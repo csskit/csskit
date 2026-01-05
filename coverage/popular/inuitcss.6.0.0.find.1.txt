@@ -1,0 +1,81 @@
+:unknown
+---
+coverage/popular/inuitcss.6.0.0.css
+360:3:  display: block; }
+368:3:  display: inline-block; }
+375:3:  display: none;
+382:3:  display: none; }
+395:3:  -webkit-text-size-adjust: 100%;
+397:3:  -ms-text-size-adjust: 100%;
+456:3:  -moz-box-sizing: content-box;
+464:3:  background: #ff0;
+481:3:  white-space: pre-wrap; }
+487:3:  quotes: "\201C" "\201D" "\2018" "\2019"; }
+503:3:  vertical-align: baseline; }
+588:3:  text-transform: none; }
+601:3:  -webkit-appearance: button;
+630:3:  -webkit-appearance: textfield;
+632:3:  -moz-box-sizing: content-box;
+633:3:  -webkit-box-sizing: content-box;
+643:3:  -webkit-appearance: none; }
+660:3:  vertical-align: top;
+684:3:  -webkit-box-sizing: border-box;
+685:3:  -moz-box-sizing: border-box;
+686:3:  -ms-box-sizing: border-box;
+687:3:  -o-box-sizing: border-box;
+712:3:  text-decoration: none; }
+753:3:  content: "";
+754:3:  display: table;
+822:3:  font: 1em/1.5 sans-serif;
+941:3:  quotes: "‘" "’" "“" "”"; }
+943:5:    content: "‘";
+944:5:    content: open-quote; }
+946:5:    content: "’";
+947:5:    content: close-quote; }
+949:5:    content: "“";
+950:5:    content: open-quote; }
+952:5:    content: "”";
+953:5:    content: close-quote; }
+956:3:  quotes: "“" "”"; }
+958:5:    content: "“";
+959:5:    content: open-quote; }
+961:5:    content: "";
+962:5:    content: no-close-quote; }
+964:5:    content: "”";
+965:5:    content: close-quote; }
+967:5:    content: "‘";
+968:5:    content: open-quote; }
+970:5:    content: "’";
+971:5:    content: close-quote; }
+986:3:  text-indent: -0.41em; }
+991:3:  display: block;
+992:3:  text-indent: 0; }
+994:5:    content: "—"; }
+1006:3:  background: none;
+1021:3:  filter: alpha(opacity=75); }
+1048:3:  list-style: decimal-leading-zero inside;
+1050:3:  white-space: nowrap;
+1057:3:  white-space: pre;
+1083:3:  border-radius: 4px; }
+1099:3:  display: block;
+1123:3:  display: block; }
+1221:3:  vertical-align: middle; }
+1224:3:  vertical-align: top; }
+1344:3:  font: 12px/1.5 sans-serif; }
+1393:3:  list-style: none;
+1427:3:  display: block; }
+1436:3:  display: block;
+1455:3:  list-style: none;
+1464:3:  display: inline-block; }
+1482:3:  display: inline-block;
+1499:3:  display: inline-block;
+2381:3:  filter: alpha(opacity=50) !important; }
+2399:3:  content: "\00A0»" !important; }
+2405:3:  text-transform: uppercase !important; }
+2414:3:  clip: rect(0 0 0 0) !important;
+2426:5:    clip: rect(0 0 0 0) !important;
+2437:5:    clip: rect(0 0 0 0) !important;
+2448:5:    clip: rect(0 0 0 0) !important;
+2459:5:    clip: rect(0 0 0 0) !important;
+2470:5:    clip: rect(0 0 0 0) !important;
+2481:5:    clip: rect(0 0 0 0) !important;

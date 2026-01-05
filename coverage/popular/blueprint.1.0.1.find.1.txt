@@ -1,0 +1,36 @@
+:unknown
+---
+coverage/popular/blueprint.1.0.1.css
+27:3:  vertical-align: baseline;
+33:5:    display:block;
+39:3:  background: white;
+54:3:  vertical-align: middle;
+58:58:blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+59:17:blockquote, q { quotes: "" ""; }
+80:3:  background: #fff;
+118:28:a           { color: #06c; text-decoration: underline; }
+130:32:pre         { margin: 1.5em 0; white-space: pre; }
+131:15:pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
+159:17:thead th      { background: #c3d9ff; }
+167:3:  background: #e5ecf9;
+170:15:caption     { background: #eee; }
+178:14:.hide      { display: none; }
+182:14:.highlight { background:#ff0; }
+183:14:.added     { background:#060; color: #fff; }
+184:14:.removed   { background:#900; color: #fff; }
+233:3:  border-color:#666;
+265:18:.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+265:55:.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
+266:18:.notice        { background: #fff6bf; color: #514721; border-color: #ffd324; }
+266:55:.notice        { background: #fff6bf; color: #514721; border-color: #ffd324; }
+267:18:.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
+267:55:.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
+268:18:.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
+268:55:.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
+295:3:  background: url(src/grid.png);
+514:3:  background: #e5eCf9;
+519:3:  background: #ddd;
+530:3:  background: #fff;
+541:3:  content: "\0020";
+542:3:  display: block;
+548:24:.clearfix, .container {display: block;}

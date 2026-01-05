@@ -1,4 +1,9 @@
-style-rule:nth-child(2)
+:unknown
 ---
 coverage/popular/reset.2.0.css
-27:1:article, aside, details, figcaption, figure, 
+24:2:	vertical-align: baseline;
+29:2:	display: block;
+35:2:	list-style: none;
+38:2:	quotes: none;
+42:2:	content: '';
+43:2:	content: none;

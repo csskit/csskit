@@ -1,0 +1,1600 @@
+:unknown
+---
+coverage/popular/foundation.6.7.5.css
+17:3:  -webkit-text-size-adjust: 100%; }
+27:3:  -webkit-box-sizing: content-box;
+41:3:  -webkit-text-decoration: underline dotted;
+42:11:          text-decoration: underline dotted; }
+62:3:  vertical-align: baseline; }
+89:3:  text-transform: none; }
+95:3:  -webkit-appearance: button; }
+114:3:  -webkit-box-sizing: border-box;
+117:3:  display: table;
+120:3:  white-space: normal; }
+123:3:  vertical-align: baseline; }
+130:3:  -webkit-box-sizing: border-box;
+139:3:  -webkit-appearance: textfield;
+143:3:  -webkit-appearance: none; }
+146:3:  -webkit-appearance: button;
+150:3:  display: block; }
+153:3:  display: list-item; }
+156:3:  display: none; }
+159:3:  display: none; }
+171:3:  -webkit-touch-callout: none;
+172:3:  -webkit-user-select: none; }
+178:3:  -webkit-box-sizing: border-box;
+185:3:  -webkit-box-sizing: inherit;
+191:3:  background: #fefefe;
+196:3:  -webkit-font-smoothing: antialiased;
+197:3:  -moz-osx-font-smoothing: grayscale; }
+200:3:  display: inline-block;
+201:3:  vertical-align: middle;
+204:3:  -ms-interpolation-mode: bicubic; }
+209:3:  border-radius: 0; }
+212:3:  -webkit-box-sizing: border-box;
+215:3:  border-radius: 0; }
+227:3:  -webkit-appearance: none;
+228:6:     -moz-appearance: none;
+231:3:  border-radius: 0;
+232:3:  background: transparent;
+240:3:  -webkit-overflow-scrolling: touch; }
+250:3:  display: block !important; }
+253:3:  display: none !important; }
+283:3:  display: -webkit-box;
+284:3:  display: -webkit-flex;
+285:3:  display: -ms-flexbox;
+286:3:  display: flex;
+287:3:  -webkit-box-orient: horizontal;
+288:3:  -webkit-box-direction: normal;
+289:3:  -webkit-flex-flow: row wrap;
+290:7:      -ms-flex-flow: row wrap;
+294:3:  -webkit-box-flex: 0;
+295:3:  -webkit-flex: 0 0 auto;
+296:7:      -ms-flex: 0 0 auto;
+297:11:          flex: 0 0 auto;
+302:5:    -webkit-box-flex: 1;
+303:5:    -webkit-flex: 1 1 0;
+304:9:        -ms-flex: 1 1 0px;
+305:13:            flex: 1 1 0; }
+307:5:    -webkit-box-flex: 0;
+308:5:    -webkit-flex: 0 0 auto;
+309:9:        -ms-flex: 0 0 auto;
+310:13:            flex: 0 0 auto; }
+319:3:  -webkit-flex-basis: auto;
+320:7:      -ms-flex-preferred-size: auto;
+325:5:    -webkit-flex-basis: auto;
+326:9:        -ms-flex-preferred-size: auto;
+331:5:    -webkit-flex-basis: auto;
+332:9:        -ms-flex-preferred-size: auto;
+336:3:  -webkit-box-flex: 0;
+337:3:  -webkit-flex: 0 0 auto;
+338:7:      -ms-flex: 0 0 auto;
+339:11:          flex: 0 0 auto; }
+379:5:    -webkit-box-flex: 1;
+380:5:    -webkit-flex: 1 1 0;
+381:9:        -ms-flex: 1 1 0px;
+382:13:            flex: 1 1 0;
+385:5:    -webkit-box-flex: 0;
+386:5:    -webkit-flex: 0 0 auto;
+387:9:        -ms-flex: 0 0 auto;
+388:13:            flex: 0 0 auto; }
+418:5:    -webkit-box-flex: 1;
+419:5:    -webkit-flex: 1 1 0;
+420:9:        -ms-flex: 1 1 0px;
+421:13:            flex: 1 1 0;
+424:5:    -webkit-box-flex: 0;
+425:5:    -webkit-flex: 0 0 auto;
+426:9:        -ms-flex: 0 0 auto;
+427:13:            flex: 0 0 auto; }
+1201:3:  display: -webkit-box;
+1202:3:  display: -webkit-flex;
+1203:3:  display: -ms-flexbox;
+1204:3:  display: flex;
+1205:3:  -webkit-box-orient: vertical;
+1206:3:  -webkit-box-direction: normal;
+1207:3:  -webkit-flex-flow: column nowrap;
+1208:7:      -ms-flex-flow: column nowrap;
+1218:5:    -webkit-flex-basis: auto;
+1219:9:        -ms-flex-preferred-size: auto;
+1223:7:      -webkit-flex-basis: auto;
+1224:11:          -ms-flex-preferred-size: auto;
+1228:7:      -webkit-flex-basis: auto;
+1229:11:          -ms-flex-preferred-size: auto;
+1232:5:    -webkit-box-flex: 0;
+1233:5:    -webkit-flex: 0 0 auto;
+1234:9:        -ms-flex: 0 0 auto;
+1235:13:            flex: 0 0 auto; }
+1262:7:      -webkit-box-flex: 1;
+1263:7:      -webkit-flex: 1 1 0;
+1264:11:          -ms-flex: 1 1 0px;
+1265:15:              flex: 1 1 0;
+1268:7:      -webkit-box-flex: 0;
+1269:7:      -webkit-flex: 0 0 auto;
+1270:11:          -ms-flex: 0 0 auto;
+1271:15:              flex: 0 0 auto; }
+1300:7:      -webkit-box-flex: 1;
+1301:7:      -webkit-flex: 1 1 0;
+1302:11:          -ms-flex: 1 1 0px;
+1303:15:              flex: 1 1 0;
+1306:7:      -webkit-box-flex: 0;
+1307:7:      -webkit-flex: 0 0 auto;
+1308:11:          -ms-flex: 0 0 auto;
+1309:15:              flex: 0 0 auto; }
+1487:3:  -webkit-flex-wrap: nowrap;
+1488:7:      -ms-flex-wrap: nowrap;
+1490:3:  -webkit-box-align: stretch;
+1491:3:  -webkit-align-items: stretch;
+1492:7:      -ms-flex-align: stretch;
+1493:11:          align-items: stretch;
+1502:3:  -webkit-overflow-scrolling: touch;
+1503:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
+1509:3:  -webkit-overflow-scrolling: touch;
+1510:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
+1513:3:  display: -webkit-box;
+1514:3:  display: -webkit-flex;
+1515:3:  display: -ms-flexbox;
+1516:3:  display: flex;
+1517:3:  -webkit-box-orient: vertical;
+1518:3:  -webkit-box-direction: normal;
+1519:3:  -webkit-flex-direction: column;
+1520:7:      -ms-flex-direction: column;
+1525:5:    -webkit-flex-wrap: nowrap;
+1526:9:        -ms-flex-wrap: nowrap;
+1533:5:    -webkit-flex-wrap: nowrap;
+1534:9:        -ms-flex-wrap: nowrap;
+1536:5:    -webkit-box-align: stretch;
+1537:5:    -webkit-align-items: stretch;
+1538:9:        -ms-flex-align: stretch;
+1539:13:            align-items: stretch;
+1546:5:    -webkit-overflow-scrolling: touch;
+1547:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
+1549:5:    display: -webkit-box;
+1550:5:    display: -webkit-flex;
+1551:5:    display: -ms-flexbox;
+1552:5:    display: flex;
+1553:5:    -webkit-box-orient: vertical;
+1554:5:    -webkit-box-direction: normal;
+1555:5:    -webkit-flex-direction: column;
+1556:9:        -ms-flex-direction: column;
+1561:7:      -webkit-flex-wrap: nowrap;
+1562:11:          -ms-flex-wrap: nowrap;
+1568:5:    -webkit-overflow-scrolling: touch;
+1569:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
+1575:5:    -webkit-flex-wrap: nowrap;
+1576:9:        -ms-flex-wrap: nowrap;
+1578:5:    -webkit-box-align: stretch;
+1579:5:    -webkit-align-items: stretch;
+1580:9:        -ms-flex-align: stretch;
+1581:13:            align-items: stretch;
+1588:5:    -webkit-overflow-scrolling: touch;
+1589:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
+1591:5:    display: -webkit-box;
+1592:5:    display: -webkit-flex;
+1593:5:    display: -ms-flexbox;
+1594:5:    display: flex;
+1595:5:    -webkit-box-orient: vertical;
+1596:5:    -webkit-box-direction: normal;
+1597:5:    -webkit-flex-direction: column;
+1598:9:        -ms-flex-direction: column;
+1603:7:      -webkit-flex-wrap: nowrap;
+1604:11:          -ms-flex-wrap: nowrap;
+1610:5:    -webkit-overflow-scrolling: touch;
+1611:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
+1616:3:  -webkit-flex-wrap: nowrap;
+1617:7:      -ms-flex-wrap: nowrap;
+1619:3:  -webkit-box-align: stretch;
+1620:3:  -webkit-align-items: stretch;
+1621:7:      -ms-flex-align: stretch;
+1622:11:          align-items: stretch;
+1630:5:    -webkit-flex-wrap: nowrap;
+1631:9:        -ms-flex-wrap: nowrap;
+1633:5:    -webkit-box-align: stretch;
+1634:5:    -webkit-align-items: stretch;
+1635:9:        -ms-flex-align: stretch;
+1636:13:            align-items: stretch;
+1644:5:    -webkit-flex-wrap: nowrap;
+1645:9:        -ms-flex-wrap: nowrap;
+1647:5:    -webkit-box-align: stretch;
+1648:5:    -webkit-align-items: stretch;
+1649:9:        -ms-flex-align: stretch;
+1650:13:            align-items: stretch;
+1814:3:  -webkit-box-pack: start;
+1815:3:  -webkit-justify-content: flex-start;
+1816:7:      -ms-flex-pack: start;
+1817:11:          justify-content: flex-start; }
+1820:3:  -webkit-box-pack: end;
+1821:3:  -webkit-justify-content: flex-end;
+1822:7:      -ms-flex-pack: end;
+1823:11:          justify-content: flex-end; }
+1826:3:  -webkit-box-pack: center;
+1827:3:  -webkit-justify-content: center;
+1828:7:      -ms-flex-pack: center;
+1829:11:          justify-content: center; }
+1832:3:  -webkit-box-pack: justify;
+1833:3:  -webkit-justify-content: space-between;
+1834:7:      -ms-flex-pack: justify;
+1835:11:          justify-content: space-between; }
+1838:3:  -webkit-justify-content: space-around;
+1839:7:      -ms-flex-pack: distribute;
+1840:11:          justify-content: space-around; }
+1843:3:  -webkit-box-pack: start;
+1844:3:  -webkit-justify-content: flex-start;
+1845:7:      -ms-flex-pack: start;
+1846:11:          justify-content: flex-start; }
+1849:3:  -webkit-box-pack: end;
+1850:3:  -webkit-justify-content: flex-end;
+1851:7:      -ms-flex-pack: end;
+1852:11:          justify-content: flex-end; }
+1855:3:  -webkit-box-pack: center;
+1856:3:  -webkit-justify-content: center;
+1857:7:      -ms-flex-pack: center;
+1858:11:          justify-content: center; }
+1861:3:  -webkit-box-align: start;
+1862:3:  -webkit-align-items: flex-start;
+1863:7:      -ms-flex-align: start;
+1864:11:          align-items: flex-start; }
+1867:3:  -webkit-align-self: flex-start;
+1868:7:      -ms-flex-item-align: start;
+1872:3:  -webkit-box-align: end;
+1873:3:  -webkit-align-items: flex-end;
+1874:7:      -ms-flex-align: end;
+1875:11:          align-items: flex-end; }
+1878:3:  -webkit-align-self: flex-end;
+1879:7:      -ms-flex-item-align: end;
+1883:3:  -webkit-box-align: center;
+1884:3:  -webkit-align-items: center;
+1885:7:      -ms-flex-align: center;
+1886:11:          align-items: center; }
+1889:3:  -webkit-align-self: center;
+1890:7:      -ms-flex-item-align: center;
+1894:3:  -webkit-box-align: stretch;
+1895:3:  -webkit-align-items: stretch;
+1896:7:      -ms-flex-align: stretch;
+1897:11:          align-items: stretch; }
+1900:3:  -webkit-align-self: stretch;
+1901:7:      -ms-flex-item-align: stretch;
+1905:3:  -webkit-box-pack: center;
+1906:3:  -webkit-justify-content: center;
+1907:7:      -ms-flex-pack: center;
+1908:11:          justify-content: center;
+1909:3:  -webkit-box-align: center;
+1910:3:  -webkit-align-items: center;
+1911:7:      -ms-flex-align: center;
+1912:11:          align-items: center;
+1913:3:  -webkit-align-content: center;
+1914:7:      -ms-flex-line-pack: center;
+1918:3:  -webkit-box-ordinal-group: 2;
+1919:3:  -webkit-order: 1;
+1920:7:      -ms-flex-order: 1;
+1924:3:  -webkit-box-ordinal-group: 3;
+1925:3:  -webkit-order: 2;
+1926:7:      -ms-flex-order: 2;
+1930:3:  -webkit-box-ordinal-group: 4;
+1931:3:  -webkit-order: 3;
+1932:7:      -ms-flex-order: 3;
+1936:3:  -webkit-box-ordinal-group: 5;
+1937:3:  -webkit-order: 4;
+1938:7:      -ms-flex-order: 4;
+1942:3:  -webkit-box-ordinal-group: 6;
+1943:3:  -webkit-order: 5;
+1944:7:      -ms-flex-order: 5;
+1948:3:  -webkit-box-ordinal-group: 7;
+1949:3:  -webkit-order: 6;
+1950:7:      -ms-flex-order: 6;
+1955:5:    -webkit-box-ordinal-group: 2;
+1956:5:    -webkit-order: 1;
+1957:9:        -ms-flex-order: 1;
+1960:5:    -webkit-box-ordinal-group: 3;
+1961:5:    -webkit-order: 2;
+1962:9:        -ms-flex-order: 2;
+1965:5:    -webkit-box-ordinal-group: 4;
+1966:5:    -webkit-order: 3;
+1967:9:        -ms-flex-order: 3;
+1970:5:    -webkit-box-ordinal-group: 5;
+1971:5:    -webkit-order: 4;
+1972:9:        -ms-flex-order: 4;
+1975:5:    -webkit-box-ordinal-group: 6;
+1976:5:    -webkit-order: 5;
+1977:9:        -ms-flex-order: 5;
+1980:5:    -webkit-box-ordinal-group: 7;
+1981:5:    -webkit-order: 6;
+1982:9:        -ms-flex-order: 6;
+1987:5:    -webkit-box-ordinal-group: 2;
+1988:5:    -webkit-order: 1;
+1989:9:        -ms-flex-order: 1;
+1992:5:    -webkit-box-ordinal-group: 3;
+1993:5:    -webkit-order: 2;
+1994:9:        -ms-flex-order: 2;
+1997:5:    -webkit-box-ordinal-group: 4;
+1998:5:    -webkit-order: 3;
+1999:9:        -ms-flex-order: 3;
+2002:5:    -webkit-box-ordinal-group: 5;
+2003:5:    -webkit-order: 4;
+2004:9:        -ms-flex-order: 4;
+2007:5:    -webkit-box-ordinal-group: 6;
+2008:5:    -webkit-order: 5;
+2009:9:        -ms-flex-order: 5;
+2012:5:    -webkit-box-ordinal-group: 7;
+2013:5:    -webkit-order: 6;
+2014:9:        -ms-flex-order: 6;
+2018:3:  display: -webkit-box;
+2019:3:  display: -webkit-flex;
+2020:3:  display: -ms-flexbox;
+2021:3:  display: flex; }
+2024:3:  -webkit-box-flex: 1;
+2025:3:  -webkit-flex: 1 1 auto;
+2026:7:      -ms-flex: 1 1 auto;
+2027:11:          flex: 1 1 auto; }
+2030:3:  -webkit-box-flex: 1;
+2031:3:  -webkit-flex: 1 0 auto;
+2032:7:      -ms-flex: 1 0 auto;
+2033:11:          flex: 1 0 auto; }
+2036:3:  -webkit-box-flex: 0;
+2037:3:  -webkit-flex: 0 1 auto;
+2038:7:      -ms-flex: 0 1 auto;
+2039:11:          flex: 0 1 auto; }
+2042:3:  -webkit-box-orient: horizontal;
+2043:3:  -webkit-box-direction: normal;
+2044:3:  -webkit-flex-direction: row;
+2045:7:      -ms-flex-direction: row;
+2049:3:  -webkit-box-orient: horizontal;
+2050:3:  -webkit-box-direction: reverse;
+2051:3:  -webkit-flex-direction: row-reverse;
+2052:7:      -ms-flex-direction: row-reverse;
+2056:3:  -webkit-box-orient: vertical;
+2057:3:  -webkit-box-direction: normal;
+2058:3:  -webkit-flex-direction: column;
+2059:7:      -ms-flex-direction: column;
+2063:3:  -webkit-box-orient: vertical;
+2064:3:  -webkit-box-direction: reverse;
+2065:3:  -webkit-flex-direction: column-reverse;
+2066:7:      -ms-flex-direction: column-reverse;
+2071:5:    display: -webkit-box;
+2072:5:    display: -webkit-flex;
+2073:5:    display: -ms-flexbox;
+2074:5:    display: flex; }
+2076:5:    -webkit-box-flex: 1;
+2077:5:    -webkit-flex: 1 1 auto;
+2078:9:        -ms-flex: 1 1 auto;
+2079:13:            flex: 1 1 auto; }
+2081:5:    -webkit-box-flex: 1;
+2082:5:    -webkit-flex: 1 0 auto;
+2083:9:        -ms-flex: 1 0 auto;
+2084:13:            flex: 1 0 auto; }
+2086:5:    -webkit-box-flex: 0;
+2087:5:    -webkit-flex: 0 1 auto;
+2088:9:        -ms-flex: 0 1 auto;
+2089:13:            flex: 0 1 auto; }
+2091:5:    -webkit-box-orient: horizontal;
+2092:5:    -webkit-box-direction: normal;
+2093:5:    -webkit-flex-direction: row;
+2094:9:        -ms-flex-direction: row;
+2097:5:    -webkit-box-orient: horizontal;
+2098:5:    -webkit-box-direction: reverse;
+2099:5:    -webkit-flex-direction: row-reverse;
+2100:9:        -ms-flex-direction: row-reverse;
+2103:5:    -webkit-box-orient: vertical;
+2104:5:    -webkit-box-direction: normal;
+2105:5:    -webkit-flex-direction: column;
+2106:9:        -ms-flex-direction: column;
+2109:5:    -webkit-box-orient: vertical;
+2110:5:    -webkit-box-direction: reverse;
+2111:5:    -webkit-flex-direction: column-reverse;
+2112:9:        -ms-flex-direction: column-reverse;
+2117:5:    display: -webkit-box;
+2118:5:    display: -webkit-flex;
+2119:5:    display: -ms-flexbox;
+2120:5:    display: flex; }
+2122:5:    -webkit-box-flex: 1;
+2123:5:    -webkit-flex: 1 1 auto;
+2124:9:        -ms-flex: 1 1 auto;
+2125:13:            flex: 1 1 auto; }
+2127:5:    -webkit-box-flex: 1;
+2128:5:    -webkit-flex: 1 0 auto;
+2129:9:        -ms-flex: 1 0 auto;
+2130:13:            flex: 1 0 auto; }
+2132:5:    -webkit-box-flex: 0;
+2133:5:    -webkit-flex: 0 1 auto;
+2134:9:        -ms-flex: 0 1 auto;
+2135:13:            flex: 0 1 auto; }
+2137:5:    -webkit-box-orient: horizontal;
+2138:5:    -webkit-box-direction: normal;
+2139:5:    -webkit-flex-direction: row;
+2140:9:        -ms-flex-direction: row;
+2143:5:    -webkit-box-orient: horizontal;
+2144:5:    -webkit-box-direction: reverse;
+2145:5:    -webkit-flex-direction: row-reverse;
+2146:9:        -ms-flex-direction: row-reverse;
+2149:5:    -webkit-box-orient: vertical;
+2150:5:    -webkit-box-direction: normal;
+2151:5:    -webkit-flex-direction: column;
+2152:9:        -ms-flex-direction: column;
+2155:5:    -webkit-box-orient: vertical;
+2156:5:    -webkit-box-direction: reverse;
+2157:5:    -webkit-flex-direction: column-reverse;
+2158:9:        -ms-flex-direction: column-reverse;
+2187:3:  text-rendering: optimizeLegibility; }
+2213:3:  text-rendering: optimizeLegibility; }
+2276:3:  text-decoration: none;
+2331:3:  text-decoration: none; }
+2362:3:  list-style: none; }
+2365:3:  display: block;
+2369:5:    content: "— "; }
+2377:3:  display: inline;
+2388:3:  display: block;
+2390:3:  white-space: pre;
+2427:3:  display: none !important; }
+2431:5:    background: transparent !important;
+2434:5:    -webkit-box-shadow: none !important;
+2435:13:            box-shadow: none !important;
+2438:5:    display: block !important; }
+2440:5:    display: none !important; }
+2442:5:    display: table !important; }
+2444:5:    display: table-header-group !important; }
+2446:5:    display: table-row-group !important; }
+2448:5:    display: table-row !important; }
+2450:5:    display: table-cell !important; }
+2452:5:    display: table-cell !important; }
+2455:5:    text-decoration: underline; }
+2457:5:    content: " (" attr(href) ")"; }
+2461:5:    content: ''; }
+2463:5:    content: " (" attr(title) ")"; }
+2467:5:    page-break-inside: avoid; }
+2469:5:    display: table-header-group; }
+2472:5:    page-break-inside: avoid; }
+2484:5:    page-break-after: avoid; }
+2486:5:    page-break-inside: auto; } }
+2489:3:  display: inline-block;
+2490:3:  vertical-align: middle;
+2494:3:  border-radius: 0;
+2495:3:  -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+2499:3:  -webkit-appearance: none;
+2512:5:    display: block;
+2558:5:    border-color: #0c3d5d;
+2564:5:    border-color: #0c3d5d;
+2570:5:    border-color: #3b3b3b;
+2576:5:    border-color: #157539;
+2582:5:    border-color: #805700;
+2588:5:    border-color: #67251a;
+2591:5:    border-color: transparent;
+2621:5:    display: block;
+2626:5:    content: '';
+2628:5:    border-color: #fefefe transparent transparent;
+2631:5:    display: inline-block;
+2652:3:  text-decoration: none; }
+2656:3:  display: block;
+2657:3:  -webkit-box-sizing: border-box;
+2664:3:  border-radius: 0;
+2666:3:  -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
+2673:3:  -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+2677:3:  -webkit-appearance: none;
+2678:6:     -moz-appearance: none;
+2685:5:    -webkit-box-shadow: 0 0 5px #cacaca;
+2686:13:            box-shadow: 0 0 5px #cacaca;
+2687:5:    -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+2705:3:  -webkit-appearance: none;
+2706:6:     -moz-appearance: none;
+2708:3:  border-radius: 0; }
+2711:3:  -webkit-box-sizing: border-box;
+2736:3:  display: inline-block;
+2737:3:  vertical-align: baseline;
+2753:3:  display: block;
+2771:3:  display: -webkit-box;
+2772:3:  display: -webkit-flex;
+2773:3:  display: -ms-flexbox;
+2774:3:  display: flex;
+2777:3:  -webkit-box-align: stretch;
+2778:3:  -webkit-align-items: stretch;
+2779:7:      -ms-flex-align: stretch;
+2780:11:          align-items: stretch; }
+2782:5:    border-radius: 0 0 0 0; }
+2784:5:    border-radius: 0 0 0 0; }
+2791:3:  white-space: nowrap; }
+2796:3:  background: #e6e6e6;
+2799:3:  white-space: nowrap;
+2800:3:  display: -webkit-box;
+2801:3:  display: -webkit-flex;
+2802:3:  display: -ms-flexbox;
+2803:3:  display: flex;
+2804:3:  -webkit-box-flex: 0;
+2805:3:  -webkit-flex: 0 0 auto;
+2806:7:      -ms-flex: 0 0 auto;
+2807:11:          flex: 0 0 auto;
+2808:3:  -webkit-box-align: center;
+2809:3:  -webkit-align-items: center;
+2810:7:      -ms-flex-align: center;
+2811:11:          align-items: center; }
+2818:3:  border-radius: 0;
+2819:3:  -webkit-box-flex: 1;
+2820:3:  -webkit-flex: 1 1 0px;
+2821:7:      -ms-flex: 1 1 0px;
+2822:11:          flex: 1 1 0px;
+2829:3:  display: -webkit-box;
+2830:3:  display: -webkit-flex;
+2831:3:  display: -ms-flexbox;
+2832:3:  display: flex;
+2833:3:  -webkit-box-flex: 0;
+2834:3:  -webkit-flex: 0 0 auto;
+2835:7:      -ms-flex: 0 0 auto;
+2836:11:          flex: 0 0 auto; }
+2841:5:    -webkit-align-self: stretch;
+2842:9:        -ms-flex-item-align: stretch;
+2871:3:  -webkit-appearance: none;
+2872:6:     -moz-appearance: none;
+2875:3:  border-radius: 0;
+2884:3:  background-position: right -1rem center;
+2888:3:  -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
+2900:13:            box-shadow: 0 0 5px #cacaca;
+2901:5:    -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+2909:5:    display: none; }
+2918:3:  border-color: #cc4b37;
+2935:3:  display: none;
+2942:5:    display: block; }
+2946:3:  background: #fefefe;
+2952:3:  border-radius: 0 0 0 0; }
+2955:3:  border-radius: 0 0 0 0; }
+2959:3:  display: block;
+2968:5:    border-radius: 0 0 0 0; }
+2976:5:    content: "+"; }
+2978:5:    content: "–"; }
+2981:3:  display: none;
+3010:5:    display: block;
+3015:5:    content: '';
+3017:5:    border-color: #1779ba transparent transparent;
+3032:3:  -webkit-transform: rotate(180deg);
+3033:7:      -ms-transform: rotate(180deg);
+3035:3:  -webkit-transform-origin: 50% 50%;
+3036:7:      -ms-transform-origin: 50% 50%;
+3037:11:          transform-origin: 50% 50%; }
+3053:5:    display: block;
+3058:5:    content: '';
+3060:5:    border-color: #1779ba transparent transparent;
+3066:3:  -webkit-transform: scaleY(-1);
+3067:7:      -ms-transform: scaleY(-1);
+3069:3:  -webkit-transform-origin: 50% 50%;
+3070:7:      -ms-transform-origin: 50% 50%;
+3071:11:          transform-origin: 50% 50%; }
+3079:3:  clip: rect(0, 0, 0, 0) !important;
+3080:3:  white-space: nowrap !important;
+3084:3:  display: inline-block;
+3087:3:  border-radius: 50%;
+3090:3:  background: #1779ba;
+3093:5:    background: #1779ba;
+3096:5:    background: #767676;
+3099:5:    background: #3adb76;
+3102:5:    background: #ffae00;
+3105:5:    background: #cc4b37;
+3110:3:  list-style: none; }
+3112:5:    display: table;
+3113:5:    content: ' ';
+3114:5:    -webkit-flex-basis: 0;
+3115:9:        -ms-flex-preferred-size: 0;
+3117:5:    -webkit-box-ordinal-group: 2;
+3118:5:    -webkit-order: 1;
+3119:9:        -ms-flex-order: 1;
+3128:5:    text-transform: uppercase; }
+3133:7:      content: "/";
+3138:7:      text-decoration: underline; }
+3145:3:  display: -webkit-box;
+3146:3:  display: -webkit-flex;
+3147:3:  display: -ms-flexbox;
+3148:3:  display: flex;
+3149:3:  -webkit-flex-wrap: wrap;
+3150:7:      -ms-flex-wrap: wrap;
+3152:3:  -webkit-box-align: stretch;
+3153:3:  -webkit-align-items: stretch;
+3154:7:      -ms-flex-align: stretch;
+3155:11:          align-items: stretch;
+3156:3:  -webkit-box-flex: 1;
+3157:3:  -webkit-flex-grow: 1;
+3158:7:      -ms-flex-positive: 1;
+3161:5:    display: table;
+3162:5:    content: ' ';
+3163:5:    -webkit-flex-basis: 0;
+3164:9:        -ms-flex-preferred-size: 0;
+3166:5:    -webkit-box-ordinal-group: 2;
+3167:5:    -webkit-order: 1;
+3168:9:        -ms-flex-order: 1;
+3173:5:    display: none; }
+3179:5:    -webkit-box-flex: 0;
+3180:5:    -webkit-flex: 0 0 auto;
+3181:9:        -ms-flex: 0 0 auto;
+3182:13:            flex: 0 0 auto; }
+3192:5:    -webkit-box-flex: 1;
+3193:5:    -webkit-flex: 1 1 0px;
+3194:9:        -ms-flex: 1 1 0px;
+3195:13:            flex: 1 1 0px; }
+3232:5:    border-color: #0c3d5d;
+3238:5:    border-color: #0c3d5d;
+3244:5:    border-color: #3b3b3b;
+3250:5:    border-color: #157539;
+3256:5:    border-color: #805700;
+3262:5:    border-color: #67251a;
+3265:5:    border-color: transparent;
+3296:5:    -webkit-flex-wrap: wrap;
+3297:9:        -ms-flex-wrap: wrap;
+3300:7:      -webkit-box-flex: 0;
+3301:7:      -webkit-flex: 0 0 100%;
+3302:11:          -ms-flex: 0 0 100%;
+3303:15:              flex: 0 0 100%; }
+3307:7:      -webkit-box-flex: 1;
+3308:7:      -webkit-flex: 1 1 0px;
+3309:11:          -ms-flex: 1 1 0px;
+3310:15:              flex: 1 1 0px; }
+3313:7:      -webkit-box-flex: 0;
+3314:7:      -webkit-flex: 0 0 auto;
+3315:11:          -ms-flex: 0 0 auto;
+3316:15:              flex: 0 0 auto;
+3320:7:      -webkit-box-flex: 0;
+3321:7:      -webkit-flex: 0 0 auto;
+3322:11:          -ms-flex: 0 0 auto;
+3323:15:              flex: 0 0 auto;
+3327:7:      display: block; }
+3329:9:        display: block;
+3333:7:      display: block; }
+3335:9:        display: block;
+3339:3:  display: -webkit-box;
+3340:3:  display: -webkit-flex;
+3341:3:  display: -ms-flexbox;
+3342:3:  display: flex;
+3343:3:  -webkit-box-orient: vertical;
+3344:3:  -webkit-box-direction: normal;
+3345:3:  -webkit-flex-direction: column;
+3346:7:      -ms-flex-direction: column;
+3348:3:  -webkit-box-flex: 1;
+3349:3:  -webkit-flex-grow: 1;
+3350:7:      -ms-flex-positive: 1;
+3354:3:  border-radius: 0;
+3355:3:  background: #fefefe;
+3356:3:  -webkit-box-shadow: none;
+3357:11:          box-shadow: none;
+3364:3:  display: -webkit-box;
+3365:3:  display: -webkit-flex;
+3366:3:  display: -ms-flexbox;
+3367:3:  display: flex;
+3368:3:  -webkit-box-flex: 0;
+3369:3:  -webkit-flex: 0 1 auto;
+3370:7:      -ms-flex: 0 1 auto;
+3371:11:          flex: 0 1 auto;
+3373:3:  background: #e6e6e6; }
+3378:3:  -webkit-box-flex: 1;
+3379:3:  -webkit-flex: 1 0 auto;
+3380:7:      -ms-flex: 1 0 auto;
+3381:11:          flex: 1 0 auto;
+3394:3:  border-radius: 0;
+3429:3:  z-index: 10;
+3450:3:  list-style: none;
+3452:3:  display: -webkit-box;
+3453:3:  display: -webkit-flex;
+3454:3:  display: -ms-flexbox;
+3455:3:  display: flex;
+3456:3:  -webkit-flex-wrap: wrap;
+3457:7:      -ms-flex-wrap: wrap;
+3464:5:    text-decoration: none;
+3465:5:    display: block;
+3473:5:    display: inline-block; }
+3475:5:    -webkit-flex-wrap: wrap;
+3476:9:        -ms-flex-wrap: wrap;
+3478:5:    -webkit-box-orient: horizontal;
+3479:5:    -webkit-box-direction: normal;
+3480:5:    -webkit-flex-direction: row;
+3481:9:        -ms-flex-direction: row;
+3484:5:    -webkit-flex-wrap: nowrap;
+3485:9:        -ms-flex-wrap: nowrap;
+3487:5:    -webkit-box-orient: vertical;
+3488:5:    -webkit-box-direction: normal;
+3489:5:    -webkit-flex-direction: column;
+3490:9:        -ms-flex-direction: column;
+3499:5:    -webkit-box-flex: 1;
+3500:5:    -webkit-flex: 1 1 0px;
+3501:9:        -ms-flex: 1 1 0px;
+3502:13:            flex: 1 1 0px; }
+3510:5:    -webkit-box-align: center;
+3511:5:    -webkit-align-items: center;
+3512:9:        -ms-flex-align: center;
+3513:13:            align-items: center; }
+3520:7:      -webkit-flex-wrap: wrap;
+3521:11:          -ms-flex-wrap: wrap;
+3523:7:      -webkit-box-orient: horizontal;
+3524:7:      -webkit-box-direction: normal;
+3525:7:      -webkit-flex-direction: row;
+3526:11:          -ms-flex-direction: row;
+3529:7:      -webkit-flex-wrap: nowrap;
+3530:11:          -ms-flex-wrap: nowrap;
+3532:7:      -webkit-box-orient: vertical;
+3533:7:      -webkit-box-direction: normal;
+3534:7:      -webkit-flex-direction: column;
+3535:11:          -ms-flex-direction: column;
+3538:7:      -webkit-box-flex: 1;
+3539:7:      -webkit-flex: 1 1 0px;
+3540:11:          -ms-flex: 1 1 0px;
+3541:15:              flex: 1 1 0px; }
+3543:7:      -webkit-box-flex: 1;
+3544:7:      -webkit-flex: 1 1 0px;
+3545:11:          -ms-flex: 1 1 0px;
+3546:15:              flex: 1 1 0px; } }
+3549:7:      -webkit-flex-wrap: wrap;
+3550:11:          -ms-flex-wrap: wrap;
+3552:7:      -webkit-box-orient: horizontal;
+3553:7:      -webkit-box-direction: normal;
+3554:7:      -webkit-flex-direction: row;
+3555:11:          -ms-flex-direction: row;
+3558:7:      -webkit-flex-wrap: nowrap;
+3559:11:          -ms-flex-wrap: nowrap;
+3561:7:      -webkit-box-orient: vertical;
+3562:7:      -webkit-box-direction: normal;
+3563:7:      -webkit-flex-direction: column;
+3564:11:          -ms-flex-direction: column;
+3567:7:      -webkit-box-flex: 1;
+3568:7:      -webkit-flex: 1 1 0px;
+3569:11:          -ms-flex: 1 1 0px;
+3570:15:              flex: 1 1 0px; }
+3572:7:      -webkit-box-flex: 1;
+3573:7:      -webkit-flex: 1 1 0px;
+3574:11:          -ms-flex: 1 1 0px;
+3575:15:              flex: 1 1 0px; } }
+3580:5:    display: -webkit-box;
+3581:5:    display: -webkit-flex;
+3582:5:    display: -ms-flexbox;
+3583:5:    display: flex; }
+3585:5:    display: -webkit-box;
+3586:5:    display: -webkit-flex;
+3587:5:    display: -ms-flexbox;
+3588:5:    display: flex; }
+3590:5:    -webkit-box-orient: horizontal;
+3591:5:    -webkit-box-direction: normal;
+3592:5:    -webkit-flex-flow: row nowrap;
+3593:9:        -ms-flex-flow: row nowrap;
+3602:5:    -webkit-box-orient: horizontal;
+3603:5:    -webkit-box-direction: normal;
+3604:5:    -webkit-flex-flow: row nowrap;
+3605:9:        -ms-flex-flow: row nowrap;
+3614:5:    -webkit-box-orient: vertical;
+3615:5:    -webkit-box-direction: normal;
+3616:5:    -webkit-flex-flow: column nowrap;
+3617:9:        -ms-flex-flow: column nowrap;
+3624:7:      -webkit-align-self: stretch;
+3625:11:          -ms-flex-item-align: stretch;
+3630:5:    -webkit-box-orient: vertical;
+3631:5:    -webkit-box-direction: normal;
+3632:5:    -webkit-flex-flow: column nowrap;
+3633:9:        -ms-flex-flow: column nowrap;
+3640:7:      -webkit-align-self: stretch;
+3641:11:          -ms-flex-item-align: stretch;
+3646:5:    background: #1779ba;
+3649:5:    background: #1779ba;
+3652:5:    -webkit-box-pack: start;
+3653:5:    -webkit-justify-content: flex-start;
+3654:9:        -ms-flex-pack: start;
+3655:13:            justify-content: flex-start; }
+3657:5:    display: -webkit-box;
+3658:5:    display: -webkit-flex;
+3659:5:    display: -ms-flexbox;
+3660:5:    display: flex;
+3661:5:    -webkit-box-pack: end;
+3662:5:    -webkit-justify-content: flex-end;
+3663:9:        -ms-flex-pack: end;
+3664:13:            justify-content: flex-end; }
+3666:7:      -webkit-box-pack: start;
+3667:7:      -webkit-justify-content: flex-start;
+3668:11:          -ms-flex-pack: start;
+3669:15:              justify-content: flex-start; }
+3671:5:    display: block;
+3685:5:    display: -webkit-box;
+3686:5:    display: -webkit-flex;
+3687:5:    display: -ms-flexbox;
+3688:5:    display: flex;
+3689:5:    -webkit-box-pack: center;
+3690:5:    -webkit-justify-content: center;
+3691:9:        -ms-flex-pack: center;
+3692:13:            justify-content: center; }
+3694:7:      -webkit-box-pack: start;
+3695:7:      -webkit-justify-content: flex-start;
+3696:11:          -ms-flex-pack: start;
+3697:15:              justify-content: flex-start; }
+3705:3:  -webkit-box-pack: center;
+3706:3:  -webkit-justify-content: center;
+3707:7:      -ms-flex-pack: center;
+3708:11:          justify-content: center; }
+3710:5:    display: -webkit-box;
+3711:5:    display: -webkit-flex;
+3712:5:    display: -ms-flexbox;
+3713:5:    display: flex;
+3714:5:    -webkit-box-pack: center;
+3715:5:    -webkit-justify-content: center;
+3716:9:        -ms-flex-pack: center;
+3717:13:            justify-content: center; }
+3719:7:      -webkit-box-pack: start;
+3720:7:      -webkit-justify-content: flex-start;
+3721:11:          -ms-flex-pack: start;
+3722:15:              justify-content: flex-start; }
+3725:3:  display: none; }
+3729:3:  display: inline-block;
+3730:3:  vertical-align: middle;
+3738:5:    display: block;
+3741:5:    background: #fefefe;
+3742:5:    -webkit-box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
+3743:13:            box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
+3744:5:    content: ''; }
+3746:5:    background: #cacaca;
+3747:5:    -webkit-box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
+3748:13:            box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca; }
+3752:3:  display: inline-block;
+3753:3:  vertical-align: middle;
+3761:5:    display: block;
+3764:5:    background: #0a0a0a;
+3765:5:    -webkit-box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
+3766:13:            box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
+3767:5:    content: ''; }
+3769:5:    background: #8a8a8a;
+3770:5:    -webkit-box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a;
+3771:13:            box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a; }
+3777:5:    display: block; }
+3779:5:    -webkit-transition: height 0.5s;
+3784:3:  background: #fefefe; }
+3790:3:  z-index: -1;
+3792:3:  background: #fefefe;
+3793:3:  -webkit-transition: -webkit-transform 0.15s linear;
+3798:5:    z-index: 1;
+3799:5:    display: block;
+3800:5:    -webkit-transform: translateX(-100%);
+3801:9:        -ms-transform: translateX(-100%);
+3804:5:    -webkit-transform: translateX(100%);
+3805:9:        -ms-transform: translateX(100%);
+3820:5:    display: block;
+3825:5:    content: '';
+3827:5:    border-color: transparent transparent transparent #1779ba;
+3834:3:  display: block;
+3839:3:  content: '';
+3841:3:  border-color: transparent transparent transparent #1779ba;
+3846:3:  display: block;
+3851:3:  content: '';
+3853:3:  border-color: transparent #1779ba transparent transparent;
+3858:3:  display: block;
+3863:3:  content: '';
+3865:3:  border-color: transparent #1779ba transparent transparent;
+3866:3:  display: inline-block;
+3867:3:  vertical-align: middle;
+3872:3:  z-index: 10;
+3873:3:  display: none;
+3878:3:  border-radius: 0;
+3882:5:    display: block; }
+3884:5:    display: block;
+3911:3:  display: block;
+3916:3:  content: '';
+3918:3:  border-color: #1779ba transparent transparent;
+3930:3:  background: transparent;
+3934:3:  display: none; }
+3956:3:  display: block;
+3961:3:  content: '';
+3963:3:  border-color: transparent #1779ba transparent transparent;
+3968:3:  display: block;
+3973:3:  content: '';
+3975:3:  border-color: transparent transparent transparent #1779ba; }
+3990:5:    display: block;
+3995:5:    content: '';
+3997:5:    border-color: #1779ba transparent transparent;
+4013:5:    display: block;
+4018:5:    content: '';
+4020:5:    border-color: transparent #1779ba transparent transparent;
+4024:5:    display: block;
+4029:5:    content: '';
+4031:5:    border-color: transparent transparent transparent #1779ba; } }
+4046:5:    display: block;
+4051:5:    content: '';
+4053:5:    border-color: #1779ba transparent transparent;
+4069:5:    display: block;
+4074:5:    content: '';
+4076:5:    border-color: transparent #1779ba transparent transparent;
+4080:5:    display: block;
+4085:5:    content: '';
+4087:5:    border-color: transparent transparent transparent #1779ba; } }
+4121:3:  z-index: 1;
+4122:3:  display: none;
+4125:3:  background: #fefefe; }
+4131:5:    display: block;
+4136:5:    content: '';
+4138:5:    border-color: transparent #1779ba transparent transparent;
+4142:5:    display: block;
+4147:5:    content: '';
+4149:5:    border-color: transparent transparent transparent #1779ba; }
+4155:5:    display: block; }
+4182:3:  display: inline-block;
+4184:3:  border-radius: 0;
+4187:3:  white-space: nowrap;
+4189:3:  background: #1779ba;
+4192:5:    background: #1779ba;
+4195:5:    background: #767676;
+4198:5:    background: #3adb76;
+4201:5:    background: #ffae00;
+4204:5:    background: #cc4b37;
+4208:3:  display: -webkit-box;
+4209:3:  display: -webkit-flex;
+4210:3:  display: -ms-flexbox;
+4211:3:  display: flex;
+4213:3:  -webkit-flex-wrap: nowrap;
+4214:7:      -ms-flex-wrap: nowrap;
+4220:7:      -webkit-flex-wrap: wrap;
+4221:11:          -ms-flex-wrap: wrap;
+4225:3:  -webkit-box-flex: 0;
+4226:3:  -webkit-flex: 0 1 auto;
+4227:7:      -ms-flex: 0 1 auto;
+4228:11:          flex: 0 1 auto; }
+4239:7:      -webkit-flex-basis: 100%;
+4240:11:          -ms-flex-preferred-size: 100%;
+4246:5:    -webkit-box-flex: 1;
+4247:5:    -webkit-flex: 1 1 0px;
+4248:9:        -ms-flex: 1 1 0px;
+4249:13:            flex: 1 1 0px; }
+4258:3:  z-index: 11;
+4261:3:  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
+4263:3:  background: rgba(254, 254, 254, 0.25);
+4283:3:  z-index: 12;
+4284:3:  -webkit-transition: -webkit-transform 0.5s ease;
+4288:3:  -webkit-backface-visibility: hidden;
+4290:3:  background: #e6e6e6; }
+4294:5:    z-index: 12; }
+4298:5:    z-index: 13; }
+4300:7:      -webkit-box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+4301:15:              box-shadow: 0 0 10px rgba(10, 10, 10, 0.7); }
+4303:5:    -webkit-transform: translate(0, 0);
+4304:9:        -ms-transform: translate(0, 0);
+4309:3:  z-index: 12;
+4310:3:  -webkit-transition: -webkit-transform 0.5s ease;
+4314:3:  -webkit-backface-visibility: hidden;
+4316:3:  background: #e6e6e6; }
+4320:5:    z-index: 12; }
+4324:5:    z-index: 13; }
+4326:7:      -webkit-box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
+4327:15:              box-shadow: 0 0 10px rgba(10, 10, 10, 0.7); }
+4329:5:    -webkit-transform: translate(0, 0);
+4330:9:        -ms-transform: translate(0, 0);
+4338:3:  -webkit-overflow-scrolling: touch;
+4340:3:  -webkit-transform: translateX(-250px);
+4341:7:      -ms-transform: translateX(-250px);
+4344:5:    -webkit-transform: translateX(-250px);
+4345:9:        -ms-transform: translateX(-250px);
+4348:7:      -webkit-transform: translate(0, 0);
+4349:11:          -ms-transform: translate(0, 0);
+4352:5:    -webkit-transform: translateX(250px);
+4353:9:        -ms-transform: translateX(250px);
+4356:5:    -webkit-box-shadow: inset -13px 0 20px -13px rgba(10, 10, 10, 0.25);
+4357:13:            box-shadow: inset -13px 0 20px -13px rgba(10, 10, 10, 0.25); }
+4364:3:  -webkit-overflow-scrolling: touch;
+4366:3:  -webkit-transform: translateX(250px);
+4367:7:      -ms-transform: translateX(250px);
+4370:5:    -webkit-transform: translateX(250px);
+4371:9:        -ms-transform: translateX(250px);
+4374:7:      -webkit-transform: translate(0, 0);
+4375:11:          -ms-transform: translate(0, 0);
+4378:5:    -webkit-transform: translateX(-250px);
+4379:9:        -ms-transform: translateX(-250px);
+4382:5:    -webkit-box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0.25);
+4383:13:            box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0.25); }
+4390:3:  -webkit-overflow-scrolling: touch;
+4392:3:  -webkit-transform: translateY(-250px);
+4393:7:      -ms-transform: translateY(-250px);
+4396:5:    -webkit-transform: translateY(-250px);
+4397:9:        -ms-transform: translateY(-250px);
+4400:7:      -webkit-transform: translate(0, 0);
+4401:11:          -ms-transform: translate(0, 0);
+4404:5:    -webkit-transform: translateY(250px);
+4405:9:        -ms-transform: translateY(250px);
+4408:5:    -webkit-box-shadow: inset 0 -13px 20px -13px rgba(10, 10, 10, 0.25);
+4409:13:            box-shadow: inset 0 -13px 20px -13px rgba(10, 10, 10, 0.25); }
+4416:3:  -webkit-overflow-scrolling: touch;
+4418:3:  -webkit-transform: translateY(250px);
+4419:7:      -ms-transform: translateY(250px);
+4422:5:    -webkit-transform: translateY(250px);
+4423:9:        -ms-transform: translateY(250px);
+4426:7:      -webkit-transform: translate(0, 0);
+4427:11:          -ms-transform: translate(0, 0);
+4430:5:    -webkit-transform: translateY(-250px);
+4431:9:        -ms-transform: translateY(-250px);
+4434:5:    -webkit-box-shadow: inset 0 13px 20px -13px rgba(10, 10, 10, 0.25);
+4435:13:            box-shadow: inset 0 13px 20px -13px rgba(10, 10, 10, 0.25); }
+4438:3:  -webkit-transform: none;
+4439:7:      -ms-transform: none;
+4441:3:  -webkit-backface-visibility: hidden;
+4444:5:    -webkit-transition: -webkit-transform 0.5s ease;
+4449:5:    -webkit-transform: translate(0, 0);
+4450:9:        -ms-transform: translate(0, 0);
+4453:5:    -webkit-transform: translate(0, 0);
+4454:9:        -ms-transform: translate(0, 0);
+4459:5:    -webkit-transform: none;
+4460:9:        -ms-transform: none;
+4462:5:    z-index: 12;
+4463:5:    -webkit-transition: none;
+4467:7:      display: none; }
+4469:7:      -webkit-transform: none;
+4470:11:          -ms-transform: none;
+4477:5:    -webkit-transform: none;
+4478:9:        -ms-transform: none;
+4480:5:    z-index: 12;
+4481:5:    -webkit-transition: none;
+4485:7:      display: none; }
+4487:7:      -webkit-transform: none;
+4488:11:          -ms-transform: none;
+4495:5:    -webkit-transform: none;
+4496:9:        -ms-transform: none;
+4498:5:    z-index: 12;
+4499:5:    -webkit-transition: none;
+4503:7:      display: none; }
+4505:7:      -webkit-transform: none;
+4506:11:          -ms-transform: none;
+4513:5:    -webkit-transform: none;
+4514:9:        -ms-transform: none;
+4516:5:    z-index: 12;
+4517:5:    -webkit-transition: none;
+4521:7:      display: none; }
+4523:7:      -webkit-transform: none;
+4524:11:          -ms-transform: none;
+4533:5:    -webkit-transform: none;
+4534:9:        -ms-transform: none;
+4536:5:    z-index: 12;
+4537:5:    -webkit-transition: none;
+4541:7:      display: none; }
+4543:7:      -webkit-transform: none;
+4544:11:          -ms-transform: none;
+4551:5:    -webkit-transform: none;
+4552:9:        -ms-transform: none;
+4554:5:    z-index: 12;
+4555:5:    -webkit-transition: none;
+4559:7:      display: none; }
+4561:7:      -webkit-transform: none;
+4562:11:          -ms-transform: none;
+4569:5:    -webkit-transform: none;
+4570:9:        -ms-transform: none;
+4572:5:    z-index: 12;
+4573:5:    -webkit-transition: none;
+4577:7:      display: none; }
+4579:7:      -webkit-transform: none;
+4580:11:          -ms-transform: none;
+4587:5:    -webkit-transform: none;
+4588:9:        -ms-transform: none;
+4590:5:    z-index: 12;
+4591:5:    -webkit-transition: none;
+4595:7:      display: none; }
+4597:7:      -webkit-transform: none;
+4598:11:          -ms-transform: none;
+4610:5:    background: none;
+4613:5:    -webkit-transition: none;
+4616:7:      -webkit-box-shadow: none;
+4617:15:              box-shadow: none;
+4618:7:      -webkit-transform: none;
+4619:11:          -ms-transform: none;
+4622:7:      display: none; } }
+4629:5:    background: none;
+4632:5:    -webkit-transition: none;
+4635:7:      -webkit-box-shadow: none;
+4636:15:              box-shadow: none;
+4637:7:      -webkit-transform: none;
+4638:11:          -ms-transform: none;
+4641:7:      display: none; } }
+4650:3:  list-style: none;
+4680:3:  -webkit-transform: translateY(-50%);
+4681:7:      -ms-transform: translateY(-50%);
+4683:3:  z-index: 10;
+4709:5:    border-radius: 50%;
+4720:5:    display: table;
+4721:5:    content: ' ';
+4722:5:    -webkit-flex-basis: 0;
+4723:9:        -ms-flex-preferred-size: 0;
+4725:5:    -webkit-box-ordinal-group: 2;
+4726:5:    -webkit-order: 1;
+4727:9:        -ms-flex-order: 1;
+4733:5:    border-radius: 0;
+4735:5:    display: none; }
+4737:7:      display: inline-block; }
+4740:9:        display: inline-block; } }
+4743:5:    display: block;
+4745:5:    border-radius: 0;
+4749:7:      background: #e6e6e6; }
+4752:5:    background: #1779ba;
+4760:7:      background: transparent; }
+4763:5:    content: '\2026';
+4768:3:  display: inline-block;
+4770:3:  content: "«"; }
+4774:3:  display: inline-block;
+4776:3:  content: "»"; }
+4781:3:  border-radius: 0;
+4796:3:  display: block;
+4805:3:  -webkit-transform: translate(-50%, -50%);
+4806:7:      -ms-transform: translate(-50%, -50%);
+4812:3:  white-space: nowrap; }
+4820:5:    -webkit-overflow-scrolling: touch; }
+4830:3:  z-index: 1005;
+4831:3:  display: none;
+4834:3:  -webkit-overflow-scrolling: touch; }
+4837:3:  z-index: 1006;
+4838:3:  -webkit-backface-visibility: hidden;
+4840:3:  display: none;
+4843:3:  border-radius: 0;
+4850:3:  -webkit-overflow-scrolling: touch; }
+4889:5:    border-radius: 0; }
+4902:7:      border-radius: 0; } }
+4913:3:  -webkit-user-select: none;
+4914:6:     -moz-user-select: none;
+4915:7:      -ms-user-select: none;
+4917:3:  -ms-touch-action: none;
+4918:7:      touch-action: none; }
+4924:3:  display: inline-block;
+4928:3:  -webkit-transition: all 0.2s ease-in-out;
+4931:5:    -webkit-transition: all 0s linear;
+4937:3:  -webkit-transform: translateY(-50%);
+4938:7:      -ms-transform: translateY(-50%);
+4941:3:  z-index: 1;
+4942:3:  cursor: -webkit-grab;
+4944:3:  display: inline-block;
+4947:3:  border-radius: 0;
+4949:3:  -webkit-transition: all 0.2s ease-in-out;
+4951:3:  -ms-touch-action: manipulation;
+4952:7:      touch-action: manipulation; }
+4958:5:    -webkit-transition: all 0s linear;
+4960:5:    cursor: -webkit-grabbing;
+4969:3:  display: inline-block;
+4973:3:  -webkit-transform: scale(1, -1);
+4974:7:      -ms-transform: scale(1, -1);
+4986:5:    -webkit-transform: translateX(-50%);
+4987:9:        -ms-transform: translateX(-50%);
+4995:3:  z-index: 0;
+4996:3:  -webkit-transform: translate3d(0, 0, 0);
+5001:3:  z-index: 5;
+5022:3:  -webkit-user-select: none;
+5023:6:     -moz-user-select: none;
+5024:7:      -ms-user-select: none;
+5035:3:  display: block;
+5038:3:  border-radius: 0;
+5039:3:  background: #cacaca;
+5040:3:  -webkit-transition: all 0.25s ease-out;
+5051:5:    display: block;
+5054:5:    -webkit-transform: translate3d(0, 0, 0);
+5056:5:    border-radius: 0;
+5057:5:    background: #fefefe;
+5058:5:    -webkit-transition: all 0.25s ease-out;
+5060:5:    content: ''; }
+5062:5:    background: #1779ba; }
+5074:3:  -webkit-transform: translateY(-50%);
+5075:7:      -ms-transform: translateY(-50%);
+5080:3:  display: none; }
+5082:5:    display: block; }
+5087:5:    display: none; }
+5135:3:  border-radius: 0; }
+5145:5:    background: #f8f8f8;
+5148:5:    background: #f1f1f1;
+5152:5:    background: transparent; }
+5174:5:    display: none; }
+5176:5:    display: none; }
+5180:5:    display: block; }
+5185:3:  display: block;
+5207:3:  background: #fefefe;
+5210:5:    display: table;
+5211:5:    content: ' ';
+5212:5:    -webkit-flex-basis: 0;
+5213:9:        -ms-flex-preferred-size: 0;
+5215:5:    -webkit-box-ordinal-group: 2;
+5216:5:    -webkit-order: 1;
+5217:9:        -ms-flex-order: 1;
+5223:3:  display: block;
+5230:5:    background: transparent; }
+5233:3:  background: #1779ba; }
+5237:7:      background: #1673b1; }
+5242:5:    display: block;
+5250:7:      background: #fefefe;
+5253:7:      background: #e6e6e6;
+5259:3:  background: #fefefe;
+5261:3:  -webkit-transition: all 0.5s ease;
+5269:3:  display: none;
+5272:5:    display: block; }
+5275:3:  display: inline-block;
+5279:3:  border-radius: 0;
+5280:3:  -webkit-box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+5281:11:          box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+5285:3:  -webkit-transition: -webkit-box-shadow 200ms ease-out;
+5290:5:    -webkit-box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5);
+5291:13:            box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5); }
+5293:5:    -webkit-box-shadow: none;
+5294:13:            box-shadow: none; }
+5298:3:  background: #0a0a0a;
+5300:3:  display: -webkit-box;
+5301:3:  display: -webkit-flex;
+5302:3:  display: -ms-flexbox;
+5303:3:  display: flex;
+5304:3:  -webkit-box-pack: start;
+5305:3:  -webkit-justify-content: flex-start;
+5306:7:      -ms-flex-pack: start;
+5307:11:          justify-content: flex-start;
+5308:3:  -webkit-box-align: center;
+5309:3:  -webkit-align-items: center;
+5310:7:      -ms-flex-align: center;
+5311:11:          align-items: center; }
+5318:3:  -webkit-box-flex: 1;
+5319:3:  -webkit-flex: 1 1 0px;
+5320:7:      -ms-flex: 1 1 0px;
+5321:11:          flex: 1 1 0px; }
+5327:3:  display: inline-block;
+5328:3:  vertical-align: middle;
+5333:3:  display: inline-block;
+5341:3:  z-index: 1200;
+5344:3:  border-radius: 0;
+5351:5:    display: block;
+5356:5:    content: '';
+5358:5:    border-color: transparent transparent #0a0a0a;
+5362:5:    -webkit-transform: translateX(-50%);
+5363:9:        -ms-transform: translateX(-50%);
+5366:5:    display: block;
+5371:5:    content: '';
+5373:5:    border-color: #0a0a0a transparent transparent;
+5378:5:    -webkit-transform: translateX(-50%);
+5379:9:        -ms-transform: translateX(-50%);
+5382:5:    display: block;
+5387:5:    content: '';
+5389:5:    border-color: transparent transparent transparent #0a0a0a;
+5394:5:    -webkit-transform: translateY(-50%);
+5395:9:        -ms-transform: translateY(-50%);
+5398:5:    display: block;
+5403:5:    content: '';
+5405:5:    border-color: transparent #0a0a0a transparent transparent;
+5411:5:    -webkit-transform: translateY(-50%);
+5412:9:        -ms-transform: translateY(-50%);
+5428:3:  display: -webkit-box;
+5429:3:  display: -webkit-flex;
+5430:3:  display: -ms-flexbox;
+5431:3:  display: flex;
+5432:3:  -webkit-flex-wrap: nowrap;
+5433:7:      -ms-flex-wrap: nowrap;
+5435:3:  -webkit-box-pack: justify;
+5436:3:  -webkit-justify-content: space-between;
+5437:7:      -ms-flex-pack: justify;
+5438:11:          justify-content: space-between;
+5439:3:  -webkit-box-align: center;
+5440:3:  -webkit-align-items: center;
+5441:7:      -ms-flex-align: center;
+5442:11:          align-items: center;
+5444:3:  -webkit-flex-wrap: wrap;
+5445:7:      -ms-flex-wrap: wrap;
+5460:5:    -webkit-box-flex: 0;
+5461:5:    -webkit-flex: 0 0 100%;
+5462:9:        -ms-flex: 0 0 100%;
+5463:13:            flex: 0 0 100%;
+5467:7:      -webkit-flex-wrap: nowrap;
+5468:11:          -ms-flex-wrap: nowrap;
+5471:9:        -webkit-box-flex: 1;
+5472:9:        -webkit-flex: 1 1 auto;
+5473:13:            -ms-flex: 1 1 auto;
+5474:17:                flex: 1 1 auto;
+5477:9:        -webkit-box-flex: 0;
+5478:9:        -webkit-flex: 0 1 auto;
+5479:13:            -ms-flex: 0 1 auto;
+5480:17:                flex: 0 1 auto;
+5484:7:      -webkit-flex-wrap: wrap;
+5485:11:          -ms-flex-wrap: wrap;
+5489:9:        -webkit-box-flex: 0;
+5490:9:        -webkit-flex: 0 0 100%;
+5491:13:            -ms-flex: 0 0 100%;
+5492:17:                flex: 0 0 100%;
+5496:7:      -webkit-flex-wrap: wrap;
+5497:11:          -ms-flex-wrap: wrap;
+5501:9:        -webkit-box-flex: 0;
+5502:9:        -webkit-flex: 0 0 100%;
+5503:13:            -ms-flex: 0 0 100%;
+5504:17:                flex: 0 0 100%;
+5508:3:  -webkit-box-flex: 0;
+5509:3:  -webkit-flex: 0 0 auto;
+5510:7:      -ms-flex: 0 0 auto;
+5511:11:          flex: 0 0 auto;
+5516:3:  -webkit-box-flex: 0;
+5517:3:  -webkit-flex: 0 0 auto;
+5518:7:      -ms-flex: 0 0 auto;
+5519:11:          flex: 0 0 auto; }
+5522:3:  display: none !important; }
+5532:5:    display: none !important; } }
+5536:5:    display: none !important; } }
+5540:5:    display: none !important; } }
+5544:5:    display: none !important; } }
+5548:5:    display: none !important; } }
+5552:5:    display: none !important; } }
+5556:5:    display: none !important; } }
+5560:5:    display: none !important; } }
+5564:5:    display: none !important; } }
+5568:5:    display: none !important; } }
+5577:3:  clip: rect(0, 0, 0, 0) !important;
+5578:3:  white-space: nowrap !important;
+5586:3:  clip: auto !important;
+5587:3:  white-space: normal !important; }
+5591:3:  display: block !important; }
+5595:7:      display: block !important; } }
+5599:7:      display: none !important; } }
+5603:3:  display: none !important; }
+5607:7:      display: none !important; } }
+5611:7:      display: block !important; } }
+5614:3:  display: none; }
+5617:3:  display: block; }
+5621:5:    display: block !important; }
+5623:5:    display: none !important; } }
+5626:3:  display: none; }
+5630:5:    display: block !important; }
+5632:5:    display: none !important; } }
+5635:3:  display: none; }
+5638:3:  display: block; }
+5641:3:  display: none; }
+5650:3:  display: block;
+5655:3:  display: table;
+5656:3:  content: ' ';
+5657:3:  -webkit-flex-basis: 0;
+5658:7:      -ms-flex-preferred-size: 0;
+5660:3:  -webkit-box-ordinal-group: 2;
+5661:3:  -webkit-order: 1;
+5662:7:      -ms-flex-order: 1;
+5669:3:  -webkit-transition-duration: 500ms;
+5671:3:  -webkit-transition-timing-function: linear;
+5673:3:  -webkit-transform: translateY(-100%);
+5674:7:      -ms-transform: translateY(-100%);
+5676:3:  -webkit-transition-property: opacity, -webkit-transform;
+5680:3:  -webkit-backface-visibility: hidden;
+5684:3:  -webkit-transform: translateY(0);
+5685:7:      -ms-transform: translateY(0);
+5689:3:  -webkit-transition-duration: 500ms;
+5691:3:  -webkit-transition-timing-function: linear;
+5693:3:  -webkit-transform: translateX(-100%);
+5694:7:      -ms-transform: translateX(-100%);
+5696:3:  -webkit-transition-property: opacity, -webkit-transform;
+5700:3:  -webkit-backface-visibility: hidden;
+5704:3:  -webkit-transform: translateX(0);
+5705:7:      -ms-transform: translateX(0);
+5709:3:  -webkit-transition-duration: 500ms;
+5711:3:  -webkit-transition-timing-function: linear;
+5713:3:  -webkit-transform: translateY(100%);
+5714:7:      -ms-transform: translateY(100%);
+5716:3:  -webkit-transition-property: opacity, -webkit-transform;
+5720:3:  -webkit-backface-visibility: hidden;
+5724:3:  -webkit-transform: translateY(0);
+5725:7:      -ms-transform: translateY(0);
+5729:3:  -webkit-transition-duration: 500ms;
+5731:3:  -webkit-transition-timing-function: linear;
+5733:3:  -webkit-transform: translateX(100%);
+5734:7:      -ms-transform: translateX(100%);
+5736:3:  -webkit-transition-property: opacity, -webkit-transform;
+5740:3:  -webkit-backface-visibility: hidden;
+5744:3:  -webkit-transform: translateX(0);
+5745:7:      -ms-transform: translateX(0);
+5749:3:  -webkit-transition-duration: 500ms;
+5751:3:  -webkit-transition-timing-function: linear;
+5753:3:  -webkit-transform: translateY(0);
+5754:7:      -ms-transform: translateY(0);
+5756:3:  -webkit-transition-property: opacity, -webkit-transform;
+5760:3:  -webkit-backface-visibility: hidden;
+5764:3:  -webkit-transform: translateY(100%);
+5765:7:      -ms-transform: translateY(100%);
+5769:3:  -webkit-transition-duration: 500ms;
+5771:3:  -webkit-transition-timing-function: linear;
+5773:3:  -webkit-transform: translateX(0);
+5774:7:      -ms-transform: translateX(0);
+5776:3:  -webkit-transition-property: opacity, -webkit-transform;
+5780:3:  -webkit-backface-visibility: hidden;
+5784:3:  -webkit-transform: translateX(100%);
+5785:7:      -ms-transform: translateX(100%);
+5789:3:  -webkit-transition-duration: 500ms;
+5791:3:  -webkit-transition-timing-function: linear;
+5793:3:  -webkit-transform: translateY(0);
+5794:7:      -ms-transform: translateY(0);
+5796:3:  -webkit-transition-property: opacity, -webkit-transform;
+5800:3:  -webkit-backface-visibility: hidden;
+5804:3:  -webkit-transform: translateY(-100%);
+5805:7:      -ms-transform: translateY(-100%);
+5809:3:  -webkit-transition-duration: 500ms;
+5811:3:  -webkit-transition-timing-function: linear;
+5813:3:  -webkit-transform: translateX(0);
+5814:7:      -ms-transform: translateX(0);
+5816:3:  -webkit-transition-property: opacity, -webkit-transform;
+5820:3:  -webkit-backface-visibility: hidden;
+5824:3:  -webkit-transform: translateX(-100%);
+5825:7:      -ms-transform: translateX(-100%);
+5829:3:  -webkit-transition-duration: 500ms;
+5831:3:  -webkit-transition-timing-function: linear;
+5834:3:  -webkit-transition-property: opacity;
+5841:3:  -webkit-transition-duration: 500ms;
+5843:3:  -webkit-transition-timing-function: linear;
+5846:3:  -webkit-transition-property: opacity;
+5853:3:  -webkit-transition-duration: 500ms;
+5855:3:  -webkit-transition-timing-function: linear;
+5857:3:  -webkit-transform: perspective(2000px) rotateX(-90deg);
+5859:3:  -webkit-transform-origin: top;
+5860:7:      -ms-transform-origin: top;
+5861:11:          transform-origin: top;
+5862:3:  -webkit-transition-property: opacity, -webkit-transform;
+5869:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5874:3:  -webkit-transition-duration: 500ms;
+5876:3:  -webkit-transition-timing-function: linear;
+5878:3:  -webkit-transform: perspective(2000px) rotateY(-90deg);
+5880:3:  -webkit-transform-origin: right;
+5881:7:      -ms-transform-origin: right;
+5882:11:          transform-origin: right;
+5883:3:  -webkit-transition-property: opacity, -webkit-transform;
+5890:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5895:3:  -webkit-transition-duration: 500ms;
+5897:3:  -webkit-transition-timing-function: linear;
+5899:3:  -webkit-transform: perspective(2000px) rotateX(90deg);
+5901:3:  -webkit-transform-origin: bottom;
+5902:7:      -ms-transform-origin: bottom;
+5903:11:          transform-origin: bottom;
+5904:3:  -webkit-transition-property: opacity, -webkit-transform;
+5911:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5916:3:  -webkit-transition-duration: 500ms;
+5918:3:  -webkit-transition-timing-function: linear;
+5920:3:  -webkit-transform: perspective(2000px) rotateY(90deg);
+5922:3:  -webkit-transform-origin: left;
+5923:7:      -ms-transform-origin: left;
+5924:11:          transform-origin: left;
+5925:3:  -webkit-transition-property: opacity, -webkit-transform;
+5932:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5937:3:  -webkit-transition-duration: 500ms;
+5939:3:  -webkit-transition-timing-function: linear;
+5941:3:  -webkit-transform: perspective(2000px) rotateX(-90deg);
+5943:3:  -webkit-transform-origin: center;
+5944:7:      -ms-transform-origin: center;
+5945:11:          transform-origin: center;
+5946:3:  -webkit-transition-property: opacity, -webkit-transform;
+5953:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5958:3:  -webkit-transition-duration: 500ms;
+5960:3:  -webkit-transition-timing-function: linear;
+5962:3:  -webkit-transform: perspective(2000px) rotateY(-90deg);
+5964:3:  -webkit-transform-origin: center;
+5965:7:      -ms-transform-origin: center;
+5966:11:          transform-origin: center;
+5967:3:  -webkit-transition-property: opacity, -webkit-transform;
+5974:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5979:3:  -webkit-transition-duration: 500ms;
+5981:3:  -webkit-transition-timing-function: linear;
+5983:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+5985:3:  -webkit-transform-origin: top;
+5986:7:      -ms-transform-origin: top;
+5987:11:          transform-origin: top;
+5988:3:  -webkit-transition-property: opacity, -webkit-transform;
+5995:3:  -webkit-transform: perspective(2000px) rotateX(90deg);
+6000:3:  -webkit-transition-duration: 500ms;
+6002:3:  -webkit-transition-timing-function: linear;
+6004:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+6006:3:  -webkit-transform-origin: right;
+6007:7:      -ms-transform-origin: right;
+6008:11:          transform-origin: right;
+6009:3:  -webkit-transition-property: opacity, -webkit-transform;
+6016:3:  -webkit-transform: perspective(2000px) rotateY(90deg);
+6021:3:  -webkit-transition-duration: 500ms;
+6023:3:  -webkit-transition-timing-function: linear;
+6025:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+6027:3:  -webkit-transform-origin: bottom;
+6028:7:      -ms-transform-origin: bottom;
+6029:11:          transform-origin: bottom;
+6030:3:  -webkit-transition-property: opacity, -webkit-transform;
+6037:3:  -webkit-transform: perspective(2000px) rotateX(-90deg);
+6042:3:  -webkit-transition-duration: 500ms;
+6044:3:  -webkit-transition-timing-function: linear;
+6046:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+6048:3:  -webkit-transform-origin: left;
+6049:7:      -ms-transform-origin: left;
+6050:11:          transform-origin: left;
+6051:3:  -webkit-transition-property: opacity, -webkit-transform;
+6058:3:  -webkit-transform: perspective(2000px) rotateY(-90deg);
+6063:3:  -webkit-transition-duration: 500ms;
+6065:3:  -webkit-transition-timing-function: linear;
+6067:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+6069:3:  -webkit-transform-origin: center;
+6070:7:      -ms-transform-origin: center;
+6071:11:          transform-origin: center;
+6072:3:  -webkit-transition-property: opacity, -webkit-transform;
+6079:3:  -webkit-transform: perspective(2000px) rotateX(90deg);
+6084:3:  -webkit-transition-duration: 500ms;
+6086:3:  -webkit-transition-timing-function: linear;
+6088:3:  -webkit-transform: perspective(2000px) rotate(0deg);
+6090:3:  -webkit-transform-origin: center;
+6091:7:      -ms-transform-origin: center;
+6092:11:          transform-origin: center;
+6093:3:  -webkit-transition-property: opacity, -webkit-transform;
+6100:3:  -webkit-transform: perspective(2000px) rotateY(90deg);
+6105:3:  -webkit-transition-duration: 500ms;
+6107:3:  -webkit-transition-timing-function: linear;
+6109:3:  -webkit-transform: scale(0.5);
+6110:7:      -ms-transform: scale(0.5);
+6112:3:  -webkit-transition-property: opacity, -webkit-transform;
+6119:3:  -webkit-transform: scale(1);
+6120:7:      -ms-transform: scale(1);
+6125:3:  -webkit-transition-duration: 500ms;
+6127:3:  -webkit-transition-timing-function: linear;
+6129:3:  -webkit-transform: scale(1.5);
+6130:7:      -ms-transform: scale(1.5);
+6132:3:  -webkit-transition-property: opacity, -webkit-transform;
+6139:3:  -webkit-transform: scale(1);
+6140:7:      -ms-transform: scale(1);
+6145:3:  -webkit-transition-duration: 500ms;
+6147:3:  -webkit-transition-timing-function: linear;
+6149:3:  -webkit-transform: scale(1);
+6150:7:      -ms-transform: scale(1);
+6152:3:  -webkit-transition-property: opacity, -webkit-transform;
+6159:3:  -webkit-transform: scale(1.5);
+6160:7:      -ms-transform: scale(1.5);
+6165:3:  -webkit-transition-duration: 500ms;
+6167:3:  -webkit-transition-timing-function: linear;
+6169:3:  -webkit-transform: scale(1);
+6170:7:      -ms-transform: scale(1);
+6172:3:  -webkit-transition-property: opacity, -webkit-transform;
+6179:3:  -webkit-transform: scale(0.5);
+6180:7:      -ms-transform: scale(0.5);
+6185:3:  -webkit-transition-duration: 500ms;
+6187:3:  -webkit-transition-timing-function: linear;
+6189:3:  -webkit-transform: rotate(-0.75turn);
+6190:7:      -ms-transform: rotate(-0.75turn);
+6192:3:  -webkit-transition-property: opacity, -webkit-transform;
+6199:3:  -webkit-transform: rotate(0);
+6200:7:      -ms-transform: rotate(0);
+6205:3:  -webkit-transition-duration: 500ms;
+6207:3:  -webkit-transition-timing-function: linear;
+6209:3:  -webkit-transform: rotate(0);
+6210:7:      -ms-transform: rotate(0);
+6212:3:  -webkit-transition-property: opacity, -webkit-transform;
+6219:3:  -webkit-transform: rotate(0.75turn);
+6220:7:      -ms-transform: rotate(0.75turn);
+6225:3:  -webkit-transition-duration: 500ms;
+6227:3:  -webkit-transition-timing-function: linear;
+6229:3:  -webkit-transform: rotate(0.75turn);
+6230:7:      -ms-transform: rotate(0.75turn);
+6232:3:  -webkit-transition-property: opacity, -webkit-transform;
+6239:3:  -webkit-transform: rotate(0);
+6240:7:      -ms-transform: rotate(0);
+6245:3:  -webkit-transition-duration: 500ms;
+6247:3:  -webkit-transition-timing-function: linear;
+6249:3:  -webkit-transform: rotate(0);
+6250:7:      -ms-transform: rotate(0);
+6252:3:  -webkit-transition-property: opacity, -webkit-transform;
+6259:3:  -webkit-transform: rotate(-0.75turn);
+6260:7:      -ms-transform: rotate(-0.75turn);
+6265:3:  -webkit-transition-duration: 750ms !important;
+6269:3:  -webkit-transition-duration: 250ms !important;
+6273:3:  -webkit-transition-timing-function: linear !important;
+6277:3:  -webkit-transition-timing-function: ease !important;
+6281:3:  -webkit-transition-timing-function: ease-in !important;
+6285:3:  -webkit-transition-timing-function: ease-out !important;
+6289:3:  -webkit-transition-timing-function: ease-in-out !important;
+6293:3:  -webkit-transition-timing-function: cubic-bezier(0.485, 0.155, 0.24, 1.245) !important;
+6297:3:  -webkit-transition-timing-function: cubic-bezier(0.485, 0.155, 0.515, 0.845) !important;
+6301:3:  -webkit-transition-timing-function: cubic-bezier(0.76, -0.245, 0.24, 1.245) !important;
+6305:3:  -webkit-transition-delay: 300ms !important;
+6309:3:  -webkit-transition-delay: 700ms !important;
+6313:3:  -webkit-animation-name: shake-7;
+6318:5:    -webkit-transform: translateX(7%);
+6321:5:    -webkit-transform: translateX(-7%);
+6326:5:    -webkit-transform: translateX(7%);
+6329:5:    -webkit-transform: translateX(-7%);
+6333:3:  -webkit-animation-name: spin-cw-1turn;
+6338:5:    -webkit-transform: rotate(-1turn);
+6341:5:    -webkit-transform: rotate(0);
+6346:5:    -webkit-transform: rotate(-1turn);
+6349:5:    -webkit-transform: rotate(0);
+6353:3:  -webkit-animation-name: spin-ccw-1turn;
+6358:5:    -webkit-transform: rotate(0);
+6361:5:    -webkit-transform: rotate(-1turn);
+6366:5:    -webkit-transform: rotate(0);
+6369:5:    -webkit-transform: rotate(-1turn);
+6373:3:  -webkit-animation-name: wiggle-7deg;
+6378:5:    -webkit-transform: rotate(7deg);
+6381:5:    -webkit-transform: rotate(-7deg);
+6384:5:    -webkit-transform: rotate(0);
+6389:5:    -webkit-transform: rotate(7deg);
+6392:5:    -webkit-transform: rotate(-7deg);
+6395:5:    -webkit-transform: rotate(0);
+6402:3:  -webkit-animation-duration: 500ms;
+6406:3:  -webkit-animation-iteration-count: infinite;
+6410:3:  -webkit-animation-duration: 750ms !important;
+6414:3:  -webkit-animation-duration: 250ms !important;
+6418:3:  -webkit-animation-timing-function: linear !important;
+6422:3:  -webkit-animation-timing-function: ease !important;
+6426:3:  -webkit-animation-timing-function: ease-in !important;
+6430:3:  -webkit-animation-timing-function: ease-out !important;
+6434:3:  -webkit-animation-timing-function: ease-in-out !important;
+6438:3:  -webkit-animation-timing-function: cubic-bezier(0.485, 0.155, 0.24, 1.245) !important;
+6442:3:  -webkit-animation-timing-function: cubic-bezier(0.485, 0.155, 0.515, 0.845) !important;
+6446:3:  -webkit-animation-timing-function: cubic-bezier(0.76, -0.245, 0.24, 1.245) !important;
+6450:3:  -webkit-animation-delay: 300ms !important;
+6454:3:  -webkit-animation-delay: 700ms !important;
