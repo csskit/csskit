@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -2517,7 +2518,7 @@ StyleSheet(
                 offset: SourceOffset(1944),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(1946),
                 len: 5,
@@ -3353,7 +3354,7 @@ StyleSheet(
                 offset: SourceOffset(2569),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2571),
                 len: 5,
@@ -5911,7 +5912,7 @@ StyleSheet(
                 offset: SourceOffset(4466),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(4468),
                 len: 5,
@@ -6937,7 +6938,7 @@ StyleSheet(
                 offset: SourceOffset(5339),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(5341),
                 len: 4,
@@ -47422,7 +47423,7 @@ StyleSheet(
                 offset: SourceOffset(32604),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(32606),
                 len: 4,
@@ -63778,7 +63779,7 @@ StyleSheet(
                 offset: SourceOffset(43452),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(43454),
                 len: 4,
@@ -64871,7 +64872,7 @@ StyleSheet(
                       offset: SourceOffset(44491),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(44493),
                       len: 4,
@@ -66140,7 +66141,7 @@ StyleSheet(
                       offset: SourceOffset(45739),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(45741),
                       len: 4,
@@ -82260,7 +82261,7 @@ StyleSheet(
                 offset: SourceOffset(57827),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(57829),
                 len: 4,
@@ -83891,7 +83892,7 @@ StyleSheet(
                       offset: SourceOffset(59173),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(59175),
                       len: 4,
@@ -85530,7 +85531,7 @@ StyleSheet(
                       offset: SourceOffset(60640),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(60642),
                       len: 4,
@@ -91897,7 +91898,7 @@ StyleSheet(
                 offset: SourceOffset(65153),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(65155),
                 len: 5,
@@ -92270,7 +92271,7 @@ StyleSheet(
                 offset: SourceOffset(65459),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Inline(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Inline(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(65461),
                 len: 6,
@@ -92567,7 +92568,7 @@ StyleSheet(
                 offset: SourceOffset(65743),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(65745),
                 len: 5,
@@ -93921,7 +93922,7 @@ StyleSheet(
                       offset: SourceOffset(66796),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(66798),
                       len: 5,
@@ -94064,7 +94065,7 @@ StyleSheet(
                       offset: SourceOffset(66906),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(66908),
                       len: 5,
@@ -96438,7 +96439,7 @@ StyleSheet(
                 offset: SourceOffset(68559),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(68561),
                 len: 5,
@@ -108384,7 +108385,7 @@ StyleSheet(
                 offset: SourceOffset(75863),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(75865),
                 len: 5,
@@ -110501,7 +110502,7 @@ StyleSheet(
                 offset: SourceOffset(77231),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(77233),
                 len: 5,
@@ -114327,7 +114328,7 @@ StyleSheet(
                 offset: SourceOffset(80012),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(80014),
                 len: 5,
@@ -114844,7 +114845,7 @@ StyleSheet(
                 offset: SourceOffset(80410),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(80412),
                 len: 4,
@@ -115912,7 +115913,7 @@ StyleSheet(
                 offset: SourceOffset(81253),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(81255),
                 len: 4,
@@ -116871,7 +116872,7 @@ StyleSheet(
                 offset: SourceOffset(81923),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(81925),
                 len: 4,
@@ -120551,7 +120552,7 @@ StyleSheet(
                 offset: SourceOffset(85531),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(85533),
                 len: 5,
@@ -121081,7 +121082,7 @@ StyleSheet(
                 offset: SourceOffset(85890),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(85892),
                 len: 5,
@@ -122773,7 +122774,7 @@ StyleSheet(
                 offset: SourceOffset(87215),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(87217),
                 len: 5,
@@ -124063,7 +124064,7 @@ StyleSheet(
                 offset: SourceOffset(88244),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(88246),
                 len: 5,
@@ -126016,7 +126017,7 @@ StyleSheet(
                 offset: SourceOffset(89622),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(89624),
                 len: 5,
@@ -127139,7 +127140,7 @@ StyleSheet(
                 offset: SourceOffset(90485),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(90487),
                 len: 4,
@@ -127575,7 +127576,7 @@ StyleSheet(
                 offset: SourceOffset(90859),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(90861),
                 len: 5,
@@ -152044,7 +152045,7 @@ StyleSheet(
                       offset: SourceOffset(106926),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(106928),
                       len: 5,
@@ -152143,7 +152144,7 @@ StyleSheet(
                       offset: SourceOffset(107009),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(107011),
                       len: 5,
@@ -152320,7 +152321,7 @@ StyleSheet(
                       offset: SourceOffset(107161),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(107163),
                       len: 5,
@@ -152419,7 +152420,7 @@ StyleSheet(
                       offset: SourceOffset(107245),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(107247),
                       len: 5,
@@ -152604,7 +152605,7 @@ StyleSheet(
                 offset: SourceOffset(107374),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(107376),
                 len: 4,
@@ -153332,7 +153333,7 @@ StyleSheet(
                 offset: SourceOffset(107986),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(107988),
                 len: 4,
@@ -156052,7 +156053,7 @@ StyleSheet(
                 offset: SourceOffset(109924),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(109926),
                 len: 4,
@@ -156403,7 +156404,7 @@ StyleSheet(
                 offset: SourceOffset(110158),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(110160),
                 len: 5,
@@ -161305,7 +161306,7 @@ StyleSheet(
                 offset: SourceOffset(113865),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(113867),
                 len: 4,
@@ -161601,7 +161602,7 @@ StyleSheet(
                 offset: SourceOffset(114046),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(114048),
                 len: 4,
@@ -165378,7 +165379,7 @@ StyleSheet(
                 offset: SourceOffset(116607),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(116609),
                 len: 4,
@@ -165810,7 +165811,7 @@ StyleSheet(
                 offset: SourceOffset(116985),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(116987),
                 len: 5,
@@ -166710,7 +166711,7 @@ StyleSheet(
                 offset: SourceOffset(117549),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(117551),
                 len: 4,
@@ -167559,7 +167560,7 @@ StyleSheet(
                 offset: SourceOffset(118272),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(118274),
                 len: 4,
@@ -168320,7 +168321,7 @@ StyleSheet(
                 offset: SourceOffset(118888),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(118890),
                 len: 5,
@@ -169293,7 +169294,7 @@ StyleSheet(
                 offset: SourceOffset(119497),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(119499),
                 len: 5,
@@ -170081,7 +170082,7 @@ StyleSheet(
                 offset: SourceOffset(119973),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(119975),
                 len: 5,
@@ -170828,7 +170829,7 @@ StyleSheet(
                 offset: SourceOffset(120569),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(120571),
                 len: 5,
@@ -171615,7 +171616,7 @@ StyleSheet(
                 offset: SourceOffset(121235),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(121237),
                 len: 5,
@@ -172026,7 +172027,7 @@ StyleSheet(
                 offset: SourceOffset(121581),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(121583),
                 len: 5,
@@ -172391,7 +172392,7 @@ StyleSheet(
                 offset: SourceOffset(121866),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(121868),
                 len: 5,
@@ -172744,7 +172745,7 @@ StyleSheet(
                 offset: SourceOffset(122129),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(122131),
                 len: 5,
@@ -173396,7 +173397,7 @@ StyleSheet(
                 offset: SourceOffset(122652),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(122654),
                 len: 5,
@@ -173466,7 +173467,7 @@ StyleSheet(
                 offset: SourceOffset(122701),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(122703),
                 len: 5,
@@ -174249,7 +174250,7 @@ StyleSheet(
                 offset: SourceOffset(123232),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(123234),
                 len: 5,
@@ -175744,7 +175745,7 @@ StyleSheet(
                 offset: SourceOffset(124173),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(124175),
                 len: 5,
@@ -176126,7 +176127,7 @@ StyleSheet(
                 offset: SourceOffset(124445),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(124447),
                 len: 5,
@@ -176997,7 +176998,7 @@ StyleSheet(
                       offset: SourceOffset(125136),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(125138),
                       len: 5,
@@ -177927,7 +177928,7 @@ StyleSheet(
                       offset: SourceOffset(125823),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(125825),
                       len: 5,
@@ -178309,7 +178310,7 @@ StyleSheet(
                       offset: SourceOffset(126123),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(126125),
                       len: 5,
@@ -179188,7 +179189,7 @@ StyleSheet(
                       offset: SourceOffset(126826),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(126828),
                       len: 5,
@@ -180118,7 +180119,7 @@ StyleSheet(
                       offset: SourceOffset(127508),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(127510),
                       len: 5,
@@ -180500,7 +180501,7 @@ StyleSheet(
                       offset: SourceOffset(127807),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(127809),
                       len: 5,
@@ -182133,7 +182134,7 @@ StyleSheet(
                 offset: SourceOffset(129119),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(129121),
                 len: 5,
@@ -182498,7 +182499,7 @@ StyleSheet(
                 offset: SourceOffset(129432),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(129434),
                 len: 5,
@@ -182920,7 +182921,7 @@ StyleSheet(
                 offset: SourceOffset(129801),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(129803),
                 len: 5,
@@ -184481,7 +184482,7 @@ StyleSheet(
                 offset: SourceOffset(130959),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(130961),
                 len: 4,
@@ -204591,7 +204592,7 @@ StyleSheet(
                 offset: SourceOffset(147631),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(147633),
                 len: 5,
@@ -205396,7 +205397,7 @@ StyleSheet(
                 offset: SourceOffset(148262),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(148264),
                 len: 5,
@@ -207133,7 +207134,7 @@ StyleSheet(
                 offset: SourceOffset(149621),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(149623),
                 len: 5,
@@ -214364,7 +214365,7 @@ StyleSheet(
                 offset: SourceOffset(154981),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(154983),
                 len: 5,
@@ -214842,7 +214843,7 @@ StyleSheet(
                 offset: SourceOffset(155345),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(155347),
                 len: 5,
@@ -215997,7 +215998,7 @@ StyleSheet(
                 offset: SourceOffset(156207),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(156209),
                 len: 5,
@@ -219109,7 +219110,7 @@ StyleSheet(
                       offset: SourceOffset(158383),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(158385),
                       len: 5,
@@ -219257,7 +219258,7 @@ StyleSheet(
                 offset: SourceOffset(158461),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(158463),
                 len: 5,
@@ -220024,7 +220025,7 @@ StyleSheet(
                 offset: SourceOffset(158962),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(158964),
                 len: 5,
@@ -220413,7 +220414,7 @@ StyleSheet(
                 offset: SourceOffset(159254),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(159256),
                 len: 5,
@@ -221119,7 +221120,7 @@ StyleSheet(
                 offset: SourceOffset(159647),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(159649),
                 len: 5,
@@ -222099,7 +222100,7 @@ StyleSheet(
                 offset: SourceOffset(160350),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(160352),
                 len: 5,
@@ -223484,7 +223485,7 @@ StyleSheet(
                 offset: SourceOffset(161266),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(161268),
                 len: 4,
@@ -224871,7 +224872,7 @@ StyleSheet(
                 offset: SourceOffset(162315),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(162317),
                 len: 5,
@@ -225404,7 +225405,7 @@ StyleSheet(
                 offset: SourceOffset(162735),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(162737),
                 len: 5,
@@ -225960,7 +225961,7 @@ StyleSheet(
                 offset: SourceOffset(163171),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(163173),
                 len: 5,
@@ -226526,7 +226527,7 @@ StyleSheet(
                 offset: SourceOffset(163620),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(163622),
                 len: 5,
@@ -227610,7 +227611,7 @@ StyleSheet(
                 offset: SourceOffset(164408),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(164410),
                 len: 4,
@@ -233477,7 +233478,7 @@ StyleSheet(
                 offset: SourceOffset(168828),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(168830),
                 len: 5,
@@ -233614,7 +233615,7 @@ StyleSheet(
                       offset: SourceOffset(168960),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(168962),
                       len: 5,
@@ -234136,7 +234137,7 @@ StyleSheet(
                       offset: SourceOffset(169431),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(169433),
                       len: 5,
@@ -234271,7 +234272,7 @@ StyleSheet(
                 offset: SourceOffset(169529),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(169531),
                 len: 5,
@@ -234379,7 +234380,7 @@ StyleSheet(
                       offset: SourceOffset(169625),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(169627),
                       len: 5,
@@ -234663,7 +234664,7 @@ StyleSheet(
                       offset: SourceOffset(169841),
                       len: 1,
                     )),
-                    value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+                    value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(169843),
                       len: 5,
@@ -234884,7 +234885,7 @@ StyleSheet(
                 offset: SourceOffset(169992),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(169994),
                 len: 5,
@@ -235155,7 +235156,7 @@ StyleSheet(
                 offset: SourceOffset(170166),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(170168),
                 len: 5,
@@ -235303,7 +235304,7 @@ StyleSheet(
                 offset: SourceOffset(170268),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Table(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Table(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(170270),
                 len: 5,

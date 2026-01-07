@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -1202,7 +1203,7 @@ StyleSheet(
                 offset: SourceOffset(846),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(848),
                 len: 5,

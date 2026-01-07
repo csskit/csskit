@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -10690,7 +10691,7 @@ StyleSheet(
                 offset: SourceOffset(9375),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(9377),
                 len: 5,
@@ -16944,7 +16945,7 @@ StyleSheet(
                 offset: SourceOffset(13922),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(13924),
                 len: 5,
@@ -30393,7 +30394,7 @@ StyleSheet(
                 offset: SourceOffset(24803),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(Some(Block(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(Some(Block(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(24805),
                 len: 5,
@@ -36338,7 +36339,7 @@ StyleSheet(
                 offset: SourceOffset(29091),
                 len: 1,
               )),
-              value: DisplayOutsideDisplayInside(Optionals2(None, Some(Flex(Ident(Cursor(
+              value: DisplayOutsideInside(Optionals2(None, Some(Flex(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(29093),
                 len: 4,

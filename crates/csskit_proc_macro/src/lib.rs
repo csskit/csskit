@@ -4,6 +4,7 @@ use syn::{DeriveInput, parse_macro_input};
 
 mod generate;
 mod syntax;
+mod type_renames;
 
 #[cfg(test)]
 mod test;

@@ -1,3 +1,4 @@
+use crate::type_renames::get_type_rename;
 use css_value_definition_parser::*;
 use heck::{ToPascalCase, ToSnakeCase};
 use itertools::Itertools;
@@ -100,18 +101,16 @@ impl ToFieldName for Def {
 				logical_first.expect("At least one Def is required").to_variant_name(0)
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
-				format_ident!(
-					"{}",
-					ds.iter().fold(String::new(), |str, d| match d {
-						Def::Type(d) => {
-							format!("{}{}", str, d.to_variant_name(0))
-						}
-						_ => {
-							dbg!("TODO variant name for Combinator() of Options", d);
-							todo!("variant name")
-						}
-					})
-				)
+				let auto_generated_name = ds.iter().fold(String::new(), |str, d| match d {
+					Def::Type(d) => {
+						format!("{}{}", str, d.to_variant_name(0))
+					}
+					_ => {
+						dbg!("TODO variant name for Combinator() of Options", d);
+						todo!("variant name")
+					}
+				});
+				format_ident!("{}", get_type_rename(&auto_generated_name).unwrap_or(&auto_generated_name))
 			}
 			Self::Combinator(_, _) => {
 				dbg!("TODO variant name for Combinator()", self);
