@@ -99,12 +99,26 @@ impl ToFieldName for Def {
 				let logical_first = others.first().or(optional.first());
 				logical_first.expect("At least one Def is required").to_variant_name(0)
 			}
-			Self::Punct(_) => {
-				dbg!("TODO variant name for Punct()", self);
-				todo!("variant name")
+			Self::Combinator(ds, DefCombinatorStyle::Options) => {
+				format_ident!(
+					"{}",
+					ds.iter().fold(String::new(), |str, d| match d {
+						Def::Type(d) => {
+							format!("{}{}", str, d.to_variant_name(0))
+						}
+						_ => {
+							dbg!("TODO variant name for Combinator() of Options", d);
+							todo!("variant name")
+						}
+					})
+				)
 			}
 			Self::Combinator(_, _) => {
 				dbg!("TODO variant name for Combinator()", self);
+				todo!("variant name")
+			}
+			Self::Punct(_) => {
+				dbg!("TODO variant name for Punct()", self);
 				todo!("variant name")
 			}
 		}

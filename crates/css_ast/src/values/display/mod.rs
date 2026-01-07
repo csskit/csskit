@@ -7,51 +7,35 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `display` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#display).
-// ///
-// /// The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-display-4/#display
-// #[syntax(
-//     " [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "inline",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     property_group = Display,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.display")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// pub enum DisplayStyleValue {}
+/// Represents the style value for `display` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#display).
+///
+/// The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>
+/// ```
+///
+/// https://drafts.csswg.org/css-display-4/#display
+#[syntax(
+	" [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "inline",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = Display,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.display"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+pub enum DisplayStyleValue {}
 
 /// Represents the style value for `order` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#order).
 ///

@@ -9,17 +9,12 @@ coverage/popular/foundation.6.7.5.css
 89:3:  text-transform: none; }
 95:3:  -webkit-appearance: button; }
 114:3:  -webkit-box-sizing: border-box;
-117:3:  display: table;
 120:3:  white-space: normal; }
 123:3:  vertical-align: baseline; }
 130:3:  -webkit-box-sizing: border-box;
 139:3:  -webkit-appearance: textfield;
 143:3:  -webkit-appearance: none; }
 146:3:  -webkit-appearance: button;
-150:3:  display: block; }
-153:3:  display: list-item; }
-156:3:  display: none; }
-159:3:  display: none; }
 171:3:  -webkit-touch-callout: none;
 172:3:  -webkit-user-select: none; }
 178:3:  -webkit-box-sizing: border-box;
@@ -27,7 +22,6 @@ coverage/popular/foundation.6.7.5.css
 191:3:  background: #fefefe;
 196:3:  -webkit-font-smoothing: antialiased;
 197:3:  -moz-osx-font-smoothing: grayscale; }
-200:3:  display: inline-block;
 201:3:  vertical-align: middle;
 204:3:  -ms-interpolation-mode: bicubic; }
 209:3:  border-radius: 0; }
@@ -38,12 +32,9 @@ coverage/popular/foundation.6.7.5.css
 231:3:  border-radius: 0;
 232:3:  background: transparent;
 240:3:  -webkit-overflow-scrolling: touch; }
-250:3:  display: block !important; }
-253:3:  display: none !important; }
 283:3:  display: -webkit-box;
 284:3:  display: -webkit-flex;
 285:3:  display: -ms-flexbox;
-286:3:  display: flex;
 287:3:  -webkit-box-orient: horizontal;
 288:3:  -webkit-box-direction: normal;
 289:3:  -webkit-flex-flow: row wrap;
@@ -89,7 +80,6 @@ coverage/popular/foundation.6.7.5.css
 1201:3:  display: -webkit-box;
 1202:3:  display: -webkit-flex;
 1203:3:  display: -ms-flexbox;
-1204:3:  display: flex;
 1205:3:  -webkit-box-orient: vertical;
 1206:3:  -webkit-box-direction: normal;
 1207:3:  -webkit-flex-flow: column nowrap;
@@ -133,7 +123,6 @@ coverage/popular/foundation.6.7.5.css
 1513:3:  display: -webkit-box;
 1514:3:  display: -webkit-flex;
 1515:3:  display: -ms-flexbox;
-1516:3:  display: flex;
 1517:3:  -webkit-box-orient: vertical;
 1518:3:  -webkit-box-direction: normal;
 1519:3:  -webkit-flex-direction: column;
@@ -151,7 +140,6 @@ coverage/popular/foundation.6.7.5.css
 1549:5:    display: -webkit-box;
 1550:5:    display: -webkit-flex;
 1551:5:    display: -ms-flexbox;
-1552:5:    display: flex;
 1553:5:    -webkit-box-orient: vertical;
 1554:5:    -webkit-box-direction: normal;
 1555:5:    -webkit-flex-direction: column;
@@ -171,7 +159,6 @@ coverage/popular/foundation.6.7.5.css
 1591:5:    display: -webkit-box;
 1592:5:    display: -webkit-flex;
 1593:5:    display: -ms-flexbox;
-1594:5:    display: flex;
 1595:5:    -webkit-box-orient: vertical;
 1596:5:    -webkit-box-direction: normal;
 1597:5:    -webkit-flex-direction: column;
@@ -320,7 +307,6 @@ coverage/popular/foundation.6.7.5.css
 2018:3:  display: -webkit-box;
 2019:3:  display: -webkit-flex;
 2020:3:  display: -ms-flexbox;
-2021:3:  display: flex; }
 2024:3:  -webkit-box-flex: 1;
 2025:3:  -webkit-flex: 1 1 auto;
 2026:7:      -ms-flex: 1 1 auto;
@@ -352,7 +338,6 @@ coverage/popular/foundation.6.7.5.css
 2071:5:    display: -webkit-box;
 2072:5:    display: -webkit-flex;
 2073:5:    display: -ms-flexbox;
-2074:5:    display: flex; }
 2076:5:    -webkit-box-flex: 1;
 2077:5:    -webkit-flex: 1 1 auto;
 2078:9:        -ms-flex: 1 1 auto;
@@ -384,7 +369,6 @@ coverage/popular/foundation.6.7.5.css
 2117:5:    display: -webkit-box;
 2118:5:    display: -webkit-flex;
 2119:5:    display: -ms-flexbox;
-2120:5:    display: flex; }
 2122:5:    -webkit-box-flex: 1;
 2123:5:    -webkit-flex: 1 1 auto;
 2124:9:        -ms-flex: 1 1 auto;
@@ -418,38 +402,23 @@ coverage/popular/foundation.6.7.5.css
 2276:3:  text-decoration: none;
 2331:3:  text-decoration: none; }
 2362:3:  list-style: none; }
-2365:3:  display: block;
 2369:5:    content: "— "; }
-2377:3:  display: inline;
-2388:3:  display: block;
 2390:3:  white-space: pre;
-2427:3:  display: none !important; }
 2431:5:    background: transparent !important;
 2434:5:    -webkit-box-shadow: none !important;
 2435:13:            box-shadow: none !important;
-2438:5:    display: block !important; }
-2440:5:    display: none !important; }
-2442:5:    display: table !important; }
-2444:5:    display: table-header-group !important; }
-2446:5:    display: table-row-group !important; }
-2448:5:    display: table-row !important; }
-2450:5:    display: table-cell !important; }
-2452:5:    display: table-cell !important; }
 2455:5:    text-decoration: underline; }
 2457:5:    content: " (" attr(href) ")"; }
 2461:5:    content: ''; }
 2463:5:    content: " (" attr(title) ")"; }
 2467:5:    page-break-inside: avoid; }
-2469:5:    display: table-header-group; }
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
-2489:3:  display: inline-block;
 2490:3:  vertical-align: middle;
 2494:3:  border-radius: 0;
 2495:3:  -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
 2499:3:  -webkit-appearance: none;
-2512:5:    display: block;
 2558:5:    border-color: #0c3d5d;
 2564:5:    border-color: #0c3d5d;
 2570:5:    border-color: #3b3b3b;
@@ -457,12 +426,9 @@ coverage/popular/foundation.6.7.5.css
 2582:5:    border-color: #805700;
 2588:5:    border-color: #67251a;
 2591:5:    border-color: transparent;
-2621:5:    display: block;
 2626:5:    content: '';
 2628:5:    border-color: #fefefe transparent transparent;
-2631:5:    display: inline-block;
 2652:3:  text-decoration: none; }
-2656:3:  display: block;
 2657:3:  -webkit-box-sizing: border-box;
 2664:3:  border-radius: 0;
 2666:3:  -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -477,13 +443,10 @@ coverage/popular/foundation.6.7.5.css
 2706:6:     -moz-appearance: none;
 2708:3:  border-radius: 0; }
 2711:3:  -webkit-box-sizing: border-box;
-2736:3:  display: inline-block;
 2737:3:  vertical-align: baseline;
-2753:3:  display: block;
 2771:3:  display: -webkit-box;
 2772:3:  display: -webkit-flex;
 2773:3:  display: -ms-flexbox;
-2774:3:  display: flex;
 2777:3:  -webkit-box-align: stretch;
 2778:3:  -webkit-align-items: stretch;
 2779:7:      -ms-flex-align: stretch;
@@ -496,7 +459,6 @@ coverage/popular/foundation.6.7.5.css
 2800:3:  display: -webkit-box;
 2801:3:  display: -webkit-flex;
 2802:3:  display: -ms-flexbox;
-2803:3:  display: flex;
 2804:3:  -webkit-box-flex: 0;
 2805:3:  -webkit-flex: 0 0 auto;
 2806:7:      -ms-flex: 0 0 auto;
@@ -513,7 +475,6 @@ coverage/popular/foundation.6.7.5.css
 2829:3:  display: -webkit-box;
 2830:3:  display: -webkit-flex;
 2831:3:  display: -ms-flexbox;
-2832:3:  display: flex;
 2833:3:  -webkit-box-flex: 0;
 2834:3:  -webkit-flex: 0 0 auto;
 2835:7:      -ms-flex: 0 0 auto;
@@ -528,19 +489,13 @@ coverage/popular/foundation.6.7.5.css
 2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2900:13:            box-shadow: 0 0 5px #cacaca;
 2901:5:    -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
-2909:5:    display: none; }
 2918:3:  border-color: #cc4b37;
-2935:3:  display: none;
-2942:5:    display: block; }
 2946:3:  background: #fefefe;
 2952:3:  border-radius: 0 0 0 0; }
 2955:3:  border-radius: 0 0 0 0; }
-2959:3:  display: block;
 2968:5:    border-radius: 0 0 0 0; }
 2976:5:    content: "+"; }
 2978:5:    content: "–"; }
-2981:3:  display: none;
-3010:5:    display: block;
 3015:5:    content: '';
 3017:5:    border-color: #1779ba transparent transparent;
 3032:3:  -webkit-transform: rotate(180deg);
@@ -548,7 +503,6 @@ coverage/popular/foundation.6.7.5.css
 3035:3:  -webkit-transform-origin: 50% 50%;
 3036:7:      -ms-transform-origin: 50% 50%;
 3037:11:          transform-origin: 50% 50%; }
-3053:5:    display: block;
 3058:5:    content: '';
 3060:5:    border-color: #1779ba transparent transparent;
 3066:3:  -webkit-transform: scaleY(-1);
@@ -558,7 +512,6 @@ coverage/popular/foundation.6.7.5.css
 3071:11:          transform-origin: 50% 50%; }
 3079:3:  clip: rect(0, 0, 0, 0) !important;
 3080:3:  white-space: nowrap !important;
-3084:3:  display: inline-block;
 3087:3:  border-radius: 50%;
 3090:3:  background: #1779ba;
 3093:5:    background: #1779ba;
@@ -567,7 +520,6 @@ coverage/popular/foundation.6.7.5.css
 3102:5:    background: #ffae00;
 3105:5:    background: #cc4b37;
 3110:3:  list-style: none; }
-3112:5:    display: table;
 3113:5:    content: ' ';
 3114:5:    -webkit-flex-basis: 0;
 3115:9:        -ms-flex-preferred-size: 0;
@@ -580,7 +532,6 @@ coverage/popular/foundation.6.7.5.css
 3145:3:  display: -webkit-box;
 3146:3:  display: -webkit-flex;
 3147:3:  display: -ms-flexbox;
-3148:3:  display: flex;
 3149:3:  -webkit-flex-wrap: wrap;
 3150:7:      -ms-flex-wrap: wrap;
 3152:3:  -webkit-box-align: stretch;
@@ -590,14 +541,12 @@ coverage/popular/foundation.6.7.5.css
 3156:3:  -webkit-box-flex: 1;
 3157:3:  -webkit-flex-grow: 1;
 3158:7:      -ms-flex-positive: 1;
-3161:5:    display: table;
 3162:5:    content: ' ';
 3163:5:    -webkit-flex-basis: 0;
 3164:9:        -ms-flex-preferred-size: 0;
 3166:5:    -webkit-box-ordinal-group: 2;
 3167:5:    -webkit-order: 1;
 3168:9:        -ms-flex-order: 1;
-3173:5:    display: none; }
 3179:5:    -webkit-box-flex: 0;
 3180:5:    -webkit-flex: 0 0 auto;
 3181:9:        -ms-flex: 0 0 auto;
@@ -631,14 +580,9 @@ coverage/popular/foundation.6.7.5.css
 3321:7:      -webkit-flex: 0 0 auto;
 3322:11:          -ms-flex: 0 0 auto;
 3323:15:              flex: 0 0 auto;
-3327:7:      display: block; }
-3329:9:        display: block;
-3333:7:      display: block; }
-3335:9:        display: block;
 3339:3:  display: -webkit-box;
 3340:3:  display: -webkit-flex;
 3341:3:  display: -ms-flexbox;
-3342:3:  display: flex;
 3343:3:  -webkit-box-orient: vertical;
 3344:3:  -webkit-box-direction: normal;
 3345:3:  -webkit-flex-direction: column;
@@ -653,7 +597,6 @@ coverage/popular/foundation.6.7.5.css
 3364:3:  display: -webkit-box;
 3365:3:  display: -webkit-flex;
 3366:3:  display: -ms-flexbox;
-3367:3:  display: flex;
 3368:3:  -webkit-box-flex: 0;
 3369:3:  -webkit-flex: 0 1 auto;
 3370:7:      -ms-flex: 0 1 auto;
@@ -669,12 +612,9 @@ coverage/popular/foundation.6.7.5.css
 3452:3:  display: -webkit-box;
 3453:3:  display: -webkit-flex;
 3454:3:  display: -ms-flexbox;
-3455:3:  display: flex;
 3456:3:  -webkit-flex-wrap: wrap;
 3457:7:      -ms-flex-wrap: wrap;
 3464:5:    text-decoration: none;
-3465:5:    display: block;
-3473:5:    display: inline-block; }
 3475:5:    -webkit-flex-wrap: wrap;
 3476:9:        -ms-flex-wrap: wrap;
 3478:5:    -webkit-box-orient: horizontal;
@@ -738,11 +678,9 @@ coverage/popular/foundation.6.7.5.css
 3580:5:    display: -webkit-box;
 3581:5:    display: -webkit-flex;
 3582:5:    display: -ms-flexbox;
-3583:5:    display: flex; }
 3585:5:    display: -webkit-box;
 3586:5:    display: -webkit-flex;
 3587:5:    display: -ms-flexbox;
-3588:5:    display: flex; }
 3590:5:    -webkit-box-orient: horizontal;
 3591:5:    -webkit-box-direction: normal;
 3592:5:    -webkit-flex-flow: row nowrap;
@@ -772,7 +710,6 @@ coverage/popular/foundation.6.7.5.css
 3657:5:    display: -webkit-box;
 3658:5:    display: -webkit-flex;
 3659:5:    display: -ms-flexbox;
-3660:5:    display: flex;
 3661:5:    -webkit-box-pack: end;
 3662:5:    -webkit-justify-content: flex-end;
 3663:9:        -ms-flex-pack: end;
@@ -781,11 +718,9 @@ coverage/popular/foundation.6.7.5.css
 3667:7:      -webkit-justify-content: flex-start;
 3668:11:          -ms-flex-pack: start;
 3669:15:              justify-content: flex-start; }
-3671:5:    display: block;
 3685:5:    display: -webkit-box;
 3686:5:    display: -webkit-flex;
 3687:5:    display: -ms-flexbox;
-3688:5:    display: flex;
 3689:5:    -webkit-box-pack: center;
 3690:5:    -webkit-justify-content: center;
 3691:9:        -ms-flex-pack: center;
@@ -801,7 +736,6 @@ coverage/popular/foundation.6.7.5.css
 3710:5:    display: -webkit-box;
 3711:5:    display: -webkit-flex;
 3712:5:    display: -ms-flexbox;
-3713:5:    display: flex;
 3714:5:    -webkit-box-pack: center;
 3715:5:    -webkit-justify-content: center;
 3716:9:        -ms-flex-pack: center;
@@ -810,10 +744,7 @@ coverage/popular/foundation.6.7.5.css
 3720:7:      -webkit-justify-content: flex-start;
 3721:11:          -ms-flex-pack: start;
 3722:15:              justify-content: flex-start; }
-3725:3:  display: none; }
-3729:3:  display: inline-block;
 3730:3:  vertical-align: middle;
-3738:5:    display: block;
 3741:5:    background: #fefefe;
 3742:5:    -webkit-box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
 3743:13:            box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
@@ -821,9 +752,7 @@ coverage/popular/foundation.6.7.5.css
 3746:5:    background: #cacaca;
 3747:5:    -webkit-box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
 3748:13:            box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca; }
-3752:3:  display: inline-block;
 3753:3:  vertical-align: middle;
-3761:5:    display: block;
 3764:5:    background: #0a0a0a;
 3765:5:    -webkit-box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
 3766:13:            box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
@@ -831,77 +760,52 @@ coverage/popular/foundation.6.7.5.css
 3769:5:    background: #8a8a8a;
 3770:5:    -webkit-box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a;
 3771:13:            box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a; }
-3777:5:    display: block; }
 3779:5:    -webkit-transition: height 0.5s;
 3784:3:  background: #fefefe; }
 3790:3:  z-index: -1;
 3792:3:  background: #fefefe;
 3793:3:  -webkit-transition: -webkit-transform 0.15s linear;
 3798:5:    z-index: 1;
-3799:5:    display: block;
 3800:5:    -webkit-transform: translateX(-100%);
 3801:9:        -ms-transform: translateX(-100%);
 3804:5:    -webkit-transform: translateX(100%);
 3805:9:        -ms-transform: translateX(100%);
-3820:5:    display: block;
 3825:5:    content: '';
 3827:5:    border-color: transparent transparent transparent #1779ba;
-3834:3:  display: block;
 3839:3:  content: '';
 3841:3:  border-color: transparent transparent transparent #1779ba;
-3846:3:  display: block;
 3851:3:  content: '';
 3853:3:  border-color: transparent #1779ba transparent transparent;
-3858:3:  display: block;
 3863:3:  content: '';
 3865:3:  border-color: transparent #1779ba transparent transparent;
-3866:3:  display: inline-block;
 3867:3:  vertical-align: middle;
 3872:3:  z-index: 10;
-3873:3:  display: none;
 3878:3:  border-radius: 0;
-3882:5:    display: block; }
-3884:5:    display: block;
-3911:3:  display: block;
 3916:3:  content: '';
 3918:3:  border-color: #1779ba transparent transparent;
 3930:3:  background: transparent;
-3934:3:  display: none; }
-3956:3:  display: block;
 3961:3:  content: '';
 3963:3:  border-color: transparent #1779ba transparent transparent;
-3968:3:  display: block;
 3973:3:  content: '';
 3975:3:  border-color: transparent transparent transparent #1779ba; }
-3990:5:    display: block;
 3995:5:    content: '';
 3997:5:    border-color: #1779ba transparent transparent;
-4013:5:    display: block;
 4018:5:    content: '';
 4020:5:    border-color: transparent #1779ba transparent transparent;
-4024:5:    display: block;
 4029:5:    content: '';
 4031:5:    border-color: transparent transparent transparent #1779ba; } }
-4046:5:    display: block;
 4051:5:    content: '';
 4053:5:    border-color: #1779ba transparent transparent;
-4069:5:    display: block;
 4074:5:    content: '';
 4076:5:    border-color: transparent #1779ba transparent transparent;
-4080:5:    display: block;
 4085:5:    content: '';
 4087:5:    border-color: transparent transparent transparent #1779ba; } }
 4121:3:  z-index: 1;
-4122:3:  display: none;
 4125:3:  background: #fefefe; }
-4131:5:    display: block;
 4136:5:    content: '';
 4138:5:    border-color: transparent #1779ba transparent transparent;
-4142:5:    display: block;
 4147:5:    content: '';
 4149:5:    border-color: transparent transparent transparent #1779ba; }
-4155:5:    display: block; }
-4182:3:  display: inline-block;
 4184:3:  border-radius: 0;
 4187:3:  white-space: nowrap;
 4189:3:  background: #1779ba;
@@ -913,7 +817,6 @@ coverage/popular/foundation.6.7.5.css
 4208:3:  display: -webkit-box;
 4209:3:  display: -webkit-flex;
 4210:3:  display: -ms-flexbox;
-4211:3:  display: flex;
 4213:3:  -webkit-flex-wrap: nowrap;
 4214:7:      -ms-flex-wrap: nowrap;
 4220:7:      -webkit-flex-wrap: wrap;
@@ -1007,56 +910,48 @@ coverage/popular/foundation.6.7.5.css
 4460:9:        -ms-transform: none;
 4462:5:    z-index: 12;
 4463:5:    -webkit-transition: none;
-4467:7:      display: none; }
 4469:7:      -webkit-transform: none;
 4470:11:          -ms-transform: none;
 4477:5:    -webkit-transform: none;
 4478:9:        -ms-transform: none;
 4480:5:    z-index: 12;
 4481:5:    -webkit-transition: none;
-4485:7:      display: none; }
 4487:7:      -webkit-transform: none;
 4488:11:          -ms-transform: none;
 4495:5:    -webkit-transform: none;
 4496:9:        -ms-transform: none;
 4498:5:    z-index: 12;
 4499:5:    -webkit-transition: none;
-4503:7:      display: none; }
 4505:7:      -webkit-transform: none;
 4506:11:          -ms-transform: none;
 4513:5:    -webkit-transform: none;
 4514:9:        -ms-transform: none;
 4516:5:    z-index: 12;
 4517:5:    -webkit-transition: none;
-4521:7:      display: none; }
 4523:7:      -webkit-transform: none;
 4524:11:          -ms-transform: none;
 4533:5:    -webkit-transform: none;
 4534:9:        -ms-transform: none;
 4536:5:    z-index: 12;
 4537:5:    -webkit-transition: none;
-4541:7:      display: none; }
 4543:7:      -webkit-transform: none;
 4544:11:          -ms-transform: none;
 4551:5:    -webkit-transform: none;
 4552:9:        -ms-transform: none;
 4554:5:    z-index: 12;
 4555:5:    -webkit-transition: none;
-4559:7:      display: none; }
 4561:7:      -webkit-transform: none;
 4562:11:          -ms-transform: none;
 4569:5:    -webkit-transform: none;
 4570:9:        -ms-transform: none;
 4572:5:    z-index: 12;
 4573:5:    -webkit-transition: none;
-4577:7:      display: none; }
 4579:7:      -webkit-transform: none;
 4580:11:          -ms-transform: none;
 4587:5:    -webkit-transform: none;
 4588:9:        -ms-transform: none;
 4590:5:    z-index: 12;
 4591:5:    -webkit-transition: none;
-4595:7:      display: none; }
 4597:7:      -webkit-transform: none;
 4598:11:          -ms-transform: none;
 4610:5:    background: none;
@@ -1065,20 +960,17 @@ coverage/popular/foundation.6.7.5.css
 4617:15:              box-shadow: none;
 4618:7:      -webkit-transform: none;
 4619:11:          -ms-transform: none;
-4622:7:      display: none; } }
 4629:5:    background: none;
 4632:5:    -webkit-transition: none;
 4635:7:      -webkit-box-shadow: none;
 4636:15:              box-shadow: none;
 4637:7:      -webkit-transform: none;
 4638:11:          -ms-transform: none;
-4641:7:      display: none; } }
 4650:3:  list-style: none;
 4680:3:  -webkit-transform: translateY(-50%);
 4681:7:      -ms-transform: translateY(-50%);
 4683:3:  z-index: 10;
 4709:5:    border-radius: 50%;
-4720:5:    display: table;
 4721:5:    content: ' ';
 4722:5:    -webkit-flex-basis: 0;
 4723:9:        -ms-flex-preferred-size: 0;
@@ -1086,31 +978,22 @@ coverage/popular/foundation.6.7.5.css
 4726:5:    -webkit-order: 1;
 4727:9:        -ms-flex-order: 1;
 4733:5:    border-radius: 0;
-4735:5:    display: none; }
-4737:7:      display: inline-block; }
-4740:9:        display: inline-block; } }
-4743:5:    display: block;
 4745:5:    border-radius: 0;
 4749:7:      background: #e6e6e6; }
 4752:5:    background: #1779ba;
 4760:7:      background: transparent; }
 4763:5:    content: '\2026';
-4768:3:  display: inline-block;
 4770:3:  content: "«"; }
-4774:3:  display: inline-block;
 4776:3:  content: "»"; }
 4781:3:  border-radius: 0;
-4796:3:  display: block;
 4805:3:  -webkit-transform: translate(-50%, -50%);
 4806:7:      -ms-transform: translate(-50%, -50%);
 4812:3:  white-space: nowrap; }
 4820:5:    -webkit-overflow-scrolling: touch; }
 4830:3:  z-index: 1005;
-4831:3:  display: none;
 4834:3:  -webkit-overflow-scrolling: touch; }
 4837:3:  z-index: 1006;
 4838:3:  -webkit-backface-visibility: hidden;
-4840:3:  display: none;
 4843:3:  border-radius: 0;
 4850:3:  -webkit-overflow-scrolling: touch; }
 4889:5:    border-radius: 0; }
@@ -1120,21 +1003,18 @@ coverage/popular/foundation.6.7.5.css
 4915:7:      -ms-user-select: none;
 4917:3:  -ms-touch-action: none;
 4918:7:      touch-action: none; }
-4924:3:  display: inline-block;
 4928:3:  -webkit-transition: all 0.2s ease-in-out;
 4931:5:    -webkit-transition: all 0s linear;
 4937:3:  -webkit-transform: translateY(-50%);
 4938:7:      -ms-transform: translateY(-50%);
 4941:3:  z-index: 1;
 4942:3:  cursor: -webkit-grab;
-4944:3:  display: inline-block;
 4947:3:  border-radius: 0;
 4949:3:  -webkit-transition: all 0.2s ease-in-out;
 4951:3:  -ms-touch-action: manipulation;
 4952:7:      touch-action: manipulation; }
 4958:5:    -webkit-transition: all 0s linear;
 4960:5:    cursor: -webkit-grabbing;
-4969:3:  display: inline-block;
 4973:3:  -webkit-transform: scale(1, -1);
 4974:7:      -ms-transform: scale(1, -1);
 4986:5:    -webkit-transform: translateX(-50%);
@@ -1145,11 +1025,9 @@ coverage/popular/foundation.6.7.5.css
 5022:3:  -webkit-user-select: none;
 5023:6:     -moz-user-select: none;
 5024:7:      -ms-user-select: none;
-5035:3:  display: block;
 5038:3:  border-radius: 0;
 5039:3:  background: #cacaca;
 5040:3:  -webkit-transition: all 0.25s ease-out;
-5051:5:    display: block;
 5054:5:    -webkit-transform: translate3d(0, 0, 0);
 5056:5:    border-radius: 0;
 5057:5:    background: #fefefe;
@@ -1158,37 +1036,24 @@ coverage/popular/foundation.6.7.5.css
 5062:5:    background: #1779ba; }
 5074:3:  -webkit-transform: translateY(-50%);
 5075:7:      -ms-transform: translateY(-50%);
-5080:3:  display: none; }
-5082:5:    display: block; }
-5087:5:    display: none; }
 5135:3:  border-radius: 0; }
 5145:5:    background: #f8f8f8;
 5148:5:    background: #f1f1f1;
 5152:5:    background: transparent; }
-5174:5:    display: none; }
-5176:5:    display: none; }
-5180:5:    display: block; }
-5185:3:  display: block;
 5207:3:  background: #fefefe;
-5210:5:    display: table;
 5211:5:    content: ' ';
 5212:5:    -webkit-flex-basis: 0;
 5213:9:        -ms-flex-preferred-size: 0;
 5215:5:    -webkit-box-ordinal-group: 2;
 5216:5:    -webkit-order: 1;
 5217:9:        -ms-flex-order: 1;
-5223:3:  display: block;
 5230:5:    background: transparent; }
 5233:3:  background: #1779ba; }
 5237:7:      background: #1673b1; }
-5242:5:    display: block;
 5250:7:      background: #fefefe;
 5253:7:      background: #e6e6e6;
 5259:3:  background: #fefefe;
 5261:3:  -webkit-transition: all 0.5s ease;
-5269:3:  display: none;
-5272:5:    display: block; }
-5275:3:  display: inline-block;
 5279:3:  border-radius: 0;
 5280:3:  -webkit-box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
 5281:11:          box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
@@ -1201,7 +1066,6 @@ coverage/popular/foundation.6.7.5.css
 5300:3:  display: -webkit-box;
 5301:3:  display: -webkit-flex;
 5302:3:  display: -ms-flexbox;
-5303:3:  display: flex;
 5304:3:  -webkit-box-pack: start;
 5305:3:  -webkit-justify-content: flex-start;
 5306:7:      -ms-flex-pack: start;
@@ -1214,27 +1078,21 @@ coverage/popular/foundation.6.7.5.css
 5319:3:  -webkit-flex: 1 1 0px;
 5320:7:      -ms-flex: 1 1 0px;
 5321:11:          flex: 1 1 0px; }
-5327:3:  display: inline-block;
 5328:3:  vertical-align: middle;
-5333:3:  display: inline-block;
 5341:3:  z-index: 1200;
 5344:3:  border-radius: 0;
-5351:5:    display: block;
 5356:5:    content: '';
 5358:5:    border-color: transparent transparent #0a0a0a;
 5362:5:    -webkit-transform: translateX(-50%);
 5363:9:        -ms-transform: translateX(-50%);
-5366:5:    display: block;
 5371:5:    content: '';
 5373:5:    border-color: #0a0a0a transparent transparent;
 5378:5:    -webkit-transform: translateX(-50%);
 5379:9:        -ms-transform: translateX(-50%);
-5382:5:    display: block;
 5387:5:    content: '';
 5389:5:    border-color: transparent transparent transparent #0a0a0a;
 5394:5:    -webkit-transform: translateY(-50%);
 5395:9:        -ms-transform: translateY(-50%);
-5398:5:    display: block;
 5403:5:    content: '';
 5405:5:    border-color: transparent #0a0a0a transparent transparent;
 5411:5:    -webkit-transform: translateY(-50%);
@@ -1242,7 +1100,6 @@ coverage/popular/foundation.6.7.5.css
 5428:3:  display: -webkit-box;
 5429:3:  display: -webkit-flex;
 5430:3:  display: -ms-flexbox;
-5431:3:  display: flex;
 5432:3:  -webkit-flex-wrap: nowrap;
 5433:7:      -ms-flex-wrap: nowrap;
 5435:3:  -webkit-box-pack: justify;
@@ -1289,39 +1146,10 @@ coverage/popular/foundation.6.7.5.css
 5517:3:  -webkit-flex: 0 0 auto;
 5518:7:      -ms-flex: 0 0 auto;
 5519:11:          flex: 0 0 auto; }
-5522:3:  display: none !important; }
-5532:5:    display: none !important; } }
-5536:5:    display: none !important; } }
-5540:5:    display: none !important; } }
-5544:5:    display: none !important; } }
-5548:5:    display: none !important; } }
-5552:5:    display: none !important; } }
-5556:5:    display: none !important; } }
-5560:5:    display: none !important; } }
-5564:5:    display: none !important; } }
-5568:5:    display: none !important; } }
 5577:3:  clip: rect(0, 0, 0, 0) !important;
 5578:3:  white-space: nowrap !important;
 5586:3:  clip: auto !important;
 5587:3:  white-space: normal !important; }
-5591:3:  display: block !important; }
-5595:7:      display: block !important; } }
-5599:7:      display: none !important; } }
-5603:3:  display: none !important; }
-5607:7:      display: none !important; } }
-5611:7:      display: block !important; } }
-5614:3:  display: none; }
-5617:3:  display: block; }
-5621:5:    display: block !important; }
-5623:5:    display: none !important; } }
-5626:3:  display: none; }
-5630:5:    display: block !important; }
-5632:5:    display: none !important; } }
-5635:3:  display: none; }
-5638:3:  display: block; }
-5641:3:  display: none; }
-5650:3:  display: block;
-5655:3:  display: table;
 5656:3:  content: ' ';
 5657:3:  -webkit-flex-basis: 0;
 5658:7:      -ms-flex-preferred-size: 0;

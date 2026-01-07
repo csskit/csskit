@@ -113,7 +113,7 @@ macro_rules! parse_optionals {
 ///
 /// # Example
 /// ```ignore
-/// // For CSS grammar: [ foo | <number> ]
+/// // For CSS grammar: [ foo || <number> ]
 /// let (foo, num) = p.parse::<Optionals![Ident, Number]>()?;
 /// ```
 #[macro_export]

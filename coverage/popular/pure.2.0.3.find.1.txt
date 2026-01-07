@@ -2,7 +2,6 @@
 ---
 coverage/popular/pure.2.0.3.css
 23:3:  -webkit-text-size-adjust: 100%; /* 2 */
-42:3:  display: block;
 64:3:  -webkit-box-sizing: content-box;
 98:3:  text-decoration: underline; /* 2 */
 99:3:  -webkit-text-decoration: underline dotted;
@@ -11,35 +10,23 @@ coverage/popular/pure.2.0.3.css
 200:3:  text-transform: none;
 211:3:  -webkit-appearance: button;
 253:3:  -webkit-box-sizing: border-box;
-256:3:  display: table; /* 1 */
 259:3:  white-space: normal; /* 1 */
 267:3:  vertical-align: baseline;
 285:3:  -webkit-box-sizing: border-box;
 305:3:  -webkit-appearance: textfield; /* 1 */
 314:3:  -webkit-appearance: none;
 323:3:  -webkit-appearance: button; /* 1 */
-335:3:  display: block;
-343:3:  display: list-item;
-354:3:  display: none;
-362:3:  display: none;
-385:5:    display: none !important;
-395:5:    display: block;
 402:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
 423:5:    display: -webkit-box;
 424:5:    display: -ms-flexbox;
-425:5:    display: flex;
 426:5:    -webkit-box-orient: horizontal;
 427:5:    -webkit-box-direction: normal;
 428:9:        -ms-flex-flow: row wrap;
 432:5:    -ms-flex-line-pack: start;
-439:3:		display: block;
-453:5:    display: inline-block;
 456:5:    vertical-align: top;
 457:5:    text-rendering: auto;
-514:5:    display: inline-block;
 517:5:    vertical-align: top;
 518:5:    text-rendering: auto;
-652:5:    display: inline-block;
 654:5:    white-space: nowrap;
 655:5:    vertical-align: middle;
 658:5:    -webkit-user-drag: none;
@@ -58,65 +45,41 @@ coverage/popular/pure.2.0.3.css
 717:5:    border-color: #000;
 729:5:    -webkit-box-shadow: none;
 730:13:            box-shadow: none;
-735:5:    display: none;
 749:5:    border-radius: 0;
-789:5:    display: inline-block;
 791:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 792:13:            box-shadow: inset 0 1px 3px #ddd;
 793:5:    border-radius: 4px;
 794:5:    vertical-align: middle;
 795:5:    -webkit-box-sizing: border-box;
-805:5:    display: inline-block;
 807:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 808:13:            box-shadow: inset 0 1px 3px #ddd;
 809:5:    border-radius: 4px;
 810:5:    -webkit-box-sizing: border-box;
 839:5:    border-color: #129FEA;
 848:5:    border-color: #129FEA;
-860:5:    display: block;
 898:5:    border-color: #ccc;
 905:5:    border-color: #e9322d;
-930:5:    display: block;
-956:5:    display: block;
-965:5:    display: block;
-972:5:    display: inline-block;
 973:5:    vertical-align: middle;
 976:5:    vertical-align: top;
-985:5:    display: inline-block;
 986:5:    vertical-align: middle;
 997:5:    border-radius: 2em;
-1007:5:    display: block;
 1010:5:    border-radius: 0;
 1016:5:    z-index: 3;
 1021:5:    border-radius: 4px 4px 0 0;
 1027:5:    border-radius: 4px;
 1033:5:    border-radius: 0 0 4px 4px;
-1061:5:    display: inline-block;
 1064:5:    vertical-align: middle;
-1070:5:    display: block;
-1097:9:        display: block;
-1121:9:        display: block;
-1131:9:        display: block;
 1140:5:    -webkit-box-sizing: border-box;
 1148:5:    z-index: 3;
 1157:5:    list-style: none;
-1170:5:    display: block;
 1171:5:    text-decoration: none;
 1172:5:    white-space: nowrap;
 1178:5:    white-space: nowrap;
-1182:5:    display: inline-block;
-1189:5:    display: inline-block;
 1190:5:    vertical-align: middle;
-1195:5:    display: block;
-1199:5:    display: none;
 1205:5:    z-index: 3;
-1216:5:    display: block;
 1223:5:    content: "\25B8";
 1229:5:    content: "\25BE";
-1239:5:    display: block;
-1243:5:    display: inline-block;
 1247:5:    white-space: nowrap;
-1271:5:    display: block;
 1276:5:    text-transform: uppercase;
 1323:5:    font: italic 85%/1 arial, sans-serif;
 1342:5:    vertical-align: bottom;
