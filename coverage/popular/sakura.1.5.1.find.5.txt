@@ -4,13 +4,10 @@ coverage/popular/sakura.1.5.1.css
 40:3:  -ms-word-break: break-all;
 78:3:  border-color: #1d7484;
 82:3:  text-decoration: none;
-129:3:  display: block;
 141:3:  white-space: pre-wrap;
 147:3:  white-space: pre;
-181:3:  display: inline-block;
 184:3:  text-decoration: none;
 185:3:  white-space: nowrap;
 188:3:  border-radius: 1px;
 226:3:  border-radius: 4px;
 227:3:  box-shadow: none;
-240:3:  display: block;

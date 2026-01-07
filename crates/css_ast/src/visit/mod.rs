@@ -9,8 +9,8 @@ pub use apply_visit_methods;
 use bumpalo::collections::Vec;
 use css_parse::{
 	Block, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup, DeclarationList,
-	DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, QualifiedRule, RuleList,
-	syntax::BadDeclaration, token_macros,
+	DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2, Optionals3,
+	Optionals4, Optionals5, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
 };
 
 use crate::*;
@@ -106,6 +106,39 @@ where
 		}
 	}
 }
+
+macro_rules! impl_optionals {
+	($N:ident, $($T:ident),+) => {
+		impl<$($T),*> Visitable for $N<$($T),+>
+		where
+			$($T: Visitable,)+
+		{
+			#[allow(non_snake_case)]
+			#[allow(unused)]
+			fn accept<VI: Visit>(&self, v: &mut VI) {
+				let $N($($T),+) = self;
+				$($T.accept(v);)+;
+			}
+		}
+
+		impl<$($T),*> VisitableMut for $N<$($T),+>
+		where
+			$($T: VisitableMut,)+
+		{
+			#[allow(non_snake_case)]
+			#[allow(unused)]
+			fn accept_mut<VI: VisitMut>(&mut self, v: &mut VI) {
+				let $N($($T),+) = self;
+				$($T.accept_mut(v);)+;
+			}
+		}
+	};
+}
+
+impl_optionals!(Optionals2, T, U);
+impl_optionals!(Optionals3, T, U, V);
+impl_optionals!(Optionals4, T, U, V, W);
+impl_optionals!(Optionals5, T, U, V, W, X);
 
 impl Visitable for token_macros::Ident {
 	fn accept<V: Visit>(&self, _: &mut V) {}

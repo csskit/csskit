@@ -2,7 +2,6 @@
 ---
 coverage/popular/blueprint.1.0.1.css
 27:3:  vertical-align: baseline;
-33:5:    display:block;
 39:3:  background: white;
 54:3:  vertical-align: middle;
 58:58:blockquote:before, blockquote:after, q:before, q:after { content: ''; }
@@ -14,7 +13,6 @@ coverage/popular/blueprint.1.0.1.css
 159:17:thead th      { background: #c3d9ff; }
 167:3:  background: #e5ecf9;
 170:15:caption     { background: #eee; }
-178:14:.hide      { display: none; }
 182:14:.highlight { background:#ff0; }
 183:14:.added     { background:#060; color: #fff; }
 184:14:.removed   { background:#900; color: #fff; }
@@ -32,5 +30,3 @@ coverage/popular/blueprint.1.0.1.css
 519:3:  background: #ddd;
 530:3:  background: #fff;
 541:3:  content: "\0020";
-542:3:  display: block;
-548:24:.clearfix, .container {display: block;}

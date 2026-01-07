@@ -1,7 +1,4 @@
 :unknown
 ---
 coverage/popular/960.css
-49:3:  display: inline;
-613:3:  display: block;
 628:3:  content: '.';
-629:3:  display: block;

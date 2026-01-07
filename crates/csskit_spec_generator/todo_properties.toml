@@ -100,9 +100,6 @@ properties = ["contain"]
 [content]
 properties = ["content", "quotes"]
 
-[display]
-properties = ["display"]
-
 [flexbox]
 properties = ["flex"]
 
