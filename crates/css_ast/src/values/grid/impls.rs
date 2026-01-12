@@ -21,7 +21,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<GridRowStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<GridColumnStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<GridAreaStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<ItemToleranceStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<FlowToleranceStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ItemDirectionStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ItemTrackStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<ItemWrapStyleValue>(), 1);
@@ -35,8 +35,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, GridTemplateAreasStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, GridTemplateAreasStyleValue, r#""foo""bar""#);
 
-		assert_parse!(CssAtomSet::ATOMS, ItemToleranceStyleValue, "infinite");
-		assert_parse!(CssAtomSet::ATOMS, ItemToleranceStyleValue, "30px");
+		assert_parse!(CssAtomSet::ATOMS, FlowToleranceStyleValue, "infinite");
+		assert_parse!(CssAtomSet::ATOMS, FlowToleranceStyleValue, "30px");
 
 		assert_parse!(CssAtomSet::ATOMS, ItemDirectionStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ItemDirectionStyleValue, "row-reverse");
