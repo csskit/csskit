@@ -19,7 +19,7 @@ fancy = ["miette", "miette/fancy-no-syscall"]
 
 [dependencies]
 css_lexer = { workspace = true } # @release
-css_ast = { workspace = true } # @release
+css_ast = { workspace = true, features = ["visitable"] } # @release
 css_parse = { workspace = true } # @release
 
 bumpalo = { workspace = true }
