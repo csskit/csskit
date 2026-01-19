@@ -889,6 +889,7 @@ dependencies = [
  "css_ast",
  "css_lexer",
  "css_parse",
+ "csskit_transform",
  "miette",
  "serde",
  "serde-wasm-bindgen",

@@ -3,7 +3,8 @@ use bumpalo::Bump;
 use core::fmt::Write;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Kind, Lexer};
-use css_parse::{CursorCompactWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors};
+use css_parse::{CursorCompactWriteSink, CursorOverlaySink, Diagnostic, DiagnosticMeta, Parser, ToCursors};
+use csskit_transform::{CssMinifierFeature, Transformer};
 #[cfg(not(feature = "fancy"))]
 use miette::JSONReportHandler;
 #[cfg(feature = "fancy")]
@@ -65,13 +66,23 @@ pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm
 pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> {
 	let allocator = Bump::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
-	let result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
+	let mut result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
 	if !result.errors.is_empty() {
 		return Err(serde_wasm_bindgen::Error::new("Parse error"));
 	}
 	let mut output_string = String::new();
-	let mut stream = CursorCompactWriteSink::new(&source_text, &mut output_string);
-	result.to_cursors(&mut stream);
+	if let Some(ref mut stylesheet) = result.output {
+		let mut transformer =
+			Transformer::new_in(&allocator, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source_text);
+		transformer.transform(stylesheet);
+		let overlays = transformer.overlays();
+		let mut stream = CursorOverlaySink::new(
+			&source_text,
+			&overlays,
+			CursorCompactWriteSink::new(&source_text, &mut output_string),
+		);
+		result.to_cursors(&mut stream);
+	}
 	Ok(output_string)
 }
 
