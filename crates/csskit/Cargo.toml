@@ -16,6 +16,7 @@ css_parse = { workspace = true, features = ["miette"] } # @release
 csskit_ast = { workspace = true, features = ["miette"] } # @release
 csskit_lsp = { workspace = true } # @release
 csskit_highlight = { workspace = true, features = ["miette"] } # @release
+csskit_transform = { workspace = true } # @release
 chromashift = { workspace = true } # @release
 
 itertools = { workspace = true }

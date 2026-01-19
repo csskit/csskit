@@ -1,0 +1,16 @@
+body {
+  margin: 0px;
+  padding: 0rem;
+  border-width: 0em;
+  width: 100%;
+}
+
+.box {
+  font-size: 12pt;
+  line-height: 1.5;
+}
+
+.other {
+  width: 10rem;
+  height: 0;
+}

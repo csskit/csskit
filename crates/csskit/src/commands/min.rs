@@ -3,8 +3,9 @@ use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_lexer::Lexer;
-use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
+use css_parse::{CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
+use csskit_transform::{CssMinifierFeature, Transformer};
 use std::io::Read;
 
 /// Minify CSS files to compress them optimized delivery.
@@ -40,17 +41,27 @@ impl Min {
 			let source_text = source_string.as_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 			let mut parser = Parser::new(&bump, source_text, lexer);
-			let result = parser.parse_entirely::<StyleSheet>();
-			if let Some(ref stylesheet) = result.output {
+			let mut result = parser.parse_entirely::<StyleSheet>();
+			if let Some(ref mut stylesheet) = result.output {
+				let mut transformer =
+					Transformer::new_in(&bump, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
+				transformer.transform(stylesheet);
+				let overlays = transformer.overlays();
+
 				let mut str = String::new();
 				if color {
 					let mut highlighter = TokenHighlighter::new();
 					stylesheet.accept(&mut highlighter);
 					let ansi = AnsiHighlightCursorStream::new(&mut str, &highlighter, DefaultAnsiTheme);
-					let mut stream = CursorCompactWriteSink::new(source_text, ansi);
+					let mut stream =
+						CursorOverlaySink::new(source_text, &overlays, CursorCompactWriteSink::new(source_text, ansi));
 					result.to_cursors(&mut stream);
 				} else {
-					let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
+					let mut stream = CursorOverlaySink::new(
+						source_text,
+						&overlays,
+						CursorCompactWriteSink::new(source_text, &mut str),
+					);
 					result.to_cursors(&mut stream);
 				};
 				if *check {

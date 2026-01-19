@@ -1,32 +1,88 @@
-use crate::{
-	Cursor, CursorSink, CursorToSourceCursorSink, Kind, ParserReturn, SourceCursor, SourceCursorSink, SourceOffset,
-	Span, ToCursors, ToSpan,
-};
+use crate::{Cursor, CursorSink, Kind, SourceCursor, SourceCursorSink, SourceOffset, Span, ToSpan};
 use bumpalo::{Bump, collections::Vec};
 use std::collections::BTreeMap;
 
 #[derive(Debug)]
+pub struct OverlaySegment<'a> {
+	span: Span,
+	cursors: Vec<'a, SourceCursor<'a>>,
+	kind: OverlayKind,
+}
+
+impl<'a> OverlaySegment<'a> {
+	pub fn new(span: Span, cursors: Vec<'a, SourceCursor<'a>>, kind: OverlayKind) -> Self {
+		Self { span, cursors, kind }
+	}
+
+	pub fn start(&self) -> SourceOffset {
+		self.span.start()
+	}
+
+	pub fn end(&self) -> SourceOffset {
+		self.span.end()
+	}
+
+	pub fn cursors(&self) -> &[SourceCursor<'a>] {
+		&self.cursors
+	}
+
+	pub fn is_insertion(&self) -> bool {
+		matches!(self.kind, OverlayKind::InsertBefore | OverlayKind::InsertAfter)
+	}
+
+	pub fn kind(&self) -> OverlayKind {
+		self.kind
+	}
+}
+
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord)]
+pub enum OverlayKind {
+	Replace,
+	InsertBefore,
+	InsertAfter,
+}
+
+#[derive(Debug)]
 pub struct CursorOverlaySet<'a> {
-	bump: &'a Bump,
-	overlays: BTreeMap<SourceOffset, (SourceOffset, Vec<'a, SourceCursor<'a>>)>,
+	segments: Vec<'a, OverlaySegment<'a>>,
 }
 
 impl<'a> CursorOverlaySet<'a> {
 	pub fn new(bump: &'a Bump) -> Self {
-		Self { bump, overlays: BTreeMap::new() }
+		Self { segments: Vec::new_in(bump) }
 	}
 
-	pub fn insert<T: ToCursors>(&mut self, span: Span, parser_return: ParserReturn<'a, T>) {
-		let start = span.start();
-		let end = span.end();
-		let mut cursors = Vec::new_in(self.bump);
-		let mut sink = CursorToSourceCursorSink::new(parser_return.source_text, &mut cursors);
-		parser_return.to_cursors(&mut sink);
-		self.overlays.insert(start, (end, cursors));
+	pub fn insert(&mut self, span: Span, cursors: Vec<'a, SourceCursor<'a>>) {
+		#[cfg(debug_assertions)]
+		{
+			let has_non_eof = cursors.iter().any(|cursor| cursor.token() != Kind::Eof);
+			debug_assert!(has_non_eof || cursors.is_empty(), "Overlay for span {:?} produced no output", span);
+		}
+		self.push_segment(OverlaySegment::new(span, cursors, OverlayKind::Replace));
 	}
 
-	pub(crate) fn find(&self, end: SourceOffset) -> Option<&(SourceOffset, Vec<'a, SourceCursor<'a>>)> {
-		self.overlays.range(..=end).rev().find(|&(_, &(overlay_end, _))| end < overlay_end).map(|(_, ret)| ret)
+	pub fn clear(&mut self) {
+		self.segments.clear();
+	}
+
+	pub fn has_overlay(&self, span: Span) -> bool {
+		let start = &span.start();
+		let end = &span.end();
+		self.segments
+			.iter()
+			.any(|segment| !segment.is_insertion() && segment.start() <= *start && *end <= segment.end())
+	}
+
+	pub fn push_segment(&mut self, segment: OverlaySegment<'a>) {
+		let idx = self.segments.partition_point(|existing| {
+			existing.start() < segment.start()
+				|| (existing.start() == segment.start() && existing.end() <= segment.end())
+		});
+		self.segments.insert(idx, segment);
+	}
+
+	pub fn segments(&self) -> &[OverlaySegment<'a>] {
+		&self.segments
 	}
 }
 
@@ -39,63 +95,77 @@ impl<'a> CursorOverlaySet<'a> {
 /// Other than replaying overlays in place of the underyling cursors, no other modifications are made to the Cursors,
 /// that is up to the base SourceCursorSink, which can apply additional formatting or logic.
 #[derive(Debug)]
-pub struct CursorOverlaySink<'a, T: SourceCursorSink<'a>> {
+pub struct CursorOverlaySink<'a, 'o, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
-	overlays: &'a CursorOverlaySet<'a>,
+	overlays: &'o CursorOverlaySet<'a>,
 	sink: T,
 	processed_overlay_ranges: BTreeMap<SourceOffset, SourceOffset>,
+	next_segment: usize,
 	#[cfg(debug_assertions)]
 	seen_eof: bool,
 }
 
-impl<'a, T: SourceCursorSink<'a>> CursorOverlaySink<'a, T> {
-	pub fn new(source_text: &'a str, overlays: &'a CursorOverlaySet<'a>, sink: T) -> Self {
+impl<'a, 'o, T: SourceCursorSink<'a>> CursorOverlaySink<'a, 'o, T> {
+	pub fn new(source_text: &'a str, overlays: &'o CursorOverlaySet<'a>, sink: T) -> Self {
 		Self {
 			source_text,
 			overlays,
 			sink,
 			processed_overlay_ranges: BTreeMap::new(),
+			next_segment: 0,
 			#[cfg(debug_assertions)]
 			seen_eof: false,
 		}
 	}
+
+	fn flush_segments_up_to(&mut self, limit: SourceOffset, include_after: bool) {
+		let segments = self.overlays.segments();
+		while self.next_segment < segments.len() {
+			let segment = &segments[self.next_segment];
+			if segment.start() > limit {
+				break;
+			}
+			if !include_after && segment.kind() == OverlayKind::InsertAfter && segment.start() == limit {
+				break;
+			}
+			for cursor in segment.cursors() {
+				if cursor.token() != Kind::Eof {
+					self.sink.append(*cursor);
+				}
+			}
+			if !segment.is_insertion() {
+				self.processed_overlay_ranges.insert(segment.start(), segment.end());
+			}
+			self.next_segment += 1;
+		}
+	}
+
+	fn cursor_is_consumed(&self, cursor_start: SourceOffset, cursor_end: SourceOffset) -> bool {
+		self.processed_overlay_ranges
+			.range(..=cursor_start)
+			.next_back()
+			.is_some_and(|(&range_start, &range_end)| cursor_start >= range_start && cursor_end <= range_end)
+	}
 }
 
-impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorOverlaySink<'a, T> {
+impl<'a, 'o, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorOverlaySink<'a, 'o, T> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		let cursor_start = c.to_span().start();
 		let cursor_end = c.to_span().end();
 
-		// Check if this entire cursor falls within an already-processed overlay range
-		// Look for any processed range that starts at or before cursor_start
-		if let Some((&range_start, &range_end)) = self.processed_overlay_ranges.range(..=cursor_start).next_back()
-			&& cursor_start >= range_start
-			&& cursor_end <= range_end
-		{
-			// This cursor is entirely within a processed overlay, skip it
+		self.flush_segments_up_to(cursor_start, false);
+
+		if self.cursor_is_consumed(cursor_start, cursor_end) {
 			return;
 		}
 
-		let mut pos = cursor_start;
-		while pos < cursor_end {
-			// dbg!(pos, self.overlays.find(pos));
-			if let Some((overlay_end, overlay)) = self.overlays.find(pos) {
-				for c in overlay {
-					if *c != Kind::Eof {
-						self.sink.append(*c);
-					}
-				}
-				self.processed_overlay_ranges.insert(pos, *overlay_end);
-				pos = *overlay_end;
-			} else {
-				self.sink.append(c);
-				pos = c.to_span().end();
-			}
-		}
+		self.sink.append(c);
+
+		self.flush_segments_up_to(cursor_end, true);
 	}
 }
 
-impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
+impl<'a, 'o, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, 'o, T> {
 	fn append(&mut self, c: Cursor) {
 		#[cfg(debug_assertions)]
 		{
@@ -113,57 +183,66 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, T> {
 mod test {
 	use super::*;
 	use crate::{
-		ComponentValue, CursorPrettyWriteSink, CursorWriteSink, EmptyAtomSet, Parser, QuoteStyle, T, ToCursors, ToSpan,
+		ComponentValue, ComponentValues, CursorPrettyWriteSink, CursorToSourceCursorSink, CursorWriteSink,
+		EmptyAtomSet, Parser, QuoteStyle, T, ToCursors, ToSpan,
 	};
 	use bumpalo::{Bump, collections::Vec};
 	use css_lexer::Lexer;
 
+	fn snippet_cursors<'a>(bump: &'a Bump, snippet: &'a str) -> Vec<'a, SourceCursor<'a>> {
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, snippet);
+		let mut parser = Parser::new(bump, snippet, lexer);
+		let parsed = parser.parse_entirely::<ComponentValues<'a>>();
+		let mut cursors = Vec::new_in(bump);
+		let mut sink = CursorToSourceCursorSink::new(snippet, &mut cursors);
+		parsed.to_cursors(&mut sink);
+		cursors
+	}
+
 	#[test]
 	fn test_basic() {
-		// Parse the original AST
 		let source_text = "black white";
 		let bump = Bump::default();
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
 		let mut p = Parser::new(&bump, source_text, lexer);
 		let output = p.parse_entirely::<(T![Ident], T![Ident])>().output.unwrap();
 
-		// Build an overlay AST
 		let overlay_text = "green";
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, overlay_text);
 		let mut p = Parser::new(&bump, overlay_text, lexer);
 		let overlay = p.parse_entirely::<T![Ident]>();
+		let mut source_cursors = Vec::new_in(&bump);
+		let mut sink = CursorToSourceCursorSink::new(overlay_text, &mut source_cursors);
+		overlay.to_cursors(&mut sink);
 		let mut overlays = CursorOverlaySet::new(&bump);
-		overlays.insert(output.1.to_span(), overlay);
+		overlays.insert(output.1.to_span(), source_cursors);
 
-		// Smoosh
 		let mut str = String::new();
 		let mut stream = CursorOverlaySink::new(source_text, &overlays, CursorWriteSink::new(source_text, &mut str));
 		output.to_cursors(&mut stream);
 
-		// str should include overlays
 		assert_eq!(str, "black green");
 	}
 
 	#[test]
 	fn test_with_pretty_writer() {
-		// Parse the original AST
 		let source_text = "foo{use:other;}";
 		let bump = Bump::default();
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
 		let mut p = Parser::new(&bump, source_text, lexer);
 		let output = p.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
 		let ComponentValue::SimpleBlock(ref block) = output[1] else { panic!("output[1] was not a block") };
-		dbg!(block.to_span(), block.values.to_span());
 
-		// Build an overlay AST
 		let overlay_text = "inner{foo: bar;}";
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, overlay_text);
 		let mut p = Parser::new(&bump, overlay_text, lexer);
 		let overlay = p.parse_entirely::<Vec<'_, ComponentValue>>();
+		let mut source_cursors = Vec::new_in(&bump);
+		let mut sink = CursorToSourceCursorSink::new(overlay_text, &mut source_cursors);
+		overlay.to_cursors(&mut sink);
 		let mut overlays = CursorOverlaySet::new(&bump);
-		overlays.insert(dbg!(block.values.to_span()), overlay);
+		overlays.insert(block.values.to_span(), source_cursors);
 
-		// Smoosh
 		let mut str = String::new();
 		let mut stream = CursorOverlaySink::new(
 			source_text,
@@ -172,7 +251,6 @@ mod test {
 		);
 		output.to_cursors(&mut stream);
 
-		// str should include overlays
 		assert_eq!(
 			str,
 			r#"
@@ -184,5 +262,67 @@ foo {
 			"#
 			.trim()
 		);
+	}
+
+	#[test]
+	fn test_insert_before_and_after() {
+		let source_text = "ab";
+		let bump = Bump::default();
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
+		let output = parser.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
+
+		let mut overlays = CursorOverlaySet::new(&bump);
+		overlays.push_segment(OverlaySegment::new(
+			Span::new(SourceOffset(0), SourceOffset(0)),
+			snippet_cursors(&bump, "pre"),
+			OverlayKind::InsertBefore,
+		));
+		overlays.push_segment(OverlaySegment::new(
+			Span::new(SourceOffset(2), SourceOffset(2)),
+			snippet_cursors(&bump, "post"),
+			OverlayKind::InsertAfter,
+		));
+
+		let mut str = String::new();
+		let mut stream = CursorOverlaySink::new(source_text, &overlays, CursorWriteSink::new(source_text, &mut str));
+		output.to_cursors(&mut stream);
+		assert_eq!(str, "pre ab post");
+	}
+
+	#[test]
+	fn test_multiple_inserts_preserve_order() {
+		let source_text = "x";
+		let bump = Bump::default();
+		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&bump, source_text, lexer);
+		let output = parser.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
+
+		let mut overlays = CursorOverlaySet::new(&bump);
+		overlays.push_segment(OverlaySegment::new(
+			Span::new(SourceOffset(0), SourceOffset(0)),
+			snippet_cursors(&bump, "A"),
+			OverlayKind::InsertBefore,
+		));
+		overlays.push_segment(OverlaySegment::new(
+			Span::new(SourceOffset(0), SourceOffset(0)),
+			snippet_cursors(&bump, "B"),
+			OverlayKind::InsertBefore,
+		));
+		overlays.push_segment(OverlaySegment::new(
+			Span::new(SourceOffset(1), SourceOffset(1)),
+			snippet_cursors(&bump, "C"),
+			OverlayKind::InsertAfter,
+		));
+		overlays.push_segment(OverlaySegment::new(
+			Span::new(SourceOffset(1), SourceOffset(1)),
+			snippet_cursors(&bump, "D"),
+			OverlayKind::InsertAfter,
+		));
+
+		let mut str = String::new();
+		let mut stream = CursorOverlaySink::new(source_text, &overlays, CursorWriteSink::new(source_text, &mut str));
+		output.to_cursors(&mut stream);
+		assert_eq!(str, "A B x C D");
 	}
 }
