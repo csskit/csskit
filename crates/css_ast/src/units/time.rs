@@ -12,6 +12,16 @@ pub enum Time {
 	S(T![Dimension]),
 }
 
+impl Time {
+	pub fn as_seconds(&self) -> f32 {
+		match self {
+			Self::Zero(_) => 0.0,
+			Self::Ms(f) => Into::<f32>::into(*f) / 1000.0,
+			Self::S(f) => (*f).into(),
+		}
+	}
+}
+
 impl From<Time> for f32 {
 	fn from(val: Time) -> Self {
 		match val {

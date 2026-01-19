@@ -1,4 +1,4 @@
-use crate::{ReduceColors, ReduceLengths, transformer};
+use crate::{ReduceColors, ReduceLengths, ReduceTimeUnits, transformer};
 use bitmask_enum::bitmask;
 use css_ast::{CssMetadata, Visitable};
 
@@ -9,6 +9,8 @@ transformer!(
 		ReduceColors,
 		/// Enables the [ReduceLengths] transformer.
 		ReduceLengths,
+		/// Enables the [ReduceTimeUnits] transformer.
+		ReduceTimeUnits,
 	}
 );
 
