@@ -10,8 +10,8 @@ impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for Re
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
-	fn may_change(features: CssMinifierFeature, node: &N) -> bool {
-		features.contains(CssMinifierFeature::ReduceColors) && node.metadata().has_colors()
+	fn may_change(features: CssMinifierFeature, _node: &N) -> bool {
+		features.contains(CssMinifierFeature::ReduceColors)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {

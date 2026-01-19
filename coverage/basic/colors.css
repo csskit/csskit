@@ -17,3 +17,11 @@ body {
 .alpha {
   color: rgba(0, 0, 0, 0);
 }
+
+.other-props {
+  background-color: black;
+  outline-color: black;
+  caret-color: black;
+  accent-color: black;
+  border-block-start-color: black;
+}

@@ -217,12 +217,6 @@ impl CssMetadata {
 		!self.box_portions.is_none()
 	}
 
-	/// Returns true if this block contains any color-related properties.
-	#[inline]
-	pub fn has_colors(&self) -> bool {
-		self.property_groups.intersects(PropertyGroup::Color | PropertyGroup::ColorHdr | PropertyGroup::ColorAdjust)
-	}
-
 	/// Returns true if metadata contains important declarations.
 	#[inline]
 	pub fn has_important(&self) -> bool {
@@ -419,7 +413,6 @@ mod tests {
 		assert!(metadata.property_groups.contains(PropertyGroup::Color));
 		assert!(metadata.property_groups.contains(PropertyGroup::Sizing));
 		assert!(metadata.modifies_box());
-		assert!(metadata.has_colors());
 		assert!(metadata.has_longhands());
 	}
 
@@ -462,7 +455,6 @@ mod tests {
 
 		assert!(metadata.property_groups.contains(PropertyGroup::Color));
 		assert!(metadata.used_at_rules.contains(AtRuleId::Media));
-		assert!(metadata.has_colors());
 	}
 
 	#[test]
