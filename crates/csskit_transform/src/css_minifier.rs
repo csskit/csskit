@@ -1,10 +1,12 @@
-use crate::{ReduceLengths, transformer};
+use crate::{ReduceColors, ReduceLengths, transformer};
 use bitmask_enum::bitmask;
 use css_ast::{CssMetadata, Visitable};
 
 transformer!(
 	/// Runtime feature flags for the CSS minifier, enabling individual transforms.
 	pub enum CssMinifierFeature[CssMetadata, Visitable] {
+		/// Enables the [ReduceColors] transformer.
+		ReduceColors,
 		/// Enables the [ReduceLengths] transformer.
 		ReduceLengths,
 	}

@@ -13,11 +13,12 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_ast = { workspace = true, features = ["visitable"] }
+css_ast = { workspace = true, features = ["visitable", "chromashift"] }
 css_parse = { workspace = true }
 css_lexer = { workspace = true }
 bumpalo = { workspace = true }
 bitmask-enum = { workspace = true }
+chromashift = { workspace = true }
 
 [dev-dependencies]
 glob = { workspace = true }

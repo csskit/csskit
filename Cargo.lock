@@ -869,6 +869,7 @@ version = "0.0.13"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
+ "chromashift",
  "criterion",
  "css_ast",
  "css_lexer",

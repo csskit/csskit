@@ -1,0 +1,19 @@
+body {
+  color: #ffffff;
+}
+
+.named {
+  color: rgb(210, 180, 140);
+}
+
+.noop {
+  color: red;
+}
+
+.short {
+  color: #000000;
+}
+
+.alpha {
+  color: rgba(0, 0, 0, 0);
+}
