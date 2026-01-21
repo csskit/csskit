@@ -321,12 +321,20 @@ impl Def {
 			Self::StyleValue(ty) => {
 				matches!(
 					ty.ident_str(),
-					"BorderTopClip"
-						| "BorderTopColor" | "ColumnRuleWidth"
+					"BorderTopColor"
+						| "ColumnRuleWidth"
 						| "DynamicRangeLimit"
 						| "EventTriggerName"
 						| "EventTriggerSource"
-						| "OutlineColor"
+						| "OutlineColor" | "PointerTimelineAxis"
+						| "PointerTimelineName"
+						| "AnimationRangeStart"
+						| "AnimationRangeEnd"
+						| "ScrollTimelineAxis"
+						| "ScrollTimelineName"
+						| "ViewTimelineAxis"
+						| "ViewTimelineName"
+						| "BorderTopClip"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) => d.maybe_unsized(),

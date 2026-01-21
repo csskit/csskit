@@ -151,7 +151,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PropertyRule>(), 112);
+		assert_eq!(std::mem::size_of::<PropertyRule>(), 128);
 	}
 
 	#[test]

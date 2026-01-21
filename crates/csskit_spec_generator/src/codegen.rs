@@ -12,6 +12,11 @@ use quote::{format_ident, quote};
 use std::collections::{HashMap, HashSet};
 use syn::{File, parse2};
 
+/// Strips the "css-" prefix from a spec name if present
+fn strip_css_prefix(name: &str) -> &str {
+	name.strip_prefix("css-").unwrap_or(name)
+}
+
 /// Recursively expand longhands to get all transitive longhands
 fn expand_longhands_recursive(
 	property: &str,
@@ -53,7 +58,8 @@ pub fn generate_spec_module(
 	property_descriptions: &HashMap<String, String>,
 	csswg_sha: Option<&str>,
 ) -> String {
-	let url = format!("https://drafts.csswg.org/css-{}-{}/", spec_name, version);
+	let url = format!("https://drafts.csswg.org/{}-{}/", spec_name, version);
+	let lookup_name = strip_css_prefix(spec_name);
 
 	let module_doc =
 		if let Some(title) = spec_title { format!("//! {}\n//! {}\n", title, url) } else { format!("//! {}\n", url) };
@@ -68,20 +74,20 @@ pub fn generate_spec_module(
 	};
 
 	let ignore_properties = get_ignore_properties();
-	let should_ignore: HashSet<String> = ignore_properties.get(spec_name).cloned().unwrap_or_default();
+	let should_ignore: HashSet<String> = ignore_properties.get(lookup_name).cloned().unwrap_or_default();
 
 	let mut filtered_properties: Vec<_> =
 		properties.iter().filter(|prop| !should_ignore.contains(&prop.name)).collect();
 	filtered_properties.sort_by_key(|prop| &prop.name);
 
 	let todo_properties = get_todo_properties();
-	let should_comment_out: HashSet<String> = todo_properties.get(spec_name).cloned().unwrap_or_default();
+	let should_comment_out: HashSet<String> = todo_properties.get(lookup_name).cloned().unwrap_or_default();
 
 	let value_extensions = get_value_extensions();
-	let spec_extensions = value_extensions.get(spec_name);
+	let spec_extensions = value_extensions.get(lookup_name);
 
 	let manual_parse_properties = get_manual_parse_properties();
-	let should_skip_parse: HashSet<String> = manual_parse_properties.get(spec_name).cloned().unwrap_or_default();
+	let should_skip_parse: HashSet<String> = manual_parse_properties.get(lookup_name).cloned().unwrap_or_default();
 
 	let shorthands = get_shorthand_properties();
 	let expanded_longhands_map = compute_all_expanded_longhands(&shorthands);
@@ -125,11 +131,11 @@ fn fix_formatting(code: &str, spec_name: &str, version: usize, properties: &[&Pr
 			fixed_line = fixed_line.replacen("///", "/// ", 1);
 		}
 
-		if fixed_line.contains(&format!("css-{}-{}", spec_name, version)) {
+		if fixed_line.contains(&format!("{}-{}", spec_name, version)) {
 			for prop in properties {
 				let property_id = if prop.name == "--*" { "defining-variables" } else { &prop.name };
-				let wrong_url = format!("css-{}-{}#{}", spec_name, version, property_id);
-				let correct_url = format!("css-{}-{}/#{}", spec_name, version, property_id);
+				let wrong_url = format!("{}-{}#{}", spec_name, version, property_id);
+				let correct_url = format!("{}-{}/#{}", spec_name, version, property_id);
 				fixed_line = fixed_line.replace(&wrong_url, &correct_url);
 			}
 		}
@@ -375,10 +381,10 @@ fn convert_computed_value(computed_value: &str) -> Option<TokenStream> {
 	Some(result)
 }
 
-/// Convert a spec name (e.g., "align", "anchor-position") to a PropertyGroup variant (e.g., "Align", "AnchorPosition")
+/// Convert a spec name (e.g., "css-align", "filter-effects") to a PropertyGroup variant (e.g., "Align", "FilterEffects")
 fn spec_name_to_property_group(spec_name: &str) -> syn::Ident {
-	// Convert kebab-case to PascalCase
-	let pascal = spec_name
+	let stripped = strip_css_prefix(spec_name);
+	let pascal = stripped
 		.split('-')
 		.map(|part| {
 			let mut chars = part.chars();
@@ -651,16 +657,16 @@ fn generate_property_type(
 		}
 	};
 
-	let doc_link_url = format!("https://drafts.csswg.org/css-{}-{}/#{}", spec_name, version, property_id);
+	let doc_link_url = format!("https://drafts.csswg.org/{}-{}/#{}", spec_name, version, property_id);
 	let doc_intro = format!(
-		" Represents the style value for `{}` as defined in [css-{}-{}]({}).",
+		" Represents the style value for `{}` as defined in [{}-{}]({}).",
 		prop.name, spec_name, version, doc_link_url
 	);
 
 	let doc_grammar_header = " The grammar is defined as:";
 	let grammar = &extended_value;
 
-	let doc_link = format!("https://drafts.csswg.org/css-{}-{}/#{}", spec_name, version, property_id);
+	let doc_link = format!("https://drafts.csswg.org/{}-{}/#{}", spec_name, version, property_id);
 
 	let syntax_value = format!(" {} ", extended_value.replace('\n', " "));
 

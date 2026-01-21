@@ -3,7 +3,7 @@ use bitmask_enum::bitmask;
 use crate::{CssAtomSet, UnitlessZeroResolves};
 
 /// The CSS specification/module that a property belongs to.
-#[bitmask(u64)]
+#[bitmask(u128)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum PropertyGroup {
@@ -18,12 +18,15 @@ pub enum PropertyGroup {
 	Color,
 	ColorAdjust,
 	ColorHdr,
+	Compositing,
 	Conditional,
 	Contain,
 	Content,
 	CounterStyle,
 	Display,
 	Exclusions,
+	FillStroke,
+	FilterEffects,
 	Flexbox,
 	Fonts,
 	Forms,
@@ -37,18 +40,21 @@ pub enum PropertyGroup {
 	Lists,
 	Logical,
 	Masking,
+	Motion,
 	Multicol,
 	Nav,
 	Overflow,
 	Overscroll,
 	Page,
 	PageFloats,
+	PointerAnimations,
 	Position,
 	Regions,
 	Rhythm,
 	RoundDisplay,
 	Ruby,
 	ScrollAnchoring,
+	ScrollAnimations,
 	ScrollSnap,
 	Scrollbars,
 	Shaders,

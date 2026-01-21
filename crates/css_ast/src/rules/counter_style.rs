@@ -236,9 +236,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CounterStyleRule>(), 112);
+		assert_eq!(std::mem::size_of::<CounterStyleRule>(), 128);
 		assert_eq!(std::mem::size_of::<CounterStyleName>(), 12);
-		assert_eq!(std::mem::size_of::<CounterStyleRuleBlock>(), 88);
+		assert_eq!(std::mem::size_of::<CounterStyleRuleBlock>(), 96);
 		assert_eq!(std::mem::size_of::<CounterStyleRuleStyleValue>(), 416);
 		assert_eq!(std::mem::size_of::<AdditiveSymbolsStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<FallbackStyleValue>(), 12);

@@ -631,7 +631,6 @@ coverage/popular/bootstrap.4.6.2.css
 4266:3:  -ms-flex-wrap: wrap;
 4270:3:  list-style: none;
 4279:3:  text-decoration: none;
-4301:3:  isolation: isolate;
 4302:3:  border-color: #e9ecef #e9ecef #dee2e6;
 4308:3:  border-color: transparent;
 4315:3:  border-color: #dee2e6 #dee2e6 #fff;

@@ -211,8 +211,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StyleSheet>(), 56);
-		assert_eq!(std::mem::size_of::<Rule>(), 744);
+		assert_eq!(std::mem::size_of::<StyleSheet>(), 64);
+		assert_eq!(std::mem::size_of::<Rule>(), 752);
 	}
 
 	#[test]

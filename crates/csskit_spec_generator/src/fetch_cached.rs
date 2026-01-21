@@ -26,8 +26,6 @@ const GITHUB_CSSWG_TREE_URL: &str = "https://api.github.com/repos/w3c/csswg-draf
 const WEB_FEATURES_DATA_URL: &str =
 	"https://github.com/web-platform-dx/web-features/releases/latest/download/data.extended.json";
 
-const CSS_SPEC_PREFIX: &str = "css-";
-
 const CSSWG_DRAFTS_BASE_URL: &str = "https://drafts.csswg.org";
 
 /// Creates an HTTP client configured with appropriate headers and compression
@@ -138,28 +136,25 @@ fn extract_tree_directories(tree_value: &Value) -> Result<Vec<String>> {
 		.filter_map(|item| {
 			if item["type"] == "tree" { serde_json::from_value::<String>(item["path"].clone()).ok() } else { None }
 		})
-		.filter(|s| s.starts_with(CSS_SPEC_PREFIX))
 		.collect())
 }
 
-/// Parses a spec path in the format "css-{name}-{version}" into (name, version)
+/// Parses a spec path in the format "{name}-{version}" into (name, version)
 ///
 /// Returns None if the path doesn't match the expected format
 fn parse_spec_path(path: &str) -> Option<(String, usize)> {
-	let parts: Vec<&str> = path.split('-').collect();
-	if parts.len() >= 3
-		&& parts[0] == "css"
-		&& let Ok(version) = parts[parts.len() - 1].parse::<usize>()
-	{
-		let name = parts[1..parts.len() - 1].join("-");
-		return Some((name, version));
+	let (name, version_str) = path.rsplit_once('-')?;
+	let version = version_str.parse::<usize>().ok()?;
+	// Skip yearly snapshots (e.g., "css-2026")
+	if name == "css" {
+		return None;
 	}
-	None
+	Some((name.to_string(), version))
 }
 
 /// Fetches the HTML content for a specific CSS spec version
 pub async fn get_spec(client: &Client, name: &str, ver: usize) -> Result<String> {
-	let url = format!("{}/css-{}-{}/", CSSWG_DRAFTS_BASE_URL, name, ver);
+	let url = format!("{}/{}-{}/", CSSWG_DRAFTS_BASE_URL, name, ver);
 	let cache_name = format!("{}-{}.txt", name, ver);
 	fetch_cached(client, &url, &cache_name).await
 }

@@ -284,7 +284,6 @@ coverage/popular/bootstrap.5.3.0.css
 3828:3:  text-decoration: none;
 3829:3:  background: none;
 3843:3:  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
-3868:3:  isolation: isolate;
 3874:3:  border-color: transparent;
 3899:3:  border-color: transparent;
 3930:3:  flex: 1 1 auto;
@@ -351,8 +350,6 @@ coverage/popular/bootstrap.5.3.0.css
 5381:3:  text-decoration: none;
 5391:3:  -webkit-user-select: none;
 5392:3:  -moz-user-select: none;
-5398:3:  filter: var(--bs-btn-close-white-filter);
-5402:3:  filter: var(--bs-btn-close-white-filter);
 5442:3:  z-index: var(--bs-toast-zindex);
 5443:3:  width: -webkit-max-content;
 5444:3:  width: -moz-max-content;

@@ -227,7 +227,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 136);
+		assert_eq!(std::mem::size_of::<ContainerRule>(), 144);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
 		assert_eq!(std::mem::size_of::<ContainerCondition>(), 536);
 		assert_eq!(std::mem::size_of::<ContainerQuery>(), 520);

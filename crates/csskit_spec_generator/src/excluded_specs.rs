@@ -4,7 +4,8 @@
 /// - Are not real specs (e.g., easter eggs like css-egg)
 /// - Have been superseded by other specs
 pub fn is_excluded_spec(spec_name: &str) -> bool {
-	EXCLUDED_SPECS.contains(&spec_name)
+	let name = spec_name.strip_prefix("css-").unwrap_or(spec_name);
+	EXCLUDED_SPECS.contains(&name)
 }
 
 /// List of specs to exclude from automatic generation.

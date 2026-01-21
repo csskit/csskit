@@ -211,9 +211,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 640);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 656);
 		assert_eq!(std::mem::size_of::<SupportsCondition>(), 536);
-		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 88);
+		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 96);
 	}
 
 	#[test]

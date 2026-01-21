@@ -26,6 +26,10 @@ use crate::spec_parser::{PropertyDefinition, parse_spec_properties};
 /// Preview line count when verbose mode is enabled
 const PREVIEW_LINE_COUNT: usize = 30;
 
+fn strip_css_prefix(name: &str) -> &str {
+	name.strip_prefix("css-").unwrap_or(name)
+}
+
 /// Type alias for property descriptions map
 type PropertyDescriptions = HashMap<String, String>;
 
@@ -103,7 +107,7 @@ async fn collect_properties_from_versions(
 	let mut latest_version = 0;
 
 	for &version in versions {
-		println!("    Processing css-{}-{}...", name, version);
+		println!("    Processing {}-{}/...", name, version);
 		latest_version = version;
 
 		match process_single_version(client, name, version, &mut all_properties).await {
@@ -163,7 +167,7 @@ fn show_verbose_output(properties: &[PropertyDefinition], code: &str, line_count
 /// Writes the generated spec module to the appropriate file
 fn write_spec_module(name: &str, code: &str) -> Result<()> {
 	let workspace_root = find_workspace_root()?;
-	let spec_snake = name.to_snake_case();
+	let spec_snake = strip_css_prefix(name).to_snake_case();
 	let output_dir = workspace_root.join("crates").join("css_ast").join("src").join("values").join(&spec_snake);
 
 	create_dir_all(&output_dir)?;

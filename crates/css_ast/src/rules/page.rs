@@ -206,13 +206,13 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageRule>(), 168);
+		assert_eq!(std::mem::size_of::<PageRule>(), 176);
 		assert_eq!(std::mem::size_of::<PageSelectorList>(), 32);
 		assert_eq!(std::mem::size_of::<PageSelector>(), 48);
 		assert_eq!(std::mem::size_of::<PagePseudoClass>(), 28);
-		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 120);
-		assert_eq!(std::mem::size_of::<MarginRule>(), 104);
-		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 88);
+		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 128);
+		assert_eq!(std::mem::size_of::<MarginRule>(), 112);
+		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 96);
 	}
 
 	#[test]

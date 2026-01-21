@@ -51,7 +51,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<WebkitKeyframesRule>(), 120);
+		assert_eq!(std::mem::size_of::<WebkitKeyframesRule>(), 128);
 	}
 
 	#[test]

@@ -61,9 +61,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<DocumentRule>(), 136);
+		assert_eq!(std::mem::size_of::<DocumentRule>(), 144);
 		assert_eq!(std::mem::size_of::<DocumentMatcher>(), 40);
-		assert_eq!(std::mem::size_of::<DocumentRuleBlock>(), 88);
+		assert_eq!(std::mem::size_of::<DocumentRuleBlock>(), 96);
 	}
 
 	#[test]
