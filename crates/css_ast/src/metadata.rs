@@ -8,6 +8,29 @@ use bitmask_enum::bitmask;
 use css_lexer::{Span, ToSpan};
 use css_parse::{NodeMetadata, SemanticEq, ToCursors};
 
+/// How unitless zero (0 without a unit) resolves in a given context.
+///
+/// For most Style Values, a `0` can be a drop-in replacement for `0px`, but
+/// certain style values will provide discrete syntax for `0px` and `0`, meaning
+/// they resolve to different things. For properties that accept both `<number>`
+/// and `<length>`, unitless zero may resolve to a _different value_. Using a
+/// piece of metadata to describe this can be helpful for linting/minifying -
+/// avoiding a reduction in semantic meaning.
+///
+/// Examples:
+/// - `width: 0px` == `width: 0` (unitless zero resolves to length)
+/// - `line-height: 0px` != `line-height: 0` (unitless zero resolves to number = 0x multiplier)
+/// - `tab-size: 0px` != `tab-size: 0` (unitless zero resolves to number = 0 tab characters)
+#[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum UnitlessZeroResolves {
+	/// Unitless zero resolves to a length (0 = 0px).
+	#[default]
+	Length,
+	/// Unitless zero resolves to a number or percentage. NOT safe to reduce.
+	Number,
+}
+
 #[bitmask(u32)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
@@ -174,6 +197,8 @@ pub struct CssMetadata {
 	pub node_kinds: NodeKinds,
 	/// Bitwise OR of queryable properties present
 	pub property_kinds: PropertyKind,
+	/// How unitless zero resolves in this context (Length or Number)
+	pub unitless_zero_resolves: UnitlessZeroResolves,
 	/// Size of vector-based nodes (e.g., number of declarations, selector list length)
 	pub size: u16,
 }
@@ -190,6 +215,7 @@ impl Default for CssMetadata {
 			vendor_prefixes: VendorPrefixes::none(),
 			node_kinds: NodeKinds::none(),
 			property_kinds: PropertyKind::none(),
+			unitless_zero_resolves: UnitlessZeroResolves::default(),
 			size: 0,
 		}
 	}
@@ -208,6 +234,7 @@ impl CssMetadata {
 			&& self.vendor_prefixes == VendorPrefixes::none()
 			&& self.node_kinds == NodeKinds::none()
 			&& self.property_kinds == PropertyKind::none()
+			&& self.unitless_zero_resolves == UnitlessZeroResolves::Length
 			&& self.size == 0
 	}
 
@@ -348,6 +375,10 @@ impl NodeMetadata for CssMetadata {
 		self.vendor_prefixes |= other.vendor_prefixes;
 		self.node_kinds |= other.node_kinds;
 		self.property_kinds |= other.property_kinds;
+		// For unitless_zero_resolves, we keep Number if either side has it (conservative)
+		if other.unitless_zero_resolves == UnitlessZeroResolves::Number {
+			self.unitless_zero_resolves = UnitlessZeroResolves::Number;
+		}
 		self.size = self.size.max(other.size);
 		self
 	}

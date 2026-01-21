@@ -20,6 +20,7 @@ struct MetadataArg {
 	pub logical_property_group: Option<Ident>,
 	pub box_side: Vec<Ident>,
 	pub box_portion: Vec<Ident>,
+	pub unitless_zero_resolves: Option<Ident>,
 }
 
 impl Parse for MetadataArg {
@@ -141,6 +142,13 @@ impl Parse for MetadataArg {
 						}
 					}
 				}
+				i if i == "unitless_zero_resolves" => {
+					if args.unitless_zero_resolves.is_some() {
+						Err(Error::new(i.span(), "redefinition of 'unitless_zero_resolves'".to_string()))?;
+					}
+					input.parse::<Token![=]>()?;
+					args.unitless_zero_resolves = Some(input.parse::<Ident>()?);
+				}
 				ident => Err(Error::new(ident.span(), format!("Unrecognized Value arg {ident:?}")))?,
 			}
 
@@ -246,6 +254,11 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			fn is_shorthand() -> bool { true }
 		}
 	};
+	let unitless_zero_resolves = attrs.unitless_zero_resolves.map(|unitless_zero_resolves| {
+		quote! {
+			fn unitless_zero_resolves() -> crate::UnitlessZeroResolves { crate::UnitlessZeroResolves::#unitless_zero_resolves }
+		}
+	});
 	quote! {
 	  #[automatically_derived]
 	  impl #impl_generics crate::DeclarationMetadata for #ident #type_generics #where_clause {
@@ -262,6 +275,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			#logical_property_group
 			#box_side
 			#box_portion
+			#unitless_zero_resolves
 	  }
 	}
 }

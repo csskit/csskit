@@ -143,6 +143,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 							box_sides: values::$ty::box_side(),
 							box_portions: values::$ty::box_portion(),
 							declaration_kinds,
+							unitless_zero_resolves: values::$ty::unitless_zero_resolves(),
 							..Default::default()
 						}
 					}

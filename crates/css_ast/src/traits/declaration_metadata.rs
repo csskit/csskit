@@ -1,6 +1,6 @@
 use bitmask_enum::bitmask;
 
-use crate::CssAtomSet;
+use crate::{CssAtomSet, UnitlessZeroResolves};
 
 /// The CSS specification/module that a property belongs to.
 #[bitmask(u64)]
@@ -336,6 +336,21 @@ pub trait DeclarationMetadata: Sized {
 	/// Returns BoxPortion::none() if the property doesn't affect the box model.
 	fn box_portion() -> BoxPortion {
 		BoxPortion::none()
+	}
+
+	/// Returns how unitless zero resolves for this property.
+	///
+	/// For properties that accept both `<number>` and `<length>`, unitless zero
+	/// may resolve to a number rather than a length. This affects whether the
+	/// minifier can safely reduce `0px` to `0`.
+	///
+	/// Examples where unitless zero resolves to Number (NOT safe to reduce):
+	/// - `line-height: 0` means 0x font-size multiplier
+	/// - `tab-size: 0` means 0 tab characters
+	/// - `border-image-outset: 0` means 0x border-width
+	fn unitless_zero_resolves() -> UnitlessZeroResolves {
+		// Default: most properties accept unitless zero as length
+		UnitlessZeroResolves::Length
 	}
 }
 

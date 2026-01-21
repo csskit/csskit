@@ -14,3 +14,16 @@ body {
   width: 10rem;
   height: 0;
 }
+
+.unitless-zero {
+	width: 0px;
+	height: 0px;
+	max-width: 0px;
+	max-height: 0px;
+
+	/* None of these should convert `0px` to `0` */
+	line-height: 0px;
+	tab-size: 0px;
+	width: calc(100px - 0px);
+	--unknown: 0px;
+}

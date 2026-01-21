@@ -5,7 +5,7 @@ use crate::spec_parser::PropertyDefinition;
 use crate::todo_properties::get_todo_properties;
 use crate::value_extensions::get_value_extensions;
 use crate::web_features_data::{BaselineStatus, FeatureData, StringOrArray, WebFeaturesData};
-use css_value_definition_parser::Def;
+use css_value_definition_parser::{Def, DefCombinatorStyle};
 use heck::ToPascalCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -502,6 +502,70 @@ fn find_root_shorthand(property_name: &str, shorthands: &HashMap<String, HashSet
 	shorthands.into_iter().min_by_key(|s| (s.len(), s.clone()))
 }
 
+/// Detect whether unitless zero resolves to a number for this property.
+///
+/// This returns `Some(quote! { unitless_zero_resolves = Number })` when `<number>` appears before `<length>`. In CSS
+/// grammar, the parser tries alternatives in order, so if `<number>` comes first, `0` will parse as a number.
+///
+/// This signifies that numbers have a semantic distinction compared to lengths, and therefore a unitless zero is not
+/// equivalent to `0px`.
+///
+/// Examples where unitless zero resolves to number (NOT safe to reduce):
+/// - `line-height: <number> | <length>`: `0` is a number (0x multiplier)
+/// - `tab-size: <number> | <length>`: `0` is a number (0 tab characters)
+fn detect_unitless_zero_resolves(def: Option<&Def>) -> Option<TokenStream> {
+	let def = def?;
+	if number_precedes_length(def) { Some(quote! { unitless_zero_resolves = Number }) } else { None }
+}
+
+/// Recursively check if `<number>` precedes `<length>` in any defs.
+fn number_precedes_length(def: &Def) -> bool {
+	match def {
+		Def::Combinator(children, DefCombinatorStyle::Alternatives) => {
+			let mut number_pos = None;
+			let mut length_pos = None;
+
+			for (i, child) in children.iter().enumerate() {
+				match child {
+					Def::Type(def_type) => {
+						let ident = def_type.ident_str();
+						if (ident == "Number" || ident == "Integer") && number_pos.is_none() {
+							number_pos = Some(i);
+						} else if (ident == "Length" || ident == "LengthPercentage" || ident == "LengthPercentageAuto")
+							&& length_pos.is_none()
+						{
+							length_pos = Some(i);
+						}
+					}
+					// Recursively check nested definitions
+					_ => {
+						if number_precedes_length(child) {
+							return true;
+						}
+					}
+				}
+			}
+
+			// If we found both and number comes first, flag it
+			if let (Some(num_pos), Some(len_pos)) = (number_pos, length_pos)
+				&& num_pos < len_pos
+			{
+				return true;
+			}
+
+			false
+		}
+		Def::Combinator(children, _) => children.iter().any(number_precedes_length),
+		Def::Group(inner, _) => number_precedes_length(inner),
+		Def::Optional(inner) => number_precedes_length(inner),
+		Def::Multiplier(inner, _, _) => number_precedes_length(inner),
+		Def::Function(_, inner) => number_precedes_length(inner),
+		Def::AutoOr(inner) | Def::NoneOr(inner) | Def::AutoNoneOr(inner) => number_precedes_length(inner),
+		// Leaf nodes don't contain the pattern
+		_ => false,
+	}
+}
+
 /// Determine which portion(s) of the box model a property affects based on its name
 fn determine_box_portion(property_name: &str) -> Option<TokenStream> {
 	// Check for margin properties
@@ -574,22 +638,15 @@ fn generate_property_type(
 		if let Some(extension) = value_extension { format!("{}{}", prop.value, extension) } else { prop.value.clone() };
 
 	let grammar_cleaned = extended_value.replace("'", "\"").replace("∞", "");
-	let (is_enum, needs_lifetime) = match grammar_cleaned.parse::<TokenStream>() {
-		Ok(tokens) => match parse2::<Def>(tokens) {
-			Ok(def) => {
-				let optimized_def = def.optimize();
-				let data_type = optimized_def.suggested_data_type();
-				let is_enum = data_type.is_enum();
-				let needs_lifetime = optimized_def.maybe_unsized();
-				(is_enum, needs_lifetime)
-			}
-			Err(e) => {
-				eprintln!("Warning: Failed to parse Def for {}: {} - Error: {}", prop.name, prop.value, e);
-				(false, false)
-			}
-		},
-		Err(e) => {
-			eprintln!("Warning: Failed to tokenize syntax for {}: {} - Error: {}", prop.name, prop.value, e);
+	let parsed_def = grammar_cleaned.parse::<TokenStream>().ok().and_then(|tokens| parse2::<Def>(tokens).ok());
+
+	let (is_enum, needs_lifetime) = match &parsed_def {
+		Some(def) => {
+			let optimized = def.optimize();
+			(optimized.suggested_data_type().is_enum(), optimized.maybe_unsized())
+		}
+		None => {
+			eprintln!("Warning: Failed to parse Def for {}: {}", prop.name, prop.value);
 			(false, false)
 		}
 	};
@@ -640,6 +697,7 @@ fn generate_property_type(
 	let property_group_attr = Some(quote! { property_group = #property_group });
 	let box_portion_attr = determine_box_portion(&prop.name);
 	let box_side_attr = determine_box_side(&prop.name);
+	let unitless_zero_resolves_attr = detect_unitless_zero_resolves(parsed_def.as_ref());
 
 	let metadata_attrs = [
 		Some(quote! { initial = #initial }),
@@ -655,6 +713,7 @@ fn generate_property_type(
 		logical_property_group_attr,
 		box_side_attr,
 		box_portion_attr,
+		unitless_zero_resolves_attr,
 	]
 	.into_iter()
 	.flatten();
