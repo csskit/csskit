@@ -1,4 +1,4 @@
-use css_parse::{DeclarationValue, NodeWithMetadata};
+use css_parse::DeclarationValue;
 
 use super::prelude::*;
 use crate::{Computed, CssMetadata};
@@ -6,34 +6,29 @@ use crate::{Computed, CssMetadata};
 // https://drafts.csswg.org/css-fonts/#font-face-rule
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.font-face"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = FontFace)]
 pub struct FontFaceRule<'a> {
 	#[atom(CssAtomSet::FontFace)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![AtKeyword],
+	#[metadata(delegate)]
 	pub block: FontFaceRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for FontFaceRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::FontFace, node_kinds: NodeKinds::AtRule, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
-pub struct FontFaceRuleBlock<'a>(DeclarationList<'a, FontFaceRuleStyleValue<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontFaceRuleBlock<'a>(#[metadata(delegate)] DeclarationList<'a, FontFaceRuleStyleValue<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
-pub struct FontFaceRuleStyleValue<'a>(pub StyleValue<'a>);
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontFaceRuleStyleValue<'a>(#[metadata(delegate)] pub StyleValue<'a>);
 
 impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 	type ComputedValue = Computed<'a>;
@@ -94,16 +89,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		Ok(Self(<StyleValue as DeclarationValue<CssMetadata>>::parse_declaration_value(p, name)?))
-	}
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for FontFaceRuleStyleValue<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata::default()
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.0.metadata().merge(self.self_metadata())
 	}
 }
 

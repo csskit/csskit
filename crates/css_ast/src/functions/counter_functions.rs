@@ -9,6 +9,7 @@ use crate::types::CounterStyle;
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CounterFunction<'a> {
 	#[atom(CssAtomSet::Counter)]
 	pub name: T![Function],
@@ -28,6 +29,7 @@ pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterSty
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CountersFunction<'a> {
 	#[atom(CssAtomSet::Counters)]
 	pub name: T![Function],
@@ -44,6 +46,7 @@ pub struct CountersFunctionParams<'a>(T![Ident], Option<T![,]>, T![String], Opti
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum Counter<'a> {
 	Counter(CounterFunction<'a>),
 	Counters(CountersFunction<'a>),

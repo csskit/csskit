@@ -17,6 +17,7 @@ use css_parse::Token;
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum Position {
 	SingleValue(PositionSingleValue),
 	TwoValue(PositionHorizontal, PositionVertical),
@@ -177,6 +178,7 @@ pub enum PositionVertical {
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionHorizontalKeyword {
 	#[atom(CssAtomSet::Left)]
 	Left(T![Ident]),
@@ -187,6 +189,7 @@ pub enum PositionHorizontalKeyword {
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionVerticalKeyword {
 	#[atom(CssAtomSet::Top)]
 	Top(T![Ident]),

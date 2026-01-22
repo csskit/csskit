@@ -4,7 +4,7 @@ use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
 
 #[derive(Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Tag {
 	Html(HtmlTag),
 	HtmlNonStandard(HtmlNonStandardTag),
@@ -51,7 +51,9 @@ impl css_parse::NodeWithMetadata<crate::CssMetadata> for Tag {
 
 #[derive(ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Custom)]
 pub struct CustomElementTag(T![Ident]);
 
 impl CustomElementTag {
@@ -128,17 +130,11 @@ impl<'a> Parse<'a> for CustomElementTag {
 	}
 }
 
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for CustomElementTag {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Custom, ..Default::default() }
-	}
-}
-
 /// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum HtmlTag {
 	#[atom(CssAtomSet::A)]
 	A(T![Ident]),
@@ -369,7 +365,9 @@ pub enum HtmlTag {
 /// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Deprecated)]
 pub enum HtmlNonConformingTag {
 	#[atom(CssAtomSet::Acronym)]
 	Acronym(T![Ident]),
@@ -431,16 +429,11 @@ pub enum HtmlNonConformingTag {
 	Xmp(T![Ident]),
 }
 
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for HtmlNonConformingTag {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Deprecated, ..Default::default() }
-	}
-}
-
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Experimental)]
 pub enum HtmlNonStandardTag {
 	// https://wicg.github.io/fenced-frame/#the-fencedframe-element
 	#[atom(CssAtomSet::Fencedframe)]
@@ -456,17 +449,11 @@ pub enum HtmlNonStandardTag {
 	Selectedcontent(T![Ident]),
 }
 
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for HtmlNonStandardTag {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Experimental, ..Default::default() }
-	}
-}
-
 /// <https://svgwg.org/svg2-draft/eltindex.html>
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SvgTag {
 	#[atom(CssAtomSet::A)]
 	A(T![Ident]),
@@ -602,6 +589,7 @@ pub enum SvgTag {
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MathmlTag {
 	#[atom(CssAtomSet::Abs)]
 	Abs(T![Ident]),
@@ -923,7 +911,9 @@ pub enum MathmlTag {
 
 #[derive(ToCursors, Parse, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Unknown)]
 pub struct UnknownTag(T![Ident]);
 
 impl<'a> Peek<'a> for UnknownTag {
@@ -932,13 +922,6 @@ impl<'a> Peek<'a> for UnknownTag {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		<T![Ident]>::peek(p, c)
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for UnknownTag {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Unknown, ..Default::default() }
 	}
 }
 

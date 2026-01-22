@@ -28,3 +28,21 @@ pub trait NodeWithMetadata<M: NodeMetadata> {
 impl NodeMetadata for () {
 	fn merge(self, _: Self) -> Self {}
 }
+
+// Blanket implementation for Option<T> where T: NodeWithMetadata<M>
+// Returns default metadata when None, or delegates to the inner value when Some
+impl<M: NodeMetadata, T: NodeWithMetadata<M>> NodeWithMetadata<M> for Option<T> {
+	fn self_metadata(&self) -> M {
+		match self {
+			Some(inner) => inner.self_metadata(),
+			None => M::default(),
+		}
+	}
+
+	fn metadata(&self) -> M {
+		match self {
+			Some(inner) => inner.metadata(),
+			None => M::default(),
+		}
+	}
+}

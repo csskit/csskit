@@ -55,21 +55,6 @@ impl From<&Vec<Attribute>> for VisitStyle {
 	}
 }
 
-/// Check if the type has a #[metadata(skip)] attribute, indicating it has a manual
-/// NodeWithMetadata implementation.
-fn has_metadata_skip(attrs: &[Attribute]) -> bool {
-	attrs.iter().any(|attr| {
-		if attr.path().is_ident("metadata") {
-			match &attr.meta {
-				Meta::List(meta) => meta.parse_args::<Ident>().map(|i| i == "skip").unwrap_or(false),
-				_ => false,
-			}
-		} else {
-			false
-		}
-	})
-}
-
 /// Check if the type has a #[queryable(skip)] attribute, indicating it has a manual
 /// QueryableNode implementation.
 fn has_queryable_skip(attrs: &[Attribute]) -> bool {
@@ -157,27 +142,6 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::Visitable });
 	let mut_where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::VisitableMut });
 
-	// Check if we should skip generating NodeWithMetadata (type has manual implementation)
-	let skip_metadata = has_metadata_skip(&input.attrs);
-
-	// Generate NodeWithMetadata implementation for queryable nodes
-	// This is needed because QueryableNode: Visitable + NodeWithMetadata<CssMetadata>
-	// Most queryable nodes just return default metadata - the important metadata (like
-	// at-rule IDs, property groups) is set by manual implementations for key types like
-	// StyleRule, MediaRule, StyleValue, etc.
-	let metadata_impl = if style.visit_self() && !skip_metadata {
-		quote! {
-			#[automatically_derived]
-			impl #impl_generics css_parse::NodeWithMetadata<crate::CssMetadata> for #ident #type_generics #where_clause {
-				fn metadata(&self) -> crate::CssMetadata {
-					crate::CssMetadata::default()
-				}
-			}
-		}
-	} else {
-		quote! {}
-	};
-
 	// Check if we should skip generating QueryableNode (type has manual implementation)
 	let skip_queryable = has_queryable_skip(&input.attrs);
 
@@ -218,7 +182,6 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			}
 		}
 
-		#metadata_impl
 		#queryable_impl
 	}
 }

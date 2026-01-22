@@ -6,6 +6,7 @@ use crate::units::LengthPercentage;
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SnapBlockFunction {
 	#[atom(CssAtomSet::SnapBlock)]
 	pub name: T![Function],
@@ -20,6 +21,7 @@ pub struct SnapBlockFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapB
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SnapBlockKeyword {
 	#[atom(CssAtomSet::Start)]
 	Start(T![Ident]),

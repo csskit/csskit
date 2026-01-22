@@ -7,6 +7,7 @@ use super::NamespacePrefix;
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Attribute {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub open: T!['['],
@@ -51,6 +52,7 @@ impl<'a> Parse<'a> for Attribute {
 #[derive(Parse, ToSpan, Peek, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum AttributeOperator {
 	Exact(T![=]),
 	SpaceList(T![~=]),
@@ -63,6 +65,7 @@ pub enum AttributeOperator {
 #[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum AttributeValue {
 	String(T![String]),
 	Ident(T![Ident]),
@@ -71,6 +74,7 @@ pub enum AttributeValue {
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 #[cfg_attr(
 	feature = "css_feature_data",
 	derive(::csskit_derives::ToCSSFeature),

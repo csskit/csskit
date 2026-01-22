@@ -7,29 +7,17 @@ use csskit_proc_macro::syntax;
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#the-counter-style-rule>
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = CounterStyle, property_kinds = Name)]
 pub struct CounterStyleRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::CounterStyle)]
 	pub name: T![AtKeyword],
 	pub prelude: CounterStyleName,
+	#[metadata(delegate)]
 	pub block: CounterStyleRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for CounterStyleRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata {
-			used_at_rules: AtRuleId::CounterStyle,
-			node_kinds: NodeKinds::AtRule,
-			property_kinds: PropertyKind::Name,
-			..Default::default()
-		}
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[cfg(feature = "visitable")]
@@ -52,11 +40,16 @@ pub struct CounterStyleName(T![Ident]);
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CounterStyleRuleBlock<'a>(DeclarationList<'a, CounterStyleRuleStyleValue<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CounterStyleRuleBlock<'a>(
+	#[metadata(delegate)] DeclarationList<'a, CounterStyleRuleStyleValue<'a>, CssMetadata>,
+);
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Declaration, property_kinds = Name)]
 pub enum CounterStyleRuleStyleValue<'a> {
 	Unknown(ComponentValues<'a>),
 	System(SystemStyleValue),
@@ -69,16 +62,6 @@ pub enum CounterStyleRuleStyleValue<'a> {
 	Pad(PadStyleValue<'a>),
 	SpeakAs(SpeakAsStyleValue),
 	Fallback(FallbackStyleValue),
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for CounterStyleRuleStyleValue<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { node_kinds: NodeKinds::Declaration, property_kinds: PropertyKind::Name, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.self_metadata()
-	}
 }
 
 impl<'a> DeclarationValue<'a, CssMetadata> for CounterStyleRuleStyleValue<'a> {
@@ -146,6 +129,7 @@ impl<'a> DeclarationValue<'a, CssMetadata> for CounterStyleRuleStyleValue<'a> {
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct AdditiveSymbolsStyleValue<'a>;
 
 #[derive(
@@ -154,6 +138,7 @@ pub struct AdditiveSymbolsStyleValue<'a>;
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct FallbackStyleValue(CounterStyleName);
 
 #[syntax(" <symbol> <symbol>? ")]
@@ -163,6 +148,7 @@ pub struct FallbackStyleValue(CounterStyleName);
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NegativeStyleValue<'a>;
 
 #[syntax(" <integer [0,∞]> && <symbol> ")]
@@ -172,6 +158,7 @@ pub struct NegativeStyleValue<'a>;
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PadStyleValue<'a>;
 
 #[syntax(" <symbol> ")]
@@ -181,6 +168,7 @@ pub struct PadStyleValue<'a>;
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PrefixStyleValue<'a>;
 
 // #[syntax(" [ [ <integer> | infinite ]{2} ]# | auto ")]
@@ -198,6 +186,7 @@ pub type RangeStyleValue = Todo;
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SpeakAsStyleValue {}
 
 #[syntax(" <symbol> ")]
@@ -207,6 +196,7 @@ pub enum SpeakAsStyleValue {}
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SuffixStyleValue<'a>;
 
 #[syntax(" <symbol>+ ")]
@@ -216,6 +206,7 @@ pub struct SuffixStyleValue<'a>;
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SymbolsStyleValue<'a>;
 
 #[syntax(
@@ -227,6 +218,7 @@ pub struct SymbolsStyleValue<'a>;
 #[declaration_metadata(initial = "n/a", inherits = False, property_group = CounterStyle)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SystemStyleValue {}
 
 #[cfg(test)]

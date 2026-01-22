@@ -10,6 +10,7 @@ use crate::{types::Color, units::LengthPercentageOrFlex};
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct StripesFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Stripes)]
@@ -27,6 +28,7 @@ pub struct StripesFunction<'a> {
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ColorStripe {
 	pub color: Color,
 	pub thickness: Option<LengthPercentageOrFlex>,

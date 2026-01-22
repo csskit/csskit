@@ -9,6 +9,7 @@ use crate::units::LengthPercentage;
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SnapInlineFunction {
 	#[atom(CssAtomSet::SnapInline)]
 	pub name: T![Function],
@@ -23,6 +24,7 @@ pub struct SnapInlineFunctionParams(LengthPercentage, Option<T![,]>, Option<Snap
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SnapInlineKeyword {
 	#[atom(CssAtomSet::Left)]
 	Left(T![Ident]),

@@ -7,29 +7,17 @@ use css_parse::NoBlockAllowed;
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.keyframes"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Keyframes, property_kinds = Name)]
 pub struct KeyframesRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Keyframes)]
 	pub name: T![AtKeyword],
 	pub prelude: KeyframesName,
+	#[metadata(delegate)]
 	pub block: KeyframesRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for KeyframesRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata {
-			used_at_rules: AtRuleId::Keyframes,
-			node_kinds: NodeKinds::AtRule,
-			property_kinds: PropertyKind::Name,
-			..Default::default()
-		}
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[cfg(feature = "visitable")]
@@ -47,6 +35,7 @@ impl<'a> QueryableNode for KeyframesRule<'a> {
 #[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum KeyframesName {
 	Ident(T![Ident]),
 	String(T![String]),
@@ -78,20 +67,17 @@ impl<'a> Parse<'a> for KeyframesName {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct KeyframesRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Keyframe<'a>(
+	#[metadata(delegate)]
 	QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed<StyleValue<'a>, CssMetadata>, CssMetadata>,
 );
-
-impl<'a> NodeWithMetadata<CssMetadata> for Keyframe<'a> {
-	fn metadata(&self) -> CssMetadata {
-		self.0.metadata()
-	}
-}
 
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -101,6 +87,7 @@ pub struct KeyframeSelectors<'a>(pub CommaSeparated<'a, KeyframeSelector>);
 #[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum KeyframeSelector {
 	#[atom(CssAtomSet::From)]
 	From(T![Ident]),

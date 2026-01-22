@@ -1,4 +1,4 @@
-use crate::{CssAtomSet, CssMetadata, NodeKinds, StyleValue, rules, stylerule::StyleRule};
+use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
 use css_parse::{
 	ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
@@ -9,7 +9,7 @@ use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 // https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct StyleSheet<'a> {
 	pub rules: Vec<'a, Rule<'a>>,
 	#[to_cursors(skip)]
@@ -77,23 +77,22 @@ macro_rules! apply_rules {
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Unknown)]
 pub struct UnknownAtRule<'a> {
 	name: T![AtKeyword],
 	prelude: ComponentValues<'a>,
 	block: ComponentValues<'a>,
 }
 
-impl<'a> NodeWithMetadata<CssMetadata> for UnknownAtRule<'a> {
-	fn metadata(&self) -> CssMetadata {
-		CssMetadata { node_kinds: NodeKinds::Unknown, ..Default::default() }
-	}
-}
-
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Unknown)]
 pub struct UnknownQualifiedRule<'a>(
+	#[metadata(delegate)]
 	QualifiedRule<
 		'a,
 		UnknownRuleBlock<'a>,
@@ -102,14 +101,6 @@ pub struct UnknownQualifiedRule<'a>(
 		CssMetadata,
 	>,
 );
-
-impl<'a> NodeWithMetadata<CssMetadata> for UnknownQualifiedRule<'a> {
-	fn metadata(&self) -> CssMetadata {
-		let mut meta = self.0.metadata();
-		meta.node_kinds |= NodeKinds::Unknown;
-		meta
-	}
-}
 
 macro_rules! rule {
     ( $(
@@ -120,6 +111,8 @@ macro_rules! rule {
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
+		#[derive(csskit_derives::NodeWithMetadata)]
+		#[metadata(delegate)]
 		pub enum Rule<'a> {
 			$(
 				$name(rules::$ty$(<$a>)?),
@@ -132,24 +125,6 @@ macro_rules! rule {
 }
 
 apply_rules!(rule);
-
-impl<'a> NodeWithMetadata<CssMetadata> for Rule<'a> {
-	fn metadata(&self) -> CssMetadata {
-		macro_rules! match_rule {
-			( $(
-				$name: ident($ty: ident$(<$a: lifetime>)?): $atoms: pat,
-			)+ ) => {
-				match self {
-					$(Self::$name(r) => r.metadata(),)+
-					Self::Style(r) => r.metadata(),
-					Self::UnknownAt(r) => r.metadata(),
-					Self::Unknown(r) => r.metadata(),
-				}
-			}
-		}
-		apply_rules!(match_rule)
-	}
-}
 
 impl<'a> RuleVariants<'a> for Rule<'a> {
 	type DeclarationValue = StyleValue<'a>;

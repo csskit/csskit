@@ -8,8 +8,10 @@ use crate::StringOrUrl;
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.page"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Namespace)]
 pub struct NamespaceRule {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Namespace)]
@@ -18,16 +20,6 @@ pub struct NamespaceRule {
 	pub resource: StringOrUrl,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub semicolon: Option<T![;]>,
-}
-
-impl NodeWithMetadata<CssMetadata> for NamespaceRule {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Namespace, node_kinds: NodeKinds::AtRule, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.self_metadata()
-	}
 }
 
 #[cfg(test)]

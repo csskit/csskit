@@ -11,6 +11,7 @@ use crate::LengthPercentage;
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct BorderRadius(pub LengthPercentage, pub Option<T![/]>, pub Option<LengthPercentage>);
 
 #[cfg(test)]

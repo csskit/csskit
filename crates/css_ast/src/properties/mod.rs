@@ -68,7 +68,7 @@ macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 		pub enum StyleValue<'a> {
 			#[cfg_attr(feature = "visitable", visit(skip))]
 			Initial(T![Ident]),

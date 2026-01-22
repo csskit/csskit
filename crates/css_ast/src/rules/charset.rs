@@ -3,8 +3,10 @@ use super::prelude::*;
 // https://drafts.csswg.org/css-syntax-3/#charset-rule
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.charset"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Charset)]
 pub struct CharsetRule {
 	at_keyword: T![AtKeyword],
 	space: T![' '],
@@ -34,16 +36,6 @@ impl<'a> Parse<'a> for CharsetRule {
 		// TODO: check quote style as it should be "
 		let semicolon = p.parse::<T![;]>().ok();
 		Ok(Self { at_keyword, space, string, semicolon })
-	}
-}
-
-impl NodeWithMetadata<CssMetadata> for CharsetRule {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Charset, node_kinds: NodeKinds::AtRule, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.self_metadata()
 	}
 }
 

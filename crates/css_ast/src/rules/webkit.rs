@@ -6,29 +6,16 @@ use crate::{KeyframesName, KeyframesRuleBlock};
 // https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule | Deprecated | NonStandard, used_at_rules = WebkitKeyframes, vendor_prefixes = WebKit, property_kinds = Name)]
 pub struct WebkitKeyframesRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::_WebkitKeyframes)]
 	pub name: T![AtKeyword],
 	pub prelude: KeyframesName,
+	#[metadata(delegate)]
 	pub block: KeyframesRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for WebkitKeyframesRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata {
-			used_at_rules: AtRuleId::WebkitKeyframes,
-			vendor_prefixes: VendorPrefixes::WebKit,
-			node_kinds: NodeKinds::AtRule | NodeKinds::Deprecated | NodeKinds::NonStandard,
-			property_kinds: PropertyKind::Name,
-			..Default::default()
-		}
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[cfg(feature = "visitable")]

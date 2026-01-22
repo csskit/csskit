@@ -3,27 +3,19 @@ use super::prelude::*;
 // https://drafts.csswg.org/css-cascade-5/#layering
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.layer"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Layer)]
 pub struct LayerRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Layer)]
 	pub name: T![AtKeyword],
 	pub prelude: LayerNameList<'a>,
+	#[metadata(delegate)]
 	pub block: Option<LayerRuleBlock<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub semicolon: Option<T![;]>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for LayerRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Layer, node_kinds: NodeKinds::AtRule, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		let child = if let Some(block) = &self.block { block.0.metadata() } else { CssMetadata::default() };
-		child.merge(self.self_metadata())
-	}
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -34,6 +26,7 @@ pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct LayerName<'a>(T![Ident], Vec<'a, (T![.], T![Ident])>);
 
 impl<'a> Parse<'a> for LayerName<'a> {
@@ -58,7 +51,8 @@ impl<'a> Parse<'a> for LayerName<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct LayerRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct LayerRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {

@@ -5,6 +5,7 @@ use crate::SymbolsFunction;
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum CounterStyle<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Predefined(PredefinedCounter),

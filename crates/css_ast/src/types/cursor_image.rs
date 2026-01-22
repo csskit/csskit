@@ -11,6 +11,7 @@ use crate::{ImageSetFunction, Url};
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum CursorImage<'a> {
 	Url(Url, #[cfg_attr(feature = "visitable", visit(skip))] Option<(T![Number], T![Number])>),
 	UrlSet(ImageSetFunction<'a>, #[cfg_attr(feature = "visitable", visit(skip))] Option<(T![Number], T![Number])>),

@@ -5,6 +5,7 @@ use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 #[allow(clippy::large_enum_variant)] // TODO: matrix3d should probably be boxed
 pub enum TransformFunction {
 	Matrix(MatrixFunction),
@@ -38,6 +39,7 @@ pub enum TransformFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct MatrixFunction {
 	#[atom(CssAtomSet::Matrix)]
 	pub name: T![Function],
@@ -69,6 +71,7 @@ pub struct MatrixFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Matrix3dFunction {
 	#[atom(CssAtomSet::Matrix3d)]
 	pub name: T![Function],
@@ -121,6 +124,7 @@ pub struct Matrix3dFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TranslateFunction {
 	#[atom(CssAtomSet::Translate)]
 	pub name: T![Function],
@@ -138,6 +142,7 @@ pub struct TranslateFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Translate3dFunction {
 	#[atom(CssAtomSet::Translate3d)]
 	pub name: T![Function],
@@ -163,6 +168,7 @@ pub struct Translate3dFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TranslatexFunction {
 	#[atom(CssAtomSet::Translatex)]
 	pub name: T![Function],
@@ -178,6 +184,7 @@ pub struct TranslatexFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TranslateyFunction {
 	#[atom(CssAtomSet::Translatey)]
 	pub name: T![Function],
@@ -193,6 +200,7 @@ pub struct TranslateyFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TranslatezFunction {
 	#[atom(CssAtomSet::Translatez)]
 	pub name: T![Function],
@@ -208,6 +216,7 @@ pub struct TranslatezFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScaleFunction {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
@@ -223,6 +232,7 @@ pub struct ScaleFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Scale3dFunction {
 	#[atom(CssAtomSet::Scale3d)]
 	pub name: T![Function],
@@ -248,6 +258,7 @@ pub struct Scale3dFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScalexFunction {
 	#[atom(CssAtomSet::Scalex)]
 	pub name: T![Function],
@@ -263,6 +274,7 @@ pub struct ScalexFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScaleyFunction {
 	#[atom(CssAtomSet::Scaley)]
 	pub name: T![Function],
@@ -278,6 +290,7 @@ pub struct ScaleyFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScalezFunction {
 	#[atom(CssAtomSet::Scalez)]
 	pub name: T![Function],
@@ -293,6 +306,7 @@ pub struct ScalezFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RotateFunction {
 	#[atom(CssAtomSet::Rotate)]
 	pub name: T![Function],
@@ -308,6 +322,7 @@ pub struct RotateFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Rotate3dFunction {
 	#[atom(CssAtomSet::Rotate3d)]
 	pub name: T![Function],
@@ -335,6 +350,7 @@ pub struct Rotate3dFunctionParams(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RotatexFunction {
 	#[atom(CssAtomSet::Rotatex)]
 	pub name: T![Function],
@@ -350,6 +366,7 @@ pub struct RotatexFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RotateyFunction {
 	#[atom(CssAtomSet::Rotatey)]
 	pub name: T![Function],
@@ -365,6 +382,7 @@ pub struct RotateyFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RotatezFunction {
 	#[atom(CssAtomSet::Rotatez)]
 	pub name: T![Function],
@@ -380,6 +398,7 @@ pub struct RotatezFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SkewFunction {
 	#[atom(CssAtomSet::Skew)]
 	pub name: T![Function],
@@ -395,6 +414,7 @@ pub struct SkewFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SkewxFunction {
 	#[atom(CssAtomSet::Skewx)]
 	pub name: T![Function],
@@ -410,6 +430,7 @@ pub struct SkewxFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SkewyFunction {
 	#[atom(CssAtomSet::Skewy)]
 	pub name: T![Function],
@@ -425,6 +446,7 @@ pub struct SkewyFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PerspectiveFunction {
 	#[atom(CssAtomSet::Perspective)]
 	pub name: T![Function],

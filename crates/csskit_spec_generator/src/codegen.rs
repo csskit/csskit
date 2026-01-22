@@ -794,6 +794,7 @@ fn generate_property_type(
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature(#css_feature))]
 		#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+		#[derive(csskit_derives::NodeWithMetadata)]
 		pub #keyword #type_name #lifetime #suffix
 	}
 }

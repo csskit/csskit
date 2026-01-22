@@ -3,7 +3,9 @@ use super::prelude::*;
 // https://drafts.csswg.org/css-values/#resolution
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Dimension)]
 pub enum Time {
 	Zero(#[in_range(0.0..0.0)] T![Number]),
 	#[atom(CssAtomSet::Ms)]
@@ -35,13 +37,6 @@ impl From<Time> for f32 {
 impl ToNumberValue for Time {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
-	}
-}
-
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for Time {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
 	}
 }
 

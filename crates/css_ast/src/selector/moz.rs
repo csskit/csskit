@@ -9,6 +9,7 @@ pseudo_element!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozPseudoElement {
 		AnonymousBlock: CssAtomSet::_MozAnonymousBlock,
 		AnonymousItem: CssAtomSet::_MozAnonymousItem,
@@ -90,6 +91,7 @@ pseudo_element!(
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MozFunctionalPseudoElement<'a> {
 	TreeCell(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
 	TreeCellText(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
@@ -105,6 +107,7 @@ pub enum MozFunctionalPseudoElement<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MozFunctionalPseudoElementKeyword {
 	#[atom(CssAtomSet::_MozTreeCell)]
 	TreeCell(T![Function]),
@@ -160,6 +163,7 @@ pseudo_class!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozPseudoClass {
 		Any: CssAtomSet::_MozAny,
 		AnyLink: CssAtomSet::_MozAnyLink,
@@ -194,6 +198,7 @@ pseudo_class!(
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MozFunctionalPseudoClass {
 	LocaleDir(MozLocaleDirFunctionalPseudoClass),
 }
@@ -219,6 +224,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct MozLocaleDirFunctionalPseudoClass {
 	pub colon: T![:],
 	pub function: T![Function],

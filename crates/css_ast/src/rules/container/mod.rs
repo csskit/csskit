@@ -9,24 +9,17 @@ pub use features::*;
 // https://drafts.csswg.org/css-contain-3/#container-rule
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.container"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Container)]
 pub struct ContainerRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Container)]
 	pub name: T![AtKeyword],
 	pub prelude: ContainerConditionList<'a>,
+	#[metadata(delegate)]
 	pub block: ContainerRulesBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for ContainerRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata { used_at_rules: AtRuleId::Container, node_kinds: NodeKinds::AtRule, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[cfg(feature = "visitable")]
@@ -37,7 +30,8 @@ impl<'a> QueryableNode for ContainerRule<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-pub struct ContainerRulesBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ContainerRulesBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -83,6 +77,7 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ContainerQuery<'a> {
 	Is(ContainerFeature<'a>),
 	Not(T![Ident], ContainerFeature<'a>),
@@ -148,6 +143,7 @@ macro_rules! container_feature {
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 		pub enum ContainerFeature<'a> {
 			$($name($typ),)+
 			Style(StyleQuery<'a>),

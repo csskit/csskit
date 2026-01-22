@@ -14,6 +14,7 @@ use crate::{LayerName, MediaQueryList, SupportsCondition, UrlOrString};
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ImportRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Import)]
@@ -22,16 +23,17 @@ pub struct ImportRule<'a> {
 	pub layer: Option<ImportLayer<'a>>,
 	pub supports_condition: Option<ImportSupportsFunction<'a>>,
 	pub media_condition: Option<MediaQueryList<'a>>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub semicolon: Option<T![;]>,
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ImportLayer<'a> {
 	#[atom(CssAtomSet::Layer)]
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Layer(T![Ident]),
 	#[atom(CssAtomSet::Layer)]
 	LayerFunction(ImportLayerFunction<'a>),
@@ -40,24 +42,26 @@ pub enum ImportLayer<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ImportLayerFunction<'a> {
 	#[atom(CssAtomSet::Layer)]
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![Function],
 	pub layer: LayerName<'a>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ImportSupportsFunction<'a> {
 	#[atom(CssAtomSet::Supports)]
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![Function],
 	pub condition: SupportsCondition<'a>,
-	#[visit(skip)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: T![')'],
 }
 

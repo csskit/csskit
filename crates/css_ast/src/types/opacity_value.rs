@@ -4,6 +4,7 @@ use crate::Percentage;
 #[derive(IntoCursor, Peek, Parse, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum OpacityValue {
 	Number(#[in_range(0.0..=1.0)] T![Number]),
 	Percent(#[in_range(0.0..=100.0)] Percentage),

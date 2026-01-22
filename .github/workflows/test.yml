@@ -118,6 +118,22 @@ jobs:
           key: global-rust-cache
       - run: cargo +nightly test --all-features
 
+  build_each_lib:
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
+    name: Build each libary to check independant errors
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          submodules: "true"
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: global-rust-cache
+      - run: set -euo pipefail; for d in crates/*/; do cargo build -p $(basename $d); done
+
   clippy:
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
@@ -209,7 +225,7 @@ jobs:
       pull-requests: write
     if: always()
     runs-on: ubuntu-latest
-    needs: [check-skip, build, build_default, build_nightly, fmt, clippy, docs, acceptance]
+    needs: [check-skip, build, build_default, build_nightly, build_each_lib, fmt, clippy, docs, acceptance]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:

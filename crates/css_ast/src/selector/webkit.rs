@@ -7,6 +7,7 @@ pseudo_element!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 	pub enum WebkitPseudoElement {
 		CalendarDatePickerIndicator: CssAtomSet::_WebkitCalendarPickerIndicator,
 		CapsLockIndicator: CssAtomSet::_WebkitCapsLockIndicator,
@@ -77,6 +78,7 @@ pseudo_element!(
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum WebkitFunctionalPseudoElement<'a> {
 	Distributed(WebkitDistrubutedFunctionalPseudoElement<'a>),
 }
@@ -102,6 +104,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colons: T![::],
@@ -140,6 +143,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitAnyFunctionalPseudoClass<'a> {
 	pub colon: T![:],
 	pub function: T![Function],
@@ -152,6 +156,7 @@ pseudo_class!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 	pub enum WebkitPseudoClass {
 		AnimatingFullScreenTransition: CssAtomSet::_WebkitAnimatingFullScreenTransition,
 		AnyLink: CssAtomSet::_WebkitAnyLink,  // Alias for :anyLink

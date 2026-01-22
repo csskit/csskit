@@ -1,4 +1,5 @@
 use super::prelude::*;
+use crate::{AtRuleId, NodeKinds};
 
 mod features;
 pub use features::*;
@@ -7,7 +8,7 @@ pub use features::*;
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct MediaRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Media)]
@@ -45,6 +46,7 @@ pub struct MediaQueryList<'a>(pub CommaSeparated<'a, MediaQuery<'a>, 1>);
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MediaType {
 	#[atom(CssAtomSet::All)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -69,6 +71,7 @@ impl MediaType {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MediaPreCondition {
 	#[atom(CssAtomSet::Not)]
 	#[cfg_attr(feature = "visitable", visit(skip))]

@@ -16,7 +16,7 @@ use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct StyleRule<'a> {
 	pub rule: QualifiedRule<'a, SelectorList<'a>, StyleValue<'a>, NestedGroupRule<'a>, CssMetadata>,
 }
@@ -34,22 +34,6 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleRule<'a> {
 
 	fn metadata(&self) -> CssMetadata {
 		self.rule.metadata().merge(self.self_metadata())
-	}
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for NestedGroupRule<'a> {
-	fn metadata(&self) -> CssMetadata {
-		match self {
-			Self::Container(r) => r.metadata(),
-			Self::Layer(r) => r.metadata(),
-			Self::Media(r) => r.metadata(),
-			Self::Scope(r) => r.metadata(),
-			Self::Supports(r) => r.metadata(),
-			Self::UnknownAt(r) => r.metadata(),
-			Self::Style(r) => r.metadata(),
-			Self::Unknown(r) => r.metadata(),
-			Self::Declarations(r) => r.metadata(),
-		}
 	}
 }
 
@@ -75,6 +59,8 @@ macro_rules! nested_group_rule {
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
+		#[derive(csskit_derives::NodeWithMetadata)]
+		#[metadata(delegate)]
 		pub enum NestedGroupRule<'a> {
 			$(
 				$name(rules::$ty$(<$a>)?),

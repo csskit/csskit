@@ -73,6 +73,7 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct DirPseudoFunction {
 	pub colon: T![:],
 	#[atom(CssAtomSet::Dir)]
@@ -84,6 +85,7 @@ pub struct DirPseudoFunction {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum DirValue {
 	#[atom(CssAtomSet::Rtl)]
 	Rtl(T![Ident]),
@@ -94,6 +96,7 @@ pub enum DirValue {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct HasPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -109,6 +112,7 @@ pub struct HasPseudoFunction<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct HostPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -123,6 +127,7 @@ pub struct HostPseudoFunction<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct HostContextPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -137,6 +142,7 @@ pub struct HostContextPseudoFunction<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct IsPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -151,6 +157,7 @@ pub struct IsPseudoFunction<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct LangPseudoFunction<'a> {
 	pub colon: T![:],
 	#[atom(CssAtomSet::Lang)]
@@ -173,6 +180,7 @@ pub enum LangValue {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NotPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -187,6 +195,7 @@ pub struct NotPseudoFunction<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthChildPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -201,6 +210,7 @@ pub struct NthChildPseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthColPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -215,6 +225,7 @@ pub struct NthColPseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthLastChildPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -229,6 +240,7 @@ pub struct NthLastChildPseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthLastColPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -243,6 +255,7 @@ pub struct NthLastColPseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthLastOfTypePseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -257,6 +270,7 @@ pub struct NthLastOfTypePseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthOfTypePseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -271,6 +285,7 @@ pub struct NthOfTypePseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct WherePseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub colon: T![:],
@@ -285,6 +300,7 @@ pub struct WherePseudoFunction<'a> {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct StatePseudoFunction {
 	pub colon: T![:],
 	#[atom(CssAtomSet::State)]
@@ -296,6 +312,7 @@ pub struct StatePseudoFunction {
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct HeadingPseudoFunction<'a> {
 	pub colon: T![:],
 	#[atom(CssAtomSet::Heading)]

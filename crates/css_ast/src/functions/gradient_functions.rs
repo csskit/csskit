@@ -8,6 +8,7 @@ use crate::{Length, LengthPercentage};
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum Gradient<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
 	LinearGradientFunction(LinearGradientFunction<'a>),
@@ -28,6 +29,7 @@ pub enum Gradient<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct LinearGradientFunction<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
 	pub name: T![Function],
@@ -52,6 +54,7 @@ pub struct LinearGradientFunctionParams<'a>(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RepeatingLinearGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
 	pub name: T![Function],
@@ -78,6 +81,7 @@ pub struct RepeatingLinearGradientFunctionParams<'a>(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RadialGradient)]
 	pub name: T![Function],
@@ -107,6 +111,7 @@ pub struct RadialGradientFunctionParams<'a>(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RepeatingRadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
 	pub name: T![Function],

@@ -68,7 +68,9 @@ macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
 		#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+		#[derive(csskit_derives::NodeWithMetadata)]
+		#[metadata(node_kinds = Dimension)]
 		pub enum Length {
 			Zero(#[in_range(0.0..0.0)] T![Number]),
 			$(
@@ -129,16 +131,10 @@ impl ToNumberValue for Length {
 	}
 }
 
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for Length {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
-	}
-}
-
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum LengthPercentage {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Zero(#[in_range(0.0..0.0)] T![Number]),
@@ -166,6 +162,7 @@ impl ToNumberValue for LengthPercentage {
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
 	LengthPercentage(LengthPercentage),
@@ -174,6 +171,7 @@ pub enum LengthPercentageOrFlex {
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NumberLength {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Number(T![Number]),

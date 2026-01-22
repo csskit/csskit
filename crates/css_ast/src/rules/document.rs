@@ -3,27 +3,16 @@ use super::prelude::*;
 // https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule | Deprecated, used_at_rules = Document)]
 pub struct DocumentRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Document)]
 	pub name: T![AtKeyword],
 	pub prelude: DocumentMatcherList<'a>,
+	#[metadata(delegate)]
 	pub block: DocumentRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for DocumentRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata {
-			used_at_rules: AtRuleId::Document,
-			node_kinds: NodeKinds::AtRule | NodeKinds::Deprecated,
-			..Default::default()
-		}
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -34,6 +23,7 @@ pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum DocumentMatcher {
 	Url(T![Url]),
 	#[atom(CssAtomSet::Url)]
@@ -51,7 +41,8 @@ pub enum DocumentMatcher {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-pub struct DocumentRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct DocumentRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {

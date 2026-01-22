@@ -7,6 +7,7 @@ mod attributes;
 mod css_feature;
 mod declaration_metadata;
 mod into_cursor;
+mod node_with_metadata;
 mod parse;
 mod peek;
 mod semantic_eq;
@@ -50,10 +51,16 @@ pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 	to_span::derive(input).into()
 }
 
-#[proc_macro_derive(Visitable, attributes(visit, metadata, queryable))]
+#[proc_macro_derive(Visitable, attributes(visit, queryable))]
 pub fn derive_visitable(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	visitable::derive(input).into()
+}
+
+#[proc_macro_derive(NodeWithMetadata, attributes(metadata))]
+pub fn derive_node_with_metadata(stream: TokenStream) -> TokenStream {
+	let input = syn::parse(stream).unwrap();
+	node_with_metadata::derive(input).into()
 }
 
 #[proc_macro_derive(ToCSSFeature, attributes(css_feature))]

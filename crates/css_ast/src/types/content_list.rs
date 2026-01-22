@@ -9,6 +9,7 @@ use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 
 /// <https://drafts.csswg.org/css-content-3/#content-values>
@@ -19,6 +20,7 @@ pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),

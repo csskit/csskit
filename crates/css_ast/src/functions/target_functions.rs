@@ -4,6 +4,7 @@ use crate::{CssAtomSet, types::CounterStyle};
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum TextFunctionContent {
 	#[atom(CssAtomSet::Content)]
 	Content(T![Ident]),
@@ -30,6 +31,7 @@ pub enum TargetCounterKind {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum Target<'a> {
 	// https://drafts.csswg.org/css-content-3/#target-counter
 	// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
@@ -45,6 +47,7 @@ pub enum Target<'a> {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TargetCounterFunction<'a> {
 	#[atom(CssAtomSet::TargetCounter)]
 	pub name: T![Function],
@@ -65,6 +68,7 @@ pub struct TargetCounterParams<'a>(
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TargetCountersFunction<'a> {
 	#[atom(CssAtomSet::TargetCounters)]
 	pub name: T![Function],
@@ -87,6 +91,7 @@ pub struct TargetCountersParams<'a>(
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TargetTextFunction {
 	#[atom(CssAtomSet::TargetText)]
 	pub name: T![Function],

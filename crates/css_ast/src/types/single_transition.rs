@@ -7,6 +7,7 @@ use css_parse::parse_optionals;
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SingleTransition<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub property: Option<NoneOr<SingleTransitionProperty>>,

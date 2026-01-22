@@ -6,6 +6,7 @@ pseudo_element!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MsPseudoElement {
 		Backdrop: CssAtomSet::_MsBackdrop,
 		Browse: CssAtomSet::_MsBrowse,
@@ -32,6 +33,7 @@ pseudo_class!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MsPseudoClass {
 		Fullscreen: CssAtomSet::_MsFullscreen,
 		InputPlaceholder: CssAtomSet::_MsInputPlaceholder

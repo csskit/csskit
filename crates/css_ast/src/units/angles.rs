@@ -4,7 +4,9 @@ use super::prelude::*;
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.types.angle"))]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Dimension)]
 pub enum Angle {
 	#[atom(CssAtomSet::Grad)]
 	Grad(T![Dimension]),
@@ -48,16 +50,10 @@ impl Angle {
 	}
 }
 
-#[cfg(feature = "visitable")]
-impl css_parse::NodeWithMetadata<crate::CssMetadata> for Angle {
-	fn metadata(&self) -> crate::CssMetadata {
-		crate::CssMetadata { node_kinds: crate::NodeKinds::Dimension, ..Default::default() }
-	}
-}
-
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum AngleOrZero {
 	Angle(Angle),
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -67,6 +63,7 @@ pub enum AngleOrZero {
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum AngleOrNumber {
 	Angle(Angle),
 	#[cfg_attr(feature = "visitable", visit(skip))]

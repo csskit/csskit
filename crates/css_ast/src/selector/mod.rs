@@ -46,7 +46,7 @@ pub use webkit::*;
 /// ```
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub struct SelectorList<'a>(pub CommaSeparated<'a, CompoundSelector<'a>>);
 
 impl<'a> NodeWithMetadata<CssMetadata> for SelectorList<'a> {
@@ -62,6 +62,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for SelectorList<'a> {
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CompoundSelector<'a>(pub Vec<'a, SelectorComponent<'a>>);
 
 impl<'a> CompoundSelectorTrait<'a> for CompoundSelector<'a> {
@@ -84,11 +85,13 @@ pub type RelativeSelector<'a> = SelectorList<'a>;
 #[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Id(T![Hash]);
 
 #[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Wildcard(T![*]);
 
 // This encapsulates all `simple-selector` subtypes (e.g. `wq-name`,
@@ -97,6 +100,7 @@ pub struct Wildcard(T![*]);
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SelectorComponent<'a> {
 	Id(Id),
 	Class(Class),

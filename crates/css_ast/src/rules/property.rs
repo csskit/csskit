@@ -7,29 +7,17 @@ use crate::visit::{NodeId, QueryableNode};
 // https://drafts.csswg.org/css-page-3/#at-page-rule
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip), queryable(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.property"))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Property, property_kinds = Name)]
 pub struct PropertyRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Property)]
 	pub name: T![AtKeyword],
 	pub prelude: PropertyPrelude,
+	#[metadata(delegate)]
 	pub block: PropertyRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for PropertyRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		CssMetadata {
-			used_at_rules: AtRuleId::Property,
-			node_kinds: NodeKinds::AtRule,
-			property_kinds: PropertyKind::Name,
-			..Default::default()
-		}
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
-	}
 }
 
 #[cfg(feature = "visitable")]
@@ -47,6 +35,7 @@ impl<'a> QueryableNode for PropertyRule<'a> {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PropertyPrelude(T![DashedIdent]);
 
 impl PropertyPrelude {
@@ -59,11 +48,12 @@ impl PropertyPrelude {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PropertyRuleBlock<'a>(DeclarationList<'a, PropertyRuleStyleValue<'a>, CssMetadata>);
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct PropertyRuleBlock<'a>(#[metadata(delegate)] DeclarationList<'a, PropertyRuleStyleValue<'a>, CssMetadata>);
 
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, metadata(skip))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum PropertyRuleStyleValue<'a> {
 	InitialValue(ComponentValues<'a>),
 	Syntax(SyntaxValue),
@@ -74,6 +64,7 @@ pub enum PropertyRuleStyleValue<'a> {
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum InheritsValue {
 	#[atom(CssAtomSet::True)]
 	True(T![Ident]),
@@ -84,6 +75,7 @@ pub enum InheritsValue {
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SyntaxValue(T![String]);
 
 impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleStyleValue<'a> {
