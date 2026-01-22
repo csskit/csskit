@@ -1,7 +1,66 @@
+## [0.0.14] - 2026-01-22
+
+### Other Changes
+- Coverage: Add `:unknown` coverage testing to all popular CSS libraries (#796) ([#796](https://github.com/csskit/csskit/pull/796))
+
+
+### Chromashift
+- chromashift: Fix lossy alpha conversions (#784) ([#784](https://github.com/csskit/csskit/pull/784))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#789) ([#789](https://github.com/csskit/csskit/pull/789))
+- css_ast: Fixup MediaQueryList & ContainerConditionList to use CommaSeparated (#795) ([#795](https://github.com/csskit/csskit/pull/795))
+- css_ast: Add support for parsing `@import` rules (#797) ([#797](https://github.com/csskit/csskit/pull/797))
+- css_ast: enables `<display>` (#799) ([#799](https://github.com/csskit/csskit/pull/799))
+- css_ast/csskit_proc_macro: Provide system for easily renaming auto-generated types (#800) ([#800](https://github.com/csskit/csskit/pull/800))
+- Regenerate css_ast/src/values from csswg drafts (#801) ([#801](https://github.com/csskit/csskit/pull/801))
+- Regenerate css_ast/src/values from csswg drafts (#808) ([#808](https://github.com/csskit/csskit/pull/808))
+- csskit_transform: Reduce more color types (#818) ([#818](https://github.com/csskit/csskit/pull/818))
+- csskit_transform: Add ReduceTimeUnits transform (#819) ([#819](https://github.com/csskit/csskit/pull/819))
+- css_ast/css_transform: Only reduce lengths to unitless zero when applicable (#821) ([#821](https://github.com/csskit/csskit/pull/821))
+- csskit_spec_generator/css_ast: Generate many more values (#823) ([#823](https://github.com/csskit/csskit/pull/823))
+
+
+### Css_lexer
+- css_lexer/css_parse: Add SourceCursor compacting, ensure CursorCompactWriteSink compacts cursors before write (#782) ([#782](https://github.com/csskit/csskit/pull/782))
+
+
+### Css_parse
+- csskit/csskit_transform/css_parse: Improve transform architecture. Minify lengths (#815) ([#815](https://github.com/csskit/csskit/pull/815))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#790) ([#790](https://github.com/csskit/csskit/pull/790))
+
+
+### Csskit_ast
+- csskit_ast: Add benchmarks for linting with example cks files (#788) ([#788](https://github.com/csskit/csskit/pull/788))
+
+
+### Csskit_transform
+- csskit_transform: Add Reduce colors (#816) ([#816](https://github.com/csskit/csskit/pull/816))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.36.0 (#791) ([#791](https://github.com/csskit/csskit/pull/791))
+- chore(deps): update dependency @types/vscode to v1.108.1 (#803) ([#803](https://github.com/csskit/csskit/pull/803))
+- chore(deps): update dependency oxlint to v1.38.0 (#805) ([#805](https://github.com/csskit/csskit/pull/805))
+- chore(deps): update dependencies (patch) (#802) ([#802](https://github.com/csskit/csskit/pull/802))
+- fix(deps): update dependencies (patch) (#809) ([#809](https://github.com/csskit/csskit/pull/809))
+- chore(deps): update dependency oxlint to v1.39.0 (#811) ([#811](https://github.com/csskit/csskit/pull/811))
+- chore(deps): update dependency prettier to v3.8.0 (#813) ([#813](https://github.com/csskit/csskit/pull/813))
+
+
+### Csskit_wasm
+- website: fix pages deploy (#807) ([#807](https://github.com/csskit/csskit/pull/807))
+- csskit_wasm: Use minifier transform architecture (#817) ([#817](https://github.com/csskit/csskit/pull/817))
+
 ## [0.0.13] - 2026-01-03
 
 ### Csskit
 - csskit_ast: Fix up feature flag issues (#780) ([#780](https://github.com/csskit/csskit/pull/780))
+- Release v0.0.13 (#781) ([#781](https://github.com/csskit/csskit/pull/781))
 
 ## [0.0.12] - 2026-01-02
 
