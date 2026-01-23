@@ -6,10 +6,6 @@ expression: pretty
 enum Foo {
     #[atom(CssAtomSet::Keyword)]
     Keyword(::css_parse::T![Ident]),
-    Literal1(#[in_range(1f32..= 1f32)] crate::CSSInt),
-    Literal1deg(
-        #[in_range(1f32..= 1f32)]
-        #[atom(CssAtomSet::Deg)]
-        ::css_parse::T![Dimension],
-    ),
+    Literal1(crate::Exact<crate::CSSInt, 1i32>),
+    Literal1deg(#[atom(CssAtomSet::Deg)] crate::Exact<::css_parse::T![Dimension], 1i32>),
 }

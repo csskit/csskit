@@ -1298,11 +1298,11 @@ StyleSheet(
                 offset: SourceOffset(990),
                 len: 1,
               )),
-              value: PaddingLeftStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingLeftStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(992),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4525,11 +4525,11 @@ StyleSheet(
                 offset: SourceOffset(3622),
                 len: 1,
               )),
-              value: LeftStyleValue(Some(Length(Zero(Number(Cursor(
+              value: LeftStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(3624),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -115823,11 +115823,11 @@ StyleSheet(
                 offset: SourceOffset(71743),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71745),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -116018,11 +116018,11 @@ StyleSheet(
                 offset: SourceOffset(71879),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(71881),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -2104,11 +2103,11 @@ StyleSheet(
                 offset: SourceOffset(1715),
                 len: 1,
               )),
-              value: MarginBottomStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginBottomStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1717),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2520,11 +2519,11 @@ StyleSheet(
                 offset: SourceOffset(2040),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(2042),
                 len: 1,
-              ))))), Some(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
+              )))), Some(PaddingTopStyleValue(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(2044),
                 len: 5,
@@ -2640,11 +2639,11 @@ StyleSheet(
                 offset: SourceOffset(2130),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(2132),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

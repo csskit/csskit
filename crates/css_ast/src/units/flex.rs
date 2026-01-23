@@ -8,6 +8,12 @@ use super::prelude::*;
 #[metadata(node_kinds = Dimension)]
 pub struct Flex(#[atom(CssAtomSet::Fr)] T![Dimension]);
 
+impl From<Flex> for f32 {
+	fn from(value: Flex) -> Self {
+		value.0.into()
+	}
+}
+
 impl ToNumberValue for Flex {
 	fn to_number_value(&self) -> Option<f32> {
 		Some(self.0.into())

@@ -1,4 +1,5 @@
 use super::prelude::*;
+use crate::NonNegative;
 
 // https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count
 // <single-animation-iteration-count> = infinite | <number [0,∞]>
@@ -9,7 +10,7 @@ use super::prelude::*;
 pub enum SingleAnimationIterationCount {
 	#[atom(CssAtomSet::Infinite)]
 	Infinite(T![Ident]),
-	Number(#[in_range(0.0f32..)] T![Number]),
+	Number(NonNegative<T![Number]>),
 }
 
 #[cfg(test)]

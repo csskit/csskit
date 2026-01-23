@@ -6,5 +6,5 @@ expression: pretty
 enum Foo {
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
-    LengthPercentage(#[in_range(0f32..)] crate::LengthPercentage),
+    LengthPercentage(crate::NonNegative<crate::LengthPercentage>),
 }

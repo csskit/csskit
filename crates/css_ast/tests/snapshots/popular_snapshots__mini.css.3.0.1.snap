@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -982,11 +981,11 @@ StyleSheet(
                 offset: SourceOffset(1002),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1004),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4055,11 +4054,11 @@ StyleSheet(
                 offset: SourceOffset(2925),
                 len: 1,
               )),
-              value: LeftStyleValue(Some(Length(Zero(Number(Cursor(
+              value: LeftStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(2927),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -5691,11 +5690,11 @@ StyleSheet(
                 offset: SourceOffset(4049),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(4051),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -6461,11 +6460,11 @@ StyleSheet(
                 offset: SourceOffset(4572),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(4574),
                 len: 1,
-              )))))), Some(MarginTopStyleValue(Auto(Ident(Cursor(
+              ))))), Some(MarginTopStyleValue(Auto(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(4576),
                 len: 4,
@@ -7209,11 +7208,11 @@ StyleSheet(
                 offset: SourceOffset(4987),
                 len: 1,
               )),
-              value: Width(LengthPercentage(Length(Zero(Number(Cursor(
+              value: Width(LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(4989),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -7388,11 +7387,11 @@ StyleSheet(
                 offset: SourceOffset(5109),
                 len: 1,
               )),
-              value: MarginLeftStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginLeftStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(5111),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -10068,11 +10067,11 @@ StyleSheet(
                       offset: SourceOffset(6937),
                       len: 1,
                     )),
-                    value: Width(LengthPercentage(Length(Zero(Number(Cursor(
+                    value: Width(LengthPercentage(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(6939),
                       len: 1,
-                    )))))),
+                    ))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -10247,11 +10246,11 @@ StyleSheet(
                       offset: SourceOffset(7073),
                       len: 1,
                     )),
-                    value: MarginLeftStyleValue(Some(Length(Zero(Number(Cursor(
+                    value: MarginLeftStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(7075),
                       len: 1,
-                    )))))),
+                    ))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -12935,11 +12934,11 @@ StyleSheet(
                       offset: SourceOffset(9075),
                       len: 1,
                     )),
-                    value: Width(LengthPercentage(Length(Zero(Number(Cursor(
+                    value: Width(LengthPercentage(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(9077),
                       len: 1,
-                    )))))),
+                    ))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -13114,11 +13113,11 @@ StyleSheet(
                       offset: SourceOffset(9211),
                       len: 1,
                     )),
-                    value: MarginLeftStyleValue(Some(Length(Zero(Number(Cursor(
+                    value: MarginLeftStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(9213),
                       len: 1,
-                    )))))),
+                    ))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -16168,11 +16167,11 @@ StyleSheet(
                 offset: SourceOffset(11610),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(11612),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -16476,11 +16475,11 @@ StyleSheet(
                 offset: SourceOffset(11813),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(11815),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -22983,11 +22982,11 @@ StyleSheet(
                 offset: SourceOffset(16300),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(16302),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -24621,11 +24620,11 @@ StyleSheet(
                 offset: SourceOffset(17320),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(17322),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -27527,11 +27526,11 @@ StyleSheet(
                 offset: SourceOffset(19180),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(19182),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -34882,11 +34881,11 @@ StyleSheet(
                 offset: SourceOffset(24101),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(24103),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -37857,11 +37856,11 @@ StyleSheet(
                 offset: SourceOffset(26045),
                 len: 1,
               )),
-              value: TopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: TopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(26047),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -38007,11 +38006,11 @@ StyleSheet(
                 offset: SourceOffset(26142),
                 len: 1,
               )),
-              value: BottomStyleValue(Some(Length(Zero(Number(Cursor(
+              value: BottomStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(26144),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -38879,11 +38878,11 @@ StyleSheet(
                 offset: SourceOffset(26727),
                 len: 1,
               )),
-              value: TopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: TopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(26729),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -39119,11 +39118,11 @@ StyleSheet(
                 offset: SourceOffset(26907),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(26909),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -39616,11 +39615,11 @@ StyleSheet(
                 offset: SourceOffset(27250),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(27252),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -40488,11 +40487,11 @@ StyleSheet(
                 offset: SourceOffset(27837),
                 len: 1,
               )),
-              value: RightStyleValue(Some(Length(Zero(Number(Cursor(
+              value: RightStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(27839),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -41231,11 +41230,11 @@ StyleSheet(
                 offset: SourceOffset(28510),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(28512),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -41407,11 +41406,11 @@ StyleSheet(
                 offset: SourceOffset(28623),
                 len: 1,
               )),
-              value: PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(28625),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -42376,11 +42375,11 @@ StyleSheet(
                 offset: SourceOffset(29269),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(29271),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -43687,11 +43686,11 @@ StyleSheet(
                 offset: SourceOffset(30036),
                 len: 1,
               )),
-              value: TopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: TopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(30038),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -44253,11 +44252,11 @@ StyleSheet(
                 offset: SourceOffset(30360),
                 len: 1,
               )),
-              value: MarginLeftStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginLeftStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(30362),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -45134,11 +45133,11 @@ StyleSheet(
                 offset: SourceOffset(30951),
                 len: 1,
               )),
-              value: PaddingLeftStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingLeftStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(30953),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46358,11 +46357,11 @@ StyleSheet(
                       offset: SourceOffset(31890),
                       len: 1,
                     )),
-                    value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+                    value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(31892),
                       len: 1,
-                    ))))), None, None, None),
+                    )))), None, None, None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -53137,11 +53136,11 @@ StyleSheet(
                 offset: SourceOffset(36455),
                 len: 1,
               )),
-              value: TopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: TopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(36457),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -53160,11 +53159,11 @@ StyleSheet(
                 offset: SourceOffset(36466),
                 len: 1,
               )),
-              value: LeftStyleValue(Some(Length(Zero(Number(Cursor(
+              value: LeftStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(36468),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -53391,11 +53390,11 @@ StyleSheet(
                 offset: SourceOffset(36612),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(36614),
                 len: 1,
-              )))))), Some(MarginTopStyleValue(Auto(Ident(Cursor(
+              ))))), Some(MarginTopStyleValue(Auto(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(36616),
                 len: 4,
@@ -53595,11 +53594,11 @@ StyleSheet(
                 offset: SourceOffset(36741),
                 len: 1,
               )),
-              value: TopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: TopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(36743),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -53618,11 +53617,11 @@ StyleSheet(
                 offset: SourceOffset(36753),
                 len: 1,
               )),
-              value: RightStyleValue(Some(Length(Zero(Number(Cursor(
+              value: RightStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(36755),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -53783,11 +53782,11 @@ StyleSheet(
                 offset: SourceOffset(36889),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(36891),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -57100,11 +57099,11 @@ StyleSheet(
                 offset: SourceOffset(39286),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(39288),
                 len: 1,
-              )))))), None, None, None),
+              ))))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -64109,11 +64108,11 @@ StyleSheet(
                 offset: SourceOffset(52668),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(52670),
                 len: 1,
-              ))))), None, None, None),
+              )))), None, None, None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -66423,11 +66422,11 @@ StyleSheet(
                       offset: SourceOffset(54280),
                       len: 1,
                     )),
-                    value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+                    value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(54282),
                       len: 1,
-                    ))))), None, None, None),
+                    )))), None, None, None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -67004,11 +67003,11 @@ StyleSheet(
                       offset: SourceOffset(54701),
                       len: 1,
                     )),
-                    value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+                    value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(54703),
                       len: 1,
-                    ))))), None, None, None),
+                    )))), None, None, None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -67558,11 +67557,11 @@ StyleSheet(
                       offset: SourceOffset(55099),
                       len: 1,
                     )),
-                    value: PaddingStyleValue(PaddingTopStyleValue(Length(Zero(Number(Cursor(
+                    value: PaddingStyleValue(PaddingTopStyleValue(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(55101),
                       len: 1,
-                    ))))), None, None, None),
+                    )))), None, None, None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",

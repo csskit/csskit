@@ -28190,11 +28190,11 @@ StyleSheet(
                         offset: SourceOffset(18984),
                         len: 11,
                       )),
-                      params: Length(Zero(Number(Cursor(
+                      params: Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18995),
                         len: 1,
-                      )))),
+                      ))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18996),
@@ -28510,11 +28510,11 @@ StyleSheet(
                         offset: SourceOffset(19152),
                         len: 11,
                       )),
-                      params: Length(Zero(Number(Cursor(
+                      params: Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19163),
                         len: 1,
-                      )))),
+                      ))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19164),
@@ -29355,11 +29355,11 @@ StyleSheet(
                         offset: SourceOffset(19579),
                         len: 11,
                       )),
-                      params: Length(Zero(Number(Cursor(
+                      params: Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19590),
                         len: 1,
-                      )))),
+                      ))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19591),

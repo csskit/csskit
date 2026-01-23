@@ -179,7 +179,7 @@ pub use try_size::*;
 pub use visual_box::*;
 
 mod prelude {
-	pub(crate) use crate::{CssAtomSet, CssDiagnostic};
+	pub(crate) use crate::CssAtomSet;
 	pub(crate) use bumpalo::collections::Vec;
 	pub(crate) use css_parse::{
 		Cursor, Diagnostic, Kind, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue,

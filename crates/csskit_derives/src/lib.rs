@@ -27,13 +27,13 @@ pub fn derive_to_cursors(stream: TokenStream) -> TokenStream {
 	to_cursors::derive(input).into()
 }
 
-#[proc_macro_derive(Parse, attributes(parse, in_range, atom))]
+#[proc_macro_derive(Parse, attributes(parse, atom))]
 pub fn derive_parse(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	parse::derive(input).into()
 }
 
-#[proc_macro_derive(Peek, attributes(peek, in_range, atom))]
+#[proc_macro_derive(Peek, attributes(peek, atom))]
 pub fn derive_peek(stream: TokenStream) -> TokenStream {
 	let input = syn::parse(stream).unwrap();
 	peek::derive(input).into()

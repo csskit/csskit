@@ -257,99 +257,6 @@ fn parse_with_multiple_state_stop_combinations() {
 }
 
 #[test]
-fn parse_struct_with_inclusive_range() {
-	let data = to_deriveinput! {
-		struct Volume {
-			#[in_range(0.0f32..=100.0f32)]
-			level: Number,
-		}
-	};
-	assert_parse_snapshot!(data, "parse_struct_with_range");
-}
-
-#[test]
-fn parse_struct_with_range_from() {
-	let data = to_deriveinput! {
-		struct PositiveValue {
-			#[in_range(1.0f32..)]
-			value: CSSInt,
-		}
-	};
-	assert_parse_snapshot!(data, "parse_struct_with_range_from");
-}
-
-#[test]
-fn parse_struct_with_range_to_exclusive() {
-	let data = to_deriveinput! {
-		struct Probability {
-			#[in_range(..1.0f32)]
-			value: Number,
-		}
-	};
-	assert_parse_snapshot!(data, "parse_struct_with_range_to");
-}
-
-#[test]
-fn parse_struct_with_multiple_range_fields() {
-	let data = to_deriveinput! {
-		struct Color {
-			#[in_range(0..=255)]
-			red: CSSInt,
-			#[in_range(0..=255)]
-			green: CSSInt,
-			#[in_range(0..=255)]
-			blue: CSSInt,
-			#[in_range(0..=1)]
-			alpha: Number,
-		}
-	};
-	assert_parse_snapshot!(data, "parse_struct_with_multiple_range_fields");
-}
-
-#[test]
-fn parse_tuple_struct_with_range() {
-	let data = to_deriveinput! {
-		struct Scale(#[in_range(0.1..=10.0)] Number);
-	};
-	assert_parse_snapshot!(data, "parse_tuple_struct_with_range");
-}
-
-#[test]
-fn parse_enum_with_range_validation() {
-	let data = to_deriveinput! {
-		enum Value {
-			Percentage(#[in_range(0..=100)] Number),
-			Scale(#[in_range(0.1..)] Number),
-		}
-	};
-	assert_parse_snapshot!(data, "parse_enum_with_range_validation");
-}
-
-#[test]
-fn parse_enum_struct_variants_with_ranges() {
-	let data = to_deriveinput! {
-		enum Transform {
-			Scale {
-				#[in_range(0..)]
-				x: Number,
-				#[in_range(0..)]
-				y: Number,
-			},
-			Rotate {
-				#[in_range(-360..=360)]
-				angle: Number,
-			},
-			Translate {
-				x: Length,
-				#[in_range(-100..=100)]
-				y: Percentage,
-			},
-		}
-	};
-	assert_parse_snapshot!(data, "parse_enum_struct_variants_with_ranges");
-}
-
-#[test]
 fn parse_struct_with_all_must_occur() {
 	let data = to_deriveinput! {
 		#[parse(all_must_occur)]
@@ -359,19 +266,6 @@ fn parse_struct_with_all_must_occur() {
 		}
 	};
 	assert_parse_snapshot!(data, "parse_struct_with_all_must_occur");
-}
-
-#[test]
-fn parse_struct_with_all_must_occur_and_range() {
-	let data = to_deriveinput! {
-		#[parse(all_must_occur)]
-		struct AutoAndLengthWithRange {
-			auto: AutoKeyword,
-			#[in_range(0..=100)]
-			length: Length,
-		}
-	};
-	assert_parse_snapshot!(data, "parse_struct_with_all_must_occur_and_range");
 }
 
 #[test]
@@ -399,53 +293,6 @@ fn parse_enum_variant_with_all_must_occur() {
 		}
 	};
 	assert_parse_snapshot!(data, "parse_enum_variant_with_all_must_occur");
-}
-
-#[test]
-fn parse_enum_variant_with_all_must_occur_and_range() {
-	let data = to_deriveinput! {
-		enum Value {
-			#[parse(all_must_occur)]
-			WithRange {
-				auto: AutoKeyword,
-				#[in_range(0..=100)]
-				percentage: Number,
-			},
-			Simple(String),
-		}
-	};
-	assert_parse_snapshot!(data, "parse_enum_variant_with_all_must_occur_and_range");
-}
-
-#[test]
-fn parse_enum_mixed_variants() {
-	let data = to_deriveinput! {
-		enum FlexValue {
-			Auto(AutoKeyword),
-			#[parse(all_must_occur)]
-			MinMax {
-				min: Length,
-				#[in_range(0..)]
-				max: Length,
-			},
-			Length(Length),
-		}
-	};
-	assert_parse_snapshot!(data, "parse_enum_mixed_variants");
-}
-
-#[test]
-fn parse_struct_with_keyword_pattern_and_range() {
-	let data = to_deriveinput! {
-		#[parse(all_must_occur)]
-		struct KeywordWithRange {
-			#[atom(FooKeywords::Auto)]
-			auto_value: AutoValue,
-			#[in_range(0..=100)]
-			percentage: Number,
-		}
-	};
-	assert_parse_snapshot!(data, "parse_struct_with_keyword_pattern_and_range");
 }
 
 #[test]

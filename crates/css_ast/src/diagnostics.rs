@@ -8,10 +8,11 @@ pub trait CssDiagnostic {
 	fn unexpected_function(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn expected_unsigned(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn number_out_of_bounds(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
-	fn number_too_small(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn expected_int(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_zero(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn reserved_keyframe_name(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
+	fn non_negative(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
+	fn positive(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 }
 
 impl CssDiagnostic for Diagnostic {
@@ -90,15 +91,6 @@ impl CssDiagnostic for Diagnostic {
 		}
 	}
 
-	fn number_too_small(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
-		DiagnosticMeta {
-			code: "NumberTooSmall",
-			message: "This number is too small.".into(),
-			help: "This needs to be a larger value.".into(),
-			labels: vec![],
-		}
-	}
-
 	fn expected_int(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
 			code: "ExpectedInt",
@@ -126,6 +118,24 @@ impl CssDiagnostic for Diagnostic {
 			code: "ReservedKeyframeName",
 			message: format!("{text} cannot be used as a keyframe name, as it's a reserved word."),
 			help: "Rename it, or try wrapping it in quotes".into(),
+			labels: vec![],
+		}
+	}
+
+	fn non_negative(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "NonNegative",
+			message: format!("Value must be non-negative, but saw `{}`", diagnostic.start_cursor.token().value()),
+			help: "This property requires a value >= 0. Use a non-negative value.".into(),
+			labels: vec![],
+		}
+	}
+
+	fn positive(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "Positive",
+			message: format!("Value must be positive, but saw `{}`", diagnostic.start_cursor.token().value()),
+			help: "This property requires a value > 0. Use a positive value.".into(),
 			labels: vec![],
 		}
 	}

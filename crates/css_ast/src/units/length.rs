@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{Flex, Percentage};
+use crate::{Exact, Flex, Percentage};
 
 macro_rules! apply_lengths {
 	($ident: ident) => {
@@ -72,7 +72,7 @@ macro_rules! define_length {
 		#[derive(csskit_derives::NodeWithMetadata)]
 		#[metadata(node_kinds = Dimension)]
 		pub enum Length {
-			Zero(#[in_range(0.0..0.0)] T![Number]),
+			Zero(Exact<T![Number], 0>),
 			$(
 				#[atom(CssAtomSet::$name)]
 				$name(T![Dimension]),
@@ -137,7 +137,7 @@ impl ToNumberValue for Length {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum LengthPercentage {
 	#[cfg_attr(feature = "visitable", visit(skip))]
-	Zero(#[in_range(0.0..0.0)] T![Number]),
+	Zero(Exact<T![Number], 0>),
 	Length(Length),
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Percent(Percentage),
@@ -166,6 +166,21 @@ impl ToNumberValue for LengthPercentage {
 pub enum LengthPercentageOrFlex {
 	Flex(Flex),
 	LengthPercentage(LengthPercentage),
+}
+
+impl From<LengthPercentageOrFlex> for f32 {
+	fn from(val: LengthPercentageOrFlex) -> Self {
+		match val {
+			LengthPercentageOrFlex::Flex(f) => f.into(),
+			LengthPercentageOrFlex::LengthPercentage(l) => l.into(),
+		}
+	}
+}
+
+impl ToNumberValue for LengthPercentageOrFlex {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
+	}
 }
 
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

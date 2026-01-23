@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CustomIdent, PositiveNonZeroInt};
+use crate::{CSSInt, CustomIdent, NonZero, PositiveNonZeroInt};
 use css_parse::parse_optionals;
 
 // https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line
@@ -12,7 +12,7 @@ pub enum GridLine {
 	Auto(T![Ident]),
 	Span(T![Ident], Option<PositiveNonZeroInt>, Option<T![Ident]>),
 	Area(CustomIdent),
-	Placement(T![Number], Option<T![Ident]>),
+	Placement(NonZero<CSSInt>, Option<T![Ident]>),
 }
 
 impl<'a> Parse<'a> for GridLine {
@@ -32,17 +32,7 @@ impl<'a> Parse<'a> for GridLine {
 				_ => Ok(Self::Area(p.parse::<CustomIdent>()?)),
 			};
 		}
-		let num = p.parse::<T![Number]>()?;
-		{
-			let c: Cursor = num.into();
-			if !num.is_int() {
-				Err(Diagnostic::new(c, Diagnostic::expected_int))?
-			}
-			if num.value() == 0.0 {
-				Err(Diagnostic::new(c, Diagnostic::unexpected_zero))?
-			}
-		}
-
+		let num = p.parse::<NonZero<CSSInt>>()?;
 		Ok(Self::Placement(num, p.parse_if_peek::<T![Ident]>()?))
 	}
 }

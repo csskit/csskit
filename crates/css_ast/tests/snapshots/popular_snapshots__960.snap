@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -1631,11 +1630,11 @@ StyleSheet(
                 offset: SourceOffset(1620),
                 len: 1,
               )),
-              value: MarginLeftStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginLeftStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1622),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1689,11 +1688,11 @@ StyleSheet(
                 offset: SourceOffset(1651),
                 len: 1,
               )),
-              value: MarginRightStyleValue(Some(Length(Zero(Number(Cursor(
+              value: MarginRightStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1653),
                 len: 1,
-              )))))),
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -10659,11 +10658,11 @@ StyleSheet(
                 offset: SourceOffset(9362),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(9364),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -10682,11 +10681,11 @@ StyleSheet(
                 offset: SourceOffset(9375),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(9377),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -10985,11 +10984,11 @@ StyleSheet(
                 offset: SourceOffset(9683),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(9685),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -11008,11 +11007,11 @@ StyleSheet(
                 offset: SourceOffset(9701),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(9703),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -11031,11 +11030,11 @@ StyleSheet(
                 offset: SourceOffset(9713),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(9715),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -11054,11 +11053,11 @@ StyleSheet(
                 offset: SourceOffset(9726),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Zero(Number(Cursor(
+              value: LengthPercentage(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(9728),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

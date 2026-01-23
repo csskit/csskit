@@ -7,7 +7,7 @@ use super::prelude::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Dimension)]
 pub enum Time {
-	Zero(#[in_range(0.0..0.0)] T![Number]),
+	Zero(Exact<T![Number], 0>),
 	#[atom(CssAtomSet::Ms)]
 	Ms(T![Dimension]),
 	#[atom(CssAtomSet::S)]

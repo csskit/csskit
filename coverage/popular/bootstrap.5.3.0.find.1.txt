@@ -237,7 +237,6 @@ coverage/popular/bootstrap.5.3.0.css
 2827:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-success-rgb), 0.25);
 2832:3:  background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
 2841:3:  background-position: right 0.75rem center, center right 2.25rem;
-2842:3:  background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 2846:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-success-rgb), 0.25);
 2860:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-success-rgb), 0.25);
 2875:3:  z-index: 3;
@@ -246,7 +245,6 @@ coverage/popular/bootstrap.5.3.0.css
 2917:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
 2922:3:  background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
 2931:3:  background-position: right 0.75rem center, center right 2.25rem;
-2932:3:  background-size: 16px 12px, calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 2936:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
 2950:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
 2965:3:  z-index: 4;

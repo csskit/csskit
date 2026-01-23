@@ -4,7 +4,7 @@ expression: pretty
 ---
 #[derive(Parse)]
 enum Foo {
-    Length(#[in_range(1f32..)] crate::Length),
+    Length(crate::Positive<crate::Length>),
     #[atom(CssAtomSet::LineThrough)]
     LineThrough(::css_parse::T![Ident]),
 }

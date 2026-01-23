@@ -25,7 +25,6 @@ pub trait DefExt {
 
 /// Trait for extending DefType with code generation methods.
 pub trait DefTypeExt {
-	fn generate_in_range_attr(&self) -> TokenStream;
 	fn get_generics(&self) -> Generics;
 }
 
@@ -193,8 +192,14 @@ impl ToType for Def {
 				let ty = def.deref().to_type();
 				vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
 			}
-			Self::IntLiteral(_) => vec![quote! { crate::CSSInt }],
-			Self::DimensionLiteral(_, _) => vec![quote! { ::css_parse::T![Dimension] }],
+			Self::IntLiteral(value) => {
+				let val = *value;
+				vec![quote! { crate::Exact<crate::CSSInt, #val> }]
+			}
+			Self::DimensionLiteral(value, _) => {
+				let val = *value as i32;
+				vec![quote! { crate::Exact<::css_parse::T![Dimension], #val> }]
+			}
 			Self::Punct(char) => {
 				let punct = Punct::new(*char, Spacing::Alone);
 				vec![quote! { ::css_parse::T![#punct] }]
@@ -209,7 +214,39 @@ impl ToType for DefType {
 		let ty = &self.ident;
 		let type_name = quote! { crate::#ty };
 		let generics = self.get_generics();
-		vec![quote! { #type_name #generics }]
+		let base_type = quote! { #type_name #generics };
+
+		let wrapped_type = match self.range {
+			DefRange::None | DefRange::Fixed(_) => base_type,
+			DefRange::Range(Range { start, end }) => {
+				if start == end {
+					let value = start as i32;
+					quote! { crate::Exact<#base_type, #value> }
+				} else {
+					let min = start as i32;
+					let max = end as i32;
+					quote! { crate::Ranged<#base_type, #min, #max> }
+				}
+			}
+			DefRange::RangeFrom(start) => {
+				if start == 0.0 {
+					quote! { crate::NonNegative<#base_type> }
+				} else if start > 0.0 && start <= 1.0 {
+					quote! { crate::Positive<#base_type> }
+				} else {
+					let min = start as i32;
+					let max = i32::MAX;
+					quote! { crate::Ranged<#base_type, #min, #max> }
+				}
+			}
+			DefRange::RangeTo(end) => {
+				let min = i32::MIN;
+				let max = end as i32;
+				quote! { crate::Ranged<#base_type, #min, #max> }
+			}
+		};
+
+		vec![wrapped_type]
 	}
 }
 
@@ -252,21 +289,6 @@ impl DefExt for Def {
 		} else {
 			quote! {}
 		};
-		let in_range = match self {
-			Def::IntLiteral(i) if derives_parse => {
-				let f = *i as f32;
-				quote! { #[in_range(#f..=#f)] }
-			}
-			Def::DimensionLiteral(f, _) if derives_parse => {
-				quote! { #[in_range(#f..=#f)] }
-			}
-			Def::Optional(def) | Def::AutoNoneOr(def) | Def::AutoOr(def) | Def::NoneOr(def) => match def.deref() {
-				Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
-				_ => quote! {},
-			},
-			Def::Type(deftype) if derives_parse => deftype.generate_in_range_attr(),
-			_ => quote! {},
-		};
 		let atom = match self {
 			Def::Type(ty) => match ty.ident_str() {
 				"Decibel" => quote! { #[atom(CssAtomSet::Db)] },
@@ -282,7 +304,7 @@ impl DefExt for Def {
 			}
 			_ => quote! {},
 		};
-		quote! { #skip #in_range #atom }
+		quote! { #skip #atom }
 	}
 
 	fn is_all_keywords(&self) -> bool {
@@ -588,15 +610,6 @@ impl GenerateDefinition for Def {
 }
 
 impl DefTypeExt for DefType {
-	fn generate_in_range_attr(&self) -> TokenStream {
-		match self.range {
-			DefRange::None | DefRange::Fixed(_) => quote! {},
-			DefRange::Range(Range { start, end }) => quote! { #[in_range(#start..=#end)] },
-			DefRange::RangeFrom(start) => quote! { #[in_range(#start..)] },
-			DefRange::RangeTo(end) => quote! { #[in_range(..=#end)] },
-		}
-	}
-
 	fn get_generics(&self) -> Generics {
 		if self.maybe_unsized() { parse_quote!(<'a>) } else { Default::default() }
 	}

@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{Color, Length};
+use crate::{Color, Length, NonNegative};
 
 // https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
 // <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
@@ -10,7 +10,7 @@ use crate::{Color, Length};
 pub struct Shadow {
 	pub color: Option<Color>,
 	pub offset: (Length, Length),
-	pub blur_radius: Option<Length>,
+	pub blur_radius: Option<NonNegative<Length>>,
 	pub spread_radius: Option<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub inset: Option<T![Ident]>,
@@ -35,12 +35,7 @@ impl<'a> Parse<'a> for Shadow {
 		let x = p.parse::<Length>()?;
 		let y = p.parse::<Length>()?;
 
-		let blur_radius = p.parse_if_peek::<Length>()?;
-		if let Some(blur) = blur_radius
-			&& 0.0f32 > blur.into()
-		{
-			Err(Diagnostic::new(blur.into(), Diagnostic::number_too_small))?
-		}
+		let blur_radius = p.parse_if_peek::<NonNegative<Length>>()?;
 
 		let spread_radius = p.parse_if_peek::<Length>()?;
 

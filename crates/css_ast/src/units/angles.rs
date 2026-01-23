@@ -57,7 +57,7 @@ impl Angle {
 pub enum AngleOrZero {
 	Angle(Angle),
 	#[cfg_attr(feature = "visitable", visit(skip))]
-	Zero(#[in_range(0.0..=0.0)] T![Number]),
+	Zero(Exact<T![Number], 0>),
 }
 
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -74,7 +74,7 @@ impl From<AngleOrZero> for f32 {
 	fn from(val: AngleOrZero) -> Self {
 		match val {
 			AngleOrZero::Angle(f) => f.into(),
-			AngleOrZero::Zero(f) => f.into(),
+			AngleOrZero::Zero(f) => f.0.into(),
 		}
 	}
 }

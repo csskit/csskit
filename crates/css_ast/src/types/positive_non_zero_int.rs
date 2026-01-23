@@ -1,9 +1,9 @@
 use super::prelude::*;
-use crate::CSSInt;
+use crate::{CSSInt, Positive};
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PositiveNonZeroInt(#[in_range(1.0..)] pub CSSInt);
+pub struct PositiveNonZeroInt(pub Positive<CSSInt>);
 
 #[cfg(test)]
 mod tests {

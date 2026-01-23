@@ -9,7 +9,6 @@ enum Foo {
     Foo(
         #[atom(CssAtomSet::Foo)]
         ::css_parse::T![Ident],
-        #[in_range(-90f32..= 90f32)]
-        Option<crate::Angle>,
+        Option<crate::Ranged<crate::Angle, -90i32, 90i32>>,
     ),
 }

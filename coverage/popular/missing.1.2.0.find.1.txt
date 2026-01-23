@@ -31,7 +31,6 @@ coverage/popular/missing.1.2.0.css
 627:3:  text-decoration: 1px dotted underline;
 630:5:    text-decoration: none;
 634:5:    text-decoration: 2px solid underline;
-659:5:    transform: translateX(calc(0px - var(--sidenote-width) + min(var(--gutter-width), var(--sidenote-width))));
 682:3:  font-variant-numeric: tabular-nums;
 704:3:  vertical-align: bottom;
 708:3:  vertical-align: top;
@@ -104,15 +103,12 @@ coverage/popular/missing.1.2.0.css
 1556:5:    grid-column: 1;
 1557:5:    grid-row: 1;
 1559:5:    border-radius: 99999rem;
-1568:7:      transform: translateX(calc(100% + 2 * var(--toggle-nub-margin)));
-1577:7:      transform: translateX(calc(50% + var(--toggle-nub-margin)));
 1751:5:    color-scheme: dark;
 1754:5:    color-scheme: light;
 1757:5:    color-scheme: light dark;
 1:1:/* src/core/sanitize.css */
 1779:16:    @supports (break-after: avoid-column) {
 1803:3:  place-items: center;
-1820:3:  transform: translateX(calc(-.5 * var(--full-width)));
 1821:3:  border-radius: 0;
 1830:3:  border-radius: 0;
 2024:5:    vertical-align: top;

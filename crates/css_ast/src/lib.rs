@@ -1,5 +1,6 @@
 #![deny(warnings)]
 
+mod constraints;
 mod css_atom_set;
 mod diagnostics;
 mod functions;
@@ -20,6 +21,7 @@ mod values;
 #[cfg(feature = "visitable")]
 pub mod visit;
 
+pub use constraints::*;
 pub use css_atom_set::*;
 pub use css_parse::{Declaration, DeclarationValue, Diagnostic};
 pub use functions::*;

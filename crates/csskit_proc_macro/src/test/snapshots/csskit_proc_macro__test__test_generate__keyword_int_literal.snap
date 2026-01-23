@@ -4,5 +4,5 @@ expression: pretty
 ---
 enum Foo {
     Keyword(::css_parse::T![Ident]),
-    Literal2(crate::CSSInt),
+    Literal2(crate::Exact<crate::CSSInt, 2i32>),
 }

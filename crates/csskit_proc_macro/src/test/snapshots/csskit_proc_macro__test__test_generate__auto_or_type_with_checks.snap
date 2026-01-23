@@ -2,4 +2,4 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo(pub crate::AutoOr<crate::Angle>);
+struct Foo(pub crate::AutoOr<crate::Ranged<crate::Angle, -90i32, 90i32>>);

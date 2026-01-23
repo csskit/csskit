@@ -1,14 +1,14 @@
 use crate::{
 	TypeIsOption, WhereCollector,
-	attributes::{Atom, extract_atom, extract_in_range},
+	attributes::{Atom, extract_atom},
 	err,
 };
 use itertools::{Itertools, Position};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
 use syn::{
-	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, ExprRange, Fields, Meta, Token, Type, TypePath,
-	parse::Parse, parse_quote,
+	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Meta, Token, Type, TypePath, parse::Parse,
+	parse_quote,
 };
 
 #[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
@@ -47,7 +47,6 @@ impl ToVarsAndTypes for Fields {
 struct ParseArg {
 	pub state: Option<Ident>,
 	pub stop: Option<(Ident, Ident)>,
-	pub in_range: Option<ExprRange>,
 	pub parse_mode: FieldParseMode,
 }
 
@@ -81,19 +80,6 @@ impl Parse for ParseArg {
 					}
 					let ident = path.segments.last().map(|s| s.ident.clone()).unwrap();
 					args.stop = Some((kind_or_kindset, ident));
-				}
-				i if i == "in_range" => {
-					if args.in_range.is_some() {
-						Err(Error::new(i.span(), "redefinition of 'in_range'".to_string()))?;
-					}
-					input.parse::<Token![=]>()?;
-					let range = input.parse::<syn::Expr>()?;
-					let range = if let syn::Expr::Range(range_expr) = range {
-						range_expr
-					} else {
-						return Err(Error::new_spanned(range, "Expected range expression"));
-					};
-					args.in_range = Some(range);
 				}
 				i if i == "all_must_occur" => {
 					if args.parse_mode != Default::default() {
@@ -130,15 +116,9 @@ impl From<&Vec<Attribute>> for ParseArg {
 					result.state = parsed.state;
 					result.stop = parsed.stop;
 					result.parse_mode = parsed.parse_mode;
-					result.in_range = parsed.in_range;
 				}
 				_ => panic!("could not parse meta"),
 			}
-		}
-
-		// Check for #[in_range(...)]
-		if let Some(range) = extract_in_range(attrs) {
-			result.in_range = Some(range);
 		}
 
 		result
@@ -164,12 +144,10 @@ fn generate_keyword_parsing(
 	var: &Ident,
 	ty: &Type,
 	atom: &Atom,
-	arg: &ParseArg,
+	_arg: &ParseArg,
 	parse_mode: FieldParseMode,
 	where_collector: &mut WhereCollector,
 ) -> TokenStream {
-	let range_validation = arg.in_range.as_ref().map(|r| generate_range_validation(&format_ident!("ident"), ty, r));
-
 	match parse_mode {
 		FieldParseMode::Sequential => {
 			let condition = atom.equals_atom(format_ident!("c"));
@@ -179,7 +157,6 @@ fn generate_keyword_parsing(
 				let #var = {
 					let c = p.peek_n(1);
 					if #condition {
-						#range_validation
 						p.parse::<#ty>()?
 					} else {
 						return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
@@ -193,7 +170,6 @@ fn generate_keyword_parsing(
 			where_collector.add(&ty);
 			quote! {
 				if #var.is_none() && atom == #atom {
-					#range_validation
 					#var = Some(p.parse::<#ty>()?);
 					continue;
 				}
@@ -212,7 +188,7 @@ fn generate_normal_parsing(
 	match parse_mode {
 		FieldParseMode::Sequential => {
 			where_collector.add(ty);
-			let parse_step = if let Some(state_ident) = &arg.state {
+			if let Some(state_ident) = &arg.state {
 				quote! {
 					let #var = {
 						let old_state = p.set_state(State::#state_ident);
@@ -223,27 +199,14 @@ fn generate_normal_parsing(
 				}
 			} else {
 				quote! { let #var = p.parse::<#ty>()?; }
-			};
-			let check_step = arg.in_range.as_ref().map(|r| generate_range_validation(var, ty, r));
-			quote! { #parse_step #check_step }
+			}
 		}
 		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
 			let ty = ty.unpack_option();
 			where_collector.add(&ty);
-			let inner = if let Some(r) = &arg.in_range {
-				let inner = format_ident!("inner");
-				let range_check = generate_range_validation(&inner, &ty, r);
-				quote! {
-				  let #inner = p.parse::<#ty>()?;
-				  #range_check
-				  #var = Some(#inner);
-				}
-			} else {
-				quote! { #var = Some(p.parse::<#ty>()?); }
-			};
 			quote! {
 			  if #var.is_none() && <#ty>::peek(p, c) {
-					#inner
+					#var = Some(p.parse::<#ty>()?);
 					continue;
 			  }
 			}
@@ -329,59 +292,6 @@ fn generate_sequential_parsing(
 	  #( #parse_steps )*
 	  #post_parse_steps
 	  return Ok(Self { #(#members: #vars),* });
-	}
-}
-
-fn generate_range_validation(field_ident: &Ident, ty: &Type, range_expr: &ExprRange) -> TokenStream {
-	let start = &range_expr.start;
-	let end = &range_expr.end;
-	let check = match (start, end) {
-		// 1..=10 (inclusive end)
-		(Some(start), Some(end)) => {
-			quote! {
-				if !(#start..=#end).contains(&i) {
-					use ::css_parse::ToSpan;
-					Err(crate::Diagnostic::new(c, crate::Diagnostic::number_out_of_bounds))?
-				}
-			}
-		}
-		(Some(start), None) => {
-			quote! {
-				if #start > i {
-					use ::css_parse::ToSpan;
-					Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_small))?
-				}
-			}
-		}
-		(None, Some(end)) => {
-			quote! {
-				if #end < i {
-					use ::css_parse::ToSpan;
-					Err(crate::Diagnostic::new(c, crate::Diagnostic::number_too_large))?
-				}
-			}
-		}
-		// .. (full range) - no validation needed
-		(None, None) => {
-			return quote! {};
-		}
-	};
-	if ty.is_option() {
-		quote! {
-			if let Some(number_val) = #field_ident {
-				if let Some(i) = ::css_parse::ToNumberValue::to_number_value(&number_val) {
-					let c: ::css_parse::Cursor = number_val.into();
-					#check
-				}
-			}
-		}
-	} else {
-		quote! {
-			if let Some(i) =::css_parse::ToNumberValue::to_number_value(&#field_ident) {
-				let c: ::css_parse::Cursor = #field_ident.into();
-				#check
-			}
-		}
 	}
 }
 
@@ -536,9 +446,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 								})
 								.collect();
 
+							let type_check = quote! { p.peek::<#ty>() };
 							if matches!(pos, Position::Last | Position::Only) {
 								quote! {
-									{
+									if #type_check {
 										let c = p.peek_n(1);
 										match #extract_atom {
 											#atom_checks
@@ -546,10 +457,11 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 												return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
 											}
 										}
+									} else {
+										return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
 									}
 								}
 							} else {
-								let type_check = quote! { p.peek::<#ty>() };
 								quote! {
 									if #type_check {
 										let c = p.peek_n(1);

@@ -9,7 +9,7 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        {
+        if p.peek::<Ident>() {
             let c = p.peek_n(1);
             match p.to_atom::<Keyword>(c) {
                 Keyword::Foo => {
@@ -26,6 +26,10 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
                     )?;
                 }
             }
+        } else {
+            return Err(
+                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+            )?;
         }
     }
 }

@@ -1,26 +1,26 @@
 use super::prelude::*;
-use crate::Percentage;
+use crate::{Percentage, Ranged};
 
 #[derive(IntoCursor, Peek, Parse, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum OpacityValue {
-	Number(#[in_range(0.0..=1.0)] T![Number]),
-	Percent(#[in_range(0.0..=100.0)] Percentage),
+	Number(Ranged<T![Number], 0, 1>),
+	Percent(Ranged<Percentage, 0, 100>),
 }
 
 impl OpacityValue {
 	#[allow(non_upper_case_globals)]
-	pub const Zero: OpacityValue = OpacityValue::Number(<T![Number]>::NUMBER_ZERO);
+	pub const Zero: OpacityValue = OpacityValue::Number(Ranged(<T![Number]>::NUMBER_ZERO));
 }
 
 impl From<OpacityValue> for i32 {
 	fn from(value: OpacityValue) -> Self {
 		match value {
-			OpacityValue::Number(t) => t.into(),
+			OpacityValue::Number(t) => t.0.into(),
 			OpacityValue::Percent(t) => {
-				let f: f32 = t.into();
+				let f: f32 = t.0.into();
 				f as i32
 			}
 		}
@@ -30,8 +30,8 @@ impl From<OpacityValue> for i32 {
 impl From<OpacityValue> for f32 {
 	fn from(value: OpacityValue) -> Self {
 		match value {
-			OpacityValue::Number(t) => t.into(),
-			OpacityValue::Percent(t) => t.into(),
+			OpacityValue::Number(t) => t.0.into(),
+			OpacityValue::Percent(t) => t.0.into(),
 		}
 	}
 }
@@ -59,14 +59,4 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "20");
 		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "1000%");
 	}
-
-	// #[cfg(feature = "serde")]
-	// #[test]
-	// fn test_serializes() {
-	// 	assert_json!(OpacityValue, "0.1", {
-	// 		"node": [0, 3],
-	// 		"start": 0,
-	// 		"end": 5
-	// 	});
-	// }
 }

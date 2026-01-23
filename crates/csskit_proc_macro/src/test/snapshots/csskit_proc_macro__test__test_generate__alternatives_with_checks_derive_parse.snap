@@ -6,5 +6,5 @@ expression: pretty
 enum Foo {
     #[atom(CssAtomSet::Bar)]
     Bar(::css_parse::T![Ident]),
-    Angle(#[in_range(-90f32..= 90f32)] Option<crate::Angle>),
+    Angle(Option<crate::Ranged<crate::Angle, -90i32, 90i32>>),
 }

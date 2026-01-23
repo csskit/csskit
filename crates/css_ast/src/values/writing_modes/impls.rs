@@ -1,5 +1,5 @@
 use super::GlyphOrientationVerticalStyleValue;
-use crate::{CSSInt, CssAtomSet};
+use crate::{CSSInt, CssAtomSet, Exact};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParseResult, T};
 
 impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
@@ -14,10 +14,10 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 			if let Some(int) = p.parse_if_peek::<CSSInt>()? {
 				match int.into() {
 					0i32 => {
-						return Ok(Self::Literal0(int));
+						return Ok(Self::Literal0(Exact(int)));
 					}
 					90i32 => {
-						return Ok(Self::Literal90(int));
+						return Ok(Self::Literal90(Exact(int)));
 					}
 					_ => {}
 				}
@@ -25,10 +25,10 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 			if let Some(dimension) = p.parse_if_peek::<T![Dimension]>()? {
 				match (dimension.value(), p.to_atom::<CssAtomSet>(dimension.into())) {
 					(0f32, CssAtomSet::Deg) => {
-						return Ok(Self::Literal0deg(dimension));
+						return Ok(Self::Literal0deg(Exact(dimension)));
 					}
 					(90f32, CssAtomSet::Deg) => {
-						return Ok(Self::Literal90deg(dimension));
+						return Ok(Self::Literal90deg(Exact(dimension)));
 					}
 					_ => {}
 				}

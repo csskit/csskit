@@ -3,4 +3,4 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
-struct Foo(#[in_range(-90f32..= 90f32)] pub crate::AutoOr<crate::Angle>);
+struct Foo(pub crate::AutoOr<crate::Ranged<crate::Angle, -90i32, 90i32>>);
