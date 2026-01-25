@@ -26,6 +26,7 @@ impl<'a> Display for SourceCursor<'a> {
 	fn fmt(&self, f: &mut Formatter<'_>) -> Result {
 		match self.token().kind() {
 			Kind::Eof => Ok(()),
+			Kind::String if self.should_compact && self.token().contains_escape_chars() => self.fmt_compacted_string(f),
 			// It is important to manually write out quotes for 2 reasons:
 			//  1. The quote style can be mutated from the source string (such as the case of normalising/switching quotes.
 			//  2. Some strings may not have the closing quote, which should be corrected.
@@ -179,6 +180,7 @@ impl<'a> SourceCursor<'a> {
 				self.fmt_compacted_number(f)?;
 				self.fmt_compacted_ident(f)
 			}
+			Kind::Url => self.fmt_compacted_url(f),
 			_ => f.write_str(self.source),
 		}
 	}
@@ -246,6 +248,50 @@ impl<'a> SourceCursor<'a> {
 			f.write_str("(")?;
 		}
 
+		Ok(())
+	}
+
+	fn fmt_compacted_url(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		let leading_len = token.leading_len() as usize;
+		let trailing_len = token.trailing_len() as usize;
+		f.write_str("url(")?;
+		let url_content = &self.source[leading_len..(self.source.len() - trailing_len)];
+		f.write_str(url_content.trim())?;
+		if token.url_has_closing_paren() {
+			f.write_str(")")?;
+		}
+		Ok(())
+	}
+
+	fn fmt_compacted_string(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		let inner = &self.source[1..(token.len() as usize) - token.has_close_quote() as usize];
+		let quote = match token.quote_style() {
+			QuoteStyle::Single => '\'',
+			QuoteStyle::Double => '"',
+			QuoteStyle::None => unreachable!(),
+		};
+		f.write_char(quote)?;
+		// Decode escape sequences
+		let mut chars = inner.chars().peekable();
+		let mut i = 0;
+		while let Some(c) = chars.next() {
+			if c == '\0' {
+				write!(f, "{}", REPLACEMENT_CHARACTER)?;
+				i += 1;
+			} else if c == '\\' {
+				i += 1;
+				let (ch, n) = inner[i..].chars().parse_escape_sequence();
+				write!(f, "{}", if ch == '\0' { REPLACEMENT_CHARACTER } else { ch })?;
+				i += n as usize;
+				chars = inner[i..].chars().peekable();
+			} else {
+				write!(f, "{}", c)?;
+				i += c.len_utf8();
+			}
+		}
+		f.write_char(quote)?;
 		Ok(())
 	}
 
@@ -741,5 +787,54 @@ mod test {
 
 		let c = Cursor::new(SourceOffset(0), Token::new_dimension(false, false, 1, 4, 1.0, 0));
 		assert!(SourceCursor::from(c, r"1\70x").may_compact());
+	}
+
+	#[test]
+	fn test_compact_url() {
+		let c = Cursor::new(SourceOffset(0), Token::new_url(true, true, false, 7, 1, 15));
+		let sc = SourceCursor::from(c, "url(   foo.png)");
+		assert_eq!(format!("{}", sc), "url(   foo.png)");
+		assert_eq!(format!("{}", sc.compact()), "url(foo.png)");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_url(true, false, false, 4, 4, 15));
+		let sc = SourceCursor::from(c, "url(foo.png   )");
+		assert_eq!(format!("{}", sc), "url(foo.png   )");
+		assert_eq!(format!("{}", sc.compact()), "url(foo.png)");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_url(true, true, false, 6, 3, 16));
+		let sc = SourceCursor::from(c, "url(  foo.png  )");
+		assert_eq!(format!("{}", sc), "url(  foo.png  )");
+		assert_eq!(format!("{}", sc.compact()), "url(foo.png)");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_url(false, false, false, 4, 0, 11));
+		let sc = SourceCursor::from(c, "url(foo.png");
+		assert_eq!(format!("{}", sc), "url(foo.png");
+		assert_eq!(format!("{}", sc.compact()), "url(foo.png");
+	}
+
+	#[test]
+	fn test_compact_string_with_escapes() {
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		let sc = SourceCursor::from(c, r#""\66oo""#);
+		assert_eq!(format!("{}", sc), r#""\66oo""#);
+		assert_eq!(format!("{}", sc.compact()), r#""foo""#);
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 8));
+		let sc = SourceCursor::from(c, r"'\62 ar'");
+		assert_eq!(format!("{}", sc), r"'\62 ar'");
+		assert_eq!(format!("{}", sc.compact()), "'bar'");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 11));
+		let sc = SourceCursor::from(c, r#""\68\65llo""#);
+		assert_eq!(format!("{}", sc), r#""\68\65llo""#);
+		assert_eq!(format!("{}", sc.compact()), r#""hello""#);
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 5));
+		let sc = SourceCursor::from(c, "\"\0oo\"");
+		assert_eq!(format!("{}", sc.compact()), "\"\u{FFFD}oo\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
+		let sc = SourceCursor::from(c, "\"\x5c0oo\"");
+		assert_eq!(format!("{}", sc.compact()), "\"\u{FFFD}oo\"");
 	}
 }
