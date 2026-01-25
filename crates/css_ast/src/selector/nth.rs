@@ -30,7 +30,7 @@ impl<'a> Parse<'a> for Nth {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		if p.peek::<CSSInt>() {
-			return Ok(Self::Integer(p.parse::<CSSInt>()?.preserve_sign()));
+			return Ok(Self::Integer(p.parse::<CSSInt>()?));
 		} else if p.peek::<T![Ident]>() {
 			let peek_cursor = p.peek_n(1);
 			let atom = p.to_atom::<CssAtomSet>(peek_cursor);
