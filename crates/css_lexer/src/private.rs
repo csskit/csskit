@@ -250,36 +250,16 @@ impl<'a> CharsConsumer for Chars<'a> {
 	}
 
 	fn consume_escape_sequence(&mut self) -> u32 {
-		let mut len = 1;
 		if let Some(c) = self.next() {
-			len += c.len_utf8() as u32;
 			if c.is_ascii_hexdigit() {
-				let mut i = 1; // We already consumed one hex digit (c)
-				let mut chars = self.clone().peekable();
-				while chars.peek().unwrap_or(&EOF).is_ascii_hexdigit() {
-					chars.next();
-					self.next();
-					len += 1;
-					i += 1;
-					if i > 5 {
-						break;
-					}
-				}
-				if is_whitespace(*chars.peek().unwrap_or(&EOF)) {
-					let c = self.next();
-					len += 1;
-					// https://drafts.csswg.org/css-syntax/#input-preprocessing
-					// Replace any U+000D CARRIAGE RETURN (CR) code points, U+000C FORM FEED (FF) code points,
-					// or pairs of U+000D CARRIAGE RETURN (CR) followed by U+000A LINE FEED (LF) in input by
-					// single U+000A LINE FEED (LF) code point.
-					if c == Some('\r') && self.peek_nth(0) == '\n' {
-						self.next();
-						len += 1;
-					}
-				}
+				let (_, hex_len) = self.consume_hex_escape(c);
+				((hex_len + self.consume_escape_whitespace()) as u32) + 1
+			} else {
+				(c.len_utf8() as u32) + 1
 			}
+		} else {
+			1
 		}
-		len
 	}
 
 	fn consume_url_sequence(&mut self, leading_len: u32, ident_escaped: bool) -> Token {
