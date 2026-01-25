@@ -9,6 +9,10 @@ pub struct CSSInt(T![Number]);
 impl CSSInt {
 	#[allow(non_upper_case_globals)]
 	pub const Zero: CSSInt = CSSInt(<T![Number]>::ZERO);
+
+	pub fn preserve_sign(self) -> Self {
+		CSSInt(self.0.preserve_sign())
+	}
 }
 
 impl From<CSSInt> for i32 {

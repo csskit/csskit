@@ -186,9 +186,7 @@ impl<'a> SourceCursor<'a> {
 	fn fmt_compacted_number(&self, f: &mut Formatter<'_>) -> Result {
 		let value = self.token().value();
 		if value <= -1.0 || value >= 1.0 || value == 0.0 {
-			// If a number token has a forced + sign it might be because it's within an AnB syntax, so we must respect that
-			// without the full context.
-			if value > 0.0 && self.token().has_sign() && self.token().kind() == Kind::Number {
+			if value > 0.0 && self.token().kind() == Kind::Number && self.token().sign_is_required() {
 				f.write_str("+")?;
 			}
 			return value.fmt(f);
@@ -199,7 +197,7 @@ impl<'a> SourceCursor<'a> {
 		if let Some(str) = small_str.as_str() {
 			if value < 0.0 {
 				f.write_str("-")?;
-			} else if value > 0.0 && self.token().has_sign() && self.token().kind() == Kind::Number {
+			} else if value > 0.0 && self.token().kind() == Kind::Number && self.token().sign_is_required() {
 				f.write_str("+")?;
 			}
 			if let Some(rest) = str.strip_prefix("0.") {
@@ -633,6 +631,11 @@ mod test {
 		assert_eq!(format!("{}", sc.compact()), "1");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_number(true, true, 8, 1.0));
+		let sc = SourceCursor::from(c, r"+1.00000");
+		assert_eq!(format!("{}", sc), r"+1.00000");
+		assert_eq!(format!("{}", sc.compact()), "1");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, true, 8, 1.0).with_sign_required());
 		let sc = SourceCursor::from(c, r"+1.00000");
 		assert_eq!(format!("{}", sc), r"+1.00000");
 		assert_eq!(format!("{}", sc.compact()), "+1");

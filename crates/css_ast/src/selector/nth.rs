@@ -29,9 +29,8 @@ impl<'a> Parse<'a> for Nth {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		if p.peek::<T![Number]>() {
-			let number = p.parse::<CSSInt>()?;
-			return Ok(Self::Integer(number));
+		if p.peek::<CSSInt>() {
+			return Ok(Self::Integer(p.parse::<CSSInt>()?.preserve_sign()));
 		} else if p.peek::<T![Ident]>() {
 			let peek_cursor = p.peek_n(1);
 			let atom = p.to_atom::<CssAtomSet>(peek_cursor);
@@ -107,13 +106,17 @@ impl<'a> Parse<'a> for Nth {
 		let b = if p.peek::<T![Number]>() {
 			c = p.parse::<T![Number]>()?.into();
 			debug_assert!(cursors[3] == Cursor::EMPTY);
-			cursors[3] = c;
 			if c.token().is_float() {
 				Err(Diagnostic::new(c, Diagnostic::expected_int))?
 			}
 			if c.token().has_sign() && b_sign != 0 {
 				Err(Diagnostic::new(c, Diagnostic::expected_unsigned))?
 			}
+			// If the number has a sign (like +1 or -1), mark it as required for minification
+			if c.token().has_sign() {
+				c = c.with_sign_required();
+			}
+			cursors[3] = c;
 			if b_sign == 0 {
 				b_sign = 1;
 			}

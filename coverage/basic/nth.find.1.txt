@@ -1,4 +1,17 @@
 style-rule
 ---
 coverage/basic/nth.css
-1:1::nth-child(n+1) {
+2:1::nth-child(n+1) {}
+3:1::nth-child(n-1) {}
+4:1::nth-child(+n) {}
+5:1::nth-child(-n) {}
+6:1::nth-child(5) {}
+7:1::nth-child(+5) {}
+8:1::nth-child(-5) {}
+9:1::nth-child(2n) {}
+10:1::nth-child(2n+1) {}
+11:1::nth-child(2n-1) {}
+12:1::nth-child(+2n+1) {}
+13:1::nth-child(-2n+1) {}
+14:1::nth-child(odd) {}
+15:1::nth-child(even) {}

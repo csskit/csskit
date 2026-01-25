@@ -77,6 +77,15 @@ impl Cursor {
 		Self::new(self.offset(), self.token().with_associated_whitespace(rules))
 	}
 
+	/// Returns a new [Cursor] with the `sign_is_required` flag set on the token.
+	/// This indicates that the `+` sign should be preserved during minification.
+	///
+	/// Asserts: the token `kind()` is [Kind::Number].
+	pub fn with_sign_required(&self) -> Self {
+		debug_assert!(self.1 == Kind::Number);
+		Self::new(self.offset(), self.token().with_sign_required())
+	}
+
 	#[inline]
 	pub fn atom_bits(&self) -> u32 {
 		self.1.atom_bits()

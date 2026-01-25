@@ -562,6 +562,10 @@ impl Number {
 	pub fn has_sign(&self) -> bool {
 		self.0.token().has_sign()
 	}
+
+	pub fn preserve_sign(self) -> Self {
+		if self.has_sign() { Self(self.0.with_sign_required()) } else { self }
+	}
 }
 
 impl<'a> Peek<'a> for Number {

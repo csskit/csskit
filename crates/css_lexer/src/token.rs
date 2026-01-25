@@ -59,7 +59,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// |--------------------|-------|-----------------------------|------------------------------------------|
 /// | [Kind::Number]     | `001` | Floating Point              | [Token::is_float()]                      |
 /// |                    | `010` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
-/// |                    | `100` | (Reserved)                  | --                                       |
+/// |                    | `100` | Sign is required            | [Token::sign_is_required()]              |
 /// | [Kind::Dimension]  | `001` | Floating Point              | [Token::is_float()]                      |
 /// |                    | `010` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
 /// |                    | `100` | Unit is a known dimension   | [Token::atom_bits()][^dimension]         |
@@ -701,6 +701,27 @@ impl Token {
 		self.kind_bits() & 0b11100 == 0b00100 && self.second_bit_is_set()
 	}
 
+	/// The [Token] is a [Kind::Number] and the `+` sign is semantically required and should be preserved during
+	/// minification. This is used for numbers in `an+b` syntax (e.g., `:nth-child(+5)`) where the `+` sign
+	/// distinguishes the value from other syntactic forms.
+	///
+	/// Asserts: the `kind()` is [Kind::Number].
+	#[inline]
+	pub const fn sign_is_required(&self) -> bool {
+		debug_assert!(self.kind_bits() == Kind::Number as u8);
+		self.first_bit_is_set()
+	}
+
+	/// Returns a new [Token] with the `sign_is_required` flag set. This indicates that the `+` sign
+	/// should be preserved during minification (e.g., for `an+b` syntax).
+	///
+	/// Asserts: the `kind()` is [Kind::Number].
+	#[inline]
+	pub const fn with_sign_required(self) -> Token {
+		debug_assert!(self.kind_bits() == Kind::Number as u8);
+		Token(self.0 | (1 << 31), self.1)
+	}
+
 	/// If the [Token] is a [Kind::Dimension] or [Kind::Number] then this returns the amount of characters used to
 	/// represent this number in the underlying source text. Numbers may be inefficiently encoded in the source text,
 	/// e.g. `0.0000`.
@@ -709,13 +730,7 @@ impl Token {
 	#[inline]
 	pub const fn numeric_len(&self) -> u32 {
 		debug_assert!(matches!(self.kind(), Kind::Number | Kind::Dimension));
-		if self.kind_bits() == Kind::Dimension as u8 {
-			(self.0 & LENGTH_MASK) >> 12
-		} else if self.first_bit_is_set() {
-			(self.0 & LENGTH_MASK) >> 16
-		} else {
-			self.0 & LENGTH_MASK
-		}
+		if self.kind_bits() == Kind::Dimension as u8 { (self.0 & LENGTH_MASK) >> 12 } else { self.0 & LENGTH_MASK }
 	}
 
 	/// If the [Token] is a [Kind::Dimension] or [Kind::Number] then this returns the [f32] representation of the number's
