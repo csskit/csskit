@@ -31,10 +31,16 @@ where
 			return;
 		}
 
-		if matches!(time, Time::Ms(_)) {
+		if let Time::Ms(dim) = time {
+			let sc = self.transformer.to_source_cursor((*dim).into());
 			let value = if seconds.fract() == 0.0 { format!("{}", seconds as i64) } else { format!("{seconds}") };
-			let len = value.len() - value.starts_with("0.") as usize - value.starts_with("-0.") as usize + 1;
-			if len < original_len {
+			let seconds_len = value.len() - value.starts_with("0.") as usize - value.starts_with("-0.") as usize + 1;
+			let ms_len = if sc.may_compact() {
+				format!("{}", self.transformer.to_source_cursor((*dim).into()).compact()).len()
+			} else {
+				sc.token().len() as usize
+			};
+			if seconds_len < ms_len {
 				self.transformer.replace_parsed::<Time>(time.to_span(), &format!("{value}s"));
 			}
 		}
@@ -96,6 +102,16 @@ mod tests {
 			StyleSheet,
 			"div { animation-duration: 1000ms; }",
 			"div { animation-duration: 1s; }"
+		);
+	}
+
+	#[test]
+	fn converts_only_when_compact_is_larger() {
+		assert_no_transform!(
+			CssMinifierFeature::ReduceTimeUnits,
+			CssAtomSet,
+			StyleSheet,
+			"div { animation-duration: 00050ms; }"
 		);
 	}
 }

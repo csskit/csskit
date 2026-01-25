@@ -112,6 +112,59 @@ impl<'a> SourceCursor<'a> {
 		Self { cursor: self.cursor, source: self.source, should_compact: true }
 	}
 
+	/// Checks if calling `compact().fmt(..)` _might_ produce different output than `fmt(..)`.
+	///
+	/// This can be used to check, rather than a full allocation & display, e.g. `format!("{}", sc.compact())`.
+	///
+	/// - Whitespace: returns `true` if len > 1
+	/// - Ident/Function/AtKeyword/Hash: returns `true` if contains escape chars
+	/// - Number: returns `true` if the number representation could be shortened
+	/// - Dimension: combines number and unit checks
+	#[inline]
+	pub fn may_compact(&self) -> bool {
+		let token = self.token();
+		match token.kind() {
+			Kind::Whitespace => token.len() > 1,
+			Kind::Ident | Kind::Function | Kind::AtKeyword | Kind::Hash => token.contains_escape_chars(),
+			Kind::Number => self.can_compact_number(),
+			Kind::Dimension => {
+				self.can_compact_number()
+					|| self.source[(self.token().numeric_len() as usize)..].bytes().any(|b| b == b'\\' || b == 0)
+			}
+			_ => false,
+		}
+	}
+
+	/// Check if the numeric value could be compacted.
+	#[inline]
+	fn can_compact_number(&self) -> bool {
+		let token = self.token();
+		let value = token.value();
+		let num_len = token.numeric_len() as usize;
+		if value > -1.0 && value < 1.0 && value != 0.0 {
+			let bytes = self.source.as_bytes();
+			if bytes.first() == Some(&b'.') {
+				return false;
+			}
+			if value < 0.0 && bytes.get(1) == Some(&b'.') {
+				return false;
+			}
+			return true;
+		}
+		if token.has_sign() && value > 0.0 {
+			return true;
+		}
+		if token.is_float() && value.fract() == 0.0 {
+			return true;
+		}
+		if token.is_int() {
+			let abs_value = value.abs();
+			let digits = if abs_value == 0.0 { 1 } else { (abs_value.log10().floor() as usize) + 1 };
+			return num_len > (digits + (value < 0.0) as usize);
+		}
+		false
+	}
+
 	fn fmt_compacted(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
 		match token.kind() {
@@ -619,5 +672,71 @@ mod test {
 		let sc = SourceCursor::from(c, r"   \n\r");
 		assert_eq!(format!("{}", sc), r"   \n\r");
 		assert_eq!(format!("{}", sc.compact()), " ");
+	}
+
+	#[test]
+	fn test_can_be_compacted_whitespace() {
+		let c = Cursor::new(SourceOffset(0), Token::new_whitespace(Whitespace::Space, 1));
+		assert!(!SourceCursor::from(c, " ").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_whitespace(Whitespace::Space, 3));
+		assert!(SourceCursor::from(c, "   ").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_whitespace(Whitespace::Newline, 2));
+		assert!(SourceCursor::from(c, "\n\n").may_compact());
+	}
+
+	#[test]
+	fn test_can_be_compacted_ident() {
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, false, 0, 3));
+		assert!(!SourceCursor::from(c, "foo").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
+		assert!(SourceCursor::from(c, r"\66oo").may_compact());
+	}
+
+	#[test]
+	fn test_can_be_compacted_number() {
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 3, 0.8));
+		assert!(SourceCursor::from(c, "0.8").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 4, -0.5));
+		assert!(SourceCursor::from(c, "-0.5").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 1, 1.0));
+		assert!(!SourceCursor::from(c, "1").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 3, 1.0));
+		assert!(SourceCursor::from(c, "001").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 2, 1.0));
+		assert!(SourceCursor::from(c, "+1").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 3, 1.0));
+		assert!(SourceCursor::from(c, "1.0").may_compact());
+	}
+
+	#[test]
+	fn test_can_be_compacted_dimension() {
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(true, true, 4, 4, 0.8, 0));
+		assert!(SourceCursor::from(c, r"+0.8\70x").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(false, false, 1, 2, 1.0, 0));
+		assert!(!SourceCursor::from(c, "1px").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(false, false, 2, 2, 1.0, 0));
+		assert!(SourceCursor::from(c, "01px").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(false, false, 2, 2, 1.0, 0));
+		assert!(SourceCursor::from(c, "+1px").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(true, false, 3, 2, 0.5, 0));
+		assert!(SourceCursor::from(c, "0.5px").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(true, false, 2, 2, 0.5, 0));
+		assert!(!SourceCursor::from(c, ".5px").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_dimension(false, false, 1, 4, 1.0, 0));
+		assert!(SourceCursor::from(c, r"1\70x").may_compact());
 	}
 }
