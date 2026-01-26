@@ -1,6 +1,6 @@
 [tools]
 rust = { version = "1.92.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
-node = "25.3.0"
+node = "25.4.0"
 npm = "11.6.4"
 hyperfine = "latest"
 "cargo:cargo-insta" = "1.43.1"
