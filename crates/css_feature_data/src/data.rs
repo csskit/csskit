@@ -360,7 +360,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(58u16, 0u16), firefox_android : BrowserVersion(58u16, 0u16), safari :
 	BrowserVersion(11u16, 1u16), safari_ios : BrowserVersion(11u16, 3u16), }, caniuse : &
-	["https://caniuse.com/css-font-rendering-controls"], popularity : 47.034065f32, },
+	["https://caniuse.com/css-font-rendering-controls"], popularity : 54.179092f32, },
 	"css.at-rules.font-face.font-family" => CSSFeature { id :
 	"css.at-rules.font-face.font-family", name : "@font-face", description :
 	"The @font-face CSS at-rule creates a custom font-family value. The at-rule's descriptors set the font's name, source, and various display settings.",
@@ -384,7 +384,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16),
 	firefox : BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/font-feature"], popularity : 21.223013f32, },
+	caniuse : & ["https://caniuse.com/font-feature"], popularity : 19.738594f32, },
 	"css.at-rules.font-face.font-stretch" => CSSFeature { id :
 	"css.at-rules.font-face.font-stretch", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -396,7 +396,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(62u16, 0u16), edge : BrowserVersion(17u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.at-rules.font-face.font-style" => CSSFeature { id :
 	"css.at-rules.font-face.font-style", name : "font-style", description :
 	"The font-style CSS property sets the text style, with normal, italic, and oblique options.",
@@ -407,8 +407,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(3u16, 1u16), safari_ios : BrowserVersion(2u16, 0u16), },
-	caniuse : & [], popularity : 80.290375f32, }, "css.at-rules.font-face.font-variant"
-	=> CSSFeature { id : "css.at-rules.font-face.font-variant", name : "font-variant",
+	caniuse : & [], popularity : 79.15034f32, }, "css.at-rules.font-face.font-variant" =>
+	CSSFeature { id : "css.at-rules.font-face.font-variant", name : "font-variant",
 	description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-prop", groups : &
@@ -419,7 +419,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 1u16), safari_ios : BrowserVersion(2u16, 0u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.at-rules.font-face.font-variation-settings" =>
+	[], popularity : 29.77054f32, }, "css.at-rules.font-face.font-variation-settings" =>
 	CSSFeature { id : "css.at-rules.font-face.font-variation-settings", name :
 	"font-variation-settings", description :
 	"The font-variation-settings CSS property sets an \"axis of variability\" on a variable font, such as weight, optical size, or a custom axis defined by the typeface designer. When possible, use other CSS font properties, such as font-weight: bold. Also known as variable fonts.",
@@ -429,7 +429,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/variable-fonts"], popularity : 21.6532f32, },
+	["https://caniuse.com/variable-fonts"], popularity : 18.29498f32, },
 	"css.at-rules.font-face.font-weight" => CSSFeature { id :
 	"css.at-rules.font-face.font-weight", name : "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
@@ -441,7 +441,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 1u16), safari_ios : BrowserVersion(2u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.at-rules.font-face.line-gap-override" =>
+	[], popularity : 87.76394f32, }, "css.at-rules.font-face.line-gap-override" =>
 	CSSFeature { id : "css.at-rules.font-face.line-gap-override", name :
 	"Font metric overrides", description :
 	"The ascent-override, descent-override, and line-gap-override descriptors adjust the display of a font declared in an @font-face statement. This can help make fallback fonts look the same size.",
@@ -461,7 +461,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(92u16, 0u16), firefox : BrowserVersion(92u16, 0u16), firefox_android :
 	BrowserVersion(92u16, 0u16), safari : BrowserVersion(17u16, 0u16), safari_ios :
 	BrowserVersion(17u16, 0u16), }, caniuse : & ["https://caniuse.com/font-size-adjust"],
-	popularity : 1.755139f32, }, "css.at-rules.font-face.src" => CSSFeature { id :
+	popularity : 1.811577f32, }, "css.at-rules.font-face.src" => CSSFeature { id :
 	"css.at-rules.font-face.src", name : "@font-face", description :
 	"The @font-face CSS at-rule creates a custom font-family value. The at-rule's descriptors set the font's name, source, and various display settings.",
 	spec : "https://drafts.csswg.org/css-fonts-5/#font-face-rule", groups : & ["fonts"],
@@ -540,7 +540,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.annotation" => CSSFeature { id :
 	"css.at-rules.font-feature-values.annotation", name : "font-variant-alternates",
 	description :
@@ -553,7 +553,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.character-variant" => CSSFeature { id :
 	"css.at-rules.font-feature-values.character-variant", name :
 	"font-variant-alternates", description :
@@ -566,7 +566,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.historical-forms" => CSSFeature { id :
 	"css.at-rules.font-feature-values.historical-forms", name :
 	"font-variant-alternates", description :
@@ -579,7 +579,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.ornaments" => CSSFeature { id :
 	"css.at-rules.font-feature-values.ornaments", name : "font-variant-alternates",
 	description :
@@ -592,7 +592,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.styleset" => CSSFeature { id :
 	"css.at-rules.font-feature-values.styleset", name : "font-variant-alternates",
 	description :
@@ -605,7 +605,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.stylistic" => CSSFeature { id :
 	"css.at-rules.font-feature-values.stylistic", name : "font-variant-alternates",
 	description :
@@ -618,7 +618,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-feature-values.swash" => CSSFeature { id :
 	"css.at-rules.font-feature-values.swash", name : "font-variant-alternates",
 	description :
@@ -631,7 +631,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.at-rules.font-palette-values" => CSSFeature { id :
 	"css.at-rules.font-palette-values", name : "font-palette", description :
 	"The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.",
@@ -643,7 +643,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.at-rules.font-palette-values.base-palette" => CSSFeature { id :
 	"css.at-rules.font-palette-values.base-palette", name : "font-palette", description :
 	"The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.",
@@ -655,7 +655,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.at-rules.font-palette-values.font-family" => CSSFeature { id :
 	"css.at-rules.font-palette-values.font-family", name : "font-palette", description :
 	"The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.",
@@ -667,7 +667,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.at-rules.font-palette-values.override-colors" => CSSFeature { id :
 	"css.at-rules.font-palette-values.override-colors", name : "font-palette",
 	description :
@@ -680,7 +680,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.at-rules.function" => CSSFeature { id : "css.at-rules.function", name :
 	"@function", description :
 	"The @function CSS at-rule defines a custom function that takes CSS values or custom properties as arguments, and returns a CSS value. It can be based on conditional logic such as by using the @media at-rule.",
@@ -1114,7 +1114,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(113u16, 0u16), edge : BrowserVersion(113u16, 0u16),
 	firefox : BrowserVersion(66u16, 0u16), firefox_android : BrowserVersion(66u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & [], popularity : 87.54875f32, }, "css.at-rules.media.overflow-inline" =>
+	caniuse : & [], popularity : 87.043076f32, }, "css.at-rules.media.overflow-inline" =>
 	CSSFeature { id : "css.at-rules.media.overflow-inline", name :
 	"Overflow media queries", description :
 	"The overflow-block and overflow-inline CSS media queries set styles based on the way a device displays content that's larger than the viewport or page area. For example, a laptop lets users scroll to reveal content, while a printer displays overflowing content on additional pages.",
@@ -1125,7 +1125,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(113u16, 0u16), edge : BrowserVersion(113u16, 0u16),
 	firefox : BrowserVersion(66u16, 0u16), firefox_android : BrowserVersion(66u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & [], popularity : 87.54875f32, }, "css.at-rules.media.pointer" =>
+	caniuse : & [], popularity : 87.043076f32, }, "css.at-rules.media.pointer" =>
 	CSSFeature { id : "css.at-rules.media.pointer", name : "Interaction media queries",
 	description :
 	"The pointer, any-pointer, hover, and any-hover CSS media queries set styles based on the presence of pointing devices and their ability to hover over elements. For example, most smartphones match the (hover: none) and (pointer: coarse) media query.",
@@ -1384,7 +1384,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(85u16, 0u16), edge : BrowserVersion(85u16, 0u16), firefox :
 	BrowserVersion(122u16, 0u16), firefox_android : BrowserVersion(122u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.840341f32, }, "css.at-rules.page.right-bottom" => CSSFeature { id :
+	popularity : 0.411072f32, }, "css.at-rules.page.right-bottom" => CSSFeature { id :
 	"css.at-rules.page.right-bottom", name : "Page setup", description :
 	"The @page CSS at-rule sets the page-specific dimensions and margins for content such as printed documents, ebooks, or slides.",
 	spec : "https://drafts.csswg.org/css-page-3/#at-page-rule", groups : & ["layout",
@@ -1663,7 +1663,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(93u16, 0u16), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(93u16, 0u16), firefox : BrowserVersion(92u16, 0u16), firefox_android :
 	BrowserVersion(92u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 2.291709f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 2.042398f32, },
 	"css.properties.accent-color.auto" => CSSFeature { id :
 	"css.properties.accent-color.auto", name : "accent-color", description :
 	"The accent-color CSS property sets a color for checkboxes, radio buttons, and other form controls.",
@@ -1672,7 +1672,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(93u16, 0u16), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(93u16, 0u16), firefox : BrowserVersion(92u16, 0u16), firefox_android :
 	BrowserVersion(92u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 2.291709f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 2.042398f32, },
 	"css.properties.align-content" => CSSFeature { id : "css.properties.align-content",
 	name : "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -1795,7 +1795,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(52u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.align-content.multicol_context" => CSSFeature { id :
 	"css.properties.align-content.multicol_context", name : "Multi-column layout",
 	description :
@@ -1917,7 +1917,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(52u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.align-items.grid_context.start_end" => CSSFeature { id :
 	"css.properties.align-items.grid_context.start_end", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -1928,7 +1928,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.align-self" => CSSFeature { id : "css.properties.align-self", name :
 	"Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -2049,7 +2049,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(52u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.align-self.normal" => CSSFeature { id :
 	"css.properties.align-self.normal", name : "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -2090,7 +2090,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.alphabetic" => CSSFeature { id :
 	"css.properties.alignment-baseline.alphabetic", name : "alignment-baseline",
 	description :
@@ -2100,7 +2100,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.baseline" => CSSFeature { id :
 	"css.properties.alignment-baseline.baseline", name : "alignment-baseline",
 	description :
@@ -2110,7 +2110,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.central" => CSSFeature { id :
 	"css.properties.alignment-baseline.central", name : "alignment-baseline", description
 	:
@@ -2120,7 +2120,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.ideographic" => CSSFeature { id :
 	"css.properties.alignment-baseline.ideographic", name : "alignment-baseline",
 	description :
@@ -2130,7 +2130,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.mathematical" => CSSFeature { id :
 	"css.properties.alignment-baseline.mathematical", name : "alignment-baseline",
 	description :
@@ -2140,7 +2140,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.middle" => CSSFeature { id :
 	"css.properties.alignment-baseline.middle", name : "alignment-baseline", description
 	:
@@ -2150,7 +2150,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.text-after-edge" => CSSFeature { id :
 	"css.properties.alignment-baseline.text-after-edge", name : "alignment-baseline",
 	description :
@@ -2160,7 +2160,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.alignment-baseline.text-before-edge" => CSSFeature { id :
 	"css.properties.alignment-baseline.text-before-edge", name : "alignment-baseline",
 	description :
@@ -2170,7 +2170,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(5u16, 1u16), safari_ios :
-	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.587966f32, },
+	BrowserVersion(5u16, 0u16), }, caniuse : & [], popularity : 0.442772f32, },
 	"css.properties.all" => CSSFeature { id : "css.properties.all", name : "all",
 	description :
 	"The all CSS property is a shorthand for all CSS properties, except for direction and unicode-bidi. It accepts only the keywords for explicit defaulting (such as initial and inherit), since they are the only values supported on all CSS properties.",
@@ -2181,7 +2181,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(27u16, 0u16), firefox_android : BrowserVersion(27u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-all"], popularity : 15.969158f32, },
+	caniuse : & ["https://caniuse.com/css-all"], popularity : 12.071727f32, },
 	"css.properties.anchor-name" => CSSFeature { id : "css.properties.anchor-name", name
 	: "Anchor positioning", description :
 	"Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.",
@@ -2254,8 +2254,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16), firefox :
 	BrowserVersion(115u16, 0u16), firefox_android : BrowserVersion(115u16, 0u16), safari
 	: BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), }, caniuse :
-	& [], popularity : 0.391607f32, }, "css.properties.animation-delay" => CSSFeature {
-	id : "css.properties.animation-delay", name : "Animations (CSS)", description :
+	& [], popularity : 0.28078f32, }, "css.properties.animation-delay" => CSSFeature { id
+	: "css.properties.animation-delay", name : "Animations (CSS)", description :
 	"The animation CSS property animates an element's style over time, using keyframes described in @keyframes rules.",
 	spec : "https://drafts.csswg.org/css-animations-2/", groups : & ["animation"],
 	baseline_status : BaselineStatus::High { since : NaiveDate::from_ymd_opt(2018i32,
@@ -2874,7 +2874,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.auto" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.auto" =>
 	CSSFeature { id : "css.properties.appearance.auto", name : "appearance", description
 	:
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2885,7 +2885,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.base-select"
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.base-select"
 	=> CSSFeature { id : "css.properties.appearance.base-select", name :
 	"Customizable <select>", description :
 	"The <select> element's appearance, including the button, selected option, picker dropdown, and options, can be customized using CSS.",
@@ -2905,7 +2905,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.checkbox" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.checkbox" =>
 	CSSFeature { id : "css.properties.appearance.checkbox", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2916,7 +2916,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.listbox" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.listbox" =>
 	CSSFeature { id : "css.properties.appearance.listbox", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2927,7 +2927,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.menulist" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.menulist" =>
 	CSSFeature { id : "css.properties.appearance.menulist", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2938,7 +2938,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, },
+	caniuse : & [], popularity : 45.77036f32, },
 	"css.properties.appearance.menulist-button" => CSSFeature { id :
 	"css.properties.appearance.menulist-button", name : "appearance", description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2949,7 +2949,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.meter" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.meter" =>
 	CSSFeature { id : "css.properties.appearance.meter", name : "appearance", description
 	:
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2960,7 +2960,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.none" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.none" =>
 	CSSFeature { id : "css.properties.appearance.none", name : "appearance", description
 	:
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2971,7 +2971,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.progress-bar"
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.progress-bar"
 	=> CSSFeature { id : "css.properties.appearance.progress-bar", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2982,7 +2982,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.radio" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.radio" =>
 	CSSFeature { id : "css.properties.appearance.radio", name : "appearance", description
 	:
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -2993,7 +2993,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.searchfield"
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.searchfield"
 	=> CSSFeature { id : "css.properties.appearance.searchfield", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -3004,7 +3004,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.textarea" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.textarea" =>
 	CSSFeature { id : "css.properties.appearance.textarea", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -3015,7 +3015,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.appearance.textfield" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.appearance.textfield" =>
 	CSSFeature { id : "css.properties.appearance.textfield", name : "appearance",
 	description :
 	"The appearance CSS property controls the appearance of form controls. Using appearance: none disables any default native appearance and allows the elements to be styled with CSS.",
@@ -3026,7 +3026,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(80u16, 0u16), firefox_android : BrowserVersion(80u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 47.23155f32, }, "css.properties.aspect-ratio" =>
+	caniuse : & [], popularity : 45.77036f32, }, "css.properties.aspect-ratio" =>
 	CSSFeature { id : "css.properties.aspect-ratio", name : "aspect-ratio", description :
 	"The aspect-ratio CSS property controls the width-to-height ratio of elements. For <img> and <video> elements, the width and height attributes used together with height: auto control the aspect ratio while the image/video is loading.",
 	spec : "https://drafts.csswg.org/css-sizing-4/#aspect-ratio", groups : & [],
@@ -3036,7 +3036,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(88u16, 0u16), edge : BrowserVersion(88u16, 0u16),
 	firefox : BrowserVersion(89u16, 0u16), firefox_android : BrowserVersion(89u16, 0u16),
 	safari : BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), },
-	caniuse : & [], popularity : 31.450916f32, }, "css.properties.aspect-ratio.auto" =>
+	caniuse : & [], popularity : 35.438786f32, }, "css.properties.aspect-ratio.auto" =>
 	CSSFeature { id : "css.properties.aspect-ratio.auto", name : "aspect-ratio",
 	description :
 	"The aspect-ratio CSS property controls the width-to-height ratio of elements. For <img> and <video> elements, the width and height attributes used together with height: auto control the aspect ratio while the image/video is loading.",
@@ -3047,7 +3047,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(88u16, 0u16), edge : BrowserVersion(88u16, 0u16),
 	firefox : BrowserVersion(89u16, 0u16), firefox_android : BrowserVersion(89u16, 0u16),
 	safari : BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), },
-	caniuse : & [], popularity : 31.450916f32, }, "css.properties.backdrop-filter" =>
+	caniuse : & [], popularity : 35.438786f32, }, "css.properties.backdrop-filter" =>
 	CSSFeature { id : "css.properties.backdrop-filter", name : "backdrop-filter",
 	description :
 	"The backdrop-filter CSS property applies graphical effects such as blurring or color shifting to the area behind an element.",
@@ -3058,7 +3058,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	0u16), firefox : BrowserVersion(103u16, 0u16), firefox_android :
 	BrowserVersion(103u16, 0u16), safari : BrowserVersion(18u16, 0u16), safari_ios :
 	BrowserVersion(18u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-backdrop-filter"], popularity : 28.579138f32, },
+	["https://caniuse.com/css-backdrop-filter"], popularity : 32.143772f32, },
 	"css.properties.backface-visibility" => CSSFeature { id :
 	"css.properties.backface-visibility", name : "3D transforms", description :
 	"The transform CSS property and its 3D transform functions allow rotations and other transforms in three dimensions, including perspective transforms.",
@@ -3081,7 +3081,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background-attachment" => CSSFeature { id :
 	"css.properties.background-attachment", name : "background-attachment", description :
 	"The background-attachment CSS property sets whether an element's background image or gradient moves as the element scrolls.",
@@ -3093,7 +3093,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	["https://caniuse.com/background-attachment"], popularity : 8.244604f32, },
+	["https://caniuse.com/background-attachment"], popularity : 8.59704f32, },
 	"css.properties.background-attachment.fixed" => CSSFeature { id :
 	"css.properties.background-attachment.fixed", name : "background-attachment",
 	description :
@@ -3106,7 +3106,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(2u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/background-attachment"], popularity : 8.244604f32, },
+	["https://caniuse.com/background-attachment"], popularity : 8.59704f32, },
 	"css.properties.background-attachment.local" => CSSFeature { id :
 	"css.properties.background-attachment.local", name : "background-attachment",
 	description :
@@ -3119,7 +3119,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(25u16, 0u16), firefox_android : BrowserVersion(25u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/background-attachment"], popularity : 8.244604f32, },
+	["https://caniuse.com/background-attachment"], popularity : 8.59704f32, },
 	"css.properties.background-attachment.multiple_backgrounds" => CSSFeature { id :
 	"css.properties.background-attachment.multiple_backgrounds", name :
 	"background-attachment", description :
@@ -3132,7 +3132,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	["https://caniuse.com/background-attachment"], popularity : 8.244604f32, },
+	["https://caniuse.com/background-attachment"], popularity : 8.59704f32, },
 	"css.properties.background-attachment.scroll" => CSSFeature { id :
 	"css.properties.background-attachment.scroll", name : "background-attachment",
 	description :
@@ -3145,7 +3145,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	["https://caniuse.com/background-attachment"], popularity : 8.244604f32, },
+	["https://caniuse.com/background-attachment"], popularity : 8.59704f32, },
 	"css.properties.background-blend-mode" => CSSFeature { id :
 	"css.properties.background-blend-mode", name : "background-blend-mode", description :
 	"The background-blend-mode CSS property blends an element's background image and background color using blend modes like multiply, difference, or color.",
@@ -3157,7 +3157,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(35u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(30u16, 0u16), firefox_android : BrowserVersion(30u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-backgroundblendmode"], popularity : 4.581009f32, },
+	["https://caniuse.com/css-backgroundblendmode"], popularity : 3.73773f32, },
 	"css.properties.background-clip" => CSSFeature { id :
 	"css.properties.background-clip", name : "background-clip", description :
 	"The background-clip CSS property sets the extent of the background: the padding box, the content box, or the default border box.",
@@ -3169,7 +3169,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	[], popularity : 45.8784f32, }, "css.properties.background-clip.border-area" =>
+	[], popularity : 41.40744f32, }, "css.properties.background-clip.border-area" =>
 	CSSFeature { id : "css.properties.background-clip.border-area", name :
 	"background-clip: border-area", description :
 	"The background-clip: border-area CSS declaration draws the background underneath only the border of an element.",
@@ -3190,7 +3190,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	[], popularity : 45.8784f32, }, "css.properties.background-clip.content-box" =>
+	[], popularity : 41.40744f32, }, "css.properties.background-clip.content-box" =>
 	CSSFeature { id : "css.properties.background-clip.content-box", name :
 	"background-clip", description :
 	"The background-clip CSS property sets the extent of the background: the padding box, the content box, or the default border box.",
@@ -3202,7 +3202,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	[], popularity : 45.8784f32, }, "css.properties.background-clip.padding-box" =>
+	[], popularity : 41.40744f32, }, "css.properties.background-clip.padding-box" =>
 	CSSFeature { id : "css.properties.background-clip.padding-box", name :
 	"background-clip", description :
 	"The background-clip CSS property sets the extent of the background: the padding box, the content box, or the default border box.",
@@ -3214,8 +3214,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	[], popularity : 45.8784f32, }, "css.properties.background-clip.text" => CSSFeature {
-	id : "css.properties.background-clip.text", name : "background-clip: text",
+	[], popularity : 41.40744f32, }, "css.properties.background-clip.text" => CSSFeature
+	{ id : "css.properties.background-clip.text", name : "background-clip: text",
 	description :
 	"The background-clip: text CSS declaration draws the background underneath only the text in the element.",
 	spec : "https://drafts.csswg.org/css-backgrounds-4/#background-clip", groups : &
@@ -3235,7 +3235,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 90.06965f32, }, "css.properties.background-color.transparent" =>
+	[], popularity : 89.34623f32, }, "css.properties.background-color.transparent" =>
 	CSSFeature { id : "css.properties.background-color.transparent", name :
 	"background-color", description :
 	"The background-color CSS property sets the fill color of an element, behind any content and background images or gradients.",
@@ -3247,7 +3247,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 90.06965f32, }, "css.properties.background-image" => CSSFeature { id
+	[], popularity : 89.34623f32, }, "css.properties.background-image" => CSSFeature { id
 	: "css.properties.background-image", name : "background-image", description :
 	"The background-image CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.",
 	spec : "https://drafts.csswg.org/css-backgrounds-3/#background-image", groups : &
@@ -3258,7 +3258,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 77.69843f32, }, "css.properties.background-image.element" =>
+	[], popularity : 77.9349f32, }, "css.properties.background-image.element" =>
 	CSSFeature { id : "css.properties.background-image.element", name : "element()",
 	description :
 	"The element() CSS function creates a live-updating image from an HTML element that can be used as an image or background image.",
@@ -3301,7 +3301,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 77.69843f32, }, "css.properties.background-image.none" => CSSFeature
+	[], popularity : 77.9349f32, }, "css.properties.background-image.none" => CSSFeature
 	{ id : "css.properties.background-image.none", name : "background-image", description
 	:
 	"The background-image CSS property sets the graphics to display behind the content of an element and in front of the background color. Graphics may be any combination of images or gradients.",
@@ -3313,7 +3313,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 77.69843f32, }, "css.properties.background-image.svg_images" =>
+	[], popularity : 77.9349f32, }, "css.properties.background-image.svg_images" =>
 	CSSFeature { id : "css.properties.background-image.svg_images", name : "SVG",
 	description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -3336,7 +3336,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 7.365023f32, }, "css.properties.background-origin.border-box" =>
+	[], popularity : 8.836246f32, }, "css.properties.background-origin.border-box" =>
 	CSSFeature { id : "css.properties.background-origin.border-box", name :
 	"background-origin", description :
 	"The background-origin CSS property sets the background starting position relative to the border and padding of an element.",
@@ -3348,7 +3348,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(2u16, 0u16), }, caniuse : &
-	[], popularity : 7.365023f32, }, "css.properties.background-origin.content-box" =>
+	[], popularity : 8.836246f32, }, "css.properties.background-origin.content-box" =>
 	CSSFeature { id : "css.properties.background-origin.content-box", name :
 	"background-origin", description :
 	"The background-origin CSS property sets the background starting position relative to the border and padding of an element.",
@@ -3360,7 +3360,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 7.365023f32, }, "css.properties.background-origin.padding-box" =>
+	[], popularity : 8.836246f32, }, "css.properties.background-origin.padding-box" =>
 	CSSFeature { id : "css.properties.background-origin.padding-box", name :
 	"background-origin", description :
 	"The background-origin CSS property sets the background starting position relative to the border and padding of an element.",
@@ -3372,7 +3372,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(2u16, 0u16), }, caniuse : &
-	[], popularity : 7.365023f32, }, "css.properties.background-position" => CSSFeature {
+	[], popularity : 8.836246f32, }, "css.properties.background-position" => CSSFeature {
 	id : "css.properties.background-position", name : "background-position", description
 	:
 	"The background-position CSS property offsets the initial position of background images relative to the background origin.",
@@ -3385,7 +3385,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position-x" => CSSFeature { id :
 	"css.properties.background-position-x", name : "background-position", description :
 	"The background-position CSS property offsets the initial position of background images relative to the background origin.",
@@ -3398,7 +3398,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position-x.side-relative_values" => CSSFeature { id :
 	"css.properties.background-position-x.side-relative_values", name :
 	"background-position", description :
@@ -3410,7 +3410,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position-y" => CSSFeature { id :
 	"css.properties.background-position-y", name : "background-position", description :
 	"The background-position CSS property offsets the initial position of background images relative to the background origin.",
@@ -3423,7 +3423,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position-y.side-relative_values" => CSSFeature { id :
 	"css.properties.background-position-y.side-relative_values", name :
 	"background-position", description :
@@ -3435,7 +3435,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.bottom" => CSSFeature { id :
 	"css.properties.background-position.bottom", name : "background-position",
 	description :
@@ -3449,7 +3449,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.center" => CSSFeature { id :
 	"css.properties.background-position.center", name : "background-position",
 	description :
@@ -3463,7 +3463,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.left" => CSSFeature { id :
 	"css.properties.background-position.left", name : "background-position", description
 	:
@@ -3477,7 +3477,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.multiple_backgrounds" => CSSFeature { id :
 	"css.properties.background-position.multiple_backgrounds", name :
 	"background-position", description :
@@ -3491,7 +3491,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.right" => CSSFeature { id :
 	"css.properties.background-position.right", name : "background-position", description
 	:
@@ -3505,7 +3505,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.side-relative_values" => CSSFeature { id :
 	"css.properties.background-position.side-relative_values", name :
 	"background-position", description :
@@ -3519,7 +3519,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(13u16, 0u16), firefox_android : BrowserVersion(14u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-position.top" => CSSFeature { id :
 	"css.properties.background-position.top", name : "background-position", description :
 	"The background-position CSS property offsets the initial position of background images relative to the background origin.",
@@ -3532,7 +3532,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
 	["https://caniuse.com/css-background-offsets",
-	"https://caniuse.com/background-position-x-y"], popularity : 75.23891f32, },
+	"https://caniuse.com/background-position-x-y"], popularity : 75.55888f32, },
 	"css.properties.background-repeat" => CSSFeature { id :
 	"css.properties.background-repeat", name : "background-repeat", description :
 	"The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3544,7 +3544,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.2-value" => CSSFeature { id :
 	"css.properties.background-repeat.2-value", name : "background-repeat", description :
 	"The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3556,7 +3556,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(13u16, 0u16), firefox_android : BrowserVersion(14u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.multiple_backgrounds" => CSSFeature { id :
 	"css.properties.background-repeat.multiple_backgrounds", name : "background-repeat",
 	description :
@@ -3569,7 +3569,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.no-repeat" => CSSFeature { id :
 	"css.properties.background-repeat.no-repeat", name : "background-repeat", description
 	: "The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3581,7 +3581,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.repeat" => CSSFeature { id :
 	"css.properties.background-repeat.repeat", name : "background-repeat", description :
 	"The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3593,7 +3593,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.repeat-x" => CSSFeature { id :
 	"css.properties.background-repeat.repeat-x", name : "background-repeat", description
 	: "The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3605,7 +3605,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.repeat-y" => CSSFeature { id :
 	"css.properties.background-repeat.repeat-y", name : "background-repeat", description
 	: "The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3617,7 +3617,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.round" => CSSFeature { id :
 	"css.properties.background-repeat.round", name : "background-repeat", description :
 	"The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3629,7 +3629,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(30u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-repeat.space" => CSSFeature { id :
 	"css.properties.background-repeat.space", name : "background-repeat", description :
 	"The background-repeat CSS property sets how a background image is tiled.", spec :
@@ -3641,7 +3641,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(30u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/background-repeat-round-space"], popularity : 72.18136f32, },
+	["https://caniuse.com/background-repeat-round-space"], popularity : 72.84349f32, },
 	"css.properties.background-size" => CSSFeature { id :
 	"css.properties.background-size", name : "background-size", description :
 	"The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.",
@@ -3653,7 +3653,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 72.79004f32, }, "css.properties.background-size.auto" => CSSFeature
+	[], popularity : 73.980446f32, }, "css.properties.background-size.auto" => CSSFeature
 	{ id : "css.properties.background-size.auto", name : "background-size", description :
 	"The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.",
 	spec : "https://drafts.csswg.org/css-backgrounds-3/#background-size", groups : &
@@ -3664,7 +3664,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 72.79004f32, }, "css.properties.background-size.contain" =>
+	[], popularity : 73.980446f32, }, "css.properties.background-size.contain" =>
 	CSSFeature { id : "css.properties.background-size.contain", name : "background-size",
 	description :
 	"The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.",
@@ -3676,9 +3676,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 72.79004f32, }, "css.properties.background-size.cover" => CSSFeature
-	{ id : "css.properties.background-size.cover", name : "background-size", description
-	:
+	[], popularity : 73.980446f32, }, "css.properties.background-size.cover" =>
+	CSSFeature { id : "css.properties.background-size.cover", name : "background-size",
+	description :
 	"The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.",
 	spec : "https://drafts.csswg.org/css-backgrounds-3/#background-size", groups : &
 	["background"], baseline_status : BaselineStatus::High { since :
@@ -3688,7 +3688,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 72.79004f32, }, "css.properties.background.SVG_image_as_background"
+	[], popularity : 73.980446f32, }, "css.properties.background.SVG_image_as_background"
 	=> CSSFeature { id : "css.properties.background.SVG_image_as_background", name :
 	"SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -3711,7 +3711,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(22u16, 0u16), firefox_android : BrowserVersion(22u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(4u16, 0u16), }, caniuse : &
-	[], popularity : 45.8784f32, }, "css.properties.background.background-origin" =>
+	[], popularity : 41.40744f32, }, "css.properties.background.background-origin" =>
 	CSSFeature { id : "css.properties.background.background-origin", name :
 	"background-origin", description :
 	"The background-origin CSS property sets the background starting position relative to the border and padding of an element.",
@@ -3723,7 +3723,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(22u16, 0u16), firefox_android : BrowserVersion(22u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(4u16, 0u16), }, caniuse : &
-	[], popularity : 7.365023f32, }, "css.properties.background.background-size" =>
+	[], popularity : 8.836246f32, }, "css.properties.background.background-size" =>
 	CSSFeature { id : "css.properties.background.background-size", name :
 	"background-size", description :
 	"The background-size CSS property scales or stretches a background based on the size of the element (with the contain and cover keywords), a length, or percentage.",
@@ -3735,8 +3735,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(18u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(4u16, 0u16), }, caniuse : &
-	[], popularity : 72.79004f32, }, "css.properties.background.local" => CSSFeature { id
-	: "css.properties.background.local", name : "background", description :
+	[], popularity : 73.980446f32, }, "css.properties.background.local" => CSSFeature {
+	id : "css.properties.background.local", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
 	spec : "https://drafts.csswg.org/css-backgrounds-3/#background", groups : &
 	["background"], baseline_status : BaselineStatus::High { since :
@@ -3746,7 +3746,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.multiple_backgrounds" => CSSFeature { id :
 	"css.properties.background.multiple_backgrounds", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3758,7 +3758,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.no-repeat" => CSSFeature { id :
 	"css.properties.background.no-repeat", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3770,7 +3770,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.none" => CSSFeature { id :
 	"css.properties.background.none", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3782,7 +3782,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.repeat" => CSSFeature { id :
 	"css.properties.background.repeat", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3794,7 +3794,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.repeat-x" => CSSFeature { id :
 	"css.properties.background.repeat-x", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3806,7 +3806,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.repeat-y" => CSSFeature { id :
 	"css.properties.background.repeat-y", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3818,7 +3818,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.round" => CSSFeature { id :
 	"css.properties.background.round", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3830,7 +3830,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.scroll" => CSSFeature { id :
 	"css.properties.background.scroll", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3842,7 +3842,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.space" => CSSFeature { id :
 	"css.properties.background.space", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3854,7 +3854,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.background.transparent" => CSSFeature { id :
 	"css.properties.background.transparent", name : "background", description :
 	"The background CSS property is a shorthand that sets several background properties at once.",
@@ -3866,7 +3866,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/multibackgrounds"], popularity : 87.7536f32, },
+	["https://caniuse.com/multibackgrounds"], popularity : 87.31018f32, },
 	"css.properties.baseline-shift" => CSSFeature { id : "css.properties.baseline-shift",
 	name : "baseline-shift", description :
 	"The baseline-shift CSS property sets the position of an element relative to its dominant baseline.",
@@ -3875,7 +3875,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(4u16, 0u16), safari_ios :
-	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.461731f32, },
+	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.401837f32, },
 	"css.properties.baseline-shift.baseline" => CSSFeature { id :
 	"css.properties.baseline-shift.baseline", name : "baseline-shift", description :
 	"The baseline-shift CSS property sets the position of an element relative to its dominant baseline.",
@@ -3884,7 +3884,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(4u16, 0u16), safari_ios :
-	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.461731f32, },
+	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.401837f32, },
 	"css.properties.baseline-shift.sub" => CSSFeature { id :
 	"css.properties.baseline-shift.sub", name : "baseline-shift", description :
 	"The baseline-shift CSS property sets the position of an element relative to its dominant baseline.",
@@ -3893,7 +3893,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(4u16, 0u16), safari_ios :
-	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.461731f32, },
+	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.401837f32, },
 	"css.properties.baseline-shift.super" => CSSFeature { id :
 	"css.properties.baseline-shift.super", name : "baseline-shift", description :
 	"The baseline-shift CSS property sets the position of an element relative to its dominant baseline.",
@@ -3902,7 +3902,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(1u16, 0u16), chrome_android : BrowserVersion(18u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(4u16, 0u16), safari_ios :
-	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.461731f32, },
+	BrowserVersion(3u16, 2u16), }, caniuse : & [], popularity : 0.401837f32, },
 	"css.properties.baseline-source" => CSSFeature { id :
 	"css.properties.baseline-source", name : "baseline-source", description :
 	"The baseline-source CSS property controls how inline-level boxes with multiple lines of text are aligned with the surrounding text. By default, which typographic baseline is used depends on the display property value.",
@@ -3911,7 +3911,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), chrome_android : BrowserVersion(111u16, 0u16), edge :
 	BrowserVersion(111u16, 0u16), firefox : BrowserVersion(115u16, 0u16), firefox_android
 	: BrowserVersion(115u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.024668f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.020531f32, },
 	"css.properties.baseline-source.auto" => CSSFeature { id :
 	"css.properties.baseline-source.auto", name : "baseline-source", description :
 	"The baseline-source CSS property controls how inline-level boxes with multiple lines of text are aligned with the surrounding text. By default, which typographic baseline is used depends on the display property value.",
@@ -3920,7 +3920,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), chrome_android : BrowserVersion(111u16, 0u16), edge :
 	BrowserVersion(111u16, 0u16), firefox : BrowserVersion(115u16, 0u16), firefox_android
 	: BrowserVersion(115u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.024668f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.020531f32, },
 	"css.properties.baseline-source.first" => CSSFeature { id :
 	"css.properties.baseline-source.first", name : "baseline-source", description :
 	"The baseline-source CSS property controls how inline-level boxes with multiple lines of text are aligned with the surrounding text. By default, which typographic baseline is used depends on the display property value.",
@@ -3929,7 +3929,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), chrome_android : BrowserVersion(111u16, 0u16), edge :
 	BrowserVersion(111u16, 0u16), firefox : BrowserVersion(115u16, 0u16), firefox_android
 	: BrowserVersion(115u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.024668f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.020531f32, },
 	"css.properties.baseline-source.last" => CSSFeature { id :
 	"css.properties.baseline-source.last", name : "baseline-source", description :
 	"The baseline-source CSS property controls how inline-level boxes with multiple lines of text are aligned with the surrounding text. By default, which typographic baseline is used depends on the display property value.",
@@ -3938,7 +3938,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), chrome_android : BrowserVersion(111u16, 0u16), edge :
 	BrowserVersion(111u16, 0u16), firefox : BrowserVersion(115u16, 0u16), firefox_android
 	: BrowserVersion(115u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.024668f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.020531f32, },
 	"css.properties.block-size" => CSSFeature { id : "css.properties.block-size", name :
 	"Logical properties", description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -4192,7 +4192,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-bottom-left-radius.elliptical_corners" => CSSFeature { id :
 	"css.properties.border-bottom-left-radius.elliptical_corners", name :
 	"border-radius", description :
@@ -4205,7 +4205,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-bottom-left-radius.percentages" => CSSFeature { id :
 	"css.properties.border-bottom-left-radius.percentages", name : "border-radius",
 	description :
@@ -4218,7 +4218,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-bottom-right-radius" => CSSFeature { id :
 	"css.properties.border-bottom-right-radius", name : "border-radius", description :
 	"The border-radius CSS property rounds the corners of the border drawn around an element.",
@@ -4230,7 +4230,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-bottom-right-radius.elliptical_corners" => CSSFeature { id :
 	"css.properties.border-bottom-right-radius.elliptical_corners", name :
 	"border-radius", description :
@@ -4243,7 +4243,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-bottom-right-radius.percentages" => CSSFeature { id :
 	"css.properties.border-bottom-right-radius.percentages", name : "border-radius",
 	description :
@@ -4256,7 +4256,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-bottom-style" => CSSFeature { id :
 	"css.properties.border-bottom-style", name : "Borders", description :
 	"The border CSS property sets the color, style, and width of the line around an element.",
@@ -4664,7 +4664,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-outset" => CSSFeature { id :
 	"css.properties.border-image-outset", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4676,7 +4676,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-repeat" => CSSFeature { id :
 	"css.properties.border-image-repeat", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4688,7 +4688,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-repeat.repeat" => CSSFeature { id :
 	"css.properties.border-image-repeat.repeat", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4700,7 +4700,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-repeat.round" => CSSFeature { id :
 	"css.properties.border-image-repeat.round", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4712,7 +4712,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(30u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-repeat.space" => CSSFeature { id :
 	"css.properties.border-image-repeat.space", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4724,7 +4724,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(56u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(50u16, 0u16), firefox_android : BrowserVersion(50u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-repeat.stretch" => CSSFeature { id :
 	"css.properties.border-image-repeat.stretch", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4736,7 +4736,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-slice" => CSSFeature { id :
 	"css.properties.border-image-slice", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4748,7 +4748,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-source" => CSSFeature { id :
 	"css.properties.border-image-source", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4760,7 +4760,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-width" => CSSFeature { id :
 	"css.properties.border-image-width", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4772,7 +4772,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(13u16, 0u16), firefox_android : BrowserVersion(14u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image-width.auto" => CSSFeature { id :
 	"css.properties.border-image-width.auto", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4784,7 +4784,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.fill" => CSSFeature { id :
 	"css.properties.border-image.fill", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4796,7 +4796,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.gradient" => CSSFeature { id :
 	"css.properties.border-image.gradient", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4808,7 +4808,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(29u16, 0u16), firefox_android : BrowserVersion(29u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.none" => CSSFeature { id :
 	"css.properties.border-image.none", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4820,7 +4820,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.optional_border_image_slice" => CSSFeature { id :
 	"css.properties.border-image.optional_border_image_slice", name : "Border images",
 	description : "The border-image CSS property draws an image around an element.", spec
@@ -4832,7 +4832,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.repeat" => CSSFeature { id :
 	"css.properties.border-image.repeat", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4844,7 +4844,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.round" => CSSFeature { id :
 	"css.properties.border-image.round", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4856,7 +4856,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.space" => CSSFeature { id :
 	"css.properties.border-image.space", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4868,7 +4868,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-image.stretch" => CSSFeature { id :
 	"css.properties.border-image.stretch", name : "Border images", description :
 	"The border-image CSS property draws an image around an element.", spec :
@@ -4880,7 +4880,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-image"], popularity : 5.443545f32, },
+	["https://caniuse.com/border-image"], popularity : 5.730539f32, },
 	"css.properties.border-inline" => CSSFeature { id : "css.properties.border-inline",
 	name : "Logical properties", description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -5380,7 +5380,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-radius.4_values_for_4_corners" => CSSFeature { id :
 	"css.properties.border-radius.4_values_for_4_corners", name : "border-radius",
 	description :
@@ -5393,7 +5393,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-radius.elliptical_borders" => CSSFeature { id :
 	"css.properties.border-radius.elliptical_borders", name : "border-radius",
 	description :
@@ -5406,7 +5406,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-radius.percentages" => CSSFeature { id :
 	"css.properties.border-radius.percentages", name : "border-radius", description :
 	"The border-radius CSS property rounds the corners of the border drawn around an element.",
@@ -5418,7 +5418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-right" => CSSFeature { id : "css.properties.border-right",
 	name : "Borders", description :
 	"The border CSS property sets the color, style, and width of the line around an element.",
@@ -5972,7 +5972,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-top-left-radius.elliptical_corners" => CSSFeature { id :
 	"css.properties.border-top-left-radius.elliptical_corners", name : "border-radius",
 	description :
@@ -5985,7 +5985,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-top-left-radius.percentages" => CSSFeature { id :
 	"css.properties.border-top-left-radius.percentages", name : "border-radius",
 	description :
@@ -5998,7 +5998,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-top-right-radius" => CSSFeature { id :
 	"css.properties.border-top-right-radius", name : "border-radius", description :
 	"The border-radius CSS property rounds the corners of the border drawn around an element.",
@@ -6010,7 +6010,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-top-right-radius.elliptical_corners" => CSSFeature { id :
 	"css.properties.border-top-right-radius.elliptical_corners", name : "border-radius",
 	description :
@@ -6023,7 +6023,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-top-right-radius.percentages" => CSSFeature { id :
 	"css.properties.border-top-right-radius.percentages", name : "border-radius",
 	description :
@@ -6036,7 +6036,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	["https://caniuse.com/border-radius"], popularity : 86.30783f32, },
+	["https://caniuse.com/border-radius"], popularity : 86.30184f32, },
 	"css.properties.border-top-style" => CSSFeature { id :
 	"css.properties.border-top-style", name : "Borders", description :
 	"The border CSS property sets the color, style, and width of the line around an element.",
@@ -6604,7 +6604,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(32u16, 0u16), firefox_android
 	: BrowserVersion(32u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-boxdecorationbreak"],
-	popularity : 2.562424f32, }, "css.properties.box-decoration-break.clone" =>
+	popularity : 2.240388f32, }, "css.properties.box-decoration-break.clone" =>
 	CSSFeature { id : "css.properties.box-decoration-break.clone", name :
 	"box-decoration-break", description :
 	"The box-decoration-break CSS property sets whether box decorations, such as borders or backgrounds, of an element divided across a page, column, or region wraps each fragment or splits across the break.",
@@ -6614,7 +6614,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(32u16, 0u16), firefox_android
 	: BrowserVersion(32u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-boxdecorationbreak"],
-	popularity : 2.562424f32, }, "css.properties.box-decoration-break.slice" =>
+	popularity : 2.240388f32, }, "css.properties.box-decoration-break.slice" =>
 	CSSFeature { id : "css.properties.box-decoration-break.slice", name :
 	"box-decoration-break", description :
 	"The box-decoration-break CSS property sets whether box decorations, such as borders or backgrounds, of an element divided across a page, column, or region wraps each fragment or splits across the break.",
@@ -6624,7 +6624,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(32u16, 0u16), firefox_android
 	: BrowserVersion(32u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-boxdecorationbreak"],
-	popularity : 2.562424f32, }, "css.properties.box-shadow" => CSSFeature { id :
+	popularity : 2.240388f32, }, "css.properties.box-shadow" => CSSFeature { id :
 	"css.properties.box-shadow", name : "box-shadow", description :
 	"The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.",
 	spec : "https://drafts.csswg.org/css-backgrounds-3/#box-shadow", groups : &
@@ -6635,7 +6635,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-boxshadow"], popularity : 82.47994f32, },
+	["https://caniuse.com/css-boxshadow"], popularity : 81.94909f32, },
 	"css.properties.box-shadow.inset" => CSSFeature { id :
 	"css.properties.box-shadow.inset", name : "box-shadow", description :
 	"The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.",
@@ -6647,7 +6647,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-boxshadow"], popularity : 82.47994f32, },
+	["https://caniuse.com/css-boxshadow"], popularity : 81.94909f32, },
 	"css.properties.box-shadow.multiple_shadows" => CSSFeature { id :
 	"css.properties.box-shadow.multiple_shadows", name : "box-shadow", description :
 	"The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.",
@@ -6659,7 +6659,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-boxshadow"], popularity : 82.47994f32, },
+	["https://caniuse.com/css-boxshadow"], popularity : 81.94909f32, },
 	"css.properties.box-shadow.none" => CSSFeature { id :
 	"css.properties.box-shadow.none", name : "box-shadow", description :
 	"The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.",
@@ -6671,7 +6671,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-boxshadow"], popularity : 82.47994f32, },
+	["https://caniuse.com/css-boxshadow"], popularity : 81.94909f32, },
 	"css.properties.box-shadow.spread_radius" => CSSFeature { id :
 	"css.properties.box-shadow.spread_radius", name : "box-shadow", description :
 	"The box-shadow CSS property applies shadow effects around an element's frame. This can create drop shadow and inner shadow effects.",
@@ -6683,7 +6683,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(4u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-boxshadow"], popularity : 82.47994f32, },
+	["https://caniuse.com/css-boxshadow"], popularity : 81.94909f32, },
 	"css.properties.box-sizing" => CSSFeature { id : "css.properties.box-sizing", name :
 	"box-sizing", description :
 	"The box-sizing CSS property sets whether an element's width and height are calculated based on the content-box, which does not count the size of borders or padding, or border-box, which does count them.",
@@ -6695,7 +6695,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(29u16, 0u16), firefox_android : BrowserVersion(29u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css3-boxsizing"], popularity : 85.953835f32, },
+	["https://caniuse.com/css3-boxsizing"], popularity : 85.84995f32, },
 	"css.properties.box-sizing.border-box" => CSSFeature { id :
 	"css.properties.box-sizing.border-box", name : "box-sizing", description :
 	"The box-sizing CSS property sets whether an element's width and height are calculated based on the content-box, which does not count the size of borders or padding, or border-box, which does count them.",
@@ -6707,7 +6707,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(29u16, 0u16), firefox_android : BrowserVersion(29u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css3-boxsizing"], popularity : 85.953835f32, },
+	["https://caniuse.com/css3-boxsizing"], popularity : 85.84995f32, },
 	"css.properties.box-sizing.content-box" => CSSFeature { id :
 	"css.properties.box-sizing.content-box", name : "box-sizing", description :
 	"The box-sizing CSS property sets whether an element's width and height are calculated based on the content-box, which does not count the size of borders or padding, or border-box, which does count them.",
@@ -6719,7 +6719,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(29u16, 0u16), firefox_android : BrowserVersion(29u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css3-boxsizing"], popularity : 85.953835f32, },
+	["https://caniuse.com/css3-boxsizing"], popularity : 85.84995f32, },
 	"css.properties.break-after" => CSSFeature { id : "css.properties.break-after", name
 	: "Page breaks", description :
 	"In printed page layouts, the break-after, break-before, break-inside CSS properties control where printed pages start and end. Also known as pagination or page breaking.",
@@ -7282,7 +7282,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(53u16, 0u16), firefox_android : BrowserVersion(53u16, 0u16),
 	safari : BrowserVersion(11u16, 1u16), safari_ios : BrowserVersion(11u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-caret-color"], popularity : 15.633729f32, },
+	caniuse : & ["https://caniuse.com/css-caret-color"], popularity : 13.103502f32, },
 	"css.properties.caret-shape" => CSSFeature { id : "css.properties.caret-shape", name
 	: "caret-shape", description :
 	"The caret-shape CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.",
@@ -7291,7 +7291,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(144u16, 0u16), chrome_android : BrowserVersion(144u16, 0u16), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.024369f32, }, "css.properties.caret-shape.auto"
+	0), }, caniuse : & [], popularity : 0.017694f32, }, "css.properties.caret-shape.auto"
 	=> CSSFeature { id : "css.properties.caret-shape.auto", name : "caret-shape",
 	description :
 	"The caret-shape CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.",
@@ -7300,7 +7300,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(144u16, 0u16), chrome_android : BrowserVersion(144u16, 0u16), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.024369f32, }, "css.properties.caret-shape.bar"
+	0), }, caniuse : & [], popularity : 0.017694f32, }, "css.properties.caret-shape.bar"
 	=> CSSFeature { id : "css.properties.caret-shape.bar", name : "caret-shape",
 	description :
 	"The caret-shape CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.",
@@ -7309,7 +7309,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(144u16, 0u16), chrome_android : BrowserVersion(144u16, 0u16), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.024369f32, },
+	0), }, caniuse : & [], popularity : 0.017694f32, },
 	"css.properties.caret-shape.block" => CSSFeature { id :
 	"css.properties.caret-shape.block", name : "caret-shape", description :
 	"The caret-shape CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.",
@@ -7318,7 +7318,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(144u16, 0u16), chrome_android : BrowserVersion(144u16, 0u16), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.024369f32, },
+	0), }, caniuse : & [], popularity : 0.017694f32, },
 	"css.properties.caret-shape.underscore" => CSSFeature { id :
 	"css.properties.caret-shape.underscore", name : "caret-shape", description :
 	"The caret-shape CSS property sets the shape of the insertion caret, the symbol that shows where the next character is to be inserted or deleted.",
@@ -7327,7 +7327,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(144u16, 0u16), chrome_android : BrowserVersion(144u16, 0u16), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.024369f32, }, "css.properties.clear" =>
+	0), }, caniuse : & [], popularity : 0.017694f32, }, "css.properties.clear" =>
 	CSSFeature { id : "css.properties.clear", name : "float and clear", description :
 	"The float CSS property aligns an element to either side of its container, allowing text and inline elements to flow around it. The clear CSS property sets whether an element is moved below floating elements that proceed it.",
 	spec : "https://drafts.csswg.org/css2/#propdef-float", groups : & [], baseline_status
@@ -7406,7 +7406,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 54.01846f32, }, "css.properties.clip-path" => CSSFeature { id :
+	[], popularity : 50.85726f32, }, "css.properties.clip-path" => CSSFeature { id :
 	"css.properties.clip-path", name : "clip-path", description :
 	"The clip-path CSS property and SVG attribute set the visible area of an element. Everything outside the area will be hidden.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-clip-path", groups : &
@@ -7417,9 +7417,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(55u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 45.039024f32, }, "css.properties.clip-path.basic_shape" =>
-	CSSFeature { id : "css.properties.clip-path.basic_shape", name : "clip-path",
-	description :
+	[], popularity : 42.59009f32, }, "css.properties.clip-path.basic_shape" => CSSFeature
+	{ id : "css.properties.clip-path.basic_shape", name : "clip-path", description :
 	"The clip-path CSS property and SVG attribute set the visible area of an element. Everything outside the area will be hidden.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-clip-path", groups : &
 	["clipping-shapes-masking"], baseline_status : BaselineStatus::High { since :
@@ -7429,7 +7428,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(55u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(54u16, 0u16), firefox_android : BrowserVersion(54u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 45.039024f32, }, "css.properties.clip-path.fill-box" => CSSFeature {
+	[], popularity : 42.59009f32, }, "css.properties.clip-path.fill-box" => CSSFeature {
 	id : "css.properties.clip-path.fill-box", name : "Clip path boxes", description :
 	"The fill-box, stroke-box, and view-box values for clip-path set an edge of the element's box to use as the clipping shape.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-clip-path", groups : &
@@ -7451,7 +7450,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(55u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 45.039024f32, }, "css.properties.clip-path.is_animatable" =>
+	[], popularity : 42.59009f32, }, "css.properties.clip-path.is_animatable" =>
 	CSSFeature { id : "css.properties.clip-path.is_animatable", name :
 	"Animatable clipping paths", description :
 	"The clip-path property can be animated using CSS transitions and animations.", spec
@@ -7474,7 +7473,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(88u16, 0u16), edge : BrowserVersion(88u16, 0u16), firefox :
 	BrowserVersion(71u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 0u16), }, caniuse : &
-	[], popularity : 45.039024f32, }, "css.properties.clip-path.stroke-box" => CSSFeature
+	[], popularity : 42.59009f32, }, "css.properties.clip-path.stroke-box" => CSSFeature
 	{ id : "css.properties.clip-path.stroke-box", name : "Clip path boxes", description :
 	"The fill-box, stroke-box, and view-box values for clip-path set an edge of the element's box to use as the clipping shape.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-clip-path", groups : &
@@ -7496,7 +7495,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(55u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 45.039024f32, }, "css.properties.clip-path.view-box" => CSSFeature {
+	[], popularity : 42.59009f32, }, "css.properties.clip-path.view-box" => CSSFeature {
 	id : "css.properties.clip-path.view-box", name : "Clip path boxes", description :
 	"The fill-box, stroke-box, and view-box values for clip-path set an edge of the element's box to use as the clipping shape.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-clip-path", groups : &
@@ -7545,7 +7544,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 54.01846f32, }, "css.properties.color" => CSSFeature { id :
+	[], popularity : 50.85726f32, }, "css.properties.color" => CSSFeature { id :
 	"css.properties.color", name : "Color", description :
 	"The color CSS property sets the primary foreground color of an element, which is used for text, the default border color, and text decorations.",
 	spec : "https://drafts.csswg.org/css-color-4/#the-color-property", groups : & [],
@@ -7555,7 +7554,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 90.552376f32, }, "css.properties.color-adjust" =>
+	caniuse : & [], popularity : 90.0028f32, }, "css.properties.color-adjust" =>
 	CSSFeature { id : "css.properties.color-adjust", name : "color-adjust", description :
 	"The color-adjust shorthand CSS property allows multiple performance related color adjustments to be set at once. Setting the print-color-adjust CSS property directly is preferred, as it is the only such adjustment so far defined.",
 	spec : "https://drafts.csswg.org/css-color-adjust-1/#color-adjust", groups : &
@@ -7663,7 +7662,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(81u16, 0u16), edge : BrowserVersion(81u16, 0u16),
 	firefox : BrowserVersion(96u16, 0u16), firefox_android : BrowserVersion(96u16, 0u16),
 	safari : BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), },
-	caniuse : & [], popularity : 17.024416f32, }, "css.properties.color-scheme.dark" =>
+	caniuse : & [], popularity : 17.10765f32, }, "css.properties.color-scheme.dark" =>
 	CSSFeature { id : "css.properties.color-scheme.dark", name : "color-scheme",
 	description :
 	"The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.",
@@ -7674,7 +7673,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(81u16, 0u16), edge : BrowserVersion(81u16, 0u16),
 	firefox : BrowserVersion(96u16, 0u16), firefox_android : BrowserVersion(96u16, 0u16),
 	safari : BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), },
-	caniuse : & [], popularity : 17.024416f32, }, "css.properties.color-scheme.light" =>
+	caniuse : & [], popularity : 17.10765f32, }, "css.properties.color-scheme.light" =>
 	CSSFeature { id : "css.properties.color-scheme.light", name : "color-scheme",
 	description :
 	"The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.",
@@ -7685,7 +7684,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(81u16, 0u16), edge : BrowserVersion(81u16, 0u16),
 	firefox : BrowserVersion(96u16, 0u16), firefox_android : BrowserVersion(96u16, 0u16),
 	safari : BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), },
-	caniuse : & [], popularity : 17.024416f32, }, "css.properties.color-scheme.normal" =>
+	caniuse : & [], popularity : 17.10765f32, }, "css.properties.color-scheme.normal" =>
 	CSSFeature { id : "css.properties.color-scheme.normal", name : "color-scheme",
 	description :
 	"The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.",
@@ -7696,7 +7695,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(81u16, 0u16), edge : BrowserVersion(81u16, 0u16),
 	firefox : BrowserVersion(96u16, 0u16), firefox_android : BrowserVersion(96u16, 0u16),
 	safari : BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), },
-	caniuse : & [], popularity : 17.024416f32, }, "css.properties.color-scheme.only" =>
+	caniuse : & [], popularity : 17.10765f32, }, "css.properties.color-scheme.only" =>
 	CSSFeature { id : "css.properties.color-scheme.only", name : "color-scheme",
 	description :
 	"The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.",
@@ -7707,7 +7706,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(98u16, 0u16), edge : BrowserVersion(98u16, 0u16),
 	firefox : BrowserVersion(96u16, 0u16), firefox_android : BrowserVersion(96u16, 0u16),
 	safari : BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), },
-	caniuse : & [], popularity : 17.024416f32, }, "css.properties.color.transparent" =>
+	caniuse : & [], popularity : 17.10765f32, }, "css.properties.color.transparent" =>
 	CSSFeature { id : "css.properties.color.transparent", name : "Color", description :
 	"The color CSS property sets the primary foreground color of an element, which is used for text, the default border color, and text decorations.",
 	spec : "https://drafts.csswg.org/css-color-4/#the-color-property", groups : & [],
@@ -7717,7 +7716,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 90.552376f32, }, "css.properties.column-count" =>
+	caniuse : & [], popularity : 90.0028f32, }, "css.properties.column-count" =>
 	CSSFeature { id : "css.properties.column-count", name : "Multi-column layout",
 	description :
 	"Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.",
@@ -7750,7 +7749,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(50u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 1.478747f32, }, "css.properties.column-fill.auto" => CSSFeature { id
+	[], popularity : 1.99148f32, }, "css.properties.column-fill.auto" => CSSFeature { id
 	: "css.properties.column-fill.auto", name : "column-fill", description :
 	"The column-fill CSS property sets the distribution of content across columns in a multi-column layout.",
 	spec : "https://drafts.csswg.org/css-multicol-1/#filling-columns", groups : &
@@ -7761,7 +7760,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(50u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 1.478747f32, }, "css.properties.column-fill.balance" => CSSFeature {
+	[], popularity : 1.99148f32, }, "css.properties.column-fill.balance" => CSSFeature {
 	id : "css.properties.column-fill.balance", name : "column-fill", description :
 	"The column-fill CSS property sets the distribution of content across columns in a multi-column layout.",
 	spec : "https://drafts.csswg.org/css-multicol-1/#filling-columns", groups : &
@@ -7772,7 +7771,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(50u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 1.478747f32, }, "css.properties.column-gap" => CSSFeature { id :
+	[], popularity : 1.99148f32, }, "css.properties.column-gap" => CSSFeature { id :
 	"css.properties.column-gap", name : "Multi-column layout", description :
 	"Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.",
 	spec : "https://drafts.csswg.org/css-multicol-1/", groups : & ["multi-column"],
@@ -7804,7 +7803,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(66u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16),
 	safari : BrowserVersion(12u16, 0u16), safari_ios : BrowserVersion(12u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.column-gap.multicol_context" => CSSFeature { id :
 	"css.properties.column-gap.multicol_context", name : "Multi-column layout",
 	description :
@@ -8211,7 +8210,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(50u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(71u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 0.705001f32, }, "css.properties.column-span.all" => CSSFeature { id
+	[], popularity : 0.989472f32, }, "css.properties.column-span.all" => CSSFeature { id
 	: "css.properties.column-span.all", name : "column-span", description :
 	"The column-span CSS property controls whether a child element extends across all columns of a multi-column parent.",
 	spec : "https://drafts.csswg.org/css-multicol-1/#spanning-columns", groups : &
@@ -8222,7 +8221,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(50u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(71u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 0.705001f32, }, "css.properties.column-span.none" => CSSFeature { id
+	[], popularity : 0.989472f32, }, "css.properties.column-span.none" => CSSFeature { id
 	: "css.properties.column-span.none", name : "column-span", description :
 	"The column-span CSS property controls whether a child element extends across all columns of a multi-column parent.",
 	spec : "https://drafts.csswg.org/css-multicol-1/#spanning-columns", groups : &
@@ -8233,7 +8232,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(50u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(71u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 0.705001f32, }, "css.properties.column-width" => CSSFeature { id :
+	[], popularity : 0.989472f32, }, "css.properties.column-width" => CSSFeature { id :
 	"css.properties.column-width", name : "Multi-column layout", description :
 	"Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.",
 	spec : "https://drafts.csswg.org/css-multicol-1/", groups : & ["multi-column"],
@@ -8275,7 +8274,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-containment"], popularity : 23.682978f32, },
+	["https://caniuse.com/css-containment"], popularity : 19.340828f32, },
 	"css.properties.contain-intrinsic-block-size" => CSSFeature { id :
 	"css.properties.contain-intrinsic-block-size", name : "contain-intrinsic-size",
 	description :
@@ -8287,7 +8286,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(95u16, 0u16), edge : BrowserVersion(95u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-block-size.none" => CSSFeature { id :
 	"css.properties.contain-intrinsic-block-size.none", name : "contain-intrinsic-size",
 	description :
@@ -8299,7 +8298,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(98u16, 0u16), edge : BrowserVersion(98u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-height" => CSSFeature { id :
 	"css.properties.contain-intrinsic-height", name : "contain-intrinsic-size",
 	description :
@@ -8311,7 +8310,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(95u16, 0u16), edge : BrowserVersion(95u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-height.none" => CSSFeature { id :
 	"css.properties.contain-intrinsic-height.none", name : "contain-intrinsic-size",
 	description :
@@ -8323,7 +8322,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(98u16, 0u16), edge : BrowserVersion(98u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-inline-size" => CSSFeature { id :
 	"css.properties.contain-intrinsic-inline-size", name : "contain-intrinsic-size",
 	description :
@@ -8335,7 +8334,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(95u16, 0u16), edge : BrowserVersion(95u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-inline-size.none" => CSSFeature { id :
 	"css.properties.contain-intrinsic-inline-size.none", name : "contain-intrinsic-size",
 	description :
@@ -8347,7 +8346,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(98u16, 0u16), edge : BrowserVersion(98u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-size" => CSSFeature { id :
 	"css.properties.contain-intrinsic-size", name : "contain-intrinsic-size", description
 	:
@@ -8359,7 +8358,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(83u16, 0u16), edge : BrowserVersion(83u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-size.auto_none" => CSSFeature { id :
 	"css.properties.contain-intrinsic-size.auto_none", name : "contain-intrinsic-size",
 	description :
@@ -8371,7 +8370,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(117u16, 0u16), edge : BrowserVersion(117u16, 0u16),
 	firefox : BrowserVersion(117u16, 0u16), firefox_android : BrowserVersion(117u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-size.none" => CSSFeature { id :
 	"css.properties.contain-intrinsic-size.none", name : "contain-intrinsic-size",
 	description :
@@ -8383,7 +8382,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(98u16, 0u16), edge : BrowserVersion(98u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-width" => CSSFeature { id :
 	"css.properties.contain-intrinsic-width", name : "contain-intrinsic-size",
 	description :
@@ -8395,7 +8394,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(95u16, 0u16), edge : BrowserVersion(95u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain-intrinsic-width.none" => CSSFeature { id :
 	"css.properties.contain-intrinsic-width.none", name : "contain-intrinsic-size",
 	description :
@@ -8407,7 +8406,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(98u16, 0u16), edge : BrowserVersion(98u16, 0u16),
 	firefox : BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 6.102947f32, },
+	0u16), }, caniuse : & [], popularity : 8.063335f32, },
 	"css.properties.contain.content" => CSSFeature { id :
 	"css.properties.contain.content", name : "contain", description :
 	"The contain CSS property sets limits to the scope of styles, layout, and paint rendering for speed and efficiency. The none keyword value disables containment, strict is equivalent to contain: size layout style paint, and content is equivalent to contain: layout style paint.",
@@ -8419,7 +8418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-containment"], popularity : 23.682978f32, },
+	["https://caniuse.com/css-containment"], popularity : 19.340828f32, },
 	"css.properties.contain.inline-size" => CSSFeature { id :
 	"css.properties.contain.inline-size", name : "Inline-size containment", description :
 	"The contain: inline-size CSS declaration prevents the element's inline dimension from being set by the element's contents. This permits the browser to avoid slower layout calculations.",
@@ -8453,7 +8452,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-containment"], popularity : 23.682978f32, },
+	["https://caniuse.com/css-containment"], popularity : 19.340828f32, },
 	"css.properties.contain.paint" => CSSFeature { id : "css.properties.contain.paint",
 	name : "Paint containment", description :
 	"The contain: paint CSS declaration prevents an element's descendants from being drawn outside the boundaries of the containing element, with any overflow clipped. This permits the browser to avoid slower painting calculations.",
@@ -8487,7 +8486,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-containment"], popularity : 23.682978f32, },
+	["https://caniuse.com/css-containment"], popularity : 19.340828f32, },
 	"css.properties.contain.style" => CSSFeature { id : "css.properties.contain.style",
 	name : "Style containment", description :
 	"The contain: style CSS declaration permits the browser to avoid slower layout calculations by preventing modification to counter (counter-increment and counter-set) and quotation styles (content property quote values) beyond the element's descendants.",
@@ -8621,7 +8620,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.content-visibility" =>
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.content-visibility" =>
 	CSSFeature { id : "css.properties.content-visibility", name : "content-visibility",
 	description :
 	"The content-visibility CSS property delays rendering an element, including layout and painting, until it is needed.",
@@ -8632,7 +8631,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(125u16, 0u16), firefox_android : BrowserVersion(125u16,
 	0u16), safari : BrowserVersion(18u16, 0u16), safari_ios : BrowserVersion(18u16,
 	0u16), }, caniuse : & ["https://caniuse.com/css-content-visibility"], popularity :
-	5.387251f32, }, "css.properties.content-visibility.auto" => CSSFeature { id :
+	8.677291f32, }, "css.properties.content-visibility.auto" => CSSFeature { id :
 	"css.properties.content-visibility.auto", name : "content-visibility", description :
 	"The content-visibility CSS property delays rendering an element, including layout and painting, until it is needed.",
 	spec : "https://drafts.csswg.org/css-contain-2/#content-visibility", groups : & [],
@@ -8642,7 +8641,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(125u16, 0u16), firefox_android : BrowserVersion(125u16,
 	0u16), safari : BrowserVersion(26u16, 0u16), safari_ios : BrowserVersion(26u16,
 	0u16), }, caniuse : & ["https://caniuse.com/css-content-visibility"], popularity :
-	5.387251f32, }, "css.properties.content-visibility.hidden" => CSSFeature { id :
+	8.677291f32, }, "css.properties.content-visibility.hidden" => CSSFeature { id :
 	"css.properties.content-visibility.hidden", name : "content-visibility", description
 	:
 	"The content-visibility CSS property delays rendering an element, including layout and painting, until it is needed.",
@@ -8653,7 +8652,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(125u16, 0u16), firefox_android : BrowserVersion(125u16,
 	0u16), safari : BrowserVersion(18u16, 0u16), safari_ios : BrowserVersion(18u16,
 	0u16), }, caniuse : & ["https://caniuse.com/css-content-visibility"], popularity :
-	5.387251f32, }, "css.properties.content-visibility.is_transitionable" => CSSFeature {
+	8.677291f32, }, "css.properties.content-visibility.is_transitionable" => CSSFeature {
 	id : "css.properties.content-visibility.is_transitionable", name :
 	"display animation", description :
 	"You can animate elements between display: none and any other display value or animate between content-visibility: hidden and any other content-visibility value. This also applies to transitions.",
@@ -8684,7 +8683,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(125u16, 0u16), firefox_android : BrowserVersion(125u16,
 	0u16), safari : BrowserVersion(18u16, 0u16), safari_ios : BrowserVersion(18u16,
 	0u16), }, caniuse : & ["https://caniuse.com/css-content-visibility"], popularity :
-	5.387251f32, }, "css.properties.content.alt_text" => CSSFeature { id :
+	8.677291f32, }, "css.properties.content.alt_text" => CSSFeature { id :
 	"css.properties.content.alt_text", name : "Alt text for generated content",
 	description :
 	"The / notation in content CSS property values adds alternative text to generated content. For example, the content: url('upvote-icon.svg') / 'Upvote' declaration adds accessible 'Upvote' text to the SVG icon. Also known as alternate text.",
@@ -8705,7 +8704,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, },
+	caniuse : & [], popularity : 81.69357f32, },
 	"css.properties.content.element_replacement" => CSSFeature { id :
 	"css.properties.content.element_replacement", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
@@ -8716,7 +8715,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(28u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(63u16, 0u16), firefox_android : BrowserVersion(63u16, 0u16),
 	safari : BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.content.gradient" =>
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.content.gradient" =>
 	CSSFeature { id : "css.properties.content.gradient", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
 	spec : "https://drafts.csswg.org/css-content-3/#content-property", groups : & [],
@@ -8724,7 +8723,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(26u16, 0u16), chrome_android : BrowserVersion(26u16, 0u16), edge :
 	BrowserVersion(12u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(7u16, 0u16), safari_ios :
-	BrowserVersion(7u16, 0u16), }, caniuse : & [], popularity : 81.94204f32, },
+	BrowserVersion(7u16, 0u16), }, caniuse : & [], popularity : 81.69357f32, },
 	"css.properties.content.image-set" => CSSFeature { id :
 	"css.properties.content.image-set", name : "image-set()", description :
 	"The image-set() CSS function provides a set of images at different resolutions or pixel densities, which the browser can pick from, depending on the device capabilities.",
@@ -8745,7 +8744,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.content.no-open-quote"
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.content.no-open-quote"
 	=> CSSFeature { id : "css.properties.content.no-open-quote", name : "Content",
 	description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
@@ -8756,7 +8755,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.content.none" =>
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.content.none" =>
 	CSSFeature { id : "css.properties.content.none", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
 	spec : "https://drafts.csswg.org/css-content-3/#content-property", groups : & [],
@@ -8766,7 +8765,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, },
+	caniuse : & [], popularity : 81.69357f32, },
 	"css.properties.content.none_applies_to_elements" => CSSFeature { id :
 	"css.properties.content.none_applies_to_elements", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
@@ -8775,7 +8774,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 81.94204f32, }, "css.properties.content.normal" => CSSFeature { id :
+	popularity : 81.69357f32, }, "css.properties.content.normal" => CSSFeature { id :
 	"css.properties.content.normal", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
 	spec : "https://drafts.csswg.org/css-content-3/#content-property", groups : & [],
@@ -8785,7 +8784,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.content.open-quote" =>
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.content.open-quote" =>
 	CSSFeature { id : "css.properties.content.open-quote", name : "Content", description
 	:
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
@@ -8796,7 +8795,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.content.url" =>
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.content.url" =>
 	CSSFeature { id : "css.properties.content.url", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
 	spec : "https://drafts.csswg.org/css-content-3/#content-property", groups : & [],
@@ -8806,7 +8805,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.properties.corner-block-end-shape"
+	caniuse : & [], popularity : 81.69357f32, }, "css.properties.corner-block-end-shape"
 	=> CSSFeature { id : "css.properties.corner-block-end-shape", name : "corner-shape",
 	description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8815,7 +8814,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-block-start-shape" => CSSFeature { id :
 	"css.properties.corner-block-start-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8824,7 +8823,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-bottom-left-shape" => CSSFeature { id :
 	"css.properties.corner-bottom-left-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8833,7 +8832,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-bottom-right-shape" => CSSFeature { id :
 	"css.properties.corner-bottom-right-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8842,7 +8841,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-bottom-shape" => CSSFeature { id :
 	"css.properties.corner-bottom-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8851,7 +8850,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-end-end-shape" => CSSFeature { id :
 	"css.properties.corner-end-end-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8860,7 +8859,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-end-start-shape" => CSSFeature { id :
 	"css.properties.corner-end-start-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8869,7 +8868,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-inline-end-shape" => CSSFeature { id :
 	"css.properties.corner-inline-end-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8878,7 +8877,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-inline-start-shape" => CSSFeature { id :
 	"css.properties.corner-inline-start-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8887,7 +8886,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-left-shape" => CSSFeature { id :
 	"css.properties.corner-left-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8896,7 +8895,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-right-shape" => CSSFeature { id :
 	"css.properties.corner-right-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8905,7 +8904,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, }, "css.properties.corner-shape" =>
+	0), }, caniuse : & [], popularity : 0.569545f32, }, "css.properties.corner-shape" =>
 	CSSFeature { id : "css.properties.corner-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
 	spec : "https://drafts.csswg.org/css-borders-4/#corner-shaping", groups : & [],
@@ -8913,7 +8912,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-start-end-shape" => CSSFeature { id :
 	"css.properties.corner-start-end-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8922,7 +8921,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-start-start-shape" => CSSFeature { id :
 	"css.properties.corner-start-start-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8931,7 +8930,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-top-left-shape" => CSSFeature { id :
 	"css.properties.corner-top-left-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8940,7 +8939,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.corner-top-right-shape" => CSSFeature { id :
 	"css.properties.corner-top-right-shape", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8949,7 +8948,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, }, "css.properties.corner-top-shape"
+	0), }, caniuse : & [], popularity : 0.569545f32, }, "css.properties.corner-top-shape"
 	=> CSSFeature { id : "css.properties.corner-top-shape", name : "corner-shape",
 	description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -8958,7 +8957,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.properties.counter-increment" => CSSFeature { id :
 	"css.properties.counter-increment", name : "Counters (CSS)", description :
 	"The counter-reset and counter-increment CSS properties and the counter() and counters() functions automatically number headings or ordered list items.",
@@ -9059,7 +9058,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(85u16, 0u16), chrome_android : BrowserVersion(85u16, 0u16), edge :
 	BrowserVersion(85u16, 0u16), firefox : BrowserVersion(68u16, 0u16), firefox_android :
 	BrowserVersion(68u16, 0u16), safari : BrowserVersion(17u16, 2u16), safari_ios :
-	BrowserVersion(17u16, 2u16), }, caniuse : & [], popularity : 0.72099f32, },
+	BrowserVersion(17u16, 2u16), }, caniuse : & [], popularity : 0.33437f32, },
 	"css.properties.counter-set.list-item" => CSSFeature { id :
 	"css.properties.counter-set.list-item", name : "counter-set", description :
 	"The counter-set CSS property creates (and optionally sets a value for) a counter, the numbers for a series of headings or ordered list items.",
@@ -9069,7 +9068,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(85u16, 0u16), chrome_android : BrowserVersion(85u16, 0u16), edge :
 	BrowserVersion(85u16, 0u16), firefox : BrowserVersion(68u16, 0u16), firefox_android :
 	BrowserVersion(68u16, 0u16), safari : BrowserVersion(17u16, 2u16), safari_ios :
-	BrowserVersion(17u16, 2u16), }, caniuse : & [], popularity : 0.72099f32, },
+	BrowserVersion(17u16, 2u16), }, caniuse : & [], popularity : 0.33437f32, },
 	"css.properties.counter-set.none" => CSSFeature { id :
 	"css.properties.counter-set.none", name : "counter-set", description :
 	"The counter-set CSS property creates (and optionally sets a value for) a counter, the numbers for a series of headings or ordered list items.",
@@ -9079,7 +9078,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(85u16, 0u16), chrome_android : BrowserVersion(85u16, 0u16), edge :
 	BrowserVersion(85u16, 0u16), firefox : BrowserVersion(68u16, 0u16), firefox_android :
 	BrowserVersion(68u16, 0u16), safari : BrowserVersion(17u16, 2u16), safari_ios :
-	BrowserVersion(17u16, 2u16), }, caniuse : & [], popularity : 0.72099f32, },
+	BrowserVersion(17u16, 2u16), }, caniuse : & [], popularity : 0.33437f32, },
 	"css.properties.cursor" => CSSFeature { id : "css.properties.cursor", name :
 	"Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
@@ -9091,7 +9090,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(95u16, 0u16), safari :
 	BrowserVersion(1u16, 2u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab",
-	"https://caniuse.com/css3-cursors-newer"], popularity : 84.9684f32, },
+	"https://caniuse.com/css3-cursors-newer"], popularity : 84.223595f32, },
 	"css.properties.cursor.alias" => CSSFeature { id : "css.properties.cursor.alias",
 	name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
@@ -9102,7 +9101,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.all-scroll" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.all-scroll" => CSSFeature { id :
 	"css.properties.cursor.all-scroll", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9112,7 +9111,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.auto" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.auto" => CSSFeature { id :
 	"css.properties.cursor.auto", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9123,7 +9122,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(95u16, 0u16), safari :
 	BrowserVersion(1u16, 2u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab",
-	"https://caniuse.com/css3-cursors-newer"], popularity : 84.9684f32, },
+	"https://caniuse.com/css3-cursors-newer"], popularity : 84.223595f32, },
 	"css.properties.cursor.cell" => CSSFeature { id : "css.properties.cursor.cell", name
 	: "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
@@ -9135,7 +9134,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 5u16), firefox_android : BrowserVersion(95u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab",
-	"https://caniuse.com/css3-cursors-newer"], popularity : 84.9684f32, },
+	"https://caniuse.com/css3-cursors-newer"], popularity : 84.223595f32, },
 	"css.properties.cursor.col-resize" => CSSFeature { id :
 	"css.properties.cursor.col-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
@@ -9146,8 +9145,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.context-menu" => CSSFeature { id :
-	"css.properties.cursor.context-menu", name : "Cursor styles", description :
+	popularity : 84.223595f32, }, "css.properties.cursor.context-menu" => CSSFeature { id
+	: "css.properties.cursor.context-menu", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
 	BaselineStatus::False, browser_support : BrowserSupport { chrome :
@@ -9156,7 +9155,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.copy" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.copy" => CSSFeature { id :
 	"css.properties.cursor.copy", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9166,7 +9165,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.crosshair" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.crosshair" => CSSFeature { id :
 	"css.properties.cursor.crosshair", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9176,7 +9175,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.default" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.default" => CSSFeature { id :
 	"css.properties.cursor.default", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9186,7 +9185,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.e-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.e-resize" => CSSFeature { id :
 	"css.properties.cursor.e-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9196,7 +9195,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.ew-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.ew-resize" => CSSFeature { id :
 	"css.properties.cursor.ew-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9206,7 +9205,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.grab" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.grab" => CSSFeature { id :
 	"css.properties.cursor.grab", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9216,7 +9215,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(11u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.grabbing" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.grabbing" => CSSFeature { id :
 	"css.properties.cursor.grabbing", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9226,7 +9225,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(11u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.help" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.help" => CSSFeature { id :
 	"css.properties.cursor.help", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9236,7 +9235,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.move" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.move" => CSSFeature { id :
 	"css.properties.cursor.move", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9246,7 +9245,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.n-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.n-resize" => CSSFeature { id :
 	"css.properties.cursor.n-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9256,7 +9255,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.ne-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.ne-resize" => CSSFeature { id :
 	"css.properties.cursor.ne-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9266,8 +9265,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.nesw-resize" => CSSFeature { id :
-	"css.properties.cursor.nesw-resize", name : "Cursor styles", description :
+	popularity : 84.223595f32, }, "css.properties.cursor.nesw-resize" => CSSFeature { id
+	: "css.properties.cursor.nesw-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
 	BaselineStatus::False, browser_support : BrowserSupport { chrome :
@@ -9276,7 +9275,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.no-drop" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.no-drop" => CSSFeature { id :
 	"css.properties.cursor.no-drop", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9286,7 +9285,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.none" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.none" => CSSFeature { id :
 	"css.properties.cursor.none", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9296,8 +9295,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(5u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.not-allowed" => CSSFeature { id :
-	"css.properties.cursor.not-allowed", name : "Cursor styles", description :
+	popularity : 84.223595f32, }, "css.properties.cursor.not-allowed" => CSSFeature { id
+	: "css.properties.cursor.not-allowed", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
 	BaselineStatus::False, browser_support : BrowserSupport { chrome :
@@ -9306,7 +9305,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.ns-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.ns-resize" => CSSFeature { id :
 	"css.properties.cursor.ns-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9316,7 +9315,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.nw-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.nw-resize" => CSSFeature { id :
 	"css.properties.cursor.nw-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9326,8 +9325,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.nwse-resize" => CSSFeature { id :
-	"css.properties.cursor.nwse-resize", name : "Cursor styles", description :
+	popularity : 84.223595f32, }, "css.properties.cursor.nwse-resize" => CSSFeature { id
+	: "css.properties.cursor.nwse-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
 	BaselineStatus::False, browser_support : BrowserSupport { chrome :
@@ -9336,7 +9335,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.pointer" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.pointer" => CSSFeature { id :
 	"css.properties.cursor.pointer", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9346,7 +9345,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.progress" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.progress" => CSSFeature { id :
 	"css.properties.cursor.progress", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9356,7 +9355,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.row-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.row-resize" => CSSFeature { id :
 	"css.properties.cursor.row-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9366,7 +9365,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.s-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.s-resize" => CSSFeature { id :
 	"css.properties.cursor.s-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9376,7 +9375,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.se-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.se-resize" => CSSFeature { id :
 	"css.properties.cursor.se-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9386,7 +9385,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.sw-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.sw-resize" => CSSFeature { id :
 	"css.properties.cursor.sw-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9396,7 +9395,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.text" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.text" => CSSFeature { id :
 	"css.properties.cursor.text", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9407,7 +9406,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(95u16, 0u16), safari :
 	BrowserVersion(1u16, 2u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab",
-	"https://caniuse.com/css3-cursors-newer"], popularity : 84.9684f32, },
+	"https://caniuse.com/css3-cursors-newer"], popularity : 84.223595f32, },
 	"css.properties.cursor.url" => CSSFeature { id : "css.properties.cursor.url", name :
 	"Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
@@ -9419,7 +9418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(1u16, 5u16), firefox_android : BrowserVersion(95u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
 	["https://caniuse.com/css3-cursors", "https://caniuse.com/css3-cursors-grab",
-	"https://caniuse.com/css3-cursors-newer"], popularity : 84.9684f32, },
+	"https://caniuse.com/css3-cursors-newer"], popularity : 84.223595f32, },
 	"css.properties.cursor.url_positioning_syntax" => CSSFeature { id :
 	"css.properties.cursor.url_positioning_syntax", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
@@ -9430,8 +9429,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.vertical-text" => CSSFeature { id
-	: "css.properties.cursor.vertical-text", name : "Cursor styles", description :
+	popularity : 84.223595f32, }, "css.properties.cursor.vertical-text" => CSSFeature {
+	id : "css.properties.cursor.vertical-text", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
 	BaselineStatus::False, browser_support : BrowserSupport { chrome :
@@ -9440,7 +9439,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.w-resize" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.w-resize" => CSSFeature { id :
 	"css.properties.cursor.w-resize", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9450,7 +9449,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.wait" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.wait" => CSSFeature { id :
 	"css.properties.cursor.wait", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9460,7 +9459,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(1u16, 2u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.zoom-in" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.zoom-in" => CSSFeature { id :
 	"css.properties.cursor.zoom-in", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9470,7 +9469,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(9u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.cursor.zoom-out" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.cursor.zoom-out" => CSSFeature { id :
 	"css.properties.cursor.zoom-out", name : "Cursor styles", description :
 	"The cursor CSS property styles the pointer, allowing you to provide hints to the user on how to interact with the hovered element.",
 	spec : "https://drafts.csswg.org/css-ui-4/#cursor", groups : & [], baseline_status :
@@ -9480,7 +9479,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(95u16, 0u16), safari : BrowserVersion(9u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css3-cursors",
 	"https://caniuse.com/css3-cursors-grab", "https://caniuse.com/css3-cursors-newer"],
-	popularity : 84.9684f32, }, "css.properties.custom-property" => CSSFeature { id :
+	popularity : 84.223595f32, }, "css.properties.custom-property" => CSSFeature { id :
 	"css.properties.custom-property", name : "Custom properties", description :
 	"Custom properties are CSS properties prefixed with -- that set values you can reuse with the var() function. For example, you can set a --key-color property to reuse as border-color: var(--key-color). Also known as CSS variables.",
 	spec : "https://drafts.csswg.org/css-variables-1/", groups : & [], baseline_status :
@@ -9572,7 +9571,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.81327f32, },
+	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.4918f32, },
 	"css.properties.display.block" => CSSFeature { id : "css.properties.display.block",
 	name : "Display", description :
 	"The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
@@ -9583,7 +9582,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.81327f32, },
+	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.4918f32, },
 	"css.properties.display.contents" => CSSFeature { id :
 	"css.properties.display.contents", name : "display: contents", description :
 	"The display: contents CSS declaration sets an element to display only its contents, not itself.",
@@ -9647,7 +9646,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.display.inline" => CSSFeature { id : "css.properties.display.inline",
 	name : "Display", description :
 	"The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
@@ -9658,7 +9657,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.81327f32, },
+	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.4918f32, },
 	"css.properties.display.inline-block" => CSSFeature { id :
 	"css.properties.display.inline-block", name : "Display", description :
 	"The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
@@ -9669,7 +9668,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.81327f32, },
+	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.4918f32, },
 	"css.properties.display.inline-flex" => CSSFeature { id :
 	"css.properties.display.inline-flex", name : "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -9691,7 +9690,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.display.inline-table" => CSSFeature { id :
 	"css.properties.display.inline-table", name : "display: table", description :
 	"The display: table CSS declaration renders an element with the box layout of a <table> HTML element. Child elements may use equivalents to <table> internal elements such as display: table-row for <tr>.",
@@ -9772,7 +9771,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.81327f32, },
+	caniuse : & ["https://caniuse.com/inline-block"], popularity : 92.4918f32, },
 	"css.properties.display.none.option_is_hidden" => CSSFeature { id :
 	"css.properties.display.none.option_is_hidden", name : "Display", description :
 	"The display CSS property sets the display behavior of an element's box within its layout and sets the layout behavior for its child elements.",
@@ -9782,7 +9781,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(1u16, 0u16),
 	firefox_android : BrowserVersion(4u16, 0u16), safari : BrowserVersion(0, 0),
 	safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/inline-block"], popularity : 92.81327f32, },
+	["https://caniuse.com/inline-block"], popularity : 92.4918f32, },
 	"css.properties.display.ruby" => CSSFeature { id : "css.properties.display.ruby",
 	name : "display: ruby", description :
 	"The display: ruby CSS declaration renders an element with the box layout of a <ruby> HTML element. Child elements may use equivalents to <ruby> internal elements such as display: ruby-base for <rb>.",
@@ -9938,7 +9937,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.alphabetic" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.alphabetic" =>
 	CSSFeature { id : "css.properties.dominant-baseline.alphabetic", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -9950,7 +9949,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.auto" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.auto" =>
 	CSSFeature { id : "css.properties.dominant-baseline.auto", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -9962,7 +9961,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.central" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.central" =>
 	CSSFeature { id : "css.properties.dominant-baseline.central", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -9974,7 +9973,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.hanging" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.hanging" =>
 	CSSFeature { id : "css.properties.dominant-baseline.hanging", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -9986,7 +9985,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.ideographic" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.ideographic" =>
 	CSSFeature { id : "css.properties.dominant-baseline.ideographic", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -9998,7 +9997,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.mathematical" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.mathematical" =>
 	CSSFeature { id : "css.properties.dominant-baseline.mathematical", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -10010,7 +10009,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.dominant-baseline.middle" =>
+	[], popularity : 0.692073f32, }, "css.properties.dominant-baseline.middle" =>
 	CSSFeature { id : "css.properties.dominant-baseline.middle", name :
 	"dominant-baseline", description :
 	"The dominant-baseline CSS property sets the specific baseline used to align an elements's text and inline-level contents.",
@@ -10022,7 +10021,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), }, caniuse : &
-	[], popularity : 0.861824f32, }, "css.properties.empty-cells" => CSSFeature { id :
+	[], popularity : 0.692073f32, }, "css.properties.empty-cells" => CSSFeature { id :
 	"css.properties.empty-cells", name : "Tables", description :
 	"The <table> HTML element, with several related elements, represents tabular data in rows and columns of cells.",
 	spec : "https://html.spec.whatwg.org/multipage/tables.html", groups : &
@@ -10063,7 +10062,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16), edge :
 	BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(26u16, 2u16), safari_ios :
-	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 1.440076f32, },
+	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 0.992025f32, },
 	"css.properties.field-sizing.content" => CSSFeature { id :
 	"css.properties.field-sizing.content", name : "field-sizing", description :
 	"The field-sizing CSS property allows form controls such as <textarea> to be sized based on their content.",
@@ -10072,7 +10071,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16), edge :
 	BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(26u16, 2u16), safari_ios :
-	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 1.440076f32, },
+	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 0.992025f32, },
 	"css.properties.field-sizing.fixed" => CSSFeature { id :
 	"css.properties.field-sizing.fixed", name : "field-sizing", description :
 	"The field-sizing CSS property allows form controls such as <textarea> to be sized based on their content.",
@@ -10081,7 +10080,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16), edge :
 	BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(26u16, 2u16), safari_ios :
-	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 1.440076f32, },
+	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 0.992025f32, },
 	"css.properties.fill" => CSSFeature { id : "css.properties.fill", name : "SVG",
 	description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -10154,7 +10153,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.blur" => CSSFeature { id : "css.properties.filter.blur", name
 	: "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10165,7 +10164,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.brightness" => CSSFeature { id :
 	"css.properties.filter.brightness", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10176,7 +10175,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.contrast" => CSSFeature { id :
 	"css.properties.filter.contrast", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10187,7 +10186,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.drop-shadow" => CSSFeature { id :
 	"css.properties.filter.drop-shadow", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10198,7 +10197,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.grayscale" => CSSFeature { id :
 	"css.properties.filter.grayscale", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10209,7 +10208,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.hue-rotate" => CSSFeature { id :
 	"css.properties.filter.hue-rotate", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10220,7 +10219,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.invert" => CSSFeature { id : "css.properties.filter.invert",
 	name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10231,7 +10230,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.opacity" => CSSFeature { id : "css.properties.filter.opacity",
 	name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10242,7 +10241,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.saturate" => CSSFeature { id :
 	"css.properties.filter.saturate", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10253,7 +10252,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.sepia" => CSSFeature { id : "css.properties.filter.sepia",
 	name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -10264,7 +10263,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.properties.filter.svg_elements" => CSSFeature { id :
 	"css.properties.filter.svg_elements", name : "SVG filters", description :
 	"The <filter> SVG element applies custom effects such as color manipulation, blurring, or morphing to SVG elements.",
@@ -10628,7 +10627,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.cursive" => CSSFeature {
+	[], popularity : 88.09823f32, }, "css.properties.font-family.cursive" => CSSFeature {
 	id : "css.properties.font-family.cursive", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10639,7 +10638,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.fangsong" => CSSFeature
+	[], popularity : 88.09823f32, }, "css.properties.font-family.fangsong" => CSSFeature
 	{ id : "css.properties.font-family.fangsong", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10650,7 +10649,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.fantasy" => CSSFeature {
+	[], popularity : 88.09823f32, }, "css.properties.font-family.fantasy" => CSSFeature {
 	id : "css.properties.font-family.fantasy", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10661,7 +10660,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.kai" => CSSFeature { id
+	[], popularity : 88.09823f32, }, "css.properties.font-family.kai" => CSSFeature { id
 	: "css.properties.font-family.kai", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10672,7 +10671,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.khmer-mul" => CSSFeature
+	[], popularity : 88.09823f32, }, "css.properties.font-family.khmer-mul" => CSSFeature
 	{ id : "css.properties.font-family.khmer-mul", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10683,7 +10682,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.math" => CSSFeature { id
+	[], popularity : 88.09823f32, }, "css.properties.font-family.math" => CSSFeature { id
 	: "css.properties.font-family.math", name : "Math font family", description :
 	"The font-family: math CSS declaration uses the browser default font face for displaying mathematical expressions.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#math-def", groups : & [],
@@ -10704,7 +10703,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.nastaliq" => CSSFeature
+	[], popularity : 88.09823f32, }, "css.properties.font-family.nastaliq" => CSSFeature
 	{ id : "css.properties.font-family.nastaliq", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10715,7 +10714,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.sans-serif" =>
+	[], popularity : 88.09823f32, }, "css.properties.font-family.sans-serif" =>
 	CSSFeature { id : "css.properties.font-family.sans-serif", name : "font-family",
 	description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
@@ -10727,7 +10726,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.serif" => CSSFeature {
+	[], popularity : 88.09823f32, }, "css.properties.font-family.serif" => CSSFeature {
 	id : "css.properties.font-family.serif", name : "font-family", description :
 	"The font-family CSS property sets the desired font face for text, along with optional fallback font faces.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-family-prop", groups : &
@@ -10738,7 +10737,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.67228f32, }, "css.properties.font-family.system-ui" => CSSFeature
+	[], popularity : 88.09823f32, }, "css.properties.font-family.system-ui" => CSSFeature
 	{ id : "css.properties.font-family.system-ui", name : "System font", description :
 	"The font-family: system-ui CSS declaration uses the operating system default font for text.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#system-ui-def", groups : & [],
@@ -10796,7 +10795,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(15u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-feature"], popularity : 21.223013f32, },
+	["https://caniuse.com/font-feature"], popularity : 19.738594f32, },
 	"css.properties.font-feature-settings.normal" => CSSFeature { id :
 	"css.properties.font-feature-settings.normal", name : "font-feature-settings",
 	description :
@@ -10809,7 +10808,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(15u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-feature"], popularity : 21.223013f32, },
+	["https://caniuse.com/font-feature"], popularity : 19.738594f32, },
 	"css.properties.font-kerning" => CSSFeature { id : "css.properties.font-kerning",
 	name : "font-kerning", description :
 	"The font-kerning CSS property sets whether kerning data from a font is used to adjust the space between letters.",
@@ -10821,7 +10820,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(32u16, 0u16), firefox_android : BrowserVersion(32u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	["https://caniuse.com/font-kerning"], popularity : 1.624657f32, },
+	["https://caniuse.com/font-kerning"], popularity : 1.638878f32, },
 	"css.properties.font-kerning.auto" => CSSFeature { id :
 	"css.properties.font-kerning.auto", name : "font-kerning", description :
 	"The font-kerning CSS property sets whether kerning data from a font is used to adjust the space between letters.",
@@ -10833,7 +10832,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(32u16, 0u16), firefox_android : BrowserVersion(32u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	["https://caniuse.com/font-kerning"], popularity : 1.624657f32, },
+	["https://caniuse.com/font-kerning"], popularity : 1.638878f32, },
 	"css.properties.font-kerning.none" => CSSFeature { id :
 	"css.properties.font-kerning.none", name : "font-kerning", description :
 	"The font-kerning CSS property sets whether kerning data from a font is used to adjust the space between letters.",
@@ -10845,7 +10844,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(32u16, 0u16), firefox_android : BrowserVersion(32u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	["https://caniuse.com/font-kerning"], popularity : 1.624657f32, },
+	["https://caniuse.com/font-kerning"], popularity : 1.638878f32, },
 	"css.properties.font-kerning.normal" => CSSFeature { id :
 	"css.properties.font-kerning.normal", name : "font-kerning", description :
 	"The font-kerning CSS property sets whether kerning data from a font is used to adjust the space between letters.",
@@ -10857,7 +10856,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(32u16, 0u16), firefox_android : BrowserVersion(32u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	["https://caniuse.com/font-kerning"], popularity : 1.624657f32, },
+	["https://caniuse.com/font-kerning"], popularity : 1.638878f32, },
 	"css.properties.font-language-override" => CSSFeature { id :
 	"css.properties.font-language-override", name : "font-language-override", description
 	:
@@ -10868,7 +10867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(143u16, 0u16), edge : BrowserVersion(143u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.418322f32, }, "css.properties.font-optical-sizing" => CSSFeature { id
+	popularity : 0.434548f32, }, "css.properties.font-optical-sizing" => CSSFeature { id
 	: "css.properties.font-optical-sizing", name : "font-optical-sizing", description :
 	"The font-optical-sizing CSS property sets whether text rendering is optimized for viewing at different sizes.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-optical-sizing-def", groups : &
@@ -10879,7 +10878,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), edge : BrowserVersion(17u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
-	[], popularity : 1.91386f32, }, "css.properties.font-optical-sizing.auto" =>
+	[], popularity : 1.984069f32, }, "css.properties.font-optical-sizing.auto" =>
 	CSSFeature { id : "css.properties.font-optical-sizing.auto", name :
 	"font-optical-sizing", description :
 	"The font-optical-sizing CSS property sets whether text rendering is optimized for viewing at different sizes.",
@@ -10891,7 +10890,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), edge : BrowserVersion(17u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
-	[], popularity : 1.91386f32, }, "css.properties.font-optical-sizing.none" =>
+	[], popularity : 1.984069f32, }, "css.properties.font-optical-sizing.none" =>
 	CSSFeature { id : "css.properties.font-optical-sizing.none", name :
 	"font-optical-sizing", description :
 	"The font-optical-sizing CSS property sets whether text rendering is optimized for viewing at different sizes.",
@@ -10903,7 +10902,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), edge : BrowserVersion(17u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
-	[], popularity : 1.91386f32, }, "css.properties.font-palette" => CSSFeature { id :
+	[], popularity : 1.984069f32, }, "css.properties.font-palette" => CSSFeature { id :
 	"css.properties.font-palette", name : "font-palette", description :
 	"The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-palette-prop", groups : &
@@ -10914,7 +10913,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.properties.font-palette.animation_computed" => CSSFeature { id :
 	"css.properties.font-palette.animation_computed", name : "font-palette animation",
 	description : "You can animate color fonts between two font-palette values.", spec :
@@ -10935,7 +10934,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.properties.font-palette.light" => CSSFeature { id :
 	"css.properties.font-palette.light", name : "font-palette", description :
 	"The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.",
@@ -10947,7 +10946,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.properties.font-palette.normal" => CSSFeature { id :
 	"css.properties.font-palette.normal", name : "font-palette", description :
 	"The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.",
@@ -10959,7 +10958,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(101u16, 0u16), edge : BrowserVersion(101u16, 0u16), firefox :
 	BrowserVersion(107u16, 0u16), firefox_android : BrowserVersion(107u16, 0u16), safari
 	: BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse :
-	& ["https://caniuse.com/css-font-palette"], popularity : 0.03951f32, },
+	& ["https://caniuse.com/css-font-palette"], popularity : 0.041518f32, },
 	"css.properties.font-palette.palette-mix_function" => CSSFeature { id :
 	"css.properties.font-palette.palette-mix_function", name : "font-palette animation",
 	description : "You can animate color fonts between two font-palette values.", spec :
@@ -10978,7 +10977,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 90.029045f32, }, "css.properties.font-size-adjust" =>
+	caniuse : & [], popularity : 89.476074f32, }, "css.properties.font-size-adjust" =>
 	CSSFeature { id : "css.properties.font-size-adjust", name : "font-size-adjust",
 	description :
 	"The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.",
@@ -10989,7 +10988,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(127u16, 0u16), firefox : BrowserVersion(3u16, 0u16), firefox_android :
 	BrowserVersion(4u16, 0u16), safari : BrowserVersion(16u16, 4u16), safari_ios :
 	BrowserVersion(16u16, 4u16), }, caniuse : & ["https://caniuse.com/font-size-adjust"],
-	popularity : 1.755139f32, }, "css.properties.font-size-adjust.from-font" =>
+	popularity : 1.811577f32, }, "css.properties.font-size-adjust.from-font" =>
 	CSSFeature { id : "css.properties.font-size-adjust.from-font", name :
 	"font-size-adjust", description :
 	"The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.",
@@ -11000,7 +10999,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(127u16, 0u16), firefox : BrowserVersion(118u16, 0u16), firefox_android
 	: BrowserVersion(118u16, 0u16), safari : BrowserVersion(17u16, 0u16), safari_ios :
 	BrowserVersion(17u16, 0u16), }, caniuse : & ["https://caniuse.com/font-size-adjust"],
-	popularity : 1.755139f32, }, "css.properties.font-size-adjust.none" => CSSFeature {
+	popularity : 1.811577f32, }, "css.properties.font-size-adjust.none" => CSSFeature {
 	id : "css.properties.font-size-adjust.none", name : "font-size-adjust", description :
 	"The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.",
 	spec : "https://drafts.csswg.org/css-fonts-5/#font-size-adjust-prop", groups : &
@@ -11010,7 +11009,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(127u16, 0u16), firefox : BrowserVersion(3u16, 0u16), firefox_android :
 	BrowserVersion(4u16, 0u16), safari : BrowserVersion(16u16, 4u16), safari_ios :
 	BrowserVersion(16u16, 4u16), }, caniuse : & ["https://caniuse.com/font-size-adjust"],
-	popularity : 1.755139f32, }, "css.properties.font-size-adjust.two-values" =>
+	popularity : 1.811577f32, }, "css.properties.font-size-adjust.two-values" =>
 	CSSFeature { id : "css.properties.font-size-adjust.two-values", name :
 	"font-size-adjust", description :
 	"The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.",
@@ -11021,7 +11020,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(127u16, 0u16), firefox : BrowserVersion(92u16, 0u16), firefox_android
 	: BrowserVersion(92u16, 0u16), safari : BrowserVersion(17u16, 0u16), safari_ios :
 	BrowserVersion(17u16, 0u16), }, caniuse : & ["https://caniuse.com/font-size-adjust"],
-	popularity : 1.755139f32, }, "css.properties.font-size.math" => CSSFeature { id :
+	popularity : 1.811577f32, }, "css.properties.font-size.math" => CSSFeature { id :
 	"css.properties.font-size.math", name : "MathML", description :
 	"MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.",
 	spec : "https://w3c.github.io/mathml-core/", groups : & [], baseline_status :
@@ -11040,7 +11039,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(42u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(31u16, 0u16), firefox_android : BrowserVersion(31u16, 0u16),
 	safari : BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), },
-	caniuse : & [], popularity : 90.029045f32, }, "css.properties.font-size.xxx-large" =>
+	caniuse : & [], popularity : 89.476074f32, }, "css.properties.font-size.xxx-large" =>
 	CSSFeature { id : "css.properties.font-size.xxx-large", name : "font-size",
 	description : "The font-size CSS property sets the text height.", spec :
 	"https://drafts.csswg.org/css-fonts-4/#font-size-prop", groups : & ["fonts"],
@@ -11050,7 +11049,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(79u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 90.029045f32, }, "css.properties.font-stretch" =>
+	caniuse : & [], popularity : 89.476074f32, }, "css.properties.font-stretch" =>
 	CSSFeature { id : "css.properties.font-stretch", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-stretch-prop", groups : &
@@ -11061,7 +11060,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.condensed" => CSSFeature { id :
 	"css.properties.font-stretch.condensed", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11073,7 +11072,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.expanded" => CSSFeature { id :
 	"css.properties.font-stretch.expanded", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11085,7 +11084,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.extra-condensed" => CSSFeature { id :
 	"css.properties.font-stretch.extra-condensed", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11097,7 +11096,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.extra-expanded" => CSSFeature { id :
 	"css.properties.font-stretch.extra-expanded", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11109,7 +11108,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.normal" => CSSFeature { id :
 	"css.properties.font-stretch.normal", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11121,7 +11120,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.percentage" => CSSFeature { id :
 	"css.properties.font-stretch.percentage", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11133,7 +11132,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(62u16, 0u16), edge : BrowserVersion(18u16, 0u16), firefox :
 	BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16), safari :
 	BrowserVersion(11u16, 1u16), safari_ios : BrowserVersion(11u16, 3u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.semi-condensed" => CSSFeature { id :
 	"css.properties.font-stretch.semi-condensed", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11145,7 +11144,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.semi-expanded" => CSSFeature { id :
 	"css.properties.font-stretch.semi-expanded", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11157,7 +11156,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.ultra-condensed" => CSSFeature { id :
 	"css.properties.font-stretch.ultra-condensed", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11169,7 +11168,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-stretch.ultra-expanded" => CSSFeature { id :
 	"css.properties.font-stretch.ultra-expanded", name : "font-stretch", description :
 	"The font-stretch CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
@@ -11181,7 +11180,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font-style" => CSSFeature { id : "css.properties.font-style", name :
 	"font-style", description :
 	"The font-style CSS property sets the text style, with normal, italic, and oblique options.",
@@ -11192,7 +11191,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 80.290375f32, }, "css.properties.font-style.italic" =>
+	caniuse : & [], popularity : 79.15034f32, }, "css.properties.font-style.italic" =>
 	CSSFeature { id : "css.properties.font-style.italic", name : "font-style",
 	description :
 	"The font-style CSS property sets the text style, with normal, italic, and oblique options.",
@@ -11203,7 +11202,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 80.290375f32, }, "css.properties.font-style.normal" =>
+	caniuse : & [], popularity : 79.15034f32, }, "css.properties.font-style.normal" =>
 	CSSFeature { id : "css.properties.font-style.normal", name : "font-style",
 	description :
 	"The font-style CSS property sets the text style, with normal, italic, and oblique options.",
@@ -11214,7 +11213,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 80.290375f32, }, "css.properties.font-style.oblique" =>
+	caniuse : & [], popularity : 79.15034f32, }, "css.properties.font-style.oblique" =>
 	CSSFeature { id : "css.properties.font-style.oblique", name : "font-style",
 	description :
 	"The font-style CSS property sets the text style, with normal, italic, and oblique options.",
@@ -11225,7 +11224,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 80.290375f32, },
+	caniuse : & [], popularity : 79.15034f32, },
 	"css.properties.font-style.oblique-angle" => CSSFeature { id :
 	"css.properties.font-style.oblique-angle", name : "font-style", description :
 	"The font-style CSS property sets the text style, with normal, italic, and oblique options.",
@@ -11234,8 +11233,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& [], popularity : 80.290375f32, }, "css.properties.font-synthesis" => CSSFeature {
-	id : "css.properties.font-synthesis", name : "font-synthesis", description :
+	& [], popularity : 79.15034f32, }, "css.properties.font-synthesis" => CSSFeature { id
+	: "css.properties.font-synthesis", name : "font-synthesis", description :
 	"The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-synthesis", groups : &
 	["font-synthesis"], baseline_status : BaselineStatus::High { since :
@@ -11245,7 +11244,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 1.712253f32, }, "css.properties.font-synthesis-position" =>
+	[], popularity : 1.62841f32, }, "css.properties.font-synthesis-position" =>
 	CSSFeature { id : "css.properties.font-synthesis-position", name :
 	"font-synthesis-position", description :
 	"The font-synthesis-position CSS property sets whether or not the browser should synthesize subscript and superscript typefaces when they're missing from the font.",
@@ -11287,7 +11286,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.014779f32, }, "css.properties.font-synthesis-small-caps.auto" =>
+	& [], popularity : 0.012339f32, }, "css.properties.font-synthesis-small-caps.auto" =>
 	CSSFeature { id : "css.properties.font-synthesis-small-caps.auto", name :
 	"font-synthesis-small-caps", description :
 	"The font-synthesis-small-caps CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.",
@@ -11299,7 +11298,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.014779f32, }, "css.properties.font-synthesis-small-caps.none" =>
+	& [], popularity : 0.012339f32, }, "css.properties.font-synthesis-small-caps.none" =>
 	CSSFeature { id : "css.properties.font-synthesis-small-caps.none", name :
 	"font-synthesis-small-caps", description :
 	"The font-synthesis-small-caps CSS property sets whether or not the browser should synthesize small caps typefaces when they're missing from the font.",
@@ -11311,7 +11310,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.014779f32, }, "css.properties.font-synthesis-style" =>
+	& [], popularity : 0.012339f32, }, "css.properties.font-synthesis-style" =>
 	CSSFeature { id : "css.properties.font-synthesis-style", name :
 	"font-synthesis-style", description :
 	"The font-synthesis-style CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.",
@@ -11323,7 +11322,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.030094f32, }, "css.properties.font-synthesis-style.auto" =>
+	& [], popularity : 0.034904f32, }, "css.properties.font-synthesis-style.auto" =>
 	CSSFeature { id : "css.properties.font-synthesis-style.auto", name :
 	"font-synthesis-style", description :
 	"The font-synthesis-style CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.",
@@ -11335,7 +11334,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.030094f32, }, "css.properties.font-synthesis-style.none" =>
+	& [], popularity : 0.034904f32, }, "css.properties.font-synthesis-style.none" =>
 	CSSFeature { id : "css.properties.font-synthesis-style.none", name :
 	"font-synthesis-style", description :
 	"The font-synthesis-style CSS property sets whether or not the browser should synthesize italic and oblique typefaces when they're missing from the font.",
@@ -11347,7 +11346,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.030094f32, }, "css.properties.font-synthesis-weight" =>
+	& [], popularity : 0.034904f32, }, "css.properties.font-synthesis-weight" =>
 	CSSFeature { id : "css.properties.font-synthesis-weight", name :
 	"font-synthesis-weight", description :
 	"The font-synthesis-weight CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.",
@@ -11359,7 +11358,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.107869f32, }, "css.properties.font-synthesis-weight.auto" =>
+	& [], popularity : 0.092339f32, }, "css.properties.font-synthesis-weight.auto" =>
 	CSSFeature { id : "css.properties.font-synthesis-weight.auto", name :
 	"font-synthesis-weight", description :
 	"The font-synthesis-weight CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.",
@@ -11371,7 +11370,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.107869f32, }, "css.properties.font-synthesis-weight.none" =>
+	& [], popularity : 0.092339f32, }, "css.properties.font-synthesis-weight.none" =>
 	CSSFeature { id : "css.properties.font-synthesis-weight.none", name :
 	"font-synthesis-weight", description :
 	"The font-synthesis-weight CSS property sets whether or not the browser should synthesize bold typefaces when they're missing from the font.",
@@ -11383,7 +11382,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(111u16, 0u16), firefox_android : BrowserVersion(111u16, 0u16), safari
 	: BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), }, caniuse :
-	& [], popularity : 0.107869f32, }, "css.properties.font-synthesis.position" =>
+	& [], popularity : 0.092339f32, }, "css.properties.font-synthesis.position" =>
 	CSSFeature { id : "css.properties.font-synthesis.position", name : "font-synthesis",
 	description :
 	"The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.",
@@ -11392,7 +11391,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(118u16, 0u16),
 	firefox_android : BrowserVersion(118u16, 0u16), safari : BrowserVersion(0, 0),
-	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 1.712253f32, },
+	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 1.62841f32, },
 	"css.properties.font-synthesis.small-caps" => CSSFeature { id :
 	"css.properties.font-synthesis.small-caps", name : "font-synthesis", description :
 	"The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.",
@@ -11404,8 +11403,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(93u16, 0u16), firefox_android : BrowserVersion(93u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 1.712253f32, }, "css.properties.font-synthesis.style" => CSSFeature
-	{ id : "css.properties.font-synthesis.style", name : "font-synthesis", description :
+	[], popularity : 1.62841f32, }, "css.properties.font-synthesis.style" => CSSFeature {
+	id : "css.properties.font-synthesis.style", name : "font-synthesis", description :
 	"The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-synthesis", groups : &
 	["font-synthesis"], baseline_status : BaselineStatus::High { since :
@@ -11415,7 +11414,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 1.712253f32, }, "css.properties.font-synthesis.weight" => CSSFeature
+	[], popularity : 1.62841f32, }, "css.properties.font-synthesis.weight" => CSSFeature
 	{ id : "css.properties.font-synthesis.weight", name : "font-synthesis", description :
 	"The font-synthesis CSS shorthand property disables all font synthesis except the given kinds. To disable a specific kind of font synthesis, instead use the longhand properties such as font-synthesis-style and font-synthesis-weight.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-synthesis", groups : &
@@ -11426,7 +11425,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(97u16, 0u16), edge : BrowserVersion(97u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 1.712253f32, }, "css.properties.font-variant" => CSSFeature { id :
+	[], popularity : 1.62841f32, }, "css.properties.font-variant" => CSSFeature { id :
 	"css.properties.font-variant", name : "font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-prop", groups : &
@@ -11437,7 +11436,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant-alternates" =>
+	[], popularity : 29.77054f32, }, "css.properties.font-variant-alternates" =>
 	CSSFeature { id : "css.properties.font-variant-alternates", name :
 	"font-variant-alternates", description :
 	"The font-variant-alternates CSS property, along with the @font-feature-values at-rule, chooses when to use a font's alternate glyphs.",
@@ -11449,7 +11448,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.annotation" => CSSFeature { id :
 	"css.properties.font-variant-alternates.annotation", name :
 	"font-variant-alternates", description :
@@ -11462,7 +11461,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(16u16, 2u16), safari_ios : BrowserVersion(16u16, 2u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.character_variant" => CSSFeature { id :
 	"css.properties.font-variant-alternates.character_variant", name :
 	"font-variant-alternates", description :
@@ -11475,7 +11474,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(16u16, 2u16), safari_ios : BrowserVersion(16u16, 2u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.historical-forms" => CSSFeature { id :
 	"css.properties.font-variant-alternates.historical-forms", name :
 	"font-variant-alternates", description :
@@ -11488,7 +11487,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.normal" => CSSFeature { id :
 	"css.properties.font-variant-alternates.normal", name : "font-variant-alternates",
 	description :
@@ -11501,7 +11500,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.ornaments" => CSSFeature { id :
 	"css.properties.font-variant-alternates.ornaments", name : "font-variant-alternates",
 	description :
@@ -11514,7 +11513,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(16u16, 2u16), safari_ios : BrowserVersion(16u16, 2u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.styleset" => CSSFeature { id :
 	"css.properties.font-variant-alternates.styleset", name : "font-variant-alternates",
 	description :
@@ -11527,7 +11526,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(16u16, 2u16), safari_ios : BrowserVersion(16u16, 2u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.stylistic" => CSSFeature { id :
 	"css.properties.font-variant-alternates.stylistic", name : "font-variant-alternates",
 	description :
@@ -11540,7 +11539,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(16u16, 2u16), safari_ios : BrowserVersion(16u16, 2u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-alternates.swash" => CSSFeature { id :
 	"css.properties.font-variant-alternates.swash", name : "font-variant-alternates",
 	description :
@@ -11553,7 +11552,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(16u16, 2u16), safari_ios : BrowserVersion(16u16, 2u16), }, caniuse : &
-	["https://caniuse.com/font-variant-alternates"], popularity : 0.336653f32, },
+	["https://caniuse.com/font-variant-alternates"], popularity : 0.348685f32, },
 	"css.properties.font-variant-caps" => CSSFeature { id :
 	"css.properties.font-variant-caps", name : "font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11565,7 +11564,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.all-petite-caps"
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.all-petite-caps"
 	=> CSSFeature { id : "css.properties.font-variant-caps.all-petite-caps", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11577,7 +11576,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.all-small-caps" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.all-small-caps" =>
 	CSSFeature { id : "css.properties.font-variant-caps.all-small-caps", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11589,7 +11588,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.normal" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.normal" =>
 	CSSFeature { id : "css.properties.font-variant-caps.normal", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11601,7 +11600,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.petite-caps" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.petite-caps" =>
 	CSSFeature { id : "css.properties.font-variant-caps.petite-caps", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11613,7 +11612,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.small-caps" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.small-caps" =>
 	CSSFeature { id : "css.properties.font-variant-caps.small-caps", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11625,7 +11624,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.titling-caps" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.titling-caps" =>
 	CSSFeature { id : "css.properties.font-variant-caps.titling-caps", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11637,7 +11636,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-caps.unicase" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-caps.unicase" =>
 	CSSFeature { id : "css.properties.font-variant-caps.unicase", name :
 	"font-variant-caps", description :
 	"The font-variant-caps CSS property sets whether text should be displayed in small caps, petite caps, or with capital letters designed for titles.",
@@ -11649,7 +11648,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.894545f32, }, "css.properties.font-variant-east-asian" =>
+	[], popularity : 0.769231f32, }, "css.properties.font-variant-east-asian" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11661,7 +11660,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.full-width"
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.full-width"
 	=> CSSFeature { id : "css.properties.font-variant-east-asian.full-width", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11673,7 +11672,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.jis04" =>
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.jis04" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian.jis04", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11685,7 +11684,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.jis78" =>
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.jis78" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian.jis78", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11697,7 +11696,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.jis83" =>
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.jis83" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian.jis83", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11709,7 +11708,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.jis90" =>
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.jis90" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian.jis90", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11721,7 +11720,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.normal" =>
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.normal" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian.normal", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11733,7 +11732,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, },
+	[], popularity : 0.595875f32, },
 	"css.properties.font-variant-east-asian.proportional-width" => CSSFeature { id :
 	"css.properties.font-variant-east-asian.proportional-width", name :
 	"font-variant-east-asian", description :
@@ -11746,7 +11745,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.ruby" =>
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.ruby" =>
 	CSSFeature { id : "css.properties.font-variant-east-asian.ruby", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11758,7 +11757,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.simplified"
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.simplified"
 	=> CSSFeature { id : "css.properties.font-variant-east-asian.simplified", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11770,7 +11769,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-east-asian.traditional"
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-east-asian.traditional"
 	=> CSSFeature { id : "css.properties.font-variant-east-asian.traditional", name :
 	"font-variant-east-asian", description :
 	"The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.",
@@ -11782,7 +11781,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(63u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 0.570863f32, }, "css.properties.font-variant-emoji" => CSSFeature {
+	[], popularity : 0.595875f32, }, "css.properties.font-variant-emoji" => CSSFeature {
 	id : "css.properties.font-variant-emoji", name : "font-variant-emoji", description :
 	"The font-variant-emoji CSS property sets the default presentation for emoji characters.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-emoji-prop", groups : &
@@ -11791,8 +11790,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(131u16, 0u16), edge : BrowserVersion(131u16, 0u16), firefox :
 	BrowserVersion(141u16, 0u16), firefox_android : BrowserVersion(141u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.06224f32, }, "css.properties.font-variant-emoji.emoji" => CSSFeature {
-	id : "css.properties.font-variant-emoji.emoji", name : "font-variant-emoji",
+	popularity : 0.048299f32, }, "css.properties.font-variant-emoji.emoji" => CSSFeature
+	{ id : "css.properties.font-variant-emoji.emoji", name : "font-variant-emoji",
 	description :
 	"The font-variant-emoji CSS property sets the default presentation for emoji characters.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-emoji-prop", groups : &
@@ -11801,7 +11800,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(131u16, 0u16), edge : BrowserVersion(131u16, 0u16), firefox :
 	BrowserVersion(141u16, 0u16), firefox_android : BrowserVersion(141u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.06224f32, }, "css.properties.font-variant-emoji.normal" => CSSFeature
+	popularity : 0.048299f32, }, "css.properties.font-variant-emoji.normal" => CSSFeature
 	{ id : "css.properties.font-variant-emoji.normal", name : "font-variant-emoji",
 	description :
 	"The font-variant-emoji CSS property sets the default presentation for emoji characters.",
@@ -11811,7 +11810,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(131u16, 0u16), edge : BrowserVersion(131u16, 0u16), firefox :
 	BrowserVersion(141u16, 0u16), firefox_android : BrowserVersion(141u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.06224f32, }, "css.properties.font-variant-emoji.text" => CSSFeature {
+	popularity : 0.048299f32, }, "css.properties.font-variant-emoji.text" => CSSFeature {
 	id : "css.properties.font-variant-emoji.text", name : "font-variant-emoji",
 	description :
 	"The font-variant-emoji CSS property sets the default presentation for emoji characters.",
@@ -11821,9 +11820,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(131u16, 0u16), edge : BrowserVersion(131u16, 0u16), firefox :
 	BrowserVersion(141u16, 0u16), firefox_android : BrowserVersion(141u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.06224f32, }, "css.properties.font-variant-emoji.unicode" => CSSFeature
-	{ id : "css.properties.font-variant-emoji.unicode", name : "font-variant-emoji",
-	description :
+	popularity : 0.048299f32, }, "css.properties.font-variant-emoji.unicode" =>
+	CSSFeature { id : "css.properties.font-variant-emoji.unicode", name :
+	"font-variant-emoji", description :
 	"The font-variant-emoji CSS property sets the default presentation for emoji characters.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-emoji-prop", groups : &
 	["font-features"], baseline_status : BaselineStatus::False, browser_support :
@@ -11831,7 +11830,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(131u16, 0u16), edge : BrowserVersion(131u16, 0u16), firefox :
 	BrowserVersion(141u16, 0u16), firefox_android : BrowserVersion(141u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.06224f32, }, "css.properties.font-variant-ligatures" => CSSFeature {
+	popularity : 0.048299f32, }, "css.properties.font-variant-ligatures" => CSSFeature {
 	id : "css.properties.font-variant-ligatures", name : "font-variant-ligatures",
 	description :
 	"The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.",
@@ -11843,7 +11842,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.common-ligatures" => CSSFeature { id :
 	"css.properties.font-variant-ligatures.common-ligatures", name :
 	"font-variant-ligatures", description :
@@ -11856,7 +11855,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, }, "css.properties.font-variant-ligatures.contextual"
+	[], popularity : 5.956805f32, }, "css.properties.font-variant-ligatures.contextual"
 	=> CSSFeature { id : "css.properties.font-variant-ligatures.contextual", name :
 	"font-variant-ligatures", description :
 	"The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.",
@@ -11868,7 +11867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.discretionary-ligatures" => CSSFeature { id :
 	"css.properties.font-variant-ligatures.discretionary-ligatures", name :
 	"font-variant-ligatures", description :
@@ -11881,7 +11880,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.historical-ligatures" => CSSFeature { id :
 	"css.properties.font-variant-ligatures.historical-ligatures", name :
 	"font-variant-ligatures", description :
@@ -11894,7 +11893,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.no-common-ligatures" => CSSFeature { id :
 	"css.properties.font-variant-ligatures.no-common-ligatures", name :
 	"font-variant-ligatures", description :
@@ -11907,7 +11906,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.no-contextual" => CSSFeature { id :
 	"css.properties.font-variant-ligatures.no-contextual", name :
 	"font-variant-ligatures", description :
@@ -11920,7 +11919,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.no-discretionary-ligatures" => CSSFeature { id
 	: "css.properties.font-variant-ligatures.no-discretionary-ligatures", name :
 	"font-variant-ligatures", description :
@@ -11933,7 +11932,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, },
+	[], popularity : 5.956805f32, },
 	"css.properties.font-variant-ligatures.no-historical-ligatures" => CSSFeature { id :
 	"css.properties.font-variant-ligatures.no-historical-ligatures", name :
 	"font-variant-ligatures", description :
@@ -11946,7 +11945,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, }, "css.properties.font-variant-ligatures.none" =>
+	[], popularity : 5.956805f32, }, "css.properties.font-variant-ligatures.none" =>
 	CSSFeature { id : "css.properties.font-variant-ligatures.none", name :
 	"font-variant-ligatures", description :
 	"The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.",
@@ -11958,7 +11957,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, }, "css.properties.font-variant-ligatures.normal" =>
+	[], popularity : 5.956805f32, }, "css.properties.font-variant-ligatures.normal" =>
 	CSSFeature { id : "css.properties.font-variant-ligatures.normal", name :
 	"font-variant-ligatures", description :
 	"The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.",
@@ -11970,7 +11969,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(34u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 7.922152f32, }, "css.properties.font-variant-numeric" => CSSFeature
+	[], popularity : 5.956805f32, }, "css.properties.font-variant-numeric" => CSSFeature
 	{ id : "css.properties.font-variant-numeric", name : "font-variant-numeric",
 	description :
 	"The font-variant-numeric CSS property sets how numeric characters are displayed. For example, you can align columns of numbers or use zeroes that have a slash.",
@@ -11982,7 +11981,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.diagonal-fractions" => CSSFeature { id :
 	"css.properties.font-variant-numeric.diagonal-fractions", name :
 	"font-variant-numeric", description :
@@ -11995,7 +11994,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.lining-nums" => CSSFeature { id :
 	"css.properties.font-variant-numeric.lining-nums", name : "font-variant-numeric",
 	description :
@@ -12008,7 +12007,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.normal" => CSSFeature { id :
 	"css.properties.font-variant-numeric.normal", name : "font-variant-numeric",
 	description :
@@ -12021,7 +12020,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.oldstyle-nums" => CSSFeature { id :
 	"css.properties.font-variant-numeric.oldstyle-nums", name : "font-variant-numeric",
 	description :
@@ -12034,7 +12033,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.ordinal" => CSSFeature { id :
 	"css.properties.font-variant-numeric.ordinal", name : "font-variant-numeric",
 	description :
@@ -12047,7 +12046,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.proportional-nums" => CSSFeature { id :
 	"css.properties.font-variant-numeric.proportional-nums", name :
 	"font-variant-numeric", description :
@@ -12060,7 +12059,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.slashed-zero" => CSSFeature { id :
 	"css.properties.font-variant-numeric.slashed-zero", name : "font-variant-numeric",
 	description :
@@ -12073,7 +12072,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.stacked-fractions" => CSSFeature { id :
 	"css.properties.font-variant-numeric.stacked-fractions", name :
 	"font-variant-numeric", description :
@@ -12086,7 +12085,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-numeric.tabular-nums" => CSSFeature { id :
 	"css.properties.font-variant-numeric.tabular-nums", name : "font-variant-numeric",
 	description :
@@ -12099,7 +12098,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/font-variant-numeric"], popularity : 5.246749f32, },
+	["https://caniuse.com/font-variant-numeric"], popularity : 5.032193f32, },
 	"css.properties.font-variant-position" => CSSFeature { id :
 	"css.properties.font-variant-position", name : "font-variant-position", description :
 	"The font-variant-position CSS property sets whether to use alternate glyphs for subscript and superscript text.",
@@ -12108,7 +12107,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(34u16, 0u16),
 	firefox_android : BrowserVersion(34u16, 0u16), safari : BrowserVersion(9u16, 1u16),
-	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.278906f32,
+	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.322806f32,
 	}, "css.properties.font-variant-position.normal" => CSSFeature { id :
 	"css.properties.font-variant-position.normal", name : "font-variant-position",
 	description :
@@ -12118,7 +12117,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(34u16, 0u16),
 	firefox_android : BrowserVersion(34u16, 0u16), safari : BrowserVersion(9u16, 1u16),
-	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.278906f32,
+	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.322806f32,
 	}, "css.properties.font-variant-position.sub" => CSSFeature { id :
 	"css.properties.font-variant-position.sub", name : "font-variant-position",
 	description :
@@ -12128,7 +12127,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(34u16, 0u16),
 	firefox_android : BrowserVersion(34u16, 0u16), safari : BrowserVersion(9u16, 1u16),
-	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.278906f32,
+	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.322806f32,
 	}, "css.properties.font-variant-position.super" => CSSFeature { id :
 	"css.properties.font-variant-position.super", name : "font-variant-position",
 	description :
@@ -12138,7 +12137,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(34u16, 0u16),
 	firefox_android : BrowserVersion(34u16, 0u16), safari : BrowserVersion(9u16, 1u16),
-	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.278906f32,
+	safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : & [], popularity : 0.322806f32,
 	}, "css.properties.font-variant.css_fonts_shorthand" => CSSFeature { id :
 	"css.properties.font-variant.css_fonts_shorthand", name : "font-variant", description
 	:
@@ -12151,7 +12150,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 27.275267f32, },
+	[], popularity : 29.77054f32, },
 	"css.properties.font-variant.greek_accented_characters" => CSSFeature { id :
 	"css.properties.font-variant.greek_accented_characters", name : "font-variant",
 	description :
@@ -12161,7 +12160,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 27.275267f32, },
+	0), }, caniuse : & [], popularity : 29.77054f32, },
 	"css.properties.font-variant.historical-forms" => CSSFeature { id :
 	"css.properties.font-variant.historical-forms", name : "font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
@@ -12173,7 +12172,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(111u16, 0u16), edge : BrowserVersion(111u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant.none" => CSSFeature {
+	[], popularity : 29.77054f32, }, "css.properties.font-variant.none" => CSSFeature {
 	id : "css.properties.font-variant.none", name : "font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-prop", groups : &
@@ -12184,8 +12183,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(52u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant.normal" => CSSFeature
-	{ id : "css.properties.font-variant.normal", name : "font-variant", description :
+	[], popularity : 29.77054f32, }, "css.properties.font-variant.normal" => CSSFeature {
+	id : "css.properties.font-variant.normal", name : "font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-prop", groups : &
 	["font-features"], baseline_status : BaselineStatus::High { since :
@@ -12195,8 +12194,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant.sub" => CSSFeature {
-	id : "css.properties.font-variant.sub", name : "font-variant", description :
+	[], popularity : 29.77054f32, }, "css.properties.font-variant.sub" => CSSFeature { id
+	: "css.properties.font-variant.sub", name : "font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-prop", groups : &
 	["font-features"], baseline_status : BaselineStatus::High { since :
@@ -12206,7 +12205,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(110u16, 0u16), edge : BrowserVersion(110u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant.super" => CSSFeature {
+	[], popularity : 29.77054f32, }, "css.properties.font-variant.super" => CSSFeature {
 	id : "css.properties.font-variant.super", name : "font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-variant-prop", groups : &
@@ -12217,7 +12216,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(110u16, 0u16), edge : BrowserVersion(110u16, 0u16), firefox :
 	BrowserVersion(34u16, 0u16), firefox_android : BrowserVersion(34u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant.turkic_is" =>
+	[], popularity : 29.77054f32, }, "css.properties.font-variant.turkic_is" =>
 	CSSFeature { id : "css.properties.font-variant.turkic_is", name : "font-variant",
 	description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
@@ -12229,7 +12228,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(31u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(14u16, 0u16), firefox_android : BrowserVersion(14u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	[], popularity : 27.275267f32, }, "css.properties.font-variant.uppercase_eszett" =>
+	[], popularity : 29.77054f32, }, "css.properties.font-variant.uppercase_eszett" =>
 	CSSFeature { id : "css.properties.font-variant.uppercase_eszett", name :
 	"font-variant", description :
 	"The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.",
@@ -12238,7 +12237,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 27.275267f32, },
+	0), }, caniuse : & [], popularity : 29.77054f32, },
 	"css.properties.font-variation-settings" => CSSFeature { id :
 	"css.properties.font-variation-settings", name : "font-variation-settings",
 	description :
@@ -12251,7 +12250,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(62u16, 0u16), edge : BrowserVersion(17u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/variable-fonts"], popularity : 21.6532f32, },
+	["https://caniuse.com/variable-fonts"], popularity : 18.29498f32, },
 	"css.properties.font-weight" => CSSFeature { id : "css.properties.font-weight", name
 	: "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
@@ -12263,8 +12262,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.properties.font-weight.bold" => CSSFeature {
-	id : "css.properties.font-weight.bold", name : "font-weight", description :
+	[], popularity : 87.76394f32, }, "css.properties.font-weight.bold" => CSSFeature { id
+	: "css.properties.font-weight.bold", name : "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-weight-prop", groups : &
 	["fonts"], baseline_status : BaselineStatus::High { since :
@@ -12274,7 +12273,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.properties.font-weight.bolder" => CSSFeature {
+	[], popularity : 87.76394f32, }, "css.properties.font-weight.bolder" => CSSFeature {
 	id : "css.properties.font-weight.bolder", name : "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-weight-prop", groups : &
@@ -12285,8 +12284,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.properties.font-weight.lighter" => CSSFeature
-	{ id : "css.properties.font-weight.lighter", name : "font-weight", description :
+	[], popularity : 87.76394f32, }, "css.properties.font-weight.lighter" => CSSFeature {
+	id : "css.properties.font-weight.lighter", name : "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-weight-prop", groups : &
 	["fonts"], baseline_status : BaselineStatus::High { since :
@@ -12296,7 +12295,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.properties.font-weight.normal" => CSSFeature {
+	[], popularity : 87.76394f32, }, "css.properties.font-weight.normal" => CSSFeature {
 	id : "css.properties.font-weight.normal", name : "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-weight-prop", groups : &
@@ -12307,7 +12306,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.properties.font-weight.number" => CSSFeature {
+	[], popularity : 87.76394f32, }, "css.properties.font-weight.number" => CSSFeature {
 	id : "css.properties.font-weight.number", name : "font-weight", description :
 	"The font-weight CSS property controls the thickness of a font. It is set explicitly with the keyword bold or a number, or relative to the inherited thickness with the keywords bolder or lighter.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-weight-prop", groups : &
@@ -12318,7 +12317,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(62u16, 0u16), edge : BrowserVersion(17u16, 0u16), firefox :
 	BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	[], popularity : 88.575455f32, }, "css.properties.font-width" => CSSFeature { id :
+	[], popularity : 87.76394f32, }, "css.properties.font-width" => CSSFeature { id :
 	"css.properties.font-width", name : "font-width", description :
 	"The font-width CSS property selects a font face from a font family based on width, either by a keyword such as condensed or a percentage.",
 	spec : "https://drafts.csswg.org/css-fonts-4/#font-width-prop", groups : & ["fonts"],
@@ -12420,7 +12419,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(60u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-font-stretch"], popularity : 28.223867f32, },
+	["https://caniuse.com/css-font-stretch"], popularity : 27.3376f32, },
 	"css.properties.font.icon" => CSSFeature { id : "css.properties.font.icon", name :
 	"Font shorthand", description :
 	"The font CSS property shorthand sets multiple font properties, including style, weight, size, and font family.",
@@ -12519,7 +12518,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.gap.flex_context" => CSSFeature { id :
 	"css.properties.gap.flex_context", name : "Flexbox gap", description :
 	"The gap CSS property in a flexbox layout sets the size of the space between items.",
@@ -12541,7 +12540,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(66u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16),
 	safari : BrowserVersion(12u16, 0u16), safari_ios : BrowserVersion(12u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.gap.grid_context.calc_values" => CSSFeature { id :
 	"css.properties.gap.grid_context.calc_values", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12552,7 +12551,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(66u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.gap.grid_context.percentage_values" => CSSFeature { id :
 	"css.properties.gap.grid_context.percentage_values", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12563,7 +12562,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(66u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16),
 	safari : BrowserVersion(12u16, 0u16), safari_ios : BrowserVersion(12u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.gap.multicol_context" => CSSFeature { id :
 	"css.properties.gap.multicol_context", name : "Multi-column layout", description :
 	"Multi-column layout flows an element's content across one or more columns in a single row, without affecting the display property of its children.",
@@ -12584,7 +12583,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.glyph-orientation-vertical" => CSSFeature { id :
 	"css.properties.glyph-orientation-vertical", name : "glyph-orientation-vertical",
 	description :
@@ -12605,7 +12604,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-area" => CSSFeature { id : "css.properties.grid-area", name :
 	"Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12616,7 +12615,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-auto-columns" => CSSFeature { id :
 	"css.properties.grid-auto-columns", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12627,7 +12626,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-auto-flow" => CSSFeature { id : "css.properties.grid-auto-flow",
 	name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12638,7 +12637,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-auto-flow.column" => CSSFeature { id :
 	"css.properties.grid-auto-flow.column", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12649,7 +12648,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-auto-flow.dense" => CSSFeature { id :
 	"css.properties.grid-auto-flow.dense", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12660,7 +12659,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-auto-flow.row" => CSSFeature { id :
 	"css.properties.grid-auto-flow.row", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12671,7 +12670,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-auto-rows" => CSSFeature { id : "css.properties.grid-auto-rows",
 	name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12682,7 +12681,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-column" => CSSFeature { id : "css.properties.grid-column", name
 	: "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12693,7 +12692,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-column-end" => CSSFeature { id :
 	"css.properties.grid-column-end", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12704,7 +12703,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-column-start" => CSSFeature { id :
 	"css.properties.grid-column-start", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12715,7 +12714,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-row" => CSSFeature { id : "css.properties.grid-row", name :
 	"Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12726,7 +12725,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-row-end" => CSSFeature { id : "css.properties.grid-row-end",
 	name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12737,7 +12736,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-row-start" => CSSFeature { id : "css.properties.grid-row-start",
 	name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12748,7 +12747,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template" => CSSFeature { id : "css.properties.grid-template",
 	name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12759,7 +12758,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-areas" => CSSFeature { id :
 	"css.properties.grid-template-areas", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12770,7 +12769,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-areas.none" => CSSFeature { id :
 	"css.properties.grid-template-areas.none", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12781,7 +12780,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns" => CSSFeature { id :
 	"css.properties.grid-template-columns", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12792,7 +12791,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.animation" => CSSFeature { id :
 	"css.properties.grid-template-columns.animation", name : "Grid animation",
 	description :
@@ -12815,7 +12814,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.fit-content" => CSSFeature { id :
 	"css.properties.grid-template-columns.fit-content", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12826,7 +12825,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.masonry" => CSSFeature { id :
 	"css.properties.grid-template-columns.masonry", name : "Masonry", description :
 	"The display: grid-lanes or display: inline-grid-lanes CSS declaration creates a layout where items are tightly packed, like brickwork, in parallel lanes. Items are placed one by one in the lane that has the most available space.",
@@ -12846,7 +12845,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.min-content" => CSSFeature { id :
 	"css.properties.grid-template-columns.min-content", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12857,7 +12856,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.minmax" => CSSFeature { id :
 	"css.properties.grid-template-columns.minmax", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12868,7 +12867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.none" => CSSFeature { id :
 	"css.properties.grid-template-columns.none", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12879,7 +12878,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.repeat" => CSSFeature { id :
 	"css.properties.grid-template-columns.repeat", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12890,7 +12889,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(76u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-columns.subgrid" => CSSFeature { id :
 	"css.properties.grid-template-columns.subgrid", name : "Subgrid", description :
 	"The subgrid value for the grid-template-columns and grid-template-rows properties allows a grid item to inherit the grid definition of its parent grid container.",
@@ -12911,7 +12910,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.animation" => CSSFeature { id :
 	"css.properties.grid-template-rows.animation", name : "Grid animation", description :
 	"Grid animation allows you to animate the grid-template-columns and grid-template-rows CSS properties.",
@@ -12933,7 +12932,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.fit-content" => CSSFeature { id :
 	"css.properties.grid-template-rows.fit-content", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12944,7 +12943,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.masonry" => CSSFeature { id :
 	"css.properties.grid-template-rows.masonry", name : "Masonry", description :
 	"The display: grid-lanes or display: inline-grid-lanes CSS declaration creates a layout where items are tightly packed, like brickwork, in parallel lanes. Items are placed one by one in the lane that has the most available space.",
@@ -12963,7 +12962,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.min-content" => CSSFeature { id :
 	"css.properties.grid-template-rows.min-content", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12974,7 +12973,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.minmax" => CSSFeature { id :
 	"css.properties.grid-template-rows.minmax", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12985,7 +12984,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.none" => CSSFeature { id :
 	"css.properties.grid-template-rows.none", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -12996,7 +12995,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.repeat" => CSSFeature { id :
 	"css.properties.grid-template-rows.repeat", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -13007,7 +13006,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(76u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.grid-template-rows.subgrid" => CSSFeature { id :
 	"css.properties.grid-template-rows.subgrid", name : "Subgrid", description :
 	"The subgrid value for the grid-template-columns and grid-template-rows properties allows a grid item to inherit the grid definition of its parent grid container.",
@@ -13028,7 +13027,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.hanging-punctuation" => CSSFeature { id :
 	"css.properties.hanging-punctuation", name : "Hanging punctuation", description :
 	"The hanging-punctuation CSS property puts punctuation characters outside of the box to align the text with the rest of the document.",
@@ -13172,7 +13171,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(106u16, 0u16), chrome_android : BrowserVersion(106u16, 0u16), edge :
 	BrowserVersion(106u16, 0u16), firefox : BrowserVersion(98u16, 0u16), firefox_android
 	: BrowserVersion(98u16, 0u16), safari : BrowserVersion(17u16, 0u16), safari_ios :
-	BrowserVersion(17u16, 0u16), }, caniuse : & [], popularity : 0.312019f32, },
+	BrowserVersion(17u16, 0u16), }, caniuse : & [], popularity : 0.196178f32, },
 	"css.properties.hyphenate-character.auto" => CSSFeature { id :
 	"css.properties.hyphenate-character.auto", name : "Hyphenate character", description
 	:
@@ -13183,7 +13182,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(106u16, 0u16), chrome_android : BrowserVersion(106u16, 0u16), edge :
 	BrowserVersion(106u16, 0u16), firefox : BrowserVersion(98u16, 0u16), firefox_android
 	: BrowserVersion(98u16, 0u16), safari : BrowserVersion(17u16, 0u16), safari_ios :
-	BrowserVersion(17u16, 0u16), }, caniuse : & [], popularity : 0.312019f32, },
+	BrowserVersion(17u16, 0u16), }, caniuse : & [], popularity : 0.196178f32, },
 	"css.properties.hyphenate-limit-chars" => CSSFeature { id :
 	"css.properties.hyphenate-limit-chars", name : "Hyphenate limit chars", description :
 	"The hyphenate-limit-chars CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.",
@@ -13193,9 +13192,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(109u16, 0u16), edge : BrowserVersion(109u16, 0u16), firefox :
 	BrowserVersion(137u16, 0u16), firefox_android : BrowserVersion(137u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.09677f32, }, "css.properties.hyphenate-limit-chars.auto" => CSSFeature
-	{ id : "css.properties.hyphenate-limit-chars.auto", name : "Hyphenate limit chars",
-	description :
+	popularity : 0.114515f32, }, "css.properties.hyphenate-limit-chars.auto" =>
+	CSSFeature { id : "css.properties.hyphenate-limit-chars.auto", name :
+	"Hyphenate limit chars", description :
 	"The hyphenate-limit-chars CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.",
 	spec : "https://drafts.csswg.org/css-text-4/#hyphenate-char-limits", groups : &
 	["text-wrap"], baseline_status : BaselineStatus::False, browser_support :
@@ -13203,7 +13202,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(109u16, 0u16), edge : BrowserVersion(109u16, 0u16), firefox :
 	BrowserVersion(137u16, 0u16), firefox_android : BrowserVersion(137u16, 0u16), safari
 	: BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.09677f32, }, "css.properties.hyphens" => CSSFeature { id :
+	popularity : 0.114515f32, }, "css.properties.hyphens" => CSSFeature { id :
 	"css.properties.hyphens", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13212,7 +13211,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(55u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.auto" => CSSFeature { id : "css.properties.hyphens.auto",
 	name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13222,7 +13221,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(55u16, 0u16), edge : BrowserVersion(88u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_afrikaans" => CSSFeature { id :
 	"css.properties.hyphens.language_afrikaans", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13232,7 +13231,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android
 	: BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_albanian" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_albanian" => CSSFeature { id :
 	"css.properties.hyphens.language_albanian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13240,7 +13239,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), chrome_android : BrowserVersion(112u16, 0u16), edge :
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_amharic" => CSSFeature { id :
 	"css.properties.hyphens.language_amharic", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13249,7 +13248,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), chrome_android : BrowserVersion(112u16, 0u16), edge :
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_armenian" => CSSFeature { id :
 	"css.properties.hyphens.language_armenian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13258,7 +13257,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_assamese" => CSSFeature { id :
 	"css.properties.hyphens.language_assamese", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13267,7 +13266,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_basque" => CSSFeature { id :
 	"css.properties.hyphens.language_basque", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13276,7 +13275,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_belarusian" => CSSFeature { id :
 	"css.properties.hyphens.language_belarusian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13285,7 +13284,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_bengali" => CSSFeature { id :
 	"css.properties.hyphens.language_bengali", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13294,7 +13293,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_bosnian" => CSSFeature { id :
 	"css.properties.hyphens.language_bosnian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13303,7 +13302,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_bulgarian" => CSSFeature { id :
 	"css.properties.hyphens.language_bulgarian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13313,7 +13312,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_catalan" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_catalan" => CSSFeature { id :
 	"css.properties.hyphens.language_catalan", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13321,7 +13320,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32,
+	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32,
 	}, "css.properties.hyphens.language_croatian" => CSSFeature { id :
 	"css.properties.hyphens.language_croatian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13331,7 +13330,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_cyrillic_mongolian" => CSSFeature { id :
 	"css.properties.hyphens.language_cyrillic_mongolian", name : "Hyphenation",
 	description :
@@ -13341,7 +13340,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_czech" => CSSFeature { id :
 	"css.properties.hyphens.language_czech", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13351,7 +13350,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16),
 	firefox : BrowserVersion(130u16, 0u16), firefox_android : BrowserVersion(130u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32,
+	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32,
 	}, "css.properties.hyphens.language_danish" => CSSFeature { id :
 	"css.properties.hyphens.language_danish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13361,7 +13360,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_dutch" => CSSFeature { id :
 	"css.properties.hyphens.language_dutch", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13371,7 +13370,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_english" => CSSFeature { id :
 	"css.properties.hyphens.language_english", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13381,7 +13380,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(55u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_esperanto" => CSSFeature { id :
 	"css.properties.hyphens.language_esperanto", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13390,7 +13389,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_estonian" => CSSFeature { id :
 	"css.properties.hyphens.language_estonian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13400,7 +13399,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_ethiopic_script_mul" =>
+	: 10.393241f32, }, "css.properties.hyphens.language_ethiopic_script_mul" =>
 	CSSFeature { id : "css.properties.hyphens.language_ethiopic_script_mul", name :
 	"Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13409,7 +13408,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), chrome_android : BrowserVersion(112u16, 0u16), edge :
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_ethiopic_script_und" => CSSFeature { id :
 	"css.properties.hyphens.language_ethiopic_script_und", name : "Hyphenation",
 	description :
@@ -13419,7 +13418,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_finnish" => CSSFeature { id :
 	"css.properties.hyphens.language_finnish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13428,7 +13427,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32,
+	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32,
 	}, "css.properties.hyphens.language_french" => CSSFeature { id :
 	"css.properties.hyphens.language_french", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13438,7 +13437,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_galician" => CSSFeature { id :
 	"css.properties.hyphens.language_galician", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13448,7 +13447,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android
 	: BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_georgian" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_georgian" => CSSFeature { id :
 	"css.properties.hyphens.language_georgian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13456,7 +13455,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), chrome_android : BrowserVersion(112u16, 0u16), edge :
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_german_reformed_orthography" => CSSFeature { id :
 	"css.properties.hyphens.language_german_reformed_orthography", name : "Hyphenation",
 	description :
@@ -13467,7 +13466,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_german_swiss_orthography" => CSSFeature { id :
 	"css.properties.hyphens.language_german_swiss_orthography", name : "Hyphenation",
 	description :
@@ -13478,7 +13477,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_german_traditional_orthography"
+	: 10.393241f32, }, "css.properties.hyphens.language_german_traditional_orthography"
 	=> CSSFeature { id :
 	"css.properties.hyphens.language_german_traditional_orthography", name :
 	"Hyphenation", description :
@@ -13489,7 +13488,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_gujarati" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_gujarati" => CSSFeature { id :
 	"css.properties.hyphens.language_gujarati", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13497,7 +13496,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_hindi" => CSSFeature { id :
 	"css.properties.hyphens.language_hindi", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13506,7 +13505,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_hungarian" => CSSFeature { id :
 	"css.properties.hyphens.language_hungarian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13516,7 +13515,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_icelandic" => CSSFeature { id :
 	"css.properties.hyphens.language_icelandic", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13525,7 +13524,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_interlingua" => CSSFeature { id :
 	"css.properties.hyphens.language_interlingua", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13534,7 +13533,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_irish" => CSSFeature { id :
 	"css.properties.hyphens.language_irish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13543,7 +13542,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_italian" => CSSFeature { id :
 	"css.properties.hyphens.language_italian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13553,7 +13552,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_kannada" => CSSFeature { id :
 	"css.properties.hyphens.language_kannada", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13562,7 +13561,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_kurmanji" => CSSFeature { id :
 	"css.properties.hyphens.language_kurmanji", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13571,7 +13570,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_latin" => CSSFeature { id :
 	"css.properties.hyphens.language_latin", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13581,7 +13580,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_latvian" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_latvian" => CSSFeature { id :
 	"css.properties.hyphens.language_latvian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13589,7 +13588,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), chrome_android : BrowserVersion(112u16, 0u16), edge :
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_lithuanian" => CSSFeature { id :
 	"css.properties.hyphens.language_lithuanian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13599,7 +13598,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android
 	: BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_malayalam" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_malayalam" => CSSFeature { id :
 	"css.properties.hyphens.language_malayalam", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13607,7 +13606,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_marathi" => CSSFeature { id :
 	"css.properties.hyphens.language_marathi", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13616,7 +13615,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_modern_greek" => CSSFeature { id :
 	"css.properties.hyphens.language_modern_greek", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13625,7 +13624,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), chrome_android : BrowserVersion(112u16, 0u16), edge :
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_mongolian" => CSSFeature { id :
 	"css.properties.hyphens.language_mongolian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13634,7 +13633,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_norwegian_nn" => CSSFeature { id :
 	"css.properties.hyphens.language_norwegian_nn", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13644,7 +13643,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(17u16, 0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"],
-	popularity : 11.322542f32, }, "css.properties.hyphens.language_norwegian_no" =>
+	popularity : 10.393241f32, }, "css.properties.hyphens.language_norwegian_no" =>
 	CSSFeature { id : "css.properties.hyphens.language_norwegian_no", name :
 	"Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13654,7 +13653,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_old_slavonic" => CSSFeature { id :
 	"css.properties.hyphens.language_old_slavonic", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13663,7 +13662,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_oriya" => CSSFeature { id :
 	"css.properties.hyphens.language_oriya", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13672,7 +13671,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_polish" => CSSFeature { id :
 	"css.properties.hyphens.language_polish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13681,7 +13680,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32,
+	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32,
 	}, "css.properties.hyphens.language_portuguese" => CSSFeature { id :
 	"css.properties.hyphens.language_portuguese", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13691,7 +13690,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_punjabi" => CSSFeature { id :
 	"css.properties.hyphens.language_punjabi", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13700,7 +13699,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_russian" => CSSFeature { id :
 	"css.properties.hyphens.language_russian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13710,7 +13709,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_slovak" => CSSFeature { id :
 	"css.properties.hyphens.language_slovak", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13720,7 +13719,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(112u16, 0u16), firefox : BrowserVersion(130u16, 0u16), firefox_android
 	: BrowserVersion(130u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_slovenian" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_slovenian" => CSSFeature { id :
 	"css.properties.hyphens.language_slovenian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13729,7 +13728,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.hyphens.language_spanish" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.hyphens.language_spanish" => CSSFeature { id :
 	"css.properties.hyphens.language_spanish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
 	spec : "https://drafts.csswg.org/css-text-3/#hyphens-property", groups : & [],
@@ -13738,7 +13737,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_swedish" => CSSFeature { id :
 	"css.properties.hyphens.language_swedish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13748,7 +13747,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_tamil" => CSSFeature { id :
 	"css.properties.hyphens.language_tamil", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13757,7 +13756,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_telugu" => CSSFeature { id :
 	"css.properties.hyphens.language_telugu", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13766,7 +13765,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_turkish" => CSSFeature { id :
 	"css.properties.hyphens.language_turkish", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13775,7 +13774,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32,
+	0u16), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32,
 	}, "css.properties.hyphens.language_turkmen" => CSSFeature { id :
 	"css.properties.hyphens.language_turkmen", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13784,7 +13783,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_ukrainian" => CSSFeature { id :
 	"css.properties.hyphens.language_ukrainian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13794,7 +13793,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(112u16, 0u16), edge : BrowserVersion(112u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	caniuse : & ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_upper_sorbian" => CSSFeature { id :
 	"css.properties.hyphens.language_upper_sorbian", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13803,7 +13802,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/css-hyphens"], popularity : 11.322542f32, },
+	& ["https://caniuse.com/css-hyphens"], popularity : 10.393241f32, },
 	"css.properties.hyphens.language_welsh" => CSSFeature { id :
 	"css.properties.hyphens.language_welsh", name : "Hyphenation", description :
 	"The hyphens CSS property controls when long words are broken by line wrapping. Although called hyphens, the property applies to word-splitting behavior across languages, such as customary spelling changes or the use of other characters. Support for non-English languages varies significantly.",
@@ -13813,7 +13812,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(43u16, 0u16), firefox_android :
 	BrowserVersion(43u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-hyphens"], popularity
-	: 11.322542f32, }, "css.properties.image-orientation" => CSSFeature { id :
+	: 10.393241f32, }, "css.properties.image-orientation" => CSSFeature { id :
 	"css.properties.image-orientation", name : "image-orientation", description :
 	"The image-orientation CSS property corrects the rotation of an image using the image's metadata, such as EXIF.",
 	spec : "https://drafts.csswg.org/css-images-3/#the-image-orientation", groups : &
@@ -13861,7 +13860,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-crisp-edges"], popularity : 6.390913f32, },
+	["https://caniuse.com/css-crisp-edges"], popularity : 7.714761f32, },
 	"css.properties.image-rendering.auto" => CSSFeature { id :
 	"css.properties.image-rendering.auto", name : "image-rendering", description :
 	"The image-rendering CSS property sets how images are scaled, retaining smoothness for photos, or hard edges for pixel art and QR codes.",
@@ -13873,7 +13872,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-crisp-edges"], popularity : 6.390913f32, },
+	["https://caniuse.com/css-crisp-edges"], popularity : 7.714761f32, },
 	"css.properties.image-rendering.crisp-edges" => CSSFeature { id :
 	"css.properties.image-rendering.crisp-edges", name : "crisp-edges", description :
 	"The image-rendering: crisp-edges CSS declaration scales images to preserve lines without blurring.",
@@ -13894,7 +13893,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(41u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(93u16, 0u16), firefox_android : BrowserVersion(93u16, 0u16), safari :
 	BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-crisp-edges"], popularity : 6.390913f32, },
+	["https://caniuse.com/css-crisp-edges"], popularity : 7.714761f32, },
 	"css.properties.image-rendering.smooth" => CSSFeature { id :
 	"css.properties.image-rendering.smooth", name : "image-rendering: smooth",
 	description :
@@ -13921,7 +13920,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(110u16, 0u16), chrome_android : BrowserVersion(110u16, 0u16), edge :
 	BrowserVersion(110u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.063161f32, },
+	0), }, caniuse : & [], popularity : 0.094549f32, },
 	"css.properties.initial-letter.normal" => CSSFeature { id :
 	"css.properties.initial-letter.normal", name : "initial-letter", description :
 	"The initial-letter CSS property sets the number of lines the first letter of an element occupies. You can use the property to make a raised capital or drop cap.",
@@ -13930,7 +13929,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(110u16, 0u16), chrome_android : BrowserVersion(110u16, 0u16), edge :
 	BrowserVersion(110u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.063161f32, }, "css.properties.inline-size" =>
+	0), }, caniuse : & [], popularity : 0.094549f32, }, "css.properties.inline-size" =>
 	CSSFeature { id : "css.properties.inline-size", name : "Logical properties",
 	description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -14302,7 +14301,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(135u16, 0u16), chrome_android : BrowserVersion(135u16, 0u16), edge :
 	BrowserVersion(135u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.023718f32, },
+	0), }, caniuse : & [], popularity : 0.021722f32, },
 	"css.properties.interactivity.auto" => CSSFeature { id :
 	"css.properties.interactivity.auto", name : "interactivity", description :
 	"The interactivity: inert CSS declaration makes an element and its descendants inert, like when using the inert HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.",
@@ -14311,7 +14310,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(135u16, 0u16), chrome_android : BrowserVersion(135u16, 0u16), edge :
 	BrowserVersion(135u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.023718f32, },
+	0), }, caniuse : & [], popularity : 0.021722f32, },
 	"css.properties.interactivity.inert" => CSSFeature { id :
 	"css.properties.interactivity.inert", name : "interactivity", description :
 	"The interactivity: inert CSS declaration makes an element and its descendants inert, like when using the inert HTML attribute. Inert elements can't be focused or clicked, their text can't be selected or found using the browser's find-in-page feature.",
@@ -14320,7 +14319,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(135u16, 0u16), chrome_android : BrowserVersion(135u16, 0u16), edge :
 	BrowserVersion(135u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.023718f32, }, "css.properties.interpolate-size"
+	0), }, caniuse : & [], popularity : 0.021722f32, }, "css.properties.interpolate-size"
 	=> CSSFeature { id : "css.properties.interpolate-size", name : "interpolate-size",
 	description :
 	"The interpolate-size CSS property sets whether animations and transitions interpolate between a numeric value and a keyword value, such as from a fixed length to auto or fit-content.",
@@ -14330,7 +14329,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(129u16, 0u16), edge : BrowserVersion(129u16, 0u16),
 	firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 4.412421f32, }, "css.properties.interpolate-size.allow-keywords" =>
+	popularity : 2.242345f32, }, "css.properties.interpolate-size.allow-keywords" =>
 	CSSFeature { id : "css.properties.interpolate-size.allow-keywords", name :
 	"interpolate-size", description :
 	"The interpolate-size CSS property sets whether animations and transitions interpolate between a numeric value and a keyword value, such as from a fixed length to auto or fit-content.",
@@ -14340,7 +14339,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(129u16, 0u16), edge : BrowserVersion(129u16, 0u16),
 	firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 4.412421f32, }, "css.properties.interpolate-size.numeric-only" =>
+	popularity : 2.242345f32, }, "css.properties.interpolate-size.numeric-only" =>
 	CSSFeature { id : "css.properties.interpolate-size.numeric-only", name :
 	"interpolate-size", description :
 	"The interpolate-size CSS property sets whether animations and transitions interpolate between a numeric value and a keyword value, such as from a fixed length to auto or fit-content.",
@@ -14350,7 +14349,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(129u16, 0u16), edge : BrowserVersion(129u16, 0u16),
 	firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 4.412421f32, }, "css.properties.isolation" => CSSFeature { id :
+	popularity : 2.242345f32, }, "css.properties.isolation" => CSSFeature { id :
 	"css.properties.isolation", name : "isolation", description :
 	"The isolation CSS property creates a new stacking context, which impacts z-index ordering and blend modes.",
 	spec : "https://drafts.csswg.org/compositing-2/#isolation", groups : &
@@ -14361,7 +14360,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(41u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	[], popularity : 15.848769f32, }, "css.properties.justify-content" => CSSFeature { id
+	[], popularity : 13.856854f32, }, "css.properties.justify-content" => CSSFeature { id
 	: "css.properties.justify-content", name : "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
 	spec : "https://drafts.csswg.org/css-flexbox-1/", groups : & ["flexbox"],
@@ -14452,7 +14451,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(52u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-content.left" => CSSFeature { id :
 	"css.properties.justify-content.left", name : "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -14550,7 +14549,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-items.left" => CSSFeature { id :
 	"css.properties.justify-items.left", name : "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -14594,7 +14593,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-self.anchor-center" => CSSFeature { id :
 	"css.properties.justify-self.anchor-center", name : "Anchor positioning", description
 	:
@@ -14616,7 +14615,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-self.block_context" => CSSFeature { id :
 	"css.properties.justify-self.block_context", name : "justify-self in block layouts",
 	description :
@@ -14637,7 +14636,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-self.left" => CSSFeature { id :
 	"css.properties.justify-self.left", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -14648,7 +14647,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-self.normal" => CSSFeature { id :
 	"css.properties.justify-self.normal", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -14659,7 +14658,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-self.position_absolute_context" => CSSFeature { id :
 	"css.properties.justify-self.position_absolute_context", name :
 	"Absolute positioning", description :
@@ -14680,7 +14679,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.justify-self.stretch" => CSSFeature { id :
 	"css.properties.justify-self.stretch", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -14691,7 +14690,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.left" => CSSFeature { id : "css.properties.left", name :
 	"Physical properties", description :
 	"The physical CSS properties, top, right, bottom, and left, set the inset position of an element relative to the corresponding side of a container determined by the element's position property.",
@@ -14743,7 +14742,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-letter-spacing"], popularity : 67.54811f32, },
+	["https://caniuse.com/css-letter-spacing"], popularity : 67.570274f32, },
 	"css.properties.letter-spacing.normal" => CSSFeature { id :
 	"css.properties.letter-spacing.normal", name : "letter-spacing", description :
 	"The letter-spacing CSS property controls the amount of space between each letter in an element or block of text.",
@@ -14755,7 +14754,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-letter-spacing"], popularity : 67.54811f32, },
+	["https://caniuse.com/css-letter-spacing"], popularity : 67.570274f32, },
 	"css.properties.letter-spacing.svg_elements" => CSSFeature { id :
 	"css.properties.letter-spacing.svg_elements", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -14811,7 +14810,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(58u16, 0u16), edge : BrowserVersion(14u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	[], popularity : 5.230705f32, }, "css.properties.line-break.anywhere" => CSSFeature {
+	[], popularity : 5.22588f32, }, "css.properties.line-break.anywhere" => CSSFeature {
 	id : "css.properties.line-break.anywhere", name : "line-break", description :
 	"The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.",
 	spec : "https://drafts.csswg.org/css-text-4/#line-break-property", groups : &
@@ -14822,8 +14821,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(83u16, 0u16), edge : BrowserVersion(83u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), }, caniuse : &
-	[], popularity : 5.230705f32, }, "css.properties.line-break.auto" => CSSFeature { id
-	: "css.properties.line-break.auto", name : "line-break", description :
+	[], popularity : 5.22588f32, }, "css.properties.line-break.auto" => CSSFeature { id :
+	"css.properties.line-break.auto", name : "line-break", description :
 	"The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.",
 	spec : "https://drafts.csswg.org/css-text-4/#line-break-property", groups : &
 	["text-wrap"], baseline_status : BaselineStatus::High { since :
@@ -14833,7 +14832,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(58u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	[], popularity : 5.230705f32, }, "css.properties.line-break.loose" => CSSFeature { id
+	[], popularity : 5.22588f32, }, "css.properties.line-break.loose" => CSSFeature { id
 	: "css.properties.line-break.loose", name : "line-break", description :
 	"The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.",
 	spec : "https://drafts.csswg.org/css-text-4/#line-break-property", groups : &
@@ -14844,8 +14843,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(58u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	[], popularity : 5.230705f32, }, "css.properties.line-break.normal" => CSSFeature {
-	id : "css.properties.line-break.normal", name : "line-break", description :
+	[], popularity : 5.22588f32, }, "css.properties.line-break.normal" => CSSFeature { id
+	: "css.properties.line-break.normal", name : "line-break", description :
 	"The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.",
 	spec : "https://drafts.csswg.org/css-text-4/#line-break-property", groups : &
 	["text-wrap"], baseline_status : BaselineStatus::High { since :
@@ -14855,8 +14854,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(58u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	[], popularity : 5.230705f32, }, "css.properties.line-break.strict" => CSSFeature {
-	id : "css.properties.line-break.strict", name : "line-break", description :
+	[], popularity : 5.22588f32, }, "css.properties.line-break.strict" => CSSFeature { id
+	: "css.properties.line-break.strict", name : "line-break", description :
 	"The line-break CSS property sets how strictly to apply rules for wrapping text to new lines, especially for symbols and punctuation.",
 	spec : "https://drafts.csswg.org/css-text-4/#line-break-property", groups : &
 	["text-wrap"], baseline_status : BaselineStatus::High { since :
@@ -14866,7 +14865,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(58u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), }, caniuse : &
-	[], popularity : 5.230705f32, }, "css.properties.line-clamp" => CSSFeature { id :
+	[], popularity : 5.22588f32, }, "css.properties.line-clamp" => CSSFeature { id :
 	"css.properties.line-clamp", name : "line-clamp", description :
 	"The line-clamp CSS property limits the text in a block container to a certain number of lines. The prefixed -webkit-line-clamp is widely supported but only works with -webkit-box-orient: vertical in combination with display: -webkit-box or display: -webkit-inline-box.",
 	spec : "https://drafts.csswg.org/css-overflow-4/#line-clamp", groups : & [],
@@ -14874,7 +14873,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/css-line-clamp"], popularity : 0.004087f32, },
+	["https://caniuse.com/css-line-clamp"], popularity : 0.003359f32, },
 	"css.properties.line-clamp.none" => CSSFeature { id :
 	"css.properties.line-clamp.none", name : "line-clamp", description :
 	"The line-clamp CSS property limits the text in a block container to a certain number of lines. The prefixed -webkit-line-clamp is widely supported but only works with -webkit-box-orient: vertical in combination with display: -webkit-box or display: -webkit-inline-box.",
@@ -14883,7 +14882,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/css-line-clamp"], popularity : 0.004087f32, },
+	["https://caniuse.com/css-line-clamp"], popularity : 0.003359f32, },
 	"css.properties.line-height" => CSSFeature { id : "css.properties.line-height", name
 	: "line-height", description :
 	"The line-height CSS property sets the spacing between text baselines, oriented to the horizontal or vertical writing mode.",
@@ -14895,7 +14894,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 86.40638f32, }, "css.properties.line-height.normal" => CSSFeature {
+	[], popularity : 86.0722f32, }, "css.properties.line-height.normal" => CSSFeature {
 	id : "css.properties.line-height.normal", name : "line-height", description :
 	"The line-height CSS property sets the spacing between text baselines, oriented to the horizontal or vertical writing mode.",
 	spec : "https://drafts.csswg.org/css-inline-3/#line-height-property", groups : &
@@ -14906,7 +14905,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 86.40638f32, }, "css.properties.list-style" => CSSFeature { id :
+	[], popularity : 86.0722f32, }, "css.properties.list-style" => CSSFeature { id :
 	"css.properties.list-style", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -14917,8 +14916,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-image" => CSSFeature { id
-	: "css.properties.list-style-image", name : "List style", description :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-image" => CSSFeature {
+	id : "css.properties.list-style-image", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -14928,8 +14927,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-image.none" => CSSFeature
-	{ id : "css.properties.list-style-image.none", name : "List style", description :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-image.none" =>
+	CSSFeature { id : "css.properties.list-style-image.none", name : "List style",
+	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -14939,8 +14939,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-position" => CSSFeature {
-	id : "css.properties.list-style-position", name : "List style", description :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-position" => CSSFeature
+	{ id : "css.properties.list-style-position", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -14950,7 +14950,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-position.inside" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-position.inside" =>
 	CSSFeature { id : "css.properties.list-style-position.inside", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -14962,7 +14962,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-position.outside" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-position.outside" =>
 	CSSFeature { id : "css.properties.list-style-position.outside", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -14974,7 +14974,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type" => CSSFeature { id
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type" => CSSFeature { id
 	: "css.properties.list-style-type", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -14985,7 +14985,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.arabic-indic" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.arabic-indic" =>
 	CSSFeature { id : "css.properties.list-style-type.arabic-indic", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -14997,7 +14997,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.armenian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.armenian" =>
 	CSSFeature { id : "css.properties.list-style-type.armenian", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15009,7 +15009,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.bengali" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.bengali" =>
 	CSSFeature { id : "css.properties.list-style-type.bengali", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15021,7 +15021,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.cambodian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.cambodian" =>
 	CSSFeature { id : "css.properties.list-style-type.cambodian", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15033,7 +15033,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.circle" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.circle" =>
 	CSSFeature { id : "css.properties.list-style-type.circle", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15045,7 +15045,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.cjk-decimal" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.cjk-decimal" =>
 	CSSFeature { id : "css.properties.list-style-type.cjk-decimal", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15057,7 +15057,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(91u16, 0u16), edge : BrowserVersion(91u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.cjk-earthly-branch"
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.cjk-earthly-branch"
 	=> CSSFeature { id : "css.properties.list-style-type.cjk-earthly-branch", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15069,7 +15069,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.cjk-heavenly-stem"
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.cjk-heavenly-stem"
 	=> CSSFeature { id : "css.properties.list-style-type.cjk-heavenly-stem", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15081,7 +15081,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.cjk-ideographic" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.cjk-ideographic" =>
 	CSSFeature { id : "css.properties.list-style-type.cjk-ideographic", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15093,7 +15093,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.decimal" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.decimal" =>
 	CSSFeature { id : "css.properties.list-style-type.decimal", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15105,7 +15105,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, },
+	[], popularity : 68.106575f32, },
 	"css.properties.list-style-type.decimal-leading-zero" => CSSFeature { id :
 	"css.properties.list-style-type.decimal-leading-zero", name : "List style",
 	description :
@@ -15118,7 +15118,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.devanagari" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.devanagari" =>
 	CSSFeature { id : "css.properties.list-style-type.devanagari", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15130,7 +15130,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.disc" => CSSFeature
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.disc" => CSSFeature
 	{ id : "css.properties.list-style-type.disc", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15141,7 +15141,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.disclosure-closed"
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.disclosure-closed"
 	=> CSSFeature { id : "css.properties.list-style-type.disclosure-closed", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15153,7 +15153,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(89u16, 0u16), edge : BrowserVersion(89u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.disclosure-open" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.disclosure-open" =>
 	CSSFeature { id : "css.properties.list-style-type.disclosure-open", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15165,8 +15165,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(89u16, 0u16), edge : BrowserVersion(89u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.ethiopic-numeric" =>
-	CSSFeature { id : "css.properties.list-style-type.ethiopic-numeric", name :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.ethiopic-numeric"
+	=> CSSFeature { id : "css.properties.list-style-type.ethiopic-numeric", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15177,7 +15177,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(91u16, 0u16), edge : BrowserVersion(91u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.georgian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.georgian" =>
 	CSSFeature { id : "css.properties.list-style-type.georgian", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15189,7 +15189,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.gujarati" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.gujarati" =>
 	CSSFeature { id : "css.properties.list-style-type.gujarati", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15201,7 +15201,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.gurmukhi" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.gurmukhi" =>
 	CSSFeature { id : "css.properties.list-style-type.gurmukhi", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15213,7 +15213,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.hebrew" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.hebrew" =>
 	CSSFeature { id : "css.properties.list-style-type.hebrew", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15225,7 +15225,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.hiragana" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.hiragana" =>
 	CSSFeature { id : "css.properties.list-style-type.hiragana", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15237,7 +15237,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.hiragana-iroha" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.hiragana-iroha" =>
 	CSSFeature { id : "css.properties.list-style-type.hiragana-iroha", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15249,7 +15249,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.japanese-formal" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.japanese-formal" =>
 	CSSFeature { id : "css.properties.list-style-type.japanese-formal", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15261,7 +15261,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(91u16, 0u16), edge : BrowserVersion(91u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.japanese-informal"
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.japanese-informal"
 	=> CSSFeature { id : "css.properties.list-style-type.japanese-informal", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15273,7 +15273,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(91u16, 0u16), edge : BrowserVersion(91u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.kannada" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.kannada" =>
 	CSSFeature { id : "css.properties.list-style-type.kannada", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15285,7 +15285,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.katakana" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.katakana" =>
 	CSSFeature { id : "css.properties.list-style-type.katakana", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15297,7 +15297,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.katakana-iroha" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.katakana-iroha" =>
 	CSSFeature { id : "css.properties.list-style-type.katakana-iroha", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15309,8 +15309,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.khmer" => CSSFeature
-	{ id : "css.properties.list-style-type.khmer", name : "List style", description :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.khmer" =>
+	CSSFeature { id : "css.properties.list-style-type.khmer", name : "List style",
+	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -15320,7 +15321,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, },
+	[], popularity : 68.106575f32, },
 	"css.properties.list-style-type.korean-hangul-formal" => CSSFeature { id :
 	"css.properties.list-style-type.korean-hangul-formal", name : "List style",
 	description :
@@ -15333,9 +15334,10 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.korean-hanja-formal"
-	=> CSSFeature { id : "css.properties.list-style-type.korean-hanja-formal", name :
-	"List style", description :
+	[], popularity : 68.106575f32, },
+	"css.properties.list-style-type.korean-hanja-formal" => CSSFeature { id :
+	"css.properties.list-style-type.korean-hanja-formal", name : "List style",
+	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -15345,7 +15347,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, },
+	[], popularity : 68.106575f32, },
 	"css.properties.list-style-type.korean-hanja-informal" => CSSFeature { id :
 	"css.properties.list-style-type.korean-hanja-informal", name : "List style",
 	description :
@@ -15358,8 +15360,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.lao" => CSSFeature {
-	id : "css.properties.list-style-type.lao", name : "List style", description :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.lao" => CSSFeature
+	{ id : "css.properties.list-style-type.lao", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -15369,7 +15371,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.lower-alpha" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.lower-alpha" =>
 	CSSFeature { id : "css.properties.list-style-type.lower-alpha", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15381,7 +15383,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.lower-armenian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.lower-armenian" =>
 	CSSFeature { id : "css.properties.list-style-type.lower-armenian", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15393,7 +15395,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.lower-greek" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.lower-greek" =>
 	CSSFeature { id : "css.properties.list-style-type.lower-greek", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15405,7 +15407,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.lower-latin" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.lower-latin" =>
 	CSSFeature { id : "css.properties.list-style-type.lower-latin", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15417,7 +15419,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.lower-roman" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.lower-roman" =>
 	CSSFeature { id : "css.properties.list-style-type.lower-roman", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15429,7 +15431,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.malayalam" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.malayalam" =>
 	CSSFeature { id : "css.properties.list-style-type.malayalam", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15441,7 +15443,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.mongolian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.mongolian" =>
 	CSSFeature { id : "css.properties.list-style-type.mongolian", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15453,7 +15455,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.myanmar" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.myanmar" =>
 	CSSFeature { id : "css.properties.list-style-type.myanmar", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15465,7 +15467,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.none" => CSSFeature
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.none" => CSSFeature
 	{ id : "css.properties.list-style-type.none", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15476,8 +15478,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.oriya" => CSSFeature
-	{ id : "css.properties.list-style-type.oriya", name : "List style", description :
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.oriya" =>
+	CSSFeature { id : "css.properties.list-style-type.oriya", name : "List style",
+	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -15487,7 +15490,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.persian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.persian" =>
 	CSSFeature { id : "css.properties.list-style-type.persian", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15499,9 +15502,10 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.simp-chinese-formal"
-	=> CSSFeature { id : "css.properties.list-style-type.simp-chinese-formal", name :
-	"List style", description :
+	[], popularity : 68.106575f32, },
+	"css.properties.list-style-type.simp-chinese-formal" => CSSFeature { id :
+	"css.properties.list-style-type.simp-chinese-formal", name : "List style",
+	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -15511,7 +15515,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, },
+	[], popularity : 68.106575f32, },
 	"css.properties.list-style-type.simp-chinese-informal" => CSSFeature { id :
 	"css.properties.list-style-type.simp-chinese-informal", name : "List style",
 	description :
@@ -15524,7 +15528,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.square" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.square" =>
 	CSSFeature { id : "css.properties.list-style-type.square", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15536,7 +15540,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.string" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.string" =>
 	CSSFeature { id : "css.properties.list-style-type.string", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15548,7 +15552,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(39u16, 0u16), firefox_android : BrowserVersion(39u16, 0u16), safari :
 	BrowserVersion(14u16, 1u16), safari_ios : BrowserVersion(14u16, 5u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.symbols" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.symbols" =>
 	CSSFeature { id : "css.properties.list-style-type.symbols", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15557,7 +15561,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(35u16, 0u16), firefox_android :
 	BrowserVersion(35u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 66.94302f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 68.106575f32, },
 	"css.properties.list-style-type.tamil" => CSSFeature { id :
 	"css.properties.list-style-type.tamil", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15569,7 +15573,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(91u16, 0u16), edge : BrowserVersion(91u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.telugu" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.telugu" =>
 	CSSFeature { id : "css.properties.list-style-type.telugu", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15581,7 +15585,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.thai" => CSSFeature
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.thai" => CSSFeature
 	{ id : "css.properties.list-style-type.thai", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15592,7 +15596,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.tibetan" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.tibetan" =>
 	CSSFeature { id : "css.properties.list-style-type.tibetan", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15604,9 +15608,10 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 0u16), safari_ios : BrowserVersion(4u16, 2u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.trad-chinese-formal"
-	=> CSSFeature { id : "css.properties.list-style-type.trad-chinese-formal", name :
-	"List style", description :
+	[], popularity : 68.106575f32, },
+	"css.properties.list-style-type.trad-chinese-formal" => CSSFeature { id :
+	"css.properties.list-style-type.trad-chinese-formal", name : "List style",
+	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
 	["lists"], baseline_status : BaselineStatus::High { since :
@@ -15616,7 +15621,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, },
+	[], popularity : 68.106575f32, },
 	"css.properties.list-style-type.trad-chinese-informal" => CSSFeature { id :
 	"css.properties.list-style-type.trad-chinese-informal", name : "List style",
 	description :
@@ -15629,7 +15634,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(45u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(28u16, 0u16), firefox_android : BrowserVersion(28u16, 0u16), safari :
 	BrowserVersion(15u16, 0u16), safari_ios : BrowserVersion(15u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.upper-alpha" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.upper-alpha" =>
 	CSSFeature { id : "css.properties.list-style-type.upper-alpha", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15641,7 +15646,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.upper-armenian" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.upper-armenian" =>
 	CSSFeature { id : "css.properties.list-style-type.upper-armenian", name :
 	"List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15653,7 +15658,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(33u16, 0u16), firefox_android : BrowserVersion(33u16, 0u16), safari :
 	BrowserVersion(5u16, 1u16), safari_ios : BrowserVersion(5u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.upper-latin" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.upper-latin" =>
 	CSSFeature { id : "css.properties.list-style-type.upper-latin", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15665,7 +15670,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style-type.upper-roman" =>
+	[], popularity : 68.106575f32, }, "css.properties.list-style-type.upper-roman" =>
 	CSSFeature { id : "css.properties.list-style-type.upper-roman", name : "List style",
 	description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
@@ -15677,7 +15682,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style.inside" => CSSFeature {
+	[], popularity : 68.106575f32, }, "css.properties.list-style.inside" => CSSFeature {
 	id : "css.properties.list-style.inside", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15688,7 +15693,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style.none" => CSSFeature { id
+	[], popularity : 68.106575f32, }, "css.properties.list-style.none" => CSSFeature { id
 	: "css.properties.list-style.none", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15699,7 +15704,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style.outside" => CSSFeature {
+	[], popularity : 68.106575f32, }, "css.properties.list-style.outside" => CSSFeature {
 	id : "css.properties.list-style.outside", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15710,7 +15715,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 66.94302f32, }, "css.properties.list-style.symbols" => CSSFeature {
+	[], popularity : 68.106575f32, }, "css.properties.list-style.symbols" => CSSFeature {
 	id : "css.properties.list-style.symbols", name : "List style", description :
 	"The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.",
 	spec : "https://drafts.csswg.org/css-lists-3/#list-style-property", groups : &
@@ -15718,7 +15723,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(35u16, 0u16), firefox_android :
 	BrowserVersion(35u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 66.94302f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 68.106575f32, },
 	"css.properties.margin" => CSSFeature { id : "css.properties.margin", name :
 	"margin", description :
 	"The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.",
@@ -15729,7 +15734,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-block" =>
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-block" =>
 	CSSFeature { id : "css.properties.margin-block", name : "Logical properties",
 	description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -15805,7 +15810,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, },
+	caniuse : & [], popularity : 91.50127f32, },
 	"css.properties.margin-bottom.anchor-size" => CSSFeature { id :
 	"css.properties.margin-bottom.anchor-size", name : "Anchor positioning", description
 	:
@@ -15827,7 +15832,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-inline" =>
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-inline" =>
 	CSSFeature { id : "css.properties.margin-inline", name : "Logical properties",
 	description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -15904,7 +15909,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-left.anchor-size"
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-left.anchor-size"
 	=> CSSFeature { id : "css.properties.margin-left.anchor-size", name :
 	"Anchor positioning", description :
 	"Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.",
@@ -15925,7 +15930,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-right" =>
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-right" =>
 	CSSFeature { id : "css.properties.margin-right", name : "margin", description :
 	"The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.",
 	spec : "https://drafts.csswg.org/css-box-4/#margins", groups : & ["layout"],
@@ -15935,7 +15940,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, },
+	caniuse : & [], popularity : 91.50127f32, },
 	"css.properties.margin-right.anchor-size" => CSSFeature { id :
 	"css.properties.margin-right.anchor-size", name : "Anchor positioning", description :
 	"Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.",
@@ -15956,7 +15961,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-top" =>
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-top" =>
 	CSSFeature { id : "css.properties.margin-top", name : "margin", description :
 	"The margin CSS property sets space around an element. It is a shorthand for margin-top, margin-right, margin-bottom, and margin-left.",
 	spec : "https://drafts.csswg.org/css-box-4/#margins", groups : & ["layout"],
@@ -15966,7 +15971,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-top.anchor-size"
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-top.anchor-size"
 	=> CSSFeature { id : "css.properties.margin-top.anchor-size", name :
 	"Anchor positioning", description :
 	"Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.",
@@ -15987,7 +15992,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.margin-trim" =>
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.margin-trim" =>
 	CSSFeature { id : "css.properties.margin-trim", name : "margin-trim", description :
 	"The margin-trim CSS property removes the margins of child elements when they meet the edges of the container.",
 	spec : "https://drafts.csswg.org/css-box-4/#margin-trim", groups : & [],
@@ -16071,7 +16076,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.63655f32, }, "css.properties.marker" => CSSFeature {
+	caniuse : & [], popularity : 91.50127f32, }, "css.properties.marker" => CSSFeature {
 	id : "css.properties.marker", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
 	spec : "https://svgwg.org/svg2-draft/", groups : & ["svg"], baseline_status :
@@ -16507,7 +16512,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	[], popularity : 2.374713f32, }, "css.properties.mask-type.alpha" => CSSFeature { id
+	[], popularity : 2.023946f32, }, "css.properties.mask-type.alpha" => CSSFeature { id
 	: "css.properties.mask-type.alpha", name : "mask-type", description :
 	"The mask-type CSS property on an SVG <mask> element sets whether the mask is a luminance or alpha mask.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-mask-type", groups : &
@@ -16518,7 +16523,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	[], popularity : 2.374713f32, }, "css.properties.mask-type.luminance" => CSSFeature {
+	[], popularity : 2.023946f32, }, "css.properties.mask-type.luminance" => CSSFeature {
 	id : "css.properties.mask-type.luminance", name : "mask-type", description :
 	"The mask-type CSS property on an SVG <mask> element sets whether the mask is a luminance or alpha mask.",
 	spec : "https://drafts.csswg.org/css-masking-1/#the-mask-type", groups : &
@@ -16529,7 +16534,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	[], popularity : 2.374713f32, }, "css.properties.math-depth" => CSSFeature { id :
+	[], popularity : 2.023946f32, }, "css.properties.math-depth" => CSSFeature { id :
 	"css.properties.math-depth", name : "MathML", description :
 	"MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.",
 	spec : "https://w3c.github.io/mathml-core/", groups : & [], baseline_status :
@@ -17183,7 +17188,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(41u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(32u16, 0u16), firefox_android : BrowserVersion(32u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-mixblendmode"], popularity : 9.798182f32, },
+	["https://caniuse.com/css-mixblendmode"], popularity : 10.058802f32, },
 	"css.properties.mix-blend-mode.plus-darker" => CSSFeature { id :
 	"css.properties.mix-blend-mode.plus-darker", name : "mix-blend-mode", description :
 	"The mix-blend-mode CSS property blends an element's content with its background or parent elements using blend modes like multiply, difference, or color.",
@@ -17193,7 +17198,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(9u16, 0u16), safari_ios :
 	BrowserVersion(9u16, 0u16), }, caniuse : & ["https://caniuse.com/css-mixblendmode"],
-	popularity : 9.798182f32, }, "css.properties.mix-blend-mode.plus-lighter" =>
+	popularity : 10.058802f32, }, "css.properties.mix-blend-mode.plus-lighter" =>
 	CSSFeature { id : "css.properties.mix-blend-mode.plus-lighter", name :
 	"mix-blend-mode", description :
 	"The mix-blend-mode CSS property blends an element's content with its background or parent elements using blend modes like multiply, difference, or color.",
@@ -17205,7 +17210,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(100u16, 0u16), edge : BrowserVersion(100u16, 0u16), firefox :
 	BrowserVersion(99u16, 0u16), firefox_android : BrowserVersion(99u16, 0u16), safari :
 	BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/css-mixblendmode"], popularity : 9.798182f32, },
+	["https://caniuse.com/css-mixblendmode"], popularity : 10.058802f32, },
 	"css.properties.mix-blend-mode.svg_elements" => CSSFeature { id :
 	"css.properties.mix-blend-mode.svg_elements", name : "mix-blend-mode", description :
 	"The mix-blend-mode CSS property blends an element's content with its background or parent elements using blend modes like multiply, difference, or color.",
@@ -17215,7 +17220,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(32u16, 0u16), firefox_android : BrowserVersion(32u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/css-mixblendmode"], popularity : 9.798182f32, },
+	["https://caniuse.com/css-mixblendmode"], popularity : 10.058802f32, },
 	"css.properties.object-fit" => CSSFeature { id : "css.properties.object-fit", name :
 	"object-fit", description :
 	"The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.",
@@ -17226,7 +17231,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/object-fit"], popularity : 49.76498f32, },
+	caniuse : & ["https://caniuse.com/object-fit"], popularity : 53.7054f32, },
 	"css.properties.object-fit.contain" => CSSFeature { id :
 	"css.properties.object-fit.contain", name : "object-fit", description :
 	"The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.",
@@ -17237,7 +17242,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/object-fit"], popularity : 49.76498f32, },
+	caniuse : & ["https://caniuse.com/object-fit"], popularity : 53.7054f32, },
 	"css.properties.object-fit.cover" => CSSFeature { id :
 	"css.properties.object-fit.cover", name : "object-fit", description :
 	"The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.",
@@ -17248,7 +17253,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/object-fit"], popularity : 49.76498f32, },
+	caniuse : & ["https://caniuse.com/object-fit"], popularity : 53.7054f32, },
 	"css.properties.object-fit.fill" => CSSFeature { id :
 	"css.properties.object-fit.fill", name : "object-fit", description :
 	"The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.",
@@ -17259,7 +17264,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/object-fit"], popularity : 49.76498f32, },
+	caniuse : & ["https://caniuse.com/object-fit"], popularity : 53.7054f32, },
 	"css.properties.object-fit.none" => CSSFeature { id :
 	"css.properties.object-fit.none", name : "object-fit", description :
 	"The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.",
@@ -17270,7 +17275,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/object-fit"], popularity : 49.76498f32, },
+	caniuse : & ["https://caniuse.com/object-fit"], popularity : 53.7054f32, },
 	"css.properties.object-fit.scale-down" => CSSFeature { id :
 	"css.properties.object-fit.scale-down", name : "object-fit", description :
 	"The object-fit CSS property sets how images, videos, and other replaced elements are scaled within their container.",
@@ -17281,7 +17286,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & ["https://caniuse.com/object-fit"], popularity : 49.76498f32, },
+	caniuse : & ["https://caniuse.com/object-fit"], popularity : 53.7054f32, },
 	"css.properties.object-position" => CSSFeature { id :
 	"css.properties.object-position", name : "object-position", description :
 	"The object-position CSS property places images, videos, and other replaced elements within their boxes.",
@@ -17292,7 +17297,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(32u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(10u16, 0u16), safari_ios : BrowserVersion(10u16, 0u16), },
-	caniuse : & [], popularity : 17.16527f32, }, "css.properties.object-view-box" =>
+	caniuse : & [], popularity : 19.561937f32, }, "css.properties.object-view-box" =>
 	CSSFeature { id : "css.properties.object-view-box", name : "object-view-box",
 	description :
 	"The object-view-box CSS property crops and zooms to an inset area of an image.",
@@ -17301,7 +17306,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(104u16, 0u16), chrome_android : BrowserVersion(104u16, 0u16), edge :
 	BrowserVersion(104u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.0322f32, },
+	0), }, caniuse : & [], popularity : 0.03676f32, },
 	"css.properties.object-view-box.none" => CSSFeature { id :
 	"css.properties.object-view-box.none", name : "object-view-box", description :
 	"The object-view-box CSS property crops and zooms to an inset area of an image.",
@@ -17310,7 +17315,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(104u16, 0u16), chrome_android : BrowserVersion(104u16, 0u16), edge :
 	BrowserVersion(104u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.0322f32, }, "css.properties.offset" =>
+	0), }, caniuse : & [], popularity : 0.03676f32, }, "css.properties.offset" =>
 	CSSFeature { id : "css.properties.offset", name : "Motion path", description :
 	"The offset CSS property animates an element along a defined motion path.", spec :
 	"https://drafts.csswg.org/motion-1/", groups : & [], baseline_status :
@@ -17656,7 +17661,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(2u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 87.11583f32, },
+	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 86.371574f32, },
 	"css.properties.opacity.percentages" => CSSFeature { id :
 	"css.properties.opacity.percentages", name : "opacity", description :
 	"The opacity CSS property sets the transparency of an element.", spec :
@@ -17667,7 +17672,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(78u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 4u16), },
-	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 87.11583f32, },
+	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 86.371574f32, },
 	"css.properties.order" => CSSFeature { id : "css.properties.order", name : "Flexbox",
 	description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -17699,7 +17704,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline-color" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline-color" =>
 	CSSFeature { id : "css.properties.outline-color", name : "Outlines", description :
 	"The outline-color, outline-style, and outline-width and outline-offset CSS properties style a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17903,7 +17908,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.dotted" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.dotted" =>
 	CSSFeature { id : "css.properties.outline.dotted", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17913,7 +17918,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.double" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.double" =>
 	CSSFeature { id : "css.properties.outline.double", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17923,7 +17928,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.groove" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.groove" =>
 	CSSFeature { id : "css.properties.outline.groove", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17933,7 +17938,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.inset" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.inset" =>
 	CSSFeature { id : "css.properties.outline.inset", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17943,7 +17948,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.medium" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.medium" =>
 	CSSFeature { id : "css.properties.outline.medium", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17953,7 +17958,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.none" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.none" =>
 	CSSFeature { id : "css.properties.outline.none", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17963,7 +17968,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.outset" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.outset" =>
 	CSSFeature { id : "css.properties.outline.outset", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17973,7 +17978,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.ridge" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.ridge" =>
 	CSSFeature { id : "css.properties.outline.ridge", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17983,7 +17988,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.solid" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.solid" =>
 	CSSFeature { id : "css.properties.outline.solid", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -17993,7 +17998,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.thick" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.thick" =>
 	CSSFeature { id : "css.properties.outline.thick", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -18003,7 +18008,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.thin" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.thin" =>
 	CSSFeature { id : "css.properties.outline.thin", name : "outline", description :
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
 	spec : "https://drafts.csswg.org/css-ui-4/#outline", groups : & [], baseline_status :
@@ -18013,7 +18018,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.outline.transparent" =>
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.outline.transparent" =>
 	CSSFeature { id : "css.properties.outline.transparent", name : "outline", description
 	:
 	"The outline CSS shorthand sets the color, style, and width of a line around an element, outside of the border.",
@@ -18024,7 +18029,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(88u16, 0u16), firefox_android : BrowserVersion(88u16, 0u16),
 	safari : BrowserVersion(16u16, 4u16), safari_ios : BrowserVersion(16u16, 4u16), },
-	caniuse : & [], popularity : 78.46742f32, }, "css.properties.overflow" => CSSFeature
+	caniuse : & [], popularity : 77.35414f32, }, "css.properties.overflow" => CSSFeature
 	{ id : "css.properties.overflow", name : "overflow", description :
 	"The overflow CSS property sets the behavior for when content doesn't fit in an element.",
 	spec : "https://drafts.csswg.org/css-overflow-3/#propdef-overflow", groups : & [],
@@ -18044,7 +18049,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(56u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(66u16, 0u16), firefox_android : BrowserVersion(66u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/css-overflow-anchor"], popularity : 6.734497f32, },
+	["https://caniuse.com/css-overflow-anchor"], popularity : 7.851278f32, },
 	"css.properties.overflow-anchor.auto" => CSSFeature { id :
 	"css.properties.overflow-anchor.auto", name : "overflow-anchor", description :
 	"The overflow-anchor CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.",
@@ -18054,7 +18059,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(56u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(66u16, 0u16), firefox_android : BrowserVersion(66u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/css-overflow-anchor"], popularity : 6.734497f32, },
+	["https://caniuse.com/css-overflow-anchor"], popularity : 7.851278f32, },
 	"css.properties.overflow-anchor.none" => CSSFeature { id :
 	"css.properties.overflow-anchor.none", name : "overflow-anchor", description :
 	"The overflow-anchor CSS property sets an element as a possible scroll anchor, reducing unintended scrolling when document changes occur above the current scrollport. This is enabled by default where supported.",
@@ -18064,7 +18069,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(56u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(66u16, 0u16), firefox_android : BrowserVersion(66u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : &
-	["https://caniuse.com/css-overflow-anchor"], popularity : 6.734497f32, },
+	["https://caniuse.com/css-overflow-anchor"], popularity : 7.851278f32, },
 	"css.properties.overflow-block" => CSSFeature { id : "css.properties.overflow-block",
 	name : "Logical properties", description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -18092,7 +18097,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.527816f32, },
+	0), }, caniuse : & [], popularity : 0.958734f32, },
 	"css.properties.overflow-clip-margin.border-box" => CSSFeature { id :
 	"css.properties.overflow-clip-margin.border-box", name : "overflow-clip-margin",
 	description :
@@ -18102,7 +18107,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.527816f32, },
+	0), }, caniuse : & [], popularity : 0.958734f32, },
 	"css.properties.overflow-clip-margin.content-box" => CSSFeature { id :
 	"css.properties.overflow-clip-margin.content-box", name : "overflow-clip-margin",
 	description :
@@ -18112,7 +18117,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.527816f32, },
+	0), }, caniuse : & [], popularity : 0.958734f32, },
 	"css.properties.overflow-clip-margin.padding-box" => CSSFeature { id :
 	"css.properties.overflow-clip-margin.padding-box", name : "overflow-clip-margin",
 	description :
@@ -18122,7 +18127,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.527816f32, }, "css.properties.overflow-inline"
+	0), }, caniuse : & [], popularity : 0.958734f32, }, "css.properties.overflow-inline"
 	=> CSSFeature { id : "css.properties.overflow-inline", name : "Logical properties",
 	description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -18153,7 +18158,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(18u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/wordwrap"], popularity : 41.96052f32, },
+	["https://caniuse.com/wordwrap"], popularity : 38.637077f32, },
 	"css.properties.overflow-wrap.anywhere" => CSSFeature { id :
 	"css.properties.overflow-wrap.anywhere", name : "overflow-wrap", description :
 	"The overflow-wrap CSS property breaks a line of text onto multiple lines inside the targeted element in an otherwise unbreakable place to prevent overflow. The legacy property is word-wrap.",
@@ -18165,7 +18170,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(80u16, 0u16), edge : BrowserVersion(80u16, 0u16), firefox :
 	BrowserVersion(65u16, 0u16), firefox_android : BrowserVersion(65u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/wordwrap"], popularity : 41.96052f32, },
+	["https://caniuse.com/wordwrap"], popularity : 38.637077f32, },
 	"css.properties.overflow-wrap.break-word" => CSSFeature { id :
 	"css.properties.overflow-wrap.break-word", name : "overflow-wrap", description :
 	"The overflow-wrap CSS property breaks a line of text onto multiple lines inside the targeted element in an otherwise unbreakable place to prevent overflow. The legacy property is word-wrap.",
@@ -18177,7 +18182,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(18u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/wordwrap"], popularity : 41.96052f32, },
+	["https://caniuse.com/wordwrap"], popularity : 38.637077f32, },
 	"css.properties.overflow-wrap.normal" => CSSFeature { id :
 	"css.properties.overflow-wrap.normal", name : "overflow-wrap", description :
 	"The overflow-wrap CSS property breaks a line of text onto multiple lines inside the targeted element in an otherwise unbreakable place to prevent overflow. The legacy property is word-wrap.",
@@ -18189,7 +18194,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(25u16, 0u16), edge : BrowserVersion(18u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/wordwrap"], popularity : 41.96052f32, },
+	["https://caniuse.com/wordwrap"], popularity : 38.637077f32, },
 	"css.properties.overflow-x" => CSSFeature { id : "css.properties.overflow-x", name :
 	"overflow", description :
 	"The overflow CSS property sets the behavior for when content doesn't fit in an element.",
@@ -18395,7 +18400,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(117u16, 0u16), chrome_android : BrowserVersion(117u16, 0u16), edge :
 	BrowserVersion(117u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.048378f32, }, "css.properties.overlay.auto" =>
+	0), }, caniuse : & [], popularity : 0.030775f32, }, "css.properties.overlay.auto" =>
 	CSSFeature { id : "css.properties.overlay.auto", name : "overlay", description :
 	"The overlay CSS property, used as an allow-discrete CSS transition, prevents a top layer element, such as a popover or a <dialog>, from being removed from the top layer before it has finished animating. You can't set the value of the overlay property; only use it as transition property.",
 	spec : "https://drafts.csswg.org/css-position-4/#overlay", groups : & [],
@@ -18403,7 +18408,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(117u16, 0u16), chrome_android : BrowserVersion(117u16, 0u16), edge :
 	BrowserVersion(117u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.048378f32, }, "css.properties.overlay.none" =>
+	0), }, caniuse : & [], popularity : 0.030775f32, }, "css.properties.overlay.none" =>
 	CSSFeature { id : "css.properties.overlay.none", name : "overlay", description :
 	"The overlay CSS property, used as an allow-discrete CSS transition, prevents a top layer element, such as a popover or a <dialog>, from being removed from the top layer before it has finished animating. You can't set the value of the overlay property; only use it as transition property.",
 	spec : "https://drafts.csswg.org/css-position-4/#overlay", groups : & [],
@@ -18411,7 +18416,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(117u16, 0u16), chrome_android : BrowserVersion(117u16, 0u16), edge :
 	BrowserVersion(117u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.048378f32, },
+	0), }, caniuse : & [], popularity : 0.030775f32, },
 	"css.properties.overscroll-behavior" => CSSFeature { id :
 	"css.properties.overscroll-behavior", name : "overscroll-behavior", description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18423,7 +18428,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-block" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-block" => CSSFeature { id :
 	"css.properties.overscroll-behavior-block", name : "overscroll-behavior", description
 	:
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18435,7 +18440,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-block.auto" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-block.auto" => CSSFeature { id :
 	"css.properties.overscroll-behavior-block.auto", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18447,7 +18452,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-block.contain" => CSSFeature {
+	18.233341f32, }, "css.properties.overscroll-behavior-block.contain" => CSSFeature {
 	id : "css.properties.overscroll-behavior-block.contain", name :
 	"overscroll-behavior", description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18459,7 +18464,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-block.none" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-block.none" => CSSFeature { id :
 	"css.properties.overscroll-behavior-block.none", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18471,7 +18476,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-inline" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-inline" => CSSFeature { id :
 	"css.properties.overscroll-behavior-inline", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18483,7 +18488,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-inline.auto" => CSSFeature { id
+	18.233341f32, }, "css.properties.overscroll-behavior-inline.auto" => CSSFeature { id
 	: "css.properties.overscroll-behavior-inline.auto", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18495,7 +18500,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-inline.contain" => CSSFeature {
+	18.233341f32, }, "css.properties.overscroll-behavior-inline.contain" => CSSFeature {
 	id : "css.properties.overscroll-behavior-inline.contain", name :
 	"overscroll-behavior", description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18507,7 +18512,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-inline.none" => CSSFeature { id
+	18.233341f32, }, "css.properties.overscroll-behavior-inline.none" => CSSFeature { id
 	: "css.properties.overscroll-behavior-inline.none", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18519,7 +18524,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(73u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-x" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-x" => CSSFeature { id :
 	"css.properties.overscroll-behavior-x", name : "overscroll-behavior", description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
 	spec : "https://drafts.csswg.org/css-overscroll-1/", groups : & ["scrolling"],
@@ -18530,7 +18535,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-x.auto" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-x.auto" => CSSFeature { id :
 	"css.properties.overscroll-behavior-x.auto", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18542,7 +18547,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-x.contain" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-x.contain" => CSSFeature { id :
 	"css.properties.overscroll-behavior-x.contain", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18554,7 +18559,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-x.none" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-x.none" => CSSFeature { id :
 	"css.properties.overscroll-behavior-x.none", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18566,7 +18571,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-y" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-y" => CSSFeature { id :
 	"css.properties.overscroll-behavior-y", name : "overscroll-behavior", description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
 	spec : "https://drafts.csswg.org/css-overscroll-1/", groups : & ["scrolling"],
@@ -18577,7 +18582,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-y.auto" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-y.auto" => CSSFeature { id :
 	"css.properties.overscroll-behavior-y.auto", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18589,7 +18594,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-y.contain" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-y.contain" => CSSFeature { id :
 	"css.properties.overscroll-behavior-y.contain", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18601,7 +18606,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior-y.none" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior-y.none" => CSSFeature { id :
 	"css.properties.overscroll-behavior-y.none", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18613,7 +18618,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior.auto" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior.auto" => CSSFeature { id :
 	"css.properties.overscroll-behavior.auto", name : "overscroll-behavior", description
 	:
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18625,7 +18630,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior.contain" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior.contain" => CSSFeature { id :
 	"css.properties.overscroll-behavior.contain", name : "overscroll-behavior",
 	description :
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18637,7 +18642,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.overscroll-behavior.none" => CSSFeature { id :
+	18.233341f32, }, "css.properties.overscroll-behavior.none" => CSSFeature { id :
 	"css.properties.overscroll-behavior.none", name : "overscroll-behavior", description
 	:
 	"The overscroll-behavior CSS property disables default scrolling behaviors when the edges of a scrolling area are reached.",
@@ -18649,7 +18654,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(59u16, 0u16), firefox_android : BrowserVersion(59u16, 0u16),
 	safari : BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), },
 	caniuse : & ["https://caniuse.com/css-overscroll-behavior"], popularity :
-	15.793177f32, }, "css.properties.padding" => CSSFeature { id :
+	18.233341f32, }, "css.properties.padding" => CSSFeature { id :
 	"css.properties.padding", name : "padding", description :
 	"The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.",
 	spec : "https://drafts.csswg.org/css-box-4/#paddings", groups : & ["layout"],
@@ -18659,7 +18664,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.86666f32, }, "css.properties.padding-block" =>
+	caniuse : & [], popularity : 91.24271f32, }, "css.properties.padding-block" =>
 	CSSFeature { id : "css.properties.padding-block", name : "Logical properties",
 	description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -18703,7 +18708,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.86666f32, }, "css.properties.padding-inline" =>
+	caniuse : & [], popularity : 91.24271f32, }, "css.properties.padding-inline" =>
 	CSSFeature { id : "css.properties.padding-inline", name : "Logical properties",
 	description :
 	"CSS logical properties control borders, size, margin, and padding with directions and dimensions relative to the writing mode. For example, in a left to right, top to bottom writing mode, block-end refers to the bottom. Also known as flow relative.",
@@ -18747,7 +18752,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.86666f32, }, "css.properties.padding-right" =>
+	caniuse : & [], popularity : 91.24271f32, }, "css.properties.padding-right" =>
 	CSSFeature { id : "css.properties.padding-right", name : "padding", description :
 	"The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.",
 	spec : "https://drafts.csswg.org/css-box-4/#paddings", groups : & ["layout"],
@@ -18757,7 +18762,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.86666f32, }, "css.properties.padding-top" =>
+	caniuse : & [], popularity : 91.24271f32, }, "css.properties.padding-top" =>
 	CSSFeature { id : "css.properties.padding-top", name : "padding", description :
 	"The padding CSS property sets space between an element's edge and its contents. It is a shorthand for padding-top, padding-right, padding-bottom, and padding-left.",
 	spec : "https://drafts.csswg.org/css-box-4/#paddings", groups : & ["layout"],
@@ -18767,7 +18772,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 91.86666f32, }, "css.properties.page" => CSSFeature { id
+	caniuse : & [], popularity : 91.24271f32, }, "css.properties.page" => CSSFeature { id
 	: "css.properties.page", name : "Page setup", description :
 	"The @page CSS at-rule sets the page-specific dimensions and margins for content such as printed documents, ebooks, or slides.",
 	spec : "https://drafts.csswg.org/css-page-3/#at-page-rule", groups : & ["layout",
@@ -18923,7 +18928,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(123u16, 0u16), edge : BrowserVersion(123u16, 0u16),
 	firefox : BrowserVersion(60u16, 0u16), firefox_android : BrowserVersion(60u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & [], popularity : 0.76678f32, }, "css.properties.perspective" =>
+	caniuse : & [], popularity : 1.16353f32, }, "css.properties.perspective" =>
 	CSSFeature { id : "css.properties.perspective", name : "3D transforms", description :
 	"The transform CSS property and its 3D transform functions allow rotations and other transforms in three dimensions, including perspective transforms.",
 	spec : "https://drafts.csswg.org/css-transforms-2/", groups : & ["transforms"],
@@ -19043,7 +19048,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(59u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(53u16, 0u16), firefox_android : BrowserVersion(53u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.place-items" => CSSFeature { id : "css.properties.place-items", name
 	: "Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -19087,7 +19092,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(59u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.place-self" => CSSFeature { id : "css.properties.place-self", name :
 	"Flexbox", description :
 	"Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.",
@@ -19130,7 +19135,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(59u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(45u16, 0u16), firefox_android : BrowserVersion(45u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.place-self.position_absolute_context" => CSSFeature { id :
 	"css.properties.place-self.position_absolute_context", name : "Absolute positioning",
 	description :
@@ -19151,7 +19156,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), },
-	caniuse : & ["https://caniuse.com/pointer-events"], popularity : 70.11473f32, },
+	caniuse : & ["https://caniuse.com/pointer-events"], popularity : 69.26786f32, },
 	"css.properties.pointer-events.html_elements" => CSSFeature { id :
 	"css.properties.pointer-events.html_elements", name : "pointer-events", description :
 	"The pointer-events CSS property sets whether a user can interact with an element using a mouse, touch, or other pointing input device.",
@@ -19162,7 +19167,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(3u16, 6u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(4u16, 0u16), safari_ios : BrowserVersion(3u16, 2u16), },
-	caniuse : & ["https://caniuse.com/pointer-events"], popularity : 70.11473f32, },
+	caniuse : & ["https://caniuse.com/pointer-events"], popularity : 69.26786f32, },
 	"css.properties.position" => CSSFeature { id : "css.properties.position", name :
 	"Position", description :
 	"The position CSS property sets the origin position of an element to an element, the element's scrollport, or the viewport.",
@@ -19174,7 +19179,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 91.86973f32, }, "css.properties.position-anchor" => CSSFeature { id
+	[], popularity : 91.080414f32, }, "css.properties.position-anchor" => CSSFeature { id
 	: "css.properties.position-anchor", name : "Anchor positioning", description :
 	"Anchor positioning places an element based on the position of another element. For example, you can place a tooltip next to the content it references.",
 	spec : "https://drafts.csswg.org/css-anchor-position-1/#anchoring", groups : & [],
@@ -20197,7 +20202,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(136u16, 0u16), edge : BrowserVersion(136u16, 0u16),
 	firefox : BrowserVersion(97u16, 0u16), firefox_android : BrowserVersion(97u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 2.750296f32, },
+	caniuse : & [], popularity : 2.499584f32, },
 	"css.properties.print-color-adjust.economy" => CSSFeature { id :
 	"css.properties.print-color-adjust.economy", name : "print-color-adjust", description
 	:
@@ -20209,7 +20214,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(136u16, 0u16), edge : BrowserVersion(136u16, 0u16),
 	firefox : BrowserVersion(97u16, 0u16), firefox_android : BrowserVersion(97u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 2.750296f32, },
+	caniuse : & [], popularity : 2.499584f32, },
 	"css.properties.print-color-adjust.exact" => CSSFeature { id :
 	"css.properties.print-color-adjust.exact", name : "print-color-adjust", description :
 	"The print-color-adjust CSS property sets whether styles of printed pages should be adjusted to use less ink, in cases such as light text on a dark background.",
@@ -20220,7 +20225,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(136u16, 0u16), edge : BrowserVersion(136u16, 0u16),
 	firefox : BrowserVersion(97u16, 0u16), firefox_android : BrowserVersion(97u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & [], popularity : 2.750296f32, }, "css.properties.quotes" => CSSFeature {
+	caniuse : & [], popularity : 2.499584f32, }, "css.properties.quotes" => CSSFeature {
 	id : "css.properties.quotes", name : "Quotes", description :
 	"The quotes CSS property sets the quotation marks inserted via the content CSS property or <q> element.",
 	spec : "https://drafts.csswg.org/css-content-3/#quotes", groups : & [],
@@ -20230,7 +20235,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), },
-	caniuse : & [], popularity : 7.644602f32, }, "css.properties.quotes.auto" =>
+	caniuse : & [], popularity : 9.332801f32, }, "css.properties.quotes.auto" =>
 	CSSFeature { id : "css.properties.quotes.auto", name : "Quotes", description :
 	"The quotes CSS property sets the quotation marks inserted via the content CSS property or <q> element.",
 	spec : "https://drafts.csswg.org/css-content-3/#quotes", groups : & [],
@@ -20240,7 +20245,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(14u16, 1u16), safari_ios : BrowserVersion(14u16, 5u16), },
-	caniuse : & [], popularity : 7.644602f32, }, "css.properties.quotes.none" =>
+	caniuse : & [], popularity : 9.332801f32, }, "css.properties.quotes.none" =>
 	CSSFeature { id : "css.properties.quotes.none", name : "Quotes", description :
 	"The quotes CSS property sets the quotation marks inserted via the content CSS property or <q> element.",
 	spec : "https://drafts.csswg.org/css-content-3/#quotes", groups : & [],
@@ -20250,7 +20255,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), },
-	caniuse : & [], popularity : 7.644602f32, }, "css.properties.r" => CSSFeature { id :
+	caniuse : & [], popularity : 9.332801f32, }, "css.properties.r" => CSSFeature { id :
 	"css.properties.r", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
 	spec : "https://svgwg.org/svg2-draft/", groups : & ["svg"], baseline_status :
@@ -20269,7 +20274,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.flex-flow" => CSSFeature { id :
 	"css.properties.reading-flow.flex-flow", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20278,7 +20283,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.flex-visual" => CSSFeature { id :
 	"css.properties.reading-flow.flex-visual", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20287,7 +20292,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.grid-columns" => CSSFeature { id :
 	"css.properties.reading-flow.grid-columns", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20296,7 +20301,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.grid-order" => CSSFeature { id :
 	"css.properties.reading-flow.grid-order", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20305,7 +20310,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.grid-rows" => CSSFeature { id :
 	"css.properties.reading-flow.grid-rows", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20314,7 +20319,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.normal" => CSSFeature { id :
 	"css.properties.reading-flow.normal", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20323,7 +20328,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, },
+	0), }, caniuse : & [], popularity : 0.030742f32, },
 	"css.properties.reading-flow.source-order" => CSSFeature { id :
 	"css.properties.reading-flow.source-order", name : "reading-flow", description :
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20332,7 +20337,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, }, "css.properties.reading-order" =>
+	0), }, caniuse : & [], popularity : 0.030742f32, }, "css.properties.reading-order" =>
 	CSSFeature { id : "css.properties.reading-order", name : "reading-flow", description
 	:
 	"The reading-flow CSS property sets the order in which flex or grid elements are rendered to speech or reached via focus navigation. The reading-order property overrides this order.",
@@ -20341,7 +20346,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(137u16, 0u16), chrome_android : BrowserVersion(137u16, 0u16), edge :
 	BrowserVersion(137u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.035416f32, }, "css.properties.resize" =>
+	0), }, caniuse : & [], popularity : 0.030742f32, }, "css.properties.resize" =>
 	CSSFeature { id : "css.properties.resize", name : "resize (CSS property)",
 	description :
 	"The resize CSS property sets whether an element can be resized by the user, and on which axes.",
@@ -20351,7 +20356,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(4u16, 0u16), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(3u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-resize"], popularity :
-	36.02796f32, }, "css.properties.resize.block" => CSSFeature { id :
+	32.774937f32, }, "css.properties.resize.block" => CSSFeature { id :
 	"css.properties.resize.block", name : "resize (CSS property)", description :
 	"The resize CSS property sets whether an element can be resized by the user, and on which axes.",
 	spec : "https://drafts.csswg.org/css-ui-4/#resize", groups : & [], baseline_status :
@@ -20360,7 +20365,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(118u16, 0u16), firefox : BrowserVersion(63u16, 0u16), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(16u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-resize"], popularity :
-	36.02796f32, }, "css.properties.resize.block_level_support" => CSSFeature { id :
+	32.774937f32, }, "css.properties.resize.block_level_support" => CSSFeature { id :
 	"css.properties.resize.block_level_support", name : "resize (CSS property)",
 	description :
 	"The resize CSS property sets whether an element can be resized by the user, and on which axes.",
@@ -20370,7 +20375,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(5u16, 0u16), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(4u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-resize"], popularity :
-	36.02796f32, }, "css.properties.resize.inline" => CSSFeature { id :
+	32.774937f32, }, "css.properties.resize.inline" => CSSFeature { id :
 	"css.properties.resize.inline", name : "resize (CSS property)", description :
 	"The resize CSS property sets whether an element can be resized by the user, and on which axes.",
 	spec : "https://drafts.csswg.org/css-ui-4/#resize", groups : & [], baseline_status :
@@ -20379,7 +20384,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(118u16, 0u16), firefox : BrowserVersion(63u16, 0u16), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(16u16, 0u16), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-resize"], popularity :
-	36.02796f32, }, "css.properties.right" => CSSFeature { id : "css.properties.right",
+	32.774937f32, }, "css.properties.right" => CSSFeature { id : "css.properties.right",
 	name : "Physical properties", description :
 	"The physical CSS properties, top, right, bottom, and left, set the inset position of an element relative to the corresponding side of a container determined by the element's position property.",
 	spec : "https://drafts.csswg.org/css-position-3/#insets", groups : & [],
@@ -20463,7 +20468,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(47u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.row-gap.flex_context" => CSSFeature { id :
 	"css.properties.row-gap.flex_context", name : "Flexbox gap", description :
 	"The gap CSS property in a flexbox layout sets the size of the space between items.",
@@ -20485,7 +20490,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(66u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(61u16, 0u16), firefox_android : BrowserVersion(61u16, 0u16),
 	safari : BrowserVersion(12u16, 0u16), safari_ios : BrowserVersion(12u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.row-gap.normal" => CSSFeature { id : "css.properties.row-gap.normal",
 	name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
@@ -20496,7 +20501,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(47u16, 0u16), edge : BrowserVersion(16u16, 0u16),
 	firefox : BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.properties.ruby-align" => CSSFeature { id : "css.properties.ruby-align", name :
 	"ruby-align", description :
 	"The ruby-align CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.",
@@ -20506,7 +20511,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(128u16, 0u16), chrome_android : BrowserVersion(128u16, 0u16), edge :
 	BrowserVersion(128u16, 0u16), firefox : BrowserVersion(38u16, 0u16), firefox_android
 	: BrowserVersion(38u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.167591f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.243828f32, },
 	"css.properties.ruby-align.center" => CSSFeature { id :
 	"css.properties.ruby-align.center", name : "ruby-align", description :
 	"The ruby-align CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.",
@@ -20516,7 +20521,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(128u16, 0u16), chrome_android : BrowserVersion(128u16, 0u16), edge :
 	BrowserVersion(128u16, 0u16), firefox : BrowserVersion(38u16, 0u16), firefox_android
 	: BrowserVersion(38u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.167591f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.243828f32, },
 	"css.properties.ruby-align.space-around" => CSSFeature { id :
 	"css.properties.ruby-align.space-around", name : "ruby-align", description :
 	"The ruby-align CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.",
@@ -20526,7 +20531,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(128u16, 0u16), chrome_android : BrowserVersion(128u16, 0u16), edge :
 	BrowserVersion(128u16, 0u16), firefox : BrowserVersion(38u16, 0u16), firefox_android
 	: BrowserVersion(38u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.167591f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.243828f32, },
 	"css.properties.ruby-align.space-between" => CSSFeature { id :
 	"css.properties.ruby-align.space-between", name : "ruby-align", description :
 	"The ruby-align CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.",
@@ -20536,7 +20541,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(128u16, 0u16), chrome_android : BrowserVersion(128u16, 0u16), edge :
 	BrowserVersion(128u16, 0u16), firefox : BrowserVersion(38u16, 0u16), firefox_android
 	: BrowserVersion(38u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.167591f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.243828f32, },
 	"css.properties.ruby-align.start" => CSSFeature { id :
 	"css.properties.ruby-align.start", name : "ruby-align", description :
 	"The ruby-align CSS property sets the spacing and alignment of ruby annotation text when it does not fill its available space.",
@@ -20546,7 +20551,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(128u16, 0u16), chrome_android : BrowserVersion(128u16, 0u16), edge :
 	BrowserVersion(128u16, 0u16), firefox : BrowserVersion(38u16, 0u16), firefox_android
 	: BrowserVersion(38u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.167591f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 0.243828f32, },
 	"css.properties.ruby-overhang" => CSSFeature { id : "css.properties.ruby-overhang",
 	name : "ruby-overhang", description :
 	"The ruby-overhang CSS property sets whether ruby annotations may overlap adjacent text.",
@@ -20555,7 +20560,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), }, caniuse : &
-	[], popularity : 0.000052f32, }, "css.properties.ruby-overhang.auto" => CSSFeature {
+	[], popularity : 0.000031f32, }, "css.properties.ruby-overhang.auto" => CSSFeature {
 	id : "css.properties.ruby-overhang.auto", name : "ruby-overhang", description :
 	"The ruby-overhang CSS property sets whether ruby annotations may overlap adjacent text.",
 	spec : "https://drafts.csswg.org/css-ruby-1/#ruby-overhang", groups : & ["ruby"],
@@ -20563,7 +20568,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), }, caniuse : &
-	[], popularity : 0.000052f32, }, "css.properties.ruby-overhang.none" => CSSFeature {
+	[], popularity : 0.000031f32, }, "css.properties.ruby-overhang.none" => CSSFeature {
 	id : "css.properties.ruby-overhang.none", name : "ruby-overhang", description :
 	"The ruby-overhang CSS property sets whether ruby annotations may overlap adjacent text.",
 	spec : "https://drafts.csswg.org/css-ruby-1/#ruby-overhang", groups : & ["ruby"],
@@ -20571,7 +20576,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), }, caniuse : &
-	[], popularity : 0.000052f32, }, "css.properties.ruby-position" => CSSFeature { id :
+	[], popularity : 0.000031f32, }, "css.properties.ruby-position" => CSSFeature { id :
 	"css.properties.ruby-position", name : "ruby-position", description :
 	"The ruby-position CSS property sets the position of a ruby annotation in relation to its base text. Annotations can display over, under, or interleaved with the base text.",
 	spec : "https://drafts.csswg.org/css-ruby-1/#rubypos", groups : & ["ruby"],
@@ -20580,7 +20585,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(38u16, 0u16), firefox_android : BrowserVersion(38u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 0.170819f32, }, "css.properties.ruby-position.alternate"
+	caniuse : & [], popularity : 0.252135f32, }, "css.properties.ruby-position.alternate"
 	=> CSSFeature { id : "css.properties.ruby-position.alternate", name :
 	"display: ruby", description :
 	"The display: ruby CSS declaration renders an element with the box layout of a <ruby> HTML element. Child elements may use equivalents to <ruby> internal elements such as display: ruby-base for <rb>.",
@@ -20598,7 +20603,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), }, caniuse : &
-	[], popularity : 0.170819f32, }, "css.properties.ruby-position.over" => CSSFeature {
+	[], popularity : 0.252135f32, }, "css.properties.ruby-position.over" => CSSFeature {
 	id : "css.properties.ruby-position.over", name : "ruby-position", description :
 	"The ruby-position CSS property sets the position of a ruby annotation in relation to its base text. Annotations can display over, under, or interleaved with the base text.",
 	spec : "https://drafts.csswg.org/css-ruby-1/#rubypos", groups : & ["ruby"],
@@ -20607,7 +20612,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(38u16, 0u16), firefox_android : BrowserVersion(38u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 0.170819f32, }, "css.properties.ruby-position.under" =>
+	caniuse : & [], popularity : 0.252135f32, }, "css.properties.ruby-position.under" =>
 	CSSFeature { id : "css.properties.ruby-position.under", name : "ruby-position",
 	description :
 	"The ruby-position CSS property sets the position of a ruby annotation in relation to its base text. Annotations can display over, under, or interleaved with the base text.",
@@ -20617,7 +20622,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(84u16, 0u16), edge : BrowserVersion(84u16, 0u16),
 	firefox : BrowserVersion(38u16, 0u16), firefox_android : BrowserVersion(38u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 0.170819f32, }, "css.properties.rx" => CSSFeature { id :
+	caniuse : & [], popularity : 0.252135f32, }, "css.properties.rx" => CSSFeature { id :
 	"css.properties.rx", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
 	spec : "https://svgwg.org/svg2-draft/", groups : & ["svg"], baseline_status :
@@ -20669,7 +20674,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(61u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-scroll-behavior"], popularity : 19.868525f32, },
+	["https://caniuse.com/css-scroll-behavior"], popularity : 21.074333f32, },
 	"css.properties.scroll-behavior.auto" => CSSFeature { id :
 	"css.properties.scroll-behavior.auto", name : "scroll-behavior", description :
 	"The scroll-behavior CSS property controls whether scrolling is smooth or snaps, for scroll actions not performed by the user such as those triggered by navigation.",
@@ -20681,7 +20686,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(61u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-scroll-behavior"], popularity : 19.868525f32, },
+	["https://caniuse.com/css-scroll-behavior"], popularity : 21.074333f32, },
 	"css.properties.scroll-behavior.smooth" => CSSFeature { id :
 	"css.properties.scroll-behavior.smooth", name : "scroll-behavior", description :
 	"The scroll-behavior CSS property controls whether scrolling is smooth or snaps, for scroll actions not performed by the user such as those triggered by navigation.",
@@ -20693,7 +20698,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(61u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	["https://caniuse.com/css-scroll-behavior"], popularity : 19.868525f32, },
+	["https://caniuse.com/css-scroll-behavior"], popularity : 21.074333f32, },
 	"css.properties.scroll-initial-target" => CSSFeature { id :
 	"css.properties.scroll-initial-target", name : "scroll-initial-target", description :
 	"The scroll-initial-target: nearest CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.",
@@ -20704,7 +20709,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), edge : BrowserVersion(133u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.022466f32, }, "css.properties.scroll-initial-target.nearest" =>
+	popularity : 0.016538f32, }, "css.properties.scroll-initial-target.nearest" =>
 	CSSFeature { id : "css.properties.scroll-initial-target.nearest", name :
 	"scroll-initial-target", description :
 	"The scroll-initial-target: nearest CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.",
@@ -20715,7 +20720,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), edge : BrowserVersion(133u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.022466f32, }, "css.properties.scroll-initial-target.none" =>
+	popularity : 0.016538f32, }, "css.properties.scroll-initial-target.none" =>
 	CSSFeature { id : "css.properties.scroll-initial-target.none", name :
 	"scroll-initial-target", description :
 	"The scroll-initial-target: nearest CSS declaration sets the initial scroll position of its scroll container to the top of the element, much like scrolling to a URL fragment.",
@@ -20726,7 +20731,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), edge : BrowserVersion(133u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.022466f32, }, "css.properties.scroll-margin" => CSSFeature { id :
+	popularity : 0.016538f32, }, "css.properties.scroll-margin" => CSSFeature { id :
 	"css.properties.scroll-margin", name : "Scroll snap", description :
 	"CSS scroll snap controls the panning and scrolling behavior within a scroll container.",
 	spec : "https://drafts.csswg.org/css-scroll-snap-2/", groups : & ["scrolling"],
@@ -21256,7 +21261,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.021844f32, }, "css.properties.scroll-target-group.auto" => CSSFeature
+	popularity : 0.015121f32, }, "css.properties.scroll-target-group.auto" => CSSFeature
 	{ id : "css.properties.scroll-target-group.auto", name : "scroll-target-group",
 	description :
 	"The scroll-target-group CSS property sets the container where anchor links act as scroll markers. Using selectors such as :target-current, you can style elements when a target has scrolled into view. It's an alternative to the ::scroll-marker-group pseudo-element, which generates scroll markers.",
@@ -21266,7 +21271,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.021844f32, }, "css.properties.scroll-target-group.none" => CSSFeature
+	popularity : 0.015121f32, }, "css.properties.scroll-target-group.none" => CSSFeature
 	{ id : "css.properties.scroll-target-group.none", name : "scroll-target-group",
 	description :
 	"The scroll-target-group CSS property sets the container where anchor links act as scroll markers. Using selectors such as :target-current, you can style elements when a target has scrolled into view. It's an alternative to the ::scroll-marker-group pseudo-element, which generates scroll markers.",
@@ -21276,7 +21281,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.021844f32, }, "css.properties.scroll-timeline" => CSSFeature { id :
+	popularity : 0.015121f32, }, "css.properties.scroll-timeline" => CSSFeature { id :
 	"css.properties.scroll-timeline", name : "Scroll-driven animations", description :
 	"The animation-timeline, scroll-timeline, and view-timeline CSS properties advance animations based on the user's scroll position.",
 	spec : "https://drafts.csswg.org/scroll-animations-1/", groups : & ["scrolling",
@@ -21354,7 +21359,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(121u16, 0u16), chrome_android : BrowserVersion(121u16, 0u16), edge :
 	BrowserVersion(121u16, 0u16), firefox : BrowserVersion(64u16, 0u16), firefox_android
 	: BrowserVersion(64u16, 0u16), safari : BrowserVersion(26u16, 2u16), safari_ios :
-	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 19.952293f32, },
+	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 13.799001f32, },
 	"css.properties.scrollbar-color.auto" => CSSFeature { id :
 	"css.properties.scrollbar-color.auto", name : "scrollbar-color", description :
 	"The scrollbar-color CSS property sets the color of the scrollbar track and thumb.",
@@ -21364,7 +21369,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(121u16, 0u16), chrome_android : BrowserVersion(121u16, 0u16), edge :
 	BrowserVersion(121u16, 0u16), firefox : BrowserVersion(64u16, 0u16), firefox_android
 	: BrowserVersion(64u16, 0u16), safari : BrowserVersion(26u16, 2u16), safari_ios :
-	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 19.952293f32, },
+	BrowserVersion(26u16, 2u16), }, caniuse : & [], popularity : 13.799001f32, },
 	"css.properties.scrollbar-gutter" => CSSFeature { id :
 	"css.properties.scrollbar-gutter", name : "scrollbar-gutter", description :
 	"The scrollbar-gutter CSS property reserves space for the scrollbar, preventing unwanted layout changes as the scrollbar appears and disappears.",
@@ -21375,7 +21380,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(97u16, 0u16), firefox_android : BrowserVersion(97u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 15.481131f32, }, "css.properties.scrollbar-gutter.auto"
+	caniuse : & [], popularity : 11.887076f32, }, "css.properties.scrollbar-gutter.auto"
 	=> CSSFeature { id : "css.properties.scrollbar-gutter.auto", name :
 	"scrollbar-gutter", description :
 	"The scrollbar-gutter CSS property reserves space for the scrollbar, preventing unwanted layout changes as the scrollbar appears and disappears.",
@@ -21386,7 +21391,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(97u16, 0u16), firefox_android : BrowserVersion(97u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 15.481131f32, },
+	caniuse : & [], popularity : 11.887076f32, },
 	"css.properties.scrollbar-gutter.stable" => CSSFeature { id :
 	"css.properties.scrollbar-gutter.stable", name : "scrollbar-gutter", description :
 	"The scrollbar-gutter CSS property reserves space for the scrollbar, preventing unwanted layout changes as the scrollbar appears and disappears.",
@@ -21397,7 +21402,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(94u16, 0u16), edge : BrowserVersion(94u16, 0u16),
 	firefox : BrowserVersion(97u16, 0u16), firefox_android : BrowserVersion(97u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 15.481131f32, }, "css.properties.scrollbar-width" =>
+	caniuse : & [], popularity : 11.887076f32, }, "css.properties.scrollbar-width" =>
 	CSSFeature { id : "css.properties.scrollbar-width", name : "scrollbar-width",
 	description : "The scrollbar-width CSS property sets the width of the scrollbar.",
 	spec : "https://drafts.csswg.org/css-scrollbars-1/#scrollbar-width", groups : &
@@ -21406,7 +21411,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(121u16, 0u16), chrome_android : BrowserVersion(121u16, 0u16), edge :
 	BrowserVersion(121u16, 0u16), firefox : BrowserVersion(64u16, 0u16), firefox_android
 	: BrowserVersion(64u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 38.49439f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 40.174183f32, },
 	"css.properties.scrollbar-width.auto" => CSSFeature { id :
 	"css.properties.scrollbar-width.auto", name : "scrollbar-width", description :
 	"The scrollbar-width CSS property sets the width of the scrollbar.", spec :
@@ -21416,7 +21421,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(121u16, 0u16), chrome_android : BrowserVersion(121u16, 0u16), edge :
 	BrowserVersion(121u16, 0u16), firefox : BrowserVersion(64u16, 0u16), firefox_android
 	: BrowserVersion(64u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 38.49439f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 40.174183f32, },
 	"css.properties.scrollbar-width.none" => CSSFeature { id :
 	"css.properties.scrollbar-width.none", name : "scrollbar-width", description :
 	"The scrollbar-width CSS property sets the width of the scrollbar.", spec :
@@ -21426,7 +21431,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(121u16, 0u16), chrome_android : BrowserVersion(121u16, 0u16), edge :
 	BrowserVersion(121u16, 0u16), firefox : BrowserVersion(64u16, 0u16), firefox_android
 	: BrowserVersion(64u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 38.49439f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 40.174183f32, },
 	"css.properties.scrollbar-width.thin" => CSSFeature { id :
 	"css.properties.scrollbar-width.thin", name : "scrollbar-width", description :
 	"The scrollbar-width CSS property sets the width of the scrollbar.", spec :
@@ -21436,7 +21441,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(121u16, 0u16), chrome_android : BrowserVersion(121u16, 0u16), edge :
 	BrowserVersion(121u16, 0u16), firefox : BrowserVersion(64u16, 0u16), firefox_android
 	: BrowserVersion(64u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 38.49439f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 40.174183f32, },
 	"css.properties.shape-image-threshold" => CSSFeature { id :
 	"css.properties.shape-image-threshold", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
@@ -21448,7 +21453,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-image-threshold.percentages"
+	[], popularity : 0.507282f32, }, "css.properties.shape-image-threshold.percentages"
 	=> CSSFeature { id : "css.properties.shape-image-threshold.percentages", name :
 	"shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
@@ -21458,7 +21463,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(78u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.530044f32, }, "css.properties.shape-margin" => CSSFeature { id :
+	popularity : 0.507282f32, }, "css.properties.shape-margin" => CSSFeature { id :
 	"css.properties.shape-margin", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21469,7 +21474,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside" => CSSFeature { id :
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside" => CSSFeature { id :
 	"css.properties.shape-outside", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21480,7 +21485,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside.circle" => CSSFeature
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside.circle" => CSSFeature
 	{ id : "css.properties.shape-outside.circle", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21491,7 +21496,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside.gradient" =>
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside.gradient" =>
 	CSSFeature { id : "css.properties.shape-outside.gradient", name : "shape-outside",
 	description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
@@ -21503,7 +21508,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside.image" => CSSFeature {
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside.image" => CSSFeature {
 	id : "css.properties.shape-outside.image", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21514,7 +21519,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside.inset" => CSSFeature {
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside.inset" => CSSFeature {
 	id : "css.properties.shape-outside.inset", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21525,7 +21530,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside.none" => CSSFeature {
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside.none" => CSSFeature {
 	id : "css.properties.shape-outside.none", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21536,7 +21541,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-outside.path" => CSSFeature {
+	[], popularity : 0.507282f32, }, "css.properties.shape-outside.path" => CSSFeature {
 	id : "css.properties.shape-outside.path", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
 	spec : "https://drafts.csswg.org/css-shapes-1/#declaring-shapes", groups : &
@@ -21544,7 +21549,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	: BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.530044f32, },
+	0), }, caniuse : & [], popularity : 0.507282f32, },
 	"css.properties.shape-outside.polygon" => CSSFeature { id :
 	"css.properties.shape-outside.polygon", name : "shape-outside", description :
 	"The shape-outside CSS property, along with shape-margin and shape-image-threshold, sets the shape around which adjacent content will wrap.",
@@ -21556,7 +21561,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(37u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(62u16, 0u16), firefox_android : BrowserVersion(62u16, 0u16), safari :
 	BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), }, caniuse : &
-	[], popularity : 0.530044f32, }, "css.properties.shape-rendering" => CSSFeature { id
+	[], popularity : 0.507282f32, }, "css.properties.shape-rendering" => CSSFeature { id
 	: "css.properties.shape-rendering", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
 	spec : "https://svgwg.org/svg2-draft/", groups : & ["svg"], baseline_status :
@@ -21585,7 +21590,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 10.576188f32, }, "css.properties.speak-as" => CSSFeature { id :
+	popularity : 10.860788f32, }, "css.properties.speak-as" => CSSFeature { id :
 	"css.properties.speak-as", name : "speak-as", description :
 	"The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.",
 	spec : "https://drafts.csswg.org/css-speech-1/#speaking-props-speak-as", groups : &
@@ -21593,7 +21598,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(11u16, 1u16), safari_ios :
-	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000473f32, },
+	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000959f32, },
 	"css.properties.speak-as.digits" => CSSFeature { id :
 	"css.properties.speak-as.digits", name : "speak-as", description :
 	"The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.",
@@ -21602,7 +21607,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(11u16, 1u16), safari_ios :
-	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000473f32, },
+	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000959f32, },
 	"css.properties.speak-as.literal-punctuation" => CSSFeature { id :
 	"css.properties.speak-as.literal-punctuation", name : "speak-as", description :
 	"The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.",
@@ -21611,7 +21616,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(11u16, 1u16), safari_ios :
-	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000473f32, },
+	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000959f32, },
 	"css.properties.speak-as.no-punctuation" => CSSFeature { id :
 	"css.properties.speak-as.no-punctuation", name : "speak-as", description :
 	"The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.",
@@ -21620,7 +21625,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(11u16, 1u16), safari_ios :
-	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000473f32, },
+	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000959f32, },
 	"css.properties.speak-as.normal" => CSSFeature { id :
 	"css.properties.speak-as.normal", name : "speak-as", description :
 	"The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.",
@@ -21629,7 +21634,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(11u16, 1u16), safari_ios :
-	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000473f32, },
+	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000959f32, },
 	"css.properties.speak-as.spell-out" => CSSFeature { id :
 	"css.properties.speak-as.spell-out", name : "speak-as", description :
 	"The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.",
@@ -21638,7 +21643,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	{ chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(11u16, 1u16), safari_ios :
-	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000473f32, },
+	BrowserVersion(11u16, 3u16), }, caniuse : & [], popularity : 0.000959f32, },
 	"css.properties.stop-color" => CSSFeature { id : "css.properties.stop-color", name :
 	"SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -21846,7 +21851,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(25u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(91u16, 0u16), firefox_android : BrowserVersion(91u16, 0u16),
 	safari : BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css3-tabsize"], popularity : 11.596716f32, },
+	caniuse : & ["https://caniuse.com/css3-tabsize"], popularity : 11.361181f32, },
 	"css.properties.tab-size.length" => CSSFeature { id :
 	"css.properties.tab-size.length", name : "tab-size", description :
 	"The tab-size CSS property sets the width of the tab character.", spec :
@@ -21857,7 +21862,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(42u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(91u16, 0u16), firefox_android : BrowserVersion(91u16, 0u16),
 	safari : BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 4u16), },
-	caniuse : & ["https://caniuse.com/css3-tabsize"], popularity : 11.596716f32, },
+	caniuse : & ["https://caniuse.com/css3-tabsize"], popularity : 11.361181f32, },
 	"css.properties.table-layout" => CSSFeature { id : "css.properties.table-layout",
 	name : "Tables", description :
 	"The <table> HTML element, with several related elements, represents tabular data in rows and columns of cells.",
@@ -21902,7 +21907,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 87.737785f32, }, "css.properties.text-align-last" => CSSFeature { id
+	[], popularity : 87.88771f32, }, "css.properties.text-align-last" => CSSFeature { id
 	: "css.properties.text-align-last", name : "text-align-last", description :
 	"The text-align-last CSS property sets the alignment of the last line of text before a forced line break.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-align-last-property", groups : &
@@ -21913,7 +21918,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(47u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-text-align-last"], popularity : 2.176261f32, },
+	["https://caniuse.com/css-text-align-last"], popularity : 2.747888f32, },
 	"css.properties.text-align-last.auto" => CSSFeature { id :
 	"css.properties.text-align-last.auto", name : "text-align-last", description :
 	"The text-align-last CSS property sets the alignment of the last line of text before a forced line break.",
@@ -21925,7 +21930,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(47u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(49u16, 0u16), firefox_android : BrowserVersion(49u16, 0u16), safari :
 	BrowserVersion(16u16, 0u16), safari_ios : BrowserVersion(16u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-text-align-last"], popularity : 2.176261f32, },
+	["https://caniuse.com/css-text-align-last"], popularity : 2.747888f32, },
 	"css.properties.text-align.center" => CSSFeature { id :
 	"css.properties.text-align.center", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
@@ -21937,7 +21942,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 87.737785f32, }, "css.properties.text-align.end" => CSSFeature { id :
+	popularity : 87.88771f32, }, "css.properties.text-align.end" => CSSFeature { id :
 	"css.properties.text-align.end", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-align-property", groups : &
@@ -21948,7 +21953,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 1u16), safari_ios : BrowserVersion(2u16, 0u16), }, caniuse : &
-	[], popularity : 87.737785f32, }, "css.properties.text-align.justify" => CSSFeature {
+	[], popularity : 87.88771f32, }, "css.properties.text-align.justify" => CSSFeature {
 	id : "css.properties.text-align.justify", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-align-property", groups : &
@@ -21959,7 +21964,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 87.737785f32, }, "css.properties.text-align.left" => CSSFeature { id
+	[], popularity : 87.88771f32, }, "css.properties.text-align.left" => CSSFeature { id
 	: "css.properties.text-align.left", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-align-property", groups : &
@@ -21970,15 +21975,15 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 87.737785f32, }, "css.properties.text-align.match-parent" => CSSFeature
-	{ id : "css.properties.text-align.match-parent", name : "text-align", description :
+	popularity : 87.88771f32, }, "css.properties.text-align.match-parent" => CSSFeature {
+	id : "css.properties.text-align.match-parent", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-align-property", groups : &
 	["text"], baseline_status : BaselineStatus::False, browser_support : BrowserSupport {
 	chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(40u16, 0u16), firefox_android :
 	BrowserVersion(40u16, 0u16), safari : BrowserVersion(15u16, 4u16), safari_ios :
-	BrowserVersion(15u16, 4u16), }, caniuse : & [], popularity : 87.737785f32, },
+	BrowserVersion(15u16, 4u16), }, caniuse : & [], popularity : 87.88771f32, },
 	"css.properties.text-align.right" => CSSFeature { id :
 	"css.properties.text-align.right", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
@@ -21990,7 +21995,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 87.737785f32, }, "css.properties.text-align.start" => CSSFeature { id :
+	popularity : 87.88771f32, }, "css.properties.text-align.start" => CSSFeature { id :
 	"css.properties.text-align.start", name : "text-align", description :
 	"The text-align CSS property sets the horizontal placement of the inner content of a block element.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-align-property", groups : &
@@ -22001,7 +22006,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 1u16), safari_ios : BrowserVersion(2u16, 0u16), }, caniuse : &
-	[], popularity : 87.737785f32, }, "css.properties.text-anchor" => CSSFeature { id :
+	[], popularity : 87.88771f32, }, "css.properties.text-anchor" => CSSFeature { id :
 	"css.properties.text-anchor", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
 	spec : "https://svgwg.org/svg2-draft/", groups : & ["svg"], baseline_status :
@@ -22052,7 +22057,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16),
 	firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16,
-	4u16), }, caniuse : & [], popularity : 0.896009f32, },
+	4u16), }, caniuse : & [], popularity : 0.46895f32, },
 	"css.properties.text-autospace.auto" => CSSFeature { id :
 	"css.properties.text-autospace.auto", name : "text-autospace", description :
 	"The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
@@ -22061,7 +22066,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16,
-	4u16), }, caniuse : & [], popularity : 0.896009f32, },
+	4u16), }, caniuse : & [], popularity : 0.46895f32, },
 	"css.properties.text-autospace.ideograph-alpha" => CSSFeature { id :
 	"css.properties.text-autospace.ideograph-alpha", name : "text-autospace", description
 	:
@@ -22071,7 +22076,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16,
-	4u16), }, caniuse : & [], popularity : 0.896009f32, },
+	4u16), }, caniuse : & [], popularity : 0.46895f32, },
 	"css.properties.text-autospace.ideograph-numeric" => CSSFeature { id :
 	"css.properties.text-autospace.ideograph-numeric", name : "text-autospace",
 	description :
@@ -22081,7 +22086,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16,
-	4u16), }, caniuse : & [], popularity : 0.896009f32, },
+	4u16), }, caniuse : & [], popularity : 0.46895f32, },
 	"css.properties.text-autospace.insert" => CSSFeature { id :
 	"css.properties.text-autospace.insert", name : "text-autospace", description :
 	"The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
@@ -22090,7 +22095,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& [], popularity : 0.896009f32, }, "css.properties.text-autospace.no-autospace" =>
+	& [], popularity : 0.46895f32, }, "css.properties.text-autospace.no-autospace" =>
 	CSSFeature { id : "css.properties.text-autospace.no-autospace", name :
 	"text-autospace", description :
 	"The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
@@ -22100,7 +22105,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16),
 	firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16,
-	4u16), }, caniuse : & [], popularity : 0.896009f32, },
+	4u16), }, caniuse : & [], popularity : 0.46895f32, },
 	"css.properties.text-autospace.normal" => CSSFeature { id :
 	"css.properties.text-autospace.normal", name : "text-autospace", description :
 	"The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
@@ -22110,7 +22115,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(140u16, 0u16), edge : BrowserVersion(140u16, 0u16),
 	firefox : BrowserVersion(145u16, 0u16), firefox_android : BrowserVersion(145u16,
 	0u16), safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16,
-	4u16), }, caniuse : & [], popularity : 0.896009f32, },
+	4u16), }, caniuse : & [], popularity : 0.46895f32, },
 	"css.properties.text-autospace.punctuation" => CSSFeature { id :
 	"css.properties.text-autospace.punctuation", name : "text-autospace", description :
 	"The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
@@ -22119,7 +22124,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.896009f32, }, "css.properties.text-autospace.replace" => CSSFeature {
+	popularity : 0.46895f32, }, "css.properties.text-autospace.replace" => CSSFeature {
 	id : "css.properties.text-autospace.replace", name : "text-autospace", description :
 	"The text-autospace CSS property sets whether and how to insert spaces in inter-script text (such as when mixing Latin and Chinese characters) and around punctuation.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-autospace-property", groups : & [],
@@ -22127,7 +22132,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse : & [],
-	popularity : 0.896009f32, }, "css.properties.text-box" => CSSFeature { id :
+	popularity : 0.46895f32, }, "css.properties.text-box" => CSSFeature { id :
 	"css.properties.text-box", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
 	spec : "https://drafts.csswg.org/css-inline-3/#leading-trim", groups : & ["text"],
@@ -22136,7 +22141,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-edge" => CSSFeature { id : "css.properties.text-box-edge",
 	name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22146,7 +22151,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-edge.auto" => CSSFeature { id :
 	"css.properties.text-box-edge.auto", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22156,7 +22161,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-trim" => CSSFeature { id : "css.properties.text-box-trim",
 	name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22166,7 +22171,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-trim.none" => CSSFeature { id :
 	"css.properties.text-box-trim.none", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22176,7 +22181,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-trim.trim-both" => CSSFeature { id :
 	"css.properties.text-box-trim.trim-both", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22186,7 +22191,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-trim.trim-end" => CSSFeature { id :
 	"css.properties.text-box-trim.trim-end", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22196,7 +22201,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box-trim.trim-start" => CSSFeature { id :
 	"css.properties.text-box-trim.trim-start", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22206,7 +22211,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-box.normal" => CSSFeature { id :
 	"css.properties.text-box.normal", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -22216,7 +22221,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.properties.text-combine-upright" => CSSFeature { id :
 	"css.properties.text-combine-upright", name : "text-combine-upright", description :
 	"The text-combine-upright CSS property displays multiple characters in the space of a single character in vertical text. This is used in East Asian documents to display Latin-based strings such as components of a date or letters of an initialism.",
@@ -22228,7 +22233,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(48u16, 0u16), firefox_android : BrowserVersion(48u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	[], popularity : 0.229717f32, }, "css.properties.text-combine-upright.all" =>
+	[], popularity : 0.282195f32, }, "css.properties.text-combine-upright.all" =>
 	CSSFeature { id : "css.properties.text-combine-upright.all", name :
 	"text-combine-upright", description :
 	"The text-combine-upright CSS property displays multiple characters in the space of a single character in vertical text. This is used in East Asian documents to display Latin-based strings such as components of a date or letters of an initialism.",
@@ -22240,7 +22245,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(48u16, 0u16), firefox_android : BrowserVersion(48u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	[], popularity : 0.229717f32, }, "css.properties.text-combine-upright.none" =>
+	[], popularity : 0.282195f32, }, "css.properties.text-combine-upright.none" =>
 	CSSFeature { id : "css.properties.text-combine-upright.none", name :
 	"text-combine-upright", description :
 	"The text-combine-upright CSS property displays multiple characters in the space of a single character in vertical text. This is used in East Asian documents to display Latin-based strings such as components of a date or letters of an initialism.",
@@ -22252,7 +22257,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(48u16, 0u16), firefox_android : BrowserVersion(48u16, 0u16), safari :
 	BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), }, caniuse : &
-	[], popularity : 0.229717f32, }, "css.properties.text-decoration" => CSSFeature { id
+	[], popularity : 0.282195f32, }, "css.properties.text-decoration" => CSSFeature { id
 	: "css.properties.text-decoration", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
 	spec : "https://drafts.csswg.org/css-text-decor-4/#line-decoration", groups : & [],
@@ -22262,7 +22267,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-color" => CSSFeature { id :
 	"css.properties.text-decoration-color", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22273,7 +22278,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-line" => CSSFeature { id :
 	"css.properties.text-decoration-line", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22284,7 +22289,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-line.blink" => CSSFeature { id :
 	"css.properties.text-decoration-line.blink", name : "text-decoration-line: blink",
 	description :
@@ -22307,8 +22312,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(137u16, 0u16), firefox_android : BrowserVersion(137u16,
 	0u16), safari : BrowserVersion(26u16, 2u16), safari_ios : BrowserVersion(26u16,
 	2u16), }, caniuse : & ["https://caniuse.com/text-decoration"], popularity :
-	83.87014f32, }, "css.properties.text-decoration-line.line-through" => CSSFeature { id
-	: "css.properties.text-decoration-line.line-through", name : "text-decoration",
+	83.892494f32, }, "css.properties.text-decoration-line.line-through" => CSSFeature {
+	id : "css.properties.text-decoration-line.line-through", name : "text-decoration",
 	description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
 	spec : "https://drafts.csswg.org/css-text-decor-4/#line-decoration", groups : & [],
@@ -22318,7 +22323,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-line.none" => CSSFeature { id :
 	"css.properties.text-decoration-line.none", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22329,7 +22334,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-line.overline" => CSSFeature { id :
 	"css.properties.text-decoration-line.overline", name : "text-decoration", description
 	:
@@ -22341,7 +22346,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-line.spelling-error" => CSSFeature { id :
 	"css.properties.text-decoration-line.spelling-error", name : "text-decoration",
 	description :
@@ -22353,7 +22358,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	firefox : BrowserVersion(137u16, 0u16), firefox_android : BrowserVersion(137u16,
 	0u16), safari : BrowserVersion(26u16, 2u16), safari_ios : BrowserVersion(26u16,
 	2u16), }, caniuse : & ["https://caniuse.com/text-decoration"], popularity :
-	83.87014f32, }, "css.properties.text-decoration-line.underline" => CSSFeature { id :
+	83.892494f32, }, "css.properties.text-decoration-line.underline" => CSSFeature { id :
 	"css.properties.text-decoration-line.underline", name : "text-decoration",
 	description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22364,7 +22369,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-skip" => CSSFeature { id :
 	"css.properties.text-decoration-skip", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22373,7 +22378,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-skip-ink" => CSSFeature { id :
 	"css.properties.text-decoration-skip-ink", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22384,7 +22389,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(64u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-skip-ink.all" => CSSFeature { id :
 	"css.properties.text-decoration-skip-ink.all", name : "text-decoration", description
 	:
@@ -22395,7 +22400,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	0), firefox : BrowserVersion(75u16, 0u16), firefox_android : BrowserVersion(79u16,
 	0u16), safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16,
 	4u16), }, caniuse : & ["https://caniuse.com/text-decoration"], popularity :
-	83.87014f32, }, "css.properties.text-decoration-skip-ink.auto" => CSSFeature { id :
+	83.892494f32, }, "css.properties.text-decoration-skip-ink.auto" => CSSFeature { id :
 	"css.properties.text-decoration-skip-ink.auto", name : "text-decoration", description
 	:
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22406,7 +22411,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(64u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-skip-ink.none" => CSSFeature { id :
 	"css.properties.text-decoration-skip-ink.none", name : "text-decoration", description
 	:
@@ -22418,7 +22423,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(64u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(15u16, 4u16), safari_ios : BrowserVersion(15u16, 4u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-skip.auto" => CSSFeature { id :
 	"css.properties.text-decoration-skip.auto", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22427,7 +22432,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-skip.none" => CSSFeature { id :
 	"css.properties.text-decoration-skip.none", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22436,7 +22441,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-style" => CSSFeature { id :
 	"css.properties.text-decoration-style", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22447,7 +22452,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-style.wavy" => CSSFeature { id :
 	"css.properties.text-decoration-style.wavy", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22458,7 +22463,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-thickness" => CSSFeature { id :
 	"css.properties.text-decoration-thickness", name : "text-decoration", description :
 	"The text-decoration CSS property sets the style and color of decorative lines including underline, overline, line-through, or a combination of lines.",
@@ -22469,7 +22474,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(89u16, 0u16), edge : BrowserVersion(89u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-thickness.auto" => CSSFeature { id :
 	"css.properties.text-decoration-thickness.auto", name : "text-decoration",
 	description :
@@ -22481,7 +22486,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(89u16, 0u16), edge : BrowserVersion(89u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-thickness.from-font" => CSSFeature { id :
 	"css.properties.text-decoration-thickness.from-font", name : "text-decoration",
 	description :
@@ -22493,7 +22498,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(89u16, 0u16), edge : BrowserVersion(89u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration-thickness.percentage" => CSSFeature { id :
 	"css.properties.text-decoration-thickness.percentage", name : "text-decoration",
 	description :
@@ -22504,7 +22509,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(89u16, 0u16), edge : BrowserVersion(89u16, 0u16),
 	firefox : BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16, 4u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration.includes_color-and-style" => CSSFeature { id :
 	"css.properties.text-decoration.includes_color-and-style", name : "text-decoration",
 	description :
@@ -22515,7 +22520,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(57u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(6u16, 0u16), firefox_android : BrowserVersion(6u16, 0u16),
 	safari : BrowserVersion(26u16, 2u16), safari_ios : BrowserVersion(26u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-decoration.includes_thickness" => CSSFeature { id :
 	"css.properties.text-decoration.includes_thickness", name : "text-decoration",
 	description :
@@ -22526,7 +22531,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16),
 	firefox : BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(26u16, 2u16), safari_ios : BrowserVersion(26u16, 2u16), },
-	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.87014f32, },
+	caniuse : & ["https://caniuse.com/text-decoration"], popularity : 83.892494f32, },
 	"css.properties.text-emphasis" => CSSFeature { id : "css.properties.text-emphasis",
 	name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22538,7 +22543,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-color" => CSSFeature { id :
 	"css.properties.text-emphasis-color", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22550,7 +22555,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-position" => CSSFeature { id :
 	"css.properties.text-emphasis-position", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22562,7 +22567,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-position.auto" => CSSFeature { id :
 	"css.properties.text-emphasis-position.auto", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22572,7 +22577,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), firefox : BrowserVersion(132u16, 0u16), firefox_android :
 	BrowserVersion(132u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/text-emphasis"],
-	popularity : 0.292067f32, }, "css.properties.text-emphasis-position.left" =>
+	popularity : 0.198329f32, }, "css.properties.text-emphasis-position.left" =>
 	CSSFeature { id : "css.properties.text-emphasis-position.left", name :
 	"text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22584,7 +22589,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-position.over" => CSSFeature { id :
 	"css.properties.text-emphasis-position.over", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22596,7 +22601,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(108u16, 0u16), firefox_android : BrowserVersion(108u16, 0u16), safari
 	: BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-position.right" => CSSFeature { id :
 	"css.properties.text-emphasis-position.right", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22608,7 +22613,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-position.under" => CSSFeature { id :
 	"css.properties.text-emphasis-position.under", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22620,7 +22625,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(108u16, 0u16), firefox_android : BrowserVersion(108u16, 0u16), safari
 	: BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style" => CSSFeature { id :
 	"css.properties.text-emphasis-style", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22632,7 +22637,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.circle" => CSSFeature { id :
 	"css.properties.text-emphasis-style.circle", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22644,7 +22649,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.dot" => CSSFeature { id :
 	"css.properties.text-emphasis-style.dot", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22656,7 +22661,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.double-circle" => CSSFeature { id :
 	"css.properties.text-emphasis-style.double-circle", name : "text-emphasis",
 	description :
@@ -22669,7 +22674,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.filled" => CSSFeature { id :
 	"css.properties.text-emphasis-style.filled", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22681,7 +22686,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.none" => CSSFeature { id :
 	"css.properties.text-emphasis-style.none", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22693,7 +22698,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.sesame" => CSSFeature { id :
 	"css.properties.text-emphasis-style.sesame", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22705,7 +22710,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-emphasis-style.triangle" => CSSFeature { id :
 	"css.properties.text-emphasis-style.triangle", name : "text-emphasis", description :
 	"The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.",
@@ -22717,7 +22722,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(99u16, 0u16), edge : BrowserVersion(99u16, 0u16), firefox :
 	BrowserVersion(46u16, 0u16), firefox_android : BrowserVersion(46u16, 0u16), safari :
 	BrowserVersion(7u16, 0u16), safari_ios : BrowserVersion(7u16, 0u16), }, caniuse : &
-	["https://caniuse.com/text-emphasis"], popularity : 0.292067f32, },
+	["https://caniuse.com/text-emphasis"], popularity : 0.198329f32, },
 	"css.properties.text-indent" => CSSFeature { id : "css.properties.text-indent", name
 	: "text-indent", description :
 	"The text-indent CSS property sets the size of the empty space (indentation) at the beginning of lines in a text.",
@@ -22728,7 +22733,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-text-indent"], popularity : 35.64265f32, },
+	caniuse : & ["https://caniuse.com/css-text-indent"], popularity : 36.13029f32, },
 	"css.properties.text-indent.each-line" => CSSFeature { id :
 	"css.properties.text-indent.each-line", name : "text-indent: each-line", description
 	:
@@ -22756,7 +22761,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), firefox : BrowserVersion(55u16, 0u16), firefox_android :
 	BrowserVersion(55u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-text-justify"],
-	popularity : 0.3633f32, }, "css.properties.text-justify.auto" => CSSFeature { id :
+	popularity : 0.3349f32, }, "css.properties.text-justify.auto" => CSSFeature { id :
 	"css.properties.text-justify.auto", name : "text-justify", description :
 	"The text-justify CSS property sets the justification method of text when text-align: justify is set.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-justify-property", groups : &
@@ -22765,7 +22770,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), firefox : BrowserVersion(55u16, 0u16), firefox_android :
 	BrowserVersion(55u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-text-justify"],
-	popularity : 0.3633f32, }, "css.properties.text-justify.inter-character" =>
+	popularity : 0.3349f32, }, "css.properties.text-justify.inter-character" =>
 	CSSFeature { id : "css.properties.text-justify.inter-character", name :
 	"text-justify", description :
 	"The text-justify CSS property sets the justification method of text when text-align: justify is set.",
@@ -22775,7 +22780,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), firefox : BrowserVersion(55u16, 0u16), firefox_android :
 	BrowserVersion(55u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-text-justify"],
-	popularity : 0.3633f32, }, "css.properties.text-justify.inter-word" => CSSFeature {
+	popularity : 0.3349f32, }, "css.properties.text-justify.inter-word" => CSSFeature {
 	id : "css.properties.text-justify.inter-word", name : "text-justify", description :
 	"The text-justify CSS property sets the justification method of text when text-align: justify is set.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-justify-property", groups : &
@@ -22784,7 +22789,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), firefox : BrowserVersion(55u16, 0u16), firefox_android :
 	BrowserVersion(55u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-text-justify"],
-	popularity : 0.3633f32, }, "css.properties.text-justify.none" => CSSFeature { id :
+	popularity : 0.3349f32, }, "css.properties.text-justify.none" => CSSFeature { id :
 	"css.properties.text-justify.none", name : "text-justify", description :
 	"The text-justify CSS property sets the justification method of text when text-align: justify is set.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-justify-property", groups : &
@@ -22793,7 +22798,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), firefox : BrowserVersion(55u16, 0u16), firefox_android :
 	BrowserVersion(55u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-text-justify"],
-	popularity : 0.3633f32, }, "css.properties.text-orientation" => CSSFeature { id :
+	popularity : 0.3349f32, }, "css.properties.text-orientation" => CSSFeature { id :
 	"css.properties.text-orientation", name : "text-orientation", description :
 	"The text-orientation CSS property sets the how text is typeset within a line when the writing mode is vertical.",
 	spec : "https://drafts.csswg.org/css-writing-modes-4/#text-orientation", groups : &
@@ -22804,7 +22809,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(41u16, 0u16), firefox_android : BrowserVersion(41u16, 0u16), safari :
 	BrowserVersion(14u16, 0u16), safari_ios : BrowserVersion(14u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-text-orientation"], popularity : 0.587055f32, },
+	["https://caniuse.com/css-text-orientation"], popularity : 0.693814f32, },
 	"css.properties.text-orientation.mixed" => CSSFeature { id :
 	"css.properties.text-orientation.mixed", name : "text-orientation", description :
 	"The text-orientation CSS property sets the how text is typeset within a line when the writing mode is vertical.",
@@ -22816,7 +22821,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(41u16, 0u16), firefox_android : BrowserVersion(41u16, 0u16), safari :
 	BrowserVersion(14u16, 0u16), safari_ios : BrowserVersion(14u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-text-orientation"], popularity : 0.587055f32, },
+	["https://caniuse.com/css-text-orientation"], popularity : 0.693814f32, },
 	"css.properties.text-orientation.sideways" => CSSFeature { id :
 	"css.properties.text-orientation.sideways", name : "text-orientation", description :
 	"The text-orientation CSS property sets the how text is typeset within a line when the writing mode is vertical.",
@@ -22828,7 +22833,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(14u16, 0u16), safari_ios : BrowserVersion(14u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-text-orientation"], popularity : 0.587055f32, },
+	["https://caniuse.com/css-text-orientation"], popularity : 0.693814f32, },
 	"css.properties.text-orientation.upright" => CSSFeature { id :
 	"css.properties.text-orientation.upright", name : "text-orientation", description :
 	"The text-orientation CSS property sets the how text is typeset within a line when the writing mode is vertical.",
@@ -22840,7 +22845,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(48u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(41u16, 0u16), firefox_android : BrowserVersion(41u16, 0u16), safari :
 	BrowserVersion(14u16, 0u16), safari_ios : BrowserVersion(14u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-text-orientation"], popularity : 0.587055f32, },
+	["https://caniuse.com/css-text-orientation"], popularity : 0.693814f32, },
 	"css.properties.text-overflow" => CSSFeature { id : "css.properties.text-overflow",
 	name : "Text overflow", description :
 	"The text-overflow CSS property sets how hidden overflow content appears to users. The property can clip content, truncate content with an ellipsis (…), or truncate with a custom string.",
@@ -22851,7 +22856,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(7u16, 0u16), firefox_android : BrowserVersion(7u16, 0u16),
 	safari : BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/text-overflow"], popularity : 66.47262f32, },
+	caniuse : & ["https://caniuse.com/text-overflow"], popularity : 66.15467f32, },
 	"css.properties.text-overflow.clip" => CSSFeature { id :
 	"css.properties.text-overflow.clip", name : "Text overflow", description :
 	"The text-overflow CSS property sets how hidden overflow content appears to users. The property can clip content, truncate content with an ellipsis (…), or truncate with a custom string.",
@@ -22862,7 +22867,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(7u16, 0u16), firefox_android : BrowserVersion(7u16, 0u16),
 	safari : BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/text-overflow"], popularity : 66.47262f32, },
+	caniuse : & ["https://caniuse.com/text-overflow"], popularity : 66.15467f32, },
 	"css.properties.text-overflow.ellipsis" => CSSFeature { id :
 	"css.properties.text-overflow.ellipsis", name : "Text overflow", description :
 	"The text-overflow CSS property sets how hidden overflow content appears to users. The property can clip content, truncate content with an ellipsis (…), or truncate with a custom string.",
@@ -22873,7 +22878,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(7u16, 0u16), firefox_android : BrowserVersion(7u16, 0u16),
 	safari : BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/text-overflow"], popularity : 66.47262f32, },
+	caniuse : & ["https://caniuse.com/text-overflow"], popularity : 66.15467f32, },
 	"css.properties.text-overflow.string" => CSSFeature { id :
 	"css.properties.text-overflow.string", name : "Custom ellipses", description :
 	"The text-overflow CSS property with a string value sets the string representing clipped text.",
@@ -22891,7 +22896,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(9u16, 0u16), firefox_android : BrowserVersion(9u16,
 	0u16), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0, 0), }, caniuse :
-	& ["https://caniuse.com/text-overflow"], popularity : 66.47262f32, },
+	& ["https://caniuse.com/text-overflow"], popularity : 66.15467f32, },
 	"css.properties.text-rendering" => CSSFeature { id : "css.properties.text-rendering",
 	name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -22936,7 +22941,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 1u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-textshadow"], popularity : 42.58891f32, },
+	["https://caniuse.com/css-textshadow"], popularity : 45.315094f32, },
 	"css.properties.text-size-adjust" => CSSFeature { id :
 	"css.properties.text-size-adjust", name : "text-size-adjust", description :
 	"The text-size-adjust CSS property disables or modifies the browser's default text size adjustment for small screen sizes.",
@@ -22946,7 +22951,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/text-size-adjust"], popularity :
-	20.696325f32, }, "css.properties.text-size-adjust.auto" => CSSFeature { id :
+	22.417593f32, }, "css.properties.text-size-adjust.auto" => CSSFeature { id :
 	"css.properties.text-size-adjust.auto", name : "text-size-adjust", description :
 	"The text-size-adjust CSS property disables or modifies the browser's default text size adjustment for small screen sizes.",
 	spec : "https://drafts.csswg.org/css-size-adjust-1/#adjustment-control", groups : &
@@ -22955,7 +22960,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/text-size-adjust"], popularity :
-	20.696325f32, }, "css.properties.text-size-adjust.none" => CSSFeature { id :
+	22.417593f32, }, "css.properties.text-size-adjust.none" => CSSFeature { id :
 	"css.properties.text-size-adjust.none", name : "text-size-adjust", description :
 	"The text-size-adjust CSS property disables or modifies the browser's default text size adjustment for small screen sizes.",
 	spec : "https://drafts.csswg.org/css-size-adjust-1/#adjustment-control", groups : &
@@ -22964,7 +22969,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/text-size-adjust"], popularity :
-	20.696325f32, }, "css.properties.text-size-adjust.percentages" => CSSFeature { id :
+	22.417593f32, }, "css.properties.text-size-adjust.percentages" => CSSFeature { id :
 	"css.properties.text-size-adjust.percentages", name : "text-size-adjust", description
 	:
 	"The text-size-adjust CSS property disables or modifies the browser's default text size adjustment for small screen sizes.",
@@ -22974,7 +22979,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/text-size-adjust"], popularity :
-	20.696325f32, }, "css.properties.text-spacing-trim" => CSSFeature { id :
+	22.417593f32, }, "css.properties.text-spacing-trim" => CSSFeature { id :
 	"css.properties.text-spacing-trim", name : "text-spacing-trim", description :
 	"The text-spacing-trim CSS property controls spacing around CJK characters, avoiding excessive whitespace when using full-width punctuation characters.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-spacing-trim-property", groups : &
@@ -22982,7 +22987,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16),
 	edge : BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.116087f32, },
+	0), }, caniuse : & [], popularity : 0.655809f32, },
 	"css.properties.text-spacing-trim.normal" => CSSFeature { id :
 	"css.properties.text-spacing-trim.normal", name : "text-spacing-trim", description :
 	"The text-spacing-trim CSS property controls spacing around CJK characters, avoiding excessive whitespace when using full-width punctuation characters.",
@@ -22991,7 +22996,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16),
 	edge : BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.116087f32, },
+	0), }, caniuse : & [], popularity : 0.655809f32, },
 	"css.properties.text-spacing-trim.space-all" => CSSFeature { id :
 	"css.properties.text-spacing-trim.space-all", name : "text-spacing-trim", description
 	:
@@ -23001,7 +23006,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16),
 	edge : BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.116087f32, },
+	0), }, caniuse : & [], popularity : 0.655809f32, },
 	"css.properties.text-spacing-trim.space-first" => CSSFeature { id :
 	"css.properties.text-spacing-trim.space-first", name : "text-spacing-trim",
 	description :
@@ -23011,7 +23016,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16),
 	edge : BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.116087f32, },
+	0), }, caniuse : & [], popularity : 0.655809f32, },
 	"css.properties.text-spacing-trim.trim-start" => CSSFeature { id :
 	"css.properties.text-spacing-trim.trim-start", name : "text-spacing-trim",
 	description :
@@ -23021,7 +23026,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(123u16, 0u16), chrome_android : BrowserVersion(123u16, 0u16),
 	edge : BrowserVersion(123u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android
 	: BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 1.116087f32, }, "css.properties.text-transform"
+	0), }, caniuse : & [], popularity : 0.655809f32, }, "css.properties.text-transform"
 	=> CSSFeature { id : "css.properties.text-transform", name : "text-transform",
 	description : "The text-transform CSS property sets text case and capitalization.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-transform-property", groups : &
@@ -23032,7 +23037,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 73.06558f32, }, "css.properties.text-transform.capitalize" =>
+	[], popularity : 73.02561f32, }, "css.properties.text-transform.capitalize" =>
 	CSSFeature { id : "css.properties.text-transform.capitalize", name :
 	"text-transform", description :
 	"The text-transform CSS property sets text case and capitalization.", spec :
@@ -23043,7 +23048,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 73.06558f32, },
+	caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.dutch_ij_digraph" => CSSFeature { id :
 	"css.properties.text-transform.dutch_ij_digraph", name : "text-transform",
 	description : "The text-transform CSS property sets text case and capitalization.",
@@ -23052,7 +23057,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge :
 	BrowserVersion(0, 0), firefox : BrowserVersion(14u16, 0u16), firefox_android :
 	BrowserVersion(14u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
-	BrowserVersion(0, 0), }, caniuse : & [], popularity : 73.06558f32, },
+	BrowserVersion(0, 0), }, caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.full-size-kana" => CSSFeature { id :
 	"css.properties.text-transform.full-size-kana", name : "text-transform", description
 	: "The text-transform CSS property sets text case and capitalization.", spec :
@@ -23061,7 +23066,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(64u16, 0u16), firefox_android : BrowserVersion(64u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 73.06558f32, },
+	0u16), }, caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.full-width" => CSSFeature { id :
 	"css.properties.text-transform.full-width", name : "text-transform", description :
 	"The text-transform CSS property sets text case and capitalization.", spec :
@@ -23070,7 +23075,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(0, 0), chrome_android : BrowserVersion(0, 0), edge : BrowserVersion(0,
 	0), firefox : BrowserVersion(19u16, 0u16), firefox_android : BrowserVersion(19u16,
 	0u16), safari : BrowserVersion(17u16, 0u16), safari_ios : BrowserVersion(17u16,
-	0u16), }, caniuse : & [], popularity : 73.06558f32, },
+	0u16), }, caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.greek_accented_characters" => CSSFeature { id :
 	"css.properties.text-transform.greek_accented_characters", name : "text-transform",
 	description : "The text-transform CSS property sets text case and capitalization.",
@@ -23079,7 +23084,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome : BrowserVersion(34u16, 0u16), chrome_android : BrowserVersion(34u16, 0u16),
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(15u16, 0u16),
 	firefox_android : BrowserVersion(15u16, 0u16), safari : BrowserVersion(0, 0),
-	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 73.06558f32, },
+	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.lowercase" => CSSFeature { id :
 	"css.properties.text-transform.lowercase", name : "text-transform", description :
 	"The text-transform CSS property sets text case and capitalization.", spec :
@@ -23090,7 +23095,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 73.06558f32, },
+	caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.lowercase_sigma" => CSSFeature { id :
 	"css.properties.text-transform.lowercase_sigma", name : "text-transform", description
 	: "The text-transform CSS property sets text case and capitalization.", spec :
@@ -23101,7 +23106,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(30u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(14u16, 0u16), firefox_android : BrowserVersion(14u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & [], popularity : 73.06558f32, },
+	caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.math-auto" => CSSFeature { id :
 	"css.properties.text-transform.math-auto", name : "MathML", description :
 	"MathML, or the Mathematical Markup Language, describes mathematical notation, such as expressions and formulas. Also known as MathML Core.",
@@ -23121,7 +23126,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 73.06558f32, },
+	caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.turkic_is" => CSSFeature { id :
 	"css.properties.text-transform.turkic_is", name : "text-transform", description :
 	"The text-transform CSS property sets text case and capitalization.", spec :
@@ -23132,7 +23137,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(31u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(14u16, 0u16), firefox_android : BrowserVersion(14u16, 0u16),
 	safari : BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), },
-	caniuse : & [], popularity : 73.06558f32, },
+	caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.uppercase" => CSSFeature { id :
 	"css.properties.text-transform.uppercase", name : "text-transform", description :
 	"The text-transform CSS property sets text case and capitalization.", spec :
@@ -23143,7 +23148,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 73.06558f32, },
+	caniuse : & [], popularity : 73.02561f32, },
 	"css.properties.text-transform.uppercase_eszett" => CSSFeature { id :
 	"css.properties.text-transform.uppercase_eszett", name : "text-transform",
 	description : "The text-transform CSS property sets text case and capitalization.",
@@ -23155,7 +23160,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(18u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 73.06558f32, }, "css.properties.text-underline-offset" => CSSFeature
+	[], popularity : 73.02561f32, }, "css.properties.text-underline-offset" => CSSFeature
 	{ id : "css.properties.text-underline-offset", name : "text-underline-offset",
 	description :
 	"The text-underline-offset CSS property shifts underlines on text from the initial position by a given distance. The initial position is affected by the text-underline-position property.",
@@ -23167,7 +23172,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16), firefox :
 	BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	[], popularity : 15.385638f32, }, "css.properties.text-underline-offset.auto" =>
+	[], popularity : 16.260239f32, }, "css.properties.text-underline-offset.auto" =>
 	CSSFeature { id : "css.properties.text-underline-offset.auto", name :
 	"text-underline-offset", description :
 	"The text-underline-offset CSS property shifts underlines on text from the initial position by a given distance. The initial position is affected by the text-underline-position property.",
@@ -23179,7 +23184,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16), firefox :
 	BrowserVersion(70u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	[], popularity : 15.385638f32, }, "css.properties.text-underline-offset.percentage"
+	[], popularity : 16.260239f32, }, "css.properties.text-underline-offset.percentage"
 	=> CSSFeature { id : "css.properties.text-underline-offset.percentage", name :
 	"text-underline-offset", description :
 	"The text-underline-offset CSS property shifts underlines on text from the initial position by a given distance. The initial position is affected by the text-underline-position property.",
@@ -23189,7 +23194,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), chrome_android : BrowserVersion(87u16, 0u16), edge :
 	BrowserVersion(87u16, 0u16), firefox : BrowserVersion(74u16, 0u16), firefox_android :
 	BrowserVersion(79u16, 0u16), safari : BrowserVersion(18u16, 2u16), safari_ios :
-	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 15.385638f32, },
+	BrowserVersion(18u16, 2u16), }, caniuse : & [], popularity : 16.260239f32, },
 	"css.properties.text-underline-position" => CSSFeature { id :
 	"css.properties.text-underline-position", name : "text-underline-position",
 	description :
@@ -23202,7 +23207,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	[], popularity : 5.668488f32, }, "css.properties.text-underline-position.auto" =>
+	[], popularity : 5.5923f32, }, "css.properties.text-underline-position.auto" =>
 	CSSFeature { id : "css.properties.text-underline-position.auto", name :
 	"text-underline-position", description :
 	"The text-underline-position CSS property sets the position of underlines on text. For example, text-underline-position: under places the underline below the text, avoiding crossing descenders. The underline may be further adjusted by the text-underline-offset property.",
@@ -23214,8 +23219,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	[], popularity : 5.668488f32, }, "css.properties.text-underline-position.from-font"
-	=> CSSFeature { id : "css.properties.text-underline-position.from-font", name :
+	[], popularity : 5.5923f32, }, "css.properties.text-underline-position.from-font" =>
+	CSSFeature { id : "css.properties.text-underline-position.from-font", name :
 	"text-underline-position", description :
 	"The text-underline-position CSS property sets the position of underlines on text. For example, text-underline-position: under places the underline below the text, avoiding crossing descenders. The underline may be further adjusted by the text-underline-offset property.",
 	spec : "https://drafts.csswg.org/css-text-decor-4/#text-underline-position-property",
@@ -23226,7 +23231,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(87u16, 0u16), edge : BrowserVersion(87u16, 0u16), firefox :
 	BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	[], popularity : 5.668488f32, }, "css.properties.text-underline-position.left" =>
+	[], popularity : 5.5923f32, }, "css.properties.text-underline-position.left" =>
 	CSSFeature { id : "css.properties.text-underline-position.left", name :
 	"text-underline-position", description :
 	"The text-underline-position CSS property sets the position of underlines on text. For example, text-underline-position: under places the underline below the text, avoiding crossing descenders. The underline may be further adjusted by the text-underline-offset property.",
@@ -23237,7 +23242,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(71u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 5.668488f32, },
+	caniuse : & [], popularity : 5.5923f32, },
 	"css.properties.text-underline-position.right" => CSSFeature { id :
 	"css.properties.text-underline-position.right", name : "text-underline-position",
 	description :
@@ -23249,7 +23254,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(71u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16),
 	safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16, 2u16), },
-	caniuse : & [], popularity : 5.668488f32, },
+	caniuse : & [], popularity : 5.5923f32, },
 	"css.properties.text-underline-position.under" => CSSFeature { id :
 	"css.properties.text-underline-position.under", name : "text-underline-position",
 	description :
@@ -23262,7 +23267,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(33u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(74u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(12u16, 1u16), safari_ios : BrowserVersion(12u16, 2u16), }, caniuse : &
-	[], popularity : 5.668488f32, }, "css.properties.text-wrap" => CSSFeature { id :
+	[], popularity : 5.5923f32, }, "css.properties.text-wrap" => CSSFeature { id :
 	"css.properties.text-wrap", name : "text-wrap", description :
 	"The text-wrap CSS property sets how lines break in text that overflows the container. It is a shorthand for text-wrap-style and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#text-wrap-shorthand", groups : &
@@ -23271,7 +23276,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(114u16, 0u16), chrome_android : BrowserVersion(114u16, 0u16), edge :
 	BrowserVersion(114u16, 0u16), firefox : BrowserVersion(121u16, 0u16), firefox_android
 	: BrowserVersion(121u16, 0u16), safari : BrowserVersion(17u16, 4u16), safari_ios :
-	BrowserVersion(17u16, 4u16), }, caniuse : & [], popularity : 23.462873f32, },
+	BrowserVersion(17u16, 4u16), }, caniuse : & [], popularity : 20.719395f32, },
 	"css.properties.text-wrap-mode" => CSSFeature { id : "css.properties.text-wrap-mode",
 	name : "text-wrap-mode", description :
 	"The text-wrap-mode CSS property sets whether lines may wrap with the values wrap and nowrap. It is a longhand property for both white-space and text-wrap.",
@@ -23282,7 +23287,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(130u16, 0u16), edge : BrowserVersion(130u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 1.726406f32, },
+	4u16), }, caniuse : & [], popularity : 2.023663f32, },
 	"css.properties.text-wrap-mode.nowrap" => CSSFeature { id :
 	"css.properties.text-wrap-mode.nowrap", name : "text-wrap-mode", description :
 	"The text-wrap-mode CSS property sets whether lines may wrap with the values wrap and nowrap. It is a longhand property for both white-space and text-wrap.",
@@ -23293,7 +23298,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(130u16, 0u16), edge : BrowserVersion(130u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 1.726406f32, },
+	4u16), }, caniuse : & [], popularity : 2.023663f32, },
 	"css.properties.text-wrap-mode.wrap" => CSSFeature { id :
 	"css.properties.text-wrap-mode.wrap", name : "text-wrap-mode", description :
 	"The text-wrap-mode CSS property sets whether lines may wrap with the values wrap and nowrap. It is a longhand property for both white-space and text-wrap.",
@@ -23304,7 +23309,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(130u16, 0u16), edge : BrowserVersion(130u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 1.726406f32, },
+	4u16), }, caniuse : & [], popularity : 2.023663f32, },
 	"css.properties.text-wrap-style" => CSSFeature { id :
 	"css.properties.text-wrap-style", name : "text-wrap-style", description :
 	"The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.",
@@ -23314,7 +23319,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), chrome_android : BrowserVersion(130u16, 0u16), edge :
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(124u16, 0u16), firefox_android
 	: BrowserVersion(124u16, 0u16), safari : BrowserVersion(17u16, 5u16), safari_ios :
-	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.096466f32, },
+	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.122286f32, },
 	"css.properties.text-wrap-style.auto" => CSSFeature { id :
 	"css.properties.text-wrap-style.auto", name : "text-wrap-style", description :
 	"The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.",
@@ -23324,7 +23329,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), chrome_android : BrowserVersion(130u16, 0u16), edge :
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(124u16, 0u16), firefox_android
 	: BrowserVersion(124u16, 0u16), safari : BrowserVersion(17u16, 5u16), safari_ios :
-	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.096466f32, },
+	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.122286f32, },
 	"css.properties.text-wrap-style.balance" => CSSFeature { id :
 	"css.properties.text-wrap-style.balance", name : "text-wrap-style", description :
 	"The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.",
@@ -23334,7 +23339,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), chrome_android : BrowserVersion(130u16, 0u16), edge :
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(124u16, 0u16), firefox_android
 	: BrowserVersion(124u16, 0u16), safari : BrowserVersion(17u16, 5u16), safari_ios :
-	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.096466f32, },
+	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.122286f32, },
 	"css.properties.text-wrap-style.pretty" => CSSFeature { id :
 	"css.properties.text-wrap-style.pretty", name : "text-wrap-style", description :
 	"The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.",
@@ -23344,7 +23349,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), edge : BrowserVersion(130u16, 0u16), firefox :
 	BrowserVersion(0, 0), firefox_android : BrowserVersion(0, 0), safari :
 	BrowserVersion(26u16, 0u16), safari_ios : BrowserVersion(26u16, 0u16), }, caniuse : &
-	[], popularity : 0.096466f32, }, "css.properties.text-wrap-style.stable" =>
+	[], popularity : 0.122286f32, }, "css.properties.text-wrap-style.stable" =>
 	CSSFeature { id : "css.properties.text-wrap-style.stable", name : "text-wrap-style",
 	description :
 	"The text-wrap-style CSS property sets how lines break in text that overflows the container. It can also be set with the text-wrap shorthand.",
@@ -23354,7 +23359,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(130u16, 0u16), chrome_android : BrowserVersion(130u16, 0u16), edge :
 	BrowserVersion(130u16, 0u16), firefox : BrowserVersion(124u16, 0u16), firefox_android
 	: BrowserVersion(124u16, 0u16), safari : BrowserVersion(17u16, 5u16), safari_ios :
-	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.096466f32, },
+	BrowserVersion(17u16, 5u16), }, caniuse : & [], popularity : 0.122286f32, },
 	"css.properties.text-wrap.balance" => CSSFeature { id :
 	"css.properties.text-wrap.balance", name : "text-wrap: balance", description :
 	"The text-wrap: balance CSS declaration balances the length of each line when text is broken into multiple lines. Also known as headline balancing.",
@@ -23405,7 +23410,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(114u16, 0u16), chrome_android : BrowserVersion(114u16, 0u16), edge :
 	BrowserVersion(114u16, 0u16), firefox : BrowserVersion(124u16, 0u16), firefox_android
 	: BrowserVersion(124u16, 0u16), safari : BrowserVersion(17u16, 4u16), safari_ios :
-	BrowserVersion(17u16, 4u16), }, caniuse : & [], popularity : 23.462873f32, },
+	BrowserVersion(17u16, 4u16), }, caniuse : & [], popularity : 20.719395f32, },
 	"css.properties.timeline-scope" => CSSFeature { id : "css.properties.timeline-scope",
 	name : "Scroll-driven animations", description :
 	"The animation-timeline, scroll-timeline, and view-timeline CSS properties advance animations based on the user's scroll position.",
@@ -23485,7 +23490,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(36u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/css-touch-action"], popularity : 39.638866f32, },
+	["https://caniuse.com/css-touch-action"], popularity : 42.556526f32, },
 	"css.properties.touch-action.manipulation" => CSSFeature { id :
 	"css.properties.touch-action.manipulation", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
@@ -23497,7 +23502,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(36u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(9u16, 3u16), }, caniuse : &
-	["https://caniuse.com/css-touch-action"], popularity : 39.638866f32, },
+	["https://caniuse.com/css-touch-action"], popularity : 42.556526f32, },
 	"css.properties.touch-action.none" => CSSFeature { id :
 	"css.properties.touch-action.none", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
@@ -23509,7 +23514,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(36u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-touch-action"], popularity : 39.638866f32, },
+	["https://caniuse.com/css-touch-action"], popularity : 42.556526f32, },
 	"css.properties.touch-action.pan-down" => CSSFeature { id :
 	"css.properties.touch-action.pan-down", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
@@ -23519,7 +23524,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/css-touch-action"], popularity :
-	39.638866f32, }, "css.properties.touch-action.pan-left" => CSSFeature { id :
+	42.556526f32, }, "css.properties.touch-action.pan-left" => CSSFeature { id :
 	"css.properties.touch-action.pan-left", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
 	spec : "https://w3c.github.io/pointerevents/#the-touch-action-css-property", groups :
@@ -23528,7 +23533,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/css-touch-action"], popularity :
-	39.638866f32, }, "css.properties.touch-action.pan-right" => CSSFeature { id :
+	42.556526f32, }, "css.properties.touch-action.pan-right" => CSSFeature { id :
 	"css.properties.touch-action.pan-right", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
 	spec : "https://w3c.github.io/pointerevents/#the-touch-action-css-property", groups :
@@ -23537,7 +23542,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/css-touch-action"], popularity :
-	39.638866f32, }, "css.properties.touch-action.pan-up" => CSSFeature { id :
+	42.556526f32, }, "css.properties.touch-action.pan-up" => CSSFeature { id :
 	"css.properties.touch-action.pan-up", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
 	spec : "https://w3c.github.io/pointerevents/#the-touch-action-css-property", groups :
@@ -23546,7 +23551,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	edge : BrowserVersion(79u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
 	0), }, caniuse : & ["https://caniuse.com/css-touch-action"], popularity :
-	39.638866f32, }, "css.properties.touch-action.pan-x" => CSSFeature { id :
+	42.556526f32, }, "css.properties.touch-action.pan-x" => CSSFeature { id :
 	"css.properties.touch-action.pan-x", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
 	spec : "https://w3c.github.io/pointerevents/#the-touch-action-css-property", groups :
@@ -23557,7 +23562,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(36u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-touch-action"], popularity : 39.638866f32, },
+	["https://caniuse.com/css-touch-action"], popularity : 42.556526f32, },
 	"css.properties.touch-action.pan-y" => CSSFeature { id :
 	"css.properties.touch-action.pan-y", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
@@ -23569,7 +23574,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(36u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(52u16, 0u16), firefox_android : BrowserVersion(52u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-touch-action"], popularity : 39.638866f32, },
+	["https://caniuse.com/css-touch-action"], popularity : 42.556526f32, },
 	"css.properties.touch-action.pinch-zoom" => CSSFeature { id :
 	"css.properties.touch-action.pinch-zoom", name : "touch-action", description :
 	"The touch-action CSS property sets whether an element on a touch screen can be panned or pinched to zoom.",
@@ -23581,7 +23586,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(56u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(85u16, 0u16), firefox_android : BrowserVersion(85u16, 0u16), safari :
 	BrowserVersion(13u16, 0u16), safari_ios : BrowserVersion(13u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-touch-action"], popularity : 39.638866f32, },
+	["https://caniuse.com/css-touch-action"], popularity : 42.556526f32, },
 	"css.properties.transform" => CSSFeature { id : "css.properties.transform", name :
 	"2D transforms", description :
 	"The transform CSS property and its 2D transform functions allow rotating, scaling, skewing, and translating an element. Arbitrary 2D transforms are also possible using a transformation matrix.",
@@ -23603,7 +23608,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(64u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(55u16, 0u16), firefox_android : BrowserVersion(55u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & [], popularity : 5.830948f32, },
+	caniuse : & [], popularity : 4.054495f32, },
 	"css.properties.transform-box.border-box" => CSSFeature { id :
 	"css.properties.transform-box.border-box", name : "transform-box", description :
 	"The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.",
@@ -23613,7 +23618,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(118u16, 0u16), edge : BrowserVersion(118u16, 0u16),
 	firefox : BrowserVersion(55u16, 0u16), firefox_android : BrowserVersion(55u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & [], popularity : 5.830948f32, },
+	caniuse : & [], popularity : 4.054495f32, },
 	"css.properties.transform-box.content-box" => CSSFeature { id :
 	"css.properties.transform-box.content-box", name : "transform-box", description :
 	"The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.",
@@ -23623,7 +23628,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(118u16, 0u16), edge : BrowserVersion(118u16, 0u16),
 	firefox : BrowserVersion(125u16, 0u16), firefox_android : BrowserVersion(125u16,
 	0u16), safari : BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16,
-	4u16), }, caniuse : & [], popularity : 5.830948f32, },
+	4u16), }, caniuse : & [], popularity : 4.054495f32, },
 	"css.properties.transform-box.fill-box" => CSSFeature { id :
 	"css.properties.transform-box.fill-box", name : "transform-box", description :
 	"The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.",
@@ -23634,7 +23639,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(64u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(55u16, 0u16), firefox_android : BrowserVersion(55u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & [], popularity : 5.830948f32, },
+	caniuse : & [], popularity : 4.054495f32, },
 	"css.properties.transform-box.stroke-box" => CSSFeature { id :
 	"css.properties.transform-box.stroke-box", name : "transform-box", description :
 	"The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.",
@@ -23644,7 +23649,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(118u16, 0u16), edge : BrowserVersion(118u16, 0u16),
 	firefox : BrowserVersion(125u16, 0u16), firefox_android : BrowserVersion(125u16,
 	0u16), safari : BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16,
-	4u16), }, caniuse : & [], popularity : 5.830948f32, },
+	4u16), }, caniuse : & [], popularity : 4.054495f32, },
 	"css.properties.transform-box.view-box" => CSSFeature { id :
 	"css.properties.transform-box.view-box", name : "transform-box", description :
 	"The transform-box CSS property sets the position and dimensions of the reference box relative to which an element's transformations are calculated.",
@@ -23655,7 +23660,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(64u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(55u16, 0u16), firefox_android : BrowserVersion(55u16, 0u16),
 	safari : BrowserVersion(11u16, 0u16), safari_ios : BrowserVersion(11u16, 0u16), },
-	caniuse : & [], popularity : 5.830948f32, }, "css.properties.transform-origin" =>
+	caniuse : & [], popularity : 4.054495f32, }, "css.properties.transform-origin" =>
 	CSSFeature { id : "css.properties.transform-origin", name : "2D transforms",
 	description :
 	"The transform CSS property and its 2D transform functions allow rotating, scaling, skewing, and translating an element. Arbitrary 2D transforms are also possible using a transformation matrix.",
@@ -23799,7 +23804,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(117u16, 0u16), edge : BrowserVersion(117u16, 0u16),
 	firefox : BrowserVersion(129u16, 0u16), firefox_android : BrowserVersion(129u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.637687f32, },
+	4u16), }, caniuse : & [], popularity : 0.593374f32, },
 	"css.properties.transition-behavior.transitionable_content-visibility" => CSSFeature
 	{ id : "css.properties.transition-behavior.transitionable_content-visibility", name :
 	"display animation", description :
@@ -24115,7 +24120,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(117u16, 0u16), edge : BrowserVersion(117u16, 0u16),
 	firefox : BrowserVersion(129u16, 0u16), firefox_android : BrowserVersion(129u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.637687f32, }, "css.properties.translate" =>
+	4u16), }, caniuse : & [], popularity : 0.593374f32, }, "css.properties.translate" =>
 	CSSFeature { id : "css.properties.translate", name :
 	"Individual transform properties", description :
 	"The translate, rotate, and scale CSS properties apply single transformations independently, as opposed to applying multiple transformations with the transform CSS property.",
@@ -24224,7 +24229,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(69u16, 0u16), firefox_android :
 	BrowserVersion(79u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/user-select-none"],
-	popularity : 68.14118f32, }, "css.properties.user-select.all" => CSSFeature { id :
+	popularity : 66.80436f32, }, "css.properties.user-select.all" => CSSFeature { id :
 	"css.properties.user-select.all", name : "user-select", description :
 	"The user-select CSS property controls which elements can be selected by the user.",
 	spec : "https://drafts.csswg.org/css-ui-4/#content-selection", groups : & [],
@@ -24233,7 +24238,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(69u16, 0u16), firefox_android :
 	BrowserVersion(79u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/user-select-none"],
-	popularity : 68.14118f32, }, "css.properties.user-select.auto" => CSSFeature { id :
+	popularity : 66.80436f32, }, "css.properties.user-select.auto" => CSSFeature { id :
 	"css.properties.user-select.auto", name : "user-select", description :
 	"The user-select CSS property controls which elements can be selected by the user.",
 	spec : "https://drafts.csswg.org/css-ui-4/#content-selection", groups : & [],
@@ -24242,7 +24247,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(69u16, 0u16), firefox_android :
 	BrowserVersion(79u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/user-select-none"],
-	popularity : 68.14118f32, }, "css.properties.user-select.none" => CSSFeature { id :
+	popularity : 66.80436f32, }, "css.properties.user-select.none" => CSSFeature { id :
 	"css.properties.user-select.none", name : "user-select", description :
 	"The user-select CSS property controls which elements can be selected by the user.",
 	spec : "https://drafts.csswg.org/css-ui-4/#content-selection", groups : & [],
@@ -24251,7 +24256,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(69u16, 0u16), firefox_android :
 	BrowserVersion(79u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/user-select-none"],
-	popularity : 68.14118f32, }, "css.properties.user-select.text" => CSSFeature { id :
+	popularity : 66.80436f32, }, "css.properties.user-select.text" => CSSFeature { id :
 	"css.properties.user-select.text", name : "user-select", description :
 	"The user-select CSS property controls which elements can be selected by the user.",
 	spec : "https://drafts.csswg.org/css-ui-4/#content-selection", groups : & [],
@@ -24260,7 +24265,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(79u16, 0u16), firefox : BrowserVersion(69u16, 0u16), firefox_android :
 	BrowserVersion(79u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/user-select-none"],
-	popularity : 68.14118f32, }, "css.properties.vector-effect" => CSSFeature { id :
+	popularity : 66.80436f32, }, "css.properties.vector-effect" => CSSFeature { id :
 	"css.properties.vector-effect", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
 	spec : "https://svgwg.org/svg2-draft/", groups : & ["svg"], baseline_status :
@@ -24281,7 +24286,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.baseline"
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.baseline"
 	=> CSSFeature { id : "css.properties.vertical-align.baseline", name :
 	"vertical-align", description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24292,7 +24297,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.bottom"
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.bottom"
 	=> CSSFeature { id : "css.properties.vertical-align.bottom", name : "vertical-align",
 	description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24303,7 +24308,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.middle"
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.middle"
 	=> CSSFeature { id : "css.properties.vertical-align.middle", name : "vertical-align",
 	description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24314,7 +24319,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.sub" =>
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.sub" =>
 	CSSFeature { id : "css.properties.vertical-align.sub", name : "vertical-align",
 	description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24325,7 +24330,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.super" =>
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.super" =>
 	CSSFeature { id : "css.properties.vertical-align.super", name : "vertical-align",
 	description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24336,7 +24341,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, },
+	caniuse : & [], popularity : 81.57195f32, },
 	"css.properties.vertical-align.text-bottom" => CSSFeature { id :
 	"css.properties.vertical-align.text-bottom", name : "vertical-align", description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24347,7 +24352,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.text-top"
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.text-top"
 	=> CSSFeature { id : "css.properties.vertical-align.text-top", name :
 	"vertical-align", description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24358,7 +24363,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.vertical-align.top" =>
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.vertical-align.top" =>
 	CSSFeature { id : "css.properties.vertical-align.top", name : "vertical-align",
 	description :
 	"The vertical-align CSS property sets the vertical alignment of inline, inline-block, and table cell elements. It has no effect on block-level elements.",
@@ -24369,7 +24374,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 82.04088f32, }, "css.properties.view-timeline" =>
+	caniuse : & [], popularity : 81.57195f32, }, "css.properties.view-timeline" =>
 	CSSFeature { id : "css.properties.view-timeline", name : "Scroll-driven animations",
 	description :
 	"The animation-timeline, scroll-timeline, and view-timeline CSS properties advance animations based on the user's scroll position.",
@@ -24468,7 +24473,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(125u16, 0u16), edge : BrowserVersion(125u16, 0u16),
 	firefox : BrowserVersion(144u16, 0u16), firefox_android : BrowserVersion(144u16,
 	0u16), safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16,
-	2u16), }, caniuse : & [], popularity : 0.071651f32, },
+	2u16), }, caniuse : & [], popularity : 0.072163f32, },
 	"css.properties.view-transition-class.none" => CSSFeature { id :
 	"css.properties.view-transition-class.none", name : "view-transition-class",
 	description :
@@ -24481,7 +24486,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(125u16, 0u16), edge : BrowserVersion(125u16, 0u16),
 	firefox : BrowserVersion(144u16, 0u16), firefox_android : BrowserVersion(144u16,
 	0u16), safari : BrowserVersion(18u16, 2u16), safari_ios : BrowserVersion(18u16,
-	2u16), }, caniuse : & [], popularity : 0.071651f32, },
+	2u16), }, caniuse : & [], popularity : 0.072163f32, },
 	"css.properties.view-transition-name" => CSSFeature { id :
 	"css.properties.view-transition-name", name : "View transitions", description :
 	"View transitions allow you to create animated visual transitions between different states of a document.",
@@ -24526,7 +24531,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 76.14372f32, }, "css.properties.visibility.collapse" =>
+	caniuse : & [], popularity : 75.34817f32, }, "css.properties.visibility.collapse" =>
 	CSSFeature { id : "css.properties.visibility.collapse", name : "visibility",
 	description :
 	"The visibility CSS property sets whether an element is shown. Invisible elements still affect the document layout.",
@@ -24537,7 +24542,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 76.14372f32, }, "css.properties.visibility.hidden" =>
+	caniuse : & [], popularity : 75.34817f32, }, "css.properties.visibility.hidden" =>
 	CSSFeature { id : "css.properties.visibility.hidden", name : "visibility",
 	description :
 	"The visibility CSS property sets whether an element is shown. Invisible elements still affect the document layout.",
@@ -24548,7 +24553,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 76.14372f32, }, "css.properties.visibility.visible" =>
+	caniuse : & [], popularity : 75.34817f32, }, "css.properties.visibility.visible" =>
 	CSSFeature { id : "css.properties.visibility.visible", name : "visibility",
 	description :
 	"The visibility CSS property sets whether an element is shown. Invisible elements still affect the document layout.",
@@ -24559,7 +24564,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 76.14372f32, }, "css.properties.white-space" =>
+	caniuse : & [], popularity : 75.34817f32, }, "css.properties.white-space" =>
 	CSSFeature { id : "css.properties.white-space", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#white-space-property", groups : &
@@ -24570,7 +24575,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space-collapse" => CSSFeature
+	[], popularity : 81.21353f32, }, "css.properties.white-space-collapse" => CSSFeature
 	{ id : "css.properties.white-space-collapse", name : "white-space-collapse",
 	description :
 	"The white-space-collapse CSS property sets whether new line characters are shown as line breaks, and whether multiple consecutive spaces are all displayed or combined.",
@@ -24581,7 +24586,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(114u16, 0u16), edge : BrowserVersion(114u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.760712f32, },
+	4u16), }, caniuse : & [], popularity : 0.61826f32, },
 	"css.properties.white-space-collapse.break-spaces" => CSSFeature { id :
 	"css.properties.white-space-collapse.break-spaces", name : "white-space-collapse",
 	description :
@@ -24593,7 +24598,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(114u16, 0u16), edge : BrowserVersion(114u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.760712f32, },
+	4u16), }, caniuse : & [], popularity : 0.61826f32, },
 	"css.properties.white-space-collapse.collapse" => CSSFeature { id :
 	"css.properties.white-space-collapse.collapse", name : "white-space-collapse",
 	description :
@@ -24605,7 +24610,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(114u16, 0u16), edge : BrowserVersion(114u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.760712f32, },
+	4u16), }, caniuse : & [], popularity : 0.61826f32, },
 	"css.properties.white-space-collapse.preserve" => CSSFeature { id :
 	"css.properties.white-space-collapse.preserve", name : "white-space-collapse",
 	description :
@@ -24617,7 +24622,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(114u16, 0u16), edge : BrowserVersion(114u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.760712f32, },
+	4u16), }, caniuse : & [], popularity : 0.61826f32, },
 	"css.properties.white-space-collapse.preserve-breaks" => CSSFeature { id :
 	"css.properties.white-space-collapse.preserve-breaks", name : "white-space-collapse",
 	description :
@@ -24629,7 +24634,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(114u16, 0u16), edge : BrowserVersion(114u16, 0u16),
 	firefox : BrowserVersion(124u16, 0u16), firefox_android : BrowserVersion(124u16,
 	0u16), safari : BrowserVersion(17u16, 4u16), safari_ios : BrowserVersion(17u16,
-	4u16), }, caniuse : & [], popularity : 0.760712f32, },
+	4u16), }, caniuse : & [], popularity : 0.61826f32, },
 	"css.properties.white-space-collapse.preserve-spaces" => CSSFeature { id :
 	"css.properties.white-space-collapse.preserve-spaces", name : "white-space-collapse",
 	description :
@@ -24639,7 +24644,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(124u16, 0u16),
 	firefox_android : BrowserVersion(124u16, 0u16), safari : BrowserVersion(0, 0),
-	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.760712f32, },
+	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 0.61826f32, },
 	"css.properties.white-space.break-spaces" => CSSFeature { id :
 	"css.properties.white-space.break-spaces", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
@@ -24651,7 +24656,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(76u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(69u16, 0u16), firefox_android : BrowserVersion(79u16, 0u16), safari :
 	BrowserVersion(13u16, 1u16), safari_ios : BrowserVersion(13u16, 4u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space.normal" => CSSFeature {
+	[], popularity : 81.21353f32, }, "css.properties.white-space.normal" => CSSFeature {
 	id : "css.properties.white-space.normal", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#white-space-property", groups : &
@@ -24662,7 +24667,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space.nowrap" => CSSFeature {
+	[], popularity : 81.21353f32, }, "css.properties.white-space.nowrap" => CSSFeature {
 	id : "css.properties.white-space.nowrap", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#white-space-property", groups : &
@@ -24673,7 +24678,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space.pre" => CSSFeature { id
+	[], popularity : 81.21353f32, }, "css.properties.white-space.pre" => CSSFeature { id
 	: "css.properties.white-space.pre", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#white-space-property", groups : &
@@ -24684,7 +24689,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space.pre-line" => CSSFeature
+	[], popularity : 81.21353f32, }, "css.properties.white-space.pre-line" => CSSFeature
 	{ id : "css.properties.white-space.pre-line", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#white-space-property", groups : &
@@ -24695,7 +24700,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 5u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space.pre-wrap" => CSSFeature
+	[], popularity : 81.21353f32, }, "css.properties.white-space.pre-wrap" => CSSFeature
 	{ id : "css.properties.white-space.pre-wrap", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
 	spec : "https://drafts.csswg.org/css-text-4/#white-space-property", groups : &
@@ -24706,7 +24711,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(3u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.white-space.shorthand_values" =>
+	[], popularity : 81.21353f32, }, "css.properties.white-space.shorthand_values" =>
 	CSSFeature { id : "css.properties.white-space.shorthand_values", name :
 	"white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
@@ -24715,7 +24720,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 81.996216f32, },
+	0), }, caniuse : & [], popularity : 81.21353f32, },
 	"css.properties.white-space.svg_elements" => CSSFeature { id :
 	"css.properties.white-space.svg_elements", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
@@ -24724,7 +24729,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserSupport { chrome : BrowserVersion(0, 0), chrome_android : BrowserVersion(0,
 	0), edge : BrowserVersion(0, 0), firefox : BrowserVersion(36u16, 0u16),
 	firefox_android : BrowserVersion(36u16, 0u16), safari : BrowserVersion(0, 0),
-	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 81.996216f32, },
+	safari_ios : BrowserVersion(0, 0), }, caniuse : & [], popularity : 81.21353f32, },
 	"css.properties.white-space.textarea_support" => CSSFeature { id :
 	"css.properties.white-space.textarea_support", name : "white-space", description :
 	"The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.",
@@ -24736,7 +24741,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16), safari :
 	BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 81.996216f32, }, "css.properties.widows" => CSSFeature { id :
+	[], popularity : 81.21353f32, }, "css.properties.widows" => CSSFeature { id :
 	"css.properties.widows", name : "Widows and orphans", description :
 	"The widows and orphans CSS properties set the minimum lines included in a text fragment created by page, column, or region breaks.",
 	spec : "https://drafts.csswg.org/css-break-4/#widows-orphans", groups : & ["layout"],
@@ -24853,7 +24858,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(36u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/will-change"], popularity : 39.18522f32, },
+	caniuse : & ["https://caniuse.com/will-change"], popularity : 37.99521f32, },
 	"css.properties.will-change.auto" => CSSFeature { id :
 	"css.properties.will-change.auto", name : "will-change", description :
 	"The will-change CSS property gives hints to the browser about expected changes to an element's scroll position, contents, or style. These hints allow browsers to optimize for upcoming style changes.",
@@ -24864,7 +24869,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(36u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/will-change"], popularity : 39.18522f32, },
+	caniuse : & ["https://caniuse.com/will-change"], popularity : 37.99521f32, },
 	"css.properties.will-change.contents" => CSSFeature { id :
 	"css.properties.will-change.contents", name : "will-change", description :
 	"The will-change CSS property gives hints to the browser about expected changes to an element's scroll position, contents, or style. These hints allow browsers to optimize for upcoming style changes.",
@@ -24875,7 +24880,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(36u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/will-change"], popularity : 39.18522f32, },
+	caniuse : & ["https://caniuse.com/will-change"], popularity : 37.99521f32, },
 	"css.properties.will-change.scroll-position" => CSSFeature { id :
 	"css.properties.will-change.scroll-position", name : "will-change", description :
 	"The will-change CSS property gives hints to the browser about expected changes to an element's scroll position, contents, or style. These hints allow browsers to optimize for upcoming style changes.",
@@ -24886,7 +24891,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(36u16, 0u16), edge : BrowserVersion(79u16, 0u16),
 	firefox : BrowserVersion(36u16, 0u16), firefox_android : BrowserVersion(36u16, 0u16),
 	safari : BrowserVersion(9u16, 1u16), safari_ios : BrowserVersion(9u16, 3u16), },
-	caniuse : & ["https://caniuse.com/will-change"], popularity : 39.18522f32, },
+	caniuse : & ["https://caniuse.com/will-change"], popularity : 37.99521f32, },
 	"css.properties.word-break" => CSSFeature { id : "css.properties.word-break", name :
 	"word-break", description :
 	"The word-break CSS property sets how lines break within words.", spec :
@@ -24897,7 +24902,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16),
 	safari : BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(2u16, 0u16), },
-	caniuse : & ["https://caniuse.com/word-break"], popularity : 57.144447f32, },
+	caniuse : & ["https://caniuse.com/word-break"], popularity : 56.395496f32, },
 	"css.properties.word-break.auto-phrase" => CSSFeature { id :
 	"css.properties.word-break.auto-phrase", name : "word-break: auto-phrase",
 	description :
@@ -24918,7 +24923,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16),
 	safari : BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(2u16, 0u16), },
-	caniuse : & ["https://caniuse.com/word-break"], popularity : 57.144447f32, },
+	caniuse : & ["https://caniuse.com/word-break"], popularity : 56.395496f32, },
 	"css.properties.word-break.break-word" => CSSFeature { id :
 	"css.properties.word-break.break-word", name : "word-break: break-word", description
 	:
@@ -24939,7 +24944,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(44u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16),
 	safari : BrowserVersion(9u16, 0u16), safari_ios : BrowserVersion(9u16, 0u16), },
-	caniuse : & ["https://caniuse.com/word-break"], popularity : 57.144447f32, },
+	caniuse : & ["https://caniuse.com/word-break"], popularity : 56.395496f32, },
 	"css.properties.word-break.normal" => CSSFeature { id :
 	"css.properties.word-break.normal", name : "word-break", description :
 	"The word-break CSS property sets how lines break within words.", spec :
@@ -24950,7 +24955,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(15u16, 0u16), firefox_android : BrowserVersion(15u16, 0u16),
 	safari : BrowserVersion(3u16, 0u16), safari_ios : BrowserVersion(2u16, 0u16), },
-	caniuse : & ["https://caniuse.com/word-break"], popularity : 57.144447f32, },
+	caniuse : & ["https://caniuse.com/word-break"], popularity : 56.395496f32, },
 	"css.properties.word-spacing" => CSSFeature { id : "css.properties.word-spacing",
 	name : "word-spacing", description :
 	"The word-spacing CSS property sets the amount of white space between words.", spec :
@@ -24961,7 +24966,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 14.449815f32, }, "css.properties.word-spacing.normal" =>
+	caniuse : & [], popularity : 12.207712f32, }, "css.properties.word-spacing.normal" =>
 	CSSFeature { id : "css.properties.word-spacing.normal", name : "word-spacing",
 	description :
 	"The word-spacing CSS property sets the amount of white space between words.", spec :
@@ -24972,7 +24977,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 14.449815f32, },
+	caniuse : & [], popularity : 12.207712f32, },
 	"css.properties.word-spacing.svg_elements" => CSSFeature { id :
 	"css.properties.word-spacing.svg_elements", name : "SVG", description :
 	"The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.",
@@ -24994,7 +24999,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(48u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(41u16, 0u16), firefox_android : BrowserVersion(41u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 6.9805f32, },
+	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 7.407496f32, },
 	"css.properties.writing-mode.horizontal-tb" => CSSFeature { id :
 	"css.properties.writing-mode.horizontal-tb", name : "writing-mode", description :
 	"The writing-mode CSS property sets whether text is laid out horizontally or vertically, and left to right, or right to left.",
@@ -25005,7 +25010,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(48u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 6.9805f32, },
+	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 7.407496f32, },
 	"css.properties.writing-mode.lr" => CSSFeature { id :
 	"css.properties.writing-mode.lr", name : "writing-mode SVG 1.1 values", description :
 	"The lr, lr-tb, rl, rl-tb, tb, and tb-rl keyword values for the writing-mode CSS property set the text direction for elements in SVG 1.1 documents.",
@@ -25053,7 +25058,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(132u16, 0u16), edge : BrowserVersion(132u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16, 4u16), },
-	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 6.9805f32, },
+	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 7.407496f32, },
 	"css.properties.writing-mode.sideways-rl" => CSSFeature { id :
 	"css.properties.writing-mode.sideways-rl", name : "writing-mode", description :
 	"The writing-mode CSS property sets whether text is laid out horizontally or vertically, and left to right, or right to left.",
@@ -25063,7 +25068,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(132u16, 0u16), edge : BrowserVersion(132u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(18u16, 4u16), safari_ios : BrowserVersion(18u16, 4u16), },
-	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 6.9805f32, },
+	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 7.407496f32, },
 	"css.properties.writing-mode.tb" => CSSFeature { id :
 	"css.properties.writing-mode.tb", name : "writing-mode SVG 1.1 values", description :
 	"The lr, lr-tb, rl, rl-tb, tb, and tb-rl keyword values for the writing-mode CSS property set the text direction for elements in SVG 1.1 documents.",
@@ -25093,7 +25098,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(48u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 6.9805f32, },
+	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 7.407496f32, },
 	"css.properties.writing-mode.vertical-rl" => CSSFeature { id :
 	"css.properties.writing-mode.vertical-rl", name : "writing-mode", description :
 	"The writing-mode CSS property sets whether text is laid out horizontally or vertically, and left to right, or right to left.",
@@ -25104,7 +25109,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(48u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(43u16, 0u16), firefox_android : BrowserVersion(43u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 6.9805f32, },
+	caniuse : & ["https://caniuse.com/css-writing-mode"], popularity : 7.407496f32, },
 	"css.properties.writing-mode.vertical_oriented_form_controls" => CSSFeature { id :
 	"css.properties.writing-mode.vertical_oriented_form_controls", name :
 	"Vertical form controls", description :
@@ -25146,7 +25151,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 85.707275f32, }, "css.properties.z-index.auto" =>
+	caniuse : & [], popularity : 85.83325f32, }, "css.properties.z-index.auto" =>
 	CSSFeature { id : "css.properties.z-index.auto", name : "z-index", description :
 	"The z-index CSS property orders overlapping elements, with higher values appearing in front of or on top of lower values.",
 	spec : "https://drafts.csswg.org/css2/#z-index", groups : & [], baseline_status :
@@ -25156,9 +25161,9 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 85.707275f32, },
-	"css.properties.z-index.negative_values" => CSSFeature { id :
-	"css.properties.z-index.negative_values", name : "z-index", description :
+	caniuse : & [], popularity : 85.83325f32, }, "css.properties.z-index.negative_values"
+	=> CSSFeature { id : "css.properties.z-index.negative_values", name : "z-index",
+	description :
 	"The z-index CSS property orders overlapping elements, with higher values appearing in front of or on top of lower values.",
 	spec : "https://drafts.csswg.org/css2/#z-index", groups : & [], baseline_status :
 	BaselineStatus::High { since : NaiveDate::from_ymd_opt(2018i32, 1u32, 29u32)
@@ -25167,8 +25172,8 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(3u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 85.707275f32, }, "css.properties.zoom" => CSSFeature {
-	id : "css.properties.zoom", name : "zoom", description :
+	caniuse : & [], popularity : 85.83325f32, }, "css.properties.zoom" => CSSFeature { id
+	: "css.properties.zoom", name : "zoom", description :
 	"The zoom CSS property scales the size of an element. Unlike the transform property, a zoomed element affects page layout.",
 	spec : "https://drafts.csswg.org/css-viewport/#zoom-property", groups : & [],
 	baseline_status : BaselineStatus::Low(NaiveDate::from_ymd_opt(2024i32, 5u32, 14u32)
@@ -25176,7 +25181,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(126u16, 0u16), firefox_android : BrowserVersion(126u16,
 	0u16), safari : BrowserVersion(3u16, 1u16), safari_ios : BrowserVersion(3u16, 0u16),
-	}, caniuse : & ["https://caniuse.com/css-zoom"], popularity : 27.808554f32, },
+	}, caniuse : & ["https://caniuse.com/css-zoom"], popularity : 27.998568f32, },
 	"css.selectors.active" => CSSFeature { id : "css.selectors.active", name :
 	"User action pseudo-classes", description :
 	"The :active, :focus, and :hover CSS pseudo-classes match elements based on how users are interacting with them.",
@@ -26086,7 +26091,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(86u16, 0u16), firefox : BrowserVersion(68u16, 0u16), firefox_android :
 	BrowserVersion(68u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-marker-pseudo"],
-	popularity : 0.052486f32, }, "css.selectors.marker.animation_and_transition_support"
+	popularity : 0.06845f32, }, "css.selectors.marker.animation_and_transition_support"
 	=> CSSFeature { id : "css.selectors.marker.animation_and_transition_support", name :
 	"::marker", description :
 	"The ::marker CSS pseudo-element selects list item markers for styling numbers or bullets.",
@@ -26096,7 +26101,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(86u16, 0u16), firefox : BrowserVersion(80u16, 0u16), firefox_android :
 	BrowserVersion(80u16, 0u16), safari : BrowserVersion(0, 0), safari_ios :
 	BrowserVersion(0, 0), }, caniuse : & ["https://caniuse.com/css-marker-pseudo"],
-	popularity : 0.052486f32, }, "css.selectors.modal" => CSSFeature { id :
+	popularity : 0.06845f32, }, "css.selectors.modal" => CSSFeature { id :
 	"css.selectors.modal", name : ":modal", description :
 	"The :modal pseudo-class selects elements that put other elements into a non-interactive state, such as a fullscreen element or a <dialog> element used with showModal().",
 	spec : "https://drafts.csswg.org/selectors-4/#modal-state", groups : & ["selectors"],
@@ -27468,7 +27473,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(59u16, 0u16), edge : BrowserVersion(79u16, 0u16), firefox :
 	BrowserVersion(30u16, 0u16), firefox_android : BrowserVersion(54u16, 0u16), safari :
 	BrowserVersion(8u16, 0u16), safari_ios : BrowserVersion(8u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-backgroundblendmode"], popularity : 4.581009f32, },
+	["https://caniuse.com/css-backgroundblendmode"], popularity : 3.73773f32, },
 	"css.types.calc" => CSSFeature { id : "css.types.calc", name : "calc()", description
 	:
 	"The calc() CSS function computes mathematical expressions such a calc(100%/3 - 1em).",
@@ -27607,7 +27612,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 90.552376f32, }, "css.types.color.color" => CSSFeature {
+	caniuse : & [], popularity : 90.0028f32, }, "css.types.color.color" => CSSFeature {
 	id : "css.types.color.color", name : "color()", description :
 	"The color() function picks a color from a given color space. Wide gamut color spaces like display-p3 allow showing more vibrant and saturated colors than the standard srgb color space.",
 	spec : "https://drafts.csswg.org/css-color-4/#color-function", groups : &
@@ -28061,7 +28066,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 90.552376f32, }, "css.types.corner-shape-value" =>
+	caniuse : & [], popularity : 90.0028f32, }, "css.types.corner-shape-value" =>
 	CSSFeature { id : "css.types.corner-shape-value", name : "corner-shape", description
 	:
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28070,7 +28075,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.bevel" => CSSFeature { id :
 	"css.types.corner-shape-value.bevel", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28079,7 +28084,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.notch" => CSSFeature { id :
 	"css.types.corner-shape-value.notch", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28088,7 +28093,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.round" => CSSFeature { id :
 	"css.types.corner-shape-value.round", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28097,7 +28102,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.scoop" => CSSFeature { id :
 	"css.types.corner-shape-value.scoop", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28106,7 +28111,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.square" => CSSFeature { id :
 	"css.types.corner-shape-value.square", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28115,7 +28120,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.squircle" => CSSFeature { id :
 	"css.types.corner-shape-value.squircle", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28124,7 +28129,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, },
+	0), }, caniuse : & [], popularity : 0.569545f32, },
 	"css.types.corner-shape-value.superellipse" => CSSFeature { id :
 	"css.types.corner-shape-value.superellipse", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
@@ -28133,7 +28138,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, }, "css.types.cos" => CSSFeature {
+	0), }, caniuse : & [], popularity : 0.569545f32, }, "css.types.cos" => CSSFeature {
 	id : "css.types.cos", name :
 	"sin(), cos(), tan(), asin(), acos(), atan(), and atan2() (CSS)", description :
 	"The sin(), cos(), tan(), asin(), acos(), atan(), and atan2() CSS functions compute various trigonometric functions.",
@@ -28415,7 +28420,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.blur" => CSSFeature { id :
 	"css.types.filter-function.blur", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28426,7 +28431,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.brightness" => CSSFeature { id :
 	"css.types.filter-function.brightness", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28437,7 +28442,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.contrast" => CSSFeature { id :
 	"css.types.filter-function.contrast", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28448,7 +28453,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.drop-shadow" => CSSFeature { id :
 	"css.types.filter-function.drop-shadow", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28459,7 +28464,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.grayscale" => CSSFeature { id :
 	"css.types.filter-function.grayscale", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28470,7 +28475,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.hue-rotate" => CSSFeature { id :
 	"css.types.filter-function.hue-rotate", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28481,7 +28486,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.invert" => CSSFeature { id :
 	"css.types.filter-function.invert", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28492,7 +28497,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.opacity" => CSSFeature { id :
 	"css.types.filter-function.opacity", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28503,7 +28508,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.saturate" => CSSFeature { id :
 	"css.types.filter-function.saturate", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28514,7 +28519,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.filter-function.sepia" => CSSFeature { id :
 	"css.types.filter-function.sepia", name : "filter", description :
 	"The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects.",
@@ -28525,7 +28530,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(53u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(35u16, 0u16), firefox_android : BrowserVersion(35u16, 0u16),
 	safari : BrowserVersion(6u16, 0u16), safari_ios : BrowserVersion(6u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-filters"], popularity : 52.438976f32, },
+	caniuse : & ["https://caniuse.com/css-filters"], popularity : 49.582394f32, },
 	"css.types.flex" => CSSFeature { id : "css.types.flex", name : "Grid", description :
 	"CSS grid is a two-dimensional layout system, which lays content out in rows and columns.",
 	spec : "https://drafts.csswg.org/css-grid-3/", groups : & ["grid"], baseline_status :
@@ -28535,7 +28540,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(29u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(40u16, 0u16), firefox_android : BrowserVersion(40u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.615685f32, },
+	caniuse : & ["https://caniuse.com/css-grid"], popularity : 0.753135f32, },
 	"css.types.global_keywords" => CSSFeature { id : "css.types.global_keywords", name :
 	"inherit", description :
 	"The inherit keyword resets any CSS property to the computed value of that property from the parent element.",
@@ -28569,7 +28574,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(13u16, 0u16), firefox :
 	BrowserVersion(19u16, 0u16), firefox_android : BrowserVersion(19u16, 0u16), safari :
 	BrowserVersion(1u16, 2u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	["https://caniuse.com/css-initial-value"], popularity : 7.13536f32, },
+	["https://caniuse.com/css-initial-value"], popularity : 5.167134f32, },
 	"css.types.global_keywords.revert" => CSSFeature { id :
 	"css.types.global_keywords.revert", name : "revert", description :
 	"The revert CSS keyword resets any property to its previous default, provided by either the user or browser stylesheets. For example, setting display: revert on a <div> will likely result in display: block, the browser default style. This is often confused with initial.",
@@ -29166,7 +29171,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 85.707275f32, }, "css.types.length" => CSSFeature { id :
+	caniuse : & [], popularity : 85.83325f32, }, "css.types.length" => CSSFeature { id :
 	"css.types.length", name : "Width and height", description :
 	"The width and height CSS properties set the preferred physical size of an element.",
 	spec : "https://drafts.csswg.org/css-sizing-3/#preferred-size-properties", groups : &
@@ -29515,7 +29520,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 87.11583f32, },
+	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 86.371574f32, },
 	"css.types.number.scientific_notation" => CSSFeature { id :
 	"css.types.number.scientific_notation", name : "opacity", description :
 	"The opacity CSS property sets the transparency of an element.", spec :
@@ -29526,7 +29531,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(43u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(29u16, 0u16), firefox_android : BrowserVersion(29u16, 0u16),
 	safari : BrowserVersion(10u16, 1u16), safari_ios : BrowserVersion(10u16, 3u16), },
-	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 87.11583f32, },
+	caniuse : & ["https://caniuse.com/css-opacity"], popularity : 86.371574f32, },
 	"css.types.overflow" => CSSFeature { id : "css.types.overflow", name : "overflow",
 	description :
 	"The overflow CSS property sets the behavior for when content doesn't fit in an element.",
@@ -29777,7 +29782,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 54.01846f32, }, "css.types.shape.rect" => CSSFeature { id :
+	[], popularity : 50.85726f32, }, "css.types.shape.rect" => CSSFeature { id :
 	"css.types.shape.rect", name : "clip", description :
 	"The clip CSS property sets the visible area of an absolutely positioned element.",
 	spec : "https://drafts.csswg.org/css-masking-1/#clip-property", groups : &
@@ -29786,7 +29791,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16), firefox :
 	BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16), safari :
 	BrowserVersion(1u16, 3u16), safari_ios : BrowserVersion(1u16, 0u16), }, caniuse : &
-	[], popularity : 54.01846f32, }, "css.types.sibling-count" => CSSFeature { id :
+	[], popularity : 50.85726f32, }, "css.types.sibling-count" => CSSFeature { id :
 	"css.types.sibling-count", name : "sibling-count() and sibling-index()", description
 	:
 	"The sibling-count() and sibling-index() CSS functions return integers that are useful to style elements based on their positions among siblings or on the number of siblings, for example as part of a calc() expression.",
@@ -29845,7 +29850,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, },
+	caniuse : & [], popularity : 81.69357f32, },
 	"css.types.string.unicode_escaped_characters" => CSSFeature { id :
 	"css.types.string.unicode_escaped_characters", name : "Content", description :
 	"The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.",
@@ -29856,7 +29861,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	chrome_android : BrowserVersion(18u16, 0u16), edge : BrowserVersion(12u16, 0u16),
 	firefox : BrowserVersion(1u16, 0u16), firefox_android : BrowserVersion(4u16, 0u16),
 	safari : BrowserVersion(1u16, 0u16), safari_ios : BrowserVersion(1u16, 0u16), },
-	caniuse : & [], popularity : 81.94204f32, }, "css.types.superellipse" => CSSFeature {
+	caniuse : & [], popularity : 81.69357f32, }, "css.types.superellipse" => CSSFeature {
 	id : "css.types.superellipse", name : "corner-shape", description :
 	"The corner-shape CSS property sets the shape of an element's corners when using border-radius, allowing for shapes other than rounded corners. For example, corner-shape: squircle is a shape in between a square and rounded corner.",
 	spec : "https://drafts.csswg.org/css-borders-4/#corner-shaping", groups : & [],
@@ -29864,7 +29869,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(139u16, 0u16), chrome_android : BrowserVersion(139u16, 0u16), edge :
 	BrowserVersion(139u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(0, 0), safari_ios : BrowserVersion(0,
-	0), }, caniuse : & [], popularity : 0.648806f32, }, "css.types.tan" => CSSFeature {
+	0), }, caniuse : & [], popularity : 0.569545f32, }, "css.types.tan" => CSSFeature {
 	id : "css.types.tan", name :
 	"sin(), cos(), tan(), asin(), acos(), atan(), and atan2() (CSS)", description :
 	"The sin(), cos(), tan(), asin(), acos(), atan(), and atan2() CSS functions compute various trigonometric functions.",
@@ -29885,7 +29890,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.types.text-edge.alphabetic" => CSSFeature { id :
 	"css.types.text-edge.alphabetic", name : "text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -29895,7 +29900,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.types.text-edge.cap" => CSSFeature { id : "css.types.text-edge.cap", name :
 	"text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -29905,7 +29910,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.types.text-edge.ex" => CSSFeature { id : "css.types.text-edge.ex", name :
 	"text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -29915,7 +29920,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.types.text-edge.text" => CSSFeature { id : "css.types.text-edge.text", name :
 	"text-box", description :
 	"The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.",
@@ -29925,7 +29930,7 @@ pub static CSS_FEATURES: Map<&'static str, CSSFeature> = phf_map! {
 	BrowserVersion(133u16, 0u16), firefox : BrowserVersion(0, 0), firefox_android :
 	BrowserVersion(0, 0), safari : BrowserVersion(18u16, 2u16), safari_ios :
 	BrowserVersion(18u16, 2u16), }, caniuse : &
-	["https://caniuse.com/css-text-box-trim"], popularity : 0.526806f32, },
+	["https://caniuse.com/css-text-box-trim"], popularity : 0.400459f32, },
 	"css.types.time" => CSSFeature { id : "css.types.time", name : "Animations (CSS)",
 	description :
 	"The animation CSS property animates an element's style over time, using keyframes described in @keyframes rules.",
