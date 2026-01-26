@@ -1,3 +1,25 @@
+## [0.0.15] - 2026-01-26
+
+### Css_ast
+- css_ast/csskit_derives: Add derive(NodeWithMetadata) (#824) ([#824](https://github.com/csskit/csskit/pull/824))
+- css_ast/csskit_derive/csskit_proc_macro: Add "constrainable" generics. (#825) ([#825](https://github.com/csskit/csskit/pull/825))
+- css_ast/css_lexer: Preserve sign in an+b, otherwise compact (#828) ([#828](https://github.com/csskit/csskit/pull/828))
+- css_ast: Don't preserve sign for integer An+B selectors. (#829) ([#829](https://github.com/csskit/csskit/pull/829))
+- Regenerate css_ast/src/values from csswg drafts (#830) ([#830](https://github.com/csskit/csskit/pull/830))
+
+
+### Css_lexer
+- csskit_transform/css_lexer: Check compacted lengths to determine if replacement is shorter. (#827) ([#827](https://github.com/csskit/csskit/pull/827))
+- css_lexer: De-duplicate escape sequence consumption (#835) ([#835](https://github.com/csskit/csskit/pull/835))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#831) ([#831](https://github.com/csskit/csskit/pull/831))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.40.0 (#834) ([#834](https://github.com/csskit/csskit/pull/834))
+
 ## [0.0.14] - 2026-01-22
 
 ### Other Changes
@@ -32,6 +54,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#790) ([#790](https://github.com/csskit/csskit/pull/790))
+- Release v0.0.14 (#783) ([#783](https://github.com/csskit/csskit/pull/783))
 
 
 ### Csskit_ast
