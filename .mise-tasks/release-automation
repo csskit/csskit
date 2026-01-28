@@ -55,9 +55,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 		exit 0
 	fi
 
-	# Release all cargo crates
-	cargo publish --allow-dirty
-
 	git config user.name "Keith Cirkel"
 	git config user.email "keithamus@users.noreply.github.com"
 
@@ -89,6 +86,8 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	gh release create "$VERSION" --generate-notes
 	gh release upload "$VERSION" binary-*/*
 
+	# Release all cargo crates
+	cargo publish --allow-dirty
 else
 	# CANARY MODE: Create/update release PR
 	echo "Creating/updating release PR..."
@@ -175,9 +174,6 @@ else
 	# Update GitHub release
 	gh release upload canary binary-*/* --clobber
 
-	# Release all cargo crates
-	cargo publish --allow-dirty
-
 	# Release platform-specific npm packages first
 	for platform_pkg in packages/csskit-*/; do
 		pushd "$platform_pkg"
@@ -203,4 +199,7 @@ else
 	npm version "${CANARY_VERSION#v}" --no-git-tag-version
 	npm pub --provenance --tag canary --access public
 	popd
+
+	# Release all cargo crates
+	cargo publish --allow-dirty
 fi
