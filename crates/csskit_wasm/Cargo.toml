@@ -13,6 +13,7 @@ crate-type = ["cdylib", "rlib"]
 
 [features]
 default = ["console_error_panic_hook", "serde", "fancy"]
+console_error_panic_hook = ["dep:console_error_panic_hook", "dep:web-sys"]
 serde = ["css_lexer/serde", "css_ast/serde", "css_parse/serde", "bumpalo/serde"]
 miette = ["css_parse/miette", "css_ast/miette"]
 fancy = ["miette", "miette/fancy-no-syscall"]
@@ -35,6 +36,7 @@ serde-wasm-bindgen = { workspace = true }
 # all the `std::fmt` and `std::panicking` infrastructure, so isn't great for
 # code size when deploying.
 console_error_panic_hook = { workspace = true, optional = true }
+web-sys = { version = "0.3", features = ["console"], optional = true }
 
 [dev-dependencies]
 wasm-bindgen-test = "0.3.54"

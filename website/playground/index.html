@@ -4,69 +4,49 @@ hide_header: true
 hide_sidebar: true
 hide_footer: true
 css:
-  - "playground"
+- "playground"
 script:
-  - index
+- index
 title: csskit playground
 ---
 
-<row-stack>
-	<col-stack>
-		<row-stack class="controls">
-			<a style="width:125px;margin:1rem 0" href="/"><img width="75" src="/images/logo.svg" /></a>
-			<example-picker>
-				<form>
-					<label>
-						Examples:
-						<select name="example">
-							<option value="">(Blank)</option>
-							<option value="/examples/960.css">960.gs</option>
-							<option value="/examples/animate.4.1.1.css">animate 4.1.1</option>
-							<option value="/examples/blueprint.1.0.1.css">blueprint 1.0.1</option>
-							<option value="/examples/bootstrap.4.6.2.css">bootstrap 4.6.2</option>
-							<option value="/examples/bootstrap.5.3.0.css">bootstrap 5.3.0</option>
-							<option value="/examples/font-awesome-all.5.15.4.css">font-awesome (all) 5.15.4</option>
-							<option value="/examples/foundation.6.7.5.css">foundation 6.7.5</option>
-							<option value="/examples/inuitcss.6.0.0.css">inuit 6.0.0</option>
-							<option value="/examples/mini.css.3.0.1.css">mini.css 3.0.1</option>
-							<option value="/examples/foundation.6.7.5.css">foundation 6.7.5</option>
-							<option value="/examples/open-props.1.5.10.min.css">open-props 1.5.10</option>
-							<option value="/examples/pure.2.0.3.css">pure 2.0.3</option>
-							<option value="/examples/reset.2.0.css">reset 2.0</option>
-							<option value="/examples/tailwind.2.2.19.min.css">tailwind 2.2.19</option>
-							<option value="/examples/primer.21.5.1.css">primer 21.5.1</option>
-						</select>
-					</label>
-				</form>
-			</example-picker>
-		</row-stack>
-		<wasm-loader>Loading Wasm</wasm-loader>
-		<csskit-editor id="editor">
-.card {
-	border-radius: var(--radius-2);
-	padding: var(--size-fluid-3);
-	box-shadow: var(--shadow-2);
+<div class="container">
+	<header class="controls">
+		<a style="width:125px;margin:1rem 0" href="/"><img width="75" src="/images/logo.svg" /></a>
+		<example-picker>
+			<form>
+				<label>
+					Examples:
+					<select class="example-item" name="example">
+						<option value="">(Blank)</option>
+						<option value="/examples/960.css">960.gs</option>
+						<option value="/examples/animate.4.1.1.css">animate 4.1.1</option>
+						<option value="/examples/blueprint.1.0.1.css">blueprint 1.0.1</option>
+						<option value="/examples/bootstrap.4.6.2.css">bootstrap 4.6.2</option>
+						<option value="/examples/bootstrap.5.3.0.css">bootstrap 5.3.0</option>
+						<option value="/examples/font-awesome-all.5.15.4.css">font-awesome (all) 5.15.4</option>
+						<option value="/examples/foundation.6.7.5.css">foundation 6.7.5</option>
+						<option value="/examples/inuitcss.6.0.0.css">inuit 6.0.0</option>
+						<option value="/examples/mini.css.3.0.1.css">mini.css 3.0.1</option>
+						<option value="/examples/foundation.6.7.5.css">foundation 6.7.5</option>
+						<option value="/examples/open-props.1.5.10.min.css">open-props 1.5.10</option>
+						<option value="/examples/pure.2.0.3.css">pure 2.0.3</option>
+						<option value="/examples/reset.2.0.css">reset 2.0</option>
+						<option value="/examples/tailwind.2.2.19.min.css">tailwind 2.2.19</option>
+						<option value="/examples/primer.21.5.1.css">primer 21.5.1</option>
+					</select>
+				</label>
+			</form>
+		</example-picker>
+	</header>
 
-	&:hover {
-		box-shadow: var(--shadow-3);
-	}
-
-	@media (--motionOK) {
-		animation: var(--animation-fade-in);
-	}
-}</csskit-editor>
-		<row-stack class="status">
-			<metric-observer name="minify">Minified to</metric-observer>
-			<metric-observer name="parseend">Parsed in</metric-observer>
-		</row-stack>
-	</col-stack>
-	<col-stack>
-		<row-stack class="controls">
-			<form id="format">
+	<div class="content-panel">
+		<col-stack class="formatter-controls">
+			<form id="format" class="format-form">
 				<radiogroup>
 					<view-options>
 						<label>
-							<input type="radio" name="format" value="ast" checked />
+							<input type="radio" name="format" value="ast" />
 							AST
 						</label>
 						<label>
@@ -74,18 +54,69 @@ title: csskit playground
 							Tokens
 						</label>
 						<label>
+							<input type="radio" name="format" value="format" checked />
+							Format
+						</label>
+						<label>
 							<input type="radio" name="format" value="minify" />
 							Minify
 						</label>
 						<label>
-							<input type="radio" name="format" value="errors" checked />
+							<input type="radio" name="format" value="errors" />
 							Errors
 							<error-diagnostic-count count="0"></error-diagnostic-count>
 						</label>
 					</view-options>
 				</radiogroup>
+				<div class="formatter-options-panel">
+					<span class="formatter-options-title">Formatter options</span>
+					<div class="format-options">
+						<label>
+							Indent Style
+							<select name="indent_style">
+								<option value="spaces" selected>Spaces</option>
+								<option value="tabs">Tabs</option>
+							</select>
+						</label>
+						<label>
+							Indent Width
+							<input type="number" name="indent_width" min="1" max="8" value="2" />
+						</label>
+						<label>
+							Quote Style
+							<select name="quote_style">
+								<option value="double" selected>Double</option>
+								<option value="single">Single</option>
+							</select>
+						</label>
+					</div>
+				</div>
 			</form>
-		</row-stack>
-		<csskit-viewer id="viewer" for-editor="editor" for-format="format"></csskit-viewer>
-	</col-stack>
-</row-stack>
+		</col-stack>
+		<col-stack class="input">
+			<wasm-loader>Loading Wasm</wasm-loader>
+			<csskit-editor id="editor">
+				.card {
+					border-radius: var(--radius-2);
+					padding: var(--size-fluid-3);
+					box-shadow: var(--shadow-2);
+
+					&:hover {
+						box-shadow: var(--shadow-3);
+					}
+
+					@media (--motionOK) {
+						animation: var(--animation-fade-in);
+					}
+				}
+			</csskit-editor>
+			<row-stack class="console status">
+				<metric-observer name="minify">Minified to</metric-observer>
+				<metric-observer name="parseend">Parsed in</metric-observer>
+			</row-stack>
+		</col-stack>
+		<col-stack class="output">
+			<csskit-viewer id="viewer" for-editor="editor" for-format="format"></csskit-viewer>
+		</col-stack>
+	</div>
+</div>

@@ -2,14 +2,16 @@
 use bumpalo::Bump;
 use core::fmt::Write;
 use css_ast::{CssAtomSet, StyleSheet};
-use css_lexer::{Kind, Lexer};
-use css_parse::{CursorCompactWriteSink, CursorOverlaySink, Diagnostic, DiagnosticMeta, Parser, ToCursors};
+use css_lexer::{Kind, Lexer, QuoteStyle};
+use css_parse::{
+	CursorCompactWriteSink, CursorOverlaySink, CursorPrettyWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors,
+};
 use csskit_transform::{CssMinifierFeature, Transformer};
 #[cfg(not(feature = "fancy"))]
 use miette::JSONReportHandler;
 #[cfg(feature = "fancy")]
 use miette::{GraphicalReportHandler, GraphicalTheme};
-use serde::Serialize;
+use serde::{Deserialize, Serialize};
 use wasm_bindgen::prelude::*;
 
 #[wasm_bindgen(start)]
@@ -87,6 +89,45 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 }
 
 #[wasm_bindgen]
+pub fn format(source_text: String, options: JsValue) -> Result<String, serde_wasm_bindgen::Error> {
+	let options: FormatOptions = match serde_wasm_bindgen::from_value(options) {
+		Ok(opts) => opts,
+		Err(e) => {
+			#[cfg(feature = "console_error_panic_hook")]
+			web_sys::console::warn_1(&format!("Failed to parse format options: {}. Using defaults.", e).into());
+			FormatOptions::default()
+		}
+	};
+	format_with_options(&source_text, options).map_err(|err| serde_wasm_bindgen::Error::new(err))
+}
+
+fn format_with_options(source_text: &str, options: FormatOptions) -> Result<String, String> {
+	let allocator = Bump::default();
+	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
+	let result = Parser::new(&allocator, source_text, lexer).parse_entirely::<StyleSheet>();
+	if !result.errors.is_empty() {
+		let first_error = &result.errors[0];
+		let DiagnosticMeta { code, message, help, .. } = (first_error.formatter)(first_error, source_text);
+		return Err(format!("Parse error [{}]: {} (Help: {})", code, message, help));
+	}
+	let mut output_string = String::new();
+	if result.output.is_some() {
+		let indent_width = options.indent_width.unwrap_or(2).clamp(1, 8);
+		let expand_tab = match options.indent_style.unwrap_or(IndentStyle::Spaces) {
+			IndentStyle::Spaces => Some(indent_width),
+			IndentStyle::Tabs => None,
+		};
+		let quote_style = match options.quote_style.unwrap_or(QuoteStyleOption::Double) {
+			QuoteStyleOption::Double => QuoteStyle::Double,
+			QuoteStyleOption::Single => QuoteStyle::Single,
+		};
+		let mut stream = CursorPrettyWriteSink::new(source_text, &mut output_string, expand_tab, quote_style);
+		result.to_cursors(&mut stream);
+	}
+	Ok(output_string)
+}
+
+#[wasm_bindgen]
 pub fn parse_error_report(source_text: String) -> String {
 	let allocator = Bump::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
@@ -122,6 +163,47 @@ fn build_error(err: &Diagnostic, source: &str, w: &mut impl Write) {
 pub struct SerializableParserResult {
 	ast: JsValue,
 	diagnostics: Vec<JsValue>,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum IndentStyle {
+	Spaces,
+	Tabs,
+}
+
+#[derive(Debug, Deserialize)]
+#[serde(rename_all = "snake_case")]
+enum QuoteStyleOption {
+	Double,
+	Single,
+}
+
+#[derive(Default, Deserialize)]
+#[serde(default, rename_all = "snake_case")]
+struct FormatOptions {
+	#[serde(alias = "indent-style", alias = "indentStyle")]
+	indent_style: Option<IndentStyle>,
+	#[serde(alias = "indent-width", alias = "indentWidth")]
+	indent_width: Option<u8>,
+	#[serde(alias = "quote-style", alias = "quoteStyle")]
+	quote_style: Option<QuoteStyleOption>,
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn format_respects_quote_style() {
+		let source = r#".a { content: "foo"; }"#;
+		let options = FormatOptions {
+			quote_style: Some(QuoteStyleOption::Single),
+			..FormatOptions::default()
+		};
+		let output = format_with_options(source, options).expect("format should succeed");
+		assert!(output.contains("content: 'foo'"));
+	}
 }
 
 #[derive(Default, Clone, Serialize)]

@@ -2,6 +2,18 @@ main {
 	height: 100vh;
 }
 
+.container {
+	height: 100%;
+	display: flex;
+	flex-direction: column;
+}
+
+.content-panel {
+	display: grid;
+  grid-template-columns: auto 1fr 1fr;
+	flex: 1;
+}
+
 csskit-editor,
 csskit-viewer {
 	font-family: monospace;
@@ -24,11 +36,11 @@ wasm-loader {
 	font-size: 90px;
 }
 
-wasm-loader + csskit-editor {
+wasm-loader+csskit-editor {
 	display: none;
 }
 
-main > row-stack > :first-child {
+.content-panel > * {
 	border-right: 1px solid var(--surface-2);
 }
 
@@ -51,7 +63,6 @@ csskit-viewer {
 	border-bottom: 1px solid var(--indigo-6);
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
 }
 
 metric-observer {
@@ -62,8 +73,70 @@ metric-observer::part(value) {
 	margin-left: 1em;
 }
 
+.controls {
+	color: #333;
+
+	.example-item {
+		color: #fff;
+	}
+}
+
+radiogroup > * {
+	display: grid;
+	grid-template-columns: repeat(2, max-content);
+	justify-content: space-around;
+}
+
 radiogroup label {
-	margin-inline: 1rem;
+	display: inline-flex;
+	align-items: center;
+	gap: 0 .25rem;
+	cursor: pointer;
+}
+
+.formatter-controls {
+	height: auto;
+	min-height: 0;
+	width: 13rem;
+	align-items: flex-start;
+	padding: .8em .5em;
+	background: #fafafa;
+}
+
+.format-form {
+	display: flex;
+	flex-direction: column;
+	gap: 0.6rem;
+}
+
+.formatter-options-panel {
+	display: flex;
+	flex-direction: column;
+	gap: 0.35rem;
+	margin-top: 1rem;
+}
+
+.formatter-options-title {
+	font-weight: 600;
+}
+
+.format-options {
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
+	flex-wrap: wrap;
+
+	select, input {
+		color: #fff;
+		padding: .2em .5em;
+	}
+}
+
+.format-options label {
+	margin-inline: 0;
+	display: inline-flex;
+	align-items: center;
+	gap: 0.35rem;
 }
 
 error-diagnostic-count {
@@ -82,15 +155,16 @@ error-diagnostic-count[count="0"] {
 	visibility: hidden;
 }
 
-body:has(input[name="format"][value="minify"]:not(:checked))
-	metric-observer[name="minify"] {
-	display: none;
+body:has(input[name="format"][value="minify"]:not(:checked)) metric-observer[name="minify"] {
+	visibility: hidden;
 }
 
-:where(
-		textarea,
-		select,
-		input:not([type="button"], [type="submit"], [type="reset"])
-	) {
+body:has(input[name="format"][value="format"]:not(:checked)) .formatter-options-panel {
+	visibility: hidden;
+}
+
+:where(textarea,
+	select,
+	input:not([type="button"], [type="submit"], [type="reset"])) {
 	background-color: var(--gray-7);
 }

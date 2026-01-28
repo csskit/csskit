@@ -21,7 +21,7 @@ import {
 } from "@codemirror/language";
 import { csskitLight } from "./theme.js";
 
-import { lex, minify, parse, parse_error_report } from "csskit_wasm";
+import { format, lex, minify, parse, parse_error_report } from "csskit_wasm";
 
 function createHighlightEffect(view, { start, end }) {
   let range = EditorSelection.range(start, end);
@@ -331,7 +331,8 @@ class CsskitViewer extends HTMLElement {
     // Change language according to the current view
     EditorState.transactionExtender.of((tr) => {
       if (!tr.docChanged) return null;
-      let format = this.format === "minify" ? css() : json();
+      let format =
+        this.format === "minify" || this.format === "format" ? css() : json();
       return {
         effects: this.compartment.reconfigure(format),
       };
@@ -344,6 +345,25 @@ class CsskitViewer extends HTMLElement {
       document.getElementById(this.getAttribute("for-format")),
     );
     return form.get("format");
+  }
+
+  get formatOptions() {
+    const form = new FormData(
+      document.getElementById(this.getAttribute("for-format")),
+    );
+    const options = {};
+    for (const [key, value] of form.entries()) {
+      if (key === "format" || value === "") continue;
+      if (key === "indent_width") {
+        const width = Number(value);
+        if (Number.isFinite(width)) {
+          options[key] = width;
+        }
+        continue;
+      }
+      options[key] = value;
+    }
+    return options;
   }
 
   get code() {
@@ -384,6 +404,22 @@ class CsskitViewer extends HTMLElement {
             }),
           );
           this.dispatchEvent(new CsskitDiagnosticEvent(diagnostics));
+        } else if (this.format === "format") {
+          const start = performance.now();
+          const formatted = format(this.code, this.formatOptions);
+          this.dispatchEvent(
+            new MetricEvent("parseend", performance.now() - start),
+          );
+          this.view.dispatch(
+            this.view.state.update({
+              changes: {
+                from: 0,
+                to: this.view.state.doc.length,
+                insert: formatted,
+              },
+            }),
+          );
+          this.dispatchEvent(new CsskitDiagnosticEvent([]));
         } else if (this.format === "minify") {
           const start = performance.now();
           const minified = minify(this.code);
