@@ -1,4 +1,14 @@
-## [0.0.15] - 2026-01-26
+## [0.0.16] - 2026-01-29
+
+### Css_lexer
+- css_lexer: Compact String & URL tokens (#843) ([#843](https://github.com/csskit/csskit/pull/843))
+- csskit/css_lexer/css_parse: Add super secret hidden `expand` command (#846) ([#846](https://github.com/csskit/csskit/pull/846))
+
+
+### Csskit_wasm
+- website/csskit-wasm: Support the format feature in the playground (#841) ([#841](https://github.com/csskit/csskit/pull/841))
+
+## [0.0.15] - 2026-01-28
 
 ### Css_ast
 - css_ast/csskit_derives: Add derive(NodeWithMetadata) (#824) ([#824](https://github.com/csskit/csskit/pull/824))
@@ -15,6 +25,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#831) ([#831](https://github.com/csskit/csskit/pull/831))
+- Release v0.0.15 (#826) ([#826](https://github.com/csskit/csskit/pull/826))
 
 
 ### Csskit_vscode
