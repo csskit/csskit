@@ -98,7 +98,7 @@ pub fn format(source_text: String, options: JsValue) -> Result<String, serde_was
 			FormatOptions::default()
 		}
 	};
-	format_with_options(&source_text, options).map_err(|err| serde_wasm_bindgen::Error::new(err))
+	format_with_options(&source_text, options).map_err(serde_wasm_bindgen::Error::new)
 }
 
 fn format_with_options(source_text: &str, options: FormatOptions) -> Result<String, String> {
@@ -197,10 +197,7 @@ mod tests {
 	#[test]
 	fn format_respects_quote_style() {
 		let source = r#".a { content: "foo"; }"#;
-		let options = FormatOptions {
-			quote_style: Some(QuoteStyleOption::Single),
-			..FormatOptions::default()
-		};
+		let options = FormatOptions { quote_style: Some(QuoteStyleOption::Single), ..FormatOptions::default() };
 		let output = format_with_options(source, options).expect("format should succeed");
 		assert!(output.contains("content: 'foo'"));
 	}
