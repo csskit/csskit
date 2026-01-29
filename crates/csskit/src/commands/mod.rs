@@ -7,6 +7,7 @@ mod check;
 mod colors;
 mod dbg_lex;
 mod dbg_parse;
+mod expand;
 mod find;
 mod fmt;
 mod lsp;
@@ -29,6 +30,10 @@ pub enum Commands {
 
 	/// Minify CSS files to compress them optimized delivery.
 	Min(min::Min),
+
+	/// Expand CSS files to their most verbose form (opposite of minify).
+	#[command(hide = true)]
+	Expand(expand::Expand),
 
 	/// Extract the colours from a CSS file.
 	Colors(colors::ColorCommand),
@@ -60,6 +65,7 @@ impl Commands {
 			Commands::Tree(cmd) => cmd.run(config),
 			Commands::Fmt(cmd) => cmd.run(config),
 			Commands::Min(cmd) => cmd.run(config),
+			Commands::Expand(cmd) => cmd.run(config),
 			Commands::Colors(cmd) => cmd.run(config),
 			Commands::Colours(cmd) => cmd.run(config),
 			Commands::DbgLex(cmd) => cmd.run(config),

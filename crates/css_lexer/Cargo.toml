@@ -43,6 +43,8 @@ pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [features]
 default = []
+# Easter egg feature for CSS expansion (opposite of minification)
+egg = []
 # Provides `From<>` implementations for the [SourceSpan] into [miette::SourceSpan] and [Span] into [miette::Span]
 miette = ["dep:miette"]
 # Provides `From<>` implementations for [Vec]

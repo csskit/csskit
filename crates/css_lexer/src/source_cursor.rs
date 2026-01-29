@@ -14,6 +14,8 @@ pub struct SourceCursor<'a> {
 	cursor: Cursor,
 	source: &'a str,
 	should_compact: bool,
+	#[cfg(feature = "egg")]
+	should_expand: bool,
 }
 
 impl<'a> ToSpan for SourceCursor<'a> {
@@ -26,6 +28,8 @@ impl<'a> Display for SourceCursor<'a> {
 	fn fmt(&self, f: &mut Formatter<'_>) -> Result {
 		match self.token().kind() {
 			Kind::Eof => Ok(()),
+			#[cfg(feature = "egg")]
+			Kind::String if self.should_expand => self.fmt_expanded_string(f),
 			Kind::String if self.should_compact && self.token().contains_escape_chars() => self.fmt_compacted_string(f),
 			// It is important to manually write out quotes for 2 reasons:
 			//  1. The quote style can be mutated from the source string (such as the case of normalising/switching quotes.
@@ -55,6 +59,8 @@ impl<'a> Display for SourceCursor<'a> {
 			| Kind::LeftCurly
 			| Kind::RightCurly => self.token().char().unwrap().fmt(f),
 			_ if self.should_compact => self.fmt_compacted(f),
+			#[cfg(feature = "egg")]
+			_ if self.should_expand => self.fmt_expanded(f),
 			_ => f.write_str(self.source),
 		}
 	}
@@ -64,6 +70,8 @@ impl<'a> SourceCursor<'a> {
 	pub const SPACE: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::SPACE), " ");
 	pub const TAB: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::TAB), "\t");
 	pub const NEWLINE: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::NEWLINE), "\n");
+	pub const SEMICOLON: SourceCursor<'static> =
+		SourceCursor::from(Cursor::new(SourceOffset(0), Token::SEMICOLON), ";");
 
 	#[inline(always)]
 	pub const fn from(cursor: Cursor, source: &'a str) -> Self {
@@ -71,7 +79,13 @@ impl<'a> SourceCursor<'a> {
 			(cursor.len() as usize) == source.len(),
 			"A SourceCursor should be constructed with a source that matches the length of the cursor!"
 		);
-		Self { cursor, source, should_compact: false }
+		Self {
+			cursor,
+			source,
+			should_compact: false,
+			#[cfg(feature = "egg")]
+			should_expand: false,
+		}
 	}
 
 	#[inline(always)]
@@ -90,7 +104,13 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Self {
-		Self { cursor: self.cursor.with_quotes(quote_style), source: self.source, should_compact: self.should_compact }
+		Self {
+			cursor: self.cursor.with_quotes(quote_style),
+			source: self.source,
+			should_compact: self.should_compact,
+			#[cfg(feature = "egg")]
+			should_expand: self.should_expand,
+		}
 	}
 
 	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Self {
@@ -98,6 +118,8 @@ impl<'a> SourceCursor<'a> {
 			cursor: self.cursor.with_associated_whitespace(rules),
 			source: self.source,
 			should_compact: self.should_compact,
+			#[cfg(feature = "egg")]
+			should_expand: self.should_expand,
 		}
 	}
 
@@ -110,7 +132,26 @@ impl<'a> SourceCursor<'a> {
 	/// - Whitespace: Normalize to a single space
 	///
 	pub fn compact(&self) -> SourceCursor<'a> {
-		Self { cursor: self.cursor, source: self.source, should_compact: true }
+		Self {
+			cursor: self.cursor,
+			source: self.source,
+			should_compact: true,
+			#[cfg(feature = "egg")]
+			should_expand: false,
+		}
+	}
+
+	/// Returns a new `SourceCursor` with the `should_expand` flag set.
+	///
+	/// With the `should_expand` flag set, the cursor will format with verbose displays of:
+	/// - Numbers: Padded with leading zeros and trailing decimal places (`1` -> `000001.00000000`)
+	/// - Idents/Functions/AtKeywords: Each character as `\XXXXXX ` escape codes
+	/// - Dimensions: Same as numbers for the number part, and same as Idents for the unit part
+	/// - Whitespace: Expanded to multiple characters
+	///
+	#[cfg(feature = "egg")]
+	pub fn expand(&self) -> SourceCursor<'a> {
+		Self { cursor: self.cursor, source: self.source, should_compact: false, should_expand: true }
 	}
 
 	/// Checks if calling `compact().fmt(..)` _might_ produce different output than `fmt(..)`.
@@ -234,8 +275,7 @@ impl<'a> SourceCursor<'a> {
 			} else if c == '\\' {
 				i += 1;
 				let (ch, n) = source[i..].chars().parse_escape_sequence();
-				let char_to_write = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
-				write!(f, "{}", char_to_write)?;
+				write!(f, "{}", if ch == '\0' { REPLACEMENT_CHARACTER } else { ch })?;
 				i += n as usize;
 				chars = source[i..].chars().peekable();
 			} else {
@@ -292,6 +332,126 @@ impl<'a> SourceCursor<'a> {
 			}
 		}
 		f.write_char(quote)?;
+		Ok(())
+	}
+
+	#[cfg(feature = "egg")]
+	fn fmt_expanded(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		match token.kind() {
+			Kind::Whitespace => f.write_str("    "),
+			Kind::Ident | Kind::Function | Kind::AtKeyword | Kind::Hash => self.fmt_expanded_ident(f),
+			Kind::Number => self.fmt_expanded_number(f),
+			Kind::Dimension => {
+				self.fmt_expanded_number(f)?;
+				self.fmt_expanded_ident(f)
+			}
+			Kind::Url => self.fmt_expanded_url(f),
+			_ => f.write_str(self.source),
+		}
+	}
+
+	#[cfg(feature = "egg")]
+	fn fmt_expanded_number(&self, f: &mut Formatter<'_>) -> Result {
+		let value = self.token().value();
+		let is_negative = value < 0.0;
+		let abs_value = value.abs();
+		if is_negative {
+			f.write_str("-")?;
+		} else {
+			f.write_str("+")?;
+		}
+
+		if self.token().is_int() {
+			return write!(f, "{:010.0}", abs_value);
+		}
+		if value == 0.0 {
+			return f.write_str("0.00000000000000e+0000000000");
+		}
+		let exp = abs_value.log10().floor() as i32;
+		let mantissa = abs_value / 10_f32.powi(exp);
+		write!(f, "{:.14}e{:+011}", mantissa, exp)
+	}
+
+	#[cfg(feature = "egg")]
+	fn fmt_expanded_ident(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		let start = token.leading_len() as usize;
+		let end = self.source.len() - token.trailing_len() as usize;
+		let source = &self.source[start..end];
+
+		match token.kind() {
+			Kind::AtKeyword => f.write_str("@")?,
+			Kind::Hash => f.write_str("#")?,
+			_ => {}
+		}
+
+		let mut chars = source.chars().peekable();
+		let mut i = 0;
+		while let Some(c) = chars.next() {
+			if c == '\0' {
+				write!(f, "\\{:06x} ", 0xFFFDu32)?;
+				i += 1;
+			} else if c == '\\' {
+				i += 1;
+				let (ch, n) = source[i..].chars().parse_escape_sequence();
+				write!(f, "\\{:06x} ", if ch == '\0' { REPLACEMENT_CHARACTER } else { ch } as u32)?;
+				i += n as usize;
+				chars = source[i..].chars().peekable();
+			} else {
+				write!(f, "\\{:06x} ", c as u32)?;
+				i += c.len_utf8();
+			}
+		}
+
+		if token.kind() == Kind::Function {
+			f.write_str("(")?;
+		}
+
+		Ok(())
+	}
+
+	#[cfg(feature = "egg")]
+	fn fmt_expanded_url(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		let leading_len = token.leading_len() as usize;
+		let trailing_len = token.trailing_len() as usize;
+		let url_prefix = &self.source[..leading_len];
+		let url_content = &self.source[leading_len..(self.source.len() - trailing_len)];
+		f.write_str(url_prefix)?;
+		f.write_str("   ")?;
+		f.write_str(url_content.trim())?;
+		f.write_str("   ")?;
+		if token.url_has_closing_paren() {
+			f.write_str(")")?;
+		}
+		Ok(())
+	}
+
+	#[cfg(feature = "egg")]
+	fn fmt_expanded_string(&self, f: &mut Formatter<'_>) -> Result {
+		let token = self.token();
+		let inner = &self.source[1..(token.len() as usize) - token.has_close_quote() as usize];
+		// Use the opposite quote style to maximize escaping opportunity
+		let (open_quote, close_quote, escape_char) = match token.quote_style() {
+			QuoteStyle::Single => ('"', '"', '"'),
+			QuoteStyle::Double => ('\'', '\'', '\''),
+			QuoteStyle::None => unreachable!(),
+		};
+		f.write_char(open_quote)?;
+		for c in inner.chars() {
+			if c == escape_char {
+				// Escape the quote character
+				write!(f, "\\{:06x} ", c as u32)?;
+			} else if c.is_ascii() && !c.is_ascii_control() {
+				// Escape all printable ASCII as hex
+				write!(f, "\\{:06x} ", c as u32)?;
+			} else {
+				// Non-ASCII or control chars: write as-is or escape
+				write!(f, "\\{:06x} ", c as u32)?;
+			}
+		}
+		f.write_char(close_quote)?;
 		Ok(())
 	}
 
@@ -427,9 +587,8 @@ impl<'a> SourceCursor<'a> {
 				}
 				i += 1;
 				let (ch, n) = self.source[(start + i)..].chars().parse_escape_sequence();
-				let char_to_push = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
 				let mut buf = [0; 4];
-				let bytes = char_to_push.encode_utf8(&mut buf).as_bytes();
+				let bytes = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch }.encode_utf8(&mut buf).as_bytes();
 				vec.as_mut().unwrap().extend_from_slice(bytes);
 				i += n as usize;
 				chars = self.source[(start + i)..end].chars().peekable();

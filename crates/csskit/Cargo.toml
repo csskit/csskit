@@ -12,7 +12,7 @@ repository.workspace = true
 [dependencies]
 css_lexer = { workspace = true } # @release
 css_ast = { workspace = true, features = ["chromashift", "visitable", "miette"] } # @release
-css_parse = { workspace = true, features = ["miette"] } # @release
+css_parse = { workspace = true, features = ["miette", "egg"] } # @release
 csskit_ast = { workspace = true, features = ["miette"] } # @release
 csskit_lsp = { workspace = true } # @release
 csskit_highlight = { workspace = true, features = ["miette"] } # @release

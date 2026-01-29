@@ -34,6 +34,8 @@ dhat = { workspace = true }
 [features]
 default = []
 testing = []
+# Easter egg feature for CSS expansion (opposite of minification)
+egg = ["css_lexer/egg"]
 miette = ["dep:miette", "dep:thiserror", "css_lexer/miette"]
 serde = ["dep:serde", "dep:serde_json", "css_lexer/serde", "bumpalo/serde"]
 fancy = ["miette", "miette/fancy-no-backtrace"]

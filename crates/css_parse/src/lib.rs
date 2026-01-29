@@ -284,6 +284,8 @@ pub use css_lexer::{
 
 mod comparison;
 mod cursor_compact_write_sink;
+#[cfg(feature = "egg")]
+mod cursor_expanded_write_sink;
 mod cursor_interleave_sink;
 mod cursor_ordered_sink;
 mod cursor_overlay_sink;
@@ -309,6 +311,8 @@ pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 
 pub use comparison::*;
 pub use cursor_compact_write_sink::*;
+#[cfg(feature = "egg")]
+pub use cursor_expanded_write_sink::*;
 pub use cursor_interleave_sink::*;
 pub use cursor_ordered_sink::*;
 pub use cursor_overlay_sink::*;
