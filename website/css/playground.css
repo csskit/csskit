@@ -2,6 +2,10 @@ main {
 	height: 100vh;
 }
 
+example-picker, metric-observer {
+	color: var(--text-1);
+}
+
 .container {
 	height: 100%;
 	display: flex;
@@ -100,7 +104,7 @@ radiogroup label {
 	width: 13rem;
 	align-items: flex-start;
 	padding: .8em .5em;
-	background: #fafafa;
+	background: var(--surface-2);
 }
 
 .format-form {
