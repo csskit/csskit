@@ -15,7 +15,7 @@ jobs:
       - name: Checkout
         uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
       - name: Download benchmark history
-        uses: dawidd6/action-download-artifact@0bd50d53a6d7fb5cb921e607957e9cc12b4ce392 # v12
+        uses: dawidd6/action-download-artifact@883bc3da0e2f55ddd0a8fc8e99378551c1991a55 # v13
         with:
           name: benchmark-history
           workflow: benchmark-tracking.yml
