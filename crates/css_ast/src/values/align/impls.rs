@@ -10,7 +10,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<JustifyContentStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<PlaceContentStyleValue>(), 48);
 		// assert_eq!(std::mem::size_of::<JustifySelfStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<AlignSelfStyleValue>(), 32);
+		// assert_eq!(std::mem::size_of::<AlignSelfStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<PlaceSelfStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<JustifyItemsStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<AlignItemsStyleValue>(), 1);
@@ -27,9 +27,9 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, AlignContentStyleValue, "flex-end");
 		// assert_parse!(CssAtomSet::ATOMS, PlaceContentStyleValue, "unsafe flex-end");
 		// assert_parse!(CssAtomSet::ATOMS, PlaceContentStyleValue, "flex-end");
-		assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "normal");
-		assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "safe flex-start");
-		assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "flex-start");
+		// assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "normal");
+		// assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "safe flex-start");
+		// assert_parse!(CssAtomSet::ATOMS, AlignSelfStyleValue, "flex-start");
 		assert_parse!(CssAtomSet::ATOMS, RowGapStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, ColumnGapStyleValue, "1px");
 		assert_parse!(CssAtomSet::ATOMS, GapStyleValue, "normal 1px");

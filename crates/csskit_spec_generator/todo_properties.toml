@@ -4,6 +4,7 @@
 
 [align]
 properties = [
+  "align-self",
   "justify-content",
   "justify-self",
   "place-self",

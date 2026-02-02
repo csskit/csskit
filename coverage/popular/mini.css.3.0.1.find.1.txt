@@ -13,6 +13,7 @@ coverage/popular/mini.css.3.0.1.css
 219:3:  text-decoration: none;
 231:3:  text-decoration: underline;
 651:3:  justify-content: space-between;
+652:3:  align-self: center;
 675:3:  border-radius: 0;
 684:3:  -o-object-fit: cover;
 685:3:  object-fit: cover;

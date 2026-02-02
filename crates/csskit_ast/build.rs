@@ -108,6 +108,7 @@ pub enum CsskitAtomSet {{
 	Gcpm,
 	Grid,
 	Images,
+	ImageAnimation,
 	Inline,
 	LineGrid,
 	LinkParams,

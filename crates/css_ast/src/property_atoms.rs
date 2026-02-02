@@ -688,6 +688,7 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	ViewTransitionClass,
 	ViewTransitionGroup,
 	ViewTransitionName,
+	ViewTransitionScope,
 	Visibility,
 	VoiceBalance,
 	VoiceDuration,

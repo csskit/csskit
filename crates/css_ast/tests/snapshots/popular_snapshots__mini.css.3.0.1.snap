@@ -15444,11 +15444,20 @@ StyleSheet(
                 offset: SourceOffset(11131),
                 len: 1,
               )),
-              value: SelfPosition(None, Center(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(11133),
-                len: 6,
-              )))),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(11132),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(11133),
+                    len: 6,
+                  )),
+                ],
+              )),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

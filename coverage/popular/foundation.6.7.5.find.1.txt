@@ -209,24 +209,28 @@ coverage/popular/foundation.6.7.5.css
 1864:11:          align-items: flex-start; }
 1867:3:  -webkit-align-self: flex-start;
 1868:7:      -ms-flex-item-align: start;
+1869:11:          align-self: flex-start; }
 1872:3:  -webkit-box-align: end;
 1873:3:  -webkit-align-items: flex-end;
 1874:7:      -ms-flex-align: end;
 1875:11:          align-items: flex-end; }
 1878:3:  -webkit-align-self: flex-end;
 1879:7:      -ms-flex-item-align: end;
+1880:11:          align-self: flex-end; }
 1883:3:  -webkit-box-align: center;
 1884:3:  -webkit-align-items: center;
 1885:7:      -ms-flex-align: center;
 1886:11:          align-items: center; }
 1889:3:  -webkit-align-self: center;
 1890:7:      -ms-flex-item-align: center;
+1891:11:          align-self: center; }
 1894:3:  -webkit-box-align: stretch;
 1895:3:  -webkit-align-items: stretch;
 1896:7:      -ms-flex-align: stretch;
 1897:11:          align-items: stretch; }
 1900:3:  -webkit-align-self: stretch;
 1901:7:      -ms-flex-item-align: stretch;
+1902:11:          align-self: stretch; }
 1905:3:  -webkit-box-pack: center;
 1906:3:  -webkit-justify-content: center;
 1907:7:      -ms-flex-pack: center;
@@ -456,6 +460,7 @@ coverage/popular/foundation.6.7.5.css
 2835:7:      -ms-flex: 0 0 auto;
 2841:5:    -webkit-align-self: stretch;
 2842:9:        -ms-flex-item-align: stretch;
+2843:13:            align-self: stretch;
 2871:3:  -webkit-appearance: none;
 2872:6:     -moz-appearance: none;
 2875:3:  border-radius: 0;
@@ -657,12 +662,14 @@ coverage/popular/foundation.6.7.5.css
 3617:9:        -ms-flex-flow: column nowrap;
 3624:7:      -webkit-align-self: stretch;
 3625:11:          -ms-flex-item-align: stretch;
+3626:15:              align-self: stretch;
 3630:5:    -webkit-box-orient: vertical;
 3631:5:    -webkit-box-direction: normal;
 3632:5:    -webkit-flex-flow: column nowrap;
 3633:9:        -ms-flex-flow: column nowrap;
 3640:7:      -webkit-align-self: stretch;
 3641:11:          -ms-flex-item-align: stretch;
+3642:15:              align-self: stretch;
 3646:5:    background: #1779ba;
 3649:5:    background: #1779ba;
 3652:5:    -webkit-box-pack: start;

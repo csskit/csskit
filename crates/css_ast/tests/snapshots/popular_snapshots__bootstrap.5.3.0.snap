@@ -228475,11 +228475,20 @@ StyleSheet(
                 offset: SourceOffset(189055),
                 len: 1,
               )),
-              value: Stretch(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(189057),
-                len: 7,
-              ))),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(189056),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(189057),
+                    len: 7,
+                  )),
+                ],
+              )),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -228610,11 +228619,20 @@ StyleSheet(
                 offset: SourceOffset(189152),
                 len: 1,
               )),
-              value: Stretch(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(189154),
-                len: 7,
-              ))),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(189153),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(189154),
+                    len: 7,
+                  )),
+                ],
+              )),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -229715,11 +229733,20 @@ StyleSheet(
                 offset: SourceOffset(189873),
                 len: 1,
               )),
-              value: Stretch(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(189875),
-                len: 7,
-              ))),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(189874),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(189875),
+                    len: 7,
+                  )),
+                ],
+              )),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -243866,23 +243893,36 @@ StyleSheet(
                 offset: SourceOffset(200106),
                 len: 1,
               )),
-              value: Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(200108),
-                len: 4,
-              ))),
-              important: Some(BangImportant(
-                bang: Bang(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(200113),
-                  len: 1,
-                ))),
-                important: Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(200114),
-                  len: 9,
-                )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200107),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200108),
+                    len: 4,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200112),
+                    len: 1,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(200113),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200114),
+                    len: 9,
+                  )),
+                ],
               )),
+              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(200123),
@@ -243935,23 +243975,36 @@ StyleSheet(
                 offset: SourceOffset(200160),
                 len: 1,
               )),
-              value: SelfPosition(None, FlexStart(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(200162),
-                len: 10,
-              )))),
-              important: Some(BangImportant(
-                bang: Bang(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(200173),
-                  len: 1,
-                ))),
-                important: Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(200174),
-                  len: 9,
-                )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200161),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200162),
+                    len: 10,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200172),
+                    len: 1,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(200173),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200174),
+                    len: 9,
+                  )),
+                ],
               )),
+              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(200183),
@@ -244004,23 +244057,36 @@ StyleSheet(
                 offset: SourceOffset(200218),
                 len: 1,
               )),
-              value: SelfPosition(None, FlexEnd(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(200220),
-                len: 8,
-              )))),
-              important: Some(BangImportant(
-                bang: Bang(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(200229),
-                  len: 1,
-                ))),
-                important: Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(200230),
-                  len: 9,
-                )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200219),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200220),
+                    len: 8,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200228),
+                    len: 1,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(200229),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200230),
+                    len: 9,
+                  )),
+                ],
               )),
+              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(200239),
@@ -244073,23 +244139,36 @@ StyleSheet(
                 offset: SourceOffset(200277),
                 len: 1,
               )),
-              value: SelfPosition(None, Center(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(200279),
-                len: 6,
-              )))),
-              important: Some(BangImportant(
-                bang: Bang(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(200286),
-                  len: 1,
-                ))),
-                important: Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(200287),
-                  len: 9,
-                )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200278),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200279),
+                    len: 6,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200285),
+                    len: 1,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(200286),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200287),
+                    len: 9,
+                  )),
+                ],
               )),
+              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(200296),
@@ -244142,23 +244221,36 @@ StyleSheet(
                 offset: SourceOffset(200336),
                 len: 1,
               )),
-              value: BaselinePosition(Baseline(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(200338),
-                len: 8,
-              )))),
-              important: Some(BangImportant(
-                bang: Bang(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(200347),
-                  len: 1,
-                ))),
-                important: Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(200348),
-                  len: 9,
-                )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200337),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200338),
+                    len: 8,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200346),
+                    len: 1,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(200347),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200348),
+                    len: 9,
+                  )),
+                ],
               )),
+              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(200357),
@@ -244211,23 +244303,36 @@ StyleSheet(
                 offset: SourceOffset(200396),
                 len: 1,
               )),
-              value: Stretch(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(200398),
-                len: 7,
-              ))),
-              important: Some(BangImportant(
-                bang: Bang(Delim(Cursor(
-                  kind: "Delim",
-                  offset: SourceOffset(200406),
-                  len: 1,
-                ))),
-                important: Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(200407),
-                  len: 9,
-                )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200397),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200398),
+                    len: 7,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(200405),
+                    len: 1,
+                  )),
+                  Delim(Cursor(
+                    kind: "Delim",
+                    offset: SourceOffset(200406),
+                    len: 1,
+                  )),
+                  Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(200407),
+                    len: 9,
+                  )),
+                ],
               )),
+              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(200416),
@@ -279392,23 +279497,36 @@ StyleSheet(
                       offset: SourceOffset(227843),
                       len: 1,
                     )),
-                    value: Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(227845),
-                      len: 4,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(227850),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(227851),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(227844),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(227845),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(227849),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(227850),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(227851),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(227860),
@@ -279461,23 +279579,36 @@ StyleSheet(
                       offset: SourceOffset(227905),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexStart(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(227907),
-                      len: 10,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(227918),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(227919),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(227906),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(227907),
+                          len: 10,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(227917),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(227918),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(227919),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(227928),
@@ -279530,23 +279661,36 @@ StyleSheet(
                       offset: SourceOffset(227971),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexEnd(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(227973),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(227982),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(227983),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(227972),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(227973),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(227981),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(227982),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(227983),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(227992),
@@ -279599,23 +279743,36 @@ StyleSheet(
                       offset: SourceOffset(228038),
                       len: 1,
                     )),
-                    value: SelfPosition(None, Center(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(228040),
-                      len: 6,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(228047),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(228048),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(228039),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(228040),
+                          len: 6,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(228046),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(228047),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(228048),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(228057),
@@ -279668,23 +279825,36 @@ StyleSheet(
                       offset: SourceOffset(228105),
                       len: 1,
                     )),
-                    value: BaselinePosition(Baseline(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(228107),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(228116),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(228117),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(228106),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(228107),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(228115),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(228116),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(228117),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(228126),
@@ -279737,23 +279907,36 @@ StyleSheet(
                       offset: SourceOffset(228173),
                       len: 1,
                     )),
-                    value: Stretch(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(228175),
-                      len: 7,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(228183),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(228184),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(228174),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(228175),
+                          len: 7,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(228182),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(228183),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(228184),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(228193),
@@ -293065,23 +293248,36 @@ StyleSheet(
                       offset: SourceOffset(238882),
                       len: 1,
                     )),
-                    value: Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(238884),
-                      len: 4,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(238889),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(238890),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(238883),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(238884),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(238888),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(238889),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(238890),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(238899),
@@ -293134,23 +293330,36 @@ StyleSheet(
                       offset: SourceOffset(238944),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexStart(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(238946),
-                      len: 10,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(238957),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(238958),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(238945),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(238946),
+                          len: 10,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(238956),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(238957),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(238958),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(238967),
@@ -293203,23 +293412,36 @@ StyleSheet(
                       offset: SourceOffset(239010),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexEnd(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(239012),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(239021),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(239022),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239011),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239012),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239020),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(239021),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239022),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(239031),
@@ -293272,23 +293494,36 @@ StyleSheet(
                       offset: SourceOffset(239077),
                       len: 1,
                     )),
-                    value: SelfPosition(None, Center(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(239079),
-                      len: 6,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(239086),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(239087),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239078),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239079),
+                          len: 6,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239085),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(239086),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239087),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(239096),
@@ -293341,23 +293576,36 @@ StyleSheet(
                       offset: SourceOffset(239144),
                       len: 1,
                     )),
-                    value: BaselinePosition(Baseline(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(239146),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(239155),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(239156),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239145),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239146),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239154),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(239155),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239156),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(239165),
@@ -293410,23 +293658,36 @@ StyleSheet(
                       offset: SourceOffset(239212),
                       len: 1,
                     )),
-                    value: Stretch(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(239214),
-                      len: 7,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(239222),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(239223),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239213),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239214),
+                          len: 7,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(239221),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(239222),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(239223),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(239232),
@@ -306738,23 +306999,36 @@ StyleSheet(
                       offset: SourceOffset(249921),
                       len: 1,
                     )),
-                    value: Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(249923),
-                      len: 4,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(249928),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(249929),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(249922),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(249923),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(249927),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(249928),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(249929),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(249938),
@@ -306807,23 +307081,36 @@ StyleSheet(
                       offset: SourceOffset(249983),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexStart(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(249985),
-                      len: 10,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(249996),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(249997),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(249984),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(249985),
+                          len: 10,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(249995),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(249996),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(249997),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(250006),
@@ -306876,23 +307163,36 @@ StyleSheet(
                       offset: SourceOffset(250049),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexEnd(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(250051),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(250060),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(250061),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250050),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250051),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250059),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(250060),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250061),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(250070),
@@ -306945,23 +307245,36 @@ StyleSheet(
                       offset: SourceOffset(250116),
                       len: 1,
                     )),
-                    value: SelfPosition(None, Center(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(250118),
-                      len: 6,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(250125),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(250126),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250117),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250118),
+                          len: 6,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250124),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(250125),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250126),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(250135),
@@ -307014,23 +307327,36 @@ StyleSheet(
                       offset: SourceOffset(250183),
                       len: 1,
                     )),
-                    value: BaselinePosition(Baseline(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(250185),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(250194),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(250195),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250184),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250185),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250193),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(250194),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250195),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(250204),
@@ -307083,23 +307409,36 @@ StyleSheet(
                       offset: SourceOffset(250251),
                       len: 1,
                     )),
-                    value: Stretch(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(250253),
-                      len: 7,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(250261),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(250262),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250252),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250253),
+                          len: 7,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(250260),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(250261),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(250262),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(250271),
@@ -320411,23 +320750,36 @@ StyleSheet(
                       offset: SourceOffset(260961),
                       len: 1,
                     )),
-                    value: Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(260963),
-                      len: 4,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(260968),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(260969),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(260962),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(260963),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(260967),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(260968),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(260969),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(260978),
@@ -320480,23 +320832,36 @@ StyleSheet(
                       offset: SourceOffset(261023),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexStart(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(261025),
-                      len: 10,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(261036),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(261037),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261024),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261025),
+                          len: 10,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261035),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(261036),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261037),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(261046),
@@ -320549,23 +320914,36 @@ StyleSheet(
                       offset: SourceOffset(261089),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexEnd(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(261091),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(261100),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(261101),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261090),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261091),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261099),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(261100),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261101),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(261110),
@@ -320618,23 +320996,36 @@ StyleSheet(
                       offset: SourceOffset(261156),
                       len: 1,
                     )),
-                    value: SelfPosition(None, Center(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(261158),
-                      len: 6,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(261165),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(261166),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261157),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261158),
+                          len: 6,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261164),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(261165),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261166),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(261175),
@@ -320687,23 +321078,36 @@ StyleSheet(
                       offset: SourceOffset(261223),
                       len: 1,
                     )),
-                    value: BaselinePosition(Baseline(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(261225),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(261234),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(261235),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261224),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261225),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261233),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(261234),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261235),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(261244),
@@ -320756,23 +321160,36 @@ StyleSheet(
                       offset: SourceOffset(261291),
                       len: 1,
                     )),
-                    value: Stretch(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(261293),
-                      len: 7,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(261301),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(261302),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261292),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261293),
+                          len: 7,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(261300),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(261301),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(261302),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(261311),
@@ -334084,23 +334501,36 @@ StyleSheet(
                       offset: SourceOffset(272050),
                       len: 1,
                     )),
-                    value: Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(272052),
-                      len: 4,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(272057),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(272058),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272051),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272052),
+                          len: 4,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272056),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(272057),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272058),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(272067),
@@ -334153,23 +334583,36 @@ StyleSheet(
                       offset: SourceOffset(272113),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexStart(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(272115),
-                      len: 10,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(272126),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(272127),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272114),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272115),
+                          len: 10,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272125),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(272126),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272127),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(272136),
@@ -334222,23 +334665,36 @@ StyleSheet(
                       offset: SourceOffset(272180),
                       len: 1,
                     )),
-                    value: SelfPosition(None, FlexEnd(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(272182),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(272191),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(272192),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272181),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272182),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272190),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(272191),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272192),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(272201),
@@ -334291,23 +334747,36 @@ StyleSheet(
                       offset: SourceOffset(272248),
                       len: 1,
                     )),
-                    value: SelfPosition(None, Center(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(272250),
-                      len: 6,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(272257),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(272258),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272249),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272250),
+                          len: 6,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272256),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(272257),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272258),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(272267),
@@ -334360,23 +334829,36 @@ StyleSheet(
                       offset: SourceOffset(272316),
                       len: 1,
                     )),
-                    value: BaselinePosition(Baseline(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(272318),
-                      len: 8,
-                    )))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(272327),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(272328),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272317),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272318),
+                          len: 8,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272326),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(272327),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272328),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(272337),
@@ -334429,23 +334911,36 @@ StyleSheet(
                       offset: SourceOffset(272385),
                       len: 1,
                     )),
-                    value: Stretch(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(272387),
-                      len: 7,
-                    ))),
-                    important: Some(BangImportant(
-                      bang: Bang(Delim(Cursor(
-                        kind: "Delim",
-                        offset: SourceOffset(272395),
-                        len: 1,
-                      ))),
-                      important: Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(272396),
-                        len: 9,
-                      )),
+                    value: Unknown(ComponentValues(
+                      values: [
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272386),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272387),
+                          len: 7,
+                        )),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(272394),
+                          len: 1,
+                        )),
+                        Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(272395),
+                          len: 1,
+                        )),
+                        Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(272396),
+                          len: 9,
+                        )),
+                      ],
                     )),
+                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(272405),

@@ -34,6 +34,7 @@ pub enum PropertyGroup {
 	Gcpm,
 	Grid,
 	Images,
+	ImageAnimation,
 	Inline,
 	LineGrid,
 	LinkParams,

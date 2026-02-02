@@ -68,6 +68,7 @@ impl CsskitAtomSet {
 			Self::Gcpm => Some(PropertyGroup::Gcpm),
 			Self::Grid => Some(PropertyGroup::Grid),
 			Self::Image | Self::Images => Some(PropertyGroup::Images),
+			Self::ImageAnimation => Some(PropertyGroup::ImageAnimation),
 			Self::Inline => Some(PropertyGroup::Inline),
 			Self::LineGrid => Some(PropertyGroup::LineGrid),
 			Self::LinkParams => Some(PropertyGroup::LinkParams),

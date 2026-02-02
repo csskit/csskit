@@ -72,6 +72,7 @@ coverage/popular/missing.1.2.0.css
 1321:3:  z-index: 5;
 1327:3:  align-items: center;
 1331:5:    align-items: start;
+1353:5:    align-self: stretch;
 1368:5:    text-decoration: none;
 1372:7:      text-decoration: underline;
 1381:5:    content: "";
@@ -133,6 +134,11 @@ coverage/popular/missing.1.2.0.css
 2377:3:  align-items: baseline;
 2380:3:  align-items: center;
 2383:3:  align-items: stretch;
+2386:3:  align-self: start;
+2389:3:  align-self: end;
+2392:3:  align-self: baseline;
+2395:3:  align-self: center;
+2398:3:  align-self: stretch;
 2472:3:  grid-column: 1;
 2481:3:  grid-column: 2;
 2490:3:  grid-column: 3;
