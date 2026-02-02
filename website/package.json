@@ -40,7 +40,7 @@
 		"esbuild-plugin-wasm": "1.1.0",
 		"glob": "13.0.0",
 		"html-minifier": "4.0.0",
-		"open-props": "1.7.17",
+		"open-props": "1.7.23",
 		"postcss-combine-duplicated-selectors": "10.0.3",
 		"postcss-import": "16.1.1",
 		"postcss-jit-props": "1.0.16",
