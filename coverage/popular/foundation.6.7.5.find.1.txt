@@ -42,15 +42,12 @@ coverage/popular/foundation.6.7.5.css
 294:3:  -webkit-box-flex: 0;
 295:3:  -webkit-flex: 0 0 auto;
 296:7:      -ms-flex: 0 0 auto;
-297:11:          flex: 0 0 auto;
 302:5:    -webkit-box-flex: 1;
 303:5:    -webkit-flex: 1 1 0;
 304:9:        -ms-flex: 1 1 0px;
-305:13:            flex: 1 1 0; }
 307:5:    -webkit-box-flex: 0;
 308:5:    -webkit-flex: 0 0 auto;
 309:9:        -ms-flex: 0 0 auto;
-310:13:            flex: 0 0 auto; }
 319:3:  -webkit-flex-basis: auto;
 320:7:      -ms-flex-preferred-size: auto;
 325:5:    -webkit-flex-basis: auto;
@@ -60,23 +57,18 @@ coverage/popular/foundation.6.7.5.css
 336:3:  -webkit-box-flex: 0;
 337:3:  -webkit-flex: 0 0 auto;
 338:7:      -ms-flex: 0 0 auto;
-339:11:          flex: 0 0 auto; }
 379:5:    -webkit-box-flex: 1;
 380:5:    -webkit-flex: 1 1 0;
 381:9:        -ms-flex: 1 1 0px;
-382:13:            flex: 1 1 0;
 385:5:    -webkit-box-flex: 0;
 386:5:    -webkit-flex: 0 0 auto;
 387:9:        -ms-flex: 0 0 auto;
-388:13:            flex: 0 0 auto; }
 418:5:    -webkit-box-flex: 1;
 419:5:    -webkit-flex: 1 1 0;
 420:9:        -ms-flex: 1 1 0px;
-421:13:            flex: 1 1 0;
 424:5:    -webkit-box-flex: 0;
 425:5:    -webkit-flex: 0 0 auto;
 426:9:        -ms-flex: 0 0 auto;
-427:13:            flex: 0 0 auto; }
 1201:3:  display: -webkit-box;
 1202:3:  display: -webkit-flex;
 1203:3:  display: -ms-flexbox;
@@ -93,23 +85,18 @@ coverage/popular/foundation.6.7.5.css
 1232:5:    -webkit-box-flex: 0;
 1233:5:    -webkit-flex: 0 0 auto;
 1234:9:        -ms-flex: 0 0 auto;
-1235:13:            flex: 0 0 auto; }
 1262:7:      -webkit-box-flex: 1;
 1263:7:      -webkit-flex: 1 1 0;
 1264:11:          -ms-flex: 1 1 0px;
-1265:15:              flex: 1 1 0;
 1268:7:      -webkit-box-flex: 0;
 1269:7:      -webkit-flex: 0 0 auto;
 1270:11:          -ms-flex: 0 0 auto;
-1271:15:              flex: 0 0 auto; }
 1300:7:      -webkit-box-flex: 1;
 1301:7:      -webkit-flex: 1 1 0;
 1302:11:          -ms-flex: 1 1 0px;
-1303:15:              flex: 1 1 0;
 1306:7:      -webkit-box-flex: 0;
 1307:7:      -webkit-flex: 0 0 auto;
 1308:11:          -ms-flex: 0 0 auto;
-1309:15:              flex: 0 0 auto; }
 1487:3:  -webkit-flex-wrap: nowrap;
 1488:7:      -ms-flex-wrap: nowrap;
 1490:3:  -webkit-box-align: stretch;
@@ -310,15 +297,12 @@ coverage/popular/foundation.6.7.5.css
 2024:3:  -webkit-box-flex: 1;
 2025:3:  -webkit-flex: 1 1 auto;
 2026:7:      -ms-flex: 1 1 auto;
-2027:11:          flex: 1 1 auto; }
 2030:3:  -webkit-box-flex: 1;
 2031:3:  -webkit-flex: 1 0 auto;
 2032:7:      -ms-flex: 1 0 auto;
-2033:11:          flex: 1 0 auto; }
 2036:3:  -webkit-box-flex: 0;
 2037:3:  -webkit-flex: 0 1 auto;
 2038:7:      -ms-flex: 0 1 auto;
-2039:11:          flex: 0 1 auto; }
 2042:3:  -webkit-box-orient: horizontal;
 2043:3:  -webkit-box-direction: normal;
 2044:3:  -webkit-flex-direction: row;
@@ -341,15 +325,12 @@ coverage/popular/foundation.6.7.5.css
 2076:5:    -webkit-box-flex: 1;
 2077:5:    -webkit-flex: 1 1 auto;
 2078:9:        -ms-flex: 1 1 auto;
-2079:13:            flex: 1 1 auto; }
 2081:5:    -webkit-box-flex: 1;
 2082:5:    -webkit-flex: 1 0 auto;
 2083:9:        -ms-flex: 1 0 auto;
-2084:13:            flex: 1 0 auto; }
 2086:5:    -webkit-box-flex: 0;
 2087:5:    -webkit-flex: 0 1 auto;
 2088:9:        -ms-flex: 0 1 auto;
-2089:13:            flex: 0 1 auto; }
 2091:5:    -webkit-box-orient: horizontal;
 2092:5:    -webkit-box-direction: normal;
 2093:5:    -webkit-flex-direction: row;
@@ -372,15 +353,12 @@ coverage/popular/foundation.6.7.5.css
 2122:5:    -webkit-box-flex: 1;
 2123:5:    -webkit-flex: 1 1 auto;
 2124:9:        -ms-flex: 1 1 auto;
-2125:13:            flex: 1 1 auto; }
 2127:5:    -webkit-box-flex: 1;
 2128:5:    -webkit-flex: 1 0 auto;
 2129:9:        -ms-flex: 1 0 auto;
-2130:13:            flex: 1 0 auto; }
 2132:5:    -webkit-box-flex: 0;
 2133:5:    -webkit-flex: 0 1 auto;
 2134:9:        -ms-flex: 0 1 auto;
-2135:13:            flex: 0 1 auto; }
 2137:5:    -webkit-box-orient: horizontal;
 2138:5:    -webkit-box-direction: normal;
 2139:5:    -webkit-flex-direction: row;
@@ -462,7 +440,6 @@ coverage/popular/foundation.6.7.5.css
 2804:3:  -webkit-box-flex: 0;
 2805:3:  -webkit-flex: 0 0 auto;
 2806:7:      -ms-flex: 0 0 auto;
-2807:11:          flex: 0 0 auto;
 2808:3:  -webkit-box-align: center;
 2809:3:  -webkit-align-items: center;
 2810:7:      -ms-flex-align: center;
@@ -471,14 +448,12 @@ coverage/popular/foundation.6.7.5.css
 2819:3:  -webkit-box-flex: 1;
 2820:3:  -webkit-flex: 1 1 0px;
 2821:7:      -ms-flex: 1 1 0px;
-2822:11:          flex: 1 1 0px;
 2829:3:  display: -webkit-box;
 2830:3:  display: -webkit-flex;
 2831:3:  display: -ms-flexbox;
 2833:3:  -webkit-box-flex: 0;
 2834:3:  -webkit-flex: 0 0 auto;
 2835:7:      -ms-flex: 0 0 auto;
-2836:11:          flex: 0 0 auto; }
 2841:5:    -webkit-align-self: stretch;
 2842:9:        -ms-flex-item-align: stretch;
 2871:3:  -webkit-appearance: none;
@@ -550,11 +525,9 @@ coverage/popular/foundation.6.7.5.css
 3179:5:    -webkit-box-flex: 0;
 3180:5:    -webkit-flex: 0 0 auto;
 3181:9:        -ms-flex: 0 0 auto;
-3182:13:            flex: 0 0 auto; }
 3192:5:    -webkit-box-flex: 1;
 3193:5:    -webkit-flex: 1 1 0px;
 3194:9:        -ms-flex: 1 1 0px;
-3195:13:            flex: 1 1 0px; }
 3232:5:    border-color: #0c3d5d;
 3238:5:    border-color: #0c3d5d;
 3244:5:    border-color: #3b3b3b;
@@ -567,19 +540,15 @@ coverage/popular/foundation.6.7.5.css
 3300:7:      -webkit-box-flex: 0;
 3301:7:      -webkit-flex: 0 0 100%;
 3302:11:          -ms-flex: 0 0 100%;
-3303:15:              flex: 0 0 100%; }
 3307:7:      -webkit-box-flex: 1;
 3308:7:      -webkit-flex: 1 1 0px;
 3309:11:          -ms-flex: 1 1 0px;
-3310:15:              flex: 1 1 0px; }
 3313:7:      -webkit-box-flex: 0;
 3314:7:      -webkit-flex: 0 0 auto;
 3315:11:          -ms-flex: 0 0 auto;
-3316:15:              flex: 0 0 auto;
 3320:7:      -webkit-box-flex: 0;
 3321:7:      -webkit-flex: 0 0 auto;
 3322:11:          -ms-flex: 0 0 auto;
-3323:15:              flex: 0 0 auto;
 3339:3:  display: -webkit-box;
 3340:3:  display: -webkit-flex;
 3341:3:  display: -ms-flexbox;
@@ -600,12 +569,10 @@ coverage/popular/foundation.6.7.5.css
 3368:3:  -webkit-box-flex: 0;
 3369:3:  -webkit-flex: 0 1 auto;
 3370:7:      -ms-flex: 0 1 auto;
-3371:11:          flex: 0 1 auto;
 3373:3:  background: #e6e6e6; }
 3378:3:  -webkit-box-flex: 1;
 3379:3:  -webkit-flex: 1 0 auto;
 3380:7:      -ms-flex: 1 0 auto;
-3381:11:          flex: 1 0 auto;
 3394:3:  border-radius: 0;
 3429:3:  z-index: 10;
 3450:3:  list-style: none;
@@ -630,7 +597,6 @@ coverage/popular/foundation.6.7.5.css
 3499:5:    -webkit-box-flex: 1;
 3500:5:    -webkit-flex: 1 1 0px;
 3501:9:        -ms-flex: 1 1 0px;
-3502:13:            flex: 1 1 0px; }
 3510:5:    -webkit-box-align: center;
 3511:5:    -webkit-align-items: center;
 3512:9:        -ms-flex-align: center;
@@ -650,11 +616,9 @@ coverage/popular/foundation.6.7.5.css
 3538:7:      -webkit-box-flex: 1;
 3539:7:      -webkit-flex: 1 1 0px;
 3540:11:          -ms-flex: 1 1 0px;
-3541:15:              flex: 1 1 0px; }
 3543:7:      -webkit-box-flex: 1;
 3544:7:      -webkit-flex: 1 1 0px;
 3545:11:          -ms-flex: 1 1 0px;
-3546:15:              flex: 1 1 0px; } }
 3549:7:      -webkit-flex-wrap: wrap;
 3550:11:          -ms-flex-wrap: wrap;
 3552:7:      -webkit-box-orient: horizontal;
@@ -670,11 +634,9 @@ coverage/popular/foundation.6.7.5.css
 3567:7:      -webkit-box-flex: 1;
 3568:7:      -webkit-flex: 1 1 0px;
 3569:11:          -ms-flex: 1 1 0px;
-3570:15:              flex: 1 1 0px; }
 3572:7:      -webkit-box-flex: 1;
 3573:7:      -webkit-flex: 1 1 0px;
 3574:11:          -ms-flex: 1 1 0px;
-3575:15:              flex: 1 1 0px; } }
 3580:5:    display: -webkit-box;
 3581:5:    display: -webkit-flex;
 3582:5:    display: -ms-flexbox;
@@ -824,13 +786,11 @@ coverage/popular/foundation.6.7.5.css
 4225:3:  -webkit-box-flex: 0;
 4226:3:  -webkit-flex: 0 1 auto;
 4227:7:      -ms-flex: 0 1 auto;
-4228:11:          flex: 0 1 auto; }
 4239:7:      -webkit-flex-basis: 100%;
 4240:11:          -ms-flex-preferred-size: 100%;
 4246:5:    -webkit-box-flex: 1;
 4247:5:    -webkit-flex: 1 1 0px;
 4248:9:        -ms-flex: 1 1 0px;
-4249:13:            flex: 1 1 0px; }
 4258:3:  z-index: 11;
 4261:3:  -webkit-transition: opacity 0.5s ease, visibility 0.5s ease;
 4263:3:  background: rgba(254, 254, 254, 0.25);
@@ -1077,7 +1037,6 @@ coverage/popular/foundation.6.7.5.css
 5318:3:  -webkit-box-flex: 1;
 5319:3:  -webkit-flex: 1 1 0px;
 5320:7:      -ms-flex: 1 1 0px;
-5321:11:          flex: 1 1 0px; }
 5328:3:  vertical-align: middle;
 5341:3:  z-index: 1200;
 5344:3:  border-radius: 0;
@@ -1115,37 +1074,30 @@ coverage/popular/foundation.6.7.5.css
 5460:5:    -webkit-box-flex: 0;
 5461:5:    -webkit-flex: 0 0 100%;
 5462:9:        -ms-flex: 0 0 100%;
-5463:13:            flex: 0 0 100%;
 5467:7:      -webkit-flex-wrap: nowrap;
 5468:11:          -ms-flex-wrap: nowrap;
 5471:9:        -webkit-box-flex: 1;
 5472:9:        -webkit-flex: 1 1 auto;
 5473:13:            -ms-flex: 1 1 auto;
-5474:17:                flex: 1 1 auto;
 5477:9:        -webkit-box-flex: 0;
 5478:9:        -webkit-flex: 0 1 auto;
 5479:13:            -ms-flex: 0 1 auto;
-5480:17:                flex: 0 1 auto;
 5484:7:      -webkit-flex-wrap: wrap;
 5485:11:          -ms-flex-wrap: wrap;
 5489:9:        -webkit-box-flex: 0;
 5490:9:        -webkit-flex: 0 0 100%;
 5491:13:            -ms-flex: 0 0 100%;
-5492:17:                flex: 0 0 100%;
 5496:7:      -webkit-flex-wrap: wrap;
 5497:11:          -ms-flex-wrap: wrap;
 5501:9:        -webkit-box-flex: 0;
 5502:9:        -webkit-flex: 0 0 100%;
 5503:13:            -ms-flex: 0 0 100%;
-5504:17:                flex: 0 0 100%;
 5508:3:  -webkit-box-flex: 0;
 5509:3:  -webkit-flex: 0 0 auto;
 5510:7:      -ms-flex: 0 0 auto;
-5511:11:          flex: 0 0 auto;
 5516:3:  -webkit-box-flex: 0;
 5517:3:  -webkit-flex: 0 0 auto;
 5518:7:      -ms-flex: 0 0 auto;
-5519:11:          flex: 0 0 auto; }
 5577:3:  clip: rect(0, 0, 0, 0) !important;
 5578:3:  white-space: nowrap !important;
 5586:3:  clip: auto !important;

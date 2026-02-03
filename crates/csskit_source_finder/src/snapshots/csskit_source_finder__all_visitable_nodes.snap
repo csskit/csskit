@@ -626,6 +626,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct FlexFlowStyleValue { }",
   "pub struct FlexGrowStyleValue { }",
   "pub struct FlexShrinkStyleValue { }",
+  "pub struct FlexStyleValue { }",
   "pub struct FloatOffsetStyleValue { }",
   "pub struct FloodColorStyleValue { }",
   "pub struct FloodOpacityStyleValue { }",

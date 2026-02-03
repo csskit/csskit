@@ -25,7 +25,6 @@ coverage/popular/missing.1.2.0.css
 456:3:  text-transform: none;
 472:3:  text-transform: none;
 498:5:    content: "";
-532:3:  flex: 0 1 0px;
 579:5:    list-style: none;
 623:3:  background: none;
 627:3:  text-decoration: 1px dotted underline;

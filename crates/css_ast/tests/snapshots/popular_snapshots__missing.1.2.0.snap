@@ -15684,40 +15684,19 @@ StyleSheet(
                 offset: SourceOffset(10436),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10437),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(10438),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10439),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(10440),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(10441),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(10442),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(10438),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(10440),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(10442),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

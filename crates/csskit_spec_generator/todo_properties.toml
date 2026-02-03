@@ -109,9 +109,6 @@ properties = [
 [filter-effects]
 properties = ["filter", "backdrop-filter"]
 
-[flexbox]
-properties = ["flex"]
-
 [fonts]
 properties = [
   "font",

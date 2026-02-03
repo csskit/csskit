@@ -293,6 +293,7 @@ impl ColorCommand {
 			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<bumpalo::collections::Vec<ASTColor>>();
 			if result.output.is_some() && result.errors.is_empty() {
+				#[allow(clippy::unnecessary_unwrap)]
 				result.output.unwrap().accept(&mut color_visitor);
 			} else {
 				let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);

@@ -7309,40 +7309,19 @@ StyleSheet(
                 offset: SourceOffset(5607),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5608),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5609),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5610),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5611),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5612),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(5613),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5609),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5611),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(5613),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -7613,40 +7592,19 @@ StyleSheet(
                 offset: SourceOffset(5777),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5778),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5779),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5780),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5781),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5782),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5783),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5779),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5781),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5783),
+                len: 1,
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -7848,40 +7806,19 @@ StyleSheet(
                 offset: SourceOffset(5902),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5903),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5904),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5905),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(5906),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5907),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(5908),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5904),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(5906),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(5908),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -10549,40 +10486,19 @@ StyleSheet(
                 offset: SourceOffset(7612),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7613),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(7614),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7615),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(7616),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7617),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(7618),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(7614),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(7616),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(7618),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -11753,40 +11669,19 @@ StyleSheet(
                       offset: SourceOffset(8299),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(8300),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(8301),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(8302),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(8303),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(8304),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(8305),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(8301),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(8303),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(8305),
+                      len: 1,
+                    ))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -12436,40 +12331,19 @@ StyleSheet(
                       offset: SourceOffset(8708),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(8709),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(8710),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(8711),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(8712),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(8713),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(8714),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(8710),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(8712),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(8714),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -13723,40 +13597,19 @@ StyleSheet(
                       offset: SourceOffset(9492),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(9493),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(9494),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(9495),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(9496),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(9497),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(9498),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(9494),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(9496),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(9498),
+                      len: 1,
+                    ))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -14406,40 +14259,19 @@ StyleSheet(
                       offset: SourceOffset(9888),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(9889),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(9890),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(9891),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(9892),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(9893),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(9894),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(9890),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(9892),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(9894),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -50370,40 +50202,19 @@ StyleSheet(
                 offset: SourceOffset(34587),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(34588),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(34589),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(34590),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(34591),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(34592),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(34593),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(34589),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(34591),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(34593),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -51574,40 +51385,19 @@ StyleSheet(
                       offset: SourceOffset(35333),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(35334),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(35335),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(35336),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(35337),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(35338),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(35339),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(35335),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(35337),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(35339),
+                      len: 1,
+                    ))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -52257,40 +52047,19 @@ StyleSheet(
                       offset: SourceOffset(35755),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(35756),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(35757),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(35758),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(35759),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(35760),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(35761),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(35757),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(35759),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(35761),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -53544,40 +53313,19 @@ StyleSheet(
                       offset: SourceOffset(36615),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(36616),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(36617),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(36618),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(36619),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(36620),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(36621),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(36617),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(36619),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(36621),
+                      len: 1,
+                    ))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -54227,40 +53975,19 @@ StyleSheet(
                       offset: SourceOffset(37024),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(37025),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(37026),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(37027),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(37028),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(37029),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(37030),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(37026),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(37028),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(37030),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -82454,40 +82181,19 @@ StyleSheet(
                 offset: SourceOffset(57946),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(57947),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(57948),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(57949),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(57950),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(57951),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(57952),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(57948),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(57950),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(57952),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82677,40 +82383,19 @@ StyleSheet(
                 offset: SourceOffset(58069),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(58070),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(58071),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(58072),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(58073),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(58074),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(58075),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(58071),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(58073),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(58075),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82900,40 +82585,19 @@ StyleSheet(
                 offset: SourceOffset(58194),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(58195),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(58196),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(58197),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(58198),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(58199),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(58200),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(58196),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(58198),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(58200),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -84085,40 +83749,19 @@ StyleSheet(
                       offset: SourceOffset(59308),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59309),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59310),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59311),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59312),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59313),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(59314),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59310),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59312),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(59314),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -84308,40 +83951,19 @@ StyleSheet(
                       offset: SourceOffset(59447),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59448),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59449),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59450),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59451),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59452),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(59453),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59449),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59451),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(59453),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -84531,40 +84153,19 @@ StyleSheet(
                       offset: SourceOffset(59588),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59589),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59590),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59591),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59592),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59593),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(59594),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59590),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59592),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(59594),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -85724,40 +85325,19 @@ StyleSheet(
                       offset: SourceOffset(60774),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60775),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60776),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60777),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60778),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60779),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(60780),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60776),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60778),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(60780),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -85947,40 +85527,19 @@ StyleSheet(
                       offset: SourceOffset(60912),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60913),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60914),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60915),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60916),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60917),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(60918),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60914),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60916),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(60918),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -86170,40 +85729,19 @@ StyleSheet(
                       offset: SourceOffset(61052),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61053),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61054),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61055),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61056),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61057),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(61058),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61054),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61056),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(61058),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -116071,40 +115609,19 @@ StyleSheet(
                 offset: SourceOffset(81350),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(81351),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(81352),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(81353),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(81354),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(81355),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(81356),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(81352),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(81354),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(81356),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -116596,40 +116113,19 @@ StyleSheet(
                 offset: SourceOffset(81728),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(81729),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(81730),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(81731),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(81732),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(81733),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(81734),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(81730),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(81732),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(81734),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -117030,40 +116526,19 @@ StyleSheet(
                 offset: SourceOffset(82020),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(82021),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(82022),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(82023),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(82024),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(82025),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(82026),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(82022),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(82024),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(82026),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -128289,40 +127764,19 @@ StyleSheet(
                 offset: SourceOffset(91404),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(91405),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(91406),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(91407),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(91408),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(91409),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(91410),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(91406),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(91408),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(91410),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -128886,40 +128340,19 @@ StyleSheet(
                 offset: SourceOffset(91784),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(91785),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(91786),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(91787),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(91788),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(91789),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(91790),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(91786),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(91788),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(91790),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -150585,40 +150018,19 @@ StyleSheet(
                 offset: SourceOffset(105878),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(105879),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(105880),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(105881),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(105882),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(105883),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(105884),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(105880),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(105882),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(105884),
+                len: 4,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151175,40 +150587,19 @@ StyleSheet(
                 offset: SourceOffset(106323),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(106324),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(106325),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(106326),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(106327),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(106328),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(106329),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(106325),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(106327),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(106329),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -151491,40 +150882,19 @@ StyleSheet(
                       offset: SourceOffset(106534),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(106535),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(106536),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(106537),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(106538),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(106539),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(106540),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(106536),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(106538),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(106540),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -151838,40 +151208,19 @@ StyleSheet(
                       offset: SourceOffset(106773),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(106774),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(106775),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(106776),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(106777),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(106778),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(106779),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(106775),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(106777),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(106779),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -153491,40 +152840,19 @@ StyleSheet(
                 offset: SourceOffset(108083),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(108084),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(108085),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(108086),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(108087),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(108088),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(108089),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(108085),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(108087),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(108089),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -153841,40 +153169,19 @@ StyleSheet(
                 offset: SourceOffset(108299),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(108300),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(108301),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(108302),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(108303),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(108304),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(108305),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(108301),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(108303),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(108305),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -157926,40 +157233,19 @@ StyleSheet(
                 offset: SourceOffset(111274),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(111275),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(111276),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(111277),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(111278),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(111279),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(111280),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(111276),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(111278),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(111280),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -159622,40 +158908,19 @@ StyleSheet(
                       offset: SourceOffset(112576),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(112577),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(112578),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(112579),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(112580),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(112581),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(112582),
-                          len: 3,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(112578),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(112580),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(112582),
+                      len: 3,
+                    )))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -159867,40 +159132,19 @@ StyleSheet(
                       offset: SourceOffset(112721),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(112722),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(112723),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(112724),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(112725),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(112726),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(112727),
-                          len: 3,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(112723),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(112725),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(112727),
+                      len: 3,
+                    )))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -160754,40 +159998,19 @@ StyleSheet(
                       offset: SourceOffset(113535),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113536),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(113537),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113538),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(113539),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113540),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(113541),
-                          len: 3,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(113537),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(113539),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(113541),
+                      len: 3,
+                    )))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -160999,40 +160222,19 @@ StyleSheet(
                       offset: SourceOffset(113679),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113680),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(113681),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113682),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(113683),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113684),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(113685),
-                          len: 3,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(113681),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(113683),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(113685),
+                      len: 3,
+                    )))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -185059,40 +184261,19 @@ StyleSheet(
                 offset: SourceOffset(131424),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(131425),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(131426),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(131427),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(131428),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(131429),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(131430),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(131426),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(131428),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(131430),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -185908,40 +185089,19 @@ StyleSheet(
                 offset: SourceOffset(132133),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(132134),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(132135),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(132136),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(132137),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(132138),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(132139),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(132135),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(132137),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(132139),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -224050,40 +223210,19 @@ StyleSheet(
                 offset: SourceOffset(161735),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(161736),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(161737),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(161738),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(161739),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(161740),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(161741),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(161737),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(161739),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(161741),
+                len: 3,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -228664,40 +227803,19 @@ StyleSheet(
                 offset: SourceOffset(165265),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(165266),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(165267),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(165268),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(165269),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(165270),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(165271),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(165267),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(165269),
+                len: 1,
+              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(165271),
+                len: 4,
+              )))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -229113,40 +228231,19 @@ StyleSheet(
                       offset: SourceOffset(165607),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(165608),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(165609),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(165610),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(165611),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(165612),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(165613),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(165609),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(165611),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(165613),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -229376,40 +228473,19 @@ StyleSheet(
                       offset: SourceOffset(165794),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(165795),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(165796),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(165797),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(165798),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(165799),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(165800),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(165796),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(165798),
+                      len: 1,
+                    )))))), Some(Width(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(165800),
+                      len: 4,
+                    )))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -229904,40 +228980,19 @@ StyleSheet(
                       offset: SourceOffset(166232),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(166233),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(166234),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(166235),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(166236),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(166237),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(166238),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(166234),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(166236),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(166238),
+                      len: 4,
+                    )))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -230432,40 +229487,19 @@ StyleSheet(
                       offset: SourceOffset(166665),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(166666),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(166667),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(166668),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(166669),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(166670),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(166671),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(166667),
+                      len: 1,
+                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(166669),
+                      len: 1,
+                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(166671),
+                      len: 4,
+                    )))))))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -230686,40 +229720,19 @@ StyleSheet(
                 offset: SourceOffset(166813),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(166814),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(166815),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(166816),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(166817),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(166818),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(166819),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(166815),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(166817),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(166819),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -230962,40 +229975,19 @@ StyleSheet(
                 offset: SourceOffset(166981),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(166982),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(166983),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(166984),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(166985),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(166986),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(166987),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FlexStyleValue(Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(166983),
+                len: 1,
+              ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(166985),
+                len: 1,
+              )))))), Some(Width(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(166987),
+                len: 4,
+              )))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
