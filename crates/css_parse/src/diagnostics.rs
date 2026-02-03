@@ -246,4 +246,22 @@ impl Diagnostic {
 		};
 		DiagnosticMeta { code: "UnexpectedId", message, help: "This isn't a valid ID.".into(), labels: vec![] }
 	}
+
+	pub fn opentype_tag_length(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "OpentypeTagLength",
+			message: "OpenType tag must be exactly 4 characters".to_string(),
+			help: "Feature and variation axis tags like 'kern', 'liga', 'wght' are always 4 ASCII characters.".into(),
+			labels: vec![],
+		}
+	}
+
+	pub fn opentype_tag_ascii(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "OpentypeTagAscii",
+			message: "OpenType tag contains invalid characters".to_string(),
+			help: "Tags must only contain ASCII characters in the range U+20-7E (printable ASCII).".into(),
+			labels: vec![],
+		}
+	}
 }

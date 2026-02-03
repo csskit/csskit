@@ -112,7 +112,6 @@ properties = ["filter", "backdrop-filter"]
 [fonts]
 properties = [
   "font",
-  "font-feature-settings",
   "font-palette",
   "font-size-adjust",
   "font-synthesis",
@@ -121,7 +120,6 @@ properties = [
   "font-variant-east-asian",
   "font-variant-ligatures",
   "font-variant-numeric",
-  "font-variation-settings",
   # Font properties with complex grammars that cause panics or use unsupported operators like /
   "superscript-size-override",
   "superscript-position-override",

@@ -93,51 +93,35 @@ use impls::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct FontFamilyStyleValue<'a>;
 
-// /// Represents the style value for `font-feature-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-feature-settings).
-// ///
-// /// The font-feature-settings CSS property sets low-level OpenType feature tags for a font. When possible, use font-variant instead.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | <feature-tag-value>#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-feature-settings
-// #[syntax(" normal | <feature-tag-value># ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     property_group = Fonts,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-feature-settings")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FontFeatureSettingsStyleValue<'a>;
+/// Represents the style value for `font-feature-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-feature-settings).
+///
+/// The font-feature-settings CSS property sets low-level OpenType feature tags for a font. When possible, use font-variant instead.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <feature-tag-value>#
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-feature-settings
+#[syntax(" normal | <feature-tag-value># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-feature-settings"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontFeatureSettingsStyleValue<'a>;
 
 /// Represents the style value for `font-kerning` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-kerning).
 ///
@@ -902,51 +886,35 @@ pub enum FontVariantEmojiStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontVariantPositionStyleValue {}
 
-// /// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
-// ///
-// /// The font-variation-settings CSS property sets an "axis of variability" on a variable font, such as weight, optical size, or a custom axis defined by the typeface designer. When possible, use other CSS font properties, such as font-weight: bold. Also known as variable fonts.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <opentype-tag> <number> ]#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-variation-settings
-// #[syntax(" normal | [ <opentype-tag> <number> ]# ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Unknown,
-//     property_group = Fonts,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-variation-settings")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FontVariationSettingsStyleValue<'a>;
+/// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
+///
+/// The font-variation-settings CSS property sets an "axis of variability" on a variable font, such as weight, optical size, or a custom axis defined by the typeface designer. When possible, use other CSS font properties, such as font-weight: bold. Also known as variable fonts.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <opentype-tag> <number> ]#
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-variation-settings
+#[syntax(" normal | [ <opentype-tag> <number> ]# ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Unknown,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variation-settings"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontVariationSettingsStyleValue<'a>;
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
 ///
