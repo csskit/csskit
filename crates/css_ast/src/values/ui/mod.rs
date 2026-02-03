@@ -297,7 +297,7 @@ pub struct InterestDelayStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum InterestDelayEndStyleValue {}
+pub struct InterestDelayEndStyleValue;
 
 /// Represents the style value for `interest-delay-start` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-start).
 ///
@@ -325,7 +325,7 @@ pub enum InterestDelayEndStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum InterestDelayStartStyleValue {}
+pub struct InterestDelayStartStyleValue;
 
 // /// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
 // ///

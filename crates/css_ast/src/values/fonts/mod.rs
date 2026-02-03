@@ -137,7 +137,7 @@ pub struct FontFamilyStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontFeatureSettingsStyleValue<'a> {}
+// pub struct FontFeatureSettingsStyleValue<'a>;
 
 /// Represents the style value for `font-kerning` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-kerning).
 ///
@@ -197,7 +197,7 @@ pub enum FontKerningStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-language-override"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontLanguageOverrideStyleValue {}
+pub struct FontLanguageOverrideStyleValue;
 
 /// Represents the style value for `font-optical-sizing` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-optical-sizing).
 ///
@@ -660,7 +660,7 @@ pub enum FontSynthesisWeightStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontVariantAlternatesStyleValue<'a> {}
+// pub struct FontVariantAlternatesStyleValue<'a>;
 
 /// Represents the style value for `font-variant-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-caps).
 ///
@@ -740,7 +740,7 @@ pub enum FontVariantCapsStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontVariantEastAsianStyleValue {}
+// pub struct FontVariantEastAsianStyleValue;
 
 /// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
 ///
@@ -869,7 +869,7 @@ pub enum FontVariantEmojiStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontVariantNumericStyleValue {}
+// pub struct FontVariantNumericStyleValue;
 
 /// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
 ///
@@ -946,7 +946,7 @@ pub enum FontVariantPositionStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontVariationSettingsStyleValue<'a> {}
+// pub struct FontVariationSettingsStyleValue<'a>;
 
 /// Represents the style value for `font-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-weight).
 ///

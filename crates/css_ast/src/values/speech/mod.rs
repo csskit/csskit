@@ -324,7 +324,7 @@ pub enum SpeakStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum SpeakAsStyleValue {}
+// pub struct SpeakAsStyleValue;
 
 /// Represents the style value for `voice-balance` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-balance).
 ///

@@ -3,8 +3,4 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
-enum Foo {
-    #[atom(CssAtomSet::Normal)]
-    Normal(::css_parse::T![Ident]),
-    SelfPosition(Option<crate::OverflowPosition>, crate::SelfPosition),
-}
+struct Foo(pub crate::NormalOr<(Option<crate::OverflowPosition>, crate::SelfPosition)>);

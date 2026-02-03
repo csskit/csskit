@@ -341,6 +341,7 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	HyphenateLimitLines,
 	HyphenateLimitZone,
 	Hyphens,
+	ImageAnimation,
 	ImageOrientation,
 	ImageRendering,
 	ImageResolution,

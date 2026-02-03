@@ -744,48 +744,32 @@ pub enum ItemDirectionStyleValue {}
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub struct ItemFlowStyleValue;
 
-// /// Represents the style value for `item-pack` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-pack).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | dense || balance
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-grid-3/#item-pack
-// #[syntax(" normal | dense || balance ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     property_group = Grid,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.item-pack")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum ItemPackStyleValue {}
+/// Represents the style value for `item-pack` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-pack).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | dense || balance
+/// ```
+///
+/// https://drafts.csswg.org/css-grid-3/#item-pack
+#[syntax(" normal | dense || balance ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Grid,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.item-pack"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ItemPackStyleValue;
 
 /// Represents the style value for `item-track` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#item-track).
 ///

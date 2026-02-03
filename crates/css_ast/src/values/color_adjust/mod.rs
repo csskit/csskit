@@ -82,7 +82,7 @@ pub struct ColorAdjustStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum ColorSchemeStyleValue<'a> {}
+// pub struct ColorSchemeStyleValue<'a>;
 
 /// Represents the style value for `forced-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust).
 ///

@@ -4,7 +4,6 @@
 
 [align]
 properties = [
-  "align-self",
   "justify-content",
   "justify-self",
   "place-self",
@@ -150,7 +149,6 @@ properties = [
   "grid-template-rows",
   "item-cross",
   "item-flow",
-  "item-pack",
   "item-wrap",
 ]
 
@@ -161,7 +159,6 @@ properties = ["image-orientation", "image-resolution", "object-fit"]
 properties = [
   "initial-letter",
   "initial-letter-align",
-  "text-box",
   "vertical-align",
 ]
 

@@ -26,7 +26,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ItemTrackStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<ItemWrapStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<ItemCrossStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<ItemPackStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<ItemPackStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<ItemFlowStyleValue>(), 1);
 	}
 
@@ -43,5 +43,9 @@ mod tests {
 
 		assert_parse!(CssAtomSet::ATOMS, ItemTrackStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ItemTrackStyleValue, "row-reverse");
+
+		assert_parse!(CssAtomSet::ATOMS, ItemPackStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, ItemPackStyleValue, "dense balance");
+		assert_parse!(CssAtomSet::ATOMS, ItemPackStyleValue, "balance dense");
 	}
 }

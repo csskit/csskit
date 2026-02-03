@@ -85,53 +85,35 @@ pub enum AlignContentStyleValue {}
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub enum AlignItemsStyleValue {}
 
-// /// Represents the style value for `align-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-self).
-// ///
-// /// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <overflow-position>? [ normal | <self-position> ]| stretch | <baseline-position>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-align-3/#align-self
-// #[syntax(
-//     " auto | <overflow-position>? [ normal | <self-position> ]| stretch | <baseline-position> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     shorthand_group = PlaceSelf,
-//     property_group = Align,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.align-self")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum AlignSelfStyleValue {}
+/// Represents the style value for `align-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-self).
+///
+/// Flexbox is a one-dimensional layout system, which places content either horizontally or vertically, with optional wrapping.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <overflow-position>? [ normal | <self-position> ]| stretch | <baseline-position>
+/// ```
+///
+/// https://drafts.csswg.org/css-align-3/#align-self
+#[syntax(" auto | <overflow-position>? [ normal | <self-position> ]| stretch | <baseline-position> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    shorthand_group = PlaceSelf,
+    property_group = Align,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-self"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum AlignSelfStyleValue {}
 
 /// Represents the style value for `column-gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#column-gap).
 ///
@@ -162,7 +144,7 @@ pub enum AlignContentStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-gap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnGapStyleValue {}
+pub struct ColumnGapStyleValue;
 
 /// Represents the style value for `gap` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#gap).
 ///
@@ -506,4 +488,4 @@ pub struct GapStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-gap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RowGapStyleValue {}
+pub struct RowGapStyleValue;

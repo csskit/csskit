@@ -250,7 +250,7 @@ pub struct PositionAreaStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-order"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionTryOrderStyleValue {}
+pub struct PositionTryOrderStyleValue;
 
 // /// Represents the style value for `position-visibility` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-visibility).
 // ///

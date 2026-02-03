@@ -273,7 +273,7 @@ pub enum HyphensStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.letter-spacing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum LetterSpacingStyleValue {}
+pub struct LetterSpacingStyleValue;
 
 /// Represents the style value for `line-break` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#line-break).
 ///
@@ -1073,7 +1073,7 @@ pub enum WordBreakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-spacing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WordSpacingStyleValue {}
+pub struct WordSpacingStyleValue;
 
 /// Represents the style value for `word-wrap` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#word-wrap).
 ///

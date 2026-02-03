@@ -139,7 +139,7 @@ fn custom_function_variant_with_args() {
 #[test]
 fn custom_function_variant_with_multiplier_args() {
 	let syntax = to_valuedef!(" normal | styleset(<feature-value-name>#) ");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "custom_function_variant_with_multiplier_args");
 }
 
@@ -335,7 +335,7 @@ fn multiplier_with_comma_separated_type() {
 #[test]
 fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
 	assert_snapshot!(syntax, data, "group_with_optional_leader");
 }
 

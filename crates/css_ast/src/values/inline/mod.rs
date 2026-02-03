@@ -334,51 +334,35 @@ pub enum LineFitEdgeStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum LineHeightStyleValue {}
 
-// /// Represents the style value for `text-box` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box).
-// ///
-// /// The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | <'text-box-trim'> || <'text-box-edge'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-inline-3/#text-box
-// #[syntax(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     longhands = TextBoxEdge|TextBoxTrim,
-//     property_group = Inline,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.text-box")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum TextBoxStyleValue {}
+/// Represents the style value for `text-box` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box).
+///
+/// The text-box CSS property sets the spacing above and below text based on a font's typographic features. For example, text-box: trim-both ex alphabetic trims the top to the top of the letter x and the bottom to the bottom of most letters, without descenders.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <'text-box-trim'> || <'text-box-edge'>
+/// ```
+///
+/// https://drafts.csswg.org/css-inline-3/#text-box
+#[syntax(" normal | <'text-box-trim'> || <'text-box-edge'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    longhands = TextBoxEdge|TextBoxTrim,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct TextBoxStyleValue;
 
 /// Represents the style value for `text-box-edge` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#text-box-edge).
 ///

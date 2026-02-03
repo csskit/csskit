@@ -88,6 +88,7 @@ impl ToFieldName for Def {
 			Self::AutoOr(ty) => format_ident!("AutoOr{}", ty.deref().to_variant_name(size_hint)),
 			Self::NoneOr(ty) => format_ident!("NoneOr{}", ty.deref().to_variant_name(size_hint)),
 			Self::AutoNoneOr(ty) => format_ident!("AutoNoneOr{}", ty.deref().to_variant_name(size_hint)),
+			Self::NormalOr(ty) => format_ident!("NormalOr{}", ty.deref().to_variant_name(size_hint)),
 			Self::Function(v, _) => format_ident!("{}Function", v.0.to_pascal_case()),
 			Self::Multiplier(v, _, _) => v.deref().to_variant_name(2),
 			Self::Group(def, _) => def.deref().to_variant_name(size_hint),
@@ -155,6 +156,10 @@ impl ToType for Def {
 			Self::AutoNoneOr(ty) => {
 				let ty = ty.to_type();
 				vec![quote! { crate::AutoNoneOr<#ty> }]
+			}
+			Self::NormalOr(ty) => {
+				let ty = ty.to_type();
+				vec![quote! { crate::NormalOr<#ty> }]
 			}
 			Self::Optional(v) => {
 				let ty = v.to_type();
@@ -272,6 +277,7 @@ impl DefExt for Def {
 			Self::AutoOr(ty) => ty.as_ref().should_skip_visit(),
 			Self::NoneOr(ty) => ty.as_ref().should_skip_visit(),
 			Self::AutoNoneOr(ty) => ty.as_ref().should_skip_visit(),
+			Self::NormalOr(ty) => ty.as_ref().should_skip_visit(),
 			Self::Type(DefType { ident, .. }) => ident.0.ends_with("Keywords"),
 			Self::StyleValue(_) => false,
 			Self::FunctionType(_) => false,
@@ -319,6 +325,7 @@ impl DefExt for Def {
 			Self::AutoOr(def) => def.deref().is_all_keywords(),
 			Self::NoneOr(def) => def.deref().is_all_keywords(),
 			Self::AutoNoneOr(def) => def.deref().is_all_keywords(),
+			Self::NormalOr(def) => def.deref().is_all_keywords(),
 			Self::Optional(def) => def.deref().is_all_keywords(),
 			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
 			Self::Group(def, _) => def.deref().is_all_keywords(),
@@ -335,6 +342,7 @@ impl DefExt for Def {
 			Self::AutoOr(_) => vec![],
 			Self::NoneOr(_) => vec![],
 			Self::AutoNoneOr(_) => vec![],
+			Self::NormalOr(_) => vec![],
 			Self::StyleValue(_) => vec![],
 			Self::FunctionType(_) => vec![],
 			Self::Type(_) => vec![],
@@ -358,8 +366,10 @@ impl DefExt for Def {
 	}
 
 	fn get_generics(&self) -> Generics {
-		// NonrOr/AutoOr might maybe_unsized for the internal to the type, but shoulnd't express it's own generics
-		if self.maybe_unsized() && !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_)) {
+		// NoneOr/AutoOr/NormalOr might maybe_unsized for the internal to the type, but shouldn't express their own generics
+		if self.maybe_unsized()
+			&& !matches!(self, Def::NoneOr(_) | Def::AutoOr(_) | Def::AutoNoneOr(_) | Def::NormalOr(_))
+		{
 			parse_quote!(<'a>)
 		} else {
 			Default::default()

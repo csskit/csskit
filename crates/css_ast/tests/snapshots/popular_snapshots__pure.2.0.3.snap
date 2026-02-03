@@ -3630,11 +3630,11 @@ StyleSheet(
                 offset: SourceOffset(7304),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Em(Dimension(Cursor(
+              value: LetterSpacingStyleValue(Some(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(7306),
                 len: 7,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4266,11 +4266,11 @@ StyleSheet(
                 offset: SourceOffset(9013),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Em(Dimension(Cursor(
+              value: WordSpacingStyleValue(Some(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(9015),
                 len: 7,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4347,11 +4347,11 @@ StyleSheet(
                 offset: SourceOffset(9082),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: LetterSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(9084),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4370,11 +4370,11 @@ StyleSheet(
                 offset: SourceOffset(9108),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: WordSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(9110),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -5425,11 +5425,11 @@ StyleSheet(
                 offset: SourceOffset(10064),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: LetterSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(10066),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -5448,11 +5448,11 @@ StyleSheet(
                 offset: SourceOffset(10090),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: WordSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(10092),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -8013,11 +8013,11 @@ StyleSheet(
                 offset: SourceOffset(12049),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Em(Dimension(Cursor(
+              value: LetterSpacingStyleValue(Some(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(12051),
                 len: 7,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -8135,11 +8135,11 @@ StyleSheet(
                 offset: SourceOffset(12265),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Em(Dimension(Cursor(
+              value: WordSpacingStyleValue(Some(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(12267),
                 len: 7,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -8210,11 +8210,11 @@ StyleSheet(
                 offset: SourceOffset(12331),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: LetterSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(12333),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -8233,11 +8233,11 @@ StyleSheet(
                 offset: SourceOffset(12357),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: WordSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(12359),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

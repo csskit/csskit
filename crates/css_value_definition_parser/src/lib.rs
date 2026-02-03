@@ -33,6 +33,7 @@ pub enum Def {
 	AutoOr(Box<Def>),
 	NoneOr(Box<Def>),
 	AutoNoneOr(Box<Def>),
+	NormalOr(Box<Def>),
 	Type(DefType),
 	StyleValue(DefType),
 	FunctionType(DefType),
@@ -337,7 +338,7 @@ impl Def {
 						| "BorderTopClip"
 				)
 			}
-			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) => d.maybe_unsized(),
+			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),
 			Self::Optional(d) => d.maybe_unsized(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.maybe_unsized()),
 			Self::Group(d, _) => d.maybe_unsized(),
@@ -386,6 +387,14 @@ impl Def {
 						!matches!(def, Def::Ident(_) | Def::AutoOr(_) | Def::NoneOr(_)) =>
 					{
 						Def::NoneOr(Box::new(def.clone()))
+					}
+					// "<X> | normal" can be simplified to "NormalOr<X>"
+					(Def::Ident(DefIdent(ident)), def) | (def, Def::Ident(DefIdent(ident)))
+						if ident == "normal" &&
+						// Avoid NormalOr<Ident>, or NormalOr<AutoOr<>> though
+						!matches!(def, Def::Ident(_) | Def::AutoOr(_) | Def::NoneOr(_) | Def::NormalOr(_)) =>
+					{
+						Def::NormalOr(Box::new(def.clone()))
 					}
 					// "<length-percentage> | <flex>" can be simplified to "<length-percentage-or-flex>"
 					(Def::Type(type1), Def::Type(type2)) => match (type1.ident_str(), type2.ident_str()) {
@@ -503,6 +512,7 @@ impl Def {
 				return Self::Multiplier(Box::new(inner.optimize()), *sep, range.clone());
 			}
 			Self::Optional(inner) => return Self::Optional(Box::new(inner.optimize())),
+			Self::Group(inner, style) => return Self::Group(Box::new(inner.optimize()), *style),
 			_ => return self.clone(),
 		}
 		.optimize()

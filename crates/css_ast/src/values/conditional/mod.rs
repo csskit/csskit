@@ -127,4 +127,4 @@ pub struct ContainerNameStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum ContainerTypeStyleValue {}
+// pub struct ContainerTypeStyleValue;

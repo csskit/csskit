@@ -164754,11 +164754,11 @@ StyleSheet(
                 offset: SourceOffset(127343),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: LetterSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(127344),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -164827,11 +164827,11 @@ StyleSheet(
                 offset: SourceOffset(127400),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: WordSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(127401),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -169215,11 +169215,11 @@ StyleSheet(
                 offset: SourceOffset(130927),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: LetterSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(130928),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -169288,11 +169288,11 @@ StyleSheet(
                 offset: SourceOffset(130984),
                 len: 1,
               )),
-              value: Normal(Ident(Cursor(
+              value: WordSpacingStyleValue(Normal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(130985),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -207323,11 +207323,11 @@ StyleSheet(
                 offset: SourceOffset(159387),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(159388),
                 len: 7,
-              ))))), None),
+              )))))), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -210966,15 +210966,11 @@ StyleSheet(
                 offset: SourceOffset(161545),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(161546),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Stretch(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(161546),
+                len: 7,
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -211101,15 +211097,11 @@ StyleSheet(
                 offset: SourceOffset(161621),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(161622),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Stretch(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(161622),
+                len: 7,
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -212135,15 +212127,11 @@ StyleSheet(
                 offset: SourceOffset(162220),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(162221),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Stretch(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(162221),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -224898,26 +224886,23 @@ StyleSheet(
                 offset: SourceOffset(170771),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170772),
-                    len: 4,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(170776),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170777),
-                    len: 9,
-                  )),
-                ],
+              value: Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(170772),
+                len: 4,
+              ))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(170776),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(170777),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: None,
             ),
           ],
@@ -224966,26 +224951,23 @@ StyleSheet(
                 offset: SourceOffset(170815),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170816),
-                    len: 10,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(170826),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170827),
-                    len: 9,
-                  )),
-                ],
+              value: NormalOrSelfPosition(None, Some(FlexStart(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(170816),
+                len: 10,
+              ))))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(170826),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(170827),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: None,
             ),
           ],
@@ -225034,26 +225016,23 @@ StyleSheet(
                 offset: SourceOffset(170863),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170864),
-                    len: 8,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(170872),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170873),
-                    len: 9,
-                  )),
-                ],
+              value: NormalOrSelfPosition(None, Some(FlexEnd(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(170864),
+                len: 8,
+              ))))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(170872),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(170873),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: None,
             ),
           ],
@@ -225102,26 +225081,23 @@ StyleSheet(
                 offset: SourceOffset(170912),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170913),
-                    len: 6,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(170919),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170920),
-                    len: 9,
-                  )),
-                ],
+              value: NormalOrSelfPosition(None, Some(Center(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(170913),
+                len: 6,
+              ))))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(170919),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(170920),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: None,
             ),
           ],
@@ -225170,26 +225146,23 @@ StyleSheet(
                 offset: SourceOffset(170961),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170962),
-                    len: 8,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(170970),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(170971),
-                    len: 9,
-                  )),
-                ],
+              value: BaselinePosition(Baseline(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(170962),
+                len: 8,
+              )))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(170970),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(170971),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: None,
             ),
           ],
@@ -225238,26 +225211,23 @@ StyleSheet(
                 offset: SourceOffset(171011),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(171012),
-                    len: 7,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(171019),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(171020),
-                    len: 9,
-                  )),
-                ],
+              value: Stretch(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(171012),
+                len: 7,
+              ))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(171019),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(171020),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: None,
             ),
           ],
@@ -232625,11 +232595,11 @@ StyleSheet(
                 offset: SourceOffset(175054),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Zero(Number(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(175055),
                 len: 1,
-              )))), None),
+              ))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -232690,11 +232660,11 @@ StyleSheet(
                 offset: SourceOffset(175077),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175078),
                 len: 6,
-              ))))), None),
+              )))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -232755,11 +232725,11 @@ StyleSheet(
                 offset: SourceOffset(175105),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175106),
                 len: 5,
-              ))))), None),
+              )))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -232820,11 +232790,11 @@ StyleSheet(
                 offset: SourceOffset(175132),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175133),
                 len: 4,
-              ))))), None),
+              )))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -232885,11 +232855,11 @@ StyleSheet(
                 offset: SourceOffset(175158),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175159),
                 len: 6,
-              ))))), None),
+              )))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -232950,11 +232920,11 @@ StyleSheet(
                 offset: SourceOffset(175186),
                 len: 1,
               )),
-              value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175187),
                 len: 4,
-              ))))), None),
+              )))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233015,11 +232985,11 @@ StyleSheet(
                 offset: SourceOffset(175220),
                 len: 1,
               )),
-              value: LengthPercentage(Zero(Number(Cursor(
+              value: RowGapStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(175221),
                 len: 1,
-              )))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233080,11 +233050,11 @@ StyleSheet(
                 offset: SourceOffset(175251),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175252),
                 len: 6,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233145,11 +233115,11 @@ StyleSheet(
                 offset: SourceOffset(175287),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175288),
                 len: 5,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233210,11 +233180,11 @@ StyleSheet(
                 offset: SourceOffset(175322),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175323),
                 len: 4,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233275,11 +233245,11 @@ StyleSheet(
                 offset: SourceOffset(175356),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175357),
                 len: 6,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233340,11 +233310,11 @@ StyleSheet(
                 offset: SourceOffset(175392),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175393),
                 len: 4,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233442,11 +233412,11 @@ StyleSheet(
                 offset: SourceOffset(175460),
                 len: 1,
               )),
-              value: LengthPercentage(Zero(Number(Cursor(
+              value: ColumnGapStyleValue(Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(175461),
                 len: 1,
-              )))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233544,11 +233514,11 @@ StyleSheet(
                 offset: SourceOffset(175531),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175532),
                 len: 6,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233646,11 +233616,11 @@ StyleSheet(
                 offset: SourceOffset(175606),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175607),
                 len: 5,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233748,11 +233718,11 @@ StyleSheet(
                 offset: SourceOffset(175678),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175679),
                 len: 4,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233850,11 +233820,11 @@ StyleSheet(
                 offset: SourceOffset(175751),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175752),
                 len: 6,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -233952,11 +233922,11 @@ StyleSheet(
                 offset: SourceOffset(175824),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Rem(Dimension(Cursor(
+              value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(175825),
                 len: 4,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -256652,26 +256622,23 @@ StyleSheet(
                       offset: SourceOffset(193982),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(193983),
-                          len: 4,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(193987),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(193988),
-                          len: 9,
-                        )),
-                      ],
+                    value: Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(193983),
+                      len: 4,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(193987),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(193988),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -256720,26 +256687,23 @@ StyleSheet(
                       offset: SourceOffset(194029),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194030),
-                          len: 10,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(194040),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194041),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexStart(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(194030),
+                      len: 10,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(194040),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(194041),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -256788,26 +256752,23 @@ StyleSheet(
                       offset: SourceOffset(194080),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194081),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(194089),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194090),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexEnd(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(194081),
+                      len: 8,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(194089),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(194090),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -256856,26 +256817,23 @@ StyleSheet(
                       offset: SourceOffset(194132),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194133),
-                          len: 6,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(194139),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194140),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(194133),
+                      len: 6,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(194139),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(194140),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -256924,26 +256882,23 @@ StyleSheet(
                       offset: SourceOffset(194184),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194185),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(194193),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194194),
-                          len: 9,
-                        )),
-                      ],
+                    value: BaselinePosition(Baseline(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(194185),
+                      len: 8,
+                    )))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(194193),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(194194),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -256992,26 +256947,23 @@ StyleSheet(
                       offset: SourceOffset(194237),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194238),
-                          len: 7,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(194245),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(194246),
-                          len: 9,
-                        )),
-                      ],
+                    value: Stretch(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(194238),
+                      len: 7,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(194245),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(194246),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -264379,11 +264331,11 @@ StyleSheet(
                       offset: SourceOffset(198580),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Zero(Number(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(198581),
                       len: 1,
-                    )))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264444,11 +264396,11 @@ StyleSheet(
                       offset: SourceOffset(198606),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198607),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264509,11 +264461,11 @@ StyleSheet(
                       offset: SourceOffset(198637),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198638),
                       len: 5,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264574,11 +264526,11 @@ StyleSheet(
                       offset: SourceOffset(198667),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198668),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264639,11 +264591,11 @@ StyleSheet(
                       offset: SourceOffset(198696),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198697),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264704,11 +264656,11 @@ StyleSheet(
                       offset: SourceOffset(198727),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198728),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264769,11 +264721,11 @@ StyleSheet(
                       offset: SourceOffset(198764),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(198765),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264834,11 +264786,11 @@ StyleSheet(
                       offset: SourceOffset(198798),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198799),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264899,11 +264851,11 @@ StyleSheet(
                       offset: SourceOffset(198837),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198838),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264964,11 +264916,11 @@ StyleSheet(
                       offset: SourceOffset(198875),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198876),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265029,11 +264981,11 @@ StyleSheet(
                       offset: SourceOffset(198912),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198913),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265094,11 +265046,11 @@ StyleSheet(
                       offset: SourceOffset(198951),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(198952),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265196,11 +265148,11 @@ StyleSheet(
                       offset: SourceOffset(199022),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: ColumnGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(199023),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265298,11 +265250,11 @@ StyleSheet(
                       offset: SourceOffset(199096),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(199097),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265400,11 +265352,11 @@ StyleSheet(
                       offset: SourceOffset(199174),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(199175),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265502,11 +265454,11 @@ StyleSheet(
                       offset: SourceOffset(199249),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(199250),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265604,11 +265556,11 @@ StyleSheet(
                       offset: SourceOffset(199325),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(199326),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265706,11 +265658,11 @@ StyleSheet(
                       offset: SourceOffset(199401),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(199402),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -269377,26 +269329,23 @@ StyleSheet(
                       offset: SourceOffset(202106),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202107),
-                          len: 4,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(202111),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202112),
-                          len: 9,
-                        )),
-                      ],
+                    value: Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(202107),
+                      len: 4,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(202111),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(202112),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -269445,26 +269394,23 @@ StyleSheet(
                       offset: SourceOffset(202153),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202154),
-                          len: 10,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(202164),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202165),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexStart(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(202154),
+                      len: 10,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(202164),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(202165),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -269513,26 +269459,23 @@ StyleSheet(
                       offset: SourceOffset(202204),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202205),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(202213),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202214),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexEnd(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(202205),
+                      len: 8,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(202213),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(202214),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -269581,26 +269524,23 @@ StyleSheet(
                       offset: SourceOffset(202256),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202257),
-                          len: 6,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(202263),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202264),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(202257),
+                      len: 6,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(202263),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(202264),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -269649,26 +269589,23 @@ StyleSheet(
                       offset: SourceOffset(202308),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202309),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(202317),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202318),
-                          len: 9,
-                        )),
-                      ],
+                    value: BaselinePosition(Baseline(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(202309),
+                      len: 8,
+                    )))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(202317),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(202318),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -269717,26 +269654,23 @@ StyleSheet(
                       offset: SourceOffset(202361),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202362),
-                          len: 7,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(202369),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(202370),
-                          len: 9,
-                        )),
-                      ],
+                    value: Stretch(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(202362),
+                      len: 7,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(202369),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(202370),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -277104,11 +277038,11 @@ StyleSheet(
                       offset: SourceOffset(206704),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Zero(Number(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(206705),
                       len: 1,
-                    )))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277169,11 +277103,11 @@ StyleSheet(
                       offset: SourceOffset(206730),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206731),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277234,11 +277168,11 @@ StyleSheet(
                       offset: SourceOffset(206761),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206762),
                       len: 5,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277299,11 +277233,11 @@ StyleSheet(
                       offset: SourceOffset(206791),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206792),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277364,11 +277298,11 @@ StyleSheet(
                       offset: SourceOffset(206820),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206821),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277429,11 +277363,11 @@ StyleSheet(
                       offset: SourceOffset(206851),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206852),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277494,11 +277428,11 @@ StyleSheet(
                       offset: SourceOffset(206888),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(206889),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277559,11 +277493,11 @@ StyleSheet(
                       offset: SourceOffset(206922),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206923),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277624,11 +277558,11 @@ StyleSheet(
                       offset: SourceOffset(206961),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(206962),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277689,11 +277623,11 @@ StyleSheet(
                       offset: SourceOffset(206999),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207000),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277754,11 +277688,11 @@ StyleSheet(
                       offset: SourceOffset(207036),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207037),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277819,11 +277753,11 @@ StyleSheet(
                       offset: SourceOffset(207075),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207076),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277921,11 +277855,11 @@ StyleSheet(
                       offset: SourceOffset(207146),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: ColumnGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(207147),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -278023,11 +277957,11 @@ StyleSheet(
                       offset: SourceOffset(207220),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207221),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -278125,11 +278059,11 @@ StyleSheet(
                       offset: SourceOffset(207298),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207299),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -278227,11 +278161,11 @@ StyleSheet(
                       offset: SourceOffset(207373),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207374),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -278329,11 +278263,11 @@ StyleSheet(
                       offset: SourceOffset(207449),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207450),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -278431,11 +278365,11 @@ StyleSheet(
                       offset: SourceOffset(207525),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(207526),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -282102,26 +282036,23 @@ StyleSheet(
                       offset: SourceOffset(210230),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210231),
-                          len: 4,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(210235),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210236),
-                          len: 9,
-                        )),
-                      ],
+                    value: Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(210231),
+                      len: 4,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(210235),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(210236),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -282170,26 +282101,23 @@ StyleSheet(
                       offset: SourceOffset(210277),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210278),
-                          len: 10,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(210288),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210289),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexStart(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(210278),
+                      len: 10,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(210288),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(210289),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -282238,26 +282166,23 @@ StyleSheet(
                       offset: SourceOffset(210328),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210329),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(210337),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210338),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexEnd(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(210329),
+                      len: 8,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(210337),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(210338),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -282306,26 +282231,23 @@ StyleSheet(
                       offset: SourceOffset(210380),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210381),
-                          len: 6,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(210387),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210388),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(210381),
+                      len: 6,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(210387),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(210388),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -282374,26 +282296,23 @@ StyleSheet(
                       offset: SourceOffset(210432),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210433),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(210441),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210442),
-                          len: 9,
-                        )),
-                      ],
+                    value: BaselinePosition(Baseline(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(210433),
+                      len: 8,
+                    )))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(210441),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(210442),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -282442,26 +282361,23 @@ StyleSheet(
                       offset: SourceOffset(210485),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210486),
-                          len: 7,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(210493),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(210494),
-                          len: 9,
-                        )),
-                      ],
+                    value: Stretch(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(210486),
+                      len: 7,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(210493),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(210494),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -289829,11 +289745,11 @@ StyleSheet(
                       offset: SourceOffset(214828),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Zero(Number(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(214829),
                       len: 1,
-                    )))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -289894,11 +289810,11 @@ StyleSheet(
                       offset: SourceOffset(214854),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214855),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -289959,11 +289875,11 @@ StyleSheet(
                       offset: SourceOffset(214885),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214886),
                       len: 5,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290024,11 +289940,11 @@ StyleSheet(
                       offset: SourceOffset(214915),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214916),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290089,11 +290005,11 @@ StyleSheet(
                       offset: SourceOffset(214944),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214945),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290154,11 +290070,11 @@ StyleSheet(
                       offset: SourceOffset(214975),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214976),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290219,11 +290135,11 @@ StyleSheet(
                       offset: SourceOffset(215012),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(215013),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290284,11 +290200,11 @@ StyleSheet(
                       offset: SourceOffset(215046),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215047),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290349,11 +290265,11 @@ StyleSheet(
                       offset: SourceOffset(215085),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215086),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290414,11 +290330,11 @@ StyleSheet(
                       offset: SourceOffset(215123),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215124),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290479,11 +290395,11 @@ StyleSheet(
                       offset: SourceOffset(215160),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215161),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290544,11 +290460,11 @@ StyleSheet(
                       offset: SourceOffset(215199),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215200),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290646,11 +290562,11 @@ StyleSheet(
                       offset: SourceOffset(215270),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: ColumnGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(215271),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290748,11 +290664,11 @@ StyleSheet(
                       offset: SourceOffset(215344),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215345),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290850,11 +290766,11 @@ StyleSheet(
                       offset: SourceOffset(215422),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215423),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290952,11 +290868,11 @@ StyleSheet(
                       offset: SourceOffset(215497),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215498),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -291054,11 +290970,11 @@ StyleSheet(
                       offset: SourceOffset(215573),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215574),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -291156,11 +291072,11 @@ StyleSheet(
                       offset: SourceOffset(215649),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(215650),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -294827,26 +294743,23 @@ StyleSheet(
                       offset: SourceOffset(218355),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218356),
-                          len: 4,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(218360),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218361),
-                          len: 9,
-                        )),
-                      ],
+                    value: Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(218356),
+                      len: 4,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(218360),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(218361),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -294895,26 +294808,23 @@ StyleSheet(
                       offset: SourceOffset(218402),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218403),
-                          len: 10,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(218413),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218414),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexStart(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(218403),
+                      len: 10,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(218413),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(218414),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -294963,26 +294873,23 @@ StyleSheet(
                       offset: SourceOffset(218453),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218454),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(218462),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218463),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexEnd(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(218454),
+                      len: 8,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(218462),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(218463),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -295031,26 +294938,23 @@ StyleSheet(
                       offset: SourceOffset(218505),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218506),
-                          len: 6,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(218512),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218513),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(218506),
+                      len: 6,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(218512),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(218513),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -295099,26 +295003,23 @@ StyleSheet(
                       offset: SourceOffset(218557),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218558),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(218566),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218567),
-                          len: 9,
-                        )),
-                      ],
+                    value: BaselinePosition(Baseline(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(218558),
+                      len: 8,
+                    )))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(218566),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(218567),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -295167,26 +295068,23 @@ StyleSheet(
                       offset: SourceOffset(218610),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218611),
-                          len: 7,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(218618),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(218619),
-                          len: 9,
-                        )),
-                      ],
+                    value: Stretch(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(218611),
+                      len: 7,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(218618),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(218619),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -302554,11 +302452,11 @@ StyleSheet(
                       offset: SourceOffset(222953),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Zero(Number(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(222954),
                       len: 1,
-                    )))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -302619,11 +302517,11 @@ StyleSheet(
                       offset: SourceOffset(222979),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(222980),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -302684,11 +302582,11 @@ StyleSheet(
                       offset: SourceOffset(223010),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223011),
                       len: 5,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -302749,11 +302647,11 @@ StyleSheet(
                       offset: SourceOffset(223040),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223041),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -302814,11 +302712,11 @@ StyleSheet(
                       offset: SourceOffset(223069),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223070),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -302879,11 +302777,11 @@ StyleSheet(
                       offset: SourceOffset(223100),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223101),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -302944,11 +302842,11 @@ StyleSheet(
                       offset: SourceOffset(223137),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(223138),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303009,11 +302907,11 @@ StyleSheet(
                       offset: SourceOffset(223171),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223172),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303074,11 +302972,11 @@ StyleSheet(
                       offset: SourceOffset(223210),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223211),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303139,11 +303037,11 @@ StyleSheet(
                       offset: SourceOffset(223248),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223249),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303204,11 +303102,11 @@ StyleSheet(
                       offset: SourceOffset(223285),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223286),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303269,11 +303167,11 @@ StyleSheet(
                       offset: SourceOffset(223324),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223325),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303371,11 +303269,11 @@ StyleSheet(
                       offset: SourceOffset(223395),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: ColumnGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(223396),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303473,11 +303371,11 @@ StyleSheet(
                       offset: SourceOffset(223469),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223470),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303575,11 +303473,11 @@ StyleSheet(
                       offset: SourceOffset(223547),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223548),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303677,11 +303575,11 @@ StyleSheet(
                       offset: SourceOffset(223622),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223623),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303779,11 +303677,11 @@ StyleSheet(
                       offset: SourceOffset(223698),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223699),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303881,11 +303779,11 @@ StyleSheet(
                       offset: SourceOffset(223774),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(223775),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -307552,26 +307450,23 @@ StyleSheet(
                       offset: SourceOffset(226529),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226530),
-                          len: 4,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(226534),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226535),
-                          len: 9,
-                        )),
-                      ],
+                    value: Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(226530),
+                      len: 4,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(226534),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(226535),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -307620,26 +307515,23 @@ StyleSheet(
                       offset: SourceOffset(226577),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226578),
-                          len: 10,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(226588),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226589),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexStart(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(226578),
+                      len: 10,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(226588),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(226589),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -307688,26 +307580,23 @@ StyleSheet(
                       offset: SourceOffset(226629),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226630),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(226638),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226639),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(FlexEnd(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(226630),
+                      len: 8,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(226638),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(226639),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -307756,26 +307645,23 @@ StyleSheet(
                       offset: SourceOffset(226682),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226683),
-                          len: 6,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(226689),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226690),
-                          len: 9,
-                        )),
-                      ],
+                    value: NormalOrSelfPosition(None, Some(Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(226683),
+                      len: 6,
+                    ))))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(226689),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(226690),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -307824,26 +307710,23 @@ StyleSheet(
                       offset: SourceOffset(226735),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226736),
-                          len: 8,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(226744),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226745),
-                          len: 9,
-                        )),
-                      ],
+                    value: BaselinePosition(Baseline(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(226736),
+                      len: 8,
+                    )))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(226744),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(226745),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -307892,26 +307775,23 @@ StyleSheet(
                       offset: SourceOffset(226789),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226790),
-                          len: 7,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(226797),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(226798),
-                          len: 9,
-                        )),
-                      ],
+                    value: Stretch(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(226790),
+                      len: 7,
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(226797),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(226798),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: None,
                   ),
                 ],
@@ -315279,11 +315159,11 @@ StyleSheet(
                       offset: SourceOffset(231232),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Zero(Number(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(231233),
                       len: 1,
-                    )))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315344,11 +315224,11 @@ StyleSheet(
                       offset: SourceOffset(231259),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231260),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315409,11 +315289,11 @@ StyleSheet(
                       offset: SourceOffset(231291),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231292),
                       len: 5,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315474,11 +315354,11 @@ StyleSheet(
                       offset: SourceOffset(231322),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231323),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315539,11 +315419,11 @@ StyleSheet(
                       offset: SourceOffset(231352),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231353),
                       len: 6,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315604,11 +315484,11 @@ StyleSheet(
                       offset: SourceOffset(231384),
                       len: 1,
                     )),
-                    value: GapStyleValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231385),
                       len: 4,
-                    ))))), None),
+                    )))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315669,11 +315549,11 @@ StyleSheet(
                       offset: SourceOffset(231422),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: RowGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(231423),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315734,11 +315614,11 @@ StyleSheet(
                       offset: SourceOffset(231457),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231458),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315799,11 +315679,11 @@ StyleSheet(
                       offset: SourceOffset(231497),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231498),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315864,11 +315744,11 @@ StyleSheet(
                       offset: SourceOffset(231536),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231537),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315929,11 +315809,11 @@ StyleSheet(
                       offset: SourceOffset(231574),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231575),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -315994,11 +315874,11 @@ StyleSheet(
                       offset: SourceOffset(231614),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: RowGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231615),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -316096,11 +315976,11 @@ StyleSheet(
                       offset: SourceOffset(231686),
                       len: 1,
                     )),
-                    value: LengthPercentage(Zero(Number(Cursor(
+                    value: ColumnGapStyleValue(Some(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(231687),
                       len: 1,
-                    )))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -316198,11 +316078,11 @@ StyleSheet(
                       offset: SourceOffset(231761),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231762),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -316300,11 +316180,11 @@ StyleSheet(
                       offset: SourceOffset(231840),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231841),
                       len: 5,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -316402,11 +316282,11 @@ StyleSheet(
                       offset: SourceOffset(231916),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231917),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -316504,11 +316384,11 @@ StyleSheet(
                       offset: SourceOffset(231993),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(231994),
                       len: 6,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -316606,11 +316486,11 @@ StyleSheet(
                       offset: SourceOffset(232070),
                       len: 1,
                     )),
-                    value: LengthPercentage(Length(Rem(Dimension(Cursor(
+                    value: ColumnGapStyleValue(Some(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(232071),
                       len: 4,
-                    ))))),
+                    )))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
