@@ -169,23 +169,88 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 	}
 }
 
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ScrollStateFeature {
-	Scrollable(ScrollableScrollStateFeature),
-	Snapped(SnappedScrollStateFeature),
-	Stuck(StuckScrollStateFeature),
+	Stuck(
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![Ident],
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![:]>,
+		Option<StuckScrollStateFeatureKeyword>,
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
+	Snapped(
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![Ident],
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![:]>,
+		Option<SnappedScrollStateFeatureKeyword>,
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
+	Scrollable(
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))] T![Ident],
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![:]>,
+		Option<ScrollableScrollStateFeatureKeyword>,
+		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+	),
 }
 
-discrete_feature!(
-	#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
-#[derive(csskit_derives::NodeWithMetadata)]
-	pub enum ScrollableScrollStateFeature{CssAtomSet::Scrollable, ScrollableScrollStateFeatureKeyword}
-);
+impl<'a> Peek<'a> for ScrollStateFeature {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		// Bare form: `stuck: top`
+		if c == Kind::Ident
+			&& matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::Stuck | CssAtomSet::Snapped | CssAtomSet::Scrollable)
+		{
+			return true;
+		}
+		// Paren-wrapped form: `(stuck: top)`
+		if c == Kind::LeftParen {
+			let c2 = p.peek_n(2);
+			return c2 == Kind::Ident
+				&& matches!(
+					p.to_atom::<CssAtomSet>(c2),
+					CssAtomSet::Stuck | CssAtomSet::Snapped | CssAtomSet::Scrollable
+				);
+		}
+		false
+	}
+}
+
+impl<'a> Parse<'a> for ScrollStateFeature {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let open = p.parse_if_peek::<T!['(']>()?;
+		let ident = p.parse::<T![Ident]>()?;
+		let c: Cursor = ident.into();
+		let colon = p.parse_if_peek::<T![:]>()?;
+		match p.to_atom::<CssAtomSet>(c) {
+			CssAtomSet::Stuck => {
+				let value = if colon.is_some() { Some(p.parse::<StuckScrollStateFeatureKeyword>()?) } else { None };
+				let close = if open.is_some() { Some(p.parse::<T![')']>()?) } else { None };
+				Ok(Self::Stuck(open, ident, colon, value, close))
+			}
+			CssAtomSet::Snapped => {
+				let value = if colon.is_some() { Some(p.parse::<SnappedScrollStateFeatureKeyword>()?) } else { None };
+				let close = if open.is_some() { Some(p.parse::<T![')']>()?) } else { None };
+				Ok(Self::Snapped(open, ident, colon, value, close))
+			}
+			CssAtomSet::Scrollable => {
+				let value =
+					if colon.is_some() { Some(p.parse::<ScrollableScrollStateFeatureKeyword>()?) } else { None };
+				let close = if open.is_some() { Some(p.parse::<T![')']>()?) } else { None };
+				Ok(Self::Scrollable(open, ident, colon, value, close))
+			}
+			_ => Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?,
+		}
+	}
+}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -222,14 +287,6 @@ pub enum ScrollableScrollStateFeatureKeyword {
 	Discrete(T![Ident]),
 }
 
-discrete_feature!(
-	#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
-#[derive(csskit_derives::NodeWithMetadata)]
-	pub enum SnappedScrollStateFeature{CssAtomSet::Snapped, SnappedScrollStateFeatureKeyword}
-);
-
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -250,14 +307,6 @@ pub enum SnappedScrollStateFeatureKeyword {
 	#[atom(CssAtomSet::Discrete)]
 	Discrete(T![Ident]),
 }
-
-discrete_feature!(
-	#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
-#[derive(csskit_derives::NodeWithMetadata)]
-	pub enum StuckScrollStateFeature{CssAtomSet::Stuck, StuckScrollStateFeatureKeyword}
-);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -301,11 +350,8 @@ mod tests {
 		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 180);
 		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
 		assert_eq!(std::mem::size_of::<StyleQuery>(), 504);
-		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 80);
-		assert_eq!(std::mem::size_of::<ScrollStateFeature>(), 68);
-		assert_eq!(std::mem::size_of::<ScrollableScrollStateFeature>(), 64);
-		assert_eq!(std::mem::size_of::<SnappedScrollStateFeature>(), 64);
-		assert_eq!(std::mem::size_of::<StuckScrollStateFeature>(), 64);
+		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 96);
+		assert_eq!(std::mem::size_of::<ScrollStateFeature>(), 80);
 	}
 
 	#[test]

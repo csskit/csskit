@@ -1706,6 +1706,7 @@ pub enum CssAtomSet {
 	ScrollSnapAlign,
 	ScrollSnapStop,
 	ScrollSnapType,
+	ScrollState,
 	ScrollTargetGroup,
 	ScrollTimeline,
 	ScrollTimelineAxis,

@@ -48,7 +48,7 @@ pub struct ContainerCondition<'a> {
 }
 
 impl<'a> Peek<'a> for ContainerCondition<'a> {
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::LeftParen]);
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::LeftParen, Kind::Function]);
 }
 
 impl<'a> Parse<'a> for ContainerCondition<'a> {
@@ -66,10 +66,8 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 				}
 			}
 		}
-		dbg!(p.peek_n(1));
 		let condition =
 			if name.is_none() { Some(p.parse::<ContainerQuery>()?) } else { p.parse_if_peek::<ContainerQuery>()? };
-		dbg!(&name, &condition);
 		Ok(Self { name, condition })
 	}
 }
@@ -143,11 +141,19 @@ macro_rules! container_feature {
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-#[derive(csskit_derives::NodeWithMetadata)]
+		#[derive(csskit_derives::NodeWithMetadata)]
 		pub enum ContainerFeature<'a> {
 			$($name($typ),)+
-			Style(StyleQuery<'a>),
-			ScrollState(ScrollStateQuery<'a>),
+			Style(
+				#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
+				StyleQuery<'a>,
+				#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+			),
+			ScrollState(
+				#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
+				ScrollStateQuery<'a>,
+				#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+			),
 		}
 	}
 }
@@ -159,6 +165,9 @@ impl<'a> Peek<'a> for ContainerFeature<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
+		if c == Kind::Function && matches!(p.to_atom::<CssAtomSet>(c), CssAtomSet::Style | CssAtomSet::ScrollState) {
+			return true;
+		}
 		let c2 = p.peek_n(2);
 		c == Kind::LeftParen && c2 == KindSet::new(&[Kind::Ident, Kind::Dimension])
 	}
@@ -170,7 +179,20 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		if p.peek::<T![Function]>() {
-			todo!();
+			let function = p.parse::<T![Function]>()?;
+			return match p.to_atom::<CssAtomSet>(function.into()) {
+				CssAtomSet::Style => {
+					let query = p.parse::<StyleQuery>()?;
+					let close = p.parse::<T![')']>()?;
+					Ok(Self::Style(function, query, close))
+				}
+				CssAtomSet::ScrollState => {
+					let query = p.parse::<ScrollStateQuery>()?;
+					let close = p.parse::<T![')']>()?;
+					Ok(Self::ScrollState(function, query, close))
+				}
+				_ => Err(Diagnostic::new(function.into(), Diagnostic::unexpected_function))?,
+			};
 		}
 		let mut c = p.peek_n(2);
 		macro_rules! match_feature {
@@ -225,8 +247,8 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ContainerRule>(), 144);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
-		assert_eq!(std::mem::size_of::<ContainerCondition>(), 536);
-		assert_eq!(std::mem::size_of::<ContainerQuery>(), 520);
+		assert_eq!(std::mem::size_of::<ContainerCondition>(), 560);
+		assert_eq!(std::mem::size_of::<ContainerQuery>(), 544);
 	}
 
 	#[test]
@@ -243,5 +265,39 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (width:2px){}");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (10em<width<10em){}");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo (width:2px){body{color:black}}");
+	}
+
+	#[test]
+	fn test_style_queries() {
+		// Basic style query
+		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "style(color:red)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "style(--my-var:10px)");
+		// Style query in container condition
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "style(color:red)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "style(--my-var:10px)");
+		// Style query in full container rule
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container style(color:red){}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container style(--my-var:10px){}");
+		// Named container with style query
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container card style(color:red){}");
+		// Style query with rules inside
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container style(color:red){body{color:black}}");
+	}
+
+	#[test]
+	fn test_scroll_state_queries() {
+		// Basic scroll-state query
+		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "scroll-state(scrollable:top)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "scroll-state(snapped:x)");
+		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "scroll-state(stuck:top)");
+		// Scroll-state query in container condition
+		assert_parse!(CssAtomSet::ATOMS, ContainerCondition, "scroll-state(stuck:top)");
+		// Scroll-state query in full container rule
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container scroll-state(stuck:top){}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container scroll-state(snapped:x){}");
+		// Named container with scroll-state query
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container nav scroll-state(stuck:top){}");
+		// Scroll-state query with rules inside
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container scroll-state(stuck:top){.item{opacity:0.5}}");
 	}
 }
