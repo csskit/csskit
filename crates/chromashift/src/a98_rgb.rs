@@ -17,12 +17,7 @@ pub struct A98Rgb {
 
 impl A98Rgb {
 	pub fn new(red: f64, green: f64, blue: f64, alpha: f32) -> Self {
-		Self {
-			red: red.clamp(0.0, 1.0),
-			green: green.clamp(0.0, 1.0),
-			blue: blue.clamp(0.0, 1.0),
-			alpha: alpha.clamp(0.0, 100.0),
-		}
+		Self { red, green, blue, alpha: alpha.clamp(0.0, 100.0) }
 	}
 }
 

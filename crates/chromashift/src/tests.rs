@@ -162,7 +162,7 @@ fn cornflower_blue() {
 		Srgb::new(100, 149, 237, 100.0),
 		LinearRgb::new(0.12743768, 0.30054379, 0.84687323, 100.0),
 		Hex::new(0x6495EDFF),
-		Hsl::new(218.5, 79.2, 66.1, 100.0),
+		Hsl::new(218.54015, 79.19075, 66.07843, 100.0),
 		Hsv::new(218.54015, 57.80591, 92.94118, 100.0),
 		Hwb::new(218.54015, 39.215687, 7.058823, 100.0),
 		Lab::new(61.23323694, 3.05558478, -50.18040851, 100.0),
@@ -181,9 +181,9 @@ fn hex_123() {
 		Srgb::new(17, 34, 51, 100.0),
 		LinearRgb::new(0.00560539, 0.01599629, 0.03310477, 100.0),
 		Hex::new(0x112233FF),
-		Hsl::new(210.0, 50.0, 13.3, 100.0),
+		Hsl::new(210.0, 50.0, 13.333333, 100.0),
 		Hsv::new(210.0, 66.7, 20.0, 100.0),
-		Hwb::new(210.0, 6.67, 80.0, 100.0),
+		Hwb::new(210.0, 6.66, 80.0, 100.0),
 		Lab::new(12.42990, -2.50513, -13.55537, 100.0),
 		Lch::new(12.42990, 13.78491, 259.52946, 100.0),
 		Oklab::new(0.24619, -0.01380, -0.03738, 100.0),
@@ -219,6 +219,204 @@ fn text_hex_alpha_conversion() {
 	assert_eq!(Hex::from(Srgb::new(0, 0, 0, 25.0)), Hex::new(0x00000040));
 	assert_eq!(Hex::from(Srgb::new(0, 0, 0, 75.0)), Hex::new(0x000000BF));
 	assert_eq!(Hex::from(Srgb::new(0, 0, 0, 100.0)), Hex::new(0x000000FF));
+}
+
+/// Out-of-gamut colors must be preserved through conversions, not clamped.
+/// CSS Color 4 §12.1, §13.1, §10.1: OOG values are retained for intermediate computations.
+/// Gamut mapping only happens at actual-value time (display time).
+mod out_of_gamut {
+	use super::*;
+
+	/// Asserts that an RGB-like type preserves values outside [0,1].
+	macro_rules! assert_oog_rgb_preserved {
+		($ty:ident) => {
+			let oog = $ty::new(-0.5, 1.5, -0.3, 100.0);
+			assert_eq!(oog.red, -0.5, "{} red was clamped", stringify!($ty));
+			assert_eq!(oog.green, 1.5, "{} green was clamped", stringify!($ty));
+			assert_eq!(oog.blue, -0.3, "{} blue was clamped", stringify!($ty));
+		};
+	}
+
+	#[test]
+	fn rgb_types_preserve_oog_values() {
+		assert_oog_rgb_preserved!(LinearRgb);
+		assert_oog_rgb_preserved!(DisplayP3);
+		assert_oog_rgb_preserved!(A98Rgb);
+		assert_oog_rgb_preserved!(ProphotoRgb);
+		assert_oog_rgb_preserved!(Rec2020);
+	}
+
+	#[test]
+	fn lab_oklab_preserve_oog_values() {
+		let lab = Lab::new(110.0, 200.0, -200.0, 100.0);
+		assert_eq!(lab.lightness, 110.0);
+		assert_eq!(lab.a, 200.0);
+		assert_eq!(lab.b, -200.0);
+
+		let oklab = Oklab::new(1.5, 0.5, -0.5, 100.0);
+		assert_eq!(oklab.lightness, 1.5);
+		assert_eq!(oklab.a, 0.5);
+		assert_eq!(oklab.b, -0.5);
+	}
+
+	#[test]
+	fn hsl_preserves_oog_values() {
+		// color(display-p3 0 1 0) in HSL is approximately hsl(127.879 301.946 25.334)
+		let oog = Hsl::new(127.0, 301.0, 25.0, 100.0);
+		assert_eq!(oog.saturation, 301.0);
+		assert_eq!(oog.lightness, 25.0);
+	}
+
+	/// Per CSS Color 4 §4.2, alpha is always clamped to [0,100].
+	#[test]
+	fn alpha_still_clamped() {
+		macro_rules! assert_alpha_clamped {
+			($color:expr, $expected:expr) => {
+				assert_eq!($color.alpha, $expected);
+			};
+		}
+		assert_alpha_clamped!(LinearRgb::new(0.0, 0.0, 0.0, 150.0), 100.0);
+		assert_alpha_clamped!(LinearRgb::new(0.0, 0.0, 0.0, -10.0), 0.0);
+		assert_alpha_clamped!(DisplayP3::new(0.0, 0.0, 0.0, 150.0), 100.0);
+		assert_alpha_clamped!(Lab::new(0.0, 0.0, 0.0, -10.0), 0.0);
+		assert_alpha_clamped!(Oklch::new(0.0, 0.0, 0.0, 200.0), 100.0);
+	}
+
+	#[test]
+	fn display_p3_green_to_linear_rgb_is_oog() {
+		let p3_green = DisplayP3::new(0.0, 1.0, 0.0, 100.0);
+		let linear: LinearRgb = p3_green.into();
+		assert!(linear.red < 0.0, "Expected negative linear red, got {}", linear.red);
+		assert!(linear.blue < 0.0, "Expected negative linear blue, got {}", linear.blue);
+		assert!(linear.green > 1.0, "Expected green > 1.0, got {}", linear.green);
+	}
+
+	#[test]
+	fn display_p3_round_trips_through_xyz() {
+		let original = DisplayP3::new(0.5, 0.7, 0.3, 100.0);
+		let xyz: XyzD65 = original.into();
+		let back: DisplayP3 = xyz.into();
+		assert!(back.close_to(original, COLOR_EPSILON), "Round-trip failed: {:?} vs {:?}", original, back);
+	}
+
+	/// WPT: color-mix-out-of-gamut.html
+	/// color-mix(in hsl, color(display-p3 0 1 0) 100%, rgb(0,0,0) 0%) → color(srgb -0.511814 1.01832 -0.310726)
+	///
+	/// Tests the full OOG chain: DisplayP3 → LinearRgb → Hsl (OOG) → LinearRgb → DisplayP3
+	/// The key assertion is that the OOG sRGB float values survive the round-trip through HSL.
+	#[test]
+	fn wpt_display_p3_green_through_hsl() {
+		let p3_green = DisplayP3::new(0.0, 1.0, 0.0, 100.0);
+		let hsl: Hsl = p3_green.into();
+		// Mix 100%/0% — result is just the first color
+		let mixed = Hsl::mix(hsl, Hsl::new(0.0, 0.0, 0.0, 100.0), 0.0);
+		// Convert to DisplayP3 to check the round-trip
+		let back: DisplayP3 = mixed.into();
+		assert!(back.close_to(p3_green, 0.001), "Expected {:?}, got {:?}", p3_green, back);
+	}
+
+	#[test]
+	fn in_gamut_rgb_types() {
+		// In-gamut values
+		assert!(LinearRgb::new(0.0, 0.5, 1.0, 100.0).in_gamut());
+		assert!(DisplayP3::new(0.0, 1.0, 0.0, 100.0).in_gamut());
+		assert!(A98Rgb::new(0.5, 0.5, 0.5, 100.0).in_gamut());
+		assert!(ProphotoRgb::new(0.0, 0.0, 0.0, 100.0).in_gamut());
+		assert!(Rec2020::new(1.0, 1.0, 1.0, 100.0).in_gamut());
+
+		// OOG values
+		assert!(!LinearRgb::new(-0.1, 0.5, 1.0, 100.0).in_gamut());
+		assert!(!DisplayP3::new(0.0, 1.1, 0.0, 100.0).in_gamut());
+		assert!(!A98Rgb::new(0.5, 0.5, -0.01, 100.0).in_gamut());
+	}
+
+	#[test]
+	fn in_gamut_lab_oklab() {
+		assert!(Lab::new(50.0, 0.0, 0.0, 100.0).in_gamut());
+		assert!(!Lab::new(110.0, 0.0, 0.0, 100.0).in_gamut());
+		assert!(!Lab::new(50.0, 200.0, 0.0, 100.0).in_gamut());
+
+		assert!(Oklab::new(0.5, 0.0, 0.0, 100.0).in_gamut());
+		assert!(!Oklab::new(1.5, 0.0, 0.0, 100.0).in_gamut());
+		assert!(!Oklab::new(0.5, 0.5, 0.0, 100.0).in_gamut());
+	}
+
+	#[test]
+	fn in_gamut_lch_oklch() {
+		assert!(Lch::new(50.0, 75.0, 180.0, 100.0).in_gamut());
+		assert!(!Lch::new(-1.0, 75.0, 180.0, 100.0).in_gamut());
+		assert!(!Lch::new(50.0, 200.0, 180.0, 100.0).in_gamut());
+
+		assert!(Oklch::new(0.5, 0.2, 180.0, 100.0).in_gamut());
+		assert!(!Oklch::new(0.5, 0.5, 180.0, 100.0).in_gamut());
+	}
+
+	#[test]
+	fn in_gamut_hsl_hwb() {
+		assert!(Hsl::new(180.0, 50.0, 50.0, 100.0).in_gamut());
+		assert!(!Hsl::new(180.0, 301.0, 50.0, 100.0).in_gamut());
+
+		assert!(Hwb::new(180.0, 20.0, 20.0, 100.0).in_gamut());
+		assert!(!Hwb::new(180.0, -10.0, 20.0, 100.0).in_gamut());
+	}
+
+	#[test]
+	fn in_gamut_always_in_gamut_types() {
+		// Srgb (u8), Hex (u32), and Hsv (clamps in constructor) are always in gamut
+		assert!(Srgb::new(255, 0, 128, 100.0).in_gamut());
+		assert!(Hex::new(0xFF00FFFF).in_gamut());
+		assert!(Hsv::new(180.0, 100.0, 100.0, 100.0).in_gamut());
+	}
+
+	#[test]
+	fn clamp_to_gamut_rgb_types() {
+		let oog = LinearRgb::new(-0.5, 1.5, 0.5, 100.0);
+		let clamped = oog.clamp_to_gamut();
+		assert!(clamped.in_gamut());
+		assert_eq!(clamped.red, 0.0);
+		assert_eq!(clamped.green, 1.0);
+		assert_eq!(clamped.blue, 0.5);
+		assert_eq!(clamped.alpha, 100.0);
+	}
+
+	#[test]
+	fn clamp_to_gamut_lab() {
+		let oog = Lab::new(110.0, 200.0, -200.0, 100.0);
+		let clamped = oog.clamp_to_gamut();
+		assert!(clamped.in_gamut());
+		assert_eq!(clamped.lightness, 100.0);
+		assert_eq!(clamped.a, 125.0);
+		assert_eq!(clamped.b, -125.0);
+	}
+
+	#[test]
+	fn clamp_to_gamut_hsl() {
+		let oog = Hsl::new(127.0, 301.0, -10.0, 100.0);
+		let clamped = oog.clamp_to_gamut();
+		assert!(clamped.in_gamut());
+		assert_eq!(clamped.saturation, 100.0);
+		assert_eq!(clamped.lightness, 0.0);
+	}
+
+	#[test]
+	fn clamp_to_gamut_preserves_already_in_gamut() {
+		let color = DisplayP3::new(0.5, 0.7, 0.3, 80.0);
+		let clamped = color.clamp_to_gamut();
+		assert_eq!(clamped, color);
+	}
+
+	/// Display P3 green is OOG when viewed as sRGB linear.
+	/// clamp_to_gamut in LinearRgb should clip the negative channels.
+	#[test]
+	fn display_p3_green_clamped_in_linear_rgb() {
+		let p3_green = DisplayP3::new(0.0, 1.0, 0.0, 100.0);
+		let linear: LinearRgb = p3_green.into();
+		assert!(!linear.in_gamut());
+		let clamped = linear.clamp_to_gamut();
+		assert!(clamped.in_gamut());
+		assert_eq!(clamped.red, 0.0);
+		assert_eq!(clamped.blue, 0.0);
+	}
 }
 
 #[test]

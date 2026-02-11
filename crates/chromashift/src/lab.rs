@@ -21,12 +21,7 @@ pub struct Lab {
 
 impl Lab {
 	pub fn new(lightness: f64, a: f64, b: f64, alpha: f32) -> Self {
-		Self {
-			lightness: lightness.clamp(0.0, 100.0),
-			a: a.clamp(-125.0, 125.0),
-			b: b.clamp(-125.0, 125.0),
-			alpha: alpha.clamp(0.0, 100.0),
-		}
+		Self { lightness, a, b, alpha: alpha.clamp(0.0, 100.0) }
 	}
 }
 

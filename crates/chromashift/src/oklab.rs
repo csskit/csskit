@@ -17,12 +17,7 @@ pub struct Oklab {
 
 impl Oklab {
 	pub fn new(lightness: f64, a: f64, b: f64, alpha: f32) -> Self {
-		Self {
-			lightness: lightness.clamp(0.0, 100.0),
-			a: a.clamp(-128.0, 127.0),
-			b: b.clamp(-128.0, 127.0),
-			alpha: alpha.clamp(0.0, 100.0),
-		}
+		Self { lightness, a, b, alpha: alpha.clamp(0.0, 100.0) }
 	}
 }
 

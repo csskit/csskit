@@ -36,6 +36,94 @@ simple_from!(A98Rgb to Srgb, via LinearRgb);
 simple_from!(A98Rgb to XyzD50, via LinearRgb);
 simple_from!(A98Rgb to XyzD65, via LinearRgb);
 
+// DisplayP3 converts through XyzD65
+simple_from!(A98Rgb to DisplayP3, via XyzD65);
+simple_from!(Hex to DisplayP3, via XyzD65);
+simple_from!(Hsv to DisplayP3, via XyzD65);
+simple_from!(Hsl to DisplayP3, via XyzD65);
+simple_from!(Hwb to DisplayP3, via XyzD65);
+simple_from!(Lab to DisplayP3, via XyzD65);
+simple_from!(Lch to DisplayP3, via XyzD65);
+simple_from!(LinearRgb to DisplayP3, via XyzD65);
+simple_from!(Named to DisplayP3, via XyzD65);
+simple_from!(Oklab to DisplayP3, via XyzD65);
+simple_from!(Oklch to DisplayP3, via XyzD65);
+simple_from!(Srgb to DisplayP3, via XyzD65);
+simple_from!(XyzD50 to DisplayP3, via XyzD65);
+
+simple_from!(DisplayP3 to A98Rgb, via XyzD65);
+simple_from!(DisplayP3 to Hex, via XyzD65);
+simple_from!(DisplayP3 to Hsv, via XyzD65);
+simple_from!(DisplayP3 to Hsl, via XyzD65);
+simple_from!(DisplayP3 to Hwb, via XyzD65);
+simple_from!(DisplayP3 to Lab, via XyzD65);
+simple_from!(DisplayP3 to Lch, via XyzD65);
+simple_from!(DisplayP3 to LinearRgb, via XyzD65);
+simple_from!(DisplayP3 to Oklab, via XyzD65);
+simple_from!(DisplayP3 to Oklch, via XyzD65);
+simple_from!(DisplayP3 to Srgb, via XyzD65);
+simple_from!(DisplayP3 to XyzD50, via XyzD65);
+simple_from!(DisplayP3 to ProphotoRgb, via XyzD65);
+simple_from!(DisplayP3 to Rec2020, via XyzD65);
+
+// ProphotoRgb converts through XyzD50
+simple_from!(A98Rgb to ProphotoRgb, via XyzD50);
+simple_from!(Hex to ProphotoRgb, via XyzD50);
+simple_from!(Hsv to ProphotoRgb, via XyzD50);
+simple_from!(Hsl to ProphotoRgb, via XyzD50);
+simple_from!(Hwb to ProphotoRgb, via XyzD50);
+simple_from!(Lab to ProphotoRgb, via XyzD50);
+simple_from!(Lch to ProphotoRgb, via XyzD50);
+simple_from!(LinearRgb to ProphotoRgb, via XyzD50);
+simple_from!(Named to ProphotoRgb, via XyzD50);
+simple_from!(Oklab to ProphotoRgb, via XyzD50);
+simple_from!(Oklch to ProphotoRgb, via XyzD50);
+simple_from!(Srgb to ProphotoRgb, via XyzD50);
+simple_from!(XyzD65 to ProphotoRgb, via XyzD50);
+
+simple_from!(ProphotoRgb to A98Rgb, via XyzD50);
+simple_from!(ProphotoRgb to Hex, via XyzD50);
+simple_from!(ProphotoRgb to Hsv, via XyzD50);
+simple_from!(ProphotoRgb to Hsl, via XyzD50);
+simple_from!(ProphotoRgb to Hwb, via XyzD50);
+simple_from!(ProphotoRgb to Lab, via XyzD50);
+simple_from!(ProphotoRgb to Lch, via XyzD50);
+simple_from!(ProphotoRgb to LinearRgb, via XyzD50);
+simple_from!(ProphotoRgb to Oklab, via XyzD50);
+simple_from!(ProphotoRgb to Oklch, via XyzD50);
+simple_from!(ProphotoRgb to Srgb, via XyzD50);
+simple_from!(ProphotoRgb to XyzD65, via XyzD50);
+simple_from!(ProphotoRgb to Rec2020, via XyzD50);
+
+// Rec2020 converts through XyzD65
+simple_from!(A98Rgb to Rec2020, via XyzD65);
+simple_from!(Hex to Rec2020, via XyzD65);
+simple_from!(Hsv to Rec2020, via XyzD65);
+simple_from!(Hsl to Rec2020, via XyzD65);
+simple_from!(Hwb to Rec2020, via XyzD65);
+simple_from!(Lab to Rec2020, via XyzD65);
+simple_from!(Lch to Rec2020, via XyzD65);
+simple_from!(LinearRgb to Rec2020, via XyzD65);
+simple_from!(Named to Rec2020, via XyzD65);
+simple_from!(Oklab to Rec2020, via XyzD65);
+simple_from!(Oklch to Rec2020, via XyzD65);
+simple_from!(Srgb to Rec2020, via XyzD65);
+simple_from!(XyzD50 to Rec2020, via XyzD65);
+
+simple_from!(Rec2020 to A98Rgb, via XyzD65);
+simple_from!(Rec2020 to Hex, via XyzD65);
+simple_from!(Rec2020 to Hsv, via XyzD65);
+simple_from!(Rec2020 to Hsl, via XyzD65);
+simple_from!(Rec2020 to Hwb, via XyzD65);
+simple_from!(Rec2020 to Lab, via XyzD65);
+simple_from!(Rec2020 to Lch, via XyzD65);
+simple_from!(Rec2020 to LinearRgb, via XyzD65);
+simple_from!(Rec2020 to Oklab, via XyzD65);
+simple_from!(Rec2020 to Oklch, via XyzD65);
+simple_from!(Rec2020 to Srgb, via XyzD65);
+simple_from!(Rec2020 to XyzD50, via XyzD65);
+simple_from!(Rec2020 to ProphotoRgb, via XyzD65);
+
 simple_from!(Hsv to Hex, via Srgb);
 simple_from!(Hsl to Hex, via Srgb);
 simple_from!(Hwb to Hex, via Srgb);
@@ -76,37 +164,37 @@ simple_from!(Hsv to Oklch, via Srgb);
 simple_from!(Hsv to XyzD50, via Srgb);
 simple_from!(Hsv to XyzD65, via Srgb);
 
-simple_from!(Hwb to Hsl, via Hsv);
-simple_from!(Lab to Hsl, via Srgb);
-simple_from!(Lch to Hsl, via Srgb);
+simple_from!(Hwb to Hsl, via LinearRgb);
+simple_from!(Lab to Hsl, via LinearRgb);
+simple_from!(Lch to Hsl, via LinearRgb);
 simple_from!(Named to Hsl, via Srgb);
-simple_from!(Oklab to Hsl, via Srgb);
-simple_from!(Oklch to Hsl, via Srgb);
-simple_from!(XyzD50 to Hsl, via Srgb);
-simple_from!(XyzD65 to Hsl, via Srgb);
+simple_from!(Oklab to Hsl, via LinearRgb);
+simple_from!(Oklch to Hsl, via LinearRgb);
+simple_from!(XyzD50 to Hsl, via LinearRgb);
+simple_from!(XyzD65 to Hsl, via LinearRgb);
 
-simple_from!(Hsl to Hwb, via Srgb);
-simple_from!(Hsl to Lab, via Srgb);
-simple_from!(Hsl to Lch, via Srgb);
-simple_from!(Hsl to Oklab, via Srgb);
-simple_from!(Hsl to Oklch, via Srgb);
-simple_from!(Hsl to XyzD50, via Srgb);
-simple_from!(Hsl to XyzD65, via Srgb);
+simple_from!(Hsl to Hwb, via LinearRgb);
+simple_from!(Hsl to Lab, via LinearRgb);
+simple_from!(Hsl to Lch, via LinearRgb);
+simple_from!(Hsl to Oklab, via LinearRgb);
+simple_from!(Hsl to Oklch, via LinearRgb);
+simple_from!(Hsl to XyzD50, via LinearRgb);
+simple_from!(Hsl to XyzD65, via LinearRgb);
 
-simple_from!(Lab to Hwb, via Srgb);
-simple_from!(Lch to Hwb, via Srgb);
+simple_from!(Lab to Hwb, via LinearRgb);
+simple_from!(Lch to Hwb, via LinearRgb);
 simple_from!(Named to Hwb, via Srgb);
-simple_from!(Oklab to Hwb, via Srgb);
-simple_from!(Oklch to Hwb, via Srgb);
-simple_from!(XyzD50 to Hwb, via Srgb);
-simple_from!(XyzD65 to Hwb, via Srgb);
+simple_from!(Oklab to Hwb, via LinearRgb);
+simple_from!(Oklch to Hwb, via LinearRgb);
+simple_from!(XyzD50 to Hwb, via LinearRgb);
+simple_from!(XyzD65 to Hwb, via LinearRgb);
 
-simple_from!(Hwb to Lab, via Srgb);
-simple_from!(Hwb to Lch, via Srgb);
-simple_from!(Hwb to Oklab, via Srgb);
-simple_from!(Hwb to Oklch, via Srgb);
-simple_from!(Hwb to XyzD50, via Srgb);
-simple_from!(Hwb to XyzD65, via Srgb);
+simple_from!(Hwb to Lab, via LinearRgb);
+simple_from!(Hwb to Lch, via LinearRgb);
+simple_from!(Hwb to Oklab, via LinearRgb);
+simple_from!(Hwb to Oklch, via LinearRgb);
+simple_from!(Hwb to XyzD50, via LinearRgb);
+simple_from!(Hwb to XyzD65, via LinearRgb);
 
 simple_from!(Named to Lab, via Srgb);
 simple_from!(Oklab to Lab, via Srgb);
@@ -129,8 +217,6 @@ simple_from!(Lch to XyzD50, via Srgb);
 simple_from!(Lch to XyzD65, via Srgb);
 
 simple_from!(Hsv to LinearRgb, via Srgb);
-simple_from!(Hsl to LinearRgb, via Srgb);
-simple_from!(Hwb to LinearRgb, via Srgb);
 simple_from!(Lab to LinearRgb, via XyzD50);
 simple_from!(Lch to LinearRgb, via Lab);
 simple_from!(Named to LinearRgb, via Srgb);
@@ -139,8 +225,6 @@ simple_from!(Oklch to LinearRgb, via Oklab);
 simple_from!(XyzD50 to LinearRgb, via XyzD65);
 
 simple_from!(LinearRgb to Hsv, via Srgb);
-simple_from!(LinearRgb to Hsl, via Srgb);
-simple_from!(LinearRgb to Hwb, via Srgb);
 simple_from!(LinearRgb to Lab, via XyzD50);
 simple_from!(LinearRgb to Lch, via Lab);
 simple_from!(LinearRgb to Oklab, via XyzD65);
@@ -179,6 +263,7 @@ simple_from!(Hwb to Srgb, via Hsv);
 simple_from!(Srgb to Hwb, via Hsv);
 
 simple_from!(Color to A98Rgb, via XyzD65);
+simple_from!(Color to DisplayP3, via XyzD65);
 simple_from!(Color to Hsv, via XyzD65);
 simple_from!(Color to Hex, via XyzD65);
 simple_from!(Color to Hsl, via XyzD65);
@@ -188,6 +273,8 @@ simple_from!(Color to Lch, via XyzD65);
 simple_from!(Color to LinearRgb, via XyzD65);
 simple_from!(Color to Oklab, via XyzD65);
 simple_from!(Color to Oklch, via XyzD65);
+simple_from!(Color to ProphotoRgb, via XyzD65);
+simple_from!(Color to Rec2020, via XyzD65);
 simple_from!(Color to Srgb, via XyzD65);
 simple_from!(Color to XyzD50, via XyzD65);
 
@@ -207,6 +294,7 @@ macro_rules! impl_named_try_from_via_srgb {
 
 impl_named_try_from_via_srgb!(
 	crate::A98Rgb,
+	crate::DisplayP3,
 	crate::Hex,
 	crate::Hsv,
 	crate::Hsl,
@@ -216,6 +304,8 @@ impl_named_try_from_via_srgb!(
 	crate::LinearRgb,
 	crate::Oklab,
 	crate::Oklch,
+	crate::ProphotoRgb,
+	crate::Rec2020,
 	crate::XyzD50,
 	crate::XyzD65,
 	crate::Color,
@@ -225,6 +315,8 @@ impl_named_try_from_via_srgb!(
 simple_from!(Color to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]
 simple_from!(A98Rgb to anstyle::RgbColor, via Srgb);
+#[cfg(feature = "anstyle")]
+simple_from!(DisplayP3 to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]
 simple_from!(Hsv to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]
@@ -246,6 +338,10 @@ simple_from!(Oklab to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]
 simple_from!(Oklch to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]
+simple_from!(ProphotoRgb to anstyle::RgbColor, via Srgb);
+#[cfg(feature = "anstyle")]
+simple_from!(Rec2020 to anstyle::RgbColor, via Srgb);
+#[cfg(feature = "anstyle")]
 simple_from!(XyzD50 to anstyle::RgbColor, via Srgb);
 #[cfg(feature = "anstyle")]
 simple_from!(XyzD65 to anstyle::RgbColor, via Srgb);
@@ -254,6 +350,8 @@ simple_from!(XyzD65 to anstyle::RgbColor, via Srgb);
 simple_from!(Color to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
 simple_from!(A98Rgb to anstyle::Color, via anstyle::RgbColor);
+#[cfg(feature = "anstyle")]
+simple_from!(DisplayP3 to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
 simple_from!(Hsv to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
@@ -275,6 +373,10 @@ simple_from!(Oklab to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
 simple_from!(Oklch to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
+simple_from!(ProphotoRgb to anstyle::Color, via anstyle::RgbColor);
+#[cfg(feature = "anstyle")]
+simple_from!(Rec2020 to anstyle::Color, via anstyle::RgbColor);
+#[cfg(feature = "anstyle")]
 simple_from!(Srgb to anstyle::Color, via anstyle::RgbColor);
 #[cfg(feature = "anstyle")]
 simple_from!(XyzD50 to anstyle::Color, via anstyle::RgbColor);
@@ -285,6 +387,8 @@ simple_from!(XyzD65 to anstyle::Color, via anstyle::RgbColor);
 simple_from!(Color to owo_colors::Rgb, via Srgb);
 #[cfg(feature = "owo-colors")]
 simple_from!(A98Rgb to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(DisplayP3 to owo_colors::Rgb, via Srgb);
 #[cfg(feature = "owo-colors")]
 simple_from!(Hsv to owo_colors::Rgb, via Srgb);
 #[cfg(feature = "owo-colors")]
@@ -305,6 +409,10 @@ simple_from!(Named to owo_colors::Rgb, via Srgb);
 simple_from!(Oklab to owo_colors::Rgb, via Srgb);
 #[cfg(feature = "owo-colors")]
 simple_from!(Oklch to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(ProphotoRgb to owo_colors::Rgb, via Srgb);
+#[cfg(feature = "owo-colors")]
+simple_from!(Rec2020 to owo_colors::Rgb, via Srgb);
 #[cfg(feature = "owo-colors")]
 simple_from!(XyzD50 to owo_colors::Rgb, via Srgb);
 #[cfg(feature = "owo-colors")]

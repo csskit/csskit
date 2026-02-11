@@ -17,12 +17,7 @@ pub struct Oklch {
 
 impl Oklch {
 	pub fn new(lightness: f64, chroma: f64, hue: f64, alpha: f32) -> Self {
-		Self {
-			lightness: lightness.clamp(0.0, 100.0),
-			chroma: chroma.clamp(0.0, 150.0),
-			hue: hue.rem_euclid(360.0),
-			alpha: alpha.clamp(0.0, 100.0),
-		}
+		Self { lightness, chroma, hue: hue.rem_euclid(360.0), alpha: alpha.clamp(0.0, 100.0) }
 	}
 }
 
