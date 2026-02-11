@@ -1,8 +1,34 @@
+## [0.0.17] - 2026-02-11
+
+### Css_ast
+- css_ast: Uncomment FlexStyleValue (#860) ([#860](https://github.com/csskit/csskit/pull/860))
+- Regenerate css_ast/src/values from csswg drafts (#851) ([#851](https://github.com/csskit/csskit/pull/851))
+- css_ast: Add NormalOr<> generic. (#861) ([#861](https://github.com/csskit/csskit/pull/861))
+- css_ast: Enable FontFeatureSettingsStyleValue, FontVariationSettingsStyleValue (#862) ([#862](https://github.com/csskit/csskit/pull/862))
+- css_ast: Fixup container queries (#874) ([#874](https://github.com/csskit/csskit/pull/874))
+- css_ast: Support custom scroll state queries (#873) ([#873](https://github.com/csskit/csskit/pull/873))
+- Regenerate css_ast/src/values from csswg drafts (#863) ([#863](https://github.com/csskit/csskit/pull/863))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#852) ([#852](https://github.com/csskit/csskit/pull/852))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.42.0 (#855) ([#855](https://github.com/csskit/csskit/pull/855))
+- chore(deps): update dependencies (patch) (#864) ([#864](https://github.com/csskit/csskit/pull/864))
+- chore(deps): update dependency oxlint to v1.43.0 (#867) ([#867](https://github.com/csskit/csskit/pull/867))
+- chore(deps): update dependency @types/vscode to v1.109.0 (#865) ([#865](https://github.com/csskit/csskit/pull/865))
+
 ## [0.0.16] - 2026-01-29
 
 ### Css_lexer
 - css_lexer: Compact String & URL tokens (#843) ([#843](https://github.com/csskit/csskit/pull/843))
 - csskit/css_lexer/css_parse: Add super secret hidden `expand` command (#846) ([#846](https://github.com/csskit/csskit/pull/846))
+
+
+### Csskit
+- Release v0.0.16 (#844) ([#844](https://github.com/csskit/csskit/pull/844))
 
 
 ### Csskit_wasm
