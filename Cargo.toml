@@ -81,7 +81,7 @@ heck = { version = "0.5.0" }
 # Serialization
 serde = { version = "1.0.228" }
 serde_json = { version = "1.0.145" }
-toml = { version = "0.9.8" }
+toml = { version = "1.0.0" }
 
 # Testing, benchmarking
 similar = { version = "2.7.0" }
