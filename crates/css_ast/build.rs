@@ -125,7 +125,6 @@ fn main() {
 			]
 		});
 		let source = quote! {
-			#[macro_export]
 			macro_rules! apply_visit_methods {
 				($macro: ident) => {
 					$macro! {
@@ -146,7 +145,7 @@ fn main() {
 			quote! { #method_name #impl_generics (#ident #ty_generics) }
 		});
 		let source = quote! {
-			#[macro_export]
+			#[allow(unused_macros)]
 			macro_rules! apply_queryable_visit_methods {
 				($macro: ident) => {
 					$macro! {
@@ -167,7 +166,7 @@ fn main() {
 			quote! { #method_name #impl_generics (#ident #ty_generics) }
 		});
 		let source = quote! {
-			#[macro_export]
+			#[allow(unused_macros)]
 			macro_rules! apply_queryable_exit_methods {
 				($macro: ident) => {
 					$macro! {

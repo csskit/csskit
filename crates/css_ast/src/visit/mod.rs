@@ -2,9 +2,6 @@ include!(concat!(env!("OUT_DIR"), "/css_node_kind.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_visit_methods.rs"));
 include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_exit_methods.rs"));
-pub use apply_queryable_exit_methods;
-pub use apply_queryable_visit_methods;
-pub use apply_visit_methods;
 
 use bumpalo::collections::Vec;
 use css_parse::{

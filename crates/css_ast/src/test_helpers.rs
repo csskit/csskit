@@ -64,7 +64,9 @@ macro_rules! visit_mut_trait {
 	}
 }
 #[cfg(feature = "visitable")]
-crate::visit::apply_visit_methods!(visit_mut_trait);
+include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
+#[cfg(feature = "visitable")]
+apply_visit_methods!(visit_mut_trait);
 
 #[macro_export]
 #[cfg(feature = "visitable")]
