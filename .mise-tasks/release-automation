@@ -62,7 +62,7 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	for platform_pkg in packages/csskit-*/; do
 		pushd "$platform_pkg"
 		echo "Publishing $platform_pkg"
-		npm pub --provenance --tag next --access public --loglevel=silly
+		npm pub --provenance --tag latest --access public --loglevel=silly
 		popd
 	done
 
@@ -79,7 +79,7 @@ if [[ "$MODE" == "RELEASE" ]]; then
 		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
 	"
 	echo "Publishing csskit"
-	npm pub --provenance --tag next --access public --loglevel=silly
+	npm pub --provenance --tag latest --access public --loglevel=silly
 	popd
 
 	# Update GitHub release
