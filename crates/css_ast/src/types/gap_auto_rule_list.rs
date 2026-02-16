@@ -1,4 +1,3 @@
-#![allow(unused)]
 use crate::{GapRepeatRule, GapRuleList, GapRuleOrRepeat};
 
 // https://drafts.csswg.org/css-gaps-1/#typedef-gap-auto-rule-list
