@@ -10,7 +10,17 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "1px solid red, repeat(2, 2px dashed green)");
 		assert_parse!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "repeat(auto, 1px solid red)");
 		assert_parse!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "1px solid red, repeat(auto, 2px dashed green)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			ColumnRuleStyleValue,
+			"repeat(auto, 1px solid red), repeat(auto, 2px dashed green)"
+		);
 		assert_parse!(CssAtomSet::ATOMS, RowRuleStyleValue, "repeat(auto, 1px solid red), 2px dashed green");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			RowRuleStyleValue,
+			"repeat(auto, 1px solid red), repeat(auto, 2px dashed green)"
+		);
 		assert_parse!(CssAtomSet::ATOMS, RuleStyleValue, "1px solid red, repeat(2, 2px dashed green)");
 		assert_parse!(CssAtomSet::ATOMS, RuleStyleValue, "repeat(auto, 1px solid red), 2px dashed green");
 		assert_parse!(CssAtomSet::ATOMS, RuleStyleValue, "1px solid red, repeat(auto, 2px dashed green)");
@@ -18,17 +28,7 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse!(
-			CssAtomSet::ATOMS,
-			ColumnRuleStyleValue,
-			"repeat(auto, 1px solid red), repeat(auto, 2px dashed green)"
-		);
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "repeat(auto,)");
-		assert_parse!(
-			CssAtomSet::ATOMS,
-			RowRuleStyleValue,
-			"repeat(auto, 1px solid red), repeat(auto, 2px dashed green)"
-		);
 		assert_parse_error!(CssAtomSet::ATOMS, RuleStyleValue, "repeat(auto,)");
 		assert_parse_error!(CssAtomSet::ATOMS, RuleStyleValue, "1px solid red,");
 	}
