@@ -24,6 +24,8 @@ chromashift = { workspace = true }
 glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
 serde_json = { workspace = true }
+similar = { workspace = true }
+console = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
 
 [target.'cfg(target_family = "unix")'.dev-dependencies]

@@ -10,3 +10,6 @@
 [submodule "coverage/css-import-tests"]
 	path = coverage/css-import-tests
 	url = https://github.com/romainmenke/css-import-tests
+[submodule "coverage/css-minify-tests"]
+	path = coverage/css-minify-tests
+	url = https://github.com/keithamus/css-minify-tests

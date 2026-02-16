@@ -867,6 +867,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "chromashift",
+ "console 0.16.2",
  "criterion",
  "css_ast",
  "css_lexer",
@@ -875,6 +876,7 @@ dependencies = [
  "pprof",
  "serde",
  "serde_json",
+ "similar",
 ]
 
 [[package]]
