@@ -913,7 +913,7 @@ StyleSheet(
                 offset: SourceOffset(604),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Zero(Number(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(r#Some(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(606),
                 len: 1,

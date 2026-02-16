@@ -203,7 +203,7 @@ StyleSheet(
                 offset: SourceOffset(125),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(Some(Length(Px(Dimension(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(r#Some(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(127),
                 len: 4,
