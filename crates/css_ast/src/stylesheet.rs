@@ -1,8 +1,8 @@
 use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
 use css_parse::{
-	ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule, Result as ParserResult,
-	RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
+	BumpBox, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule,
+	Result as ParserResult, RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
@@ -52,7 +52,6 @@ macro_rules! apply_rules {
 			FontFace(FontFaceRule<'a>): CssAtomSet::FontFace,
 			FontFeatureValues(FontFeatureValuesRule): CssAtomSet::FontFeatureValues,
 			FontPaletteValues(FontPaletteValuesRule): CssAtomSet::FontPaletteValues,
-			Import(ImportRule<'a>): CssAtomSet::Import,
 			Keyframes(KeyframesRule<'a>): CssAtomSet::Keyframes,
 			Layer(LayerRule<'a>): CssAtomSet::Layer,
 			Media(MediaRule<'a>): CssAtomSet::Media,
@@ -61,7 +60,6 @@ macro_rules! apply_rules {
 			Property(PropertyRule<'a>): CssAtomSet::Property,
 			Scope(ScopeRule): CssAtomSet::Scope,
 			StartingStyle(StartingStyleRule<'a>): CssAtomSet::StartingStyle,
-			Supports(SupportsRule<'a>): CssAtomSet::Supports,
 
 			// Deprecated Rules
 			Document(DocumentRule<'a>): CssAtomSet::Document,
@@ -106,7 +104,6 @@ macro_rules! rule {
     ( $(
         $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
-		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -117,6 +114,10 @@ macro_rules! rule {
 			$(
 				$name(rules::$ty$(<$a>)?),
 			)+
+			// Boxed variants for rarely used rules
+			Import(BumpBox<'a, rules::ImportRule<'a>>),
+			Supports(BumpBox<'a, rules::SupportsRule<'a>>),
+
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
 			Unknown(UnknownQualifiedRule<'a>)
@@ -140,6 +141,8 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 			)+ ) => {
 				match p.to_atom::<CssAtomSet>(c) {
 					$($atoms => p.parse::<rules::$ty>().map(Self::$name),)+
+					CssAtomSet::Import => p.parse::<rules::ImportRule>().map(|r| Self::Import(BumpBox::new_in(p.bump(), r))),
+					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(BumpBox::new_in(p.bump(), r))),
 					_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 				}
 			}
@@ -187,7 +190,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StyleSheet>(), 64);
-		assert_eq!(std::mem::size_of::<Rule>(), 752);
+		assert_eq!(std::mem::size_of::<Rule>(), 208);
 	}
 
 	#[test]

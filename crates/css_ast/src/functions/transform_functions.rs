@@ -1,15 +1,15 @@
 use super::prelude::*;
 use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
+use css_parse::BumpBox;
 
 // https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[allow(clippy::large_enum_variant)] // TODO: matrix3d should probably be boxed
-pub enum TransformFunction {
+pub enum TransformFunction<'a> {
 	Matrix(MatrixFunction),
-	Matrix3d(Matrix3dFunction),
+	Matrix3d(BumpBox<'a, Matrix3dFunction>),
 	Translate(TranslateFunction),
 	Translate3d(Translate3dFunction),
 	TranslateX(TranslatexFunction),
@@ -462,7 +462,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformFunction>(), 456);
+		assert_eq!(std::mem::size_of::<TransformFunction>(), 176);
 	}
 
 	#[test]

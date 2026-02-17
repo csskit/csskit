@@ -59,7 +59,6 @@ pub enum SymbolsType {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[allow(clippy::large_enum_variant)] // TODO: Box or shrink Image
 pub enum Symbol<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	String(T![String]),
@@ -75,7 +74,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<SymbolsFunction>(), 72);
-		assert_eq!(std::mem::size_of::<Symbol>(), 208);
+		assert_eq!(std::mem::size_of::<Symbol>(), 128);
 		assert_eq!(std::mem::size_of::<SymbolsType>(), 16);
 	}
 

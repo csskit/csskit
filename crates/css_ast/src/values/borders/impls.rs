@@ -92,7 +92,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BoxShadowSpreadStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BoxShadowStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 208);
+		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 128);
 		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);

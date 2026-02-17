@@ -43,6 +43,7 @@ mod tests {
 			let mut overlay_stream =
 				CursorOverlaySink::new(source_text, &*overlays, CursorCompactWriteSink::new(source_text, &mut output));
 			result.output.to_cursors(&mut overlay_stream);
+			drop(overlay_stream);
 			(output.clone(), changed)
 		} else {
 			panic!("Could not transform output");

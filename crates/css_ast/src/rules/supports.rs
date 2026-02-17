@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::selector::ComplexSelector;
+use css_parse::BumpBox;
 
 ///
 /// ```md
@@ -110,7 +111,6 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 	}
 }
 
-#[allow(clippy::large_enum_variant)] // TODO: Box?
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -139,7 +139,7 @@ pub enum SupportsFeature<'a> {
 	),
 	Property(
 		#[cfg_attr(feature = "visitable", visit(skip))] T!['('],
-		Declaration<'a, StyleValue<'a>, CssMetadata>,
+		BumpBox<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>,
 		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
 	),
 }
@@ -192,7 +192,7 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 		} else if let Some(open) = open {
 			let property = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
 			let close = p.parse_if_peek::<T![')']>()?;
-			Ok(Self::Property(open, property, close))
+			Ok(Self::Property(open, BumpBox::new_in(p.bump(), property), close))
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}
@@ -207,8 +207,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 656);
-		assert_eq!(std::mem::size_of::<SupportsCondition>(), 536);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 224);
+		assert_eq!(std::mem::size_of::<SupportsCondition>(), 112);
 		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 96);
 	}
 

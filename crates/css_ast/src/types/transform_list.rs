@@ -8,7 +8,7 @@ use crate::TransformFunction;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TransformList<'a>(pub Vec<'a, TransformFunction>);
+pub struct TransformList<'a>(pub Vec<'a, TransformFunction<'a>>);
 
 #[cfg(test)]
 mod tests {

@@ -1,3 +1,5 @@
+use css_parse::BumpBox;
+
 use super::prelude::*;
 use crate::{Length, LengthPercentage};
 
@@ -15,9 +17,9 @@ pub enum Gradient<'a> {
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
 	RepeatingLinearGradientFunction(RepeatingLinearGradientFunction<'a>),
 	#[atom(CssAtomSet::RadialGradient)]
-	RadialGradientFunction(RadialGradientFunction<'a>),
+	RadialGradientFunction(BumpBox<'a, RadialGradientFunction<'a>>),
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
-	RepeatingRadialGradientFunction(RepeatingRadialGradientFunction<'a>),
+	RepeatingRadialGradientFunction(BumpBox<'a, RepeatingRadialGradientFunction<'a>>),
 }
 
 /// <https://drafts.csswg.org/css-images-3/#funcdef-linear-gradient>
@@ -241,7 +243,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Gradient>(), 208);
+		assert_eq!(std::mem::size_of::<Gradient>(), 128);
 		assert_eq!(std::mem::size_of::<LinearDirection>(), 44);
 		assert_eq!(std::mem::size_of::<RadialSize>(), 32);
 		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 160);

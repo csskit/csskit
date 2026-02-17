@@ -3,7 +3,7 @@ use crate::{
 	rules,
 };
 use css_parse::{
-	Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
+	BumpBox, Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
 	Result as ParserResult, RuleVariants,
 };
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
@@ -45,7 +45,6 @@ macro_rules! apply_rules {
 			Layer(LayerRule<'a>): "layer",
 			Media(MediaRule<'a>): "media",
 			Scope(ScopeRule): "scope",
-			Supports(SupportsRule<'a>): "supports",
 		}
 	};
 }
@@ -54,7 +53,6 @@ macro_rules! nested_group_rule {
     ( $(
         $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
-		#[allow(clippy::large_enum_variant)] // TODO: Box?
 		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -65,6 +63,7 @@ macro_rules! nested_group_rule {
 			$(
 				$name(rules::$ty$(<$a>)?),
 			)+
+			Supports(BumpBox<'a, rules::SupportsRule<'a>>),
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
 			Unknown(UnknownQualifiedRule<'a>),
@@ -88,6 +87,7 @@ impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
 			)+ ) => {
 				match p.to_atom::<CssAtomSet>(name) {
 					$(CssAtomSet::$name => p.parse::<rules::$ty>().map(Self::$name),)+
+					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(BumpBox::new_in(p.bump(), r))),
 					_ => Err(Diagnostic::new(name.into(), Diagnostic::unexpected_at_rule))?,
 				}
 			}

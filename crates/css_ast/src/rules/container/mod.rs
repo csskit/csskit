@@ -137,7 +137,6 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 
 macro_rules! container_feature {
 	( $($name: ident($typ: ident))+ ) => {
-		#[allow(clippy::large_enum_variant)] // TODO: refine
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -246,8 +245,8 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ContainerRule>(), 144);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
-		assert_eq!(std::mem::size_of::<ContainerCondition>(), 560);
-		assert_eq!(std::mem::size_of::<ContainerQuery>(), 544);
+		assert_eq!(std::mem::size_of::<ContainerCondition>(), 216);
+		assert_eq!(std::mem::size_of::<ContainerQuery>(), 200);
 	}
 
 	#[test]

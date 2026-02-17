@@ -1,6 +1,6 @@
 use crate::{Cursor, CursorSink, Parse, Parser, Peek, SemanticEq, ToCursors};
 use bumpalo::Bump;
-use css_lexer::{Span, ToSpan};
+use css_lexer::{KindSet, Span, ToSpan};
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::ops::{Deref, DerefMut};
@@ -110,6 +110,8 @@ impl<M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>> crate::NodeWithMetad
 }
 
 impl<'a, T: Peek<'a>> Peek<'a> for BumpBox<'a, T> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

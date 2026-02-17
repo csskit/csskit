@@ -1,6 +1,6 @@
 use super::super::prelude::*;
 use crate::{types::Ratio, units::Length};
-use css_parse::{discrete_feature, ranged_feature};
+use css_parse::{BumpBox, discrete_feature, ranged_feature};
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -72,13 +72,12 @@ pub enum StyleQuery<'a> {
 	Or(Vec<'a, (StyleFeature<'a>, Option<T![Ident]>)>),
 }
 
-#[allow(clippy::large_enum_variant)]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum StyleFeature<'a> {
-	Declaration(Declaration<'a, StyleValue<'a>, CssMetadata>),
+	Declaration(BumpBox<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>),
 	CustomProperty(T![Ident]),
 }
 
@@ -91,7 +90,8 @@ impl<'a> Parse<'a> for StyleFeature<'a> {
 		if c == Kind::Ident && c.token().is_dashed_ident() && p.peek_n(2) != Kind::Colon {
 			return Ok(Self::CustomProperty(p.parse::<T![Ident]>()?));
 		}
-		Ok(Self::Declaration(p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?))
+		let decl = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
+		Ok(Self::Declaration(BumpBox::new_in(p.bump(), decl)))
 	}
 }
 
@@ -372,7 +372,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BlockSizeContainerFeature>(), 124);
 		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 180);
 		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
-		assert_eq!(std::mem::size_of::<StyleQuery>(), 504);
+		assert_eq!(std::mem::size_of::<StyleQuery>(), 40);
 		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 96);
 		assert_eq!(std::mem::size_of::<ScrollStateFeature>(), 80);
 	}

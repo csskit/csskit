@@ -1,5 +1,6 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
+assertion_line: 209
 expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
 ---
 [
@@ -393,7 +394,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum TimelineScopeStyleValue < \'a > { }",
   "pub enum Todo { }",
   "pub enum TransformBoxStyleValue { }",
-  "pub enum TransformFunction { }",
+  "pub enum TransformFunction < \'a > { }",
   "pub enum TransformStyleStyleValue { }",
   "pub enum TransitionBehaviorValue { }",
   "pub enum TriggerScopeStyleValue < \'a > { }",
