@@ -1,12 +1,11 @@
 use bumpalo::Bump;
-use console::Style;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
 use css_parse::{CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
 use csskit_transform::{CssMinifierFeature, Transformer};
 use glob::glob;
 use similar::{ChangeTag, TextDiff};
-use std::{fs::read_to_string, panic::catch_unwind, path::PathBuf};
+use std::{fmt::Write, fs::read_to_string, panic::catch_unwind, path::PathBuf};
 
 const FIXTURES_GLOB: &str = "../../coverage/css-minify-tests/tests/**/source.css";
 
@@ -50,9 +49,11 @@ fn minify(source_text: &str) -> String {
 	if let Some(ref mut node) = result.output {
 		transformer.transform(node);
 		let overlays = transformer.overlays();
-		let mut overlay_stream =
-			CursorOverlaySink::new(source_text, &*overlays, CursorCompactWriteSink::new(source_text, &mut output));
-		result.output.to_cursors(&mut overlay_stream);
+		{
+			let mut overlay_stream =
+				CursorOverlaySink::new(source_text, &*overlays, CursorCompactWriteSink::new(source_text, &mut output));
+			result.output.to_cursors(&mut overlay_stream);
+		}
 	} else {
 		panic!("Could not parse source");
 	}
@@ -61,8 +62,8 @@ fn minify(source_text: &str) -> String {
 
 enum TestResult {
 	Pass,
-	Fail,
-	Panic,
+	Fail(String),
+	Panic(String),
 }
 
 fn test_case(case: &CssMinifyTestCase) -> TestResult {
@@ -76,28 +77,30 @@ fn test_case(case: &CssMinifyTestCase) -> TestResult {
 			} else {
 				"unknown panic".to_string()
 			};
-			println!("{} {} ({})", Style::new().yellow().apply_to("PANIC"), case.name, msg);
-			TestResult::Panic
+			TestResult::Panic(msg)
 		}
 		Ok(actual) => {
 			if actual == case.expected {
 				return TestResult::Pass;
 			}
-			println!("{} {}", Style::new().red().apply_to("FAILED"), case.name);
-			println!("{}", Style::new().red().apply_to("- actual"));
-			println!("{}", Style::new().green().apply_to("+ expected"));
-			let diff = TextDiff::from_lines(&*actual, &*case.expected);
-			for change in diff.iter_all_changes() {
-				let (sign, style) = match change.tag() {
-					ChangeTag::Delete => ("-", Style::new().red()),
-					ChangeTag::Insert => ("+", Style::new().green()),
-					ChangeTag::Equal => (" ", Style::new()),
-				};
-				print!("{}{}", style.apply_to(sign).bold(), style.apply_to(change));
-			}
-			TestResult::Fail
+			TestResult::Fail(actual)
 		}
 	}
+}
+
+fn format_diff(actual: &str, expected: &str) -> String {
+	let mut out = String::new();
+	let diff = TextDiff::from_lines(actual, expected);
+	for change in diff.iter_all_changes() {
+		let sign = match change.tag() {
+			ChangeTag::Delete => "-",
+			ChangeTag::Insert => "+",
+			ChangeTag::Equal => " ",
+		};
+		// TextDiff changes include trailing newlines, but write the sign prefix
+		write!(out, "{sign}{change}").unwrap();
+	}
+	out
 }
 
 #[test]
@@ -107,15 +110,24 @@ fn full_suite() {
 	let mut fails = 0;
 	let mut passes = 0;
 	let mut panics = 0;
+	let mut fail_log = String::new();
 	for case in &cases {
 		match test_case(case) {
 			TestResult::Pass => passes += 1,
-			TestResult::Fail => fails += 1,
-			TestResult::Panic => panics += 1,
+			TestResult::Fail(actual) => {
+				fails += 1;
+				writeln!(fail_log, "FAIL {}", case.name).unwrap();
+				writeln!(fail_log, "{}", format_diff(&actual, &case.expected)).unwrap();
+			}
+			TestResult::Panic(msg) => {
+				panics += 1;
+				writeln!(fail_log, "PANIC {}", case.name).unwrap();
+				writeln!(fail_log, "  {msg}\n").unwrap();
+			}
 		}
 	}
 
-	// XXX: If these fail because the numbers go down, great! If they go up, investigate why.
 	println!("\ncss-minify-tests: {} passed, {} failed, {} panicked, {} total", passes, fails, panics, cases.len());
-	assert_eq!(fails + panics, 254, "Should have zero failures but {fails} tests failed and {panics} panicked");
+
+	insta::assert_snapshot!("css_minify_failures", fail_log);
 }
