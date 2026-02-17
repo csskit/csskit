@@ -423,6 +423,28 @@ pub enum Kind {
 	/// [1]: https://drafts.csswg.org/css-syntax/#url-token-diagram
 	Url = 0b1101,
 
+	/// Represents the [&lt;unicode-range-token>][1]. This token is only produced when the
+	/// [Feature::UnicodeRange][crate::Feature::UnicodeRange] feature is enabled.
+	///
+	/// ```md
+	///
+	/// <hexdigit>
+	///  │├─ [ 0-9, A-F, a-f ] ─┤│
+	///
+	/// <unicode-range-token>
+	///  │├─╮─ 'U' ─╭─ '+' ─╭──────────────────╭── <hexdigit> ─╮──────────────────╭─┤│
+	///     ╰─ 'u' ─╯       │                  ╰─ (1-6 times) ─╯                  │
+	///                     │ ╭───────────────────╮                               │
+	///                     ├─╯─╭── <hexdigit> ─╮─╰─╭───────────── ? ───────────╮─┤
+	///                     │   ╰─ (1-5 times) ─╯   ╰─ (1 to (6 digits) times) ─╯ │
+	///                     │                                                     │
+	///                     ╰────╭── <hexdigit> ─╮── '-' ──╭── <hexdigit> ─╮──────╯
+	///                          ╰─ (1-5 times) ─╯         ╰─ (1-5 times) ─╯
+	/// ```
+	///
+	/// [1]: https://drafts.csswg.org/css-syntax/#unicode-range-token-diagram
+	UnicodeRange = 0b1110,
+
 	// Single character Tokens (mask 0b1_XXXX)
 	/// Represents the [&lt;delim-token>][1]. The `<delim-token>` has a value composed of a single code point.
 	///
@@ -541,6 +563,7 @@ impl Kind {
 			0b1011 => Self::Hash,
 			0b1100 => Self::String,
 			0b1101 => Self::Url,
+			0b1110 => Self::UnicodeRange,
 			0b1_0000 => Self::Delim,
 			0b1_0001 => Self::Colon,
 			0b1_0010 => Self::Semicolon,
@@ -572,6 +595,7 @@ impl Kind {
 			Kind::Hash => "Hash",
 			Kind::String => "String",
 			Kind::Url => "Url",
+			Kind::UnicodeRange => "UnicodeRange",
 			Kind::Delim => "Delim",
 			Kind::Colon => "Colon",
 			Kind::Semicolon => "Semicolon",
@@ -620,6 +644,7 @@ fn test_from_bits() {
 	assert_eq!(Kind::from_bits(Kind::Hash as u8), Kind::Hash);
 	assert_eq!(Kind::from_bits(Kind::String as u8), Kind::String);
 	assert_eq!(Kind::from_bits(Kind::Url as u8), Kind::Url);
+	assert_eq!(Kind::from_bits(Kind::UnicodeRange as u8), Kind::UnicodeRange);
 	assert_eq!(Kind::from_bits(Kind::Delim as u8), Kind::Delim);
 	assert_eq!(Kind::from_bits(Kind::Colon as u8), Kind::Colon);
 	assert_eq!(Kind::from_bits(Kind::Semicolon as u8), Kind::Semicolon);

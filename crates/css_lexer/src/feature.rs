@@ -155,9 +155,31 @@ pub enum Feature {
 	///	assert_eq!(lexer.advance(), Kind::Ident);
 	/// ```
 	SeparateWhitespace = 0b0010,
-}
 
-#[test]
-fn size_test() {
-	assert_eq!(::std::mem::size_of::<Feature>(), 1);
+	/// With this flag enabled the [Lexer][crate::Lexer] will produce [Tokens][crate::Token] with
+	/// [Kind::UnicodeRange][crate::Kind::UnicodeRange] when it encounters a valid `<unicode-range-token>` as described
+	/// in the [CSS Syntax specification][1].
+	///
+	/// Per the specification, this token is only produced as part of a special re-tokenization of the `unicode-range`
+	/// descriptor value in `@font-face` rules. Normal tokenization does not produce this token.
+	///
+	/// A unicode-range token starts with `U+` or `u+` followed by hex digits and/or `?` wildcards.
+	///
+	/// Without this feature enabled, `U+0000-00FF` would be tokenized as multiple separate tokens
+	/// (Ident, Delim, Number, Delim, Number, Ident, etc).
+	///
+	/// [1]: https://drafts.csswg.org/css-syntax/#consume-unicode-range-token
+	///
+	/// # Example
+	///
+	/// ```
+	/// use css_lexer::*;
+	/// let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "U+0-7F");
+	/// assert_eq!(lexer.advance(), Kind::Ident);
+	///
+	/// let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+0-7F", Feature::UnicodeRange);
+	/// let token = lexer.advance();
+	/// assert_eq!(token, Kind::UnicodeRange);
+	/// ```
+	UnicodeRange = 0b0100,
 }

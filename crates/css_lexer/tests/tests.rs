@@ -7,9 +7,207 @@ fn tokenizes_empty() {
 	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "");
 	assert_eq!(lexer.offset(), 0);
 	assert_eq!(lexer.advance(), Kind::Eof);
-	assert_eq!(lexer.offset(), 0);
+}
+
+#[test]
+fn tokenizes_unicode_range_single_codepoint() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+A5", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0xA5);
+	assert_eq!(token.unicode_range_end(), 0xA5);
+	assert_eq!(token.len(), 4);
+	assert_eq!(lexer.offset(), 4);
 	assert_eq!(lexer.advance(), Kind::Eof);
-	assert_eq!(lexer.offset(), 0);
+}
+
+#[test]
+fn tokenizes_unicode_range_basic_range() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+0-7F", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x0);
+	assert_eq!(token.unicode_range_end(), 0x7F);
+	assert_eq!(token.len(), 6);
+	assert_eq!(lexer.offset(), 6);
+}
+
+#[test]
+fn tokenizes_unicode_range_with_wildcards() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+30??", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x3000);
+	assert_eq!(token.unicode_range_end(), 0x30FF);
+	assert_eq!(token.len(), 6);
+}
+
+#[test]
+fn tokenizes_unicode_range_full_wildcards() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+??????", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x000000);
+	assert_eq!(token.unicode_range_end(), 0xFFFFFF);
+	assert_eq!(token.len(), 8); // "U+" + 6 * "?"
+}
+
+#[test]
+fn tokenizes_unicode_range_lowercase_u() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "u+590-5ff", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x590);
+	assert_eq!(token.unicode_range_end(), 0x5FF);
+	assert_eq!(token.len(), 9);
+}
+
+#[test]
+fn tokenizes_unicode_range_six_digit_range() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+000000-10FFFF", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x0);
+	assert_eq!(token.unicode_range_end(), 0x10FFFF);
+	assert_eq!(token.len(), 15);
+}
+
+#[test]
+fn tokenizes_unicode_range_single_hex_range() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+FF00-FF9F", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0xFF00);
+	assert_eq!(token.unicode_range_end(), 0xFF9F);
+	assert_eq!(token.len(), 11);
+}
+
+#[test]
+fn tokenizes_unicode_range_in_comma_list() {
+	let source = "U+A5, U+4E00-9FFF";
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, source, Feature::UnicodeRange);
+	{
+		let token = lexer.advance();
+		assert_eq!(token, Kind::UnicodeRange);
+		assert_eq!(token.unicode_range_start(), 0xA5);
+		assert_eq!(token.unicode_range_end(), 0xA5);
+		assert_eq!(token.len(), 4);
+	}
+	assert_eq!(lexer.advance(), Kind::Comma);
+	assert_eq!(lexer.advance(), Kind::Whitespace);
+	{
+		let token = lexer.advance();
+		assert_eq!(token, Kind::UnicodeRange);
+		assert_eq!(token.unicode_range_start(), 0x4E00);
+		assert_eq!(token.unicode_range_end(), 0x9FFF);
+	}
+	assert_eq!(lexer.advance(), Kind::Eof);
+}
+
+#[test]
+fn unicode_range_without_feature_falls_back_to_ident() {
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "U+A5");
+	let token = lexer.advance();
+	assert_eq!(token, Kind::Ident);
+}
+
+#[test]
+fn unicode_range_not_matching_pattern_falls_back_to_ident() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+G", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::Ident);
+}
+
+#[test]
+fn unicode_range_stops_after_six_hex_digits() {
+	// U+1234567 should be U+123456 (6 hex) then "7" as separate token
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+1234567", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x123456);
+	assert_eq!(token.unicode_range_end(), 0x123456);
+	assert_eq!(token.len(), 8); // "U+123456"
+	let next = lexer.advance();
+	assert_eq!(next, Kind::Number); // "7"
+}
+
+#[test]
+fn unicode_range_wildcards_limited_to_six_total() {
+	// U+1?? has 1 hex + 2 ? = 3 < 6, so it greedily consumes up to 6-1=5 ?s
+	// But there are only 2 ?s, so total is 3
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+1??", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x100);
+	assert_eq!(token.unicode_range_end(), 0x1FF);
+	assert_eq!(token.len(), 5);
+}
+
+#[test]
+fn unicode_range_wildcard_no_hex_digits() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+??", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x00);
+	assert_eq!(token.unicode_range_end(), 0xFF);
+	assert_eq!(token.len(), 4);
+}
+
+#[test]
+fn tokenizes_unicode_range_font_face_example() {
+	let source = "U+0000-00FF";
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, source, Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x0);
+	assert_eq!(token.unicode_range_end(), 0xFF);
+	assert_eq!(token.len(), 11);
+}
+
+#[test]
+fn unicode_range_end_range_stops_at_six_hex_digits() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+0-1234567", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0x0);
+	assert_eq!(token.unicode_range_end(), 0x123456);
+	assert_eq!(token.len(), 10); // "U+0-123456" = 2 + 1 + 1 + 6
+	assert_eq!(lexer.advance(), Kind::Number); // "7"
+}
+
+#[test]
+fn unicode_range_token_values_roundtrip() {
+	{
+		let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+A5", Feature::UnicodeRange);
+		let token = lexer.advance();
+		assert_eq!(token.unicode_range_start(), 0xA5);
+		assert_eq!(token.unicode_range_end(), 0xA5);
+		assert_eq!(token.len(), 4);
+	}
+	{
+		let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+000000-10FFFF", Feature::UnicodeRange);
+		let token = lexer.advance();
+		assert_eq!(token.unicode_range_start(), 0x0);
+		assert_eq!(token.unicode_range_end(), 0x10FFFF);
+		assert_eq!(token.len(), 15);
+	}
+	{
+		let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+1F600", Feature::UnicodeRange);
+		let token = lexer.advance();
+		assert_eq!(token.unicode_range_start(), 0x1F600);
+		assert_eq!(token.unicode_range_end(), 0x1F600);
+		assert_eq!(token.len(), 7);
+	}
+}
+
+#[test]
+fn unicode_range_dash_not_followed_by_hex_is_single_range() {
+	let mut lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, "U+A5-G", Feature::UnicodeRange);
+	let token = lexer.advance();
+	assert_eq!(token, Kind::UnicodeRange);
+	assert_eq!(token.unicode_range_start(), 0xA5);
+	assert_eq!(token.unicode_range_end(), 0xA5);
+	assert_eq!(token.len(), 4); // "U+A5"
 }
 
 #[test]

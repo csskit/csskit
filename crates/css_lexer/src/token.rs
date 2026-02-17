@@ -81,6 +81,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// | [Kind::Url]        | `001` | Has a closing paren )       | [Token::url_has_closing_paren()]         |
 /// |                    | `010` | Contains whitespace after ( | [Token::url_has_leading_space()]         |
 /// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::UnicodeRange]| `---` | (Unused)                    | --                                       |
 /// | [Kind::CdcOrCdo]   | `001` | Is CDO (`000` would be CDC) | [Token::is_cdc()]                        |
 /// |                    | `010` | (Reserved)                  | --                                       |
 /// |                    | `100` | (Reserved)                  | --                                       |
@@ -555,6 +556,36 @@ impl Token {
 		Self((flags << 24) & KIND_MASK | ((leading_length | trailing_length) & LENGTH_MASK), len)
 	}
 
+	/// Creates a new [Kind::UnicodeRange] token.
+	#[inline]
+	pub(crate) fn new_unicode_range(start: u32, end: u32, len: u32) -> Self {
+		debug_assert!(start <= 0xFFFFFF);
+		debug_assert!(end <= 0xFFFFFF);
+		debug_assert!(len <= 255);
+		let flags: u32 = Kind::UnicodeRange as u32;
+		Self((flags << 24) & KIND_MASK | (start & LENGTH_MASK), (len << 24) | (end & LENGTH_MASK))
+	}
+
+	/// If the [Token] is [Kind::UnicodeRange], returns the start value of the range.
+	/// This value can be up to 0xFFFFFF (6 hex digits).
+	///
+	/// Asserts: The token is [Kind::UnicodeRange].
+	#[inline]
+	pub const fn unicode_range_start(&self) -> u32 {
+		debug_assert!(self.kind_bits() == Kind::UnicodeRange as u8);
+		self.0 & LENGTH_MASK
+	}
+
+	/// If the [Token] is [Kind::UnicodeRange], returns the end value of the range.
+	/// This value can be up to 0xFFFFFF (6 hex digits).
+	///
+	/// Asserts: The token is [Kind::UnicodeRange].
+	#[inline]
+	pub const fn unicode_range_end(&self) -> u32 {
+		debug_assert!(self.kind_bits() == Kind::UnicodeRange as u8);
+		self.1 & LENGTH_MASK
+	}
+
 	/// Creates a new [Kind::Delim] token.
 	#[inline]
 	pub(crate) const fn new_delim(char: char) -> Self {
@@ -619,7 +650,9 @@ impl Token {
 	/// Check if the [Kind] is "Ident Like", i.e. it is [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
 	#[inline(always)]
 	pub(crate) const fn is_ident_like(&self) -> bool {
-		self.kind_bits() & 0b11000 == 0b01000 && self.kind_bits() != Kind::String as u8
+		self.kind_bits() & 0b11000 == 0b01000
+			&& self.kind_bits() != Kind::String as u8
+			&& self.kind_bits() != Kind::UnicodeRange as u8
 	}
 
 	/// Check if the [Kind] is "Delim Like", i.e. it is [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
@@ -664,6 +697,8 @@ impl Token {
 			}
 		} else if self.kind_bits() == Kind::Hash as u8 {
 			self.0 & LENGTH_MASK
+		} else if self.kind_bits() == Kind::UnicodeRange as u8 {
+			self.1 >> 24
 		} else {
 			self.1
 		}
@@ -1121,6 +1156,10 @@ impl core::fmt::Debug for Token {
 				.field("url_has_closing_paren", &self.first_bit_is_set())
 				.field("url_has_leading_space", &self.second_bit_is_set())
 				.field("contains_escape_chars", &self.third_bit_is_set())
+				.field("len", &self.len()),
+			Kind::UnicodeRange => d
+				.field("start", &format_args!("U+{:X}", self.unicode_range_start()))
+				.field("end", &format_args!("U+{:X}", self.unicode_range_end()))
 				.field("len", &self.len()),
 			Kind::CdcOrCdo => d.field("is_cdc", &self.first_bit_is_set()).field("len", &self.len()),
 			Kind::Whitespace => d.field("contains", &self.whitespace_style()).field("len", &self.len()),

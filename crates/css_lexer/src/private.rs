@@ -60,6 +60,12 @@ trait CharsConsumer {
 
 	#[must_use]
 	fn is_number_start(&mut self) -> bool;
+
+	#[must_use]
+	fn would_start_unicode_range(&self) -> bool;
+
+	#[must_use]
+	fn consume_unicode_range_token(&mut self) -> Token;
 }
 
 impl<'a> CharsConsumer for Chars<'a> {
@@ -554,6 +560,89 @@ impl<'a> CharsConsumer for Chars<'a> {
 		}
 		first == b'.' && bytes.len() >= 2 && bytes[1].is_ascii_digit()
 	}
+
+	// https://drafts.csswg.org/css-syntax/#starts-a-unicode-range
+	// Check if three code points would start a unicode-range.
+	// The caller has already confirmed the current code point is U or u (not yet consumed).
+	// This checks that the next two are `+` followed by `?` or a hex digit.
+	fn would_start_unicode_range(&self) -> bool {
+		let (_, c1, c2) = self.peek3();
+		c1 == '+' && (c2 == '?' || c2.is_ascii_hexdigit())
+	}
+
+	// https://drafts.csswg.org/css-syntax/#consume-unicode-range-token
+	// Consume a unicode-range token.
+	// Assumes the stream would start a unicode-range (i.e. would_start_unicode_range() returned true).
+	fn consume_unicode_range_token(&mut self) -> Token {
+		// Step 1: Consume the next two input code points (U/u and +) and discard them.
+		self.next(); // U or u
+		self.next(); // +
+		let mut len: u32 = 2;
+
+		// Step 2: Consume as many hex digits as possible, but no more than 6.
+		let mut hex_count: u32 = 0;
+		let mut hex_value: u32 = 0;
+		while hex_count < 6 {
+			let c = self.peek_nth(0);
+			if c.is_ascii_hexdigit() {
+				self.next();
+				hex_value = (hex_value << 4) | c.to_digit(16).unwrap();
+				hex_count += 1;
+				len += 1;
+			} else {
+				break;
+			}
+		}
+
+		// If less than 6 hex digits were consumed, consume as many ? as possible
+		// but no more than enough to make total = 6.
+		let mut question_count: u32 = 0;
+		while hex_count + question_count < 6 && self.peek_nth(0) == '?' {
+			self.next();
+			question_count += 1;
+			len += 1;
+		}
+
+		// Step 3: If first segment contains any question mark code points
+		if question_count > 0 {
+			// Replace ? with 0 for start
+			let start = hex_value << (question_count * 4);
+			// Replace ? with F for end
+			let end = start | ((1 << (question_count * 4)) - 1);
+			return Token::new_unicode_range(start, end, len);
+		}
+
+		// Step 4: Otherwise, hex_value is start of range.
+		let start = hex_value;
+
+		// Step 5: If next 2 code points are - followed by a hex digit
+		let (c1, c2) = self.peek2();
+		if c1 == '-' && c2.is_ascii_hexdigit() {
+			// Consume the -
+			self.next();
+			len += 1;
+
+			// Consume as many hex digits as possible, but no more than 6
+			let mut end_hex_count: u32 = 0;
+			let mut end_value: u32 = 0;
+			while end_hex_count < 6 {
+				let c = self.peek_nth(0);
+				if c.is_ascii_hexdigit() {
+					self.next();
+					end_value = (end_value << 4) | c.to_digit(16).unwrap();
+					end_hex_count += 1;
+					len += 1;
+				} else {
+					break;
+				}
+			}
+
+			return Token::new_unicode_range(start, end_value, len);
+		}
+
+		// Step 6: Otherwise, start == end
+		Token::new_unicode_range(start, start, len)
+	}
 }
 
 impl<'a> Lexer<'a> {
@@ -574,6 +663,16 @@ impl<'a> Lexer<'a> {
 			}
 			// fast path for identifiers
 			if is_ident_ascii_start(c) {
+				// https://drafts.csswg.org/css-syntax/#consume-token
+				// U+0055 LATIN CAPITAL LETTER U (U) / U+0075 LATIN SMALL LETTER U (u):
+				// If unicode ranges allowed is true and the input stream would start a
+				// unicode-range, reconsume and consume a unicode-range token.
+				if matches!(c, 'U' | 'u')
+					&& self.features.intersects(Feature::UnicodeRange)
+					&& chars.would_start_unicode_range()
+				{
+					return chars.consume_unicode_range_token();
+				}
 				return chars.consume_ident_like_token(self.atoms);
 			}
 		}
