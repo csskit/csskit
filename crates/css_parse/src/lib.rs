@@ -282,6 +282,7 @@ pub use css_lexer::{
 	SourceOffset, Span, ToSpan, Token, Whitespace,
 };
 
+mod bump_box;
 mod comparison;
 mod cursor_compact_write_sink;
 #[cfg(feature = "egg")]
@@ -309,6 +310,7 @@ mod traits;
 
 pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 
+pub use bump_box::*;
 pub use comparison::*;
 pub use cursor_compact_write_sink::*;
 #[cfg(feature = "egg")]
