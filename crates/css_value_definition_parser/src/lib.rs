@@ -98,7 +98,9 @@ impl DefType {
 		matches!(
 			self.ident_str(),
 			// Hand-written types that contain other allocating types
-			"Image"          // contains Gradient<'a>
+			"Color"          // Color<'a>
+				| "Shadow"       // Shadow<'a> (contains Color<'a>)
+				| "Image"          // contains Gradient<'a>
 				| "Image1d"  // contains StripesFunction<'a>
 				| "ContentList"  // Vec<'a, ContentListItem<'a>>
 				| "CounterStyle"  // complex hand-written type
@@ -324,7 +326,8 @@ impl Def {
 			Self::StyleValue(ty) => {
 				matches!(
 					ty.ident_str(),
-					"BorderTopColor"
+					"BorderBlockStart"
+						| "BorderTopColor" | "CaretColor"
 						| "ColumnRuleWidth"
 						| "DynamicRangeLimit"
 						| "EventTriggerName"

@@ -15,7 +15,7 @@ pub struct StripesFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Stripes)]
 	pub name: T![Function],
-	pub params: CommaSeparated<'a, ColorStripe>,
+	pub params: CommaSeparated<'a, ColorStripe<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: T![')'],
 }
@@ -29,12 +29,12 @@ pub struct StripesFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColorStripe {
-	pub color: Color,
+pub struct ColorStripe<'a> {
+	pub color: Color<'a>,
 	pub thickness: Option<LengthPercentageOrFlex>,
 }
 
-impl<'a> Peek<'a> for ColorStripe {
+impl<'a> Peek<'a> for ColorStripe<'a> {
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -43,7 +43,7 @@ impl<'a> Peek<'a> for ColorStripe {
 	}
 }
 
-impl<'a> Parse<'a> for ColorStripe {
+impl<'a> Parse<'a> for ColorStripe<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -66,7 +66,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StripesFunction>(), 56);
-		assert_eq!(std::mem::size_of::<ColorStripe>(), 156);
+		assert_eq!(std::mem::size_of::<ColorStripe>(), 160);
 	}
 
 	#[test]

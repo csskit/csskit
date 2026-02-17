@@ -42,7 +42,7 @@ pub struct LinearGradientFunction<'a> {
 pub struct LinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
 	Option<T![,]>,
-	CommaSeparated<'a, ColorStopOrHint>,
+	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
 /// <https://drafts.csswg.org/css-images-3/#funcdef-repeating-linear-gradient>
@@ -67,7 +67,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 pub struct RepeatingLinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
 	Option<T![,]>,
-	CommaSeparated<'a, ColorStopOrHint>,
+	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
 /// <https://drafts.csswg.org/css-images-3/#funcdef-radial-gradient>
@@ -97,7 +97,7 @@ pub struct RadialGradientFunctionParams<'a>(
 	Option<T![Ident]>,
 	Option<Position>,
 	Option<T![,]>,
-	CommaSeparated<'a, ColorStopOrHint>,
+	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
 /// <https://drafts.csswg.org/css-images-3/#funcdef-repeating-radial-gradient>
@@ -127,7 +127,7 @@ pub struct RepeatingRadialGradientFunctionParams<'a>(
 	Option<T![Ident]>,
 	Option<Position>,
 	Option<T![,]>,
-	CommaSeparated<'a, ColorStopOrHint>,
+	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -228,9 +228,9 @@ pub enum RadialShape {
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum ColorStopOrHint {
+pub enum ColorStopOrHint<'a> {
 	Hint(LengthPercentage),
-	Stop(Color, Option<LengthPercentage>),
+	Stop(Color<'a>, Option<LengthPercentage>),
 }
 
 #[cfg(test)]
@@ -244,7 +244,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<Gradient>(), 208);
 		assert_eq!(std::mem::size_of::<LinearDirection>(), 44);
 		assert_eq!(std::mem::size_of::<RadialSize>(), 32);
-		assert_eq!(std::mem::size_of::<ColorStopOrHint>(), 156);
+		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 160);
 	}
 
 	#[test]

@@ -1,6 +1,7 @@
 mod attr_function;
 mod calc_size_function;
 mod color_function;
+mod color_mix_function;
 mod content_function;
 mod counter_functions;
 mod dynamic_range_limit_mix_function;
@@ -25,6 +26,7 @@ mod url;
 pub use attr_function::*;
 pub use calc_size_function::*;
 pub use color_function::*;
+pub use color_mix_function::*;
 pub use content_function::*;
 pub use counter_functions::*;
 pub use dynamic_range_limit_mix_function::*;

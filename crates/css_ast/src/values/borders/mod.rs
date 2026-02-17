@@ -39,7 +39,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderStyleValue;
+pub struct BorderStyleValue<'a>;
 
 /// Represents the style value for `border-block` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block).
 ///
@@ -73,7 +73,7 @@ pub struct BorderStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockStyleValue;
+pub struct BorderBlockStyleValue<'a>;
 
 /// Represents the style value for `border-block-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-clip).
 ///
@@ -170,7 +170,7 @@ pub struct BorderBlockColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockEndStyleValue;
+pub struct BorderBlockEndStyleValue<'a>;
 
 /// Represents the style value for `border-block-end-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-clip).
 ///
@@ -373,7 +373,7 @@ pub struct BorderBlockEndWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockStartStyleValue;
+pub struct BorderBlockStartStyleValue<'a>;
 
 /// Represents the style value for `border-block-start-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-clip).
 ///
@@ -644,7 +644,7 @@ pub struct BorderBlockWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBottomStyleValue;
+pub struct BorderBottomStyleValue<'a>;
 
 /// Represents the style value for `border-bottom-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-clip).
 ///
@@ -1306,7 +1306,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineStyleValue;
+pub struct BorderInlineStyleValue<'a>;
 
 /// Represents the style value for `border-inline-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-clip).
 ///
@@ -1403,7 +1403,7 @@ pub struct BorderInlineColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineEndStyleValue;
+pub struct BorderInlineEndStyleValue<'a>;
 
 /// Represents the style value for `border-inline-end-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-clip).
 ///
@@ -1606,7 +1606,7 @@ pub struct BorderInlineEndWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineStartStyleValue;
+pub struct BorderInlineStartStyleValue<'a>;
 
 /// Represents the style value for `border-inline-start-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-clip).
 ///
@@ -1877,7 +1877,7 @@ pub struct BorderInlineWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderLeftStyleValue;
+pub struct BorderLeftStyleValue<'a>;
 
 /// Represents the style value for `border-left-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-clip).
 ///
@@ -2177,7 +2177,7 @@ pub struct BorderLeftWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderRightStyleValue;
+pub struct BorderRightStyleValue<'a>;
 
 /// Represents the style value for `border-right-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-clip).
 ///
@@ -2526,7 +2526,7 @@ pub struct BorderStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderTopStyleValue;
+pub struct BorderTopStyleValue<'a>;
 
 /// Represents the style value for `border-top-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-clip).
 ///

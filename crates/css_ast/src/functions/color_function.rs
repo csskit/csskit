@@ -1,5 +1,7 @@
 use super::prelude::*;
+use crate::functions::color_mix_function::ColorMixFunction;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
+use css_parse::BumpBox;
 
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -58,8 +60,9 @@ impl<'a> Parse<'a> for CommaOrSlash {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColorFunction {
-	Color(ColorFunctionColor),
+pub enum ColorFunction<'a> {
+	Color(BumpBox<'a, ColorFunctionColor>),
+	ColorMix(BumpBox<'a, ColorMixFunction<'a>>),
 	Rgb(RgbFunction),
 	Rgba(RgbaFunction),
 	Hsl(HslFunction),
@@ -72,10 +75,11 @@ pub enum ColorFunction {
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for ColorFunction {
+impl crate::ToChromashift for ColorFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		match self {
 			Self::Color(c) => c.to_chromashift(),
+			Self::ColorMix(c) => c.to_chromashift(),
 			Self::Rgb(c) => c.to_chromashift(),
 			Self::Rgba(c) => c.to_chromashift(),
 			Self::Hsl(c) => c.to_chromashift(),
@@ -651,7 +655,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorFunction>(), 140);
+		assert_eq!(std::mem::size_of::<ColorFunction<'_>>(), 144);
 		assert_eq!(std::mem::size_of::<ColorFunctionColor>(), 120);
 		assert_eq!(std::mem::size_of::<RgbFunction>(), 136);
 		assert_eq!(std::mem::size_of::<RgbaFunction>(), 136);

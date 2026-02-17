@@ -142,7 +142,7 @@ pub struct BackgroundClipStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BackgroundColorStyleValue;
+pub struct BackgroundColorStyleValue<'a>;
 
 /// Represents the style value for `background-image` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-image).
 ///

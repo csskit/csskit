@@ -2,4 +2,4 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo(pub Option<crate::Color>, pub Option<crate::Color>);
+struct Foo<'a>(pub Option<crate::Color<'a>>, pub Option<crate::Color<'a>>);

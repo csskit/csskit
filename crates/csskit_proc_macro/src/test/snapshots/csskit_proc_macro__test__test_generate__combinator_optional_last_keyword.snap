@@ -1,10 +1,9 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
-assertion_line: 268
 expression: pretty
 ---
 #[derive(Visitable, Parse)]
-enum Foo {
+enum Foo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
@@ -12,6 +11,6 @@ enum Foo {
         #[cfg_attr(feature = "visitable", visit(skip))]
         #[atom(CssAtomSet::Bar)]
         ::css_parse::T![Ident],
-        Option<crate::Color>,
+        Option<crate::Color<'a>>,
     ),
 }

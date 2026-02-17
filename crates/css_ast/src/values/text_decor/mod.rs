@@ -85,7 +85,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextDecorationColorStyleValue;
+pub struct TextDecorationColorStyleValue<'a>;
 
 /// Represents the style value for `text-decoration-inset` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-inset).
 ///
@@ -476,7 +476,7 @@ pub enum TextDecorationThicknessStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextEmphasisColorStyleValue;
+pub struct TextEmphasisColorStyleValue<'a>;
 
 // /// Represents the style value for `text-emphasis-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position).
 // ///

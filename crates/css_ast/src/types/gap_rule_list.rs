@@ -18,7 +18,7 @@ pub struct GapRuleList<'a>(pub CommaSeparated<'a, GapRuleOrRepeat<'a>>);
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum GapRuleOrRepeat<'a> {
-	GapRule(GapRule),
+	GapRule(GapRule<'a>),
 	GapRepeatRule(GapRepeatRule<'a>),
 }
 
@@ -35,13 +35,13 @@ pub struct GapRepeatRule<'a> {
 	pub count: AutoOr<PositiveNonZeroInt>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub comma: T![,],
-	pub rules: CommaSeparated<'a, GapRule>,
+	pub rules: CommaSeparated<'a, GapRule<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: T![')'],
 }
 
 // <gap-rule> = <line-width> || <line-style> || <color>
-pub type GapRule = Optionals3<LineWidth, LineStyle, Color>;
+pub type GapRule<'a> = Optionals3<LineWidth, LineStyle, Color<'a>>;
 
 #[cfg(test)]
 mod tests {
@@ -54,7 +54,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<GapRuleList>(), 32);
 		assert_eq!(std::mem::size_of::<GapRuleOrRepeat>(), 176);
 		assert_eq!(std::mem::size_of::<GapRepeatRule>(), 88);
-		assert_eq!(std::mem::size_of::<GapRule>(), 172);
+		assert_eq!(std::mem::size_of::<GapRule>(), 176);
 	}
 
 	#[test]

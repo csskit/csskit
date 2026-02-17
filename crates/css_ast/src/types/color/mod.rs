@@ -12,7 +12,7 @@ pub use system::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum Color {
+pub enum Color<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Currentcolor)]
 	Currentcolor(T![Ident]),
@@ -24,13 +24,10 @@ pub enum Color {
 	Hex(T![Hash]),
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Named(NamedColor),
-	Function(ColorFunction),
-	// TODO: need bumpalo::Box PartialEq, or bumpalo::Box serde
-	// Relative(Box<'a, Color<'a>>, ColorFunction),
-	// Mix(ColorMixSyntax, Box<'a, Color<'a>>, u8, Box<'a, Color<'a>>),
+	Function(ColorFunction<'a>),
 }
 
-impl Color {
+impl Color<'_> {
 	// Alias CanvasText for #[initial()]
 	// #[allow(non_upper_case_globals)]
 	// pub const Canvastext: Color = Color::System(SystemColor::CanvasText);
@@ -51,7 +48,7 @@ impl ToChromashift for T![Hash] {
 }
 
 #[cfg(feature = "chromashift")]
-impl ToChromashift for Color {
+impl ToChromashift for Color<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Srgb;
 
@@ -81,7 +78,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Color>(), 140);
+		assert_eq!(std::mem::size_of::<Color<'_>>(), 144);
 	}
 
 	#[test]
@@ -100,6 +97,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Color, "lab(63.673% 51.577 5.811)");
 		assert_parse!(CssAtomSet::ATOMS, Color, "hwb(740deg 20% 30%/50%)");
 		assert_parse!(CssAtomSet::ATOMS, Color, "lch(20% 30% 740deg/50%)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "color-mix(in srgb,red,blue)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "color-mix(in oklch longer hue,red 25%,blue)");
 	}
 
 	#[test]

@@ -5,9 +5,9 @@ include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_exit_methods.rs"));
 
 use bumpalo::collections::Vec;
 use css_parse::{
-	Block, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup, DeclarationList,
-	DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2, Optionals3,
-	Optionals4, Optionals5, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
+	Block, BumpBox, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup,
+	DeclarationList, DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2,
+	Optionals3, Optionals4, Optionals5, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
 };
 
 use crate::*;
@@ -229,6 +229,18 @@ where
 		if let Some(node) = self {
 			node.accept(v)
 		}
+	}
+}
+
+impl<'a, T: VisitableMut> VisitableMut for BumpBox<'a, T> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		(**self).accept_mut(v)
+	}
+}
+
+impl<'a, T: Visitable> Visitable for BumpBox<'a, T> {
+	fn accept<V: Visit>(&self, v: &mut V) {
+		(**self).accept(v)
 	}
 }
 

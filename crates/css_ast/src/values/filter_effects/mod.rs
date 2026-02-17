@@ -158,7 +158,7 @@ pub enum ColorInterpolationFiltersStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flood-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FloodColorStyleValue;
+pub struct FloodColorStyleValue<'a>;
 
 /// Represents the style value for `flood-opacity` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#flood-opacity).
 ///
@@ -216,4 +216,4 @@ pub struct FloodOpacityStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.lighting-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LightingColorStyleValue;
+pub struct LightingColorStyleValue<'a>;

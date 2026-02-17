@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scrollbar-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollbarColorStyleValue;
+pub struct ScrollbarColorStyleValue<'a>;
 
 /// Represents the style value for `scrollbar-width` as defined in [css-scrollbars-1](https://drafts.csswg.org/css-scrollbars-1/#scrollbar-width).
 ///

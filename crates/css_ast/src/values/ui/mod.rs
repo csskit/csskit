@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.accent-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct AccentColorStyleValue;
+pub struct AccentColorStyleValue<'a>;
 
 /// Represents the style value for `appearance` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#appearance).
 ///
@@ -92,7 +92,7 @@ pub enum AppearanceStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CaretStyleValue;
+pub struct CaretStyleValue<'a>;
 
 /// Represents the style value for `caret-animation` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-animation).
 ///
@@ -150,7 +150,7 @@ pub enum CaretAnimationStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CaretColorStyleValue;
+pub struct CaretColorStyleValue<'a>;
 
 /// Represents the style value for `caret-shape` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-shape).
 ///

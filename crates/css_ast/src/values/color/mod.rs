@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColorStyleValue;
+pub struct ColorStyleValue<'a>;
 
 /// Represents the style value for `opacity` as defined in [css-color-6](https://drafts.csswg.org/css-color-6/#opacity).
 ///

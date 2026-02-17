@@ -7,8 +7,8 @@ use crate::{Color, Length, NonNegative};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Shadow {
-	pub color: Option<Color>,
+pub struct Shadow<'a> {
+	pub color: Option<Color<'a>>,
 	pub offset: (Length, Length),
 	pub blur_radius: Option<NonNegative<Length>>,
 	pub spread_radius: Option<Length>,
@@ -16,7 +16,7 @@ pub struct Shadow {
 	pub inset: Option<T![Ident]>,
 }
 
-impl<'a> Peek<'a> for Shadow {
+impl<'a> Peek<'a> for Shadow<'a> {
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -25,7 +25,7 @@ impl<'a> Peek<'a> for Shadow {
 	}
 }
 
-impl<'a> Parse<'a> for Shadow {
+impl<'a> Parse<'a> for Shadow<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -59,7 +59,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Shadow>(), 220);
+		assert_eq!(std::mem::size_of::<Shadow<'_>>(), 224);
 	}
 
 	#[test]

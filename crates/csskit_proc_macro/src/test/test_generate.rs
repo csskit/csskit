@@ -146,14 +146,14 @@ fn custom_function_variant_with_multiplier_args() {
 #[test]
 fn custom_function_all_optionals() {
 	let syntax = to_valuedef!(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ");
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "custom_function_all_optionals");
 }
 
 #[test]
 fn ordered_custom_function_last_option() {
 	let syntax = to_valuedef!(" <'caret-color'> <'caret-animation'>? ");
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "ordered_custom_function_last_option");
 }
 
@@ -202,7 +202,7 @@ fn bound_range_multiplier_with_keyword() {
 #[test]
 fn value_fixed_range_color2_optimized() {
 	let syntax = to_valuedef! { <color>{2} };
-	let data = to_deriveinput! { struct Foo {} };
+	let data = to_deriveinput! { struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "value_fixed_range_color2_optimized");
 }
 
@@ -223,7 +223,7 @@ fn value_with_derive_parse_skips_impl() {
 #[test]
 fn value_fixed_range_auto_color2_optimized() {
 	let syntax = to_valuedef! { foo | <color>{2} };
-	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "value_fixed_range_auto_color2_optimized");
 }
 
@@ -258,28 +258,28 @@ fn literal_with_derive_parse() {
 #[test]
 fn combinator_optional_keyword() {
 	let syntax = to_valuedef! { foo | <color>? bar };
-	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "combinator_optional_keyword");
 }
 
 #[test]
 fn combinator_optional_last_keyword() {
 	let syntax = to_valuedef! { foo | bar <color>? };
-	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "combinator_optional_last_keyword");
 }
 
 #[test]
 fn combinator_optional2_keyword() {
 	let syntax = to_valuedef! { foo | <color>? <color>? bar };
-	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "combinator_optional2_keyword");
 }
 
 #[test]
 fn just_optional() {
 	let syntax = to_valuedef! { <color>? <color>? };
-	let data = to_deriveinput! { struct Foo {} };
+	let data = to_deriveinput! { struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "just_optional");
 }
 
@@ -405,7 +405,7 @@ fn auto_or_type() {
 #[test]
 fn auto_or_fixed_multiplier() {
 	let syntax = to_valuedef! { auto | <color>{2} };
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_or_fixed_multiplier");
 }
 

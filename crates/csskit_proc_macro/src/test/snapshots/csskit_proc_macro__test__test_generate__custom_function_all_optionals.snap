@@ -2,8 +2,8 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo {
-    pub caret_color: Option<crate::CaretColorStyleValue>,
+struct Foo<'a> {
+    pub caret_color: Option<crate::CaretColorStyleValue<'a>>,
     pub caret_animation: Option<crate::CaretAnimationStyleValue>,
     pub caret_shape: Option<crate::CaretShapeStyleValue>,
 }

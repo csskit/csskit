@@ -1,4 +1,4 @@
-use crate::{CursorSink, SemanticEq, ToCursors};
+use crate::{Cursor, CursorSink, Parse, Parser, Peek, SemanticEq, ToCursors};
 use bumpalo::Bump;
 use css_lexer::{Span, ToSpan};
 use std::fmt;
@@ -106,6 +106,25 @@ impl<M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>> crate::NodeWithMetad
 
 	fn metadata(&self) -> M {
 		(**self).metadata()
+	}
+}
+
+impl<'a, T: Peek<'a>> Peek<'a> for BumpBox<'a, T> {
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		T::peek(p, c)
+	}
+}
+
+impl<'a, T: Parse<'a>> Parse<'a> for BumpBox<'a, T> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> crate::Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let value = T::parse(p)?;
+		Ok(BumpBox::new_in(p.bump(), value))
 	}
 }
 

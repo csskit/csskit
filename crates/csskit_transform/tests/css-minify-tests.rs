@@ -117,5 +117,5 @@ fn full_suite() {
 
 	// XXX: If these fail because the numbers go down, great! If they go up, investigate why.
 	println!("\ncss-minify-tests: {} passed, {} failed, {} panicked, {} total", passes, fails, panics, cases.len());
-	assert_eq!(fails + panics, 257, "Should have zero failures but {fails} tests failed and {panics} panicked");
+	assert_eq!(fails + panics, 254, "Should have zero failures but {fails} tests failed and {panics} panicked");
 }
