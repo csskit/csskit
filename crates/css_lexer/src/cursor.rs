@@ -52,6 +52,16 @@ impl Cursor {
 	}
 
 	#[inline(always)]
+	pub fn with_bad_flag(&self) -> Self {
+		Self(self.0, self.1.with_bad_flag())
+	}
+
+	#[inline(always)]
+	pub fn is_bad(&self) -> bool {
+		self.1.is_bad()
+	}
+
+	#[inline(always)]
 	pub fn str_slice<'a>(&self, str: &'a str) -> &'a str {
 		debug_assert!(
 			str.len() >= (self.end_offset().0 as usize),

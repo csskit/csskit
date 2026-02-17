@@ -14,7 +14,7 @@ use crate::Kind;
 /// assert_eq!(lexer.advance(), KindSet::new(&[Kind::AtKeyword, Kind::Ident, Kind::Function]));
 /// ```
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct KindSet(u32);
+pub struct KindSet(u64);
 
 impl KindSet {
 	/// A [KindSet] that matches no [Kinds][Kind].
@@ -30,6 +30,9 @@ impl KindSet {
 	/// A [KindSet] that matches just Whitespace. This is the same as [Kind::Comment] but can be useful to apply to
 	/// functions that expect a [KindSet] rather than [Kind].
 	pub const COMMENTS: KindSet = KindSet::new(&[Kind::Comment]);
+
+	/// A [KindSet] that matches just Whitespace or Semicolons.
+	pub const WHITESPACE_OR_SEMICOLON: KindSet = KindSet::new(&[Kind::Whitespace, Kind::Semicolon]);
 
 	/// A [KindSet] that matches either [Kind::RightCurly] or [Kind::Semicolon]. This is useful for matching
 	/// stop-tokens, for example checking the end of a declaration.
@@ -67,7 +70,7 @@ impl KindSet {
 	]);
 
 	/// A [KindSet] that matches _any_ token.
-	pub const ANY: KindSet = KindSet(u32::MAX);
+	pub const ANY: KindSet = KindSet(u64::MAX);
 
 	/// Creates a new [KindSet] with the combination of all given [Kinds][Kind].
 	///
@@ -77,7 +80,7 @@ impl KindSet {
 		let mut i = 0;
 		let len = kinds.len();
 		while i < len {
-			u |= 1 << (kinds[i] as u8 % 32);
+			u |= 1 << (kinds[i] as u8 & 0b111111);
 			i += 1;
 		}
 		Self(u)
@@ -87,16 +90,16 @@ impl KindSet {
 	///
 	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
 	pub const fn add(&self, kind: Kind) -> Self {
-		Self(self.0 | (1 << (kind as u8 % 32)))
+		Self(self.0 | (1 << (kind as u8 & 0b111111)))
 	}
 
 	/// Check if a [KindSet] contains the subpplied [Kind].
 	pub fn contains(&self, kind: Kind) -> bool {
-		self.0 & (1 << (kind as u8 % 32)) != 0
+		self.0 & (1 << (kind as u8 & 0b111111)) != 0
 	}
 
 	pub(crate) const fn contains_bits(&self, kind_bits: u8) -> bool {
-		self.0 & (1 << (kind_bits % 32)) != 0
+		self.0 & (1 << (kind_bits & 0b111111)) != 0
 	}
 }
 
@@ -108,4 +111,17 @@ fn test_kindset_contains() {
 	assert!(set.contains(Kind::Comment));
 	assert!(!set.contains(Kind::String));
 	assert!(!set.contains(Kind::Url));
+
+	let set = KindSet::new(&[Kind::LeftCurly, Kind::LeftSquare, Kind::LeftParen]);
+
+	assert!(set.contains(Kind::LeftCurly));
+	assert!(!set.contains(Kind::RightCurly));
+	assert!(set.contains(Kind::LeftSquare));
+	assert!(!set.contains(Kind::RightSquare));
+	assert!(set.contains(Kind::LeftParen));
+	assert!(!set.contains(Kind::RightParen));
+	assert!(!set.contains(Kind::Ident));
+
+	assert!(KindSet::COMMENTS.contains(Kind::Comment));
+	assert!(!KindSet::COMMENTS.contains(Kind::Delim));
 }

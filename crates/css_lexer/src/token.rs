@@ -1,5 +1,6 @@
 use crate::{
 	AssociatedWhitespaceRules, CommentStyle, Cursor, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace,
+	constants::SINGLE_CHAR_KINDS,
 };
 use std::char::REPLACEMENT_CHARACTER;
 
@@ -41,11 +42,11 @@ use std::char::REPLACEMENT_CHARACTER;
 /// The first [u32], however, is split into 3 (sometimes 5) parts. The two u32s can be thought of like so:
 ///
 /// ```md
-///   |-----|-------|--------------------------|---------------------------------|
-///   | TF  | K     | VD                       | Value                           |
-/// 0b| 000 | 00000 | 000000000000000000000000 | 0000000000000000000000000000000 |
-///   |-----|-------|--------------------------|---------------------------------|
-///   | 3-- | 5---- | 24---------------------- | 32----------------------------- |
+///   |------|------|--------------------------|---------------------------------|
+///   | TF   | K    | VD                       | Value                           |
+/// 0b| 0000 | 0000 | 000000000000000000000000 | 0000000000000000000000000000000 |
+///   |------|------|--------------------------|---------------------------------|
+///   | 4--- | 4--- | 24---------------------- | 32----------------------------- |
 /// ```
 ///
 /// ## TF = Type Flags (or "Token Facts")
@@ -55,40 +56,60 @@ use std::char::REPLACEMENT_CHARACTER;
 /// table, but it can serve as a useful reference. Note that not all methods return a [bool], so footnotes have been
 /// added to explain these further.
 ///
-/// | Kind::             | Flag  | Description                 | Method                                   |
-/// |--------------------|-------|-----------------------------|------------------------------------------|
-/// | [Kind::Number]     | `001` | Floating Point              | [Token::is_float()]                      |
-/// |                    | `010` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
-/// |                    | `100` | Sign is required            | [Token::sign_is_required()]              |
-/// | [Kind::Dimension]  | `001` | Floating Point              | [Token::is_float()]                      |
-/// |                    | `010` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
-/// |                    | `100` | Unit is a known dimension   | [Token::atom_bits()][^dimension]         |
-/// | [Kind::String]     | `001` | Uses Double Quotes          | [Token::quote_style()][^quotes]          |
-/// |                    | `010` | Has a closing quote         | [Token::has_close_quote()]               |
-/// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
-/// | [Kind::Ident]      | `001` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
-/// |                    | `010` | Is a "Dashed Ident"         | [Token::is_dashed_ident()]               |
-/// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
-/// | [Kind::Function]   | `001` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
-/// |                    | `010` | Is a "Dashed Ident"         | [Token::is_dashed_ident()]               |
-/// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
-/// | [Kind::AtKeyword]  | `001` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
-/// |                    | `010` | Is a "Dashed Ident"         | [Token::is_dashed_ident()]               |
-/// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
-/// | [Kind::Hash]       | `001` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
-/// |                    | `010` | First character is ASCII    | [Token::hash_is_id_like()]               |
-/// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
-/// | [Kind::Url]        | `001` | Has a closing paren )       | [Token::url_has_closing_paren()]         |
-/// |                    | `010` | Contains whitespace after ( | [Token::url_has_leading_space()]         |
-/// |                    | `100` | Contains escape characters  | [Token::contains_escape_chars()]         |
-/// | [Kind::UnicodeRange]| `---` | (Unused)                    | --                                       |
-/// | [Kind::CdcOrCdo]   | `001` | Is CDO (`000` would be CDC) | [Token::is_cdc()]                        |
-/// |                    | `010` | (Reserved)                  | --                                       |
-/// |                    | `100` | (Reserved)                  | --                                       |
-/// | [Kind::Whitespace] | `---` | Whitespace style            | [Token::whitespace_style()][^whitespace] |
-/// | [Kind::Delim]      | `---` | Associate whitespace rules  | [Token::associated_whitespace()][^delim] |
-/// | [Kind::Comment]    | `---` | (Special)                   | [Token::comment_style()][^comments]      |
+/// | Kind::              | Flag   | Description                 | Method                                   |
+/// |---------------------|--------|-----------------------------|------------------------------------------|
+/// | [Kind::Number]      | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Floating Point              | [Token::is_float()]                      |
+/// |                     | `0100` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
+/// |                     | `1000` | Sign is required            | [Token::sign_is_required()]              |
+/// | [Kind::Dimension]   | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Floating Point              | [Token::is_float()]                      |
+/// |                     | `0100` | Has a "Sign" (-/+)          | [Token::has_sign()]                      |
+/// |                     | `1000` | Unit is a known dimension   | [Token::atom_bits()][^dimension]         |
+/// | [Kind::String]      | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Uses Double Quotes          | [Token::quote_style()][^quotes]          |
+/// |                     | `0100` | Has a closing quote         | [Token::has_close_quote()]               |
+/// |                     | `1000` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::Ident]       | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
+/// |                     | `0100` | Is a "Dashed Ident"         | [Token::is_dashed_ident()]               |
+/// |                     | `1000` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::Function]    | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
+/// |                     | `0100` | Is a "Dashed Ident"         | [Token::is_dashed_ident()]               |
+/// |                     | `1000` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::AtKeyword]   | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
+/// |                     | `0100` | Is a "Dashed Ident"         | [Token::is_dashed_ident()]               |
+/// |                     | `1000` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::Hash]        | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Contains non-lower-ASCII    | [Token::is_lower_case()]                 |
+/// |                     | `0100` | First character is ASCII    | [Token::hash_is_id_like()]               |
+/// |                     | `1000` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::Url]         | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Has a closing paren )       | [Token::url_has_closing_paren()]         |
+/// |                     | `0100` | Contains whitespace after ( | [Token::url_has_leading_space()]         |
+/// |                     | `1000` | Contains escape characters  | [Token::contains_escape_chars()]         |
+/// | [Kind::UnicodeRange]| `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | (Reserved)                  | --                                       |
+/// |                     | `0100` | (Reserved)                  | --                                       |
+/// |                     | `1000` | (Reserved)                  | --                                       |
+/// | [Kind::CdcOrCdo]    | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `0010` | Is CDO (`000` would be CDC) | [Token::is_cdc()]                        |
+/// |                     | `0100` | (Reserved)                  | --                                       |
+/// |                     | `1000` | (Reserved)                  | --                                       |
+/// | [Kind::Whitespace]  | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `???0` | Whitespace style            | [Token::whitespace_style()][^whitespace] |
+/// | [Kind::Delim]       | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `???0` | Associate whitespace rules  | [Token::associated_whitespace()][^delim] |
+/// | [Kind::Comment]     | `0001` | Error/Recovery token        | [Token::is_bad()][^bad]                  |
+/// |                     | `???0` | (Special)                   | [Token::comment_style()][^comments]      |
 ///
+/// [^bad]: All tokens use the 4th bit to denote if this token is a "Erorr/Recovery Token". These tokens are not going
+/// to be emitted by the lexer (except in the case of BadString & BadUrl), but a Parser can set this flag on a token to
+/// help differentiate between tokens emitted by the lexer and tokens that were either emitted by the lexer but in an
+/// unexpected position, or tokens _constructed_ by the parser in order to aid in recovering the Parser into a state to
+/// resume.
 /// [^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
 /// quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
 /// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will
@@ -210,7 +231,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// invent their own dimension units. In other words being too restrictive on dimension ident length could be costly
 /// in the future, therefore 4,096 characters seems like a reasonable, if generous, trade-off.
 ///
-/// There's a giant caveat here though. If `TF & 100 != 0`, then the dimension is considered "known" and DUL will be
+/// There's a giant caveat here though. If `TF & 1000 != 0`, then the dimension is considered "known" and DUL will be
 /// encoded differently. Instead of just containing the dimension unit length, which requires consulting the underlying
 /// `&str` to get the actual dimension, it will be used to store an Atom - but only the first 7 bits (the KNOWN
 /// portion), which for an Atom must be a Dimension atom (an assummption made on anything that implements
@@ -303,31 +324,31 @@ impl Token {
 	pub const NUMBER_ZERO: Token = Token((((Kind::Number as u32) | 0b100_00000) << 24) & KIND_MASK, 1);
 
 	/// Represents the `:` token.
-	pub const COLON: Token = Token::new_delim_kind(Kind::Colon, ':');
+	pub const COLON: Token = Token::new_delim(':');
 
 	/// Represents the `;` token.
-	pub const SEMICOLON: Token = Token::new_delim_kind(Kind::Semicolon, ';');
+	pub const SEMICOLON: Token = Token::new_delim(';');
 
 	/// Represents the `,` token.
-	pub const COMMA: Token = Token::new_delim_kind(Kind::Comma, ',');
+	pub const COMMA: Token = Token::new_delim(',');
 
 	/// Represents the `[` token.
-	pub const LEFT_SQUARE: Token = Token::new_delim_kind(Kind::LeftSquare, '[');
+	pub const LEFT_SQUARE: Token = Token::new_delim('[');
 
 	/// Represents the `]` token.
-	pub const RIGHT_SQUARE: Token = Token::new_delim_kind(Kind::RightSquare, ']');
+	pub const RIGHT_SQUARE: Token = Token::new_delim(']');
 
 	/// Represents the `(` token.
-	pub const LEFT_PAREN: Token = Token::new_delim_kind(Kind::LeftParen, '(');
+	pub const LEFT_PAREN: Token = Token::new_delim('(');
 
 	/// Represents the `)` token.
-	pub const RIGHT_PAREN: Token = Token::new_delim_kind(Kind::RightParen, ')');
+	pub const RIGHT_PAREN: Token = Token::new_delim(')');
 
 	/// Represents the `{` token.
-	pub const LEFT_CURLY: Token = Token::new_delim_kind(Kind::LeftCurly, '{');
+	pub const LEFT_CURLY: Token = Token::new_delim('{');
 
 	/// Represents the `}` token.
-	pub const RIGHT_CURLY: Token = Token::new_delim_kind(Kind::RightCurly, '}');
+	pub const RIGHT_CURLY: Token = Token::new_delim('}');
 
 	/// Represents a `!` [Kind::Delim] token.
 	pub const BANG: Token = Token::new_delim('!');
@@ -398,13 +419,13 @@ impl Token {
 	/// Creates a "Dummy" token with no additional data, just the [Kind].
 	#[inline]
 	pub const fn dummy(kind: Kind) -> Self {
-		Self((kind as u32) << 24, 0)
+		Self((kind as u32) << 24, 0).with_bad_flag()
 	}
 
 	/// Creates a "Dummy" token with no additional data, just [Kind::Ident].
 	#[inline]
 	pub const fn dummy_ident() -> Self {
-		Self((Kind::Ident as u32) << 24, 0)
+		Self((Kind::Ident as u32) << 24, 0).with_bad_flag()
 	}
 
 	/// Creates a [Kind::Whitesapce] token.
@@ -593,13 +614,6 @@ impl Token {
 		Self((flags << 24) & KIND_MASK, char as u32)
 	}
 
-	/// Creates a new [Kind::Delim] token.
-	#[inline]
-	pub(crate) const fn new_delim_kind(kind: Kind, char: char) -> Self {
-		let flags: u32 = kind as u32;
-		Self((flags << 24) & KIND_MASK, char as u32)
-	}
-
 	/// Creates a new [Kind::Delim] token with associated whitespace.
 	#[inline]
 	pub(crate) const fn new_delim_with_associated_whitespace(char: char, rules: AssociatedWhitespaceRules) -> Self {
@@ -620,39 +634,43 @@ impl Token {
 	/// Returns the raw bits representing the [Kind].
 	#[inline(always)]
 	pub(crate) const fn kind_bits(&self) -> u8 {
-		(self.0 >> 24 & 0b11111) as u8
+		(self.0 >> 24 & 0b1_1111) as u8
 	}
 
 	/// Returns the [Kind].
 	#[inline]
 	pub const fn kind(&self) -> Kind {
-		Kind::from_bits(self.kind_bits())
+		let kind_bits = if self.kind_bits() & 0b1111 == Kind::Delim as u8 {
+			let c = self.char().unwrap() as usize;
+			if c < 127 { SINGLE_CHAR_KINDS[c] as u8 } else { Kind::Delim as u8 }
+		} else {
+			self.kind_bits()
+		};
+		Kind::from_bits(if self.is_bad() { kind_bits | 0b1_0000 } else { kind_bits })
 	}
 
 	/// Check if the TF upper-most bit is set.
 	#[inline(always)]
-	const fn first_bit_is_set(&self) -> bool {
+	const fn first_flag(&self) -> bool {
 		self.0 >> 31 == 1
 	}
 
 	/// Check if the TF second-upper-most bit is set.
 	#[inline(always)]
-	const fn second_bit_is_set(&self) -> bool {
+	const fn second_flag(&self) -> bool {
 		self.0 >> 30 & 0b1 == 1
 	}
 
 	/// Check if the TF third-upper-most bit is set.
 	#[inline(always)]
-	const fn third_bit_is_set(&self) -> bool {
+	const fn third_flag(&self) -> bool {
 		self.0 >> 29 & 0b1 == 1
 	}
 
 	/// Check if the [Kind] is "Ident Like", i.e. it is [Kind::Ident], [Kind::AtKeyword], [Kind::Function], [Kind::Hash].
 	#[inline(always)]
 	pub(crate) const fn is_ident_like(&self) -> bool {
-		self.kind_bits() & 0b11000 == 0b01000
-			&& self.kind_bits() != Kind::String as u8
-			&& self.kind_bits() != Kind::UnicodeRange as u8
+		self.kind_bits() & 0b1100 == 0b1000
 	}
 
 	/// Check if the [Kind] is "Delim Like", i.e. it is [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
@@ -660,7 +678,7 @@ impl Token {
 	/// [Kind::RightCurly].
 	#[inline(always)]
 	pub(crate) const fn is_delim_like(&self) -> bool {
-		self.kind_bits() & 0b10000 == 0b10000
+		self.kind_bits() & 0b1111 == Kind::Delim as u8
 	}
 
 	/// The only token with an empty length is EOF, but this method is available for symmetry with `len()`.
@@ -687,15 +705,15 @@ impl Token {
 					| Kind::RightCurly
 			));
 			self.char().unwrap().len_utf8() as u32
-		} else if self.kind_bits() == Kind::Number as u8 {
+		} else if self.kind_bits() & 0b1111 == Kind::Number as u8 {
 			self.numeric_len()
-		} else if self.kind_bits() == Kind::Dimension as u8 {
-			if self.first_bit_is_set() {
+		} else if self.kind_bits() & 0b1111 == Kind::Dimension as u8 {
+			if self.first_flag() {
 				self.numeric_len() + (self.0 >> 7 & 0b11111)
 			} else {
 				((self.0 & LENGTH_MASK) >> 12) + (self.0 & !HALF_LENGTH_MASK)
 			}
-		} else if self.kind_bits() == Kind::Hash as u8 {
+		} else if self.kind_bits() & 0b1111 == Kind::Hash as u8 {
 			self.0 & LENGTH_MASK
 		} else if self.kind_bits() == Kind::UnicodeRange as u8 {
 			self.1 >> 24
@@ -718,14 +736,14 @@ impl Token {
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and is an integer - i.e. it has no `.`.
 	#[inline]
 	pub const fn is_int(&self) -> bool {
-		self.kind_bits() & 0b11100 == 0b00100 && !self.third_bit_is_set()
+		self.kind_bits() & 0b1110 == 0b0100 && !self.third_flag()
 	}
 
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and is a float - i.e. it has decimal places. This will be
 	/// `true` even if the decimal places are 0. e.g. `0.0`.
 	#[inline]
 	pub const fn is_float(&self) -> bool {
-		self.kind_bits() & 0b11100 == 0b00100 && self.third_bit_is_set()
+		self.kind_bits() & 0b1100 == 0b0100 && self.third_flag()
 	}
 
 	/// The [Token] is a [Kind::Dimension] or [Kind::Number] and the underlying character data included a `-` or `+`
@@ -733,7 +751,7 @@ impl Token {
 	/// will return `true`.
 	#[inline]
 	pub const fn has_sign(&self) -> bool {
-		self.kind_bits() & 0b11100 == 0b00100 && self.second_bit_is_set()
+		self.kind_bits() & 0b1100 == 0b0100 && self.second_flag()
 	}
 
 	/// The [Token] is a [Kind::Number] and the `+` sign is semantically required and should be preserved during
@@ -744,7 +762,7 @@ impl Token {
 	#[inline]
 	pub const fn sign_is_required(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Number as u8);
-		self.first_bit_is_set()
+		self.first_flag()
 	}
 
 	/// Returns a new [Token] with the `sign_is_required` flag set. This indicates that the `+` sign
@@ -764,8 +782,12 @@ impl Token {
 	/// Asserts: the `kind()` is [Kind::Dimension] or [Kind::Number].
 	#[inline]
 	pub const fn numeric_len(&self) -> u32 {
-		debug_assert!(matches!(self.kind(), Kind::Number | Kind::Dimension));
-		if self.kind_bits() == Kind::Dimension as u8 { (self.0 & LENGTH_MASK) >> 12 } else { self.0 & LENGTH_MASK }
+		debug_assert!(matches!(self.kind(), Kind::Number | Kind::Dimension | Kind::BadNumber | Kind::BadDimension));
+		if self.kind_bits() & 0b1111 == Kind::Dimension as u8 {
+			(self.0 & LENGTH_MASK) >> 12
+		} else {
+			self.0 & LENGTH_MASK
+		}
 	}
 
 	/// If the [Token] is a [Kind::Dimension] or [Kind::Number] then this returns the [f32] representation of the number's
@@ -833,7 +855,7 @@ impl Token {
 	#[inline]
 	pub fn quote_style(&self) -> QuoteStyle {
 		if self.kind_bits() == Kind::String as u8 {
-			if self.third_bit_is_set() {
+			if self.third_flag() {
 				return QuoteStyle::Double;
 			} else {
 				return QuoteStyle::Single;
@@ -864,13 +886,16 @@ impl Token {
 	#[inline]
 	pub const fn has_close_quote(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::String as u8);
-		self.second_bit_is_set()
+		self.second_flag()
 	}
 
 	/// Checks if it is possible for the [Token] to contain escape characters. Numbers, for example, cannot. Idents can.
 	#[inline]
 	pub const fn can_escape(&self) -> bool {
-		self.kind_bits() == Kind::String as u8 || self.kind_bits() == Kind::Dimension as u8 || self.is_ident_like()
+		self.kind_bits() == Kind::String as u8
+			|| self.kind_bits() == Kind::Url as u8
+			|| self.kind_bits() == Kind::Dimension as u8
+			|| self.is_ident_like()
 	}
 
 	/// If the [Token] can escape, checks if the underlying source text contained escape characters.
@@ -882,7 +907,7 @@ impl Token {
 			// Always assume Dimension contains escape because we have other fast paths to handle dimension units
 			return true;
 		}
-		self.can_escape() && self.first_bit_is_set()
+		self.can_escape() && self.first_flag()
 	}
 
 	/// If the [Token] is Ident like, checks if the first two code points are HYPHEN-MINUS (`-`).
@@ -891,20 +916,20 @@ impl Token {
 	#[inline]
 	pub const fn is_dashed_ident(&self) -> bool {
 		debug_assert!(self.is_ident_like());
-		self.second_bit_is_set()
+		self.second_flag()
 	}
 
 	/// Checks if the [Token] is Ident like and none of the characters are ASCII upper-case.
 	#[inline]
 	pub const fn is_lower_case(&self) -> bool {
-		self.is_ident_like() && !self.third_bit_is_set()
+		self.is_ident_like() && !self.third_flag()
 	}
 
 	#[inline]
 	pub fn atom_bits(&self) -> u32 {
-		if self.kind_bits() == Kind::Dimension as u8 && self.first_bit_is_set() {
+		if self.kind_bits() & 0b1111 == Kind::Dimension as u8 && self.first_flag() {
 			self.0 & 0b111_1111
-		} else if self.is_ident_like() && self.kind_bits() != Kind::Hash as u8 {
+		} else if self.is_ident_like() && self.kind_bits() & 0b1111 != Kind::Hash as u8 {
 			self.0 & LENGTH_MASK
 		} else {
 			0
@@ -923,7 +948,7 @@ impl Token {
 	#[inline]
 	pub const fn url_has_leading_space(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Url as u8);
-		self.second_bit_is_set()
+		self.second_flag()
 	}
 
 	/// If the [Token] is [Kind::Url], checks if the closing parenthesis is present.
@@ -932,7 +957,7 @@ impl Token {
 	#[inline]
 	pub const fn url_has_closing_paren(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Url as u8);
-		self.third_bit_is_set()
+		self.third_flag()
 	}
 
 	/// If the [Token] is [Kind::Hash], checks if the Hash is "ID-like" (i.e its first character is ASCII).
@@ -941,19 +966,26 @@ impl Token {
 	#[inline]
 	pub const fn hash_is_id_like(&self) -> bool {
 		debug_assert!(self.kind_bits() == Kind::Hash as u8);
-		self.second_bit_is_set()
+		self.second_flag()
 	}
 
-	/// Checks if the [Token] is [Kind::BadString] or [Kind::BadUrl].
+	/// Checks if the [Token] is [Kind::BadString] or [Kind::BadUrl], or the "bad flag" has been set.
 	#[inline]
 	pub const fn is_bad(&self) -> bool {
-		(self.kind_bits() | 0b00001) & 0b11001 == 1
+		self.kind_bits() & 0b1_0000 == 0b1_0000
+	}
+
+	/// Returns a new token with the bad/recovery flag set.
+	/// This is used by the parser to mark tokens as problematic during error recovery.
+	#[inline]
+	pub const fn with_bad_flag(&self) -> Self {
+		Self(self.0 | 1 << 28, self.1)
 	}
 
 	/// Checks if the [Token] is [Kind::CdcOrCdo] and is the CDC variant of that token.
 	#[inline]
 	pub const fn is_cdc(&self) -> bool {
-		self.kind_bits() == (Kind::CdcOrCdo as u8) && self.third_bit_is_set()
+		self.kind_bits() == (Kind::CdcOrCdo as u8) && self.third_flag()
 	}
 
 	/// Some tokens may have a "leading" part:
@@ -969,10 +1001,10 @@ impl Token {
 	/// data which is likely to be of greater use.
 	pub fn leading_len(&self) -> u32 {
 		match self.kind() {
-			Kind::AtKeyword | Kind::Hash | Kind::String => 1,
-			Kind::Dimension => self.numeric_len(),
-			Kind::Comment => 2,
-			Kind::Url => (self.0 & LENGTH_MASK) >> 12,
+			Kind::AtKeyword | Kind::Hash | Kind::String | Kind::BadAtKeyword | Kind::BadHash | Kind::BadString => 1,
+			Kind::Dimension | Kind::BadDimension => self.numeric_len(),
+			Kind::Comment | Kind::BadComment => 2,
+			Kind::Url | Kind::BadUrl => (self.0 & LENGTH_MASK) >> 12,
 			_ => 0,
 		}
 	}
@@ -988,10 +1020,10 @@ impl Token {
 	/// data which is likely to be of greater use.
 	pub fn trailing_len(&self) -> u32 {
 		match self.kind() {
-			Kind::Function => 1,
-			Kind::String => self.has_close_quote() as u32,
-			Kind::Comment if self.comment_style().unwrap().is_block() => 2,
-			Kind::Url => self.0 & !HALF_LENGTH_MASK,
+			Kind::Function | Kind::BadFunction => 1,
+			Kind::String | Kind::BadString => self.has_close_quote() as u32,
+			Kind::Comment | Kind::BadComment if self.comment_style().unwrap().is_block() => 2,
+			Kind::Url | Kind::BadUrl => self.0 & !HALF_LENGTH_MASK,
 			_ => 0,
 		}
 	}
@@ -1119,6 +1151,10 @@ impl Token {
 			},
 		}
 	}
+
+	pub fn to_bits(&self) -> u64 {
+		(self.0 as u64) << 32 | self.1 as u64
+	}
 }
 
 impl core::fmt::Debug for Token {
@@ -1138,35 +1174,35 @@ impl core::fmt::Debug for Token {
 				&mut d
 			}
 			Kind::String => d
-				.field("quote_style", &if self.first_bit_is_set() { "Double" } else { "Single" })
-				.field("has_close_quote", &self.second_bit_is_set())
-				.field("contains_escape_chars", &self.third_bit_is_set())
+				.field("quote_style", &if self.first_flag() { "Double" } else { "Single" })
+				.field("has_close_quote", &self.second_flag())
+				.field("contains_escape_chars", &self.third_flag())
 				.field("len", &self.len()),
 			Kind::Ident | Kind::Function | Kind::AtKeyword => d
-				.field("is_lower_case", &self.first_bit_is_set())
-				.field("is_dashed_ident", &self.second_bit_is_set())
-				.field("contains_escape_chars", &self.third_bit_is_set())
+				.field("is_lower_case", &self.first_flag())
+				.field("is_dashed_ident", &self.second_flag())
+				.field("contains_escape_chars", &self.third_flag())
 				.field("len", &self.len()),
 			Kind::Hash => d
-				.field("is_lower_case", &self.first_bit_is_set())
-				.field("hash_is_id_like", &self.second_bit_is_set())
-				.field("contains_escape_chars", &self.third_bit_is_set())
+				.field("is_lower_case", &self.first_flag())
+				.field("hash_is_id_like", &self.second_flag())
+				.field("contains_escape_chars", &self.third_flag())
 				.field("len", &self.len()),
 			Kind::Url => d
-				.field("url_has_closing_paren", &self.first_bit_is_set())
-				.field("url_has_leading_space", &self.second_bit_is_set())
-				.field("contains_escape_chars", &self.third_bit_is_set())
+				.field("url_has_closing_paren", &self.first_flag())
+				.field("url_has_leading_space", &self.second_flag())
+				.field("contains_escape_chars", &self.third_flag())
 				.field("len", &self.len()),
 			Kind::UnicodeRange => d
 				.field("start", &format_args!("U+{:X}", self.unicode_range_start()))
 				.field("end", &format_args!("U+{:X}", self.unicode_range_end()))
 				.field("len", &self.len()),
-			Kind::CdcOrCdo => d.field("is_cdc", &self.first_bit_is_set()).field("len", &self.len()),
+			Kind::CdcOrCdo => d.field("is_cdc", &self.first_flag()).field("len", &self.len()),
 			Kind::Whitespace => d.field("contains", &self.whitespace_style()).field("len", &self.len()),
 			_ => d
-				.field("flag_0", &self.first_bit_is_set())
-				.field("flag_1", &self.second_bit_is_set())
-				.field("flag_2", &self.third_bit_is_set())
+				.field("flag_0", &self.first_flag())
+				.field("flag_1", &self.second_flag())
+				.field("flag_2", &self.third_flag())
 				.field("len", &self.len()),
 		}
 		.finish()
@@ -1207,7 +1243,7 @@ impl From<Token> for Kind {
 
 impl PartialEq<Kind> for Token {
 	fn eq(&self, other: &Kind) -> bool {
-		self.kind_bits() == *other as u8
+		self.kind() == *other
 	}
 }
 
@@ -1219,7 +1255,7 @@ impl From<Token> for KindSet {
 
 impl PartialEq<KindSet> for Token {
 	fn eq(&self, other: &KindSet) -> bool {
-		other.contains_bits(self.kind_bits())
+		other.contains(self.kind())
 	}
 }
 
@@ -1373,6 +1409,10 @@ fn with_associated_whitespace() {
 		),
 		AssociatedWhitespaceRules::EnforceBefore | AssociatedWhitespaceRules::EnforceBefore
 	);
+	assert_eq!(
+		Token::new_delim('>').with_associated_whitespace(AssociatedWhitespaceRules::BanAfter),
+		AssociatedWhitespaceRules::BanAfter
+	);
 }
 
 #[test]
@@ -1418,4 +1458,33 @@ fn test_new_dimension() {
 		let token = Token::new_dimension(false, false, 9, 3, i as f32, 0);
 		assert_eq!(token.value(), i as f32);
 	}
+}
+
+#[test]
+fn test_bad_bits() {
+	let token = Token::new_dimension(false, false, 5, 2, 8191.0, 42);
+	assert_eq!(token.is_bad(), false);
+	assert_eq!(token.kind(), Kind::Dimension);
+	assert_eq!(Kind::from_bits(token.kind_bits()), Kind::Dimension);
+	assert_eq!(token.is_bad(), false);
+	assert_eq!(token.len(), 7);
+	assert_eq!(token.numeric_len(), 5);
+	let bad_token = token.with_bad_flag();
+	assert_eq!(bad_token.is_bad(), true);
+	assert_eq!(bad_token.kind(), Kind::BadDimension);
+	assert_eq!(Kind::from_bits(bad_token.kind_bits()), Kind::BadDimension);
+	assert_eq!(bad_token.len(), 7);
+	assert_eq!(bad_token.numeric_len(), 5);
+	assert_eq!(bad_token.atom_bits(), 42);
+
+	let token = Token::new_delim('(');
+	assert_eq!(token.is_bad(), false);
+	let bad_token = token.with_bad_flag();
+	assert_eq!(token.is_bad(), false);
+	assert_eq!(bad_token.is_bad(), true);
+	assert_eq!(bad_token.kind(), Kind::BadLeftParen);
+
+	let token = Token::new_delim('[');
+	assert_eq!(token, Kind::LeftSquare);
+	assert_eq!(token.with_bad_flag().kind(), Kind::BadLeftSquare);
 }

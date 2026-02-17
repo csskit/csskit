@@ -535,6 +535,25 @@ fn tokenizes_unterminated_url() {
 }
 
 #[test]
+fn tokenizes_escaped_url() {
+	let source = "url( \\)";
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
+	{
+		let token = lexer.advance();
+		assert_eq!(token, Kind::Url);
+		assert_eq!(token.len(), 7);
+		assert_eq!(token.contains_escape_chars(), true);
+		assert_eq!(token.url_has_leading_space(), true);
+		assert_eq!(token.url_has_closing_paren(), false);
+		let c = token.with_cursor(SourceOffset(0));
+		let str = c.str_slice(source);
+		let sc = SourceCursor::from(c, str);
+		assert_eq!(str, "url( \\)");
+		assert_eq!(sc.parse(Global), ")");
+	}
+}
+
+#[test]
 fn tokenizes_wtf() {
 	let source = "\\75 rl(a)\n";
 	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
@@ -1506,4 +1525,15 @@ fn tokenizes_escaped_dimensions_into_token_bytes() {
 		assert_eq!(lexer.offset(), 37);
 	}
 	assert_eq!(lexer.advance(), Kind::Eof);
+}
+
+#[test]
+fn test_bad_flag_manipulation() {
+	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "foo");
+	let token = lexer.advance();
+	assert_eq!(token, Kind::Ident);
+	assert_eq!(token.is_bad(), false);
+	let bad_token = token.with_bad_flag();
+	assert_eq!(bad_token.is_bad(), true);
+	assert_eq!(bad_token, Kind::BadIdent);
 }

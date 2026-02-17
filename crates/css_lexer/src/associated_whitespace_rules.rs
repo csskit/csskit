@@ -7,7 +7,7 @@ use bitmask_enum::bitmask;
 /// [Kind::LeftCurly][crate::Kind::LeftCurly] will store this data internal to the token. Using
 /// [Token::associated_whitespace()][crate::Token::associated_whitespace()] will return this bitmask, depending on what
 /// rules are set for this token. By default the [Lexer][crate::Lexer] will produce tokens with
-/// [AssociatedWhitespaceRules::None], but new tokens can be created which can be accompanied with a different set of
+/// [AssociatedWhitespaceRules::none()], but new tokens can be created which can be accompanied with a different set of
 /// rules.
 ///
 /// ```rust
@@ -17,13 +17,12 @@ use bitmask_enum::bitmask;
 ///		// This token will be a Delim of `.`
 ///		let token = lexer.advance();
 ///		assert_eq!(token, Kind::Delim);
-///		assert_eq!(token, AssociatedWhitespaceRules::None);
+///		assert_eq!(token, AssociatedWhitespaceRules::none());
 /// }
 /// ```
 #[bitmask(u8)]
 #[bitmask_config(vec_debug)]
 pub enum AssociatedWhitespaceRules {
-	None = 0b000,
 	/// If the token before this one is not whitespace, then whitespace must be placed before this token.
 	EnforceBefore = 0b100,
 	/// The token must produce a whitespace token to separate it and the next token (if the next token is not already
