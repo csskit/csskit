@@ -78,12 +78,14 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 			Transformer::new_in(&allocator, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source_text);
 		transformer.transform(stylesheet);
 		let overlays = transformer.overlays();
-		let mut stream = CursorOverlaySink::new(
-			&source_text,
-			&overlays,
-			CursorCompactWriteSink::new(&source_text, &mut output_string),
-		);
-		result.to_cursors(&mut stream);
+		{
+			let mut stream = CursorOverlaySink::new(
+				&source_text,
+				&overlays,
+				CursorCompactWriteSink::new(&source_text, &mut output_string),
+			);
+			result.to_cursors(&mut stream);
+		}
 	}
 	Ok(output_string)
 }

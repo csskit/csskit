@@ -12,7 +12,7 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 }
 
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
-const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Colon, Kind::RightCurly]);
+const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::RightCurly]);
 // Tokens where whitespace immediately before them can be removed
 const NO_WHITESPACE_BEFORE_KINDSET: KindSet =
 	KindSet::new(&[Kind::Whitespace, Kind::Colon, Kind::Delim, Kind::LeftCurly, Kind::RightCurly]);
@@ -64,6 +64,20 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 	}
 }
 
+impl<'a, T: SourceCursorSink<'a>> Drop for CursorCompactWriteSink<'a, T> {
+	fn drop(&mut self) {
+		// Flush any pending semicolons at the end of the stream.
+		// Trailing whitespace is genuinely redundant, but trailing semicolons may be
+		// required (e.g. `@import "foo.css";` needs the `;`).
+		if let Some(prev) = self.pending.take()
+			&& prev == Kind::Semicolon
+		{
+			self.last_token = Some(prev.token());
+			self.sink.append(prev.compact());
+		}
+	}
+}
+
 impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorCompactWriteSink<'a, T> {
 	fn append(&mut self, c: Cursor) {
 		self.write(SourceCursor::from(c, c.str_slice(self.source_text)))
@@ -91,10 +105,12 @@ mod test {
 			let source_text = $before;
 			let bump = Bump::default();
 			let mut sink = String::new();
-			let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
-			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
-			parser.parse_entirely::<$struct>().output.unwrap().to_cursors(&mut stream);
+			{
+				let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
+				let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+				let mut parser = Parser::new(&bump, source_text, lexer);
+				parser.parse_entirely::<$struct>().output.unwrap().to_cursors(&mut stream);
+			}
 			assert_eq!(sink, $after.trim());
 		};
 	}
@@ -185,5 +201,16 @@ mod test {
 	fn test_does_not_change_numbers_without_optimization() {
 		assert_format!("width: 123px", "width:123px");
 		assert_format!("width: .5px", "width:.5px");
+	}
+
+	#[test]
+	fn test_preserves_trailing_semicolons() {
+		assert_format!("foo;", "foo;");
+	}
+
+	#[test]
+	fn test_drops_trailing_whitespace() {
+		assert_format!("foo  ", "foo");
+		assert_format!("foo; ", "foo;");
 	}
 }

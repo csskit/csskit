@@ -28,11 +28,11 @@ impl Build {
 			let mut source_string = String::new();
 			source.read_to_string(&mut source_string)?;
 			let source_text = source_string.as_str();
-			let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
+				let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
 				result.to_cursors(&mut stream);
 			} else {
 				for compact_err in result.errors {

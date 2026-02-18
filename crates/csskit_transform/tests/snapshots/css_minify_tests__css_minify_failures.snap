@@ -216,23 +216,23 @@ FAIL gradients/0005
 +a{background:radial-gradient(red,#00f)}
 
 FAIL import/0001
--@import url("foo.css")
+-@import url("foo.css");
 +@import"foo.css";
 
 FAIL import/0002
--@import url("foo.css")screen
+-@import url("foo.css")screen;
 +@import"foo.css"screen;
 
 FAIL import/0003
--@import url(foo.css)
+-@import url(foo.css);
 +@import"foo.css";
 
 FAIL import/0004
--@import url("foo.css")layer
+-@import url("foo.css")layer;
 +@import"foo.css"layer;
 
 FAIL import/0005
--@import url("foo.css")layer(base)supports(foo:bar)
+-@import url("foo.css")layer(base)supports(foo:bar);
 +@import"foo.css"layer(base)supports(foo:bar);
 
 FAIL keyframes/0001
@@ -946,7 +946,7 @@ FAIL values/0057
 +a{--brand-color: rgb(0 0 0)}
 
 FAIL values/0058
--a{--foo:color:var(--foo,red)}
+-a{--foo:;color:var(--foo,red)}
 +a{--foo: ;color:var(--foo,red)}
 
 FAIL values/0062

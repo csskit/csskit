@@ -53,16 +53,23 @@ impl Min {
 					let mut highlighter = TokenHighlighter::new();
 					stylesheet.accept(&mut highlighter);
 					let ansi = AnsiHighlightCursorStream::new(&mut str, &highlighter, DefaultAnsiTheme);
-					let mut stream =
-						CursorOverlaySink::new(source_text, &overlays, CursorCompactWriteSink::new(source_text, ansi));
-					result.to_cursors(&mut stream);
+					{
+						let mut stream = CursorOverlaySink::new(
+							source_text,
+							&overlays,
+							CursorCompactWriteSink::new(source_text, ansi),
+						);
+						result.to_cursors(&mut stream);
+					}
 				} else {
-					let mut stream = CursorOverlaySink::new(
-						source_text,
-						&overlays,
-						CursorCompactWriteSink::new(source_text, &mut str),
-					);
-					result.to_cursors(&mut stream);
+					{
+						let mut stream = CursorOverlaySink::new(
+							source_text,
+							&overlays,
+							CursorCompactWriteSink::new(source_text, &mut str),
+						);
+						result.to_cursors(&mut stream);
+					}
 				};
 				if *check {
 					if str != source_text {
