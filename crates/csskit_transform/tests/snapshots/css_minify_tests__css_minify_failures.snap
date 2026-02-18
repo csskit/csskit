@@ -178,14 +178,6 @@ FAIL empty-rules/0004
 -a{color:red;&b{}}
 +a{color:red}
 
-FAIL escaping/0006
--.123{color:red}
-+.\31 23{color:red}
-
-FAIL escaping/0008
--.@{color:red}
-+.\@{color:red}
-
 FAIL font-face/0002
 -@font-face{font-family:"Custom";font-display:swap}
 +@font-face{font-family:Custom;font-display:swap}

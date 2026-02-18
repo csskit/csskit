@@ -2,7 +2,11 @@ use crate::{
 	AssociatedWhitespaceRules, CommentStyle, CowStr, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan,
 	Token,
 	small_str_buf::SmallStrBuf,
-	syntax::{ParseEscape, is_newline},
+	syntax::{
+		ParseEscape,
+		identifier::{is_ident, is_ident_start},
+		is_newline,
+	},
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use std::char::REPLACEMENT_CHARACTER;
@@ -268,6 +272,7 @@ impl<'a> SourceCursor<'a> {
 
 		let mut chars = source.chars().peekable();
 		let mut i = 0;
+		let mut char_i = 0;
 		while let Some(c) = chars.next() {
 			if c == '\0' {
 				write!(f, "{}", REPLACEMENT_CHARACTER)?;
@@ -275,13 +280,35 @@ impl<'a> SourceCursor<'a> {
 			} else if c == '\\' {
 				i += 1;
 				let (ch, n) = source[i..].chars().parse_escape_sequence();
-				write!(f, "{}", if ch == '\0' { REPLACEMENT_CHARACTER } else { ch })?;
 				i += n as usize;
 				chars = source[i..].chars().peekable();
+				let ch = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
+				// Check if the decoded character is valid at this position unescaped.
+				let valid_unescaped = if ch == '-' && char_i == 0 {
+					true
+				} else if char_i == 0 || (char_i == 1 && source.starts_with('-')) {
+					is_ident_start(ch)
+				} else {
+					is_ident(ch)
+				};
+				if valid_unescaped {
+					write!(f, "{}", ch)?;
+				} else if !ch.is_ascii_hexdigit() && !ch.is_ascii_whitespace() && !is_newline(ch) {
+					write!(f, "\\{}", ch)?;
+				} else {
+					write!(f, "\\{:x}", ch as u32)?;
+					// A trailing space is needed if the next character is a hex digit
+					// or whitespace, to prevent it from being consumed as part of the escape.
+					let next_char = chars.peek().copied();
+					if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
+						f.write_char(' ')?;
+					}
+				}
 			} else {
 				write!(f, "{}", c)?;
 				i += c.len_utf8();
 			}
+			char_i += 1;
 		}
 
 		if token.kind() == Kind::Function {
@@ -1005,6 +1032,35 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
 		let sc = SourceCursor::from(c, "\"\x5c0oo\"");
 		assert_eq!(format!("{}", sc.compact()), "\"\u{FFFD}oo\"");
+	}
+
+	#[test]
+	fn test_compact_ident_reencodes_invalid_unescaped() {
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
+		let sc = SourceCursor::from(c, r"\66oo");
+		assert_eq!(format!("{}", sc.compact()), "foo");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 6));
+		let sc = SourceCursor::from(c, r"a\20 b");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "a\\20 b");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 3));
+		let sc = SourceCursor::from(c, "a\\!");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "a\\!");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
+		let sc = SourceCursor::from(c, r"b\61r");
+		assert_eq!(format!("{}", sc.compact()), "bar");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 6));
+		let sc = SourceCursor::from(c, r"\31 23");
+		assert_eq!(format!("{}", sc.compact()), r"\31 23");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 9));
+		let sc = SourceCursor::from(c, r"\66\6f\6f");
+		assert_eq!(format!("{}", sc.compact()), "foo");
 	}
 
 	#[test]
