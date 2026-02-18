@@ -36,33 +36,33 @@ simple_from!(A98Rgb to Srgb, via LinearRgb);
 simple_from!(A98Rgb to XyzD50, via LinearRgb);
 simple_from!(A98Rgb to XyzD65, via LinearRgb);
 
-// DisplayP3 converts through XyzD65
-simple_from!(A98Rgb to DisplayP3, via XyzD65);
-simple_from!(Hex to DisplayP3, via XyzD65);
-simple_from!(Hsv to DisplayP3, via XyzD65);
-simple_from!(Hsl to DisplayP3, via XyzD65);
-simple_from!(Hwb to DisplayP3, via XyzD65);
-simple_from!(Lab to DisplayP3, via XyzD65);
-simple_from!(Lch to DisplayP3, via XyzD65);
-simple_from!(LinearRgb to DisplayP3, via XyzD65);
-simple_from!(Named to DisplayP3, via XyzD65);
-simple_from!(Oklab to DisplayP3, via XyzD65);
-simple_from!(Oklch to DisplayP3, via XyzD65);
-simple_from!(Srgb to DisplayP3, via XyzD65);
+// DisplayP3 converts through LinearRgb
+simple_from!(A98Rgb to DisplayP3, via LinearRgb);
+simple_from!(Hex to DisplayP3, via LinearRgb);
+simple_from!(Hsv to DisplayP3, via LinearRgb);
+simple_from!(Hsl to DisplayP3, via LinearRgb);
+simple_from!(Hwb to DisplayP3, via LinearRgb);
+simple_from!(Lab to DisplayP3, via LinearRgb);
+simple_from!(Lch to DisplayP3, via LinearRgb);
+// LinearRgb to DisplayP3 is implemented directly
+simple_from!(Named to DisplayP3, via LinearRgb);
+simple_from!(Oklab to DisplayP3, via LinearRgb);
+simple_from!(Oklch to DisplayP3, via LinearRgb);
+simple_from!(Srgb to DisplayP3, via LinearRgb);
 simple_from!(XyzD50 to DisplayP3, via XyzD65);
 
-simple_from!(DisplayP3 to A98Rgb, via XyzD65);
-simple_from!(DisplayP3 to Hex, via XyzD65);
-simple_from!(DisplayP3 to Hsv, via XyzD65);
-simple_from!(DisplayP3 to Hsl, via XyzD65);
-simple_from!(DisplayP3 to Hwb, via XyzD65);
-simple_from!(DisplayP3 to Lab, via XyzD65);
-simple_from!(DisplayP3 to Lch, via XyzD65);
-simple_from!(DisplayP3 to LinearRgb, via XyzD65);
-simple_from!(DisplayP3 to Oklab, via XyzD65);
-simple_from!(DisplayP3 to Oklch, via XyzD65);
-simple_from!(DisplayP3 to Srgb, via XyzD65);
-simple_from!(DisplayP3 to XyzD50, via XyzD65);
+simple_from!(DisplayP3 to A98Rgb, via LinearRgb);
+simple_from!(DisplayP3 to Hex, via LinearRgb);
+simple_from!(DisplayP3 to Hsv, via LinearRgb);
+simple_from!(DisplayP3 to Hsl, via LinearRgb);
+simple_from!(DisplayP3 to Hwb, via LinearRgb);
+simple_from!(DisplayP3 to Lab, via LinearRgb);
+simple_from!(DisplayP3 to Lch, via LinearRgb);
+// DisplayP3 to LinearRgb is implemented directly
+simple_from!(DisplayP3 to Oklab, via LinearRgb);
+simple_from!(DisplayP3 to Oklch, via LinearRgb);
+simple_from!(DisplayP3 to Srgb, via LinearRgb);
+simple_from!(DisplayP3 to XyzD50, via LinearRgb);
 simple_from!(DisplayP3 to ProphotoRgb, via XyzD65);
 simple_from!(DisplayP3 to Rec2020, via XyzD65);
 
@@ -275,7 +275,23 @@ simple_from!(Color to Oklab, via XyzD65);
 simple_from!(Color to Oklch, via XyzD65);
 simple_from!(Color to ProphotoRgb, via XyzD65);
 simple_from!(Color to Rec2020, via XyzD65);
-simple_from!(Color to Srgb, via XyzD65);
+
+// Color to Srgb: route DisplayP3 through LinearRgb
+impl From<Color> for Srgb {
+	fn from(value: Color) -> Self {
+		match value {
+			Color::DisplayP3(d) => {
+				let linear: LinearRgb = d.into();
+				linear.into()
+			}
+			other => {
+				let xyz: XyzD65 = other.into();
+				xyz.into()
+			}
+		}
+	}
+}
+
 simple_from!(Color to XyzD50, via XyzD65);
 
 macro_rules! impl_named_try_from_via_srgb {

@@ -1,4 +1,4 @@
-use crate::{ToAlpha, XyzD65, round_dp};
+use crate::{LinearRgb, ToAlpha, XyzD65, round_dp};
 use core::fmt;
 
 /// A colour in the Display P3 colour space.
@@ -56,10 +56,10 @@ impl From<XyzD65> for DisplayP3 {
 		let x = x / 100.0;
 		let y = y / 100.0;
 		let z = z / 100.0;
-		// XYZ D65 -> Linear Display P3
-		let lr = x * 2.4934969119414263 + y * (-0.9313836179191239) + z * (-0.40271078445071684);
-		let lg = x * (-0.8294889695615747) + y * 1.7626640603183463 + z * 0.023624685841943577;
-		let lb = x * 0.03584583024378447 + y * (-0.07617238926804182) + z * 0.9568845240076872;
+		// XYZ D65 -> Linear Display P3 (see XYZ_to_lin_P3 in CSS Color 4)
+		let lr = x * (446124.0 / 178915.0) + y * (-333277.0 / 357830.0) + z * (-72051.0 / 178915.0);
+		let lg = x * (-14852.0 / 17905.0) + y * (63121.0 / 35810.0) + z * (423.0 / 17905.0);
+		let lb = x * (11844.0 / 330415.0) + y * (-50337.0 / 660830.0) + z * (316169.0 / 330415.0);
 		// Apply sRGB gamma
 		DisplayP3::new(gamma(lr), gamma(lg), gamma(lb), alpha)
 	}
@@ -72,10 +72,38 @@ impl From<DisplayP3> for XyzD65 {
 		let lr = linear(red);
 		let lg = linear(green);
 		let lb = linear(blue);
-		// Linear Display P3 -> XYZ D65
-		let x = lr * 0.4865709486482162 + lg * 0.26566769316909306 + lb * 0.1982172852343625;
-		let y = lr * 0.22897456406974884 + lg * 0.6917385218365064 + lb * 0.079286914093745;
-		let z = lr * 0.0 + lg * 0.04511338185890264 + lb * 1.043944368900976;
+		// Linear Display P3 -> XYZ D65 (see lin_d3_to_XYZ in CSS Color 4)
+		let x = lr * (608311.0 / 1250200.0) + lg * (189793.0 / 714400.0) + lb * (198249.0 / 1000160.0);
+		let y = lr * (35783.0 / 156275.0) + lg * (247089.0 / 357200.0) + lb * (198249.0 / 2500400.0);
+		let z = lg * (32229.0 / 714400.0) + lb * (5220557.0 / 5000800.0);
 		XyzD65::new(x * 100.0, y * 100.0, z * 100.0, alpha)
+	}
+}
+
+impl From<DisplayP3> for LinearRgb {
+	fn from(value: DisplayP3) -> Self {
+		let DisplayP3 { red, green, blue, alpha } = value;
+		// Linearize with sRGB gamma
+		let lr = linear(red);
+		let lg = linear(green);
+		let lb = linear(blue);
+		// Linear Display P3 -> Linear sRGB
+		let red = lr * (3685649.0 / 3008840.0) + lg * (-676809.0 / 3008840.0);
+		let green = lr * (-5617931.0 / 133579120.0) + lg * (139197051.0 / 133579120.0);
+		let blue = lr * (-1323971.0 / 67420360.0) + lg * (-1514763.0 / 19262960.0) + lb * (148092003.0 / 134840720.0);
+		LinearRgb::new(red, green, blue, alpha)
+	}
+}
+
+impl From<LinearRgb> for DisplayP3 {
+	fn from(value: LinearRgb) -> Self {
+		let LinearRgb { red, green, blue, alpha } = value;
+		// Linear sRGB -> Linear Display P3
+		let lr = red * (2442703.0 / 2969989.0) + green * (527286.0 / 2969989.0);
+		let lg = red * (621563.0 / 18725049.0) + green * (18103486.0 / 18725049.0);
+		let lb =
+			red * (281089.0 / 16454667.0) + green * (10721482.0 / 148092003.0) + blue * (134840720.0 / 148092003.0);
+		// Apply sRGB gamma
+		DisplayP3::new(gamma(lr), gamma(lg), gamma(lb), alpha)
 	}
 }
