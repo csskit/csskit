@@ -105,4 +105,26 @@ mod tests {
 	fn no_transform_for_currentcolor() {
 		assert_no_transform!(CssMinifierFeature::ReduceColors, CssAtomSet, StyleSheet, "body { color: currentcolor; }");
 	}
+
+	#[test]
+	fn reduces_color_srgb_function() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color(srgb 1 0 0); }",
+			"a { color: red; }"
+		);
+	}
+
+	#[test]
+	fn reduces_color_display_p3() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color(display-p3 0.5 0.5 0.5); }",
+			"a { color: gray; }"
+		);
+	}
 }

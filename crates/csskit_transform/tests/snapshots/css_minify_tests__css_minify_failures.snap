@@ -53,8 +53,9 @@ FAIL colors/0029
 -a{color:#ba00c2}
 +a{color:oklch(53.9985% .285449 326.643)}
 
-PANIC colors/0030
-  not yet implemented
+FAIL colors/0030
+-a{color:red}
++a{color:color(display-p3 1 0 0)}
 
 FAIL colors/0031
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
