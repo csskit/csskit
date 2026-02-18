@@ -323,9 +323,19 @@ impl<'a> SourceCursor<'a> {
 			} else if c == '\\' {
 				i += 1;
 				let (ch, n) = inner[i..].chars().parse_escape_sequence();
-				write!(f, "{}", if ch == '\0' { REPLACEMENT_CHARACTER } else { ch })?;
 				i += n as usize;
 				chars = inner[i..].chars().peekable();
+				let ch = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
+				if is_newline(ch) || ch == quote || ch == '\\' {
+					write!(f, "\\{:x}", ch as u32)?;
+					// Trailing space needed if next char is a hex digit.
+					let next_char = chars.peek().copied();
+					if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
+						f.write_char(' ')?;
+					}
+				} else {
+					write!(f, "{}", ch)?;
+				}
 			} else {
 				write!(f, "{}", c)?;
 				i += c.len_utf8();
@@ -995,5 +1005,47 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
 		let sc = SourceCursor::from(c, "\"\x5c0oo\"");
 		assert_eq!(format!("{}", sc.compact()), "\"\u{FFFD}oo\"");
+	}
+
+	#[test]
+	fn test_compact_string_reencodes_special_chars() {
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		let sc = SourceCursor::from(c, "\"\\22 x\"");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "\"\\22x\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		let sc = SourceCursor::from(c, "\"\\22 a\"");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "\"\\22 a\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 7));
+		let sc = SourceCursor::from(c, "'\\27 x'");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "'\\27x'");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		let sc = SourceCursor::from(c, "\"\\5c x\"");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "\"\\5cx\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		let sc = SourceCursor::from(c, "\"\\5c a\"");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "\"\\5c a\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
+		let sc = SourceCursor::from(c, "\"\\a x\"");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "\"\\ax\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
+		let sc = SourceCursor::from(c, "\"\\a b\"");
+		let compacted = format!("{}", sc.compact());
+		assert_eq!(compacted, "\"\\a b\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		let sc = SourceCursor::from(c, "\"\\66oo\"");
+		assert_eq!(format!("{}", sc.compact()), "\"foo\"");
 	}
 }

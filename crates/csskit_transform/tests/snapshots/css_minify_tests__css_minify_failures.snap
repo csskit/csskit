@@ -1,6 +1,5 @@
 ---
 source: crates/csskit_transform/tests/css-minify-tests.rs
-assertion_line: 132
 expression: fail_log
 ---
 FAIL anchor/0001
@@ -182,11 +181,6 @@ FAIL empty-rules/0004
 FAIL escaping/0006
 -.123{color:red}
 +.\31 23{color:red}
-
-FAIL escaping/0007
--a{content:"
--"}
-+a{content:"\a"}
 
 FAIL escaping/0008
 -.@{color:red}
