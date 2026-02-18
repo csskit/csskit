@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::functions::color_mix_function::ColorMixFunction;
+use crate::functions::relative_color::RelativeColorFunction;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
 use css_parse::BumpBox;
 
@@ -59,11 +60,12 @@ impl<'a> Parse<'a> for CommaOrSlash {
 }
 
 /// <https://drafts.csswg.org/css-color/#typedef-color-function>
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorFunction<'a> {
+	Relative(BumpBox<'a, RelativeColorFunction<'a>>),
 	Color(BumpBox<'a, ColorFunctionColor>),
 	ColorMix(BumpBox<'a, ColorMixFunction<'a>>),
 	Rgb(RgbFunction),
@@ -77,10 +79,54 @@ pub enum ColorFunction<'a> {
 	Oklch(OklchFunction),
 }
 
+impl<'a> Parse<'a> for ColorFunction<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		// Check for relative colour syntax first: any colour function with `from` as 2nd token.
+		if p.peek::<BumpBox<RelativeColorFunction>>() {
+			return Ok(Self::Relative(p.parse()?));
+		}
+		if p.peek::<BumpBox<ColorFunctionColor>>() {
+			return Ok(Self::Color(p.parse()?));
+		}
+		if p.peek::<BumpBox<ColorMixFunction>>() {
+			return Ok(Self::ColorMix(p.parse()?));
+		}
+		if p.peek::<RgbFunction>() {
+			return Ok(Self::Rgb(p.parse()?));
+		}
+		if p.peek::<RgbaFunction>() {
+			return Ok(Self::Rgba(p.parse()?));
+		}
+		if p.peek::<HslFunction>() {
+			return Ok(Self::Hsl(p.parse()?));
+		}
+		if p.peek::<HslaFunction>() {
+			return Ok(Self::Hsla(p.parse()?));
+		}
+		if p.peek::<HwbFunction>() {
+			return Ok(Self::Hwb(p.parse()?));
+		}
+		if p.peek::<LabFunction>() {
+			return Ok(Self::Lab(p.parse()?));
+		}
+		if p.peek::<LchFunction>() {
+			return Ok(Self::Lch(p.parse()?));
+		}
+		if p.peek::<OklabFunction>() {
+			return Ok(Self::Oklab(p.parse()?));
+		}
+		Ok(Self::Oklch(p.parse()?))
+	}
+}
+
 #[cfg(feature = "chromashift")]
 impl crate::ToChromashift for ColorFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		match self {
+			Self::Relative(r) => r.to_chromashift(),
 			Self::Color(c) => c.to_chromashift(),
 			Self::ColorMix(c) => c.to_chromashift(),
 			Self::Rgb(c) => c.to_chromashift(),

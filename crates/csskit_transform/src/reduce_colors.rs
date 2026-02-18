@@ -586,4 +586,59 @@ mod tests {
 			"a { color: oklch(0.659 0.304 203.3); }"
 		);
 	}
+
+	#[test]
+	fn relative_rgb_static_channels_minified() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: rgb(from red 200 g b); }",
+			"a { color: #c80000; }"
+		);
+	}
+
+	#[test]
+	fn relative_rgb_all_keywords_passthrough() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: rgb(from red r g b); }",
+			"a { color: red; }"
+		);
+	}
+
+	#[test]
+	fn relative_rgb_all_static_minified() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: rgb(from blue 255 255 0); }",
+			"a { color: #ff0; }"
+		);
+	}
+
+	#[test]
+	fn relative_hsl_keywords_passthrough() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: hsl(from green h s l); }",
+			"a { color: green; }"
+		);
+	}
+
+	#[test]
+	fn relative_oklch_static_produces_named() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: oklch(from red l c h); }",
+			"a { color: red; }"
+		);
+	}
 }

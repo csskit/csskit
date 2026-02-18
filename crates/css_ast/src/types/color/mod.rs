@@ -99,6 +99,17 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Color, "lch(20% 30% 740deg/50%)");
 		assert_parse!(CssAtomSet::ATOMS, Color, "color-mix(in srgb,red,blue)");
 		assert_parse!(CssAtomSet::ATOMS, Color, "color-mix(in oklch longer hue,red 25%,blue)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "rgb(from red 200 g b / alpha)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "hwb(from rebeccapurple h w b / 100%)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "oklch(from currentcolor l c h)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "oklch(from currentcolor l c h)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "oklch(from #123456 0.75 C H)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "oklch(from lab(1 3 40) l c h / alpha)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Color,
+			"color(from color(srgb 0.7 0.5 0.3 / 40%) srgb alpha alpha alpha / alpha)"
+		);
 	}
 
 	#[test]

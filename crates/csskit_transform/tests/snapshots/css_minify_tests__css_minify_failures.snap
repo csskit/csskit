@@ -29,10 +29,6 @@ FAIL charset/0002
 -@charset"ISO-8859-1";@charset"ISO-8859-15";a{color:red}
 +@charset "ISO-8859-1";a{color:red}
 
-FAIL colors/0020
--a{color:color(from red srgb r g b / .5)}
-+a{color:#ff000080}
-
 FAIL colors/0021
 -a{color:rgb(none 128 0)}
 +a{color:green}
