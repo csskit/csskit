@@ -1,6 +1,5 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
-assertion_line: 209
 expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
 ---
 [
@@ -27,6 +26,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum AutoNoneOr < T > { }",
   "pub enum AutoOr < T > { }",
   "pub enum BackfaceVisibilityStyleValue { }",
+  "pub enum BaselineMetric { }",
   "pub enum BaselinePosition { }",
   "pub enum BaselineShiftStyleValue { }",
   "pub enum BaselineSourceStyleValue { }",
@@ -108,7 +108,6 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum DisplayOutside { }",
   "pub enum DisplayStyleValue { }",
   "pub enum DocumentMatcher { }",
-  "pub enum DominantBaselineStyleValue { }",
   "pub enum DynamicRangeLimitStyleValue < \'a > { }",
   "pub enum DynamicRangeMediaFeature { }",
   "pub enum DynamicRangeMediaFeatureKeyword { }",
@@ -615,6 +614,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct DocumentMatcherList < \'a > { }",
   "pub struct DocumentRule < \'a > { }",
   "pub struct DocumentRuleBlock < \'a > { }",
+  "pub struct DominantBaselineStyleValue { }",
   "pub struct DynamicRangeLimitMixFunction < \'a > { }",
   "pub struct EventTriggerNameStyleValue < \'a > { }",
   "pub struct EventTriggerSourceStyleValue < \'a > { }",
