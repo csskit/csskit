@@ -44,6 +44,7 @@ itertools = { version = "0.14.0" }
 ropey = { version = "1.6.1" }
 smallvec = { version = "1.15.1" }
 strum = { version = "0.27.2" }
+memchr = { version = "2.8.0" }
 phf = { version = "0.13.1" }
 
 # CLI

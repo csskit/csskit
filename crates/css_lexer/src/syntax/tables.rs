@@ -51,15 +51,6 @@ pub const ASCII_NEWLINE: Align64<[bool; 128]> = Align64([
 	F, F, F, F, F, F, F, F, F, F, F, F, F, F,
 ]);
 
-/// Lookup table for ASCII newline characters or EOF (LF, CR, FF, NUL)
-/// Used to detect line terminators in single-line comments
-pub const ASCII_NEWLINE_OR_EOF: Align64<[bool; 128]> = Align64([
-	T, F, F, F, F, F, F, F, F, F, T, F, T, T, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-	F, F, F, F, F, F, F, F, F, F, F, F, F, F,
-]);
-
 /// Lookup table for ASCII non-printable characters
 /// Includes control characters except TAB, LF, FF, CR
 pub const ASCII_NON_PRINTABLE: Align64<[bool; 128]> = Align64([

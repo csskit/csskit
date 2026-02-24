@@ -18,7 +18,7 @@ pub const TAB: char = '\u{9}';
 
 pub const SPACE: char = ' ';
 
-use tables::{ASCII_NEWLINE, ASCII_NEWLINE_OR_EOF, ASCII_NON_PRINTABLE, ASCII_WHITESPACE};
+use tables::{ASCII_NEWLINE, ASCII_NON_PRINTABLE, ASCII_WHITESPACE};
 
 #[inline(always)]
 pub const fn is_whitespace(c: char) -> bool {
@@ -28,11 +28,6 @@ pub const fn is_whitespace(c: char) -> bool {
 #[inline(always)]
 pub const fn is_newline(c: char) -> bool {
 	c.is_ascii() && ASCII_NEWLINE.0[c as usize]
-}
-
-#[inline(always)]
-pub const fn is_newline_or_eof(c: char) -> bool {
-	c.is_ascii() && ASCII_NEWLINE_OR_EOF.0[c as usize]
 }
 
 #[inline(always)]

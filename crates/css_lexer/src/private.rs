@@ -3,132 +3,198 @@ use crate::{
 	constants::SINGLE_CHAR_TOKENS,
 	small_str_buf::SmallStrBuf,
 	syntax::{
-		CR, EOF, FF, LF, ParseEscape, SPACE, TAB,
+		CR, EOF, FF, LF, SPACE, TAB,
 		identifier::{
 			is_ident, is_ident_ascii_lower_or_digit, is_ident_ascii_start, is_ident_byte, is_ident_start,
 			is_ident_start_sequence,
 		},
-		is_escape_sequence, is_newline, is_newline_or_eof, is_non_printable, is_quote, is_url_ident, is_whitespace,
+		is_escape_sequence, is_non_printable, is_quote, is_url_ident, is_whitespace,
+		tables::{ASCII_NEWLINE, ASCII_WHITESPACE},
 	},
 };
-use std::{char::REPLACEMENT_CHARACTER, str::Chars};
+use std::char::REPLACEMENT_CHARACTER;
 
 // 7 makes size_of::<SmallStrBuf<8>>() == size_of::<usize>()
 const MAX_SMALL_IDENT_SIZE: usize = 7;
 
-trait CharsConsumer {
-	fn is_last(&self) -> bool;
-
-	fn peek_nth(&self, n: usize) -> char;
-
-	fn peek2(&self) -> (char, char);
-
-	fn peek3(&self) -> (char, char, char);
-
-	#[must_use]
-	fn consume_newline(&mut self) -> u32;
-
-	#[must_use]
-	fn consume_same(&mut self, char: char) -> u32;
-
-	#[must_use]
-	fn consume_whitespace(&mut self) -> (u32, Whitespace);
-
-	#[must_use]
-	fn consume_ident_sequence(&mut self, atoms: &dyn DynAtomSet) -> (u32, bool, bool, bool, u32, bool);
-
-	#[must_use]
-	fn consume_escape_sequence(&mut self) -> u32;
-
-	#[must_use]
-	fn consume_url_sequence(&mut self, len: u32, ident_escaped: bool) -> Token;
-
-	#[must_use]
-	fn consume_remnants_of_bad_url(&mut self, len: u32) -> Token;
-
-	#[must_use]
-	fn consume_numeric_token(&mut self, atoms: &dyn DynAtomSet) -> Token;
-
-	#[must_use]
-	fn consume_hash_token(&mut self, atoms: &dyn DynAtomSet) -> Token;
-
-	#[must_use]
-	fn consume_ident_like_token(&mut self, atoms: &dyn DynAtomSet) -> Token;
-
-	#[must_use]
-	fn consume_string_token(&mut self) -> Token;
-
-	#[must_use]
-	fn is_number_start(&mut self) -> bool;
-
-	#[must_use]
-	fn would_start_unicode_range(&self) -> bool;
-
-	#[must_use]
-	fn consume_unicode_range_token(&mut self) -> Token;
+/// A byte-position cursor over a `&[u8]` slice (which must be valid UTF-8).
+struct ByteCursor<'a> {
+	bytes: &'a [u8],
+	pos: usize,
 }
 
-impl<'a> CharsConsumer for Chars<'a> {
-	#[inline]
-	fn is_last(&self) -> bool {
-		self.clone().next().is_none()
+impl<'a> ByteCursor<'a> {
+	#[inline(always)]
+	fn new(bytes: &'a [u8]) -> Self {
+		Self { bytes, pos: 0 }
 	}
 
-	#[inline]
-	fn peek_nth(&self, n: usize) -> char {
-		self.clone().nth(n).unwrap_or(EOF)
+	/// Peek at the byte at offset `n` from current position.
+	/// Returns 0 (NUL) if past end — this maps to EOF in the CSS spec.
+	#[inline(always)]
+	fn peek_byte(&self, n: usize) -> u8 {
+		let idx = self.pos + n;
+		if idx < self.bytes.len() {
+			// SAFETY: we just checked bounds
+			unsafe { *self.bytes.get_unchecked(idx) }
+		} else {
+			0
+		}
 	}
 
-	#[inline]
+	/// Peek the next char (decoding UTF-8 if needed). Returns EOF ('\0') if at end.
+	#[inline(always)]
+	fn peek_char(&self) -> char {
+		self.peek_char_at(0)
+	}
+
+	/// Peek a char at offset `n` bytes from current position.
+	#[inline(always)]
+	fn peek_char_at(&self, n: usize) -> char {
+		let idx = self.pos + n;
+		if idx >= self.bytes.len() {
+			return EOF;
+		}
+		let b = unsafe { *self.bytes.get_unchecked(idx) };
+		if b < 128 {
+			b as char
+		} else {
+			// Decode multi-byte UTF-8
+			self.decode_non_ascii_at(idx)
+		}
+	}
+
+	/// Decode a non-ASCII char starting at `idx`. The byte at `idx` is >= 128.
+	fn decode_non_ascii_at(&self, idx: usize) -> char {
+		// SAFETY: self.bytes is valid UTF-8
+		let remaining = unsafe { std::str::from_utf8_unchecked(&self.bytes[idx..]) };
+		remaining.chars().next().unwrap_or(EOF)
+	}
+
+	/// Peek the next two chars
+	#[inline(always)]
 	fn peek2(&self) -> (char, char) {
-		let mut chars = self.clone();
-		let c0 = chars.next().unwrap_or(EOF);
-		let c1 = chars.next().unwrap_or(EOF);
+		let c0 = self.peek_char_at(0);
+		let c1 = self.peek_char_at(c0.len_utf8());
 		(c0, c1)
 	}
 
-	#[inline]
+	/// Peek the next three chars
+	#[inline(always)]
 	fn peek3(&self) -> (char, char, char) {
-		let mut chars = self.clone();
-		let c0 = chars.next().unwrap_or(EOF);
-		let c1 = chars.next().unwrap_or(EOF);
-		let c2 = chars.next().unwrap_or(EOF);
+		let c0 = self.peek_char_at(0);
+		let off1 = c0.len_utf8();
+		let c1 = self.peek_char_at(off1);
+		let c2 = self.peek_char_at(off1 + c1.len_utf8());
 		(c0, c1, c2)
 	}
 
+	/// Advance by one byte (for ASCII). Returns the byte.
+	#[inline(always)]
+	fn advance_byte(&mut self) -> u8 {
+		debug_assert!(self.pos < self.bytes.len());
+		let b = unsafe { *self.bytes.get_unchecked(self.pos) };
+		self.pos += 1;
+		b
+	}
+
+	/// Advance by `n` bytes.
+	#[inline(always)]
+	fn advance_n(&mut self, n: usize) {
+		self.pos += n;
+	}
+
+	/// Advance past one char, return it. Returns None if at end.
+	#[inline(always)]
+	fn next_char(&mut self) -> Option<char> {
+		if self.pos >= self.bytes.len() {
+			return None;
+		}
+		let b = unsafe { *self.bytes.get_unchecked(self.pos) };
+		if b < 128 {
+			self.pos += 1;
+			Some(b as char)
+		} else {
+			let remaining = unsafe { std::str::from_utf8_unchecked(&self.bytes[self.pos..]) };
+			let c = remaining.chars().next()?;
+			self.pos += c.len_utf8();
+			Some(c)
+		}
+	}
+
+	/// Check if at end (no more bytes)
+	#[inline(always)]
+	fn at_end(&self) -> bool {
+		self.pos >= self.bytes.len()
+	}
+
+	/// Check if there's exactly one or zero bytes remaining.
+	#[inline(always)]
+	fn is_last(&self) -> bool {
+		self.pos >= self.bytes.len()
+	}
+
+	/// Return the remaining bytes as a &str (valid since source is UTF-8)
+	#[inline(always)]
+	fn remaining_str(&self) -> &'a str {
+		unsafe { std::str::from_utf8_unchecked(&self.bytes[self.pos..]) }
+	}
+
+	/// Return the remaining bytes slice
+	#[inline(always)]
+	fn remaining_bytes(&self) -> &'a [u8] {
+		&self.bytes[self.pos..]
+	}
+
 	fn consume_newline(&mut self) -> u32 {
-		if let Some(c) = self.next()
-			&& c == CR
-			&& self.peek_nth(0) == LF
-		{
-			self.next();
-			return 2;
+		let b = self.peek_byte(0);
+		if b == b'\r' {
+			self.pos += 1;
+			if self.peek_byte(0) == b'\n' {
+				self.pos += 1;
+				return 2;
+			}
+			return 1;
+		}
+		// LF or FF
+		if self.pos < self.bytes.len() {
+			self.pos += 1;
 		}
 		1
 	}
 
-	fn consume_same(&mut self, char: char) -> u32 {
-		let mut i = 0;
-		while self.peek_nth(0) == char {
-			self.next();
+	fn consume_same(&mut self, byte: u8) -> u32 {
+		let mut i: u32 = 0;
+		while self.peek_byte(0) == byte {
+			self.pos += 1;
 			i += 1;
 		}
 		i
 	}
 
 	fn consume_whitespace(&mut self) -> (u32, Whitespace) {
-		let mut i = 0;
+		let mut i: u32 = 0;
 		let mut style = Whitespace::none();
-		while is_whitespace(self.peek_nth(0)) {
-			let c = self.next().unwrap();
-			if c == ' ' {
+		loop {
+			let remaining = self.remaining_bytes();
+			let non_space = remaining.iter().position(|&b| b != b' ').unwrap_or(remaining.len());
+			if non_space > 0 {
+				self.advance_n(non_space);
+				i += non_space as u32;
 				style |= Whitespace::Space;
-			} else if c == '\t' {
-				style |= Whitespace::Tab;
-			} else {
-				style |= Whitespace::Newline;
 			}
-			i += 1;
+			let b = self.peek_byte(0);
+			if b == b'\t' {
+				self.pos += 1;
+				i += 1;
+				style |= Whitespace::Tab;
+			} else if b == b'\n' || b == b'\r' || b == 0x0C {
+				self.pos += 1;
+				i += 1;
+				style |= Whitespace::Newline;
+			} else {
+				break;
+			}
 		}
 		(i, style)
 	}
@@ -138,11 +204,10 @@ impl<'a> CharsConsumer for Chars<'a> {
 		let mut contains_non_lower_ascii = false;
 		let mut contains_escape = false;
 
-		let str = self.as_str();
-		if !str.is_empty() {
-			let bytes = str.as_bytes();
-			const MAX_FAST_SCAN_IDENT_SIZE: u32 = 50;
-			let end = MAX_FAST_SCAN_IDENT_SIZE.min(bytes.len() as u32) as usize;
+		let remaining = self.remaining_bytes();
+		if !remaining.is_empty() {
+			let bytes = remaining;
+			let end = bytes.len();
 			let mut i = 0;
 			if bytes.len() >= 2 && bytes[0] == b'-' && bytes[1] == b'-' {
 				i = 2;
@@ -161,47 +226,46 @@ impl<'a> CharsConsumer for Chars<'a> {
 			let ascii_len = (i - scan_start) as u32;
 			let len = i as u32;
 			if ascii_len > 0 {
-				let next_byte = if i < bytes.len() { bytes[i] } else { b' ' };
+				let next_byte = if i < end { bytes[i] } else { b' ' };
 				if next_byte < 128 && !is_ident_byte(next_byte) && next_byte != b'\\' && next_byte != 0 {
-					// Tempting to use `nth(len)` here but this is faster
-					for _ in 0..len {
-						self.next();
-					}
-					let atom_bits = if dashed_ident {
-						atoms.str_to_bits(&str[2..len as usize])
-					} else {
-						atoms.str_to_bits(&str[0..len as usize])
-					};
+					// SAFETY: the fast path only scans ASCII ident bytes, which are valid UTF-8.
+					let ident_str = unsafe { std::str::from_utf8_unchecked(&bytes[..i]) };
+					self.advance_n(i);
+					let atom_bits =
+						if dashed_ident { atoms.str_to_bits(&ident_str[2..]) } else { atoms.str_to_bits(ident_str) };
 					return (
 						len,
 						contains_non_lower_ascii,
 						dashed_ident,
 						false,
 						atom_bits,
-						ascii_len == 3 && is_url_ident(&str[0..len as usize]),
+						ascii_len == 3 && is_url_ident(ident_str),
 					);
 				}
 			}
 		}
 
-		let mut len = 0;
+		let str = self.remaining_str();
+		let mut len: u32 = 0;
 		let mut small_ident = SmallStrBuf::<MAX_SMALL_IDENT_SIZE>::new();
 
-		let mut chars_peek = self.clone();
-		while let Some(c) = chars_peek.next() {
+		loop {
+			let c = self.peek_char();
+			if c == EOF && self.at_end() {
+				break;
+			}
 			// Most common case first: lowercase ASCII, digits, or dash (except leading dash)
 			if is_ident_ascii_lower_or_digit(c) || (c == '-' && len > 0) {
-				self.next();
+				self.pos += 1; // ASCII, 1 byte
 				len += 1;
 				small_ident.append(c);
 			} else if len == 0 && c == '-' {
 				// Leading dash case - check for dashed ident
-				let next = chars_peek.clone().next().unwrap_or(EOF);
-				self.next();
+				let next = self.peek_char_at(1);
+				self.pos += 1;
 				len += 1;
 				if next == '-' {
-					self.next();
-					chars_peek.next();
+					self.pos += 1;
 					len += 1;
 					dashed_ident = true;
 					// Reset the small_ident buffer as dashed_idents always begin with two dashes.
@@ -210,28 +274,28 @@ impl<'a> CharsConsumer for Chars<'a> {
 				}
 				small_ident.append(c);
 			} else if is_ident(c) {
-				self.next();
-				len += c.len_utf8() as u32;
+				let clen = c.len_utf8();
+				self.advance_n(clen);
+				len += clen as u32;
 				contains_non_lower_ascii = true;
 				small_ident.append(c);
 			} else {
-				let next = chars_peek.clone().next().unwrap_or(EOF);
+				let next = self.peek_char_at(c.len_utf8());
 				if is_escape_sequence(c, next) {
-					self.next();
+					self.pos += 1; // skip the backslash
 					if small_ident.over_capacity() {
 						contains_escape = true;
 						len += self.consume_escape_sequence();
-						chars_peek = self.clone();
+						// no need to re-sync, pos is already advanced
 					} else {
-						let (char, esc_len) = self.parse_escape_sequence();
-						small_ident.append(char);
+						let (ch, esc_len) = self.parse_escape_sequence();
+						small_ident.append(ch);
 						len += 1 + esc_len as u32;
 						contains_escape = true;
-						chars_peek = self.clone();
 					}
 					continue;
-				} else if c == '\0' {
-					self.next();
+				} else if c == '\0' && !self.at_end() {
+					self.pos += 1;
 					contains_escape = true;
 					len += 1;
 				} else {
@@ -256,7 +320,7 @@ impl<'a> CharsConsumer for Chars<'a> {
 	}
 
 	fn consume_escape_sequence(&mut self) -> u32 {
-		if let Some(c) = self.next() {
+		if let Some(c) = self.next_char() {
 			if c.is_ascii_hexdigit() {
 				let (_, hex_len) = self.consume_hex_escape(c);
 				((hex_len + self.consume_escape_whitespace()) as u32) + 1
@@ -265,6 +329,54 @@ impl<'a> CharsConsumer for Chars<'a> {
 			}
 		} else {
 			1
+		}
+	}
+
+	fn consume_hex_escape(&mut self, first_digit: char) -> (u32, u8) {
+		let mut value = first_digit.to_digit(16).unwrap();
+		let mut i = 1u8;
+		while i < 6 {
+			let b = self.peek_byte(0);
+			if b < 128 {
+				if let Some(hex_value) = (b as char).to_digit(16) {
+					self.pos += 1;
+					value = (value << 4) | hex_value;
+					i += 1;
+				} else {
+					break;
+				}
+			} else {
+				break;
+			}
+		}
+		(value, i)
+	}
+
+	fn consume_escape_whitespace(&mut self) -> u8 {
+		let b = self.peek_byte(0);
+		if b < 128 && ASCII_WHITESPACE.0[b as usize] {
+			self.pos += 1;
+			if b == b'\r' && self.peek_byte(0) == b'\n' {
+				self.pos += 1;
+				2
+			} else {
+				1
+			}
+		} else {
+			0
+		}
+	}
+
+	fn parse_escape_sequence(&mut self) -> (char, u8) {
+		if let Some(c) = self.next_char() {
+			if !c.is_ascii_hexdigit() {
+				return (c, c.len_utf8() as u8);
+			}
+			let (value, hex_len) = self.consume_hex_escape(c);
+			let ws_len = self.consume_escape_whitespace();
+			(codepoint_to_char(value), hex_len + ws_len)
+		} else {
+			(REPLACEMENT_CHARACTER, 0)
 		}
 	}
 
@@ -278,59 +390,78 @@ impl<'a> CharsConsumer for Chars<'a> {
 			len += whitespace_count;
 		}
 		loop {
-			let c = self.peek_nth(0);
-			match c {
-				')' => {
-					self.next();
+			let b = self.peek_byte(0);
+			match b {
+				b')' => {
+					self.pos += 1;
 					len += 1;
 					trailing_len += 1;
 					ends_with_paren = true;
 					break;
 				}
-				EOF => {
+				0 if self.at_end() => {
 					break;
 				}
-				_ if is_whitespace(c) => {
+				b if b < 128 && ASCII_WHITESPACE.0[b as usize] => {
 					trailing_len += self.consume_whitespace().0;
 					len += trailing_len;
-					// Consider trailing whitespace as escape to allow the string
-					// parser to consume characters one-by-one
 					contains_escape = true;
-					match self.peek_nth(0) {
-						')' => {
-							self.next();
+					let b2 = self.peek_byte(0);
+					match b2 {
+						b')' => {
+							self.pos += 1;
 							len += 1;
 							trailing_len += 1;
 							ends_with_paren = true;
 							break;
 						}
-						EOF => {
+						0 if self.at_end() => {
 							break;
 						}
 						_ => {
 							return self.consume_remnants_of_bad_url(len);
 						}
-					};
+					}
 				}
-				'\'' | '"' | '(' => {
+				b'\'' | b'"' | b'(' => {
 					return self.consume_remnants_of_bad_url(len);
 				}
-				_ if is_non_printable(c) => {
-					return self.consume_remnants_of_bad_url(len);
-				}
-				'\\' => {
-					let (_, next) = self.peek2();
-					if is_escape_sequence(c, next) {
-						self.next();
+				b'\\' => {
+					let c2 = self.peek_char_at(1);
+					if is_escape_sequence('\\', c2) {
+						self.pos += 1;
 						len += self.consume_escape_sequence();
 						contains_escape = true;
 					} else {
 						return self.consume_remnants_of_bad_url(len);
 					}
 				}
-				c => {
-					self.next();
-					len += c.len_utf8() as u32;
+				_ => {
+					// Bulk scan: find next ), \, or space (most common terminators)
+					let remaining = self.remaining_bytes();
+					let scan_end = match memchr::memchr3(b')', b'\\', b' ', remaining) {
+						Some(offset) => offset,
+						None => remaining.len(),
+					};
+					// Within scanned range, check for rare sentinels:
+					// whitespace/control (<=0x20), quotes, (, DEL, non-ASCII
+					let safe_end = remaining[..scan_end]
+						.iter()
+						.position(|&b| b <= 0x20 || b == b'\'' || b == b'"' || b == b'(' || b == 0x7F || b >= 0x80)
+						.unwrap_or(scan_end);
+					if safe_end > 0 {
+						self.advance_n(safe_end);
+						len += safe_end as u32;
+					} else {
+						// First byte is a rare sentinel; handle one byte
+						let c = self.peek_char();
+						if is_non_printable(c) {
+							return self.consume_remnants_of_bad_url(len);
+						}
+						let clen = c.len_utf8();
+						self.advance_n(clen);
+						len += clen as u32;
+					}
 				}
 			}
 		}
@@ -346,21 +477,39 @@ impl<'a> CharsConsumer for Chars<'a> {
 
 	fn consume_remnants_of_bad_url(&mut self, len: u32) -> Token {
 		let mut len = len;
-		while let Some(ch) = self.next() {
-			match ch {
-				')' => {
-					len += 1;
-					break;
-				}
-				'\\' => {
-					if is_escape_sequence(ch, self.peek_nth(0)) {
+		loop {
+			let remaining = self.remaining_bytes();
+			if remaining.is_empty() {
+				break;
+			}
+			// Bulk-skip to the next ')' or '\\' — the only bytes that need special handling.
+			match memchr::memchr2(b')', b'\\', remaining) {
+				Some(offset) => {
+					// Skip everything before the sentinel.
+					if offset > 0 {
+						self.advance_n(offset);
+						len += offset as u32;
+					}
+					let b = self.peek_byte(0);
+					if b == b')' {
+						self.pos += 1;
+						len += 1;
+						break;
+					}
+					// b == b'\\'
+					self.pos += 1;
+					let next = self.peek_char();
+					if is_escape_sequence('\\', next) {
 						len += self.consume_escape_sequence();
-					} else if let Some(ch) = self.next() {
-						len += ch.len_utf8() as u32 + 1;
+					} else if let Some(ch2) = self.next_char() {
+						len += ch2.len_utf8() as u32 + 1;
 					}
 				}
-				_ => {
-					len += ch.len_utf8() as u32;
+				None => {
+					// No ')' or '\\' in remaining input — consume it all.
+					len += remaining.len() as u32;
+					self.advance_n(remaining.len());
+					break;
 				}
 			}
 		}
@@ -368,16 +517,15 @@ impl<'a> CharsConsumer for Chars<'a> {
 	}
 
 	fn consume_numeric_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
-		let str = self.as_str();
-		let bytes = str.as_bytes();
+		let bytes = self.remaining_bytes();
 
-		let mut num_len = 1;
+		let mut num_len: usize = 1;
 		let first_byte = bytes[0];
 		let mut is_float = first_byte == b'.';
 		let has_sign = first_byte == b'+' || first_byte == b'-';
 
 		// Scan integer part
-		let mut i = 1;
+		let mut i: usize = 1;
 		while i < bytes.len() && bytes[i].is_ascii_digit() {
 			num_len += 1;
 			i += 1;
@@ -414,15 +562,23 @@ impl<'a> CharsConsumer for Chars<'a> {
 			}
 		}
 
-		let value = str[0..num_len].parse::<f32>().unwrap();
-		self.nth(num_len - 1);
-		match self.peek_nth(0) {
-			'%' => {
-				self.next();
+		let value = if !is_float {
+			// Fast path for integers: compute value inline without str::parse
+			fast_parse_integer(bytes, has_sign, num_len)
+		} else {
+			let str = self.remaining_str();
+			str[0..num_len].parse::<f32>().unwrap()
+		};
+		self.advance_n(num_len);
+
+		match self.peek_byte(0) {
+			b'%' => {
+				self.pos += 1;
 				Token::new_dimension(is_float, has_sign, num_len as u32, 1, value, atoms.str_to_bits("%") as u8)
 			}
-			c => {
-				let (_, c2, c3) = self.peek3();
+			_ => {
+				let c = self.peek_char();
+				let (_, c2, c3) = if c == EOF && self.at_end() { (EOF, EOF, EOF) } else { self.peek3() };
 				if is_ident_start_sequence(c, c2, c3) {
 					let (unit_len, _, _, _, atom_bits, _) = self.consume_ident_sequence(atoms);
 					Token::new_dimension(is_float, has_sign, num_len as u32, unit_len, value, atom_bits as u8)
@@ -434,15 +590,28 @@ impl<'a> CharsConsumer for Chars<'a> {
 	}
 
 	fn consume_hash_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
-		self.next();
-		let hex_reader = self.clone();
-		let first_is_ascii = is_ident(self.peek_nth(0));
+		self.pos += 1; // skip '#'
+		let hash_str = self.remaining_str();
+		let first_is_ascii = is_ident(self.peek_char());
+		let hash_start = self.pos;
 		let (len, contains_non_lower_ascii, _, contains_escape, _, _) = self.consume_ident_sequence(atoms);
-		let mut hex_value = 0;
+		let hash_bytes = &self.bytes[hash_start..hash_start + len as usize];
+		let mut hex_value: u32 = 0;
 		let mut is_hex = false;
-		if len == 3 || len == 4 {
+		if (len == 3 || len == 4) && !contains_escape {
 			is_hex = true;
-			for c in hex_reader.take(len as usize) {
+			for &b in hash_bytes.iter().take(len as usize) {
+				if let Some(d) = (b as char).to_digit(16) {
+					hex_value = (hex_value << 8) | (d << 4) | d;
+				} else {
+					is_hex = false;
+					break;
+				}
+			}
+		} else if (len == 3 || len == 4) && contains_escape {
+			// Use char-based iteration for escaped sequences
+			is_hex = true;
+			for c in hash_str.chars().take(len as usize) {
 				if let Some(d) = c.to_digit(16) {
 					hex_value = (hex_value << 8) | (d << 4) | d;
 				} else {
@@ -450,9 +619,19 @@ impl<'a> CharsConsumer for Chars<'a> {
 					break;
 				}
 			}
-		} else if len == 6 || len == 8 {
+		} else if (len == 6 || len == 8) && !contains_escape {
 			is_hex = true;
-			for c in hex_reader.take(len as usize) {
+			for &b in hash_bytes.iter().take(len as usize) {
+				if let Some(d) = (b as char).to_digit(16) {
+					hex_value = (hex_value << 4) | d;
+				} else {
+					is_hex = false;
+					break;
+				}
+			}
+		} else if (len == 6 || len == 8) && contains_escape {
+			is_hex = true;
+			for c in hash_str.chars().take(len as usize) {
 				if let Some(d) = c.to_digit(16) {
 					hex_value = (hex_value << 4) | d;
 				} else {
@@ -470,22 +649,27 @@ impl<'a> CharsConsumer for Chars<'a> {
 		Token::new_hash(contains_non_lower_ascii, first_is_ascii, contains_escape, len + 1, hex_value)
 	}
 
+	#[inline]
 	fn consume_ident_like_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
 		let (mut len, contains_non_lower_ascii, dashed, contains_escape, atom_bits, is_url) =
 			self.consume_ident_sequence(atoms);
-		if self.peek_nth(0) == '(' {
-			self.next();
+		if self.peek_byte(0) == b'(' {
+			self.pos += 1;
 			len += 1;
 			let token = Token::new_function(contains_non_lower_ascii, dashed, contains_escape, atom_bits, len);
 			if is_url {
-				let mut chars = self.clone();
-				let mut char = chars.next().unwrap_or(EOF);
+				// Look ahead for up to 4 whitespace chars then check for quote
+				let mut lookahead = 0usize;
 				for _i in 0..=3 {
-					if is_whitespace(char) {
-						char = chars.next().unwrap_or(EOF);
+					let b = self.peek_byte(lookahead);
+					if b < 128 && ASCII_WHITESPACE.0[b as usize] {
+						lookahead += 1;
+					} else {
+						break;
 					}
 				}
-				if !is_quote(char) {
+				let next_b = self.peek_byte(lookahead);
+				if !is_quote(next_b as char) || (next_b == 0 && self.pos + lookahead >= self.bytes.len()) {
 					return self.consume_url_sequence(len, contains_escape);
 				}
 			}
@@ -495,153 +679,217 @@ impl<'a> CharsConsumer for Chars<'a> {
 	}
 
 	fn consume_string_token(&mut self) -> Token {
-		let delimiter = self.next().unwrap();
-		let quotes = if delimiter == '"' { QuoteStyle::Double } else { QuoteStyle::Single };
+		let delimiter = self.advance_byte();
+		let quotes = if delimiter == b'"' { QuoteStyle::Double } else { QuoteStyle::Single };
 		let mut contains_escape = false;
-		let mut len = 1;
+		let mut len: u32 = 1;
 		loop {
-			match self.peek_nth(0) {
-				c if is_newline(c) => {
+			let b = self.peek_byte(0);
+			match b {
+				// Check for newlines (LF=0x0A, CR=0x0D, FF=0x0C)
+				b'\n' | b'\r' | 0x0C => {
 					return Token::new_bad_string(len);
 				}
-				EOF => {
-					if self.next().is_some() {
-						contains_escape = true;
-						len += 1;
-					} else {
+				0 => {
+					if self.at_end() {
+						// EOF
 						return Token::new_string(quotes, false, contains_escape, len);
 					}
-				}
-				c @ ('"' | '\'') => {
-					self.next();
+					// NUL byte in middle of string — treat as replacement char
+					self.pos += 1;
+					contains_escape = true;
 					len += 1;
-					if c == delimiter {
+				}
+				b'"' | b'\'' => {
+					self.pos += 1;
+					len += 1;
+					if b == delimiter {
 						return Token::new_string(quotes, true, contains_escape, len);
 					}
 				}
-				c @ '\\' => {
-					self.next();
+				b'\\' => {
+					self.pos += 1;
 					contains_escape = true;
-					match self.peek_nth(0) {
-						EOF => {
-							len += 1;
-							return Token::new_string(quotes, false, contains_escape, len);
-						}
-						p if is_newline(p) => {
-							len += self.consume_newline() + 1;
-						}
-						p if is_escape_sequence(c, p) => {
+					let next_b = self.peek_byte(0);
+					if next_b == 0 && self.at_end() {
+						// EOF after backslash
+						len += 1;
+						return Token::new_string(quotes, false, contains_escape, len);
+					}
+					// Check newline
+					if next_b < 128 && ASCII_NEWLINE.0[next_b as usize] {
+						len += self.consume_newline() + 1;
+					} else {
+						let next_c = self.peek_char();
+						if is_escape_sequence('\\', next_c) {
 							len += self.consume_escape_sequence();
+						} else {
+							return Token::new_bad_string(len);
 						}
-						_ => return Token::new_bad_string(len),
 					}
 				}
-				c => {
-					self.next();
-					len += c.len_utf8() as u32;
+				_ => {
+					// Bulk scan: find next delimiter, backslash, or newline
+					let remaining = self.remaining_bytes();
+					let scan_end = match memchr::memchr3(delimiter, b'\\', b'\n', remaining) {
+						Some(offset) => offset,
+						None => remaining.len(),
+					};
+					// Within the scanned range, check for rare sentinels:
+					// \r (0x0D), \x0C (FF), \0 (NUL), or non-ASCII (>= 0x80)
+					let safe_end = remaining[..scan_end]
+						.iter()
+						.position(|&b| (b < 0x0E && (b == 0 || b == 0x0D || b == 0x0C)) || b >= 0x80)
+						.unwrap_or(scan_end);
+					if safe_end > 0 {
+						self.advance_n(safe_end);
+						len += safe_end as u32;
+					} else {
+						// First byte is itself a sentinel — handle one byte at a time
+						if b < 128 {
+							self.pos += 1;
+							len += 1;
+						} else {
+							let c = self.peek_char();
+							let clen = c.len_utf8();
+							self.advance_n(clen);
+							len += clen as u32;
+						}
+					}
 				}
 			}
 		}
 	}
 
-	fn is_number_start(&mut self) -> bool {
-		let str = self.as_str();
-		if str.is_empty() {
+	fn is_number_start(&self) -> bool {
+		let remaining = self.remaining_bytes();
+		if remaining.is_empty() {
 			return false;
 		}
-		let bytes = str.as_bytes();
-		let first = bytes[0];
+		let first = remaining[0];
 		if first.is_ascii_digit() {
 			return true;
 		}
-		if (first == b'+' || first == b'-') && bytes.len() >= 2 {
-			let second = bytes[1];
-			return second.is_ascii_digit() || (second == b'.' && bytes.len() >= 3 && bytes[2].is_ascii_digit());
+		if (first == b'+' || first == b'-') && remaining.len() >= 2 {
+			let second = remaining[1];
+			return second.is_ascii_digit()
+				|| (second == b'.' && remaining.len() >= 3 && remaining[2].is_ascii_digit());
 		}
-		first == b'.' && bytes.len() >= 2 && bytes[1].is_ascii_digit()
+		first == b'.' && remaining.len() >= 2 && remaining[1].is_ascii_digit()
 	}
 
-	// https://drafts.csswg.org/css-syntax/#starts-a-unicode-range
-	// Check if three code points would start a unicode-range.
-	// The caller has already confirmed the current code point is U or u (not yet consumed).
-	// This checks that the next two are `+` followed by `?` or a hex digit.
 	fn would_start_unicode_range(&self) -> bool {
-		let (_, c1, c2) = self.peek3();
-		c1 == '+' && (c2 == '?' || c2.is_ascii_hexdigit())
+		// Caller confirmed current byte is U or u. Check next two.
+		let b1 = self.peek_byte(1);
+		if b1 != b'+' {
+			return false;
+		}
+		let b2 = self.peek_byte(2);
+		b2 == b'?' || (b2 as char).is_ascii_hexdigit()
 	}
 
-	// https://drafts.csswg.org/css-syntax/#consume-unicode-range-token
-	// Consume a unicode-range token.
-	// Assumes the stream would start a unicode-range (i.e. would_start_unicode_range() returned true).
 	fn consume_unicode_range_token(&mut self) -> Token {
-		// Step 1: Consume the next two input code points (U/u and +) and discard them.
-		self.next(); // U or u
-		self.next(); // +
+		// Step 1: Consume U/u and +
+		self.pos += 1; // U or u
+		self.pos += 1; // +
 		let mut len: u32 = 2;
 
-		// Step 2: Consume as many hex digits as possible, but no more than 6.
+		// Step 2: Consume hex digits (up to 6)
 		let mut hex_count: u32 = 0;
 		let mut hex_value: u32 = 0;
 		while hex_count < 6 {
-			let c = self.peek_nth(0);
-			if c.is_ascii_hexdigit() {
-				self.next();
-				hex_value = (hex_value << 4) | c.to_digit(16).unwrap();
-				hex_count += 1;
-				len += 1;
+			let b = self.peek_byte(0);
+			if b < 128 {
+				if let Some(d) = (b as char).to_digit(16) {
+					self.pos += 1;
+					hex_value = (hex_value << 4) | d;
+					hex_count += 1;
+					len += 1;
+				} else {
+					break;
+				}
 			} else {
 				break;
 			}
 		}
 
-		// If less than 6 hex digits were consumed, consume as many ? as possible
-		// but no more than enough to make total = 6.
+		// Consume ? placeholders
 		let mut question_count: u32 = 0;
-		while hex_count + question_count < 6 && self.peek_nth(0) == '?' {
-			self.next();
+		while hex_count + question_count < 6 && self.peek_byte(0) == b'?' {
+			self.pos += 1;
 			question_count += 1;
 			len += 1;
 		}
 
-		// Step 3: If first segment contains any question mark code points
 		if question_count > 0 {
-			// Replace ? with 0 for start
 			let start = hex_value << (question_count * 4);
-			// Replace ? with F for end
 			let end = start | ((1 << (question_count * 4)) - 1);
 			return Token::new_unicode_range(start, end, len);
 		}
 
-		// Step 4: Otherwise, hex_value is start of range.
 		let start = hex_value;
 
-		// Step 5: If next 2 code points are - followed by a hex digit
-		let (c1, c2) = self.peek2();
-		if c1 == '-' && c2.is_ascii_hexdigit() {
-			// Consume the -
-			self.next();
+		// Check for range: - followed by hex digit
+		if self.peek_byte(0) == b'-' && (self.peek_byte(1) as char).is_ascii_hexdigit() {
+			self.pos += 1; // -
 			len += 1;
 
-			// Consume as many hex digits as possible, but no more than 6
 			let mut end_hex_count: u32 = 0;
 			let mut end_value: u32 = 0;
 			while end_hex_count < 6 {
-				let c = self.peek_nth(0);
-				if c.is_ascii_hexdigit() {
-					self.next();
-					end_value = (end_value << 4) | c.to_digit(16).unwrap();
-					end_hex_count += 1;
-					len += 1;
+				let b = self.peek_byte(0);
+				if b < 128 {
+					if let Some(d) = (b as char).to_digit(16) {
+						self.pos += 1;
+						end_value = (end_value << 4) | d;
+						end_hex_count += 1;
+						len += 1;
+					} else {
+						break;
+					}
 				} else {
 					break;
 				}
 			}
-
 			return Token::new_unicode_range(start, end_value, len);
 		}
 
-		// Step 6: Otherwise, start == end
 		Token::new_unicode_range(start, start, len)
+	}
+}
+
+/// Fast integer parsing for CSS numeric tokens. Handles optional leading sign.
+/// Only called when `is_float` is false (no decimal point or exponent).
+/// For integers with 9 or fewer digits, this computes the value directly.
+/// For larger integers, falls back to str::parse.
+#[inline]
+fn fast_parse_integer(bytes: &[u8], has_sign: bool, num_len: usize) -> f32 {
+	let start = if has_sign { 1 } else { 0 };
+	let digit_count = num_len - start;
+	if digit_count <= 9 {
+		let mut value: u32 = 0;
+		let mut i = start;
+		while i < num_len {
+			value = value * 10 + (bytes[i] - b'0') as u32;
+			i += 1;
+		}
+		let fvalue = value as f32;
+		if has_sign && bytes[0] == b'-' { -fvalue } else { fvalue }
+	} else {
+		// Fallback for very large integers (> 9 digits)
+		let str = unsafe { std::str::from_utf8_unchecked(&bytes[0..num_len]) };
+		str.parse::<f32>().unwrap()
+	}
+}
+
+/// Convert raw codepoint to char, handling 0 and surrogates -> REPLACEMENT_CHARACTER
+#[inline]
+fn codepoint_to_char(value: u32) -> char {
+	use crate::syntax::SURROGATE_RANGE;
+	if value == 0 || SURROGATE_RANGE.contains(&value) {
+		REPLACEMENT_CHARACTER
+	} else {
+		char::from_u32(value).unwrap_or(REPLACEMENT_CHARACTER)
 	}
 }
 
@@ -651,148 +899,129 @@ impl<'a> Lexer<'a> {
 		if self.source.len() as u32 == offset {
 			return Token::EOF;
 		}
-		let mut chars = self.source[offset as usize..].chars();
-		let c = chars.peek_nth(0);
-		// fast path for single character tokens
-		// '{'  '}'  '('  ')'  '['  ']'  ';' ',' ':'
-		let size = c as usize;
-		if size < 128 {
-			let token = SINGLE_CHAR_TOKENS[size];
+		let bytes = self.source.as_bytes();
+		let mut cursor = ByteCursor::new(&bytes[offset as usize..]);
+		let b = cursor.peek_byte(0);
+		// fast path for single character tokens (ASCII only)
+		if b < 128 {
+			let token = SINGLE_CHAR_TOKENS[b as usize];
 			if token != Token::EOF {
 				return token;
 			}
 			// fast path for identifiers
-			if is_ident_ascii_start(c) {
-				// https://drafts.csswg.org/css-syntax/#consume-token
-				// U+0055 LATIN CAPITAL LETTER U (U) / U+0075 LATIN SMALL LETTER U (u):
-				// If unicode ranges allowed is true and the input stream would start a
-				// unicode-range, reconsume and consume a unicode-range token.
-				if matches!(c, 'U' | 'u')
+			if is_ident_ascii_start(b as char) {
+				if matches!(b, b'U' | b'u')
 					&& self.features.intersects(Feature::UnicodeRange)
-					&& chars.would_start_unicode_range()
+					&& cursor.would_start_unicode_range()
 				{
-					return chars.consume_unicode_range_token();
+					return cursor.consume_unicode_range_token();
 				}
-				return chars.consume_ident_like_token(self.atoms);
+				return cursor.consume_ident_like_token(self.atoms);
 			}
 		}
+		let c = cursor.peek_char();
 		match c {
 			'\0' => {
-				// https://drafts.csswg.org/css-syntax-3/#input-preprocessing
-				// The input stream consists of the filtered code points pushed into it as the input byte stream is decoded.
-				// To filter code points from a stream of (unfiltered) code points input:
-				//  Replace any U+0000 NULL or surrogate code points in input with U+FFFD REPLACEMENT CHARACTER (�).
-				//
-				if !chars.is_last() {
-					let (_, c2, c3) = chars.peek3();
+				if !cursor.is_last() {
+					let (_, c2, c3) = cursor.peek3();
 					if is_ident_start_sequence(REPLACEMENT_CHARACTER, c2, c3) {
-						return chars.consume_ident_like_token(self.atoms);
+						return cursor.consume_ident_like_token(self.atoms);
 					}
 				}
-				if chars.next().is_some() { Token::REPLACEMENT_CHARACTER } else { Token::EOF }
+				if cursor.next_char().is_some() { Token::REPLACEMENT_CHARACTER } else { Token::EOF }
 			}
 			c if is_whitespace(c) && !self.features.contains(Feature::SeparateWhitespace) => {
-				let (len, style) = chars.consume_whitespace();
+				let (len, style) = cursor.consume_whitespace();
 				Token::new_whitespace(style, len)
 			}
 			// Whitespace Range
-			TAB => Token::new_whitespace(Whitespace::Tab, chars.consume_same(TAB)),
-			SPACE => Token::new_whitespace(Whitespace::Space, chars.consume_same(SPACE)),
+			TAB => Token::new_whitespace(Whitespace::Tab, cursor.consume_same(b'\t')),
+			SPACE => Token::new_whitespace(Whitespace::Space, cursor.consume_same(b' ')),
 			LF | CR | FF => {
-				// https://drafts.csswg.org/css-syntax/#input-preprocessing
-				//  Replace any U+000D CARRIAGE RETURN (CR) code points, U+000C FORM FEED
-				//  (FF) code points, or pairs of U+000D CARRIAGE RETURN (CR) followed by
-				//  U+000A LINE FEED (LF) in input by a single U+000A LINE FEED (LF) code
-				//  point.
-				let mut len = 0;
+				let mut len: u32 = 0;
 				loop {
-					let c = chars.peek_nth(0);
-					if !matches!(c, LF | CR | FF) {
+					let nb = cursor.peek_byte(0);
+					if !matches!(nb, b'\n' | b'\r' | 0x0C) {
 						break;
 					}
-					chars.next();
+					cursor.pos += 1;
 					len += 1;
 				}
 				Token::new_whitespace(Whitespace::Newline, len)
 			}
 			// Quote Range
-			c if is_quote(c) => chars.consume_string_token(),
+			c if is_quote(c) => cursor.consume_string_token(),
 			// Digit Range
-			c if c.is_ascii_digit() => chars.consume_numeric_token(self.atoms),
+			c if c.is_ascii_digit() => cursor.consume_numeric_token(self.atoms),
 			// Sign Range
 			'-' => {
-				if chars.peek_nth(1) == '-' && chars.peek_nth(2) == '>' {
-					chars.next();
-					chars.next();
-					chars.next();
+				if cursor.peek_byte(1) == b'-' && cursor.peek_byte(2) == b'>' {
+					cursor.advance_n(3);
 					return Token::CDC;
 				}
-				if is_ident_start_sequence(c, chars.peek_nth(1), chars.peek_nth(2)) {
-					return chars.consume_ident_like_token(self.atoms);
+				let c2 = cursor.peek_char_at(1);
+				let c3 = cursor.peek_char_at(1 + c2.len_utf8());
+				if is_ident_start_sequence(c, c2, c3) {
+					return cursor.consume_ident_like_token(self.atoms);
 				}
-				if chars.is_number_start() {
-					return chars.consume_numeric_token(self.atoms);
+				if cursor.is_number_start() {
+					return cursor.consume_numeric_token(self.atoms);
 				}
-				chars.next();
 				Token::DASH
 			}
 			// Dot or Plus
 			'.' | '+' => {
-				if chars.is_number_start() {
-					return chars.consume_numeric_token(self.atoms);
+				if cursor.is_number_start() {
+					return cursor.consume_numeric_token(self.atoms);
 				}
-				chars.next();
 				Token::new_delim(c)
 			}
 			// Less Than
 			'<' => {
-				chars.next();
-				if chars.peek_nth(0) == '!' && chars.peek_nth(1) == '-' && chars.peek_nth(2) == '-' {
-					chars.next();
-					chars.next();
-					chars.next();
+				cursor.pos += 1;
+				if cursor.peek_byte(0) == b'!' && cursor.peek_byte(1) == b'-' && cursor.peek_byte(2) == b'-' {
+					cursor.advance_n(3);
 					return Token::CDO;
 				}
 				Token::LESS_THAN
 			}
 			// Hash / Pound Sign
 			'#' => {
-				if is_ident(chars.peek_nth(1)) || is_escape_sequence(chars.peek_nth(1), chars.peek_nth(2)) {
-					chars.consume_hash_token(self.atoms)
+				let c1 = cursor.peek_char_at(1);
+				let c2 = cursor.peek_char_at(1 + c1.len_utf8());
+				if is_ident(c1) || is_escape_sequence(c1, c2) {
+					cursor.consume_hash_token(self.atoms)
 				} else {
-					chars.next();
 					Token::HASH
 				}
 			}
 			// Commercial At
 			'@' => {
-				chars.next();
-				let (c1, c2, c3) = chars.peek3();
+				cursor.pos += 1;
+				let (c1, c2, c3) = cursor.peek3();
 				if is_ident_start_sequence(c1, c2, c3) {
 					let (len, contains_non_lower_ascii, dashed, contains_escape, atom_bits, _) =
-						chars.consume_ident_sequence(self.atoms);
+						cursor.consume_ident_sequence(self.atoms);
 					return Token::new_atkeyword(contains_non_lower_ascii, dashed, contains_escape, atom_bits, len + 1);
 				}
 				Token::AT
 			}
 			// Reverse Solidus
 			'\\' => {
-				let (_, c2) = chars.peek2();
+				let c2 = cursor.peek_char_at(1);
 				if is_escape_sequence(c, c2) {
-					return chars.consume_ident_like_token(self.atoms);
+					return cursor.consume_ident_like_token(self.atoms);
 				}
-				chars.next();
 				Token::BACKSLASH
 			}
 			// Solidus
 			'/' => {
-				let (_, c2) = chars.peek2();
-				match c2 {
-					'*' => {
-						chars.next();
-						chars.next();
-						let mut len = 2;
-						let (c1, c2) = chars.peek2();
+				let b2 = cursor.peek_byte(1);
+				match b2 {
+					b'*' => {
+						cursor.advance_n(2);
+						let mut len: u32 = 2;
+						let (c1, c2) = cursor.peek2();
 						let comment_style = match c1 {
 							'*' if c2 != '/' => CommentStyle::BlockStar,
 							'#' => CommentStyle::BlockPound,
@@ -800,42 +1029,54 @@ impl<'a> Lexer<'a> {
 							'-' | '=' => CommentStyle::BlockHeading,
 							_ => CommentStyle::Block,
 						};
-						while let Some(c) = chars.next() {
-							len += c.len_utf8() as u32;
-							if c == '*' && chars.peek_nth(0) == '/' {
-								chars.next();
-								len += 1;
-								break;
+						loop {
+							let remaining = cursor.remaining_bytes();
+							match memchr::memchr(b'*', remaining) {
+								Some(offset) => {
+									let advance = offset + 1;
+									cursor.advance_n(advance);
+									len += advance as u32;
+									if cursor.peek_byte(0) == b'/' {
+										cursor.advance_n(1);
+										len += 1;
+										break;
+									}
+								}
+								None => {
+									len += remaining.len() as u32;
+									cursor.advance_n(remaining.len());
+									break;
+								}
 							}
 						}
 						Token::new_comment(comment_style, len)
 					}
-					'/' if self.features.intersects(Feature::SingleLineComments) => {
-						chars.next();
-						chars.next();
-						let mut len = 2;
-						let comment_style = match chars.peek_nth(0) {
-							'*' => CommentStyle::SingleStar,
-							'!' => CommentStyle::SingleBang,
+					b'/' if self.features.intersects(Feature::SingleLineComments) => {
+						cursor.advance_n(2);
+						let mut len: u32 = 2;
+						let comment_style = match cursor.peek_byte(0) {
+							b'*' => CommentStyle::SingleStar,
+							b'!' => CommentStyle::SingleBang,
 							_ => CommentStyle::Single,
 						};
-						while !is_newline_or_eof(chars.peek_nth(0)) {
-							chars.next();
-							len += 1;
-						}
+						let remaining = cursor.remaining_bytes();
+						let line_end = match memchr::memchr3(b'\n', b'\r', 0x0C, remaining) {
+							Some(offset) => offset,
+							None => remaining.len(),
+						};
+						let safe_end = match memchr::memchr(0, &remaining[..line_end]) {
+							Some(nul_pos) => nul_pos,
+							None => line_end,
+						};
+						len += safe_end as u32;
+						cursor.advance_n(safe_end);
 						Token::new_comment(comment_style, len)
 					}
-					_ => {
-						chars.next();
-						Token::SLASH
-					}
+					_ => Token::SLASH,
 				}
 			}
-			c if is_ident_start(c) => chars.consume_ident_like_token(self.atoms),
-			c => {
-				chars.next();
-				Token::new_delim(c)
-			}
+			c if is_ident_start(c) => cursor.consume_ident_like_token(self.atoms),
+			c => Token::new_delim(c),
 		}
 	}
 }
