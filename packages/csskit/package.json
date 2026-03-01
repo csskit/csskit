@@ -1,6 +1,6 @@
 {
     "name": "csskit",
-    "version": "0.0.17",
+    "version": "0.0.18",
     "description": "Refreshing CSS",
     "keywords": [],
     "license": "MIT",
@@ -11,12 +11,12 @@
         "./bin"
     ],
     "optionalDependencies": {
-        "csskit-linux-x64": "0.0.17",
-        "csskit-linux-arm64": "0.0.17",
-        "csskit-darwin-x64": "0.0.17",
-        "csskit-darwin-arm64": "0.0.17",
-        "csskit-win32-x64": "0.0.17",
-        "csskit-win32-arm64": "0.0.17"
+        "csskit-linux-x64": "0.0.18",
+        "csskit-linux-arm64": "0.0.18",
+        "csskit-darwin-x64": "0.0.18",
+        "csskit-darwin-arm64": "0.0.18",
+        "csskit-win32-x64": "0.0.18",
+        "csskit-win32-arm64": "0.0.18"
     },
     "funding": {
         "url": "https://github.com/sponsors/keithamus"

@@ -1,3 +1,54 @@
+## [0.0.18] - 2026-03-01
+
+### Other Changes
+- Chore(deps): update rust crate toml to v1 (#875) ([#875](https://github.com/csskit/csskit/pull/875))
+- Update css-tokenizer-tests (#887) ([#887](https://github.com/csskit/csskit/pull/887))
+- Chore(deps): update dependencies (patch) (#900) ([#900](https://github.com/csskit/csskit/pull/900))
+
+
+### Chromashift
+- chromashift: Update to support wide-gamut color spaces, out of gamut colors (#877) ([#877](https://github.com/csskit/csskit/pull/877))
+- chromashift: Implement css-color-4 raytrace gamut mapping (#879) ([#879](https://github.com/csskit/csskit/pull/879))
+- chromashift: Increase precision of display-p3 to sRGB conversion (#897) ([#897](https://github.com/csskit/csskit/pull/897))
+
+
+### Css_ast
+- css_ast: Implement gap rule list (#878) ([#878](https://github.com/csskit/csskit/pull/878))
+- Regenerate css_ast/src/values from csswg drafts (#881) ([#881](https://github.com/csskit/csskit/pull/881))
+- css_ast: Implement ColorMix (#889) ([#889](https://github.com/csskit/csskit/pull/889))
+- css_ast: Boxup more types (#890) ([#890](https://github.com/csskit/csskit/pull/890))
+- Implement ColorFunctionColor::to_chromashift() and extract shortest_color helper (#898) ([#898](https://github.com/csskit/csskit/pull/898))
+- Regenerate css_ast/src/values from csswg drafts (#899) ([#899](https://github.com/csskit/csskit/pull/899))
+- css_ast: Remove StringOrUrl type (#909) ([#909](https://github.com/csskit/csskit/pull/909))
+
+
+### Css_lexer
+- css_lexer: Introduce UnicodeRange token kind. (#891) ([#891](https://github.com/csskit/csskit/pull/891))
+- css_lexer: Add "Bad" tokens. (#892) ([#892](https://github.com/csskit/csskit/pull/892))
+- css_lexer: Re-encode escapes in strings if they're invalid for unescaping (#894) ([#894](https://github.com/csskit/csskit/pull/894))
+- css_lexer: Re-encode escapes in idents if they're invalid for unescaping (#896) ([#896](https://github.com/csskit/csskit/pull/896))
+- css_lexer: Rewrite to use Bytes, memchr (#907) ([#907](https://github.com/csskit/csskit/pull/907))
+
+
+### Css_parse
+- css_parse: Add BumpBox type and blanket trait impls for Box types (#888) ([#888](https://github.com/csskit/csskit/pull/888))
+- css_parse: flush trailing semicolons in CursorCompactWriteSink on drop (#908) ([#908](https://github.com/csskit/csskit/pull/908))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#882) ([#882](https://github.com/csskit/csskit/pull/882))
+
+
+### Csskit_transform
+- csskit_transform: introduce css-minify-tests (#886) ([#886](https://github.com/csskit/csskit/pull/886))
+- csskit_transform: snapshot css-minify-tests failures instead of asserting count (#893) ([#893](https://github.com/csskit/csskit/pull/893))
+- csskit_transform: reduce Urls to Strings where possible (#910) ([#910](https://github.com/csskit/csskit/pull/910))
+
+
+### Csskit_vscode
+- chore(deps): update dependencies (minor) (#884) ([#884](https://github.com/csskit/csskit/pull/884))
+- chore(deps): update dependencies to v1.49.0 (minor) (#901) ([#901](https://github.com/csskit/csskit/pull/901))
+
 ## [0.0.17] - 2026-02-11
 
 ### Css_ast
@@ -12,6 +63,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#852) ([#852](https://github.com/csskit/csskit/pull/852))
+- Release v0.0.17 (#858) ([#858](https://github.com/csskit/csskit/pull/858))
 
 
 ### Csskit_vscode
