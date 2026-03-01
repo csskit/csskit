@@ -16,11 +16,13 @@ mod css_minifier;
 mod reduce_colors;
 mod reduce_lengths;
 mod reduce_time_units;
+mod reduce_urls;
 
 pub use css_minifier::*;
 pub use reduce_colors::*;
 pub use reduce_lengths::*;
 pub use reduce_time_units::*;
+pub use reduce_urls::*;
 
 #[cfg(test)]
 pub mod test_helpers;

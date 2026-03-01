@@ -215,22 +215,6 @@ FAIL gradients/0005
 -a{background:radial-gradient(ellipse at center,red,blue)}
 +a{background:radial-gradient(red,#00f)}
 
-FAIL import/0001
--@import url("foo.css");
-+@import"foo.css";
-
-FAIL import/0002
--@import url("foo.css")screen;
-+@import"foo.css"screen;
-
-FAIL import/0003
--@import url(foo.css);
-+@import"foo.css";
-
-FAIL import/0004
--@import url("foo.css")layer;
-+@import"foo.css"layer;
-
 FAIL import/0005
 -@import url("foo.css")layer(base)supports(foo:bar);
 +@import"foo.css"layer(base)supports(foo:bar);
