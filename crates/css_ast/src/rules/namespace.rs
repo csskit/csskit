@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::StringOrUrl;
+use crate::UrlOrString;
 
 /// <https://drafts.csswg.org/css-namespaces/#at-ruledef-namespace>
 ///
@@ -17,7 +17,7 @@ pub struct NamespaceRule {
 	#[atom(CssAtomSet::Namespace)]
 	pub name: T![AtKeyword],
 	pub prefix: Option<T![Ident]>,
-	pub resource: StringOrUrl,
+	pub resource: UrlOrString,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub semicolon: Option<T![;]>,
 }

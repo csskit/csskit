@@ -354,7 +354,6 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum SpatialNavigationFunctionStyleValue { }",
   "pub enum SpeakAsStyleValue { }",
   "pub enum SpeakStyleValue { }",
-  "pub enum StringOrUrl { }",
   "pub enum StrokeAlignStyleValue { }",
   "pub enum StrokeBreakStyleValue { }",
   "pub enum StrokeLinecapStyleValue { }",
