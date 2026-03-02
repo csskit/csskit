@@ -3,6 +3,7 @@
 use core::fmt;
 mod a98_rgb;
 mod channels;
+mod color_space;
 mod conversion;
 mod display_p3;
 mod distance;
@@ -29,6 +30,7 @@ mod xyzd65;
 
 pub use a98_rgb::A98Rgb;
 pub use channels::ToAlpha;
+pub use color_space::ColorSpace;
 pub use display_p3::DisplayP3;
 pub use distance::ColorDistance;
 pub use gamut::Gamut;

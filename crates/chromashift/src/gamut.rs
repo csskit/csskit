@@ -471,6 +471,52 @@ impl Gamut for XyzD65 {
 	}
 }
 
+impl Color {
+	/// Returns the [`ColorSpace`] of this colour, if it maps to a bounded RGB gamut.
+	///
+	/// Perceptual and CIE spaces (`Lab`, `Lch`, `Oklab`, `Oklch`, `XyzD50`, `XyzD65`) return `None` — they can represent
+	/// colours outside any single RGB gamut.
+	pub fn color_space(&self) -> Option<ColorSpace> {
+		match self {
+			Color::Srgb(_)
+			| Color::Hex(_)
+			| Color::Named(_)
+			| Color::Hsl(_)
+			| Color::Hwb(_)
+			| Color::Hsv(_)
+			| Color::LinearRgb(_) => Some(ColorSpace::Srgb),
+			Color::DisplayP3(_) => Some(ColorSpace::DisplayP3),
+			Color::A98Rgb(_) => Some(ColorSpace::A98Rgb),
+			Color::ProphotoRgb(_) => Some(ColorSpace::ProphotoRgb),
+			Color::Rec2020(_) => Some(ColorSpace::Rec2020),
+			Color::Lab(_) | Color::Lch(_) | Color::Oklab(_) | Color::Oklch(_) | Color::XyzD50(_) | Color::XyzD65(_) => {
+				None
+			}
+		}
+	}
+
+	/// Returns `true` if this colour can be represented in `space` without clamping.
+	///
+	/// If the colour's own space is a subset of `space` and the colour is in gamut of its own space, this returns `true`
+	/// without conversion.  Otherwise the colour is converted to the target space (via `XyzD65`) and the RGB channels are
+	/// checked against `[0,1]`.
+	pub fn in_gamut_of(&self, space: ColorSpace) -> bool {
+		if let Some(src) = self.color_space()
+			&& space.contains(src)
+			&& self.in_gamut()
+		{
+			return true;
+		}
+		match space {
+			ColorSpace::Srgb => LinearRgb::from(XyzD65::from(*self)).in_gamut(),
+			ColorSpace::DisplayP3 => DisplayP3::from(XyzD65::from(*self)).in_gamut(),
+			ColorSpace::A98Rgb => A98Rgb::from(XyzD65::from(*self)).in_gamut(),
+			ColorSpace::ProphotoRgb => ProphotoRgb::from(XyzD65::from(*self)).in_gamut(),
+			ColorSpace::Rec2020 => Rec2020::from(XyzD65::from(*self)).in_gamut(),
+		}
+	}
+}
+
 impl Gamut for Color {
 	fn in_gamut(&self) -> bool {
 		match self {

@@ -482,3 +482,88 @@ fn named_try_from_other_spaces() {
 	assert!(matches!(Named::try_from(translucent), Err(ToNamedError::NotOpaque)));
 	assert!(matches!(Named::try_from(Color::Hex(translucent)), Err(ToNamedError::NotOpaque)));
 }
+
+#[test]
+fn color_space_partial_ord() {
+	// Every space equals itself.
+	assert_eq!(ColorSpace::Srgb.partial_cmp(&ColorSpace::Srgb), Some(core::cmp::Ordering::Equal));
+
+	// sRGB < every wider gamut.
+	assert!(ColorSpace::Srgb < ColorSpace::DisplayP3);
+	assert!(ColorSpace::Srgb < ColorSpace::A98Rgb);
+	assert!(ColorSpace::Srgb < ColorSpace::Rec2020);
+	assert!(ColorSpace::Srgb < ColorSpace::ProphotoRgb);
+
+	// Display P3 < Rec2020 < ProPhoto RGB
+	assert!(ColorSpace::DisplayP3 < ColorSpace::Rec2020);
+	assert!(ColorSpace::Rec2020 < ColorSpace::ProphotoRgb);
+	assert!(ColorSpace::DisplayP3 < ColorSpace::ProphotoRgb);
+
+	// A98 RGB < ProPhoto RGB
+	assert!(ColorSpace::A98Rgb < ColorSpace::ProphotoRgb);
+
+	// Display P3 and A98 RGB are incomparable.
+	assert_eq!(ColorSpace::DisplayP3.partial_cmp(&ColorSpace::A98Rgb), None);
+	assert_eq!(ColorSpace::A98Rgb.partial_cmp(&ColorSpace::DisplayP3), None);
+
+	// A98 RGB and Rec2020 are incomparable.
+	assert_eq!(ColorSpace::A98Rgb.partial_cmp(&ColorSpace::Rec2020), None);
+}
+
+#[test]
+fn color_space_contains() {
+	// contains() is equivalent to >=
+	assert!(ColorSpace::DisplayP3.contains(ColorSpace::Srgb));
+	assert!(ColorSpace::DisplayP3.contains(ColorSpace::DisplayP3));
+	assert!(!ColorSpace::Srgb.contains(ColorSpace::DisplayP3));
+	assert!(!ColorSpace::DisplayP3.contains(ColorSpace::A98Rgb));
+	assert!(ColorSpace::ProphotoRgb.contains(ColorSpace::Rec2020));
+}
+
+#[test]
+fn in_gamut_of_srgb_for_srgb_native_colors() {
+	// sRGB-native Color variants should be in the sRGB gamut.
+	assert!(Color::Srgb(Srgb::new(255, 0, 0, 100.0)).in_gamut_of(ColorSpace::Srgb));
+	assert!(Color::Hex(Hex::new(0xFF0000FF)).in_gamut_of(ColorSpace::Srgb));
+	assert!(Color::Named(Named::Red).in_gamut_of(ColorSpace::Srgb));
+	assert!(Color::Hsl(Hsl::new(0.0, 100.0, 50.0, 100.0)).in_gamut_of(ColorSpace::Srgb));
+	assert!(Color::Hwb(Hwb::new(0.0, 0.0, 0.0, 100.0)).in_gamut_of(ColorSpace::Srgb));
+}
+
+#[test]
+fn in_gamut_of_display_p3_wider_than_srgb() {
+	// Display P3 red (1,0,0) is out of sRGB but in Display P3.
+	let p3_red = Color::DisplayP3(DisplayP3::new(1.0, 0.0, 0.0, 100.0));
+	assert!(!p3_red.in_gamut_of(ColorSpace::Srgb));
+	assert!(p3_red.in_gamut_of(ColorSpace::DisplayP3));
+
+	// Display P3 green (0,1,0) is out of sRGB but in Display P3.
+	let p3_green = Color::DisplayP3(DisplayP3::new(0.0, 1.0, 0.0, 100.0));
+	assert!(!p3_green.in_gamut_of(ColorSpace::Srgb));
+	assert!(p3_green.in_gamut_of(ColorSpace::DisplayP3));
+}
+
+#[test]
+fn in_gamut_of_srgb_color_fits_all_wider_gamuts() {
+	// Plain sRGB red should be in gamut for all wider RGB spaces.
+	let red = Color::Srgb(Srgb::new(255, 0, 0, 100.0));
+	assert!(red.in_gamut_of(ColorSpace::Srgb));
+	assert!(red.in_gamut_of(ColorSpace::DisplayP3));
+	assert!(red.in_gamut_of(ColorSpace::A98Rgb));
+	assert!(red.in_gamut_of(ColorSpace::ProphotoRgb));
+	assert!(red.in_gamut_of(ColorSpace::Rec2020));
+}
+
+#[test]
+fn in_gamut_of_perceptual_space_checks_target_gamut() {
+	// An Oklch colour with very high chroma should be out of sRGB gamut.
+	let vivid = Color::Oklch(Oklch::new(0.7, 0.35, 150.0, 100.0));
+	assert!(!vivid.in_gamut_of(ColorSpace::Srgb));
+
+	// But it may still be in Display P3 gamut (P3 is wider).
+	let moderate = Color::Oklch(Oklch::new(0.7, 0.2, 150.0, 100.0));
+	// P3 should accept at least as many colours as sRGB.
+	if moderate.in_gamut_of(ColorSpace::Srgb) {
+		assert!(moderate.in_gamut_of(ColorSpace::DisplayP3));
+	}
+}

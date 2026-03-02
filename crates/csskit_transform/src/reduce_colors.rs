@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use chromashift::{Hex, Named, Srgb};
+use chromashift::{ColorSpace, Hex, Named, Srgb};
 use css_ast::{Color, ToChromashift, Visitable};
 
 pub struct ReduceColors<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
@@ -29,11 +29,17 @@ where
 		};
 		let len = color.to_span().len() as usize;
 
-		let srgb = Srgb::from(chroma_color);
+		// Only generate sRGB-based candidates if the colour is within the sRGB gamut.
+		// Converting an out-of-gamut colour (e.g. display-p3 1 0 0) to sRGB would silently
+		// clamp the values, changing the actual colour.
+		if !chroma_color.in_gamut_of(ColorSpace::Srgb) {
+			return;
+		}
+
 		let Some(candidate) = [
-			Some(Hex::from(srgb).to_string()),
+			Some(Hex::from(Srgb::from(chroma_color)).to_string()),
 			Named::try_from(chroma_color).ok().map(|named| named.to_string()),
-			Some(srgb.to_string()),
+			Some(Srgb::from(chroma_color).to_string()),
 		]
 		.into_iter()
 		.flatten()
@@ -125,6 +131,16 @@ mod tests {
 			StyleSheet,
 			"a { color: color(display-p3 0.5 0.5 0.5); }",
 			"a { color: gray; }"
+		);
+	}
+
+	#[test]
+	fn no_transform_for_out_of_gamut_display_p3() {
+		assert_no_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color(display-p3 1 0 0); }"
 		);
 	}
 }
