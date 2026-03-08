@@ -6,7 +6,9 @@
 	gap: 1.5rem;
 	grid-template-columns: repeat(auto-fit, minmax(10ch, 1fr));
 
-	> p { display: none; }
+	> p {
+		display: none;
+	}
 
 	div {
 		display: grid;
@@ -22,7 +24,8 @@
 		order: -1;
 	}
 
-	h2, h3 {
+	h2,
+	h3 {
 		font-size: 1.2rem;
 		color: var(--text-1);
 		font-weight: 500;
@@ -64,11 +67,17 @@ table {
 		margin-top: 0.1rem;
 		line-height: 1.1;
 	}
-
 }
 
 .error-text {
 	color: var(--color-error, #dc2626);
 	font-weight: 500;
 	font-size: 0.9rem;
+}
+
+.apexcharts-canvas {
+	content-visibility: auto;
+	contain: strict;
+	min-height: 300px;
+	min-width: 100%;
 }
