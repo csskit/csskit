@@ -47,7 +47,7 @@ FAIL colors/0027
 
 FAIL colors/0029
 -a{color:color-mix(in oklch,red 50%,blue 50%)}
-+a{color:oklch(53.9985% .285449 326.643)}
++a{color:oklch(54% .285 326.6)}
 
 FAIL colors/0031
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
@@ -64,6 +64,42 @@ FAIL colors/0033
 FAIL colors/0034
 -a{border:1px solid blue}
 +a{border:1px solid#00f}
+
+FAIL colors/0035
+-a{color:color(display-p3 1.2 -.3 .5)}
++a{color:color(display-p3 1.2-.3 .5)}
+
+FAIL colors/0038
+-a{color:color-mix(in srgb,currentcolor 50%,red 50%)}
++a{color:color-mix(in srgb,currentcolor,red)}
+
+FAIL colors/0039
+-a{color:color-mix(in oklch shorter hue,currentcolor,red)}
++a{color:color-mix(in oklch,currentcolor,red)}
+
+FAIL colors/0040
+-a{color:color-mix(in oklch,rgba(255,255,255,1),currentcolor)}
++a{color:color-mix(in oklch,#fff,currentcolor)}
+
+FAIL colors/0042
+-a{color:purple}
++a{color:#80008099}
+
+FAIL colors/0044
+-a{color:color-mix(in oklch,lime,blue)}
++a{color:oklch(.659 .304 203.3)}
+
+FAIL colors/0045
+-a{color:#7f40bf}
++a{color:#8040c0}
+
+FAIL colors/0046
+-a{color:oklch(.55432 .12276 180.4567/.74567);background-color:#52a746}
++a{color:oklch(.554 .123 180.5/.746);background-color:oklab(.654 -.123 .099)}
+
+FAIL colors/0047
+-a{color:#5d82cebd;background-color:#6b8b4a}
++a{color:lch(54.3 43.8 274.5/.746);background-color:lab(54.3 -20.5 30.8)}
 
 FAIL comments/0003
 -a{color:red}
@@ -82,19 +118,15 @@ FAIL container/0002
 
 FAIL container/0004
 -@container (min-width:700px){a{color:red}}
-+@container (width>=700px){a{color:red}}
++@container(width>=700px){a{color:red}}
 
 FAIL container/0005
 -@container (max-width:500px){a{color:red}}
-+@container (width<=500px){a{color:red}}
++@container(width<=500px){a{color:red}}
 
 FAIL container/0006
 -@container sidebar (min-width:700px){a{color:red}}
 +@container sidebar (width>=700px){a{color:red}}
-
-FAIL counter-style/0001
--@counter-style thumbs{system:cyclic;symbols:"👍";suffix:" "}
-+@counter-style thumbs{system:cyclic;symbols:"\1F44D";suffix:" "}
 
 FAIL counter-style/0002
 -@counter-style empty{}
@@ -339,8 +371,8 @@ FAIL scope/0001
 +@scope(.card){.title{color:red}}
 
 FAIL scope/0002
--@scope (.card)to (.card .content){a{color:blue}}
-+@scope(.card)to (.card .content){a{color:blue}}
+-@scope (.card)to (.card .content){a{color:red}}
++@scope(.card)to (.card .content){a{color:red}}
 
 FAIL scope/0003
 -@scope (.card){}
@@ -689,6 +721,14 @@ FAIL shorthands/0072
 -a{inset-block-start:10px;inset-block:20px}
 +a{inset-block:20px}
 
+FAIL shorthands/0073
+-a{transition:all 0}
++a{transition:all}
+
+FAIL shorthands/0074
+-a{flex:0 0 0}
++a{flex:0 0}
+
 FAIL supports/0001
 -@supports(hanging-punctuation:first){a{hanging-punctuation:first}}
 +@supports (hanging-punctuation:first){a{hanging-punctuation:first}}
@@ -740,6 +780,14 @@ FAIL transforms/0008
 FAIL transforms/0009
 -a{transform:rotate3d(1,0,0,20deg)}
 +a{transform:rotateX(20deg)}
+
+FAIL transforms/0010
+-a{transform:scale(50%)}
++a{transform:scale(.5)}
+
+FAIL transforms/0011
+-a{scale:200%}
++a{scale:2}
 
 FAIL values/0001
 -a{font-weight:bold}
@@ -951,7 +999,7 @@ FAIL values/0070
 
 FAIL whitespace/0010
 -@supports (display:grid)and (gap:10px){a{display:grid; gap:10px}}
-+@supports (display:grid) and (gap:10px){a{display:grid;gap:10px}}
++@supports(display:grid)and (gap:10px){a{display:grid;gap:10px}}
 
 FAIL whitespace/0012
 -a{width:calc(100% * 2)}
@@ -966,13 +1014,5 @@ FAIL whitespace/0015
 +a{font:16px/1.5 sans-serif}
 
 FAIL zero-units/0002
--a{transition:all 0}
-+a{transition:all 0s}
-
-FAIL zero-units/0004
--a{padding:0 10px 0 10px}
-+a{padding:0 10px}
-
-FAIL zero-units/0007
--a{flex:0 0 0}
-+a{flex:0 0}
+-a{transition-delay:0}
++a{transition-delay:0s}
