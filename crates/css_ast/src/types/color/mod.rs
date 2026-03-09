@@ -135,10 +135,10 @@ mod tests {
 		use crate::assert_visits;
 		assert_visits!("#fff", Color);
 		assert_visits!("black", Color);
-		assert_visits!("rgb(255 255 255)", Color, ColorFunction);
-		assert_visits!("rgba(255,255,255,0.5)", Color, ColorFunction);
-		assert_visits!("lab(63.673% 51.577 5.811)", Color, ColorFunction);
-		assert_visits!("hwb(740deg 20% 30%/50%)", Color, ColorFunction);
+		assert_visits!("rgb(255 255 255)", Color, ColorFunction, RgbFunction);
+		assert_visits!("rgba(255,255,255,0.5)", Color, ColorFunction, RgbaFunction);
+		assert_visits!("lab(63.673% 51.577 5.811)", Color, ColorFunction, LabFunction);
+		assert_visits!("hwb(740deg 20% 30%/50%)", Color, ColorFunction, HwbFunction);
 	}
 
 	#[test]

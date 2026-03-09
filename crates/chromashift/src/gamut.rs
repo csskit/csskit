@@ -228,9 +228,13 @@ fn raytrace_box(start: &[f64; 3], end: &[f64; 3]) -> Option<[f64; 3]> {
 	Some([start[0] + direction[0] * tnear, start[1] + direction[1] * tnear, start[2] + direction[2] * tnear])
 }
 
-/// Helper: checks an f64 is in [0.0, 1.0]
+/// Tolerance for floating-point noise accumulated during colour-space round-trips
+/// (e.g. XYZ to LinearRgb can produce values like −2.9e-17 for a channel that should be 0).
+const GAMUT_EPSILON: f64 = 1e-6;
+
+/// Helper: checks an f64 is in [0.0, 1.0] with [`GAMUT_EPSILON`] tolerance.
 fn in_unit(v: f64) -> bool {
-	(0.0..=1.0).contains(&v)
+	(-GAMUT_EPSILON..=1.0 + GAMUT_EPSILON).contains(&v)
 }
 
 /// Helper: checks an f32 is in [0.0, 100.0]

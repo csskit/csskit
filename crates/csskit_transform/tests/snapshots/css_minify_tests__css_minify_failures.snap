@@ -38,7 +38,7 @@ FAIL colors/0021
 +a{color:green}
 
 FAIL colors/0024
--a{color:color-mix(in srgb,rgb(none 0 0)50%,rgb(200 0 0)50%)}
+-a{color:color-mix(in srgb,rgb(none 0 0),#c80000)}
 +a{color:#c80000}
 
 FAIL colors/0027
@@ -46,7 +46,7 @@ FAIL colors/0027
 +a{color:oklab(.5 -.1 .1)}
 
 FAIL colors/0029
--a{color:color-mix(in oklch,red 50%,blue 50%)}
+-a{color:oklch(.54 .2854 326.64)}
 +a{color:oklch(54% .285 326.6)}
 
 FAIL colors/0031
@@ -69,24 +69,8 @@ FAIL colors/0035
 -a{color:color(display-p3 1.2 -.3 .5)}
 +a{color:color(display-p3 1.2-.3 .5)}
 
-FAIL colors/0038
--a{color:color-mix(in srgb,currentcolor 50%,red 50%)}
-+a{color:color-mix(in srgb,currentcolor,red)}
-
-FAIL colors/0039
--a{color:color-mix(in oklch shorter hue,currentcolor,red)}
-+a{color:color-mix(in oklch,currentcolor,red)}
-
-FAIL colors/0040
--a{color:color-mix(in oklch,rgba(255,255,255,1),currentcolor)}
-+a{color:color-mix(in oklch,#fff,currentcolor)}
-
-FAIL colors/0042
--a{color:purple}
-+a{color:#80008099}
-
 FAIL colors/0044
--a{color:color-mix(in oklch,lime,blue)}
+-a{color:oklch(.66 .304 203.27)}
 +a{color:oklch(.659 .304 203.3)}
 
 FAIL colors/0045

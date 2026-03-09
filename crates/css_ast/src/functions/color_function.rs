@@ -58,7 +58,7 @@ impl<'a> Parse<'a> for CommaOrSlash {
 /// <https://drafts.csswg.org/css-color/#typedef-color-function>
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorFunction<'a> {
 	Color(BumpBox<'a, ColorFunctionColor>),

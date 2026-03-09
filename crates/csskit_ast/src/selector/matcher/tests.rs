@@ -611,7 +611,7 @@ fn rule_pseudo() {
 
 #[test]
 fn function_pseudo() {
-	assert_query!("a { color: rgb(255, 0, 0); }", "*:function", 1, [NodeId::ColorFunction]);
+	assert_query!("a { color: rgb(255, 0, 0); }", "*:function", 2, [NodeId::ColorFunction, NodeId::RgbFunction]);
 	assert_query!(
 		"a { background: linear-gradient(red, blue); transform: rotate(45deg); }",
 		"*:function",

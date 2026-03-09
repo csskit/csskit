@@ -97,6 +97,87 @@ impl fmt::Display for Color {
 	}
 }
 
+impl Color {
+	/// Returns a copy of this colour with a new alpha value (0.0–100.0).
+	///
+	/// For `Named` colours (which are always fully opaque), setting a non-100 alpha converts to `Srgb`. For `Hex`,
+	/// the colour is round-tripped through `Srgb` to apply the new alpha.
+	pub fn with_alpha(self, alpha: f32) -> Self {
+		match self {
+			Color::A98Rgb(mut c) => {
+				c.alpha = alpha;
+				Color::A98Rgb(c)
+			}
+			Color::DisplayP3(mut c) => {
+				c.alpha = alpha;
+				Color::DisplayP3(c)
+			}
+			Color::Hsv(mut c) => {
+				c.alpha = alpha;
+				Color::Hsv(c)
+			}
+			Color::Hsl(mut c) => {
+				c.alpha = alpha;
+				Color::Hsl(c)
+			}
+			Color::Hex(h) => {
+				let mut srgb: Srgb = h.into();
+				srgb.alpha = alpha;
+				Color::Srgb(srgb)
+			}
+			Color::Hwb(mut c) => {
+				c.alpha = alpha;
+				Color::Hwb(c)
+			}
+			Color::Lab(mut c) => {
+				c.alpha = alpha;
+				Color::Lab(c)
+			}
+			Color::Lch(mut c) => {
+				c.alpha = alpha;
+				Color::Lch(c)
+			}
+			Color::LinearRgb(mut c) => {
+				c.alpha = alpha;
+				Color::LinearRgb(c)
+			}
+			Color::Named(n) => {
+				let mut srgb: Srgb = n.into();
+				srgb.alpha = alpha;
+				Color::Srgb(srgb)
+			}
+			Color::Oklab(mut c) => {
+				c.alpha = alpha;
+				Color::Oklab(c)
+			}
+			Color::Oklch(mut c) => {
+				c.alpha = alpha;
+				Color::Oklch(c)
+			}
+			Color::ProphotoRgb(mut c) => {
+				c.alpha = alpha;
+				Color::ProphotoRgb(c)
+			}
+			Color::Rec2020(mut c) => {
+				c.alpha = alpha;
+				Color::Rec2020(c)
+			}
+			Color::Srgb(mut c) => {
+				c.alpha = alpha;
+				Color::Srgb(c)
+			}
+			Color::XyzD50(mut c) => {
+				c.alpha = alpha;
+				Color::XyzD50(c)
+			}
+			Color::XyzD65(mut c) => {
+				c.alpha = alpha;
+				Color::XyzD65(c)
+			}
+		}
+	}
+}
+
 impl ToAlpha for Color {
 	fn to_alpha(&self) -> f32 {
 		match self {

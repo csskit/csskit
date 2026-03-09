@@ -8,16 +8,20 @@ use crate::Percentage;
 /// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ColorMixFunction<'a> {
 	#[atom(CssAtomSet::ColorMix)]
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![Function],
 	pub interpolation: ColorInterpolationMethod,
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub comma: T![,],
 	pub first: ColorMixPart<'a>,
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub comma2: T![,],
 	pub second: ColorMixPart<'a>,
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub close: T![')'],
 }
 
@@ -181,13 +185,72 @@ impl<'a> Parse<'a> for ColorMixPart<'a> {
 }
 
 #[cfg(feature = "chromashift")]
+impl HueInterpolationDirection {
+	/// Converts this AST node to the corresponding chromashift hue interpolation direction.
+	pub fn to_hue_interpolation(&self) -> chromashift::HueInterpolation {
+		match self {
+			Self::Shorter(_) => chromashift::HueInterpolation::Shorter,
+			Self::Longer(_) => chromashift::HueInterpolation::Longer,
+			Self::Increasing(_) => chromashift::HueInterpolation::Increasing,
+			Self::Decreasing(_) => chromashift::HueInterpolation::Decreasing,
+		}
+	}
+}
+
+#[cfg(feature = "chromashift")]
+impl InterpolationColorSpace {
+	/// Mixes two colours in this interpolation colour space.
+	///
+	/// `percentage` is how much of the second colour to use (0.0 = all first, 100.0 = all second).
+	pub fn mix(&self, first: chromashift::Color, second: chromashift::Color, percentage: f64) -> chromashift::Color {
+		use chromashift::{
+			A98Rgb, ColorMix, ColorMixPolar, DisplayP3, Hsl, Hwb, Lab, Lch, LinearRgb, Oklab, Oklch, ProphotoRgb,
+			Rec2020, Srgb, XyzD50, XyzD65,
+		};
+		match self {
+			Self::Rectangular(space) => match space {
+				RectangularColorSpace::Srgb(_) => chromashift::Color::Srgb(Srgb::mix(first, second, percentage)),
+				RectangularColorSpace::SrgbLinear(_) => {
+					chromashift::Color::LinearRgb(LinearRgb::mix(first, second, percentage))
+				}
+				RectangularColorSpace::DisplayP3(_) => {
+					chromashift::Color::DisplayP3(DisplayP3::mix(first, second, percentage))
+				}
+				RectangularColorSpace::A98Rgb(_) => chromashift::Color::A98Rgb(A98Rgb::mix(first, second, percentage)),
+				RectangularColorSpace::ProphotoRgb(_) => {
+					chromashift::Color::ProphotoRgb(ProphotoRgb::mix(first, second, percentage))
+				}
+				RectangularColorSpace::Rec2020(_) => {
+					chromashift::Color::Rec2020(Rec2020::mix(first, second, percentage))
+				}
+				RectangularColorSpace::Lab(_) => chromashift::Color::Lab(Lab::mix(first, second, percentage)),
+				RectangularColorSpace::Oklab(_) => chromashift::Color::Oklab(Oklab::mix(first, second, percentage)),
+				RectangularColorSpace::XyzD50(_) => chromashift::Color::XyzD50(XyzD50::mix(first, second, percentage)),
+				RectangularColorSpace::Xyz(_) | RectangularColorSpace::XyzD65(_) => {
+					chromashift::Color::XyzD65(XyzD65::mix(first, second, percentage))
+				}
+			},
+			Self::Polar(space, hue_method) => {
+				let dir = match hue_method {
+					None => chromashift::HueInterpolation::Shorter,
+					Some(him) => him.direction.to_hue_interpolation(),
+				};
+				match space {
+					PolarColorSpace::Hsl(_) => chromashift::Color::Hsl(Hsl::mix_polar(first, second, percentage, dir)),
+					PolarColorSpace::Hwb(_) => chromashift::Color::Hwb(Hwb::mix_polar(first, second, percentage, dir)),
+					PolarColorSpace::Lch(_) => chromashift::Color::Lch(Lch::mix_polar(first, second, percentage, dir)),
+					PolarColorSpace::Oklch(_) => {
+						chromashift::Color::Oklch(Oklch::mix_polar(first, second, percentage, dir))
+					}
+				}
+			}
+		}
+	}
+}
+
+#[cfg(feature = "chromashift")]
 impl crate::ToChromashift for ColorMixFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
-		use chromashift::{
-			A98Rgb, ColorMix, ColorMixPolar, DisplayP3, Hsl, HueInterpolation, Hwb, Lab, Lch, LinearRgb, Oklab, Oklch,
-			ProphotoRgb, Rec2020, Srgb, XyzD50, XyzD65,
-		};
-
 		let first_color = self.first.color.to_chromashift()?;
 		let second_color = self.second.color.to_chromashift()?;
 
@@ -211,77 +274,11 @@ impl crate::ToChromashift for ColorMixFunction<'_> {
 			return None;
 		}
 		let p1 = p1 / sum * 100.0;
-		let _p2 = p2 / sum * 100.0;
 
 		// The percentage for mixing is "how much of the second color"
-		// p1 is the first color's weight, so the second color's percentage is 100 - p1
 		let mix_percentage = 100.0 - p1;
 
-		let hue_direction = |method: &Option<HueInterpolationMethod>| -> HueInterpolation {
-			match method {
-				None => HueInterpolation::Shorter,
-				Some(him) => match him.direction {
-					HueInterpolationDirection::Shorter(_) => HueInterpolation::Shorter,
-					HueInterpolationDirection::Longer(_) => HueInterpolation::Longer,
-					HueInterpolationDirection::Increasing(_) => HueInterpolation::Increasing,
-					HueInterpolationDirection::Decreasing(_) => HueInterpolation::Decreasing,
-				},
-			}
-		};
-
-		let result = match &self.interpolation.color_space {
-			InterpolationColorSpace::Rectangular(space) => match space {
-				RectangularColorSpace::Srgb(_) => {
-					chromashift::Color::Srgb(Srgb::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::SrgbLinear(_) => {
-					chromashift::Color::LinearRgb(LinearRgb::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::DisplayP3(_) => {
-					chromashift::Color::DisplayP3(DisplayP3::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::A98Rgb(_) => {
-					chromashift::Color::A98Rgb(A98Rgb::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::ProphotoRgb(_) => {
-					chromashift::Color::ProphotoRgb(ProphotoRgb::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::Rec2020(_) => {
-					chromashift::Color::Rec2020(Rec2020::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::Lab(_) => {
-					chromashift::Color::Lab(Lab::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::Oklab(_) => {
-					chromashift::Color::Oklab(Oklab::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::Xyz(_) | RectangularColorSpace::XyzD65(_) => {
-					chromashift::Color::XyzD65(XyzD65::mix(first_color, second_color, mix_percentage))
-				}
-				RectangularColorSpace::XyzD50(_) => {
-					chromashift::Color::XyzD50(XyzD50::mix(first_color, second_color, mix_percentage))
-				}
-			},
-			InterpolationColorSpace::Polar(space, hue_method) => {
-				let dir = hue_direction(hue_method);
-				match space {
-					PolarColorSpace::Hsl(_) => {
-						chromashift::Color::Hsl(Hsl::mix_polar(first_color, second_color, mix_percentage, dir))
-					}
-					PolarColorSpace::Hwb(_) => {
-						chromashift::Color::Hwb(Hwb::mix_polar(first_color, second_color, mix_percentage, dir))
-					}
-					PolarColorSpace::Lch(_) => {
-						chromashift::Color::Lch(Lch::mix_polar(first_color, second_color, mix_percentage, dir))
-					}
-					PolarColorSpace::Oklch(_) => {
-						chromashift::Color::Oklch(Oklch::mix_polar(first_color, second_color, mix_percentage, dir))
-					}
-				}
-			}
-		};
-
-		Some(result)
+		Some(self.interpolation.color_space.mix(first_color, second_color, mix_percentage))
 	}
 }
 
@@ -319,6 +316,42 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ColorMixFunction, "color-mix(in xyz-d50,red,green)");
 		assert_parse!(CssAtomSet::ATOMS, ColorMixFunction, "color-mix(in xyz-d65,red,green)");
 		assert_parse!(CssAtomSet::ATOMS, ColorMixFunction, "color-mix(in srgb-linear,red,green)");
+	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn test_visits() {
+		use crate::assert_visits;
+		// Named colors
+		assert_visits!("color-mix(in srgb, red, blue)", ColorMixFunction, ColorInterpolationMethod, Color, Color,);
+		// Function colors recurse into ColorFunction and its variant
+		assert_visits!(
+			"color-mix(in srgb, rgb(255, 0, 0), blue)",
+			ColorMixFunction,
+			ColorInterpolationMethod,
+			Color,
+			ColorFunction,
+			RgbFunction,
+			Color,
+		);
+		// Percentages are visited
+		assert_visits!(
+			"color-mix(in srgb, red 50%, blue 50%)",
+			ColorMixFunction,
+			ColorInterpolationMethod,
+			Color,
+			Percentage,
+			Color,
+			Percentage,
+		);
+		// Polar color space with hue interpolation
+		assert_visits!(
+			"color-mix(in oklch shorter hue, red, blue)",
+			ColorMixFunction,
+			ColorInterpolationMethod,
+			Color,
+			Color,
+		);
 	}
 
 	#[test]
