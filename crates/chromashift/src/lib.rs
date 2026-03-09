@@ -21,6 +21,7 @@ mod oklab;
 mod oklch;
 mod prophoto_rgb;
 mod rec2020;
+mod round;
 mod srgb;
 #[cfg(test)]
 mod tests;
@@ -47,6 +48,7 @@ pub use oklab::Oklab;
 pub use oklch::Oklch;
 pub use prophoto_rgb::ProphotoRgb;
 pub use rec2020::Rec2020;
+pub use round::PerceptualRound;
 pub use srgb::Srgb;
 pub use wcag::{WcagColorContrast, WcagLevel};
 pub use xyzd50::XyzD50;
@@ -228,7 +230,7 @@ impl From<Color> for XyzD65 {
 
 pub const COLOR_EPSILON: f64 = 0.0072;
 
-pub(crate) fn round_dp(f: f64, d: u32) -> f64 {
+pub fn round_dp(f: f64, d: u32) -> f64 {
 	let factor = 10u32.pow(d) as f64;
 	(f * factor).round() / factor
 }

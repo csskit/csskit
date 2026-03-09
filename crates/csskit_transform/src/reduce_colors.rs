@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use chromashift::{COLOR_EPSILON, ColorDistance, ColorSpace, Hex, Named, Srgb, ToAlpha};
+use chromashift::{COLOR_EPSILON, ColorDistance, ColorSpace, Hex, Named, PerceptualRound, Srgb, ToAlpha, round_dp};
 use css_ast::{
 	Color, ColorFunction, ColorMixFunction, HueInterpolationDirection, InterpolationColorSpace, ToChromashift,
 	Visitable,
@@ -34,11 +34,137 @@ impl Shortest for chromashift::Color {
 		[
 			Some(Hex::from(*self).to_string()),
 			Named::try_from(*self).ok().map(|named| named.to_string()),
-			Some(Srgb::from(*self).to_string()),
+			Some(Srgb::from(*self).round().to_string()),
 		]
 		.into_iter()
 		.flatten()
 		.min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)))
+	}
+}
+
+/// Formats a CSS alpha value (0–1) from chromashift's internal 0–100 representation.
+/// Returns `None` when the alpha is fully opaque (100.0).
+fn css_alpha(alpha: f32) -> Option<String> {
+	if alpha >= 100.0 {
+		return None;
+	}
+	Some(format!("{}", round_dp(alpha as f64 / 100.0, 3)))
+}
+
+/// Serialises a chromashift colour into valid CSS function syntax.
+///
+/// This produces the native-space representation (e.g. `lch(54.3 43.8 274.5 / 0.746)`) which the
+/// compact writer will then minify (removing leading zeros, collapsing whitespace around `/`, etc.).
+///
+/// Returns `None` for colour types that don't have a non-sRGB CSS function syntax (Hex, Named, Srgb, Hsv).
+trait ToCss {
+	fn to_css(&self) -> Option<String>;
+}
+
+macro_rules! impl_to_css_3ch {
+	($ty:ident, $name:literal, $c1:ident, $c2:ident, $c3:ident) => {
+		impl ToCss for chromashift::$ty {
+			fn to_css(&self) -> Option<String> {
+				let alpha = css_alpha(self.alpha);
+				if let Some(a) = alpha {
+					Some(format!(concat!($name, "({} {} {} / {})"), self.$c1, self.$c2, self.$c3, a))
+				} else {
+					Some(format!(concat!($name, "({} {} {})"), self.$c1, self.$c2, self.$c3))
+				}
+			}
+		}
+	};
+	($ty:ident, $name:literal, $c1:ident, $c2:ident: $suf2:literal, $c3:ident: $suf3:literal) => {
+		impl ToCss for chromashift::$ty {
+			fn to_css(&self) -> Option<String> {
+				let alpha = css_alpha(self.alpha);
+				if let Some(a) = alpha {
+					Some(format!(
+						concat!($name, "({} {}", $suf2, " {}", $suf3, " / {})"),
+						self.$c1, self.$c2, self.$c3, a
+					))
+				} else {
+					Some(format!(concat!($name, "({} {}", $suf2, " {}", $suf3, ")"), self.$c1, self.$c2, self.$c3))
+				}
+			}
+		}
+	};
+}
+
+macro_rules! impl_to_css_color_fn {
+	($ty:ident, $space:literal) => {
+		impl ToCss for chromashift::$ty {
+			fn to_css(&self) -> Option<String> {
+				let alpha = css_alpha(self.alpha);
+				if let Some(a) = alpha {
+					Some(format!(concat!("color(", $space, " {} {} {} / {})"), self.red, self.green, self.blue, a))
+				} else {
+					Some(format!(concat!("color(", $space, " {} {} {})"), self.red, self.green, self.blue))
+				}
+			}
+		}
+	};
+}
+
+macro_rules! impl_to_css_xyz {
+	($ty:ident, $space:literal) => {
+		impl ToCss for chromashift::$ty {
+			fn to_css(&self) -> Option<String> {
+				let alpha = css_alpha(self.alpha);
+				// CSS color(xyz-*) uses 0–1 scale; chromashift stores 0–100 internally.
+				// After dividing, re-apply round_dp(4) to eliminate float display artifacts
+				// (e.g. 18.76 / 100.0 = 0.18760000000000002 without this).
+				let x = round_dp(self.x / 100.0, 4);
+				let y = round_dp(self.y / 100.0, 4);
+				let z = round_dp(self.z / 100.0, 4);
+				if let Some(a) = alpha {
+					Some(format!(concat!("color(", $space, " {} {} {} / {})"), x, y, z, a))
+				} else {
+					Some(format!(concat!("color(", $space, " {} {} {})"), x, y, z))
+				}
+			}
+		}
+	};
+}
+
+impl_to_css_3ch!(Lab, "lab", lightness, a, b);
+impl_to_css_3ch!(Lch, "lch", lightness, chroma, hue);
+impl_to_css_3ch!(Oklab, "oklab", lightness, a, b);
+impl_to_css_3ch!(Oklch, "oklch", lightness, chroma, hue);
+impl_to_css_3ch!(Hsl, "hsl", hue, saturation: "%", lightness: "%");
+impl_to_css_3ch!(Hwb, "hwb", hue, whiteness: "%", blackness: "%");
+
+impl_to_css_color_fn!(DisplayP3, "display-p3");
+impl_to_css_color_fn!(LinearRgb, "srgb-linear");
+impl_to_css_color_fn!(A98Rgb, "a98-rgb");
+impl_to_css_color_fn!(ProphotoRgb, "prophoto-rgb");
+impl_to_css_color_fn!(Rec2020, "rec2020");
+
+impl_to_css_xyz!(XyzD50, "xyz-d50");
+impl_to_css_xyz!(XyzD65, "xyz-d65");
+
+impl ToCss for chromashift::Color {
+	fn to_css(&self) -> Option<String> {
+		match self {
+			chromashift::Color::Lab(c) => c.to_css(),
+			chromashift::Color::Lch(c) => c.to_css(),
+			chromashift::Color::Oklab(c) => c.to_css(),
+			chromashift::Color::Oklch(c) => c.to_css(),
+			chromashift::Color::Hsl(c) => c.to_css(),
+			chromashift::Color::Hwb(c) => c.to_css(),
+			chromashift::Color::DisplayP3(c) => c.to_css(),
+			chromashift::Color::LinearRgb(c) => c.to_css(),
+			chromashift::Color::A98Rgb(c) => c.to_css(),
+			chromashift::Color::ProphotoRgb(c) => c.to_css(),
+			chromashift::Color::Rec2020(c) => c.to_css(),
+			chromashift::Color::XyzD50(c) => c.to_css(),
+			chromashift::Color::XyzD65(c) => c.to_css(),
+			// sRGB types don't need native-space CSS — they use Shortest
+			chromashift::Color::Hex(_)
+			| chromashift::Color::Named(_)
+			| chromashift::Color::Srgb(_)
+			| chromashift::Color::Hsv(_) => None,
+		}
 	}
 }
 
@@ -61,19 +187,21 @@ where
 		};
 		let len = color.to_span().len() as usize;
 
-		// Only generate sRGB-based candidates if the colour is within the sRGB gamut.
-		// Converting an out-of-gamut colour (e.g. display-p3 1 0 0) to sRGB would silently
-		// clamp the values, changing the actual colour.
-		if !chroma_color.in_gamut_of(ColorSpace::Srgb) {
+		if chroma_color.in_gamut_of(ColorSpace::Srgb)
+			&& let Some(candidate) = chroma_color.shortest()
+			&& candidate.len() < len
+		{
+			self.transformer.replace_parsed::<Color>(color.to_span(), &candidate);
 			return;
 		}
 
-		let Some(candidate) = chroma_color.shortest() else {
-			return;
-		};
-
-		if candidate.len() < len {
-			self.transformer.replace_parsed::<Color>(color.to_span(), &candidate);
+		// Try the native-space rounded form. This preserves the original colour space
+		// while reducing precision to perceptually safe levels.
+		let rounded = chroma_color.round();
+		if let Some(css) = rounded.to_css()
+			&& css.len() < len
+		{
+			self.transformer.replace_parsed::<Color>(color.to_span(), &css);
 		}
 	}
 
@@ -153,19 +281,18 @@ where
 			let mixed_alpha = (mixed.to_alpha() as f64 / 100.0 * alpha_mult * 100.0) as f32;
 			let mixed = mixed.with_alpha(mixed_alpha);
 
-			// Only convert to sRGB hex/named if the result is in sRGB gamut.
-			// Converting out-of-gamut colors to hex silently clamps, changing the color.
-			let candidate = if mixed.in_gamut_of(ColorSpace::Srgb) {
-				mixed.shortest()
-			} else {
-				// Out of sRGB gamut — output in the native interpolation color space
-				Some(mixed.to_string())
-			};
+			// Try the perceptually-rounded native-space form first, then sRGB
+			// candidates if the result is in gamut.
+			let rounded = mixed.round();
+			let native_css = rounded.to_css();
+			let srgb_css = if mixed.in_gamut_of(ColorSpace::Srgb) { mixed.shortest() } else { None };
+			let candidate =
+				native_css.into_iter().chain(srgb_css).min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)));
 
-			if let Some(candidate) = candidate
+			if let Some(ref candidate) = candidate
 				&& candidate.len() < outer_len
 			{
-				self.transformer.replace_parsed::<Color>(outer_span, &candidate);
+				self.transformer.replace_parsed::<Color>(outer_span, candidate);
 				self.replacing_outer = true;
 				return;
 			}
@@ -272,7 +399,7 @@ mod tests {
 	}
 
 	#[test]
-	fn reduces_color_display_p3() {
+	fn reduces_in_gamut_display_p3_to_shortest() {
 		assert_transform!(
 			CssMinifierFeature::ReduceColors,
 			CssAtomSet,
@@ -449,13 +576,14 @@ mod tests {
 
 	#[test]
 	fn color_mix_oklch_out_of_gamut_uses_native_space() {
-		// oklch mix of lime+blue is out of sRGB gamut — resolved to oklch(), not hex
+		// oklch mix of lime+blue is out of sRGB gamut — resolved to oklch(), not hex.
+		// Perceptual rounding: L/C at 3dp, hue at 1dp.
 		assert_transform!(
 			CssMinifierFeature::ReduceColors,
 			CssAtomSet,
 			StyleSheet,
 			"a { color: color-mix(in oklch, lime, blue); }",
-			"a { color: oklch(0.66 0.304 203.27); }"
+			"a { color: oklch(0.659 0.304 203.3); }"
 		);
 	}
 }

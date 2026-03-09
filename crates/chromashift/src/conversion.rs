@@ -213,8 +213,8 @@ simple_from!(XyzD65 to Lch, via Srgb);
 
 simple_from!(Lch to Oklab, via Srgb);
 simple_from!(Lch to Oklch, via Srgb);
-simple_from!(Lch to XyzD50, via Srgb);
-simple_from!(Lch to XyzD65, via Srgb);
+simple_from!(Lch to XyzD50, via Lab);
+simple_from!(Lch to XyzD65, via Lab);
 
 simple_from!(Hsv to LinearRgb, via Srgb);
 simple_from!(Lab to LinearRgb, via XyzD50);

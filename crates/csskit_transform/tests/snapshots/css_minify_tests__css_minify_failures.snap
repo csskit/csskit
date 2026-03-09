@@ -41,14 +41,6 @@ FAIL colors/0024
 -a{color:color-mix(in srgb,rgb(none 0 0),#c80000)}
 +a{color:#c80000}
 
-FAIL colors/0027
--a{color:#3c740a}
-+a{color:oklab(.5 -.1 .1)}
-
-FAIL colors/0029
--a{color:oklch(.54 .2854 326.64)}
-+a{color:oklch(54% .285 326.6)}
-
 FAIL colors/0031
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
 +a{color:color-mix(in oklch,#fff,var(--foo))}
@@ -68,22 +60,6 @@ FAIL colors/0034
 FAIL colors/0035
 -a{color:color(display-p3 1.2 -.3 .5)}
 +a{color:color(display-p3 1.2-.3 .5)}
-
-FAIL colors/0044
--a{color:oklch(.66 .304 203.27)}
-+a{color:oklch(.659 .304 203.3)}
-
-FAIL colors/0045
--a{color:#7f40bf}
-+a{color:#8040c0}
-
-FAIL colors/0046
--a{color:oklch(.55432 .12276 180.4567/.74567);background-color:#52a746}
-+a{color:oklch(.554 .123 180.5/.746);background-color:oklab(.654 -.123 .099)}
-
-FAIL colors/0047
--a{color:#5d82cebd;background-color:#6b8b4a}
-+a{color:lch(54.3 43.8 274.5/.746);background-color:lab(54.3 -20.5 30.8)}
 
 FAIL comments/0003
 -a{color:red}

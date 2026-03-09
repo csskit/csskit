@@ -139,9 +139,9 @@ impl crate::ToChromashift for ColorFunctionColor {
 
 		match space {
 			ColorSpace::Srgb(_) => {
-				let r = (channel_unit(c1)? * 255.0) as u8;
-				let g = (channel_unit(c2)? * 255.0) as u8;
-				let b = (channel_unit(c3)? * 255.0) as u8;
+				let r = (channel_unit(c1)? * 255.0).round() as u8;
+				let g = (channel_unit(c2)? * 255.0).round() as u8;
+				let b = (channel_unit(c3)? * 255.0).round() as u8;
 				Some(chromashift::Color::Srgb(Srgb::new(r, g, b, alpha)))
 			}
 			ColorSpace::SrgbLinear(_) => {
@@ -280,27 +280,30 @@ impl crate::ToChromashift for RgbFunctionParams {
 			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
 			None => 100.0,
 		};
-		let red = match red {
+		let red = (match red {
 			NoneOr::None(_) => {
 				return None;
 			}
 			NoneOr::Some(NumberOrPercentage::Number(red)) => red.value(),
 			NoneOr::Some(NumberOrPercentage::Percentage(red)) => red.value() / 100.0 * 255.0,
-		} as u8;
-		let green = match green {
+		})
+		.round() as u8;
+		let green = (match green {
 			NoneOr::None(_) => {
 				return None;
 			}
 			NoneOr::Some(NumberOrPercentage::Number(green)) => green.value(),
 			NoneOr::Some(NumberOrPercentage::Percentage(green)) => green.value() / 100.0 * 255.0,
-		} as u8;
-		let blue = match blue {
+		})
+		.round() as u8;
+		let blue = (match blue {
 			NoneOr::None(_) => {
 				return None;
 			}
 			NoneOr::Some(NumberOrPercentage::Number(blue)) => blue.value(),
 			NoneOr::Some(NumberOrPercentage::Percentage(blue)) => blue.value() / 100.0 * 255.0,
-		} as u8;
+		})
+		.round() as u8;
 		Some(chromashift::Color::Srgb(Srgb::new(red, green, blue, alpha)))
 	}
 }
