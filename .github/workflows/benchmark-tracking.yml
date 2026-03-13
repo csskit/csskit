@@ -24,7 +24,7 @@ jobs:
           search_artifacts: true
           path: website/_data
       - name: Setup mise
-        uses: jdx/mise-action@v3
+        uses: jdx/mise-action@v4
       - name: Setup
         uses: ./.github/actions/setup
       - name: Run benchmark collection
