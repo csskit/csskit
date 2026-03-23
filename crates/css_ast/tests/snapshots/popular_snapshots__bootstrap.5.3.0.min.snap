@@ -204214,11 +204214,11 @@ StyleSheet(
                 offset: SourceOffset(157800),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(157801),
                 len: 7,
-              )))))), None),
+              ))))), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -229546,7 +229546,7 @@ StyleSheet(
                 offset: SourceOffset(173462),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Zero(Number(Cursor(
+              value: GapStyleValue(LineWidth(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(173463),
                 len: 1,
@@ -229611,11 +229611,11 @@ StyleSheet(
                 offset: SourceOffset(173485),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173486),
                 len: 6,
-              )))))), None),
+              ))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -229676,11 +229676,11 @@ StyleSheet(
                 offset: SourceOffset(173513),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173514),
                 len: 5,
-              )))))), None),
+              ))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -229741,11 +229741,11 @@ StyleSheet(
                 offset: SourceOffset(173540),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173541),
                 len: 4,
-              )))))), None),
+              ))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -229806,11 +229806,11 @@ StyleSheet(
                 offset: SourceOffset(173566),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173567),
                 len: 6,
-              )))))), None),
+              ))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -229871,11 +229871,11 @@ StyleSheet(
                 offset: SourceOffset(173594),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173595),
                 len: 4,
-              )))))), None),
+              ))))), None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -229936,7 +229936,7 @@ StyleSheet(
                 offset: SourceOffset(173628),
                 len: 1,
               )),
-              value: RowGapStyleValue(r#Some(Zero(Number(Cursor(
+              value: LineWidth(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(173629),
                 len: 1,
@@ -230001,11 +230001,11 @@ StyleSheet(
                 offset: SourceOffset(173659),
                 len: 1,
               )),
-              value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173660),
                 len: 6,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230066,11 +230066,11 @@ StyleSheet(
                 offset: SourceOffset(173695),
                 len: 1,
               )),
-              value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173696),
                 len: 5,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230131,11 +230131,11 @@ StyleSheet(
                 offset: SourceOffset(173730),
                 len: 1,
               )),
-              value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173731),
                 len: 4,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230196,11 +230196,11 @@ StyleSheet(
                 offset: SourceOffset(173764),
                 len: 1,
               )),
-              value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173765),
                 len: 6,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230261,11 +230261,11 @@ StyleSheet(
                 offset: SourceOffset(173800),
                 len: 1,
               )),
-              value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173801),
                 len: 4,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230368,7 +230368,7 @@ StyleSheet(
                 offset: SourceOffset(173869),
                 len: 1,
               )),
-              value: ColumnGapStyleValue(r#Some(Zero(Number(Cursor(
+              value: LineWidth(Length(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(173870),
                 len: 1,
@@ -230475,11 +230475,11 @@ StyleSheet(
                 offset: SourceOffset(173940),
                 len: 1,
               )),
-              value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(173941),
                 len: 6,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230582,11 +230582,11 @@ StyleSheet(
                 offset: SourceOffset(174015),
                 len: 1,
               )),
-              value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(174016),
                 len: 5,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230689,11 +230689,11 @@ StyleSheet(
                 offset: SourceOffset(174088),
                 len: 1,
               )),
-              value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(174089),
                 len: 4,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230796,11 +230796,11 @@ StyleSheet(
                 offset: SourceOffset(174162),
                 len: 1,
               )),
-              value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(174163),
                 len: 6,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -230903,11 +230903,11 @@ StyleSheet(
                 offset: SourceOffset(174236),
                 len: 1,
               )),
-              value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+              value: LineWidth(Length(Rem(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(174237),
                 len: 4,
-              )))))),
+              ))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -261450,7 +261450,7 @@ StyleSheet(
                       offset: SourceOffset(196982),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(196983),
                       len: 1,
@@ -261515,11 +261515,11 @@ StyleSheet(
                       offset: SourceOffset(197008),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197009),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -261580,11 +261580,11 @@ StyleSheet(
                       offset: SourceOffset(197039),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197040),
                       len: 5,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -261645,11 +261645,11 @@ StyleSheet(
                       offset: SourceOffset(197069),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197070),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -261710,11 +261710,11 @@ StyleSheet(
                       offset: SourceOffset(197098),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197099),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -261775,11 +261775,11 @@ StyleSheet(
                       offset: SourceOffset(197129),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197130),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -261840,7 +261840,7 @@ StyleSheet(
                       offset: SourceOffset(197166),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(197167),
                       len: 1,
@@ -261905,11 +261905,11 @@ StyleSheet(
                       offset: SourceOffset(197200),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197201),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -261970,11 +261970,11 @@ StyleSheet(
                       offset: SourceOffset(197239),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197240),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262035,11 +262035,11 @@ StyleSheet(
                       offset: SourceOffset(197277),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197278),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262100,11 +262100,11 @@ StyleSheet(
                       offset: SourceOffset(197314),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197315),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262165,11 +262165,11 @@ StyleSheet(
                       offset: SourceOffset(197353),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197354),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262272,7 +262272,7 @@ StyleSheet(
                       offset: SourceOffset(197425),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(197426),
                       len: 1,
@@ -262379,11 +262379,11 @@ StyleSheet(
                       offset: SourceOffset(197499),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197500),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262486,11 +262486,11 @@ StyleSheet(
                       offset: SourceOffset(197577),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197578),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262593,11 +262593,11 @@ StyleSheet(
                       offset: SourceOffset(197653),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197654),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262700,11 +262700,11 @@ StyleSheet(
                       offset: SourceOffset(197730),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197731),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -262807,11 +262807,11 @@ StyleSheet(
                       offset: SourceOffset(197807),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(197808),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274292,7 +274292,7 @@ StyleSheet(
                       offset: SourceOffset(205130),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(205131),
                       len: 1,
@@ -274357,11 +274357,11 @@ StyleSheet(
                       offset: SourceOffset(205156),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205157),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274422,11 +274422,11 @@ StyleSheet(
                       offset: SourceOffset(205187),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205188),
                       len: 5,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274487,11 +274487,11 @@ StyleSheet(
                       offset: SourceOffset(205217),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205218),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274552,11 +274552,11 @@ StyleSheet(
                       offset: SourceOffset(205246),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205247),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274617,11 +274617,11 @@ StyleSheet(
                       offset: SourceOffset(205277),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205278),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274682,7 +274682,7 @@ StyleSheet(
                       offset: SourceOffset(205314),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(205315),
                       len: 1,
@@ -274747,11 +274747,11 @@ StyleSheet(
                       offset: SourceOffset(205348),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205349),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274812,11 +274812,11 @@ StyleSheet(
                       offset: SourceOffset(205387),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205388),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274877,11 +274877,11 @@ StyleSheet(
                       offset: SourceOffset(205425),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205426),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -274942,11 +274942,11 @@ StyleSheet(
                       offset: SourceOffset(205462),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205463),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -275007,11 +275007,11 @@ StyleSheet(
                       offset: SourceOffset(205501),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205502),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -275114,7 +275114,7 @@ StyleSheet(
                       offset: SourceOffset(205573),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(205574),
                       len: 1,
@@ -275221,11 +275221,11 @@ StyleSheet(
                       offset: SourceOffset(205647),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205648),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -275328,11 +275328,11 @@ StyleSheet(
                       offset: SourceOffset(205725),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205726),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -275435,11 +275435,11 @@ StyleSheet(
                       offset: SourceOffset(205801),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205802),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -275542,11 +275542,11 @@ StyleSheet(
                       offset: SourceOffset(205878),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205879),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -275649,11 +275649,11 @@ StyleSheet(
                       offset: SourceOffset(205955),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(205956),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287134,7 +287134,7 @@ StyleSheet(
                       offset: SourceOffset(213278),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(213279),
                       len: 1,
@@ -287199,11 +287199,11 @@ StyleSheet(
                       offset: SourceOffset(213304),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213305),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287264,11 +287264,11 @@ StyleSheet(
                       offset: SourceOffset(213335),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213336),
                       len: 5,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287329,11 +287329,11 @@ StyleSheet(
                       offset: SourceOffset(213365),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213366),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287394,11 +287394,11 @@ StyleSheet(
                       offset: SourceOffset(213394),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213395),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287459,11 +287459,11 @@ StyleSheet(
                       offset: SourceOffset(213425),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213426),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287524,7 +287524,7 @@ StyleSheet(
                       offset: SourceOffset(213462),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(213463),
                       len: 1,
@@ -287589,11 +287589,11 @@ StyleSheet(
                       offset: SourceOffset(213496),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213497),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287654,11 +287654,11 @@ StyleSheet(
                       offset: SourceOffset(213535),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213536),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287719,11 +287719,11 @@ StyleSheet(
                       offset: SourceOffset(213573),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213574),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287784,11 +287784,11 @@ StyleSheet(
                       offset: SourceOffset(213610),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213611),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287849,11 +287849,11 @@ StyleSheet(
                       offset: SourceOffset(213649),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213650),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -287956,7 +287956,7 @@ StyleSheet(
                       offset: SourceOffset(213721),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(213722),
                       len: 1,
@@ -288063,11 +288063,11 @@ StyleSheet(
                       offset: SourceOffset(213795),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213796),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -288170,11 +288170,11 @@ StyleSheet(
                       offset: SourceOffset(213873),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213874),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -288277,11 +288277,11 @@ StyleSheet(
                       offset: SourceOffset(213949),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(213950),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -288384,11 +288384,11 @@ StyleSheet(
                       offset: SourceOffset(214026),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214027),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -288491,11 +288491,11 @@ StyleSheet(
                       offset: SourceOffset(214103),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(214104),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -299976,7 +299976,7 @@ StyleSheet(
                       offset: SourceOffset(221427),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(221428),
                       len: 1,
@@ -300041,11 +300041,11 @@ StyleSheet(
                       offset: SourceOffset(221453),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221454),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300106,11 +300106,11 @@ StyleSheet(
                       offset: SourceOffset(221484),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221485),
                       len: 5,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300171,11 +300171,11 @@ StyleSheet(
                       offset: SourceOffset(221514),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221515),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300236,11 +300236,11 @@ StyleSheet(
                       offset: SourceOffset(221543),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221544),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300301,11 +300301,11 @@ StyleSheet(
                       offset: SourceOffset(221574),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221575),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300366,7 +300366,7 @@ StyleSheet(
                       offset: SourceOffset(221611),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(221612),
                       len: 1,
@@ -300431,11 +300431,11 @@ StyleSheet(
                       offset: SourceOffset(221645),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221646),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300496,11 +300496,11 @@ StyleSheet(
                       offset: SourceOffset(221684),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221685),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300561,11 +300561,11 @@ StyleSheet(
                       offset: SourceOffset(221722),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221723),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300626,11 +300626,11 @@ StyleSheet(
                       offset: SourceOffset(221759),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221760),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300691,11 +300691,11 @@ StyleSheet(
                       offset: SourceOffset(221798),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221799),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -300798,7 +300798,7 @@ StyleSheet(
                       offset: SourceOffset(221870),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(221871),
                       len: 1,
@@ -300905,11 +300905,11 @@ StyleSheet(
                       offset: SourceOffset(221944),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(221945),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -301012,11 +301012,11 @@ StyleSheet(
                       offset: SourceOffset(222022),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(222023),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -301119,11 +301119,11 @@ StyleSheet(
                       offset: SourceOffset(222098),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(222099),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -301226,11 +301226,11 @@ StyleSheet(
                       offset: SourceOffset(222175),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(222176),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -301333,11 +301333,11 @@ StyleSheet(
                       offset: SourceOffset(222252),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(222253),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -312818,7 +312818,7 @@ StyleSheet(
                       offset: SourceOffset(229730),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(229731),
                       len: 1,
@@ -312883,11 +312883,11 @@ StyleSheet(
                       offset: SourceOffset(229757),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229758),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -312948,11 +312948,11 @@ StyleSheet(
                       offset: SourceOffset(229789),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229790),
                       len: 5,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313013,11 +313013,11 @@ StyleSheet(
                       offset: SourceOffset(229820),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229821),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313078,11 +313078,11 @@ StyleSheet(
                       offset: SourceOffset(229850),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229851),
                       len: 6,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313143,11 +313143,11 @@ StyleSheet(
                       offset: SourceOffset(229882),
                       len: 1,
                     )),
-                    value: GapStyleValue(RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: GapStyleValue(LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229883),
                       len: 4,
-                    )))))), None),
+                    ))))), None),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313208,7 +313208,7 @@ StyleSheet(
                       offset: SourceOffset(229920),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(229921),
                       len: 1,
@@ -313273,11 +313273,11 @@ StyleSheet(
                       offset: SourceOffset(229955),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229956),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313338,11 +313338,11 @@ StyleSheet(
                       offset: SourceOffset(229995),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(229996),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313403,11 +313403,11 @@ StyleSheet(
                       offset: SourceOffset(230034),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230035),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313468,11 +313468,11 @@ StyleSheet(
                       offset: SourceOffset(230072),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230073),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313533,11 +313533,11 @@ StyleSheet(
                       offset: SourceOffset(230112),
                       len: 1,
                     )),
-                    value: RowGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230113),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313640,7 +313640,7 @@ StyleSheet(
                       offset: SourceOffset(230185),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Zero(Number(Cursor(
+                    value: LineWidth(Length(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(230186),
                       len: 1,
@@ -313747,11 +313747,11 @@ StyleSheet(
                       offset: SourceOffset(230260),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230261),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313854,11 +313854,11 @@ StyleSheet(
                       offset: SourceOffset(230339),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230340),
                       len: 5,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -313961,11 +313961,11 @@ StyleSheet(
                       offset: SourceOffset(230416),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230417),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -314068,11 +314068,11 @@ StyleSheet(
                       offset: SourceOffset(230494),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230495),
                       len: 6,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -314175,11 +314175,11 @@ StyleSheet(
                       offset: SourceOffset(230572),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(230573),
                       len: 4,
-                    )))))),
+                    ))))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",

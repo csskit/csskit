@@ -84,6 +84,7 @@ pub enum CsskitAtomSet {{
 	Anchor,
 	AnchorPosition,
 	Animation,
+	AnimationTriggers,
 	Animations,
 	Background,
 	Backgrounds,

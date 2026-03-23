@@ -140503,11 +140503,11 @@ StyleSheet(
                       offset: SourceOffset(103739),
                       len: 1,
                     )),
-                    value: ColumnGapStyleValue(r#Some(Length(Rem(Dimension(Cursor(
+                    value: LineWidth(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(103741),
                       len: 7,
-                    )))))),
+                    ))))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",

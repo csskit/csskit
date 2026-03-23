@@ -47252,11 +47252,11 @@ StyleSheet(
                 offset: SourceOffset(31934),
                 len: 1,
               )),
-              value: GapStyleValue(RowGapStyleValue(r#Some(Length(Ch(Dimension(Cursor(
+              value: GapStyleValue(LineWidth(Length(Ch(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(31936),
                 len: 4,
-              )))))), None),
+              ))))), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

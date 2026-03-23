@@ -341,7 +341,14 @@ impl Def {
 						| "ViewTimelineAxis"
 						| "ViewTimelineName"
 						| "BorderTopClip" | "ColumnRule"
-						| "RowRule"
+						| "RowRule" | "TimelineTriggerActivationRange"
+						| "TimelineTriggerActivationRangeEnd"
+						| "TimelineTriggerActivationRangeStart"
+						| "TimelineTriggerActiveRange"
+						| "TimelineTriggerActiveRangeEnd"
+						| "TimelineTriggerActiveRangeStart"
+						| "TimelineTriggerName"
+						| "TimelineTriggerSource"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),

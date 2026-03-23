@@ -1,5 +1,6 @@
 mod align;
 mod anchor_position;
+mod animation_triggers;
 mod animations;
 mod backgrounds;
 mod borders;
@@ -70,6 +71,7 @@ mod writing_modes;
 #[allow(ambiguous_glob_reexports)]
 pub use align::*;
 pub use anchor_position::*;
+pub use animation_triggers::*;
 pub use animations::*;
 pub use backgrounds::*;
 pub use borders::*;

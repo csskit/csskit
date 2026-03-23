@@ -46,6 +46,7 @@ impl CsskitAtomSet {
 		match self {
 			Self::Align => Some(PropertyGroup::Align),
 			Self::Anchor | Self::AnchorPosition => Some(PropertyGroup::AnchorPosition),
+			Self::AnimationTriggers => Some(PropertyGroup::AnimationTriggers),
 			Self::Animation | Self::Animations => Some(PropertyGroup::Animations),
 			Self::Background | Self::Backgrounds => Some(PropertyGroup::Backgrounds),
 			Self::Border | Self::Borders => Some(PropertyGroup::Borders),

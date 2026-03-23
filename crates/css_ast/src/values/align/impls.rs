@@ -15,9 +15,9 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<JustifyItemsStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<AlignItemsStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<PlaceItemsStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<RowGapStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ColumnGapStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<GapStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<RowGapStyleValue>(), 20);
+		assert_eq!(std::mem::size_of::<ColumnGapStyleValue>(), 20);
+		assert_eq!(std::mem::size_of::<GapStyleValue>(), 40);
 	}
 
 	#[test]
