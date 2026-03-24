@@ -1,3 +1,38 @@
+## [0.0.19] - 2026-03-24
+
+### Other Changes
+- Csskit-acceptance: Never skip tests (#916) ([#916](https://github.com/csskit/csskit/pull/916))
+- Chore(deps): update dependencies (patch) (#919) ([#919](https://github.com/csskit/csskit/pull/919))
+- Chore(deps): update dependencies (patch) (#929) ([#929](https://github.com/csskit/csskit/pull/929))
+- Chore(deps): update dependencies (patch) (#935) ([#935](https://github.com/csskit/csskit/pull/935))
+
+
+### Chromashift
+- chromashift: Add `in_gamut_of(ColorSpace)` to help guard minifying OOG. (#915) ([#915](https://github.com/csskit/csskit/pull/915))
+- chromashift/csskit_transform/css_ast: Implement colour mixing & minification (#924) ([#924](https://github.com/csskit/csskit/pull/924))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#911) ([#911](https://github.com/csskit/csskit/pull/911))
+- Regenerate css_ast/src/values from csswg drafts (#918) ([#918](https://github.com/csskit/csskit/pull/918))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#912) ([#912](https://github.com/csskit/csskit/pull/912))
+
+
+### Csskit_transform
+- Update css-minify-tests (#923) ([#923](https://github.com/csskit/csskit/pull/923))
+
+
+### Csskit_vscode
+- chore(deps): update dependency @types/node to v24.11.0 (#913) ([#913](https://github.com/csskit/csskit/pull/913))
+- chore(deps): update dependency @types/node to v24.12.0 (#921) ([#921](https://github.com/csskit/csskit/pull/921))
+- chore(deps): update dependencies to v1.50.0 (minor) (#920) ([#920](https://github.com/csskit/csskit/pull/920))
+- chore(deps): update dependency @types/vscode to v1.110.0 (#930) ([#930](https://github.com/csskit/csskit/pull/930))
+- chore(deps): update dependency oxlint to v1.51.0 (#938) ([#938](https://github.com/csskit/csskit/pull/938))
+- chore(deps): update dependency typescript to v6 (#940) ([#940](https://github.com/csskit/csskit/pull/940))
+
 ## [0.0.18] - 2026-03-01
 
 ### Other Changes
@@ -37,6 +72,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#882) ([#882](https://github.com/csskit/csskit/pull/882))
+- Release v0.0.18 (#876) ([#876](https://github.com/csskit/csskit/pull/876))
 
 
 ### Csskit_transform
