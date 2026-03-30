@@ -167,7 +167,7 @@ properties = ["columns"]
 properties = ["counter-increment", "counter-reset", "counter-set", "list-style"]
 
 [overflow]
-properties = ["line-clamp", "scrollbar-gutter", "text-overflow"]
+properties = ["line-clamp", "scroll-marker-group", "scrollbar-gutter", "text-overflow"]
 
 [regions]
 properties = ["flow-into"]
