@@ -29,7 +29,9 @@ impl Serialize for Response {
 		#[derive(Serialize)]
 		struct Res<'a> {
 			id: &'a Id,
+			#[serde(skip_serializing_if = "Option::is_none")]
 			result: Option<&'a Value>,
+			#[serde(skip_serializing_if = "Option::is_none")]
 			error: Option<Value>,
 		}
 		if let Response::Ok(id, value) = self {
@@ -104,9 +106,26 @@ impl Response {
 
 #[cfg(test)]
 mod tests {
-	use serde_json::{from_str, json};
+	use serde_json::{from_str, json, to_string};
 
 	use super::*;
+
+	#[test]
+	fn test_response_serialize_ok_omits_error() {
+		let response = Response::Ok(1.into(), json!({"capabilities": {}}));
+		let serialized = to_string(&response).unwrap();
+		assert!(serialized.contains("\"result\""), "should contain result");
+		assert!(!serialized.contains("\"error\""), "should not contain error key");
+		assert_eq!(serialized, r#"{"id":1,"result":{"capabilities":{}}}"#);
+	}
+
+	#[test]
+	fn test_response_serialize_err_omits_result() {
+		let response = Response::Err(1.into(), ErrorCode::ParseError, "Parse error".into(), Value::Null);
+		let serialized = to_string(&response).unwrap();
+		assert!(serialized.contains("\"error\""), "should contain error");
+		assert!(!serialized.contains("\"result\""), "should not contain result key");
+	}
 
 	#[test]
 	fn test_response_deserialize() {
