@@ -1,3 +1,20 @@
+## [0.0.20] - 2026-04-01
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#943) ([#943](https://github.com/csskit/csskit/pull/943))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#944) ([#944](https://github.com/csskit/csskit/pull/944))
+
+
+### Csskit_lsp
+- csskit_lsp: Skip serializing None values for result/error in LSP messages. (#950) ([#950](https://github.com/csskit/csskit/pull/950))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.54.0 (#947) ([#947](https://github.com/csskit/csskit/pull/947))
+
 ## [0.0.19] - 2026-03-24
 
 ### Other Changes
@@ -19,6 +36,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#912) ([#912](https://github.com/csskit/csskit/pull/912))
+- Release v0.0.19 (#914) ([#914](https://github.com/csskit/csskit/pull/914))
 
 
 ### Csskit_transform
