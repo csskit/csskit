@@ -1,15 +1,11 @@
 // Why does a CSS processor tool need postcss? Well, put simply, it's not ready yet.
-const postcssPresetEnv = require("postcss-preset-env");
-const postcssImport = require("postcss-import");
-const cssnano = require("cssnano");
-const combineSelectors = require("postcss-combine-duplicated-selectors");
-const postcssJitProps = require("postcss-jit-props");
-const OpenProps = require("open-props");
-module.exports = {
+import postcssPresetEnv from "postcss-preset-env";
+import postcssImport from "postcss-import";
+import cssnano from "cssnano";
+import combineSelectors from "postcss-combine-duplicated-selectors";
+
+export default {
   plugins: [
-    // postcssJitProps({
-    //   files: ["./node_modules/open-props/open-props.min.css", "./node_modules/open-props/media.min.css"],
-    // }),
     postcssImport(),
     postcssPresetEnv({
       stage: 0,

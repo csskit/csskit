@@ -103,7 +103,7 @@ scraper = { version = "0.24.0" }
 tokio = { version = "1.48.0" }
 
 # Wasm
-wasm-bindgen = { version = "0.2.104" }
+wasm-bindgen = { version = "0.2.117" }
 serde-wasm-bindgen = { version = "0.6.5" }
 console_error_panic_hook = { version = "0.1.7" }
 

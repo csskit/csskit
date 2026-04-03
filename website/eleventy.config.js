@@ -1,15 +1,16 @@
-const syntaxHighlight = require("@11ty/eleventy-plugin-syntaxhighlight");
-const mditPluginAlert = require("@mdit/plugin-alert");
-const path = require("path");
-const pluginRss = require("@11ty/eleventy-plugin-rss");
-const generateSocialImages = require("@manustays/eleventy-plugin-generate-social-images");
-const glob = require("glob");
-const fs = require("fs");
-const htmlmin = require("html-minifier");
-const { build } = require("esbuild");
-const postcss = require("postcss");
-const postcssConfig = require("./postcss.config.js");
-const { wasmLoader } = require("esbuild-plugin-wasm");
+import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
+import { alert } from "@mdit/plugin-alert";
+import path from "path";
+import pluginRss, { dateToRfc3339, dateToRfc822 } from "@11ty/eleventy-plugin-rss";
+import generateSocialImages from "@manustays/eleventy-plugin-generate-social-images";
+import { globSync } from "glob";
+import fs from "fs";
+import htmlmin from "html-minifier";
+import { build } from "esbuild";
+import postcss from "postcss";
+import postcssConfig from "./postcss.config.js";
+import { wasmLoader } from "esbuild-plugin-wasm";
+
 const buildJS = (config = {}) => {
 	return build({
 		minify: process.NODE_ENV === "development" ? false : true,
@@ -27,7 +28,7 @@ const buildJS = (config = {}) => {
 const buildCSS = (config = {}) => {
 	for (const file of config.entryPoints) {
 		const css = fs.readFileSync(file, "utf-8");
-		let res = postcss(postcssConfig.plugins)
+		postcss(postcssConfig.plugins)
 			.process(css, { from: file, to: `_site/${file}` })
 			.then((res) => {
 				fs.mkdirSync("_site/css", { recursive: true });
@@ -36,11 +37,11 @@ const buildCSS = (config = {}) => {
 	}
 };
 
-module.exports = (eleventyConfig) => {
-	const jsEntryPoints = glob.sync("script/*.[tj]s").map((p) => path.relative(process.cwd(), p));
+export default (eleventyConfig) => {
+	const jsEntryPoints = globSync("script/*.[tj]s").map((p) => path.relative(process.cwd(), p));
 	eleventyConfig.addWatchTarget("script/*.[tj]s");
 
-	const cssEntryPoints = glob.sync("css/*.css").map((p) => path.relative(process.cwd(), p));
+	const cssEntryPoints = globSync("css/*.css").map((p) => path.relative(process.cwd(), p));
 	eleventyConfig.addWatchTarget("css/*.css");
 
 	buildJS({ entryPoints: jsEntryPoints });
@@ -58,7 +59,6 @@ module.exports = (eleventyConfig) => {
 	});
 
 	eleventyConfig.addTransform("htmlmin", function (content) {
-		// Prior to Eleventy 2.0: use this.outputPath instead
 		if (this.page.outputPath && this.page.outputPath.endsWith(".html")) {
 			let minified = htmlmin.minify(content, {
 				useShortDoctype: true,
@@ -71,7 +71,7 @@ module.exports = (eleventyConfig) => {
 		return content;
 	});
 
-	eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(mditPluginAlert.alert));
+	eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(alert));
 
 	eleventyConfig.addPlugin(generateSocialImages, {
 		hideTerminal: false,
@@ -85,8 +85,8 @@ module.exports = (eleventyConfig) => {
 	});
 	eleventyConfig.addPlugin(syntaxHighlight);
 	eleventyConfig.addPlugin(pluginRss);
-	eleventyConfig.addLiquidFilter("date_to_rfc3339", pluginRss.dateToRfc3339);
-	eleventyConfig.addLiquidFilter("date_to_rfc822", pluginRss.dateToRfc822);
+	eleventyConfig.addLiquidFilter("date_to_rfc3339", dateToRfc3339);
+	eleventyConfig.addLiquidFilter("date_to_rfc822", dateToRfc822);
 
 	eleventyConfig.ignores.add("js");
 	eleventyConfig.ignores.add("css");

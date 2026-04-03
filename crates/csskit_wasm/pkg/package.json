@@ -1,0 +1,24 @@
+{
+  "name": "csskit_wasm",
+  "collaborators": [
+    "Keith Cirkel (https://keithcirkel.co.uk)"
+  ],
+  "version": "0.0.20",
+  "license": "MIT",
+  "files": [
+    "csskit_wasm_bg.wasm",
+    "csskit_wasm.js",
+    "csskit_wasm_bg.js",
+    "csskit_wasm.d.ts"
+  ],
+  "module": "csskit_wasm.js",
+  "types": "csskit_wasm.d.ts",
+  "sideEffects": [
+    "./csskit_wasm.js",
+    "./snippets/*"
+  ],
+  "keywords": [
+    "CSS",
+    "parser"
+  ]
+}

@@ -41,6 +41,3 @@ web-sys = { version = "0.3", features = ["console"], optional = true }
 [dev-dependencies]
 wasm-bindgen-test = "0.3.54"
 
-[package.metadata.wasm-pack.profile.release]
-wasm-opt = false
-# wasm-opt = ['-O4']
