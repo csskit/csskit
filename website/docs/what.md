@@ -23,8 +23,9 @@ bundled into one:
   colors, suggest complementary palettes, and identify browser compatibility
   issues.
 - <b>💻</b> <a href="/docs/lsp">LSP</a>: integrates with
-  <a href="/docs/lsp/zed">Zed</a> and <a href="/docs/lsp/vscode">VSCode</a> for
-  real-time guidance and code completion.
+  <a href="/docs/lsp/zed">Zed</a>, <a href="/docs/lsp/vscode">VSCode</a>, and
+  <a href="/docs/lsp/neovim">Neovim</a> for real-time guidance and code
+  completion.
 
 ## Philosophy
 

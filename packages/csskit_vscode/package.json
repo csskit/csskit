@@ -1,5 +1,5 @@
 {
-	"name": "csskit_vscode",
+	"name": "csskit",
 	"displayName": "csskit",
 	"version": "1.0.0",
 	"description": "Refreshing CSS",
@@ -8,18 +8,18 @@
 	"funding": {
 		"url": "https://github.com/sponsors/keithamus"
 	},
+	"publisher": "csskit",
 	"license": "MIT",
 	"author": "Keith Cirkel (https://keithcirkel.co.uk)",
 	"type": "commonjs",
-	"main": "./src/main.js",
-	"files": [
-		"./dist"
-	],
+	"main": "./dist/main.js",
 	"scripts": {
+		"build": "esbuild src/main.js --bundle --outfile=dist/main.js --format=cjs --platform=node --external:vscode --minify",
 		"check": "prettier --check . && npm run lint && npm run typecheck",
 		"fmt": "prettier --write .",
 		"lint": "oxlint",
 		"typecheck": "tsc",
+		"vscode:prepublish": "npm run build",
 		"watch": "npm run build -- --watch",
 		"watch-test": "vscode-test"
 	},
@@ -126,7 +126,7 @@
 		"typescript": "6.0.2"
 	},
 	"engines": {
-		"vscode": "^1.95.0"
+		"vscode": "^1.110.0"
 	},
 	"prettierConfig": {
 		"useTabs": true,

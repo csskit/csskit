@@ -11,3 +11,5 @@ website/_site
 .vscode-test
 .DS_Store
 .mise-tasks/generate-values/.caches
+*.vsix
+packages/csskit_vscode/dist/

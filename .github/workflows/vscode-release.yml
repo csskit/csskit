@@ -1,0 +1,96 @@
+name: vscode-release
+on:
+  push:
+    branches: [main]
+    paths:
+      - "packages/csskit_vscode/**"
+  workflow_dispatch:
+
+concurrency:
+  group: "vscode-release"
+  cancel-in-progress: true
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+        with:
+          fetch-depth: 0
+
+      - name: Setup Node
+        uses: actions/setup-node@53b83947a5a98c8d113130e565377fae1a50d02f # v6.3.0
+        with:
+          node-version: "24"
+
+      - name: Get current and published versions
+        id: versions
+        run: |
+          CURRENT=$(node -p "require('./packages/csskit_vscode/package.json').version")
+          echo "current=$CURRENT" >> "$GITHUB_OUTPUT"
+
+          PUBLISHED=$(npx --yes @vscode/vsce show csskit.csskit --json | jq -r '.versions[0].version')
+          echo "published=$PUBLISHED" >> "$GITHUB_OUTPUT"
+
+          if [ "$CURRENT" != "$PUBLISHED" ]; then
+            echo "mode=publish" >> "$GITHUB_OUTPUT"
+          else
+            echo "mode=pr" >> "$GITHUB_OUTPUT"
+          fi
+      - run: |
+          echo "Current version:   ${{ steps.versions.outputs.current }}"
+          echo "Published version: ${{ steps.versions.outputs.published }}"
+          echo "Mode:              ${{ steps.versions.outputs.mode }}"
+
+      - name: Bump patch version
+        if: steps.versions.outputs.mode == 'pr'
+        id: bump
+        run: |
+          cd packages/csskit_vscode
+          npm version patch --no-git-tag-version
+          NEXT=$(node -p "require('./package.json').version")
+          echo "next=$NEXT" >> "$GITHUB_OUTPUT"
+
+      - name: Create release PR
+        if: steps.versions.outputs.mode == 'pr'
+        run: |
+          NEXT="${{ steps.bump.outputs.next }}"
+          BRANCH="vscode-release-v${NEXT}"
+
+          git config user.name "Keith Cirkel"
+          git config user.email "keithamus@users.noreply.github.com"
+          git add packages/csskit_vscode/package.json packages/csskit_vscode/package-lock.json
+          git commit -m "Release csskit vscode extension v${NEXT}"
+
+          git remote add PAT "https://keithamus:${GH_TOKEN}@github.com/csskit/csskit.git" > /dev/null 2>&1
+          git push --force PAT HEAD:refs/heads/"${BRANCH}"
+          git remote rm PAT
+
+          gh pr edit "${BRANCH}" \
+            --title "Release csskit vscode extension v${NEXT}" \
+            --body "Bumps the VS Code extension to v${NEXT} for publishing to the [marketplace](https://marketplace.visualstudio.com/items?itemName=csskit.csskit)." ||
+            gh pr create \
+              --title "Release csskit vscode extension v${NEXT}" \
+              --body "Bumps the VS Code extension to v${NEXT} for publishing to the [marketplace](https://marketplace.visualstudio.com/items?itemName=csskit.csskit)." \
+              --label "release" \
+              --base main \
+              --head "${BRANCH}"
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PR_PAT }}
+
+      - name: Install dependencies
+        if: steps.versions.outputs.mode == 'publish'
+        run: npm ci
+        working-directory: packages/csskit_vscode
+
+      - name: Publish extension
+        if: steps.versions.outputs.mode == 'publish'
+        run: npx --yes @vscode/vsce publish --skip-duplicate
+        working-directory: packages/csskit_vscode
+        env:
+          VSCE_PAT: ${{ secrets.VSCE_PAT }}
