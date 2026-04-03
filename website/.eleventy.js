@@ -10,8 +10,6 @@ const { build } = require("esbuild");
 const postcss = require("postcss");
 const postcssConfig = require("./postcss.config.js");
 const { wasmLoader } = require("esbuild-plugin-wasm");
-const { css } = require("@codemirror/lang-css");
-
 const buildJS = (config = {}) => {
 	return build({
 		minify: process.NODE_ENV === "development" ? false : true,
@@ -39,8 +37,6 @@ const buildCSS = (config = {}) => {
 };
 
 module.exports = (eleventyConfig) => {
-	eleventyConfig.addPlugin(css);
-
 	const jsEntryPoints = glob.sync("script/*.[tj]s").map((p) => path.relative(process.cwd(), p));
 	eleventyConfig.addWatchTarget("script/*.[tj]s");
 
