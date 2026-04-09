@@ -4,57 +4,49 @@ layout: markdown-base
 
 # Neovim
 
-You can use csskit as an LSP server in Neovim via [nvim-lspconfig]. Since csskit
-isn't in the lspconfig registry yet, you'll need to register it as a
-custom server.
+csskit is available in both the [nvim-lspconfig] and [mason.nvim] registries.
 
-## Setup
+If you're using a "neovim distro" such as [LazyVim], [NvChad], [AstroNvim], or [LunarVim], these all include [mason.nvim] and [nvim-lspconfig] by default.
 
-Add the following to your Neovim config. If you're using [LazyVim], this goes in
-a plugin spec file like `lua/plugins/lsp-config.lua`:
+## Quick setup (Mason)
 
-```lua
-return {
-  {
-    "neovim/nvim-lspconfig",
-    opts = function(_, opts)
-      local lspconfig = require("lspconfig")
-      local configs = require("lspconfig.configs")
-      local util = require("lspconfig.util")
+If you already have [mason.nvim] and [nvim-lspconfig] installed, run:
 
-      if not configs.csskit then
-        configs.csskit = {
-          default_config = {
-            cmd = { "csskit", "lsp" },
-            filetypes = { "css" },
-            root_dir = util.root_pattern("package.json", ".git"),
-            settings = {},
-          },
-        }
-      end
-
-      opts.servers = opts.servers or {}
-      opts.servers.csskit = opts.servers.csskit or {}
-
-      lspconfig.csskit.setup({})
-    end,
-  },
-}
+```
+:MasonInstall csskit
 ```
 
-This assumes `csskit` is on your `$PATH` (e.g. installed via `npm install -g
-csskit`). If you're using a local build, replace `"csskit"` with the full path
-to the binary:
+Mason will install the binary and configure lspconfig automatically. Open a
+`.css` file and run `:LspInfo` to confirm csskit is active.
+
+## Manual setup
+
+If you're not using Mason, install the `csskit` binary yourself:
+
+- **npm**: `npm install -g csskit`
+- **Cargo**: `cargo install csskit`
+- **Binary download**: Grab a release from [GitHub Releases](https://github.com/csskit/csskit/releases)
+
+Then register the server in your Neovim config:
 
 ```lua
-cmd = { "/path/to/csskit", "lsp" },
+require("lspconfig").csskit.setup({})
 ```
+
+Open a `.css` file and run `:LspInfo` to confirm csskit is active.
 
 ## Disabling other CSS LSPs
 
 If you have `cssls` (the VSCode CSS language server) or another CSS LSP running,
-you may want to disable it to avoid duplicate results. With LazyVim, add a setup
-handler that prevents it from starting:
+you may want to disable it to avoid duplicate results.
+
+**Uninstall via Mason:**
+
+```
+:MasonUninstall css-lsp
+```
+
+**Or prevent it from starting** (LazyVim):
 
 ```lua
 opts.setup = opts.setup or {}
@@ -66,23 +58,9 @@ end
 Returning `true` tells LazyVim "I'm handling this server" and skips its default
 setup.
 
-If `cssls` is being auto-configured by
-[mason-lspconfig](https://github.com/williamboman/mason-lspconfig.nvim), you may
-need to either uninstall the `css-lsp` Mason package (`:MasonUninstall
-css-lsp`) or explicitly prevent it from auto-starting:
-
-```lua
-opts.setup.cssls = function()
-  lspconfig.cssls.setup({ autostart = false })
-  return true
-end
-```
-
-## Verifying
-
-Open a `.css` file and run `:LspInfo`. You should see `csskit` listed as an
-active client. If `cssls` or other CSS servers still appear, check the
-"Disabling other CSS LSPs" section above.
-
 [nvim-lspconfig]: https://github.com/neovim/nvim-lspconfig
+[mason.nvim]: https://github.com/williamboman/mason.nvim
 [LazyVim]: https://www.lazyvim.org/
+[NvChad]: https://nvchad.com/
+[AstroNvim]: https://astronvim.com/
+[LunarVim]: https://www.lunarvim.org/
