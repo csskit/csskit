@@ -5,6 +5,7 @@ schema_version = 1
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)", "Marais Rossouw (https://marais.io)"]
 description = "Refreshing CSS!"
 repository = "https://github.com/csskit/csskit"
+license = "MIT"
 
 [language_servers.csskit]
 language = "CSS"
