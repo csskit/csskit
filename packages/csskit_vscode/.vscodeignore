@@ -1,5 +1,6 @@
 **
 !dist/**
+!icon.png
 !package.json
 !README.md
 !LICENSE

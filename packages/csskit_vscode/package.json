@@ -9,6 +9,7 @@
 		"url": "https://github.com/sponsors/keithamus"
 	},
 	"publisher": "csskit",
+	"icon": "icon.png",
 	"license": "MIT",
 	"author": "Keith Cirkel (https://keithcirkel.co.uk)",
 	"type": "commonjs",
