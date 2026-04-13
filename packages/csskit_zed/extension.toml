@@ -1,12 +1,12 @@
-id = "csskit"
+id = "csskit-lsp"
 name = "csskit"
 version = "0.0.1"
 schema_version = 1
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)", "Marais Rossouw (https://marais.io)"]
-description = "Refreshing CSS!"
+description = "csskit-lsp language server integration for csskit."
 repository = "https://github.com/csskit/csskit"
 license = "MIT"
 
 [language_servers.csskit]
-language = "CSS"
 name = "csskit Language Server"
+languages = ["CSS"]
