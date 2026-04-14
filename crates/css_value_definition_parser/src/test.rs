@@ -514,4 +514,7 @@ fn def_returns_true_for_maybe_unsized() {
 	assert!(to_valuedef! { <foo> <bar()># }.maybe_unsized());
 	assert!(to_valuedef!(" <'bar'># ").maybe_unsized());
 	assert!(!to_valuedef!(" <'bar'> ").maybe_unsized());
+	assert!(to_valuedef!(" <bar>+ ").maybe_unsized());
+	assert!(!to_valuedef!(" <bar>{1,4} ").maybe_unsized());
+	assert!(!to_valuedef!(" [ <bar> | <baz> ]{1,4} ").maybe_unsized());
 }

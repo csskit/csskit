@@ -355,7 +355,13 @@ impl Def {
 			Self::Optional(d) => d.maybe_unsized(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.maybe_unsized()),
 			Self::Group(d, _) => d.maybe_unsized(),
-			Self::Multiplier(_, _, _) => true,
+			Self::Multiplier(inner, sep, range) => {
+				// Bounded ranges are optimized to Optionals combinators and only need 'a if the
+				// inner type does.
+				matches!(sep, DefMultiplierSeparator::Commas)
+					|| matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_))
+					|| inner.maybe_unsized()
+			}
 		}
 	}
 
