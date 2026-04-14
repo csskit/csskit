@@ -2,13 +2,14 @@ use crate::CssDiagnostic;
 #[cfg(feature = "visitable")]
 use crate::visit::{Visit, VisitMut, Visitable, VisitableMut};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, SemanticEq, ToCursors, ToNumberValue, ToSpan};
-use csskit_derives::{ToCursors as DeriveToCursors, ToSpan as DeriveToSpan};
+use csskit_derives::{NodeWithMetadata, ToCursors as DeriveToCursors, ToSpan as DeriveToSpan};
 
 /// A non-negative value wrapper.
 ///
 /// This wrapper validates that literal values are >= 0 at parse time.
 #[derive(DeriveToCursors, DeriveToSpan, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[derive(NodeWithMetadata)]
 pub struct NonNegative<T>(pub T);
 
 impl<T: Into<Cursor>> From<NonNegative<T>> for Cursor {
@@ -80,6 +81,7 @@ impl<T> NonNegative<T> {
 /// This wrapper validates that literal values are > 0 at parse time.
 #[derive(DeriveToCursors, DeriveToSpan, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[derive(NodeWithMetadata)]
 pub struct Positive<T>(pub T);
 
 impl<T: Into<Cursor>> From<Positive<T>> for Cursor {
@@ -152,6 +154,7 @@ impl<T> Positive<T> {
 /// This wrapper validates that literal values are != 0 at parse time.
 #[derive(DeriveToCursors, DeriveToSpan, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[derive(NodeWithMetadata)]
 pub struct NonZero<T>(pub T);
 
 impl<T: Into<Cursor>> From<NonZero<T>> for Cursor {
@@ -224,6 +227,7 @@ impl<T> NonZero<T> {
 /// This wrapper validates that literal values fall within [MIN, MAX] at parse time.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[derive(NodeWithMetadata)]
 pub struct Ranged<T, const MIN: i32, const MAX: i32>(pub T);
 
 impl<T: Into<Cursor>, const MIN: i32, const MAX: i32> From<Ranged<T, MIN, MAX>> for Cursor {
@@ -323,6 +327,7 @@ impl<T, const MIN: i32, const MAX: i32> Ranged<T, MIN, MAX> {
 /// This wrapper validates that literal values are exactly equal to the specified VALUE at parse time.
 #[derive(Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[derive(NodeWithMetadata)]
 pub struct Exact<T, const VALUE: i32>(pub T);
 
 impl<T: Into<Cursor>, const VALUE: i32> From<Exact<T, VALUE>> for Cursor {

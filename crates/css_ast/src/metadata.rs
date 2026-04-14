@@ -406,6 +406,88 @@ impl SemanticEq for CssMetadata {
 	}
 }
 
+macro_rules! impl_token_metadata {
+	($($token:tt),* $(,)?) => {
+		$(
+			impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::T![$token] {
+				fn metadata(&self) -> CssMetadata {
+					CssMetadata::default()
+				}
+			}
+		)*
+	};
+}
+
+impl_token_metadata!(Ident, Number, Dimension, Hash, AtKeyword, String, Function, Url);
+
+impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::token_macros::RightParen {
+	fn metadata(&self) -> CssMetadata {
+		CssMetadata::default()
+	}
+}
+
+impl<'a, T: css_parse::NodeWithMetadata<CssMetadata>> css_parse::NodeWithMetadata<CssMetadata>
+	for bumpalo::collections::Vec<'a, T>
+{
+	fn metadata(&self) -> CssMetadata {
+		self.iter().fold(CssMetadata::default(), |acc, item| NodeMetadata::merge(acc, item.metadata()))
+	}
+}
+
+impl<'a, T: css_parse::NodeWithMetadata<CssMetadata>, const MIN: usize> css_parse::NodeWithMetadata<CssMetadata>
+	for css_parse::CommaSeparated<'a, T, MIN>
+{
+	fn metadata(&self) -> CssMetadata {
+		self.into_iter().fold(CssMetadata::default(), |acc, (item, _comma)| NodeMetadata::merge(acc, item.metadata()))
+	}
+}
+
+macro_rules! impl_optionals_metadata {
+	($name:ident, $($T:ident => $v:ident),+) => {
+		impl<$($T: css_parse::NodeWithMetadata<CssMetadata>),+>
+			css_parse::NodeWithMetadata<CssMetadata> for css_parse::$name<$($T),+>
+		{
+			fn metadata(&self) -> CssMetadata {
+				let css_parse::$name($($v),+) = self;
+				let mut meta = CssMetadata::default();
+				$(
+					if let Some(val) = $v {
+						meta = NodeMetadata::merge(meta, val.metadata());
+					}
+				)+
+				meta
+			}
+		}
+	};
+}
+
+impl_optionals_metadata!(Optionals2, A => a, B => b);
+impl_optionals_metadata!(Optionals3, A => a, B => b, C => c);
+impl_optionals_metadata!(Optionals4, A => a, B => b, C => c, D => d);
+impl_optionals_metadata!(Optionals5, A => a, B => b, C => c, D => d, E => e);
+
+macro_rules! impl_tuple_metadata {
+	($($T:ident),+) => {
+		impl<$($T: css_parse::NodeWithMetadata<CssMetadata>),+>
+			css_parse::NodeWithMetadata<CssMetadata> for ($($T,)+)
+		{
+			#[allow(non_snake_case)]
+			fn metadata(&self) -> CssMetadata {
+				let ($($T,)+) = self;
+				let mut meta = CssMetadata::default();
+				$(
+					meta = NodeMetadata::merge(meta, $T.metadata());
+				)+
+				meta
+			}
+		}
+	};
+}
+
+impl_tuple_metadata!(A, B);
+impl_tuple_metadata!(A, B, C);
+impl_tuple_metadata!(A, B, C, D);
+
 #[cfg(test)]
 mod tests {
 	use super::*;

@@ -121,8 +121,26 @@ fn has_delegate_attr(attrs: &[Attribute]) -> bool {
 	})
 }
 
-/// Find a field with #[metadata(delegate)] attribute and return its identifier/index
-fn find_delegate_field(fields: &Fields) -> Option<TokenStream> {
+fn has_skip_attr(attrs: &[Attribute]) -> bool {
+	attrs.iter().any(|attr| {
+		if attr.path().is_ident("metadata") {
+			match &attr.meta {
+				Meta::List(meta) => meta.parse_args::<MetadataArgs>().map(|args| args.skip).unwrap_or(false),
+				_ => false,
+			}
+		} else {
+			false
+		}
+	})
+}
+
+/// Determines which struct field to delegate `metadata()` to, if any.
+///
+/// Generic newtypes (e.g. `NonNegative<T>`) auto-delegate so that `T`'s metadata
+/// propagates without requiring an explicit attribute. Non-generic single-field structs
+/// don't auto-delegate because their inner types may not implement `NodeWithMetadata`.
+fn find_delegate_field(fields: &Fields, generics: &syn::Generics) -> Option<TokenStream> {
+	// Explicit #[metadata(delegate)] attribute takes priority
 	match fields {
 		Fields::Named(named) => {
 			for field in &named.named {
@@ -131,7 +149,6 @@ fn find_delegate_field(fields: &Fields) -> Option<TokenStream> {
 					return Some(quote! { #ident });
 				}
 			}
-			None
 		}
 		Fields::Unnamed(unnamed) => {
 			for (i, field) in unnamed.unnamed.iter().enumerate() {
@@ -140,17 +157,63 @@ fn find_delegate_field(fields: &Fields) -> Option<TokenStream> {
 					return Some(quote! { #idx });
 				}
 			}
-			None
 		}
-		Fields::Unit => None,
+		Fields::Unit => return None,
 	}
+
+	// Second: auto-delegate for generic single-field structs (newtypes)
+	let has_type_params = generics.type_params().next().is_some();
+	if !has_type_params {
+		return None;
+	}
+
+	let total_fields = match fields {
+		Fields::Named(named) => named.named.len(),
+		Fields::Unnamed(unnamed) => unnamed.unnamed.len(),
+		Fields::Unit => 0,
+	};
+	if total_fields == 1 {
+		match fields {
+			Fields::Named(named) => {
+				let ident = named.named.first()?.ident.as_ref()?;
+				Some(quote! { #ident })
+			}
+			Fields::Unnamed(_) => {
+				let idx = syn::Index::from(0);
+				Some(quote! { #idx })
+			}
+			Fields::Unit => None,
+		}
+	} else {
+		None
+	}
+}
+
+/// Check if delegation is active (struct field delegate or enum-level delegate).
+/// Used to determine if we need to add NodeWithMetadata bounds on generic type params.
+fn needs_delegation_bounds(args: &MetadataArgs, data: &Data, generics: &syn::Generics) -> bool {
+	if args.delegate {
+		return true;
+	}
+	if let Data::Struct(DataStruct { fields, .. }) = data {
+		return find_delegate_field(fields, generics).is_some();
+	}
+	false
+}
+
+/// Ensures delegated fields can provide metadata by bounding type params with `NodeWithMetadata`.
+fn generics_with_metadata_bounds(generics: &syn::Generics) -> syn::Generics {
+	let mut generics = generics.clone();
+	for param in &mut generics.params {
+		if let syn::GenericParam::Type(type_param) = param {
+			type_param.bounds.push(syn::parse_quote!(css_parse::NodeWithMetadata<crate::CssMetadata>));
+		}
+	}
+	generics
 }
 
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let ident = input.ident;
-	let generics = &input.generics;
-	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
-
 	let args = MetadataArgs::from(input.attrs.as_slice());
 
 	// Check if we should skip generating NodeWithMetadata (type has manual implementation)
@@ -161,6 +224,14 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		)
 		.into_compile_error();
 	}
+
+	// Add NodeWithMetadata bounds on generic params when delegation is active
+	let effective_generics = if needs_delegation_bounds(&args, &input.data, &input.generics) {
+		generics_with_metadata_bounds(&input.generics)
+	} else {
+		input.generics.clone()
+	};
+	let (impl_generics, type_generics, where_clause) = effective_generics.split_for_impl();
 
 	// Generate field initializers for any specified metadata
 	let node_kinds = if args.node_kinds.is_empty() {
@@ -199,7 +270,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 	};
 
 	let field_delegate = match &input.data {
-		Data::Struct(DataStruct { fields, .. }) => find_delegate_field(fields),
+		Data::Struct(DataStruct { fields, .. }) => find_delegate_field(fields, &input.generics),
 		_ => None,
 	};
 
@@ -227,6 +298,18 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					let variant_ident = &variant.ident;
 					let field_count = variant.fields.len();
 
+					// Check if variant has #[metadata(skip)] - if so, return default
+					if has_skip_attr(&variant.attrs) {
+						let pattern = if field_count == 0 {
+							quote! { Self::#variant_ident }
+						} else {
+							quote! { Self::#variant_ident(..) }
+						};
+						return quote! {
+							#pattern => crate::CssMetadata::default(),
+						};
+					}
+
 					if field_count == 0 {
 						// Unit variant - return default metadata
 						quote! {
@@ -239,12 +322,12 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						// For enum delegation, we merge metadata from all fields
 						// First field is the base, subsequent fields are merged in
 						let metadata_expr = if field_count == 1 {
-							quote! { css_parse::NodeWithMetadata::metadata(v0) }
+							quote! { <_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(v0) }
 						} else {
 							// Merge metadata from all fields using NodeMetadata::merge
-							let mut expr = quote! { css_parse::NodeWithMetadata::metadata(v0) };
+							let mut expr = quote! { <_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(v0) };
 							for binding in bindings.iter().skip(1) {
-								expr = quote! { css_parse::NodeMetadata::merge(#expr, css_parse::NodeWithMetadata::metadata(#binding)) };
+								expr = quote! { css_parse::NodeMetadata::merge(#expr, <_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(#binding)) };
 							}
 							expr
 						};
@@ -271,9 +354,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			.into_compile_error();
 		}
 	} else if let Some(field_path) = field_delegate {
-		// Field-level delegate on struct - merge from that field
+		// Struct delegate (explicit or auto for single-field newtypes) - merge from that field
 		let field_access = quote! { self.#field_path };
-		let child_meta_access = quote! { css_parse::NodeWithMetadata::metadata(&#field_access) };
+		let child_meta_access =
+			quote! { <_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(&#field_access) };
 		quote! {
 			fn metadata(&self) -> crate::CssMetadata {
 				let child_meta = #child_meta_access;

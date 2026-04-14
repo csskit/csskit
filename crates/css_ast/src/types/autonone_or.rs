@@ -1,4 +1,6 @@
 use super::prelude::*;
+use crate::CssMetadata;
+use css_parse::NodeWithMetadata;
 use css_parse::token_macros::Ident;
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -12,6 +14,15 @@ pub enum AutoNoneOr<T> {
 	#[atom(CssAtomSet::None)]
 	None(Ident),
 	Some(T),
+}
+
+impl<T: NodeWithMetadata<CssMetadata>> NodeWithMetadata<CssMetadata> for AutoNoneOr<T> {
+	fn metadata(&self) -> CssMetadata {
+		match self {
+			Self::Auto(_) | Self::None(_) => CssMetadata::default(),
+			Self::Some(t) => t.metadata(),
+		}
+	}
 }
 
 impl<T: ToNumberValue> ToNumberValue for AutoNoneOr<T> {
