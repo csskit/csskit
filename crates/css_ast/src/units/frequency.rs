@@ -1,6 +1,10 @@
 use super::prelude::*;
 
-// https://drafts.csswg.org/css-values/#resolution
+/// <https://drafts.csswg.org/css-values/#frequency>
+///
+/// ```text,ignore
+/// <frequency> = <dimension-token>
+/// ```
 #[derive(Parse, Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Frequency {

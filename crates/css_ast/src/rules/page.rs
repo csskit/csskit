@@ -2,8 +2,9 @@ use super::prelude::*;
 use crate::specificity::{Specificity, ToSpecificity};
 use css_parse::RuleVariants;
 
-// https://drafts.csswg.org/cssom-1/#csspagerule
-// https://drafts.csswg.org/css-page-3/#at-page-rule
+/// <https://drafts.csswg.org/cssom-1/#csspagerule>
+///
+/// <https://drafts.csswg.org/css-page-3/#at-page-rule>
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -94,7 +95,7 @@ impl ToSpecificity for PagePseudoClass {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct PageRuleBlock<'a>(#[metadata(delegate)] Block<'a, StyleValue<'a>, MarginRule<'a>, CssMetadata>);
 
-// https://drafts.csswg.org/cssom-1/#cssmarginrule
+/// <https://drafts.csswg.org/cssom-1/#cssmarginrule>
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]

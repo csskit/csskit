@@ -1,32 +1,35 @@
 use super::prelude::*;
 
-// https://drafts.csswg.org/css-anchor-position-1/#typedef-position-area
-// <position-area> = [
-//   [ left | center | right | span-left | span-right
-//   | x-start | x-end | span-x-start | span-x-end
-//   | x-self-start | x-self-end | span-x-self-start | span-x-self-end
-//   | span-all ]
-//   ||
-//   [ top | center | bottom | span-top | span-bottom
-//   | y-start | y-end | span-y-start | span-y-end
-//   | y-self-start | y-self-end | span-y-self-start | span-y-self-end
-//   | span-all ]
-// |
-//   [ block-start | center | block-end | span-block-start | span-block-end | span-all ]
-//   ||
-//   [ inline-start | center | inline-end | span-inline-start | span-inline-end
-//   | span-all ]
-// |
-//   [ self-block-start | center | self-block-end | span-self-block-start
-//   | span-self-block-end | span-all ]
-//   ||
-//   [ self-inline-start | center | self-inline-end | span-self-inline-start
-//   | span-self-inline-end | span-all ]
-// |
-//   [ start | center | end | span-start | span-end | span-all ]{1,2}
-// |
-//   [ self-start | center | self-end | span-self-start | span-self-end | span-all ]{1,2}
-// ]
+/// <https://drafts.csswg.org/css-anchor-position-1/#typedef-position-area>
+///
+/// ```text,ignore
+/// <position-area> = [
+///   [ left | center | right | span-left | span-right
+///   | x-start | x-end | span-x-start | span-x-end
+///   | x-self-start | x-self-end | span-x-self-start | span-x-self-end
+///   | span-all ]
+///   ||
+///   [ top | center | bottom | span-top | span-bottom
+///   | y-start | y-end | span-y-start | span-y-end
+///   | y-self-start | y-self-end | span-y-self-start | span-y-self-end
+///   | span-all ]
+/// |
+///   [ block-start | center | block-end | span-block-start | span-block-end | span-all ]
+///   ||
+///   [ inline-start | center | inline-end | span-inline-start | span-inline-end
+///   | span-all ]
+/// |
+///   [ self-block-start | center | self-block-end | span-self-block-start
+///   | span-self-block-end | span-all ]
+///   ||
+///   [ self-inline-start | center | self-inline-end | span-self-inline-start
+///   | span-self-inline-end | span-all ]
+/// |
+///   [ start | center | end | span-start | span-end | span-all ]{1,2}
+/// |
+///   [ self-start | center | self-end | span-self-start | span-self-end | span-all ]{1,2}
+/// ]
+/// ```
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

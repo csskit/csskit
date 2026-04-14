@@ -6,7 +6,7 @@ use bumpalo::collections::Vec;
 
 use super::ComponentValue;
 
-// https://drafts.csswg.org/css-syntax-3/#consume-list-of-components
+/// <https://drafts.csswg.org/css-syntax-3/#consume-list-of-components>
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ComponentValues<'a> {

@@ -6,7 +6,7 @@ use super::prelude::*;
 mod features;
 pub use features::*;
 
-// https://drafts.csswg.org/css-contain-3/#container-rule
+/// <https://drafts.csswg.org/css-contain-3/#container-rule>
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]

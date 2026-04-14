@@ -30,15 +30,24 @@ pub enum ContentListItem<'a> {
 	Contents(T![Ident]),
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Quote(Quote),
-	// https://drafts.csswg.org/css-content-3/#leader-function
-	// leader() = leader( <leader-type> )
+	/// <https://drafts.csswg.org/css-content-3/#leader-function>
+	///
+	/// ```text,ignore
+	/// leader() = leader( <leader-type> )
+	/// ```
 	LeaderFunction(LeaderFunction),
 	Target(Target<'a>),
-	// https://drafts.csswg.org/css-content-3/#string-function
-	// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
+	/// <https://drafts.csswg.org/css-content-3/#string-function>
+	///
+	/// ```text,ignore
+	/// string() = string( <custom-ident> , [ first | start | last | first-except ]? )
+	/// ```
 	StringFunction(StringFunction),
-	// https://drafts.csswg.org/css-content-3/#funcdef-content
-	// content() = content( [ text | before | after | first-letter | marker ]? )
+	/// <https://drafts.csswg.org/css-content-3/#funcdef-content>
+	///
+	/// ```text,ignore
+	/// content() = content( [ text | before | after | first-letter | marker ]? )
+	/// ```
 	ContentFunction(ContentFunction),
 	Counter(Counter<'a>),
 }

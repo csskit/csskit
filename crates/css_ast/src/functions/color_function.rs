@@ -409,12 +409,15 @@ impl crate::ToChromashift for HslFunctionParams {
 	}
 }
 
-// https://drafts.csswg.org/css-color/#funcdef-hwb
-// hwb() = hwb(
-//  [<hue> | none]
-//  [<percentage> | <number> | none]
-//  [<percentage> | <number> | none]
-//  [ / [<alpha-value> | none] ]? )
+/// <https://drafts.csswg.org/css-color/#funcdef-hwb>
+///
+/// ```text,ignore
+/// hwb() = hwb(
+///  [<hue> | none]
+///  [<percentage> | <number> | none]
+///  [<percentage> | <number> | none]
+///  [ / [<alpha-value> | none] ]? )
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

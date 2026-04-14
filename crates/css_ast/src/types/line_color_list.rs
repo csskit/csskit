@@ -3,8 +3,11 @@ use super::prelude::*;
 
 use crate::Todo;
 
-// https://drafts.csswg.org/css-gaps-1/#typedef-line-color-list
-// <line-color-list> = [ <line-color-or-repeat> ]+
+/// <https://drafts.csswg.org/css-gaps-1/#typedef-line-color-list>
+///
+/// ```text,ignore
+/// <line-color-list> = [ <line-color-or-repeat> ]+
+/// ```
 pub type LineColorList = Todo;
 
 #[cfg(test)]

@@ -12,22 +12,22 @@ use super::CompoundSelector;
 #[derive(csskit_derives::NodeWithMetadata)]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 pub enum FunctionalPseudoElement<'a> {
-	// https://drafts.csswg.org/css-highlight-api/#custom-highlight-pseudo
+	/// <https://drafts.csswg.org/css-highlight-api/#custom-highlight-pseudo>
 	Highlight(HighlightPseudoElement),
-	// https://drafts.csswg.org/css-shadow-parts/#part
+	/// <https://drafts.csswg.org/css-shadow-parts/#part>
 	Part(PartPseudoElement<'a>),
-	// https://drafts.csswg.org/css-forms-1/#picker-pseudo
+	/// <https://drafts.csswg.org/css-forms-1/#picker-pseudo>
 	Picker(PickerPseudoElement),
-	// https://drafts.csswg.org/css-scoping/#slotted-pseudo
+	/// <https://drafts.csswg.org/css-scoping/#slotted-pseudo>
 	Slotted(SlottedPseudoElement<'a>),
-	// https://drafts.csswg.org/css-view-transitions-2/#view-transition-pseudo
-	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-group
+	/// <https://drafts.csswg.org/css-view-transitions-2/#view-transition-pseudo>
+	/// <https://drafts.csswg.org/css-view-transitions-2/#::view-transition-group>
 	ViewTransitionGroup(ViewTransitionGroupPseudoElement<'a>),
-	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-image-pair
+	/// <https://drafts.csswg.org/css-view-transitions-2/#::view-transition-image-pair>
 	ViewTransitionImagePair(ViewTransitionImagePairPseudoElement<'a>),
-	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-new
+	/// <https://drafts.csswg.org/css-view-transitions-2/#::view-transition-new>
 	ViewTransitionNew(ViewTransitionNewPseudoElement<'a>),
-	// https://drafts.csswg.org/css-view-transitions-2/#::view-transition-old
+	/// <https://drafts.csswg.org/css-view-transitions-2/#::view-transition-old>
 	ViewTransitionOld(ViewTransitionOldPseudoElement<'a>),
 }
 

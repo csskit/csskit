@@ -2,18 +2,21 @@ use super::prelude::*;
 use crate::LengthPercentage;
 use css_parse::Token;
 
-// https://drafts.csswg.org/css-values-4/#position
-// <position> = [
-//   [ left | center | right | top | bottom | <length-percentage> ]
-// |
-//   [ left | center | right ] && [ top | center | bottom ]
-// |
-//   [ left | center | right | <length-percentage> ]
-//   [ top | center | bottom | <length-percentage> ]
-// |
-//   [ [ left | right ] <length-percentage> ] &&
-//   [ [ top | bottom ] <length-percentage> ]
-// ]
+/// <https://drafts.csswg.org/css-values-4/#position>
+///
+/// ```text,ignore
+/// <position> = [
+///   [ left | center | right | top | bottom | <length-percentage> ]
+/// |
+///   [ left | center | right ] && [ top | center | bottom ]
+/// |
+///   [ left | center | right | <length-percentage> ]
+///   [ top | center | bottom | <length-percentage> ]
+/// |
+///   [ [ left | right ] <length-percentage> ] &&
+///   [ [ top | bottom ] <length-percentage> ]
+/// ]
+/// ```
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

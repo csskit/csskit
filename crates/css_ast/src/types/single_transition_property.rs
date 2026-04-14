@@ -1,7 +1,10 @@
 use super::prelude::*;
 
-// https://drafts.csswg.org/css-transitions-1/#single-transition-property
-// <single-transition-property> = all | <custom-ident>
+/// <https://drafts.csswg.org/css-transitions-1/#single-transition-property>
+///
+/// ```text,ignore
+/// <single-transition-property> = all | <custom-ident>
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

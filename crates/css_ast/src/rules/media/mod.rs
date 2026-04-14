@@ -4,7 +4,7 @@ use crate::{AtRuleId, NodeKinds};
 mod features;
 pub use features::*;
 
-// https://drafts.csswg.org/mediaqueries-4/
+/// <https://drafts.csswg.org/mediaqueries-4/>
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
@@ -189,7 +189,7 @@ impl<'a> Parse<'a> for MediaCondition<'a> {
 
 macro_rules! media_feature {
 	( $($name: ident($typ: ident): $pat: pat,)+) => {
-		// https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table
+		/// <https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table>
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]

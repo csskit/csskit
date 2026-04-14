@@ -4,15 +4,20 @@ use super::prelude::*;
 use crate::{AutoOr, Color, LineStyle, LineWidth, PositiveNonZeroInt};
 use css_parse::{CommaSeparated, Optionals3};
 
-// https://drafts.csswg.org/css-gaps-1/#typedef-gap-rule-list
-// <gap-rule-list> = <gap-rule-or-repeat>#
+/// <https://drafts.csswg.org/css-gaps-1/#typedef-gap-rule-list>
+///
+/// ```text,ignore
+/// <gap-rule-list> = <gap-rule-or-repeat>#
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct GapRuleList<'a>(pub CommaSeparated<'a, GapRuleOrRepeat<'a>>);
 
-// <gap-rule-or-repeat> = <gap-rule> | <gap-repeat-rule>
+/// ```text,ignore
+/// <gap-rule-or-repeat> = <gap-rule> | <gap-repeat-rule>
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -22,7 +27,9 @@ pub enum GapRuleOrRepeat<'a> {
 	GapRepeatRule(GapRepeatRule<'a>),
 }
 
-// <gap-repeat-rule> = repeat( <integer [1,∞]> , <gap-rule># )
+/// ```text,ignore
+/// <gap-repeat-rule> = repeat( <integer [1,∞]> , <gap-rule># )
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -40,7 +47,9 @@ pub struct GapRepeatRule<'a> {
 	pub close: T![')'],
 }
 
-// <gap-rule> = <line-width> || <line-style> || <color>
+/// ```text,ignore
+/// <gap-rule> = <line-width> || <line-style> || <color>
+/// ```
 pub type GapRule<'a> = Optionals3<LineWidth, LineStyle, Color<'a>>;
 
 #[cfg(test)]

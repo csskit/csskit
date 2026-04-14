@@ -1,7 +1,11 @@
 use super::prelude::*;
 use crate::units::CSSInt;
 
-// https://drafts.csswg.org/css-values-4/#ratios
+/// <https://drafts.csswg.org/css-values-4/#ratios>
+///
+/// ```text,ignore
+/// <ratio> = <number [0,∞]> [ / <number [0,∞]> ]?
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

@@ -41,8 +41,11 @@ pub struct CountersFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CountersFunctionParams<'a>(T![Ident], Option<T![,]>, T![String], Option<T![,]>, Option<CounterStyle<'a>>);
 
-// https://drafts.csswg.org/css-lists-3/#counter-functions
-// <counter> = <counter()> | <counters()>
+/// <https://drafts.csswg.org/css-lists-3/#counter-functions>
+///
+/// ```text,ignore
+/// <counter> = <counter()> | <counters()>
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]

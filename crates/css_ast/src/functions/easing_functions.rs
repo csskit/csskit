@@ -1,25 +1,28 @@
 use super::prelude::*;
 use crate::Percentage;
 
-// https://drafts.csswg.org/css-easing-2/#typedef-easing-function
-// <easing-function> = <linear-easing-function>
-//                      | <cubic-bezier-easing-function>
-//                      | <step-easing-function>
-//
-// <linear-easing-function> = linear | <linear()>
-//
-// linear() = linear( [ <number> && <percentage>{0,2} ]# )
-//
-// <cubic-bezier-easing-function> =
-// 	ease | ease-in | ease-out | ease-in-out | <cubic-bezier()>
-//
-// cubic-bezier() = cubic-bezier( [ <number [0,1]>, <number> ]#{2} )
-//
-// <step-easing-function> = step-start | step-end | <steps()>
-//
-// steps() = steps( <integer>, <step-position>?)
-//
-// <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
+/// <https://drafts.csswg.org/css-easing-2/#typedef-easing-function>
+///
+/// ```text,ignore
+/// <easing-function> = <linear-easing-function>
+///                      | <cubic-bezier-easing-function>
+///                      | <step-easing-function>
+///
+/// <linear-easing-function> = linear | <linear()>
+///
+/// linear() = linear( [ <number> && <percentage>{0,2} ]# )
+///
+/// <cubic-bezier-easing-function> = ease | ease-in | ease-out | ease-in-out
+///                                    | <cubic-bezier()>
+///
+/// cubic-bezier() = cubic-bezier( [ <number [0,1]>, <number> ]#{2} )
+///
+/// <step-easing-function> = step-start | step-end | <steps()>
+///
+/// steps() = steps( <integer>, <step-position>?)
+///
+/// <step-position> = jump-start | jump-end | jump-none | jump-both | start | end
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]

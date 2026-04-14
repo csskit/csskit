@@ -1,6 +1,6 @@
 use crate::Todo;
 
-// https://drafts.csswg.org/css-fonts/#at-ruledef-font-feature-values
+/// <https://drafts.csswg.org/css-fonts/#at-ruledef-font-feature-values>
 pub type FontFeatureValuesRule = Todo;
 
 #[cfg(test)]

@@ -1,8 +1,11 @@
 use super::prelude::*;
 use crate::units::LengthPercentage;
 
-// https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-block
-// snap-block() = snap-block( <length> , [ start | end | near ]? )
+/// <https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-block>
+///
+/// ```text,ignore
+/// snap-block() = snap-block( <length> , [ start | end | near ]? )
+/// ```
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

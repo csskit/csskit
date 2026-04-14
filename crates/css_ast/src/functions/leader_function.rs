@@ -17,8 +17,11 @@ pub struct LeaderFunction {
 	pub close: T![')'],
 }
 
-// https://drafts.csswg.org/css-content-3/#typedef-leader-type
-// <leader-type> = dotted | solid | space | <string>
+/// <https://drafts.csswg.org/css-content-3/#typedef-leader-type>
+///
+/// ```text,ignore
+/// <leader-type> = dotted | solid | space | <string>
+/// ```
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LeaderType {

@@ -23,7 +23,9 @@ pub struct AttrFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType>, Option<T![,]>, Option<ComponentValues<'a>>);
 
-// <attr-name> = [ <ident-token>? '|' ]? <ident-token>
+/// ```text,ignore
+/// <attr-name> = [ <ident-token>? '|' ]? <ident-token>
+/// ```
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrName(pub Option<T![Ident]>, pub Option<T![|]>, pub Option<T![Ident]>);
@@ -63,7 +65,9 @@ impl<'a> Parse<'a> for AttrName {
 	}
 }
 
-// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
+/// ```text,ignore
+/// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
+/// ```
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttrType {

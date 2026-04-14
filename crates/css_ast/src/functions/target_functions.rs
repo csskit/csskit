@@ -33,14 +33,23 @@ pub enum TargetCounterKind {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum Target<'a> {
-	// https://drafts.csswg.org/css-content-3/#target-counter
-	// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
+	/// <https://drafts.csswg.org/css-content-3/#target-counter>
+	///
+	/// ```text,ignore
+	/// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
+	/// ```
 	TargetCounter(TargetCounterFunction<'a>),
-	// https://drafts.csswg.org/css-content-3/#target-counters
-	// target-counters() = target-counters( [ <string> | <url> ] , <custom-ident> , <string> , <counter-style>? )
+	/// <https://drafts.csswg.org/css-content-3/#target-counters>
+	///
+	/// ```text,ignore
+	/// target-counters() = target-counters( [ <string> | <url> ] , <custom-ident> , <string> , <counter-style>? )
+	/// ```
 	TargetCounters(TargetCountersFunction<'a>),
-	// https://drafts.csswg.org/css-content-3/#target-text
-	// target-text() = target-text( [ <string> | <url> ] , [ content | before | after | first-letter ]? )
+	/// <https://drafts.csswg.org/css-content-3/#target-text>
+	///
+	/// ```text,ignore
+	/// target-text() = target-text( [ <string> | <url> ] , [ content | before | after | first-letter ]? )
+	/// ```
 	TargetText(TargetTextFunction),
 }
 

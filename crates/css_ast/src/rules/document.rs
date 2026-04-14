@@ -1,6 +1,6 @@
 use super::prelude::*;
 
-// https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document
+/// <https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document>
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]

@@ -1,6 +1,10 @@
 use super::prelude::*;
 
-// https://www.w3.org/TR/css-grid-2/#typedef-flex
+/// <https://www.w3.org/TR/css-grid-2/#typedef-flex>
+///
+/// ```text,ignore
+/// <flex> = <dimension-token>
+/// ```
 #[derive(IntoCursor, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

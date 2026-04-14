@@ -3,8 +3,7 @@ use crate::Computed;
 #[cfg(feature = "visitable")]
 use crate::visit::{NodeId, QueryableNode};
 
-// https://drafts.csswg.org/cssom-1/#csspagerule
-// https://drafts.csswg.org/css-page-3/#at-page-rule
+/// <https://drafts.css-houdini.org/css-properties-values-api/#at-property-rule>
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]

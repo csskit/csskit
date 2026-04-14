@@ -3,9 +3,10 @@ use crate::{
 	Result as ParserResult, SemanticEq, SimpleBlock, Span, State, T, ToCursors, ToSpan,
 };
 
-// https://drafts.csswg.org/css-syntax-3/#consume-component-value
-// A compatible "Token" per CSS grammar, subsetted to the tokens possibly
-// rendered by ComponentValue (so no pairwise, function tokens, etc).
+/// <https://drafts.csswg.org/css-syntax-3/#consume-component-value>
+///
+/// A compatible "Token" per CSS grammar, subsetted to the tokens possibly
+/// rendered by ComponentValue (so no pairwise, function tokens, etc).
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 pub enum ComponentValue<'a> {

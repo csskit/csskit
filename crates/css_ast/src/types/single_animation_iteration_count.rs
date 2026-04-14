@@ -1,8 +1,11 @@
 use super::prelude::*;
 use crate::NonNegative;
 
-// https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count
-// <single-animation-iteration-count> = infinite | <number [0,∞]>
+/// <https://drafts.csswg.org/css-animations/#typedef-single-animation-iteration-count>
+///
+/// ```text,ignore
+/// <single-animation-iteration-count> = infinite | <number [0,∞]>
+/// ```
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

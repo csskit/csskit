@@ -3,7 +3,11 @@ use super::prelude::*;
 // const DPPX_IN: f32 = 96.0;
 // const DPPX_CM: f32 = DPPX_IN / 2.54;
 
-// https://drafts.csswg.org/css-values/#resolution
+/// <https://drafts.csswg.org/css-values/#resolution>
+///
+/// ```text,ignore
+/// <resolution> = <dimension-token>
+/// ```
 #[derive(ToCursors, Parse, Peek, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Resolution {

@@ -2,7 +2,7 @@ use super::prelude::*;
 use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
 use css_parse::BumpBox;
 
-// https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions
+/// <https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions>
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]

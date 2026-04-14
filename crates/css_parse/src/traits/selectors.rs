@@ -2,11 +2,11 @@ use crate::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
 use bumpalo::collections::Vec;
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
-	// SelectorComponent represents a Selector, or Combinator.
-	// https://drafts.csswg.org/selectors-4/#typedef-combinator
-	// https://drafts.csswg.org/selectors-4/#typedef-type-selector
-	// https://drafts.csswg.org/selectors-4/#typedef-subclass-selector
-	// https://drafts.csswg.org/selectors-4/#typedef-pseudo-element-selector
+	/// SelectorComponent represents a Selector, or Combinator.
+	/// <https://drafts.csswg.org/selectors-4/#typedef-combinator>
+	/// <https://drafts.csswg.org/selectors-4/#typedef-type-selector>
+	/// <https://drafts.csswg.org/selectors-4/#typedef-subclass-selector>
+	/// <https://drafts.csswg.org/selectors-4/#typedef-pseudo-element-selector>
 	type SelectorComponent: Parse<'a> + SelectorComponent<'a>;
 
 	/// Parse the next selector component, or return Ok(None) if at a terminator.

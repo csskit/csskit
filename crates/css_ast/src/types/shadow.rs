@@ -1,8 +1,11 @@
 use super::prelude::*;
 use crate::{Color, Length, NonNegative};
 
-// https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow
-// <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
+/// <https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow>
+///
+/// ```text,ignore
+/// <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
+/// ```
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]

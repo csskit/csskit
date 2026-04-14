@@ -1,7 +1,10 @@
 use crate::{GapRepeatRule, GapRuleList, GapRuleOrRepeat};
 
-// https://drafts.csswg.org/css-gaps-1/#typedef-gap-auto-rule-list
-// <gap-auto-rule-list> = <gap-rule-or-repeat>#? , <gap-auto-repeat-rule> , <gap-rule-or-repeat>#?
+/// <https://drafts.csswg.org/css-gaps-1/#typedef-gap-auto-rule-list>
+///
+/// ```text,ignore
+/// <gap-auto-rule-list> = <gap-rule-or-repeat>#? , <gap-auto-repeat-rule> , <gap-rule-or-repeat>#?
+/// ```
 // We intentionally flatten this into <gap-rule-list> semantics so higher layers
 // can decide whether stricter auto-repeat placement constraints should apply.
 pub type GapAutoRuleList<'a> = GapRuleList<'a>;

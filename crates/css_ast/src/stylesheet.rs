@@ -6,7 +6,7 @@ use css_parse::{
 };
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
-// https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface
+/// <https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface>
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -104,7 +104,7 @@ macro_rules! rule {
     ( $(
         $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
-		// https://drafts.csswg.org/cssom-1/#the-cssrule-interface
+		/// <https://drafts.csswg.org/cssom-1/#the-cssrule-interface>
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]

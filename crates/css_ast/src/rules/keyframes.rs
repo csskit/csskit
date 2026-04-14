@@ -4,7 +4,7 @@ use crate::Percentage;
 use crate::visit::{NodeId, QueryableNode};
 use css_parse::NoBlockAllowed;
 
-// https://drafts.csswg.org/css-animations/#at-ruledef-keyframes
+/// <https://drafts.csswg.org/css-animations/#at-ruledef-keyframes>
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
