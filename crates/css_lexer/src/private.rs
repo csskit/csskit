@@ -581,7 +581,15 @@ impl<'a> ByteCursor<'a> {
 				let (_, c2, c3) = if c == EOF && self.at_end() { (EOF, EOF, EOF) } else { self.peek3() };
 				if is_ident_start_sequence(c, c2, c3) {
 					let (unit_len, _, _, _, atom_bits, _) = self.consume_ident_sequence(atoms);
-					Token::new_dimension(is_float, has_sign, num_len as u32, unit_len, value, atom_bits as u8)
+					// Dimension token encoding packs the unit atom into 7 bits (discriminants 1-127).
+					// Unit atoms are all in the low discriminant range; non-unit keywords are placed
+					// above 127 by convention. Unknown suffixes are represented as atom 0.
+					debug_assert!(
+						atom_bits == 0 || atom_bits <= 127,
+						"atom with discriminant {atom_bits} used as dimension unit; non-unit atoms must have discriminant > 127"
+					);
+					let atom = if atom_bits <= 127 { atom_bits as u8 } else { 0 };
+					Token::new_dimension(is_float, has_sign, num_len as u32, unit_len, value, atom)
 				} else {
 					Token::new_number(is_float, has_sign, num_len as u32, value)
 				}

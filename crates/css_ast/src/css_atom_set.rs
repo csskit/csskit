@@ -84,7 +84,13 @@ pub enum CssAtomSet {
 	Vmin,
 	Vw,
 	X,
-	Y,
+
+	// n- is _not_ a dimension, but it needs to be in the lower bitset to ensure that if
+	// nth parses a Dimension that `n-` can be compared without hitting a debug_assert!
+	#[atom("n-")]
+	_NDash = 127,
+
+	// ^^^ Only dimensions go above here! ^^^
 
 	// CSS Keywords
 	A,
@@ -2127,16 +2133,16 @@ pub enum CssAtomSet {
 	Width,
 	WillChange,
 	WindowsVista,
-	With,
 	WindowsWin10,
 	WindowsWin7,
 	WindowsWin8,
 	WindowsXp,
-	Words,
+	With,
 	WordBreak,
 	WordSpaceTransform,
 	WordSpacing,
 	WordWrap,
+	Words,
 	Wrap,
 	WrapAfter,
 	WrapBefore,
@@ -2160,6 +2166,7 @@ pub enum CssAtomSet {
 	Xyz,
 	XyzD50,
 	XyzD65,
+	Y,
 	YEnd,
 	YSelfEnd,
 	YSelfStart,
@@ -2170,8 +2177,6 @@ pub enum CssAtomSet {
 	Zoom,
 	ZoomIn,
 	ZoomOut,
-	#[atom("n-")]
-	_NDash,
 	#[atom("-infinity")]
 	_NegInfinity,
 
