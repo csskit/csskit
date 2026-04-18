@@ -9,6 +9,8 @@ document.addEventListener("DOMContentLoaded", function () {
 let charts = [];
 let selectedFile = null; // null means show all files
 
+const MAX_POINTS = 30;
+
 function refreshCharts() {
 	// Destroy existing charts
 	charts.forEach((chart) => {
@@ -51,7 +53,7 @@ function updateFilterUI() {
 			cursor: pointer;
 		`;
 		indicator.innerHTML = `
-			📊 Showing: ${selectedFile.replace(/\./g, " ").replace(/-/g, " ")}
+			Showing: ${selectedFile.replace(/\./g, " ").replace(/-/g, " ")}
 			<br><small style="opacity: 0.9;">Click to show all files</small>
 		`;
 		indicator.addEventListener("click", () => {
@@ -191,8 +193,8 @@ function getBaseChartConfig(title, yAxisTitle, yAxisOptions = {}, thresholds = n
 	const config = {
 		chart: {
 			type: "line",
-			height: 400,
-			zoom: { enabled: true },
+			height: 460,
+			zoom: { enabled: true, type: "x" },
 			toolbar: { show: true },
 			...getChartOptions(),
 		},
@@ -209,14 +211,16 @@ function getBaseChartConfig(title, yAxisTitle, yAxisOptions = {}, thresholds = n
 			borderColor: getGridBorderColor(),
 		},
 		xaxis: {
+			type: "datetime",
 			title: {
-				text: "Time",
+				text: "Date",
 				style: { fontSize: fontSizes.axis },
 			},
-			type: "category",
 			labels: {
-				show: false,
+				datetimeUTC: false,
+				style: { fontSize: "12px" },
 			},
+			tooltip: { enabled: false },
 		},
 		yaxis: {
 			title: {
@@ -231,6 +235,7 @@ function getBaseChartConfig(title, yAxisTitle, yAxisOptions = {}, thresholds = n
 		legend: {
 			position: "bottom",
 			offsetY: 0,
+			height: 80,
 			fontSize: fontSizes.legend,
 		},
 		tooltip: {
@@ -238,6 +243,9 @@ function getBaseChartConfig(title, yAxisTitle, yAxisOptions = {}, thresholds = n
 			intersect: false,
 			style: {
 				fontSize: fontSizes.tooltip,
+			},
+			x: {
+				format: "dd MMM yyyy HH:mm",
 			},
 		},
 		theme: getChartTheme(),
@@ -275,10 +283,6 @@ function getCriterionChartConfig(
 
 	const config = getBaseChartConfig(title, yAxisTitle, yAxisOptions, thresholds);
 	config.stroke.width = 3;
-	config.markers = {
-		size: 4,
-		hover: { size: 6 },
-	};
 	config.tooltip.y = {
 		formatter: function (y) {
 			if (typeof y !== "undefined" && typeof y === "number" && !isNaN(y)) {
@@ -309,22 +313,126 @@ function setupThemeObserver() {
 	});
 }
 
+// --- Adaptive sampling ---
+
+/**
+ * Coalesce entries by calendar day, keeping the last run of each day.
+ * Entries must be sorted oldest-first.
+ */
+function coalesceByDay(entries) {
+	const byDay = new Map();
+	for (const entry of entries) {
+		const day = entry.timestamp.slice(0, 10); // YYYY-MM-DD
+		byDay.set(day, entry); // later entries overwrite earlier ones
+	}
+	return Array.from(byDay.values());
+}
+
+/**
+ * Thin an array to at most maxPoints by picking evenly spaced entries.
+ * Always includes first and last.
+ */
+function thinEvenly(entries, maxPoints) {
+	if (entries.length <= maxPoints) return entries;
+	const result = [];
+	const step = (entries.length - 1) / (maxPoints - 1);
+	for (let i = 0; i < maxPoints; i++) {
+		result.push(entries[Math.round(i * step)]);
+	}
+	return result;
+}
+
+/**
+ * Given a full list of entries (oldest-first), return a sampled subset
+ * of at most MAX_POINTS for display. Coalesces same-day runs first, then
+ * thins if still too many.
+ */
+function sampleEntries(entries) {
+	const coalesced = coalesceByDay(entries);
+	return thinEvenly(coalesced, MAX_POINTS);
+}
+
+/**
+ * Filter entries to a timestamp window [minMs, maxMs], then resample.
+ */
+function sampleEntriesWindow(entries, minMs, maxMs) {
+	const windowed = entries.filter((e) => {
+		const ms = new Date(e.timestamp).getTime();
+		return ms >= minMs && ms <= maxMs;
+	});
+	// Within a zoom window show all coalesced points (no further thinning)
+	// unless there are still more than MAX_POINTS
+	const coalesced = coalesceByDay(windowed);
+	return thinEvenly(coalesced, MAX_POINTS);
+}
+
+/**
+ * Attach zoom/reset handlers to a chart that update its series from fullSeriesBuilder.
+ * fullSeriesBuilder(entries) -> series array
+ * fullEntries: all benchmark entries, oldest-first
+ */
+function attachZoomHandlers(chart, fullEntries, fullSeriesBuilder) {
+	// We patch the chart options after render to inject event handlers,
+	// since ApexCharts events must be in the initial config.
+	// Instead we use the chart's internal event system via updateOptions.
+	// NOTE: zoomed and beforeResetZoom must be set in initial chart config.
+	// This function is a no-op placeholder; see buildZoomEvents() below.
+}
+
+/**
+ * Build the chart.events block for adaptive zoom.
+ *
+ * The chart is always rendered with the full coalesced-by-day dataset.
+ * ApexCharts handles zoom natively within that dataset. On reset we
+ * ensure the coalesced view is restored (in case updateSeries was called
+ * from elsewhere).
+ *
+ * sampledEntries: the initial sample shown on render - restored on reset
+ * seriesBuilder(entries) -> ApexCharts series array
+ * getChartRef: () -> ApexCharts instance (populated after render)
+ */
+function sampledTimeRange(sampledEntries) {
+	const min = new Date(sampledEntries[0].timestamp).getTime();
+	const max = new Date(sampledEntries[sampledEntries.length - 1].timestamp).getTime();
+	return { min, max };
+}
+
+function buildZoomEvents(sampledEntries, seriesBuilder, getChartRef) {
+	const { min, max } = sampledTimeRange(sampledEntries);
+	return {
+		beforeZoom: function (_ctx, { xaxis }) {
+			return {
+				xaxis: {
+					min: Math.max(xaxis.min, min),
+					max: Math.min(xaxis.max, max),
+				},
+			};
+		},
+		beforeResetZoom: function (_ctx) {
+			return { xaxis: { min, max } };
+		},
+	};
+}
+
 function initializeCharts() {
 	const data = window.benchmarkData;
 
 	if (data.length < 2) return;
 
+	// data is newest-first; reverse to oldest-first for sampling
+	const entries = [...data].reverse();
+
 	// Create all charts
-	createTimeChart(data);
-	createCompressionChart(data);
-	createThroughputChart(data);
-	createCriterionParseChart(data);
-	createCriterionLexChart(data);
-	createCriterionMinifyChart(data);
-	createCriterionParseSheetChart(data);
-	createCriterionSelectorMatcherChart(data);
-	createCriterionCollectorChart(data);
-	createCriterionFromStrChart(data);
+	createTimeChart(entries);
+	createCompressionChart(entries);
+	createThroughputChart(entries);
+	createCriterionParseChart(entries);
+	createCriterionLexChart(entries);
+	createCriterionMinifyChart(entries);
+	createCriterionParseSheetChart(entries);
+	createCriterionSelectorMatcherChart(entries);
+	createCriterionCollectorChart(entries);
+	createCriterionFromStrChart(entries);
 
 	createComparisonTimeChart(data);
 	createComparisonSizeChart(data);
@@ -332,28 +440,35 @@ function initializeCharts() {
 	setupThemeObserver();
 }
 
-function createTimeChart(data) {
+function createTimeChart(entries) {
 	const chartElement = document.getElementById("processing-time-chart");
 	if (!chartElement) return;
-	const allFiles = Object.keys(data[0].hyperfine_results);
-	const series = allFiles.map((file) => {
-		const dataPoints = [...data].reverse()
-			.map((entry, index) => {
-				const fileData = entry.hyperfine_results[file];
-				if (fileData && fileData.results && fileData.results[0]) {
-					return {
-						x: `${entry.git_commit.slice(0, 8)}-${index}`,
-						y: Math.round(fileData.results[0].mean * 1000000), // microseconds
-					};
-				}
-				return null;
-			})
-			.filter((point) => point !== null);
-		return {
-			name: file.replace(/\./g, " ").replace(/-/g, " "),
-			data: dataPoints,
-		};
-	});
+
+	const allFiles = Object.keys(entries[0].hyperfine_results);
+
+	function buildSeries(sampledEntries) {
+		return allFiles.map((file) => {
+			const dataPoints = sampledEntries
+				.map((entry) => {
+					const fileData = entry.hyperfine_results[file];
+					if (fileData && fileData.results && fileData.results[0]) {
+						return {
+							x: new Date(entry.timestamp).getTime(),
+							y: Math.round(fileData.results[0].mean * 1000000), // microseconds
+						};
+					}
+					return null;
+				})
+				.filter((point) => point !== null);
+			return {
+				name: file.replace(/\./g, " ").replace(/-/g, " "),
+				data: dataPoints,
+			};
+		});
+	}
+
+	const sampled = sampleEntries(entries);
+	const series = buildSeries(sampled);
 
 	// Detect outliers
 	let allValues = [];
@@ -364,10 +479,8 @@ function createTimeChart(data) {
 	const { outliers, normal } = detectOutliers(allValues);
 	const hasOutliers = outliers.length > 0;
 
-	// Separate outlier series from normal series
 	const normalSeries = [];
 	const outlierSeries = [];
-
 	series.forEach((s) => {
 		const avgValue = s.data.reduce((sum, point) => sum + point.y, 0) / s.data.length;
 		if (outliers.includes(avgValue) || s.data.some((point) => outliers.includes(point.y))) {
@@ -377,10 +490,17 @@ function createTimeChart(data) {
 		}
 	});
 
-	// Create main chart with normal data
+	function buildNormalSeries(e) {
+		return buildSeries(e).filter((s) => normalSeries.some((ns) => ns.name === s.name));
+	}
+	function buildOutlierSeries(e) {
+		return buildSeries(e).filter((s) => outlierSeries.some((os) => os.name === s.name));
+	}
+
 	const mainMin = normal.length > 0 ? Math.max(0, Math.min(...normal)) : 0;
 	const mainMax = normal.length > 0 ? Math.max(...normal) : 100;
 
+	let chartRef = null;
 	const options = {
 		series: normalSeries,
 		...getBaseChartConfig(
@@ -390,6 +510,8 @@ function createTimeChart(data) {
 			PERFORMANCE_THRESHOLDS.processing_time,
 		),
 	};
+	options.chart.events = buildZoomEvents(sampled, buildNormalSeries, () => chartRef);
+	Object.assign(options.xaxis, sampledTimeRange(sampled));
 	options.tooltip.y = {
 		formatter: function (y) {
 			if (typeof y !== "undefined" && typeof y === "number" && !isNaN(y)) {
@@ -399,14 +521,13 @@ function createTimeChart(data) {
 		},
 	};
 	const chart = new ApexCharts(chartElement, options);
+	chartRef = chart;
 	charts.push(chart);
 	chart.render();
 
-	// Create outlier chart if there are outliers
 	if (hasOutliers && outlierSeries.length > 0) {
 		const outlierChartId = "processing-time-outliers-chart";
 		let outlierChartElement = document.getElementById(outlierChartId);
-
 		if (!outlierChartElement) {
 			outlierChartElement = document.createElement("div");
 			outlierChartElement.id = outlierChartId;
@@ -417,6 +538,7 @@ function createTimeChart(data) {
 		const outlierMin = Math.min(...outliers);
 		const outlierMax = Math.max(...outliers);
 
+		let outlierChartRef = null;
 		const outlierOptions = {
 			series: outlierSeries,
 			...getBaseChartConfig(
@@ -426,7 +548,9 @@ function createTimeChart(data) {
 				PERFORMANCE_THRESHOLDS.processing_time,
 			),
 		};
-		outlierOptions.chart.height = 300;
+		outlierOptions.chart.height = 460;
+		outlierOptions.chart.events = buildZoomEvents(sampled, buildOutlierSeries, () => outlierChartRef);
+		Object.assign(outlierOptions.xaxis, sampledTimeRange(sampled));
 		outlierOptions.tooltip.y = {
 			formatter: function (y) {
 				if (typeof y !== "undefined") {
@@ -437,72 +561,80 @@ function createTimeChart(data) {
 		};
 
 		const outlierChart = new ApexCharts(outlierChartElement, outlierOptions);
+		outlierChartRef = outlierChart;
 		charts.push(outlierChart);
 		outlierChart.render();
 	}
 }
 
-function createCompressionChart(data) {
+function createCompressionChart(entries) {
 	const chartElement = document.getElementById("compression-chart");
 	if (!chartElement) return;
-	const allFiles = Object.keys(data[0].hyperfine_results);
-	const series = allFiles
-		.map((file) => {
-			const dataPoints = [...data].reverse()
-				.map((entry, index) => {
-					const fileData = entry.hyperfine_results[file];
-					if (fileData && fileData.compression_ratio && fileData.output_size > 0) {
-						const compressionPercent = (1 - fileData.compression_ratio) * 100;
-						return {
-							x: `${entry.git_commit.slice(0, 8)}-${index}`,
-							y: Math.round(compressionPercent * 10) / 10, // 1dp
-						};
-					}
-					return null;
-				})
-				.filter((point) => point !== null);
 
-			return {
-				name: file.replace(/\./g, " ").replace(/-/g, " "),
-				data: dataPoints,
-			};
-		})
-		.filter((series) => series.data.length > 0);
+	const allFiles = Object.keys(entries[0].hyperfine_results);
 
-	// Detect outliers
+	function buildSeries(sampledEntries) {
+		return allFiles
+			.map((file) => {
+				const dataPoints = sampledEntries
+					.map((entry) => {
+						const fileData = entry.hyperfine_results[file];
+						if (fileData && fileData.compression_ratio && fileData.output_size > 0) {
+							const compressionPercent = (1 - fileData.compression_ratio) * 100;
+							return {
+								x: new Date(entry.timestamp).getTime(),
+								y: Math.round(compressionPercent * 10) / 10,
+							};
+						}
+						return null;
+					})
+					.filter((point) => point !== null);
+				return {
+					name: file.replace(/\./g, " ").replace(/-/g, " "),
+					data: dataPoints,
+				};
+			})
+			.filter((s) => s.data.length > 0);
+	}
+
+	const sampled = sampleEntries(entries);
+	const series = buildSeries(sampled);
+
 	let allValues = [];
-	series.forEach((s) => {
-		s.data.forEach((point) => {
-			if (point !== null) allValues.push(point);
-		});
-	});
+	series.forEach((s) => s.data.forEach((point) => allValues.push(point.y)));
 
 	const { outliers, normal } = detectOutliers(allValues);
 	const hasOutliers = outliers.length > 0;
 
-	// Separate outlier series from normal series
 	const normalSeries = [];
 	const outlierSeries = [];
-
 	series.forEach((s) => {
-		const validValues = s.data.filter((point) => point !== null);
-		const avgValue =
-			validValues.length > 0 ? validValues.reduce((sum, point) => sum + point, 0) / validValues.length : 0;
-		if (outliers.includes(avgValue) || s.data.some((point) => point !== null && outliers.includes(point))) {
+		const validValues = s.data.filter((p) => p !== null);
+		const avgValue = validValues.length > 0 ? validValues.reduce((sum, p) => sum + p.y, 0) / validValues.length : 0;
+		if (outliers.includes(avgValue) || s.data.some((p) => p !== null && outliers.includes(p.y))) {
 			outlierSeries.push(s);
 		} else {
 			normalSeries.push(s);
 		}
 	});
 
-	// Create main chart with normal data
-	const mainMin = normal.length > 0 ? Math.max(0, Math.min(...normal)) : 0;
-	const mainMax = normal.length > 0 ? Math.min(100, Math.max(...normal)) : 100;
+	function buildNormalSeries(e) {
+		return buildSeries(e).filter((s) => normalSeries.some((ns) => ns.name === s.name));
+	}
+	function buildOutlierSeries(e) {
+		return buildSeries(e).filter((s) => outlierSeries.some((os) => os.name === s.name));
+	}
 
+	const mainMin = normal.length > 0 ? Math.max(0, Math.min(...normal.map((p) => (typeof p === "object" ? p.y : p)))) : 0;
+	const mainMax = normal.length > 0 ? Math.min(100, Math.max(...normal.map((p) => (typeof p === "object" ? p.y : p)))) : 100;
+
+	let chartRef = null;
 	const options = {
 		series: normalSeries,
 		...getBaseChartConfig("Compression Ratio Trends", "Percent", { min: mainMin, max: mainMax }),
 	};
+	options.chart.events = buildZoomEvents(sampled, buildNormalSeries, () => chartRef);
+	Object.assign(options.xaxis, sampledTimeRange(sampled));
 	options.tooltip.y = {
 		formatter: function (y) {
 			if (typeof y !== "undefined" && typeof y === "number" && !isNaN(y)) {
@@ -512,14 +644,13 @@ function createCompressionChart(data) {
 		},
 	};
 	const chart = new ApexCharts(chartElement, options);
+	chartRef = chart;
 	charts.push(chart);
 	chart.render();
 
-	// Create outlier chart if there are outliers
 	if (hasOutliers && outlierSeries.length > 0) {
 		const outlierChartId = "compression-outliers-chart";
 		let outlierChartElement = document.getElementById(outlierChartId);
-
 		if (!outlierChartElement) {
 			outlierChartElement = document.createElement("div");
 			outlierChartElement.id = outlierChartId;
@@ -527,14 +658,17 @@ function createCompressionChart(data) {
 			chartElement.parentNode.insertBefore(outlierChartElement, chartElement.nextSibling);
 		}
 
-		const outlierMin = Math.max(0, Math.min(...outliers));
-		const outlierMax = Math.min(100, Math.max(...outliers));
+		const outlierMin = Math.max(0, Math.min(...outliers.map((p) => (typeof p === "object" ? p.y : p))));
+		const outlierMax = Math.min(100, Math.max(...outliers.map((p) => (typeof p === "object" ? p.y : p))));
 
+		let outlierChartRef = null;
 		const outlierOptions = {
 			series: outlierSeries,
 			...getBaseChartConfig("Compression Ratio Trends (Outliers)", "Percent", { min: outlierMin, max: outlierMax }),
 		};
-		outlierOptions.chart.height = 300;
+		outlierOptions.chart.height = 460;
+		outlierOptions.chart.events = buildZoomEvents(sampled, buildOutlierSeries, () => outlierChartRef);
+		Object.assign(outlierOptions.xaxis, sampledTimeRange(sampled));
 		outlierOptions.tooltip.y = {
 			formatter: function (y) {
 				if (typeof y !== "undefined") {
@@ -545,77 +679,93 @@ function createCompressionChart(data) {
 		};
 
 		const outlierChart = new ApexCharts(outlierChartElement, outlierOptions);
+		outlierChartRef = outlierChart;
 		charts.push(outlierChart);
 		outlierChart.render();
 	}
 }
 
-function createThroughputChart(data) {
+function createThroughputChart(entries) {
 	const chartElement = document.getElementById("throughput-chart");
 	if (!chartElement) return;
-	const allFiles = Object.keys(data[0].hyperfine_results);
-	const series = allFiles
-		.map((file) => {
-			const dataPoints = [...data].reverse()
-				.map((entry, index) => {
-					const fileData = entry.hyperfine_results[file];
-					if (fileData && fileData.results && fileData.results[0] && fileData.input_size) {
-						// Calculate throughput: input_size (bytes) / time (seconds) = bytes/sec -> MB/s
-						const throughputMBps = fileData.input_size / fileData.results[0].mean / (1024 * 1024);
-						return {
-							x: `${entry.git_commit.slice(0, 8)}-${index}`,
-							y: Math.round(throughputMBps * 10) / 10, // 1dp
-						};
-					}
-					return null;
-				})
-				.filter((point) => point !== null);
 
-			return {
-				name: file.replace(/\./g, " ").replace(/-/g, " "),
-				data: dataPoints,
-			};
-		})
-		.filter((series) => series.data.length > 0);
+	const allFiles = Object.keys(entries[0].hyperfine_results);
 
-	// Detect outliers
+	function buildSeries(sampledEntries) {
+		return allFiles
+			.map((file) => {
+				const dataPoints = sampledEntries
+					.map((entry) => {
+						const fileData = entry.hyperfine_results[file];
+						if (fileData && fileData.results && fileData.results[0] && fileData.input_size) {
+							const throughputMBps = fileData.input_size / fileData.results[0].mean / (1024 * 1024);
+							return {
+								x: new Date(entry.timestamp).getTime(),
+								y: Math.round(throughputMBps * 10) / 10,
+							};
+						}
+						return null;
+					})
+					.filter((point) => point !== null);
+				return {
+					name: file.replace(/\./g, " ").replace(/-/g, " "),
+					data: dataPoints,
+				};
+			})
+			.filter((s) => s.data.length > 0);
+	}
+
+	// Compute low/high water marks from full history (p10/p90 across all files)
+	const historyValues = buildSeries(entries)
+		.flatMap((s) => s.data.map((p) => p.y))
+		.filter((v) => typeof v === "number" && !isNaN(v))
+		.sort((a, b) => a - b);
+	const p10 = historyValues[Math.floor(historyValues.length * 0.1)] ?? 0;
+	const p90 = historyValues[Math.floor(historyValues.length * 0.9)] ?? 0;
+	const throughputThresholds = { bad: Math.round(p10 * 10) / 10, good: Math.round(p90 * 10) / 10 };
+
+	const sampled = sampleEntries(entries);
+	const series = buildSeries(sampled);
+
 	let allValues = [];
-	series.forEach((s) => {
-		s.data.forEach((point) => {
-			if (point !== null) allValues.push(point);
-		});
-	});
+	series.forEach((s) => s.data.forEach((point) => allValues.push(point.y)));
 
 	const { outliers, normal } = detectOutliers(allValues);
 	const hasOutliers = outliers.length > 0;
 
-	// Separate outlier series from normal series
 	const normalSeries = [];
 	const outlierSeries = [];
-
 	series.forEach((s) => {
-		const validValues = s.data.filter((point) => point !== null);
-		const avgValue =
-			validValues.length > 0 ? validValues.reduce((sum, point) => sum + point, 0) / validValues.length : 0;
-		if (outliers.includes(avgValue) || s.data.some((point) => point !== null && outliers.includes(point))) {
+		const validValues = s.data.filter((p) => p !== null);
+		const avgValue = validValues.length > 0 ? validValues.reduce((sum, p) => sum + p.y, 0) / validValues.length : 0;
+		if (outliers.includes(avgValue) || s.data.some((p) => p !== null && outliers.includes(p.y))) {
 			outlierSeries.push(s);
 		} else {
 			normalSeries.push(s);
 		}
 	});
 
-	// Create main chart with normal data
-	const mainMin = normal.length > 0 ? Math.max(0, Math.min(...normal)) : 0;
+	function buildNormalSeries(e) {
+		return buildSeries(e).filter((s) => normalSeries.some((ns) => ns.name === s.name));
+	}
+	function buildOutlierSeries(e) {
+		return buildSeries(e).filter((s) => outlierSeries.some((os) => os.name === s.name));
+	}
 
+	const mainMin = normal.length > 0 ? Math.max(0, Math.min(...normal.map((p) => (typeof p === "object" ? p.y : p)))) : 0;
+
+	let chartRef = null;
 	const options = {
 		series: normalSeries,
 		...getBaseChartConfig(
 			"Processing Throughput Trends",
 			"Megabytes per Second",
 			{ min: mainMin },
-			PERFORMANCE_THRESHOLDS.throughput,
+			throughputThresholds,
 		),
 	};
+	options.chart.events = buildZoomEvents(sampled, buildNormalSeries, () => chartRef);
+	Object.assign(options.xaxis, sampledTimeRange(sampled));
 	options.tooltip.y = {
 		formatter: function (y) {
 			if (typeof y !== "undefined" && typeof y === "number" && !isNaN(y)) {
@@ -625,14 +775,13 @@ function createThroughputChart(data) {
 		},
 	};
 	const chart = new ApexCharts(chartElement, options);
+	chartRef = chart;
 	charts.push(chart);
 	chart.render();
 
-	// Create outlier chart if there are outliers
 	if (hasOutliers && outlierSeries.length > 0) {
 		const outlierChartId = "throughput-outliers-chart";
 		let outlierChartElement = document.getElementById(outlierChartId);
-
 		if (!outlierChartElement) {
 			outlierChartElement = document.createElement("div");
 			outlierChartElement.id = outlierChartId;
@@ -640,19 +789,22 @@ function createThroughputChart(data) {
 			chartElement.parentNode.insertBefore(outlierChartElement, chartElement.nextSibling);
 		}
 
-		const outlierMin = Math.max(0, Math.min(...outliers));
-		const outlierMax = Math.max(...outliers);
+		const outlierMin = Math.max(0, Math.min(...outliers.map((p) => (typeof p === "object" ? p.y : p))));
+		const outlierMax = Math.max(...outliers.map((p) => (typeof p === "object" ? p.y : p)));
 
+		let outlierChartRef = null;
 		const outlierOptions = {
 			series: outlierSeries,
 			...getBaseChartConfig(
 				"Processing Throughput Trends (Outliers)",
 				"Megabytes per Second",
 				{ min: outlierMin, max: outlierMax },
-				PERFORMANCE_THRESHOLDS.throughput,
+				throughputThresholds,
 			),
 		};
-		outlierOptions.chart.height = 300;
+		outlierOptions.chart.height = 460;
+		outlierOptions.chart.events = buildZoomEvents(sampled, buildOutlierSeries, () => outlierChartRef);
+		Object.assign(outlierOptions.xaxis, sampledTimeRange(sampled));
 		outlierOptions.tooltip.y = {
 			formatter: function (y) {
 				if (typeof y !== "undefined") {
@@ -663,14 +815,15 @@ function createThroughputChart(data) {
 		};
 
 		const outlierChart = new ApexCharts(outlierChartElement, outlierOptions);
+		outlierChartRef = outlierChart;
 		charts.push(outlierChart);
 		outlierChart.render();
 	}
 }
 
-function createCriterionParseChart(data) {
+function createCriterionParseChart(entries) {
 	createCriterionGroupChart(
-		data,
+		entries,
 		"parse_popular",
 		"criterion-parse-chart",
 		"Parsing Performance",
@@ -681,9 +834,9 @@ function createCriterionParseChart(data) {
 	);
 }
 
-function createCriterionLexChart(data) {
+function createCriterionLexChart(entries) {
 	createCriterionGroupChart(
-		data,
+		entries,
 		"lex_popular",
 		"criterion-lex-chart",
 		"Lexing Performance",
@@ -694,9 +847,9 @@ function createCriterionLexChart(data) {
 	);
 }
 
-function createCriterionMinifyChart(data) {
+function createCriterionMinifyChart(entries) {
 	createCriterionGroupChart(
-		data,
+		entries,
 		"minify_popular",
 		"criterion-minify-chart",
 		"Minification Performance",
@@ -707,9 +860,9 @@ function createCriterionMinifyChart(data) {
 	);
 }
 
-function createCriterionFromStrChart(data) {
+function createCriterionFromStrChart(entries) {
 	createCriterionGroupChart(
-		data,
+		entries,
 		"from_str_by_length",
 		"criterion-fromstr-chart",
 		"String Parsing by Length",
@@ -720,9 +873,9 @@ function createCriterionFromStrChart(data) {
 	);
 }
 
-function createCriterionParseSheetChart(data) {
+function createCriterionParseSheetChart(entries) {
 	createCriterionGroupChart(
-		data,
+		entries,
 		"parse_sheet",
 		"criterion-parse-sheet-chart",
 		"Linting Sheet Parsing Performance",
@@ -732,28 +885,109 @@ function createCriterionParseSheetChart(data) {
 	);
 }
 
-function createCriterionSelectorMatcherChart(data) {
-	createCriterionGroupChart(
-		data,
-		"selector_matching",
-		"criterion-selector-matcher-chart",
-		"Selector Matching Performance",
-		"Microseconds",
-		1000,
-		1,
-	);
+function createCriterionSelectorMatcherChart(entries) {
+	createCriterionQueryFilteredChart(entries, {
+		groupPrefix: "selector_matching",
+		chartId: "criterion-selector-matcher-chart",
+		selectId: "selector-matcher-query-select",
+		title: "Selector Matching Performance",
+		yAxisTitle: "Microseconds",
+		conversionFactor: 1000,
+		decimalPlaces: 1,
+	});
 }
 
-function createCriterionCollectorChart(data) {
-	createCriterionGroupChart(
-		data,
-		"collector",
-		"criterion-collector-chart",
-		"Linting Collection Performance",
-		"Microseconds",
-		1000,
-		1,
+/**
+ * Create a criterion group chart that is filtered by a secondary "query file" dimension.
+ * Keys must follow the pattern "<groupPrefix>/<css_file>_<query_file>".
+ * A <select> is injected above the chart to switch between query files.
+ */
+function createCriterionQueryFilteredChart(entries, {
+	groupPrefix,
+	chartId,
+	selectId,
+	title,
+	yAxisTitle,
+	conversionFactor,
+	decimalPlaces,
+	thresholds = null,
+}) {
+	const chartElement = document.getElementById(chartId);
+	if (!chartElement) return;
+
+	const allBenchmarks = Object.keys(entries[0].criterion_results).filter((b) =>
+		b.startsWith(groupPrefix + "/"),
 	);
+	if (allBenchmarks.length === 0) return;
+
+	const names = allBenchmarks.map((b) => b.replace(groupPrefix + "/", ""));
+	const queryFiles = [...new Set(names.map((n) => n.replace(/^[^_]+_/, "")))].sort();
+
+	let select = document.getElementById(selectId);
+	if (!select) {
+		const wrapper = document.createElement("div");
+		wrapper.style.cssText = "margin-bottom: 0.5rem;";
+		select = document.createElement("select");
+		select.id = selectId;
+		queryFiles.forEach((q) => {
+			const opt = document.createElement("option");
+			opt.value = q;
+			opt.textContent = q.replace(/-/g, " ").replace(/_/g, " ");
+			select.appendChild(opt);
+		});
+		wrapper.appendChild(select);
+		chartElement.parentNode.insertBefore(wrapper, chartElement);
+	}
+
+	const outlierId = chartId.replace("-chart", "-outliers-chart");
+
+	function renderForQuery(queryFile) {
+		[chartId, outlierId].forEach((id) => {
+			const idx = charts.findIndex((c) => c && c.el && c.el.id === id);
+			if (idx !== -1) {
+				charts[idx].destroy();
+				charts.splice(idx, 1);
+			}
+			if (id === outlierId) {
+				const el = document.getElementById(id);
+				if (el) el.remove();
+			}
+		});
+
+		const filtered = allBenchmarks.filter((b) => b.endsWith("_" + queryFile));
+		const filteredEntries = entries.map((e) => ({
+			...e,
+			criterion_results: Object.fromEntries(
+				Object.entries(e.criterion_results).filter(([k]) => filtered.includes(k)),
+			),
+		}));
+
+		createCriterionGroupChart(
+			filteredEntries,
+			groupPrefix,
+			chartId,
+			`${title} - ${queryFile.replace(/-/g, " ")}`,
+			yAxisTitle,
+			conversionFactor,
+			decimalPlaces,
+			thresholds,
+		);
+	}
+
+	select.addEventListener("change", () => renderForQuery(select.value));
+	renderForQuery(queryFiles[0]);
+}
+
+function createCriterionCollectorChart(entries) {
+	createCriterionQueryFilteredChart(entries, {
+		groupPrefix: "collector",
+		chartId: "criterion-collector-chart",
+		selectId: "collector-query-select",
+		title: "Linting Collection Performance",
+		yAxisTitle: "Milliseconds",
+		conversionFactor: 1000000,
+		decimalPlaces: 2,
+	});
 }
 
 function detectOutliers(values, threshold = 3) {
@@ -773,7 +1007,7 @@ function detectOutliers(values, threshold = 3) {
 }
 
 function createCriterionGroupChart(
-	data,
+	entries,
 	groupPrefix,
 	chartId,
 	title,
@@ -784,52 +1018,60 @@ function createCriterionGroupChart(
 ) {
 	const chartElement = document.getElementById(chartId);
 	if (!chartElement) return;
-	const criterionBenchmarks = Object.keys(data[0].criterion_results).filter((benchmark) =>
+
+	const criterionBenchmarks = Object.keys(entries[0].criterion_results).filter((benchmark) =>
 		benchmark.startsWith(groupPrefix + "/"),
 	);
 	if (criterionBenchmarks.length === 0) return;
-	const series = criterionBenchmarks
-		.map((benchmark) => {
-			const dataPoints = [...data].reverse()
-				.map((entry, index) => {
-					const benchmarkData = entry.criterion_results[benchmark];
-					if (benchmarkData && benchmarkData.mean && benchmarkData.mean.point_estimate) {
-						// Convert nanoseconds using the provided conversion factor and precision
-						const convertedTime = benchmarkData.mean.point_estimate / conversionFactor;
-						const roundedTime = Math.round(convertedTime * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces);
 
-						return {
-							x: `${entry.git_commit.slice(0, 8)}-${index}`, // Add index to ensure uniqueness
-							y: roundedTime,
-						};
-					}
-					return null;
-				})
-				.filter((point) => point !== null);
+	const unitSuffix = yAxisTitle.includes("Nanoseconds")
+		? "ns"
+		: yAxisTitle.includes("Microseconds")
+			? "μs"
+			: yAxisTitle.includes("Milliseconds")
+				? "ms"
+				: "";
 
-			return {
-				name: benchmark
-					.replace(groupPrefix + "/", "")
-					.replace(/\./g, " ")
-					.replace(/-/g, " "),
-				data: dataPoints,
-			};
-		})
-		.filter((series) => series.data.length > 0);
+	function buildSeries(sampledEntries) {
+		return criterionBenchmarks
+			.map((benchmark) => {
+				const dataPoints = sampledEntries
+					.map((entry) => {
+						const benchmarkData = entry.criterion_results[benchmark];
+						if (benchmarkData && benchmarkData.mean && benchmarkData.mean.point_estimate) {
+							const convertedTime = benchmarkData.mean.point_estimate / conversionFactor;
+							const roundedTime =
+								Math.round(convertedTime * Math.pow(10, decimalPlaces)) / Math.pow(10, decimalPlaces);
+							return {
+								x: new Date(entry.timestamp).getTime(),
+								y: roundedTime,
+							};
+						}
+						return null;
+					})
+					.filter((point) => point !== null);
+				return {
+					name: benchmark
+						.replace(groupPrefix + "/", "")
+						.replace(/\./g, " ")
+						.replace(/-/g, " "),
+					data: dataPoints,
+				};
+			})
+			.filter((s) => s.data.length > 0);
+	}
 
-	// Detect outliers
+	const sampled = sampleEntries(entries);
+	const series = buildSeries(sampled);
+
 	let allValues = [];
-	series.forEach((s) => {
-		s.data.forEach((point) => allValues.push(point.y));
-	});
+	series.forEach((s) => s.data.forEach((point) => allValues.push(point.y)));
 
 	const { outliers, normal } = detectOutliers(allValues);
 	const hasOutliers = outliers.length > 0;
 
-	// Separate outlier series from normal series
 	const normalSeries = [];
 	const outlierSeries = [];
-
 	series.forEach((s) => {
 		const avgValue = s.data.reduce((sum, point) => sum + point.y, 0) / s.data.length;
 		if (outliers.includes(avgValue) || s.data.some((point) => outliers.includes(point.y))) {
@@ -839,22 +1081,19 @@ function createCriterionGroupChart(
 		}
 	});
 
-	// Create main chart with normal data
+	function buildNormalSeries(e) {
+		return buildSeries(e).filter((s) => normalSeries.some((ns) => ns.name === s.name));
+	}
+	function buildOutlierSeries(e) {
+		return buildSeries(e).filter((s) => outlierSeries.some((os) => os.name === s.name));
+	}
+
 	const mainMinVal = normal.length > 0 ? Math.min(0, ...normal) : 0;
 	const mainMaxVal = normal.length > 0 ? Math.max(...normal) : 100;
 	const mainRange = mainMaxVal - mainMinVal;
 	const mainPadding = mainRange * 0.1;
 
-	// Determine the unit suffix for tooltips
-	const unitSuffix = yAxisTitle.includes("Nanoseconds")
-		? "ns"
-		: yAxisTitle.includes("Microseconds")
-			? "μs"
-			: yAxisTitle.includes("Milliseconds")
-				? "ms"
-				: "";
-
-	// Create main chart
+	let chartRef = null;
 	const options = {
 		series: normalSeries,
 		...getCriterionChartConfig(
@@ -868,17 +1107,17 @@ function createCriterionGroupChart(
 			thresholds,
 		),
 	};
+	options.chart.events = buildZoomEvents(sampled, buildNormalSeries, () => chartRef);
+	Object.assign(options.xaxis, sampledTimeRange(sampled));
 
 	const chart = new ApexCharts(chartElement, options);
+	chartRef = chart;
 	charts.push(chart);
 	chart.render();
 
-	// Create outlier chart if there are outliers
 	if (hasOutliers && outlierSeries.length > 0) {
 		const outlierChartId = chartId.replace("-chart", "-outliers-chart");
 		let outlierChartElement = document.getElementById(outlierChartId);
-
-		// Create outlier chart container if it doesn't exist
 		if (!outlierChartElement) {
 			outlierChartElement = document.createElement("div");
 			outlierChartElement.id = outlierChartId;
@@ -891,6 +1130,7 @@ function createCriterionGroupChart(
 		const outlierRange = outlierMaxVal - outlierMinVal;
 		const outlierPadding = outlierRange * 0.1;
 
+		let outlierChartRef = null;
 		const outlierOptions = {
 			series: outlierSeries,
 			...getCriterionChartConfig(
@@ -904,11 +1144,12 @@ function createCriterionGroupChart(
 				thresholds,
 			),
 		};
-
-		// Make outlier chart slightly smaller
-		outlierOptions.chart.height = 300;
+		outlierOptions.chart.height = 460;
+		outlierOptions.chart.events = buildZoomEvents(sampled, buildOutlierSeries, () => outlierChartRef);
+		Object.assign(outlierOptions.xaxis, sampledTimeRange(sampled));
 
 		const outlierChart = new ApexCharts(outlierChartElement, outlierOptions);
+		outlierChartRef = outlierChart;
 		charts.push(outlierChart);
 		outlierChart.render();
 	}

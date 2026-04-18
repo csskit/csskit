@@ -29,6 +29,25 @@ script:
 > but these numbers should be viewed as _relative performance_, and your hardware
 > will likely be different.
 
+## Contents
+
+- [CSS Processing Performance](#css-processing-performance)
+- [CSS Tool Comparison](#css-tool-comparison)
+  - [Processing Time Comparison](#processing-time-comparison)
+  - [Output Size Comparison](#output-size-comparison)
+- [Historical Trends](#historical-trends)
+  - [Processing Time Trends](#processing-time-trends)
+  - [Throughput Trends](#throughput-trends)
+  - [Compression Ratio Trends](#compression-ratio-trends)
+  - [Criterion Benchmark Trends](#criterion-benchmark-trends)
+    - [Parsing Performance](#parsing-performance)
+    - [Lexing Performance](#lexing-performance)
+    - [Minification Performance](#minification-performance)
+    - [Linting Sheet Parsing Performance](#linting-sheet-parsing-performance)
+    - [Selector Matching Performance](#selector-matching-performance)
+    - [Linting Collection Performance](#linting-collection-performance)
+    - [String Parsing by Length](#string-parsing-by-length)
+
 <!-- markdownlint-disable -->
 
 {%- assign latest = benchmark-history[0] -%}
@@ -210,8 +229,9 @@ performance is consistent between different css, and there aren't performance
 weak spots or bottlenecks depending on the css content.
 
 Lines closer together means more consistent performance. Lines further parts
-means unstable performance. Ideally all lines would be within 1mbps of each
-other.
+means unstable performance. Ideally all lines would be within a few mbps of each
+other. There may be some outliers though: very small files tend to be a low
+slower (due to repeated memory drops after each parse).
 
 <div id="throughput-chart" style="width: 100%; height: 400px;"></div>
 
@@ -255,7 +275,7 @@ Lexing (tokenization) is the foundation of CSS processing. The lexer must scan
 every character and classify them into meaningful tokens. Lexer performance
 directly impacts all downstream operations.
 
-The target is to have most files lex in under 2ms (2000 microseconds).
+The target is to have most files lex in under 1.5ms (1500 microseconds).
 
 <div id="criterion-lex-chart" style="width: 100%; height: 400px;"></div>
 
