@@ -61,9 +61,9 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<GapRuleList>(), 32);
-		assert_eq!(std::mem::size_of::<GapRuleOrRepeat>(), 176);
+		assert_eq!(std::mem::size_of::<GapRuleOrRepeat>(), 88);
 		assert_eq!(std::mem::size_of::<GapRepeatRule>(), 88);
-		assert_eq!(std::mem::size_of::<GapRule>(), 176);
+		assert_eq!(std::mem::size_of::<GapRule>(), 56);
 	}
 
 	#[test]

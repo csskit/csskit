@@ -7,7 +7,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorStyleValue>(), 144);
+		assert_eq!(std::mem::size_of::<ColorStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<OpacityStyleValue>(), 16);
 	}
 

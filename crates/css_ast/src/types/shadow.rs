@@ -62,7 +62,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Shadow<'_>>(), 224);
+		assert_eq!(std::mem::size_of::<Shadow<'_>>(), 104);
 	}
 
 	#[test]

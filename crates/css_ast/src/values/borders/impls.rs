@@ -6,17 +6,17 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<BorderTopColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderRightColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderBottomColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderLeftColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderBlockStartColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderBlockEndColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderInlineStartColorStyleValue>(), 144);
-		assert_eq!(std::mem::size_of::<BorderInlineEndColorStyleValue>(), 144);
+		assert_eq!(std::mem::size_of::<BorderTopColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderRightColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBottomColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderLeftColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBlockStartColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBlockEndColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderInlineStartColorStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderInlineEndColorStyleValue>(), 56);
 		// assert_eq!(std::mem::size_of::<BorderColorStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<BorderBlockColorStyleValue>(), 288);
-		assert_eq!(std::mem::size_of::<BorderInlineColorStyleValue>(), 288);
+		assert_eq!(std::mem::size_of::<BorderBlockColorStyleValue>(), 120);
+		assert_eq!(std::mem::size_of::<BorderInlineColorStyleValue>(), 120);
 		assert_eq!(std::mem::size_of::<BorderTopStyleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<BorderRightStyleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<BorderBottomStyleStyleValue>(), 16);
@@ -36,16 +36,16 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderInlineEndWidthStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<BorderBlockWidthStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BorderInlineWidthStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BorderTopStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderRightStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderBottomStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderLeftStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderBlockStartStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderBlockEndStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderInlineStartStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderInlineEndStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderBlockStyleValue>(), 176);
-		assert_eq!(std::mem::size_of::<BorderInlineStyleValue>(), 176);
+		assert_eq!(std::mem::size_of::<BorderTopStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderRightStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBottomStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderLeftStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBlockStartStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBlockEndStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderInlineStartStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderInlineEndStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderBlockStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<BorderInlineStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<BorderTopLeftRadiusStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<BorderTopRightRadiusStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<BorderBottomRightRadiusStyleValue>(), 48);

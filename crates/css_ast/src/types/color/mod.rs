@@ -2,8 +2,8 @@ mod named;
 mod system;
 
 use crate::{ColorFunction, CssAtomSet};
-use css_parse::T;
-use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use css_parse::{BumpBox, T};
+use csskit_derives::{NodeWithMetadata, Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
 pub use named::*;
 pub use system::*;
@@ -11,7 +11,7 @@ pub use system::*;
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-#[derive(csskit_derives::NodeWithMetadata)]
+#[derive(NodeWithMetadata)]
 pub enum Color<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Currentcolor)]
@@ -24,7 +24,7 @@ pub enum Color<'a> {
 	Hex(T![Hash]),
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Named(NamedColor),
-	Function(ColorFunction<'a>),
+	Function(BumpBox<'a, ColorFunction<'a>>),
 }
 
 impl Color<'_> {
@@ -78,7 +78,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Color<'_>>(), 144);
+		assert_eq!(std::mem::size_of::<Color<'_>>(), 24);
 	}
 
 	#[test]

@@ -51,7 +51,9 @@ where
 			return;
 		}
 		// color-mix() is handled by visit_color_mix_function
-		if matches!(color, Color::Function(ColorFunction::ColorMix(_))) {
+		if let Color::Function(colorfn) = color
+			&& matches!(**colorfn, ColorFunction::ColorMix(_))
+		{
 			return;
 		}
 		let Some(chroma_color) = color.to_chromashift() else {

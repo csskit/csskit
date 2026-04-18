@@ -290,14 +290,14 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorMixFunction>(), 424);
+		assert_eq!(std::mem::size_of::<ColorMixFunction>(), 184);
 		assert_eq!(std::mem::size_of::<ColorInterpolationMethod>(), 56);
 		assert_eq!(std::mem::size_of::<InterpolationColorSpace>(), 44);
 		assert_eq!(std::mem::size_of::<RectangularColorSpace>(), 16);
 		assert_eq!(std::mem::size_of::<PolarColorSpace>(), 16);
 		assert_eq!(std::mem::size_of::<HueInterpolationMethod>(), 28);
 		assert_eq!(std::mem::size_of::<HueInterpolationDirection>(), 16);
-		assert_eq!(std::mem::size_of::<ColorMixPart>(), 160);
+		assert_eq!(std::mem::size_of::<ColorMixPart>(), 40);
 	}
 
 	#[test]

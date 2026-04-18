@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ScrollbarColorStyleValue>(), 288);
+		assert_eq!(std::mem::size_of::<ScrollbarColorStyleValue>(), 48);
 	}
 
 	#[test]
