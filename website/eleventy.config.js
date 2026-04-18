@@ -2,6 +2,7 @@ import syntaxHighlight from "@11ty/eleventy-plugin-syntaxhighlight";
 import { alert } from "@mdit/plugin-alert";
 import path from "path";
 import pluginRss, { dateToRfc3339, dateToRfc822 } from "@11ty/eleventy-plugin-rss";
+import markdownItAnchor from "markdown-it-anchor";
 import generateSocialImages from "@manustays/eleventy-plugin-generate-social-images";
 import { globSync } from "glob";
 import fs from "fs";
@@ -10,6 +11,7 @@ import { build } from "esbuild";
 import postcss from "postcss";
 import postcssConfig from "./postcss.config.js";
 import { wasmLoader } from "esbuild-plugin-wasm";
+const { permalink } = markdownItAnchor;
 
 const buildJS = (config = {}) => {
 	return build({
@@ -71,7 +73,19 @@ export default (eleventyConfig) => {
 		return content;
 	});
 
-	eleventyConfig.amendLibrary("md", (mdLib) => mdLib.use(alert));
+	eleventyConfig.amendLibrary("md", (mdLib) => {
+		mdLib.use(markdownItAnchor, {
+			permalink: permalink.headerLink(),
+			slugify: (s) =>
+				s
+					.toLowerCase()
+					.replace(/[^\w\s-]/g, "")
+					.replace(/\s+/g, "-")
+					.replace(/-+/g, "-")
+					.trim(),
+		});
+		mdLib.use(alert);
+	});
 
 	eleventyConfig.addPlugin(generateSocialImages, {
 		hideTerminal: false,
