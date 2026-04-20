@@ -37,7 +37,7 @@
 		"@11ty/eleventy-plugin-rss": "3.0.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "5.0.2",
 		"@manustays/eleventy-plugin-generate-social-images": "4.1.0",
-		"cssnano": "7.1.4",
+		"cssnano": "7.1.5",
 		"esbuild": "0.25.12",
 		"esbuild-plugin-wasm": "1.1.0",
 		"glob": "13.0.6",
