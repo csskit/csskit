@@ -112,7 +112,7 @@ impl DefType {
 					| "AutoLineWidthList"  // contains Repeat<'a> and LineWidthOrRepeat<'a>
 					| "GapRuleList"  // contains Vec<'a, ...>
 					| "GapAutoRuleList"  // contains Vec<'a, ...>
-					| "FamilyName"  // may contain allocating elements
+					| "FontFamilyName"  // may contain allocating elements
 				| "BgImage"  // contains Image<'a>
 				| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
 				| "DynamicRangeLimitMixFunction"  // contains allocating params
