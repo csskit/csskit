@@ -127,7 +127,7 @@
 		"typescript": "6.0.3"
 	},
 	"engines": {
-		"vscode": "^1.115.0"
+		"vscode": "^1.116.0"
 	},
 	"prettierConfig": {
 		"useTabs": true,
