@@ -13,7 +13,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum GenericFamily {}
+pub enum GenericFontFamily {}
 
 /// <https://drafts.csswg.org/css-fonts-4/#family-name-syntax>
 ///
@@ -97,19 +97,19 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<GenericFamily>(), 40);
+		assert_eq!(std::mem::size_of::<GenericFontFamily>(), 40);
 	}
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CssAtomSet::ATOMS, GenericFamily, "sans-serif");
-		assert_parse!(CssAtomSet::ATOMS, GenericFamily, "ui-serif");
-		assert_parse!(CssAtomSet::ATOMS, GenericFamily, "generic(fangsong)");
+		assert_parse!(CssAtomSet::ATOMS, GenericFontFamily, "sans-serif");
+		assert_parse!(CssAtomSet::ATOMS, GenericFontFamily, "ui-serif");
+		assert_parse!(CssAtomSet::ATOMS, GenericFontFamily, "generic(fangsong)");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, GenericFamily, "");
-		assert_parse_error!(CssAtomSet::ATOMS, GenericFamily, "'foo' bar");
+		assert_parse_error!(CssAtomSet::ATOMS, GenericFontFamily, "");
+		assert_parse_error!(CssAtomSet::ATOMS, GenericFontFamily, "'foo' bar");
 	}
 }

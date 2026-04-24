@@ -116134,7 +116134,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFaceRuleStyleValue(FontFamilyStyleValue([
-              (FamilyName(String(String(Cursor(
+              (FontFamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(71970),
                 len: 23,
@@ -116620,7 +116620,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FamilyName(String(String(Cursor(
+                (FontFamilyName(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(72441),
                   len: 23,
@@ -116691,7 +116691,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFaceRuleStyleValue(FontFamilyStyleValue([
-              (FamilyName(String(String(Cursor(
+              (FontFamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(72516),
                 len: 21,
@@ -117177,7 +117177,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FamilyName(String(String(Cursor(
+                (FontFamilyName(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(72991),
                   len: 21,
@@ -117248,7 +117248,7 @@ StyleSheet(
               len: 1,
             )),
             value: FontFaceRuleStyleValue(FontFamilyStyleValue([
-              (FamilyName(String(String(Cursor(
+              (FontFamilyName(String(String(Cursor(
                 kind: "String",
                 offset: SourceOffset(73064),
                 len: 21,
@@ -117752,7 +117752,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FamilyName(String(String(Cursor(
+                (FontFamilyName(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(73532),
                   len: 21,
