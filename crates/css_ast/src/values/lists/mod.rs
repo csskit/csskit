@@ -7,50 +7,34 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `counter-increment` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-increment).
-// ///
-// /// The counter-reset and counter-increment CSS properties and the counter() and counters() functions automatically number headings or ordered list items.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <counter-name> <integer>? ]+ | none
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-lists-3/#counter-increment
-// #[syntax(" [ <counter-name> <integer>? ]+ | none ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Elements,
-//     animation_type = ByComputedValue,
-//     property_group = Lists,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.counter-increment")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CounterIncrementStyleValue<'a>;
+/// Represents the style value for `counter-increment` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-increment).
+///
+/// The counter-reset and counter-increment CSS properties and the counter() and counters() functions automatically number headings or ordered list items.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <counter-name> <integer>? ]+ | none
+/// ```
+///
+/// https://drafts.csswg.org/css-lists-3/#counter-increment
+#[syntax(" [ <counter-name> <integer>? ]+ | none ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Lists,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.counter-increment"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CounterIncrementStyleValue<'a>;
 
 // /// Represents the style value for `counter-reset` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-reset).
 // ///
@@ -97,50 +81,34 @@ use impls::*;
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub struct CounterResetStyleValue<'a>;
 
-// /// Represents the style value for `counter-set` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-set).
-// ///
-// /// The counter-set CSS property creates (and optionally sets a value for) a counter, the numbers for a series of headings or ordered list items.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <counter-name> <integer>? ]+ | none
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-lists-3/#counter-set
-// #[syntax(" [ <counter-name> <integer>? ]+ | none ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Elements,
-//     animation_type = ByComputedValue,
-//     property_group = Lists,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.counter-set")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CounterSetStyleValue<'a>;
+/// Represents the style value for `counter-set` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#counter-set).
+///
+/// The counter-set CSS property creates (and optionally sets a value for) a counter, the numbers for a series of headings or ordered list items.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <counter-name> <integer>? ]+ | none
+/// ```
+///
+/// https://drafts.csswg.org/css-lists-3/#counter-set
+#[syntax(" [ <counter-name> <integer>? ]+ | none ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Lists,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.counter-set"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CounterSetStyleValue<'a>;
 
 /// Represents the style value for `list-style` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style).
 ///

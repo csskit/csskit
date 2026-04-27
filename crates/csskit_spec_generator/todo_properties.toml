@@ -160,7 +160,7 @@ properties = ["initial-letter", "initial-letter-align", "vertical-align"]
 properties = ["columns"]
 
 [lists]
-properties = ["counter-increment", "counter-reset", "counter-set"]
+properties = ["counter-reset"]
 
 [overflow]
 properties = [

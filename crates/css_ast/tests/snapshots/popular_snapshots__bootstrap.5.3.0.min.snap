@@ -139603,15 +139603,13 @@ StyleSheet(
                 offset: SourceOffset(105251),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(105252),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: CounterIncrementStyleValue(r#Some([
+                (CounterName(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(105252),
+                  len: 7,
+                ))), None),
+              ])),
               important: None,
               semicolon: None,
             ),
