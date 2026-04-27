@@ -936,6 +936,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct TextDecorationInsetStyleValue { }",
   "pub struct TextEmphasisColorStyleValue < \'a > { }",
   "pub struct TextEmphasisSkipStyleValue { }",
+  "pub struct TextFitStyleValue { }",
   "pub struct TextShadowStyleValue < \'a > { }",
   "pub struct TextSizeAdjustStyleValue { }",
   "pub struct TextSpacingTrimStyleValue { }",

@@ -378,7 +378,7 @@ impl DefExt for Def {
 
 	fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
 		let needs_keyword_type = match self {
-			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs.iter().all(|def| def.is_all_keywords()),
+			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs.iter().any(|def| def.is_all_keywords()),
 			Self::Multiplier(def, _, _) => match def.deref() {
 				Self::Combinator(defs, DefCombinatorStyle::Alternatives) => {
 					defs.iter().all(|def| matches!(def, Def::Ident(_)))
