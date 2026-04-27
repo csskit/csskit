@@ -28,6 +28,25 @@ mod tests {
 		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<BoxSizingStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 60);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicBlockSizeStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicHeightStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicInlineSizeStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicSizeStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicWidthStyleValue>(), 32);
+	}
+
+	#[test]
+	fn test_contain_intrinsic() {
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "100px");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "auto none");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "auto 100px");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "100px");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "none none");
+		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "auto none 100px");
+		assert_parse_error!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "auto");
+		assert_parse_error!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "");
 	}
 
 	#[test]

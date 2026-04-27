@@ -544,6 +544,26 @@ impl Def {
 		}
 		.optimize()
 	}
+
+	/// Returns the keyword name if `self` is a keyword-optional-prefixed ordered sequence:
+	/// either `Group(Ordered([Optional(Ident(kw)), ...]))` or a bare
+	/// `Combinator(Ordered, [Optional(Ident(kw)), ...])` (groups are elided by optimize()).
+	/// These need a named helper struct so that `Peek` includes both the optional keyword
+	/// and the required subsequent tokens.
+	pub fn keyword_prefix_name(&self) -> Option<&str> {
+		let inner = match self {
+			Def::Group(inner, _) => inner.as_ref(),
+			Def::Combinator(_, DefCombinatorStyle::Ordered) => self,
+			_ => return None,
+		};
+		if let Def::Combinator(defs, DefCombinatorStyle::Ordered) = inner
+			&& let Some(Def::Optional(first)) = defs.first()
+			&& let Def::Ident(DefIdent(name)) = first.as_ref()
+		{
+			return Some(name.as_str());
+		}
+		None
+	}
 }
 
 impl Parse for DefIdent {

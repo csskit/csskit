@@ -187,11 +187,6 @@ properties = ["shape-inside", "shape-outside"]
 
 [sizing]
 properties = [
-  "contain-intrinsic-block-size",
-  "contain-intrinsic-height",
-  "contain-intrinsic-inline-size",
-  "contain-intrinsic-size",
-  "contain-intrinsic-width",
   "min-intrinsic-sizing",
 ]
 
@@ -208,7 +203,6 @@ properties = [
 [text]
 properties = [
   "hanging-punctuation",
-  "hyphenate-limit-chars",
   "text-indent",
   "text-justify",
   "text-spacing",

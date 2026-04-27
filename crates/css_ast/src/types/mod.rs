@@ -3,6 +3,7 @@ mod anchor_name;
 mod animateable_feature;
 mod animation_action;
 mod attachment;
+mod auto;
 mod auto_line_color_list;
 
 mod auto_line_style_list;
@@ -98,6 +99,7 @@ pub use anchor_name::*;
 pub use animateable_feature::*;
 pub use animation_action::*;
 pub use attachment::*;
+pub use auto::*;
 pub use auto_line_color_list::*;
 pub use auto_line_style_list::*;
 pub use auto_line_width_list::*;

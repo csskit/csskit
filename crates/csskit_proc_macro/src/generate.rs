@@ -161,10 +161,18 @@ impl ToType for Def {
 				let ty = ty.to_type();
 				vec![quote! { crate::NormalOr<#ty> }]
 			}
-			Self::Optional(v) => {
-				let ty = v.to_type();
-				vec![quote! { Option<#ty> }]
-			}
+			Self::Optional(v) => match v.as_ref() {
+				// When an optional ident appears as a keyword prefix (e.g. `auto?`),
+				// reference the standalone keyword type rather than bare T![Ident].
+				Self::Ident(DefIdent(name)) => {
+					let kw_type = format_ident!("{}", name.to_pascal_case());
+					vec![quote! { Option<crate::#kw_type> }]
+				}
+				_ => {
+					let ty = v.to_type();
+					vec![quote! { Option<#ty> }]
+				}
+			},
 			Self::Function(_, _) => {
 				let func_name = self.to_variant_name(0);
 				let generics = self.get_generics();
@@ -326,7 +334,11 @@ impl DefExt for Def {
 			Self::NoneOr(def) => def.deref().is_all_keywords(),
 			Self::AutoNoneOr(def) => def.deref().is_all_keywords(),
 			Self::NormalOr(def) => def.deref().is_all_keywords(),
-			Self::Optional(def) => def.deref().is_all_keywords(),
+			// Optional(Ident(kw)) is emitted as Option<crate::Kw>, not via the Keywords enum path.
+			Self::Optional(def) => match def.as_ref() {
+				Self::Ident(_) => false,
+				_ => def.deref().is_all_keywords(),
+			},
 			Self::Combinator(defs, _) => defs.iter().all(Self::is_all_keywords),
 			Self::Group(def, _) => def.deref().is_all_keywords(),
 			Self::Multiplier(def, _, _) => def.deref().is_all_keywords(),
@@ -346,7 +358,10 @@ impl DefExt for Def {
 			Self::StyleValue(_) => vec![],
 			Self::FunctionType(_) => vec![],
 			Self::Type(_) => vec![],
-			Self::Optional(def) => def.gather_keywords(),
+			Self::Optional(def) => {
+				// Optional(Ident(kw)) is handled as Option<crate::Kw>, not via Keywords enum.
+				if matches!(def.as_ref(), Self::Ident(_)) { vec![] } else { def.gather_keywords() }
+			}
 			Self::Combinator(opts, DefCombinatorStyle::Alternatives)
 			| Self::Combinator(opts, DefCombinatorStyle::Options) => {
 				opts.iter().filter(|def| matches!(def, Self::Ident(_))).collect()
@@ -420,37 +435,55 @@ impl DefExt for Def {
 		} else {
 			quote! {}
 		};
-		let single_type = match self {
-			Self::Multiplier(defs, _, range) => {
-				match defs.deref() {
-					// Combinator of alternatives where all alternatives are keywords does not need
-					// an additional type beyond the keyword_type.
-					Def::Combinator(defs, DefCombinatorStyle::Alternatives)
-						if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
-					{
-						quote! {}
-					}
-					Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
-						let ident = Self::single_ident(ident);
-						let generics = defs.get_generics();
-						let def = defs.generate_definition(vis, &ident, &generics, true, true);
-						quote! {
-							#[derive(
-								::csskit_derives::Parse,
-								::csskit_derives::Peek,
-								::csskit_derives::ToSpan,
-								::csskit_derives::ToCursors,
-								::csskit_derives::SemanticEq,
-								Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-							#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-							#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
-							#def
-						}
-					}
-					_ => quote! {},
+		// Determine if a Single* helper struct is needed, and which Def to generate it from.
+		let single_inner: Option<&Def> = match self {
+			Self::Multiplier(defs, _, range) => match defs.deref() {
+				// All-keyword alternatives don't need a Single* type beyond keyword_type.
+				Def::Combinator(defs, DefCombinatorStyle::Alternatives)
+					if defs.iter().all(|def| matches!(def, Def::Ident(_))) =>
+				{
+					None
 				}
+				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
+					Some(defs.deref())
+				}
+				_ => None,
+			},
+			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
+				.iter()
+				.find_map(|def| {
+					if def.keyword_prefix_name().is_some() {
+						Some(def)
+					} else if let Def::Optional(inner) = def {
+						if inner.keyword_prefix_name().is_some() { Some(inner.as_ref()) } else { None }
+					} else {
+						None
+					}
+				})
+				.map(|def| match def {
+					Def::Group(inner, _) => inner.as_ref(),
+					other => other,
+				}),
+			_ => None,
+		};
+		let single_type = if let Some(inner) = single_inner {
+			let single_ident = Self::single_ident(ident);
+			let generics = inner.get_generics();
+			let def = inner.generate_definition(vis, &single_ident, &generics, true, true);
+			quote! {
+				#[derive(
+					::csskit_derives::Parse,
+					::csskit_derives::Peek,
+					::csskit_derives::ToSpan,
+					::csskit_derives::ToCursors,
+					::csskit_derives::SemanticEq,
+					Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
+				#def
 			}
-			_ => quote! {},
+		} else {
+			quote! {}
 		};
 		quote! {
 			#keyword_type
@@ -490,13 +523,25 @@ impl GenerateDefinition for Def {
 						quote! { { #(#members),* } }
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
+						let single_ident = Self::single_ident(ident);
 						let types = defs.iter().map(|def| {
-							let ty = if def.is_all_keywords() {
-								let keyword_name = Self::keyword_ident(ident);
-								match def {
-									Self::Optional(_) => quote! { Option<#keyword_name> },
-									_ => quote! { #keyword_name },
+							let ty = if let Self::Optional(inner) = def {
+								if matches!(inner.as_ref(), Self::Ident(_)) {
+									// Optional(Ident(kw)) references standalone keyword type
+									def.to_type()
+								} else if inner.keyword_prefix_name().is_some() {
+									quote! { Option<#single_ident> }
+								} else if inner.is_all_keywords() {
+									let keyword_name = Self::keyword_ident(ident);
+									quote! { Option<#keyword_name> }
+								} else {
+									def.to_type()
 								}
+							} else if def.keyword_prefix_name().is_some() {
+								quote! { #single_ident }
+							} else if def.is_all_keywords() {
+								let keyword_name = Self::keyword_ident(ident);
+								quote! { #keyword_name }
 							} else {
 								def.to_type()
 							};

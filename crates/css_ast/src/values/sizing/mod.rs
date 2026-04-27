@@ -65,241 +65,169 @@ pub struct AspectRatioStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BoxSizingStyleValue {}
 
-// /// Represents the style value for `contain-intrinsic-block-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size).
-// ///
-// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     property_group = Sizing,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     logical_property_group = ContainIntrinsicSize,
-//     box_side = BlockStart|BlockEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.contain-intrinsic-block-size")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ContainIntrinsicBlockSizeStyleValue;
+/// Represents the style value for `contain-intrinsic-block-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size).
+///
+/// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto? [ none | <length [0,∞]> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size
+#[syntax(" auto? [ none | <length [0,∞]> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Sizing,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = ContainIntrinsicSize,
+    box_side = BlockStart|BlockEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.contain-intrinsic-block-size")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ContainIntrinsicBlockSizeStyleValue;
 
-// /// Represents the style value for `contain-intrinsic-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height).
-// ///
-// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     shorthand_group = ContainIntrinsicSize,
-//     property_group = Sizing,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     logical_property_group = ContainIntrinsicSize,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.contain-intrinsic-height")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ContainIntrinsicHeightStyleValue;
+/// Represents the style value for `contain-intrinsic-height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height).
+///
+/// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto? [ none | <length [0,∞]> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-height
+#[syntax(" auto? [ none | <length [0,∞]> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    shorthand_group = ContainIntrinsicSize,
+    property_group = Sizing,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = ContainIntrinsicSize,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-height"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ContainIntrinsicHeightStyleValue;
 
-// /// Represents the style value for `contain-intrinsic-inline-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size).
-// ///
-// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     property_group = Sizing,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     logical_property_group = ContainIntrinsicSize,
-//     box_side = InlineStart|InlineEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.contain-intrinsic-inline-size")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ContainIntrinsicInlineSizeStyleValue;
+/// Represents the style value for `contain-intrinsic-inline-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size).
+///
+/// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto? [ none | <length [0,∞]> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-inline-size
+#[syntax(" auto? [ none | <length [0,∞]> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Sizing,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = ContainIntrinsicSize,
+    box_side = InlineStart|InlineEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.contain-intrinsic-inline-size")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ContainIntrinsicInlineSizeStyleValue;
 
-// /// Represents the style value for `contain-intrinsic-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size).
-// ///
-// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto? [ none | <length [0,∞]> ] ]{1,2}
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
-// #[syntax(" [ auto? [ none | <length [0,∞]> ] ]{1,2} ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     inherits = Unknown,
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = ContainIntrinsicHeight|ContainIntrinsicWidth,
-//     property_group = Sizing,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.contain-intrinsic-size")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ContainIntrinsicSizeStyleValue;
+/// Represents the style value for `contain-intrinsic-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size).
+///
+/// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto? [ none | <length [0,∞]> ] ]{1,2}
+/// ```
+///
+/// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-size
+#[syntax(" [ auto? [ none | <length [0,∞]> ] ]{1,2} ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = ContainIntrinsicHeight|ContainIntrinsicWidth,
+    property_group = Sizing,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-size"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ContainIntrinsicSizeStyleValue;
 
-// /// Represents the style value for `contain-intrinsic-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width).
-// ///
-// /// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto? [ none | <length [0,∞]> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
-// #[syntax(" auto? [ none | <length [0,∞]> ] ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     shorthand_group = ContainIntrinsicSize,
-//     property_group = Sizing,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     logical_property_group = ContainIntrinsicSize,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.contain-intrinsic-width")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ContainIntrinsicWidthStyleValue;
+/// Represents the style value for `contain-intrinsic-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width).
+///
+/// The contain-intrinsic-size CSS property sets the intrinsic size of an element. When using size containment, the browser will lay out the element as if it had a single child of this size.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto? [ none | <length [0,∞]> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-width
+#[syntax(" auto? [ none | <length [0,∞]> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    shorthand_group = ContainIntrinsicSize,
+    property_group = Sizing,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    logical_property_group = ContainIntrinsicSize,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-width"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ContainIntrinsicWidthStyleValue;
 
 /// Represents the style value for `frame-sizing` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#frame-sizing).
 ///

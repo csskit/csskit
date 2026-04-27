@@ -518,3 +518,24 @@ fn def_returns_true_for_maybe_unsized() {
 	assert!(!to_valuedef!(" <bar>{1,4} ").maybe_unsized());
 	assert!(!to_valuedef!(" [ <bar> | <baz> ]{1,4} ").maybe_unsized());
 }
+
+#[test]
+fn def_builds_auto_prefixed_group_range() {
+	// [ auto? [ none | <length> ] ]{1,2}
+	// Should become Combinator(Ordered, [InnerOrdered, Optional(InnerOrdered)])
+	// where InnerOrdered = Combinator(Ordered, [Optional(Ident("auto")), NoneOr(Length)])
+	let inner_ordered = Def::Combinator(
+		vec![
+			Def::Optional(Box::new(Def::Ident(DefIdent("auto".into())))),
+			Def::NoneOr(Box::new(Def::Type(DefType::new("Length", DefRange::None)))),
+		],
+		DefCombinatorStyle::Ordered,
+	);
+	assert_eq!(
+		to_valuedef!(" [ auto? [ none | <length> ] ]{1,2} "),
+		Def::Combinator(
+			vec![inner_ordered.clone(), Def::Optional(Box::new(inner_ordered))],
+			DefCombinatorStyle::Ordered
+		)
+	);
+}

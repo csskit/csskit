@@ -83,51 +83,35 @@ use impls::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HyphenateCharacterStyleValue;
 
-// /// Represents the style value for `hyphenate-limit-chars` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars).
-// ///
-// /// The hyphenate-limit-chars CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ auto | <integer> ]{1,3}
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
-// #[syntax(" [ auto | <integer> ]{1,3} ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     inherits,
-//     applies_to = Text,
-//     animation_type = ByComputedValue,
-//     property_group = Text,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.hyphenate-limit-chars")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct HyphenateLimitCharsStyleValue;
+/// Represents the style value for `hyphenate-limit-chars` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars).
+///
+/// The hyphenate-limit-chars CSS property sets the number of characters in a word before it is hyphenated and the minimum number of characters on either side of the hyphen.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ auto | <integer> ]{1,3}
+/// ```
+///
+/// https://drafts.csswg.org/css-text-4/#hyphenate-limit-chars
+#[syntax(" [ auto | <integer> ]{1,3} ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Text,
+    animation_type = ByComputedValue,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-chars"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct HyphenateLimitCharsStyleValue;
 
 /// Represents the style value for `hyphenate-limit-last` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#hyphenate-limit-last).
 ///
