@@ -15861,15 +15861,15 @@ StyleSheet(
                 offset: SourceOffset(10658),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(10659),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(10659),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -15942,15 +15942,15 @@ StyleSheet(
                 offset: SourceOffset(10702),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(10703),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(10703),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -92683,15 +92683,15 @@ StyleSheet(
                 offset: SourceOffset(65652),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(65653),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(65653),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -102966,15 +102966,15 @@ StyleSheet(
                 offset: SourceOffset(72935),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(72936),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(72936),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -109356,15 +109356,15 @@ StyleSheet(
                 offset: SourceOffset(78591),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(78592),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(78592),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -129849,15 +129849,15 @@ StyleSheet(
                 offset: SourceOffset(96266),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(96267),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(96267),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -131273,15 +131273,15 @@ StyleSheet(
                 offset: SourceOffset(97696),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(97697),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(97697),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: None,
             ),

@@ -639,6 +639,7 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	TextEmphasisPosition,
 	TextEmphasisSkip,
 	TextEmphasisStyle,
+	TextFit,
 	TextGroupAlign,
 	TextIndent,
 	TextJustify,

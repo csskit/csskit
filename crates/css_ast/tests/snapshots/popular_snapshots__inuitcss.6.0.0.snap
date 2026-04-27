@@ -9335,30 +9335,19 @@ StyleSheet(
                 offset: SourceOffset(26005),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26006),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(26007),
-                    len: 20,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26027),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(26028),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: Some(Inside(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(26028),
+                  len: 6,
+                )))),
+                list_style_image: None,
+                list_style_type: Some(CounterStyle(Predefined(DecimalLeadingZero(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(26007),
+                  len: 20,
+                )))))),
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -13268,20 +13257,15 @@ StyleSheet(
                 offset: SourceOffset(31797),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31798),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(31799),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(31799),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -13585,20 +13569,15 @@ StyleSheet(
                 offset: SourceOffset(32987),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(32988),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(32989),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ListStyleStyleValue(
+                list_style_position: None,
+                list_style_image: Some(ListStyleImageStyleValue(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(32989),
+                  len: 4,
+                ))))),
+                list_style_type: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

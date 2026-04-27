@@ -71,7 +71,6 @@ coverage/popular/pure.2.0.3.css
 1064:5:    vertical-align: middle;
 1140:5:    -webkit-box-sizing: border-box;
 1148:5:    z-index: 3;
-1157:5:    list-style: none;
 1171:5:    text-decoration: none;
 1172:5:    white-space: nowrap;
 1178:5:    white-space: nowrap;

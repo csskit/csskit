@@ -154,20 +154,21 @@ properties = [
 properties = ["image-orientation", "image-resolution", "object-fit"]
 
 [inline]
-properties = [
-  "initial-letter",
-  "initial-letter-align",
-  "vertical-align",
-]
+properties = ["initial-letter", "initial-letter-align", "vertical-align"]
 
 [multicol]
 properties = ["columns"]
 
 [lists]
-properties = ["counter-increment", "counter-reset", "counter-set", "list-style"]
+properties = ["counter-increment", "counter-reset", "counter-set"]
 
 [overflow]
-properties = ["line-clamp", "scroll-marker-group", "scrollbar-gutter", "text-overflow"]
+properties = [
+  "line-clamp",
+  "scroll-marker-group",
+  "scrollbar-gutter",
+  "text-overflow",
+]
 
 [regions]
 properties = ["flow-into"]

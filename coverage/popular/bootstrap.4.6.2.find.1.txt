@@ -24,8 +24,6 @@ coverage/popular/bootstrap.4.6.2.css
 327:3:  -webkit-appearance: none;
 331:3:  -webkit-appearance: none;
 336:3:  -webkit-appearance: button;
-437:3:  list-style: none;
-442:3:  list-style: none;
 455:3:  text-transform: uppercase;
 470:3:  content: "\2014\00A0";
 482:3:  border-radius: 0.25rem;
@@ -418,7 +416,6 @@ coverage/popular/bootstrap.4.6.2.css
 3222:3:  vertical-align: 0.255em;
 3223:3:  content: "";
 3238:3:  z-index: 1000;
-3247:3:  list-style: none;
 3251:3:  border-radius: 0.25rem;
 3318:3:  vertical-align: 0.255em;
 3319:3:  content: "";
@@ -531,7 +528,6 @@ coverage/popular/bootstrap.4.6.2.css
 4226:3:  border-radius: 1rem;
 4264:3:  display: -ms-flexbox;
 4266:3:  -ms-flex-wrap: wrap;
-4270:3:  list-style: none;
 4279:3:  text-decoration: none;
 4302:3:  border-color: #e9ecef #e9ecef #dee2e6;
 4308:3:  border-color: transparent;
@@ -557,7 +553,6 @@ coverage/popular/bootstrap.4.6.2.css
 4396:3:  text-decoration: none;
 4400:3:  display: -ms-flexbox;
 4402:3:  -ms-flex-direction: column;
-4406:3:  list-style: none;
 4426:3:  -ms-flex-preferred-size: 100%;
 4428:3:  -ms-flex-positive: 1;
 4430:3:  -ms-flex-align: center;
@@ -624,13 +619,11 @@ coverage/popular/bootstrap.4.6.2.css
 5026:3:  border-radius: 0;
 5031:3:  display: -ms-flexbox;
 5033:3:  -ms-flex-wrap: wrap;
-5037:3:  list-style: none;
 5039:3:  border-radius: 0.25rem;
 5050:3:  content: "/";
 5054:3:  text-decoration: underline;
 5058:3:  text-decoration: none;
 5066:3:  display: -ms-flexbox;
-5069:3:  list-style: none;
 5070:3:  border-radius: 0.25rem;
 5085:3:  z-index: 2;
 5087:3:  text-decoration: none;
@@ -784,7 +777,6 @@ coverage/popular/bootstrap.4.6.2.css
 6631:3:  display: -ms-flexbox;
 6633:3:  -ms-flex-pack: center;
 6634:3:  justify-content: center;
-6638:3:  list-style: none;
 6643:3:  -ms-flex: 0 1 auto;
 6649:3:  text-indent: -999px;
 6674:3:  z-index: 10;

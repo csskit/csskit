@@ -25,7 +25,6 @@ coverage/popular/missing.1.2.0.css
 456:3:  text-transform: none;
 472:3:  text-transform: none;
 498:5:    content: "";
-579:5:    list-style: none;
 623:3:  background: none;
 627:3:  text-decoration: 1px dotted underline;
 630:5:    text-decoration: none;
@@ -91,7 +90,6 @@ coverage/popular/missing.1.2.0.css
 1482:3:  z-index: 10;
 1491:3:  text-decoration: none;
 1492:3:  border-radius: 0;
-1501:3:  list-style: none;
 1505:5:    border-radius: 0;
 1534:3:  vertical-align: middle;
 1535:3:  grid-template-columns: repeat(2, 1rem);

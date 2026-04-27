@@ -22,8 +22,6 @@ coverage/popular/bootstrap.5.3.0.css
 565:3:  -webkit-appearance: button;
 570:3:  -webkit-appearance: button;
 587:3:  vertical-align: baseline;
-667:3:  list-style: none;
-672:3:  list-style: none;
 684:3:  text-transform: uppercase;
 702:3:  content: "— ";
 1871:3:  vertical-align: top;
@@ -130,7 +128,6 @@ coverage/popular/bootstrap.5.3.0.css
 3406:3:  vertical-align: 0.255em;
 3407:3:  content: "";
 3445:3:  z-index: var(--bs-dropdown-zindex);
-3453:3:  list-style: none;
 3570:3:  vertical-align: 0.255em;
 3571:3:  content: "";
 3591:3:  vertical-align: 0.255em;
@@ -150,7 +147,6 @@ coverage/popular/bootstrap.5.3.0.css
 3737:3:  justify-content: flex-start;
 3786:3:  align-items: flex-start;
 3787:3:  justify-content: center;
-3819:3:  list-style: none;
 3828:3:  text-decoration: none;
 3829:3:  background: none;
 3843:3:  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
@@ -162,7 +158,6 @@ coverage/popular/bootstrap.5.3.0.css
 3991:3:  justify-content: space-between;
 3999:3:  text-decoration: none;
 4000:3:  white-space: nowrap;
-4017:3:  list-style: none;
 4040:3:  align-items: center;
 4059:3:  text-decoration: none;
 4062:3:  text-decoration: none;
@@ -190,8 +185,6 @@ coverage/popular/bootstrap.5.3.0.css
 4641:3:  z-index: 3;
 4690:3:  border-radius: 0;
 4699:3:  border-radius: 0;
-4721:3:  list-style: none;
-4762:3:  list-style: none;
 4771:3:  text-decoration: none;
 4782:3:  z-index: 2;
 4788:3:  z-index: 3;

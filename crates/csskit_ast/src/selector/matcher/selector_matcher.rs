@@ -26,10 +26,8 @@ impl HasPrefilter {
 			Self { type_id: None, requirements: SelectorRequirements::none(), attribute_filter: PropertyKind::none() };
 		for part in segment.parts(all_parts) {
 			match part {
-				QuerySelectorComponent::Type(t) => {
-					if prefilter.type_id.is_none() {
-						prefilter.type_id = t.node_id(source);
-					}
+				QuerySelectorComponent::Type(t) if prefilter.type_id.is_none() => {
+					prefilter.type_id = t.node_id(source);
 				}
 				QuerySelectorComponent::PseudoClass(p) => {
 					let meta = <_ as NodeWithMetadata<crate::QuerySelectorMetadata>>::self_metadata(p);

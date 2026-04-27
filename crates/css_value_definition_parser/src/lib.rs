@@ -349,6 +349,7 @@ impl Def {
 						| "TimelineTriggerActiveRangeStart"
 						| "TimelineTriggerName"
 						| "TimelineTriggerSource"
+						| "ListStyleImage" | "ListStyleType"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),

@@ -47,15 +47,12 @@ coverage/popular/inuitcss.6.0.0.css
 994:5:    content: "—"; }
 1006:3:  background: none;
 1021:3:  filter: alpha(opacity=75); }
-1048:3:  list-style: decimal-leading-zero inside;
 1050:3:  white-space: nowrap;
 1057:3:  white-space: pre;
 1083:3:  border-radius: 4px; }
 1221:3:  vertical-align: middle; }
 1224:3:  vertical-align: top; }
 1344:3:  font: 12px/1.5 sans-serif; }
-1393:3:  list-style: none;
-1455:3:  list-style: none;
 2381:3:  filter: alpha(opacity=50) !important; }
 2399:3:  content: "\00A0»" !important; }
 2405:3:  text-transform: uppercase !important; }

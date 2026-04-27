@@ -142,53 +142,37 @@ use impls::*;
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub struct CounterSetStyleValue<'a>;
 
-// /// Represents the style value for `list-style` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style).
-// ///
-// /// The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'list-style-position'> || <'list-style-image'> || <'list-style-type'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-lists-3/#list-style
-// #[syntax(" <'list-style-position'> || <'list-style-image'> || <'list-style-type'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     inherits = Unknown,
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = ListStyleImage|ListStylePosition|ListStyleType,
-//     property_group = Lists,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.list-style")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ListStyleStyleValue;
+/// Represents the style value for `list-style` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style).
+///
+/// The list-style shorthand CSS property and the list-style-image, list-style-position, and list-style-type longhand properties set the position and appearance of a list item's marker.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'list-style-position'> || <'list-style-image'> || <'list-style-type'>
+/// ```
+///
+/// https://drafts.csswg.org/css-lists-3/#list-style
+#[syntax(" <'list-style-position'> || <'list-style-image'> || <'list-style-type'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = ListStyleImage|ListStylePosition|ListStyleType,
+    property_group = Lists,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.list-style"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ListStyleStyleValue<'a>;
 
 /// Represents the style value for `list-style-image` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style-image).
 ///

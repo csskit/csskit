@@ -711,6 +711,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct LinearGradientFunction < \'a > { }",
   "pub struct LinkParametersStyleValue < \'a > { }",
   "pub struct ListStyleImageStyleValue < \'a > { }",
+  "pub struct ListStyleStyleValue < \'a > { }",
   "pub struct MarginBlockEndStyleValue { }",
   "pub struct MarginBlockStartStyleValue { }",
   "pub struct MarginBlockStyleValue { }",

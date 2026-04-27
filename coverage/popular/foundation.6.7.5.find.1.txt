@@ -379,7 +379,6 @@ coverage/popular/foundation.6.7.5.css
 2213:3:  text-rendering: optimizeLegibility; }
 2276:3:  text-decoration: none;
 2331:3:  text-decoration: none; }
-2362:3:  list-style: none; }
 2369:5:    content: "— "; }
 2390:3:  white-space: pre;
 2431:5:    background: transparent !important;
@@ -494,7 +493,6 @@ coverage/popular/foundation.6.7.5.css
 3099:5:    background: #3adb76;
 3102:5:    background: #ffae00;
 3105:5:    background: #cc4b37;
-3110:3:  list-style: none; }
 3113:5:    content: ' ';
 3114:5:    -webkit-flex-basis: 0;
 3115:9:        -ms-flex-preferred-size: 0;
@@ -575,7 +573,6 @@ coverage/popular/foundation.6.7.5.css
 3380:7:      -ms-flex: 1 0 auto;
 3394:3:  border-radius: 0;
 3429:3:  z-index: 10;
-3450:3:  list-style: none;
 3452:3:  display: -webkit-box;
 3453:3:  display: -webkit-flex;
 3454:3:  display: -ms-flexbox;
@@ -926,7 +923,6 @@ coverage/popular/foundation.6.7.5.css
 4636:15:              box-shadow: none;
 4637:7:      -webkit-transform: none;
 4638:11:          -ms-transform: none;
-4650:3:  list-style: none;
 4680:3:  -webkit-transform: translateY(-50%);
 4681:7:      -ms-transform: translateY(-50%);
 4683:3:  z-index: 10;
