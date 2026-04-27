@@ -4258,20 +4258,11 @@ StyleSheet(
                 offset: SourceOffset(3437),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3438),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3439),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FilterStyleValue(r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(3439),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

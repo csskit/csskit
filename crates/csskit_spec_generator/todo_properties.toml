@@ -106,9 +106,6 @@ properties = [
   "stroke-linejoin",
 ]
 
-[filter-effects]
-properties = ["filter", "backdrop-filter"]
-
 [fonts]
 properties = [
   "font",

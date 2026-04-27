@@ -121,6 +121,9 @@ impl DefType {
 				| "SingleTransition"
 				| "Symbol" // Symbol<'a>
 				| "TransformList"
+				| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
+				| "FilterValue"  // contains FilterFunction<'a>
+				| "FilterFunction" // contains DropShadowFunction<'a>
 		)
 	}
 }

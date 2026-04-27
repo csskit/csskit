@@ -7,50 +7,34 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `backdrop-filter` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#backdrop-filter).
-// ///
-// /// The backdrop-filter CSS property applies graphical effects such as blurring or color shifting to the area behind an element.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <filter-value-list>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/filter-effects-2/#backdrop-filter
-// #[syntax(" none | <filter-value-list> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     property_group = FilterEffects,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.backdrop-filter")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackdropFilterStyleValue;
+/// Represents the style value for `backdrop-filter` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#backdrop-filter).
+///
+/// The backdrop-filter CSS property applies graphical effects such as blurring or color shifting to the area behind an element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <filter-value-list>
+/// ```
+///
+/// https://drafts.csswg.org/filter-effects-2/#backdrop-filter
+#[syntax(" none | <filter-value-list> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = FilterEffects,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.backdrop-filter"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackdropFilterStyleValue<'a>;
 
 /// Represents the style value for `color-interpolation-filters` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#color-interpolation-filters).
 ///
@@ -86,50 +70,34 @@ use impls::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorInterpolationFiltersStyleValue {}
 
-// /// Represents the style value for `filter` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#filter).
-// ///
-// /// The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects. For instance, filter: blur(2px).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <filter-value-list>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/filter-effects-2/#filter
-// #[syntax(" none | <filter-value-list> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     property_group = FilterEffects,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.filter")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FilterStyleValue;
+/// Represents the style value for `filter` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#filter).
+///
+/// The filter CSS property applies one or more graphic effects to an element. You can use filter functions, such as blur() and drop-shadow(), alone or combined to produce different effects. For instance, filter: blur(2px).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <filter-value-list>
+/// ```
+///
+/// https://drafts.csswg.org/filter-effects-2/#filter
+#[syntax(" none | <filter-value-list> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = FilterEffects,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.filter"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FilterStyleValue<'a>;
 
 /// Represents the style value for `flood-color` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#flood-color).
 ///

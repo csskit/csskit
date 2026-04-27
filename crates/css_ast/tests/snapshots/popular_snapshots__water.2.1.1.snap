@@ -39131,36 +39131,25 @@ StyleSheet(
               offset: SourceOffset(31247),
               len: 1,
             )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(31248),
+            value: BackdropFilterStyleValue(r#Some(FilterValueList([
+              FilterFunction(Blur(BlurFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(31249),
+                  len: 5,
+                )),
+                radius: Some(Px(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(31254),
+                  len: 3,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(31257),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(31249),
-                    len: 5,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      Dimension(Cursor(
-                        kind: "Dimension",
-                        offset: SourceOffset(31254),
-                        len: 3,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(31257),
-                    len: 1,
-                  )),
-                ),
-              ],
-            )),
+              ))),
+            ]))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -39299,36 +39288,25 @@ StyleSheet(
                 offset: SourceOffset(31370),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31371),
+              value: BackdropFilterStyleValue(r#Some(FilterValueList([
+                FilterFunction(Blur(BlurFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(31372),
+                    len: 5,
+                  )),
+                  radius: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(31377),
+                    len: 3,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(31380),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(31372),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(31377),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(31380),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

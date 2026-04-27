@@ -39,11 +39,9 @@ coverage/popular/missing.1.2.0.css
 790:3:  text-decoration: none;
 792:3:  justify-content: center;
 793:3:  align-items: center;
-802:5:    filter: brightness(1.1);
 807:5:    text-decoration: none;
 843:3:  border-color: transparent;
 869:3:  vertical-align: middle;
-887:3:  filter: brightness(1.1);
 889:3:  text-decoration: none;
 908:3:  border-color: transparent;
 934:3:  vertical-align: top;
@@ -60,7 +58,6 @@ coverage/popular/missing.1.2.0.css
 1080:7:      border-radius: 0;
 1100:9:        content: "";
 1129:5:    background-position: left;
-1166:5:    filter: brightness(.8);
 1186:3:  background: black;
 1188:3:  animation: bg 2s;
 1192:5:    background: transparent;

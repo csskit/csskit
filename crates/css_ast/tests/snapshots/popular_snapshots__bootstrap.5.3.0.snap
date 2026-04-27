@@ -61666,36 +61666,25 @@ StyleSheet(
                 offset: SourceOffset(45469),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(45470),
+              value: FilterStyleValue(r#Some(FilterValueList([
+                FilterFunction(Brightness(BrightnessFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(45471),
+                    len: 11,
+                  )),
+                  value: Some(Percentage(Percentage(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(45482),
+                    len: 3,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(45485),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(45471),
-                      len: 11,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(45482),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(45485),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -62534,20 +62523,11 @@ StyleSheet(
                 offset: SourceOffset(46607),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(46608),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(46609),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FilterStyleValue(r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(46609),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -64108,20 +64088,11 @@ StyleSheet(
                 offset: SourceOffset(48182),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(48183),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(48184),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: FilterStyleValue(r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(48184),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -194241,62 +194212,42 @@ StyleSheet(
                 offset: SourceOffset(162888),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(162889),
+              value: FilterStyleValue(r#Some(FilterValueList([
+                FilterFunction(Invert(InvertFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(162890),
+                    len: 7,
+                  )),
+                  value: Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(162897),
+                    len: 1,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(162898),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(162890),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(162897),
-                          len: 1,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(162898),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(162899),
+                ))),
+                FilterFunction(Grayscale(GrayscaleFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(162900),
+                    len: 10,
+                  )),
+                  value: Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(162910),
+                    len: 3,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(162913),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(162900),
-                      len: 10,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(162910),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(162913),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -194774,62 +194725,42 @@ StyleSheet(
                 offset: SourceOffset(163301),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(163302),
+              value: FilterStyleValue(r#Some(FilterValueList([
+                FilterFunction(Invert(InvertFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(163303),
+                    len: 7,
+                  )),
+                  value: Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(163310),
+                    len: 1,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(163311),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(163303),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(163310),
-                          len: 1,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(163311),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(163312),
+                ))),
+                FilterFunction(Grayscale(GrayscaleFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(163313),
+                    len: 10,
+                  )),
+                  value: Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(163323),
+                    len: 3,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(163326),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(163313),
-                      len: 10,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(163323),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(163326),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

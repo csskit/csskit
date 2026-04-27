@@ -107,9 +107,7 @@ coverage/popular/mini.css.3.0.1.css
 1903:3:  animation: spinner-donut-anim 1.2s linear infinite;
 1940:3:  vertical-align: -0.125em;
 1946:3:  -webkit-filter: invert(25%);
-1947:3:  filter: invert(25%);
 1951:3:  -webkit-filter: invert(100%);
-1952:3:  filter: invert(100%);
 2055:3:  clip: rect(0 0 0 0) !important;
 2056:3:  -webkit-clip-path: inset(100%) !important;
 2057:3:  clip-path: inset(100%) !important;

@@ -61485,36 +61485,25 @@ StyleSheet(
                 offset: SourceOffset(43067),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(43068),
+              value: FilterStyleValue(r#Some(FilterValueList([
+                FilterFunction(Invert(InvertFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(43069),
+                    len: 7,
+                  )),
+                  value: Some(Percentage(Percentage(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(43076),
+                    len: 3,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(43079),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(43069),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(43076),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(43079),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -61654,36 +61643,25 @@ StyleSheet(
                 offset: SourceOffset(43156),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(43157),
+              value: FilterStyleValue(r#Some(FilterValueList([
+                FilterFunction(Invert(InvertFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(43158),
+                    len: 7,
+                  )),
+                  value: Some(Percentage(Percentage(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(43165),
+                    len: 4,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(43169),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(43158),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(43165),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(43169),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
