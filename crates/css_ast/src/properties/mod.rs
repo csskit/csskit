@@ -328,7 +328,10 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		c.token().is_dashed_ident() || crate::property_atoms::CSS_PROPERTY_ATOMS.contains(&p.to_atom::<CssAtomSet>(c))
+		let atom = p.to_atom::<CssAtomSet>(c);
+		c.token().is_dashed_ident()
+			|| crate::property_atoms::CSS_PROPERTY_ATOMS.contains(&atom)
+			|| CSS_VENDOR_PROPERTY_ATOMS.contains(&atom)
 	}
 
 	fn is_unknown(&self) -> bool {
@@ -492,6 +495,12 @@ mod tests {
 		let mut p = Parser::new(&bump, input, lexer);
 		let decl = p.parse::<Property>().unwrap();
 		assert!(decl.value.is_unknown(), "notarealproperty should be parsed as unknown");
+
+		let input = "-webkit-filter:blur(4px)";
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = Parser::new(&bump, input, lexer);
+		let decl = p.parse::<Property>().unwrap();
+		assert!(!decl.value.is_unknown(), "-webkit-filter should be recognized as a known property");
 
 		let input = "--custom:value";
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);

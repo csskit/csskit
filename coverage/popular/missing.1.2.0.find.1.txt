@@ -1,19 +1,13 @@
 :unknown
 ---
 coverage/popular/missing.1.2.0.css
-16:3:  -webkit-tap-highlight-color: transparent;
-18:3:  -webkit-text-size-adjust: none;
 21:3:  text-decoration: underline;
 22:3:  text-decoration: underline dotted;
 37:3:  vertical-align: middle;
 40:3:  fill: currentColor;
 44:3:  border-color: currentColor;
 45:3:  text-indent: 0;
-56:3:  -webkit-appearance: button;
 62:3:  vertical-align: baseline;
-68:3:  -webkit-appearance: textfield;
-82:3:  -webkit-appearance: none;
-85:3:  -webkit-appearance: button;
 93:3:  z-index: 2;
 102:3:  z-index: 2;
 1:1:/* src/core/sanitize.css */

@@ -162,20 +162,11 @@ StyleSheet(
                 offset: SourceOffset(284),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(285),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(286),
-                    len: 11,
-                  )),
-                ],
-              )),
+              value: Antialiased(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(286),
+                len: 11,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2561,36 +2552,25 @@ StyleSheet(
                     offset: SourceOffset(1845),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(1846),
+                  value: WebkitTransformStyleValue(r#Some(TransformList([
+                    Rotate(RotateFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(1847),
+                        len: 7,
+                      )),
+                      params: Angle(Deg(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(1854),
+                        len: 4,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(1858),
                         len: 1,
                       )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(1847),
-                          len: 7,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Dimension(Cursor(
-                              kind: "Dimension",
-                              offset: SourceOffset(1854),
-                              len: 4,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(1858),
-                          len: 1,
-                        )),
-                      ),
-                    ],
-                  )),
+                    )),
+                  ]))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -2670,36 +2650,25 @@ StyleSheet(
                     offset: SourceOffset(1930),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(1931),
+                  value: WebkitTransformStyleValue(r#Some(TransformList([
+                    Rotate(RotateFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(1932),
+                        len: 7,
+                      )),
+                      params: Angle(Deg(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(1939),
+                        len: 6,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(1945),
                         len: 1,
                       )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(1932),
-                          len: 7,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Dimension(Cursor(
-                              kind: "Dimension",
-                              offset: SourceOffset(1939),
-                              len: 6,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(1945),
-                          len: 1,
-                        )),
-                      ),
-                    ],
-                  )),
+                    )),
+                  ]))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -2805,36 +2774,25 @@ StyleSheet(
                     offset: SourceOffset(2041),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(2042),
+                  value: WebkitTransformStyleValue(r#Some(TransformList([
+                    Rotate(RotateFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(2043),
+                        len: 7,
+                      )),
+                      params: Angle(Deg(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(2050),
+                        len: 4,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(2054),
                         len: 1,
                       )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(2043),
-                          len: 7,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Dimension(Cursor(
-                              kind: "Dimension",
-                              offset: SourceOffset(2050),
-                              len: 4,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(2054),
-                          len: 1,
-                        )),
-                      ),
-                    ],
-                  )),
+                    )),
+                  ]))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -2914,36 +2872,25 @@ StyleSheet(
                     offset: SourceOffset(2126),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(2127),
+                  value: WebkitTransformStyleValue(r#Some(TransformList([
+                    Rotate(RotateFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(2128),
+                        len: 7,
+                      )),
+                      params: Angle(Deg(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(2135),
+                        len: 6,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(2141),
                         len: 1,
                       )),
-                      FunctionBlock(
-                        name: Function(Cursor(
-                          kind: "Function",
-                          offset: SourceOffset(2128),
-                          len: 7,
-                        )),
-                        params: ComponentValues(
-                          values: [
-                            Dimension(Cursor(
-                              kind: "Dimension",
-                              offset: SourceOffset(2135),
-                              len: 6,
-                            )),
-                          ],
-                        ),
-                        close: RightParen(Cursor(
-                          kind: "RightParen",
-                          offset: SourceOffset(2141),
-                          len: 1,
-                        )),
-                      ),
-                    ],
-                  )),
+                    )),
+                  ]))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -3073,36 +3020,25 @@ StyleSheet(
                 offset: SourceOffset(2297),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(2298),
+              value: WebkitTransformStyleValue(r#Some(TransformList([
+                Rotate(RotateFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(2299),
+                    len: 7,
+                  )),
+                  params: Angle(Deg(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(2306),
+                    len: 5,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(2311),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(2299),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(2306),
-                          len: 5,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(2311),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                )),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3225,36 +3161,25 @@ StyleSheet(
                 offset: SourceOffset(2463),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(2464),
+              value: WebkitTransformStyleValue(r#Some(TransformList([
+                Rotate(RotateFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(2465),
+                    len: 7,
+                  )),
+                  params: Angle(Deg(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(2472),
+                    len: 6,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(2478),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(2465),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(2472),
-                          len: 6,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(2478),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                )),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3377,36 +3302,25 @@ StyleSheet(
                 offset: SourceOffset(2631),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(2632),
+              value: WebkitTransformStyleValue(r#Some(TransformList([
+                Rotate(RotateFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(2633),
+                    len: 7,
+                  )),
+                  params: Angle(Deg(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(2640),
+                    len: 6,
+                  )))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(2646),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(2633),
-                      len: 7,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(2640),
-                          len: 6,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(2646),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                )),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3529,51 +3443,33 @@ StyleSheet(
                 offset: SourceOffset(2814),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(2815),
+              value: WebkitTransformStyleValue(r#Some(TransformList([
+                Scale(ScaleFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(2816),
+                    len: 6,
+                  )),
+                  params: (Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(2822),
+                    len: 2,
+                  ))), Some(Comma(Cursor(
+                    kind: "Comma",
+                    offset: SourceOffset(2824),
+                    len: 1,
+                  ))), Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(2826),
+                    len: 1,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(2827),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(2816),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(2822),
-                          len: 2,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(2824),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(2825),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(2826),
-                          len: 1,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(2827),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                )),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3704,51 +3600,33 @@ StyleSheet(
                 offset: SourceOffset(2991),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(2992),
+              value: WebkitTransformStyleValue(r#Some(TransformList([
+                Scale(ScaleFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(2993),
+                    len: 6,
+                  )),
+                  params: (Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(2999),
+                    len: 1,
+                  ))), Some(Comma(Cursor(
+                    kind: "Comma",
+                    offset: SourceOffset(3000),
+                    len: 1,
+                  ))), Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(3002),
+                    len: 2,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(3004),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(2993),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(2999),
-                          len: 1,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(3000),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(3001),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(3002),
-                          len: 2,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(3004),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                )),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3909,51 +3787,33 @@ StyleSheet(
                 offset: SourceOffset(3202),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3203),
+              value: WebkitTransformStyleValue(r#Some(TransformList([
+                Scale(ScaleFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(3204),
+                    len: 6,
+                  )),
+                  params: (Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(3210),
+                    len: 2,
+                  ))), Some(Comma(Cursor(
+                    kind: "Comma",
+                    offset: SourceOffset(3212),
+                    len: 1,
+                  ))), Some(Number(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(3214),
+                    len: 2,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(3216),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(3204),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(3210),
-                          len: 2,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(3212),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(3213),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(3214),
-                          len: 2,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(3216),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                )),
+              ]))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4226,20 +4086,11 @@ StyleSheet(
                 offset: SourceOffset(3413),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3414),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3415),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: WebkitFilterStyleValue(r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(3415),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

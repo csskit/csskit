@@ -1,21 +1,16 @@
 :unknown
 ---
 coverage/popular/pure.2.0.3.css
-23:3:  -webkit-text-size-adjust: 100%; /* 2 */
 64:3:  -webkit-box-sizing: content-box;
 98:3:  text-decoration: underline; /* 2 */
 99:3:  -webkit-text-decoration: underline dotted;
 100:11:          text-decoration: underline dotted; /* 2 */
 142:3:  vertical-align: baseline;
 200:3:  text-transform: none;
-211:3:  -webkit-appearance: button;
 253:3:  -webkit-box-sizing: border-box;
 259:3:  white-space: normal; /* 1 */
 267:3:  vertical-align: baseline;
 285:3:  -webkit-box-sizing: border-box;
-305:3:  -webkit-appearance: textfield; /* 1 */
-314:3:  -webkit-appearance: none;
-323:3:  -webkit-appearance: button; /* 1 */
 402:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
 423:5:    display: -webkit-box;
 424:5:    display: -ms-flexbox;

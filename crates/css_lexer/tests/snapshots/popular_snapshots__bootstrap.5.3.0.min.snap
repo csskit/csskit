@@ -4188,40 +4188,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Function",
+    kind: "Hash",
     len: 5,
-  ),
-  Token(
-    kind: "Number",
-    len: 1,
-  ),
-  Token(
-    kind: "Comma",
-    len: 1,
-  ),
-  Token(
-    kind: "Number",
-    len: 1,
-  ),
-  Token(
-    kind: "Comma",
-    len: 1,
-  ),
-  Token(
-    kind: "Number",
-    len: 1,
-  ),
-  Token(
-    kind: "Comma",
-    len: 1,
-  ),
-  Token(
-    kind: "Number",
-    len: 1,
-  ),
-  Token(
-    kind: "RightParen",
-    len: 1,
   ),
   Token(
     kind: "RightCurly",

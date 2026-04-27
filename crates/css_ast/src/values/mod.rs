@@ -65,6 +65,7 @@ mod values;
 mod variables;
 mod view_transitions;
 mod viewport;
+mod webkit;
 mod will_change;
 mod writing_modes;
 
@@ -140,6 +141,7 @@ pub use values::*;
 pub use variables::*;
 pub use view_transitions::*;
 pub use viewport::*;
+pub use webkit::*;
 pub use will_change::*;
 pub use writing_modes::*;
 

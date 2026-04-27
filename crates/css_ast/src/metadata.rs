@@ -575,7 +575,7 @@ mod tests {
 		// Vendor-prefixed atoms should convert successfully
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_WebkitTransform), Ok(VendorPrefixes::WebKit));
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_WebkitAnimation), Ok(VendorPrefixes::WebKit));
-		assert_eq!(VendorPrefixes::try_from(CssAtomSet::WebkitLineClamp), Ok(VendorPrefixes::WebKit));
+		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_WebkitLineClamp), Ok(VendorPrefixes::WebKit));
 
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_MozAppearance), Ok(VendorPrefixes::Moz));
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::_MozAny), Ok(VendorPrefixes::Moz));

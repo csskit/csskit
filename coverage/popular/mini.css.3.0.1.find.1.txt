@@ -1,7 +1,6 @@
 :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
-40:3:  -webkit-text-size-adjust: 100%;
 63:3:  text-decoration: underline dotted;
 130:3:  background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
 142:3:  border-radius: 0 var(--universal-border-radius) var(--universal-border-radius) 0;
@@ -21,19 +20,15 @@ coverage/popular/mini.css.3.0.1.css
 788:3:  justify-content: center;
 799:5:    align-items: stretch;
 806:3:  align-items: stretch;
-821:3:  -webkit-appearance: textfield;
-827:3:  -webkit-appearance: none;
 843:3:  box-shadow: none;
 848:3:  box-shadow: none;
 861:3:  text-overflow: ellipsis;
-865:3:  -webkit-appearance: none;
 866:3:  -moz-appearance: none;
 871:3:  vertical-align: text-bottom;
 882:3:  content: '\2713';
 890:3:  border-radius: 100%;
 894:3:  border-radius: 100%;
 895:3:  content: '';
-918:3:  -webkit-appearance: button;
 923:3:  text-transform: none;
 936:3:  text-decoration: none;
 969:3:  border-radius: 0;
@@ -100,14 +95,11 @@ coverage/popular/mini.css.3.0.1.css
 1808:3:  border-radius: 0 0 var(--universal-border-radius) var(--universal-border-radius);
 1824:3:  border-radius: 1em;
 1838:3:  vertical-align: baseline;
-1839:3:  -webkit-appearance: none;
 1840:3:  -moz-appearance: none;
 1877:3:  vertical-align: middle;
 1900:3:  border-radius: 50%;
 1903:3:  animation: spinner-donut-anim 1.2s linear infinite;
 1940:3:  vertical-align: -0.125em;
-1946:3:  -webkit-filter: invert(25%);
-1951:3:  -webkit-filter: invert(100%);
 2055:3:  clip: rect(0 0 0 0) !important;
 2056:3:  -webkit-clip-path: inset(100%) !important;
 2057:3:  clip-path: inset(100%) !important;

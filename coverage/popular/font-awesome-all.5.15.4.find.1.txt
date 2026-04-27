@@ -2,7 +2,6 @@
 ---
 coverage/popular/font-awesome-all.5.15.4.css
 11:3:  -moz-osx-font-smoothing: grayscale;
-12:3:  -webkit-font-smoothing: antialiased;
 15:3:  font-variant: normal;
 16:3:  text-rendering: auto;
 22:3:  vertical-align: -.0667em; }
@@ -11,23 +10,12 @@ coverage/popular/font-awesome-all.5.15.4.css
 105:11:          animation: fa-spin 2s infinite linear; }
 108:3:  -webkit-animation: fa-spin 1s infinite steps(8);
 109:11:          animation: fa-spin 1s infinite steps(8); }
-113:5:    -webkit-transform: rotate(0deg);
-116:5:    -webkit-transform: rotate(360deg);
-121:5:    -webkit-transform: rotate(0deg);
-124:5:    -webkit-transform: rotate(360deg);
 128:3:  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
-129:3:  -webkit-transform: rotate(90deg);
 133:3:  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
-134:3:  -webkit-transform: rotate(180deg);
 138:3:  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=3)";
-139:3:  -webkit-transform: rotate(270deg);
 143:3:  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=0, mirror=1)";
-144:3:  -webkit-transform: scale(-1, 1);
 148:3:  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-149:3:  -webkit-transform: scale(1, -1);
 153:3:  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2, mirror=1)";
-154:3:  -webkit-transform: scale(-1, -1);
-163:3:  -webkit-filter: none;
 171:3:  vertical-align: middle;
 193:3:  content: "\f26e"; }
 196:3:  content: "\f368"; }

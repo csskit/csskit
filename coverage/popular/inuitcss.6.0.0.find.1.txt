@@ -1,7 +1,6 @@
 :unknown
 ---
 coverage/popular/inuitcss.6.0.0.css
-395:3:  -webkit-text-size-adjust: 100%;
 397:3:  -ms-text-size-adjust: 100%;
 456:3:  -moz-box-sizing: content-box;
 464:3:  background: #ff0;
@@ -9,11 +8,8 @@ coverage/popular/inuitcss.6.0.0.css
 487:3:  quotes: "\201C" "\201D" "\2018" "\2019"; }
 503:3:  vertical-align: baseline; }
 588:3:  text-transform: none; }
-601:3:  -webkit-appearance: button;
-630:3:  -webkit-appearance: textfield;
 632:3:  -moz-box-sizing: content-box;
 633:3:  -webkit-box-sizing: content-box;
-643:3:  -webkit-appearance: none; }
 660:3:  vertical-align: top;
 684:3:  -webkit-box-sizing: border-box;
 685:3:  -moz-box-sizing: border-box;

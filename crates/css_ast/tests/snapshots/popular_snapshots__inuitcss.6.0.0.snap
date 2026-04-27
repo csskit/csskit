@@ -510,20 +510,11 @@ StyleSheet(
                 offset: SourceOffset(11813),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(11814),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(11815),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: WebkitTextSizeAdjustStyleValue(r#Some(Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(11815),
+                len: 4,
+              ))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2609,20 +2600,11 @@ StyleSheet(
                 offset: SourceOffset(16224),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(16225),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(16226),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: CompatAuto(Button(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(16226),
+                len: 6,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2978,20 +2960,11 @@ StyleSheet(
                 offset: SourceOffset(16838),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(16839),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(16840),
-                    len: 9,
-                  )),
-                ],
-              )),
+              value: CompatSpecial(Textfield(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(16840),
+                len: 9,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3220,20 +3193,11 @@ StyleSheet(
                 offset: SourceOffset(17181),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17182),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(17183),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(17183),
+                len: 4,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

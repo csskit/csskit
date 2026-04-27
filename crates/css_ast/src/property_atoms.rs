@@ -698,7 +698,6 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	VoiceRate,
 	VoiceStress,
 	VoiceVolume,
-	WebkitLineClamp,
 	WhiteSpace,
 	WhiteSpaceCollapse,
 	WhiteSpaceTrim,

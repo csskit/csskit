@@ -2,8 +2,6 @@
 ---
 coverage/popular/bootstrap.5.3.0.css
 128:3:  color-scheme: dark;
-202:3:  -webkit-text-size-adjust: 100%;
-203:3:  -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 272:3:  -webkit-text-decoration: underline dotted;
 273:3:  text-decoration: underline dotted;
 275:3:  -webkit-text-decoration-skip-ink: none;
@@ -16,11 +14,6 @@ coverage/popular/bootstrap.5.3.0.css
 425:3:  text-align: -webkit-match-parent;
 444:3:  border-radius: 0;
 464:3:  text-transform: none;
-486:3:  -webkit-appearance: button;
-544:3:  -webkit-appearance: textfield;
-556:3:  -webkit-appearance: none;
-565:3:  -webkit-appearance: button;
-570:3:  -webkit-appearance: button;
 587:3:  vertical-align: baseline;
 684:3:  text-transform: uppercase;
 702:3:  content: "— ";
@@ -33,28 +26,23 @@ coverage/popular/bootstrap.5.3.0.css
 2066:5:    -webkit-overflow-scrolling: touch;
 2072:5:    -webkit-overflow-scrolling: touch;
 2078:5:    -webkit-overflow-scrolling: touch;
-2122:3:  -webkit-appearance: none;
 2123:3:  -moz-appearance: none;
 2142:3:  border-color: #86b7fe;
 2144:3:  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 2170:3:  -webkit-margin-end: 0.75rem;
 2179:3:  border-radius: 0;
-2180:3:  -webkit-transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
 2186:3:  -webkit-margin-end: 0.75rem;
 2195:3:  border-radius: 0;
-2200:5:    -webkit-transition: none;
 2242:3:  -webkit-margin-end: 0.5rem;
 2248:3:  -webkit-margin-end: 0.5rem;
 2261:3:  -webkit-margin-end: 1rem;
 2267:3:  -webkit-margin-end: 1rem;
 2316:3:  background-position: right 0.75rem center;
-2321:3:  -webkit-appearance: none;
 2322:3:  -moz-appearance: none;
 2331:3:  border-color: #86b7fe;
 2333:3:  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 2394:3:  vertical-align: top;
 2398:3:  background-position: center;
-2401:3:  -webkit-appearance: none;
 2402:3:  -moz-appearance: none;
 2404:3:  -webkit-print-color-adjust: exact;
 2409:3:  border-radius: 0.25em;
@@ -67,14 +55,10 @@ coverage/popular/bootstrap.5.3.0.css
 2456:3:  border-radius: 2em;
 2468:3:  background-position: right center;
 2487:3:  clip: rect(0, 0, 0, 0);
-2505:3:  -webkit-appearance: none;
 2506:3:  -moz-appearance: none;
 2513:3:  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 2516:3:  box-shadow: 0 0 0 1px #fff, 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
 2527:3:  border-radius: 1rem;
-2528:3:  -webkit-transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
-2530:3:  -webkit-appearance: none;
-2535:5:    -webkit-transition: none;
 2548:3:  border-color: transparent;
 2549:3:  border-radius: 1rem;
 2556:3:  border-radius: 1rem;
@@ -244,7 +228,6 @@ coverage/popular/bootstrap.5.3.0.css
 5982:3:  content: "";
 6029:3:  touch-action: pan-y;
 6040:3:  content: "";
-6049:3:  -webkit-backface-visibility: hidden;
 6083:3:  z-index: 1;
 6088:3:  z-index: 0;
 6104:3:  z-index: 1;
@@ -340,7 +323,6 @@ coverage/popular/bootstrap.5.3.0.css
 7005:3:  align-items: center;
 7006:3:  -webkit-text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
 7007:3:  text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
-7009:3:  -webkit-backface-visibility: hidden;
 7016:3:  fill: currentcolor;
 7036:3:  content: "";
 7067:3:  z-index: 1030;
