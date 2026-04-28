@@ -1067,6 +1067,7 @@ pub enum CssAtomSet {
 	LeftToRight,
 	LeftTop,
 	Leftwards,
+	Legacy,
 	Legend,
 	Lemonchiffon,
 	Leq,

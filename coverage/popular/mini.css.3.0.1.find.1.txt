@@ -11,15 +11,10 @@ coverage/popular/mini.css.3.0.1.css
 195:3:  vertical-align: baseline;
 219:3:  text-decoration: none;
 231:3:  text-decoration: underline;
-651:3:  justify-content: space-between;
 675:3:  border-radius: 0;
 684:3:  -o-object-fit: cover;
 685:3:  object-fit: cover;
 772:3:  white-space: normal;
-787:3:  align-items: center;
-788:3:  justify-content: center;
-799:5:    align-items: stretch;
-806:3:  align-items: stretch;
 843:3:  box-shadow: none;
 848:3:  box-shadow: none;
 861:3:  text-overflow: ellipsis;
@@ -57,7 +52,6 @@ coverage/popular/mini.css.3.0.1.css
 1313:3:  z-index: 999;
 1321:3:  border-radius: 0 0 var(--universal-border-radius) var(--universal-border-radius);
 1363:3:  text-overflow: ellipsis;
-1387:3:  justify-content: space-between;
 1457:5:    clip: rect(0 0 0 0);
 1458:5:    -webkit-clip-path: inset(100%);
 1459:5:    clip-path: inset(100%);

@@ -36365,20 +36365,11 @@ StyleSheet(
                 offset: SourceOffset(29138),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(29139),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(29140),
-                    len: 10,
-                  )),
-                ],
-              )),
+              value: SelfPosition(None, FlexStart(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(29140),
+                len: 10,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

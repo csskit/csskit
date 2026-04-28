@@ -31,8 +31,6 @@ coverage/popular/missing.1.2.0.css
 757:3:  vertical-align: top;
 778:3:  vertical-align: middle;
 790:3:  text-decoration: none;
-792:3:  justify-content: center;
-793:3:  align-items: center;
 807:5:    text-decoration: none;
 843:3:  border-color: transparent;
 869:3:  vertical-align: middle;
@@ -60,8 +58,6 @@ coverage/popular/missing.1.2.0.css
 1294:5:    display: inline list-item;
 1307:1:chip {
 1321:3:  z-index: 5;
-1327:3:  align-items: center;
-1331:5:    align-items: start;
 1368:5:    text-decoration: none;
 1372:7:      text-decoration: underline;
 1381:5:    content: "";
@@ -96,7 +92,6 @@ coverage/popular/missing.1.2.0.css
 1757:5:    color-scheme: light dark;
 1:1:/* src/core/sanitize.css */
 1779:16:    @supports (break-after: avoid-column) {
-1803:3:  place-items: center;
 1821:3:  border-radius: 0;
 1830:3:  border-radius: 0;
 2024:5:    vertical-align: top;
@@ -110,18 +105,6 @@ coverage/popular/missing.1.2.0.css
 2235:3:  text-transform: uppercase;
 1:1:/* src/core/sanitize.css */
 2267:3:  -webkit-text-stroke: var(--stroke-width) var(--stroke-color);
-2350:3:  justify-content: start;
-2353:3:  justify-content: end;
-2356:3:  justify-content: center;
-2359:3:  justify-content: stretch;
-2362:3:  justify-content: space-between;
-2365:3:  justify-content: space-around;
-2368:3:  justify-content: space-evenly;
-2371:3:  align-items: start;
-2374:3:  align-items: end;
-2377:3:  align-items: baseline;
-2380:3:  align-items: center;
-2383:3:  align-items: stretch;
 2472:3:  grid-column: 1;
 2481:3:  grid-column: 2;
 2490:3:  grid-column: 3;

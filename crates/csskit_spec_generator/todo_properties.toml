@@ -2,17 +2,6 @@
 # Once we figure out how to parse them in csskit_proc_macro/src/def.rs, we can
 # remove them from this file and the generator will uncomment them.
 
-[align]
-properties = [
-  "justify-content",
-  "justify-self",
-  "place-self",
-  "justify-items",
-  "align-items",
-  "place-content",
-  "place-items",
-]
-
 [anchor-position]
 properties = ["position-visibility", "position-try-fallbacks", "position-try"]
 
