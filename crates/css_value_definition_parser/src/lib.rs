@@ -381,41 +381,39 @@ impl Def {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 				if defs.iter().any(Self::has_distributable_group) =>
 			{
-				let distributed: Vec<Def> = defs
-					.iter()
-					.flat_map(|d| match d {
-						Def::Combinator(
-							children,
-							style @ (DefCombinatorStyle::Ordered | DefCombinatorStyle::AllMustOccur),
-						) => {
-							if let Some((group_idx, alts)) = children.iter().enumerate().find_map(|(i, c)| match c {
-								Def::Group(inner, _) => {
-									if let Def::Combinator(alts, DefCombinatorStyle::Alternatives) = inner.as_ref() {
-										Some((i, alts))
-									} else {
-										None
-									}
+				let distributed: Vec<Def> =
+					defs.iter()
+						.flat_map(|d| match d {
+							Def::Combinator(
+								children,
+								style @ (DefCombinatorStyle::Ordered | DefCombinatorStyle::AllMustOccur),
+							) => {
+								if let Some((group_idx, alts, wrap_optional)) =
+									children.iter().enumerate().find_map(|(i, c)| {
+										Self::extract_alternatives(c).map(|(alts, wrap)| (i, alts, wrap))
+									}) {
+									let prefix = &children[..group_idx];
+									let suffix = &children[group_idx + 1..];
+									alts.iter()
+										.map(|alt| {
+											let mut new_children: Vec<Def> = prefix.to_vec();
+											let distributed_alt = if wrap_optional {
+												Def::Optional(Box::new(alt.clone()))
+											} else {
+												alt.clone()
+											};
+											new_children.push(distributed_alt);
+											new_children.extend_from_slice(suffix);
+											Def::Combinator(new_children, *style)
+										})
+										.collect()
+								} else {
+									vec![d.clone()]
 								}
-								Def::Combinator(alts, DefCombinatorStyle::Alternatives) => Some((i, alts)),
-								_ => None,
-							}) {
-								let prefix = &children[..group_idx];
-								let suffix = &children[group_idx + 1..];
-								alts.iter()
-									.map(|alt| {
-										let mut new_children: Vec<Def> = prefix.to_vec();
-										new_children.push(alt.clone());
-										new_children.extend_from_slice(suffix);
-										Def::Combinator(new_children, *style)
-									})
-									.collect()
-							} else {
-								vec![d.clone()]
 							}
-						}
-						_ => vec![d.clone()],
-					})
-					.collect();
+							_ => vec![d.clone()],
+						})
+						.collect();
 				return Self::Combinator(distributed, DefCombinatorStyle::Alternatives).optimize();
 			}
 
@@ -589,16 +587,35 @@ impl Def {
 		.optimize()
 	}
 
+	fn extract_alternatives(def: &Def) -> Option<(&[Def], bool)> {
+		match def {
+			Def::Combinator(alts, DefCombinatorStyle::Alternatives) => Some((alts, false)),
+			Def::Group(inner, _) => {
+				if let Def::Combinator(alts, DefCombinatorStyle::Alternatives) = inner.as_ref() {
+					Some((alts, false))
+				} else {
+					None
+				}
+			}
+			Def::Optional(inner) => {
+				let inner_def = match inner.as_ref() {
+					Def::Group(g, _) => g.as_ref(),
+					other => other,
+				};
+				if let Def::Combinator(alts, DefCombinatorStyle::Alternatives) = inner_def {
+					Some((alts, true))
+				} else {
+					None
+				}
+			}
+			_ => None,
+		}
+	}
+
 	fn has_distributable_group(def: &Def) -> bool {
 		match def {
 			Def::Combinator(children, DefCombinatorStyle::Ordered | DefCombinatorStyle::AllMustOccur) => {
-				children.iter().any(|c| match c {
-					Def::Group(inner, _) => {
-						matches!(inner.as_ref(), Def::Combinator(_, DefCombinatorStyle::Alternatives))
-					}
-					Def::Combinator(_, DefCombinatorStyle::Alternatives) => true,
-					_ => false,
-				})
+				children.iter().any(|c| Self::extract_alternatives(c).is_some())
 			}
 			_ => false,
 		}

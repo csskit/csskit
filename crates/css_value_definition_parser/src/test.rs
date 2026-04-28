@@ -602,3 +602,62 @@ fn optimize_distributes_all_must_occur_with_nested_alternatives() {
 		)
 	);
 }
+
+#[test]
+fn optimize_distributes_optional_alternatives() {
+	// `none | [ x | y | both ] [ mandatory | proximity ]?`
+	// First pass distributes [x|y|both] across the Ordered children.
+	// Second pass distributes the Optional [mandatory|proximity]? into each Ordered.
+	// Result: none | x mandatory? | x proximity? | y mandatory? | y proximity? | both mandatory? | both proximity?
+	assert_eq!(
+		to_valuedef! { none | [ x | y | both ] [ mandatory | proximity ]? },
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("none".into())),
+				Def::Combinator(
+					vec![
+						Def::Ident(DefIdent("x".into())),
+						Def::Optional(Box::new(Def::Ident(DefIdent("mandatory".into())))),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Ident(DefIdent("x".into())),
+						Def::Optional(Box::new(Def::Ident(DefIdent("proximity".into())))),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Ident(DefIdent("y".into())),
+						Def::Optional(Box::new(Def::Ident(DefIdent("mandatory".into())))),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Ident(DefIdent("y".into())),
+						Def::Optional(Box::new(Def::Ident(DefIdent("proximity".into())))),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Ident(DefIdent("both".into())),
+						Def::Optional(Box::new(Def::Ident(DefIdent("mandatory".into())))),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Ident(DefIdent("both".into())),
+						Def::Optional(Box::new(Def::Ident(DefIdent("proximity".into())))),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}
