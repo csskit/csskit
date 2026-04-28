@@ -98,7 +98,7 @@ impl ToFieldName for Def {
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
 				let non_optional: Vec<String> = ds
 					.iter()
-					.filter(|d| !matches!(d, Def::Optional(_)))
+					.filter(|d| !matches!(d, Def::Optional(_) | Def::Punct(_)))
 					.map(|d| d.to_variant_name(0).to_string())
 					.collect();
 				let distinct_count = {
@@ -107,11 +107,15 @@ impl ToFieldName for Def {
 					uniq.len()
 				};
 				if distinct_count > 1 {
-					let name: String = ds.iter().map(|d| d.to_variant_name(0).to_string()).collect();
+					let name: String = ds
+						.iter()
+						.filter(|d| !matches!(d, Def::Punct(_)))
+						.map(|d| d.to_variant_name(0).to_string())
+						.collect();
 					format_ident!("{}", name)
 				} else {
 					let (optional, others): (Vec<&Def>, Vec<&Def>) =
-						ds.iter().partition(|d| matches!(d, Def::Optional(_)));
+						ds.iter().filter(|d| !matches!(d, Def::Punct(_))).partition(|d| matches!(d, Def::Optional(_)));
 					let logical_first = others.first().or(optional.first());
 					logical_first.expect("At least one Def is required").to_variant_name(0)
 				}
@@ -129,17 +133,18 @@ impl ToFieldName for Def {
 				format_ident!("{}", get_type_rename(&auto_generated_name).unwrap_or(&auto_generated_name))
 			}
 			Self::Combinator(ds, DefCombinatorStyle::AllMustOccur) => {
-				let name: String = ds.iter().map(|d| d.to_variant_name(0).to_string()).collect();
+				let name: String = ds
+					.iter()
+					.filter(|d| !matches!(d, Def::Punct(_)))
+					.map(|d| d.to_variant_name(0).to_string())
+					.collect();
 				format_ident!("{}", name)
 			}
 			Self::Combinator(_, _) => {
 				dbg!("TODO variant name for Combinator()", self);
 				todo!("variant name")
 			}
-			Self::Punct(_) => {
-				dbg!("TODO variant name for Punct()", self);
-				todo!("variant name")
-			}
+			Self::Punct(c) => panic!("Punct('{c}') has no variant name; filter before calling to_variant_name"),
 		}
 	}
 }

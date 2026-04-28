@@ -1,0 +1,11 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+enum Foo {
+    #[atom(CssAtomSet::None)]
+    None(::css_parse::T![Ident]),
+    Number(crate::Number, (::css_parse::T![/], crate::Number)),
+    Length(crate::Length),
+}

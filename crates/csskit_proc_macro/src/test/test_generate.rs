@@ -451,3 +451,10 @@ fn mixed_ordered_and_all_must_occur_distribution() {
 	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "mixed_ordered_and_all_must_occur_distribution");
 }
+
+#[test]
+fn enum_with_ordered_punct() {
+	let syntax = to_valuedef! { none | <number> / <number> | <length> };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "enum_with_ordered_punct");
+}
