@@ -607,55 +607,74 @@ fn optimize_distributes_all_must_occur_with_nested_alternatives() {
 fn optimize_distributes_optional_alternatives() {
 	// `none | [ x | y | both ] [ mandatory | proximity ]?`
 	// First pass distributes [x|y|both] across the Ordered children.
-	// Second pass distributes the Optional [mandatory|proximity]? into each Ordered.
-	// Result: none | x mandatory? | x proximity? | y mandatory? | y proximity? | both mandatory? | both proximity?
+	// Second pass distributes the Optional [mandatory|proximity]? into "present" + "absent" variants.
+	// Result: none | x mandatory | x proximity | x | y mandatory | y proximity | y | both mandatory | both proximity | both
 	assert_eq!(
 		to_valuedef! { none | [ x | y | both ] [ mandatory | proximity ]? },
 		Def::Combinator(
 			vec![
 				Def::Ident(DefIdent("none".into())),
 				Def::Combinator(
-					vec![
-						Def::Ident(DefIdent("x".into())),
-						Def::Optional(Box::new(Def::Ident(DefIdent("mandatory".into())))),
-					],
+					vec![Def::Ident(DefIdent("x".into())), Def::Ident(DefIdent("mandatory".into()))],
 					DefCombinatorStyle::Ordered,
 				),
 				Def::Combinator(
-					vec![
-						Def::Ident(DefIdent("x".into())),
-						Def::Optional(Box::new(Def::Ident(DefIdent("proximity".into())))),
-					],
+					vec![Def::Ident(DefIdent("x".into())), Def::Ident(DefIdent("proximity".into()))],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Ident(DefIdent("x".into())),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("y".into())), Def::Ident(DefIdent("mandatory".into()))],
 					DefCombinatorStyle::Ordered,
 				),
 				Def::Combinator(
-					vec![
-						Def::Ident(DefIdent("y".into())),
-						Def::Optional(Box::new(Def::Ident(DefIdent("mandatory".into())))),
-					],
+					vec![Def::Ident(DefIdent("y".into())), Def::Ident(DefIdent("proximity".into()))],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Ident(DefIdent("y".into())),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("both".into())), Def::Ident(DefIdent("mandatory".into()))],
 					DefCombinatorStyle::Ordered,
 				),
 				Def::Combinator(
-					vec![
-						Def::Ident(DefIdent("y".into())),
-						Def::Optional(Box::new(Def::Ident(DefIdent("proximity".into())))),
-					],
+					vec![Def::Ident(DefIdent("both".into())), Def::Ident(DefIdent("proximity".into()))],
 					DefCombinatorStyle::Ordered,
+				),
+				Def::Ident(DefIdent("both".into())),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}
+
+#[test]
+fn optimize_distributes_top_level_all_must_occur() {
+	// `[ over | under ] && [ right | left ]?`
+	// Lifts AllMustOccur into Alternatives, distributing both groups:
+	// First pass distributes [over|under], then [right|left]? distributes with "absent" variant.
+	// Result: over && right | over && left | over | under && right | under && left | under
+	assert_eq!(
+		to_valuedef! { [ over | under ] && [ right | left ]? },
+		Def::Combinator(
+			vec![
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("over".into())), Def::Ident(DefIdent("right".into()))],
+					DefCombinatorStyle::AllMustOccur,
 				),
 				Def::Combinator(
-					vec![
-						Def::Ident(DefIdent("both".into())),
-						Def::Optional(Box::new(Def::Ident(DefIdent("mandatory".into())))),
-					],
-					DefCombinatorStyle::Ordered,
+					vec![Def::Ident(DefIdent("over".into())), Def::Ident(DefIdent("left".into()))],
+					DefCombinatorStyle::AllMustOccur,
+				),
+				Def::Ident(DefIdent("over".into())),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("under".into())), Def::Ident(DefIdent("right".into()))],
+					DefCombinatorStyle::AllMustOccur,
 				),
 				Def::Combinator(
-					vec![
-						Def::Ident(DefIdent("both".into())),
-						Def::Optional(Box::new(Def::Ident(DefIdent("proximity".into())))),
-					],
-					DefCombinatorStyle::Ordered,
+					vec![Def::Ident(DefIdent("under".into())), Def::Ident(DefIdent("left".into()))],
+					DefCombinatorStyle::AllMustOccur,
 				),
+				Def::Ident(DefIdent("under".into())),
 			],
 			DefCombinatorStyle::Alternatives,
 		)

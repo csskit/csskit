@@ -394,19 +394,32 @@ impl Def {
 									}) {
 									let prefix = &children[..group_idx];
 									let suffix = &children[group_idx + 1..];
-									alts.iter()
+									let mut result: Vec<Def> = alts
+										.iter()
 										.map(|alt| {
 											let mut new_children: Vec<Def> = prefix.to_vec();
-											let distributed_alt = if wrap_optional {
-												Def::Optional(Box::new(alt.clone()))
-											} else {
-												alt.clone()
-											};
-											new_children.push(distributed_alt);
+											new_children.push(alt.clone());
 											new_children.extend_from_slice(suffix);
 											Def::Combinator(new_children, *style)
 										})
-										.collect()
+										.collect();
+									if wrap_optional {
+										let mut absent: Vec<Def> = prefix.to_vec();
+										absent.extend_from_slice(suffix);
+										match absent.len() {
+											0 => {}
+											1 => {
+												let single = absent.into_iter().next().unwrap();
+												if let Some((alts, _)) = Self::extract_alternatives(&single) {
+													result.extend(alts.iter().cloned());
+												} else {
+													result.push(single);
+												}
+											}
+											_ => result.push(Def::Combinator(absent, *style)),
+										}
+									}
+									result
 								} else {
 									vec![d.clone()]
 								}
@@ -561,7 +574,44 @@ impl Def {
 				}
 			}
 			Self::Combinator(defs, style) => {
-				return Self::Combinator(defs.iter().map(|d| d.optimize()).collect(), *style);
+				// First optimize all children.
+				let optimized: Vec<Def> = defs.iter().map(|d| d.optimize()).collect();
+				if !matches!(style, DefCombinatorStyle::Alternatives)
+					&& let Some((group_idx, alts, wrap_optional)) = optimized
+						.iter()
+						.enumerate()
+						.find_map(|(i, c)| Self::extract_distributable(c, *style).map(|(alts, wrap)| (i, alts, wrap)))
+				{
+					let prefix = &optimized[..group_idx];
+					let suffix = &optimized[group_idx + 1..];
+					let mut distributed: Vec<Def> = alts
+						.iter()
+						.map(|alt| {
+							let mut new_children: Vec<Def> = prefix.to_vec();
+							new_children.push(alt.clone());
+							new_children.extend_from_slice(suffix);
+							Def::Combinator(new_children, *style)
+						})
+						.collect();
+					if wrap_optional {
+						let mut absent: Vec<Def> = prefix.to_vec();
+						absent.extend_from_slice(suffix);
+						match absent.len() {
+							0 => {}
+							1 => {
+								let single = absent.into_iter().next().unwrap();
+								if let Some((alts, _)) = Self::extract_alternatives(&single) {
+									distributed.extend(alts.iter().cloned());
+								} else {
+									distributed.push(single);
+								}
+							}
+							_ => distributed.push(Def::Combinator(absent, *style)),
+						}
+					}
+					return Self::Combinator(distributed, DefCombinatorStyle::Alternatives).optimize();
+				}
+				return Self::Combinator(optimized, *style);
 			}
 			// Optimize multiplier styles to avoid unnecessarily allocating.
 			// A Multiplier with a fixed range can be normalised to an Ordered combinator of the same value.
@@ -610,6 +660,16 @@ impl Def {
 			}
 			_ => None,
 		}
+	}
+
+	/// Extracts alternatives that need distribution for the given combinator style.
+	/// For top-level Ordered structs, all-keyword alternatives are handled by codegen's
+	/// `is_all_keywords()` → `keyword_ident` path and don't need distribution.
+	/// For AllMustOccur and other styles, all alternatives need distribution.
+	fn extract_distributable(def: &Def, style: DefCombinatorStyle) -> Option<(&[Def], bool)> {
+		Self::extract_alternatives(def).filter(|(alts, _)| {
+			!matches!(style, DefCombinatorStyle::Ordered) || !alts.iter().all(|d| matches!(d, Def::Ident(_)))
+		})
 	}
 
 	fn has_distributable_group(def: &Def) -> bool {

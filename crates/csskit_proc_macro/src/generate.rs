@@ -96,9 +96,25 @@ impl ToFieldName for Def {
 			Self::IntLiteral(v) => format_ident!("Literal{}", v.to_string()),
 			Self::DimensionLiteral(int, dim) => format_ident!("Literal{int}{dim}"),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				let (optional, others): (Vec<&Def>, Vec<&Def>) = ds.iter().partition(|d| matches!(d, Def::Optional(_)));
-				let logical_first = others.first().or(optional.first());
-				logical_first.expect("At least one Def is required").to_variant_name(0)
+				let non_optional: Vec<String> = ds
+					.iter()
+					.filter(|d| !matches!(d, Def::Optional(_)))
+					.map(|d| d.to_variant_name(0).to_string())
+					.collect();
+				let distinct_count = {
+					let mut uniq = non_optional.clone();
+					uniq.dedup();
+					uniq.len()
+				};
+				if distinct_count > 1 {
+					let name: String = ds.iter().map(|d| d.to_variant_name(0).to_string()).collect();
+					format_ident!("{}", name)
+				} else {
+					let (optional, others): (Vec<&Def>, Vec<&Def>) =
+						ds.iter().partition(|d| matches!(d, Def::Optional(_)));
+					let logical_first = others.first().or(optional.first());
+					logical_first.expect("At least one Def is required").to_variant_name(0)
+				}
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
 				let auto_generated_name = ds.iter().fold(String::new(), |str, d| match d {
@@ -165,18 +181,10 @@ impl ToType for Def {
 				let ty = ty.to_type();
 				vec![quote! { crate::NormalOr<#ty> }]
 			}
-			Self::Optional(v) => match v.as_ref() {
-				// When an optional ident appears as a keyword prefix (e.g. `auto?`),
-				// reference the standalone keyword type rather than bare T![Ident].
-				Self::Ident(DefIdent(name)) => {
-					let kw_type = format_ident!("{}", name.to_pascal_case());
-					vec![quote! { Option<crate::#kw_type> }]
-				}
-				_ => {
-					let ty = v.to_type();
-					vec![quote! { Option<#ty> }]
-				}
-			},
+			Self::Optional(v) => {
+				let ty = v.to_type();
+				vec![quote! { Option<#ty> }]
+			}
 			Self::Function(_, _) => {
 				let func_name = self.to_variant_name(0);
 				let generics = self.get_generics();
@@ -320,6 +328,13 @@ impl DefExt for Def {
 				let name = format_ident!("{}", str.to_pascal_case());
 				quote! { #[atom(CssAtomSet::#name)] }
 			}
+			Def::Optional(inner) => match inner.as_ref() {
+				Def::Ident(DefIdent(str)) if derives_parse => {
+					let name = format_ident!("{}", str.to_pascal_case());
+					quote! { #[atom(CssAtomSet::#name)] }
+				}
+				_ => quote! {},
+			},
 			_ => quote! {},
 		};
 		quote! { #skip #atom }

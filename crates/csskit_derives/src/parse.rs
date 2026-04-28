@@ -151,17 +151,30 @@ fn generate_keyword_parsing(
 	match parse_mode {
 		FieldParseMode::Sequential => {
 			let condition = atom.equals_atom(format_ident!("c"));
-			let ty = ty.unpack_option();
-			where_collector.add(&ty);
-			quote! {
-				let #var = {
-					let c = p.peek_n(1);
-					if #condition {
-						p.parse::<#ty>()?
-					} else {
-						return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
-					}
-				};
+			let inner_ty = ty.unpack_option();
+			where_collector.add(&inner_ty);
+			if ty.is_option() {
+				quote! {
+					let #var = {
+						let c = p.peek_n(1);
+						if #condition {
+							Some(p.parse::<#inner_ty>()?)
+						} else {
+							None
+						}
+					};
+				}
+			} else {
+				quote! {
+					let #var = {
+						let c = p.peek_n(1);
+						if #condition {
+							p.parse::<#inner_ty>()?
+						} else {
+							return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
+						}
+					};
+				}
 			}
 		}
 		FieldParseMode::AllMustOccur | FieldParseMode::OneMustOccur => {
