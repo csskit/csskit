@@ -576,7 +576,15 @@ impl Def {
 			Self::Combinator(defs, style) => {
 				// First optimize all children.
 				let optimized: Vec<Def> = defs.iter().map(|d| d.optimize()).collect();
+				let is_repeated_multiplier = {
+					let extractable: Vec<_> = optimized.iter().filter_map(Self::extract_alternatives).collect();
+					extractable.len() == optimized.len() && {
+						let first = extractable[0].0;
+						extractable.iter().all(|(alts, _)| *alts == first)
+					}
+				};
 				if !matches!(style, DefCombinatorStyle::Alternatives)
+					&& !is_repeated_multiplier
 					&& let Some((group_idx, alts, wrap_optional)) = optimized
 						.iter()
 						.enumerate()
@@ -675,7 +683,17 @@ impl Def {
 	fn has_distributable_group(def: &Def) -> bool {
 		match def {
 			Def::Combinator(children, DefCombinatorStyle::Ordered | DefCombinatorStyle::AllMustOccur) => {
-				children.iter().any(|c| Self::extract_alternatives(c).is_some())
+				let extractable: Vec<_> = children.iter().filter_map(Self::extract_alternatives).collect();
+				if extractable.is_empty() {
+					return false;
+				}
+				if extractable.len() == children.len() {
+					let first_alts = extractable[0].0;
+					if extractable.iter().all(|(alts, _)| *alts == first_alts) {
+						return false;
+					}
+				}
+				true
 			}
 			_ => false,
 		}

@@ -541,6 +541,23 @@ fn def_builds_auto_prefixed_group_range() {
 }
 
 #[test]
+fn optimize_skips_distribution_for_multiplier_expansion() {
+	let def = to_valuedef! { "[ <color> | <image-1D> ]{1,4}" };
+	assert!(matches!(&def, Def::Combinator(_, DefCombinatorStyle::Ordered)));
+	if let Def::Combinator(children, _) = &def {
+		assert_eq!(children.len(), 4); // T, Optional(T), Optional(T), Optional(T)
+		// First child should be an Alternatives (not distributed)
+		assert!(matches!(&children[0], Def::Combinator(_, DefCombinatorStyle::Alternatives)));
+		// Remaining should be Optional(Alternatives)
+		for child in &children[1..] {
+			assert!(
+				matches!(child, Def::Optional(inner) if matches!(inner.as_ref(), Def::Combinator(_, DefCombinatorStyle::Alternatives)))
+			);
+		}
+	}
+}
+
+#[test]
 fn optimize_distributes_ordered_with_nested_alternatives() {
 	// `normal | <overflow-position>? [ <content-position> | left | right ]`
 	// distributes to: `normal | <overflow-position>? <content-position> | <overflow-position>? left | <overflow-position>? right`
