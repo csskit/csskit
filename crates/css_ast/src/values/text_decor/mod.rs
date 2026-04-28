@@ -476,51 +476,35 @@ pub enum TextDecorationThicknessStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct TextEmphasisColorStyleValue<'a>;
 
-// /// Represents the style value for `text-emphasis-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position).
-// ///
-// /// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ over | under ] && [ right | left ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position
-// #[syntax(" [ over | under ] && [ right | left ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "over right",
-//     inherits,
-//     applies_to = Text,
-//     animation_type = Discrete,
-//     property_group = TextDecor,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.text-emphasis-position")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct TextEmphasisPositionStyleValue;
+/// Represents the style value for `text-emphasis-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position).
+///
+/// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ over | under ] && [ right | left ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-position
+#[syntax(" [ over | under ] && [ right | left ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "over right",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-position"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum TextEmphasisPositionStyleValue {}
 
 /// Represents the style value for `text-emphasis-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip).
 ///

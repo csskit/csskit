@@ -708,7 +708,7 @@ pub enum StrokeLinecapStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct StrokeLinejoinStyleValue;
+// pub enum StrokeLinejoinStyleValue {}
 
 /// Represents the style value for `stroke-miterlimit` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-miterlimit).
 ///

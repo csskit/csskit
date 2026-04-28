@@ -206,7 +206,7 @@ where
 		#[cfg(debug_assertions)]
 		{
 			let source_cursor = self.to_source_cursor(c);
-			if !(c == Kind::Ident && c.token().is_dashed_ident()) {
+			if !((c == Kind::Ident || c == Kind::Function) && c.token().is_dashed_ident()) {
 				debug_assert!(
 					A::from_bits(bits) == A::from_str(&source_cursor.parse(self.bump)),
 					"{:?} -> {:?} != {:?} ({:?})",

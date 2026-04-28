@@ -642,7 +642,7 @@ pub enum TextGroupAlignStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct TextJustifyStyleValue;
+// pub enum TextJustifyStyleValue {}
 
 // /// Represents the style value for `text-spacing` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#text-spacing).
 // ///

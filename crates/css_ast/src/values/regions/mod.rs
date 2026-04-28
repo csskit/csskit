@@ -33,47 +33,31 @@ use impls::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct FlowFromStyleValue;
 
-// /// Represents the style value for `flow-into` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#flow-into).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <custom-ident> [element | content]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-regions-1/#flow-into
-// #[syntax(" none | <custom-ident> [element | content]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     property_group = Regions,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.flow-into")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FlowIntoStyleValue;
+/// Represents the style value for `flow-into` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#flow-into).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <custom-ident> [element | content]?
+/// ```
+///
+/// https://drafts.csswg.org/css-regions-1/#flow-into
+#[syntax(" none | <custom-ident> [element | content]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    property_group = Regions,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flow-into"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum FlowIntoStyleValue {}
 
 /// Represents the style value for `region-fragment` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#region-fragment).
 ///

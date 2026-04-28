@@ -868,4 +868,4 @@ pub enum ScrollTargetGroupStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct TextOverflowStyleValue;
+// pub enum TextOverflowStyleValue {}

@@ -368,7 +368,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct NavDownStyleValue;
+// pub enum NavDownStyleValue {}
 
 // /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
 // ///
@@ -412,7 +412,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct NavLeftStyleValue;
+// pub enum NavLeftStyleValue {}
 
 // /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
 // ///
@@ -456,7 +456,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct NavRightStyleValue;
+// pub enum NavRightStyleValue {}
 
 // /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
 // ///
@@ -499,7 +499,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct NavUpStyleValue;
+// pub enum NavUpStyleValue {}
 
 /// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
 ///

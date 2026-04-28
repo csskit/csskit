@@ -291,53 +291,35 @@ pub enum FontOpticalSizingStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontSizeStyleValue {}
 
-// /// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
-// ///
-// /// The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-size-adjust
-// #[syntax(
-//     " none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     property_group = Fonts,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-size-adjust")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontSizeAdjustStyleValue {}
+/// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
+///
+/// The font-size-adjust CSS property preserves apparent text size, regardless of the font used, by scaling fonts to the same size with respect to a specific metric, such as x-height. This can help make fallback fonts look the same size.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-size-adjust
+#[syntax(" none | [ ex-height | cap-height | ch-width | ic-width | ic-height ]? [ from-font | <number [0,∞]> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size-adjust"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum FontSizeAdjustStyleValue {}
 
 /// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
 ///

@@ -812,47 +812,31 @@ pub struct ScrollSnapAlignStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ScrollSnapStopStyleValue {}
 
-// /// Represents the style value for `scroll-snap-type` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type).
-// ///
-// /// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
-// #[syntax(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = ScrollSnap,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.scroll-snap-type")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum ScrollSnapTypeStyleValue {}
+/// Represents the style value for `scroll-snap-type` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type).
+///
+/// CSS scroll snap controls the panning and scrolling behavior within a scroll container.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [ x | y | block | inline | both ] [ mandatory | proximity ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type
+#[syntax(" none | [ x | y | block | inline | both ] [ mandatory | proximity ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = ScrollSnap,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-type"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum ScrollSnapTypeStyleValue {}

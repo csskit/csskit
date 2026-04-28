@@ -968,7 +968,7 @@ pub struct BorderClipStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderColorStyleValue<'a>;
+// pub enum BorderColorStyleValue<'a> {}
 
 /// Represents the style value for `border-end-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-end-end-radius).
 ///
@@ -1083,7 +1083,7 @@ pub struct BorderEndStartRadiusStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderImageStyleValue;
+// pub enum BorderImageStyleValue {}
 
 /// Represents the style value for `border-image-outset` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image-outset).
 ///
@@ -1272,7 +1272,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderImageWidthStyleValue;
+// pub enum BorderImageWidthStyleValue {}
 
 /// Represents the style value for `border-inline` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline).
 ///
@@ -2050,53 +2050,37 @@ pub struct BorderLeftStyleStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BorderLeftWidthStyleValue;
 
-// /// Represents the style value for `border-limit` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-limit).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /**all | [ sides | corners ] <length-percentage [0,∞]>?
-// | [ top | right | bottom | left ] <length-percentage [0,∞]>*/
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-limit
-// #[syntax(
-//     " all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "all",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-limit")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum BorderLimitStyleValue {}
+/// Represents the style value for `border-limit` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-limit).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/**all | [ sides | corners ] <length-percentage [0,∞]>?
+| [ top | right | bottom | left ] <length-percentage [0,∞]>*/
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-limit
+#[syntax(
+	" all | [ sides | corners ] <length-percentage [0,∞]>? | [ top | right | bottom | left ] <length-percentage [0,∞]> "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "all",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-limit"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum BorderLimitStyleValue {}
 
 // /// Represents the style value for `border-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-radius).
 // ///

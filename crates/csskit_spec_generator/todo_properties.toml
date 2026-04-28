@@ -42,7 +42,7 @@ properties = [
   "border-inline-end-radius",
   "border-inline-start-radius",
   "border-left-radius",
-  "border-limit",
+
   "border-radius",
   "border-right-radius",
   "border-shape",
@@ -99,7 +99,7 @@ properties = [
 properties = [
   "font",
   "font-palette",
-  "font-size-adjust",
+
   "font-synthesis",
   "font-variant",
   "font-variant-alternates",
@@ -140,7 +140,7 @@ properties = [
 properties = ["image-orientation", "image-resolution", "object-fit"]
 
 [inline]
-properties = ["initial-letter", "initial-letter-align", "vertical-align"]
+properties = ["initial-letter-align", "vertical-align"]
 
 [multicol]
 properties = ["columns"]
@@ -157,13 +157,13 @@ properties = [
 ]
 
 [regions]
-properties = ["flow-into"]
+properties = []
 
 [ruby]
 properties = ["ruby-position"]
 
 [scroll-snap]
-properties = ["scroll-snap-type"]
+properties = []
 
 [scroll-animations]
 properties = ["view-timeline"]
@@ -172,9 +172,7 @@ properties = ["view-timeline"]
 properties = ["shape-inside", "shape-outside"]
 
 [sizing]
-properties = [
-  "min-intrinsic-sizing",
-]
+properties = ["min-intrinsic-sizing"]
 
 [speech]
 properties = [
@@ -205,7 +203,7 @@ properties = [
   "text-decoration-skip-self",
   "text-decoration-skip-spaces",
   "text-emphasis",
-  "text-emphasis-position",
+
   "text-emphasis-style",
   "text-underline-position",
 ]

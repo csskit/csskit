@@ -566,7 +566,7 @@ pub struct VoiceDurationStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct VoiceRateStyleValue;
+// pub enum VoiceRateStyleValue {}
 
 /// Represents the style value for `voice-stress` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-stress).
 ///

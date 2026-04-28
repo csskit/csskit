@@ -125,52 +125,34 @@ pub enum BaselineSourceStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct DominantBaselineStyleValue;
 
-// /// Represents the style value for `initial-letter` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter).
-// ///
-// /// The initial-letter CSS property sets the number of lines the first letter of an element occupies. You can use the property to make a raised capital or drop cap.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-inline-3/#initial-letter
-// #[syntax(
-//     " normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]? "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     property_group = Inline,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.initial-letter")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum InitialLetterStyleValue {}
+/// Represents the style value for `initial-letter` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter).
+///
+/// The initial-letter CSS property sets the number of lines the first letter of an element occupies. You can use the property to make a raised capital or drop cap.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-inline-3/#initial-letter
+#[syntax(" normal | <number [1,∞]> <integer [1,∞]> | <number [1,∞]> && [ drop | raise ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum InitialLetterStyleValue {}
 
 // /// Represents the style value for `initial-letter-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-align).
 // ///
@@ -468,4 +450,4 @@ pub enum TextBoxTrimStyleValue {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct VerticalAlignStyleValue;
+// pub enum VerticalAlignStyleValue {}

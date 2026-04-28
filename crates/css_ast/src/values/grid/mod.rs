@@ -208,7 +208,7 @@ pub struct GridAutoColumnsStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct GridAutoFlowStyleValue;
+// pub enum GridAutoFlowStyleValue {}
 
 /// Represents the style value for `grid-auto-rows` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-rows).
 ///
