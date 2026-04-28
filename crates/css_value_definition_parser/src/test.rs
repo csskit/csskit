@@ -539,3 +539,66 @@ fn def_builds_auto_prefixed_group_range() {
 		)
 	);
 }
+
+#[test]
+fn optimize_distributes_ordered_with_nested_alternatives() {
+	// `normal | <overflow-position>? [ <content-position> | left | right ]`
+	// distributes to: `normal | <overflow-position>? <content-position> | <overflow-position>? left | <overflow-position>? right`
+	assert_eq!(
+		to_valuedef! { normal | <overflow-position>? [ <content-position> | left | right ] },
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("normal".into())),
+				Def::Combinator(
+					vec![
+						Def::Optional(Box::new(Def::Type(DefType::new("OverflowPosition", DefRange::None)))),
+						Def::Type(DefType::new("ContentPosition", DefRange::None)),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Optional(Box::new(Def::Type(DefType::new("OverflowPosition", DefRange::None)))),
+						Def::Ident(DefIdent("left".into())),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+				Def::Combinator(
+					vec![
+						Def::Optional(Box::new(Def::Type(DefType::new("OverflowPosition", DefRange::None)))),
+						Def::Ident(DefIdent("right".into())),
+					],
+					DefCombinatorStyle::Ordered,
+				),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}
+
+#[test]
+fn optimize_distributes_all_must_occur_with_nested_alternatives() {
+	// `legacy | legacy && [ left | right | center ]`
+	// distributes to: `legacy | legacy && left | legacy && right | legacy && center`
+	assert_eq!(
+		to_valuedef! { legacy | legacy && [ left | right | center ] },
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("legacy".into())),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("legacy".into())), Def::Ident(DefIdent("left".into()))],
+					DefCombinatorStyle::AllMustOccur,
+				),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("legacy".into())), Def::Ident(DefIdent("right".into()))],
+					DefCombinatorStyle::AllMustOccur,
+				),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("legacy".into())), Def::Ident(DefIdent("center".into()))],
+					DefCombinatorStyle::AllMustOccur,
+				),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}

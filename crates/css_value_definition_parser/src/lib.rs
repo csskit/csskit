@@ -378,6 +378,47 @@ impl Def {
 
 	pub fn optimize(&self) -> Self {
 		match self {
+			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
+				if defs.iter().any(Self::has_distributable_group) =>
+			{
+				let distributed: Vec<Def> = defs
+					.iter()
+					.flat_map(|d| match d {
+						Def::Combinator(
+							children,
+							style @ (DefCombinatorStyle::Ordered | DefCombinatorStyle::AllMustOccur),
+						) => {
+							if let Some((group_idx, alts)) = children.iter().enumerate().find_map(|(i, c)| match c {
+								Def::Group(inner, _) => {
+									if let Def::Combinator(alts, DefCombinatorStyle::Alternatives) = inner.as_ref() {
+										Some((i, alts))
+									} else {
+										None
+									}
+								}
+								Def::Combinator(alts, DefCombinatorStyle::Alternatives) => Some((i, alts)),
+								_ => None,
+							}) {
+								let prefix = &children[..group_idx];
+								let suffix = &children[group_idx + 1..];
+								alts.iter()
+									.map(|alt| {
+										let mut new_children: Vec<Def> = prefix.to_vec();
+										new_children.push(alt.clone());
+										new_children.extend_from_slice(suffix);
+										Def::Combinator(new_children, *style)
+									})
+									.collect()
+							} else {
+								vec![d.clone()]
+							}
+						}
+						_ => vec![d.clone()],
+					})
+					.collect();
+				return Self::Combinator(distributed, DefCombinatorStyle::Alternatives).optimize();
+			}
+
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives) if defs.len() == 2 => {
 				let [first, second] = defs.as_slice() else { panic!("defs.len() was 2!") };
 				match (first, second) {
@@ -546,6 +587,21 @@ impl Def {
 			_ => return self.clone(),
 		}
 		.optimize()
+	}
+
+	fn has_distributable_group(def: &Def) -> bool {
+		match def {
+			Def::Combinator(children, DefCombinatorStyle::Ordered | DefCombinatorStyle::AllMustOccur) => {
+				children.iter().any(|c| match c {
+					Def::Group(inner, _) => {
+						matches!(inner.as_ref(), Def::Combinator(_, DefCombinatorStyle::Alternatives))
+					}
+					Def::Combinator(_, DefCombinatorStyle::Alternatives) => true,
+					_ => false,
+				})
+			}
+			_ => false,
+		}
 	}
 
 	/// Returns the keyword name if `self` is a keyword-optional-prefixed ordered sequence:

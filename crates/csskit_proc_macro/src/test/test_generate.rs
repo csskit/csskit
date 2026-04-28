@@ -429,3 +429,25 @@ fn auto_and_length_with_range() {
 	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_and_length_with_range");
 }
+
+#[test]
+fn ordered_with_group_alternatives() {
+	let syntax =
+		to_valuedef! { normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "ordered_with_group_alternatives");
+}
+
+#[test]
+fn all_must_occur_with_group_alternatives() {
+	let syntax = to_valuedef! { legacy | legacy && [ left | right | center ] };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "all_must_occur_with_group_alternatives");
+}
+
+#[test]
+fn mixed_ordered_and_all_must_occur_distribution() {
+	let syntax = to_valuedef! { normal | <overflow-position>? [ <self-position> | left | right ] | legacy && [ left | right | center ] };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "mixed_ordered_and_all_must_occur_distribution");
+}

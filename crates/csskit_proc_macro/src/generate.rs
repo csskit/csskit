@@ -112,6 +112,10 @@ impl ToFieldName for Def {
 				});
 				format_ident!("{}", get_type_rename(&auto_generated_name).unwrap_or(&auto_generated_name))
 			}
+			Self::Combinator(ds, DefCombinatorStyle::AllMustOccur) => {
+				let name: String = ds.iter().map(|d| d.to_variant_name(0).to_string()).collect();
+				format_ident!("{}", name)
+			}
 			Self::Combinator(_, _) => {
 				dbg!("TODO variant name for Combinator()", self);
 				todo!("variant name")
@@ -628,6 +632,18 @@ impl GenerateDefinition for Def {
 										quote! { #attrs #ty }
 									})
 									.collect(),
+								Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
+									if derives_parse {
+										attrs = Some(quote! { #[parse(all_must_occur)] });
+									}
+									defs.iter()
+										.map(|d| {
+											let ty = d.to_type();
+											let a = d.type_attributes(derives_parse, derives_visitable);
+											quote! { #a #ty }
+										})
+										.collect()
+								}
 								Self::Ident(_) => d.to_types(),
 								Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
 									let attrs = attrs.take().unwrap();
