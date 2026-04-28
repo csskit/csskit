@@ -35,18 +35,9 @@ properties = [
 
 [borders]
 properties = [
-  "border-block-end-radius",
-  "border-block-start-radius",
-  "border-bottom-radius",
   "border-color",
-  "border-inline-end-radius",
-  "border-inline-start-radius",
-  "border-left-radius",
-
-  "border-radius",
-  "border-right-radius",
+  "border-image-width",
   "border-shape",
-  "border-top-radius",
   "box-shadow-offset",
   "corner-top-left",
   "corner-top-right",
@@ -67,7 +58,6 @@ properties = [
   "corner",
   "border-image",
   "border-image-slice",
-  "border-image-width",
 ]
 
 [box]
@@ -83,7 +73,7 @@ properties = ["container", "container-type"]
 properties = ["contain"]
 
 [content]
-properties = ["content", "quotes"]
+properties = ["content"]
 
 [fill-stroke]
 properties = [
@@ -124,10 +114,7 @@ properties = ["string-set", "copy-into"]
 [grid]
 properties = [
   "grid",
-  "grid-area",
   "grid-auto-flow",
-  "grid-column",
-  "grid-row",
   "grid-template",
   "grid-template-columns",
   "grid-template-rows",
@@ -209,7 +196,7 @@ properties = [
 ]
 
 [transforms]
-properties = ["rotate", "transform-origin", "translate"]
+properties = ["rotate", "transform-origin"]
 
 [ui]
 properties = ["nav-down", "nav-left", "nav-right", "nav-up"]

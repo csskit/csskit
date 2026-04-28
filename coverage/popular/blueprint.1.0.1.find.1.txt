@@ -5,7 +5,6 @@ coverage/popular/blueprint.1.0.1.css
 39:3:  background: white;
 54:3:  vertical-align: middle;
 58:58:blockquote:before, blockquote:after, q:before, q:after { content: ''; }
-59:17:blockquote, q { quotes: "" ""; }
 80:3:  background: #fff;
 118:28:a           { color: #06c; text-decoration: underline; }
 130:32:pre         { margin: 1.5em 0; white-space: pre; }

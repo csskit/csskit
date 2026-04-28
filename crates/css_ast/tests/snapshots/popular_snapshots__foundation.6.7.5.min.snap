@@ -4602,15 +4602,11 @@ StyleSheet(
                 offset: SourceOffset(2914),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(2915),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(2915),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: None,
             ),
@@ -4726,15 +4722,11 @@ StyleSheet(
                 offset: SourceOffset(3000),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(3001),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(3001),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: None,
             ),
@@ -5115,15 +5107,11 @@ StyleSheet(
                 offset: SourceOffset(3237),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(3238),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(3238),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -88531,15 +88519,11 @@ StyleSheet(
                 offset: SourceOffset(52135),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(52136),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(52136),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -103173,15 +103157,11 @@ StyleSheet(
                 offset: SourceOffset(60335),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(60336),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(60336),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105421,15 +105401,11 @@ StyleSheet(
                 offset: SourceOffset(61859),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(61860),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(61860),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: None,
             ),
@@ -107344,45 +107320,23 @@ StyleSheet(
                 offset: SourceOffset(63017),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63018),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(63019),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63020),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(63021),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63022),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(63023),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63024),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63018),
+                len: 1,
+              ))), Some(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63020),
+                len: 1,
+              )))), Some(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63022),
+                len: 1,
+              )))), Some(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63024),
+                len: 1,
+              )))), None),
               important: None,
               semicolon: None,
             ),
@@ -107500,45 +107454,23 @@ StyleSheet(
                 offset: SourceOffset(63110),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63111),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(63112),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63113),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(63114),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63115),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(63116),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63117),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63111),
+                len: 1,
+              ))), Some(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63113),
+                len: 1,
+              )))), Some(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63115),
+                len: 1,
+              )))), Some(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63117),
+                len: 1,
+              )))), None),
               important: None,
               semicolon: None,
             ),
@@ -108488,15 +108420,11 @@ StyleSheet(
                 offset: SourceOffset(63796),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(63797),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(63797),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -109914,15 +109842,11 @@ StyleSheet(
                 offset: SourceOffset(64692),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(64693),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(64693),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

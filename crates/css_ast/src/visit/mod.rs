@@ -523,6 +523,14 @@ macro_rules! impl_tuple_mut {
 impl_tuple_mut!(T, U);
 impl_tuple_mut!(T, U, V);
 impl_tuple_mut!(T, U, V, W);
+impl_tuple_mut!(T, U, V, W, X);
+impl_tuple_mut!(T, U, V, W, X, Y);
+impl_tuple_mut!(T, U, V, W, X, Y, Z);
+impl_tuple_mut!(T, U, V, W, X, Y, Z, A);
+impl_tuple_mut!(T, U, V, W, X, Y, Z, A, B);
+impl_tuple_mut!(T, U, V, W, X, Y, Z, A, B, C);
+impl_tuple_mut!(T, U, V, W, X, Y, Z, A, B, C, D);
+impl_tuple_mut!(T, U, V, W, X, Y, Z, A, B, C, D, E);
 
 macro_rules! impl_tuple {
     ($($T:ident),*) => {
@@ -542,3 +550,11 @@ macro_rules! impl_tuple {
 impl_tuple!(T, U);
 impl_tuple!(T, U, V);
 impl_tuple!(T, U, V, W);
+impl_tuple!(T, U, V, W, X);
+impl_tuple!(T, U, V, W, X, Y);
+impl_tuple!(T, U, V, W, X, Y, Z);
+impl_tuple!(T, U, V, W, X, Y, Z, A);
+impl_tuple!(T, U, V, W, X, Y, Z, A, B);
+impl_tuple!(T, U, V, W, X, Y, Z, A, B, C);
+impl_tuple!(T, U, V, W, X, Y, Z, A, B, C, D);
+impl_tuple!(T, U, V, W, X, Y, Z, A, B, C, D, E);

@@ -2,6 +2,5 @@
 ---
 coverage/popular/reset.2.0.css
 24:2:	vertical-align: baseline;
-38:2:	quotes: none;
 42:2:	content: '';
 43:2:	content: none;

@@ -18,11 +18,8 @@ coverage/popular/foundation.6.7.5.css
 197:3:  -moz-osx-font-smoothing: grayscale; }
 201:3:  vertical-align: middle;
 204:3:  -ms-interpolation-mode: bicubic; }
-209:3:  border-radius: 0; }
 212:3:  -webkit-box-sizing: border-box;
-215:3:  border-radius: 0; }
 228:6:     -moz-appearance: none;
-231:3:  border-radius: 0;
 232:3:  background: transparent;
 240:3:  -webkit-overflow-scrolling: touch; }
 283:3:  display: -webkit-box;
@@ -326,7 +323,6 @@ coverage/popular/foundation.6.7.5.css
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
 2490:3:  vertical-align: middle;
-2494:3:  border-radius: 0;
 2558:5:    border-color: #0c3d5d;
 2564:5:    border-color: #0c3d5d;
 2570:5:    border-color: #3b3b3b;
@@ -338,14 +334,12 @@ coverage/popular/foundation.6.7.5.css
 2628:5:    border-color: #fefefe transparent transparent;
 2652:3:  text-decoration: none; }
 2657:3:  -webkit-box-sizing: border-box;
-2664:3:  border-radius: 0;
 2666:3:  -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2678:6:     -moz-appearance: none;
 2685:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2686:13:            box-shadow: 0 0 5px #cacaca;
 2706:6:     -moz-appearance: none;
-2708:3:  border-radius: 0; }
 2711:3:  -webkit-box-sizing: border-box;
 2737:3:  vertical-align: baseline;
 2771:3:  display: -webkit-box;
@@ -354,8 +348,6 @@ coverage/popular/foundation.6.7.5.css
 2777:3:  -webkit-box-align: stretch;
 2778:3:  -webkit-align-items: stretch;
 2779:7:      -ms-flex-align: stretch;
-2782:5:    border-radius: 0 0 0 0; }
-2784:5:    border-radius: 0 0 0 0; }
 2791:3:  white-space: nowrap; }
 2796:3:  background: #e6e6e6;
 2799:3:  white-space: nowrap;
@@ -367,7 +359,6 @@ coverage/popular/foundation.6.7.5.css
 2808:3:  -webkit-box-align: center;
 2809:3:  -webkit-align-items: center;
 2810:7:      -ms-flex-align: center;
-2818:3:  border-radius: 0;
 2819:3:  -webkit-box-flex: 1;
 2821:7:      -ms-flex: 1 1 0px;
 2829:3:  display: -webkit-box;
@@ -378,15 +369,11 @@ coverage/popular/foundation.6.7.5.css
 2841:5:    -webkit-align-self: stretch;
 2842:9:        -ms-flex-item-align: stretch;
 2872:6:     -moz-appearance: none;
-2875:3:  border-radius: 0;
 2884:3:  background-position: right -1rem center;
 2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2900:13:            box-shadow: 0 0 5px #cacaca;
 2918:3:  border-color: #cc4b37;
 2946:3:  background: #fefefe;
-2952:3:  border-radius: 0 0 0 0; }
-2955:3:  border-radius: 0 0 0 0; }
-2968:5:    border-radius: 0 0 0 0; }
 2976:5:    content: "+"; }
 2978:5:    content: "–"; }
 3015:5:    content: '';
@@ -403,7 +390,6 @@ coverage/popular/foundation.6.7.5.css
 3071:11:          transform-origin: 50% 50%; }
 3079:3:  clip: rect(0, 0, 0, 0) !important;
 3080:3:  white-space: nowrap !important;
-3087:3:  border-radius: 50%;
 3090:3:  background: #1779ba;
 3093:5:    background: #1779ba;
 3096:5:    background: #767676;
@@ -465,7 +451,6 @@ coverage/popular/foundation.6.7.5.css
 3348:3:  -webkit-box-flex: 1;
 3349:3:  -webkit-flex-grow: 1;
 3350:7:      -ms-flex-positive: 1;
-3354:3:  border-radius: 0;
 3355:3:  background: #fefefe;
 3356:3:  -webkit-box-shadow: none;
 3357:11:          box-shadow: none;
@@ -477,7 +462,6 @@ coverage/popular/foundation.6.7.5.css
 3373:3:  background: #e6e6e6; }
 3378:3:  -webkit-box-flex: 1;
 3380:7:      -ms-flex: 1 0 auto;
-3394:3:  border-radius: 0;
 3429:3:  z-index: 10;
 3452:3:  display: -webkit-box;
 3453:3:  display: -webkit-flex;
@@ -627,7 +611,6 @@ coverage/popular/foundation.6.7.5.css
 3865:3:  border-color: transparent #1779ba transparent transparent;
 3867:3:  vertical-align: middle;
 3872:3:  z-index: 10;
-3878:3:  border-radius: 0;
 3916:3:  content: '';
 3918:3:  border-color: #1779ba transparent transparent;
 3930:3:  background: transparent;
@@ -653,7 +636,6 @@ coverage/popular/foundation.6.7.5.css
 4138:5:    border-color: transparent #1779ba transparent transparent;
 4147:5:    content: '';
 4149:5:    border-color: transparent transparent transparent #1779ba; }
-4184:3:  border-radius: 0;
 4187:3:  white-space: nowrap;
 4189:3:  background: #1779ba;
 4192:5:    background: #1779ba;
@@ -755,31 +737,24 @@ coverage/popular/foundation.6.7.5.css
 4638:11:          -ms-transform: none;
 4681:7:      -ms-transform: translateY(-50%);
 4683:3:  z-index: 10;
-4709:5:    border-radius: 50%;
 4721:5:    content: ' ';
 4722:5:    -webkit-flex-basis: 0;
 4723:9:        -ms-flex-preferred-size: 0;
 4725:5:    -webkit-box-ordinal-group: 2;
 4727:9:        -ms-flex-order: 1;
-4733:5:    border-radius: 0;
-4745:5:    border-radius: 0;
 4749:7:      background: #e6e6e6; }
 4752:5:    background: #1779ba;
 4760:7:      background: transparent; }
 4763:5:    content: '\2026';
 4770:3:  content: "«"; }
 4776:3:  content: "»"; }
-4781:3:  border-radius: 0;
 4806:7:      -ms-transform: translate(-50%, -50%);
 4812:3:  white-space: nowrap; }
 4820:5:    -webkit-overflow-scrolling: touch; }
 4830:3:  z-index: 1005;
 4834:3:  -webkit-overflow-scrolling: touch; }
 4837:3:  z-index: 1006;
-4843:3:  border-radius: 0;
 4850:3:  -webkit-overflow-scrolling: touch; }
-4889:5:    border-radius: 0; }
-4902:7:      border-radius: 0; } }
 4913:3:  -webkit-user-select: none;
 4914:6:     -moz-user-select: none;
 4915:7:      -ms-user-select: none;
@@ -788,7 +763,6 @@ coverage/popular/foundation.6.7.5.css
 4938:7:      -ms-transform: translateY(-50%);
 4941:3:  z-index: 1;
 4942:3:  cursor: -webkit-grab;
-4947:3:  border-radius: 0;
 4951:3:  -ms-touch-action: manipulation;
 4952:7:      touch-action: manipulation; }
 4960:5:    cursor: -webkit-grabbing;
@@ -799,14 +773,11 @@ coverage/popular/foundation.6.7.5.css
 5022:3:  -webkit-user-select: none;
 5023:6:     -moz-user-select: none;
 5024:7:      -ms-user-select: none;
-5038:3:  border-radius: 0;
 5039:3:  background: #cacaca;
-5056:5:    border-radius: 0;
 5057:5:    background: #fefefe;
 5060:5:    content: ''; }
 5062:5:    background: #1779ba; }
 5075:7:      -ms-transform: translateY(-50%);
-5135:3:  border-radius: 0; }
 5145:5:    background: #f8f8f8;
 5148:5:    background: #f1f1f1;
 5152:5:    background: transparent; }
@@ -822,7 +793,6 @@ coverage/popular/foundation.6.7.5.css
 5250:7:      background: #fefefe;
 5253:7:      background: #e6e6e6;
 5259:3:  background: #fefefe;
-5279:3:  border-radius: 0;
 5280:3:  -webkit-box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
 5281:11:          box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
 5290:5:    -webkit-box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5);
@@ -843,7 +813,6 @@ coverage/popular/foundation.6.7.5.css
 5320:7:      -ms-flex: 1 1 0px;
 5328:3:  vertical-align: middle;
 5341:3:  z-index: 1200;
-5344:3:  border-radius: 0;
 5356:5:    content: '';
 5358:5:    border-color: transparent transparent #0a0a0a;
 5363:9:        -ms-transform: translateX(-50%);

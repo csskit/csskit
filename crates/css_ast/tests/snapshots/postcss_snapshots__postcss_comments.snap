@@ -56,40 +56,19 @@ StyleSheet(
                 offset: SourceOffset(112),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(113),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(114),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(117),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(118),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(119),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(120),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(114),
+                len: 3,
+              )))), None, None, None, Some((Slash(Delim(Cursor(
+                kind: "Delim",
+                offset: SourceOffset(118),
+                len: 1,
+              ))), Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(120),
+                len: 3,
+              )))), None, None, None))),
               important: None,
               semicolon: None,
             ),

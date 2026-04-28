@@ -12388,20 +12388,11 @@ StyleSheet(
                         offset: SourceOffset(8498),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(8499),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(8500),
-                            len: 1,
-                          )),
-                        ],
-                      )),
+                      value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(8500),
+                        len: 1,
+                      ))), None, None, None, None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -33262,20 +33253,11 @@ StyleSheet(
                               offset: SourceOffset(22090),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
-                              values: [
-                                Whitespace(Cursor(
-                                  kind: "Whitespace",
-                                  offset: SourceOffset(22091),
-                                  len: 1,
-                                )),
-                                Number(Cursor(
-                                  kind: "Number",
-                                  offset: SourceOffset(22092),
-                                  len: 1,
-                                )),
-                              ],
-                            )),
+                            value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                              kind: "Number",
+                              offset: SourceOffset(22092),
+                              len: 1,
+                            ))), None, None, None, None),
                             important: None,
                             semicolon: Some(Semicolon(Cursor(
                               kind: "Semicolon",
@@ -33431,20 +33413,11 @@ StyleSheet(
                               offset: SourceOffset(22272),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
-                              values: [
-                                Whitespace(Cursor(
-                                  kind: "Whitespace",
-                                  offset: SourceOffset(22273),
-                                  len: 1,
-                                )),
-                                Number(Cursor(
-                                  kind: "Number",
-                                  offset: SourceOffset(22274),
-                                  len: 1,
-                                )),
-                              ],
-                            )),
+                            value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                              kind: "Number",
+                              offset: SourceOffset(22274),
+                              len: 1,
+                            ))), None, None, None, None),
                             important: None,
                             semicolon: Some(Semicolon(Cursor(
                               kind: "Semicolon",
@@ -34812,20 +34785,11 @@ StyleSheet(
                               offset: SourceOffset(23369),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
-                              values: [
-                                Whitespace(Cursor(
-                                  kind: "Whitespace",
-                                  offset: SourceOffset(23370),
-                                  len: 1,
-                                )),
-                                Number(Cursor(
-                                  kind: "Number",
-                                  offset: SourceOffset(23371),
-                                  len: 1,
-                                )),
-                              ],
-                            )),
+                            value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                              kind: "Number",
+                              offset: SourceOffset(23371),
+                              len: 1,
+                            ))), None, None, None, None),
                             important: None,
                             semicolon: Some(Semicolon(Cursor(
                               kind: "Semicolon",
@@ -35018,20 +34982,11 @@ StyleSheet(
                               offset: SourceOffset(23552),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
-                              values: [
-                                Whitespace(Cursor(
-                                  kind: "Whitespace",
-                                  offset: SourceOffset(23553),
-                                  len: 1,
-                                )),
-                                Number(Cursor(
-                                  kind: "Number",
-                                  offset: SourceOffset(23554),
-                                  len: 1,
-                                )),
-                              ],
-                            )),
+                            value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                              kind: "Number",
+                              offset: SourceOffset(23554),
+                              len: 1,
+                            ))), None, None, None, None),
                             important: None,
                             semicolon: Some(Semicolon(Cursor(
                               kind: "Semicolon",
@@ -35139,20 +35094,11 @@ StyleSheet(
                               offset: SourceOffset(23647),
                               len: 1,
                             )),
-                            value: Unknown(ComponentValues(
-                              values: [
-                                Whitespace(Cursor(
-                                  kind: "Whitespace",
-                                  offset: SourceOffset(23648),
-                                  len: 1,
-                                )),
-                                Number(Cursor(
-                                  kind: "Number",
-                                  offset: SourceOffset(23649),
-                                  len: 1,
-                                )),
-                              ],
-                            )),
+                            value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                              kind: "Number",
+                              offset: SourceOffset(23649),
+                              len: 1,
+                            ))), None, None, None, None),
                             important: None,
                             semicolon: Some(Semicolon(Cursor(
                               kind: "Semicolon",
@@ -46177,20 +46123,11 @@ StyleSheet(
                 offset: SourceOffset(31311),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31312),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(31313),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Percent(Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(31313),
+                len: 3,
+              )))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -49067,20 +49004,11 @@ StyleSheet(
                 offset: SourceOffset(33230),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(33231),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(33232),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(33232),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -49556,20 +49484,11 @@ StyleSheet(
                         offset: SourceOffset(33484),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(33485),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(33486),
-                            len: 1,
-                          )),
-                        ],
-                      )),
+                      value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(33486),
+                        len: 1,
+                      ))), None, None, None, None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -50974,50 +50893,23 @@ StyleSheet(
                         offset: SourceOffset(34547),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34548),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(34549),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34550),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(34551),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34552),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(34553),
-                            len: 4,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34557),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(34558),
-                            len: 1,
-                          )),
-                        ],
-                      )),
+                      value: GridColumnStyleValue(Placement(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(34549),
+                        len: 1,
+                      )), None), Some((Slash(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(34551),
+                        len: 1,
+                      ))), Span(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(34553),
+                        len: 4,
+                      )), Some(PositiveNonZeroInt(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(34558),
+                        len: 1,
+                      )))), None)))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -51036,20 +50928,11 @@ StyleSheet(
                         offset: SourceOffset(34573),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34574),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(34575),
-                            len: 1,
-                          )),
-                        ],
-                      )),
+                      value: GridRowStyleValue(Placement(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(34575),
+                        len: 1,
+                      )), None), None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -51216,20 +51099,11 @@ StyleSheet(
                         offset: SourceOffset(34719),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34720),
-                            len: 1,
-                          )),
-                          Dimension(Cursor(
-                            kind: "Dimension",
-                            offset: SourceOffset(34721),
-                            len: 7,
-                          )),
-                        ],
-                      )),
+                      value: BorderRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(34721),
+                        len: 7,
+                      )))), None, None, None, None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -51321,20 +51195,11 @@ StyleSheet(
                         offset: SourceOffset(34792),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34793),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(34794),
-                            len: 1,
-                          )),
-                        ],
-                      )),
+                      value: GridColumnStyleValue(Placement(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(34794),
+                        len: 1,
+                      )), None), None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -51353,20 +51218,11 @@ StyleSheet(
                         offset: SourceOffset(34809),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34810),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(34811),
-                            len: 1,
-                          )),
-                        ],
-                      )),
+                      value: GridRowStyleValue(Placement(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(34811),
+                        len: 1,
+                      )), None), None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -51433,20 +51289,11 @@ StyleSheet(
                         offset: SourceOffset(34869),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(34870),
-                            len: 1,
-                          )),
-                          Dimension(Cursor(
-                            kind: "Dimension",
-                            offset: SourceOffset(34871),
-                            len: 8,
-                          )),
-                        ],
-                      )),
+                      value: BorderRadiusStyleValue(Length(Rem(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(34871),
+                        len: 8,
+                      )))), None, None, None, None),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -62442,20 +62289,11 @@ StyleSheet(
                 offset: SourceOffset(42699),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42700),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(42701),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(42701),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -62665,20 +62503,11 @@ StyleSheet(
                 offset: SourceOffset(42858),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42859),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(42860),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(42860),
+                len: 1,
+              ))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -79072,20 +78901,11 @@ StyleSheet(
                 offset: SourceOffset(53764),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(53765),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(53766),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(53766),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -79314,20 +79134,11 @@ StyleSheet(
                 offset: SourceOffset(53892),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(53893),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(53894),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(53894),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -79556,20 +79367,11 @@ StyleSheet(
                 offset: SourceOffset(54020),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54021),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54022),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54022),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -79798,20 +79600,11 @@ StyleSheet(
                 offset: SourceOffset(54148),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54149),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54150),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54150),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -80040,20 +79833,11 @@ StyleSheet(
                 offset: SourceOffset(54276),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54277),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54278),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54278),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -80282,20 +80066,11 @@ StyleSheet(
                 offset: SourceOffset(54404),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54405),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54406),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54406),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -80524,20 +80299,11 @@ StyleSheet(
                 offset: SourceOffset(54532),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54533),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54534),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54534),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -80766,20 +80532,11 @@ StyleSheet(
                 offset: SourceOffset(54660),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54661),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54662),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54662),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -81008,20 +80765,11 @@ StyleSheet(
                 offset: SourceOffset(54789),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54790),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54791),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54791),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -81250,20 +80998,11 @@ StyleSheet(
                 offset: SourceOffset(54922),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54923),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54924),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54924),
+                len: 2,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -81492,20 +81231,11 @@ StyleSheet(
                 offset: SourceOffset(55056),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55057),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55058),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55058),
+                len: 2,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -81734,20 +81464,11 @@ StyleSheet(
                 offset: SourceOffset(55190),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55191),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55192),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: GridColumnStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55192),
+                len: 2,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -81976,20 +81697,11 @@ StyleSheet(
                 offset: SourceOffset(55310),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55311),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55312),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55312),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82218,20 +81930,11 @@ StyleSheet(
                 offset: SourceOffset(55429),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55430),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55431),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55431),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82460,20 +82163,11 @@ StyleSheet(
                 offset: SourceOffset(55548),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55549),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55550),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55550),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82702,20 +82396,11 @@ StyleSheet(
                 offset: SourceOffset(55667),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55668),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55669),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55669),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82944,20 +82629,11 @@ StyleSheet(
                 offset: SourceOffset(55786),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55787),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55788),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55788),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -83186,20 +82862,11 @@ StyleSheet(
                 offset: SourceOffset(55905),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(55906),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(55907),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(55907),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -83428,20 +83095,11 @@ StyleSheet(
                 offset: SourceOffset(56024),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(56025),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(56026),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(56026),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -83670,20 +83328,11 @@ StyleSheet(
                 offset: SourceOffset(56143),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(56144),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(56145),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(56145),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -83912,20 +83561,11 @@ StyleSheet(
                 offset: SourceOffset(56263),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(56264),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(56265),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(56265),
+                len: 1,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -84154,20 +83794,11 @@ StyleSheet(
                 offset: SourceOffset(56387),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(56388),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(56389),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(56389),
+                len: 2,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -84396,20 +84027,11 @@ StyleSheet(
                 offset: SourceOffset(56512),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(56513),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(56514),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(56514),
+                len: 2,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -84638,20 +84260,11 @@ StyleSheet(
                 offset: SourceOffset(56637),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(56638),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(56639),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: GridRowStyleValue(Placement(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(56639),
+                len: 2,
+              )), None), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -84922,20 +84535,11 @@ StyleSheet(
                       offset: SourceOffset(56819),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(56820),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(56821),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(56821),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -85164,20 +84768,11 @@ StyleSheet(
                       offset: SourceOffset(56974),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(56975),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(56976),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(56976),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -85406,20 +85001,11 @@ StyleSheet(
                       offset: SourceOffset(57129),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(57130),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(57131),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(57131),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -85648,20 +85234,11 @@ StyleSheet(
                       offset: SourceOffset(57284),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(57285),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(57286),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(57286),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -85890,20 +85467,11 @@ StyleSheet(
                       offset: SourceOffset(57439),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(57440),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(57441),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(57441),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -86132,20 +85700,11 @@ StyleSheet(
                       offset: SourceOffset(57594),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(57595),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(57596),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(57596),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -86374,20 +85933,11 @@ StyleSheet(
                       offset: SourceOffset(57749),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(57750),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(57751),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(57751),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -86616,20 +86166,11 @@ StyleSheet(
                       offset: SourceOffset(57904),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(57905),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(57906),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(57906),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -86858,20 +86399,11 @@ StyleSheet(
                       offset: SourceOffset(58060),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58061),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58062),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58062),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -87100,20 +86632,11 @@ StyleSheet(
                       offset: SourceOffset(58220),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58221),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58222),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58222),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -87342,20 +86865,11 @@ StyleSheet(
                       offset: SourceOffset(58381),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58382),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58383),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58383),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -87584,20 +87098,11 @@ StyleSheet(
                       offset: SourceOffset(58542),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58543),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58544),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58544),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -87826,20 +87331,11 @@ StyleSheet(
                       offset: SourceOffset(58689),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58690),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58691),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58691),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -88068,20 +87564,11 @@ StyleSheet(
                       offset: SourceOffset(58835),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58836),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58837),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58837),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -88310,20 +87797,11 @@ StyleSheet(
                       offset: SourceOffset(58981),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(58982),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(58983),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(58983),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -88552,20 +88030,11 @@ StyleSheet(
                       offset: SourceOffset(59127),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59128),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59129),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59129),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -88794,20 +88263,11 @@ StyleSheet(
                       offset: SourceOffset(59273),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59274),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59275),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59275),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -89036,20 +88496,11 @@ StyleSheet(
                       offset: SourceOffset(59419),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59420),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59421),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59421),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -89278,20 +88729,11 @@ StyleSheet(
                       offset: SourceOffset(59565),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59566),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59567),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59567),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -89520,20 +88962,11 @@ StyleSheet(
                       offset: SourceOffset(59711),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59712),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59713),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59713),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -89762,20 +89195,11 @@ StyleSheet(
                       offset: SourceOffset(59858),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(59859),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(59860),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(59860),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -90004,20 +89428,11 @@ StyleSheet(
                       offset: SourceOffset(60009),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60010),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60011),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60011),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -90246,20 +89661,11 @@ StyleSheet(
                       offset: SourceOffset(60161),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60162),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60163),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60163),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -90488,20 +89894,11 @@ StyleSheet(
                       offset: SourceOffset(60313),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60314),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60315),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60315),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -90780,20 +90177,11 @@ StyleSheet(
                       offset: SourceOffset(60500),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60501),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60502),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60502),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -91022,20 +90410,11 @@ StyleSheet(
                       offset: SourceOffset(60655),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60656),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60657),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60657),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -91264,20 +90643,11 @@ StyleSheet(
                       offset: SourceOffset(60810),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60811),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60812),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60812),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -91506,20 +90876,11 @@ StyleSheet(
                       offset: SourceOffset(60965),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(60966),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(60967),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(60967),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -91748,20 +91109,11 @@ StyleSheet(
                       offset: SourceOffset(61120),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61121),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61122),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61122),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -91990,20 +91342,11 @@ StyleSheet(
                       offset: SourceOffset(61275),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61276),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61277),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61277),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -92232,20 +91575,11 @@ StyleSheet(
                       offset: SourceOffset(61430),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61431),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61432),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61432),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -92474,20 +91808,11 @@ StyleSheet(
                       offset: SourceOffset(61585),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61586),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61587),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61587),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -92716,20 +92041,11 @@ StyleSheet(
                       offset: SourceOffset(61741),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61742),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61743),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61743),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -92958,20 +92274,11 @@ StyleSheet(
                       offset: SourceOffset(61901),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(61902),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(61903),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(61903),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -93200,20 +92507,11 @@ StyleSheet(
                       offset: SourceOffset(62062),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62063),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62064),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62064),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -93442,20 +92740,11 @@ StyleSheet(
                       offset: SourceOffset(62223),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62224),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62225),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62225),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -93684,20 +92973,11 @@ StyleSheet(
                       offset: SourceOffset(62370),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62371),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62372),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62372),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -93926,20 +93206,11 @@ StyleSheet(
                       offset: SourceOffset(62516),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62517),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62518),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62518),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -94168,20 +93439,11 @@ StyleSheet(
                       offset: SourceOffset(62662),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62663),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62664),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62664),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -94410,20 +93672,11 @@ StyleSheet(
                       offset: SourceOffset(62808),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62809),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62810),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62810),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -94652,20 +93905,11 @@ StyleSheet(
                       offset: SourceOffset(62954),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(62955),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(62956),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(62956),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -94894,20 +94138,11 @@ StyleSheet(
                       offset: SourceOffset(63100),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63101),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63102),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63102),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -95136,20 +94371,11 @@ StyleSheet(
                       offset: SourceOffset(63246),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63247),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63248),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63248),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -95378,20 +94604,11 @@ StyleSheet(
                       offset: SourceOffset(63392),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63393),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63394),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63394),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -95620,20 +94837,11 @@ StyleSheet(
                       offset: SourceOffset(63539),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63540),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63541),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63541),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -95862,20 +95070,11 @@ StyleSheet(
                       offset: SourceOffset(63690),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63691),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63692),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63692),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -96104,20 +95303,11 @@ StyleSheet(
                       offset: SourceOffset(63842),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63843),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63844),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63844),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -96346,20 +95536,11 @@ StyleSheet(
                       offset: SourceOffset(63994),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(63995),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(63996),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(63996),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -96622,20 +95803,11 @@ StyleSheet(
                       offset: SourceOffset(64167),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(64168),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(64169),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(64169),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -96864,20 +96036,11 @@ StyleSheet(
                       offset: SourceOffset(64322),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(64323),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(64324),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(64324),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -97106,20 +96269,11 @@ StyleSheet(
                       offset: SourceOffset(64477),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(64478),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(64479),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(64479),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -97348,20 +96502,11 @@ StyleSheet(
                       offset: SourceOffset(64632),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(64633),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(64634),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(64634),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -97590,20 +96735,11 @@ StyleSheet(
                       offset: SourceOffset(64787),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(64788),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(64789),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(64789),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -97832,20 +96968,11 @@ StyleSheet(
                       offset: SourceOffset(64942),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(64943),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(64944),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(64944),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -98074,20 +97201,11 @@ StyleSheet(
                       offset: SourceOffset(65097),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(65098),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(65099),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(65099),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -98316,20 +97434,11 @@ StyleSheet(
                       offset: SourceOffset(65252),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(65253),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(65254),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(65254),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -98558,20 +97667,11 @@ StyleSheet(
                       offset: SourceOffset(65408),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(65409),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(65410),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(65410),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -98800,20 +97900,11 @@ StyleSheet(
                       offset: SourceOffset(65568),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(65569),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(65570),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(65570),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -99042,20 +98133,11 @@ StyleSheet(
                       offset: SourceOffset(65729),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(65730),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(65731),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(65731),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -99284,20 +98366,11 @@ StyleSheet(
                       offset: SourceOffset(65890),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(65891),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(65892),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridColumnStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(65892),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -99526,20 +98599,11 @@ StyleSheet(
                       offset: SourceOffset(66037),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66038),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66039),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66039),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -99768,20 +98832,11 @@ StyleSheet(
                       offset: SourceOffset(66183),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66184),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66185),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66185),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -100010,20 +99065,11 @@ StyleSheet(
                       offset: SourceOffset(66329),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66330),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66331),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66331),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -100252,20 +99298,11 @@ StyleSheet(
                       offset: SourceOffset(66475),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66476),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66477),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66477),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -100494,20 +99531,11 @@ StyleSheet(
                       offset: SourceOffset(66621),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66622),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66623),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66623),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -100736,20 +99764,11 @@ StyleSheet(
                       offset: SourceOffset(66767),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66768),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66769),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66769),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -100978,20 +99997,11 @@ StyleSheet(
                       offset: SourceOffset(66913),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(66914),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(66915),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(66915),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -101220,20 +100230,11 @@ StyleSheet(
                       offset: SourceOffset(67059),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(67060),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(67061),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(67061),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -101462,20 +100463,11 @@ StyleSheet(
                       offset: SourceOffset(67206),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(67207),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(67208),
-                          len: 1,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(67208),
+                      len: 1,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -101704,20 +100696,11 @@ StyleSheet(
                       offset: SourceOffset(67357),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(67358),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(67359),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(67359),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -101946,20 +100929,11 @@ StyleSheet(
                       offset: SourceOffset(67509),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(67510),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(67511),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(67511),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -102188,20 +101162,11 @@ StyleSheet(
                       offset: SourceOffset(67661),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(67662),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(67663),
-                          len: 2,
-                        )),
-                      ],
-                    )),
+                    value: GridRowStyleValue(Placement(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(67663),
+                      len: 2,
+                    )), None), None),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",

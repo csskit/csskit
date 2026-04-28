@@ -135,48 +135,32 @@ pub enum BookmarkStateStyleValue {}
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub enum ContentStyleValue<'a> {}
 
-// /// Represents the style value for `quotes` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#quotes).
-// ///
-// /// The quotes CSS property sets the quotation marks inserted via the content CSS property or <q> element.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | none | match-parent | [ <string> <string> ]+
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-content-3/#quotes
-// #[syntax(" auto | none | match-parent | [ <string> <string> ]+ ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     inherits,
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = Content,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.quotes")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum QuotesStyleValue<'a> {}
+/// Represents the style value for `quotes` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#quotes).
+///
+/// The quotes CSS property sets the quotation marks inserted via the content CSS property or <q> element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | none | match-parent | [ <string> <string> ]+
+/// ```
+///
+/// https://drafts.csswg.org/css-content-3/#quotes
+#[syntax(" auto | none | match-parent | [ <string> <string> ]+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Content,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.quotes"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum QuotesStyleValue<'a> {}

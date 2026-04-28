@@ -522,7 +522,7 @@ FAIL shorthands/0019
 +a{border-radius:5px 10px}
 
 FAIL shorthands/0020
--a{border-radius:10px 10px 10px 10px / 5px 5px 5px 5px}
+-a{border-radius:10px 10px 10px 10px/5px 5px 5px 5px}
 +a{border-radius:10px/5px}
 
 FAIL shorthands/0021

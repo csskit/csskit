@@ -87,51 +87,35 @@ pub enum FlowToleranceStyleValue {}
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub enum GridStyleValue {}
 
-// /// Represents the style value for `grid-area` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-area).
-// ///
-// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <grid-line> [ / <grid-line> ]{0,3}
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-grid-3/#grid-area
-// #[syntax(" <grid-line> [ / <grid-line> ]{0,3} ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     longhands = GridColumnEnd|GridColumnStart|GridRowEnd|GridRowStart,
-//     property_group = Grid,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.grid-area")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct GridAreaStyleValue;
+/// Represents the style value for `grid-area` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-area).
+///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <grid-line> [ / <grid-line> ]{0,3}
+/// ```
+///
+/// https://drafts.csswg.org/css-grid-3/#grid-area
+#[syntax(" <grid-line> [ / <grid-line> ]{0,3} ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    longhands = GridColumnEnd|GridColumnStart|GridRowEnd|GridRowStart,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-area"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct GridAreaStyleValue;
 
 /// Represents the style value for `grid-auto-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-columns).
 ///
@@ -241,51 +225,35 @@ pub struct GridAutoColumnsStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct GridAutoRowsStyleValue<'a>;
 
-// /// Represents the style value for `grid-column` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column).
-// ///
-// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <grid-line> [ / <grid-line> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-grid-3/#grid-column
-// #[syntax(" <grid-line> [ / <grid-line> ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     longhands = GridColumnEnd|GridColumnStart,
-//     property_group = Grid,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.grid-column")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct GridColumnStyleValue;
+/// Represents the style value for `grid-column` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column).
+///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <grid-line> [ / <grid-line> ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-grid-3/#grid-column
+#[syntax(" <grid-line> [ / <grid-line> ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    longhands = GridColumnEnd|GridColumnStart,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct GridColumnStyleValue;
 
 /// Represents the style value for `grid-column-end` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column-end).
 ///
@@ -347,51 +315,35 @@ pub struct GridColumnEndStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct GridColumnStartStyleValue;
 
-// /// Represents the style value for `grid-row` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row).
-// ///
-// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <grid-line> [ / <grid-line> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-grid-3/#grid-row
-// #[syntax(" <grid-line> [ / <grid-line> ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     longhands = GridRowEnd|GridRowStart,
-//     property_group = Grid,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.grid-row")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct GridRowStyleValue;
+/// Represents the style value for `grid-row` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row).
+///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <grid-line> [ / <grid-line> ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-grid-3/#grid-row
+#[syntax(" <grid-line> [ / <grid-line> ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    longhands = GridRowEnd|GridRowStart,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct GridRowStyleValue;
 
 /// Represents the style value for `grid-row-end` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row-end).
 ///

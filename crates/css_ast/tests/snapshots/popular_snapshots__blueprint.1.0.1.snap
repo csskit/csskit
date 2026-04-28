@@ -1544,30 +1544,17 @@ StyleSheet(
                 offset: SourceOffset(1422),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1423),
-                    len: 1,
-                  )),
-                  String(Cursor(
-                    kind: "String",
-                    offset: SourceOffset(1424),
-                    len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1426),
-                    len: 1,
-                  )),
-                  String(Cursor(
-                    kind: "String",
-                    offset: SourceOffset(1427),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: String([
+                (String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(1424),
+                  len: 2,
+                )), String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(1427),
+                  len: 2,
+                ))),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

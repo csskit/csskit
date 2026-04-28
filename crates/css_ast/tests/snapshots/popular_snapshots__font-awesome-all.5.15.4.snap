@@ -1600,20 +1600,11 @@ StyleSheet(
                 offset: SourceOffset(1205),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1206),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(1207),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: BorderRadiusStyleValue(Length(Em(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(1207),
+                len: 4,
+              )))), None, None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

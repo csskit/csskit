@@ -5,7 +5,6 @@ coverage/popular/inuitcss.6.0.0.css
 456:3:  -moz-box-sizing: content-box;
 464:3:  background: #ff0;
 481:3:  white-space: pre-wrap; }
-487:3:  quotes: "\201C" "\201D" "\2018" "\2019"; }
 503:3:  vertical-align: baseline; }
 588:3:  text-transform: none; }
 632:3:  -moz-box-sizing: content-box;
@@ -18,7 +17,6 @@ coverage/popular/inuitcss.6.0.0.css
 712:3:  text-decoration: none; }
 753:3:  content: "";
 822:3:  font: 1em/1.5 sans-serif;
-941:3:  quotes: "‘" "’" "“" "”"; }
 943:5:    content: "‘";
 944:5:    content: open-quote; }
 946:5:    content: "’";
@@ -27,7 +25,6 @@ coverage/popular/inuitcss.6.0.0.css
 950:5:    content: open-quote; }
 952:5:    content: "”";
 953:5:    content: close-quote; }
-956:3:  quotes: "“" "”"; }
 958:5:    content: "“";
 959:5:    content: open-quote; }
 961:5:    content: "";
@@ -45,7 +42,6 @@ coverage/popular/inuitcss.6.0.0.css
 1021:3:  filter: alpha(opacity=75); }
 1050:3:  white-space: nowrap;
 1057:3:  white-space: pre;
-1083:3:  border-radius: 4px; }
 1221:3:  vertical-align: middle; }
 1224:3:  vertical-align: top; }
 1344:3:  font: 12px/1.5 sans-serif; }

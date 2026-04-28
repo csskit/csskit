@@ -234,50 +234,34 @@ pub struct BorderBlockEndClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderBlockEndColorStyleValue<'a> {}
 
-// /// Represents the style value for `border-block-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-block-end-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-block-end-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderBlockEndRadiusStyleValue;
+/// Represents the style value for `border-block-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-block-end-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderBlockEndRadiusStyleValue;
 
 /// Represents the style value for `border-block-end-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-style).
 ///
@@ -437,50 +421,34 @@ pub struct BorderBlockStartClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderBlockStartColorStyleValue<'a> {}
 
-// /// Represents the style value for `border-block-start-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-block-start-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-block-start-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderBlockStartRadiusStyleValue;
+/// Represents the style value for `border-block-start-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-block-start-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderBlockStartRadiusStyleValue;
 
 /// Represents the style value for `border-block-start-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-style).
 ///
@@ -742,50 +710,34 @@ pub enum BorderBottomColorStyleValue<'a> {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BorderBottomLeftRadiusStyleValue;
 
-// /// Represents the style value for `border-bottom-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-bottom-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-bottom-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderBottomRadiusStyleValue;
+/// Represents the style value for `border-bottom-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-bottom-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderBottomRadiusStyleValue;
 
 /// Represents the style value for `border-bottom-right-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius).
 ///
@@ -968,7 +920,7 @@ pub struct BorderClipStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum BorderColorStyleValue<'a> {}
+// pub struct BorderColorStyleValue<'a>;
 
 /// Represents the style value for `border-end-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-end-end-radius).
 ///
@@ -1272,7 +1224,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum BorderImageWidthStyleValue {}
+// pub struct BorderImageWidthStyleValue;
 
 /// Represents the style value for `border-inline` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline).
 ///
@@ -1467,50 +1419,34 @@ pub struct BorderInlineEndClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderInlineEndColorStyleValue<'a> {}
 
-// /// Represents the style value for `border-inline-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-inline-end-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-inline-end-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderInlineEndRadiusStyleValue;
+/// Represents the style value for `border-inline-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-inline-end-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderInlineEndRadiusStyleValue;
 
 /// Represents the style value for `border-inline-end-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-style).
 ///
@@ -1670,50 +1606,38 @@ pub struct BorderInlineStartClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderInlineStartColorStyleValue<'a> {}
 
-// /// Represents the style value for `border-inline-start-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-inline-start-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-inline-start-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderInlineStartRadiusStyleValue;
+/// Represents the style value for `border-inline-start-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-inline-start-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.border-inline-start-radius")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderInlineStartRadiusStyleValue;
 
 /// Represents the style value for `border-inline-start-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-style).
 ///
@@ -1941,50 +1865,34 @@ pub struct BorderLeftClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderLeftColorStyleValue<'a> {}
 
-// /// Represents the style value for `border-left-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-left-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-left-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderLeftRadiusStyleValue;
+/// Represents the style value for `border-left-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-left-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderLeftRadiusStyleValue;
 
 /// Represents the style value for `border-left-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-style).
 ///
@@ -2082,54 +1990,38 @@ pub struct BorderLeftWidthStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderLimitStyleValue {}
 
-// /// Represents the style value for `border-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-radius).
-// ///
-// /// The border-radius CSS property rounds the corners of the border drawn around an element.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-radius
-// #[syntax(" <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     inherits = Unknown,
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = BorderBottomLeftRadius|BorderBottomRightRadius|BorderTopLeftRadius|BorderTopRightRadius,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderRadiusStyleValue;
+/// Represents the style value for `border-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-radius).
+///
+/// The border-radius CSS property rounds the corners of the border drawn around an element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-radius
+#[syntax(" <length-percentage [0,∞]>{1,4} [ / <length-percentage [0,∞]>{1,4} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = BorderBottomLeftRadius|BorderBottomRightRadius|BorderTopLeftRadius|BorderTopRightRadius,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderRadiusStyleValue;
 
 /// Represents the style value for `border-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right).
 ///
@@ -2225,50 +2117,34 @@ pub struct BorderRightClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BorderRightColorStyleValue<'a> {}
 
-// /// Represents the style value for `border-right-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-right-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-right-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderRightRadiusStyleValue;
+/// Represents the style value for `border-right-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-right-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderRightRadiusStyleValue;
 
 /// Represents the style value for `border-right-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-style).
 ///
@@ -2610,50 +2486,34 @@ pub enum BorderTopColorStyleValue<'a> {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BorderTopLeftRadiusStyleValue;
 
-// /// Represents the style value for `border-top-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-radius).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-top-radius
-// #[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-top-radius")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderTopRadiusStyleValue;
+/// Represents the style value for `border-top-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-radius).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-top-radius
+#[syntax(" <length-percentage [0,∞]>{1,2} [ / <length-percentage [0,∞]>{1,2} ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-radius"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderTopRadiusStyleValue;
 
 /// Represents the style value for `border-top-right-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-right-radius).
 ///

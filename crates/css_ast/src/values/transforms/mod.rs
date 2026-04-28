@@ -305,48 +305,32 @@ pub enum TransformBoxStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum TransformStyleStyleValue {}
 
-// /// Represents the style value for `translate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#translate).
-// ///
-// /// The translate, rotate, and scale CSS properties apply single transformations independently, as opposed to applying multiple transformations with the transform CSS property.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <length-percentage> [ <length-percentage> <length>? ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-transforms-2/#translate
-// #[syntax(" none | <length-percentage> [ <length-percentage> <length>? ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     percentages = ReferenceBox,
-//     property_group = Transforms,
-//     computed_value_type = AbsoluteLengthOrPercentage,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.translate")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct TranslateStyleValue;
+/// Represents the style value for `translate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#translate).
+///
+/// The translate, rotate, and scale CSS properties apply single transformations independently, as opposed to applying multiple transformations with the transform CSS property.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <length-percentage> [ <length-percentage> <length>? ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-transforms-2/#translate
+#[syntax(" none | <length-percentage> [ <length-percentage> <length>? ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    percentages = ReferenceBox,
+    property_group = Transforms,
+    computed_value_type = AbsoluteLengthOrPercentage,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.translate"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct TranslateStyleValue;
