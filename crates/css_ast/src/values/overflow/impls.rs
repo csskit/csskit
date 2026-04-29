@@ -11,7 +11,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<OverflowBlockStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<OverflowInlineStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<OverflowStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<OverflowClipMarginStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<OverflowClipMarginStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollBehaviorStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<ScrollbarGutterStyleValue>(), 12);
 		// assert_eq!(std::mem::size_of::<TextOverflowStyleValue>(), 12);
@@ -24,11 +24,13 @@ mod tests {
 		assert_eq!(std::mem::size_of::<OverflowClipMarginInlineEndStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginInlineStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockStartStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BlockEllipsisStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<LineClampStyleValue>(), 12);
 		assert_eq!(std::mem::size_of::<WebkitLineClampStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaxLinesStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ContinueStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ScrollTargetGroupStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<ScrollMarkerGroupStyleValue>(), 16);
 	}
 

@@ -6,9 +6,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<ScrollSnapTypeStyleValue>(), 2);
-		// assert_eq!(std::mem::size_of::<ScrollPaddingStyleValue>(), 2);
-		// assert_eq!(std::mem::size_of::<ScrollMarginStyleValue>(), 2);
+		assert_eq!(std::mem::size_of::<ScrollSnapTypeStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<ScrollPaddingStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<ScrollMarginStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<ScrollSnapAlignStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollSnapStopStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollPaddingTopStyleValue>(), 16);
@@ -19,8 +19,8 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ScrollPaddingBlockStartStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollPaddingInlineEndStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollPaddingBlockEndStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<ScrollPaddingBlockStyleValue>(), 2);
-		// assert_eq!(std::mem::size_of::<ScrollPaddingInlineStyleValue>(), 2);
+		assert_eq!(std::mem::size_of::<ScrollPaddingBlockStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ScrollPaddingInlineStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollMarginTopStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollMarginRightStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollMarginBottomStyleValue>(), 16);
@@ -31,6 +31,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ScrollMarginInlineEndStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollMarginBlockStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollMarginInlineStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ScrollInitialTargetStyleValue>(), 16);
 	}
 
 	#[test]

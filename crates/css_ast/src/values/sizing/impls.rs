@@ -33,6 +33,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ContainIntrinsicInlineSizeStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ContainIntrinsicSizeStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<ContainIntrinsicWidthStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<FrameSizingStyleValue>(), 16);
 	}
 
 	#[test]

@@ -10,17 +10,17 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<GridTemplateRowsStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<GridTemplateAreasStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<GridTemplateStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridAutoColumnsStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<GridAutoColumnsStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<GridAutoFlowStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<GridStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridColumnStartStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridRowEndStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridColumnEndStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridRowStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridColumnStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<GridAreaStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 44);
+		assert_eq!(std::mem::size_of::<GridColumnStartStyleValue>(), 44);
+		assert_eq!(std::mem::size_of::<GridRowEndStyleValue>(), 44);
+		assert_eq!(std::mem::size_of::<GridColumnEndStyleValue>(), 44);
+		assert_eq!(std::mem::size_of::<GridRowStyleValue>(), 100);
+		assert_eq!(std::mem::size_of::<GridColumnStyleValue>(), 100);
+		assert_eq!(std::mem::size_of::<GridAreaStyleValue>(), 212);
 		assert_eq!(std::mem::size_of::<FlowToleranceStyleValue>(), 16);
 	}
 

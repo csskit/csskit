@@ -14,8 +14,8 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<TextEmphasisStyleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextEmphasisColorStyleValue>(), 24);
 		// assert_eq!(std::mem::size_of::<TextEmphasisStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<TextEmphasisPositionStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<TextShadowStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<TextEmphasisPositionStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<TextShadowStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<TextDecorationThicknessStyleValue>(), 20);
 		assert_eq!(std::mem::size_of::<TextUnderlineOffsetStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextDecorationInsetStyleValue>(), 32);

@@ -9,6 +9,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ViewTransitionNameStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ViewTransitionClassStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ViewTransitionGroupStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ViewTransitionScopeStyleValue>(), 16);
 	}
 
 	#[test]

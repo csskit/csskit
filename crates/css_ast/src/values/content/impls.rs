@@ -10,8 +10,9 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<QuotesStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<StringSetStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<BookmarkLevelStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<BookmarkLabelStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BookmarkLabelStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BookmarkStateStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<QuotesStyleValue>(), 40);
 	}
 
 	#[test]

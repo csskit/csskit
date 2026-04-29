@@ -6,12 +6,12 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		// assert_eq!(std::mem::size_of::<FontFamilyStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<FontFamilyStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<FontWeightStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FontWidthStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FontStyleStyleValue>(), 28);
 		assert_eq!(std::mem::size_of::<FontSizeStyleValue>(), 20);
-		// assert_eq!(std::mem::size_of::<FontSizeAdjustStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<FontSizeAdjustStyleValue>(), 28);
 		// assert_eq!(std::mem::size_of::<FontStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<FontSynthesisWeightStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FontSynthesisStyleStyleValue>(), 16);
@@ -26,10 +26,10 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<FontVariantAlternatesStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<FontVariantEastAsianStyleValue>(), 1);
 		// assert_eq!(std::mem::size_of::<FontVariantStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<FontFeatureSettingsStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<FontFeatureSettingsStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<FontLanguageOverrideStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FontOpticalSizingStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<FontVariationSettingsStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<FontVariationSettingsStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<FontPaletteStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<FontVariantEmojiStyleValue>(), 16);
 	}

@@ -7,14 +7,14 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<AlignContentStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<JustifyContentStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<PlaceContentStyleValue>(), 48);
-		// assert_eq!(std::mem::size_of::<JustifySelfStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<JustifyContentStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<PlaceContentStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<JustifySelfStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<AlignSelfStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<PlaceSelfStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<JustifyItemsStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<AlignItemsStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<PlaceItemsStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<PlaceSelfStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<JustifyItemsStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<AlignItemsStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<PlaceItemsStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<RowGapStyleValue>(), 20);
 		assert_eq!(std::mem::size_of::<ColumnGapStyleValue>(), 20);
 		assert_eq!(std::mem::size_of::<GapStyleValue>(), 40);

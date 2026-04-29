@@ -8,6 +8,16 @@ mod tests {
 	pub fn size_test() {
 		assert_eq!(std::mem::size_of::<LineHeightStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextBoxStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<AlignmentBaselineStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<BaselineShiftStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<BaselineSourceStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<DominantBaselineStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<InitialLetterStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<InitialLetterWrapStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<InlineSizingStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<LineFitEdgeStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<TextBoxEdgeStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<TextBoxTrimStyleValue>(), 16);
 	}
 
 	#[test]
