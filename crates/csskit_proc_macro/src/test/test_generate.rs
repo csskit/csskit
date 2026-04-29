@@ -458,3 +458,36 @@ fn enum_with_ordered_punct() {
 	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "enum_with_ordered_punct");
 }
+
+#[test]
+fn enum_with_keyword_options() {
+	// 4 alternatives stays as enum (not folded to NoneOr)
+	let syntax =
+		to_valuedef! { none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "enum_with_keyword_options");
+}
+
+#[test]
+fn enum_with_mixed_options() {
+	// 3 alternatives: keyword, type-only options, mixed options
+	let syntax = to_valuedef! { none | [ <angle> || flip ] | <length> };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "enum_with_mixed_options");
+}
+
+#[test]
+fn enum_with_type_only_options() {
+	// type-only options use Optionals! directly (no helper struct needed)
+	let syntax = to_valuedef! { none | [ <angle> || <percentage> ] | <length> };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "enum_with_type_only_options");
+}
+
+#[test]
+fn struct_nonor_keyword_options() {
+	// NoneOr wrapping Options-with-keywords generates helper struct
+	let syntax = to_valuedef! { none | [ weight || style || small-caps || position ] };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	assert_snapshot!(syntax, data, "struct_nonor_keyword_options");
+}

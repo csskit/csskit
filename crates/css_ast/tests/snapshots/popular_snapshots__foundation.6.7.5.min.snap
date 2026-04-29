@@ -6706,19 +6706,22 @@ StyleSheet(
                 offset: SourceOffset(4296),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4297),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4299),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4301),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4297),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4299),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(4301),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -6784,19 +6787,22 @@ StyleSheet(
                 offset: SourceOffset(4328),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4329),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4331),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4333),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4329),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4331),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(4333),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -6954,19 +6960,22 @@ StyleSheet(
                 offset: SourceOffset(4416),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4417),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4419),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4421),
-                len: 1,
-              ))))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4417),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4419),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4421),
+                  len: 1,
+                )))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -7032,19 +7041,22 @@ StyleSheet(
                 offset: SourceOffset(4444),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4445),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4447),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4449),
-                len: 1,
-              ))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4445),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4447),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4449),
+                  len: 1,
+                )))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -7133,19 +7145,22 @@ StyleSheet(
                 offset: SourceOffset(4495),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4496),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4498),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4500),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4496),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4498),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(4500),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -7211,19 +7226,22 @@ StyleSheet(
                 offset: SourceOffset(4527),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4528),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(4530),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(4532),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4528),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(4530),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(4532),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -9728,19 +9746,22 @@ StyleSheet(
                 offset: SourceOffset(5879),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(5880),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(5882),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5884),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(5880),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(5882),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(5884),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -9806,19 +9827,22 @@ StyleSheet(
                 offset: SourceOffset(5911),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(5912),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(5914),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(5916),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(5912),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(5914),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(5916),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -10828,19 +10852,22 @@ StyleSheet(
                       offset: SourceOffset(6389),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6390),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6392),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6394),
-                      len: 1,
-                    ))))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6390),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6392),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6394),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -10906,19 +10933,22 @@ StyleSheet(
                       offset: SourceOffset(6417),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6418),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6420),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6422),
-                      len: 1,
-                    ))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6418),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6420),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6422),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -11455,19 +11485,22 @@ StyleSheet(
                       offset: SourceOffset(6708),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6709),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6711),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(6713),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6709),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6711),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(6713),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -11533,19 +11566,22 @@ StyleSheet(
                       offset: SourceOffset(6740),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6741),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(6743),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(6745),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6741),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(6743),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(6745),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -12634,19 +12670,22 @@ StyleSheet(
                       offset: SourceOffset(7264),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7265),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7267),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7269),
-                      len: 1,
-                    ))))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7265),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7267),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7269),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -12712,19 +12751,22 @@ StyleSheet(
                       offset: SourceOffset(7292),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7293),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7295),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7297),
-                      len: 1,
-                    ))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7293),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7295),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7297),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -13261,19 +13303,22 @@ StyleSheet(
                       offset: SourceOffset(7570),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7571),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7573),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(7575),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7571),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7573),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(7575),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -13339,19 +13384,22 @@ StyleSheet(
                       offset: SourceOffset(7602),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7603),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(7605),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(7607),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7603),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(7605),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(7607),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -47160,19 +47208,22 @@ StyleSheet(
                 offset: SourceOffset(26826),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(26827),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(26829),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(26831),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(26827),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(26829),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(26831),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -47238,19 +47289,22 @@ StyleSheet(
                 offset: SourceOffset(26858),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(26859),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(26861),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(26863),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(26859),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(26861),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(26863),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -48260,19 +48314,22 @@ StyleSheet(
                       offset: SourceOffset(27348),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27349),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27351),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27353),
-                      len: 1,
-                    ))))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27349),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27351),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27353),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -48338,19 +48395,22 @@ StyleSheet(
                       offset: SourceOffset(27376),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27377),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27379),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27381),
-                      len: 1,
-                    ))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27377),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27379),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27381),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -48887,19 +48947,22 @@ StyleSheet(
                       offset: SourceOffset(27668),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27669),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27671),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(27673),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27669),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27671),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(27673),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -48965,19 +49028,22 @@ StyleSheet(
                       offset: SourceOffset(27700),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27701),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(27703),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(27705),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27701),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(27703),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(27705),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -50066,19 +50132,22 @@ StyleSheet(
                       offset: SourceOffset(28237),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28238),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28240),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28242),
-                      len: 1,
-                    ))))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28238),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28240),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28242),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -50144,19 +50213,22 @@ StyleSheet(
                       offset: SourceOffset(28265),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28266),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28268),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28270),
-                      len: 1,
-                    ))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28266),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28268),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28270),
+                        len: 1,
+                      )))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -50693,19 +50765,22 @@ StyleSheet(
                       offset: SourceOffset(28544),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28545),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28547),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(28549),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28545),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28547),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(28549),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -50771,19 +50846,22 @@ StyleSheet(
                       offset: SourceOffset(28576),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28577),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(28579),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(28581),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28577),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(28579),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(28581),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -76354,19 +76432,22 @@ StyleSheet(
                 offset: SourceOffset(44330),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44331),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44333),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(44335),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44331),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44333),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(44335),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -76432,19 +76513,22 @@ StyleSheet(
                 offset: SourceOffset(44362),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44363),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44365),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(44367),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44363),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44365),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(44367),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -76521,19 +76605,22 @@ StyleSheet(
                 offset: SourceOffset(44420),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44421),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44423),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(44425),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44421),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44423),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(44425),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -76599,19 +76686,22 @@ StyleSheet(
                 offset: SourceOffset(44452),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44453),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44455),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(44457),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44453),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44455),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(44457),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -76688,19 +76778,22 @@ StyleSheet(
                 offset: SourceOffset(44512),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44513),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44515),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(44517),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44513),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44515),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(44517),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -76766,19 +76859,22 @@ StyleSheet(
                 offset: SourceOffset(44544),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44545),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(44547),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(44549),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44545),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(44547),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(44549),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -77702,19 +77798,22 @@ StyleSheet(
                       offset: SourceOffset(45401),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45402),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45404),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45406),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45402),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45404),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45406),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -77780,19 +77879,22 @@ StyleSheet(
                       offset: SourceOffset(45433),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45434),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45436),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45438),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45434),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45436),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45438),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -77869,19 +77971,22 @@ StyleSheet(
                       offset: SourceOffset(45498),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45499),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45501),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45503),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45499),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45501),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45503),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -77947,19 +78052,22 @@ StyleSheet(
                       offset: SourceOffset(45530),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45531),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45533),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45535),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45531),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45533),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45535),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -78036,19 +78144,22 @@ StyleSheet(
                       offset: SourceOffset(45597),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45598),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45600),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45602),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45598),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45600),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45602),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -78114,19 +78225,22 @@ StyleSheet(
                       offset: SourceOffset(45629),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45630),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45632),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45634),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45630),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45632),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45634),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -79058,19 +79172,22 @@ StyleSheet(
                       offset: SourceOffset(46513),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46514),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46516),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(46518),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46514),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46516),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(46518),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -79136,19 +79253,22 @@ StyleSheet(
                       offset: SourceOffset(46545),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46546),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46548),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(46550),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46546),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46548),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(46550),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -79225,19 +79345,22 @@ StyleSheet(
                       offset: SourceOffset(46609),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46610),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46612),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(46614),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46610),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46612),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(46614),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -79303,19 +79426,22 @@ StyleSheet(
                       offset: SourceOffset(46641),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46642),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46644),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(46646),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46642),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46644),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(46646),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -79392,19 +79518,22 @@ StyleSheet(
                       offset: SourceOffset(46707),
                       len: 1,
                     )),
-                    value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46708),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46710),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(46712),
-                      len: 4,
-                    )))))))),
+                    value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46708),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46710),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(46712),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -79470,19 +79599,22 @@ StyleSheet(
                       offset: SourceOffset(46739),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46740),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(46742),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(46744),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46740),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(46742),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(46744),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: None,
                   ),
@@ -108042,19 +108174,22 @@ StyleSheet(
                 offset: SourceOffset(63539),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63540),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63542),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(63544),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63540),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63542),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(63544),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -108120,19 +108255,22 @@ StyleSheet(
                 offset: SourceOffset(63571),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63572),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63574),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(63576),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63572),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63574),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(63576),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -108470,19 +108608,22 @@ StyleSheet(
                 offset: SourceOffset(63830),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63831),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63833),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63835),
-                len: 1,
-              ))))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63831),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63833),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63835),
+                  len: 1,
+                )))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -108548,19 +108689,22 @@ StyleSheet(
                 offset: SourceOffset(63858),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63859),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63861),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Zero(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(63863),
-                len: 1,
-              ))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63859),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63861),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(63863),
+                  len: 1,
+                )))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -108833,19 +108977,22 @@ StyleSheet(
                 offset: SourceOffset(64051),
                 len: 1,
               )),
-              value: WebkitFlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(64052),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(64054),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(64056),
-                len: 4,
-              )))))))),
+              value: WebkitFlexStyleValue(r#Some(WebkitFlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(64052),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(64054),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(64056),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -108911,19 +109058,22 @@ StyleSheet(
                 offset: SourceOffset(64083),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(64084),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(64086),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(64088),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(64084),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(64086),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(64088),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: None,
             ),

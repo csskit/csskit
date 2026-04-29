@@ -15,11 +15,13 @@ pub fn pluralize(str: String) -> String {
 pub trait DefExt {
 	fn single_ident(ident: &Ident) -> Ident;
 	fn keyword_ident(ident: &Ident) -> Ident;
+	fn options_ident(ident: &Ident) -> Ident;
 	fn should_skip_visit(&self) -> bool;
 	fn type_attributes(&self, derives_parse: bool, derives_visitable: bool) -> TokenStream;
 	fn is_all_keywords(&self) -> bool;
 	fn get_generics(&self) -> Generics;
 	fn gather_keywords(&self) -> Vec<&Self>;
+	fn rewrite_options_type(&self, replacement: &TokenStream) -> TokenStream;
 	fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, generics: &Generics) -> TokenStream;
 }
 
@@ -121,15 +123,11 @@ impl ToFieldName for Def {
 				}
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
-				let auto_generated_name = ds.iter().fold(String::new(), |str, d| match d {
-					Def::Type(d) => {
-						format!("{}{}", str, d.to_variant_name(0))
-					}
-					_ => {
-						dbg!("TODO variant name for Combinator() of Options", d);
-						todo!("variant name")
-					}
-				});
+				let auto_generated_name: String = ds
+					.iter()
+					.filter(|d| !matches!(d, Def::Punct(_)))
+					.map(|d| d.to_variant_name(0).to_string())
+					.collect();
 				format_ident!("{}", get_type_rename(&auto_generated_name).unwrap_or(&auto_generated_name))
 			}
 			Self::Combinator(ds, DefCombinatorStyle::AllMustOccur) => {
@@ -205,8 +203,8 @@ impl ToType for Def {
 				vec![quote! { ::css_parse::Optionals![#(#types),*] }]
 			}
 			Self::Combinator(ds, DefCombinatorStyle::AllMustOccur) => {
-				let types = ds.iter().map(|d| d.to_type());
-				vec![quote! { #(#types),* }]
+				let types: Vec<_> = ds.iter().map(|d| d.to_type()).collect();
+				if types.len() == 1 { types } else { vec![quote! { (#(#types),*) }] }
 			}
 			Self::Multiplier(def, DefMultiplierSeparator::Commas, range) => {
 				let ty = def.deref().to_type();
@@ -280,6 +278,34 @@ impl ToType for DefType {
 	}
 }
 
+/// Find Options combinators containing keyword (Ident) children that need helper structs.
+/// Searches: direct Alternatives children, and NoneOr/AutoOr/NormalOr/AutoNoneOr wrappers.
+fn find_options_with_keywords(def: &Def) -> Vec<&Def> {
+	fn is_options_with_keywords(def: &Def) -> bool {
+		if let Def::Combinator(defs, DefCombinatorStyle::Options) = def {
+			defs.iter().any(|d| !matches!(d, Def::Type(_) | Def::StyleValue(_)))
+		} else {
+			false
+		}
+	}
+	fn unwrap_to_options(def: &Def) -> Option<&Def> {
+		match def {
+			Def::Group(inner, _) => unwrap_to_options(inner),
+			d if is_options_with_keywords(d) => Some(d),
+			_ => None,
+		}
+	}
+	match def {
+		Def::Combinator(children, DefCombinatorStyle::Alternatives) => {
+			children.iter().filter_map(unwrap_to_options).collect()
+		}
+		Def::NoneOr(inner) | Def::AutoOr(inner) | Def::NormalOr(inner) | Def::AutoNoneOr(inner) => {
+			unwrap_to_options(inner).into_iter().collect()
+		}
+		_ => vec![],
+	}
+}
+
 impl DefExt for Def {
 	fn single_ident(ident: &Ident) -> Ident {
 		let ident = ident.to_string();
@@ -291,6 +317,12 @@ impl DefExt for Def {
 		let ident = ident.to_string();
 		let ident = ident.strip_prefix("Single").unwrap_or(&ident);
 		format_ident!("{}Keywords", ident)
+	}
+
+	fn options_ident(ident: &Ident) -> Ident {
+		let ident = ident.to_string();
+		let ident = ident.strip_prefix("Single").unwrap_or(&ident);
+		format_ident!("{}Options", ident)
 	}
 
 	fn should_skip_visit(&self) -> bool {
@@ -415,6 +447,18 @@ impl DefExt for Def {
 		}
 	}
 
+	fn rewrite_options_type(&self, replacement: &TokenStream) -> TokenStream {
+		match self {
+			Self::NoneOr(_) => quote! { crate::NoneOr<#replacement> },
+			Self::AutoOr(_) => quote! { crate::AutoOr<#replacement> },
+			Self::NormalOr(_) => quote! { crate::NormalOr<#replacement> },
+			Self::AutoNoneOr(_) => quote! { crate::AutoNoneOr<#replacement> },
+			Self::Group(inner, _) => inner.rewrite_options_type(replacement),
+			Self::Combinator(_, DefCombinatorStyle::Options) => replacement.clone(),
+			_ => self.to_type(),
+		}
+	}
+
 	fn generate_additional_types(&self, vis: &Visibility, ident: &Ident, _generics: &Generics) -> TokenStream {
 		let needs_keyword_type = match self {
 			Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs.iter().any(|def| def.is_all_keywords()),
@@ -509,9 +553,41 @@ impl DefExt for Def {
 		} else {
 			quote! {}
 		};
+		// Generate Options helper structs when Options contains keyword (Ident) children.
+		// Optionals![T![Ident], T![Ident], ...] can't discriminate keywords — a named struct
+		// with #[parse(one_must_occur)] and per-field #[atom] handles this correctly.
+		let options_children = find_options_with_keywords(self);
+		let options_types = if options_children.is_empty() {
+			quote! {}
+		} else {
+			let mut result = quote! {};
+			for (i, inner) in options_children.iter().enumerate() {
+				let opts_ident = if options_children.len() == 1 {
+					Self::options_ident(ident)
+				} else {
+					format_ident!("{}Options{}", ident, i + 1)
+				};
+				let generics = inner.get_generics();
+				let def = inner.generate_definition(vis, &opts_ident, &generics, true, true);
+				result.extend(quote! {
+					#[derive(
+						::csskit_derives::Parse,
+						::csskit_derives::Peek,
+						::csskit_derives::ToSpan,
+						::csskit_derives::ToCursors,
+						::csskit_derives::SemanticEq,
+						Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+					#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+					#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
+					#def
+				});
+			}
+			result
+		};
 		quote! {
 			#keyword_type
 			#single_type
+			#options_types
 		}
 	}
 }
@@ -629,58 +705,105 @@ impl GenerateDefinition for Def {
 						}
 					},
 					_ => {
-						let ty = self.to_types();
-						let attrs = self.type_attributes(derives_parse, derives_visitable);
-						quote! { ( #(#attrs pub #ty),* ); }
+						// Check if this wraps an Options-with-keywords that has a helper struct.
+						let options_children = find_options_with_keywords(self);
+						if !options_children.is_empty() {
+							let opts_ident = Self::options_ident(ident);
+							let opts_generics = options_children[0].get_generics();
+							let ty = self.rewrite_options_type(&quote! { crate::#opts_ident #opts_generics });
+							quote! { ( pub #ty ); }
+						} else {
+							let ty = self.to_types();
+							let attrs = self.type_attributes(derives_parse, derives_visitable);
+							quote! { ( #(#attrs pub #ty),* ); }
+						}
 					}
 				};
 				quote! { #struct_attrs #vis struct #ident #type_generics #where_clause #members }
 			}
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {
+					// Pre-compute which children are Options-with-keywords that have helper structs.
+					let options_indices: Vec<usize> = children
+						.iter()
+						.enumerate()
+						.filter_map(|(i, d)| {
+							let inner = match d {
+								Def::Group(inner, _) => inner.as_ref(),
+								other => other,
+							};
+							if let Def::Combinator(defs, DefCombinatorStyle::Options) = inner {
+								if defs.iter().any(|d| !matches!(d, Def::Type(_) | Def::StyleValue(_))) {
+									Some(i)
+								} else {
+									None
+								}
+							} else {
+								None
+							}
+						})
+						.collect();
+
 					let variants: TokenStream = children
 						.iter()
-						.map(|d| {
+						.enumerate()
+						.map(|(child_idx, d)| {
 							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
 							let name = d.to_variant_name(0);
-							let types = match d {
-								Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
-									.iter()
-									.map(|d| {
-										let ty = d.to_type();
-										let attrs = d.type_attributes(derives_parse, derives_visitable);
-										quote! { #attrs #ty }
-									})
-									.collect(),
-								Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
-									if derives_parse {
-										attrs = Some(quote! { #[parse(all_must_occur)] });
-									}
-									defs.iter()
+							// Check if this child has a generated Options helper struct.
+							let options_helper_idx = options_indices.iter().position(|&i| i == child_idx);
+							let types = if let Some(idx) = options_helper_idx {
+								let opts_ident = if options_indices.len() == 1 {
+									Self::options_ident(ident)
+								} else {
+									format_ident!("{}Options{}", ident, idx + 1)
+								};
+								let inner = match d {
+									Def::Group(inner, _) => inner.as_ref(),
+									other => other,
+								};
+								let generics = inner.get_generics();
+								vec![quote! { crate::#opts_ident #generics }]
+							} else {
+								match d {
+									Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
+										.iter()
 										.map(|d| {
 											let ty = d.to_type();
-											let a = d.type_attributes(derives_parse, derives_visitable);
-											quote! { #a #ty }
+											let attrs = d.type_attributes(derives_parse, derives_visitable);
+											quote! { #attrs #ty }
 										})
-										.collect()
+										.collect(),
+									Self::Combinator(defs, DefCombinatorStyle::AllMustOccur) => {
+										if derives_parse {
+											attrs = Some(quote! { #[parse(all_must_occur)] });
+										}
+										defs.iter()
+											.map(|d| {
+												let ty = d.to_type();
+												let a = d.type_attributes(derives_parse, derives_visitable);
+												quote! { #a #ty }
+											})
+											.collect()
+									}
+									Self::Ident(_) => d.to_types(),
+									Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
+										let attrs = attrs.take().unwrap();
+										let ty = d.to_type();
+										vec![quote! { #attrs #ty }]
+									}
+									Self::Type(_) => {
+										let attrs = attrs.take().unwrap();
+										let ty = d.to_type();
+										vec![quote! { #attrs #ty }]
+									}
+									Self::Optional(inner) if matches!(inner.deref(), Def::Type(_)) => {
+										let attrs = attrs.take().unwrap();
+										let ty = d.to_type();
+										vec![quote! { #attrs #ty }]
+									}
+									_ => d.to_types(),
 								}
-								Self::Ident(_) => d.to_types(),
-								Self::IntLiteral(_) | Self::DimensionLiteral(_, _) => {
-									let attrs = attrs.take().unwrap();
-									let ty = d.to_type();
-									vec![quote! { #attrs #ty }]
-								}
-								Self::Type(_) => {
-									let attrs = attrs.take().unwrap();
-									let ty = d.to_type();
-									vec![quote! { #attrs #ty }]
-								}
-								Self::Optional(inner) if matches!(inner.deref(), Def::Type(_)) => {
-									let attrs = attrs.take().unwrap();
-									let ty = d.to_type();
-									vec![quote! { #attrs #ty }]
-								}
-								_ => d.to_types(),
 							};
 							quote! { #attrs #name(#(#types),*), }
 						})

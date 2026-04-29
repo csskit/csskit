@@ -15621,19 +15621,22 @@ StyleSheet(
                 offset: SourceOffset(10436),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10438),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10440),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10442),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10438),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10440),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Length(Px(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10442),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -13781,19 +13781,22 @@ StyleSheet(
                 offset: SourceOffset(9720),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9722),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9724),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(9726),
-                len: 4,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9722),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9724),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(9726),
+                  len: 4,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -13932,19 +13935,22 @@ StyleSheet(
                 offset: SourceOffset(9799),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9801),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9803),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(9805),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9801),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9803),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(9805),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14083,19 +14089,22 @@ StyleSheet(
                 offset: SourceOffset(9883),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9885),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9887),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(9889),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9885),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9887),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(9889),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14234,19 +14243,22 @@ StyleSheet(
                 offset: SourceOffset(9974),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9976),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(9978),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(9980),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9976),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(9978),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(9980),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14385,19 +14397,22 @@ StyleSheet(
                 offset: SourceOffset(10051),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10053),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10055),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10057),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10053),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10055),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10057),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14536,19 +14551,22 @@ StyleSheet(
                 offset: SourceOffset(10135),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10137),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10139),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10141),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10137),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10139),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10141),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14677,19 +14695,22 @@ StyleSheet(
                 offset: SourceOffset(10221),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10223),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10225),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(10227),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10223),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10225),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(10227),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14841,19 +14862,22 @@ StyleSheet(
                 offset: SourceOffset(10312),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10314),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10316),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10318),
-                len: 9,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10314),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10316),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10318),
+                  len: 9,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -14982,19 +15006,22 @@ StyleSheet(
                 offset: SourceOffset(10399),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10401),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10403),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10405),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10401),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10403),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10405),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15123,19 +15150,22 @@ StyleSheet(
                 offset: SourceOffset(10481),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10483),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10485),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10487),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10483),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10485),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10487),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15264,19 +15294,22 @@ StyleSheet(
                 offset: SourceOffset(10556),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10558),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10560),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10562),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10558),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10560),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10562),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15405,19 +15438,22 @@ StyleSheet(
                 offset: SourceOffset(10645),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10647),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10649),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10651),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10647),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10649),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10651),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15546,19 +15582,22 @@ StyleSheet(
                 offset: SourceOffset(10727),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10729),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10731),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10733),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10729),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10731),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10733),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15687,19 +15726,22 @@ StyleSheet(
                 offset: SourceOffset(10802),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10804),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10806),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10808),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10804),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10806),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10808),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15828,19 +15870,22 @@ StyleSheet(
                 offset: SourceOffset(10891),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10893),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10895),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10897),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10893),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10895),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10897),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -15969,19 +16014,22 @@ StyleSheet(
                 offset: SourceOffset(10973),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10975),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(10977),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(10979),
-                len: 3,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10975),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(10977),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(10979),
+                  len: 3,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -16110,19 +16158,22 @@ StyleSheet(
                 offset: SourceOffset(11049),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(11051),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(11053),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(11055),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(11051),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(11053),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(11055),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -16251,19 +16302,22 @@ StyleSheet(
                 offset: SourceOffset(11139),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(11141),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(11143),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(11145),
-                len: 10,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(11141),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(11143),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(11145),
+                  len: 10,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -16392,19 +16446,22 @@ StyleSheet(
                 offset: SourceOffset(11223),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(11225),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(11227),
-                len: 1,
-              )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                kind: "Dimension",
-                offset: SourceOffset(11229),
-                len: 4,
-              )))))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(11225),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(11227),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(11229),
+                  len: 4,
+                ))))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -18741,19 +18798,22 @@ StyleSheet(
                       offset: SourceOffset(12639),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12641),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12643),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(12645),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12641),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12643),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(12645),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -18892,19 +18952,22 @@ StyleSheet(
                       offset: SourceOffset(12730),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12732),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12734),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(12736),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12732),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12734),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(12736),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19043,19 +19106,22 @@ StyleSheet(
                       offset: SourceOffset(12826),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12828),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12830),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(12832),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12828),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12830),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(12832),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19194,19 +19260,22 @@ StyleSheet(
                       offset: SourceOffset(12929),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12931),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(12933),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(12935),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12931),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(12933),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(12935),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19345,19 +19414,22 @@ StyleSheet(
                       offset: SourceOffset(13018),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13020),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13022),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13024),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13020),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13022),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13024),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19496,19 +19568,22 @@ StyleSheet(
                       offset: SourceOffset(13114),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13116),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13118),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13120),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13116),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13118),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13120),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19637,19 +19712,22 @@ StyleSheet(
                       offset: SourceOffset(13212),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13214),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13216),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(13218),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13214),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13216),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(13218),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19801,19 +19879,22 @@ StyleSheet(
                       offset: SourceOffset(13317),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13319),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13321),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13323),
-                      len: 9,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13319),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13321),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13323),
+                        len: 9,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19942,19 +20023,22 @@ StyleSheet(
                       offset: SourceOffset(13416),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13418),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13420),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13422),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13418),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13420),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13422),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20083,19 +20167,22 @@ StyleSheet(
                       offset: SourceOffset(13510),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13512),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13514),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13516),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13512),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13514),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13516),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20224,19 +20311,22 @@ StyleSheet(
                       offset: SourceOffset(13597),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13599),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13601),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13603),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13599),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13601),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13603),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20365,19 +20455,22 @@ StyleSheet(
                       offset: SourceOffset(13698),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13700),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13702),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13704),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13700),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13702),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13704),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20506,19 +20599,22 @@ StyleSheet(
                       offset: SourceOffset(13792),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13794),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13796),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13798),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13794),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13796),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13798),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20647,19 +20743,22 @@ StyleSheet(
                       offset: SourceOffset(13879),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13881),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13883),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13885),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13881),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13883),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13885),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20788,19 +20887,22 @@ StyleSheet(
                       offset: SourceOffset(13980),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13982),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(13984),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(13986),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13982),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(13984),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(13986),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20929,19 +21031,22 @@ StyleSheet(
                       offset: SourceOffset(14074),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14076),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14078),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(14080),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14076),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14078),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(14080),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -21070,19 +21175,22 @@ StyleSheet(
                       offset: SourceOffset(14162),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14164),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14166),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(14168),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14164),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14166),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(14168),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -21211,19 +21319,22 @@ StyleSheet(
                       offset: SourceOffset(14264),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14266),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14268),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(14270),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14266),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14268),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(14270),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -21352,19 +21463,22 @@ StyleSheet(
                       offset: SourceOffset(14360),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14362),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(14364),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(14366),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14362),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(14364),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(14366),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -23767,19 +23881,22 @@ StyleSheet(
                       offset: SourceOffset(16061),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16063),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16065),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16067),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16063),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16065),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16067),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -23918,19 +24035,22 @@ StyleSheet(
                       offset: SourceOffset(16152),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16154),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16156),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16158),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16154),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16156),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16158),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24069,19 +24189,22 @@ StyleSheet(
                       offset: SourceOffset(16248),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16250),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16252),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16254),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16250),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16252),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16254),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24220,19 +24343,22 @@ StyleSheet(
                       offset: SourceOffset(16351),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16353),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16355),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16357),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16353),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16355),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16357),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24371,19 +24497,22 @@ StyleSheet(
                       offset: SourceOffset(16440),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16442),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16444),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16446),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16442),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16444),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16446),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24522,19 +24651,22 @@ StyleSheet(
                       offset: SourceOffset(16536),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16538),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16540),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16542),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16538),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16540),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16542),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24663,19 +24795,22 @@ StyleSheet(
                       offset: SourceOffset(16634),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16636),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16638),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(16640),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16636),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16638),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(16640),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24827,19 +24962,22 @@ StyleSheet(
                       offset: SourceOffset(16739),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16741),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16743),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16745),
-                      len: 9,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16741),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16743),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16745),
+                        len: 9,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -24968,19 +25106,22 @@ StyleSheet(
                       offset: SourceOffset(16838),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16840),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16842),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16844),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16840),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16842),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16844),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25109,19 +25250,22 @@ StyleSheet(
                       offset: SourceOffset(16932),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16934),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(16936),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(16938),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16934),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(16936),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(16938),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25250,19 +25394,22 @@ StyleSheet(
                       offset: SourceOffset(17019),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17021),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17023),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17025),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17021),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17023),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17025),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25391,19 +25538,22 @@ StyleSheet(
                       offset: SourceOffset(17120),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17122),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17124),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17126),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17122),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17124),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17126),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25532,19 +25682,22 @@ StyleSheet(
                       offset: SourceOffset(17214),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17216),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17218),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17220),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17216),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17218),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17220),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25673,19 +25826,22 @@ StyleSheet(
                       offset: SourceOffset(17301),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17303),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17305),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17307),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17303),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17305),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17307),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25814,19 +25970,22 @@ StyleSheet(
                       offset: SourceOffset(17402),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17404),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17406),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17408),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17404),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17406),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17408),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -25955,19 +26114,22 @@ StyleSheet(
                       offset: SourceOffset(17496),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17498),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17500),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17502),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17498),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17500),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17502),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -26096,19 +26258,22 @@ StyleSheet(
                       offset: SourceOffset(17584),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17586),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17588),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17590),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17586),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17588),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17590),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -26237,19 +26402,22 @@ StyleSheet(
                       offset: SourceOffset(17686),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17688),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17690),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17692),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17688),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17690),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17692),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -26378,19 +26546,22 @@ StyleSheet(
                       offset: SourceOffset(17782),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17784),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(17786),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(17788),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17784),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(17786),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(17788),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -28793,19 +28964,22 @@ StyleSheet(
                       offset: SourceOffset(19483),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19485),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19487),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(19489),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19485),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19487),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19489),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -28944,19 +29118,22 @@ StyleSheet(
                       offset: SourceOffset(19574),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19576),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19578),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(19580),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19576),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19578),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19580),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29095,19 +29272,22 @@ StyleSheet(
                       offset: SourceOffset(19670),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19672),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19674),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(19676),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19672),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19674),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19676),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29246,19 +29426,22 @@ StyleSheet(
                       offset: SourceOffset(19773),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19775),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19777),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(19779),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19775),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19777),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19779),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29397,19 +29580,22 @@ StyleSheet(
                       offset: SourceOffset(19862),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19864),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19866),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(19868),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19864),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19866),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19868),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29548,19 +29734,22 @@ StyleSheet(
                       offset: SourceOffset(19958),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19960),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(19962),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(19964),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19960),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(19962),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(19964),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29689,19 +29878,22 @@ StyleSheet(
                       offset: SourceOffset(20056),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20058),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20060),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(20062),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20058),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20060),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(20062),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29853,19 +30045,22 @@ StyleSheet(
                       offset: SourceOffset(20161),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20163),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20165),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20167),
-                      len: 9,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20163),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20165),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20167),
+                        len: 9,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -29994,19 +30189,22 @@ StyleSheet(
                       offset: SourceOffset(20260),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20262),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20264),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20266),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20262),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20264),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20266),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30135,19 +30333,22 @@ StyleSheet(
                       offset: SourceOffset(20354),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20356),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20358),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20360),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20356),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20358),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20360),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30276,19 +30477,22 @@ StyleSheet(
                       offset: SourceOffset(20441),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20443),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20445),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20447),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20443),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20445),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20447),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30417,19 +30621,22 @@ StyleSheet(
                       offset: SourceOffset(20542),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20544),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20546),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20548),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20544),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20546),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20548),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30558,19 +30765,22 @@ StyleSheet(
                       offset: SourceOffset(20636),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20638),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20640),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20642),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20638),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20640),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20642),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30699,19 +30909,22 @@ StyleSheet(
                       offset: SourceOffset(20723),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20725),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20727),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20729),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20725),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20727),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20729),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30840,19 +31053,22 @@ StyleSheet(
                       offset: SourceOffset(20824),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20826),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20828),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20830),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20826),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20828),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20830),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -30981,19 +31197,22 @@ StyleSheet(
                       offset: SourceOffset(20918),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20920),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(20922),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(20924),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20920),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(20922),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(20924),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -31122,19 +31341,22 @@ StyleSheet(
                       offset: SourceOffset(21006),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(21008),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(21010),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(21012),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(21008),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(21010),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(21012),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -31263,19 +31485,22 @@ StyleSheet(
                       offset: SourceOffset(21108),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(21110),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(21112),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(21114),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(21110),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(21112),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(21114),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -31404,19 +31629,22 @@ StyleSheet(
                       offset: SourceOffset(21204),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(21206),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(21208),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(21210),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(21206),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(21208),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(21210),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -33819,19 +34047,22 @@ StyleSheet(
                       offset: SourceOffset(22906),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(22908),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(22910),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(22912),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(22908),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(22910),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(22912),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -33970,19 +34201,22 @@ StyleSheet(
                       offset: SourceOffset(22997),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(22999),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23001),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23003),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(22999),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23001),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23003),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -34121,19 +34355,22 @@ StyleSheet(
                       offset: SourceOffset(23093),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23095),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23097),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23099),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23095),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23097),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23099),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -34272,19 +34509,22 @@ StyleSheet(
                       offset: SourceOffset(23196),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23198),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23200),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23202),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23198),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23200),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23202),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -34423,19 +34663,22 @@ StyleSheet(
                       offset: SourceOffset(23285),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23287),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23289),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23291),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23287),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23289),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23291),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -34574,19 +34817,22 @@ StyleSheet(
                       offset: SourceOffset(23381),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23383),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23385),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23387),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23383),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23385),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23387),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -34715,19 +34961,22 @@ StyleSheet(
                       offset: SourceOffset(23479),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23481),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23483),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(23485),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23481),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23483),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(23485),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -34879,19 +35128,22 @@ StyleSheet(
                       offset: SourceOffset(23584),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23586),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23588),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23590),
-                      len: 9,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23586),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23588),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23590),
+                        len: 9,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35020,19 +35272,22 @@ StyleSheet(
                       offset: SourceOffset(23683),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23685),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23687),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23689),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23685),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23687),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23689),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35161,19 +35416,22 @@ StyleSheet(
                       offset: SourceOffset(23777),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23779),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23781),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23783),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23779),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23781),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23783),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35302,19 +35560,22 @@ StyleSheet(
                       offset: SourceOffset(23864),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23866),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23868),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23870),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23866),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23868),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23870),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35443,19 +35704,22 @@ StyleSheet(
                       offset: SourceOffset(23965),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23967),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(23969),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(23971),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23967),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(23969),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(23971),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35584,19 +35848,22 @@ StyleSheet(
                       offset: SourceOffset(24059),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24061),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24063),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24065),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24061),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24063),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24065),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35725,19 +35992,22 @@ StyleSheet(
                       offset: SourceOffset(24146),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24148),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24150),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24152),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24148),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24150),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24152),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -35866,19 +36136,22 @@ StyleSheet(
                       offset: SourceOffset(24247),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24249),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24251),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24253),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24249),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24251),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24253),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -36007,19 +36280,22 @@ StyleSheet(
                       offset: SourceOffset(24341),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24343),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24345),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24347),
-                      len: 3,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24343),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24345),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24347),
+                        len: 3,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -36148,19 +36424,22 @@ StyleSheet(
                       offset: SourceOffset(24429),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24431),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24433),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24435),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24431),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24433),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24435),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -36289,19 +36568,22 @@ StyleSheet(
                       offset: SourceOffset(24531),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24533),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24535),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24537),
-                      len: 10,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24533),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24535),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24537),
+                        len: 10,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -36430,19 +36712,22 @@ StyleSheet(
                       offset: SourceOffset(24627),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24629),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(24631),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(24633),
-                      len: 4,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24629),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(24631),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(24633),
+                        len: 4,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -62311,19 +62596,22 @@ StyleSheet(
                       offset: SourceOffset(45186),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45188),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(45190),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(45192),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45188),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(45190),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(45192),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -94240,19 +94528,22 @@ StyleSheet(
                 offset: SourceOffset(66966),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(66968),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(66970),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(66972),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(66968),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(66970),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(66972),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -98285,19 +98576,22 @@ StyleSheet(
                 offset: SourceOffset(69947),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(69949),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(69951),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(69953),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(69949),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(69951),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(69953),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -120454,19 +120748,22 @@ StyleSheet(
                 offset: SourceOffset(88498),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(88500),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(88502),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(88504),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(88500),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(88502),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(88504),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -135130,19 +135427,22 @@ StyleSheet(
                 offset: SourceOffset(100441),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(100443),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(100445),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(100447),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(100443),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(100445),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(100447),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -137736,19 +138036,22 @@ StyleSheet(
                       offset: SourceOffset(102226),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(102228),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(102230),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(102232),
-                      len: 2,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(102228),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(102230),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(102232),
+                        len: 2,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -138227,19 +138530,22 @@ StyleSheet(
                       offset: SourceOffset(102561),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(102563),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(102565),
-                      len: 1,
-                    )))))), Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
-                      kind: "Dimension",
-                      offset: SourceOffset(102567),
-                      len: 2,
-                    )))))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(102563),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(102565),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(102567),
+                        len: 2,
+                      ))))))),
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -152709,11 +153015,14 @@ StyleSheet(
                 offset: SourceOffset(113190),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(113192),
-                len: 1,
-              ))), None)), None))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(113192),
+                  len: 1,
+                ))), None)),
+                flex_basis: None,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -166725,19 +167034,22 @@ StyleSheet(
                 offset: SourceOffset(125465),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(125467),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(125469),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(125471),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(125467),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(125469),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(125471),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -180889,19 +181201,22 @@ StyleSheet(
                 offset: SourceOffset(136719),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(136721),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(136723),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(136725),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(136721),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(136723),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(136725),
+                  len: 4,
+                ))))),
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -194767,19 +195082,22 @@ StyleSheet(
                 offset: SourceOffset(147659),
                 len: 1,
               )),
-              value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(147661),
-                len: 1,
-              ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                kind: "Number",
-                offset: SourceOffset(147663),
-                len: 1,
-              )))))), Some(Width(Auto(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(147665),
-                len: 4,
-              )))))))),
+              value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(147661),
+                  len: 1,
+                ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(147663),
+                  len: 1,
+                )))))),
+                flex_basis: Some(Width(Auto(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(147665),
+                  len: 4,
+                ))))),
+              ))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -198781,19 +199099,22 @@ StyleSheet(
                       offset: SourceOffset(151114),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(151116),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(151118),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(151120),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(151116),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(151118),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(151120),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -202803,19 +203124,22 @@ StyleSheet(
                       offset: SourceOffset(154833),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(154835),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(154837),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(154839),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(154835),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(154837),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(154839),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -206825,19 +207149,22 @@ StyleSheet(
                       offset: SourceOffset(158552),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(158554),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(158556),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(158558),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(158554),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(158556),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(158558),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -210847,19 +211174,22 @@ StyleSheet(
                       offset: SourceOffset(162272),
                       len: 1,
                     )),
-                    value: FlexStyleValue(r#Some(Optionals2(Some((FlexGrowStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(162274),
-                      len: 1,
-                    ))), Some(FlexShrinkStyleValue(Number(Cursor(
-                      kind: "Number",
-                      offset: SourceOffset(162276),
-                      len: 1,
-                    )))))), Some(Width(Auto(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(162278),
-                      len: 4,
-                    )))))))),
+                    value: FlexStyleValue(r#Some(FlexStyleValueOptions(
+                      flex_grow: Some((FlexGrowStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(162274),
+                        len: 1,
+                      ))), Some(FlexShrinkStyleValue(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(162276),
+                        len: 1,
+                      )))))),
+                      flex_basis: Some(Width(Auto(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(162278),
+                        len: 4,
+                      ))))),
+                    ))),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",

@@ -1,0 +1,37 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(
+    ::csskit_derives::Parse,
+    ::csskit_derives::Peek,
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::ToCursors,
+    ::csskit_derives::SemanticEq,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
+#[parse(one_must_occur)]
+struct FooOptions {
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    #[atom(CssAtomSet::Weight)]
+    pub weight: Option<::css_parse::T![Ident]>,
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    #[atom(CssAtomSet::Style)]
+    pub style: Option<::css_parse::T![Ident]>,
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    #[atom(CssAtomSet::SmallCaps)]
+    pub small_caps: Option<::css_parse::T![Ident]>,
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    #[atom(CssAtomSet::Position)]
+    pub position: Option<::css_parse::T![Ident]>,
+}
+#[derive(Parse)]
+struct Foo(pub crate::NoneOr<crate::FooOptions>);

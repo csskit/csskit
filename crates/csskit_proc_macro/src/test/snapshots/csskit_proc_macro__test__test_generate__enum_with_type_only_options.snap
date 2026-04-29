@@ -1,0 +1,11 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+enum Foo {
+    #[atom(CssAtomSet::None)]
+    None(::css_parse::T![Ident]),
+    AnglePercentage(::css_parse::Optionals![crate ::Angle, crate ::Percentage]),
+    Length(crate::Length),
+}
