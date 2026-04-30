@@ -26,8 +26,8 @@ pub enum BlendMode {
 	ColorDodge(T![Ident]),
 	#[atom(CssAtomSet::Overlay)]
 	Overlay(T![Ident]),
-	#[atom(CssAtomSet::SoftLift)]
-	SoftLift(T![Ident]),
+	#[atom(CssAtomSet::SoftLight)]
+	SoftLight(T![Ident]),
 	#[atom(CssAtomSet::HardLight)]
 	HardLight(T![Ident]),
 	#[atom(CssAtomSet::Difference)]
@@ -36,4 +36,10 @@ pub enum BlendMode {
 	Exclusion(T![Ident]),
 	#[atom(CssAtomSet::Hue)]
 	Hue(T![Ident]),
+	#[atom(CssAtomSet::Saturation)]
+	Saturation(T![Ident]),
+	#[atom(CssAtomSet::Color)]
+	Color(T![Ident]),
+	#[atom(CssAtomSet::Luminosity)]
+	Luminosity(T![Ident]),
 }
