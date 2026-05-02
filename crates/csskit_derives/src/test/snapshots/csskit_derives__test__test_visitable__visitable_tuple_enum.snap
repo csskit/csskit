@@ -1,0 +1,32 @@
+---
+source: crates/csskit_derives/src/test/test_visitable.rs
+expression: pretty
+---
+#[automatically_derived]
+impl crate::VisitableMut for Display {
+    fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
+        use crate::VisitableMut;
+        match self {
+            Self::Block(v0) => {
+                v0.accept_mut(v);
+            }
+            Self::Inline(v0) => {
+                v0.accept_mut(v);
+            }
+        }
+    }
+}
+#[automatically_derived]
+impl crate::Visitable for Display {
+    fn accept<V: crate::Visit>(&self, v: &mut V) {
+        use crate::Visitable;
+        match self {
+            Self::Block(v0) => {
+                v0.accept(v);
+            }
+            Self::Inline(v0) => {
+                v0.accept(v);
+            }
+        }
+    }
+}

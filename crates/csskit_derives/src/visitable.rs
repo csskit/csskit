@@ -2,7 +2,8 @@ use heck::ToSnakeCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{
-	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Ident, Meta, parse::Parse, parse_quote, token::SelfValue,
+	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Ident, Meta, parse::Parse, parse_quote,
+	token::SelfValue,
 };
 
 use crate::{WhereCollector, err};
@@ -108,26 +109,48 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					.iter()
 					.map(|variant| {
 						let variant_ident = &variant.ident;
-						let (members, steps): (Vec<_>, Vec<_>) = variant
-							.fields
-							.iter()
-							.enumerate()
-							.map(|(i, field)| {
-								if Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip
-									|| Into::<VisitStyle>::into(&variant.attrs) == VisitStyle::Skip
-								{
-									(format_ident!("_"), quote! {})
-								} else {
-									let ident = format_ident!("v{}", i);
-									where_collector.add(&field.ty);
-									(ident.clone(), quote! { #ident.#accept(v) })
+						let skip_variant = Into::<VisitStyle>::into(&variant.attrs) == VisitStyle::Skip;
+						match &variant.fields {
+							Fields::Named(fields) => {
+								let (bindings, steps): (Vec<_>, Vec<_>) = fields
+									.named
+									.iter()
+									.map(|field| {
+										let fname = field.ident.as_ref().unwrap();
+										let binding = format_ident!("f_{}", fname);
+										if skip_variant || Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip {
+											(quote! { #fname: _ }, quote! {})
+										} else {
+											where_collector.add(&field.ty);
+											(quote! { #fname: #binding }, quote! { #binding.#accept(v) })
+										}
+									})
+									.unzip();
+								quote! {
+									Self::#variant_ident { #(#bindings),* } => { #(#steps;)* },
 								}
-							})
-							.collect::<Vec<_>>()
-							.into_iter()
-							.unzip();
-						quote! {
-							Self::#variant_ident(#(#members),*) => { #(#steps;)* },
+							}
+							_ => {
+								let (members, steps): (Vec<_>, Vec<_>) = variant
+									.fields
+									.iter()
+									.enumerate()
+									.map(|(i, field)| {
+										if skip_variant || Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip {
+											(format_ident!("_"), quote! {})
+										} else {
+											let ident = format_ident!("v{}", i);
+											where_collector.add(&field.ty);
+											(ident.clone(), quote! { #ident.#accept(v) })
+										}
+									})
+									.collect::<Vec<_>>()
+									.into_iter()
+									.unzip();
+								quote! {
+									Self::#variant_ident(#(#members),*) => { #(#steps;)* },
+								}
+							}
 						}
 					})
 					.collect();

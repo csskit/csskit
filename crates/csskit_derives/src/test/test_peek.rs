@@ -99,3 +99,28 @@ fn peek_enum_with_lifetime() {
 	};
 	assert_peek_snapshot!(data, "peek_enum_with_lifetime");
 }
+
+#[test]
+fn peek_enum_struct_variant_one_must_occur() {
+	let data = to_deriveinput! {
+		enum FlexWrap {
+			#[atom(FooAtoms::Nowrap)]
+			Nowrap(Ident),
+			#[parse(one_must_occur)]
+			Wrap {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::Balance)]
+				balance: Option<Ident>,
+			},
+			#[parse(one_must_occur)]
+			WrapReverse {
+				#[atom(FooAtoms::WrapReverse)]
+				wrap_reverse: Option<Ident>,
+				#[atom(FooAtoms::Balance)]
+				balance: Option<Ident>,
+			},
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_struct_variant_one_must_occur");
+}

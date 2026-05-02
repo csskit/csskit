@@ -48,21 +48,41 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			let mut steps = vec![];
 			for var in variants {
 				let var_ident = var.ident;
-				let mut idents = vec![];
-				let field_steps: Vec<_> = var
-					.fields
-					.into_iter()
-					.enumerate()
-					.map(|(i, field)| {
-						where_collector.add(&field.ty);
-						let ident = format_ident!("v{}", i);
-						idents.push(ident.clone());
-						quote! { ToCursors::to_cursors(#ident, s); }
-					})
-					.collect();
-				steps.push(quote! {
-					Self::#var_ident(#(#idents),*) => { #(#field_steps)* }
-				});
+				match var.fields {
+					Fields::Named(fields) => {
+						let field_idents: Vec<_> =
+							fields.named.iter().map(|f| f.ident.as_ref().unwrap().clone()).collect();
+						let field_steps: Vec<_> = fields
+							.named
+							.iter()
+							.map(|field| {
+								where_collector.add(&field.ty);
+								let fid = field.ident.as_ref().unwrap();
+								quote! { ToCursors::to_cursors(#fid, s); }
+							})
+							.collect();
+						steps.push(quote! {
+							Self::#var_ident { #(#field_idents),* } => { #(#field_steps)* }
+						});
+					}
+					_ => {
+						let mut idents = vec![];
+						let field_steps: Vec<_> = var
+							.fields
+							.into_iter()
+							.enumerate()
+							.map(|(i, field)| {
+								where_collector.add(&field.ty);
+								let ident = format_ident!("v{}", i);
+								idents.push(ident.clone());
+								quote! { ToCursors::to_cursors(#ident, s); }
+							})
+							.collect();
+						steps.push(quote! {
+							Self::#var_ident(#(#idents),*) => { #(#field_steps)* }
+						});
+					}
+				}
 			}
 			quote! {
 				match self {

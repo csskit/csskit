@@ -10,9 +10,9 @@ impl<'a> ::css_parse::ToCursors for CssValue<'a> {
             Self::Keyword(v0) => {
                 ToCursors::to_cursors(v0, s);
             }
-            Self::Function(v0, v1) => {
-                ToCursors::to_cursors(v0, s);
-                ToCursors::to_cursors(v1, s);
+            Self::Function { name, args } => {
+                ToCursors::to_cursors(name, s);
+                ToCursors::to_cursors(args, s);
             }
         }
     }

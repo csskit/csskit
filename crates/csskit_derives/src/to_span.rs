@@ -2,7 +2,7 @@ use crate::{TypeIsOption, WhereCollector, err};
 use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, parse_quote};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, parse_quote};
 
 pub fn derive(input: DeriveInput) -> TokenStream {
 	let mut where_collector = WhereCollector::new();
@@ -80,12 +80,30 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					for field in variant.fields.iter() {
 						where_collector.add(&field.ty);
 					}
-					if len == 1 {
-						quote! { #ident::#variant_ident(val) => val.to_span(), }
-					} else {
-						let rest = (2..len).map(|_| quote! { _ }).chain([quote! {last}]);
-						quote! {
-							#ident::#variant_ident(first, #(#rest),*) => first.to_span() + last.to_span(),
+					match &variant.fields {
+						Fields::Named(fields) => {
+							let field_idents: Vec<_> = fields.named.iter().map(|f| f.ident.as_ref().unwrap()).collect();
+							if len == 1 {
+								let fid = field_idents[0];
+								quote! { #ident::#variant_ident { #fid: val } => val.to_span(), }
+							} else {
+								let first = field_idents[0];
+								let last = field_idents[len - 1];
+								let rest_pats = field_idents[1..len - 1].iter().map(|f| quote! { #f: _ });
+								quote! {
+									#ident::#variant_ident { #first: first, #(#rest_pats,)* #last: last } => first.to_span() + last.to_span(),
+								}
+							}
+						}
+						_ => {
+							if len == 1 {
+								quote! { #ident::#variant_ident(val) => val.to_span(), }
+							} else {
+								let rest = (2..len).map(|_| quote! { _ }).chain([quote! {last}]);
+								quote! {
+									#ident::#variant_ident(first, #(#rest),*) => first.to_span() + last.to_span(),
+								}
+							}
 						}
 					}
 				})

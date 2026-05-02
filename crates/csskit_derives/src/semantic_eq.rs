@@ -48,24 +48,57 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 			let mut steps = vec![];
 			for var in variants {
 				let var_ident = var.ident;
-				let mut a_idents = vec![];
-				let mut b_idents = vec![];
-				let field_steps: Vec<_> = var
-					.fields
-					.into_iter()
-					.enumerate()
-					.map(|(i, field)| {
-						where_collector.add(&field.ty);
-						let a_ident = format_ident!("a{}", i);
-						a_idents.push(a_ident.clone());
-						let b_ident = format_ident!("b{}", i);
-						b_idents.push(b_ident.clone());
-						quote! { #a_ident.semantic_eq(&#b_ident) }
-					})
-					.collect();
-				steps.push(quote! {
-					(Self::#var_ident(#(#a_idents),*), Self::#var_ident(#(#b_idents),*)) => { #(#field_steps)&&* }
-				});
+				match var.fields {
+					Fields::Named(fields) => {
+						let a_idents: Vec<_> =
+							fields.named.iter().map(|f| format_ident!("a_{}", f.ident.as_ref().unwrap())).collect();
+						let b_idents: Vec<_> =
+							fields.named.iter().map(|f| format_ident!("b_{}", f.ident.as_ref().unwrap())).collect();
+						let field_names: Vec<_> =
+							fields.named.iter().map(|f| f.ident.as_ref().unwrap().clone()).collect();
+						let field_steps: Vec<_> = fields
+							.named
+							.iter()
+							.zip(a_idents.iter().zip(b_idents.iter()))
+							.map(|(field, (a_ident, b_ident))| {
+								where_collector.add(&field.ty);
+								quote! { #a_ident.semantic_eq(&#b_ident) }
+							})
+							.collect();
+						let a_pats =
+							field_names.iter().zip(a_idents.iter()).map(|(fname, aname)| quote! { #fname: #aname });
+						let b_pats =
+							field_names.iter().zip(b_idents.iter()).map(|(fname, bname)| quote! { #fname: #bname });
+						let body = if field_steps.is_empty() {
+							quote! { true }
+						} else {
+							quote! { #(#field_steps)&&* }
+						};
+						steps.push(quote! {
+							(Self::#var_ident { #(#a_pats),* }, Self::#var_ident { #(#b_pats),* }) => { #body }
+						});
+					}
+					_ => {
+						let mut a_idents = vec![];
+						let mut b_idents = vec![];
+						let field_steps: Vec<_> = var
+							.fields
+							.into_iter()
+							.enumerate()
+							.map(|(i, field)| {
+								where_collector.add(&field.ty);
+								let a_ident = format_ident!("a{}", i);
+								a_idents.push(a_ident.clone());
+								let b_ident = format_ident!("b{}", i);
+								b_idents.push(b_ident.clone());
+								quote! { #a_ident.semantic_eq(&#b_ident) }
+							})
+							.collect();
+						steps.push(quote! {
+							(Self::#var_ident(#(#a_idents),*), Self::#var_ident(#(#b_idents),*)) => { #(#field_steps)&&* }
+						});
+					}
+				}
 			}
 			quote! {
 				match (self, other) {

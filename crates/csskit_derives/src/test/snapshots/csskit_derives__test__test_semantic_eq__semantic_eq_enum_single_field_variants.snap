@@ -1,0 +1,16 @@
+---
+source: crates/csskit_derives/src/test/test_semantic_eq.rs
+expression: pretty
+---
+#[automatically_derived]
+impl ::css_parse::SemanticEq for Display {
+    fn semantic_eq(&self, other: &Self) -> bool {
+        use ::css_parse::SemanticEq;
+        match (self, other) {
+            (Self::Block(a0), Self::Block(b0)) => a0.semantic_eq(&b0),
+            (Self::Inline(a0), Self::Inline(b0)) => a0.semantic_eq(&b0),
+            (Self::None(a0), Self::None(b0)) => a0.semantic_eq(&b0),
+            _ => false,
+        }
+    }
+}

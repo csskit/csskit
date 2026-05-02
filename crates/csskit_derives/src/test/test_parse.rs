@@ -434,3 +434,46 @@ fn parse_enum_variant_with_keyword_variants_or_type() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_variant_with_keyword_variants_or_type");
 }
+
+#[test]
+fn parse_enum_struct_variant_one_must_occur() {
+	let data = to_deriveinput! {
+		enum FlexWrap {
+			#[atom(FooAtoms::Nowrap)]
+			Nowrap(Ident),
+			#[parse(one_must_occur)]
+			Wrap {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::Balance)]
+				balance: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_struct_variant_one_must_occur");
+}
+
+#[test]
+fn parse_enum_struct_variants_one_must_occur_siblings() {
+	let data = to_deriveinput! {
+		enum FlexWrap {
+			#[atom(FooAtoms::Nowrap)]
+			Nowrap(Ident),
+			#[parse(one_must_occur)]
+			Wrap {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::Balance)]
+				balance: Option<Ident>,
+			},
+			#[parse(one_must_occur)]
+			WrapReverse {
+				#[atom(FooAtoms::WrapReverse)]
+				wrap_reverse: Option<Ident>,
+				#[atom(FooAtoms::Balance)]
+				balance: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_struct_variants_one_must_occur_siblings");
+}

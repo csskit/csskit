@@ -1,0 +1,16 @@
+---
+source: crates/csskit_derives/src/test/test_to_span.rs
+expression: pretty
+---
+#[automatically_derived]
+impl ::css_parse::ToSpan for BorderStyle {
+    fn to_span(&self) -> ::css_parse::Span {
+        use ::css_parse::{Span, ToSpan};
+        match self {
+            BorderStyle::Solid(first, last) => first.to_span() + last.to_span(),
+            BorderStyle::Dotted { radius: first, spacing: last } => {
+                first.to_span() + last.to_span()
+            }
+        }
+    }
+}

@@ -1,0 +1,17 @@
+---
+source: crates/csskit_derives/src/test/test_semantic_eq.rs
+expression: pretty
+---
+#[automatically_derived]
+impl ::css_parse::SemanticEq for BorderStyle {
+    fn semantic_eq(&self, other: &Self) -> bool {
+        use ::css_parse::SemanticEq;
+        match (self, other) {
+            (Self::Solid(), Self::Solid()) => {}
+            (Self::Dashed { width: a_width }, Self::Dashed { width: b_width }) => {
+                a_width.semantic_eq(&b_width)
+            }
+            _ => false,
+        }
+    }
+}

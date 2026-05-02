@@ -1,0 +1,19 @@
+---
+source: crates/csskit_derives/src/test/test_to_span.rs
+expression: pretty
+---
+#[automatically_derived]
+impl ::css_parse::ToSpan for FlexWrap {
+    fn to_span(&self) -> ::css_parse::Span {
+        use ::css_parse::{Span, ToSpan};
+        match self {
+            FlexWrap::Nowrap(val) => val.to_span(),
+            FlexWrap::Wrap { wrap: first, balance: last } => {
+                first.to_span() + last.to_span()
+            }
+            FlexWrap::WrapReverse { wrap_reverse: first, balance: last } => {
+                first.to_span() + last.to_span()
+            }
+        }
+    }
+}

@@ -421,6 +421,10 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 
 					let effective_atom = if let Some(variant_atom) = atom {
 						Some(variant_atom)
+					} else if parse_mode == FieldParseMode::OneMustOccur
+						&& split_fields.iter().all(|(_, ty, _, _)| ty.is_option())
+					{
+						None
 					} else {
 						variant.fields.iter().next().and_then(|field| extract_atom(&field.attrs))
 					};

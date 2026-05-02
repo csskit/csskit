@@ -2,7 +2,7 @@ use heck::ToKebabCase;
 use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, quote};
 use std::fmt::Display;
-use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, LitStr, Meta, Result, parse::Parse};
+use syn::{Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Fields, LitStr, Meta, Result, parse::Parse};
 
 use crate::err;
 
@@ -72,17 +72,28 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					.iter()
 					.map(|variant| {
 						let variant_ident = &variant.ident;
-						let members = variant.fields.members().map(|_| quote! { _ });
+						let pattern = match &variant.fields {
+							Fields::Named(fields) => {
+								let ignores = fields.named.iter().map(|f| {
+									let fname = f.ident.as_ref().unwrap();
+									quote! { #fname: _ }
+								});
+								quote! { Self::#variant_ident { #(#ignores),* } }
+							}
+							_ => {
+								let members = variant.fields.members().map(|_| quote! { _ });
+								quote! { Self::#variant_ident(#(#members),*) }
+							}
+						};
 						if let Ok(feature) = TryInto::<CSSFeatureName>::try_into(&variant.attrs) {
 							let step = by_feature_name(feature.to_string());
-							quote! { Self::#variant_ident(#(#members),*) => { #step }, }
+							quote! { #pattern => { #step }, }
 						} else {
-							// enum candidates are very likely to be candidates for their own feature name, so just try guessing:
 							let str = feature.to_string();
 							let guessed_step =
 								by_feature_name(format!("{}.{}", str, variant_ident.to_string().to_kebab_case()));
 							let or_step = by_feature_name(feature.to_string());
-							quote! { Self::#variant_ident(#(#members),*) => { #guessed_step.or_else(|| #or_step) }, }
+							quote! { #pattern => { #guessed_step.or_else(|| #or_step) }, }
 						}
 					})
 					.collect::<Vec<_>>();

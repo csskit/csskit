@@ -1,0 +1,12 @@
+---
+source: crates/csskit_derives/src/test/test_to_span.rs
+expression: pretty
+---
+#[automatically_derived]
+impl ::css_parse::ToSpan for Range {
+    fn to_span(&self) -> ::css_parse::Span {
+        use ::css_parse::{Span, ToSpan};
+        let first = self.0.to_span();
+        first + self.1.to_span()
+    }
+}
