@@ -3,6 +3,14 @@
 # Each entry maps a property name to a string that will be appended to its grammar.
 # For example, the sizing spec adds " | stretch | fit-content | contain" to width.
 
+[ruby]
+# https://drafts.csswg.org/css-ruby-1/#ruby-overhang
+# Spec grammar is `auto | spaces` but UAs must also accept `none` as a legacy
+# compat value (Chromium source: RubyOverhang::ParseSingleValue). We preserve
+# `none` as-is in the AST rather than silently aliasing to `spaces`, since this
+# is a build tool that serialises per author intent.
+ruby-overhang = " | none"
+
 [sizing]
 # https://drafts.csswg.org/css-sizing-4/#sizing-values
 width = " | stretch | fit-content | contain"

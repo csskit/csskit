@@ -45,6 +45,7 @@ mod tests {
 	#[test]
 	fn test_ruby_overhang_writes() {
 		assert_parse!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "spaces");
 	}
 
