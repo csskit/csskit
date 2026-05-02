@@ -20,5 +20,6 @@ mod tests {
 	fn test_page_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, PageStyleValue, "not valid");
 		assert_parse_error!(CssAtomSet::ATOMS, PageStyleValue, "123px");
+		assert_parse_error!(CssAtomSet::ATOMS, PageStyleValue, "default");
 	}
 }
