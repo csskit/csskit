@@ -37,6 +37,7 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, BorderCollapseStyleValue, "separate collapse");
 
 		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "10%");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "-20px");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "30");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "40px 50px 60px");
 
