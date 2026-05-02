@@ -236,12 +236,16 @@ fn generate_must_occur_parsing(
 	where_collector: &mut WhereCollector,
 ) -> TokenStream {
 	let mut atom_binding = None;
+	let mut atom_set_ty = None;
 	let bindings: Vec<TokenStream> = split_fields
 		.iter()
 		.map(|(var, ty, _, atom)| {
 			if atom.is_some() && atom_binding.is_none() {
-				let atom = atom.as_ref().unwrap().to_atom(format_ident!("c"));
-				atom_binding = Some(quote! { let atom = #atom; });
+				let a = atom.as_ref().unwrap();
+				let atom_expr = a.to_atom(format_ident!("c"));
+				let atom_set = a.first_segment();
+				atom_set_ty = Some(atom_set.clone());
+				atom_binding = Some(quote! { let atom = #atom_expr; });
 			}
 			if ty.is_option() {
 				quote! { let mut #var: #ty = None; }
@@ -269,11 +273,22 @@ fn generate_must_occur_parsing(
 		FieldParseMode::AllMustOccur => quote! { #(#checks)||* },
 	};
 
+	let atom_binding_guarded = if let Some(atom_set) = atom_set_ty {
+		quote! {
+			let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+				p.to_atom::<#atom_set>(c)
+			} else {
+				<#atom_set>::default()
+			};
+		}
+	} else {
+		quote! { #atom_binding }
+	};
 	quote! {
 	  #(#bindings)*
 	  loop {
 			let c = p.peek_n(1);
-			#atom_binding
+			#atom_binding_guarded
 			#(#parse_steps)*
 			break;
 	  }

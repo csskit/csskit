@@ -24,7 +24,11 @@ impl<'a> ::css_parse::Parse<'a> for FlexWrap {
             let mut balance: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = p.to_atom::<FooAtoms>(c);
+                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+                    p.to_atom::<FooAtoms>(c)
+                } else {
+                    <FooAtoms>::default()
+                };
                 if wrap.is_none() && atom == FooAtoms::Wrap {
                     wrap = Some(p.parse::<Ident>()?);
                     continue;
