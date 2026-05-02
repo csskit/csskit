@@ -6693,11 +6693,14 @@ StyleSheet(
                   offset: SourceOffset(4717),
                   len: 3,
                 )))),
-                flex_wrap: Some(Wrap(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(4721),
-                  len: 4,
-                )))),
+                flex_wrap: Some(Wrap(
+                  wrap: Some(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(4721),
+                    len: 4,
+                  ))),
+                  balance: None,
+                )),
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -41082,11 +41085,14 @@ StyleSheet(
                   offset: SourceOffset(28563),
                   len: 3,
                 )))),
-                flex_wrap: Some(Wrap(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(28567),
-                  len: 4,
-                )))),
+                flex_wrap: Some(Wrap(
+                  wrap: Some(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(28567),
+                    len: 4,
+                  ))),
+                  balance: None,
+                )),
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -41477,11 +41483,14 @@ StyleSheet(
                   offset: SourceOffset(28812),
                   len: 3,
                 )))),
-                flex_wrap: Some(Wrap(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(28816),
-                  len: 4,
-                )))),
+                flex_wrap: Some(Wrap(
+                  wrap: Some(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(28816),
+                    len: 4,
+                  ))),
+                  balance: None,
+                )),
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -42996,11 +43005,14 @@ StyleSheet(
                   offset: SourceOffset(29828),
                   len: 3,
                 )))),
-                flex_wrap: Some(Wrap(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(29832),
-                  len: 4,
-                )))),
+                flex_wrap: Some(Wrap(
+                  wrap: Some(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(29832),
+                    len: 4,
+                  ))),
+                  balance: None,
+                )),
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(

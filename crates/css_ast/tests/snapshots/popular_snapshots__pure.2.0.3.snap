@@ -3919,11 +3919,14 @@ StyleSheet(
                   offset: SourceOffset(8426),
                   len: 3,
                 )))),
-                flex_wrap: Some(Wrap(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(8430),
-                  len: 4,
-                )))),
+                flex_wrap: Some(Wrap(
+                  wrap: Some(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(8430),
+                    len: 4,
+                  ))),
+                  balance: None,
+                )),
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(

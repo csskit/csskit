@@ -1,7 +1,7 @@
 #[cfg(test)]
 mod tests {
 	use super::super::*;
-	use crate::CssAtomSet;
+	use crate::{ColumnGapStyleValue, CssAtomSet, GapStyleValue, RowGapStyleValue};
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]

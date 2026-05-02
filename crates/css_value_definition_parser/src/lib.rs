@@ -330,6 +330,7 @@ impl Def {
 				matches!(
 					ty.ident_str(),
 					"BorderBlockStart"
+						| "BorderImageSource"
 						| "BorderTopColor" | "CaretColor"
 						| "ColumnRuleWidth"
 						| "DynamicRangeLimit"

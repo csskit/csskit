@@ -7,8 +7,8 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<FlexDirectionStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<FlexWrapStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<FlexFlowStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<FlexWrapStyleValue>(), 36);
+		assert_eq!(std::mem::size_of::<FlexFlowStyleValue>(), 52);
 		assert_eq!(std::mem::size_of::<FlexStyleValue>(), 68);
 		assert_eq!(std::mem::size_of::<FlexGrowStyleValue>(), 12);
 		assert_eq!(std::mem::size_of::<FlexShrinkStyleValue>(), 12);

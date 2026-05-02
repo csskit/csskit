@@ -6,6 +6,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
+		assert_eq!(std::mem::size_of::<RowGapStyleValue>(), 20);
+		assert_eq!(std::mem::size_of::<ColumnGapStyleValue>(), 20);
+		assert_eq!(std::mem::size_of::<GapStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ColumnRuleColorStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<ColumnRuleStyleStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<ColumnRuleWidthStyleValue>(), 152);
@@ -22,6 +25,9 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(CssAtomSet::ATOMS, RowGapStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, ColumnGapStyleValue, "1px");
+		assert_parse!(CssAtomSet::ATOMS, GapStyleValue, "normal 1px");
 		assert_parse!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "1px solid red");
 		assert_parse!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "1px solid red, repeat(2, 2px dashed green)");
 		assert_parse!(CssAtomSet::ATOMS, ColumnRuleStyleValue, "repeat(auto, 1px solid red)");

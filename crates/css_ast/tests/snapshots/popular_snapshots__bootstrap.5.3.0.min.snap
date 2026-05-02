@@ -18508,11 +18508,14 @@ StyleSheet(
                 offset: SourceOffset(12392),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(12393),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(12393),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -65892,11 +65895,14 @@ StyleSheet(
                 offset: SourceOffset(43508),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(43509),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(43509),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -100362,11 +100368,14 @@ StyleSheet(
                 offset: SourceOffset(70931),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(70932),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(70932),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -103066,11 +103075,14 @@ StyleSheet(
                 offset: SourceOffset(72880),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(72881),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(72881),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -108292,11 +108304,14 @@ StyleSheet(
                 offset: SourceOffset(77549),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(77550),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(77550),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -123642,11 +123657,14 @@ StyleSheet(
                         offset: SourceOffset(89698),
                         len: 3,
                       )))),
-                      flex_wrap: Some(Wrap(Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(89702),
-                        len: 4,
-                      )))),
+                      flex_wrap: Some(Wrap(
+                        wrap: Some(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(89702),
+                          len: 4,
+                        ))),
+                        balance: None,
+                      )),
                     ),
                     important: None,
                     semicolon: None,
@@ -129794,11 +129812,14 @@ StyleSheet(
                 offset: SourceOffset(96083),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(96084),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(96084),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -157898,11 +157919,14 @@ StyleSheet(
                 offset: SourceOffset(122678),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(122679),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(122679),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -220433,11 +220457,14 @@ StyleSheet(
                 offset: SourceOffset(168072),
                 len: 1,
               )),
-              value: Wrap(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(168073),
-                len: 4,
-              ))),
+              value: Wrap(
+                wrap: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(168073),
+                  len: 4,
+                ))),
+                balance: None,
+              ),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -220563,11 +220590,14 @@ StyleSheet(
                 offset: SourceOffset(168156),
                 len: 1,
               )),
-              value: WrapReverse(Ident(Cursor(
-                kind: "Ident",
-                offset: SourceOffset(168157),
-                len: 12,
-              ))),
+              value: WrapReverse(
+                wrap_reverse: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(168157),
+                  len: 12,
+                ))),
+                balance: None,
+              ),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -252236,11 +252266,14 @@ StyleSheet(
                       offset: SourceOffset(191204),
                       len: 1,
                     )),
-                    value: Wrap(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(191205),
-                      len: 4,
-                    ))),
+                    value: Wrap(
+                      wrap: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(191205),
+                        len: 4,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -252366,11 +252399,14 @@ StyleSheet(
                       offset: SourceOffset(191294),
                       len: 1,
                     )),
-                    value: WrapReverse(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(191295),
-                      len: 12,
-                    ))),
+                    value: WrapReverse(
+                      wrap_reverse: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(191295),
+                        len: 12,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -264993,11 +265029,14 @@ StyleSheet(
                       offset: SourceOffset(199341),
                       len: 1,
                     )),
-                    value: Wrap(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(199342),
-                      len: 4,
-                    ))),
+                    value: Wrap(
+                      wrap: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(199342),
+                        len: 4,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -265123,11 +265162,14 @@ StyleSheet(
                       offset: SourceOffset(199431),
                       len: 1,
                     )),
-                    value: WrapReverse(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(199432),
-                      len: 12,
-                    ))),
+                    value: WrapReverse(
+                      wrap_reverse: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(199432),
+                        len: 12,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277750,11 +277792,14 @@ StyleSheet(
                       offset: SourceOffset(207478),
                       len: 1,
                     )),
-                    value: Wrap(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(207479),
-                      len: 4,
-                    ))),
+                    value: Wrap(
+                      wrap: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(207479),
+                        len: 4,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -277880,11 +277925,14 @@ StyleSheet(
                       offset: SourceOffset(207568),
                       len: 1,
                     )),
-                    value: WrapReverse(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(207569),
-                      len: 12,
-                    ))),
+                    value: WrapReverse(
+                      wrap_reverse: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(207569),
+                        len: 12,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290507,11 +290555,14 @@ StyleSheet(
                       offset: SourceOffset(215616),
                       len: 1,
                     )),
-                    value: Wrap(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(215617),
-                      len: 4,
-                    ))),
+                    value: Wrap(
+                      wrap: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(215617),
+                        len: 4,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -290637,11 +290688,14 @@ StyleSheet(
                       offset: SourceOffset(215706),
                       len: 1,
                     )),
-                    value: WrapReverse(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(215707),
-                      len: 12,
-                    ))),
+                    value: WrapReverse(
+                      wrap_reverse: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(215707),
+                        len: 12,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303264,11 +303318,14 @@ StyleSheet(
                       offset: SourceOffset(223783),
                       len: 1,
                     )),
-                    value: Wrap(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(223784),
-                      len: 4,
-                    ))),
+                    value: Wrap(
+                      wrap: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(223784),
+                        len: 4,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",
@@ -303394,11 +303451,14 @@ StyleSheet(
                       offset: SourceOffset(223875),
                       len: 1,
                     )),
-                    value: WrapReverse(Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(223876),
-                      len: 12,
-                    ))),
+                    value: WrapReverse(
+                      wrap_reverse: Some(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(223876),
+                        len: 12,
+                      ))),
+                      balance: None,
+                    ),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
                         kind: "Delim",

@@ -6624,11 +6624,14 @@ StyleSheet(
                   offset: SourceOffset(4250),
                   len: 3,
                 )))),
-                flex_wrap: Some(Wrap(Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(4254),
-                  len: 4,
-                )))),
+                flex_wrap: Some(Wrap(
+                  wrap: Some(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(4254),
+                    len: 4,
+                  ))),
+                  balance: None,
+                )),
               ),
               important: None,
               semicolon: None,
