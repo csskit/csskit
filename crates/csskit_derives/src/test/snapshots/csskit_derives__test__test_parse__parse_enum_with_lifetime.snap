@@ -13,9 +13,21 @@ impl<'a> ::css_parse::Parse<'a> for CssValue<'a> {
             let f0 = p.parse::<Length>()?;
             return Ok(Self::Length { 0: f0 });
         }
-        {
+        if p.peek::<String>() {
             let f0 = p.parse::<String>()?;
             return Ok(Self::Keyword { 0: f0 });
+        }
+        if p.peek::<String>() {
+            let name = p.parse::<String>()?;
+            let args = p.parse::<Vec<String>>()?;
+            return Ok(Self::Function {
+                name: name,
+                args: args,
+            });
+        } else {
+            return Err(
+                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+            )?;
         }
     }
 }

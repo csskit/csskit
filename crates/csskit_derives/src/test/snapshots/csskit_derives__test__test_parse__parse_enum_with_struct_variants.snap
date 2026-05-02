@@ -13,9 +13,17 @@ impl<'a> ::css_parse::Parse<'a> for BorderStyle {
             let f0 = p.parse::<Ident>()?;
             return Ok(Self::Solid { 0: f0 });
         }
-        {
+        if p.peek::<Length>() {
             let width = p.parse::<Length>()?;
             return Ok(Self::Dashed { width: width });
+        }
+        if p.peek::<Length>() {
+            let radius = p.parse::<Length>()?;
+            return Ok(Self::Dotted { radius: radius });
+        } else {
+            return Err(
+                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+            )?;
         }
     }
 }

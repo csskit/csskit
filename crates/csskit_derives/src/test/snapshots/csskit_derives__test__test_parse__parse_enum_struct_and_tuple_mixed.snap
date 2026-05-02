@@ -17,6 +17,11 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
             let f0 = p.parse::<Length>()?;
             return Ok(Self::Length { 0: f0 });
         }
+        if p.peek::<Length>() {
+            let min = p.parse::<Length>()?;
+            let max = p.parse::<Length>()?;
+            return Ok(Self::MinMax { min: min, max: max });
+        }
         if p.peek::<Percentage>() {
             let f0 = p.parse::<Percentage>()?;
             return Ok(Self::Percentage { 0: f0 });

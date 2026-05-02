@@ -227,6 +227,9 @@ fn generate_normal_parsing(
 	}
 }
 
+/// Generate a pre-loop that parses shared fields before variant discrimination.
+/// `shared_fields` are fields present in all sibling variants (same atom path).
+/// Returns `(binding_decls, loop_body)` so callers can emit them before the variant dispatch.
 fn generate_must_occur_parsing(
 	split_fields: &[(Ident, Type, ParseArg, Option<Atom>)],
 	members: Vec<TokenStream>,
@@ -426,7 +429,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						let constructor = quote! { Self::#variant_ident };
 						generate_must_occur_parsing(
 							&split_fields,
-							members,
+							members.clone(),
 							&post_parse_steps,
 							parse_mode,
 							constructor,
@@ -444,15 +447,18 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 						variant.fields.iter().next().and_then(|field| extract_atom(&field.attrs))
 					};
 
-					(first_type, effective_atom, step, split_fields)
+					// Store variant_ident, members, parse_mode alongside so the sibling block can
+					// regenerate steps with hoisted vars when needed.
+					let variant_ident_ts = quote! { #variant_ident };
+					(first_type, effective_atom, step, split_fields, variant_ident_ts, members, parse_mode)
 				})
 				.collect();
 
 			// Group by first type and atom status to separate atom variants from non-atom variants of the same type
 			let grouped_variants = variant_data
 				.into_iter()
-				.sorted_by_key(|(ty, atom, _, _)| (quote!(#ty).to_string(), atom.is_none()))
-				.chunk_by(|(ty, atom, _, _)| (quote!(#ty).to_string(), atom.is_none()));
+				.sorted_by_key(|(ty, atom, _, _, _, _, _)| (quote!(#ty).to_string(), atom.is_none()))
+				.chunk_by(|(ty, atom, _, _, _, _, _)| (quote!(#ty).to_string(), atom.is_none()));
 
 			{
 				grouped_variants
@@ -466,12 +472,12 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 							let extract_atom: TokenStream = variants
 								.first()
 								.iter()
-								.flat_map(|(_, atom, _, _)| atom)
+								.flat_map(|(_, atom, _, _, _, _, _)| atom)
 								.map(|atom| atom.to_atom(format_ident!("c")))
 								.collect();
 							let atom_checks: TokenStream = variants
 								.into_iter()
-								.map(|(_, atom, step, _)| {
+								.map(|(_, atom, step, _, _, _, _)| {
 									let atom = atom.unwrap();
 									let atom_path = atom.path();
 									quote! { #atom_path => { #step }, }
@@ -504,37 +510,231 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 									}
 								}
 							}
-						} else {
-							let (_, _, step, split_fields) = variants.into_iter().next().unwrap();
-							if matches!(pos, Position::Last | Position::Only) {
-								quote! { { #step } }
-							} else {
-								// Generate peek condition for all types up to and including the first non-optional
-								let mut peek_types = Vec::new();
-								for (_, field_ty, _, _) in &split_fields {
-									// Always add the type to peek for (unwrapping Option if needed)
-									let peek_ty =
-										if field_ty.is_option() { field_ty.unpack_option() } else { field_ty.clone() };
-									peek_types.push(peek_ty);
+				} else {
+					let variants: Vec<_> = variants.into_iter().collect();
+					let last_idx = variants.len() - 1;
 
-									// If this field is non-optional, we've found our stopping point
-									if !field_ty.is_option() {
-										break;
+					// For multiple sibling one_must_occur variants, hoist fields whose atoms
+					// appear in every variant so they can be parsed before the discriminator
+					// (enabling orderings like `balance wrap` and `balance wrap-reverse`).
+					let shared_atom_paths: Vec<String> = if variants.len() > 1 {
+						let first_atoms: Vec<String> = variants[0]
+							.3
+							.iter()
+							.filter_map(|(_, _, _, atom)| atom.as_ref().map(|a| quote!(#a).to_string()))
+							.collect();
+						first_atoms
+							.into_iter()
+							.filter(|ap| {
+								variants[1..].iter().all(|(_, _, _, sf, _, _, _)| {
+									sf.iter().any(|(_, _, _, a)| a.as_ref().map(|a| quote!(#a).to_string()).as_deref() == Some(ap))
+								})
+							})
+							.collect()
+					} else {
+						vec![]
+					};
+
+					// Build hoisted binding declarations and pre-loop for shared fields.
+					// Use first variant's split_fields as representative (all share these atoms).
+					let hoisted_var_names: Vec<&Ident> = variants[0]
+						.3
+						.iter()
+						.filter(|(_, _, _, atom)| {
+							atom.as_ref().map(|a| shared_atom_paths.contains(&quote!(#a).to_string())).unwrap_or(false)
+						})
+						.map(|(var, _, _, _)| var)
+						.collect();
+
+					let hoisted_bindings: TokenStream = variants[0]
+						.3
+						.iter()
+						.filter(|(_, _, _, atom)| {
+							atom.as_ref().map(|a| shared_atom_paths.contains(&quote!(#a).to_string())).unwrap_or(false)
+						})
+						.map(|(var, ty, _, _)| {
+							if ty.is_option() {
+								quote! { let mut #var: #ty = None; }
+							} else {
+								quote! { let mut #var: Option<#ty> = None; }
+							}
+						})
+						.collect();
+
+					let hoisted_preloop: TokenStream = if !shared_atom_paths.is_empty() {
+						let atom_set = variants[0]
+							.3
+							.iter()
+							.find_map(|(_, _, _, atom)| {
+								atom.as_ref().filter(|a| shared_atom_paths.contains(&quote!(#a).to_string())).map(|a| a.first_segment().clone())
+							});
+						let parse_steps: Vec<TokenStream> = variants[0]
+							.3
+							.iter()
+							.filter(|(_, _, _, atom)| {
+								atom.as_ref().map(|a| shared_atom_paths.contains(&quote!(#a).to_string())).unwrap_or(false)
+							})
+							.map(|(var, ty, _, atom)| {
+								let atom_path = atom.as_ref().unwrap().path();
+								let inner_ty = ty.unpack_option();
+								quote! {
+									if #var.is_none() && atom == #atom_path {
+										#var = Some(p.parse::<#inner_ty>()?);
+										continue;
 									}
 								}
+							})
+							.collect();
+						if let Some(atom_set) = atom_set {
+							quote! {
+								loop {
+									let c = p.peek_n(1);
+									let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+										p.to_atom::<#atom_set>(c)
+									} else {
+										<#atom_set>::default()
+									};
+									#(#parse_steps)*
+									break;
+								}
+							}
+						} else {
+							quote! {}
+						}
+					} else {
+						quote! {}
+					};
 
-								let type_checks: Vec<TokenStream> =
-									peek_types.iter().map(|peek_ty| quote! { p.peek::<#peek_ty>() }).collect();
-
-								let type_check = if type_checks.len() == 1 {
-									type_checks.into_iter().next().unwrap()
+					let variant_steps: TokenStream = variants
+						.iter()
+						.enumerate()
+						.map(|(idx, (_, _, _step, split_fields, variant_ident_ts, members, _parse_mode))| {
+							let is_last_variant = matches!(pos, Position::Last | Position::Only) && idx == last_idx;
+							if is_last_variant && idx == 0 && shared_atom_paths.is_empty() {
+								// Single variant, last in outer sequence, no hoisting needed
+								quote! { { #_step } }
+							} else {
+								// Find discriminating atom: first atom NOT in shared set
+								let discriminating_field = split_fields.iter().find(|(_, _, _, atom)| {
+									atom.as_ref().map(|a| !shared_atom_paths.contains(&quote!(#a).to_string())).unwrap_or(false)
+								});
+								let type_check = if let Some((_, field_ty, _, Some(atom))) = discriminating_field {
+									let peek_ty =
+										if field_ty.is_option() { field_ty.unpack_option() } else { field_ty.clone() };
+									let atom_path = atom.path();
+									let atom_set = atom.first_segment();
+									quote! { p.peek::<#peek_ty>() && p.to_atom::<#atom_set>(p.peek_n(1)) == #atom_path }
+								} else if let Some((_, field_ty, _, Some(atom))) = split_fields.iter().find(|(_, _, _, atom)| atom.is_some()) {
+									// All fields are shared; fall back to first atom field (single variant case)
+									let peek_ty =
+										if field_ty.is_option() { field_ty.unpack_option() } else { field_ty.clone() };
+									let atom_path = atom.path();
+									let atom_set = atom.first_segment();
+									quote! { p.peek::<#peek_ty>() && p.to_atom::<#atom_set>(p.peek_n(1)) == #atom_path }
 								} else {
-									quote! { #(#type_checks)||* }
+									// Fallback: peek all types up to and including first non-optional
+									let mut peek_types = Vec::new();
+									for (_, field_ty, _, _) in split_fields {
+										let peek_ty = if field_ty.is_option() {
+											field_ty.unpack_option()
+										} else {
+											field_ty.clone()
+										};
+										peek_types.push(peek_ty);
+										if !field_ty.is_option() {
+											break;
+										}
+									}
+									let type_checks: Vec<TokenStream> =
+										peek_types.iter().map(|t| quote! { p.peek::<#t>() }).collect();
+									if type_checks.len() == 1 {
+										type_checks.into_iter().next().unwrap()
+									} else {
+										quote! { #(#type_checks)||* }
+									}
 								};
 
-								quote! { if #type_check { #step } }
+								let final_step: TokenStream = if hoisted_var_names.is_empty() {
+									quote! { #_step }
+								} else {
+									// Regenerate step excluding hoisted binding declarations.
+									// Hoisted vars are already in scope from outer bindings.
+									let atom_set = split_fields.iter().find_map(|(_, _, _, atom)| {
+										atom.as_ref().map(|a| a.first_segment().clone())
+									});
+									let non_hoisted_bindings: Vec<TokenStream> = split_fields
+										.iter()
+										.filter(|(var, _, _, _)| !hoisted_var_names.contains(&var))
+										.map(|(var, ty, _, _)| {
+											if ty.is_option() {
+												quote! { let mut #var: #ty = None; }
+											} else {
+												quote! { let mut #var: Option<#ty> = None; }
+											}
+										})
+										.collect();
+									let loop_parse_steps: Vec<TokenStream> = split_fields
+										.iter()
+										.map(|(var, ty, _, atom)| {
+											if let Some(atom) = atom {
+												let atom_path = atom.path();
+												let inner_ty = ty.unpack_option();
+												quote! {
+													if #var.is_none() && atom == #atom_path {
+														#var = Some(p.parse::<#inner_ty>()?);
+														continue;
+													}
+												}
+											} else {
+												quote! {}
+											}
+										})
+										.collect();
+									let all_vars: Vec<&Ident> = split_fields.iter().map(|(v, _, _, _)| v).collect();
+									let all_checks: Vec<TokenStream> = all_vars.iter().map(|v| quote! { #v.is_none() }).collect();
+									let all_assignments: Vec<TokenStream> = all_vars.iter().map(|v| quote! { #v }).collect();
+									let atom_binding_guarded = if let Some(atom_set) = atom_set {
+										quote! {
+											let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+												p.to_atom::<#atom_set>(c)
+											} else {
+												<#atom_set>::default()
+											};
+										}
+									} else {
+										quote! {}
+									};
+									quote! {
+										#(#non_hoisted_bindings)*
+										loop {
+											let c = p.peek_n(1);
+											#atom_binding_guarded
+											#(#loop_parse_steps)*
+											break;
+										}
+										if #(#all_checks)&&* {
+											let c = p.peek_n(1);
+											Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+										}
+										return Ok(Self::#variant_ident_ts { #(#members: #all_assignments),* });
+									}
+								};
+
+								if is_last_variant {
+									quote! { if #type_check { #final_step } else { return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?; } }
+								} else {
+									quote! { if #type_check { #final_step } }
+								}
 							}
-						}
+						})
+						.collect();
+
+					quote! {
+						#hoisted_bindings
+						#hoisted_preloop
+						#variant_steps
+					}
+				}
 					})
 					.collect()
 			}
