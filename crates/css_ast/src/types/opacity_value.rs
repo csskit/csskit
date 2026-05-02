@@ -1,26 +1,26 @@
 use super::prelude::*;
-use crate::{Percentage, Ranged};
+use crate::Percentage;
 
 #[derive(IntoCursor, Peek, Parse, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum OpacityValue {
-	Number(Ranged<T![Number], 0, 1>),
-	Percent(Ranged<Percentage, 0, 100>),
+	Number(T![Number]),
+	Percent(Percentage),
 }
 
 impl OpacityValue {
 	#[allow(non_upper_case_globals)]
-	pub const Zero: OpacityValue = OpacityValue::Number(Ranged(<T![Number]>::NUMBER_ZERO));
+	pub const Zero: OpacityValue = OpacityValue::Number(<T![Number]>::NUMBER_ZERO);
 }
 
 impl From<OpacityValue> for i32 {
 	fn from(value: OpacityValue) -> Self {
 		match value {
-			OpacityValue::Number(t) => t.0.into(),
+			OpacityValue::Number(t) => t.into(),
 			OpacityValue::Percent(t) => {
-				let f: f32 = t.0.into();
+				let f: f32 = t.into();
 				f as i32
 			}
 		}
@@ -30,8 +30,8 @@ impl From<OpacityValue> for i32 {
 impl From<OpacityValue> for f32 {
 	fn from(value: OpacityValue) -> Self {
 		match value {
-			OpacityValue::Number(t) => t.0.into(),
-			OpacityValue::Percent(t) => t.0.into(),
+			OpacityValue::Number(t) => t.into(),
+			OpacityValue::Percent(t) => t.into(),
 		}
 	}
 }
@@ -52,11 +52,14 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "0.1");
 		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "1");
 		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "20");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "1000%");
+		assert_parse!(CssAtomSet::ATOMS, OpacityValue, "-2");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "20");
-		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "1000%");
+		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "red");
+		assert_parse_error!(CssAtomSet::ATOMS, OpacityValue, "10px");
 	}
 }

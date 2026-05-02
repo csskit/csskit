@@ -13,6 +13,8 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "12.5");
+		assert_parse!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "-7");
 		assert_parse!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "0.5");
 
 		assert_parse!(CssAtomSet::ATOMS, ShapeMarginStyleValue, "10px");
