@@ -36,6 +36,8 @@ mod tests {
 
 	#[test]
 	fn test_animation_range_start_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "peek 50%");
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "50% contain");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "normal 10px");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "contain contain");
@@ -55,6 +57,9 @@ mod tests {
 
 	#[test]
 	fn test_animation_range_end_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "infinite");
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "peek 50%");
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "normal 10px");
 	}
 
