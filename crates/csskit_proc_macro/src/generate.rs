@@ -306,6 +306,42 @@ fn find_options_with_keywords(def: &Def) -> Vec<&Def> {
 	}
 }
 
+/// For a list of sibling `Combinator(Options, ...)` children, compute each child's
+/// distinguishing keyword set: the keywords that appear in this child but NOT in some other
+/// sibling. Used to derive concise variant names when distribution produces multiple Options
+/// siblings sharing common keywords (e.g. `[a|b] || c` distributes to `(a||c)|(b||c)` whose
+/// distinguishing sets are `{a}` and `{b}`).
+///
+/// Returns `None` for a child if it cannot be uniquely distinguished, in which case the caller
+/// should fall back to the full concatenated name.
+fn distinguishing_keyword_names(siblings: &[&Def]) -> Vec<Option<Vec<String>>> {
+	if siblings.len() < 2 {
+		return siblings.iter().map(|_| None).collect();
+	}
+	let keyword_sets: Vec<Vec<String>> = siblings
+		.iter()
+		.map(|sibling| match sibling {
+			Def::Combinator(children, DefCombinatorStyle::Options) => children
+				.iter()
+				.filter_map(|d| if let Def::Ident(DefIdent(s)) = d { Some(s.clone()) } else { None })
+				.collect(),
+			_ => vec![],
+		})
+		.collect();
+	keyword_sets
+		.iter()
+		.enumerate()
+		.map(|(i, mine)| {
+			let unique: Vec<String> = mine
+				.iter()
+				.filter(|kw| keyword_sets.iter().enumerate().any(|(j, other)| j != i && !other.contains(kw)))
+				.cloned()
+				.collect();
+			if unique.is_empty() || unique.len() == mine.len() { None } else { Some(unique) }
+		})
+		.collect()
+}
+
 impl DefExt for Def {
 	fn single_ident(ident: &Ident) -> Ident {
 		let ident = ident.to_string();
@@ -751,6 +787,9 @@ impl GenerateDefinition for Def {
 						.collect();
 					let options_indices: Vec<usize> = options_children_refs.iter().map(|(i, _)| *i).collect();
 					let options_inner_defs: Vec<&Def> = options_children_refs.iter().map(|(_, d)| *d).collect();
+					// For multi-sibling Options, derive each variant's distinguishing keywords so
+					// names reflect the discriminator rather than concatenating shared keywords.
+					let distinguishing = distinguishing_keyword_names(&options_inner_defs);
 
 					let variants: TokenStream = children
 						.iter()
@@ -765,7 +804,13 @@ impl GenerateDefinition for Def {
 								let Def::Combinator(opts_children, DefCombinatorStyle::Options) = inner else {
 									unreachable!("filtered above");
 								};
-								let name = inner.to_variant_name(0);
+								// Variant name: distinguishing keywords (if computed) else full
+								// concatenation of all child names.
+								let name = if let Some(keywords) = &distinguishing[idx] {
+									format_ident!("{}", keywords.iter().map(|k| k.to_pascal_case()).collect::<String>())
+								} else {
+									inner.to_variant_name(0)
+								};
 								let members = opts_children.iter().map(|child| {
 									let member_name = child.to_member_name(0);
 									let ty = child.to_type();

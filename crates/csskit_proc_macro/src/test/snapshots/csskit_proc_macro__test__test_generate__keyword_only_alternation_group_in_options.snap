@@ -5,14 +5,14 @@ expression: pretty
 #[derive(Parse)]
 enum Foo {
     #[parse(one_must_occur)]
-    WrapBalance {
+    Wrap {
         #[atom(CssAtomSet::Wrap)]
         pub wrap: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Balance)]
         pub balance: Option<::css_parse::T![Ident]>,
     },
     #[parse(one_must_occur)]
-    WrapReverseBalance {
+    WrapReverse {
         #[atom(CssAtomSet::WrapReverse)]
         pub wrap_reverse: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Balance)]
