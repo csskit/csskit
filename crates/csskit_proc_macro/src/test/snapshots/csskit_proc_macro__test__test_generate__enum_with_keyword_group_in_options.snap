@@ -1,0 +1,23 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+enum Foo {
+    #[atom(CssAtomSet::Nowrap)]
+    Nowrap(::css_parse::T![Ident]),
+    #[parse(one_must_occur)]
+    WrapBalance {
+        #[atom(CssAtomSet::Wrap)]
+        pub wrap: Option<::css_parse::T![Ident]>,
+        #[atom(CssAtomSet::Balance)]
+        pub balance: Option<::css_parse::T![Ident]>,
+    },
+    #[parse(one_must_occur)]
+    WrapReverseBalance {
+        #[atom(CssAtomSet::WrapReverse)]
+        pub wrap_reverse: Option<::css_parse::T![Ident]>,
+        #[atom(CssAtomSet::Balance)]
+        pub balance: Option<::css_parse::T![Ident]>,
+    },
+}

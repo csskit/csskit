@@ -491,3 +491,24 @@ fn struct_nonor_keyword_options() {
 	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
 	assert_snapshot!(syntax, data, "struct_nonor_keyword_options");
 }
+
+#[test]
+fn enum_with_keyword_group_in_options() {
+	// Upcoming flex-wrap grammar: `nowrap | [ wrap | wrap-reverse ] || balance`.
+	// The `||` operand `[ wrap | wrap-reverse ]` is a keyword-only alternation
+	// group. Codegen should mint an inline keyword enum so the Options helper
+	// struct's field can hold it.
+	let syntax = to_valuedef! { nowrap | [ wrap | wrap-reverse ] || balance };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "enum_with_keyword_group_in_options");
+}
+
+#[test]
+fn keyword_only_alternation_group_in_options() {
+	// Isolated form: `||` over a keyword-only alternation group plus a plain
+	// keyword. The optimiser distributes the inner alternation over `||`,
+	// producing a top-level alternation that requires an enum.
+	let syntax = to_valuedef! { [ wrap | wrap-reverse ] || balance };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	assert_snapshot!(syntax, data, "keyword_only_alternation_group_in_options");
+}

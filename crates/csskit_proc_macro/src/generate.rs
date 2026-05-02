@@ -556,7 +556,15 @@ impl DefExt for Def {
 		// Generate Options helper structs when Options contains keyword (Ident) children.
 		// Optionals![T![Ident], T![Ident], ...] can't discriminate keywords — a named struct
 		// with #[parse(one_must_occur)] and per-field #[atom] handles this correctly.
-		let options_children = find_options_with_keywords(self);
+		// When `self` is an Alternatives (i.e. an enum), Options-with-keywords children are
+		// inlined as struct variants on the enum directly (see DataType::Enum codegen below) —
+		// so no helper structs are needed here. Helper structs are still emitted for struct
+		// cases (e.g. NoneOr-wrapped Options).
+		let options_children = if matches!(self, Self::Combinator(_, DefCombinatorStyle::Alternatives)) {
+			vec![]
+		} else {
+			find_options_with_keywords(self)
+		};
 		let options_types = if options_children.is_empty() {
 			quote! {}
 		} else {
@@ -723,8 +731,9 @@ impl GenerateDefinition for Def {
 			}
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {
-					// Pre-compute which children are Options-with-keywords that have helper structs.
-					let options_indices: Vec<usize> = children
+					// Pre-compute which children are Options-with-keywords; these are inlined as
+					// struct variants on the enum (rather than referencing a helper struct).
+					let options_children_refs: Vec<(usize, &Def)> = children
 						.iter()
 						.enumerate()
 						.filter_map(|(i, d)| {
@@ -732,40 +741,46 @@ impl GenerateDefinition for Def {
 								Def::Group(inner, _) => inner.as_ref(),
 								other => other,
 							};
-							if let Def::Combinator(defs, DefCombinatorStyle::Options) = inner {
-								if defs.iter().any(|d| !matches!(d, Def::Type(_) | Def::StyleValue(_))) {
-									Some(i)
-								} else {
-									None
-								}
-							} else {
-								None
+							if let Def::Combinator(defs, DefCombinatorStyle::Options) = inner
+								&& defs.iter().any(|d| !matches!(d, Def::Type(_) | Def::StyleValue(_)))
+							{
+								return Some((i, inner));
 							}
+							None
 						})
 						.collect();
+					let options_indices: Vec<usize> = options_children_refs.iter().map(|(i, _)| *i).collect();
+					let options_inner_defs: Vec<&Def> = options_children_refs.iter().map(|(_, d)| *d).collect();
 
 					let variants: TokenStream = children
 						.iter()
 						.enumerate()
 						.map(|(child_idx, d)| {
 							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
-							let name = d.to_variant_name(0);
-							// Check if this child has a generated Options helper struct.
+							// Locate this child in the Options list (if it is one).
 							let options_helper_idx = options_indices.iter().position(|&i| i == child_idx);
-							let types = if let Some(idx) = options_helper_idx {
-								let opts_ident = if options_indices.len() == 1 {
-									Self::options_ident(ident)
+							if let Some(idx) = options_helper_idx {
+								// Inline as struct variant with #[parse(one_must_occur)].
+								let inner = options_inner_defs[idx];
+								let Def::Combinator(opts_children, DefCombinatorStyle::Options) = inner else {
+									unreachable!("filtered above");
+								};
+								let name = inner.to_variant_name(0);
+								let members = opts_children.iter().map(|child| {
+									let member_name = child.to_member_name(0);
+									let ty = child.to_type();
+									let field_attrs = child.type_attributes(derives_parse, derives_visitable);
+									quote! { #field_attrs pub #member_name: Option<#ty> }
+								});
+								let variant_attrs = if derives_parse {
+									quote! { #[parse(one_must_occur)] }
 								} else {
-									format_ident!("{}Options{}", ident, idx + 1)
+									quote! {}
 								};
-								let inner = match d {
-									Def::Group(inner, _) => inner.as_ref(),
-									other => other,
-								};
-								let generics = inner.get_generics();
-								vec![quote! { crate::#opts_ident #generics }]
+								quote! { #variant_attrs #name { #(#members),* }, }
 							} else {
-								match d {
+								let name = d.to_variant_name(0);
+								let types = match d {
 									Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
 										.iter()
 										.map(|d| {
@@ -803,9 +818,9 @@ impl GenerateDefinition for Def {
 										vec![quote! { #attrs #ty }]
 									}
 									_ => d.to_types(),
-								}
-							};
-							quote! { #attrs #name(#(#types),*), }
+								};
+								quote! { #attrs #name(#(#types),*), }
+							}
 						})
 						.collect();
 					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
