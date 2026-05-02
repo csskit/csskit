@@ -815,7 +815,7 @@ impl GenerateDefinition for Def {
 									let member_name = child.to_member_name(0);
 									let ty = child.to_type();
 									let field_attrs = child.type_attributes(derives_parse, derives_visitable);
-									quote! { #field_attrs pub #member_name: Option<#ty> }
+									quote! { #field_attrs #member_name: Option<#ty> }
 								});
 								let variant_attrs = if derives_parse {
 									quote! { #[parse(one_must_occur)] }

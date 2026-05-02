@@ -8,9 +8,9 @@ enum Foo {
     None(::css_parse::T![Ident]),
     #[parse(one_must_occur)]
     AngleFlip {
-        pub angle: Option<crate::Angle>,
+        angle: Option<crate::Angle>,
         #[atom(CssAtomSet::Flip)]
-        pub flip: Option<::css_parse::T![Ident]>,
+        flip: Option<::css_parse::T![Ident]>,
     },
     Length(crate::Length),
 }

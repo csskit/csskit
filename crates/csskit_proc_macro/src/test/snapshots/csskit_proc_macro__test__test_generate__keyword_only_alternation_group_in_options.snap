@@ -7,15 +7,15 @@ enum Foo {
     #[parse(one_must_occur)]
     Wrap {
         #[atom(CssAtomSet::Wrap)]
-        pub wrap: Option<::css_parse::T![Ident]>,
+        wrap: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Balance)]
-        pub balance: Option<::css_parse::T![Ident]>,
+        balance: Option<::css_parse::T![Ident]>,
     },
     #[parse(one_must_occur)]
     WrapReverse {
         #[atom(CssAtomSet::WrapReverse)]
-        pub wrap_reverse: Option<::css_parse::T![Ident]>,
+        wrap_reverse: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Balance)]
-        pub balance: Option<::css_parse::T![Ident]>,
+        balance: Option<::css_parse::T![Ident]>,
     },
 }

@@ -9,13 +9,13 @@ enum Foo {
     #[parse(one_must_occur)]
     UnderlineOverlineLineThroughBlink {
         #[atom(CssAtomSet::Underline)]
-        pub underline: Option<::css_parse::T![Ident]>,
+        underline: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Overline)]
-        pub overline: Option<::css_parse::T![Ident]>,
+        overline: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::LineThrough)]
-        pub line_through: Option<::css_parse::T![Ident]>,
+        line_through: Option<::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Blink)]
-        pub blink: Option<::css_parse::T![Ident]>,
+        blink: Option<::css_parse::T![Ident]>,
     },
     #[atom(CssAtomSet::SpellingError)]
     SpellingError(::css_parse::T![Ident]),
