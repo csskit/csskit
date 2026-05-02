@@ -377,6 +377,19 @@ impl Def {
 	}
 
 	pub fn optimize(&self) -> Self {
+		if let Self::Combinator(defs, DefCombinatorStyle::Alternatives) = self {
+			let optimized: Vec<Def> = defs.iter().map(Self::optimize).collect();
+			if optimized.iter().any(|d| matches!(d, Def::Combinator(_, DefCombinatorStyle::Alternatives))) {
+				let flat: Vec<Def> = optimized
+					.into_iter()
+					.flat_map(|d| match d {
+						Def::Combinator(inner, DefCombinatorStyle::Alternatives) => inner,
+						other => vec![other],
+					})
+					.collect();
+				return Self::Combinator(flat, DefCombinatorStyle::Alternatives).optimize();
+			}
+		}
 		match self {
 			Self::Combinator(defs, DefCombinatorStyle::Alternatives)
 				if defs.iter().any(Self::has_distributable_group) =>

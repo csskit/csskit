@@ -697,3 +697,52 @@ fn optimize_distributes_top_level_all_must_occur() {
 		)
 	);
 }
+
+#[test]
+fn def_flattens_distributed_options_over_alternation_group() {
+	assert_eq!(
+		to_valuedef! { nowrap | [ wrap | wrap-reverse ] || balance },
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("nowrap".into())),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("wrap".into())), Def::Ident(DefIdent("balance".into()))],
+					DefCombinatorStyle::Options,
+				),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("wrap-reverse".into())), Def::Ident(DefIdent("balance".into()))],
+					DefCombinatorStyle::Options,
+				),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}
+
+#[test]
+fn def_flattens_two_distributed_options_in_alternatives() {
+	assert_eq!(
+		to_valuedef! { [ a | b ] || c | [ d | e ] || f },
+		Def::Combinator(
+			vec![
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("a".into())), Def::Ident(DefIdent("c".into()))],
+					DefCombinatorStyle::Options,
+				),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("b".into())), Def::Ident(DefIdent("c".into()))],
+					DefCombinatorStyle::Options,
+				),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("d".into())), Def::Ident(DefIdent("f".into()))],
+					DefCombinatorStyle::Options,
+				),
+				Def::Combinator(
+					vec![Def::Ident(DefIdent("e".into())), Def::Ident(DefIdent("f".into()))],
+					DefCombinatorStyle::Options,
+				),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}
