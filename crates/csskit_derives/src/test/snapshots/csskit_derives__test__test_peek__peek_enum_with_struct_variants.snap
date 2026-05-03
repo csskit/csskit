@@ -9,6 +9,6 @@ impl<'a> ::css_parse::Peek<'a> for BorderStyle {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use ::css_parse::Peek;
-        <Length>::peek(p, c) || <Length>::peek(p, c)
+        <Length>::peek(p, c)
     }
 }

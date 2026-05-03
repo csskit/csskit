@@ -9,9 +9,10 @@ impl<'a> ::css_parse::Peek<'a> for FlexWrap {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use ::css_parse::Peek;
-        (<Ident>::peek(p, c) && p.equals_atom(c.into(), &FooAtoms::Nowrap))
-            || (<Option<Ident>>::peek(p, c) && p.equals_atom(c.into(), &FooAtoms::Wrap))
-            || (<Option<Ident>>::peek(p, c)
-                && p.equals_atom(c.into(), &FooAtoms::WrapReverse))
+        (<Ident>::peek(p, c)
+            && (p.equals_atom(c.into(), &FooAtoms::Nowrap)
+                || p.equals_atom(c.into(), &FooAtoms::Wrap)
+                || p.equals_atom(c.into(), &FooAtoms::Balance)
+                || p.equals_atom(c.into(), &FooAtoms::WrapReverse)))
     }
 }

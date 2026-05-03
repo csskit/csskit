@@ -1,6 +1,45 @@
+use darling::FromAttributes;
 use proc_macro2::TokenStream;
 use quote::{ToTokens, quote};
 use syn::{Attribute, Error, ExprPath, Ident, Meta, Result};
+
+/// How fields within a struct variant must be satisfied.
+#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
+pub enum FieldParseMode {
+	/// Fields are consumed in order; first non-optional field ends the variant.
+	#[default]
+	Sequential,
+	/// All optional fields must appear (in any order).
+	AllMustOccur,
+	/// At least one optional field must appear (in any order).
+	OneMustOccur,
+}
+
+impl FieldParseMode {
+	/// Any field can be the first token (unordered multi-field modes).
+	pub fn any_field_can_start(self) -> bool {
+		matches!(self, Self::AllMustOccur | Self::OneMustOccur)
+	}
+}
+
+#[derive(Debug, Default, FromAttributes)]
+#[darling(attributes(parse))]
+struct ParseModeArgs {
+	#[darling(default)]
+	all_must_occur: bool,
+	#[darling(default)]
+	one_must_occur: bool,
+}
+
+pub fn extract_field_parse_mode(attrs: &[Attribute]) -> Result<FieldParseMode> {
+	let args = ParseModeArgs::from_attributes(attrs)
+		.map_err(|e| syn::Error::new(proc_macro2::Span::call_site(), e.to_string()))?;
+	Ok(match (args.all_must_occur, args.one_must_occur) {
+		(true, _) => FieldParseMode::AllMustOccur,
+		(_, true) => FieldParseMode::OneMustOccur,
+		_ => FieldParseMode::Sequential,
+	})
+}
 
 #[derive(Debug)]
 pub struct Atom(ExprPath);

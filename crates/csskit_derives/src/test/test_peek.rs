@@ -121,3 +121,57 @@ fn peek_enum_struct_variant_one_must_occur() {
 	};
 	assert_peek_snapshot!(data, "peek_enum_struct_variant_one_must_occur");
 }
+
+#[test]
+fn peek_enum_variant_one_must_occur_distinct_types() {
+	let data = to_deriveinput! {
+		enum TextDecoration {
+			#[parse(one_must_occur)]
+			Decorated {
+				#[atom(FooAtoms::Underline)]
+				line: Option<Ident>,
+				style: Option<DecorationStyle>,
+				color: Option<Color>,
+			},
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_variant_one_must_occur_distinct_types");
+}
+
+#[test]
+fn peek_enum_variant_all_must_occur_distinct_types() {
+	let data = to_deriveinput! {
+		enum TextDecoration {
+			#[parse(all_must_occur)]
+			Decorated {
+				#[atom(FooAtoms::Underline)]
+				line: Option<Ident>,
+				style: Option<DecorationStyle>,
+				color: Option<Color>,
+			},
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_variant_all_must_occur_distinct_types");
+}
+
+#[test]
+fn peek_enum_with_multiple_identical_types() {
+	let data = to_deriveinput! {
+		enum FlowInto {
+			#[atom(FooAtoms::None)]
+			None(Ident),
+			Element(
+				CustomIdent,
+				#[atom(FooAtoms::Element)]
+				Ident,
+			),
+			Content(
+				CustomIdent,
+				#[atom(CssAtomSet::Content)]
+				Ident,
+			),
+			CustomIdent(CustomIdent),
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_with_multiple_identical_types");
+}

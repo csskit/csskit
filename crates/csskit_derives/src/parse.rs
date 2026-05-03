@@ -1,6 +1,6 @@
 use crate::{
 	FieldsExt, WhereCollector,
-	attributes::{Atom, extract_atom},
+	attributes::{Atom, FieldParseMode, extract_atom},
 	darling_ext::{StateArg, StopArg},
 	ensure_lifetime_a,
 	field_view::option_inner,
@@ -24,14 +24,6 @@ impl TypeIsOption for Type {
 	fn unpack_option(&self) -> Self {
 		option_inner(self).cloned().unwrap_or_else(|| self.clone())
 	}
-}
-
-#[derive(Default, Debug, Clone, Copy, PartialEq, Eq)]
-enum FieldParseMode {
-	#[default]
-	Sequential,
-	AllMustOccur,
-	OneMustOccur,
 }
 
 #[derive(Debug, Default, FromAttributes)]
