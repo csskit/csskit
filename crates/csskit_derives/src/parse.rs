@@ -139,6 +139,22 @@ impl Field {
 		}
 	}
 
+	/// Emits a simple parse-if-peek for a single atom field.
+	fn atom_parse_if_peek(&self) -> TokenStream {
+		let atom = self.atom.as_ref().expect("atom_parse_if_peek called without atom");
+		let atom_path = atom.path();
+		let atom_set = atom.first_segment();
+		let var = &self.var;
+		let inner_ty = self.ty.unpack_option();
+		quote! {
+			if p.peek::<::css_parse::token_macros::Ident>()
+				&& p.to_atom::<#atom_set>(p.peek_n(1)) == #atom_path
+			{
+				#var = Some(p.parse::<#inner_ty>()?);
+			}
+		}
+	}
+
 	fn binding(&self) -> TokenStream {
 		let Field { var, ty, .. } = self;
 		if ty.is_option() {
@@ -368,6 +384,43 @@ impl VariantPlan {
 			hoisted,
 		)
 	}
+
+	/// Emit only the occurrence check + return for hoisted-only fallback.
+	/// Used when all variant discriminants failed but hoisted shared fields
+	/// may have been consumed.
+	fn return_with_hoisted_only(&self, hoisted: &[&Ident]) -> TokenStream {
+		let ident = &self.ident;
+		let members = &self.members;
+		let post_parse_steps = &self.post_parse_steps;
+		let unexpected = unexpected_at_c();
+		let none_checks: Vec<_> =
+			self.fields.iter().filter(|f| hoisted.contains(&&f.var)).map(Field::none_check).collect();
+		let occurance_cond = if none_checks.is_empty() {
+			quote! { true }
+		} else {
+			quote! { #(#none_checks)&&* }
+		};
+		let assignments: Vec<TokenStream> = self
+			.fields
+			.iter()
+			.map(|f| {
+				if hoisted.contains(&&f.var) {
+					let v = &f.var;
+					quote! { #v }
+				} else {
+					quote! { None }
+				}
+			})
+			.collect();
+		quote! {
+			#post_parse_steps
+			if #occurance_cond {
+				let c = p.peek_n(1);
+				#unexpected
+			}
+			return Ok(Self::#ident { #(#members: #assignments),* });
+		}
+	}
 }
 
 enum GroupKind {
@@ -440,51 +493,53 @@ impl<'a> EnumVariantGroup<'a> {
 	}
 
 	fn render_peeked_fallback(&self, where_collector: &mut WhereCollector) -> TokenStream {
-		let last_idx = self.variants.len() - 1;
 		let is_outer_last = matches!(self.position, Position::Last | Position::Only);
-
 		let plan = OneMustOccurPlan::for_group(&self.variants);
 		let hoisted_bindings = plan.hoisted_bindings();
 		let hoisted_preloop = plan.hoisted_preloop();
 		let hoisted_var_names = plan.hoisted_var_names();
 
+		if is_outer_last && self.variants.len() == 1 && plan.shared_atom_paths.is_empty() {
+			let body = &self.variants[0].body;
+			return quote! {
+				#hoisted_bindings
+				#hoisted_preloop
+				{ #body }
+			};
+		}
+
 		let variant_blocks: TokenStream = self
 			.variants
 			.iter()
-			.enumerate()
-			.map(|(idx, variant)| {
-				let is_last_variant = is_outer_last && idx == last_idx;
-
-				// Single trailing variant with no shared hoisting: emit
-				// body directly, no peek check needed.
-				if is_last_variant && idx == 0 && plan.shared_atom_paths.is_empty() {
-					let body = &variant.body;
-					return quote! { { #body } };
-				}
-
+			.map(|variant| {
 				let type_check = variant.discriminator(&plan.shared_atom_paths);
 				let final_step = if hoisted_var_names.is_empty() {
 					variant.body.clone()
 				} else {
 					variant.body_with_hoisted(&hoisted_var_names, where_collector)
 				};
-
-				if is_last_variant {
-					let unexpected = unexpected_at_next();
-					quote! {
-						if #type_check { #final_step }
-						else { #unexpected }
-					}
-				} else {
-					quote! { if #type_check { #final_step } }
-				}
+				quote! { if #type_check { #final_step } }
 			})
 			.collect();
+
+		let fallback = if hoisted_var_names.is_empty() {
+			let unexpected = unexpected_at_next();
+			quote! { #unexpected }
+		} else {
+			self.variants[0].return_with_hoisted_only(&hoisted_var_names)
+		};
+
+		let trailing = if is_outer_last {
+			quote! { #fallback }
+		} else {
+			TokenStream::new()
+		};
 
 		quote! {
 			#hoisted_bindings
 			#hoisted_preloop
 			#variant_blocks
+			#trailing
 		}
 	}
 }
@@ -536,12 +591,15 @@ impl<'a> OneMustOccurPlan<'a> {
 	}
 
 	fn hoisted_preloop(&self) -> TokenStream {
-		let Some(atom) = self.shared_atom() else {
-			return TokenStream::new();
-		};
-		let parse_steps: TokenStream = self.shared_fields.iter().map(|f| f.atom_match_arm()).collect();
-		let atom_binding = atom.binding_block();
-		emit_peek_loop(atom_binding, parse_steps)
+		match self.shared_fields.as_slice() {
+			[] => TokenStream::new(),
+			[field] => field.atom_parse_if_peek(),
+			_ => {
+				let atom = self.shared_atom().expect("shared_fields non-empty implies shared_atom");
+				let parse_steps: TokenStream = self.shared_fields.iter().map(|f| f.atom_match_arm()).collect();
+				emit_peek_loop(atom.binding_block(), parse_steps)
+			}
+		}
 	}
 }
 

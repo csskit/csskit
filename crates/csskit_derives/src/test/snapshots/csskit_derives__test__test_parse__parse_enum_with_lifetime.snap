@@ -24,10 +24,7 @@ impl<'a> ::css_parse::Parse<'a> for CssValue<'a> {
                 name: name,
                 args: args,
             });
-        } else {
-            return Err(
-                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
-            )?;
         }
+        return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
     }
 }

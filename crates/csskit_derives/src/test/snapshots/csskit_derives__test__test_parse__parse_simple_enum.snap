@@ -20,10 +20,7 @@ impl<'a> ::css_parse::Parse<'a> for Display {
         if p.peek::<Ident>() {
             let v0 = p.parse::<Ident>()?;
             return Ok(Self::None { 0: v0 });
-        } else {
-            return Err(
-                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
-            )?;
         }
+        return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
     }
 }
