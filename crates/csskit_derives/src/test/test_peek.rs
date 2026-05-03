@@ -98,6 +98,18 @@ fn peek_enum_with_lifetime() {
 }
 
 #[test]
+fn peek_struct_all_must_occur() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur)]
+		struct Params {
+			keyword: Ident,
+			percentage: Percentage,
+		}
+	};
+	assert_peek_snapshot!(data, "peek_struct_all_must_occur");
+}
+
+#[test]
 fn peek_enum_struct_variant_one_must_occur() {
 	let data = to_deriveinput! {
 		enum FlexWrap {

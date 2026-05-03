@@ -34,14 +34,15 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let body = match input.data {
 		Data::Union(_) => return Err(Error::new(ident.span(), "Cannot derive Peek on a Union")),
 
-		Data::Struct(DataStruct { fields, .. }) => {
+		Data::Struct(DataStruct { ref fields, .. }) => {
+			let parse_mode = extract_field_parse_mode(&input.attrs)?;
 			let mut checks: Vec<TokenStream> = vec![];
 			for (view, syn_field) in fields.views().into_iter().zip(fields.iter()) {
 				let atom = extract_atom(&syn_field.attrs)?;
 				let atoms = atom.map(|a| vec![a]).unwrap_or_default();
 				let peek_ty = option_inner(view.ty).unwrap_or(view.ty);
 				checks.push(generate_type_peek(peek_ty, &atoms, &mut where_collector));
-				if !view.is_option {
+				if !parse_mode.any_field_can_start() && !view.is_option {
 					break;
 				}
 			}
