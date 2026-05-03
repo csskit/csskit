@@ -71555,7 +71555,7 @@ StyleSheet(
                 offset: SourceOffset(47881),
                 len: 1,
               )),
-              value: Computed(ComponentValues(
+              value: Unknown(ComponentValues(
                 values: [
                   Dimension(Cursor(
                     kind: "Dimension",
@@ -75745,7 +75745,7 @@ StyleSheet(
                 offset: SourceOffset(51379),
                 len: 1,
               )),
-              value: Computed(ComponentValues(
+              value: Unknown(ComponentValues(
                 values: [
                   Dimension(Cursor(
                     kind: "Dimension",

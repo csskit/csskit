@@ -71,15 +71,24 @@ impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated
 		}
 		loop {
 			let item = p.parse::<T>()?;
-			let comma = p.parse_if_peek::<Comma>()?;
-			items.items.push((item, comma));
-			if comma.is_none() {
-				if MIN > items.len() {
-					p.parse::<Comma>()?;
+			if p.peek::<Comma>() {
+				let checkpoint = p.checkpoint();
+				let comma = p.parse::<Comma>()?;
+				if !<T>::peek(p, p.peek_n(1)) {
+					p.rewind(checkpoint);
+					items.items.push((item, None));
+					break;
 				}
-				return Ok(items);
+				items.items.push((item, Some(comma)));
+			} else {
+				items.items.push((item, None));
+				break;
 			}
 		}
+		if MIN > items.len() {
+			p.parse::<Comma>()?;
+		}
+		Ok(items)
 	}
 }
 
@@ -167,6 +176,7 @@ mod tests {
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two");
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two,three");
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 0>, "");
+		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<(T![Number], CommaSeparated<T![Ident]>)>, "1 foo, 2 bar");
 	}
 
 	#[test]
