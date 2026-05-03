@@ -1,11 +1,12 @@
 #![deny(warnings)]
 use proc_macro::TokenStream;
-use proc_macro2::Span;
-use syn::{AngleBracketedGenericArguments, Error, GenericArgument, PathArguments, PathSegment, Type, TypePath};
+use syn::{DeriveInput, Generics, Result, parse_quote};
 
 mod attributes;
 mod css_feature;
+mod darling_ext;
 mod declaration_metadata;
+mod field_view;
 mod into_cursor;
 mod node_with_metadata;
 mod parse;
@@ -16,102 +17,74 @@ mod to_span;
 mod visitable;
 mod where_collector;
 
+use field_view::FieldsExt;
 use where_collector::WhereCollector;
+
+fn ensure_lifetime_a(generics: &Generics) -> Generics {
+	let mut g = generics.clone();
+	if generics.lifetimes().all(|l| l.lifetime.ident != "a") {
+		g.params.insert(0, parse_quote!('a));
+	}
+	g
+}
 
 #[cfg(test)]
 mod test;
 
+fn run<F>(stream: TokenStream, f: F) -> TokenStream
+where
+	F: FnOnce(DeriveInput) -> Result<proc_macro2::TokenStream>,
+{
+	let input = syn::parse::<DeriveInput>(stream).unwrap_or_else(|e| panic!("{e}"));
+	f(input).unwrap_or_else(|e| e.into_compile_error()).into()
+}
+
 #[proc_macro_derive(ToCursors, attributes(to_cursors))]
 pub fn derive_to_cursors(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	to_cursors::derive(input).into()
+	run(stream, to_cursors::derive)
 }
 
 #[proc_macro_derive(Parse, attributes(parse, atom))]
 pub fn derive_parse(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	parse::derive(input).into()
+	run(stream, parse::derive)
 }
 
 #[proc_macro_derive(Peek, attributes(peek, atom))]
 pub fn derive_peek(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	peek::derive(input).into()
+	run(stream, peek::derive)
 }
 
 #[proc_macro_derive(IntoCursor)]
 pub fn derive_into_cursor(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	into_cursor::derive(input).into()
+	run(stream, into_cursor::derive)
 }
 
 #[proc_macro_derive(ToSpan)]
 pub fn derive_into_span(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	to_span::derive(input).into()
+	run(stream, to_span::derive)
 }
 
 #[proc_macro_derive(Visitable, attributes(visit, queryable))]
 pub fn derive_visitable(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	visitable::derive(input).into()
+	run(stream, visitable::derive)
 }
 
 #[proc_macro_derive(NodeWithMetadata, attributes(metadata))]
 pub fn derive_node_with_metadata(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	node_with_metadata::derive(input).into()
+	run(stream, node_with_metadata::derive)
 }
 
 #[proc_macro_derive(ToCSSFeature, attributes(css_feature))]
 pub fn derive_css_feature(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	css_feature::derive(input).into()
+	run(stream, css_feature::derive)
 }
 
 #[proc_macro_derive(DeclarationMetadata, attributes(declaration_metadata))]
 pub fn derive_declaration_metadata(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	declaration_metadata::derive(input).into()
+	run(stream, declaration_metadata::derive)
 }
 
 #[proc_macro_derive(SemanticEq, attributes(semantic_eq))]
 pub fn derive_semantic_eq(stream: TokenStream) -> TokenStream {
-	let input = syn::parse(stream).unwrap();
-	semantic_eq::derive(input).into()
-}
-
-fn err(span: Span, msg: &str) -> proc_macro2::TokenStream {
-	let err = Error::new(span, msg).into_compile_error();
-	quote::quote! {#err}
-}
-
-trait TypeIsOption {
-	fn is_option(&self) -> bool;
-	fn unpack_option(&self) -> Self;
-}
-
-impl TypeIsOption for Type {
-	fn is_option(&self) -> bool {
-		match self {
-			Self::Path(TypePath { path, .. }) => path.segments.last().is_some_and(|s| s.ident == "Option"),
-			_ => false,
-		}
-	}
-
-	fn unpack_option(&self) -> Self {
-		if let Self::Path(TypePath { path, .. }) = self
-			&& let Some(PathSegment {
-				ident,
-				arguments: PathArguments::AngleBracketed(AngleBracketedGenericArguments { args, .. }),
-				..
-			}) = path.segments.last()
-			&& ident == "Option"
-			&& args.len() == 1
-			&& let GenericArgument::Type(inner_ty) = &args[0]
-		{
-			return inner_ty.clone();
-		}
-		self.clone()
-	}
+	run(stream, semantic_eq::derive)
 }

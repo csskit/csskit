@@ -9,8 +9,8 @@ impl<'a> ::css_parse::Parse<'a> for Length {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let f0 = p.parse::<Number>()?;
-        let f1 = p.parse::<Unit>()?;
-        return Ok(Self { 0: f0, 1: f1 });
+        let v0 = p.parse::<Number>()?;
+        let v1 = p.parse::<Unit>()?;
+        return Ok(Self { 0: v0, 1: v1 });
     }
 }

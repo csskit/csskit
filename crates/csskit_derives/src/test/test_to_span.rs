@@ -1,12 +1,9 @@
-use super::to_deriveinput;
+use super::{assert_derive_snapshot, to_deriveinput};
 use crate::to_span;
 
 macro_rules! assert_to_span_snapshot {
 	( $data:ident, $name:literal) => {
-		let tokens = to_span::derive($data);
-		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
-		let pretty = ::prettyplease::unparse(&file);
-		::insta::assert_snapshot!($name, pretty)
+		assert_derive_snapshot!(to_span::derive, $data, $name)
 	};
 }
 

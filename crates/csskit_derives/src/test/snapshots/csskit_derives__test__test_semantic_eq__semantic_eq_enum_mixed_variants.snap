@@ -7,14 +7,20 @@ impl ::css_parse::SemanticEq for FlexWrap {
     fn semantic_eq(&self, other: &Self) -> bool {
         use ::css_parse::SemanticEq;
         match (self, other) {
-            (Self::Nowrap(a0), Self::Nowrap(b0)) => a0.semantic_eq(&b0),
+            (FlexWrap::Nowrap(a0), FlexWrap::Nowrap(b0)) => a0.semantic_eq(&b0),
             (
-                Self::Wrap { wrap: a_wrap, balance: a_balance },
-                Self::Wrap { wrap: b_wrap, balance: b_balance },
+                FlexWrap::Wrap { wrap: a_wrap, balance: a_balance },
+                FlexWrap::Wrap { wrap: b_wrap, balance: b_balance },
             ) => a_wrap.semantic_eq(&b_wrap) && a_balance.semantic_eq(&b_balance),
             (
-                Self::WrapReverse { wrap_reverse: a_wrap_reverse, balance: a_balance },
-                Self::WrapReverse { wrap_reverse: b_wrap_reverse, balance: b_balance },
+                FlexWrap::WrapReverse {
+                    wrap_reverse: a_wrap_reverse,
+                    balance: a_balance,
+                },
+                FlexWrap::WrapReverse {
+                    wrap_reverse: b_wrap_reverse,
+                    balance: b_balance,
+                },
             ) => {
                 a_wrap_reverse.semantic_eq(&b_wrap_reverse)
                     && a_balance.semantic_eq(&b_balance)

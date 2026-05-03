@@ -1,12 +1,9 @@
-use super::to_deriveinput;
+use super::{assert_derive_snapshot, to_deriveinput};
 use crate::to_cursors;
 
 macro_rules! assert_to_cursors_snapshot {
 	( $data:ident, $name:literal) => {
-		let tokens = to_cursors::derive($data);
-		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
-		let pretty = ::prettyplease::unparse(&file);
-		::insta::assert_snapshot!($name, pretty)
+		assert_derive_snapshot!(to_cursors::derive, $data, $name)
 	};
 }
 

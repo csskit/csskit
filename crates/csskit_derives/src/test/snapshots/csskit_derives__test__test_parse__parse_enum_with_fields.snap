@@ -10,16 +10,16 @@ impl<'a> ::css_parse::Parse<'a> for Value {
     {
         use css_parse::{Parse, Peek};
         if p.peek::<Length>() {
-            let f0 = p.parse::<Length>()?;
-            return Ok(Self::Length { 0: f0 });
+            let v0 = p.parse::<Length>()?;
+            return Ok(Self::Length { 0: v0 });
         }
         if p.peek::<Percentage>() {
-            let f0 = p.parse::<Percentage>()?;
-            return Ok(Self::Percentage { 0: f0 });
+            let v0 = p.parse::<Percentage>()?;
+            return Ok(Self::Percentage { 0: v0 });
         }
         {
-            let f0 = p.parse::<String>()?;
-            return Ok(Self::Keyword { 0: f0 });
+            let v0 = p.parse::<String>()?;
+            return Ok(Self::Keyword { 0: v0 });
         }
     }
 }

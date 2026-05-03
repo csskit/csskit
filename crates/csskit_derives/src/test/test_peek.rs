@@ -1,12 +1,9 @@
-use super::to_deriveinput;
+use super::{assert_derive_snapshot, to_deriveinput};
 use crate::peek;
 
 macro_rules! assert_peek_snapshot {
 	( $data:ident, $name:literal) => {
-		let tokens = peek::derive($data);
-		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
-		let pretty = ::prettyplease::unparse(&file);
-		::insta::assert_snapshot!($name, pretty)
+		assert_derive_snapshot!(peek::derive, $data, $name)
 	};
 }
 

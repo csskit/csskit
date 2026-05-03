@@ -5,14 +5,17 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::ToCursors for CssValue<'a> {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        use ::css_parse::ToCursors;
-        match self {
-            Self::Keyword(v0) => {
-                ToCursors::to_cursors(v0, s);
+        match *self {
+            CssValue::Keyword(ref __binding_0) => {
+                ::css_parse::ToCursors::to_cursors(__binding_0, s);
             }
-            Self::Function { name, args } => {
-                ToCursors::to_cursors(name, s);
-                ToCursors::to_cursors(args, s);
+            CssValue::Function { name: ref __binding_0, args: ref __binding_1 } => {
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_0, s);
+                }
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_1, s);
+                }
             }
         }
     }

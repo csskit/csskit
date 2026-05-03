@@ -7,11 +7,11 @@ impl crate::VisitableMut for Display {
     fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
         use crate::VisitableMut;
         match self {
-            Self::Block(v0) => {
-                v0.accept_mut(v);
+            Self::Block(__binding_0) => {
+                __binding_0.accept_mut(v);
             }
-            Self::Inline(v0) => {
-                v0.accept_mut(v);
+            Self::Inline(__binding_0) => {
+                __binding_0.accept_mut(v);
             }
         }
     }
@@ -21,11 +21,11 @@ impl crate::Visitable for Display {
     fn accept<V: crate::Visit>(&self, v: &mut V) {
         use crate::Visitable;
         match self {
-            Self::Block(v0) => {
-                v0.accept(v);
+            Self::Block(__binding_0) => {
+                __binding_0.accept(v);
             }
-            Self::Inline(v0) => {
-                v0.accept(v);
+            Self::Inline(__binding_0) => {
+                __binding_0.accept(v);
             }
         }
     }

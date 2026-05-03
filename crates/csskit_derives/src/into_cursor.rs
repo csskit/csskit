@@ -1,45 +1,43 @@
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Result};
 
-use crate::err;
-
-pub fn derive(input: DeriveInput) -> TokenStream {
+pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let ident = input.ident;
 	let generics = &mut input.generics.clone();
 	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
 	let body = match input.data {
-		Data::Union(_) => err(ident.span(), "Cannot derive Into<Cursor> on a Union"),
+		Data::Union(_) => return Err(Error::new(ident.span(), "Cannot derive Into<Cursor> on a Union")),
 
 		Data::Struct(DataStruct { fields, .. }) => {
 			if fields.len() != 1 {
-				return err(ident.span(), "Cannot derive Into<Cursor> for a struct with many fields");
+				return Err(Error::new(ident.span(), "Cannot derive Into<Cursor> for a struct with many fields"));
 			} else {
-				let member = fields.members().next().unwrap();
+				let member = fields.members().next().expect("len checked");
 				quote! { value.#member.into() }
 			}
 		}
 
 		Data::Enum(DataEnum { variants, .. }) => {
-			let steps: TokenStream = variants
-				.iter()
-				.map(|variant| {
-					if variant.fields.len() != 1 {
-						err(ident.span(), "Cannot derive Into<Cursor> for an enum variant with none or many fields")
-					} else {
-						let variant = &variant.ident;
-						quote! { #ident::#variant(c) => c.into(), }
-					}
-				})
-				.collect();
+			let mut steps: Vec<TokenStream> = Vec::new();
+			for variant in &variants {
+				if variant.fields.len() != 1 {
+					return Err(Error::new(
+						variant.ident.span(),
+						"Cannot derive Into<Cursor> for an enum variant with none or many fields",
+					));
+				}
+				let variant_ident = &variant.ident;
+				steps.push(quote! { #ident::#variant_ident(c) => c.into(), });
+			}
 			quote! {
 				match value {
-					#steps
+					#(#steps)*
 				}
 			}
 		}
 	};
-	quote! {
+	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics From<#ident #type_generics> for ::css_parse::Cursor #where_clause {
 			fn from(value: #ident) -> ::css_parse::Cursor {
@@ -67,5 +65,5 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				Cursor::from(*self).semantic_eq(&Cursor::from(*other))
 			}
 		}
-	}
+	})
 }

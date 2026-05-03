@@ -5,8 +5,15 @@ expression: pretty
 #[automatically_derived]
 impl<'a> ::css_parse::ToCursors for Value<'a> {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        use ::css_parse::ToCursors;
-        ToCursors::to_cursors(&self.content, s);
-        ToCursors::to_cursors(&self.unit, s);
+        match *self {
+            Value { content: ref __binding_0, unit: ref __binding_1 } => {
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_0, s);
+                }
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_1, s);
+                }
+            }
+        }
     }
 }

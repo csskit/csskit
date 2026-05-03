@@ -13,16 +13,16 @@ where
     {
         use css_parse::{Parse, Peek};
         if p.peek::<T>() {
-            let f0 = p.parse::<Option<T>>()?;
-            return Ok(Self::Optional { 0: f0 });
+            let v0 = p.parse::<Option<T>>()?;
+            return Ok(Self::Optional { 0: v0 });
         }
         if p.peek::<T>() {
-            let f0 = p.parse::<T>()?;
-            return Ok(Self::Single { 0: f0 });
+            let v0 = p.parse::<T>()?;
+            return Ok(Self::Single { 0: v0 });
         }
         {
-            let f0 = p.parse::<Vec<T>>()?;
-            return Ok(Self::Multiple { 0: f0 });
+            let v0 = p.parse::<Vec<T>>()?;
+            return Ok(Self::Multiple { 0: v0 });
         }
     }
 }

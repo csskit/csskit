@@ -1,12 +1,9 @@
-use super::to_deriveinput;
+use super::{assert_derive_snapshot, to_deriveinput};
 use crate::visitable;
 
 macro_rules! assert_visitable_snapshot {
 	( $data:ident, $name:literal) => {
-		let tokens = visitable::derive($data);
-		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
-		let pretty = ::prettyplease::unparse(&file);
-		::insta::assert_snapshot!($name, pretty)
+		assert_derive_snapshot!(visitable::derive, $data, $name)
 	};
 }
 

@@ -5,16 +5,15 @@ expression: pretty
 #[automatically_derived]
 impl ::css_parse::ToCursors for Display {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        use ::css_parse::ToCursors;
-        match self {
-            Self::Block(v0) => {
-                ToCursors::to_cursors(v0, s);
+        match *self {
+            Display::Block(ref __binding_0) => {
+                ::css_parse::ToCursors::to_cursors(__binding_0, s);
             }
-            Self::Inline(v0) => {
-                ToCursors::to_cursors(v0, s);
+            Display::Inline(ref __binding_0) => {
+                ::css_parse::ToCursors::to_cursors(__binding_0, s);
             }
-            Self::None(v0) => {
-                ToCursors::to_cursors(v0, s);
+            Display::None(ref __binding_0) => {
+                ::css_parse::ToCursors::to_cursors(__binding_0, s);
             }
         }
     }

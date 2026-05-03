@@ -5,18 +5,25 @@ expression: pretty
 #[automatically_derived]
 impl ::css_parse::ToCursors for Value {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        use ::css_parse::ToCursors;
-        match self {
-            Self::Length(v0, v1) => {
-                ToCursors::to_cursors(v0, s);
-                ToCursors::to_cursors(v1, s);
+        match *self {
+            Value::Length(ref __binding_0, ref __binding_1) => {
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_0, s);
+                }
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_1, s);
+                }
             }
-            Self::Percentage(v0) => {
-                ToCursors::to_cursors(v0, s);
+            Value::Percentage(ref __binding_0) => {
+                ::css_parse::ToCursors::to_cursors(__binding_0, s);
             }
-            Self::Function(v0, v1) => {
-                ToCursors::to_cursors(v0, s);
-                ToCursors::to_cursors(v1, s);
+            Value::Function(ref __binding_0, ref __binding_1) => {
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_0, s);
+                }
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_1, s);
+                }
             }
         }
     }

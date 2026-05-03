@@ -9,7 +9,7 @@ impl<'a> ::css_parse::Parse<'a> for Opacity {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let f0 = p.parse::<Number>()?;
-        return Ok(Self { 0: f0 });
+        let v0 = p.parse::<Number>()?;
+        return Ok(Self { 0: v0 });
     }
 }

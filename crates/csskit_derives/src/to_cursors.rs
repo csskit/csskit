@@ -1,107 +1,46 @@
-use crate::{WhereCollector, err};
-use proc_macro2::{Span, TokenStream};
-use quote::{format_ident, quote};
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, Index, parse_quote};
+use proc_macro2::TokenStream;
+use quote::quote;
+use syn::{Data, DeriveInput, Error, Fields, Result, parse_quote};
+use synstructure::{AddBounds, BindStyle, Structure};
 
-pub fn derive(input: DeriveInput) -> TokenStream {
-	let mut where_collector = WhereCollector::new();
-	let ident = input.ident;
-	let generics = input.generics.clone();
+use crate::WhereCollector;
+
+pub fn derive(input: DeriveInput) -> Result<TokenStream> {
+	if let Data::Struct(ref s) = input.data
+		&& matches!(s.fields, Fields::Unit)
+	{
+		return Err(Error::new(input.ident.span(), "Cannot derive ToCursors on this struct"));
+	}
+	if matches!(input.data, Data::Union(_)) {
+		return Err(Error::new(input.ident.span(), "Cannot derive ToCursors on a Union"));
+	}
+
+	let mut s = Structure::try_new(&input)?;
+	s.add_bounds(AddBounds::None);
+	s.bind_with(|_| BindStyle::Ref);
+
+	let body = s.each(|bi| {
+		quote! { ::css_parse::ToCursors::to_cursors(#bi, s); }
+	});
+
+	let mut wc = WhereCollector::new();
+	for variant in s.variants() {
+		for binding in variant.bindings() {
+			wc.add(&binding.ast().ty);
+		}
+	}
+	let where_clause = wc.extend_where_clause(&input.generics, parse_quote! { ::css_parse::ToCursors });
+
+	let ident = &input.ident;
+	let generics = &input.generics;
 	let (impl_generics, type_generics, _) = generics.split_for_impl();
-	let body = match input.data {
-		Data::Struct(DataStruct { fields: Fields::Unnamed(fields), .. }) => {
-			let steps: Vec<TokenStream> = fields
-				.unnamed
-				.into_iter()
-				.enumerate()
-				.map(|(i, field)| {
-					let index = Index { index: i as u32, span: Span::call_site() };
-					where_collector.add(&field.ty);
-					quote! {
-						ToCursors::to_cursors(&self.#index, s);
-					}
-				})
-				.collect();
-			quote! { #(#steps)* }
-		}
 
-		Data::Struct(DataStruct { fields: Fields::Named(fields), .. }) => {
-			let steps: Vec<TokenStream> = fields
-				.named
-				.into_iter()
-				.map(|f| {
-					let ident = f.ident.expect("Named field");
-					where_collector.add(&f.ty);
-					quote! {
-						ToCursors::to_cursors(&self.#ident, s);
-					}
-				})
-				.collect();
-			quote! { #(#steps)* }
-		}
-
-		Data::Struct(_) => err(ident.span(), "Cannot derive ToCursors on this struct"),
-
-		Data::Union(_) => err(ident.span(), "Cannot derive ToCursors on a Union"),
-
-		Data::Enum(DataEnum { variants, .. }) => {
-			let mut steps = vec![];
-			for var in variants {
-				let var_ident = var.ident;
-				match var.fields {
-					Fields::Named(fields) => {
-						let field_idents: Vec<_> =
-							fields.named.iter().map(|f| f.ident.as_ref().unwrap().clone()).collect();
-						let field_steps: Vec<_> = fields
-							.named
-							.iter()
-							.map(|field| {
-								where_collector.add(&field.ty);
-								let fid = field.ident.as_ref().unwrap();
-								quote! { ToCursors::to_cursors(#fid, s); }
-							})
-							.collect();
-						steps.push(quote! {
-							Self::#var_ident { #(#field_idents),* } => { #(#field_steps)* }
-						});
-					}
-					_ => {
-						let mut idents = vec![];
-						let field_steps: Vec<_> = var
-							.fields
-							.into_iter()
-							.enumerate()
-							.map(|(i, field)| {
-								where_collector.add(&field.ty);
-								let ident = format_ident!("v{}", i);
-								idents.push(ident.clone());
-								quote! { ToCursors::to_cursors(#ident, s); }
-							})
-							.collect();
-						steps.push(quote! {
-							Self::#var_ident(#(#idents),*) => { #(#field_steps)* }
-						});
-					}
-				}
-			}
-			quote! {
-				match self {
-					#(#steps)*
-				}
-			}
-		}
-	};
-
-	let mut generics = input.generics.clone();
-	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { ::css_parse::ToCursors });
-
-	quote! {
+	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::ToCursors for #ident #type_generics #where_clause {
 			fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-				use ::css_parse::ToCursors;
-				#body
+				match *self { #body }
 			}
 		}
-	}
+	})
 }

@@ -1,29 +1,27 @@
-use crate::{TypeIsOption, WhereCollector, err};
+use crate::{FieldsExt, WhereCollector};
 use itertools::{Itertools, Position};
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Fields, parse_quote};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Result, parse_quote};
 
-pub fn derive(input: DeriveInput) -> TokenStream {
+pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let mut where_collector = WhereCollector::new();
 	let ident = input.ident;
-	let generics = &mut input.generics.clone();
+	let generics = input.generics.clone();
 	let (impl_generics, type_generics, _) = generics.split_for_impl();
 	let body = match input.data {
-		Data::Union(_) => err(ident.span(), "Cannot derive ToSpan on a Union"),
+		Data::Union(_) => return Err(Error::new(ident.span(), "Cannot derive ToSpan on a Union")),
 
 		Data::Struct(DataStruct { fields, .. }) => {
-			for field in fields.iter() {
-				where_collector.add(&field.ty);
+			for syn_field in fields.iter() {
+				where_collector.add(&syn_field.ty);
 			}
-			let members: Vec<_> = fields.members().zip(fields.iter().map(|f| f.ty.is_option())).collect();
-			// All members are Option<T>, so we have no choice but to try and add them all to get something useful.
+			let members: Vec<_> = fields.views().into_iter().map(|v| (v.member, v.is_option)).collect();
+
 			if members.len() == 1 || members.iter().all(|(_, is_option)| *is_option) {
-				let members = fields.members();
+				let members = members.iter().map(|(m, _)| m);
 				quote! { #(self.#members.to_span())+* }
 			} else {
-				// To get a reliable span we need to find the first member, and the last. However as some members are
-				// Optional<T>, and could potentially all be none, we need to find the first non-optional member to guarantee we can get a Span.
 				members
 					.iter()
 					.take_while_inclusive(|(_, is_option)| *is_option)
@@ -76,22 +74,26 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				.iter()
 				.map(|variant| {
 					let variant_ident = &variant.ident;
-					let len = variant.fields.len();
-					for field in variant.fields.iter() {
-						where_collector.add(&field.ty);
+					let views = variant.fields.views();
+					let len = views.len();
+					for syn_field in variant.fields.iter() {
+						where_collector.add(&syn_field.ty);
 					}
 					match &variant.fields {
-						Fields::Named(fields) => {
-							let field_idents: Vec<_> = fields.named.iter().map(|f| f.ident.as_ref().unwrap()).collect();
+						Fields::Named(_) => {
 							if len == 1 {
-								let fid = field_idents[0];
-								quote! { #ident::#variant_ident { #fid: val } => val.to_span(), }
+								let m = &views[0].member;
+								quote! { #ident::#variant_ident { #m: val } => val.to_span(), }
 							} else {
-								let first = field_idents[0];
-								let last = field_idents[len - 1];
-								let rest_pats = field_idents[1..len - 1].iter().map(|f| quote! { #f: _ });
+								let first_m = &views[0].member;
+								let last_m = &views[len - 1].member;
+								let rest_pats = views[1..len - 1].iter().map(|v| {
+									let m = &v.member;
+									quote! { #m: _ }
+								});
 								quote! {
-									#ident::#variant_ident { #first: first, #(#rest_pats,)* #last: last } => first.to_span() + last.to_span(),
+									#ident::#variant_ident { #first_m: first, #(#rest_pats,)* #last_m: last }
+										=> first.to_span() + last.to_span(),
 								}
 							}
 						}
@@ -99,7 +101,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 							if len == 1 {
 								quote! { #ident::#variant_ident(val) => val.to_span(), }
 							} else {
-								let rest = (2..len).map(|_| quote! { _ }).chain([quote! {last}]);
+								let rest = (2..len).map(|_| quote! { _ }).chain([quote! { last }]);
 								quote! {
 									#ident::#variant_ident(first, #(#rest),*) => first.to_span() + last.to_span(),
 								}
@@ -108,18 +110,13 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 					}
 				})
 				.collect();
-			quote! {
-				match self {
-					#steps
-				}
-			}
+			quote! { match self { #steps } }
 		}
 	};
 
-	let mut generics = input.generics.clone();
-	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { ::css_parse::ToSpan });
+	let where_clause = where_collector.extend_where_clause(&generics, parse_quote! { ::css_parse::ToSpan });
 
-	quote! {
+	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::ToSpan for #ident #type_generics #where_clause {
 			fn to_span(&self) -> ::css_parse::Span {
@@ -127,5 +124,5 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 				#body
 			}
 		}
-	}
+	})
 }

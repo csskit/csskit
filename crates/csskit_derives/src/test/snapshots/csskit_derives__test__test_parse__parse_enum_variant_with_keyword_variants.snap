@@ -13,12 +13,12 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
             let c = p.peek_n(1);
             match p.to_atom::<Keyword>(c) {
                 Keyword::Foo => {
-                    let f0 = p.parse::<Ident>()?;
-                    return Ok(Self::Foo { 0: f0 });
+                    let v0 = p.parse::<Ident>()?;
+                    return Ok(Self::Foo { 0: v0 });
                 }
                 Keyword::Bar => {
-                    let f0 = p.parse::<Ident>()?;
-                    return Ok(Self::Bar { 0: f0 });
+                    let v0 = p.parse::<Ident>()?;
+                    return Ok(Self::Bar { 0: v0 });
                 }
                 _ => {
                     return Err(

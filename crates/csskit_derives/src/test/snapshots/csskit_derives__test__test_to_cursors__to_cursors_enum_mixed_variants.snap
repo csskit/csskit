@@ -5,15 +5,21 @@ expression: pretty
 #[automatically_derived]
 impl ::css_parse::ToCursors for BorderStyle {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        use ::css_parse::ToCursors;
-        match self {
-            Self::Solid() => {}
-            Self::Dashed { width } => {
-                ToCursors::to_cursors(width, s);
+        match *self {
+            BorderStyle::Solid => {}
+            BorderStyle::Dashed { width: ref __binding_0 } => {
+                ::css_parse::ToCursors::to_cursors(__binding_0, s);
             }
-            Self::Dotted { radius, spacing } => {
-                ToCursors::to_cursors(radius, s);
-                ToCursors::to_cursors(spacing, s);
+            BorderStyle::Dotted {
+                radius: ref __binding_0,
+                spacing: ref __binding_1,
+            } => {
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_0, s);
+                }
+                {
+                    ::css_parse::ToCursors::to_cursors(__binding_1, s);
+                }
             }
         }
     }

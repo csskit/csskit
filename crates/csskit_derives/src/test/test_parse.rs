@@ -1,13 +1,9 @@
-use super::to_deriveinput;
+use super::{assert_derive_snapshot, to_deriveinput};
 use crate::parse;
 
 macro_rules! assert_parse_snapshot {
 	( $data:ident, $name:literal) => {
-		let tokens = parse::derive($data);
-		dbg!(tokens.to_string());
-		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
-		let pretty = ::prettyplease::unparse(&file);
-		::insta::assert_snapshot!($name, pretty)
+		assert_derive_snapshot!(parse::derive, $data, $name)
 	};
 }
 

@@ -14,11 +14,13 @@ bench = false
 proc-macro = true
 
 [dependencies]
-syn = { workspace = true, features = ["extra-traits", "full"] }
+syn = { workspace = true, features = ["extra-traits", "full", "visit"] }
 quote = { workspace = true }
 proc-macro2 = { workspace = true }
 itertools = { workspace = true }
 heck = { workspace = true }
+darling = { workspace = true }
+synstructure.workspace = true
 
 [dev-dependencies]
 prettyplease = { workspace = true }

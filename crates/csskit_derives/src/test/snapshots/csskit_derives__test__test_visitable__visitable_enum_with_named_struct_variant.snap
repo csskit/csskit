@@ -7,16 +7,16 @@ impl crate::VisitableMut for FlexWrap {
     fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
         use crate::VisitableMut;
         match self {
-            Self::Nowrap(v0) => {
-                v0.accept_mut(v);
+            Self::Nowrap(__binding_0) => {
+                __binding_0.accept_mut(v);
             }
-            Self::Wrap { wrap: f_wrap, balance: f_balance } => {
-                f_wrap.accept_mut(v);
-                f_balance.accept_mut(v);
+            Self::Wrap { wrap: __binding_0, balance: __binding_1 } => {
+                __binding_0.accept_mut(v);
+                __binding_1.accept_mut(v);
             }
-            Self::WrapReverse { wrap_reverse: f_wrap_reverse, balance: f_balance } => {
-                f_wrap_reverse.accept_mut(v);
-                f_balance.accept_mut(v);
+            Self::WrapReverse { wrap_reverse: __binding_0, balance: __binding_1 } => {
+                __binding_0.accept_mut(v);
+                __binding_1.accept_mut(v);
             }
         }
     }
@@ -26,16 +26,16 @@ impl crate::Visitable for FlexWrap {
     fn accept<V: crate::Visit>(&self, v: &mut V) {
         use crate::Visitable;
         match self {
-            Self::Nowrap(v0) => {
-                v0.accept(v);
+            Self::Nowrap(__binding_0) => {
+                __binding_0.accept(v);
             }
-            Self::Wrap { wrap: f_wrap, balance: f_balance } => {
-                f_wrap.accept(v);
-                f_balance.accept(v);
+            Self::Wrap { wrap: __binding_0, balance: __binding_1 } => {
+                __binding_0.accept(v);
+                __binding_1.accept(v);
             }
-            Self::WrapReverse { wrap_reverse: f_wrap_reverse, balance: f_balance } => {
-                f_wrap_reverse.accept(v);
-                f_balance.accept(v);
+            Self::WrapReverse { wrap_reverse: __binding_0, balance: __binding_1 } => {
+                __binding_0.accept(v);
+                __binding_1.accept(v);
             }
         }
     }

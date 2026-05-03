@@ -1,6 +1,6 @@
 use proc_macro2::TokenStream;
 use quote::{ToTokens, quote};
-use syn::{Attribute, ExprPath, Ident, Meta};
+use syn::{Attribute, Error, ExprPath, Ident, Meta, Result};
 
 #[derive(Debug)]
 pub struct Atom(ExprPath);
@@ -21,7 +21,22 @@ impl Atom {
 	}
 
 	pub fn first_segment(&self) -> Ident {
-		self.0.path.segments.first().expect("keyword variant path should have at least one segment").ident.clone()
+		self.0.path.segments.first().expect("atom path must have at least one segment").ident.clone()
+	}
+
+	pub fn binding_block(&self) -> TokenStream {
+		let atom_set = self.first_segment();
+		quote! {
+			let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+				p.to_atom::<#atom_set>(c)
+			} else {
+				<#atom_set>::default()
+			};
+		}
+	}
+
+	pub fn opt_binding_block(atom: Option<&Self>) -> TokenStream {
+		atom.map(Self::binding_block).unwrap_or_default()
 	}
 }
 
@@ -31,14 +46,12 @@ impl ToTokens for Atom {
 	}
 }
 
-/// Extract #[atom(...)] attribute from a field
-pub fn extract_atom(attrs: &[Attribute]) -> Option<Atom> {
-	if let Some(Attribute { meta, .. }) = attrs.iter().find(|a| a.path().is_ident("atom")) {
-		match meta {
-			Meta::List(meta) => meta.parse_args::<ExprPath>().ok().map(Atom),
-			_ => panic!("could not parse in_range meta"),
-		}
-	} else {
-		None
+pub fn extract_atom(attrs: &[Attribute]) -> Result<Option<Atom>> {
+	let Some(attr) = attrs.iter().find(|a| a.path().is_ident("atom")) else {
+		return Ok(None);
+	};
+	match &attr.meta {
+		Meta::List(meta) => Ok(Some(Atom(meta.parse_args::<ExprPath>()?))),
+		_ => Err(Error::new_spanned(&attr.meta, "#[atom] requires a path argument, e.g. #[atom(MyAtomSet::my_atom)]")),
 	}
 }

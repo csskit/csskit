@@ -1,12 +1,14 @@
+use crate::{FieldsExt, WhereCollector};
 use heck::ToSnakeCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{
-	Attribute, Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Ident, Meta, parse::Parse, parse_quote,
+	Attribute, Data, DeriveInput, Error, Fields, Ident, Meta, Result,
+	parse::{Parse, ParseStream},
+	parse_quote,
 	token::SelfValue,
 };
-
-use crate::{WhereCollector, err};
+use synstructure::{AddBounds, Structure};
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 enum VisitStyle {
@@ -27,7 +29,7 @@ impl VisitStyle {
 }
 
 impl Parse for VisitStyle {
-	fn parse(input: syn::parse::ParseStream) -> syn::Result<Self> {
+	fn parse(input: ParseStream) -> Result<Self> {
 		if input.parse::<SelfValue>().is_ok() {
 			return Ok(Self::OnlySelf);
 		}
@@ -40,24 +42,19 @@ impl Parse for VisitStyle {
 	}
 }
 
-impl From<&Vec<Attribute>> for VisitStyle {
-	fn from(attrs: &Vec<Attribute>) -> Self {
+impl From<&[Attribute]> for VisitStyle {
+	fn from(attrs: &[Attribute]) -> Self {
 		if let Some(Attribute { meta, .. }) = &attrs.iter().find(|a| a.path().is_ident("visit")) {
 			match meta {
-				// #[visit(keyword)]
 				Meta::List(meta) => meta.parse_args::<VisitStyle>().unwrap(),
-				// #[visit]
 				_ => Self::All,
 			}
 		} else {
-			// No attribute present
 			Self::default()
 		}
 	}
 }
 
-/// Check if the type has a #[queryable(skip)] attribute, indicating it has a manual
-/// QueryableNode implementation.
 fn has_queryable_skip(attrs: &[Attribute]) -> bool {
 	attrs.iter().any(|attr| {
 		if attr.path().is_ident("queryable") {
@@ -71,13 +68,88 @@ fn has_queryable_skip(attrs: &[Attribute]) -> bool {
 	})
 }
 
-pub fn derive(input: DeriveInput) -> TokenStream {
-	let mut where_collector = WhereCollector::new();
-	let ident = input.ident;
-	let generics = &mut input.generics.clone();
-	let (impl_generics, type_generics, _) = generics.split_for_impl();
-	let style: VisitStyle = (&input.attrs).into();
+fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector) -> TokenStream {
+	match &s.ast().data {
+		Data::Struct(ds) => {
+			let steps: Vec<TokenStream> = ds
+				.fields
+				.views()
+				.into_iter()
+				.zip(ds.fields.iter())
+				.filter_map(|(view, syn_field)| {
+					if VisitStyle::from(syn_field.attrs.as_slice()) == VisitStyle::Skip {
+						return None;
+					}
+					wc.add(&syn_field.ty);
+					let m = &view.member;
+					Some(quote! { self.#m.#accept(v); })
+				})
+				.collect();
+			quote! { #(#steps)* }
+		}
+		Data::Enum(_) => {
+			let arms: TokenStream = s
+				.variants()
+				.iter()
+				.map(|variant| {
+					let var_ident = variant.ast().ident;
+					let skip_variant = VisitStyle::from(variant.ast().attrs) == VisitStyle::Skip;
+					let bindings: Vec<_> = variant.bindings().iter().collect();
+					let named = bindings.first().and_then(|bi| bi.ast().ident.as_ref()).is_some();
+
+					let (patterns, calls): (Vec<TokenStream>, Vec<TokenStream>) = bindings
+						.iter()
+						.map(|bi| {
+							let skip_field =
+								skip_variant || VisitStyle::from(bi.ast().attrs.as_slice()) == VisitStyle::Skip;
+							let binding = &bi.binding;
+							if named {
+								let field_name = bi.ast().ident.as_ref().unwrap();
+								if skip_field {
+									(quote! { #field_name: _ }, quote! {})
+								} else {
+									wc.add(&bi.ast().ty);
+									(quote! { #field_name: #binding }, quote! { #binding.#accept(v) })
+								}
+							} else if skip_field {
+								(quote! { _ }, quote! {})
+							} else {
+								wc.add(&bi.ast().ty);
+								(quote! { #binding }, quote! { #binding.#accept(v) })
+							}
+						})
+						.unzip();
+
+					let pattern = if bindings.is_empty() {
+						quote! { Self::#var_ident }
+					} else if named {
+						quote! { Self::#var_ident { #(#patterns),* } }
+					} else {
+						quote! { Self::#var_ident(#(#patterns),*) }
+					};
+					quote! { #pattern => { #(#calls;)* }, }
+				})
+				.collect();
+			quote! { match self { #arms } }
+		}
+		Data::Union(_) => unreachable!("checked above"),
+	}
+}
+
+pub fn derive(input: DeriveInput) -> Result<TokenStream> {
+	if matches!(input.data, Data::Union(_)) {
+		return Err(Error::new(input.ident.span(), "Cannot derive Visitable on a Union"));
+	}
+	if let Data::Struct(ref s) = input.data
+		&& matches!(s.fields, Fields::Unit)
+	{
+		return Err(Error::new(input.ident.span(), "Cannot derive Visitable on this struct"));
+	}
+
+	let style: VisitStyle = VisitStyle::from(input.attrs.as_slice());
 	let is_queryable = style.visit_self();
+	let ident = &input.ident;
+	let (impl_generics, type_generics, _) = input.generics.split_for_impl();
 
 	let (visit, exit) = if style.visit_self() {
 		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
@@ -93,84 +165,26 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		(quote! {}, quote! {})
 	};
 
-	let [body_mut, body] = if style.visit_children() {
-		[format_ident!("accept_mut"), format_ident!("accept")].map(|accept| match &input.data {
-			Data::Union(_) => err(ident.span(), "Cannot derive Into<Span> on a Union"),
+	let mut s = Structure::try_new(&input)?;
+	s.add_bounds(AddBounds::None);
 
-			Data::Struct(DataStruct { fields, .. }) => {
-				let members = fields.members().zip(fields).filter_map(|(member, field)| {
-					if Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip { None } else { Some(member) }
-				});
-				quote! { #(self.#members.#accept(v);)* }
-			}
+	let mut wc = WhereCollector::new();
 
-			Data::Enum(DataEnum { variants, .. }) => {
-				let steps: TokenStream = variants
-					.iter()
-					.map(|variant| {
-						let variant_ident = &variant.ident;
-						let skip_variant = Into::<VisitStyle>::into(&variant.attrs) == VisitStyle::Skip;
-						match &variant.fields {
-							Fields::Named(fields) => {
-								let (bindings, steps): (Vec<_>, Vec<_>) = fields
-									.named
-									.iter()
-									.map(|field| {
-										let fname = field.ident.as_ref().unwrap();
-										let binding = format_ident!("f_{}", fname);
-										if skip_variant || Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip {
-											(quote! { #fname: _ }, quote! {})
-										} else {
-											where_collector.add(&field.ty);
-											(quote! { #fname: #binding }, quote! { #binding.#accept(v) })
-										}
-									})
-									.unzip();
-								quote! {
-									Self::#variant_ident { #(#bindings),* } => { #(#steps;)* },
-								}
-							}
-							_ => {
-								let (members, steps): (Vec<_>, Vec<_>) = variant
-									.fields
-									.iter()
-									.enumerate()
-									.map(|(i, field)| {
-										if skip_variant || Into::<VisitStyle>::into(&field.attrs) == VisitStyle::Skip {
-											(format_ident!("_"), quote! {})
-										} else {
-											let ident = format_ident!("v{}", i);
-											where_collector.add(&field.ty);
-											(ident.clone(), quote! { #ident.#accept(v) })
-										}
-									})
-									.collect::<Vec<_>>()
-									.into_iter()
-									.unzip();
-								quote! {
-									Self::#variant_ident(#(#members),*) => { #(#steps;)* },
-								}
-							}
-						}
-					})
-					.collect();
-				quote! { match self { #steps } }
-			}
-		})
+	let (body_mut, body) = if style.visit_children() {
+		let accept_mut = format_ident!("accept_mut");
+		let accept = format_ident!("accept");
+		let b_mut = make_body(&s, &accept_mut, &mut wc);
+		let b = make_body(&s, &accept, &mut wc);
+		(b_mut, b)
 	} else {
-		[quote! {}, quote! {}]
+		(quote! {}, quote! {})
 	};
 
-	let mut generics = input.generics.clone();
-	let where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::Visitable });
-	let mut_where_clause = where_collector.extend_where_clause(&mut generics, parse_quote! { crate::VisitableMut });
+	let where_clause = wc.extend_where_clause(&input.generics, parse_quote! { crate::Visitable });
+	let mut_where_clause = wc.extend_where_clause(&input.generics, parse_quote! { crate::VisitableMut });
 
-	// Check if we should skip generating QueryableNode (type has manual implementation)
 	let skip_queryable = has_queryable_skip(&input.attrs);
 
-	// Implement QueryableNode for nodes that visit themselves (not just children)
-	// This matches the types that get NodeId variants generated in build.rs
-	// Skip if queryable(skip) is present (manual impl provided)
 	let queryable_impl = if style.visit_self() && !skip_queryable {
 		quote! {
 			#[automatically_derived]
@@ -182,7 +196,7 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		quote! {}
 	};
 
-	quote! {
+	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics crate::VisitableMut for #ident #type_generics #mut_where_clause {
 			fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
@@ -206,5 +220,5 @@ pub fn derive(input: DeriveInput) -> TokenStream {
 		}
 
 		#queryable_impl
-	}
+	})
 }

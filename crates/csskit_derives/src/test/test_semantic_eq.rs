@@ -1,12 +1,9 @@
-use super::to_deriveinput;
+use super::{assert_derive_snapshot, to_deriveinput};
 use crate::semantic_eq;
 
 macro_rules! assert_semantic_eq_snapshot {
 	( $data:ident, $name:literal) => {
-		let tokens = semantic_eq::derive($data);
-		let file = ::syn::parse2::<syn::File>(tokens).unwrap();
-		let pretty = ::prettyplease::unparse(&file);
-		::insta::assert_snapshot!($name, pretty)
+		assert_derive_snapshot!(semantic_eq::derive, $data, $name)
 	};
 }
 
