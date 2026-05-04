@@ -11,6 +11,10 @@ use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
 use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Result, Type, Variant, parse_quote};
 
+trait Plan {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream;
+}
+
 trait TypeIsOption {
 	fn is_option(&self) -> bool;
 	fn unpack_option(&self) -> Self;
@@ -224,64 +228,74 @@ fn emit_peek_loop(atom_binding: TokenStream, parse_steps: TokenStream) -> TokenS
 	}
 }
 
-fn generate_sequential_parsing(
-	fields: &[Field],
-	members: &[TokenStream],
-	post_parse_steps: &TokenStream,
+struct SequentialPlan<'a> {
+	fields: &'a [Field],
+	members: &'a [TokenStream],
+	post_parse_steps: &'a TokenStream,
 	constructor: TokenStream,
-	where_collector: &mut WhereCollector,
-) -> TokenStream {
-	let parse_steps = fields.iter().map(|f| f.parse_tokens(where_collector));
-	let vars = fields.iter().map(|f| &f.var);
-	quote! {
-		#( #parse_steps )*
-		#post_parse_steps
-		return Ok(#constructor { #(#members: #vars),* });
+}
+
+impl<'a> Plan for SequentialPlan<'a> {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
+		let parse_steps = self.fields.iter().map(|f| f.parse_tokens(wc));
+		let vars = self.fields.iter().map(|f| &f.var);
+		let members = self.members;
+		let constructor = &self.constructor;
+		let post = self.post_parse_steps;
+		quote! {
+			#( #parse_steps )*
+			#post
+			return Ok(#constructor { #(#members: #vars),* });
+		}
 	}
 }
 
-fn generate_must_occur_parsing(
-	fields: &[Field],
-	members: &[TokenStream],
-	post_parse_steps: &TokenStream,
+struct MustOccurPlan<'a> {
+	fields: &'a [Field],
+	members: &'a [TokenStream],
+	post_parse_steps: &'a TokenStream,
 	parse_mode: FieldParseMode,
 	constructor: TokenStream,
-	where_collector: &mut WhereCollector,
-	hoisted: &[&Ident],
-) -> TokenStream {
-	let bindings: TokenStream = fields.iter().filter(|f| !hoisted.contains(&&f.var)).map(Field::binding).collect();
-	let any_atom = fields.iter().find_map(|f| f.atom.as_ref());
-	let atom_binding = Atom::opt_binding_block(any_atom);
+	hoisted: &'a [&'a Ident],
+}
 
-	let parse_steps: TokenStream = fields
-		.iter()
-		.map(|f| if f.atom.is_some() { f.atom_match_arm() } else { f.parse_normal_tokens(parse_mode, where_collector) })
-		.collect();
+impl<'a> Plan for MustOccurPlan<'a> {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
+		let MustOccurPlan { fields, members, post_parse_steps, parse_mode, constructor, hoisted } = self;
+		let bindings: TokenStream = fields.iter().filter(|f| !hoisted.contains(&&f.var)).map(Field::binding).collect();
+		let any_atom = fields.iter().find_map(|f| f.atom.as_ref());
+		let atom_binding = Atom::opt_binding_block(any_atom);
 
-	// Add where bounds for atom fields (atom_match_arm doesn't call wc.add)
-	for f in fields.iter().filter(|f| f.atom.is_some()) {
-		where_collector.add(&f.ty.unpack_option());
-	}
+		let parse_steps: TokenStream = fields
+			.iter()
+			.map(|f| if f.atom.is_some() { f.atom_match_arm() } else { f.parse_normal_tokens(*parse_mode, wc) })
+			.collect();
 
-	let vars = fields.iter().map(|f| &f.var);
-	let checks: Vec<_> = fields.iter().map(Field::none_check).collect();
-	let (occurance_cond, assignments): (TokenStream, Vec<TokenStream>) = match parse_mode {
-		FieldParseMode::Sequential => unreachable!(),
-		FieldParseMode::OneMustOccur => (quote! { #(#checks)&&* }, vars.map(|v| quote! { #v }).collect()),
-		FieldParseMode::AllMustOccur => (quote! { #(#checks)||* }, vars.map(|v| quote! { #v.unwrap() }).collect()),
-	};
-
-	let peek_loop = emit_peek_loop(atom_binding, parse_steps);
-	let unexpected = unexpected_at_c();
-	quote! {
-		#bindings
-		#peek_loop
-		#post_parse_steps
-		if #occurance_cond {
-			let c = p.peek_n(1);
-			#unexpected
+		// Add where bounds for atom fields (atom_match_arm doesn't call wc.add)
+		for f in fields.iter().filter(|f| f.atom.is_some()) {
+			wc.add(&f.ty.unpack_option());
 		}
-		return Ok(#constructor { #(#members: #assignments),* });
+
+		let vars = fields.iter().map(|f| &f.var);
+		let checks: Vec<_> = fields.iter().map(Field::none_check).collect();
+		let (occurance_cond, assignments): (TokenStream, Vec<TokenStream>) = match parse_mode {
+			FieldParseMode::Sequential => unreachable!(),
+			FieldParseMode::OneMustOccur => (quote! { #(#checks)&&* }, vars.map(|v| quote! { #v }).collect()),
+			FieldParseMode::AllMustOccur => (quote! { #(#checks)||* }, vars.map(|v| quote! { #v.unwrap() }).collect()),
+		};
+
+		let peek_loop = emit_peek_loop(atom_binding, parse_steps);
+		let unexpected = unexpected_at_c();
+		quote! {
+			#bindings
+			#peek_loop
+			#post_parse_steps
+			if #occurance_cond {
+				let c = p.peek_n(1);
+				#unexpected
+			}
+			return Ok(#constructor { #(#members: #assignments),* });
+		}
 	}
 }
 
@@ -289,14 +303,14 @@ struct VariantPlan {
 	ident: Ident,
 	first_type: Type,
 	effective_atom: Option<Atom>,
-	body: TokenStream,
+	parse_mode: FieldParseMode,
 	fields: Vec<Field>,
 	members: Vec<TokenStream>,
 	post_parse_steps: TokenStream,
 }
 
 impl VariantPlan {
-	fn new(variant: &Variant, post_parse_steps: &TokenStream, where_collector: &mut WhereCollector) -> Result<Self> {
+	fn new(variant: &Variant, post_parse_steps: &TokenStream) -> Result<Self> {
 		let ident = variant.ident.clone();
 		let parse_mode = ParseArg::from_attributes(&variant.attrs)?.parse_mode();
 		let variant_atom = extract_atom(&variant.attrs)?;
@@ -307,20 +321,6 @@ impl VariantPlan {
 			.ok_or_else(|| Error::new(ident.span(), "enum variant must have at least one field"))?;
 		let members = members_tokens(&variant.fields);
 
-		let body = if parse_mode == FieldParseMode::Sequential {
-			generate_sequential_parsing(&fields, &members, post_parse_steps, quote! { Self::#ident }, where_collector)
-		} else {
-			generate_must_occur_parsing(
-				&fields,
-				&members,
-				post_parse_steps,
-				parse_mode,
-				quote! { Self::#ident },
-				where_collector,
-				&[],
-			)
-		};
-
 		// Prefer variant-level atom; fall back to first field's atom except
 		// one_must_occur variants with all-optional fields dispatch by type only.
 		let effective_atom = if variant_atom.is_some() {
@@ -328,21 +328,44 @@ impl VariantPlan {
 		} else if parse_mode == FieldParseMode::OneMustOccur && fields.iter().all(|f| f.ty.is_option()) {
 			None
 		} else {
-			match variant.fields.iter().next() {
-				Some(f) => extract_atom(&f.attrs)?,
-				None => None,
-			}
+			fields.first().and_then(|f| f.atom.clone())
 		};
 
 		Ok(Self {
 			ident,
 			first_type,
 			effective_atom,
-			body,
+			parse_mode,
 			fields,
 			members,
 			post_parse_steps: post_parse_steps.clone(),
 		})
+	}
+
+	/// Render the body for this variant, consuming where-bounds into `wc`.
+	/// Picks `SequentialPlan` or `MustOccurPlan` based on `parse_mode`.
+	fn body(&self, wc: &mut WhereCollector) -> TokenStream {
+		let ident = &self.ident;
+		let constructor = quote! { Self::#ident };
+		if self.parse_mode == FieldParseMode::Sequential {
+			SequentialPlan {
+				fields: &self.fields,
+				members: &self.members,
+				post_parse_steps: &self.post_parse_steps,
+				constructor,
+			}
+			.render(wc)
+		} else {
+			MustOccurPlan {
+				fields: &self.fields,
+				members: &self.members,
+				post_parse_steps: &self.post_parse_steps,
+				parse_mode: self.parse_mode,
+				constructor,
+				hoisted: &[],
+			}
+			.render(wc)
+		}
 	}
 
 	fn discriminator(&self, shared_atom_paths: &[String]) -> TokenStream {
@@ -356,14 +379,19 @@ impl VariantPlan {
 			return field.peek_tokens();
 		}
 
-		let mut peek_types = Vec::new();
-		for f in &self.fields {
-			let peek_ty = if f.ty.is_option() { f.ty.unpack_option() } else { f.ty.clone() };
-			peek_types.push(peek_ty);
-			if !f.ty.is_option() {
-				break;
-			}
-		}
+		let peek_types: Vec<Type> = self
+			.fields
+			.iter()
+			.scan(true, |still_optional, f| {
+				if !*still_optional {
+					return None;
+				}
+				if !f.ty.is_option() {
+					*still_optional = false;
+				}
+				Some(f.ty.unpack_option())
+			})
+			.collect();
 		let type_checks: Vec<TokenStream> = peek_types.iter().map(|t| quote! { p.peek::<#t>() }).collect();
 		if type_checks.len() == 1 {
 			type_checks.into_iter().next().expect("len checked")
@@ -374,15 +402,15 @@ impl VariantPlan {
 
 	fn body_with_hoisted(&self, hoisted: &[&Ident], where_collector: &mut WhereCollector) -> TokenStream {
 		let ident = &self.ident;
-		generate_must_occur_parsing(
-			&self.fields,
-			&self.members,
-			&self.post_parse_steps,
-			FieldParseMode::OneMustOccur,
-			quote! { Self::#ident },
-			where_collector,
+		MustOccurPlan {
+			fields: &self.fields,
+			members: &self.members,
+			post_parse_steps: &self.post_parse_steps,
+			parse_mode: FieldParseMode::OneMustOccur,
+			constructor: quote! { Self::#ident },
 			hoisted,
-		)
+		}
+		.render(where_collector)
 	}
 
 	/// Emit only the occurrence check + return for hoisted-only fallback.
@@ -423,27 +451,53 @@ impl VariantPlan {
 	}
 }
 
-enum GroupKind {
-	AtomDispatch,
-	PeekedFallback,
+/// Top-level enum-variant group: dispatches between `AtomDispatchPlan` (variants
+/// with effective atoms on a shared first-field type) and `PeekedFallbackPlan`
+/// (variants with no atom, fall back to peek-based discrimination).
+enum EnumGroupPlan<'a> {
+	AtomDispatch(AtomDispatchPlan<'a>),
+	PeekedFallback(PeekedFallbackPlan<'a>),
 }
 
-struct EnumVariantGroup<'a> {
-	first_type: Type,
-	kind: GroupKind,
-	variants: Vec<&'a VariantPlan>,
-	position: Position,
-}
-
-impl<'a> EnumVariantGroup<'a> {
-	fn render(&self, where_collector: &mut WhereCollector) -> TokenStream {
-		match self.kind {
-			GroupKind::AtomDispatch => self.render_atom_dispatch(),
-			GroupKind::PeekedFallback => self.render_peeked_fallback(where_collector),
+impl<'a> EnumGroupPlan<'a> {
+	fn new(no_atom: bool, variants: Vec<&'a VariantPlan>, position: &Position) -> Self {
+		if no_atom {
+			Self::PeekedFallback(PeekedFallbackPlan::new(variants, position))
+		} else {
+			let first_type = variants[0].first_type.clone();
+			Self::AtomDispatch(AtomDispatchPlan::new(first_type, variants, position))
 		}
 	}
+}
 
-	fn render_atom_dispatch(&self) -> TokenStream {
+impl<'a> Plan for EnumGroupPlan<'a> {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
+		match self {
+			Self::AtomDispatch(p) => p.render(wc),
+			Self::PeekedFallback(p) => p.render(wc),
+		}
+	}
+}
+
+/// Plan for a group of variants dispatched by atom on a shared first-field type.
+///
+/// All variants in the group have an effective atom; the type is peeked first,
+/// then `to_atom` selects the branch.  When `is_last`, unknown atoms and a
+/// missing peek both produce an error; otherwise they fall through silently.
+struct AtomDispatchPlan<'a> {
+	first_type: Type,
+	variants: Vec<&'a VariantPlan>,
+	is_last: bool,
+}
+
+impl<'a> AtomDispatchPlan<'a> {
+	fn new(first_type: Type, variants: Vec<&'a VariantPlan>, position: &Position) -> Self {
+		Self { first_type, variants, is_last: matches!(position, Position::Last | Position::Only) }
+	}
+}
+
+impl<'a> Plan for AtomDispatchPlan<'a> {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
 		let ty = &self.first_type;
 		let extract_atom: TokenStream = self
 			.variants
@@ -458,67 +512,93 @@ impl<'a> EnumVariantGroup<'a> {
 			.iter()
 			.map(|v| {
 				let atom_path = v.effective_atom.as_ref().expect("AtomDispatch variant must have atom").path();
-				let body = &v.body;
+				let body = v.body(wc);
 				quote! { #atom_path => { #body }, }
 			})
 			.collect();
 
-		let is_last = matches!(self.position, Position::Last | Position::Only);
-		let unexpected = unexpected_at_next();
-		if is_last {
-			quote! {
-				if p.peek::<#ty>() {
-					let c = p.peek_n(1);
-					match #extract_atom {
-						#atom_arms
-						_ => {
-							return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
-						}
-					}
-				} else {
-					#unexpected
-				}
-			}
+		let unknown_atom_arm = if self.is_last {
+			quote! { _ => { return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?; } }
 		} else {
-			quote! {
-				if p.peek::<#ty>() {
-					let c = p.peek_n(1);
-					match #extract_atom {
-						#atom_arms
-						_ => {}
-					}
+			quote! { _ => {} }
+		};
+		let else_branch = if self.is_last {
+			let unexpected = unexpected_at_next();
+			quote! { else { #unexpected } }
+		} else {
+			TokenStream::new()
+		};
+		quote! {
+			if p.peek::<#ty>() {
+				let c = p.peek_n(1);
+				match #extract_atom {
+					#atom_arms
+					#unknown_atom_arm
 				}
-			}
+			} #else_branch
 		}
 	}
+}
 
-	fn render_peeked_fallback(&self, where_collector: &mut WhereCollector) -> TokenStream {
-		let is_outer_last = matches!(self.position, Position::Last | Position::Only);
-		let plan = OneMustOccurPlan::for_group(&self.variants);
-		let hoisted_bindings = plan.hoisted_bindings();
-		let hoisted_preloop = plan.hoisted_preloop();
-		let hoisted_var_names = plan.hoisted_var_names();
+/// Plan for a group of variants dispatched by type-peek (no effective atom on
+/// the group key).  Handles three sub-cases in priority order:
+///
+/// 1. Single variant, last group, no hoisting — emit body directly.
+/// 2. Shared-prefix variants — delegate to `SharedPrefixPlan`.
+/// 3. General case — emit one `if type_check { body }` block per variant,
+///    with optional hoisted bindings and trailing fallback.
+struct PeekedFallbackPlan<'a> {
+	variants: Vec<&'a VariantPlan>,
+	is_last: bool,
+}
 
-		if is_outer_last && self.variants.len() == 1 && plan.shared_atom_paths.is_empty() {
-			let body = &self.variants[0].body;
-			return quote! {
-				#hoisted_bindings
-				#hoisted_preloop
-				{ #body }
-			};
+impl<'a> PeekedFallbackPlan<'a> {
+	fn new(variants: Vec<&'a VariantPlan>, position: &Position) -> Self {
+		Self { variants, is_last: matches!(position, Position::Last | Position::Only) }
+	}
+}
+
+impl<'a> Plan for PeekedFallbackPlan<'a> {
+	fn render(&self, where_collector: &mut WhereCollector) -> TokenStream {
+		let hoist = SharedAtomHoistPlan::new(&self.variants);
+
+		// Single variant, last group, no hoisting — emit body directly.
+		if self.is_last && self.variants.len() == 1 && hoist.shared_atom_paths.is_empty() {
+			return self.variants[0].body(where_collector);
 		}
 
-		if let Some(shared_prefix) = SharedPrefixPlan::for_group(&self.variants) {
-			return shared_prefix.render(is_outer_last, where_collector);
+		// Shared prefix across all variants — consume prefix first, then atom-dispatch.
+		if let Some(p) = SharedPrefixPlan::try_new(&self.variants, self.is_last) {
+			return p.render(where_collector);
 		}
+
+		// General case: per-variant if-blocks with optional hoisting.
+		MultiVariantBlocksPlan { variants: &self.variants, is_last: self.is_last, hoist: &hoist }
+			.render(where_collector)
+	}
+}
+
+/// General `PeekedFallback` rendering: per-variant `if discriminator { body }`
+/// blocks with optional shared-atom hoisting and a fallback at the end.
+struct MultiVariantBlocksPlan<'a, 'b> {
+	variants: &'b [&'a VariantPlan],
+	is_last: bool,
+	hoist: &'b SharedAtomHoistPlan<'a>,
+}
+
+impl<'a, 'b> Plan for MultiVariantBlocksPlan<'a, 'b> {
+	fn render(&self, where_collector: &mut WhereCollector) -> TokenStream {
+		let hoisted_bindings = self.hoist.hoisted_bindings();
+		let hoisted_preloop = self.hoist.hoisted_preloop();
+		let hoisted_var_names = self.hoist.hoisted_var_names();
 
 		let variant_blocks: TokenStream = self
 			.variants
 			.iter()
 			.map(|variant| {
-				let type_check = variant.discriminator(&plan.shared_atom_paths);
+				let type_check = variant.discriminator(&self.hoist.shared_atom_paths);
 				let final_step = if hoisted_var_names.is_empty() {
-					variant.body.clone()
+					variant.body(where_collector)
 				} else {
 					variant.body_with_hoisted(&hoisted_var_names, where_collector)
 				};
@@ -533,7 +613,7 @@ impl<'a> EnumVariantGroup<'a> {
 			self.variants[0].return_with_hoisted_only(&hoisted_var_names)
 		};
 
-		let trailing = if is_outer_last {
+		let trailing = if self.is_last {
 			quote! { #fallback }
 		} else {
 			TokenStream::new()
@@ -548,19 +628,19 @@ impl<'a> EnumVariantGroup<'a> {
 	}
 }
 
-/// Hoisting plan for `one_must_occur` sibling variants that share atom fields.
+/// Hoisting plan for sibling variants in a `PeekedFallback` group that share atom fields.
 ///
 /// When variants share a field with the same atom (e.g. `balance` in
 /// `[ wrap | wrap-reverse ] || balance`), we hoist it: declare the binding at
 /// group level and run a pre-loop to consume it before the variant discriminator.
 /// Per-variant bodies then reference the hoisted bindings instead of redeclaring them.
-struct OneMustOccurPlan<'a> {
+struct SharedAtomHoistPlan<'a> {
 	shared_atom_paths: Vec<String>,
 	shared_fields: Vec<&'a Field>,
 }
 
-impl<'a> OneMustOccurPlan<'a> {
-	fn for_group(variants: &[&'a VariantPlan]) -> Self {
+impl<'a> SharedAtomHoistPlan<'a> {
+	fn new(variants: &[&'a VariantPlan]) -> Self {
 		if variants.len() <= 1 {
 			return Self { shared_atom_paths: Vec::new(), shared_fields: Vec::new() };
 		}
@@ -624,10 +704,11 @@ struct SharedPrefixPlan<'a> {
 	atom_variants: Vec<&'a VariantPlan>,
 	/// Variant with only the prefix field (no second field), if any.
 	bare_variant: Option<&'a VariantPlan>,
+	is_last: bool,
 }
 
 impl<'a> SharedPrefixPlan<'a> {
-	fn for_group(variants: &[&'a VariantPlan]) -> Option<Self> {
+	fn try_new(variants: &[&'a VariantPlan], is_last: bool) -> Option<Self> {
 		if variants.len() < 2 {
 			return None;
 		}
@@ -667,10 +748,13 @@ impl<'a> SharedPrefixPlan<'a> {
 		if atom_variants.is_empty() {
 			return None;
 		}
-		Some(Self { prefix_ty: first_field.ty.clone(), atom_variants, bare_variant })
+		Some(Self { prefix_ty: first_field.ty.clone(), atom_variants, bare_variant, is_last })
 	}
+}
 
-	fn render(&self, is_last: bool, where_collector: &mut WhereCollector) -> TokenStream {
+impl<'a> Plan for SharedPrefixPlan<'a> {
+	fn render(&self, where_collector: &mut WhereCollector) -> TokenStream {
+		let is_last = self.is_last;
 		let prefix_ty = &self.prefix_ty;
 		where_collector.add(prefix_ty);
 		let atom_set = self.atom_variants[0].fields[1]
@@ -706,30 +790,20 @@ impl<'a> SharedPrefixPlan<'a> {
 			quote! { _ => {} }
 		};
 
-		if is_last {
-			quote! {
-				if p.peek::<#prefix_ty>() {
-					let v0 = p.parse::<#prefix_ty>()?;
-					let c = p.peek_n(1);
-					match p.to_atom::<#atom_set>(c) {
-						#atom_arms
-						#default_arm
-					}
-				} else {
-					return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
-				}
-			}
+		let else_branch = if is_last {
+			quote! { else { return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?; } }
 		} else {
-			quote! {
-				if p.peek::<#prefix_ty>() {
-					let v0 = p.parse::<#prefix_ty>()?;
-					let c = p.peek_n(1);
-					match p.to_atom::<#atom_set>(c) {
-						#atom_arms
-						#default_arm
-					}
+			TokenStream::new()
+		};
+		quote! {
+			if p.peek::<#prefix_ty>() {
+				let v0 = p.parse::<#prefix_ty>()?;
+				let c = p.peek_n(1);
+				match p.to_atom::<#atom_set>(c) {
+					#atom_arms
+					#default_arm
 				}
-			}
+			} #else_branch
 		}
 	}
 }
@@ -743,17 +817,18 @@ fn derive_struct_body(
 	let fields = Field::from_fields(&data.fields)?;
 	let members = members_tokens(&data.fields);
 	Ok(if parse_mode == FieldParseMode::Sequential {
-		generate_sequential_parsing(&fields, &members, post_parse_steps, quote! { Self }, where_collector)
+		SequentialPlan { fields: &fields, members: &members, post_parse_steps, constructor: quote! { Self } }
+			.render(where_collector)
 	} else {
-		generate_must_occur_parsing(
-			&fields,
-			&members,
+		MustOccurPlan {
+			fields: &fields,
+			members: &members,
 			post_parse_steps,
 			parse_mode,
-			quote! { Self },
-			where_collector,
-			&[],
-		)
+			constructor: quote! { Self },
+			hoisted: &[],
+		}
+		.render(where_collector)
 	})
 }
 
@@ -763,7 +838,7 @@ fn derive_enum_body(
 	where_collector: &mut WhereCollector,
 ) -> Result<TokenStream> {
 	let plans: Vec<VariantPlan> =
-		data.variants.iter().map(|v| VariantPlan::new(v, post_parse_steps, where_collector)).collect::<Result<_>>()?;
+		data.variants.iter().map(|v| VariantPlan::new(v, post_parse_steps)).collect::<Result<_>>()?;
 
 	// Group by (first-field type, has-effective-atom). No-atom variants get their
 	// own peeked-fallback group, after any atom-dispatch group for the same type.
@@ -783,10 +858,7 @@ fn derive_enum_body(
 		.with_position()
 		.map(|(position, ((_type_str, no_atom), group))| {
 			let variants: Vec<&VariantPlan> = group.collect();
-			let first_type = variants[0].first_type.clone();
-			let kind = if no_atom { GroupKind::PeekedFallback } else { GroupKind::AtomDispatch };
-			let group = EnumVariantGroup { first_type, kind, variants, position };
-			Ok(group.render(where_collector))
+			Ok(EnumGroupPlan::new(no_atom, variants, &position).render(where_collector))
 		})
 		.collect::<Result<TokenStream>>()?;
 	Ok(ts)

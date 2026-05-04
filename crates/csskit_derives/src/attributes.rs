@@ -41,7 +41,7 @@ pub fn extract_field_parse_mode(attrs: &[Attribute]) -> Result<FieldParseMode> {
 	})
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Atom(ExprPath);
 
 impl Atom {

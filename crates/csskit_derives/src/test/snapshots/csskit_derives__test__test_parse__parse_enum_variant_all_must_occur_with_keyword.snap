@@ -50,9 +50,7 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurEnum {
                 _ => {}
             }
         }
-        {
-            let v0 = p.parse::<String>()?;
-            return Ok(Self::Simple { 0: v0 });
-        }
+        let v0 = p.parse::<String>()?;
+        return Ok(Self::Simple { 0: v0 });
     }
 }

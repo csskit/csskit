@@ -20,9 +20,7 @@ where
             let v0 = p.parse::<T>()?;
             return Ok(Self::Single { 0: v0 });
         }
-        {
-            let v0 = p.parse::<Vec<T>>()?;
-            return Ok(Self::Multiple { 0: v0 });
-        }
+        let v0 = p.parse::<Vec<T>>()?;
+        return Ok(Self::Multiple { 0: v0 });
     }
 }
