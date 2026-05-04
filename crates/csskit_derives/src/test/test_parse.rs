@@ -532,3 +532,26 @@ fn parse_sequential_optional_keyword() {
 	};
 	assert_parse_snapshot!(data, "parse_sequential_optional_keyword");
 }
+
+#[test]
+fn parse_enum_one_must_occur_variant_mixed_atom_and_type_fields() {
+	let data = to_deriveinput! {
+		enum VerticalAlign {
+			#[parse(one_must_occur)]
+			First {
+				#[atom(CssAtomSet::First)]
+				first: Option<Ident>,
+				alignment_baseline: Option<AlignmentBaseline>,
+				baseline_shift: Option<BaselineShift>,
+			},
+			#[parse(one_must_occur)]
+			Last {
+				#[atom(CssAtomSet::Last)]
+				last: Option<Ident>,
+				alignment_baseline: Option<AlignmentBaseline>,
+				baseline_shift: Option<BaselineShift>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_one_must_occur_variant_mixed_atom_and_type_fields");
+}

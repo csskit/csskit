@@ -389,7 +389,7 @@ impl VariantPlan {
 		}
 	}
 
-	fn discriminator(&self, shared_atom_paths: &[String]) -> TokenStream {
+	fn discriminator(&self, shared_atom_paths: &[String], hoisted_type_var_names: &[&Ident]) -> TokenStream {
 		let discriminating =
 			self.fields.iter().find(|f| f.atom_path_string().is_some_and(|ap| !shared_atom_paths.contains(&ap)));
 		if let Some(field) = discriminating {
@@ -403,6 +403,7 @@ impl VariantPlan {
 		let peek_types: Vec<Type> = self
 			.fields
 			.iter()
+			.filter(|f| !hoisted_type_var_names.contains(&&f.var))
 			.scan(true, |still_optional, f| {
 				if !*still_optional {
 					return None;
@@ -416,6 +417,8 @@ impl VariantPlan {
 		let type_checks: Vec<TokenStream> = peek_types.iter().map(|t| quote! { p.peek::<#t>() }).collect();
 		if type_checks.len() == 1 {
 			type_checks.into_iter().next().expect("len checked")
+		} else if type_checks.is_empty() {
+			quote! { false }
 		} else {
 			quote! { #(#type_checks)||* }
 		}
@@ -610,28 +613,29 @@ struct MultiVariantBlocksPlan<'a, 'b> {
 impl<'a, 'b> Plan for MultiVariantBlocksPlan<'a, 'b> {
 	fn render(&self, where_collector: &mut WhereCollector) -> TokenStream {
 		let hoisted_bindings = self.hoist.hoisted_bindings();
-		let hoisted_preloop = self.hoist.hoisted_preloop();
-		let hoisted_var_names = self.hoist.hoisted_var_names();
+		let hoisted_preloop = self.hoist.hoisted_preloop(where_collector);
+		let all_hoisted_var_names = self.hoist.all_hoisted_var_names();
 
 		let variant_blocks: TokenStream = self
 			.variants
 			.iter()
 			.map(|variant| {
-				let type_check = variant.discriminator(&self.hoist.shared_atom_paths);
-				let final_step = if hoisted_var_names.is_empty() {
+				let type_check =
+					variant.discriminator(&self.hoist.shared_atom_paths, &self.hoist.hoisted_type_var_names());
+				let final_step = if all_hoisted_var_names.is_empty() {
 					variant.body(where_collector)
 				} else {
-					variant.body_with_hoisted(&hoisted_var_names, where_collector)
+					variant.body_with_hoisted(&all_hoisted_var_names, where_collector)
 				};
 				quote! { if #type_check { #final_step } }
 			})
 			.collect();
 
-		let fallback = if hoisted_var_names.is_empty() {
+		let fallback = if all_hoisted_var_names.is_empty() {
 			let unexpected = unexpected_at_next();
 			quote! { #unexpected }
 		} else {
-			self.variants[0].return_with_hoisted_only(&hoisted_var_names)
+			self.variants[0].return_with_hoisted_only(&all_hoisted_var_names)
 		};
 
 		let trailing = if self.is_last {
@@ -651,19 +655,25 @@ impl<'a, 'b> Plan for MultiVariantBlocksPlan<'a, 'b> {
 
 /// Hoisting plan for sibling variants in a `PeekedFallback` group that share atom fields.
 ///
-/// When variants share a field with the same atom (e.g. `balance` in
-/// `[ wrap | wrap-reverse ] || balance`), we hoist it: declare the binding at
-/// group level and run a pre-loop to consume it before the variant discriminator.
-/// Per-variant bodies then reference the hoisted bindings instead of redeclaring them.
+/// Hoists two kinds of shared fields:
+/// - Atom fields (e.g. `balance` in `[ wrap | wrap-reverse ] || balance`): declared at
+///   group level and consumed in a pre-check before the variant discriminator.
+/// - Non-atom `Option<Type>` fields shared across all variants (e.g. `alignment_baseline`
+///   in `[ first | last ] || <'alignment-baseline'>`): declared at group level and
+///   consumed in a pre-loop before the variant discriminator, enabling parse of input
+///   that starts with those types without a leading keyword.
+///
+/// Per-variant bodies reference the hoisted bindings instead of redeclaring them.
 struct SharedAtomHoistPlan<'a> {
 	shared_atom_paths: Vec<String>,
 	shared_fields: Vec<&'a Field>,
+	shared_type_fields: Vec<&'a Field>,
 }
 
 impl<'a> SharedAtomHoistPlan<'a> {
 	fn new(variants: &[&'a VariantPlan]) -> Self {
 		if variants.len() <= 1 {
-			return Self { shared_atom_paths: Vec::new(), shared_fields: Vec::new() };
+			return Self { shared_atom_paths: Vec::new(), shared_fields: Vec::new(), shared_type_fields: Vec::new() };
 		}
 
 		let first_atoms: Vec<String> = variants[0].fields.iter().filter_map(Field::atom_path_string).collect();
@@ -680,23 +690,48 @@ impl<'a> SharedAtomHoistPlan<'a> {
 			.filter(|f| f.atom_path_string().is_some_and(|ap| shared_atom_paths.contains(&ap)))
 			.collect();
 
-		Self { shared_atom_paths, shared_fields }
+		let shared_type_fields: Vec<&Field> = if variants.iter().all(|v| v.parse_mode == FieldParseMode::OneMustOccur) {
+			variants[0]
+				.fields
+				.iter()
+				.filter(|f| f.atom.is_none() && f.ty.is_option())
+				.filter(|f| {
+					let var_str = f.var.to_string();
+					let ty = &f.ty;
+					let ty_str = quote!(#ty).to_string();
+					variants[1..].iter().all(|v| {
+						v.fields.iter().any(|vf| {
+							let vf_ty = &vf.ty;
+							vf.atom.is_none() && vf.var == var_str && quote!(#vf_ty).to_string() == ty_str
+						})
+					})
+				})
+				.collect()
+		} else {
+			Vec::new()
+		};
+
+		Self { shared_atom_paths, shared_fields, shared_type_fields }
 	}
 
 	fn shared_atom(&self) -> Option<&Atom> {
 		self.shared_fields.first().and_then(|f| f.atom.as_ref())
 	}
 
-	fn hoisted_var_names(&self) -> Vec<&Ident> {
-		self.shared_fields.iter().map(|f| &f.var).collect()
+	fn hoisted_type_var_names(&self) -> Vec<&Ident> {
+		self.shared_type_fields.iter().map(|f| &f.var).collect()
+	}
+
+	fn all_hoisted_var_names(&self) -> Vec<&Ident> {
+		self.shared_fields.iter().chain(self.shared_type_fields.iter()).map(|f| &f.var).collect()
 	}
 
 	fn hoisted_bindings(&self) -> TokenStream {
-		self.shared_fields.iter().map(|f| f.binding()).collect()
+		self.shared_fields.iter().chain(self.shared_type_fields.iter()).map(|f| f.binding()).collect()
 	}
 
-	fn hoisted_preloop(&self) -> TokenStream {
-		match self.shared_fields.as_slice() {
+	fn hoisted_preloop(&self, wc: &mut WhereCollector) -> TokenStream {
+		let atom_preloop = match self.shared_fields.as_slice() {
 			[] => TokenStream::new(),
 			[field] => field.atom_parse_if_peek(),
 			_ => {
@@ -704,7 +739,20 @@ impl<'a> SharedAtomHoistPlan<'a> {
 				let parse_steps: TokenStream = self.shared_fields.iter().map(|f| f.atom_match_arm()).collect();
 				emit_peek_loop(atom.binding_block(), parse_steps)
 			}
-		}
+		};
+
+		let type_preloop = if self.shared_type_fields.is_empty() {
+			TokenStream::new()
+		} else {
+			let parse_steps: TokenStream = self
+				.shared_type_fields
+				.iter()
+				.map(|f| f.parse_normal_tokens(FieldParseMode::OneMustOccur, wc))
+				.collect();
+			emit_peek_loop(TokenStream::new(), parse_steps)
+		};
+
+		quote! { #atom_preloop #type_preloop }
 	}
 }
 
