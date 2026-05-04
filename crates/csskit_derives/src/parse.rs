@@ -390,6 +390,18 @@ impl VariantPlan {
 	}
 
 	fn discriminator(&self, shared_atom_paths: &[String], hoisted_type_var_names: &[&Ident]) -> TokenStream {
+		if self.parse_mode == FieldParseMode::OneMustOccur {
+			let peeks: Vec<TokenStream> = self
+				.fields
+				.iter()
+				.filter(|f| f.atom_path_string().is_some_and(|ap| !shared_atom_paths.contains(&ap)))
+				.map(|f| f.peek_tokens())
+				.collect();
+			if !peeks.is_empty() {
+				return quote! { #(#peeks)||* };
+			}
+		}
+
 		let discriminating =
 			self.fields.iter().find(|f| f.atom_path_string().is_some_and(|ap| !shared_atom_paths.contains(&ap)));
 		if let Some(field) = discriminating {

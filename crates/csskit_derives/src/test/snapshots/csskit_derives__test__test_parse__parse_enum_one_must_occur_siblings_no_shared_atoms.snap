@@ -1,0 +1,89 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for MarginTrim {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        if p.peek::<Ident>() {
+            let c = p.peek_n(1);
+            match p.to_atom::<FooAtoms>(c) {
+                FooAtoms::None => {
+                    let v0 = p.parse::<Ident>()?;
+                    return Ok(Self::None { 0: v0 });
+                }
+                _ => {}
+            }
+        }
+        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::Block
+            || p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::Inline
+        {
+            let mut block: Option<Ident> = None;
+            let mut inline: Option<Ident> = None;
+            loop {
+                let c = p.peek_n(1);
+                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+                    p.to_atom::<FooAtoms>(c)
+                } else {
+                    <FooAtoms>::default()
+                };
+                if block.is_none() && atom == FooAtoms::Block {
+                    block = Some(p.parse::<Ident>()?);
+                    continue;
+                }
+                if inline.is_none() && atom == FooAtoms::Inline {
+                    inline = Some(p.parse::<Ident>()?);
+                    continue;
+                }
+                break;
+            }
+            if block.is_none() && inline.is_none() {
+                let c = p.peek_n(1);
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+            }
+            return Ok(Self::BlockInline {
+                block: block,
+                inline: inline,
+            });
+        }
+        if p.peek::<Ident>()
+            && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::BlockStart
+            || p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::BlockEnd
+        {
+            let mut block_start: Option<Ident> = None;
+            let mut block_end: Option<Ident> = None;
+            loop {
+                let c = p.peek_n(1);
+                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+                    p.to_atom::<FooAtoms>(c)
+                } else {
+                    <FooAtoms>::default()
+                };
+                if block_start.is_none() && atom == FooAtoms::BlockStart {
+                    block_start = Some(p.parse::<Ident>()?);
+                    continue;
+                }
+                if block_end.is_none() && atom == FooAtoms::BlockEnd {
+                    block_end = Some(p.parse::<Ident>()?);
+                    continue;
+                }
+                break;
+            }
+            if block_start.is_none() && block_end.is_none() {
+                let c = p.peek_n(1);
+                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+            }
+            return Ok(Self::BlockStartBlockEnd {
+                block_start: block_start,
+                block_end: block_end,
+            });
+        }
+        return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
+    }
+}

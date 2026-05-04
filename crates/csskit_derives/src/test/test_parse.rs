@@ -555,3 +555,28 @@ fn parse_enum_one_must_occur_variant_mixed_atom_and_type_fields() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_one_must_occur_variant_mixed_atom_and_type_fields");
 }
+
+#[test]
+fn parse_enum_one_must_occur_siblings_no_shared_atoms() {
+	let data = to_deriveinput! {
+		enum MarginTrim {
+			#[atom(FooAtoms::None)]
+			None(Ident),
+			#[parse(one_must_occur)]
+			BlockInline {
+				#[atom(FooAtoms::Block)]
+				block: Option<Ident>,
+				#[atom(FooAtoms::Inline)]
+				inline: Option<Ident>,
+			},
+			#[parse(one_must_occur)]
+			BlockStartBlockEnd {
+				#[atom(FooAtoms::BlockStart)]
+				block_start: Option<Ident>,
+				#[atom(FooAtoms::BlockEnd)]
+				block_end: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_one_must_occur_siblings_no_shared_atoms");
+}

@@ -36,6 +36,10 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block-start");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block-start block-end");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline-start");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline-end");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block inline");
 		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "auto");
 	}
