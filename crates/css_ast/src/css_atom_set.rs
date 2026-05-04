@@ -1130,6 +1130,7 @@ pub enum CssAtomSet {
 	LinearGradient,
 	LinearRgb,
 	Lineargradient,
+	Linearrgb,
 	Linen,
 	Link,
 	LinkParameters,

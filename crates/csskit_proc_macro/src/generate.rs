@@ -68,7 +68,7 @@ pub trait ToType {
 
 impl ToFieldName for DefIdent {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
-		let pascal = self.0.to_pascal_case();
+		let pascal = self.0.to_lowercase().to_pascal_case();
 		format_ident!("{}", if size_hint > 0 { pluralize(pascal) } else { pascal })
 	}
 }
@@ -398,12 +398,12 @@ impl DefExt for Def {
 				quote! { #[atom(CssAtomSet::#name)] }
 			}
 			Def::Ident(DefIdent(str)) if derives_parse => {
-				let name = format_ident!("{}", str.to_pascal_case());
+				let name = format_ident!("{}", str.to_lowercase().to_pascal_case());
 				quote! { #[atom(CssAtomSet::#name)] }
 			}
 			Def::Optional(inner) => match inner.as_ref() {
 				Def::Ident(DefIdent(str)) if derives_parse => {
-					let name = format_ident!("{}", str.to_pascal_case());
+					let name = format_ident!("{}", str.to_lowercase().to_pascal_case());
 					quote! { #[atom(CssAtomSet::#name)] }
 				}
 				_ => quote! {},
@@ -513,7 +513,7 @@ impl DefExt for Def {
 				.unique_by(|def| if let Self::Ident(DefIdent(str)) = def { str } else { "" })
 				.filter_map(|def| {
 					if let Self::Ident(def) = def {
-						let ident = format_ident!("{}", def.to_string().to_pascal_case());
+						let ident = format_ident!("{}", def.to_string().to_lowercase().to_pascal_case());
 						let ty = def.to_type();
 						Some(quote! { #[atom(CssAtomSet::#ident)] #ident(#ty), })
 					} else {
