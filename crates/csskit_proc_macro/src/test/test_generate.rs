@@ -512,3 +512,10 @@ fn keyword_only_alternation_group_in_options() {
 	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
 	assert_snapshot!(syntax, data, "keyword_only_alternation_group_in_options");
 }
+
+#[test]
+fn struct_keyword_group_options_with_style_values() {
+	let syntax = to_valuedef!(" [ first | last ] || <'alignment-baseline'> || <'baseline-shift'> ");
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
+	assert_snapshot!(syntax, data, "struct_keyword_group_options_with_style_values");
+}

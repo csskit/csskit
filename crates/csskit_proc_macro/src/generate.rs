@@ -337,7 +337,7 @@ fn distinguishing_keyword_names(siblings: &[&Def]) -> Vec<Option<Vec<String>>> {
 				.filter(|kw| keyword_sets.iter().enumerate().any(|(j, other)| j != i && !other.contains(kw)))
 				.cloned()
 				.collect();
-			if unique.is_empty() || unique.len() == mine.len() { None } else { Some(unique) }
+			if unique.is_empty() { None } else { Some(unique) }
 		})
 		.collect()
 }
