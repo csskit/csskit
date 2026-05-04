@@ -316,7 +316,19 @@ fn find_options_with_keywords(def: &Def) -> Vec<&Def> {
 /// should fall back to the full concatenated name.
 fn distinguishing_keyword_names(siblings: &[&Def]) -> Vec<Option<Vec<String>>> {
 	if siblings.len() < 2 {
-		return siblings.iter().map(|_| None).collect();
+		return siblings
+			.iter()
+			.map(|sibling| match sibling {
+				Def::Combinator(children, DefCombinatorStyle::Options) => {
+					let kws: Vec<String> = children
+						.iter()
+						.filter_map(|d| if let Def::Ident(DefIdent(s)) = d { Some(s.clone()) } else { None })
+						.collect();
+					if kws.is_empty() { None } else { Some(kws) }
+				}
+				_ => None,
+			})
+			.collect();
 	}
 	let keyword_sets: Vec<Vec<String>> = siblings
 		.iter()
@@ -807,7 +819,8 @@ impl GenerateDefinition for Def {
 								// Variant name: distinguishing keywords (if computed) else full
 								// concatenation of all child names.
 								let name = if let Some(keywords) = &distinguishing[idx] {
-									format_ident!("{}", keywords.iter().map(|k| k.to_pascal_case()).collect::<String>())
+									let auto = keywords.iter().map(|k| k.to_pascal_case()).collect::<String>();
+									format_ident!("{}", get_type_rename(&auto).unwrap_or(&auto))
 								} else {
 									inner.to_variant_name(0)
 								};
