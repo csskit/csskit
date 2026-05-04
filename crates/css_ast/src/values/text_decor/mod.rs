@@ -333,53 +333,37 @@ pub enum TextDecorationStyleStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum TextDecorationThicknessStyleValue {}
 
-// /// Represents the style value for `text-emphasis` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis).
-// ///
-// /// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'text-emphasis-style'> || <'text-emphasis-color'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis
-// #[syntax(" <'text-emphasis-style'> || <'text-emphasis-color'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     inherits = Unknown,
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = TextEmphasisColor|TextEmphasisStyle,
-//     property_group = TextDecor,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.text-emphasis")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct TextEmphasisStyleValue;
+/// Represents the style value for `text-emphasis` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis).
+///
+/// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'text-emphasis-style'> || <'text-emphasis-color'>
+/// ```
+///
+/// https://drafts.csswg.org/css-text-decor-4/#text-emphasis
+#[syntax(" <'text-emphasis-style'> || <'text-emphasis-color'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = TextEmphasisColor|TextEmphasisStyle,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct TextEmphasisStyleValue<'a>;
 
 /// Represents the style value for `text-emphasis-color` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-color).
 ///
@@ -470,54 +454,36 @@ pub enum TextEmphasisPositionStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct TextEmphasisSkipStyleValue;
 
-// /// Represents the style value for `text-emphasis-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style).
-// ///
-// /// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style
-// #[syntax(
-//     " none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     inherits,
-//     applies_to = Text,
-//     animation_type = Discrete,
-//     shorthand_group = TextEmphasis,
-//     property_group = TextDecor,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.text-emphasis-style")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum TextEmphasisStyleStyleValue {}
+/// Represents the style value for `text-emphasis-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style).
+///
+/// The text-emphasis CSS property sets position and style for text emphasis marks, especially for East Asian languages.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string>
+/// ```
+///
+/// https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style
+#[syntax(" none | [ [ filled | open ] || [ dot | circle | double-circle | triangle | sesame ] ] | <string> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    shorthand_group = TextEmphasis,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-style"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum TextEmphasisStyleStyleValue {}
 
 /// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
 ///

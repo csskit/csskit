@@ -80,6 +80,23 @@ mod tests {
 		assert_eq!(std::mem::size_of::<CornerBlockEndShapeStyleValue>(), 80);
 		assert_eq!(std::mem::size_of::<CornerInlineStartShapeStyleValue>(), 80);
 		assert_eq!(std::mem::size_of::<CornerInlineEndShapeStyleValue>(), 80);
+		assert_eq!(std::mem::size_of::<CornerTopLeftStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerTopRightStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerBottomLeftStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerBottomRightStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerStartStartStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerStartEndStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerEndStartStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerEndEndStyleValue>(), 88);
+		assert_eq!(std::mem::size_of::<CornerTopStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerLeftStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerRightStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerBottomStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerBlockStartStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerBlockEndStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerInlineStartStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerInlineEndStyleValue>(), 156);
+		assert_eq!(std::mem::size_of::<CornerStyleValue>(), 300);
 		assert_eq!(std::mem::size_of::<BorderLimitStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BorderClipStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BorderTopClipStyleValue>(), 32);
@@ -141,5 +158,17 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "-10");
+	}
+
+	#[test]
+	fn test_corner_shorthands() {
+		assert_parse!(CssAtomSet::ATOMS, CornerTopLeftStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, CornerTopLeftStyleValue, "round");
+		assert_parse!(CssAtomSet::ATOMS, CornerTopLeftStyleValue, "10px round");
+		assert_parse!(CssAtomSet::ATOMS, CornerTopRightStyleValue, "5px squircle");
+		assert_parse!(CssAtomSet::ATOMS, CornerTopStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, CornerTopStyleValue, "10px 20px");
+		assert_parse_error!(CssAtomSet::ATOMS, CornerTopLeftStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, CornerTopLeftStyleValue, "red");
 	}
 }

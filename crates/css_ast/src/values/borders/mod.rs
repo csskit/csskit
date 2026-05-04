@@ -2812,94 +2812,62 @@ pub struct BoxShadowPositionStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BoxShadowSpreadStyleValue<'a>;
 
-// /// Represents the style value for `corner` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-radius'> || <'corner-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner
-// #[syntax(" <'border-radius'> || <'corner-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerStyleValue;
+/// Represents the style value for `corner` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-radius'> || <'corner-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner
+#[syntax(" <'border-radius'> || <'corner-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerStyleValue;
 
-// /// Represents the style value for `corner-block-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-block-end
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = BlockEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-block-end")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerBlockEndStyleValue;
+/// Represents the style value for `corner-block-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-block-end
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerBlockEndStyleValue;
 
 /// Represents the style value for `corner-block-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end-shape).
 ///
@@ -2932,50 +2900,34 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerBlockEndShapeStyleValue;
 
-// /// Represents the style value for `corner-block-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-block-start
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = BlockStart,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-block-start")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerBlockStartStyleValue;
+/// Represents the style value for `corner-block-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-block-start
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-start"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerBlockStartStyleValue;
 
 /// Represents the style value for `corner-block-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start-shape).
 ///
@@ -3008,95 +2960,63 @@ pub struct CornerBlockEndShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerBlockStartShapeStyleValue;
 
-// /// Represents the style value for `corner-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-bottom
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Bottom,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-bottom")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerBottomStyleValue;
+/// Represents the style value for `corner-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-bottom
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Bottom,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerBottomStyleValue;
 
-// /// Represents the style value for `corner-bottom-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-bottom-left
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Bottom|Left,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-bottom-left")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerBottomLeftStyleValue;
+/// Represents the style value for `corner-bottom-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-bottom-left
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Bottom|Left,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerBottomLeftStyleValue;
 
 /// Represents the style value for `corner-bottom-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape).
 ///
@@ -3129,50 +3049,34 @@ pub struct CornerBlockStartShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerBottomLeftShapeStyleValue;
 
-// /// Represents the style value for `corner-bottom-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-bottom-right
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Bottom|Right,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-bottom-right")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerBottomRightStyleValue;
+/// Represents the style value for `corner-bottom-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-bottom-right
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Bottom|Right,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-right"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerBottomRightStyleValue;
 
 /// Represents the style value for `corner-bottom-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape).
 ///
@@ -3236,50 +3140,34 @@ pub struct CornerBottomRightShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerBottomShapeStyleValue;
 
-// /// Represents the style value for `corner-end-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-end-end
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = BlockEnd|InlineEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-end-end")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerEndEndStyleValue;
+/// Represents the style value for `corner-end-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-end-end
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockEnd|InlineEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerEndEndStyleValue;
 
 /// Represents the style value for `corner-end-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end-shape).
 ///
@@ -3312,50 +3200,34 @@ pub struct CornerBottomShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerEndEndShapeStyleValue;
 
-// /// Represents the style value for `corner-end-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-end-start
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = BlockEnd|InlineStart,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-end-start")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerEndStartStyleValue;
+/// Represents the style value for `corner-end-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-end-start
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockEnd|InlineStart,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-start"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerEndStartStyleValue;
 
 /// Represents the style value for `corner-end-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start-shape).
 ///
@@ -3388,50 +3260,34 @@ pub struct CornerEndEndShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerEndStartShapeStyleValue;
 
-// /// Represents the style value for `corner-inline-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-inline-end
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = InlineEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-inline-end")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerInlineEndStyleValue;
+/// Represents the style value for `corner-inline-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-inline-end
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerInlineEndStyleValue;
 
 /// Represents the style value for `corner-inline-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape).
 ///
@@ -3464,50 +3320,34 @@ pub struct CornerEndStartShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerInlineEndShapeStyleValue;
 
-// /// Represents the style value for `corner-inline-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-inline-start
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = InlineStart,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-inline-start")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerInlineStartStyleValue;
+/// Represents the style value for `corner-inline-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-inline-start
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = InlineStart,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-start"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerInlineStartStyleValue;
 
 /// Represents the style value for `corner-inline-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape).
 ///
@@ -3540,50 +3380,34 @@ pub struct CornerInlineEndShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerInlineStartShapeStyleValue;
 
-// /// Represents the style value for `corner-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-left
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Left,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-left")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerLeftStyleValue;
+/// Represents the style value for `corner-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-left
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Left,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerLeftStyleValue;
 
 /// Represents the style value for `corner-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left-shape).
 ///
@@ -3616,50 +3440,34 @@ pub struct CornerInlineStartShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerLeftShapeStyleValue;
 
-// /// Represents the style value for `corner-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-right
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Right,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-right")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerRightStyleValue;
+/// Represents the style value for `corner-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-right
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Right,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-right"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerRightStyleValue;
 
 /// Represents the style value for `corner-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right-shape).
 ///
@@ -3722,50 +3530,34 @@ pub struct CornerRightShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerShapeStyleValue;
 
-// /// Represents the style value for `corner-start-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-start-end
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = BlockStart|InlineEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-start-end")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerStartEndStyleValue;
+/// Represents the style value for `corner-start-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-start-end
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|InlineEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-end"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerStartEndStyleValue;
 
 /// Represents the style value for `corner-start-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end-shape).
 ///
@@ -3798,50 +3590,34 @@ pub struct CornerShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerStartEndShapeStyleValue;
 
-// /// Represents the style value for `corner-start-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-start-start
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = BlockStart|InlineStart,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-start-start")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerStartStartStyleValue;
+/// Represents the style value for `corner-start-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-start-start
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = BlockStart|InlineStart,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-start"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerStartStartStyleValue;
 
 /// Represents the style value for `corner-start-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start-shape).
 ///
@@ -3874,95 +3650,63 @@ pub struct CornerStartEndShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerStartStartShapeStyleValue;
 
-// /// Represents the style value for `corner-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-radius'> || <'corner-top-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-top
-// #[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Top,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-top")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerTopStyleValue;
+/// Represents the style value for `corner-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-radius'> || <'corner-top-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-top
+#[syntax(" <'border-top-radius'> || <'corner-top-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerTopStyleValue;
 
-// /// Represents the style value for `corner-top-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-top-left
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Top|Left,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-top-left")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerTopLeftStyleValue;
+/// Represents the style value for `corner-top-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-top-left
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Left,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerTopLeftStyleValue;
 
 /// Represents the style value for `corner-top-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left-shape).
 ///
@@ -3995,50 +3739,34 @@ pub struct CornerStartStartShapeStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CornerTopLeftShapeStyleValue;
 
-// /// Represents the style value for `corner-top-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-top-left-radius'> || <'corner-top-left-shape'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#corner-top-right
-// #[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = BorderBox,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_side = Top|Right,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.corner-top-right")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct CornerTopRightStyleValue;
+/// Represents the style value for `corner-top-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-top-left-radius'> || <'corner-top-left-shape'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#corner-top-right
+#[syntax(" <'border-top-left-radius'> || <'corner-top-left-shape'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_side = Top|Right,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-right"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct CornerTopRightStyleValue;
 
 /// Represents the style value for `corner-top-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right-shape).
 ///

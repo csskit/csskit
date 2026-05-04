@@ -4,7 +4,6 @@ coverage/popular/foundation.6.7.5.css
 27:3:  -webkit-box-sizing: content-box;
 41:3:  -webkit-text-decoration: underline dotted;
 114:3:  -webkit-box-sizing: border-box;
-120:3:  white-space: normal; }
 130:3:  -webkit-box-sizing: border-box;
 171:3:  -webkit-touch-callout: none;
 172:3:  -webkit-user-select: none; }
@@ -303,7 +302,6 @@ coverage/popular/foundation.6.7.5.css
 2187:3:  text-rendering: optimizeLegibility; }
 2213:3:  text-rendering: optimizeLegibility; }
 2369:5:    content: "— "; }
-2390:3:  white-space: pre;
 2431:5:    background: transparent !important;
 2434:5:    -webkit-box-shadow: none !important;
 2435:13:            box-shadow: none !important;
@@ -337,9 +335,7 @@ coverage/popular/foundation.6.7.5.css
 2777:3:  -webkit-box-align: stretch;
 2778:3:  -webkit-align-items: stretch;
 2779:7:      -ms-flex-align: stretch;
-2791:3:  white-space: nowrap; }
 2796:3:  background: #e6e6e6;
-2799:3:  white-space: nowrap;
 2800:3:  display: -webkit-box;
 2801:3:  display: -webkit-flex;
 2802:3:  display: -ms-flexbox;
@@ -378,7 +374,6 @@ coverage/popular/foundation.6.7.5.css
 3070:7:      -ms-transform-origin: 50% 50%;
 3071:11:          transform-origin: 50% 50%; }
 3079:3:  clip: rect(0, 0, 0, 0) !important;
-3080:3:  white-space: nowrap !important;
 3090:3:  background: #1779ba;
 3093:5:    background: #1779ba;
 3096:5:    background: #767676;
@@ -619,7 +614,6 @@ coverage/popular/foundation.6.7.5.css
 4138:5:    border-color: transparent #1779ba transparent transparent;
 4147:5:    content: '';
 4149:5:    border-color: transparent transparent transparent #1779ba; }
-4187:3:  white-space: nowrap;
 4189:3:  background: #1779ba;
 4192:5:    background: #1779ba;
 4195:5:    background: #767676;
@@ -732,7 +726,6 @@ coverage/popular/foundation.6.7.5.css
 4770:3:  content: "«"; }
 4776:3:  content: "»"; }
 4806:7:      -ms-transform: translate(-50%, -50%);
-4812:3:  white-space: nowrap; }
 4820:5:    -webkit-overflow-scrolling: touch; }
 4830:3:  z-index: 1005;
 4834:3:  -webkit-overflow-scrolling: touch; }
@@ -841,9 +834,7 @@ coverage/popular/foundation.6.7.5.css
 5516:3:  -webkit-box-flex: 0;
 5518:7:      -ms-flex: 0 0 auto;
 5577:3:  clip: rect(0, 0, 0, 0) !important;
-5578:3:  white-space: nowrap !important;
 5586:3:  clip: auto !important;
-5587:3:  white-space: normal !important; }
 5656:3:  content: ' ';
 5657:3:  -webkit-flex-basis: 0;
 5658:7:      -ms-flex-preferred-size: 0;

@@ -11,9 +11,9 @@ mod tests {
 		assert_eq!(std::mem::size_of::<TextDecorationColorStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<TextDecorationStyleValue>(), 128);
 		assert_eq!(std::mem::size_of::<TextUnderlinePositionStyleValue>(), 36);
-		// assert_eq!(std::mem::size_of::<TextEmphasisStyleStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<TextEmphasisStyleStyleValue>(), 36);
 		assert_eq!(std::mem::size_of::<TextEmphasisColorStyleValue>(), 24);
-		// assert_eq!(std::mem::size_of::<TextEmphasisStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<TextEmphasisStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<TextEmphasisPositionStyleValue>(), 28);
 		assert_eq!(std::mem::size_of::<TextShadowStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<TextDecorationThicknessStyleValue>(), 20);
@@ -37,6 +37,34 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "right");
 		assert_parse_error!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "1px");
+	}
+
+	#[test]
+	fn test_text_emphasis_style() {
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "filled");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "open");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "dot");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "circle");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "double-circle");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "triangle");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "sesame");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "filled dot");
+		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "auto");
+	}
+
+	#[test]
+	fn test_text_emphasis() {
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "filled");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "dot");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "red");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "#ff0000");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "filled red");
+		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "dot blue");
+		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "invalid");
 	}
 
 	#[test]

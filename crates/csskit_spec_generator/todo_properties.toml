@@ -38,38 +38,12 @@ properties = [
   "border-color",
   "border-image-width",
   "border-shape",
-  "corner-top-left",
-  "corner-top-right",
-  "corner-bottom-left",
-  "corner-bottom-right",
-  "corner-start-start",
-  "corner-start-end",
-  "corner-end-start",
-  "corner-end-end",
-  "corner-top",
-  "corner-left",
-  "corner-right",
-  "corner-bottom",
-  "corner-block-start",
-  "corner-block-end",
-  "corner-inline-start",
-  "corner-inline-end",
-  "corner",
   "border-image",
   "border-image-slice",
 ]
 
 [color-adjust]
 properties = ["color-scheme"]
-
-[box]
-properties = []
-
-[conditional]
-properties = []
-
-[contain]
-properties = []
 
 [content]
 properties = ["content"]
@@ -81,7 +55,6 @@ properties = ["fill", "fill-image", "stroke", "stroke-image"]
 properties = [
   "font",
   "font-palette",
-
   "font-variant",
   "font-variant-alternates",
   "font-variant-east-asian",
@@ -119,23 +92,11 @@ properties = ["image-resolution"]
 [inline]
 properties = ["initial-letter-align"]
 
-[multicol]
-properties = []
-
 [lists]
 properties = ["counter-reset"]
 
 [overflow]
 properties = ["line-clamp", "text-overflow"]
-
-[regions]
-properties = []
-
-[ruby]
-properties = []
-
-[scroll-snap]
-properties = []
 
 [scroll-animations]
 properties = ["view-timeline"]
@@ -143,23 +104,11 @@ properties = ["view-timeline"]
 [shapes]
 properties = ["shape-inside", "shape-outside"]
 
-[sizing]
-properties = []
-
 [speech]
-properties = [
-  "speak-as",
-  "voice-family",
-  "voice-pitch",
-  "voice-range",
-  "voice-volume",
-]
+properties = ["speak-as", "voice-family", "voice-pitch", "voice-range"]
 
 [text]
-properties = ["text-spacing", "white-space"]
-
-[text-decor]
-properties = ["text-emphasis", "text-emphasis-style"]
+properties = ["text-spacing"]
 
 [transforms]
 properties = ["rotate", "transform-origin"]
@@ -173,14 +122,8 @@ properties = ["--*"]
 [counter-styles]
 properties = ["range", "additive-symbols"]
 
-[page]
-properties = ["size", "marks"]
-
 [pointer-animations]
 properties = ["animation-range-center"]
-
-[mixins]
-properties = ["result"]
 
 [motion]
 properties = ["offset", "offset-path"]

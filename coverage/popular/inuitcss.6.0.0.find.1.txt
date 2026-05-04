@@ -4,7 +4,6 @@ coverage/popular/inuitcss.6.0.0.css
 397:3:  -ms-text-size-adjust: 100%;
 456:3:  -moz-box-sizing: content-box;
 464:3:  background: #ff0;
-481:3:  white-space: pre-wrap; }
 632:3:  -moz-box-sizing: content-box;
 633:3:  -webkit-box-sizing: content-box;
 684:3:  -webkit-box-sizing: border-box;
@@ -34,8 +33,6 @@ coverage/popular/inuitcss.6.0.0.css
 994:5:    content: "—"; }
 1006:3:  background: none;
 1021:3:  filter: alpha(opacity=75); }
-1050:3:  white-space: nowrap;
-1057:3:  white-space: pre;
 1344:3:  font: 12px/1.5 sans-serif; }
 2381:3:  filter: alpha(opacity=50) !important; }
 2399:3:  content: "\00A0»" !important; }

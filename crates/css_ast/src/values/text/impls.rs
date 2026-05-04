@@ -40,6 +40,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<WhiteSpaceTrimStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<WordSpaceTransformStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<TextTransformStyleValue>(), 52);
+		assert_eq!(std::mem::size_of::<WhiteSpaceStyleValue>(), 80);
 	}
 
 	#[test]
@@ -94,6 +95,21 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextIndentStyleValue, "1em hanging each-line");
 		assert_parse_error!(CssAtomSet::ATOMS, TextIndentStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, TextIndentStyleValue, "hanging");
+	}
+
+	#[test]
+	fn test_white_space() {
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "pre");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "pre-wrap");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "pre-line");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "preserve");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "collapse");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "wrap");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "nowrap");
+		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "preserve nowrap");
+		assert_parse_error!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "1px");
 	}
 
 	#[test]

@@ -2341,20 +2341,11 @@ StyleSheet(
                 offset: SourceOffset(4804),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4805),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(4806),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: Normal(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(4806),
+                len: 6,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -7489,20 +7480,11 @@ StyleSheet(
                 offset: SourceOffset(11554),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(11555),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(11556),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(11556),
+                len: 6,
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -23681,20 +23663,11 @@ StyleSheet(
                 offset: SourceOffset(24667),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(24668),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(24669),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(24669),
+                len: 6,
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -23771,20 +23744,11 @@ StyleSheet(
                 offset: SourceOffset(24758),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(24759),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(24760),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(24760),
+                len: 6,
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -25132,20 +25096,11 @@ StyleSheet(
                 offset: SourceOffset(26206),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26207),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(26208),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(26208),
+                len: 6,
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

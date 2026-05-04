@@ -4,9 +4,7 @@ coverage/popular/mini.css.3.0.1.css
 130:3:  background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
 152:3:  content: "\201c";
 160:3:  content: "\a—  " attr(cite);
-161:3:  white-space: pre;
 684:3:  -o-object-fit: cover;
-772:3:  white-space: normal;
 843:3:  box-shadow: none;
 848:3:  box-shadow: none;
 861:3:  text-overflow: ellipsis;
@@ -14,7 +12,6 @@ coverage/popular/mini.css.3.0.1.css
 882:3:  content: '\2713';
 895:3:  content: '';
 970:3:  box-shadow: none;
-1066:3:  white-space: nowrap;
 1134:3:  content: '';
 1149:3:  content: '';
 1168:3:  position: -webkit-sticky;
@@ -47,7 +44,6 @@ coverage/popular/mini.css.3.0.1.css
 1602:3:  content: '';
 1603:3:  background: transparent;
 1617:3:  content: attr(aria-label);
-1622:3:  white-space: nowrap;
 1646:3:  clip: rect(0 0 0 0);
 1647:3:  -webkit-clip-path: inset(100%);
 1648:3:  clip-path: inset(100%);

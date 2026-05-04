@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		// assert_eq!(std::mem::size_of::<VoiceVolumeStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<VoiceVolumeStyleValue>(), 36);
 		assert_eq!(std::mem::size_of::<VoiceBalanceStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<SpeakStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<SpeakAsStyleValue>(), 16);
@@ -25,6 +25,20 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<VoiceRangeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceStressStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceDurationStyleValue>(), 16);
+	}
+
+	#[test]
+	fn test_voice_volume() {
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "silent");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "x-soft");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "soft");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "medium");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "loud");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "x-loud");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "soft 6db");
+		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "loud -3db");
+		assert_parse_error!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "1px");
 	}
 
 	#[test]

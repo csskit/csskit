@@ -39,11 +39,11 @@ pub struct CueStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <uri> <decibel>? | none
+/// <url> <decibel>? | none
 /// ```
 ///
 /// https://drafts.csswg.org/css-speech-1/#cue-after
-#[syntax(" <uri> <decibel>? | none ")]
+#[syntax(" <url> <decibel>? | none ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -66,11 +66,11 @@ pub struct CueAfterStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// <uri> <decibel>? | none
+/// <url> <decibel>? | none
 /// ```
 ///
 /// https://drafts.csswg.org/css-speech-1/#cue-before
-#[syntax(" <uri> <decibel>? | none ")]
+#[syntax(" <url> <decibel>? | none ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -578,46 +578,30 @@ pub enum VoiceRateStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum VoiceStressStyleValue {}
 
-// /// Represents the style value for `voice-volume` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-volume).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// silent | [ [ x-soft | soft | medium | loud | x-loud ] || <decibel> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-speech-1/#voice-volume
-// #[syntax(" silent | [ [ x-soft | soft | medium | loud | x-loud ] || <decibel> ] ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "medium",
-//     inherits,
-//     applies_to = Elements,
-//     animation_type = ByComputedValue,
-//     property_group = Speech,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.voice-volume")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum VoiceVolumeStyleValue {}
+/// Represents the style value for `voice-volume` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-volume).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// silent | [ [ x-soft | soft | medium | loud | x-loud ] || <decibel> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-speech-1/#voice-volume
+#[syntax(" silent | [ [ x-soft | soft | medium | loud | x-loud ] || <decibel> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "medium",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Speech,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-volume"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum VoiceVolumeStyleValue {}

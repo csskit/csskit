@@ -1378,20 +1378,11 @@ StyleSheet(
                 offset: SourceOffset(13476),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(13477),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(13478),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: PreWrap(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(13478),
+                len: 8,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -9228,20 +9219,11 @@ StyleSheet(
                 offset: SourceOffset(26061),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26062),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(26063),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(26063),
+                len: 6,
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -9351,20 +9333,11 @@ StyleSheet(
                 offset: SourceOffset(26168),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26169),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(26170),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: Pre(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(26170),
+                len: 3,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

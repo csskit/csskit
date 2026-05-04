@@ -448,8 +448,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Property>(), 328);
-		assert_eq!(std::mem::size_of::<StyleValue>(), 256);
+		assert_eq!(std::mem::size_of::<Property>(), 376);
+		assert_eq!(std::mem::size_of::<StyleValue>(), 304);
 	}
 
 	#[test]

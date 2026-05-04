@@ -5,7 +5,6 @@ coverage/popular/bootstrap.4.6.2.css
 93:3:  -webkit-text-decoration-skip-ink: none;
 188:3:  -ms-overflow-style: scrollbar;
 219:3:  text-align: -webkit-match-parent;
-313:3:  white-space: normal;
 470:3:  content: "\2014\00A0";
 580:3:  display: -ms-flexbox;
 582:3:  -ms-flex-wrap: wrap;
@@ -365,15 +364,12 @@ coverage/popular/bootstrap.4.6.2.css
 3096:3:  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 3108:3:  border-color: #343a40;
 3113:3:  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
-3216:3:  white-space: nowrap;
 3223:3:  content: "";
 3238:3:  z-index: 1000;
 3319:3:  content: "";
 3342:3:  content: "";
 3369:3:  content: "";
 3380:3:  content: "";
-3414:3:  white-space: nowrap;
-3447:3:  white-space: nowrap;
 3459:3:  display: -ms-inline-flexbox;
 3467:3:  -ms-flex: 1 1 auto;
 3473:3:  z-index: 1;
@@ -398,7 +394,6 @@ coverage/popular/bootstrap.4.6.2.css
 3685:3:  z-index: 3;
 3708:3:  display: -ms-flexbox;
 3710:3:  -ms-flex-align: center;
-3719:3:  white-space: nowrap;
 3793:3:  z-index: 1;
 3797:3:  -webkit-print-color-adjust: exact;
 3803:3:  display: -ms-inline-flexbox;
@@ -454,7 +449,6 @@ coverage/popular/bootstrap.4.6.2.css
 4377:3:  -ms-flex-wrap: wrap;
 4379:3:  -ms-flex-align: center;
 4381:3:  -ms-flex-pack: justify;
-4392:3:  white-space: nowrap;
 4400:3:  display: -ms-flexbox;
 4402:3:  -ms-flex-direction: column;
 4426:3:  -ms-flex-preferred-size: 100%;
@@ -519,7 +513,6 @@ coverage/popular/bootstrap.4.6.2.css
 5110:3:  z-index: 3;
 5113:3:  border-color: #007bff;
 5121:3:  border-color: #dee2e6;
-5163:3:  white-space: nowrap;
 5206:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 5221:3:  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
 5236:3:  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.5);
@@ -545,7 +538,6 @@ coverage/popular/bootstrap.4.6.2.css
 5504:3:  display: -ms-flexbox;
 5506:3:  -ms-flex-direction: column;
 5508:3:  -ms-flex-pack: center;
-5513:3:  white-space: nowrap;
 5530:3:  -webkit-animation: 1s linear infinite progress-bar-stripes;
 5531:3:  animation: 1s linear infinite progress-bar-stripes;
 5536:5:    -webkit-animation: none;
@@ -601,11 +593,9 @@ coverage/popular/bootstrap.4.6.2.css
 6183:5:    height: -webkit-min-content;
 6184:5:    height: -moz-min-content;
 6207:3:  z-index: 1070;
-6221:3:  white-space: normal;
 6242:3:  content: "";
 6243:3:  border-color: transparent;
 6320:3:  z-index: 1060;
-6334:3:  white-space: normal;
 6356:3:  content: "";
 6357:3:  border-color: transparent;
 6431:3:  content: "";

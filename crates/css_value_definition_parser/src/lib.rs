@@ -355,6 +355,7 @@ impl Def {
 						| "TimelineTriggerSource"
 						| "ListStyleImage" | "ListStyleType"
 						| "TextDecorationColor"
+						| "TextEmphasisColor"
 						| "ContainerName" | "Container"
 				)
 			}

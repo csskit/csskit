@@ -3845,20 +3845,11 @@ StyleSheet(
                 offset: SourceOffset(3473),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3474),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3475),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: Pre(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(3475),
+                len: 3,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -794,53 +794,37 @@ pub enum TextWrapModeStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum TextWrapStyleStyleValue {}
 
-// /// Represents the style value for `white-space` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space).
-// ///
-// /// The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-text-4/#white-space
-// #[syntax(
-//     " normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits = Unknown,
-//     applies_to = Text,
-//     animation_type = Discrete,
-//     property_group = Text,
-//     computed_value_type = Unknown,
-//     canonical_order = "n/a",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.white-space")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum WhiteSpaceStyleValue {}
+/// Represents the style value for `white-space` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space).
+///
+/// The white-space CSS property sets how white space is collapsed and how lines wrap. It is a shorthand for white-space-collapse and text-wrap-mode.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'>
+/// ```
+///
+/// https://drafts.csswg.org/css-text-4/#white-space
+#[syntax(
+	" normal | pre | pre-wrap | pre-line | <'white-space-collapse'> || <'text-wrap-mode'> || <'white-space-trim'> "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits = Unknown,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WhiteSpaceStyleValue {}
 
 /// Represents the style value for `white-space-collapse` as defined in [css-text-4](https://drafts.csswg.org/css-text-4/#white-space-collapse).
 ///

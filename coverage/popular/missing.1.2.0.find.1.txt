@@ -54,6 +54,5 @@ coverage/popular/missing.1.2.0.css
 2159:5:    content: " (" attr(title) ")";
 2210:3:  clip: rect(0 0 0 0);
 2211:3:  clip-path: inset(50%);
-2215:3:  white-space: nowrap;
 1:1:/* src/core/sanitize.css */
 2267:3:  -webkit-text-stroke: var(--stroke-width) var(--stroke-color);
