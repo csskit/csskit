@@ -811,12 +811,28 @@ impl GenerateDefinition for Def {
 								} else {
 									inner.to_variant_name(0)
 								};
-								let members = opts_children.iter().map(|child| {
-									let member_name = child.to_member_name(0);
-									let ty = child.to_type();
-									let field_attrs = child.type_attributes(derives_parse, derives_visitable);
-									quote! { #field_attrs #member_name: Option<#ty> }
-								});
+								let members: Vec<_> = opts_children
+									.iter()
+									.flat_map(|child| {
+										if let Def::Combinator(nested, DefCombinatorStyle::Options) = child {
+											nested
+												.iter()
+												.map(|nc| {
+													let member_name = nc.to_member_name(0);
+													let ty = nc.to_type();
+													let field_attrs =
+														nc.type_attributes(derives_parse, derives_visitable);
+													quote! { #field_attrs #member_name: Option<#ty> }
+												})
+												.collect::<Vec<_>>()
+										} else {
+											let member_name = child.to_member_name(0);
+											let ty = child.to_type();
+											let field_attrs = child.type_attributes(derives_parse, derives_visitable);
+											vec![quote! { #field_attrs #member_name: Option<#ty> }]
+										}
+									})
+									.collect();
 								let variant_attrs = if derives_parse {
 									quote! { #[parse(one_must_occur)] }
 								} else {

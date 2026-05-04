@@ -519,3 +519,10 @@ fn struct_keyword_group_options_with_style_values() {
 	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "struct_keyword_group_options_with_style_values");
 }
+
+#[test]
+fn enum_keyword_group_with_nested_options() {
+	let syntax = to_valuedef!(" [ foo | bar ] || [ baz || qux ] ");
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
+	assert_snapshot!(syntax, data, "enum_keyword_group_with_nested_options");
+}
