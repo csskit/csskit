@@ -508,6 +508,10 @@ impl<'a> EnumVariantGroup<'a> {
 			};
 		}
 
+		if let Some(shared_prefix) = SharedPrefixPlan::for_group(&self.variants) {
+			return shared_prefix.render(is_outer_last, where_collector);
+		}
+
 		let variant_blocks: TokenStream = self
 			.variants
 			.iter()
@@ -598,6 +602,133 @@ impl<'a> OneMustOccurPlan<'a> {
 				let atom = self.shared_atom().expect("shared_fields non-empty implies shared_atom");
 				let parse_steps: TokenStream = self.shared_fields.iter().map(|f| f.atom_match_arm()).collect();
 				emit_peek_loop(atom.binding_block(), parse_steps)
+			}
+		}
+	}
+}
+
+/// Shared-prefix plan: variants in a `PeekedFallback` group all start with the
+/// same non-atom required field type, differing only by a subsequent atom field
+/// (or having no second field at all — the bare fallback).
+///
+/// e.g. `none | <custom-ident> [element | content]?` generates:
+///   `None(Ident)`
+///   `CustomIdentElement(CustomIdent, #[atom(Element)] Ident)`
+///   `CustomIdentContent(CustomIdent, #[atom(Content)] Ident)`
+///   `CustomIdent(CustomIdent)`
+///
+/// This should consume `CustomIdent` first, then atom-dispatch on next token.
+struct SharedPrefixPlan<'a> {
+	prefix_ty: Type,
+	/// Variants that have a second field with a distinguishing atom.
+	atom_variants: Vec<&'a VariantPlan>,
+	/// Variant with only the prefix field (no second field), if any.
+	bare_variant: Option<&'a VariantPlan>,
+}
+
+impl<'a> SharedPrefixPlan<'a> {
+	fn for_group(variants: &[&'a VariantPlan]) -> Option<Self> {
+		if variants.len() < 2 {
+			return None;
+		}
+		// All variants must start with the same non-atom first field type.
+		let first_field = variants[0].fields.first()?;
+		if first_field.atom.is_some() {
+			return None;
+		}
+		let first_ty = &first_field.ty;
+		let prefix_ty_str = quote!(#first_ty).to_string();
+		let all_share_prefix = variants.iter().all(|v| {
+			v.fields.first().is_some_and(|f| {
+				let ty = &f.ty;
+				f.atom.is_none() && quote!(#ty).to_string() == prefix_ty_str
+			})
+		});
+		if !all_share_prefix {
+			return None;
+		}
+		let mut atom_variants = Vec::new();
+		let mut bare_variant = None;
+		for v in variants {
+			match v.fields.as_slice() {
+				[_prefix] => {
+					if bare_variant.is_some() {
+						return None; // two bare variants — ambiguous
+					}
+					bare_variant = Some(*v);
+				}
+				[_prefix, second] if second.atom.is_some() => {
+					atom_variants.push(*v);
+				}
+				_ => return None, // more complex structure — don't handle here
+			}
+		}
+		// Need at least one atom variant for this to be useful.
+		if atom_variants.is_empty() {
+			return None;
+		}
+		Some(Self { prefix_ty: first_field.ty.clone(), atom_variants, bare_variant })
+	}
+
+	fn render(&self, is_last: bool, where_collector: &mut WhereCollector) -> TokenStream {
+		let prefix_ty = &self.prefix_ty;
+		where_collector.add(prefix_ty);
+		let atom_set = self.atom_variants[0].fields[1]
+			.atom
+			.as_ref()
+			.expect("atom_variants guaranteed to have atom on field 1")
+			.first_segment();
+
+		let atom_arms: TokenStream = self
+			.atom_variants
+			.iter()
+			.map(|v| {
+				let atom_path = v.fields[1].atom.as_ref().expect("checked above").path();
+				let ident = &v.ident;
+				let second_ty = &v.fields[1].ty;
+				where_collector.add(second_ty);
+				quote! {
+					#atom_path => {
+						let v1 = p.parse::<#second_ty>()?;
+						return Ok(Self::#ident(v0, v1));
+					}
+				}
+			})
+			.collect();
+
+		let default_arm: TokenStream = if let Some(bare) = self.bare_variant {
+			let ident = &bare.ident;
+			quote! { _ => return Ok(Self::#ident(v0)), }
+		} else if is_last {
+			let unexpected = unexpected_at_c();
+			quote! { _ => { let c = p.peek_n(1); #unexpected } }
+		} else {
+			quote! { _ => {} }
+		};
+
+		if is_last {
+			quote! {
+				if p.peek::<#prefix_ty>() {
+					let v0 = p.parse::<#prefix_ty>()?;
+					let c = p.peek_n(1);
+					match p.to_atom::<#atom_set>(c) {
+						#atom_arms
+						#default_arm
+					}
+				} else {
+					return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
+				}
+			}
+		} else {
+			quote! {
+				if p.peek::<#prefix_ty>() {
+					let v0 = p.parse::<#prefix_ty>()?;
+					let c = p.peek_n(1);
+					match p.to_atom::<#atom_set>(c) {
+						#atom_arms
+						#default_arm
+					}
+				}
 			}
 		}
 	}

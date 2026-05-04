@@ -1,0 +1,46 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for FlowInto {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        if p.peek::<CustomIdent>() {
+            let v0 = p.parse::<CustomIdent>()?;
+            let c = p.peek_n(1);
+            match p.to_atom::<Atoms>(c) {
+                Atoms::Element => {
+                    let v1 = p.parse::<Ident>()?;
+                    return Ok(Self::WithElement(v0, v1));
+                }
+                Atoms::Content => {
+                    let v1 = p.parse::<Ident>()?;
+                    return Ok(Self::WithContent(v0, v1));
+                }
+                _ => return Ok(Self::Bare(v0)),
+            }
+        }
+        if p.peek::<Ident>() {
+            let c = p.peek_n(1);
+            match p.to_atom::<Atoms>(c) {
+                Atoms::None => {
+                    let v0 = p.parse::<Ident>()?;
+                    return Ok(Self::None { 0: v0 });
+                }
+                _ => {
+                    return Err(
+                        crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                    )?;
+                }
+            }
+        } else {
+            return Err(
+                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+            )?;
+        }
+    }
+}

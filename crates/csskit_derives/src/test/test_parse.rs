@@ -473,3 +473,17 @@ fn parse_enum_struct_variants_one_must_occur_siblings() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_struct_variants_one_must_occur_siblings");
 }
+
+#[test]
+fn parse_enum_variant_discriminated_by_second_field_atom() {
+	let data = to_deriveinput! {
+		enum FlowInto {
+			#[atom(Atoms::None)]
+			None(Ident),
+			WithElement(CustomIdent, #[atom(Atoms::Element)] Ident),
+			WithContent(CustomIdent, #[atom(Atoms::Content)] Ident),
+			Bare(CustomIdent),
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_variant_discriminated_by_second_field_atom");
+}
