@@ -1460,20 +1460,16 @@ StyleSheet(
                 offset: SourceOffset(1214),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1215),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1216),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(1216),
+                  len: 4,
+                )))),
+                text_decoration_thickness: None,
+                text_decoration_style: None,
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3466,20 +3462,16 @@ StyleSheet(
                 offset: SourceOffset(2762),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(2763),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(2764),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(2764),
+                  len: 4,
+                )))),
+                text_decoration_thickness: None,
+                text_decoration_style: None,
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

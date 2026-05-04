@@ -849,25 +849,25 @@ StyleSheet(
                 offset: SourceOffset(483),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(UnderlineOverlineLineThroughBlink(
+                  underline: Some(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(484),
                     len: 9,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(493),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(494),
-                    len: 6,
-                  )),
-                ],
-              )),
+                  ))),
+                  overline: None,
+                  line_through: None,
+                  blink: None,
+                )),
+                text_decoration_thickness: None,
+                text_decoration_style: Some(Dotted(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(494),
+                  len: 6,
+                )))),
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -1202,15 +1202,15 @@ StyleSheet(
                 offset: SourceOffset(677),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(678),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(Baseline(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(678),
+                  len: 8,
+                )))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -1623,15 +1623,11 @@ StyleSheet(
                 offset: SourceOffset(898),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(899),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(899),
+                len: 4,
+              ))),
               important: None,
               semicolon: None,
             ),
@@ -2501,15 +2497,15 @@ StyleSheet(
                 offset: SourceOffset(1472),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1473),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(Baseline(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(1473),
+                  len: 8,
+                )))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -4432,15 +4428,15 @@ StyleSheet(
                 offset: SourceOffset(2798),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(2799),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(BaselineMetric(Middle(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(2799),
+                  len: 6,
+                ))))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -82953,15 +82949,16 @@ StyleSheet(
                 offset: SourceOffset(48750),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(48751),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(48751),
+                  len: 4,
+                )))),
+                text_decoration_thickness: None,
+                text_decoration_style: None,
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -84255,15 +84252,16 @@ StyleSheet(
                 offset: SourceOffset(49456),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(49457),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(49457),
+                  len: 4,
+                )))),
+                text_decoration_thickness: None,
+                text_decoration_style: None,
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -87516,15 +87514,21 @@ StyleSheet(
                       offset: SourceOffset(51570),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Ident(Cursor(
+                    value: TextDecorationStyleValue(
+                      text_decoration_line: Some(UnderlineOverlineLineThroughBlink(
+                        underline: Some(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(51571),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        ))),
+                        overline: None,
+                        line_through: None,
+                        blink: None,
+                      )),
+                      text_decoration_thickness: None,
+                      text_decoration_style: None,
+                      text_decoration_color: None,
+                    ),
                     important: None,
                     semicolon: None,
                   ),
@@ -88530,15 +88534,15 @@ StyleSheet(
                 offset: SourceOffset(52056),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(52057),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(BaselineMetric(Middle(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(52057),
+                  len: 6,
+                ))))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -102543,15 +102547,16 @@ StyleSheet(
                 offset: SourceOffset(59940),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(59941),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(r#None(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(59941),
+                  len: 4,
+                )))),
+                text_decoration_thickness: None,
+                text_decoration_style: None,
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: None,
             ),
@@ -106208,15 +106213,15 @@ StyleSheet(
                 offset: SourceOffset(62256),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(62257),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(Baseline(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(62257),
+                  len: 8,
+                )))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

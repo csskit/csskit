@@ -9,6 +9,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<RubyAlignStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<RubyMergeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<RubyOverhangStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<RubyPositionStyleValue>(), 36);
 	}
 
 	#[test]
@@ -54,5 +55,18 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "auto none");
 		assert_parse_error!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "simple");
 		assert_parse_error!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "auto spaces");
+	}
+
+	#[test]
+	fn test_ruby_position() {
+		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "over");
+		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "under");
+		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "alternate");
+		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "inter-character");
+		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "alternate over");
+		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "alternate under");
+		assert_parse_error!(CssAtomSet::ATOMS, RubyPositionStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, RubyPositionStyleValue, "left");
+		assert_parse_error!(CssAtomSet::ATOMS, RubyPositionStyleValue, "over under");
 	}
 }

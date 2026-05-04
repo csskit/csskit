@@ -5,16 +5,12 @@ coverage/popular/inuitcss.6.0.0.css
 456:3:  -moz-box-sizing: content-box;
 464:3:  background: #ff0;
 481:3:  white-space: pre-wrap; }
-503:3:  vertical-align: baseline; }
-588:3:  text-transform: none; }
 632:3:  -moz-box-sizing: content-box;
 633:3:  -webkit-box-sizing: content-box;
-660:3:  vertical-align: top;
 684:3:  -webkit-box-sizing: border-box;
 685:3:  -moz-box-sizing: border-box;
 686:3:  -ms-box-sizing: border-box;
 687:3:  -o-box-sizing: border-box;
-712:3:  text-decoration: none; }
 753:3:  content: "";
 822:3:  font: 1em/1.5 sans-serif;
 943:5:    content: "‘";
@@ -35,19 +31,14 @@ coverage/popular/inuitcss.6.0.0.css
 968:5:    content: open-quote; }
 970:5:    content: "’";
 971:5:    content: close-quote; }
-986:3:  text-indent: -0.41em; }
-992:3:  text-indent: 0; }
 994:5:    content: "—"; }
 1006:3:  background: none;
 1021:3:  filter: alpha(opacity=75); }
 1050:3:  white-space: nowrap;
 1057:3:  white-space: pre;
-1221:3:  vertical-align: middle; }
-1224:3:  vertical-align: top; }
 1344:3:  font: 12px/1.5 sans-serif; }
 2381:3:  filter: alpha(opacity=50) !important; }
 2399:3:  content: "\00A0»" !important; }
-2405:3:  text-transform: uppercase !important; }
 2414:3:  clip: rect(0 0 0 0) !important;
 2426:5:    clip: rect(0 0 0 0) !important;
 2437:5:    clip: rect(0 0 0 0) !important;

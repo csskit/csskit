@@ -1,38 +1,26 @@
 :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
-63:3:  text-decoration: underline dotted;
 130:3:  background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
 152:3:  content: "\201c";
 160:3:  content: "\a—  " attr(cite);
 161:3:  white-space: pre;
-195:3:  vertical-align: baseline;
-219:3:  text-decoration: none;
-231:3:  text-decoration: underline;
 684:3:  -o-object-fit: cover;
-685:3:  object-fit: cover;
 772:3:  white-space: normal;
 843:3:  box-shadow: none;
 848:3:  box-shadow: none;
 861:3:  text-overflow: ellipsis;
 866:3:  -moz-appearance: none;
-871:3:  vertical-align: text-bottom;
 882:3:  content: '\2713';
 895:3:  content: '';
-923:3:  text-transform: none;
-936:3:  text-decoration: none;
 970:3:  box-shadow: none;
 1066:3:  white-space: nowrap;
-1079:3:  text-decoration: none;
-1094:3:  text-transform: uppercase;
-1121:3:  text-decoration: none;
 1134:3:  content: '';
 1149:3:  content: '';
 1168:3:  position: -webkit-sticky;
 1170:3:  z-index: 1101;
 1175:3:  position: -webkit-sticky;
 1177:3:  z-index: 1101;
-1184:3:  vertical-align: bottom;
 1185:3:  content: '\00a0\2261\00a0';
 1202:3:  clip: rect(0 0 0 0);
 1203:3:  -webkit-clip-path: inset(100%);
@@ -75,11 +63,8 @@ coverage/popular/mini.css.3.0.1.css
 1781:3:  clip: auto;
 1782:3:  -webkit-clip-path: inset(0%);
 1783:3:  clip-path: inset(0%);
-1838:3:  vertical-align: baseline;
 1840:3:  -moz-appearance: none;
-1877:3:  vertical-align: middle;
 1903:3:  animation: spinner-donut-anim 1.2s linear infinite;
-1940:3:  vertical-align: -0.125em;
 2055:3:  clip: rect(0 0 0 0) !important;
 2056:3:  -webkit-clip-path: inset(100%) !important;
 2057:3:  clip-path: inset(100%) !important;

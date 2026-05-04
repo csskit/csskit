@@ -803,20 +803,15 @@ StyleSheet(
                 offset: SourceOffset(627),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(628),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(629),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(Baseline(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(629),
+                  len: 8,
+                )))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1344,20 +1339,15 @@ StyleSheet(
                 offset: SourceOffset(1253),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1254),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1255),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(BaselineMetric(Middle(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(1255),
+                  len: 6,
+                ))))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3277,20 +3267,21 @@ StyleSheet(
                 offset: SourceOffset(3109),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3110),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: TextDecorationStyleValue(
+                text_decoration_line: Some(UnderlineOverlineLineThroughBlink(
+                  underline: Some(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3111),
                     len: 9,
-                  )),
-                ],
-              )),
+                  ))),
+                  overline: None,
+                  line_through: None,
+                  blink: None,
+                )),
+                text_decoration_thickness: None,
+                text_decoration_style: None,
+                text_decoration_color: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

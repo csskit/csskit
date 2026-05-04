@@ -1,12 +1,9 @@
 :unknown
 ---
 coverage/popular/blueprint.1.0.1.css
-27:3:  vertical-align: baseline;
 39:3:  background: white;
-54:3:  vertical-align: middle;
 58:58:blockquote:before, blockquote:after, q:before, q:after { content: ''; }
 80:3:  background: #fff;
-118:28:a           { color: #06c; text-decoration: underline; }
 130:32:pre         { margin: 1.5em 0; white-space: pre; }
 131:15:pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
 159:17:thead th      { background: #c3d9ff; }

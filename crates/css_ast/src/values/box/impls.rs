@@ -13,7 +13,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	pub fn size_test() {
@@ -27,7 +27,17 @@ mod tests {
 		assert_eq!(std::mem::size_of::<PaddingBottomStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PaddingLeftStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PaddingStyleValue>(), 64);
-		// assert_eq!(std::mem::size_of::<MarginTrimStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<MarginTrimStyleValue>(), 64);
+	}
+
+	#[test]
+	fn test_margin_trim() {
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block-start");
+		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block-start block-end");
+		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "auto");
 	}
 
 	#[test]

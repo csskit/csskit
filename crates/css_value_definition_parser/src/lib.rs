@@ -354,6 +354,8 @@ impl Def {
 						| "TimelineTriggerName"
 						| "TimelineTriggerSource"
 						| "ListStyleImage" | "ListStyleType"
+						| "TextDecorationColor"
+						| "ContainerName" | "Container"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),

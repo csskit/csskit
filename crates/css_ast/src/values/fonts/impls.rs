@@ -17,7 +17,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<FontSynthesisStyleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FontSynthesisSmallCapsStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FontSynthesisPositionStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<FontSynthesisStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<FontSynthesisStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<FontKerningStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<FontVariantLigaturesStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<FontVariantPositionStyleValue>(), 16);
@@ -41,6 +41,19 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FontSizeStyleValue, "45rem");
 		assert_parse!(CssAtomSet::ATOMS, FontSizeStyleValue, "smaller");
 		assert_parse!(CssAtomSet::ATOMS, FontSizeStyleValue, "80%");
+	}
+
+	#[test]
+	fn test_font_synthesis() {
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "weight");
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "style");
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "small-caps");
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "position");
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "weight style");
+		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "weight style small-caps position");
+		assert_parse_error!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "auto");
 	}
 
 	#[test]
