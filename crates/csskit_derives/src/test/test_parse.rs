@@ -487,3 +487,48 @@ fn parse_enum_variant_discriminated_by_second_field_atom() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_variant_discriminated_by_second_field_atom");
 }
+
+#[test]
+fn parse_struct_all_must_occur_with_optional_fields() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur)]
+		struct StableWithOptionalEdges {
+			#[atom(CssAtomSet::Stable)]
+			stable: Ident,
+			#[atom(CssAtomSet::BothEdges)]
+			both_edges: Option<Ident>,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_all_must_occur_with_optional_fields");
+}
+
+#[test]
+fn parse_enum_variant_all_must_occur_with_optional_fields() {
+	let data = to_deriveinput! {
+		enum ScrollbarGutter {
+			#[atom(CssAtomSet::Auto)]
+			Auto(Ident),
+			#[parse(all_must_occur)]
+			Stable {
+				#[atom(CssAtomSet::Stable)]
+				stable: Ident,
+				#[atom(CssAtomSet::BothEdges)]
+				both_edges: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_variant_all_must_occur_with_optional_fields");
+}
+
+#[test]
+fn parse_sequential_optional_keyword() {
+	let data = to_deriveinput! {
+		struct AxisWithOptionalSnap(
+			#[atom(CssAtomSet::X)]
+			Ident,
+			#[atom(CssAtomSet::Mandatory)]
+			Option<Ident>,
+		);
+	};
+	assert_parse_snapshot!(data, "parse_sequential_optional_keyword");
+}

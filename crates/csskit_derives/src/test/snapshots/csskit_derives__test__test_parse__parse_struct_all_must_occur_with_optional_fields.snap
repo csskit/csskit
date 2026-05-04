@@ -1,0 +1,40 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for StableWithOptionalEdges {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        let mut stable: Option<Ident> = None;
+        let mut both_edges: Option<Ident> = None;
+        loop {
+            let c = p.peek_n(1);
+            let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+                p.to_atom::<CssAtomSet>(c)
+            } else {
+                <CssAtomSet>::default()
+            };
+            if stable.is_none() && atom == CssAtomSet::Stable {
+                stable = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            if both_edges.is_none() && atom == CssAtomSet::BothEdges {
+                both_edges = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            break;
+        }
+        if stable.is_none() {
+            let c = p.peek_n(1);
+            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+        }
+        return Ok(Self {
+            stable: stable.unwrap(),
+            both_edges: both_edges,
+        });
+    }
+}

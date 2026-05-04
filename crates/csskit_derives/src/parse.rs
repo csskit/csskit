@@ -276,12 +276,33 @@ impl<'a> Plan for MustOccurPlan<'a> {
 			wc.add(&f.ty.unpack_option());
 		}
 
-		let vars = fields.iter().map(|f| &f.var);
-		let checks: Vec<_> = fields.iter().map(Field::none_check).collect();
+		let all_checks: Vec<_> = fields.iter().map(Field::none_check).collect();
+		let required_checks: Vec<_> = fields.iter().filter(|f| !f.ty.is_option()).map(Field::none_check).collect();
 		let (occurance_cond, assignments): (TokenStream, Vec<TokenStream>) = match parse_mode {
 			FieldParseMode::Sequential => unreachable!(),
-			FieldParseMode::OneMustOccur => (quote! { #(#checks)&&* }, vars.map(|v| quote! { #v }).collect()),
-			FieldParseMode::AllMustOccur => (quote! { #(#checks)||* }, vars.map(|v| quote! { #v.unwrap() }).collect()),
+			FieldParseMode::OneMustOccur => {
+				let vars = fields.iter().map(|f| &f.var);
+				(quote! { #(#all_checks)&&* }, vars.map(|v| quote! { #v }).collect())
+			}
+			FieldParseMode::AllMustOccur => {
+				let cond = if required_checks.is_empty() {
+					quote! { false }
+				} else {
+					quote! { #(#required_checks)||* }
+				};
+				let assignments = fields
+					.iter()
+					.map(|f| {
+						let v = &f.var;
+						if f.ty.is_option() {
+							quote! { #v }
+						} else {
+							quote! { #v.unwrap() }
+						}
+					})
+					.collect();
+				(cond, assignments)
+			}
 		};
 
 		let peek_loop = emit_peek_loop(atom_binding, parse_steps);

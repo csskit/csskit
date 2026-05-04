@@ -1,0 +1,30 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for AxisWithOptionalSnap {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        let v0 = {
+            let c = p.peek_n(1);
+            if p.equals_atom(c.into(), &CssAtomSet::X) {
+                p.parse::<Ident>()?
+            } else {
+                return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
+            }
+        };
+        let v1 = {
+            let c = p.peek_n(1);
+            if p.equals_atom(c.into(), &CssAtomSet::Mandatory) {
+                Some(p.parse::<Ident>()?)
+            } else {
+                None
+            }
+        };
+        return Ok(Self { 0: v0, 1: v1 });
+    }
+}
