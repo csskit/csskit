@@ -17,6 +17,8 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "srgb");
+		assert_parse!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "linearrgb");
 
 		assert_parse!(CssAtomSet::ATOMS, FloodColorStyleValue, "currentcolor");
 		assert_parse!(CssAtomSet::ATOMS, FloodColorStyleValue, "red");
@@ -52,6 +54,7 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "none");
+		assert_parse_error!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "linearrgb srgb");
 
 		assert_parse_error!(CssAtomSet::ATOMS, FloodColorStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FloodColorStyleValue, "black white");
