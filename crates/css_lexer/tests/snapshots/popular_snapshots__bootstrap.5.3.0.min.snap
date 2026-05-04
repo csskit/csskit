@@ -101632,8 +101632,8 @@ expression: tokens
     len: 7,
   ),
   Token(
-    kind: "Number",
-    len: 1,
+    kind: "Dimension",
+    len: 2,
   ),
   Token(
     kind: "Dimension",
