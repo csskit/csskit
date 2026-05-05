@@ -580,3 +580,20 @@ fn parse_enum_one_must_occur_siblings_no_shared_atoms() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_one_must_occur_siblings_no_shared_atoms");
 }
+
+#[test]
+fn parse_enum_all_must_occur_non_atom_only_input() {
+	let data = to_deriveinput! {
+		enum Foo {
+			#[atom(FooAtoms::None)]
+			None(Ident),
+			#[parse(all_must_occur)]
+			Valued {
+				#[atom(FooAtoms::Auto)]
+				auto: Option<Ident>,
+				length: Option<Length>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_all_must_occur_non_atom_only_input");
+}

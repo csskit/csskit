@@ -286,7 +286,7 @@ impl<'a> Plan for MustOccurPlan<'a> {
 			}
 			FieldParseMode::AllMustOccur => {
 				let cond = if required_checks.is_empty() {
-					quote! { false }
+					quote! { #(#all_checks)&&* }
 				} else {
 					quote! { #(#required_checks)||* }
 				};
@@ -342,11 +342,14 @@ impl VariantPlan {
 			.ok_or_else(|| Error::new(ident.span(), "enum variant must have at least one field"))?;
 		let members = members_tokens(&variant.fields);
 
-		// Prefer variant-level atom; fall back to first field's atom except
-		// one_must_occur variants with all-optional fields dispatch by type only.
+		// Prefer variant-level atom; fall back to first field's atom except for
+		// must-occur variants with all-optional fields.
+		let all_optional = fields.iter().all(|f| f.ty.is_option());
 		let effective_atom = if variant_atom.is_some() {
 			variant_atom
-		} else if parse_mode == FieldParseMode::OneMustOccur && fields.iter().all(|f| f.ty.is_option()) {
+		} else if (parse_mode == FieldParseMode::OneMustOccur || parse_mode == FieldParseMode::AllMustOccur)
+			&& all_optional
+		{
 			None
 		} else {
 			fields.first().and_then(|f| f.atom.clone())
@@ -390,11 +393,17 @@ impl VariantPlan {
 	}
 
 	fn discriminator(&self, shared_atom_paths: &[String], hoisted_type_var_names: &[&Ident]) -> TokenStream {
-		if self.parse_mode == FieldParseMode::OneMustOccur {
+		let all_optional = self.fields.iter().all(|f| f.ty.is_option());
+		let is_all_optional_must_occur =
+			matches!(self.parse_mode, FieldParseMode::OneMustOccur | FieldParseMode::AllMustOccur) && all_optional;
+		if is_all_optional_must_occur {
 			let peeks: Vec<TokenStream> = self
 				.fields
 				.iter()
-				.filter(|f| f.atom_path_string().is_some_and(|ap| !shared_atom_paths.contains(&ap)))
+				.filter(|f| {
+					f.atom_path_string().is_none_or(|ap| !shared_atom_paths.contains(&ap))
+						&& !hoisted_type_var_names.contains(&&f.var)
+				})
 				.map(|f| f.peek_tokens())
 				.collect();
 			if !peeks.is_empty() {
