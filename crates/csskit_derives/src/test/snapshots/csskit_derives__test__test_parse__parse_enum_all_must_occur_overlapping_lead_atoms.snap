@@ -1,0 +1,50 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        let mut wrap: Option<Ident> = None;
+        let mut a: Option<Ident> = None;
+        let mut b: Option<Ident> = None;
+        let mut _alternative: usize = 0;
+        loop {
+            let c = p.peek_n(1);
+            let atom = if p.peek::<::css_parse::token_macros::Ident>() {
+                p.to_atom::<FooAtoms>(c)
+            } else {
+                <FooAtoms>::default()
+            };
+            if wrap.is_none() && atom == FooAtoms::Wrap {
+                wrap = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            if (a.is_none() && _alternative == 0 && atom == FooAtoms::A) {
+                _alternative = 1usize;
+                a = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            if (b.is_none() && _alternative == 0 && atom == FooAtoms::B) {
+                _alternative = 2usize;
+                b = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            break;
+        }
+        if wrap.is_none() && a.is_none() && b.is_none() {
+            return Err(
+                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+            )?;
+        }
+        match _alternative {
+            1usize => return Ok(Self::WrapA { wrap: wrap, a: a }),
+            2usize => return Ok(Self::WrapB { wrap: wrap, b: b }),
+            _ => return Ok(Self::WrapA { wrap: wrap, a: a }),
+        }
+    }
+}

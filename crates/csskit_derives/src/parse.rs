@@ -617,6 +617,10 @@ impl<'a> Plan for PeekedFallbackPlan<'a> {
 			return p.render(where_collector);
 		}
 
+		if let Some(p) = SharedAllMustOccurPlan::try_new(&self.variants, self.is_last) {
+			return p.render(where_collector);
+		}
+
 		// General case: per-variant if-blocks with optional hoisting.
 		MultiVariantBlocksPlan { variants: &self.variants, is_last: self.is_last, hoist: &hoist }
 			.render(where_collector)
@@ -894,6 +898,175 @@ impl<'a> Plan for SharedPrefixPlan<'a> {
 					#default_arm
 				}
 			} #else_branch
+		}
+	}
+}
+
+/// Plan for sibling `AllMustOccur` variants that all have all-optional fields.
+///
+/// A single shared loop consumes every atom (and non-atom type) from every sibling
+/// variant.  After the loop the filled fields determine which variant to construct.
+///
+/// Example: `[ filled | open ] || [ dot | sesame ]` generates four variants
+/// `FilledDot`, `FilledSesame`, `OpenDot`, `OpenSesame` whose atom sets overlap.
+/// Running separate per-variant loops would leave unconsumed tokens; the shared loop
+/// avoids that by accepting all atoms and deciding the constructor at the end.
+struct SharedAllMustOccurPlan<'a> {
+	variants: Vec<&'a VariantPlan>,
+	is_last: bool,
+}
+
+impl<'a> SharedAllMustOccurPlan<'a> {
+	/// Returns `Some` iff all variants are `AllMustOccur` with all-optional fields
+	/// and there is at least one shared atom between any two variants (i.e. the
+	/// per-variant discriminators would overlap and the shared-loop approach is needed).
+	fn try_new(variants: &[&'a VariantPlan], is_last: bool) -> Option<Self> {
+		if variants.len() < 2 {
+			return None;
+		}
+		let all_qualify = variants
+			.iter()
+			.all(|v| v.parse_mode == FieldParseMode::AllMustOccur && v.fields.iter().all(|f| f.ty.is_option()));
+		if !all_qualify {
+			return None;
+		}
+		let has_overlap = variants.iter().enumerate().any(|(i, v)| {
+			let atoms_i: Vec<String> = v.fields.iter().filter_map(Field::atom_path_string).collect();
+			variants.iter().enumerate().any(|(j, w)| {
+				i != j && w.fields.iter().filter_map(Field::atom_path_string).any(|ap| atoms_i.contains(&ap))
+			})
+		});
+		if !has_overlap {
+			return None;
+		}
+		Some(Self { variants: variants.to_vec(), is_last })
+	}
+}
+
+impl<'a> Plan for SharedAllMustOccurPlan<'a> {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
+		let mut seen_vars: Vec<String> = Vec::new();
+		let mut all_fields: Vec<(&Field, usize)> = Vec::new();
+		for (vi, v) in self.variants.iter().enumerate() {
+			for f in &v.fields {
+				let key = f.var.to_string();
+				if !seen_vars.contains(&key) {
+					seen_vars.push(key);
+					all_fields.push((f, vi));
+				}
+			}
+		}
+		let atom_counts: Vec<(String, usize)> = {
+			let mut counts: Vec<(String, usize)> = Vec::new();
+			for v in &self.variants {
+				for f in &v.fields {
+					if let Some(ap) = Field::atom_path_string(f) {
+						if let Some(entry) = counts.iter_mut().find(|(k, _)| k == &ap) {
+							entry.1 += 1;
+						} else {
+							counts.push((ap, 1));
+						}
+					}
+				}
+			}
+			counts
+		};
+		let is_shared_atom = |f: &Field| -> bool {
+			match Field::atom_path_string(f) {
+				Some(ap) => atom_counts.iter().find(|(k, _)| k == &ap).is_some_and(|(_, c)| *c > 1),
+				None => false,
+			}
+		};
+		let bindings: TokenStream = all_fields.iter().map(|(f, _)| f.binding()).collect();
+		let any_atom = all_fields.iter().find_map(|(f, _)| f.atom.as_ref());
+		let atom_binding = Atom::opt_binding_block(any_atom);
+		for (f, _) in all_fields.iter().filter(|(f, _)| f.atom.is_some()) {
+			wc.add(&f.ty.unpack_option());
+		}
+		let parse_steps: TokenStream = all_fields
+			.iter()
+			.map(|(f, vi)| {
+				if let Some(atom) = f.atom.as_ref().filter(|_| !is_shared_atom(f)) {
+					let sentinel = vi + 1;
+					let var = &f.var;
+					let ty = &f.ty.unpack_option();
+					let atom_path = atom.path();
+					quote! {
+						if (#var.is_none() && _alternative == 0 && atom == #atom_path) {
+							_alternative = #sentinel;
+							#var = Some(p.parse::<#ty>()?);
+							continue;
+						}
+					}
+				} else if f.atom.is_some() {
+					f.atom_match_arm()
+				} else {
+					f.parse_normal_tokens(FieldParseMode::AllMustOccur, wc)
+				}
+			})
+			.collect();
+
+		let peek_loop = emit_peek_loop(atom_binding, parse_steps);
+		let all_none_checks: Vec<TokenStream> = all_fields.iter().map(|(f, _)| f.none_check()).collect();
+		let nothing_parsed_check = quote! { #(#all_none_checks)&&* };
+		let match_arms: TokenStream = self
+			.variants
+			.iter()
+			.enumerate()
+			.map(|(i, v)| {
+				let sentinel = i + 1;
+				let ident = &v.ident;
+				let members = &v.members;
+				let assignments: Vec<TokenStream> = v
+					.fields
+					.iter()
+					.map(|f| {
+						let v2 = &f.var;
+						quote! { #v2 }
+					})
+					.collect();
+				quote! { #sentinel => return Ok(Self::#ident { #(#members: #assignments),* }), }
+			})
+			.collect();
+		let first_ident = &self.variants[0].ident;
+		let first_members = &self.variants[0].members;
+		let first_assignments: Vec<TokenStream> = self.variants[0]
+			.fields
+			.iter()
+			.map(|f| {
+				let v = &f.var;
+				quote! { #v }
+			})
+			.collect();
+
+		let unexpected = unexpected_at_next();
+		let construct = quote! {
+			match _alternative {
+				#match_arms
+				_ => return Ok(Self::#first_ident { #(#first_members: #first_assignments),* }),
+			}
+		};
+
+		let trailing = if self.is_last {
+			quote! {
+				if #nothing_parsed_check {
+					#unexpected
+				}
+				#construct
+			}
+		} else {
+			quote! {
+				if !#nothing_parsed_check {
+					#construct
+				}
+			}
+		};
+
+		quote! {
+			#bindings
+			let mut _alternative: usize = 0;
+			#peek_loop
+			#trailing
 		}
 	}
 }

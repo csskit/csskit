@@ -582,6 +582,29 @@ fn parse_enum_one_must_occur_siblings_no_shared_atoms() {
 }
 
 #[test]
+fn parse_enum_all_must_occur_overlapping_lead_atoms() {
+	let data = to_deriveinput! {
+		enum Foo {
+			#[parse(all_must_occur)]
+			WrapA {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::A)]
+				a: Option<Ident>,
+			},
+			#[parse(all_must_occur)]
+			WrapB {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::B)]
+				b: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_all_must_occur_overlapping_lead_atoms");
+}
+
+#[test]
 fn parse_enum_all_must_occur_non_atom_only_input() {
 	let data = to_deriveinput! {
 		enum Foo {
