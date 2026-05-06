@@ -132,11 +132,13 @@ impl Field {
 
 	/// Emits the atom-conditional match arm used in must-occur loops.
 	fn atom_match_arm(&self) -> TokenStream {
-		let atom_path = self.atom.as_ref().expect("atom_match_arm called without atom").path();
+		let atom = self.atom.as_ref().expect("atom_match_arm called without atom");
+		let atom_path = atom.path();
+		let atom_set = atom.first_segment();
 		let var = &self.var;
 		let inner_ty = self.ty.unpack_option();
 		quote! {
-			if #var.is_none() && atom == #atom_path {
+			if #var.is_none() && p.peek::<#inner_ty>() && p.to_atom::<#atom_set>(c) == #atom_path {
 				#var = Some(p.parse::<#inner_ty>()?);
 				continue;
 			}
@@ -151,8 +153,8 @@ impl Field {
 		let var = &self.var;
 		let inner_ty = self.ty.unpack_option();
 		quote! {
-			if p.peek::<::css_parse::token_macros::Ident>()
-				&& p.to_atom::<#atom_set>(p.peek_n(1)) == #atom_path
+			if p.peek::<#inner_ty>()
+				&& p.to_atom::<#atom_set>(c) == #atom_path
 			{
 				#var = Some(p.parse::<#inner_ty>()?);
 			}
@@ -198,7 +200,7 @@ impl Field {
 		if let Some(atom) = &self.atom {
 			let atom_path = atom.path();
 			let atom_set = atom.first_segment();
-			quote! { p.peek::<#peek_ty>() && p.to_atom::<#atom_set>(p.peek_n(1)) == #atom_path }
+			quote! { p.peek::<#peek_ty>() && p.to_atom::<#atom_set>(c) == #atom_path }
 		} else {
 			quote! { p.peek::<#peek_ty>() }
 		}
@@ -215,17 +217,6 @@ fn unexpected_at_next() -> TokenStream {
 
 fn unexpected_at_c() -> TokenStream {
 	quote! { Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))? }
-}
-
-fn emit_peek_loop(atom_binding: TokenStream, parse_steps: TokenStream) -> TokenStream {
-	quote! {
-		loop {
-			let c = p.peek_n(1);
-			#atom_binding
-			#parse_steps
-			break;
-		}
-	}
 }
 
 struct SequentialPlan<'a> {
@@ -263,8 +254,6 @@ impl<'a> Plan for MustOccurPlan<'a> {
 	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
 		let MustOccurPlan { fields, members, post_parse_steps, parse_mode, constructor, hoisted } = self;
 		let bindings: TokenStream = fields.iter().filter(|f| !hoisted.contains(&&f.var)).map(Field::binding).collect();
-		let any_atom = fields.iter().find_map(|f| f.atom.as_ref());
-		let atom_binding = Atom::opt_binding_block(any_atom);
 
 		let parse_steps: TokenStream = fields
 			.iter()
@@ -277,6 +266,7 @@ impl<'a> Plan for MustOccurPlan<'a> {
 		}
 
 		let all_checks: Vec<_> = fields.iter().map(Field::none_check).collect();
+
 		let required_checks: Vec<_> = fields.iter().filter(|f| !f.ty.is_option()).map(Field::none_check).collect();
 		let (occurance_cond, assignments): (TokenStream, Vec<TokenStream>) = match parse_mode {
 			FieldParseMode::Sequential => unreachable!(),
@@ -305,11 +295,14 @@ impl<'a> Plan for MustOccurPlan<'a> {
 			}
 		};
 
-		let peek_loop = emit_peek_loop(atom_binding, parse_steps);
 		let unexpected = unexpected_at_c();
 		quote! {
 			#bindings
-			#peek_loop
+			loop {
+				let c = p.peek_n(1);
+				#parse_steps
+				break;
+			}
 			#post_parse_steps
 			if #occurance_cond {
 				let c = p.peek_n(1);
@@ -669,9 +662,26 @@ impl<'a, 'b> Plan for MultiVariantBlocksPlan<'a, 'b> {
 			TokenStream::new()
 		};
 
+		let needs_c = !self.hoist.shared_fields.is_empty()
+			|| self.variants.iter().any(|v| {
+				let shared = &self.hoist.shared_atom_paths;
+				let hoisted = self.hoist.hoisted_type_var_names();
+				v.fields.iter().any(|f| {
+					f.atom.is_some()
+						&& f.atom_path_string().is_none_or(|ap| !shared.contains(&ap))
+						&& !hoisted.contains(&&f.var)
+				})
+			});
+		let peek_binding = if needs_c {
+			quote! { let c = p.peek_n(1); }
+		} else {
+			quote! {}
+		};
+
 		quote! {
 			#hoisted_bindings
 			#hoisted_preloop
+			#peek_binding
 			#variant_blocks
 			#trailing
 		}
@@ -739,10 +749,6 @@ impl<'a> SharedAtomHoistPlan<'a> {
 		Self { shared_atom_paths, shared_fields, shared_type_fields }
 	}
 
-	fn shared_atom(&self) -> Option<&Atom> {
-		self.shared_fields.first().and_then(|f| f.atom.as_ref())
-	}
-
 	fn hoisted_type_var_names(&self) -> Vec<&Ident> {
 		self.shared_type_fields.iter().map(|f| &f.var).collect()
 	}
@@ -758,11 +764,19 @@ impl<'a> SharedAtomHoistPlan<'a> {
 	fn hoisted_preloop(&self, wc: &mut WhereCollector) -> TokenStream {
 		let atom_preloop = match self.shared_fields.as_slice() {
 			[] => TokenStream::new(),
-			[field] => field.atom_parse_if_peek(),
+			[field] => {
+				let inner = field.atom_parse_if_peek();
+				quote! { { let c = p.peek_n(1); #inner } }
+			}
 			_ => {
-				let atom = self.shared_atom().expect("shared_fields non-empty implies shared_atom");
 				let parse_steps: TokenStream = self.shared_fields.iter().map(|f| f.atom_match_arm()).collect();
-				emit_peek_loop(atom.binding_block(), parse_steps)
+				quote! {
+					loop {
+						let c = p.peek_n(1);
+						#parse_steps
+						break;
+					}
+				}
 			}
 		};
 
@@ -774,7 +788,13 @@ impl<'a> SharedAtomHoistPlan<'a> {
 				.iter()
 				.map(|f| f.parse_normal_tokens(FieldParseMode::OneMustOccur, wc))
 				.collect();
-			emit_peek_loop(TokenStream::new(), parse_steps)
+			quote! {
+				loop {
+					let c = p.peek_n(1);
+					#parse_steps
+					break;
+				}
+			}
 		};
 
 		quote! { #atom_preloop #type_preloop }
@@ -978,8 +998,6 @@ impl<'a> Plan for SharedAllMustOccurPlan<'a> {
 			}
 		};
 		let bindings: TokenStream = all_fields.iter().map(|(f, _)| f.binding()).collect();
-		let any_atom = all_fields.iter().find_map(|(f, _)| f.atom.as_ref());
-		let atom_binding = Atom::opt_binding_block(any_atom);
 		for (f, _) in all_fields.iter().filter(|(f, _)| f.atom.is_some()) {
 			wc.add(&f.ty.unpack_option());
 		}
@@ -991,8 +1009,9 @@ impl<'a> Plan for SharedAllMustOccurPlan<'a> {
 					let var = &f.var;
 					let ty = &f.ty.unpack_option();
 					let atom_path = atom.path();
+					let atom_set = atom.first_segment();
 					quote! {
-						if (#var.is_none() && _alternative == 0 && atom == #atom_path) {
+						if (#var.is_none() && _alternative == 0 && p.peek::<#ty>() && p.to_atom::<#atom_set>(c) == #atom_path) {
 							_alternative = #sentinel;
 							#var = Some(p.parse::<#ty>()?);
 							continue;
@@ -1006,7 +1025,6 @@ impl<'a> Plan for SharedAllMustOccurPlan<'a> {
 			})
 			.collect();
 
-		let peek_loop = emit_peek_loop(atom_binding, parse_steps);
 		let all_none_checks: Vec<TokenStream> = all_fields.iter().map(|(f, _)| f.none_check()).collect();
 		let nothing_parsed_check = quote! { #(#all_none_checks)&&* };
 		let match_arms: TokenStream = self
@@ -1065,7 +1083,11 @@ impl<'a> Plan for SharedAllMustOccurPlan<'a> {
 		quote! {
 			#bindings
 			let mut _alternative: usize = 0;
-			#peek_loop
+			loop {
+				let c = p.peek_n(1);
+				#parse_steps
+				break;
+			}
 			#trailing
 		}
 	}

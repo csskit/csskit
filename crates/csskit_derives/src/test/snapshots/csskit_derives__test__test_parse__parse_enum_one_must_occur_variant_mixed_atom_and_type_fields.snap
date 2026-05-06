@@ -23,17 +23,14 @@ impl<'a> ::css_parse::Parse<'a> for VerticalAlign {
             }
             break;
         }
-        if p.peek::<Ident>() && p.to_atom::<CssAtomSet>(p.peek_n(1)) == CssAtomSet::First
-        {
+        let c = p.peek_n(1);
+        if p.peek::<Ident>() && p.to_atom::<CssAtomSet>(c) == CssAtomSet::First {
             let mut first: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                    p.to_atom::<CssAtomSet>(c)
-                } else {
-                    <CssAtomSet>::default()
-                };
-                if first.is_none() && atom == CssAtomSet::First {
+                if first.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<CssAtomSet>(c) == CssAtomSet::First
+                {
                     first = Some(p.parse::<Ident>()?);
                     continue;
                 }
@@ -59,17 +56,13 @@ impl<'a> ::css_parse::Parse<'a> for VerticalAlign {
                 baseline_shift: baseline_shift,
             });
         }
-        if p.peek::<Ident>() && p.to_atom::<CssAtomSet>(p.peek_n(1)) == CssAtomSet::Last
-        {
+        if p.peek::<Ident>() && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Last {
             let mut last: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                    p.to_atom::<CssAtomSet>(c)
-                } else {
-                    <CssAtomSet>::default()
-                };
-                if last.is_none() && atom == CssAtomSet::Last {
+                if last.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Last
+                {
                     last = Some(p.parse::<Ident>()?);
                     continue;
                 }

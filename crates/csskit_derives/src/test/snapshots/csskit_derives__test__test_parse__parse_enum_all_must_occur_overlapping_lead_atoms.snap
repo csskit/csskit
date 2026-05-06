@@ -15,21 +15,22 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         let mut _alternative: usize = 0;
         loop {
             let c = p.peek_n(1);
-            let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                p.to_atom::<FooAtoms>(c)
-            } else {
-                <FooAtoms>::default()
-            };
-            if wrap.is_none() && atom == FooAtoms::Wrap {
+            if wrap.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap
+            {
                 wrap = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if (a.is_none() && _alternative == 0 && atom == FooAtoms::A) {
+            if (a.is_none() && _alternative == 0 && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::A)
+            {
                 _alternative = 1usize;
                 a = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if (b.is_none() && _alternative == 0 && atom == FooAtoms::B) {
+            if (b.is_none() && _alternative == 0 && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::B)
+            {
                 _alternative = 2usize;
                 b = Some(p.parse::<Ident>()?);
                 continue;

@@ -20,25 +20,26 @@ impl<'a> ::css_parse::Parse<'a> for FlexWrap {
             }
         }
         let mut balance: Option<Ident> = None;
-        if p.peek::<::css_parse::token_macros::Ident>()
-            && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::Balance
         {
-            balance = Some(p.parse::<Ident>()?);
+            let c = p.peek_n(1);
+            if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance {
+                balance = Some(p.parse::<Ident>()?);
+            }
         }
-        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::Wrap {
+        let c = p.peek_n(1);
+        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap {
             let mut wrap: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                    p.to_atom::<FooAtoms>(c)
-                } else {
-                    <FooAtoms>::default()
-                };
-                if wrap.is_none() && atom == FooAtoms::Wrap {
+                if wrap.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap
+                {
                     wrap = Some(p.parse::<Ident>()?);
                     continue;
                 }
-                if balance.is_none() && atom == FooAtoms::Balance {
+                if balance.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance
+                {
                     balance = Some(p.parse::<Ident>()?);
                     continue;
                 }
@@ -53,22 +54,19 @@ impl<'a> ::css_parse::Parse<'a> for FlexWrap {
                 balance: balance,
             });
         }
-        if p.peek::<Ident>()
-            && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::WrapReverse
-        {
+        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::WrapReverse {
             let mut wrap_reverse: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                    p.to_atom::<FooAtoms>(c)
-                } else {
-                    <FooAtoms>::default()
-                };
-                if wrap_reverse.is_none() && atom == FooAtoms::WrapReverse {
+                if wrap_reverse.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::WrapReverse
+                {
                     wrap_reverse = Some(p.parse::<Ident>()?);
                     continue;
                 }
-                if balance.is_none() && atom == FooAtoms::Balance {
+                if balance.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance
+                {
                     balance = Some(p.parse::<Ident>()?);
                     continue;
                 }

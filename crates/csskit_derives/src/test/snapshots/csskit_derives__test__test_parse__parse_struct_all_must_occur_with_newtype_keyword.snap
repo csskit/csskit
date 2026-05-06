@@ -14,16 +14,11 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurNewtypeTest {
         let mut length: Option<Length> = None;
         loop {
             let c = p.peek_n(1);
-            let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                p.to_atom::<Auto>(c)
-            } else {
-                <Auto>::default()
-            };
-            if auto_value.is_none() && atom == Auto {
+            if auto_value.is_none() && p.peek::<Auto>() && p.to_atom::<Auto>(c) == Auto {
                 auto_value = Some(p.parse::<Auto>()?);
                 continue;
             }
-            if none_value.is_none() && atom == None {
+            if none_value.is_none() && p.peek::<None>() && p.to_atom::<None>(c) == None {
                 none_value = Some(p.parse::<None>()?);
                 continue;
             }

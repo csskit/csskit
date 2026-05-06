@@ -18,16 +18,15 @@ impl<'a> ::css_parse::Parse<'a> for AllMustOccurEnum {
                     let mut length: Option<Length> = None;
                     loop {
                         let c = p.peek_n(1);
-                        let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                            p.to_atom::<FooKeywords>(c)
-                        } else {
-                            <FooKeywords>::default()
-                        };
-                        if auto_field.is_none() && atom == FooKeywords::Auto {
+                        if auto_field.is_none() && p.peek::<AutoValue>()
+                            && p.to_atom::<FooKeywords>(c) == FooKeywords::Auto
+                        {
                             auto_field = Some(p.parse::<AutoValue>()?);
                             continue;
                         }
-                        if none_field.is_none() && atom == FooKeywords::None {
+                        if none_field.is_none() && p.peek::<NoneValue>()
+                            && p.to_atom::<FooKeywords>(c) == FooKeywords::None
+                        {
                             none_field = Some(p.parse::<NoneValue>()?);
                             continue;
                         }

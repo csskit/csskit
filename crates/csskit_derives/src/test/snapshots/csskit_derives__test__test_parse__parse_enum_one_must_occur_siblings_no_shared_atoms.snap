@@ -19,24 +19,23 @@ impl<'a> ::css_parse::Parse<'a> for MarginTrim {
                 _ => {}
             }
         }
-        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::Block
-            || p.peek::<Ident>()
-                && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::Inline
+        let c = p.peek_n(1);
+        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Block
+            || p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Inline
         {
             let mut block: Option<Ident> = None;
             let mut inline: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                    p.to_atom::<FooAtoms>(c)
-                } else {
-                    <FooAtoms>::default()
-                };
-                if block.is_none() && atom == FooAtoms::Block {
+                if block.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Block
+                {
                     block = Some(p.parse::<Ident>()?);
                     continue;
                 }
-                if inline.is_none() && atom == FooAtoms::Inline {
+                if inline.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Inline
+                {
                     inline = Some(p.parse::<Ident>()?);
                     continue;
                 }
@@ -51,25 +50,22 @@ impl<'a> ::css_parse::Parse<'a> for MarginTrim {
                 inline: inline,
             });
         }
-        if p.peek::<Ident>()
-            && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::BlockStart
-            || p.peek::<Ident>()
-                && p.to_atom::<FooAtoms>(p.peek_n(1)) == FooAtoms::BlockEnd
+        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockStart
+            || p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockEnd
         {
             let mut block_start: Option<Ident> = None;
             let mut block_end: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                    p.to_atom::<FooAtoms>(c)
-                } else {
-                    <FooAtoms>::default()
-                };
-                if block_start.is_none() && atom == FooAtoms::BlockStart {
+                if block_start.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockStart
+                {
                     block_start = Some(p.parse::<Ident>()?);
                     continue;
                 }
-                if block_end.is_none() && atom == FooAtoms::BlockEnd {
+                if block_end.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockEnd
+                {
                     block_end = Some(p.parse::<Ident>()?);
                     continue;
                 }

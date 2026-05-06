@@ -23,12 +23,9 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         let mut length: Option<Length> = None;
         loop {
             let c = p.peek_n(1);
-            let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                p.to_atom::<FooAtoms>(c)
-            } else {
-                <FooAtoms>::default()
-            };
-            if auto.is_none() && atom == FooAtoms::Auto {
+            if auto.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Auto
+            {
                 auto = Some(p.parse::<Ident>()?);
                 continue;
             }

@@ -3,37 +3,37 @@ source: crates/csskit_derives/src/test/test_parse.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl<'a> ::css_parse::Parse<'a> for StableWithOptionalEdges {
+impl<'a> ::css_parse::Parse<'a> for VoiceVolume {
     fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
     where
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let mut stable: Option<Ident> = None;
-        let mut both_edges: Option<Ident> = None;
+        let mut soft: Option<Ident> = None;
+        let mut decibel: Option<Decibel> = None;
         loop {
             let c = p.peek_n(1);
-            if stable.is_none() && p.peek::<Ident>()
-                && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Stable
+            if soft.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Soft
             {
-                stable = Some(p.parse::<Ident>()?);
+                soft = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if both_edges.is_none() && p.peek::<Ident>()
-                && p.to_atom::<CssAtomSet>(c) == CssAtomSet::BothEdges
+            if decibel.is_none() && p.peek::<Decibel>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Db
             {
-                both_edges = Some(p.parse::<Ident>()?);
+                decibel = Some(p.parse::<Decibel>()?);
                 continue;
             }
             break;
         }
-        if stable.is_none() {
+        if soft.is_none() && decibel.is_none() {
             let c = p.peek_n(1);
             Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
         }
-        return Ok(Self {
-            stable: stable.unwrap(),
-            both_edges: both_edges,
+        return Ok(Self::Soft {
+            soft: soft,
+            decibel: decibel,
         });
     }
 }

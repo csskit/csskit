@@ -604,6 +604,25 @@ fn parse_enum_all_must_occur_overlapping_lead_atoms() {
 	assert_parse_snapshot!(data, "parse_enum_all_must_occur_overlapping_lead_atoms");
 }
 
+/// Regression: atom_match_arm used the ident-based `atom` loop variable, which
+/// was always CssAtomSet::default() for non-Ident tokens (e.g. Dimension), so
+/// `soft 6db` would fail to parse the decibel field in the loop.
+#[test]
+fn parse_enum_one_must_occur_non_ident_atom_field() {
+	let data = to_deriveinput! {
+		enum VoiceVolume {
+			#[parse(one_must_occur)]
+			Soft {
+				#[atom(FooAtoms::Soft)]
+				soft: Option<Ident>,
+				#[atom(FooAtoms::Db)]
+				decibel: Option<Decibel>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_one_must_occur_non_ident_atom_field");
+}
+
 #[test]
 fn parse_enum_all_must_occur_non_atom_only_input() {
 	let data = to_deriveinput! {
