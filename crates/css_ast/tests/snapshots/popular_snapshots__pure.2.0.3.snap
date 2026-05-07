@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -7571,7 +7572,7 @@ StyleSheet(
                 offset: SourceOffset(11626),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(11628),
                 len: 7,
@@ -9946,7 +9947,7 @@ StyleSheet(
                 offset: SourceOffset(13501),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(13503),
                 len: 11,
@@ -15255,7 +15256,7 @@ StyleSheet(
                 offset: SourceOffset(17819),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(17821),
                 len: 11,
@@ -15432,7 +15433,7 @@ StyleSheet(
                 offset: SourceOffset(18084),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(18086),
                 len: 11,

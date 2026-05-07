@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -5467,7 +5468,7 @@ StyleSheet(
                 offset: SourceOffset(4243),
                 len: 1,
               )),
-              value: CursorStyleValue([], Auto(Ident(Cursor(
+              value: CursorStyleValue(None, Auto(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(4245),
                 len: 4,
@@ -88503,7 +88504,7 @@ StyleSheet(
                 offset: SourceOffset(63683),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(63685),
                 len: 7,
@@ -89807,7 +89808,7 @@ StyleSheet(
                 offset: SourceOffset(64566),
                 len: 1,
               )),
-              value: CursorStyleValue([], Help(Ident(Cursor(
+              value: CursorStyleValue(None, Help(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(64568),
                 len: 4,
@@ -94752,7 +94753,7 @@ StyleSheet(
                 offset: SourceOffset(68329),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(68331),
                 len: 7,
@@ -106991,7 +106992,7 @@ StyleSheet(
                 offset: SourceOffset(75807),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(75809),
                 len: 11,
@@ -111536,7 +111537,7 @@ StyleSheet(
                 offset: SourceOffset(79069),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(79071),
                 len: 11,
@@ -112678,7 +112679,7 @@ StyleSheet(
                 offset: SourceOffset(79868),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(79870),
                 len: 7,
@@ -117714,7 +117715,7 @@ StyleSheet(
                 offset: SourceOffset(84637),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(84639),
                 len: 11,
@@ -119122,7 +119123,7 @@ StyleSheet(
                 offset: SourceOffset(85676),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(85678),
                 len: 11,
@@ -122262,7 +122263,7 @@ StyleSheet(
                 offset: SourceOffset(88193),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(88195),
                 len: 7,
@@ -124698,7 +124699,7 @@ StyleSheet(
                 offset: SourceOffset(89982),
                 len: 1,
               )),
-              value: CursorStyleValue([], Default(Ident(Cursor(
+              value: CursorStyleValue(None, Default(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(89984),
                 len: 7,
@@ -125194,7 +125195,7 @@ StyleSheet(
                 offset: SourceOffset(90346),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(90348),
                 len: 11,
@@ -153225,7 +153226,7 @@ StyleSheet(
                 offset: SourceOffset(109402),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(109404),
                 len: 7,
@@ -165831,7 +165832,7 @@ StyleSheet(
                 offset: SourceOffset(118793),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(118795),
                 len: 7,
@@ -166787,7 +166788,7 @@ StyleSheet(
                 offset: SourceOffset(119397),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(119399),
                 len: 7,
@@ -181343,7 +181344,7 @@ StyleSheet(
                 offset: SourceOffset(130476),
                 len: 1,
               )),
-              value: CursorStyleValue([], Default(Ident(Cursor(
+              value: CursorStyleValue(None, Default(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(130478),
                 len: 7,
@@ -184138,7 +184139,7 @@ StyleSheet(
                 offset: SourceOffset(132653),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(132655),
                 len: 7,
@@ -202686,7 +202687,7 @@ StyleSheet(
                 offset: SourceOffset(148546),
                 len: 1,
               )),
-              value: CursorStyleValue([], Default(Ident(Cursor(
+              value: CursorStyleValue(None, Default(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(148548),
                 len: 7,
@@ -202811,7 +202812,7 @@ StyleSheet(
                 offset: SourceOffset(148648),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(148650),
                 len: 11,
@@ -207503,7 +207504,7 @@ StyleSheet(
                 offset: SourceOffset(152203),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(152205),
                 len: 7,
@@ -208398,7 +208399,7 @@ StyleSheet(
                 offset: SourceOffset(152943),
                 len: 1,
               )),
-              value: CursorStyleValue([], Grab(Ident(Cursor(
+              value: CursorStyleValue(None, Grab(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(152945),
                 len: 4,
@@ -208998,7 +208999,7 @@ StyleSheet(
                 offset: SourceOffset(153471),
                 len: 1,
               )),
-              value: CursorStyleValue([], Grabbing(Ident(Cursor(
+              value: CursorStyleValue(None, Grabbing(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(153473),
                 len: 8,
@@ -209130,7 +209131,7 @@ StyleSheet(
                 offset: SourceOffset(153549),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(153551),
                 len: 11,
@@ -211353,7 +211354,7 @@ StyleSheet(
                 offset: SourceOffset(155190),
                 len: 1,
               )),
-              value: CursorStyleValue([], Pointer(Ident(Cursor(
+              value: CursorStyleValue(None, Pointer(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(155192),
                 len: 7,
@@ -212131,7 +212132,7 @@ StyleSheet(
                 offset: SourceOffset(155804),
                 len: 1,
               )),
-              value: CursorStyleValue([], NotAllowed(Ident(Cursor(
+              value: CursorStyleValue(None, NotAllowed(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(155806),
                 len: 11,
@@ -220961,7 +220962,7 @@ StyleSheet(
                 offset: SourceOffset(162010),
                 len: 1,
               )),
-              value: CursorStyleValue([], Help(Ident(Cursor(
+              value: CursorStyleValue(None, Help(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(162012),
                 len: 4,

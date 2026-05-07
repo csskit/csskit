@@ -216,9 +216,16 @@ impl ToType for Def {
 				};
 				vec![quote! { ::css_parse::CommaSeparated<'a, #ty, #min> }]
 			}
-			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
+			Self::Multiplier(def, DefMultiplierSeparator::None, range) => {
 				let ty = def.deref().to_type();
-				vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
+				match range {
+					DefRange::RangeFrom(f) if *f == 0.0 => {
+						vec![quote! { Option<::bumpalo::collections::Vec<'a, #ty>> }]
+					}
+					_ => {
+						vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
+					}
+				}
 			}
 			Self::IntLiteral(value) => {
 				let val = *value;
@@ -748,9 +755,15 @@ impl GenerateDefinition for Def {
 									};
 									vec![quote! { ::css_parse::CommaSeparated<'a, #inner_type_ref, #min> }]
 								}
-								DefMultiplierSeparator::None => {
-									vec![quote! { ::bumpalo::collections::Vec<'a, #inner_type_ref> }]
-								}
+								DefMultiplierSeparator::None => match range {
+									DefRange::Range(Range { start, .. }) if *start == 0.0 => {
+										vec![quote! { Option<::bumpalo::collections::Vec<'a, #inner_type_ref>> }]
+									}
+									_ => {
+										dbg!(range);
+										vec![quote! { Option<::bumpalo::collections::Vec<'a, #inner_type_ref> }]
+									}
+								},
 							};
 							quote! { ( #(pub #ty),* ); }
 						}
