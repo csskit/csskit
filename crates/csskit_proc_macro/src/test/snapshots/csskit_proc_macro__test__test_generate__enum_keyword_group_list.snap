@@ -1,7 +1,6 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
-snapshot_kind: text
 ---
 #[derive(
     ::csskit_derives::Parse,

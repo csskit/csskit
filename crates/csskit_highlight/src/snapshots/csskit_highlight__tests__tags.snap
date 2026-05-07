@@ -2,6 +2,7 @@
 source: crates/csskit_highlight/src/tests.rs
 expression: actual
 ---
+
 <!DOCTYPE html>
 <head>
 	<style>

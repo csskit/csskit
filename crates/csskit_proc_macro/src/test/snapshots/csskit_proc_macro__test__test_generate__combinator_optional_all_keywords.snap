@@ -1,6 +1,5 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
-assertion_line: 289
 expression: pretty
 ---
 #[derive(Visitable, Parse)]
