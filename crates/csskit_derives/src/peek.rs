@@ -113,22 +113,17 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			for variant in variants.iter() {
 				let views = variant.fields.views();
 				let parse_mode = extract_field_parse_mode(&variant.attrs)?;
-				if parse_mode.any_field_can_start() {
-					for (view, syn_field) in views.iter().zip(variant.fields.iter()) {
-						let atom = extract_atom(&syn_field.attrs)?;
-						let peek_ty = option_inner(view.ty).unwrap_or(view.ty);
-						register(peek_ty, atom);
-					}
-				} else {
-					let Some((view, syn_field)) = views.first().zip(variant.fields.iter().next()) else {
-						continue;
-					};
+				for (view, syn_field) in views.iter().zip(variant.fields.iter()) {
 					let atom = match extract_atom(&variant.attrs)? {
 						Some(a) => Some(a),
 						None => extract_atom(&syn_field.attrs)?,
 					};
-					let peek_ty = option_inner(view.ty).unwrap_or(view.ty);
+					let option = option_inner(view.ty);
+					let peek_ty = option.unwrap_or(view.ty);
 					register(peek_ty, atom);
+					if !parse_mode.any_field_can_start() && option.is_none() {
+						break;
+					}
 				}
 			}
 
