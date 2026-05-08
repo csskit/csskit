@@ -93,6 +93,13 @@ impl KindSet {
 		Self(self.0 | (1 << (kind as u8 & 0b111111)))
 	}
 
+	/// Returns a new [KindSet] without the supplied [Kind].
+	///
+	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
+	pub const fn remove(&self, kind: Kind) -> Self {
+		Self(self.0 ^ (1 << (kind as u8 & 0b111111)))
+	}
+
 	/// Check if a [KindSet] contains the subpplied [Kind].
 	pub fn contains(&self, kind: Kind) -> bool {
 		self.0 & (1 << (kind as u8 & 0b111111)) != 0
@@ -124,4 +131,14 @@ fn test_kindset_contains() {
 
 	assert!(KindSet::COMMENTS.contains(Kind::Comment));
 	assert!(!KindSet::COMMENTS.contains(Kind::Delim));
+}
+
+#[test]
+fn test_kindset_add_remove() {
+	let k_ident = KindSet::new(&[Kind::Ident]);
+	let k_ident_eof = k_ident.add(Kind::Eof);
+	assert!(k_ident.contains(Kind::Ident));
+	assert!(k_ident_eof.contains(Kind::Ident));
+	assert!(k_ident_eof.contains(Kind::Eof));
+	assert!(!k_ident_eof.remove(Kind::Eof).contains(Kind::Eof));
 }
