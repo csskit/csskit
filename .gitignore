@@ -13,3 +13,4 @@ website/_site
 .mise-tasks/generate-values/.caches
 *.vsix
 packages/csskit_vscode/dist/
+packages/csskit-*/bin/csskit
