@@ -63,7 +63,7 @@ macro_rules! pseudo_class {
 			where
 				I: Iterator<Item = $crate::Cursor> + Clone,
 			{
-				let c2 = p.peek_n(2);
+				let c2 = p.peek_n_including_whitespace(2);
 				c == $crate::Kind::Colon &&
 				c2 == $crate::Kind::Ident &&
 				matches!(p.to_atom::<$atoms>(c2), $atoms::$first $(| $variant_pat)*)

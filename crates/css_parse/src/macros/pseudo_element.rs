@@ -57,8 +57,8 @@ macro_rules! pseudo_element {
 			where
 				I: Iterator<Item = $crate::Cursor> + Clone,
 			{
-				let c2 = p.peek_n(2);
-				let c3 = p.peek_n(3);
+				let c2 = p.peek_n_including_whitespace(2);
+				let c3 = p.peek_n_including_whitespace(3);
 				c == $crate::Kind::Colon
 				&& c2 == $crate::Kind::Colon
 				&& c3 == $crate::Kind::Ident
