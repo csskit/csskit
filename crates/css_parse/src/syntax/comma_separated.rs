@@ -175,7 +175,6 @@ mod tests {
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "foo");
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two");
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two,three");
-		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 0>, "");
 		assert_parse!(EmptyAtomSet::ATOMS, CommaSeparated<(T![Number], CommaSeparated<T![Ident]>)>, "1 foo, 2 bar");
 	}
 
@@ -200,9 +199,13 @@ mod tests {
 	}
 
 	#[test]
+	fn test_peek() {
+		assert_peek_false!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "");
+		assert_peek_false!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, ",");
+	}
+
+	#[test]
 	fn test_errors() {
-		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "");
-		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, ",");
 		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one,two,three,");
 		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one two");
 		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 2>, "one");

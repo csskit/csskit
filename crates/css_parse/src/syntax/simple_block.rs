@@ -11,6 +11,10 @@ pub struct SimpleBlock<'a> {
 	pub close: Option<T![PairWiseEnd]>,
 }
 
+impl<'a> Peek<'a> for SimpleBlock<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::PAIRWISE_START;
+}
+
 // https://drafts.csswg.org/css-syntax-3/#consume-a-simple-block
 impl<'a> Parse<'a> for SimpleBlock<'a> {
 	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
@@ -79,7 +83,8 @@ mod tests {
 	}
 
 	#[test]
-	fn test_errors() {
-		assert_parse_error!(EmptyAtomSet::ATOMS, SimpleBlock, "foo");
+	fn test_peek() {
+		assert_peek_false!(EmptyAtomSet::ATOMS, SimpleBlock, "foo");
+		assert_peek_false!(EmptyAtomSet::ATOMS, SimpleBlock, "");
 	}
 }

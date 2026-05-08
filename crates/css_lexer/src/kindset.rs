@@ -69,6 +69,12 @@ impl KindSet {
 		Kind::RightCurly,
 	]);
 
+	/// A [KindSet] that matches either [Kind::LeftCurly], [Kind::LeftParen], [Kind::LeftSquare].
+	pub const PAIRWISE_START: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::LeftParen, Kind::LeftSquare]);
+	///
+	/// A [KindSet] that matches either [Kind::RightCurly], [Kind::RightParen], [Kind::RightSquare].
+	pub const PAIRWISE_END: KindSet = KindSet::new(&[Kind::RightCurly, Kind::RightParen, Kind::RightSquare]);
+
 	/// A [KindSet] that matches _any_ token.
 	pub const ANY: KindSet = KindSet(u64::MAX);
 
