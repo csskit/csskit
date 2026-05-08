@@ -23,15 +23,8 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn visit_time(&mut self, time: &Time) {
-		let original_len = time.to_span().len() as usize;
-		let seconds = time.as_seconds();
-
-		if seconds == 0.0 && original_len > 1 {
-			self.transformer.replace_parsed::<Time>(time.to_span(), "0");
-			return;
-		}
-
 		if let Time::Ms(dim) = time {
+			let seconds = time.as_seconds();
 			let sc = self.transformer.to_source_cursor((*dim).into());
 			let value = if seconds.fract() == 0.0 { format!("{}", seconds as i64) } else { format!("{seconds}") };
 			let seconds_len = value.len() - value.starts_with("0.") as usize - value.starts_with("-0.") as usize + 1;
@@ -70,17 +63,6 @@ mod tests {
 			CssAtomSet,
 			StyleSheet,
 			"div { transition-duration: 50ms; }"
-		);
-	}
-
-	#[test]
-	fn normalizes_zero_units() {
-		assert_transform!(
-			CssMinifierFeature::ReduceTimeUnits,
-			CssAtomSet,
-			StyleSheet,
-			"div { transition-delay: 0ms; animation-duration: 0s; }",
-			"div { transition-delay: 0; animation-duration: 0; }"
 		);
 	}
 

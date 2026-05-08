@@ -3,12 +3,8 @@
 coverage/popular/foundation.6.7.5.css
 27:3:  -webkit-box-sizing: content-box;
 41:3:  -webkit-text-decoration: underline dotted;
-42:11:          text-decoration: underline dotted; }
-62:3:  vertical-align: baseline; }
-89:3:  text-transform: none; }
 114:3:  -webkit-box-sizing: border-box;
 120:3:  white-space: normal; }
-123:3:  vertical-align: baseline; }
 130:3:  -webkit-box-sizing: border-box;
 171:3:  -webkit-touch-callout: none;
 172:3:  -webkit-user-select: none; }
@@ -16,7 +12,6 @@ coverage/popular/foundation.6.7.5.css
 185:3:  -webkit-box-sizing: inherit;
 191:3:  background: #fefefe;
 197:3:  -moz-osx-font-smoothing: grayscale; }
-201:3:  vertical-align: middle;
 204:3:  -ms-interpolation-mode: bicubic; }
 212:3:  -webkit-box-sizing: border-box;
 228:6:     -moz-appearance: none;
@@ -307,14 +302,11 @@ coverage/popular/foundation.6.7.5.css
 2158:9:        -ms-flex-direction: column-reverse;
 2187:3:  text-rendering: optimizeLegibility; }
 2213:3:  text-rendering: optimizeLegibility; }
-2276:3:  text-decoration: none;
-2331:3:  text-decoration: none; }
 2369:5:    content: "— "; }
 2390:3:  white-space: pre;
 2431:5:    background: transparent !important;
 2434:5:    -webkit-box-shadow: none !important;
 2435:13:            box-shadow: none !important;
-2455:5:    text-decoration: underline; }
 2457:5:    content: " (" attr(href) ")"; }
 2461:5:    content: ''; }
 2463:5:    content: " (" attr(title) ")"; }
@@ -322,7 +314,6 @@ coverage/popular/foundation.6.7.5.css
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
-2490:3:  vertical-align: middle;
 2558:5:    border-color: #0c3d5d;
 2564:5:    border-color: #0c3d5d;
 2570:5:    border-color: #3b3b3b;
@@ -332,7 +323,6 @@ coverage/popular/foundation.6.7.5.css
 2591:5:    border-color: transparent;
 2626:5:    content: '';
 2628:5:    border-color: #fefefe transparent transparent;
-2652:3:  text-decoration: none; }
 2657:3:  -webkit-box-sizing: border-box;
 2666:3:  -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -341,7 +331,6 @@ coverage/popular/foundation.6.7.5.css
 2686:13:            box-shadow: 0 0 5px #cacaca;
 2706:6:     -moz-appearance: none;
 2711:3:  -webkit-box-sizing: border-box;
-2737:3:  vertical-align: baseline;
 2771:3:  display: -webkit-box;
 2772:3:  display: -webkit-flex;
 2773:3:  display: -ms-flexbox;
@@ -401,9 +390,7 @@ coverage/popular/foundation.6.7.5.css
 3115:9:        -ms-flex-preferred-size: 0;
 3117:5:    -webkit-box-ordinal-group: 2;
 3119:9:        -ms-flex-order: 1;
-3128:5:    text-transform: uppercase; }
 3133:7:      content: "/";
-3138:7:      text-decoration: underline; }
 3145:3:  display: -webkit-box;
 3146:3:  display: -webkit-flex;
 3147:3:  display: -ms-flexbox;
@@ -468,7 +455,6 @@ coverage/popular/foundation.6.7.5.css
 3454:3:  display: -ms-flexbox;
 3456:3:  -webkit-flex-wrap: wrap;
 3457:7:      -ms-flex-wrap: wrap;
-3464:5:    text-decoration: none;
 3475:5:    -webkit-flex-wrap: wrap;
 3476:9:        -ms-flex-wrap: wrap;
 3478:5:    -webkit-box-orient: horizontal;
@@ -579,7 +565,6 @@ coverage/popular/foundation.6.7.5.css
 3719:7:      -webkit-box-pack: start;
 3720:7:      -webkit-justify-content: flex-start;
 3721:11:          -ms-flex-pack: start;
-3730:3:  vertical-align: middle;
 3741:5:    background: #fefefe;
 3742:5:    -webkit-box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
 3743:13:            box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
@@ -587,7 +572,6 @@ coverage/popular/foundation.6.7.5.css
 3746:5:    background: #cacaca;
 3747:5:    -webkit-box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
 3748:13:            box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca; }
-3753:3:  vertical-align: middle;
 3764:5:    background: #0a0a0a;
 3765:5:    -webkit-box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
 3766:13:            box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
@@ -609,7 +593,6 @@ coverage/popular/foundation.6.7.5.css
 3853:3:  border-color: transparent #1779ba transparent transparent;
 3863:3:  content: '';
 3865:3:  border-color: transparent #1779ba transparent transparent;
-3867:3:  vertical-align: middle;
 3872:3:  z-index: 10;
 3916:3:  content: '';
 3918:3:  border-color: #1779ba transparent transparent;
@@ -811,7 +794,6 @@ coverage/popular/foundation.6.7.5.css
 5310:7:      -ms-flex-align: center;
 5318:3:  -webkit-box-flex: 1;
 5320:7:      -ms-flex: 1 1 0px;
-5328:3:  vertical-align: middle;
 5341:3:  z-index: 1200;
 5356:5:    content: '';
 5358:5:    border-color: transparent transparent #0a0a0a;

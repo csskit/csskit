@@ -11,7 +11,6 @@ use super::prelude::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Dimension)]
 pub enum Time {
-	Zero(Exact<T![Number], 0>),
 	#[atom(CssAtomSet::Ms)]
 	Ms(T![Dimension]),
 	#[atom(CssAtomSet::S)]
@@ -21,7 +20,6 @@ pub enum Time {
 impl Time {
 	pub fn as_seconds(&self) -> f32 {
 		match self {
-			Self::Zero(_) => 0.0,
 			Self::Ms(f) => Into::<f32>::into(*f) / 1000.0,
 			Self::S(f) => (*f).into(),
 		}
@@ -31,7 +29,6 @@ impl Time {
 impl From<Time> for f32 {
 	fn from(val: Time) -> Self {
 		match val {
-			Time::Zero(_) => 0.0,
 			Time::Ms(f) => f.into(),
 			Time::S(f) => f.into(),
 		}
@@ -57,13 +54,15 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
-		assert_parse!(CssAtomSet::ATOMS, Time, "0");
 		assert_parse!(CssAtomSet::ATOMS, Time, "0s");
 		assert_parse!(CssAtomSet::ATOMS, Time, "0ms");
+		assert_parse!(CssAtomSet::ATOMS, Time, "1s");
+		assert_parse!(CssAtomSet::ATOMS, Time, "100ms");
 	}
 
 	#[test]
 	fn test_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, Time, "0");
 		assert_parse_error!(CssAtomSet::ATOMS, Time, "1");
 		assert_parse_error!(CssAtomSet::ATOMS, Time, "foo");
 	}

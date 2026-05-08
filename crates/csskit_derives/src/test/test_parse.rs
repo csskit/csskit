@@ -473,3 +473,169 @@ fn parse_enum_struct_variants_one_must_occur_siblings() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_struct_variants_one_must_occur_siblings");
 }
+
+#[test]
+fn parse_enum_variant_discriminated_by_second_field_atom() {
+	let data = to_deriveinput! {
+		enum FlowInto {
+			#[atom(Atoms::None)]
+			None(Ident),
+			WithElement(CustomIdent, #[atom(Atoms::Element)] Ident),
+			WithContent(CustomIdent, #[atom(Atoms::Content)] Ident),
+			Bare(CustomIdent),
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_variant_discriminated_by_second_field_atom");
+}
+
+#[test]
+fn parse_struct_all_must_occur_with_optional_fields() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur)]
+		struct StableWithOptionalEdges {
+			#[atom(CssAtomSet::Stable)]
+			stable: Ident,
+			#[atom(CssAtomSet::BothEdges)]
+			both_edges: Option<Ident>,
+		}
+	};
+	assert_parse_snapshot!(data, "parse_struct_all_must_occur_with_optional_fields");
+}
+
+#[test]
+fn parse_enum_variant_all_must_occur_with_optional_fields() {
+	let data = to_deriveinput! {
+		enum ScrollbarGutter {
+			#[atom(CssAtomSet::Auto)]
+			Auto(Ident),
+			#[parse(all_must_occur)]
+			Stable {
+				#[atom(CssAtomSet::Stable)]
+				stable: Ident,
+				#[atom(CssAtomSet::BothEdges)]
+				both_edges: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_variant_all_must_occur_with_optional_fields");
+}
+
+#[test]
+fn parse_sequential_optional_keyword() {
+	let data = to_deriveinput! {
+		struct AxisWithOptionalSnap(
+			#[atom(CssAtomSet::X)]
+			Ident,
+			#[atom(CssAtomSet::Mandatory)]
+			Option<Ident>,
+		);
+	};
+	assert_parse_snapshot!(data, "parse_sequential_optional_keyword");
+}
+
+#[test]
+fn parse_enum_one_must_occur_variant_mixed_atom_and_type_fields() {
+	let data = to_deriveinput! {
+		enum VerticalAlign {
+			#[parse(one_must_occur)]
+			First {
+				#[atom(CssAtomSet::First)]
+				first: Option<Ident>,
+				alignment_baseline: Option<AlignmentBaseline>,
+				baseline_shift: Option<BaselineShift>,
+			},
+			#[parse(one_must_occur)]
+			Last {
+				#[atom(CssAtomSet::Last)]
+				last: Option<Ident>,
+				alignment_baseline: Option<AlignmentBaseline>,
+				baseline_shift: Option<BaselineShift>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_one_must_occur_variant_mixed_atom_and_type_fields");
+}
+
+#[test]
+fn parse_enum_one_must_occur_siblings_no_shared_atoms() {
+	let data = to_deriveinput! {
+		enum MarginTrim {
+			#[atom(FooAtoms::None)]
+			None(Ident),
+			#[parse(one_must_occur)]
+			BlockInline {
+				#[atom(FooAtoms::Block)]
+				block: Option<Ident>,
+				#[atom(FooAtoms::Inline)]
+				inline: Option<Ident>,
+			},
+			#[parse(one_must_occur)]
+			BlockStartBlockEnd {
+				#[atom(FooAtoms::BlockStart)]
+				block_start: Option<Ident>,
+				#[atom(FooAtoms::BlockEnd)]
+				block_end: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_one_must_occur_siblings_no_shared_atoms");
+}
+
+#[test]
+fn parse_enum_all_must_occur_overlapping_lead_atoms() {
+	let data = to_deriveinput! {
+		enum Foo {
+			#[parse(all_must_occur)]
+			WrapA {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::A)]
+				a: Option<Ident>,
+			},
+			#[parse(all_must_occur)]
+			WrapB {
+				#[atom(FooAtoms::Wrap)]
+				wrap: Option<Ident>,
+				#[atom(FooAtoms::B)]
+				b: Option<Ident>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_all_must_occur_overlapping_lead_atoms");
+}
+
+/// Regression: atom_match_arm used the ident-based `atom` loop variable, which
+/// was always CssAtomSet::default() for non-Ident tokens (e.g. Dimension), so
+/// `soft 6db` would fail to parse the decibel field in the loop.
+#[test]
+fn parse_enum_one_must_occur_non_ident_atom_field() {
+	let data = to_deriveinput! {
+		enum VoiceVolume {
+			#[parse(one_must_occur)]
+			Soft {
+				#[atom(FooAtoms::Soft)]
+				soft: Option<Ident>,
+				#[atom(FooAtoms::Db)]
+				decibel: Option<Decibel>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_one_must_occur_non_ident_atom_field");
+}
+
+#[test]
+fn parse_enum_all_must_occur_non_atom_only_input() {
+	let data = to_deriveinput! {
+		enum Foo {
+			#[atom(FooAtoms::None)]
+			None(Ident),
+			#[parse(all_must_occur)]
+			Valued {
+				#[atom(FooAtoms::Auto)]
+				auto: Option<Ident>,
+				length: Option<Length>,
+			},
+		}
+	};
+	assert_parse_snapshot!(data, "parse_enum_all_must_occur_non_atom_only_input");
+}

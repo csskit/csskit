@@ -187,3 +187,16 @@ fn peek_enum_with_multiple_identical_types() {
 	};
 	assert_peek_snapshot!(data, "peek_enum_with_multiple_identical_types");
 }
+
+#[test]
+fn peek_enum_with_option_variants() {
+	let data = to_deriveinput! {
+		enum Foo {
+			Element(
+				Option<Ident>,
+				Number,
+			),
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_with_option_variants");
+}

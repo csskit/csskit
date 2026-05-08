@@ -1,0 +1,11 @@
+---
+source: crates/csskit_derives/src/test/test_peek.rs
+expression: pretty
+snapshot_kind: text
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for Foo {
+    const PEEK_KINDSET: ::css_lexer::KindSet = ::css_lexer::KindSet::new(
+        &[::css_lexer::Kind::Ident, ::css_lexer::Kind::Number],
+    );
+}

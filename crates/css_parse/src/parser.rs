@@ -323,6 +323,11 @@ where
 		self.peek_n_with_skip(n, self.skip)
 	}
 
+	#[inline]
+	pub fn peek_n_including_whitespace(&self, n: u8) -> Cursor {
+		self.peek_n_with_skip(n, self.skip.remove(Kind::Whitespace))
+	}
+
 	pub fn to_source_cursor(&self, cursor: Cursor) -> SourceCursor<'a> {
 		SourceCursor::from(cursor, cursor.str_slice(self.source_text))
 	}

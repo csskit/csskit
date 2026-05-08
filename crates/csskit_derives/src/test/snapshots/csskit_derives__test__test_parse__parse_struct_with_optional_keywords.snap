@@ -13,16 +13,15 @@ impl<'a> ::css_parse::Parse<'a> for KeywordWithRange {
         let mut none_value: Option<Ident> = None;
         loop {
             let c = p.peek_n(1);
-            let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-                p.to_atom::<FooKeywords>(c)
-            } else {
-                <FooKeywords>::default()
-            };
-            if auto_value.is_none() && atom == FooKeywords::Auto {
+            if auto_value.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooKeywords>(c) == FooKeywords::Auto
+            {
                 auto_value = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if none_value.is_none() && atom == FooKeywords::None {
+            if none_value.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooKeywords>(c) == FooKeywords::None
+            {
                 none_value = Some(p.parse::<Ident>()?);
                 continue;
             }

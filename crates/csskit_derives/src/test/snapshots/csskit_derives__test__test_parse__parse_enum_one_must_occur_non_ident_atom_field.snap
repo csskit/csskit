@@ -1,0 +1,39 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for VoiceVolume {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        let mut soft: Option<Ident> = None;
+        let mut decibel: Option<Decibel> = None;
+        loop {
+            let c = p.peek_n(1);
+            if soft.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Soft
+            {
+                soft = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            if decibel.is_none() && p.peek::<Decibel>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Db
+            {
+                decibel = Some(p.parse::<Decibel>()?);
+                continue;
+            }
+            break;
+        }
+        if soft.is_none() && decibel.is_none() {
+            let c = p.peek_n(1);
+            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+        }
+        return Ok(Self::Soft {
+            soft: soft,
+            decibel: decibel,
+        });
+    }
+}

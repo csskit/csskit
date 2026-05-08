@@ -17,9 +17,7 @@ impl<'a> ::css_parse::Parse<'a> for Value {
             let v0 = p.parse::<Percentage>()?;
             return Ok(Self::Percentage { 0: v0 });
         }
-        {
-            let v0 = p.parse::<String>()?;
-            return Ok(Self::Keyword { 0: v0 });
-        }
+        let v0 = p.parse::<String>()?;
+        return Ok(Self::Keyword { 0: v0 });
     }
 }

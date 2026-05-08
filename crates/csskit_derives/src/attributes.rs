@@ -41,7 +41,7 @@ pub fn extract_field_parse_mode(attrs: &[Attribute]) -> Result<FieldParseMode> {
 	})
 }
 
-#[derive(Debug)]
+#[derive(Debug, Clone)]
 pub struct Atom(ExprPath);
 
 impl Atom {
@@ -61,21 +61,6 @@ impl Atom {
 
 	pub fn first_segment(&self) -> Ident {
 		self.0.path.segments.first().expect("atom path must have at least one segment").ident.clone()
-	}
-
-	pub fn binding_block(&self) -> TokenStream {
-		let atom_set = self.first_segment();
-		quote! {
-			let atom = if p.peek::<::css_parse::token_macros::Ident>() {
-				p.to_atom::<#atom_set>(c)
-			} else {
-				<#atom_set>::default()
-			};
-		}
-	}
-
-	pub fn opt_binding_block(atom: Option<&Self>) -> TokenStream {
-		atom.map(Self::binding_block).unwrap_or_default()
 	}
 }
 

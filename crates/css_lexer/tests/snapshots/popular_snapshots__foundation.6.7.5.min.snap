@@ -116716,8 +116716,8 @@ expression: tokens
     len: 3,
   ),
   Token(
-    kind: "Number",
-    len: 1,
+    kind: "Dimension",
+    len: 2,
   ),
   Token(
     kind: "Ident",
@@ -116740,8 +116740,8 @@ expression: tokens
     len: 3,
   ),
   Token(
-    kind: "Number",
-    len: 1,
+    kind: "Dimension",
+    len: 2,
   ),
   Token(
     kind: "Ident",
@@ -117208,8 +117208,8 @@ expression: tokens
     len: 3,
   ),
   Token(
-    kind: "Number",
-    len: 1,
+    kind: "Dimension",
+    len: 2,
   ),
   Token(
     kind: "Ident",
@@ -117232,8 +117232,8 @@ expression: tokens
     len: 3,
   ),
   Token(
-    kind: "Number",
-    len: 1,
+    kind: "Dimension",
+    len: 2,
   ),
   Token(
     kind: "Ident",

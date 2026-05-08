@@ -1032,20 +1032,15 @@ StyleSheet(
                 offset: SourceOffset(683),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(684),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(685),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(Baseline(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(685),
+                  len: 8,
+                )))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -1,3 +1,133 @@
+## [0.0.21] - 2026-05-08
+
+### Other Changes
+- Chore(deps): update rust crate similar to v3 (#951) ([#951](https://github.com/csskit/csskit/pull/951))
+- Chore(deps): update rust crate clap to v4.6.1 (#1052) ([#1052](https://github.com/csskit/csskit/pull/1052))
+- Chore(deps): update rust crate bumpalo to v3.20.2 (#1051) ([#1051](https://github.com/csskit/csskit/pull/1051))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#958) ([#958](https://github.com/csskit/csskit/pull/958))
+- Regenerate css_ast/src/values from csswg drafts (#974) ([#974](https://github.com/csskit/csskit/pull/974))
+- csskit_ast: Impl derive(metadata) for more types including generics (#986) ([#986](https://github.com/csskit/csskit/pull/986))
+- csskit_ast: Improve docs for a lot of types (#988) ([#988](https://github.com/csskit/csskit/pull/988))
+- css_ast: Assert atoms <127 are dimensions, reorganise atoms to avoid hitting asserts (#989) ([#989](https://github.com/csskit/csskit/pull/989))
+- csskit_ast: Box up ColorFunction, reducing many struct sizes (#992) ([#992](https://github.com/csskit/csskit/pull/992))
+- Regenerate css_ast/src/values from csswg drafts (#995) ([#995](https://github.com/csskit/csskit/pull/995))
+- Regenerate css_ast/src/values from csswg drafts (#1002) ([#1002](https://github.com/csskit/csskit/pull/1002))
+- css_ast: implement list-style property (#1010) ([#1010](https://github.com/csskit/csskit/pull/1010))
+- css_ast/css_value_definition_parser: Implement `<kw>?` style syntax (#1011) ([#1011](https://github.com/csskit/csskit/pull/1011))
+- css_ast: Implement counter-increment, counter-set (#1012) ([#1012](https://github.com/csskit/csskit/pull/1012))
+- css_ast: Implement filter/backdrop-filter (#1013) ([#1013](https://github.com/csskit/csskit/pull/1013))
+- css_ast: Implement -webkit prefixed declarations (#1014) ([#1014](https://github.com/csskit/csskit/pull/1014))
+- css_ast: Uncomment/implement justify-*/align-* properties (#1017) ([#1017](https://github.com/csskit/csskit/pull/1017))
+- css_ast: Uncomment a bunch of properties (#1020) ([#1020](https://github.com/csskit/csskit/pull/1020))
+- css_ast: Implement out a whole heap of todo properties (#1023) ([#1023](https://github.com/csskit/csskit/pull/1023))
+- csskit_proc_macro: Geenrate Optionals subtypes for small groups (#1024) ([#1024](https://github.com/csskit/csskit/pull/1024))
+- css_ast: Add all missing size_of tests for StyleValues (#1025) ([#1025](https://github.com/csskit/csskit/pull/1025))
+- css_ast: Add a whole heap of parser tests for the various StyleValues (#1026) ([#1026](https://github.com/csskit/csskit/pull/1026))
+- css_ast: Ensure CustomIdent doesn't accept css-wide keywords (#1027) ([#1027](https://github.com/csskit/csskit/pull/1027))
+- css_ast: Correct syntax for TimelineRangeName (#1028) ([#1028](https://github.com/csskit/csskit/pull/1028))
+- css_ast: add none as legacy compat value for ruby-overhang (#1029) ([#1029](https://github.com/csskit/csskit/pull/1029))
+- csskit_derives: Parse all alternatives, hoisting common vars (#1037) ([#1037](https://github.com/csskit/csskit/pull/1037))
+- css_ast: make OpacityValue unbounded at parse time (#1040) ([#1040](https://github.com/csskit/csskit/pull/1040))
+- Regenerate css_ast/src/values from csswg drafts (#1030) ([#1030](https://github.com/csskit/csskit/pull/1030))
+- css_ast: add negative border-spacing red test (#1039) ([#1039](https://github.com/csskit/csskit/pull/1039))
+- css_ast: Add tests for FlexWrapStyleValue (#1041) ([#1041](https://github.com/csskit/csskit/pull/1041))
+- Regenerate css_ast/src/values from csswg drafts (#1046) ([#1046](https://github.com/csskit/csskit/pull/1046))
+- css_parse: Allow nested CommaSeparated items without failures (#1044) ([#1044](https://github.com/csskit/csskit/pull/1044))
+- css_ast/css_transform: Remove unitless-zero time values (#1053) ([#1053](https://github.com/csskit/csskit/pull/1053))
+- css_ast: Add some more tests for FlowIntoStyleValue (#1055) ([#1055](https://github.com/csskit/csskit/pull/1055))
+- csskit_proc_macro: always lowercase idents (#1056) ([#1056](https://github.com/csskit/csskit/pull/1056))
+- css_ast: Drop erroneous Atoms from bad filter-effects generation (#1057) ([#1057](https://github.com/csskit/csskit/pull/1057))
+- css_ast: Uncomment a bunch of properties (#1063) ([#1063](https://github.com/csskit/csskit/pull/1063))
+- csskit_derives: Fix one_must_occur discriminator to OR atoms (#1064) ([#1064](https://github.com/csskit/csskit/pull/1064))
+- csskit_proc_macro: Wrap Zero-Or-More vecs in Option<> (#1071) ([#1071](https://github.com/csskit/csskit/pull/1071))
+- csskit_ast/csskit_proc_macro/cssit_highlight: Force update all snapshots (#1072) ([#1072](https://github.com/csskit/csskit/pull/1072))
+
+
+### Css_lexer
+- css_lexer: Remove debug_assert! around atom bits (#993) ([#993](https://github.com/csskit/csskit/pull/993))
+- css_lexer: Don't atomize for non-dimensions (#994) ([#994](https://github.com/csskit/csskit/pull/994))
+- css_lexer: Add KindSet::remove (#1076) ([#1076](https://github.com/csskit/csskit/pull/1076))
+- css_parse: Add assert_peek_false helper (#1075) ([#1075](https://github.com/csskit/csskit/pull/1075))
+
+
+### Css_parse
+- css_parse: Add peek_n_including_whitespace (#1077) ([#1077](https://github.com/csskit/csskit/pull/1077))
+
+
+### Css_value_definition_parser
+- css_value_definition_parser: Ensure maybe_unsized returns false for optimised types (#987) ([#987](https://github.com/csskit/csskit/pull/987))
+- csskit_proc_macro/css_value_definition_parser: Optimize Alternatives by distributing types to discriminants (#1016) ([#1016](https://github.com/csskit/csskit/pull/1016))
+- css_value_definition_parser: Improve optimisation of Alternatives via distributing optionals (#1018) ([#1018](https://github.com/csskit/csskit/pull/1018))
+- css_value_definition_parser: Improve optimisations for Alternatives with optionals (#1019) ([#1019](https://github.com/csskit/csskit/pull/1019))
+- css_value_definition_parser: Avoid distributing repeated multipliers (#1022) ([#1022](https://github.com/csskit/csskit/pull/1022))
+- css_value_definition_parser: Pre-flatten nested Alternatives (#1031) ([#1031](https://github.com/csskit/csskit/pull/1031))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#959) ([#959](https://github.com/csskit/csskit/pull/959))
+
+
+### Csskit_derives
+- csskit_derives: Add support for named struct variants (#1035) ([#1035](https://github.com/csskit/csskit/pull/1035))
+- csskit_derives: guard atom extraction in parse, when encountering non-atom values (#1036) ([#1036](https://github.com/csskit/csskit/pull/1036))
+- csskit_derives: massively refactor library (#1038) ([#1038](https://github.com/csskit/csskit/pull/1038))
+- csskit_derives: Support AllMustOccur/OneMustOccur in peek. (#1042) ([#1042](https://github.com/csskit/csskit/pull/1042))
+- csskit_derives: Improve parsing for OneMustOccur fallthrough (#1043) ([#1043](https://github.com/csskit/csskit/pull/1043))
+- csskit_derives: Handle AllMustOccur peeking in struct cases. (#1045) ([#1045](https://github.com/csskit/csskit/pull/1045))
+- csskit_derives: Add new SharedPrefixPlan for parsing common variants with later discriminants (#1054) ([#1054](https://github.com/csskit/csskit/pull/1054))
+- csskit_derives: Refactor all generation to use "Plans" concept (#1058) ([#1058](https://github.com/csskit/csskit/pull/1058))
+- csskit_derives: Fix AllMustOccur occurance check to skip the optional fields (#1059) ([#1059](https://github.com/csskit/csskit/pull/1059))
+- csskit_derives: Hoist shared type fields during parsing where possible (#1060) ([#1060](https://github.com/csskit/csskit/pull/1060))
+- csskit_derives: Fix AllMustOccur all-optional non-atom dispatch (#1066) ([#1066](https://github.com/csskit/csskit/pull/1066))
+- csskit_derives: Fix overlapping lead-atoms in sibling AllMustOccur variants (#1067) ([#1067](https://github.com/csskit/csskit/pull/1067))
+- csskit_derives: Avoid getting atom from Idents only. (#1070) ([#1070](https://github.com/csskit/csskit/pull/1070))
+- csskit_derives: Optimise Peek derive to use PEEK_KINDSET when possible (#1073) ([#1073](https://github.com/csskit/csskit/pull/1073))
+- csskit_derives: Ensure peek checks enum variants after Option (#1074) ([#1074](https://github.com/csskit/csskit/pull/1074))
+
+
+### Csskit_proc_macro
+- csskit_proc_macro: Don't factor Puncts into variant names (#1021) ([#1021](https://github.com/csskit/csskit/pull/1021))
+- csskit_proc_macro: Inline Options-with-keywords as enum struct variants (#1032) ([#1032](https://github.com/csskit/csskit/pull/1032))
+- csskit_proc_macro: Generate more concise names for varaitns (#1033) ([#1033](https://github.com/csskit/csskit/pull/1033))
+- csskit_proc_macro: drop erroneous pub from codegen (#1034) ([#1034](https://github.com/csskit/csskit/pull/1034))
+- csskit_proc_macro: Allow names to be truncated even when unique values are equal (#1061) ([#1061](https://github.com/csskit/csskit/pull/1061))
+- csskit_proc_macro: Flatten nested options into separate fields for enums (#1062) ([#1062](https://github.com/csskit/csskit/pull/1062))
+- csskit_proc_macro: Try to improve type names even more (#1065) ([#1065](https://github.com/csskit/csskit/pull/1065))
+
+
+### Csskit_vscode
+- vscode/zed/nvim: Add docs & publish to various stores. Fixes #926 (#954) ([#926](https://github.com/csskit/csskit/pull/926))
+- Release csskit vscode extension v1.0.1 (#955) ([#955](https://github.com/csskit/csskit/pull/955))
+- chore(deps): update dependency oxlint to v1.55.0 (#967) ([#967](https://github.com/csskit/csskit/pull/967))
+- chore(deps): update dependency oxlint to v1.57.0 (#969) ([#969](https://github.com/csskit/csskit/pull/969))
+- chore(deps): update dependencies (patch) (#975) ([#975](https://github.com/csskit/csskit/pull/975))
+- chore(deps): update dependency @types/vscode to v1.115.0 (#976) ([#976](https://github.com/csskit/csskit/pull/976))
+- chore(deps): update dependency oxlint to v1.59.0 (#978) ([#978](https://github.com/csskit/csskit/pull/978))
+- csskit_vscode: Update extension to auto-download the latest release (#982) ([#982](https://github.com/csskit/csskit/pull/982))
+- Release csskit vscode extension v1.0.2 (#966) ([#966](https://github.com/csskit/csskit/pull/966))
+- csskit_vscode: add logo to extension (#983) ([#983](https://github.com/csskit/csskit/pull/983))
+- Release csskit vscode extension v1.0.3 (#984) ([#984](https://github.com/csskit/csskit/pull/984))
+- chore(deps): update dependencies (patch) (#996) ([#996](https://github.com/csskit/csskit/pull/996))
+- chore(deps): update dependency @types/vscode to v1.116.0 (#997) ([#997](https://github.com/csskit/csskit/pull/997))
+- chore(deps): update dependency oxlint to v1.60.0 (#999) ([#999](https://github.com/csskit/csskit/pull/999))
+- Release csskit vscode extension v1.0.4 (#1000) ([#1000](https://github.com/csskit/csskit/pull/1000))
+- csskit_vscode: bump vscode engines version (#1001) ([#1001](https://github.com/csskit/csskit/pull/1001))
+- chore(deps): update dependency oxlint to v1.61.0 (#1005) ([#1005](https://github.com/csskit/csskit/pull/1005))
+- chore(deps): update dependency oxlint to v1.62.0 (#1049) ([#1049](https://github.com/csskit/csskit/pull/1049))
+- chore(deps): update dependency @types/vscode to v1.118.0 (#1048) ([#1048](https://github.com/csskit/csskit/pull/1048))
+
+
+### Csskit_wasm
+- website: switch from commonjs to esm, drop wasm-pack (#957) ([#957](https://github.com/csskit/csskit/pull/957))
+
+
+### Csskit_zed
+- csskit_zed: add license field to extension.toml (#971) ([#971](https://github.com/csskit/csskit/pull/971))
+- csskit_zed: Rewrite extension to download available binary for the latest version (#981) ([#981](https://github.com/csskit/csskit/pull/981))
+
 ## [0.0.20] - 2026-04-01
 
 ### Css_ast
@@ -6,6 +136,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#944) ([#944](https://github.com/csskit/csskit/pull/944))
+- Release v0.0.20 (#948) ([#948](https://github.com/csskit/csskit/pull/948))
 
 
 ### Csskit_lsp

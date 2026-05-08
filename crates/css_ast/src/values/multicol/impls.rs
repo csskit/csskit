@@ -12,6 +12,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ColumnSpanStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ColumnWidthStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ColumnWrapStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ColumnsStyleValue>(), 60);
 	}
 
 	#[test]
@@ -29,6 +30,16 @@ mod tests {
 
 		assert_parse!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "10px");
+	}
+
+	#[test]
+	fn test_columns() {
+		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "3");
+		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "10px 3");
+		assert_parse_error!(CssAtomSet::ATOMS, ColumnsStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, ColumnsStyleValue, "none");
 	}
 
 	#[test]

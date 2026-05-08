@@ -69,6 +69,12 @@ impl KindSet {
 		Kind::RightCurly,
 	]);
 
+	/// A [KindSet] that matches either [Kind::LeftCurly], [Kind::LeftParen], [Kind::LeftSquare].
+	pub const PAIRWISE_START: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::LeftParen, Kind::LeftSquare]);
+	///
+	/// A [KindSet] that matches either [Kind::RightCurly], [Kind::RightParen], [Kind::RightSquare].
+	pub const PAIRWISE_END: KindSet = KindSet::new(&[Kind::RightCurly, Kind::RightParen, Kind::RightSquare]);
+
 	/// A [KindSet] that matches _any_ token.
 	pub const ANY: KindSet = KindSet(u64::MAX);
 
@@ -91,6 +97,13 @@ impl KindSet {
 	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
 	pub const fn add(&self, kind: Kind) -> Self {
 		Self(self.0 | (1 << (kind as u8 & 0b111111)))
+	}
+
+	/// Returns a new [KindSet] without the supplied [Kind].
+	///
+	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
+	pub const fn remove(&self, kind: Kind) -> Self {
+		Self(self.0 ^ (1 << (kind as u8 & 0b111111)))
 	}
 
 	/// Check if a [KindSet] contains the subpplied [Kind].
@@ -124,4 +137,14 @@ fn test_kindset_contains() {
 
 	assert!(KindSet::COMMENTS.contains(Kind::Comment));
 	assert!(!KindSet::COMMENTS.contains(Kind::Delim));
+}
+
+#[test]
+fn test_kindset_add_remove() {
+	let k_ident = KindSet::new(&[Kind::Ident]);
+	let k_ident_eof = k_ident.add(Kind::Eof);
+	assert!(k_ident.contains(Kind::Ident));
+	assert!(k_ident_eof.contains(Kind::Ident));
+	assert!(k_ident_eof.contains(Kind::Eof));
+	assert!(!k_ident_eof.remove(Kind::Eof).contains(Kind::Eof));
 }

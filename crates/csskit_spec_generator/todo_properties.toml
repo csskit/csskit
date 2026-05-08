@@ -3,7 +3,7 @@
 # remove them from this file and the generator will uncomment them.
 
 [anchor-position]
-properties = ["position-visibility", "position-try-fallbacks", "position-try"]
+properties = ["position-try-fallbacks", "position-try"]
 
 [animations]
 properties = [
@@ -38,7 +38,6 @@ properties = [
   "border-color",
   "border-image-width",
   "border-shape",
-  "box-shadow-offset",
   "corner-top-left",
   "corner-top-right",
   "corner-bottom-left",
@@ -60,37 +59,29 @@ properties = [
   "border-image-slice",
 ]
 
-[box]
-properties = ["margin-trim"]
-
 [color-adjust]
 properties = ["color-scheme"]
 
+[box]
+properties = []
+
 [conditional]
-properties = ["container", "container-type"]
+properties = []
 
 [contain]
-properties = ["contain"]
+properties = []
 
 [content]
 properties = ["content"]
 
 [fill-stroke]
-properties = [
-  "fill",
-  "fill-image",
-  "stroke",
-  "stroke-dash-justify",
-  "stroke-image",
-  "stroke-linejoin",
-]
+properties = ["fill", "fill-image", "stroke", "stroke-image"]
 
 [fonts]
 properties = [
   "font",
   "font-palette",
 
-  "font-synthesis",
   "font-variant",
   "font-variant-alternates",
   "font-variant-east-asian",
@@ -114,7 +105,6 @@ properties = ["string-set", "copy-into"]
 [grid]
 properties = [
   "grid",
-  "grid-auto-flow",
   "grid-template",
   "grid-template-columns",
   "grid-template-rows",
@@ -124,30 +114,25 @@ properties = [
 ]
 
 [images]
-properties = ["image-orientation", "image-resolution", "object-fit"]
+properties = ["image-resolution"]
 
 [inline]
-properties = ["initial-letter-align", "vertical-align"]
+properties = ["initial-letter-align"]
 
 [multicol]
-properties = ["columns"]
+properties = []
 
 [lists]
 properties = ["counter-reset"]
 
 [overflow]
-properties = [
-  "line-clamp",
-  "scroll-marker-group",
-  "scrollbar-gutter",
-  "text-overflow",
-]
+properties = ["line-clamp", "text-overflow"]
 
 [regions]
 properties = []
 
 [ruby]
-properties = ["ruby-position"]
+properties = []
 
 [scroll-snap]
 properties = []
@@ -159,7 +144,7 @@ properties = ["view-timeline"]
 properties = ["shape-inside", "shape-outside"]
 
 [sizing]
-properties = ["min-intrinsic-sizing"]
+properties = []
 
 [speech]
 properties = [
@@ -167,33 +152,14 @@ properties = [
   "voice-family",
   "voice-pitch",
   "voice-range",
-  "voice-rate",
   "voice-volume",
 ]
 
 [text]
-properties = [
-  "hanging-punctuation",
-  "text-indent",
-  "text-justify",
-  "text-spacing",
-  "text-transform",
-  "white-space",
-  "white-space-trim",
-  "word-space-transform",
-]
+properties = ["text-spacing", "white-space"]
 
 [text-decor]
-properties = [
-  "text-decoration",
-  "text-decoration-line",
-  "text-decoration-skip-self",
-  "text-decoration-skip-spaces",
-  "text-emphasis",
-
-  "text-emphasis-style",
-  "text-underline-position",
-]
+properties = ["text-emphasis", "text-emphasis-style"]
 
 [transforms]
 properties = ["rotate", "transform-origin"]
@@ -217,4 +183,4 @@ properties = ["animation-range-center"]
 properties = ["result"]
 
 [motion]
-properties = ["offset", "offset-rotate", "offset-path"]
+properties = ["offset", "offset-path"]

@@ -26,13 +26,11 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
             let v0 = p.parse::<Percentage>()?;
             return Ok(Self::Percentage { 0: v0 });
         }
-        {
-            let expr = p.parse::<String>()?;
-            let unit = p.parse::<Unit>()?;
-            return Ok(Self::Calc {
-                expr: expr,
-                unit: unit,
-            });
-        }
+        let expr = p.parse::<String>()?;
+        let unit = p.parse::<Unit>()?;
+        return Ok(Self::Calc {
+            expr: expr,
+            unit: unit,
+        });
     }
 }

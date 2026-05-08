@@ -2,14 +2,9 @@
 ---
 coverage/popular/pure.2.0.3.css
 64:3:  -webkit-box-sizing: content-box;
-98:3:  text-decoration: underline; /* 2 */
 99:3:  -webkit-text-decoration: underline dotted;
-100:11:          text-decoration: underline dotted; /* 2 */
-142:3:  vertical-align: baseline;
-200:3:  text-transform: none;
 253:3:  -webkit-box-sizing: border-box;
 259:3:  white-space: normal; /* 1 */
-267:3:  vertical-align: baseline;
 285:3:  -webkit-box-sizing: border-box;
 402:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
 423:5:    display: -webkit-box;
@@ -18,21 +13,16 @@ coverage/popular/pure.2.0.3.css
 427:5:    -webkit-box-direction: normal;
 428:9:        -ms-flex-flow: row wrap;
 432:5:    -ms-flex-line-pack: start;
-456:5:    vertical-align: top;
 457:5:    text-rendering: auto;
-517:5:    vertical-align: top;
 518:5:    text-rendering: auto;
 654:5:    white-space: nowrap;
-655:5:    vertical-align: middle;
 658:5:    -webkit-user-drag: none;
 659:5:    -webkit-user-select: none;
 660:8:       -moz-user-select: none;
 661:9:        -ms-user-select: none;
 663:5:    -webkit-box-sizing: border-box;
 676:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
-687:5:    vertical-align: top;
 688:5:    text-rendering: auto;
-700:5:    text-decoration: none;
 707:5:    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
 715:5:    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
 716:13:            box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
@@ -41,7 +31,6 @@ coverage/popular/pure.2.0.3.css
 730:13:            box-shadow: none;
 791:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 792:13:            box-shadow: inset 0 1px 3px #ddd;
-794:5:    vertical-align: middle;
 795:5:    -webkit-box-sizing: border-box;
 807:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 808:13:            box-shadow: inset 0 1px 3px #ddd;
@@ -50,21 +39,13 @@ coverage/popular/pure.2.0.3.css
 848:5:    border-color: #129FEA;
 898:5:    border-color: #ccc;
 905:5:    border-color: #e9322d;
-973:5:    vertical-align: middle;
-976:5:    vertical-align: top;
-986:5:    vertical-align: middle;
 1016:5:    z-index: 3;
-1064:5:    vertical-align: middle;
 1140:5:    -webkit-box-sizing: border-box;
 1148:5:    z-index: 3;
-1171:5:    text-decoration: none;
 1172:5:    white-space: nowrap;
 1178:5:    white-space: nowrap;
-1190:5:    vertical-align: middle;
 1205:5:    z-index: 3;
 1223:5:    content: "\25B8";
 1229:5:    content: "\25BE";
 1247:5:    white-space: nowrap;
-1276:5:    text-transform: uppercase;
 1323:5:    font: italic 85%/1 arial, sans-serif;
-1342:5:    vertical-align: bottom;

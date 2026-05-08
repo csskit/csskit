@@ -97,7 +97,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<BorderWidthStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BoxShadowColorStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<BoxShadowOffsetStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BoxShadowOffsetStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowBlurStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowSpreadStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 32);
@@ -108,6 +108,17 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
+	}
+
+	#[test]
+	fn test_box_shadow_offset() {
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "10px 20px");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "none,10px");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "10px,20px 30px");
+		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "red");
 	}
 
 	#[test]

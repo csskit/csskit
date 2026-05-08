@@ -1,0 +1,21 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+enum Foo<'a> {
+    #[parse(one_must_occur)]
+    First {
+        #[atom(CssAtomSet::First)]
+        first: Option<::css_parse::T![Ident]>,
+        alignment_baseline: Option<crate::AlignmentBaselineStyleValue>,
+        baseline_shift: Option<crate::BaselineShiftStyleValue>,
+    },
+    #[parse(one_must_occur)]
+    Last {
+        #[atom(CssAtomSet::Last)]
+        last: Option<::css_parse::T![Ident]>,
+        alignment_baseline: Option<crate::AlignmentBaselineStyleValue>,
+        baseline_shift: Option<crate::BaselineShiftStyleValue>,
+    },
+}

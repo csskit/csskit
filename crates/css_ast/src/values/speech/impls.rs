@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	pub fn size_test() {
@@ -20,11 +20,25 @@ mod tests {
 		assert_eq!(std::mem::size_of::<CueAfterStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<CueStyleValue>(), 112);
 		// assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 36);
 		// assert_eq!(std::mem::size_of::<VoicePitchStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<VoiceRangeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceStressStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceDurationStyleValue>(), 16);
+	}
+
+	#[test]
+	fn test_voice_rate() {
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "x-slow");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "slow");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "medium");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "fast");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "x-fast");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "normal 50%");
+		assert_parse_error!(CssAtomSet::ATOMS, VoiceRateStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, VoiceRateStyleValue, "1px");
 	}
 
 	#[test]

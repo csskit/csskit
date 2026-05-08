@@ -23,9 +23,7 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
                 _ => {}
             }
         }
-        {
-            let v0 = p.parse::<Length>()?;
-            return Ok(Self::Length { 0: v0 });
-        }
+        let v0 = p.parse::<Length>()?;
+        return Ok(Self::Length { 0: v0 });
     }
 }

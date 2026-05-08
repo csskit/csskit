@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	fn size_test() {
@@ -13,7 +13,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<OverflowStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollBehaviorStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<ScrollbarGutterStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<ScrollbarGutterStyleValue>(), 28);
 		// assert_eq!(std::mem::size_of::<TextOverflowStyleValue>(), 12);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginTopStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginRightStyleValue>(), 32);
@@ -31,7 +31,26 @@ mod tests {
 		assert_eq!(std::mem::size_of::<MaxLinesStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ContinueStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollTargetGroupStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<ScrollMarkerGroupStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ScrollMarkerGroupStyleValue>(), 36);
+	}
+
+	#[test]
+	fn test_scrollbar_gutter() {
+		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "stable");
+		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "stable both-edges");
+		assert_parse_error!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "1px");
+	}
+
+	#[test]
+	fn test_scroll_marker_group() {
+		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before");
+		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "after");
+		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before links");
+		assert_parse_error!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "1px");
 	}
 
 	#[test]

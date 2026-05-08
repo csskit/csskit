@@ -68,7 +68,7 @@ pub trait ToType {
 
 impl ToFieldName for DefIdent {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
-		let pascal = self.0.to_pascal_case();
+		let pascal = self.0.to_lowercase().to_pascal_case();
 		format_ident!("{}", if size_hint > 0 { pluralize(pascal) } else { pascal })
 	}
 }
@@ -216,9 +216,16 @@ impl ToType for Def {
 				};
 				vec![quote! { ::css_parse::CommaSeparated<'a, #ty, #min> }]
 			}
-			Self::Multiplier(def, DefMultiplierSeparator::None, _) => {
+			Self::Multiplier(def, DefMultiplierSeparator::None, range) => {
 				let ty = def.deref().to_type();
-				vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
+				match range {
+					DefRange::RangeFrom(f) if *f == 0.0 => {
+						vec![quote! { Option<::bumpalo::collections::Vec<'a, #ty>> }]
+					}
+					_ => {
+						vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
+					}
+				}
 			}
 			Self::IntLiteral(value) => {
 				let val = *value;
@@ -316,7 +323,19 @@ fn find_options_with_keywords(def: &Def) -> Vec<&Def> {
 /// should fall back to the full concatenated name.
 fn distinguishing_keyword_names(siblings: &[&Def]) -> Vec<Option<Vec<String>>> {
 	if siblings.len() < 2 {
-		return siblings.iter().map(|_| None).collect();
+		return siblings
+			.iter()
+			.map(|sibling| match sibling {
+				Def::Combinator(children, DefCombinatorStyle::Options) => {
+					let kws: Vec<String> = children
+						.iter()
+						.filter_map(|d| if let Def::Ident(DefIdent(s)) = d { Some(s.clone()) } else { None })
+						.collect();
+					if kws.is_empty() { None } else { Some(kws) }
+				}
+				_ => None,
+			})
+			.collect();
 	}
 	let keyword_sets: Vec<Vec<String>> = siblings
 		.iter()
@@ -337,7 +356,7 @@ fn distinguishing_keyword_names(siblings: &[&Def]) -> Vec<Option<Vec<String>>> {
 				.filter(|kw| keyword_sets.iter().enumerate().any(|(j, other)| j != i && !other.contains(kw)))
 				.cloned()
 				.collect();
-			if unique.is_empty() || unique.len() == mine.len() { None } else { Some(unique) }
+			if unique.is_empty() { None } else { Some(unique) }
 		})
 		.collect()
 }
@@ -398,12 +417,12 @@ impl DefExt for Def {
 				quote! { #[atom(CssAtomSet::#name)] }
 			}
 			Def::Ident(DefIdent(str)) if derives_parse => {
-				let name = format_ident!("{}", str.to_pascal_case());
+				let name = format_ident!("{}", str.to_lowercase().to_pascal_case());
 				quote! { #[atom(CssAtomSet::#name)] }
 			}
 			Def::Optional(inner) => match inner.as_ref() {
 				Def::Ident(DefIdent(str)) if derives_parse => {
-					let name = format_ident!("{}", str.to_pascal_case());
+					let name = format_ident!("{}", str.to_lowercase().to_pascal_case());
 					quote! { #[atom(CssAtomSet::#name)] }
 				}
 				_ => quote! {},
@@ -513,7 +532,7 @@ impl DefExt for Def {
 				.unique_by(|def| if let Self::Ident(DefIdent(str)) = def { str } else { "" })
 				.filter_map(|def| {
 					if let Self::Ident(def) = def {
-						let ident = format_ident!("{}", def.to_string().to_pascal_case());
+						let ident = format_ident!("{}", def.to_string().to_lowercase().to_pascal_case());
 						let ty = def.to_type();
 						Some(quote! { #[atom(CssAtomSet::#ident)] #ident(#ty), })
 					} else {
@@ -736,9 +755,15 @@ impl GenerateDefinition for Def {
 									};
 									vec![quote! { ::css_parse::CommaSeparated<'a, #inner_type_ref, #min> }]
 								}
-								DefMultiplierSeparator::None => {
-									vec![quote! { ::bumpalo::collections::Vec<'a, #inner_type_ref> }]
-								}
+								DefMultiplierSeparator::None => match range {
+									DefRange::Range(Range { start, .. }) if *start == 0.0 => {
+										vec![quote! { Option<::bumpalo::collections::Vec<'a, #inner_type_ref>> }]
+									}
+									_ => {
+										dbg!(range);
+										vec![quote! { Option<::bumpalo::collections::Vec<'a, #inner_type_ref> }]
+									}
+								},
 							};
 							quote! { ( #(pub #ty),* ); }
 						}
@@ -807,16 +832,33 @@ impl GenerateDefinition for Def {
 								// Variant name: distinguishing keywords (if computed) else full
 								// concatenation of all child names.
 								let name = if let Some(keywords) = &distinguishing[idx] {
-									format_ident!("{}", keywords.iter().map(|k| k.to_pascal_case()).collect::<String>())
+									let auto = keywords.iter().map(|k| k.to_pascal_case()).collect::<String>();
+									format_ident!("{}", get_type_rename(&auto).unwrap_or(&auto))
 								} else {
 									inner.to_variant_name(0)
 								};
-								let members = opts_children.iter().map(|child| {
-									let member_name = child.to_member_name(0);
-									let ty = child.to_type();
-									let field_attrs = child.type_attributes(derives_parse, derives_visitable);
-									quote! { #field_attrs #member_name: Option<#ty> }
-								});
+								let members: Vec<_> = opts_children
+									.iter()
+									.flat_map(|child| {
+										if let Def::Combinator(nested, DefCombinatorStyle::Options) = child {
+											nested
+												.iter()
+												.map(|nc| {
+													let member_name = nc.to_member_name(0);
+													let ty = nc.to_type();
+													let field_attrs =
+														nc.type_attributes(derives_parse, derives_visitable);
+													quote! { #field_attrs #member_name: Option<#ty> }
+												})
+												.collect::<Vec<_>>()
+										} else {
+											let member_name = child.to_member_name(0);
+											let ty = child.to_type();
+											let field_attrs = child.type_attributes(derives_parse, derives_visitable);
+											vec![quote! { #field_attrs #member_name: Option<#ty> }]
+										}
+									})
+									.collect();
 								let variant_attrs = if derives_parse {
 									quote! { #[parse(one_must_occur)] }
 								} else {

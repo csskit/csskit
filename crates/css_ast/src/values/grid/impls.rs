@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
 	pub fn size_test() {
@@ -12,7 +12,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<GridTemplateStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<GridAutoColumnsStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<GridAutoFlowStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<GridAutoFlowStyleValue>(), 36);
 		// assert_eq!(std::mem::size_of::<GridStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 44);
 		assert_eq!(std::mem::size_of::<GridColumnStartStyleValue>(), 44);
@@ -31,5 +31,17 @@ mod tests {
 
 		assert_parse!(CssAtomSet::ATOMS, FlowToleranceStyleValue, "infinite");
 		assert_parse!(CssAtomSet::ATOMS, FlowToleranceStyleValue, "30px");
+	}
+
+	#[test]
+	fn test_grid_auto_flow() {
+		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "row");
+		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "column");
+		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "dense");
+		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "row dense");
+		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "column dense");
+		assert_parse_error!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "auto");
+		assert_parse_error!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "row column");
 	}
 }

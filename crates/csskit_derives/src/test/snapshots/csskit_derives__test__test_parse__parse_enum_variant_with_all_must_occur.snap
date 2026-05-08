@@ -33,9 +33,7 @@ impl<'a> ::css_parse::Parse<'a> for Value {
                 length: length.unwrap(),
             });
         }
-        {
-            let v0 = p.parse::<String>()?;
-            return Ok(Self::Normal { 0: v0 });
-        }
+        let v0 = p.parse::<String>()?;
+        return Ok(Self::Normal { 0: v0 });
     }
 }

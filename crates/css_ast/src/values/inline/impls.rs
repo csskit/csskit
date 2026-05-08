@@ -18,6 +18,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<LineFitEdgeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextBoxEdgeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextBoxTrimStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<VerticalAlignStyleValue>(), 52);
 	}
 
 	#[test]
@@ -28,5 +29,19 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextBoxStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, TextBoxStyleValue, "trim-start auto");
 		assert_parse!(CssAtomSet::ATOMS, TextBoxStyleValue, "auto trim-start");
+	}
+
+	#[test]
+	fn test_vertical_align() {
+		use css_parse::assert_parse_error;
+		// [ first | last ] || <'alignment-baseline'> || <'baseline-shift'>
+		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first");
+		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "last");
+		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "baseline");
+		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "sub");
+		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first baseline");
+		assert_parse_error!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first last");
 	}
 }

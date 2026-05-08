@@ -16,6 +16,12 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FlowFromStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, FlowFromStyleValue, "myflow");
 		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "myflow");
+		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "myflow element");
+		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "myflow content");
+		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "element content");
+		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "element element");
+		assert_parse!(CssAtomSet::ATOMS, FlowIntoStyleValue, "content content");
 		assert_parse!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "break");
 	}
@@ -23,6 +29,8 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, FlowFromStyleValue, "none myflow");
+		assert_parse_error!(CssAtomSet::ATOMS, FlowIntoStyleValue, "element myflow");
+		assert_parse_error!(CssAtomSet::ATOMS, FlowIntoStyleValue, "content myflow");
 		assert_parse_error!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "auto break");
 	}

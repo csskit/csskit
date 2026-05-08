@@ -1,8 +1,8 @@
 ---
 source: crates/csskit_highlight/src/tests.rs
 expression: actual
-snapshot_kind: text
 ---
+
 <!DOCTYPE html>
 <head>
 	<style>

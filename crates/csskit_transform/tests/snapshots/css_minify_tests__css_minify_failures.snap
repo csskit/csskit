@@ -566,11 +566,11 @@ FAIL shorthands/0030
 +a{font:italic 700 16px/1.5 Arial,sans-serif}
 
 FAIL shorthands/0031
--a{transition-property:opacity;transition-duration:.3s;transition-timing-function:ease;transition-delay:0}
+-a{transition-property:opacity;transition-duration:.3s;transition-timing-function:ease;transition-delay:0s}
 +a{transition:opacity .3s}
 
 FAIL shorthands/0032
--a{animation-name:slide;animation-duration:1s;animation-timing-function:ease;animation-delay:0;animation-iteration-count:1;animation-direction:normal;animation-fill-mode:none;animation-play-state:running}
+-a{animation-name:slide;animation-duration:1s;animation-timing-function:ease;animation-delay:0s;animation-iteration-count:1;animation-direction:normal;animation-fill-mode:none;animation-play-state:running}
 +a{animation:slide 1s}
 
 FAIL shorthands/0033
@@ -706,7 +706,7 @@ FAIL shorthands/0072
 +a{inset-block:20px}
 
 FAIL shorthands/0073
--a{transition:all 0}
+-a{transition:all 0s}
 +a{transition:all}
 
 FAIL shorthands/0074
@@ -996,7 +996,3 @@ FAIL whitespace/0014
 FAIL whitespace/0015
 -a{font:16px / 1.5 sans-serif}
 +a{font:16px/1.5 sans-serif}
-
-FAIL zero-units/0002
--a{transition-delay:0}
-+a{transition-delay:0s}

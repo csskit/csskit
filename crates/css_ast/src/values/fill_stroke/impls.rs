@@ -28,6 +28,8 @@ mod tests {
 		assert_eq!(std::mem::size_of::<StrokeRepeatStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<StrokeSizeStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<StrokeWidthStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<StrokeDashJustifyStyleValue>(), 52);
+		assert_eq!(std::mem::size_of::<StrokeLinejoinStyleValue>(), 36);
 	}
 
 	#[test]
@@ -118,6 +120,27 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StrokeWidthStyleValue, "thick");
 		assert_parse!(CssAtomSet::ATOMS, StrokeWidthStyleValue, "50%");
 		assert_parse!(CssAtomSet::ATOMS, StrokeWidthStyleValue, "1px, 2px");
+	}
+
+	#[test]
+	fn test_stroke_dash_justify() {
+		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "stretch");
+		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "dashes");
+		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "stretch dashes");
+		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "stretch dashes gaps");
+		assert_parse_error!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "1px");
+	}
+
+	#[test]
+	fn test_stroke_linejoin() {
+		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "crop");
+		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "arcs");
+		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "miter");
+		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "crop bevel");
+		assert_parse_error!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "1px");
 	}
 
 	#[test]

@@ -399,20 +399,15 @@ StyleSheet(
                 offset: SourceOffset(487),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(488),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(489),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: None,
+                baseline_shift: Some(LengthPercentage(Length(Em(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(489),
+                  len: 8,
+                )))))),
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4250,20 +4245,15 @@ StyleSheet(
                 offset: SourceOffset(3558),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3559),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3560),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: First(
+                first: None,
+                alignment_baseline: Some(BaselineMetric(Middle(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(3560),
+                  len: 6,
+                ))))),
+                baseline_shift: None,
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

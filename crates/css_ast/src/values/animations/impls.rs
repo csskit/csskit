@@ -38,6 +38,8 @@ mod tests {
 
 	#[test]
 	fn test_animation_delay_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0");
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0px");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "infinite");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "1s 2s 3s");
 	}
@@ -66,6 +68,8 @@ mod tests {
 
 	#[test]
 	fn test_animation_duration_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "0");
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "0px");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "-3s");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "infinite");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "1s 2s");

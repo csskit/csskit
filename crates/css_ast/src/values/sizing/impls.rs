@@ -34,6 +34,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ContainIntrinsicSizeStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<ContainIntrinsicWidthStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<FrameSizingStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<MinIntrinsicSizingStyleValue>(), 32);
 	}
 
 	#[test]
@@ -48,6 +49,16 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "auto none 100px");
 		assert_parse_error!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "");
+	}
+
+	#[test]
+	fn test_min_intrinsic_sizing() {
+		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "legacy");
+		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "zero-if-scroll");
+		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "zero-if-extrinsic");
+		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "zero-if-scroll zero-if-extrinsic");
+		assert_parse_error!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "auto");
 	}
 
 	#[test]

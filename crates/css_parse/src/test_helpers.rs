@@ -98,6 +98,43 @@ macro_rules! assert_parse_error {
 #[cfg(test)]
 pub(crate) use assert_parse_error;
 
+/// (Requires feature "testing") Given a Node, and a string, this will expand to code that sets up a parser, and checks
+/// that the Node returns false when Peeking on the node. It _also_ parses using the node, to ensure that the Parse
+/// causes an error, confirming that Peek doesn't contradict Parse. If the parse succeeded this macro will [panic] with
+/// a readable failure.
+///
+/// ```
+/// use css_parse::*;
+/// assert_peek_false!(EmptyAtomSet::ATOMS, T![Ident], "1");
+/// ```
+#[macro_export]
+macro_rules! assert_peek_false {
+	($atomset: path, $ty: ty, $str: literal) => {
+		let source_text = $str;
+		let bump = ::bumpalo::Bump::default();
+		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
+		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
+		if parser.peek::<$ty>() {
+			panic!("\n\n.\n\nPeek returned true! You might want `assert_parse_error` instead: {:?}", source_text);
+		}
+		let result = parser.parse::<$ty>();
+		if parser.at_end() {
+			if let Ok(result) = result {
+				let mut actual = ::bumpalo::collections::String::new_in(&bump);
+				{
+					let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
+					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+					use $crate::ToCursors;
+					result.to_cursors(&mut ordered_sink);
+				}
+				panic!("\n\nExpected errors but it passed without error.\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: (Error)", source_text, actual);
+			}
+		}
+	};
+}
+#[cfg(test)]
+pub(crate) use assert_peek_false;
+
 /// (Requires feature "testing") Given a Node, and a multiline string, this will expand to code that sets up a parser,
 /// and parses the first line of the given string with the parser. It will then create a second string based on the span
 /// data and append it to the first line of the string, showing what was parsed and where the span rests.
