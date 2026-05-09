@@ -2,26 +2,8 @@
 # Once we figure out how to parse them in csskit_proc_macro/src/def.rs, we can
 # remove them from this file and the generator will uncomment them.
 
-[anchor-position]
-properties = ["position-try-fallbacks", "position-try"]
-
 [animations]
-properties = [
-  "animation",
-  "animation-trigger-exit-range",
-  "animation-trigger-exit-range-end",
-  "animation-trigger-exit-range-start",
-  "animation-trigger-range",
-  "animation-trigger-range-end",
-  "animation-trigger-range-start",
-  "timeline-trigger",
-  "timeline-trigger-range",
-  "timeline-trigger-range-end",
-  "timeline-trigger-range-start",
-  "timeline-trigger-exit-range",
-  "timeline-trigger-exit-range-end",
-  "timeline-trigger-exit-range-start",
-]
+properties = ["animation"]
 
 [backgrounds]
 properties = [
@@ -34,10 +16,7 @@ properties = [
 ]
 
 [borders]
-properties = [
-  "border-shape",
-  "border-image",
-]
+properties = ["border-shape", "border-image"]
 
 [color-adjust]
 properties = ["color-scheme"]
@@ -75,34 +54,19 @@ properties = [
   "grid-template",
   "grid-template-columns",
   "grid-template-rows",
-  "item-cross",
-  "item-flow",
-  "item-wrap",
 ]
-
-[images]
-properties = ["image-resolution"]
 
 [inline]
 properties = ["initial-letter-align"]
 
-[lists]
-properties = ["counter-reset"]
-
 [overflow]
 properties = ["line-clamp", "text-overflow"]
-
-[scroll-animations]
-properties = ["view-timeline"]
 
 [shapes]
 properties = ["shape-inside", "shape-outside"]
 
 [speech]
-properties = ["speak-as", "voice-family", "voice-pitch", "voice-range"]
-
-[text]
-properties = ["text-spacing"]
+properties = ["speak-as", "voice-pitch", "voice-range"]
 
 [transforms]
 properties = ["rotate", "transform-origin"]
@@ -112,9 +76,6 @@ properties = ["nav-down", "nav-left", "nav-right", "nav-up"]
 
 [variables]
 properties = ["--*"]
-
-[counter-styles]
-properties = ["range", "additive-symbols"]
 
 [pointer-animations]
 properties = ["animation-range-center"]

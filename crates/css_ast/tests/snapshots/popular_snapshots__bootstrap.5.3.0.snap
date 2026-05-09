@@ -152702,20 +152702,13 @@ StyleSheet(
                 offset: SourceOffset(125105),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(125106),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(125107),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: CounterResetStyleValue(r#Some([
+                Left((CounterName(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(125107),
+                  len: 7,
+                ))), None)),
+              ])),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

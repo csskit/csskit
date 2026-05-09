@@ -705,6 +705,7 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	Widows,
 	Width,
 	WillChange,
+	WindowDrag,
 	WordBreak,
 	WordSpaceTransform,
 	WordSpacing,

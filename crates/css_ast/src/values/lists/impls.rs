@@ -7,12 +7,25 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<CounterIncrementStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<CounterResetStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<CounterSetStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ListStyleImageStyleValue>(), 128);
 		assert_eq!(std::mem::size_of::<ListStylePositionStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ListStyleStyleValue>(), 216);
 		assert_eq!(std::mem::size_of::<ListStyleTypeStyleValue>(), 72);
 		assert_eq!(std::mem::size_of::<MarkerSideStyleValue>(), 16);
+	}
+
+	#[test]
+	fn test_counter_reset() {
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "my-counter");
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "my-counter 5");
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "a 1 b 2");
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "reversed(foo)");
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "reversed(foo) 3");
+		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "my-counter reversed(foo)");
+		assert_parse_error!(CssAtomSet::ATOMS, CounterResetStyleValue, "123");
 	}
 
 	#[test]

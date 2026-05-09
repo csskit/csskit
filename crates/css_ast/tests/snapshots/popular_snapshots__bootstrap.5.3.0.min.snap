@@ -139541,15 +139541,13 @@ StyleSheet(
                 offset: SourceOffset(105113),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(105114),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: CounterResetStyleValue(r#Some([
+                Left((CounterName(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(105114),
+                  len: 7,
+                ))), None)),
+              ])),
               important: None,
               semicolon: None,
             ),

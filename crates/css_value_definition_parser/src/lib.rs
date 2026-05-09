@@ -113,6 +113,7 @@ impl DefType {
 					| "GapRuleList"  // contains Vec<'a, ...>
 					| "GapAutoRuleList"  // contains Vec<'a, ...>
 					| "FontFamilyName"  // may contain allocating elements
+				| "VoiceFamilyName"  // may contain allocating elements
 				| "BgImage"  // contains Image<'a>
 				| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
 				| "DynamicRangeLimitMixFunction"  // contains allocating params
@@ -329,23 +330,26 @@ impl Def {
 			Self::StyleValue(ty) => {
 				matches!(
 					ty.ident_str(),
-					"BorderBlockStart"
+					"AnimationRangeEnd"
+						| "AnimationRangeStart"
+						| "BorderBlockStart"
 						| "BorderImageSource"
-						| "BorderTopColor" | "CaretColor"
+						| "BorderTopClip" | "BorderTopColor"
+						| "CaretColor" | "ColumnRule"
 						| "ColumnRuleWidth"
+						| "Container" | "ContainerName"
 						| "DynamicRangeLimit"
 						| "EventTriggerName"
 						| "EventTriggerSource"
+						| "ListStyleImage" | "ListStyleType"
 						| "OutlineColor" | "PointerTimelineAxis"
 						| "PointerTimelineName"
-						| "AnimationRangeStart"
-						| "AnimationRangeEnd"
-						| "ScrollTimelineAxis"
+						| "PositionTryFallbacks"
+						| "RowRule" | "ScrollTimelineAxis"
 						| "ScrollTimelineName"
-						| "ViewTimelineAxis"
-						| "ViewTimelineName"
-						| "BorderTopClip" | "ColumnRule"
-						| "RowRule" | "TimelineTriggerActivationRange"
+						| "TextDecorationColor"
+						| "TextEmphasisColor"
+						| "TimelineTriggerActivationRange"
 						| "TimelineTriggerActivationRangeEnd"
 						| "TimelineTriggerActivationRangeStart"
 						| "TimelineTriggerActiveRange"
@@ -353,10 +357,9 @@ impl Def {
 						| "TimelineTriggerActiveRangeStart"
 						| "TimelineTriggerName"
 						| "TimelineTriggerSource"
-						| "ListStyleImage" | "ListStyleType"
-						| "TextDecorationColor"
-						| "TextEmphasisColor"
-						| "ContainerName" | "Container"
+						| "ViewTimelineAxis"
+						| "ViewTimelineInset"
+						| "ViewTimelineName"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),

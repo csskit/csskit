@@ -19,12 +19,26 @@ mod tests {
 		assert_eq!(std::mem::size_of::<CueBeforeStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<CueAfterStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<CueStyleValue>(), 112);
-		// assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 36);
 		// assert_eq!(std::mem::size_of::<VoicePitchStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<VoiceRangeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceStressStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceDurationStyleValue>(), 16);
+	}
+
+	#[test]
+	fn test_voice_family() {
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "preserve");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "male");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "female");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "neutral");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "child male");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "old neutral");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "Alice");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "\"Alice\"");
+		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "Alice,male");
+		assert_parse_error!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "");
 	}
 
 	#[test]

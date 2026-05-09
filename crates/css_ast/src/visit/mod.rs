@@ -145,6 +145,14 @@ impl VisitableMut for token_macros::Ident {
 	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
 }
 
+impl Visitable for token_macros::Function {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::Function {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
 impl Visitable for token_macros::Comma {
 	fn accept<V: Visit>(&self, _: &mut V) {}
 }
@@ -189,6 +197,14 @@ impl VisitableMut for Comparison {
 		v.visit_comparison(self);
 		v.exit_comparison(self);
 	}
+}
+
+impl Visitable for token_macros::delim::Dash {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::delim::Dash {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
 }
 
 impl Visitable for token_macros::delim::Slash {
