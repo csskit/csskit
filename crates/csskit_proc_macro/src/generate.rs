@@ -138,10 +138,15 @@ impl ToFieldName for Def {
 					.collect();
 				format_ident!("{}", name)
 			}
-			Self::Combinator(_, _) => {
-				dbg!("TODO variant name for Combinator()", self);
-				todo!("variant name")
+			Self::Combinator(ds, DefCombinatorStyle::Alternatives) => {
+				let auto_generated_name: String = ds
+					.iter()
+					.filter(|d| !matches!(d, Def::Punct(_)))
+					.map(|d| d.to_variant_name(0).to_string())
+					.collect();
+				format_ident!("{}", get_type_rename(&auto_generated_name).unwrap_or(&auto_generated_name))
 			}
+
 			Self::Punct(c) => panic!("Punct('{c}') has no variant name; filter before calling to_variant_name"),
 		}
 	}
@@ -195,8 +200,9 @@ impl ToType for Def {
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => ds.iter().map(|d| d.to_type()).collect(),
 			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
-				dbg!("TODO to_type for Combinator::Alternatives()", self);
-				todo!("to_type")
+				let ident = self.to_variant_name(0);
+				let generics = self.get_generics();
+				vec![quote! { crate::#ident #generics }]
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
 				let types = ds.iter().map(|d| d.to_type());
