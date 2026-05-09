@@ -204,6 +204,18 @@ fn def_optimizes_lengthpercentage_or_flex_to_lengthpercentageorflex_type() {
 }
 
 #[test]
+fn def_optimizes_length_percentage_number_auto_to_auto_or() {
+	assert_eq!(
+		to_valuedef! { auto | <length-percentage> | <number> },
+		Def::AutoOr(Box::new(Def::Type(DefType::new("LengthPercentageNumber", DefRange::None))))
+	);
+	assert_eq!(
+		to_valuedef! { <length-percentage [0,]> | <number [0,]> | auto },
+		Def::AutoOr(Box::new(Def::Type(DefType::new("LengthPercentageNumber", DefRange::RangeFrom(0.)))))
+	);
+}
+
+#[test]
 fn def_optimizes_gap_rule_list_or_gap_auto_rule_list_to_gap_rule_list_type() {
 	assert_eq!(
 		to_valuedef! { <gap-rule-list> | <gap-auto-rule-list> },

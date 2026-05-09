@@ -547,6 +547,12 @@ impl Def {
 							("Percentage", "Length") | ("Length", "Percentage") => {
 								Def::AutoOr(Box::new(Def::Type(DefType::new("LengthPercentage", type1.range.clone()))))
 							}
+							("Number", "Percentage") | ("Percentage", "Number") => {
+								Def::AutoOr(Box::new(Def::Type(DefType::new("NumberPercentage", type1.range.clone()))))
+							}
+							("LengthPercentage", "Number") | ("Number", "LengthPercentage") => Def::AutoOr(Box::new(
+								Def::Type(DefType::new("LengthPercentageNumber", type1.range.clone())),
+							)),
 							_ => {
 								return Self::Combinator(
 									vec![first.optimize(), second.optimize(), third.optimize()],
