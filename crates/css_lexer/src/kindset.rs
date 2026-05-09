@@ -99,6 +99,13 @@ impl KindSet {
 		Self(self.0 | (1 << (kind as u8 & 0b111111)))
 	}
 
+	/// Returns a new [KindSet] combined with the other [KindSet].
+	///
+	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
+	pub const fn combine(&self, ks: KindSet) -> Self {
+		Self(self.0 & ks.0)
+	}
+
 	/// Returns a new [KindSet] without the supplied [Kind].
 	///
 	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
