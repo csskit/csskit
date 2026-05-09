@@ -9,9 +9,7 @@ coverage/popular/missing.1.2.0.css
 418:5:    background: none;
 498:5:    content: "";
 623:3:  background: none;
-682:3:  font-variant-numeric: tabular-nums;
 734:3:  color-scheme: light;
-737:3:  font-variant-numeric: tabular-nums;
 843:3:  border-color: transparent;
 908:3:  border-color: transparent;
 961:3:  background: none;

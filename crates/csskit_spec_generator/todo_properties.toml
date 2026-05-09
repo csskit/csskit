@@ -57,9 +57,6 @@ properties = [
   "font-palette",
   "font-variant",
   "font-variant-alternates",
-  "font-variant-east-asian",
-  "font-variant-ligatures",
-  "font-variant-numeric",
   # Font properties with complex grammars that cause panics or use unsupported operators like /
   "superscript-size-override",
   "superscript-position-override",

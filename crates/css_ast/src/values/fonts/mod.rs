@@ -643,54 +643,36 @@ pub enum FontSynthesisWeightStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontVariantCapsStyleValue {}
 
-// /// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
-// ///
-// /// The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
-// #[syntax(
-//     " normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     shorthand_group = Font,
-//     property_group = Fonts,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-variant-east-asian")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FontVariantEastAsianStyleValue;
+/// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
+///
+/// The font-variant-east-asian CSS property controls glyph substitution and sizing in East Asian text.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ]
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian
+#[syntax(" normal | [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    shorthand_group = Font,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-east-asian"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontVariantEastAsianStyleValue;
 
 /// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
 ///
@@ -723,103 +705,71 @@ pub enum FontVariantCapsStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontVariantEmojiStyleValue {}
 
-// /// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
-// ///
-// /// The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
-// #[syntax(
-//     " normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     shorthand_group = Font,
-//     property_group = Fonts,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-variant-ligatures")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontVariantLigaturesStyleValue {}
+/// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
+///
+/// The font-variant-ligatures CSS property sets how characters can be visually combined for readability or stylistic reasons.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ]
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures
+#[syntax(
+	" normal | none | [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    shorthand_group = Font,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-ligatures"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum FontVariantLigaturesStyleValue {}
 
-// /// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
-// ///
-// /// The font-variant-numeric CSS property sets how numeric characters are displayed. For example, you can align columns of numbers or use zeroes that have a slash.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
-// #[syntax(
-//     " normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     shorthand_group = Font,
-//     property_group = Fonts,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-variant-numeric")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FontVariantNumericStyleValue;
+/// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
+///
+/// The font-variant-numeric CSS property sets how numeric characters are displayed. For example, you can align columns of numbers or use zeroes that have a slash.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ]
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-numeric
+#[syntax(
+	" normal | [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    shorthand_group = Font,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-numeric"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontVariantNumericStyleValue;
 
 /// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
 ///

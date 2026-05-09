@@ -20343,20 +20343,17 @@ StyleSheet(
                 offset: SourceOffset(13817),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(13818),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(13819),
-                    len: 12,
-                  )),
-                ],
-              )),
+              value: FontVariantNumericStyleValue(r#Some(FontVariantNumericStyleValueOptions(
+                numeric_figure_values: None,
+                numeric_spacing_values: Some(TabularNums(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(13819),
+                  len: 12,
+                )))),
+                numeric_fraction_values: None,
+                ordinal: None,
+                slashed_zero: None,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -21722,20 +21719,17 @@ StyleSheet(
                 offset: SourceOffset(14701),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14702),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(14703),
-                    len: 12,
-                  )),
-                ],
-              )),
+              value: FontVariantNumericStyleValue(r#Some(FontVariantNumericStyleValueOptions(
+                numeric_figure_values: None,
+                numeric_spacing_values: Some(TabularNums(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(14703),
+                  len: 12,
+                )))),
+                numeric_fraction_values: None,
+                ordinal: None,
+                slashed_zero: None,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
