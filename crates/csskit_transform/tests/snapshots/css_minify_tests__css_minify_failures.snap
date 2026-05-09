@@ -614,7 +614,7 @@ FAIL shorthands/0043
 +a{border:1px solid red}
 
 FAIL shorthands/0044
--a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:transparent}
+-a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:#0000}
 +a{border:4px solid transparent;border-image:url(border.png) 30 round}
 
 FAIL shorthands/0045

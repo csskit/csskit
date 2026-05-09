@@ -2,5 +2,4 @@
 ---
 coverage/popular/sakura.1.5.1.css
 40:3:  -ms-word-break: break-all;
-78:3:  border-color: #1d7484;
 227:3:  box-shadow: none;

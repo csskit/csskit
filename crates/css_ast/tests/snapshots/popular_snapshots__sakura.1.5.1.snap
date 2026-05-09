@@ -1400,20 +1400,11 @@ StyleSheet(
                 offset: SourceOffset(1179),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1180),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
-                    kind: "Hash",
-                    offset: SourceOffset(1181),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: BorderColorStyleValue(Left(Hex(Hash(Cursor(
+                kind: "Hash",
+                offset: SourceOffset(1181),
+                len: 7,
+              )))), None, None, None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -14,7 +14,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderBlockEndColorStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<BorderInlineStartColorStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<BorderInlineEndColorStyleValue>(), 56);
-		// assert_eq!(std::mem::size_of::<BorderColorStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderColorStyleValue>(), 248);
 		assert_eq!(std::mem::size_of::<BorderBlockColorStyleValue>(), 120);
 		assert_eq!(std::mem::size_of::<BorderInlineColorStyleValue>(), 120);
 		assert_eq!(std::mem::size_of::<BorderTopStyleStyleValue>(), 16);
@@ -120,8 +120,8 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 128);
-		// assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 1);
-		// assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 80);
+		assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
@@ -158,6 +158,44 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, BorderImageOutsetStyleValue, "-10");
+	}
+
+	#[test]
+	fn test_border_color() {
+		assert_parse!(CssAtomSet::ATOMS, BorderColorStyleValue, "red");
+		assert_parse!(CssAtomSet::ATOMS, BorderColorStyleValue, "red blue");
+		assert_parse!(CssAtomSet::ATOMS, BorderColorStyleValue, "red blue green");
+		assert_parse!(CssAtomSet::ATOMS, BorderColorStyleValue, "red blue green yellow");
+		assert_parse!(CssAtomSet::ATOMS, BorderColorStyleValue, "stripes(red 1fr,blue 2fr)");
+		assert_parse!(CssAtomSet::ATOMS, BorderColorStyleValue, "red stripes(red 1fr,blue 2fr)");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderColorStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderColorStyleValue, "auto");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderColorStyleValue, "red blue green yellow purple");
+	}
+
+	#[test]
+	fn test_border_image_slice() {
+		assert_parse!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "0");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "10 20");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "10 20 30 40");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "10% fill");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "fill 10%");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderImageSliceStyleValue, "auto");
+	}
+
+	#[test]
+	fn test_border_image_width() {
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "1");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "1 2");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "1 2 3 4");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "auto 10px 1 50%");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "none");
 	}
 
 	#[test]

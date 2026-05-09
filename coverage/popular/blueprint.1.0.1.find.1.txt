@@ -11,15 +11,10 @@ coverage/popular/blueprint.1.0.1.css
 182:14:.highlight { background:#ff0; }
 183:14:.added     { background:#060; color: #fff; }
 184:14:.removed   { background:#900; color: #fff; }
-233:3:  border-color:#666;
 265:18:.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
-265:55:.error, .alert { background: #fbe3e4; color: #8a1f11; border-color: #fbc2c4; }
 266:18:.notice        { background: #fff6bf; color: #514721; border-color: #ffd324; }
-266:55:.notice        { background: #fff6bf; color: #514721; border-color: #ffd324; }
 267:18:.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
-267:55:.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
 268:18:.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
-268:55:.info          { background: #d5edf8; color: #205791; border-color: #92cae4; }
 295:3:  background: url(src/grid.png);
 514:3:  background: #e5eCf9;
 519:3:  background: #ddd;

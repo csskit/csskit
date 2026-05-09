@@ -161,6 +161,34 @@ impl ToNumberValue for LengthPercentage {
 
 #[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum LengthPercentageNumber {
+	Length(Length),
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	Percent(Percentage),
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	Number(T![Number]),
+}
+
+impl From<LengthPercentageNumber> for f32 {
+	fn from(val: LengthPercentageNumber) -> Self {
+		match val {
+			LengthPercentageNumber::Length(f) => f.into(),
+			LengthPercentageNumber::Percent(f) => f.into(),
+			LengthPercentageNumber::Number(f) => f.into(),
+		}
+	}
+}
+
+impl ToNumberValue for LengthPercentageNumber {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
+	}
+}
+
+#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum LengthPercentageOrFlex {

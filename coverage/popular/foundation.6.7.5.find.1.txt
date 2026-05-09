@@ -312,15 +312,7 @@ coverage/popular/foundation.6.7.5.css
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
-2558:5:    border-color: #0c3d5d;
-2564:5:    border-color: #0c3d5d;
-2570:5:    border-color: #3b3b3b;
-2576:5:    border-color: #157539;
-2582:5:    border-color: #805700;
-2588:5:    border-color: #67251a;
-2591:5:    border-color: transparent;
 2626:5:    content: '';
-2628:5:    border-color: #fefefe transparent transparent;
 2657:3:  -webkit-box-sizing: border-box;
 2666:3:  -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
@@ -357,18 +349,15 @@ coverage/popular/foundation.6.7.5.css
 2884:3:  background-position: right -1rem center;
 2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2900:13:            box-shadow: 0 0 5px #cacaca;
-2918:3:  border-color: #cc4b37;
 2946:3:  background: #fefefe;
 2976:5:    content: "+"; }
 2978:5:    content: "–"; }
 3015:5:    content: '';
-3017:5:    border-color: #1779ba transparent transparent;
 3033:7:      -ms-transform: rotate(180deg);
 3035:3:  -webkit-transform-origin: 50% 50%;
 3036:7:      -ms-transform-origin: 50% 50%;
 3037:11:          transform-origin: 50% 50%; }
 3058:5:    content: '';
-3060:5:    border-color: #1779ba transparent transparent;
 3067:7:      -ms-transform: scaleY(-1);
 3069:3:  -webkit-transform-origin: 50% 50%;
 3070:7:      -ms-transform-origin: 50% 50%;
@@ -406,13 +395,6 @@ coverage/popular/foundation.6.7.5.css
 3181:9:        -ms-flex: 0 0 auto;
 3192:5:    -webkit-box-flex: 1;
 3194:9:        -ms-flex: 1 1 0px;
-3232:5:    border-color: #0c3d5d;
-3238:5:    border-color: #0c3d5d;
-3244:5:    border-color: #3b3b3b;
-3250:5:    border-color: #157539;
-3256:5:    border-color: #805700;
-3262:5:    border-color: #67251a;
-3265:5:    border-color: transparent;
 3296:5:    -webkit-flex-wrap: wrap;
 3297:9:        -ms-flex-wrap: wrap;
 3300:7:      -webkit-box-flex: 0;
@@ -581,39 +563,24 @@ coverage/popular/foundation.6.7.5.css
 3801:9:        -ms-transform: translateX(-100%);
 3805:9:        -ms-transform: translateX(100%);
 3825:5:    content: '';
-3827:5:    border-color: transparent transparent transparent #1779ba;
 3839:3:  content: '';
-3841:3:  border-color: transparent transparent transparent #1779ba;
 3851:3:  content: '';
-3853:3:  border-color: transparent #1779ba transparent transparent;
 3863:3:  content: '';
-3865:3:  border-color: transparent #1779ba transparent transparent;
 3872:3:  z-index: 10;
 3916:3:  content: '';
-3918:3:  border-color: #1779ba transparent transparent;
 3930:3:  background: transparent;
 3961:3:  content: '';
-3963:3:  border-color: transparent #1779ba transparent transparent;
 3973:3:  content: '';
-3975:3:  border-color: transparent transparent transparent #1779ba; }
 3995:5:    content: '';
-3997:5:    border-color: #1779ba transparent transparent;
 4018:5:    content: '';
-4020:5:    border-color: transparent #1779ba transparent transparent;
 4029:5:    content: '';
-4031:5:    border-color: transparent transparent transparent #1779ba; } }
 4051:5:    content: '';
-4053:5:    border-color: #1779ba transparent transparent;
 4074:5:    content: '';
-4076:5:    border-color: transparent #1779ba transparent transparent;
 4085:5:    content: '';
-4087:5:    border-color: transparent transparent transparent #1779ba; } }
 4121:3:  z-index: 1;
 4125:3:  background: #fefefe; }
 4136:5:    content: '';
-4138:5:    border-color: transparent #1779ba transparent transparent;
 4147:5:    content: '';
-4149:5:    border-color: transparent transparent transparent #1779ba; }
 4189:3:  background: #1779ba;
 4192:5:    background: #1779ba;
 4195:5:    background: #767676;
@@ -789,16 +756,12 @@ coverage/popular/foundation.6.7.5.css
 5320:7:      -ms-flex: 1 1 0px;
 5341:3:  z-index: 1200;
 5356:5:    content: '';
-5358:5:    border-color: transparent transparent #0a0a0a;
 5363:9:        -ms-transform: translateX(-50%);
 5371:5:    content: '';
-5373:5:    border-color: #0a0a0a transparent transparent;
 5379:9:        -ms-transform: translateX(-50%);
 5387:5:    content: '';
-5389:5:    border-color: transparent transparent transparent #0a0a0a;
 5395:9:        -ms-transform: translateY(-50%);
 5403:5:    content: '';
-5405:5:    border-color: transparent #0a0a0a transparent transparent;
 5412:9:        -ms-transform: translateY(-50%);
 5428:3:  display: -webkit-box;
 5429:3:  display: -webkit-flex;

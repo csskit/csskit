@@ -35120,8 +35120,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Ident",
-    len: 11,
+    kind: "Hash",
+    len: 5,
   ),
   Token(
     kind: "Semicolon",
@@ -35648,8 +35648,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Ident",
-    len: 11,
+    kind: "Hash",
+    len: 5,
   ),
   Token(
     kind: "Semicolon",
@@ -61608,8 +61608,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Ident",
-    len: 11,
+    kind: "Hash",
+    len: 5,
   ),
   Token(
     kind: "RightCurly",
@@ -62032,8 +62032,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Ident",
-    len: 11,
+    kind: "Hash",
+    len: 5,
   ),
   Token(
     kind: "RightCurly",
@@ -94684,8 +94684,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Ident",
-    len: 11,
+    kind: "Hash",
+    len: 5,
   ),
   Token(
     kind: "Semicolon",
@@ -97280,8 +97280,8 @@ expression: tokens
     len: 1,
   ),
   Token(
-    kind: "Ident",
-    len: 11,
+    kind: "Hash",
+    len: 5,
   ),
   Token(
     kind: "Semicolon",

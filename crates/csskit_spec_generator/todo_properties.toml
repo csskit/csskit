@@ -35,11 +35,8 @@ properties = [
 
 [borders]
 properties = [
-  "border-color",
-  "border-image-width",
   "border-shape",
   "border-image",
-  "border-image-slice",
 ]
 
 [color-adjust]

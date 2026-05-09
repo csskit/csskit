@@ -2,7 +2,6 @@
 ---
 coverage/popular/missing.1.2.0.css
 40:3:  fill: currentColor;
-44:3:  border-color: currentColor;
 93:3:  z-index: 2;
 102:3:  z-index: 2;
 1:1:/* src/core/sanitize.css */
@@ -10,8 +9,6 @@ coverage/popular/missing.1.2.0.css
 498:5:    content: "";
 623:3:  background: none;
 734:3:  color-scheme: light;
-843:3:  border-color: transparent;
-908:3:  border-color: transparent;
 961:3:  background: none;
 1:1:/* src/core/sanitize.css */
 1028:6:    }
