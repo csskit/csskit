@@ -1845,7 +1845,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1971),
                   len: 16,
@@ -1854,7 +1854,7 @@ StyleSheet(
                   offset: SourceOffset(1987),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1989),
@@ -1865,7 +1865,7 @@ StyleSheet(
                   offset: SourceOffset(1994),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1996),
@@ -1876,7 +1876,7 @@ StyleSheet(
                   offset: SourceOffset(2005),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(2007),

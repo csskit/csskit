@@ -333,6 +333,13 @@ fn multiplier_with_comma_separated_type() {
 }
 
 #[test]
+fn multiplier_with_two_type_alternatives() {
+	let syntax = to_valuedef! { [ <foo> | <bar> ]# };
+	let data = to_deriveinput! { struct Baz<'a> {} };
+	assert_snapshot!(syntax, data, "multiplier_with_two_type_alternatives");
+}
+
+#[test]
 fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
 	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };

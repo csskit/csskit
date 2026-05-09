@@ -6,8 +6,8 @@ include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_exit_methods.rs"));
 use bumpalo::collections::Vec;
 use css_parse::{
 	Block, BumpBox, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup,
-	DeclarationList, DeclarationOrBad, DeclarationValue, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2,
-	Optionals3, Optionals4, Optionals5, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
+	DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata,
+	Optionals2, Optionals3, Optionals4, Optionals5, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
 };
 
 use crate::*;
@@ -262,6 +262,32 @@ where
 	fn accept<V: Visit>(&self, v: &mut V) {
 		for (node, _) in self {
 			node.accept(v)
+		}
+	}
+}
+
+impl<Left, Right> VisitableMut for Either<Left, Right>
+where
+	Left: VisitableMut,
+	Right: VisitableMut,
+{
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		match self {
+			Self::Left(t) => t.accept_mut(v),
+			Self::Right(t) => t.accept_mut(v),
+		}
+	}
+}
+
+impl<Left, Right> Visitable for Either<Left, Right>
+where
+	Left: Visitable,
+	Right: Visitable,
+{
+	fn accept<V: Visit>(&self, v: &mut V) {
+		match self {
+			Self::Left(t) => t.accept(v),
+			Self::Right(t) => t.accept(v),
 		}
 	}
 }

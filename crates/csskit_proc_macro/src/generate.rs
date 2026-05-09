@@ -199,10 +199,17 @@ impl ToType for Def {
 				vec![quote! { crate::#func_name #generics }]
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => ds.iter().map(|d| d.to_type()).collect(),
-			Self::Combinator(_, DefCombinatorStyle::Alternatives) => {
-				let ident = self.to_variant_name(0);
-				let generics = self.get_generics();
-				vec![quote! { crate::#ident #generics }]
+			Self::Combinator(ds, DefCombinatorStyle::Alternatives) => {
+				let non_kw: Vec<&Def> = ds.iter().filter(|d| !matches!(d, Def::Ident(_))).collect();
+				if non_kw.len() == 2 && non_kw.len() == ds.len() {
+					let left = non_kw[0].to_type();
+					let right = non_kw[1].to_type();
+					vec![quote! { ::css_parse::Either<#left, #right> }]
+				} else {
+					let ident = self.to_variant_name(0);
+					let generics = self.get_generics();
+					vec![quote! { crate::#ident #generics }]
+				}
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Options) => {
 				let types = ds.iter().map(|d| d.to_type());
@@ -573,6 +580,11 @@ impl DefExt for Def {
 				{
 					None
 				}
+				Def::Combinator(ds, DefCombinatorStyle::Alternatives)
+					if ds.len() == 2 && ds.iter().all(|d| !matches!(d, Def::Ident(_))) =>
+				{
+					None
+				}
 				Def::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {
 					Some(defs.deref())
 				}
@@ -739,6 +751,14 @@ impl GenerateDefinition for Def {
 								range.clone(),
 							);
 							let ty = phantom_type.to_type();
+							quote! { ( pub #ty ); }
+						}
+						Self::Combinator(ds, DefCombinatorStyle::Alternatives)
+							if !ds.iter().all(|d| matches!(d, Def::Ident(_)))
+								&& ds.iter().filter(|d| !matches!(d, Def::Ident(_))).count() == 2
+								&& ds.len() == 2 =>
+						{
+							let ty = self.to_type();
 							quote! { ( pub #ty ); }
 						}
 						Self::Combinator(_, _) if matches!(range, DefRange::RangeFrom(_) | DefRange::RangeTo(_)) => {

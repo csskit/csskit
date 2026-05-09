@@ -1331,7 +1331,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1198),
@@ -1664,7 +1664,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1454),
@@ -1675,7 +1675,7 @@ StyleSheet(
                   offset: SourceOffset(1467),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1469),
@@ -1686,7 +1686,7 @@ StyleSheet(
                   offset: SourceOffset(1487),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1489),
                   len: 10,
@@ -1695,7 +1695,7 @@ StyleSheet(
                   offset: SourceOffset(1499),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1501),
@@ -1706,7 +1706,7 @@ StyleSheet(
                   offset: SourceOffset(1507),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1509),
                   len: 16,
@@ -1715,7 +1715,7 @@ StyleSheet(
                   offset: SourceOffset(1525),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1527),
@@ -1726,7 +1726,7 @@ StyleSheet(
                   offset: SourceOffset(1532),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1534),
                   len: 11,
@@ -1735,7 +1735,7 @@ StyleSheet(
                   offset: SourceOffset(1545),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1547),
                   len: 17,
@@ -1744,7 +1744,7 @@ StyleSheet(
                   offset: SourceOffset(1564),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1566),
@@ -1755,7 +1755,7 @@ StyleSheet(
                   offset: SourceOffset(1576),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1578),
                   len: 19,
@@ -1764,7 +1764,7 @@ StyleSheet(
                   offset: SourceOffset(1597),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1599),
                   len: 16,
@@ -1773,7 +1773,7 @@ StyleSheet(
                   offset: SourceOffset(1615),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1617),
                   len: 17,
@@ -1782,7 +1782,7 @@ StyleSheet(
                   offset: SourceOffset(1634),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(1636),
                   len: 18,
@@ -4114,7 +4114,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3167),
@@ -4125,7 +4125,7 @@ StyleSheet(
                   offset: SourceOffset(3181),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3183),
@@ -4136,7 +4136,7 @@ StyleSheet(
                   offset: SourceOffset(3188),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3190),
@@ -4147,7 +4147,7 @@ StyleSheet(
                   offset: SourceOffset(3196),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3198),
@@ -4158,7 +4158,7 @@ StyleSheet(
                   offset: SourceOffset(3206),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(3208),
                   len: 17,
@@ -4167,7 +4167,7 @@ StyleSheet(
                   offset: SourceOffset(3225),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(3227),
                   len: 13,
@@ -4176,7 +4176,7 @@ StyleSheet(
                   offset: SourceOffset(3240),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3242),
@@ -168640,7 +168640,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(126791),
@@ -168651,7 +168651,7 @@ StyleSheet(
                   offset: SourceOffset(126804),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(126806),
@@ -168662,7 +168662,7 @@ StyleSheet(
                   offset: SourceOffset(126824),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126826),
                   len: 10,
@@ -168671,7 +168671,7 @@ StyleSheet(
                   offset: SourceOffset(126836),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(126838),
@@ -168682,7 +168682,7 @@ StyleSheet(
                   offset: SourceOffset(126844),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126846),
                   len: 16,
@@ -168691,7 +168691,7 @@ StyleSheet(
                   offset: SourceOffset(126862),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(126864),
@@ -168702,7 +168702,7 @@ StyleSheet(
                   offset: SourceOffset(126869),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126871),
                   len: 11,
@@ -168711,7 +168711,7 @@ StyleSheet(
                   offset: SourceOffset(126882),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126884),
                   len: 17,
@@ -168720,7 +168720,7 @@ StyleSheet(
                   offset: SourceOffset(126901),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(126903),
@@ -168731,7 +168731,7 @@ StyleSheet(
                   offset: SourceOffset(126913),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126915),
                   len: 19,
@@ -168740,7 +168740,7 @@ StyleSheet(
                   offset: SourceOffset(126934),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126936),
                   len: 16,
@@ -168749,7 +168749,7 @@ StyleSheet(
                   offset: SourceOffset(126952),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126954),
                   len: 17,
@@ -168758,7 +168758,7 @@ StyleSheet(
                   offset: SourceOffset(126971),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(126973),
                   len: 18,
@@ -171920,7 +171920,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(129297),
@@ -171931,7 +171931,7 @@ StyleSheet(
                   offset: SourceOffset(129310),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(129312),
@@ -171942,7 +171942,7 @@ StyleSheet(
                   offset: SourceOffset(129330),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129332),
                   len: 10,
@@ -171951,7 +171951,7 @@ StyleSheet(
                   offset: SourceOffset(129342),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(129344),
@@ -171962,7 +171962,7 @@ StyleSheet(
                   offset: SourceOffset(129350),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129352),
                   len: 16,
@@ -171971,7 +171971,7 @@ StyleSheet(
                   offset: SourceOffset(129368),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(129370),
@@ -171982,7 +171982,7 @@ StyleSheet(
                   offset: SourceOffset(129375),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129377),
                   len: 11,
@@ -171991,7 +171991,7 @@ StyleSheet(
                   offset: SourceOffset(129388),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129390),
                   len: 17,
@@ -172000,7 +172000,7 @@ StyleSheet(
                   offset: SourceOffset(129407),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(129409),
@@ -172011,7 +172011,7 @@ StyleSheet(
                   offset: SourceOffset(129419),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129421),
                   len: 19,
@@ -172020,7 +172020,7 @@ StyleSheet(
                   offset: SourceOffset(129440),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129442),
                   len: 16,
@@ -172029,7 +172029,7 @@ StyleSheet(
                   offset: SourceOffset(129458),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129460),
                   len: 17,
@@ -172038,7 +172038,7 @@ StyleSheet(
                   offset: SourceOffset(129477),
                   len: 1,
                 )))),
-                (FontFamilyName(String(String(Cursor(
+                (Left(String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(129479),
                   len: 18,

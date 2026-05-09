@@ -228,7 +228,7 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(243),
@@ -239,7 +239,7 @@ StyleSheet(
                   offset: SourceOffset(253),
                   len: 1,
                 )))),
-                (FontFamilyName(CustomIdents([
+                (Left(CustomIdents([
                   CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(258),

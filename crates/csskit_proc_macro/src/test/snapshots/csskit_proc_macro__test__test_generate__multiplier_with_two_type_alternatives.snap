@@ -1,0 +1,7 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+struct Baz<'a>(
+    pub ::css_parse::CommaSeparated<'a, ::css_parse::Either<crate::Foo, crate::Bar>>,
+);
