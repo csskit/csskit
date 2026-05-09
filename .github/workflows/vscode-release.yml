@@ -94,3 +94,10 @@ jobs:
         working-directory: packages/csskit_vscode
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
+
+      - name: Publish extension
+        if: steps.versions.outputs.mode == 'publish'
+        run: npx --yes ovsx publish -p $OPEN_VSX_PAT
+        working-directory: packages/csskit_vscode
+        env:
+          OPEN_VSX_PAT: ${{ secrets.OPEN_VSX_PAT }}
