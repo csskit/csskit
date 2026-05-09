@@ -8,6 +8,7 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<OffsetAnchorStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<OffsetDistanceStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<OffsetPathStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<OffsetPositionStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<OffsetRotateStyleValue>(), 36);
 	}
@@ -42,12 +43,27 @@ mod tests {
 	}
 
 	#[test]
+	fn test_offset_path() {
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "content-box");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "border-box");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "fill-box");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "stroke-box");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "view-box");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "url(\"path.svg\")");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "url(\"path.svg\") fill-box");
+	}
+
+	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "30deg");
 
 		assert_parse_error!(CssAtomSet::ATOMS, OffsetDistanceStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, OffsetDistanceStyleValue, "30deg");
+
+		assert_parse_error!(CssAtomSet::ATOMS, OffsetPathStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, OffsetPathStyleValue, "auto");
 
 		assert_parse_error!(CssAtomSet::ATOMS, OffsetPositionStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, OffsetPositionStyleValue, "30deg");

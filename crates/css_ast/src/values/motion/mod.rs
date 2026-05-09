@@ -119,51 +119,35 @@ pub struct OffsetAnchorStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct OffsetDistanceStyleValue;
 
-// /// Represents the style value for `offset-path` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-path).
-// ///
-// /// The offset CSS property animates an element along a defined motion path.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <offset-path> || <coord-box>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/motion-1/#offset-path
-// #[syntax(" none | <offset-path> || <coord-box> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Unknown,
-//     animation_type = ByComputedValue,
-//     shorthand_group = Offset,
-//     property_group = Motion,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.offset-path")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct OffsetPathStyleValue;
+/// Represents the style value for `offset-path` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-path).
+///
+/// The offset CSS property animates an element along a defined motion path.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <offset-path> || <coord-box>
+/// ```
+///
+/// https://drafts.csswg.org/motion-1/#offset-path
+#[syntax(" none | <offset-path> || <coord-box> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    shorthand_group = Offset,
+    property_group = Motion,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset-path"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct OffsetPathStyleValue;
 
 /// Represents the style value for `offset-position` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-position).
 ///

@@ -125,6 +125,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
+		assert_eq!(std::mem::size_of::<BorderShapeStyleValue>(), 32);
 	}
 
 	#[test]
@@ -196,6 +197,13 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "auto 10px 1 50%");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "none");
+	}
+
+	#[test]
+	fn test_border_shape() {
+		assert_parse!(CssAtomSet::ATOMS, BorderShapeStyleValue, "none");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderShapeStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderShapeStyleValue, "auto");
 	}
 
 	#[test]

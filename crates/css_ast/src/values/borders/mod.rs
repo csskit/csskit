@@ -2162,52 +2162,36 @@ pub struct BorderRightStyleStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BorderRightWidthStyleValue;
 
-// /// Represents the style value for `border-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-shape).
-// ///
-// /// The border-shape CSS property sets the geometry of the border box, changing the shape of any applicable border, border image, focus outline, or shadow.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [ <basic-shape> <geometry-box>?]{1,2}
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-shape
-// #[syntax(" none | [ <basic-shape> <geometry-box>?]{1,2} ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Elements,
-//     animation_type = ByComputedValue,
-//     percentages = Unknown,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-shape")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BorderShapeStyleValue;
+/// Represents the style value for `border-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-shape).
+///
+/// The border-shape CSS property sets the geometry of the border box, changing the shape of any applicable border, border image, focus outline, or shadow.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [ <basic-shape> <geometry-box>?]{1,2}
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-shape
+#[syntax(" none | [ <basic-shape> <geometry-box>?]{1,2} ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-shape"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BorderShapeStyleValue;
 
 /// Represents the style value for `border-start-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-start-end-radius).
 ///

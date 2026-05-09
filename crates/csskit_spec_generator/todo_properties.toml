@@ -16,7 +16,7 @@ properties = [
 ]
 
 [borders]
-properties = ["border-shape", "border-image"]
+properties = ["border-image"]
 
 [color-adjust]
 properties = ["color-scheme"]
@@ -62,9 +62,6 @@ properties = ["initial-letter-align"]
 [overflow]
 properties = ["line-clamp", "text-overflow"]
 
-[shapes]
-properties = ["shape-inside", "shape-outside"]
-
 [speech]
 properties = ["speak-as", "voice-pitch", "voice-range"]
 
@@ -81,4 +78,4 @@ properties = ["--*"]
 properties = ["animation-range-center"]
 
 [motion]
-properties = ["offset", "offset-path"]
+properties = ["offset"]
