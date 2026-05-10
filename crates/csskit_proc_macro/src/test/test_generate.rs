@@ -529,3 +529,12 @@ fn struct_keyword_group_list() {
 	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_keyword_group_list");
 }
+
+#[test]
+fn vendor_prefixed_keyword_enum() {
+	let syntax = to_valuedef!(" foo | -webkit-sticky ");
+	let data = to_deriveinput! { #[derive(Parse)] enum TestValue {} };
+	let file = ::syn::parse2::<syn::File>(generate(syntax, data)).unwrap();
+	let pretty = ::prettyplease::unparse(&file);
+	assert!(pretty.contains("_WebkitSticky"), "expected _WebkitSticky in:\n{}", pretty);
+}
