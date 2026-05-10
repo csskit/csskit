@@ -1,0 +1,5 @@
+# CSS properties not covered by any W3C spec module that the generator fetches.
+# These are injected into property_atoms.rs on every `mise run generate-property-atoms` run.
+properties = [
+  "z-index",  # CSS2: https://drafts.csswg.org/css2/#z-index
+]

@@ -67629,20 +67629,11 @@ StyleSheet(
                 offset: SourceOffset(51227),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(51228),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(51229),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(51229),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -70025,20 +70016,11 @@ StyleSheet(
                 offset: SourceOffset(53329),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(53330),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(53331),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(53331),
+                len: 2,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -70546,20 +70528,11 @@ StyleSheet(
                 offset: SourceOffset(53733),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(53734),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(53735),
-                    len: 2,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(53735),
+                len: 2,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -71799,20 +71772,11 @@ StyleSheet(
                 offset: SourceOffset(54671),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54672),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54673),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54673),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -71906,20 +71870,11 @@ StyleSheet(
                 offset: SourceOffset(54729),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54730),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54731),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54731),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -71999,20 +71954,11 @@ StyleSheet(
                 offset: SourceOffset(54771),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(54772),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(54773),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(54773),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -74998,20 +74944,11 @@ StyleSheet(
                 offset: SourceOffset(57173),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(57174),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(57175),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(57175),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -79214,20 +79151,11 @@ StyleSheet(
                 offset: SourceOffset(60597),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(60598),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(60599),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(60599),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -79502,20 +79430,11 @@ StyleSheet(
                 offset: SourceOffset(60807),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(60808),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(60809),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(60809),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -83718,20 +83637,11 @@ StyleSheet(
                 offset: SourceOffset(64481),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(64482),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(64483),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(64483),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -100994,7 +100904,7 @@ StyleSheet(
                 offset: SourceOffset(79059),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -109293,20 +109203,11 @@ StyleSheet(
                 offset: SourceOffset(85686),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(85687),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(85688),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(85688),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -121980,20 +121881,11 @@ StyleSheet(
                       offset: SourceOffset(96579),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(96580),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(96581),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(96581),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -123324,20 +123216,11 @@ StyleSheet(
                       offset: SourceOffset(97734),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(97735),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(97736),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(97736),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -124668,20 +124551,11 @@ StyleSheet(
                       offset: SourceOffset(98889),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(98890),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(98891),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(98891),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -126012,20 +125886,11 @@ StyleSheet(
                       offset: SourceOffset(100045),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(100046),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(100047),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(100047),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -127356,20 +127221,11 @@ StyleSheet(
                       offset: SourceOffset(101209),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(101210),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(101211),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(Auto(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(101211),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -128658,20 +128514,11 @@ StyleSheet(
                 offset: SourceOffset(102260),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(102261),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(102262),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(Auto(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(102262),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -139138,20 +138985,11 @@ StyleSheet(
                 offset: SourceOffset(111956),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(111957),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(111958),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(111958),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -139214,20 +139052,11 @@ StyleSheet(
                 offset: SourceOffset(111998),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(111999),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(112000),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(112000),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -144141,20 +143970,11 @@ StyleSheet(
                 offset: SourceOffset(117315),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(117316),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(117317),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(117317),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -144361,20 +144181,11 @@ StyleSheet(
                 offset: SourceOffset(117501),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(117502),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(117503),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(117503),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -144646,20 +144457,11 @@ StyleSheet(
                 offset: SourceOffset(117720),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(117721),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(117722),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(117722),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -147773,20 +147575,11 @@ StyleSheet(
                 offset: SourceOffset(120480),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(120481),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(120482),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(120482),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -152858,20 +152651,11 @@ StyleSheet(
                 offset: SourceOffset(125423),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(125424),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(125425),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(125425),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -153937,20 +153721,11 @@ StyleSheet(
                 offset: SourceOffset(126475),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(126476),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(126477),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(126477),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -166901,7 +166676,7 @@ StyleSheet(
                 offset: SourceOffset(140323),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -169117,7 +168892,7 @@ StyleSheet(
                 offset: SourceOffset(142283),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -171069,7 +170844,7 @@ StyleSheet(
                 offset: SourceOffset(143713),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -177039,7 +176814,7 @@ StyleSheet(
                 offset: SourceOffset(148674),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -181786,7 +181561,7 @@ StyleSheet(
                 offset: SourceOffset(152708),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -190261,20 +190036,11 @@ StyleSheet(
                 offset: SourceOffset(159810),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(159811),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(159812),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(159812),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -190427,20 +190193,11 @@ StyleSheet(
                 offset: SourceOffset(159927),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(159928),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(159929),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(159929),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -190835,20 +190592,11 @@ StyleSheet(
                 offset: SourceOffset(160244),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(160245),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(160246),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(160246),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -192096,20 +191844,11 @@ StyleSheet(
                 offset: SourceOffset(161910),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(161911),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(161912),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(161912),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -196552,7 +196291,7 @@ StyleSheet(
                       offset: SourceOffset(165754),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -199028,7 +198767,7 @@ StyleSheet(
                       offset: SourceOffset(167839),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -201504,7 +201243,7 @@ StyleSheet(
                       offset: SourceOffset(169924),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -203980,7 +203719,7 @@ StyleSheet(
                       offset: SourceOffset(172010),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -206456,7 +206195,7 @@ StyleSheet(
                       offset: SourceOffset(174100),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -208890,7 +208629,7 @@ StyleSheet(
                 offset: SourceOffset(176159),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -210826,20 +210565,11 @@ StyleSheet(
                 offset: SourceOffset(177646),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(177647),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(177648),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(177648),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -225057,20 +224787,11 @@ StyleSheet(
                 offset: SourceOffset(187434),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(187435),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(187436),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(187436),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -225216,20 +224937,11 @@ StyleSheet(
                 offset: SourceOffset(187525),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(187526),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(187527),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(187527),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -225361,20 +225073,11 @@ StyleSheet(
                 offset: SourceOffset(187617),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(187618),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(187619),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(187619),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -225506,20 +225209,11 @@ StyleSheet(
                 offset: SourceOffset(187715),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(187716),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(187717),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(187717),
+                len: 4,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -225693,20 +225387,11 @@ StyleSheet(
                       offset: SourceOffset(187848),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(187849),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(187850),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(187850),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -225838,20 +225523,11 @@ StyleSheet(
                       offset: SourceOffset(187960),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(187961),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(187962),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(187962),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -226033,20 +225709,11 @@ StyleSheet(
                       offset: SourceOffset(188096),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188097),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188098),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188098),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -226178,20 +225845,11 @@ StyleSheet(
                       offset: SourceOffset(188208),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188209),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188210),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188210),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -226373,20 +226031,11 @@ StyleSheet(
                       offset: SourceOffset(188344),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188345),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188346),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188346),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -226518,20 +226167,11 @@ StyleSheet(
                       offset: SourceOffset(188456),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188457),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188458),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188458),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -226713,20 +226353,11 @@ StyleSheet(
                       offset: SourceOffset(188593),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188594),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188595),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188595),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -226858,20 +226489,11 @@ StyleSheet(
                       offset: SourceOffset(188705),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188706),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188707),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188707),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -227053,20 +226675,11 @@ StyleSheet(
                       offset: SourceOffset(188843),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188844),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188845),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188845),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -227198,20 +226811,11 @@ StyleSheet(
                       offset: SourceOffset(188956),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(188957),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(188958),
-                          len: 4,
-                        )),
-                      ],
-                    )),
+                    value: ZIndexStyleValue(r#Some(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(188958),
+                      len: 4,
+                    )))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -228328,20 +227932,11 @@ StyleSheet(
                 offset: SourceOffset(189717),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(189718),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(189719),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(189719),
+                len: 1,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -273476,36 +273071,23 @@ StyleSheet(
                 offset: SourceOffset(224354),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224355),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(224356),
-                    len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224358),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(224359),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(224360),
-                    len: 9,
-                  )),
-                ],
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(224356),
+                len: 2,
+              )))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(224359),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(224360),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(224369),
@@ -273558,36 +273140,23 @@ StyleSheet(
                 offset: SourceOffset(224390),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224391),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(224392),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224393),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(224394),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(224395),
-                    len: 9,
-                  )),
-                ],
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(224392),
+                len: 1,
+              )))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(224394),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(224395),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(224404),
@@ -273640,36 +273209,23 @@ StyleSheet(
                 offset: SourceOffset(224425),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224426),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(224427),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224428),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(224429),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(224430),
-                    len: 9,
-                  )),
-                ],
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(224427),
+                len: 1,
+              )))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(224429),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(224430),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(224439),
@@ -273722,36 +273278,23 @@ StyleSheet(
                 offset: SourceOffset(224460),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224461),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(224462),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224463),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(224464),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(224465),
-                    len: 9,
-                  )),
-                ],
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(224462),
+                len: 1,
+              )))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(224464),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(224465),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(224474),
@@ -273804,36 +273347,23 @@ StyleSheet(
                 offset: SourceOffset(224495),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224496),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(224497),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(224498),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(224499),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(224500),
-                    len: 9,
-                  )),
-                ],
+              value: ZIndexStyleValue(r#Some(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(224497),
+                len: 1,
+              )))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(224499),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(224500),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(224509),

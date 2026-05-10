@@ -9,6 +9,7 @@ use crate::{CssAtomSet, UnitlessZeroResolves};
 pub enum PropertyGroup {
 	Align,
 	AnchorPosition,
+	Css2,
 	AnimationTriggers,
 	Animations,
 	Backgrounds,

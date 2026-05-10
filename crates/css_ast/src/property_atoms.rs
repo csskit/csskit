@@ -716,5 +716,6 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	WrapInside,
 	WrapThrough,
 	WritingMode,
+	ZIndex,
 	Zoom,
 ];

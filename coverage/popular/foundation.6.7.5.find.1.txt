@@ -57,7 +57,6 @@ coverage/popular/foundation.6.7.5.css
 3356:3:  -webkit-box-shadow: none;
 3357:11:          box-shadow: none;
 3373:3:  background: #e6e6e6; }
-3429:3:  z-index: 10;
 3646:5:    background: #1779ba;
 3649:5:    background: #1779ba;
 3741:5:    background: #fefefe;
@@ -75,14 +74,11 @@ coverage/popular/foundation.6.7.5.css
 3770:5:    -webkit-box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a;
 3771:13:            box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a; }
 3784:3:  background: #fefefe; }
-3790:3:  z-index: -1;
 3792:3:  background: #fefefe;
-3798:5:    z-index: 1;
 3825:5:    content: '';
 3839:3:  content: '';
 3851:3:  content: '';
 3863:3:  content: '';
-3872:3:  z-index: 10;
 3916:3:  content: '';
 3930:3:  background: transparent;
 3961:3:  content: '';
@@ -93,7 +89,6 @@ coverage/popular/foundation.6.7.5.css
 4051:5:    content: '';
 4074:5:    content: '';
 4085:5:    content: '';
-4121:3:  z-index: 1;
 4125:3:  background: #fefefe; }
 4136:5:    content: '';
 4147:5:    content: '';
@@ -103,18 +98,11 @@ coverage/popular/foundation.6.7.5.css
 4198:5:    background: #3adb76;
 4201:5:    background: #ffae00;
 4204:5:    background: #cc4b37;
-4258:3:  z-index: 11;
 4263:3:  background: rgba(254, 254, 254, 0.25);
-4283:3:  z-index: 12;
 4290:3:  background: #e6e6e6; }
-4294:5:    z-index: 12; }
-4298:5:    z-index: 13; }
 4300:7:      -webkit-box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
 4301:15:              box-shadow: 0 0 10px rgba(10, 10, 10, 0.7); }
-4309:3:  z-index: 12;
 4316:3:  background: #e6e6e6; }
-4320:5:    z-index: 12; }
-4324:5:    z-index: 13; }
 4326:7:      -webkit-box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
 4327:15:              box-shadow: 0 0 10px rgba(10, 10, 10, 0.7); }
 4356:5:    -webkit-box-shadow: inset -13px 0 20px -13px rgba(10, 10, 10, 0.25);
@@ -125,21 +113,12 @@ coverage/popular/foundation.6.7.5.css
 4409:13:            box-shadow: inset 0 -13px 20px -13px rgba(10, 10, 10, 0.25); }
 4434:5:    -webkit-box-shadow: inset 0 13px 20px -13px rgba(10, 10, 10, 0.25);
 4435:13:            box-shadow: inset 0 13px 20px -13px rgba(10, 10, 10, 0.25); }
-4462:5:    z-index: 12;
-4480:5:    z-index: 12;
-4498:5:    z-index: 12;
-4516:5:    z-index: 12;
-4536:5:    z-index: 12;
-4554:5:    z-index: 12;
-4572:5:    z-index: 12;
-4590:5:    z-index: 12;
 4610:5:    background: none;
 4616:7:      -webkit-box-shadow: none;
 4617:15:              box-shadow: none;
 4629:5:    background: none;
 4635:7:      -webkit-box-shadow: none;
 4636:15:              box-shadow: none;
-4683:3:  z-index: 10;
 4721:5:    content: ' ';
 4749:7:      background: #e6e6e6; }
 4752:5:    background: #1779ba;
@@ -147,15 +126,10 @@ coverage/popular/foundation.6.7.5.css
 4763:5:    content: '\2026';
 4770:3:  content: "«"; }
 4776:3:  content: "»"; }
-4830:3:  z-index: 1005;
-4837:3:  z-index: 1006;
 4918:7:      touch-action: none; }
-4941:3:  z-index: 1;
 4942:3:  cursor: -webkit-grab;
 4952:7:      touch-action: manipulation; }
 4960:5:    cursor: -webkit-grabbing;
-4995:3:  z-index: 0;
-5001:3:  z-index: 5;
 5039:3:  background: #cacaca;
 5057:5:    background: #fefefe;
 5060:5:    content: ''; }
@@ -178,7 +152,6 @@ coverage/popular/foundation.6.7.5.css
 5293:5:    -webkit-box-shadow: none;
 5294:13:            box-shadow: none; }
 5298:3:  background: #0a0a0a;
-5341:3:  z-index: 1200;
 5356:5:    content: '';
 5371:5:    content: '';
 5387:5:    content: '';

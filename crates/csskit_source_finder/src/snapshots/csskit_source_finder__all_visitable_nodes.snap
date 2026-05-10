@@ -1220,5 +1220,6 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct Wildcard { }",
   "pub struct WillChangeStyleValue < \'a > { }",
   "pub struct WordSpacingStyleValue { }",
+  "pub struct ZIndexStyleValue { }",
   "pub struct ZoomStyleValue { }",
 ]

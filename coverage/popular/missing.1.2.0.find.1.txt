@@ -2,8 +2,6 @@
 ---
 coverage/popular/missing.1.2.0.css
 40:3:  fill: currentColor;
-93:3:  z-index: 2;
-102:3:  z-index: 2;
 1:1:/* src/core/sanitize.css */
 418:5:    background: none;
 498:5:    content: "";
@@ -22,7 +20,6 @@ coverage/popular/missing.1.2.0.css
 1263:5:    grid-template-columns: 25ch auto;
 1294:5:    display: inline list-item;
 1307:1:chip {
-1321:3:  z-index: 5;
 1381:5:    content: "";
 1385:5:    background: currentcolor;
 1403:3:  background: none;
@@ -34,8 +31,6 @@ coverage/popular/missing.1.2.0.css
 1447:3:  color-scheme: light dark;
 1466:5:    box-shadow: none;
 1469:5:    box-shadow: none;
-1478:3:  z-index: 1;
-1482:3:  z-index: 10;
 1535:3:  grid-template-columns: repeat(2, 1rem);
 1540:5:    content: "";
 1751:5:    color-scheme: dark;

@@ -1,6 +1,7 @@
 #![deny(warnings)]
 mod codegen;
 mod excluded_specs;
+mod extra_property_atoms;
 mod fetch_cached;
 mod ignore_properties;
 mod manual_parse_properties;
@@ -424,6 +425,11 @@ async fn main() -> Result<()> {
 						}
 					}
 				}
+			}
+
+			// Inject properties not covered by any fetched spec (e.g. CSS2)
+			for prop in extra_property_atoms::get_extra_property_atoms() {
+				all_property_names.insert(prop);
 			}
 
 			println!("\nCollected {} unique property names from specs", all_property_names.len());
