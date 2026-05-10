@@ -345,11 +345,11 @@ pub enum OverlayStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// static | relative | absolute | sticky | fixed
+/// static | relative | absolute | sticky | fixed | -webkit-sticky
 /// ```
 ///
 /// https://drafts.csswg.org/css-position-4/#position
-#[syntax(" static | relative | absolute | sticky | fixed ")]
+#[syntax(" static | relative | absolute | sticky | fixed | -webkit-sticky ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

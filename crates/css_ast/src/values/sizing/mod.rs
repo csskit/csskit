@@ -263,12 +263,12 @@ pub enum FrameSizingStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content
 /// ```
 ///
 /// https://drafts.csswg.org/css-sizing-4/#height
 #[syntax(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -297,12 +297,12 @@ pub enum HeightStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
+/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content
 /// ```
 ///
 /// https://drafts.csswg.org/css-sizing-4/#max-height
 #[syntax(
-	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
+	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -331,12 +331,12 @@ pub enum MaxHeightStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
+/// none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content
 /// ```
 ///
 /// https://drafts.csswg.org/css-sizing-4/#max-width
 #[syntax(
-	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
+	" none | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -365,12 +365,12 @@ pub enum MaxWidthStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content
 /// ```
 ///
 /// https://drafts.csswg.org/css-sizing-4/#min-height
 #[syntax(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -426,12 +426,12 @@ pub enum MinIntrinsicSizingStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content
 /// ```
 ///
 /// https://drafts.csswg.org/css-sizing-4/#min-width
 #[syntax(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -460,12 +460,12 @@ pub enum MinWidthStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain
+/// auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content
 /// ```
 ///
 /// https://drafts.csswg.org/css-sizing-4/#width
 #[syntax(
-	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain "
+	" auto | <length-percentage [0,∞]> | min-content | max-content | fit-content(<length-percentage [0,∞]>) | <calc-size()> | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,

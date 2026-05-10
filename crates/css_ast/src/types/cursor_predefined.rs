@@ -3,7 +3,7 @@ use super::prelude::*;
 /// <https://drafts.csswg.org/css-ui-4/#typedef-cursor-predefined>
 ///
 /// ```text,ignore
-/// <cursor-predefined> = auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | grab | grabbing | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out
+/// <cursor-predefined> = auto | default | none | context-menu | help | pointer | progress | wait | cell | crosshair | text | vertical-text | alias | copy | move | no-drop | not-allowed | grab | grabbing | e-resize | n-resize | ne-resize | nw-resize | s-resize | se-resize | sw-resize | w-resize | ew-resize | ns-resize | nesw-resize | nwse-resize | col-resize | row-resize | all-scroll | zoom-in | zoom-out | -webkit-grab | -webkit-grabbing
 /// ```
 ///
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -83,4 +83,8 @@ pub enum CursorPredefined {
 	ZoomIn(T![Ident]),
 	#[atom(CssAtomSet::ZoomOut)]
 	ZoomOut(T![Ident]),
+	#[atom(CssAtomSet::_WebkitGrab)]
+	_WebkitGrab(T![Ident]),
+	#[atom(CssAtomSet::_WebkitGrabbing)]
+	_WebkitGrabbing(T![Ident]),
 }

@@ -12,8 +12,6 @@ coverage/popular/mini.css.3.0.1.css
 970:3:  box-shadow: none;
 1134:3:  content: '';
 1149:3:  content: '';
-1168:3:  position: -webkit-sticky;
-1175:3:  position: -webkit-sticky;
 1185:3:  content: '\00a0\2261\00a0';
 1202:3:  clip: rect(0 0 0 0);
 1203:3:  -webkit-clip-path: inset(100%);

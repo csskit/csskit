@@ -127,9 +127,7 @@ coverage/popular/foundation.6.7.5.css
 4770:3:  content: "«"; }
 4776:3:  content: "»"; }
 4918:7:      touch-action: none; }
-4942:3:  cursor: -webkit-grab;
 4952:7:      touch-action: manipulation; }
-4960:5:    cursor: -webkit-grabbing;
 5039:3:  background: #cacaca;
 5057:5:    background: #fefefe;
 5060:5:    content: ''; }

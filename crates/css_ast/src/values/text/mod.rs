@@ -369,11 +369,13 @@ pub struct TabSizeStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// start | end | left | right | center | <string> | justify | match-parent | justify-all
+/// start | end | left | right | center | <string> | justify | match-parent | justify-all | -webkit-match-parent
 /// ```
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align
-#[syntax(" start | end | left | right | center | <string> | justify | match-parent | justify-all ")]
+#[syntax(
+	" start | end | left | right | center | <string> | justify | match-parent | justify-all | -webkit-match-parent "
+)]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -398,11 +400,11 @@ pub enum TextAlignStyleValue {}
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// start | end | left | right | center | <string> | justify | match-parent
+/// start | end | left | right | center | <string> | justify | match-parent | -webkit-match-parent
 /// ```
 ///
 /// https://drafts.csswg.org/css-text-4/#text-align-all
-#[syntax(" start | end | left | right | center | <string> | justify | match-parent ")]
+#[syntax(" start | end | left | right | center | <string> | justify | match-parent | -webkit-match-parent ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

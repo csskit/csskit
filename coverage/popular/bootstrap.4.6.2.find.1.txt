@@ -1,7 +1,6 @@
 :unknown
 ---
 coverage/popular/bootstrap.4.6.2.css
-219:3:  text-align: -webkit-match-parent;
 470:3:  content: "\2014\00A0";
 2036:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 2080:3:  text-shadow: 0 0 0 #495057;
@@ -98,12 +97,8 @@ coverage/popular/bootstrap.4.6.2.css
 5537:5:    animation: none;
 5900:3:  text-shadow: 0 1px 0 #fff;
 5931:3:  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-6055:3:  height: -webkit-min-content;
-6056:3:  height: -moz-min-content;
 6058:3:  content: "";
 6074:3:  content: none;
-6183:5:    height: -webkit-min-content;
-6184:5:    height: -moz-min-content;
 6242:3:  content: "";
 6356:3:  content: "";
 6431:3:  content: "";
@@ -117,5 +112,4 @@ coverage/popular/bootstrap.4.6.2.css
 6746:3:  animation: .75s linear infinite spinner-grow;
 6997:3:  content: "";
 7208:3:  content: "";
-8072:3:  position: -webkit-sticky !important;
 1:1:/*!

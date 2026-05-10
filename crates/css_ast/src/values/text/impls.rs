@@ -44,6 +44,16 @@ mod tests {
 	}
 
 	#[test]
+	fn test_text_align() {
+		assert_parse!(CssAtomSet::ATOMS, TextAlignStyleValue, "start");
+		assert_parse!(CssAtomSet::ATOMS, TextAlignStyleValue, "left");
+		assert_parse!(CssAtomSet::ATOMS, TextAlignStyleValue, "match-parent");
+		assert_parse!(CssAtomSet::ATOMS, TextAlignStyleValue, "-webkit-match-parent");
+		assert_parse!(CssAtomSet::ATOMS, TextAlignAllStyleValue, "match-parent");
+		assert_parse!(CssAtomSet::ATOMS, TextAlignAllStyleValue, "-webkit-match-parent");
+	}
+
+	#[test]
 	fn test_text_transform() {
 		assert_parse!(CssAtomSet::ATOMS, TextTransformStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, TextTransformStyleValue, "capitalize");

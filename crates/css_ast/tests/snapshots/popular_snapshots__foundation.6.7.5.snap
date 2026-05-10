@@ -202027,20 +202027,11 @@ StyleSheet(
                 offset: SourceOffset(152919),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(152920),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(152921),
-                    len: 12,
-                  )),
-                ],
-              )),
+              value: CursorStyleValue(None, _WebkitGrab(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(152921),
+                len: 12,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -202618,20 +202609,11 @@ StyleSheet(
                 offset: SourceOffset(153441),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(153442),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(153443),
-                    len: 16,
-                  )),
-                ],
-              )),
+              value: CursorStyleValue(None, _WebkitGrabbing(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(153443),
+                len: 16,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

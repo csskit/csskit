@@ -13,14 +13,24 @@ ruby-overhang = " | none"
 
 [display]
 # Vendor-prefixed legacy display values used for backwards compatibility with
-# older browsers.
+# older browsers' flex implementations (-webkit-box, -webkit-flex, -ms-flexbox,
+# -ms-inline-flexbox).
 display = " | <display-legacy-vendor>"
+
+[position]
+# -webkit-sticky is a vendor-prefixed alias for `sticky`
+position = " | -webkit-sticky"
 
 [sizing]
 # https://drafts.csswg.org/css-sizing-4/#sizing-values
-width = " | stretch | fit-content | contain"
-max-width = " | stretch | fit-content | contain"
-min-width = " | stretch | fit-content | contain"
-height = " | stretch | fit-content | contain"
-max-height = " | stretch | fit-content | contain"
-min-height = " | stretch | fit-content | contain"
+width = " | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content"
+max-width = " | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content"
+min-width = " | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content"
+height = " | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content"
+max-height = " | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content"
+min-height = " | stretch | fit-content | contain | -webkit-max-content | -moz-max-content | -webkit-min-content | -moz-min-content"
+
+[text]
+# -webkit-match-parent is a vendor-prefixed alias for `match-parent`
+text-align = " | -webkit-match-parent"
+text-align-all = " | -webkit-match-parent"

@@ -3,7 +3,6 @@
 coverage/popular/bootstrap.5.3.0.css
 128:3:  color-scheme: dark;
 348:3:  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
-425:3:  text-align: -webkit-match-parent;
 702:3:  content: "— ";
 1879:3:  box-shadow: inset 0 0 0 9999px var(--bs-table-bg-state, var(--bs-table-bg-type, var(--bs-table-accent-bg)));
 2144:3:  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
@@ -53,8 +52,6 @@ coverage/popular/bootstrap.5.3.0.css
 5013:5:    animation: none;
 5047:3:  content: counters(section, ".") ". ";
 5374:3:  background: transparent var(--bs-btn-close-bg) center/1em auto no-repeat;
-5443:3:  width: -webkit-max-content;
-5444:3:  width: -moz-max-content;
 5810:3:  content: "";
 5921:3:  content: "";
 5982:3:  content: "";
@@ -134,18 +131,6 @@ coverage/popular/bootstrap.5.3.0.css
 7007:3:  text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
 7016:3:  fill: currentcolor;
 7036:3:  content: "";
-7079:3:  position: -webkit-sticky;
-7086:3:  position: -webkit-sticky;
-7094:5:    position: -webkit-sticky;
-7100:5:    position: -webkit-sticky;
-7108:5:    position: -webkit-sticky;
-7114:5:    position: -webkit-sticky;
-7122:5:    position: -webkit-sticky;
-7128:5:    position: -webkit-sticky;
-7136:5:    position: -webkit-sticky;
-7142:5:    position: -webkit-sticky;
-7150:5:    position: -webkit-sticky;
-7156:5:    position: -webkit-sticky;
 7183:3:  clip: rect(0, 0, 0, 0) !important;
 7199:3:  content: "";
 7204:3:  text-overflow: ellipsis;
@@ -153,7 +138,6 @@ coverage/popular/bootstrap.5.3.0.css
 7395:3:  box-shadow: 0 0.125rem 0.25rem rgba(0, 0, 0, 0.075) !important;
 7399:3:  box-shadow: 0 1rem 3rem rgba(0, 0, 0, 0.175) !important;
 7403:3:  box-shadow: none !important;
-7455:3:  position: -webkit-sticky !important;
 7561:3:  border-color: rgba(var(--bs-primary-rgb), var(--bs-border-opacity)) !important;
 7566:3:  border-color: rgba(var(--bs-secondary-rgb), var(--bs-border-opacity)) !important;
 7571:3:  border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important;

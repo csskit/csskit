@@ -34,6 +34,9 @@ mod tests {
 	#[test]
 	fn test_parse() {
 		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "pointer");
+		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "grab");
+		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "-webkit-grab");
+		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "-webkit-grabbing");
 	}
 
 	#[test]

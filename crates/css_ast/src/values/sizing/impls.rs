@@ -70,6 +70,14 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "fit-content(0)");
 		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "stretch");
 		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "contain");
+		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "-webkit-min-content");
+		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "-webkit-max-content");
+		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "-moz-min-content");
+		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "-moz-max-content");
+		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-webkit-min-content");
+		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-webkit-max-content");
+		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-moz-min-content");
+		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-moz-max-content");
 
 		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto 1/5");
 		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto 1/2");

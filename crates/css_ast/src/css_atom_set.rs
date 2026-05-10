@@ -2507,6 +2507,10 @@ pub enum CssAtomSet {
 	_WebkitFullScreenDocument,
 	#[atom("-webkit-generic-cue-root")]
 	_WebkitGenericCueRoot,
+	#[atom("-webkit-grab")]
+	_WebkitGrab,
+	#[atom("-webkit-grabbing")]
+	_WebkitGrabbing,
 	#[atom("-webkit-inner-spin-button")]
 	_WebkitInnerSpinButton,
 	#[atom("-webkit-input-placeholder")]
@@ -2529,6 +2533,10 @@ pub enum CssAtomSet {
 	_WebkitMaskPosition,
 	#[atom("-webkit-mask-size")]
 	_WebkitMaskSize,
+	#[atom("-webkit-match-parent")]
+	_WebkitMatchParent,
+	#[atom("-webkit-max-content")]
+	_WebkitMaxContent,
 	#[atom("-webkit-max-device-pixel-ratio")]
 	_WebkitMaxDevicePixelRatio,
 	#[atom("-webkit-media-text-track-container")]
@@ -2551,6 +2559,8 @@ pub enum CssAtomSet {
 	_WebkitMeterOptimumValue,
 	#[atom("-webkit-meter-suboptimum-value")]
 	_WebkitMeterSuboptimumValue,
+	#[atom("-webkit-min-content")]
+	_WebkitMinContent,
 	#[atom("-webkit-min-device-pixel-ratio")]
 	_WebkitMinDevicePixelRatio,
 	#[atom("-webkit-order")]
@@ -2597,6 +2607,8 @@ pub enum CssAtomSet {
 	_WebkitSliderRunnableTrack,
 	#[atom("-webkit-slider-thumb")]
 	_WebkitSliderThumb,
+	#[atom("-webkit-sticky")]
+	_WebkitSticky,
 	#[atom("-webkit-tap-highlight-color")]
 	_WebkitTapHighlightColor,
 	#[atom("-webkit-text-decoration")]
@@ -2762,8 +2774,12 @@ pub enum CssAtomSet {
 	_MozMaemoClassicTheme,
 	#[atom("-moz-mathml-anonymous-block")]
 	_MozMathmlAnonymousBlock,
+	#[atom("-moz-max-content")]
+	_MozMaxContent,
 	#[atom("-moz-max-device-pixel-ratio")]
 	_MozMaxDevicePixelRatio,
+	#[atom("-moz-min-content")]
+	_MozMinContent,
 	#[atom("-moz-min-device-pixel-ratio")]
 	_MozMinDevicePixelRatio,
 	#[atom("-moz-native-anonymous")]
