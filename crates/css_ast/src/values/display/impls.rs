@@ -40,6 +40,12 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "table");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "table-row");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "list-item");
+
+		// Vendor-prefixed legacy flex values
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-webkit-box");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-webkit-flex");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-flexbox");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-inline-flexbox");
 	}
 
 	#[test]

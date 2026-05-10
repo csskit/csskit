@@ -14,12 +14,12 @@ use impls::*;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy>
+/// [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> | <display-legacy-vendor>
 /// ```
 ///
 /// https://drafts.csswg.org/css-display-4/#display
 #[syntax(
-	" [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> "
+	" [ <display-outside> || <display-inside> ] | <display-listitem> | <display-internal> | <display-box> | <display-legacy> | <display-legacy-vendor> "
 )]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,

@@ -4,36 +4,12 @@ coverage/popular/foundation.6.7.5.css
 191:3:  background: #fefefe;
 204:3:  -ms-interpolation-mode: bicubic; }
 232:3:  background: transparent;
-283:3:  display: -webkit-box;
-284:3:  display: -webkit-flex;
-285:3:  display: -ms-flexbox;
-1201:3:  display: -webkit-box;
-1202:3:  display: -webkit-flex;
-1203:3:  display: -ms-flexbox;
 1503:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
 1510:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
-1513:3:  display: -webkit-box;
-1514:3:  display: -webkit-flex;
-1515:3:  display: -ms-flexbox;
 1547:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
-1549:5:    display: -webkit-box;
-1550:5:    display: -webkit-flex;
-1551:5:    display: -ms-flexbox;
 1569:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
 1589:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
-1591:5:    display: -webkit-box;
-1592:5:    display: -webkit-flex;
-1593:5:    display: -ms-flexbox;
 1611:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
-2018:3:  display: -webkit-box;
-2019:3:  display: -webkit-flex;
-2020:3:  display: -ms-flexbox;
-2071:5:    display: -webkit-box;
-2072:5:    display: -webkit-flex;
-2073:5:    display: -ms-flexbox;
-2117:5:    display: -webkit-box;
-2118:5:    display: -webkit-flex;
-2119:5:    display: -ms-flexbox;
 2187:3:  text-rendering: optimizeLegibility; }
 2213:3:  text-rendering: optimizeLegibility; }
 2369:5:    content: "— "; }
@@ -52,16 +28,7 @@ coverage/popular/foundation.6.7.5.css
 2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2685:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2686:13:            box-shadow: 0 0 5px #cacaca;
-2771:3:  display: -webkit-box;
-2772:3:  display: -webkit-flex;
-2773:3:  display: -ms-flexbox;
 2796:3:  background: #e6e6e6;
-2800:3:  display: -webkit-box;
-2801:3:  display: -webkit-flex;
-2802:3:  display: -ms-flexbox;
-2829:3:  display: -webkit-box;
-2830:3:  display: -webkit-flex;
-2831:3:  display: -ms-flexbox;
 2884:3:  background-position: right -1rem center;
 2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2900:13:            box-shadow: 0 0 5px #cacaca;
@@ -85,41 +52,14 @@ coverage/popular/foundation.6.7.5.css
 3105:5:    background: #cc4b37;
 3113:5:    content: ' ';
 3133:7:      content: "/";
-3145:3:  display: -webkit-box;
-3146:3:  display: -webkit-flex;
-3147:3:  display: -ms-flexbox;
 3162:5:    content: ' ';
-3339:3:  display: -webkit-box;
-3340:3:  display: -webkit-flex;
-3341:3:  display: -ms-flexbox;
 3355:3:  background: #fefefe;
 3356:3:  -webkit-box-shadow: none;
 3357:11:          box-shadow: none;
-3364:3:  display: -webkit-box;
-3365:3:  display: -webkit-flex;
-3366:3:  display: -ms-flexbox;
 3373:3:  background: #e6e6e6; }
 3429:3:  z-index: 10;
-3452:3:  display: -webkit-box;
-3453:3:  display: -webkit-flex;
-3454:3:  display: -ms-flexbox;
-3580:5:    display: -webkit-box;
-3581:5:    display: -webkit-flex;
-3582:5:    display: -ms-flexbox;
-3585:5:    display: -webkit-box;
-3586:5:    display: -webkit-flex;
-3587:5:    display: -ms-flexbox;
 3646:5:    background: #1779ba;
 3649:5:    background: #1779ba;
-3657:5:    display: -webkit-box;
-3658:5:    display: -webkit-flex;
-3659:5:    display: -ms-flexbox;
-3685:5:    display: -webkit-box;
-3686:5:    display: -webkit-flex;
-3687:5:    display: -ms-flexbox;
-3710:5:    display: -webkit-box;
-3711:5:    display: -webkit-flex;
-3712:5:    display: -ms-flexbox;
 3741:5:    background: #fefefe;
 3742:5:    -webkit-box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
 3743:13:            box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
@@ -163,9 +103,6 @@ coverage/popular/foundation.6.7.5.css
 4198:5:    background: #3adb76;
 4201:5:    background: #ffae00;
 4204:5:    background: #cc4b37;
-4208:3:  display: -webkit-box;
-4209:3:  display: -webkit-flex;
-4210:3:  display: -ms-flexbox;
 4258:3:  z-index: 11;
 4263:3:  background: rgba(254, 254, 254, 0.25);
 4283:3:  z-index: 12;
@@ -241,17 +178,11 @@ coverage/popular/foundation.6.7.5.css
 5293:5:    -webkit-box-shadow: none;
 5294:13:            box-shadow: none; }
 5298:3:  background: #0a0a0a;
-5300:3:  display: -webkit-box;
-5301:3:  display: -webkit-flex;
-5302:3:  display: -ms-flexbox;
 5341:3:  z-index: 1200;
 5356:5:    content: '';
 5371:5:    content: '';
 5387:5:    content: '';
 5403:5:    content: '';
-5428:3:  display: -webkit-box;
-5429:3:  display: -webkit-flex;
-5430:3:  display: -ms-flexbox;
 5577:3:  clip: rect(0, 0, 0, 0) !important;
 5586:3:  clip: auto !important;
 5656:3:  content: ' ';

@@ -2401,6 +2401,8 @@ pub enum CssAtomSet {
 	_WebkitBackgroundClip,
 	#[atom("-webkit-background-size")]
 	_WebkitBackgroundSize,
+	#[atom("-webkit-box")]
+	_WebkitBox,
 	#[atom("-webkit-box-align")]
 	_WebkitBoxAlign,
 	#[atom("-webkit-box-decoration-break")]
@@ -2955,6 +2957,10 @@ pub enum CssAtomSet {
 	_MsFlexPreferredSize,
 	#[atom("-ms-flex-wrap")]
 	_MsFlexWrap,
+	#[atom("-ms-flexbox")]
+	_MsFlexbox,
+	#[atom("-ms-inline-flexbox")]
+	_MsInlineFlexbox,
 	#[atom("-ms-fullscreen")]
 	_MsFullscreen,
 	#[atom("-ms-high-contrast")]

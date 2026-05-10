@@ -11,6 +11,11 @@
 # is a build tool that serialises per author intent.
 ruby-overhang = " | none"
 
+[display]
+# Vendor-prefixed legacy display values used for backwards compatibility with
+# older browsers.
+display = " | <display-legacy-vendor>"
+
 [sizing]
 # https://drafts.csswg.org/css-sizing-4/#sizing-values
 width = " | stretch | fit-content | contain"

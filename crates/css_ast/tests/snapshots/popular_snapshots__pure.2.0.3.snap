@@ -3656,20 +3656,11 @@ StyleSheet(
                 offset: SourceOffset(8239),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8240),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(8241),
-                    len: 11,
-                  )),
-                ],
-              )),
+              value: DisplayLegacyVendor(WebkitBox(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(8241),
+                len: 11,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3688,20 +3679,11 @@ StyleSheet(
                 offset: SourceOffset(8265),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8266),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(8267),
-                    len: 11,
-                  )),
-                ],
-              )),
+              value: DisplayLegacyVendor(MsFlexbox(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(8267),
+                len: 11,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

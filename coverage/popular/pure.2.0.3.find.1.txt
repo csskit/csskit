@@ -2,8 +2,6 @@
 ---
 coverage/popular/pure.2.0.3.css
 402:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
-423:5:    display: -webkit-box;
-424:5:    display: -ms-flexbox;
 457:5:    text-rendering: auto;
 518:5:    text-rendering: auto;
 676:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */

@@ -110,6 +110,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum DisplayInside { }",
   "pub enum DisplayInternal { }",
   "pub enum DisplayLegacy { }",
+  "pub enum DisplayLegacyVendor { }",
   "pub enum DisplayListitemInside { }",
   "pub enum DisplayModeMediaFeature { }",
   "pub enum DisplayModeMediaFeatureKeyword { }",
