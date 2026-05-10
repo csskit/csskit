@@ -130,20 +130,11 @@ StyleSheet(
                 offset: SourceOffset(247),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(248),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(249),
-                    len: 9,
-                  )),
-                ],
-              )),
+              value: Grayscale(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(249),
+                len: 9,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

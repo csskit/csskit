@@ -1,24 +1,11 @@
 :unknown
 ---
 coverage/popular/pure.2.0.3.css
-64:3:  -webkit-box-sizing: content-box;
-99:3:  -webkit-text-decoration: underline dotted;
-253:3:  -webkit-box-sizing: border-box;
-285:3:  -webkit-box-sizing: border-box;
 402:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
 423:5:    display: -webkit-box;
 424:5:    display: -ms-flexbox;
-426:5:    -webkit-box-orient: horizontal;
-427:5:    -webkit-box-direction: normal;
-428:9:        -ms-flex-flow: row wrap;
-432:5:    -ms-flex-line-pack: start;
 457:5:    text-rendering: auto;
 518:5:    text-rendering: auto;
-658:5:    -webkit-user-drag: none;
-659:5:    -webkit-user-select: none;
-660:8:       -moz-user-select: none;
-661:9:        -ms-user-select: none;
-663:5:    -webkit-box-sizing: border-box;
 676:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
 688:5:    text-rendering: auto;
 707:5:    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
@@ -28,12 +15,9 @@ coverage/popular/pure.2.0.3.css
 730:13:            box-shadow: none;
 791:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 792:13:            box-shadow: inset 0 1px 3px #ddd;
-795:5:    -webkit-box-sizing: border-box;
 807:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 808:13:            box-shadow: inset 0 1px 3px #ddd;
-810:5:    -webkit-box-sizing: border-box;
 1016:5:    z-index: 3;
-1140:5:    -webkit-box-sizing: border-box;
 1148:5:    z-index: 3;
 1205:5:    z-index: 3;
 1223:5:    content: "\25B8";

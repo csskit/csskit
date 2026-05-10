@@ -254,6 +254,7 @@ pub enum CssAtomSet {
 	Bleed,
 	Blink,
 	Block,
+	BlockAxis,
 	BlockEllipsis,
 	BlockEnd,
 	BlockSize,
@@ -674,6 +675,7 @@ pub enum CssAtomSet {
 	Display,
 	DisplayMode,
 	DisplayP3,
+	Distribute,
 	Div,
 	Divergence,
 	Divide,
@@ -1028,6 +1030,7 @@ pub enum CssAtomSet {
 	InitialOnly,
 	InitialValue,
 	Inline,
+	InlineAxis,
 	InlineBlock,
 	InlineEnd,
 	InlineFlex,
@@ -1216,6 +1219,7 @@ pub enum CssAtomSet {
 	Maligngroup,
 	Malignmark,
 	Mandatory,
+	Manipulation,
 	Manual,
 	Map,
 	Margin,
@@ -1562,6 +1566,12 @@ pub enum CssAtomSet {
 	Palegreen,
 	Paleturquoise,
 	Palevioletred,
+	PanDown,
+	PanLeft,
+	PanRight,
+	PanUp,
+	PanX,
+	PanY,
 	Papayawhip,
 	Param,
 	Parent,
@@ -1591,6 +1601,7 @@ pub enum CssAtomSet {
 	PictureInPicture,
 	Piece,
 	Piecewise,
+	PinchZoom,
 	Pink,
 	Pixelated,
 	PlaceContent,
@@ -1849,6 +1860,7 @@ pub enum CssAtomSet {
 	ScrollTimelineAxis,
 	ScrollTimelineName,
 	Scrollable,
+	Scrollbar,
 	ScrollbarColor,
 	ScrollbarGutter,
 	ScrollbarWidth,
@@ -2345,8 +2357,14 @@ pub enum CssAtomSet {
 	// Moz:    0b00000000_10100000_00000000_00000000 (index 1)
 	// Ms:     0b00000000_11000000_00000000_00000000 (index 2)
 	// O:      0b00000000_11100000_00000000_00000000 (index 3)
+	#[atom("-webkit-align-content")]
+	_WebkitAlignContent = 0b00000000_10000000_00000000_00000000,
+	#[atom("-webkit-align-items")]
+	_WebkitAlignItems,
+	#[atom("-webkit-align-self")]
+	_WebkitAlignSelf,
 	#[atom("-webkit-animating-full-screen-transition")]
-	_WebkitAnimatingFullScreenTransition = 0b00000000_10000000_00000000_00000000,
+	_WebkitAnimatingFullScreenTransition,
 	#[atom("-webkit-animation")]
 	_WebkitAnimation,
 	#[atom("-webkit-animation-delay")]
@@ -2361,14 +2379,12 @@ pub enum CssAtomSet {
 	_WebkitAnimationName,
 	#[atom("-webkit-animation-timing-function")]
 	_WebkitAnimationTimingFunction,
-	#[atom("-webkit-appearance")]
-	_WebkitAppearance,
-	#[atom("-webkit-line-clamp")]
-	_WebkitLineClamp,
 	#[atom("-webkit-any")]
 	_WebkitAny,
 	#[atom("-webkit-any-link")]
 	_WebkitAnyLink,
+	#[atom("-webkit-appearance")]
+	_WebkitAppearance,
 	#[atom("-webkit-autofill")]
 	_WebkitAutofill,
 	#[atom("-webkit-autofill-and-obscured")]
@@ -2381,16 +2397,44 @@ pub enum CssAtomSet {
 	_WebkitBackdropFilter,
 	#[atom("-webkit-backface-visibility")]
 	_WebkitBackfaceVisibility,
+	#[atom("-webkit-background-clip")]
+	_WebkitBackgroundClip,
+	#[atom("-webkit-background-size")]
+	_WebkitBackgroundSize,
+	#[atom("-webkit-box-align")]
+	_WebkitBoxAlign,
+	#[atom("-webkit-box-decoration-break")]
+	_WebkitBoxDecorationBreak,
+	#[atom("-webkit-box-direction")]
+	_WebkitBoxDirection,
+	#[atom("-webkit-box-flex")]
+	_WebkitBoxFlex,
+	#[atom("-webkit-box-ordinal-group")]
+	_WebkitBoxOrdinalGroup,
+	#[atom("-webkit-box-orient")]
+	_WebkitBoxOrient,
+	#[atom("-webkit-box-pack")]
+	_WebkitBoxPack,
 	#[atom("-webkit-box-reflect")]
 	_WebkitBoxReflect,
+	#[atom("-webkit-box-shadow")]
+	_WebkitBoxShadow,
+	#[atom("-webkit-box-sizing")]
+	_WebkitBoxSizing,
 	#[atom("-webkit-calendar-picker-indicator")]
 	_WebkitCalendarPickerIndicator,
 	#[atom("-webkit-caps-lock-indicator")]
 	_WebkitCapsLockIndicator,
+	#[atom("-webkit-clip-path")]
+	_WebkitClipPath,
 	#[atom("-webkit-color-swatch")]
 	_WebkitColorSwatch,
 	#[atom("-webkit-color-swatch-wrapper")]
 	_WebkitColorSwatchWrapper,
+	#[atom("-webkit-column-count")]
+	_WebkitColumnCount,
+	#[atom("-webkit-column-gap")]
+	_WebkitColumnGap,
 	#[atom("-webkit-contacts-auto-fill-button")]
 	_WebkitContactsAutoFillButton,
 	#[atom("-webkit-credentials-auto-fill-button")]
@@ -2437,6 +2481,16 @@ pub enum CssAtomSet {
 	_WebkitFilter,
 	#[atom("-webkit-flex")]
 	_WebkitFlex,
+	#[atom("-webkit-flex-basis")]
+	_WebkitFlexBasis,
+	#[atom("-webkit-flex-direction")]
+	_WebkitFlexDirection,
+	#[atom("-webkit-flex-flow")]
+	_WebkitFlexFlow,
+	#[atom("-webkit-flex-grow")]
+	_WebkitFlexGrow,
+	#[atom("-webkit-flex-wrap")]
+	_WebkitFlexWrap,
 	#[atom("-webkit-font-smoothing")]
 	_WebkitFontSmoothing,
 	#[atom("-webkit-full-page-media")]
@@ -2455,14 +2509,24 @@ pub enum CssAtomSet {
 	_WebkitInnerSpinButton,
 	#[atom("-webkit-input-placeholder")]
 	_WebkitInputPlaceholder,
+	#[atom("-webkit-justify-content")]
+	_WebkitJustifyContent,
 	#[atom("-webkit-keyframes")]
 	_WebkitKeyframes,
+	#[atom("-webkit-line-clamp")]
+	_WebkitLineClamp,
 	#[atom("-webkit-list-button")]
 	_WebkitListButton,
+	#[atom("-webkit-margin-end")]
+	_WebkitMarginEnd,
 	#[atom("-webkit-mask")]
 	_WebkitMask,
 	#[atom("-webkit-mask-box-image")]
 	_WebkitMaskBoxImage,
+	#[atom("-webkit-mask-position")]
+	_WebkitMaskPosition,
+	#[atom("-webkit-mask-size")]
+	_WebkitMaskSize,
 	#[atom("-webkit-max-device-pixel-ratio")]
 	_WebkitMaxDevicePixelRatio,
 	#[atom("-webkit-media-text-track-container")]
@@ -2497,6 +2561,8 @@ pub enum CssAtomSet {
 	_WebkitPasswordAutoFillButton,
 	#[atom("-webkit-perspective")]
 	_WebkitPerspective,
+	#[atom("-webkit-print-color-adjust")]
+	_WebkitPrintColorAdjust,
 	#[atom("-webkit-progress-bar")]
 	_WebkitProgressBar,
 	#[atom("-webkit-progress-inner-element")]
@@ -2531,22 +2597,46 @@ pub enum CssAtomSet {
 	_WebkitSliderThumb,
 	#[atom("-webkit-tap-highlight-color")]
 	_WebkitTapHighlightColor,
-	#[atom("-webkit-textfield-decoration-container")]
-	_WebkitTextfieldDecorationContainer,
+	#[atom("-webkit-text-decoration")]
+	_WebkitTextDecoration,
+	#[atom("-webkit-text-decoration-color")]
+	_WebkitTextDecorationColor,
+	#[atom("-webkit-text-decoration-skip-ink")]
+	_WebkitTextDecorationSkipInk,
+	#[atom("-webkit-text-fill-color")]
+	_WebkitTextFillColor,
 	#[atom("-webkit-text-size-adjust")]
 	_WebkitTextSizeAdjust,
+	#[atom("-webkit-text-stroke-color")]
+	_WebkitTextStrokeColor,
+	#[atom("-webkit-text-stroke-width")]
+	_WebkitTextStrokeWidth,
+	#[atom("-webkit-textfield-decoration-container")]
+	_WebkitTextfieldDecorationContainer,
+	#[atom("-webkit-touch-callout")]
+	_WebkitTouchCallout,
+	#[atom("-webkit-transform")]
+	_WebkitTransform,
 	#[atom("-webkit-transform-2d")]
 	_WebkitTransform2d,
 	#[atom("-webkit-transform-3d")]
 	_WebkitTransform3d,
-	#[atom("-webkit-transform")]
-	_WebkitTransform,
+	#[atom("-webkit-transform-origin")]
+	_WebkitTransformOrigin,
 	#[atom("-webkit-transition")]
 	_WebkitTransition,
+	#[atom("-webkit-transition-delay")]
+	_WebkitTransitionDelay,
 	#[atom("-webkit-transition-duration")]
 	_WebkitTransitionDuration,
+	#[atom("-webkit-transition-property")]
+	_WebkitTransitionProperty,
 	#[atom("-webkit-transition-timing-function")]
 	_WebkitTransitionTimingFunction,
+	#[atom("-webkit-user-drag")]
+	_WebkitUserDrag,
+	#[atom("-webkit-user-select")]
+	_WebkitUserSelect,
 	#[atom("-webkit-validation-bubble")]
 	_WebkitValidationBubble,
 	#[atom("-webkit-validation-bubble-arrow")]
@@ -2574,14 +2664,16 @@ pub enum CssAtomSet {
 	_MozAnonymousPositionedBlock,
 	#[atom("-moz-any")]
 	_MozAny,
-	#[atom("-moz-appearance")]
-	_MozAppearance,
 	#[atom("-moz-any-link")]
 	_MozAnyLink,
+	#[atom("-moz-appearance")]
+	_MozAppearance,
 	#[atom("-moz-block-inside-inline-wrapper")]
 	_MozBlockInsideInlineWrapper,
 	#[atom("-moz-block-ruby-content")]
 	_MozBlockRubyContent,
+	#[atom("-moz-box-sizing")]
+	_MozBoxSizing,
 	#[atom("-moz-broken")]
 	_MozBroken,
 	#[atom("-moz-button-content")]
@@ -2594,6 +2686,10 @@ pub enum CssAtomSet {
 	_MozColorSwatch,
 	#[atom("-moz-column-content")]
 	_MozColumnContent,
+	#[atom("-moz-column-count")]
+	_MozColumnCount,
+	#[atom("-moz-column-gap")]
+	_MozColumnGap,
 	#[atom("-moz-column-set")]
 	_MozColumnSet,
 	#[atom("-moz-column-span-wrapper")]
@@ -2682,6 +2778,8 @@ pub enum CssAtomSet {
 	_MozOofPlaceholder,
 	#[atom("-moz-os-version")]
 	_MozOsVersion,
+	#[atom("-moz-osx-font-smoothing")]
+	_MozOsxFontSmoothing,
 	#[atom("-moz-page")]
 	_MozPage,
 	#[atom("-moz-page-break")]
@@ -2768,6 +2866,8 @@ pub enum CssAtomSet {
 	_MozTextControlPreview,
 	#[atom("-moz-touch-enabled")]
 	_MozTouchEnabled,
+	#[atom("-moz-transition")]
+	_MozTransition,
 	#[atom("-moz-tree-cell")]
 	_MozTreeCell,
 	#[atom("-moz-tree-cell-text")]
@@ -2796,6 +2896,8 @@ pub enum CssAtomSet {
 	_MozUiValid,
 	#[atom("-moz-user-disabled")]
 	_MozUserDisabled,
+	#[atom("-moz-user-select")]
+	_MozUserSelect,
 	#[atom("-moz-vframeset-border")]
 	_MozVframesetBorder,
 	#[atom("-moz-viewport")]
@@ -2805,8 +2907,10 @@ pub enum CssAtomSet {
 	#[atom("-moz-window-inactive")]
 	_MozWindowInactive,
 
+	#[atom("-ms-autohiding-scrollbar")]
+	MsAutohidingScrollbar = 0b00000000_11000000_00000000_00000000,
 	#[atom("-ms-backdrop")]
-	_MsBackdrop = 0b00000000_11000000_00000000_00000000,
+	_MsBackdrop,
 	#[atom("-ms-browse")]
 	_MsBrowse,
 	#[atom("-ms-check")]
@@ -2825,6 +2929,32 @@ pub enum CssAtomSet {
 	_MsFillLower,
 	#[atom("-ms-fill-upper")]
 	_MsFillUpper,
+	#[atom("-ms-filter")]
+	_MsFilter,
+	#[atom("-ms-flex")]
+	_MsFlex,
+	#[atom("-ms-flex-align")]
+	_MsFlexAlign,
+	#[atom("-ms-flex-direction")]
+	_MsFlexDirection,
+	#[atom("-ms-flex-flow")]
+	_MsFlexFlow,
+	#[atom("-ms-flex-item-align")]
+	_MsFlexItemAlign,
+	#[atom("-ms-flex-line-pack")]
+	_MsFlexLinePack,
+	#[atom("-ms-flex-negative")]
+	_MsFlexNegative,
+	#[atom("-ms-flex-order")]
+	_MsFlexOrder,
+	#[atom("-ms-flex-pack")]
+	_MsFlexPack,
+	#[atom("-ms-flex-positive")]
+	_MsFlexPositive,
+	#[atom("-ms-flex-preferred-size")]
+	_MsFlexPreferredSize,
+	#[atom("-ms-flex-wrap")]
+	_MsFlexWrap,
 	#[atom("-ms-fullscreen")]
 	_MsFullscreen,
 	#[atom("-ms-high-contrast")]
@@ -2841,12 +2971,16 @@ pub enum CssAtomSet {
 	_MsMinColumnCount,
 	#[atom("-ms-min-device-pixel-ratio")]
 	_MsMinDevicePixelRatio,
+	#[atom("-ms-overflow-style")]
+	_MsOverflowStyle,
 	#[atom("-ms-placeholder")]
 	_MsPlaceholder,
 	#[atom("-ms-reveal")]
 	_MsReveal,
 	#[atom("-ms-selection")]
 	_MsSelection,
+	#[atom("-ms-text-size-adjust")]
+	_MsTextSizeAdjust,
 	#[atom("-ms-thumb")]
 	_MsThumb,
 	#[atom("-ms-ticks-after")]
@@ -2855,21 +2989,35 @@ pub enum CssAtomSet {
 	_MsTicksBefore,
 	#[atom("-ms-tooltip")]
 	_MsTooltip,
+	#[atom("-ms-touch-action")]
+	_MsTouchAction,
 	#[atom("-ms-track")]
 	_MsTrack,
+	#[atom("-ms-transform")]
+	_MsTransform,
+	#[atom("-ms-transform-origin")]
+	_MsTransformOrigin,
+	#[atom("-ms-transition")]
+	_MsTransition,
+	#[atom("-ms-user-select")]
+	_MsUserSelect,
 	#[atom("-ms-value")]
 	_MsValue,
 	#[atom("-ms-view-state")]
 	_MsViewState,
 
+	#[atom("-o-box-sizing")]
+	_OBoxSizing = 0b00000000_11100000_00000000_00000000,
 	#[atom("-o-device-pixel-ratio")]
-	_ODevicePixelRatio = 0b00000000_11100000_00000000_00000000,
+	_ODevicePixelRatio,
 	#[atom("-o-inner-spin-button")]
 	_OInnerSpinButton,
 	#[atom("-o-max-device-pixel-ratio")]
 	_OMaxDevicePixelRatio,
 	#[atom("-o-min-device-pixel-ratio")]
 	_OMinDevicePixelRatio,
+	#[atom("-o-object-fit")]
+	_OObjectFit,
 	#[atom("-o-outer-spin-button")]
 	_OOuterSpinButton,
 	#[atom("-o-placeholder")]

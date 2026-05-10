@@ -1,15 +1,8 @@
 :unknown
 ---
 coverage/popular/inuitcss.6.0.0.css
-397:3:  -ms-text-size-adjust: 100%;
-456:3:  -moz-box-sizing: content-box;
 464:3:  background: #ff0;
-632:3:  -moz-box-sizing: content-box;
-633:3:  -webkit-box-sizing: content-box;
-684:3:  -webkit-box-sizing: border-box;
-685:3:  -moz-box-sizing: border-box;
 686:3:  -ms-box-sizing: border-box;
-687:3:  -o-box-sizing: border-box;
 753:3:  content: "";
 822:3:  font: 1em/1.5 sans-serif;
 943:5:    content: "‘";

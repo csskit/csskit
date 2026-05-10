@@ -24675,20 +24675,19 @@ StyleSheet(
                 offset: SourceOffset(21149),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21150),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: MozTransitionStyleValue([
+                (SingleTransition(
+                  property: None,
+                  duration: Some(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21151),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  easing: None,
+                  delay: None,
+                  behavior: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

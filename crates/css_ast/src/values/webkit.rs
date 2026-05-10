@@ -464,6 +464,735 @@ pub struct WebkitTransitionDurationStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitTransitionTimingFunctionStyleValue<'a>;
 
+// ── Flexbox aliases ──────────────────────────────────────────────────────────
+
+/// `-webkit-flex-direction` — alias for `flex-direction`.
+#[syntax(" row | row-reverse | column | column-reverse ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "row",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitFlexDirectionStyleValue {}
+
+/// `-webkit-flex-wrap` — alias for `flex-wrap`.
+#[syntax(" nowrap | wrap | wrap-reverse ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "nowrap",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitFlexWrapStyleValue {}
+
+/// `-webkit-flex-basis` — alias for `flex-basis`.
+#[syntax(" content | <'width'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Flexbox,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitFlexBasisStyleValue {}
+
+/// `-webkit-flex-flow` — alias for `flex-flow`.
+#[syntax(" <'flex-direction'> || <'flex-wrap'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    applies_to = Elements,
+    property_group = Flexbox,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitFlexFlowStyleValue;
+
+/// `-webkit-flex-grow` — alias for `flex-grow`.
+#[syntax(" <number [0,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitFlexGrowStyleValue;
+
+/// `-webkit-justify-content` — alias for `justify-content`.
+#[syntax(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Align,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitJustifyContentStyleValue {}
+
+/// `-webkit-align-items` — alias for `align-items`.
+#[syntax(" normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Align,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitAlignItemsStyleValue {}
+
+/// `-webkit-align-self` — alias for `align-self`.
+#[syntax(" auto | <overflow-position>? [ normal | <self-position> ] | stretch | <baseline-position> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Align,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitAlignSelfStyleValue {}
+
+/// `-webkit-align-content` — alias for `align-content`.
+#[syntax(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Align,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitAlignContentStyleValue {}
+
+// ── Legacy box model ─────────────────────────────────────────────────────────
+
+/// `-webkit-box-orient` — legacy flexbox axis direction.
+#[syntax(" horizontal | vertical | inline-axis | block-axis ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "inline-axis",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitBoxOrientStyleValue {}
+
+/// `-webkit-box-direction` — legacy flexbox item order direction.
+#[syntax(" normal | reverse ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitBoxDirectionStyleValue {}
+
+/// `-webkit-box-pack` — legacy flexbox main-axis alignment.
+#[syntax(" start | end | center | justify ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "start",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitBoxPackStyleValue {}
+
+/// `-webkit-box-align` — legacy flexbox cross-axis alignment.
+#[syntax(" stretch | start | end | center | baseline ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "stretch",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitBoxAlignStyleValue {}
+
+/// `-webkit-box-flex` — legacy flexbox grow factor.
+#[syntax(" <number> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitBoxFlexStyleValue;
+
+/// `-webkit-box-ordinal-group` — legacy flexbox ordering.
+#[syntax(" <integer [1,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Flexbox,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitBoxOrdinalGroupStyleValue;
+
+/// `-webkit-box-shadow` — alias for `box-shadow`.
+#[syntax(" <spread-shadow># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitBoxShadowStyleValue<'a>;
+
+/// `-webkit-box-sizing` — alias for `box-sizing`.
+#[syntax(" content-box | border-box ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "content-box",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Sizing,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitBoxSizingStyleValue {}
+
+/// `-webkit-box-decoration-break` — alias for `box-decoration-break`.
+#[syntax(" clone | slice ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "slice",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Borders,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitBoxDecorationBreakStyleValue {}
+
+// ── Misc aliases ─────────────────────────────────────────────────────────────
+
+/// `-webkit-user-select` — alias for `user-select`.
+#[syntax(" auto | text | none | all ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitUserSelectStyleValue {}
+
+/// `-webkit-overflow-scrolling` — non-standard momentum scrolling on iOS.
+#[syntax(" auto | touch ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Overflow,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitOverflowScrollingStyleValue {}
+
+/// `-webkit-print-color-adjust` — alias for `print-color-adjust`.
+#[syntax(" economy | exact ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "economy",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = ColorAdjust,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitPrintColorAdjustStyleValue {}
+
+/// `-webkit-text-decoration` — alias for `text-decoration`.
+#[syntax(
+	" <'text-decoration-line'> || <'text-decoration-thickness'> || <'text-decoration-style'> || <'text-decoration-color'> "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTextDecorationStyleValue<'a>;
+
+/// `-webkit-text-decoration-color` — alias for `text-decoration-color`.
+#[syntax(" <color> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = TextDecor,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTextDecorationColorStyleValue<'a>;
+
+/// `-webkit-text-decoration-skip-ink` — alias for `text-decoration-skip-ink`.
+#[syntax(" auto | none | all ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = TextDecor,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitTextDecorationSkipInkStyleValue {}
+
+/// `-webkit-column-gap` — alias for `column-gap`.
+#[syntax(" normal | <length-percentage [0,∞]> | <line-width> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Gaps,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitColumnGapStyleValue {}
+
+/// `-webkit-column-count` — alias for `column-count`.
+#[syntax(" auto | <integer [1,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Multicol,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitColumnCountStyleValue;
+
+/// `-webkit-margin-end` — alias for `margin-inline-end`.
+#[syntax(" <'margin-top'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Logical,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitMarginEndStyleValue;
+
+/// `-webkit-mask-position` — alias for `mask-position`.
+#[syntax(" <position># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0% 0%",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitMaskPositionStyleValue<'a>;
+
+/// `-webkit-mask-size` — alias for `mask-size`.
+#[syntax(" <bg-size># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitMaskSizeStyleValue<'a>;
+
+/// `-webkit-transition-property` — alias for `transition-property`.
+#[syntax(" none | <single-transition-property># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "all",
+    applies_to = Elements,
+    property_group = Transitions,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTransitionPropertyStyleValue<'a>;
+
+/// `-webkit-transition-delay` — alias for `transition-delay`.
+#[syntax(" <time># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0s",
+    applies_to = Elements,
+    property_group = Transitions,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTransitionDelayStyleValue<'a>;
+
+/// `-webkit-user-drag` — non-standard drag behaviour.
+#[syntax(" auto | none | element ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitUserDragStyleValue {}
+
+/// `-webkit-touch-callout` — non-standard iOS touch callout behaviour.
+#[syntax(" default | none ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "default",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitTouchCalloutStyleValue {}
+
+/// `-webkit-text-fill-color` — non-standard text fill colour.
+#[syntax(" <color> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTextFillColorStyleValue<'a>;
+
+/// `-webkit-text-stroke-color` — non-standard text stroke colour.
+#[syntax(" <color> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "currentcolor",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTextStrokeColorStyleValue<'a>;
+
+/// `-webkit-text-stroke-width` — non-standard text stroke width.
+#[syntax(" <line-width> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    inherits,
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTextStrokeWidthStyleValue;
+
+/// `-webkit-background-clip` — alias for `background-clip`.
+#[syntax(" <bg-clip># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "border-box",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Backgrounds,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitBackgroundClipStyleValue<'a>;
+
+/// `-webkit-background-size` — alias for `background-size`.
+#[syntax(" <bg-size># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitBackgroundSizeStyleValue<'a>;
+
+// TODO: `-webkit-animation` — alias for `animation`.
+// Blocked on `<single-animation>` type (animation shorthand not yet implemented).
+// #[syntax(" <single-animation># ")]
+// pub struct WebkitAnimationStyleValue<'a>;
+
+// TODO: `-webkit-transform-origin` — alias for `transform-origin`.
+// Blocked on `transform-origin` grammar support (complex multi-keyword positional syntax).
+// #[syntax(" [ left | center | right | top | bottom | <length-percentage> ] | ... ")]
+// pub enum WebkitTransformOriginStyleValue<'a> {}
+
+/// `-webkit-perspective` — alias for `perspective`.
+#[syntax(" none | <length [0,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitPerspectiveStyleValue;
+
+// TODO: `-webkit-clip-path` — alias for `clip-path`.
+// Blocked on `<basic-shape>` and `<clip-source>` types (Todo stubs).
+// #[syntax(" none | <clip-source> | [ <basic-shape> || <geometry-box> ] ")]
+// pub enum WebkitClipPathStyleValue<'a> {}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -809,5 +1538,16 @@ mod tests {
 	#[test]
 	fn test_transition_timing_function_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, WebkitTransitionTimingFunctionStyleValue, "invalid");
+	}
+
+	#[test]
+	fn test_webkit_perspective_parses() {
+		assert_parse!(CssAtomSet::ATOMS, WebkitPerspectiveStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, WebkitPerspectiveStyleValue, "800px");
+	}
+
+	#[test]
+	fn test_webkit_perspective_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, WebkitPerspectiveStyleValue, "invalid");
 	}
 }
