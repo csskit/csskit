@@ -203,6 +203,11 @@ impl Parse for Def {
 			} else {
 				Self::Ident(ident)
 			}
+		} else if input.peek(Token![-]) && input.peek2(Ident::peek_any) {
+			input.parse::<Token![-]>()?;
+			let mut ident = input.parse::<DefIdent>()?;
+			ident.0.insert(0, '-');
+			Self::Ident(ident)
 		} else if input.peek(Lit) {
 			let lit = input.parse::<Lit>()?;
 			match lit {

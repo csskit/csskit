@@ -86,6 +86,22 @@ fn test_def_builds_dashed_idents() {
 }
 
 #[test]
+fn test_def_builds_vendor_prefixed_keyword() {
+	assert_eq!(to_valuedef!(" -webkit-sticky "), Def::Ident(DefIdent("-webkit-sticky".into())),);
+	assert_eq!(
+		to_valuedef!(" foo | -webkit-sticky | -moz-min-content "),
+		Def::Combinator(
+			vec![
+				Def::Ident(DefIdent("foo".into())),
+				Def::Ident(DefIdent("-webkit-sticky".into())),
+				Def::Ident(DefIdent("-moz-min-content".into())),
+			],
+			DefCombinatorStyle::Alternatives,
+		)
+	);
+}
+
+#[test]
 fn def_builds_group_with_brackets() {
 	assert_eq!(
 		to_valuedef! { [ block || inline ] | foo },
