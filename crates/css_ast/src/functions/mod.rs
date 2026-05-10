@@ -55,7 +55,9 @@ pub use url::*;
 mod prelude {
 	pub(crate) use crate::{Angle, CSSInt, Color, CssAtomSet, Position, Todo};
 	pub(crate) use bumpalo::collections::Vec;
-	pub(crate) use css_parse::{CommaSeparated, Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
+	pub(crate) use css_parse::{
+		CommaSeparated, Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T,
+	};
 	pub(crate) use csskit_derives::*;
 	pub(crate) use csskit_proc_macro::*;
 }

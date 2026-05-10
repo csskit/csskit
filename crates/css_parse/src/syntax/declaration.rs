@@ -1,6 +1,6 @@
 use crate::{
-	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
-	Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
+	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
+	Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
 };
 use std::marker::PhantomData;
 
@@ -73,6 +73,9 @@ where
 	V: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
+
+	#[inline(always)]
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,

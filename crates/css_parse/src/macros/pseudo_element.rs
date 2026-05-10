@@ -53,6 +53,9 @@ macro_rules! pseudo_element {
 		}
 
 		impl<'a> $crate::Peek<'a> for $name {
+			const PEEK_KINDSET: $crate::KindSet = $crate::KindSet::new(&[$crate::Kind::Colon]);
+
+			#[inline(always)]
 			fn peek<I>(p: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
 			where
 				I: Iterator<Item = $crate::Cursor> + Clone,

@@ -1,6 +1,6 @@
 use crate::{
-	BadDeclaration, Block, Cursor, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata,
-	NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, Span, State, T, ToCursors, ToSpan,
+	BadDeclaration, Block, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata, NodeWithMetadata,
+	Parse, Parser, Peek, Result, SemanticEq, Span, State, T, ToCursors, ToSpan,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -37,12 +37,7 @@ where
 	D: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
-	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
-	where
-		Iter: Iterator<Item = crate::Cursor> + Clone,
-	{
-		<P>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = P::PEEK_KINDSET;
 }
 
 // https://drafts.csswg.org/css-syntax-3/#consume-a-qualified-rule
@@ -165,7 +160,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{EmptyAtomSet, test_helpers::*};
+	use crate::{Cursor, EmptyAtomSet, test_helpers::*};
 
 	#[derive(Debug)]
 	struct Decl(T![Ident]);

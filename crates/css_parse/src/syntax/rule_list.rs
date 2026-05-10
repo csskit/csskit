@@ -1,6 +1,6 @@
 use crate::{
-	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors, ToSpan,
-	token_macros,
+	CursorSink, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors,
+	ToSpan, token_macros,
 };
 use bumpalo::collections::Vec;
 
@@ -43,12 +43,7 @@ where
 	R: NodeWithMetadata<M>,
 	M: NodeMetadata,
 {
-	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
-	where
-		Iter: Iterator<Item = crate::Cursor> + Clone,
-	{
-		<token_macros::LeftCurly>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftCurly]);
 }
 
 impl<'a, R, M> Parse<'a> for RuleList<'a, R, M>

@@ -1,4 +1,4 @@
-use css_parse::{Cursor, Kind, Parser, Peek, T};
+use css_parse::{Cursor, Kind, KindSet, Parser, Peek, T};
 use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
 
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -11,6 +11,9 @@ pub struct Class {
 }
 
 impl<'a> Peek<'a> for Class {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Delim]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

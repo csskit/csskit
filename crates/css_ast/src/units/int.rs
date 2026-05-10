@@ -34,6 +34,9 @@ impl ToNumberValue for CSSInt {
 }
 
 impl<'a> Peek<'a> for CSSInt {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

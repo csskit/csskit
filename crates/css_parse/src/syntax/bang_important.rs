@@ -1,5 +1,5 @@
 use crate::{
-	Cursor, CursorSink, Diagnostic, Kind, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan,
+	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan,
 };
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
@@ -28,6 +28,9 @@ pub struct BangImportant {
 }
 
 impl<'a> Peek<'a> for BangImportant {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Delim]);
+
+	#[inline(always)]
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = Cursor> + Clone,

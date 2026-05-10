@@ -1,6 +1,6 @@
 use crate::{
-	ComponentValues, Cursor, CursorSink, DeclarationValue, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result,
-	SemanticEq, Span, ToCursors, ToSpan,
+	ComponentValues, Cursor, CursorSink, DeclarationValue, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
+	Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
 };
 
 /// Wrapper type for using ComponentValues as a rule type parameter in unknown rules.
@@ -24,12 +24,7 @@ impl<'a, D, M> Parse<'a> for UnknownRuleBlock<'a, D, M> {
 }
 
 impl<'a, D, M> Peek<'a> for UnknownRuleBlock<'a, D, M> {
-	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
-	where
-		Iter: Iterator<Item = Cursor> + Clone,
-	{
-		ComponentValues::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = ComponentValues::PEEK_KINDSET;
 }
 
 impl<'a, D, M> ToCursors for UnknownRuleBlock<'a, D, M> {

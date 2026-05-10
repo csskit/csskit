@@ -63,12 +63,7 @@ macro_rules! define_kinds {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek<I>(_: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
-			where
-				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
-			{
-				c == $crate::Kind::$ident
-			}
+			const PEEK_KINDSET: $crate::KindSet = $crate::KindSet::new(&[$crate::Kind::$ident]);
 		}
 
 		impl<'a> $crate::Parse<'a> for $ident {
@@ -124,12 +119,7 @@ macro_rules! define_kind_idents {
 		}
 
 		impl<'a> $crate::Peek<'a> for $ident {
-			fn peek<I>(_: &$crate::Parser<'a, I>, c: $crate::Cursor) -> bool
-			where
-				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
-			{
-				c == $crate::Kind::$ident
-			}
+			const PEEK_KINDSET: $crate::KindSet = $crate::KindSet::new(&[$crate::Kind::$ident]);
 		}
 
 		impl<'a> $crate::Parse<'a> for $ident {
@@ -429,6 +419,8 @@ pub struct Whitespace(Cursor);
 cursor_wrapped!(Whitespace);
 
 impl<'a> Peek<'a> for Whitespace {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Whitespace]);
+
 	fn peek<I>(p: &Parser<'a, I>, _: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -464,6 +456,9 @@ pub struct DashedIdent(Ident);
 cursor_wrapped!(DashedIdent);
 
 impl<'a> Peek<'a> for DashedIdent {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
+
+	#[inline(always)]
 	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -499,12 +494,7 @@ impl PartialEq<f32> for Dimension {
 }
 
 impl<'a> Peek<'a> for Dimension {
-	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		c == Kind::Dimension
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Dimension]);
 }
 
 impl<'a> Parse<'a> for Dimension {
@@ -569,12 +559,7 @@ impl Number {
 }
 
 impl<'a> Peek<'a> for Number {
-	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		c == Kind::Number
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number]);
 }
 
 impl<'a> Parse<'a> for Number {

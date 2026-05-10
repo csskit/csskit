@@ -13,12 +13,7 @@ use super::prelude::*;
 pub struct OpentypeTag(pub T![String]);
 
 impl<'a> Peek<'a> for OpentypeTag {
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		<T![String]>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::String]);
 }
 
 impl<'a> Parse<'a> for OpentypeTag {

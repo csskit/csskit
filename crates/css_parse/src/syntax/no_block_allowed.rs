@@ -1,4 +1,4 @@
-use crate::{Cursor, CursorSink, Diagnostic, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan};
+use crate::{CursorSink, Diagnostic, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan};
 
 /// A struct to provide to rules to disallow blocks.
 ///
@@ -32,12 +32,7 @@ impl<'a, D, M> Parse<'a> for NoBlockAllowed<D, M> {
 }
 
 impl<'a, D, M> Peek<'a> for NoBlockAllowed<D, M> {
-	fn peek<Iter>(_: &Parser<'a, Iter>, _: Cursor) -> bool
-	where
-		Iter: Iterator<Item = crate::Cursor> + Clone,
-	{
-		false
-	}
+	const PEEK_KINDSET: KindSet = KindSet::NONE;
 }
 
 impl<D, M> ToCursors for NoBlockAllowed<D, M> {

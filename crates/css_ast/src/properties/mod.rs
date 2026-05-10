@@ -26,6 +26,9 @@ pub struct Custom<'a>(pub ComponentValues<'a>);
 pub struct Computed<'a>(pub ComponentValues<'a>);
 
 impl<'a> Peek<'a> for Computed<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Function]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

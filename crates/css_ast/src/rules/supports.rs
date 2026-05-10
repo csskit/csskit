@@ -145,6 +145,9 @@ pub enum SupportsFeature<'a> {
 }
 
 impl<'a> Peek<'a> for SupportsFeature<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen, Kind::Function, Kind::Ident]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

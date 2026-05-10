@@ -15,6 +15,9 @@ pub enum CounterStyle<'a> {
 }
 
 impl<'a> Peek<'a> for CounterStyle<'a> {
+	const PEEK_KINDSET: KindSet = <T![Ident]>::PEEK_KINDSET.combine(SymbolsFunction::PEEK_KINDSET);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

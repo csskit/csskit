@@ -39,6 +39,9 @@ pub trait Peek<'a>: Sized {
 }
 
 impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -50,6 +53,7 @@ impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
 impl<'a, T: Peek<'a>> Peek<'a> for ::bumpalo::collections::Vec<'a, T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -64,6 +68,8 @@ macro_rules! impl_tuple {
         where
             $($T: Peek<'a>,)*
         {
+            const PEEK_KINDSET: KindSet = A::PEEK_KINDSET;
+
             fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
             where
                 Iter: Iterator<Item = Cursor> + Clone,

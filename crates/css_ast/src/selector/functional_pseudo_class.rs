@@ -1,6 +1,6 @@
 use crate::CssAtomSet;
 use css_lexer::Kind;
-use css_parse::{CommaSeparated, Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, State, T};
+use css_parse::{CommaSeparated, Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, State, T};
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
@@ -42,6 +42,9 @@ macro_rules! define_functional_pseudo_class {
 apply_functional_pseudo_class!(define_functional_pseudo_class);
 
 impl<'a> Peek<'a> for FunctionalPseudoClass<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Colon]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: css_lexer::Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

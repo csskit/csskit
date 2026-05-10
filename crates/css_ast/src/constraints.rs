@@ -1,7 +1,9 @@
 use crate::CssDiagnostic;
 #[cfg(feature = "visitable")]
 use crate::visit::{Visit, VisitMut, Visitable, VisitableMut};
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, SemanticEq, ToCursors, ToNumberValue, ToSpan};
+use css_parse::{
+	Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result, SemanticEq, ToCursors, ToNumberValue, ToSpan,
+};
 use csskit_derives::{NodeWithMetadata, ToCursors as DeriveToCursors, ToSpan as DeriveToSpan};
 
 /// A non-negative value wrapper.
@@ -33,6 +35,9 @@ impl<T: VisitableMut> VisitableMut for NonNegative<T> {
 }
 
 impl<'a, T: Peek<'a>> Peek<'a> for NonNegative<T> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -105,6 +110,9 @@ impl<T: VisitableMut> VisitableMut for Positive<T> {
 }
 
 impl<'a, T: Peek<'a>> Peek<'a> for Positive<T> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -178,6 +186,9 @@ impl<T: VisitableMut> VisitableMut for NonZero<T> {
 }
 
 impl<'a, T: Peek<'a>> Peek<'a> for NonZero<T> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -263,6 +274,8 @@ impl<T: VisitableMut, const MIN: i32, const MAX: i32> VisitableMut for Ranged<T,
 }
 
 impl<'a, T: Peek<'a>, const MIN: i32, const MAX: i32> Peek<'a> for Ranged<T, MIN, MAX> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -363,6 +376,8 @@ impl<T: VisitableMut, const VALUE: i32> VisitableMut for Exact<T, VALUE> {
 }
 
 impl<'a, T: Peek<'a>, const VALUE: i32> Peek<'a> for Exact<T, VALUE> {
+	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
+
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

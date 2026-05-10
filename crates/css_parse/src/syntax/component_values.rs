@@ -1,6 +1,6 @@
 use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, NodeMetadata, NodeWithMetadata, Parse, Parser,
-	Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
+	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, KindSet, NodeMetadata, NodeWithMetadata, Parse,
+	Parser, Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
 };
 use bumpalo::collections::Vec;
 
@@ -14,12 +14,7 @@ pub struct ComponentValues<'a> {
 }
 
 impl<'a> Peek<'a> for ComponentValues<'a> {
-	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
-	where
-		Iter: Iterator<Item = Cursor> + Clone,
-	{
-		ComponentValue::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = ComponentValue::PEEK_KINDSET;
 }
 
 impl<'a> Parse<'a> for ComponentValues<'a> {
@@ -30,6 +25,7 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 	{
 		let mut values = Vec::new_in(p.bump());
 		let mut last_was_whitespace = false;
+
 		loop {
 			if p.at_end() {
 				break;
@@ -37,9 +33,7 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 			if p.next_is_stop() {
 				break;
 			}
-			let c = p.peek_n(1);
-			if <ComponentValue>::peek(p, c) {
-				let mut value = p.parse::<ComponentValue>()?;
+			if let Some(mut value) = p.parse_if_peek::<ComponentValue>()? {
 				if let ComponentValue::Delim(d) = value
 					&& last_was_whitespace
 				{

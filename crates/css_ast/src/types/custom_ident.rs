@@ -11,6 +11,9 @@ use super::prelude::*;
 pub struct CustomIdent(T![Ident]);
 
 impl<'a> Peek<'a> for CustomIdent {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

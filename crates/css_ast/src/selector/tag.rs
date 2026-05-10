@@ -1,5 +1,5 @@
 use crate::CssAtomSet;
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T};
+use css_parse::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, T};
 use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
 
 #[derive(Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -16,12 +16,7 @@ pub enum Tag {
 }
 
 impl<'a> Peek<'a> for Tag {
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		<T![Ident]>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 }
 
 #[cfg(feature = "visitable")]
@@ -73,6 +68,9 @@ impl CustomElementTag {
 }
 
 impl<'a> Peek<'a> for CustomElementTag {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -917,12 +915,7 @@ pub enum MathmlTag {
 pub struct UnknownTag(T![Ident]);
 
 impl<'a> Peek<'a> for UnknownTag {
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		<T![Ident]>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 }
 
 #[cfg(test)]

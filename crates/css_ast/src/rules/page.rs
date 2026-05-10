@@ -36,13 +36,6 @@ pub struct PageSelector<'a> {
 
 impl<'a> Peek<'a> for PageSelector<'a> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::Colon]);
-
-	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		c == Self::PEEK_KINDSET
-	}
 }
 
 impl<'a> Parse<'a> for PageSelector<'a> {

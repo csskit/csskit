@@ -11,6 +11,9 @@ impl From<CustomDimension> for f32 {
 }
 
 impl<'a> Peek<'a> for CustomDimension {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Dimension]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

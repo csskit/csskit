@@ -41,8 +41,8 @@ pub use visit::*;
 use crate::diagnostics::CssDiagnostic;
 
 use css_parse::{
-	Cursor, CursorSink, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span,
-	ToCursors, ToSpan,
+	Cursor, CursorSink, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult,
+	SemanticEq, Span, ToCursors, ToSpan,
 };
 
 // TODO! - delete this when we're done ;)
@@ -55,12 +55,7 @@ pub enum Todo {
 }
 
 impl<'a> Peek<'a> for Todo {
-	fn peek<I>(_p: &Parser<'a, I>, _c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		false
-	}
+	const PEEK_KINDSET: KindSet = KindSet::NONE;
 }
 
 impl<'a> Parse<'a> for Todo {

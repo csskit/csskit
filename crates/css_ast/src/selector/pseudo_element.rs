@@ -49,6 +49,9 @@ macro_rules! define_pseudo_element {
 apply_pseudo_element!(define_pseudo_element);
 
 impl<'a> Peek<'a> for PseudoElement {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Colon]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, _: css_lexer::Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

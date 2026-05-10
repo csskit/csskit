@@ -164,6 +164,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		None
 	} else {
 		Some(quote! {
+			#[inline(always)]
 			fn peek<I>(p: &::css_parse::Parser<'a, I>, c: ::css_parse::Cursor) -> bool
 			where
 				I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,

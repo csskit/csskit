@@ -20,6 +20,9 @@ pub struct Shadow<'a> {
 }
 
 impl<'a> Peek<'a> for Shadow<'a> {
+	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(Length::PEEK_KINDSET);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

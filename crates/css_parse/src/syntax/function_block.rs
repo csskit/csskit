@@ -1,5 +1,6 @@
 use crate::{
-	ComponentValues, CursorSink, Parse, Parser, Result as ParserResult, SemanticEq, Span, T, ToCursors, ToSpan,
+	ComponentValues, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T,
+	ToCursors, ToSpan,
 };
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -8,6 +9,10 @@ pub struct FunctionBlock<'a> {
 	pub name: T![Function],
 	pub params: ComponentValues<'a>,
 	pub close: T![')'],
+}
+
+impl<'a> Peek<'a> for FunctionBlock<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Function]);
 }
 
 // https://drafts.csswg.org/css-syntax-3/#consume-function

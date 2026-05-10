@@ -31,12 +31,7 @@ pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType>, Option<T![,]>, Opt
 pub struct AttrName(pub Option<T![Ident]>, pub Option<T![|]>, pub Option<T![Ident]>);
 
 impl<'a> Peek<'a> for AttrName {
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		<T![Ident]>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 }
 
 impl<'a> Parse<'a> for AttrName {

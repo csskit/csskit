@@ -4,9 +4,9 @@ use bumpalo::collections::Vec;
 use css_ast::{AttributeOperator, CssMetadata, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_lexer::{Span, ToSpan};
 use css_parse::{
-	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, NodeMetadata, NodeWithMetadata,
-	Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, SemanticEq, State, T, ToCursors,
-	pseudo_class, syntax::CommaSeparated,
+	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, KindSet, NodeMetadata,
+	NodeWithMetadata, Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, SemanticEq, State, T,
+	ToCursors, pseudo_class, syntax::CommaSeparated,
 };
 use csskit_derives::*;
 use smallvec::SmallVec;
@@ -277,12 +277,7 @@ impl<'a> NodeWithMetadata<QuerySelectorMetadata> for QuerySelectorComponent<'a> 
 pub struct NeverMatch;
 
 impl<'a> Peek<'a> for NeverMatch {
-	fn peek<I>(_p: &Parser<'a, I>, _c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		false
-	}
+	const PEEK_KINDSET: KindSet = KindSet::NONE;
 }
 
 impl<'a> Parse<'a> for NeverMatch {

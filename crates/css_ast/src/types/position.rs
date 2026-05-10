@@ -28,6 +28,9 @@ pub enum Position {
 }
 
 impl<'a> Peek<'a> for Position {
+	const PEEK_KINDSET: KindSet = PositionSingleValue::PEEK_KINDSET;
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

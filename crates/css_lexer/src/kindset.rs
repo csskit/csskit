@@ -103,7 +103,7 @@ impl KindSet {
 	///
 	/// This function is marked `const` to allow creation of const [KindSets][KindSet].
 	pub const fn combine(&self, ks: KindSet) -> Self {
-		Self(self.0 & ks.0)
+		Self(self.0 | ks.0)
 	}
 
 	/// Returns a new [KindSet] without the supplied [Kind].

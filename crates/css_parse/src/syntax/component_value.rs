@@ -27,30 +27,24 @@ pub enum ComponentValue<'a> {
 }
 
 impl<'a> Peek<'a> for ComponentValue<'a> {
-	fn peek<Iter>(_: &Parser<'a, Iter>, c: Cursor) -> bool
-	where
-		Iter: Iterator<Item = Cursor> + Clone,
-	{
-		let kindset = KindSet::new(&[
-			Kind::Whitespace,
-			Kind::Number,
-			Kind::Dimension,
-			Kind::Ident,
-			Kind::AtKeyword,
-			Kind::Hash,
-			Kind::String,
-			Kind::Url,
-			Kind::Delim,
-			Kind::Colon,
-			Kind::Semicolon,
-			Kind::Comma,
-			Kind::Function,
-			Kind::LeftCurly,
-			Kind::LeftParen,
-			Kind::LeftSquare,
-		]);
-		c == kindset
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[
+		Kind::Whitespace,
+		Kind::Number,
+		Kind::Dimension,
+		Kind::Ident,
+		Kind::AtKeyword,
+		Kind::Hash,
+		Kind::String,
+		Kind::Url,
+		Kind::Delim,
+		Kind::Colon,
+		Kind::Semicolon,
+		Kind::Comma,
+		Kind::Function,
+		Kind::LeftCurly,
+		Kind::LeftParen,
+		Kind::LeftSquare,
+	]);
 }
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value

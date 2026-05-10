@@ -112,6 +112,7 @@ impl<M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>> crate::NodeWithMetad
 impl<'a, T: Peek<'a>> Peek<'a> for BumpBox<'a, T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

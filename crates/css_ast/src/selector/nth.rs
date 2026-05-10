@@ -16,12 +16,7 @@ pub enum Nth {
 }
 
 impl<'a> Peek<'a> for Nth {
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		<T![Number]>::peek(p, c) || <T![Ident]>::peek(p, c)
-	}
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number, Kind::Ident]);
 }
 
 impl<'a> Parse<'a> for Nth {

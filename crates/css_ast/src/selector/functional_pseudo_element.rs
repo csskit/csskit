@@ -1,7 +1,7 @@
 use crate::{CssAtomSet, CssDiagnostic};
 use bumpalo::collections::Vec;
 use css_lexer::Kind;
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
+use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
 
 use super::CompoundSelector;
@@ -32,6 +32,9 @@ pub enum FunctionalPseudoElement<'a> {
 }
 
 impl<'a> Peek<'a> for FunctionalPseudoElement<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Colon]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, _: css_lexer::Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

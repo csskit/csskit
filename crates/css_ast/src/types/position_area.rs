@@ -43,6 +43,16 @@ pub enum PositionArea {
 }
 
 impl<'a> Peek<'a> for PositionArea {
+	const PEEK_KINDSET: KindSet = PositionAreaPhsyicalVertical::PEEK_KINDSET
+		.combine(PositionAreaPhsyicalHorizontal::PEEK_KINDSET)
+		.combine(PositionAreaBlock::PEEK_KINDSET)
+		.combine(PositionAreaInline::PEEK_KINDSET)
+		.combine(PositionAreaSelfBlock::PEEK_KINDSET)
+		.combine(PositionAreaSelfInline::PEEK_KINDSET)
+		.combine(PositionAreaPosition::PEEK_KINDSET)
+		.combine(PositionAreaSelfPosition::PEEK_KINDSET);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

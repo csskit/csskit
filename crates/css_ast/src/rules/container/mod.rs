@@ -84,6 +84,9 @@ pub enum ContainerQuery<'a> {
 }
 
 impl<'a> Peek<'a> for ContainerQuery<'a> {
+	const PEEK_KINDSET: KindSet = ContainerFeature::PEEK_KINDSET.combine(<T![Ident]>::PEEK_KINDSET);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -160,6 +163,9 @@ macro_rules! container_feature {
 apply_container_features!(container_feature);
 
 impl<'a> Peek<'a> for ContainerFeature<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen, Kind::Function]);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

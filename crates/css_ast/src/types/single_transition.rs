@@ -22,6 +22,11 @@ pub struct SingleTransition<'a> {
 }
 
 impl<'a> Peek<'a> for SingleTransition<'a> {
+	const PEEK_KINDSET: KindSet = <NoneOr<SingleTransitionProperty>>::PEEK_KINDSET
+		.combine(EasingFunction::PEEK_KINDSET)
+		.combine(Time::PEEK_KINDSET);
+
+	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
