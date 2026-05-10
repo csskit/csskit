@@ -51,6 +51,11 @@ impl Span {
 		self.start <= span.start && span.end <= self.end
 	}
 
+	/// Checks if this [Span] overlaps with the given [Span] (i.e. they share at least one byte).
+	pub fn overlaps(&self, span: Span) -> bool {
+		self.start < span.end && span.start < self.end
+	}
+
 	/// Checks if the [Span] has no length.
 	pub const fn is_empty(&self) -> bool {
 		self.start.0 == self.end.0
