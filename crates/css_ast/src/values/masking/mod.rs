@@ -7,6 +7,64 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
+/// Represents the style value for `clip` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#clip).
+///
+/// The clip CSS property sets the visible area of an absolutely positioned element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <rect()> | auto
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#clip
+#[syntax(" <rect()> | auto ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Masking,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clip"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ClipStyleValue;
+
+/// Represents the style value for `clip-path` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#clip-path).
+///
+/// The clip-path CSS property and SVG attribute set the visible area of an element. Everything outside the area will be hidden.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <clip-source> | [ <basic-shape> || <geometry-box> ] | none
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#clip-path
+#[syntax(" <clip-source> | [ <basic-shape> || <geometry-box> ] | none ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Masking,
+    computed_value_type = SpecifiedWithAbsoluteUrls,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clip-path"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum ClipPathStyleValue {}
+
 /// Represents the style value for `clip-rule` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#clip-rule).
 ///
 /// The SVG image format, represented by the <svg> element, creates two-dimensional vector graphics with declarative or scripted interaction and animation.
@@ -36,6 +94,85 @@ use impls::*;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ClipRuleStyleValue {}
+
+/// Represents the style value for `mask` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask).
+///
+/// The mask CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <mask-layer>#
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#mask
+#[syntax(" <mask-layer># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = MaskClip|MaskComposite|MaskImage|MaskMode|MaskOrigin|MaskPosition|MaskRepeat|MaskSize,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MaskStyleValue<'a>;
+
+// /// Represents the style value for `mask-border` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border).
+// ///
+// /// The mask-border CSS property sets how the edges of an element are masked. It is a shorthand for mask-border-outset, mask-border-repeat, mask-border-slice, mask-border-source, and mask-border-width.
+// ///
+// /// The grammar is defined as:
+// ///
+// /// ```text,ignore
+// /// <'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'>
+// /// ```
+// ///
+// /// https://drafts.csswg.org/css-masking-1/#mask-border
+// #[syntax(
+//     " <'mask-border-source'> || <'mask-border-slice'> [ / <'mask-border-width'>? [ / <'mask-border-outset'> ]? ]? || <'mask-border-repeat'> || <'mask-border-mode'> "
+// )]
+// #[derive(
+//     Parse,
+//     Peek,
+//     ToSpan,
+//     ToCursors,
+//     DeclarationMetadata,
+//     SemanticEq,
+//     Debug,
+//     Clone,
+//     PartialEq,
+//     Eq,
+//     PartialOrd,
+//     Ord,
+//     Hash,
+// )]
+// #[declaration_metadata(
+//     initial = "See individual properties",
+//     applies_to = Unknown,
+//     animation_type = Unknown,
+//     longhands = MaskBorderMode|MaskBorderOutset|MaskBorderRepeat|MaskBorderSlice|MaskBorderSource|MaskBorderWidth,
+//     property_group = Masking,
+//     computed_value_type = Unknown,
+//     canonical_order = "per grammar",
+// )]
+// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+// #[cfg_attr(
+//     feature = "css_feature_data",
+//     derive(ToCSSFeature),
+//     css_feature("css.properties.mask-border")
+// )]
+// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+// #[derive(csskit_derives::NodeWithMetadata)]
+// pub struct MaskBorderStyleValue<'a>;
 
 /// Represents the style value for `mask-border-mode` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border-mode).
 ///
@@ -125,6 +262,37 @@ pub struct MaskBorderOutsetStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct MaskBorderRepeatStyleValue;
 
+/// Represents the style value for `mask-border-slice` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border-slice).
+///
+/// The mask-border CSS property sets how the edges of an element are masked. It is a shorthand for mask-border-outset, mask-border-repeat, mask-border-slice, mask-border-source, and mask-border-width.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-image-slice'>
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#mask-border-slice
+#[syntax(" <'border-image-slice'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    percentages = BorderImageArea,
+    shorthand_group = MaskBorder,
+    property_group = Masking,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-border-slice"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MaskBorderSliceStyleValue;
+
 /// Represents the style value for `mask-border-source` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border-source).
 ///
 /// The mask-border CSS property sets how the edges of an element are masked. It is a shorthand for mask-border-outset, mask-border-repeat, mask-border-slice, mask-border-source, and mask-border-width.
@@ -155,6 +323,37 @@ pub struct MaskBorderRepeatStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct MaskBorderSourceStyleValue<'a>;
 
+/// Represents the style value for `mask-border-width` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border-width).
+///
+/// The mask-border CSS property sets how the edges of an element are masked. It is a shorthand for mask-border-outset, mask-border-repeat, mask-border-slice, mask-border-source, and mask-border-width.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-image-width'>
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#mask-border-width
+#[syntax(" <'border-image-width'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    percentages = BorderImageArea,
+    shorthand_group = MaskBorder,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-border-width"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MaskBorderWidthStyleValue;
+
 /// Represents the style value for `mask-clip` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-clip).
 ///
 /// The mask CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
@@ -184,6 +383,96 @@ pub struct MaskBorderSourceStyleValue<'a>;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct MaskClipStyleValue<'a>;
+
+/// Represents the style value for `mask-composite` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-composite).
+///
+/// The mask CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <compositing-operator>#
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#mask-composite
+#[syntax(" <compositing-operator># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "add",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    shorthand_group = Mask,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-composite"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MaskCompositeStyleValue<'a>;
+
+/// Represents the style value for `mask-image` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-image).
+///
+/// The mask CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <mask-reference>#
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#mask-image
+#[syntax(" <mask-reference># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    shorthand_group = Mask,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-image"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MaskImageStyleValue<'a>;
+
+/// Represents the style value for `mask-mode` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-mode).
+///
+/// The mask CSS property (and several longhand properties) partially or completely hides an element according to the shape and depth of an image.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <masking-mode>#
+/// ```
+///
+/// https://drafts.csswg.org/css-masking-1/#mask-mode
+#[syntax(" <masking-mode># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "match-source",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    shorthand_group = Mask,
+    property_group = Masking,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-mode"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MaskModeStyleValue<'a>;
 
 /// Represents the style value for `mask-origin` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-origin).
 ///

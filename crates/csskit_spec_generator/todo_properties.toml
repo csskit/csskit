@@ -79,3 +79,6 @@ properties = ["animation-range-center"]
 
 [motion]
 properties = ["offset"]
+
+[masking]
+properties = ["mask-border"]

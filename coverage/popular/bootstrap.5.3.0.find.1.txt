@@ -62,7 +62,6 @@ coverage/popular/bootstrap.5.3.0.css
 6814:3:  content: "";
 6830:3:  animation: placeholder-glow 2s ease-in-out infinite;
 6839:3:  -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
-6840:3:  mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
 6843:3:  animation: placeholder-wave 2s linear infinite;
 6855:3:  content: "";
 6860:3:  background-color: RGBA(13, 110, 253, var(--bs-bg-opacity, 1)) !important;

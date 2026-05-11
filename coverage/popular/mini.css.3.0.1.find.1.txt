@@ -26,7 +26,6 @@ coverage/popular/mini.css.3.0.1.css
 1578:3:  clip: rect(0 0 0 0);
 1579:3:  -webkit-clip-path: inset(100%);
 1580:3:  clip-path: inset(100%);
-1596:3:  clip: auto;
 1597:3:  -webkit-clip-path: inset(0%);
 1598:3:  clip-path: inset(0%);
 1602:3:  content: '';
@@ -42,7 +41,6 @@ coverage/popular/mini.css.3.0.1.css
 1758:3:  clip: rect(0 0 0 0);
 1759:3:  -webkit-clip-path: inset(100%);
 1760:3:  clip-path: inset(100%);
-1781:3:  clip: auto;
 1782:3:  -webkit-clip-path: inset(0%);
 1783:3:  clip-path: inset(0%);
 1903:3:  animation: spinner-donut-anim 1.2s linear infinite;

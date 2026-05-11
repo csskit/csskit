@@ -115,6 +115,8 @@ impl DefType {
 					| "FontFamilyName"  // may contain allocating elements
 				| "VoiceFamilyName"  // may contain allocating elements
 				| "BgImage"  // contains Image<'a>
+				| "MaskLayer"  // contains Image<'a>
+				| "MaskReference"  // contains Image<'a>
 				| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
 				| "DynamicRangeLimitMixFunction"  // contains allocating params
 				// Additional types that reference allocating types
@@ -347,6 +349,7 @@ impl Def {
 						| "EventTriggerName"
 						| "EventTriggerSource"
 						| "ListStyleImage" | "ListStyleType"
+						| "MaskBorderSource"
 						| "OutlineColor" | "PointerTimelineAxis"
 						| "PointerTimelineName"
 						| "PositionTryFallbacks"

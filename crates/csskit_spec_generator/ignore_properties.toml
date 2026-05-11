@@ -13,47 +13,47 @@ properties = ["shape-inside"]
 
 [backgrounds]
 properties = [
-    # https://drafts.csswg.org/css-backgrounds-4/#background-layers
-    # The name of this property is discussed in issue https://github.com/w3c/csswg-drafts/issues/9083.
-    "background-tbd",
-    # https://drafts.csswg.org/css-borders-4/#intro
-    #  This module is currently maintained as a diff against the parts related to borders and box
-    #  decorations of CSS Backgrounds and Borders Module Level 3 [CSS3BG]. We will fold in the text
-    #  once it's all formatted up and in CR again, as this will reduce the effort of keeping them in
-    #  sync (source diffs will be accurate in reflecting the differences).
-    # (IOW these are all defined in CSS Borders 4)
-    "border-color",
-    "border-top-color",
-    "border-right-color",
-    "border-bottom-color",
-    "border-left-color",
-    "border-style",
-    "border-top-style",
-    "border-right-style",
-    "border-bottom-style",
-    "border-left-style",
-    "border-width",
-    "border-top-width",
-    "border-right-width",
-    "border-bottom-width",
-    "border-left-width",
-    "border",
-    "border-top",
-    "border-right",
-    "border-bottom",
-    "border-left",
-    "border-radius",
-    "border-top-left-radius",
-    "border-top-right-radius",
-    "border-bottom-left-radius",
-    "border-bottom-right-radius",
-    "border-image",
-    "border-image-slice",
-    "border-image-source",
-    "border-image-outset",
-    "border-image-repeat",
-    "border-image-width",
-    "box-shadow",
+  # https://drafts.csswg.org/css-backgrounds-4/#background-layers
+  # The name of this property is discussed in issue https://github.com/w3c/csswg-drafts/issues/9083.
+  "background-tbd",
+  # https://drafts.csswg.org/css-borders-4/#intro
+  #  This module is currently maintained as a diff against the parts related to borders and box
+  #  decorations of CSS Backgrounds and Borders Module Level 3 [CSS3BG]. We will fold in the text
+  #  once it's all formatted up and in CR again, as this will reduce the effort of keeping them in
+  #  sync (source diffs will be accurate in reflecting the differences).
+  # (IOW these are all defined in CSS Borders 4)
+  "border-color",
+  "border-top-color",
+  "border-right-color",
+  "border-bottom-color",
+  "border-left-color",
+  "border-style",
+  "border-top-style",
+  "border-right-style",
+  "border-bottom-style",
+  "border-left-style",
+  "border-width",
+  "border-top-width",
+  "border-right-width",
+  "border-bottom-width",
+  "border-left-width",
+  "border",
+  "border-top",
+  "border-right",
+  "border-bottom",
+  "border-left",
+  "border-radius",
+  "border-top-left-radius",
+  "border-top-right-radius",
+  "border-bottom-left-radius",
+  "border-bottom-right-radius",
+  "border-image",
+  "border-image-slice",
+  "border-image-source",
+  "border-image-outset",
+  "border-image-repeat",
+  "border-image-width",
+  "box-shadow",
 ]
 
 [content]
@@ -67,49 +67,54 @@ properties = ["string-set"]
 # https://drafts.csswg.org/css-logical-1/
 # These are extended definitions which are already defined in their respective specifications
 properties = [
-    # https://drafts.csswg.org/css-borders-4/
-    "border-block",
-    "border-block-color",
-    "border-block-end",
-    "border-block-end-color",
-    "border-block-end-style",
-    "border-block-end-width",
-    "border-block-start",
-    "border-block-start-color",
-    "border-block-start-style",
-    "border-block-start-width",
-    "border-block-style",
-    "border-block-width",
-    "border-end-end-radius",
-    "border-end-start-radius",
-    "border-inline",
-    "border-inline-color",
-    "border-inline-end",
-    "border-inline-end-color",
-    "border-inline-end-style",
-    "border-inline-end-width",
-    "border-inline-start",
-    "border-inline-start-color",
-    "border-inline-start-style",
-    "border-inline-start-width",
-    "border-inline-style",
-    "border-inline-width",
-    "border-start-end-radius",
-    "border-start-start-radius",
-    # https://drafts.csswg.org/css-position-4/
-    "inset",
-    "inset-block",
-    "inset-block-start",
-    "inset-block-end",
-    "inset-inline",
-    "inset-inline-end",
-    "inset-inline-start",
+  # https://drafts.csswg.org/css-borders-4/
+  "border-block",
+  "border-block-color",
+  "border-block-end",
+  "border-block-end-color",
+  "border-block-end-style",
+  "border-block-end-width",
+  "border-block-start",
+  "border-block-start-color",
+  "border-block-start-style",
+  "border-block-start-width",
+  "border-block-style",
+  "border-block-width",
+  "border-end-end-radius",
+  "border-end-start-radius",
+  "border-inline",
+  "border-inline-color",
+  "border-inline-end",
+  "border-inline-end-color",
+  "border-inline-end-style",
+  "border-inline-end-width",
+  "border-inline-start",
+  "border-inline-start-color",
+  "border-inline-start-style",
+  "border-inline-start-width",
+  "border-inline-style",
+  "border-inline-width",
+  "border-start-end-radius",
+  "border-start-start-radius",
+  # https://drafts.csswg.org/css-position-4/
+  "inset",
+  "inset-block",
+  "inset-block-start",
+  "inset-block-end",
+  "inset-inline",
+  "inset-inline-end",
+  "inset-inline-start",
 ]
 
 [multicol]
 # https://drafts.csswg.org/css-multicol/
 # Moved the column-rule-* properties to [CSS-GAP-1].
-properties = ["column-rule", "column-rule-width", "column-rule-color", "column-rule-style"]
+properties = [
+  "column-rule",
+  "column-rule-width",
+  "column-rule-color",
+  "column-rule-style",
+]
 
 [flexbox]
 # https://drafts.csswg.org/css-flexbox-1/
@@ -136,30 +141,11 @@ properties = ["src"]
 # speak-as is defined in both counter-styles and speech specs. Speech is the canonical location.
 properties = ["speak-as"]
 
-[masking]
-# TODO: These properties use complex syntax or reference types that don't exist yet:
-# - clip-path uses || combinator: <clip-source> | [ <basic-shape> || <geometry-box> ] | none
-# - mask-border-width uses alternatives in repetition: [ <length-percentage> | <number> | auto ]{1,4}
-# - clip uses <rect()> which requires RectFunction type
-# - mask uses <mask-layer># which requires MaskLayer type
-# - mask-composite uses <compositing-operator># which requires CompositingOperator type
-# - mask-image uses <mask-reference># which requires MaskReference type
-# - mask-mode uses <masking-mode># which requires MaskingMode type
-# - mask-border-slice generates internal keywords type that conflicts
-# - mask-border references mask-border-width which is excluded
-properties = [
-    "clip",
-    "clip-path",
-    "mask",
-    "mask-border",
-    "mask-border-slice",
-    "mask-border-width",
-    "mask-composite",
-    "mask-image",
-    "mask-mode",
-]
-
 [shaders]
-# TODO: These properties depend on types that don't exist yet (filter-margin-*)
-# They should be re-enabled once the necessary types are properly defined
-properties = ["filter-margin-top", "filter-margin-right", "filter-margin-bottom", "filter-margin-left"]
+# These properties were dropped from https://www.w3.org/TR/filter-effects-1/
+properties = [
+  "filter-margin-top",
+  "filter-margin-right",
+  "filter-margin-bottom",
+  "filter-margin-left",
+]

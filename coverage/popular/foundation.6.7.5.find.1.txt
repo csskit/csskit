@@ -155,7 +155,6 @@ coverage/popular/foundation.6.7.5.css
 5387:5:    content: '';
 5403:5:    content: '';
 5577:3:  clip: rect(0, 0, 0, 0) !important;
-5586:3:  clip: auto !important;
 5656:3:  content: ' ';
 5859:3:  -webkit-transform-origin: top;
 5860:7:      -ms-transform-origin: top;
