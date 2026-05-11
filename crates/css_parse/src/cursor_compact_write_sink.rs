@@ -213,4 +213,12 @@ mod test {
 		assert_format!("foo  ", "foo");
 		assert_format!("foo; ", "foo;");
 	}
+
+	#[test]
+	fn test_preserves_comment_absence_in_custom_properties() {
+		// Issue #770: Comments in custom properties should not be replaced by whitespace
+		// because `--bar: a/**/b` and `--bar: a b` are different component values
+		assert_format!("div{--bar:a/**/b}", "div{--bar:a/**/b}");
+		assert_format!("div { --bar: a/**/b }", "div{--bar:a/**/b}");
+	}
 }
