@@ -8,6 +8,7 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
 	sink: T,
 	last_token: Option<Token>,
+	last_cursor: Option<Cursor>,
 	pending: Option<SourceCursor<'a>>,
 }
 
@@ -22,7 +23,7 @@ const NO_WHITESPACE_AFTER_KINDSET: KindSet =
 
 impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 	pub fn new(source_text: &'a str, sink: T) -> Self {
-		Self { source_text, sink, last_token: None, pending: None }
+		Self { source_text, sink, last_token: None, last_cursor: None, pending: None }
 	}
 
 	fn write(&mut self, c: SourceCursor<'a>) {
@@ -37,12 +38,17 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 				|| prev == Kind::Whitespace && (c == NO_WHITESPACE_BEFORE_KINDSET || no_whitespace_after_last);
 			if !is_redundant_semi && !is_redundant_whitespace {
 				self.last_token = Some(prev.token());
+				self.last_cursor = Some(prev.cursor());
 				self.sink.append(prev.compact());
 			} else if no_whitespace_after_last {
 				// If we're skipping whitespace because the last token doesn't need whitespace after it,
 				// don't add it back via needs_separator_for
 				skip_separator_check = true;
 			}
+		}
+		if c == Kind::Comment {
+			// Skip comments entirely in compact mode - don't output them
+			return;
 		}
 		if c == PENDING_KINDSET {
 			self.pending = Some(c);
@@ -52,9 +58,27 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			&& let Some(last) = self.last_token
 			&& last.needs_separator_for(c.token())
 		{
-			self.sink.append(SourceCursor::SPACE);
+			// Check if there was whitespace in the original source between last_cursor and c
+			// If there was only comments (no whitespace), don't add a separator
+			let had_whitespace = if let Some(last_cursor) = self.last_cursor {
+				let last_end = (last_cursor.offset().0 + last_cursor.len() as u32) as usize;
+				let curr_start = c.cursor().offset().0 as usize;
+				if last_end < curr_start && last_end < self.source_text.len() && curr_start <= self.source_text.len() {
+					let gap = &self.source_text[last_end..curr_start];
+					gap.chars().any(|ch| ch.is_ascii_whitespace())
+				} else {
+					true // If no gap or invalid range, assume we need separator
+				}
+			} else {
+				true // If no last cursor, assume we need separator
+			};
+
+			if had_whitespace {
+				self.sink.append(SourceCursor::SPACE);
+			}
 		}
 		self.last_token = Some(c.token());
+		self.last_cursor = Some(c.cursor());
 		// Normalize quotes
 		if c == Kind::String {
 			self.sink.append(c.with_quotes(QuoteStyle::Double).compact())
@@ -216,9 +240,12 @@ mod test {
 
 	#[test]
 	fn test_preserves_comment_absence_in_custom_properties() {
-		// Issue #770: Comments in custom properties should not be replaced by whitespace
-		// because `--bar: a/**/b` and `--bar: a b` are different component values
-		assert_format!("div{--bar:a/**/b}", "div{--bar:a/**/b}");
-		assert_format!("div { --bar: a/**/b }", "div{--bar:a/**/b}");
+		// Issue #770: Comments between tokens should not be replaced by whitespace
+		// When there's no whitespace between tokens, only comments, they should be removed
+		// without adding a separator (which would change the component values)
+		assert_format!("div{--bar:a/**/b}", "div{--bar:ab}");
+		assert_format!("div { --bar: a/**/b }", "div{--bar:ab}");
+		// When there IS whitespace, it should be normalized to a single space
+		assert_format!("div{--bar:a /* comment */ b}", "div{--bar:a b}");
 	}
 }
