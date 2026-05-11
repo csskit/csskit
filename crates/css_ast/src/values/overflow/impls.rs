@@ -26,7 +26,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockStartStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BlockEllipsisStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<LineClampStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<LineClampStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<WebkitLineClampStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaxLinesStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ContinueStyleValue>(), 16);
@@ -51,6 +51,20 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before links");
 		assert_parse_error!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "1px");
+	}
+
+	#[test]
+	fn test_line_clamp() {
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3");
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3 auto");
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3 -webkit-legacy");
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "auto -webkit-legacy");
+		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3 auto -webkit-legacy");
+		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "-webkit-legacy");
+		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "0");
 	}
 
 	#[test]

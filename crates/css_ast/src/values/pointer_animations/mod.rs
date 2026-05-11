@@ -7,50 +7,32 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `animation-range-center` as defined in [pointer-animations-1](https://drafts.csswg.org/pointer-animations-1/#animation-range-center).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ normal | [ <length-percentage> | <timeline-range-center-subject> <length-percentage>? ] ]#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/pointer-animations-1/#animation-range-center
-// #[syntax(
-//     " [ normal | [ <length-percentage> | <timeline-range-center-subject> <length-percentage>? ] ]# "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     applies_to = Elements,
-//     percentages = Unknown,
-//     property_group = PointerAnimations,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.animation-range-center")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct AnimationRangeCenterStyleValue<'a>;
+/// Represents the style value for `animation-range-center` as defined in [pointer-animations-1](https://drafts.csswg.org/pointer-animations-1/#animation-range-center).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ normal | [ <length-percentage> | <timeline-range-center-subject> <length-percentage>? ] ]#
+/// ```
+///
+/// https://drafts.csswg.org/pointer-animations-1/#animation-range-center
+#[syntax(" [ normal | [ <length-percentage> | <timeline-range-center-subject> <length-percentage>? ] ]# ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    percentages = Unknown,
+    property_group = PointerAnimations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation-range-center"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct AnimationRangeCenterStyleValue<'a>;
 
 /// Represents the style value for `pointer-timeline` as defined in [pointer-animations-1](https://drafts.csswg.org/pointer-animations-1/#pointer-timeline).
 ///

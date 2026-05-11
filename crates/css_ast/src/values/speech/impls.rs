@@ -9,7 +9,6 @@ mod tests {
 		assert_eq!(std::mem::size_of::<VoiceVolumeStyleValue>(), 36);
 		assert_eq!(std::mem::size_of::<VoiceBalanceStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<SpeakStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<SpeakAsStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PauseBeforeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PauseAfterStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PauseStyleValue>(), 32);

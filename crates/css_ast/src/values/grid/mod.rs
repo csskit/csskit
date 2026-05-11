@@ -471,96 +471,64 @@ pub struct GridRowStartStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct GridTemplateAreasStyleValue<'a>;
 
-// /// Represents the style value for `grid-template-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-columns).
-// ///
-// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <track-list> | <auto-track-list> | subgrid <line-name-list>?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-grid-3/#grid-template-columns
-// #[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Grid,
-//     animation_type = Discrete,
-//     percentages = ContentArea,
-//     shorthand_group = Grid,
-//     property_group = Grid,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.grid-template-columns")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum GridTemplateColumnsStyleValue {}
+/// Represents the style value for `grid-template-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-columns).
+///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <track-list> | <auto-track-list> | subgrid <line-name-list>?
+/// ```
+///
+/// https://drafts.csswg.org/css-grid-3/#grid-template-columns
+#[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Grid,
+    animation_type = Discrete,
+    percentages = ContentArea,
+    shorthand_group = Grid,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template-columns"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum GridTemplateColumnsStyleValue {}
 
-// /// Represents the style value for `grid-template-rows` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-rows).
-// ///
-// /// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | <track-list> | <auto-track-list> | subgrid <line-name-list>?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-grid-3/#grid-template-rows
-// #[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     applies_to = Grid,
-//     animation_type = Discrete,
-//     percentages = ContentArea,
-//     shorthand_group = Grid,
-//     property_group = Grid,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.grid-template-rows")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum GridTemplateRowsStyleValue {}
+/// Represents the style value for `grid-template-rows` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template-rows).
+///
+/// CSS grid is a two-dimensional layout system, which lays content out in rows and columns.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | <track-list> | <auto-track-list> | subgrid <line-name-list>?
+/// ```
+///
+/// https://drafts.csswg.org/css-grid-3/#grid-template-rows
+#[syntax(" none | <track-list> | <auto-track-list> | subgrid <line-name-list>? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Grid,
+    animation_type = Discrete,
+    percentages = ContentArea,
+    shorthand_group = Grid,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-template-rows"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum GridTemplateRowsStyleValue {}

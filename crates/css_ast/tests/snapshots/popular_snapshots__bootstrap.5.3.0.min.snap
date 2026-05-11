@@ -69949,7 +69949,7 @@ StyleSheet(
                 offset: SourceOffset(46737),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Ident(Cursor(
                     kind: "Ident",
@@ -70543,7 +70543,7 @@ StyleSheet(
                 offset: SourceOffset(47133),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Ident(Cursor(
                     kind: "Ident",
@@ -74131,7 +74131,7 @@ StyleSheet(
                 offset: SourceOffset(50131),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Ident(Cursor(
                     kind: "Ident",
@@ -74725,7 +74725,7 @@ StyleSheet(
                 offset: SourceOffset(50536),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Ident(Cursor(
                     kind: "Ident",

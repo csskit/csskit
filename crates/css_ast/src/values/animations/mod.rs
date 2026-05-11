@@ -7,50 +7,34 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `animation` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation).
-// ///
-// /// The animation CSS property animates an element's style over time, using keyframes described in @keyframes rules.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <single-animation>#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-animations-2/#animation
-// #[syntax(" <single-animation># ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     applies_to = Elements,
-//     longhands = AnimationDelay|AnimationDirection|AnimationDuration|AnimationFillMode|AnimationIterationCount|AnimationName|AnimationPlayState|AnimationTimeline|AnimationTimingFunction,
-//     property_group = Animations,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.animation")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct AnimationStyleValue<'a>;
+/// Represents the style value for `animation` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation).
+///
+/// The animation CSS property animates an element's style over time, using keyframes described in @keyframes rules.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <single-animation>#
+/// ```
+///
+/// https://drafts.csswg.org/css-animations-2/#animation
+#[syntax(" <single-animation># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    applies_to = Elements,
+    longhands = AnimationDelay|AnimationDirection|AnimationDuration|AnimationFillMode|AnimationIterationCount|AnimationName|AnimationPlayState|AnimationTimeline|AnimationTimingFunction,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct AnimationStyleValue<'a>;
 
 /// Represents the style value for `animation-composition` as defined in [css-animations-2](https://drafts.csswg.org/css-animations-2/#animation-composition).
 ///

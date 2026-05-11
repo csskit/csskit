@@ -204,52 +204,36 @@ pub struct BackgroundImageStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BackgroundOriginStyleValue<'a>;
 
-// /// Represents the style value for `background-position` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position).
-// ///
-// /// The background-position CSS property offsets the initial position of background images relative to the background origin.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <bg-position>#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-backgrounds-4/#background-position
-// #[syntax(" <bg-position># ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0% 0%",
-//     applies_to = Elements,
-//     animation_type = RepeatableList,
-//     percentages = BackgroundPositioningArea,
-//     shorthand_group = Background,
-//     property_group = Backgrounds,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.background-position")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackgroundPositionStyleValue<'a>;
+/// Represents the style value for `background-position` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position).
+///
+/// The background-position CSS property offsets the initial position of background images relative to the background origin.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <bg-position>#
+/// ```
+///
+/// https://drafts.csswg.org/css-backgrounds-4/#background-position
+#[syntax(" <bg-position># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0% 0%",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    percentages = BackgroundPositioningArea,
+    shorthand_group = Background,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackgroundPositionStyleValue<'a>;
 
 // /// Represents the style value for `background-position-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-block).
 // ///

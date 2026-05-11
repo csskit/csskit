@@ -280,52 +280,6 @@ pub enum RestBeforeStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum SpeakStyleValue {}
 
-// /// Represents the style value for `speak-as` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#speak-as).
-// ///
-// /// The speak-as CSS property sets how any element's content is spoken. Not to be confused with the speak-as descriptor of @counter-style at-rules.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | spell-out || digits || [ literal-punctuation | no-punctuation ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-speech-1/#speak-as
-// #[syntax(" normal | spell-out || digits || [ literal-punctuation | no-punctuation ] ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = Speech,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.speak-as")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum SpeakAsStyleValue {}
-
 /// Represents the style value for `voice-balance` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-balance).
 ///
 /// The grammar is defined as:

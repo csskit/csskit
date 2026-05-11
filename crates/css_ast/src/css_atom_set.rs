@@ -2053,6 +2053,7 @@ pub enum CssAtomSet {
 	Stuck,
 	Style,
 	Sub,
+	Subgrid,
 	SubpixelAntialiased,
 	Subset,
 	Subtractive,

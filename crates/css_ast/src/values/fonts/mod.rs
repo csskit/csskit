@@ -213,51 +213,35 @@ pub struct FontLanguageOverrideStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontOpticalSizingStyleValue {}
 
-// /// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
-// ///
-// /// The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | light | dark | <palette-identifier> | <palette-mix()>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-palette
-// #[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = ByComputedValue,
-//     property_group = Fonts,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-palette")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontPaletteStyleValue {}
+/// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
+///
+/// The font-palette CSS property selects a color palette from the font, optionally overriding individual colors in the @font-palette-values at-rule.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | light | dark | <palette-identifier> | <palette-mix()>
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-palette
+#[syntax(" normal | light | dark | <palette-identifier> | <palette-mix()> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = ByComputedValue,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-palette"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum FontPaletteStyleValue {}
 
 /// Represents the style value for `font-size` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size).
 ///

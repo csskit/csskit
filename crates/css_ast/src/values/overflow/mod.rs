@@ -90,51 +90,35 @@ pub enum BlockEllipsisStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ContinueStyleValue {}
 
-// /// Represents the style value for `line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#line-clamp).
-// ///
-// /// The line-clamp CSS property limits the text in a block container to a certain number of lines. The prefixed -webkit-line-clamp is widely supported but only works with -webkit-box-orient: vertical in combination with display: -webkit-box or display: -webkit-inline-box.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-overflow-5/#line-clamp
-// #[syntax(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "none",
-//     inherits = Unknown,
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     property_group = Overflow,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.line-clamp")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct LineClampStyleValue;
+/// Represents the style value for `line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#line-clamp).
+///
+/// The line-clamp CSS property limits the text in a block container to a certain number of lines. The prefixed -webkit-line-clamp is widely supported but only works with -webkit-box-orient: vertical in combination with display: -webkit-box or display: -webkit-inline-box.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy?
+/// ```
+///
+/// https://drafts.csswg.org/css-overflow-5/#line-clamp
+#[syntax(" none | [<integer [1,∞]> || <'block-ellipsis'>] -webkit-legacy? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = Overflow,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-clamp"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct LineClampStyleValue;
 
 /// Represents the style value for `max-lines` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#max-lines).
 ///

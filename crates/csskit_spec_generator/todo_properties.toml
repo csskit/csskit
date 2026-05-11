@@ -2,13 +2,9 @@
 # Once we figure out how to parse them in csskit_proc_macro/src/def.rs, we can
 # remove them from this file and the generator will uncomment them.
 
-[animations]
-properties = ["animation"]
-
 [backgrounds]
 properties = [
   "background",
-  "background-position",
   "background-position-block",
   "background-position-inline",
   "background-position-x",
@@ -25,12 +21,11 @@ properties = ["color-scheme"]
 properties = ["content"]
 
 [fill-stroke]
-properties = ["fill", "fill-image", "stroke", "stroke-image"]
+properties = ["fill", "stroke"]
 
 [fonts]
 properties = [
   "font",
-  "font-palette",
   "font-variant",
   "font-variant-alternates",
   # Font properties with complex grammars that cause panics or use unsupported operators like /
@@ -45,25 +40,20 @@ properties = [
   "src",  # Requires FontSrcList type
 ]
 
-[gcpm]
-properties = ["string-set", "copy-into"]
 
 [grid]
-properties = [
-  "grid",
-  "grid-template",
-  "grid-template-columns",
-  "grid-template-rows",
-]
+properties = ["grid", "grid-template"]
 
 [inline]
 properties = ["initial-letter-align"]
 
 [overflow]
-properties = ["line-clamp", "text-overflow"]
+properties = [
+  "text-overflow",
+]  # FadeFunction stub exists but [alternatives]{1,2} with mixed kw+type hits proc macro bug
 
 [speech]
-properties = ["speak-as", "voice-pitch", "voice-range"]
+properties = ["voice-pitch", "voice-range"]
 
 [transforms]
 properties = ["rotate", "transform-origin"]
@@ -73,9 +63,6 @@ properties = ["nav-down", "nav-left", "nav-right", "nav-up"]
 
 [variables]
 properties = ["--*"]
-
-[pointer-animations]
-properties = ["animation-range-center"]
 
 [motion]
 properties = ["offset"]

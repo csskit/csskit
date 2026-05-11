@@ -9,6 +9,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<FootnoteDisplayStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FootnotePolicyStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<RunningStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<StringSetStyleValue>(), 32);
 	}
 
 	#[test]
@@ -21,6 +22,15 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FootnotePolicyStyleValue, "block");
 		assert_parse!(CssAtomSet::ATOMS, RunningStyleValue, "myelement");
 		assert_parse!(CssAtomSet::ATOMS, RunningStyleValue, "header");
+	}
+
+	#[test]
+	fn test_string_set() {
+		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "header contents");
+		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "header string(chapter)");
+		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "header contents, footer string(chapter)");
+		assert_parse_error!(CssAtomSet::ATOMS, StringSetStyleValue, "");
 	}
 
 	#[test]

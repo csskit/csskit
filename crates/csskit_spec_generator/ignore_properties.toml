@@ -141,6 +141,10 @@ properties = ["src"]
 # speak-as is defined in both counter-styles and speech specs. Speech is the canonical location.
 properties = ["speak-as"]
 
+[speech]
+# speak-as defined in both counter-styles and gcpm
+properties = ["speak-as"]
+
 [shaders]
 # These properties were dropped from https://www.w3.org/TR/filter-effects-1/
 properties = [
