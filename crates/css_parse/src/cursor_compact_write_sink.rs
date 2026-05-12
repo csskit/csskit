@@ -248,4 +248,27 @@ mod test {
 		// When there IS whitespace, it should be normalized to a single space
 		assert_format!("div{--bar:a /* comment */ b}", "div{--bar:a b}");
 	}
+
+	#[test]
+	fn test_edge_cases_multiple_comments() {
+		// Multiple consecutive comments without whitespace
+		assert_format!("div{--bar:a/**//**/b}", "div{--bar:ab}");
+		// Multiple comments with whitespace
+		assert_format!("div{--bar:a /* x */ /* y */ b}", "div{--bar:a b}");
+		// Comment at start of rule
+		assert_format!("div{/*comment*/--bar:a}", "div{--bar:a}");
+		// Comment at end of value
+		assert_format!("div{--bar:a/*comment*/}", "div{--bar:a}");
+		// Whitespace, comment, whitespace
+		assert_format!("div{--bar:a  /**/  b}", "div{--bar:a b}");
+	}
+
+	#[test]
+	fn test_style_query_matching() {
+		// Real-world case from issue #770: style queries must match minified custom properties
+		// If we minify --bar:a/**/b to --bar:a b (with space), it won't match @container style(--bar:a/**/b)
+		assert_format!("@container style(--bar:a/**/b){}", "@container style(--bar:ab){}");
+		// With whitespace, both should normalize to space
+		assert_format!("@container style(--bar:a /* x */ b){}", "@container style(--bar:a b){}");
+	}
 }
