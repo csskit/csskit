@@ -247,8 +247,8 @@ mod test {
 		assert_format!("div { --bar: a/**/b }", "div{--bar:a/**/b}");
 		// Multiple consecutive comments — only first kept (second is redundant after comment)
 		assert_format!("div{--bar:a/**//**/b}", "div{--bar:a/**/b}");
-		// Style queries — same rules
-		assert_format!("@container style(--bar:a/**/b){}", "@container style(--bar:a/**/b){}");
+		// Style queries — same rules; comment content is normalized to empty
+		assert_format!("@container style(--bar:a/*some comment text*/b){}", "@container style(--bar:a/**/b){}");
 	}
 
 	#[test]
