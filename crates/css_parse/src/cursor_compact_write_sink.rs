@@ -31,31 +31,13 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			return;
 		}
 
-		// Rule 1: Comment arrives — store or drop.
-		// Don't flush pending whitespace yet; it stays pending until a non-comment token
-		// decides whether the whitespace (or the comment) is needed.
 		if c == Kind::Comment {
-			// Determine the effective last token (pending whitespace counts as emitted whitespace
-			// for purposes of deciding whether a comment is needed)
-			let effective_last = if self.pending.is_some_and(|p| p == Kind::Whitespace) {
-				Some(Kind::Whitespace)
-			} else {
-				self.last_token.map(|t| t.kind())
-			};
-			if effective_last.is_some_and(|k| NO_WHITESPACE_AFTER_KINDSET.contains(k)) {
-				// Comment after a token that doesn't want whitespace after — drop
-				return;
+			if self.pending.is_none()
+				&& self.pending_comment.is_none()
+				&& self.last_token.is_some_and(|t| t != NO_WHITESPACE_AFTER_KINDSET)
+			{
+				self.pending_comment = Some(c);
 			}
-			if effective_last.is_some_and(|k| k == Kind::Whitespace) {
-				// Whitespace already separates — comment is redundant, drop
-				return;
-			}
-			if effective_last.is_none() {
-				// Comment at start of stream — drop
-				return;
-			}
-			// Store for potential replay as separator
-			self.pending_comment = Some(c);
 			return;
 		}
 
@@ -81,14 +63,11 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			}
 		}
 
-		// Rule 2: Non-comment arrives with stored comment — replay or discard
 		if let Some(comment) = self.pending_comment.take() {
 			if c != NO_WHITESPACE_BEFORE_KINDSET {
-				// Comment acts as separator — replay it
 				self.last_token = Some(comment.token());
-				self.sink.append(comment.compact());
+				self.sink.append(SourceCursor::EMPTY_COMMENT);
 			}
-			// Otherwise discard the comment
 		}
 
 		if c == PENDING_KINDSET {
