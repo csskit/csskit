@@ -1,3 +1,63 @@
+## [0.0.22] - 2026-05-15
+
+### Other Changes
+- Chore(deps): update rust crate indexmap to v2.13.1 (#1108) ([#1108](https://github.com/csskit/csskit/pull/1108))
+- Chore(deps): update rust crate indexmap to v2.14.0 (#1109) ([#1109](https://github.com/csskit/csskit/pull/1109))
+
+
+### Chromashift
+- chromashift/csskit_transform: Round fractional colour channels to perceptually safe values (#1092) ([#1092](https://github.com/csskit/csskit/pull/1092))
+
+
+### Css_ast
+- css_ast: implement corner-*, whites-pace, text-emphasis(-style), voice-volume (#1084) ([#1084](https://github.com/csskit/csskit/pull/1084))
+- css_ast: Implement FontVariant* properties and sub-types (#1086) ([#1086](https://github.com/csskit/csskit/pull/1086))
+- csskit_proc_macro: use Either<> type for 2-type Alternatives (#1089) ([#1089](https://github.com/csskit/csskit/pull/1089))
+- css_ast: implement BorderColor, BorderImageSlice, BorderImageWidth (#1090) ([#1090](https://github.com/csskit/csskit/pull/1090))
+- css_ast: Implement lots more properties (#1091) ([#1091](https://github.com/csskit/csskit/pull/1091))
+- css_ast: Uncomment BorderShape, OffsetPath, ShapeInside, ShapeOutside (#1093) ([#1093](https://github.com/csskit/csskit/pull/1093))
+- css_parse/css_ast: Use PEEK_KINDSET alot more consistently (#1094) ([#1094](https://github.com/csskit/csskit/pull/1094))
+- css_ast: Implement a bunch of vendor prefixed style values (#1096) ([#1096](https://github.com/csskit/csskit/pull/1096))
+- css_ast: Add vendor prefix display values (#1097) ([#1097](https://github.com/csskit/csskit/pull/1097))
+- css_ast: Implement z-index (#1098) ([#1098](https://github.com/csskit/csskit/pull/1098))
+- css_ast: Add vendor prefixed value keywords (#1101) ([#1101](https://github.com/csskit/csskit/pull/1101))
+- css_ast: Uncomment clip/clip-path/mask/mask-image/mask-mode/mask-border-slice (#1110) ([#1110](https://github.com/csskit/csskit/pull/1110))
+- css_ast: Unlock more properties by stubbing types (#1111) ([#1111](https://github.com/csskit/csskit/pull/1111))
+
+
+### Css_feature_data
+- Regenerate css_ast/src/values from csswg drafts (#1102) ([#1102](https://github.com/csskit/csskit/pull/1102))
+
+
+### Css_lexer
+- css_parse: Add Either<Left, Right> (#1088) ([#1088](https://github.com/csskit/csskit/pull/1088))
+- css_lexer: Add Span.overlaps (#1095) ([#1095](https://github.com/csskit/csskit/pull/1095))
+
+
+### Css_value_definition_parser
+- css_value_definition_parser: Optimize Auto Number/Percentage or LengthPercentage/Number cases (#1087) ([#1087](https://github.com/csskit/csskit/pull/1087))
+- css_value_definition_parser: Ensure dash prefixed idents are properly emitted (#1099) ([#1099](https://github.com/csskit/csskit/pull/1099))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1103) ([#1103](https://github.com/csskit/csskit/pull/1103))
+- csskit: Improve messaging for check commands with missing sheets (#1113) ([#1113](https://github.com/csskit/csskit/pull/1113))
+
+
+### Csskit-linux-x64
+- packages: remove accidentally comitted bin (#1079) ([#1079](https://github.com/csskit/csskit/pull/1079))
+
+
+### Csskit_proc_macro
+- csskit_proc_macro: Auto generate name for Combinator of Alternatives (#1085) ([#1085](https://github.com/csskit/csskit/pull/1085))
+- csskit_proc_macro: Ensure dash prefixed idents are properly emitted (#1100) ([#1100](https://github.com/csskit/csskit/pull/1100))
+
+
+### Csskit_vscode
+- vscode: bump version (#1082) ([#1082](https://github.com/csskit/csskit/pull/1082))
+- Release csskit vscode extension v1.0.7 (#1083) ([#1083](https://github.com/csskit/csskit/pull/1083))
+- chore(deps): update dependency oxlint to v1.63.0 (#1106) ([#1106](https://github.com/csskit/csskit/pull/1106))
+
 ## [0.0.21] - 2026-05-08
 
 ### Other Changes
@@ -68,6 +128,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#959) ([#959](https://github.com/csskit/csskit/pull/959))
+- Release v0.0.21 (#952) ([#952](https://github.com/csskit/csskit/pull/952))
 
 
 ### Csskit_derives
@@ -118,6 +179,7 @@
 - chore(deps): update dependency oxlint to v1.61.0 (#1005) ([#1005](https://github.com/csskit/csskit/pull/1005))
 - chore(deps): update dependency oxlint to v1.62.0 (#1049) ([#1049](https://github.com/csskit/csskit/pull/1049))
 - chore(deps): update dependency @types/vscode to v1.118.0 (#1048) ([#1048](https://github.com/csskit/csskit/pull/1048))
+- Release csskit vscode extension v1.0.5 (#1007) ([#1007](https://github.com/csskit/csskit/pull/1007))
 
 
 ### Csskit_wasm
