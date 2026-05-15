@@ -34,10 +34,6 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 				break;
 			}
 			if let Some(mut value) = p.parse_if_peek::<ComponentValue>()? {
-				// Only flag `EnforceBefore` on Delims that are also flanked by whitespace on the
-				// trailing side (EnforceAfter set by `ComponentValue::parse`). Single-flanked
-				// Delims like `.` in `} .foo{}` shouldn't force whitespace preservation in the
-				// sink.
 				if let ComponentValue::Delim(d) = value
 					&& last_was_whitespace
 					&& d.associated_whitespace().contains(AssociatedWhitespaceRules::EnforceAfter)

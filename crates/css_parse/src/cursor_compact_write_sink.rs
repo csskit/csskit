@@ -33,11 +33,6 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			self.pending = None;
 			let is_redundant_semi = prev == Kind::Semicolon
 				&& (c == REDUNDANT_SEMI_KINDSET || self.last_token.is_some_and(|c| c == REDUNDANT_SEMI_KINDSET));
-			// Honor `AssociatedWhitespaceRules` set by upstream parsers: if the last token
-			// requires whitespace after it or the next token requires whitespace before it,
-			// the pending whitespace must be preserved even when the surrounding token kinds
-			// would otherwise allow trimming. This is how spec-required whitespace (e.g.
-			// around `+`/`-` in `calc()`) survives minification.
 			let prev_is_whitespace = prev == Kind::Whitespace;
 			let whitespace_required = prev_is_whitespace
 				&& (self.last_token.is_some_and(|t| t == AssociatedWhitespaceRules::EnforceAfter)
@@ -180,14 +175,6 @@ mod test {
 
 	#[test]
 	fn test_preserves_whitespace_around_calc_sum_operators() {
-		// The CSS spec requires whitespace around `+` and `-` in calc() <calc-sum>; without
-		// it, WebKit treats the expression as invalid. See:
-		// https://www.w3.org/TR/css-values-4/#calc-syntax
-		//
-		// The sink honors `AssociatedWhitespaceRules` generically: any Delim that was flanked
-		// by whitespace on both sides in the source keeps both surrounding spaces. This
-		// preserves the spec-critical spacing around `+`/`-` and, as a side effect, around
-		// `*`/`/` too (slightly less aggressive minification, but still valid CSS).
 		assert_format!("calc(var(--col-gap) / 2 + var(--date-col))", "calc(var(--col-gap) / 2 + var(--date-col))");
 		assert_format!("calc((var(--col-gap) / -2) - 5px)", "calc((var(--col-gap) / -2) - 5px)");
 		assert_format!("calc(var(--x) + 1px)", "calc(var(--x) + 1px)");
