@@ -140,7 +140,7 @@ FAIL duplicates/0012
 +a{color:red;font-size:1rem}
 
 FAIL duplicates/0013
--a{--color:blue;--color:red !important}
+-a{--color:blue;--color:red!important}
 +a{--color:red !important}
 
 FAIL duplicates/0014
@@ -331,7 +331,7 @@ FAIL scope/0001
 +@scope(.card){.title{color:red}}
 
 FAIL scope/0002
--@scope (.card)to (.card .content){a{color:red}}
+-@scope (.card)to (.card.content){a{color:red}}
 +@scope(.card)to (.card .content){a{color:red}}
 
 FAIL scope/0003
@@ -766,7 +766,7 @@ FAIL values/0013
 +a{background:linear-gradient(45deg,#111,#999)}
 
 FAIL values/0014
--a{width:calc(calc(100% - 20px)+ 10px)}
+-a{width:calc(calc(100% - 20px) + 10px)}
 +a{width:calc(100% - 10px)}
 
 FAIL values/0015
@@ -778,7 +778,7 @@ FAIL values/0016
 +a{width:100px}
 
 FAIL values/0017
--a{width:calc(((75.37% - 63.5px)- 900px)+ (2 * 100px))}
+-a{width:calc(((75.37% - 63.5px) - 900px) + (2 * 100px))}
 +a{width:calc(75.37% - 763.5px)}
 
 FAIL values/0019
@@ -870,7 +870,7 @@ FAIL values/0042
 +a{width:50px}
 
 FAIL values/0043
--a{width:calc(calc(10px + 20px)+ calc(30px + 40px))}
+-a{width:calc(calc(10px + 20px) + calc(30px + 40px))}
 +a{width:100px}
 
 FAIL values/0044
