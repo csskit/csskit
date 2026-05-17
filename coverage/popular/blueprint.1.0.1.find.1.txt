@@ -2,7 +2,6 @@
 ---
 coverage/popular/blueprint.1.0.1.css
 39:3:  background: white;
-58:58:blockquote:before, blockquote:after, q:before, q:after { content: ''; }
 80:3:  background: #fff;
 131:15:pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
 159:17:thead th      { background: #c3d9ff; }
@@ -19,4 +18,3 @@ coverage/popular/blueprint.1.0.1.css
 514:3:  background: #e5eCf9;
 519:3:  background: #ddd;
 530:3:  background: #fff;
-541:3:  content: "\0020";

@@ -8519,20 +8519,11 @@ StyleSheet(
                 offset: SourceOffset(7984),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(7985),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(7986),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(7986),
+                len: 4,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -8592,20 +8583,11 @@ StyleSheet(
                 offset: SourceOffset(8015),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8016),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(8017),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: r#None(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(8017),
+                len: 4,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -9676,20 +9658,13 @@ StyleSheet(
                 offset: SourceOffset(8765),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8766),
-                    len: 1,
-                  )),
-                  String(Cursor(
-                    kind: "String",
-                    offset: SourceOffset(8767),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: ContentList(ContentList([
+                String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(8767),
+                  len: 7,
+                ))),
+              ]), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -9782,20 +9757,13 @@ StyleSheet(
                 offset: SourceOffset(8815),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8816),
-                    len: 1,
-                  )),
-                  String(Cursor(
-                    kind: "String",
-                    offset: SourceOffset(8817),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: ContentList(ContentList([
+                String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(8817),
+                  len: 7,
+                ))),
+              ]), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -9888,20 +9856,13 @@ StyleSheet(
                 offset: SourceOffset(8865),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(8866),
-                    len: 1,
-                  )),
-                  String(Cursor(
-                    kind: "String",
-                    offset: SourceOffset(8867),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: ContentList(ContentList([
+                String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(8867),
+                  len: 7,
+                ))),
+              ]), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -1,5 +1,3 @@
 :unknown
 ---
-coverage/popular/reset.2.0.css
-42:2:	content: '';
-43:2:	content: none;
+

@@ -10883,20 +10883,13 @@ StyleSheet(
                 offset: SourceOffset(9605),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(9606),
-                    len: 1,
-                  )),
-                  String(Cursor(
-                    kind: "String",
-                    offset: SourceOffset(9607),
-                    len: 3,
-                  )),
-                ],
-              )),
+              value: ContentList(ContentList([
+                String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(9607),
+                  len: 3,
+                ))),
+              ]), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

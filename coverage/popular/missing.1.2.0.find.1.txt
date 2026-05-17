@@ -4,14 +4,12 @@ coverage/popular/missing.1.2.0.css
 40:3:  fill: currentColor;
 1:1:/* src/core/sanitize.css */
 418:5:    background: none;
-498:5:    content: "";
 623:3:  background: none;
 734:3:  color-scheme: light;
 961:3:  background: none;
 1:1:/* src/core/sanitize.css */
 1028:6:    }
 1:1:/* src/core/sanitize.css */
-1100:9:        content: "";
 1129:5:    background-position: left;
 1186:3:  background: black;
 1188:3:  animation: bg 2s;
@@ -20,7 +18,6 @@ coverage/popular/missing.1.2.0.css
 1263:5:    grid-template-columns: 25ch auto;
 1294:5:    display: inline list-item;
 1307:1:chip {
-1381:5:    content: "";
 1385:5:    background: currentcolor;
 1403:3:  background: none;
 1406:3:  box-shadow: none;
@@ -32,7 +29,6 @@ coverage/popular/missing.1.2.0.css
 1466:5:    box-shadow: none;
 1469:5:    box-shadow: none;
 1535:3:  grid-template-columns: repeat(2, 1rem);
-1540:5:    content: "";
 1751:5:    color-scheme: dark;
 1754:5:    color-scheme: light;
 1757:5:    color-scheme: light dark;
@@ -40,8 +36,6 @@ coverage/popular/missing.1.2.0.css
 1779:16:    @supports (break-after: avoid-column) {
 2088:5:    color-scheme: light;
 2091:3:  role[menuitem] {
-2155:5:    content: " (" attr(href) ")";
-2159:5:    content: " (" attr(title) ")";
 2210:3:  clip: rect(0 0 0 0);
 2211:3:  clip-path: inset(50%);
 1:1:/* src/core/sanitize.css */

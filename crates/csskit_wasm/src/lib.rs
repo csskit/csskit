@@ -201,7 +201,7 @@ mod tests {
 		let source = r#".a { content: "foo"; }"#;
 		let options = FormatOptions { quote_style: Some(QuoteStyleOption::Single), ..FormatOptions::default() };
 		let output = format_with_options(source, options).expect("format should succeed");
-		assert!(output.contains("content: 'foo'"));
+		assert!(output.contains("content:'foo'"));
 	}
 }
 

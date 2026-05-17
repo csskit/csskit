@@ -1,7 +1,6 @@
 :unknown
 ---
 coverage/popular/bootstrap.4.6.2.css
-470:3:  content: "\2014\00A0";
 2036:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 2080:3:  text-shadow: 0 0 0 #495057;
 2266:3:  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
@@ -49,31 +48,19 @@ coverage/popular/bootstrap.4.6.2.css
 3081:3:  box-shadow: 0 0 0 0.2rem rgba(248, 249, 250, 0.5);
 3096:3:  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
 3113:3:  box-shadow: 0 0 0 0.2rem rgba(52, 58, 64, 0.5);
-3223:3:  content: "";
-3319:3:  content: "";
-3342:3:  content: "";
-3369:3:  content: "";
-3380:3:  content: "";
 3579:3:  clip: rect(0, 0, 0, 0);
 3824:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-3859:3:  content: "";
-3871:3:  content: "";
 3872:3:  background: 50% / 50% 50% no-repeat;
 3919:3:  pointer-events: all;
 3961:3:  background: #fff url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='5' viewBox='0 0 4 5'%3e%3cpath fill='%23343a40' d='M2 0L0 2h4zm0 5L0 3h4z'/%3e%3c/svg%3e") right 0.75rem center/8px 10px no-repeat;
 3972:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 3997:3:  text-shadow: 0 0 0 #495057;
 4036:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
-4045:3:  content: "Browse";
-4049:3:  content: attr(data-browse);
-4080:3:  content: "Browse";
 4101:3:  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 4105:3:  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 4109:3:  box-shadow: 0 0 0 1px #fff, 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 4325:3:  background: none;
-4452:3:  content: "";
 4453:3:  background: 50% / 100% 100% no-repeat;
-5050:3:  content: "/";
 5095:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
 5206:3:  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
 5221:3:  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
@@ -93,18 +80,10 @@ coverage/popular/bootstrap.4.6.2.css
 5537:5:    animation: none;
 5900:3:  text-shadow: 0 1px 0 #fff;
 5931:3:  box-shadow: 0 0.25rem 0.75rem rgba(0, 0, 0, 0.1);
-6058:3:  content: "";
-6074:3:  content: none;
-6242:3:  content: "";
-6356:3:  content: "";
-6431:3:  content: "";
-6495:3:  content: "";
 6579:3:  background: none;
 6614:3:  background: 50% / 100% 100% no-repeat;
 6703:3:  -webkit-animation: .75s linear infinite spinner-border;
 6704:3:  animation: .75s linear infinite spinner-border;
 6745:3:  -webkit-animation: .75s linear infinite spinner-grow;
 6746:3:  animation: .75s linear infinite spinner-grow;
-6997:3:  content: "";
-7208:3:  content: "";
 1:1:/*!

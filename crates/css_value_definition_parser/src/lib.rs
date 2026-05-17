@@ -103,6 +103,9 @@ impl DefType {
 				| "Image"          // contains Gradient<'a>
 				| "Image1d"  // contains StripesFunction<'a>
 				| "ContentList"  // Vec<'a, ContentListItem<'a>>
+				| "ContentAltItem"  // contains Counter<'a> and AttrFunction<'a>
+				| "ContentReplacement"  // type alias for Image<'a>
+				| "Counter"  // Counter<'a> enum with CounterFunction/CountersFunction variants
 				| "CounterStyle"  // complex hand-written type
 				| "CursorImage"  // contains Image<'a>
 				| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
@@ -331,7 +334,7 @@ impl Def {
 			// Functions that contain multipliers or known allocating types
 			Self::Function(_, inner) => inner.maybe_unsized(),
 			Self::FunctionType(ty) => {
-				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat")
+				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "Attr")
 			}
 			Self::Type(d) => d.maybe_unsized(),
 			Self::StyleValue(ty) => {

@@ -6,7 +6,6 @@
 
 mod impls;
 use super::prelude::*;
-use impls::*;
 /// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
 ///
 /// The grammar is defined as:
@@ -88,52 +87,34 @@ pub struct BookmarkLevelStyleValue;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BookmarkStateStyleValue {}
 
-// /// Represents the style value for `content` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#content).
-// ///
-// /// The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-content-3/#content
-// #[syntax(
-//     " normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     property_group = Content,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.content")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum ContentStyleValue<'a> {}
+/// Represents the style value for `content` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#content).
+///
+/// The content CSS property sets the content inside of an element or pseudo-element, replacing the current value. It's often used with the ::before and ::after pseudo-elements to generate cosmetic content.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-content-3/#content
+#[syntax(" normal | none | [ <content-replacement> | <content-list> ] [/ [ <string> | <counter> | <attr()> ]+ ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Content,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum ContentStyleValue<'a> {}
 
 /// Represents the style value for `quotes` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#quotes).
 ///

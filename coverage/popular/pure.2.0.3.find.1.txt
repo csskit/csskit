@@ -10,6 +10,4 @@ coverage/popular/pure.2.0.3.css
 792:13:            box-shadow: inset 0 1px 3px #ddd;
 807:5:    -webkit-box-shadow: inset 0 1px 3px #ddd;
 808:13:            box-shadow: inset 0 1px 3px #ddd;
-1223:5:    content: "\25B8";
-1229:5:    content: "\25BE";
 1323:5:    font: italic 85%/1 arial, sans-serif;

@@ -17,9 +17,6 @@ properties = ["border-image"]
 [color-adjust]
 properties = ["color-scheme"]
 
-[content]
-properties = ["content"]
-
 [fill-stroke]
 properties = ["fill", "stroke"]
 

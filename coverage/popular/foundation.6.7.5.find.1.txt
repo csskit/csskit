@@ -10,18 +10,13 @@ coverage/popular/foundation.6.7.5.css
 1569:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
 1589:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
 1611:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
-2369:5:    content: "— "; }
 2431:5:    background: transparent !important;
 2434:5:    -webkit-box-shadow: none !important;
 2435:13:            box-shadow: none !important;
-2457:5:    content: " (" attr(href) ")"; }
-2461:5:    content: ''; }
-2463:5:    content: " (" attr(title) ")"; }
 2467:5:    page-break-inside: avoid; }
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
-2626:5:    content: '';
 2666:3:  -webkit-box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2685:5:    -webkit-box-shadow: 0 0 5px #cacaca;
@@ -31,13 +26,9 @@ coverage/popular/foundation.6.7.5.css
 2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2900:13:            box-shadow: 0 0 5px #cacaca;
 2946:3:  background: #fefefe;
-2976:5:    content: "+"; }
-2978:5:    content: "–"; }
-3015:5:    content: '';
 3035:3:  -webkit-transform-origin: 50% 50%;
 3036:7:      -ms-transform-origin: 50% 50%;
 3037:11:          transform-origin: 50% 50%; }
-3058:5:    content: '';
 3069:3:  -webkit-transform-origin: 50% 50%;
 3070:7:      -ms-transform-origin: 50% 50%;
 3071:11:          transform-origin: 50% 50%; }
@@ -48,9 +39,6 @@ coverage/popular/foundation.6.7.5.css
 3099:5:    background: #3adb76;
 3102:5:    background: #ffae00;
 3105:5:    background: #cc4b37;
-3113:5:    content: ' ';
-3133:7:      content: "/";
-3162:5:    content: ' ';
 3355:3:  background: #fefefe;
 3356:3:  -webkit-box-shadow: none;
 3357:11:          box-shadow: none;
@@ -60,36 +48,19 @@ coverage/popular/foundation.6.7.5.css
 3741:5:    background: #fefefe;
 3742:5:    -webkit-box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
 3743:13:            box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
-3744:5:    content: ''; }
 3746:5:    background: #cacaca;
 3747:5:    -webkit-box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
 3748:13:            box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca; }
 3764:5:    background: #0a0a0a;
 3765:5:    -webkit-box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
 3766:13:            box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
-3767:5:    content: ''; }
 3769:5:    background: #8a8a8a;
 3770:5:    -webkit-box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a;
 3771:13:            box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a; }
 3784:3:  background: #fefefe; }
 3792:3:  background: #fefefe;
-3825:5:    content: '';
-3839:3:  content: '';
-3851:3:  content: '';
-3863:3:  content: '';
-3916:3:  content: '';
 3930:3:  background: transparent;
-3961:3:  content: '';
-3973:3:  content: '';
-3995:5:    content: '';
-4018:5:    content: '';
-4029:5:    content: '';
-4051:5:    content: '';
-4074:5:    content: '';
-4085:5:    content: '';
 4125:3:  background: #fefefe; }
-4136:5:    content: '';
-4147:5:    content: '';
 4189:3:  background: #1779ba;
 4192:5:    background: #1779ba;
 4195:5:    background: #767676;
@@ -117,22 +88,16 @@ coverage/popular/foundation.6.7.5.css
 4629:5:    background: none;
 4635:7:      -webkit-box-shadow: none;
 4636:15:              box-shadow: none;
-4721:5:    content: ' ';
 4749:7:      background: #e6e6e6; }
 4752:5:    background: #1779ba;
 4760:7:      background: transparent; }
-4763:5:    content: '\2026';
-4770:3:  content: "«"; }
-4776:3:  content: "»"; }
 5039:3:  background: #cacaca;
 5057:5:    background: #fefefe;
-5060:5:    content: ''; }
 5062:5:    background: #1779ba; }
 5145:5:    background: #f8f8f8;
 5148:5:    background: #f1f1f1;
 5152:5:    background: transparent; }
 5207:3:  background: #fefefe;
-5211:5:    content: ' ';
 5230:5:    background: transparent; }
 5233:3:  background: #1779ba; }
 5237:7:      background: #1673b1; }
@@ -146,12 +111,7 @@ coverage/popular/foundation.6.7.5.css
 5293:5:    -webkit-box-shadow: none;
 5294:13:            box-shadow: none; }
 5298:3:  background: #0a0a0a;
-5356:5:    content: '';
-5371:5:    content: '';
-5387:5:    content: '';
-5403:5:    content: '';
 5577:3:  clip: rect(0, 0, 0, 0) !important;
-5656:3:  content: ' ';
 5859:3:  -webkit-transform-origin: top;
 5860:7:      -ms-transform-origin: top;
 5861:11:          transform-origin: top;

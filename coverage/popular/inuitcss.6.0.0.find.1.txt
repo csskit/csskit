@@ -3,32 +3,11 @@
 coverage/popular/inuitcss.6.0.0.css
 464:3:  background: #ff0;
 686:3:  -ms-box-sizing: border-box;
-753:3:  content: "";
 822:3:  font: 1em/1.5 sans-serif;
-943:5:    content: "‘";
-944:5:    content: open-quote; }
-946:5:    content: "’";
-947:5:    content: close-quote; }
-949:5:    content: "“";
-950:5:    content: open-quote; }
-952:5:    content: "”";
-953:5:    content: close-quote; }
-958:5:    content: "“";
-959:5:    content: open-quote; }
-961:5:    content: "";
-962:5:    content: no-close-quote; }
-964:5:    content: "”";
-965:5:    content: close-quote; }
-967:5:    content: "‘";
-968:5:    content: open-quote; }
-970:5:    content: "’";
-971:5:    content: close-quote; }
-994:5:    content: "—"; }
 1006:3:  background: none;
 1021:3:  filter: alpha(opacity=75); }
 1344:3:  font: 12px/1.5 sans-serif; }
 2381:3:  filter: alpha(opacity=50) !important; }
-2399:3:  content: "\00A0»" !important; }
 2414:3:  clip: rect(0 0 0 0) !important;
 2426:5:    clip: rect(0 0 0 0) !important;
 2437:5:    clip: rect(0 0 0 0) !important;
