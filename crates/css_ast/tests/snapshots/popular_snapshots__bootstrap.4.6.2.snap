@@ -171527,6 +171527,7 @@ StyleSheet(
                   offset: SourceOffset(133292),
                   len: 5,
                 ))),
+                pinch_zoom: None,
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(

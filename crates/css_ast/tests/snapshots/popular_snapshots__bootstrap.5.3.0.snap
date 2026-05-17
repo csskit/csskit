@@ -188639,6 +188639,7 @@ StyleSheet(
                   offset: SourceOffset(158771),
                   len: 5,
                 ))),
+                pinch_zoom: None,
               ),
               important: None,
               semicolon: Some(Semicolon(Cursor(

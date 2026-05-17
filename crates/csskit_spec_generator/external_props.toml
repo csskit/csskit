@@ -10,7 +10,7 @@ title = "Pointer Events"
 
 [[module.properties]]
 name = "touch-action"
-value = "auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] ] | manipulation"
+value = "auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom ] | manipulation"
 initial = "auto"
 applies_to = "all elements except: non-replaced inline elements, table rows, row groups, table columns, and column groups"
 inherited = "no"
