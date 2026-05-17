@@ -209,6 +209,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum InlineSizeContainerFeature { }",
   "pub enum InlineSizingStyleValue { }",
   "pub enum InputSecurityStyleValue { }",
+  "pub enum InsetValue { }",
   "pub enum InteractivityStyleValue { }",
   "pub enum InterpolateSizeStyleValue { }",
   "pub enum InterpolationColorSpace { }",

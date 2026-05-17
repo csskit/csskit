@@ -1543,6 +1543,7 @@ pub enum CssAtomSet {
 	OverflowWrap,
 	OverflowX,
 	OverflowY,
+	OverlapJoin,
 	Overlay,
 	Overline,
 	Override,
