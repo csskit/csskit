@@ -1,0 +1,204 @@
+# CSS properties defined outside of w3c/csswg-drafts.
+# Each [[module]] entry produces one generated file at css_ast/src/values/<name>/mod.rs.
+# Property fields match the PropertyDefinition struct exactly; optional fields may be omitted.
+
+# https://w3c.github.io/pointerevents/#the-touch-action-css-property
+[[module]]
+name = "pointer-events"
+url = "https://w3c.github.io/pointerevents/"
+title = "Pointer Events"
+
+[[module.properties]]
+name = "touch-action"
+value = "auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] ] | manipulation"
+initial = "auto"
+applies_to = "all elements except: non-replaced inline elements, table rows, row groups, table columns, and column groups"
+inherited = "no"
+percentages = "n/a"
+animation_type = "not animatable"
+
+# https://w3c.github.io/svgwg/svg2-draft/painting.html
+[[module]]
+name = "svg-painting"
+url = "https://w3c.github.io/svgwg/svg2-draft/painting.html"
+title = "SVG 2 Painting"
+
+[[module.properties]]
+name = "fill"
+value = "<paint>"
+initial = "black"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "fill-rule"
+value = "nonzero | evenodd"
+initial = "nonzero"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "fill-opacity"
+value = "<'opacity'>"
+initial = "1"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "stroke"
+value = "<paint>"
+initial = "none"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "stroke-opacity"
+value = "<'opacity'>"
+initial = "1"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "stroke-width"
+value = "<length-percentage> | <number>"
+initial = "1px"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "refer to the normalized diagonal of the current SVG viewport"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "stroke-linecap"
+value = "butt | round | square"
+initial = "butt"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "stroke-linejoin"
+value = "miter | round | bevel"
+initial = "miter"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "stroke-miterlimit"
+value = "<number>"
+initial = "4"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "stroke-dasharray"
+value = "none | <dasharray>"
+initial = "none"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "refer to the normalized diagonal of the current SVG viewport"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "stroke-dashoffset"
+value = "<length-percentage> | <number>"
+initial = "0"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "refer to the normalized diagonal of the current SVG viewport"
+animation_type = "by computed value"
+
+[[module.properties]]
+name = "paint-order"
+value = "normal | [ fill || stroke || markers ]"
+initial = "normal"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "color-interpolation"
+value = "auto | sRGB | linearRGB"
+initial = "sRGB"
+applies_to = "all elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "shape-rendering"
+value = "auto | optimizeSpeed | crispEdges | geometricPrecision"
+initial = "auto"
+applies_to = "shapes and text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "text-rendering"
+value = "auto | optimizeSpeed | optimizeLegibility | geometricPrecision"
+initial = "auto"
+applies_to = "text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "image-rendering"
+value = "auto | optimizeQuality | optimizeSpeed"
+initial = "auto"
+applies_to = "text content elements"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "marker-start"
+value = "none | <url>"
+initial = "none"
+applies_to = "shapes"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "marker-mid"
+value = "none | <url>"
+initial = "none"
+applies_to = "shapes"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "marker-end"
+value = "none | <url>"
+initial = "none"
+applies_to = "shapes"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"
+
+[[module.properties]]
+name = "marker"
+value = "none | <url>"
+initial = "none"
+applies_to = "shapes"
+inherited = "yes"
+percentages = "n/a"
+animation_type = "discrete"

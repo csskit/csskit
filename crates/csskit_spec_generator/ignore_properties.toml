@@ -153,3 +153,22 @@ properties = [
   "filter-margin-bottom",
   "filter-margin-left",
 ]
+
+[svg-painting]
+# - These SVG painting properties are superseded by css-fill-stroke-3 which is
+#   the canonical CSS definition. fill and stroke are also defined there.
+# - image-rendering is defined in css-images-5.
+properties = [
+  "fill",
+  "fill-opacity",
+  "fill-rule",
+  "image-rendering",
+  "stroke",
+  "stroke-dasharray",
+  "stroke-dashoffset",
+  "stroke-linecap",
+  "stroke-linejoin",
+  "stroke-miterlimit",
+  "stroke-opacity",
+  "stroke-width",
+]

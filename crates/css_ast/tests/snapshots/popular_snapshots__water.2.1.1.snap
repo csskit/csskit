@@ -3334,20 +3334,11 @@ StyleSheet(
                 offset: SourceOffset(3805),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3806),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3807),
-                    len: 18,
-                  )),
-                ],
-              )),
+              value: Optimizelegibility(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(3807),
+                len: 18,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

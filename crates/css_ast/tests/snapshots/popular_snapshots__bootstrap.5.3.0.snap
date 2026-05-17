@@ -188739,20 +188739,14 @@ StyleSheet(
                 offset: SourceOffset(158769),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(158770),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(158771),
-                    len: 5,
-                  )),
-                ],
-              )),
+              value: PanXPanY(
+                pan_x: None,
+                pan_y: Some(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(158771),
+                  len: 5,
+                ))),
+              ),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

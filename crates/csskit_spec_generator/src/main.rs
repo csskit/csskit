@@ -1,6 +1,7 @@
 #![deny(warnings)]
 mod codegen;
 mod excluded_specs;
+mod external_props;
 mod extra_property_atoms;
 mod fetch_cached;
 mod ignore_properties;
@@ -19,6 +20,7 @@ use std::fs::{create_dir_all, write};
 use std::path::PathBuf;
 
 use crate::codegen::{generate_feature_data, generate_property_atoms, generate_spec_module};
+use crate::external_props::get_external_props;
 use crate::fetch_cached::{
 	default_http_client, get_css_popularity, get_csswg_commit_sha, get_spec, get_spec_versions, get_web_features_data,
 };
@@ -84,7 +86,7 @@ async fn generate_single_spec(
 
 	println!("  Total unique properties across all versions: {}", properties.len());
 
-	let code = generate_spec_module(name, latest_version, &properties, None, property_descriptions, csswg_sha);
+	let code = generate_spec_module(name, latest_version, &properties, None, None, property_descriptions, csswg_sha);
 	let line_count = code.lines().count();
 
 	if verbose {
@@ -316,16 +318,15 @@ async fn main() -> Result<()> {
 							if properties.is_empty() {
 								continue;
 							}
-							// Collect property names for property_atoms.rs
 							for prop in &properties {
 								all_property_names.insert(prop.name.clone());
 							}
-
-							// Generate the spec module
+							let ver = versions.iter().max().copied().unwrap_or(1);
 							let code = generate_spec_module(
 								name,
-								versions.iter().max().copied().unwrap_or(1),
+								ver,
 								&properties,
+								None,
 								None,
 								&property_descriptions,
 								Some(&csswg_sha),
@@ -359,6 +360,27 @@ async fn main() -> Result<()> {
 				println!("  Failed: {}", failed);
 			}
 			println!("═══════════════════════════════════");
+
+			// Generate external (non-csswg) property modules
+			for (module_name, module_url, module_title, properties) in get_external_props() {
+				println!("  Generating external module: {}", module_name);
+				for prop in &properties {
+					all_property_names.insert(prop.name.clone());
+				}
+				let code = generate_spec_module(
+					&module_name,
+					0,
+					&properties,
+					Some(&module_url),
+					Some(&module_title),
+					&property_descriptions,
+					None,
+				);
+				match write_spec_module(&module_name, &code) {
+					Ok(_) => println!("  Completed: {}", module_name),
+					Err(e) => eprintln!("  Failed to write {}: {}", module_name, e),
+				}
+			}
 
 			println!("\nGenerating CSS feature data...");
 
@@ -424,6 +446,12 @@ async fn main() -> Result<()> {
 							println!(" error: {}", e);
 						}
 					}
+				}
+			}
+
+			for (_, _, _, properties) in get_external_props() {
+				for prop in &properties {
+					all_property_names.insert(prop.name.clone());
 				}
 			}
 

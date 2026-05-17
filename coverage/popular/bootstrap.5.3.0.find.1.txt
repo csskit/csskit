@@ -51,7 +51,6 @@ coverage/popular/bootstrap.5.3.0.css
 5810:3:  content: "";
 5921:3:  content: "";
 5982:3:  content: "";
-6029:3:  touch-action: pan-y;
 6040:3:  content: "";
 6112:3:  background: none;
 6146:3:  background-position: 50%;

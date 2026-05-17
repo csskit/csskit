@@ -1,11 +1,6 @@
 :unknown
 ---
 coverage/popular/pure.2.0.3.css
-402:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
-457:5:    text-rendering: auto;
-518:5:    text-rendering: auto;
-676:5:    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
-688:5:    text-rendering: auto;
 707:5:    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
 715:5:    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
 716:13:            box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;

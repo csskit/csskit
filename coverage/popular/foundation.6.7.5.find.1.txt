@@ -10,8 +10,6 @@ coverage/popular/foundation.6.7.5.css
 1569:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
 1589:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
 1611:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
-2187:3:  text-rendering: optimizeLegibility; }
-2213:3:  text-rendering: optimizeLegibility; }
 2369:5:    content: "— "; }
 2431:5:    background: transparent !important;
 2434:5:    -webkit-box-shadow: none !important;
@@ -126,8 +124,6 @@ coverage/popular/foundation.6.7.5.css
 4763:5:    content: '\2026';
 4770:3:  content: "«"; }
 4776:3:  content: "»"; }
-4918:7:      touch-action: none; }
-4952:7:      touch-action: manipulation; }
 5039:3:  background: #cacaca;
 5057:5:    background: #fefefe;
 5060:5:    content: ''; }

@@ -54,15 +54,17 @@ pub fn generate_spec_module(
 	spec_name: &str,
 	version: usize,
 	properties: &[PropertyDefinition],
-	spec_title: Option<&str>,
+	spec_url: Option<&str>,
+	doc_label: Option<&str>,
 	property_descriptions: &HashMap<String, String>,
 	csswg_sha: Option<&str>,
 ) -> String {
-	let url = format!("https://drafts.csswg.org/{}-{}/", spec_name, version);
+	let base_url =
+		spec_url.map(str::to_string).unwrap_or_else(|| format!("https://drafts.csswg.org/{}-{}/", spec_name, version));
+	let label = doc_label.map(str::to_string).unwrap_or_else(|| format!("{}-{}", spec_name, version));
 	let lookup_name = strip_css_prefix(spec_name);
 
-	let module_doc =
-		if let Some(title) = spec_title { format!("//! {}\n//! {}\n", title, url) } else { format!("//! {}\n", url) };
+	let module_doc = format!("//! {}\n", base_url);
 
 	let autogen_notice = if let Some(sha) = csswg_sha {
 		format!(
@@ -97,7 +99,16 @@ pub fn generate_spec_module(
 		let extension = spec_extensions.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
 		let skip_parse = should_skip_parse.contains(&prop.name);
 		let expanded_longhands = expanded_longhands_map.get(&prop.name);
-		generate_property_type(spec_name, version, prop, description, extension, skip_parse, expanded_longhands)
+		generate_property_type(
+			&base_url,
+			&label,
+			spec_name,
+			prop,
+			description,
+			extension,
+			skip_parse,
+			expanded_longhands,
+		)
 	});
 
 	let tokens = quote! {
@@ -114,15 +125,16 @@ pub fn generate_spec_module(
 
 	code = format!("{}{}{}\n{}", autogen_notice, "#![allow(warnings)]\n", module_doc, code);
 
-	code = fix_formatting(&code, spec_name, version, &filtered_properties);
+	code = fix_formatting(&code, &base_url, &filtered_properties);
 
 	code = add_blank_lines_between_properties(&code);
 
 	comment_out_properties(&code, &filtered_properties, &should_comment_out)
 }
 
-fn fix_formatting(code: &str, spec_name: &str, version: usize, properties: &[&PropertyDefinition]) -> String {
+fn fix_formatting(code: &str, base_url: &str, properties: &[&PropertyDefinition]) -> String {
 	let mut result = String::new();
+	let base_url_no_slash = base_url.trim_end_matches('/');
 
 	for line in code.lines() {
 		let mut fixed_line = line.to_string();
@@ -131,12 +143,12 @@ fn fix_formatting(code: &str, spec_name: &str, version: usize, properties: &[&Pr
 			fixed_line = fixed_line.replacen("///", "/// ", 1);
 		}
 
-		if fixed_line.contains(&format!("{}-{}", spec_name, version)) {
+		if fixed_line.contains(base_url_no_slash) {
 			for prop in properties {
 				let property_id = if prop.name == "--*" { "defining-variables" } else { &prop.name };
-				let wrong_url = format!("{}-{}#{}", spec_name, version, property_id);
-				let correct_url = format!("{}-{}/#{}", spec_name, version, property_id);
-				fixed_line = fixed_line.replace(&wrong_url, &correct_url);
+				let wrong = format!("{}#{}", base_url_no_slash, property_id);
+				let correct = format!("{}#{}", base_url, property_id);
+				fixed_line = fixed_line.replace(&wrong, &correct);
 			}
 		}
 
@@ -623,9 +635,11 @@ fn determine_box_portion(property_name: &str) -> Option<TokenStream> {
 	None
 }
 
+#[allow(clippy::too_many_arguments)]
 fn generate_property_type(
+	base_url: &str,
+	doc_label: &str,
 	spec_name: &str,
-	version: usize,
 	prop: &PropertyDefinition,
 	description: Option<&String>,
 	value_extension: Option<&str>,
@@ -657,16 +671,12 @@ fn generate_property_type(
 		}
 	};
 
-	let doc_link_url = format!("https://drafts.csswg.org/{}-{}/#{}", spec_name, version, property_id);
-	let doc_intro = format!(
-		" Represents the style value for `{}` as defined in [{}-{}]({}).",
-		prop.name, spec_name, version, doc_link_url
-	);
+	let doc_link = format!("{}#{}", base_url, property_id);
+	let doc_intro =
+		format!(" Represents the style value for `{}` as defined in [{}]({}).", prop.name, doc_label, doc_link);
 
 	let doc_grammar_header = " The grammar is defined as:";
 	let grammar = &extended_value;
-
-	let doc_link = format!("https://drafts.csswg.org/{}-{}/#{}", spec_name, version, property_id);
 
 	let syntax_value = format!(" {} ", extended_value.replace('\n', " "));
 
