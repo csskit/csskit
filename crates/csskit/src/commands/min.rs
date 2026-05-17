@@ -41,7 +41,7 @@ impl Min {
 			let source_text = source_string.as_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 			let mut parser = Parser::new(&bump, source_text, lexer);
-			let mut result = parser.parse_entirely::<StyleSheet>();
+			let mut result = parser.parse_entirely::<StyleSheet>().with_trivia();
 			if let Some(ref mut stylesheet) = result.output {
 				let mut transformer =
 					Transformer::new_in(&bump, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);

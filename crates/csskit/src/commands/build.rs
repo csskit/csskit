@@ -33,7 +33,7 @@ impl Build {
 			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
-				result.to_cursors(&mut stream);
+				result.with_trivia().to_cursors(&mut stream);
 			} else {
 				for compact_err in result.errors {
 					let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);

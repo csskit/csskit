@@ -36,7 +36,7 @@ mod tests {
 		let mut transformer = Transformer::new_in(&bump, features, &CssAtomSet::ATOMS, source_text);
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 		let mut parser = Parser::new(&bump, source_text, lexer);
-		let mut result = parser.parse_entirely::<StyleSheet>();
+		let mut result = parser.parse_entirely::<StyleSheet>().with_trivia();
 		let mut output = String::new();
 		if let Some(ref mut node) = result.output {
 			transformer.transform(node);
@@ -48,7 +48,7 @@ mod tests {
 					&*overlays,
 					CursorCompactWriteSink::new(source_text, &mut output),
 				);
-				result.output.to_cursors(&mut overlay_stream);
+				result.to_cursors(&mut overlay_stream);
 			}
 			(output, changed)
 		} else {

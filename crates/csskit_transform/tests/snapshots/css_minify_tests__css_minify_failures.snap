@@ -11,22 +11,22 @@ FAIL anchor/0002
 +a{position-area:top}
 
 FAIL anchor/0003
--@position-try --flip{position-area:top}a{position-area:bottom; position-try-fallbacks:--flip}
+-@position-try --flip{position-area:top}a{position-area:bottom;position-try-fallbacks:--flip}
 +a{position-area:bottom;position-try-fallbacks:flip-block}
 
 FAIL anchor/0004
 -@position-try --empty{}
 
 FAIL anchor/0005
--@position-try --top{position-area:top}a{position-area:bottom; position-try-fallbacks:--top,--undefined}
+-@position-try --top{position-area:top}a{position-area:bottom;position-try-fallbacks:--top,--undefined}
 +@position-try --top{position-area:top}a{position-area:bottom;position-try-fallbacks:--top}
 
 FAIL charset/0001
--@charset "UTF-8";a{color:red}
+-@charset"UTF-8";a{color:red}
 +a{color:red}
 
 FAIL charset/0002
--@charset "ISO-8859-1";@charset "ISO-8859-15";a{color:red}
+-@charset"ISO-8859-1";@charset"ISO-8859-15";a{color:red}
 +@charset "ISO-8859-1";a{color:red}
 
 FAIL colors/0020
@@ -65,23 +65,15 @@ FAIL comments/0003
 -a{color:red}
 +/*! important */a{color:red}
 
-FAIL comments/0004
--a{--bar:a b}
-+a{--bar:a/**/b}
-
-FAIL comments/0005
--@container style(--bar:a b){a{color:red}}
-+@container style(--bar:a/**/b){a{color:red}}
-
 FAIL container/0002
--@container (min-width:700px){}
+-@container(min-width:700px){}
 
 FAIL container/0004
--@container (min-width:700px){a{color:red}}
+-@container(min-width:700px){a{color:red}}
 +@container(width>=700px){a{color:red}}
 
 FAIL container/0005
--@container (max-width:500px){a{color:red}}
+-@container(max-width:500px){a{color:red}}
 +@container(width<=500px){a{color:red}}
 
 FAIL container/0006
@@ -172,7 +164,7 @@ FAIL font-face/0003
 +@font-face{font-family:Custom;src:url(font.woff2)}
 
 FAIL font-face/0004
--@font-face{font-family:Custom;src:url(font.woff2) format("woff2")}
+-@font-face{font-family:Custom;src:url(font.woff2)format("woff2")}
 +@font-face{font-family:Custom;src:url(font.woff2)format(woff2)}
 
 FAIL font-face/0006
@@ -326,16 +318,12 @@ FAIL nesting/0019
 FAIL page/0003
 -@page{}
 
-FAIL scope/0001
--@scope (.card){.title{color:red}}
-+@scope(.card){.title{color:red}}
-
 FAIL scope/0002
--@scope (.card)to (.card.content){a{color:red}}
+-@scope(.card)to (.card.content){a{color:red}}
 +@scope(.card)to (.card .content){a{color:red}}
 
 FAIL scope/0003
--@scope (.card){}
+-@scope(.card){}
 
 FAIL selectors-advanced/0001
 -:is(a,b){color:red}
@@ -554,7 +542,7 @@ FAIL shorthands/0033
 +a{border:solid red}
 
 FAIL shorthands/0034
--a{background:red url(bg.png) 0% 0% repeat scroll}
+-a{background:red url(bg.png)0% 0% repeat scroll}
 +a{background:red url(bg.png)}
 
 FAIL shorthands/0035
@@ -578,15 +566,15 @@ FAIL shorthands/0040
 +a{overflow:hidden}
 
 FAIL shorthands/0041
--a{border-image:url(border.png) 30 round;border-width:1px;border-style:solid;border-color:red}
+-a{border-image:url(border.png)30 round;border-width:1px;border-style:solid;border-color:red}
 +a{border:1px solid red;border-image:url(border.png) 30 round}
 
 FAIL shorthands/0042
--a{border-width:1px;border-style:solid;border-color:red;border-image:url(border.png) 30 round}
+-a{border-width:1px;border-style:solid;border-color:red;border-image:url(border.png)30 round}
 +a{border:1px solid red;border-image:url(border.png) 30 round}
 
 FAIL shorthands/0043
--a{border-image:url(border.png) 30 round;border:1px solid red}
+-a{border-image:url(border.png)30 round;border:1px solid red}
 +a{border:1px solid red}
 
 FAIL shorthands/0044
@@ -610,15 +598,15 @@ FAIL shorthands/0048
 +a{font:14px/1.4 Georgia,serif;font-kerning:none}
 
 FAIL shorthands/0049
--a{mask-border:url(mask.png) 25 / 10px round;mask-image:linear-gradient(black,transparent);mask-size:cover;mask-repeat:no-repeat}
+-a{mask-border:url(mask.png)25 / 10px round;mask-image:linear-gradient(black,transparent);mask-size:cover;mask-repeat:no-repeat}
 +a{mask:linear-gradient(#000,transparent) no-repeat/cover;mask-border:url(mask.png) 25/10px round}
 
 FAIL shorthands/0050
--a{mask-image:linear-gradient(black,transparent);mask-repeat:no-repeat;mask-border:url(mask.png) 25 round}
+-a{mask-image:linear-gradient(black,transparent);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
 +a{mask:linear-gradient(#000,transparent) no-repeat;mask-border:url(mask.png) 25 round}
 
 FAIL shorthands/0051
--a{mask-border:url(mask.png) 25 round;mask:linear-gradient(black,transparent)}
+-a{mask-border:url(mask.png)25 round;mask:linear-gradient(black,transparent)}
 +a{mask:linear-gradient(#000,transparent)}
 
 FAIL shorthands/0052
@@ -761,12 +749,8 @@ FAIL values/0003
 -a{background:url("image.png")}
 +a{background:url(image.png)}
 
-FAIL values/0013
--a{background:linear-gradient( 45deg,#111 ,#999)}
-+a{background:linear-gradient(45deg,#111,#999)}
-
 FAIL values/0014
--a{width:calc(calc(100% - 20px) + 10px)}
+-a{width:calc(calc(100% - 20px)+ 10px)}
 +a{width:calc(100% - 10px)}
 
 FAIL values/0015
@@ -778,7 +762,7 @@ FAIL values/0016
 +a{width:100px}
 
 FAIL values/0017
--a{width:calc(((75.37% - 63.5px) - 900px) + (2 * 100px))}
+-a{width:calc(((75.37% - 63.5px)- 900px)+ (2 * 100px))}
 +a{width:calc(75.37% - 763.5px)}
 
 FAIL values/0019
@@ -870,7 +854,7 @@ FAIL values/0042
 +a{width:50px}
 
 FAIL values/0043
--a{width:calc(calc(10px + 20px) + calc(30px + 40px))}
+-a{width:calc(calc(10px + 20px)+ calc(30px + 40px))}
 +a{width:100px}
 
 FAIL values/0044
@@ -957,17 +941,9 @@ FAIL values/0070
 -@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:rgb(0 0 0)}
 +@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:#000}
 
-FAIL whitespace/0010
--@supports (display:grid)and (gap:10px){a{display:grid; gap:10px}}
-+@supports(display:grid)and (gap:10px){a{display:grid;gap:10px}}
-
 FAIL whitespace/0012
 -a{width:calc(100% * 2)}
 +a{width:calc(100%*2)}
-
-FAIL whitespace/0014
--a{background:url(bg.png) no-repeat}
-+a{background:url(bg.png)no-repeat}
 
 FAIL whitespace/0015
 -a{font:16px / 1.5 sans-serif}

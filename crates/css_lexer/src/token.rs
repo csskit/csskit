@@ -437,7 +437,7 @@ impl Token {
 
 	/// Creates a [Kind::Comment] token.
 	#[inline]
-	pub(crate) fn new_comment(style: CommentStyle, len: u32) -> Self {
+	pub(crate) const fn new_comment(style: CommentStyle, len: u32) -> Self {
 		let flags: u32 = Kind::Comment as u32 | ((style as u32) << 5);
 		Self((flags << 24) & KIND_MASK, len)
 	}

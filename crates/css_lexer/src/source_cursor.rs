@@ -76,6 +76,8 @@ impl<'a> SourceCursor<'a> {
 	pub const NEWLINE: SourceCursor<'static> = SourceCursor::from(Cursor::new(SourceOffset(0), Token::NEWLINE), "\n");
 	pub const SEMICOLON: SourceCursor<'static> =
 		SourceCursor::from(Cursor::new(SourceOffset(0), Token::SEMICOLON), ";");
+	pub const EMPTY_COMMENT: SourceCursor<'static> =
+		SourceCursor::from(Cursor::new(SourceOffset(0), Token::new_comment(CommentStyle::Block, 4)), "/**/");
 
 	#[inline(always)]
 	pub const fn from(cursor: Cursor, source: &'a str) -> Self {

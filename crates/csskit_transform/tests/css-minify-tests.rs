@@ -44,7 +44,7 @@ fn minify(source_text: &str) -> String {
 	let mut transformer = Transformer::new_in(&bump, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 	let mut parser = Parser::new(&bump, source_text, lexer);
-	let mut result = parser.parse_entirely::<StyleSheet>();
+	let mut result = parser.parse_entirely::<StyleSheet>().with_trivia();
 	let mut output = String::new();
 	if let Some(ref mut node) = result.output {
 		transformer.transform(node);
@@ -52,7 +52,7 @@ fn minify(source_text: &str) -> String {
 		{
 			let mut overlay_stream =
 				CursorOverlaySink::new(source_text, &*overlays, CursorCompactWriteSink::new(source_text, &mut output));
-			result.output.to_cursors(&mut overlay_stream);
+			result.to_cursors(&mut overlay_stream);
 		}
 	} else {
 		panic!("Could not parse source");

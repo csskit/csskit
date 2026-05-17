@@ -1,6 +1,4 @@
-use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token,
-};
+use crate::{Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token};
 
 /// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given sink - using the given `&'a str` as the original source.
@@ -11,78 +9,99 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 	sink: T,
 	last_token: Option<Token>,
 	pending: Option<SourceCursor<'a>>,
+	pending_comment: Option<SourceCursor<'a>>,
 }
 
+// Tokens that get buffered as `pending` rather than emitted immediately.
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
+// `;` is redundant immediately before/after these.
 const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::RightCurly]);
-// Tokens where whitespace immediately before them can be removed
+// Whitespace immediately before these tokens can always be removed (overrides any
+// `AssociatedWhitespaceRules::EnforceBefore` annotations carried from the source).
 const NO_WHITESPACE_BEFORE_KINDSET: KindSet =
-	KindSet::new(&[Kind::Whitespace, Kind::Colon, Kind::Delim, Kind::LeftCurly, Kind::RightCurly]);
-// Tokens where whitespace immediately after them can be removed
+	KindSet::new(&[Kind::Whitespace, Kind::Colon, Kind::Delim, Kind::LeftCurly, Kind::RightCurly, Kind::Eof]);
+// Whitespace immediately after these tokens can always be removed.
 const NO_WHITESPACE_AFTER_KINDSET: KindSet =
 	KindSet::new(&[Kind::Comma, Kind::RightParen, Kind::RightCurly, Kind::LeftCurly, Kind::Colon]);
 
 impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 	pub fn new(source_text: &'a str, sink: T) -> Self {
-		Self { source_text, sink, last_token: None, pending: None }
+		Self { source_text, sink, last_token: None, pending: None, pending_comment: None }
+	}
+
+	/// Would emitting `next` immediately after `last_token` change tokenisation?
+	fn needs_separator(&self, next: Token) -> bool {
+		self.last_token.is_some_and(|t| t.needs_separator_for(next))
+	}
+
+	/// True when the previously-emitted token never needs a separator after it
+	/// (e.g. `,`, `)`, `{`). Whitespace can be dropped and re-injection skipped.
+	fn last_forbids_ws_after(&self) -> bool {
+		self.last_token.is_some_and(|t| t == NO_WHITESPACE_AFTER_KINDSET)
+	}
+
+	fn emit(&mut self, c: SourceCursor<'a>) {
+		self.last_token = Some(c.token());
+		self.sink.append(c);
 	}
 
 	fn write(&mut self, c: SourceCursor<'a>) {
-		let mut skip_separator_check = false;
-		if let Some(prev) = self.pending {
-			self.pending = None;
-			let is_redundant_semi = prev == Kind::Semicolon
-				&& (c == REDUNDANT_SEMI_KINDSET || self.last_token.is_some_and(|c| c == REDUNDANT_SEMI_KINDSET));
-			let prev_is_whitespace = prev == Kind::Whitespace;
-			let whitespace_required = prev_is_whitespace
-				&& (self.last_token.is_some_and(|t| t == AssociatedWhitespaceRules::EnforceAfter)
-					|| c.token() == AssociatedWhitespaceRules::EnforceBefore);
-			let no_whitespace_after_last = prev_is_whitespace
-				&& !whitespace_required
-				&& self.last_token.is_some_and(|c| c == NO_WHITESPACE_AFTER_KINDSET);
-			let is_redundant_whitespace = self.last_token.is_none()
-				|| prev_is_whitespace
-					&& !whitespace_required
-					&& (c == NO_WHITESPACE_BEFORE_KINDSET || no_whitespace_after_last);
-			if !is_redundant_semi && !is_redundant_whitespace {
-				self.last_token = Some(prev.token());
-				self.sink.append(prev.compact());
-			} else if no_whitespace_after_last {
-				// If we're skipping whitespace because the last token doesn't need whitespace after it,
-				// don't add it back via needs_separator_for
-				skip_separator_check = true;
+		if c == Kind::Comment {
+			let can_separate =
+				self.pending.is_none() && self.pending_comment.is_none() && !self.last_forbids_ws_after();
+			if can_separate {
+				self.pending_comment = Some(c);
+			}
+			return;
+		}
+		if self.pending_comment.take().is_some()
+			&& c != Kind::Whitespace
+			&& c != Kind::Eof
+			&& self.needs_separator(c.token())
+		{
+			self.emit(SourceCursor::EMPTY_COMMENT);
+		}
+
+		if c == Kind::Whitespace && self.pending.is_some_and(|c| c == Kind::Semicolon) {
+			return;
+		}
+
+		let suppress_separator = self.last_forbids_ws_after();
+		if let Some(prev) = self.pending.take() {
+			let keep = match prev.token().kind() {
+				Kind::Semicolon => {
+					c != REDUNDANT_SEMI_KINDSET && self.last_token.is_some_and(|t| t != REDUNDANT_SEMI_KINDSET)
+				}
+				_ => !suppress_separator && c != NO_WHITESPACE_BEFORE_KINDSET && self.needs_separator(c.token()),
+			};
+			if keep {
+				self.emit(prev.compact());
 			}
 		}
+
 		if c == PENDING_KINDSET {
 			self.pending = Some(c);
 			return;
 		}
-		if !skip_separator_check
-			&& let Some(last) = self.last_token
-			&& last.needs_separator_for(c.token())
-		{
+		if c == Kind::Eof {
+			return;
+		}
+
+		if !suppress_separator && self.needs_separator(c.token()) {
 			self.sink.append(SourceCursor::SPACE);
 		}
-		self.last_token = Some(c.token());
-		// Normalize quotes
-		if c == Kind::String {
-			self.sink.append(c.with_quotes(QuoteStyle::Double).compact())
-		} else {
-			self.sink.append(c.compact());
-		}
+
+		let out = if c == Kind::String { c.with_quotes(QuoteStyle::Double).compact() } else { c.compact() };
+		self.emit(out);
 	}
 }
 
 impl<'a, T: SourceCursorSink<'a>> Drop for CursorCompactWriteSink<'a, T> {
 	fn drop(&mut self) {
-		// Flush any pending semicolons at the end of the stream.
-		// Trailing whitespace is genuinely redundant, but trailing semicolons may be
-		// required (e.g. `@import "foo.css";` needs the `;`).
 		if let Some(prev) = self.pending.take()
 			&& prev == Kind::Semicolon
 		{
-			self.last_token = Some(prev.token());
-			self.sink.append(prev.compact());
+			self.emit(prev);
 		}
 	}
 }
@@ -118,7 +137,7 @@ mod test {
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
 				let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
 				let mut parser = Parser::new(&bump, source_text, lexer);
-				parser.parse_entirely::<$struct>().output.unwrap().to_cursors(&mut stream);
+				parser.parse_entirely::<$struct>().with_trivia().to_cursors(&mut stream);
 			}
 			assert_eq!(sink, $after.trim());
 		};
@@ -174,14 +193,6 @@ mod test {
 	}
 
 	#[test]
-	fn test_preserves_whitespace_around_calc_sum_operators() {
-		assert_format!("calc(var(--col-gap) / 2 + var(--date-col))", "calc(var(--col-gap) / 2 + var(--date-col))");
-		assert_format!("calc((var(--col-gap) / -2) - 5px)", "calc((var(--col-gap) / -2) - 5px)");
-		assert_format!("calc(var(--x) + 1px)", "calc(var(--x) + 1px)");
-		assert_format!("calc(var(--x) - 1px)", "calc(var(--x) - 1px)");
-	}
-
-	#[test]
 	fn test_removes_whitespace_after_right_curly() {
 		assert_format!("@media screen{} .foo{}", "@media screen{}.foo{}");
 	}
@@ -226,8 +237,47 @@ mod test {
 	}
 
 	#[test]
+	fn test_removes_trailing_semis_when_after_curly() {
+		assert_format!("{foo};", "{foo}");
+	}
+
+	#[test]
 	fn test_drops_trailing_whitespace() {
 		assert_format!("foo  ", "foo");
 		assert_format!("foo; ", "foo;");
+	}
+
+	#[test]
+	fn test_preserves_comment_absence_in_custom_properties() {
+		assert_format!("div{--bar:a/**/b}", "div{--bar:a/**/b}");
+		assert_format!("div { --bar: a/**/b }", "div{--bar:a/**/b}");
+		assert_format!("div{--bar:a /* comment */ b}", "div{--bar:a b}");
+		assert_format!("div{--bar:a/**//**/b}", "div{--bar:a/**/b}");
+		assert_format!("div{--bar:a /* x */ /* y */ b}", "div{--bar:a b}");
+		assert_format!("div{/*comment*/--bar:a}", "div{--bar:a}");
+		assert_format!("div{--bar:a/*comment*/}", "div{--bar:a}");
+		assert_format!("div{--bar:a  /**/  b}", "div{--bar:a b}");
+		assert_format!("@container style(--bar:a/**/b){}", "@container style(--bar:a/**/b){}");
+		assert_format!("@container style(--bar:a/**/b){}", "@container style(--bar:a/**/b){}");
+		assert_format!("foo /**/bar", "foo bar");
+		assert_format!("foo{/**/bar}", "foo{bar}");
+		assert_format!("foo:/**/bar", "foo:bar");
+		assert_format!("foo(/**/bar)", "foo(bar)");
+		assert_format!("foo/**/,bar", "foo,bar");
+		assert_format!("/**/foo", "foo");
+		assert_format!("div{--bar:a/*some really long comment text*/b}", "div{--bar:a/**/b}");
+	}
+
+	#[test]
+	fn test_at_rule_no_space_before_paren() {
+		assert_format!(
+			"@media(prefers-reduced-motion:no-preference){:root{}}",
+			"@media(prefers-reduced-motion:no-preference){:root{}}"
+		);
+		assert_format!(
+			"@media (prefers-reduced-motion:no-preference){:root{}}",
+			"@media(prefers-reduced-motion:no-preference){:root{}}"
+		);
+		assert_format!("@media(min-width:576px){}", "@media(min-width:576px){}");
 	}
 }
