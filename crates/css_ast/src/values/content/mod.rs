@@ -6,6 +6,7 @@
 
 mod impls;
 use super::prelude::*;
+use impls::*;
 /// Represents the style value for `bookmark-label` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-label).
 ///
 /// The grammar is defined as:
