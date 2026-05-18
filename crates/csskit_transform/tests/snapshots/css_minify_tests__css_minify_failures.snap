@@ -538,7 +538,7 @@ FAIL shorthands/0033
 +a{border:solid red}
 
 FAIL shorthands/0034
--a{background:red url(bg.png)0% 0% repeat scroll}
+-a{background:url(bg.png)0% 0% repeat scroll red}
 +a{background:red url(bg.png)}
 
 FAIL shorthands/0035

@@ -33,7 +33,7 @@ StyleSheet(
                 offset: SourceOffset(17),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",

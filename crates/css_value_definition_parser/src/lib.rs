@@ -130,6 +130,9 @@ impl DefType {
 				| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
 				| "FilterValue"  // contains FilterFunction<'a>
 				| "FilterFunction" // contains DropShadowFunction<'a>
+			| "BgLayer"  // contains BgImage<'a> and Color<'a>
+			| "FinalBgLayer"  // type alias for BgLayer<'a>
+			| "BgPositionAndSize" // contains BgPosition which contains Position
 		)
 	}
 }

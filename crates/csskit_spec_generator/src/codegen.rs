@@ -4,6 +4,7 @@ use crate::shorthands::get_shorthand_properties;
 use crate::spec_parser::PropertyDefinition;
 use crate::todo_properties::get_todo_properties;
 use crate::value_extensions::get_value_extensions;
+use crate::value_replacements::get_value_replacements;
 use crate::web_features_data::{BaselineStatus, FeatureData, StringOrArray, WebFeaturesData};
 use css_value_definition_parser::{Def, DefCombinatorStyle};
 use heck::ToPascalCase;
@@ -88,6 +89,9 @@ pub fn generate_spec_module(
 	let value_extensions = get_value_extensions();
 	let spec_extensions = value_extensions.get(lookup_name);
 
+	let value_replacements = get_value_replacements();
+	let spec_replacement = value_replacements.get(lookup_name);
+
 	let manual_parse_properties = get_manual_parse_properties();
 	let should_skip_parse: HashSet<String> = manual_parse_properties.get(lookup_name).cloned().unwrap_or_default();
 
@@ -97,6 +101,7 @@ pub fn generate_spec_module(
 	let property_types = filtered_properties.iter().map(|prop| {
 		let description = property_descriptions.get(&prop.name);
 		let extension = spec_extensions.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
+		let replacement = spec_replacement.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
 		let skip_parse = should_skip_parse.contains(&prop.name);
 		let expanded_longhands = expanded_longhands_map.get(&prop.name);
 		generate_property_type(
@@ -105,6 +110,7 @@ pub fn generate_spec_module(
 			spec_name,
 			prop,
 			description,
+			replacement,
 			extension,
 			skip_parse,
 			expanded_longhands,
@@ -642,6 +648,7 @@ fn generate_property_type(
 	spec_name: &str,
 	prop: &PropertyDefinition,
 	description: Option<&String>,
+	value_replacement: Option<&str>,
 	value_extension: Option<&str>,
 	skip_parse: bool,
 	expanded_longhands: Option<&Vec<String>>,
@@ -656,6 +663,9 @@ fn generate_property_type(
 
 	let extended_value =
 		if let Some(extension) = value_extension { format!("{}{}", prop.value, extension) } else { prop.value.clone() };
+
+	let extended_value =
+		if let Some(replacement) = value_replacement { replacement.to_string() } else { extended_value };
 
 	let grammar_cleaned = extended_value.replace("'", "\"").replace("∞", "");
 	let parsed_def = grammar_cleaned.parse::<TokenStream>().ok().and_then(|tokens| parse2::<Def>(tokens).ok());

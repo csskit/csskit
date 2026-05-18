@@ -1,16 +1,13 @@
 :unknown
 ---
 coverage/popular/foundation.6.7.5.css
-191:3:  background: #fefefe;
 204:3:  -ms-interpolation-mode: bicubic; }
-232:3:  background: transparent;
 1503:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
 1510:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
 1547:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
 1569:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
 1589:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
 1611:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
-2431:5:    background: transparent !important;
 2434:5:    -webkit-box-shadow: none !important;
 2435:13:            box-shadow: none !important;
 2467:5:    page-break-inside: avoid; }
@@ -21,11 +18,8 @@ coverage/popular/foundation.6.7.5.css
 2667:11:          box-shadow: inset 0 1px 2px rgba(10, 10, 10, 0.1);
 2685:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2686:13:            box-shadow: 0 0 5px #cacaca;
-2796:3:  background: #e6e6e6;
-2884:3:  background-position: right -1rem center;
 2899:5:    -webkit-box-shadow: 0 0 5px #cacaca;
 2900:13:            box-shadow: 0 0 5px #cacaca;
-2946:3:  background: #fefefe;
 3035:3:  -webkit-transform-origin: 50% 50%;
 3036:7:      -ms-transform-origin: 50% 50%;
 3037:11:          transform-origin: 50% 50%; }
@@ -33,45 +27,18 @@ coverage/popular/foundation.6.7.5.css
 3070:7:      -ms-transform-origin: 50% 50%;
 3071:11:          transform-origin: 50% 50%; }
 3079:3:  clip: rect(0, 0, 0, 0) !important;
-3090:3:  background: #1779ba;
-3093:5:    background: #1779ba;
-3096:5:    background: #767676;
-3099:5:    background: #3adb76;
-3102:5:    background: #ffae00;
-3105:5:    background: #cc4b37;
-3355:3:  background: #fefefe;
 3356:3:  -webkit-box-shadow: none;
 3357:11:          box-shadow: none;
-3373:3:  background: #e6e6e6; }
-3646:5:    background: #1779ba;
-3649:5:    background: #1779ba;
-3741:5:    background: #fefefe;
 3742:5:    -webkit-box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
 3743:13:            box-shadow: 0 7px 0 #fefefe, 0 14px 0 #fefefe;
-3746:5:    background: #cacaca;
 3747:5:    -webkit-box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca;
 3748:13:            box-shadow: 0 7px 0 #cacaca, 0 14px 0 #cacaca; }
-3764:5:    background: #0a0a0a;
 3765:5:    -webkit-box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
 3766:13:            box-shadow: 0 7px 0 #0a0a0a, 0 14px 0 #0a0a0a;
-3769:5:    background: #8a8a8a;
 3770:5:    -webkit-box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a;
 3771:13:            box-shadow: 0 7px 0 #8a8a8a, 0 14px 0 #8a8a8a; }
-3784:3:  background: #fefefe; }
-3792:3:  background: #fefefe;
-3930:3:  background: transparent;
-4125:3:  background: #fefefe; }
-4189:3:  background: #1779ba;
-4192:5:    background: #1779ba;
-4195:5:    background: #767676;
-4198:5:    background: #3adb76;
-4201:5:    background: #ffae00;
-4204:5:    background: #cc4b37;
-4263:3:  background: rgba(254, 254, 254, 0.25);
-4290:3:  background: #e6e6e6; }
 4300:7:      -webkit-box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
 4301:15:              box-shadow: 0 0 10px rgba(10, 10, 10, 0.7); }
-4316:3:  background: #e6e6e6; }
 4326:7:      -webkit-box-shadow: 0 0 10px rgba(10, 10, 10, 0.7);
 4327:15:              box-shadow: 0 0 10px rgba(10, 10, 10, 0.7); }
 4356:5:    -webkit-box-shadow: inset -13px 0 20px -13px rgba(10, 10, 10, 0.25);
@@ -82,35 +49,16 @@ coverage/popular/foundation.6.7.5.css
 4409:13:            box-shadow: inset 0 -13px 20px -13px rgba(10, 10, 10, 0.25); }
 4434:5:    -webkit-box-shadow: inset 0 13px 20px -13px rgba(10, 10, 10, 0.25);
 4435:13:            box-shadow: inset 0 13px 20px -13px rgba(10, 10, 10, 0.25); }
-4610:5:    background: none;
 4616:7:      -webkit-box-shadow: none;
 4617:15:              box-shadow: none;
-4629:5:    background: none;
 4635:7:      -webkit-box-shadow: none;
 4636:15:              box-shadow: none;
-4749:7:      background: #e6e6e6; }
-4752:5:    background: #1779ba;
-4760:7:      background: transparent; }
-5039:3:  background: #cacaca;
-5057:5:    background: #fefefe;
-5062:5:    background: #1779ba; }
-5145:5:    background: #f8f8f8;
-5148:5:    background: #f1f1f1;
-5152:5:    background: transparent; }
-5207:3:  background: #fefefe;
-5230:5:    background: transparent; }
-5233:3:  background: #1779ba; }
-5237:7:      background: #1673b1; }
-5250:7:      background: #fefefe;
-5253:7:      background: #e6e6e6;
-5259:3:  background: #fefefe;
 5280:3:  -webkit-box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
 5281:11:          box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
 5290:5:    -webkit-box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5);
 5291:13:            box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5); }
 5293:5:    -webkit-box-shadow: none;
 5294:13:            box-shadow: none; }
-5298:3:  background: #0a0a0a;
 5577:3:  clip: rect(0, 0, 0, 0) !important;
 5859:3:  -webkit-transform-origin: top;
 5860:7:      -ms-transform-origin: top;

@@ -4,7 +4,6 @@
 
 [backgrounds]
 properties = [
-  "background",
   "background-position-block",
   "background-position-inline",
   "background-position-x",

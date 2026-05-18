@@ -33,36 +33,29 @@ StyleSheet(
                 offset: SourceOffset(18),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(19),
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(20),
+                    len: 4,
+                  )), String(Cursor(
+                    kind: "String",
+                    offset: SourceOffset(24),
+                    len: 8,
+                  )), RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(32),
                     len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(20),
-                      len: 4,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        String(Cursor(
-                          kind: "String",
-                          offset: SourceOffset(24),
-                          len: 8,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(32),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                  )))))),
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -81,20 +74,21 @@ StyleSheet(
                 offset: SourceOffset(49),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(50),
-                    len: 1,
-                  )),
-                  Url(Cursor(
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: Some(r#Some(Url(Url(Url(Cursor(
                     kind: "Url",
                     offset: SourceOffset(51),
                     len: 8,
-                  )),
-                ],
-              )),
+                  )))))),
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -113,20 +107,21 @@ StyleSheet(
                 offset: SourceOffset(75),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(76),
-                    len: 1,
-                  )),
-                  Url(Cursor(
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: Some(r#Some(Url(Url(Url(Cursor(
                     kind: "Url",
                     offset: SourceOffset(77),
                     len: 8,
-                  )),
-                ],
-              )),
+                  )))))),
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

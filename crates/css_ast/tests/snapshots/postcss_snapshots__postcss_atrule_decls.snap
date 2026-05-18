@@ -44,20 +44,21 @@ StyleSheet(
               offset: SourceOffset(28),
               len: 1,
             )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(29),
-                  len: 1,
-                )),
-                Ident(Cursor(
+            value: BackgroundStyleValue([
+              (BgLayer(
+                image: None,
+                position: None,
+                repeat: None,
+                attachment: None,
+                origin: None,
+                clip: None,
+                color: Some(Named(Black(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(30),
                   len: 5,
-                )),
-              ],
-            )),
+                ))))),
+              ), None),
+            ]),
             important: None,
             semicolon: None,
           ),
@@ -122,20 +123,21 @@ StyleSheet(
               offset: SourceOffset(76),
               len: 1,
             )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(77),
-                  len: 1,
-                )),
-                Ident(Cursor(
+            value: BackgroundStyleValue([
+              (BgLayer(
+                image: None,
+                position: None,
+                repeat: None,
+                attachment: None,
+                origin: None,
+                clip: None,
+                color: Some(Named(White(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(78),
                   len: 5,
-                )),
-              ],
-            )),
+                ))))),
+              ), None),
+            ]),
             important: None,
             semicolon: None,
           ),

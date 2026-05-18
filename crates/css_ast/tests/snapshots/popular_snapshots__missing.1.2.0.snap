@@ -12166,20 +12166,21 @@ StyleSheet(
                         offset: SourceOffset(8347),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(8348),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BackgroundStyleValue([
+                        (BgLayer(
+                          image: Some(r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(8349),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          )))),
+                          position: None,
+                          repeat: None,
+                          attachment: None,
+                          origin: None,
+                          clip: None,
+                          color: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -18255,20 +18256,21 @@ StyleSheet(
                 offset: SourceOffset(12275),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(12276),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: Some(r#None(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(12277),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -30817,20 +30819,21 @@ StyleSheet(
                 offset: SourceOffset(20541),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20542),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: Some(r#None(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(20543),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -36434,20 +36437,13 @@ StyleSheet(
                     offset: SourceOffset(25034),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(25035),
-                        len: 1,
-                      )),
-                      Ident(Cursor(
-                        kind: "Ident",
-                        offset: SourceOffset(25036),
-                        len: 4,
-                      )),
-                    ],
-                  )),
+                  value: BackgroundPositionStyleValue([
+                    (Standard(SingleValue(Left(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(25036),
+                      len: 4,
+                    ))))), None),
+                  ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -38510,20 +38506,21 @@ StyleSheet(
                 offset: SourceOffset(26507),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26508),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: None,
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: Some(Named(Black(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(26509),
                     len: 5,
-                  )),
-                ],
-              )),
+                  ))))),
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -38650,20 +38647,21 @@ StyleSheet(
                     offset: SourceOffset(26592),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(26593),
-                        len: 1,
-                      )),
-                      Ident(Cursor(
+                  value: BackgroundStyleValue([
+                    (BgLayer(
+                      image: None,
+                      position: None,
+                      repeat: None,
+                      attachment: None,
+                      origin: None,
+                      clip: None,
+                      color: Some(Transparent(Ident(Cursor(
                         kind: "Ident",
                         offset: SourceOffset(26594),
                         len: 11,
-                      )),
-                    ],
-                  )),
+                      )))),
+                    ), None),
+                  ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -45144,20 +45142,21 @@ StyleSheet(
                         offset: SourceOffset(30829),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(30830),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BackgroundStyleValue([
+                        (BgLayer(
+                          image: None,
+                          position: None,
+                          repeat: None,
+                          attachment: None,
+                          origin: None,
+                          clip: None,
+                          color: Some(Currentcolor(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(30831),
                             len: 12,
-                          )),
-                        ],
-                      )),
+                          )))),
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -45639,20 +45638,21 @@ StyleSheet(
                 offset: SourceOffset(31123),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31124),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: BackgroundStyleValue([
+                (BgLayer(
+                  image: Some(r#None(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(31125),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46262,20 +46262,21 @@ StyleSheet(
                         offset: SourceOffset(31609),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(31610),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BackgroundStyleValue([
+                        (BgLayer(
+                          image: Some(r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(31611),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          )))),
+                          position: None,
+                          repeat: None,
+                          attachment: None,
+                          origin: None,
+                          clip: None,
+                          color: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",

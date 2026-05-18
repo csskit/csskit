@@ -10,6 +10,7 @@ mod shorthands;
 mod spec_parser;
 mod todo_properties;
 mod value_extensions;
+mod value_replacements;
 mod web_features_data;
 
 use anyhow::Result;

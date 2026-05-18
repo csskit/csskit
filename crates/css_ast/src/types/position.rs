@@ -116,7 +116,7 @@ pub enum PositionSingleValue {
 
 impl PositionSingleValue {
 	#[inline]
-	fn to_horizontal(self) -> Option<PositionHorizontal> {
+	pub(crate) fn to_horizontal(self) -> Option<PositionHorizontal> {
 		match self {
 			Self::Left(t) => Some(PositionHorizontal::Left(t)),
 			Self::Right(t) => Some(PositionHorizontal::Right(t)),
@@ -127,7 +127,7 @@ impl PositionSingleValue {
 	}
 
 	#[inline]
-	fn to_vertical(self) -> Option<PositionVertical> {
+	pub(crate) fn to_vertical(self) -> Option<PositionVertical> {
 		match self {
 			Self::Top(t) => Some(PositionVertical::Top(t)),
 			Self::Bottom(t) => Some(PositionVertical::Bottom(t)),
@@ -138,7 +138,7 @@ impl PositionSingleValue {
 	}
 
 	#[inline]
-	fn to_horizontal_keyword(self) -> Option<PositionHorizontalKeyword> {
+	pub(crate) fn to_horizontal_keyword(self) -> Option<PositionHorizontalKeyword> {
 		match self {
 			Self::Left(t) => Some(PositionHorizontalKeyword::Left(t)),
 			Self::Right(t) => Some(PositionHorizontalKeyword::Right(t)),
@@ -147,7 +147,7 @@ impl PositionSingleValue {
 	}
 
 	#[inline]
-	fn to_vertical_keyword(self) -> Option<PositionVerticalKeyword> {
+	pub(crate) fn to_vertical_keyword(self) -> Option<PositionVerticalKeyword> {
 		match self {
 			Self::Top(t) => Some(PositionVerticalKeyword::Top(t)),
 			Self::Bottom(t) => Some(PositionVerticalKeyword::Bottom(t)),
