@@ -100,6 +100,7 @@ impl DefType {
 			// Hand-written types that contain other allocating types
 			"Color"          // Color<'a>
 				| "Shadow"       // Shadow<'a> (contains Color<'a>)
+				| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)
 				| "Image"          // contains Gradient<'a>
 				| "Image1d"  // contains StripesFunction<'a>
 				| "ContentList"  // Vec<'a, ContentListItem<'a>>

@@ -140,6 +140,19 @@ mod tests {
 	}
 
 	#[test]
+	fn test_box_shadow() {
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 0 0 .2rem rgba(0,123,255,.25)");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 1px 1px rgba(0,0,0,.075)inset");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "10px 20px 5px red");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "10px 20px inset");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 0 0 transparent,0 0 0 transparent");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(0,0,0,.05)");
+		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowStyleValue, "red");
+	}
+
+	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, BorderTopColorStyleValue, "red");
 		assert_parse!(CssAtomSet::ATOMS, BorderClipStyleValue, "1fr");

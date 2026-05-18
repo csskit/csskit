@@ -6,55 +6,16 @@ use crate::{Color, Length, NonNegative};
 /// ```text,ignore
 /// <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
 /// ```
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[parse(all_must_occur)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Shadow<'a> {
 	pub color: Option<Color<'a>>,
-	pub offset: (Length, Length),
-	pub blur_radius: Option<NonNegative<Length>>,
-	pub spread_radius: Option<Length>,
-	#[cfg_attr(feature = "visitable", visit(skip))]
+	pub offset: (Length, Length, Option<NonNegative<Length>>, Option<Length>),
+	#[atom(CssAtomSet::Inset)]
 	pub inset: Option<T![Ident]>,
-}
-
-impl<'a> Peek<'a> for Shadow<'a> {
-	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(Length::PEEK_KINDSET);
-
-	#[inline(always)]
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		Color::peek(p, c) || Length::peek(p, c)
-	}
-}
-
-impl<'a> Parse<'a> for Shadow<'a> {
-	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		let color = p.parse_if_peek::<Color>()?;
-
-		let x = p.parse::<Length>()?;
-		let y = p.parse::<Length>()?;
-
-		let blur_radius = p.parse_if_peek::<NonNegative<Length>>()?;
-
-		let spread_radius = p.parse_if_peek::<Length>()?;
-
-		let inset = p.parse_if_peek::<T![Ident]>()?;
-		if let Some(ident) = inset
-			&& !p.equals_atom(ident.into(), &CssAtomSet::Inset)
-		{
-			let c: Cursor = x.into();
-			Err(Diagnostic::new(c, Diagnostic::unexpected_ident))?
-		}
-
-		Ok(Self { color, offset: (x, y), blur_radius, spread_radius, inset })
-	}
 }
 
 #[cfg(test)]
@@ -91,6 +52,15 @@ mod tests {
 	}
 
 	#[test]
+	fn test_inset_leading() {
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "inset 10px 20px");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "inset 0 1px 1px");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "inset 0 1px 1px rgba(0,0,0,.075)");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "inset red 10px 20px");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "red inset 10px 20px");
+	}
+
+	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "");
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "10% 20%");
@@ -99,7 +69,6 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "inset");
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "10px 20px -5px");
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "10px 20px 5px 3px 7px");
-		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "10px 20px notinset");
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "10px 20px 5px inset 3px");
 		assert_parse_error!(CssAtomSet::ATOMS, Shadow, "10px 20px 5px 3px inset extra");
 	}

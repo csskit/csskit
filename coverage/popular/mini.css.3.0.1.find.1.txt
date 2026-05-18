@@ -1,10 +1,7 @@
 :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
-843:3:  box-shadow: none;
-848:3:  box-shadow: none;
 861:3:  text-overflow: ellipsis;
-970:3:  box-shadow: none;
 1202:3:  clip: rect(0 0 0 0);
 1203:3:  -webkit-clip-path: inset(100%);
 1204:3:  clip-path: inset(100%);

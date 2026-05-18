@@ -45717,20 +45717,19 @@ StyleSheet(
                 offset: SourceOffset(31180),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31181),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: None,
+                  offset: r#None(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(31182),
                     len: 4,
-                  )),
-                ],
-              )),
+                  ))),
+                  blur: None,
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46015,20 +46014,19 @@ StyleSheet(
                         offset: SourceOffset(31406),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(31407),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BoxShadowStyleValue([
+                        (SpreadShadow(
+                          color: None,
+                          offset: r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(31408),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          ))),
+                          blur: None,
+                          spread: None,
+                          position: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -46207,20 +46205,19 @@ StyleSheet(
                         offset: SourceOffset(31562),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(31563),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BoxShadowStyleValue([
+                        (SpreadShadow(
+                          color: None,
+                          offset: r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(31564),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          ))),
+                          blur: None,
+                          spread: None,
+                          position: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -46352,20 +46349,19 @@ StyleSheet(
                         offset: SourceOffset(31660),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(31661),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BoxShadowStyleValue([
+                        (SpreadShadow(
+                          color: None,
+                          offset: r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(31662),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          ))),
+                          blur: None,
+                          spread: None,
+                          position: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -47953,20 +47949,19 @@ StyleSheet(
                         offset: SourceOffset(32726),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(32727),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BoxShadowStyleValue([
+                        (SpreadShadow(
+                          color: None,
+                          offset: r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(32728),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          ))),
+                          blur: None,
+                          spread: None,
+                          position: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -48022,20 +48017,19 @@ StyleSheet(
                         offset: SourceOffset(32772),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(32773),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
+                      value: BoxShadowStyleValue([
+                        (SpreadShadow(
+                          color: None,
+                          offset: r#None(Ident(Cursor(
                             kind: "Ident",
                             offset: SourceOffset(32774),
                             len: 4,
-                          )),
-                        ],
-                      )),
+                          ))),
+                          blur: None,
+                          spread: None,
+                          position: None,
+                        ), None),
+                      ]),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",

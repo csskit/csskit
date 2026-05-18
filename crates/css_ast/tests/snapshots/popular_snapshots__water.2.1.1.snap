@@ -19238,60 +19238,35 @@ StyleSheet(
                 offset: SourceOffset(17659),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17660),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(17661),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17662),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(17663),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17664),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(17665),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17666),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(17667),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17670),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(17671),
                     len: 9,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(17661),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(17663),
+                    len: 1,
+                  ))))),
+                  blur: Some(Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(17665),
+                    len: 1,
+                  )))),
+                  spread: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(17667),
+                    len: 3,
+                  )))),
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -19310,7 +19285,7 @@ StyleSheet(
                 offset: SourceOffset(17694),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -19477,60 +19452,35 @@ StyleSheet(
                       offset: SourceOffset(17790),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17791),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(17792),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17793),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(17794),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17795),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(17796),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17797),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(17798),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17801),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
+                    value: BoxShadowStyleValue([
+                      (SpreadShadow(
+                        color: Some(Hex(Hash(Cursor(
                           kind: "Hash",
                           offset: SourceOffset(17802),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        offset: r#Some((Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(17792),
+                          len: 1,
+                        ))), Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(17794),
+                          len: 1,
+                        ))))),
+                        blur: Some(Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(17796),
+                          len: 1,
+                        )))),
+                        spread: Some(Px(Dimension(Cursor(
+                          kind: "Dimension",
+                          offset: SourceOffset(17798),
+                          len: 3,
+                        )))),
+                        position: None,
+                      ), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19549,7 +19499,7 @@ StyleSheet(
                       offset: SourceOffset(17825),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -19682,60 +19632,35 @@ StyleSheet(
                 offset: SourceOffset(17885),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17886),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(17887),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17888),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(17889),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17890),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(17891),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17892),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(17893),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(17896),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(17897),
                     len: 9,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(17887),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(17889),
+                    len: 1,
+                  ))))),
+                  blur: Some(Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(17891),
+                    len: 1,
+                  )))),
+                  spread: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(17893),
+                    len: 3,
+                  )))),
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -19754,7 +19679,7 @@ StyleSheet(
                 offset: SourceOffset(17920),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -19921,60 +19846,35 @@ StyleSheet(
                       offset: SourceOffset(18017),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18018),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18019),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18020),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18021),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18022),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18023),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18024),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18025),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18028),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
+                    value: BoxShadowStyleValue([
+                      (SpreadShadow(
+                        color: Some(Hex(Hash(Cursor(
                           kind: "Hash",
                           offset: SourceOffset(18029),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        offset: r#Some((Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18019),
+                          len: 1,
+                        ))), Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18021),
+                          len: 1,
+                        ))))),
+                        blur: Some(Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18023),
+                          len: 1,
+                        )))),
+                        spread: Some(Px(Dimension(Cursor(
+                          kind: "Dimension",
+                          offset: SourceOffset(18025),
+                          len: 3,
+                        )))),
+                        position: None,
+                      ), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -19993,7 +19893,7 @@ StyleSheet(
                       offset: SourceOffset(18052),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -20126,60 +20026,35 @@ StyleSheet(
                 offset: SourceOffset(18112),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18113),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(18114),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18115),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(18116),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18117),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(18118),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18119),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(18120),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18123),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(18124),
                     len: 9,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(18114),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(18116),
+                    len: 1,
+                  ))))),
+                  blur: Some(Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(18118),
+                    len: 1,
+                  )))),
+                  spread: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(18120),
+                    len: 3,
+                  )))),
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -20198,7 +20073,7 @@ StyleSheet(
                 offset: SourceOffset(18147),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -20365,60 +20240,35 @@ StyleSheet(
                       offset: SourceOffset(18244),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18245),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18246),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18247),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18248),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18249),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18250),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18251),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18252),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18255),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
+                    value: BoxShadowStyleValue([
+                      (SpreadShadow(
+                        color: Some(Hex(Hash(Cursor(
                           kind: "Hash",
                           offset: SourceOffset(18256),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        offset: r#Some((Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18246),
+                          len: 1,
+                        ))), Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18248),
+                          len: 1,
+                        ))))),
+                        blur: Some(Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18250),
+                          len: 1,
+                        )))),
+                        spread: Some(Px(Dimension(Cursor(
+                          kind: "Dimension",
+                          offset: SourceOffset(18252),
+                          len: 3,
+                        )))),
+                        position: None,
+                      ), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20437,7 +20287,7 @@ StyleSheet(
                       offset: SourceOffset(18279),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -20570,60 +20420,35 @@ StyleSheet(
                 offset: SourceOffset(18341),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18342),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(18343),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18344),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(18345),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18346),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(18347),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18348),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(18349),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(18352),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(18353),
                     len: 9,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(18343),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(18345),
+                    len: 1,
+                  ))))),
+                  blur: Some(Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(18347),
+                    len: 1,
+                  )))),
+                  spread: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(18349),
+                    len: 3,
+                  )))),
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -20642,7 +20467,7 @@ StyleSheet(
                 offset: SourceOffset(18376),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
+              value: Computed(ComponentValues(
                 values: [
                   Whitespace(Cursor(
                     kind: "Whitespace",
@@ -20809,60 +20634,35 @@ StyleSheet(
                       offset: SourceOffset(18475),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18476),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18477),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18478),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18479),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18480),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(18481),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18482),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(18483),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(18486),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
+                    value: BoxShadowStyleValue([
+                      (SpreadShadow(
+                        color: Some(Hex(Hash(Cursor(
                           kind: "Hash",
                           offset: SourceOffset(18487),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        offset: r#Some((Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18477),
+                          len: 1,
+                        ))), Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18479),
+                          len: 1,
+                        ))))),
+                        blur: Some(Zero(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(18481),
+                          len: 1,
+                        )))),
+                        spread: Some(Px(Dimension(Cursor(
+                          kind: "Dimension",
+                          offset: SourceOffset(18483),
+                          len: 3,
+                        )))),
+                        position: None,
+                      ), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -20881,7 +20681,7 @@ StyleSheet(
                       offset: SourceOffset(18510),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
+                    value: Computed(ComponentValues(
                       values: [
                         Whitespace(Cursor(
                           kind: "Whitespace",
@@ -23654,95 +23454,58 @@ StyleSheet(
                 offset: SourceOffset(20444),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20445),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(20446),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20447),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(20448),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20451),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(20452),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20455),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(20456),
                     len: 4,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(20460),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20461),
-                    len: 1,
-                  )),
-                  Number(Cursor(
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
                     kind: "Number",
-                    offset: SourceOffset(20462),
+                    offset: SourceOffset(20446),
                     len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20463),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(20464),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20465),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+                  ))), Px(Dimension(Cursor(
                     kind: "Dimension",
-                    offset: SourceOffset(20466),
+                    offset: SourceOffset(20448),
                     len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20469),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(20452),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(20460),
+                  len: 1,
+                )))),
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(20470),
                     len: 7,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(20462),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(20464),
+                    len: 1,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(20466),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -25081,95 +24844,58 @@ StyleSheet(
                 offset: SourceOffset(21454),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21455),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(21456),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21459),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(21460),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21463),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(21464),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21467),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(21468),
                     len: 4,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(21472),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21473),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(21474),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21475),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(21476),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21477),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+                  )))),
+                  offset: r#Some((Px(Dimension(Cursor(
                     kind: "Dimension",
-                    offset: SourceOffset(21478),
+                    offset: SourceOffset(21456),
                     len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(21481),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+                  ))), Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(21460),
+                    len: 3,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(21464),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(21472),
+                  len: 1,
+                )))),
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(21482),
                     len: 7,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(21474),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(21476),
+                    len: 1,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(21478),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -25970,95 +25696,58 @@ StyleSheet(
                 offset: SourceOffset(22068),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22069),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22070),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22073),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22074),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22077),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22078),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22081),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(22082),
                     len: 4,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(22086),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22087),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(22088),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22089),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(22090),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22091),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+                  )))),
+                  offset: r#Some((Px(Dimension(Cursor(
                     kind: "Dimension",
-                    offset: SourceOffset(22092),
+                    offset: SourceOffset(22070),
                     len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22095),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+                  ))), Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22074),
+                    len: 3,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22078),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(22086),
+                  len: 1,
+                )))),
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(22096),
                     len: 7,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(22088),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(22090),
+                    len: 1,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22092),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -26487,95 +26176,58 @@ StyleSheet(
                 offset: SourceOffset(22409),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22410),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22411),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22414),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22415),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22418),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22419),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22422),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(22423),
                     len: 4,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(22427),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22428),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(22429),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22430),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(22431),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22432),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+                  )))),
+                  offset: r#Some((Px(Dimension(Cursor(
                     kind: "Dimension",
-                    offset: SourceOffset(22433),
+                    offset: SourceOffset(22411),
                     len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22436),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+                  ))), Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22415),
+                    len: 3,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22419),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(22427),
+                  len: 1,
+                )))),
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(22437),
                     len: 7,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(22429),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(22431),
+                    len: 1,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22433),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -26865,95 +26517,58 @@ StyleSheet(
                 offset: SourceOffset(22636),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22637),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22638),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22641),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22642),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22645),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(22646),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22649),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(22650),
                     len: 4,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(22654),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22655),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(22656),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22657),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(22658),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22659),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+                  )))),
+                  offset: r#Some((Px(Dimension(Cursor(
                     kind: "Dimension",
-                    offset: SourceOffset(22660),
+                    offset: SourceOffset(22638),
                     len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(22663),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
+                  ))), Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22642),
+                    len: 3,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22646),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(22654),
+                  len: 1,
+                )))),
+                (SpreadShadow(
+                  color: Some(Hex(Hash(Cursor(
                     kind: "Hash",
                     offset: SourceOffset(22664),
                     len: 7,
-                  )),
-                ],
-              )),
+                  )))),
+                  offset: r#Some((Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(22656),
+                    len: 1,
+                  ))), Zero(Number(Cursor(
+                    kind: "Number",
+                    offset: SourceOffset(22658),
+                    len: 1,
+                  ))))),
+                  blur: Some(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(22660),
+                    len: 3,
+                  )))),
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
