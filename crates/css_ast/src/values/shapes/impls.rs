@@ -7,9 +7,9 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ShapeImageThresholdStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ShapeInsideStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<ShapeInsideStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ShapeMarginStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ShapeOutsideStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<ShapeOutsideStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ShapePaddingStyleValue>(), 16);
 	}
 

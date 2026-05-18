@@ -9,9 +9,9 @@ mod tests {
 		assert_eq!(std::mem::size_of::<CounterIncrementStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<CounterResetStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<CounterSetStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ListStyleImageStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<ListStyleImageStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ListStylePositionStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ListStyleStyleValue>(), 216);
+		assert_eq!(std::mem::size_of::<ListStyleStyleValue>(), 128);
 		assert_eq!(std::mem::size_of::<ListStyleTypeStyleValue>(), 72);
 		assert_eq!(std::mem::size_of::<MarkerSideStyleValue>(), 16);
 	}

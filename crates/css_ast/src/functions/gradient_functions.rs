@@ -13,9 +13,9 @@ use crate::{Length, LengthPercentage};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum Gradient<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
-	LinearGradientFunction(LinearGradientFunction<'a>),
+	LinearGradientFunction(BumpBox<'a, LinearGradientFunction<'a>>),
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
-	RepeatingLinearGradientFunction(RepeatingLinearGradientFunction<'a>),
+	RepeatingLinearGradientFunction(BumpBox<'a, RepeatingLinearGradientFunction<'a>>),
 	#[atom(CssAtomSet::RadialGradient)]
 	RadialGradientFunction(BumpBox<'a, RadialGradientFunction<'a>>),
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
@@ -243,7 +243,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Gradient>(), 128);
+		assert_eq!(std::mem::size_of::<Gradient>(), 24);
 		assert_eq!(std::mem::size_of::<LinearDirection>(), 44);
 		assert_eq!(std::mem::size_of::<RadialSize>(), 32);
 		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 40);
