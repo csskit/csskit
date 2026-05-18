@@ -1,4 +1,7 @@
-use crate::CssMetadata;
+use crate::{
+	CssMetadata,
+	specificity::{Specificity, ToSpecificity},
+};
 use bumpalo::collections::Vec;
 use css_parse::{
 	CompoundSelector as CompoundSelectorTrait, Cursor, NodeMetadata, NodeWithMetadata, Parse, Parser,
@@ -125,6 +128,31 @@ impl<'a> Parse<'a> for SelectorComponent<'a> {
 	}
 }
 
+impl<'a> ToSpecificity for SelectorComponent<'a> {
+	fn specificity(&self) -> Specificity {
+		match self {
+			Self::Id(_) => Specificity(1, 0, 0),
+			Self::Class(_) | Self::Attribute(_) | Self::PseudoClass(_) => Specificity(0, 1, 0),
+			Self::Tag(_) | Self::PseudoElement(_) | Self::LegacyPseudoElement(_) => Specificity(0, 0, 1),
+			Self::FunctionalPseudoElement(_) => Specificity(0, 0, 1),
+			Self::Combinator(_) | Self::Namespace(_) | Self::Wildcard(_) => Specificity(0, 0, 0),
+			Self::FunctionalPseudoClass(f) => f.specificity(),
+		}
+	}
+}
+
+impl<'a> ToSpecificity for CompoundSelector<'a> {
+	fn specificity(&self) -> Specificity {
+		self.0.iter().map(ToSpecificity::specificity).sum()
+	}
+}
+
+impl<'a> ToSpecificity for SelectorList<'a> {
+	fn specificity(&self) -> Specificity {
+		(&self.0).into_iter().map(|(s, _)| s.specificity()).max().unwrap_or_default()
+	}
+}
+
 impl<'a> SelectorComponentTrait<'a> for SelectorComponent<'a> {
 	type Wildcard = Wildcard;
 	type Id = Id;
@@ -191,7 +219,10 @@ impl<'a> SelectorComponentTrait<'a> for SelectorComponent<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::CssAtomSet;
+	use crate::{CssAtomSet, specificity::ToSpecificity};
+	use bumpalo::Bump;
+	use css_lexer::Lexer;
+	use css_parse::Parser;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -282,5 +313,66 @@ mod tests {
 	fn test_assert_visits_fails() {
 		use crate::assert_visits;
 		assert_visits!(".foo", CompoundSelector, visit_id<Id>);
+	}
+
+	macro_rules! assert_specificity {
+		($sel:literal, $a:literal, $b:literal, $c:literal) => {{
+			let bump = Bump::default();
+			let lexer = Lexer::new(&CssAtomSet::ATOMS, $sel);
+			let mut parser = Parser::new(&bump, $sel, lexer);
+			let result = parser.parse_entirely::<SelectorList>().with_trivia();
+			assert!(result.errors.is_empty(), "parse failed for {:?}: {:?}", $sel, result.errors);
+			let s = result.output.unwrap().specificity();
+			assert_eq!(
+				s,
+				Specificity($a, $b, $c),
+				"selector {:?}: expected ({},{},{}) got ({},{},{})",
+				$sel,
+				$a,
+				$b,
+				$c,
+				s.0,
+				s.1,
+				s.2
+			);
+		}};
+	}
+
+	#[test]
+	fn test_specificity_arithmetic() {
+		assert_eq!(Specificity(0, 1, 0) + Specificity(0, 1, 0), Specificity(0, 2, 0));
+		assert_eq!(Specificity(1, 0, 0) + Specificity(0, 1, 0), Specificity(1, 1, 0));
+		assert_eq!(Specificity(255, 0, 0) + Specificity(1, 0, 0), Specificity(255, 0, 0));
+	}
+
+	#[test]
+	fn test_specificity() {
+		assert_specificity!("#foo", 1, 0, 0);
+		assert_specificity!(".foo", 0, 1, 0);
+		assert_specificity!(".a.b.c", 0, 3, 0);
+		assert_specificity!("div", 0, 0, 1);
+		assert_specificity!(":hover", 0, 1, 0);
+		assert_specificity!("::before", 0, 0, 1);
+		assert_specificity!(":before", 0, 0, 1);
+		assert_specificity!("[href]", 0, 1, 0);
+		assert_specificity!("*", 0, 0, 0);
+		assert_specificity!("a.foo", 0, 1, 1);
+		assert_specificity!("a.foo:hover", 0, 2, 1);
+		assert_specificity!("#a.b", 1, 1, 0);
+		assert_specificity!(":where(.a.b)", 0, 0, 0);
+		assert_specificity!(":is(.a, #b)", 1, 0, 0);
+		assert_specificity!(":not(.a, .b)", 0, 1, 0);
+		assert_specificity!("a:has(.b)", 0, 1, 1);
+		assert_specificity!(":nth-child(2)", 0, 1, 0);
+		assert_specificity!(":nth-of-type(2n+1)", 0, 1, 0);
+		assert_specificity!(".a, #b", 1, 0, 0);
+	}
+
+	#[test]
+	fn test_specificity_complex() {
+		assert_specificity!("nav ul li:nth-child(even) a:not([href^='#'])", 0, 2, 4);
+		assert_specificity!("button:only-of-type:enabled:active:hover", 0, 4, 1);
+		assert_specificity!("table tr:not(:first-child):hover td:nth-child(2n+1)", 0, 3, 3);
+		assert_specificity!("input[type='checkbox'][checked]:indeterminate + label", 0, 3, 2);
 	}
 }

@@ -9,7 +9,7 @@ mod properties;
 mod property_atoms;
 mod rules;
 mod selector;
-mod specificity;
+pub mod specificity;
 mod stylerule;
 mod stylesheet;
 #[cfg(test)]

@@ -1,4 +1,7 @@
-use crate::CssAtomSet;
+use crate::{
+	CssAtomSet,
+	specificity::{Specificity, ToSpecificity},
+};
 use css_lexer::Kind;
 use css_parse::{CommaSeparated, Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, State, T};
 use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
@@ -322,6 +325,22 @@ pub struct HeadingPseudoFunction<'a> {
 	pub function: T![Function],
 	pub value: CommaSeparated<'a, Nth>,
 	pub close: Option<T![')']>,
+}
+
+impl<'a> ToSpecificity for FunctionalPseudoClass<'a> {
+	fn specificity(&self) -> Specificity {
+		match self {
+			Self::Where(_) => Specificity(0, 0, 0),
+			Self::Is(f) => f.value.specificity(),
+			Self::Not(f) => f.value.specificity(),
+			Self::Has(f) => f.value.specificity(),
+			Self::Host(f) => f.value.specificity(),
+			Self::HostContext(f) => f.value.specificity(),
+			Self::NthChild(_) | Self::NthLastChild(_) => Specificity(0, 1, 0),
+			Self::NthOfType(_) | Self::NthLastOfType(_) | Self::NthCol(_) | Self::NthLastCol(_) => Specificity(0, 1, 0),
+			Self::Dir(_) | Self::Lang(_) | Self::State(_) | Self::Heading(_) => Specificity(0, 1, 0),
+		}
+	}
 }
 
 #[cfg(test)]

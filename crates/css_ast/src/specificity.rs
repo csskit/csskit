@@ -6,21 +6,21 @@ pub trait ToSpecificity: Sized {
 	fn specificity(&self) -> Specificity;
 }
 
-#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash, Default)]
 pub struct Specificity(pub u8, pub u8, pub u8);
 
 impl ops::AddAssign for Specificity {
 	fn add_assign(&mut self, other: Self) {
-		self.0 |= other.0;
-		self.1 |= other.1;
-		self.2 |= other.2;
+		self.0 = self.0.saturating_add(other.0);
+		self.1 = self.1.saturating_add(other.1);
+		self.2 = self.2.saturating_add(other.2);
 	}
 }
 
 impl ops::Add for Specificity {
 	type Output = Self;
 	fn add(self, other: Self) -> Self {
-		Self(self.0 | other.0, self.1 | other.1, self.2 | other.2)
+		Self(self.0.saturating_add(other.0), self.1.saturating_add(other.1), self.2.saturating_add(other.2))
 	}
 }
 
