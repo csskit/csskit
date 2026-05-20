@@ -1,11 +1,9 @@
 :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
-861:3:  text-overflow: ellipsis;
 1202:3:  clip: rect(0 0 0 0);
 1203:3:  -webkit-clip-path: inset(100%);
 1204:3:  clip-path: inset(100%);
-1363:3:  text-overflow: ellipsis;
 1457:5:    clip: rect(0 0 0 0);
 1458:5:    -webkit-clip-path: inset(100%);
 1459:5:    clip-path: inset(100%);

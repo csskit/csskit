@@ -67382,20 +67382,11 @@ StyleSheet(
                 offset: SourceOffset(51329),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(51330),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(51331),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: TextOverflowStyleValue(Ellipsis(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(51331),
+                len: 8,
+              ))), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -227280,20 +227271,11 @@ StyleSheet(
                 offset: SourceOffset(189792),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(189793),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(189794),
-                    len: 8,
-                  )),
-                ],
-              )),
+              value: TextOverflowStyleValue(Ellipsis(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(189794),
+                len: 8,
+              ))), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -776,48 +776,32 @@ pub enum ScrollTargetGroupStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScrollbarGutterStyleValue;
 
-// /// Represents the style value for `text-overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#text-overflow).
-// ///
-// /// The text-overflow CSS property sets how hidden overflow content appears to users. The property can clip content, truncate content with an ellipsis (…), or truncate with a custom string.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ clip | ellipsis | <string> | fade | <fade()> ]{1,2}
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-overflow-5/#text-overflow
-// #[syntax(" [ clip | ellipsis | <string> | fade | <fade()> ]{1,2} ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "clip",
-//     applies_to = Block,
-//     animation_type = ByComputedValue,
-//     percentages = LineBox,
-//     property_group = Overflow,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.text-overflow")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct TextOverflowStyleValue;
+/// Represents the style value for `text-overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#text-overflow).
+///
+/// The text-overflow CSS property sets how hidden overflow content appears to users. The property can clip content, truncate content with an ellipsis (…), or truncate with a custom string.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ clip | ellipsis | <string> | fade | <fade()> ]{1,2}
+/// ```
+///
+/// https://drafts.csswg.org/css-overflow-5/#text-overflow
+#[syntax(" [ clip | ellipsis | <string> | fade | <fade()> ]{1,2} ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "clip",
+    applies_to = Block,
+    animation_type = ByComputedValue,
+    percentages = LineBox,
+    property_group = Overflow,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-overflow"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct TextOverflowStyleValue;

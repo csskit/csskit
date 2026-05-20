@@ -17,10 +17,6 @@ FAIL anchor/0003
 FAIL anchor/0004
 -@position-try --empty{}
 
-FAIL anchor/0005
--@position-try --top{position-area:top}a{position-area:bottom;position-try-fallbacks:--top,--undefined}
-+@position-try --top{position-area:top}a{position-area:bottom;position-try-fallbacks:--top}
-
 FAIL charset/0001
 -@charset"UTF-8";a{color:red}
 +a{color:red}
@@ -79,10 +75,6 @@ FAIL container/0006
 FAIL counter-style/0002
 -@counter-style empty{}
 
-FAIL counter-style/0003
--@counter-style paren{system:fixed;symbols:"("")"}
-+@counter-style paren{system:fixed;symbols:"(" ")"}
-
 FAIL duplicates/0001
 -a{color:red;color:blue}
 +a{color:#00f}
@@ -134,6 +126,10 @@ FAIL duplicates/0013
 FAIL duplicates/0014
 -a{border-top:1px solid blue;border-top:2px solid red}
 +a{border-top:2px solid red}
+
+FAIL duplicates/0019
+-a{color:var(--x);color:var(--x)}
++a{color:var(--x)}
 
 FAIL empty-rules/0001
 -a{}b{color:red}
@@ -387,7 +383,7 @@ FAIL selectors/0007
 
 FAIL selectors/0008
 -a:nth-child(1n){color:red}
-+a{color:red}
++a:nth-child(n){color:red}
 
 FAIL selectors/0009
 -a:nth-of-type(1){color:red}

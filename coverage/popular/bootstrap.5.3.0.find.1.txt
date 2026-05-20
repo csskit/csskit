@@ -4,7 +4,6 @@ coverage/popular/bootstrap.5.3.0.css
 128:3:  color-scheme: dark;
 348:3:  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
 2487:3:  clip: rect(0, 0, 0, 0);
-2609:3:  text-overflow: ellipsis;
 2613:3:  transform-origin: 0 0;
 2652:3:  color: rgba(var(--bs-body-color-rgb), 0.65);
 2659:3:  color: rgba(var(--bs-body-color-rgb), 0.65);
@@ -91,7 +90,6 @@ coverage/popular/bootstrap.5.3.0.css
 7007:3:  text-decoration-color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 0.5));
 7016:3:  fill: currentcolor;
 7183:3:  clip: rect(0, 0, 0, 0) !important;
-7204:3:  text-overflow: ellipsis;
 7561:3:  border-color: rgba(var(--bs-primary-rgb), var(--bs-border-opacity)) !important;
 7566:3:  border-color: rgba(var(--bs-secondary-rgb), var(--bs-border-opacity)) !important;
 7571:3:  border-color: rgba(var(--bs-success-rgb), var(--bs-border-opacity)) !important;
