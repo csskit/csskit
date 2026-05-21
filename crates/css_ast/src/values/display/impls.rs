@@ -41,11 +41,22 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "table-row");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "list-item");
 
-		// Vendor-prefixed legacy flex values
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "box");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-webkit-box");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-webkit-inline-box");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-webkit-flex");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-webkit-inline-flex");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-moz-box");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-moz-inline-box");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-moz-flex");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-moz-flexbox");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-moz-inline-stack");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-flex");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-inline-flex");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-flexbox");
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-inline-flexbox");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-ms-grid");
+		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "-o-flex");
 	}
 
 	#[test]
