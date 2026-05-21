@@ -1158,6 +1158,7 @@ pub enum CssAtomSet {
 	Lightblue,
 	Lightcoral,
 	Lightcyan,
+	LightDark,
 	Lighten,
 	Lighter,
 	Lightgoldenrodyellow,

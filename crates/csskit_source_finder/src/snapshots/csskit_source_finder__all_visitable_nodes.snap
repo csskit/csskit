@@ -914,6 +914,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct LeaderFunction { }",
   "pub struct LeftStyleValue { }",
   "pub struct LetterSpacingStyleValue { }",
+  "pub struct LightDarkFunction < \'a > { }",
   "pub struct LightingColorStyleValue < \'a > { }",
   "pub struct LineClampStyleValue { }",
   "pub struct LineHeightStepStyleValue { }",

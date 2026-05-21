@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::functions::color_mix_function::ColorMixFunction;
+use crate::functions::light_dark_function::LightDarkFunction;
 use crate::functions::relative_color::RelativeColorFunction;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
 use css_parse::BumpBox;
@@ -68,6 +69,7 @@ pub enum ColorFunction<'a> {
 	Relative(BumpBox<'a, RelativeColorFunction<'a>>),
 	Color(BumpBox<'a, ColorFunctionColor>),
 	ColorMix(BumpBox<'a, ColorMixFunction<'a>>),
+	LightDark(BumpBox<'a, LightDarkFunction<'a>>),
 	Rgb(RgbFunction),
 	Rgba(RgbaFunction),
 	Hsl(HslFunction),
@@ -93,6 +95,9 @@ impl<'a> Parse<'a> for ColorFunction<'a> {
 		}
 		if p.peek::<BumpBox<ColorMixFunction>>() {
 			return Ok(Self::ColorMix(p.parse()?));
+		}
+		if p.peek::<BumpBox<LightDarkFunction>>() {
+			return Ok(Self::LightDark(p.parse()?));
 		}
 		if p.peek::<RgbFunction>() {
 			return Ok(Self::Rgb(p.parse()?));
@@ -129,6 +134,7 @@ impl crate::ToChromashift for ColorFunction<'_> {
 			Self::Relative(r) => r.to_chromashift(),
 			Self::Color(c) => c.to_chromashift(),
 			Self::ColorMix(c) => c.to_chromashift(),
+			Self::LightDark(_c) => None,
 			Self::Rgb(c) => c.to_chromashift(),
 			Self::Rgba(c) => c.to_chromashift(),
 			Self::Hsl(c) => c.to_chromashift(),
