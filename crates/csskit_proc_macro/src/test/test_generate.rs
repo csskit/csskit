@@ -538,3 +538,12 @@ fn vendor_prefixed_keyword_enum() {
 	let pretty = ::prettyplease::unparse(&file);
 	assert!(pretty.contains("_WebkitSticky"), "expected _WebkitSticky in:\n{}", pretty);
 }
+
+#[test]
+fn transform_origin_grammar() {
+	let syntax = to_valuedef!(
+		" [ left | center | right | top | bottom | <length-percentage> ] | [ left | center | right | <length-percentage> ] [ top | center | bottom | <length-percentage> ] <length>? | [ [ center | left | right ] && [ center | top | bottom ] ] <length>? "
+	);
+	let data = to_deriveinput! { #[derive(Parse)] enum TransformOriginStyleValue {} };
+	assert_snapshot!(syntax, data, "transform_origin_grammar");
+}

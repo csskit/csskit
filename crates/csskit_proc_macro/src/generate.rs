@@ -16,6 +16,28 @@ pub fn keyword_to_pascal(s: &str) -> String {
 	if s.starts_with('-') { format!("_{pascal}") } else { pascal }
 }
 
+/// Returns a structural suffix used to disambiguate colliding variant names.
+///
+/// When two variants in an enum would otherwise get the same name, we append this
+/// suffix to the second occurrence. The suffix reflects the underlying grammar
+/// structure so the name remains meaningful.
+///
+/// Returns `Some("AnyOrder")` for variants whose top-level structure includes an
+/// `AllMustOccur` combinator (the `&&` operator — keyword pairs in any order).
+/// Returns `None` for the "default" ordered form (no disambiguation suffix needed).
+fn collision_suffix(def: &Def) -> Option<&'static str> {
+	match def {
+		Def::Combinator(children, DefCombinatorStyle::Ordered) => {
+			if children.iter().any(|c| matches!(c, Def::Combinator(_, DefCombinatorStyle::AllMustOccur))) {
+				Some("AnyOrder")
+			} else {
+				None
+			}
+		}
+		_ => None,
+	}
+}
+
 /// Trait for extending Def with code generation methods.
 pub trait DefExt {
 	fn single_ident(ident: &Ident) -> Ident;
@@ -103,17 +125,19 @@ impl ToFieldName for Def {
 			Self::IntLiteral(v) => format_ident!("Literal{}", v.to_string()),
 			Self::DimensionLiteral(int, dim) => format_ident!("Literal{int}{dim}"),
 			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
-				let non_optional: Vec<String> = ds
+				let non_optional: Vec<(String, &Def)> = ds
 					.iter()
 					.filter(|d| !matches!(d, Def::Optional(_) | Def::Punct(_)))
-					.map(|d| d.to_variant_name(0).to_string())
+					.map(|d| (d.to_variant_name(0).to_string(), d))
 					.collect();
 				let distinct_count = {
-					let mut uniq = non_optional.clone();
+					let mut uniq: Vec<&str> = non_optional.iter().map(|(s, _)| s.as_str()).collect();
 					uniq.dedup();
 					uniq.len()
 				};
-				if distinct_count > 1 {
+				let has_multiple_ident_children =
+					non_optional.len() > 1 && non_optional.iter().any(|(_, d)| matches!(d, Def::Ident(_)));
+				if distinct_count > 1 || has_multiple_ident_children {
 					let name: String = ds
 						.iter()
 						.filter(|d| !matches!(d, Def::Punct(_)))
@@ -847,11 +871,59 @@ impl GenerateDefinition for Def {
 					// names reflect the discriminator rather than concatenating shared keywords.
 					let distinguishing = distinguishing_keyword_names(&options_inner_defs);
 
+					let base_names: Vec<String> = children
+						.iter()
+						.enumerate()
+						.map(|(child_idx, d)| {
+							let options_helper_idx = options_indices.iter().position(|&i| i == child_idx);
+							if let Some(idx) = options_helper_idx {
+								let inner = options_inner_defs[idx];
+								if let Some(keywords) = &distinguishing[idx] {
+									keywords.iter().map(|k| k.to_pascal_case()).collect::<String>()
+								} else {
+									inner.to_variant_name(0).to_string()
+								}
+							} else {
+								d.to_variant_name(0).to_string()
+							}
+						})
+						.collect();
+
+					let mut seen: std::collections::HashMap<String, usize> = std::collections::HashMap::new();
+					let resolved_names: Vec<Ident> = base_names
+						.iter()
+						.zip(children.iter())
+						.enumerate()
+						.map(|(child_idx, (base, d))| {
+							let options_helper_idx = options_indices.iter().position(|&i| i == child_idx);
+							let raw = if *seen.get(base.as_str()).unwrap_or(&0) == 0 {
+								base.clone()
+							} else {
+								let suffix = if options_helper_idx.is_some() { None } else { collision_suffix(d) };
+								if let Some(s) = suffix {
+									let candidate = format!("{base}{s}");
+									if *seen.get(candidate.as_str()).unwrap_or(&0) == 0 {
+										candidate
+									} else {
+										let n = seen.get(candidate.as_str()).copied().unwrap_or(1);
+										format!("{candidate}{n}")
+									}
+								} else {
+									let n = seen.get(base.as_str()).copied().unwrap_or(1);
+									format!("{base}{n}")
+								}
+							};
+							*seen.entry(base.clone()).or_insert(0) += 1;
+							format_ident!("{}", raw)
+						})
+						.collect();
+
 					let variants: TokenStream = children
 						.iter()
 						.enumerate()
 						.map(|(child_idx, d)| {
 							let mut attrs = Some(d.type_attributes(derives_parse, derives_visitable));
+							let name = resolved_names[child_idx].clone();
 							// Locate this child in the Options list (if it is one).
 							let options_helper_idx = options_indices.iter().position(|&i| i == child_idx);
 							if let Some(idx) = options_helper_idx {
@@ -860,14 +932,8 @@ impl GenerateDefinition for Def {
 								let Def::Combinator(opts_children, DefCombinatorStyle::Options) = inner else {
 									unreachable!("filtered above");
 								};
-								// Variant name: distinguishing keywords (if computed) else full
-								// concatenation of all child names.
-								let name = if let Some(keywords) = &distinguishing[idx] {
-									let auto = keywords.iter().map(|k| k.to_pascal_case()).collect::<String>();
-									format_ident!("{}", get_type_rename(&auto).unwrap_or(&auto))
-								} else {
-									inner.to_variant_name(0)
-								};
+								let name_str = name.to_string();
+								let name = format_ident!("{}", get_type_rename(&name_str).unwrap_or(&name_str));
 								let members: Vec<_> = opts_children
 									.iter()
 									.flat_map(|child| {
@@ -897,7 +963,6 @@ impl GenerateDefinition for Def {
 								};
 								quote! { #variant_attrs #name { #(#members),* }, }
 							} else {
-								let name = d.to_variant_name(0);
 								let types = match d {
 									Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
 										.iter()
