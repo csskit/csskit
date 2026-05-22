@@ -688,7 +688,7 @@ fn generate_property_type(
 	let doc_grammar_header = " The grammar is defined as:";
 	let grammar = &extended_value;
 
-	let syntax_value = format!(" {} ", extended_value.replace('\n', " "));
+	let syntax_value = format!(" {} ", extended_value.replace(['\n', '\u{a0}'], " "));
 
 	// Build declaration_metadata attributes
 	let initial = &prop.initial;
