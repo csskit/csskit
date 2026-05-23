@@ -1,7 +1,7 @@
 @import url("open-props/normalize.min.css");
 @import url("open-props/open-props.min.css");
 @import url("open-props/media.min.css");
-@import url("open-props/masks.edges.min.css");
+@import url("openswatch/css/open-swatch.css");
 
 @font-face {
 	font-family: "Fredoka";
@@ -15,53 +15,56 @@
 		U+2122, U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
 }
 
-/*#0a050f  #29143D  #47246B  #663399  #8547c2  #a375d1  #a375d1  #F5F0FA */
-/*#663399  #4CE0B3 #f45866  #78c3fb  #ffbf46 */
-
 :root {
-	--bg-1: rgba(255 255 255 / 0.8);
+	--color-lightness-inc: -/**/ 5.6%;
+	--color-lightness-1: 98%;
+	--color-chroma-inc: 0.056;
+	--color-chroma-1: 0.02;
+	--color-yellow-base: 101;
+	--color-orange-base: 49.38;
+	--color-magenta-base: 350;
+	--color-green-base: 152.5;
+	--accent: #639;
+	--bg-overlay: hsl(0 0% 100% / 0.7);
+	--bg: var(--sand-0);
+	--outline: 3px solid var(--ink);
+	--outline-thick: 4px solid var(--ink);
+	--ink: var(--text-1);
+
 	scroll-behavior: smooth;
 	background:
-		linear-gradient(to top, var(--bg-1), var(--bg-1)),
-		url(/images/background.svg) top left 0/200px var(--sand-0);
+		linear-gradient(to top, var(--bg-overlay), var(--bg-overlay)),
+		url(/images/background.svg) top left / 300px var(--bg);
 
-	font-family:
-		Calibri,
-		Candara,
-		Segoe,
-		Segoe UI,
-		Helvetica,
-		sans-serif;
+	font-family: Fredoka, Calibri, Candara, Segoe, "Segoe UI", Helvetica, sans-serif;
 	font-size: 17px;
-
-	--text-1: #0a050f;
-	--text-2: #1c0e2a;
-	--text-3: #47246b;
-
-	--surface-1: #f5f0fa;
-	--surface-2: #e2d4f0;
-	--surface-3: #c6a9e2;
+	color: var(--text-1);
 
 	@media (prefers-color-scheme: dark) {
-		--text-1: #f5f0fa;
-		--text-2: #e2d4f0;
-		--text-3: #c6a9e2;
+		--text-1: #f0ecf8;
+		--text-2: #d4c8e8;
+		--text-3: #bf5fff;
+		--surface-1: #0e0e1c;
+		--surface-2: #181828;
+		--surface-3: #242438;
+		--bg-overlay: hsl(220 18.4% 9.6% / 0.96);
+		--bg: hsl(220 18.4% 9.6%);
 
-		--surface-1: #0a050f;
-		--surface-2: #29143d;
-		--surface-3: #47246b;
+		--outline: 3px solid var(--ink);
+		--outline-thick: 4px solid var(--ink);
 
-		--bg-1: rgba(0 0 0 / 0.94);
+		color: var(--text-1);
 	}
+}
+
+:where(h1, h2, h3, h4, h5, h6) {
+	font-family: Fredoka, Fredoka, sans-serif;
+	font-weight: 400;
+	letter-spacing: 0.02em;
 }
 
 body > :where(row-stack, col-stack) {
 	min-height: 100vh;
-}
-
-:where(h1, h2, h3, h4, h5, h6) {
-	font-family: Fredoka;
-	font-weight: var(--font-weight-4);
 }
 
 nav ol {
@@ -92,18 +95,13 @@ col-stack {
 }
 
 .page-head {
-	height: 80px;
+	height: 100px;
 	flex: 0;
 	position: sticky;
 	top: 0;
-	background: #fff;
-	z-index: 1;
-	box-shadow: var(--shadow-2);
+	background: var(--surface-1);
+	z-index: 10;
 	width: 100%;
-
-	@media (prefers-color-scheme: dark) {
-		background: #0f0f0f;
-	}
 
 	a {
 		color: var(--text-1);
@@ -116,7 +114,11 @@ col-stack {
 
 		a {
 			display: block;
-			margin: 1rem;
+			margin: 0.75rem 2rem;
+
+			&:first-child {
+				flex-shrink: 0;
+			}
 		}
 	}
 
@@ -124,41 +126,74 @@ col-stack {
 		display: flex;
 		align-items: center;
 		justify-content: end;
-		margin: 0 2rem 0 0;
+		margin: 0 1.5rem 0 0;
 
 		ul {
 			display: flex;
 			flex-direction: row;
-			gap: 1rem;
+			gap: 1.5rem;
 			align-items: center;
 			list-style: none;
+		}
 
-			li {
-				min-width: 2rem;
-				display: flex;
-				align-content: center;
+		li {
+			min-width: 2rem;
+			display: flex;
+			align-content: center;
+			text-transform: uppercase;
+		}
+
+		svg {
+			display: inline-block;
+			width: 1rem;
+			height: 1rem;
+			flex-shrink: 0;
+		}
+
+		a {
+			display: flex;
+			gap: 0.5rem;
+			font-family: Fredoka, sans-serif;
+			font-size: 0.9rem;
+			color: var(--text-2);
+			align-items: center;
+		}
+
+		@media (max-width: 700px) {
+			span {
+				position: absolute;
+				width: 1px;
+				height: 1px;
+				padding: 0;
+				margin: -1px;
+				overflow: hidden;
+				clip: rect(0, 0, 0, 0);
+				border: 0;
 			}
 		}
 	}
+}
+
+.get-started-button[class] {
+	display: none;
 }
 
 .side-nav {
 	flex: initial;
 	width: 90vw;
 	height: 100%;
-	box-shadow: var(--shadow-6), var(--shadow-6);
 	padding: 2rem 0 0;
 	flex-shrink: 0;
 	overflow-x: hidden;
+	background: var(--surface-1);
 
 	&::backdrop {
-		background: #000000aa;
+		background: rgba(0, 0, 0, 0.6);
 	}
 
 	@media (width >= 768px) {
 		padding: 0;
 		display: flex;
-		box-shadow: none;
 		width: 25ch;
 		height: auto;
 		inset: auto;
@@ -182,17 +217,13 @@ col-stack {
 		}
 
 		li {
-			margin: 0 0 0 0.7rem;
-
 			&.nav-section {
-				font-family: Fredoka;
-				font-size: var(--font-size-2);
+				font-family: Fredoka, sans-serif;
+				font-size: var(--font-size-1);
 				color: var(--text-2);
 				margin: 1.5rem 0 0.5rem 0;
 				padding: 0 1rem;
-				text-transform: uppercase;
-				font-weight: 600;
-				letter-spacing: 0.5px;
+				letter-spacing: 0.1em;
 			}
 		}
 
@@ -200,17 +231,20 @@ col-stack {
 			color: var(--text-1);
 			padding: 0.5rem 1rem;
 			margin-left: 0.5rem;
-			border-radius: var(--radius-2);
-
+			border-radius: 0;
+			font-family: Fredoka, sans-serif;
 			&:hover {
-				background: var(--surface-2);
+				border-radius: var(--radius-3);
+				background: var(--purple-6);
+				color: var(--purple-1);
 				text-decoration: none;
 			}
 		}
 
-		[active] {
-			margin-left: 0;
-			border-left: 0.5rem solid #8d54c6;
+		[active] > a {
+			border-radius: var(--radius-3);
+			background: var(--accent);
+			color: var(--purple-1);
 		}
 	}
 }
@@ -220,6 +254,7 @@ col-stack {
 		appearance: none;
 		background: none;
 		width: 2rem;
+		cursor: pointer;
 	}
 
 	@media (width >= 768px) {
@@ -232,10 +267,11 @@ col-stack {
 	max-width: 100vw;
 
 	:where(h2, h3, h4, h5, h6) {
-		font-family: Fredoka;
+		font-family: Fredoka, sans-serif;
 		color: var(--text-3);
 		font-size: 1.5rem;
 		margin: 2.5rem 0 1rem -0.5rem;
+		letter-spacing: 0.02em;
 	}
 
 	h1 {
@@ -254,23 +290,18 @@ col-stack {
 
 	pre[class*="language-"] {
 		display: block;
-		mask: var(--mask-edge-zig-zag-vertical);
-		mask-size: 10px 100%;
 		padding: 2rem 2rem;
 		max-inline-size: none;
-		width: max(100vw - 25ch - 4rem, calc(100% + 4rem));
-		margin: 2rem 0 2rem -2rem;
+		width: 80ch;
+		margin: 2rem 0 2rem 0;
 		overflow-x: auto;
+		background: var(--slate-12);
+		color: var(--text-1);
 	}
 
 	code,
 	pre {
-		font-family:
-			Consolas,
-			Monaco,
-			Andale Mono,
-			Ubuntu Mono,
-			monospace;
+		font-family: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
 		font-size: 0.9rem;
 	}
 
@@ -279,7 +310,6 @@ col-stack {
 	}
 
 	details > pre {
-		mask: 0;
 		width: max(100vw, 100%);
 		margin: 0;
 	}
@@ -300,109 +330,69 @@ col-stack {
 	.markdown-alert {
 		background: var(--surface-2);
 		display: block;
-		mask: var(--mask-edge-zig-zag-vertical);
-		mask-size: 10px 100%;
 		padding: 1rem 2rem;
 		max-width: 80ch;
+		border: var(--outline);
 
 		.markdown-alert-title {
 			font-weight: 600;
 			font-size: var(--font-size-3);
-			font-family: "Fredoka";
+			font-family: Fredoka, sans-serif;
 		}
 
 		&.markdown-alert-tip {
-			background: var(--green-2);
+			background: light-dark(var(--green-2), var(--green-10));
+			border-color: light-dark(var(--green-9), var(--green-12));
 			.markdown-alert-title {
-				color: var(--green-12);
-				&::before {
-					content: "💡 ";
-				}
-			}
-			@media (prefers-color-scheme: dark) {
-				background: var(--green-10);
-				.markdown-alert-title {
-					color: var(--green-2);
-				}
+				color: light-dark(var(--green-12), var(--green-2));
 			}
 		}
 		&.markdown-alert-note {
-			background: var(--blue-2);
+			background: light-dark(var(--blue-2), var(--blue-10));
+			border-color: light-dark(var(--blue-9), var(--blue-12));
 			.markdown-alert-title {
-				color: var(--blue-12);
-				&::before {
-					content: "ℹ️ ";
-				}
-			}
-			@media (prefers-color-scheme: dark) {
-				background: var(--blue-10);
-				.markdown-alert-title {
-					color: var(--blue-2);
-				}
+				color: light-dark(var(--blue-12), var(--blue-2));
 			}
 		}
 		&.markdown-alert-warning {
-			background: var(--yellow-2);
+			background: light-dark(var(--yellow-2), var(--yellow-10));
+			border-color: light-dark(var(--yellow-9), var(--yellow-12));
 			.markdown-alert-title {
-				color: var(--yellow-12);
-				&::before {
-					content: "⚠️ ";
-				}
-			}
-			@media (prefers-color-scheme: dark) {
-				background: var(--yellow-10);
-				.markdown-alert-title {
-					color: var(--yellow-2);
-				}
+				color: light-dark(var(--yellow-12), var(--yellow-2));
 			}
 		}
 		&.markdown-alert-important {
-			background: var(--orange-2);
+			background: light-dark(var(--orange-2), var(--orange-10));
+			border-color: light-dark(var(--orange-9), var(--orange-12));
 			.markdown-alert-title {
-				color: var(--orange-12);
-				&::before {
-					content: "🗨️ ";
-				}
-			}
-			@media (prefers-color-scheme: dark) {
-				background: var(--orange-10);
-				.markdown-alert-title {
-					color: var(--orange-2);
-				}
+				color: light-dark(var(--orange-12), var(--orange-2));
 			}
 		}
 		&.markdown-alert-caution {
-			background: var(--red-2);
+			background: light-dark(var(--red-2), var(--red-10));
+			border-color: light-dark(var(--red-9), var(--red-12));
 			.markdown-alert-title {
-				color: var(--red-12);
-				&::before {
-					content: "🛑 ";
-				}
-			}
-			@media (prefers-color-scheme: dark) {
-				background: var(--red-10);
-				.markdown-alert-title {
-					color: var(--red-2);
-				}
+				color: light-dark(var(--red-12), var(--red-2));
 			}
 		}
 	}
 }
 
 footer {
-	background: var(--surface-1);
-	border-top: 1px solid var(--surface-2);
+	border-top: 2px solid var(--green-12);
 	margin-block-start: 4rem;
-	padding: 3rem 2rem 1rem;
+	padding: 2rem 2rem 0;
+	background: light-dark(var(--green-2), var(--green-11));
 
 	& > p {
 		text-align: center;
-		margin: 1rem -2rem 0;
-		padding-block-start: 2rem;
+		margin: 1rem -2rem;
+		padding: 1rem;
 		max-width: calc(100% + 6rem);
-		border-top: 1px solid var(--surface-2);
+		border-top: 2px solid var(--yellow-12);
 		color: var(--text-1);
 		font-size: var(--font-size-1);
+		background: light-dark(var(--yellow-2), var(--yellow-10));
 	}
 
 	& > div {
@@ -411,8 +401,8 @@ footer {
 		gap: 2rem;
 
 		h2 {
-			color: var(--text-1);
-			font-weight: 500;
+			color: var(--text-2);
+			font-weight: 400;
 			margin-bottom: 1rem;
 			font-size: var(--font-size-3);
 		}
@@ -430,11 +420,12 @@ footer {
 		a {
 			color: var(--text-1);
 			text-decoration: none;
-			transition: color 0.2s ease;
-		}
+			font-family: Fredoka, sans-serif;
+			transition: color 0.1s ease;
 
-		a:hover {
-			color: var(--text-2);
+			&:hover {
+				color: var(--accent);
+			}
 		}
 	}
 }

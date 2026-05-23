@@ -30,7 +30,8 @@
 		"apexcharts": "^5.3.5",
 		"codemirror": "6.0.2",
 		"csskit_wasm": "../crates/csskit_wasm/pkg/",
-		"markdown-it-anchor": "^9.2.0"
+		"markdown-it-anchor": "^9.2.0",
+		"openswatch": "^0.1.0"
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "3.1.5",
