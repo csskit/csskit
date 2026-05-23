@@ -375,6 +375,7 @@ pub enum CssAtomSet {
 	BottomRightCorner,
 	BottomToTop,
 	BoundingBox,
+	Box,
 	BoxDecorationBreak,
 	BoxShadow,
 	BoxShadowBlur,
@@ -712,6 +713,7 @@ pub enum CssAtomSet {
 	Economy,
 	Element,
 	Ellipse,
+	Ellipsis,
 	Embed,
 	Emoji,
 	Empty,
@@ -741,6 +743,7 @@ pub enum CssAtomSet {
 	Extends,
 	ExtraCondensed,
 	ExtraExpanded,
+	Fade,
 	Factorial,
 	Factorof,
 	Fallback,
@@ -1155,6 +1158,7 @@ pub enum CssAtomSet {
 	Lightblue,
 	Lightcoral,
 	Lightcyan,
+	LightDark,
 	Lighten,
 	Lighter,
 	Lightgoldenrodyellow,
@@ -2543,6 +2547,10 @@ pub enum CssAtomSet {
 	_WebkitGrab,
 	#[atom("-webkit-grabbing")]
 	_WebkitGrabbing,
+	#[atom("-webkit-inline-box")]
+	_WebkitInlineBox,
+	#[atom("-webkit-inline-flex")]
+	_WebkitInlineFlex,
 	#[atom("-webkit-inner-spin-button")]
 	_WebkitInnerSpinButton,
 	#[atom("-webkit-input-placeholder")]
@@ -2718,6 +2726,8 @@ pub enum CssAtomSet {
 	_MozBlockInsideInlineWrapper,
 	#[atom("-moz-block-ruby-content")]
 	_MozBlockRubyContent,
+	#[atom("-moz-box")]
+	_MozBox,
 	#[atom("-moz-box-sizing")]
 	_MozBoxSizing,
 	#[atom("-moz-broken")]
@@ -2756,6 +2766,10 @@ pub enum CssAtomSet {
 	_MozFirstLetterContinuation,
 	#[atom("-moz-first-node")]
 	_MozFirstNode,
+	#[atom("-moz-flex")]
+	_MozFlex,
+	#[atom("-moz-flexbox")]
+	_MozFlexbox,
 	#[atom("-moz-focus-inner")]
 	_MozFocusInner,
 	#[atom("-moz-focus-outer")]
@@ -2780,6 +2794,10 @@ pub enum CssAtomSet {
 	_MozHtmlCanvasContent,
 	#[atom("-moz-images-in-menus")]
 	_MozImagesInMenus,
+	#[atom("-moz-inline-box")]
+	_MozInlineBox,
+	#[atom("-moz-inline-stack")]
+	_MozInlineStack,
 	#[atom("-moz-inline-table")]
 	_MozInlineTable,
 	#[atom("-moz-last-node")]
@@ -3007,14 +3025,18 @@ pub enum CssAtomSet {
 	_MsFlexWrap,
 	#[atom("-ms-flexbox")]
 	_MsFlexbox,
-	#[atom("-ms-inline-flexbox")]
-	_MsInlineFlexbox,
 	#[atom("-ms-fullscreen")]
 	_MsFullscreen,
+	#[atom("-ms-grid")]
+	_MsGrid,
 	#[atom("-ms-high-contrast")]
 	_MsHighContrast,
 	#[atom("-ms-ime-align")]
 	_MsImeAlign,
+	#[atom("-ms-inline-flex")]
+	_MsInlineFlex,
+	#[atom("-ms-inline-flexbox")]
+	_MsInlineFlexbox,
 	#[atom("-ms-input-placeholder")]
 	_MsInputPlaceholder,
 	#[atom("-ms-max-column-count")]
@@ -3064,6 +3086,8 @@ pub enum CssAtomSet {
 	_OBoxSizing = 0b00000000_11100000_00000000_00000000,
 	#[atom("-o-device-pixel-ratio")]
 	_ODevicePixelRatio,
+	#[atom("-o-flex")]
+	_OFlex,
 	#[atom("-o-inner-spin-button")]
 	_OInnerSpinButton,
 	#[atom("-o-max-device-pixel-ratio")]

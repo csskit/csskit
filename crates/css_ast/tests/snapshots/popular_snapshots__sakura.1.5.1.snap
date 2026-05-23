@@ -4870,20 +4870,19 @@ StyleSheet(
                 offset: SourceOffset(3818),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3819),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: BoxShadowStyleValue([
+                (SpreadShadow(
+                  color: None,
+                  offset: r#None(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(3820),
                     len: 4,
-                  )),
-                ],
-              )),
+                  ))),
+                  blur: None,
+                  spread: None,
+                  position: None,
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

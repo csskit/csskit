@@ -5,157 +5,137 @@ hide_sidebar: true
 css:
   - "index"
 ---
+{% include "header.html" %}
 
 {% assign html_class = "index" %}
 <section class="hero">
-	<h1><img alt="csskit" width="500" src="/images/logo.svg" /></h1>
 	<h2>Refreshing CSS</h2>
 	<h3>Beautiful, fast, and powerful CSS tooling with zero configuration</h3>
 	<div class="cta">
 		<a href="/docs/">Get Started</a>
-		<a href="https://github.com/csskit/csskit">View on GitHub</a>
+		<a href="https://github.com/csskit/csskit">
+			<svg width="24" height="24" fill="currentColor" viewBox="3 3 18 18" role="none">
+				<path
+					d="M12 3C7.0275 3 3 7.12937 3 12.2276C3 16.3109 5.57625 19.7597 9.15374 20.9824C9.60374 21.0631 9.77249 20.7863 9.77249 20.5441C9.77249 20.3249 9.76125 19.5982 9.76125 18.8254C7.5 19.2522 6.915 18.2602 6.735 17.7412C6.63375 17.4759 6.19499 16.6569 5.8125 16.4378C5.4975 16.2647 5.0475 15.838 5.80124 15.8264C6.51 15.8149 7.01625 16.4954 7.18499 16.7723C7.99499 18.1679 9.28875 17.7758 9.80625 17.5335C9.885 16.9337 10.1212 16.53 10.38 16.2993C8.3775 16.0687 6.285 15.2728 6.285 11.7432C6.285 10.7397 6.63375 9.9092 7.20749 9.26326C7.1175 9.03257 6.8025 8.08674 7.2975 6.81794C7.2975 6.81794 8.05125 6.57571 9.77249 7.76377C10.4925 7.55615 11.2575 7.45234 12.0225 7.45234C12.7875 7.45234 13.5525 7.55615 14.2725 7.76377C15.9937 6.56418 16.7475 6.81794 16.7475 6.81794C17.2424 8.08674 16.9275 9.03257 16.8375 9.26326C17.4113 9.9092 17.76 10.7281 17.76 11.7432C17.76 15.2843 15.6563 16.0687 13.6537 16.2993C13.98 16.5877 14.2613 17.1414 14.2613 18.0065C14.2613 19.2407 14.25 20.2326 14.25 20.5441C14.25 20.7863 14.4188 21.0746 14.8688 20.9824C16.6554 20.364 18.2079 19.1866 19.3078 17.6162C20.4077 16.0457 20.9995 14.1611 21 12.2276C21 7.12937 16.9725 3 12 3Z"
+				></path>
+			</svg>
+			View on GitHub
+		</a>
 	</div>
 </section>
 
-<section class="features">
-	<h2>Everything you need for modern CSS</h2>
-	<label for="fmt">
-		<h4><span>💅</span><a href="/docs/fmt/">Format</a></h4>
-		<p>Opinionated code formatting to keep your CSS consistent</p>
-	</label>
-	<label for="lint">
-		<h4><span>🔍</span><a href="/docs/lint/">Lint</a></h4>
-		<p>Find mistakes and get helpful suggestions to write better CSS</p>
-	</label>
-	<label for="min">
-		<h4><span>⚡</span><a href="/docs/min/">Minify</a></h4>
-		<p>Blazing fast compression that optimizes your CSS for production</p>
-	</label>
-	<label for="transpile">
-		<h4><span>🔄</span><a href="/docs/transpile">Transpile</a></h4>
-		<p>Use modern CSS features with automatic browser compatibility</p>
-	</label>
-	<label for="bundle">
-		<h4><span>📦</span><a href="/docs/bundle/">Bundle</a></h4>
-		<p>Smart bundling that combines and optimizes your CSS files</p>
-	</label>
-	<label for="colors">
-		<h4><span>🧪</span><a href="/docs/analyze">Analyze</a></h4>
-		<p>Deep insights into your CSS with color analysis and usage reports</p>
-	</label>
-
-	<div class="demo">
-		<div data-feature="fmt">
-			<input type="radio" name="features" id="fmt" checked>
-			<div class="terminal-command">
-				<span class="typing-text"></span>
-				<pre style="display: none">{% highlight bash %}csskit fmt styles.css{% endhighlight %}</pre>
-			</div>
-			<div class="code-block">
-				<h5>Before</h5>
-				{% highlight css %}body{color:red;background:white;border-color:#ff0000}{% endhighlight %}
-			</div>
-			<div class="code-block">
-				<h5>After</h5>
+<section class="feature" data-accent="purple" data-color="cyan">
+	<div class="feature-copy">
+		<h2><a href="/docs/fmt/">Consistent CSS, instantly.</a></h2>
+		<p>Opinionated formatting so your whole team writes CSS the same way. No arguments, no config, just clean code.</p>
+		<a class="feature-link" href="/docs/fmt/">Formatting &rarr;</a>
+	</div>
+	<div class="code-pane" data-label="Before">
+{% highlight css %}body{color:red;background:white;border-color:#ff0000}{% endhighlight %}
+	</div>
+	<div class="code-pane" data-label="After">
 {% highlight css %}body {
 	color: red;
 	background: white;
 	border-color: #ff0000;
 }{% endhighlight %}
-			</div>
-		</div>
+	</div>
+</section>
 
-		<div data-feature="lint">
-			<input type="radio" name="features" id="lint">
-			<div class="terminal-command">
-				<span class="typing-text"></span>
-				<pre style="display: none">{% highlight bash %}csskit lint styles.css{% endhighlight %}</pre>
-			</div>
-			<div class="code-block">
-				<h5>Input</h5>
+<section class="feature" data-accent="dark" data-color="yellow">
+	<div class="feature-copy">
+		<h2><a href="/docs/lint/">Catch mistakes before they ship.</a></h2>
+		<p>Find typos, invalid values and redundant rules. Get helpful suggestions, not just error codes.</p>
+		<a class="feature-link" href="/docs/lint/">Linting &rarr;</a>
+	</div>
+	<div class="code-pane" data-label="Output">
+		<pre class="language-text"><code class="language-text">  × <span class="token deleted">Invalid property</span>
+   <span class="token comment">╭─[example.css:3]</span>
+ 3 <span class="token comment">│</span>  backgrond: blue;
+   <span class="token comment">·  ────┬────</span>
+   <span class="token comment">·      ╰── </span>Did you mean <span class="token strong inserted">background</span>?
+   <span class="token comment">╰────</span></code></pre>
+	</div>
+	<div class="code-pane" data-label="Input">
 {% highlight css %}.btn {
-	color: #ff0;
-	backgrond: blue;
-	margin: 10px 5px 10px;
+  color: #ff0;
+  backgrond: blue;
+  margin: 10px 5px 10px;
 }{% endhighlight %}
-			</div>
-			<div class="code-block">
-				<h5>Suggestions</h5>
-				<pre class="language-text">
-					<code class="language-text">
-  × <span class="token deleted">Invalid property name</span>
-   <span class="token comment">╭─[</span><span class="token bold keyword">example.css</span>:21:15]
- 2 <span class="token comment">│</span>		color: #ff000;
- 3 <span class="token comment">│</span>		backgrond: #ff000;
-   <span class="token comment">·		────┬────</span>
-   <span class="token comment">·		    ╰──</span>  Did you mean backgro<span class="token strong inserted">u</span>nd?
- 4 <span class="token comment">│</span>		margin: 10px 5px 10px;
-   <span class="token comment">╰────</span>
-					</code>
-				</pre>
-			</div>
-		</div>
+	</div>
+</section>
 
-		<div data-feature="min">
-			<input type="radio" name="features" id="min">
-			<div class="terminal-command">
-				<span class="typing-text"></span>
-				<pre style="display: none">{% highlight bash %}csskit min styles.css{% endhighlight %}</pre>
-			</div>
-			<div class="code-block">
-				<h5>Before</h5>
-				{% highlight css %}.header {
-	background-color: #ffffff;
-	padding: 20px 16px 20px 16px;
-	margin: 0 auto;
-	border-radius: 8px;
+<section class="feature" data-accent="light" data-color="magenta">
+	<div class="feature-copy">
+		<h2><a href="/docs/min/">Smaller files, faster sites.</a></h2>
+		<p>Blazing fast compression that removes whitespace, merges shorthand, and strips redundant values — no output configuration needed.</p>
+		<a class="feature-link" href="/docs/min/">Minify &rarr;</a>
+	</div>
+	<div class="code-pane" data-label="Before">
+{% highlight css %}.header {
+  background-color: #ffffff;
+  padding: 20px 16px 20px 16px;
+  margin: 0 auto;
+  border-radius: 8px;
 }{% endhighlight %}
-			</div>
-			<div class="code-block">
-				<h5>After</h5>
-				{% highlight css %}.header{background:#fff;padding:20px 16px;margin:0 auto;border-radius:8px}{% endhighlight
-				%}
-			</div>
-		</div>
+	</div>
+	<div class="code-pane" data-label="After">
+{% highlight css %}.header{background:#fff;padding:20px 16px;margin:0 auto;border-radius:8px}{% endhighlight %}
+	</div>
+</section>
 
-		<div data-feature="transpile">
-			<input type="radio" name="features" id="transpile">
-			<div class="terminal-command">
-				<span class="typing-text"></span>
-				<pre style="display: none">{% highlight bash %}csskit transpile styles.css{% endhighlight %}</pre>
-			</div>
-			<div class="code-block">
-				<h5>Before</h5>
-{% highlight css %}:heading {
-  font-weight:600;
+<section class="feature" data-accent="dark" data-color="green">
+	<div class="feature-copy">
+		<h2><a href="/docs/transpile">Use tomorrow's CSS today.</a></h2>
+		<p>Write modern CSS and ship code every browser understands. csskit handles the compatibility layer automatically.</p>
+		<a class="feature-link" href="/docs/transpile">Transpile &rarr;</a>
+	</div>
+	<div class="code-pane" data-label="Modern CSS">
+{% highlight css %}
+:heading {
+  font-weight: 600;
 }{% endhighlight %}
-			</div>
-			<div class="code-block">
-				<h5>After</h5>
+	</div>
+	<div class="code-pane" data-label="Compatible output">
 {% highlight css %}:is(h1,h2,h3,h4,h5,h6) {
-  font-weight:600;
+  font-weight: 600;
 }{% endhighlight %}
-			</div>
-		</div>
+	</div>
+</section>
 
-		<div data-feature>
-			<input type="radio" name="features" id="bundle">
-			<div class="terminal-command">
-				<span class="typing-text"></span>
-				<pre style="display: none">{% highlight bash %}csskit bundle src/styles/{% endhighlight %}</pre>
-			</div>
-			<div class="code-block">
-				<h5>Multiple files</h5>
-				{% highlight text %}📁 src/styles/
+<section class="feature" data-accent="purple" data-color="orange">
+	<div class="feature-copy">
+		<h2><a href="/docs/bundle/">One command, one file.</a></h2>
+		<p>Combine and optimise all your CSS files. Tree-shaking, deduplication, and minification in a single pass.</p>
+		<a class="feature-link" href="/docs/bundle/">Read the docs &rarr;</a>
+	</div>
+	<div class="code-pane" data-label="Source files">
+{% highlight text %}src/styles/
 ├── base.css
 ├── components.css
 └── utilities.css{% endhighlight %}
-			</div>
-			<div class="code-block">
-				<h5>Bundled output</h5>
-				{% highlight css %}.btn{padding:8px 16px;border:none}.card{background:#fff;border-radius:4px} .mt-4{margin-top:1rem}{% endhighlight %}
-			</div>
-		</div>
+	</div>
+	<div class="code-pane" data-label="Bundled output">
+		{% highlight css %}.btn{padding:8px 16px;border:none}.card{background:#fff}.mt-4{margin-top:1rem}{% endhighlight %}
+	</div>
+</section>
+
+<section class="feature" data-accent="light" data-color="cyan">
+	<div class="feature-copy">
+		<h2><a href="/docs/analyze">Know your CSS inside out.</a></h2>
+		<p>Deep insights: colour palettes, unused rules, property usage stats. Understand what your stylesheet is actually doing.</p>
+		<a class="feature-link" href="/docs/analyze">Analyze &rarr;</a>
+	</div>
+	<div class="code-pane" data-label="csskit analyze styles.css" style="grid-column: span 2">
+{% highlight text %}Colors (12 unique)
+  #ffffff  ████████████  38%
+  #663399  ████████      24%
+  #ff0000  ████          11%
+
+Properties (847 total)
+  color          ██████  22%
+  background     ████    15%
+  margin         ████    13%{% endhighlight %}
 	</div>
 </section>
 
@@ -163,19 +143,19 @@ css:
 	<h2>Why csskit?</h2>
 	<div class="comparison-grid">
 		<div>
-			<h4><span>⚡</span> Blazing Fast</h4>
+			<h4><span>&#9889;</span> Blazing Fast</h4>
 			<p>Built for performance. Process thousands of CSS files in milliseconds.</p>
 		</div>
 		<div>
-			<h4><span>🚀</span> Zero Config</h4>
+			<h4><span>&#128640;</span> Zero Config</h4>
 			<p>Works out of the box with sensible defaults. No complex configuration files to manage.</p>
 		</div>
 		<div>
-			<h4><span>🔧</span> All-in-One</h4>
-			<p>Replace multiple tools with one. Format, lint, minify, and analyze in a single package.</p>
+			<h4><span>&#128295;</span> All-in-One</h4>
+			<p>Replace multiple tools with one. Format, lint, minify, and analyse in a single package.</p>
 		</div>
 		<div>
-			<h4><span>🌟</span> Modern Standards</h4>
+			<h4><span>&#127775;</span> Modern Standards</h4>
 			<p>Built on the latest CSS specifications, with weekly updates.</p>
 		</div>
 	</div>

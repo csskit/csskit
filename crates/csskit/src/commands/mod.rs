@@ -12,6 +12,7 @@ mod find;
 mod fmt;
 mod lsp;
 mod min;
+mod specificity;
 mod tree;
 
 #[derive(Subcommand, Debug)]
@@ -55,6 +56,9 @@ pub enum Commands {
 
 	/// Run the LSP server. It's unlikely you want to run this, but your IDE might!
 	Lsp(lsp::Lsp),
+
+	/// Emit per-selector specificity for every style rule in a CSS file.
+	Specificity(specificity::Specificity),
 }
 
 impl Commands {
@@ -72,6 +76,7 @@ impl Commands {
 			Commands::DbgParse(cmd) => cmd.run(config),
 			Commands::Build(cmd) => cmd.run(config),
 			Commands::Lsp(cmd) => cmd.run(config),
+			Commands::Specificity(cmd) => cmd.run(config),
 		}
 	}
 }

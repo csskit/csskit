@@ -615,8 +615,8 @@ fn function_pseudo() {
 	assert_query!(
 		"a { background: linear-gradient(red, blue); transform: rotate(45deg); }",
 		"*:function",
-		2,
-		[NodeId::TransformFunction, NodeId::RotateFunction]
+		3,
+		[NodeId::LinearGradientFunction, NodeId::TransformFunction, NodeId::RotateFunction]
 	);
 }
 

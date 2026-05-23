@@ -14,7 +14,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<OverflowClipMarginStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<ScrollBehaviorStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<ScrollbarGutterStyleValue>(), 28);
-		// assert_eq!(std::mem::size_of::<TextOverflowStyleValue>(), 12);
+		assert_eq!(std::mem::size_of::<TextOverflowStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginTopStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginRightStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<OverflowClipMarginBottomStyleValue>(), 32);
@@ -71,5 +71,19 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, OverflowXStyleValue, "scroll");
 		assert_parse!(CssAtomSet::ATOMS, OverflowStyleValue, "hidden scroll");
+	}
+
+	#[test]
+	fn test_text_overflow() {
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "clip");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "ellipsis");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "\"...\"");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "clip ellipsis");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "ellipsis clip");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "clip clip");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "\"...\" ellipsis");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "fade");
+		assert_parse_error!(CssAtomSet::ATOMS, TextOverflowStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, TextOverflowStyleValue, "1px");
 	}
 }

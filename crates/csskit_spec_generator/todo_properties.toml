@@ -4,7 +4,6 @@
 
 [backgrounds]
 properties = [
-  "background",
   "background-position-block",
   "background-position-inline",
   "background-position-x",
@@ -44,10 +43,6 @@ properties = ["grid", "grid-template"]
 [inline]
 properties = ["initial-letter-align"]
 
-[overflow]
-properties = [
-  "text-overflow",
-]  # FadeFunction stub exists but [alternatives]{1,2} with mixed kw+type hits proc macro bug
 
 [speech]
 properties = ["voice-pitch", "voice-range"]

@@ -74,7 +74,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<SymbolsFunction>(), 72);
-		assert_eq!(std::mem::size_of::<Symbol>(), 128);
+		assert_eq!(std::mem::size_of::<Symbol>(), 40);
 		assert_eq!(std::mem::size_of::<SymbolsType>(), 16);
 	}
 

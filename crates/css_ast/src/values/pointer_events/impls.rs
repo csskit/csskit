@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TouchActionStyleValue>(), 36);
+		assert_eq!(std::mem::size_of::<TouchActionStyleValue>(), 52);
 	}
 
 	#[test]
@@ -14,6 +14,9 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "pan-x pan-y");
+		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "pan-y pinch-zoom");
+		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "pan-x pan-y pinch-zoom");
+		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "pinch-zoom");
 		assert_parse!(CssAtomSet::ATOMS, TouchActionStyleValue, "manipulation");
 	}
 

@@ -1,10 +1,8 @@
 :unknown
 ---
 coverage/popular/inuitcss.6.0.0.css
-464:3:  background: #ff0;
 686:3:  -ms-box-sizing: border-box;
 822:3:  font: 1em/1.5 sans-serif;
-1006:3:  background: none;
 1021:3:  filter: alpha(opacity=75); }
 1344:3:  font: 12px/1.5 sans-serif; }
 2381:3:  filter: alpha(opacity=50) !important; }

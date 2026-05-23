@@ -7,52 +7,36 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `background` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background).
-// ///
-// /// The background CSS property is a shorthand that sets several background properties at once.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <bg-layer>#? , <final-bg-layer>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-backgrounds-4/#background
-// #[syntax(" <bg-layer>#? , <final-bg-layer> ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     applies_to = Elements,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = BackgroundAttachment|BackgroundClip|BackgroundColor|BackgroundImage|BackgroundOrigin|BackgroundPosition|BackgroundRepeat|BackgroundSize,
-//     property_group = Backgrounds,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.background")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackgroundStyleValue<'a>;
+/// Represents the style value for `background` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background).
+///
+/// The background CSS property is a shorthand that sets several background properties at once.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <bg-layer>#
+/// ```
+///
+/// https://drafts.csswg.org/css-backgrounds-4/#background
+#[syntax(" <bg-layer># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    applies_to = Elements,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = BackgroundAttachment|BackgroundClip|BackgroundColor|BackgroundImage|BackgroundOrigin|BackgroundPosition|BackgroundRepeat|BackgroundSize,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackgroundStyleValue<'a>;
 
 /// Represents the style value for `background-attachment` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-attachment).
 ///

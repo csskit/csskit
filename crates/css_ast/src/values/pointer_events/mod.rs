@@ -12,11 +12,13 @@ use impls::*;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] ] | manipulation
+/// auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom ] | manipulation
 /// ```
 ///
 /// https://w3c.github.io/pointerevents/#touch-action
-#[syntax(" auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] ] | manipulation ")]
+#[syntax(
+	" auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom ] | manipulation "
+)]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

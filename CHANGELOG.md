@@ -1,3 +1,43 @@
+## [0.0.23] - 2026-05-22
+
+### Other Changes
+- Coverage: update css-minify-tests (#1133) ([#1133](https://github.com/csskit/csskit/pull/1133))
+
+
+### Css_ast
+- fix(css_parse): preserve whitespace around +/- in calc() (#1114) ([#1114](https://github.com/csskit/csskit/pull/1114))
+- coverage: drop bootstrap/foundation .min files (#1117) ([#1117](https://github.com/csskit/csskit/pull/1117))
+- css_ast: Implement relative color syntax (#1119) ([#1119](https://github.com/csskit/csskit/pull/1119))
+- Regenerate css_ast/src/values from csswg drafts (#1120) ([#1120](https://github.com/csskit/csskit/pull/1120))
+- csskit_spec_generator/css_ast: Generate properties from SVG, PointerEvents specs (#1121) ([#1121](https://github.com/csskit/csskit/pull/1121))
+- css_ast: Implement ContentStyleValue (#1122) ([#1122](https://github.com/csskit/csskit/pull/1122))
+- Regenerate css_ast/src/values from csswg drafts (#1123) ([#1123](https://github.com/csskit/csskit/pull/1123))
+- css_ast: add pinch-zoom to touch-action (#1128) ([#1128](https://github.com/csskit/csskit/pull/1128))
+- css_ast/csskit: Finish off ToSpecificity, add `csskit specificity` command (#1129) ([#1129](https://github.com/csskit/csskit/pull/1129))
+- css_ast: Box all Gradient types (#1130) ([#1130](https://github.com/csskit/csskit/pull/1130))
+- css_ast: Implement Background property (#1131) ([#1131](https://github.com/csskit/csskit/pull/1131))
+- css_ast: Implement SpreadShadow, improve Shadow (#1132) ([#1132](https://github.com/csskit/csskit/pull/1132))
+- css_ast: Implement text-overflow (#1134) ([#1134](https://github.com/csskit/csskit/pull/1134))
+- css_ast: Implement more legacy/vendor display values (#1135) ([#1135](https://github.com/csskit/csskit/pull/1135))
+- css_ast: Implement light-dark for color values (#1136) ([#1136](https://github.com/csskit/csskit/pull/1136))
+
+
+### Css_lexer
+- css_parse: refactor CursorCompactWriteSink, preserve comments between idents (#1118) ([#1118](https://github.com/csskit/csskit/pull/1118))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1124) ([#1124](https://github.com/csskit/csskit/pull/1124))
+
+
+### Csskit_spec_generator
+- csskit_spec_generator: Replace non-breaking spaces with whitespace (#1137) ([#1137](https://github.com/csskit/csskit/pull/1137))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.64.0 (#1127) ([#1127](https://github.com/csskit/csskit/pull/1127))
+- chore(deps): update dependency @types/vscode to v1.120.0 (#1125) ([#1125](https://github.com/csskit/csskit/pull/1125))
+
 ## [0.0.22] - 2026-05-15
 
 ### Other Changes
@@ -42,6 +82,7 @@
 ### Csskit
 - chore(deps): update dependencies (patch) (#1103) ([#1103](https://github.com/csskit/csskit/pull/1103))
 - csskit: Improve messaging for check commands with missing sheets (#1113) ([#1113](https://github.com/csskit/csskit/pull/1113))
+- Release v0.0.22 (#1080) ([#1080](https://github.com/csskit/csskit/pull/1080))
 
 
 ### Csskit-linux-x64

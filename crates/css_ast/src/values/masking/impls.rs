@@ -10,7 +10,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<MaskBorderModeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaskBorderOutsetStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<MaskBorderRepeatStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<MaskBorderSourceStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<MaskBorderSourceStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<MaskClipStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<MaskOriginStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<MaskPositionStyleValue>(), 32);

@@ -119,7 +119,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BoxShadowSpreadStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowPositionStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<BoxShadowStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<BorderImageSourceStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<BorderImageSliceStyleValue>(), 80);
 		assert_eq!(std::mem::size_of::<BorderImageWidthStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
@@ -137,6 +137,19 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "10px,20px 30px");
 		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowOffsetStyleValue, "red");
+	}
+
+	#[test]
+	fn test_box_shadow() {
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 0 0 .2rem rgba(0,123,255,.25)");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 1px 1px rgba(0,0,0,.075)inset");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "10px 20px 5px red");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "10px 20px inset");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 0 0 transparent,0 0 0 transparent");
+		assert_parse!(CssAtomSet::ATOMS, BoxShadowStyleValue, "0 1px 1px rgba(0,0,0,.075),0 0 6px rgba(0,0,0,.05)");
+		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, BoxShadowStyleValue, "red");
 	}
 
 	#[test]

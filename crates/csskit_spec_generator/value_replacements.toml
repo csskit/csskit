@@ -1,0 +1,8 @@
+# Returns a map of spec names to property value replacements
+#
+# Each entry maps a property name to a string that will be replace its grammar.
+
+[backgrounds]
+# https://drafts.csswg.org/css-backgrounds-4/
+# background: uses awkward `<bg-layer>#? , <final-bg-layer>`
+background = "<bg-layer>#"

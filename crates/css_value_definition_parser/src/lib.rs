@@ -100,6 +100,7 @@ impl DefType {
 			// Hand-written types that contain other allocating types
 			"Color"          // Color<'a>
 				| "Shadow"       // Shadow<'a> (contains Color<'a>)
+				| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)
 				| "Image"          // contains Gradient<'a>
 				| "Image1d"  // contains StripesFunction<'a>
 				| "ContentList"  // Vec<'a, ContentListItem<'a>>
@@ -130,6 +131,9 @@ impl DefType {
 				| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
 				| "FilterValue"  // contains FilterFunction<'a>
 				| "FilterFunction" // contains DropShadowFunction<'a>
+			| "BgLayer"  // contains BgImage<'a> and Color<'a>
+			| "FinalBgLayer"  // type alias for BgLayer<'a>
+			| "BgPositionAndSize" // contains BgPosition which contains Position
 		)
 	}
 }
