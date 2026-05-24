@@ -9,23 +9,79 @@ csskit is a program aimed at developers to make writing CSS more fun,
 productive, and easier. It's a "toolchain" - a collection of different tools
 bundled into one:
 
-- <b>💅</b> <a href="/docs/fmt">Formatting</a>: keeps your code well organized
-  with consistent style - tabs vs spaces, quote style, color syntax.
-- <b>🔍</b> <a href="/docs/lint">Linting</a>: finds mistakes in your CSS and
-  suggests corrections, like misspelled selectors or properties.
-- <b>⚡</b> <a href="/docs/min">Minifier</a>: write CSS with generous whitespace
-  and comments, then compress it for web delivery with `csskit min`.
-- <b>🔄</b> <a href="/docs/transform">Transpiler</a>: converts modern CSS syntax
-  to ensure browser compatibility.
-- <b>📦</b> <a href="/docs/bundle">Bundler</a>: combines multiple CSS files into
-  optimized bundles.
-- <b>🔬</b> <a href="/docs/analyze">Analyzer</a>: queries your CSS to summarize
-  colors, suggest complementary palettes, and identify browser compatibility
-  issues.
-- <b>💻</b> <a href="/docs/lsp">LSP</a>: integrates with
-  <a href="/docs/lsp/zed">Zed</a>, <a href="/docs/lsp/vscode">VSCode</a>, and
-  <a href="/docs/lsp/neovim">Neovim</a> for real-time guidance and code
-  completion.
+<ul>
+ <li>
+  <div class="icon-wrap" style="color:var(--gold-5);background:light-dark(var(--gold-1),var(--gold-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="none">
+    <path d="m16 22-1-4"/><path d="M19 14a1 1 0 0 0 1-1v-1a2 2 0 0 0-2-2h-3a1 1 0 0 1-1-1V4a2 2 0 0 0-4 0v5a1 1 0 0 1-1 1H6a2 2 0 0 0-2 2v1a1 1 0 0 0 1 1"/><path d="M19 14H5l-1.973 6.767A1 1 0 0 0 4 22h16a1 1 0 0 0 .973-1.233z"/><path d="m8 22 1-4"/>
+   </svg>
+  </div>
+  <span>
+   <a href="/docs/fmt">Formatting</a>: keeps your code well organized with consistent style - tabs vs spaces, quote style, color syntax.
+ </span>
+ </li>
+ <li>
+  <div class="icon-wrap" style="color:var(--stone-7);background:light-dark(var(--stone-1),var(--stone-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="none">
+    <path d="m8 11 2 2 4-4"/><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/>
+   </svg>
+  </div>
+  <span>
+  <a href="/docs/lint">Linting</a>: finds mistakes in your CSS and suggests corrections, like misspelled selectors or properties.
+ </span>
+ </li>
+ <li>
+  <div class="icon-wrap" style="color:var(--yellow-4);background:light-dark(var(--yellow-1),var(--yellow-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="none">
+    <path d="M4 14a1 1 0 0 1-.78-1.63l9.9-10.2a.5.5 0 0 1 .86.46l-1.92 6.02A1 1 0 0 0 13 10h7a1 1 0 0 1 .78 1.63l-9.9 10.2a.5.5 0 0 1-.86-.46l1.92-6.02A1 1 0 0 0 11 14z"/>
+   </svg>
+  </div>
+  <span>
+  <a href="/docs/min">Minifier</a>: write CSS with generous whitespace and comments, then compress it for web delivery with `csskit min`.
+ </span>
+ </li>
+ <li>
+  <div class="icon-wrap" style="color:var(--teal-3);background:light-dark(var(--teal-1),var(--teal-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M12 6v6l2 1"/><path d="M12.337 21.994a10 10 0 1 1 9.588-8.767"/><path d="m14 18 4 4 4-4"/><path d="M18 14v8"/>
+   </svg>
+  </div>
+  <span>
+  <a href="/docs/transform">Transpiler</a>: converts modern CSS syntax to ensure browser compatibility.
+ </span>
+ </li>
+ <li>
+  <div class="icon-wrap" style="color:var(--orange-3);background:light-dark(var(--orange-1),var(--orange-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="none">
+    <path d="M11 21.73a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73z"/><path d="M12 22V12"/><polyline points="3.29 7 12 12 20.71 7"/><path d="m7.5 4.27 9 5.15"/>
+   </svg>
+  </div>
+  <span>
+  <a href="/docs/bundle">Bundler</a>: combines multiple CSS files into optimized bundles.
+  </span>
+ </li>
+ <li>
+  <div class="icon-wrap" style="color:var(--blue-3);background:light-dark(var(--blue-1),var(--blue-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="none">
+    <path d="M6 18h8"/><path d="M3 22h18"/><path d="M14 22a7 7 0 1 0 0-14h-1"/><path d="M9 14h2"/><path d="M9 12a2 2 0 0 1-2-2V6h6v4a2 2 0 0 1-2 2Z"/><path d="M12 6V3a1 1 0 0 0-1-1H9a1 1 0 0 0-1 1v3"/>
+   </svg>
+  </div>
+  <span>
+  <a href="/docs/analyze">Analyzer</a>: queries your CSS to summarize colors, suggest complementary palettes, and identify browser compatibility issues.
+  </span>
+ </li>
+ <li>
+  <div class="icon-wrap" style="color:var(--blue-5);background:light-dark(var(--blue-1),var(--blue-10))">
+   <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentcolor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" role="none" role="none">
+    <rect width="20" height="16" x="2" y="4" rx="2"/><path d="M6 8h.01"/><path d="M10 8h.01"/><path d="M14 8h.01"/>
+   </svg>
+  </div>
+  <span>
+  <a href="/docs/lsp">LSP</a>: integrates with
+  <a href="/docs/lsp/zed">Zed</a>, <a href="/docs/lsp/vscode">VSCode</a>, and <a href="/docs/lsp/neovim">Neovim</a> for real-time guidance and code completion.
+  </span>
+ </li>
+</ul>
 
 ## Philosophy
 
