@@ -147,6 +147,10 @@ FAIL empty-rules/0004
 -a{color:red;&b{}}
 +a{color:red}
 
+FAIL escaping/0013
+-[href="#"],[href="/"],[href="file.html"],[href=https\:\/\/example\.com]{color:red}
++[href=\#],[href=\/],[href=file\.html],[href="https://example.com"]{color:red}
+
 FAIL font-face/0002
 -@font-face{font-family:"Custom";font-display:swap}
 +@font-face{font-family:Custom;font-display:swap}
@@ -322,8 +326,8 @@ FAIL selectors-advanced/0001
 +a,b{color:red}
 
 FAIL selectors-advanced/0005
--input:not(:invalid){color:red}
-+input:valid{color:red}
+-button:not(:invalid),fieldset:not(:invalid),form:not(:invalid),input:not(:invalid),select:not(:invalid),textarea:not(:invalid),div:not(:invalid),custom-element:not(:invalid),.foo:not(:invalid){color:red}
++button:valid,fieldset:valid,form:valid,input:valid,select:valid,textarea:valid,div:not(:invalid),custom-element:not(:invalid),.foo:not(:invalid){color:red}
 
 FAIL selectors-advanced/0006
 -a:not(:dir(ltr)){color:red}
@@ -342,8 +346,8 @@ FAIL selectors-advanced/0009
 +input:optional{color:red}
 
 FAIL selectors-advanced/0010
--a:not(:link){color:red}
-+a:visited{color:red}
+-a:not(:link),area:not(:link),link:not(:link),.foo:not(:link),h1:not(:link),[href]:not(:link),[href="/foo.html#bar"]:not(:link),a[href]:not(:link),area[href="/foo.html#bar"]:not(:link),:where(:not(:link)),a:where(:not(:link)){color:red}
++a:visited,area:visited,link:visited,.foo:not(:link),h1:not(:link),[href]:not(:link),[href="/foo.html#bar"]:not(:link),a[href]:visited,area[href="/foo.html#bar"]:visited,:where(:not(:link)),a:where(:visited){color:red}
 
 FAIL selectors-advanced/0011
 -:is(:link,:visited){color:red}
