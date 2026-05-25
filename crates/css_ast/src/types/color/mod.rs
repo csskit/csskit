@@ -48,6 +48,75 @@ impl ToChromashift for T![Hash] {
 }
 
 #[cfg(feature = "chromashift")]
+impl Color<'_> {
+	/// Convert this colour to `[Channel; 4]` in interpolation space `C`, preserving `none` channels.
+	///
+	/// Returns `None` if the colour has no fixed value (e.g. `currentcolor`).
+	pub fn to_mix_channels<C>(&self) -> Option<[chromashift::Channel; 4]>
+	where
+		C: From<chromashift::Color> + Into<[chromashift::Channel; 4]>,
+	{
+		use crate::{ColorFunction, NoneOr};
+
+		// Determine which of the first three channels are `none` in the AST.
+		let none = match self {
+			Color::Function(func) => match &**func {
+				ColorFunction::Rgb(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.2, NoneOr::None(_)), matches!(p.4, NoneOr::None(_))]
+				}
+				ColorFunction::Rgba(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.2, NoneOr::None(_)), matches!(p.4, NoneOr::None(_))]
+				}
+				ColorFunction::Hsl(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.2, NoneOr::None(_)), matches!(p.4, NoneOr::None(_))]
+				}
+				ColorFunction::Hsla(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.2, NoneOr::None(_)), matches!(p.4, NoneOr::None(_))]
+				}
+				ColorFunction::Hwb(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.1, NoneOr::None(_)), matches!(p.2, NoneOr::None(_))]
+				}
+				ColorFunction::Lab(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.1, NoneOr::None(_)), matches!(p.2, NoneOr::None(_))]
+				}
+				ColorFunction::Lch(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.1, NoneOr::None(_)), matches!(p.2, NoneOr::None(_))]
+				}
+				ColorFunction::Oklab(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.1, NoneOr::None(_)), matches!(p.2, NoneOr::None(_))]
+				}
+				ColorFunction::Oklch(f) => {
+					let p = &f.params;
+					[matches!(p.0, NoneOr::None(_)), matches!(p.1, NoneOr::None(_)), matches!(p.2, NoneOr::None(_))]
+				}
+				ColorFunction::Color(f) => {
+					let p = &f.params;
+					[matches!(p.1, NoneOr::None(_)), matches!(p.2, NoneOr::None(_)), matches!(p.3, NoneOr::None(_))]
+				}
+				_ => [false; 3],
+			},
+			_ => [false; 3],
+		};
+
+		let mut ch: [chromashift::Channel; 4] = C::from(self.to_chromashift()?).into();
+		for i in 0..3 {
+			if none[i] {
+				ch[i] = None;
+			}
+		}
+		Some(ch)
+	}
+}
+
+#[cfg(feature = "chromashift")]
 impl ToChromashift for Color<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Srgb;

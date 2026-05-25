@@ -30,7 +30,7 @@ mod xyzd50;
 mod xyzd65;
 
 pub use a98_rgb::A98Rgb;
-pub use channels::ToAlpha;
+pub use channels::{Channel, PolarLayout, ToAlpha};
 pub use color_space::ColorSpace;
 pub use display_p3::DisplayP3;
 pub use distance::ColorDistance;
@@ -42,7 +42,7 @@ pub use hwb::Hwb;
 pub use lab::Lab;
 pub use lch::Lch;
 pub use linear_rgb::LinearRgb;
-pub use mix::{ColorMix, ColorMixPolar, HueInterpolation};
+pub use mix::{ColorMix, ColorMixPolar, HueInterpolation, mix_channels};
 pub use named::{Named, ToNamedError};
 pub use oklab::Oklab;
 pub use oklch::Oklch;
@@ -201,6 +201,77 @@ impl ToAlpha for Color {
 			Color::XyzD50(x) => x.to_alpha(),
 			Color::XyzD65(x) => x.to_alpha(),
 		}
+	}
+}
+
+impl From<A98Rgb> for Color {
+	fn from(c: A98Rgb) -> Self {
+		Color::A98Rgb(c)
+	}
+}
+impl From<DisplayP3> for Color {
+	fn from(c: DisplayP3) -> Self {
+		Color::DisplayP3(c)
+	}
+}
+impl From<Hsl> for Color {
+	fn from(c: Hsl) -> Self {
+		Color::Hsl(c)
+	}
+}
+impl From<Hwb> for Color {
+	fn from(c: Hwb) -> Self {
+		Color::Hwb(c)
+	}
+}
+impl From<Lab> for Color {
+	fn from(c: Lab) -> Self {
+		Color::Lab(c)
+	}
+}
+impl From<Lch> for Color {
+	fn from(c: Lch) -> Self {
+		Color::Lch(c)
+	}
+}
+impl From<LinearRgb> for Color {
+	fn from(c: LinearRgb) -> Self {
+		Color::LinearRgb(c)
+	}
+}
+impl From<Oklab> for Color {
+	fn from(c: Oklab) -> Self {
+		Color::Oklab(c)
+	}
+}
+impl From<Oklch> for Color {
+	fn from(c: Oklch) -> Self {
+		Color::Oklch(c)
+	}
+}
+impl From<ProphotoRgb> for Color {
+	fn from(c: ProphotoRgb) -> Self {
+		Color::ProphotoRgb(c)
+	}
+}
+impl From<Rec2020> for Color {
+	fn from(c: Rec2020) -> Self {
+		Color::Rec2020(c)
+	}
+}
+impl From<Srgb> for Color {
+	fn from(c: Srgb) -> Self {
+		Color::Srgb(c)
+	}
+}
+impl From<XyzD50> for Color {
+	fn from(c: XyzD50) -> Self {
+		Color::XyzD50(c)
+	}
+}
+impl From<XyzD65> for Color {
+	fn from(c: XyzD65) -> Self {
+		Color::XyzD65(c)
 	}
 }
 

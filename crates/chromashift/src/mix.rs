@@ -1,5 +1,6 @@
 use crate::{
-	A98Rgb, DisplayP3, Hsl, Hwb, Lab, Lch, LinearRgb, Oklab, Oklch, ProphotoRgb, Rec2020, Srgb, XyzD50, XyzD65,
+	A98Rgb, Channel, DisplayP3, Hsl, Hwb, Lab, Lch, LinearRgb, Oklab, Oklch, PolarLayout, ProphotoRgb, Rec2020, Srgb,
+	XyzD50, XyzD65,
 };
 
 /// A direction to interopolate hue values between, when mixing colours.
@@ -108,6 +109,65 @@ pub fn interpolate_hue(h1: f64, h2: f64, t: f64, interpolation: HueInterpolation
 	(h1 + diff * t).rem_euclid(360.0)
 }
 
+/// Mixes two colours channel-by-channel, honouring `none` channels by adopting the analogous channel from the other
+/// colour. When both are missing the result resolves to 0.
+///
+/// Non-hue colour components and alpha use premultiplied alpha interpolation. Polar colours use `hue_index` to select
+/// which (if any) component is a hue: that channel uses hue interpolation with the given direction.
+pub fn mix_channels(
+	first: [Channel; 4],
+	second: [Channel; 4],
+	percentage: f64,
+	hue_index: Option<usize>,
+	hue_interpolation: HueInterpolation,
+) -> [Channel; 4] {
+	let t = percentage / 100.0;
+	let mut out = [Channel::default(); 4];
+
+	// Alpha: resolve none, then lerp. Store in 0..100 range.
+	let (alpha_a, alpha_b) = match (first[3], second[3]) {
+		(None, None) => (0.0, 0.0),
+		(None, Some(b)) => (b, b),
+		(Some(a), None) => (a, a),
+		(Some(a), Some(b)) => (a, b),
+	};
+	let a1 = alpha_a / 100.0;
+	let a2 = alpha_b / 100.0;
+	let alpha = a1 * (1.0 - t) + a2 * t;
+	out[3] = if first[3].or(second[3]).is_none() { None } else { Some(alpha * 100.0) };
+
+	for i in 0..3 {
+		let (l, r) = (first[i], second[i]);
+		let (a, b) = match (l, r) {
+			(None, None) => (None, None),
+			(None, Some(b)) => (Some(b), Some(b)),
+			(Some(a), None) => (Some(a), Some(a)),
+			(Some(a), Some(b)) => (Some(a), Some(b)),
+		};
+		out[i] = match (a, b) {
+			(None, _) | (_, None) => None,
+			(Some(av), Some(bv)) => Some(if hue_index == Some(i) {
+				interpolate_hue(av, bv, t, hue_interpolation)
+			} else {
+				premultiply_lerp(av, a1, bv, a2, t, alpha)
+			}),
+		};
+	}
+
+	out
+}
+
+/// Mixes two values of the same colour type via [`mix_channels`]. Devolves types to [Channel; 4] before mixing.
+fn mix_in<C, T, U>(first: T, second: U, percentage: f64, hue_interpolation: HueInterpolation) -> C
+where
+	C: From<T> + From<U> + From<[Channel; 4]> + Into<[Channel; 4]> + PolarLayout,
+{
+	let first: [Channel; 4] = C::from(first).into();
+	let second: [Channel; 4] = C::from(second).into();
+	let out = mix_channels(first, second, percentage, C::HUE_INDEX, hue_interpolation);
+	C::from(out)
+}
+
 mod sealed {
 	pub trait PolarColor {}
 }
@@ -128,257 +188,48 @@ where
 	}
 }
 
-impl<T, U> ColorMix<T, U> for Srgb
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let r = premultiply_lerp(first.red as f64, a1, second.red as f64, a2, t, a);
-		let g = premultiply_lerp(first.green as f64, a1, second.green as f64, a2, t, a);
-		let b = premultiply_lerp(first.blue as f64, a1, second.blue as f64, a2, t, a);
-		Srgb::new(r.round() as u8, g.round() as u8, b.round() as u8, (a * 100.0) as f32)
-	}
+/// Implements [`ColorMix`] for a rectangular space by delegating to [`mix_in`].
+macro_rules! impl_color_mix {
+	($ty:ty) => {
+		impl<T, U> ColorMix<T, U> for $ty
+		where
+			Self: From<T> + From<U>,
+		{
+			fn mix(first: T, second: U, percentage: f64) -> Self {
+				mix_in::<Self, T, U>(first, second, percentage, HueInterpolation::Shorter)
+			}
+		}
+	};
 }
 
-impl<T, U> ColorMix<T, U> for LinearRgb
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let r = premultiply_lerp(first.red, a1, second.red, a2, t, a);
-		let g = premultiply_lerp(first.green, a1, second.green, a2, t, a);
-		let b = premultiply_lerp(first.blue, a1, second.blue, a2, t, a);
-		LinearRgb::new(r, g, b, (a * 100.0) as f32)
-	}
+/// Implements [`ColorMixPolar`] for a polar space by delegating to [`mix_in`].
+macro_rules! impl_color_mix_polar {
+	($ty:ty) => {
+		impl<T, U> ColorMixPolar<T, U> for $ty
+		where
+			Self: From<T> + From<U>,
+		{
+			fn mix_polar(first: T, second: U, percentage: f64, hue_interpolation: HueInterpolation) -> Self {
+				mix_in::<Self, T, U>(first, second, percentage, hue_interpolation)
+			}
+		}
+	};
 }
 
-impl<T, U> ColorMixPolar<T, U> for Hsl
-where
-	Self: From<T> + From<U>,
-{
-	fn mix_polar(first: T, second: U, percentage: f64, hue_interpolation: HueInterpolation) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let h = interpolate_hue(first.hue as f64, second.hue as f64, t, hue_interpolation);
-		let s = premultiply_lerp(first.saturation as f64, a1, second.saturation as f64, a2, t, a);
-		let l = premultiply_lerp(first.lightness as f64, a1, second.lightness as f64, a2, t, a);
-		Hsl::new(h as f32, s as f32, l as f32, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMixPolar<T, U> for Hwb
-where
-	Self: From<T> + From<U>,
-{
-	fn mix_polar(first: T, second: U, percentage: f64, hue_interpolation: HueInterpolation) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let h = interpolate_hue(first.hue as f64, second.hue as f64, t, hue_interpolation);
-		let w = premultiply_lerp(first.whiteness as f64, a1, second.whiteness as f64, a2, t, a);
-		let b = premultiply_lerp(first.blackness as f64, a1, second.blackness as f64, a2, t, a);
-		Hwb::new(h as f32, w as f32, b as f32, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for A98Rgb
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let r = premultiply_lerp(first.red, a1, second.red, a2, t, a);
-		let g = premultiply_lerp(first.green, a1, second.green, a2, t, a);
-		let b = premultiply_lerp(first.blue, a1, second.blue, a2, t, a);
-		A98Rgb::new(r, g, b, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for DisplayP3
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let r = premultiply_lerp(first.red, a1, second.red, a2, t, a);
-		let g = premultiply_lerp(first.green, a1, second.green, a2, t, a);
-		let b = premultiply_lerp(first.blue, a1, second.blue, a2, t, a);
-		DisplayP3::new(r, g, b, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for ProphotoRgb
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let r = premultiply_lerp(first.red, a1, second.red, a2, t, a);
-		let g = premultiply_lerp(first.green, a1, second.green, a2, t, a);
-		let b = premultiply_lerp(first.blue, a1, second.blue, a2, t, a);
-		ProphotoRgb::new(r, g, b, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for Rec2020
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let r = premultiply_lerp(first.red, a1, second.red, a2, t, a);
-		let g = premultiply_lerp(first.green, a1, second.green, a2, t, a);
-		let b = premultiply_lerp(first.blue, a1, second.blue, a2, t, a);
-		Rec2020::new(r, g, b, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for Lab
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let l = premultiply_lerp(first.lightness, a1, second.lightness, a2, t, a);
-		let ab_a = premultiply_lerp(first.a, a1, second.a, a2, t, a);
-		let ab_b = premultiply_lerp(first.b, a1, second.b, a2, t, a);
-		Lab::new(l, ab_a, ab_b, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMixPolar<T, U> for Lch
-where
-	Self: From<T> + From<U>,
-{
-	fn mix_polar(first: T, second: U, percentage: f64, hue_interpolation: HueInterpolation) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let l = premultiply_lerp(first.lightness, a1, second.lightness, a2, t, a);
-		let c = premultiply_lerp(first.chroma, a1, second.chroma, a2, t, a);
-		let h = interpolate_hue(first.hue, second.hue, t, hue_interpolation);
-		Lch::new(l, c, h, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for Oklab
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let l = premultiply_lerp(first.lightness, a1, second.lightness, a2, t, a);
-		let ab_a = premultiply_lerp(first.a, a1, second.a, a2, t, a);
-		let ab_b = premultiply_lerp(first.b, a1, second.b, a2, t, a);
-		Oklab::new(l, ab_a, ab_b, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMixPolar<T, U> for Oklch
-where
-	Self: From<T> + From<U>,
-{
-	fn mix_polar(first: T, second: U, percentage: f64, hue_interpolation: HueInterpolation) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let l = premultiply_lerp(first.lightness, a1, second.lightness, a2, t, a);
-		let c = premultiply_lerp(first.chroma, a1, second.chroma, a2, t, a);
-		let h = interpolate_hue(first.hue, second.hue, t, hue_interpolation);
-		Oklch::new(l, c, h, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for XyzD50
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let x = premultiply_lerp(first.x, a1, second.x, a2, t, a);
-		let y = premultiply_lerp(first.y, a1, second.y, a2, t, a);
-		let z = premultiply_lerp(first.z, a1, second.z, a2, t, a);
-		XyzD50::new(x, y, z, (a * 100.0) as f32)
-	}
-}
-
-impl<T, U> ColorMix<T, U> for XyzD65
-where
-	Self: From<T> + From<U>,
-{
-	fn mix(first: T, second: U, percentage: f64) -> Self {
-		let first: Self = first.into();
-		let second: Self = second.into();
-		let t = percentage / 100.0;
-		let a1 = first.alpha as f64 / 100.0;
-		let a2 = second.alpha as f64 / 100.0;
-		let a = a1 * (1.0 - t) + a2 * t;
-		let x = premultiply_lerp(first.x, a1, second.x, a2, t, a);
-		let y = premultiply_lerp(first.y, a1, second.y, a2, t, a);
-		let z = premultiply_lerp(first.z, a1, second.z, a2, t, a);
-		XyzD65::new(x, y, z, (a * 100.0) as f32)
-	}
-}
+impl_color_mix!(Srgb);
+impl_color_mix!(LinearRgb);
+impl_color_mix!(A98Rgb);
+impl_color_mix!(DisplayP3);
+impl_color_mix!(ProphotoRgb);
+impl_color_mix!(Rec2020);
+impl_color_mix!(Lab);
+impl_color_mix!(Oklab);
+impl_color_mix!(XyzD50);
+impl_color_mix!(XyzD65);
+impl_color_mix_polar!(Hsl);
+impl_color_mix_polar!(Hwb);
+impl_color_mix_polar!(Lch);
+impl_color_mix_polar!(Oklch);
 
 #[cfg(test)]
 mod tests {
@@ -496,5 +347,15 @@ mod tests {
 		let c2 = Lab::new(50.0, 60.0, 70.0, 100.0);
 		let mixed = Lab::mix(c1, c2, 50.0);
 		assert_close_to!(mixed, Lab::new(30.0, 40.0, 50.0, 100.0));
+	}
+
+	/// `None` channel in one input adopts the analogous channel from the other.
+	#[test]
+	fn test_none_channel_substitution() {
+		let first = [None, Some(0.0), Some(0.0), Some(100.0)];
+		let second: [Channel; 4] = Srgb::new(200, 0, 0, 100.0).into();
+		let out = mix_channels(first, second, 50.0, Srgb::HUE_INDEX, HueInterpolation::Shorter);
+		let mixed: Srgb = out.into();
+		assert_eq!(mixed, Srgb::new(200, 0, 0, 100.0));
 	}
 }

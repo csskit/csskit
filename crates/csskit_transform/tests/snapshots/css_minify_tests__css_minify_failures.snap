@@ -25,10 +25,6 @@ FAIL charset/0002
 -@charset"ISO-8859-1";@charset"ISO-8859-15";a{color:red}
 +@charset "ISO-8859-1";a{color:red}
 
-FAIL colors/0024
--a{color:#640000}
-+a{color:#c80000}
-
 FAIL colors/0031
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
 +a{color:color-mix(in oklch,#fff,var(--foo))}
@@ -48,14 +44,6 @@ FAIL colors/0034
 FAIL colors/0035
 -a{color:color(display-p3 1.2 -.3 .5)}
 +a{color:color(display-p3 1.2-.3 .5)}
-
-FAIL colors/0060
--a{color:color-mix(in oklab,red,orange,purple)}
-+a{color:#d45456}
-
-FAIL colors/0061
--a{color:color-mix(in srgb,red 0%,green 0%,blue 0%)}
-+a{color:#0000}
 
 FAIL comments/0003
 -a{color:red}

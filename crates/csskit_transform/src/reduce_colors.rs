@@ -209,86 +209,68 @@ where
 		let outer_span = mix.to_span();
 		let outer_len = outer_span.len() as usize;
 
-		let first_chroma = mix.first.color.to_chromashift();
-		let second_chroma = mix.second.color.to_chromashift();
-		let delta_e = first_chroma.and_then(|first| second_chroma.map(|second| first.delta_e(second)));
+		let n = mix.parts.len();
+		let default_pct = 100.0 / n as f32;
 
-		// Compute effective percentages per CSS Color 5 3.2:
-		// - If only one percentage is given, the other is 100% - given
-		// - If neither is given, both default to 50%
-		// - If both are given, they're used as-is (and may not sum to 100%)
-		let p1_explicit = mix.first.percentage.as_ref().map(|p| p.value());
-		let p2_explicit = mix.second.percentage.as_ref().map(|p| p.value());
-		let (p1, p2) = match (p1_explicit, p2_explicit) {
-			(Some(a), Some(b)) => (a, b),
-			(Some(a), None) => (a, 100.0 - a),
-			(None, Some(b)) => (100.0 - b, b),
-			(None, None) => (50.0, 50.0),
-		};
-		let sum = p1 + p2;
+		// Resolve effective percentages
+		let explicit_sum: f32 =
+			(&mix.parts).into_iter().filter_map(|(p, _)| p.percentage.as_ref().map(|pct| pct.value())).sum();
+		let implicit_count = (&mix.parts).into_iter().filter(|(p, _)| p.percentage.is_none()).count();
+		let implicit_share = if implicit_count > 0 { (100.0 - explicit_sum) / implicit_count as f32 } else { 0.0 };
+		let pcts: Vec<f32> = (&mix.parts)
+			.into_iter()
+			.map(|(p, _)| p.percentage.as_ref().map(|pct| pct.value()).unwrap_or(implicit_share))
+			.collect();
+		let sum: f32 = pcts.iter().sum();
 
-		// The same color on both sides should just shrink to the one color,
-		// but only when alpha_mult is 1 (sum >= 100)
-		if delta_e.is_some_and(|delta| delta < COLOR_EPSILON) && sum >= 100.0 {
-			let str = first_chroma.and_then(|color| color.shortest()).unwrap_or_else(|| {
-				let span = mix.first.color.to_span();
-				self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
-			});
-			self.transformer.clear_pending_edits(outer_span);
-			self.transformer.replace_parsed::<Color>(outer_span, &str);
-			self.replacing_outer = true;
-			return;
-		}
-
-		// 100%/0% elimination — only when sum == 100 (no alpha multiplier, no normalization)
-		if sum == 100.0 && (p1 == 100.0 || p2 == 0.0) {
-			let str = first_chroma.and_then(|color| color.shortest()).unwrap_or_else(|| {
-				let span = mix.first.color.to_span();
-				self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
-			});
-			self.transformer.clear_pending_edits(outer_span);
-			self.transformer.replace_parsed::<Color>(outer_span, &str);
-			self.replacing_outer = true;
-			return;
-		}
-
-		// 0%/100% elimination — only when sum == 100
-		if sum == 100.0 && (p2 == 100.0 || p1 == 0.0) {
-			let str = second_chroma.and_then(|color| color.shortest()).unwrap_or_else(|| {
-				let span = mix.second.color.to_span();
-				self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
-			});
-			self.transformer.clear_pending_edits(outer_span);
-			self.transformer.replace_parsed::<Color>(outer_span, &str);
-			self.replacing_outer = true;
-			return;
-		}
-
-		// Try to statically mix both colors if they're both known
-		if let (Some(first), Some(second)) = (first_chroma, second_chroma)
-			&& sum > 0.0
+		// If exactly one part has all the weight (sum == 100 and all others are 0), collapse to it.
+		if sum == 100.0
+			&& let Some(dominant) = pcts.iter().position(|&p| p == 100.0)
 		{
-			// Normalize so that p1_norm + p2_norm = 100
-			let np1 = (p1 as f64) / (sum as f64) * 100.0;
-			// The percentage for mixing is "how much of the second color"
-			let percentage = 100.0 - np1;
+			{
+				let (part, _) = &mix.parts[dominant];
+				let chroma = part.color.to_chromashift();
+				let str = chroma.and_then(|c| c.shortest()).unwrap_or_else(|| {
+					let span = part.color.to_span();
+					self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
+				});
+				self.transformer.clear_pending_edits(outer_span);
+				self.transformer.replace_parsed::<Color>(outer_span, &str);
+				self.replacing_outer = true;
+				return;
+			}
+		}
 
-			let mixed = mix.interpolation.color_space.mix(first, second, percentage);
+		// All identical colors with alpha_mult == 1 (sum >= 100): collapse to first.
+		if sum >= 100.0 {
+			let chromata: Vec<_> = (&mix.parts).into_iter().map(|(p, _)| p.color.to_chromashift()).collect();
+			if chromata.iter().all(Option::is_some) {
+				let first = chromata[0].unwrap();
+				if chromata[1..].iter().all(|c| c.unwrap().delta_e(first) < COLOR_EPSILON) {
+					let (part, _) = &mix.parts[0];
+					let str = first.shortest().unwrap_or_else(|| {
+						let span = part.color.to_span();
+						self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
+					});
+					self.transformer.clear_pending_edits(outer_span);
+					self.transformer.replace_parsed::<Color>(outer_span, &str);
+					self.replacing_outer = true;
+					return;
+				}
+			}
+		}
 
-			// Apply alpha multiplier per CSS Color 5 3.3:
-			// alpha_mult = 1 - leftover, where leftover = max(1 - sum/100, 0)
+		// Try static mix to reduce colors:
+		let all_known = (&mix.parts).into_iter().all(|(p, _)| p.color.to_chromashift().is_some());
+		if all_known && let Some(mixed) = mix.to_chromashift() {
 			let alpha_mult = (sum as f64 / 100.0).min(1.0);
 			let mixed_alpha = (mixed.to_alpha() as f64 / 100.0 * alpha_mult * 100.0) as f32;
 			let mixed = mixed.with_alpha(mixed_alpha);
-
-			// Try the perceptually-rounded native-space form first, then sRGB
-			// candidates if the result is in gamut.
 			let rounded = mixed.round();
 			let native_css = rounded.to_css();
 			let srgb_css = if mixed.in_gamut_of(ColorSpace::Srgb) { mixed.shortest() } else { None };
 			let candidate =
 				native_css.into_iter().chain(srgb_css).min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)));
-
 			if let Some(ref candidate) = candidate
 				&& candidate.len() < outer_len
 			{
@@ -298,25 +280,20 @@ where
 			}
 		}
 
-		// Partial optimizations (only when not replacing the entire expression)
-
-		// Remove redundant 50% percentages — only when both effective percentages are 50%
-		// (i.e. the sum is 100, so no alpha multiplier effect)
-		if sum == 100.0 {
-			if p1 == 50.0
-				&& let Some(ref pct) = mix.first.percentage
-			{
-				self.transformer.delete(pct.to_span());
-			}
-			if p2 == 50.0
-				&& let Some(ref pct) = mix.second.percentage
-			{
-				self.transformer.delete(pct.to_span());
+		// Remove redundant percentages on an equal N-way split (partial optimisation).
+		if (sum - 100.0).abs() < 0.01 {
+			for ((part, _), &effective) in (&mix.parts).into_iter().zip(&pcts) {
+				if let Some(ref pct) = part.percentage
+					&& (effective - default_pct).abs() < 0.01
+				{
+					self.transformer.delete(pct.to_span());
+				}
 			}
 		}
 
 		// Remove redundant "shorter hue" (shorter is the default hue interpolation direction)
-		if let InterpolationColorSpace::Polar(_, Some(ref hue_method)) = mix.interpolation.color_space
+		if let Some(ref interp) = mix.interpolation
+			&& let InterpolationColorSpace::Polar(_, Some(ref hue_method)) = interp.color_space
 			&& matches!(hue_method.direction, HueInterpolationDirection::Shorter(_))
 		{
 			self.transformer.delete(hue_method.to_span());
@@ -442,6 +419,18 @@ mod tests {
 	}
 
 	#[test]
+	fn color_mix_all_zero_percent() {
+		// Per CSS Color 5 §3.3: sum of 0% → transparent black.
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color-mix(in srgb, red 0%, green 0%, blue 0%); }",
+			"a { color: #0000; }"
+		);
+	}
+
+	#[test]
 	fn color_mix_same_color_both_sides() {
 		assert_transform!(
 			CssMinifierFeature::ReduceColors,
@@ -460,6 +449,17 @@ mod tests {
 			StyleSheet,
 			"a { color: color-mix(in srgb, currentcolor 50%, red 50%); }",
 			"a { color: color-mix(in srgb, currentcolor, red); }"
+		);
+	}
+
+	#[test]
+	fn color_mix_removes_redundant_equal_n_way_split() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color-mix(in srgb, currentcolor 33.33%, red 33.33%, blue 33.33%); }",
+			"a { color: color-mix(in srgb, currentcolor, red, blue); }"
 		);
 	}
 
@@ -584,6 +584,17 @@ mod tests {
 			StyleSheet,
 			"a { color: color-mix(in oklch, lime, blue); }",
 			"a { color: oklch(0.659 0.304 203.3); }"
+		);
+	}
+
+	#[test]
+	fn color_mix_none_channel_adopts_other() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color-mix(in srgb, rgb(none 0 0) 50%, rgb(200 0 0) 50%); }",
+			"a { color: #c80000; }"
 		);
 	}
 
