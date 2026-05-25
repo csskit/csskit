@@ -461,18 +461,6 @@ checksum = "e47641d3deaf41fb1538ac1f54735925e275eaf3bf4d55c81b137fba797e5cbb"
 
 [[package]]
 name = "console"
-version = "0.15.11"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "054ccb5b10f9f2cbf51eb355ca1d05c2d279ce1804688d0db74b4733a5aeafd8"
-dependencies = [
- "encode_unicode",
- "libc",
- "once_cell",
- "windows-sys 0.59.0",
-]
-
-[[package]]
-name = "console"
 version = "0.16.3"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d64e8af5551369d19cf50138de61f1c42074ab970f74e99be916646777f8fc87"
@@ -610,7 +598,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "chromashift",
- "console 0.16.3",
+ "console",
  "criterion",
  "css_feature_data",
  "css_lexer",
@@ -652,7 +640,7 @@ dependencies = [
  "allocator-api2",
  "bitmask-enum",
  "bumpalo",
- "console 0.16.3",
+ "console",
  "criterion",
  "derive_atom_set",
  "dhat",
@@ -766,7 +754,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "chromashift",
- "console 0.16.3",
+ "console",
  "css_ast",
  "css_lexer",
  "css_parse",
@@ -783,7 +771,7 @@ version = "0.0.23"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
- "console 0.16.3",
+ "console",
  "criterion",
  "crossbeam-channel",
  "css_ast",
@@ -1121,7 +1109,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "778e2ac28f6c47af28e4907f13ffd1e1ddbd400980a9abd7c8df189bf578a5ad"
 dependencies = [
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
@@ -1736,11 +1724,11 @@ dependencies = [
 
 [[package]]
 name = "insta"
-version = "1.46.3"
+version = "1.47.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e82db8c87c7f1ccecb34ce0c24399b8a73081427f3c7c50a5d597925356115e4"
+checksum = "7b4a6248eb93a4401ed2f37dfe8ea592d3cf05b7cf4f8efa867b6895af7e094e"
 dependencies = [
- "console 0.15.11",
+ "console",
  "once_cell",
  "ron",
  "serde",
@@ -2600,7 +2588,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.52.0",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
@@ -3082,7 +3070,7 @@ dependencies = [
  "getrandom 0.3.3",
  "once_cell",
  "rustix",
- "windows-sys 0.52.0",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
