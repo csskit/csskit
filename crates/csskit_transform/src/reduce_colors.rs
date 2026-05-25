@@ -588,6 +588,17 @@ mod tests {
 	}
 
 	#[test]
+	fn rgb_none_channel_resolves_to_zero() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: rgb(none 128 0); }",
+			"a { color: green; }"
+		);
+	}
+
+	#[test]
 	fn relative_rgb_static_channels_minified() {
 		assert_transform!(
 			CssMinifierFeature::ReduceColors,
