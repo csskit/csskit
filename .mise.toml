@@ -1,5 +1,5 @@
 [tools]
-rust = { version = "1.95.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
+rust = { version = "1.96.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
 node = "25.9.0"
 npm = "11.15.0"
 hyperfine = "latest"
