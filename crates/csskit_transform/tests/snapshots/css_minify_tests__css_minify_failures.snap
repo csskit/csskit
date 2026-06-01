@@ -49,6 +49,14 @@ FAIL colors/0035
 -a{color:color(display-p3 1.2 -.3 .5)}
 +a{color:color(display-p3 1.2-.3 .5)}
 
+FAIL colors/0060
+-a{color:color-mix(in oklab,red,orange,purple)}
++a{color:#d45456}
+
+FAIL colors/0061
+-a{color:color-mix(in srgb,red 0%,green 0%,blue 0%)}
++a{color:#0000}
+
 FAIL comments/0003
 -a{color:red}
 +/*! important */a{color:red}
@@ -356,6 +364,22 @@ FAIL selectors-advanced/0012
 FAIL selectors-advanced/0013
 -h1,h2,h3,h4,h5,h6{color:red}
 +:heading{color:red}
+
+FAIL selectors-advanced/0014
+-:is(h2,a,h1,.foo,:visited,p,.example,.bar){color:red}
++:is(.bar,.example,.foo,:visited,a,h1,h2,p){color:red}
+
+FAIL selectors-advanced/0015
+-:is(h1,h1,h2){color:red}
++:is(h1,h2){color:red}
+
+FAIL selectors-advanced/0016
+-:is(:visited,:link,:where(.link)){color:red}
++:is(:any-link,:where(.link)){color:red}
+
+FAIL selectors-advanced/0017
+-:is(h2,:link,h1,:visited,h1,:any-link,div){color:red}
++:is(:any-link,div,h1,h2){color:red}
 
 FAIL selectors/0001
 -a:nth-child(2n+ 1){color:red}
