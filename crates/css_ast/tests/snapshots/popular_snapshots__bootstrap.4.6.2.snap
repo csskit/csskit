@@ -50944,7 +50944,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (HorizontalOffsetVertical(Right(Ident(Cursor(
+                (ThreeVertical(Right(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(37401),
                   len: 5,
@@ -55519,7 +55519,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (HorizontalOffsetVertical(Right(Ident(Cursor(
+                (ThreeVertical(Right(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(41776),
                   len: 5,
@@ -101244,11 +101244,11 @@ StyleSheet(
                 (BgLayer(
                   image: None,
                   position: Some(BgPositionAndSize(
-                    position: Standard(SingleValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                    position: One(LengthPercentage(Percent(Percentage(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(77443),
                       len: 3,
-                    ))))))),
+                    )))))),
                     size: Some((Slash(Delim(Cursor(
                       kind: "Delim",
                       offset: SourceOffset(77447),
@@ -104240,7 +104240,7 @@ StyleSheet(
                     len: 1,
                   )))))),
                   position: Some(BgPositionAndSize(
-                    position: HorizontalOffsetVertical(Right(Ident(Cursor(
+                    position: ThreeVertical(Right(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(80756),
                       len: 5,
@@ -116177,11 +116177,11 @@ StyleSheet(
                 (BgLayer(
                   image: None,
                   position: Some(BgPositionAndSize(
-                    position: Standard(SingleValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                    position: One(LengthPercentage(Percent(Percentage(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(90595),
                       len: 3,
-                    ))))))),
+                    )))))),
                     size: Some((Slash(Delim(Cursor(
                       kind: "Delim",
                       offset: SourceOffset(90599),
@@ -142794,7 +142794,7 @@ StyleSheet(
                     len: 1,
                   )),
                   value: BackgroundPositionStyleValue([
-                    (Standard(TwoValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    (Two(Physical(LengthPercentage(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(111758),
                       len: 4,
@@ -142847,7 +142847,7 @@ StyleSheet(
                     len: 1,
                   )),
                   value: BackgroundPositionStyleValue([
-                    (Standard(TwoValue(LengthPercentage(Zero(Number(Cursor(
+                    (Two(Physical(LengthPercentage(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(111802),
                       len: 1,
@@ -142926,7 +142926,7 @@ StyleSheet(
                     len: 1,
                   )),
                   value: BackgroundPositionStyleValue([
-                    (Standard(TwoValue(LengthPercentage(Length(Rem(Dimension(Cursor(
+                    (Two(Physical(LengthPercentage(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(111882),
                       len: 4,
@@ -142979,7 +142979,7 @@ StyleSheet(
                     len: 1,
                   )),
                   value: BackgroundPositionStyleValue([
-                    (Standard(TwoValue(LengthPercentage(Zero(Number(Cursor(
+                    (Two(Physical(LengthPercentage(Zero(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(111926),
                       len: 1,
@@ -171309,11 +171309,11 @@ StyleSheet(
                 (BgLayer(
                   image: None,
                   position: Some(BgPositionAndSize(
-                    position: Standard(SingleValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                    position: One(LengthPercentage(Percent(Percentage(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(135833),
                       len: 3,
-                    ))))))),
+                    )))))),
                     size: Some((Slash(Delim(Cursor(
                       kind: "Delim",
                       offset: SourceOffset(135837),
