@@ -36438,11 +36438,11 @@ StyleSheet(
                     len: 1,
                   )),
                   value: BackgroundPositionStyleValue([
-                    (Standard(SingleValue(Left(Ident(Cursor(
+                    (One(Left(Ident(Cursor(
                       kind: "Ident",
                       offset: SourceOffset(25036),
                       len: 4,
-                    ))))), None),
+                    )))), None),
                   ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(

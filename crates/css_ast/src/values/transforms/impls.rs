@@ -14,7 +14,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ScaleStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<TransformStyleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PerspectiveStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 68);
 		assert_eq!(std::mem::size_of::<BackfaceVisibilityStyleValue>(), 16);
 	}
 

@@ -1,7 +1,7 @@
 use super::prelude::*;
 use crate::{
-	LengthPercentage, Position, PositionHorizontal, PositionHorizontalKeyword, PositionSingleValue,
-	PositionVerticalKeyword,
+	LengthPercentage, PositionFour, PositionHorizontal, PositionHorizontalKeyword, PositionOne, PositionTwo,
+	PositionVertical, PositionVerticalKeyword,
 };
 
 /// <https://drafts.csswg.org/css-backgrounds-4/#typedef-bg-position>
@@ -21,25 +21,27 @@ use crate::{
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BgPosition {
-	/// Standard 1, 2, or 4-value `<position>`.
-	Standard(Position),
-	/// `[ left | center | right ] [ top | bottom ] <length-percentage>`
-	/// e.g. `center bottom 10px`
-	HorizontalVerticalOffset(PositionSingleValue, PositionVerticalKeyword, LengthPercentage),
-	/// `[ left | right ] <length-percentage> [ top | center | bottom ]`
-	/// e.g. `left 10px center`
-	HorizontalOffsetVertical(PositionHorizontalKeyword, LengthPercentage, PositionSingleValue),
+	/// Single value syntax
+	One(PositionOne),
+	/// Two value syntax
+	Two(PositionTwo),
+	/// Three value syntax where the Horizontal axis may be "center"
+	ThreeHorizontal(PositionHorizontal, PositionVerticalKeyword, LengthPercentage),
+	/// Three value syntax where the Vertical axis may be "center"
+	ThreeVertical(PositionHorizontalKeyword, LengthPercentage, PositionVertical),
+	/// Four value syntax
+	Four(PositionFour),
 }
 
 impl<'a> Peek<'a> for BgPosition {
-	const PEEK_KINDSET: KindSet = PositionSingleValue::PEEK_KINDSET;
+	const PEEK_KINDSET: KindSet = PositionOne::PEEK_KINDSET;
 
 	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		PositionSingleValue::peek(p, c)
+		PositionOne::peek(p, c)
 	}
 }
 
@@ -48,72 +50,79 @@ impl<'a> Parse<'a> for BgPosition {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let first = p.parse::<PositionSingleValue>()?;
-
-		if !p.peek::<PositionSingleValue>() {
-			return Ok(Self::Standard(Position::SingleValue(first)));
+		let first = p.parse::<PositionOne>()?;
+		if !p.peek::<PositionOne>() {
+			return Ok(Self::One(first));
 		}
 
-		let second = p.parse::<PositionSingleValue>()?;
-		if !p.peek::<PositionSingleValue>() {
-			if let Some(h) = first.to_horizontal() {
-				if let Some(v) = second.to_vertical() {
-					return Ok(Self::Standard(Position::TwoValue(h, v)));
-				}
-			} else if let Some(h) = second.to_horizontal()
-				&& let Some(v) = first.to_vertical()
-			{
-				return Ok(Self::Standard(Position::TwoValue(h, v)));
-			}
-			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
+		let second = p.parse::<PositionOne>()?;
+		if !p.peek::<PositionOne>() {
+			return Ok(Self::Two(PositionTwo::from_two(p, first, second)?));
 		}
 
 		if let Some(h_kw) = first.to_horizontal_keyword() {
-			if let PositionSingleValue::LengthPercentage(lp) = second {
-				if let Some(v) = p.parse_if_peek::<PositionSingleValue>()? {
-					if let Some(_v_single) = v.to_vertical() {
-						if !p.peek::<LengthPercentage>() {
-							return Ok(Self::HorizontalOffsetVertical(h_kw, lp, v));
-						}
-						let fourth = p.parse::<LengthPercentage>()?;
-						if let Some(v_kw) = v.to_vertical_keyword() {
-							return Ok(Self::Standard(Position::FourValue(h_kw, lp, v_kw, fourth)));
-						}
-						Err(Diagnostic::new(v.into(), Diagnostic::unexpected))?
+			if let PositionOne::LengthPercentage(lp) = second {
+				// `H L ? ...` — three-value or four-value
+				let third = p.parse::<PositionOne>()?;
+				if let Some(v) = third.to_vertical() {
+					let fourth = if third.to_vertical_keyword().is_some() {
+						p.parse_if_peek::<LengthPercentage>()?
 					} else {
-						Err(Diagnostic::new(v.into(), Diagnostic::unexpected))?
+						None
+					};
+					if let Some(fourth) = fourth
+						&& let Some(v_kw) = third.to_vertical_keyword()
+					{
+						// Four-value physical: `left 10px bottom 20px`
+						return Ok(Self::Four(PositionFour::Physical(h_kw, lp, v_kw, fourth)));
+					} else if fourth.is_none() {
+						// Three-value: `left 10px center`
+						return Ok(Self::ThreeVertical(h_kw, lp, v));
 					}
-				} else {
-					Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
 				}
-			} else {
-				if let Some(v_kw) = second.to_vertical_keyword() {
-					let third = p.parse::<LengthPercentage>()?;
-					if !p.peek::<PositionSingleValue>() {
-						return Ok(Self::HorizontalVerticalOffset(first, v_kw, third));
-					}
-					Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
-				} else {
-					Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
-				}
-			}
-		} else if matches!(first, PositionSingleValue::Center(_)) {
-			if let Some(v_kw) = second.to_vertical_keyword() {
+				Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
+			} else if let Some(v_kw) = second.to_vertical_keyword() {
+				// `H V L` — three-value: `left bottom 10px`
 				let third = p.parse::<LengthPercentage>()?;
-				return Ok(Self::HorizontalVerticalOffset(first, v_kw, third));
+				return Ok(Self::ThreeHorizontal(PositionHorizontal::from_keyword(h_kw), v_kw, third));
 			}
-			if let Some(v) = second.to_vertical() {
-				return Ok(Self::Standard(Position::TwoValue(
+			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
+		} else if matches!(first, PositionOne::Center(_)) {
+			if let Some(v_kw) = second.to_vertical_keyword() {
+				// Three-value: `center bottom 10px`
+				let third = p.parse::<LengthPercentage>()?;
+				return Ok(Self::ThreeHorizontal(
 					PositionHorizontal::Center(match first {
-						PositionSingleValue::Center(t) => t,
+						PositionOne::Center(t) => t,
+						_ => unreachable!(),
+					}),
+					v_kw,
+					third,
+				));
+			} else if let Some(v) = second.to_vertical() {
+				return Ok(Self::Two(PositionTwo::Physical(
+					PositionHorizontal::Center(match first {
+						PositionOne::Center(t) => t,
 						_ => unreachable!(),
 					}),
 					v,
 				)));
 			}
 			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
-		} else {
-			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
+		}
+		// Vertical keyword first — could be reversed four-value handled by Position::Four
+		// e.g. `bottom 20px left 10px`
+		Ok(Self::Four(PositionFour::from_four(p, first, second)?))
+	}
+}
+
+impl PositionHorizontal {
+	pub(crate) fn from_keyword(kw: PositionHorizontalKeyword) -> Self {
+		match kw {
+			PositionHorizontalKeyword::Left(t) => Self::Left(t),
+			PositionHorizontalKeyword::Right(t) => Self::Right(t),
+			PositionHorizontalKeyword::XStart(t) => Self::XStart(t),
+			PositionHorizontalKeyword::XEnd(t) => Self::XEnd(t),
 		}
 	}
 }
@@ -126,7 +135,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgPosition>(), 64);
+		assert_eq!(std::mem::size_of::<BgPosition>(), 68);
 	}
 
 	#[test]

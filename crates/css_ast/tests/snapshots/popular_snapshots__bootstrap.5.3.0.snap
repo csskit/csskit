@@ -58704,7 +58704,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (HorizontalOffsetVertical(Right(Ident(Cursor(
+                (ThreeVertical(Right(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(42991),
                   len: 5,
@@ -60969,11 +60969,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (Standard(SingleValue(Center(Ident(Cursor(
+                (One(Center(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(45053),
                   len: 6,
-                ))))), None),
+                )))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -62700,7 +62700,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (Standard(TwoValue(Left(Ident(Cursor(
+                (Two(Physical(Left(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(47123),
                   len: 4,
@@ -63094,7 +63094,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (Standard(TwoValue(Right(Ident(Cursor(
+                (Two(Physical(Right(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(47584),
                   len: 5,
@@ -120442,11 +120442,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (Standard(SingleValue(Center(Ident(Cursor(
+                (One(Center(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(95755),
                   len: 6,
-                ))))), None),
+                )))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -190961,11 +190961,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (Standard(SingleValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                (One(LengthPercentage(Percent(Percentage(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(161032),
                   len: 3,
-                ))))))), None),
+                )))))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -212261,7 +212261,7 @@ StyleSheet(
                     len: 1,
                   )),
                   value: WebkitMaskPositionStyleValue([
-                    (TwoValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                    (Two(Physical(LengthPercentage(Percent(Percentage(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(179377),
                       len: 5,
@@ -212269,7 +212269,7 @@ StyleSheet(
                       kind: "Dimension",
                       offset: SourceOffset(179383),
                       len: 2,
-                    )))))), None),
+                    ))))))), None),
                   ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
@@ -212290,7 +212290,7 @@ StyleSheet(
                     len: 1,
                   )),
                   value: MaskPositionStyleValue([
-                    (TwoValue(LengthPercentage(Percent(Percentage(Dimension(Cursor(
+                    (Two(Physical(LengthPercentage(Percent(Percentage(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(179406),
                       len: 5,
@@ -212298,7 +212298,7 @@ StyleSheet(
                       kind: "Dimension",
                       offset: SourceOffset(179412),
                       len: 2,
-                    )))))), None),
+                    ))))))), None),
                   ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(

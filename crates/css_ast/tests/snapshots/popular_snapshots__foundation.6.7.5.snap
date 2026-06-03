@@ -113230,7 +113230,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundPositionStyleValue([
-                (HorizontalOffsetVertical(Right(Ident(Cursor(
+                (ThreeVertical(Right(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(83254),
                   len: 5,
