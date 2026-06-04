@@ -2,27 +2,36 @@ specificity --format json
 ---
 [
   {
+    "file": "coverage/basic/many-rules.css",
+    "line": 1,
+    "column": 1,
+    "start": 0,
+    "end": 4,
     "selector": ".foo",
     "a": 0,
     "b": 1,
-    "c": 0,
-    "line": 1,
-    "col": 1
+    "c": 0
   },
   {
+    "file": "coverage/basic/many-rules.css",
+    "line": 2,
+    "column": 1,
+    "start": 21,
+    "end": 25,
     "selector": ".bar",
     "a": 0,
     "b": 1,
-    "c": 0,
-    "line": 2,
-    "col": 1
+    "c": 0
   },
   {
+    "file": "coverage/basic/many-rules.css",
+    "line": 3,
+    "column": 1,
+    "start": 43,
+    "end": 47,
     "selector": ".baz",
     "a": 0,
     "b": 1,
-    "c": 0,
-    "line": 3,
-    "col": 1
+    "c": 0
   }
 ]

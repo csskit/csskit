@@ -1,0 +1,21 @@
+check coverage/basic/warn-many-rules.cks --format json
+---
+{
+  "diagnostics": [
+    {
+      "file": "coverage/basic/many-rules.css",
+      "line": 1,
+      "column": 1,
+      "start": 0,
+      "end": 65,
+      "severity": "warning",
+      "message": "Too many rules: 3"
+    }
+  ],
+  "stats": {
+    "rule-count": [
+      "counter",
+      3
+    ]
+  }
+}

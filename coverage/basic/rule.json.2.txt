@@ -3,11 +3,11 @@ find --format json style-rule
 [
   {
     "file": "coverage/basic/rule.css",
-    "type": "style-rule",
     "line": 1,
     "column": 1,
     "start": 0,
     "end": 28,
+    "type": "style-rule",
     "text": "body {\n  min-width: 960px;\n}"
   }
 ]

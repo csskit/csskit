@@ -2,11 +2,14 @@ specificity --format json
 ---
 [
   {
+    "file": "coverage/basic/rule.css",
+    "line": 1,
+    "column": 1,
+    "start": 0,
+    "end": 4,
     "selector": "body",
     "a": 0,
     "b": 0,
-    "c": 1,
-    "line": 1,
-    "col": 1
+    "c": 1
   }
 ]

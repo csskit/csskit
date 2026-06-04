@@ -1,4 +1,11 @@
-use crate::{CliError, CliResult, GlobalConfig, bold_green, bold_red, commands::format_diagnostic_error};
+use crate::{
+	CliError, CliResult, GlobalConfig, bold_green, bold_red,
+	commands::{
+		OutputFormat,
+		extract::{Location, Record},
+		format_diagnostic_error,
+	},
+};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::CssAtomSet;
@@ -7,7 +14,22 @@ use css_parse::Parser;
 use csskit_ast::{Collector, CsskitAtomSet, ResolvedDiagnosticLevel, StatType, sheet::Sheet};
 use csskit_highlight::CssHighlighter;
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource, Report};
+use serde::Serialize;
 use std::{collections::HashMap, fs};
+
+/// JSON data payload for a single diagnostic.
+#[derive(Serialize)]
+struct DiagnosticData {
+	severity: String,
+	message: String,
+}
+
+/// JSON output envelope for check command.
+#[derive(Serialize)]
+struct CheckJson {
+	diagnostics: Vec<Record<DiagnosticData>>,
+	stats: HashMap<String, (String, usize)>,
+}
 
 /// Report potential issues around some CSS files
 #[derive(Debug, Args)]
@@ -23,11 +45,15 @@ pub struct Check {
 	/// Automatically apply suggested fixes
 	#[arg(short, long, value_parser)]
 	fix: bool,
+
+	/// Output format
+	#[arg(long, value_enum, default_value_t = OutputFormat::Text)]
+	format: OutputFormat,
 }
 
 impl Check {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
-		let Self { sheet, input, fix } = self;
+		let Self { sheet, input, fix, format } = self;
 
 		if *fix {
 			todo!()
@@ -54,8 +80,9 @@ impl Check {
 		})?;
 
 		// Aggregate statistics across all files
-		let mut aggregated_stats = HashMap::new();
+		let mut aggregated_stats: HashMap<_, _> = HashMap::new();
 		let mut error_count = 0;
+		let mut json_diagnostics: Vec<Record<DiagnosticData>> = Vec::new();
 
 		for css_file_path in input.iter() {
 			let css_source = fs::read_to_string(css_file_path)?;
@@ -81,19 +108,33 @@ impl Check {
 					file_failed = true;
 				}
 
-				let handler = if config.colors() {
-					let highlighter = CssHighlighter::new(css_source.clone(), &stylesheet);
-					GraphicalReportHandler::new_themed(GraphicalTheme::unicode()).with_syntax_highlighting(highlighter)
-				} else {
-					GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor())
-				};
+				match format {
+					OutputFormat::Json => {
+						json_diagnostics.push(Record {
+							location: Location::from_span(css_file_path, diagnostic.span, &css_source),
+							data: DiagnosticData {
+								severity: diagnostic.severity.to_string(),
+								message: diagnostic.message,
+							},
+						});
+					}
+					OutputFormat::Text => {
+						let handler = if config.colors() {
+							let highlighter = CssHighlighter::new(css_source.clone(), &stylesheet);
+							GraphicalReportHandler::new_themed(GraphicalTheme::unicode())
+								.with_syntax_highlighting(highlighter)
+						} else {
+							GraphicalReportHandler::new_themed(GraphicalTheme::unicode_nocolor())
+						};
 
-				let miette_diag = diagnostic.into_miette();
-				let named_source = NamedSource::new(css_file_path, css_source.clone());
-				let report = Report::new(miette_diag).with_source_code(named_source);
-				let mut output = String::new();
-				if handler.render_report(&mut output, &*report).is_ok() {
-					eprint!("{}", output);
+						let miette_diag = diagnostic.into_miette();
+						let named_source = NamedSource::new(css_file_path, css_source.clone());
+						let report = Report::new(miette_diag).with_source_code(named_source);
+						let mut output = String::new();
+						if handler.render_report(&mut output, &*report).is_ok() {
+							eprint!("{}", output);
+						}
+					}
 				}
 			}
 
@@ -103,21 +144,36 @@ impl Check {
 			}
 		}
 
-		// Output aggregated statistics summary
-		if !aggregated_stats.is_empty() {
-			println!("\nStatistics:");
-			let mut stat_entries: Vec<_> = aggregated_stats
-				.iter()
-				.map(|(name, val)| (CsskitAtomSet::get_dyn_set().bits_to_str(name.as_bits()), val))
-				.collect();
-			stat_entries.sort_by_key(|(name, _)| *name);
-			for (name, (stat_type, count)) in stat_entries {
-				let type_label = match stat_type {
-					StatType::Counter => "",
-					StatType::Bytes => " bytes",
-					StatType::Lines => " lines",
-				};
-				println!("  --{}: {}{}", name, count, type_label);
+		match format {
+			OutputFormat::Json => {
+				let stats: HashMap<String, (String, usize)> = aggregated_stats
+					.iter()
+					.map(|(name, (stat_type, count))| {
+						let key = CsskitAtomSet::get_dyn_set().bits_to_str(name.as_bits()).to_string();
+						(key, (stat_type.to_string(), *count))
+					})
+					.collect();
+				let output = CheckJson { diagnostics: json_diagnostics, stats };
+				println!("{}", serde_json::to_string_pretty(&output)?);
+			}
+			OutputFormat::Text => {
+				// Output aggregated statistics summary
+				if !aggregated_stats.is_empty() {
+					println!("\nStatistics:");
+					let mut stat_entries: Vec<_> = aggregated_stats
+						.iter()
+						.map(|(name, val)| (CsskitAtomSet::get_dyn_set().bits_to_str(name.as_bits()), val))
+						.collect();
+					stat_entries.sort_by_key(|(name, _)| *name);
+					for (name, (stat_type, count)) in stat_entries {
+						let type_label = match stat_type {
+							StatType::Counter => "",
+							StatType::Bytes => " bytes",
+							StatType::Lines => " lines",
+						};
+						println!("  --{}: {}{}", name, count, type_label);
+					}
+				}
 			}
 		}
 

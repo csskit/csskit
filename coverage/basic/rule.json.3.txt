@@ -1,0 +1,11 @@
+check coverage/basic/basic-stats.cks --format json
+---
+{
+  "diagnostics": [],
+  "stats": {
+    "total-rules": [
+      "counter",
+      1
+    ]
+  }
+}
