@@ -41,6 +41,24 @@ pub enum OObjectFitStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum OBoxSizingStyleValue {}
 
+/// `-o-filter` - alias for `filter`.
+#[syntax(" none | <filter-value-list> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = FilterEffects,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct OFilterStyleValue<'a>;
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -70,5 +88,17 @@ mod tests {
 	#[test]
 	fn test_o_box_sizing_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, OBoxSizingStyleValue, "invalid");
+	}
+
+	#[test]
+	fn test_o_filter_parses() {
+		assert_parse!(CssAtomSet::ATOMS, OFilterStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, OFilterStyleValue, "blur(4px)");
+		assert_parse!(CssAtomSet::ATOMS, OFilterStyleValue, "brightness(0.5) contrast(1.2)");
+	}
+
+	#[test]
+	fn test_o_filter_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, OFilterStyleValue, "invalid");
 	}
 }
