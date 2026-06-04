@@ -1585,6 +1585,7 @@ pub enum CssAtomSet {
 	PageOrientation,
 	Paged,
 	Paint,
+	Painted,
 	PaintOrder,
 	Palegoldenrod,
 	Palegreen,
@@ -2301,6 +2302,12 @@ pub enum CssAtomSet {
 	Violet,
 	Visibility,
 	Visible,
+	#[atom("visibleFill")]
+	Visiblefill,
+	#[atom("visiblePainted")]
+	Visiblepainted,
+	#[atom("visibleStroke")]
+	Visiblestroke,
 	Visited,
 	Visitedtext,
 	VoiceBalance,

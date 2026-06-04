@@ -657,11 +657,13 @@ pub struct OutlineWidthStyleValue;
 /// The grammar is defined as:
 ///
 /// ```text,ignore
-/// auto | none
+/// auto | none | all | fill | stroke | visible | painted | visiblePainted | visibleFill | visibleStroke | bounding-box
 /// ```
 ///
 /// https://drafts.csswg.org/css-ui-4/#pointer-events
-#[syntax(" auto | none ")]
+#[syntax(
+	" auto | none | all | fill | stroke | visible | painted | visiblePainted | visibleFill | visibleStroke | bounding-box "
+)]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

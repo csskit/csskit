@@ -34,3 +34,9 @@ min-height = " | stretch | fit-content | contain | -webkit-max-content | -moz-ma
 # -webkit-match-parent is a vendor-prefixed alias for `match-parent`
 text-align = " | -webkit-match-parent"
 text-align-all = " | -webkit-match-parent"
+
+[ui]
+# SVG `pointer-events` values used on HTML elements in the wild (e.g. Bootstrap).
+# The CSS UI spec only defines `auto | none`; SVG adds a richer set.
+# https://www.w3.org/TR/SVG2/interact.html#PointerEventsProperty
+pointer-events = " | all | fill | stroke | visible | painted | visiblePainted | visibleFill | visibleStroke | bounding-box"
