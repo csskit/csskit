@@ -42,11 +42,11 @@ check_variant() {
 
 	if $UPDATE; then
 		if new_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null); then
-			if diff -q <(printf '%s\n' "$new_output") "$target_file" >/dev/null 2>&1; then
+			if diff -q <(printf '%s' "$new_output") "$target_file" >/dev/null 2>&1; then
 				echo " $PASS $variant $css_file"
 				passed=$((passed + 1))
 			else
-				printf '%s\n' "$new_output" >"$target_file"
+				printf '%s' "$new_output" >"$target_file"
 				echo " $UPDATED $variant $css_file"
 				updated=$((updated + 1))
 			fi
@@ -54,7 +54,7 @@ check_variant() {
 			echo " $FAIL $variant $css_file (update failed)"
 			failed=$((failed + 1))
 		fi
-	elif diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff -Z --new-file --color=always --side-by-side --suppress-common-lines - "$target_file" 2>&1); then
+	elif new_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null) && diff_output=$(diff -Z --new-file --color=always --side-by-side --suppress-common-lines <(printf '%s' "$new_output") "$target_file" 2>&1); then
 		echo " $PASS $variant $css_file"
 		passed=$((passed + 1))
 	else
@@ -83,7 +83,7 @@ check_frontmatter() {
 				echo " $PASS $label '$args' $css_file"
 				passed=$((passed + 1))
 			else
-				{ printf '%s\n---\n' "$args"; printf '%s\n' "$actual"; } >"$fixture_file"
+				{ printf '%s\n---\n' "$args"; printf '%s' "$actual"; } >"$fixture_file"
 				echo " $UPDATED $label '$args' $css_file"
 				updated=$((updated + 1))
 			fi
@@ -132,7 +132,7 @@ check_check() {
 			echo " $PASS check $cks_basename $css_file"
 			passed=$((passed + 1))
 		else
-			{ printf '%s\n---\n' "$cks_basename"; printf '%s\n' "$actual"; } >"$check_file"
+			{ printf '%s\n---\n' "$cks_basename"; printf '%s' "$actual"; } >"$check_file"
 			echo " $UPDATED check $cks_basename $css_file"
 			updated=$((updated + 1))
 		fi
