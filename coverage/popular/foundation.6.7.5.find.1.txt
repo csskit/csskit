@@ -12,5 +12,3 @@ coverage/popular/foundation.6.7.5.css
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
-3079:3:  clip: rect(0, 0, 0, 0) !important;
-5577:3:  clip: rect(0, 0, 0, 0) !important;

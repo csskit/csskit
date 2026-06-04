@@ -1079,6 +1079,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct RadialGradientFunction < \'a > { }",
   "pub struct Ratio { }",
   "pub struct ReadingOrderStyleValue { }",
+  "pub struct RectFunction { }",
   "pub struct RelativeColorOrigin < \'a > { }",
   "pub struct RepeatFunction < \'a > { }",
   "pub struct RepeatFunctionParams < \'a > { }",
