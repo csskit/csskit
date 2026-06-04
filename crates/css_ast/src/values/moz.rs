@@ -133,6 +133,24 @@ pub struct MozTransitionStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum MozBoxSizingStyleValue {}
 
+/// `-moz-filter` - alias for `filter`.
+#[syntax(" none | <filter-value-list> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    animation_type = Unknown,
+    property_group = FilterEffects,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MozFilterStyleValue<'a>;
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -216,5 +234,17 @@ mod tests {
 	#[test]
 	fn test_moz_box_sizing_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, MozBoxSizingStyleValue, "invalid");
+	}
+
+	#[test]
+	fn test_moz_filter_parses() {
+		assert_parse!(CssAtomSet::ATOMS, MozFilterStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, MozFilterStyleValue, "blur(4px)");
+		assert_parse!(CssAtomSet::ATOMS, MozFilterStyleValue, "brightness(0.5) contrast(1.2)");
+	}
+
+	#[test]
+	fn test_moz_filter_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, MozFilterStyleValue, "invalid");
 	}
 }

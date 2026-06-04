@@ -2769,6 +2769,8 @@ pub enum CssAtomSet {
 	_MozDropdownList,
 	#[atom("-moz-fieldset-content")]
 	_MozFieldsetContent,
+	#[atom("-moz-filter")]
+	_MozFilter,
 	#[atom("-moz-first-letter-continuation")]
 	_MozFirstLetterContinuation,
 	#[atom("-moz-first-node")]
@@ -3097,6 +3099,8 @@ pub enum CssAtomSet {
 	_OBoxSizing = 0b00000000_11100000_00000000_00000000,
 	#[atom("-o-device-pixel-ratio")]
 	_ODevicePixelRatio,
+	#[atom("-o-filter")]
+	_OFilter,
 	#[atom("-o-flex")]
 	_OFlex,
 	#[atom("-o-inner-spin-button")]

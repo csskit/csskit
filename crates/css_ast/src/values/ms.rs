@@ -4,8 +4,8 @@
 //! with legacy stylesheets targeting IE/Edge Legacy.
 
 use super::prelude::*;
-use crate::{Length, PositionOne, PositionTwo};
-use css_parse::{Cursor, Parse, Parser, Result as ParseResult};
+use crate::{FilterValueList, Length, PositionOne, PositionTwo};
+use css_parse::{Cursor, Parse, Parser, Result as ParseResult, T};
 
 /// `-ms-overflow-style` — IE/Edge scrollbar display behaviour.
 // TODO: `-ms-autohiding-scrollbar` is a vendor-prefixed keyword value with a leading `-`.
@@ -389,8 +389,16 @@ impl<'a> Parse<'a> for MsTransformOriginStyleValue {
 	}
 }
 
-/// `-ms-filter` — IE8 alias for `filter`.
-#[syntax(" none | <filter-value-list> ")]
+/// `-ms-filter` — IE8/IE9 `filter` alias.
+///
+/// IE8 used a quoted string with proprietary `progid:DXImageTransform` syntax.
+/// IE9+ accepted the same CSS filter functions as the standard `filter` property.
+///
+/// The grammar is:
+///
+/// ```text,ignore
+/// none | <string> | <filter-value-list>
+/// ```
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -405,7 +413,11 @@ impl<'a> Parse<'a> for MsTransformOriginStyleValue {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsFilterStyleValue<'a>;
+pub enum MsFilterStyleValue<'a> {
+	None(#[atom(CssAtomSet::None)] T![Ident]),
+	String(T![String]),
+	FilterValueList(FilterValueList<'a>),
+}
 
 /// `-ms-word-break` — IE alias for `word-break`.
 #[syntax(" normal | break-all | keep-all | manual | auto-phrase | break-word ")]
@@ -630,6 +642,11 @@ mod tests {
 	fn test_ms_filter_parses() {
 		assert_parse!(CssAtomSet::ATOMS, MsFilterStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, MsFilterStyleValue, "blur(4px)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			MsFilterStyleValue,
+			"\"progid:DXImageTransform.Microsoft.blur(pixelradius=2)\""
+		);
 	}
 
 	#[test]
