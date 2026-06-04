@@ -12,12 +12,6 @@ passed=0
 failed=0
 updated=0
 
-css_files=$(ls coverage/basic/*.css 2>/dev/null)
-if [ -z "$css_files" ]; then
-	echo "No CSS test files found!"
-	exit 1
-fi
-
 QUIET=false
 UPDATE=false
 for arg in "$@"; do
@@ -44,59 +38,65 @@ check_variant() {
 	base="$3"
 	target_file="$base.$variant.css"
 
-	if [ -f "$target_file" ]; then
-		if $UPDATE; then
-			if new_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null); then
-				old_output=$(cat "$target_file")
-				if [ "$new_output" = "$old_output" ]; then
-					passed=$((passed + 1))
-				else
-					printf '%s\n' "$new_output" >"$target_file"
-					echo " $UPDATED $variant $css_file"
-					updated=$((updated + 1))
-				fi
-			else
-				echo " $FAIL $variant $css_file (update failed)"
-				failed=$((failed + 1))
-			fi
-		elif diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff -Z --new-file --color=always --side-by-side --suppress-common-lines - "$target_file" 2>&1); then
-			echo " $PASS $variant $css_file"
-			passed=$((passed + 1))
-		else
-			echo " $FAIL $variant $css_file"
-			$QUIET || echo "$diff_output"
-			failed=$((failed + 1))
-		fi
-	fi
-}
-
-check_find() {
-	css_file="$1"
-	find_file="$2"
-
-	# Parse front-matter: first line is query, second is ---, rest is expected output
-	query=$(head -n1 "$find_file")
-	expected=$(tail -n +3 "$find_file")
+	[ -f "$target_file" ] || return 0
 
 	if $UPDATE; then
-		if actual=$($CSSKIT --color never find "$query" "$css_file" 2>/dev/null); then
-			if [ "$actual" = "$expected" ]; then
+		if new_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null); then
+			if diff -q <(printf '%s\n' "$new_output") "$target_file" >/dev/null 2>&1; then
+				echo " $PASS $variant $css_file"
 				passed=$((passed + 1))
 			else
-				printf '%s\n---\n%s\n' "$query" "$actual" >"$find_file"
-				echo " $UPDATED find '$query' $css_file"
+				printf '%s\n' "$new_output" >"$target_file"
+				echo " $UPDATED $variant $css_file"
 				updated=$((updated + 1))
 			fi
 		else
-			echo " $FAIL find '$query' $css_file (update failed)"
+			echo " $FAIL $variant $css_file (update failed)"
 			failed=$((failed + 1))
 		fi
-	elif actual=$($CSSKIT --color never find "$query" "$css_file" 2>/dev/null); then
+	elif diff_output=$($CSSKIT "$variant" "$css_file" 2>/dev/null | diff -Z --new-file --color=always --side-by-side --suppress-common-lines - "$target_file" 2>&1); then
+		echo " $PASS $variant $css_file"
+		passed=$((passed + 1))
+	else
+		echo " $FAIL $variant $css_file"
+		$QUIET || echo "$diff_output"
+		failed=$((failed + 1))
+	fi
+}
+
+# Generic front-matter test runner.
+# Fixture format: line 1 = full csskit args (word-split, css file appended),
+# line 2 = ---, rest = expected output.
+check_frontmatter() {
+	label="$1"
+	css_file="$2"
+	fixture_file="$3"
+
+	args=$(head -n1 "$fixture_file")
+	expected=$(tail -n +3 "$fixture_file")
+
+	run_fixture() { (set -f; eval "$CSSKIT --color never $args $(printf '%q' "$css_file")" 2>/dev/null); }
+
+	if $UPDATE; then
+		if actual=$(run_fixture); then
+			if [ "$actual" = "$expected" ]; then
+				echo " $PASS $label '$args' $css_file"
+				passed=$((passed + 1))
+			else
+				{ printf '%s\n---\n' "$args"; printf '%s\n' "$actual"; } >"$fixture_file"
+				echo " $UPDATED $label '$args' $css_file"
+				updated=$((updated + 1))
+			fi
+		else
+			echo " $FAIL $label '$args' $css_file (update failed)"
+			failed=$((failed + 1))
+		fi
+	elif actual=$(run_fixture); then
 		if [ "$actual" = "$expected" ]; then
-			echo " $PASS find '$query' $css_file"
+			echo " $PASS $label '$args' $css_file"
 			passed=$((passed + 1))
 		else
-			echo " $FAIL find '$query' $css_file"
+			echo " $FAIL $label '$args' $css_file"
 			if ! $QUIET; then
 				echo "Expected:"
 				echo "$expected"
@@ -106,7 +106,7 @@ check_find() {
 			failed=$((failed + 1))
 		fi
 	else
-		echo " $FAIL find '$query' $css_file (command failed)"
+		echo " $FAIL $label '$args' $css_file (command failed)"
 		failed=$((failed + 1))
 	fi
 }
@@ -115,13 +115,9 @@ check_check() {
 	css_file="$1"
 	check_file="$2"
 
-	# Parse front-matter: first line is .cks basename, second is ---, rest is expected stderr
 	cks_basename=$(head -n1 "$check_file")
 	expected=$(tail -n +3 "$check_file")
-
-	# Determine directory and construct .cks path
-	dir=$(dirname "$css_file")
-	cks_file="$dir/$cks_basename.cks"
+	cks_file="$(dirname "$css_file")/$cks_basename.cks"
 
 	if [ ! -f "$cks_file" ]; then
 		echo " $FAIL check $cks_basename $css_file (.cks file not found)"
@@ -129,50 +125,38 @@ check_check() {
 		return
 	fi
 
+	actual=$($CSSKIT --color never check "$cks_file" "$css_file" 2>&1) || true
+
 	if $UPDATE; then
-		actual=$($CSSKIT --color never check "$cks_file" "$css_file" 2>&1) || true
 		if [ "$actual" = "$expected" ]; then
+			echo " $PASS check $cks_basename $css_file"
 			passed=$((passed + 1))
 		else
-			printf '%s\n---\n%s\n' "$cks_basename" "$actual" >"$check_file"
+			{ printf '%s\n---\n' "$cks_basename"; printf '%s\n' "$actual"; } >"$check_file"
 			echo " $UPDATED check $cks_basename $css_file"
 			updated=$((updated + 1))
 		fi
-	elif actual=$($CSSKIT --color never check "$cks_file" "$css_file" 2>&1); then
-		if [ "$actual" = "$expected" ]; then
-			echo " $PASS check $cks_basename $css_file"
-			passed=$((passed + 1))
-		else
-			echo " $FAIL check $cks_basename $css_file"
-			if ! $QUIET; then
-				echo "Expected:"
-				echo "$expected"
-				echo "Actual:"
-				echo "$actual"
-			fi
-			failed=$((failed + 1))
-		fi
+	elif [ "$actual" = "$expected" ]; then
+		echo " $PASS check $cks_basename $css_file"
+		passed=$((passed + 1))
 	else
-		# Command failed - compare stderr with expected
-		if [ "$actual" = "$expected" ]; then
-			echo " $PASS check $cks_basename $css_file"
-			passed=$((passed + 1))
-		else
-			echo " $FAIL check $cks_basename $css_file (command failed)"
-			if ! $QUIET; then
-				echo "Expected:"
-				echo "$expected"
-				echo "Actual:"
-				echo "$actual"
-			fi
-			failed=$((failed + 1))
+		echo " $FAIL check $cks_basename $css_file"
+		if ! $QUIET; then
+			echo "Expected:"
+			echo "$expected"
+			echo "Actual:"
+			echo "$actual"
 		fi
+		failed=$((failed + 1))
 	fi
 }
 
+shopt -s nullglob
+
+found_css=false
 for css in coverage/basic/*.css coverage/popular/*.css; do
-	[ -f "$css" ] || continue
 	case "$css" in *.min.css | *.fmt.css) continue ;; esac
+	found_css=true
 	base="${css%.css}"
 
 	check_parse "$css"
@@ -180,18 +164,23 @@ for css in coverage/basic/*.css coverage/popular/*.css; do
 	check_variant "min" "$css" "$base"
 	check_variant "tree" "$css" "$base"
 
-	# Check find tests (*.find.N.txt files)
-	for find_file in "$base".find.*.txt; do
-		[ -f "$find_file" ] || continue
-		check_find "$css" "$find_file"
+	for fixture in "$base".json.*.txt; do
+		check_frontmatter "json" "$css" "$fixture"
 	done
 
-	# Check check tests (*.check.N.txt files)
-	for check_file in "$base".check.*.txt; do
-		[ -f "$check_file" ] || continue
-		check_check "$css" "$check_file"
+	for fixture in "$base".find.*.txt; do
+		check_frontmatter "find" "$css" "$fixture"
+	done
+
+	for fixture in "$base".check.*.txt; do
+		check_check "$css" "$fixture"
 	done
 done
+
+if ! $found_css; then
+	echo "No CSS test files found!"
+	exit 1
+fi
 
 total=$((passed + failed + updated))
 if [ "$total" -gt 0 ]; then

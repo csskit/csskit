@@ -1,4 +1,4 @@
-style-rule
+find style-rule
 ---
 coverage/basic/vars.css
 1:1:hr {

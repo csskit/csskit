@@ -1,4 +1,4 @@
-legacy-pseudo-element
+find legacy-pseudo-element
 ---
 coverage/popular/reset.2.0.css
 40:11:blockquote:before, blockquote:after,

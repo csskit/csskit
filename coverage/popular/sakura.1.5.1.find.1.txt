@@ -1,4 +1,4 @@
-media-rule
+find media-rule
 ---
 coverage/popular/sakura.1.5.1.css
 22:1:@media (max-width: 684px) {

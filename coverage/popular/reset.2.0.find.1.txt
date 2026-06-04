@@ -1,4 +1,4 @@
-style-rule
+find style-rule
 ---
 coverage/popular/reset.2.0.css
 6:1:html, body, div, span, applet, object, iframe,

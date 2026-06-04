@@ -1,4 +1,4 @@
-color
+find color
 ---
 coverage/basic/media.css
 3:10:		color: black;

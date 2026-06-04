@@ -1,4 +1,4 @@
-:unknown
+find :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
 1202:3:  clip: rect(0 0 0 0);

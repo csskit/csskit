@@ -1,4 +1,4 @@
-html-tag
+find html-tag
 ---
 coverage/basic/media.css
 2:2:	body {
