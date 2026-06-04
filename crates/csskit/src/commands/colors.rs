@@ -1,13 +1,42 @@
 use super::GlobalConfig;
-use crate::{CliResult, InputArgs, InputSource, bg, bold, dimmed, fg};
+use crate::{
+	CliResult, InputArgs, bg, bold,
+	commands::{Extract, OutputFormat},
+	dimmed, fg,
+};
 use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
 use css_ast::{Color as ASTColor, CssAtomSet, StyleSheet, ToChromashift, Visitable};
 use css_lexer::Lexer;
-use css_parse::{Parser, Span, ToSpan};
+use css_parse::{Diagnostic, Parser, Span, ToSpan};
 use itertools::Itertools;
-use std::{collections::HashSet, io::Read};
+use serde::Serialize;
+use std::collections::HashSet;
+
+fn extract_colors(src: &str, bump: &Bump) -> Result<Vec<(Color, Span)>, Vec<Diagnostic>> {
+	let mut visitor = ColorExtractor::new();
+
+	// Try parsing as a bare list of colors first.
+	let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
+	let mut parser = Parser::new(bump, src, lexer);
+	let result = parser.parse_entirely::<bumpalo::collections::Vec<ASTColor>>();
+	if let Some(output) = result.output.filter(|_| result.errors.is_empty()) {
+		output.accept(&mut visitor);
+		return Ok(visitor.colors);
+	}
+
+	// Fall back to full stylesheet parse.
+	let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
+	let mut parser = Parser::new(bump, src, lexer);
+	let result = parser.parse_entirely::<StyleSheet>();
+	if let Some(stylesheet) = result.output {
+		stylesheet.accept(&mut visitor);
+		Ok(visitor.colors)
+	} else {
+		Err(result.errors.to_vec())
+	}
+}
 
 struct ColorExtractor {
 	colors: Vec<(Color, Span)>,
@@ -41,7 +70,7 @@ fn format_wcag_status(level: WcagLevel) -> &'static str {
 	}
 }
 
-fn suggest_wcag_variant<T>(color: T, other: Named, level: WcagLevel, conf: &GlobalConfig)
+fn suggest_wcag_variant<T>(color: T, other: Named, level: WcagLevel, colors: bool)
 where
 	T: core::fmt::Display + Copy + WcagColorContrast<T> + From<Named>,
 	Oklch: From<T>,
@@ -52,7 +81,7 @@ where
 		let hex = format!("{}", Hex::from(wcag_color));
 		let desc = level.description();
 
-		if conf.colors() {
+		if colors {
 			print!(" {} ", bg(fg(hex, wcag_color), color));
 			println!("  {:.1}:1 {}", ratio, dimmed(format!("({})", desc)));
 		} else {
@@ -61,26 +90,19 @@ where
 	}
 }
 
-fn print_color_block<T>(color: T, config: &GlobalConfig)
+fn print_color_block<T>(color: T, colors: bool)
 where
 	T: core::fmt::Display + Copy,
 	Srgb: From<T>,
 {
-	if config.colors() {
+	if colors {
 		println!(" {}  {color}", bg("          ", color));
 	} else {
 		println!(" {:10}  {color}", "");
 	}
 }
 
-fn print_color_info(
-	color: Color,
-	config: &GlobalConfig,
-	all: bool,
-	wcag: bool,
-	named: bool,
-	lc: Option<(&'_ str, u32, u32)>,
-) {
+fn print_color_info(color: Color, colors: bool, all: bool, wcag: bool, named: bool, lc: Option<(&'_ str, u32, u32)>) {
 	let a98 = A98Rgb::from(color);
 	let hex = Hex::from(color);
 	let hsv = Hsv::from(color);
@@ -96,67 +118,67 @@ fn print_color_info(
 	let d65 = XyzD65::from(color);
 
 	if let Some((file, line, column)) = lc {
-		if config.colors() {
+		if colors {
 			println!(" {}  {} - {file}:{line}:{column}", bg("          ", color), bold(color.to_string()));
 		} else {
 			println!(" {:10}  {color} - {file}:{line}:{column}", "");
 		}
-	} else if config.colors() {
+	} else if colors {
 		println!(" {}  {}", bg("          ", color), bold(color.to_string()));
 	} else {
 		println!(" {:10}  {color}", "");
 	}
-	if config.colors() {
+	if colors {
 		println!(" {}", bg("          ", color));
 	} else {
 		println!(" {:10}", "");
 	}
 
 	if !matches!(color, Color::Hex(_)) {
-		print_color_block(hex, config);
+		print_color_block(hex, colors);
 	}
 	if !matches!(color, Color::Srgb(_)) {
-		print_color_block(rgb, config);
+		print_color_block(rgb, colors);
 	}
 	if !matches!(color, Color::Oklab(_)) {
-		print_color_block(oklab, config);
+		print_color_block(oklab, colors);
 	}
 	if !matches!(color, Color::Oklch(_)) {
-		print_color_block(oklch, config);
+		print_color_block(oklch, colors);
 	}
 	if all {
 		if !matches!(color, Color::A98Rgb(_)) {
-			print_color_block(a98, config);
+			print_color_block(a98, colors);
 		}
 		if !matches!(color, Color::Hsv(_)) {
-			print_color_block(hsv, config);
+			print_color_block(hsv, colors);
 		}
 		if !matches!(color, Color::Hsl(_)) {
-			print_color_block(hsl, config);
+			print_color_block(hsl, colors);
 		}
 		if !matches!(color, Color::Hwb(_)) {
-			print_color_block(hwb, config);
+			print_color_block(hwb, colors);
 		}
 		if !matches!(color, Color::Lab(_)) {
-			print_color_block(lab, config);
+			print_color_block(lab, colors);
 		}
 		if !matches!(color, Color::Lch(_)) {
-			print_color_block(lch, config);
+			print_color_block(lch, colors);
 		}
 		if !matches!(color, Color::LinearRgb(_)) {
-			print_color_block(linear, config);
+			print_color_block(linear, colors);
 		}
 		if !matches!(color, Color::XyzD50(_)) {
-			print_color_block(d50, config);
+			print_color_block(d50, colors);
 		}
 		if !matches!(color, Color::XyzD65(_)) {
-			print_color_block(d65, config);
+			print_color_block(d65, colors);
 		}
 	}
 
 	// Show WCAG contrast information
 	if wcag {
-		if config.colors() {
+		if colors {
 			println!(" {}", bg("          ", color));
 			println!(" {} {}", bg("          ", color), bold("WCAG Contrast Analysis"));
 		} else {
@@ -169,7 +191,7 @@ fn print_color_info(
 		let white_level = rgb.wcag_level(Named::White);
 		let black_level = rgb.wcag_level(Named::Black);
 
-		if config.colors() {
+		if colors {
 			println!(
 				" {} vs White    {:.1}:1 {} {}",
 				bg(fg(" ", Named::White), color),
@@ -200,7 +222,7 @@ fn print_color_info(
 		}
 
 		if white_level != WcagLevel::AA || black_level != WcagLevel::AA {
-			if config.colors() {
+			if colors {
 				println!(" {}", bg("          ", color));
 				println!(" {} {}", bg("          ", color), bold("Minimum contrast"));
 			} else {
@@ -208,15 +230,15 @@ fn print_color_info(
 				println!(" {:10} Minimum contrast", "");
 			}
 
-			suggest_wcag_variant(rgb, Named::White, WcagLevel::AA, config);
-			suggest_wcag_variant(rgb, Named::White, WcagLevel::AAA, config);
-			suggest_wcag_variant(rgb, Named::Black, WcagLevel::AA, config);
-			suggest_wcag_variant(rgb, Named::Black, WcagLevel::AAA, config);
+			suggest_wcag_variant(rgb, Named::White, WcagLevel::AA, colors);
+			suggest_wcag_variant(rgb, Named::White, WcagLevel::AAA, colors);
+			suggest_wcag_variant(rgb, Named::Black, WcagLevel::AA, colors);
+			suggest_wcag_variant(rgb, Named::Black, WcagLevel::AAA, colors);
 		}
 	}
 
 	if named && !matches!(color, Color::Named(_)) {
-		let colors: Vec<Named> = Named::iter()
+		let named_colors: Vec<Named> = Named::iter()
 			.filter(|named| named.close_to(color, 10.0))
 			.sorted_by(|a, b| {
 				((a.delta_e(color) * 1000.0).round() as u64).cmp(&((b.delta_e(color) * 1000.0).round() as u64))
@@ -224,26 +246,26 @@ fn print_color_info(
 			.take(2)
 			.collect::<Vec<Named>>();
 		// We have one (near enough) identical colour...
-		if colors.first().is_some_and(|named| named.close_to(color, COLOR_EPSILON)) {
-			if config.colors() {
+		if named_colors.first().is_some_and(|n| n.close_to(color, COLOR_EPSILON)) {
+			if colors {
 				println!(" {}", bg("          ", color));
 				println!(" {} {}", bg("          ", color), bold("Named color"));
-				println!(" {} {}", bg("          ", color), bold(colors.first().unwrap().to_string()));
+				println!(" {} {}", bg("          ", color), bold(named_colors.first().unwrap().to_string()));
 			} else {
 				println!(" {:10}", "");
 				println!(" {:10} Named color", "");
-				println!(" {:10} {}", "", colors.first().unwrap());
+				println!(" {:10} {}", "", named_colors.first().unwrap());
 			}
-		} else if !colors.is_empty() {
-			if config.colors() {
+		} else if !named_colors.is_empty() {
+			if colors {
 				println!(" {}", bg("          ", color));
 				println!(" {} {}", bg("          ", color), bold("Similar named colors"));
 			} else {
 				println!(" {:10}", "");
 				println!(" {:10} Similar named colors", "");
 			}
-			for similar_color in colors {
-				if config.colors() {
+			for similar_color in named_colors {
+				if colors {
 					println!(" {} {} {similar_color}", bg("          ", color), bg("          ", similar_color));
 				} else {
 					println!(" {:10} {:10} {similar_color}", "", "");
@@ -252,18 +274,36 @@ fn print_color_info(
 		}
 	}
 
-	if config.colors() {
+	if colors {
 		println!(" {}", bg("          ", color));
 	} else {
 		println!(" {:10}", "");
 	}
 }
 
+/// JSON data payload for a single extracted colour.
+#[derive(Serialize)]
+pub struct ColorData {
+	source: String,
+	hex: String,
+	srgb: String,
+	hsl: String,
+	oklch: String,
+	oklab: String,
+	/// The resolved colour value for text rendering; not serialised.
+	#[serde(skip)]
+	color: Color,
+}
+
+/// Per-file context for colour rendering (unused; location derived from filename).
+#[derive(Default)]
+pub struct ColorContext;
+
 /// Extract the colours from a CSS file.
 #[derive(Debug, Args)]
 pub struct ColorCommand {
 	#[command(flatten)]
-	content: InputArgs,
+	input: InputArgs,
 
 	/// Print every known syntax for each colour
 	#[arg(short, long, value_parser)]
@@ -276,58 +316,102 @@ pub struct ColorCommand {
 	/// Print similar Named colours for each colour
 	#[arg(long, value_parser)]
 	named: bool,
+
+	/// Output format
+	#[arg(short, long, value_enum, default_value_t = OutputFormat::Text)]
+	format: OutputFormat,
 }
 
 impl ColorCommand {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
-		let bump = Bump::default();
-		let ColorCommand { content, all, wcag, named } = self;
-		let wcag = *wcag || *all;
-		let named = *named || *all;
-		for (file_name, mut source) in content.sources()? {
-			let mut source_string = String::new();
-			source.read_to_string(&mut source_string)?;
-			let source_text = source_string.as_str();
-			let mut color_visitor = ColorExtractor::new();
-			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
-			let result = parser.parse_entirely::<bumpalo::collections::Vec<ASTColor>>();
-			if result.output.is_some() && result.errors.is_empty() {
-				#[allow(clippy::unnecessary_unwrap)]
-				result.output.unwrap().accept(&mut color_visitor);
-			} else {
-				let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-				let mut parser = Parser::new(&bump, source_text, lexer);
-				let result = parser.parse_entirely::<StyleSheet>();
-				if let Some(stylesheet) = result.output {
-					stylesheet.accept(&mut color_visitor);
-				} else {
-					for compact_err in result.errors {
-						let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
-						println!("{report}");
-					}
-				}
+		Extract::run(self, config)
+	}
+}
+
+impl Extract for ColorCommand {
+	type Row = ColorData;
+	type FileContext = ColorContext;
+
+	fn input(&self) -> &InputArgs {
+		&self.input
+	}
+
+	fn format(&self) -> OutputFormat {
+		self.format
+	}
+
+	fn show_file_header(&self) -> bool {
+		false
+	}
+
+	fn on_no_results(&self, file: &str) {
+		eprintln!("No colors found in {file}");
+	}
+
+	fn render_file_preamble(&self, _file: &str, row_count: usize, _color: bool) {
+		println!();
+		eprintln!("Found {row_count} color{}", if row_count == 1 { "" } else { "s" });
+		println!();
+	}
+
+	fn parse_and_extract_file(
+		&self,
+		file: &str,
+		src: &str,
+		bump: &Bump,
+		_on_stylesheet: &mut dyn for<'a> FnMut(&StyleSheet<'a>),
+	) -> Result<Vec<(Span, ColorData)>, ()> {
+		match extract_colors(src, bump) {
+			Ok(colors) => {
+				let mut seen: HashSet<Hex> = HashSet::new();
+				Ok(colors
+					.into_iter()
+					.filter_map(|(color, span)| {
+						let hex = Hex::from(color);
+						if seen.insert(hex) {
+							let start = usize::from(span.start());
+							let end = usize::from(span.end());
+							Some((
+								span,
+								ColorData {
+									source: src[start..end].to_string(),
+									hex: hex.to_string(),
+									srgb: Srgb::from(color).to_string(),
+									hsl: Hsl::from(color).to_string(),
+									oklch: Oklch::from(color).to_string(),
+									oklab: Oklab::from(color).to_string(),
+									color,
+								},
+							))
+						} else {
+							None
+						}
+					})
+					.collect())
 			}
-			if color_visitor.colors.is_empty() {
-				eprintln!("No colors found in {file_name}");
-			} else {
-				let i = color_visitor.colors.len();
-				println!();
-				eprintln!("Found {i} color{}", if i > 0 { "s" } else { "" });
-				println!();
-				for (color, span) in color_visitor.colors {
-					let lc = if matches!(source, InputSource::File(_)) {
-						let (line, col) = span.line_and_column(source_text);
-						Some((file_name, line, col))
-					} else {
-						None
-					};
-					print_color_info(color, &config, *all, wcag, named, lc);
-					println!();
+			Err(errors) => {
+				for err in errors {
+					eprintln!("{}", crate::commands::format_diagnostic_error(&err, src, file));
 				}
-				println!();
+				Err(())
 			}
 		}
-		Ok(())
+	}
+
+	fn extract<'a>(&self, _stylesheet: &StyleSheet<'a>, _src: &str, _out: &mut Vec<(Span, ColorData)>) {
+		// Unreachable: parse_and_extract_file is fully overridden.
+	}
+
+	fn render_text(&self, _ctx: &ColorContext, file: &str, src: &str, span: Span, row: &ColorData, color: bool) {
+		let lc = if file != "<content>" && file != "-" {
+			let (line, col) = span.line_and_column(src);
+			Some((file, line, col))
+		} else {
+			None
+		};
+		let wcag = self.wcag || self.all;
+		let named = self.named || self.all;
+		print_color_info(row.color, color, self.all, wcag, named, lc);
+		println!();
 	}
 }

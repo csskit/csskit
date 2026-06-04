@@ -14,7 +14,10 @@ use css_lexer::{Atom, Cursor, RegisteredAtomSet, SourceCursor, SourceOffset, Spa
 #[cfg(feature = "miette")]
 use miette::{LabeledSpan, MietteDiagnostic, Severity as MietteSeverity};
 use smallvec::SmallVec;
-use std::collections::{HashMap, HashSet};
+use std::{
+	collections::{HashMap, HashSet},
+	fmt,
+};
 
 #[cfg(test)]
 mod tests;
@@ -25,6 +28,16 @@ pub enum ResolvedDiagnosticLevel {
 	Error,
 	Warning,
 	Advice,
+}
+
+impl fmt::Display for ResolvedDiagnosticLevel {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		f.write_str(match self {
+			Self::Error => "error",
+			Self::Warning => "warning",
+			Self::Advice => "advice",
+		})
+	}
 }
 
 #[cfg(feature = "miette")]
@@ -72,6 +85,16 @@ pub enum StatType {
 	Bytes,
 	/// Counts lines in matching nodes
 	Lines,
+}
+
+impl fmt::Display for StatType {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		f.write_str(match self {
+			Self::Counter => "counter",
+			Self::Bytes => "bytes",
+			Self::Lines => "lines",
+		})
+	}
 }
 
 pub type Stats = HashMap<Atom<CsskitAtomSet>, (StatType, usize)>;

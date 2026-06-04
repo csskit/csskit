@@ -1,8 +1,12 @@
-use crate::{CliError, CliResult, GlobalConfig, InputArgs, commands::format_diagnostic_error, green, magenta};
+use crate::{
+	CliError, CliResult, GlobalConfig, InputArgs,
+	commands::{Extract, OutputFormat, extract::Location},
+	green,
+};
 use bumpalo::Bump;
-use clap::{Args, ValueEnum};
+use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable, visit::NodeId};
-use css_lexer::{Cursor, Lexer, SourceOffset};
+use css_lexer::{Cursor, Lexer, SourceOffset, Span};
 use css_parse::{NodeWithMetadata, Parser, SourceCursor, SourceCursorSink};
 use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
@@ -10,33 +14,6 @@ use itertools::Itertools;
 use serde::Serialize;
 use std::io::Read;
 use strsim::levenshtein;
-
-#[derive(Serialize)]
-struct JsonMatch {
-	file: String,
-	#[serde(rename = "type")]
-	kind: String,
-	line: usize,
-	column: usize,
-	start: usize,
-	end: usize,
-	text: String,
-}
-
-#[derive(Serialize)]
-struct JsonCount {
-	count: usize,
-}
-
-/// Output format for find results.
-#[derive(Debug, Clone, Copy, Default, ValueEnum)]
-pub enum OutputFormat {
-	/// Ripgrep-style text output
-	#[default]
-	Text,
-	/// JSON output
-	Json,
-}
 
 #[derive(Debug, Args)]
 #[command(after_help = "Examples:
@@ -64,7 +41,13 @@ pub struct Find {
 	format: OutputFormat,
 }
 
-/// Returns (line_start, line_end) byte offsets for the line containing `offset`.
+#[derive(Serialize)]
+pub struct FindData {
+	#[serde(rename = "type")]
+	kind: String,
+	text: String,
+}
+
 fn line_bounds(source: &str, offset: usize) -> (usize, usize) {
 	let start = source[..offset].rfind('\n').map_or(0, |i| i + 1);
 	let end = source[offset..].find('\n').map_or(source.len(), |i| offset + i);
@@ -79,7 +62,6 @@ impl Find {
 		let result = parser.parse_entirely::<QuerySelectorList>();
 
 		if !result.errors.is_empty() || result.output.as_ref().is_some_and(|n| n.metadata().is_invalid) {
-			// Show first error only (subsequent errors may be cascading from the first)
 			if let Some(err) = result.errors.first() {
 				eprintln!("error: {}", err.message(&self.selector));
 			} else {
@@ -95,116 +77,20 @@ impl Find {
 			return Err(CliError::ParseFailed);
 		};
 
-		match self.format {
-			OutputFormat::Text => self.output_text(&selectors, &self.selector, config.colors()),
-			OutputFormat::Json => self.output_json(&selectors, &self.selector),
-		}
+		if self.count { self.output_count(&selectors) } else { Extract::run(self, config) }
 	}
 
-	fn output_text(&self, selectors: &QuerySelectorList, selector_str: &str, color: bool) -> CliResult {
+	fn output_count(&self, selectors: &QuerySelectorList) -> CliResult {
+		#[derive(Serialize)]
+		struct JsonCount {
+			file: String,
+			count: usize,
+		}
+
+		let bump = Bump::default();
 		let mut total = 0;
 		let mut files = 0;
-
-		self.process_files(selectors, selector_str, |filename, src, stylesheet, matches| {
-			if files > 0 && !self.count {
-				println!();
-			}
-			files += 1;
-			total += matches.len();
-
-			if self.count {
-				println!("{filename}:{}", matches.len());
-				return;
-			}
-
-			// Build highlighter once for the entire file
-			let mut highlighter = TokenHighlighter::new();
-			stylesheet.accept(&mut highlighter);
-
-			// Print filename header
-			if color {
-				println!("{}", magenta(filename));
-			} else {
-				println!("{filename}");
-			}
-
-			for m in matches {
-				let (line, col) = m.span.line_and_column(src);
-				let (start, end) = line_bounds(src, m.span.start().into());
-
-				if color {
-					print!("{}:{}:", green(line + 1), green(col + 1));
-				} else {
-					print!("{}:{}:", line + 1, col + 1);
-				}
-
-				if color {
-					// Use lexer to walk through all tokens in the line, including whitespace
-					let line_text = &src[start..end];
-					let line_lexer = Lexer::new(&CssAtomSet::ATOMS, line_text);
-					let mut line_output = String::new();
-					let mut cursor_stream =
-						AnsiHighlightCursorStream::new(&mut line_output, &highlighter, DefaultAnsiTheme);
-
-					// Process each cursor in the line
-					for cursor in line_lexer {
-						// Adjust cursor offset to global coordinates
-						let global_offset = SourceOffset(cursor.offset().0 + start as u32);
-						let global_cursor = Cursor::new(global_offset, cursor.token());
-						let sc = SourceCursor::from(global_cursor, cursor.str_slice(line_text));
-						cursor_stream.append(sc);
-					}
-
-					println!("{}", line_output);
-				} else {
-					let line_text = &src[start..end];
-					println!("{}", line_text);
-				}
-			}
-		})?;
-
-		if self.count && files > 1 {
-			println!("\nTotal: {total}");
-		}
-
-		Ok(())
-	}
-
-	fn output_json(&self, selectors: &QuerySelectorList, selector_str: &str) -> CliResult {
-		if self.count {
-			let mut count = 0;
-			self.process_files(selectors, selector_str, |_filename, _src, _stylesheet, matches| {
-				count += matches.len();
-			})?;
-			println!("{}", serde_json::to_string(&JsonCount { count })?);
-		} else {
-			let mut all_matches = Vec::new();
-			self.process_files(selectors, selector_str, |filename, src, _stylesheet, matches| {
-				for m in matches {
-					let (line, col) = m.span.line_and_column(src);
-
-					all_matches.push(JsonMatch {
-						file: filename.to_string(),
-						kind: m.node_id.tag_name().to_string(),
-						line: (line + 1) as usize,
-						column: (col + 1) as usize,
-						start: usize::from(m.span.start()),
-						end: usize::from(m.span.end()),
-						text: src[m.span.start().into()..m.span.end().into()].to_string(),
-					});
-				}
-			})?;
-			println!("{}", serde_json::to_string_pretty(&all_matches)?);
-		}
-
-		Ok(())
-	}
-
-	fn process_files<F>(&self, selectors: &QuerySelectorList, selector_str: &str, mut callback: F) -> CliResult
-	where
-		F: FnMut(&str, &str, &StyleSheet, &[csskit_ast::MatchOutput]),
-	{
-		let bump = Bump::default();
+		let mut json_counts: Vec<JsonCount> = Vec::new();
 
 		for (filename, mut source) in self.input.sources()? {
 			let mut src = String::new();
@@ -212,24 +98,27 @@ impl Find {
 
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, &src);
 			let mut parser = Parser::new(&bump, &src, lexer);
-			let result = parser.parse_entirely::<StyleSheet>();
-
-			let Some(stylesheet) = result.output.as_ref() else {
-				// Only show errors in text mode
-				if matches!(self.format, OutputFormat::Text) {
-					for err in result.errors {
-						eprintln!("{}", format_diagnostic_error(&err, &src, filename));
-					}
-				}
-				continue;
-			};
-
-			let matches: Vec<_> = SelectorMatcher::new(selectors, selector_str, &src).run(stylesheet).collect();
-			if matches.is_empty() {
+			let Some(stylesheet) = parser.parse_entirely::<StyleSheet>().output else { continue };
+			let count = SelectorMatcher::new(selectors, &self.selector, &src).run(&stylesheet).count();
+			if count == 0 {
 				continue;
 			}
 
-			callback(filename, &src, stylesheet, &matches);
+			match self.format {
+				OutputFormat::Text => println!("{filename}:{count}"),
+				OutputFormat::Json => json_counts.push(JsonCount { file: filename.to_string(), count }),
+			}
+			files += 1;
+			total += count;
+		}
+
+		match self.format {
+			OutputFormat::Text => {
+				if files > 1 {
+					println!("\nTotal: {total}");
+				}
+			}
+			OutputFormat::Json => println!("{}", serde_json::to_string_pretty(&json_counts)?),
 		}
 
 		Ok(())
@@ -256,5 +145,62 @@ impl Find {
 			}
 		}
 		eprintln!("\nRun 'csskit tree' to see all node types.");
+	}
+
+	fn parsed_selectors<'b>(&'b self, bump: &'b Bump) -> Option<QuerySelectorList<'b>> {
+		let lexer = Lexer::new(&CsskitAtomSet::ATOMS, &self.selector);
+		let mut parser = Parser::new(bump, &self.selector, lexer);
+		parser.parse_entirely::<QuerySelectorList>().output
+	}
+}
+
+impl Extract for Find {
+	type Row = FindData;
+	type FileContext = TokenHighlighter;
+
+	fn input(&self) -> &InputArgs {
+		&self.input
+	}
+
+	fn format(&self) -> OutputFormat {
+		self.format
+	}
+
+	fn build_context<'a>(&self, stylesheet: &StyleSheet<'a>, _src: &str) -> TokenHighlighter {
+		let mut highlighter = TokenHighlighter::new();
+		stylesheet.accept(&mut highlighter);
+		highlighter
+	}
+
+	fn extract<'a>(&self, stylesheet: &StyleSheet<'a>, src: &str, out: &mut Vec<(Span, FindData)>) {
+		let bump = Bump::default();
+		let Some(selectors) = self.parsed_selectors(&bump) else { return };
+		for m in SelectorMatcher::new(&selectors, &self.selector, src).run(stylesheet) {
+			let location = Location::from_span("", m.span, src);
+			let text = src[location.start..location.end].to_string();
+			out.push((m.span, FindData { kind: m.node_id.tag_name().to_string(), text }));
+		}
+	}
+
+	fn render_text(&self, ctx: &TokenHighlighter, _file: &str, src: &str, span: Span, _row: &FindData, color: bool) {
+		let (line, col) = span.line_and_column(src);
+		let (start, end) = line_bounds(src, span.start().into());
+
+		if color {
+			print!("{}:{}:", green(line + 1), green(col + 1));
+			let line_text = &src[start..end];
+			let line_lexer = Lexer::new(&CssAtomSet::ATOMS, line_text);
+			let mut line_output = String::new();
+			let mut cursor_stream = AnsiHighlightCursorStream::new(&mut line_output, ctx, DefaultAnsiTheme);
+			for cursor in line_lexer {
+				let global_offset = SourceOffset(cursor.offset().0 + start as u32);
+				let global_cursor = Cursor::new(global_offset, cursor.token());
+				let sc = SourceCursor::from(global_cursor, cursor.str_slice(line_text));
+				cursor_stream.append(sc);
+			}
+			println!("{}", line_output);
+		} else {
+			println!("{}:{}:{}", line + 1, col + 1, &src[start..end]);
+		}
 	}
 }

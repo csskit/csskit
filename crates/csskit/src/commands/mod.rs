@@ -8,12 +8,15 @@ mod colors;
 mod dbg_lex;
 mod dbg_parse;
 mod expand;
+mod extract;
 mod find;
 mod fmt;
 mod lsp;
 mod min;
 mod specificity;
 mod tree;
+
+pub use extract::{Extract, OutputFormat};
 
 #[derive(Subcommand, Debug)]
 pub enum Commands {
