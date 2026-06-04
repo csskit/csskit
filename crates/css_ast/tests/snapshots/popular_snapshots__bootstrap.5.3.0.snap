@@ -5516,20 +5516,13 @@ StyleSheet(
                 offset: SourceOffset(4435),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4436),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(4437),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ColorSchemeStyleValue(r#Some(([
+                Dark(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(4437),
+                  len: 4,
+                ))),
+              ], None))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

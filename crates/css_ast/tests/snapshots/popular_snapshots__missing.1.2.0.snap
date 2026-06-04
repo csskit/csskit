@@ -21627,20 +21627,13 @@ StyleSheet(
                 offset: SourceOffset(14660),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14661),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(14662),
-                    len: 5,
-                  )),
-                ],
-              )),
+              value: ColorSchemeStyleValue(r#Some(([
+                Light(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(14662),
+                  len: 5,
+                ))),
+              ], None))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -46979,30 +46972,18 @@ StyleSheet(
                 offset: SourceOffset(32011),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(32012),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(32013),
-                    len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(32018),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(32019),
-                    len: 4,
-                  )),
-                ],
-              )),
+              value: ColorSchemeStyleValue(r#Some(([
+                Light(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(32013),
+                  len: 5,
+                ))),
+                Dark(Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(32019),
+                  len: 4,
+                ))),
+              ], None))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -60098,20 +60079,13 @@ StyleSheet(
                         offset: SourceOffset(41349),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(41350),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(41351),
-                            len: 4,
-                          )),
-                        ],
-                      )),
+                      value: ColorSchemeStyleValue(r#Some(([
+                        Dark(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(41351),
+                          len: 4,
+                        ))),
+                      ], None))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -60170,20 +60144,13 @@ StyleSheet(
                         offset: SourceOffset(41398),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(41399),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(41400),
-                            len: 5,
-                          )),
-                        ],
-                      )),
+                      value: ColorSchemeStyleValue(r#Some(([
+                        Light(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(41400),
+                          len: 5,
+                        ))),
+                      ], None))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -60281,30 +60248,18 @@ StyleSheet(
                         offset: SourceOffset(41468),
                         len: 1,
                       )),
-                      value: Unknown(ComponentValues(
-                        values: [
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(41469),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(41470),
-                            len: 5,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(41475),
-                            len: 1,
-                          )),
-                          Ident(Cursor(
-                            kind: "Ident",
-                            offset: SourceOffset(41476),
-                            len: 4,
-                          )),
-                        ],
-                      )),
+                      value: ColorSchemeStyleValue(r#Some(([
+                        Light(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(41470),
+                          len: 5,
+                        ))),
+                        Dark(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(41476),
+                          len: 4,
+                        ))),
+                      ], None))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",
@@ -69929,20 +69884,13 @@ StyleSheet(
                       offset: SourceOffset(48031),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(48032),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(48033),
-                          len: 5,
-                        )),
-                      ],
-                    )),
+                    value: ColorSchemeStyleValue(r#Some(([
+                      Light(Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(48033),
+                        len: 5,
+                      ))),
+                    ], None))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",

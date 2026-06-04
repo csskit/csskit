@@ -3,7 +3,6 @@ find :unknown
 coverage/popular/missing.1.2.0.css
 40:3:  fill: currentColor;
 1:1:/* src/core/sanitize.css */
-734:3:  color-scheme: light;
 1:1:/* src/core/sanitize.css */
 1028:6:    }
 1:1:/* src/core/sanitize.css */
@@ -12,14 +11,9 @@ coverage/popular/missing.1.2.0.css
 1263:5:    grid-template-columns: 25ch auto;
 1294:5:    display: inline list-item;
 1307:1:chip {
-1447:3:  color-scheme: light dark;
 1535:3:  grid-template-columns: repeat(2, 1rem);
-1751:5:    color-scheme: dark;
-1754:5:    color-scheme: light;
-1757:5:    color-scheme: light dark;
 1:1:/* src/core/sanitize.css */
 1779:16:    @supports (break-after: avoid-column) {
-2088:5:    color-scheme: light;
 2091:3:  role[menuitem] {
 2210:3:  clip: rect(0 0 0 0);
 2211:3:  clip-path: inset(50%);
