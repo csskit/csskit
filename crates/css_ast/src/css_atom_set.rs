@@ -252,6 +252,7 @@ pub enum CssAtomSet {
 	Blanchedalmond,
 	Blank,
 	Bleed,
+	Bicubic,
 	Blink,
 	Block,
 	BlockAxis,
@@ -1432,6 +1433,7 @@ pub enum CssAtomSet {
 	NeResize,
 	Near,
 	Nearest,
+	NearestNeighbor,
 	Negative,
 	Neq,
 	NeswResize,
@@ -2985,7 +2987,7 @@ pub enum CssAtomSet {
 	_MozWindowInactive,
 
 	#[atom("-ms-autohiding-scrollbar")]
-	MsAutohidingScrollbar = 0b00000000_11000000_00000000_00000000,
+	_MsAutohidingScrollbar = 0b00000000_11000000_00000000_00000000,
 	#[atom("-ms-backdrop")]
 	_MsBackdrop,
 	#[atom("-ms-box-sizing")]
@@ -3042,6 +3044,8 @@ pub enum CssAtomSet {
 	_MsGrid,
 	#[atom("-ms-high-contrast")]
 	_MsHighContrast,
+	#[atom("-ms-interpolation-mode")]
+	_MsInterpolationMode,
 	#[atom("-ms-ime-align")]
 	_MsImeAlign,
 	#[atom("-ms-inline-flex")]

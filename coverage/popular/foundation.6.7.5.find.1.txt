@@ -1,13 +1,6 @@
 find :unknown
 ---
 coverage/popular/foundation.6.7.5.css
-204:3:  -ms-interpolation-mode: bicubic; }
-1503:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
-1510:3:  -ms-overflow-style: -ms-autohiding-scrollbar; }
-1547:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
-1569:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
-1589:5:    -ms-overflow-style: -ms-autohiding-scrollbar; }
-1611:5:    -ms-overflow-style: -ms-autohiding-scrollbar; } }
 2467:5:    page-break-inside: avoid; }
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }

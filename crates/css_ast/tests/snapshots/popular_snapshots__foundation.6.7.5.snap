@@ -4671,20 +4671,11 @@ StyleSheet(
                 offset: SourceOffset(3702),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3703),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3704),
-                    len: 7,
-                  )),
-                ],
-              )),
+              value: Bicubic(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(3704),
+                len: 7,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -62098,20 +62089,11 @@ StyleSheet(
                 offset: SourceOffset(43151),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(43152),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(43153),
-                    len: 24,
-                  )),
-                ],
-              )),
+              value: _MsAutohidingScrollbar(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(43153),
+                len: 24,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -62257,20 +62239,11 @@ StyleSheet(
                 offset: SourceOffset(43315),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(43316),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(43317),
-                    len: 24,
-                  )),
-                ],
-              )),
+              value: _MsAutohidingScrollbar(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(43317),
+                len: 24,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -63206,20 +63179,11 @@ StyleSheet(
                       offset: SourceOffset(44338),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(44339),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(44340),
-                          len: 24,
-                        )),
-                      ],
-                    )),
+                    value: _MsAutohidingScrollbar(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(44340),
+                      len: 24,
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -63774,20 +63738,11 @@ StyleSheet(
                       offset: SourceOffset(45022),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(45023),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(45024),
-                          len: 24,
-                        )),
-                      ],
-                    )),
+                    value: _MsAutohidingScrollbar(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(45024),
+                      len: 24,
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -64322,20 +64277,11 @@ StyleSheet(
                       offset: SourceOffset(45587),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(45588),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(45589),
-                          len: 24,
-                        )),
-                      ],
-                    )),
+                    value: _MsAutohidingScrollbar(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(45589),
+                      len: 24,
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -64890,20 +64836,11 @@ StyleSheet(
                       offset: SourceOffset(46268),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(46269),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(46270),
-                          len: 24,
-                        )),
-                      ],
-                    )),
+                    value: _MsAutohidingScrollbar(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(46270),
+                      len: 24,
+                    ))),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
