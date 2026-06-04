@@ -15,7 +15,6 @@ coverage/popular/missing.1.2.0.css
 1:1:/* src/core/sanitize.css */
 1779:16:    @supports (break-after: avoid-column) {
 2091:3:  role[menuitem] {
-2210:3:  clip: rect(0 0 0 0);
 2211:3:  clip-path: inset(50%);
 1:1:/* src/core/sanitize.css */
 2267:3:  -webkit-text-stroke: var(--stroke-width) var(--stroke-color);

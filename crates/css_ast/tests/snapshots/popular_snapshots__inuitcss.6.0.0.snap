@@ -29346,82 +29346,53 @@ StyleSheet(
                 offset: SourceOffset(50834),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(50835),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(50836),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(50841),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(50842),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(50843),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(50844),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(50845),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(50846),
-                          len: 1,
-                        )),
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(50847),
-                          len: 1,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(50848),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(50849),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(50850),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(50851),
-                    len: 9,
-                  )),
-                ],
+              value: ClipStyleValue(r#Some(RectFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(50836),
+                  len: 5,
+                )),
+                top: r#Some(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(50841),
+                  len: 1,
+                )))),
+                comma1: None,
+                right: r#Some(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(50843),
+                  len: 1,
+                )))),
+                comma2: None,
+                bottom: r#Some(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(50845),
+                  len: 1,
+                )))),
+                comma3: None,
+                left: r#Some(Zero(Number(Cursor(
+                  kind: "Number",
+                  offset: SourceOffset(50847),
+                  len: 1,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(50848),
+                  len: 1,
+                )),
+              ))),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(50850),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(50851),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(50860),
@@ -29788,82 +29759,53 @@ StyleSheet(
                       offset: SourceOffset(51160),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(51161),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(51162),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51167),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51168),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51169),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51170),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51171),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51172),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51173),
-                                len: 1,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(51174),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(51175),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(51176),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(51177),
-                          len: 9,
-                        )),
-                      ],
+                    value: ClipStyleValue(r#Some(RectFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(51162),
+                        len: 5,
+                      )),
+                      top: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51167),
+                        len: 1,
+                      )))),
+                      comma1: None,
+                      right: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51169),
+                        len: 1,
+                      )))),
+                      comma2: None,
+                      bottom: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51171),
+                        len: 1,
+                      )))),
+                      comma3: None,
+                      left: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51173),
+                        len: 1,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(51174),
+                        len: 1,
+                      )),
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(51176),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(51177),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(51186),
@@ -30265,82 +30207,53 @@ StyleSheet(
                       offset: SourceOffset(51521),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(51522),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(51523),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51528),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51529),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51530),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51531),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51532),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51533),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51534),
-                                len: 1,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(51535),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(51536),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(51537),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(51538),
-                          len: 9,
-                        )),
-                      ],
+                    value: ClipStyleValue(r#Some(RectFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(51523),
+                        len: 5,
+                      )),
+                      top: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51528),
+                        len: 1,
+                      )))),
+                      comma1: None,
+                      right: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51530),
+                        len: 1,
+                      )))),
+                      comma2: None,
+                      bottom: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51532),
+                        len: 1,
+                      )))),
+                      comma3: None,
+                      left: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51534),
+                        len: 1,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(51535),
+                        len: 1,
+                      )),
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(51537),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(51538),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(51547),
@@ -30715,82 +30628,53 @@ StyleSheet(
                       offset: SourceOffset(51872),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(51873),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(51874),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51879),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51880),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51881),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51882),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51883),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(51884),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(51885),
-                                len: 1,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(51886),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(51887),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(51888),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(51889),
-                          len: 9,
-                        )),
-                      ],
+                    value: ClipStyleValue(r#Some(RectFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(51874),
+                        len: 5,
+                      )),
+                      top: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51879),
+                        len: 1,
+                      )))),
+                      comma1: None,
+                      right: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51881),
+                        len: 1,
+                      )))),
+                      comma2: None,
+                      bottom: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51883),
+                        len: 1,
+                      )))),
+                      comma3: None,
+                      left: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(51885),
+                        len: 1,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(51886),
+                        len: 1,
+                      )),
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(51888),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(51889),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(51898),
@@ -31165,82 +31049,53 @@ StyleSheet(
                       offset: SourceOffset(52220),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(52221),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(52222),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52227),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52228),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52229),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52230),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52231),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52232),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52233),
-                                len: 1,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(52234),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(52235),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(52236),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(52237),
-                          len: 9,
-                        )),
-                      ],
+                    value: ClipStyleValue(r#Some(RectFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(52222),
+                        len: 5,
+                      )),
+                      top: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52227),
+                        len: 1,
+                      )))),
+                      comma1: None,
+                      right: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52229),
+                        len: 1,
+                      )))),
+                      comma2: None,
+                      bottom: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52231),
+                        len: 1,
+                      )))),
+                      comma3: None,
+                      left: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52233),
+                        len: 1,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(52234),
+                        len: 1,
+                      )),
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(52236),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(52237),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(52246),
@@ -31615,82 +31470,53 @@ StyleSheet(
                       offset: SourceOffset(52560),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(52561),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(52562),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52567),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52568),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52569),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52570),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52571),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52572),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52573),
-                                len: 1,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(52574),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(52575),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(52576),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(52577),
-                          len: 9,
-                        )),
-                      ],
+                    value: ClipStyleValue(r#Some(RectFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(52562),
+                        len: 5,
+                      )),
+                      top: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52567),
+                        len: 1,
+                      )))),
+                      comma1: None,
+                      right: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52569),
+                        len: 1,
+                      )))),
+                      comma2: None,
+                      bottom: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52571),
+                        len: 1,
+                      )))),
+                      comma3: None,
+                      left: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52573),
+                        len: 1,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(52574),
+                        len: 1,
+                      )),
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(52576),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(52577),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(52586),
@@ -32065,82 +31891,53 @@ StyleSheet(
                       offset: SourceOffset(52910),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(52911),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(52912),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52917),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52918),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52919),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52920),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52921),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(52922),
-                                len: 1,
-                              )),
-                              Number(Cursor(
-                                kind: "Number",
-                                offset: SourceOffset(52923),
-                                len: 1,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(52924),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(52925),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(52926),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(52927),
-                          len: 9,
-                        )),
-                      ],
+                    value: ClipStyleValue(r#Some(RectFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(52912),
+                        len: 5,
+                      )),
+                      top: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52917),
+                        len: 1,
+                      )))),
+                      comma1: None,
+                      right: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52919),
+                        len: 1,
+                      )))),
+                      comma2: None,
+                      bottom: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52921),
+                        len: 1,
+                      )))),
+                      comma3: None,
+                      left: r#Some(Zero(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(52923),
+                        len: 1,
+                      )))),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(52924),
+                        len: 1,
+                      )),
+                    ))),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(52926),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(52927),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(52936),

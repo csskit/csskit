@@ -5,10 +5,3 @@ coverage/popular/inuitcss.6.0.0.css
 1021:3:  filter: alpha(opacity=75); }
 1344:3:  font: 12px/1.5 sans-serif; }
 2381:3:  filter: alpha(opacity=50) !important; }
-2414:3:  clip: rect(0 0 0 0) !important;
-2426:5:    clip: rect(0 0 0 0) !important;
-2437:5:    clip: rect(0 0 0 0) !important;
-2448:5:    clip: rect(0 0 0 0) !important;
-2459:5:    clip: rect(0 0 0 0) !important;
-2470:5:    clip: rect(0 0 0 0) !important;
-2481:5:    clip: rect(0 0 0 0) !important;
