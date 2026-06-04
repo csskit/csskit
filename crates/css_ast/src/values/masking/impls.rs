@@ -6,6 +6,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
+		assert_eq!(std::mem::size_of::<ClipStyleValue>(), 124);
 		assert_eq!(std::mem::size_of::<ClipRuleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaskBorderModeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaskBorderOutsetStyleValue>(), 64);
@@ -21,6 +22,11 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(CssAtomSet::ATOMS, ClipStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, ClipStyleValue, "rect(10px,20px,30px,40px)");
+		assert_parse!(CssAtomSet::ATOMS, ClipStyleValue, "rect(auto,auto,auto,auto)");
+		assert_parse!(CssAtomSet::ATOMS, ClipStyleValue, "rect(-5px,auto,10px,0px)");
+
 		assert_parse!(CssAtomSet::ATOMS, ClipRuleStyleValue, "nonzero");
 		assert_parse!(CssAtomSet::ATOMS, ClipRuleStyleValue, "evenodd");
 
@@ -47,6 +53,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, ClipStyleValue, "none");
+		assert_parse_error!(CssAtomSet::ATOMS, ClipStyleValue, "rect(10px)");
 		assert_parse_error!(CssAtomSet::ATOMS, ClipRuleStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, ClipRuleStyleValue, "1");
 
