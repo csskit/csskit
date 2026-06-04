@@ -297,6 +297,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum MsTransformOriginStyleValue { }",
   "pub enum MsUserSelectStyleValue { }",
   "pub enum MsViewStateMediaFeature { }",
+  "pub enum MsWordBreakStyleValue { }",
   "pub enum NamedColor { }",
   "pub enum NamedDirection { }",
   "pub enum NavControlsMediaFeature { }",

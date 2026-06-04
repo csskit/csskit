@@ -3081,6 +3081,8 @@ pub enum CssAtomSet {
 	_MsValue,
 	#[atom("-ms-view-state")]
 	_MsViewState,
+	#[atom("-ms-word-break")]
+	_MsWordBreak,
 
 	#[atom("-o-box-sizing")]
 	_OBoxSizing = 0b00000000_11100000_00000000_00000000,

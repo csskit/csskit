@@ -1,4 +1,2 @@
 find :unknown
 ---
-coverage/popular/sakura.1.5.1.css
-40:3:  -ms-word-break: break-all;
