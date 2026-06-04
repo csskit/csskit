@@ -1,0 +1,28 @@
+specificity --format json
+---
+[
+  {
+    "selector": ".foo",
+    "a": 0,
+    "b": 1,
+    "c": 0,
+    "line": 1,
+    "col": 1
+  },
+  {
+    "selector": ".bar",
+    "a": 0,
+    "b": 1,
+    "c": 0,
+    "line": 2,
+    "col": 1
+  },
+  {
+    "selector": ".baz",
+    "a": 0,
+    "b": 1,
+    "c": 0,
+    "line": 3,
+    "col": 1
+  }
+]
