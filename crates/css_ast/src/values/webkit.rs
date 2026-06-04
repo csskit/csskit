@@ -4,6 +4,8 @@
 //! with legacy stylesheets.
 
 use super::prelude::*;
+use crate::{Length, PositionOne, PositionTwo};
+use css_parse::{Cursor, Parse, Parser, Result as ParseResult};
 
 /// Represents the style value for `-webkit-filter`.
 ///
@@ -82,6 +84,44 @@ pub struct WebkitFlexStyleValue;
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitOrderStyleValue;
+
+/// Represents the style value for `-webkit-transform-origin`.
+///
+/// Legacy alias for `transform-origin`. Accepts the same grammar.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <position-one> | <position-two> <length>?
+/// ```
+#[syntax(" <position-one> | <position-two> <length>? ")]
+#[derive(
+	Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = FilterEffects,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitTransformOriginStyleValue {}
+
+impl<'a> Parse<'a> for WebkitTransformOriginStyleValue {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParseResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let first = p.parse::<PositionOne>()?;
+		let Some(second) = p.parse_if_peek::<PositionOne>()? else { return Ok(Self::PositionOne(first)) };
+		let two = PositionTwo::from_two(p, first, second)?;
+		Ok(Self::PositionTwo(two, p.parse_if_peek::<Length>()?))
+	}
+}
 
 /// Represents the style value for `-webkit-transition`.
 ///
@@ -1164,11 +1204,6 @@ pub struct WebkitBackgroundSizeStyleValue<'a>;
 // Blocked on `<single-animation>` type (animation shorthand not yet implemented).
 // #[syntax(" <single-animation># ")]
 // pub struct WebkitAnimationStyleValue<'a>;
-
-// TODO: `-webkit-transform-origin` — alias for `transform-origin`.
-// Blocked on `transform-origin` grammar support (complex multi-keyword positional syntax).
-// #[syntax(" [ left | center | right | top | bottom | <length-percentage> ] | ... ")]
-// pub enum WebkitTransformOriginStyleValue<'a> {}
 
 /// `-webkit-perspective` — alias for `perspective`.
 #[syntax(" none | <length [0,∞]> ")]

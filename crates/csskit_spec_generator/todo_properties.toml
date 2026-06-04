@@ -48,7 +48,7 @@ properties = ["initial-letter-align"]
 properties = ["voice-pitch", "voice-range"]
 
 [transforms]
-properties = ["rotate", "transform-origin"]
+properties = ["rotate"]
 
 [ui]
 properties = ["nav-down", "nav-left", "nav-right", "nav-up"]

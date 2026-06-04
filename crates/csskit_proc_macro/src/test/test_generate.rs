@@ -547,3 +547,10 @@ fn transform_origin_grammar() {
 	let data = to_deriveinput! { #[derive(Parse)] enum TransformOriginStyleValue {} };
 	assert_snapshot!(syntax, data, "transform_origin_grammar");
 }
+
+#[test]
+fn transform_origin_replacement() {
+	let syntax = to_valuedef!(" <position-one> | <position-two> <length>? ");
+	let data = to_deriveinput! { #[derive(Parse)] enum TransformOriginStyleValue {} };
+	assert_snapshot!(syntax, data, "transform_origin_replacement");
+}
