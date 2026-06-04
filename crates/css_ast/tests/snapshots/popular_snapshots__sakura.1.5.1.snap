@@ -864,20 +864,11 @@ StyleSheet(
                 offset: SourceOffset(861),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(862),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(863),
-                    len: 9,
-                  )),
-                ],
-              )),
+              value: BreakAll(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(863),
+                len: 9,
+              ))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
