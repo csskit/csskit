@@ -17,13 +17,13 @@ pub struct RectFunction {
 	pub name: T![Function],
 	pub top: AutoOr<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
-	pub comma1: T![,],
+	pub comma1: Option<T![,]>,
 	pub right: AutoOr<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
-	pub comma2: T![,],
+	pub comma2: Option<T![,]>,
 	pub bottom: AutoOr<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
-	pub comma3: T![,],
+	pub comma3: Option<T![,]>,
 	pub left: AutoOr<Length>,
 	pub close: T![')'],
 }
@@ -36,11 +36,12 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<RectFunction>(), 124);
+		assert_eq!(std::mem::size_of::<RectFunction>(), 136);
 	}
 
 	#[test]
 	fn test_writes() {
+		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(0 0 0 0)");
 		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(10px,20px,30px,40px)");
 		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(auto,auto,auto,auto)");
 		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(10px,auto,30px,auto)");
