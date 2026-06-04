@@ -12,47 +12,5 @@ coverage/popular/foundation.6.7.5.css
 2472:5:    page-break-inside: avoid; }
 2484:5:    page-break-after: avoid; }
 2486:5:    page-break-inside: auto; } }
-3035:3:  -webkit-transform-origin: 50% 50%;
-3036:7:      -ms-transform-origin: 50% 50%;
-3037:11:          transform-origin: 50% 50%; }
-3069:3:  -webkit-transform-origin: 50% 50%;
-3070:7:      -ms-transform-origin: 50% 50%;
-3071:11:          transform-origin: 50% 50%; }
 3079:3:  clip: rect(0, 0, 0, 0) !important;
 5577:3:  clip: rect(0, 0, 0, 0) !important;
-5859:3:  -webkit-transform-origin: top;
-5860:7:      -ms-transform-origin: top;
-5861:11:          transform-origin: top;
-5880:3:  -webkit-transform-origin: right;
-5881:7:      -ms-transform-origin: right;
-5882:11:          transform-origin: right;
-5901:3:  -webkit-transform-origin: bottom;
-5902:7:      -ms-transform-origin: bottom;
-5903:11:          transform-origin: bottom;
-5922:3:  -webkit-transform-origin: left;
-5923:7:      -ms-transform-origin: left;
-5924:11:          transform-origin: left;
-5943:3:  -webkit-transform-origin: center;
-5944:7:      -ms-transform-origin: center;
-5945:11:          transform-origin: center;
-5964:3:  -webkit-transform-origin: center;
-5965:7:      -ms-transform-origin: center;
-5966:11:          transform-origin: center;
-5985:3:  -webkit-transform-origin: top;
-5986:7:      -ms-transform-origin: top;
-5987:11:          transform-origin: top;
-6006:3:  -webkit-transform-origin: right;
-6007:7:      -ms-transform-origin: right;
-6008:11:          transform-origin: right;
-6027:3:  -webkit-transform-origin: bottom;
-6028:7:      -ms-transform-origin: bottom;
-6029:11:          transform-origin: bottom;
-6048:3:  -webkit-transform-origin: left;
-6049:7:      -ms-transform-origin: left;
-6050:11:          transform-origin: left;
-6069:3:  -webkit-transform-origin: center;
-6070:7:      -ms-transform-origin: center;
-6071:11:          transform-origin: center;
-6090:3:  -webkit-transform-origin: center;
-6091:7:      -ms-transform-origin: center;
-6092:11:          transform-origin: center;

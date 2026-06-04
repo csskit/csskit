@@ -4,6 +4,8 @@
 //! with legacy stylesheets targeting IE/Edge Legacy.
 
 use super::prelude::*;
+use crate::{Length, PositionOne, PositionTwo};
+use css_parse::{Cursor, Parse, Parser, Result as ParseResult};
 
 /// `-ms-overflow-style` — IE/Edge scrollbar display behaviour.
 // TODO: `-ms-autohiding-scrollbar` is a vendor-prefixed keyword value with a leading `-`.
@@ -331,10 +333,43 @@ pub enum MsFlexLinePackStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct MsTransformStyleValue<'a>;
 
-// TODO: `-ms-transform-origin` — IE9 alias for `transform-origin`.
-// Blocked on `transform-origin` grammar support (complex multi-keyword positional syntax).
-// #[syntax(" <transform-origin> ")]
-// pub struct MsTransformOriginStyleValue<'a>;
+/// Represents the style value for `-ms-transform-origin`.
+///
+/// Legacy alias for `transform-origin`. Accepts the same grammar.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <position-one> | <position-two> <length>?
+/// ```
+#[syntax(" <position-one> | <position-two> <length>? ")]
+#[derive(
+	Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    property_group = FilterEffects,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum MsTransformOriginStyleValue {}
+
+impl<'a> Parse<'a> for MsTransformOriginStyleValue {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParseResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let first = p.parse::<PositionOne>()?;
+		let Some(second) = p.parse_if_peek::<PositionOne>()? else { return Ok(Self::PositionOne(first)) };
+		let two = PositionTwo::from_two(p, first, second)?;
+		Ok(Self::PositionTwo(two, p.parse_if_peek::<Length>()?))
+	}
+}
 
 /// `-ms-filter` — IE8 alias for `filter`.
 #[syntax(" none | <filter-value-list> ")]

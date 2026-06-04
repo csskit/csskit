@@ -4,9 +4,7 @@ expression: pretty
 ---
 #[derive(Parse)]
 enum TransformOriginStyleValue {
-    LeftCenterRightTopBottomLengthPercentage(
-        crate::LeftCenterRightTopBottomLengthPercentage,
-    ),
+    PositionOne(crate::PositionOne),
     LeftTop(
         #[atom(CssAtomSet::Left)]
         ::css_parse::T![Ident],

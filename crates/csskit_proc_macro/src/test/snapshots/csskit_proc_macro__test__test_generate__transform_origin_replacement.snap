@@ -1,0 +1,9 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+enum TransformOriginStyleValue {
+    PositionOne(crate::PositionOne),
+    PositionTwo(crate::PositionTwo, Option<crate::Length>),
+}

@@ -67519,30 +67519,15 @@ StyleSheet(
                 offset: SourceOffset(51458),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(51459),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(51460),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(51461),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(51462),
-                    len: 1,
-                  )),
-                ],
-              )),
+              value: PositionTwo(Physical(LengthPercentage(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(51460),
+                len: 1,
+              )))), LengthPercentage(Zero(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(51462),
+                len: 1,
+              ))))), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -8,3 +8,8 @@
 # Properties with hand-written Parse implementations
 # glyph-orientation-vertical: Requires special handling for literal integers and dimensions
 properties = ["glyph-orientation-vertical"]
+
+[transforms]
+# transform-origin: raw spec grammar produces ~25 colliding variants after distribution;
+# hand-written Parse using PositionOne/PositionHorizontal/PositionVertical is cleaner.
+properties = ["transform-origin"]

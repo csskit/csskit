@@ -216,6 +216,18 @@ pub enum PositionTwo {
 	Logical(PositionLogical, PositionLogical),
 }
 
+impl<'a> Peek<'a> for PositionTwo {
+	const PEEK_KINDSET: KindSet = PositionOne::PEEK_KINDSET;
+
+	#[inline(always)]
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		PositionOne::peek(p, c)
+	}
+}
+
 impl PositionTwo {
 	pub(crate) fn from_two<'a, I>(_p: &mut Parser<'a, I>, first: PositionOne, second: PositionOne) -> ParserResult<Self>
 	where
