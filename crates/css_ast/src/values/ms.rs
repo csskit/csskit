@@ -30,6 +30,24 @@ use css_parse::{Cursor, Parse, Parser, Result as ParseResult};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum MsOverflowStyleStyleValue {}
 
+/// `-ms-box-sizing` — alias for `box-sizing`.
+#[syntax(" content-box | border-box ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "content-box",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Sizing,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum MsBoxSizingStyleValue {}
+
 /// `-ms-touch-action` — alias for `touch-action`.
 #[syntax(
 	" auto | none | [ [ pan-x | pan-left | pan-right ] || [ pan-y | pan-up | pan-down ] || pinch-zoom ] | manipulation "
@@ -430,6 +448,17 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
+
+	#[test]
+	fn test_ms_box_sizing_parses() {
+		assert_parse!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "content-box");
+		assert_parse!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "border-box");
+	}
+
+	#[test]
+	fn test_ms_box_sizing_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "invalid");
+	}
 
 	#[test]
 	fn test_ms_overflow_style_parses() {

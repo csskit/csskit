@@ -279,6 +279,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum MozPseudoElement { }",
   "pub enum MozTouchEnabledMediaFeature { }",
   "pub enum MozUserSelectStyleValue { }",
+  "pub enum MsBoxSizingStyleValue { }",
   "pub enum MsColumnCountMediaFeature { }",
   "pub enum MsDevicePixelRatioMediaFeature { }",
   "pub enum MsFlexAlignStyleValue { }",
