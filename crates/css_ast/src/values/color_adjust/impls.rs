@@ -12,6 +12,18 @@ mod tests {
 	}
 
 	#[test]
+	fn test_color_scheme() {
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "light");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "dark");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "light dark");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "only light");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "light only");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "light dark only");
+		assert_parse!(CssAtomSet::ATOMS, ColorSchemeStyleValue, "my-scheme");
+	}
+
+	#[test]
 	fn test_forced_color_adjust() {
 		assert_parse!(CssAtomSet::ATOMS, ForcedColorAdjustStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ForcedColorAdjustStyleValue, "none");

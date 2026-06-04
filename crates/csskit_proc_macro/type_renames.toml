@@ -9,3 +9,4 @@
 "StringCounterAttrFunction" = "ContentAltItem"
 "ClipEllipsisStringFadeFadeFunction" = "TextOverflowSingleAxis"
 "LeftCenterRightTopBottomLengthPercentage" = "PositionOne"
+"LightDarkCustomIdent" = "ColorSchemeName"

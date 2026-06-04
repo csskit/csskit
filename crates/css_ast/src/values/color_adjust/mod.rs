@@ -38,51 +38,35 @@ use impls::*;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ColorAdjustStyleValue;
 
-// /// Represents the style value for `color-scheme` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-scheme).
-// ///
-// /// The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | [ light | dark | <custom-ident> ]+ && only?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-color-adjust-1/#color-scheme
-// #[syntax(" normal | [ light | dark | <custom-ident> ]+ && only? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     property_group = ColorAdjust,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.color-scheme")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct ColorSchemeStyleValue<'a>;
+/// Represents the style value for `color-scheme` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-scheme).
+///
+/// The color-scheme CSS property sets which color schemes (light or dark) an element uses and may prevent automatic dark mode adjustments by the browser.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | [ light | dark | <custom-ident> ]+ && only?
+/// ```
+///
+/// https://drafts.csswg.org/css-color-adjust-1/#color-scheme
+#[syntax(" normal | [ light | dark | <custom-ident> ]+ && only? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = ColorAdjust,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-scheme"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct ColorSchemeStyleValue<'a>;
 
 /// Represents the style value for `forced-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#forced-color-adjust).
 ///
