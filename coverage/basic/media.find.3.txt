@@ -1,4 +1,4 @@
-find 'media-rule > style-rule'
+find "media-rule > style-rule"
 ---
 coverage/basic/media.css
 2:2:	body {
