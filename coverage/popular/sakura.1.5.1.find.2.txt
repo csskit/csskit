@@ -1,4 +1,4 @@
-media-rule > style-rule
+find 'media-rule > style-rule'
 ---
 coverage/popular/sakura.1.5.1.css
 23:3:  body {

@@ -1,4 +1,4 @@
-style-rule:first-child
+find style-rule:first-child
 ---
 coverage/popular/sakura.1.5.1.css
 7:1:html {
