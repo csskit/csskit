@@ -8,11 +8,7 @@ use crate::{FilterValueList, Length, PositionOne, PositionTwo};
 use css_parse::{Cursor, Parse, Parser, Result as ParseResult, T};
 
 /// `-ms-overflow-style` — IE/Edge scrollbar display behaviour.
-// TODO: `-ms-autohiding-scrollbar` is a vendor-prefixed keyword value with a leading `-`.
-// The generator strips the leading `-` when deriving atom names (to_pascal_case), producing
-// `MsAutohidingScrollbar`, but single-dash idents need the same `_`-prefix treatment as
-// vendor property atoms. Needs generator fix before this value can be included.
-#[syntax(" auto | none | scrollbar ")]
+#[syntax(" auto | none | scrollbar | -ms-autohiding-scrollbar ")]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -29,6 +25,24 @@ use css_parse::{Cursor, Parse, Parser, Result as ParseResult, T};
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum MsOverflowStyleStyleValue {}
+
+/// `-ms-interpolation-mode` - IE image scaling algorithm.
+#[syntax(" nearest-neighbor | bicubic ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "undefined",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Images,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum MsInterpolationModeStyleValue {}
 
 /// `-ms-box-sizing` — alias for `box-sizing`.
 #[syntax(" content-box | border-box ")]
@@ -462,6 +476,18 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
+	fn test_ms_interpolation_mode_parses() {
+		assert_parse!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "nearest-neighbor");
+		assert_parse!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "bicubic");
+	}
+
+	#[test]
+	fn test_ms_interpolation_mode_errors() {
+		assert_parse_error!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "auto");
+		assert_parse_error!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "invalid");
+	}
+
+	#[test]
 	fn test_ms_box_sizing_parses() {
 		assert_parse!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "content-box");
 		assert_parse!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "border-box");
@@ -477,7 +503,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, MsOverflowStyleStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, MsOverflowStyleStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, MsOverflowStyleStyleValue, "scrollbar");
-		// TODO: -ms-autohiding-scrollbar omitted pending generator fix for vendor-prefixed values
+		assert_parse!(CssAtomSet::ATOMS, MsOverflowStyleStyleValue, "-ms-autohiding-scrollbar");
 	}
 
 	#[test]

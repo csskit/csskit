@@ -293,6 +293,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum MsFlexWrapStyleValue { }",
   "pub enum MsHighContrastMediaFeature { }",
   "pub enum MsImeAlignMediaFeature { }",
+  "pub enum MsInterpolationModeStyleValue { }",
   "pub enum MsOverflowStyleStyleValue { }",
   "pub enum MsPseudoClass { }",
   "pub enum MsPseudoElement { }",
