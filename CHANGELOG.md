@@ -1,3 +1,46 @@
+## [0.0.24] - 2026-06-04
+
+### Other Changes
+- Update css-minify-tests (#1150) ([#1150](https://github.com/csskit/csskit/pull/1150))
+- Chore(deps): update rust crate dashmap to v6.2.1 (#1151) ([#1151](https://github.com/csskit/csskit/pull/1151))
+- Chore(deps): update rust crate insta to v1.47.2 (#1152) ([#1152](https://github.com/csskit/csskit/pull/1152))
+- Coverage: refactor csskit-acceptance script to allow arbitrary command syntax (#1167) ([#1167](https://github.com/csskit/csskit/pull/1167))
+- Coverage: add more csskit-acceptance snapshot tests (#1168) ([#1168](https://github.com/csskit/csskit/pull/1168))
+- Coverage: try and be consistent with trailing newlines (#1170) ([#1170](https://github.com/csskit/csskit/pull/1170))
+
+
+### Chromashift
+- chromashift/css_ast: Completely rewrite color mixing, support `none` channels & N-colors (#1162) ([#1162](https://github.com/csskit/csskit/pull/1162))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#1142) ([#1142](https://github.com/csskit/csskit/pull/1142))
+- css_ast: resolve `none` channels to 0 (#1154) ([#1154](https://github.com/csskit/csskit/pull/1154))
+- css_ast: Rewrite <position> and <bg-position> (#1164) ([#1164](https://github.com/csskit/csskit/pull/1164))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1143) ([#1143](https://github.com/csskit/csskit/pull/1143))
+
+
+### Csskit_proc_macro
+- csskit_proc_macro: Generate name suffixes for colliding properties (#1163) ([#1163](https://github.com/csskit/csskit/pull/1163))
+
+
+### Csskit_transform
+- coverage: update snapshot data (#1153) ([#1153](https://github.com/csskit/csskit/pull/1153))
+- coverage: update css-minify-tests (#1161) ([#1161](https://github.com/csskit/csskit/pull/1161))
+
+
+### Csskit_vscode
+- Release csskit vscode extension v1.0.8 (#1107) ([#1107](https://github.com/csskit/csskit/pull/1107))
+- Release csskit vscode extension v1.0.9 (#1147) ([#1147](https://github.com/csskit/csskit/pull/1147))
+- chore(deps): update dependency oxlint to v1.65.0 (#1146) ([#1146](https://github.com/csskit/csskit/pull/1146))
+- chore(deps): update dependency oxlint to v1.66.0 (#1148) ([#1148](https://github.com/csskit/csskit/pull/1148))
+- chore(deps): update dependencies (patch) (#1156) ([#1156](https://github.com/csskit/csskit/pull/1156))
+- chore(deps): update dependency oxlint to v1.67.0 (#1159) ([#1159](https://github.com/csskit/csskit/pull/1159))
+- fix(deps): update dependency vscode-languageclient to v10 (#1165) ([#1165](https://github.com/csskit/csskit/pull/1165))
+
 ## [0.0.23] - 2026-05-22
 
 ### Other Changes
@@ -28,6 +71,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1124) ([#1124](https://github.com/csskit/csskit/pull/1124))
+- Release v0.0.23 (#1116) ([#1116](https://github.com/csskit/csskit/pull/1116))
 
 
 ### Csskit_spec_generator
