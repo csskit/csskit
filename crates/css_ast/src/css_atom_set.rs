@@ -2986,6 +2986,8 @@ pub enum CssAtomSet {
 	MsAutohidingScrollbar = 0b00000000_11000000_00000000_00000000,
 	#[atom("-ms-backdrop")]
 	_MsBackdrop,
+	#[atom("-ms-box-sizing")]
+	_MsBoxSizing,
 	#[atom("-ms-browse")]
 	_MsBrowse,
 	#[atom("-ms-check")]
