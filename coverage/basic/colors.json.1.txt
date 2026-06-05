@@ -1,69 +1,72 @@
 colors --format json
 ---
-[
-  {
-    "file": "coverage/basic/colors.css",
-    "line": 2,
-    "column": 10,
-    "start": 16,
-    "end": 23,
-    "source": "#ffffff",
-    "hex": "#fff",
-    "srgb": "rgb(255 255 255)",
-    "hsl": "hsl(300 50% 100%)",
-    "oklch": "oklch(1 0 180)",
-    "oklab": "oklab(1 -0 0)"
-  },
-  {
-    "file": "coverage/basic/colors.css",
-    "line": 6,
-    "column": 10,
-    "start": 46,
-    "end": 64,
-    "source": "rgb(210, 180, 140)",
-    "hex": "#d2b48c",
-    "srgb": "rgb(210 180 140)",
-    "hsl": "hsl(34.29 43.75% 68.63%)",
-    "oklch": "oklch(0.79 0.0638 74.62)",
-    "oklab": "oklab(0.78619 0.017 0.062)"
-  },
-  {
-    "file": "coverage/basic/colors.css",
-    "line": 10,
-    "column": 10,
-    "start": 86,
-    "end": 89,
-    "source": "red",
-    "hex": "#f00",
-    "srgb": "rgb(255 0 0)",
-    "hsl": "hsl(0 100% 50%)",
-    "oklch": "oklch(0.63 0.2577 29.23)",
-    "oklab": "oklab(0.62796 0.225 0.126)"
-  },
-  {
-    "file": "coverage/basic/colors.css",
-    "line": 14,
-    "column": 10,
-    "start": 112,
-    "end": 119,
-    "source": "#000000",
-    "hex": "#000",
-    "srgb": "rgb(0 0 0)",
-    "hsl": "hsl(0 0% 0%)",
-    "oklch": "oklch(0 0 0)",
-    "oklab": "oklab(0 0 0)"
-  },
-  {
-    "file": "coverage/basic/colors.css",
-    "line": 18,
-    "column": 10,
-    "start": 142,
-    "end": 158,
-    "source": "rgba(0, 0, 0, 0)",
-    "hex": "#0000",
-    "srgb": "rgb(0 0 0 / 0%)",
-    "hsl": "hsl(0 0% 0% / 0)",
-    "oklch": "oklch(0 0 0 / 0)",
-    "oklab": "oklab(0 0 0 / 0)"
-  }
-]
+{
+  "files": [
+    {
+      "file": "coverage/basic/colors.css",
+      "ok": true,
+      "results": [
+        {
+          "line": 2,
+          "column": 10,
+          "start": 16,
+          "end": 23,
+          "source": "#ffffff",
+          "hex": "#fff",
+          "srgb": "rgb(255 255 255)",
+          "hsl": "hsl(300 50% 100%)",
+          "oklch": "oklch(1 0 180)",
+          "oklab": "oklab(1 -0 0)"
+        },
+        {
+          "line": 6,
+          "column": 10,
+          "start": 46,
+          "end": 64,
+          "source": "rgb(210, 180, 140)",
+          "hex": "#d2b48c",
+          "srgb": "rgb(210 180 140)",
+          "hsl": "hsl(34.29 43.75% 68.63%)",
+          "oklch": "oklch(0.79 0.0638 74.62)",
+          "oklab": "oklab(0.78619 0.017 0.062)"
+        },
+        {
+          "line": 10,
+          "column": 10,
+          "start": 86,
+          "end": 89,
+          "source": "red",
+          "hex": "#f00",
+          "srgb": "rgb(255 0 0)",
+          "hsl": "hsl(0 100% 50%)",
+          "oklch": "oklch(0.63 0.2577 29.23)",
+          "oklab": "oklab(0.62796 0.225 0.126)"
+        },
+        {
+          "line": 14,
+          "column": 10,
+          "start": 112,
+          "end": 119,
+          "source": "#000000",
+          "hex": "#000",
+          "srgb": "rgb(0 0 0)",
+          "hsl": "hsl(0 0% 0%)",
+          "oklch": "oklch(0 0 0)",
+          "oklab": "oklab(0 0 0)"
+        },
+        {
+          "line": 18,
+          "column": 10,
+          "start": 142,
+          "end": 158,
+          "source": "rgba(0, 0, 0, 0)",
+          "hex": "#0000",
+          "srgb": "rgb(0 0 0 / 0%)",
+          "hsl": "hsl(0 0% 0% / 0)",
+          "oklch": "oklch(0 0 0 / 0)",
+          "oklab": "oklab(0 0 0 / 0)"
+        }
+      ]
+    }
+  ]
+}

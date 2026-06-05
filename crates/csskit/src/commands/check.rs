@@ -2,7 +2,7 @@ use crate::{
 	CliError, CliResult, GlobalConfig, bold_green, bold_red,
 	commands::{
 		OutputFormat,
-		extract::{Location, Record},
+		extract::{ErrorKind, ErrorRecord, Location},
 		format_diagnostic_error,
 	},
 };
@@ -17,18 +17,50 @@ use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource, Report};
 use serde::Serialize;
 use std::{collections::HashMap, fs};
 
+/// A single stat record in JSON output.
+#[derive(Serialize)]
+struct StatRecord {
+	name: String,
+	value: usize,
+	unit: Option<&'static str>,
+}
+
+impl StatRecord {
+	fn new(name: String, stat_type: StatType, count: usize) -> Self {
+		let unit = match stat_type {
+			StatType::Counter => None,
+			StatType::Bytes => Some("bytes"),
+			StatType::Lines => Some("lines"),
+		};
+		Self { name, value: count, unit }
+	}
+}
+
 /// JSON data payload for a single diagnostic.
 #[derive(Serialize)]
 struct DiagnosticData {
 	severity: String,
 	message: String,
+	#[serde(flatten)]
+	location: Location,
 }
 
-/// JSON output envelope for check command.
+/// Per-file JSON envelope for check output.
 #[derive(Serialize)]
-struct CheckJson {
-	diagnostics: Vec<Record<DiagnosticData>>,
-	stats: HashMap<String, (String, usize)>,
+struct CheckFileEnvelope {
+	file: String,
+	ok: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	error: Option<ErrorRecord>,
+	diagnostics: Vec<DiagnosticData>,
+	stats: Vec<StatRecord>,
+}
+
+/// Top-level JSON output for check command.
+#[derive(Serialize)]
+struct CheckOutput {
+	files: Vec<CheckFileEnvelope>,
+	aggregate_stats: Vec<StatRecord>,
 }
 
 /// Report potential issues around some CSS files
@@ -46,6 +78,10 @@ pub struct Check {
 	#[arg(short, long, value_parser)]
 	fix: bool,
 
+	/// Treat warnings as errors
+	#[arg(long)]
+	deny_warnings: bool,
+
 	/// Output format
 	#[arg(long, value_enum, default_value_t = OutputFormat::Text)]
 	format: OutputFormat,
@@ -53,7 +89,7 @@ pub struct Check {
 
 impl Check {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
-		let Self { sheet, input, fix, format } = self;
+		let Self { sheet, input, fix, deny_warnings, format } = self;
 
 		if *fix {
 			todo!()
@@ -79,43 +115,85 @@ impl Check {
 			CliError::ParseFailed
 		})?;
 
-		// Aggregate statistics across all files
-		let mut aggregated_stats: HashMap<_, _> = HashMap::new();
+		let mut aggregated_stats: HashMap<_, (StatType, usize)> = HashMap::new();
 		let mut error_count = 0;
-		let mut json_diagnostics: Vec<Record<DiagnosticData>> = Vec::new();
+		let mut file_envelopes: Vec<CheckFileEnvelope> = Vec::new();
 
 		for css_file_path in input.iter() {
-			let css_source = fs::read_to_string(css_file_path)?;
+			let css_source = match fs::read_to_string(css_file_path) {
+				Ok(s) => s,
+				Err(e) => {
+					match format {
+						OutputFormat::Json => {
+							file_envelopes.push(CheckFileEnvelope {
+								file: css_file_path.clone(),
+								ok: false,
+								error: Some(ErrorRecord { kind: ErrorKind::Io, message: e.to_string() }),
+								diagnostics: Vec::new(),
+								stats: Vec::new(),
+							});
+						}
+						OutputFormat::Text => eprintln!("{css_file_path}: {e}"),
+					}
+					error_count += 1;
+					continue;
+				}
+			};
+
 			let css_lexer = Lexer::new(&CssAtomSet::ATOMS, &css_source);
 			let mut css_parser = Parser::new(&bump, &css_source, css_lexer);
 			let css_result = css_parser.parse_entirely();
 
-			let stylesheet = css_result.output.ok_or_else(|| {
-				if let Some(e) = css_result.errors.first() {
-					eprintln!("{}", format_diagnostic_error(e, &css_source, css_file_path));
+			let stylesheet = match css_result.output {
+				Some(s) => s,
+				None => {
+					let message = css_result
+						.errors
+						.first()
+						.map(|e| {
+							eprintln!("{}", format_diagnostic_error(e, &css_source, css_file_path));
+							e.message(&css_source).to_string()
+						})
+						.unwrap_or_else(|| "parse failed".to_string());
+					match format {
+						OutputFormat::Json => {
+							file_envelopes.push(CheckFileEnvelope {
+								file: css_file_path.clone(),
+								ok: false,
+								error: Some(ErrorRecord { kind: ErrorKind::ParseError, message }),
+								diagnostics: Vec::new(),
+								stats: Vec::new(),
+							});
+						}
+						OutputFormat::Text => {}
+					}
+					error_count += 1;
+					continue;
 				}
-				CliError::ParseFailed
-			})?;
+			};
 
 			let mut collector = Collector::new(&parsed_rules, &rule_source, &bump);
 			collector.collect(&stylesheet, &css_source);
 
 			let mut file_failed = false;
+			let mut file_diagnostics: Vec<DiagnosticData> = Vec::new();
 
 			for diagnostic in collector.diagnostics(&css_source) {
-				if matches!(diagnostic.severity, ResolvedDiagnosticLevel::Error) && !file_failed {
+				let is_error = matches!(diagnostic.severity, ResolvedDiagnosticLevel::Error);
+				let is_warning = matches!(diagnostic.severity, ResolvedDiagnosticLevel::Warning);
+				let counts_as_failure = is_error || (*deny_warnings && is_warning);
+
+				if counts_as_failure && !file_failed {
 					error_count += 1;
 					file_failed = true;
 				}
 
 				match format {
 					OutputFormat::Json => {
-						json_diagnostics.push(Record {
-							location: Location::from_span(css_file_path, diagnostic.span, &css_source),
-							data: DiagnosticData {
-								severity: diagnostic.severity.to_string(),
-								message: diagnostic.message,
-							},
+						file_diagnostics.push(DiagnosticData {
+							severity: diagnostic.severity.to_string(),
+							message: diagnostic.message.clone(),
+							location: Location::from_span(diagnostic.span, &css_source),
 						});
 					}
 					OutputFormat::Text => {
@@ -138,27 +216,51 @@ impl Check {
 				}
 			}
 
+			let mut file_stats: Vec<StatRecord> = Vec::new();
 			for (stat_name, (stat_type, count)) in collector.stats() {
+				let name = CsskitAtomSet::get_dyn_set().bits_to_str(stat_name.as_bits()).to_string();
 				let entry = aggregated_stats.entry(*stat_name).or_insert((*stat_type, 0));
 				entry.1 += count;
+				file_stats.push(StatRecord::new(name, *stat_type, *count));
+			}
+			file_stats.sort_by(|a, b| a.name.cmp(&b.name));
+
+			match format {
+				OutputFormat::Json => {
+					file_envelopes.push(CheckFileEnvelope {
+						file: css_file_path.clone(),
+						ok: !file_failed,
+						error: None,
+						diagnostics: file_diagnostics,
+						stats: file_stats,
+					});
+				}
+				OutputFormat::Text => {
+					if !aggregated_stats.is_empty() && input.len() == 1 {
+						// Per-file stats in text mode when only one file
+						print_stats_text(&file_stats);
+					}
+				}
 			}
 		}
 
 		match format {
 			OutputFormat::Json => {
-				let stats: HashMap<String, (String, usize)> = aggregated_stats
+				let mut aggregate: Vec<StatRecord> = aggregated_stats
 					.iter()
 					.map(|(name, (stat_type, count))| {
 						let key = CsskitAtomSet::get_dyn_set().bits_to_str(name.as_bits()).to_string();
-						(key, (stat_type.to_string(), *count))
+						StatRecord::new(key, *stat_type, *count)
 					})
 					.collect();
-				let output = CheckJson { diagnostics: json_diagnostics, stats };
-				println!("{}", serde_json::to_string_pretty(&output)?);
+				aggregate.sort_by(|a, b| a.name.cmp(&b.name));
+				println!(
+					"{}",
+					serde_json::to_string_pretty(&CheckOutput { files: file_envelopes, aggregate_stats: aggregate })?
+				);
 			}
 			OutputFormat::Text => {
-				// Output aggregated statistics summary
-				if !aggregated_stats.is_empty() {
+				if !aggregated_stats.is_empty() && input.len() > 1 {
 					println!("\nStatistics:");
 					let mut stat_entries: Vec<_> = aggregated_stats
 						.iter()
@@ -177,8 +279,18 @@ impl Check {
 			}
 		}
 
-		// Return error if we encountered any error-level diagnostics
 		if error_count > 0 { Err(CliError::Checks(error_count)) } else { Ok(()) }
+	}
+}
+
+fn print_stats_text(stats: &[StatRecord]) {
+	if stats.is_empty() {
+		return;
+	}
+	println!("\nStatistics:");
+	for stat in stats {
+		let unit = stat.unit.map(|u| format!(" {u}")).unwrap_or_default();
+		println!("  --{}: {}{}", stat.name, stat.value, unit);
 	}
 }
 
@@ -204,7 +316,6 @@ fn maybe_color<F: Fn(&str) -> String>(colors: bool, s: &str, f: F) -> String {
 	if colors { f(s) } else { s.to_string() }
 }
 
-/// No CSS input files provided. The `sheet` arg may itself be a CSS file.
 fn hint_no_input(sheet: &str, config: &GlobalConfig) {
 	let colors = config.colors();
 	let error_label = maybe_color(colors, "error", |s| bold_red(s));
@@ -226,7 +337,6 @@ fn hint_no_input(sheet: &str, config: &GlobalConfig) {
 	}
 }
 
-/// Sheet arg failed to parse; may be a CSS file passed in the wrong position.
 fn hint_bad_sheet(sheet: &str, input: &[String], config: &GlobalConfig) {
 	if !sheet.ends_with(".css") {
 		return;

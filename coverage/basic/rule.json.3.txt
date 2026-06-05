@@ -1,11 +1,25 @@
 check coverage/basic/basic-stats.cks --format json
 ---
 {
-  "diagnostics": [],
-  "stats": {
-    "total-rules": [
-      "counter",
-      1
-    ]
-  }
+  "files": [
+    {
+      "file": "coverage/basic/rule.css",
+      "ok": true,
+      "diagnostics": [],
+      "stats": [
+        {
+          "name": "total-rules",
+          "value": 1,
+          "unit": null
+        }
+      ]
+    }
+  ],
+  "aggregate_stats": [
+    {
+      "name": "total-rules",
+      "value": 1,
+      "unit": null
+    }
+  ]
 }

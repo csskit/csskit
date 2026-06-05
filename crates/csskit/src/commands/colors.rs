@@ -1,7 +1,7 @@
 use super::GlobalConfig;
 use crate::{
 	CliResult, InputArgs, bg, bold,
-	commands::{Extract, OutputFormat},
+	commands::{Extract, OutputFormat, extract::ErrorRecord},
 	dimmed, fg,
 };
 use bumpalo::Bump;
@@ -360,7 +360,8 @@ impl Extract for ColorCommand {
 		src: &str,
 		bump: &Bump,
 		_on_stylesheet: &mut dyn for<'a> FnMut(&StyleSheet<'a>),
-	) -> Result<Vec<(Span, ColorData)>, ()> {
+	) -> Result<Vec<(Span, ColorData)>, ErrorRecord> {
+		use crate::commands::extract::ErrorKind;
 		match extract_colors(src, bump) {
 			Ok(colors) => {
 				let mut seen: HashSet<Hex> = HashSet::new();
@@ -390,10 +391,14 @@ impl Extract for ColorCommand {
 					.collect())
 			}
 			Err(errors) => {
-				for err in errors {
-					eprintln!("{}", crate::commands::format_diagnostic_error(&err, src, file));
-				}
-				Err(())
+				let message = errors
+					.first()
+					.map(|e| {
+						eprintln!("{}", crate::commands::format_diagnostic_error(e, src, file));
+						e.message(src).to_string()
+					})
+					.unwrap_or_else(|| "parse failed".to_string());
+				Err(ErrorRecord { kind: ErrorKind::ParseError, message })
 			}
 		}
 	}

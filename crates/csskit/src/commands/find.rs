@@ -1,6 +1,6 @@
 use crate::{
 	CliError, CliResult, GlobalConfig, InputArgs,
-	commands::{Extract, OutputFormat, extract::Location},
+	commands::{Extract, OutputFormat},
 	green,
 };
 use bumpalo::Bump;
@@ -77,20 +77,18 @@ impl Find {
 			return Err(CliError::ParseFailed);
 		};
 
-		if self.count { self.output_count(&selectors) } else { Extract::run(self, config) }
+		// In JSON mode, --count is ignored: consumers derive counts from results array length.
+		if self.count && !matches!(self.format, OutputFormat::Json) {
+			self.output_count(&selectors)
+		} else {
+			Extract::run(self, config)
+		}
 	}
 
 	fn output_count(&self, selectors: &QuerySelectorList) -> CliResult {
-		#[derive(Serialize)]
-		struct JsonCount {
-			file: String,
-			count: usize,
-		}
-
 		let bump = Bump::default();
 		let mut total = 0;
 		let mut files = 0;
-		let mut json_counts: Vec<JsonCount> = Vec::new();
 
 		for (filename, mut source) in self.input.sources()? {
 			let mut src = String::new();
@@ -104,21 +102,13 @@ impl Find {
 				continue;
 			}
 
-			match self.format {
-				OutputFormat::Text => println!("{filename}:{count}"),
-				OutputFormat::Json => json_counts.push(JsonCount { file: filename.to_string(), count }),
-			}
+			println!("{filename}:{count}");
 			files += 1;
 			total += count;
 		}
 
-		match self.format {
-			OutputFormat::Text => {
-				if files > 1 {
-					println!("\nTotal: {total}");
-				}
-			}
-			OutputFormat::Json => println!("{}", serde_json::to_string_pretty(&json_counts)?),
+		if files > 1 {
+			println!("\nTotal: {total}");
 		}
 
 		Ok(())
@@ -176,8 +166,9 @@ impl Extract for Find {
 		let bump = Bump::default();
 		let Some(selectors) = self.parsed_selectors(&bump) else { return };
 		for m in SelectorMatcher::new(&selectors, &self.selector, src).run(stylesheet) {
-			let location = Location::from_span("", m.span, src);
-			let text = src[location.start..location.end].to_string();
+			let start = usize::from(m.span.start());
+			let end = usize::from(m.span.end());
+			let text = src[start..end].to_string();
 			out.push((m.span, FindData { kind: m.node_id.tag_name().to_string(), text }));
 		}
 	}
