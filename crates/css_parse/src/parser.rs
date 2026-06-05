@@ -383,66 +383,63 @@ where
 		// Collect trivia that should be associated with the next content token
 		let mut pending_trivia = Vec::new_in(self.bump);
 
-		if self.buffer_index >= BUFFER_REFILL_INDEX {
-			self.fill_buffer(self.buffer_index);
-		}
-
-		for i in self.buffer_index..BUFFER_LEN {
-			let c = self.buffer[i];
-			if c == Kind::Eof {
-				self.buffer_index = i + 1;
-				// Associate pending trivia with EOF if any
-				if !pending_trivia.is_empty() {
-					self.trivia.push((pending_trivia.clone(), c));
-				}
-				return c;
-			} else if c == self.skip {
-				pending_trivia.push(c);
-				self.buffer_index = i + 1;
-			} else {
-				self.buffer_index = i + 1;
-				// Associate all pending trivia with this content token
-				if !pending_trivia.is_empty() {
-					self.trivia.push((pending_trivia.clone(), c));
-				}
-				return c;
-			}
-		}
-
-		let c;
 		loop {
-			let Some(cursor) = self.cursor_iter.next() else {
-				let eof_cursor = eof_cursor(self.source_text.len());
-				if !pending_trivia.is_empty() {
-					self.trivia.push((pending_trivia.clone(), eof_cursor));
-				}
-				return eof_cursor;
-			};
-			if cursor == Kind::Eof || cursor != self.skip {
-				c = cursor;
-				break;
+			if self.buffer_index >= BUFFER_REFILL_INDEX {
+				self.fill_buffer(self.buffer_index);
 			}
-			pending_trivia.push(cursor);
-		}
 
-		// Associate pending trivia with the content token we found
-		if !pending_trivia.is_empty() {
-			self.trivia.push((pending_trivia.clone(), c));
-		}
+			for i in self.buffer_index..BUFFER_LEN {
+				let c = self.buffer[i];
+				if c == Kind::Eof {
+					self.buffer_index = i;
+					// Associate pending trivia with EOF if any
+					if !pending_trivia.is_empty() {
+						self.trivia.push((pending_trivia.clone(), c));
+					}
+					#[cfg(debug_assertions)]
+					{
+						self.last_cursor = None;
+					}
+					return c;
+				} else if c == self.skip {
+					pending_trivia.push(c);
+				} else {
+					self.buffer_index = i + 1;
+					if self.buffer_index >= BUFFER_REFILL_INDEX {
+						self.fill_buffer(self.buffer_index);
+					}
+					// Associate all pending trivia with this content token
+					if !pending_trivia.is_empty() {
+						self.trivia.push((pending_trivia.clone(), c));
+					}
+					#[cfg(debug_assertions)]
+					{
+						if let Some(last_cursor) = self.last_cursor {
+							debug_assert!(last_cursor != c, "Detected a next loop, {c:?} was fetched twice");
+						}
+						self.last_cursor = Some(c);
+					}
+					return c;
+				}
+			}
 
-		#[cfg(debug_assertions)]
-		if let Some(last_cursor) = self.last_cursor {
-			debug_assert!(last_cursor != c, "Detected a next loop, {c:?} was fetched twice");
+			// Buffer exhausted with only skip tokens. Refill so buffer_index stays valid.
+			self.fill_buffer(BUFFER_LEN);
 		}
-		#[cfg(debug_assertions)]
-		if c == Kind::Eof {
-			self.last_cursor = None;
-		} else {
-			self.last_cursor = Some(c);
-		}
-
-		c
 	}
+}
+
+#[test]
+fn test_filling_buffer_with_skip_tokens() {
+	let str = "/*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*/a";
+	let bump = bumpalo::Bump::default();
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str);
+	let mut p = Parser::new(&bump, str, lexer);
+	let c = p.next();
+	assert_eq!(c.token(), Kind::Ident);
+	// Must not panic:
+	let _ = p.at_end();
+	let _ = p.offset();
 }
 
 #[test]
