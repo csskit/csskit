@@ -7,7 +7,23 @@ use css_parse::Parser;
 use serde::Serialize;
 use std::io::Read;
 
-/// Envelope for a single extracted result from any record-emitting command.
+/// Position metadata for a single result within a file.
+#[derive(Serialize, Debug, Clone)]
+pub struct Location {
+	pub line: u32,
+	pub column: u32,
+	pub start: usize,
+	pub end: usize,
+}
+
+impl Location {
+	pub fn from_span(span: Span, src: &str) -> Self {
+		let (line, col) = span.line_and_column(src);
+		Self { line: line + 1, column: col + 1, start: usize::from(span.start()), end: usize::from(span.end()) }
+	}
+}
+
+/// A single extracted result: position + command-specific payload.
 #[derive(Serialize, Debug)]
 pub struct Record<T: Serialize> {
 	#[serde(flatten)]
@@ -16,29 +32,48 @@ pub struct Record<T: Serialize> {
 	pub data: T,
 }
 
-/// Position metadata for a record.
-#[derive(Serialize, Debug, Clone)]
-pub struct Location {
-	pub file: String,
-	pub line: u32,
-	pub column: u32,
-	pub start: usize,
-	pub end: usize,
+/// Error kinds for machine-readable failure records.
+#[derive(Serialize, Debug, Clone, Copy, PartialEq, Eq)]
+#[serde(rename_all = "kebab-case")]
+pub enum ErrorKind {
+	ParseError,
+	Io,
+	#[allow(dead_code)]
+	Internal,
 }
 
-impl Location {
-	/// Build a Location from a filename, span, and source text.
-	/// Line and column are 1-based.
-	pub fn from_span(file: impl Into<String>, span: Span, src: &str) -> Self {
-		let (line, col) = span.line_and_column(src);
-		Self {
-			file: file.into(),
-			line: line + 1,
-			column: col + 1,
-			start: usize::from(span.start()),
-			end: usize::from(span.end()),
-		}
+/// Machine-readable error attached to a file envelope on failure.
+#[derive(Serialize, Debug)]
+pub struct ErrorRecord {
+	pub kind: ErrorKind,
+	pub message: String,
+}
+
+/// Per-file result envelope emitted in JSON mode.
+#[derive(Serialize, Debug)]
+pub struct FileEnvelope<T: Serialize> {
+	pub file: String,
+	pub ok: bool,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub error: Option<ErrorRecord>,
+	#[serde(skip_serializing_if = "Option::is_none")]
+	pub results: Option<Vec<Record<T>>>,
+}
+
+impl<T: Serialize> FileEnvelope<T> {
+	pub fn ok(file: impl Into<String>, results: Vec<Record<T>>) -> Self {
+		Self { file: file.into(), ok: true, error: None, results: Some(results) }
 	}
+
+	pub fn err(file: impl Into<String>, error: ErrorRecord) -> Self {
+		Self { file: file.into(), ok: false, error: Some(error), results: None }
+	}
+}
+
+/// Top-level JSON output wrapper.
+#[derive(Serialize, Debug)]
+pub struct OutputEnvelope<T: Serialize> {
+	pub files: Vec<FileEnvelope<T>>,
 }
 
 /// Output format for extraction commands.
@@ -54,7 +89,7 @@ pub enum OutputFormat {
 /// Trait for a command that walks a CSS AST and emits records.
 ///
 /// Implementors define:
-/// - `Row`: the command-specific data payload (what goes in `Record.data`)
+/// - `Row`: the command-specific data payload
 /// - `extract()`: walk one parsed stylesheet and collect (span, row) pairs
 /// - `render_text()`: format one row for text output
 ///
@@ -62,14 +97,13 @@ pub enum OutputFormat {
 /// - Looping over input files
 /// - Parsing each to a StyleSheet
 /// - Calling `extract()` and dispatching to text or JSON output
+/// - Per-file envelopes in JSON mode (always emitted, even for empty results)
 /// - Error handling and file headers (text mode)
 pub trait Extract: Sized {
 	/// The command-specific payload type.
 	type Row: Serialize;
 
 	/// Per-file context computed after parsing, before rendering.
-	/// Use this to build derived data (e.g. a syntax highlighter) that
-	/// `render_text` needs but can only be constructed from the stylesheet.
 	type FileContext: Default;
 
 	/// Return reference to input args.
@@ -85,46 +119,36 @@ pub trait Extract: Sized {
 	fn render_text(&self, ctx: &Self::FileContext, file: &str, src: &str, span: Span, row: &Self::Row, color: bool);
 
 	/// Build the per-file context from the parsed stylesheet and source.
-	/// Called once per file in text mode, before the first `render_text` call.
-	/// Default: returns `FileContext::default()`.
 	fn build_context<'a>(&self, _stylesheet: &StyleSheet<'a>, _src: &str) -> Self::FileContext {
 		Self::FileContext::default()
 	}
 
 	/// Whether to print a filename header before each file's rows in text mode.
-	/// Default: true.
 	fn show_file_header(&self) -> bool {
 		true
 	}
 
-	/// Called in text mode just before a file's rows are rendered, after the
-	/// file header. Use for per-file preamble output (e.g. "Found N items").
-	/// Default: no-op.
+	/// Called in text mode just before a file's rows are rendered, after the file header.
 	fn render_file_preamble(&self, _file: &str, _row_count: usize, _color: bool) {}
 
 	/// Called in text mode when a file yields no rows.
-	/// Default: silent.
 	fn on_no_results(&self, _file: &str) {}
 
-	/// Try parsing source as raw content (e.g. a bare selector list or color list)
-	/// before falling back to StyleSheet. Populate `out` and return true if the
-	/// content parse succeeded; return false to fall through to StyleSheet parsing.
+	/// Try parsing source as raw content before falling back to StyleSheet.
+	/// Return true if handled.
 	fn try_content(&self, _src: &str, _bump: &Bump, _out: &mut Vec<(Span, Self::Row)>) -> bool {
 		false
 	}
 
-	/// Override to handle custom parsing (e.g., find's selector validation).
-	/// Default: try try_content first, then parse as StyleSheet.
-	/// `on_stylesheet` is called with the stylesheet while it is still in scope,
-	/// allowing `build_context` to run before the stylesheet is dropped.
-	/// If the file fails to parse, print errors (unless JSON) and return Err(()).
+	/// Parse and extract from one file. Returns Ok(rows) or Err(error_record).
+	/// `on_stylesheet` is called with the stylesheet while still in scope.
 	fn parse_and_extract_file(
 		&self,
 		file: &str,
 		src: &str,
 		bump: &Bump,
 		on_stylesheet: &mut dyn for<'a> FnMut(&StyleSheet<'a>),
-	) -> Result<Vec<(Span, Self::Row)>, ()> {
+	) -> Result<Vec<(Span, Self::Row)>, ErrorRecord> {
 		let mut rows = Vec::new();
 		if self.try_content(src, bump, &mut rows) {
 			return Ok(rows);
@@ -139,24 +163,42 @@ pub trait Extract: Sized {
 			self.extract(&stylesheet, src, &mut rows);
 			Ok(rows)
 		} else {
-			if matches!(self.format(), OutputFormat::Text) {
-				for err in result.errors {
-					eprintln!("{}", crate::commands::format_diagnostic_error(&err, src, file));
-				}
-			}
-			Err(())
+			let message = result
+				.errors
+				.first()
+				.map(|e| {
+					if matches!(self.format(), OutputFormat::Text) {
+						eprintln!("{}", crate::commands::format_diagnostic_error(e, src, file));
+					}
+					e.message(src).to_string()
+				})
+				.unwrap_or_else(|| "parse failed".to_string());
+			Err(ErrorRecord { kind: ErrorKind::ParseError, message })
 		}
 	}
 
 	/// Run the command: loop files, parse, extract, render.
 	fn run(&self, config: GlobalConfig) -> CliResult {
 		let bump = Bump::default();
-		let mut json_records: Vec<Record<Self::Row>> = Vec::new();
+		let mut envelopes: Vec<FileEnvelope<Self::Row>> = Vec::new();
 		let mut first_file = true;
 
 		for (filename, mut source) in self.input().sources()? {
 			let mut src = String::new();
-			source.read_to_string(&mut src)?;
+			if let Err(e) = source.read_to_string(&mut src) {
+				match self.format() {
+					OutputFormat::Json => {
+						envelopes.push(FileEnvelope::err(
+							filename,
+							ErrorRecord { kind: ErrorKind::Io, message: e.to_string() },
+						));
+					}
+					OutputFormat::Text => {
+						eprintln!("{filename}: {e}");
+					}
+				}
+				continue;
+			}
 
 			let mut ctx = Self::FileContext::default();
 			let mut on_stylesheet = |ss: &StyleSheet| {
@@ -165,47 +207,48 @@ pub trait Extract: Sized {
 				}
 			};
 
-			let rows = match self.parse_and_extract_file(filename, &src, &bump, &mut on_stylesheet) {
-				Ok(rows) => rows,
-				Err(()) => continue,
-			};
-
-			if rows.is_empty() {
-				if matches!(self.format(), OutputFormat::Text) {
-					self.on_no_results(filename);
-				}
-				continue;
-			}
-
-			match self.format() {
-				OutputFormat::Text => {
-					if !first_file {
-						println!();
-					}
-					first_file = false;
-					if self.show_file_header() {
-						if config.colors() {
-							println!("{}", crate::magenta(filename));
+			match self.parse_and_extract_file(filename, &src, &bump, &mut on_stylesheet) {
+				Ok(rows) => match self.format() {
+					OutputFormat::Text => {
+						if rows.is_empty() {
+							self.on_no_results(filename);
 						} else {
-							println!("{}", filename);
+							if !first_file {
+								println!();
+							}
+							first_file = false;
+							if self.show_file_header() {
+								if config.colors() {
+									println!("{}", crate::magenta(filename));
+								} else {
+									println!("{}", filename);
+								}
+							}
+							self.render_file_preamble(filename, rows.len(), config.colors());
+							for (span, row) in &rows {
+								self.render_text(&ctx, filename, &src, *span, row, config.colors());
+							}
 						}
 					}
-					self.render_file_preamble(filename, rows.len(), config.colors());
-					for (span, row) in rows {
-						self.render_text(&ctx, filename, &src, span, &row, config.colors());
+					OutputFormat::Json => {
+						let records = rows
+							.into_iter()
+							.map(|(span, data)| Record { location: Location::from_span(span, &src), data })
+							.collect();
+						envelopes.push(FileEnvelope::ok(filename, records));
 					}
-				}
-				OutputFormat::Json => {
-					for (span, row) in rows {
-						let location = Location::from_span(filename, span, &src);
-						json_records.push(Record { location, data: row });
+				},
+				Err(err) => {
+					match self.format() {
+						OutputFormat::Json => envelopes.push(FileEnvelope::err(filename, err)),
+						OutputFormat::Text => {} // already printed in parse_and_extract_file
 					}
 				}
 			}
 		}
 
 		if matches!(self.format(), OutputFormat::Json) {
-			println!("{}", serde_json::to_string_pretty(&json_records)?);
+			println!("{}", serde_json::to_string_pretty(&OutputEnvelope { files: envelopes })?);
 		}
 
 		Ok(())

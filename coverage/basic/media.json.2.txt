@@ -1,13 +1,20 @@
 find --format json style-rule
 ---
-[
-  {
-    "file": "coverage/basic/media.css",
-    "line": 2,
-    "column": 2,
-    "start": 17,
-    "end": 42,
-    "type": "style-rule",
-    "text": "body {\n\t\tcolor: black;\n\t}"
-  }
-]
+{
+  "files": [
+    {
+      "file": "coverage/basic/media.css",
+      "ok": true,
+      "results": [
+        {
+          "line": 2,
+          "column": 2,
+          "start": 17,
+          "end": 42,
+          "type": "style-rule",
+          "text": "body {\n\t\tcolor: black;\n\t}"
+        }
+      ]
+    }
+  ]
+}

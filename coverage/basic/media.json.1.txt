@@ -1,15 +1,22 @@
 specificity --format json
 ---
-[
-  {
-    "file": "coverage/basic/media.css",
-    "line": 2,
-    "column": 2,
-    "start": 17,
-    "end": 21,
-    "selector": "body",
-    "a": 0,
-    "b": 0,
-    "c": 1
-  }
-]
+{
+  "files": [
+    {
+      "file": "coverage/basic/media.css",
+      "ok": true,
+      "results": [
+        {
+          "line": 2,
+          "column": 2,
+          "start": 17,
+          "end": 21,
+          "selector": "body",
+          "a": 0,
+          "b": 0,
+          "c": 1
+        }
+      ]
+    }
+  ]
+}
