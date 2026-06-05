@@ -26,6 +26,26 @@
 /// ```
 #[macro_export]
 macro_rules! assert_parse {
+	($atomset: path, $ty: ty, $str: literal, $expected: literal) => {
+		let source_text = $str;
+		let bump = ::bumpalo::Bump::default();
+		let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
+		let mut parser = $crate::Parser::new(&bump, &source_text, lexer);
+		let result = parser.parse_entirely::<$ty>().with_trivia();
+		if !result.errors.is_empty() {
+			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
+		}
+		let mut actual = ::bumpalo::collections::String::new_in(&bump);
+		{
+			let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
+			let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+			use $crate::ToCursors;
+			result.to_cursors(&mut ordered_sink);
+		}
+		if $expected.trim() != actual.trim() {
+			panic!("\n\nParse failed: did not match expected output:\n\n   parser input: {:?}\n  parser output: {:?}\n       expected: {:?}\n", source_text, actual, $expected);
+		}
+	};
 	($atomset: path, $ty: ty, $str: literal, $($ast: pat)+) => {
 		let source_text = $str;
 		let bump = ::bumpalo::Bump::default();

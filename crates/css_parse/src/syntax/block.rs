@@ -88,7 +88,14 @@ where
 			// While by default the parser will skip whitespace, the Declaration or Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
 			// Rules are parsed.
-			if p.parse_if_peek::<T![' ']>()?.is_some() || p.parse_if_peek::<T![;]>()?.is_some() {
+			// CDC (`-->`) and CDO (`<!--`) tokens are not valid component values and are not consumed by the
+			// declaration/rule/bad-declaration recovery paths below. Left unconsumed they cause a zero-progress
+			// loop and unbounded allocation. Per CSS Syntax they are only meaningful at the stylesheet top
+			// level, so discard them here, mirroring the stylesheet top-level loop.
+			if p.parse_if_peek::<T![' ']>()?.is_some()
+				|| p.parse_if_peek::<T![;]>()?.is_some()
+				|| p.parse_if_peek::<T![CdcOrCdo]>()?.is_some()
+			{
 				continue;
 			}
 			if p.at_end() {

@@ -204,4 +204,10 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Rule, "@media screen{}", Rule::Media(_));
 		assert_parse!(CssAtomSet::ATOMS, Rule, "@layer foo{}", Rule::Layer(_));
 	}
+
+	#[test]
+	fn cdc_in_unknown_rule_block() {
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->}", "={}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->", "={");
+	}
 }
