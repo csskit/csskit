@@ -4,134 +4,134 @@ members = ["crates/*"]
 exclude = ["packages/csskit_zed"]
 
 [workspace.package]
+version = "0.0.24"  # @release
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)"]
-description = "Refreshing CSS!"
 edition = "2024"
+description = "Refreshing CSS!"
 homepage = "https://csskit.rs"
-keywords = ["CSS", "parser"]
-license = "MIT"
 repository = "https://github.com/csskit/csskit"
-version = "0.0.24"                                      #@release
+license = "MIT"
+keywords = ["CSS", "parser"]
 
 [workspace.dependencies]
+chromashift = { path = "crates/chromashift", version = "0.0.24" }  # @release
+css_ast = { path = "crates/css_ast", version = "0.0.24" }  # @release
+css_feature_data = { path = "crates/css_feature_data", version = "0.0.24" }  # @release
+css_lexer = { path = "crates/css_lexer", version = "0.0.24" }  # @release
+css_parse = { path = "crates/css_parse", version = "0.0.24" }  # @release
+css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.24" }  # @release
 # Local packages
-csskit = { version = "0.0.24", path = "crates/csskit" }                                           #@release
-csskit_derives = { version = "0.0.24", path = "crates/csskit_derives" }                           #@release
-csskit_proc_macro = { version = "0.0.24", path = "crates/csskit_proc_macro" }                     #@release
-css_value_definition_parser = { version = "0.0.24", path = "crates/css_value_definition_parser" } #@release
-css_parse = { version = "0.0.24", path = "crates/css_parse" }                                     #@release
-css_lexer = { version = "0.0.24", path = "crates/css_lexer" }                                     #@release
-css_ast = { version = "0.0.24", path = "crates/css_ast" }                                         #@release
-derive_atom_set = { version = "0.0.24", path = "crates/derive_atom_set" }                         #@release
-css_feature_data = { version = "0.0.24", path = "crates/css_feature_data" }                       #@release
-csskit_source_finder = { version = "0.0.24", path = "crates/csskit_source_finder" }               #@release
-csskit_transform = { version = "0.0.24", path = "crates/csskit_transform" }                       #@release
-csskit_highlight = { version = "0.0.24", path = "crates/csskit_highlight" }                       #@release
-csskit_lsp = { version = "0.0.24", path = "crates/csskit_lsp" }                                   #@release
-csskit_ast = { version = "0.0.24", path = "crates/csskit_ast" }                                   #@release
-chromashift = { version = "0.0.24", path = "crates/chromashift" }                                 #@release
-csskit_spec_generator = { version = "0.0.0", path = "crates/csskit_spec_generator" }
+csskit = { path = "crates/csskit", version = "0.0.24" }  # @release
+csskit_ast = { path = "crates/csskit_ast", version = "0.0.24" }  # @release
+csskit_derives = { path = "crates/csskit_derives", version = "0.0.24" }  # @release
+csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.24" }  # @release
+csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.24" }  # @release
+csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.24" }  # @release
+csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.24" }  # @release
+csskit_spec_generator = { path = "crates/csskit_spec_generator", version = "0.0.0" }
+csskit_transform = { path = "crates/csskit_transform", version = "0.0.24" }  # @release
+derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.24" }  # @release
 
 # Memory
-allocator-api2 = { version = "0.2.21" } # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
-bumpalo = { version = "3.19.0" }
+allocator-api2 = { version = "0.4.0" }  # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
+bumpalo = { version = "3.20.3" }
 
 # Data structure libraries/helpers
 bitmask-enum = { version = "2.2.5" }
 fnv = { version = "1.0.7" }
-indexmap = { version = "2.12.1" }
+indexmap = { version = "2.14.0" }
 itertools = { version = "0.14.0" }
+memchr = { version = "2.8.1" }
+phf = { version = "0.13.1" }
 ropey = { version = "1.6.1" }
 smallvec = { version = "1.15.1" }
-strum = { version = "0.27.2" }
-memchr = { version = "2.8.0" }
-phf = { version = "0.13.1" }
+strum = { version = "0.28.0" }
 
+anstyle = { version = "1.0.14" }
 # CLI
-clap = { version = "4.5.48" }
+clap = { version = "4.6.1" }
 glob = { version = "0.3.3" }
+owo-colors = { version = "4.3.0" }
 project-root = { version = "0.2.2" }
-anstyle = { version = "1.0.13" }
-owo-colors = { version = "4" }
 strsim = { version = "0.11.1" }
 
+httparse = { version = "1.10.1" }
 # LSP packages
 lsp-types = { version = "0.97.0" }
-httparse = { version = "1.10.1" }
 
 # Multithreading
 crossbeam-channel = { version = "0.5.15" }
-dashmap = { version = "6.1.0" }
+dashmap = { version = "6.2.1" }
 
+console = { version = "0.16.3" }
 # Logging
-tracing = { version = "0.1.41" }
-tracing-subscriber = { version = "0.3.20" }
-console = { version = "0.16.1" }
+tracing = { version = "0.1.44" }
+tracing-subscriber = { version = "0.3.23" }
 
+anyhow = { version = "1.0.102" }
 # Error handling
 miette = { version = "7.6.0", default-features = false }
-thiserror = { version = "2.0.17" }
-anyhow = { version = "1.0.100" }
+thiserror = { version = "2.0.18" }
 
-# Procc Macro Tools
-syn = { version = "2.0.106" }
-quote = { version = "1.0.41" }
-proc-macro2 = { version = "1.0.101" }
-heck = { version = "0.5.0" }
 darling = { version = "0.23.0" }
+heck = { version = "0.5.0" }
+proc-macro2 = { version = "1.0.106" }
+quote = { version = "1.0.45" }
+# Procc Macro Tools
+syn = { version = "2.0.117" }
 synstructure = { version = "0.13.2" }
 
 # Serialization
 serde = { version = "1.0.228" }
-serde_json = { version = "1.0.145" }
-toml = { version = "1.0.0" }
+serde_json = { version = "1.0.150" }
+toml = { version = "1.1.2+spec-1.1.0" }
 
-# Testing, benchmarking
-similar = { version = "3.0.0" }
-criterion = { version = "0.5.1" }     # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
-pprof = { version = "0.15.0" }
-flate2 = { version = "1.1.4" }
-insta = { version = "1.43.2" }
-prettyplease = { version = "0.2.37" }
+criterion = { version = "0.8.2" }  # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 dhat = { version = "0.3.3" }
+flate2 = { version = "1.1.9" }
+insta = { version = "1.47.2" }
+pprof = { version = "0.15.0" }
+prettyplease = { version = "0.2.37" }
+# Testing, benchmarking
+similar = { version = "3.1.1" }
 
+grep-matcher = { version = "0.1.8" }
 # Build tools
-grep-regex = { version = "0.1.13" }
-grep-matcher = { version = "0.1.7" }
-grep-searcher = { version = "0.1.14" }
-regex = { version = "1.12.2" }
-reqwest = { version = "0.12.24" }
-scraper = { version = "0.24.0" }
-tokio = { version = "1.48.0" }
+grep-regex = { version = "0.1.14" }
+grep-searcher = { version = "0.1.16" }
+regex = { version = "1.12.3" }
+reqwest = { version = "0.13.4" }
+scraper = { version = "0.27.0" }
+tokio = { version = "1.52.3" }
 
-# Wasm
-wasm-bindgen = { version = "0.2.117" }
-serde-wasm-bindgen = { version = "0.6.5" }
 console_error_panic_hook = { version = "0.1.7" }
+serde-wasm-bindgen = { version = "0.6.5" }
+# Wasm
+wasm-bindgen = { version = "0.2.122" }
 
 # CSS Feature Data packages
-browserslist-rs = { version = "0.19" }
-chrono = { version = "0.4.42" }
-
-[profile.release]
-# Configurations explicitly listed here for clarity.
-# Using the best options for performance.
-opt-level = 3
-lto = "fat"
-codegen-units = 1
-strip = "symbols"
-debug = false
-panic = "abort"   # Let it crash and force ourselves to write safe Rust.
-
-# Use the `--profile release-debug` flag to show symbols in release mode.
-# e.g. `cargo build --profile release-debug`
-[profile.release-debug]
-inherits = "release"
-strip = false
-debug = true
+browserslist-rs = { version = "0.19.0" }
+chrono = { version = "0.4.45" }
 
 # For faster compiles during development, opt-level some dynamic libraries
 [profile.dev.package]
 criterion.opt-level = 3
 insta.opt-level = 3
 similar.opt-level = 3
+
+[profile.release]
+# Configurations explicitly listed here for clarity.
+# Using the best options for performance.
+opt-level = 3
+debug = false
+strip = "symbols"
+lto = "fat"
+panic = "abort"  # Let it crash and force ourselves to write safe Rust.
+codegen-units = 1
+
+# Use the `--profile release-debug` flag to show symbols in release mode.
+# e.g. `cargo build --profile release-debug`
+[profile.release-debug]
+inherits = "release"
+debug = true
+strip = false
