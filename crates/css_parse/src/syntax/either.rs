@@ -108,9 +108,8 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{Parser, T, assert_parse, assert_parse_error};
-	use bumpalo::Bump;
-	use css_lexer::{EmptyAtomSet, Lexer};
+	use crate::{T, assert_parse, assert_parse_error};
+	use css_lexer::EmptyAtomSet;
 
 	type IdentOrNumber = Either<T![Ident], T![Number]>;
 	type NumberOrDimension = Either<T![Number], T![Dimension]>;
@@ -136,17 +135,11 @@ mod tests {
 
 	#[test]
 	fn test_to_number_value() {
-		let bump = Bump::default();
-		let source_text = "47";
-		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let num = p.parse_entirely::<NumberOrDimension>().output.unwrap();
-		assert_eq!(num.to_number_value(), Some(47.0));
-
-		let source_text = "47px";
-		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let num = p.parse_entirely::<NumberOrDimension>().output.unwrap();
-		assert_eq!(num.to_number_value(), Some(47.0));
+		assert_parse!(EmptyAtomSet::ATOMS, NumberOrDimension, "47", |node| {
+			assert_eq!(node.to_number_value(), Some(47.0));
+		});
+		assert_parse!(EmptyAtomSet::ATOMS, NumberOrDimension, "47px", |node| {
+			assert_eq!(node.to_number_value(), Some(47.0));
+		});
 	}
 }
