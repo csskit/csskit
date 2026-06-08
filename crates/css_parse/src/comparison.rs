@@ -1,3 +1,5 @@
+use std::fmt;
+
 use crate::{Diagnostic, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors};
 use css_lexer::{Span, ToSpan};
 
@@ -63,6 +65,18 @@ impl ToCursors for Comparison {
 			Self::LessThanEqual(c) => ToCursors::to_cursors(c, s),
 			Self::Equal(c) => ToCursors::to_cursors(c, s),
 		}
+	}
+}
+
+impl fmt::Display for Comparison {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		f.write_str(match self {
+			Self::LessThan(_) => "<",
+			Self::GreaterThan(_) => ">",
+			Self::GreaterThanEqual(_) => ">=",
+			Self::LessThanEqual(_) => "<=",
+			Self::Equal(_) => "=",
+		})
 	}
 }
 
