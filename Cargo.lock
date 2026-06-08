@@ -349,7 +349,7 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
 name = "chromashift"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -542,6 +542,29 @@ dependencies = [
 ]
 
 [[package]]
+name = "criterion"
+version = "0.6.0"
+source = "registry+https://github.com/rust-lang/crates.io-index"
+checksum = "3bf7af66b0989381bd0be551bd7cc91912a655a58c6918420c9527b1fd8b4679"
+dependencies = [
+ "anes",
+ "cast",
+ "ciborium",
+ "clap",
+ "criterion-plot",
+ "itertools 0.13.0",
+ "num-traits",
+ "oorandom",
+ "plotters",
+ "rayon",
+ "regex",
+ "serde",
+ "serde_json",
+ "tinytemplate",
+ "walkdir",
+]
+
+[[package]]
 name = "criterion-plot"
 version = "0.5.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -593,13 +616,13 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
  "chromashift",
  "console",
- "criterion",
+ "criterion 0.6.0",
  "css_feature_data",
  "css_lexer",
  "css_parse",
@@ -626,7 +649,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -635,13 +658,13 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
  "bumpalo",
  "console",
- "criterion",
+ "criterion 0.6.0",
  "derive_atom_set",
  "dhat",
  "fnv",
@@ -657,7 +680,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -675,7 +698,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "css_lexer",
  "heck",
@@ -689,7 +712,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "anstyle",
  "bumpalo",
@@ -714,11 +737,11 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
- "criterion",
+ "criterion 0.6.0",
  "css_ast",
  "css_lexer",
  "css_parse",
@@ -733,7 +756,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "darling",
  "heck",
@@ -748,7 +771,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -767,12 +790,12 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
  "console",
- "criterion",
+ "criterion 0.6.0",
  "crossbeam-channel",
  "css_ast",
  "css_lexer",
@@ -798,7 +821,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -814,7 +837,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "glob",
  "grep-matcher",
@@ -830,7 +853,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "anyhow",
  "clap",
@@ -852,12 +875,12 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
  "chromashift",
- "criterion",
+ "criterion 0.6.0",
  "css_ast",
  "css_lexer",
  "css_parse",
@@ -871,7 +894,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "bumpalo",
  "console_error_panic_hook",
@@ -969,7 +992,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.23"
+version = "0.0.24"
 dependencies = [
  "heck",
  "itertools 0.14.0",
@@ -2340,7 +2363,7 @@ dependencies = [
  "aligned-vec",
  "backtrace",
  "cfg-if",
- "criterion",
+ "criterion 0.5.1",
  "findshlibs",
  "inferno",
  "libc",
