@@ -30,7 +30,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<WhiteSpaceCollapseStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<WordBreakStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<WordSpacingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<WordWrapStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<OverflowWrapStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<WrapAfterStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<WrapBeforeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<WrapInsideStyleValue>(), 16);
