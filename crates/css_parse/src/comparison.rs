@@ -1,4 +1,5 @@
 use crate::{Diagnostic, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors};
+use css_lexer::{Span, ToSpan};
 
 /// This enum represents a set of comparison operators, used in Ranged Media Features (see
 /// [RangedFeature][crate::RangedFeature]), and could be used in other parts of a CSS-alike language. This isn't a
@@ -61,6 +62,18 @@ impl ToCursors for Comparison {
 			Self::GreaterThanEqual(c) => ToCursors::to_cursors(c, s),
 			Self::LessThanEqual(c) => ToCursors::to_cursors(c, s),
 			Self::Equal(c) => ToCursors::to_cursors(c, s),
+		}
+	}
+}
+
+impl ToSpan for Comparison {
+	fn to_span(&self) -> Span {
+		match self {
+			Self::LessThan(c) => c.to_span(),
+			Self::GreaterThan(c) => c.to_span(),
+			Self::GreaterThanEqual(c) => c.to_span(),
+			Self::LessThanEqual(c) => c.to_span(),
+			Self::Equal(c) => c.to_span(),
 		}
 	}
 }
