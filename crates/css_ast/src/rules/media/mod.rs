@@ -434,6 +434,7 @@ mod tests {
 		assert_visits!(
 			"@media (min-width: 768px) { body { color: red; } }",
 			MediaRule,
+			WidthMediaFeature,
 			Length,
 			StyleRule,
 			SelectorList,
@@ -448,6 +449,7 @@ mod tests {
 			"@media screen and (min-width: 768px) { body { color: red; } }",
 			MediaRule,
 			MediaType,
+			WidthMediaFeature,
 			Length,
 			StyleRule,
 			SelectorList,

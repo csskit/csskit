@@ -48,6 +48,10 @@ macro_rules! visit_trait {
 
 			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
 			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
+
+			fn visit_feature<T: FeatureMetadata + QueryableNode>(&mut self, _node: &T) {}
+			fn exit_feature<T: FeatureMetadata + QueryableNode>(&mut self, _node: &T) {}
+
 			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn exit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
 			fn visit_string(&mut self, _str: &token_macros::String) {}
@@ -220,6 +224,14 @@ impl Visitable for token_macros::Number {
 }
 
 impl VisitableMut for token_macros::Number {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
+impl Visitable for token_macros::Any {
+	fn accept<V: Visit>(&self, _: &mut V) {}
+}
+
+impl VisitableMut for token_macros::Any {
 	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
 }
 

@@ -6,13 +6,16 @@ use crate::units::CSSFloat;
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozDevicePixelRatio)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozDevicePixelRatioMediaFeature{CssAtomSet::_MozDevicePixelRatio | CssAtomSet::_MozMinDevicePixelRatio | CssAtomSet::_MozMaxDevicePixelRatio, CSSFloat}
 );
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum MozDeviceOrientationMediaFeatureKeyword {
 	#[atom(CssAtomSet::Portrait)]
 	Portrait(T![Ident]),
@@ -23,7 +26,9 @@ pub enum MozDeviceOrientationMediaFeatureKeyword {
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozDeviceOrientation)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozDeviceOrientationMediaFeature{CssAtomSet::_MozDeviceOrientation, MozDeviceOrientationMediaFeatureKeyword}
 );
@@ -31,7 +36,9 @@ discrete_feature!(
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozMacGraphiteTheme)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozMacGraphiteThemeMediaFeature{CssAtomSet::_MozMacGraphiteTheme}
 );
@@ -39,7 +46,9 @@ boolean_feature!(
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozMaemoClassicTheme)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozMaemoClassicMediaFeature{CssAtomSet::_MozMaemoClassicTheme}
 );
@@ -47,13 +56,16 @@ boolean_feature!(
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozMaemoClassicTheme)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozImagesInMenusMediaFeature{CssAtomSet::_MozMaemoClassicTheme}
 );
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum MozOsVersionMediaFeatureKeyword {
 	#[atom(CssAtomSet::WindowsVista)]
 	WindowsVista(T![Ident]),
@@ -70,7 +82,9 @@ pub enum MozOsVersionMediaFeatureKeyword {
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozOsVersion)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozOsVersionMediaFeature{CssAtomSet::_MozOsVersion, MozOsVersionMediaFeatureKeyword}
 );
@@ -78,7 +92,9 @@ discrete_feature!(
 boolean_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::_MozTouchEnabled)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MozTouchEnabledMediaFeature{CssAtomSet::_MozTouchEnabled}
 );

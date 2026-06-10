@@ -6,6 +6,7 @@ mod attributes;
 mod css_feature;
 mod darling_ext;
 mod declaration_metadata;
+mod feature_metadata;
 mod field_view;
 mod into_cursor;
 mod node_with_metadata;
@@ -67,6 +68,11 @@ pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 #[proc_macro_derive(Visitable, attributes(visit, queryable))]
 pub fn derive_visitable(stream: TokenStream) -> TokenStream {
 	run(stream, visitable::derive)
+}
+
+#[proc_macro_derive(FeatureMetadata, attributes(feature_metadata))]
+pub fn derive_feature_metadata(stream: TokenStream) -> TokenStream {
+	run(stream, feature_metadata::derive)
 }
 
 #[proc_macro_derive(NodeWithMetadata, attributes(metadata))]

@@ -5,7 +5,9 @@ use css_parse::{BumpBox, discrete_feature, ranged_feature};
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::Width)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum WidthContainerFeature{CssAtomSet::Width, Length}
 );
@@ -13,7 +15,9 @@ ranged_feature!(
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::Height)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum HeightContainerFeature{CssAtomSet::Height, Length}
 );
@@ -21,7 +25,9 @@ ranged_feature!(
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::InlineSize)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum InlineSizeContainerFeature{CssAtomSet::InlineSize, Length}
 );
@@ -29,7 +35,9 @@ ranged_feature!(
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::BlockSize)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum BlockSizeContainerFeature{CssAtomSet::BlockSize, Length}
 );
@@ -37,7 +45,9 @@ ranged_feature!(
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::AspectRatio)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum AspectRatioContainerFeature{CssAtomSet::AspectRatio, Ratio}
 );
@@ -56,7 +66,9 @@ pub enum OrientationContainerFeatureKeyword {
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::Orientation)]
+	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum OrientationContainerFeature{CssAtomSet::Orientation, OrientationContainerFeatureKeyword}
 );
@@ -194,7 +206,7 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ScrollStateFeature {
 	Stuck(
