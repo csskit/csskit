@@ -226,28 +226,17 @@ mod tests {
 	fn test_chromashift() {
 		use super::ToChromashift;
 		use crate::CssAtomSet;
-		use bumpalo::Bump;
 		use chromashift::{Hex, Named, Srgb};
-		use css_lexer::Lexer;
-		use css_parse::Parser;
-		let bump = Bump::default();
+		use css_parse::assert_parse;
 
-		let source_text = "red";
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let color = p.parse_entirely::<Color>().output.unwrap().to_chromashift();
-		assert_eq!(color, Some(chromashift::Color::Named(Named::Red)));
-
-		let source_text = "#f00";
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let color = p.parse_entirely::<Color>().output.unwrap().to_chromashift();
-		assert_eq!(color, Some(chromashift::Color::Hex(Hex::new(0xFF0000FF))));
-
-		let source_text = "rgb(255, 0, 0)";
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let color = p.parse_entirely::<Color>().output.unwrap().to_chromashift();
-		assert_eq!(color, Some(chromashift::Color::Srgb(Srgb::new(255, 0, 0, 100.0))));
+		assert_parse!(CssAtomSet::ATOMS, Color, "red", |node| {
+			assert_eq!(node.to_chromashift(), Some(chromashift::Color::Named(Named::Red)));
+		});
+		assert_parse!(CssAtomSet::ATOMS, Color, "#f00", |node| {
+			assert_eq!(node.to_chromashift(), Some(chromashift::Color::Hex(Hex::new(0xFF0000FF))));
+		});
+		assert_parse!(CssAtomSet::ATOMS, Color, "rgb(255, 0, 0)", |node| {
+			assert_eq!(node.to_chromashift(), Some(chromashift::Color::Srgb(Srgb::new(255, 0, 0, 100.0))));
+		});
 	}
 }
