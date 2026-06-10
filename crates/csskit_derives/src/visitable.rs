@@ -68,6 +68,21 @@ fn has_queryable_skip(attrs: &[Attribute]) -> bool {
 	})
 }
 
+/// Returns true if `#[derive(... FeatureMetadata ...)]` is present on the type,
+/// indicating `visit_feature`/`exit_feature` calls should be emitted in `accept()`.
+fn has_feature_metadata(attrs: &[Attribute]) -> bool {
+	attrs.iter().any(|attr| {
+		if !attr.path().is_ident("derive") {
+			return false;
+		}
+		let Meta::List(list) = &attr.meta else { return false };
+		// Parse as comma-separated paths and check for FeatureMetadata
+		list.parse_args_with(syn::punctuated::Punctuated::<syn::Path, syn::Token![,]>::parse_terminated)
+			.map(|paths| paths.iter().any(|p| p.is_ident("FeatureMetadata")))
+			.unwrap_or(false)
+	})
+}
+
 fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector) -> TokenStream {
 	match &s.ast().data {
 		Data::Struct(ds) => {
@@ -165,6 +180,12 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		(quote! {}, quote! {})
 	};
 
+	let (visit_feature, exit_feature) = if has_feature_metadata(&input.attrs) {
+		(quote! { v.visit_feature(self); }, quote! { v.exit_feature(self); })
+	} else {
+		(quote! {}, quote! {})
+	};
+
 	let mut s = Structure::try_new(&input)?;
 	s.add_bounds(AddBounds::None);
 
@@ -212,9 +233,11 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			fn accept<V: crate::Visit>(&self, v: &mut V) {
 				use crate::Visitable;
 				#visit_queryable
+				#visit_feature
 				#visit
 				#body
 				#exit
+				#exit_feature
 				#exit_queryable
 			}
 		}

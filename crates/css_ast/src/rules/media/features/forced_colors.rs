@@ -3,6 +3,8 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::ForcedColors)]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum ForcedColorsMediaFeature{CssAtomSet::ForcedColors, ForcedColorsMediaFeatureKeyword}

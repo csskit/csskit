@@ -3,6 +3,8 @@ use super::prelude::*;
 discrete_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+	#[derive(csskit_derives::FeatureMetadata)]
+	#[feature_metadata(CssAtomSet::AnyHover)]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum AnyHoverMediaFeature{CssAtomSet::AnyHover, AnyHoverMediaFeatureKeyword}
@@ -22,7 +24,7 @@ pub enum AnyHoverMediaFeatureKeyword {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::CssAtomSet;
+	use crate::{ConditionalFeature, CssAtomSet, FeatureMetadata};
 	use css_parse::assert_parse;
 
 	#[test]
@@ -35,5 +37,25 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, AnyHoverMediaFeature, "(any-hover)");
 		assert_parse!(CssAtomSet::ATOMS, AnyHoverMediaFeature, "(any-hover:hover)");
 		assert_parse!(CssAtomSet::ATOMS, AnyHoverMediaFeature, "(any-hover:none)");
+	}
+
+	#[test]
+	fn test_feature_metadata_bare() {
+		assert_parse!(CssAtomSet::ATOMS, AnyHoverMediaFeature, "(any-hover)", |node| {
+			assert!(matches!(
+				node.feature_metadata(),
+				ConditionalFeature::Plain { name: CssAtomSet::AnyHover, value: None }
+			));
+		});
+	}
+
+	#[test]
+	fn test_feature_metadata_with_value() {
+		assert_parse!(CssAtomSet::ATOMS, AnyHoverMediaFeature, "(any-hover:hover)", |node| {
+			assert!(matches!(
+				node.feature_metadata(),
+				ConditionalFeature::Plain { name: CssAtomSet::AnyHover, value: Some(_) }
+			));
+		});
 	}
 }
