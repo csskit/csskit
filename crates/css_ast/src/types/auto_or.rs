@@ -51,9 +51,7 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use crate::Length;
-	use bumpalo::Bump;
-	use css_lexer::Lexer;
-	use css_parse::{Parser, T, assert_parse, assert_parse_error};
+	use css_parse::{T, assert_parse, assert_parse_error};
 
 	type AutoOrIdent = AutoOr<T![Ident]>;
 	type AutoOrNumber = AutoOr<T![Number]>;
@@ -82,23 +80,14 @@ mod tests {
 
 	#[test]
 	fn test_to_number_value() {
-		let bump = Bump::default();
-		let source_text = "47";
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let num = p.parse_entirely::<AutoOrNumber>().output.unwrap();
-		assert_eq!(num.to_number_value(), Some(47.0));
-
-		let source_text = "47px";
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let num = p.parse_entirely::<AutoOrLength>().output.unwrap();
-		assert_eq!(num.to_number_value(), Some(47.0));
-
-		let source_text = "auto";
-		let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
-		let num = p.parse_entirely::<AutoOrLength>().output.unwrap();
-		assert_eq!(num.to_number_value(), None);
+		assert_parse!(CssAtomSet::ATOMS, AutoOrNumber, "47", |node| {
+			assert_eq!(node.to_number_value(), Some(47.0));
+		});
+		assert_parse!(CssAtomSet::ATOMS, AutoOrLength, "47px", |node| {
+			assert_eq!(node.to_number_value(), Some(47.0));
+		});
+		assert_parse!(CssAtomSet::ATOMS, AutoOrLength, "auto", |node| {
+			assert_eq!(node.to_number_value(), None);
+		});
 	}
 }
