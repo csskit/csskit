@@ -1197,7 +1197,18 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	};
 
 	let generics = input.generics.clone();
-	let where_clause = where_collector.extend_where_clause(&generics, parse_quote! { ::css_parse::Parse<'a> });
+	let mut where_clause = where_collector.extend_where_clause(&generics, parse_quote! { ::css_parse::Parse<'a> });
+	// Add Peek<'a> predicate for each collected type param too.
+	if let Some(ref mut wc) = where_clause {
+		let additional = where_collector.extend_where_clause(&generics, parse_quote! { ::css_parse::Peek<'a> });
+		if let Some(additional) = additional {
+			for pred in additional.predicates {
+				if !wc.predicates.iter().any(|p| p == &pred) {
+					wc.predicates.push(pred);
+				}
+			}
+		}
+	}
 
 	Ok(quote! {
 		#[automatically_derived]
