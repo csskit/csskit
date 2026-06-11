@@ -247,10 +247,50 @@ impl<T, const VALUE: i32> Exact<T, VALUE> {
 	}
 }
 
+/// A non-empty collection wrapper.
+///
+/// Wraps any collection type that derefs to a slice (`Deref<Target = [_]>`)
+/// and validates at parse time that the collection contains at least one item.
+///
+/// Works with [`bumpalo::collections::Vec`] and any other slice-backed type.
+#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[derive(NodeWithMetadata)]
+pub struct NonEmpty<T>(pub T);
+
+impl<'a, T, Item> Parse<'a> for NonEmpty<T>
+where
+	T: Peek<'a> + Parse<'a> + std::ops::Deref<Target = [Item]>,
+{
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let cursor = p.peek_n(1);
+		let value = p.parse::<T>()?;
+		if value.is_empty() {
+			Err(Diagnostic::new(cursor, <Diagnostic as CssDiagnostic>::empty_collection))?;
+		}
+		Ok(Self(value))
+	}
+}
+
+impl<T> NonEmpty<T> {
+	pub fn inner(&self) -> &T {
+		&self.0
+	}
+
+	pub fn into_inner(self) -> T {
+		self.0
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
+	use bumpalo::collections::Vec;
 	use css_parse::{T, assert_parse, assert_parse_error};
 
 	type ExactOne = Exact<T![Number], 1>;
@@ -309,5 +349,20 @@ mod tests {
 	#[test]
 	fn test_non_zero_rejects_zero() {
 		assert_parse_error!(CssAtomSet::ATOMS, NonZero<T![Number]>, "0");
+	}
+
+	#[test]
+	fn test_non_empty_accepts_one() {
+		assert_parse!(CssAtomSet::ATOMS, NonEmpty<Vec<T![Ident]>>, "foo");
+	}
+
+	#[test]
+	fn test_non_empty_accepts_multiple() {
+		assert_parse!(CssAtomSet::ATOMS, NonEmpty<Vec<T![Ident]>>, "foo bar");
+	}
+
+	#[test]
+	fn test_non_empty_rejects_empty() {
+		assert_parse_error!(CssAtomSet::ATOMS, NonEmpty<Vec<T![Ident]>>, "");
 	}
 }

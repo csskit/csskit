@@ -13,6 +13,7 @@ pub trait CssDiagnostic {
 	fn reserved_keyframe_name(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn non_negative(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn positive(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
+	fn empty_collection(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta;
 }
 
 impl CssDiagnostic for Diagnostic {
@@ -136,6 +137,15 @@ impl CssDiagnostic for Diagnostic {
 			code: "Positive",
 			message: format!("Value must be positive, but saw `{}`", diagnostic.start_cursor.token().value()),
 			help: "This property requires a value > 0. Use a positive value.".into(),
+			labels: vec![],
+		}
+	}
+
+	fn empty_collection(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "EmptyCollection",
+			message: "Expected at least one item but found none".to_string(),
+			help: "This value requires one or more items.".into(),
 			labels: vec![],
 		}
 	}
