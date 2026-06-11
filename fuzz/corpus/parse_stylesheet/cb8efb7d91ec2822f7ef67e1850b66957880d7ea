@@ -1,0 +1,234 @@
+rs
+  */
+  .palm-one-quarter, .palm-two-eighths, .palm-three-twelfths {
+    width: 25%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    width: 75%; }
+
+  /**
+  * Fifths
+  */
+  .palm-one-fifth, .palm-two-tenths {
+    width: 20%; }
+
+  .palm-two-fifths, .palm-four-tenths {
+    width: 40%; }
+
+  .palm-three-fifths, .palm-six-tenths {
+    width: 60%; }
+
+  .palm-four-fifths, .palm-eight-tenths {
+    width: 80%; }
+
+  /**
+  * Sixths
+  */
+  .palm-one-sixth, .palm-two-twelfths {
+    width: 16.666%; }
+
+  .palm-five-sixths, .palm-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .palm-one-eighth {
+    width: 12.5%; }
+
+  .palm-three-eighths {
+    width: 37.5%; }
+
+  .palm-five-eighths {
+    width: 62.5%; }
+
+  .palm-seven-eighths {
+    width: 87.5%; }
+
+  /**
+  * Tenths
+  */
+  .palm-one-tenth {
+    width: 10%; }
+
+  .palm-three-tenths {
+    width: 30%; }
+
+  .palm-seven-tenths {
+    width: 70%; }
+
+  .palm-nine-tenths {
+    width: 90%; }
+
+  /**
+  * Twelfths
+  */
+  .palm-one-twelfth {
+    width: 8.333%; }
+
+  .palm-five-twelfths {
+    width: 41.666%; }
+
+  .palm-seven-twelfths {
+    width: 58.333%; }
+
+  .palm-eleven-twelfths {
+    width: 91.666%; } }
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
+  /**
+  * Whole
+  */
+  .lap-one-whole {
+    width: 100%; }
+
+  /**
+  * Halves
+  */
+  .lap-one-half, .lap-two-quarters, .lap-three-sixths, .lap-four-eighths, .lap-five-tenths, .lap-six-twelfths {
+    width: 50%; }
+
+  /**
+  * Thirds
+  */
+  .lap-one-third, .lap-two-sixths, .lap-four-twelfths {
+    width: 33.333%; }
+
+  .lap-two-thirds, .lap-four-sixths, .lap-eight-twelfths {
+    width: 66.666%; }
+
+  /**
+  * Quarters
+  */
+  .lap-one-quarter, .lap-two-eighths, .lap-three-twelfths {
+    width: 25%; }
+
+  .lap-three-quarters, .lap-six-eighths, .lap-nine-twelfths {
+    width: 75%; }
+
+  /**
+  * Fifths
+  */
+  .lap-one-fifth, .lap-two-tenths {
+    width: 20%; }
+
+  .lap-two-fifths, .lap-four-tenths {
+    width: 40%; }
+
+  .lap-three-fifths, .lap-six-tenths {
+    width: 60%; }
+
+  .lap-four-fifths, .lap-eight-tenths {
+    width: 80%; }
+
+  /**
+  * Sixths
+  */
+  .lap-one-sixth, .lap-two-twelfths {
+    width: 16.666%; }
+
+  .lap-five-sixths, .lap-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .lap-one-eighth {
+    width: 12.5%; }
+
+  .lap-three-eighths {
+    width: 37.5%; }
+
+  .lap-five-eighths {
+    width: 62.5%; }
+
+  .lap-seven-eighths {
+    width: 87.5%; }
+
+  /**
+  * Tenths
+  */
+  .lap-one-tenth {
+    width: 10%; }
+
+  .lap-three-tenths {
+    width: 30%; }
+
+  .lap-seven-tenths {
+    width: 70%; }
+
+  .lap-nine-tenths {
+    width: 90%; }
+
+  /**
+  * Twelfths
+  */
+  .lap-one-twelfth {
+    width: 8.333%; }
+
+  .lap-five-twelfths {
+    width: 41.666%; }
+
+  .lap-seven-twelfths {
+    width: 58.333%; }
+
+  .lap-eleven-twelfths {
+    width: 91.666%; } }
+@media only screen and (min-width: 481px) {
+  /**
+  * Whole
+  */
+  .lap-and-up-one-whole {
+    width: 100%; }
+
+  /**
+  * Halves
+  */
+  .lap-and-up-one-half, .lap-and-up-two-quarters, .lap-and-up-three-sixths, .lap-and-up-four-eighths, .lap-and-up-five-tenths, .lap-and-up-six-twelfths {
+    width: 50%; }
+
+  /**
+  * Thirds
+  */
+  .lap-and-up-one-third, .lap-and-up-two-sixths, .lap-and-up-four-twelfths {
+    width: 33.333%; }
+
+  .lap-and-up-two-thirds, .lap-and-up-four-sixths, .lap-and-up-eight-twelfths {
+    width: 66.666%; }
+
+  /**
+  * Quarters
+  */
+  .lap-and-up-one-quarter, .lap-and-up-two-eighths, .lap-and-up-three-twelfths {
+    width: 25%; }
+
+  .lap-and-up-three-quarters, .lap-and-up-six-eighths, .lap-and-up-nine-twelfths {
+    width: 75%; }
+
+  /**
+  * Fifths
+  */
+  .lap-and-up-one-fifth, .lap-and-up-two-tenths {
+    width: 20%; }
+
+  .lap-and-up-two-fifths, .lap-and-up-four-tenths {
+    width: 40%; }
+
+  .lap-and-up-three-fifths, .lap-and-up-six-tenths {
+    width: 60%; }
+
+  .lap-and-up-four-fifths, .lap-and-up-eight-tenths {
+    width: 80%; }
+
+  /**
+  * Sixths
+  */
+  .lap-and-up-one-sixth, .lap-and-up-two-twelfths {
+    width: 16.666%; }
+
+  .lap-and-up-five-sixths, .lap-and-up-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .lap-and-up-one-eight
