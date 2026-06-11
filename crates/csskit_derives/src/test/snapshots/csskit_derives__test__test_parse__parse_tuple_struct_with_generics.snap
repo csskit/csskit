@@ -7,6 +7,8 @@ impl<'a, T, U> ::css_parse::Parse<'a> for Pair<T, U>
 where
     T: ::css_parse::Parse<'a>,
     U: ::css_parse::Parse<'a>,
+    T: ::css_parse::Peek<'a>,
+    U: ::css_parse::Peek<'a>,
 {
     fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
     where
