@@ -264,7 +264,7 @@ mod prelude {
 	pub(crate) use css_parse::{
 		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue,
 	};
-	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, SemanticEq, ToCursors, ToSpan};
+	pub(crate) use csskit_derives::*;
 	pub(crate) use csskit_proc_macro::syntax;
 }
 

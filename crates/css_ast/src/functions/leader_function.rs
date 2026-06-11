@@ -22,7 +22,9 @@ pub struct LeaderFunction {
 /// ```text,ignore
 /// <leader-type> = dotted | solid | space | <string>
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LeaderType {
 	#[atom(CssAtomSet::Dotted)]

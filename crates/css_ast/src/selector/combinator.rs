@@ -1,5 +1,5 @@
 use css_parse::T;
-use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 /// <https://drafts.csswg.org/selectors/#combinators>
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

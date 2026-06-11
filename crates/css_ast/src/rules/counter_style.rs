@@ -2,7 +2,7 @@ use super::prelude::*;
 #[cfg(feature = "visitable")]
 use crate::visit::{NodeId, QueryableNode};
 use crate::{Computed, Inherits, PropertyGroup, Todo};
-use csskit_derives::{DeclarationMetadata, IntoCursor, Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 use csskit_proc_macro::syntax;
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#the-counter-style-rule>
@@ -32,7 +32,9 @@ impl<'a> QueryableNode for CounterStyleRule<'a> {
 	}
 }
 
-#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CounterStyleName(T![Ident]);

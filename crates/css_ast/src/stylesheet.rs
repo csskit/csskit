@@ -4,7 +4,7 @@ use css_parse::{
 	BumpBox, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule,
 	Result as ParserResult, RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
-use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 /// <https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface>
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

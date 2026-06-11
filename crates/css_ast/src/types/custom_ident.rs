@@ -4,7 +4,7 @@ use super::prelude::*;
 ///
 /// Wraps `T![Ident]`, but exists for the purposes of Visitable/VisitableMut.
 /// Excludes CSS-wide keywords: `initial`, `inherit`, `unset`, `revert`, `revert-layer`, `default`.
-#[derive(IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]

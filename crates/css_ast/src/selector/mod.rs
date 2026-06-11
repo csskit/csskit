@@ -7,7 +7,7 @@ use css_parse::{
 	CompoundSelector as CompoundSelectorTrait, Cursor, NodeMetadata, NodeWithMetadata, Parse, Parser,
 	Result as ParserResult, SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
 };
-use csskit_derives::{IntoCursor, Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 mod attribute;
 mod class;
@@ -85,13 +85,17 @@ pub type ComplexSelector<'a> = SelectorList<'a>;
 pub type ForgivingSelector<'a> = SelectorList<'a>;
 pub type RelativeSelector<'a> = SelectorList<'a>;
 
-#[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Peek, Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Id(T![Hash]);
 
-#[derive(Peek, Parse, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Peek, Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]

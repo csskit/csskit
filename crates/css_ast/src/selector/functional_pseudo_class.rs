@@ -4,7 +4,7 @@ use crate::{
 };
 use css_lexer::Kind;
 use css_parse::{CommaSeparated, Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, State, T};
-use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
 

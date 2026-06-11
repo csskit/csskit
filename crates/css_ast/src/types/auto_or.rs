@@ -3,7 +3,9 @@ use crate::CssMetadata;
 use css_parse::NodeWithMetadata;
 use css_parse::token_macros::Ident;
 
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum AutoOr<T> {
@@ -32,19 +34,6 @@ impl<T: ToNumberValue> ToNumberValue for AutoOr<T> {
 }
 
 impl<T: Copy> Copy for AutoOr<T> {}
-
-impl<T> From<AutoOr<T>> for Cursor
-where
-	T: Copy,
-	Cursor: From<T>,
-{
-	fn from(value: AutoOr<T>) -> Self {
-		match value {
-			AutoOr::Auto(ident) => ident.into(),
-			AutoOr::Some(t) => t.into(),
-		}
-	}
-}
 
 #[cfg(test)]
 mod tests {

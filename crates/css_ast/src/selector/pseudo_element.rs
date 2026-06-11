@@ -1,7 +1,7 @@
 use crate::{CssAtomSet, CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseudoElement, WebkitPseudoElement};
 use css_lexer::Kind;
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class};
-use csskit_derives::{SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 macro_rules! apply_pseudo_element {
 	($macro: ident) => {

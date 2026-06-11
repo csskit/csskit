@@ -1,11 +1,32 @@
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Result};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Result, parse_quote};
+
+use crate::WhereCollector;
 
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let ident = input.ident;
-	let generics = &mut input.generics.clone();
-	let (impl_generics, type_generics, where_clause) = generics.split_for_impl();
+	let generics = &input.generics;
+	let (impl_generics, type_generics, _) = generics.split_for_impl();
+
+	let mut wc = WhereCollector::new();
+	match &input.data {
+		Data::Struct(DataStruct { fields, .. }) => {
+			for field in fields {
+				wc.add(&field.ty);
+			}
+		}
+		Data::Enum(DataEnum { variants, .. }) => {
+			for variant in variants {
+				for field in &variant.fields {
+					wc.add(&field.ty);
+				}
+			}
+		}
+		Data::Union(_) => {}
+	}
+	let where_clause = wc.extend_where_clause(generics, parse_quote! { Into<::css_parse::Cursor> });
+
 	let body = match input.data {
 		Data::Union(_) => return Err(Error::new(ident.span(), "Cannot derive Into<Cursor> on a Union")),
 
@@ -37,32 +58,19 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			}
 		}
 	};
+
 	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics From<#ident #type_generics> for ::css_parse::Cursor #where_clause {
-			fn from(value: #ident) -> ::css_parse::Cursor {
+			fn from(value: #ident #type_generics) -> ::css_parse::Cursor {
 				#body
 			}
 		}
 
 		#[automatically_derived]
 		impl #impl_generics From<#ident #type_generics> for ::css_parse::Token #where_clause {
-			fn from(value: #ident) -> ::css_parse::Token {
-				Cursor::from(value).token()
-			}
-		}
-
-		#[automatically_derived]
-		impl #impl_generics ::css_parse::ToSpan for #ident #type_generics #where_clause {
-			fn to_span(&self) -> ::css_parse::Span {
-				Cursor::from(*self).span()
-			}
-		}
-
-		#[automatically_derived]
-		impl #impl_generics ::css_parse::SemanticEq for #ident #type_generics #where_clause {
-			fn semantic_eq(&self, other: &Self) -> bool  {
-				Cursor::from(*self).semantic_eq(&Cursor::from(*other))
+			fn from(value: #ident #type_generics) -> ::css_parse::Token {
+				::css_parse::Cursor::from(value).token()
 			}
 		}
 	})
