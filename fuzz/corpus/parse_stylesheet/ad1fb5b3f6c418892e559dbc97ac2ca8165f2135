@@ -1,0 +1,259 @@
+corporated:before {
+  content: "\f6af"; }
+
+.fa-ad:before {
+  content: "\f641"; }
+
+.fa-address-book:before {
+  content: "\f2b9"; }
+
+.fa-address-card:before {
+  content: "\f2bb"; }
+
+.fa-adjust:before {
+  content: "\f042"; }
+
+.fa-adn:before {
+  content: "\f170"; }
+
+.fa-adversal:before {
+  content: "\f36a"; }
+
+.fa-affiliatetheme:before {
+  content: "\f36b"; }
+
+.fa-air-freshener:before {
+  content: "\f5d0"; }
+
+.fa-airbnb:before {
+  content: "\f834"; }
+
+.fa-algolia:before {
+  content: "\f36c"; }
+
+.fa-align-center:before {
+  content: "\f037"; }
+
+.fa-align-justify:before {
+  content: "\f039"; }
+
+.fa-align-left:before {
+  content: "\f036"; }
+
+.fa-align-right:before {
+  content: "\f038"; }
+
+.fa-alipay:before {
+  content: "\f642"; }
+
+.fa-allergies:before {
+  content: "\f461"; }
+
+.fa-amazon:before {
+  content: "\f270"; }
+
+.fa-amazon-pay:before {
+  content: "\f42c"; }
+
+.fa-ambulance:before {
+  content: "\f0f9"; }
+
+.fa-american-sign-language-interpreting:before {
+  content: "\f2a3"; }
+
+.fa-amilia:before {
+  content: "\f36d"; }
+
+.fa-anchor:before {
+  content: "\f13d"; }
+
+.fa-android:before {
+  content: "\f17b"; }
+
+.fa-angellist:before {
+  content: "\f209"; }
+
+.fa-angle-double-down:before {
+  content: "\f103"; }
+
+.fa-angle-double-left:before {
+  content: "\f100"; }
+
+.fa-angle-double-right:before {
+  content: "\f101"; }
+
+.fa-angle-double-up:before {
+  content: "\f102"; }
+
+.fa-angle-down:before {
+  content: "\f107"; }
+
+.fa-angle-left:before {
+  content: "\f104"; }
+
+.fa-angle-right:before {
+  content: "\f105"; }
+
+.fa-angle-up:before {
+  content: "\f106"; }
+
+.fa-angry:before {
+  content: "\f556"; }
+
+.fa-angrycreative:before {
+  content: "\f36e"; }
+
+.fa-angular:before {
+  content: "\f420"; }
+
+.fa-ankh:before {
+  content: "\f644"; }
+
+.fa-app-store:before {
+  content: "\f36f"; }
+
+.fa-app-store-ios:before {
+  content: "\f370"; }
+
+.fa-apper:before {
+  content: "\f371"; }
+
+.fa-apple:before {
+  content: "\f179"; }
+
+.fa-apple-alt:before {
+  content: "\f5d1"; }
+
+.fa-apple-pay:before {
+  content: "\f415"; }
+
+.fa-archive:before {
+  content: "\f187"; }
+
+.fa-archway:before {
+  content: "\f557"; }
+
+.fa-arrow-alt-circle-down:before {
+  content: "\f358"; }
+
+.fa-arrow-alt-circle-left:before {
+  content: "\f359"; }
+
+.fa-arrow-alt-circle-right:before {
+  content: "\f35a"; }
+
+.fa-arrow-alt-circle-up:before {
+  content: "\f35b"; }
+
+.fa-arrow-circle-down:before {
+  content: "\f0ab"; }
+
+.fa-arrow-circle-left:before {
+  content: "\f0a8"; }
+
+.fa-arrow-circle-right:before {
+  content: "\f0a9"; }
+
+.fa-arrow-circle-up:before {
+  content: "\f0aa"; }
+
+.fa-arrow-down:before {
+  content: "\f063"; }
+
+.fa-arrow-left:before {
+  content: "\f060"; }
+
+.fa-arrow-right:before {
+  content: "\f061"; }
+
+.fa-arrow-up:before {
+  content: "\f062"; }
+
+.fa-arrows-alt:before {
+  content: "\f0b2"; }
+
+.fa-arrows-alt-h:before {
+  content: "\f337"; }
+
+.fa-arrows-alt-v:before {
+  content: "\f338"; }
+
+.fa-artstation:before {
+  content: "\f77a"; }
+
+.fa-assistive-listening-systems:before {
+  content: "\f2a2"; }
+
+.fa-asterisk:before {
+  content: "\f069"; }
+
+.fa-asymmetrik:before {
+  content: "\f372"; }
+
+.fa-at:before {
+  content: "\f1fa"; }
+
+.fa-atlas:before {
+  content: "\f558"; }
+
+.fa-atlassian:before {
+  content: "\f77b"; }
+
+.fa-atom:before {
+  content: "\f5d2"; }
+
+.fa-audible:before {
+  content: "\f373"; }
+
+.fa-audio-description:before {
+  content: "\f29e"; }
+
+.fa-autoprefixer:before {
+  content: "\f41c"; }
+
+.fa-avianex:before {
+  content: "\f374"; }
+
+.fa-aviato:before {
+  content: "\f421"; }
+
+.fa-award:before {
+  content: "\f559"; }
+
+.fa-aws:before {
+  content: "\f375"; }
+
+.fa-baby:before {
+  content: "\f77c"; }
+
+.fa-baby-carriage:before {
+  content: "\f77d"; }
+
+.fa-backspace:before {
+  content: "\f55a"; }
+
+.fa-backward:before {
+  content: "\f04a"; }
+
+.fa-bacon:before {
+  content: "\f7e5"; }
+
+.fa-bacteria:before {
+  content: "\e059"; }
+
+.fa-bacterium:before {
+  content: "\e05a"; }
+
+.fa-bahai:before {
+  content: "\f666"; }
+
+.fa-balance-scale:before {
+  content: "\f24e"; }
+
+.fa-balance-scale-left:before {
+  content: "\f515"; }
+
+.fa-balance-scale-right:before {
+  content: "\f516"; }
+
+.fa-ban:bef

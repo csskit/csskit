@@ -9,6 +9,7 @@ hyperfine = "latest"
 "cargo:git-cliff" = "2.10.1"
 "cargo:samply" = "0.13.1"
 "cargo:wasm-bindgen-cli" = "0.2.117"
+"cargo:cargo-fuzz" = "0.13.1"
 
 [tasks.clean]
 confirm = 'Are you sure?'
@@ -69,6 +70,11 @@ run = ["cargo run -p csskit_spec_generator generate-all"]
 [tasks.generate-property-atoms]
 description = "Generate property_atoms.rs from CSS specs"
 run = ["cargo run -p csskit_spec_generator generate-property-atoms"]
+
+[tasks.fuzz]
+description = "Run the fuzzer (Ctrl-C to stop)"
+dir = "{{config_root}}/fuzz"
+run = "cargo +nightly fuzz run parse_stylesheet corpus/parse_stylesheet --target x86_64-unknown-linux-gnu -- -max_len=4096 -artifact_prefix=artifacts/parse_stylesheet/"
 
 [tasks.profile]
 depends = ["build -p csskit --profile release-debug"]
