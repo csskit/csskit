@@ -177,17 +177,19 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, pat
 	let manual_matcher = build_manual_impl_matcher();
 	let mut searcher = SearcherBuilder::new().line_number(false).multi_line(true).build();
 	let entries: Vec<_> = glob(dir).unwrap().filter_map(|p| p.ok()).collect();
+	let mut all: HashSet<VisitableNode> = HashSet::new();
 	// First pass: find types with derive(Visitable)
 	for entry in &entries {
 		path_callback(entry);
-		let context = NodeMatcher { matcher: &attr_matcher, matches };
+		let context = NodeMatcher { matcher: &attr_matcher, matches: &mut all };
 		searcher.search_path(&attr_matcher, entry, context).unwrap();
 	}
 	// Second pass: find types with manual impl VisitableTrait
 	for entry in &entries {
-		let context = ManualImplMatcher { matcher: &manual_matcher, matches };
+		let context = ManualImplMatcher { matcher: &manual_matcher, matches: &mut all };
 		searcher.search_path(&manual_matcher, entry, context).unwrap();
 	}
+	matches.extend(all.into_iter().filter(|node| !matches!(node.visit_mode, VisitMode::Children)));
 }
 
 /// Find types that are queryable (have `#[visit]`, `#[visit(self)]`, or `#[visit(all)]` - not skip/children)
