@@ -2,7 +2,7 @@ use crate::{CssAtomSet, CssDiagnostic, DirValue};
 use css_parse::{
 	Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element, syntax::CommaSeparated,
 };
-use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 pseudo_element!(
 	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes

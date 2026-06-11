@@ -1,5 +1,5 @@
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{IntoCursor, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 use super::Tag;
 
@@ -77,7 +77,7 @@ impl<'a> Parse<'a> for NamespacePrefix {
 	}
 }
 
-#[derive(Peek, ToCursors, IntoCursor, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespaceTag {
 	Wildcard(T![*]),

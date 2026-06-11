@@ -1,6 +1,6 @@
 use crate::{CompoundSelector, CssAtomSet, CssDiagnostic};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element};
-use csskit_derives::{SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 pseudo_element!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>

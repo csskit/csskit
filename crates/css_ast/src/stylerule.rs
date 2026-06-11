@@ -6,7 +6,7 @@ use css_parse::{
 	BumpBox, Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
 	Result as ParserResult, RuleVariants,
 };
-use csskit_derives::{Parse, Peek, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///

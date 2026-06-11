@@ -3,7 +3,9 @@ use crate::CssMetadata;
 use css_parse::NodeWithMetadata;
 use css_parse::token_macros::Ident;
 
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum NormalOr<T> {
@@ -23,19 +25,6 @@ impl<T: NodeWithMetadata<CssMetadata>> NodeWithMetadata<CssMetadata> for NormalO
 }
 
 impl<T: Copy> Copy for NormalOr<T> {}
-
-impl<T> From<NormalOr<T>> for Cursor
-where
-	T: Copy,
-	Cursor: From<T>,
-{
-	fn from(value: NormalOr<T>) -> Self {
-		match value {
-			NormalOr::Normal(ident) => ident.into(),
-			NormalOr::Some(t) => t.into(),
-		}
-	}
-}
 
 #[cfg(test)]
 mod tests {

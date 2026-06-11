@@ -11,7 +11,9 @@ use super::prelude::*;
 ///                         | -ms-flex | -ms-inline-flex | -ms-flexbox | -ms-inline-flexbox | -ms-grid
 ///                         | -o-flex
 /// ```
-#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum DisplayLegacyVendor {

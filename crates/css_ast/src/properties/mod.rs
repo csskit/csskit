@@ -7,7 +7,7 @@ use css_parse::{
 	AtomSet, ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser,
 	Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
-use csskit_derives::{Parse, SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 use std::{fmt::Debug, hash::Hash};
 
 // The build.rs generates a list of CSS properties from the value mods

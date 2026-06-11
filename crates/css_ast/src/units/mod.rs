@@ -31,7 +31,7 @@ mod prelude {
 	pub(crate) use css_parse::{
 		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue,
 	};
-	pub(crate) use csskit_derives::{IntoCursor, Parse, Peek, ToCursors};
+	pub(crate) use csskit_derives::*;
 }
 
 pub trait AbsoluteUnit {

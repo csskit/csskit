@@ -1,6 +1,6 @@
 use crate::CssAtomSet;
 use css_parse::{Diagnostic, pseudo_class, pseudo_element};
-use csskit_derives::{SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 pseudo_element!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

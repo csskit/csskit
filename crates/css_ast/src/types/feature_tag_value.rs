@@ -13,7 +13,9 @@ use crate::{CSSInt, NonNegative, OpentypeTag};
 pub struct FeatureTagValue(pub OpentypeTag, pub Option<FeatureTagToggle>);
 
 /// The optional value for a feature tag: `<integer [0,∞]> | on | off`
-#[derive(Parse, Peek, IntoCursor, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(
+	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub enum FeatureTagToggle {

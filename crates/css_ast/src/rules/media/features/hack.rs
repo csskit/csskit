@@ -1,6 +1,6 @@
 use crate::CssAtomSet;
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::{SemanticEq, ToCursors, ToSpan};
+use csskit_derives::*;
 
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
