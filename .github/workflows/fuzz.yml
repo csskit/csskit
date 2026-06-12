@@ -81,16 +81,17 @@ jobs:
         run: |
           BRANCH="fuzz/findings-$(date +%Y%m%d-%H%M%S)"
           DATE=$(date +%Y-%m-%d)
+          RUN_URL="${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}"
           echo "FUZZ_BRANCH=${BRANCH}" >> $GITHUB_ENV
           echo "FUZZ_DATE=${DATE}" >> $GITHUB_ENV
-          echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
-
+          echo "RUN_URL=${RUN_URL}" >> $GITHUB_ENV
           git switch -c "$BRANCH"
           shopt -s nullglob
           for f in fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
             cp "$f" "fuzz/corpus/parse_stylesheet/$(basename "$f")"
           done
           git add fuzz/corpus/parse_stylesheet/
+          printf 'Nightly fuzz run found new findings.\n\nReproduce: `mise run fuzz`. Fix the bug, add a regression test, then merge.\n\nGHA run: %s\n' "${RUN_URL}" > /tmp/fuzz-pr-body-rendered.md
 
       - name: Open PR with findings
         if: steps.findings.outputs.found == 'true'
@@ -100,9 +101,4 @@ jobs:
           branch: ${{ env.FUZZ_BRANCH }}
           commit-message: "fuzz: add new findings from nightly run ${{ env.FUZZ_DATE }}"
           title: "fuzz: new parser findings ${{ env.FUZZ_DATE }}"
-          body: |
-            Nightly fuzz run found new findings.
-
-            Reproduce: `mise run fuzz`. Fix the bug, add a regression test, then merge.
-
-            GHA run: ${RUN_URL}
+          body-file: /tmp/fuzz-pr-body-rendered.md
