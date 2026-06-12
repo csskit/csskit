@@ -191,6 +191,9 @@ where
 	pub fn equals_atom(&self, c: Cursor, atom: &'static dyn DynAtomSet) -> bool {
 		let mut cursor_bits = c.atom_bits();
 		if cursor_bits == 0 {
+			if c != KindSet::ATOM_LIKE {
+				return false;
+			}
 			let source_cursor = self.to_source_cursor(c);
 			cursor_bits = atom.str_to_bits(&source_cursor.parse(self.bump));
 		}
@@ -200,22 +203,23 @@ where
 	pub fn to_atom<A: AtomSet + PartialEq>(&self, c: Cursor) -> A {
 		let bits = c.atom_bits();
 		if bits == 0 {
+			if c != KindSet::ATOM_LIKE {
+				return A::from_bits(0);
+			}
 			let source_cursor = self.to_source_cursor(c);
 			return A::from_str(&source_cursor.parse(self.bump));
 		}
 		#[cfg(debug_assertions)]
-		{
+		if c == KindSet::ATOM_LIKE && !((c == Kind::Ident || c == Kind::Function) && c.token().is_dashed_ident()) {
 			let source_cursor = self.to_source_cursor(c);
-			if !((c == Kind::Ident || c == Kind::Function) && c.token().is_dashed_ident()) {
-				debug_assert!(
-					A::from_bits(bits) == A::from_str(&source_cursor.parse(self.bump)),
-					"{:?} -> {:?} != {:?} ({:?})",
-					c,
-					A::from_bits(bits),
-					A::from_str(&source_cursor.parse(self.bump)),
-					source_cursor.parse(self.bump)
-				);
-			}
+			debug_assert!(
+				A::from_bits(bits) == A::from_str(&source_cursor.parse(self.bump)),
+				"{:?} -> {:?} != {:?} ({:?})",
+				c,
+				A::from_bits(bits),
+				A::from_str(&source_cursor.parse(self.bump)),
+				source_cursor.parse(self.bump)
+			);
 		}
 		A::from_bits(bits)
 	}

@@ -1,5 +1,5 @@
 use bumpalo::{Bump, collections::Vec};
-use css_lexer::{AtomSet, Cursor, DynAtomSet, Lexer, ToSpan};
+use css_lexer::{AtomSet, Cursor, DynAtomSet, KindSet, Lexer, ToSpan};
 use css_parse::{
 	CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment, Parse,
 	Parser, SourceCursor, SourceOffset, Span, ToCursors,
@@ -89,6 +89,9 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	pub fn to_atom<A: AtomSet + PartialEq>(&self, c: Cursor) -> A {
 		let bits = c.atom_bits();
 		if bits == 0 {
+			if c != KindSet::ATOM_LIKE {
+				return A::from_bits(0);
+			}
 			let source_cursor = self.to_source_cursor(c);
 			return A::from_str(&source_cursor.parse(self.bump));
 		}
