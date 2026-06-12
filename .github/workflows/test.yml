@@ -166,6 +166,38 @@ jobs:
       - name: Run acceptance tests
         run: mise r csskit-acceptance
 
+  fuzz_replay:
+    name: Fuzz Corpus Replay
+    needs: check-skip
+    if: github.event_name == 'pull_request'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
+      - name: Check if fuzz files changed
+        id: check-fuzz
+        run: |
+          if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q '^fuzz/'; then
+            echo "changed=true" >> $GITHUB_OUTPUT
+          else
+            echo "changed=false" >> $GITHUB_OUTPUT
+          fi
+
+      - name: Setup
+        if: steps.check-fuzz.outputs.changed == 'true'
+        uses: ./.github/actions/setup
+        with:
+          nightly: "true"
+
+      - name: Replay corpus
+        if: steps.check-fuzz.outputs.changed == 'true'
+        working-directory: fuzz
+        run: |
+          cargo +nightly fuzz run parse_stylesheet corpus/parse_stylesheet \
+            --target x86_64-unknown-linux-gnu \
+            -- -runs=0
+
   deploy-dryrun:
     name: Deploy Dry Run
     needs: check-skip
@@ -194,7 +226,7 @@ jobs:
   results:
     name: CI Results
     if: always()
-    needs: [check-skip, build, build_default, build_nightly, build_each_lib, acceptance]
+    needs: [check-skip, build, build_default, build_nightly, build_each_lib, acceptance, fuzz_replay]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
