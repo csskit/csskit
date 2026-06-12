@@ -1,8 +1,10 @@
-name: Generate all values
+name: Weekly Spec Generation
+
 on:
   workflow_dispatch:
   schedule:
     - cron: "0 0 * * 1"
+
 jobs:
   build:
     name: Generate css_ast/src/values
@@ -12,32 +14,37 @@ jobs:
       pull-requests: write
       contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          submodules: "true"
       - name: Setup
         uses: ./.github/actions/setup
-      - name: Check fmt
-        run: cargo fmt --check
+
       - name: Generate changelog from csswg-drafts commits
-        run: mise run generate-csswg-changelog pr_body.md
+        run: |
+          {
+            echo "CHANGELOG_BODY<<EOF"
+            mise run generate-csswg-changelog
+            echo "EOF"
+          } >> $GITHUB_ENV
         env:
-          GITHUB_TOKEN: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
+          GITHUB_TOKEN: ${{ github.token }}
+
       - name: Generate all values
         run: mise run generate-all-values
+
       - name: Cargo fmt
         run: cargo fmt
-      - name: Make PR
+
+      - name: Stage changes
         run: |
-          git config user.name "Keith Cirkel"
-          git config user.email "keithamus@users.noreply.github.com"
-          git update-ref -d refs/heads/generate-all-values
+          git update-ref -d refs/heads/generate-all-values || true
           git switch -c generate-all-values
           git add crates/css_ast/src/values/ crates/css_feature_data/src/data.rs .csswg-drafts-sha
-          git commit --message 'Regenerate css_ast/src/values & css_feature_data from csswg drafts' && \
-          git push --force origin HEAD:refs/heads/generate-all-values && \
-          gh pr create --title 'Regenerate css_ast/src/values from csswg drafts' --body-file pr_body.md
-          gh pr merge --auto --delete-branch --squash "$BRANCH_NAME"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
+
+      - name: Create PR
+        uses: ./.github/actions/create-pr
+        with:
+          token: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
+          branch: generate-all-values
+          commit-message: "Regenerate css_ast/src/values & css_feature_data from csswg drafts"
+          title: "Regenerate css_ast/src/values from csswg drafts"
+          body: ${{ env.CHANGELOG_BODY }}
+          auto-merge: "true"

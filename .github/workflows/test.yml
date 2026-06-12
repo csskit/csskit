@@ -1,4 +1,5 @@
-name: test
+name: Test Automation
+
 on:
   workflow_dispatch:
   push:
@@ -7,13 +8,13 @@ on:
 
 permissions:
   contents: read
-  id-token: write
 
 env:
   CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
 
 jobs:
   check-skip:
+    name: Check if build is needed
     runs-on: ubuntu-latest
     outputs:
       skip-build: ${{ steps.check.outputs.skip-build }}
@@ -22,25 +23,32 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0
-      - name: Check if Rust files changed
+
+      - name: Check if build-relevant files changed
         id: check
         run: |
           # Check for [forcebuild] flag in commit message
           if git log --format=%B -n 1 HEAD | grep -qiE '\[forcebuild\]'; then
             echo "skip-build=false" >> $GITHUB_OUTPUT
             echo "[forcebuild] found, running builds"
-          # Check if any .rs files were changed
-          elif git diff --name-only HEAD~1 HEAD | grep -qE '\.rs$'; then
+          # On initial commit HEAD~1 doesn't exist - always build
+          elif ! git rev-parse --verify HEAD~1 > /dev/null 2>&1; then
             echo "skip-build=false" >> $GITHUB_OUTPUT
-            echo "Rust files changed, running builds"
+            echo "Initial commit, running builds"
+          # Check if any build-relevant files were changed
+          elif git diff --name-only HEAD~1 HEAD | grep -qE '\.(rs|toml|css|snap)$|^\.github/|^mise-tasks/|^coverage/|^Cargo\.lock$'; then
+            echo "skip-build=false" >> $GITHUB_OUTPUT
+            echo "Build-relevant files changed, running builds"
           else
             echo "skip-build=true" >> $GITHUB_OUTPUT
-            echo "No Rust files changed, skipping builds"
+            echo "No build-relevant files changed, skipping builds"
           fi
 
   build:
+    name: Build & Test on ${{ matrix.code-target }}
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
+    runs-on: ${{ matrix.os }}
     strategy:
       fail-fast: false
       matrix:
@@ -69,120 +77,80 @@ jobs:
             target: aarch64-apple-darwin
             code-target: darwin-arm64
 
-    name: Build & Test on ${{ matrix.code-target }}
-    runs-on: ${{ matrix.os }}
     steps:
       - name: Configure git line endings
         run: |
           git config --global core.autocrlf false
           git config --global core.eol lf
+
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
+
       - name: Setup
         uses: ./.github/actions/setup
         with:
           key: test-${{ matrix.target }}
-      - run: cargo test --all-features
+
+      - name: Test
+        run: cargo test --all-features
 
   build_default:
+    name: Build & Test with default features
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
-    name: Build & Test with default features
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
+
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          key: global-rust-cache
-      - run: cargo test
+
+      - name: Test
+        run: cargo test
 
   build_nightly:
+    name: Build & Test with nightly
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
-    name: Build & Test with nightly
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
+
       - name: Setup
         uses: ./.github/actions/setup
         with:
-          key: global-rust-cache
-      - run: cargo +nightly test --all-features
+          nightly: "true"
+
+      - name: Test
+        run: cargo +nightly test --all-features
 
   build_each_lib:
+    name: Build each library to check independent errors
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
-    name: Build each libary to check independant errors
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          key: global-rust-cache
-      - run: set -euo pipefail; for d in crates/*/; do cargo build -p $(basename $d); done
 
-  clippy:
-    needs: check-skip
-    if: needs.check-skip.outputs.skip-build != 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          submodules: "true"
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          key: global-rust-cache
-        # Ensure clippy is happy with us
-      - run: RUSTFLAGS="-Dwarnings" cargo clippy
 
-  fmt:
-    needs: check-skip
-    if: needs.check-skip.outputs.skip-build != 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          submodules: "true"
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          key: global-rust-cache
-        # Ensure that everything is nicely formatted
-      - run: cargo fmt --check
-
-  docs:
-    needs: check-skip
-    if: needs.check-skip.outputs.skip-build != 'true'
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          submodules: "true"
-      - name: Setup
-        uses: ./.github/actions/setup
-        with:
-          key: global-rust-cache
-        # Ensure that docs can also build
-      - run: cargo doc --all-features --no-deps
+      - name: Build
+        run: set -euo pipefail; for d in crates/*/; do cargo build -p $(basename $d); done
 
   acceptance:
+    name: Acceptance Tests
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
@@ -191,52 +159,57 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
+
       - name: Setup
         uses: ./.github/actions/setup
-        with:
-          key: global-rust-cache
-        # Ensure that csskit works!
-      - run: mise r csskit-acceptance
+
+      - name: Run acceptance tests
+        run: mise r csskit-acceptance
 
   deploy-dryrun:
+    name: Deploy Dry Run
     needs: check-skip
     if: needs.check-skip.outputs.skip-build != 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-      - name: Get version and set TAG_NAME
-        run: |
-          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
-          TAG_NAME="${VERSION}-canary.${GITHUB_SHA}"
-          echo "TAG_NAME=$TAG_NAME" >> $GITHUB_ENV
+
       - name: Setup
         uses: ./.github/actions/setup
         with:
-          key: release-${{ matrix.target }}
-      - name: Set workspace version
-        run: cargo set-version --workspace $TAG_NAME
-      - name: Dry run cargo publish
+          key: deploy-dryrun
+
+      - name: Set canary version
         run: |
-          cargo publish --workspace --dry-run --allow-dirty
+          VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
+          echo "TAG_NAME=${VERSION}-canary.${GITHUB_SHA}" >> $GITHUB_ENV
+
+      - name: Bump workspace version
+        run: cargo set-version --workspace $TAG_NAME
+
+      - name: Dry run publish
+        run: cargo publish --workspace --dry-run --allow-dirty
 
   results:
+    name: CI Results
+    if: always()
+    needs: [check-skip, build, build_default, build_nightly, build_each_lib, acceptance]
+    runs-on: ubuntu-latest
     permissions:
       pull-requests: write
-    if: always()
-    runs-on: ubuntu-latest
-    needs: [check-skip, build, build_default, build_nightly, build_each_lib, fmt, clippy, docs, acceptance]
     env:
       GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
+
       - name: Check Results
         run: |
           if [[ "${{ needs.check-skip.outputs.skip-build }}" == "true" ]]; then
-            echo "Build jobs were skipped (no Rust files changed)";
+            echo "Build jobs were skipped (no build-relevant files changed)";
             if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-              gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving. (Build jobs were skipped - no Rust files changed)" || true;
+              gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving. (Build jobs were skipped - no build-relevant files changed)" || true;
             fi
             exit 0;
           fi

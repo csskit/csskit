@@ -3,7 +3,7 @@
 set -euo pipefail
 
 # Color output support
-if [ -t 1 ] && command -v tput >/dev/null 2>&1; then
+if [ -t 2 ] && command -v tput >/dev/null 2>&1; then
 	GREEN=$(tput setaf 2)
 	YELLOW=$(tput setaf 3)
 	RED=$(tput setaf 1)
@@ -15,17 +15,9 @@ else
 	RESET=""
 fi
 
-info() {
-	echo "${GREEN}INFO:${RESET} $*"
-}
-
-warn() {
-	echo "${YELLOW}WARN:${RESET} $*"
-}
-
-error() {
-	echo "${RED}ERROR:${RESET} $*" >&2
-}
+info() { echo "${GREEN}INFO:${RESET} $*" >&2; }
+warn() { echo "${YELLOW}WARN:${RESET} $*" >&2; }
+error() { echo "${RED}ERROR:${RESET} $*" >&2; }
 
 # Read the previous SHA
 if [ -f .csswg-drafts-sha ]; then
@@ -47,44 +39,44 @@ fi
 
 info "Current SHA: $NEW_SHA"
 
-# Output file for the changelog (default or from first argument)
-OUTPUT_FILE="${1:-csswg-changelog.md}"
+# Emit changelog to stdout
+if [ "$OLD_SHA" = "$NEW_SHA" ]; then
+	info "No changes - SHAs are identical"
+	cat <<EOF
+Updates to the latest specs from w3c/csswg-drafts
 
-# Generate changelog
-if [ -n "$OLD_SHA" ] && [ "$OLD_SHA" != "$NEW_SHA" ]; then
-	info "Fetching commits between $OLD_SHA and $NEW_SHA"
+No changes - csswg-drafts is already at commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
+EOF
+	exit 0
+fi
 
-	# Fetch commits from GitHub API
-	# Use GITHUB_TOKEN if available for higher rate limits
-	CURL_HEADERS=(-s)
-	if [ -n "${GITHUB_TOKEN:-}" ]; then
-		CURL_HEADERS+=(-H "Authorization: token $GITHUB_TOKEN")
-	fi
+info "Fetching commits between $OLD_SHA and $NEW_SHA"
 
-	API_RESPONSE=$(curl "${CURL_HEADERS[@]}" \
-		"https://api.github.com/repos/w3c/csswg-drafts/compare/${OLD_SHA}...${NEW_SHA}")
+CURL_HEADERS=(-s)
+if [ -n "${GITHUB_TOKEN:-}" ]; then
+	CURL_HEADERS+=(-H "Authorization: token $GITHUB_TOKEN")
+fi
 
-	# Check if we got a valid response
-	if echo "$API_RESPONSE" | jq -e '.message' >/dev/null 2>&1; then
-		API_MESSAGE=$(echo "$API_RESPONSE" | jq -r '.message')
-		error "GitHub API error: $API_MESSAGE"
-		warn "Falling back to simple update message"
-		cat >"$OUTPUT_FILE" <<EOF
+API_RESPONSE=$(curl "${CURL_HEADERS[@]}" \
+	"https://api.github.com/repos/w3c/csswg-drafts/compare/${OLD_SHA}...${NEW_SHA}")
+
+if echo "$API_RESPONSE" | jq -e '.message' >/dev/null 2>&1; then
+	error "GitHub API error: $(echo "$API_RESPONSE" | jq -r '.message')"
+	warn "Falling back to simple update message"
+	cat <<EOF
 Updates to the latest specs from w3c/csswg-drafts
 
 Updated to commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
 EOF
-		exit 0
-	fi
+	exit 0
+fi
 
-	COMMITS=$(echo "$API_RESPONSE" | jq -r '.commits[]? | "- [\(.sha[0:7])](\(.html_url)) \(.commit.message | split("\n")[0])"')
+COMMITS=$(echo "$API_RESPONSE" | jq -r '.commits[]? | "- [\(.sha[0:7])](\(.html_url)) \(.commit.message | split("\n")[0])"')
 
-	if [ -n "$COMMITS" ]; then
-		COMMIT_COUNT=$(echo "$COMMITS" | wc -l)
-		info "Found $COMMIT_COUNT commits"
-
-		# Create changelog
-		cat >"$OUTPUT_FILE" <<EOF
+if [ -n "$COMMITS" ]; then
+	COMMIT_COUNT=$(echo "$COMMITS" | wc -l | tr -d ' ')
+	info "Found $COMMIT_COUNT commits"
+	cat <<EOF
 Updates to the latest specs from w3c/csswg-drafts
 
 ## Changes from w3c/csswg-drafts
@@ -95,36 +87,13 @@ $COMMITS
 
 [View full diff](https://github.com/w3c/csswg-drafts/compare/${OLD_SHA}...${NEW_SHA})
 EOF
-	else
-		warn "No commits found in API response"
-		cat >"$OUTPUT_FILE" <<EOF
+else
+	warn "No commits found in API response"
+	cat <<EOF
 Updates to the latest specs from w3c/csswg-drafts
 
 Updated from [\`${OLD_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$OLD_SHA) to [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
 
 No commits found in comparison.
 EOF
-	fi
-else
-	if [ "$OLD_SHA" = "$NEW_SHA" ]; then
-		info "No changes - SHAs are identical"
-		cat >"$OUTPUT_FILE" <<EOF
-Updates to the latest specs from w3c/csswg-drafts
-
-No changes - csswg-drafts is already at commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
-EOF
-	else
-		info "First run - no previous SHA to compare"
-		cat >"$OUTPUT_FILE" <<EOF
-Updates to the latest specs from w3c/csswg-drafts
-
-Initial generation from w3c/csswg-drafts at commit [\`${NEW_SHA:0:7}\`](https://github.com/w3c/csswg-drafts/commit/$NEW_SHA)
-EOF
-	fi
 fi
-
-info "Changelog written to $OUTPUT_FILE"
-echo ""
-echo "--- Changelog Preview ---"
-cat "$OUTPUT_FILE"
-echo "--- End Preview ---"

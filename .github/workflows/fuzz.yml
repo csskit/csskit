@@ -1,4 +1,5 @@
 name: Fuzz
+
 on:
   workflow_dispatch:
   schedule:
@@ -13,46 +14,44 @@ jobs:
       pull-requests: write
       contents: write
     steps:
-      - name: Checkout
-        uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
+      - name: Setup
+        uses: ./.github/actions/setup
         with:
-          submodules: "true"
-
-      - name: Install nightly Rust
-        run: rustup toolchain install nightly --component llvm-tools-preview
-
-      - name: Install cargo-fuzz
-        run: cargo +nightly install cargo-fuzz --version 0.13.1 --locked
+          nightly: "true"
 
       - name: Run fuzzer
         # Continue on error so we can collect artifacts even on crash/timeout finds.
         continue-on-error: true
+        working-directory: fuzz
         run: |
           cargo +nightly fuzz run parse_stylesheet \
-            fuzz/corpus/parse_stylesheet \
-            -- -max_total_time=300 -max_len=4096 -artifact_prefix=fuzz/artifacts/parse_stylesheet/
-        working-directory: fuzz
+            corpus/parse_stylesheet \
+            --target x86_64-unknown-linux-gnu \
+            -- -max_total_time=300 -max_len=4096 \
+            -artifact_prefix=artifacts/parse_stylesheet/
 
       - name: Minimise artifacts
         # For each crash/timeout, run tmin to produce a minimal reproducer.
+        working-directory: fuzz
         run: |
           shopt -s nullglob
-          mkdir -p fuzz/artifacts/parse_stylesheet
-          for f in fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
+          mkdir -p artifacts/parse_stylesheet
+          for f in artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
             echo "Minimising $f"
             cargo +nightly fuzz tmin parse_stylesheet "$f" \
+              --target x86_64-unknown-linux-gnu \
               -- -max_total_time=30 || true
           done
-        working-directory: fuzz
 
       - name: Collect coverage
         continue-on-error: true
-        run: |
-          cargo +nightly fuzz coverage parse_stylesheet fuzz/corpus/parse_stylesheet
         working-directory: fuzz
+        run: |
+          cargo +nightly fuzz coverage parse_stylesheet corpus/parse_stylesheet \
+            --target x86_64-unknown-linux-gnu
 
       - name: Upload coverage report
-        uses: actions/upload-artifact@v7.0.1
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: fuzz-coverage
           path: fuzz/coverage/
@@ -72,41 +71,33 @@ jobs:
             echo "No new findings."
           fi
 
-      - name: Open PR with findings
+      - name: Stage findings
         if: steps.findings.outputs.found == 'true'
         run: |
-          git config user.name "Keith Cirkel"
-          git config user.email "keithamus@users.noreply.github.com"
-
           BRANCH="fuzz/findings-$(date +%Y%m%d-%H%M%S)"
-          git switch -c "$BRANCH"
+          DATE=$(date +%Y-%m-%d)
+          echo "FUZZ_BRANCH=${BRANCH}" >> $GITHUB_ENV
+          echo "FUZZ_DATE=${DATE}" >> $GITHUB_ENV
+          echo "RUN_URL=${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" >> $GITHUB_ENV
 
-          # Copy minimised artifacts into corpus and failed_files
+          git switch -c "$BRANCH"
           shopt -s nullglob
           for f in fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
-            name="$(basename "$f")"
-            cp "$f" "fuzz/corpus/parse_stylesheet/$name"
-            cp "$f" "failed_files/$name.css"
+            cp "$f" "fuzz/corpus/parse_stylesheet/$(basename "$f")"
           done
+          git add fuzz/corpus/parse_stylesheet/
 
-          git add fuzz/corpus/parse_stylesheet/ failed_files/
-          git commit --message "fuzz: add new findings from nightly run $(date +%Y-%m-%d)"
-          git push origin HEAD:"$BRANCH"
+      - name: Open PR with findings
+        if: steps.findings.outputs.found == 'true'
+        uses: ./.github/actions/create-pr
+        with:
+          token: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
+          branch: ${{ env.FUZZ_BRANCH }}
+          commit-message: "fuzz: add new findings from nightly run ${{ env.FUZZ_DATE }}"
+          title: "fuzz: new parser findings ${{ env.FUZZ_DATE }}"
+          body: |
+            Nightly fuzz run found new findings.
 
-          gh pr create \
-            --title "fuzz: new parser findings $(date +%Y-%m-%d)" \
-            --body "Nightly fuzz run found new crash/timeout artifacts.
+            Reproduce: `mise run fuzz`. Fix the bug, add a regression test, then merge.
 
-Each file in \`fuzz/corpus/parse_stylesheet/\` and \`failed_files/\` is a minimised reproducer.
-
-**To reproduce locally:**
-\`\`\`
-cargo +nightly fuzz run parse_stylesheet fuzz/corpus/parse_stylesheet -- -max_total_time=60
-\`\`\`
-
-Fix the underlying bug, add a regression test, then merge.
-
-GHA run: ${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }}" \
-            --head "$BRANCH"
-        env:
-          GITHUB_TOKEN: ${{ secrets.GENERATE_VALUES_GITHUB_PAT }}
+            GHA run: ${RUN_URL}

@@ -1,0 +1,85 @@
+name: "Create or Update PR"
+description: "Commit staged changes, push branch, upsert PR. Uses a PAT remote so the PR can trigger downstream workflows."
+inputs:
+  token:
+    description: "PAT with repo + pull-request write access"
+    required: true
+  branch:
+    description: "Branch name to push to"
+    required: true
+  commit-message:
+    description: "Commit message"
+    required: true
+  title:
+    description: "PR title"
+    required: true
+  body:
+    description: "PR body. Use ${ENV_VAR} for substitution from environment."
+    required: false
+    default: ""
+  body-file:
+    description: "Path to a pre-rendered PR body file (takes precedence over body)"
+    required: false
+    default: ""
+  base:
+    description: "Base branch for the PR"
+    required: false
+    default: "main"
+  labels:
+    description: "Comma-separated list of labels to apply"
+    required: false
+    default: ""
+  auto-merge:
+    description: "Enable auto-merge (squash) once checks pass"
+    required: false
+    default: "false"
+runs:
+  using: "composite"
+  steps:
+    - name: Commit, push, and upsert PR
+      shell: bash
+      env:
+        GITHUB_TOKEN: ${{ inputs.token }}
+        GH_TOKEN: ${{ inputs.token }}
+      run: |
+        git config user.name "Keith Cirkel"
+        git config user.email "keithamus@users.noreply.github.com"
+        git commit --message "${{ inputs.commit-message }}"
+
+        # Push via authenticated remote so the PR can trigger downstream workflows
+        REPO_URL="https://keithamus:${GH_TOKEN}@github.com/${{ github.repository }}.git"
+        git remote remove _pr_push 2>/dev/null || true
+        git remote add _pr_push "$REPO_URL"
+        git push --force _pr_push HEAD:refs/heads/${{ inputs.branch }}
+        git remote remove _pr_push
+
+        # Resolve body: file takes precedence, then rendered template, then empty
+        if [ -n "${{ inputs.body-file }}" ]; then
+          BODY_ARGS=(--body-file "${{ inputs.body-file }}")
+        elif [ -n "${{ inputs.body }}" ]; then
+          printf '%s' "${{ inputs.body }}" | envsubst > /tmp/pr-body.md
+          BODY_ARGS=(--body-file /tmp/pr-body.md)
+        else
+          BODY_ARGS=(--body "")
+        fi
+
+        LABEL_ARGS=()
+        if [ -n "${{ inputs.labels }}" ]; then
+          LABEL_ARGS=(--label "${{ inputs.labels }}")
+        fi
+
+        # Upsert: edit if PR already exists, create otherwise
+        gh pr edit "${{ inputs.branch }}" \
+          --title "${{ inputs.title }}" \
+          "${BODY_ARGS[@]}" \
+          2>/dev/null || \
+        gh pr create \
+          --title "${{ inputs.title }}" \
+          "${BODY_ARGS[@]}" \
+          --base "${{ inputs.base }}" \
+          --head "${{ inputs.branch }}" \
+          "${LABEL_ARGS[@]}"
+
+        if [ "${{ inputs.auto-merge }}" = "true" ]; then
+          gh pr merge --auto --delete-branch --squash "${{ inputs.branch }}"
+        fi

@@ -1,30 +1,37 @@
-name: Pages
+name: Website Deploy to GitHub Pages
+
 on:
+  workflow_dispatch:
   push:
     branches: [main]
-  workflow_dispatch:
   schedule:
     - cron: "0 3 * * *"
+
 permissions:
   contents: read
   pages: write
   id-token: write
+
 concurrency:
   group: "pages"
   cancel-in-progress: true
+
 jobs:
   deploy:
+    name: Build and Deploy
+    runs-on: ubuntu-latest
     environment:
       name: github-pages
       url: ${{ steps.deployment.outputs.page_url }}
-    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
+
       - name: Download benchmark history
         uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
+        continue-on-error: true
         with:
           name: benchmark-history
           workflow: benchmark-tracking.yml
@@ -32,22 +39,28 @@ jobs:
           branch: main
           search_artifacts: true
           path: website/_data
+
       - name: Setup
         uses: ./.github/actions/setup
         with:
           dir: ./website
+
       - name: Configure Pages
         uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d # v6.0.0
+
       - name: Add wasm target
         run: rustup target add wasm32-unknown-unknown
+
       - name: npm Install
         run: npm i --production=false
         working-directory: ./website
         env:
           NODE_ENV: production
+
       - name: Get npm cache directory
         id: npm-cache-dir
         run: echo "dir=$(npm config get cache)" >> ${GITHUB_OUTPUT}
+
       - name: Cache npm
         uses: actions/cache@27d5ce7f107fe9357f9df03efb73ab90386fccae # v5.0.5
         with:
@@ -55,16 +68,21 @@ jobs:
           key: ${{ runner.os }}-node-${{ hashFiles('**/package-lock.json') }}
           restore-keys: |
             ${{ runner.os }}-node-
+
       - name: Build internal docs
         run: cargo doc --all-features --no-deps --keep-going --release
+
       - name: Ensure internal docs directory exists
         run: mkdir -p ./website/_site/docs/internal/
+
       - name: Copy internal docs to website
         run: cp -rf ./target/doc/* ./website/_site/docs/internal/
+
       - name: Upload website
         uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9 # v5.0.0
         with:
           path: "website/_site"
+
       - name: Deploy website
         id: deployment
         uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128 # v5.0.0
