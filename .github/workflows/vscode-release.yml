@@ -1,4 +1,5 @@
-name: vscode-release
+name: VSCode Release Automation (Including Automated PRs)
+
 on:
   push:
     branches: [main]
@@ -16,6 +17,7 @@ permissions:
 
 jobs:
   release:
+    name: Release VS Code Extension
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -42,7 +44,9 @@ jobs:
           else
             echo "mode=pr" >> "$GITHUB_OUTPUT"
           fi
-      - run: |
+
+      - name: Show current versions
+        run: |
           echo "Current version:   ${{ steps.versions.outputs.current }}"
           echo "Published version: ${{ steps.versions.outputs.published }}"
           echo "Mode:              ${{ steps.versions.outputs.mode }}"
@@ -56,46 +60,39 @@ jobs:
           NEXT=$(node -p "require('./package.json').version")
           echo "next=$NEXT" >> "$GITHUB_OUTPUT"
 
-      - name: Create release PR
+      - name: Stage version bump
         if: steps.versions.outputs.mode == 'pr'
         run: |
           NEXT="${{ steps.bump.outputs.next }}"
-          BRANCH="vscode-release-v${NEXT}"
-
-          git config user.name "Keith Cirkel"
-          git config user.email "keithamus@users.noreply.github.com"
+          echo "NEXT=${NEXT}" >> $GITHUB_ENV
+          echo "VSCODE_BRANCH=vscode-release-v${NEXT}" >> $GITHUB_ENV
           git add packages/csskit_vscode/package.json packages/csskit_vscode/package-lock.json
-          git commit -m "Release csskit vscode extension v${NEXT}"
 
-          git remote add PAT "https://keithamus:${GH_TOKEN}@github.com/csskit/csskit.git" > /dev/null 2>&1
-          git push --force PAT HEAD:refs/heads/"${BRANCH}"
-          git remote rm PAT
-
-          gh pr edit "${BRANCH}" \
-            --title "Release csskit vscode extension v${NEXT}" \
-            --body "Bumps the VS Code extension to v${NEXT} for publishing to the [marketplace](https://marketplace.visualstudio.com/items?itemName=csskit.csskit)." ||
-            gh pr create \
-              --title "Release csskit vscode extension v${NEXT}" \
-              --body "Bumps the VS Code extension to v${NEXT} for publishing to the [marketplace](https://marketplace.visualstudio.com/items?itemName=csskit.csskit)." \
-              --label "release" \
-              --base main \
-              --head "${BRANCH}"
-        env:
-          GH_TOKEN: ${{ secrets.RELEASE_PR_PAT }}
+      - name: Create release PR
+        if: steps.versions.outputs.mode == 'pr'
+        uses: ./.github/actions/create-pr
+        with:
+          token: ${{ secrets.RELEASE_PR_PAT }}
+          branch: ${{ env.VSCODE_BRANCH }}
+          commit-message: "Release csskit vscode extension v${{ env.NEXT }}"
+          title: "Release csskit vscode extension v${{ env.NEXT }}"
+          labels: release
+          body: |
+            Bumps the VS Code extension to v${NEXT} for publishing to the [marketplace](https://marketplace.visualstudio.com/items?itemName=csskit.csskit).
 
       - name: Install dependencies
         if: steps.versions.outputs.mode == 'publish'
         run: npm ci
         working-directory: packages/csskit_vscode
 
-      - name: Publish extension
+      - name: Publish to VS Code Marketplace
         if: steps.versions.outputs.mode == 'publish'
         run: npx --yes @vscode/vsce publish --skip-duplicate
         working-directory: packages/csskit_vscode
         env:
           VSCE_PAT: ${{ secrets.VSCE_PAT }}
 
-      - name: Publish extension
+      - name: Publish to Open VSX
         if: steps.versions.outputs.mode == 'publish'
         run: npx --yes ovsx publish -p $OPEN_VSX_PAT
         working-directory: packages/csskit_vscode

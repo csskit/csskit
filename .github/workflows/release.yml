@@ -1,10 +1,12 @@
-name: release
+name: Release Automation (Including Automated PRs)
+
 on:
+  workflow_dispatch:
   workflow_run:
-    workflows: [test]
+    workflows: ["Test Automation"]
     types: [completed]
     branches: [main, release]
-  workflow_dispatch:
+
 concurrency:
   group: "release"
   cancel-in-progress: true
@@ -20,7 +22,7 @@ jobs:
         (
           github.event.workflow_run.conclusion == 'success' &&
           github.repository_owner == 'csskit' &&
-          github.ref_name == 'main'
+          github.event.workflow_run.head_branch == 'main'
         )
       }}
 
@@ -58,15 +60,19 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           submodules: "true"
+
       - name: Setup
         uses: ./.github/actions/setup
         with:
           key: release-${{ matrix.target }}
+
       - name: Rustup target
         run: rustup target add ${{ matrix.target }}
+
       - name: Install arm64 toolchain
         if: matrix.code-target == 'linux-arm64'
         run: sudo apt update && sudo apt install -y gcc-aarch64-linux-gnu
+
       - name: Build Binary
         run: cargo build --release --target ${{ matrix.target }} -p csskit
         env:
@@ -85,7 +91,8 @@ jobs:
           BIN_NAME=csskit-${{ matrix.code-target }}
           mv target/${{ matrix.target }}/release/csskit $BIN_NAME
 
-      - run: chmod +x csskit-*
+      - name: Set executable bit on binaries
+        run: chmod +x csskit-*
 
       - name: Upload Binary
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
@@ -95,17 +102,21 @@ jobs:
           path: csskit-*
 
   deploy:
-    runs-on: ubuntu-latest
+    name: Deploy Release
     needs: [build]
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
         with:
           fetch-depth: 0
+
       - name: Setup
         uses: ./.github/actions/setup
+
       - name: Download Artifacts
         uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c # v8.0.1
+
       - name: Copy binaries to platform packages
         run: |
           for artifact_dir in binary-*; do
@@ -122,13 +133,21 @@ jobs:
               fi
             done
           done
+
       - name: Ensure binaries are chmod +x
         run: chmod +x packages/csskit-*/bin/*
-      - run: tree packages/
+
+      - name: Print packages/ tree
+        run: tree packages/
+
       - name: Install Dependencies
         run: npm i
         working-directory: ./packages/csskit
+
       - name: Release
+        # SECURITY: mise tasks run with privileged secrets. This is safe only
+        # because CODEOWNERS (* @keithamus) prevents merging .mise-tasks/
+        # changes without explicit review. Do not relax CODEOWNERS.
         run: mise r release-automation
         env:
           CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}

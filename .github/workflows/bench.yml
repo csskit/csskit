@@ -1,23 +1,20 @@
-name: bench
+name: PR Benchmarking
+
 on:
   pull_request:
     types: [opened, synchronize, reopened, labeled]
+
 jobs:
-  build:
+  benchmark:
     if: contains(github.event.pull_request.labels.*.name, 'bench')
     name: Benchmark on linux
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
     steps:
-      - name: Checkout PR
-        uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
-        with:
-          submodules: "true"
-      - name: Setup mise
-        uses: jdx/mise-action@v4
       - name: Setup
         uses: ./.github/actions/setup
+
       - name: Download benchmark history
         uses: dawidd6/action-download-artifact@b6e2e70617bc3265edd6dab6c906732b2f1ae151 # v21
         with:
@@ -27,85 +24,84 @@ jobs:
           branch: main
           search_artifacts: true
           path: website/_data
-      - name: Run PR branch benchmarks
+
+      - name: Run benchmarks
         run: mise run collect-benchmarks
-      - name: Compare benchmark results
+
+      - name: Build comparison data
         id: compare
         run: |
           HISTORY="website/_data/benchmark-history.json"
-
-          # Extract the latest entry from each
           PR_ENTRY=$(jq '.[0]' "$HISTORY")
           BASE_ENTRY=$(jq '.[1]' "$HISTORY")
 
-          # Generate comparison report
-          REPORT_FILE="benchmark-comparison.md"
-          echo "# Benchmark Comparison" > "$REPORT_FILE"
-          echo "" >> "$REPORT_FILE"
-          echo "**Base:** \`${{ github.base_ref }}\` @ $(echo "$BASE_ENTRY" | jq -r '.git_commit[:7]')" >> "$REPORT_FILE"
-          echo "**PR:** \`${{ github.head_ref }}\` @ $(echo "$PR_ENTRY" | jq -r '.git_commit[:7]')" >> "$REPORT_FILE"
-          echo "" >> "$REPORT_FILE"
+          echo "BASE_REF=${{ github.base_ref }}" >> $GITHUB_ENV
+          echo "PR_REF=${{ github.head_ref }}" >> $GITHUB_ENV
+          echo "BASE_SHA=$(echo "$BASE_ENTRY" | jq -r '.git_commit[:7]')" >> $GITHUB_ENV
+          echo "PR_SHA=$(echo "$PR_ENTRY" | jq -r '.git_commit[:7]')" >> $GITHUB_ENV
 
-          # Compare criterion results
-          echo "## Criterion Benchmarks" >> "$REPORT_FILE"
-          echo "" >> "$REPORT_FILE"
-          echo "$BASE_ENTRY" "$PR_ENTRY" | jq -rs '
+          CRITERION_TABLE=$(echo "$BASE_ENTRY" "$PR_ENTRY" | jq -rs '
             .[0] as $base | .[1] as $pr |
             $base.criterion_results as $base_crit |
             $pr.criterion_results as $pr_crit |
-            $pr_crit | keys | sort[] | . as $bench_name |
-            $base_crit[$bench_name] // null | . as $base_result |
-            $pr_crit[$bench_name] | . as $pr_result |
-            if $base_result != null then
-              ($pr_result.mean.point_estimate / $base_result.mean.point_estimate - 1) * 100 | . as $change |
-              ($change | if . > 5 then ":chart_with_upwards_trend:" elif . < -5 then ":chart_with_downwards_trend:" else ":left_right_arrow:" end) as $icon |
-              "- **\($bench_name)**: \($pr_result.mean.point_estimate / 1000000 * 1000 | round / 1000)ms (base: \($base_result.mean.point_estimate / 1000000 * 1000 | round / 1000)ms) \($icon) **\($change * 100 | round / 100)%**"
-            else
-              "- **\($bench_name)**: \($pr_result.mean.point_estimate / 1000000 * 1000 | round / 1000)ms :sparkles: (new benchmark)"
-            end
-          ' >> "$REPORT_FILE"
+            [$pr_crit | keys | sort[] | . as $bench_name |
+              $base_crit[$bench_name] // null | . as $base_result |
+              $pr_crit[$bench_name] | . as $pr_result |
+              if $base_result != null then
+                ($pr_result.mean.point_estimate / $base_result.mean.point_estimate - 1) * 100 | . as $change |
+                ($change | if . > 5 then ":chart_with_upwards_trend:" elif . < -5 then ":chart_with_downwards_trend:" else ":left_right_arrow:" end) as $icon |
+                "- **\($bench_name)**: \($pr_result.mean.point_estimate / 1000000 * 1000 | round / 1000)ms (base: \($base_result.mean.point_estimate / 1000000 * 1000 | round / 1000)ms) \($icon) **\($change * 100 | round / 100 / 100)%**"
+              else
+                "- **\($bench_name)**: \($pr_result.mean.point_estimate / 1000000 * 1000 | round / 1000)ms :sparkles: (new benchmark)"
+              end] | join("\n")
+          ')
 
-          # Compare hyperfine results
-          echo "" >> "$REPORT_FILE"
-          echo "## Hyperfine Benchmarks" >> "$REPORT_FILE"
-          echo "" >> "$REPORT_FILE"
-          echo "$BASE_ENTRY" "$PR_ENTRY" | jq -rs '
+          HYPERFINE_TABLE=$(echo "$BASE_ENTRY" "$PR_ENTRY" | jq -rs '
             .[0] as $base | .[1] as $pr |
             $base.hyperfine_results as $base_hyper |
             $pr.hyperfine_results as $pr_hyper |
-            $pr_hyper | keys | sort[] | . as $file_name |
-            $base_hyper[$file_name] // null | . as $base_result |
-            $pr_hyper[$file_name] | . as $pr_result |
-            if $base_result != null and ($base_result.results | length > 0) and ($pr_result.results | length > 0) then
-              ($pr_result.results[0].mean / $base_result.results[0].mean - 1) * 100 | . as $change |
-              ($change | if . > 5 then ":chart_with_upwards_trend:" elif . < -5 then ":chart_with_downwards_trend:" else ":left_right_arrow:" end) as $icon |
-              "- **\($file_name)**: \($pr_result.results[0].mean * 1000 | round / 1000)s (base: \($base_result.results[0].mean * 1000 | round / 1000)s) \($icon) **\($change * 100 | round / 100)%**"
-            elif ($pr_result.results | length > 0) then
-              "- **\($file_name)**: \($pr_result.results[0].mean * 1000 | round / 1000)s :sparkles: (new benchmark)"
-            else
-              empty
-            end
-          ' >> "$REPORT_FILE"
+            [$pr_hyper | keys | sort[] | . as $file_name |
+              $base_hyper[$file_name] // null | . as $base_result |
+              $pr_hyper[$file_name] | . as $pr_result |
+              if $base_result != null and ($base_result.results | length > 0) and ($pr_result.results | length > 0) then
+                ($pr_result.results[0].mean / $base_result.results[0].mean - 1) * 100 | . as $change |
+                ($change | if . > 5 then ":chart_with_upwards_trend:" elif . < -5 then ":chart_with_downwards_trend:" else ":left_right_arrow:" end) as $icon |
+                "- **\($file_name)**: \($pr_result.results[0].mean * 1000 | round / 1000)s (base: \($base_result.results[0].mean * 1000 | round / 1000)s) \($icon) **\($change * 100 | round / 100 / 100)%**"
+              elif ($pr_result.results | length > 0) then
+                "- **\($file_name)**: \($pr_result.results[0].mean * 1000 | round / 1000)s :sparkles: (new benchmark)"
+              else empty
+              end] | join("\n")
+          ')
 
-          cat "$REPORT_FILE"
+          {
+            echo "CRITERION_TABLE<<EOF"
+            echo "$CRITERION_TABLE"
+            echo "EOF"
+            echo "HYPERFINE_TABLE<<EOF"
+            echo "$HYPERFINE_TABLE"
+            echo "EOF"
+          } >> $GITHUB_ENV
+
       - name: Upload benchmark history artifact
         uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
         with:
           name: benchmark-history
           path: website/_data/benchmark-history.json
+
       - name: Comment PR
-        if: success()
-        uses: actions/github-script@3a2844b7e9c422d3c10d287c895573f7108da1b3 # v9.0.0
+        uses: ./.github/actions/github-comment
         with:
-          script: |
-            const fs = require('fs');
-            const reportPath = 'benchmark-comparison.md';
-            if (fs.existsSync(reportPath)) {
-              const report = fs.readFileSync(reportPath, 'utf8');
-              github.rest.issues.createComment({
-                issue_number: context.issue.number,
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                body: report
-              });
-            }
+          issue-number: ${{ github.event.number }}
+          body: |
+            # Benchmark Comparison
+
+            **Base:** `${BASE_REF}` @ ${BASE_SHA}
+            **PR:** `${PR_REF}` @ ${PR_SHA}
+
+            ## Criterion Benchmarks
+
+            ${CRITERION_TABLE}
+
+            ## Hyperfine Benchmarks
+
+            ${HYPERFINE_TABLE}
