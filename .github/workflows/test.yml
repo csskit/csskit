@@ -178,6 +178,7 @@ jobs:
       - name: Check if fuzz files changed
         id: check-fuzz
         run: |
+          git fetch origin ${{ github.base_ref }} --depth=1
           if git diff --name-only origin/${{ github.base_ref }}...HEAD | grep -q '^fuzz/'; then
             echo "changed=true" >> $GITHUB_OUTPUT
           else
