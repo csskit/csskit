@@ -1,0 +1,45 @@
+  padding-bottom: 12px !important; }
+
+.soft-half--sides {
+  padding-right: 12px !important;
+  padding-left: 12px !important; }
+
+.hard {
+  padding: 0 !important; }
+
+.hard--top {
+  padding-top: 0 !important; }
+
+.hard--right {
+  padding-right: 0 !important; }
+
+.hard--bottom {
+  padding-bottom: 0 !important; }
+
+.hard--left {
+  padding-left: 0 !important; }
+
+.hard--ends {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important; }
+
+.hard--sides {
+  padding-right: 0 !important;
+  padding-left: 0 !important; }
+
+/**
+ * Pull items full width of `.island` parents.
+ */
+.full-bleed {
+  margin-right: -24px !important;
+  margin-left: -24px !important; }
+  .islet .full-bleed {
+    margin-right: -12px !important;
+    margin-left: -12px !important; }
+
+/**
+ * Add a help cursor to any element that gives the user extra information on
+cus-within{opacity:.05}.md\:focus-within\:opacity-10:focus-within{opacity:.1}.md\:focus-within\:opacity-20:focus-within{opacity:.2}.md\:focus-within\:opacity-25:focus-within{opacity:.25}.md\:focus-w * `:hover`.
+ */
+.informative {
+  cursor: help !importan

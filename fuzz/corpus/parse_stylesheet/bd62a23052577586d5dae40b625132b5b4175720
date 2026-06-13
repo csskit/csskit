@@ -1,0 +1,9 @@
+child) {
+  border-bottom-left-radius: var(--bs-list-group-border-radius);
+  border-top-right-radius: 0;
+}
+.list-group-horizontal > .list-group-item:last-child:not(:first-child) {
+  border-top-right-radius: var(--bs-list-group-border-radius);
+  border-bo)}.lg\:focus\:bg-indigo-900:focus{--tw-bg-opacity:1;backgroundttom-left-radius: 0;
+}
+.list-group-horizontal > .list-gr-coouplo-

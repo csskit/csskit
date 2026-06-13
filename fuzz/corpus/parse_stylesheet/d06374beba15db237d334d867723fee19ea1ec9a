@@ -1,0 +1,84 @@
+der: none;
+  font-size: 1em;
+  font-family:.inherit;
+  text-decoration: 1px dotted underline;
+  padding: 0;
+  .list-of-links & {
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: 2px solid underline;
+    cursor: pointer;
+    outline: none;
+  }
+}
+small[role=note] {
+  display: block;
+  float: inline-end;
+  clear: inline-end;
+  --sidenote-width: 20ch;
+  max-inline-size: var(--sidenote-width);
+  padding-inline: 1.5ch 1ch;
+  margin-in  text-decoration: 2px solid underline;
+    cursor: pointer;
+    outline: none;
+  }
+}
+small[role=note] {
+  display: block;
+  float: inline-end;
+  clear: inline-end;
+  --sidenote-width: 20ch;
+  max-inline-size: var(--sidenote-width);
+  padding-inline: 1.5ch 1ch;
+  margin-inline-end: calc(1em - var(--sidenote-width));
+  margin-block-end: var(--rhythm, 1rlh);
+  font-family: var(--secondary-font);
+  background: var(--bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) transparent;
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) trm}.\32xl\:h-60{height:15rem}.\32xl\:h-64{height:16rem}.\32xl\:h-72{height:18rem}.\32xl\:h-80{height:20rem}.\32xl\:h-96{height:24rem}.\32xl\:h-auto{height:auto}.\32xl\:h-px{height:1px}.\32xl\:h-0\.5{height:.125rem}.\32xl\:h-1\.5{height:.375rem}.\32xl\:h-2\.5{height:.625rem}.\32xl\:h-3\.5{height:.875rem}.\32xl\:h-1\/2{height:50%}.\32xl\:h-1\/3{height:33.333333%}.\32xl\:h-2\/3{height:66.666667%}.\32xl\:h-1\/4{height:25%}.\32xl\:h-2\/4{height:50%}.\32xl\:h-3\/4{height:75%}.\32xl\:h-1\/5{height:20%}.\32xl\:h-2\/5{height:40%}.\32xl\:h-3\/5{height:60%}.\32xl\:h-4\/5{height:80%}.\32xl\:h-1\/6{height:16.666667%}.\32xl\:h-2\/6{height:33.333333%}.\32xl\:h-3\/6{height:50%}.\32xl\:h-4\/6{height:66.666667%}.\32xl\:h-5\/6{height:83.333333%}.\32xl\:h-full{height:100%}.\32xl\:h-screen{height:100vh}.\32xl\:max-h-0{max-height:0}.\32xl\:max-h-1{max-height:.25rem}.\32xl\:max-h-2{max-height:.5rem}.\32xl\:max-h-3{max-height:.75rem}.\32xl\:max-h-4{max-height:1rem}.\32xl\:max-h-5{max-height:1.25rem}.\32xl\:max-h-6{max-height:2.5rem}.\32xl\:max-h-7{max-height:1.75rem}.\32xl\:max-h-8{max-height:2rem}.\32xl\:max-h-9{max-height:2.25rem}.\32xl\:max-h-10{max-height:2.5rem}.\32xl\:max-h-11{max-height:2.75rem}.\32xl\:max-h-12{max-height:3rem}.\32xl\:max-h-14{max-height:3.5rem}.\32xl\:max-h-16{max-height:4rem}.\32xl\:max-h-20{max-height:5rem}.\32xl\:max-h-24{max-height:6rem}.\32xl\:max-h-28{max-height:7rem}.\32xl\:max-h-32{max-height:8rem}.\32xl\:max-h-36{max-height:9rem}.\32xl\:max-h-40{max-height:10rem}.\32xl\:max-h-44{max-height:11rem}.\32xl\:max-h-48{max-height:12rem}.\32xl\:max-h-52{max-height:13rem}.\32xl\:max-h-56{max-height:14rem}.\32xl\:max-h-60{max-height:15rem}.\32xth:11rem}.\32xl\:w-48{width:12rem}.\32xl\:w-52{width:13rem}.\32xl\:w-56{width:14rem}.\32xl\:w-60{width:15rem}.\32xl\:w-64{width:16rem}.\32xl\:w-72{width:18rem}.\32xl\:w-80{width:20rem}.\32xl\:w-96{width:24rem}.\32xl\:w-auto{width:auto}.\32xl\:w-px{width:1px}.\32xl\:w-0\.5{width:.125rem}.\32xl\:w-1\.5{widot {
+}
+tr {
+}
+td,
+th {
+  vertical-align: top;
+  &:not(:last-child) {
+    padding-inline-end: var(--rhythm, 1rlh);
+  }
+}
+td {
+}
+th {
+  font-family: var(--secondary-font);
+  text-align: start;
+}
+input {
+  display: block;
+}
+label :is(input, select):not([specificity-hack]) {
+  display: inline;
+  padding-block: 0;
+}
+:where(button, input[type=submit], input[type=reset], input[type=button], .\<button\>):not(.\<a\>) {
+  display: inline-block;
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  vertical-align: middle;], input[type=button], .\<button\>):not(.\<a\>) {
+  display: inline-block;
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: .8rem;
+  line-height: 1.125em;
+  font-family: var(--secondary-font);
+  min-height: var(--rhythm, 1rlh);
+  background: var(--interactive-bg);
+  color: var(--fg);
+  border: var(--interactive-border-width) var(--interactive-border-style) var(--muted-fg);
+  box-shadow:-shadow: var(--dotted underline;
+  padding: 0;
+  .list-of-links & decoration: none;
+  }
+  &:active {
+ 
