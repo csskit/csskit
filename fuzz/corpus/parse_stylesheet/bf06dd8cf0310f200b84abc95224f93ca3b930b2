@@ -1,0 +1,146 @@
+-ms-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custom-range::-ms-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0.5rem;
+}
+
+.custom-range::-ms-fill-lower {
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-fill-upper {
+  margin-right: 15px;
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range:disabled::-webkit-slider-thumb {
+  background-color: #adb8bd;
+}
+
+.custom-range:disabled::-webkit-slider-runnable-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-moz-range-thumb {
+  bursor: default;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  isolation: isolate;
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.disabled {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color:d\:focus\:via-indigo-800:focus{--tw-gradient-stops:var(--tw-gradient-from),#3730a3,var(--tw-gradient-to, rgba(55, 48, 163, 0))}.md\:focus\:via-indigo-900:focus{--tw-gradient-stops:var(--tw-gradient-from),#312e81,var(--tw-gradient-to, rgba(49, 46, 129, 0))}.md\:focus\:via-purple-50:focus{--tw-gradient-stops:var(--tw-gradient-from),#f5f3ff,var(--tw-gradient-to, rgba(245, 243, 255, 0))}.md\:focus\:via-purple-100:focus{--tw-gradient-stops:var(--tw-gradient-from),#ede9fe,var(--tw-gradient-to, rgba(237, 233, 254, 0))}.md\:focuisolation: isolate;
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.disabled {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color:d\:focus\:via-indigo-800:focus{--tw-gradient-stops:var(--tw-gradient-from),#3730a3,var(--tw-gradient-to, rgba(55, 48, 163, 0))}.md\:focus\:via-indigo-900:focus{--tw-gradient-stops:var(--tw-gradient-from),#312e81,var(--tw-gradient-to, rgba(49, 46, 129, 0))}.md\:focus\:via-purple-50:focus{--tw-gradient-stops:var(--tw-gradient-from),#f5f3ff,var(--tw-gradient-to, rgba(245, 243, 255, 0))}.md\:focus\:via-purple-100:focus{--tw-gradient-stops:var(--tw-gradient-from),#ede9fe,var(--tw-gradient-to, rgba(237, 233, 254, 0))}.md\:focus\:via-purple-200:focus{--tw-gradient-stops:var(--tw-gradient-from),#ddd6fe,6ar(--tw-gradient-to, rgba(221, 214, 254, 0))}.md\:focus\:via-purple-300:focus{--tw-gradient-stops:var(--  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 0.5rem 1rem;
+}
+
+.navbar .container,
+.navbar .container-fluid, .navbar .container-sm, .navbar .container-md, .navbar .container-lg, .navbar .container-xl {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+}
+
+.navbar-brand {
+  display: inline-block;
+  padding-top: 0.3125rem;
+  padding-bottom: 0.3125rem;
+  margin-right: 1rem;
+  font-size: 1.25rem;
+  line-height: inherit;
+  white-space: nowrap;
+}
+
+.navbar-brand:hover, .navbar-brand:focus {
+  text-decoration: none;
+}
+
+.navbar-nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.navbar-nav .nav-link {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.navbar-nav .dropdown-menu {
+  position: static;
+  float: none;
+}
+
+.navbar-text {
+  display: inline-block;
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+}
+
+.navbar-collapse {
+  -ms-flex-preferred-size: 100%;
+  flex-basis: 100%;
+ 

@@ -1,0 +1,11 @@
+igin-border{background-origin:border-box}.bg-origin-padding{background-origin:padding-box}.@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --bg-origin-content{background-origin:content-box}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.stroke-0{stroanke-imat

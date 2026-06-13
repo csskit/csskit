@@ -1,0 +1,95 @@
+th: 25%; }
+  .medium-up-5 > .cell {
+    width: 20%; }
+  .medium-up-6 > .cell {
+    width: 16.66667%; }
+  .medium-up-7 > .cell {
+    width: 14.28571%; }
+  .medium-up-8 > .cell {
+    width: 12.5%; } }
+
+@media print, screen and (min-width: 64em) {
+  .large-up-1 > .cell {
+    width: 100%; }
+  .large-up-2 > .cell {
+    width: 50%; }
+  .large-up-3 > .cell {
+    width: 33.33333%; }
+  .large-up-4 > .cell {
+    width: 25%; }
+  .large-up-5 > .cell {
+    width: 20%; }
+  .large-up-6 > .cell {
+    width: 16.66667%; }
+  .large-up-7 > .cell {
+    width: 14.28571%; }
+  .large-up-8 > .cell {
+    width: 12.5%; } }
+
+.grid-margin-x.small-up-1 > .cell {
+  width: calc(100% - 1.25rem); }
+
+.grid-margin-x.small-up-2 > .cell {
+  width: calc(50% - 1.25rem); }
+
+.grid-margin-x.small-up-3 > .cell {
+  width: calc(33.33333% - 1.25rem); }
+
+.grid-margin-x.small-up-4 > .cell {
+  width: calc(25% - 1.25rem); }
+
+.grid-margin-x.small-up-5 > .cell {
+  width: calc(20% - 1.25rem); }
+
+.grid-margin-x.small-up-6 > .cell {
+  width: calc(16.66667% - 1.25rem); }
+
+.grid-margin-x.small-up-7 > .cell {
+  width: calc(14.28571% - 1.25rem); }
+
+.grid-margin-x.small-up-8 > .cell {
+  width: calc(12.5% - 1.25rem); }
+
+@media print, screen and (min-width: 40em) {
+  .grid-margin-x.small-up-1 > .cell {
+    width: calc(100% - 1.875rem); }
+  .grid-margin-x.small-up-2 > .cell {
+    width: calc(50% - 1.875rem); }
+  .grid-margin-x.small-up-3 > .cell {
+    width: calc(33.33333% - 1.875rem); }
+  .grid-margin-x.small-up-4 > .cell {
+    width: calc(25% - 1.875rem); }
+  .grid-margin-x.small-up-5 > .cell {
+    width: calc(20% - 1.875rem); }
+  .grid-margin-x.small-up-6 > .cell {
+    width: calc(16.66667% - 1.875rem); }
+  .grid-margin-x.small-up-7 > .cell {
+    width: calc(14.28571% - 1.875rem); }
+  .grid-margin-x.small-up-8--tw-backdrop-hue-rotate:hue-rotate(90deg)}.backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(180deg)}.-backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(-180deg)}.-backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(-90deg)}.-backdrop-hue-rotate-60{--tw-backdrop-hue-rotate:hue-rotate(-60deg)}.-backdrop-hue-rotate-30{--tw-backdrop-hue-rotate:hue-rotate(-30deg)}.-backdrop-hue-rotate-15{--tw-backdrop-hue-rotate:hue-rotate(-15deg)}.backdrop-invert-0{--tw-backdrop-invert:invert(0)}.backdrop-invert{--tw-backdrop-invert:invert(100%)}.backdrop-opacity-0{--tw-backdrop-opacity:opacity(0)}.backdrop-opacity-5{--tw-backdrop-opacity:opacity(0.05)}.backdrop-opacity-10{--tw-backdrop-opacity:opacity(0.1)}.backdrop-opacity-20{--tw-backdrop-opacity:opacity(0.2)}.backdrop-opacity-25{--tw-backdrop-opacity:opacity(0.25)}.backdrop-opacity-30{--tw-backdrop-opacity:opacity(0.3)}.backdrop-opacity-40{--tw-backdrop-opacity:opacity(0.4)}.backdrop-opacity-50{--tw-backdrop-opacity:opacity(0.5)}.backdrop-opacity-60{--tw-backdrop-opacity:opacity(0.6)}.backdrop-opacity-70{--tw-backdrop-opacity:opacity(0.7)}.backdrop-opacity-75{--tw-backdrop-opacity:opacity(0.75)}.backdrop-opacity-80{--tw-backdrop-opacity:opacity(0.8)}.backdrop-opacity-90{--tw-backdrop-opacity:opacity(0.9)}.backdrop-opacity-95{--tw-backdrop-opacity:opacity(0.95)}.backdrop-opacity-100{--tw-backdrop-opacity:opacity(1)}.backdrop-saturate-0{--tw-backdrop-saturate:saturate(0)}.backdrop-saturate--collapse > .small-1 {
+    width: 8.33333%; }
+  .small-margin-collapse > .small-2 {
+    width: 16.66667%; }
+  .small-margin-collapse > .small-3 {
+    width: 25%; }
+  .small-margin-collapse > .small-4 {
+    width: 33.33333%; }
+  .small-margin-collapse > .small-5 {
+    width: 41.66667%; }
+  .small-margin-collapse > .small-6 {
+    width: 50%; }
+  .small-margin-collapse > .small-7 {
+    width: 58.33333%; }
+  .small-margin-collapse > .small-8 {
+    width: 66.66667%; }
+  .small-margin-collapse > .small-9 {
+    width: 75%; }
+  .small-margin-collapse > .small-10 {
+    width: 83.33333%; }
+  .small-margin-collapse > .small-11 {
+    width: 91.66667%; }
+  .small-margin-collapse > .small-12 {
+    width: 100%; }
+  @media print, screen and (min-width: 40em) {
+    .small-margin-collapse > .medium-1 {
+      width: 8.33333%; }
+    .small-margin-col

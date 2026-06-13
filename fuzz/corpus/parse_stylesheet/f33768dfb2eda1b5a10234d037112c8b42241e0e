@@ -1,0 +1,47 @@
+button-group.hollow.warning .button.disabled:focus, .button-group.hollow.warning .button[disabled]:focus, .button-group.hollow .button.warning, .button-group.hollow .button.warning.disabled, .button-group.hollow .button.warning[disabled], .button-group.hollow .button.warning.disabled:hover, .button-group.hollow .button.warning[disabled]:hover, .button-group.hollow .button.warning.disabled:focus, .button-group.hollow .button.warning[disabled]:focus {
+    border: 1px solid #ffae00;
+    color: #ffae00; }
+  .button-group.hollow.warning .button:hover, .button-group.hollow.warning .button:focus, .button-group.hollow .button.warning:hover, .button-group.hollow .button.warning:focus {
+    border-color: #805700;
+    color: #805700; }
+  .button-group.hollow.alert .button, .button-group.hollow.alert .button.disabled, .button-group.hollow.alert .button[disabled], .button-group.hollow.alert .button.disabled:hover, .button-group.hollow.alert .button[disabled]:hover, .button-group.hollow.alert .button.disabled:focus, .button-group.hollow.alert .button[disabled]:focus, .button-group.hollow .button.alert, .button-group.hollow .button.alert.disabled, .button-group.hollow .button.alert[disabled], .button-group.hollow .button.alert.disabled:hover, .button-group.hollow .button.alert[disabled]:hover, .button-group.hollow .button.alert.disabled:focus, .button-group.hollow .button.alert[disabled]:focus {
+    border: 1px solid #cc4b37;
+    color: #cc4b37; }
+  .button-group.hollow.alert .button:hover, .button-group.hollow.alert .button:focus, .button-group.hollow .button.alert:hover, .button-group.hollow .button.alert:focus {
+    border-color: #67251a;
+    color: #67251a; }
+  .button-group.clear .button, .button-group.clear .button:hover, .button-group.clear .button:focus, .button-group.clear .button.disabled, .button-group.cle[r .button.disabled:hover, .button-group.clear .button.disabled:focus, .button-group.clear .button[disabled], .button-group.clear .button[disabled]:hover, .bocus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+  background-color: #0062cc !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+a.bg-secondary:hover, a.bg-secondary:focus,
+button.bg-secondary:hover,
+button.bg-secondary:focus {
+  background-color: #545b62 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+a.bg-success:hover, a.bg-success:focus,
+button.bg-success:hover,
+button.bg-success:focus {
+  background-color: #1e7e34 !important;
+}
+
+.bg-info {
+  bautton-group.clear .button[disabled]:focus {
+    border-color: transparent;
+    background-color: transparent; }ckground-color: #17a2b8 !important;
+}
+
+a.bg-info:hover, a.bg-i
+  .button-group.clear .button, .button-group.clear .buttonfo:focus,
+butnton.d

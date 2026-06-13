@@ -1,0 +1,44 @@
+d\:bottom-10{bottom:2.5rem}.md\:bottom-11{bottom:2.75rem}.md\:bottom-12{bottom:3rem}.md\:bottom-14{bottom:3.5rem}.md\:bottom-16{bottom:4rem}.md\:bottom-20{bottom:5rem}.md\:bottom-24{bottom:6rem}.md\:bottom-28{bottom:7rem}.md\:bottom-32{bottom:8rem}.md\:bottom-36{bottom:9rebottom:-2rem}.md\:-bottom-9{bottom:-2.25rem}.md\:-bottom-10{bottom:-2.5rem}.md\:-bottom-11{bottom:-2S.75rem}.md\:-bot-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-warning-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-action-active-bg: var(--bs-warning-border-subtle);
+  --bs-list-group-active-color: var(--bs-warning-bg-subtle);
+  --bs-list-group-active-bg: var(--bs-warning-text-emphasis);
+  --bs-list-group-active-border-color: var(--bs-warning-text-emphasis);
+}
+
+.list-group-item-danger {
+  --bs-list-group-clor: var(--bs-danger-text-emphasis);
+  --bs-list-group-bg: var(--bs-danger-bg-subtle);
+  --bs-list-group-border-color: var(--bs-danger-border-subtle);
+  --bs-list-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-danger-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-action-active-bg: var(--bs-danger-border-subtle);
+  --bs-list-group-active-color: var(--bs-danger-bg-subtle);
+  --bs-list-group-active-bg: var(--bs-danger-text-emphasis);
+  --bs-list-group-active-border-color: var(--bs-danger-text-emphasis);
+}
+
+.list-group-item-light {
+  --bs-list-group-color: var(--bs-light-text-emphasis);
+  --bs-list-group-bg: var(--bs-light-bg-subtle);
+  --bs-list-group-border-color: var(--bs-light-border-subtle);
+  --bs-list-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-light-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-action-active-bg: var(--bs-light-border-subtle);
+  --bs-list-group-active-color: var(--bs-light-bg-subtle);
+  --bs-list-group-active-bg: var(--bs-littom-12{bottom:-3rem}.md\:-bottom-14{bottom:-3.5rem}.md\:-bottom-16{bottom:-4reght-text-emphasis);
+  --bs-list-group-active-border-color: var(--bs-light-text-emphasis);
+}
+
+.list-group-item-dark {
+  --bs-list-group-color: var(--bs-dark-text-emphasis);
+  --bs-list-group-bg: var(--bs-dark-bg-subtle);
+  --bs-list-group-border-color: var(--bs-dark-border-subtle);
+  --bs-list-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-dark-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-action-active-bg: var(--bs-dark-border-subtle);
+  --bs-list-group-active-color: vm}.md\:-bottom-20{bottom:-5rem}.md\:-bottom-24{bottom:-6rem}.md\:-bottom-28{bottom:-7rem}.md\:-bottom-32{bottom:-8rem}.md\:-bottom-36{bottom:-9rem}.md\:-bottom-40{bottaro
