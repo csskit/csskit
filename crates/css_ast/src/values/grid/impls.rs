@@ -1,5 +1,5 @@
 use super::{GridTemplateColumnsStyleValue, GridTemplateRowsStyleValue};
-use crate::{AutoTrackList, CssAtomSet, LineNameList, TrackList};
+use crate::{AutoTrackList, CssAtomSet, LineNameList, TrackList, Value};
 use css_parse::{Cursor, Parse, Parser, Result as ParserResult, T};
 
 // `grid-template-columns`/`grid-template-rows` share `none | <track-list> | <auto-track-list> |
@@ -24,16 +24,16 @@ macro_rules! impl_grid_template_axis_parse {
 					}
 					if p.equals_atom(c.into(), &CssAtomSet::Subgrid) {
 						let keyword = p.parse::<T![Ident]>()?;
-						let names = p.parse_if_peek::<LineNameList<'a>>()?;
+						let names = p.parse_if_peek::<Value<'a, LineNameList<'a>>>()?;
 						return Ok(Self::Subgrid(keyword, names));
 					}
 					// Not `none`/`subgrid` - could still be a track keyword like `auto` or
 					// `min-content`, so fall through to the track-list attempts below.
 				}
-				if let Ok(auto_track_list) = p.try_parse::<AutoTrackList<'a>>() {
+				if let Ok(auto_track_list) = p.try_parse::<Value<'a, AutoTrackList<'a>>>() {
 					return Ok(Self::AutoTrackList(auto_track_list));
 				}
-				Ok(Self::TrackList(p.parse::<TrackList<'a>>()?))
+				Ok(Self::TrackList(p.parse::<Value<'a, TrackList<'a>>>()?))
 			}
 		}
 	};
@@ -58,14 +58,14 @@ mod tests {
 		assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<GridAutoFlowStyleValue>(), 36);
 		// assert_eq!(std::mem::size_of::<GridStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 44);
-		assert_eq!(std::mem::size_of::<GridColumnStartStyleValue>(), 44);
-		assert_eq!(std::mem::size_of::<GridRowEndStyleValue>(), 44);
-		assert_eq!(std::mem::size_of::<GridColumnEndStyleValue>(), 44);
-		assert_eq!(std::mem::size_of::<GridRowStyleValue>(), 100);
-		assert_eq!(std::mem::size_of::<GridColumnStyleValue>(), 100);
-		assert_eq!(std::mem::size_of::<GridAreaStyleValue>(), 212);
-		assert_eq!(std::mem::size_of::<FlowToleranceStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<GridColumnStartStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<GridRowEndStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<GridColumnEndStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<GridRowStyleValue>(), 112);
+		assert_eq!(std::mem::size_of::<GridColumnStyleValue>(), 112);
+		assert_eq!(std::mem::size_of::<GridAreaStyleValue>(), 240);
+		assert_eq!(std::mem::size_of::<FlowToleranceStyleValue>(), 24);
 	}
 
 	#[test]

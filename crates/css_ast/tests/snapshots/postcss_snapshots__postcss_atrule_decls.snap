@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -46,7 +45,7 @@ StyleSheet(
               len: 1,
             )),
             value: BackgroundStyleValue([
-              (BgLayer(
+              (Literal(BgLayer(
                 image: None,
                 position: None,
                 repeat: None,
@@ -58,7 +57,7 @@ StyleSheet(
                   offset: SourceOffset(30),
                   len: 5,
                 ))))),
-              ), None),
+              )), None),
             ]),
             important: None,
             semicolon: None,
@@ -125,7 +124,7 @@ StyleSheet(
               len: 1,
             )),
             value: BackgroundStyleValue([
-              (BgLayer(
+              (Literal(BgLayer(
                 image: None,
                 position: None,
                 repeat: None,
@@ -137,7 +136,7 @@ StyleSheet(
                   offset: SourceOffset(78),
                   len: 5,
                 ))))),
-              ), None),
+              )), None),
             ]),
             important: None,
             semicolon: None,

@@ -23,7 +23,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MozDocumentRule>(), 144);
+		assert_eq!(std::mem::size_of::<MozDocumentRule>(), 160);
 	}
 
 	#[test]

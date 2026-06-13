@@ -63,7 +63,7 @@ pub enum ScrollInitialTargetStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginStyleValue;
+pub struct ScrollMarginStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block).
 ///
@@ -94,7 +94,7 @@ pub struct ScrollMarginStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginBlockStyleValue;
+pub struct ScrollMarginBlockStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-end).
 ///
@@ -126,7 +126,7 @@ pub struct ScrollMarginBlockStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginBlockEndStyleValue;
+pub struct ScrollMarginBlockEndStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-block-start).
 ///
@@ -158,7 +158,7 @@ pub struct ScrollMarginBlockEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginBlockStartStyleValue;
+pub struct ScrollMarginBlockStartStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-bottom).
 ///
@@ -190,7 +190,7 @@ pub struct ScrollMarginBlockStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginBottomStyleValue;
+pub struct ScrollMarginBottomStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline).
 ///
@@ -221,7 +221,7 @@ pub struct ScrollMarginBottomStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginInlineStyleValue;
+pub struct ScrollMarginInlineStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-end).
 ///
@@ -253,7 +253,7 @@ pub struct ScrollMarginInlineStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginInlineEndStyleValue;
+pub struct ScrollMarginInlineEndStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-inline-start).
 ///
@@ -289,7 +289,7 @@ pub struct ScrollMarginInlineEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginInlineStartStyleValue;
+pub struct ScrollMarginInlineStartStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-left).
 ///
@@ -321,7 +321,7 @@ pub struct ScrollMarginInlineStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginLeftStyleValue;
+pub struct ScrollMarginLeftStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-right).
 ///
@@ -353,7 +353,7 @@ pub struct ScrollMarginLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginRightStyleValue;
+pub struct ScrollMarginRightStyleValue<'a>;
 
 /// Represents the style value for `scroll-margin-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin-top).
 ///
@@ -385,7 +385,7 @@ pub struct ScrollMarginRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollMarginTopStyleValue;
+pub struct ScrollMarginTopStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding).
 ///
@@ -416,7 +416,7 @@ pub struct ScrollMarginTopStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingStyleValue;
+pub struct ScrollPaddingStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-block` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block).
 ///
@@ -448,7 +448,7 @@ pub struct ScrollPaddingStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingBlockStyleValue;
+pub struct ScrollPaddingBlockStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-block-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-end).
 ///
@@ -481,7 +481,7 @@ pub struct ScrollPaddingBlockStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingBlockEndStyleValue;
+pub struct ScrollPaddingBlockEndStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-block-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-block-start).
 ///
@@ -518,7 +518,7 @@ pub struct ScrollPaddingBlockEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingBlockStartStyleValue;
+pub struct ScrollPaddingBlockStartStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-bottom` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-bottom).
 ///
@@ -551,7 +551,7 @@ pub struct ScrollPaddingBlockStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingBottomStyleValue;
+pub struct ScrollPaddingBottomStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-inline` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline).
 ///
@@ -583,7 +583,7 @@ pub struct ScrollPaddingBottomStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingInlineStyleValue;
+pub struct ScrollPaddingInlineStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-inline-end` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-end).
 ///
@@ -616,7 +616,7 @@ pub struct ScrollPaddingInlineStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingInlineEndStyleValue;
+pub struct ScrollPaddingInlineEndStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-inline-start` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-inline-start).
 ///
@@ -653,7 +653,7 @@ pub struct ScrollPaddingInlineEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingInlineStartStyleValue;
+pub struct ScrollPaddingInlineStartStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-left` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-left).
 ///
@@ -686,7 +686,7 @@ pub struct ScrollPaddingInlineStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingLeftStyleValue;
+pub struct ScrollPaddingLeftStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-right` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-right).
 ///
@@ -719,7 +719,7 @@ pub struct ScrollPaddingLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingRightStyleValue;
+pub struct ScrollPaddingRightStyleValue<'a>;
 
 /// Represents the style value for `scroll-padding-top` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-padding-top).
 ///
@@ -752,7 +752,7 @@ pub struct ScrollPaddingRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollPaddingTopStyleValue;
+pub struct ScrollPaddingTopStyleValue<'a>;
 
 /// Represents the style value for `scroll-snap-align` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-align).
 ///

@@ -24,14 +24,14 @@ pub struct NameRepeat<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum NameRepeatCount {}
+pub enum NameRepeatCount<'a> {}
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NameRepeatParams<'a> {
-	pub count: NameRepeatCount,
+	pub count: NameRepeatCount<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
 	pub comma: T![,],
@@ -46,7 +46,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<NameRepeat>(), 80);
+		assert_eq!(std::mem::size_of::<NameRepeat>(), 88);
 	}
 
 	#[test]

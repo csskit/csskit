@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{BasicShape, RayFunction, Url};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-fonts-4/#numeric-spacing-values>
 ///
@@ -13,5 +14,5 @@ use crate::{BasicShape, RayFunction, Url};
 pub enum OffsetPath<'a> {
 	RayFunction(RayFunction),
 	Url(Url),
-	BasicShape(BasicShape<'a>),
+	BasicShape(Box<'a, BasicShape<'a>>),
 }

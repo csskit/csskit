@@ -11,7 +11,7 @@ use crate::RepeatLineWidth;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum LineWidthOrRepeat<'a> {
-	LineWidth(crate::LineWidth),
+	LineWidth(crate::Value<'a, crate::LineWidth>),
 	RepeatFunction(RepeatLineWidth<'a>),
 }
 
@@ -30,7 +30,12 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, LineWidthOrRepeat, "repeat(2,12px)", LineWidthOrRepeat::RepeatFunction(_));
-		assert_parse!(CssAtomSet::ATOMS, LineWidthOrRepeat, "thin", LineWidthOrRepeat::LineWidth(LineWidth::Thin(_)));
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			LineWidthOrRepeat,
+			"thin",
+			LineWidthOrRepeat::LineWidth(crate::Value::Literal(LineWidth::Thin(_)))
+		);
 	}
 
 	#[test]

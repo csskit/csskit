@@ -6,24 +6,24 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<VoiceVolumeStyleValue>(), 36);
-		assert_eq!(std::mem::size_of::<VoiceBalanceStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<VoiceVolumeStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<VoiceBalanceStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<SpeakStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PauseBeforeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PauseAfterStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PauseStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RestBeforeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<RestAfterStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<RestStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<CueBeforeStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<CueAfterStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<CueStyleValue>(), 112);
+		assert_eq!(std::mem::size_of::<PauseBeforeStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<PauseAfterStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<PauseStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<RestBeforeStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<RestAfterStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<RestStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<CueBeforeStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<CueAfterStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<CueStyleValue>(), 128);
 		assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 36);
+		assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 48);
 		// assert_eq!(std::mem::size_of::<VoicePitchStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<VoiceRangeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceStressStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<VoiceDurationStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<VoiceDurationStyleValue>(), 24);
 	}
 
 	#[test]

@@ -3,4 +3,4 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[parse(all_must_occur)]
-struct Foo<'a>(pub crate::Length, pub ::css_parse::T![Ident]);
+struct Foo<'a>(pub crate::CalcableValue<'a, crate::Length>, pub ::css_parse::T![Ident]);

@@ -256,12 +256,35 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		quote! { visit_flow::try_visit!({ #body }); }
 	};
 
-	let where_clause = wc.extend_where_clause(&input.generics, parse_quote! { crate::Visitable });
 	let mut_where_clause = wc.extend_where_clause(&input.generics, parse_quote! { crate::VisitableMut });
 
 	let skip_queryable = has_queryable_skip(&input.attrs);
+	let queryable = is_queryable && !skip_queryable;
 
-	let queryable_impl = if style.visit_self() && !skip_queryable {
+	// Any type parameter that must be `Visitable` for this impl's fields must also satisfy
+	// `ToSpan` and `NodeWithMetadata<CssMetadata>`. This is required directly when this node is
+	// itself queryable (`accept()`'s body calls `QueryableNode::visit_node(self)`, and
+	// `QueryableNode: ToSpan + NodeWithMetadata<CssMetadata>`, see visit/mod.rs) - but it's also
+	// required transitively whenever a *field*'s type is queryable over the same `T` (that
+	// field's own `Visitable` impl already carries this same requirement on `T`, so callers like
+	// this one, invoking `field.accept(v)`, must prove it too). Since field queryability isn't
+	// visible from here, bundle all three bounds together unconditionally for every `T` that
+	// needs `Visitable` at all.
+	let where_clause = {
+		let to_span_clause = wc.extend_where_clause(&input.generics, parse_quote! { ::css_parse::ToSpan });
+		let metadata_clause =
+			wc.extend_where_clause(&input.generics, parse_quote! { css_parse::NodeWithMetadata<crate::CssMetadata> });
+		let mut merged = wc.extend_where_clause(&input.generics, parse_quote! { crate::Visitable });
+		for extra in [to_span_clause, metadata_clause].into_iter().flatten() {
+			match &mut merged {
+				Some(merged) => merged.predicates.extend(extra.predicates),
+				None => merged = Some(extra),
+			}
+		}
+		merged
+	};
+
+	let queryable_impl = if queryable {
 		quote! {
 			#[automatically_derived]
 			impl #impl_generics crate::QueryableNode for #ident #type_generics #where_clause {
@@ -275,7 +298,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics crate::VisitableMut for #ident #type_generics #mut_where_clause {
-			fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
+			fn accept_mut<__V: crate::VisitMut>(&mut self, v: &mut __V) {
 				use crate::VisitableMut;
 				#visit_mut
 				#body_mut
@@ -285,7 +308,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 
 		#[automatically_derived]
 		impl #impl_generics crate::Visitable for #ident #type_generics #where_clause {
-			fn accept<V: crate::Visit>(&self, v: &mut V) -> visit_flow::VisitFlow {
+			fn accept<__V: crate::Visit>(&self, v: &mut __V) -> visit_flow::VisitFlow {
 				use crate::Visitable;
 				#accept_body
 				<visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND

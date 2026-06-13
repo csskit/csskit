@@ -93,62 +93,86 @@ impl DefType {
 		self.ident.0.as_str()
 	}
 
+	/// Returns true if this type *intrinsically* carries its own `'a` lifetime (i.e. the
+	/// hand-written or generated type is declared as `Foo<'a>`). This is independent of the
+	/// `Value<'a, T>` substitution wrapper, which always supplies `'a` separately. Numeric
+	/// primitives (`Integer`, `Length`, ...), `Url`, and `String` carry **no** own lifetime.
 	pub fn maybe_unsized(&self) -> bool {
 		// Check for specific types that require allocations
 		matches!(
 			self.ident_str(),
-			// Hand-written types that contain other allocating types
-			"Color"          // Color<'a>
-				| "Shadow"       // Shadow<'a> (contains Color<'a>)
-				| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)
-				| "Image"          // contains Gradient<'a>
-				| "Image1d"  // contains StripesFunction<'a>
-				| "ContentList"  // Vec<'a, ContentListItem<'a>>
-				| "ContentAltItem"  // contains Counter<'a> and AttrFunction<'a>
-				| "ContentReplacement"  // type alias for Image<'a>
-				| "Counter"  // Counter<'a> enum with CounterFunction/CountersFunction variants
-				| "CounterStyle"  // complex hand-written type
-				| "CursorImage"  // contains Image<'a>
-				| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
-				// Types that reference other allocating types
-					| "LineWidthOrRepeat"  // contains Repeat<'a>
-					| "LineWidthList"  // contains LineWidthOrRepeat<'a>
-					| "AutoLineWidthList"  // contains Repeat<'a> and LineWidthOrRepeat<'a>
-					| "GapRuleList"  // contains Vec<'a, ...>
-					| "GapAutoRuleList"  // contains Vec<'a, ...>
-					| "FontFamilyName"  // may contain allocating elements
-				| "VoiceFamilyName"  // may contain allocating elements
-				| "BgImage"  // contains Image<'a>
-				| "MaskLayer"  // contains Image<'a>
-				| "MaskReference"  // contains Image<'a>
-				| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
-				| "DynamicRangeLimitMixFunction"  // contains allocating params
-				// Additional types that reference allocating types
-				| "Outline"
-				| "SingleTransition"
-				| "Symbol" // Symbol<'a>
-				| "TransformList"
-				| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
-				| "FilterValue"  // contains FilterFunction<'a>
-				| "FilterFunction" // contains DropShadowFunction<'a>
-			| "BgLayer"  // contains BgImage<'a> and Color<'a>
-			| "FinalBgLayer"  // type alias for BgLayer<'a>
-			| "BgPositionAndSize" // contains BgPosition which contains Position
+			"AnchorName"        // Value<'a, DashedIdent>
+			| "ArcCommand"  // ArcCommand<'a> (contains CommandEndPoint<'a>)
+			| "AutoLineWidthList"  // contains Repeat<'a> and LineWidthOrRepeat<'a>
 			| "BasicShape"  // contains PolygonFunction<'a> and ShapeFunction<'a>
+			| "BasicShapeRect"  // contains InsetFunction<'a>, ShapeRectFunction<'a>, XywhFunction<'a>
+			| "BgImage"  // contains Image<'a>
+			| "BgLayer"  // contains BgImage<'a> and Color<'a>
+			| "BgPositionAndSize" // contains BgPosition which contains Position
+			| "BgSize"           // BgSize<'a>
+			| "Color"          // Color<'a>
+			| "ColorSchemeName"   // Other(Value<'a, CustomIdent>)
+			| "ContentAltItem"  // contains Counter<'a> and AttrFunction<'a>
+			| "ContentList"  // Vec<'a, ContentListItem<'a>>
+			| "ContentReplacement"  // type alias for Image<'a>
+			| "ControlPoint"  // ControlPoint<'a> (contains RelativeControlPoint<'a>)
+			| "CoordinatePair"  // CoordinatePair<'a> (contains LengthPercentage pairs via CalcableValue)
+			| "Counter"  // Counter<'a> enum with CounterFunction/CountersFunction variants
+			| "CounterStyle"  // complex hand-written type
+			| "CurveCommand"  // CurveCommand<'a> (contains CurveTarget<'a>)
+			| "CursorImage"  // contains Image<'a>
+			| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
+			| "DynamicRangeLimitMixFunction"  // contains allocating params
+			| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
+			| "FilterFunction" // contains DropShadowFunction<'a>
+			| "FilterValue"  // contains FilterFunction<'a>
+			| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
+			| "FinalBgLayer"  // type alias for BgLayer<'a>
+			| "FontFamilyName"  // may contain allocating elements
+			| "FontWeightAbsolute" // FontWeightAbsolute<'a>
+			| "GapAutoRuleList"  // contains Vec<'a, ...>
+			| "GapRuleList"  // contains Vec<'a, ...>
+			| "GenericFontFamily" // contains Value<'a, _> alternatives
+			| "HorizontalLineCommand"  // HorizontalLineCommand<'a> (contains HorizontalLineClause<'a>)
+			| "HorizontalLineValue"  // HorizontalLineValue<'a> (contains LengthPercentage)
+			| "Image"          // contains Gradient<'a>
+			| "Image1d"  // contains StripesFunction<'a>
+			| "LineCommand"  // LineCommand<'a> (contains CommandEndPoint<'a>)
+			| "LineWidthList"  // contains LineWidthOrRepeat<'a>
+			| "LineWidthOrRepeat"  // contains Repeat<'a>
+			| "MaskLayer"  // contains Image<'a>
+			| "MaskReference"  // contains Image<'a>
+			| "MoveCommand"  // MoveCommand<'a> (contains CommandEndPoint<'a>)
 			| "OffsetPath" // contains BasicShape<'a>
+			| "Outline"
 			| "Paint" // contains Image<'a>
 			| "FillLayer" // contains Paint<'a> and Color<'a>
 			| "StrokeLayer" // contains Paint<'a> and Color<'a>
+			| "RelativeControlPoint"  // RelativeControlPoint<'a> (contains CoordinatePair<'a>)
+			| "Shadow"       // Shadow<'a> (contains Color<'a>)
+			| "SingleTransition"
+			| "SmoothCommand"  // SmoothCommand<'a> (contains SmoothTarget<'a>)
+			| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)
+			| "Symbol" // Symbol<'a>
+			| "TransformList"
+			| "VerticalLineCommand"  // VerticalLineCommand<'a> (contains VerticalLineClause<'a>)
+			| "VerticalLineValue"  // VerticalLineValue<'a> (contains LengthPercentage)
+			| "VoiceFamilyName" // may contain allocating elements
 			// css-grid track sizing types
 			| "LineNames" // LineNames<'a>, Vec<'a, CustomIdent>
 			| "TrackRepeat" // contains Vec<'a, ...> and LineNames<'a>
 			| "AutoRepeat" // contains Vec<'a, ...> and LineNames<'a>
 			| "FixedRepeat" // contains Vec<'a, ...> and LineNames<'a>
+			| "FixedSize" // contains MinmaxFunction<'a>
 			| "NameRepeat" // contains Vec<'a, LineNames<'a>>
+			| "NameRepeatCount" // contains CalcableValue<'a, ...> via <integer>
 			| "TrackList" // contains Vec<'a, ...>, LineNames<'a> and TrackRepeat<'a>
 			| "AutoTrackList" // contains Vec<'a, ...>, LineNames<'a>, FixedRepeat<'a> and AutoRepeat<'a>
 			| "ExplicitTrackList" // contains Vec<'a, ...> and LineNames<'a>
 			| "LineNameList" // contains Vec<'a, ...>, LineNames<'a> and NameRepeat<'a>
+			| "TrackSize" // contains CalcableValue<'a, ...> via <track-breadth>/<length-percentage>
+			| "TrackBreadth" // contains CalcableValue<'a, ...> via <length-percentage>/<flex>
+			| "InflexibleBreadth" // contains CalcableValue<'a, ...> via <length-percentage>
 		)
 	}
 }
@@ -355,7 +379,9 @@ impl Def {
 			Self::FunctionType(ty) => {
 				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "Attr")
 			}
-			Self::Type(d) => d.maybe_unsized(),
+			// Every named <type> reference is wrapped in Value<'a, T> / CalcableValue<'a, T>,
+			// which always supplies 'a — so any container holding one is unsized.
+			Self::Type(_) => true,
 			Self::StyleValue(ty) => {
 				matches!(
 					ty.ident_str(),
@@ -397,6 +423,73 @@ impl Def {
 						| "ViewTimelineInset"
 						| "ViewTimelineName"
 						| "WebkitTextStrokeColor"
+						| "WebkitTextStrokeWidth"
+					| "MarginTop" | "MarginRight" | "MarginBottom" | "MarginLeft"
+					| "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft"
+					// Sizing properties that use Value<Length> or Value<LengthPercentage>
+					| "Width" | "Height" | "MaxWidth" | "MaxHeight" | "MinWidth" | "MinHeight"
+					| "ContainIntrinsicBlockSize" | "ContainIntrinsicWidth"
+					| "ContainIntrinsicHeight" | "ContainIntrinsicInlineSize"
+					// Flex properties
+					| "FlexGrow" | "FlexShrink" | "FlexBasis" | "FlexLineCount"
+					// Column/gap properties
+					| "ColumnGap" | "RowGap"
+					| "ColumnWidth" | "ColumnCount" | "ColumnHeight"
+					// Inline/typography properties
+					| "BaselineShift" | "LineHeight" | "InitialLetter" | "InitialLetterWrap"
+					| "LetterSpacing" | "LinePadding" | "TextAlign" | "TextAlignAll"
+					| "TextFit" | "TextIndent" | "WordSpacing"
+					| "HyphenateCharacter" | "HyphenateLimitChars" | "HyphenateLimitLines"
+					| "HyphenateLimitZone"
+					// Position properties
+					| "Top" | "Bottom" | "Left" | "Right" | "Inset" | "InsetBlock" | "InsetInline"
+					// Font properties
+					| "FontSize" | "FontSizeAdjust" | "FontWeight" | "FontWidth"
+					| "FontLanguageOverride"
+					// Speech properties
+					| "VoiceBalance" | "VoiceRate"
+					// Transform properties
+					| "Perspective" | "Translate"
+					// Text decoration
+					| "TextDecorationThickness"
+					// Rhythm
+					| "BlockStepSize"
+					// Borders radius
+					| "BorderBlockEndRadius" | "BorderBlockStartRadius" | "BorderBottomRadius"
+					| "BorderInlineEndRadius" | "BorderInlineStartRadius" | "BorderLeftRadius"
+					| "BorderLimit" | "BorderRadius" | "BorderRightRadius" | "BorderTopRadius"
+					// Webkit
+					| "WebkitOrder" | "WebkitTextSizeAdjust" | "WebkitFlex"
+					// Shorthand properties that reference unsized style values
+					| "Flex" | "Columns" | "Gap"
+					| "VerticalAlign"
+					| "BlockEllipsis"
+					| "Cue" | "CueBefore" | "CueAfter"
+					| "LineClamp"
+					| "TextEmphasis" | "TextEmphasisStyle"
+					// Properties whose StyleValue gained 'a via Value<'a, T> wrapping of
+					// angle/time/frequency/flex/number-length/number-percentage numerics.
+					| "BorderImageOutset" | "BorderImageSlice"
+					| "PauseBefore" | "PauseAfter" | "RestBefore" | "RestAfter"
+					| "InterestDelayStart" | "InterestDelayEnd"
+					// Shorthands referencing other now-unsized StyleValues (transitively gained 'a
+					// once every <type> reference became Value<'a, T> / CalcableValue<'a, T>).
+					// Names are the *referenced* property (the `<'prop'>` inside the grammar).
+					// minimal: name table, collapses once <'prop'> references are wrapped too.
+					| "AlignContent" | "JustifyContent" | "AlignItems" | "JustifyItems"
+					| "AlignSelf" | "JustifySelf"
+					| "BorderImageWidth"
+					| "BorderTopLeftRadius" | "CornerTopLeftShape"
+					| "CornerShape" | "CornerTopShape"
+					| "ColumnRuleInset"
+					| "BorderTopStyle" | "BorderTopWidth"
+					| "ColumnRuleColor" | "ColumnRuleInsetCap" | "ColumnRuleInsetJunction"
+					| "ColumnRuleInsetEnd" | "ColumnRuleInsetStart" | "ColumnRuleStyle"
+					| "AlignmentBaseline"
+					| "MixBlendMode" | "TextBoxEdge"
+					| "Opacity"
+					| "OutlineWidth" | "OutlineStyle"
+					| "PositionTryOrder"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),

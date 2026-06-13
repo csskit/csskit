@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -34,11 +33,11 @@ StyleSheet(
                 offset: SourceOffset(13),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Px(Dimension(Cursor(
+              value: LengthPercentage(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(15),
                 len: 4,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

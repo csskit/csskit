@@ -31,7 +31,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flow-from"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FlowFromStyleValue;
+pub struct FlowFromStyleValue<'a>;
 
 /// Represents the style value for `flow-into` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#flow-into).
 ///
@@ -57,7 +57,7 @@ pub struct FlowFromStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flow-into"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FlowIntoStyleValue {}
+pub enum FlowIntoStyleValue<'a> {}
 
 /// Represents the style value for `region-fragment` as defined in [css-regions-1](https://drafts.csswg.org/css-regions-1/#region-fragment).
 ///

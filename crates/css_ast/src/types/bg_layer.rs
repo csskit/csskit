@@ -20,7 +20,7 @@ use crate::{Attachment, BgClip, BgImage, BgPositionAndSize, Color, RepeatStyle, 
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BgLayer<'a> {
 	pub image: Option<BgImage<'a>>,
-	pub position: Option<BgPositionAndSize>,
+	pub position: Option<BgPositionAndSize<'a>>,
 	pub repeat: Option<RepeatStyle>,
 	pub attachment: Option<Attachment>,
 	pub origin: Option<VisualBox>,
@@ -139,7 +139,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgLayer>(), 256);
+		assert_eq!(std::mem::size_of::<BgLayer>(), 280);
 	}
 
 	#[test]

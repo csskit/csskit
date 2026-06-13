@@ -26,11 +26,11 @@ StyleSheet(
           len: 1,
         )),
         value: AnimationNameStyleValue([
-          (r#Some(Ident(Ident(Cursor(
+          (r#Some(Literal(Ident(Ident(Cursor(
             kind: "Ident",
             offset: SourceOffset(27),
             len: 4,
-          )))), None),
+          ))))), None),
         ]),
         important: None,
         semicolon: None,

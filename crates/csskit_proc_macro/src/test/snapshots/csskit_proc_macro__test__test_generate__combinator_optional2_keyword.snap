@@ -8,8 +8,8 @@ enum Foo<'a> {
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
     Bar(
-        Option<crate::Color<'a>>,
-        Option<crate::Color<'a>>,
+        Option<crate::Value<'a, crate::Color<'a>>>,
+        Option<crate::Value<'a, crate::Color<'a>>>,
         #[cfg_attr(feature = "visitable", visit(skip))]
         #[atom(CssAtomSet::Bar)]
         ::css_parse::T![Ident],

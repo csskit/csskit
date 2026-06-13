@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-orientation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ImageOrientationStyleValue {}
+pub enum ImageOrientationStyleValue<'a> {}
 
 /// Represents the style value for `image-rendering` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-rendering).
 ///
@@ -93,7 +93,7 @@ pub enum ImageRenderingStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-resolution"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ImageResolutionStyleValue;
+pub struct ImageResolutionStyleValue<'a>;
 
 /// Represents the style value for `object-fit` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-fit).
 ///
@@ -152,7 +152,7 @@ pub enum ObjectFitStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ObjectPositionStyleValue;
+pub struct ObjectPositionStyleValue<'a>;
 
 /// Represents the style value for `object-view-box` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-view-box).
 ///
@@ -181,4 +181,4 @@ pub struct ObjectPositionStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-view-box"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ObjectViewBoxStyleValue;
+pub struct ObjectViewBoxStyleValue<'a>;

@@ -16,7 +16,7 @@ use crate::{Angle, LengthPercentage, Position};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ShapeCommand {}
+pub enum ShapeCommand<'a> {}
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-coordinate-pair>
 ///
@@ -28,7 +28,7 @@ pub enum ShapeCommand {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CoordinatePair;
+pub struct CoordinatePair<'a>;
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-command-end-point>
 ///
@@ -40,7 +40,7 @@ pub struct CoordinatePair;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CommandEndPoint {}
+pub enum CommandEndPoint<'a> {}
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-control-point>
 ///
@@ -52,7 +52,7 @@ pub enum CommandEndPoint {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ControlPoint {}
+pub enum ControlPoint<'a> {}
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-relative-control-point>
 ///
@@ -64,7 +64,7 @@ pub enum ControlPoint {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RelativeControlPoint;
+pub struct RelativeControlPoint<'a>;
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-arc-sweep>
 ///
@@ -104,10 +104,10 @@ pub enum ArcSize {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MoveCommand {
+pub struct MoveCommand<'a> {
 	#[atom(CssAtomSet::Move)]
 	pub keyword: T![Ident],
-	pub point: CommandEndPoint,
+	pub point: CommandEndPoint<'a>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-line-command>
@@ -119,10 +119,10 @@ pub struct MoveCommand {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LineCommand {
+pub struct LineCommand<'a> {
 	#[atom(CssAtomSet::Line)]
 	pub keyword: T![Ident],
-	pub point: CommandEndPoint,
+	pub point: CommandEndPoint<'a>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-horizontal-line-command>
@@ -137,23 +137,23 @@ pub struct LineCommand {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum HorizontalLineValue {}
+pub enum HorizontalLineValue<'a> {}
 
 #[syntax(" to <horizontal-line-value> | by <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum HorizontalLineClause {}
+pub enum HorizontalLineClause<'a> {}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HorizontalLineCommand {
+pub struct HorizontalLineCommand<'a> {
 	#[atom(CssAtomSet::Hline)]
 	pub keyword: T![Ident],
-	pub clause: HorizontalLineClause,
+	pub clause: HorizontalLineClause<'a>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-vertical-line-command>
@@ -169,23 +169,23 @@ pub struct HorizontalLineCommand {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VerticalLineValue {}
+pub enum VerticalLineValue<'a> {}
 
 #[syntax(" to <vertical-line-value> | by <length-percentage> ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VerticalLineClause {}
+pub enum VerticalLineClause<'a> {}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct VerticalLineCommand {
+pub struct VerticalLineCommand<'a> {
 	#[atom(CssAtomSet::Vline)]
 	pub keyword: T![Ident],
-	pub clause: VerticalLineClause,
+	pub clause: VerticalLineClause<'a>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-curve-command>
@@ -202,16 +202,16 @@ pub struct VerticalLineCommand {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CurveTarget {}
+pub enum CurveTarget<'a> {}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CurveCommand {
+pub struct CurveCommand<'a> {
 	#[atom(CssAtomSet::Curve)]
 	pub keyword: T![Ident],
-	pub target: CurveTarget,
+	pub target: CurveTarget<'a>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-smooth-command>
@@ -226,16 +226,16 @@ pub struct CurveCommand {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SmoothTarget {}
+pub enum SmoothTarget<'a> {}
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SmoothCommand {
+pub struct SmoothCommand<'a> {
 	#[atom(CssAtomSet::Smooth)]
 	pub keyword: T![Ident],
-	pub target: SmoothTarget,
+	pub target: SmoothTarget<'a>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-arc-command>
@@ -282,10 +282,10 @@ pub struct ArcCommandParams {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ArcCommand {
+pub struct ArcCommand<'a> {
 	#[atom(CssAtomSet::Arc)]
 	pub keyword: T![Ident],
-	pub point: CommandEndPoint,
+	pub point: CommandEndPoint<'a>,
 	pub params: ArcCommandParams,
 }
 

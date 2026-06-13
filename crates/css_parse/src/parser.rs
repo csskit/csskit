@@ -41,6 +41,10 @@ pub struct Parser<'a, I: Iterator<Item = Cursor> + Clone> {
 	buffer: [Cursor; BUFFER_LEN],
 	buffer_index: usize,
 
+	/// Nesting depth of substitution functions (`var()`, `env()`, etc.) currently being parsed.
+	/// Guards against stack overflow from deeply-nested fallbacks like `var(--a, var(--a, ...))`.
+	substitution_depth: u8,
+
 	#[cfg(debug_assertions)]
 	pub(crate) last_cursor: Option<Cursor>,
 }
@@ -81,6 +85,7 @@ where
 			stop: KindSet::NONE,
 			buffer,
 			buffer_index: 0,
+			substitution_depth: 0,
 			bump,
 			#[cfg(debug_assertions)]
 			last_cursor: None,
@@ -106,6 +111,31 @@ where
 	#[inline]
 	pub fn bump(&self) -> &'a Arena {
 		self.bump
+	}
+
+	/// Maximum nesting depth of substitution functions before parsing bails to `Unresolved`.
+	pub const MAX_SUBSTITUTION_DEPTH: u8 = 32;
+
+	/// Enters a substitution-function parse scope, incrementing the depth counter.
+	///
+	/// Returns `false` if the depth limit ([`Self::MAX_SUBSTITUTION_DEPTH`]) would be exceeded;
+	/// callers should then consume the tokens as an unresolved token sequence instead of recursing.
+	/// On success, callers MUST call [`Self::exit_substitution`] once parsing of the scope ends.
+	#[inline]
+	#[must_use]
+	pub fn enter_substitution(&mut self) -> bool {
+		if self.substitution_depth >= Self::MAX_SUBSTITUTION_DEPTH {
+			return false;
+		}
+		self.substitution_depth += 1;
+		true
+	}
+
+	/// Exits a substitution-function parse scope, decrementing the depth counter.
+	#[inline]
+	pub fn exit_substitution(&mut self) {
+		debug_assert!(self.substitution_depth > 0);
+		self.substitution_depth = self.substitution_depth.saturating_sub(1);
 	}
 
 	#[inline]

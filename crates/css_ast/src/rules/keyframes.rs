@@ -106,10 +106,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<KeyframesRule>(), 128);
+		assert_eq!(std::mem::size_of::<KeyframesRule>(), 144);
 		assert_eq!(std::mem::size_of::<KeyframeSelector>(), 16);
 		assert_eq!(std::mem::size_of::<KeyframesName>(), 16);
-		assert_eq!(std::mem::size_of::<KeyframesRuleBlock>(), 96);
+		assert_eq!(std::mem::size_of::<KeyframesRuleBlock>(), 112);
 	}
 
 	#[test]

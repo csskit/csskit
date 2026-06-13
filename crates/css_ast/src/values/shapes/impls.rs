@@ -6,11 +6,11 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ShapeImageThresholdStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ShapeInsideStyleValue>(), 264);
-		assert_eq!(std::mem::size_of::<ShapeMarginStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ShapeOutsideStyleValue>(), 264);
-		assert_eq!(std::mem::size_of::<ShapePaddingStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ShapeImageThresholdStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<ShapeInsideStyleValue>(), 368);
+		assert_eq!(std::mem::size_of::<ShapeMarginStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<ShapeOutsideStyleValue>(), 376);
+		assert_eq!(std::mem::size_of::<ShapePaddingStyleValue>(), 24);
 	}
 
 	#[test]

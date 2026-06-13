@@ -329,7 +329,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MediaRule>(), 160);
+		assert_eq!(std::mem::size_of::<MediaRule>(), 176);
 		assert_eq!(std::mem::size_of::<MediaQueryList>(), 24);
 		assert_eq!(std::mem::size_of::<MediaQuery>(), 192);
 		assert_eq!(std::mem::size_of::<MediaCondition>(), 144);

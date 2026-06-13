@@ -8,15 +8,19 @@ mod counter_functions;
 mod dynamic_range_limit_mix_function;
 mod easing_functions;
 mod ellipse_function;
+mod env_function;
 mod fade_function;
 mod filter_functions;
+mod first_valid_function;
 mod fit_content_function;
 mod gradient_functions;
+mod if_function;
 mod image_set_function;
 mod inset_function;
 mod keypress_function;
 mod leader_function;
 mod light_dark_function;
+mod math_function;
 mod minmax_function;
 mod palette_mix_function;
 mod param_function;
@@ -37,6 +41,7 @@ mod symbols_function;
 mod target_functions;
 mod transform_functions;
 mod url;
+mod var_function;
 mod xywh_function;
 
 pub use attr_function::*;
@@ -49,15 +54,19 @@ pub use counter_functions::*;
 pub use dynamic_range_limit_mix_function::*;
 pub use easing_functions::*;
 pub use ellipse_function::*;
+pub use env_function::*;
 pub use fade_function::*;
 pub use filter_functions::*;
+pub use first_valid_function::*;
 pub use fit_content_function::*;
 pub use gradient_functions::*;
+pub use if_function::*;
 pub use image_set_function::*;
 pub use inset_function::*;
 pub use keypress_function::*;
 pub use leader_function::*;
 pub use light_dark_function::*;
+pub use math_function::*;
 pub use minmax_function::*;
 pub use palette_mix_function::*;
 pub use param_function::*;
@@ -78,13 +87,17 @@ pub use symbols_function::*;
 pub use target_functions::*;
 pub use transform_functions::*;
 pub use url::*;
+pub use var_function::*;
 pub use xywh_function::*;
 
 mod prelude {
+	pub(crate) use crate::types::DashedIdent;
 	pub(crate) use crate::{Angle, CSSInt, Color, CssAtomSet, Position, Todo};
 	pub(crate) use css_parse::Vec;
 	pub(crate) use css_parse::{
-		CommaSeparated, Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T,
+		AssociatedWhitespaceRules, Box, CommaSeparated, Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek,
+		Result as ParserResult, T,
+		token_macros::{Comma, Function, Ident, LeftParen, RightParen},
 	};
 	pub(crate) use csskit_derives::*;
 	pub(crate) use csskit_proc_macro::*;

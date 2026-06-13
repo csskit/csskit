@@ -8,6 +8,7 @@ expression: pretty
     ::csskit_derives::ToSpan,
     ::csskit_derives::ToCursors,
     ::csskit_derives::SemanticEq,
+    ::csskit_derives::NodeWithMetadata,
     Debug,
     Clone,
     PartialEq,
@@ -16,6 +17,7 @@ expression: pretty
     Ord,
     Hash
 )]
+#[metadata(delegate)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 #[parse(one_must_occur)]

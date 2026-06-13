@@ -93,7 +93,7 @@ pub enum AnchorScopeStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-anchor"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionAnchorStyleValue {}
+pub enum PositionAnchorStyleValue<'a> {}
 
 /// Represents the style value for `position-area` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-area).
 ///
@@ -123,7 +123,7 @@ pub enum PositionAnchorStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-area"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PositionAreaStyleValue;
+pub struct PositionAreaStyleValue<'a>;
 
 /// Represents the style value for `position-try` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-try).
 ///
@@ -218,7 +218,7 @@ pub struct PositionTryFallbacksStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try-order"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PositionTryOrderStyleValue;
+pub struct PositionTryOrderStyleValue<'a>;
 
 /// Represents the style value for `position-visibility` as defined in [css-anchor-position-2](https://drafts.csswg.org/css-anchor-position-2/#position-visibility).
 ///

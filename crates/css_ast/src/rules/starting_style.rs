@@ -33,8 +33,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StartingStyleRule>(), 112);
-		assert_eq!(std::mem::size_of::<StartingStyleRuleBlock>(), 96);
+		assert_eq!(std::mem::size_of::<StartingStyleRule>(), 128);
+		assert_eq!(std::mem::size_of::<StartingStyleRuleBlock>(), 112);
 	}
 
 	#[test]

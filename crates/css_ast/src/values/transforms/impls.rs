@@ -1,16 +1,18 @@
 use super::TransformOriginStyleValue;
-use crate::{Length, PositionOne, PositionTwo};
+use crate::{CalcableValue, Length, PositionOne, PositionTwo};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Peek, Result as ParseResult, T};
 
-impl<'a> Parse<'a> for TransformOriginStyleValue {
+impl<'a> Parse<'a> for TransformOriginStyleValue<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParseResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let first = p.parse::<PositionOne>()?;
-		let Some(second) = p.parse_if_peek::<PositionOne>()? else { return Ok(Self::PositionOne(first)) };
+		let Some(second) = p.parse_if_peek::<PositionOne>()? else {
+			return Ok(Self::PositionOne(crate::Value::Literal(first)));
+		};
 		let two = PositionTwo::from_two(p, first, second)?;
-		Ok(Self::PositionTwo(two, p.parse_if_peek::<Length>()?))
+		Ok(Self::PositionTwo(crate::Value::Literal(two), p.parse_if_peek::<CalcableValue<Length>>()?))
 	}
 }
 
@@ -22,15 +24,15 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TransformStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<TransformOriginStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TransformBoxStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TranslateStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<TranslateStyleValue>(), 72);
 		// assert_eq!(std::mem::size_of::<RotateStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ScaleStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<ScaleStyleValue>(), 72);
 		assert_eq!(std::mem::size_of::<TransformStyleStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PerspectiveStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 68);
+		assert_eq!(std::mem::size_of::<PerspectiveStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 72);
 		assert_eq!(std::mem::size_of::<BackfaceVisibilityStyleValue>(), 16);
 	}
 

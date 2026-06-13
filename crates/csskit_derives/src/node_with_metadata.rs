@@ -24,6 +24,8 @@ struct MetadataArgs {
 	#[darling(default)]
 	pub property_kinds: Option<PipeList<Ident>>,
 	#[darling(default)]
+	pub uses_substitution: bool,
+	#[darling(default)]
 	pub delegate: bool,
 }
 
@@ -135,6 +137,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let vendor_prefixes = MetadataArgs::pipe_tokens(&args.vendor_prefixes, parse_quote! { crate::VendorPrefixes });
 	let declaration_kinds = MetadataArgs::pipe_tokens(&args.declaration_kinds, parse_quote! { crate::DeclarationKind });
 	let property_kinds = MetadataArgs::pipe_tokens(&args.property_kinds, parse_quote! { crate::PropertyKind });
+	let uses_substitution = args.uses_substitution;
 
 	let field_delegates = match &input.data {
 		Data::Struct(DataStruct { fields, .. }) => MetadataArgs::delegate_fields(fields, &input.generics),
@@ -149,6 +152,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				vendor_prefixes: #vendor_prefixes,
 				declaration_kinds: #declaration_kinds,
 				property_kinds: #property_kinds,
+				uses_substitution: #uses_substitution,
 				..Default::default()
 			}
 		}

@@ -96,7 +96,7 @@ pub struct TextDecorationColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-inset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextDecorationInsetStyleValue;
+pub struct TextDecorationInsetStyleValue<'a>;
 
 /// Represents the style value for `text-decoration-line` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-line).
 ///
@@ -331,7 +331,7 @@ pub enum TextDecorationStyleStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-thickness"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationThicknessStyleValue {}
+pub enum TextDecorationThicknessStyleValue<'a> {}
 
 /// Represents the style value for `text-emphasis` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis).
 ///
@@ -483,7 +483,7 @@ pub struct TextEmphasisSkipStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextEmphasisStyleStyleValue {}
+pub enum TextEmphasisStyleStyleValue<'a> {}
 
 /// Represents the style value for `text-shadow` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-shadow).
 ///
@@ -543,7 +543,7 @@ pub struct TextShadowStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-offset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextUnderlineOffsetStyleValue;
+pub struct TextUnderlineOffsetStyleValue<'a>;
 
 /// Represents the style value for `text-underline-position` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-underline-position).
 ///

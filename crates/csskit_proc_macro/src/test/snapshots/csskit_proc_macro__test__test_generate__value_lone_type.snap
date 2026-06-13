@@ -2,4 +2,4 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo(pub crate::Integer);
+struct Foo<'a>(pub crate::CalcableValue<'a, crate::Integer>);

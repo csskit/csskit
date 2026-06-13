@@ -34,7 +34,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundStyleValue([
-                (BgLayer(
+                (Literal(BgLayer(
                   image: Some(r#Some(Url(UrlFunction(Function(Cursor(
                     kind: "Function",
                     offset: SourceOffset(20),
@@ -54,7 +54,7 @@ StyleSheet(
                   origin: None,
                   clip: None,
                   color: None,
-                ), None),
+                )), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -75,7 +75,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundStyleValue([
-                (BgLayer(
+                (Literal(BgLayer(
                   image: Some(r#Some(Url(Url(Url(Cursor(
                     kind: "Url",
                     offset: SourceOffset(51),
@@ -87,7 +87,7 @@ StyleSheet(
                   origin: None,
                   clip: None,
                   color: None,
-                ), None),
+                )), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -108,7 +108,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundStyleValue([
-                (BgLayer(
+                (Literal(BgLayer(
                   image: Some(r#Some(Url(Url(Url(Cursor(
                     kind: "Url",
                     offset: SourceOffset(77),
@@ -120,7 +120,7 @@ StyleSheet(
                   origin: None,
                   clip: None,
                   color: None,
-                ), None),
+                )), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(

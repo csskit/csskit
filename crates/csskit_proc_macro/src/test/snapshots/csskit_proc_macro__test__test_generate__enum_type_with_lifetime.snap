@@ -3,6 +3,6 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 enum Foo<'a> {
-    Color(crate::Color<'a>),
-    Image1d(crate::Image1d<'a>),
+    Color(crate::Value<'a, crate::Color<'a>>),
+    Image1d(crate::Value<'a, crate::Image1d<'a>>),
 }

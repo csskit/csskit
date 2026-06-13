@@ -33,11 +33,11 @@ StyleSheet(
                 offset: SourceOffset(13),
                 len: 1,
               )),
-              value: ColorStyleValue(Named(Black(Ident(Cursor(
+              value: ColorStyleValue(Literal(Named(Black(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(15),
                 len: 5,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -57,7 +57,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundStyleValue([
-                (BgLayer(
+                (Literal(BgLayer(
                   image: None,
                   position: None,
                   repeat: None,
@@ -69,7 +69,7 @@ StyleSheet(
                     offset: SourceOffset(38),
                     len: 5,
                   ))))),
-                ), None),
+                )), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(

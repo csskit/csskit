@@ -229,6 +229,16 @@ macro_rules! custom_delim {
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		pub struct $ident($crate::T![Delim]);
 
+		impl $ident {
+			pub fn associated_whitespace(&self) -> $crate::AssociatedWhitespaceRules {
+				self.0.associated_whitespace()
+			}
+
+			pub fn with_associated_whitespace(&self, rules: $crate::AssociatedWhitespaceRules) -> Self {
+				Self(self.0.with_associated_whitespace(rules))
+			}
+		}
+
 		impl $crate::ToCursors for $ident {
 			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
 				s.append((*self).into());

@@ -6,13 +6,13 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColumnCountStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ColumnCountStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<ColumnFillStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ColumnHeightStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ColumnSpanStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ColumnWidthStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<ColumnHeightStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<ColumnSpanStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<ColumnWidthStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<ColumnWrapStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ColumnsStyleValue>(), 60);
+		assert_eq!(std::mem::size_of::<ColumnsStyleValue>(), 88);
 	}
 
 	#[test]

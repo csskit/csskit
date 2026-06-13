@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-count"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnCountStyleValue;
+pub struct ColumnCountStyleValue<'a>;
 
 /// Represents the style value for `column-fill` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-fill).
 ///
@@ -91,7 +91,7 @@ pub enum ColumnFillStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-height"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnHeightStyleValue;
+pub struct ColumnHeightStyleValue<'a>;
 
 /// Represents the style value for `column-span` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-span).
 ///
@@ -120,7 +120,7 @@ pub struct ColumnHeightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-span"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnSpanStyleValue {}
+pub enum ColumnSpanStyleValue<'a> {}
 
 /// Represents the style value for `column-width` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-width).
 ///
@@ -150,7 +150,7 @@ pub enum ColumnSpanStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnWidthStyleValue;
+pub struct ColumnWidthStyleValue<'a>;
 
 /// Represents the style value for `column-wrap` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-wrap).
 ///
@@ -209,4 +209,4 @@ pub enum ColumnWrapStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnsStyleValue;
+pub struct ColumnsStyleValue<'a>;

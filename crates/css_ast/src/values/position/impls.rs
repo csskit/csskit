@@ -7,17 +7,17 @@ mod tests {
 	#[test]
 	pub fn size_test() {
 		assert_eq!(std::mem::size_of::<PositionStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TopStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<RightStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BottomStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<LeftStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InsetBlockStartStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InsetInlineStartStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InsetBlockEndStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InsetInlineEndStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InsetBlockStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<InsetInlineStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<InsetStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<TopStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<RightStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BottomStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<LeftStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InsetBlockStartStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InsetInlineStartStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InsetBlockEndStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InsetInlineEndStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InsetBlockStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<InsetInlineStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<InsetStyleValue>(), 96);
 		assert_eq!(std::mem::size_of::<OverlayStyleValue>(), 16);
 	}
 

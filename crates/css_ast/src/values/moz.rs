@@ -21,7 +21,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MozColumnGapStyleValue {}
+pub enum MozColumnGapStyleValue<'a> {}
 
 /// `-moz-column-count` — alias for `column-count`.
 #[syntax(" auto | <integer [1,∞]> ")]
@@ -39,7 +39,7 @@ pub enum MozColumnGapStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MozColumnCountStyleValue;
+pub struct MozColumnCountStyleValue<'a>;
 
 /// `-moz-user-select` — alias for `user-select`.
 #[syntax(" auto | text | none | all ")]
@@ -75,7 +75,7 @@ pub enum MozUserSelectStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MozAppearanceStyleValue {}
+pub enum MozAppearanceStyleValue<'a> {}
 
 /// `-moz-osx-font-smoothing` — non-standard macOS font smoothing.
 ///

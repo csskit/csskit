@@ -1,4 +1,6 @@
-use crate::{Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token};
+use crate::{
+	AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token,
+};
 
 /// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given sink - using the given `&'a str` as the original source.
@@ -66,13 +68,18 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			return;
 		}
 
-		let suppress_separator = self.last_forbids_ws_after();
+		let enforce_before = c.token() == AssociatedWhitespaceRules::EnforceBefore;
+		let suppress_separator = self.last_forbids_ws_after() && !enforce_before;
 		if let Some(prev) = self.pending.take() {
 			let keep = match prev.token().kind() {
 				Kind::Semicolon => {
 					c != REDUNDANT_SEMI_KINDSET && self.last_token.is_some_and(|t| t != REDUNDANT_SEMI_KINDSET)
 				}
-				_ => !suppress_separator && c != NO_WHITESPACE_BEFORE_KINDSET && self.needs_separator(c.token()),
+				_ => {
+					!suppress_separator
+						&& (enforce_before || c != NO_WHITESPACE_BEFORE_KINDSET)
+						&& self.needs_separator(c.token())
+				}
 			};
 			if keep {
 				self.emit(prev.compact());

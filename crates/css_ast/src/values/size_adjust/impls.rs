@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TextSizeAdjustStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<TextSizeAdjustStyleValue>(), 24);
 	}
 
 	#[test]

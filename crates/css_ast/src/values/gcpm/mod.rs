@@ -113,7 +113,7 @@ pub enum FootnotePolicyStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.running"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RunningStyleValue;
+pub struct RunningStyleValue<'a>;
 
 /// Represents the style value for `string-set` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#string-set).
 ///

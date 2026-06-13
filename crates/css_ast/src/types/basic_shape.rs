@@ -13,7 +13,7 @@ use crate::{BasicShapeRect, CircleFunction, EllipseFunction, PathFunction, Polyg
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BasicShape<'a> {
-	Rect(BasicShapeRect),
+	Rect(BasicShapeRect<'a>),
 	Circle(CircleFunction),
 	Ellipse(EllipseFunction),
 	Polygon(PolygonFunction<'a>),

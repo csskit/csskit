@@ -33,7 +33,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.-webkit-line-clamp"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitLineClampStyleValue;
+pub struct WebkitLineClampStyleValue<'a>;
 
 /// Represents the style value for `block-ellipsis` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#block-ellipsis).
 ///
@@ -61,7 +61,7 @@ pub struct WebkitLineClampStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-ellipsis"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BlockEllipsisStyleValue {}
+pub enum BlockEllipsisStyleValue<'a> {}
 
 /// Represents the style value for `continue` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#continue).
 ///
@@ -118,7 +118,7 @@ pub enum ContinueStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-clamp"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LineClampStyleValue;
+pub struct LineClampStyleValue<'a>;
 
 /// Represents the style value for `max-lines` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#max-lines).
 ///
@@ -145,7 +145,7 @@ pub struct LineClampStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-lines"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MaxLinesStyleValue;
+pub struct MaxLinesStyleValue<'a>;
 
 /// Represents the style value for `overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow).
 ///
@@ -236,7 +236,7 @@ pub enum OverflowBlockStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginStyleValue;
+pub struct OverflowClipMarginStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-block` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block).
 ///
@@ -269,7 +269,7 @@ pub struct OverflowClipMarginStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginBlockStyleValue;
+pub struct OverflowClipMarginBlockStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-block-end` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-end).
 ///
@@ -303,7 +303,7 @@ pub struct OverflowClipMarginBlockStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginBlockEndStyleValue;
+pub struct OverflowClipMarginBlockEndStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-block-start` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-block-start).
 ///
@@ -337,7 +337,7 @@ pub struct OverflowClipMarginBlockEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginBlockStartStyleValue;
+pub struct OverflowClipMarginBlockStartStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-bottom` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-bottom).
 ///
@@ -371,7 +371,7 @@ pub struct OverflowClipMarginBlockStartStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginBottomStyleValue;
+pub struct OverflowClipMarginBottomStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-inline` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline).
 ///
@@ -404,7 +404,7 @@ pub struct OverflowClipMarginBottomStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginInlineStyleValue;
+pub struct OverflowClipMarginInlineStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-inline-end` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-end).
 ///
@@ -438,7 +438,7 @@ pub struct OverflowClipMarginInlineStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginInlineEndStyleValue;
+pub struct OverflowClipMarginInlineEndStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-inline-start` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-inline-start).
 ///
@@ -472,7 +472,7 @@ pub struct OverflowClipMarginInlineEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginInlineStartStyleValue;
+pub struct OverflowClipMarginInlineStartStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-left` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-left).
 ///
@@ -502,7 +502,7 @@ pub struct OverflowClipMarginInlineStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginLeftStyleValue;
+pub struct OverflowClipMarginLeftStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-right` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-right).
 ///
@@ -536,7 +536,7 @@ pub struct OverflowClipMarginLeftStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginRightStyleValue;
+pub struct OverflowClipMarginRightStyleValue<'a>;
 
 /// Represents the style value for `overflow-clip-margin-top` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin-top).
 ///
@@ -566,7 +566,7 @@ pub struct OverflowClipMarginRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-clip-margin-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowClipMarginTopStyleValue;
+pub struct OverflowClipMarginTopStyleValue<'a>;
 
 /// Represents the style value for `overflow-inline` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-inline).
 ///
@@ -804,4 +804,4 @@ pub struct ScrollbarGutterStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-overflow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextOverflowStyleValue;
+pub struct TextOverflowStyleValue<'a>;

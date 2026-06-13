@@ -63,10 +63,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<LayerRule>(), 176);
+		assert_eq!(std::mem::size_of::<LayerRule>(), 192);
 		assert_eq!(std::mem::size_of::<LayerNameList>(), 24);
 		assert_eq!(std::mem::size_of::<LayerName>(), 40);
-		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 112);
+		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 128);
 	}
 
 	#[test]

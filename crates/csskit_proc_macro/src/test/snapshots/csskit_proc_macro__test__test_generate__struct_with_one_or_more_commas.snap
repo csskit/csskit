@@ -2,4 +2,10 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::AnimateableFeature, 0usize>);
+struct Foo<'a>(
+    pub ::css_parse::CommaSeparated<
+        'a,
+        crate::Value<'a, crate::AnimateableFeature>,
+        0usize,
+    >,
+);

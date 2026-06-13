@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::LengthPercentage;
+use crate::{CalcableValue, LengthPercentage};
 
 /// <https://drafts.csswg.org/css-grid-2/#funcdef-grid-template-columns-fit-content>
 ///
@@ -10,10 +10,10 @@ use crate::LengthPercentage;
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FitContentFunction {
+pub struct FitContentFunction<'a> {
 	#[atom(CssAtomSet::FitContent)]
 	pub name: T![Function],
-	pub params: LengthPercentage,
+	pub params: CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -26,12 +26,14 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FitContentFunction>(), 40);
+		assert_eq!(std::mem::size_of::<FitContentFunction>(), 48);
 	}
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, FitContentFunction, "fit-content(1px)");
 		assert_parse!(CssAtomSet::ATOMS, FitContentFunction, "fit-content(10%)");
+		assert_parse!(CssAtomSet::ATOMS, FitContentFunction, "fit-content(var(--x))");
+		assert_parse!(CssAtomSet::ATOMS, FitContentFunction, "fit-content(calc(100% - 20px))");
 	}
 }

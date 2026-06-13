@@ -52,7 +52,7 @@ impl ColorExtractor {
 
 #[css_ast::visitor]
 impl css_ast::Visit for ColorExtractor {
-	fn visit_color(&mut self, color: &ASTColor) {
+	fn visit_color<'b>(&mut self, color: &ASTColor<'b>) {
 		if let Some(raw_color) = color.to_chromashift() {
 			let hex = raw_color.into();
 			if !self.seen.contains(&hex) {

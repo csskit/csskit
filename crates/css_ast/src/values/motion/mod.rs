@@ -86,7 +86,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset-anchor"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OffsetAnchorStyleValue;
+pub struct OffsetAnchorStyleValue<'a>;
 
 /// Represents the style value for `offset-distance` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-distance).
 ///
@@ -117,7 +117,7 @@ pub struct OffsetAnchorStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset-distance"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OffsetDistanceStyleValue;
+pub struct OffsetDistanceStyleValue<'a>;
 
 /// Represents the style value for `offset-path` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-path).
 ///
@@ -178,7 +178,7 @@ pub struct OffsetPathStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OffsetPositionStyleValue {}
+pub enum OffsetPositionStyleValue<'a> {}
 
 /// Represents the style value for `offset-rotate` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-rotate).
 ///
@@ -208,4 +208,4 @@ pub enum OffsetPositionStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset-rotate"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OffsetRotateStyleValue {}
+pub enum OffsetRotateStyleValue<'a> {}

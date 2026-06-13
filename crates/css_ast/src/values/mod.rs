@@ -67,6 +67,7 @@ mod text_decor;
 mod transforms;
 mod transitions;
 mod ui;
+mod value;
 #[allow(clippy::module_inception)]
 mod values;
 mod variables;
@@ -149,6 +150,8 @@ pub use text_decor::*;
 pub use transforms::*;
 pub use transitions::*;
 pub use ui::*;
+pub use value::{CalcableSubstitutionFunction, CalcableValue, SubstitutionFunction, Value};
+pub(crate) use value::{impl_value_slot_parse, is_substitution_function};
 pub use values::*;
 // TODO: not sure if this is needed yet.
 #[allow(unused)]

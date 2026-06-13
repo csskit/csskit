@@ -33,11 +33,11 @@ StyleSheet(
                 offset: SourceOffset(68),
                 len: 1,
               )),
-              value: ColorStyleValue(Named(Black(Ident(Cursor(
+              value: ColorStyleValue(Literal(Named(Black(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(70),
                 len: 5,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -56,19 +56,19 @@ StyleSheet(
                 offset: SourceOffset(112),
                 len: 1,
               )),
-              value: BorderRadiusStyleValue(Length(Px(Dimension(Cursor(
+              value: BorderRadiusStyleValue(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(114),
                 len: 3,
-              )))), None, None, None, Some((Slash(Delim(Cursor(
+              ))))), None, None, None, Some((Slash(Delim(Cursor(
                 kind: "Delim",
                 offset: SourceOffset(118),
                 len: 1,
-              ))), Length(Px(Dimension(Cursor(
+              ))), Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(120),
                 len: 3,
-              )))), None, None, None))),
+              ))))), None, None, None))),
               important: None,
               semicolon: None,
             ),
@@ -111,11 +111,11 @@ StyleSheet(
                 offset: SourceOffset(162),
                 len: 1,
               )),
-              value: ColorStyleValue(Named(Black(Ident(Cursor(
+              value: ColorStyleValue(Literal(Named(Black(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(164),
                 len: 5,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -228,24 +228,24 @@ StyleSheet(
                 len: 1,
               )),
               value: FontFamilyStyleValue([
-                (Left(CustomIdents([
-                  CustomIdent(Ident(Cursor(
+                (Left(Literal(CustomIdents([
+                  Literal(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(243),
                     len: 10,
-                  ))),
-                ])), Some(Comma(Cursor(
+                  )))),
+                ]))), Some(Comma(Cursor(
                   kind: "Comma",
                   offset: SourceOffset(253),
                   len: 1,
                 )))),
-                (Left(CustomIdents([
-                  CustomIdent(Ident(Cursor(
+                (Left(Literal(CustomIdents([
+                  Literal(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(258),
                     len: 5,
-                  ))),
-                ])), None),
+                  )))),
+                ]))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(

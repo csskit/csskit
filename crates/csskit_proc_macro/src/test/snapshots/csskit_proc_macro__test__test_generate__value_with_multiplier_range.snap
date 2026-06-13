@@ -2,9 +2,9 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo(
-    pub crate::Length,
-    pub crate::Length,
-    pub Option<crate::Length>,
-    pub Option<crate::Length>,
+struct Foo<'a>(
+    pub crate::CalcableValue<'a, crate::Length>,
+    pub crate::CalcableValue<'a, crate::Length>,
+    pub Option<crate::CalcableValue<'a, crate::Length>>,
+    pub Option<crate::CalcableValue<'a, crate::Length>>,
 );

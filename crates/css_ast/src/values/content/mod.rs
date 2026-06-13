@@ -59,7 +59,7 @@ pub struct BookmarkLabelStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-level"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BookmarkLevelStyleValue;
+pub struct BookmarkLevelStyleValue<'a>;
 
 /// Represents the style value for `bookmark-state` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#bookmark-state).
 ///

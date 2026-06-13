@@ -37,6 +37,7 @@ impl<'a> QueryableNode for CounterStyleRule<'a> {
 )]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CounterStyleName(T![Ident]);
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -54,7 +55,7 @@ pub struct CounterStyleRuleBlock<'a>(
 #[metadata(node_kinds = Declaration, property_kinds = Name)]
 pub enum CounterStyleRuleStyleValue<'a> {
 	Unknown(ComponentValues<'a>),
-	System(SystemStyleValue),
+	System(SystemStyleValue<'a>),
 	Symbols(SymbolsStyleValue<'a>),
 	AdditiveSymbols(AdditiveSymbolsStyleValue<'a>),
 	Negative(NegativeStyleValue<'a>),
@@ -62,7 +63,7 @@ pub enum CounterStyleRuleStyleValue<'a> {
 	Suffix(SuffixStyleValue<'a>),
 	Range(RangeStyleValue),
 	Pad(PadStyleValue<'a>),
-	SpeakAs(SpeakAsStyleValue),
+	SpeakAs(SpeakAsStyleValue<'a>),
 	Fallback(FallbackStyleValue),
 }
 
@@ -107,7 +108,7 @@ impl<'a> DeclarationValue<'a, CssMetadata> for CounterStyleRuleStyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		Ok(match p.to_atom::<CssAtomSet>(c) {
-			CssAtomSet::System => Self::System(p.parse::<SystemStyleValue>()?),
+			CssAtomSet::System => Self::System(p.parse::<SystemStyleValue<'a>>()?),
 			CssAtomSet::Symbols => Self::Symbols(p.parse::<SymbolsStyleValue<'a>>()?),
 			CssAtomSet::AdditiveSymbols => Self::AdditiveSymbols(p.parse::<AdditiveSymbolsStyleValue<'a>>()?),
 			CssAtomSet::Negative => Self::Negative(p.parse::<NegativeStyleValue<'a>>()?),
@@ -187,7 +188,7 @@ pub type RangeStyleValue = Todo;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SpeakAsStyleValue {}
+pub enum SpeakAsStyleValue<'a> {}
 
 #[syntax(" <symbol> ")]
 #[derive(
@@ -219,7 +220,7 @@ pub struct SymbolsStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SystemStyleValue {}
+pub enum SystemStyleValue<'a> {}
 
 #[cfg(test)]
 mod tests {
@@ -228,20 +229,22 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CounterStyleRule>(), 128);
+		assert_eq!(std::mem::size_of::<CounterStyleRule>(), 144);
 		assert_eq!(std::mem::size_of::<CounterStyleName>(), 12);
-		assert_eq!(std::mem::size_of::<CounterStyleRuleBlock>(), 96);
+		assert_eq!(std::mem::size_of::<CounterStyleRuleBlock>(), 112);
 		assert_eq!(std::mem::size_of::<CounterStyleRuleStyleValue>(), 80);
 		assert_eq!(std::mem::size_of::<AdditiveSymbolsStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<FallbackStyleValue>(), 12);
 		assert_eq!(std::mem::size_of::<NegativeStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<PadStyleValue>(), 56);
+		assert_eq!(std::mem::size_of::<PadStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<PrefixStyleValue>(), 40);
 		// assert_eq!(std::mem::size_of::<RangeStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<SpeakAsStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<SpeakAsStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<SuffixStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<SymbolsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<SystemStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<SystemStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<SymbolsStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<SystemStyleValue>(), 40);
 	}
 
 	#[test]

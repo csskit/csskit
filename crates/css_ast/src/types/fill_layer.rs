@@ -17,7 +17,7 @@ use crate::{Color, FillOrigin, Paint, PositionAndSize, RepeatStyle};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct FillLayer<'a> {
 	pub image: Option<Paint<'a>>,
-	pub position: Option<PositionAndSize>,
+	pub position: Option<PositionAndSize<'a>>,
 	pub repeat: Option<RepeatStyle>,
 	pub origin: Option<FillOrigin>,
 	pub color: Option<Color<'a>>,
@@ -31,7 +31,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FillLayer>(), 232);
+		assert_eq!(std::mem::size_of::<FillLayer>(), 256);
 	}
 
 	#[test]

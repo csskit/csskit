@@ -20,7 +20,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FontFamilyName>(), 24);
+		assert_eq!(std::mem::size_of::<FontFamilyName>(), 32);
 	}
 
 	#[test]

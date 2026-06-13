@@ -94,7 +94,7 @@ pub enum FloatStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-defer"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FloatDeferStyleValue {}
+pub enum FloatDeferStyleValue<'a> {}
 
 /// Represents the style value for `float-offset` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-offset).
 ///
@@ -122,7 +122,7 @@ pub enum FloatDeferStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-offset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FloatOffsetStyleValue;
+pub struct FloatOffsetStyleValue<'a>;
 
 /// Represents the style value for `float-reference` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-reference).
 ///

@@ -6,13 +6,11 @@ use super::prelude::*;
 /// <anchor-name> = <dashed-ident>
 /// ```
 #[syntax("<dashed-ident>")]
-#[derive(
-	IntoCursor, ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
+#[derive(ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct AnchorName;
+pub struct AnchorName<'a>;
 
 #[cfg(test)]
 mod tests {
@@ -22,7 +20,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AnchorName>(), 12);
+		assert_eq!(std::mem::size_of::<AnchorName>(), 24);
 	}
 
 	#[test]

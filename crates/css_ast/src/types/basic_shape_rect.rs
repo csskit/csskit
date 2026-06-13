@@ -10,10 +10,10 @@ use crate::{InsetFunction, ShapeRectFunction, XywhFunction};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BasicShapeRect {
-	Inset(InsetFunction),
-	Rect(ShapeRectFunction),
-	Xywh(XywhFunction),
+pub enum BasicShapeRect<'a> {
+	Inset(InsetFunction<'a>),
+	Rect(ShapeRectFunction<'a>),
+	Xywh(XywhFunction<'a>),
 }
 
 #[cfg(test)]

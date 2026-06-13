@@ -173,6 +173,37 @@ pub enum PropertyKind {
 /// All PropertyKind variants for iteration.
 pub const PROPERTY_KIND_VARIANTS: &[PropertyKind] = &[PropertyKind::Name];
 
+/// OR-composable bitflag recording the set of CSS value types a substitution position accepts.
+///
+/// Used by [`Unresolved`](crate::Unresolved) to carry grammar-type knowledge at positions where a
+/// substitution function appears but the slot cannot be fully typed at parse time.
+///
+/// `ANY` (all bits set) is used for `Custom` declaration bodies and substitution-function
+/// internals where no type constraint applies.
+#[bitmask(u32)]
+#[bitmask_config(vec_debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum ExpectedTypes {
+	Length,
+	Percentage,
+	Number,
+	Integer,
+	Angle,
+	Time,
+	Frequency,
+	Flex,
+	Color,
+	Keyword,
+	Image,
+	Url,
+	String,
+}
+
+impl ExpectedTypes {
+	/// All bits set - use for untyped contexts (custom declarations, substitution internals).
+	pub const ANY: ExpectedTypes = ExpectedTypes { bits: !0 };
+}
+
 /// Aggregated metadata computed from declarations within a block.
 /// This allows efficient checking of what types of properties a block contains
 /// without iterating through all declarations.
@@ -201,6 +232,12 @@ pub struct CssMetadata {
 	pub unitless_zero_resolves: UnitlessZeroResolves,
 	/// Size of vector-based nodes (e.g., number of declarations, selector list length)
 	pub size: u16,
+	/// True if any substitution function (var(), env(), attr(), etc.) or Unresolved node is present.
+	/// Enables subtree-skip optimisations in visitors and the minifier.
+	pub uses_substitution: bool,
+	/// OR-union of all ExpectedTypes bits for substitution positions in this node.
+	/// Accumulates upward through CssMetadata::merge for type inference.
+	pub expected_types: ExpectedTypes,
 }
 
 impl Default for CssMetadata {
@@ -217,6 +254,8 @@ impl Default for CssMetadata {
 			property_kinds: PropertyKind::none(),
 			unitless_zero_resolves: UnitlessZeroResolves::default(),
 			size: 0,
+			uses_substitution: false,
+			expected_types: ExpectedTypes::none(),
 		}
 	}
 }
@@ -236,6 +275,8 @@ impl CssMetadata {
 			&& self.property_kinds == PropertyKind::none()
 			&& self.unitless_zero_resolves == UnitlessZeroResolves::Length
 			&& self.size == 0
+			&& !self.uses_substitution
+			&& self.expected_types == ExpectedTypes::none()
 	}
 
 	/// Returns true if this block modifies any positioning-related properties.
@@ -350,6 +391,12 @@ impl CssMetadata {
 		self.property_kinds.contains(kind)
 	}
 
+	/// Returns true if any substitution function or Unresolved node is present in this subtree.
+	#[inline]
+	pub fn has_substitution(&self) -> bool {
+		self.uses_substitution
+	}
+
 	/// Returns true if this is an empty container (no declarations, no nested rules).
 	#[inline]
 	pub fn is_empty_container(&self) -> bool {
@@ -380,6 +427,8 @@ impl NodeMetadata for CssMetadata {
 			self.unitless_zero_resolves = UnitlessZeroResolves::Number;
 		}
 		self.size = self.size.max(other.size);
+		self.uses_substitution |= other.uses_substitution;
+		self.expected_types |= other.expected_types;
 		self
 	}
 
@@ -397,6 +446,22 @@ impl ToCursors for CssMetadata {
 impl ToSpan for CssMetadata {
 	fn to_span(&self) -> Span {
 		Span::DUMMY
+	}
+}
+
+// ExpectedTypes is not serialized to tokens; these no-op impls let it sit as a
+// non-node field on Unresolved under derive(ToCursors)/derive(ToSpan).
+impl ToCursors for ExpectedTypes {
+	fn to_cursors(&self, _: &mut impl css_parse::CursorSink) {}
+}
+impl ToSpan for ExpectedTypes {
+	fn to_span(&self) -> Span {
+		Span::DUMMY
+	}
+}
+impl SemanticEq for ExpectedTypes {
+	fn semantic_eq(&self, other: &Self) -> bool {
+		self == other
 	}
 }
 
@@ -418,7 +483,60 @@ macro_rules! impl_token_metadata {
 	};
 }
 
-impl_token_metadata!(Ident, Number, Dimension, Hash, AtKeyword, String, Function, Url);
+impl_token_metadata!(
+	Ident,
+	Number,
+	Dimension,
+	Hash,
+	AtKeyword,
+	String,
+	Function,
+	Url,
+	Delim,
+	Colon,
+	Semicolon,
+	Comma,
+	LeftCurly,
+	RightCurly,
+	LeftSquare,
+	RightSquare,
+	LeftParen
+);
+
+// Delim subtypes (T![/] etc.) — defined by custom_delim! in css_parse, not covered by T![$token] expansion
+macro_rules! impl_delim_metadata {
+	($($t:ty),* $(,)?) => {
+		$(
+			impl css_parse::NodeWithMetadata<CssMetadata> for $t {
+				fn metadata(&self) -> CssMetadata {
+					CssMetadata::default()
+				}
+			}
+		)*
+	};
+}
+impl_delim_metadata!(
+	css_parse::token_macros::delim::Slash,
+	css_parse::token_macros::delim::Or,
+	css_parse::token_macros::delim::Plus,
+	css_parse::token_macros::delim::Tilde,
+	css_parse::token_macros::delim::Star,
+	css_parse::token_macros::delim::Question,
+	css_parse::token_macros::delim::Underscore,
+	css_parse::token_macros::delim::Eq,
+	css_parse::token_macros::delim::Gt,
+	css_parse::token_macros::delim::Lt,
+	css_parse::token_macros::delim::Dot,
+	css_parse::token_macros::delim::And,
+	css_parse::token_macros::delim::At,
+	css_parse::token_macros::delim::Caret,
+	css_parse::token_macros::delim::Dash,
+	css_parse::token_macros::delim::Dollar,
+	css_parse::token_macros::delim::Bang,
+	css_parse::token_macros::delim::Percent,
+	css_parse::token_macros::delim::Hash,
+	css_parse::token_macros::delim::Backtick,
+);
 
 impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::token_macros::RightParen {
 	fn metadata(&self) -> CssMetadata {
@@ -487,6 +605,10 @@ macro_rules! impl_tuple_metadata {
 impl_tuple_metadata!(A, B);
 impl_tuple_metadata!(A, B, C);
 impl_tuple_metadata!(A, B, C, D);
+impl_tuple_metadata!(A, B, C, D, E);
+impl_tuple_metadata!(A, B, C, D, E, F);
+impl_tuple_metadata!(A, B, C, D, E, F, G);
+impl_tuple_metadata!(A, B, C, D, E, F, G, H);
 
 #[cfg(test)]
 mod tests {
@@ -497,13 +619,17 @@ mod tests {
 
 	#[test]
 	fn test_block_metadata_merge() {
-		let mut meta1 = CssMetadata::default();
-		meta1.property_groups = PropertyGroup::Color;
-		meta1.declaration_kinds = DeclarationKind::Important;
+		let meta1 = CssMetadata {
+			property_groups: PropertyGroup::Color,
+			declaration_kinds: DeclarationKind::Important,
+			..Default::default()
+		};
 
-		let mut meta2 = CssMetadata::default();
-		meta2.property_groups = PropertyGroup::Position;
-		meta2.declaration_kinds = DeclarationKind::Custom;
+		let meta2 = CssMetadata {
+			property_groups: PropertyGroup::Position,
+			declaration_kinds: DeclarationKind::Custom,
+			..Default::default()
+		};
 
 		let merged = meta1.merge(meta2);
 
@@ -649,5 +775,54 @@ mod tests {
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Em), Err(()));
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Auto), Err(()));
 		assert_eq!(VendorPrefixes::try_from(CssAtomSet::Transform), Err(()));
+	}
+
+	#[test]
+	fn size_baseline_css_metadata() {
+		// S1 baseline: CssMetadata must stay <=48 bytes after adding uses_substitution + expected_types.
+		assert!(std::mem::size_of::<CssMetadata>() <= 48, "CssMetadata size = {}", std::mem::size_of::<CssMetadata>());
+	}
+
+	#[test]
+	fn test_substitution_fields_default() {
+		let meta = CssMetadata::default();
+		assert!(!meta.uses_substitution);
+		assert_eq!(meta.expected_types, ExpectedTypes::none());
+		assert!(meta.is_empty());
+	}
+
+	#[test]
+	fn test_substitution_fields_merge() {
+		let meta1 = CssMetadata {
+			uses_substitution: true,
+			expected_types: ExpectedTypes::Length | ExpectedTypes::Percentage,
+			..Default::default()
+		};
+
+		let meta2 = CssMetadata { expected_types: ExpectedTypes::Color, ..Default::default() };
+
+		let merged = NodeMetadata::merge(meta1, meta2);
+		assert!(merged.uses_substitution);
+		assert!(merged.expected_types.contains(ExpectedTypes::Length));
+		assert!(merged.expected_types.contains(ExpectedTypes::Percentage));
+		assert!(merged.expected_types.contains(ExpectedTypes::Color));
+	}
+
+	#[test]
+	fn test_has_substitution() {
+		let mut meta = CssMetadata::default();
+		assert!(!meta.has_substitution());
+		meta.uses_substitution = true;
+		assert!(meta.has_substitution());
+	}
+
+	#[test]
+	fn test_is_empty_with_substitution() {
+		let mut meta = CssMetadata::default();
+		assert!(meta.is_empty());
+		meta.uses_substitution = true;
+		assert!(!meta.is_empty());
+		let meta2 = CssMetadata { expected_types: ExpectedTypes::Number, ..Default::default() };
+		assert!(!meta2.is_empty());
 	}
 }

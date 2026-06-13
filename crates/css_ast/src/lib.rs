@@ -17,6 +17,7 @@ mod test_helpers;
 mod traits;
 mod types;
 mod units;
+mod unresolved;
 mod values;
 #[cfg(feature = "visitable")]
 pub mod visit;
@@ -34,6 +35,7 @@ pub use stylesheet::*;
 pub use traits::*;
 pub use types::*;
 pub use units::*;
+pub use unresolved::*;
 pub use values::*;
 #[cfg(feature = "visitable")]
 pub use visit::*;

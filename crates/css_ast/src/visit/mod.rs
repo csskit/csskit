@@ -264,6 +264,16 @@ impl VisitableMut for token_macros::Colon {
 	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
 }
 
+impl Visitable for token_macros::Semicolon {
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
+}
+
+impl VisitableMut for token_macros::Semicolon {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
 impl Visitable for Comparison {
 	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		try_visit!(v.visit_comparison(self));
@@ -360,7 +370,7 @@ impl<'a, T: Visitable> Visitable for Box<'a, T> {
 
 impl<'a, T, const MIN: usize> VisitableMut for CommaSeparated<'a, T, MIN>
 where
-	T: VisitableMut + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
+	T: VisitableMut,
 {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		for (node, _) in self {
@@ -371,7 +381,7 @@ where
 
 impl<'a, T, const MIN: usize> Visitable for CommaSeparated<'a, T, MIN>
 where
-	T: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
+	T: Visitable,
 {
 	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		for (node, _) in self {
@@ -602,6 +612,16 @@ impl<'a> VisitableMut for ComponentValues<'a> {
 }
 
 impl<'a> Visitable for ComponentValues<'a> {
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
+}
+
+impl<'a> VisitableMut for Unresolved<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+}
+
+impl<'a> Visitable for Unresolved<'a> {
 	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
 		VisitFlow::DESCEND
 	}

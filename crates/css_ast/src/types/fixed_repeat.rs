@@ -5,7 +5,7 @@ use crate::{FixedSize, NamedRepeatItems, RepeatFunction};
 /// ```text,ignore
 /// <fixed-repeat> = repeat( [ <integer [1,∞]> ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
 /// ```
-pub type FixedRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize>>;
+pub type FixedRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize<'a>>>;
 
 #[cfg(test)]
 mod tests {

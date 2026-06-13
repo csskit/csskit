@@ -33,7 +33,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flow-tolerance"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FlowToleranceStyleValue {}
+pub enum FlowToleranceStyleValue<'a> {}
 
 /// Represents the style value for `grid` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid).
 ///
@@ -99,7 +99,7 @@ pub enum GridStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-area"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridAreaStyleValue;
+pub struct GridAreaStyleValue<'a>;
 
 /// Represents the style value for `grid-auto-columns` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-auto-columns).
 ///
@@ -221,7 +221,7 @@ pub struct GridAutoRowsStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridColumnStyleValue;
+pub struct GridColumnStyleValue<'a>;
 
 /// Represents the style value for `grid-column-end` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column-end).
 ///
@@ -251,7 +251,7 @@ pub struct GridColumnStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridColumnEndStyleValue;
+pub struct GridColumnEndStyleValue<'a>;
 
 /// Represents the style value for `grid-column-start` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-column-start).
 ///
@@ -281,7 +281,7 @@ pub struct GridColumnEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-column-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridColumnStartStyleValue;
+pub struct GridColumnStartStyleValue<'a>;
 
 /// Represents the style value for `grid-row` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row).
 ///
@@ -311,7 +311,7 @@ pub struct GridColumnStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridRowStyleValue;
+pub struct GridRowStyleValue<'a>;
 
 /// Represents the style value for `grid-row-end` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row-end).
 ///
@@ -341,7 +341,7 @@ pub struct GridRowStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridRowEndStyleValue;
+pub struct GridRowEndStyleValue<'a>;
 
 /// Represents the style value for `grid-row-start` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-row-start).
 ///
@@ -371,7 +371,7 @@ pub struct GridRowEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.grid-row-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GridRowStartStyleValue;
+pub struct GridRowStartStyleValue<'a>;
 
 /// Represents the style value for `grid-template` as defined in [css-grid-3](https://drafts.csswg.org/css-grid-3/#grid-template).
 ///

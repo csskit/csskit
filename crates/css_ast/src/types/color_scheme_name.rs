@@ -9,12 +9,12 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColorSchemeName {
+pub enum ColorSchemeName<'a> {
 	#[atom(CssAtomSet::Light)]
 	Light(T![Ident]),
 	#[atom(CssAtomSet::Dark)]
 	Dark(T![Ident]),
-	Other(T![Ident]),
+	Other(crate::Value<'a, crate::CustomIdent>),
 }
 
 #[cfg(test)]
@@ -25,7 +25,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorSchemeName>(), 16);
+		assert_eq!(std::mem::size_of::<ColorSchemeName>(), 24);
 	}
 
 	#[test]

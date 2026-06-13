@@ -12,7 +12,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TrackSize {}
+pub enum TrackSize<'a> {}
 
 #[cfg(test)]
 mod tests {
@@ -22,7 +22,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TrackSize>(), 68);
+		assert_eq!(std::mem::size_of::<TrackSize>(), 96);
 	}
 
 	#[test]

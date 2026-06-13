@@ -6,8 +6,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FlowFromStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<FlowIntoStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<FlowFromStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<FlowIntoStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<RegionFragmentStyleValue>(), 16);
 	}
 

@@ -32,7 +32,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BlockStepStyleValue;
+pub struct BlockStepStyleValue<'a>;
 
 /// Represents the style value for `block-step-align` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-align).
 ///
@@ -140,7 +140,7 @@ pub enum BlockStepRoundStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BlockStepSizeStyleValue;
+pub struct BlockStepSizeStyleValue<'a>;
 
 /// Represents the style value for `line-height-step` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#line-height-step).
 ///
@@ -168,4 +168,4 @@ pub struct BlockStepSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-height-step"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LineHeightStepStyleValue;
+pub struct LineHeightStepStyleValue<'a>;

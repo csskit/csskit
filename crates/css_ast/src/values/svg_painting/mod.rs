@@ -59,7 +59,7 @@ pub enum ColorInterpolationStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.marker"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarkerStyleValue;
+pub struct MarkerStyleValue<'a>;
 
 /// Represents the style value for `marker-end` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#marker-end).
 ///
@@ -87,7 +87,7 @@ pub struct MarkerStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.marker-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarkerEndStyleValue;
+pub struct MarkerEndStyleValue<'a>;
 
 /// Represents the style value for `marker-mid` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#marker-mid).
 ///
@@ -115,7 +115,7 @@ pub struct MarkerEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.marker-mid"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarkerMidStyleValue;
+pub struct MarkerMidStyleValue<'a>;
 
 /// Represents the style value for `marker-start` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#marker-start).
 ///
@@ -143,7 +143,7 @@ pub struct MarkerMidStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.marker-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarkerStartStyleValue;
+pub struct MarkerStartStyleValue<'a>;
 
 /// Represents the style value for `paint-order` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#paint-order).
 ///

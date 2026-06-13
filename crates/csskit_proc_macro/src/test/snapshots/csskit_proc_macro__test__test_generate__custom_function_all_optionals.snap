@@ -1,5 +1,6 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
+assertion_line: 150
 expression: pretty
 ---
 struct Foo<'a> {

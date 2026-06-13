@@ -8,6 +8,7 @@ expression: pretty
     ::csskit_derives::ToCursors,
     ::csskit_derives::ToSpan,
     ::csskit_derives::SemanticEq,
+    ::csskit_derives::NodeWithMetadata,
     Debug,
     Copy,
     Clone,
@@ -17,6 +18,7 @@ expression: pretty
     Ord,
     Hash
 )]
+#[metadata(delegate)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
 pub enum FooKeywords {
@@ -25,4 +27,4 @@ pub enum FooKeywords {
     #[atom(CssAtomSet::Inset)]
     Inset(::css_parse::T![Ident]),
 }
-struct Foo<'a>(pub ::css_parse::Vec<'a, crate::FooKeywords>);
+struct Foo<'a>(pub ::css_parse::Vec<'a, crate::Value<'a, crate::FooKeywords>>);
