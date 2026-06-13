@@ -238,21 +238,62 @@ jobs:
         uses: actions/checkout@df4cb1c069e1874edd31b4311f1884172cec0e10 # v6.0.3
 
       - name: Check Results
+        id: check
         run: |
-          if [[ "${{ needs.check-skip.outputs.skip-build }}" == "true" ]]; then
-            echo "Build jobs were skipped (no build-relevant files changed)";
-            if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-              gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving. (Build jobs were skipped - no build-relevant files changed)" || true;
-            fi
-            exit 0;
+          SKIPPED="${{ needs.check-skip.outputs.skip-build }}"
+          NEEDS='${{ toJSON(needs) }}'
+
+          # Build a status table for the PR comment
+          declare -A JOB_NAMES=(
+            [build]="Build & Test (win32-x64, win32-arm64, linux-x64, linux-arm64, darwin-x64, darwin-arm64)"
+            [build_default]="Build & Test (default features)"
+            [build_nightly]="Build & Test (nightly)"
+            [build_each_lib]="Build each library"
+            [acceptance]="Acceptance Tests"
+            [fuzz_replay]="Fuzz Corpus Replay"
+          )
+
+          TABLE="| Job | Result |\n|---|---|\n"
+          FAILED_JOBS=""
+
+          for job in build build_default build_nightly build_each_lib acceptance fuzz_replay; do
+            result=$(echo "$NEEDS" | jq -r ".${job}.result // \"skipped\"")
+            name="${JOB_NAMES[$job]}"
+            case "$result" in
+              success) icon=":white_check_mark:" ;;
+              skipped) icon=":white_circle:" ;;
+              *)       icon=":x:"; FAILED_JOBS="${FAILED_JOBS}\n- **${name}**" ;;
+            esac
+            TABLE="${TABLE}| ${name} | ${icon} ${result} |\n"
+          done
+
+          if [[ "$SKIPPED" == "true" ]]; then
+            BODY="### :white_circle: CI skipped\n\nNo build-relevant files changed.\n\n${TABLE}"
+            echo "outcome=skip" >> $GITHUB_OUTPUT
+          elif [[ -n "$FAILED_JOBS" ]]; then
+            BODY="### :x: CI failed\n\nThe following jobs failed:\n${FAILED_JOBS}\n\n${TABLE}\n\n[View run](${{ github.server_url }}/${{ github.repository }}/actions/runs/${{ github.run_id }})"
+            echo "outcome=fail" >> $GITHUB_OUTPUT
+          else
+            BODY="### :white_check_mark: CI passed\n\n${TABLE}"
+            echo "outcome=pass" >> $GITHUB_OUTPUT
           fi
-          outcome='${{ toJSON(needs.*.result) }}'
-          if [[ $(echo $outcome | jq -e 'all(. == "success")') != "true" ]]; then
-            echo "Some required steps failed!";
-            if [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-              gh pr review ${{ github.event.number }} --request-changes --body "Some required steps failed!" || true;
-            fi
-            exit 1;
-          elif [[ "${{ github.ref }}" != "refs/heads/main" ]]; then
-            gh pr review ${{ github.event.number }} --approve --body "All CI jobs have passed. Approving." || true;
-          fi
+
+          # Export body for comment step
+          {
+            echo "RESULTS_BODY<<EOF"
+            printf '%b' "$BODY"
+            echo "EOF"
+          } >> $GITHUB_ENV
+
+          # Log for the Actions console
+          printf '%b\n' "$BODY"
+
+          # Fail the job if there were failures
+          [[ -z "$FAILED_JOBS" ]]
+
+      - name: Comment on PR
+        if: github.event_name == 'pull_request'
+        uses: ./.github/actions/github-comment
+        with:
+          issue-number: ${{ github.event.number }}
+          body: ${RESULTS_BODY}
