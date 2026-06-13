@@ -1,3 +1,49 @@
+## [0.0.25] - 2026-06-13
+
+### Other Changes
+- Update cargo deps (#1189) ([#1189](https://github.com/csskit/csskit/pull/1189))
+- Push allocator-api2 back to 2.21 due to bumpalo (#1191) ([#1191](https://github.com/csskit/csskit/pull/1191))
+- Fuzz: Try setting up a fuzzing suite (#1201) ([#1201](https://github.com/csskit/csskit/pull/1201))
+
+
+### Css_ast
+- css_ast: Avoid hanging on `={-->}` input. (#1183) ([#1183](https://github.com/csskit/csskit/pull/1183))
+- Regenerate css_ast/src/values from csswg drafts (#1184) ([#1184](https://github.com/csskit/csskit/pull/1184))
+- css_ast: Use assert_parse! closure macro variant in tests. (#1196) ([#1196](https://github.com/csskit/csskit/pull/1196))
+- cssast/csskit_derives: Add new FeatureMetadata system (#1197) ([#1197](https://github.com/csskit/csskit/pull/1197))
+- csskit_derives/css_ast: make derive(IntoCursor) work with generics (#1200) ([#1200](https://github.com/csskit/csskit/pull/1200))
+- css_ast: Implement a NonEmpty generic (#1202) ([#1202](https://github.com/csskit/csskit/pull/1202))
+
+
+### Css_lexer
+- fuzz: early return atom functions when given non-atom tokens (#1206) ([#1206](https://github.com/csskit/csskit/pull/1206))
+- fuzz(css_lexer): ensure REPLACEMENT_CHARACTER is appended in small idents (#1213) ([#1213](https://github.com/csskit/csskit/pull/1213))
+
+
+### Css_parse
+- css_parse: Ensure buffer is refilled if skipping past a whole buffer (#1180) ([#1180](https://github.com/csskit/csskit/pull/1180))
+- css_parse: Impl ToSpan for Comparison (#1190) ([#1190](https://github.com/csskit/csskit/pull/1190))
+- Impl Display for Comparison (#1193) ([#1193](https://github.com/csskit/csskit/pull/1193))
+- css_parse: Improve assert_parse! macros to use a block/closure (#1194) ([#1194](https://github.com/csskit/csskit/pull/1194))
+
+
+### Csskit
+- csskit: improve json output for subcommands (#1182) ([#1182](https://github.com/csskit/csskit/pull/1182))
+- chore(deps): update dependencies (patch) (#1185) ([#1185](https://github.com/csskit/csskit/pull/1185))
+
+
+### Csskit_derives
+- csskit_derives: Ensure generics expect Peek when using it. (#1198) ([#1198](https://github.com/csskit/csskit/pull/1198))
+
+
+### Csskit_source_finder
+- csskit_source_finder: Don't find visitable nodes that just visit children (#1199) ([#1199](https://github.com/csskit/csskit/pull/1199))
+
+
+### Csskit_vscode
+- chore(deps): update dependency @vscode/test-electron to v3 (#1192) ([#1192](https://github.com/csskit/csskit/pull/1192))
+- fix(deps): update dependency esbuild to v0.28.1 [security] (#1210) ([#1210](https://github.com/csskit/csskit/pull/1210))
+
 ## [0.0.24] - 2026-06-04
 
 ### Other Changes
@@ -17,10 +63,21 @@
 - Regenerate css_ast/src/values from csswg drafts (#1142) ([#1142](https://github.com/csskit/csskit/pull/1142))
 - css_ast: resolve `none` channels to 0 (#1154) ([#1154](https://github.com/csskit/csskit/pull/1154))
 - css_ast: Rewrite <position> and <bg-position> (#1164) ([#1164](https://github.com/csskit/csskit/pull/1164))
+- css_ast: Implement transform-origin parsing (#1169) ([#1169](https://github.com/csskit/csskit/pull/1169))
+- css_ast: Implement rect() function (#1171) ([#1171](https://github.com/csskit/csskit/pull/1171))
+- css_ast: implement extra values for pointer-events (#1172) ([#1172](https://github.com/csskit/csskit/pull/1172))
+- css_ast: implement -ms-word-break (#1173) ([#1173](https://github.com/csskit/csskit/pull/1173))
+- css_ast: Implement -ms-box-sizing (#1174) ([#1174](https://github.com/csskit/csskit/pull/1174))
+- css_ast: Implement vendor-prefixed -*-filter style values (#1175) ([#1175](https://github.com/csskit/csskit/pull/1175))
+- css_ast: Implement color-scheme (#1176) ([#1176](https://github.com/csskit/csskit/pull/1176))
+- css_ast: Implement -ms-interpolation-mode (#1177) ([#1177](https://github.com/csskit/csskit/pull/1177))
+- css_ast: allow comma less rect functions (#1178) ([#1178](https://github.com/csskit/csskit/pull/1178))
 
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1143) ([#1143](https://github.com/csskit/csskit/pull/1143))
+- csskit: refactor unify CLI extraction commands with Extract trait + shared OutputFormat (#1179) ([#1179](https://github.com/csskit/csskit/pull/1179))
+- Release v0.0.24 (#1139) ([#1139](https://github.com/csskit/csskit/pull/1139))
 
 
 ### Csskit_proc_macro

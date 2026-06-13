@@ -4,7 +4,7 @@ members = ["crates/*"]
 exclude = ["packages/csskit_zed"]
 
 [workspace.package]
-version = "0.0.24"  # @release
+version = "0.0.25"  # @release
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)"]
 edition = "2024"
 description = "Refreshing CSS!"
@@ -14,23 +14,23 @@ license = "MIT"
 keywords = ["CSS", "parser"]
 
 [workspace.dependencies]
-chromashift = { path = "crates/chromashift", version = "0.0.24" }  # @release
-css_ast = { path = "crates/css_ast", version = "0.0.24" }  # @release
-css_feature_data = { path = "crates/css_feature_data", version = "0.0.24" }  # @release
-css_lexer = { path = "crates/css_lexer", version = "0.0.24" }  # @release
-css_parse = { path = "crates/css_parse", version = "0.0.24" }  # @release
-css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.24" }  # @release
+chromashift = { path = "crates/chromashift", version = "0.0.25" }  # @release
+css_ast = { path = "crates/css_ast", version = "0.0.25" }  # @release
+css_feature_data = { path = "crates/css_feature_data", version = "0.0.25" }  # @release
+css_lexer = { path = "crates/css_lexer", version = "0.0.25" }  # @release
+css_parse = { path = "crates/css_parse", version = "0.0.25" }  # @release
+css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.25" }  # @release
 # Local packages
-csskit = { path = "crates/csskit", version = "0.0.24" }  # @release
-csskit_ast = { path = "crates/csskit_ast", version = "0.0.24" }  # @release
-csskit_derives = { path = "crates/csskit_derives", version = "0.0.24" }  # @release
-csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.24" }  # @release
-csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.24" }  # @release
-csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.24" }  # @release
-csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.24" }  # @release
+csskit = { path = "crates/csskit", version = "0.0.25" }  # @release
+csskit_ast = { path = "crates/csskit_ast", version = "0.0.25" }  # @release
+csskit_derives = { path = "crates/csskit_derives", version = "0.0.25" }  # @release
+csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.25" }  # @release
+csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.25" }  # @release
+csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.25" }  # @release
+csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.25" }  # @release
 csskit_spec_generator = { path = "crates/csskit_spec_generator", version = "0.0.0" }
-csskit_transform = { path = "crates/csskit_transform", version = "0.0.24" }  # @release
-derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.24" }  # @release
+csskit_transform = { path = "crates/csskit_transform", version = "0.0.25" }  # @release
+derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.25" }  # @release
 
 # Memory
 allocator-api2 = { version = "0.2.21" }  # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
