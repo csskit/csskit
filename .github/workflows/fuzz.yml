@@ -36,13 +36,12 @@ jobs:
             -artifact_prefix=artifacts/parse_stylesheet/
 
       - name: Minimise artifacts
-        # For each crash/timeout, run tmin to produce a minimal reproducer.
         working-directory: fuzz
         run: |
           shopt -s nullglob
           mkdir -p artifacts/parse_stylesheet
           touch artifacts/parse_stylesheet/.tmin-start
-          for f in artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
+          for f in artifacts/parse_stylesheet/{crash,timeout,slow-unit,oom,leak}-*; do
             echo "Minimising $f"
             cargo +nightly fuzz tmin parse_stylesheet "$f" \
               --target x86_64-unknown-linux-gnu \
@@ -67,7 +66,7 @@ jobs:
         id: findings
         run: |
           shopt -s nullglob
-          findings=(fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*)
+          findings=(fuzz/artifacts/parse_stylesheet/{crash,timeout,slow-unit,oom,leak}-*)
           if [ ${#findings[@]} -gt 0 ]; then
             echo "found=true" >> "$GITHUB_OUTPUT"
             echo "Found ${#findings[@]} artifact(s):"
@@ -91,7 +90,7 @@ jobs:
           marker="fuzz/artifacts/parse_stylesheet/.tmin-start"
           mapfile -d '' minimized < <(find fuzz/artifacts/parse_stylesheet \
             -name 'minimized-from-*' -newer "$marker" -print0 2>/dev/null)
-          originals=(fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*)
+          originals=(fuzz/artifacts/parse_stylesheet/{crash,timeout,slow-unit,oom,leak}-*)
           if [ ${#minimized[@]} -gt 0 ]; then
             to_stage=("${minimized[@]}")
           else
