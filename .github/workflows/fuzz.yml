@@ -87,11 +87,33 @@ jobs:
           echo "RUN_URL=${RUN_URL}" >> $GITHUB_ENV
           git switch -c "$BRANCH"
           shopt -s nullglob
-          for f in fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
-            cp "$f" "fuzz/corpus/parse_stylesheet/$(basename "$f")"
-          done
+
+          # Collect artifacts to stage: prefer minimized-from-* over originals,
+          # fall back to crash-*/timeout-*/slow-* if no minimized versions exist.
+          minimized=(fuzz/artifacts/parse_stylesheet/minimized-from-*)
+          originals=(fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*)
+          if [ ${#minimized[@]} -gt 0 ]; then
+            to_stage=("${minimized[@]}")
+          else
+            to_stage=("${originals[@]}")
+          fi
+
+          # Build PR body with per-artifact hex dumps and rendered content
+          {
+            printf 'Nightly fuzz run found new findings.\n\nReproduce: `mise run fuzz`. Fix the bug, add a regression test, then merge.\n\nGHA run: %s\n\n' "${RUN_URL}"
+            printf '## Findings\n\n'
+            for f in "${to_stage[@]}"; do
+              name=$(basename "$f")
+              size=$(wc -c < "$f")
+              hex=$(xxd "$f" | head -32)
+              readable=$(cat -v "$f")
+              printf '### `%s` (%d bytes)\n\n```\n%s\n```\n\n```css\n%s\n```\n\n' \
+                "$name" "$size" "$hex" "$readable"
+              cp "$f" "fuzz/corpus/parse_stylesheet/${name}"
+            done
+          } > /tmp/fuzz-pr-body-rendered.md
+
           git add fuzz/corpus/parse_stylesheet/
-          printf 'Nightly fuzz run found new findings.\n\nReproduce: `mise run fuzz`. Fix the bug, add a regression test, then merge.\n\nGHA run: %s\n' "${RUN_URL}" > /tmp/fuzz-pr-body-rendered.md
 
       - name: Open PR with findings
         if: steps.findings.outputs.found == 'true'
