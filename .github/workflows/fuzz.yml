@@ -41,6 +41,7 @@ jobs:
         run: |
           shopt -s nullglob
           mkdir -p artifacts/parse_stylesheet
+          touch artifacts/parse_stylesheet/.tmin-start
           for f in artifacts/parse_stylesheet/{crash,timeout,slow}-*; do
             echo "Minimising $f"
             cargo +nightly fuzz tmin parse_stylesheet "$f" \
@@ -87,10 +88,9 @@ jobs:
           echo "RUN_URL=${RUN_URL}" >> $GITHUB_ENV
           git switch -c "$BRANCH"
           shopt -s nullglob
-
-          # Collect artifacts to stage: prefer minimized-from-* over originals,
-          # fall back to crash-*/timeout-*/slow-* if no minimized versions exist.
-          minimized=(fuzz/artifacts/parse_stylesheet/minimized-from-*)
+          marker="fuzz/artifacts/parse_stylesheet/.tmin-start"
+          mapfile -d '' minimized < <(find fuzz/artifacts/parse_stylesheet \
+            -name 'minimized-from-*' -newer "$marker" -print0 2>/dev/null)
           originals=(fuzz/artifacts/parse_stylesheet/{crash,timeout,slow}-*)
           if [ ${#minimized[@]} -gt 0 ]; then
             to_stage=("${minimized[@]}")
@@ -112,7 +112,6 @@ jobs:
               cp "$f" "fuzz/corpus/parse_stylesheet/${name}"
             done
           } > /tmp/fuzz-pr-body-rendered.md
-
           git add fuzz/corpus/parse_stylesheet/
 
       - name: Open PR with findings
