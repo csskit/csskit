@@ -298,6 +298,7 @@ impl<'a> ByteCursor<'a> {
 					self.pos += 1;
 					contains_escape = true;
 					len += 1;
+					small_ident.append(REPLACEMENT_CHARACTER);
 				} else {
 					break;
 				}
