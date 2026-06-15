@@ -341,10 +341,12 @@ where
 		for i in self.buffer_index..BUFFER_LEN {
 			let c = self.buffer[i];
 			if c == Kind::Eof {
+				self.buffer_index = i;
 				return trivia;
 			} else if c == self.skip {
 				trivia.push(c)
 			} else {
+				self.buffer_index = i;
 				self.fill_buffer(i);
 				return trivia;
 			}
