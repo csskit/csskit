@@ -88,14 +88,18 @@ where
 			// While by default the parser will skip whitespace, the Declaration or Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
 			// Rules are parsed.
-			// CDC (`-->`) and CDO (`<!--`) tokens are not valid component values and are not consumed by the
-			// declaration/rule/bad-declaration recovery paths below. Left unconsumed they cause a zero-progress
-			// loop and unbounded allocation. Per CSS Syntax they are only meaningful at the stylesheet top
-			// level, so discard them here, mirroring the stylesheet top-level loop.
-			if p.parse_if_peek::<T![' ']>()?.is_some()
-				|| p.parse_if_peek::<T![;]>()?.is_some()
-				|| p.parse_if_peek::<T![CdcOrCdo]>()?.is_some()
-			{
+			// Additional tokens, such as CDC (`-->`) and CDO (`<!--`), Semicolon, RightParen, RightSquare are not valid
+			// component values and are not consumed by the declaration/rule/bad-declaration recovery paths below. Left
+			// unconsumed they cause a zero-progress loop and unbounded allocation. Per CSS Syntax they are only meaningful
+			// at the stylesheet top level, so discard them here, mirroring the stylesheet top-level loop.
+			p.consume_trivia_as_leading();
+			const ERROR_KINDS: KindSet =
+				KindSet::new(&[Kind::CdcOrCdo, Kind::Semicolon, Kind::RightParen, Kind::RightSquare]);
+			let c = p.peek_n(1);
+			if c == ERROR_KINDS {
+				let old_skip = p.set_skip(ERROR_KINDS);
+				p.consume_trivia_as_leading();
+				p.set_skip(old_skip);
 				continue;
 			}
 			if p.at_end() {

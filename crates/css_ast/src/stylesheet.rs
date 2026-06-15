@@ -207,7 +207,15 @@ mod tests {
 
 	#[test]
 	fn cdc_in_unknown_rule_block() {
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->}", "={}");
-		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->", "={");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->}");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "={-->");
+	}
+
+	#[test]
+	fn stray_close_bracket_in_block() {
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "%{)");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "t% {90)");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "{--ty-2% {90)");
+		assert_parse!(CssAtomSet::ATOMS, StyleSheet, "%{]");
 	}
 }
