@@ -15,7 +15,7 @@ impl<const N: usize> SmallStrBuf<N> {
 		if n + char_len <= N {
 			c.encode_utf8(&mut self.1[n..]);
 		}
-		self.0 += char_len as u8;
+		self.0 = self.0.saturating_add(char_len as u8);
 	}
 
 	#[inline]
