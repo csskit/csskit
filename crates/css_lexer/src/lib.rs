@@ -271,6 +271,16 @@ fn size_test() {
 	assert_eq!(::std::mem::size_of::<Lexer>(), 48);
 }
 
+#[test]
+fn test_smallstr_buf_overflow() {
+	let mut source = String::from("a");
+	source.extend(std::iter::repeat('\0').take(86));
+	let lexer = Lexer::new(&EmptyAtomSet::ATOMS, &source);
+	for cursor in lexer {
+		let _ = cursor;
+	}
+}
+
 #[cfg(test)]
 mod iterator_tests {
 	use super::*;
