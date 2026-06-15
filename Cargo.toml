@@ -33,7 +33,7 @@ csskit_transform = { path = "crates/csskit_transform", version = "0.0.25" }  # @
 derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.25" }  # @release
 
 # Memory
-allocator-api2 = { version = "0.2.21" }  # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
+allocator-api2 = { version = "0.3.0" }  # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
 bumpalo = { version = "3.20.3" }
 
 # Data structure libraries/helpers
