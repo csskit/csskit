@@ -93,8 +93,14 @@ where
 			// unconsumed they cause a zero-progress loop and unbounded allocation. Per CSS Syntax they are only meaningful
 			// at the stylesheet top level, so discard them here, mirroring the stylesheet top-level loop.
 			p.consume_trivia_as_leading();
-			const ERROR_KINDS: KindSet =
-				KindSet::new(&[Kind::CdcOrCdo, Kind::Semicolon, Kind::RightParen, Kind::RightSquare]);
+			const ERROR_KINDS: KindSet = KindSet::new(&[
+				Kind::CdcOrCdo,
+				Kind::Semicolon,
+				Kind::RightParen,
+				Kind::RightSquare,
+				Kind::BadString,
+				Kind::BadUrl,
+			]);
 			let c = p.peek_n(1);
 			if c == ERROR_KINDS {
 				let old_skip = p.set_skip(ERROR_KINDS);
@@ -342,5 +348,17 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(EmptyAtomSet::ATOMS, Block<Decl, Rule, ()>, "{color:black}");
+	}
+
+	#[test]
+	fn test_bad_string_in_block_does_not_hang() {
+		let bump = bumpalo::Bump::new();
+		for src in
+			[":{\".\n", "am:{\"\n", "alm:{\"\n", "alm:{\";.\n", "alm:{\"; }.\n", "alm:s {\n \x16\x00\x00:\";\n }\n"]
+		{
+			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
+			let mut parser = crate::Parser::new(&bump, src, lexer);
+			let _ = parser.parse::<Block<Decl, Rule, ()>>();
+		}
 	}
 }
