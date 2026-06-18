@@ -1,0 +1,33 @@
+ semantic
+   element names, use the compressor script (lib/compress.rb)
+
+---------------------------mpress.rb)
+
+-------------------------------------- */
+.container {
+  width: 950px;
+  margin: 0 auto;
+tainer to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+------------------------------------------------pack: start !important;
+    justify-content: flex-start !important;
+  }
+  .justify-content-sm-end {
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+  }
+  .justify-content-sm-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+  }
+  .justify-content-sm-between {
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+  }
+  .justify-content-sm-around {
+    -ms-flex-pack:--- 

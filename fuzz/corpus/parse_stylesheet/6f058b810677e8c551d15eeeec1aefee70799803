@@ -1,0 +1,16 @@
+1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.was-validated select.form-n\:ring-inset:focus-within{--tw-ring-inset:inset}.\32xl\:focus\:ring-in/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1px 1px 0;border-radius:2px;background:no-repeat 10px 17px;overflow-wrap:set:focus{--tw-ringbreak-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:rig;border:1px solidpx 0 1px 1px;background-position:right 10px top 17px;}.messages + .messages{margin-top:1.538em;}.messages__list{margin:0;p-inset:inset}.\32xl\:ring-transparent{--tw-ring-color:transparent}.\32xl\:ring-current{--tw-ring-color:currentColor}.\32xl\:ring-black{--tw-ring-opacity:1;--tadding:0;list-stylew-r:ni

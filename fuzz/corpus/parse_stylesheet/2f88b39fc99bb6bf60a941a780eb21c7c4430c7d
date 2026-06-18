@@ -1,0 +1,184 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    INUIT.CSS
+\*------------------------------------*/
+/*!*
+ *
+ * inuitcss.com -- @inuitcss -- @csswizardry
+ *
+ */
+/**
+ * inuit.css acts as a base stylesheet which you should extend with your own
+ * theme stylesheet.
+ *
+ * inuit.css aims to do the heavy lifting; sorting objects and abstractions,
+ * design patterns and fiddly bits of CSS, whilst leaving as much design as
+ * possible to you. inuit.css is the scaffolding to your decorator.
+ *
+ * This stylesheet is heavily documented and contains lots of comments, please
+ * take care to read and refer to them as you build. For further support please
+ * tweet at @inuitcss.
+ *
+ * Owing to the amount of comments please only ever use minified CSS in
+ * production. This file is purely a dev document.
+ *
+ * The table of contents below maps to section titles of the same name, to jump
+ * to any section simply run a find for $[SECTION-TITLE].
+ *
+ * Most objects and abstractions come with a chunk of markup that you should be
+ * able to paste into any view to quickly see how the CSS works in conjunction
+ * with the correct HTML.
+ *
+ * inuit.css is written to this standard: github.com/csswizardry/CSS-Guidelines
+ *
+ * LICENSE
+ *
+ * Copyright 2013 Harry Roberts
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * Thank you for choosing inuit.css. May your web fonts render perfectly.
+ */
+/*------------------------------------*\
+    $CONTENTS
+\*------------------------------------*/
+/**
+ * CONTENTS............You’re reading;
+    }
+  }
+  hr.page-break {
+    break-before: page;
+    display: none;
+  }
+  .break-before\:page {
+    break-before: page;
+  }
+  .break-after\:page {
+    break-after: page;
+  }
+  .break-inside\:avoid-page {
+    break-inside: avoid-page;
+    & * {
+      break-inside: avoid-page;
+    }
+  }
+}
+
+/* src/flex.css */
+.flex-row,
+.f-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+  & > * {
+    margin: 0;
+  }
+}
+.flex-column,
+.f-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  & > * {
+    margin: 0;
+  }
+}
+.flex-switch,
+.f-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  --f-switch-threshold: 55ch;
+  --flex-switch-threshold:ter-spin-button {
+  height: auto;
+}
+
+[type="search"] {
+  outline-offset: -2px;
+  -webkit-appearance: none;
+}
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  font: inherit;
+  -webkit-appearance: button;
+}
+
+output {
+  display: inline-block;
+}
+
+summary {
+  display: list-item;
+  cursor: pointer;
+}
+
+template {
+  display: none;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+h1, h2, h3, h4, h5, h6,
+.h1, .h2, .h3, .h4, .h5, .h6 {
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+h1, .h1 {
+  font-size: 2.5rem;
+}
+
+h2, .h2 {
+items: start;
+}
+.align-items\:end {
+  align-items: end;
+}
+.align-items\:baseline {
+  align-items: baseline;
+}
+.align-items\:center {
+  align-items: center;
+}
+.align-items\:stretch {
+  flex-grow: 7;
+}
+.flex-grow\:8 {
+  flex-grow: 8;
+}
+.flex-grow\:9 {
+  flex-grow: 9;
+}
+.flex-grow\:10 {
+  flex-grow: 10;
+}
+.flex-grow\:11 {
+  flex-grow: 11;
+}
+.flexozenge styles
+ * RULES...............Horizontal rules
+ * STATS...............Simple stats object
+ * GREYBOX.............Wireframing styles
+ *
+ * WIDTHS..............Width classes for use alongside the grid system etc.
+ * PUSH................Push classes for manipulating grids
+ * PULL................Pull classes for manipulating grids
+ * BRAND...............Helper class to apply brand treatment to elements
+ * HELPER..............A s

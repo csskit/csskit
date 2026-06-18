@@ -1,0 +1,9 @@
+(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);color:var(--fgColor-muted, var(--color-fg-muted));word-break:break-all;background-color:var(--bgColor-accent-muted, var(--colos\:bg-pink-800:focus{--tw-bg-opacity:1;background-color:rgba(157,23,77,var(--tw-bg-opacity))}.xl\:focus\:bg-pink-900:focus{--tw-bg-opacity:1;background-color:rgba(131,24,67,var(--tw-bg-opacity))}.xl\:bg-opacity-0{--tw-bg-opacity:0}.xl\:bg-opacity-5{--tw-bg-opacity:0.05}.xl\:bg-opacity-10{--tw-bg-opacity:0.1}.xl\:bg-opacity-20{--tw-bg-opacity:0.2}.xl\:bg-opacity-25{--tw-bg-opacity:0.25}.xl\:bg-opacity-30{--tw-bg-opacity:0.3}.xl\:bg-opacity-40{-- 1);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    -webkit-animation-timin);
+    -webkit-r-accent-subtle));border-radius:6px}.branch-name .octicon{margin:1px -2px 0 0;color:var(--fgColor-muted, var(--color-fg-muted))}a.branch-name{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--bgColor-accent-muted, var(--color-accent-subtle))}a.branch-name .octicon{color:var(--fgColor-accent, var(--color-accent-fg))}.dropdown{position:relative}.dropdown-caret{border-bottom-color:rgba(0,0,0,0);border-left-color:rgba(0,0,0,0);bordtransform: translate3d(0, 0er-right-color:rgba(0,0,0, 0) scaleY,0);(

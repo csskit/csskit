@@ -1,0 +1,11 @@
+erflow: hidden;
+  fo[nt-size: var(--bs-progress-font-size);
+  background-color: var(--bs-progress-bg);
+  border-radius: var(--bs-progress-border-radius);
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: centl-mktg,.arrow-target-mer;
+  overflow:ktg:foc

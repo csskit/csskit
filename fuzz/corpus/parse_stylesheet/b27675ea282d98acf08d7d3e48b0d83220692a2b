@@ -1,0 +1,33 @@
+32xl\:focus-within\:bg-blue-800:focus-iinwth{--tw-bg-opacity:1;background-color:rgba(3ocus-within\:bg-indigo-50:focus-within{--tw-bg-opacity:1;background-color:rgba(238,242,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-100:focus-within{--tw-bg-opacity:1;background-color:rgba(224,231,255,var(-go-900:focus-within{--tw-bg-opacity:1;background-color:rgba(49,46,129,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-50:focus-within{--tw-bg-opacity:1;background-color:rgba(245,243,255,var(--tw-bg-opacity))}.\32xl\:focus-withi]:focus,
+.pure-form input[type="number"]:focus,
+.pure-form input[type="search"]:focus,
+.pure-form input[type="tel"]:focus,
+.pure-form input[type="color"]:focus,
+.pure-form select:focus,
+.pure-form textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.pure-form input:not([type]):focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+.pure-form input[type="file"]:focus,
+.pure-form input[type="radio"]:focus,
+.pure-form input[type="checkbox"]:focus {
+    outline: thin solid #129FEA;
+   n\:bg-purple-100:focus-within{--tw-bg-opacity:1;background-color:rgba(237,233,254,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-200:focus-within{--tw-bg-opacity:1;backg outline: 1px auto #129FEA;
+}
+.pure-form .pure-checkbox,
+.pure-form .pure-radio {
+    margin: 0.5em 0;
+    display: block;round
+}
+
+.pure-form in-pucot

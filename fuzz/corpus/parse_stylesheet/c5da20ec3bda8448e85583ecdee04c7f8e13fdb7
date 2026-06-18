@@ -1,0 +1,43 @@
+olor-hover, var(--color-btn-danger-hover-bg));border-color:var(--button-danger-borderColor-hover, var(--color-btn-danger-hover-border));box-shadow:var(--shadow-resting-small, var(--color-btn-danger-hover-shadow)),var(--shadow-highlight, var(--color-btn-danger-hover-inset-shadow))}.btn-danger:hover .Counter,[open]>.btn-danger .Counter{background-color:var(--buttonCounter-danger-bgColor-hover, var(--color-btn-danger-hover-counter-bg))}.btn-danger:hover .octicon,[open]>.btn-danger .octicon{color:var(--button-danger-iconColor-hover, var(--color-btn-danger-hover-icon))}.btn-danger:active,.btn-danger.selected,.btn-danger[aria-selected=true]{color:var(--button-danger-fgColor-active, var(--color-btn-danger-selected-text));background-color:var(--button-danger-bgColor-active, var(--color-btn-danger-selected-bg));border-color:var(--button-danger-borderColor-active, var(--color-btn-danger-selected-border));box-shadow:var(--button-danger-shadow-selected, var(--color-btn-danger-selec semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span-15 {width: 590px;}
+.span-16 {width: 630px;}
+.span-17 {width: 670px;}
+.span-18 {width: 710px;}
+.span-19 {width: 749ted-shadow))}.btn-danger:disabled,.btn-danger.disabled,.btn-danger[aria-disabled=true]{color:var(--button-danger-fgColor-disabled, var(--color-btn-danger-disabled-text));background-color:var(--button-danger-bgColor-disapx;}
+.span-20 {width: 790px;}
+.span-21 {width: 830px;}
+.span-22 {width: 870px;}
+.span-23 {width: 910px;}
+.span-24 {width:950px; margin-right:0;}
+
+/* bled, var(--color-btn-danger-disabled-bg));border-color:var(--button-default-borderColor-rest, var(--color-btn-Use these classes to set border));box-shathe wdow:nidth one}.b

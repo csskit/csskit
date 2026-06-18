@@ -1,0 +1,134 @@
+2.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6.25deg);
+  }
+
+  44.4% {
+    -webkit-transform: skewX(-3.125deg) skewY(-3.125deg);
+    transform: skewX(-3.125deg) skewY(-3.125deg);
+  }
+
+  55.5% {
+    -webkit-transform: skewX(1.5625deg) skewY(1.5625deg);
+    transform: skewX(1.5625deg) skewY(1.5625deg);
+  }
+
+  66.6% {
+    -webkit-transform: skewX(-0.78125deg) skewY(-0.78125deg);
+    transform: skewX(-0.78125deg) skewY(-0.78125deg);
+  }
+
+  77.7% {
+    -webkit-transform: skewX(0.390625deg) skewY(0.390625deg);
+    transform: skewX(0.390625deg) skewY(0.390625deg);
+  }
+
+  88.8% {
+    -webkit-transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+    transform: skewX(-0.1953125deg) skewY(-0.1953125deg);
+  }
+}
+.animate__jello {
+  -webkit-animation-name: jello;
+  animation-name: jello;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+}
+@-webkit-keyframes heartBeat {
+  0% {
+    -webkit-transform: scale(1);
+    transf:bg-clip-border{background-clip:border-box}.xl\:bg-clip-padding{background-m li a i,
+    .menu.icon-bottom li a svg, .menu.nested.icon-bottom li a img,
+    .menu.nested.icon-bottom li a i,
+    .menu.nested.icon-bottom li a svg {
+      -webkit-align-self: stretch;
+          -ms-flex-item-align: stretch;
+              align-self: stretch;
+      margin-bottom: 1.25rem;
+      text-align: center; }
+  .menu .is-active > a {
+    background: #1779ba;
+    color: #fefefe; }
+  .menu .active > a {
+    background: #1779ba;
+    color: #fefefe; }
+  .menu.align-left {
+    -webkit-box-pack: start;
+    -webkit-justify-content: flex-start;
+        -ms-flex-pack: start;
+            justify-content: flex-start; }
+  .menu.align-right li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+    .menu.align-right li .submenu li {
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+  .menu.align-right.vertical li {
+    display: block;
+    text-align: right; }
+    .menu.align-right.vertical li .submenu li {
+      text-align: right; }
+  .menu.align-right.icon-top li a img,
+  .menu.align-right.icon-top l
+            flex-flow: column nowrap; }
+    .menu.icon-top li a img,
+    .menu.icon-top li a i,
+    .menu.icon-top li a svg, .menu.nested.icon-top li a img,
+    .menu.nested.icon-top li a i,
+    .menu.nested.icon-top li a svg {
+   `  -w]bkit-align-self: stretch;
+          -ms-flex-item-align: stretch;
+              align-self: stretch;
+      margin-bottom: 0.25rem;
+      text-align: center; }
+  .menu.icon-bottom li a, .menu.nested.icon-bottom li a {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+  .menu .menu-text {
+    padding: 0.7rem 1rem;
+    font-weight: bold;
+    line-height: 1;
+    color: inhErit; }
+
+.menu-centered > .menu {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .menu-centered > .menu li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .menu-centered > .menu li .submenu li {
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; tered > .menu li .submenu li {
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+           dth: 20px;
+  height: 16px;

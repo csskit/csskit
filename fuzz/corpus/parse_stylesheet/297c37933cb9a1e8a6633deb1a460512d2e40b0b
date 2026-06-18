@@ -1,0 +1,55 @@
+ !important}.Layout .Layout-divider,.Layout .Layout-main,.Layout .Layout-sidebar{grid-column:1 !important;width:100% !important}.Layout.Layout--sidebarPosition-flowRow-start .Layout-sidebar{grid-row:1}.Layout.Layout--sidebarPosition-flowRow-end .Layout-sidebar,.Layout.Layout--sidebarPosition-flowRow-start .Layout-main{grid-row:2/span 2}.Layout.Layout--sidebarPosition-flowRow-end .Layout-main{grid-row:1}.Layout.Layout--sidebarPosition-flowRow-none .Layout-sidebar{display:none}.Layout.Layout--divided{--Layout-gs-flex-direction: row;
+    flex-direction: row;
+  }
+  .list-group-horizontal-sm > .list-group-item:first-child {
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+  }
+  .list-group-horizontal-sm > .list-group-item:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-left-radius: 0;
+  }
+  .list-group-horizontal-sm > .list-group-item.active {
+    margin-top: 0;
+  }
+  .list-group-horizontal-sm > .list-group-item + .list-group-item {
+    border-top-width: 1px;
+    border-left-width: 0;
+  }
+  .list-group-horizontal-sm > .list-group-item + .list-group-item.active {
+    margin-left: -1px;
+    border-left-width: 1px;
+  }
+}
+
+@media (min-width: 768px) {
+  .list-group-horizontal-md {
+    -ms-flex-direction: row;
+    flex-direction: row;
+  }
+  .list-group-horizontal-md > .list-group-item:first-child {
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius: 0;
+  }
+  .list-group-horizontal-md > .list-group-item:last-child {
+    border-top-right-radius: 0.25rem;
+    border-bottom-left-radius: 0;
+  }
+  .list-group-horizontal-md > .list-group-item.active {
+    margin-top: 0;
+  }
+  .list-group-horizontal-md > .list-group-item + .list-group-item {
+    border-top-width: 1px;
+    border-left-width: 0;
+  }
+  .list-group-horizontal-md > .list-group-item + .list-group-item.active {
+    margin-left: -1px;
+    border-left-width: 1px;
+  }
+}
+
+@media (min-width: 992px) {
+  .list-group-horizontal-lg {
+    -ms-flee:focus,
+.show > .btn-light.dropdox-direction: row;
+w n-to 

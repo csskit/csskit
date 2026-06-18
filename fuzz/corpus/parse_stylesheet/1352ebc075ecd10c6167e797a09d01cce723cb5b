@@ -1,0 +1,14 @@
+lg\:max-w-none{max-width:none}.lg\:max-w-xs{max-width:20rem}.lg\:max-w-sm{max-width:24rem}.lg\:max-w-md{max-width:28rem}.lg\:max-w-lg{max-width:32rem}.lg\:max-w-xl{max-width:36rem}.lg\:max-w-2xl{max-width:42rem}.lg\:max-w-3xl{max-width:48rem}.lg\:max-w-4xl{max-width:56rem}.lg\:max-w-5xl{max-width:64rem}.lg\:max-w-6xl{max-width:72rem}.lg\:max-w-7xl{max-width:80rem}.lg\:max-w-full{max-width:100%}.lg\:max-w-min{max-widt.lg\:transform-none{transform:none}.lg\:translate-x-0{--tw-translate-x:0px}.lg\:translate-x-1{--tw-translate-x:0.25rem}.lg\:translate-x-2{--tw-translate-x:0.5rem}.lg\:translate-x-3{--tw-translate-x:0.75x-w-screen-xl{max-width:1280px}.lg\:max-w-screen-2xl{max-width:1536px}.lg\:flex-1{flex:1 1 0%}.lg\:flex-auto{flex:1 1 auto}.lg\:flex-initial{flex:0 1 auto}.lg\:flex-none{flex:none}.lg\:flex-shrink-0{flex-shrink:0}.lg\:flex-shrink{flex-shrink:1}.lg\:flex-grow-0{flex-grow:0}.lg\:flex-grow{flex-grow:1}.lg\:table-auto{table-layout:auto}.lg\:table-fixed{table-layout:fixed}.lg\:border-collapse{border-collapse:collapse}.l@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: g\:border-separate{border-collapse:separate}.lg\:o1;
+}rigin-cen
+ter

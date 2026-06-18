@@ -1,0 +1,95 @@
+pan-10{grid-column:span 10/span 10}.cong-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-lg .offcanvas {
+    position: static;
+    z-index: auto;
+    flex-grow: 2;
+    width: auto !important;
+    height: auto !important;
+    visibility: visible !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .navbar-expand-lg .offcanvas .offcanvas-header {
+    display: none;
+  }
+  .navbar-expand-lg .offcanvas .offcanvas-body {
+    display: flex;
+    flex-grow: 0;
+    padding: 0;
+    overflow-y: visible;
+  ,
+}
+@media (min-width: 1200px) {
+  .navbar-expand-xl {
+    flex-wrap: nowrap;
+    justify-content: flex-start;
+  }
+  .navbar-expand-xl .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-xl .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-xl .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .navbar-expand-xl .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-xl .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-xl .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-xl .offcanvas {
+    position: static;
+    z-index: auto;
+    flex-grow: 1;
+    width: auto !important;
+    height: auto !important;
+    visibility: visible !important;
+    background-color: transparent !important;
+    border: 0 !important;
+    transform: none !important;
+    transition: none;
+  }
+  .navbar-expand-xl .offcanvas .offcanvl-checkbox[type=checkbox]:checked:disabled{background-color:var(--control-fgColor-disabled);border-color:var(--control-fgColor-disabled);cursor:not-allowed;opacity:1}input.FormControl-checkbox[type=checkbox]:checked:disabled:before{background-color:var(--content: flex-start;
+  }
+  .navbar-expand-xxl .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-xxl .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-xxl .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .navbar-expand-xxl .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-xxl .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-xxl .navbar-toggler {
+    display: none;
+  }
+  .navbaem}.-m-2{margin:-.5rem}.-m-3{margin:-.75rem}.-m-4{margin:-1rem}.-m-5{margin:-1.25rem}.-m-6{margin:-1.5rem}.-m-7{margin:-1.75rem}.-m-8{margin:-2rem}.-m-9{margin:-2.25rem}.-m-10{margin:-2.5rem}.-m-11{margin:-2.75rem}.-m-12{margin:-3rem}.-m-14{margin:-3.5rem}.-m-16{margin:-4rem}.-m-20{margin:-5rem}.-m-24{margin:-6rem}.-m-28{margin:-7rem}.-m-32{margin:-8rem}.-m-36{margin:-9rem}.-m-40{margin:-10rem}.-m-44{margin:-11rem}.-m-48{margin:-12rem}.-m-52{margin:-13rem}.-m-56{margin:-14rem}.-m-60{margin:-15rem}.-m-64{margin:-16rem}.-m-72{margin:-18rem}.-m-80{margin:-20rem}.-m-96{margin:-24rem}.-m-px{margin:-1px}.-m-0\.5{margin:-.125rem}.-m-1\.5{margin:-.375rem}.-m-2\.5{margin:-.625rem}.-m-3\.5{margin:-.875rem}.mx-0{margin-left:0;margin-right:0}.mx-1{margin-left:.25rem;margin-right:.25rem}.mx-2{margin-left:.5rem;margin-right:.5rem}.mx-3{margin-left:.75rem;margin-right:.75rem}.mx-4{margin-left:1rem;margin-right:1rem}.mx-5{margin-left:1.25rem;margin-right:1.25rem}.mx-6{margin-left:1.5rem;margin-right:1.5rem}.mx-7{margin-left:1.75rem;margin-right:1.75rem}.mx-8{margin-left:2rem;margin-right:2rem}.mx-9{margin-left:2.25rem;margin-right:2.25rem}.mx-10{margin-left:2.5rem;margin-right:2.5rem}.mx-11{margin-left:2.75rem;margin-right:2.75rem}.mx-12{margin-left:3rem;margin-right:3rem}.mx-14{margin-left:3.5rem;margin-right:3.5rem}.mx-16{margin-left:4rem;margin-right:4rem}.mx-20{margin-left:5rem;margin-right:5rem}.mx-24{margin-left:6rem;margin-rig

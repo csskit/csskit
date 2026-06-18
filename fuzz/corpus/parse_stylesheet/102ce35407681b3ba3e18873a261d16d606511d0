@@ -1,0 +1,176 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    INUIT.CSS
+\*------------------------------------*/
+/*!*
+ *
+ * inuitcss.com -- @inuitcss -- @csswizardry
+ *
+ */
+/**
+ * inuit.css acts as a base stylesheet which you should extend with your own
+ * theme stylesheet.
+ *
+ * inuit.css aims to do the heavy lifting; sorting objects and abstractions,
+ * design patterns and fiddly bits of CSS, whilst leaving as much design as
+ * possible to you. inuit.css is the scaffolding to your decorator.
+ *
+ * This stylesheet is heavily documented and contains lots of comments, please
+ * take care to read and refer to them as you build. For furthorder: -999;
+  }
+  .col-md-last {
+    order: 999;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .col-lg,
+  [class^='col-lg-'],
+  [class^='col-lg-offset-'],
+  .row[class*='cols-lg-'] > * {
+    box-sizing: border-box;
+    flex: 0 0 auto;
+    padding: 0 calc(var(--universal-padding) / 2);
+  }
+  .col-lg,
+  .row.cols-lg > * {
+    max-width: 100%;
+    flex-grow: 1;
+    flex-basis: 0;
+  }
+  .col-lg-1,
+  .row.cols-lg-1 > * {
+    max-width: 8.33333%;
+    flex-basis: 8.33333%;
+  }
+  .col-lg-offset-0 {
+    margin-left: 0;
+  }
+  .col-lg-2,
+  .row.cols-lg-2 > * {
+    max-width: 16.66667%;
+    flex-basis: 16.66667%;
+  }
+  .col-lg-offset-1 {
+    margin-left: 8.33333%;
+  }
+  .col-lg-3,
+  .row.cols-lg-3 > * {
+    max-width: 25%;
+    flex-basis: 25%;
+  }
+  .col-lg-offset-2 {
+    margin-left: 16.66667%;
+  }
+  .col-lg-4,
+  .row.cols-lg-4 > * {
+    max-width: 33.33333%;
+    flex-basis: 33.33333%;
+  }
+  .col-lg-offset-3 {
+    margin-left: 25%;
+  }
+  .col-lg-5,
+  .row.cols-lg-5 > * {
+    max-width: 41.66667%;
+    flex-basis: 41.66667%;
+  }
+  .col-lg-offset-4 {
+    margin-left: 33.33333%;
+  }
+  .col-lg-6,
+  .row.cols-lg-6 > * {
+    max-width: 50%;
+    flex-basis: 50%;
+  }
+  .col-lg-offset-5 {
+    margin-left: 41.66667%;
+  }
+  .col-lg-7,
+  .row.cols-lg-7 > * {
+    max-width: 58.33333%;
+    flex-basis: 58.33333%;
+  }
+  .col-lg-offset-6 {
+    margin-left: 50%;
+  }
+  .col-lg-8,
+  .row.cols-lg-8 > * {
+    max-width: 66.66667%;
+    flex-basis: 66.66667%;
+  }
+  .col-lg-offset-7 {
+    margin-left: 58.33333%;
+  }
+  .col-lg-9,
+  .row.cols-lg-9 > * {
+    max-width: 75%;
+    flex-basis: 75%;
+  }
+  .col-lg-offset-8 {
+    margin-left: 66.66667%;
+  }
+  .col-lg-10,
+  .row.cols-lg-10 > * {
+    max-width: 83.33333%;
+    flex-basis: 83.33333%;
+  }
+  .col-lg-offset-9 {
+    margin-left: 75%;
+  }
+  .col-lg-11,
+  .row.cols-lg-11 > * {
+    max-width: 91.66667%;
+    flex-basis: 91.66667%;
+  }
+  .col-lg-offset-10 {
+    margin-left: 83.33333%;
+  }
+  .col-lg-12,
+  .row.cols-lg-12 > * {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+  .col-lg-offset-11 {
+    margin-left: 91.66667%;
+  }
+  .col-lg-normal {
+    order: initial;
+  }
+  .col-lg-first {
+    order: -999;
+  }
+  .col-lg-last {
+    order: 999;
+  }
+}
+
+/* Card component CSS variable definitions */
+:root {
+   list in horizontal nav mode
+ * OPTIONS.............Grouped nav items
+ * PAGINATION..........Very stripped back, basic paginator
+ * BREADCRUMB..........Simple breadcrumb trail object
+ * MEDIA...............Media object
+ * MARGINALIA..........Simple marginalia content
+ * ISLAND..............Boxed off content
+ * BLOCK-LIST..........Blocky lists of content
+ * MATRIX..............Gridded lists
+ * SPLIT...............A simple split-in-two object
+ * THIS-OR-THIS........Options object
+ * LINK-COMPLEX........
+ * FLYOUT..............Flyout-on-hover object
+ * ARROWS..............CSS arrows
+ * SPRITE..............Generic spriting element
+ * ICON-TEXT...........Icon and text couplings
+ * BEAUTONS............Use the beautons micro library
+ * LOZENGES............Basic lozenge styles
+ * RULES...............Horizontal rules
+ * STATS...............Simple stats object
+ * GREYBOX.............Wireframing styles
+ *
+ * WIDTHS..............Width classes for use alongside the grid system etc.
+ * PUSH................Push classes for manipulating grids
+ * PULL................Pull classes for manipulating grids
+ * BRAND...............Helper class to apply brand treatment to elements
+ * HELPER..............A s

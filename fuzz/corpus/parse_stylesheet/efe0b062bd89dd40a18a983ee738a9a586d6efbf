@@ -1,0 +1,101 @@
+@charset "UTF-8";
+/*
+  Flavor name: Default (mini-default)
+  Auth: Arongelos Chalaris (chalarangelo@gmail.com)
+  Maintainers: Angelos Chalaris
+  mini.css version: v3.0.1
+*/
+/*
+  Browsers resets and base typography.
+*/
+/* Core module CSS variable definitions */
+:root {
+  --fore-color: #111;
+  --secondary-fore-color: #444;
+  --back-color: #f8f8f8;
+  --secondary-back-color: #f0f0f0;
+  --blockquote-color: #f57c00;
+  --pre-color: #1565c0;
+  --border-color: #aaa;
+  --secondary-border-color: #ddd;
+  --heading-ratio: 1.19;
+  --universal-margin: 0.5rem;
+  --universal-padding: 0.5rem;
+  --universal-border-radius: 0.125rem;
+  --a-link-color: #0277bd;
+  --a-visited-color: #09579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, derem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-zatio));
+}
+
+h3 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--headi
+g-ratio));
+}
+
+h4 {
+  font-size: calc(1rem * var(--heading-ratio));
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+ {
+    display: block; }
+  table.stack td {
+    border-top: 0; } }
+
+table.scroll {
+  display: block;
+  width: 100%;
+  overflow-x: auto; }
+
+table.hover thead tr:hover {
+  background-color: #f3f3f3; }
+
+table.hover tfoot tr:hover {
+  background-color: #ececec; }
+
+table.hover tbody tr:hover {
+  background-color: #f9f9f9; }
+
+table.hover:not(.unstriped) tr:nth-of-type(even):hover {
+  background-color: #ececec; }
+
+.table#scroll {
+  overflow-x: auto; }
+
+.tabs {
+  margin: 0;
+  border: 1px solid #e6e6e6;
+  background: #fefefe;
+  list-style-type: none; }
+  .tabs::before, .tabs::after {
+    display: table;
+    content: ' ';
+    -webkit-flex-basis: 0;
+        -ms-flex-preferred-size: 0;
+            flex-basis: 0;
+    -webkit-box-ordinal-group: 2;
+    -webkit-order: 1;
+        -ms-flex-order: 1;
+            order: 1; }
+  .tabs::af5rem solid var(--pre-color);
+  border-radius: 0 var(--universal-border-radius) var(--universal-border-radius) 0;
+}
+
+sup, sub, code, kbd {
+  line-height: 0;
+  position: relative;
+  vertical-align: ba

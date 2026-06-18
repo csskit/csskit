@@ -1,0 +1,148 @@
+pacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-color: var(--bs-primary-bg-subtle) !important;
+}
+
+.bg-secondary-subtle {
+  background-color: var(--bs-secondary-bg-subtle) !important;
+}
+
+.bg-success-subtle {
+  background-color: var(--bs-success-bg-subtle) !important;
+}
+
+.bg-info-subtle {
+  background-color: var(--bs-info-bg-subtle) !important;
+}
+
+.bg-warning-subtle {
+  background-color: var(--bs-warning-bg-subtle) !important;
+}
+
+.bg-danger-subtle {
+  background-color: var(--bs-danger-bg-subtle) !important;
+}
+
+.bg-light-subtle {
+  background-color: var(--bs-light-bg-subtle) !important;
+}
+
+.bg-dark-subtle {
+  background-color: var(--bs-dark-bg-subtle) !important;
+}
+
+.bg-g border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.border-block-end {
+  boblock-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.border-block-end {
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-inline\:none {
+  border-inline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.border-inline-start {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+}
+.border-inline-end\:none {
+  border-inline-end: none;
+}
+.border-inline-end {
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+
+/* src/variables.css */
+:root {
+  --fg: light-dark(var(--gray-12), var(--gray-0));
+  --muted-fg: light-dark(var(--gray-10), var(--gray-2));
+  --faded-fg: light-dark(var(--gray-6), var(--gray-7));
+  --graphical3:not(.disabled):active:focus, .btn-outline-warning:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-outline-danger {
+  color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:hover {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:focus, .btn-outline-danger.focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5sabled, .btn-outline-danger:disabled {
+  color: #dc3545;
+  background-color: transparent;
+}
+
+.btn-outline-danger:not(:disabled):not(.disabled):active, .btn-outline-danger:not(:disabled):not(.disabled).active,
+.show > .btn-outline-danger.dropdown-toggle {
+  color: #fff;
+  background-color: #dc3545;
+  border-color: #dc3545;
+}
+
+.btn-outline-danger:not(:disabled):not(.disabled):active:focus, .btn-outline-danger:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-danger.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(220, 53, 69, 0.5);
+}
+
+.btn-outline-light {
+  color: #f8f9fa;
+  border-color: #f8f9
+  border-top-right-radius: var(--bs-border-radius-sm) !important;
+  border-bottom-right-radius: var(--bs-border-radius-sm) !important;
+}
+
+.rounded-end-2 {
+  border-top-right-radius: var(--bs-border-radius) !important;
+  border-bottom-right-radius: var(--bs-border-radius) !important;
+}
+
+.rounded-end-3 {
+  border-top-right-radius: var(--bs-border-radius-lg) !important;
+  border-bottom-right-radius: var(--bs-border-radius-lg) !important;
+}
+
+.rounded-end-4 {
+  border-top-right-radius: var(--bs-border-radius-xl) !important;
+  border-bottom-right-radius: var(--bs-border-radius-xl) !important;
+}
+
+.rounded-end-5 {
+  b

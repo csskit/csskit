@@ -1,0 +1,7 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0er{opacity:.7}.hover\:opacity-75:hover{opacity:.75}.hover\:, 0.25);
+}
+
+.bs-popover-rightopaci > t

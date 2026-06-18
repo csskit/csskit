@@ -1,0 +1,52 @@
+-cols\@p="10"] {
+    grid-column: 10;
+  }
+  [data-cols\@p^="11 "] {
+    grid-column-start: 11;
+  }
+  [data-cols\@p$=" 11"] {
+    grid-column-end: 12;
+  }
+  [data-cols\@p="11"] {
+    grid-column:-thumb);
+  }
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #9b9b9g: 10px;
+  display: block;
+  overflow-x: auto;
+}
+
+var {
+  color: #39a33c;
+  color: var(--variable);
+  font-style: normal;
+  font-ckground: rgb(0, 0, 0);
+  background: var(--scrollbar-thumb-hover);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 0, 0);
+  background: {
+    grid-row-end: 3;
+  }
+  [data-rows\@p="2"] {
+    grid-row: 2;
+  }
+  [data-rows\@p^="3 "] {
+    grid-row-start: 3;
+  }
+  [data-rows\@p$=" 3"] {
+    grid-row-end: 4;
+  }
+  c4c00;--fgColor-danger: #be4e02;--fgColor-closed: #59636e;--fgColor-done: #8250df;--fgColor-upsell: #8250df;--fgColor-sponsors: #bf3989;--bgColor-default: #ffffff;--bgColor-muted: #f6f8fa;--bgColor-inset: #f6f8fa;--bgColor-emphasis: #25292e;--bgColor-inve[data-rows\@p="3"] {
+    grid-row: 3;
+  }
+  [data-rows\@p^="4 "] {
+    grid-row-start: 4;
+  }
+  [data-rrse: #25292e;o

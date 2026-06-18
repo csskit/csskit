@@ -1,0 +1,46 @@
+rs
+  */
+  .palm-one-quarter, .palm-two-eighths, .palm-tckInDown {
+  0% {
+    -webkit-transfohree-twelfthrm: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webks {
+    width: 25%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    width: 75%; }
+
+  /**
+  * Fifths
+  */
+  .palm-one-fifth, .palm-two-tenths {
+    width: 20%; }
+
+  .palm-two-fifths, .palm-four-tenths {
+    width: 40%; }
+even-twelfths {
+    width: 58.333%; }
+
+  .palm-eleven-twelfths {
+    width: 91.666%; } }
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
+it-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes backInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0  /**
+  * Whole.7
+ 

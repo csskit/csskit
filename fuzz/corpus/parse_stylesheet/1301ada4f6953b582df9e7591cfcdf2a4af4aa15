@@ -1,0 +1,121 @@
+ue-500:focus-within{--tw-border-op`city:1;border-color:rgba(59,130,246,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-600:focus-within{--tw-border-opacity:1;border-color:rgba(37,99,235,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-700:focus-within{--tw-border-opacity:1;border-color:rgba(29,78,216,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-800:focus-within{--tw-border-opacity:1;border-color:rgba(30,64,175,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-900:focus-within{--tw-border-opacity:1;border-color:rgba(30,58,138,var(--tw-border-opacity))}.lg\:focus-within\:border-indigo-50:focus-within{--tw-border-opacity:1;border-color:rgba(238,242,255,var(--tw-border-opacity))}.lg\:focus-within\:border-indigo-100:focus-within{--tw-border-opacity:1;border-color:rgba(224,231,255,var(--tw-border-opacity))}.lg\:focus-within\:border-indigo-200:focus-within{--tw-border-opacity:1;border-coecificity-hack]) {
+  margin-inline-end: var(--gap);
+}
+.margin-inline-end\:auto:not([specificity-hack]) {
+  margin-inline-end: auto;
+}
+.margin-start\:0:not([specificity-hack]) {
+  margin-block-start: 0;
+  margin-inline-start: 0;
+}
+.margin-start:not([specificity-hack]) {
+  margin-block-start: var(--gap);
+  margin-inline-start: var(--gap);
+}
+.margin-start\:auto:not([specificity-hack]) {
+  margin-block-start: auto;
+  margin-inline-start: auto;
+}
+.margin-end\:0:not([specificity-hack]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: auto;
+  margin-inline-end: auto;
+}
+.flow-gap {
+  & > :not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+}
+.inline {
+  display: inline;
+}
+.block {
+  display: block;
+}
+.contents {
+  display: contents;
+}
+.table {
+  display: table;
+  width: 100%;
+  margin: 0;
+}
+.row,
+.rows > * {
+  display: table-row;
+  &:not(:last-child):not([specificity-hack]) > * {
+    margin-bottom: var(--gap);
+  }
+  & > *:not([specificity-hack]) {
+    display: table-cell;
+    vertical-align: top;
+  }
+  & > * + *:not([specificity-hack]) {
+    margin-inline-start: var(--gap);
+    display: inline-block;
+  }
+}
+.big,
+.\<big\> {
+  font-size: 1.4em;
+  line-height: calc(1.5 * var(--rhythm, 1rlh));
+}
+.nested-list :where(ul, ol, dl) {
+  margin-block: 0;
+}
+.fixed {
+  position: fixed;
+}
+.sticky {
+  position: sticky;
+}
+.top {
+  top: 0;
+}
+.right {
+  right: 0;
+}
+.bottom {
+  bottom: 0;
+}
+.left {
+  left: 0;
+}
+.float\:left {
+  float: left;
+}
+.float\:right {
+  float: right;
+}
+.overflow\:auto {
+  overflow: auto;
+}
+.overflow\:scroll {
+  overflow: scroll;
+}
+.overflow-x\:scroll {
+  overflow-x: scroll;
+}
+.overflow-y\:scroll {
+  overflow-y: scroll;
+}
+.overflow\:clip {
+  overflow: clip;
+}
+.overflow-x\:clip {
+  overflow-x: clip;
+}
+.overflow-y\:clip {
+  overflow-y: clip;
+}
+@media print {
+  :root {
+    --bg: transparent;
+    --fg:ithin{--tw-border-opacity:1;border-color:rgba(91,33,182,var(--tw-border-opacity))}.lg\:focus-within\:border-purple-900:focus-within{--tw-border-opacity:1;border-color:rgba(76,29,149,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-50:focus-within{--tw-border-opacity:1;border-color:rgba(253,242,248,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-100:focus-within{--tw-border-opacity:1;border-color:rgba(252,231,243,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-200:focus-within{--tw-border-opacity:1;border-color:rgba(251,207,232,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-300:focus-within{--tw-border-opacity:1;border-color:rgba(249,168,212,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-400:focus-within{--tw-border-opacity:1;border-color:rgba(244,114,182,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-500:focus-within{--tw-border-opacity:1;border-color:rgba(236,72,153,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-600:focus-within{--tw-border-opacity:1;border-color:rgba(219,39,119,var(--tw-border-opacity))}.lg\:focus-within\:border-pink-700:focus-within{--tw-border-opacity:1;border-color

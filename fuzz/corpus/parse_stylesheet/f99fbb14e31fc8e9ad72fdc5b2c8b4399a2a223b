@@ -1,0 +1,67 @@
+ot([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.125rem * var(--tw-space-x-reverse));margin-left:calc(.125rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-1\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.375rem * var(--tw-space-x-reverse));margin-left:calc(.375rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-2\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.625rem * var(--tw-space-x-reverse));margin-left:calc(.625rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-3\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.875rem * var(--tw-space-x-reverse));margin-left:calc(.875rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-0>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(0px * var(--tw-space-x-reverse));margin-left:calc(0px * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-1>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-.25rem * var(--tw-space-xer-verse));margin-left:calc(-.25rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-2>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-.5rem * var(--tw-space-x-reverse));margin-left:calc(-.5rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-3>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-.75rem * var(--tw-space-x-reverse));margin-left:calc(-.75rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-4>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-1rem * var(--tw-space-x-reverse));margin-left:calc(-1rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-1.25rem * var(--tw-space-x-reverse));margin-left:calc(-1.25rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-6>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-1.5rem * var(--tw-space-x-reverse));margin-left:calc(-1.5rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-7>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0-reverse));margin-left:calc(-2.5rem * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-11>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-2.75rem * div .card .modal-close:hover, [type="checkbox"].modal + div .card .modal-close:focus {
+  background: var(--modal-close-hover-color);
+}
+
+[type="checkbox"].modal:checked + div {
+  display: flex;
+  flex: 0 1 auto;
+  z-index: 1200;
+}
+
+[type="checkbox"].modal:checked + div .card .modal-close {
+  z-index: 1211;
+}
+
+:root {
+  --collapse-label-back-color: #e8e8e8;
+  --collapse-label-fore-color: #212121;
+  --collapse-label-hover-back-color: #f0f0f0;
+  --collapse-selected-labelٝack-color: #ececec;
+  --collapse-border-color: #ddd;
+  --collapse-content-back-color: #fafafa;
+  --collapse-selected-label-border-color: #0277bd;
+}
+
+.collapse {
+  width: calc(100% - 2 * var(--universal-margin));
+  opacity: 1;
+  display: flex;
+  flex-direction: column;
+  margin: volor: var(--collapse-label-fore-color);
+  background: var(--collapse-label-back-color);
+  border: 0.0625rem solid var(--collapse-border-color);
+  padding: calc(1.5 * var(--universal-padding));
+}
+
+.collapse > label:hover, .collapse > label:focus {
+  background: var(--collapse-label-hover-back-color);
+}
+
+.collapse > label + div {
+  flex-basis: auto;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  transition: max-height 0.3s;
+  max-height: 1px;
+}
+
+.collapse > :checked + label {
+  background: var(--collapse-selected-label-back-color);
+  border-bottom-color: var(--collapse-selected-label-border-color);
+}
+
+.collapse > :checked + label + div {
+  box-sizing: border-box;
+  position: relative;
+  width: 100%;
+  height: auto;
+  overflow: auto;
+  margin: 0;
+  background: var(--collapse-content-back-color);
+  border: 0.0625rem solid var(--collapse-bordvar(--tw-space-x-reverse));margin-left:calc(-7rem * calc(1 - var(--tw-space-x-rever

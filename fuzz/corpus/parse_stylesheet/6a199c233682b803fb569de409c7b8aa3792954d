@@ -1,0 +1,79 @@
+h {
+    width: 12.5%; }
+
+  .lap-and-up-three-eighths {
+    width: 36.5%; }
+
+  .lap-and-up-five-eighths {
+    width: 62.5%; }
+
+  .lap-and-e-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform-gpu{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translate3d(var(--tw-translate-x),var(--tw-translate-y),0) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform-none{transform:none}.translate-x-0{--tw-translate-x:0px}.translate-x-1{--tw-translate-x:0.25rem}.translate-x-2{--tw-translate-x:0.5rem}.translate-x-3{--tw-translate-x:0.75rem}.translate-x-4{--tw-translate-x:1rem}.translate-x-5{--tw-translate-x:1.25rem}.translate-x-6{--tw-translate-x:1.5rem}.translate-x-7{--tw-translate-x:1.75rem}.translate-x-8{--tw-translate-x:2rem}.translate-x-9{--tw-translate-x:2.25rem}.trs{font-size:.75rem;line-height:1rem}.\32xl\:text-sm{font-size:.875rem;line-height:1.25rem}.\32xl\:text-base{font-size:1rem;line-height:1.5rem}.\32xl\:text-lg{font-size:1.125rem;line-height:1rem}.translate-x-20{--tw-translate-x:5rem}.translate-x-24{--tw-translate-x:; }
+
+  /**
+  * Fifths
+  */
+  .desk-one-fifth, .desk-two-tenths {
+    width: 20%; }
+
+  .desk-two-fifths, .desk-four-tenths {
+    width: 40%; }
+
+  .desk-three-fifths, .desk-six-tenths {
+    width: 60%; }
+
+  .desk-four-fifths, .desk-eight-tenths {
+    width: 80%; }
+
+  /**
+  * Sixths
+  */
+  .desk-one-sixth, .desk-two-twelfths {
+    width: 16.666%; }
+
+  .desk-five-sixths, .desk-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .desk-one-eighth {
+    width: 12.5%; }
+
+  .desk-three-eighths {
+    width: 37.5%; }
+
+  .desk-five-eighths {
+    width: 62.5%; }
+
+  .desk-seven-eighths {
+    width: 87.5%; }
+
+  /**
+  * Tenths
+  */
+  .desk-one-tenth {
+    width: 10%; }
+
+  .desk-three-tenths {
+    width: 30%; }
+
+  .desk-seven-tenths {
+    width: 70%; }
+
+  .desk-nine-tenths {
+    width: 90%; }
+
+  /**
+  * Twelfths
+  */
+  .desk-one-twelfth {
+    width: 8.333%; }
+
+  .desk-five-twelfths {
+    width: 41.666%; }
+
+  .desk-seven-twelfths {
+    width: 58.333%; }
+
+  .desk-eleven-twelfths {
+    width: 91.666%; } 

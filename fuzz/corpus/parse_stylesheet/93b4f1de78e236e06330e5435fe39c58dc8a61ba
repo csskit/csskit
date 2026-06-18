@@ -1,0 +1,9 @@
+button.clear.disabled, .button.clear[disabled], .button.clear.disabled:hover, .button.clear[disabled]:hover, .button.clear.disabled:focus, .button.clear[disabled]:focus {
+    color: #1779ba; }
+  .button.clear:hover, .button.clear:focus {
+    color: #0c3d5d; }
+  .button.clear.primary, .button.clear.primary.disabled, .button.clear.primary[disabled], .button.clear.primary.disabled:hover, .button.clear.primary[disabled]:hover, .button.clear.primary.disabled:focus, .button.clear.primary[disabled]:focus {
+    color: #1779ba; }
+  .button.clear.primary:hover, .button.clear.primary:focus {
+    down-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-bcolor: #0c3d5d; }
+  .button.clear.secondary, .button.clear.secondary.disabled, .buodytt

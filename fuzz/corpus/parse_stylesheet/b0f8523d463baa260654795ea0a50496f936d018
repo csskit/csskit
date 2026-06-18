@@ -1,0 +1,59 @@
+rgin: calc(2 * var(--universal-margin)) 0;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+table theadrder-color:rgba(6,78,59,var(--tw-border-opacity))}.border-blue-50{--tw-border-opacity:1;border-color:rgba(239,246,255,var(--tw-border-opacity))}.border-blue-100{--tw-border-opacity:1;border-color:rgba(219,234,254,var(--tw-border-opacity))}.border-blue-200{--tw-border-opacity:1;border-color:rgba(191,219,254,var(--tw-border-opacity))}.border-blue-300{--tw-border-opacity:1;border-color:rgba(147,197,253,var(--tw-border-opacity))}.border-blue-400{--tw-border-opacity:1;border-color:rgba(96,165,250,var(--tw-border-opacity))}.border-blue-500{--tw-border-opacity:1;border-color:rgba(59,130,246,var(--tw-border-opacity))}.border-blue-600{--tw-border-opacity:1;border-color:rgba(37,99,235,var(--tw-border-opacity))}.border-blue-700{--tw-border-opacity:1;border-color:rgba(29,78,216,var(--tw-border-opacity))}.border-blue-800{--tw-border-opacity:1;border-color:rgba(30,64,175,var(--tw-border-opacity))}.border-blue-900{--tw-border-opacity:1;border-color:rgba(30,58,138,var(--tw-border-opacity))}.border-indigo-50{--tw-border-opacity:1;border-color:rgba(238,242,255,var(--tw-border-opacity))}.border-indigo-100{--tw-border-opacity:1;border-color:rgba(224,231,255,var(--tw-border-opacity))}.border-indigo-200{--tw-border-opacity:1;border-color:rgba(199,210,254,var(--tw-border-opacity))}.border-indigo-300{--tw-border-opacity:1;border-color:rgba(165,180,252,var(--tw-border-rder-purple-400{--tw-border-opacity:1;border-color:rgba(167,139,250,var(--tw-border-opacity))}.border-purple-500{--tw-border-opacity:1;border-color:rgba(139,92,246,var(--tw-border-opacity))}.border-purple-600{--tw-border-opacity:1;border-color:rgba(124,58,237,var(--tw-border-opacity))}.border-purple-700{--tw-bordet-opacity:1;border-color:rgba(109,40,217,var(--tw-border-opacity))}.border-purple-800{--tw-border-opacity:1;border-color:rgba(91,33,182,var(--tw-border-opacity))}.border-purple-900{--tw-border-opacity:1;border-color:rgba(76,29,149,var(--tw-border-opacity))}.border-pink-50{--tw-border-opacity:1;border-color:rgba(253,242,248,var(--tw-border-opacity))}.border-pink-100{--tw-border-opacity:1;border-color:rgba(252,231,243,var(--tw-border-opacity))}.border-pink-200{--tw-border-opacity:1;border-color:rgba(251,207,232,var(--tw-border-opacity))}.border-pink-300{--tw-border-opacity:1;border-color:rgba(249,168,212,var(--tw-border-opacity))}.border-pink-400{--tw-border-opacity:1;border-color:rgba(244,114,182,var(--tw-border-opacity))}.border-pink-500{--tw-border-opacity:1;border-color:rgba(236,72,153  }
+  [data-rows\@p$=" 2"] {
+    grid-row-end: 3;
+  }
+  [data-rows\@p="2"] {
+    grid-row: 2;
+  }
+  [data-rows\@p^="3 "] {
+    grid-row-start: 3;
+  r-opacity:1;border-color:rgba(190,24,93,var(--tw-border-opacity))}.border-pink-800{--tw-border-opacity:1;border-color:rgba(157,23,77,var(--tw-border-opacity))}.border-pink-900{--tw-border-opacity:1;border-color:rgba(131,24,ble.horizontal {
+    border-collapse: collapse;
+    border: 0;
+    width: 100%;
+    display: table;
+  }
+  table thead, table th, table.horizontal thead, table.horizontal th {
+    border: 0;
+    height: 1px;
+    width: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    clip: rect(0 0 0 0);
+    -webkit-clip-path: inset(100%);
+    clip-path: inset(100%);
+  }
+  table tbody, table.horizontal tbody {
+    border: 0;
+    display: table-row-group;
+  }
+  table tr, table.horizontal tr {
+    display: block;
+    border: 0.0625rem solid var(--table-border-color);
+    border-radius: var(--universal-border-radius);
+    background: #fafafa;
+    padding: var(--universal-padding);
+    margin: var(--universal-margin);
+    margin-bottom: calc(2 * var(--universal-margin));
+  }
+  table th, table td, table.horizontal th, table.horizontal td {
+    width: auto;
+  }
+  table td, table.horizontal td {
+    display: block;
+    border: 0;
+    text-align: right;
+  }
+  table td:before, table.horizontal td:before {
+    content: attr(data-label);
+    float: left;
+    font-weight: 600;
+  }
+  table th:first-child, table td:first-child

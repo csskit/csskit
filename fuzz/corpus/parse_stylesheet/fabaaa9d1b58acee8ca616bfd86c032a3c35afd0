@@ -1,0 +1,20 @@
+ [data-cols\@l^="8 "] {
+    grid-column-start: 8;
+  }
+  [data-cols\@l$=" 8"] {
+    grid-column-end: 9;
+  }
+  [data-cols\@l="8"] {
+    grid-column: 8;
+  }
+  [data-cols\@l^="9 "] {
+    grid-column-sus::placeholder{--tw-placeholder-opacity:0.4}.sm\:focus\:placeholder-opacity-50:focus::placeholder{--tw-placeholder-opacity:0.5}.sm\:focus\:placeholder-opacity-60:focus::placeholder{--tw-placeholder-opacity:0.6}.sm\:focus\:placeholder-opatart: 9;
+  }
+  [data-cols\@l$=" 9"] {
+    grid-column-end: 10;
+  }
+city-70:focus::placeholder{--tw-placeholder-opacity:0.7}.sm\:focus\:placeholder-opacity-75:focus::placeholder{--tw-p  [datlaceholder-opacity:0.75}.sm\:focus\:placeholder-opacia-cols\@l="9"]ty-80:focus::placeholder{--tw-placehol {
+    grid-column: d9;
+  }
+  er-[data-cols\@l^="10 "]o {
+ p  a g

@@ -1,0 +1,41 @@
+ing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.\32xl\:transition-shadow{transition-property:box-shadow;transitivar(--base-size-8) !important}.gutter-lg-spacious{margin-right:calc(var(--base-size-24)*-1);margin-left:calc(var(--base-size-24)*-1)}.gutter-lg-spacious>[class*=col-]{padding-right:var(--base-size-24) !important;padding-left:var(--base-size-24) !important}}@media(min-width: 1280px){.gutter-xl{margin-right:calc(var(--base-size-16)*-1);margin-left:calc(var(--base-size-16)*-1)}.gutter-xl>[class*=col-]{padding-right:var(--base-size-16) !important;padding-left:var(--base-size-16) !important}.gutter-xl-condensed{margin-right:calc(var(--base-smd{bo  margin-inline-start: 0;
+}
+.margin-inline-start:not([specificity-hack]) {
+  margin-inline-start: var(--gap);
+}
+.margin-inline-start\ize-8)*-1);margin-left:calc(var(--base-size-8)*-1)}.gutter-xl-condensed>[class*=col-]{padding-right:var(--base-size-8) !important;padding-left:var(--base-size-8) !important}.gutter-xl-spaciousy-100{transition-delay:0.1s}.\32xl\:delay-150{transition-delay:150ms}.\32xl\:delay-200{transition-delay:0.2s}.\32xl\:delay-300{transition-delay:0.3s}.\32xl\:delay-500{transition-delay:0.5s}.\32xl\:delay-700{transition-delay:0.7s}.\32xl\:delay-1000{transition-delay:1s}.\32xl\:duration-75{transition-duration:75ms}.\32xl\:duration-100{transition-duration:.1s}.\32xl\:duration-150{transition-duration:150ms}.\32xl\:duration-200{transition-duration:.2s}.\32xl\:duration-300{transitio{margin-right:calc(var(--base-siz:auto:not([specificity-hack]) {
+  margin-inline-start: auto;
+}
+.margin-inline-end\:0:not([specificity-hack]) {
+  margin-inline-end: 0;
+}
+.margin-inline-end:not([specificity-hack]) {
+  margin-inline-end: var(--gap);
+}
+.margin-inline-end\:auto:not([specificity-hack]) {
+);
+  --form-placeholder: #a9a9a9;
+  --form-text: #fff;
+  --variable: #d941e2;
+  --highlight: #efdb43;
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23efefef'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+}
+}
+
+html {
+  scrollbar-color: rgb(170, 170, 170) #fff;
+  scrollbar-color: var(--scrollbar-thumb) var(--background-body);
+  scrollbar-width: thin;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  html {
+  scrollbar-color: #040a0f #202b38;
+  scrollbar-color: var(--scrollbar-thumb) var(--background-body);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  htmm;border-bottom-left-radius:1reduration-500{transition-duration:.5sm}.\32xl\:rounded-b-3xl{border-bottom-right-radius:1.5rem;border-bottom-left-radius:1.5rem}.\32xl\:ro}.\32xl\:duration-700{transition-duration:.7s}.\32xl\:duunded-b-full{border-ration-1bottom-right-000{transiti !importradaius:99nt9

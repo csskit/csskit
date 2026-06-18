@@ -1,0 +1,128 @@
+-ms-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custom-range::-ms-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0.5rem;
+}
+
+.custom-range::-ms-fill-lower {
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-fill-upper {
+  margin-right: 15px;
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range:disabled::-webkit-slider-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-webkit-slider-runnable-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-moz-range-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-moz-range-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-ms-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-control-label::before,
+.custom-file-label,
+.custom-select {
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-control-label::before,
+  .custom-file-label,
+  .custom-select {
+    transition: none;
+  }
+}
+
+.nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover, .nav-link:focus {
+  text-decoration: none;
+}
+
+.nav-link.disabled {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: default;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.2ter;
+  background-size: contain;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none5rem;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  isolation: isolate;
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.disabled {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.nav-pills .nav-link {
+  backgr;
+  appearance: none;
+  -webkit-print-color-adjust: exoundact;

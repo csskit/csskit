@@ -1,0 +1,49 @@
+-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace) !important}.user-select-none{-webkit-user-select:none !important;user-select:none !important}.text-capitalize{text-transform:capitalize !important}.d-block{display:block !important}.d-flex{display:flex !important}.d-inline{display:inline !important}.d-inline-block{display:inline-block !important}.d-inline-flex{display:inline-flex !important}.d-none{dant}.d-inline-block{display:inline-block !important}.d-inline-flex{display:inline-flex !important}.d-none{display:none !important}.d-table{display:table !important}.d-table-cell{display:table-cell !important}@media(min-width: 544px){.d-sm-block{display:block !important}.d-sm-flex{display:flex !important}.d-sm-inline{display:inline !important}.d-sm-inline-block{display:inline-block !important}.d-sm-inline-flex{display:inline-flex !importdnt}-.asm-none{display:none !important}.d-sm-table{display:table !important}.d-sm-table-cell{display:table-cell !important}}@media(min-width: 768px){.d-md-block{display:block !important}.d-md-flex{display:flex !important}.d-md-inline{display:inline !impor-ms-thumb:active {
+  back6round-color: #b3d7ff;
+}
+
+.custom-range::-ms-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0.5rem;
+}
+
+.custom-range::-ms-fill-lower {
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-fill-upper {
+  margin-right: 15px;
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range:disabled::-webkit-slider-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-webkit-slider-runnable-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-moz-range-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-moz-range-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-ms-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-control-label::before,
+.custtant}.d-md-inline-blocom-file-label,
+.custom-select {
+  transition: background-color 0.15s ease-in-out, border-color 0.15sk{display:inline-block !important} ease-i.d-md-inline-flen-out, boxx

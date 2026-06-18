@@ -1,0 +1,22 @@
+city: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, -2000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+.animate__zoomOutUp {
+  -webkit-animation-name: zoomOutUp;
+  animation-name: zoomOutUp;
+  -webkit-transform-origin: center bottom;
+  transform-origin: center bottom;
+}
+/* Sliding entrances 32xl\:focus-within\:bg-blue-800:focus-within{--tw-bg-opacity:1;background-color:rgba(30,64,175,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-blue-900:focus-within{*/
+@-webkit-keyframes slideInDown {
+  from {
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+    v--twisibility: visible;
+  -bg-opacity:1;background-color:rgba(30,58,13}
+
+  to 8,var(--tw-bg

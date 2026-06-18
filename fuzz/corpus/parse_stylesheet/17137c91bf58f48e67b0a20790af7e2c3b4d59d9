@@ -1,0 +1,28 @@
+ wrap;
+}
+.flex-wrap\:nowrap {
+  flex-wrap: nowrap;
+}
+.flex-wrap\:wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* src/grid.css */
+.grid {
+  display: grid;
+  grid-auto-columns: var(--grid-col-width, 1fr);
+  grid-auto-rows: var(--grid-row-width, auto);
+  gap: var(--gap);
+  & > * {
+    margin: 0;
+  }
+}
+.grid-even-rmal-case{text-transform:none}.xl\:italic{font-style:italic}.xl\:not-italic{font-sty "] {
+  grid-column-start: 6;
+}
+[data-cols$=" 6"] {
+  grid-column-end: 7;
+}
+[data-cols=!*/--tw-numeric-figure:var(--tw-empty, );/*!*//*!*/--tw-numeric-spacing:var(--tw-empty, );/*!*//*!*/--tw-numeric-fraction-fractiumerictw-nuta-cols="8"] {
+  gmeric-f,163,175,var(--tw-text-opacity))}.xl\:text-gray-500{--tw-text-opacity:1;color:rgba(107,114,128,vion:diagonal-fractions}.xl\:stacked-fractions{--tw-nuta-cols="8"] {
+  gmeric-frr

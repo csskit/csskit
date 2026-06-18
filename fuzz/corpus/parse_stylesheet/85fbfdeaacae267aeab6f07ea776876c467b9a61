@@ -1,0 +1,59 @@
+{
+  border-color: var(--bs-secondary-border-subtle) !important;
+}
+
+.border-success-subtle {
+  border-color: var(--bs-success-border-subtle) !important;
+}
+
+.border-info-subtle {
+  border-color: var(--bs-info-border-subtle) !important;
+}
+
+.border-warning-subtle {
+  border-color: var(--bs-warning-border-subtle) !important;
+}
+
+.border-danger-subtle {
+  border-color: var(--bs-danger-border-subtle) !important;
+}
+
+.border-light-subtle {
+  border-color: var(--bs-light-border-subtle) !important;
+}
+
+.border-dark-subtle {
+  border-color: var(--bs-dark-border-subtle) !important;
+}
+
+.inter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-alloborder-1 {
+  border-width: 1px !important;
+}
+
+.border-2 {
+  border-width: 2px !important;
+}
+
+.border-3 {
+  border-width: 3px !importrder-opacity-10 {
+  --bs-border-opacity: 0.1;
+}
+
+.border-opacity-25 {
+  --bs-border-opacity: 0.25;
+}
+
+.border-opacity-50 {
+  --bs-border-opacity: 0.5;
+}
+
+.dbw{oecursor:not-allowed}.\32xl\:select-none{-webrder-opacity-75 {
+  --bs-border-opacity: 0.75;
+}
+
+.border-opacity-100 {
+  --bs-border-opacity: 1;
+}
+
+.w-25 {
+  width: 25% !imkitpo-user-sert

@@ -1,0 +1,104 @@
+d\:focus\:bp:hover .md\:group-hover\:border-opacity-75{--tw-border-opacity:0.75}.group:hover .md\:group-hover\:border-opacity-80{--tw-border-opacity:0.8}.group:hover .md\:group-hover\:border-opacity-90{--tw-border-opacity:0.9}.group:hover .md\:group-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .md\:group-hover\:border-opacity-100{--tw-border-opacity:1}.md\:focus-within\:border-opacity-0:focus-within{--tw-bord
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  border: 1px solid #526980;
+  border: 1px solid var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--border);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  hr {
+  border-top: 1px solid #526980;
+  border-top: 1px solid var(--border);
+  }
+}
+
+table {
+  border-collapse: collapse;
+  margin-bottom: 10px;
+  width: 100%;
+  table-layout: fixed;
+}
+
+table caption {
+  text-align: left;
+}
+
+td,
+th {
+  padding: 6px;
+  text-align: left;
+  vertical-align: top;
+  word-wrap: break-word;
+}
+
+thead {
+  border-bottom: 1px solid #dbdbdb;
+  border-bottom: 1px solid var(--border);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  thead {
+  border-bottom: 1px solid #526980;
+  border-bottom: 1px solid var(--border);
+  }
+}
+
+tfoot {
+  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--border);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  tfoot {
+  border-top: 1px solid #526980;
+  border-top: 1px solid var(--border);
+  }
+}
+
+tbody tr:nth-child(even) {
+  background-color: #efefef;
+  background-color: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  tbody tr:nth-child(even) {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+tbody tr:nth-child(even) button {
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  tbody tr:nth-child(even) button {
+  er-opacity:0}.md\:focus-within\:border-opacity-5:focus-within{--tw-border:hover{--tw-border-opacity:0.75}.md\:hover\:border-opacity-80:hover{--tw-border-opacity:0.8}.md\:hover\:border-opacity-90:hover{--tw-border-opacity:0.9}.md\:hover\:border-opacity-95:hover{--tw-border-opacity:0.95}.md\:hover\:border-op

@@ -1,0 +1,10 @@
+g-n4{bottom:-24px !important}.left-lg-n4{left:-24px !important}.top-lg-5{top:32px !important}.right-lg-5{right:32px !important}.bottom-lg-5{bottom:32px !important}.left-lg-5{left:32px !important}.top-lg-n5{top:-32px !im),
+.input-group.has-validation > .custom-select:nth-last-child(n + 3),
+.input-group.has-validation > .custom-file:nth-last-child(n + 3) .custom-file-label,
+.input-group.haut-group-append {
+  margin-left: -1px;
+}
+
+.input-group-text {
+  display: -ms-flexbox;t:auto !important}.object-fit-cover{object-fit:cover !important}[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[.z-1{z-index:1 !important}.z-2{z-index:2 !important}.z-3{z-index:3 !important}.z-n1{z-index:-1 !important}.z-n0{z-index:-2 !important}
+/*# sourceMappingURL=primer.css.map */

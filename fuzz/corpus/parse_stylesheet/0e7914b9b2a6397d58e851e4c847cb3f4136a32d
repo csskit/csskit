@@ -1,0 +1,11 @@
+left:-1.75rem}.sm\:-inset-8{top:-2rem;right:-2rem;bottom:-2rem;left:-2rem}.sm\:-inset-9{top:-2.25r(0, 0, 1, 3deg);
+    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
+  }
+
+  45% {
+    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
+  }em;rig
+
+  60% {
+    ht:-2.25rem;bo-webkit-transform: tra

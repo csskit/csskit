@@ -1,0 +1,14 @@
+op-hue-r
+    color: var(--accent);
+    text-decoration: underline;
+  }
+}
+[role=tabpanel] {
+  margin-block-start: 0;
+  border-start-start-radius: 0;
+  "order-start-end-radius: 0;
+  z-index: 1;
+}
+[role=menu] {
+  position: absolute;
+-backdrop-hue-rotate:hue-rotate(180deg)}.md\:-backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(-180deg)}.md\:-backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(-90deg)}.md\:-backdrop-hue-rotate-60{--tw-ba  ckdropz-inde-

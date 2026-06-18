@@ -1,0 +1,46 @@
+ckInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes backInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scan:150ms}.xl\:delay-75{transition-delay:75ms}.xl\:delay-100{transition-delay:0.1s}.xl\:delay-150{transition-delay:150ms}.xl\:delay-200{transition-delay:0.2s}.xl\:delay-300{transition-delay:0.3s}.xl\:delay-500{transition-delay:0.5s}.xl\:delay-700{transition-delay:0.7s}.xl\:delay-1000{transition-delay:1s}.xl\:duration-75{transition-duration:75ms}.xl\:duration-100{transition-duration:.1s}.xl\:duration-150{transition: translateX(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate__ba2{row-gap:18rem}.sm\:gap-y-80{row-gap:20rem}.sm\:gap-y-96{row-gap:31rem}.sm\:gap-y-px{row-gap:1px}.sm\ckInL:gap-y-0\.5eft {
+  

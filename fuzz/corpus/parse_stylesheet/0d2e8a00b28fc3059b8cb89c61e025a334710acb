@@ -1,0 +1,94 @@
+left:-1.75rem}.sm\:-inset-8{top:-2rem;right:-2rem;bottom:-2rem;left:-2rem}.sm\:-inset-9{top:-2.25rment^=bottom] > .popover-arrow::before {
+  top: 0;
+  border-bottom-color: var(--bs-popover-arrow-border);
+}
+.bs-popover-bottom > .popover-arrow::after, .bs-popover-auto[data-popper-placement^=bottom] > .popover-arrow::after {
+  top: var(--bs-popover-border-width);
+  border-bottom-color: var(--bs-popover-bg);
+}
+.bs-popover-bottom .popover-header::before, .bs-popover-auto[data-popper-placement^=bottom] .popover-header::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  width: var(--bs-popover-arrow-width);
+  margin-left: calc(-0.5 * var(--bs-popover-arrow-width));
+  content: "";
+  border-bottom: var(--bs-popover-border-width) solid var(--bs-popover-header-bg);
+}
+
+/* rtl:begin:ignore */
+.bs-popover-start > .popover-arrow, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow {
+  right: calc(-1 * (var(--bs-popover-arrow-height)) - var(--bs-popover-border-width));
+  width: var(--bs-popover-arrow-height);
+  height: var(--bs-popover-arrow-width);
+}
+.bs-popover-start > .popover-arrow::before, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::before, .bs-popover-start > .popover-arrow::after, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::after {
+  border-width: calc(var(--bs-popover-arrow-width) * 0.5) 0 calc(var(--bs-popover-arrow-width) * 0.5) var(--bs-popover-arrow-height);
+}
+.bs-popover-start > .popover-arrow::before, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::before {
+  right: 0;
+  border-left-color: var(--bs-popover-arrow-border);
+}
+.bs-popover-start > .popover-arrow::after, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::after {
+  right: var(--bs-popover-border-width);
+  border-left-color: var(--bs-popover-bg);
+}
+
+/* rtl:end:ignore */
+.popover-header {
+  padding: var(--bs-popover-header-padding-y) var(--bs-popover-header-padding-x);
+  margin-bottom: 0;
+  font-size: var(--bs-popover-header-font-size);
+  color: var(--bs-popover-header-color);
+  background-color: var(--bs-popover-header-bg);
+  border-bottom: var(--bs-popover-border-width) solid var(--bs-popover-border-color);
+  border-top-left-radius: var(--bs-popover-inner-border-radius);
+  border-top-right-radius: var(--bs-popover-inner-border-radius);
+}
+.popover-header:empty {
+  display: none;
+}
+
+.popover-body {
+  padding: var(--bs-popover-body-padding-y) var(--bs-popover-body-padding-x);
+  color: var(--bs-popover-body-color);
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel.pointer-event {
+  touch-action: pan-y;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+.carousel-inner::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: transform 0.6s ease-in-out;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item {
+    transition: none;
+  }
+}
+
+.carousel-item.active,
+.carousel-it:2.5rem;right:2.5rem}.sm\:inset-x-11{left:2.75rem;right:2.75rem}.sm\:inset-x-12{left:3rem;right:3rem}.sm\:inset-x-14{left:3.5rem;right:3.5rem}.sm\:inset-x-16{left:4rem;right:4rem}.sm\:inset-x-20{left:5rem;right:5rem}.sm\:inset-x-24{left:6rem;right:6rem}.sm\:inset-x-28{left:7rem;right:7rem}.sm\:inset-x-32{left:8rem;right:8rem}.sm\:inset-x-36{left:9rem;right:9rem}.sm\:inset-x-40{left:10rem;right:10rem}.sm\:inset-x-44{left:11rem;right:11rem}.sm\:inset-x-48{left:12rem;right:12rem}.sm\:inset-x-52{left:13rem;right:13rem}.sm\:inset-x-56{left:14rem;right:14rem}.sm\:inset-x-60{left:15rem;right:15rem}.sm\:inset-x-64{left:16rem;right:16rem}.sm\:inset-x-72{left:18rem;right:18rem}.sm\:inset-x-80{left:20rem;right:20rem}.sm\:inset-x-96{left:24rem;right:24rem}.sm\:inset-x-auto{left:auto;right:auto}.sm\:inset-x-px{left:1px;right:1px}.sm\:inset-x-0\.5{left:.125rem;right:.125rem}.sm\:inset-x-1\.5{left:.375rem;right:.375rem}.sm\:inset-x-2\.5{left:.625rem;right:.625rem}.sm\:inset-x-3\.5{left:.8

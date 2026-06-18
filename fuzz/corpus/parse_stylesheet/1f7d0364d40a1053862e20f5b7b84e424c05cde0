@@ -1,0 +1,6 @@
+d\:bottom-10{bottom:2.5rem}.md\:bottom-11{bottom:2.75rem}.md\:bottom-12{bottom:3rem}.md\:bottom-14{bottom:3.5rem}.md\:bottom-16{bottom:4rem}.md\:bottom-20{bottom:5rem}.md\:bottom-24{bottom:6rem}.md\:bottom-28{bottom:7rem}.md\:bottom-32{bottom:8rem}.md\:bottom-36{bottom:9rem}.md\:bottom-40{bottom:10rem}.md\:bottom-44{bottom:11rem}.md\:bottom-48{bottom:12rem}.md\:bottom-52{bottom:13rem}.md\:bottom-56{bottom:14re:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) v/r(--graphical-fg);
+  border-block-end: var(--border-block-end-width) m}var(--b.md\:bottoro

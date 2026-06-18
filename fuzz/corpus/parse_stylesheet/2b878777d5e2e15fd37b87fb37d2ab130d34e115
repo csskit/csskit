@@ -1,0 +1,21 @@
+ .large-10, .grid-y > .large-11, .grid-y > .large-12 {
+      -webkit-box-flex: 0;
+      -webkit-flex: 0 0 auto;
+          -ms-flex: 0 0 auto;
+              flex: 0 0 auto; }
+    .grid-y > .large-shrink 00{--tw-border-opacity:1}.sm\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.sm\:focus-within\:border-opacity-5:focus-within{--tw-border-opacity:0.05}.sm\:focus-within\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.sm\:focus-within\:border-opacity-20:focus-within{--tw-border-opacity:0.2}.sm\:focus-within\:border-opacity-25:focus-within{--tw-border-opacity:0.25}.sm\:focus-within\:border-opacity-30:focus-within{--tw-border-opacity:0.3}.sm\:focus-within\:border-opacity-40:focus-within{--tw-border-opacity:0.4}.sm\:focus-within\:border-opacity-50:focus-within{--tw-border-opacity:0.5}.sm\:focus-within\:border-opacity-60:focus-within{--tw-border-opacity:0.6}.sm\:focus-within\:border-opacity-70:focus-within{--tw-bor{
+      height: auto; }
+    .grid-y > .large-1 {
+      height: 8.33333%; }
+    .grder-opacity:0.7}.sm\:focus-within\:border-opacity-75:focus-within{--tw-border-opacity:0.75}.sm\:focus-withid-y > .large-2 {
+      height: 16.66667%; }
+    .grid-y > .large-3 {
+      height: 25%; }
+    .grid-y > .large-4 {
+      height: 33.33333%; }
+    .grid-y > .large-5 {
+      height: 41.66667%; }
+    .gin\:border-opacity-80:focus-within{--tw-border-opacity:0.8}.sm\:focus-within\:border-opacity-90:focurid-y > .large-6 {
+      height: 50%; }
+    .grid-y > .large-7 {
+      height: 58.33333%; s-wi

@@ -1,0 +1,22 @@
+ewBox='0 0 12 12' width='12' height='12' fill='none' stroke='%23dc3545'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy='8.2' r='.6' fill='%23dc3545' stroke='none'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+.was-validated .form-control:invalid:focus, .form-control.is-invalid:focus {
+  border-color: var(--bs-form-invalid-border-color);
+  box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
+}
+
+.was-validated textarea.form-control:invalid, textarea.form-control.is-invalid {
+  padding-right: calc(1.5em + 0.75rem);
+  background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
+}
+
+.was-validated .form-select:invalid, .form-select.is-invalid {
+  border-color: var(--bs-form-invalid-border-color);
+}
+.was-validated .form-select:invalid:not([multiple]):not([size]), .was-validated .form-select:invalid:not([multiple])[size="1"], .form-select.is-invalid:not([multiple]):not([size]), .form-select.is-invalid:not([multiple])[size="1"] {
+  --bs-form-select-bg-icon: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 12 12' w-52{margin-left:-13rem;margin-right:-13rem}.\32xl\:-mx-56{margin-left:-14rem;margin-right:-14rem}.\32xl\:-mx-60{margin-left:-15rem;margin-right:-15rem}.\32xl\:-mx-64{margin-left:-16rem;margin-right:-16rem}.\32xl\:-mx-72{margin-left:-18rem;margin-right:-18rem}.\32xl\:-mx-80{margin-left:-20rem;margin-right:-20rem}.\32xl\:-mx-96{ma.\32xl\:-mx-9{margin-left:-2.25rem;margin-right:-2.25rem}.\32xl\:-mx-10{margin-left:-2.5rem;margin-right:-2.5rem}.\32xl\:-mx-11{margin-left:-2.75rem;margin-right:-2-36{margin-left:-9rem;margin-right:-9rem}.\32xl\:-mx-40{margin-left:-10rem;margin-right:-10rem}.\32xl\:-mx-44{margin-left:-11rem;margin-right:-11rem}.\32xl\:-mx-48{margin-left:-12rem;margin-right:-12rem}.\32xl\:-mx-52{margin-left:-13rem;margin-right:-13rem}.\32xl\:-mx-56{margin-left:-14rem;margin-right:-14rem}.\32xl\:-mx-60{margin-left:-15rem;margin-right:-15rem}.\32xl\:-mx-64{margin-left:-16rem;margin-right:-16rem}.\32xl\:-mx-72{margin-left:-18rem;margin-right:-18rem}.\32xl\:-mx-80{margin-left:-20rem;margin-right:-20rem}.\32xl\:-mx-96{ma.\32xl\:-mx-9{margin-left:-2.25rem;margin-right:-2.25rem}.\32xl\:-mx-10{margin-left:-2.5rem;margin-right:-2.5rem}.\32xl\:-mx-11{margin-left:-2.75rem;margin-right:-2.75rem}.\32xl\:-mx-12{margin-left:-3rem;margin-right:-3rem}.\32xl\:-mx-14{margin-left:-3.5rem;margin-right:-3.5rem}.\32xl\:-mx-16{margin-left:-4rem;margin-right:-4rem}.\32xl\:-mx-20{margin-left:-5rem;margin-right:-5rem}.\32xl\:-mx-24{margin-left:-6rem;margin-right:-6rem}.\32xl\:-mx-28{margin-left:-7rem;margin-right:-7rem}.\32xl\:-mx-32{margin-left:-8rem;margin-right:-8rem}.\32xl\:-mx-36{margin-left:-9rem;margin-right:-9rem}.\32xl\:-mx-40{margin-left:-10rem;margin-right:-10rem}.\32xl\:-mx-44{margin-left:-11rem;margin-right:-11rem}.\32xl\:-mx-48{margin-left:-12rem;margin-right:-12rem}.\32xl\:-mx-52{margin-left:-13rem;margin-right:-13rem}.\32xl\:-mx-56{margin-left:-14rem;margin-right:-14rem}.\32xl\:-mx-60{margin-left:-15rem;margin-right:-15rem}.\32xl\:-mx-64{margin-left:-16rem;margin-right:-16rem}.\32xl\:-mx-72{margin-left:-18rem;margin-right:-18rem}.\32xl\:-mx-80{margin-left:-20rem;margin-right:-20rem}.\32xl\:-mx-96{margin-left:-24rem;margin-right:-24rem}.\32xl\:-mx-px{margin-left:-1px;margin-right:-1px}.\32xl\:-mx-0\.5{margin-left:-.125rem;margin-right:-.125rem}.\32xl\:-mx-1\.5{margin-left:-.375rem;margin-right:-.375rem}.\32xl\:-mx-2\.5{margin-left:-.625rem;margin-right:-.625rem}.\32xl\:-mx-3\.5{margin-left:-.875rem;margin-right:-.875rem}.\32xl\:my-0{margin-top:0;margin-bottom:0}.\32xl\:my-1{margin-top:.25rem;margin-bottom:.25rem}.\32xl\:my-2{margin-top:.5rem;margin-bottom:.5rem}.\3my-0{margin-top:0;margin-bottom:0}.\32xl\:my-1{margin-top:.25rem;margin-bottom:.25rem}.\32xl\:my-2{margin-top:.5rem;margin-bottom:.5rem}.\32xal-align: middle;
+  cursor: pointer;
+  -webkit-user-select: none;

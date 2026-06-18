@@ -1,0 +1,48 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottom;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+    transform: rotate3d(0, 0, 1, -45deg);
+    opacity: 0;
+  }
+}
+@keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+    transform: rotate3d(0, 0, 1, -45deg);
+    opacity: 0;
+  }
+}
+.animate__rotateOutUpLeft {
+  -webkit-animation-name: rotateOutUpLeft;
+  animation-name: rotateOutUpLeft;
+  -webkit-transform-origin: left bottom;
+  transform-origin: left bottom;
+}
+@-webkit-keyframes rotateOutUpRight {
+9da1a;--buttonCounter-outline-bgColor-hover: #ffffff33;--buttonCounter-outline-bgColor-disabled: #0969da0d;--buttonCounter-o  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 90deg);
+    transform: rotate3d(0, 0, 1, 90deg);
+    opacity: 0;
+  }
+}
+@utline-fgColor-rest: #keyframes rotateOutUpRight {
+  from {0550ae;--buttonCounter-outline
+    op-fgColor-hoveraci: #fffft

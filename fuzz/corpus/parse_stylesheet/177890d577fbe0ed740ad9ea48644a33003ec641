@@ -1,0 +1,120 @@
+switch-paddle {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }
+  input:disabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0.5; }
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%); }
+
+.switch-active {
+  left: 8%;
+  display: none; }
+  input:checked + label > .switch-active {
+    display: block; }
+
+.switch-inactive {
+  right: 15%; }
+  input:checked + label > .switch-inactive {
+    display: none; }
+
+.switch.tiny {
+  height: 1.5rem; }
+  .switch.tiny .switch-paddle {
+    width: 3rem;
+    height: 1.5rem;
+    font-size: 0.625rem; }
+  .switch.tiny .switch-paddle::after {
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1rem;
+    height: 1rem; }
+  .ssmall .switch-paddle::after {
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem; }
+  .switch.small input:checked ~ .switch-paddle::after {
+    left: 2rem; }
+
+.switch.large {
+  height: 2.5rem; }
+  .switch.large .switch-paddle {
+    width: 5rem;
+    height: 2.5rem;
+x-2\.5{--tw-translate-x:0.625rem}.\32xl\:translate-x-3\.5{--tw-translate-x:0.875rem}.\32xl\:-translate-x-0{--tw-translate-x:0pe-x:50%}.\32xl\:translate-x-3\/4{--tw-translate-x:75%}.\32xl\:translate-x-full{--tw-translate-x:100%}.\32xl\:-translate-x-1\/2{--tw-translate-x:-50%}.\32xl\:-translate-    font-size: 1rem; }
+  .switch.large .switch-paddle::after {
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 2rem;
+    height: 2rem; }
+  .switch.large input:checked ~ .switch-paddle::after {
+    left: 2.75rem; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottox-1\/3{--tw-translate-x:-33.333333%}.\32xl\:-translate-x-2\/3{--tw-translate-x:-66.666667%}.\32xl\:-translate-x-1\/4{--tw-translate-x:-25%}.\32xl\:-translate-x-2\/4{--tw-translate-x:-50%}.\32xl\:-translate-x-3\/4{--tw-translate-x:-75%}.\32xl\:-translate-x-full{--tw-translate-x:-100%}m: 1rem;
+  border-radius: 0; }
+  thead,
+  tbody,
+  tfoot {
+    border: 1px solid #f1f1f1;
+    background-color: #fefefe; }
+  caption {
+    padding: 0.5rem 0.625rem 0.625rem;
+    font-weight: bold; }
+  thead {
+    background: #f8f8f8;
+    color: #0a0a0a; }
+  tfoot {
+    background: #f1f1f1;
+    color: #0a0a0a; }
+  thead tr,
+  tfoot tr {
+    background: transparent; }
+  thead th,
+  thead td,
+  tfoot th,
+  tfoot td {
+    padding: 0.5rem 0.625rem 0.625rem;
+    font-weight: bold;
+    text-align: left; }
+  tbody th,
+  tbody td {
+    padding: 0.5rem 0.625rem 0.625rem; }
+  tbody tr:nth-child(even) {
+    border-bottom: 0;
+    background-color: #f1f1f1; }
+  table.unstriped tbody {
+    background-color: #fefefe; }
+    table.unstriped tbody tr {
+      border-bottom: 1px solid #f1f1f1;
+      background-color: #fefefe; }
+
+@media p.\32xl\:translate-y-0{--tw-translate-y:0px}.\32xl\:translate-y-1{--tw-translate-y:0.25rem}.\32xl\:translate-y-2{--tw-translate-y:0.5rem}.\32xl\:translate-y-3{--tw-translate-y:0.75rem}.\32xl\:translate-y-4{--tw-rint, screen and (max-width: 63.99875em) {
+  table.stack thead {
+    display: none; }
+  table.stack tfoot {
+    display: none; }
+  table.stack tr,
+  table.stack th,
+  table.stack td {
+    display: block; }
+  table.stack td {
+    border-top: 0; } }
+
+table.scroll {
+  display: block;
+  width: 100%;
+  overflow-xtranslate-y:1rem}.\32xl\:translate-y-5{--tw-translate-y:1.25rem}.\32xl\:translate-y-6{-: auto; }
+
+tab-tw-tranle.

@@ -1,0 +1,21 @@
+ble-horizontal th {
+    border-width: 0 0 1;x 0;
+   -  rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+}
+.animate__animated.animate__flip {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(400px) rotate-borderColor-attgntsolid #cbcbcb;
+}
+.pure-table-horizontal tbody > tr:last-child > td    
+{b order-bottom-width: 0;
+}

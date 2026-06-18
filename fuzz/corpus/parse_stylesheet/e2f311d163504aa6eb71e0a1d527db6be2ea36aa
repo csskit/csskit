@@ -1,0 +1,112 @@
+32xl\:focus-within\:bg-blue-800:focus-within{--tw-bg-opacity:1;background-color:rgba(30,64,175,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-blue-900:focus-within{--tw-bg-opacity:1;background-color:rgba(30,58,138,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-50:focus-within{--tw-bg-opacity:1;background-color:rgba(238,242,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-100:focus-within{--tw-bg-opacity:1;background-color:rgba(2242xl\:focus-within\:bg-indigo-400:focus-within{--tw-bg-opacity:1;background-color:rgba(129,140,248,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-500:focus-within{--tw-bg-opacity:1;background-color:rgba(99,102,241,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-600:focus-within{--tw-bg-opacity:1;background-color:rgba(79,70,229,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-700:focus-within{--tw-bg-opacity:1;background-color:rgba(67,56,202,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-800:focus-within{--tw-bg-opacity:1;background-color:rgba(55,48,163,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-900:focus-within{--tw-bg-opacity:1;background-color:rgba(49,46,129,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-50:focus-within{--tw-bg-opacity:1;background-color:rgba(245,243,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-100:focus-within{--tw-bg-opacity:1;background-color:rgba(237,233,254,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-200:focus-within{--tw-bg-opacity:1;background-color:rgba(221,214,254,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-300:focus-within{--tw-bg-opacity:1;background-color:rgba(196,181,253,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-400:focus-within{--tw-bg-opacity:1;background-color:rgba(167,139,250,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-500:focus-within{--tw-bg-opacity:1;background-color:rgba(139,92,2-range:disabled::-webkit-slider-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-webkit-slider-runnable-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-moz-range-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-moz-range-track {
+  cursor: default;
+}
+
+.custom-range:disabled::-ms-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-control-label::before,
+.custom-file-label,
+.custom-select {
+  transition: background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .custom-control-label::before,
+  .custom-file-label,
+  .custom-select {
+    transition: none;
+  }
+}
+
+.nav {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  padding-left: 0;
+  margin-bottom: 0;
+  list-style: none;
+}
+
+.nav-link {
+  display: block;
+  padding: 0.5rem 1rem;
+}
+
+.nav-link:hover, .nav-link:focus {
+  text-decoration: none;
+}
+
+.nav-link.disabled {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: default;
+}
+
+.nav-tabs {
+  border-bottom: 1px solid #dee2e6;
+}
+
+.nav-tabs .nav-link {
+  margin-bottom: -1px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  border-top-left-radius: 0.25rem;
+  border-top-right-radius: 0.25rem;
+}
+
+.nav-tabs .nav-link:hover, .nav-tabs .nav-link:focus {
+  isolation: isolate;
+  border-color: #e9ecef #e9ecef #dee2e6;
+}
+
+.nav-tabs .nav-link.disabled {
+  color: #6c757d;
+  background-color: transparent;
+  border-color: transparent;
+}
+
+.nav-tabs .nav-link.active,
+.nav-tabs .nav-item.show .nav-link {
+  color: #495057;
+  background-color: #fff;
+  border-color: #dee2e6 #dee2e6 #fff;
+}
+
+.nav-tabs .dropdown-menu {
+  margin-top: -1px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
+}
+
+.nav-pills .nav-link {
+  background: none;
+  border: 0;
+  border-radius: 0.25rem;
+}
+
+.nav-pills .nav-link.active,
+.nav-pills .show > .nav-link {
+  color: #fff;
+  background-color: #007bff;
+}
+
+.nav-fill > .nav-link,
+.nav-fill .nav-item {
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  text-a\32xl\:hover\:bg-current:hover{background-color:currentColor}.\32xl\:hover\:bg-black:hover{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-op

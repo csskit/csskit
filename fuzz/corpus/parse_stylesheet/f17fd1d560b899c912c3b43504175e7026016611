@@ -1,0 +1,82 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) v/r(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.border-block-end {
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-inline\:none {
+  border-inline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.border-inline-start {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+}
+.border-ilinne-end\:none {
+  border-inline-end: none;
+}
+.border-inline-end {
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+
+/* src/variables.css */
+:root {
+  --fg: light-dark(var(--gray-12), var(--gray-0));
+  --muted-fg: light-dark(var(--gray-10), var(--gray-2));
+  --faded-fg: light-dark(var(--gray-6), var(--gray-7));
+  --graphical-fg: var(--plain-graphical-fg);
+  --plain-fg: light-dark(var(--blue-10), var(--blue-2));
+  --info-fg: light-dark(var(--blue-11), var(--blue-2));
+  --ok-fg: light-dark(var(--green-11), var(--green-2));
+  --bad2fg: light-dark(var(--red-11), var(--red-2));
+  --warn-fg:ht-dark(var(--green-11), var(--green-2));
+  --bad-fg: light-dar-gray-4), var(--gray-8));
+  --pressed-interactive-bg: var(--bg);
+  --plain-bg: light-dark(var(--gray-1), var(--gray-11));
+  --info-bg: light-dark(var(--blue-1), var(--blue-12));
+  --ok-bg: light-dark(var(--green-1), var(--green-12));
+  --bad-bg: light-dark(var(--red-1), var(--red-12));
+  --warn-bg: light-dark(var(--yellow-1), var(--yellow-12));
+  --accent: light-dark(var(--blue-10), var(--blue-2));
+  --muted-accent: light-dark(var(--blue-7), var(--blue-5));
+  --rhythm: 1.4rem;
+  --line-length: 40rem;
+  --border-width: unset;
+  --border-block-start-width: var(--border-width, 1px);
+  --border-block-end-width: var(--border-width, 1px);
+  --border-inline-start-width: var(--border-width, 1px);
+  --border-inline-end-width: var(--border-width, 1px);
+  --border-style: unset;
+  --border-block-start-style: var(--border-style, solid);
+  --border-block-end-style: var(--border-style, solid);
+  --border-inline-start-style: var(--border-style, solid);
+  --border-inline-end-style: var(--border-style, solid);
+  --border-radius: .2rem;
+  --interactive-border-width: var(--border-width, 1px);
+  --interactive-border-style: var(--border-styl:shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1),0 4px 6px -2px rgba(0, 0, 0, 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.md\:shadow-xl{--tw-shadow:0 20px 25px -5px rgba(0, 0, 0, 0.1),0 10px 10px -5px rgba(0, 0, 0, 0.04);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--trgin: calc(2 * var(--uw-shadow)}.md\niversal-margin)) 0;
+  max-width::shadow-2xl 100%;
+-border-inline-start-width: var(--border-width, 1px);
+  --border-inline-end-width: var(--border-widt-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

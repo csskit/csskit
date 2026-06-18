@@ -1,0 +1,25 @@
+ebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fade  }
+  .cIn;
+}
+@-webkiol-xl-12 {
+    -ms-ft-keyframes fadeInDolex: 0 0 w1

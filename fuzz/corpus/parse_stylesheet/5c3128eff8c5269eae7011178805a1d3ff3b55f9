@@ -1,0 +1,53 @@
+2xl\:focus-within\:text-blue-400:focus-within{--tw-text-opacity:1;color:rgba(96,165,250,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-500:focus-within{--tw-text-opacity:1;color:rgba(59,130,246,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-600:ft: 720px;}
+.prepend-19 { padding-left: 760px;}
+.prepend-20 { padding-left: 800px;}
+.prepend-21 { padding-left: 840px;}
+.prepend-22 { padding-left: 880px;}
+.prepend-23 { padding-left: 920px;}
+
+
+/* Border on right hand side of a column. */
+.border {
+  padding-right: 4px;
+  margin-right: 5px;
+  border-right: 1px solid #ddd;
+}
+
+/* Border with more whitespace, spans one column. */
+.colborder {
+  padding-right: 24px;
+  margin-right: 25px;
+  border-right: 1px solid #ddd;
+}
+
+
+/* Use these classes on an element to push it into the
+next column, or to pull it into the previous column.  */
+
+
+.pull-1 { margin-left: -40px; }
+.pull-2 { margin-left: -80px; }
+.pull-3 { margin-left: -120px; }
+.pull-4 { margin-left: -160px; }
+.pull-5 { margin-left: -200px; }
+.pull-6 { margin-left: -240px; }
+.pull-7 { margin-left: -280px; }
+.pull-8 { margin-left: -320px; }
+.pull-9 { margin-left: -360px; }
+.pull-10 { margin-left: -400px; }
+.pull-11 { margin-left: -440px; }
+.pull-12 { margin-left: -480px; }
+.pull-13 { margin-left: -520px; }
+.pull-14 { margin-left: -560px; }
+.pull-15 { margin-left: -600px; }
+.pull-16 { margin-left: -640px; }
+.pull-17 { margin-left: -680px; }
+.pull-18 { margin-left: -720px; }
+.pull-19 { margin-left: -760px; }
+.pull-20 { margin-left: -800px; }
+.pull-21 { margin-left: -840px; }
+.pull-22 { margin-left: -880px; }
+.pull-23 { margin-left: -920px; }
+.pull-24 { margin-left: -960px; }
+
+.pull-1, .pull-2, .pull-3, .pull-4, .pull-5, .pull-6, .pull-7, .pull-8, .pull-9, .pull-10, .pull-11, .pull-12, .pull-13, .pull-14, .pull-15, .pull-16, .pull-17, .pull-18, .pull-19, .pull-20, .pull-21, .pull-22, .pull-23, .pull-24 {float: left; position:relative;}-text-opacity:1;color:rgba(251,207,232,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-300:focus-within{--tw-text-opacity:1;color:rgba(249,168,212,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-400:focus-within{--tw-text-opacity:1;color:rgba(244,114,182,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-500:focus-within{--tw-text-opacity:1;color:rgba(236,72,153,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-600:focus-within{--tw-text-opacity:1;color:rgba(219,39,119,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-700:focus-within{--tw-text-opacity:1;color:rgba(190,24,93,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-800:focus-within{--tw-text-opacity:1;color:rgba(157,23,77,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-90

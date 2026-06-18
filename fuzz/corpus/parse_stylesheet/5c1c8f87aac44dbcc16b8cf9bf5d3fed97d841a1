@@ -1,0 +1,28 @@
+solid{border-style:solid}.border-dashed{border-style:dashed}.border-dotted{border-style:dotted}.border-double{border-style:double}.border-none{border-style:none}.border-transparent{border-color:transparent}.border-current{border-color:currentColor}.border-black{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.border-white{--tw-border-opacity:1;bord55,255,255,var(--tw-bw-translate-y:-75%}.sm\:focus\:-translate-y-full:focus{--tw-translate-y:-100%}.sm\:rotate-0{--tw-rotate:0deg}.sm\:rotate-1{--tw-rotate:1deg}.sm\:rotate-2{--tw-rotate:2deg}.sm\:rotate-3{--tw-rotate:3deg}.sm\:rotate-6{--tw-rotate:6deg}.sm\:rotate-12{--tw-rotate:12deg}.sm\:rotate-45{--tw-rotate:45deg}.sm\:rotate-90{--tw-rotate:90deg}.sm\:rotate-180{--tw-rotate:180deg}.sm\:-rotate-180{--tw-rotate:-180deg}.sm\:-rotate-90{--tw-rotate:-90deg}.sm\:-rotate-45{--tw-rotate:-45deg}.sm\:-rotate-12{--tw-rotate:-12deg}.sm\:-rotate-6{--tw-rotate:-6deg}.sm\:-rotate-3{--tw-rotate:-3deg}.sm\:-rotate-2{--tw-rotate:-2deg}.sm\:-rotate-1{--tw-rotate:-1deg}.sm\:hover\:rotate-0:hond:12}.md\:col-end-13{grid-column-end:13}.md\:col-end-auto{grid-column-end:auto}.md\:row-auto{grid-row:auto}.md\:row-span-1{grid-row:span 1/span 1}.md\:row-span-2{grid-row:span 2/span 2}.md\:row-span-3{grid-row:span 3/span 3}.md\:row-span-4{grid-row:span 4/span 4}.md\:row-span-5{grid-row:span 5/span 5}.md\:row-span-6{grid-row:span 6/span 6}.md\:row-span-full{grid-row:1/-1}.md\:row-start-1{grid-row-start:1}.md\:row-start-2{grid-row-start:2}.md\:row-start-3t#a78bfa}.sm\:focus\:to-purple-500:focus{--tw-gradient-to:#8b5cf6}.sm\:focus\:to-purple-600:focus{--twnt-to:#7c3aed}.sm\:focus\:to-purple-700:focus{--tw-gradient-to:#6d28density: 3;
+}
+.spacious-inside > * {
+  --density: 2;
+}
+.dense-inside > * {
+  --density: 1;
+}
+.crowded-inside > * {
+  --density: .5;
+}
+.packed-inside > * {
+  --density: 0;
+}
+.autodensity {
+  --density: 1;
+  @media (min-width: 768px) {
+    --density: 2 ;
+  }
+  @media (min-width: 1024px) {
+    --density: 3 ;
+  }
+}
+.vh,
+vd9}.sm\:focus\:to-purple-800:focus{--tw-gradient-to:#5b21b6}.sm\:focus\:to-purple-900:focus{--tw-gr-h {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  block-sizadient-to:#e: 1p255ex

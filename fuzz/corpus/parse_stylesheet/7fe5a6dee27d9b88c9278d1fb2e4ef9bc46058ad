@@ -1,0 +1,47 @@
+-reactionButton-selected-fgColor-hover: #79c0ff;--focus-outlineColor: #1f6feb;--menu-bgColor-active: #151b23;--overlay-bgColor: #151b23;-- [data-cols\@l^="8 "] {
+    grid-column-start: 8;
+  }
+  [data-cols\@l$=" 8"] {
+    grid-column-end: 9;
+  }
+  [data-cols\@l="8"] {
+    grid-column: 8;
+  }
+  [data-cols\@l^="9 "] {
+    grid-column-start: 9;
+  }
+  [data-cols\@l$=" 9"] {
+    grid-column-end: 10;
+  }
+  [data-cols\@l="9"] {
+    grid-column: 9;
+  }
+  [data-cols\@l^="10 "] {
+    grid-column-start: 10;
+  }
+  [data-cols\@l$=" 10"] {
+    grid-column-end: 11;
+  }
+  [data-cols\@l="10"] {
+    grid-column: 10;
+  }
+  [data-cols\@l^="11 "] {
+    grid-column-start: 11;
+  }
+  :data-cols\@l$=" 11"] {
+    grid-column-end: 12;
+  }
+  [data-cols\@l="11"] {
+    grid-column: 11;
+  }
+  [data-cols\@l^="12 "] {
+    grid-column-start: 12;
+  }
+  [data-cols\@l$=" 12"] {
+    grid-column-end: 13;
+  }
+  [data-cols\@l="12"] {
+    grid-column: 12;
+  }
+  [doverlay-borderColor: #3d444db3;--overlay-backdrop-bgColor: #21283066;--selectMenu-borderColor: #3d444d;--selectMenu-bgColor-active: #0c2d6b;--sideNav-bgColor-selected: #212830;--skeletonLoader-bgColor: #656c7633;--timelineBadge-bgColor: #212830;--treeViewItem-leadingVisual-iconColor-rest: #9198a1;--underlineNav-borderColor-active: #f78166;--underlineNav-borderColor-hover: #3d444db3;--underlineNav-iconColor-rest: #9198a1;--selection-bgColor: #1f6febb3;--card-bgColor: #151b23;--label-green-bgColor-rest: #122117;--labata-rows\@l^="1 "] {
+    grid-el-green-bgColor-hover: #182f1f;--lr

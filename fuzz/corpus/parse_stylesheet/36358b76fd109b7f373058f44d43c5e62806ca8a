@@ -1,0 +1,255 @@
+rs
+  */
+  .palm-one-quarter, .palm-two-eighths, .palm-three-twelfths {
+    width: 25%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    width: 75%; }
+
+  /**
+  * Fifths
+  */
+  .palm-one-fifth, .palm-two-tenths {
+    width: 20%; }
+
+  .palm-two-fifths, .palm-four-tenths {
+    width: 40%; }
+
+  .palm-three-fifths, .palm-six-tenths {
+    width: 60%; }
+
+  .palm-four-fifths, .palm-eight-tenths {
+    width: 80%; }
+
+  /**
+  * Sixths
+  */
+  .palm-one-sixth, .palm-two-twelfths {
+    width: 16.666%; }
+
+  .palm-five-sixths, .palm-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .palm-one-eighth {
+    width: 12.5%; }
+
+  .palm-three-eighths {
+    width: 37.5%; }
+
+  .palm-five-eighths {
+    width: 62.5%; }
+
+  .palm-seven-eighths {
+    width: 87.5%; }
+
+  /**
+  * Tenths
+  */
+  .palm-one-tenth {
+    width: 10%; }
+
+  .palm-three-tenths {
+    width: 30%; }
+
+  .palm-seven-tenths {
+    width: 70%; }
+
+  ..875rem;
+  line-height: 1.5;
+}
+
+.form-control-plaintext {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0;
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #212529;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+.form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.form-control-sm {
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.form-control-lg {
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.t: 5px;
+}
+
+.form-check {
+  position: relative;
+  display: block;
+  padding-left: 1.25rem;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: 0.3rem;
+
+
+textarea.form-control {
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.form-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row > .col,
+.form-row > [class*="col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.for  line-height: 1.5;
+  color: #212529;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+.form-control-plaintext.form-control-sm, .form-control-plaintext.form-control-lg {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.form-control-sm {
+  height: calc(1.5em + 0.5rem + 2px);
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.form-control-lg {
+  height: calc(1.5em + 1rem + 2px);
+  padding: 0.t: 5px;
+}
+
+.form-check {
+  position: relative;
+  display: block;
+  padding-left: 1.25rem;
+}
+
+.form-check-input {
+  position: absolute;
+  margin-top: 0.3rem;
+
+
+textarea.form-control {
+  height: auto;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+.form-text {
+  display: block;
+  margin-top: 0.25rem;
+}
+
+.form-row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -5px;
+  margin-left: -5px;
+}
+
+.form-row > .col,
+.form-row > [class*="col-"] {
+  padding-right: 5px;
+  padding-left: 5px;
+}
+
+.form-check {
+  position: relative;
+  display: block;
+  padding-lef; }
+
+  .lap-five-sixths, .lap-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .lap-one-eighth {
+    width: 12.5%; }
+
+  .lap-three-eighths {
+    width: 37.5%; }
+
+  .lap-five-eighths {
+    width: 62.5%; }
+
+  .lap-seven-eighths {
+    width: 87.5%; }
+
+  /**
+  * Tenths
+  */dth: 25%; }
+
+  .lap-and-up-three-quarters, .lap-and-up-six-eighths, .lap-and-up-nine-twelfths {
+    width: 75%; }
+
+  /**
+  * Fifths
+  */
+  .lap-and-up-one-fifth, .lap-and-up-two-tenths {
+    width: 20%; }
+
+  .lap-and-up-two-fifths, .lap-and-up-four-tenths {
+    width: 40%; }
+
+  .lap-and-up-three-fifths, .lap-and-up-six-tenths {
+    width: 60%; }
+
+  .lap-and-up-four-fifths, .lap-and-up-eight-tenths {
+    width: 80%; }
+
+  /**
+  * Sixths
+  */
+  .lap-and-up-one-sixth, .lap-and-up-two-twelfths {
+    width: 16.666%; }
+
+  .lap-and-up-five-sixths, .lap-and-up-ten-twelfths {
+    width: 83.333%; }
+
+  /**
+  * Eighths
+  */
+  .lap-and-up-one-eight

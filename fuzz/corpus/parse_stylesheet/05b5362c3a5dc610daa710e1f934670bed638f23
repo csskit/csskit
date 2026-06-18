@@ -1,0 +1,108 @@
+      <td>Lorem</td>
+           </tr>
+           <tr>
+               <th rowspan=2>Sit</th>
+               <td>Dolor</td>
+               <td class=numerical>09.640</td>
+               <td>Lorem</td>
+           </tr>
+           <tr>
+     >Lorem</td>
+           </tr>
+           <tr>
+               <th rowspan=2>Sit</th>
+               <td>Dolor</td>
+               <td class=numerical>09.640</td>
+               <td>Lorem</td>
+           </tr>
+           <tr>
+               <td>Dolor</td>
+               <td class=numerical>12.117</td>
+               <td>Lorem</td>
+           </tr>
+       </tbody>
+   </table>
+ *
+ */
+table {
+  width: 100%; }
+
+th,
+td {
+  padding: 6px;
+  text-align: left; }
+  @media screen and (min-width: 480px) {
+    th,
+    td {
+      padding: 12px; } }
+
+/**
+ * Cell alignments
+ */
+[colspan] {
+  text-align: center; }
+
+[colspan="1"] {
+  text-align: left; }
+
+[rowspan] {
+  vertical-align: middle; }
+
+[rowspan="1"] {
+  vertical-align: top; }
+
+.numerical {
+  text-align: right; }
+
+/**
+ * In the HTML above we see several `col` elements with classes whose numbers
+ * represent a percentage width for that column. We leave one column fre|||||||||||||||||||||||||||||||||||||||||||||y-200{--tw-bg-opacitidental breakage in
+ * the table.
+ */
+.t5 {
+  width: 5%; }
+
+.t10 {
+  width: 10%; }
+
+.t12 {
+  width: 12.5%; }
+
+/* 1/8 */
+.t15 {
+  width: 15%; }
+
+.t20 {
+  width: 20%; }
+
+.t25 {
+  width: 25%; }
+
+/* 1/4lg\:group-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.lg\:focus-within\:border-opacity-5:focus-within{--tw-border-opacity:0.05}.lg\:focus-within\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.lg\:focus-within\:borde:border-opacity-25:focus{--tw-border-opacity:0.25}.lg\:focus\:border-opacity-30:focus{--tw-border-opacity:0.3}.lg\:focus\:border-opacity-39:focus{--tw-border-opacity:0.4}.lg\:focus\:border-opacity-50:focus{--tw-border-opacity:0.5}.lg\:focus\:border-opacity-60:focus{--tw-border-opacity:0.6}.lg\:focus\:border-opacity-70:focus{--tw-border-opacity:0.7}.lg\:focus\:border-opacity-75:focus{--tw-border-opacity:0.75}.lg\:focus\:border-opacity-80:focus{--tw-border-opacity:0.8}.lg\:focus\:border-opacity-90:focus{--tw-border-opacity:0.9}.lg\:focus\:border-opacity-95:focus{--tw-border-opacity:0.95}.lg\:focus\:border-opacity-100:focus{--tw-border-opacity:1}.lg\:bg-transparent{background-color:transparent}.lg\:bg-current{background-color:currentColor}.lg\:bg-black{--tw-bg-opacity:1;background-color:rgba(0,0,0,var(--tw-bg-opacity))}.lg\:bg-white{--tw-bg-opacity:1;background-color:rgba(255,255,255,var(--tw-bg-opacity))}.lg\:bg-gray-50{--tw-bg-opacity:1;background-color:rgba(249,250,251,var(--tw-bg-opacity))}.lg\:bg-gray-100{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity))}.lg\:bg-,ra|||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||||y-200{--t175,var(--tw-bg-op              <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+label,
+.label {
+  display: block; }
+
+/**
+ * Extra help text in `label`s, e.g.:
+ *
+   <label>Card number <small class=additional>No spaces</small></label>
+ *
+ */
+.additional {
+  display: block;
+  font-weight: normal; }
+
+/*
+ * Groups of checkboxes and radios, e.g.:
+ *
+   <li>
+ 

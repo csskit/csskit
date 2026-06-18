@@ -1,0 +1,8 @@
+ble-horizontal horizontal t
+    border-bttom-width {
+    border-width: 0 0 1;x 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+.pure-table-horizontal t
+    border-bttom-width: 0;
+}

@@ -1,0 +1,4 @@
+ble-horizontal th {
+   table-horizo0ntal tbody > tr:last-child > td {
+    border-bottom-width: 0;
+}
