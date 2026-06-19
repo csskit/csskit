@@ -1,0 +1,67 @@
+:root {
+	--color-lightness-inc: -/**/ 5.6%;
+	--color-lightness-1: 98%;
+	--color-chroma-inc: 0.056;
+	--color-chroma-1: 0.02;
+	--color-yellow-base: 101;
+	--color-orange-base: 49.38;
+	--color-magenta-base: 350;
+	--color-green-base: 152.5;
+	--color-accent-raw: #639;
+	--color-accent-dark-raw: #4a1f6e;
+	--color-backdrop-raw: hsl(0 0% 0% / 0.6);
+
+	--text-xs: 0.75rem;
+	--text-sm: 0.875rem;
+	--text-md: 1rem;
+	--text-lg: 1.15rem;
+	--text-xl: 1.5rem;
+	--text-2xl: 2rem;
+	--text-3xl: 2.5rem;
+	--text-4xl: 3.5rem;
+
+	--space-1: 0.25rem;
+	--space-2: 0.5rem;
+	--space-3: 0.75rem;
+	--space-4: 1rem;
+	--space-5: 1.5rem;
+	--space-6: 2rem;
+	--space-7: 2.5rem;
+	--space-8: 3rem;
+	--space-9: 4rem;
+	--space-10: 6rem;
+
+	--font-display: Fredoka, Calibri, Candara, Segoe, "Segoe UI", Helvetica, sans-serif;
+	--font-ui: Fredoka, sans-serif;
+	--font-mono: Consolas, Monaco, "Andale Mono", "Ubuntu Mono", monospace;
+
+	--page-nav-height: 100px;
+
+	--accent: var(--color-accent-raw);
+	--accent-dark: var(--color-accent-dark-raw);
+	--bg-overlay: hsl(0 0% 100% / 0.85);
+	--bg: var(--sand-0);
+	--ink: var(--text-1);
+	--outline: 3px solid var(--ink);
+	--outline-thick: 4px solid var(--ink);
+
+	--color-primary: var(--blue-7);
+	--color-success: var(--green-7);
+	--color-error: var(--red-7);
+	--color-text-secondary: var(--text-2);
+
+	color-scheme: light dark;
+}
+
+@media (prefers-color-scheme: dark) {
+	:root {
+		--text-1: #f0ecf8;
+		--text-2: #d4c8e8;
+		--text-3: #bf5fff;
+		--surface-1: #0e0e1c;
+		--surface-2: #181828;
+		--surface-3: #242438;
+		--bg-overlay: hsl(220 18.4% 9.6% / 0.96);
+		--bg: hsl(220 18.4% 9.6%);
+	}
+}

@@ -2,8 +2,6 @@
 import postcssPresetEnv from "postcss-preset-env";
 import postcssImport from "postcss-import";
 import cssnano from "cssnano";
-import combineSelectors from "postcss-combine-duplicated-selectors";
-
 export default {
   plugins: [
     postcssImport(),
@@ -25,7 +23,6 @@ export default {
         },
       },
     }),
-    combineSelectors(),
     cssnano({
       preset: "default",
     }),

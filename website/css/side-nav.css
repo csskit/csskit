@@ -1,0 +1,82 @@
+.side-nav {
+	flex: none;
+	width: 90vw;
+	height: 100%;
+	padding: var(--space-6) 0 0;
+	overflow-x: hidden;
+	background: var(--surface-1);
+
+	&::backdrop {
+		background: var(--color-backdrop-raw);
+	}
+
+	@media (width >= 768px) {
+		flex: none;
+		padding: 0;
+		display: flex;
+		width: 25ch;
+		height: auto;
+		inset: auto;
+		position: static;
+		background: none;
+	}
+
+	nav {
+		ol {
+			padding: var(--space-4) var(--space-4) var(--space-4) var(--space-2);
+			display: flex;
+			flex-direction: column;
+			gap: var(--space-2);
+			align-items: center;
+		}
+
+		:where(a, li) {
+			display: block;
+			padding: 0;
+			width: 100%;
+		}
+
+		li {
+			&.nav-section {
+				font-family: var(--font-ui);
+				font-size: var(--text-xs);
+				font-weight: 600;
+				letter-spacing: 0.12em;
+				text-transform: uppercase;
+				color: var(--text-2);
+				margin: var(--space-5) 0 var(--space-2);
+				padding: 0 var(--space-4);
+			}
+		}
+
+		a {
+			display: flex;
+			gap: var(--space-4);
+			color: var(--text-1);
+			padding: var(--space-2) var(--space-4);
+			margin-inline-start: var(--space-2);
+			border-radius: 0;
+			font-family: var(--font-ui);
+			font-size: var(--text-md);
+
+			span,
+			svg {
+				width: 24px;
+				text-align: center;
+			}
+
+			&:hover {
+				border-radius: var(--radius-3);
+				background: var(--purple-6);
+				color: var(--purple-1);
+				text-decoration: none;
+			}
+		}
+
+		[active] > a {
+			border-radius: var(--radius-3);
+			background: var(--accent);
+			color: var(--purple-1);
+		}
+	}
+}
