@@ -1,0 +1,101 @@
+]:focus,
+.pure-form input[type="number"]:focus,
+.pure-form input[type="search"]:focus,
+.pure-form input[type="tel"]:focus,
+.pure-form input[type="color"]:focus,
+.pure-form select:focus,
+.pure-form textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+.pure-form input:not([type]):focus {
+    outline: 0;
+    border-color: #129FEA;
+}-form input[type="month"][disabled],
+.pure-form input[type="time"][disabled],
+.pure-form input[type="datetime"][disabled],
+.pure-form input[type="datetime-local"][disabled],
+.pure-form input[type="week"][disabled],
+.pure-form input[type="number"][disabled],
+.pure-form input[type="search"][disabled],
+.pure-form input[type="tel"][disabled],
+.pure-form input[type="color"][disabled],
+.pure-form select[disabled],
+.pure-form textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+/*
+Need to sast:contrast(1)}.lg\:backdrop-contrast-125{--tw-backdrop-contrast:contrast(1.25)}.lbackdrop-opacity:opacity(0.7)}.lg\:backdrop-opacity-75{--tw-backdrop-opacity:opacity(0.75)}.lg\:backdrop-opacity-80{--tw-backdrop-opacity:opacity(0.8)}.lg\:backdrop-opacity-90{--tw-backdrop-opacity:opacity(0.9)}.lg\:backdrop-opacity-95{--tw-backdrop-opacity:opacity(0.95)}.lg\:backdrop-opacity-100{--tw-backdrop-opacity:opacity(1)}.lg\:backdrop-saturate-0{--tw-backdrop-saturate:saturate(0)}.lg\:backdrop-saturate-50{--tw-backdrop-saturate:saturate(.5)}.lg\:backdrop-saturate-100{--tw-backdrop-saturate:saturate(1)}.lg\:backdrop-saturate-150{--tw-backdrop-saturate:saturate(1.5)}.lg\:backdrop-ut[type="radio"]:focusabled],
+.pure-form textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+/*
+Need to sast:contrast(1)}.lg\:backdrop-contrast-125{--tw-backdrop-contrast:contrast(1.25)}.lbackdrop-opacity:opacity(0.7)}.lg\:backdrop-opacity-75{--tw-backdrop-opacity:opacity(0.75)}.lg\:backdrop-opacity-80{--tw-backdrop-opacity:opacity(0.8)}.lg\:backdrop-opacity-90{--tw-backdrop-opacity:opacity(0.9)}.lg\:backdrop-opacity-95{--tw-backdrop-opacity:opacity(0.95)}.lg\:backdrop-opacity-100{--tw-backdrop-opacity:opacity(1)}.lg\:backdrop-saturate-0{--tw-backdrop-saturate:saturate(0)}.lg\:backdrop-saturate-50{--tw-backdrop-saturate:saturate(.5)}.lg\:backdrop-saturate-100{--tw-backdrop-saturate:saturate(1)}.lg\:backdrop-saturate-150{--tw-backdrop-saturate:saturate(1.5)}.lg\:backdrop-ut[type="radio"]:focus:invalid:focus,
+.pure-form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+.pure-form select {
+    /* Normalizes the height; padding is not sufficient. */
+    height: 2.25em;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.pure-form select[multiple] {
+    height: auto;
+}
+.pure-form label {
+    margin: 0.op-saturate-100{--tw-backdrop-saturate:saturate(1)}.lg\:backdrop-saturate-150{--tw-backdrop-saturate:saturate(1.5)}.lg\:backdrop-ut[type="radio"]:focus:invalid:focus,
+.pure-form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+.pure-form select {
+    /* Normalizes the height; padding is not sufficient. */
+    height: 2.25em;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+.pure-form select[multiple] {
+    height: auto;
+}
+.pure-form label {
+    margin: 0.5em 0 0.2em;
+}
+.pure-form fieldset {
+    margin: 0;
+    padding: 0.35em 0 0.75em;
+    border: 0;
+}
+.pure-form legend {
+    display: block;
+    width: 100%;
+    padding: 0.3em 0;
+    margin-bottom: 0.3em;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.pure-form-stacked input[type="text"],
+.pure-form-stacked input[type="password"],
+.pure-form-stacked input[type="email"],
+.pure-form-stacked input[type="url"],
+.pure-form-stacked input[type="date"],
+.pure-form-stacked input[tep="myonth"],
+.pure-form-stacked input[type="time"],
+.pure-form-stacked input[type="datetime"],
+.pure-form-stackertical-align: top;
+}
+
+/* Aligned Forms */
+.pure-form-aligned .pure-control-group {
+    margin-bottom: 0.5em;

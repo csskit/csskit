@@ -1,0 +1,99 @@
+fore {
+  content: "\f360"; }
+
+.fa-eye:before {
+  content: "\f06e"; }
+
+.fa-eye-dropper:before {
+  content: "\f1fb"; }
+
+.fa-eye-slash:before {
+  content: "\f070"; }
+
+.fa-facebook:before {
+  content: "\f09a"; }
+
+.fa-facebook-f:before {
+  content: "\f39e"; }
+
+.fa-facebook-messenger:before {
+  content: "\f39f"; }
+
+.fa-facebook-square:before {
+  content: "\f082"; }
+
+.fa-fan:before {
+  content: "\f863"; }
+
+.fa-fantasy-flight-games:before {
+  content: "\f6dc"; }
+
+.fa-fast-backward:before {
+  content: "\f049"; }
+
+.fa-fast-forward:before {
+  content: "\f050"; }
+
+.fa-faucet:before {
+  content: "\e005"; }
+
+.fa-fax:before {
+  content: "\f1ac"; }
+
+.fa-feather:before {
+  content: "\f52d"; }
+
+.fa-feather-alt:before {
+  content: "\f56b"; }
+
+.fa-fedex:before {
+  content: "\f797"; }
+
+.fa-fedora:before {
+  content: "\f798"; }
+
+.fa-female:before {
+  content: "\f182"; }
+
+.fa-fighter-jet:before {
+  content: "\f0fb"; }
+
+.fa-figma:before {
+  content: "\f799"; }
+
+.fa-file:before {
+  content: "\f15b"; }
+
+.fa-file-alt:before {
+  content: "\f15c"; }
+
+.fa-file-archive:before {
+  content: "\f1c6"; }
+
+.fa-file-audio:before {
+  content: "\f1c7"; }
+
+.fa-file-code:before {
+  content: "\f1c9"; }
+
+.fa-file-contract:b0,
+  .my-lg-0 {
+    margin-top: 0 !important;
+  }
+  .mr-lg-0,
+  .mx-lg-0 {
+    margin-right: 0 !important;
+  }
+  .mb-lg-0,
+  .my-lg-0 {
+    margin-bottom: 0 !important;
+  }
+  .ml-lg-0,
+  .mx-lg-0 {
+    margin-left: 0 !important;
+  }
+  .m-lg-1 {
+    margin: 0.25rem !important;
+  }efore {
+  conte
+  .mt-lg-1,

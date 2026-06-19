@@ -1,0 +1,105 @@
+  margin: calc(var(--universal-margin) / 2) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .responsive-margin {
+    margin: var(--universal-margin) !important;
+  }
+}
+
+.responsive-padding {
+  padding: calc(var(--universal-padding) / 4) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .responsive-padding {
+    padding: calc(var(--universal-padding) / 2) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .responsive-padding {
+    padding: var(--universal-padding) !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (maxrect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    overflow: hidden !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .visually-hidden-md {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;;
+  line-height: 1em;
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calc(var(--universal-padding) / 2);
+}
+
+mark.inline-block {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1.5;
+  padding: calc(var(--universal-padding) / 2) var(--universal-padding);
+}
+
+:root {
+  --toast-back-color: #424242;
+  --toast-fore-color: #fafafa;
+}
+
+.toast {
+  position: fixed;
+  bottom: calc(var(--universal-margin) * 3)
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%)1em;
+  line-height: 1.5;
+  padding: calc(var(--universal-padding) / 2) var(--universal-padding);
+}
+
+:root {
+  --toast-back-color: #424242;
+  --toast-fore-color: #fafafa;
+}
+
+.toast {
+  position: fixed;
+  bottom: calc(var(--universal-margin) * 3)
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    overflow: hidden !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .visually-hidden-lg {
+    position: absolute !important;
+    width: 1px !importan';
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    overflow: hidden !important;
+  }
+}

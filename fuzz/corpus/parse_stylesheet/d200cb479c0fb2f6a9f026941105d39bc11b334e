@@ -1,0 +1,120 @@
+;box-shadow:var(--boxShadow-thin) var(--borderColor-open-emphasis)}.State--merged,.State--open{color:var(--fgColor-onEmphasis)}.State--merged{background-color:var(--bgColor-done-emphasis, var(--color-done-emphasis));box-shadow:var(--boxShadow-thin) var(--borderColor-done-emphasis)}.State--closed{backgrog {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  paddingfadeOutBottomLeft;
+}
+/* Flippers */
+@-webkit-keyframes flip {
+  from {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, -360deg);
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, -360deg);
+    -webkit-animation-timing-function: ease-out;
+    animatpe="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 1 */
+  padding: 0; /* 2 */
+}
+
+/**
+ * Correct the cursor style of increment and decrement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safari on macOS.
+ */
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+/**
+ * 1. Correct the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button; /* 1 */
+  font: inherit; /* 2 */
+}
+
+/* Interactive
+   ========================================================================== */
+
+/*
+ * Add the correct display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/*csslint important:false*/
+
+/* =======================================================================und-color:var(--bgColor-closed-emphasis, var(--color-closed-emphasis));box-shadow:var(--boxShadow-thin) var(--borderColor-closed-emphasis);color:var(--fgColor-onEmphasis)}.State--small{font-size:var(--text-body-size-small);line-height:var(--base-size-24);padding:0 10px}.State--small .octicon{width:1em}.Counter{background-color:var(--bgColor-neutral-muted, var(--color-neutral-muted));border:var(--borderWidth-thin) solid var(--counter-borderColor);border-radius:2em;color:var(--fgColor-default);display:inline-block;font-size:var(--text-body-size-small);font-weight:var(--base-text-weight-medium);line-height:calc(var(--base-size-20) - var(--borderWidth-thin)*2);min-width:var(--base-size-20);padding:0 var(--base-size-6);text-align:center}.Counter:empty{display:none}.Counter .octicon{opacity:.8;vertical-align:text-top}.Counter--primary{background-color:var(--bgColor-neutral-emphasis);sm\:gap-y-48{row-gap:12rem}.sm\:gap-y-52{row-gap:13rem}.sm\:gap-y-56{row-gap:14rem}.sm\:gap-y-60{row-gap:15rem}.sm\:gap-y-64{row-gap:16rem}.sm\:gap-y-72{row-gap:18rem}.sm\:gap-y-80{row-gap:20rem}.sm\:gap-y-96{row-gap:24rem}.sm\:gap-y-px{row-gap:1px}.sm\:gap-y-0\.5{row-gap:.125rem}.sm\:gap-y-1\.5{row-gap:.375rem}.sm\:gapcolor:var(--fgColor-onEmphasis)}.Counter--secondary{background-color:var(--bgColor-neutral-muted);color:var-y-2\.5{row-gap:.625(--fgCorem

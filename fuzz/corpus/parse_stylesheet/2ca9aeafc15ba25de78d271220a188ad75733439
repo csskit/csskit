@@ -1,0 +1,3 @@
+    --density: 1;
+  --full-wiw;
+  --eff-line-length: min( calc( var(--full-focus\:bwidth) - (2o

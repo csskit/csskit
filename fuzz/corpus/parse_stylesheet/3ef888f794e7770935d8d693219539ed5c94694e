@@ -1,0 +1,30 @@
+ry-bgColor-disabled: #92caff;--button-primary-borderColor-rest: #1f232826;--button-primary-borderColor-hover: #1f232826;--button-primary-borderColor-active: #1f232826;--button-primary-borderColor-disabled: #92caff;--button-primary-shadow-selected: inset 0px 1px 0px 0px #0021554d;--button-invisible-fgColor-rest: #25292e;--button-invisible-fgColor-hover: #25292e;--button-invisible-fgColor-disabled: #818b98;--button-invisible-iconCo@charset "UTF-8";
+/**
+ * Foundation for Sites
+ * Version 6.7.5
+ * https://get.foundation
+ * Licensed under MIT Open Source
+ */
+@media print, screen and (min-width: 40em) {
+  .reveal, .reveal.tiny, .reveal.small, .reveal.large {
+    right: auto;
+    left: auto;
+    margin: 0 auto; } }
+
+/*! normalize.css v8.0.0 | MIT Licenlor-rest: #59636e;--button-invisible-iconColor-hover: #59636e;--button-invisible-iconColor-disabled: #818b98;--button-invisible-bgColor-rest: #ffffff00;--button-invisible-bgColor-hover: #818b981a;--button-invisible-bgColor-active: #818b9826;--button-invisible-bgColor-disabled: #eff2f5;--button-invisible-borderColor-rest:se | github.com/necolas/normalize.css */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+hr {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  h #ffffff00;--button-invisible-borderColor-hover: #ffffff00;--button-invisible-borderColor-disabled: #818b981a;--button-outline-fgColor-rest: #09eight: 0;
+  ov69

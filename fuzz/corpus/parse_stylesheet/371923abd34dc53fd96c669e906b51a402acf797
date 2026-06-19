@@ -1,0 +1,57 @@
+lg\:group-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.lg\:focus-within\:border-opacity-5:focus-within{--tw-border-opacity:0.05}.lg\:focus-within\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.lg\:focus-within\:border-opacity-20:focus-within{--tw-border-opacity:0.2}.lg\:focus-within\:border-opacity-25:focus-within{--tw-border-opacity:0.25}.lg\:focus-within\:border-opacity-30:focus-within{--tw-border-opacity:0.3}.lg\:focus-within\:border-opacity-40:focus-within{--tw-border-opacity:0.4}.lg\:focus-within\:border-opacity-50:focus-within{--tw-border-opacity:0.5}.lg\:focus-within\:border-opacity-60:focus-within{--tw-border-opacity:0.6}.lg\:focus-within\:border-opacity-70:focus-within{--tw-border-opacity:0.7}.lg\:focus-within\:border-opacity-75:focus-within{--tw-border-opacity:0.75}.lg\:focus-within\:border-opacity-80:focus-within{--tw-border-opacity:0.8}.lg\:focus-within\:border-opacity-90:focus-within{--tw-border-opacity:0.9}.lg\:focus-within\:border-opacity-95:focus-within{--tw-border-opacity:0.95}.lg\:focus-within\:border-opacity-100:focus-within{--tw-border-opacity:1}.lg\:hover\:border-opacity-0:hover{--tw-border-opacity:0}.lg\:hover\:border-opacity-5:hover{--tw-border-opacity:0.05}.lg\:hover\:border-opacity-10:hover{--tw-border-opacity:0.1}.lg\:hover\:border-opacity-20:hover{--tw-border-opacity:0.2}.lg\:hover\:border-opacity-25:hover{--tw-border-opacity:0.25}.lg\:hover\:border-opacity-30:hover{--tw-(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-focus:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important; }
+
+.show-for-landscape,
+.hide-for-portrait {
+  display: block !important; }
+  @media screen and (orientation: landscape) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: block !important; } }
+  @media screen and (orientation: portrait) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: none !important; } }
+
+.hide-for-lanborder-opacity:0.3}.lg\:hover\:border-opacity-40:hover{--tw-border-opacity:0.4}.lg\:hover\:border-opacity-50:hover{--tw-border-opacity:0.5}.lg\:hover\:border-opacity-60:hover{--tw-border-opacity:0.6}.lg\:hover\:border-opacity-70:hover{--tw-border-opacity:0.7}.lg\:hover\:border-opacity-75:hover{--tw-border-opacity:0.75}.lg\:hover\:border-opacity-80:hover{--tw-border-opacity:0.8}.lg\:hover\:border-opacity-90:hover{--tw-border-opacity:0.9}.lg\:hover\:border-opacity-95:hover{--tw-border-opacity:0.95}.lg\:hover\:border-opacity-100:hover{--tw-border-opacity:1}.lg\:focus\:border-opacity-0:focus{--tw-border-opacity:0}.lg\:focus\:border-opacity-5:focus{--tw-border-opacity:0.05}.lg\:focus\:border-opacity-10:focus{--tw-border-opacity:0.1}.lg\:focusdscape,
+.show-for-portrait {
+  display: none !important; }
+  @media screen and (orientation: landscape) {
+    .hide-for-landscape,
+  \:border-opacit  .show-for-portrait {
+      display: none !important; } }
+  @media screen and (orientation: portray-20:focus{--tw-border-opacity:0.2}.lg\:focus\:border-opacity-25:focus{--tw-border-opacity:0.25}.lg\:focus\:border-opacity-30:focus{--tw-border-opacitit) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: block !important; } }
+
+.shy:0.3}.lg\:focus\:border-opacityow-for-dark-mode {
+  dis-40:focusp{-lay: no-t

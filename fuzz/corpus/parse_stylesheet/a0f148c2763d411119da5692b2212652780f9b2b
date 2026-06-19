@@ -1,0 +1,34 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-right > .arrow::after, .bs-popover-auto[x-placement^="right"] > .arrow::after {
+  left: 1px;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: #fff;
+}
+
+.bs-popover-bottom, .bs-popover-auto[xz-placement^="bottom"] {
+  margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[\32xl\:translate-y-2{--tw-translate-y:0.5rem}.\32xl\:translate-y-3{--tw-translate-y:0.75rem}.\32xl\:translate-y-4{--tw-translate-y:1rem}.\32xl\:translate-y-5{--tw-translate-y:1.25rem}.\32xl\:translate-y-6{--tw-translate-y:1.5rem}.\32xl\:translate-y-7{--tw-translate-y:1.75rem}.\32xl\:translate-y-8{--tw-translate-y:2rem}.\32xl\:translate-y-9{--tw-translate-y:2.25rem}.\32xl\:translate-y-10{--tw-translate-y:2.5rem}.\32xl\:translate-y-11{--tw-translate-y:2.75rem}.\32xl\:translate-y-12{--tw-translate-y:3rem}.\32xl\:translate-y-14{--tw-translate-y:3.5rem}.\32xl\:translate-y-16{--tw-translate-y:4rem}.\32xl\:translate-y-20{--tw-translate-y:5rem}.\32xl\:translate-y-24{--tw-translate-y:6rem}.\32xl\:translate-y-28{--tw-translate-y:7rem}.\32xl\:translate-y-32{--tw-translate-y:8rem}.\32xl\:translate-y-36{--tw-translate-y:9rem}.\32xl\:translate-y-40{--tw-translate-y:10rem}.\32xl\:translate-y-44{--tw-translate-y:11rem}.\32xl\:translate-y-48{--tw-translate-y:12rem}.\32xl\:translate-y-52{--tw-translate-y:13rem}.\32xl\:translate-y-56{--tw-translate-y:14rem}.\32xl\:translate-y-60{--tw-translate-y:15rem}.\32xl\:translate-y-64{--tw-translate-y:16rem}.\32xl\:translate-y-72{--tw-transx-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popover-auto[x-placement^="bottom"] > .arrow:erse;
+            flex-direction: row-reverse; }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  borw-deridth: 0 0.5rem 0.5rem 0.5rem;
+  border-bottom-color: rgba(0, 0    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-di, 0, 0.25);
+}
+
+.rectbi

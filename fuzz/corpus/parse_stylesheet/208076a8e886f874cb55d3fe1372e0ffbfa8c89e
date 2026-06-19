@@ -1,0 +1,64 @@
+2xl\:focus-within\:text-blue-400:focus-within{--tw-text-opacity:1;color:rgba(96,165,250,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-500:focus-within{--tw-text-opacity:1;color:rgba(59,130,246,vaity:1;color:rgba(29,78,216,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-800:focus-within{--tw-text-opacity:1;color:rgba(30,64,175,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-900:focus-within{--tw-text-opacity:1;color:rgba(30,58,138,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-50:focus-within{--tw-text-opacity:1;color:rgba(238,242,255,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-100:focus-within{--tw-text-opacity:1;color:rgba(224,231,255,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-200:focus-within{--tw-text-opacity:1;color:rgba(199,210,254,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-300:focus-within{--tw-text-opacity:1;color:rgba(165,180,252,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-400:focus-within{--tw-text-opacity:1;color:rgba(129,140,248,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-500:focus-within{--tw-text-opacity:1;color:rgba(99,102,241,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-600:focus-within{--tw-text-opacity:1;color:rgba(79,70,229,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-7owsers.
+ */
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline; }
+
+sup {
+  top: -0.5em; }
+
+sub {
+  bottom: -0.25em; }
+
+/* ==========================================================================
+   Embedded content
+   ========================================================================== */
+/*
+ * Remove border when inside `a` element in IE 8/9.
+ */
+img {
+  border: 0; }
+
+/*
+ * Correct overflow displayed oddly in IE 9.
+ */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* ==========================================================================
+   Figures
+   ========================================================================== */
+/*
+ * Address margin not present in IE 8/9 and Safari 5.
+ */
+figure {
+  margin: 0; }
+
+/* ==========================================================================
+   Forms
+   ========================================================================== */
+/*
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75em; }
+
+/*
+ * 1. Correct `color` not being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero out fieldsets.
+ */
+legend {
+  border: 0;
+  /* 1 */
+  padding: 0;
+  /* 2 */ }
+
+/*
+ * 1. Correct font family not being inherited in all browsers.
+ * 2. Correct font size not being inherited in all browsers.
+ * 3. Address margins set differently in Firefox 4+, Safari 5, and Chrome.2xl\:focus-within\:text-pink-50:focus-within{--tw-text-opacity:1;color:rgba(253,242,248,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-100:focus-within{--tw-text-opacity:1;color:rgba(252,231,243,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-200:focus-within{--tw-text-opacity:1;color:rgba(251,207,232,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-300:focus-within{--tw-text-opacity:1;color:rgba(249,168,212,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-400:focus-within{--tw-text-opacity:1;color:rgba(244,114,182,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-500:focus-within{--tw-text-opacity:1;color:rgba(236,72,153,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-600:focus-within{--tw-text-opacity:1;color:rgba(219,39,119,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-700:focus-within{--tw-text-opacity:1;color:rgba(190,24,93,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-800:focus-within{--tw-text-opacity:1;color:rgba(157,23,77,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-90

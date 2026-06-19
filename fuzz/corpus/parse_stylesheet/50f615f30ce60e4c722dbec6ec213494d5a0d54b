@@ -1,0 +1,37 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.forntax-markup-deleted-text: #6e011a;--color-prettylights-syntax-markup-deleted-bg: #fff0ee;--color-prettylights-syntax-markup-inserted-text: #024c1a;--color-prettylights-syntax-markup-inserted-bg: #d2fedb;--color-prettylights-syntax-markup-changed-text: #702c00;--color-prettylights-syntax-markup-changed-bg: #ffc67b;--color-prettylights-syntax-markup-ignored-text: #d1d9e0;--color-prettylights-syntax-markup-ignored-bg: #023b95;--color-prettylights-syntax-meta-diff-range: #622cbc;--color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;--shadow-inset: inset 0px 1px 0px 0px #0104090a;--shadow-resting-xsmall: 0px 1px 0px 0px #0104091a;--shadow-resting-small: 0px 1px 0px 0px #0104090a;--shadow-resting-medium: 0px 3px 6px 0px #25292e1f;--shadow-floating-small: 0px 0px 0px 1px #454c5480, 0px 6px 12px -3px #25292e0a, 0px 6px 18px 0px #25292e1f;--shadow-floating-medium: 0px 0px 0px 1px #454c54, 0px 8px 16px -4px #25292e14, 0px 4px 32px -4px #25292e14, 0px 24px 48px -12px #25292e14, 0px 48px 96px -24px #25292e14;--shadow-floating-large: 0pxm-control:disabled, .form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+input[type="date"].form-control,
+input[type="time"].form-control,
+input[type="datetime-local"].form-control,
+inp 0px 0px 1px #454c54, 0px 40px 80px 0px #25292e3d;--shadow-floating-xlarge: 0px 0px 0px 1px #454c54, 0px 56px 112px 0ut[type="month"].form-control {
+  -webkit-appearance: none;
+  -moz-appearance: px #25292e52;--shadow-floating-lenone;
+  appeagacy: 0px 6pr

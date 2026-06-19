@@ -1,0 +1,198 @@
+   box-shadow: var(--shadow-active);
+  }
+  &:active:is([aria-pressed], [aria-expanded]) {
+    color: var(--accent);
+    box-shadow: var(--pressed-shadow-active);
+  }
+  &:where([aria-pressed=true], [aria-expanded=true]) {
+    box-shadow: var(--pressed-shadow);
+    background: var(--pressed-interactive-bg);
+    color: var(--accent);
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--pressed-shadow-focus);
+    }
+  }
+  &:disabled {
+    cursor: not-allowed;
+    --fg: var(--muted-fg);
+    box-shadow: var(--shadow-disabled);
+  }
+  &:is(.big, .\<big\>) {
+    min-block-size: calc(1.5 * var(--rhythm, 1rlh));
+    font-size: 1rem;
+    padding-inline: calc(.5 * var(--rhythm, 1rlh));
+    line-height: var(--rhythm, 1rlh);
+  }
+}
+a.\<button\>:not([specificity-hack]) {
+  cursor: default;
+}
+strong > :where(button, input[type=submit], input[type=reset], input[type=button], .\<button\>):not(.\<a\>) {
+  background: var(--accent);
+  color: var(--box-bg);
+  border-color: transparent;
+  font-weight: bold;
+  &:is(.plain, .info, .ok, .warn, .bad) {
+    --fg: var[data-cols\@p^="11 "] {
+    grid-column-start: 11;
+  }
+  [data-cols\@p$=" 11"] {
+    grid-column-end: 12;
+  }
+  [data-cols\@p="11"] {
+    grid-column: 11;
+  }
+  [data-cols\@p^="12 "] {
+    grid-column-start: 12;
+  }
+  [data-cols\@p$=" 12"] {
+    grid-column-end: 13;
+  }
+  [data-cols\@p="12"] {
+    grid-column: 12;
+  }
+  [data-rows\@p^="1 "] {
+    grid-row-start: 1;
+  }
+  [data-rows\@p$=" 1"] {
+    grid-row-end: 2;
+  }
+  [data-rows\@p="1"] {
+    grid-row: 1;
+  }
+  [data-rows\@p^="2 "] {
+    grid-row-start: 2;
+  }
+  [data-rows\@p$=" 2"] {
+    grid-row-end: 3;
+  }
+  [data-rows\@p="2"] {
+    grid-row: 2;
+  }
+  [data-rows\@p^="3 "] {
+    grid-row-start: 3;
+  }
+  [data-rows\@p$=" 3"] {
+    grid-row-end: 4;
+  }
+  [data-rows\@p="3"] {
+    grid-row: 3;
+  }
+  [data-rows\@p^="4 "] {
+    grid-row-start: 4;
+  }
+  [data-rows\@p$=" 4"] {
+    grid-row-end: 5;
+  }
+  [data-rows\@p="4"] {
+    grid-row: 4;
+  }
+  [data-rowsL@p^="5 "] {
+    grid-row-start: 5;
+  }
+  [data-rows\@p$=" 5"] {
+    grid-row-end: 6;
+  }
+  [data-rows\@p="5"] {
+    grid-row: 5;
+  }
+  [data-rows\@p^="6 "] {
+    grid-row-start: 6;
+  }
+  [data-rows\@p$=" 6"] {
+    grid-row-end: 7;
+  }
+  [data-rows\@p="6"] {
+    grid-row: 6;
+  }
+  [data-rows\@p^="7 "] {
+    grid-row-start: 7;
+  }
+  [data-rows\@p$=" 7"] {
+    grid-row-end: 8;
+  }
+  [data-rows\@p="7"] {
+    grid-row: 7;
+  }
+  [data-rows\@p^="8 "] {
+    grid-row-start: 8;
+  }
+  [data-rows\@p$=" 8"] {
+    grid-row-end: 9;
+  }
+  [data-rows\@p="8"] {
+    grid-row: 8;
+  }
+  [data-rows\@p^="9 "] {
+    grid-row-start: 9;
+  }
+  [data-rows\@p$=" 9"] {
+    grid-row-end: 10;
+  }
+  [data-rows\@p="9"] {
+    grid-row: 9;
+  }
+  [data-rows\"] {
+    grid-row: 11;
+  }
+  [data-rows\@p^="12 "] {
+    grid-row-start: 12;
+  }
+  [data-rows\@p$=" 12"] {
+    grid-row-end: 13;
+  }
+  [data-rows\@p="12"] {
+    grid-row: 12;
+-color: transparent;
+  font-weight: bold;
+}
+strong > input:is(.plain, .info, .ok, .warn, .bad)::file-selector-button {
+  --fg: var(--box-bg);
+  --muted-accent: var(--graphical-fg);
+}
+strong > input:disabled::file-selector-button {
+}
+input:not([type]),
+input[type=text],
+input[type=search],
+input[type=tel],
+input[type=url],
+input[type=email],
+input[type=password],
+input[type=date],
+input[type=month],
+input[type=week],
+input[type=time],
+input[type=datetime],
+input[type=datetime-local],
+input[type=number],
+select,
+textarea {
+  padding: calc(var(--rhythm, 1rlh) / 4);
+  vertical-align: top;
+  font-size: 1rem;
+  line-height: inherit;
+  font-family: var(--main-font);
+  background: var(--bg);
+  color: var(--fg);
+  border: var(--interactive-border-width) var(--interactive-border-style) var(--graphical-fg);
+  border-radius: var(--interactive-border-radius);
+  vertical-align: top;
+  &:focus-visible {
+    border: var(--interactive-border-width) var(--interactive-border-style) var(--accent);
+  }
+  &::placeholder {
+    color: var(--muted-fg);
+    opacity: 1;
+    text-align: end;
+  }
+}
+input[type=range] {
+  width: 100%;
+  padding: calc(var(--gap) / 4);
+}
+input[type=color] {
+  padding: 0;
+  margin: 0;
+  height: 

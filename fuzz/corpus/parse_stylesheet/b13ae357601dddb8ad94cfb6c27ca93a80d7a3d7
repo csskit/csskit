@@ -1,0 +1,2 @@
+a (min-width: 992px) {
+  .container, .md\:left-1\/4{left:25%}.md\:left-2\/4{left:50%}.md\:left-3\/4{left:75%}.md\:left-full{left:100%}.md\container-sm, .container-md, .c:-left-1\/2{leofnt
