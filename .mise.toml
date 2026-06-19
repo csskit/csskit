@@ -9,6 +9,7 @@ hyperfine = "latest"
 "cargo:git-cliff" = "2.10.1"
 "cargo:samply" = "0.13.1"
 "cargo:wasm-bindgen-cli" = "0.2.122"
+"npm:wasm-opt" = "1.4.0"
 "cargo:cargo-fuzz" = "0.13.1"
 
 [tasks.clean]
