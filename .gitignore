@@ -14,3 +14,7 @@ website/_site
 *.vsix
 packages/csskit_vscode/dist/
 packages/csskit-*/bin/csskit
+packages/csskit/index.*
+packages/csskit/csskit_wasm_bg.wasm*
+packages/csskit/bundle/
+packages/csskit/node_modules/
