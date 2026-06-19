@@ -7,7 +7,7 @@ use css_parse::{
 	CursorCompactWriteSink, CursorOverlaySink, CursorPrettyWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors,
 };
 use csskit_transform::{CssMinifierFeature, Transformer};
-#[cfg(not(feature = "fancy"))]
+#[cfg(all(feature = "miette", not(feature = "fancy")))]
 use miette::JSONReportHandler;
 #[cfg(feature = "fancy")]
 use miette::{GraphicalReportHandler, GraphicalTheme};
@@ -94,9 +94,9 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 pub fn format(source_text: String, options: JsValue) -> Result<String, serde_wasm_bindgen::Error> {
 	let options: FormatOptions = match serde_wasm_bindgen::from_value(options) {
 		Ok(opts) => opts,
-		Err(e) => {
+		Err(_e) => {
 			#[cfg(feature = "console_error_panic_hook")]
-			web_sys::console::warn_1(&format!("Failed to parse format options: {}. Using defaults.", e).into());
+			web_sys::console::warn_1(&format!("Failed to parse format options: {}. Using defaults.", _e).into());
 			FormatOptions::default()
 		}
 	};

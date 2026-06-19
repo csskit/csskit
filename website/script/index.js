@@ -21,7 +21,7 @@ import {
 } from "@codemirror/language";
 import { csskitLight } from "./theme.js";
 
-import { format, lex, minify, parse, parse_error_report } from "csskit_wasm";
+import { format, lex, minify, parse, parse_error_report } from "csskit/bundler";
 
 function createHighlightEffect(view, { start, end }) {
   let range = EditorSelection.range(start, end);

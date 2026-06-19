@@ -140,8 +140,15 @@ jobs:
       - name: Print packages/ tree
         run: tree packages/
 
+      - name: Add wasm32 target
+        run: rustup target add wasm32-unknown-unknown
+
       - name: Install Dependencies
         run: npm i
+        working-directory: ./packages/csskit
+
+      - name: Build wasm
+        run: npm run build
         working-directory: ./packages/csskit
 
       - name: Release
