@@ -1,0 +1,26 @@
+body > :where(row-stack, col-stack) {
+	min-height: 100dvh;
+}
+
+row-stack:not([popover]),
+col-stack:not([popover]) {
+	display: flex;
+}
+
+:where(col-stack > :not([height])) {
+	flex: 2;
+}
+
+:where(row-stack > :not([width], a)) {
+	flex: 2;
+}
+
+row-stack {
+	flex-direction: row;
+	height: 100%;
+}
+
+col-stack {
+	flex-direction: column;
+	width: 100%;
+}
