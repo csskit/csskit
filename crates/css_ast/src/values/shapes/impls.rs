@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -30,8 +30,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "outside-shape");
 		assert_parse!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "display");
 		assert_parse!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "url(\"shape.svg\")");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeInsideStyleValue, "none");
 	}
 
 	#[test]
@@ -41,16 +41,16 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "content-box");
 		assert_parse!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "border-box");
 		assert_parse!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "url(\"shape.svg\")");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeOutsideStyleValue, "auto");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "10px");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "10px");
 
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeMarginStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeMarginStyleValue, "10");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeMarginStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeMarginStyleValue, "10");
 	}
 }

@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -69,10 +69,10 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationTriggerStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationTriggerStyleValue, "play");
-		assert_parse_error!(CssAtomSet::ATOMS, EventTriggerNameStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, TimelineTriggerNameStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, TriggerScopeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationTriggerStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationTriggerStyleValue, "play");
+		assert_peek_false!(CssAtomSet::ATOMS, EventTriggerNameStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TimelineTriggerNameStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TriggerScopeStyleValue, "auto");
 	}
 }

@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -32,7 +32,7 @@ mod tests {
 
 	#[test]
 	fn test_forced_color_adjust_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ForcedColorAdjustStyleValue, "exact");
+		assert_peek_false!(CssAtomSet::ATOMS, ForcedColorAdjustStyleValue, "exact");
 		assert_parse_error!(CssAtomSet::ATOMS, ForcedColorAdjustStyleValue, "auto none");
 	}
 
@@ -44,7 +44,7 @@ mod tests {
 
 	#[test]
 	fn test_print_color_adjust_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, PrintColorAdjustStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PrintColorAdjustStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, PrintColorAdjustStyleValue, "economy exact");
 	}
 }

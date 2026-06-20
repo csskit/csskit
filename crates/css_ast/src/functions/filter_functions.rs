@@ -185,7 +185,7 @@ pub struct SepiaFunction {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -220,8 +220,8 @@ mod tests {
 
 	#[test]
 	fn test_filter_function_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, FilterFunction, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, FilterFunction, "foo()");
+		assert_peek_false!(CssAtomSet::ATOMS, FilterFunction, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FilterFunction, "foo()");
 		assert_parse_error!(CssAtomSet::ATOMS, FilterFunction, "blur(-5px)");
 	}
 
@@ -235,6 +235,6 @@ mod tests {
 
 	#[test]
 	fn test_filter_value_list_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, FilterValueList, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FilterValueList, "none");
 	}
 }

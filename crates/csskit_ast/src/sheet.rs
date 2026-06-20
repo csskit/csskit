@@ -12,7 +12,7 @@ use crate::stat_rule::StatRule;
 use crate::when_rule::WhenRule;
 
 /// A stats stylesheet containing rules for collecting statistics and diagnostics.
-#[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Sheet<'a> {
 	pub rules: Vec<'a, Rule<'a>>,
 }

@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -25,7 +25,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "reversed(foo)");
 		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "reversed(foo) 3");
 		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "my-counter reversed(foo)");
-		assert_parse_error!(CssAtomSet::ATOMS, CounterResetStyleValue, "123");
+		assert_peek_false!(CssAtomSet::ATOMS, CounterResetStyleValue, "123");
 	}
 
 	#[test]
@@ -38,7 +38,7 @@ mod tests {
 
 	#[test]
 	fn test_counter_increment_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, CounterIncrementStyleValue, "123");
+		assert_peek_false!(CssAtomSet::ATOMS, CounterIncrementStyleValue, "123");
 	}
 
 	#[test]
@@ -51,6 +51,6 @@ mod tests {
 
 	#[test]
 	fn test_counter_set_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, CounterSetStyleValue, "123");
+		assert_peek_false!(CssAtomSet::ATOMS, CounterSetStyleValue, "123");
 	}
 }

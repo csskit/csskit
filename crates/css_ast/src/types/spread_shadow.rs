@@ -35,7 +35,7 @@ pub enum ShadowPosition {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -76,7 +76,7 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, SpreadShadow, "");
+		assert_peek_false!(CssAtomSet::ATOMS, SpreadShadow, "");
 		assert_parse_error!(CssAtomSet::ATOMS, SpreadShadow, "10px");
 		assert_parse_error!(CssAtomSet::ATOMS, SpreadShadow, "red");
 		assert_parse_error!(CssAtomSet::ATOMS, SpreadShadow, "inset");

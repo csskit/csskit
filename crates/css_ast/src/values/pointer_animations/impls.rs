@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -28,9 +28,9 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, PointerTimelineAxisStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PointerTimelineAxisStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, PointerTimelineAxisStyleValue, "block inline");
-		assert_parse_error!(CssAtomSet::ATOMS, PointerTimelineNameStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, PointerTimelineStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PointerTimelineNameStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PointerTimelineStyleValue, "auto");
 	}
 }

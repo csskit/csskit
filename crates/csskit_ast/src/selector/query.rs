@@ -861,7 +861,7 @@ impl QuerySizePseudo {
 mod tests {
 	use super::{QueryCompoundSelector, QuerySelectorList};
 	use crate::CsskitAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn test_parse_simple_type() {
@@ -960,7 +960,7 @@ mod tests {
 
 	#[test]
 	fn test_parse_class_unsupported() {
-		assert_parse_error!(CsskitAtomSet::ATOMS, QueryCompoundSelector, ".foo");
+		assert_peek_false!(CsskitAtomSet::ATOMS, QueryCompoundSelector, ".foo");
 	}
 
 	#[test]

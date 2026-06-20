@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -37,10 +37,10 @@ mod tests {
 
 	#[test]
 	fn test_block_size_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockSizeStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "-10px");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "-20%");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "60");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockSizeStyleValue, "60");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "10px 20%");
 	}
 
@@ -55,9 +55,9 @@ mod tests {
 
 	#[test]
 	fn test_inline_size_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, InlineSizeStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, InlineSizeStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, InlineSizeStyleValue, "-10px");
-		assert_parse_error!(CssAtomSet::ATOMS, InlineSizeStyleValue, "60");
+		assert_peek_false!(CssAtomSet::ATOMS, InlineSizeStyleValue, "60");
 		assert_parse_error!(CssAtomSet::ATOMS, InlineSizeStyleValue, "10px 20%");
 	}
 
@@ -93,8 +93,8 @@ mod tests {
 
 	#[test]
 	fn test_margin_block_start_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MarginBlockStartStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, MarginBlockStartStyleValue, "10");
+		assert_peek_false!(CssAtomSet::ATOMS, MarginBlockStartStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, MarginBlockStartStyleValue, "10");
 	}
 
 	#[test]
@@ -121,7 +121,7 @@ mod tests {
 
 	#[test]
 	fn test_margin_block_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MarginBlockStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, MarginBlockStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, MarginBlockStyleValue, "10px auto 20px");
 	}
 
@@ -138,10 +138,10 @@ mod tests {
 
 	#[test]
 	fn test_padding_block_start_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "-10px");
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "10");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingBlockStartStyleValue, "10");
 	}
 
 	#[test]
@@ -152,7 +152,7 @@ mod tests {
 
 	#[test]
 	fn test_padding_block_end_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockEndStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingBlockEndStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockEndStyleValue, "-10px");
 		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockEndStyleValue, "1px, 2px");
 	}
@@ -176,9 +176,9 @@ mod tests {
 
 	#[test]
 	fn test_padding_block_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingBlockStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStyleValue, "1px 2px 3px");
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingBlockStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingBlockStyleValue, "auto");
 	}
 
 	#[test]
@@ -188,7 +188,7 @@ mod tests {
 
 	#[test]
 	fn test_padding_inline_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, PaddingInlineStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, PaddingInlineStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, PaddingInlineStyleValue, "10px auto 20px");
 	}
 }

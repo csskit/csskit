@@ -949,7 +949,7 @@ mod chromashift_impl {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -971,7 +971,7 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, RgbChannelKeyword, "h");
-		assert_parse_error!(CssAtomSet::ATOMS, HslChannelKeyword, "r");
+		assert_peek_false!(CssAtomSet::ATOMS, RgbChannelKeyword, "h");
+		assert_peek_false!(CssAtomSet::ATOMS, HslChannelKeyword, "r");
 	}
 }

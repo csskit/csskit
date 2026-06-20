@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -20,8 +20,8 @@ mod tests {
 
 	#[test]
 	fn test_all_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AllStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, AllStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, AllStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AllStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, AllStyleValue, "unset inherit");
 	}
 }

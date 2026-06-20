@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -53,24 +53,24 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ClipStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ClipStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ClipRuleStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ClipRuleStyleValue, "1");
 		assert_parse_error!(CssAtomSet::ATOMS, ClipStyleValue, "rect(10px)");
-		assert_parse_error!(CssAtomSet::ATOMS, ClipRuleStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, ClipRuleStyleValue, "1");
 
-		assert_parse_error!(CssAtomSet::ATOMS, MaskBorderModeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MaskBorderModeStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskBorderModeStyleValue, "luminance alpha");
 
-		assert_parse_error!(CssAtomSet::ATOMS, MaskTypeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MaskTypeStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskTypeStyleValue, "luminance alpha");
 
-		assert_parse_error!(CssAtomSet::ATOMS, MaskRepeatStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, MaskRepeatStyleValue, "repeat-z");
+		assert_peek_false!(CssAtomSet::ATOMS, MaskRepeatStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MaskRepeatStyleValue, "repeat-z");
 
 		assert_parse_error!(CssAtomSet::ATOMS, MaskSizeStyleValue, "-1px");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskSizeStyleValue, "1px 2px 3px");
 
-		assert_parse_error!(CssAtomSet::ATOMS, MaskPositionStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MaskPositionStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskPositionStyleValue, "1px 2px 3px");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskPositionStyleValue, "left right");
 	}

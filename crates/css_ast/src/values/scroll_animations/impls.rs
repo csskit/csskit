@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -36,8 +36,8 @@ mod tests {
 
 	#[test]
 	fn test_animation_range_start_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "peek 50%");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "peek 50%");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "50% contain");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "normal 10px");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "contain contain");
@@ -57,9 +57,9 @@ mod tests {
 
 	#[test]
 	fn test_animation_range_end_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "infinite");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "peek 50%");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "infinite");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "peek 50%");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationRangeEndStyleValue, "normal 10px");
 	}
 
@@ -73,8 +73,8 @@ mod tests {
 
 	#[test]
 	fn test_scroll_timeline_axis_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollTimelineAxisStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollTimelineAxisStyleValue, "horizontal");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollTimelineAxisStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollTimelineAxisStyleValue, "horizontal");
 		assert_parse_error!(CssAtomSet::ATOMS, ScrollTimelineAxisStyleValue, "block inline");
 	}
 
@@ -87,8 +87,8 @@ mod tests {
 
 	#[test]
 	fn test_scroll_timeline_name_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollTimelineNameStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollTimelineNameStyleValue, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollTimelineNameStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollTimelineNameStyleValue, "foo");
 	}
 
 	#[test]
@@ -115,7 +115,7 @@ mod tests {
 
 	#[test]
 	fn test_timeline_scope_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TimelineScopeStyleValue, "foo");
-		assert_parse_error!(CssAtomSet::ATOMS, TimelineScopeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TimelineScopeStyleValue, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, TimelineScopeStyleValue, "auto");
 	}
 }

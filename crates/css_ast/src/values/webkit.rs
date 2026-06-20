@@ -1232,7 +1232,7 @@ pub struct WebkitPerspectiveStyleValue;
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -1250,7 +1250,7 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitFilterStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitFilterStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1287,7 +1287,7 @@ mod tests {
 
 	#[test]
 	fn test_flex_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitFlexStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitFlexStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1304,7 +1304,7 @@ mod tests {
 
 	#[test]
 	fn test_order_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitOrderStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitOrderStyleValue, "none");
 	}
 
 	#[test]
@@ -1322,7 +1322,7 @@ mod tests {
 
 	#[test]
 	fn test_appearance_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAppearanceStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAppearanceStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1339,7 +1339,7 @@ mod tests {
 
 	#[test]
 	fn test_transform_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitTransformStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitTransformStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1357,7 +1357,7 @@ mod tests {
 
 	#[test]
 	fn test_font_smoothing_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitFontSmoothingStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitFontSmoothingStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1374,7 +1374,7 @@ mod tests {
 
 	#[test]
 	fn test_text_size_adjust_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitTextSizeAdjustStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitTextSizeAdjustStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1393,7 +1393,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_delay_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAnimationDelayStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationDelayStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1413,7 +1413,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_duration_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAnimationDurationStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationDurationStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1433,7 +1433,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_fill_mode_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAnimationFillModeStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationFillModeStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1453,7 +1453,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_iteration_count_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAnimationIterationCountStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationIterationCountStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1472,7 +1472,8 @@ mod tests {
 
 	#[test]
 	fn test_animation_name_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "1px");
 	}
 
 	#[test]
@@ -1493,7 +1494,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_timing_function_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitAnimationTimingFunctionStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationTimingFunctionStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1512,7 +1513,7 @@ mod tests {
 
 	#[test]
 	fn test_backface_visibility_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitBackfaceVisibilityStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitBackfaceVisibilityStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1532,7 +1533,7 @@ mod tests {
 
 	#[test]
 	fn test_tap_highlight_color_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitTapHighlightColorStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitTapHighlightColorStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1552,7 +1553,7 @@ mod tests {
 
 	#[test]
 	fn test_transition_duration_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitTransitionDurationStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitTransitionDurationStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1572,7 +1573,7 @@ mod tests {
 
 	#[test]
 	fn test_transition_timing_function_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitTransitionTimingFunctionStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitTransitionTimingFunctionStyleValue, "invalid");
 	}
 
 	#[test]
@@ -1583,6 +1584,6 @@ mod tests {
 
 	#[test]
 	fn test_webkit_perspective_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WebkitPerspectiveStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitPerspectiveStyleValue, "invalid");
 	}
 }

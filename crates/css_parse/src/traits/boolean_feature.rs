@@ -124,6 +124,15 @@ macro_rules! boolean_feature {
 			Bare($crate::T!['('], $crate::T![Ident], $crate::T![')']),
 		}
 
+		impl<'a> $crate::Peek<'a> for $feature {
+			fn peek<Iter>(p: &$crate::Parser<'a, Iter>, c: $crate::Cursor) -> bool
+			where
+				Iter: Iterator<Item = $crate::Cursor> + Clone,
+			{
+				c == $crate::Kind::LeftParen && p.peek_n(2) == $crate::Kind::Ident
+			}
+		}
+
 		impl<'a> $crate::Parse<'a> for $feature {
 			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
 			where

@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -143,6 +144,11 @@ StyleSheet(
                   len: 1,
                 ))),
               ),
+              Whitespace(Cursor(
+                kind: "Whitespace",
+                offset: SourceOffset(56),
+                len: 1,
+              )),
             ],
           ),
         ],

@@ -42,7 +42,7 @@ impl<'a> Parse<'a> for GlyphOrientationVerticalStyleValue {
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -68,10 +68,13 @@ mod tests {
 	}
 
 	#[test]
+	fn test_peek() {
+		assert_peek_false!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "128");
+		assert_peek_false!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "50deg");
+	}
+
+	#[test]
 	fn test_parse_error() {
-		assert_parse_error!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "128");
-		assert_parse_error!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "50deg");
-		assert_parse_error!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "50deg");
 		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 1");
 		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 2 2");
 		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 5");

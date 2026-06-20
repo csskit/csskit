@@ -6,7 +6,7 @@ pub(crate) use csskit_proc_macro::*;
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	pub fn size_test() {
@@ -28,8 +28,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "no-overflow");
 		assert_parse!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "anchor-valid anchor-visible");
 		assert_parse!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "anchor-valid anchor-visible no-overflow");
-		assert_parse_error!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "none");
 	}
 
 	#[test]
@@ -41,8 +41,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "--my-fallback flip-block");
 		assert_parse!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "top");
 		assert_parse!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "--a,--b,flip-block");
-		assert_parse_error!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, PositionTryFallbacksStyleValue, "auto");
 	}
 
 	#[test]

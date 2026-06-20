@@ -21,7 +21,7 @@ pub struct ReversedCounterName {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -36,8 +36,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ReversedCounterName, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ReversedCounterName, "my-counter");
-		assert_parse_error!(CssAtomSet::ATOMS, ReversedCounterName, "counter(foo)");
+		assert_peek_false!(CssAtomSet::ATOMS, ReversedCounterName, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ReversedCounterName, "my-counter");
+		assert_peek_false!(CssAtomSet::ATOMS, ReversedCounterName, "counter(foo)");
 	}
 }

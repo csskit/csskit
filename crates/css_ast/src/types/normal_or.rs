@@ -30,7 +30,7 @@ impl<T: Copy> Copy for NormalOr<T> {}
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use css_parse::{T, assert_parse, assert_parse_error, assert_peek_false};
 
 	type NormalOrIdent = NormalOr<T![Ident]>;
 
@@ -49,8 +49,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, NormalOrIdent, "");
-		assert_parse_error!(CssAtomSet::ATOMS, NormalOrIdent, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, NormalOrIdent, "");
+		assert_peek_false!(CssAtomSet::ATOMS, NormalOrIdent, "0");
 		assert_parse_error!(CssAtomSet::ATOMS, NormalOrIdent, "normal normal");
 		assert_parse_error!(CssAtomSet::ATOMS, NormalOrIdent, "normal all");
 	}

@@ -30,7 +30,7 @@ pub enum FeatureTagToggle {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -56,6 +56,6 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, FeatureTagValue, "\"ker\"");
 		assert_parse_error!(CssAtomSet::ATOMS, FeatureTagValue, "\"kerns\"");
 		assert_parse_error!(CssAtomSet::ATOMS, FeatureTagValue, "\"kern\" -1");
-		assert_parse_error!(CssAtomSet::ATOMS, FeatureTagValue, "kern");
+		assert_peek_false!(CssAtomSet::ATOMS, FeatureTagValue, "kern");
 	}
 }
