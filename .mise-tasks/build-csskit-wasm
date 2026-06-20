@@ -1,0 +1,40 @@
+#!/usr/bin/env bash
+set -eu pipefail
+#MISE description="Build csskit wasm for the csskit npm package (node + bundler targets)"
+
+REPO_ROOT="$(git rev-parse --show-toplevel)"
+PKG="$REPO_ROOT/packages/csskit"
+
+cargo build \
+  --target wasm32-unknown-unknown \
+  --release \
+  -p csskit_wasm \
+  --no-default-features \
+  --features serde
+
+wasm-bindgen \
+  --out-dir "$PKG" \
+  --target nodejs \
+  "$REPO_ROOT/target/wasm32-unknown-unknown/release/csskit_wasm.wasm"
+
+mv "$PKG/csskit_wasm.js" "$PKG/index.js"
+mv "$PKG/csskit_wasm.d.ts" "$PKG/index.d.ts"
+
+wasm-bindgen \
+  --out-dir "$PKG/bundle" \
+  --target bundler \
+  "$REPO_ROOT/target/wasm32-unknown-unknown/release/csskit_wasm.wasm"
+
+npx --yes wasm-opt@1.4.0 \
+  --enable-bulk-memory \
+  --enable-nontrapping-float-to-int \
+  -Oz \
+  -o "$PKG/csskit_wasm_bg.wasm" \
+  "$PKG/csskit_wasm_bg.wasm"
+
+npx --yes wasm-opt@1.4.0 \
+  --enable-bulk-memory \
+  --enable-nontrapping-float-to-int \
+  -Oz \
+  -o "$PKG/bundle/csskit_wasm_bg.wasm" \
+  "$PKG/bundle/csskit_wasm_bg.wasm"

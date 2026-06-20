@@ -25,9 +25,6 @@
 		"./csskit_wasm_bg.wasm.d.ts",
 		"./bundle"
 	],
-	"scripts": {
-		"build": "cargo build --target wasm32-unknown-unknown --release -p csskit_wasm --no-default-features --features serde && wasm-bindgen --out-dir ./ --target nodejs ../../target/wasm32-unknown-unknown/release/csskit_wasm.wasm && mv ./csskit_wasm.js ./index.js && mv ./csskit_wasm.d.ts ./index.d.ts && wasm-bindgen --out-dir ./bundle --target bundler ../../target/wasm32-unknown-unknown/release/csskit_wasm.wasm && wasm-opt --enable-bulk-memory --enable-nontrapping-float-to-int -Oz -o ./csskit_wasm_bg.wasm ./csskit_wasm_bg.wasm && wasm-opt --enable-bulk-memory --enable-nontrapping-float-to-int -Oz -o ./bundle/csskit_wasm_bg.wasm ./bundle/csskit_wasm_bg.wasm"
-	},
     "optionalDependencies": {
 		"csskit-darwin-arm64": "0.0.25",
 		"csskit-darwin-x64": "0.0.25",
