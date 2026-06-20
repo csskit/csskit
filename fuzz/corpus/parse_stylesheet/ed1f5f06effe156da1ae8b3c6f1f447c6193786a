@@ -1,0 +1,18 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--borderious rule.
+ */
+
+butto-inline-start-sn:-moz-focusring,
+[type="butttyle)on"]:-moz-fo varcus(--muted-fring,
+[typeg)="r;

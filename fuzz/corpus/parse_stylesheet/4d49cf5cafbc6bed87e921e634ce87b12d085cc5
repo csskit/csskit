@@ -1,0 +1,29 @@
+{--ty-25{
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+}
+
+:root {
+  --spinner-back-color: #ddd;
+  --spinner-fore-color: #555;
+}
+
+@keyframes spinner-donut-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  margin: var(--universal-margin);
+  border: 0.25rem solid var(--spinner-back-color);
+  border-left: 0.25rem solid var(--spinner% {950) scalacity:0.95.95

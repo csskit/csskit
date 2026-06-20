@@ -1,0 +1,11 @@
+#ffd8b5;--color-prettylights-syntax-markup-ignored-text: #d1d9e0;--color-prettylights-syntax-markup-ignored-bg: #0550ae;--color-prettylights-syntax-meta-diff-range: #8250df;--color-prettylights-syntax-sublimelinter-gutter-mark: #818b98;--shadow-inset: inset 0px 1px 0px 0px #1f23280a;--shadow-resting-xsmall: 0px 1px 0px 0px #1f23281a;--shadow-resting-small: 0px 1px 0px 0px #1f23280a;--shadow-resting-medium: 0px 3px 6px 0px #25292e1f;--shadow-floating-small: 0px 0px 0px 1px #d1d9e080, 0px 6px 12px -3px #25292e0a, 0px 6px 18px 0px #25292e1f;--shadow-floating-medium: 0px 0px 0px 1px #d1d9e0, 0px 8px 16px -4px #25292e14, 0px 4px 32px -4px #25292e14, 0px 24px 48px -12px #25292e14, 0px 48px 96px -24px #25292e14;--shadow {
+  grid-column: 1;
+}
+[data-cols^="2 "] {
+  grid-column-start: 2;
+}
+[data-cols$=" 2"] {
+  grid-column-end: 3;
+}
+[data-cols="2"] {
+  grid-c #a0111f;--codeMirror-syntax-fgColor-storage: #a0111f;--codeMirror-syntax-fgColor-string: #032563;--codeMirror-syntax-fgColor-support: #023b95;--codeMirror-syntax-fgColor-variableo: #702c00;-

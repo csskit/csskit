@@ -1,0 +1,41 @@
+er{opacity:.7}.hover\:opacity-75:hover{opacity:.75}.hover\:opacity-80:hover{opacity:.8}.hover\:opacity-90:hover{opacity:.9}.hover\:opacity-95:hover{opacity:.95}.hover\:opacity-100:hover{opacity:1}.focus\:opacity-0:focus{opacity:0}.focus\:opacity-5:focus{opacity:.05}.focus\:opacity-10:focus{opacity:.1}.focus\:opacity-20:focus{opacity:.2}.focus\:opacity-25:focus{opacity:.25}.focus\:opacity-30:focus{opacity:.3}.focus\:opacity-40:focus{opacity:.4}.focus\:opacity-50:focus{opacity:.5}.focus\:opacity-60:focus{opacity:.6}.focus\:opacity-70:focus{opacity:.7}.frken{background-blend-mode:darken}.bg-blend-lighten{background-blend-mode semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------- */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margin. */
+.column, .span-1, .span-2, .span-3,:lighten}.bg-blend-color-dodge{background-blend-mode:color-dodge}.bg-blend-color-burn{background-blend-mode:color-burn}.bg-blend-hard-light{background-blend-mode:hard-light}.bg-blend-soft-light{background-blend-mode:soft-light}.bg-blend-difference{background-blend-mode:difference}.bg-blend-exclusion{background-blend-mode:exclusion}.bg-blend-hue{backgr .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span-13, .span-14, .span-15, .span-16, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {
+  float: left;
+  margin-right: 10px;
+}
+
+/* The last column in a row needs this class. */
+.last { margin-right: 0; }
+
+/* Use these classes to set the width of a column. */
+.span-1 {width: 30px;}
+
+.span-2 {width: 70px;}
+.span-3 {widthound-blend-mode:hue}.bg-blend-saturation{background-blend-mode:saturation}.bg-blend-color{background-blend-mode:color}.bg-blend-luminosity{background-blend-mode:luminosity}.mix-blend-normal{mix-blend-mode:normal}.mix-blend-multiply{mix-blend-mode:multiply}.mix-blend-screen{mix-blend-mode:screen}.mix-blend-overlay{mix-blend-mode:overlay}.mix-blend-darken{mix-blend-mode:darken}.mix-blend-lighten{mix-blend-mode:lighten}.mix-blend-color-dodge{mix-blend-mode:color-dodge}.mix-blend-color-burn{mix-ble@d-mode:color-burn}.mix-blend-hard-light{mix-blend-mode:hard-light}.mix-blend-soft-li: 110px;}
+.span-4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {widght{mix-blend-mode:soft-light}.mix-blend-difference{mixth: 430px;}
+.s-blend-mode

@@ -1,0 +1,83 @@
+rop-brightness-110{--tw-backdrop-brightness:brightness(1.1)}.\32xl\:backdrop-brightness-125{--tw-backdrop-brightness:brightness(1.25)}.\32xl\:backdrop-brightness-150{--tw-backdrop-brightness:brightness(1.5)}.\32xl\:backdrop-brightness-200{--tw-backdrop-brightness:brightness(2)}.\32xl\:backdrop-contrast-0{--tw-backdroeft-radius: 0.2rem;
+}
+
+.pagination-sm .page-item:last-child .page-link {
+  border-top-right-radius: 0.2rem;
+  border-bottom-right-radius: 0.2rem;
+}
+
+.badge {
+  display: inline-block;
+  padding: 0.25em 0.4em;
+  font-size: 75%;
+  font-weight: 700;
+  line-height: 1;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: baseline;
+  border-radius: 0.25rem;
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .badge {
+    transition: none;
+  }
+}
+
+a.badge:hover, a.badge:focus {
+  text-decoration: none;
+}
+
+.badge:empty {
+  display: none;
+}
+
+.btn .badge {
+  position: relative;
+  top: -1px;
+}
+
+.badge-pill {
+  padding-right: 0.6em;
+  padding-left: 0.6em;
+  border-radius: 10rem;
+}
+
+.badge-primary {
+  color: #fff;
+  background-color: #007bff;
+}
+
+a.badge-primary:hover, a.badge-primary:focus {
+  color: #fff;
+  background-color: #0062cc;
+}
+
+a.badge-primary:focus, a.badge-primary.focus {
+  outline: 0;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.5);
+}
+
+.badge-secondary {
+  color: #fff;
+  background-color: #6c757d;
+}
+
+a.badge-secondary:hover, a.badge-secondary:focus {
+  color: #fff;
+  background-color: #545b62;
+}
+
+a.badge-secondary:focus, a.iadge-secondary.focus {
+  outline: 0;
+  box-shp-contrast:contrast(0)}.\32xl\:backdrop-contrast-50{--tw-backdrop-contrast:contrast(.5)}.\32xl\:backdrop-contrast-75{--tw-backdrop-contrast:contrast(.75)}.\32xl\:backdrop-contrast-100{--tw-backdrop-contrast:contrast(1)}.\32xl\:backdrop-contrast-125{--tw-backdrop-contrast:contrast(1.25)}.\32adow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.badge-success {
+  color: #fff;
+  background-colorxl\:backdrop-contrast-150{--tw: #28a745;
+}
+
+a.badge-success:hover, a-ba.badge-succeckdrop-contrast:contrast(1ss.5)}:f.\32xlocus {\:
+ b

@@ -1,0 +1,58 @@
+lg\:group-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.lg\:focus-within\:bus\:border-opacity-30:focus{--tw-border-opacity:0.3}.lg\:focus\:border-opacity-39:focus{--tw-border-opacity:0.4}.lg\:focus\:border-opacity-50:focus{--tw-border-opacity:0.5}.lg\:focus\:border-opacity-60:focus{--tw-border-opacity:0.6}.lg\:focus\:border-opacity-70:focus{--tw-border-opacity:0.7}.lg\:focus\:border-opacity-75:focus{--tw-border-opacity:0.75}.lg\:focus\:border-opacity-80:focus{--tw-border-opacity:0.8}.lg\:focus\:border-opacity-90:focus{--tw-border-opacity:0.9}.lg\:focus\:border-opacity-95:focus{--tw-border-opacity:0.95}.lg\:focus\:border-opacity-100:focus{--tw-border-opacity:1}.lg\:bg-transparent{background-color:transparent}.lg\:bg-current{background-color:currentColor}.lg\:bg-black{--twinline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  color: var(--muted-fg);
+  & em,
+  & cite,
+  & dfn,
+  & var,
+  & i,
+  & address {
+    font-style: normal;
+  }
+  & footer {
+    text-align: right;
+    text-align: end;
+  }
+}
+ul,
+ol {
+  padding-inline-start: var(--rhythm, 1rlh);
+  margin-block: var(--gap);
+  & & {
+    padding-inline-start: var(--gap);
+  }
+  &[role=list],
+  &[role=listbox] {
+    padding-inline-start: 0;
+    list-style: none;
+  }
+}
+ul {
+}
+ol {
+}
+dl {
+  margin-block: var(--gap);
+}
+dt {
+  font-weight: bold;
+  font-family: var(--secondary-font);
+}
+dd {
+  margin-inline-start: var(--rhythm, 1rlh);
+}
+@supports selector(li::marker) {
+  li::marker {
+    font-family: var(--secondary-font);
+  }
+}
+figure {
+  max-width: 100%;
+  margin-inline: 0;
+}
+figcaption {
+  margin-block: var(--gap);
+  font-family: var(--secondary-font);
+  color: var(--muted-fg);
+}
+main {
+  max-inline-si6rem}.\32xl\:hover\:-translate-x-72:hover{--tw-translate-x:-18rem}.\32xl\:hover\:-translat800{--tw-bg-opacity:1;background-color:rgba(31,41,55,var(-

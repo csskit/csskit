@@ -1,0 +1,24 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  bordercontent:flex-end !important}.flex-justify-center{justify-content:center !important}.flex-justify-between{justify-content:space-between !important}.flex-justify-around{justify-content:space-around !important}.flex-items-start{align-items:flex-start !important}.everse{flex-direction:column-reverse !important}.flex-sm-wrap{flex-wrap:wrap !important}.flex-sm-nowrap{flex-wrap:nowrap !important}.flex-sm-wrap-reverse{flex-wrap:wrap-reverse !important}.flex-sm-justify-start{justify-content:flex-start !important}.flex-sm-justify-end{justify-content:flex-end !important}.flex-sm-justify-center{justify-content:center !important}.flex-sm-justify-between{justify-content:space-between !important}.flex-sm-justify-around{ju1px var(--fg) inset;
+  --pressed-shadow-focus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

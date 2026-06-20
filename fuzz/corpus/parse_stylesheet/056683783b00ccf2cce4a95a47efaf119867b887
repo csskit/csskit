@@ -1,0 +1,79 @@
+ntal > .list-group-item:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-left-radius: 0;
+}
+
+.list-group-horizontal > .list-group-item.active {
+  margin-top: 0;
+}
+
+.list-group-horizontal > .list-group-item + .list-group-item {
+  border-top-width: 1px;
+  border-left-wid--tw-border-opacity))}.\32xl\:focus-within\:border-red-900:focus-within{--tw-border-opacity:1;border-color:rgba(127,29,29,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-50:focus-within{--tw-border-opacity:1;border-color:rgba(255,251,235,var(--tw-border-opacilex-direction: row;
+    flex-;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    margin-left: 0;
+    border: 0;
+    border-radius: 0; }
+  @media print, screen and (max-width: 39.99875em) {
+    .reveal {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      min-height: 100%;
+      margin-left: 0;
+      border: 0;
+      border-radius: 0; } }
+  .reveal.without-overlay {
+    position: fixed; }
+
+.slider {
+  position: relative;
+  height: 0.5rem;
+  margin-top: 1.25rem;
+  margin-bottom: 2.25rem;
+  background-color: #e6e6e6;
+  cursor: pointer;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -ms-touch-action: none;
+      touch-action: none; }
+
+.slider-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inlinem-block;
+  max-width: 100%;
+  height: 0.5rem;
+  background-color: #cacaca;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out; }
+ direction: row;
+  }
+  .list-group-horizontal-md > .slider-fill .list-group-item:first-child {
+    border-bottom-left-radius: 0.25rem;
+    border-top-right-radius:.is-dragging {
+    -webkit-transition: all 0s linear;
+    transition: all 0s linear; }
+
+.slider-handle {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          t 0;
+  }
+  .list-group-horizontal-md > .list-ransform: tra

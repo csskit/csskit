@@ -1,0 +1,7 @@
+ble-hohizontal th {
+    border-width: 1 0 1;x 0;
+   --borderColor-attgntsolid #cbcbcb;
+}
+.pure-table-horizontal tbody > tr:last-child > td    
+{b order-bottom-width: 0;
+}

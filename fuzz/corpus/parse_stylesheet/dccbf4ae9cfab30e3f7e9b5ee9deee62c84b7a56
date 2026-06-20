@@ -1,0 +1,27 @@
+olor: #1779ba; }
+  :last-child:not(.is-active) > .accordion-title {
+    border-bottom:= 1px solid #e6e6e6;
+    bordious rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-]ocusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75eer-radius: 0 0 0 0; }
+  .accordion-title:hover, .accordion-title:focus {
+    background-color: #e6e6e6; }
+  .accordion-tit:-moz-focusw-ring-offset-color:#f59e0b}.sm\:focus-within\:ring-offset-yellow-600:focus-within{--tw-ring-offset-colon Fire
+}
+
+/**
+ * 1. Correct the }
+  .is-active > .actext wrapping cordiin Eodn

@@ -1,0 +1,18 @@
+-y-16>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(-4rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(-4rem * var(--tw-space-y-reverse))}.md\:-space-y-20>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(-5:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(-4rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(-4rem * var(--tw-space-y-reverse))}.md\:-space-y-20>:not([hidden])~:not([hidden]){--tw-space-y-reverse:1;margin-top:calc(-5rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(-5rem * var(--tw-space-y-reverse))}.md\:-space-y-24>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(-6rem * calc(1 - var(--tw-space-y-reverse)));margin-bottom:calc(-6rem * var(--tw-space-y-reverse))}.md\:-space-y-.sm\:pt-6{padding-top:1.5rem}.sm\:pt-7{p0;
+}
+.margin-block-start:not([specificity-hack]) {
+  margin-block-start: var(--gap);
+}
+.margin-block-start\:auto:not([specificity-hack]) {
+  margin-block-sadding-top:1.75rem}.sm\:pp-8{padding-top:2rem}.sm\:pt-9{padding-top:2.25rem}.sm\:pt-10{padding-top:2.5rem}.sm\:pt-11{padding-top:2.75rem}.sm\:pt-12{padding-top:3rem}.sm\:pt-14{padding-top:3.5rem}.sm\:pt-16{padding-top:4rem}.sm\:pt-20{padding-top:5rem}.sm\:pt-24{p28>:not([hiddenadding-top:6rem}.sm\:pt-28{padding-top:7rem}.sm\:pt-32{padding-tart: auto;
+}
+.margin-block-end\:0:not([specificity-hack]) {
+  margin-block-end: 0;
+}
+.margin-block-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+}
+.margin-block-end\:auto:not([specificity-hack]) {
+  margin-block-end: auto;
+}
+.margin-inline\:0:not([specificitop:8rem}.sm\:pt-36{padding-top:9rem}.sm\:pt-40{padding-top:])~0:0t

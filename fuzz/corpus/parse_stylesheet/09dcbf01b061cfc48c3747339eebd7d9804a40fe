@@ -1,0 +1,67 @@
+.75rem}.xl\:inset-8{top:2rem;right:2rem;bottom:2rem;left:2rem}.xl\:inset-9{top:2.25rem;right:2.25rem;bottom:2.25rem;left:2.25rem}.xl\:inset-10{top:2.5rem;right:2.5rem;bottom:2.5rem;left:2.5rem}.xl\:inset-11{top:2.75rem;right:2.75rem;bottom:2.75rem;left:2.75rem}.xl\:inset-12{top:3rem;right:3rem;bottom:3rem;left:3rem}.xl\:inset-14{top:3.5rem;right:3.5rem;bottom:3.5rem;left:3.5rem}.xl\:inset-16{top:4rem;right:4rem;bottom:4rem;left:4rem}.xl\:inset-20{top:5rem;right:5rem;bottom:5rem;left:5rem}.xl\:inset-24{top:6rem;mation-timing-function: ease-out;
+    animation-timing-function: ease-out;
+  }
+
+  50% {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1)
+      translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 150px)
+      rotate3d(0, 1, 0, -170deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95)
+      translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);
+    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  to {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+}
+.animate__animated.animate__flip {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+"   transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    -webkit-animation-timing-function: ease-in;
+    animatoltipped-alfunction: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    transform: perspective(400px) rotate3d(1, 0, 0, -20deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-fun.xl\:-inset-8{top:-2rem;right:-2rem;bottom:-2rem;left:-2rem}.xl\:-inset-9{top:-2.25rem;right:-2.25rem;bottom:-2.25rem;left:-2.25rem}.xl\:-inset-10{top:-2.5rem;right:-2.5rem;bottom:-2.5rem;left:-2.5rem}.xl\:-inset-11{top:-2.75rem;right:-2.75rem;bottom:-2.75rem;left:-2.75rem}.xl\:-inset-12{top:-3rem;right:-3rem;bottom:-3rem;left:-3rem}.xl\:-inset-14{top:-3.5rem;right:-3.5rem;bottom:-3.5rem;left:-3.5rem}.xl\:-inset-16{top:-4rem;right:-4rem;bottom:-4rem;left:-4rem}.xl\:-inset-20{top:-5rem;right:-5rem;bottom:-5rem;left:-5rem}.xl\:-inset-24{top:-6rem;right:-6rem;bottom:-6rem;left:-6rem}.xl\:-inset-28{top:-7re@charset "UTF-8";
+/*
+  Flavor name: Default (mini-default)
+  Auth: Arongelos Chalaris (chalarangelo@gmail.com)
+  Maintainers: Angelos Chalaris
+  mini.css version: v3.0.1
+*/
+/*
+  Browsers resets and base typography.
+*/
+/* Core module CSS variablem;right:-7rem;bottom:-7rem;left:-7rem}.xl\:-inset-32{top:-8rem;right:-8rem;bottom:-8rem;left:-8rem}.xl\:-inset-36{top:-9rem;right:-9rem;bottom:-9rem;left:-9rem}.xl\:-inset-40{top:-10rem;right:-10rem;bottom:-10rem;left:-10rem} definitions */
+:root {
+  --fore-color: #111;
+  --secondary-fore-color: #444;
+  --back-color: #f8f8f8;
+  --secondary-back-color: #f.xl\:-inset-44{top:-11rem;right:-11rem;bottom:-11rem;left:-11rem}.xl\:-inset-48{top:-12rem;right:-12rem;bottom:-12rem;left:-12rem}.xl\:-inset-52{top:-13rem;right:-13rem;bottom:-13r0f0f0;
+em;left:-13rem}.xl\:-inset-56{top:-14re  -m;right:--

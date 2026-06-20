@@ -1,0 +1,112 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline{--ty-25%-n4{left:-24px !important}.top-lg-5{top:32px !important}.right-lg-5{right:32px !important}.bottom-lg-5{bottom:32px !important}.left-lg-5{left:32px !important}.top-lg-n5{top:-32px !important}.right-lg-n5{right:-32px !important}.bottom-lg-n5{bottom:-32px !important}.left-lg-n5{left:-32px !important}.top-lg-6{top:40px !important}.right-lg-6{right:40px !important}.bottom-lg-6{bottom:40px !important}.left-lg-6{left:40px !important}.top-lg-n6{top:-40px !important}.right-lg-n6{right:-40px !important}.bottom-lg-n6{bottom:-40px !important}.left-lg-n6{left:-40px !important}.top-lg-7{top:48px !important}.right-lg-7{right:48px !important}.bottom-lg-7{bottom:48px !important}.left-lg-7{left:48px !important}.top-lg-n7{top:-48px !important}.right-lg-n7{right:-48px !important}.bottom-lg-n7{bottom:-48px !important}.left-lg-n7{left:-48px !important}.top-lg-8{top:64px !important}.right-lg-8{right:64px !important}.bottom-lg-8{bottom:64px !important}.left-lg-8{left:64px !important}.top-lg-n8{top:-64px !important}.right-lg-n8{right:-64px !important}.bottom-lg-n8{bottom:-64px !important}.left-lg-n8{left:-64px !important}.top-lg-9{top:80px !important}.right-lg-9{right:80px !important}.bottom-lg-9{bottom:80px !important}.left-lg-9{left:80px !important}.top-lg-n9{top:-80px !important}.right-lg-n9{right:-80px !important}.bottom-l {9ity:0.95.95;
+    background: var(--accent);
+  }
+}
+header {
+  font-family: var(--display-font);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+footer {
+  font-family: var(--secondary-font);
+  font-size: .8em;
+  line-height: calc(var(--rhythm, 1rlh) * 2 / 3);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+body > header,
+body > footer,
+main + footer {
+  padding: var(--rhythm, 1rlh) calc((100% - var(--eff-line-length)) / 2);
+}
+address {
+  --density: 0;
+}
+p {
+  margin-block: var(--gap);
+}
+hr {
+  color: inherit;
+  margin-inline: 0;
+  margin-block: var(--gap);
+  flex: 0 1 0px;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--accent);
+  block-size: auto;
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--accent);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  margin: var(--gap) 0;
+  overflow-x: auto;
+}
+blockquote {
+  margin-inline: 0 var(--gap);
+  padding-inline: var(--gap) 0;
+  margin-block: var(--gap);
+  font-size: 1.1em;
+  line-height: var(--rhythm, 1rlh);
+  font-style: italic;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  color: var(--muted-fg);
+  & em,
+  & cite,
+  & dfn,
+  & var,
+  & i,
+  & address {
+    font-style: normal;
+  }
+  & footer {
+    text-"].large, [type="reset"].large, .button.large, [role="button"].large {
+  padding: calc(1.5 * var(--universal-padding)) calc(2 * var(--universal-padding));
+  margin: var(--universal-margin);
+}
+
+/*
+  Definitions for navigation elements.
+*/
+/* Navigation module CSS variable definitions */
+:root {
+  --header-back-color: #f8f8f8;
+  -adding: var(--rhythm, 1rlh) calc((100% - var(--eff-line-length)) / 2);
+}
+address {
+  --density: 0;
+}
+p {
+  margin-block: var(--gap);
+}
+hr {
+  color: inherit;
+  margin-inline: 0;
+  margin-block: var(--gap);
+  flex: 0 1 0px;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--accent);
+  block-size: auto;
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--accent);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

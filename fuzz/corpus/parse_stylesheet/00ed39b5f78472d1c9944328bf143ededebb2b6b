@@ -1,0 +1,6 @@
+ble-th: 0 0 1;x 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+pur#############e-table-horizontal tbody > tr:last-child > td {
+    border-bottom-width: 0;
+}

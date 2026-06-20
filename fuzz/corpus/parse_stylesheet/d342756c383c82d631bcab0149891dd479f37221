@@ -1,0 +1,33 @@
+y-lineHeight-large: 1.5;--text-body-size-small: 0.75rem;--text-body-size-medium: 0.875rem;--text-body-size-large: 1rem;--text-subtitle-lineHeight: 1.6;--text-subtitle-size: 1.25rem;--text-title-lineHeight-small: 1.5;--text-title-lineHeight-medium: 1.6;--text-title-lineHeight-large: 1.5;--text-title-size-small: 1rem;--text-title-size-medium: 1.25rem;--text-title-size-large: 2rem;--text-display-lineHeight: 1.4;--text-display-size: 2.5rem;--text-display-lineBoxHeight: 1.4;--fontStack-monospace: ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace;--fontStack-sansSerifDisplay: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";--fontStack-sansSerif: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";--fontStack-system: -apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";--text-codeInline-weight: var(--base-text-weight-normal);--text-codeBlock-weight: var(--base-text-weight-normal);--text-caption-weight: var(--base-text-weight-normal);--text-body-weight: var(--base-text-weight-normal);--text-subtitle-weight: var(--base-text-weight-normal);--text-title-weight-small: var(--base-text-weight-semibold);--text-title-weight-medium: var(--base-text-weight-semibold);--text-title-weight-large: var(--base-text-weight-semibold);--text-display-weight: var(--base-text-weight-medium);--text-codeInline-shorthand: var(--te;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    margin-left: 0;
+    border: 0;
+    border-radius: 0; }
+  @media print, screen and (max-width: 39.99875em) {
+    .reveal {
+      top: 0;
+      right: 0;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      max-width: none;
+      height: 100%;
+      min-height: 100%;
+      margin-left: 0;
+      border: 0;
+      border-radius: 0; } }
+  .reveal.without-overlay {
+    position: fixed; }
+
+.slider {
+  position: relative;
+  height: 0.5rem;
+  margin-top: 1.25rem;
+  margin-botxt-codeInline-weight) var(--text-codeInline-size) var(--fontStack-monospace);--text-codeBlock-shorthand: var(--text-codeBlock-weight) var(--text-codeBlock-size) / var(--text-codeBlock-lineHeight) var(--fontStack-monospace);--text-caption-shorthand: var(--text-caption-weight) var(--text-caption-size) / var(--text-caption-lineHeight) var(--fontStack-sansSerif);--tomtext-body-sh: 2.25rorthaem;
+  background-color: #e6nd-sme6

@@ -1,0 +1,45 @@
+reen-600:focus{--tw-gradient-from:#059669;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(5, 150, 105, 0))}.lg\:focus\:from-green-70.subnav-item{margin-left:-1px}.subnav-item:hover,.subnav-item:focus{text-decoration:none;background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.subnav-item.selected,.subnav-item[aria-selected=true],.subnav-item[aria-current]:not([aria-current=false]){z-index:2;color:var(--fgColor-onEmphasis, var(--color-fg-on-emphasis));background-color:var(--bgColor-accent-emphasis, var(--color-accent-emphasis));border-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis))}.subnav-item.selected:focus,.subnav-item[aria-selected=true]:focus,.subnav-item[aria-current]:not([aria-current=false]):focus{outline:2px solid var(--focus-outlineColor, var(--color-accent-fg));outline-offset:-2px;box-shadow:inset 0 0 0 3px var(--fgColor-onEmphasis, var(--color-fg-on-emphasis))}.subnav-item.selected:focus:not(:focus-visible),.subnav-item[aria-selected=true]:focus:not(:focus-visible),.subnav-item[aria-current]:not([aria-current=false]):focus:not(:focus-visible){outline:solid 1px rgba(0,0,0,0);box-shadow:none}.subnav-item.selected:focus-visible,.subnav-item[aria-selected=true]:focus-visible,.subnav-item[aria-current]:not([aria-current=false]):focus-visible{outline:2px solid var(--focus-outlineColor, var(--color-accent-fg));outline-offset:-2px;box-shadow:inset 0 0 0 3px var(--fgColor-onEmphasis, var(--color-fg-on-emphasis))}.subnav-item:first-child{border-top-left-radius:6px;border-bottom-left-radius:6px}.su0:focus{--tw-gradient-from:#047857;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(4, 120, 87, 0))}.lg\:focus\:from-green-800:focus{--tw-gradient-from:#065f46;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-toight: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-2 {
+    font-size: 4.5rem;
+  }
+}
+
+.display-3 {
+  font-size: calc(1.525rem + 3.3vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-3 {
+    font-size: 4rem;
+  }
+}
+
+.display-4 {
+  font-size: calc(1.475rem + 2.7vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-4 {
+    font-size: 3.5rem;
+  }
+}
+
+.display-5 {
+  font-size: calc(1.425rem + 2.1vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1bnav-item:last-child{border-top-right-ra200px) {
+  .display-5 {
+    font-size: 3rem;
+  }
+}
+
+.display-6 {
+  font-size: calc(1.375rem + 1.5vw);
+  fodint-weight: 300us:6;
+p 

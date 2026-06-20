@@ -1,0 +1,50 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  bordercontent:flex-end !important}.flex-justify-center{justify-content:center !important}.flex-justify-between{justify-content:space-between !important}.flex-justify-around{justify-content:space-around !important}.flex-items-start{align-items:flex-start !important}.flex-items-end{align-items:flex-end !important}.flex-items-center{align-items:center !important}.flex-items-baseline{align-items:baseline !important}.flex-items-stretch{align-items:stretch !important}.flex-content-start{align-content:flex-start !important}.flex-content-end{align-content:flex-end !important}.flex-content-center{align-content:center !important}.flex-content-between{align-content:space-between !important}.flex-content-around{align-content:space-around !important}.flex-content-stretch{align-content:stretch !important}.flex-1{flex:1 !important}.flex-auto{flex:auto !important}.flex-grow-0{flex-grow:0 !important}.flex-shrink-0{flex-shrink:0 !important}.flex-self-auto{align-self:auto !important}.flex-self-start{align-self:flex-start !important}.flex-self-end{align-self:flex-end !important}.flex-self-center{align-self:center !important}.flex-self-baseline{align-self:baseline !important}.flex-self-stretch{align-self:stretch !important}.flex-order-1{order:1 !important}.flex-order-2{order:2 !important}.flex-order-none{order:inherit !important}@media(min-width: 544px){.flex-sm-row{flex-direction:row !important}.flex-sm-row-reverse{flex-direction:row-reverse !important}.flex-sm-column{flex-direction:column !important}.flex-sm-column-reverse{flex-direction:column-reverse !important}.flex-sm-wrap{flex-wrap:wrap !important}.flex-sm-nowrap{flex-wrap:nowrap !important}.flex-sm-wrap-reverse{flex-wrap:wrap-reverse !important}.flex-sm-justify-start{justify-content:flex-start !important}.flex-sm-justify-end{justify-content:flex-end !important}.flex-sm-justify-center{justify-content:center !important}.flex-sm-justify-between{justify-content:space-between !important}.flex-sm-justify-around{justify-content:space-around !important}.flex-sm-items-start{align-items:flex-start !important}.flex-sm-items-end{align-items:flex-end !important}.flex-sm-items-center{align-items:center !important}.flex-sm-items-baseline{align-items:baseline !important}.flex-sm-items-stretch));
+  --accent: light-dark(var(--blue-10), var(--blue-2));
+  --muted-accent: light-dark(var(--blue-7), var(--blue-5));
+  --rhythm: 1.4rem;
+  --line-length: 40rem;
+  --border-width: unset;
+  --border-block-start-width: var(--border-width, 1px);
+  --border-block-end-width: var(--border-width, 1px);
+  --border-inline-start-width: var(--border-width, 1px);
+  --border-inline-end-width: var(--border-width, 1px);
+  --border-style: unset;
+  --border-block-start-style: var(--border-style, solid);
+  --border-block-end-style: var(--border-style, solid);
+  --border-inline-start-style: var(--border-style, solid);
+  --border-inline-end-style: var(--border-style, solid);
+  --border-radius: .2rem;
+  --interactive-border-width: var(--border-width, 1px);
+  --interactive-border-style: var(--border-style, solid);
+  --interactive-border-radius: .2rem;
+  --chip-border-width: var(--border-width, 1px);
+  --chip-border-style: var(--border-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--fg) inset;
+  --pressed-shadow-focus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

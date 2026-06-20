@@ -1,0 +1,49 @@
+sm\:h-12{height:3rem}.sm\:h-14{height:3.5rem}.sm\:h-16{height:4rem}.sm\:h-20{height:5rem}.sm\:h-24{height:6rem}.sm\:h-28{height:7rem}.sm\:h-32{height:8rem}.sm\:h-36{height:9rem}.sm\:h-40{height:10rem}.sm\:h-44{height:11rem}.sm\:h-48{height:12rem}.sm\:h-52{height:13rem}.sm\:h-56{height:14rem}.sm\:h-60{height:15rem}.sm\:h-64{height:16rem}.sm\:h-72{height:18rem}.sm\:h-80{height:20rem}.sm\:h-96{height:24rem}.sm\:h-auto{height:auto}.sm\:h-px{height:1px}.sm\:h-0\.5{height:.125rem}.sm\:h-1\.5{height:.375rem}.sm\:h-2\.5{height:.625rem}.sm\:h-3\.5{height:.875rem}.sm\:h-1\/2{height:50%}.sm\:h-1\/3{height:33.333333%}.sm\:h-2\/3{height:66.666667%}.sm\:h-1\/4{height:25%}.sm\:h-2\/4{height:50%}.sm\:h-3\/4{height:75%}, .span-20, .span-21, .span-22, .span-23, .span-24 {
+  float: left;
+  margin-right: 10px;
+}
+
+/* The last column in a row needs this class. */
+.last { margin-right: 0; }
+
+/* Use these classes to set the width of a column. */
+.span-1 {width: 30px;}
+
+.span-2 {width: 70px;}
+.span-3 {width: 110px;}
+.span-4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span-15 {width: 590px;}
+.span-16 {width: 630px;}
+.span-17 {width: 670px;}
+.span-18 {width: 710px;}
+.span-19 {width: 750px;}
+.span-20 {width: 790px;}
+.span-21 {width: 830px;}
+.span-22 {width: 870px;}
+.span-23 {width: 910px;}
+.span-24 {width:950px; margin-right:0;}
+
+/* Use these classes to set the width of an input. */
+input.span-1, textarea.span-1, input.span-2, textarea.span-2, input.span-3, textarea.span-3, input.span-4, textarea.span-4, input.span-5, textarea.span-5, input.span-6, textarea.span-6, input.span-7, textarea.span-7, input.span-8, textarea.span-8, input.span-9, textarea.span-9, input.span-10, textarea.span-10, input.span-11, textarea.span-11, input.span-12, textarea.span-12, input.span-13, textarea.span-13, input.span-14, textarea.span-14, input.span-15, textarea.span-15, input.span-16, textarea.span-16, input.speight:80%}.sm\:h-1\/6{height:16.666667%}.sm\:h-2\/6{height:33.333333%}.sm\:h-3\/6{height:50%}.sm\:h-4\/6{height:66.666667%}.sm\:h-5\/6{height:83.333333%}.sm\:h-full{height:100%}.sm\:h-screen{height:100vh}.sm\:max-h-0{max-height:0}.sm\:max-h-1{max-height:.25rean-17, textarea.span-17, input.span-18, textarea.span-18, input.span-19, textarea.span-19, input.span-20, textarea.span-20, input.span-21, textarea.span-21, input.span-22, textarea.span-22, input.span-23, textarea.span-23, input.span-24, textarea.span-24 {
+  border-left-width: 1px;
+  border-right-width: 1px;
+  padding-left: 5px;m}.sm\:max-h-2{max-height:.5rem}.sm\:max-h-3{max-height:.75rem}.sm\:max-h-4{max-height:1rem}.sm\:max-h-5{max-height:1.25
+  padding-right: 5px;
+}
+
+input.span-1, textarea.span-1 { width: 18px; }
+input.span-2rem}.sm\:max-h-6{max-h, textarea.span-2 { width: 58px; }
+input.span-3, textarea.span-3 { width: 98px; }
+input.span-4, textarea.span-4 { width: 138px; }
+input.span-5, textarea.spaneight:1.5rem}.sm\:max-5 { width: 178px; }
+input.span-6, textarea.span-6 { width-h-7{m: 218pax-heighxt

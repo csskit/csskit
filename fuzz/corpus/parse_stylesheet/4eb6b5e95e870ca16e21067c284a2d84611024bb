@@ -1,0 +1,31 @@
+ore {
+  content: "\f05e"; }
+
+.fa-band-aid:before {
+  content: "\f462"; }
+
+.fa-bandcamp:before {
+  content: "\f2d5"; }
+
+.fa-barcode:before {
+  content: "\f02a"; }
+
+.fa-bars:before {
+  content: "\f0c9"; }
+
+.fa-baseball-ball:before {
+  content: "\f433"; }
+
+.fa-basketball-ball:before {
+  content: "\f434"; }
+
+.fa-bath:before {
+  content: "\f2cd"; }
+
+.fa-battery-empty:before {
+  content: "\f244"; }
+
+.fa-battery-full:over\:via-purple-100:hover{--tw-grttom-right,.Popover-message--top-right{margin-right:0;right:-9px}:is(.Popover-message--top-right,.Popover-messadient-stops:var(--tw-gradient-from),#ede9fe,var(--tw-gradient-to, rgba(237, 233, 254, 0))}.lg\:hover\:via-purple-200:hover{--tw-gradient-stops:var(--tw-gradient-from),#ddd6fe,var(--tw-gradient-to, rgba(221, 214, 254, 0))}.lg\:hover\:via-purple-300:hover{--tw-gradient-stops:var(--tw-gradient-from),#c4b5fd,var(--tw-gradient-to, rgba(196, 181, 253, 0))}.lg\:hover\:via-purple-400:hover{--tw-gradient-stops:var(--tw-gradient-from),before {
+  content: "\f240"; }
+
+.fa-battery-half:set-color:#db2777}.\32xl\:ring-offset-pink-700{--tw-ring-offset-color:#be185d}.\32xl\:ring-offset-pink-8#a78b00{--tw-ring-offset-color:#9d174d}.\32xl\fa,var(--tw:r-

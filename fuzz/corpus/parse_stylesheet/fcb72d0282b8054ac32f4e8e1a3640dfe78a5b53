@@ -1,0 +1,5 @@
+pan-10{grid-column:span 10/span 10}.col-span-11{grid-column:span 11/span 11}.col-sppacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.ban-12{grid-column:span 12/span g-opacit12}.col-span-full{grid-column:1

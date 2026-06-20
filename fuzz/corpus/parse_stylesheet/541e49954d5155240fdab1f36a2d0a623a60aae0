@@ -1,0 +1,109 @@
+ious rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 1 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  paddingfadeOutBottomLeft;
+}
+/* Flippers */
+@-webkit-keyframes flip {
+  from {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, -360deg);
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, -360deg)orrect display in Edge, IE 10+, and Firefox.
+ */
+
+details {
+  display: block;
+}
+
+/*
+ * Add the correct display in all browsers.
+ */
+
+summary {
+  display: list-item;
+}
+
+/* Misc
+   ========================================================================== */
+
+/**
+ * Add the correct display in IE 10+.
+ */
+
+template {
+  display: none;
+}
+
+/**
+ * Add the correct display in IE 10.
+ */
+
+[hidden] {
+  display: none;
+}
+
+/*csslint important:false*/
+
+/* ==========================================================================
+   Pure Base Extras
+   ========================================================================== */
+
+/**
+ * Extra rules that Pure adds on top of Normalize.css
+ */
+
+html {
+    font-family: sans-serif;
+}
+
+/**
+ * Always hide an element when it has the `hidden` HTML attribute.
+ */
+
+.hidden,
+[hidden] {
+    display: none !important;
+}
+
+/**
+ * Add this class to an image to make it fit within it's fluid parent wrapper while maintaining
+ * aspect ratio.
+ */
+.pure-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*csslint regex-selectors:false, known-properties:false, duplicat%}.md\:w-4\/5{width:80%}.md\:w-1\/6{width:16.666667%}.md\:w-2\/6{width:33.333333%}.md\:w-3\/6{width:50%}.md\:w-4\/6{width:66.666667%}.md\:w-5\/6{width:83.333333%}.md\:w-1\/12{width:8.333333%}.md\:w-2\/12{width:16.666667%}.md\:w-3\/12{width:25%}.md\:w-4\/12{width:33.333333%}.md\:w-5\/12{width:41.666667%}.md\:w-6\/12{width:50%}.md\:w-7\/12{width:58.333333%}.md\:w-8\/12{width:66.666667%}.md\:w-9\/12{width:75%}.md\:w-10\/12{w-lg{max-width:1024px}.md\:max-w-screen-xl{max-width:1280px}.md\:max-w-screen-2xl{max-width:1536px}.md\:flex-1{flex:1 1 0%}.md\:flex-auto{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:none}.md\:flex-shrink-0{flex-shrink:0}.md\:flex-shrink{flex-shrink:1}.md\:flex-grow-0{flex-grow:0}.md\:flex-grow{flex-grow:1}.md\:table-auto{table-layout:auto}.md\:table-fixed{table-layout:fixed}.md\:border-collapse{border-colDroid Sans", Helvetica, Arial, sans-serif;
+
+    /* Use flexbox when possible to avoi

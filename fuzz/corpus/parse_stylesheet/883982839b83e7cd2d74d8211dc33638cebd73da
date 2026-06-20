@@ -1,0 +1,145 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rele-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; |
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  ment^="bottom"] > .arrow:ersolor: #fff;
+}
+
+.bs-popover-bottom, .bs-popover-auto[x-placement^="bottom"] {
+  margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+./*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icobs-popover-bottom > .arrow::before, .bs-popover-auto[x-placement^="bottom"] > .arrow:erse;
+            flex-direction: row-reverse; }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  border-bottom-color: rgba(0, 0    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-di, 0,ns: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-size: 2.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8x {
+  font-size: 8em; }
+
+f.a-9x {
+  font-size: 9em; }
+
+.fa-10x {
+  font-size: 10em; }
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em;lue-12:#0d375e;--cyan-0:#e3fafc;--cyan-1:#c5f6fa;--cyan-2:#99e9f2;--cyan-3:#66d9e8;--cyan-4:#3bc9db;--cyan-5:#22b8cf;--cyan-6:#15aabf;--cyan-7:#1098ad;--cyan-8:#0c8599;--cyan-9:#0b7285;--cyan-10:#095c6b;--cyan-11:#074652;--cyan-12:#053038;--teal-0:#e6fcf5;--teal-1:#c3fae8;--teal-2:#96f2d7;--teal-3:#63e6be;--teal-4:#38d9a9;--teal-5:#20c997;--teal-6:#12b886;--teal-7:#0ca678;--teal-8:#099268;--teal-9:#087f5b;--teal-10:#066649;--teal-11:#054d37;--teal-12:#033325;--green-0:#ebfbee;--green-1:#d3f9d8;--green-2:#b2f2bb;--green-3:#8ce99a;--green-4:#69db7c;--green-5:#51cf66;--green-6:#40c057;--green-7:#37b24d;--green-8:#2f9e44;--green-9:#2b8a3e;--green-10:#237032;--green-11:#1b5727;--green-12:#133d1b;--lime-0:#f4fce3;--lime-1:#e9fac8;--lime-2:#d8f5a2;--lime-3:#c0eb75;--lime-4:#a9e34b;--lime-5:#94d82d;--lime-6:#82c91e;--lime-7:#74b816;--lime-8:#66a80f;--lime-9:#5c940d;--lime-10:#4c7a0b;--lime-11:#3c6109;--lime-12:#2c4706;--yellow-0:#fff9db;--yellow-1:#fff3bf;--yellow-2:#ffec99;--yellow-3:#ffe066;--yellow-4:#ffd43b;--yellow-5:#fcc419;--yellow-6:#fab005;--yellow-7:#f59f00;--yellow-8:#f08c00;--yellow-9:#e67700;--yellow-10:#b35c00;--yellow-11:#804200;--yellow-12:#663500;--animation-duration: calc(var(--animate-duration) / 2);
+}
+.animaon: calc(var(--animate-duration) * 0.8);
+}
+.animate__animated.animate__slow {
+  -webkit-animation-duration: calc(1s * 2);
+  animation-duration: calc(1s * 2);
+  -webkit-animation-duration: cte__animated.animate__fast {
+  -webkit-animation-duration: calc(1s * 0.8);
+  animation-duration: calc(1s * 0.8);
+  -webkit-animation-duration: calc(var(--animate-duration) * }
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; |
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.fa-border {
+  borde2: solid 0.08em #eee;
+  border-radius: .1em;
+  padding: .2em .25em .15em; }
+
+.fa-pull-left {
+  float: left; }
+
+.fa-pull-right {
+  float: right; }
+
+.fa.fa-pull-left,
+.fas.fa-pull-left,
+.far.fa-pull-left,
+.fal.fa-pull-left,
+.fab.fa-pull-left {
+  0.25);
+}
+ margin-right: .3em; }
+
+.fa.fa-pull-right,
+.f
+.rectbias.fa-pull-right,
+.far.fa-pull-

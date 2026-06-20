@@ -1,0 +1,107 @@
+ae8;
+  --teal-2: #96f2d7;
+  --teal-3: #63e6be;
+  --teal-4: #38d9a9;
+  --teal-5: #20c997;
+  --teal-6: #12b886;
+  --teal-7: #0ca678;
+  --teal-8: #099268;
+  --teal-9: #087f5b;
+  --teal-10: #066649;
+  --teal-11: #054d37;
+  --teal-12: #033325;
+  --green-0: #ebfbee;
+  --green-1: #d3f9d8;
+  --green-2: #b2f2bb;
+  --green-3: #8ce99a;
+  --green-4: #69db7c;
+  --green-5: #51cf66;
+  --green-6: #40c057;
+  --green-7: #37b24d;
+  --green-8: #2f9e44;
+  --green-9: #2b8a3e;
+  --green-10: #237032;
+  --green-11: #1b5727;
+  --green-12: #133d1b;
+  --lime-0: #f4fce3;
+  --lime-1: #e9fac8;
+  --lime-2: #d8f5a2;
+  --lime-3: #c0eb75;
+  --lime-4: #a9e34b;
+  --lime-5: #94d82d;
+  --lime-6: #82c91e;
+  --lime-7: #74b816;
+  --lime-8: #66a80f;
+  --lime-9: #5c940d;
+  --lime-10: #4c7a0b;
+  --lime-11: #3c6109;
+  --lime-12: #2c4706;
+  --yellow-0: #fff9db;
+  --yellow-1: #fff3bf;
+  --yellow-2: #ffec99;
+  --yellow-3: #ffe066;
+  --yellow-4: #ffd43b;
+  --yellow-5: #fcc419;
+  --yellow-6: #fab005;
+  --yellow-7: #f59f00;
+  --yellow-8: #f08c00;
+  --yellow-9: #e67700;
+  --yellow-10: #b35c00;
+  --yellow-11: #804200;
+  --yellow-12: #663500;
+  --orange-0: #fff4e6;
+  --orange-1: #ffe8cc;
+  --orange-2: #ffd8a8;
+  --orange-3: #ffc078;
+  --orange-4: #ffa94d;
+  --orange-5: #ff922b;
+  --orange-6: #fd7e14;
+  --orange-7: #f76707;
+  --orange-8: #e8590c;
+  --orange-9: #d9480f;
+  --orange-10: #bf400d;
+  --orange-11: #99330b;
+  --orange-12: #802b09;
+  --choco-0: #fff8dc;
+  --choco-1: #fce1bc;
+  --choco-2: #f7ca9e;
+  --choco-3: #f1b280;
+  --choco-4: #e99b62;
+  --choco-5: #df8545;
+  --choco-6: #d46e25;
+  --choco-7: #bd5f1b;
+  --choco-8: #a45117;
+  --choco-9: #8a4513;
+  --choco-10: #703a13;
+  --choco-11: #572f12;
+  --choco-12: #3d210d;
+  --brown-0: #faf4ebllbar-width: thin;
+  }
+}
+body {
+  margin: 0;
+}
+header,
+footer,
+section + section {
+  margin-block: calc(2 * var(--gap));
+}
+nav {
+  & :is(a:not(.\<button\>), .\<a\>) {
+    text-decoration: none;
+    color: var(--accent);
+  }
+}
+aside {
+  font-size: .8em;
+  line-height: calc(var(--rhythm, 1rlh) * 2 / 3);
+  --gap: calc(var(--rhythm, 1rlh) * var(--density) * 2 / 3);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+  padding-block: var(--gap);
+  margin-block: calc(var(--gap) * 3 / 2);
+  &.bg {
+    padding-innlie: var(--gap);
+  }
+  & h1,
+  &

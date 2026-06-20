@@ -1,0 +1,76 @@
+}
+  .large-order-4 {
+    -webkit-box-ordinal-group: 5;
+    -webkit-order: 4;
+        -ms-flex-order: 4;
+            or9ba; }
+    [data-whatinput='mouse'] .tabs-title > a {
+      outline: 0; }
+    .tabs-title > a:hover {
+      background: #fefefe;
+      color: #1468a0; }
+    .tabs-title > a:focus, .tabs-title > a[aria-selected='true'] {
+      background: #e6e6e6;
+      color: #1779ba; }
+
+.tabs-content {
+  border: 1px solid #e6e6e6;
+  border-top: 0;
+  background: #fefefe;
+  color: #0a0a0a;
+  -webkit-transition: all 0.5s ease;
+  transition: all 0.5s ease; }
+
+.tabs-content.vertical {
+  border: 1px solid #e6e6e6;
+  border-left: 0; }
+
+.tabs-panel {
+  display: none;
+  padding: 1rem; }
+  .tabs-panel.is-active {
+    display: block; }
+
+.thumbnail {
+  display: inline-block;
+  max-width: 100%;
+  margin-bottom: 1rem;
+  border: 4px solid #fefefe;
+  border-radius: 0;
+  -webkit-box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+          box-shadow: 0 0 0 1px rgba(10, 10, 10, 0.2);
+  line-height: 0; }
+
+a.thumbnail {
+  -webkit-transition: -webkit-box-shadow 200ms ease-out;
+  transition: -webkit-box-shadow 200ms ease-out;
+  transition: box-shadow 200ms ease-out;
+  transition: box-shadow 200ms ease-out, -webkit-box-shadow 200ms ease-out; }
+  a.thumbnail:hover, a.thumbnail:focus {
+    -webkit-box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5);
+            box-shadow: 0 0 6px 1px rgba(23, 121, 186, 0.5); }
+  a.thumbnail image {
+    -webkit-box-shadow: none;
+            box-shadow: none; }
+
+.title-bar {
+  padding: 0.5rem;
+  background: #0a0a0a;
+  color: #fefefe;
+  display: -webkit-box;
+  display: -webkit-flex;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: start;
+  -webkit-justify-content: flex-start;
+      -ms-flex-pack: start;
+          justify-content: flex-start;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+der: 4; }
+  .large-order-5   .title-bar .menu-icon {
+    margin-left: 0.25rem;
+   {
+    -webkit margi-b

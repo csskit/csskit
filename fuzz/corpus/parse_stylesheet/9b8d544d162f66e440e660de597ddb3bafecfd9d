@@ -1,0 +1,30 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  backteIn{0%{opacity:0;transform:translateY(100%)}}.Toast--animateOut{animation:Toast--animateOut .18s cubic-bezier(0.55, 0.06, 0.68, 0.19) forwards}@keyframes Toast--animateOut{10ground-color: var(--selection);
+  }
+}
+
+details {
+  0%{pointer-events:none;opacity:0;transform:translateY(100%)}}.Toast--spinner{animatidisplaony:

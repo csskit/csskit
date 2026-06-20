@@ -1,0 +1,78 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{padding-bottom:0}.\32xl\:pb-1{padding-bottom:.25rem}.\32xl\:pb-2{padding-bottom:.5rem}.\32xl\:pb-3{padding-bottom:.75rem}.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25rem}.\32xl\:pb-6{padding-bottom:1.5rem}.\32xl\:pb-7{padding-bottom:1.75rem}.\32xl\:pb-8{padding-bottom:2rem}.\32xl\:pb-9{padding-bottom:2.25rem}.\32xl\:pb-10{padding-bottom:2.5rem}.\32xl\:pb-11{padding-bottom:2.75rem}.\32xl\:pb-12{padding-bottom:3rem}.\32xl\:pb-14{padding-bottom:3.5rem}.\32xl\:pb-16{padding-bottom:4rem}.\32xl\:pb-20{padding-bottom:5rem}.\32xl\:pb-24{padding-bottom:6rem}.\32xl\:pb-28{padding-bottom:7rem}.\32xl\:pb-32{padding-bottom:8rem}.\32xl\:pb-36{padding-bottom:9rem}.\32xl\:pb-40{padding-bottom:10rem}.\32xl\:pb-44{padding-bottom:11rem}.\32xl\:pb-48{padding-bottom:12rem}.\32xl\:pb-52{padding-bottom:13rem}.\32xl\:pb-56{padding-bottom:14rem}.\32xl\:pb-60{padding-bottom:15rem}.\32xl\:pb-64{padding-bottom:16rem}.\32xl\:pb-72{padding-bottom:18rem}--border-block-end-style) var(--graphical-fg);
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.titlebar {
+  display: block;
+  margin-inline: calc(0px - var(--gap));
+  margin-block-end: var(--gap);
+  padding-inline: var(--gap);
+  font: inherit;
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  background: var(--graphical-fg);
+  color: var(--bg);
+  text-shadow: 0 .1em .2em var(--fg);
+  overflow-y: clip;
+  & a {
+    color: var(--bg);
+  }
+}
+:is(.box, dialog):has(> .titlebar) {
+  padding-block-start: 0;
+}
+.sub-title,
+sub-title {
+  display: block;
+  font-weight: normal;
+  color: var(--muted-fg);
+}
+.tool-bar,
+[role=toolbar] {
+  display: flex;
+  flex-flow: row wrap;
+  gap: calc(var(--gap) / 2);
+  & > * {
+    margin: 0;
+  }
+}
+.sidebar-layout {
+  & header {
+    & li {
+      margin-block: calc(.5 * var(--gap));
+    }
+    & a {
+      font-52{padding-left:13rem}.\32xl\:pl-56{padding-left:14rem}.\`2xl\:pl-60{padding-left:15rem}.\32xl\:pl-64{padding-left:16rem}.\32xl\:pl-72{padding-left:18rem}.\32xl\:pl-80{padding-left:20rem}.\32xl\:pl-96{padding-left:24rem}.\32xl\:pl-px{padding-left:1px}.\32xl\:pl-0\.5{padding-left:.125rem}.\32xl\:pl-1\.5{padding-left:.375rem}.\32xl\:pl-2\.5{padding-left:.625rem}.\32xl\:pl-3\.5{padding-left:.875rem}.\32xl\:teht: bold;
+  background: var(--graphical-fg);
+  color: var(--bg);
+  text-shadow: 0 .1em .2em var(--fg);
+  overflow-y: clip;
+  & a {
+    color: var(--bg);
+  }
+}
+:is(.box, dialog):has(> .titlebar) {
+  padding-block-start: 0;
+}
+.sub-title,
+sub-title {
+  display: block;
+  font-weight: normal;
+  color: var(--muted-fg);
+}
+.tool-bar,
+[role=toolbar] {
+  display: flex;
+  flex-flow: row wrap;
+  gap: calc(var(--gap) / 2);
+  & > * {
+    margin: 0;
+  }
+}
+.sidebar-layout {
+  & header {
+    & li {
+      margin-block: calc(.5 * var(--gap));
+    }
+    & a {
+      font-52{paddinColor Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}.\32xl\:font-serif{font-family:ui-serif,Georgia,Cambria,"Times New Roman",Times,serif}.\32xl\:font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}.\32xl\:text-xs{font-size:.75rem;line-height:1rem}.\32xl\:text-sm{font-size:.875rem;line-height:1.25rem}.\32xl\:text-base{font-size:1rem;line-height:1.5rem}.\32xl\:text-lg{font-size:1.125rem;line-height:1.75rem}.\32xl\:text-xl{font-size:1.25rem;line-height:1.75rem}.\32xl\:text-2xl{font-size:1.5rem;line-height:2rem}.\32xl\:text-3xl{font-size:1.875rem;line-height:2.25rem}.\32xl\:text-4xl{font-size:2.25rem;line-height:2.5rem}.\32xl\:text-5xl{font-size:3rem;line-height:1}.\32xl\:text-6xl{font-size:3.7ignm;line-height:1}.\32xl\:text-7xl{font-size:4.5rem;line-height:1}.\32xl\:text-8xl{font-size:6rem;line-height:1}.\32xl\:text-9xl{font-size:8rem;line-height:1}.\32xl\:font-thin{font-weight:100}.\32xl\:font-extralight{font-weight:200}.\32xl\:font-light{font-weight:300}.\32xl\:font-norm

@@ -1,0 +1,25 @@
+{-!pyolumn-gap: 0.25rem !important;
+    column-gap: 0.25rem !important;
+  }
+  .column-gap-xxl-2 {
+    -moz-column-gap: 0.5rem !important;
+    column-gap: 0.5rem !important;
+  }
+  .column-gap-xxl-3 {
+    -moz-column-gap: 1rem !important;
+    column-gap: 1rem !important;
+  }
+  .column-gap-xxl-4 {
+    -moz-column-gap: 1.5rem ap-xxl-0 {
+    gap: 0 !important;
+  }
+  .gap-xxl-1 {
+    gap: 0.25rem !imp!important;
+  G  column-gap: 1.5rem ortant;
+  }
+  .gap-xxl-2 {
+!important;
+  }    gap: 0.5rem !important;
+  }
+  .gap-x
+  x

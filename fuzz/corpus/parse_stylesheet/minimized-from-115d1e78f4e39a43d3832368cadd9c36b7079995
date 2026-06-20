@@ -1,0 +1,26 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: vapx)}.sm\:backdrop-blur-3xl{--tw-backdrop-blur:blur(64px)}.sm\:backdrop-brightness-0{--tw-backdrop-brightness:brightness(0)}.sm\:backdrop-brightness-50{--tw-backdrop-brightness:brightnes}.sm\:backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(180deg)}.sm\:-backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(-180deg)}.sm\:-backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(-90d1eg)}.sm\:-backdrop-hue-rotate-60{--tw-backdrop-hue-rotate:hue-rotate(-60deg)}.sm\:-backdrop-hue-rotate-30{--tw-backdrop-hue-rotate:hue-rotate(-30deg)}.sm\:-backdrop-hue-rotate-15{--tw-backdrop-hue-rotate:hue-rotate(-15deg)}.sm\:backdrop-invert-0{--tw-backdrop-invert:invert(0)}.sm\:backdrop-invert{--tw-backdrop-invert:invert(100%)}.sm\:backdrop-opacity-0{--tw-backdrop-opacity:opacity(0)}.sm\:backdrop-opacity-5{--tw-backdckgrounrop-opd-color: varacity:opacity(0.0(--background-alt);
+  colo5)}.s

@@ -1,0 +1,18 @@
+eOutTopLeft {
+  -webkit-animation-name: fadeOutTopLeft;
+  animation-name: fadeOutTopLeft;
+}
+@-webkit-keyframes fadeOutTopRight {
+  from {
+    opacity: 1;
+    -webkit-transform: tpadding: var(--gap);
+  overflow: clip;
+  border-radius: var(--border-radius);
+  background: var(--box-bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-ter-item{position:relative;display:block;padding:var(--base-size-8) var(--base-size-16);margin-bottom:var(--base-size-4);overflow:hidden;font-size:14px;color:var(--fgColor-muted, var(--color-fg-muted));text-decoration:ninline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.tione;text-overflow:ellipsis;white-space:nowrap;cursor:pointer;botlebar {
+  display: bly: var(--secondary-rde

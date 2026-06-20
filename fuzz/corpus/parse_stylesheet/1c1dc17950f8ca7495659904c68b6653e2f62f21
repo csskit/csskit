@@ -1,0 +1,56 @@
+ebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.anisition: all 0.2s ease-in-out;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation; }
+  [data-whatinput='mouse'] .slider-handle {
+    outline: 0; }
+  .slider-handle:hover {
+    background-color: #14679e; }
+  .slider-handle.is-dragging {
+    -webkit-transition: all 0s linear;
+    transition: all 0s linear;
+    cursor: -webkit-grabbing;
+    cursor: grabbing; }
+
+.slider.disabled,
+.slider[disabled] {
+  opacity: 0.25;
+  cursor: not-allowed; }
+
+.slider.vertical {
+  display: inline-block;
+  width: 0.5rem;
+  height: 12.5rem;
+  margin: 0 1.25rem;
+  -webkit-transform: scale 0);
+  }
+}
+.animate__fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+@-webkit-keyframes fadeInalmDownBig {
+  from {
+    opacity: 0;
+    -webkit-tr:{
+ :"; }
+ansform: translate3d(0 from {
+    opacity: 0;
+    -web

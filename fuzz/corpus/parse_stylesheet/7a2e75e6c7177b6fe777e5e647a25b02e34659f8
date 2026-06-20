@@ -1,0 +1,43 @@
+{
+    -webkit-transform: skewX(-5deg);
+    transform: skewX(-5deg);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes lightSpeedInRig:18rem}.sm\:pt-80{padding-top:20rem}.sm\:pt-96{padding-top:24rem}.sm\:pt-px{padding-top:1px}.sm\:pt-0\.5{padding-top:.125rem}.sm\:pt-1\.5{padding-top:.375rem}.sm\:pt-2\.5{padding-top:.625rem}.sm\:pt-3\.5{padding-top:.875rem}.s}.sm\:pt-14{padding-top:3.5rem}.sm\:pt-16{padding-top:4rem}.sm\:pt-20{padding-top:5rem}.sm\:pt-24{padding-top:6rem}.sm\:pt-28{padding-top:7rem}.sm\:pt-32{padding-top:8rem}.sm\:pt-36{padding-top:9rem}.sm\:pt-40{padding-top:10rem}.sm\:pt-44{padding-top:11rem}.sm\:pt-48{padding-top:12rem}.sm\:pt-52{padding-top:13rem}.sm\:pt-56{padding-top:14rem}.sm\:pt-60{padding-top:15rem}.sm\:pt-64{padding-top:16rem}.sm\:pt-72{padding-top:18rem}.sm\:pt-80{padding-top:20rem}.sm\:pt-96{padding-top:24rem}.sm\:pt-px{padding-top:1px}.sm\:pt-0\.5{padding-top:.125rem}.sm\:pt-1\.5{padding-top:.375rem}.sm\:pt-2\.5{padding-top:.625rem}.sm\:pt-3\.5{padding-top:.875rem}.sm\:pr-0{padding-right:0}.sm\:pr-1{padding-right:.25rem}.sm\:pr-2{padding-right:.4rem}.sm\:pr-3{padding-right:.75rem}.sm\:pr-4{padding-right:1rem}.sm\:pr-5{padding-right:1.25rem}.sm\:pr-6{padding-right:1.5rem}.sm\:pr-7{padding-right:1.75rem}.sm\:pr-8{padding-right:2rem}.sm\:pr-9{padding-right:2.25rem}.sm\:pr-10{padding-right:2.5rem}.sm\:pr-11{padding-right:2.75rem}.sm\:pr-12{padding-right:3rem}.sm\:pr-14{padding-right:3.5rem}.sm\:pr-16{padding-right:4rem}.sm\:pr-20{padding-right:5rem}.sm\:pr-24{padding-right:6rem}.sm\:pr-28{padding-right:7rem}.sm\:pr-32{padding-right:8rem}.sm\:pr-36{parm: translate3d(-100%, 0, 0) skewX(-30deg);
+    opacity: 0;
+  }
+}
+.animate__lightSpeedOutLeft {
+  -webkit-animation-name: lightSpeedOutLeft;
+  animation-name: lightSpeedOutLeft;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+}
+/* Rotating entrances */
+@-webkit-keyframes rotateIn {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes rotateIn {
+  from {
+    -webkit-transform: rotate1d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+  dding-right:9rem}.sm\:pr-40{padding-right:10rem}.sm\:pr-44{padding-right:11rem}.sm\:pr-48{padding-right:12rem}.sm\:pr-52{padding-right:13rem}.sm\:pr-56{padding-right:14rem}.sm\:pr-60{padding-right:15rem}.sm\:pr-64{padding-right:16rem}.sm\:pr-72{padding-right:18rem}.sm\:pr-80{ping-top:4rem}.sm\:pt-20{padding-top:5rem}.sm\:pt-24{padding-top:6rem}.sm\:pt-28{padding-top:7r  -webkit-transform:em} 
