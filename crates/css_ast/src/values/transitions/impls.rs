@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -24,9 +24,9 @@ mod tests {
 
 	#[test]
 	fn test_transition_delay_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "0");
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "0px");
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "infinite");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "0px");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "infinite");
 		assert_parse_error!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "1s 2s 3s");
 	}
 
@@ -40,12 +40,12 @@ mod tests {
 
 	#[test]
 	fn test_transition_duration_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "0");
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "0px");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "0px");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "infinite");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "-3s");
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "infinite");
 		assert_parse_error!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "1s 2s");
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionDurationStyleValue, "auto");
 	}
 
 	#[test]
@@ -60,7 +60,7 @@ mod tests {
 
 	#[test]
 	fn test_transition_property_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionPropertyStyleValue, "12");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionPropertyStyleValue, "12");
 		assert_parse_error!(CssAtomSet::ATOMS, TransitionPropertyStyleValue, "opacity color");
 	}
 
@@ -92,8 +92,8 @@ mod tests {
 
 	#[test]
 	fn test_transition_behavior_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionBehaviorStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, TransitionBehaviorStyleValue, "discrete");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionBehaviorStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TransitionBehaviorStyleValue, "discrete");
 		assert_parse_error!(CssAtomSet::ATOMS, TransitionBehaviorStyleValue, "allow-discrete normal");
 	}
 }

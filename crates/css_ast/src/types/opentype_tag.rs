@@ -46,7 +46,7 @@ impl<'a> Parse<'a> for OpentypeTag {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -69,6 +69,6 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, OpentypeTag, "\"ker\"");
 		assert_parse_error!(CssAtomSet::ATOMS, OpentypeTag, "\"kerns\"");
 		assert_parse_error!(CssAtomSet::ATOMS, OpentypeTag, "\"\"");
-		assert_parse_error!(CssAtomSet::ATOMS, OpentypeTag, "kern");
+		assert_peek_false!(CssAtomSet::ATOMS, OpentypeTag, "kern");
 	}
 }

@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -22,9 +22,9 @@ mod tests {
 
 	#[test]
 	fn test_ruby_align_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, RubyAlignStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyAlignStyleValue, "left");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyAlignStyleValue, "10px");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyAlignStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyAlignStyleValue, "left");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyAlignStyleValue, "10px");
 		assert_parse_error!(CssAtomSet::ATOMS, RubyAlignStyleValue, "center start");
 	}
 
@@ -37,9 +37,9 @@ mod tests {
 
 	#[test]
 	fn test_ruby_merge_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, RubyMergeStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyMergeStyleValue, "collapse");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyMergeStyleValue, "10px");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyMergeStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyMergeStyleValue, "collapse");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyMergeStyleValue, "10px");
 		assert_parse_error!(CssAtomSet::ATOMS, RubyMergeStyleValue, "merge separate");
 	}
 
@@ -53,7 +53,7 @@ mod tests {
 	#[test]
 	fn test_ruby_overhang_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "auto none");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "simple");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "simple");
 		assert_parse_error!(CssAtomSet::ATOMS, RubyOverhangStyleValue, "auto spaces");
 	}
 
@@ -65,8 +65,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "inter-character");
 		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "alternate over");
 		assert_parse!(CssAtomSet::ATOMS, RubyPositionStyleValue, "alternate under");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyPositionStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, RubyPositionStyleValue, "left");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyPositionStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, RubyPositionStyleValue, "left");
 		assert_parse_error!(CssAtomSet::ATOMS, RubyPositionStyleValue, "over under");
 	}
 }

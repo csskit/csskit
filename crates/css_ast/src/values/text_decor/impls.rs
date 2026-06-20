@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	pub fn size_test() {
@@ -35,8 +35,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "from-font left");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "left");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "right");
-		assert_parse_error!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "1px");
 	}
 
 	#[test]
@@ -50,8 +50,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "triangle");
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "sesame");
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "filled dot");
-		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextEmphasisStyleStyleValue, "auto");
 	}
 
 	#[test]
@@ -63,8 +63,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "#ff0000");
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "filled red");
 		assert_parse!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "dot blue");
-		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextEmphasisStyleValue, "invalid");
 	}
 
 	#[test]
@@ -77,7 +77,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationLineStyleValue, "underline line-through overline");
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationLineStyleValue, "spelling-error");
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationLineStyleValue, "grammar-error");
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationLineStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationLineStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationLineStyleValue, "none underline");
 	}
 
@@ -90,8 +90,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "skip-overline");
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "skip-line-through");
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "skip-underline skip-overline");
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "left");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationSkipSelfStyleValue, "left");
 	}
 
 	#[test]
@@ -101,8 +101,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "start");
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "end");
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "start end");
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "left");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationSkipSpacesStyleValue, "left");
 	}
 
 	#[test]
@@ -119,8 +119,8 @@ mod tests {
 		// order should not matter (|| combinator)
 		assert_parse!(CssAtomSet::ATOMS, TextDecorationStyleValue, "red underline");
 		// errors
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextDecorationStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextDecorationStyleValue, "invalid");
 	}
 
 	#[test]
@@ -139,10 +139,10 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "spaces spaces");
 		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "punctuation punctuation");
-		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "foo");
 		assert_parse_error!(CssAtomSet::ATOMS, TextEmphasisSkipStyleValue, "punctuation bar narrow");
 	}
 }

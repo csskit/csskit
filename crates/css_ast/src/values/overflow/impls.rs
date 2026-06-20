@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -39,8 +39,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "stable");
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "stable both-edges");
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "1px");
 	}
 
 	#[test]
@@ -49,8 +49,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before");
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "after");
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before links");
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "1px");
 	}
 
 	#[test]
@@ -62,8 +62,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3 -webkit-legacy");
 		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "auto -webkit-legacy");
 		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3 auto -webkit-legacy");
-		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "-webkit-legacy");
+		assert_peek_false!(CssAtomSet::ATOMS, LineClampStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, LineClampStyleValue, "-webkit-legacy");
 		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "0");
 	}
 
@@ -83,7 +83,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "clip clip");
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "\"...\" ellipsis");
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "fade");
-		assert_parse_error!(CssAtomSet::ATOMS, TextOverflowStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextOverflowStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, TextOverflowStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextOverflowStyleValue, "1px");
 	}
 }

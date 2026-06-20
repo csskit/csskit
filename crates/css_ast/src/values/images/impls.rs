@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -28,10 +28,10 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ImageRenderingStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ImageRenderingStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, ImageRenderingStyleValue, "high-quality crisp-edges");
 
-		assert_parse_error!(CssAtomSet::ATOMS, ObjectPositionStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ObjectPositionStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, ObjectPositionStyleValue, "1px 2px 3px");
 		assert_parse_error!(CssAtomSet::ATOMS, ObjectPositionStyleValue, "left right");
 	}
@@ -43,8 +43,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "90deg");
 		assert_parse!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "flip");
 		assert_parse!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "90deg flip");
-		assert_parse_error!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ImageOrientationStyleValue, "auto");
 	}
 
 	#[test]
@@ -56,8 +56,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ObjectFitStyleValue, "scale-down");
 		assert_parse!(CssAtomSet::ATOMS, ObjectFitStyleValue, "contain scale-down");
 		assert_parse!(CssAtomSet::ATOMS, ObjectFitStyleValue, "cover scale-down");
-		assert_parse_error!(CssAtomSet::ATOMS, ObjectFitStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ObjectFitStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ObjectFitStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ObjectFitStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, ObjectFitStyleValue, "contain cover");
 	}
 }

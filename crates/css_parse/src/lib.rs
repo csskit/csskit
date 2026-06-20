@@ -254,6 +254,11 @@
 //!   colon: T![Colon],
 //!   dimension: T![Dimension],
 //! }
+//!
+//! impl<'a> Peek<'a> for MyProperty {
+//!   const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
+//! }
+//!
 //! impl<'a> Parse<'a> for MyProperty {
 //!   fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
 //!   where

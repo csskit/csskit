@@ -108,7 +108,7 @@ where
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{T, assert_parse, assert_parse_error};
+	use crate::{T, assert_parse, assert_parse_error, assert_peek_false};
 	use css_lexer::EmptyAtomSet;
 
 	type IdentOrNumber = Either<T![Ident], T![Number]>;
@@ -127,8 +127,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(EmptyAtomSet::ATOMS, IdentOrNumber, "");
-		assert_parse_error!(EmptyAtomSet::ATOMS, IdentOrNumber, "foo(");
+		assert_peek_false!(EmptyAtomSet::ATOMS, IdentOrNumber, "");
+		assert_peek_false!(EmptyAtomSet::ATOMS, IdentOrNumber, "foo(");
 		assert_parse_error!(EmptyAtomSet::ATOMS, IdentOrNumber, "auto auto");
 		assert_parse_error!(EmptyAtomSet::ATOMS, IdentOrNumber, "1 1");
 	}

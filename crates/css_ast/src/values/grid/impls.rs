@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	pub fn size_test() {
@@ -40,8 +40,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "dense");
 		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "row dense");
 		assert_parse!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "column dense");
-		assert_parse_error!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, GridAutoFlowStyleValue, "row column");
 	}
 }

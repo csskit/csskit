@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -20,9 +20,9 @@ mod tests {
 
 	#[test]
 	fn test_text_size_adjust_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "reverse");
-		assert_parse_error!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "0");
-		assert_parse_error!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "10px");
+		assert_peek_false!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "reverse");
+		assert_peek_false!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "10px");
 		assert_parse_error!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "-100%");
 	}
 }

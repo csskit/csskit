@@ -16,7 +16,7 @@
 /// ```
 /// use css_parse::*;
 /// use csskit_derives::*;
-/// #[derive(Parse, ToCursors, Debug)]
+/// #[derive(Peek, Parse, ToCursors, Debug)]
 /// enum IdentOrNumber {
 ///     Ident(T![Ident]),
 ///     Number(T![Number]),
@@ -81,6 +81,9 @@ macro_rules! assert_parse {
 			let bump = ::bumpalo::Bump::default();
 			let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
 			let mut parser = $crate::Parser::new(&bump, &source_text, lexer);
+			if !parser.peek::<$ty>() {
+				panic!("\n\nParse failed because Type didn't peek!\n\n   parser input: {:?}\n", source_text);
+			}
 			let result = parser.parse_entirely::<$ty>().with_trivia();
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
@@ -119,7 +122,7 @@ pub(crate) use assert_parse;
 ///
 /// ```
 /// use css_parse::*;
-/// assert_parse_error!(EmptyAtomSet::ATOMS, T![Ident], "1");
+/// assert_parse_error!(EmptyAtomSet::ATOMS, T![Ident], "one two");
 /// ```
 #[macro_export]
 macro_rules! assert_parse_error {
@@ -128,6 +131,9 @@ macro_rules! assert_parse_error {
 		let bump = ::bumpalo::Bump::default();
 		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
 		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
+		if !parser.peek::<$ty>() {
+			panic!("\n\n.\n\nPeek returned false, please don't use `assert_parse_error` - use `assert_peek_false` instead: {:?}", source_text);
+		}
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {

@@ -88,20 +88,20 @@ pseudo_element!(
 	}
 );
 
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum MozFunctionalPseudoElement<'a> {
-	TreeCell(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeCellText(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeCheckbox(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeColumn(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeImage(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeLine(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeRow(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeSeparator(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeTwisty(T![::], T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeCell(T![::], #[atom(CssAtomSet::TreeCell)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeCellText(T![::], #[atom(CssAtomSet::TreeCellText)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeCheckbox(T![::], #[atom(CssAtomSet::TreeCheckbox)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeColumn(T![::], #[atom(CssAtomSet::TreeColumn)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeImage(T![::], #[atom(CssAtomSet::TreeImage)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeLine(T![::], #[atom(CssAtomSet::TreeLine)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeRow(T![::], #[atom(CssAtomSet::TreeRow)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeSeparator(T![::], #[atom(CssAtomSet::TreeSeparator)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeTwisty(T![::], #[atom(CssAtomSet::TreeTwisty)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

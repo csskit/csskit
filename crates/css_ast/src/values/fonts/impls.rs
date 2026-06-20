@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -54,8 +54,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "position");
 		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "weight style");
 		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "weight style small-caps position");
-		assert_parse_error!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "auto");
 	}
 
 	#[test]
@@ -71,8 +71,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "slashed-zero");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "lining-nums ordinal");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "tabular-nums slashed-zero diagonal-fractions");
-		assert_parse_error!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "bold");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "bold");
 	}
 
 	#[test]
@@ -86,8 +86,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "contextual");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "no-contextual");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "common-ligatures discretionary-ligatures");
-		assert_parse_error!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "bold");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "bold");
 	}
 
 	#[test]
@@ -103,8 +103,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "proportional-width");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "ruby");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "jis78 full-width");
-		assert_parse_error!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "bold");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantEastAsianStyleValue, "bold");
 	}
 
 	#[test]

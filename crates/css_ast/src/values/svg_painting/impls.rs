@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -36,8 +36,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ColorInterpolationStyleValue, "red");
+		assert_peek_false!(CssAtomSet::ATOMS, ColorInterpolationStyleValue, "red");
+		assert_peek_false!(CssAtomSet::ATOMS, ShapeRenderingStyleValue, "crisp-edges");
 		assert_parse_error!(CssAtomSet::ATOMS, PaintOrderStyleValue, "fill fill");
-		assert_parse_error!(CssAtomSet::ATOMS, ShapeRenderingStyleValue, "crisp-edges");
 	}
 }

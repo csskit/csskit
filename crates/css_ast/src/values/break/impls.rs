@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -29,7 +29,7 @@ mod tests {
 
 	#[test]
 	fn test_break_after_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BreakAfterStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BreakAfterStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, BreakAfterStyleValue, "avoid region");
 	}
 
@@ -43,7 +43,7 @@ mod tests {
 
 	#[test]
 	fn test_break_before_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BreakBeforeStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BreakBeforeStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, BreakBeforeStyleValue, "avoid region");
 	}
 
@@ -57,7 +57,7 @@ mod tests {
 
 	#[test]
 	fn test_break_inside_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BreakInsideStyleValue, "region");
+		assert_peek_false!(CssAtomSet::ATOMS, BreakInsideStyleValue, "region");
 		assert_parse_error!(CssAtomSet::ATOMS, BreakInsideStyleValue, "auto avoid");
 	}
 
@@ -69,7 +69,7 @@ mod tests {
 
 	#[test]
 	fn test_box_decoration_break_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BoxDecorationBreakStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BoxDecorationBreakStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, BoxDecorationBreakStyleValue, "slice clone");
 	}
 
@@ -81,7 +81,7 @@ mod tests {
 
 	#[test]
 	fn test_orphans_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, OrphansStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, OrphansStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, OrphansStyleValue, "1 234");
 		assert_parse_error!(CssAtomSet::ATOMS, OrphansStyleValue, "-234");
 		assert_parse_error!(CssAtomSet::ATOMS, OrphansStyleValue, "0");
@@ -95,7 +95,7 @@ mod tests {
 
 	#[test]
 	fn test_widows_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, WidowsStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, WidowsStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, WidowsStyleValue, "-1");
 		assert_parse_error!(CssAtomSet::ATOMS, WidowsStyleValue, "0");
 	}

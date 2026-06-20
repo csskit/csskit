@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -28,12 +28,12 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BoxSnapStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BoxSnapStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, BoxSnapStyleValue, "none center");
-		assert_parse_error!(CssAtomSet::ATOMS, LineGridStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, LineGridStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, LineGridStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, LineGridStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, LineGridStyleValue, "match-parent create");
-		assert_parse_error!(CssAtomSet::ATOMS, LineSnapStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, LineSnapStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, LineSnapStyleValue, "none baseline");
 	}
 }

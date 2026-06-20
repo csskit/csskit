@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -38,8 +38,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "45deg");
 		assert_parse!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "auto 45deg");
 		assert_parse!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "reverse 90deg");
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetRotateStyleValue, "none");
 	}
 
 	#[test]
@@ -56,16 +56,16 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "30deg");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "30deg");
 
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetDistanceStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetDistanceStyleValue, "30deg");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetDistanceStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetDistanceStyleValue, "30deg");
 
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetPathStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetPathStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetPathStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetPathStyleValue, "auto");
 
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetPositionStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, OffsetPositionStyleValue, "30deg");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetPositionStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetPositionStyleValue, "30deg");
 	}
 }

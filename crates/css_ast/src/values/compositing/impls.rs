@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -33,7 +33,7 @@ mod tests {
 
 	#[test]
 	fn test_background_blend_mode_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BackgroundBlendModeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BackgroundBlendModeStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, BackgroundBlendModeStyleValue, "normal luminosity");
 	}
 
@@ -45,7 +45,7 @@ mod tests {
 
 	#[test]
 	fn test_isolation_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, IsolationStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, IsolationStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, IsolationStyleValue, "auto isolate");
 	}
 
@@ -60,7 +60,7 @@ mod tests {
 
 	#[test]
 	fn test_mix_blend_mode_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MixBlendModeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MixBlendModeStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, MixBlendModeStyleValue, "normal luminosity");
 		assert_parse_error!(CssAtomSet::ATOMS, MixBlendModeStyleValue, "normal, luminosity");
 	}

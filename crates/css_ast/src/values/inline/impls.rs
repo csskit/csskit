@@ -33,7 +33,7 @@ mod tests {
 
 	#[test]
 	fn test_vertical_align() {
-		use css_parse::assert_parse_error;
+		use css_parse::{assert_parse_error, assert_peek_false};
 		// [ first | last ] || <'alignment-baseline'> || <'baseline-shift'>
 		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first");
 		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "last");
@@ -41,7 +41,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "sub");
 		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "10px");
 		assert_parse!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first baseline");
-		assert_parse_error!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first last");
 	}
 }

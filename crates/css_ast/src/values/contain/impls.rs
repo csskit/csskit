@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -19,7 +19,7 @@ mod tests {
 
 	#[test]
 	fn test_content_visibility_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ContentVisibilityStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ContentVisibilityStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, ContentVisibilityStyleValue, "visible hidden");
 	}
 
@@ -35,7 +35,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainStyleValue, "paint");
 		assert_parse!(CssAtomSet::ATOMS, ContainStyleValue, "size layout");
 		assert_parse!(CssAtomSet::ATOMS, ContainStyleValue, "size layout style paint");
-		assert_parse_error!(CssAtomSet::ATOMS, ContainStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ContainStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ContainStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ContainStyleValue, "auto");
 	}
 }

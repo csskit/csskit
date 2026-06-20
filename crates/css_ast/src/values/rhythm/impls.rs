@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -23,11 +23,11 @@ mod tests {
 
 	#[test]
 	fn test_block_step_size_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "-1px");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "min-content");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "10%");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "20");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "min-content");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "10%");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "20");
 	}
 
 	#[test]
@@ -42,8 +42,8 @@ mod tests {
 	fn test_block_step_align_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, BlockStepAlignStyleValue, "auto auto");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockStepAlignStyleValue, "start end");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepAlignStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepAlignStyleValue, "-1px");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepAlignStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepAlignStyleValue, "-1px");
 	}
 
 	#[test]
@@ -55,8 +55,8 @@ mod tests {
 
 	#[test]
 	fn test_block_step_round_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepRoundStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepRoundStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepRoundStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepRoundStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockStepRoundStyleValue, "up down");
 	}
 
@@ -69,9 +69,9 @@ mod tests {
 
 	#[test]
 	fn test_block_step_insert_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "border-box");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "border-box");
 		assert_parse_error!(CssAtomSet::ATOMS, BlockStepInsertStyleValue, "margin-box padding-box");
 	}
 
@@ -83,9 +83,9 @@ mod tests {
 
 	#[test]
 	fn test_line_height_step_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "-1px");
-		assert_parse_error!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "10%");
+		assert_peek_false!(CssAtomSet::ATOMS, LineHeightStepStyleValue, "10%");
 	}
 }

@@ -63,7 +63,7 @@ pub struct OFilterStyleValue<'a>;
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
 	fn test_o_object_fit_parses() {
@@ -76,7 +76,7 @@ mod tests {
 
 	#[test]
 	fn test_o_object_fit_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, OObjectFitStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, OObjectFitStyleValue, "invalid");
 	}
 
 	#[test]
@@ -87,7 +87,7 @@ mod tests {
 
 	#[test]
 	fn test_o_box_sizing_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, OBoxSizingStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, OBoxSizingStyleValue, "invalid");
 	}
 
 	#[test]
@@ -99,6 +99,6 @@ mod tests {
 
 	#[test]
 	fn test_o_filter_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, OFilterStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, OFilterStyleValue, "invalid");
 	}
 }

@@ -473,7 +473,7 @@ pub struct MsTransitionStyleValue<'a>;
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn test_ms_interpolation_mode_parses() {
@@ -483,8 +483,8 @@ mod tests {
 
 	#[test]
 	fn test_ms_interpolation_mode_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MsInterpolationModeStyleValue, "invalid");
 	}
 
 	#[test]
@@ -495,7 +495,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_box_sizing_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsBoxSizingStyleValue, "invalid");
 	}
 
 	#[test]
@@ -508,7 +508,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_overflow_style_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsOverflowStyleStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsOverflowStyleStyleValue, "invalid");
 	}
 
 	#[test]
@@ -522,7 +522,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_touch_action_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsTouchActionStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsTouchActionStyleValue, "invalid");
 	}
 
 	#[test]
@@ -534,7 +534,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_user_select_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsUserSelectStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsUserSelectStyleValue, "invalid");
 	}
 
 	#[test]
@@ -546,7 +546,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_text_size_adjust_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsTextSizeAdjustStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsTextSizeAdjustStyleValue, "invalid");
 	}
 
 	#[test]
@@ -559,7 +559,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexStyleValue, "invalid");
 	}
 
 	#[test]
@@ -579,7 +579,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_direction_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexDirectionStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexDirectionStyleValue, "invalid");
 	}
 
 	#[test]
@@ -591,7 +591,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_wrap_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexWrapStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexWrapStyleValue, "invalid");
 	}
 
 	#[test]
@@ -605,7 +605,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_pack_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexPackStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexPackStyleValue, "invalid");
 	}
 
 	#[test]
@@ -619,7 +619,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_align_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexAlignStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexAlignStyleValue, "invalid");
 	}
 
 	#[test]
@@ -634,7 +634,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_item_align_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexItemAlignStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexItemAlignStyleValue, "invalid");
 	}
 
 	#[test]
@@ -649,7 +649,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_flex_line_pack_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFlexLinePackStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFlexLinePackStyleValue, "invalid");
 	}
 
 	#[test]
@@ -661,7 +661,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_transform_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsTransformStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsTransformStyleValue, "invalid");
 	}
 
 	#[test]
@@ -677,7 +677,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_filter_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsFilterStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsFilterStyleValue, "invalid");
 	}
 
 	#[test]
@@ -689,7 +689,7 @@ mod tests {
 
 	#[test]
 	fn test_ms_word_break_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MsWordBreakStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MsWordBreakStyleValue, "invalid");
 	}
 
 	#[test]

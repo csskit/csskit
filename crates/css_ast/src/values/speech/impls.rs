@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	pub fn size_test() {
@@ -37,7 +37,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "Alice");
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "\"Alice\"");
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "Alice,male");
-		assert_parse_error!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "");
 	}
 
 	#[test]
@@ -50,8 +50,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "x-loud");
 		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "soft 6db");
 		assert_parse!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "loud -3db");
-		assert_parse_error!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, VoiceVolumeStyleValue, "1px");
 	}
 
 	#[test]
@@ -64,8 +64,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "x-fast");
 		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "50%");
 		assert_parse!(CssAtomSet::ATOMS, VoiceRateStyleValue, "normal 50%");
-		assert_parse_error!(CssAtomSet::ATOMS, VoiceRateStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, VoiceRateStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, VoiceRateStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, VoiceRateStyleValue, "1px");
 	}
 
 	#[test]

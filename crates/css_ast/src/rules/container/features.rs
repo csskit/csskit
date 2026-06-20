@@ -84,6 +84,10 @@ pub enum StyleQuery<'a> {
 	Or(Vec<'a, (StyleFeature<'a>, Option<T![Ident]>)>),
 }
 
+impl<'a> Peek<'a> for StyleQuery<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen, Kind::Ident]);
+}
+
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -159,6 +163,16 @@ pub enum ScrollStateQuery<'a> {
 	Not(T![Ident], ScrollStateFeature),
 	And(Vec<'a, (ScrollStateFeature, Option<T![Ident]>)>),
 	Or(Vec<'a, (ScrollStateFeature, Option<T![Ident]>)>),
+}
+
+impl<'a> Peek<'a> for ScrollStateQuery<'a> {
+	const PEEK_KINDSET: KindSet = ScrollStateFeature::PEEK_KINDSET.add(Kind::Ident);
+	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		<ScrollStateFeature>::peek(p, c) || (c == Kind::Ident && p.equals_atom(c, &CssAtomSet::Not))
+	}
 }
 
 impl<'a> FeatureConditionList<'a> for ScrollStateQuery<'a> {

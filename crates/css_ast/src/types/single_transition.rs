@@ -49,7 +49,7 @@ impl<'a> Parse<'a> for SingleTransition<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	type NoneOrSingleTransitionProperty = NoneOr<SingleTransitionProperty>;
 
@@ -94,7 +94,7 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, SingleTransition, "1deg");
+		assert_peek_false!(CssAtomSet::ATOMS, SingleTransition, "1deg");
 		assert_parse_error!(CssAtomSet::ATOMS, SingleTransition, "none none");
 	}
 
