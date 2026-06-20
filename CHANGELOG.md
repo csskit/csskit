@@ -1,3 +1,28 @@
+## [0.0.26] - 2026-06-20
+
+### Other Changes
+- Chore(deps): update dependencies to v1.48.0 (#1227) ([#1227](https://github.com/csskit/csskit/pull/1227))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#1221) ([#1221](https://github.com/csskit/csskit/pull/1221))
+- fuzz(css_parse): Mark more erroneous tokens in blocks as trivia. (#1225) ([#1225](https://github.com/csskit/csskit/pull/1225))
+
+
+### Css_lexer
+- fuzz(css_lex): avoid buffer overflows with SmallStr buffer (#1220) ([#1220](https://github.com/csskit/csskit/pull/1220))
+
+
+### Css_parse
+- fuzz(css_parse): consume `Bad` tokens as trivia in blocks. (#1228) ([#1228](https://github.com/csskit/csskit/pull/1228))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1222) ([#1222](https://github.com/csskit/csskit/pull/1222))
+- csskit_wasm/csskit(node): Provide csskit library functions in csskit package (#1234) ([#1234](https://github.com/csskit/csskit/pull/1234))
+- csskit(node): manage wasm-opt with mise (#1235) ([#1235](https://github.com/csskit/csskit/pull/1235))
+- csskit(node): Move build script to Mise (#1237) ([#1237](https://github.com/csskit/csskit/pull/1237))
+
 ## [0.0.25] - 2026-06-13
 
 ### Other Changes
@@ -30,6 +55,7 @@
 ### Csskit
 - csskit: improve json output for subcommands (#1182) ([#1182](https://github.com/csskit/csskit/pull/1182))
 - chore(deps): update dependencies (patch) (#1185) ([#1185](https://github.com/csskit/csskit/pull/1185))
+- Release v0.0.25 (#1181) ([#1181](https://github.com/csskit/csskit/pull/1181))
 
 
 ### Csskit_derives
