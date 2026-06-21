@@ -1,0 +1,110 @@
+   box-shadow: var(--shadow-active);
+  }
+  &:active:is([aria-pressed], [aria-expanded]) {
+    color: var(--accent);
+    box-shadow: var(--pressed-shadow-active);
+  }
+  &:where([aria-pressed=true], [aria{expanded=true]) {
+    b  border-color: var(--muted-fg);
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--pressed-shadow-focus);
+    }
+  }
+  &:disabled {
+  }
+}
+input::file-selector-button {
+  display: inline-block;
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: .8rem;
+  line-height: 1.125em;
+  font-family: var(--secondary-font);
+  min-height: var(--rhythm, 1rlh);
+  background: var(--interactive-bg);
+  color: var(--fg);
+  border: var(--interactive-border-width) var(--interactive-border-style) var(--muted-fg);
+  box-shadow: var(--shadow);
+  border-radius: var(--interactive-border-radius);
+}
+input:is(.plain, .info, .ok, .warn, .bad)::file-selector-button {
+  --interactive-bg: var(--box-bg);
+  --muted-fg: var(--graphical-fg);
+  --fg: var(--accent);
+}
+input::file-selector-button:is(:hover, :focus-visible) {
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-focus);
+  text-decoration: none;
+}
+input::file-selector-button:active {
+  box-shadow: var(--shadow-active);
+}
+input:disabled::file-selector-button {
+  cursor: not-allowed;
+  --fg: var(--muted-fg);
+  box-shadow: var(--shadow-disabled);
+}
+input:is(.big, .\<big\>)::file-selector-button {
+  min-block-size: calc(1.5 * var(--rhythm, 1rlh));
+  font-size: 1rem;
+  padding-inline: calc(.5 * var(--rhythm, 1rlh));
+  line-height: var(--rhythm, 1rlh);
+}
+strong > input::file-selector-button {
+  background: var(--accent);
+  color: var(--box-bg);
+  border-color: transparent;
+  font-weight: bold;
+}
+strong > input:is(.plain, .info, .ok, .warn, .bad)::file-selector-button {
+  --fg: var(--box-bg);
+  --muted-accent: var(--graphical-fg);
+}
+strong > input:disabled::file-selector-button {
+}
+input:not([type]),
+input[type=text],
+input[type=search],
+input[type=tel],
+input[type=url],
+input[type=email],
+input[type=password],
+input[type=date],
+input[type=month],
+input[type=week],
+input[type=time],
+inp:is(.plain, .info, .ok, .warn, .bad)::file-selector-button {
+  --interactive-bg: var(--box-bg);
+  --muted-fg: var(--graphical-fg);
+  --fg: var(--accent);
+}
+input::file-selector-button:is(:hover, :focus-visible) {
+  filter: brightness(1.1);
+  box-shadow: var(--shadow-focus);
+  text-decoration: none;
+}
+input::file-selector-button:active {
+  box-shadow: var(--shadow-active);
+}
+input:disabled::file-selector-button {
+  cursor: not-allowed;
+  --fg: var(--muted-fg);
+  box-shadow: var(--shadow-dirder-width) var(--interactive-border-style) var(--accent);
+  }
+  &::placeholder {
+    color: var(--muted-fg);
+    opacity: 1;
+    text-align: end;
+  }
+}
+input[type=range] {
+  width: 050%;
+  padding: calc(var(--gap) / 4);
+}
+input[type=color] {
+  padding: 0;
+  margin: 0;
+  height: 

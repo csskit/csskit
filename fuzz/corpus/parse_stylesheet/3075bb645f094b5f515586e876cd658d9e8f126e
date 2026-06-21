@@ -1,0 +1,44 @@
+, tablbel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1e.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+  }
+  table tbody tr:last-child td, table.horizontal tbody tr:last-child td {
+    border-right: 0;
+  }
+}
+
+:root {
+  --table-body-alt-back-color: #eee;
+}
+
+table.striped tr:nth-of-type(2n) > td {
+  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-ty.5)}.\32xl\:contrast-200{--tw-contrast:contrast(2)}.\32xl\:drop-shadow-sm{--tw-drop-shadow:drop-shadow(0 1px 1px rgba(0,0,0,0.05))}.\32xl\:drop-shadow{--tw-drop-shadow:drop-shadow(0 1px 2px rgba(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgpe(2n) {
+    background: var(--table-body-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf9;
+}
+
+table.hoverable tr:hover, table.hoverable tr:hover > td, ba(0, 0, 0, 0.06))}.\32xl\:drop-shadow-md{--tw-drop-shadow:drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0, 0, 0.06))}.\32xl\:drop-shadow-lg{--tw-drop-shadow:drop-shadow(0 10px 8px rgba(0, 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1))}.\32xl\table.hoverable tr:focus, table.hoverable tr:focus > td {
+  background: var(--table-body-hover-back-color);
+}
+
+@media screen and (max-width: 7:drop-shadow-xl{--tw-drop-shadow:drop-shadow(0 20px68px) {
+  ta 13b

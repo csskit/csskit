@@ -1,0 +1,49 @@
+from-green-900:hover{--tw-gradient-from:#064eover\:from-indigo-800:hover{--tw-gradient-from:#3730a3;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(55, 48, 163, 0))}.hover\:from-indigo-900:hover{--tw-gradient-from:#312e81;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(49, 46, 129, 0))}.hover\:from-purple-50:hover{--tw-gradient-from:#f5f3ff;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(245, 243, 255, 0))}.hover\:from-purple-100:hover{--tw-gradient-from:#ede9fe;--tw-gradient-stops:var(/-tw-gradient-from),var(--tw-gradient-to, rgba(237, 233, 254, 0))}.hover\:from-purple-200:hover{--tw-gradient-from:#ddd6fe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(221, 214, 254, 0))}.hover\:from-purple-300:hover{--tw-gradient-from:#c4b5fd;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(196, 181, 253, 0))}.hover\:from-purple-400:hover{--tw-gradient-from:#a78bfa;--tw-grpacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transform: translate3d(0, 100%, 0);
+  }
+}
+.animate__fadeOutDown {
+  -webkit-animation-name: fadeOutDown;
+  animation-name: fadeOutDown;
+}
+@-webkit-keyframes fadeOutDownBig {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2000px, 0);
+    transform: translate3d(0, 2000px, 0);
+  }
+}
+@keyframes fadeOutDownBig {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 2000px, 0);
+    transform: translate3d(0, 2000px, 0);
+  }
+}
+.animate__fadeOutDownBig {
+  -webkit-animation-name: fadeOutDownBig;
+  animation-name: fadeOutDownBig;
+}
+@-webkit-keyframes fadeOutLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0);
+    transform: translate3d(-100%, 0, 0);
+  }
+}
+@keyframes fadeOutLeft {
+  from {
+  adient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(167, 139, 250, 0))}.hover\:from-purple-500:hover{--tw-gradient-from:#8b5cf6;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(139, 92, 246, 0))}.hover\:from-purple-600:hover{--tw-gradient-from:#7c3aed;--tw-gradient-stops:va?r(--tw-gradient-from),var(--tw-gradient-to, rgba(124, 58, 237, 0))}.hover\:from-purple-700:hover{--tw-gr

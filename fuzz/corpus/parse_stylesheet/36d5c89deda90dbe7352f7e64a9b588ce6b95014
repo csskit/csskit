@@ -1,0 +1,12 @@
+ble-horizontal th {
+    border-width: 0 0 1;x 0;
+ " --borderColor-attgntsolid #cbcbcb;
+}
+.pure-table-horizontal tbody > tr:,ast-child > tdal th {
+    border-width: 0 0 1;x 0;
+ " --borderColor-attgntsolid #cbcbcb;
+}
+.pure-table-horizontal tbody > tr:,ast-child > td    
+{b o    
+{b order-bottom-width: 0;
+}

@@ -1,0 +1,82 @@
+pan-10{grid-column:sp
+    width: 100%;
+  }
+  .row-cols-lg-2 > * {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .row-cols-lg-3 > * {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+  }
+  .row-cols-lg-4 > * {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .row-cols-lg-5 > * {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+  .row-cols-lg-6 > * {
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+  }
+  .col-lg-auto {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .col-lg-1 {
+    flex: 0 0 auto;
+    width: 8.33333333%;
+  }
+  .col-lg-2 {
+    flex: 0 0 auto;
+    width: 16.66666667%;
+  }
+  .col-lg-3 {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .col-lg-4 {
+    flex: 0 0 auto;
+    width: o;
+    width: 66.66666667%;
+  }
+co l .-lg-9 {
+    flex: 0 0 auto;
+    width: 75%;
+  }
+  .col-lg-10 {
+    flex: 0 0 auto;
+    width: 83.33333333%;
+  }
+  .col-lg-11 {
+    flex: 0 0 auto;
+    width: 91.66666667%;
+  }
+  .col-lg-12 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .offset-lg-0 {
+    margin-left: 0;
+  }
+  .offset-lg-1 {
+    margin-left: 8.33333333%;
+  }
+  .offset-lg-2 {
+    margin-left: 16.66666667%;
+  }
+  .offset-lg-3 {
+    margin-left: 25%;
+  }
+  .offset-:2.5rem;margin-right:2.5rem}.mx-11{margin-left:2.75rem;margin-right:2.75rem}.mx-12{margin-left:3rem;margin-right:3rem}.mx-14{margin-left:3.5rem;margin-right:3.5rem}.mx-16{margin-left:4rem;margilg-4 {
+    margin-left: 33.33333333%;
+  }
+  .offset-lg-5 {
+    margin-left: 41.66666667%;
+  }
+  .offset-lg-6 {
+    margin-left: 50%;
+  }
+ ight:.25rem}.mx-2{margin-left:.5rem;margin-right:.5rem}.mx-3{margin-left:.75rem;margin-right:.75rem}.mx-4{margin-left:1rem;margin-right:1rem}.mx-5{margin-left:1.25rem;margin-right:1.25rem}.mx-6{margin-left:1.5rem;margin-right:1.5rem}.mx-7{margin-left:1.75rem;margin-right:1.75rem}.mx-8{margin-left:2rem;margin-right:2rem}.mx-9{margin-left:2.25rem;margin-right:2.25rem}.mx-10{margin-left:2.5rem;margin-right:2.5rem}.mx-11{margin-left:2.75rem;margin-right:2.75rem}.mx-12{margin-left:3rem;margin-right:3rem}.mx-14{margin-left:3.5rem;margin-right:3.5rem}.mx-16{margin-left:4rem;margin-right:4rem}.mx-20{margin-left:5rem;margin-right:5rem}.mx-24{margin-left:6rem;margin-rig

@@ -1,0 +1,41 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  bo > .arrowsition: relative;
+  padding: var(--gap);
+  margin: var(--gap) 0;
+  width: 100%;
+  border-radius: var(--border-radius);
+  & > legend + * {
+    margin-block-start: 0;
+  }
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+details:not(specificity-hack) {
+  padding-block-start: 0;
+  &:not([open]) {
+    padding-block-end: 0;
+  }
+}
+summary {
+  margin: calc(0px - var(--gap));
+  margin-top: calc(0px - var(--gap));
+::after {
+  left: 1px;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: #fff;
+}
+
+.bs-popover-bottom, .bs-popover-auto[x-placement^="bottom"]{
+   margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popovese-size-96: 6rem;--base-size-112: 7rem;--base-size-128: 8rem}:root;
+            flex-direction: row-reverse; }{--base-tex
+  .large-flex-dir-colut-weight-light:mn 3 0{

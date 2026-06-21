@@ -1,0 +1,58 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.border-inline-start {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+}
+.border-inline-end\:none {
+  border-inline-end: none;
+}
+.border-inline-end {
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+
+/* src/variables.css */
+:root {
+  --fg: light-dark(r(--gap) 0;
+  margin-block: var(--gap);
+  font-size: 1.1em;
+  line-height: var(--rhythm, 1rlh);
+  font-style: italic;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  color: var(--muted-fg);
+  & em,
+  & cite,
+  & dfn,
+  & var,
+  &  solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--fg) inset;
+  --pressed-shadow-focus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",
