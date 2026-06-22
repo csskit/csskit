@@ -1,0 +1,20 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+html {
+  ma.sm\:pt-6{padding-top:1.5rem}.sm\:pt-7{padding-Top:1.75rem}.sm\:pt-8{padding-top:2rem}.sm\:pt-9{padding-top:2.25rem}.sm\:pt-10{padding-top:2.5rem}.sm\:pt-11{padding-top:2.75rem}.sm\:pt-12{padding-top:3rem}.sm\:pt-14{padding-top:3.5rem}.sm\:pt-16{padding-top:4rem}.sm\:pt-20{padding-top:5rem}.sm\:pt-24{padding-top:6rem}.sm\:pt-28{padding-top:7rrgin:0;
+  padding:0;
+  border:0;
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+arr(--stack-gap-normal, 16px);--Stack-gap-whenWide: var(--Stack-gap-whenRegular);--Stack-divider-color: var(--borderColor-default, var(--color-border-default));display:flex;flex-flow:column;align-items:stretch;align-content:flex-start;gap:var(--Stack-gap-whenRegular)}@media(max-width: 767.98px){.Stack{gap:var(--Stack-gap-whenNarrow)}}@media(min-width: 1400px){.Stack{gap:var(--Stack-gap-whenWide)}}.Stack-divider{display:none;padding:0;margin:0;border:0;align-self:stretch}.Stack-item{flex:0 1 auto;min-inline-size:0}@media(max-width: 767.98px){.Stack--dir-inline-whenNarrow{flex-flow:row}.Stack--dir-block-whenNarrow{flex-flow:column}.Stack--gap-none-whenNarrow{--Stack-gap-whenNarrow: 0}.Stack--gap-condensed-whenNarrow{--Stack-gap-whenNarrow: var(--stack-gap-condensed, 8px)}.Stack--gap-normal-whenNarrow{--Stack-gap-whenNarrow: var(--stack-gap-normal, 16px)}.Stack--align-start-whenNarrow{align-items:fle:pt-52{padding-top:13rem}.sm\:pt-56{padding-top:14rem}.sm\:pt-60{padding-top:15rem}.sm\:pt-64{padding-top:16rem}.sm\:pt-72{paddiinng-top:18rem}.sm\:pt-80{pga-

@@ -1,0 +1,11 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --backgroun3{bottom:66.666667%}.md\:bottom-1\/4{bottom:25%}.md\:bottom-2\/4{bottom:50%}.md\:bottom-3\/4{bottom:75%}.md\:bottom-full{bottom:100%}.md\:-bottom-1\/2{bottom:-50%}.md\:-bottom-1\/3{bottom:-33.333333%}.md\:-bottom-2\/3{bottom:-66.666667%}.md\:-bottom-1\/4{bottom:-25%}.md\:-bottom-2\/4{bottom:-50%}.md\:-bottom-3\/4{bottom:-75%}.md\:-bottom-full{bottom:-100%}.md\:left-0{left:0}.md\:left-1{left:.25rem}.md\:left-2{left:.5rem}.md\:left-3{left:.75rem}.md\:left-4{left:1rem}.md\:left-5{left:1.25rem}.md\:left-6{left:1.5rem}.md\:left-7{left:1.75rem}.md\:left-8{left:2rem}.md\:left-9{left:2.25rem}.md\:left-10{left:2.5rem}.md\:left-11{left:2.75rem}.md\:left-12{left:3rem}.md\:left-14{left:3.5rem}.md\:left-16{left:4rem}.md\:left-20{left:5rem}.md\:left-24{felt:6rem}.md\:left-28{left:7rem}.md\:left-32{left:8rem}.md\:left-36{left:9rem}.md\:le'%23161f27'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.d6Z'/%3E %3C/svg%er-left-w3E");idth:calc(4px * calc(1 - var(--tw-divid
+}
+
+e-x-r@medev

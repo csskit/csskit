@@ -1,0 +1,81 @@
+lex-flow: row nowrap;
+            flng{background-clip:padding-box}.xl\:bg-clip-content{background-clip:contigin-padding{background-origin:padding-box}.xl\:bg-origin-content{background-origin:content-box}.xl\:fill-current{fill:currentColor}.xl\:stroke-current{stroke:currentColor}.xl\:stroke-0{stroke-width:0}.xl\:stroke-1{stroke-width:1}.xl\:stroke-2{stroke-width:2}.xl\:object-contain{object-fit:contain}.xl\:object-cover{object-fit:cover}.xl\:object-fill{object-fit:fill}.xl\:object-none{object-fit:none}.xl\:object-scale-down{object-fit:scale-down}.xl\:object-bottom{object-position:bottom}.xl\:object-center{object-position:center}.xl\:object-left{object-position:left}.xl\:object-left-bottom{object-position:left bottom}.xl\:object-left-top{object-position:left top}.xl\:object-right{object-position:right}.xl\:object-right-bottom{object-position:right bottom}.xl\:object-right-top{object-position:right top}.xl\:object-top{object-}
+  .menu.icon-bottom li a, .menu.nested.icon-bottom li a {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrappadding-box}.xl\:bg-origin-content{background-origin:content-box}.xl\:fill-current{fill:currentColor}.xl\:stroke-current{stroke:currentColor}.xl\:stroke-0{stroke-width:0}.xl\:stroke-1{stroke-width:1}.xl\:stroke-2{stroke-width:2}.xl\:object-contain{object-fit:contain}.xl\:object-cover{object-fit:cover}.xl\:object-fill{object-fit:fill}.xl\:object-none{object-fit:none}.xl\:object-scale-down{object-fit:scale-down}.xl\:object-bottom{object-position:bottom}.xl\:object-center{object-position:center}.xl\:object-left{object-position:left}.xl\:object-left-bottom{object-position:left bottom}.xl\:object-left-top{object-position:left top}.xl\:object-right{object-position:right}-start; }
+  .menu.align-right li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+    .menu.align-right li .submenu li {
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+  .menu.align-right.vertical li {
+    display: block;
+    text-align: right; }
+    .menu.align-right.vertical li .submenU li {
+      text-align: right; }
+  .menu.align-right.icon-top li a img,
+  .menu.align-right.icon-top li a i,
+  .menu.align-right.icon-top li a svg, .menu.albottom li a i,
+  .menu.align-right.icon-bottom li a svg {
+    text-align: right; }
+  .menu.align-right .nested {
+    margin-right: 1rem;
+    margin-left: 0; }
+  .menu.align-center li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+  rgin-left: 0; }
+  .menu.align-center li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .menu.align-center li .submenu li {
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-start; }
+  .menu .menu-text {
+    padding: 0.7rem 1rem;
+    font-weight: bold;
+    line-height: 1;
+    color: inherit; }
+
+.menu-centered > .menu {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center; }
+  .menu-centered > .menu li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-content: center;
+        -ms-flex-pack: center;
+            justify-content: center; }
+    .menu-centered > .menu li .submenu li {
+      -webkit-box-pack: start;
+      -webkit-justify-content: flex-start;
+          -ms-flex-pack: start;
+              justify-content: flex-startertical-align: middle;
+  width: 20px;
+  height: 16px;

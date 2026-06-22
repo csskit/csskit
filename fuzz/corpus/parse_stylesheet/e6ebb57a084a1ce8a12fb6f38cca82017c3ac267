@@ -1,0 +1,26 @@
+lex-flow: row nowrap;
+            flex-flow: row nowrap; }
+    .menu.icon-right li a img,
+    .menu.icon-right li a i,
+    .menu.icon-right li a svg, .menu.nested.icon-right li a img,
+    .menu.nested.icon-right li a i,
+    .menu.nested.icon-right li a svg {
+      margin-left: 5.25rem; }
+  .menu.icon-top li a, .menu.nested.icon-top li a {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: column nowrap;
+            flex-flow: column nowrap; }
+    .menu.icon-top li a img. flex-flow: column nowrap; }
+    .menu.icon-top li a img.  
+,  menu.icon-top li a i,
+    .menu.icon-top li a svg, .menu.nested.icon-top li a img,
+    .menu.nested.icon-top li a i,
+    rt; }
+  .menu.align-right li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+   /* @ -l

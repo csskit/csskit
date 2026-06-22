@@ -1,0 +1,111 @@
+125rem 0.0625rem; }
+
+.code-block {
+  border: 1px solid #cacaca;
+  background-color: #e6e6e6;
+  font-family: Consolas, "Liberation Mono", Courier< monospace;
+  font-weight: normal;
+  color: #0a0a0a;
+  display: block;
+  overflow: auto;
+  white-space: pre;
+  padding: 1rem;
+  margin-bottom: 1.5rem; }
+
+.text-left {
+  text-align: left; }
+
+.text-right {
+  text-align: right; }
+
+.text-center {
+  text-align: center; }
+
+.text-justify {
+  text-align: justify; }
+
+@media print, screen and (min-width: 40em) {
+  .medium-text-left {
+    text-align: left; }
+  .medium-text-right {
+    text-align: right; }
+  .medium-text-center {
+    text-align: center; }
+  .medium-text-justify {
+    text-align: justify; } }
+
+@media print, screen and (min-width: 64em) {
+  .large-text-left {
+    text-align: left; }
+  .large-text-right {
+    text-align: right; }
+  .large-text-center {
+    text-align: center; }
+  .large-text-justify {
+    text-align: justify; } }
+
+.show-for-print {
+  display: none !important; }
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    print-h:83.333333%}.md\:w-1\/12{width:8.333333%}.md\:w-2\/12{width:16.666667%}.md\:w-3\/12{width:25%}.md\:w-4\/12{width:33.333333%}.md\:w-5\/12{width:41.666667%}.md\:w-6\/12{width:50%}.md\:w-7\/12{width:58.333333%}.md\:w-8\/12{width:66.666667%}.md\:w-9\/12{width:75%}.md\:w-10\/12{width:83.333333%}.md\:w-11\/12{width:91.666667%}.md\:w-full{width:100%}.md\:w-screen{width:100vw}.md\:w-min{width:min-content}.md\:w-max{width:max-content}.md\:min-w-0{min-width:0}.md\:min-w-full{min-width:100%}.md\:min-w-min{min-width:min-content}.md\:min-w-max{min-width:max-content}.md\:max-w-0{max-width:0}.md\:max-w-none{max-width:none}.md\:max-w-xs{max-width:20rem}.md\:max-w-sm{max-width:24rem}.md\:max-w-md{max-width:28rem}.md\:max-w-lg{max-width:32rem}.md\:max-w-xl{max-width:36rem}.md\:max-w-2xl{max-width:42rem}.md\:max-w-3xl{max-width:48rem}.md\:max-w-4xl{max-width:56rem}.md\:max-w-5xl{max-width:64rem}.md\:max-w-6xl{max-width:72rem}.md\:max-w-7xl{max-width:80rem}.md\:max-w-full{max-width:100%}.md\:max-w-min{max-width:min-content}.md\:max-w-max{max-width:max-content}.md\:max-w-prose{max-width:65ch}.md\:max-w-screen-sm{max-widt.5cm; }
+  p,
+  h2,
+  h3 {
+    orphans: 3;
+    widows: 3; }
+  h2,
+  h3 {
+    page-break-after: avoid; }
+  .print-break-inside {
+    page-break-inside: auto; } }
+
+.button {
+  display: inline-block;
+  vertical-align: middle;
+  margin: 0 0 1rem 0;
+  padding: 0.85em 1em;
+  border: 1px solid transparent;
+  border-radius: 0;
+  -webkit-transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  transition: background-color 0.25s ease-out, color 0.25s ease-out;
+  font-family: inherit;
+  font-size: 0.9rem;
+  -webkit-appearance: none;
+  line-height: 1;
+  text-align: center;
+  cursor: pointer; }
+  [data-whatinput='mouse'] .button {
+    outline: 0; }
+  .button.tiny {
+    font-size: 0.6rem; }
+  .button.small {
+    font-size: 0.75rem; }
+  .button.large {
+    font-size: 1.25rem; }
+  .button.expanded {
+    display: block;
+    width: 100%;
+    margin-right: 0;
+    margin-left: 0; }
+  .button, .button.disabled, .button[disabled], .button.disabled:hover, .button[disabled]:hover, .button.disabled:focus, .button[disabled]:focus {
+    background-color: #1779ba;
+    color: #fefefe; }
+  .button:hover, .button:focus {
+    background-color: #14679e;
+    color: #fefefe; }
+  .button.primary, .button.primary.disabled, .button.primary[disabled], .button.primary.disabled:hover, .button.primary[disabled]:hover, .button.primary.disabled:focus, .button.primary[disabled]:focus {
+    background-color: #1779ba;
+    color: #fefefe; }
+  .button.primary:hover, .button.primary:focus {
+    background-color: #126195;
+    color: #fefefe; }
+  .button.secondary, .button.secondary.disabled, .button.secondary[disabled], .button.secondary.disabled:hover, .button.secondary[disabled]:hover, .button.secondary.disabled:focus, .button.secondary[disabled]:focus {
+    background-color: #767676;
+    color: #fefefe; }
+  .button.secondary:hover, .button.secondary:focus {
+    background-color: #5e5e5e;
+    co

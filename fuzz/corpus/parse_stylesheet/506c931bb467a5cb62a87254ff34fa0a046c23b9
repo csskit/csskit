@@ -1,0 +1,31 @@
+In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;]
+  border: none;
+}
+
+hr.space {
+  background: #fff1;background-color:rgba(224,231,255,var(--tw-bg-opacity))}.focus-within\:bg-indigo-200:focus-within{--tw-bg-opacity:1;background-color:rgba(199,210,254,var(--tw-bg-opacity))}.focus-within\:bg-indigo-300:focus-within{--tw-bg-opacity:1;background-color:rgba(165,180,252,var(--tw-bg-opacity))}.focus-within\:bg-indigo-400:focus-within{--tw-bg-opacity:1;background-color:rgba(129,140,248,var(--tw-bg-opacity))}.focus-within\:bg-indigo-x to create a padded box inside a us ones. */
+
+.clear { clear:both; }

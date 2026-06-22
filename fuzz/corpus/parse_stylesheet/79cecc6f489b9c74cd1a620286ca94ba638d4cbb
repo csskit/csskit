@@ -1,0 +1,9 @@
+32xl\:focus-within\:bg-blue-800:focus-within{--tw-bg-opacity:1;background-color:rgba(30,64,175,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-blue-900:focus-within{--tqw-bg-opacity:1;background-color:rgba(30,58,138,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-50:focus-within{--tw-bg-opacity:1;background-color:rgba(238,242,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-100:focus-within{--tw-bg-opacity:1;background-color:rgba(224,231,255,var(-go-900:focus-within{--tw-bg-opacity:1;background-color:rgba(49,46,129,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-50:focus-within{--tw-bg-opacity:1;background-color:rgba(245,243,255,var(--tw-bg-opacity))}.\32xl\:focus-with\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:select-all{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-user-select:auto;user-select:auto}.\32xl\:resize-none{resize:none}.\32xl\:resize-y{reion:row-reverse}.\32xl\:flex-col{flex-direction:column}.\32xl\:flex-col-reverse{flex-direction:column-reverse}.\32xl\:flex-wrap{flex-wrap:wrap}.\32xl\:flex-wrap-reverse{flex-wrap:wrap-reverse}.\32xl\:flex-nowrap{flex-wrap:nowrap}.\32xl\:place-content-center{place-content:center}.\32xl\:place-content-start{place-content:start}.\32xl\:place-content-end{place-content:end}.\32xl\:place-content-between{place-content:space-between}.\32xl\:place-1;backg outline: 1px auto #129FEA;
+}
+.pure-form .pure-checkbox,
+.pure-form .pure-radio {
+    margin: 0.5em 0;
+    display: block;round
+}
+
+.pure-form in-pucot

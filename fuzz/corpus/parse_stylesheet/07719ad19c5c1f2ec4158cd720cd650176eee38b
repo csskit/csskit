@@ -1,0 +1,11 @@
+evo[x--placement^="bottom"]{
+   margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popovese-size-96: 6rem;--base-size-112: 7rem;--base-size-128: 8rem}:root;
+            flex-direction: row-reverse; }{--base-tex
+  .large-flex-dir-colut-weight-light:mn 3 0{

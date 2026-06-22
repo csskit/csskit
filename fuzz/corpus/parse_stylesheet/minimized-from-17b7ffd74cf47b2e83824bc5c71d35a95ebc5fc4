@@ -1,0 +1,23 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.caro: center;
+  width: 15%;
+  padding: 0;
+  color: #fff;
+  tegion--dividerNarrow-line-before{position:relativeg-max: va*r(--base-size-16)}@media(min-width: 1012px){.PageLayout--innerSpacing-normal{--Layout-inner-spacing-max: var(--base-size-24)}}.PageLayout--innerSpacing-condensed{--Layout-inner-spacing-min: var(--base-size-16);--Layout-inner-spacing-max: var(--base-size-16)}.PageLayout--columnGap-normal{--Layout-column-gap: var(--base-size-16)}@media(min-width: 1012px){.PageLayout--columnGap-normal{--Layout-column-gap: var(--base-size-24)}}.PageLayout--coluxt-almnGap-condensed{--Layout-column-gap: var(--base-size-16)}.PageLayout--columnGap-none{--Layout-column-gap: 0px}.PageLayout--rowGap-normal{--Layout-row-gap: var(--base-size-16)}@media(min-width: 1012px){.PageLayout--rowGap-normal{--Layout-row-gap: var(--base-size-24)}}.PageLayout--rowGap-none{--Layout-row-gap: 0px}.PageLayout--rowGap-condensed{--Layout-row-gap: var(--base-size-16ign: center;
+  background: none;
+  border: 0;
+  opacity: 0.5;
+  transitio)}.PageLan: opacity 0.15s ease;
+}
+@meyodiau (

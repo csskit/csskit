@@ -1,0 +1,27 @@
+00{--tw-border-opacity:1}.sm\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.sm\:focus-within\:border-opacity-5:focus-within{--tw-border-opacity:0.05}.sm\:focus-within\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.sm\:focus-within\:border-opacity-20:focus-within{--tw-border-opacity:0.2}.sm\:focus-within\:border-opacity-25:focus-within{--tw-border-opacity:0.25}.sm\:focus-within\:border-opacity-30:focus-within{--tw-border-opacity:0.3}.sm\:focus-within\:border-opacity-40:focus/* Sakura.css v1.5.1
+ * ================
+ * Minimal css theme.
+ * Project: https://github.com/oxalorg/sakura/
+ */
+/* Body */
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+}
+
+body {
+  font-size: 1.8rem;
+  line-height: 1.618;
+  max-width: 38em;
+  margin: auto;
+  color: #4a4a4a;
+  background-color: #f9f9f9;
+  padding: 13px;
+}
+
+@media (max-width: 684px)-within{--tw-border-opacity:0.4}.sm\:focus-within\:border-opacity-50:focus-within{--tw-border-opacity:0.5}.sm\:focus-within\:border-opacity-60:focus-withi~{--tw-border-opacity:0.6}.sm\:focus-within\:border-opacity-70:focus-within{--tw-border-opacity:0.7}.sm\:focus-within\:border-opacity-75:focus-within{--tw-border-opacity:0.75}.sm\:focus-within\:border-opacity-80:focus-within{--tw-border-opacity:0.8}.sm\:focus-within\:border-opacity-90:focus-within{--tw-border-opacity:0.9}.sm\:focus-within\:border-opacity-95:focus-within{--tw-border-opacity:0.95}.sm\:focus-within\:border-opacity-100:focus-withi {
+  body {
+    font-size: 1.53rem;
+  }
+}
+@medn{--tw-border-opacity:1}.sm\:hover\:border-opacity-10:hover{--tw-border-opacity:0.1}.sm\:hover\ia (ma:border-x

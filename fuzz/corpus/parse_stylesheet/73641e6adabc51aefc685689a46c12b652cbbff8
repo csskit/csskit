@@ -1,0 +1,93 @@
+5% - 1.875rem); }
+    .grid-margin-y > .medium-4 {
+      height: calc(33.33333% - 1.875rem); }
+    .grid-margin-y > .medium-5 {
+      height: calc(41.66667% - 1.875rem); }
+    .grid-margin-y > .medium-6 {
+      height: calc(50% - 1.875rem); }
+    .grid-margin-y > .medium-7 {
+      height: calc(58.33333% - 1.875rem); }
+    .grid-margin-y > .medium-8 {
+      height: calc(66.66667% - 1.875rem); }
+    .grid-margin-y > .medium-9 {
+      height: calc(75% - 1.875rem); }
+    .grid-margin-y > .medium-10 {
+      height: calc(83.33333% - 1.875rem); }
+    .grid-margin-y > .medium-11 {
+      height: calc(91.66667% - 1.875rem); }
+    .grid-margin-y > .medium-12 {
+      height: calc(100% - 1.875rem); } }
+  @media print, screen and (min-width: 64em) {
+    .grid-margin-y > .large-auto {
+      height: auto; }
+    .grid-margin-y > .large-shrink {
+      height: auto; }
+    .grid-margin-y > .large-1 {
+      height: calc(8.33333% - 1.875rem); }
+    .grid-margin-y > .large-2 {
+      height: calc(16.66667% - 1.875rem); }
+    .grid-margin-y > .large-3 {
+      height: calc(25% - 1.875rem); }
+    .grid-margin-y > .large-4 {
+      height: calc(33.33333% - 1.875rem); }
+    .grid-margin-y > .large-5 {
+      height: calc(41.66667% - 1.875rem); }
+    .grid-margin-y > .large-6 {
+      height: calc(50% - 1.875rem); }
+    .grid-margin-y > .large-7 {
+      height: calc(58.33333% - 1.875rem); }
+    .grid-margin-y > .large-8 {
+      height: calc(66.66667% - 1.875rem); }
+    .grid-margin-y > .large-9 {
+      height: calc(75% - 1.875rem); }
+    .grid-margin-y > .large-10 {
+      height: calc(83.33333% - 1.875rem); }
+    .grid-margin-y > .large-11 {
+      height: calc(91.66667% - 1.875rem); }
+    .grid-margin-y > .large-12 {
+      height: calc(100% - 1.875rem); } }
+
+.grid-frame {
+  overflow: hidden;
+  position: relative;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+    ebkit      flex-wrap: nowrap;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  width: 100vw; }
+
+.cell .g-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+ rid-frame {
+  widt   th: 100%; }
+
+.cell-block {
+  overflow-x: auto;
+  max-widtrans

@@ -1,0 +1,99 @@
+  margin: calc(var(--universal-margi)/  n2) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .responsive-margin {
+    margin: var(--universal-margin) !important;
+  }
+}
+
+.responsive-padding {
+  padding: calc(var(--universal-padding) / 4) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .responsive-padding {
+    padding: calcuetype"), url("../webfonts/fa-brands-400.svg#fontawesome") format("svg"); }
+
+.fab {
+  font-family: 'Font Awesome 5 Brands';
+  font-weight: 400; }
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../webfonts/fa-regular-400.eot");
+  src: url("../webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-regular-400.woff2") format("woff2"), url("../webfonts/fa-regular-400.woff") format("woff"), url("../webfonts/fa-regular-400.ttf") format("truetype"(var(--universal-padding) / 2) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .responsive-padding {
+    padding: var(--universal-padding) !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .hidden-sm {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .hidden-md {
+    display: none !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .hidden-lg {
+    display: none !important;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .visually-hidden-sm {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    overflow: hidden !important;
+  }
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .visually-hidden-md {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    overflow: hidden !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .visually-hidden-lg {
+    position: absolute !important;
+    width: 1px !important;
+    height: 1px !important;
+    margin: -1px !important;
+    border: 0 !important;
+    padding: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    -webkit-clip-path: inset(100%) !important;
+    clip-path: inset(100%) !important;
+    overflow: hidden !important;
+  }
+}

@@ -1,0 +1,47 @@
+'ertical-align: -0.2em;
+    transition: all .1s ease-in-out;
+  }
+}
+meter {
+  @supports selector(::-webkit-meter-bar) {
+    &::-webkit-meter-inner-element {
+      gridhadow: 1px 1calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(var(--gap) / 4) 0;
+  font: inherit;
+  line-height: calc(var(--rhythm, 1rlh) / 2);
+  &::file-selector-button {
+    margin-block: ythm, 1lh));
+  background: var(--bg)+
+  color: var(--fg);
+  & option {
+    background: inherit;
+    color: inherit;
+    border:px 1px #000, 0 0 1px #0d0d0d;
+}
+
+@media (prefers-color-rcheme: dark) {
+
+  input[type}'range']::-ms-fill-upper inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: normal;
+}
+meter,
+progress {
+  --border-width: var(--interactive-border-width);
+  --borde {
+  background: #r-styl161f27;
+  bace: var(--interackt

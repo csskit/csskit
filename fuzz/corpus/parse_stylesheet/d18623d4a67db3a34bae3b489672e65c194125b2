@@ -1,0 +1,9 @@
+gio%{)n--dividerNarrow-line-before{position:relative;margin-top:var(--Layout-row-gap)}.P74 2.99L8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::before {
+  border-color: #040bff;
+  background-color: #007bff;
+}
+
+.custom-checkbox .custom-control-iageLayout .PageLayout-region--dividerNarrow-linn

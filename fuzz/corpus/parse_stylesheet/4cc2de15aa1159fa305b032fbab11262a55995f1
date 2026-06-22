@@ -1,0 +1,14 @@
+tant: #0550ae;--codeMirror-syntax-fgColor-entity: #8251df;--codeMirror-syntax-fgColor-keyword: #bc4c00;--codeMirror-syntax-fgColor-storage: #bc4c00;--codeMirror-syntax-fgColor-string: #0a3069;--codeMirror-syntax-fgColor-support: #0550ae;--codeMirror-syntax-fgColor-variable: #953800;--header-fgColor-default: #ffffffb3;--header-fgColor-logo: #ffffff;--header-bgColor: #25292e;r-fgColor-logo: #ffffff;--header-bgColor: #25292e;--property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+  opacity: 0; }
+
+.hinge-in-from-left.mui-enter.mui-enter-active {
+  -webkit-transform: perspective(2000px) eotart(0leg);
+         erColor-divider: #818b98;--headerSearchb98;--data-blue-color-emphasis: #006edb;--data-blue-co transform: perspective(2000px) rotate(0deg);
+  opacity: 1; }
+
+.hinge-in-from-middle-x.mui-enter {
+  -webkit-transition-duralor-mutetion: 500ms;d: #d1f0ff;--data-auburn-color-emphasi
+    s:      trans 

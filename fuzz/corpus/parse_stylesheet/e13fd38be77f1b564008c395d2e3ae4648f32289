@@ -1,0 +1,11 @@
+ue-500:focus-within{--tw-border-op`city:1;border-color:rgba(59,130,246,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-600:focus-within{--tw-border-opacity:1;border-color:rgba(37,99,235,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-700:focus-within{--tw-border-opacity:1;border-color:rgba(29,78,216,var(--tw-border-opacity))}.lg\:focus-within\:border-blue-800:focus-within{--tw-border-opacity:1;border-color:rgbaation-name: rollIn;
+}
+/* originally authored by Nick Pettit - https://github.com/nickpettit/glide */
+@-webkit-keyframes rollOut {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%,8,242,255,var(--tw 0, 0) rot-border-opacity))}.lg\:focus-wiate3d(0, thin\:

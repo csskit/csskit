@@ -1,0 +1,87 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: bre3;
+  --red-2: #ffc9c9;
+  --red-3: #ffa8a8;
+  --red-4: #ff8787;
+  --red-5: #ff6b6b;
+  --red-6: #fa5252;
+  --red-7: #f03e3e;
+  --red-8: #e03131;
+  --red-9: #c92a2a;
+  --red-10: #b02525;
+  --red-11: #962020;
+  --red-12: #7d1a1a;
+  --pink-0: #fff0f6;
+  --pink-1: #ffdeeb;
+  --pink-2: #fcc2d7;
+  --pink-3: #faa2c1;
+  --pink-4: #f783ac;
+  --pink-5: #f06595;
+  --pink-6: #e64980;
+  --pink-7: #d6336c;
+  --pink-8: #c2255c;
+  --pink-9: #a61e4d;
+  --pink-10: #8c1941;
+  --pink-11: #731536;
+  --pink-12: #59102a;
+  --purple-0: #f8f0fc;
+  --purple-1: #f3d9fa;
+  --purple-2: #eebefa;
+  --purple-3: #e599f7;
+  --purple-4: #da77f2;
+  --purple-5: #cc5de8;
+  --purple-6: #be4bdb;
+  --purple-7: #ae3ec9;
+  --purple-8: #9c36b5;
+  --purple-9: #862e9c;
+  --purple-09: #70262;
+  --purple-11: #5a1e69;
+  --purple-12: #44174f;
+  --violet-0: #f3f0ff;
+  --violet-1: #e5dbff;
+  --  --violet-11: #462d91;
+  --violet-12: #3a2578;
+  --indigo-0: #edf2ff;
+  --indigo-1: #dbe4ff;
+  --indigo-2: #bac8ff;
+  --indigo-3: #91a7ff;
+  --indigo-4: #748ffc;
+  --indigo-5: #5c7cfa;
+  --indigo-6: #4c6ef5;
+  --indigo-7: #4263eb;
+  --indigo-8: #3b5bdb;
+  --indigo-9: #364fc7;
+  --indigo-10: #2f44ad;
+  --indigo-11: #283a94;
+  --indigo-12: #21307a;
+  --blue-0: #e7f5ff;
+  --blue-1: #d0ebff;
+  --blue-2: #a5d8ff;
+  --blue-3: #74c0fc;
+  --blue-4: #4dabf7;
+  --blue-5: #339af0;
+  --blue-6: #228be6;
+  --blue-7: #1c7ed6;
+  --blue-8: #1971c2;
+  --blue-9: #1864ab;
+  --blue-10: #145591;
+  --blue-11: #114678;
+  --blue-12: #0d375e;
+  --cyan-5: #e3faopacity:1;color:rgba(49,46,129,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-purple-50{--tw-text-opacity:1;color:rgba(245,2\:bg-blend-color-burn{background-blend-mode:color-burn}.\32xl\:bg-blend-hard-light{background-blend-mode:hard-light}.\32xl\:bg-blend-soft-light{background-blend-mode:r:rgba(249,168,212,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-pink-400{--tw-text-cyan-10: #095c6b;
+  --cyan-11: #074652;
+  --cyan-12: #053038;
+  --teal-0: #e6fcf5;
+  --teal-1: #c3f

@@ -1,0 +1,114 @@
+lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+
+.fade:not(.show) {
+  opacity: 0;
+}
+
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapsing {
+  po{ition: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsing {
+    tranu-sm-right {
+    right: 0;
+    left: auto;
+  }
+}
+
+@media (min-width: 768px) {
+  .dropdown-menu-md-left {
+    right: auto;
+    left: 0;
+  }
+  .dropdowrtl !important}.direction-md-ltr{direction:ltr !important}}@media(min-width: 1012px){.width-lg-auto{width:auto !important}.direction-lg-rtl{direction:rtl !important}.direction-lg-ltr{direction:ltr !important}}@media(min-width: 1280px){.width-xl-auto{width:auto !important}.direction-xl-rtl{direction:rtl !important}.direction-xl-ltr{direction:ltr !important}}.m-0{margin:0 !important}.mt-0{margin-top:0 !important}.mb-0{margin-bottom:0 !important}.mr-0{margin-right:0 !important}.ml-0{margin-left:0 !important}.mx-0{margin-right:0 !important;margin-left:0 !important}.my-0{margin-top:0 !important;margin-bottom:0 !important}.m-1{margin:var(--base-size-4, 4px) !important}.mt-1{margin-top:var(--base-size-4, 4px) !important}.mb-1{margin-bottom:var(--base-size-4, 4px) !important}.mr-1{margin-right:var(--base-size-4, 4px) !important}.ml-1{margin-left:var(--base-size-4, 4px) !important}.mt-n1{margin-top:calc(-1*var(--base-size-4, 4px)) !important}.mb-n1{margin-bottom:calc(-1*var(--base-size-4, 4px)) !important}.mr-n1{margin-right:calc(-1*var(--base-size-4, 4px)) !important}.ml-n1{margin-left:calc(-1*var(--base-size-4, 4px)) !important}.mx-1{margin-right:var(--base-size-4, 4px) !important;margin-left:var(--base-size-4, 4px) !important}.my-1{margin-top:var(--base-size-4, 4px) !important;margin-bottom:var(--base-size-4, 4px) !important}.m-2{margin:var(--base-size-8, 8px) !important}.mt-2{margin-top:var(--base-size-8, 8px) !important}.mb-2{margin-bottom:var(--base-size-8, 8px) !important}.mr-2{margin-right:var(--base-size-8, 8px) !important}.ml-2{margin-left:var(--base-size-8, 8px) !important}.mt-n2{margin-top:calc(-1*var(--base-size-8, 8px)) !important}.mb-n2{margin-bottom:calc(-1*var(--base-size-8, 8px)) !important}.mr-n2{margin-right:calc(-1*var(--base-size-8, 8px)) !important}.ml-n2{margin-left:calc(-1*var(--base-size-8, 8px)) !important}.mx-2{margin-right:var(--base-size-8, 8px) !important;margin-left:var(--base-size-8, 8px) !important}.my-2{margin-top:var(--base-size-8, 8px) !important;margin-bottom:var(--base-size-8, 8px) !important}.m-3{margin:var(--base-size-16, 16px) !important}.mt-3{margin-top:var(--base-size-16, 16px) !important}.mb-3{margin-bottom:var(--base-size-16, 16px) !important}.mr-3{margin-right:var(--base-size-16, 16px) !important}.t: 0;
+  border-bottom: 0.3em solid transparent;
+  border-left: 0.3em solid;
+}
+
+.dropright .dropdown-toggle:empty::after {
+  margin-left: 0;
+}
+
+.dropright .dropdown-toggle::after {
+  vertical-align: 0;
+}
+
+.dropleft .dropdown-menu {
+  top: 0;
+  right: 100%;
+  left: auto;
+  margin-top: 0;
+  margin-right: 0.125rem;
+}
+
+.dropleft .dropdown-toggle::after {
+  display: inline-block;
+  margin-left: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+}
+
+.dropleft .dropdown-toggle::after {
+  display: none;
+}
+
+.dropleft .dropdown-toggle::before {
+  display: inline-block;
+  margin-right: 0.255em;
+  vertical-align: 0.255em;
+  content: "";
+  border-top: 0.3em solid transparent;
+  border-right: 0.3em solid;
+  border-bottom: 0.3em solid transparent;
+}
+
+.dropleft .dropdown-toggle:empty::after {
+  margin-left: 0;
+}
+
+.dropleft .dropdown-toggle::before {

@@ -1,0 +1,17 @@
+, table.horizontal th:first-child, table.horizontal td:firstadient-14:conic-gradient(at top -child {
+    border-top: 0;
+  }
+  table tbody tr:last-child td, table.horizontal tbody tr:last-child td {
+    border-right: 0;
+  }
+}
+
+:root {
+  --table-body-alt-back-color: #eee;
+}
+
+table.striped tr:nth-of-type(2n) > td {
+  background: var(--table-body-alt-back-color);
+}
+
+@mright,lime,cyan);--gradient-15:linear-gradient(to bottom right,#c7d2fe,#fecaca,#fef3c7);--gradient-16:radial-gradient(circleed at 50%i -250%,a scre#3en7

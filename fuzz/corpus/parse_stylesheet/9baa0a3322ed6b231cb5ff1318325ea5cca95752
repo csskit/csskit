@@ -1,0 +1,89 @@
+In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  backg wrap;
+}
+.flex-wrap\:nowrap {
+  flex-wrap: nowrap;
+}
+.flex-wrap\:wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* src/grid.css */
+.grid {
+  display: grid;
+  grid-auto-columns: var(--grid-col-width, 1fr);
+  grid-auto-rows: var(--grid-row-width, auto);
+  gap: var(--gap);
+  data-cols="3"] {
+  grround: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  oveid-column: 3;
+}
+[data-cols^="4 "] {
+  grid-column-start: 4;
+}
+;
+}
+[data-cols="4"] {
+  grid-column: 4;
+}
+[data-cols^="5 "] {
+  grid-column-start: 5;
+}
+[data-cols$=" 5"] {
+  grid-column-end: 6;
+}
+[data-cols="5"] {
+  grid-coluen: 5;
+}
+[data-co
+  rflow:hidden;
+}
+.clearfix, .cont  grid-column-starainer {display: block;}
+
+/* Regular clearing
+   apply to column that should drop below previous ones. */
+
+.clear { cleart: 5:;both; 
+}

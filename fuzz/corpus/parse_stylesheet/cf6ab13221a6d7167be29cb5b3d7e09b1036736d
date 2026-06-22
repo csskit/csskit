@@ -1,0 +1,59 @@
+nsform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+  opacity: 1; }
+
+.spin-out-ccw.mui-leave.mui-leave-active {
+  -webkit-transform: rotate(-0.75turn);
+      -ms-transform: rotate(-0.75turn);
+          transform: rotate(-0.75turn);
+  opacity: 0; }
+
+.slow {
+  -webkit-transition-duration: 750ms !important;
+          transition-duration: 750ms !important; }
+
+.fast {
+  -webkit-transition-duration: 250ms !important;
+          transition-duration: 250ms !important; }
+
+.linear {
+  -webkit-transition-timing-function: linear !important;
+          transition-timing-function: linear !important; }
+
+.ease {
+  -webkit-transition-timing-function: ease !important;
+          transition-timing-function: ease !important; }
+
+.ease-in {
+  -webkit-transition-timing-function: ease-ipacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-color: var(--bs-primary-bg-subtle) !important;
+}
+
+.bg-secondary-subtle {
+  background-color: var(--bs-secondary-bg-subtle) !imn: cubic-bezier(0.485, 0.155, 0.24, 1.245) !important;
+          transition-timing-function: cubic-bezier(0.485, 0.155, 0.24, 1.245) !important; }
+
+.bounce-out {
+  -webkit-transition-timing-function: cubic-bezier(0.485, 0.155, 0.515, 0.845) !important;
+          transition-timing-function: cubic-bezier(0.485, 0.155, 0.515, 0.845) !important; }
+
+.bounce-in-ortant;
+  -moz-user-select: auto !important;
+  user-select: auto !important;
+}
+
+.user-select-none {
+  -webkit-user-select: none !ut {
+  -webkit-transition-timing-function: cubic-bezier(0.7

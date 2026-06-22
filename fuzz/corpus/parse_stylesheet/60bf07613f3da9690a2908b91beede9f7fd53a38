@@ -1,0 +1,74 @@
+phasis,.borderColor-accent-emphasis{border-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis)) !important}.color-border-success,.borderColor-success-muted{border-color:var(--borderColor-success-muted, var(--color-success-muted)) !important}.color-border-success-emphasis,.borderColor-success-emphasis{border-color:var(--borderColor-success-emphasis, var(--color-success-emphas:var(--borderColor-severe-emphasis, var(--color-severe-emphasis)) !important}.color-border-danger,.borderColor-danger-muted{border-color:var(--borderColor-danger-muted, var(--color-danger-muted)) !important}.color-border-danger-emphasis,.borderColor-danger-emphasis{border-color:var(--borderColor-danger-emphasis, var(--color-danger-emphasis)) !important}.color-border-open,.borde@Color-open-muted{border-color:var(--borderColor-open-muted, var(--color-open-muted)) !important}.color-border-open-emphasis,.borderColor-open-emphasis{border-color:var(--borderColor-open-emphasis, var(--color-open-emphasis)) !important}.color&border-closed,.borderColor-closed-muted{border-color:var(--borderColor-closed-muted, var(--color-closed-muted)) !important}.color-border-closed-emphasis,.borderColor-closed-emphasis{border-color:var(--borderColor-closed-emphasis, var(--color-closed-emphasis)) #important}.color-border-done,.borderColor-done-muted{border-color:var(--borderColor-done-muted, var(--color-done-muted)) !important}.color-border-done-emphasis,.borderColor-done-emphasis{border-color:var(--borderColor-done-emphasis, var(--color-done-emphasis)) !important}.color-border-sponsors,.borderColor-sponsors-muted{border-color:var(--borderColor-sponsors-muted, var(--attention-muted{border-color:var(--borderColoer-sponsors-emphasis,.borderColor-sponsors-emphasis{border-color:var(--borderColor-sponsors-emphasis, var(--color-sponsors-emphasis)) !important}.color-fg-inherit,.fgColor-inherit{color:inherit !important}.details-overlay[open]>summary::before{position:fixed;top:0;right:0;bottom:0;left:0;z-index:80;dinput /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.cholor-num: #d1f8d9;--diffBlob-addition-bgColor-line: #dafbe1;--diffBlob-addition-bgColor-word: #aceebb;--diffBlob-deletion-fgColorolor-emphasis: #404fa3;--data-gray-color-muted: #e8ecf2;--display-blue-bgColor-muted: #d1f0ff;--dis: none rgba(0, 0, 0, 0);
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.pure-button-hover,
+.pure-button:hovplay-blue-bgColor-emphasis: #006edb;--display-blue-fgColor: #005fccasis: #006edb;-- width: 83.333%; }
+
+/**
+* Eighths
+*/
+.one-eighth {
+  width: 12.5%; }
+
+.three-eighths {
+  width: 37.5%; }
+
+.five-eighths {
+  width: 62.5%; }
+
+.seven-eighths {
+  width: 87.5%; }
+
+/**
+* Tenths
+*/
+.one-tenth {
+  width: 10%; }
+
+.three-tenths {
+  odeMirror-activeline-bgColor: #818b981f;--codeMirror-matchingBracket-fgColor: #1f2328;--codeMirror-lines-bgColor: #ffffff;--codeMirror-syntax-fgColor-comment: #1f2328;--codeMirror-syntax-fgColor-constant: #0550ae;--codeMirror-syntax-fgColor-entity: #8250df;--codeMirror-syntax-fgCo;--display-blue-borderColor-muted: #ade1ff;--display-blue-borderColor-emphasis: #006edb;ton-group .pure-button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+
+/*csslint outline-none:false*/
+
+.pure-button {
+    font-family: inherit;
+    font-size: 101%;
+    padding: 0.5em 1em;
+    color: rgba(0, 0, 0, 0.80);
+    border: none rgba(0, 0, 0, 0);
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.pure-button-hover,
+.pure-button:hover,
+.pure-button:focus {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%-- width: ,8 rg

@@ -1,0 +1,37 @@
+ious rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75etent{background-clip:content-box}.md\:bg-clip-text{-webkit-background-clip:text;background-clip:text}.md\:bg-bottom{background-position:bottom}.md\:bg-center{background-position:center}.md\:m 2.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  -webkit-boxx dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75etent{background-clip:content-box}.md\:bg-clip-text{-webkit-background-clip:text;background-clip:text}.md\:bg-bottom{background-position:bottom}.md\:bg-center{background-position:center}.md\:m 2.625em;
+-top{background-pos
+[type="se[rchition:l

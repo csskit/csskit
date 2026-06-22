@@ -1,0 +1,30 @@
+lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+phasis,.borderColor-accent-emphasis{border-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis)) !important}.color-border-success,.borderColor-success-muted{border-color:var(--borderColor-success-muted, var(--color-success-muted)) !important}.color-border-success-emphasis,.borderColor-success-emphasis{border-color:var(--borderColor-success-emphasis, var(--color-success-emphasis)) !important}.color-border-attention,.borderColor-attention-muted{border-color:var(--borderColor-attention-muted, var(--color-attention-muted)) !important}.color-border-attention-emphasis,.borderColor-attention-emphasis{border-color:var(--borderColor-attention-emphasis, var(--color-attention-emphasis)) !important}.color-border-severe,.borderColor-severe-muted{border-color:var(--borderColor-severe-muted, var(--color-severe-muted)) !important}.color-border-severe-emphasis,.borderColor-severe-emphasis{border-color:var(--borderColor-severe-emphasis, var(--color-severe-emphasis)) !important}.color-border-danger,.borderColor-danger-muted{border-color:var(--borderColor-danger-muted, var(--color-danger-muted)) !important}.color-border-danger-emphasis,.borderColor-danger-emphasis{border-color:var(--borderColor-danger-emphasis, var(--color-danger-emphasis)) !important}.color-border-open,.borderColor-open-muted{border-color:var(--borderColor-open-muted, var(--color-open-muted)) !important}.color-border-open-emphasis,.borderColor-open-emphasis{border-color:var(--borderColor-open-emphasis, var(--color-open-emphasis)) !important}.color-border-closed,.borderColor-closed-muted{border-color:var(--borderColor-closed-muted, var(--color-closed-muted)) !important}.color-border-closed-emphasis,.borderColor-closed-emphasis{border-color:var(--borderColor-closed-emphasis, var(--color-closed-emphasis)) !imp}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+inpuortant}.color-border-done,.borderColor-done-muted{border-color:var(--borderColor-done-muted, t[type="button"].btn-block {
+  width: 100%;
+}
+
+.vfar

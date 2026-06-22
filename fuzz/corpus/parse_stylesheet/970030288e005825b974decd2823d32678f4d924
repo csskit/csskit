@@ -1,0 +1,21 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  fl-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg) /* exrtl:ig: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1.5)}.\32xl\:contrast-200{--tw-contrast:contrast(2)}.\32xl\:drop-shadow-sm{-nore */;
+  }
+}
+.spinner-tw-drop-shadow-border {:dr

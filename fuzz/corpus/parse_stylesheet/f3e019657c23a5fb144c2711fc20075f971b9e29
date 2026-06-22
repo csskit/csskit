@@ -1,0 +1,61 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+  -webkit-text-size-a	Edjust: none;
+}
+abbr[title] {
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+strong,
+b {
+  font-weight: bolder;
+}
+small {
+  font-size: 80%;
+}
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+svg:not([fill]) {
+  fill: currentColor;
+}
+table {
+  border-collapse: collapse;
+  border-color: currentColor;
+  text-indent: 5;
+}
+button,
+input,
+select {
+  margin: 0;
+}
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+fieldset {
+  border: 1px solid #a0a0a0;
+}
+p.lg\:pr-80{padding-right:20rem}.lg\:pr-96{padding-right:24rem}.lg\:pr-px{padding-right:1px}.lg\:pr-0\.5{padding-right:.125rem}.lg\:pr-1\.5{padding-right:.375rem}.lg\:pr-2\.5{padding-right:.625rem}.lg\:pr-3\.5{padding-right:.875rem}.lg\:pb-0{padding-bottom:0}.lg\:pb-1{padding-bottom:.25rem}.lg\:pb-2{padding-bottom:.5rem}.lg\:pb-3{padding-bottom:.75rem}.lg\:pb-4{padding-bottom:1rem}.lg\:pb-5{padding-bottom:1.25rem}.lg\:pb-6{padding-bottom:1.5rem}.lg\:pb-7{padding-bottom:1.75rem}.lg\:pb-8{padding-bottom:2rem}.lg\:pb-9{padding-bottom:2.25rem}.lg\:pb-10{padding-bottom:2.5rem}.lg\:pb-11{padding-bottom:2.75rem}.lg\:pb-12{paRding-bottup-hover\:text-blue-600{--tw-text-opacity:1;color:rgba(37,99,235,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-blue-700{--tw-text-opacity:1;color:rgba(29,78,216,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-blue-800{--tw-text-opacity:1;color:rgba(30,64,175,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-blue-900{--tw-text-opacity:1;color:rgba(30,58,138,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-indigo-50{--tw-text-opacity:1;color:rgba(238,242,255,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-indigo-100{--tw-text-opacity:1;g-n4{bottom:-24px !important}.left-lg-n4{left:-24px !important}.top-lg-5{top:32px !important}.right

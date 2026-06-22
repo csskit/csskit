@@ -1,0 +1,13 @@
+fset-indigo-600:focus{--tw-ring-offset-color:#4f46e5}.xl\:focus\:ring-offset-indigo-700:focus{--tw-ring-offset-color:#4338ca}.xl\:focus\:ring-offset-indigo-800:focus{--tw-ring-offset-color:#3730a3}.xl\:focus\:ring-offset-indigo-900:focus{--tw-ring-offset-color:#312e81}.xl\:focus\:ring-offset-purple-50:focus{--tw-ring-offset-color:#f5f3ff}.xl\:focus\:ring-offset-purple-100:focus{--tw-ring-offset-color:#ede9fe}.xl\:focus\:ring-offset-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.xl\:focus\:ring-offset-{--tw-blur:blur(12px)}.xl\:blur-lg{--tw-blur:blur(16px)}.xl\:blur-xl{--tw-blur:blur(24px)}.xl\:blur-2xl{--tw-blur:blur(40px)}.xl\:blur-3xl{--tw-blur:blur(64px)}.xl\:brightness-0{--tw-brightness:brightness(0)}.xl\:brightness-50{--tw-brightness:brightness(.5)}.xl\:brightness-75{--tw-brightness:brightness(.75)}.xl\:brightness-90{--tw-brightness:brightness(.9)}.xl\:brightness-95{--tw-brightness:brightness(.95)}.xl\:brightness-100{--tw-brightnesding: calc(var(--universal-padding) / 2) var(--universal-padding);
+}
+
+:root {
+  --toast-back-color: #424242;
+  --toast-fore-color: #fafafa;
+}
+
+.toast {
+  position: fixed;
+  bottom: calc(var(--universal-margin) * 3);
+  left: 50%;
+  transform: translate(s:brightness(1)}.xl\:brightness-105{--tw-brightness:brightness(1.05)}.xl\:brightness-110{--tw-brightness:brightness(1.1)}.xl\:brightness-125{--tw-brightness:brightness(1.25)}.xl\:brightness-150{--tw-brightness:brightness(1.5)}.xl\:brightness-200{--tw-brightness:brightness(2)}.xl\:contrast-0{--tw-contrast:contrast(0)}.xl\:contrast-50{--tw-contrast:contrast(.5)}.xl\:contrast-75{--tw-contrast:contrast(.75)}.xl\:contrast-100{--tw-contrast:contrast(1)}.xl\:contrast-125{--tw-contrast:contrast(1.25)}.xl\:contrast-150{--tw-contrast:contrast(1.5)}.xg-offset-indigo-700:focus{--tw-ring-offset-color:#4338ca}.xl\:focus\:ring-offset-indigo-800:focus{--tw-ring-offset-color:#3730a3}.xl\:focus\:ring-offset-indigo-900:focus{--tw-ring-offset-color:#312e81}.xl\:focus\:ring-offset-purple-50:focus{--tw-ring-offset-color:#f5f3ff}.xl\:focus\:ring-offset-purple-100:focus{--tw-ring-offset-color:#ede9fe}.xl\:focus\:ring-offset-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.xl\:focus\:ring-offset-purple-300:focus{--tw-ring-offset-color:#c4b5fd}.xl\:focus\:ring-offset-purple-400:focus{--tw-ring-offset-color:#a78bfa}.xl\:focus-shadow(0 8px 5px rgba(0, 0, 0, 0.08))}.xl\:drop-shadow-2xl{--tw-drop-shadow:drop-shadow(0 25px 25px rgba(0, 0, 0, 0

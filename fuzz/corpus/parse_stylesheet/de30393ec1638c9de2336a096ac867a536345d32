@@ -1,0 +1,12 @@
+(0, 0, 0, 0.175) !important;
+}
+
+.shadow-none {
+  box-shadow: none !important;
+}
+
+.focus--color-muted: #271817;--data-orange-color-emphasis: #984b10;--data-orange-color-muted: #311708;--data-yellow-color-emphasis: #895906;-ring-primary {
+  --bs-focus-ring-color: rgba(var(--bs-primary-rgb), var(--bs-focus-ring-opacity));
+}
+
+.focus-muted: #2e1a00;--data-green-color-emphasis: #2f6f37;--data-green-color-mutbes-focud:

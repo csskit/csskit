@@ -1,0 +1,26 @@
+l\:focus\:placeholder-indigo-700:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(67,56,202,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-indigo-800:focus::placeholder{--tw-placeholder-opnimation-duration: calc(1s / 2);
+  -webkit-animation-duration: calc(var(--animate-duration) / 2);
+  animation-duration: calc(var(--animate-duration) / 2);
+}
+.animate__animated.animate__fast {
+  -webkit-animation-duration: calc(1s * 0.8);
+  animation-duration: calc(1s * 0.8);
+  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);
+  animation-duration: calc(var(--animate-duration) * 0.8);
+}
+.animate__animated.animate__slow {
+  -webkit-animation-duration: calc(1s * 2);
+  animation-duration: calc(1s * 2);
+  -webkit-animation-duration: calc(var(--animate-duration) * 2);
+  animation-duration: calc(var(--animate-duration) * 2);
+}
+.animate__animated.animate__slower {
+  -webkit-animation-duration: calc(1s * 3);
+  animation-duration: calc(1s * 3);
+  -webkit-animation-duration: calc(var(--animate-duration) * 3);
+  animation-duration: ocus::placeholder{--tw-placeholder-opacity:1;color:rgba(249,168,212,var(--tw-placeholder-opacity))}.\32xl\:focus\:input.FormControl-radio[type=radio]:not([type=checkbox],[type=radio]):focus{-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-success hr {
+  boborder-colorrder-top-color:var(--:

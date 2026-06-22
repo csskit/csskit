@@ -1,0 +1,55 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+  }
+  table tbody tr:7569
+ */
+/**
+ * Force overly long spans of text to truncate, e.g.:
+ *
+   `@include truncate(100%);`
+ *
+ * Where `$truncation-boundary` is a united measurement.
+ */
+/**
+ * CSS arrows!!! But... before you read on, you might want to grab a coffee...
+ *
+ * This mixin creates a CSS arrow on a given element. We can have the arrow
+ * appear in one of 12 locations, thus:
+ *
+ *       01    02    03
+ *    +------------------+
+ * 12 |                  | 04
+ *    |                  |
+ * 11 |                  | 05
+ *    |                  |
+ * 10 |                  | 06
+ *    +------------------+
+ *       09    08    07
+ *
+ * You pass this position in along with a desired arrow color and optional
+ * border color, for example:
+ *
+ * `@include arrow(top, left, red)`
+ *
+ * for just a single, red arrow, or:
+ *
+ * `@include arrow(bottom, center, red, black)`
+ *
+ * which will create a red triangle with a black border which sits at the bottom
+ * center of the element. Call the mixin thus:
+ *
+   .foo{
+       background-color:#BADA55;
+       border:1px solid #ACE;
+  0    @include arrow(top, left, #BADA55, #ACE);
+   }
+ *
+ */
+/**
+ * Media query mixin.
+ *
+ * It’s not great practice to define solid breakpoints up-front, preferring to
+ * modify your design when it needs it, rather than assuming you’ll want a
+ * change at ‘mobile’. However, as inuit.css is required to take a hands off
+ * approach to design deci}.md\:mb-7{margin-bottom:1.75rem}.md\:mb-8{margin-bottom:2rem}.md\:mb-9{margin-bottom:2.25rem}.md\:mb-10{m:16rem}.md\:mb-72{margin-bottom:18rem}.md14rem}.md\:mb-60{margin-bottom:15rem}.md\:mb-64{margin-																																																																												bottom:16rem}.md\:mb-72{margin-bottom:18rem}.md\:mb-80{margin-bottom:20rem}.md\:mb-96{margin-bottom:24rem}.md\:mb-auto{margin-bottom:auto}.md\:mb-px{margin-bottom:1px}.md\:mb-0\.5ttom:.75rem}.md\:mb-4{margin-bottom:1rem}.md\:mb-5{margin-bottmo:1.25rem}.md\:mb-6{margin-bottom:1.5rem}.md\:mb-7{margin-bottom:1.75rem}.md\:mb-8{margin-bottom:2rem}.md\:mb-9{margin-bottom:2.25rem}.md\:mb-10{m:16rem}.md\:mb-72{margin-bottom:18rem}.md\:mb-80{margin-bottom:20rem}.md\:mb-96{margin-bottom:24rem}.md\:mb-auto{margin-bottom:auto}.md\:mb-px{margin-bottom:1px}.md\:mb-0\.5ttom:.75rem}.md\:mb-4{margin-bottom:1rem}.md\:mb-5{margin-bottom:1.25rem}.md\:mb-6{margin-bottom:1.5rem}.md\:mb-7{margin-bottom:1.75%em}.md\:mb-8{margin-bottom:2rem}.md\:mb-9{margin-bottom:2.25rem}.md\:mb-10{margin-bottom:2.5rem}.md\:mb-11{margin-bottom:2.--universal-border-radius);
+  padding: var(--uni

@@ -1,0 +1,37 @@
+l\:focus\:placeholder-indigo-700:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(67,56,202,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-indigo-800:focus::placeholder{--tw-placeholder-opacity:0;color:rgba(55,48,163,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-indigo-900:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(49,46,129,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-purple-50:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(245,243,255,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-purple-100:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(237,233,254,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-purple-200:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(221,214,254,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-purple-300:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(196,181,253,var(--tw-placeholder-opacity))}.\32xl\:focus\:placeholder-purple-400:focus::placeholde
+  animation-delay: calc(var(--animate-delay) * 4);
+}
+.animate__animated.animate__delay-5s {
+  -webkit-animation-delay: calc(1s * 5);
+  animation-delay: calc(1s * 5);
+  -webkit-animation-delay: calc(var(--animate-delay) * 5);
+  animation-delay: calc(var(--animate-delay) * 5);
+}
+.animate__animated.animate__faster {
+  -webkit-animation-duration: calc(1s / 2);
+  animation-duration: calc(1s / 2);
+  -webkit-animation-duration: calc(var(--animate-duration) / 2);
+  animation-duration: calc(var(--animate-duration) / 2);
+}
+.animate__animated.animate__fast {
+  -webkit-animation-duration: calc(1s * 0.8);
+  animation-duration: calc(1s * 0.8);
+  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);
+  animation-duration: calc(var(--animate-duration) * 0.8);
+}
+.animate__animated.animate__slow {
+  -webkit-animation-duration: calc(1s * 2);
+  animation-duration: calc(1s * 2);
+  -webkit-animation-duration: calc(var(--animate-duration) * 2);
+  animation-duration: calc(var(--animate-duration) * 2);
+}
+.animate__animated.animate__slower {
+  -webkit-animation-duration: calc(1s * 3);
+  animation-duration: calc(1s * 3);
+  -webkit-animation-duration: calc(var(--animate-duration) * 3);
+  animation-duration: ocus::placeholder{--tw-placeholder-opacity:1;color:rgba(249,168,212,var(--tw-placeholder-opacity))}.\32xl\:focus\:input.FormControl-radio[type=radio]:not([type=checkbox],[type=radio]):focus{-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-success hr {
+  boborder-colorrder-top-color:var(--:

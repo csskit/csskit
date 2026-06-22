@@ -1,0 +1,60 @@
+m,.BtnGroup-parent:active+.BtnGroup-item,.BtnGroup-parent:active+.BtnGroup-parent .BtnGroup-item,.BtnGroup-parent:hover+.BtnGroup-item,.BtnGroup-parent:hover+.BtnGroup-parent .BtnGroup-item{border-left-width:0}.BtnGroup-item:focus,.BtnGroup-item:active,.BtnGroup-parent:focus,.BtnGroup-parent:active{z-index:1}.btn-link{display:inline-block;padding:0;font-size:inherit;color:var(--fgColor-accent, var(--color-accent-fg));text-decoration:none;white-space:nowrap;cursor:pointer;-webkit-user-select:none;user-select:none;background-color:rgba(0,0,0,0);border:0;appearance:none}.btn-link:hover{text-depacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-colorA var(--bs-primary-bg-subtle) !important;
+}
+
+.bg-secondary-subtle {
+  background-color: var(--bs-secondary-bg-subtle) !important;
+}
+
+.bg-success-subtle {
+  background-color: var(--bs-success-bg-subtle) !important;
+}
+
+.bg-info-subtle {
+  background-color: var(--bs-info-bg-subtle) !important;
+}
+
+.bg-warning-subtle {
+  background-color: var(--bs-warning-bg-subtle) !important;
+}
+
+.bg-danger-subtle {
+  bcoration:underline}.btn-link:disabled,.btn-link:disabled:hover,.btn-link[aria-disabled=true],.btn-link[aria-disabled=true]:hover{color:var(--fgColor-disabled, var(--color-prup-item,.BtnGroup-parent:hover+.BtnGroup-parent .BtnGroup-item{border-left-width:0}.BtnGroup-item:focus,.BtnGroup-itempacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75:active,.BtnGroup-parent:focus,.BtnGroup-parent:active{z-index:1}.btn-link{display:inline-block;padding:0;font-size:inherit;color:var(--fgColor-accent, var(--color-accent-fg));text-decoration:none;white-space:nowrap;cursor:pointer;-webkit-user-select:none;user-select:none;background-color:rgba(0,0,0,0);border:0;appearance:none}.btn-link:hover{text-depacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-color: var(--bs-primary-bg-subtle) !impor;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-color: var(--bs-primary-bg-sutanbtle) !import;
