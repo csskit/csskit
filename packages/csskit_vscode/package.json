@@ -117,7 +117,7 @@
 		"@types/mocha": "10.0.10",
 		"@types/node": "24.12.4",
 		"@types/vscode": "1.120.0",
-		"@vscode/test-cli": "0.0.12",
+		"@vscode/test-cli": "0.0.15",
 		"@vscode/test-electron": "3.0.0",
 		"esbuild": "0.28.1",
 		"mocha": "11.7.6",
