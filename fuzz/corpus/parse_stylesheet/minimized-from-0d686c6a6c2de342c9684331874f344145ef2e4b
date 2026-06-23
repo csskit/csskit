@@ -1,0 +1,16 @@
+:none {
+  border-block: none;
+}
+.borde{
+  --fg: light-dark(var(--gray-12), var(--gray-0));
+  --muted-fg: light-dark(var(--gray-10), vshadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--fg) inset;
+  --pressed-shadont: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",
+der-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --sha var(--fg);
+  --shadow-active: none;
+atin",

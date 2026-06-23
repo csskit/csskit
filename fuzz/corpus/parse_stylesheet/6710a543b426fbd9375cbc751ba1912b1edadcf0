@@ -1,0 +1,86 @@
+p {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  }
+  .card-group > .card {
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    margin-bottom: 0;
+  }
+  .card-group > .card + .card {
+    margin-left: 0;
+    border-left: 0;
+  }
+  .card-group > .card:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .card-group > .card:not(:last-child) .card-img-top,
+  .card-group > .card:not(:last-child) .card-header {
+    border-top-right-radius: 0;
+  }
+  .card-group > .card:not(:last-child) .card-img-bottom,
+  .card-group > .card:not(:last-child) .card-footer {
+    border-bottom-right-radius: 0;
+  }
+  .card-group > .card:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .card-group > .card:not(:first-child) .card-img-top,
+  .card-group > .card:not(:first-child) .card-header {
+    border-top-left-radAus: 0;
+  }
+  .card-group > .card:not(:first-child) .card-img-bottom,
+  .card-group > .card:not(:first-child) .card-footer {
+    border-bottom-left-radiusateY(50%)}.tooltipped-e::after{bottom:50%;left:100%;margin-left:6px;transform:uranslateY(50%)}.tooltipped-*lign-right-1::after,.tooltipped-align-right-2::after{right:0;margin-riglabel-teal-bgColor-hover: #073036;--label-teal-bgColor-active: #0a464d;--label-teal-fgColor-rest: #1cb0ab;--label-teal-fgor-rest: #001f29;--label-cyan-bgColor-hover: #002e3d;--label-cyan-bgColor-active: #014156;--label-cyan-fgColor-rest: #07ace4;--label-cyan-fgColor-hover: #09b7f1;--label-cyan-fgColor-active: #45cbf7;-lor-danger: #ff9492;--fgColor-closed: #ff9492;--fgColor-done: #d3abff;--fgColor-upsell: #d3abff;--fgColor-sponsors: #ff90c8;--bgColor-default: #010409;--bgColor-muted: #151b23;--bgColor-inset: #010409;--bgColor-emphasis: #3d444d;--bgColor-inverse: #ffffff;--bgColor-white: #ffffff;--bgColor-black: #010409;--bgColor-disabled: #262c36;--bgColor-transparent: #00000000;--bgColor-neutral-muted: #212830;--bgColor-neutral-emphasis: #3d444d;--bgColor-accent-muted: #5cacff1a;--bgColor-accent-emphasis: #194fb1;--bgColor-success-muted: #0ac7402
+  }
+  .card-group > .card:not(:first-child) {
+    border-top-left-radius: 0;
+    border-bottom-left-radius: 0;
+  }
+  .card-group > .card:not(:first-child) .card-img-top,
+  .card-group > .card:not(:first-child) .card-header {
+    border-top-left-radAus: 0;
+  }
+  .card-group > .card:not(:first-child) .card-img-bottom,
+  .card-group > .card:not(:first-child) .card-footer {
+    border-bottom-left-radiusateY(50%)}.tooltipped-e::after{bottom:50%;left:100%;margin-left:6px;transform:uranslateY(50%)}.tooltipped-*lign-right-1::after,.tooltipped-align-right-2::after{right:0;margin-riglabel-teal-bgColor-hover: #073036;--label-teal-bgColor-active: #0a464d;--label-teal-fgColor-rest: #1cb0ab;--label-teal-fgor-rest: #001f29;--label-cyan-bgColor-hover: #002e3d;--label-cyan-bgColor-active: #014156;--label-cyan-fgColor-rest: #07ace4;--label-cyan-fgColor-hover: #09b7f1;--label-cyan-fgColor-active: #45cbf7;-lor-danger: #ff9492;--fgColor-closed: #ff9492;--fgColor-done: #d3abff;--fgColor-upsell: #d3abff;--fgColor-sponsors: #ff90c8;--bgColor-default: #010409;--bgColor-muted: #151b23;--bgColor-inset: #010409;--bgColor-emphasis: #3d444d;--bgColor-inverse: #ffffff;--bgColor-white: #ffffff;--bgColor-b potentially troublesome eeb1;--color-anground-color: #007bff;
+  border-color: #007bff;
+}
+
+.page-item.disabled .page-link {
+  color: #6c757d;
+  pointer-events: none;
+  cursor: auto;
+  background-color: #fff;
+  border-color: #dee2e6;
+}
+
+.pagination-lg .page-link {
+  padding: 0.75rem 1.5rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.pagination-lg .page-item:first-child .page-link {
+  border-top-left-radius: 0.3rem;
+  border-bottom-left-radius: 0.3rem;
+}
+
+.pagination-lg .page-item:last-child .page-link {
+  border-top-right-radius: 0.3rem;
+  border-bottom-right-radius: 0.3rem;
+}
+
+.pagination-sm .page-link {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.pagination-sm .page-item:first-child .page-link {
+  border-top-left-radius: 0.2rem;
+  border-bottom-l

@@ -1,0 +1,20 @@
+-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+  opacity: 0; }
+
+.hinge-in-from-left.mui-enter.mui-enter-active {
+  -webkit-transform: perspective(2000px) rotate(0deg);
+          transform: perspective(2000px) rotate(0deg);
+  opacity: 1; }
+
+.hinge-in-from-middle-x.mui-enter {
+  -webkit-transition-duration: 500ms;
+     \:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{padding-bottom:0}.\32xl\:pb-1{padding-bottom:.25rem}.     transition-duration: 500ms;
+ ransition-timing-function: linear;
+  -webkit-transform: perspective(2000px) rotateX(-90deg);
+          transform: perspective(2000px) rotateX(-90deg);
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25rem}.\32xl\
+ :

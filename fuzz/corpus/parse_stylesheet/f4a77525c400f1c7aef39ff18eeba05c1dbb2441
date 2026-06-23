@@ -1,0 +1,90 @@
+))}.FormControl-input-wrap.FormControl-input-wrap--trailingAction .FormControl-input{padding-inline-end:calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap))}.FormControl-input-wrap.FormControl-input-wrap--trailingAction.FormControl-input-wrap-trailingAction--divider .FormControl-input{padding-inline-end:calc(var(--control-medium-paddingInline-condensed) + var(--base-size-16) + var(--control-medium-gap) + var(--borderWidth-thin))}.FormControl-input-wrap.FormControl-input-wrap--small .FormControl-input-leadingVisualWrap{left:calc(var(--control-medium-paddindge {
+  position: relative;
+  top: -1px;
+}
+
+.alert {
+  --bs-alert-bg: transparent;
+  --bs-alert-padding-x: 1rem;
+  --bs-alert-padding-y: 1rem;
+  --bs-alert-margin-bottom: 1rem;
+  --bs-alert-color: inherit;
+  --bs-alert-border-color: transparent;
+  --bs-alert-border: var(--bs-border-width) solid var(--bs-alert-border-color);
+  --bs-alert-border-radius: var(--bs-border-radius);
+  --bs-alert-link-color: inherit;
+  position: relative;
+  padding: var(--bs-alert-padding-y) var(--bs-alert-padding-x);
+  margin-bottom: var(--bs-alert-margin-bottom);
+  color: var(--bs-alert-color);
+  background-color: var(--bs-alert-bg);
+  border: var(--bs-alert-border);
+  border-radius: var(--bs-alert-border-radius);
+}
+
+.alert-heading {
+  color: inherit;
+}
+
+.alert-link {
+  font-weight: 700;
+  color: var(--bs-alert-link-color);
+}
+
+.alert-dismissible {
+  padding-right: 3rem;
+}
+.alert-dismissible .btn-close {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  padding: 1.25rem 1rem;
+}
+
+.alert-primary {
+  --bs-alert-color: var(--bs-primary-text-emphasis);
+  --bs-alert-bg: var(--bs-primary-bg-subtle);
+  --bs-alert-border-color: var(--bs-primary-border-subtle);
+  --bs-alert-link-color: var(--bs-primary-text-emphasis);
+}
+
+.alert-secondary {
+  --bs-alert-color: var(--bs-secondary-text-emphasis);
+  --bs-alert-bg: var(--bs-secondary-bg-subtle);
+  --bs-alert-border-color: var(--bs-secondary-border-subtle);
+  --bs-alert-link-color: var(--bs-secondary-text-emphasis);
+}
+
+.alert-success {
+  --bs-alert-color: var(--bs-success-text-emphasis);
+  --bs-alert-bg: var(--bs-success-bg-subtle);
+  --bs-alert-border-color: var(--bs-success-border-subtle);
+  --bs-alert-link-color: var(--bs-success-text-emphasis);
+}
+
+.alert-info {
+  --bs-alert-color: var(--bs-info-text-emphasis);
+  --bs-alert-bg: var(--bs-info-bg-subtle);
+  --bs-alert-border-color: var(--bs-info-border-subtle);
+  --bs-alert-link-color: var(--bs-info-text-emphasis);
+}
+
+.alert-warning {
+  --bs-alert-color: var(--bs-warning-text-emphasis);
+  --bs-alert-bg: var(--bs-warning-bg-subtle);
+  --bs-alert-border-color: var(--bs-warning-border-subtle);
+  --bs-alert-link-color: var(--bs-warning-text-emphasis);
+}
+
+.alert-danger {
+  --bs-alert-color: var(--bs-danger-text-emphasis);
+  --bs-alert-bg: var(--bs-danger-bg-subtle);
+  --bs-alert-border-color: var(--bs-danger-border-subtle);
+  --bs-alert-link-color: var(--bs-danger-text-emphasis);
+}
+
+.alert-light {
+  --bs-alert-color: var(--bs-light-text-emphasis);
+  --bs-alert-bg: var(--bs-light-bg-subtle);
+  --bs-alert-border-color: var(--bs-light-border-sub-columns:minmax(0, auto) var(--base-size-16)}.FormControl-select-wrap:after{background-color:var(--bgColor-neutral-emphasis);content:"";grid-column:2;grid-row:1;height:var(--base-size-16);-webkit-mask:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iIzU4NjA2OSIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJtNC40MjcgOS40MjcgMy4zOTYgMy4zOTZhLjI1LjI1IDAgMCAwIC4zNTQgMGwzLjM5Ni0zLjM5NkEuMjUuMjUgMCAwIDAgMTEuMzk2IDlINC42MDRhLjI1LjI1IDAgMCAwLS4xNzcuNDI3TTQuNDIzIDYuNDcgNy44MiAzLjA3MmEuMjUuMjUgMCAwIDEgLjM1NCAwTDExLjU3IDYuNDdhLjI1LjI1IDAgMCAxLS4xNzcuNDI3SDQuNmEuMjUuMjUgMCAwIDEtLjE3Ny0uNDI3Ii8+PC9zdmc+");mask:url("data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIxNiIgaGVpZ2h0PSIxNiIgZmlsbD0iIzU4NjA2OSIgdmlld0JveD0iMCAwIDE2IDE2Ij48cGF0aCBkPSJtNC40MjcgOS40MjcgMy4zOTYgMy4zOTZhLjI1LjI1IDAgMCAwIC4zNTQgMGwzLjM5Ni0zLjM5NkEuMjUuMjUgM

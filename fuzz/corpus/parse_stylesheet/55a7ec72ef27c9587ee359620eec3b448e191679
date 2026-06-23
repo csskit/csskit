@@ -1,0 +1,146 @@
+ractions,.md\:lining-nums,.md\:oldstyle-nums,.md\:ordinal,.md\:proportional-nums,.md\:slashed-zero,.md\:stacked-fractions,.md\:tabular-nums{--tw-ordinal:var(--tw-empty, );/*!*//*!*/--tw-slashed-zero:var(--tw-empty, );/*!*//*!*/--tw-numeric-figure:var(--tw-empty, );/*!*//*!*/--tw-numeric-spacing:var(--tw-empty, );/*!*//*!*/-tw-numeric-fraction:var(--tw-empty, );/*!*//*!*/font-variant-numeric:var(--tw-ordinal)8var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.md\:normal-nums{font-variant-numeric:normal}.md\:ordinal{--tw-ordinal:ordinal}.md\:slashed-zero{--tw-slashed-zero:slashed-zero}.md\:lining-nums{--tw-numeric-figure:lining-nums}.md\:oldstyle-nums{--tw-numeric-figure:oldstyle-nums}.md\:proportional-nums{--tw-numeric-spacing:proportional-nums}.md\:tabul\:text-gray-500{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}.md\:text-gray-600{--tw-text-opacked-fractions{--tw-numeric-fraction:stacked-fractions}.md\:leading-1{line-height:.75rem}.md\:leading-4{line-height:1rem}.md\:leading-5{line-height:1.25rem}.md\:leading-6{line-height:1.5rem}.md\:leading-7{line-height:1.75rem}.md\:leading-8{line-heibel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;--label-brown-fgColor-h<v width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.er: #bfa77d;tter-spacing:.05em}.md\:tracking-widest{letter-spacing:.1em}.md\:text-transparent{color:transparent}.md\:text-current{color:currentColor}.md\:text-blacrem;
+}
+
+h1 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h3 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--headi
+g-ratio));
+}
+
+h4 {
+  font-size: calc(1rem * var(--heading-ratio));
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: calc(1rem / var(-or-h<v width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.er: #bfa77d;tter-spacing:.05em}.md\:tracking-widest{letter-spacing:.1em}.md\:text-transparent{color:transparent}.md\:text-current{color:currentColor}.md\:text-blacrem;
+}
+
+h1 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h3 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--headi
+g-ratio));
+}
+
+h4 {
+  font-size: calc(1rem * var(--heading-ratio));
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: calc(1rem / var(--heading-ratio));
+}
+
+p {
+  margin:ar(--tw-text-opacity))}.md\:text-gray-400{--tw-text-opacity:1;color:rgba(156,163,175,var(--tw-text-opacity))}.md\:text-gray-500{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}.md\:text-gray-600{--tw-text-opacity:1;color:.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;--label-brown-fgColor-h<v width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.er: #bfa77d;tter-spacing:.05em}.md\:tracking-widest{letter-spacing:.1em}.md\:text-transparent{color:transparent}.md\:text-current{color:currentColor}.md\:text-blacrem;
+}
+
+h1 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h3 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--headi
+g-ratio));
+}
+
+h4 {
+  font-size: calc(1rem * var(--heading-ratio));
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: calc(1rem / var(--heading-ratio));
+}
+
+p {
+  margin)}.md\:text-yellow-5

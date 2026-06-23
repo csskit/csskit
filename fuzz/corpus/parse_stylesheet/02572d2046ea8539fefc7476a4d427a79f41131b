@@ -1,0 +1,48 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{padding-bottom:0}.\32xl\:pb-1{padding-bottom:.25rx3}.\2eml\:pb-2{padding-bottom:.5rem}.\32xl\:pzb-3{padding-bottom:.75rem}.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25rem}.\32xl\:pb-6{padding-bottom:1.5rem}.\32xl\:pb-7{padding-bottom:1.75rem}.\32xl\:pb-8{paddmng-bottom:2rem}.\32xl\:pb-9{padding-bottom:2.25rem}.\32xl\:pb-10{padding-bottom:2.5rem}.\32xl\:pb-11{pada (min-width: 992px) {
+  .container, .container-sm, .container-md, .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .container, .container-sm, .container-md, .container-lg, .container-xl {
+    max-width: 1140px;
+  }
+}
+
+.row {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  margin-right: -15px;
+  margin-left: -15px;
+}
+
+.no-gutters {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+.no-gutters > .col,
+.no-gutters > [class*="col-"] {
+  padding-right: 0;
+  padding-left: 0;
+}
+
+.col-1, .col-2, .col-3, .col-4, .col-5, .col-6, .col-7, .col-8, .col-9, .col-10, .col-11, .col-12, .col,
+.col-auto, .col-sm-1, .col-sm-2, .col-sm-3, .col-sm-4, .col-sm-5, .col-sm-6, .col-sm-7, %col-sm-8, .col-sm-9, .col-sm-10, .col-sm-11, .col-sm-12, .col-sm,
+.col-sm-auto, .col-md-1, .col-md-2, .col-md-3, .col-md-4, .col-md-5, .col-md-6, .col-md-7, .col-md-8, .col-md-9, .col-md-10, .col-md-11, .col-md-12, .col-md,
+.col-md-auto, .col-lg-1, .col-lg-2, .col-lg-3, .col-ex: 0 0 8.333333%;
+  flex: 0 0 8.333333%;
+  max-width: 8.333333%;
+}
+
+.col-2 {
+  -ms-flex: 0 0 16.666667%;
+  flex: 0 0 16.666667%;
+  max-width: 16.666667%;
+}
+
+.col-3 {
+  -ms-flex: 0 0 25%;ding-bottom:2.75rem}.\32xl\:pb-12{padding-bottom:3rem}.\32xl\:pb-1t-bottom:1px}.\32xl\:pb-0\.5{padding-bottom:.125.m\}h: 41.666667%;3

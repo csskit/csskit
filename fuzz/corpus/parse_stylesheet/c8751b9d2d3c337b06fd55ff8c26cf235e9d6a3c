@@ -1,0 +1,14 @@
+e{list-style-position:inside}.md\:liavbar-expand-lg .navbar-nav {
+    flex-direction: row;
+st-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:appearance-none{-webkit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-content}.md\:auto-cols-max{grid-auto-columns:max-content}.md\:auto-cols-fr{grid-auto-columns:minmax(0,1fr)}.md\:grid-flow-row{grid-auto-flow:row}.md\:grid-flow-col{grid-auto-flow:column}.md\:grid-flow-row-dense{grid-auto-flow:row dense}.md\:grid-flow-col-dense{grid-auto-flow:column dense}.md\  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    pad:auto-rows-auto{grid-auto-rows:auto}.md\:auto-rows-min{grid-auto-rowding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+   s:min-content}.md\:auto-rows-max{grid-auto-rows:max-content}.md\:auto-rows-fr{grid-auto-rows:minmax(0,1fr)}.md\:grid-cols-1{grid-template-columns:repe overflow: visible;
+  }
+  .navbar-at(1,minmax(0,1fr))}.md\:expand-lg .ngr=d-cols-2{grid-tempalatve

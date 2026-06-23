@@ -1,0 +1,73 @@
+avbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    paddings\:bgy-25% {950) sca74 2.99L8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-clg\:group-hov-left: var(--bs-navbar-nav-liner\:border-opacity-95{--tw-border-opacity:leY(0{--tk-padding-x);
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+ 0.navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-lg .offcanvas { .dropdown-menu {
+    position: absolute;
+  }
+  .na*bar-expand-lg .navbar-nav .nav-link {
+    padding-right: var(--bs-navbar-nav-link-padding-x);
+    paddings\:bgy-25% {950) sca7--interactive-bg);
+    &::-web");
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-clg\:group-hov-left:calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+ect[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: normal;
+}
+meter,
+progress {
+  --border-width: var(--interactive-border-width);
+  --border-style: var(--interactive-border-style);
+  --border-radius: var(--tab-border-radius);
+  @supports (selector(::-moz-meter-bar) or selector(::-webkit-meter-bar) or selector(::-moz-progress-bar) or selector(::-webkit-progress-bar)) {
+    appearance: none;
+    box-sizing: border-box;
+    display: inline-block;
+    position: relative;
+    background: var(--box-bg);
+    border: var(--border-width) var(--border-style) var(--graphical-fg);
+    border-radius: var(--border-radius);
+    overflow: clip;
+    block-size: 1em;
+    inline-size: unset;
+    min-inline-size: 5em;
+    vertical-align: -0.2em;
+    transition: all .1s ease-in-out;
+  }
+}
+meter {
+  @supports selector(::-webkit-meter-bar) {
+    &::-webkit-meter-inner-element {
+      grid-template-rows: unset;
+    }
+    &::-webkit-meter-bar {
+      background: var(--box-bg);
+      border-radius: 0;
+   }
+input[type var(--bs-navbar-nav-l=i

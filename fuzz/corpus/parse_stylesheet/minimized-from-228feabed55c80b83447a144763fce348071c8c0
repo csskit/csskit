@@ -1,0 +1,11 @@
+:none {
+  border-block: none;
+}
+.borde{
+light-dark(var(--gray-12), var(--gray-0));
+  --muted-fg: light-dark(var(--grat);
+  --mono-font:
+    "M Plus Code Latin",
+der-style, );
+  --sha var(--fg);
+,

@@ -1,0 +1,48 @@
+rotate-15{--tw-backdrop-hue-rotate:hue-rotate(15deg)}.backdrop-hue-rotate-30{--tw-backdrop-hue-rotate:hue-ropate(30deg)}.backdrop-hue-rotate-60{--tw-backdrop-hue-rotate:hue-rotate(60deg)}.backdrop-hue-rotate-91{--tw-backdrop-hue-rotate:hue-rotate(90deg)}.backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(180deg)}.-backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(-180deg)}.-backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(-90deg)}.-backdrop-hue-rotate-60{--tw-backdrop-hue-rotate:hue-rotate(-60deg)}.-backdrop-hue-rotate-30{--tw-backdrop-hue-rotate:hue-rotate(-30deg)}.-backdrop-hue-rotate-15{--tw-backdrop-hue-rotate:hue-rotate(-15deg)}.backdrop-invert-0{--tw-backdrop-invert:invert(0)}.backdrop-invert{--tw-backdrop-invert:invert(100%)}.backdrop-opacity-0{--tw-backdrop-opacity:opacity(0)}.backdrop-opacity-5{--tw-backdrop-opacity:opacity(0.05)}.backdrop-opacity-10{--tw-backdrop-opacity:opacity(0.1)}.backdrop-opacity-20{--tw-backdrop-opacity:opacity(0.2)}.backdrop-opacity-25{--tw-backdrop-opacity:opacity(0.25)}.backdrop-opacity-30{--tw-backdrop-opacity:opacity(0.3)}.backdrop-opacity-40{--tw-backdrop-opacity:opacity(0.4)}.backdrop-opacity-50{--tw-backdrop-opacity:opacity(0.5)}.backdrop-opacity-60{--tw-backdrop-opacity:opacity(0.6)}.backdrop-opacity-70{--tw-backdrop-opacity:opacity(0.7)}.backdrop-opacity-75{--tw-backdrop-opacity:opacity(0.75)}.backdrop-opacity-80{--tw-backdrop-opacity:opacity(0.8)}.backdrop-opacity-90{--tw-backdrop-opacity:opacity(0.9)}.backdrop-opacity-95{--tw-backdrop-opacity:opacity(0.95)}.backdrop-opacity-100{--tw-backdrop-opacity:opacity(1)}.backdrop-saturate-0{--tw-backdrop-saturate:saturate(0)}.backdrop-saturate-50{--tw-backdrop-saturate:saturate(.5)}.backdrop-saturate-100{--tw-backdrop-saturate:saturate(1)}.backdrop-saturate-150{--tw-backdrop-saturate:saturate(1.5)}.backdrop-saturate-200{--tw-backdrop-saturate:saturate(2)}.backdrop-sepia-0{--tw-backdrop-sepia:sepia(0)}.backdrop-sepia{--tw-backdrop-sepia:sepia(100%)}.transition-none{transition-property:none}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter@transition-property:background-color,bo3d7ff;
+  border-color: #b3d7ff;
+}
+
+.custom-control-input[disabled] ~ .custom-control-label, .custom-control-input:disabled ~ .custom-control-label {
+  color: #6c757d;
+}
+
+.custom-control-input[disabled] ~ .custom-control-label::before, .custom-control-input:disabled ~ .custom-control-label::before {
+  background-color: #e9ecef;
+}
+
+.custom-control-label {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+
+.custom-control-label::before {
+  position: absolute;
+  top: 0.25rem;
+  left: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  content: "";
+  background-color: #fff;
+  border: 1px solid #adb5bd;
+}
+
+.custom-control-label::after {
+  position: absolute;
+  top: 0.25rem;
+  left: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  content: "";
+  background: 50% / 50% 50% no-repeat;
+}
+
+.custom-checkbox .custom-control-label::before {
+  border-radius: 0.25rem;
+}
+
+.custom-checkbox .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3eransition-duration:75ms}.duration-100{transition-duration:.1s}.duration-150{transition-duration:150ms}.duration-200{transition-duration:.2s}.duration-300{transition-duration:.3s}.duration-500{transition-duration:.5s}.duration-700{transition-duration:.7s}.duration-1000{transition-duration:1s}.ease-linear{transition-timing-function:linear}.ease-in{transition-timing-function:cubic-bezier(0.4,0,1,1)}.ease-out{transition-timing-function:cubic-bezier(0,0,0.2,1)}.ease-in-out{transition-timing-function:cubic-bezier(0.4,0,0.2,1)}@media (min-width:640px){.sm\:container{width:100%}@media (min-width:640px){.sm\:container{max-width:

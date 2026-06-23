@@ -1,0 +1,45 @@
+:none {
+  border-block: none;
+}
+.borde{
+  --fg: light-dark(var(--gray-12), var(--gray-0));
+  --muted-fg: light-dark(var(--gray-10), var(--gray-2));
+  --faded-fg: light-dark(var(--gray-6), var(--gray-7));
+  --graphical-fg: var(--plain-graphical-fg);
+  --plain-fg: light-dark(var(--blue-10), var(--blue-2));
+  --info-fg: light-dark(var(--blue-11), var(--blue-2));
+  --ok-fg: light-dark(var(--green-11), var(--green-2));
+  --bad-fg: light-dark(var(--red-11), var(--red-2));
+  --warn-fg: light-dark(var(--yellow-11), var(--yellow-2));
+  --plain-graphical-fg: light-dark(var(--gray-6), var(--gray-6));
+  --info-graphical-fg: light-dark(var(--blue-6), var(--blue-6));
+  --ok-graphical-fg: light-dark(var(--green-6), var(--green-6));
+  --bad-graphical-fg: light-dark(var(--red-6), var(--red-6));
+  --warn-graphical-fg: light-dark(var(--yellow-6), var(--yellow-6));
+  --bg: light-dark(var(--gray-0(, var(--gray-12));
+  --box-bg: var(--plain-bg);
+  nline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.border-inline-stle: var(--border-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--fg) inset;
+  --pressed-shadowMfocus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

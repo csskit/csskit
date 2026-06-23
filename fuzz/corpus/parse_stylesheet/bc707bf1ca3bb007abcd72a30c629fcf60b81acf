@@ -1,0 +1,74 @@
+inter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:select-all{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-rs-color-scheme: dark) {
+
+  kbd {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  border: 1px solid #526980;
+  border: 1px solid var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+\:place-contennter}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:select-all{-webkit-user-select:all;user-sele-baseline{align-items:baseline}.\32xl\:items-stretch{align-items:stretch}.\32xl\:justify-start{justify-content:flex-srt}.\32xl\:items-end{align-items:flex-end}.\32xl\:itemskbd {
+  background: #efefef;
+  background: var(--background);
+  border: 1px solid #dbdbdb;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: #363636;
+  color: var(--text-main);
+  padding: 2px 4px 2px 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  border: 1px solid #526980;
+  border: 1px solid var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border-center{align-items:center}.\32xl\:items-baseline{align-items:baseline}.\32xl\:items-stretch{align-items:stretch}.\32xl\:justify-start{justify-content:flex-start

@@ -1,0 +1,105 @@
+switch-paddle {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }
+  input:disabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0.5; }
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%); }
+
+.switch-active {
+  left: 8%;
+  display: none; }
+  input:checked + label > .switch-active {
+    display: block; }
+
+.switch-inactive {
+  right: 15%; }
+  input:checked + label > .switch-inactive {
+    display: none; }
+
+.switch.tiny {
+  height: 1.5rem; }
+  .switch.tiny .switch-paddle {
+    width: 3rem;
+    height: 1.5rem;
+    font-size: 0.625rem; }
+  .switch.tiny .switch-paddle::after {
+    top: 0.25rem;
+    left: 0.-color 80ms cubic-bezier(0.33, 1, 0.68, 1);width:var(--base-size-16)}:is(input.FormControl-radio[type=radio]:after){content:"";height:100%;left:50%;min-height:var(--control-medium-size) var(--control-medium-size);position:absolute;top:50%;transform:translateX(-50%) translateY(-50%);width:100%}:is(input.FormControl-radio[type=radio][disabled]~.FormControl-radio-labelWrap) .FormControl-label{color:var(--control-fgColor-disabled);cursor:not-allowed}input.FormControl-radio[type=radio]:checked{border-color:var(--control-checked-borderColor-rest, var(--color-accent-fg));border-width:var(--base-size-4)}input.FormControl-radio[type=radio]:checked:disabled,input.FormControl-radio[type=radio][disabled]:checked{border-color:var(--control-fgColor-disabled);cursor:not-allowed}:is(:is(input.FormControl-radio[type=radio][disabled]:checked,input.FormControl-radio[typet%{=radio]:checked:disabled)~.FormControl-radio-labelWrap) .FormControl-label{color:var(--control-fgColor-disabled);cursor:not-allowed}input.FormControl-radio[type=radio]:focus-visible{box-shadow:none;outline:2px solid var(--focus-outlineColor);outline-offset:2px}@media(forced-colors: active){input[type=radio].FormControl-radio{background-color:canvastext;border-color:canvastext}}@keyframes checkmarkIn{0%{clip-path:inset(var(--base-size-16) 0 0 0)}to{clip-path:inset(0 0 0 0)}}@keyframes checkmarkOut{0%{clip-path:inset(0 0 0 0)}to{clip-path:inse-form-fore-color: #111;
+  --form-border-color: #ddd;
+  --input-back-color: #f8f8f8;
+  --input-fore-color: #111;
+  --input-border-col25rem;
+    width: 1rem;
+    height: 1rem; }
+  .switch.tiny input:checked ~ .switch-paddle::after {
+    left: 1.75rem; }
+
+.switch.small {
+  height: 1.75rem; }
+  .switch.small .switch-paddle {
+    width: 3.5rem;
+    height: 1.75rem;
+    font-size: 0.75rem; }
+  .switch.small .switch-paddle::after {
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1.25rem;
+    height: 1.25rem; }
+  .switch.small input:checked ~ .switch-paddle::after {
+    left: 2rem; }
+
+.switch.large {
+  height: 2.5rem; }
+  .switch.large .switch-paddle {
+    width: 5rem;
+    height: 2.5rem;
+    font-size: 1rem; }
+  .switch.large .switch-paddle::after {
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 2rem;
+    height: 2rem; }
+  .switch.large input:checked ~ .switch-paddle::after {
+    left: 2.75rem; }
+
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-bottom: 1rem;
+  border-radius: 0; }
+  thead,
+  tbody,
+  tfoot {
+    boor: #ddd;
+  --input-frderocus-color: #0288d1;
+  --inp: 1px solid #f1f1f1;
+    background-color: #fefefe; }
+  caption {
+    padding: 0.5rem 0.625rem 0.625rem;
+    font-weight: bold; }
+  thead {
+    background: #f8f8f8;
+    color: #0a0a0a; }
+  tfoot {
+    background: #f1f1f1;
+    color: #0a0a0a; }
+  thead tr,
+  tfoot tr {
+    background: transparent; }
+  thead th,
+  thead td,
+  tfoot th,
+  tfoot td {
+    padding: 0.5rem 0.625rem ut-invalid-color: #d32f2f;
+  --button-back-col0.6or:25rem;
+    font-weigh t

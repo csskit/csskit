@@ -1,0 +1,55 @@
+lor-scheme: dark) {
+
+  time {
+  color: #ffbe85;
+  color: var(--code);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  time {
+  background: #161f27;
+  background: var(--bty:1;border-color:rgba(219,39,119,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-700:focus-within{--tw-border-opacity:1;border-color:rgba(190,24,93,var(--tw-border-opacity))}.xlb:focus-within\:border-pink-800:focus-within{--tw-border-opacity:1;border-color:rgba(157,23,77,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-900:focus-within{--tw-border-opacity:1;border-color:rgba(131,24,67,var(--tw-border-opacity))}.xl\:hover\:border-transparent:hover{border-color:transparent}.xl\:hover\:border-current:hover{border-color:currentColor}.xl\:hover\:border-black:hover{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.xl\:hover\:border-white:hover{--tw-border-opacity:1;border-color:rgba(255,255,255,var(--tw-border-opacity))}.xl\:hover\:border-gray-50:hover{--tw-border-opacity:1;border-color:rgba(249,250,251,var(--tw-border-opacity))}.xl\ba(243,244,246,var(--tw-border-opacity))}.xl\:hover\:border-gray-200:hover{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}.xl\:hover\:border-gray-300:hover{--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity))}.xl\:hover\:border-gray-400:hover{--tw-border-opacity:1;border-color:rgba(156,163,175,var(--tw-border-opacity))}.xl\:hover\:border-gray-500:hover{--tw-border-opacity:1;border-color:rgba(107,114,128,var(}
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  border: 1px solid #526980;
+  border: 1px solid var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+immb-hover);
+  }
+}Y
+@media (prefers-color-scheme: dark) {
+
+  ::-webkit-scrollbar-thumb:hover {
+  background: rgb(0, 0, 0);
+  background: var(--scrollbar-thumb-hover);
+  }
+}
+
+::-moz-selection {
+  background-color: #9e9e9e;
+  background-color: var(--selection);
+  color: #000;
+  color: var(--text-bright);
+}
+
+::selection {
+  background-coroel9# :9e9e;
+  background-color: var(--selection);
+  color: #000;
+  color: var(--text-bright);
+}

@@ -1,0 +1,6 @@
+osition-left.is-transation-overlap.is-open {
+      -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+              transform: translate(0, 0); }
+  .off-canvas-content.is-open-left.ha@s-transition-push {
+ ch a

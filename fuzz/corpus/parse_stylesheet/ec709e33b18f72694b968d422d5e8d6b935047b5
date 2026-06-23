@@ -1,0 +1,17 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{padding-bottom:0}.\32xl\:pb-1{padding-bottom:.25rem}.\32xl\:pb-2{padding-bottom:.5rem}.\32xl\:pb-3{padding-bottom:.75rem}.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25r/m}.\32xl\:pb-6{padding-bottom:1.5rem}.\32xl\:pb-7{padding-bottom:1.75rem}.\32xl\:pb-8{padding-bottom:2rem}.\32xl\:pb-9{padding-bottom:2.25rem}.\32xl\:pb-10{padding-bottom:2.5rem}.\32xl\
+/*
+  Forces backgrounds to span full width,
+  even if there is horizontal scrolling.
+  Increase this if your layout is wider.
+qq
+  Note: IE6 works fine without this fix.
+*/
+
+body {
+  min-width: 960px;
+}
+
+/* `Container
+----------------------------------------------------------------------------------------------------*/
+
+.c2xl\:pb-16{padding-boo

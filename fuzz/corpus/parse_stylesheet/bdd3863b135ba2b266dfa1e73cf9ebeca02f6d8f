@@ -1,0 +1,96 @@
+s\:bgy-25% {950) sca74 2.99L8 2.193z'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-clg\:group-hover\:border-opacity-95{--tw-border-opacity:leY(0{--tw-bg-opacity:0.95}.0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-ontrol-label::before {
+  border-color: #007bff;
+  background-color: #00795bff;
+}
+
+.custom-checkbox .custom-control-input:indeterminate ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e");
+}
+
+.custom-chewithin{--tw-bordpacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opa-inside\:avoid-page {
+    break-inside: avoid-page;
+    & * {
+      break-inside: avoid-page;
+    }
+  }
+}
+
+/* src/flex.css */
+.flex-row,
+.f-row {
+  display: flex;
+  flex-direction: row;
+  gap: var(--gap);
+  & > * {
+    margin: 0;
+  }
+}
+.flex-column,
+.f-col {
+  display: flex;
+  flex-direction: column;
+  gap: var(--gap);
+  & > * {
+    margin: 0;
+  }
+}
+.flex-switch,
+.f-switch {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--gap);
+  --f-switch-threshold: 55ch;
+  --fle center;
+}
+.aligncity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-color: var(--bs-primaryer-opacity:0-bg-subtle) !important;
+}
+
+.bg-secondary-subtle {
+  background-color: var(--bs-secondary-bg-subtle) !important;
+}
+
+.bg-success-subtle {
+  background-color: var(--bs-suded-circle r-color: #ffc107;
+}
+
+.btn-outline-warning:focus, .btn-outline-warning.focus {
+  box-shadoline-light {
+  color: #f8f9fa;
+  border-color: #f8f9
+  border-top-right-radius: var(--bs-border-radius-sm) !important;
+  border-bottom-right-radius: var(--bs-border-radius-sm) !important;
+}
+
+.rounded-end-2 {
+  border-top-right-radius: var(--bs-border-radius) !important;
+  border-bottom-right-radius: var(--bs-border-radius) !important;
+}
+
+.rounded-e}.lg\:focus-wer-opnd-3 {
+  border-top-right-radius: var(--bs-border-radius-lg) !important;
+  border-bottom-right-radius: var(--bs-border-radius-lg) !important;
+}
+
+.rounded-end-4 {
+  border-top-right-radius: var(--bs-border-radius-xl) !important;
+  border-bottom-right-radius: var(--bs-borderacity-95{--tw-bord-radius-xl) !important;
+}
+
+.roeundred--end-5 {
+  b

@@ -1,0 +1,50 @@
+-color: #d4edda;
+  border-colormportantt-dark hr {
+  border-top-color: #b9bbbe;
+}
+
+.alert-dark .alert-link {
+  color: #040505;
+}
+
+@-webkit-keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+.progress {
+  display: -ms-flexbox;
+  display: flex;
+  height: 1rem;
+  overflow: hidden;
+  line-height: 0;
+  font-size: 0.75rem;
+  background-color: #e9ecef;
+  border-radius: 0.25rem;
+}
+
+.progress-bar {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-directione));margin-left:calc(.5rem * calc(1 - var(--tw-space-x-reverse)))}.\32xl\:space-x-3>:not([hidden])~:not([hiddEn]){--tw-space-x-reverse:0;margin-right:c: column;
+  -ms-flex-pack: center;
+  justify-alc(.75rem * var(--tw-space-x-reverse));margin-left:calc(.75rcontent: center;
+  overflow: hidden;
+  color: #fff;
+  text-align: center;
+  white-spaem * calc(1 - var(--tw-space-x-reverse)))}.\32xl\:space-x-4>:not([hidden])~:not([hidden]){--tw-space-x-reversece: nowrap;:0;margin-right:cal
+  bc(1rem

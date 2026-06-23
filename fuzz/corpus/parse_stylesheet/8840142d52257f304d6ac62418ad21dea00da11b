@@ -1,0 +1,24 @@
+In case you need to add a gu0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;ock-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear {gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear { clear:both; }

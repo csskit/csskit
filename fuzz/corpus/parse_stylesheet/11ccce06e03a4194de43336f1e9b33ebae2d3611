@@ -1,0 +1,13 @@
+y-lineHeight-large: 1.5;--text-body-size-smbel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1.5)}.\32xl\:contrast-200all: 0.75rem;--text-body-size-medium: 0.875rem;--text-body-size-large: 1rem;--text-subtitle-lineHeight: 1.6;--text-subtitle-size: 1.25rem;--text-title-lineHeight-small:{--tw-c on1.5tra

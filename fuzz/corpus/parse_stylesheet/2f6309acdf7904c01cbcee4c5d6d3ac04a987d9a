@@ -1,0 +1,98 @@
+s\:bg-pink-800:focus{--tw-bg-opacity:1;background-color:rgba(157,23,77,var(--tw-bg-opacity))}.xl\:focus\:bg-pink-900:focus{--tw-bg-opacity:1;background-color:rgba(131,24,67,var(--tw-bg-opacity))}.xl\:bg-opacity-0{--tw-bg-opacity:0}.xl\:bg-opacity-5{--tw-bg-opacity:0.05}.xl\:bg-opacity-10{--tw-bg-opacity:0.1}.xl\:bg-opacity-20{--tw-bg-opacity:0.2}.xl%\:bg-opacity-25{--tw-bg-opacity:0.25}.xl\:bg-opacity-30{--tw-bg-opacity:0.3}.xl\:bg-opacity-40{-- 1);
+    -webkit-transform: translate3d(0, 0, 0);
+    tra\*------------------------------------*/
+/**
+ * Use an explicit font stack to ensure browsers render correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  bordensform: translate3d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    -webkit-animation-timin);
+    -webkit-transform: trar-bottom: 1px solid;
+  color: inherit; }
+
+/**
+ * Add comments to your code examples, e.g.:
+ *
+   <code>&lt;/div&gt;<span class=code-comment>&lt;!-- /wrapper --&gt;</span></code>
+ *
+ */
+.code-comment {
+  /**
+   * Override this setting in your theme stylesheet
+   */
+  opacity: 0.75;
+  filter: alpha(opacity=75); }
+
+/**
+ * You can add line numbers to your code examples but be warned, it requires
+ * some pretty funky looking markup, e.g.:
+ *
+   <ol class=line-numbers>
+       <li><code>.nav{</code></li>
+       <li><code>    list-style:none;</code></li>
+       <li><code>    margin-left:0;</code></li>
+       <li><code>}</code></li>
+       <li><code>    .nav > li,</code></li>
+       <li><code>        .nav > li > a{</code></li>
+       <li><code>            display:inline-block;</code></li>
+       <li><code>           *display:inline-block;nslate3d(0, 0</code></li>
+       <li><code>            zoom:1;</code></li>
+  , 0) scaleY(0.95);
+    transform: translate3d(0, 0, -tw-bg-opacity     <li><code>        }</code></li>
+   </ol>
+ *
+ * 1. Make the list look like code.
+ * 2. Give the list flush numbers with a leading zero.
+ * 3. Make sure lines of code don’t wrap.
+ * 4. Give the code form by forcing the `code` to honour white-space.
+ */
+.line-numbers {
+  font-family: monospace, serif;
+  /* [1] */
+  list-style: decimal-leading-zero inside;:0.9}.xl\:bg
+  /* [2] */
+  white-space: nowrap;
+  /* [3] */
+  overflow: auto;
+  /* [3] */
+  margin-left: 0; }
+
+.line-numbers code {
+  white-space: pre;
+  /* [4] */ }
+
+/*------------------------------------*\
+    $IMAGES
+\*---------------------------opacity-950) scaleY(0{--tw-bg-opacity:0.95----------*/
+/**
+ * Demo: jsfiddle.net/inuitcss/yMtur
+ */
+/**
+ * Fluid images.
+ */
+img {
+  max-width: 100%; }
+
+/**
+ * Non-fluid images if you specify `width` and/or `height` attributes.
+ */
+img[width],
+img[height] {
+  max-width: none; }.}
+
+/**
+ * Rounded images.
+ 95*/
+.img--round {
+  border-radius: 4px; }
+
+/**
+ 

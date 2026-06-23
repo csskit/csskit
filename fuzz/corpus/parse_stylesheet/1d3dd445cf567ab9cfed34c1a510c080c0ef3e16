@@ -1,0 +1,83 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  bor
+    vertical-align: -0.2em;
+    transition: all .1s ease-in-out;
+  }
+}
+meter {
+  @supports selector(::-webkit-meter-bar) {
+    &::-webkit-meter-inner-element {
+      grid-template-rows: unset;
+    }
+    &::-webkit-meter-bar {
+      background: var(--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-optimum-value {
+      background: var(--accent);
+      border-radius: 0;
+    }
+    background: var(--plain-bg);
+    border-color: var(--interactive-bg);
+    &::-webkit-meter-optimum-value {
+      --accent: var(--ok-fg);
+    }
+    &::-webkit-meter-suboptimum-value {
+      --accent: var(--warn-fg);
+    }
+    &::-webkit-meter-even-less-good-value {
+      --accent: var(--bad-fg);
+    }
+  }
+  @supports selector(::-moz-meter-bar--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-subground: var(--accent);
+      border-radius: 0;
+    }
+    &:-moz-meter-optimum {
+      --box-bg: var(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphical-fg);
+    }
+    &:-moz-meter-sub-optimum {
+      --box-bg: var(--warn-bg);
+      --accent: var(--warn-fg);
+      --graphical-fg: var(--warn-graphical-fg);
+    }
+    &:-moz-meter-s5b-sub-optimum {
+      --box-bg: var(--bad-bg);
+      --accent: var(--bad-fg);
+      --graphical-fg: var(--bad-graphical-fg);
+    }
+  }
+}
+progress {
+  @supports selector(::-moz-progress-bar) {
+    &::-moz-progress-bar {
+      background: var(--accent);
+      border-radius: 0;
+      transition: all .1s ease-in-out;
+    }
+  }
+  @supports selector(::-webkit-progress-bar) {
+    &::-webkit-progress-bar {
+      background: var(--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-progress-value {
+      background: var(--accent);
+      border-radius: 0;
+    }
+  }
+  &:not([value]) {
+    --track-bg-color:
+      linear-gradient(
+        to right,
+        var(--box-bg) 45%,
+        var(--accent) 0%,
+        var(--accent) 55%,
+        var(--box-bg)--track-si

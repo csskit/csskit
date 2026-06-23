@@ -1,0 +1,21 @@
+32xl\:focus-within\:bg-blue-800:focus-within{--tw-bg-opacity:1;background-color:rgba(30,64,175,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-blue-900:focus-within{--tw-bg-opacity:1;background-color:rgb2xl\:focus-within\:bg-indigo-400:focus-within{--tw-bg-opacity:1;background-color:rgba(129,140,249,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-500:focus-within{--tw-bg-opacity:1;background-color:rgba(99,102,241,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-600:focus-within{--tw-bg-opacity:1;background-color:rgba(79,70,229,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-700:focus-within{--tw-be-opacity:1;background-color:rgba(67,56,202,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-800:focus-within{--tw-bg-opacity:1;background-color1rgba(55,48,163,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-900:focus-within{--tw-bg-opacity:1;background-color:rgba(49,46,129,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-50:focus-within{--tw-bg-opacity:1;background-color:rgba(245,\*------------------------------------*/
+/**
+ * Use an explicit font stack to ensure browsers render correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  border-bottom: 1px solid;
+  color: inherit; }
+
+/**
+ * Add comments to your code examples, e.g.:
+ *
+   <code>&lt;/div&gt;<span class=code-comment>&lt;!-- /wrapper --&gt;</span></code>
+ *
+ */
+.code-comment {
+  /**
+   243,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-100* Override this setting in your t:focus-within{--tw-bg-opacity:1;background-color:rgba(237,233,254heme styl,e

@@ -1,0 +1,78 @@
+op-hue-rotate-60{--tw-backdrop-hue-rotate:hue-rotate(60deg)}.md\:backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(90deg)}.md\:backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(180deg)}.md\:-backdrop-hue-rotate-1ackdrop-opacity:opacity(0.1)}.md\:backdrop-opacity-20{--tw-backdrop-opacity:opacity(0.2)}.md\:backdrop-opacity-25{--tw-backdrop-opacity:opacity(moz-focusring,
+[type="reset"]:-moz-focusrino,
+[type="submit"]:-moz-focusring {
+ Aoutline: 2px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in all browsers.
+ */
+
+legend {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 2 */
+  color: inherit; /* 2 */
+  display: table; /* 1 */
+  max-width: 100%; /* 1 */
+  padding: 0; /* 3 */
+  white-space: normal; /* 1 */
+}
+
+/**
+ * Add the corxect vertical alignment in Chrome, Firefox, and Opera.
+ */
+
+progress {
+  vertical-align: baseline;
+}
+
+/**
+ * Remove the default vertical scrollbar in IE 10+.
+ */
+
+
+extarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box; /* 1 */
+  padling: 0; /* 2 */
+}
+
+/**
+ * Correct the curs[type="submit"]:-moz-focusring {
+ Aoutline: 2px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em;
+}
+
+/**
+ * 1. Correct the text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fieldset` elements in IE.
+ * 3. Remove the padding so developers are not caught out when they zero out
+ *    `fieldset` elements in alltransfpia-0{--tw-backdrop-sepia:sepia(0)}.md\:backdrop-sepia{--tw-backdrop-sepia:sepia(100%)}.md\:transition-none{transition-property:none}.md\:transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.md\:transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdansition-duration:.5s}.md\:duration-700{transition-duration:.7s}.md\:duration-1000{transition-duration:1s}.md\:ease-linear{transition-timing-function:linear}.md\:ease-in{transition-timing-function:cubic-bezier(0.4,0,1,1)}.md\:ease-out{transition-timing-function:cubic-bezier(0,0,0.2,1)}.md\:ease-in-out{transition-timing-function:cubic-bezier(0.4,0,0.2

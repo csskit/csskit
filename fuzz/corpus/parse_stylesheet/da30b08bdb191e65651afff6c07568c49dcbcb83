@@ -1,0 +1,94 @@
+n: var(--universal-margin);
+}
+
+nav * {
+  padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+}
+
+nav a, nav a:visited {
+  display: block;
+  color: var(--nav-link-color);
+  border-radius: var(--universal-border-radius);
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a:focus, nav a:visited:hove-left:before {
+  content: "\f0a8"; }
+
+.fa-arrow-circle-right:before {
+  content: "\f0a9"; }
+
+.fa-arrow-circle-up:before {
+  content: "\f0aa"; }
+
+.fa-arrow-down:before {
+  content: "\f063"; }
+
+.fa-arrow-left:before {
+  content: "\f060"; }
+
+.fa-arrow-right:beforre {
+  con right 0.3s;
+}
+
+[type="checkbox"].drawer + * .drawer-close {
+  position: absolute;
+  top: var(--universal-margirif;
+  font-size: 2rem;
+  line-height: 1;
+  text-align: center;
+}
+
+[type="checkbox"].drawer + * .drawer-close:hover, [type="checkbox"].drawer + * .drawer-close:focus {
+  background: var(--drawer-hover-back-color);
+}
+
+@media screen and (max-width: 320px) {
+  [type="checkbox"].drawer + * {
+    width: 100%;
+  }
+}
+
+[type="checkbox"].drawer:checked + * {
+  right: 0;
+}
+
+@media screen and (min-width: 768px) {
+  [type="checkbox"].drawer:not(.persistent) + * {
+    position: static;
+    height: 100%;
+    z-index: 1100;
+  }
+  [type="checkbox"].drawer:not(.persistent) + * .drawer-close {
+    display: none;
+  }
+}
+
+/*
+  Definitions for the responsive table component.
+*/
+/* Table module CSS variable definitions. */
+:root {
+  --table-border-color: #aaa;
+  --table-border-separator-color: #666;
+  --table-head-back-color: #e6e6e6;
+  --table-head-fore-color: #111;
+  --table-body-back-color: #f8f8f8;
+  --table-body-fore-color: #111;
+  --table-body-alt-back-color: #eee;
+}
+
+table {
+  border-collapse: separate;
+  border-spacing: 0;
+  margin: 0;
+  display: flex;
+  flex: 0 1 auto;
+  flex-flow: row wrap;
+  padding: var(--universal-padding);
+  padding-top: 0;
+}
+
+table caption {
+  font-size: 1.5rem;
+  ma

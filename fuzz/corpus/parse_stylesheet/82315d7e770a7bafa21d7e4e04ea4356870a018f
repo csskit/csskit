@@ -1,0 +1,80 @@
+e-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(219,234,254,var(--tw-divide-opacity))}.xl\:divide-blue-200>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(191,219,254,var(--tw-divide-opacity))}.xl\:divide-blue-300>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(147,197,253,var(--tw-divide-opacity))}.xl\:divide-blue-400>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(96,165,250,var(--tw-divide-opacity))}.xl\:divide-blue-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(59,130,246,var(--tw-divideon-duration) ease;
+  }
+}
+
+input {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+  }
+}
+
+textarea {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  textarea {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+  }
+}
+
+h1 {
+  font-size: 2.2em;
+  margin-top: 0;
+}
+
+h1,
+h2,
+h3,
+h4,
+hde-opacity:1;border-color:rgba(245,243,255,var(--tw-divide-opacity))}.xl\:divide-purple-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(237,233,254,var(--tw-divide-opacity))}.xl\:divide-purple-200>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(221,214,254,var(--tw-divide-opacity))}.xl\:divide-purple-300>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(196,181,253,var(--tw-divide-opacity))}.xl\:divide-purple-400>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(167,139,250,var(--tw-divide-opacity))}.xl\:divide-purple-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(139,92,246,var(--tw-divide-opacity))}.xl\:divide-purple-600>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(124,58,237,var(--tw-divide-opacity))}.xl\:divide-purple-700>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(109,40,217,var(--tw-divide-opacity))}.xl\:divide-purple-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(91,33,182,var(--tw-divide-opacity))}.xl\:divide-purple-900>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(76,29,149,var(--tw-divide-opacity))}.xl\:divide-pink-50>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(253,242,248,var(--tw-divide-opacity))}.xl\:divide-pink-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(252,231,243,var(--tw-divide-opacity))}.xl\:divide-pink-200>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(251,207,23

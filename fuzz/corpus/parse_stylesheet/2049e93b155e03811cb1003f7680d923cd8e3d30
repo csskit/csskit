@@ -1,0 +1,40 @@
+indigo-50:hover{--tw-border-opacity:1;border-color:rgba(238,242,255,var(--tw-border-opacity))}.md\:hover\:border-indigo-100:hover{--tw-border-opacity:1;border-color:rgba(224,231,255,var(--tw-border-opacity))}.md\:hover\:border-indigo-200:hover{--tw-border-opacity:1;border-color:rgba(199,2w-border-opacity))}.md\:hover\:border-indigo-500:hover{--tw-border-opacity:1;border-color:rgba(99,102,241,var(--tw-border-opacity))}.md\:hover\:border-indigo-600:hover{--tw-border-opacity:1;border-color:rgba(79,70,229,var(--tw-border-opacity))}.md\:hover\:border-indigo-700:hover{--tw-border-opacity:1;border-color:rgba(67,56,202,var(--tw-border-opacity))}.md\:hover\:border-indigo-800:hover{--tw-border-opacity:1d `letter-spacing` side-effects. */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-;border-color:rgba(55,48,163,var(--tw-border-10,254,var(--tw-border-opacity))}.md\:hover\:border-indigo-300:hover{--tw-border-opacity:1;border-color:rgba(165,180,252,var(--tw-border-opacity))}.md\:hover\:border-indigo-400:hover{--tw-border-opacity:1;border-color:rgba(129,140,248,var(--tw-border-opacity))}.md\:hover\:border-indigo-500:hover{--tw-border-opacity:1;border-color:rgba(99,102,241,var(--tw-border-opacity))}.md\:hover\:border-indigo-600:hover{--tw-border-opacity:1;border-color:rgba(79,70,229,var(--tw-border-opacity))}.md\:hover\:border-indigo-700:hover{--tw-border-opacity:1;border-color:rgba(67,56,202,var(--tw-border-opacity))}.md\:hover\:border-indigo-800:hover{--tw-border-opacity:1;border-color:rgba(55,48,163,var(--tw-border-opacity))}.md\:hover\:border-indigo-900:hover{--tw-border-opacity:1;border-color:rgba(49,46,129,flow: row wrap;
+            flex-flow: row wrap;
+
+    /* Prevents distributing space between rows */
+    -ms-flex-line-pack: start;
+        align-content: flex-start;
+}
+
+/* IE10 display: -ms-flexbox (and display: flex in IE 10) does not work inside a table; fall back to block and rely on font hack */
+@media all and (-ms-high-contrast: none), (-ms-high-contrast: active) {
+	table .pure-g {
+		display: block;
+	}
+}
+
+/* Opera as of 12 on Windows needs word-spacing.
+   The ".opera-only" selector is used to prevent actual prefocus styling
+   and is not required in markup.
+*/
+.opera-only :-o-prefocus,
+.pure-g {
+    word-spacing: -0.43em;
+}
+
+.pure-u {
+    display: inline-block;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+
+/*
+Resvar(--tw-border-opacity))}.md\:hover\:border-purple-50:hover{--twets the font family-b bordear

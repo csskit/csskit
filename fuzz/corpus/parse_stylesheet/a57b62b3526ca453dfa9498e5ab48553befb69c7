@@ -1,0 +1,34 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+  }
+  table tbody tr:7569
+ */
+/**
+ * Force overly long spans of text to truncate, e.g.:
+ *
+   `@include truncate(100%);`
+ *
+ * Where `$truncation-boundary` is a united measurement.
+ */
+/**
+ * CSS arrows!!! But... before you read on, you might want to grab a coffee...
+ *
+ * This mixin creates a CSS arrow on a given element. We can have the arrow
+ * appear in one of 12 locat=50:hover{--tw-text-opacity:1;color:rgba(249,250,251,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-100:hover{--tw-text-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-200:hover{--tw-text-opacity:1;color:rgba(229,231,235,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-300:hover{--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-400:hover{--tw-text-opacity:1;color:rgba(156,163,175,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-500:hover{--ave the arrow
+ * appear in one of 12 locat=50:hover{--tw-text-opacity:1;color:rgba(249,250,251,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-100:hover{--tw-text-opacity:1;color:rgba(243,244,246,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-200:hover{--tw-text-opacity:1;color:rgba(229,231,235,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-300:hover{--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-400:hover{--tw-text-opacity:1;color:rgba(156,163,175,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-500:hover{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}.\32xl\:htw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-600:hover{--tw-text-opacity:1;color:rgba(75,85,99,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-700:hover{--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-800:hover{--tw-text-opacity:1;color:ions, thus:
+ *
+ *       01    02    03
+ *    +------------------+
+ * 12 |                  | 04
+ *    |                  |
+ * 11 |                  | 05
+ *    |                  |
+ * 10 |                  | xl\:hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}.\32xl\:hover\:text-red-50:hover{--tw-text-opacity:1;color:rgba(254,242,242,var(--tw-text-opacity))}.\32xl\:hover\:text-re, red arrow, or:
+ *
+ * `@include arrow(bottom, center, red, black)`
+ *
+ * which will create a red triangle with a black border which sits at the bottom
+ * center d-100:hoof the element. Call the mixin thus:
+ *
+   .foo{
+      ver{--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity))}.\32xl\:hover\:text-red-20 backgro0:hund-colover{-or-tw-te

@@ -1,0 +1,48 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: break-word;
+  -webkit-tap-highlighe text wrapping in Edge and IE.
+ * 2. Correct the color inheritance from `fg,
+video {
+  ve(229,231,235,var(--tw-border-opacity))}.sm\:border-gray-300{--tw-border-opacity:1;border-color:rgba209,213,219,varorder-opacity:1;border-color:rgba(252,211,77,var(--tw-border-opacity))}.sm\:border-yellow-400{--tw-border-opacity:1;border-color:rgba(251,191,36,var(--tw-border-opacity))}.sm\:border-yellow-500{--tw-border-opacity:1;border-color:rgba(245,158,11,var(--tw-boolor: #eaeded;
+    color: #cad2d3;
+}
+.pure-form input[readonly],
+.pure-form select[readonly],
+.pure-form textarea[readonly] {
+    background-color: #eee; /* menu hover bg color */
+    color: #777; /* menu text color */
+    border-color: #ccc;
+}
+
+.pure-form input:focus:invalid,
+.pure-form textarea:focus:invalid,
+.pure-form select:focus:invalid {
+    color: #b94a48;
+    border-color: #e9322d;
+}
+.pure-form input[type="file"]:focus:invalid:focus,
+.pure-form input[type="radio"]:focus:invalid:focus,
+.pure-form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;: disc; }
+ol     { list-style-type: decimal; }
+
+dl     { margin: 0 0 1.5em 0; }
+dl dt  { font-weight: bold; }
+dd     { margin-left: 1.5em;}
+
+
+/* Tables
+--border-opacity:1;border-color:rgba(110,231,183,var(--tw-border-opacity))}.sm\:border-green-400{--tw-border-opacity:1;border-color:rgba(52,211,153,var(--tw-border-opacity))}.sm\:border-green-500{--tw-border-opacity:1;border-color:rgba(16,185,129,var(--tw-boblack{--tw-border-opacity:1;border-color:rgbrder-opaca(0,0,0,vaity))r(--

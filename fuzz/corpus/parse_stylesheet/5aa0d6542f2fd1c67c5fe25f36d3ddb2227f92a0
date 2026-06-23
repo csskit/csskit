@@ -1,0 +1,45 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  bo > .arrow::after {
+  left: 1px;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: #fff;
+}
+
+.bs-popover-bottom, .bs-popover-auto[x-placement^="bottom"]{
+   margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popovese-size-96: 6rem;--base-size-112: 7rem;--base-size-128: 8rem}:root;
+            flex-direction: row-reverse; }{--base-tex
+  .large-fleer{opacity:.7}.hover\:opacity-75:hover{opacity:.75}.hover\:opacity-80:hover{opacity:.8}.hover\:opacity-90:hover{opacity:.9}.hover\:opacity-95:hover{opacity:.95}.hover\:opacity-100:hover{opacity:1}.focus\:opacity-0:focus{opacity:0}.focus\:opacity-5:focus{opacity:.05}.focus\:opacity-10:focus{opacity:.1}.focus\:opacity-20:focus{opacity:.2}.focus\:opacity-25:focus{opacity:.25}.focus\:opacity-30:focus{opacity:.3}.focus\:opacity-40:focus{opacity:.4}.focus\:opacity-50:focus{opacity:.5}.focus\:opacity-60:focus{opacity:.6}.focus\:opacity-70:focus{opacity:.7}.focus\:opacity-75:focus{opacity:.75}.focus\:opacity-80:focus{opacity:.d-mode:exclusion}.bg-blend-hue{background-blend-mode:hue}.bg-blend-satursizing: content-box;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 30px;
+  height: 3px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-indent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacityr(--tw-shadow)}.group:hover .group-hover\:shadow-sm{--tw-shadow:0 1px 2px 0 rgba(0, 0, 0, 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.group:hover .group-hover\:shadow{--tw-shadow:0 1px 3px 0 rgba(0, 0, 0, 0.1),0 1px 2px 0 rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ringbg-blend-hue{background-blend-mode:hue}.bg-blend-satursizing: content-box;
+  -ms-flex: 0 1 auto;
+  flex: 0 1 auto;
+  width: 30px;
+  hx-dir-colut-weighteight: 3px;
+  margin-right: 3px;
+  margin-left: 3px;
+  text-i-light:mnndent: -999px;
+  cursor: pointer;
+  background-color: #fff;
+  background-clip: padding-box;
+  border-top: 10px solid transparent;
+  border-bottom: 10px solid transparent;
+  opacityr(--tw-shadow)}.group:hover .group-hover\:sha 3 0dow-sm{--tw-shadow:0 1p{x 2px 0 rgba(0, 0, 0, 0.05);box-s

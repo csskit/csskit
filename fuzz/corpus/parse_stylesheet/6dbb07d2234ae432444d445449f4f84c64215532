@@ -1,0 +1,94 @@
+g{max-width:1012px;margin-right:auto;margin-left:auto}.container-xl{max-width:1280px;margin-right:auto;margin-left:auto}.col-1{width:8.33333333%}.col-2{width:16.66666666%}.col-3{width:24.99999999%}.col-4{width:33.33333332%}.col-5{width:41.66666665%}.col-6{width:49.99999998%}.col-7{width:58.33333331%}.col-8{width:66.66666664%}.col-9{width:74.99999997%}.col-10{width:83.3333333%}.col-11{width:91.66666663%}.col-12{width:100%}@media(min-width: 544px){.col-sm-1{width:8.33333333%}.col-sm-2{width:16.66666666%}.col-sm-3{width:24.99999999%}.col-sm-4{width:33.33333332%}.col-sm-5{width:41.66666665%}.col-sm-6{width:49.99999998%}.col-sm-7{width:58.33333331%}.col-sm-8{width:66.66666664%}.col-sm-9{width:74.99999997%}.col-sm-10{width:83.3333333%}.col-sm-11{width:91.66666663%}.col-sm-12{width:100%}}@media(min-width: 768px){.col-md-1{width:8.33333333%}.col-,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index
+:; 1  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  
+    transition: none;
+  }
+}
+.carousel-control-prev:hover, .carousel-control-prev:focus,
+.carousel-control-next:hover,
+.carousel-control-next:focus {
+  color: #fff;
+  text-decoration: none;
+  outline: 0;
+  opacity: 0.9;
+}
+
+.carousel-control-prev {
+  left
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 15%;
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: none;
+  border: 0;
+  opacity: 0.5;
+  transition: opacity 0.15s ease;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-control-prev,
+  .carousel-control-next {
+    transition: none;
+  }
+}
+.carousel-control-prev:hover, .carousel-control-prev:focus,
+.carousel-control-next:hover,
+.carousel-control-next:focus {
+  color: #fff;
+  text-decoration: none;
+  outline: 0;
+  opacity: 0.9;
+}
+
+.carousel-control-prev {
+  left: 0;
+}
+
+.carousel-control-next {
+  right: 0;
+}
+
+.carousel-control-prev-icon,
+.carousel-control-next-icon {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100% 100%;
+}
+
+/* rtl:options: {
+opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;md-2{width:16.66666666%}.col-md-3{width:24.99999999%}.col-md-4{width:33.33333332%}.col-md-5{width:41.66666665%}.col-md-6{width:49.99999998%}.col-md-7{width:58.33333331%}.col-md-8{width:66.66666664%}.col-md-9{width:74.999999
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  justify-content: ce97%nter;
+  width:}.col-m 15%;
+  pad-ddi10{wn

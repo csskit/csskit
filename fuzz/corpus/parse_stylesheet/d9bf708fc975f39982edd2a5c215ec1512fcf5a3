@@ -1,0 +1,126 @@
+om-green-805:hover{--tw-gradient-from:#065f46;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(6, 95, 70, 0))}.sm\:hover\:from-green-900:hover{--tw-gradient-from:#064e3b;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(6, 78, 59, 0))}.sm\:hover\:from-blue-50:hover{--tw-gradient-from:#eff6ff;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(239, 246, 255, 0))}.sm\:hover\:from-blue-100:hover{--tw-gradient-from:#dbeafe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(219, 234, 254, 0))}.sm\:hover\:from-blue-200:hover{--tw-gradient-from:#bfdbfe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rg\:hover\:from-blue-100:hover{--tw-gradient-from:#dbeafe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-grarm: translateX(-2000px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+@keyframes backOutLeft {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    -webkit-transform: translateX(0px) scale(0.7);
+    transform: translateX(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: translateX(-2000px) scale(0.7);
+    transform: translateX(-2000px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+.animate__backOutLeft {
+  -webkit-animation-name: backOutLeft;
+  animation-name: backOutLeft;
+}
+@-webkit-keyframes backOutRight {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    -webkit-transform: translateX(0px) scale(0.7);
+    transform: translateX(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: translateX(2000px) scale(0.7);
+    transform: translateX(2000px) scale(0.7);
+    opacity: 0.7;
+  }
+}
+@keyframes backOutRight {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    -webkit-transform: translateX(0px) scale(0.7);
+    transform: translateX(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: translateX(2000px) scale(0.7);
+    transformc-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(1.03, 1.03, 1.03);
+    transform: scale3d(1.03, 1.03, 1.03);
+  }
+
+  80% {
+    -webkit-transform: scale3d(0.97, 0.97, 0.97);
+    transform: scale3d(0.97, 0.97, 0.97);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale3d(1, 1, 1);
+    transform: scale3d(1, 1, 1);
+  }
+}
+@keyframes bounceIn {
+  from,
+  20%,
+  40%,
+  60%,
+  80%,
+  to {
+    -webkit-animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    -webkit-transform: scale3d(0.9, 0.9, 0.9);
+    transform: scale3d(0.9, 0.9, 0.9);
+  }
+
+  60% {
+   129, 0))}.sm\:hover\:from-purple-50:hover{--tw-gradient-from:#f5f3ff;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(245, 243, 255, 0))}.sm\:hover\:from-purple-100:hover{--tw-gradient-from:#ede9fe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(237, 233, 254, 0))}.sm\:hover\:from-purple-200:hover{--tw-gradient-from:#ddd6fe;--tw-gradient-stops:var(--tw-gradient-from),var(--twrgba(237, 233, 254, 0))}.sm\:hover\:from-purple-200:hover{--tw-gradient-from:#ddd6fe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(221, 214, 254, 0))}.sm\:hover\:from-purple-300:hover{--tw-gradient-from:#c4b5fd;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(196, 181, 253(167, 139, 250, 0))}.sm\:hover\:from-purple-500:hover{--tw-gradient-from:#8b5cf6;--tw-gradient-stops:var(

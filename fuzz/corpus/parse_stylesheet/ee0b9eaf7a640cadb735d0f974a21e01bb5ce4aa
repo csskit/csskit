@@ -1,0 +1,83 @@
+/*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8x {
+  font-size: 8em; }
+
+.fa-9x {
+  font-size: 9em; }
+
+.fa-10x {
+  font-size: 10em; }
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; }
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.fa-border {
+  bordertent{background-clip:content-box}.md\:bg-clip-text{-webkit-background-clip:text;background-clip:text}.md\:bg-bottom{background-position:bottom}.md\:bg-center{background-position:center}.md\:bg-left{background-position:left}.md\:bg-left-bottom{background-position:left bottom}.md\:bg-left-top{background-position:left top}.md\:bg-right{background-position:right}.md\:bg-right-bottom{background-position:right bottom}.md\:bg-right-top{background-position:right top}.md\:bg-top{background-position:top}.md\:bg-repeat{background-repeat:repeat}.md\:bg-no-repeat{background-repeat:no-repeat}.md\:bg-repeat-x{background-repeat:repeat-x}.md\:bg-repeat-y{background-repeat:repeat-y}.md\:bg-repeat-round{background-repeat:round}.md\:bg-repeat-space{background-repeat:space}.md\:bg-origin-border{background-origin:border-box}.md\:bg-origin-padding{background-origin:padding-box}.md\:bg-origin-content{background-origin:content-box}.md\:fill-current{fill:currentColor}.md\:stroke-current{stroke:currentColor}.md\:stroke-0{stroke-width:0}.md\:stroke-1{stroke-width:1}.md\:stroke-2{stroke-width:2}.md\:object-contain{object-fit:contain}.md\:object-cov: solid 0.08em #eee;
+  border-radius: .1em;er{object-fit:cover}.md\:object-fill{object-fit:fill}.md\:object-none{object-fit:none}.md\:object-scale-down{object-fit:scale-down
+  padding: .2em .25em .1}.md\5em; }
+
+.fa-pu:objeclt

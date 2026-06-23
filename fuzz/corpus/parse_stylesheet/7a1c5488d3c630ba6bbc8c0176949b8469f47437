@@ -1,0 +1,93 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+ {
+  background: var(--table-body-hover-back-color);
+}
+
+@  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-type(2n) {
+    background: var(--table-body-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf9;
+}
+
+table.hoverableild, table.horizontal td:first-child {
+    border-top: 0;
+ {
+  background: var(--table-body-hover-back-color);
+}
+
+@  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-type(2n) {
+    background: var(--table-body-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf9;
+}
+
+table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hoverable tr:focus > td {
+  background: var(--table-body-hover-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hoverable tr:focus > td {
+    background: var(--table-body-hover-back-color);
+  }
+}
+
+/*
+  Definitions for contextual background elements, toasts and tooltips.
+*/
+/* Contextual module CSS variable definitions */
+:root {
+  --mark-back-color: #0277bd;
+  --mark-fore-color: #fafafa;
+}
+
+mark {
+  background: var(--mark-back-color);
+  color: var(--mark-fore-color);
+  font-size: 0.95em;
+  line-height: 1em;
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calc(var(--universal-padding) / 2);
+}
+
+mark.inline-block {
+  display: inline-block;
+  font-size: 1em;
+  line-height: 1.5;
+  padding: calc(var(--universal-padding) / 2)w-bg-opacity))}.\32xl\:focus-within\:bg-indigo-800:focus-within{--tw-bg-opacity:1;background-color1rgba(55,48,163,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-900:focus-within{--tw-bg-opacity:1;background-color:rgba(49,46,129,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-purple-50:focus-within{--tw-bg-opacity:1;background-color:rgba(245,\*--------~----------------------------*/
+/**
+ * Use an explicit font stack to ensure brow var(--universal-padding);
+}
+
+:root {
+  --toast-back-color: #42sers render correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  border-bottom: 1px solid;
+  color: inherit; }
+
+/**
+ * Add comments to your c-margin) *background-color:rgba(237 3);
+  left: 50%;
+  transform: translate(-50%, -50%);
+  z-index: 1111;
+  color: var(--toast-fo,233,254heme sre-cotyllor);
+  background: va,re(--

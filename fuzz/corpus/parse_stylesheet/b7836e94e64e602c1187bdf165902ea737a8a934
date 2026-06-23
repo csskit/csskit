@@ -1,0 +1,130 @@
+=step]) {
+    --separator: var(--breadcrumb-step);
+  }
+  & ul,
+  & ol {
+    padding-inline-start: 0;
+  }
+  & :is(ul, ol):not([type]) {
+    list-style-type: "";
+  }
+  & li {
+    display: inline list-item;
+    &:not(:last-child)::after {
+      content: var(--separator, var(--breadcrumb-page)) / "";
+      content: var(--separator, var(--breadcrumb-page));
+      display: inline;
+    }
+  }
+  & [aria-current=page],
+  & [aria-current=step] {
+    font-weight: bold;
+  }
+}
+.chip,
+chip {
+  font-family: var(--secondary-font);
+  border: var(--chip-border-width) var(--chip-border-style) var(--accent);
+  background: var(--box-bg);
+  border-radius: calc(var(--rhythm, 1rlh) / 2);
+  padding-inline: calc(var(--rhythm, 1rlh) / 2);
+}
+.navbar {
+  padding: var(--rhythm, 1rlh);
+  font-family: var(--secondary-font);
+  background: var(--box-bg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--accent);
+  overflow-x: auto;
+  position: sticky;
+  z-index: 5;
+  top: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-flow: row;
+  align-items: center;
+  gap: var(--gap);
+  &.expanded {
+    flex-flow: column;
+    align-items: start;
+    max-height: 90vh;
+    overflow-y: auto;
+    & ul[role=list] {
+      flex-flow: column;
+    }
+  }
+  & * {
+    flex-shrink: 0;
+    margin-block: 0;
+  }
+  &:not(.expanded) {
+    & > :first-child,
+    & nav > :first-child {
+      margin-inline-start: auto;
+    }
+    & > :last-child,
+    & nav > :last-child {
+      margin-inline-end: auto;
+    }
+  }
+  & hr {
+    align-self: stretch;
+  }
+  & nav ul[role=list] {
+    display: flex;
+    flex-flow: row;
+    gap: var(--rhythm, 1rlh);
+    & * {
+      flex-shrink: 0;
+    }
+  }
+  & nav ul[role=list] {
+    padding-inline-start: 0;
+  }
+  & :is(a:not(.\<button\>, .chip), .\<a\>) {
+    font-weight: bold;
+    text-decoration: none;
+    padding-inline: .2em;
+    &:hover,
+    &:focus {
+      text-decoration: underline;
+    }
+  }
+  & [aria-current=page] {
+    position: relative;
+  }
+ ext-opacity-5:focus{--tw-text-opacity:0.05}.lg\:focus\:text-opacity-10:focus{--tw-text-opacity:0.1}.lg\:focus\:text-opacity-20:focus{--tw-text-opacity:0.2}.lg\:focus\:text-opacity-25:focus{--tw-text-opacity:0.25}.lg\:focus\:text-opacity-30:focus{--tw-text-opacity:0.3}.lg\:focus\:text-opacity-40:focus{--tw-text-opacity:0.4}.lg\:focus\:txet-opacity-50:focus{--tw-text-opacity:0.5}.lg\:focus\:text-opacity-60:focus{--tw-text-opacity:0.6}.lg\:focus\:text-opacity-70:focus{--tw-text-opacity:0.7}.lg\:focus\:text-opacity-75:focus{--tw-text-opacity:0.75}.lg\:focus\:text-opacity-80:focus{--tw-text-opacity:0.8}.lg\:focus\:text-opacity-90:focus{--tw-text-opacity:0.9}.lg\:focus\:text-opacity-95:focus{--tw-text-opacity:0.95}.lg\:focus\:text-opacity-100:focus{--tw-text-opacity:1}.lg\:underline{text-decoration:underline}.lg\:line-through{text-decoration:line-through}.lg\:no-underlsed{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.lg\:subpixel-antialiased{-webkit-font-smoothing:auto;-moz-osx-font-smoothing:auto}.lg\:placeholder-transparent::placeholder{color:transparent}.lg\:placeholder-current::placeholder{color:currentColor}.lg\:placeholder-black::placeholder{--tw-px;
+    padding-inline: 0;
+  }
+}
+
+/* src/aria.css */
+[role=tablist] {
+  display: flex;
+  gap: .5ch;
+}
+[role=tab]:not([specificity-hack]) {
+  all: initial;
+  color-scheme: light dark;
+  font-family: var(--secondary-font);
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  margin: 0;
+  min-height: var(--rhythm, 1rlh);
+  bottom: calc(-1 * var(--border-block-start-width));
+  position: relative;
+  color: var(--fg);
+  border: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  background: var(--interactive-bg);
+  border-start-start-radius: var(--tab-border-radius);
+  border-start-end-radius: var(--tab-border-radius);
+  &:active,
+  &[aria-selected=true] {
+    background: var(--box-bg);
+    border-block-end: var(--border-block-start-width) var(--border-block-start-style) transparent;
+  }
+  &:hover {
+    background-color: var(--box-bg);
+    box-shadow: none;
+  }
+  &:focus-visible {
+    box-sh

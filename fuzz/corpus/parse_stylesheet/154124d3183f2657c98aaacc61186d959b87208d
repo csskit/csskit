@@ -1,0 +1,53 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --background-body: #fff;
+  --background: #efefef;
+  --background-alt: #f7f7f7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --links: #0076d1;
+  --focus: #0096bfab;
+  --border: #dbdbdb;
+  --code: #000;
+  --animation-duration: 0.1s;
+  --button-base: #d0cfcf;
+  --button-hover: #9b9b9b;
+  --scrollbar-thumb: rgb(170, 170, 170);
+  --scrollbar-thumb-hover: var(--button-hover);
+  --form-placeholder: #949494;
+  --form-text: #1d1d1d;
+  --variable: #39a33c;
+  --highlight: #ff0;
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23161f27'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-body: #202b38;
+  --background: #161f27;
+   80px rgba(0, 0, 0, 0.02);--color-mktg-btn-shadow-hover-muted:rgba(0, 0, 0, 0.7) 0 0 0 2px inset}}.h0-mktg,.h1-mktg,.h2-mktg,.h3-mktg,.h4-mktg,.h5-mktg,.h6-mktg{font-family:-apple-system,BlinkMacSystemFont,"Segoe UI","Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";font-feature-settings:"ss02" on,"ss01" on;font-weight:var(--base-text-weight-semibold, 600) !important;letter-spacing:-0.01em}.h0-mktg{font-size:48px !important;line-height:52px !important;font-weight:800 !important}@media(min-width: 768px){.h0-mktg{font-size:72px !important;line-height:76px !important}}@media(min-width: 1012px){.h0-mktg{font-size:96px !important;line-height:100px !important}}.h1-mktg{font-size:40px !important;line-height:44px !important;font-weight:800 !important}@media(min-width: 768px){.h1-mktg{font-size:56px !important;line-height:60px !important;letter-spacing:-0.03em}}@media(min-width: 1012px){.h1-mktg{font-size:72px !important;line-height:76px !important}}.h2-mktg{font-size:32px !important;line-height:36px !important;font-weight:800 !important}@media(min-width: 768px){.h2-mktg{font-size:48px !important;line-height:52px !important;letter-spacing:-0.03em}}@media(min-width: 1012px){.h2-mktg{font-size:64px !important;line-h--background-alt: #1a242f;
+  --selection: #1c76c5;
+  --text-main: #dbdbdb;
+  --text-bright: #fff;
+  --text-muted: #a9b1ba;
+  --links: #41adff;
+  --focus: #0096bfab;
+  --border: #526980;
+  --code: #ffbe85;
+  --animation-duration: 0.1s;
+  --button-base: #0c151c;
+  --button-hover: #040a0f;
+  --scrollbar-thumb: var(--button-hover);
+  --scrollbar-thumb-hover: rgb(0, 0, 0);
+  --form-placeholder: #a9a9a9;
+  --form-text: #fff;
+  --variable: #d941e2;
+  --highlight: #efdb43;
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0'eight:68px !important}}. encoding='utf-8'?%3E %3Csvg vh3-mktg{font-size:28px !important;line-height:32px ersion='

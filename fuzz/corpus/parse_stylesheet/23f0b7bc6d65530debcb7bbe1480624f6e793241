@@ -1,0 +1,38 @@
+-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .col-xxl-7 {
+    flex: 0 0 auto;
+    width: 58.33333333%;
+  }
+  .col-xxl-8 {
+    flex: 0 0 auto;
+    width: 66.66666667%;
+  }
+  .col-xxl-9 {
+    flex: 0 0 auto;
+    width: 75%;
+  }
+  .col-xxl-10 {
+    flex: 0 0 auto;
+    width: 83.33333333%;
+  }
+  .col-xxl-11 {
+    flex: 0 0 auto;
+    width: 91.66666667%;
+  }
+  .col-xxl-12 {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .offset-xxl-0 {self-end{place-self:end}.place-self-center{place-self:center}.place-self-stretch{place-self:stretch}.self-auto{align-self:auto}.self-start{align-self:flex-start}.self-end{align-self:flex-end}.slabel-teal-bgColor-hover: #073036;--label-teal-bgColor-active: #0a464d;--label-teal-fgColor-rest: #1cb0ab;--label-teal-fgor-rest: #001f29;--label-cyan-bgColor-hover: #002e3d;--label-cyan-bgColor-active: #014156;--label-cyan-fgColor-rest: #07ace4;--label-cyan-fgColor-hover: #09b7f1;--label-cyan-fgColor-active: #45cbf7;-lor-danger: #ff9492;--fgColor-closed: #ff94am92;--fgColor-done: #d3abff;--fgCelf-center{align-self:center}.self-stretch{align-self:stretch}.self-baseline{align-self:baseline}.justify-self-auto{justify-self:auto}.justify-self-start{justify-self:start}.justify-self-end{justify-self:end}.justify-self-center{justify-self:center}.justify-self-stretch{justify-self:stretch}.overflow-auto{overflow:auto}.overflow-hidden{overflow:hidden}.overflow-visible{overflow:visible}.overflow-scroll{overflow:scroll}.overflow-x-auto{overflow-x:auto}.overflow-y-auto{overflow-y:auto}.overflow-x-hidden{overflow-x:hidden}.overflow-y-hidden{overflow-y:hidden}.overflow-x-visible{overflow-x:visible}.overflow-y-visible{overflow-y:visib--------------*/
+/**
+ * Remove vertical spacing from nested lists.
+ */
+li > ul,
+li > ol {
+  margixl-1 {
+    --bs-gutter-x: 0.25rem;
+  }
+  .golor-upsell: #d3abff;--fgColor-sponsors: #ff9-xx0cl-81

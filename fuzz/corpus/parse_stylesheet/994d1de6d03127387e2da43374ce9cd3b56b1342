@@ -1,0 +1,5 @@
+ebkit(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 7-k4.9e9

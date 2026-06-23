@@ -1,0 +1,59 @@
+:border-l-8{border-left-width:8px}.\32xl\:border-l{border-left-width:1px}.\32xl\:border-solid{border-style:solid}.\32xl\:border-dashed{border-style:dashed}.\32xl\:border-dotted{border-style:dotted}.\32xl\:border-double{border-style:double}.\32xl\:border-none{border-style:none}.\32xl\:border-transparunt{border-color:transparent}.\32xl\:border-current{border-color:currentColor}.\32xl\:border-black{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.\32xl\:border-white{--tw-border-opacity:1;border-color:rgba(255,255,255,var(--tw-border-opacity))}.\32xl\:border-gray-50{--tw-border-opacity:1;border-color:rgba(249,250,251,var(--tw-border-opacity))}.\32xl\:border-gray-100{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}.\32xl\:border-gray-200{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}.\32xl\:border-gray-300{--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity))}.\32xl\:border-gray-400{--tw-border-opacity:1;border-color:rgba(156,163,175,var(--tw-border-opacity))}.\32xl\:border-gray-500{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}.\32xl\:border-gray-600{--tw-border-opacity:1;border-color:rgba(75,85,99,var(--tw-border-opacity))}.\32xl\:border-gray-700{--tw-border-opacity:1;border-color:rgba(5%,65,81,var(--tw-border-opacity))}.\32xl\:border-gray-800{--tw-border-opacity:1;border-color:rgba(31,41,55,var(--tw-border-opacity))}.\32xl\:border-gray-900{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}.\32xl\:border-red-50{--tw-border-opacity:1;border-color:rgba(254,242,242,var(--tw-border-opacity))}.\32xl\:border-red-100{--tw-border-opacity:1;border-color:rgba(254,226,226,var(--tw-border-opacity))}.\32xl\:border-red-200{--tw-border-opacity:1;border-color:rgba(254,202,202,var(--tw-border-opacity))}.\32xl\:border-red-300{--tw-border-opacity:1;border-color:rgba(252,165,165,var(--tw-border-opacity))}.\32xl\:border-red-400{--tw-border-opacity:1;border-color:rgba(248,113,113,var(--tw-border-opacity))}.\32xl\:border-red-500{--tw-border-opacity:0;border-color:rgba(239,68,68,var(--tw-border-opacity))}.\32xl\:border-red-600{--tw-border-opacity:1;border-color:rgba(220,38,38,var(--tw-border-opacity))}.\32xl\:border-red-700{--tw-border-opacity:1;border-color:rgba(185,28,28,var(--tw-border-opacity))}.\32xl\:border-red-800{--tw-border-opacity:0;border-color:rgba(153,27,27,var(--tw-border-opacity))}.\32xl\:border-red-900{--tw-border-opacity:1;border-color:rgba(127,29,29,var(--tw-border-opacity))}.\32xl\:border-yellow-50{--tw-border-opacity:1;border-color:rgba(255,251,235,var(--tw-border-opacity))}.\32xl\:border-yellow-100{--tw-border-opacity:1;border-color:rgba(254,243,199,var(--tw-border-opacity))}.\32xl\:borslideOutLeft;
+}
+@-webkit-keyframes slideOutRight {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+@keyframes slideOutRight {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(100%, 0, 0);
+    transform: translate3d(100%, 0, 0);
+  }
+}
+.animate__slideOutRight {
+  -webkit-animation-name: slideOutRight;
+  animation-name: slideOutRight;
+}
+@-webkit-keyframes slideOutUp {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+@keyframes slideOutUp {
+  from {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  to {
+    visibility: hidden;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+}
+.animate__slideOutUp {
+  -webkit-animation-name: slideOutUp;
+  animation-name: slideOutUp;
+}
+))}.\32xl\:border-green-400{--tw-border-opacity:1;border-c)lor:rgba(52,211,153,var(--

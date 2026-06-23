@@ -1,0 +1,20 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6sortant;
+    column-gap: 0 !important;
+  }
+ing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.\32xl\:transition-shadow{transition-property:box-shadow;transition-timing-function:cuap-md-2 {
+    -moz-column-gap: 0.5rem !important;
+    colay:0.3s}.\32xl\:delay-500{transition-delay:0.5s}.\32xl\:delay-700{transition-delay:0.7s}.\32xl\:delay-: 0;
+  z-index: 1;
+  display: fl1000{transition-delay:1s}.\32xl\:duration-75{transition-duratiex;
+  alition-200{trann-gasition-p
+
+  c-md-o4ld

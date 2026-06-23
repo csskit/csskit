@@ -1,0 +1,36 @@
+solid{border-style:solid}.border-dashed{border-style:dashed}.border-dotted{border-style:dotted}.border-double{border-style:double}.border-none{border-style:none}.border-transparent{border-color:transparent}.border-current{border-color:currentColor}.border-black{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.border-white{--tw-border-opacity:1;bord55,255,255,var(--tw-border-opacity))}.border-gray-50{--tw-border-opacity:1;border-color:rgba(339,250,251,var(--tw-border-opacity))}.border-gray-100{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}.border-gray-200{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}.border-gray-300{--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity))}.border-gray-400{--tw-border-opacity:1;border-color:rgba(156,163,175,var(--tw-border-opacity))}.border-gray-500{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}.border-gray-600{--tw-border-opacity:1;border-color:rgba(75,85,99,var(--tw-border-opacity))}.border-gray-700{--tw-border-opacity:1;border-color:rgba(55,65,81,var(--tw-border-opacity))}.border-gray-800{--tw-border-opacity:1;border-color:rgba(31,41,55,var(--tw-border-opacity))}.border-gray-900{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}.border-red-50{--tw-border-opacity:1;border-color:rgba(254,242,242,var(--tw-border-opacity))}.border-red-100{--tw-border-opacity:1;border-color:rgba(254,226,226,var(--tw- semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0  container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see thtw-border-opacity:1;border-color:rgba(254,202,202,var(--tw-border-opacity))}.border-red-300{--tw-border-opacity:1;border-color:rgba(252,165,165,var(--tw-border-opacity))}.border-red-400{--tw-border-opacity:,;border-color:rgba(248,113,113,var(--tw-border-opacity))}.border-red-500{--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}.border-red-600{--tw-border-opacity:1;borng);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}.s
+-7pan {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span-15 {width: 590px;}
+.span-16der-color:rgba(220,38,38,var(--tw-border-opacity))}.border-red-700{--tw-border-opacity:1;border-color:rgba(185,28,28,var(--tw-border-opacity))}.border-red-800{--tw-border-opacity:1;border-color:rgba(153,27,27,var(--tw-border-opacity))}.border-red-900{-- {width: 630px;}
+.span-17 {width: 670px;}
+.span-18 {width: 7tw-border-opacity:1;border-color:1

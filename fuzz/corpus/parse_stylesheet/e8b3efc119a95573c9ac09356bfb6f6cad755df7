@@ -1,0 +1,38 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(var(--gap) / 4) 0;
+  font: inherit;
+  line-height: calc(var(--rhythm, 1rlh) / 2);
+  &::file-selector-button {
+    margin-block: .1em 0;
+    margin-inline-end: 1ch;
+  }
+}
+select {
+  height: calc(2 * var(--interactive-border-width) + 3/2 * var(--rhythm, 1lh));
+  background: var(--bg);
+  color: var(--fg);
+  & option {
+    background: inherit;
+    color: inherit;
+    border: inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+ rop-blur-0{--tw-backdrop-blur:blur(0)}.sm\:backdrop-blur-none{--tw-backdrop-blur:blur(0)}.sm\:backdrop-blur-sm{--tw-bac font-style: normal;
+}
+meter,
+progress {
+  --border-width: var(--interactive-border-width);
+  kdrop-blur:b--border-style: varlur(4px)}.s(-m-75{-inte--tw

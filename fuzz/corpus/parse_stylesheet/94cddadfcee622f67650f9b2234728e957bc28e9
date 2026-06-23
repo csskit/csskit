@@ -1,0 +1,51 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  bor
+    vertical-align: -0.2em;
+    transition: all .1s ease-in-out;
+  }
+}
+meter {
+  @supports selector(::-webkit-meter-bar) {
+    &::-webkit-meter-inner-element {
+      grid-template-rows: unset;
+    }
+    &::-webkit-meter-bar {
+      background: var(--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-optimum-value {
+      background: var(--accent);
+      border-radius: 0;
+    }
+    background: var(--plain-bg);
+    border-color: var(--interactive-bg);
+    &::-webkit-meter-optimum-value {
+      --accent: var(--ok-fg);
+    }
+    &::-webkit-meter-suboptimum-value {
+      --accent: var(--warn-f     border-radius: 0;
+    }
+    background: var(--plain-bg);
+    border-color: var(--interactive-bg);
+    &::-webkit-meter-optimum-value {
+      --accent: var(--ok-fg);
+    }
+    &::-webkit-meter-suboptimum-value {
+      --accent: var(--warn-fg);
+    }
+    &::-webkit-meter-even-less-good-value {
+      --accent: var(--badss-loading 4s infinite ease-in-out;
+    @media (prefers-reduced-motion) {
+      --track-bg-position: center;
+      --track-animation: none;
+    }
+    @supports selector(progress::after) {
+      &::after {
+        content: "";
+        inset: 0;
+ ctor(::-webkit-progress-bar) {
+      &::-webkit-progress-bar {
+        background: var(--track-bg-color);
+        background-size: var(--track-si

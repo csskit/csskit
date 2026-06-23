@@ -1,0 +1,19 @@
+r{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stretch{direction: row; }
+  .menu.vertical {
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-orient: vertical;
+    -webded.icon-top li a img,
+ kit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .menu.simple li + li {
+      margin-left: 1rem; }
+    .menu.simple a {
+      padding: 0; }
+  @media print, screen and (min-width: 40em) {
+    .menu.medium-horizontal {
+ align-self:stretch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-self-end{justify-s     -webkit-flex-wrap: wrapelf:end}.sm\:;
+   

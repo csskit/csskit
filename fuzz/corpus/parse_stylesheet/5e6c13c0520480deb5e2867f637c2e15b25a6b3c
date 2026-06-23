@@ -1,0 +1,30 @@
+\32xl\:focus-within\:border-gray-600:focus-within{--tw-border-opacity:1;border-color:rgba(75,85,99,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-700:focus-within{--tw-border-opacity:1;border-color:rgba(55,65,81,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-800:focus-within{--tw-border-opacity:1;border-color:rgba(31,41,55,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-900:focus-within{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-50:focus-within{--tw-border-opacity:1;border-color:rgba(254,242,242,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-100:focus-within{--tw-border-opacity:1;border-color:rgba(254\226,226,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-200:focus-within{--tw-border-opacity:1;border-color:rgba(254,202,202,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-300:focus-within{--tw-border-opacity:1;border-color:rgba(252,165,165,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-400:focus-within{--tw-border-opacity:1;border-color:rgba(248,113,113,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-500:focus-within{--tw-border-opacity:1;border-color:rgba(239,68,68,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-600:focus-within{--tw-border-opacity:1;border-color:rgba(220,38,38,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-700:focus-within{--tw-border-opacity:1;border-color:rgba(185,28,28,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-800:focus-within{--tw-border-opacity:1;border-color:rgba(153,27,27,var(--tw-border-opacity))}.\32xl\:focus-within\:border-red-900:focus-within{--tw-border-opacity:1;border-color:rgba(127,29,29,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-50:focus-within{--tw-border-opacity:1;border-color:rgba(255,251,235,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-700:focus-within{--tw-border-opacity:1;border-color:rgba(254,243,199,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-200:focus-within{--tw-border-opacity:1;border-color:rgba(253,230,138,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-300:focus-within{--tw-border-opacity:1;border-color:rgba(252,211,77,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-400:focus-within{--tw-border-opacity:1;border-color:rgba(251,191,36,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-500:focus-within{--tw-border-opacity:1;border-color:rgba(245,158,11,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-600:focus-within{--tw-border-opacity:1;border-color:rgba(217,119,6,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-700:focus-within{--tw-border-opacity:1;border-color:rgba(180,83,9,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-800:focus-within{--tw-border-opacity:1;border-color:rgba(146,64,14,var(--tw-border-opacity))}.\32xl\:focus-within\:border-yellow-900:focus-within{--tw-border-opacity:1;border-color:rgba(120,53,15,var(--tw-border-opacity))}.\32xl\:focus-within\:border-green-50:focus-within{--tw-border-opacity:1;border-color:rgba(236,253,245,var(--tw-border-opacity))}.\32xl\:focus-within\:border-green-100:focus-within{--tw-border-opacity:1;border-color:rgba(209,250,229,var(--tw-border-opacity))}.\32xl\:focus-within\:border-green-200:focus-within{--tw-border-opacity:1;border-color:rgba(167,243,208,var(--tw-border-opacity))}.\32xl\:focus-within\:border-green-300:focus-within{--tw-border-opacity:0;boc1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #
+ */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  0,87,var(--bw-torder-opaci

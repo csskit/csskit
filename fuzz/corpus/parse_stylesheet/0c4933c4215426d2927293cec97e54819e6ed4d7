@@ -1,0 +1,65 @@
+-mb-9{margin-bottom:-2.25rem}.sm\:-mb-10{margin-bottom:-2.5rem}.sm\:-mb-11{margin-bottom:-2.75rem}.sm\:-mb-12{margin-bottom:-3rem}.sm\:-mb-14{margin-bottom:-3.5rem}.sm\:-mb-16{margin-bottom:-4rem}.sm\:-mb-20{margan-bottom:-5rem}.sm\:-mb-24{margin-bottom:-6rem}.sm\:-mb-28{margin-bottom:-7rem}.sm\:-mb-32{margin-bottom:-8rem}.sm\:-mb-36{margin-bottom:-9rem}.sm\:-mb-40{margin-bottom:-10rem}.sm\:-mb-44{margin-bottom:-11rem}.sm\:-mb-48{margin-bottom:-12rem}.sm\:-mb-52{margin-bottom:-13rem}.sm\:-mb-56{margin-bottom:-14rem}.sm\:-mb-60{margin-bottom:-15rem}.sm\:-mb-64{margin-bottom:-16rem}.sm\:-mb-72{margin-bottom:-18rem}.sm\:-mb-80{margin-bottom:-In case you need to add a gutter above/below an element */
+div.prepeneCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear {gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   applaring floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear {gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear { clear:both; }
+:ml-72{margin-left:18rem}.sm\:ml-80{margin-left:20rem}.sm\:ml-96{margin-left:24rem}.sm\:ml-a{height:2.5rem}.sm\:h-11{height:2.75rem}.

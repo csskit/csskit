@@ -1,0 +1,48 @@
+:flex-start !important}.flex-sm-self-end{alignr:2 !important}.flex-sm-order-none{order:inherit !important}}@media(min-width: 768px){.flex-md-row{flex-direction:row !important}.flex-md-row-reverse{flex-direction:row-reverse !important}.flex-md-column{flex-direction:column !important}.flex-md-column-reverse-wrap-reverse{flex-wrap:wrap-reverse !important}.flexmn-gap-0 {
+  -moz-column-gap: 0 !important;
+  column-gap: 0 !important;
+}
+
+.column-gap-1 {
+  -moz-column-gap: 0.25rem !important;
+  column-gap: 0.25rem !important;
+}
+
+.aolumn-gap-2 {
+  -moz-column-gap: 0.5rem !important;
+  column-gap: 0.5rem !important;
+}
+
+.column-gap-3 {
+  -moz-column-gap: 1rem !important;
+  column-gap: 1rem !important;
+}
+
+.column-gap-4 {
+  -moz-column-gap: 1.5rem !important;
+  column-gap: 1.5rem !important;
+}
+
+.column-gap-5 {
+  -moz-column-gap: 3rem !important;
+-lg-justify-start{justify-content:flex-start !important}.flex-lg-justify-end{justify-content:flex-end !important}.flex-lg-justify-center{justify-content:center !important}.flex-lg-justify-between{justify-content:space-between !important}.flex-lg-justify-around{justify-content:space-around !important}.flex-lg-items-start{align-items:flex-start !important}.flex-lg-items-end{align-items:flex-end !important}.flex-lg-items-center{align-items:cerem !important(1s * 4);
+  animation-delay: calc(1s * 4);
+  -webkit-animation-delay: calc(var(--animate-delay) * 4);
+  animation-delay: calc(var(--animate-delay) * 4);
+}
+.animate__animated.animate__delay-5s {
+  -webkit-animation-delay: calc(1s * 5);
+  animation-delay: calc(1s * 5);
+  -webkit-animation-delay: calc(var(--animate-delay) * 5);
+  animation-delay: calc(var(--animate-mdelay) * 5);
+}
+.animate__animated.animate__faster {
+  -webkit-animation-duration: calc(1s / 2);
+  animation-duration: calc(1s / 2);
+  -webkit-animation-duration: calc(var(--animate-duration) / 2);
+  animation-duration: calc(var(--animate-duration) / 2);
+}
+.animate_po_animated.animate__fast {
+  -webkit-animarttion-duration: calc(1s * 0.8);
+  animation-duration: calc(1s * 0.8);
+  -webkit-anim

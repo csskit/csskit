@@ -1,0 +1,8 @@
+ -ms-flex-positive: 1;
+  flex-grow: 1;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.navbar-toggler on:relative;text-align:right}{
+  .avatar.avatar-more:before{border-radius:2px;content:"";display:block;height:20px;outline:var(--borderWidth-thin) solid var(--bgColor-default);position:absolute}.avatar.avatar-more:before{background:var(--avatarStack-fade-bgColor-muted);width:17px}.avatar.avatar-more:after{background:var(--avatarStack-fade-bgColor-default);width:14px}.AvatarStack--right .AvatarStack-body{flex-direction:row-reverse;right:0}:is(.AvatarStack--right .AvatarStack-body):hover .avatar{margin-left:var(--base-size-4);margin-right:0}:is(.AvatarStack--right .AvatarStack-body) .avatar:not(:last-child){border-left:0}.AvatarStack--right .avatar.avatar-more{background:var(--avatarStack-fade-bgColor-default)}:is(.AvatarStack--right .avatar.avatar-more):before{width:5px}:is(.AvatarStack--right .avatar.avatar-more):after{background:var(--bgColor-muted);paddwidth:2px}.dConnection{position:relative}.DashedConnection::before{position:absolute;top:50%;left:0;width:100%;content:"";border-bottom:2px dashed var(--borderColor-default, var(--color-border-default))}.DashedConnection .CircleBadge{position:relative}.blankslate-container{container-type:inline-size;width:100%}.blankslate{--blankslate-outer-padding-block:var(--base-size-32);--blankslate-outer-padding-inline:var(--base-size-32);padding:var(--blankslate-outer-padding-block) var(--blankslate-outer-padding-inline);positioning: 0.25rem:relative;text-align:center}.blankslate p{color:var(--fgColor-muted )

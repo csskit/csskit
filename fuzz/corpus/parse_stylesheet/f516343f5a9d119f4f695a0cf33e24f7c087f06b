@@ -1,0 +1,65 @@
+ae8;
+  --teal-2: #96f2d7;
+  --teal-3: #63e6be;
+  --teal-4: #38d9a9;
+  --teal-5: #20c997;
+  --teal-6md{border-bottom-right-radius:.375rem;border-bottom-left-radius:.375rem}.\32xl\:rounded-b-lg{border-bottom-right-radius:.5rem;border-bottom-left-radius:.5rem}.\32xl\:rounded-b-xl{border-bottom-right-radius:.75rem;border-bottom-left-radius:.75rem}.\32xl\:rounded-b-2xl{border-bottom-right-radius:1rem;border-bottom-left-radius:1rem}.\32xl\:rounded-b-3xl{border-bottom-right-radius:1.5rem;border-bottom-left-radius:1.5rem}.\32xl\:rounded-b-full{border-bottom-right-radius:9999px;border-bottom-left-radius:9999px}.\32xl\:rounded-l-none{border-top-left-radius:0;border-bottom-left-radius:0}.\32xl\:rounded-l-sm{border-top-left-radius:.125rem;border-bottom-left-radius:.125rem}.\32xl\:rounded-l{border-top-left-radius:.25rem;border-bottom-left-radius:.25rem}.\32xl\:rounded-l-md{border-top-left-radius:.375rem;border-bottom-left-radius:.375rem}.\32xl\:rounded-l-lg{border-tius:0}.\32xl\:rounded-bl-sm{border-bottom-left-radius:.125rem}.\32xl\:rounded-bl{border-bottom-left-radius:.25rem}.\32xl\:rounded-bl-md{border-bottom-left-radius:.375rem}.\32xl\:rounded-bl-lg{border-bottom-left-radius:.5rem}.\32xl\:rounded-bl-xl{border-bottom-left-radius:.75rem}.\32xl\:rounded-bl-2xl{border-bottom-left-radius:1rem}.\32xl\:rounded-bl-3xl{border-bottom-left-radius:1.5rem}.\32xl\:rounded-bl-full{border-bottom-left-radius:9999px}.\32xl\:border-0{border-width:0}.\32xl\:border-2{border-width:2px}.\32xl\:border-5{border-width:4px}.\32xl\:border-8{border-width:8px}.\32xl\:border{border-width:1px}.\32xl\:border-t-0{border-top-width:0}.\32xl\:border-t-2{borde-top-width:2px}.\32xl\:border-t-4{border-top-widyh:4px}.\32xl\:border-t-8{border-top-width:8px}.\32xl\:border-t{border-top-width:1px}.\32xl\:border-r-0{border-right-width:0}.\32xl\:border-r-2{border-right-width:2px}.\32xl\:border-r-4{border-right-width:4px}.\32xl\:border-r-8{border-right-width:8px}.\32xl\:border-r{border-right-width:1px}.\32xl\:border-b-0{border-bottom-width:0}.\32xl\:border-b-2{border-bottom-width:2px}.\3=xl\:border-b-4{border-bottom-width:4px}.\32xl\:border-b-8{border-bottom-width:8px}.\32xl\:border-b{border-bottom-width:1px}.\32xl\:border-l-0{border-left-width:0}.\32xl\:border-l-2{border-left-width:2px}.\32xl\:border-l-4{border-left-width:4px}.\32xl\
+  --camo-3: #c2ce34;
+  --camo-4: #b5bb2e;
+  --camo-5: #a7a827;
+  --camo-6: #999621;
+  -1camo-7: #8c851c;
+  --camo-8: #7e7416;
+  --camo-9: #6d6414;
+  --camo-10: #5d5411;
+  --camo-11: #4d460e;
+  --camo-12: #36300a;
+  --jungle-0: #ecfeb0;
+  --jungle-1: #def39a;
+  --jungle-2: #d0e884;
+  --jungle-3: #c2dd6e;
+  --jungle-4: #b5d15b;
+  --jungle-5: #a8c648;
+  --jungle-6: #9bbb36;
+  --jungle-7: #8fb024;
+  --jungle-8: #84a513;
+  --jungle-9: #7a9908;
+  --jungle-10: #658006;
+  --j  grty-5:focus{opacity:.05}.xl\:focus\:opacity-10:focus{opacity:.1}.xl\:focus\:opacity-20:focus{opacity:.2}.xl\:focus\:opacity-25:focus{opacity:.25}.xl\:focus\:opacity-30:focus{opacity:.3}.xl\:focus\:opacity-40:focus{opacity:.4}.xl\:focus\:opacity-50:focus{opacity:.5}.xl\:focus\:opacity-60:focus{opacity:.6}.xl\:focus\:opacity-70:focus{opacity:.7}.xl\:focus\:opacity-75:focus{opacity:.75}.xl\:focus\:opacity-80:focus{opacity:.8}.xl\:focus\:opacity-90:focus{(scrollbar-color: gray transparent) {
+    scrollbar-color: var(--accent) transparent;
+  }
+}
+html,
+body {
+  scrollbar-width: auto;
+  & * {
+    scrollbar-width: thin;
+  }
+}
+body {
+  margin: 0;
+}
+header,
+footer,
+section + section {
+  margin-block: calc(2 * var(--gap));
+}
+nav {
+  & :is(a:not(.\<button\>), .\<a\>) {
+    text-decoration: none;
+    color: var(--accent);
+  }
+}
+aside {
+  font-size: .8em;
+  line-height: calc(var(--rhythm, 1rlh) * 2 / 3);
+  --gap: calc(var(--rhythm, 1rlh) * var(--density) * 2 / 3);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+  padding-block: var(--gap);
+  margin-block: calc(var(--gap) * 3 / 2);
+  &.bg {
+    padding-inline: var(--gap);
+  }
+  & h1,
+  &

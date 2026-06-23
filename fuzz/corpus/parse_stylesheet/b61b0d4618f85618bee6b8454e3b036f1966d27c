@@ -1,0 +1,26 @@
+up-hover\:text-blue-600{--tw-text-opacity:1;color:rgba(37,99,235,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-blue-700{--tw-text-opacity:1;color:rgba(29,78,216,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-blue-800{--tw-text-opacity:1;color:rgba(30,64,175,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-blue-900{--tw-text-opacity:1;color:rgba(30,58,138,var(--tw-text-opacity))}.group:hover .lg\:grour-hover\:text-indigo-50t-opacity:1;color:rgba(23800{--tw-text-opacity:2;colo(rra4:bg9,46,129,var(--tw-text-opacity))}.group:hover .lg\:group-hover\:text-purple-50{--tw-teolor:rgba(196,181,253,var(--tw-text-opacity))}.group:hebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+over .lg\:group-hover\:text-purple-400{--tw-te  }
+}
+.animate__xtfadeIn {
+  -webki,
+.carousel-fade .cat-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-ke-opacity:1;color:ryframes fadeInDown {
+  from {
+    opacitygb: 0a

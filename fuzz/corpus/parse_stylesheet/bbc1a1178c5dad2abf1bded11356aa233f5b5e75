@@ -1,0 +1,44 @@
+ semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margin. */
+.column, .span-1, .span-2, .span-3, .span-4, .span-5, .span-6, .span-7, .span-8, .span-9, .span-10, .span-11, .span-12, .span-13, .span-14, .span-15, .span-16, .span-17, .span-18, .span-19, .span-20, .span-21, .span-22, .span-23, .span-24 {
+  float: left;
+  margin-right: 10px;
+}
+
+/* The last column in a row needs this class. */
+.last { margin-right: 0; }
+
+/* Use these classes to set the width of a column. */
+.span-1 {width: 30px;}
+
+.span-2 {width: 70px;}
+.span-3 {widt.span-10, textarea.span-10 { width: 378px; }
+input.span-11, textarea.span-11 { width: 418px; }
+input.span-12, textarea.span-12 { width: 458px; }
+input.span-13, textarea.span-13 { width: 498px; }
+input.span-14, textarea.span-14 { width: 538px; }
+input.span-15, textarea.span-15 { width: 578px; }
+input.span-16, textarea.span-16 { width: 618px; }
+input.span-17, textarea.span-17 { width: 658px; }
+input.span-18, textarea.span-18 { width: 698px; }
+input.span-19, textarea.span-19 { pend-12 { padding-right: 480px;}
+.append-13 { padding-ri

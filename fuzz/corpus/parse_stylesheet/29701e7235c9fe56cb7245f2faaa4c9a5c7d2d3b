@@ -1,0 +1,66 @@
+ semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the gird. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span-15 {width: 590px;}
+.span-16 {width: 630px;}
+.spa{
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.spt-group-action-hover-color: var(--bs-emphasis-color);
+  --bs-list-group-action-hover-bg: var(--bs-warning-border-subtle);
+  --bs-list-group-action-active-color: var(--bs-emphasis-color);
+  --bs-list-group-acti5{margin-left:-.125rem;margin-right:-.125rem}.md\:-mx-1\.5{margin-left:-.375rem;margin-right:-an-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9, input.span-9, textarea.span-9, input.span-10, textarea.span-10, input.span-11, textarea.span-11, input.span-12, textarea.span-12, input.span-13, textarea.span-13, input.span-14, textarea.span-14, input.span-15, tewidth: 138px; }
+input.span-5, textarea.span-5 { width: 178px; }
+input.span-6, textarea.span-6 { width: 218px; }
+input.span-7, textarea.span-7 .375rem}.md\:-mx-2\.5{margin-lefton-active-bg: var(--bs-warning-border-subtler: var(--bs-emphasis-co{ width: 258px; }
+input.span-8, textarea.splor);
+  --bs-list-group-action-active-bg: var(--bs-light-border-subtle);
+  --bs-list-group-active-coloran-8 { width: 298px; }
+input.span-9, textarea.span-9 { width: 338px; }
+input.span-10, textarea.spa: var(n-10 { width: 378px; }
+input.--bs-light-bg-subtle);
+  --bs-list-grouspap-activne
