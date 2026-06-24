@@ -1,0 +1,96 @@
+ore {
+  content:e {
+  content: "\f462"; }
+
+.fa-bandcamp:before {
+  content: "\f2d5"; }
+
+.fa-barcode:before {
+  content: "\f02a"; }
+
+.fa-bars:before {
+  content: "\f0c9"; }
+
+.fa-baseball-ball:before {
+  content: "\f433"; }
+
+.fa-basketball-ball:before {
+  content: "\f.2, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.5half:before {
+  content: "\f242"; }
+
+.fa-battery-quarter:before {
+  content: "\f243"; }
+
+.fa-battery-three-quarters:before {
+  content:fgColor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-divider: #818b98;--headerSearb-gchColor: #25292e;--headerSearch-borderColor: #818b98;--data-blue-color-emphasis: #A06edb;--dat
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--textڝright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1cQQQQQQQQQQQQQQQQQQQQQQQQQQQQQQ7
+;  c56background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7color: var(--background);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+dialog::backdrop {
+  backa-blue-color-muted: #d1f0ff;--data-auburn-color-emphasis: #9d615c;--data-auburn-color-muted: #f2e9e9;--data-orange-col   opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+ fa-brain:before {
+  content: "\f5dc"; }
+
+.fa-bread-slice:before {
+  content: "\f7ec"; }
+
+.fa-briefcase:before {
+  content: "\f0b1"; }
+
+.fa-briefcase-medical:before {
+  content: "\f469"; }
+
+.fa-broadcast-tower:before {
+  content:ground: # "\0

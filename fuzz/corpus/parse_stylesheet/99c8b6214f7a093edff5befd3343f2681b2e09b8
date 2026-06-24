@@ -1,0 +1,11 @@
+.sm\:pt-6{padding-top:1.5rem}.sm\:pt-7{padding-top:1.75rem}.sm\:pt-8{padding-top:2rem}.sm\:pt-9{padding-top:2.25rem}.sm\:pt-10{padding-top:2.5rem}.sm\:pt-11{padding-top:2.75rem}.sm\:pt-12{padding-top:3rem}.sm\:pt-14{padding-top:3.5rem}.sm\:pt-16{padding-top:4rem}.sm\:pt-20{padding-top:5rem}.sm\:pt-24{padding-top:6rem}.sm\:pt-28{padding-top:7rem}.sm\:pt-32{padding-top:8rem}.sm\:pt-36{padding-top:9rem}.sm\:pt-40{padding-top:10rem}.sm\:pt-44m\:pt-72{padding-top:18rem}.sm\:pt-80{padding-top:20rem}.sm\:pt-96{padding-top:24rem}.sm\:pt-px{padding-top:1px}.sm\:pt-0\.5{In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+ock;width:100%;text-align:center}.BtnGroup{display:inline-block;vertical-align:middle}.BtnGroup::before{display:table;content:""}.BtnGroup::after{display:table;clear:both;content:""}.BtnGroup+.BtnGroup,.BtnGroup+.btn{margin-left:var(--base-size-4)}.BtnGroup-item{position:relative;float:left;border-right-width:0;border-radius:0}.BtnGroup-item:first-child{border-top-left-radius:6px;border-bottom-left-radius:6px}.BtnGroup-item:last-child{border-right-width:1px;border-top-right-radius:6px;border-bottom-right-radius:6px}.BtnGroup-item.selected,.BtnGroup-item[aria-selected=true],.BtnGroup-item:focus,.BtnGroup-item:active,.BtnGroup-item:hover{border-right-width:1px}.BtnGroup-item.selected+.BtnGroup-item,.BtnGroup-item.selected+.BtnGroup-parent .Btnspacing:-.025em}.tracking-normal{letter-spacing:0}.tracking-wide{letter-spacing:.025em}.tracking-wider{letter-spacing:.05em}.tracking-widest{letter-spaccenter{text-align:center}.text-right{text-align:right}.text-justify{text-align:justify}.align-baseline{vertical-align:baseline}.align-top{vertical-align:top}ding-top:.625rem}.sm\:pt-3\..align5{p-miad

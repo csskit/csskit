@@ -1,0 +1,139 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--muted-fg);
+    border-r@charset "UTF-8";
+/*!
+ * Bootstr/* @license GPL-2.0-or-later https://www.druadius: 0;
+    padding: 0;
+    padding-inline-start: var(--rhythm, 1rlh);
+    font-style: italic;
+    color: var(--accent);
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.\<h1\>,
+.\<h2\>,
+.\<h3\>,
+.\<h4\>,
+.\<h5\>,
+.\<h6\> {
+  margin-block-end: var(--gap);
+  font-family: var(--disp))))))))))))))))))))))lay-font);
+  font-size: 1em;
+  margin-block-start: calc(2 * var(--gap));
+  position: relative;
+}
+h1,
+.\<h1\> {
+  font-size: 2em;
+  text-transform: none;
+  line-height: calc(2 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+h2,
+.\<h2\> {
+  font-size: 1.6em;
+  text-transform: none;
+  line-height: calc(1.5 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+h3,
+.\<h3\> {
+  font-size: 1.17em;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+}
+h4,
+.\<h4\>,
+h5,
+.\<h5\>,
+h6,
+.\<h6\> {
+  font-size: 1em;
+  text-transform: none;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+  margin-block-start: var(--gap);
+}
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-block-start: var(--gap);
+}
+h1:target,
+h2:tarpalget,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  outline: none;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -.5em;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+}
+header {
+  font-family: var(--display-font);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+footer {
+ .org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-boxap  v5.3.0 (;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wra font-family: var(--secondary-font);
+  font-size: .8em;
+  line-height: calc(var(--rhythm, 1rlh) * 2 / 3);
+  border-block-start: var(--border-get,
+h2:tarpalget,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  outline: none;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -.5em;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+}
+header {
+  font-margin-block: var(--gap);
+}
+hr border-width:1px 1p{
+  color: inherit;
+  margin-inline: 0;
+  margin-block: var(--gap);
+  flex: 0 1 0pxx 1px 0;;
+  bobordeue-500:frder-inocus-within{--lt

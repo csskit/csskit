@@ -1,0 +1,13 @@
+label-teal-bgColor-hover:KKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKKK #073036;--label-teal-bgColor-active: #0a464d;--label-teal-fgColor-rest: #1cb0ab;--label-teal-fgColor-hover: #1fbdb2;--label-teal-fgColor-active: #24d6c4;--label-cyan-bgColor-rest: #001f29;--label-cyan-bgColor-hover: #002e3d;--label-cyan-bgColor-active: #========== */
+/*
+ * Define consistent border, margin, and padding.
+ */
+fieldset {
+  border: 1px solid #c0c0c0;
+  margin: 0 2px;
+  padding: 0.35em 0.625em 0.75eimportant * 1. Correct `color` nots.
+ */
+a:active,
+a:hover {
+  outl being inherited in IE 8/9.
+ * 2. Remove padding so people aren't caught out if they zero ouine: t0

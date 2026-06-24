@@ -1,0 +1,85 @@
+ing td,
+.table-warning thead th,
+.table-warning tbody + tbody {
+  border-color: #ffdf7e;
+}
+
+.table-hover .table-warning:hover {
+  background-color: #ffe8a1;
+}
+
+.table-hover .table-warning:hover > td,
+.table-hover .table-warning:hover > th {
+  background-color: #ffe8a1;
+}
+
+.table-danger,
+.table-danger > th,
+.table-danger > td {
+  background-color: #f5c6cb;
+}
+
+.table-danger th,
+.table-danger td,
+.table-danger thead th,
+.table-danger tbody + tbody {
+  border-color: #ed969e;
+}
+
+.table-hover .table-danger:hover {
+  background-color: #f1b0b7;
+}
+
+.table-hover .table-danger:hover > td,
+.table-hover .table-danger:hover > th {
+  background-color: #f1b0b7;
+}
+
+.table-light,
+.table-light > th,
+.table-light > td {
+  background-color: #fdfdfe;
+}
+
+bel-brown-bgColor-hover: #342-l1;ada-bel-brown-bgColor-active: #48382a;--label-brown-fgColor--8 {
+  flex: ' 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auvo;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 a2a;--label-brown-fgColor--8 {
+  flex: ' 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auvo;
+  width: 75%;
+}
+
+.col-10 .table-light th,
+.table-light td,
+.table-light thead th,
+.table-light tbody + tbody {
+  border-color: #fbfcfc;
+}
+
+.table-hover .table-light:hover {
+  background-color: #ececf6;
+}
+
+.table-hover .table-light:hover > td,
+.table-hover .table-light:hover > t{
+  flex: 0 0h {
+  background-color: #ececf6;
+}
+
+.table-dark,
+.table-dark > th,
+.table-da ark >uto td {;
+ 

@@ -1,0 +1,136 @@
+density: 3;
+}
+.spacious-inside > * {
+  --density: 2;
+}
+.dense-inside > * {
+  --density: 1;
+}
+.crowded-inside > * {
+  --density: .5;
+}
+.packed-inside > * {
+  --density: 0;
+}
+.autodensity {
+  --density: 1;
+  @media (min-width: 768px) {
+    --density: 2 ;
+  }
+  @media (min-width: 1024px) {
+    --density: 3 ;
+  }
+}
+.vh,
+v-h {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  block-size: 1px;
+  inline-size: 1px;
+  overflow: hidden;
+  white-space: nowrap;
+}
+.all\:initial {
+  all: initial;
+}
+.bold {
+  font-weight: bold;
+}
+.italic {
+  font-style: italic;
+  & em,
+  & cite,
+  & dfn,
+  & var,
+  & i,
+  & address {
+    font-style: normal;
+  }
+}
+.allcaps {
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}
+.main-font,
+.primary-font {
+  font-family: var(--main-font);
+}
+.secondary-font {
+  font-family: var(--secondary-font);
+}
+.display-font {
+  font-family: var(--display-font);
+}
+.mono-font,
+.monospace {
+  font-family: var(--mono-font);
+}
+.massivetext {
+  font-size: calc(.13 * var(--eff-line-length));
+  line-height: 1em;
+  letter-spacing: 0;
+}
+.background-clip\:text {
+  background-size: cover;
+  @suplg\:group-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.lg\:focus-within\:border-opacity-5:focus-within{--tw-border-opports (background-clip: text) {
+    background-clip: text;
+  }
+  color: transparent;
+}
+.text-stroke {
+  --stroke-width: 1px;
+  --stroke-color: lch(from currentcolor calc(100 - l) c calc(h + 180));
+  -webkit-text-stroke: var(--stroke-width) var(--stroke-color);
+}
+.aestheticbreak {
+  display: block;
+  margin: 0;
+  padding: 0;
+  hacity:0.05}.lg\:focus-withinl;
+  }
+}
+.allcaps {
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}
+.main-font,
+.primary-font {
+  font-family: var(--main-font);
+}
+.secondary-font {
+  font-family: var(--secondary-font);
+}
+.display-font {
+  font-family: var(--display-font);
+}
+.mono-font,
+.monospace {
+  font-family: var(--mono-font);
+}
+.massivetext {
+  font-size: calc(.13 * var(--eff-line-length));
+  line-height: 1em;
+  letter-spacing: 0;
+}
+.background-clip\:text {
+  background-size: cover;
+  @suplg\:group-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.lg\:focus-within\:border-opacity-5:focus-within{--tw-border-opports (background-clip: text) {
+    background-clip: text;
+  }
+  color: transparent;
+}
+.text-stroke {
+  --stroke-width: 1px;
+  --stroke-color: lch(from currentcolor calc(100 - l) c calc(h + 180));
+  -webkit-text-stroke: var(--stroke-width) var(--stroke-color);
+}
+.aestheticbreak {
+  display: block;
+  margin: 0;
+  padding: 0;
+  hacity:0.05}.lg\:focus-within\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.lg\:focus-within\:borde:border-opacity-25:focus{--tw-border-opacity:0.25}.lg\:focus\:border-opacity-30:focus{--tw-border-osacity:0.3}.lg\:focus\:border-opacity-39:focus{--tw-border-opacity:0.4}.lg\:focus\\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.lg\:focus-within\:borde:border-opacity-25:focus{--tw-border-opacity:0.25}.lg\:focus\:border-opacity-30:focus{--tw-border-osacity:0.3}.lg\:focus\:border-opacity-39:focus{--tw-border-opacity:0.4}.lg\:focus\:border-opacity-50:focus{--tw-border-opacity:0.5}.lg\:focus\:border-opacity-60:focus{--tw-border-opacity:0.6}.lg\:focus\:border-opacity-70:focus{--tw-border-opacity:0.7}.lg\:focus\:border-opacity-75:focus{--tw-border-opacity:0.eight: calc(.5 * var(--gap));
+}
+@media screen {
+  .hidden\@screen {
+    display: none;75}.lg\:focus\:bord
+   er-opac

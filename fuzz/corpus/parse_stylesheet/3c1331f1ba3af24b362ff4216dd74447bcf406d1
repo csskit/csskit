@@ -1,0 +1,36 @@
+:bg-clip-border{background-clip:border-box}.xl\:bg-clip-padding{background-clip:padding-box}.xl\:bg-clip-content{background-clip:contigin-padding{background-origin:padding-box}.xl\:bg-origin-content{background-origin:content-box}.xl\:fill-current{fill:currentColor}.xl\:stroke-current{stroke:currentColor}.xl\:stroke-0{stroke-width:0}.xl\:stroke-1{stroke-width:1}.xl\:stroke-2{stroke-width:2}.xl\:object-contain{object-fit:contain}.xl\:object-cover{object-fit:cover}.xl\:object-fill{ck--right .avatar.avatar-more):after{background:var(--bgColor-muted);width:2px}.AvatarStack--right .avatar{border-left:var(--borderWidth-thin) solid var(--bgColor-default);border-right:0;margin-left:-11px;margin-right:0}.CircleBadge{display:flex;align-items:center;justify-content:center;background-color:var(--bgColor-default, var(--color-canvas-default));border-radius:50%;box-shadow:var(--shadow-resting-medium, var(--color-shadow-medium))}.CircleBadge-icon{max-width:60% !important;height:auto !important;max-height:55% !important}.CircleBadge--small{width:56px;height:56px}.CircleBadge--medium{width:96px;height:96px}.CircleBadge--large{width:128px;height:128px}.DashedConnection{position:relative}.DashedConnection::before{position:absolute;top:50%;left:0;width:100%;content:"";border-bottom:2px dashed var(--borderColor-default, var(--color-border-default))}.DashedConnection .CircleBadge{position:relative}.blankslate-containe8rem}.xl\:p-36{padding:9rem}.xl\:p-40{padding:10rem}.xl\:p-44{padding:11rem}.xl\:p-48{padding:12rem}.xl\:p-52{padding:13rem}.xl\:p-56{padding:14rem}.xl\:p-60{padding:15rem}.xl\:p-64{padding:16rem}.xl\:p-72{padding:18rem}.xl\:p-80{padding:20rem}.xl\:p-96{padding:24rem}.xl\:p-px{padding:1px}.xl\:p-0\.5{paddicity)) !important;
+}
+
+.text-white {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-body {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-body-color-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-muted {
+  --bs-text-opacity: 1;
+  color: var(--bs-secondary-color) !important;
+}
+
+.text-black-50 {
+  --bs-text-opacity: 1;
+  color: rgba(0, 0, 0, 0.5) !important;
+}
+
+.text-white-50 {
+  --bs-text-opacity: 1;
+  color: rgba(255, 255, 255, 0.5) !important;
+}
+
+.text-body-secondary {
+  --bs-text-opacity: 1;
+  color: var(--bs-secondary-color) !important;
+}
+
+.text-body-tertiary {
+  --bs-text-opacity: 1;
+  color: ng:.125rem}.xl\:p-1\.5{padding:.375rem}.xl\:p-2\.5{padding:.625rem}.xl\:p-3m;padding-right:4rem}.xl\:px-20{padding-left:5rem;pap-28{padding:7rem}.xl\:p-32{padding:8rem}.xl\:p-36{padding:9rem}.xl\:p-40{padding:10rem}.xl\:p-44{padding:11rem}.xl\:p-48{padding:12rem}.xl\:p-52{padding:13rem}.xl\:p-56{padding:14rem}.xl\:p-60{padding:15rem}.xl\:p-64{padding:16rem}.xl\:p-72{padding:18rem}.xl\:p-80{padding:20rem}.xl\:p-96{padding:24rem}.xl\:p-px{padding:1px}.xl\:p-0\.5{padding:.125rem}.xl\:p-1\.5{padding:.375rem}.xl\:p-2\.5{padding:.625rem}.xl\:p-3m;padding-right:4rem}.xl\:px-20{padding-left:5rem;padding-right:5rem}.xl\:px-24{padding-left:6rem;padding-right:6rem}.xl\:px-28{padding-left:7rem;padding-right:7rem}.xl\:px-32{padding-left:8rem;padding-right:8rem}.xl\:px-36{padding-left:9rem;padding-right:9rem}.xl\:px-40{padding-l:1.25rem;padding-right:1.25rem}.xl\:px-6{padding-left:1.5rem;padding-right:1.5rem}.xl\:px-7{padding-left:1.75rem;padding-right:1.75rem}.xl\:px-8{padding-left:2rem;padding-right:2rem}.xl\:px-9{padding-left:2.25rem;padding-right:2.25rem}.xl\:px-10{padding-left:2.5rem;paddindding-left:10rem;padding-right:10rem}.xl\:px-44{padding-left:11rem;padding-right:11rem}.xl\:px-48{padding-left:12rem;padding-right:12rem}.xl\:px-52{padding-left:13rem;padding-right:13rem}.xl\:px-56{padding-left:14rem;padding-right:14rem}.xl\:px-60{padding-left:15rem;padding-right:15rem}.xl\:px-64{padding-left:16rem;padding-right:16rem}.xl\:px-72{padding-left:18rem;padding-right:18rem}.xl\:px-80{padding-left:20rem;padding-right:20rem}.xl\:px-96{padding-left:24rem;padding-

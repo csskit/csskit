@@ -1,0 +1,28 @@
+1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background-position: right calc(0.375em + 0.1875rem) center;
+  ba\:ring-transparent{--tw-ring-color:transparent}.\32xl\:ring-current{--tw-ring-color:currentColor}.\32xl\:ring-black{--tw-ring-opacity:1;--tw-ring-color:rgba(0, 0, 0, var(--tw-ring-opacity))}.\32xl\:ring-white{--tw-ring-opacity:1;--tw-ring-color:rgba(255, 255, 255, var(--tw-ring-opacity))}.\32xl\:ring-gray-50{--tg-ring-opacity:1;--tw-ring-color:rgba(249, 25ebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-keyframes 0, 251, var(--tw-ring-opacity))}.\32xl\:fadeInDown {
+  from {
+    ring-grao

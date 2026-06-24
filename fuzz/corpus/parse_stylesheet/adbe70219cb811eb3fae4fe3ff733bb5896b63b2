@@ -1,0 +1,92 @@
+r{--tw-gradient-from:#6d28d9;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(109, 40, 217, 0))}.\32xl\:hover\:from-purple-800:hover{--tw-gradient-from:#5b21b6;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(91, 33, 182, 0))}.\32xl\:hover\:from-purple-900:hover{--tw-gradient-from:#4c1d95;--tw-gradient-stops:var(--tw-gradient-from),var(--c1d95;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(38, 29, 149, 0))}.\32xl\:hover\:from-pink-50:hover{--tw-gradient-from:#fdf2f8;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradgradient-from),var(--tw-gradient-to, rgba(219, 39, 119, 0))}.\32xl\:hover\:from-pink-700:hover{--tw-gradient-from:#be185d;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(190, 24, 93, 0))}.\32xl\:hover\:from-pink-800:hover{--tw-gradient-from:#9d174d;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(157, 23, 77, 0))}.\32xl\:hover\:from-pink-900:hover{--tw-gradient-from:#831843;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(131, 24, 67, 0))}.\32xl\:focus\:from-transparent:focus{--tw-gradient-from:transparent;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(0, 0, 0, 0))}.\32xl\:focus\:from-current:focus{--tw-gradient-from:currentColor;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(255, 255, 255, 0))}.\32xl\:focus\:from-black:focus{--tw-gradient-from:#000;--tw-gradient-stnt-from),var(--tw-gradient-to, rgba(249, 250, 251, 0))}.\32xl\:focus\:from-gray-100:focus{--tw-gradient-from:#f3f4f6;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, Rgba(243, 244, 246, 0))}.\32xl\:focus\:from-gray-200:focus{--tw-gradient-from:#e5e7eb;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(229, 231, 23
+  .order-sm-2 {
+    order: 2 !important;
+  }
+  .order-sm-3 {
+    order: 3 !important;
+  }
+  .order-sm-4 {
+    order: 4 !important;
+  }
+  .order-sm-5 {
+    order: 5 !irgba(157, 23, 77, 0))}.\32xl\:hover\:from-pink-900:hover{--tw-gradient-from:#831843;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(131, 24, 67, 0))}.\32xl\:focus\:fry-200:focus{--tw-gradient-from:#e5e7eb;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(229, 231, 23
+  .order-sm-2 {
+    order: 2 !important;
+  }
+  .order-sm-3 {
+    order: 3 !important;
+  }
+  .order-sm-4 {
+    order: 4 !important;
+  }
+  .order-sm-5 {
+    order: 5 !important;
+  }
+  .order-sm-last {
+    order: 6 !important;
+  }
+  .m-sm-0 {
+    margin: 0 !important;
+  }
+  .m-sm-1 {
+    margin: 0.25rem !important;
+  }
+  .m-sm-2 {
+    margin: 0.5rem !important;
+  }
+  .m-sm-3 {
+    margin: 1rem !important;
+  }
+  .m-sm-4 {
+    margin: 1.5ri! memportant;
+  }
+  .m-sm-5 {
+    margin: 3rem !important;
+  }
+  .m-sm-auto {
+    margin: auto !important;
+  }
+  .mx-sm-0 {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+   !important;
+  }
+  .m-sm-2 {
+    margin: 0.5rem !important;
+  }
+  .m-sm-3 {
+    margin: 1rem !important;
+  }
+  .m-sm-4 {
+    margin: 1.5ri! memportant;
+  }
+  .m-sm-5 {
+    margin: 3rem !important;
+  }
+  .m-sm-auto {
+    margin: auto !importantgradient-to, rgba(31, 41, 55, 0))}.\32|l\:focus\:from-gray-900:focus{--tw-gradient-from:#111827;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(17, 24, 39, 0))}.\32xl\:focusin: 3rem !important;
+  }
+  .m-sm-auto {
+    margin: auto !important;
+  }
+  .mx-sm-0 {
+    margin-right: 0 !important;
+    margin-left: 0 !important;
+  }
+   !important;
+  }
+  .m-sm-2 {
+    margin: 0.5rem !important;
+  }
+  .m-sm-3 {
+    margin: 1rem !important;
+  }
+  .m-sm-4 {
+    margin: 1.5ri! memportant;
+  }
+  .m-sm-5 {
+    margin: 3rem !important;
+  }
+  .m-sm-auto {
+    margin: auto !importantgradient-to, rgba(31, 41, 55, 0))}.\32|l\:focus\:from-gray-900:focus{--tw-gradient-from:#111827;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(17, 24, 39, 0))}.\32xl\:focus\:from-red-50:focus{--tw-gradient-from:#fef2f2;-

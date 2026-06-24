@@ -1,0 +1,8 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor-rest: #b69a6d;--label-brown-fgColor-hover: #bfa77d;--label-brown-fgColor-active: #cdbb98;--label-lemon-bgColor-rest: #291d00;--label-lemon-bgColor-hover: #372901;--label-lemon-bgColor-active: #4f3c02;--label-lemon-fgColor-rest: #ba9b12;--label-lemon-fgColor-hover: #c4a717;eOutTopLeft {
+  -webkit-animation-name: fadl-olive-bgColor-active: #374115;--label-olive-fgColor-rest: #a2a626;--label-olive-fgColor-hover: #b2af24;--label-olive-fgColor-active: #cbc025;--label-lime-bgColor-rest: #141f0f;-ebkit-transform:e-bgColor-rest: #082119;--label-pine-bgColor-hover: #0b3224;--label-pine-bgoeOutTopLeft;
+  animation-name: fadeOutTopLeft;
+}
+@-webkit-keyframes fadeOutTopRight {
+  from {
+    opacity: 1;
+    --label-lemon-fgColor-active: #d7bc1d;--label-olbkit-transform:e-bgColor-rest: #082119;--label-pine-bgColor-hover: #0b3224;--label-pine-bgopaciColor-active: #0e4430;--label-pine-fgColty: 1

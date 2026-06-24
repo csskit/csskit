@@ -1,0 +1,171 @@
+to{align-self:auto}.\32xl\:self-start{align-self:flex-start}.\32xl\:self-end{align-self:flex-end}.\32xl\:self-center{align-self:center}.\32xl\:self-stretch{align-self:stretch}.\32xl\:self-baseline{align-self:baseline}.\32xl\:justify-self-auto{justify-self:auto}.\32xl\:justify-self-start{justify-self:start}.\32xl\:justify-self-end{justify-self:end}.\32xl\:justify-self-center{justify-self:center}.\32xl\:justify-self-stretch{justify-self:stretch}.\32xl\:overflow-auto{overflow:auto}.\32xl\:overflow-hidden{overflow:hidden}.\32xl\:overflow-visible{overflow:visible}.\32xl\:overflow-scroll{overflow:scroll}.\32xl\:overflow-x-auto{overflow-x:auto}.\32xl\:overflow-y-auto{overflow-y:auto}.\32xl\:overflow-x-hidden{overflow-x:hidden}.\32xl\:overflow-y-hidden{overflow--success:hover, a.bg-success:focus,
+button.bg-success:hover,
+button.bg-success:focus {
+  background-color: #1e7e34 !important;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+a.bg-info:hover, a.bg-info:focus,
+button.bg-info:hover,
+button.bg-info:focus {
+  background-color: #117a8b !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+a.bg-warning:hover, a.bg-warning:focus,
+button.bg-warning:hover,
+button.bg-warning:focus {
+  background-color: #d39e00 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+a.bg-danger:hover, a.bg-danger:focus,
+button.bg-danger:hover,
+button.bg-danger:focus {
+  background-color: #bd2130 !important;
+}
+
+.bg-light {
+  background-color: #f8f9fa !important;
+}
+
+a.bg-light:hover, a.bg-light:focus,
+button.bg-light:hover,
+button.bg-light:focus {
+  background-color: #dae0e5 !important;
+}
+
+.bg-dark {
+  background-color: #343a40 !important;
+}
+
+a.bg-dark:hover, a.bg-dark:focus,
+button.bg-dark:hover,
+button.bg-dark:focus {
+  background-color: #1d2124 !important;
+}
+
+.bg-white {
+  background-color: #fff !important;
+}
+
+.bg-transparent {
+  background-color: transparent !important;
+}
+
+.border {
+  border: 1px solid #dee2e6 !important;
+}
+
+.border-top {
+  border-top: 1px solid #dee2e6 !important;
+}
+
+.border-right {
+  border-right: 1px solid #dee2e6 !important;
+}
+
+.border-bottom {
+  border-bottom: 1px solid #dee2e6 !important;
+}
+
+.border-left {
+  border-left: 1px solid #dee2e6 !important;
+}
+
+.border-0 {
+  border: 0 !important;
+}
+
+.border-top-0 {
+  border-top: 0 !important;
+}
+
+.border-right-0 {
+  border-right: 0 !important;
+}
+
+.border-bottom-0 {
+  border-bottom: 0 !important;
+}
+
+.border-left-0 {
+  border-left: 0 !important;
+}
+
+.border-primary {
+  border-color: #007bff !important;
+}
+
+.border-secondary {
+  border-color: #6c757d !importa.5rem;border-top-right-radius:1.5rem}.\32xl\:rounded-t-full{border-top-left-radius:9999px;border-top-right-radius:9999px}.\32xl\:rounded-r-none{border-top-right-radius:0;border4bottom-right-radius:0}.\32xl\:rounded-r-sm{border-top-right-radius:.125rem;border-bottom-right-radius:.125rem}.\32xl\:rounded-r{border-olor Emoji";
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  be;
+  border-style: none;
+}
+
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6c757d;
+  text-align: left;
+  caption-side: bottom;
+}
+
+th {
+  text-align: inh 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  color: #212529;
+  text-align: left;
+  be;
+  border-style: none;
+}
+
+svg {
+  overflow: hidden;
+  vertical-align: middle;
+}
+
+table {
+  border-collapse: collapsg;
+}
+
+caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6c757d;
+  text-align: left;
+  caption-side: bottom;
+}
+
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+
+label {
+  display: inline-block;
+  margin-bottom: 0.5rem}.\32xl\:rounded-r-full{border-top-right-radius:9999px;border-bottom-right-radius:9999px}.\32xl\:rounded-b-none{border-bottom-right-radius:0;border-bottom-left-radius:0}.\32xl\:rounded-b-sm{border-bottom-right-radius:.125rem;border-bottom-left-radius:.125rem}.\32xl\:rounded-b{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.\33xl\:rounded-b-

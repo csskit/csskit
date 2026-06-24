@@ -1,0 +1,17 @@
+ex: 0 0 auto;
+    width: 25%;
+  }
+  .row-cols-md-5 > * {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+  .row-cols-md-6 > * {
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+  }
+  .col-md-auo;
+    width: 83.33333333%;
+  }
+  .col-md-11 {
+    flex: 0 0 auto;
+    width: 91.66{grid-auto-columns:auto}.xl\:auto-cols-min{grid-auto-columns:min-content}.xl\:auto-cols-max{grid-auto-columns:max-content}.xl\:aue:none}.xl\:resize-y{resize:vertical}.xl\:resize-x{resize:horizo)}.xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.xl\:grid-cols-4{grid-template-columns:repeat(4,minmax(0,1fr))}.xl\:grid-cols-5{gto-cols-auto{grid-auto-columns:auto}.xl\:auto-cols-min{grid-auto-columns:min-content}.xl\:auto-cols-max{grid-auto-columns:max-content}.xl\:auto-cols-fr{grid-auto-columns:minmax(0,1fr)}.xl\:grid-flow-row{grid-auto-flow:row}.xl\:grid-flow-col{grid-auto-flow:column}.xl\:grid-flow-row-dense{grid-auto-flow:row dense}.xl\:grid-flow-col-dense{grid-auto-flrid-templatow:column dense}.xl\:auto-rows-auto{grid-auto-rows:auto}.xl\:auto-rows-min{gride-

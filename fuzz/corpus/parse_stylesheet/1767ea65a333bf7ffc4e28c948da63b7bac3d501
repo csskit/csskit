@@ -1,0 +1,97 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--muted-fg);
+    border-radius: 0;
+    padding: 0;
+    padding-inline-start: var(--rhythm, 1rlh);
+    font-style: italic;
+    color: var(--acc/*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+Bfas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+ent);
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.\<h1\>,
+.\<h2\>,
+.\<h3\>,
+.\<h4\>,
+.\<h5\>,
+.\<h6\> {
+  margin-block-end: var(--gap);
+  font-family: var(--display-font);
+  font-size: 1em;
+  margin-block-start: calc(2 * var(--gap));
+  position: relative;
+}
+h1,
+.\<h1\> {
+  font-size: 2em;
+  text-transform: none;
+  line-height: calc(2 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8h2,
+.\<

@@ -1,0 +1,119 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{padding-bottom:0}.\32xl\:pb-1{padding-bottom:.25rem}.\32xl\:pb-2{padding-bottom:.5rem}.\32xl\:pb-3{padding-bottom:.75rem}.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25rem}.\visible; }
+
+button,
+select {
+  text-transform: none; }
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button; }
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]::-moz-focus-inner {
+  border-style: none;
+  padding: 0; }
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText; }
+
+fieldset {
+  padding: 0.35em 0.75em 0.625em; }
+
+legend {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  color: inherit;
+  display: table;
+  max-width: 100%;
+  padding: 0;
+  white-space: normal; }
+
+progress {
+  vertical-align: baseline; }
+
+textarea {
+  overflow: auto; }
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  padding: 0; }
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto; }
+
+[type="search"] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px; }
+
+[type="search"]::-webkit-search-decoration {
+  -webkit-appearance: none; }
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit; }
+
+details {
+  display: block; }
+
+summary {
+  display: list-item; }
+
+template {
+  display: none; }
+
+[hidden] {
+  display: none; }
+
+[data-whatintent="mouse"] *, [data-whatintent="mouse"] *:focus,
+[data-whatintent="touch"] *,
+[data-whatintent="touch"] *:focus,
+[data-whatinput="mouse"] *,
+[data-whatinput="mouse"] *:focus,
+[data-whatinput="touch"] *,
+[data-whatinput="touch"] *:focus {
+  outline: none; }
+
+[draggable=false] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; }
+
+.foundation-mq {
+  font-family: "small=0em&medium=40em&large=64em&xlarge=75em&xxlarge=90em"; }
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 100%; }
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fefefe;
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale; }
+
+img {
+  display: inline-block;
+  vertical-align: middle;
+  max-width: 100%;
+  heeline{vertical-align:baseline}.\32xl\:align-top{vertical-align:top}.\32xl\:align-middle{vertical-align:middle}.\32xl\:align-bottom{vertical-align:bottom}.\32xl\:align-text-top{vertical-align:text-top}.\32xl\:align-text-bottom{vertical-align:text-bottom}.\32xl\:font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}.\32xl\:font-serif{font-family:ui-serif,Georgia,Cambria,"Times New Roman",Times,serif}.\32xl\:font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monaco,Consolas,"Liberation Mono","Courier New",monospace}.\32xl\:text-xs{font-size:.75rem;line-height:1rem}.\32xl\:text-sm{font-size:.875rem;line-height:1.25rem}.\32xl\:text-base{font-size:1rem;line-height:1.5rem}.\32xl\:text-lg{font-size:1.125rem;line-height:1.75rem}.\32xl\:text-xl{font-size:1.25rem;line-height:1.75rem}.\32xl\:text-2xl{font-size:1.5rem;line-height:2rem}.\32xl\:text-3xl{font-size:1.875rem;line-height:2.25rem}.\32xl\:text-4xl{font-size:2.25rem;line-height:2.5rem}.\32xl\:text-5xl{font-size:3rem;line-height:1}.\32xl\:text-6xl{font-size:3.75rem;line-height:1}.\32xl\:text-7xl{font-size:4.5rem;line-height:1}.\32xl\:text-8xl{font-size:6rem;line-height:1}.\32xl\:text-9xl{font-size:8rem;line-height:1}.\32xl\:font-thin{font-weight:100}.\32xl\:font-extralight{font-weight:200}.\32xl\:font-light{font-weight:300}.\32xl\:font-norm

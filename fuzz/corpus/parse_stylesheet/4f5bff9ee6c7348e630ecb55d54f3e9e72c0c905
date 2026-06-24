@@ -1,0 +1,19 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor-rest: #b69a6d;--label-brown-fgColor-hover: #bfa77d;--label-brown-fgColor-active: #cdbb98;--label-lemon-bgColor-rest: #291d00;--label-lemon-bgColor-hover: #372901;--label-lemon-bgColor-active: #4f3c02;--label-lemon-fgColor-rest: #ba9b12;--label-lemon-fgColor-hover: #c4a717;eOutTopLeft {
+  -webkit-animation-name: fadeOutTopLeft;
+  animation-name: fadeOutTopLeft;
+}
+@-webkit-keyframes fadeOutTopRight {
+  from {
+    opacity: 1;
+    --label-lemon-fgColor-active: #d7bc1d;--label-olive-bgColo-wr-rest: #171e0b;--label-olive-bgColor-hover: #252d10;--label-olive-bgColor-active: #374115;--label-olive-fgColor-rest: #a2a626;--label-olive-fgColor-hover: #b2af24;--label-olive-fgColor-active: #cbc025;--label-lime-bgColor-rest: #141f0f;-ebkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3d(100%, -100%, 0);
+    transform: translate3d(100%, -100%, 0);
+  }
+}
+-label-lime-bgColor-hover: #1f3116;--label-lime-bgColor-active: #2c441d;--label-lime-fgColo@keyframes fadeOutTopr-rest: #7dae37;--label-lime-fgColor-hover: #89ba36;-Right {
+  from {
+    -label-lime-fgColor-active: #9fcc3e;--label-pine-bgColor-rest: #082119;--label-pine-bgColor-hover: #0b3224;--label-pine-bgopaciColor-active: #0e4430;--label-pine-fgColty: 1

@@ -1,0 +1,21 @@
+inter{cursor:pointer}.\32xl\pse > label:focus {
+  background: var(--collapse-label-hover-back-color);
+}
+
+.collapse > label + div {
+  flex-basis: auto;
+  height: 1px;
+  width: 1px;
+  margin: -1px;
+  overflow: hidden;
+  position: absolute;
+  clip: rect(0 0 0 0);
+  -webkit-clip-path: inset(100%);
+  clip-path: inset(100%);
+  transition: max-height 0.3s;
+  max-height: 1px;
+}
+
+.collapse > :checked b al+el {
+  background: var(--collapse-selected-label-back-color);
+  border-bottom-color: var(--collapse-selected-label32xl\:content-between{align-content:space-between}.\32xl\:content-around{align-content:space-around}.\32xl\:content-evenly{align-content:space-evenly}.\32xl\:items-tart{align-items:flex-start}.\32xl\:items-end{align-items:flex-end}.\32xl\:items-center{align-items:center}.\32xl\:items-baseline{align-items:baseline}.\32xl\:items-stretch{align-items:stretch}.\32xl\:justify-start{justify-content:flex-start

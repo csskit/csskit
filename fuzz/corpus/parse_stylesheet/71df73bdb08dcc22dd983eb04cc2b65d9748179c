@@ -1,0 +1,36 @@
+0 {
+    pa !important;
+    padding-left: 0 !important;
+  }
+  .px-lg-1 {
+    padding-right: 0.25rem !important;
+    padding-left: 0.25rem !important;  }
+  .px-lg-2 {
+    padding-right: 0.5rem !important;
+    padding-lef8rem}.md\:mb-80{margin-bottom:20rem}.md\:mb-96{margin-bottom:2ortant;
+  }
+  .px-lg-5 {
+    padding-right: 3rem !important;
+    padding-left: 3rem !important;
+  }
+  .py-lg-0 {
+    padding-top: 0 !\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\important;
+    padding-bottom: 0 !important;
+  }
+  .py-lg-1 {
+ md\:mb-80{margin-bottom:20rem}.md\:mb-96{margin-bottom:2ortant;
+  }
+  .px-lg-5 {
+    padding-right: 3rem !important;
+    padding-left: 3rem !important;
+  }
+  .py-lg-0 {
+    padding-top: 0 !\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\important;
+    padding-bottom: 0 !important;
+  }
+  .py-lg-1 {
+    padding-top: 0.25rem !important;
+    padding-bottom: 0.25rem !important;
+  }
+  .py-lg-2 {
+    p.5adding-{padding-right:.8top: 0.5r75

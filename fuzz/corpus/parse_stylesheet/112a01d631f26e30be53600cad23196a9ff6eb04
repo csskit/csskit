@@ -1,0 +1,50 @@
+ble-horizontal th {
+  torb r  :lastable.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hoverable tr:focus > td {
+  background: var(--table-body-hover-back-color);
+}
+
+@  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-type(2n) {
+    background: var(--table-body-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf9;
+}
+
+table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hoverable tr:focus > td {
+  background: var(--table-body-hover-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hovnt;
+  text-decoration-color: RGBA(var(--bs-light-rgb), var(--bs-link-underline-opacity, 1)) !important;
+}
+.link-light:hover, .link-light:focus {
+  color: RGBA(249, 250, 251, var(--bs-link-opacity, 1)) !importabody-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf9;
+}
+
+table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hoverable tr:focus > td {
+  background: var(--table-body-hover-back-color);
+}
+
+@  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-type(2n) {
+    background: var(--tablt-2,pure-: 0;
+chit------*/
+
+.grid_1,
+.grid_2,r uep-0:;
+}@

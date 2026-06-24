@@ -1,0 +1,128 @@
+wnRight {
+  -webkit-awebkit-transform-origin: right bottom;
+  transform-origin: right bottom;
+}
+/* Specials */
+@-webkit-keyframes hinge {
+  0% {
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+
+  20%,
+  60% {
+    -webkit-transform: rotate3d(0, 0, 1, 80deg);
+    transform: rotate3d(0, 0, 1, 80deg);
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+  }
+
+  41%,
+  80% {
+    -webkit-transform: rotate3d(0, 0, 1, 60deg);
+    transform: rotate3d(0, 0, 1, 60deg);
+    -webkit-animation-timing-function: ease-in-out;
+    animation-timing-function: ease-in-out;
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 700px, 0);
+    transform: translate3d(0, 700px, 0);
+    opacity: 0;
+  }
+}
+@keyframes hinge {
+  0% {
+    -webkit-animation-timing-function: -rhythm, 1rlh);
+  margin-block: var(--gap);
+  & & {
+    padding-inline-start: var(--gap);
+  }
+  &[role=list],
+  &[role=listbox] {
+    padding-inline-start: 0;
+    list-style: none;
+  }
+}
+ul {
+}
+ol {
+}
+dl {
+  margin-block: var(--gap);
+}
+dt {
+  font-weight: bold;
+  font-family: var(--secondary-font);
+}
+dd {
+  margin-inline-start: var(--rhythm, 1rlh);
+}
+@supports selector(li::marker) {
+  li::marker {
+    font-family: var(--secondary-font);
+  }
+}
+figure {
+  max-width: 100%;
+  margin-inline: 0;
+}
+figcaption {
+  margin-block: var(--gap);
+  font-family: var(--secondary-font);
+  color: var(--muted-fg);
+}
+main {
+  max-inline-si6rem}.\32xl\:hover\:-translate-x-72:hover{--tw-translate-x:-18rem}.\32xl\:hover\:-translate-x-8-tw-translate-y:0px}.\32xl\:hover\:translate-y-1:hover{--tw-translate-y:0.25rem}.\32xl\:hover\:translate-y-2:hover{--tw-translate-y:0.5rem}.\32xl\:hover\:translate-y-3:hover{--tw-translate-y:0.75rem}.\32xl\:hover\:translate-y-4:hover{--tw-translate-y:1rem}.\32xl\:hover\:translate-y-5:hover{--tw-translate-y:1.25rem}.\32xl\:hover\:trae(30deg);
+    transform: scale(0.1) rotate(30deg);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
+  }
+
+  50% {
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform: scale(1);
+  }
+}
+@keyframes jackInTheBox {
+  from {
+    opacity: 0;
+    -webkit-transform: scale(0.1) rotate(30deg);
+    transform: scale(0.1) rotate(30deg);
+    -webkit-transform-origin: center bottom;
+    transform-origin: center bottom;
+  }
+
+  50% {
+    -webkit-transform: rotate(-10deg);
+    transform: rotate(-10deg);
+  }
+
+  70% {
+    -webkit-transform: rotate(3deg);
+    transform: rotate(3deg);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: scale(1);
+    transform:0scale(1);
+  }
+}
+.animate__jackInTheBox {
+  -webkit-animation-name: jackInTheBox;
+  animation-name: jackInTheBox;
+}
+/* originally authored by Nick Pettit - h

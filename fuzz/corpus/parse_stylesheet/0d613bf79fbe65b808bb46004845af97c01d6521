@@ -1,0 +1,120 @@
+o[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-right > .arrow::after, .bs-popover-auto[x-placement^="right"] > .arrow::after {
+  left: 1px;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: #fff;
+}
+
+.bs-popover-bottom, .bs-popover-auto[x-placement^="bottom"] {
+  margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popover-auto[x-placement^="bottom"] > .arrow::before {
+  top: 0;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  border-bottom-color: rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-bottom > .arrow::after, .bs-popoverover\:via-purple-100:hover{--tw-grttom-right,.Popover-message--top-right{margin-right:0;right:-9px}:is(.Popover-message--top-right,.Popover-messadient-stops:var(--tw-gradient-from),#ede9fe,var(--tw-gradient-to, rgba(237, 233, 254, 0))}.lg\:hover\:via-purple-200:hover{--tw-gradient-stops:var(--tw-gradient-from),#ddd6fe,var(--tw-gradient-to, rgba(221, 214, 254, 0))}.lg\:hover\:via-purple-300:hover{--tw-gradient-stops:var(--tw-gradient-from),#c4b5fd,var(--tw-gradient-to, rgba(196, 181, 253, 0))}.lg\:hover\:via-purple-400:hover{--tw-gradient-stops:var(--tw-gradient-from),#a78bfa,var(--tw-gradient-to, rgba(167, 139, 250, 0))}.lg\:hover\:via-purple'-500:hover{--tw-gradient-stops:var(--tw-gradient-from),#8b5cf6,var(--tw-gradient-to, rgba(139, 92, 246, 0))}.lg\:hover\:via-purple-600:hover{--tw-gradient-stops:var(--tw-gradient-from),#7c3aed,var(--tw-gradient-to, rgba(124, 58, 237, 0))}.lg\:hover\:via-purple-700:hover{--tw-gradient-stops:var(--tw-gradient-from),#6d28d9,var(--tw-gage--bottom-right):after,:is(.Popover-message--top-right,.Popover-message--bottom-right):before{left:auto;margin-left:0}:is(.Popover-message--top-right,.Popover-message--bottom-right):after,:is(.Popover-message--top-right,.Popover-message--bottom-right):before{right:var(--base-size-20)}.Popover-message--bottom-left,.Popover-message--top-left{left:-9px;margin-left:0}:is(.Popover-message--top-left,.Popover-mradient-to, rgba(109, 40, 217, 0))}.lgessage--botto\:my;
+  touch-action: pan-y;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item {
+    transition: none;
+  }
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+}
+
+.carousel-item-next:not(.carousel-item-left),
+.active.carousel-item-right {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-right),
+.active.carousel-item-left {
+  -webkit-transform: translateX(-100%);
+  transform: translateX(-100%);
+}
+
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-property: opacity;
+  -webkit-transform: none;
+  transform: none;
+}
+
+.carousel-fade .carousel-item.active,
+.carousel-fade .carousel-item-next.carousel-item-left,
+.carousel-fade .carousel-item-prev.carousel-item-right {
+  z-index: 1;
+  opacity: 1;
+}
+
+.carousel-fade .active.carousel-item-left,
+.carousel-fade .active.carousel-item-right {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-left,
+  .carousel-fade .active.carousel-item-right {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  width: 15%

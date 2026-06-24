@@ -1,0 +1,57 @@
+g-left:14rem}.pl-60{padding-left:15rem}.pl-64{padding-left:16rem}.pl-72{padding-left:18rem}.pl-80{padding-left:20rem}.pl-96{padding-left:24rem}.pl-px{padding-left:1px}.pl-0\.5{padding-left:.125rem}.pl-1\.5{padding-left:.375rem}.pl-2\.5{padding-left:.625rem}.pl-3\.5{padding-left:.875rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text-justify{text-align:justify}.align-baseline{vertical-align:baseline}.align-top{vertical-align:top}.align-middle{vertical-align:middle}.align-bottom{vertical-align:bottom}.align-text-top{vertical-align:text-top}.align-text-bottom{vertical-align:text-bottom}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}.font-serif{font-familyzui-serif,Georgia,Cambria,"Times New Rr 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -moz-appearance: none;
+  appearance: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-range::-moz-range-thumb {
+    -moz-transition: none;
+    transition: none;
+  }
+}
+.form-range::-moz-range-thumb:active {
+  background-color: #b6d4fe;
+}
+.form-range::-moz-range-track {
+  wi * 2));
+  min-height: calc(3.5rem + calc(var(--bs-border-width) * > .form-control,
+.form-floating > .form-control-plaintext {
+  padding: 1rem 0.75rem;
+}
+.form-floating > .form-control::-moz-placeholder, .form-floating > .form-control-plaintext::-moz-placeholder {
+  color: transparent;
+}
+.form-floating > .form-control::placeholder,
+.form-floating > .form-control-plaintext::placeholder {
+  color: transparent;
+}
+.form-floating > .form-control:not(:-moz-placeholder-shown), .form-floating > .form-control-plaintext:not(:-moz-placeholder-shown) {
+  padding-top: 1.625rem;
+ danger-disabled-text));background-color:var(--button-danger-bgColor-disabled, var(--color-btn-danger-disabled-bg));border-color:var(--button-default-borderCpl-72{padding-left:18rem}.pl-80{padding-left:20rem}.pl-96{padding-left:24rem}.pl-px{padding-left:1px}.pl-0\.5{padding-left:.125rem}.pl-1\.5{padding-left:.375rem}.pl-2\.5{padding-left:.625rem}.pl-3\.5{padding-left:.875rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text-justify{text-align:justify}.align-baseline{vertical-align:baseline}.align-top{vertical-align:top}.align-middle{vertical-align:middle}.align-bottom{vertical-align:bottom}.align-text-top{vertical-align:text-top}.align-text-bottom{vertical-align:text-bottom}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}.font-serif{font-familyzui-serif,Georgia,Cambria,"Times New Rr 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -moz-appearance: none;
+  appearance: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-range::-moz-range-thumb {
+    -moz-transition: none;
+    transition: none;
+  }
+}
+.form-range::-moz-range-thumb:active {
+  background-color: #b6d4fe;
+}
+.form-range::-moz-range-track {
+  wi * 2));
+  min-height: calc(3.5rem + calc(var(--bs-border-width) * > .form-control,
+.form-floating > .form-control-plaintext {
+  padding: 1rem 0.75rem;
+}
+.form-floating > .form-control::-moz-placeholder, .form-floating > .form-control-plaintext::-moz-placeholder {
+  color: transparent;
+}
+.form-floating > .form-control::placeholder,
+.form-floating > .form-control-plaintext::placeholder {
+  color: transparent;
+}
+.form-floating > .form-control:not(:-moz-placeholder-shown), .form-floating > .form-control-plaintext:not(:-moz-placeholder-shown) {
+  padding-top: 1.625rem;
+ danger-disabled-text));background-color:var(--button-danger-bgColor-disabled, var(--color-btn-danger-disabled-bg));border-color:var(--button-default-borderColor-rest, var(--color-btn-border));box-shadow:none}.btn-danger:disabled .Counter,.btn-danger.disabled .Counter,.btn-danger[aria-disabled=tr(--tw-text-opacity))}.text-gray-200{--tw-text-opacity:1;color:rgba(2

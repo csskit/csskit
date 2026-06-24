@@ -1,0 +1,28 @@
+der: none;
+  font-size: 1em;
+  font-family: inherit;
+  text-decoration: 1px dotted underline;
+  padding: 0;
+  .list-of-links & {
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: 2px solid underline;
+    cursor: pointer;
+    outline: none;
+  }
+}
+small[role=note] {
+  display: block;
+  float: inline-end;
+  clear: inline-end;
+  --sidenote-width: 20ch;
+  max-inline-size: var(--sidenote-width);
+  padding-inline: 1.5ch 1ch;
+  margin-inline-end: calc(1em - var(--sidenote-width));
+  margin-block-end: var(--rhythm, 1rlh);
+  font-family: var(--secondary-font);
+  background: var(--bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) transparent;
+  border-block-end: var(--to{align-self:auto}.\32xl\:self-start{align-self:flex-start}.\32xl\:self-end{align-self:flex-end}.\32xl\:self-center{align-self:center}.\32xl\:self-stretch{align-self:stretch}.\32xl\:self-baseline{align-self:baseline}.\32xl\:justify-self-auto{justify-self:auto}.border-b\32xl\:justify-self-lost

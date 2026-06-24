@@ -1,0 +1,14 @@
+r{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stretch{align-self:stretch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-self-end{justify-self:end}.sm\:justify-self-center{justify-self:center}.sm\:justify-self-stretch{justify-self:stretch}.sm\:overflow-auto{overflow:auto}.sm\:overflow-hidden{overflow:hidden}.sm\:overflow-visible{overflow:visible}.sm\:overflow-scroll{overflow:scroll}.sm\:overflow-x-auto{overflow-x:auto}.sm\:overflow-y-auto{overflow-y:auto}.sm\:overflow-x-hidden{overflow-x:hidden}.sm\:overflow-y-hidden{overflow-y:hidden}.sm\:overflow-x-visible{overflow-x:visible}.sm\:overflow-y-visible{overflow-y:visible}.sm\:overflow-x-scroll{overflow-x:scroll}.sm\:overflow-y-scroll{overflow-y:scroll}.sm\:overscroll-auto{overscroll-behavior:auto}.sm\:overscroll-contain{overscroll-behavior:contain}.sm\:overscroll-none{overscroll-behavior:none}.sm\:overscroll-y-auto{overscroll-behavior-y:auto}.sm\:overscroll-y-contain{overscroll-behavior-y:contain}.sm\:overscroll-y-none{overscroll-behavior-y:none}.sm\:overscroll-x-auto{overscroll-br-top-right-radius:0;border-bottom-right-radius:0}.sm\:rounded-r-sm{border-top-right-radius:.125rem;border-bottom-right-radius:.125rem}.sm\:rounded-r{border-top-right-radius:.25rem;border-bottom-right-radius:.25rem}.sm\:rounded-r-md{border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.sm\:rounded-r-lg{border-top-right-ery-quarter:before {
+  content: "\f243"; }
+
+.fa-battery-three-quarters:before {
+  content:fgColor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-divider: #818b98;--headerSearb-gchColor: #25292e;--headerSearch-borderColor: #818b98;--data-blue-color-emphasis: #006edb;--data-blue-color-muted: #d1f0ff;--data-auburn-color-emphasis: #9d615c;--data-auburn-color-muted: #f2e9e9;--data-orange-col   opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(0.475, om-left-ra

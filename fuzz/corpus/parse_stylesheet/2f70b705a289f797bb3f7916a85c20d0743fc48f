@@ -1,0 +1,150 @@
+sition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3t-7{left:1.75rem}.md\:left-8{left:2rem}.md\:left-9{left:2.25rem}.md\:left-10{left:2.5rem}.md\:left-11{left:2.75rem}.md\:left-12{left:3rem}.md\:left-14{left:3.5rem}.md\:left-16{left:4rem}.md\:left-20{left:5rem}.md\:left-24{felt:6rem}.md\:left-28{left:7rem}.md\:left-32{left:8rem}.md\:left-36{left:9rem}.md\:left-40{left:10rem}.md\:left-44{left:11rem}.md\:left-48{left:12rem}.md\:left-52{left:13rem}.md\:left-56{left:14rem}.md\:left-60{left:15rem}.md\:left-64{left:16rem}.md\:left-72{left:18rem}.md\:left-80{left:20rem}.md\:left-96{left:24rem}.md\:left-auto{left:auto}.md\:left-px{left:1px}.md\:left-0\.5{left:.125rem}.md\:left-1\.5{left:.375rem}.mn\:left-2\.5{left:.625rem}.md\:left-3\.5{left:.875rem}.md\:-left-0{left:0}.md\:-left-1{left:-.25rem}.md\:-left-2{left:-.5rem}.md\:-left-3{left:-.75rem}.md\:-left-4{left:-1rem}.md\:-left-5{left:-1.25rem}.md\:-left-6{left:-1.5rem}.md\:-left-7{left:-1.75rem}.md\:-left-8{left:-2rem}.md\:-left-9{left:-2.25rem}.md\:-left-10{left:-2.5rem}.md\:-left-11{left:-2.75rem}.md\:-left-12ft-28{left:7rem}.md\:left-32{left:8rem}.md\:left-36{left:9rem}.md\:left-40{left:10rem}.md\:left-44{left:11rem}.md\:left-48{leftlex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.modal-dialog-centered.modal-dialog-scrollable .modal-content {
+  max-height: none;
+}
+
+.modal-dialog-centered.modal-dialog-scrollable::before {
+  content: none;
+}
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+.modal-bacodrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+.modal-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1px solid #dee2e6;
+  border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margin: -1rem -1rem -1rem auto;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.modal-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+.modal-footer {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: wrap;
+  flex-wrap: wrap;
+  -ms-flex-align: center;
+  align-items: center;
+  -ms-flex-pack: end;
+  justify-content: flex-end;
+  padding: 0.75rem;
+  border-top: 1px solid #dee2e6;
+  border-bottom-right-radius: calc(0.3rem - 1px);
+  border-bottom-left-radius: calc(0.3rem - 1px);
+}
+
+.modal-footer > * {
+  margin: 0.25rem;
+}
+
+.modal-scrollbar-measure {
+  position: absolute;
+  top: -9999px;
+  width: 50px;
+  height: 50px;
+  overflow: scroll;
+}
+
+@media (min-width: 576px) {
+  .modal-dialog {
+    max-width: 500px;
+    margin: 1.75rem auto;
+  }
+  .modal-dialog-scrollable {
+    max-height: calc(100% - 3.5rem);
+  }
+  .modal-dialog-scrollable .modal-content {
+    max-height: calc(100vh - 3.5rem);
+  }
+  .modal-dialog-centered {
+    min-height: calc(100% - 3.5rem);
+  }
+  .modal-dialog-centered::before {
+    height: calc(100vh - 3.5rem);
+    height: -webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+  }
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl {
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 1140px;
+  }
+}
+
+.tooltip {
+  position: absolute;
+  z-index: 1070;
+  display: block;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "No

@@ -1,0 +1,114 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+  }
+  table tbody tr:7569
+ */
+/**
+ * Force overly long spans of text to truncate, e.g.:
+ *
+   `@include truncate(100%);`
+ *
+ * Where `$truncation-boundary` is a united measurement.
+ */
+/**
+ * CSS arrows!!! But... before you read on, you might want to grab a coffee...
+ *
+ * This mixin creates a CSS arrow on a given element. We can have the arrow
+ * appear in one of 12 locations, thus:
+ *
+ *       01    02    03
+ *    +------------------+
+ * 12 |                  | 04
+ *    |                  |
+ * 11 |                  | 05
+ *    |                  |
+ * 10 |                  | 06
+ *    +------------------+
+ *       09    08    07
+ *
+ * You pass this position in along with a desired arrow color and optional
+ * border color, for example:
+ *
+ * `@include arrow(top, left, red)`
+ *
+ * for just a single, red arrow, or:
+ *
+ * `@include arrow(bottom, center, red, black)`
+ *
+ * which will create a red triangle with a black border which sits at the bottom
+ * center of the element. Call the mixin thus:
+ *
+   .foo{
+       background-color:#BADA55;
+       border:1px solid #ACE;
+       @include arrow(top, left, #BADA55, #ACE);
+   }
+ *
+ */
+/**
+ * Media query mixin.
+ *
+ * It’s not great practice to define solid breakpoints up-front, preferring to
+ * modify your design when it need:flex-col{flex-direction:column}.sm\:flex-col-reverse{flex-direction:column-reverse}.sm\:flex-wrap{flex-wrap:wrap}.sm\:flex-wrap-reverse{flex-wrap:wrap-reverse}.sm\:flex-nowrap{flex-wrap:nowrap}.sm\:place-content-center{place-content:center}.sm\:placs it, rather than assuming you’ll want a
+ * change at ‘mobile’. However, as inuit.css is reque-content-start{place-content:start}.sm\:place-content-end{place-content:end}.sm\:place-content-between{place-content:space-between}.sm\:place-content-around{place-content:space-around}.sm\:place-content-evenly{place-content:space-evenly}.sm\:place-content-stretch{place-content:stretch}.sm\:place-items-start{place-items:start}.sm\:place-items-end{place-items:end}.sm\:place-items-center{placeired to take a hands off
+ * approach to design decisions, this is the closest we can get to baked-in
+ * responsiveness. It’s flexible enough to allow you to set your own breakpoints
+ * but solid enough to be frameworkified.
+ *
+ * We define some broad breakpoints in our vars file that are picked up here
+ * for use in a simple media query mixin. Our options are:
+ *
+ * palm
+ * lap
+ * lap-and-up
+ * portable
+ * desk
+ * desk-wide
+ *
+ * Not using a media query will, naturally, serve styles to all devices.
+ *
+ * `@include media-query(palm){ [styles here] }`
+ *
+ * We work out your end points for you:
+ */
+/* normalize.css v2.1.0 | MIT License | git.io/normalize */
+/* =========================================================-items:center}.sm\:place-items-stretch{place-items:stretch}.sm\:content-center{align-content:center}.sm\:content-start{align-content:flex-start}.sm\:content-end{align-content:flex=================
+   HTML5 display definitions
+   ========================================================================== */
+/*
+ * Correct `block` display not defined in IE 8/9.
+ */
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+main,
+nav,
+section,
+summary {
+  display: block; }
+
+/*
+ * Correct `inline-block` display not defined in IE 8/9.
+ */
+audio,
+canvas,
+video {
+  display: inline-block; }
+
+/*
+ * Prevent ansition: all 0.3s;
+  z-index: 1010;
+  left: 50%;
+}
+
+.tooltip:not(.bottom):before, .tooltip:not(.bottom):after {
+  bottom: 75%;
+}
+
+-end}.sm\.tooltip.bottom:before, .tooltip.bottom:afte:content-br {
+  e

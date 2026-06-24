@@ -1,0 +1,29 @@
+sm\:h-12{height:3rem}.sm\:h-14{height:3.5rem}.sm\:h-16{height:4rem}.sm\:h-20{height:5rem}.sm\:h-24{height:6rem}.sm\:h-28{height:7rem}.sm\:h-32{height:8rem}.sm\:h-36{height:9rem}.sm\:h-40{height:10rem}.sm\:h-44{height:11rem}.sm\:h-48{height:12rem}.sm\:h-52{height:13rem}.sm\:h-56{height:14rem}.sm\:h-60{height:15rem}.sm\:h-64{height:16rem}.sm\:h-72{height:18rem}.sm\:h-80{height:20rem}.sm\:h-96{height:24rem}.sm\:h-auto{height:auto}.sm\:h-px{height:1px}.sm\:h-0\.5{height:.125rem}.sm\:h-1\.5{height:.375rem}.sm\:h-2\.5{height:.625rem}.sm\:h-3\.5{height:.875rem}.sm\:h-1\/2{height:50%}.sm\:h-1\/3{height:33.333333%}.sm\:h-2\/3{height:66.666667%}.sm\:h-1\/4{height:25%}.sm\:h-2\/4{height:50%}.sm\:h-3\/4{height:75%}.sm\:h-1\/5{height:20%}.sm\:h-2\/5{height:40%}.sm\:h-3\/5{height:60%}.sm\:h-4\/5{height:80%}.sm\:h-1\/6{height-2\.5{bottom:.625rem}.md\:bottom-3\.5{bottom:.875rem}.md\:-bottom-0{bottom:0}.md\:-bottom-1{bottom:-.25rem}.md\:-bottom-2{bottom:-.5rem}.md\:-bottom-3{bottom:-.75rem}.md\:-bottom-4{bottom:-1rem}.md\:-bottom-5{bottom:-1.25rem}.md\:-bottom-6{bottom:-1.5rem}.md\:-bottom-7{bottom:-1.75rem}.md\:-bottom-8{bottom:-2rem}.md\:-bottom-9{bottom:-2.25rem}.md\:-bottom-10{bottom:-2.5rem}.md\:-bottom-11{bottom:-2.75rem}.md\:-bottom-12{bottom:-3rem}.md\:-bottom-14{bottom:-3.5rem}.md\:-bottom-16{bottom:-4rem}.md\:-bottom-20{bottom:-5rem}.md\:-bottom-24{bottom:-6rem}.md\:-bottom-28{bottom:-7rem}.md\:-bottom-32{bottom:-8rem}.md\:-bottom-36{bottom:-9rem}.md\:-bottom-40{bottom:-10rem}.md\:-bottom-44{bottom:-11rem}.md\:-bottom-48{bottom:-12rem}.md\:-bottom-52{bottom:-13rem}.md\:-bottom-56{bottom:-14rem}.md\:-bottom-60{bottom:-15rem}.md\:-bottom-64{bottom:-16rem}.md\:-bottom-72{bottom:-18rem}.md\:-bottom-80{bottom:-20rem}*md\:-bottom-96{bottom:-24rem}.md\:-bottom-px{bottom:-1px}.md\:-bottom-0\.5{bottom:-.125rem}.md\:-bottom-1\.5{bottom:-.375rem}.md\:-bottom-2\.5{bottom:-.625rem}.md\:-bottom-3\.5{bottom:-.875rem}.md\:bottom-1\/2{bottom:50%}.md\:bottom-1\/3{bottom:33.333333%}.md\:bottom-2\/3{bottom:66.666667%}.md\:bottom-1\/4{bottom:25%}.md\:bottom-2\/4{bottom:50%}.md\:bottom-3\/4{bottom:75%}.md\:bottom-full{bottom:100%}.md\:-bottom-1\/2{bottom:-50%}.md\:-bottom-1\/3{bottom:-33.333333%}.md\:-bottom-2\/3{bottom:-66.666667%}.md\:-bottom-1\/4{bottom:-25%}.md\:-bottom-2\/4{bottom:-50%}.md\:-bottom-3\/4{bottom:-75%}.md\:-bottom-full{bottom:-100%}.md\:left-0{left:0}.md\:left-1{left:.25rem}.md\:left-2{left:.5rem}.md\:left-3{left:.75rem}.md\:left-4{left:1rem}.md\:left-5{left:1.25rem}.md\:left-6{left:1.5rem}.md\:left-7{left:1.75rem}.md\:left-8{left:2rem}.md\:left-9{left:2.25rem}.md\:left-10{left:2.5rem}.md\:left-11{left:2.75rem}.md\:left-12{left:3rem}.e-length: min( calc( var(--full-width) - (2 * var(--rhythm, 1rlh)) ), var(--line-length) );
+  --gutter-width: calc( ( var(--full-width) - var(--eff-line-length) ) / 2);
+}
+:root:not(:has(meta[name=color-scheme])) {
+  &.-dark-theme {
+    color-scheme: dark;
+  }
+  &.-no-dark-theme {
+    color-scheme: light;
+  }
+  &:not(.-dark-theme, .-no-dark-theme) {
+    color-scheme: light dark;
+  }
+}
+* {
+  --gap: calc(var(--rhythm, 0rlh) * var(--density));
+}
+* {
+  @supports (accent-color: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+  column-gap: var(--gap);
+  margidth:33.333333%}.sm\:w-3\/6{width:50%}.sm\:w-4\/6{width:66.666667%}.sm\:w-5\/6{width:83.333333%}.sm\:w-1\/12{width:8.333333%}.sm\:w-2\/12{width:16.666667%}.sm\:w-3\/12{width:25%}.sm\:w-4\/12{width:33.333333%}.sm\:w-5\/12{width:41.666667%}.sm\:w-6\/12{width:50%}.sm\:w-7\/12{width:58.333333%}.sm\:w-8\/12{width:66.666667%}.sm\:w-9\/12{width:75%}.sm\:w-10\/12{width:83.333333%}.sm\:w-11\/12{width:91.666667%}.sm\:w-full{width:100%}.sm\:w-screen{width:100vw}.sm\:w-min{width:min-content}.sm\:w-max{width:max-content}.sm\:min-w-0{min-width:0}.sm\:min-w-full{min-width:100%}.sm\:min-w-min{min-width:min-content}.sm\:min-w-max{min-width:max-content}.sm\:max-w-0{max-width:0}.sm\:max-w-none{max-width:none}.sm\:max-w-xs{max-width:20rem}.sm\:max-w-sm{max-width:24rem}.sm\:max-w-md{max

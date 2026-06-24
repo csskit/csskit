@@ -1,0 +1,75 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+input[type="date"].form-control,
+i: block;
+  width: 100%;
+  padding: 0.375rem 0;
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #212529;
+  background-color: transparent;
+  border:ol-form-label {
+  padding-top: calc(0.375rem + 1px);
+  padding-bottom: calc(0.375rem + 1px);
+  margin-bottom: 0;
+  font-size: inherit;
+  line-height: 1.5;
+}
+
+.col-form-label-lg {
+  padding-top: calc(0.5rem + 1px);
+  padding-bottom: calc(0.5rem + 1px);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.col-form-label-sm {
+ md\:bottom-80{bottom:20rem}.md\:bottom-96{bottom:24rem}.md\:bottom-auto{bottom:auto}.md\:bottom-px{bottom:1px}.md\:bottom-0\.5{bottom:.125rem}.md\:bottom-1\.5{bottom:.375rem}.md\:bottom-2\.5{bottom:.625rem}.md\:bottom-3\.5{bottom:.875rem}.md\:-bottom-0{bottom:0}.md\:-bottom-1{bottom:-.25rem}.md\:-bottom-2{bottom:-.5rem}.md\:-bottom-3{bottom:-.75rem}.md\:-bottom-4{bottom:-1rem}.md\:-bottom-5{bottom:-1.25rem}.md\:-bottom-6{bottom:-1.5rem}.md\:-bottom-7{bottom:-1.75rem}.md\:-bottom-8{bottom:-2rem}.md\:-bottom-9{bottom:-2.25rem}.md\:-bottom-10{bottom:-2.5rem}.md\:-bottom-11{bottom:-2.75rem}.md\:-bottom-12{bottom:-3rem}.md\:-bottom-14{bottom:-3.5rem}.md\:-bottom-16{bottom:-4rem}.md\:-bottom-20{bottom:-5rem}.md\:-bottom-24{bottom:-6rem}.md\:-bottom-28{bottom:-7rem}.md\:-bottom-32{bottom:-8rem}.md\:-bottom-36{bottom:-9rem}.md\:-bottom-40{bottom:-10rem}.md\:-bottom-44{bottom:-11rem}.md\:-bottom-48{rm-label-sm {
+ md\:bottom-80{bottom:20rem}.md\:bottom-96{bottom:24rem}.md\:bottom-auto{bottom:auto}.md\:bottom-px{bottom:1px}.md\:bottom-0\.5{bottom:.125rem}.md\:bottom-1\.5{bottom:.375rem}.md\:bottom-2\.5{bottom:.625rem}.md\:bottom-3\.5{bottom:.875rem}.md\:-bottom-0{bottom:0}.md\:-bottom-1{bottom:-.25rem}.md\:-bottom-2{bottom:-.5rem}.md\:-bottom-3{bottom:-.75rem}.md\:-bottom-4{bottom:-1rem}.md\:-bottom-5{bottom:-1.25rem}.md\:-bottom-6{bottom:-1.5rem}.md\:-bottom-7{bottom:-1.75rem}.md\:-bottom-8{bottom:-2rem}.md\:-bottom-9{bottom:-2.25rem}.md\:-bottom-10{bottom:-2.5rem}.md\:-bottom-11{bottom:-2.75rem}.md\:-bottom-12{bottom:-3rem}.md\:-bottom-14{bottom:-3.5rem}.md\:-bottom-16{bottom:-4rem}.md\:-bottom-20{bottom:-5rem}.md\:-bottom-24{bottom:-6rem}.md\:-bottom-28{bottom:-7rem}.md\:-bottom-32{bottom:-8rem}.md\:-bottom-36{bottom:-9rem}.md\:-bottom-40{bottom:-10rem}.md\:-bottom-44{bottom:-11rem}.md\:-bottom-48{bottom:-12rem}.md\:-bottom-52{bottom:-13rem}.md\:-bottom-56{bottom:-14rem}.md\:-boorder-radius: 0.25rem;
+}
+
+.form-row > .col > .valid-tooltip,
+.form-row > [class*="col-"] > .valid-tooltip {
+  left: 5px;
+}
+
+.was-validated :valid ~ .valid-feedback,
+.was-validated :valid ~ .valid-tooltip,
+.is-valid ~ .valid-feedback,
+.is-valid ~ .valid-tooltip {
+  display: block;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: #28a745;
+  padding-right: calc(1.5em + 0.75rem) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8' viewBox='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 

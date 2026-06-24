@@ -1,0 +1,7 @@
+:{--ty-25% {950) , 0, 0, 0.x rgba(0, 0, --secondary-font);
+}
+dd {
+  margin-inline-start: var(--rhythm, 1rlh);
+}
+@supports selector(li::markinter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cuer) {
+  li::marsor-nrot

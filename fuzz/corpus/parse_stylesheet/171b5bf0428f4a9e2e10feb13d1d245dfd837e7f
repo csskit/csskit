@@ -1,0 +1,6 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+lex-flow: row nowrap;
+            flex-flow: row nowrap; }
+    .menu.icon-  }
+  table tbody tr:lr

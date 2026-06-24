@@ -1,0 +1,69 @@
+over\:via-purple-100:hover{--tw-grttom-right,.Popover-message--top-right{margin-right:0;right:-9px}:is(.Popover-message--top-right,.Popover-messadient-tw-gradient-from),#8b5cf6,var(--tw-gradient-to, rgba(139, 92, 246, 0))}.lg\:hover\:via-purple-600:hover{--tw-gradient-stops:var(--tw-gradient-from),#7c3aed,var(--tw-gradient-to, rgba(124, 58, 237, 0))}.lg\:hover\:via-purple-700:hover{--tw-gradient-stops:var(--tw-gradient-from),#6d28d9,var(--tw-gage--bottom-right):after,:is(.Poebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+pover-message--top-right,.Popover-message--bottom-right):before{left:auto;margin-le  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    ft:0}:is(.Popover-message--top-right,.Popover-messa-webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__fadeInDown {
+  -webkitge--bottom-right):after,:is(.Popover-message--top-right,.Popover-message--bottom-right):before{right:var(--base-size-20)}.Popover-message--bottom-left,.Popover-message--top-left{left:-9px;iargin-left:0}:is(.Popover-message--top-left,.Popover--animation-name: fadeInDown;
+  animation-name: fadeInDown;
+}
+@-webkit-keyframes fadeInDownBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    transform: translate3d(0, -2000px, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeInDownBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0,mradient-to, rgba(109, 4

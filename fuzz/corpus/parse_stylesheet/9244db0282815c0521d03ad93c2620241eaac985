@@ -1,0 +1,54 @@
+ign-items-lg-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-lg-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-lg-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-lg-start {
+    -ms-flex-line-pack: start !important;
+    align-content: flex-start !important;
+  }
+  .align-content-lg-end {
+    -ms-flex-line-pack: end !important;
+    align-content: flex-end !important;
+  }
+  .align-content-lg-center {
+    -ms-flex-line-pack: center !important;
+    align-content: center !important;
+  }
+  .align-content-lg-between {
+    -ms-flex-line-pack: justify !important;
+    align-content: space-between !important;
+  }
+  .align-content-lg-around {
+    -ms-flex-line-pack: distribute !important;
+    align-content: space-around !important;
+  }
+  .align-content-lg-stretch {
+    -ms-flex-line-pack: stretch !important;
+    align-content: stretch !important;
+  }
+  .align-self-lg-auto {
+    -ms-flex-item-align: auto !important;
+    align-self: auto !important;
+  }
+  .align-self-lg-start {
+    -ms-flex-item-align: start !important;
+    align-self: flex-start !important;
+  }
+  .align-self-lg-end {
+    -ms-flex-item-align: end !important;
+    align-\:focus\:ring-offset-purple-500:focus{--tw-ring-offset-color:#8b5cf6}.xl\:focus\:ring-offset-purple-600:focus{--tw-ring-offset-color:#7c3aed}.xl\:focus\:ring-offset-purple-700:focus{--tw-ring-offset-color:#6d28d9}.xl\:focus\:ring-offset-purple-800:focus{--tw-ring-offset-color:#5b21b6}.xl\:focus\:ring-offset-purple-900:focus{--tw-ring-offset-color:#4c1d95}.xl\:focus\:ring-offset-pink-50:focus{--tw-ring-offset-color:#fdf2f8}.xl\:focus\:ring-offset-pink-100:focus{--tw-ring-offset-color:#fce7f3}.xl\:focus\:ring-offset-pink-200:focus{--tw-ring-offset-color:#fbcfe8}.xl\:focus\:ring-offset-pink-300:focus{--tw-ring-offset-color:#f9a8d4}.xl\:focus\:ring-offset-pink-400:focus{--tw-ring-offset-color:#f472b6}.xl\:focus\:ring-offset-pink-500:focus{--tw-75rem}.rounded-lg{border-radius:.5rem}.rounded-xl{border-radius:.75rem}.rounded-2xl{border-radius:1rem}.rounded-3xl{border-radius:1.5rem}.rounded-full{border-radius:9999px}.rounded-t-none{border-top-left-radius:0;border-top-right-radius:0}.rounded-t-sm{border-top-left-radius:.125rem;border-top-right-radius:.125rem}.rounded-t{border-top-left-radius:.25rem;border-top-right-radius:.25rem}.rounded-t-md{border-top-left-radius:.375rem;border-top-right-radius:.375rem}.rounded-t-lg{border-top-left-radius:.5rem;border-top-right-radius:.5rem}.rounded-t-xl{border-top-left-radius:.75rem;border-top-right-radius:.75rem}.rounded-t-2xl{border-top-left-radius:1rem;border-top-right-radius:1rem}.rounded-t-3xl{border-top-left-radius:1.5rem;border-top-right-radius:1.5rem}.rounded-t-full{border-top-left-radius:9999px;border-top-right-radius:9999px}.rounded-r-none{border-top-right-radius:0;border-bottom-right-radius:0}.rounded-r-sm{border-top-right-radius:.125rem;border-bottom-right-radius:.125rem}.rounded-r{border-top-right-radius:.25rem;border-bottom-right-radius:.25rem}.rounded-r-md{border-top-right-radius:.375rem;border-bottom-right-rad:brightness-150{--tw-brightness:brightness(1.5)}.xl\:brightness-200{--tw-brightness:brightness(2)}.xl\:contrast-0{--tw-contrast:contrast(0)}.xl\:contrast-50{--tw-contrast:contratems: baseline !important;
+  }
+  .align-items-xl-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-xl-start {
+    -ms-flex-line-pack: st

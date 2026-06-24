@@ -1,0 +1,181 @@
+0;
+}
+.margin-block-start:not([specificity-hack]) {
+  margin-block-start: var(--gap);
+}
+.margin-block-start\:auto:not([specificity-hack]) {
+  margin-block-start: auto;
+}
+.margo;
+}
+.margin-end\:0:not([specificity-hack]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:notft {
+  float: left;
+}
+.float\:right {
+  float: right;
+}
+.overflow\:auto {
+  overflow: auto;
+}
+.overflow\:scroll {
+  overflow: scroll;
+}
+.overflow-x\:scroll {
+  overflow-x: scroll;
+}
+.overflow-y\:scroll {
+  overflow-y: scroll;
+}
+.overflow\:clip {
+  overflow: clip;
+}
+.overflow-x\:clip {
+  overflow-x: clip;
+}
+.overflow-y\:clip {
+  overflow-y: clip;
+}
+@media print {
+  :root {
+    --bg: transparent;
+    --fg: black;
+    color-scheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+  main,
+  .container {
+    max-inline-size: unset;
+    width: auto;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  table,
+  tr,
+  th,
+  td,
+  blockquote,
+  pre,
+  code,
+  ol,
+  li,
+  dt,
+  dd,
+  .box,
+  dialog,
+  details,
+  verflow-x\:clip {
+  overflow-x: clip;
+}
+.overflow-y\:clip {
+  overflow-y: clip;
+}
+@media print {
+  :root {
+    --bg: transparent;
+    --fg: black;
+    color-scheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+  main,
+  .container {
+    max-inline-size: unset;
+    width: auto;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  table,
+  tr,
+  th,
+  td,
+  blockquote,
+  pre,
+  cosummary,
+  img,
+  figure,
+  figcaption,
+  video,
+  audio,
+  object,
+  embed,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  select,
+  button,
+  header,
+  footer,
+  nav,
+  aside,
+  search,
+  section {
+    break-inside: avoid-page;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid-page;
+  }
+  p {
+    orphans: 2;
+    widows: 2;
+  }
+  a:not([href^="#"]):not(:has(> *))::after {
+    content: " (" attr(href) ")";
+    font-size: 80%;
+  }
+  abbr[title]::after {
+    content: " (" attr(title) ")";
+  }
+  @supports selector(::details-content) {
+    details::details-content {
+      content-visibility: visible;
+    }
+  }
+}
+
+/* src/utils.css */
+.airy {
+  --density: 3;
+}
+.spacious {
+  --density: 2;
+}
+.dense {
+  --density: 1;
+}
+.crowded {
+  --density: .5;
+}
+.packed {
+  --density: 0;
+}
+.airy-inside > * {
+  --

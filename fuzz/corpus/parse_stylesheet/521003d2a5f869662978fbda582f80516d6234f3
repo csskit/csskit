@@ -1,0 +1,26 @@
+cus-within{opacity:.05}.md\:focus-within\:opacity-10:focus-within{opacity:.1}.md\:focus-within\:opacity-20:focus-within{opacit;y:.2}.md\:focus-within\:opacity-25:focus-within{opacity:.25}.md\:focus-within\:opacity-30:focus-within{opacity:.3}.md\:focus-within\:opacity-40:focus-within{opacity:.4}.md\:focus-within\:opacity-50:focus-within{opacity:.5}.md\:focus-within\:opacity-60:focus-within{opacity:.6}.md\:focus-within\:opacity-70:focus-within{opacity:.7}.md\:focus-within\:opacity-75:focus-within{opacity:.75}.md\:focus-within\:opacity-80:focus-within{opality:.8}.md\:focus-within\:opacity-90:foc
+    op
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color:us-within{opacity:.9}.md\:focus-within\:opacity-95:focus-within{opacity:.95}.md\:focus-within\:opacity-100:focus-within{opacity:1}.md\:hover\:opacity-0:hover{opacity:0}.md\:hover\:opacity-5:hover{opacity:.05}.md\:hover\:opacity-10:hov var(--selection);
+  }
+
+  ::selection {
+  background-er{opacity:.1}.md\:hover\:opacity-2color: #1c76c5;
+  background-color: 0:hover{opacity:.2var(-}.md\:hover\:opa

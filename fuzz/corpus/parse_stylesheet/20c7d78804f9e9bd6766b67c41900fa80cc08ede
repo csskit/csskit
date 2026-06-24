@@ -1,0 +1,95 @@
+ign-items-lg-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-lg-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-lg-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-lg-start {
+    -ms-flex-line-pack: start !important;
+    align-content: flex-start !important;
+  }
+  .align-content-lg-end {
+    -ms-flex-line-pack: end !important;
+    align-content: flex-end !important;
+  }
+  .align-content-lg-center {
+    -ms-flex-line-pack: center !important;
+    align-content: center !important;
+  }
+  .align-content-lg-between {
+    -ms-flex-line-pack: justify !important;
+    align-content: space-between !important;
+  }
+  .align-content-lg-around {
+    -ms-flex-line-pack: distribute !important;
+    align-content: space-around !important;
+  }
+  .align-content-lg-stretch {
+    -ms-flex-line-pack: stretch !important;
+    align-content: stretch !important;
+  }
+  .align-self-lg-auto {
+    -ms-flex-item-align: auto !important;
+    align-self: auto !important;
+  }
+  .align-self-lg-start {
+    -ms-flex-item-align: start !important;
+    align-self: flex-start !important;
+  }
+  .align-self-lg-end {
+    -ms-flex-item-align: end !important;
+    align-self: flex-end !important;
+  }
+  .align-self-lg-center {
+    -ms-flex-item-align: center !important;
+    align-self: center !important;
+  }
+  .align-self-lg-baseline {
+    -ms-flex-item-align: baseline !important;
+    align24{padding-bottom:6rem}.\32xl\:pb-28{padding-bottom:7rem}.\32xl\:pb-32{padding-bottom:8rem}.\32xl\:pb-36{padding-bottom:9rem}.\32xl\:pb-40{padding-bottom:10rem}.\32xl\:pb-44{padding-bottom:11rem}.\32xl\:pb-48{padding-bottom:12rem}.\32xl\:pb-52t: center !important;
+  }
+  .align-content-lg-between {
+    -ms-flex-line-pack: justify !important;
+    align-content: space-between !important;
+  }
+  .align-content-lg-around {
+    -ms-flex-line-pack: distribute !important;
+    align-content: space-around !important;
+  }
+  .align-content-lg-stretch {
+    -ms-flex-line-pack: stretch !important;
+    align-content: stretch !important;
+  }
+  .align-self-lg-auto {
+    -ms-flex-item-align: auto !important;
+    align-self: auto !important;
+  }
+  .align-self-lg-start {
+    -ms-flex-item-align: start !important;
+    align-self: flex-start !important;
+  }
+  .align-self-lg-end {
+    -ms-flex-item-align: end !important;
+    align-self: flex-end !important;
+  }
+  .align-self-lg-center {
+    -ms-flex-item-align: center !important;
+    align-self: center !important;
+  }
+  .align-self-lg-baseline {
+    -ms-flex-item-align: baseline !important;
+    align24{padding-bottom:6rem}.\32xl\:pb-28{padding-bottom:7rem}.\32xl\:pb-32{padding-bottom:8rem}.\32xl\:pb-36{padding-bottom:9rem}.\32xl\:pb-40{padding-bottom:10rem}.\32xl\:pb-44{padding-bottom:11rem}.\32xl\:pb-48{padding-bottom:12rem}.\32xl\:pb-52{padding-bottom:13rem}.\32xl\:pb-56{padding-bottom:14rem}.\32xl\:pb-60{padding-bottom:15rem}.\32xl\:pb-64{padding-bottom:16rem}.\32xl\:pb-72{padding-bottom:18rem}.\32xl\:pb-80{padding-bottom:20rem}.\32xl\:pb-96{padding-bottom:24rem}.\32xl\:pb-px{padding-bottom:1px}.\32xl\:pb-0\.5{padding-bottom:.125.m\}3re2xl\:pb-1\.5{padding-bottom:.375rem}.\32xl\:pb-2\.5{padding-bottom:.625rem}.\32xl\:pb-3\.5{padding-bottom:.875rem}.\32xl\:pl-0{padding-left:0}.\32xl\:pl-1{padding-left:.25rem}.\32xl\:pl-2{padding-left:.5rem}.\32xl\:pl-3{padding-left:.75rem}.\32xl\:pl-4{padding-left:1rem}.\32xl\:pl-5{padding-left:1.25rem}.\32xl\:pl-6{padding-left:1.5rem}.\32xl\:pl-7{padding-left:1.75rem}.\32xl\:pl-8{padding-left:2rem}.\32xl\:pl-9{padding-left:2.25rem}.\32xl\:pl-10{padding-left:2.5rem}.\32xl\:pl-11{paddine-lgft:2.75rem}.\32xl\:pl-12{padding-left:3rem}.\32xl\:pl-14{padding-left:3.5rem}.\32xl\:pl-16{padding-left:4rem}.\32xl\:pl-20{padding-left:5reign: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-xl-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-xl-start {
+    -ms-flex-line-pack: st

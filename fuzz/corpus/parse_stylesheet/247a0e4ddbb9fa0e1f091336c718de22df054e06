@@ -1,0 +1,81 @@
+controlTrack-bgColor-rest: #e6eaef;--controlTrack-bgColor-hover: #e0e6eb;--controlTrack-bgColor-active: #dae0e7;--controlTrack-bgColor-disabled: #818b98;--controlTrack-fgColor-rest: #59636e;--controlTrack-fgColor-disabled: #ffffff;--controlTrack-borderColor-rest: #d1d9e0;--controlTrack-borderColor-disabled: #818b98;--controlKnob-bgColor-rest: #ffffff;--controlKnob-bgColor-disabled: #eff2f5;--controlKnob-bgColor-checked: #ffffff;--controlKnob-borderColor-rest: #818b98;--controlKnob-borderColor-disabled: #eff2f5;--controlKnob-borderColor-checked: #0969da;--counter-borderColor: #ffffff00;--counter-bgColor-muted: #818b981f;--counter-bgColor-emphasis: #59636e;--button-default-fgColor-rest: #25292e;--button-default-bgColor-rest: #f6f8fa;--button-default-bgColor-hover: #eff2f5;--button-default-bgColor-active: #e6eaef;--button-default-bgColor-selected: #e6eaef;--button-default-bgColor-disabled: #eff2f5;--button-default-borderColor-rest: #d1d9e0;--button-default-borderColor-hover: #d1d9e0;--button-default-borderColor-active: #d1d9e0;--button-default-borderColor-disabled: #818b981a;--button-default-shadow-resting: 0px 1px 0px 0px #1f23280a;--button-primary-fgColor-rest: #ffffff;--button-primary-fgColor-disabled: #ffffffcc;--button-primary-iconColor-rest: #ffffffcc;--button-primary-bgColor-rest: #1f883d;--button-primary-bgColor-hover: #1c8139;--button-primary-bgColor-active: #197935;--button-primary-bgColor-disabled: #95d8a6;--button-primary-borderColor-rest: #1f232826;--button-primary-borderColor-hover: #1f232826;--button-primary-borderColor-active: #1f232826;--button-primary-borderColor-disabled: #95d8a6;--button-primary-shadow-selected: inset 0px 1px 0px 0px #002d114d;--button-invisible-fgColor-rest: #25292e;--button-invisible-fgColor-hover: #25292e;--button-invisible-fgColor-disabled: #818b98;--button-invisible-iconColor-rest: #59636e;--button-invisible-iconColor-hover: #rd-title {
+  margin-bottom: 0.75rem;
+}
+
+.card-subtitle {
+  margin-top: -0.375rem;
+  margin-bottom: 0;
+}
+
+.card-text:last-child {
+  margin-bottom: 0;
+}
+
+.card-link:hover {
+  text-decoration: none;
+}
+
+.card-link + .card-link {
+  margin-left: 1.25rem;
+}
+
+.card-header {
+  padding: 0.75rem 1.25rem;
+  margin-bottom: 0;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-header:first-child {
+  border-radius: calc(0.25rem - 1px) calc(0.25rem - 1px) 0 0;
+}
+
+.card-footer {
+  padding: 0.75rem 1.25rem;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-top: 1px solid rgba(0, 0, 0, 0.125);
+}
+
+.card-footer:last-child {
+  border-radius: 0 0 calc(0.25rem - 1px) calc(0.25rem - 1px);
+}
+
+.card-header-tabs {
+  margin-right: -0.625rem;
+  margin-bottom: -0.75rem;
+  margin-left: -0.625rem;
+  border-bottom: 0;
+}
+
+.card-header-pills {
+  margin-right: -0.625rem;
+  margin-left: -0.625rem;
+}
+
+.card-img-overlay {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  padding: 1.25rem;
+  border-radius: calc(0.25rem - 1px);
+}
+
+.card-img,
+.card-img-top,
+.card-img-bottom {
+  -ms-flex-negative: 0;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+.card-img,
+.card-img-top {
+  border-top-left-radius: calc(0.25rem - 1px);
+  border-top-right-radius: calc(0.25rem - 1px);
+}
+
+.card-img,
+.card-img-bottom {
+  border-bottom-right-radius: calc(0.25rrColor-active: #1f232826;--button-danger-shadow-selected: inset 0px 1px 0px 0px #4c001433;--button-inactive-fgColor: #59636e;--button-inactive-bgColor: #e6eaef;--button-star-iconColor: #eac54f;--buttonCounter-default-bgColor-rest: #818b981f;--buttonCounter-invisible-bgColor-rest: #818b981f;--buttonCounter-primary-bgColor-rest: #002d1133;--buttonCounter-outline-bgColor-rest: #0969da1a;--buttonCounter-outline-bgColor-hover: #ffffff33;--buttonCounter-outline-bgColor-disabled: #0969da0d;--buttonCounter-outline-fgColor-rest: #0550ae;--buttonCounter-outline-fgColor-hover: #ffffff;--buttonCounter-outline-fgColor-disabled: #0969da80;--buttonCounter-danger-bgColor-hover: #ffffff33;--buttonCounter-danger-bgColor-disabled: #cf222e0d;--buttonCounter-danger-bgColor-rest: #cf222e1a;--buttonCounter-danger-fgColor-rest: #c21c2c;--

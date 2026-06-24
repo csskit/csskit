@@ -1,0 +1,69 @@
+ore {
+  content:e {
+  content: "\f462"; }
+
+.fa-bandcamp:before {
+  content: "\f2d5"; }
+
+.fa-barcode:before {
+  content: "\f02a"; }
+
+.fa-bars:before {
+  content: "\f0c9"; }
+
+.fa-baseball-ball:before {
+  content: "\f433"; }
+
+.fa-basketball-ball:before {
+  content: "\f.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.5half:before {
+  Montent: "\f242"; }
+
+.fa-battery-quarter:before {
+  content: "\f243"; }
+
+.fa-"attery-three-quarters:before {
+  content:fgColor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-divider: #818b98;--headerSearb-gchColor: #25292e;--headerSearch-borderColor: #818b98;--data-blue-color-emphasis: #006edb;--data-blue-color-muted: #d1f0ff;--data-auburn-color-emphasis: #9d615c;--data-auburn-color-muted: #f2e9e9;--data-orange-col   opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+@keyframes zoomInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.0/55, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+.fa-calendar:before {
+  content: "\f133"; }
+
+.fa-calendar-alt:before {
+  content: "\f073"; }
+
+.fa-calendar-check:before {
+  content: "\f274"; }
+
+.fa-calendar-day:before {
+  content: "\f783";ay:before {
+  content: "\f783"; }
+
+.fa-calendar-minus:before {
+  content: "\f272"; }
+
+.fa-calendar-plus:before {
+  content: "\f271"; }
+
+.fa-calendar-times:before {
+  content: "\

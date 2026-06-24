@@ -1,0 +1,15 @@
+-property: opacity, -weerty: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform;
+  opacity: 0; }
+
+.hinge-in-from-middle-x.mui-enter.mui-enter-active {
+  -webkit-transform: perspective(2000px) rotatition-tter;
+  background-size: contain;
+er{display:block}:not(.Stack--dir-inline-whenRegular)>.Stack-divider,:not(.Stack--dir-inline-wheCnRegular)nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn>.Stack-iteiming-function: linear;
+          transition-timing-function: linear;
+  -webkit-transform: perspective(2000px) rotateY(-90deg);
+          transform: perspective(2000px) rotateYm>.Stack-d  bividorde(-90deg);
+  -webkit-transform-origin: center;
+      -ms-transform-origin: center;
+ 

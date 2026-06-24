@@ -1,0 +1,217 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.border-block-end {
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-inline\:none {
+  border-inline: none;
+}
+.border-inline {
+  border-tent: "\f0fe"; }
+
+.fa-podcast:before {
+  content: "\f2ce"; }
+
+.fa-poll:before {
+  content: "\f681"; }
+
+.fa-poll-h:before {
+  content: "\f682"; }
+
+.fa-poo:before {
+  content: "\f2fe"; }
+
+.fa-poo-storm:before {
+  content: "\f75a"; }
+
+.fa-poop:before {
+  content: "\f619"; }
+
+.fa-portrait:before {
+  content: "\f3e0"; }
+
+.fa-pound-sign:before {
+  content: "\f154"; }
+
+.fa-power-off:before {
+  content: "\f011"; }
+
+.fa-pray:before {
+  content: "\f683"; }
+
+.fa-praying-hands:before {
+  content: "\f684"; }
+
+.fa-prescription:before {
+  content: "\f5b1"; }
+
+.fa-prescription-bottle:before {
+  content: "\f485"; }
+
+.fa-prescription-bottle-alt:before {
+  content: "\f486"; }
+
+.fa-print:before {
+  content: "\f02f"; }
+
+.fa-procedures:before {
+  content: "\f487"; }
+
+.fa-product-hunt:before {
+  content: "\f288"; }
+
+.fa-project-diagram:before {
+  content: "\f542"; }
+
+.fa-pump-medical:before {
+  content: "\e06a"; }
+
+.fa-pump-soap:before {
+  content: "\e06b"; }
+
+.fa-pushed:before {
+  content: "\f3e1"; }
+
+.fa-puzzle-piece:before {
+  content: "\f12e"; }
+
+.fa-python:before {
+  content: "\f3e2"; }
+
+.fa-qq:before {
+  content: "\f1d6"; }
+
+.fa-qrcode:before {
+  content: "\f029" content: "\f079"; }
+
+.fa-rev:before {
+  content: "\f5b2"; }
+
+.fa-ribbon:before {
+  content: "\f4d6"; }
+
+.fa-ring:before {
+  content: "\f70b"; }
+
+.fa-road:before {
+  content: "\f018"; }
+
+.fa-robot:before {
+  content: "\f544"; }
+
+.fa-rocket:before {
+  content: "\f135"; }
+
+.fa-rocketchat:before {
+  content: "\f3e8"; }
+
+.fa-rockrms:before {
+  content: "\f3e9"; }
+
+.fa-route:before {
+  content: "\f4d7"; }
+
+.fa-rss:before {
+  content: "\f09e"; }
+
+.fa-rss-square:before {
+  content: "\f143"; }
+
+.fa-ruble-sign:before {
+  content: "\f158"; }
+
+.fa-ruler:before {
+  content: "\f545"; }
+
+.fa-ruler-combined:before {
+  content: "\f546"; }
+
+.fa-ruler-horizontal:before {
+  content: "\f547"; }
+
+.fa-ruler-vertical:before {
+  content: "\f548"; }
+
+.fa-running:before {
+  content: "\f70c"; }
+
+.fa-rupee-sign:before {
+  content: "\f156"; }
+
+.fa-rust:before {
+  content: "\e07a"; }
+
+.fa-sad-cry:before {
+  content: "\f5b3"; }
+
+.fa-sad-tear:before {
+  content: "\f5b4"; }
+
+.fa-safari:before {
+  content: "\f267"; }
+
+.fa-salesforce:before {
+  content: "\f83b"; }
+
+.fa-sass:before {
+  content: "\f41e"; }
+
+.fa-satellite:before {
+  content: "\f7bf
+  }
+  [data-rows\@l="2"] {
+    grid-row: 2;
+  }
+  [data-rows\@l^="3 "] {
+    grid-row-start: 3;
+  }
+  [data-rows\@l$=" 3"] {
+    grid-row-end: 4;
+  }
+  [data-rows\@l="3"] {
+    grid-row: 3;
+  }
+  [data-rows\@l^="4 "] {
+    grid-row-start: 4;
+  }
+  [data-rows\@l$=" 4"] {
+    grid-row-end: 5;
+  }
+  [data-rows\@l="4"] {
+    grid-row: 4;
+  }
+  [data-rows\@l^="5 "] {
+    grid-rle: var(--border-style, solid);
+  --interactive-border-radius: .2rem;
+  --chip-border-width: var(--border-width, 1px);
+  --chip-border-style: var(--border-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  e-length: 40rem;
+  --border-width: unset;
+  --border-block-start-width: var(--border-width, 1px);
+  --border-block-end-width: var(--border-width, 1px);
+  --border-inline-start-width: var(--border-width, 1px);
+  --border-inline-end-width: var(--border-widt-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

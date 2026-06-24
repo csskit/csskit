@@ -1,0 +1,193 @@
+ore {
+  content:e {
+  content: "\f462"; }
+
+.fa-bandcamp:before {
+  content: "\f2d5"; }
+
+.fa-barcode:before {
+  content: "\f02a"; }
+
+.fa-bars:before {
+  content: "\f0c9"; }
+
+.fa-baseball-ball:before {
+  content: "\f433"; }
+
+.fa-basketball-ball:before {
+  content: "\f434"; }
+
+.fa-bath:before {
+  content: "\f2cd"; }
+
+.fa-battery-empty:before {
+  content: "\f244"; }
+
+.fa-battery-full:before {
+  content: "\f240"; }
+
+.fa-battery-half:before {
+  content: "\f242"; }
+
+.fa-battery-quarter:before {
+  content: "\f243"; }
+
+.fa-battery-three-quarters:before {
+  content:fgColor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-divider: #818b98;--headerSearch-bgColor: #25292e;--headerSearch-borderColor: #818b98;--data-blue-color-emphasis: #006edb;--data-blue-color-muted: #d1f0ff;--data-auburn-color-emphasis: #9d615c;--data-auburn-color-muted: #f2e9e9;--data-orange-col   opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+@keyframes zoomInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    transform: scale3d(0.1, 0.1, 0.1) translate3d(0, 1000px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+    animation-timing-function: cubic-bezier(0.55, 0.055, 0.675, 0.19);
+  }
+
+  60% {
+    opacity: 1;
+    -webkit-transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    transform: scale3d(0.475, 0.475, 0.475) translate3d(0, -60px, 0);
+    -webkit-animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+    animation-timing-function: cubic-bezier(0.175, 0.885, 0.32, 1);
+  }
+}
+.animate__zoomInUp {
+  -webkit-animation-name: zoomInUp;
+  animation-name: zoomInUp;
+}
+/* Zooming exits */
+@-webkit-keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+@keyframes zoomOut {
+  from {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+    -webkit-transfe {
+  content: "\f466"; }
+
+.fa-box-open:before {
+  content: "\f49e"; }
+
+.fa-box-tissue:before {
+  content: "\e05b"; }
+
+.fa-boxes:before {
+  content: "\f468"; }
+
+.fa-braille:before {
+  content: "\f2a1"; }
+
+.fa-brain:before {
+  content: "\f5dc"; }
+
+.fa-bread-slice:before {
+  content: "\f7ec"; }
+
+.fa-briefcase:before {
+  content: "\f0b1"; }
+
+.fa-briefcase-medical:before {
+  content: "\f469"; }
+
+.fa-broadcast-tower:before {
+  content: "\f519"; }
+
+.fa-broom:before {
+  content: "\f51a"; }
+
+.fa-brush:before {
+  content: "\f55d"; }
+
+.fa-btc:before {
+  content: "\f15a"; }
+
+.fa-buffer:before {
+  content: "\f837"; }
+
+.fa-bug:before {
+  content: "\f188"; }
+
+.fa-building:before {
+  content: "\f1ad"; }
+
+.fa-bullhorn:before {
+  content: "\f0a1"; }
+
+.fa-bullseye:before {
+  content: "\f140"; }
+
+.fa-burn:before {
+  content: "\f46a"; }
+
+.fa-buromobelexperte:before {
+  content: "\f37f"; }
+
+.fa-bus:before {
+  content: "\f207"; }
+
+.fa-bus-alt:before {
+  content: "\f55e"; }
+
+.fa-business-time:before {
+  content: "\f64a"; }
+
+.fa-buy-n-large:before {
+  content: "\f8a6"; }
+
+.fa-buysellads:before {
+  content: "\f20d"; }
+
+.fa-calculator:before {
+  content: "\f1ec"; }
+
+.fa-calendar:before {
+  content: "\f133"; }
+
+.fa-calendar-alt:before {
+  content: "\f073"; }
+
+.fa-calendar-check:before {
+  content: "\f274"; }
+
+.fa-calendar-day:before {
+  content: "\f783";ay:before {
+  content: "\f783"; }
+
+.fa-calendar-minus:before {
+  content: "\f272"; }
+
+.fa-calendar-plus:before {
+  content: "\f271"; }
+
+.fa-calendar-times:before {
+  content: "\

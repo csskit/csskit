@@ -1,0 +1,3 @@
+:bg-clip-border{background-clip:border-box}.xl\:bg-clip-padding{background-clip:padding-box}.xl\:bg-clip-content{background-clip:content-box}.xl\:bg-clip-text{-webkit-background-clip:text;background/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;b-clip:text}.xl\:bg-bottom{background-position:bottom}.xl\:bg-center{background-position:center}.xl\:bg-left{ox-sizbackground-poing

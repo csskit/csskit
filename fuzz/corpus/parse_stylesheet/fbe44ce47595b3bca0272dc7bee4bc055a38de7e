@@ -1,0 +1,35 @@
+igin-border{background-origin:border-box}.bg-origin-padding{background-origin:padding-box}.bg-origin-content{background-origin:content-box}.fill-current{fill:currentColor}.stroke-current{stroke:currentColor}.stroke-0{stroke-width:0}.stroke-1{stroke-width:1}.stroke-2{st
+    op
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  backgroroke-width:2}.object-contain{object-fit:contain}.object-cover{object-fit:cover}.object-fill{object-fit:fill}.object-none{object-fit:none}.object-scale-down{object-fit:scale-down}.object-bottom{object-position:bottom}.object-center{object-position:center}.object-left{object-position:left}.object-left-bottom{object-position:left bottom}.object-left-top{objund-color: var(--selectio  }n;
+)
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+ ect-position:left top}.object-right{object-position:right}.object-right-bottom{object- align-items:positi flex-start;
+  background-color: #f7f7f7;
+on:right  backg bottom}.ro

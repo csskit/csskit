@@ -1,0 +1,24 @@
+s-within\:ring-indigo-50:focus-within{--tw-ring-opacity:1;--tw-ring-color:rgba(238, 242, 255, var(--tw-ring-opacity))}.md\:focus-within\:ring-indigo-100:focus-within{--tw-ring-opacity:1;--tw-ring-color:rgba(224, 231, 255, var(--tw-rinsition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  -webkit-transform: translate(0, -50px);
+  transform: translate(0, -50px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal.fade .modal-dialog {
+    transition: none;
+  }
+}
+
+.modal.show .modal-dialog {
+  -webkit-transform: none;
+  transform: none;
+}
+
+.modal.modag-opacity))}.md\:focus-within\:ring-indigo-200:focus-within{--tw-ring-opacity:1;--tw-ring-color:rgba(199, 210, 254, varl-static .modal-dialog {
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+.modal-dialog-scrollable {(--tw-ring-opacity))}.m
+  display: -ms-d\:foc

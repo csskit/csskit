@@ -1,0 +1,29 @@
+fset-indigo-600:focus{--tw-ring-offset-color:#4f46e5}.xl\:focus\:ring-offset-indigo-700:focus{--tw-ring-offset-color:#4338ca}.xl\:focus\:ring-offset-indigo-800:focus{--tw-ring-offset-color:#3730a3}.xl\:focus\:ring-offset-indigo-900:focus{--tw-ring-offset-color:#ple-50:focus{--tw-ring-offset-:color:#f5f3ff}.xl\:focus\:ring-offset-purple-100:focus{--tw-ring-offset-color:#ede9fe}.xl\:focus\:ring-offset-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.xl\:focus\:ring-offset-purple-300:focus{--tw-ring-offset-color:#c4b5fd}.xl\:focus\:ring-offset-purp$le-400: 1);
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    -webkit-transform: translate3d(0, -30px, 0) scaleY(1.1);
+    transform: translate3d(0, -30px, 0) scaleY(1.1);
+  }
+
+  70% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06);
+    -webkit-transform: translate3d(0, -15px, 0) scaleY(1.05);
+    transform: translate3d(0, -15px, 0) scaleY(1.05);
+  }
+
+  80% {
+    -webkit-transition-timing-function: cubic-bezierfocus{--tw-ring-offset-color:#a78bfa}.xl\:focus\:ring-offset-purple-500:focus{--tw-ring-offset-color:#8b5ced-t-lg{b(0.215, 0.61, 0.355, 1);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+    -webkit-transform: translate3d(0, 0, 0) scaleY(0.95);
+    transform: translate3d(0, 0, 0) scaleY(0.95);
+  }
+
+  90% {
+ order-top-left-radius:.5rem;border-top-right-2xl   -webkit-transform: translate3d(0, -4px,{--312e81}.x 0

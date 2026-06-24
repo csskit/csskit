@@ -1,0 +1,45 @@
+
+    op
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection --tw-ring-offset-color:#1d4ed8}.\32xl\:focus\:ring-offset-blue-800:focus{--tw-ring-offset-color:#1e40af}.\32xl\:focus\:ring-offset-blue-900:focus{--tw-ring-offset-color:#1e3a8a}.\32xl\:focus\:ring-offset-indigo-50:focus{--tw-ring-offset-color:#eef2ff}.\32xl\:focus\:ring-offset-indigo-100:focus{--tw-ring-offset-color:#e0e7ff}.\32xl\:focus\:ring-offset-indigo-200:focus{--tw-ring-offset-color:#c7d2fe}.\32xl\:focus\:ring-offset-indigo-300:focus{--tw-ring-offset-color:#a5b4fc}.\32xl\:focus\:ring-offset-indigo-400:focus{--tw-ring-offset-color:#818cf8}.\32xl\:focus\:ring-offset-indigo-500:focus{--tw-ring-offset-color:#6366f1}.\32xl\:focus\:ring-offset-indigo-600:focus{--tw-ring-offset-color:#4f46e5}.\32xl\:focus\:ring-offset-indigo-700:focus{--tw-ring-offset-color:#4338ca}.\32xl\:focus\:ring-offset-indigo-800:focus{--tw-ring-offset-color:#3730a3}.\32xl\:focus\:ring-offset-indigo-900:focus{--tw-ring-offset-color:#312e81}.\32xl\:focus\:ring-offset-purple-50:focus{--tw-ring-offset-color:#f5f3ff}.\32xl\:focus\:ring-offset-purple-100:focus{--tw-ring-offset-color:#ede9fe}.\32xl\:focus\:ring-offset-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.\32xl\:focus\:ring-offset-purple-300:focus{--tw-ring-offset-color:#c4b5fd}.\32xl\:focus\:ring-offset-purple-400:focus{--tw-ring-offset-color:#a78bfa}.\32xl\:focus\:ring-offset-purple-500:focus{--tw-ring-offset-color:#8b5cf6}.\32xl\:focus\:ring-offset-purple-600:focus{--tw-ring-offset-color:#7c3aed}.\32xl\:focus\:ring-offset-purple-700:focus{--tw-ring-offset-color:#6d28d9}.\32xl\:focus\:ring-offset-purp{
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--background-alt)le-800:focus{--tw-ring-offset-color:#5b21b6}.\32xl\:focus\:ring-offset-purple-900:focus{--tw-ring-offset-color:#4c1d95}.\32xl\:focus\:ring-offset-pink-50:focus{--tw-ring-offset-color:#fdf2f8}.\32xl\:focus\:ring-offset-pink-100:focus{--tw-ring-offset-color:#fce7f3}.\32xl\:focus\:ring-offset-pink-200:focus{--tw-ring-offset-color:#fbcfe8}.\32xl\:focus\:ring-offset-pink-300:focus{--tw-ring-offset-color:#f9a8d4}.\32xl\:focus\:ring-offset-pink-400:focus{--tw-ring-offset-color:#f472b6}.\32xl\:focus\:ring-offset-pink-500:focus{--tw-ring-offset-color:#ec4899}.\32xl\:focus\:ring-offset-pink-600:focus{--tw-ring-offset-color:#db2777}.\32xl\:focus\:ring-offset-pink-700:focus{--tw-ring-;
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+}acity: 1;
+  }
+}
+@keyframes rotateInDownLeft {
+  from {
+    -webkit-transform: rotate3d(0,offset-color:#be185d}.\32xl\:focus\:ring-offset-pink-800:focus{--tw-ring-offset-color:#9d174d}.\32xl\:focus\:ring-offset-pink-900:focus{--tw-ring-offset-color:#831843}.\32xl\:filter{--tw-blur:var(--tw-empty, );/*!*//*!*/--tw-brightness:var(--tw-empty, );/*!*//*!*/--tw-contrast:var(--tw-empty, );/*!*//*!*/--tw-grayscale:var(--tw-empty, );/*!*//*!*/--tw-hue-rotate:var(--tw-empty, );/*!*//*!*/--tw-invert:var(--tw-empty, );/*!*//*!*/--tw-saturate:v ar(--tw0, 1-e, -4m

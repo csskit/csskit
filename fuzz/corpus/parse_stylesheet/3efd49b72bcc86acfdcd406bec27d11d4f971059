@@ -1,0 +1,41 @@
+from-green-900:hover{--tw-gradient-from:#064e3b;--tw-gradient-stops:var(--tw-gradient-froIn case you need to add a gu0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) m),var(--tw-gradient-to, rgba(6, 78, 59, 0))}.hover\:from-blue-50:hover{--tw-gradient-from:#eff6ff;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(239, 246, 255, 0))}.hover\:from-blue-100:hover{--tw-gradient-from:#dbeafe;--tw-gtw-gradient-from),var(--tw-gradient-to, rgba(238, 242, 255, 0))}.hover\:from-indigo-100:hover{--tw-gradient-from:#e0e7ff;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(224, 231, 255, 0))}.hover\:from-indigo-200:hover{--tw-gradient-from:#c7d2fe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-graDient-to, rgba(199, 210, 254, 0))}.hover\:from-indigo-300:hover{--tw-gradient-from:#a5b4fc;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(165, 180, 252, 0))}.hover\:from-indigo-400:hover{--tw-gradient-from:#818cf8;--tw-gradient-stops:var(--tw-gradient-from),var({
+  margin-block-end: var(--gap);
+  margin-inline-endlear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear {gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that--tw-gradient-to, rgba(129, 1 should drop below previous one40, 248, 0))}.hover\:from-indigo-500:hover{--tw-gradient-from:#6366f1;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(99, 102, 241, 0))}.hover\:from-indigo-600:hover{--tw-gradient-from:#4f46e5;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(79, 70, 229, 0))}.hover\:from-indigo-700:hover{--tw-gradient-from:#4338ca;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(67, 56, 202, 0))}.hover\:from-indigo-800:hover{--tw-gradient-from:#3730as. */
+
+.clear { c3;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(55, 48, 163, 0))}.hover\:fromtops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(196, 181, 253, 0))}.hover\:from-purple-400:hover{--tw-gradient-from:#a78bfa;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(167, 139, 250, 0))}.hover\:from-purple-500:hover{--tw-gradient-from:#8b5cf6;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(139, 92, 246, 0))}, 0))}.hover\:from-indigo-300:hover{--tw-gradient-from:#a5b4fc;--tw-gradilear:both;ent-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(165, 180, 252, 0))}.hover\:from-indigo-400:hover{--tw-gradient-from:#818cf8;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(129, 140, 248, 0))}.hover\:from-indigo-500:hover{--tw-gradient-from:#6366f1;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(99, 102, 241, 0))}.hover\:from-indigo-600:hover{--tw-gradient-from:#4f46e5;--tw-gradient-stops:var }(--tw-gradient
+-from),var(--tw-gradient-to, rgba(79, 70, 229, 0))}.hover

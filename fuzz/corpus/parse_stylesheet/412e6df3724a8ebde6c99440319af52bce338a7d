@@ -1,0 +1,52 @@
+;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    max-width: none;
+    height: 100%;
+    min-height: 100%;
+    margin-left: 0;
+    border: 0;
+    border-radius: 0; }
+  @media print, screen and (max-width: 39.99875em) {ebkit-transition: all 0s linear;
+    transition: all 0s linear; }
+
+.slider-handle {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-trasform: translateY(-50%);
+          transform: translateY(-50%);
+  left: 0;
+  z-index: 1;
+  cursor: -webkit-grab;
+  cursor: grab;
+  display: inline-block;
+  width: 1.4rem;
+  height: 1.4rem;
+  border-radius: 0;
+  background-color: #1779ba;
+  -webkit-transition: all 0.2s ease-in-out;
+  transition: all 0.2s ease-in-out;
+  -ms-touch-action: manipulation;
+      touch-action: manipulation; }
+  [data-whatinput='mouse'] .slider-handle {
+    outline: 0; }
+  .slider-handle:hover {
+    background-color: #14679e; }
+  .slider-handle.isition: all 0.25s ease-out;
+  transition: all 0.25s ease-out;
+  font-weight: inherit;
+  color: inherit;
+  cursor: pointer; }
+  input + .switch-paddle{
+    margin: 0; }
+  .switch-paddle::after {
+    positio0);
+    border-radius: 0;
+    background: #fe+fefe;
+    -webkit-transition: all 0.25s ease-out;
+    transition: all 0.25s ease-out;
+    content: ''; }
+  input:checked ~ .

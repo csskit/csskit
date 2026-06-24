@@ -1,0 +1,97 @@
+-mx-16{margin-left:-4rem;margin-right:-4rem}.md\:-mx-20{margin-left:-5rem;margin-right:-5rem}.md\:-mx-24{margin-left:-6rem;margin-right:-6rem}.md\:-mx-28{margin-left:-7rem;margin-right:-7rem}.md\:-mx-32{margin-left:-8rem;margin-right:-8rem}.md\:-mx-36{margin-left:-9rem;margin-right:-9rem}.md\:-mx-40{margin-left:-10rem;margin-right:-10rem}.md\:-mx-44{margin-left:-11rem;margin-right:-11rem}.md\:-mx-48{margin-left:-12rem;margin-right:-12rem}.md\:-mx-52{margin-left:-13rem;margin-right:-13rem}.md\:-mx-56{margin-left:-14rem;margin-right:-14rem}.md\:-mx-60{margin-left:-15rem;margin-right:-15rem}.md\:-mx-64{margin-left:-16rem;margin-right:-16rem}.md\:-mx-72{margin-left:-18rem;margin-right:-18rem}.md\:-mx-80{margin-left:-20rem;margackground: var(--progress-back-color);
+  color: var(--progress-fore-color);
+}
+
+progress::-webkit-progress-value {
+  backgr(--univerersal-border-radius));
+}
+
+progress.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+}
+
+:root {
+  --spinner-back-color: #ddd;
+  --spinner-fore-color: #555;
+}
+
+@keyframes spinner-donut-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  margin: var(--universal-margin);
+  border: 0.25rem solid var(--spinner-back-color);
+  border-left: 0.25rem solid var(--spinner-fore-color);
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: spinner-donut-anim 1.2s linear infinite;
+}
+
+/*
+  Custom elements for progress bars and spinners.
+*/
+progress.primary {
+  --progress-fore-color: #1976d2;
+}
+
+progress.secondary {
+  --progress-fore-color: #d32f2f;
+}
+
+progress.tertiary {
+  --progress-fore-color: #308732;
+}
+
+.spinner.primary {
+  --spinner-fore-color: #1976d2;
+}
+
+.spinner.secondary {
+  --spinner-fore-color: #d32f2f;
+}
+
+.spinner.tertiary {
+  --spinner-fore-color: #308732;
+}
+
+/*
+  Definitions for icons - powered by Feather (https://feathericons.com/).
+*/
+span[class^='icon-'] {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  vertical-align: -0.125em;
+  background-size: contain;
+  margin: 0 calc(var(--universal-margin) / 4);
+}
+
+span[class^='icon-'].secondary {
+  -webkit-filter: invert(25%);
+  filter: invert(25%);
+}
+
+span[class^='icon-'].inverse {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+span.icon-alert {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stro='10' x2='21' y2='10'%3E%3C/line%3E%3C/svg%us));
+}
+
+progress[value="1000"]::-moz-progress-bar {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress.inlinie

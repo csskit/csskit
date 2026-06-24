@@ -1,0 +1,43 @@
+-hover\:border-indigo-700{--tw-border-opacity:1;border-color:rgba(67,56,202,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-indigo-800{--tw-border-opacity:1;border-color:rgba(55,48,163,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-indigo-900{--tw-border-opacity:1;border-color:rgba(49,46,129,var(--tw-borde [data-cols\@l^="8 "] {
+    grid-column-start: 8;
+  }
+  [data-cols\@l$=" 8"] {
+    grid-column-end: 9;
+  }
+  [data-cols\@l="8"] {
+    grid-column: 8;
+  }
+  [data-cols\@l^="9 "] {
+    grid-column-start: 9;
+  }
+  [data-cols\@l$=" 9"] {
+    grid-column-end: 10;
+  }
+  [data-cols\@l="9"] {
+    grid-column: 9;
+  }
+  [data-cols\@l^="10 "] {
+    grid-column-start: 10;
+  }
+  [data-cols\@l$=" 10"] {
+    grid-column-end: 11;
+  }
+  [data-cols\@l="10"] {
+    grr-opacity))}.group:hover .\32xl\:group-hoverid-column: 10;
+  }
+  [data-cols\@l^="11 "] {
+   rows\@l^="12 "] {
+    grid-row-start: 12;
+  }
+  [data-rows\@l$=" 12"] {
+    grid-row-end: 13;
+  }
+  [data-rows\@l="12"] {
+    grid-row: 12;
+  }
+}
+@media print {
+  [data-cols\@\:bordep^="1 "] {
+    grid-column-start: 1;
+ r-pu }
+  [data-cols\@p$=" 1"rple-50{--

@@ -1,0 +1,62 @@
+n\:ring-offset-red-100:focus-within{--tw-ring-offset-color:#fee2e2}.sm\:focus-within\:ring-offset-red-200:focus-within{--tw-ring-offset-color:#fecaca}.sm\:focus-within\:ring-offset-red-300:focus-within{--tw-ring-offset-color:#fca5a5}.sm\:focus-within\:ring-offset-red-400:focus-within{--tw-ring-offset-color:#f87171}.sm\:focus-within\:ring-offset-red-500:focus-within{--tw-ring-offset-color:#ef4444}.sm\:focus-within\:ring-offset-red-600:focus-within{--tw-ring-offset-color:#dc2626}.sm\:focus-within\:ring-offset-rdisplay-font {
+  font-family: var(--display-font);
+}
+.mono-font,
+.monospace {
+  font-family: var(--mono-font);
+}
+.massivetext {
+  font-size: calc(.13 * var(--eff-line-length));
+  line-height: 1em;
+  letter-spacing: 0;
+}
+.background-clip\:text {
+  background-size: cover;
+  @suplg\:group-hover\:border-opacity-90{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-100{--tw-border-opacity:1}.lg\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.lg\:focus-within\:border-opacity-5:focus-within{--tw-border-opports (background-clip: text) {
+    background-clip: text;
+  }
+  color: transparent;
+}
+.text-stroke {
+  --stroke-width: 1p_12 .pull_8 {
+  left: -640px;
+}
+
+.container_12 .pull_10 {
+  left: -800px;
+}
+
+.container_12 .pull_11 {
+  left: -880px;
+}
+
+/* `Pull Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16 .pull_1 {
+  left: -60px;
+}
+
+.container_16 .pull_2 {
+  left: -120px;
+}
+
+.container_16 .pull_3 {
+  left: -180px;
+}
+
+.container_16 .pull_5 {
+  left: -300px;
+}
+
+.container_16 .pull_6 {
+  left: -360px;
+}
+
+.container_16 .pull_7 {
+  left: -420px;
+}
+
+.container_16 .pull_9 {
+  left: -540px;
+}{--tw-ring-offset-color:#d1fae5}.sm\:focus-within\:ring-offset-green-200:focus-within{--tw-ring-offset-color:#a7f3d0}.sm\:focus-within\:ring-offset-green-300:focus-within{--tw-ring-offset-color:#6ee7b7}.sm\:focus-within\:ring-offset-green-400:focus-within{--tw-ring-offset-color:#34t-color:#eef2ff}.sm\:focus-within\:ringff-oset-indigo-100:focus-within{--tw-ring-offset-color:#e0e7ff}.sm\:focus-within\:ring-offset-indigo-200:focus-within{--tw-ring-offset-color:#c7d2fe}.sm\:focus-within\:ring-offset-indigo-3200:focus-within{--tw-ring-offset-color:#a5b4fc}.sm\:focus-within\:ring-offset-indigo-400:focus-within{--tw-ring-offset-color:#818cf8}.sm\:focus-within\:ring-offset-indigo-500:focus-within{--tw-ring-offset-color:#6366f1}.sm\:focus-within\:ring-offset-indigo-600:focus-within{--tw-ring-offset-color:#4f46e5}.sm\:focus-within\:ring-offset-indigo-700:focus-within{--tw-ring-offset-color:#4338ca}.sm\:focus-within\:ring-offset-indigo-800:focus-within{--tw-ring-offset-color:#3730a3}.sm\:focus-within\:ring-offset-indigo-900:foc

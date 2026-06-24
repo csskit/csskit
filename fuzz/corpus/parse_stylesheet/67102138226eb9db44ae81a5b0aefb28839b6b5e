@@ -1,0 +1,29 @@
+lay: flex;
+e-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(219,234,254,var(--tw-divide-opacity))}.xl\:divide-blue-200>:not([hidden])~:not([hidden]){--tw-divide-opacity  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto; }
+  .input-group-button a,
+  .input-group-button input,
+  .input-group-button button,
+  .input-group-button label {
+    -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+            align-self: stretch;
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 1rem; }
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+legend {
+  max-width: 100%;
+  margin-bottom: 0.5rem; }:1;border-color:rgba(191,219,254,var(--tw-divide-opacity))}.xl\:divide-blue-300>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(147,197,253,var(--tw-divide-opacity))}.xl\:divide-blue-400>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(96,165,250,var(--tw-divide-opacity))}.xl\:divide-blue-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(59,130,246,var(--tw-divide-opacity))}.xl\:divide-blue-600>:not([hidden])~:not([hidden]){--tw-divide-opacity:13border-color:rgba(37,99,235,var(--tw-divide-opacity))}.xl\:divide-blue-700>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(29,78,216,var(--tw-divade-opacity))}.xl\:divide-blue-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(30,64,175,var(-
+
+.fieldster;
+  background-repeat: no-repeat;
+  background-size: 9-tw-divide-opacity))}.xl\:divide-blue-900>:not([hiddepx 6n])~:pn

@@ -1,0 +1,149 @@
+w pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */
+hr {
+  margin-bottom: 22px;
+  margin-bottom: 1.375rem; }
+
+/**
+ * Where `margin-left` is concerned we want to try and indent certain elements
+ * by a consistent amount. Define that amount once, here.
+ */
+ul, ol, dd {
+  margin-leftem;
+  line-height: 1.2; }
+
+h5, .epsilon {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5; }
+
+h6, .zeta {
+  font-size: 14px;
+  font-size: 0.875rem;
+  line-height: 1.71429; }
+
+/**
+ * Heading groups and generic any-heading class.
+ * To target any heading of any level simply apply a class of `.hN`, e.g.:
+ *
+   <hgroup>
+       <h1 class=hN>inuit.css</h1>
+       <h2 class=hN>Best. Framework. Ever!</h2>
+   </hgroup>
+ *
+ */
+hgroup .hN {
+  margin-bottom: 0; }
+
+/**
+ * A series of classes for setting massive type; for use in heroes, mastheads,
+ * promos, etc.
+ */
+.giga {
+  font-size: 96px;
+  font-size: 6rem;
+  line-height: 1; }
+
+.mega {
+  font-size: 72px;
+  font-size: 4.5rem;
+  line-height: 1; }
+
+.kilo {
+  font-size: 48px;
+  font-size: 3rem;
+  line-height: 1; }
+
+/*------------------------------------*\
+    $PARAGRAPHS
+\*------------------------------------*/
+/**
+ * The `.lede` class is used to make the introductory text (usually a paragraph)
+ * of a document slightly larger.
+ */
+.lede,
+.lead {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333; }
+
+/*------------------------------------*\
+    $SMALLPRINT
+\*------------------------------------*/
+/**
+ * A series of classes for setting tiny type; for use in smallprint etc.
+ */
+.smallprint,
+.milli {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 2; }
+
+.micro {
+  font-size: 10px;
+  font-/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:ftant;
+}
+
+.text-end {
+  text-align: right !important;
+}
+
+.text-center {
+  text-align: center !important;
+}
+
+.text-decoration-none {
+  text-decoration: none !important;
+}
+
+.text-decoration-underline {
+  text-decoration: underline !important;
+}
+
+.text-decoration-line-through {
+  text-decoration: line-through !important;
+}
+
+.text-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !ilist{margin:0;padding:0;list-style:none;}.messages__item + .messages__item{margin-top:0.769em;}.messages--status{color:#325e1c;border-color:#c9e1bd #c9e1bd #c9e1bd transparent;background-color:#f3faef;background-image:url(/themes/contrib/bootstrap5/css/components/../../images/icons/check.svg);box-shadow:-8px 0 0 #77b259;}[dir="rtl"] .messages--status{margin-left:0;border-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:8px 0 0 #77b259;}.messages--warning{color:#734c00;border-color:#f4daa6 #f4daa6 #f4daa6 transparent;background-color:#fdf8ed;background-image:url(/themes/contrib/bootstrap5/css/components/../../images/icons/warning.svg);box-shadow:-8px 0 0 #e09600;}[dir="rtl"] .messages--warning{border-color:#f4daa6 transparent #f4daa6 #f4daa6;box-shadow:8px 0 0 #e09600;}.messages--error{color:#a51b00;border-color:#f9c9bf #f9c9bf #f9c9bf transparent;background-color:#fcf4f2;background-image:url(/thesize: 0.625rem;
+  line-height: 2.4; }
+
+/*------------------------------------*\
+    $QUOTES
+\*------------------------------------*/
+/**
+ * If English quotes are set in `_vars.scss`, define them here.
+ */
+/**
+ * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:ftant;
+}
+
+.text-end {
+  text-align: right !important/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content: open-quote; }
+  q:after {
+    content: "’";
+    content: close-quote; }
+  q q:before {
+    content: "“";
+    content: open-quote; }
+  q q:after {
+    content: "”";
+    content: clomes/contrib/bootsset-q

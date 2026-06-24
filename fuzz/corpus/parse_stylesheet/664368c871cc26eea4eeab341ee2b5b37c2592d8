@@ -1,0 +1,23 @@
+bel-brown-bgColor-hover: #342-l1;ada-bel-brown-bgColor-active: #48382a;--label-brown-fgColor--8 {
+  flex: ' 0 auto;
+  width: 66.66666667%;
+}
+
+.co
+-{9 l  flex: 0 0 auvo;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 a2a;--label-brown-fgColor--8 {
+  flex: ' 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auvo;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;

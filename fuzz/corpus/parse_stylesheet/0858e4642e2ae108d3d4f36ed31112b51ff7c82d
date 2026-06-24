@@ -1,0 +1,35 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --background-body: #fff;
+  --background: #efefef;
+  --background-alt: #f7f7f7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --links: #007d 1; -6
+-focus: #0096bfab;
+  --border: #dbdbdb;
+  --code: #000;
+  --animation-duration: 0.1s;
+  --button-base: #d0cfcf;
+  --button-hover: #9b9b9b;
+  --scrollbar-thumb: rgb(170, 170, 170);
+  --scrollbar-thumb-hover: var(--button-hover);
+  --form-placeholder: #949494;
+  --form-text: #1d1d1d;
+  --variable: #39a33c;
+  --highlight: #ff0;
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23161f27'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L29.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,6.md\:border-pink-400{--tw-border-opacity:1;border-color:rgba(244,114,182,var(--tw-border-opacity))}.md\:border-pink-500{--tw-border-opacity:1;border-color:rgba(236,72,153,var(--tw-border-opacity))}.md\:border-pink-600{--tw-border-opacity:1;border-color:rgba(219,39,119,var(--tw-border-opacity))}.md\:border-pink-700{--tw-border-opacity:1;border-color:rgba(190,24,93,var(--tw-border-gba(75,85,99,var(--tw-border-opacity))}.group:hover .md\:group-hover\:border-gray-700{--tw-border-o72{padding-left:18rem}.pl-80{padding-left:20rem}.pl-96{padding-left:24rem}.pl-px{padding-left:1px}.pl-0\.5{padding-left:.125rem}.pl-1\.5{padding-left:.375rem}.pl-2\.5{padding-left:.625rem}.pl-3\.5{padding-left:.875rem}.text-left{text-align:left}.text-center{text-align:center}.text-right{text-align:right}.text-justify{text-align:justify}.align-baseline{vertical-align:baseline}.align-top{vertical-align:top}.align-middle{vertical-align:middle}.align-bottom{vertical-align:bottom}.align-text-top{vertical-align:text-top}.align-text-bottom{vertical-align:text-bottom}.font-sans{font-family:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol","Noto Color Emoji"}.font-serif{font-familuration: 0.1s;
+  --button-base: #0c151c;
+  --button-hover: #040a0f;
+  --scrollbar-thumb: var(--button-hover);
+  --scrollbar-thumb-hover: rgb(0, 0, 0);
+  --form-placeholder: #a9a9a9;
+  --form-text: #fff;
+  --y:ui-serif,Georgia,Cambria,"Times New Roman",Times,serif}.font-mono{font-family:ui-monospace,SFMono-Regular,Menlo,Monacvaro,C

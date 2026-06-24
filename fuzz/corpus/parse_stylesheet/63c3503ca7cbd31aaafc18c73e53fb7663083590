@@ -1,0 +1,73 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--mnsform: none;
+  line-height: calc(2 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+h2,
+.\<h2\> {
+  font-size: 1.6em;
+  text-transform: none;
+  line-height: calc(1.5 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+h3,
+.\<h3\> {
+  font-size: 1.17em;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+}
+h4,
+.\<h4\>,
+h5,
+.\<h5\>,
+h6,
+.\<h6\> {
+  font-size: 1em;
+  text-transform: none;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+  margin-block-start: var(--gap);
+}
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-block-start: var(--gap);
+}
+h1:target,
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  outline: none;
+  &::before {
+    co-bgColor-accent-emphasis, var(--color-accent-emphasis))}.suggester li:hover small{color:var(--fgColor-onEmphasis, var(--color-fg-on-emphasis))}.suggester li:hover .octicon{color:inherit !important}.suggester li[aria-selected=true],.suggester li.navigation-focus{color:var(--fgColor-onEmphasis, var(--color-fg-on-emphasis));text-decoration:none;background:var(--bgColor-accent-emphasis, var(--color-accent-emphasis))}.suggester li[aria-selected=true] small,.suggester li.navigation-focus small{color:var(--fgColor-onEmphasis, var(--color-fg-on-emphasis))}.suggester li[aria-selected=true] .octicon,.suggester li.navigation-focus .octicon{color:inherit !important}.suggester-container{position:absolute;top:0;left:0;z-index:30}@media(max-width: 544px){.page-responsive .suggester-container{right:var(--base-size-8) !important;left:var(--base-size-8) !important}.page-responsive .suggester li{padding:var(--base-size-8) var(--base-size-16)}}.avatar{background-color:var(--avatar-bgColor);border-radius:var(--borderRadius-medium);box-shadow:0 0 0 1px var(--avatar-borderColor);display:inline-block;flex-shrink:0;line-height:1;overflow:hidden;vertical-align:middle}.avatar-link{float:left;line-height:1}.avatar-group-item{display:inline-block;margin-bottom:var(--base-size-4)}.avatar-1,.avatar-2,.avatar-small{border-radius:var(--borderRadius-small)}.avatar-1{height:var(--base-size-16);width:var(--base-size-16)}.avatar-2{height:var(--base-size-20);width:var(--base-size-20)}.avatar-3{height:var(--base-size-24);width:var(--base-size-24)}.avatar-4{height:var(--base-size-28);width:var(--base-size-28)}.avatar-5{height:var(--base-size-32);width:var(--base-size-32)}.avatar-6{height:var(--base-size-40);width:var(--base-size-40)}.avatar-7{height:var(--base-size-48);width:var(--base-size-48)}.avatar-8{height:var(--base-size-64);width:var(--base-size-64)}.avatar-parent-child{position:relative}.avatar-child{position:absolute;right:-15%;bottom:-9%;background-color:var(--bgColor-default, var(--color-canvas-default));border-radius:4px;box-shadow:var(--avatar-shadow, var(--color-avatar-child-shadow))}.AvatarStack{height:20px;min-width:26px;position:relative}.AvatarStack .AvatarStack-body{position:absolute}.AvatarStack.AvatarStack--two{min-width:36px}.AvatarStack.AvatarStack--three-plus{min-width:46px}.AvatarStack-body{background:var(--bgColor-default);border-radius:100px;display:flex}.AvatarStack-body .avatar{background-color:var(--bgColor-default);border-radius:var(--borderRadius-small);border-right:var(--borderWidth-thin) solid var(--bgColor-default);box-shadow:none;box-sizing:initial;display:flex;height:20px;margin-right:-11px;position:relative;transition:margin .1s ease-in-out;width:20px;z-index:2}:is(.AvatarStack-body .avatar):first-child{z-index:3}:is(.Atart: var(--border-block-start-width) var(--border-block-start-style) var(--accent);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

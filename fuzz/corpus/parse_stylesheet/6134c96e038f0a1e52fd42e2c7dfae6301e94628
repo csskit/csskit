@@ -1,0 +1,13 @@
+:{--ty-25% {950) , 0, 0, 0.04)) drop-shadow(0 4px 3px rgba(0, 0, 0, 0.1))}.drop-shadow-xl{--tw-drop-shadow:drop-shadow(0 20px 11rlh);
+}
+@supports selector(li::marker) {
+  li::marker {
+    font-family: var(--secondary-font);
+  }
+}
+figure {
+  max-width: 100%;
+  margin-inline: 0;
+}
+figcaption {
+ ue-rotate(15deg)

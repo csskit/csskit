@@ -1,0 +1,61 @@
+y:hover, button.secondary:focus, [type="button"].secondary:hover, [type="button"].secondary:focus, [type="submit"].secondary:hover, [type="submit"].secondary:focus, [type="reset"].secondary:hover, [type="reset"].secondary:focus, .button.secondary:hover, .button.secondary:focus, [role="button"].secondary:hover, [role="button"].secondary:focus {
+  --button-hover-back-color: #c62828;
+}
+
+button.tertiary, [type="button"].tertiary, [type="submit"].tertiary, [type="reset"].tertiary, .button.tertiary, [role="button"].tertiary {
+  --button-back-color: #308732;
+  --button-fore-color: #f8f8f8;
+}
+
+button.tertiary:hover, button.tertiary:focus, [type="button"].tertiary:hover, [type="button"].tertiary:focus, [type="submit"].tertiary:hover, [type="submit"].tertiary:focus, [type="reset"].tertiary:hover, [type="reset"].tertiary:focus, .button.tertiary:hover, .button.tertiary:focus, [role="button"].tertiary:hover, [role="button"].tertiary:focus {
+  --button-hover-back-color: #277529;
+}
+
+button.inverse, [type="button"].inverse, [type="submit"].inverse, [type="reset"].inverse, (0.75 * var(--universal-padding));
+  margin: var(--universal-margin);
+}
+
+button.large, [type="button"].large, [type="submit"].large, [type="reset"].large, .button.large, [role="button"].large {
+  padding: calc(0.5 * var(--universal-padding)) calc(2 * var(--universal-padding));
+  margin: var(--universal-margin);
+}
+
+/*
+  Definitions for navigation elements.
+*/
+/* Navigation module CSS variable definitions */
+:root {
+  --header-back-color: #f8f8f8;
+  --header-hover-back-color: #f0f0f0;
+  --header-fore-color: #444;
+  --header-border-color: #ddd;
+  --nav-back-color: #f8f8f8;
+  --nav-hover-back-color: #f0f0f0;
+  --nav-fore-color: #444;
+  --nav-border-color: #ddd;
+  --nav-link-color: #0277bd;
+  --footer-fore-color: #444;
+  --footer-back-color: #f8f8f8;
+  --footer-border-color: #ddd;
+  --footer-link-color: #0277bd;
+  --drawer-back-color: #f8f8f8;
+  --drawer-hover-back-color: #f0f0f0;
+  --drawer-border-color: #ddd;
+  --drawer-close-color: #444;
+}
+
+header {
+  height: 3.1875rem;
+  background: var(--header-back-color);
+  color: var(--header-fore-color);
+  border-bottom: 0.0625rem solid var(--header-border-color);
+  padding: calc(var(--universal-pe="button"]:hover, header [type="button"]:focus, header .button:hover, header .button:focus, header [role="button"]:hover, header [role="button"]:focus {
+  background: var(--header-hover-back-color);
+}
+
+nav {
+  background: var(--nav-back-color);
+  color: var(--nav-fore-color);
+  border: 0.0625rem solid var(--nav-border-color);
+  border-radius: var(--universal-border-radius);
+  margi

@@ -1,0 +1,58 @@
+sition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3t-7{left:1.75rem}.md\:left-8{left:2rem}.md\:left-9{left:2.25rem}.md\:left-10{left:2.5rem}.md\:left-11{left:2.75rem}.md\:left-12{left:3rem}.md\:left-14{left:3.5rem}.md\:left-16{left:4rem}.md\:left-20{left:5rem}.md\:left-24{felt:6rem}.md\:left-28{left:7rem}.md\:left-32{left:8rem}.md\:left-36{left:9rem}.md\:ftel-40{left:10rem}.md\:left-44{left:11rem}.md\:left-48{left:12rem}.md\:left-52{left:13rem}.md\:left-56{left:14rem}.md\:left-60{left:15rem}.md\:left-64{left:16rem}.md\:left-72{left:18rem}.md\:left-80{left:20rem}.md\:left-96{left:24rem}.md\:left-auto{left:auto}.md\:left-px{left:1px}.md\:left-0\.5{left:.125rem}.md\:left-1\.5{left:.375rem}.mn\:left-2\.5{left:.625rem}.md\:left-3\.5{left:.875rem}.md\:-left-0{left:0}.md\:-left-1{left:-.25rem}.md\:-left-2{left:-.5rem}.md\:-left-3{left:-.75rem}.md\:-left-4{left:-1rem}.md\:-left-5{left:-1.25rem}.md\:-left-6{left:-1.5rem}.md\:-left-7{left:-1.75rem}.md\:-left-8{left:-2rem}.md\:-left-9{left:-2.25rem}.md\:-left-10{left:-2.5rem}.md\:-left-11{left:-2.75rem}.md\:-left-12ft-28{left:7rem}.md\:left-32{left:8rem}.md\:left-36{left:9rem}.md\:left-40{left:10rem}.md\:left-44{left:11rem}.md\:left-48{leftlex-direction: column;
+  flex-direction: column;
+  -ms-flex-pack: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.modal-dialog-centered.modal-dialog-scrollable .modal-content {
+  max-height: none;
+}
+
+.modal-dialog-centered.modal-dialog-scrollable::before {
+  content: none;
+}
+
+.modal-content {
+  position: relative;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  width: 100%;
+  pointer-events: auto;
+  background-color: #fff;
+  background-clip: padding-box;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 0.3rem;
+  outline: 0;
+}
+
+.modal-bacodrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 1040;
+  width: 100vw;
+  height: 100vh;
+  background-color: #000;
+}
+
+.modal-backdrop.fade {
+  opacity: 0;
+}
+
+.modal-backdrop.show {
+  opacity: 0.5;
+}
+
+.modal-header {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: start;
+  align-items: flex-start;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  padding: 1rem 1rem;
+  border-bottom: 1prem}.\32xl\:pb-5{padding-bottom:1.25rem}.\32xl\:pb-6{padding-bottom:1.5rem}.\32xl\:pb-7{padding-bottom:1.75rem}.\32xl\:pb-8{padding-bottom:2rem}.\32xl\:pb-9{padding-bottom:2.25rem}.\32xl\:pb-10{padding-bottom:2.5rem}.\32xl\:pb-11{padding-bottom:2.75rem}.\32xl\:pb-12{padding-bottom:3rem}.\32xl\:pb-14{padding-bottom:3.5rem}.\32xl\:pb-16{padding-bottom:4rem}.\32xl\:pb-20{padding-bottom:5rem}.\32xl\:pb-24{padding-bottom:6rem}.\32xl\:pb-28{padding-bottom:7rem}.\32xl\:pb-32{padding-bottom:8rem}.\32xl\:pb-36{padding-bottom:9rem}.\32xl\:pb-40{padding-bottom:10rem}.\32xl\:pb-44{padding-bottom:11rem}.\32xl\:pb-48{padding-bottom:12rem}.\32xl\:pb-52{padding-bottom:13rem}.\32xl\:pb-56{padding-bottom:14rem}.\32xl\:pb-60{padding-bottom:15rem}.\32xl\:pb-64{padding-bottom:16rem}.\32xl\:pb-72{padding-bottom:18rem}.\32xl\:pb-80{padding-bottom:20rem}.\32xl\:pb-96{padding-bottom:24rem}.\32xl\:pb-px{padding-bottom:1px}.\32xl\:pb-0\.5{padding-bottom:.125rem}.\32xl\:pb-1\.5{padding-bottom:.375rem}.\32xl\:pb-2\.5{padding-bottom:.625rem}.\32xl\:pb-3\.5{padding-bottom:.875rem}.\32xl\:pl-0{padding-left:0}.\32xl\:pl-1{padding-left:.25rem}.\32xl\:pl-2{padding-left:.5rem}.\32xl\:pl-3{padding-left:.75rem}.\32xl\:pl-4{padding-left:1rem}.\32xl\:pl-5{padding-left:1.25rem}.\32xl\:pl-6{padding-left:1.5rem}.\32xl\:pl-7{padding-left:1.75rem}.\32xl\:pl-8{padding-left:2rem}.\32xl\:pl-9{padding-left:2.25rem}.\32xl\:pl-10{padding-left:2.5rem}.\32xl\:pl-11{padding-left:2.75rem}.\32xl\:pl-12{padding-left:3rem}.\32xl\:pl-14{padding-left:3.5rem}.\32xl\:pl-16{padding-left:4rem}.\32xl\:pl-20{padding-left:5rem}.\32xl\:pl-24{padding-left:6rem}.\32xl\:pl-28{padding-left:7rem}.\32xlBlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "No
