@@ -1,0 +1,43 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 , 0, 0.08))}.\32xl\:drop-shadow-2xl{--tw-drop-shadow:drop-shadow(0 25px 25px rgba(0, 0, 0, 0.15))}.\32xl\:drop-shadow-none{--tw-drop-shadow:drop-shadow(0 0 #0000)}.\32xl\:grayscale-1{--tw-grayscale:grayscale(0)}.\32xl\:grayscale{--tw-grayscale:grayscale(100%)}.\32xl\:hue-rotate-0{--tw-hue-rotate:hue-rotate(0deg)}.\32xl\:hue-rotate-15{--tw-hue-rotate:hue-rotate(15deg)}.\32xl\:hue-rotate-30{--tw-hue-rotate:hue-rotate(30deg)}.\32xl\:hue-rotate-60{--tw-hue-rotate:hue-rotate(60deg)}.\32xl\:hue-rotate-90{--tw-hue-rotate:hue-rotate(90deg)}.\32xl\:hue-rotate-180{--tw-hue-rotate:hue-rotate(180deg)}.\32xl\:-hue-rotate-180{--tw-hue-rotate:hue-rotate(-180deg)}.\32xl\:-hue-rotate-90{--tw-hue-rotate:hue-rotate(-90deg)}.\32xl\:-hue-rotate-60{--tw-hue-rotate:hue-rotate(-60deg)}.\32xl\:-hue-rotate-30{--tw-hue-rotate:huetw-backdrop-blur:blur(0)}.\32xl\:backdrop-blur-none{--tw-backdrop-blur:blur(0)}.\32xl\:idth: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;--label-brown-fgColor-hov width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}rop-invert:var(--tw-empty, );/*!*//*!*/--tw-backdrop-opacity:var(--tw-empty, );/*!*//*!*/--tw-backdrop-saturate:var(--tw-empty, );/*!*//*!*/--tw-backdrop-sepia:var(--tw-empty, );/*!*//*!*/-webkit-backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-garyscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia);backdrop-filter:var(--tw-backdrop-blur) var(--tw-backdrop-brightness) var(--tw-backdrop-contrast) var(--tw-backdrop-grayscale) var(--tw-backdrop-hue-rotate) var(--tw-backdrop-invert) var(--tw-backdrop-opacity) var(--tw-backdrop-saturate) var(--tw-backdrop-sepia)}.\32xl\:backdrop-filter-none{-webkit-backdrop-filter:none;backdrop-filter:none}.\32xl\:backdrop-blur-0{--tw-backdrop-blur:blur(0)}.\32xl\:backdrop-blur-none{--tw-backdrop-blur:blur(0)}.\32xl\:idth: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;--label-brown-fgColor-hov width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.er: #bfa77d;

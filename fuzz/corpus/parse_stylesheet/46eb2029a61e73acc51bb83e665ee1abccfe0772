@@ -1,0 +1,14 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inhericus-within{opacity:.05}.md\o:cfus-within\:opacity-10:focus-witht;
+}
+:roiot {
+n{ 

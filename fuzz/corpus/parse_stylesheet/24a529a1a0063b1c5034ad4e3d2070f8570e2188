@@ -1,0 +1,66 @@
+e {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    z-index: 12;
+    -webkit-transition: none;
+    transition: none;
+    visibility: visible; }
+    .position-top.reveal-for-large .close-button {
+      display: none; }
+    .off-canvas-content .p+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++osition-top.reveal-for-large {
+      -webkit-transform: none;
+          -ms-transform: none;
+              eight: auto; }
+    .grid-margin-y > .shrink {
+      height: auto; }
+    .grid-margin-y > .small-1 {
+      height: calc(8.33333% - 1.875rem); }
+    .grid-margin-y > .small-2 {
+  transform: none; }
+    .off-canvas-content.has-reveal-top {
+      margin-top: 250px; }
+    .position-top.reveal-for-large ~ .off-canvas-content {
+      margin-top: 250px; }
+  .position-bottom.reveal-for-large {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    z-index: 12;
+    -webkit-transition: none;
+    tra    height: calc(16.66667% - 1.875rem); }
+    .grid-margin-y > .small-3 {
+      height: calc(25% - 1.875rem); }
+    .grid-margin-y > .small-4 {
+      height: calc(33.33333% - 1.875rem); }
+    .grid-margin-y > .small-5 {
+      height: calc(41.66667% - 1.875rem); }
+    .grid-margin-y > .small-6 {
+      height: calc(50% - 1.875rem); }
+    .grid-margin-y > .small-7 {
+      height: calc(58.33333% - 1.875rem); }
+    .grid-margin-y > .small-8 {
+      height: calc(66.66667% - 1.875rem); }
+    .grid-margin-y > .small-9 {
+      height: calc(75% - 1.875rem); }
+    .grid-margin-y > .small-10 {
+      height: calc(83.33333% - 1.875rem); }
+    .grid-margin-y > .small-11 {
+      height: calc(91.66667% - 1.875rem); }
+    .grid-margin-y > .small-12 {
+      height: calc(100% - 1.nsition: none;
+    visibility: visible; }
+    .position-bottom.reveal-for-large .close-button {
+      display: none; }
+    .off-canvas-content .position-bottom.reveal-for-large {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-content.has-reveal-bottom {
+      margin-bottom: 250px; }
+    .position-bottom.reveal-for-large ~ .off-canvas-content {
+      margin-bottom: 250px; } }
+
+@media875rem); }
+    .grid-margin-y > .medium-auto {
+  print, sc     height: autoreen and (min-width: 40em);

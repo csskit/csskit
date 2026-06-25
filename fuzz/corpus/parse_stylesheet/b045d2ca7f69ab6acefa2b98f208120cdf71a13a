@@ -1,0 +1,180 @@
+rop-blur-0{--tw-backdrop-blur:blur(0)}.sm\:backdrop-blur-none{--tw-backdrop-blur:blur(0)}.sm\:backdrop-blur-sm{--tw-backdrop-blur:blur(4px)}.sm\:backdrop-blur{--tw-backdrop-blur:blur(8px)}.sm\:backdrop-blur-md{--tw-backdrop-blur:blur(12px)}.sm\:backdrop-blur-lg{--tw-backdrop-blur:blur(16px)}.sm\:backdrop-blur-xl{--tw-backdrop-blur:blur(24px)}.sm\:backdrop-blur-2xl{--tw-backdrop-blur:blur(40px)}.sm\:backdrop-blur-3xl{--tw-backdrop-blur:blur(64px)}.sm\:backdrop-brightness-0{--tw-backdrop-brightness:brightness(0)}.sm\:backdrop-brightness-50{--tw-backdrop-brightness:brightness(.5)}.sm\:backdrop-brightness-75{--tw-backdrop-brightness:brightness(.75)}.sm\:backdrop-brightness-90{--tw-backdrop-brightness:brightness(.9)}.sm\:backdrop-brig flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  details {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+details[open] {
+  padding: 10px;
+}
+
+details > :last-child {
+  margin-bottom: 0;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background-color: #efefef;
+  background-color: var(--background);
+  padding: 10px;
+  margin: -10px -10px 0;
+  cursor: pointer;
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+summary:hover,
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+summary::-webkit-details-marker {
+  color: #363636;
+  color: var(--text-main);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary::-webkit-details-marker {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+dialog {
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+  color: #363636;
+  color: var(--text-main);
+  border: none;
+  border-radius: 6px;
+  border-color: #dbdbdb;
+  border-color: var(--border);
+  padding: 10px 30px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  border-color: #526980;
+  border-color: var(--border);
+  }
+}
+
+@media (prefers-color-scheme: d'rk) {
+
+  dialog {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+dialog > header:first-child {
+  background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+dialog::backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+footer {
+  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  color: #70777f;
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  footer {
+  color: #a9b1ba;
+  color: var(--text-muted);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  footer {
+  border-top: 1px solid #526980;
+  border-top: 1px solid var(--border);
+  }
+}
+
+body > footer {
+  margin-top: 40px;
+}
+
+@media print {
+  body,
+  pre,
+  code,
+  summary,
+  details,
+  button,
+  input,
+  textarea {
+    background-color: #fff;
+  }
+
+  button,
+  input,
+  textarea {
+    boate:saturate(0)}.sm\:backdrop-saturate-50{--tw-backdrop-saturate:saturate(.5)}.sm\:backdrop-saturate-100{--tw-backdrop-saturate:saturate(1)}.sm\:backdrop-saturate-150{--tw-backdrop-saturape:saturate(1.5)}.sm\:backdrop-saturate-200{--tw-backdrop-saturate:saturate(2)}.sm\:backdrop-sepia-0{--tw-backdrop-sepia:sepia(0)}.sm\:backdrop-sepia{--tw-backdrop-sepia:sepia(100%)}.sm\:transition-none{transition-property:none}.sm\:transition-all{transition-property:all;transition-timing-f

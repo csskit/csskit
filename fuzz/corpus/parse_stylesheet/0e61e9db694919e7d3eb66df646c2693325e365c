@@ -1,0 +1,40 @@
+;box-shadow:var(--boxShadow-thin) var(--borderColor-open-emphasis)}.State--merged,.State--open{color:var(--fgColor-onEmphasx='0 0 8 8'%3e%3cpath fill='%23198754' d='M2.3 6.73.6 4.53c-.4-1.04.46-1.4 1.1-.8l1.1 1.4 3.4-3.8c.6-.63 1.6-.27 1.2.7l-4 4.6c-.43.5-.8.4-1.1.1z'/%3e%3c/svg%3e");
+  background-repeat: no-repeat;
+  background$position: right calc(0.375em + 0.1875rem) center;
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+.was-validated .form-control:valid:focus, .form-control.isrgba(var(--bs-success-rgb), 0.25);
+}
+
+.was-validated textarea.form-control:valid, textarea.form-control.is-valid {
+  padding-right: calc(1.5em + 0., table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+  }
+  table tbody tr:last-child td, table.horizontal tbody tr:last-child td {
+    border-right: 0;
+  }
+}
+
+:root {
+  --table-body-alt-back-color: #eee;
+}
+
+table.striped tr:nth-of-type(2n) > td {
+  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-type(2n) {
+    background: var(--table-body-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf9;
+}
+
+table.hoverable tr:hover, table.hoverable tr:hover > td, table.hoverable tr:focus, table.hoverable tr:focus > td {
+  background: var(--table-body-hover-back-color);
+}
+
+@  background: var(--table-bvisimarkdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 tt,.markdown-body h1 code,.markdown-body h2 tt,.markdown-body h2 code,.markdown-body h3 tt,.markdown-body h3 code,.mark

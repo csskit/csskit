@@ -1,0 +1,146 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the on-duration: calc(0s * 3);
+  animation-duration: calc(1s * 3);
+  -webkit-animation-duration: calc(var(--animate-duration) * 3);
+  animation-duration: calc(var(--animate-duration) * 3);
+}
+@media print, (prefers-reduced-motion: reduce) {
+  .animate__animated {
+    -webkit-animation-duration: 1ms !important;
+    animation-duration: 1ms !important;
+    -webkit-transition-duration: 1ms !important;
+    tranious rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  padding: 0.35em 0.k-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+}
+.margin-block-end\:auto:not([specificity-hack]) {
+  margin-block-end: auto;
+}
+.margin-inline\:0:not([specificity-hack]) {
+  margin-inline: 0;
+}
+.margin-y-hack]) {
+  margin-inline: auto;
+}
+.margin-inline-start\:0:not([specificity-hack]) {
+  margin-inline-start: 0;
+}
+.margin-inline-start:not([specificity-hack]) {
+  margin-inline-start: var(--gap);
+}
+.margin-inline-start\:auto:not([specificity-hack]) {
+  margin-inline-start: auto;
+}
+.margin-inline-end\:0:not([specificity-hack]) {
+  margin-inline-end: 0;
+}
+.margin-inline-end:not([specificity-hack]) {
+  margin-inline-end: var(--gap);
+}
+.margin-inline-end\:auto:not([specificity-hack]) {
+  margin-inline-end: auto;
+}
+.margin-start\:0:not([specificity-hack]) {
+  margin-block-start: 0;
+  margin-inline-start: 0;
+}
+.margin-start:not([specificity-hack]) {
+  margin-block-start: var(--gap);
+  margin-inline-start: var(--gap);
+}
+.margin-start\:auto:not([specificity-hack]) {
+  margin-block-start: auto;
+  margin-inline-start: auto;
+}
+.margin-end\:0:not([specificity-hack]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: auto;
+  margin-inline-end: auto;
+}
+.flow-gap {
+  & > :not(:last-child) {
+    margin-bottom: var(--gap);
+  }
+}
+.inline {
+  display: inline;
+}
+.block {
+  display: block;
+}
+.contents {
+  display: contents;
+}
+.table {
+  display: table;
+  width: 100%;
+  margin: 0;
+}
+.row,
+.rows > * {
+  display: table-row;
+  &:not(:last-child):not([specificity-hack]) > * {
+    margin-bottom: var(--gap);
+  }
+  & > *:not([specificity-hack]) {
+    display: table-cell;
+    vertical-align: top;
+  }
+  & > * + *:not([specificity-hack]) {
+    margin-inline-start: var(--gap);
+    display: inline-block;
+  }
+}
+.big,
+.\<big\> {
+  font-size: 1.4em;
+  line-height: calc(1.5 * var(--rhythm, 1rlh));
+(var(--animate-duration) / 2);
+  animation-duration: calc(var(--animate-duration) / 2);
+}
+.animate__animated.animate__fast {
+  -webkit-animation-duration: calc(1s * 0.8);
+  animation-duration: calc(1s * 0.8);
+  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);
+  animation-duration: calc(var(--animate-duration) * 0.8);
+}
+.animate__anement buttons in Chrome.
+ */
+
+[type="number"]::-webkit-inner-spin-button,
+[type="number"]::-webkit-outer-spin-button {
+  height: auto;
+}
+
+/**
+ * 1. Correct the odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-appearance: textfield; /* 1 */
+  outlineimat-offset: -2px;ed.an /* 2 i

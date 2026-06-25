@@ -1,0 +1,79 @@
+{
+    -webkit-transform: skewX(-5deg);
+    transform: skewX(-5deg);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes lightSpeedInRight {
+  from {
+    -webkit-transform: translate3d(1/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1px 1px 0;border-radius:2px;background:no-repeat 10px 17px;overflow-wrap:break-word;}[dir="rtl"]fa-battery-half:before {
+  content: "\f242"; }
+
+.fa-battery-quarter:before {
+  content: "\f243"; }
+
+.fa-battery-three-quarters:before {
+  content:fgColor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-divider: #818b98;--headerSearch-bgColor: #25292e;--headerSearch-borderColor: #818b98;--data-blue-color-emphasis: #006edb;--data-blue-color-muted: #d1f0ff;--data-auburn-color-emphasis: #9d615c;--data-auburn-color-muted: #f2e9e9;--data-orange-color-emphasis: #eb670f;--data-orange-color-muted: #ffe7d1;--data-yellow-color-emphasis: #b88700;--data-yellow-color-muted: #ffec9e;--data-green-color-emphasis: #30a147;--data-green-color-muted: #caf7ca;--data-teal-color-emphasis: #179b9b;--data-teal-color-muted: #c7f5ef;--data-purple-color-emphasis: #894ceb;--data-purple-color-muted: #f1e5ff;--data-pink-color-emphasis: #ce2c85;--data-pink-color-muted: #ffe5f1;--data-red-color-emphasis: #df0c24;--data-red-color-muted: #ffe2e0;--data-gray-color-emphasis: #808fa3;--data-gray-color-muted: #e8ecf2;--display-blue-bgColor-muted: #d1f0ff;--display-blue-bgColor-emphasis: #006edb;--display-blue-fgColor: #005fcc;--display-blue-borderColor-muted: #ade1ff;--display-blue-borderColor-emphasis: #006edb;--display-green-bgColor-muted: #caf7ca;--display-green-bgColor-emphasis: #2c8141;--display-green-fgColor: #2b6e3f;--display-green-borderColor-muted: #9ceda0;--display-green-borderColor-emphasis: #2c8141;--display-orange-bgColor-muted: #ffe7d1;--display-orange-bgColor-emphasis: #b8500f;--display-orange-fgColor: #a24610;--display-orange-borderColor-muted: #fecfaa;--display-orange-borderColor-emphasis: #b8500f;--display-purple-bgColor-muted: #f1e5ff;--display-purple-bgColor-emphasis: #894ceb;--display-purple-fgColor: #783ae4;--display-purple-borderColor-muted: #e6d2fe;--display-purple-borderColor-emp
+.fa-book-reader:before {
+  content: "\f5da"; }
+
+.fa-bookmark:before {
+  content: "\f02e"; }
+
+.fa-bootstrap:before {
+  content: "\f836"; }
+
+.fa-border-all:before {
+  content: "\f84c"; }
+
+.fa-border-none:before {
+  conteund-size:40px 40px;}[dir="rtl"] .progress__bar{margin-right:-1px;margin-left:0;-webkit-animation-direction:reverse;animation-direction:reverse;}@media screen and (prefers-reduced-motion:reduce){.progress__bar{-webkit-transition:none;transition:none;-webkit-animt;background-position:center center;}.ui-dialog .ajax-progress-throbber .throbber,.ui-dialog .ajax-progress-throbber .mes rotateIn {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes rotateIn {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.animate__rotateIn {
+  -webkit-animation-name: rotateIn;
+  animation-name: rotateIn;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+}
+@-webkit-keyframes rotateInDownLeft {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+    transform: rotate3d(0, 0, 1, -45deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);

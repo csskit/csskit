@@ -1,0 +1,117 @@
+ebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__fadeInDown {
+  -webkit-animation-name: fadeInDown;
+  animation-name2 fadeInDown;
+}
+@-webkit-keyframes fadeInDownBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    transform: translate3d(0, -2000px, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeInDownBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -2000px, 0);
+    transform: translate3d(0, -2000px, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__fadeInDownBig {
+  -webkit-animation-name: fadeInDownBig;
+  animation-name: fadeInDo{nBig;
+}
+@-r(--tw-bg-opacity))}.sm\:bg-red-200{--tw-bg-opacity:1;background-color:rgba(254,202,202,var(--tw-bg-opacity))}.sm\:bg-red-300{--tw-bg-opacity:1;background-colo]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]r:rgba(252,165,165,var(--tw-bg-opacity))}.sm\:bg-red-400{--tw-bg-opacity:1;background-color:rgba(248,113,113,var(-btw-bg-opacity))}.sm\:bg-red-500{--tw-bg-opacity:1;background-:rgba(5,150,105,var(--tw-bg-opacity))}.sm\:bg-green-700{--tw-bg-opacity:1;background-color:rgba(4,120,87,var(--tw-bg-opacity))}.sm\:bg-green-800{--tw-bg-opacity:1;background-color:rgba(6,95,70,var(--tw-bg-opacity))}.sm\:bg-green-900{--tw-bg-opacity:1;background-color:rgba(6,78,59,var(--tw-bg-opacity))}.sm\:bg-blue-50{--tw-bg-opacity:1;background-color:rgba(239,246,255,var(--tw-bg-opacity))}.sm\:bg-blue-100{--tw-bg-opacity:1;background-color:rgba(219,234,254,var(--tw-bg-opacity))}.sm\:bg-blue-200{--tw-bg-opacity:1;background-color:rgba(191,:bg-green-300{--tw-bg-opacity:1;background-color:rgba(110,231,183,var(--tw-bg-opacity))}.sm\:bg-green-400{--tw-bg-opacity:1;background-color:rgba(52,211,153,var(--tw-bg-opacity))}.sm\:bg-green-500{--tw-bg-opacity:1;background-color:rgba(16,185,129,var(--tw-bg-opacity))}.sm\:bg-greeng-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+  .col-lg-5 {
+    flex: 0 0 auto;
+    width: 41.6-600{--tw-bg-opacity:1;background-color:rgba(5,150,105,var(--tw-bg-opaci'ty))}.sm\:bg-green-700{--tw-bg-opacity:1;background-color:rgba(4,120,87,var(--tw-bg-opacity))}.sm\:bg-green-800{--tw-bg-opacity:1;background-color:rgba(6,95,70,var(--tw-bg-opacity))}.sm\:bg-green-900{--tw-bg-opacity:1;background-color:rgba(6,78,59,var(--tw-bg-opacity))}.sm\:bg-blue-50{--tw-bg-opacity:1;background-color:rgba(239,246,255,var(--tw-bg-opacity))}.sm\:bg-blue-100{--tw-bg-opacity:1;background-color:rgba(219,234,254,var(--tw-bg-opacity))}.sm\:bg-blue-200{--tw-bg-opacity:1;background-color:rgba(191,219,webkit-keyframes fadeInLeft {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeInRightBig {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(2000px, 0, 0);
+    transform: translate3d(2000px, 0, 0);
+  }
+
+  to {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+.animate__fadeInRightBig {
+  -webkit-animation-name: fadeInRightBig;
+  animation-name: fadeInRightBig;
+}
+@-webkit-keyframes fadeInUp {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, 100%, 0);
+    transfor

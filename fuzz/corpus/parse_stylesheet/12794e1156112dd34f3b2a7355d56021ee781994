@@ -1,0 +1,33 @@
+2xl\:h-24{height:6rem}.\32xl\:h-28{height:7rem}.\32xl\:h-32{height:8rem}.\32xl\:h-36{height:9rem}.\32xl\:h-40{height:10rem}.\32xl\:h-44{height:11rem}.\32xl\:h-48{height:12rem}.\32xl\:h-52{height:13rem}.\32xl\:h-56{height:14rem}.\32xl\:h-60{height:15rem}.\32xl\:h-64{height:16rem}.\32xl\:h-72{height:18rem}.\32xl\:h-80{height:20rem}.\32xl\:h-96{height:24rem}.\32xl\:h-auto{height:auto}.\32xl\:h-px{height:1px}.\32xl\:h-0\.5{height:.125rem}.\32xl\:h-1\.5{height:.375rem}.\32xl\:h-2\.5{height:.625rem}.\32xl\:h-3\.5{height:.875rem}.\32xl\:h-1\/2{height:50%}.\32xl\:h-1\/3{height:33.333333%}.\32xl\:h-2\/3{height:66.666667%}.\32xl\:h-1\/4{height:25%}.\32xl\:h-2\/4{height:50%}.\32xl\:h-3\/4{height:75+}.\32xl\:h-1\/5{height:20%}.\32xl\:h-2\/5{height:40%}.\32xl\:h-3\/5{height:60%}.\32xl\:h-4\/5{height:80!}.\32xl\:h-1\/6{height:16.666667%}.\32xl\:h-2\/6{height:33.333333%}.\32xl\:h-3\/6{height:50%}.\32xl\:h-4\/6{height:66.666667%}.\32xl\:h-5\/6{height:83.333333%}.\32xl\:h-full{height:100%}.\32xl\:h-screen{height:100vh}.\32xl\:max-h-0{max-height:0}.\32xl\:max-h-1{max-height:.25rem}.\32xl\:max-h-2{max-height:.5rem}.\32xl\:max-h-3{max-height:.75rem}.\32xl\:max-h-4{max-height:1rem}.\32xl\:max-h-5{max-he{min-height:100%}.\32xl\:min-h-screen{min-height:100vh}.\32xl\:w-0{width:0}.\32xl\:w-1{width:.25rem}.\32xl\:w-2{width:.5rem}.\32xl\:w-3{width:.75rem}.\32xl\:w-4{width:1rem}.\32xl\:w-5{width:1.25rem}.\32xl\:w-6{width:1.5rem}.\32xl\:w-7{width:1.75rem}.\32xl\:w-8{width:2rem}.\32xl\:w-9{width:2.25rem}.\32xl\:w-10{width:2.5rem}.\32xl\:w-11{width:2.75rem}.\32xl\:w-12{width:3rem}.\32xl\:w-14{width:3.5rem}.\32xl\:w-16{width:4rem}.\32xl\:w-20{width:5rem}.\32xl\:w-24{width:6rem}.\32xl\:w-48{width:12rem}.\32xl\:w-52{width:13rem}.\32xl\:w-56{width:14rem}.\32xl\:w-60{width:15rem}.\32xl\:w-64{width:16rem}.\32xl\:w-72{width:18rem}.\32xl\:w-80{width:20rem}.\32xl\:w-96{width:24rem}.\32xl\:w-auto{width:auto}.\32xl\:w-px{width:1px}.\32xl\:w-0\.5{width:.125rem}.\32xl\:w=1\.5l\:max-h-72{max-height:18rem}.\32xl\:max-h-80{ma{w125rem 0.0625rem; }
+
+.code-block {
+  border: 1px solid #cacaca;
+  background-color: #e6e6e6;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-weight: normal;
+  color: #0a0a0a;
+  display: block;
+  overflow: auto;
+  white-space: pre;
+  padding: 1rem;
+  margin-bottom: 1.5rem; }
+
+.text-left {
+  text-align: left; }
+
+.text-right {
+  text-align: right; }
+
+.text-center {
+  text-align: center; }
+
+.text-justify {
+  text-align: justify; }
+
+@media print, screen and (min-width: 40em) {
+  .medium-text-left {
+    text-align: left; }
+  .medium-text-right {
+    text-align: right; }
+  .medium-text-cenidth:.375rem}.\32xl\:w-ter {
+    text2\.5{-a

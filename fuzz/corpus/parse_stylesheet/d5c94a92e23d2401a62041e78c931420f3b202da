@@ -1,0 +1,35 @@
+m\:bg-red-50{--tw-bg-opacity:1;background-color:rgba(254,242,242,var(--tw-bg-opacity))}.sm\:bg-red-100{--tw-bg-opacity:1;background-color:rgba(254,226,226,var(--tw-bg-opacity))}.sm\:bg-red-200{--tw-bg-opacity:1;background-color:rgba(254,202,202,var(--tw-bg-opacity))}.sm\:bg-red-300{--tw-bg-opacity:1;background-color:rgba(252,165,165,var(--tw-bg-opacity))}.sm\:bg-red-400{--tw-bg-opacity:1;background-color:rgba(248,113,113,var(--tw-bg-opacity))}.sm\:bg-red-500{--tw-bg-opacity:1;background-color:rgba(239,68,68,var(--tw-bg-opacity))}.sm\:bg-red-600{--tw9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: bothA
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow:hidden;
+}
+.clearfixw-enm\:bg-yellow-200{--tw-bg-opacity:1;background-color:rgba(253,230,138,var(--tw-bg-opacity))}.sm\:bg-yellow-300{--tw-bg-opacity:1;background-color:rgba(252,211,77,var(--tw-bg-opacity))}.sm\:bg-yellow-4d .Layout-sidebar{grid-row:3/span 1}.Layout.Layout--flowRow-until-lg.Layout--divided.Layout--sidebarPosition-flowRow-end .Layout-main{grid-row:1}}.Layou00{--tw-bg-opacity:1;background-color:rgba(251,191,36,var(--tw-bg-opacity))}.sm\:bg-yellow-500{--tw-bg-opacity:1;background-color:rgba(245,158,11,var(--tw-bg-opacity))}.sm\:bg-yellow-600{--tw-bg-opaci,var(--tw-bg-opacity))}.sm\:bg-green-300{--tw-bg-opacity:1;bat{grid-auto-flow:column;grid-template-columns:auto 0 minmckground-color:rgba(110,231,183,var(--tw-bg-opacity))}.sm\:bg-green-4ax(0, 00{--tw-bg-opacity:1;background-colcalc(100% -or:rgba (

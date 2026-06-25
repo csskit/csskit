@@ -1,0 +1,62 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  backumeric-fraction:diagonal-fractions}.lg\:stacked-fractions{--tw-numeric-fraction:stacked-fractions}.lg\:leading-3{line-height:.75rem}.lg\:leading-4{line-height:1rem}.lg\:leading-5{line-height:1.25rem}.lg\:leading-6{line-height:1.5rem}.lg\:leading-7{line-height:1.75rem}.lg\:leading-8{line-height:2rem}.lg\:leading-9{line-height:2.25rem}.lg\:leading-10{line-height:2.5rem}.lg\:leading-none{line-height:1}.lg\:leading-tight{line-height:1.25}.lg\:leading-snug{line-height:1.375}.lg\:leading-normal{line-height:1.5}.lg\:leading-relaxed{line-height:1.625}.lg\:leading-loose{line-height:2}.lg\:tracking-tighter{letter-spacing:-.05em}.lg\:tracking-tight{letter-spacing:-.025em}.lg\:tracking-normal{letter-spacing:0}.lg\:tracking-wide{letter-spacing:.025em}.lg\:tracking-wider{letter-spacing:.05em}.lg\:tracking-widest{letter-spacing:.1em}.lg\:text-transparent{color:transparent}.lg\:text-current{color:currentColor}.lg\:text-black{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.lg\:text-white{--tw-text-opacity:1;col-fg);
+    }
+  }
+  @supports selector(::-moz-meter-bar) {
+    background: var(--box-bg);
+    border-color: var(--graphical-fg);
+    &::-moz-meter-bar {
+      background: var(--accent);
+      border-radius: 5;
+    }
+    &:-moz-meter-optimum {
+      --box-bg: var(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphical-fg);
+      &::-moz-progress-bar {
+      background: var(--accent);
+      border-radius: 0;
+      transition: all .1s ease-in-out;
+    }
+  }
+  @supports selector(::-webkit-progress-bar) {
+    &::-webkit-progress-bar {
+      background: var(--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-progress-value {
+      background: var(--accent);
+      border-radius: 0;
+    }
+  }
+  &:not([value]) {
+    --track-bg-color:
+      linear-gradient(
+        to right,
+        var(--box-bg) 45%,
+        var(--accent) 0%,
+        var(--accent) 55%,
+        var(--box-bg) 0% );
+    --track-size: 225% 100%;
+    --track-bg-position: right;
+    --track-animation: progress-loading 4s infinite ease-in-out;
+    @media (prefers-reduced-motion) {
+      --track-bg-position: center;
+      --track-animation: none;
+    }
+    @supports selector(progress::after) {
+      &::after {
+        content: "";
+        inset: 0;
+        position: absolute;
+        background: var(--track-bg-color);
+        background-size: var(--track-sizesupports selecto4r(::-webkit-meter-bar) {
+    &::-webkit-meter-inner-element {
+      grid-template-rows: unset;
+    }
+    &::-webkit-meter-bar {
+      background: var(--box-bg);
+ it-progress-bar {
+        background: var(--track-bg-color);
+        background-size: var(--track-si

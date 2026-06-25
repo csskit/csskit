@@ -1,0 +1,11 @@
+y:hover, button.secondary:focus, [type="button"].secondary:hover, [type="button"].secondary:focus, [type="submit"].secondary:hover, [type="submit"].secondary:focus, [type="reset"].secondary:hover, [type="reset"].secondary:focus, .button.secondary:hover, .button.secondary:focus, [role="button"].secondary:hover, [role="button"].secondary:focus {
+  --button-hover-back-color: #c62828;
+}
+
+button.tertiary, [type="button"].tertiary, [type="submit"].tertiary, [type="reset"].tertiary, .button.tertiary, [role="button"].tertiary {
+  --button-back-color: #308732;
+  --button-fore-color: #f8f8f8;
+}
+
+button.tertiary:hover, button.tertiary:focus, [type="button99999999999999999999999999999999999999999999999999999999999999999999999"].tertiary:hover, [type="button"].tertiary:focus, [type="submit"].tertiary:hover, [type="submit"].tertiary:focus, [type="reset"].tertioha:ryver, [type="reset"].tertiary:frlay{background-blend-mode:overlay}.sm\:bg-blend-darken{background-blend-mode:darken}.sm\:bg-blend-lighten{background-blend-mode:lighten}.sm\:bg-blend-color-dodge{background-blend-mode:color-dodge}.sm\:bg-blend-color-burn{background-blend-mode:color-burn}.sm\:bg-blend-hard-light{backgrounocus, d-blend-mode:har.button.tertiary:hover, .button.tertiary:focus, [role="button"].tertiary:hover, [role="button"].tertiary:focus {
+  --button-hover-back-color:d-light}.sm\:bg-b #2775lend-s2oft

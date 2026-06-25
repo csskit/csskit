@@ -1,0 +1,38 @@
+:focus-within\:border-purple-100:focus-within{--tw-border-opacity:1;border-color:rgba(237,233,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-200:focus-within{--tw-border-opacity:1;border-color:rgba(221,214,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-300:focus-within{--tw-border-opacity:1;border-color:rgba(196,181,253,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-400:focus-within{--tw-border-opacity:1;border-color:rgba(167,139,250,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-500:focus-within{--tw-border-opacity:1;border-color:rgba(139,92,246,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-600:focus-within{--tw-border-opacity:1;border-color:rgba(124,58,237,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-700:focus-within{--tw-border-opacity:1;border-color:rgba(109,40,217,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-800:focus-within{--tw-border-opacity:1;border-color:rgba(91,33,182,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-900:focus-within{--tw-border-opacity:1;border-color:rgba(76,29,149,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-50:focus-within{--tw-border-opacity:1;border-color:rgba(253,242,248,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-100:focus-within{--tw-border-opacity:1;border-color:rgba(252,231,243,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-200:focus-within{--tw-border-opacity:1;border-color:rgba(251,207,232,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-300:focus-within{--tw-border-opacity:1;border-color:rgba(249,168,212,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-400:focus-within{--tw-border-opacity:1;border-color:rgba(244,114,182,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-500:focus-within{--tw-border-opacity:1;border-color:rgba(236,72,153,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-600:focus-within{--tw-border-opacity:1;border-color:rgba(219,39,119,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-700:focus-within{--tw-border-opacity:1;border-color:rgba(190,24,93,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-800:focus-within{--tw-border-opacity:1;border-color:rgba(157,23,77,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-900:focus-within{--tw-border-opacity:1;border-color:rgba(131,24,67,var(--tw-border-opacity))}.xl\:hover\:border-transparent:hover{border-color:transparent}.xl\:hover\:border-current:hover{border-color:currentColor}.xl\:hover\:border-black:hover{--tw-border-opacity:1;border-al {
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .menu.vertical.icon-top li a img,
+    .menu.vertical.icon-top li a i,
+    .menu.vertical.icon-top li a svg, .menu.vertical.icon-bottom li a img,
+    .menu.vertical.icon-bottom li a i,
+    .menu.vertical.icon-bottom li a svg {
+      text-align: left; }
+  .menu.expanded li {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0px;
+        -ms-flex: 1 1 0px;
+            flex: 1 1 0px; }
+  .menu.expanded.icon-top li a img,
+  .menu.expanded.icon-top li a i,
+  .menu.expanded.icon-top li a svg, .menu.expanded.icon-bottom li a img,
+  .menu.expanded.icon-bottom li a i,
+  .menu.expanded.icon-bottom li a svg {
+    text-align: left; }
+  .menu.simple {
+    -webkit-box-align: center;
+    -webkit-align-items: center;
+        -ms-flex-align: center;
+            align-items: center; }
+    .menu.simple li + li {
+      margin-left: 1rem; }
+    .menu.simple a {
+      padding: 0; }
+  @media print, screen and (min-width: 40em) {
+    .menu.medium-horizontal {
+      -webkit-flex-wrap: wrap;)}.xl\:hover\:border-red-50:hover{--tw-border-opacity:1;border-color:rgba(254,242,242,var(--tw-border-opacity))}.xl\:hover\:border-red-100:hover{--tw-border-opacity:1;border-color:rgba(254,226,226,var(--tw-border-opacity))}.xl\:hover\:border-red-200:hover{--tw-borde

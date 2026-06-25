@@ -1,0 +1,45 @@
+-cols\@p="10"] {
+    grid-column: 10;
+  }
+  [data-cols\@p^="11 "] {
+    grid-column-start: 11;
+  }
+  [data-cols\@p$=" 1[data-rows\@p$=" 5"] {
+    grid-row-end: 6;
+  }
+  [data-rows\@p="5"] {
+    grid-row: 5;
+  }
+  [data-rows\@p^="6 "] {
+    grid-row-start: 6;
+  }
+  [data-rows\@p$=" 6"] {
+    grid-row-end: 7;
+  }
+  [data-rows\@p="6"] {
+    grid-row: 6;
+  }
+  [data-rows\@p^="7 "] {
+    grid-row-start: 7;
+  }
+  [data-rows\@p$=" 7"] {
+    grid-row-end: 8;
+  }
+  [data-rows\@p="7"] {
+    grid-row: 7;
+  }
+  [\@p="11"] {
+    grid-row: 11;
+  }
+  [data-rows\@p^="12 "] {
+    grid-row-start: 12;
+  }
+  [data-rows\@p$=" 12"] {
+    grid-row-end: 13;
+  }
+  [data-rows\@p="12"] z
+    grid-row: 12;
+  }
+}
+
+/* src/missing.css */

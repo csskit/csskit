@@ -1,0 +1,69 @@
+d\:bottom-10{bottom:2.5rem}.md\:bottom-11{bottom:2.75rem}.md\:bottownRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottomt a
+r ;nsform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+
+  summary {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+summary:hover,
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+summary::-webkit-details-marker {
+  color: #363636;
+  color: var(--text-main);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary::-webkit-details-marker {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+dialog {
+  it-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+footer {
+  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--border);
+  padding-top: 10px;
+  color: #70777f;
+  color: var(--text-muted);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  footer {
+  color: #a9b1ba;
+  color: var(--text-muted);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  footer {
+  border-top: 1px solid #526980;
+  border-top: 1px solid var  to {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+    transform: rotate3d(0, 0, 1, -45deg);
+    opacity:m-12{bottom:3rem}.md\:bottom-14{bottom:3.5rem}.md\:bottom-16{bottom:4rem}.md\:bottom-20{bottom:5rem}.md\:bottom-24{bottom:6rem}.md\:bottom-28{bottom:7rem}.md\:bottom-32{bottom:8rem}.md\:bottom-36 {bottom:9rem}.0m

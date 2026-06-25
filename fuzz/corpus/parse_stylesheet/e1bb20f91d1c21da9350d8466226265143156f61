@@ -1,0 +1,63 @@
+var(--tw-bg-opacity))}.md\:hover\:bg-blue-400:hover{--tw-bg-opacity:1;background-color:rgba(96,165,250,var(--tw-bg-opacity))}.md\:hover\:bg-blue-500:hover{--tw-bg-opacity:1;background-color:rgba(59,130,246,var(--tw-bg-opacity))}.md\:hover\:bg-blue-600:hover{--tw-bg-opacity:1;background-color:rgba(37,99,235,var(--tw-bg-opacity))}.md\:hover\:bg-blue-7sm\:focus\:bg-purple-50:focus{--tw-bg-opacity:1;ckbaground-color:rgba(245,243,255,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-100:focus{--tw-bg-opacity:1;background-color:rgba(237,233,254,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-200:focus{--tw-bg-opacity:1;background-color:rgba(221,214,254,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-300:focus{--tw-bg-opacity:1;backgreed to add a gu0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-endlear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear {gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous on-color:rgba(99,102,241,var(--tw-bg-opacity))}.md\:hover\:bg-indigo-600:hover{--tw-bg-oped-zero:slashed-zero}.md\:lining-nums{--tw-numeric-figure:lining-nums}.md\:oldstyle-nums{--tw-numeric-figure:oldstyle-nums}.md\:proportional-nums{--tw-numeric-spacing:proportional-numsy.md\:tabular-numw-bg-opacity:1;background-color:rgba(55,48,163,var(--tw-bg-opacity))}.md\:hover\:bg-indigo-900:hover{--tw-bg-opacity71;background-color:rgba(49,46,129,var(--tw-bg-opacity))}.md\:hover\:bg-purple-50:hover{--tw-bg-opacity:1;background-color:rgba(245,243,255,var(--tw-bg-opacity))}.md\:hover\:bg-purple-100:hover{--tw-bg-opacity:1;background-color:rgba(237,233,254,var(--tw-bg-opacity))}.md\:hover\:bg-purple-200:hover{--tw-bg-opacity:1;background-color:rgba(221,214,25lear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-endlear Floats Without Structural Markup by PiE
+   [http://www.positioniseverythi]) {
+  margin-block-end: 0;
+  margin-inline-end: 0;
+}
+.margin-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous ones. */
+
+.clear {gap);
+  margin-inline-end: var(--gap);
+}
+.margin-end\:auto:not([specificity-hack]) {
+  margin-block-end: autoclearing
+   apply to column that should drop below previous on-color:rgba(99,102,241,var(--tw-bg-opacity))}.md\:hover\:bg-indigo-600:hover{--tw-bg-4,var00:focus{--tw-bg-opacity:1;background-color:rgba(167,139,250,var(--tw-bg-opacity))}(

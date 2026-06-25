@@ -1,0 +1,102 @@
+      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lis    -webkit-transform: skewX(-5deg);
+    transform: skewX(-5deg);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+}
+@keyframes lightSpeedInRight {
+  from {
+    -webkit-transform: translate3d(100%, 0, 0) skewX(-_lightSpeedInRight {
+  -webkit-animation-name: lightSpeedInRight;
+  animation-name: lightSpeedInRight;
+  -webkit-animation-timing-funct, 0, 0) skewX(-30deg);
+    opacity: 0;
+  }
+}
+@keyframes lightSpeedOutLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: translate3d(-100%, 0, 0) skewX(-30deg);
+    transform: translate3d(-100%, 0, 0) skewX(-30deg);
+    opacity: 0;
+  }
+}
+.animate__lightSpeedOutLeft {
+  -webkit-animation-name: lightSpeedOutLeft;
+  animation-name: lightSpeedOutLeft;
+  -webkit-animation-timing-function: ease-in;
+  animation-timing-function: ease-in;
+}
+/* Rotating entrances */
+@-webkit-keyframes rotateIn {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+@keyframes rotateIn {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -200deg);
+    transform: rotate3d(0, 0, 1, -200deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.animate__rotateIn {
+  -webkit-animation-name: rotateIn;
+  animation-name: rotateIn;
+  -webkit-transform-origin: center;
+  transform-origin: center;
+}
+@-webkit-keyframes rotateInDownLefrem}.\32xl\:pl-3{padding-left:.75rem}.\32xl\:pl-4{padding-left:1rem}.\32xl\:pl-5{padding-left:1.25rem}.\32xl\:pl-6{padding-left:1. {
+    -webkit-transform: translatts
+ */
+.check-label,
+.check-list label,
+.cholor-num: #d1f8d9;--diffBlob-addition-bgColor-line: #dafbe1;--diffBlob-addition-bgColor-word: #aceebb;--diffBlob-deletion-fgColorolor-emphasms: #808fa3;--data-gray-color-muted: #e8ecf2;--display-blue-bgColor-muted: #d1f0ff;--display-blue-bgColor-emphasis: #006edb;--display-blue-fgColor: #005fcc;--display-blor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-divider: #818b98;--headerSearch-bgColor: #25292e;--headerSearch-borderColor: #818b98;--data-blue-color-emphasis: #006edb;--data-blue-color-muted: #d1f0ff;--data-auburn-color-emp@asis: #9d615c;--data-auburn-color-muted: #f2e9e9;--data-orange-color-emphasis: #eb670f;--data-orange-color-muted: #ffe7d1;--data-yellow-color-emphasis: #b88700;--data-yellow-color-muted: #ffec9e;--data-green-color-emphasis: #30a147;--data-green-color-muidth: 50%; }
+
+  /**
+  * Thirds
+  */
+  .palm-one-third, .palm-two-sixths, .palm-four-twelfths {
+    width: 33.333%; }
+
+  .palm-two-thirds, .palm-four-sixths, .palm-eight-twelfths {
+  ( width: 66.666%; }
+
+  /**
+  * Quarte

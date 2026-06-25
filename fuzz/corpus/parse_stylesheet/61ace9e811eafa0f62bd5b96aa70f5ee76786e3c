@@ -1,0 +1,110 @@
+-mx-16{margin-left:-4rem;margin-right:-4rem}.md\:-mx-20{margin-left:-5rem;margin-right:-5rem}.md\:-mx-24{margin-left:-6rem;margin-right:-6rem}.md\:-mx-28{margin-left:-7rem;margin-right:-7rem}.md\:-mx-32{margin-left:-8rem;margin-right:-8rem}.md\:-mx-36{margin-left:-9rem;margin-right:-9rem}.md\:-mx-40{margin-left:-10rem;margin-right:-10rem}.md\:-mx-44{margin-left:-11rem;margin-right:-11rem}.md\:-mx-48{margin-left:-12rem;margin-right:-12rem}.md\:-mx-52{margin-left:-13rem;margin-right:-13rem}.md\:-mx-56{margin-left:-14rem;margin-right:-14rem}.md\:-mx-60{margin-left:-15rem;margin-right:-15rem}.md\:-mx-64{margin-left:-16rem;margin-right:-16rem}.md\:-mx-72{margin-left:-18rem;margin-right:-18rem}.md\:-mx-80{margin-left:-20rem;margin-right:-20rem}.md\:-mx-96{margin-left:-24rem;margin-right:-24rem}.md\:-mx-px{margin-left:-1px;margin-o[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0 border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.popover-header:empty {
+  display: none;
+}
+
+.popover-body {
+  padding: 0.5rem 0.75rem;
+  color: #212529;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel.pointer-event {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner::after {
+  displright:-1px}.md\:-mx-0\.5{margin-o[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0 border-top-left-radius: calc(0.3rem - 1px);
+  border-top-right-radius: calc(0.3rem - 1px);
+}
+
+.popover-header:empty {
+  display: none;
+}
+
+.popover-body {
+  padding: 0.5rem 0.75rem;
+  color: #212529;
+}
+
+.carousel {
+  position: relative;
+}
+
+.carousel.pointer-event {
+  -ms-touch-action: pan-y;
+  touch-action: pan-y;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+}
+
+.carousel-inner::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.carousel-item {
+  position: relative;
+  display: none;
+  float: left;
+  width: 100%;
+  margin-right: -100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transition: -webkit-transform 0.6s ease-in-out;
+  transition: transform 0.6s ease-in-out;
+  transition: left:-.125rem;margin-right:-.125rem}.md\:-mx-1\ay: block;
+.5{margin-left:-. 375rem; transform 0.6s ease-in-out, -webkit-transform 0.6s ease-in-out;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carousel-item {m
+    transition: none;
+  }
+}
+
+.carousel-item.active,
+.carousel-item-next,
+.carousel-item-prev {
+  display: block;
+}
+
+.carousel-item-next:not(.carousel-item-left),
+.active.carousel-item-right {
+  -webkit-transform: translateX(100%);
+  transform: translateX(100%);
+}
+
+.carousel-item-prev:not(.carousel-item-right),
+.active.carousel-item-left {
+  -webkit-transform: translateX(-100%)acl;
+  transform: translateX(-100%);
+}
+
+.carousel-fade .carousel-item {
+  opacity: 0;
+  transition-proeaperty: opacity;

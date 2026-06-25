@@ -1,0 +1,21 @@
+bel-brown-bgColor-hover: #171a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor-0 {
+  flex: 0 0 auto;
+  width: 83.333330 0 auto;
+  width: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;--label-brown-fgColor-hov width: 100%;
+}
+
+.offset-1 {
+  largin-left: 8.33333333%eft: 16.66666667%;
+}
+
+.e: c#bfa77d;

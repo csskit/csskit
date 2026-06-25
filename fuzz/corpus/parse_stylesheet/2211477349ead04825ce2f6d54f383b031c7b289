@@ -1,0 +1,33 @@
+:focus-within\:border-purple-100:focus-within{--tw-border-opacity:1;border-color:rgba(237,233,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-200:focusex-dir-row {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: row;
+      -ms-flex-direction: row;
+          flex-direction: row; }
+
+.flex-dir-row-reverse {
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: row-reverse;
+      -ms-flex-direction: row-reverse;
+          flex-direction: row-reverse; }
+
+*flex-dir-column {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -webkit-flex-direction: column;
+      -ms-flex-direction: column;
+          flex-direction: column; }
+
+.flex-dir-column-reverse {
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: reverse;
+  -webkit-flex-direction: column-reverse;
+      -ms-flex-direction: column-reverse;
+          flex-direction: column-reverse; }
+
+@media print, screen and (min-width: 40em) {
+  .medium-flex-container {
+    display: -webkit-box;
+    display: -webkit-flex;
+    dispr:rgba(76,29,149,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-50:focus-within{--tw-border-opacity:1;border-color:rgba(253,242,248,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-100:focus-within{--tw-border-opacity:1;border-color:rgba(252,231,243,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-200:focus-within{--tw-border-opacity:1;border-color:rgba(251,207,232,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-300:focus-within{--tw-border-opacity:1;border-color:rgba(249,168,212,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-400:focus-within{--tw-border-opacity:1;border-color:rgba(244,114,182,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-500:fo1;border-color:rgba(107,114,128,var(--tw-border{--tw-border-opacity:1;border-color:rgba(55,65,81,var(--tw-border-opacity))}.xl\:hover\:border-gray-800:hover{--tw-border-opacity:1;border-color:rgba(31,41,55,var(--tw-border-opacity))}.xl\:hover\:border-gray-900:hover{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}.xl\:hover\:border-red-50:hover{--tw-border-opacity:1;border-color:rgba(254,242,242,var(--tw-border-opacity))}.xl\:hover\:border-red-100:hover{--tw-border-opacity:1;border-color:rgba(254,226,226,var(--tw-border-opacity))}.xl\:hover\:border-red-200:hover{--tw-borde

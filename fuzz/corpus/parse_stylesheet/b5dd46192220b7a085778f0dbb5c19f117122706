@@ -1,0 +1,83 @@
+bel-brown-bgColor-hover: #171a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.333330 0 auto;
+  width: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 %;left:50%;min-height:var(--control-medium-size) var(--control-medium-size);position:absolute;top:50%;transform:translateX(-50%) translateY(-50%);width:100%}:is(input.FormControl-radio[type=radio][disabled]~.FormControl-radio-labelWrap) .FormControl-label{color:var(--control-fgColor-disabled);cursor:not-allowed}input.FormControl-radio[type=radio]:checked{border-color:var(--control-checked-borderColor-rest, var(--color-accent-fg));border-width:var(--base-size-4)}input.FormControl-radio[type=radio]:checked:disabled,input.FormControl-radio[type=radio][disabled]:checked{border-color:var(--control-fgColor-disabled);cursor:not-allowed}:is(:is(input.FormControl-radio[type=radio][disabled]:checked,input.FormControl-radio[type=radio]:checked:disabled)~.FormControl-radio-labelWrap) .FormControl-label{color:var(--control-fgColor-disabled);cursor:not-allowed}input.FormControl-radio[type=radio]:focus-visible{box-shadow:none;outline:2px solid var(--focus-outlineColor);outline-offset:2px}@media(forced-colors: active){iorder-color: transparent;
+  --button-hover-border-color: transparent;
+  --button-group-border-color: rgba(124, 124, 124, 0.54);
+}
+
+form {
+  background: var(--form-back-color);
+  color: var(--form-fore-color);
+  border: 0.0625rem solid var(--form-border-color);
+  border-radius: var(--universal-border-radius);
+  margin: var(--universal-margin);
+  padding: calc(2 * var(--universal-paddiradius: var(--universal-border-radius);
+  margin: calc(var(--universal-margin) / 5);
+  padding: var(--universal-padding);
+}
+
+legend {
+  box-sizing: border-box;
+  display: table;
+  max-width: 100%;
+  white-space: normal;
+  font-weight: 700;
+  padding: calc(var(--universal-padding) / 2);
+}
+
+label {
+  padding: calc(var(--universal-padding) / 2) var(--universal-padding);
+}
+
+.input-group {
+  display: inline-block;
+}
+
+.input-group.fluid {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.input-group.fluid > input {
+  max-width: 100%;
+  flex-grow: 1;
+  flex-basis: 0px;
+}
+
+@media screen and (max-width: 767px) {
+  .input-group.fluid {
+    align-items: stretch;
+    flex-direction-coolumn;
+  }
+}
+
+.input-gauto;
+ rest: #b69a6d;--label-brown-fgColor-hov width: 100%;
+}
+
+.offset-1 {
+  largin-left: 8.33333333%eft: 16.66666667%;
+}
+
+.e: c#bfa77d;

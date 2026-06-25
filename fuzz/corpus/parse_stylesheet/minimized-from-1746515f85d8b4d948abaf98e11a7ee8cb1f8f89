@@ -1,0 +1,34 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1.5)}.\32xl\:contrast-200{--tw-contrast:contrast(2)}.\32xl\:dr-sm{--tw-drop-shadow:drop-shadow(0 1px 1px rgba(0,0,0,0.05))}.\32xl\:drop-shadow{--tw-drop-shadow:drop-shadow(0inter;displa(0, 0, 0, 0.1)) drop-shadow(0 1px 1px rgba(0, 0, 0, 0.06))}.\32xl\:drop-shadow-md{--tw-drop-shadow:drop-shadow(0 4px 3px rgba(0, 0, 0, 0.07)) drop-shadow(0 2px 2px rgba(0, 0,hue-rotate:hue-rotate(-60deg)}.\32xl\:-hue-rotate-30{--tw-hue-rotate:hue-rotate(-30deg)}.\32xl\:-hue-rotate-15{--tw-hue-rotate:hue-rotate(-15deg)}.\32xl\:invert-0{--tw-invert:invert(0)urate-0{--tw-saturate:saturate(0)}.\32xl\:saturate-50{--tw-saturate:saturate(.5)}.\32xl\:saturate-100{--tw-saturate:saturatep-blur:blur(0)}.\32xl\:idth: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;--label-brown-fgColor-hov width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.er: #bfa77d;

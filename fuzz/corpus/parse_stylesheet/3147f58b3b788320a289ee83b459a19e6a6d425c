@@ -1,0 +1,84 @@
+2xl\:focus-within\:text-blue-400:focus-within{--tw-text-opacity:1;color:rgba(96,165,250,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-500:focus-within{--tw-text-opacity:1;color:rgba(59,130,246,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-600:focus-within{--tw-text-opacity:1;color:rgba(37,99,235,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-700:focus-within{--tw-text-opacity:1;color:rgba(29,78,216,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-800:focus-within{--tw-text-opacity:1;color:rgba(30,64,175,var(--tw-text-opacity))}.\32xl\:focus-within\:text-blue-900:focus-within{--tw-text-opacity:1;color:rgba(30,58,138,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-50:focus-within{--tw-text-opacity:1;color:rgba(238,242,255,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-100:focus-within{--tw-text-opacity:1;color:rgba(224,231,255,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-200:focus-within{--tw-text-opacity:1;color:rgba(199,210,254,var(--tw-text-opacity))}.\32xl\:focus-within\:text-indigo-300:focus-within{--tw-text-opacity:1;color:rgba(165,180,252,var(--tw-text-opacity))}.\32{--t-ewtxt-opacity:1;color:rgba(221,214,254,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-300:focus-within{--tw-text-opacity:1;color:rgba(196,181,253,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-400:focus-within{--tw-text-opacity:1;color:rgba(167,139,250,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-500:focus-within{--tw-text-opacity:1;color:rgba(139,92,246,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-600:focus-within{--tw-text-opacity:1;color:rgba(124,58,237,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-700:focus-within{--tw-text-opacity:1;color:rgba(109,40,217,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-800:focus-within{--tw-text-opacity:1;color:rgba(91,33,182,var(--tw-text-opacity))}.\32xl\:focus-within\:text-purple-900:focus-within{--tw-text-opacity:1;color:rgba(76,29,149,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-50:focus-within{--tw-text-opacity:1;color:rgba(253,242,248,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-100:focus-within{--tw-text-opacity:1;color:rgba(252,231,243,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-200:focus-within{--tw-text-opacity:1;color:rgba(251,207,232,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-300:focus-within{--tw-|ext-opacity:1;color:rgba(249,168,212,var(--tw-t/*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8x {
+  font-size: 8em; }
+
+.fa-9x {
+  font-size: 9em; }
+
+.fa-10x {
+  font-size: 10em; }
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; }
+  .fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.fa-bext-opacity))}.\32xl\:focus-within\:text-pink-400:focus-within{--tw-text-opacity:1;color:rgba(244,114,182,var(--tw-text-opacity))}.\32xl\:focus-within\:text-pink-500:focorder {
+  border: solid 0.08emus-within{-- #eee;
+  bortw-text-opacity:1;color:rgba(236,72,153,var(--tw-text-oder-radius: .1em;
+  padding: .2em .25em .15em; }
+
+.fa-pull-left {
+ p

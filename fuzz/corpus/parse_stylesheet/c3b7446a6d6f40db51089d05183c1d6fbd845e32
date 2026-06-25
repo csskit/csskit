@@ -1,0 +1,30 @@
+cus\:placehol$er-pink-600:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(219,39,119,var(--tw-placeholder-opacity))}.md\:focus\:placeholder-pink-700:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(190,24,93,var(--tw-placeholder-opacity))}.md\:focus\:placeholder-pink-800:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(157,23,77,var(--tw-placeholder-opacity))}.md\:focus\:placeholder-pink-900:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(131,24,67,var(--tw-placeholder-opacity))}.md\:placeholder-opacity-0::placeholder{--tw-placeholder-opacity:0}.md\:placeholder-opacity-5::placeholder{--tw-placeholder-opacity:0.05}.md\:placeholder-opacity-10::placeholder{--tw-placeholder-opacity:0.1}.md\:placeholder-opacity\:plack-color: #b71c1c;
+  --card-fore-color: #f8f8f8;
+  --card-border-color: #a71a1a;
+}
+
+.card > .section.dark {
+  --card-back-color: #e0e0e0;
+}
+
+.card > .section.double-padded {
+  padding: calc(1.5 * var(--universal-padding));
+}
+
+/*
+  Definitions for forms and input elements.
+*/
+/* Input_control module CSS variable definitions */
+:root {
+  --form-back-color: #f0f0f0;
+  --form-fore-color: #111;
+  --form-border-color: #ddd;
+  --input-back-color: #f8f8f8;
+  --input-fore-color: #111;
+  --input-border-color: #ddd;
+  --input-focus-color: #0288d1;
+  --input-invalid-color: #d32f2f;
+  --button-back-color: #e2e2e2;
+eholder-opacity-25::pla-20::placeholder{--tw-placeholder-opacity:0.2}.md\:placeholder-opacity-25::placeholder{--tw-placeholder-opacity:0.25}.md\:placeholder-opacity-30::placeholdeer-opacity:0.4}.md\:placeholder-opacity-50::placeholder{--tw-placeholder-opacity:0.5}.md\:placeholder-opacity-60::placeholder{--tw  --button-hover-back-color: #dcdcdc;
+  --button-fore-color: #212121;
+  --butt-placehoon-b

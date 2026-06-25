@@ -1,0 +1,40 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(var(--gap) / 4) 0;
+  font: inherit;
+  line-height: calc(var(--rhythm, 1rlh) / 2);
+  &::file-selector-button {
+    margin-block: .1em 0;
+    margin-inline-end: 1ch;
+  }
+}
+select {
+  height: calc(2 * var(--interactive-border-width) + 3/2 * var(--rhythm, 1lh));
+  background: var(--bg);
+  color: var(--fg);
+  & option {
+    background: inherit;
+    color: inherit;
+    border: inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: normal;
+}
+meter,
+progress {
+  --border-width: var(--interactive-border-width);
+  --border-style: var(--interactive-border-style);
+  --border-radius: var(--tab-border-radius);
+  @supports (selectoom-green-805:hover{--tw-gradient-from:#065f46;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(6, 95, 70, 0))}.sm\:hover\:from-green-900:hover{--tw-gradient-from:#064e3b;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(6, 78, 59, 0))}.sm\:hover\:from-blue-50:hover{--tw-gradient-from:#eff6ff;--tw-gradient-stopsr(::-moz-meter-bar) or selector(::-webkit-meter-bar) or selector(::-moz-progress-bar) or selec:var(--tw-gradient-from),var(--tw-gradient-to, rgba(239, 246, 255, 0))}.sm\:hover\:from-blue-100:hover{--tw-gradient-from:#dbeafe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(219, 234, 254, 0))}.sm\:hover\:from-blue-200:hover{--tw-gradient-from:#bfdbfe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rg\:hover\:from-blue-100:hover{--tw-gradient-from:#dbeafe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(219, 234, 254, 0))}.sm\:hover\:from-blue-200:hover{--tw-gradient-from:#bfdbfe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(191, 219, 254, 0))}.sm\:hover\:from-blue-300:hover{--tw-gradient-from:#93c5fd;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(147, 197, 253, 0))}.sm\:hover\:from-blue-400:hover{--tw-graditorent-from:#60a5fa;--tw-gradient-stops:var(--tw-grad(ient-from),var(--tw-gradi::-webkei
