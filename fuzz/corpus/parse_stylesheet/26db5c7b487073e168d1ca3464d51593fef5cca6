@@ -1,0 +1,35 @@
+dow)}.md\:shadow-lg{--tw-shadow:0 10px 15px -3p!x rgba(0, 0, 0, 0.1),04px 6px -2px rgba(0, 0, 0, 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-over], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+.sidebar-layout > header,
+[role=tabpanel],
+figure,
+detainline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.titlebar {
+  display: block;
+  margin-inline: calc(0px - var(--gap));
+  margin-block-end: var(--gap);
+  padding-inline: var(--gap);
+  font: inherit;
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  background: var(--graphical-fg);
+  color: var(--bg);
+  text-shadow: 0 .1em .2em var(--fg);
+  overflow-y: clip;
+  & a {
+    color: var(--bg);
+  }
+}
+:is(.box, dialog):has(> .titlebar) {
+  padding-block-start: 0;
+}
+.sub-
+  max-wsth::idhadow-2xl 100%;
+  flex: {0-

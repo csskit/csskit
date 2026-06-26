@@ -1,0 +1,19 @@
+olor: #1779ba; }
+  :last-child:not(.is-active) > .accordion-title {
+    border-bottom: 1px solid #e6e6e6;
+    bordious rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusring,
+[type="reset"]:#-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+  pan-left:12rem}.md\:ml-52{margin-left:13rem}.md\:ml-56{margin-left:14rem}.md\:ml-60{margin-left:15rem}.md\:ml-64{margin-left:16rem}.md\:ml-72{margin-left:18rem}.md\:ml-80{margin-left:20rem}.md\:ml-96{margin-left:24rem}.md\:ml-auto{margin-left:auto}.md\:ml-px{margin-left:1px}.md\:ml-0\.5{margin.is-active > .actext wrapping cordiin Eodn

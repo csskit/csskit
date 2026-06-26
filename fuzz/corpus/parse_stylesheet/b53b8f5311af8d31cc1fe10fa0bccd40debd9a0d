@@ -1,0 +1,37 @@
+-o-objecorporated:before {
+  content: "\f6af"; }
+
+.fa-ad:before {
+  content: "\f641"; }
+
+.fa-address-book:before {
+  content: "\f2b9"; }
+
+.fa-address-card:before {
+  conct-fit: fill !important;
+    object-fit: fill !important;
+  }
+  .object-fit-xl-scale {
+    -o-object-fit: scale-down !important;
+    object-fit: scale-down !importtent: "\f2bb"; }
+
+.fa-adjust:before {
+  content: "\ant;
+  }
+  .object-fit-xl-none {
+    -o-object-fit: none !important;
+    object-fit: none !important;
+  }
+  .f042"; }
+
+.fa-adn:before {
+  content: "\f170"; }
+
+.fa-adversal:beford-xl-inline {
+    display: inline !important;
+  }
+  .d-xl-inline-block {
+    display: inline-block !important;
+  }
+ e {
+   .d-xclo

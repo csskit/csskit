@@ -1,0 +1,223 @@
+: 0 !important;
+}
+
+[type="checkbox"]:checked:before, [type="radio"]:checked:before {
+  position: absolute;
+}
+
+[type="checkbox"]:checked:before {
+  content: '\2713';
+  font-family: sans-serif;
+  font-size: calc(1rem + var(--universal-padding) / 2);
+  top: calc(0rem - var(--universal-padding));
+  left: calc(var(--universal-padding) / 4);
+}
+
+[type="radio"] {
+  border-radius: 100%;
+}
+
+[type="radio"]:checked:before {
+  border-radius: 100%;
+  content: '';
+  top: calc(0.0625rem + var(--universal-padding) / 2);
+  left: calc(0.0625rem + var(--universal-padding) / 2);
+  background: var(--input-fore-color);
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+:placeholder-shown {
+  color:on: static !important;
+}
+
+.position-relative {
+  position: relative !important;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.position-fixed {
+  position: fixed !important;
+}
+
+.position-sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+@supports ((position: -webkit-sticky) or (position: sticky)) {
+  .sticky-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+  }
+}
+
+.srt {
+  float: left !important;
+}
+
+.float-right {
+  float: right !important;
+}
+
+.float-none {
+  float: none !important;
+}
+
+@media (min-width: 576px) {
+  .float-sm-left {
+    float: left !important;
+  }
+  .float-sm-right {
+    float: right !important;
+  }
+  .float-sm-none {
+    float: none !important;
+  }
+}
+
+@media (min-width: 768px) {
+  .float-md-left {
+    float: left !important;
+  }
+  .float-md-right {
+    float: right !important;
+  }
+  .float-md-none {
+    float: none !important;
+  }
+}
+
+@media (min-width: 992px) {
+  .float-lg-left {
+    float: left !important;
+  }
+  .float-lg-right {
+    float: right !important;
+  }
+  .float-lg-none {
+    float: none !important;
+  }
+}
+
+@media (min-width: 1200px) {
+  .float-xl-left {
+    float: left !important;
+  }
+  .float-xl-right {
+    float: right !important;
+  }
+  .float-xl-none {
+    float: none !important;
+  }
+}
+
+.user-select-all {
+  -webkit-user-select: all !important;
+  -moz-user-select: all !important;
+  user-select: all !important;
+}
+
+.user-select-auto {
+  -webkit-user-select: auto !important;
+  -moz-user-select: auto !important;
+  -ms-user-select: auto !important;
+  user-select: auto !important;
+}
+
+.user-select-none {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: none !important;
+  user-select: none !important;
+}
+
+.overflow-auto {
+  overflow: auto !important;
+}
+
+.overflow-hidden {
+  overflow: hidden !important;
+}
+
+.position-static {
+  position: static !important;
+}
+
+.position-relative {
+  position: relative !important;
+}
+
+.position-absolute {
+  position: absolute !important;
+}
+
+.position-fixed {
+  position: fixed !important;
+}
+
+.position-sticky {
+  position: -webkit-sticky !important;
+  position: sticky !important;
+}
+
+.fixed-top {
+  position: fixed;
+  top: 0;
+  rightion: column;
+  }
+  .button-group > :not(:first-child) {
+    border: 0;
+    border-top: 0.0625rem solid var(--button-group-border-color);
+  }
+}
+
+/*
+  Custom elements for forms and input elements.
+*/
+button.primary, [type="button"].primary, [type="submit"].primary, [type="reset"].primary, .button.primary, [role="button"].primary {
+  --button-back-color: #1976d2;
+  --button-fore-color: #f8f8f8;
+}
+
+button.primary:hover, button.primary:focus, [type="button"].primary:hover, [type="button"].primary:focus, [type="submit"].primary:hover, [type="submit"].primary:focus, [er-radius: 100%;
+  content: '';
+  top: calc(0.0625rem + var(--universal-padding) / 2);
+  left: calc(0.0625rem + var(--universal-padding) / 2);
+  background: var(--input-fore-color);
+  width: 0.5rem;
+  height: 0.5rem;
+}
+
+:placeholder-shown {
+  color:on: static !important;
+}
+
+.position-relative {
+  position:.button.secondary, [role="button"].secondary {
+  --button-back-color: #d32f2f;
+  --button-fore-color: #f8f8f8;
+}
+
+button.secondar

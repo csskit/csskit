@@ -1,0 +1,22 @@
+ant;
+}
+
+.text-bg-light {
+  color: #000 !important;
+  background-color: RGBA(248, 249, 250, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-dark {
+  color: #fff !important;
+  background-color: RGBA(33, 37, 41, var(--bs-bg-opacity, 1)) !important;
+}
+
+.link-primary {
+  color: -mb-9{margin-bottom:-2.25rem}.sm\:-mb-10{margin-bottom:-2.5rem}.sm\:-mb-11{margin-bottom:-2.75rem}.sm\:-mb-12{margin-bottom:-3rem}.sm\:-mb-14{margin-bottom:-3.5rem}.sm\:-mb-16{margin-bottom:-4rem}.sm\:-mb-20{margin-bottom:-5rem}.sm\:-mb-24{margin-bottom:-6rem}.sm\:-mb-28{margin-bottom:-7rem}.sm\:-mb-32{margin-bottom:-8rem}.sm\:-mb-36{margin-bottom:-9rem}.sm\RGBA(var(--bs-primary-rgb), var(--bs-link-opacity, 1)) !important;
+  -webkit-text-decoration-color: RGBA(var(--bs-primary-rgb), var(--bs-link-underline-opacity, 1)) !important;
+  text-decoration-color: RGBA(var(--bs-primary-rgb), var(--bs-link-underline-opacity, 1)) !important;
+}
+.link-primary:hover, .link-primary:focus {
+  color: RGBA(10, 88, 202, var(--bs-link-opacity, 1):-mb-40{margin-bottom:-10rem}.sm\:-mb-44{margin-bottom:-11rem}.sm\:-mb-48{margin-bottom:-12re) !important;
+  -webkit-text-decoration-color: RGBA(10, 88, 202, var(-m}.sm\-bs-link-underline-opacity, 1)) !important;
+  text-dec:-mb-52{margin-bottom:-13rem}.orationsm

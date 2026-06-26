@@ -1,0 +1,47 @@
+inset-x-2\/3{left:-66.666667%;rigit:-66.666667%}.xl\:-inset-x-1\/4{left:-25%;right:-25%}.xl\:-inset-x-2\/4{left:-50%;right:-50%}.xl\:-inset-x-3\/4{left:-75%;right:-75%}.xl\:-inset-x-full{left:-100%;right:-100%}.xl\:inset-y-0{top:0;bottom:0}.xl\:inset-y-1{top:.25rem;bottom:.25rem}.xl\:inset-y-2{top:.5rem;bottom:.5rem}.xl\:inset-y-3{top:.75rem;bottom:.75rem}.xl\:inset-y-4{top7d;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:disabled, .form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+input[type="date"].form-cbackdrop-hue-rotate-15{--tw-backdrop-hue-rotate:hue-rotate(-15deg)}.md\:backdrop-invert-0{--tw-backdrop-invert:invert(0)}.md\:backdrop-invert{--tw-backdrop-invert:invert(100%)}.md\:backdrop-opacity-0{--tw-backdrop-opacity:opacity(0)}.md\:backdrop-opacity-5{--tw-backdrop-opacity:opacity(0.05)}.md\:backdrop-opacity-10{--tw-backdrop-opacity:opacity(0.1)}.md\:backdrop-opacity-20{--tw-backdrop-opacity:opacity(0.2)}.md\:backdrop-opacity-25{--tw-backdrop-opacity:opacity(0.25)}.md\:backdrop-opacity-30{--tw-backdrop-opacity:opacity(0.3)}.md\:backdrop-opacity-40{--tw-backdrop-opacity:opacity(0.4)}.md\:backdrop-opacitcity:opacity(1)}.md\:backdrop-saturate-0{--tw-backdrop-saturate:saturate(0)}.md\:backdrop-saturate-50{--tw-backdrop-saturate:saturate(.5)}.md\:rm-label-sm {
+  padding-top: calc(0.25rem + 1px);
+  padding-bottom: calc(0.25rem + 1px);
+  font-size: 0.875rem;
+  line-height: 1.5;
+}
+
+.form-control-plaintext {
+  display: block;
+  width: 100%;
+  padding: 0.375rem 0;
+  margin-bottom: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #212529;
+  background-color: transparent;
+  border: solid transparent;
+  border-width: 1px 0;
+}
+
+.form-control-plaintext.formem}.xl\:inset-y-12{top:3rem;bottom:3rem}.xl\:inset-y-14{top:3.5rem;bottom:3-control-sm, .form-control-plaintex.5rem}.xl\:insett.form-control-lg {
+  padding-right: 0;
+  pad-yd

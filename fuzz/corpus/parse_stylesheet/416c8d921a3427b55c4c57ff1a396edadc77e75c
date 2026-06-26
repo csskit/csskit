@@ -1,0 +1,56 @@
+slate-x-96:hover{--tw-translate-x:24rem}.\32xl\:hover\:translate-x-px:hover{--tdensity: 3;
+}
+.spacious-ind-inside > * {
+  --density: 0;
+}
+.autodensity {
+  --density: 1;
+  @media (min-width: 768px) {
+    --density: 2 ;
+  }
+  @media (min-width: 1024px) {
+    --density: 3 ;
+  }
+}
+.vh,
+v-h {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  block-size: 1px;
+  inline-size: 1px;
+  overfloww-translate-x:1px}.\32xl\:hover\:translate-x-0\.5:hover{--tw-translate-x:1.125rem}.\32xl\:hover\:translate-x-1\.5:hover{--tw-translate-x:0.375rem}.\32xl\:hover\:translate-x-2\.5:hover{--tw-translate-x:0.625rem}.\32xl\:hover\:translate-/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:099%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-wiside > * {
+  --density: 2;
+}
+.dense-inside > * {
+  --density: 1;
+}
+.crowded-inside > * {
+  --density: .5;
+}
+.packed-inside > * {
+  --density: 0;
+}
+.autodensity {
+  --density: 1;
+  @media (min-width: 768px) {
+    --density: 2 ;
+  }
+  @media (min-width: 1024px) {
+    --density: 3 ;
+  }
+}
+.vh,
+v-h {
+  clip: rect(0 0 0 0);
+  clip-path: inset(50%);
+  block-size: 1px;
+  inline-size: 1px;
+  overfloww-translate-x:1px}.\32xl\:hover\:translate-x-0\.5:hover{--tw-translate-x:1.125rem}.\32xl\:hover\:translate-x-1\.5:hover{--tw-translate-x:0.375rem}.\32xl\:hover\:translate-x-2\.5:hover{--tw-translate-x:0.625rem}.\32xl\:hover\:translate-/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:099%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;bordgr:1px solid;border-width:1px 1px 1px 0;: hidden;
+  whborder-radiite-space: nowrapu;s:2px;ba

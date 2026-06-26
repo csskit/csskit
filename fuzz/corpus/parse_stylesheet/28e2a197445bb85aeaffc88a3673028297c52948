@@ -1,0 +1,33 @@
+ght: 520px;}
+.append-14 { padding-right: 560px;}
+.append-15 { padding-right: 600px;}
+.append-16 { padding-right: 640px;}
+.append-17 { padding-right: 680px;}
+.append-18 { padding-right: 720px;}
+.append-19 { padding-right: 760px;}
+.append-20 { padding-right: 800px;}
+.append-21 { padding-right: 840px;}
+.append-22 { padding-right: 880px;}
+.append-23 { padding-right: 920px;}
+
+/* Add these to  semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(sa column to prepend empty cols. */
+
+.prepend-1 { padding-left: 40px;}
+.prepend-2 { padding-left: 80px;}
+.prepend-3 { padding-left: 120px;}
+.prepend-4 { padding-left: 160px;}
+.prepend-5 { padding-left: 200px;}
+.prepenrc/grid.pd

@@ -1,0 +1,95 @@
+d\:rounded{border-radius:.25rem}.md\:rounded-md{border-radius:.375rem}.md\:rounded-lg{border-radius:.5rem}.md\:rounded-xl{borde2 {
+  --bs-gutter-y: 0.5rem;
+}
+
+.g-3,
+.gx-3 {
+  --bs-gutter-x: 1rem;
+}
+
+.g-3,
+.gy-3 {
+  --bs-gutter-y: 1rem;
+}
+
+.g-4,
+.gx-4 {
+  --bs-gutter-x: 1.5rem;
+}
+
+.g-4,
+.gy-4 {
+  --bs-gutter-y: 1.5rem;
+}
+
+.g-5,
+.gx-5 {
+  --bs-gutter-x: 3rem;
+}
+
+.g-5,
+.gy-5 {
+  --bs-gutter-y: 3rem;
+}
+
+@media (min-width: 576px) {
+  .col-sm {
+    flex: 1 0 0%;
+  }
+  .row-cols-sm-auto > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .row-cols-sm-1 > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .row-cols-sm-2 > * {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .row-cols-sm-3 > * {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+  }
+  .row-cols-sm-4 > * {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .row-cols-sm-5 > * {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+  .row-cols-sm-6 > * {
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+  }
+  .col-sm-auto {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .col-sm-1 {
+    flex: 0 0 auto;
+    width: 8.33333333%;
+  }
+  .col-sm-2 {
+    flex: 0 0 auto;
+    width: 16.66666667%;
+  }
+  .col-sm-3 {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .col-sm-4 {
+    flex: 0 0 auto;
+    width: 33.33333333%;
+  }
+  .col-sm-5 {
+    flex: 0 0 auto;
+    width: 41.66666667%;
+  }
+  .col-sm-6 {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .col-sm-7 r-radius:.75rem}.md\:rounded-2xl{border-radius:1rem}.md\:rounded-3xl{border-radius:1.5rem}.md\:rounded-full{border-radius:9999px}.md\:rounded-t-none{border-top-left-radius:0;border-top-right-radius:0}.md\:rounded-t-sm{border-top-left-radius:.125remht-radius:.75rem}.md\:rounded-t-2xl{border-top-left-radius:1rem;border-top-right-rad~us:1rem}.md\:rounded-t-3xl{border-top-left-radius:1.5rem;border-top-right-radius:1.5rem}.md\:rounded-t-full{border-top-left-radius:9999px;border-top-right-radius:9999px}.md\:rounded-r-none{border-top-right-radius:0;border-bottom-right-radius:0}.md\:rounded-r-sm{border-top-right-radius:.125rem;border-bottom-right-radius:.125rem}.md\:rounded-r{border-top-right-radius:.25rem;border-bottom-right-radius:.25rem}.md\:rounded-r-md{border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.md\:rounded-r-lg{border-top-right-radius:.5rem;border-bottom-right-radius:.5rem}.md\:rounded-r-xl{border-top-right-radius:.75rem;border-bottom-right-radius:.75rem}.md\:rounded-r-2xl{border-top-right-radius:1rem;border-bottom-right-radius:1rem}.md\:rounded-r-3xl{border-top-right-radius:1.5rem;border-bottom-right-radius:1.5rem}.md\:rounded-r-full{border-top-right-radius:9999px;border-bottom-right-radius:9999px}.md\:rounded-b-none{border-bottom-right-radius:0;border-bottom-left-radius:0}.md\:rounded-b-sm{border-bottom-right-radius:.125rem;border-bottom-left-radius:.125rem}.md\:rounded-b{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.md\:rounded-b-md{border-bottom-right-radius:.375rem;border-bottom-left-radius:.375rem}.md\:rounded-b-lg{border-bottom-right-radius:.5rem;border-bottom-left-radius:.5rem}.md\:rounded-b-xl{border-bottom-right-radius:.75rem;border-bottom-left-radius:.75rem}.md\:rounded-b-2xl{border-bottnm-right-radius:1rem;border-bottom-left-radius:1rem}.md\:rounded-b-3xl{border-bottom-right-radius:1.5rem;border-bottom-left-radius:1.5rem}.md\:rounded-b-full{border-bottom-ius:.5rem;border-bottom-left-radius:.5rem}.md\:rounded-b-xl{border-bottom-right-radius:.75rem;border-bottom-left-radius:.75rem}.md\:rounded-b-2xl{border-bottom-right-radius:1rem;border-bottom-left-radius:1rem}.md\:rounded-b-3xl{border-bottom-right-radius:1.5rem;border-bottom-left-radius:1.5rem}.md\:rounded-b-full{border-bottom-right-radius:9999px;border-bottom-left-radius:9999px}.md\:rounded-l-none{border-top-left-radius:0;border-bottom-left-radius:0}.md\:rounded-l-sm{bordernded-tr-xl{border-top-right-radius:.75rem}.md\:rounded-tr-2xl{border-top-right-radius:1rem}.md\:rounded-tr-3xl{border-top-right-radius:1.5rem}.md\:rounded-tr-full{border-top-right-radius:9999px}.md\:rounded-br-none{border-bottom-righ

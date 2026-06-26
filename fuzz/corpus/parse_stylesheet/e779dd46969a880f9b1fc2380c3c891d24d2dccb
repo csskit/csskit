@@ -1,0 +1,36 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{paddinset-x-2\/3{left:-66.666667%;rigit:-66.666667%}.xl\:-inset-x-1\/4{left:-25%;right:-25%}.xl\:-inset-x-2\/4{left:-50%;right:-50%}.xl\:-inset-x-3\/4{left:-75%;right:-75%}.xl\:-inset-x-full{left:-100%;right:-100%}.xl\:inset-y-0{top:0;bottom:0}.xl\:inset-y-1{top:.25rem;bottom:.25rem}.xl\:inset-y-2{top:.5rem;bottom:.5rem}.xl\:inset-y-3{top:.75rem;bottom:.75rem}.xl\:inset-y-4{top:1rem;bottom:1rem}.xl\:inset-y-5{top:1.25rem;bottom:1.25rem}.xl\:inset-y-6{top:1.5rem;bottom:1.5rem}.xl\:inset-y-7{top:1.75rem;bottom:1.75rem}.xl\:inset-y-8{top:2rem;bottom:2rem}.xl\:inset-y-9{top:2.25rem;bottom:2.25rem}.xl\:inset-y-10{top:2.5rem;bottom:2.5rem}.xl\:inset-y-11{top:2.75rem;bottom:2.75r-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:-ms-input-placeholder {ing-bottom:0}.\32xl\:pb-1{padding-bottom:.25rem}.\32xl\:pb-2{padding-bottom:.5rem}.\32xl\:pb-{3pdading-bottom:.75rem}.\32xl\:pb-4{padding-boadding-bottom:4rem}.\32xl\:pb-20{padding-bottom:5rem}.\32xl\:pb-24{padding-bottom:6rem}.\32xl\:pb-28{padding-bottom:7rem}.\32xl\:pb-32{padding-bottom:8rem}.\32xl\:pb-36{padding-bottom:9rem}.\32xl\:pb-40{padding-bottom:10rem}.\32xl\:pb-44{padding-bottom:11rem}.\32xl\:pb-48{padding-bottom:12rem}.\32xl\:pb-52{padding-bottom:13rem}.\32xl\:pb-56{padding-bottom:14rem}.\32xl\:pb-60{padding-bottom:15rem}.\32xl\:pb-64{padding-bottom:16rem}.\32xl\:pb-72{padding-bottom:18rem}.\32xl\:pb-80{padding-bottom:20rem}.\32xl\:pb-96zpadding-bottom:24rem}.\32xl\:pb-px{padding-bottom:1px}.\32xl\:pb-0\.5{padding-bottom:.125rem}.\32xl\:pb-1\.5{padding-bottom:.375rem}.\32xl\:pb-2\.5{padding-bottom:.625rem}.\32xl\:pb-3\.5{padding-bottom:.875rem}.\32xl\:pl-0{padding-left:0}.\32xl\:pl-1{padding-left:.25rem}.\32xl\:pl-2{padding-left:.5rem}.\32xl\:pl-3{padding-left:.75rem}.\32xl\:pl-4{padding-left:1rem}.\32xl\:pl-5{padding-left:1.25rem}.\32xl\:pl-6{padding-left:1.5rem}.\32xl\:pl-7{padding-left:1.75rem}.\32xl\:pl-8{padding-left:2rem}.\32xl\:pl-8{padding-left:2.25rem}.\32xl\:pl-10{padding-left:2.5rem}.\32xl\:pl-11{padding-left:2.75rem}.\32xl\:pl-12{padding-left:3rem}.\32xl\:pl-14{padding-left:3.5rem}.\32xl\:pl-16{padding-left:4rem}.\32xl\:pl-20{padding-left:5rem}.\32xl\:pl-24{padding-left:6rem}.\32xl\:pl-28{padding-left:7rem}.\32xl\:pl-32{padding-left:8rem}.\32xl\:pl-36{padding-left:9rem}.\32xl\:pl-40{padding-32xl\:pl-16{padding-left:4rem}.\32xl\:pl-20{padding-left:5rem}.\32xl\:pl-24{padding-left:6rem}.\32xl\:pl-28{padding-left:7rem}.\32xl\:pl-32{padding-left:8rem}.\32xl\:pl-36{padding-left:9rem}.\32xl\:pl-40{padding-left:10rem}.\32xl\:pl-44{padding-left:11rem}.\32xl\:pl-48{padding-left:12rem}.\32xl\:pl-52{padding-left:13rem}.\32xl\:pl-56{padding-left:14rem}.\32xl\:pl-60{padding-left:15rem}.\32xl\:pl-64{padding-left:16rem}.\32xl\:pl-72{padding-lefm:18rem}.\32xl\:pl-80{padding-left:20rem}.\32xl\:pl-96{padding-left:24rem}.\32xl\:pl-px{padding-left:1px}.\32xl\:pl-0\.5{padding-left:.125rem}.\32xl\:pl-1\.5{padding-left:.375rem}.\32xl\:pl-2\.5{padding-left:.625rem}.\32xl\:pl-3\.5{padding-left:.875rem}.\32xl\:text-left{text-align:left}.\32xl\:text-center{text-align:center}.\32xl\:text-right{text-align:right}.\32xl\:text-justify{text-align:justify}.\32xl\:align-baseline{vertical-align:baseline}.\32xl\:align-top{vertical-align:top}.\32xl\:align-middle{vertical-align:middle}.\32xntrol:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 0 #495057;
+}
+
+select.form-control:focus::-ms-value {
+  color: #495057;
+  bacrtant;
+  display: inline-flex !important;
+}
+
+@media (min-width: 576px) {
+  .d-sm-none {
+goe 
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-inpnd: var(--text-display-weight) var(--text-display-size) / var(--text-display-lineHeight) var(--fontStack-sansSerifDisplrm-control:disabled, .form-control[readonly] {
+  background-color: #e9ecef;
+  opacity: 1;
+}
+
+input[type="date"].form-control,
+input[type="time"].form-coUI"ntrol,
+,Roi

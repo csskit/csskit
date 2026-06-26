@@ -1,0 +1,36 @@
+ebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fadeIn;
+}
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%, 0);
+    transform: translate3d(0, -100%, 0);
+  }
+
+  to {
+    opacity: 1;
+    -00{--tw-border-opacity:1}.sm\:focus-within\:border-opacity-0:focus-within{--tw-border-opacity:0}.sm\:focus-within\:border-opacity-5:focus-within{--tw-border-opacity:0.05}.sm\:focus-within\:border-opacity-10:focus-within{--tw-border-opacity:0.1}.swebkit-transform: translate3d(0, 0, 0);
+    transformm\:focus-within\:border-op: translate3d(0, 0, 0);
+  }
+}
+@keyframes fadeInDown acity-20:fo{c

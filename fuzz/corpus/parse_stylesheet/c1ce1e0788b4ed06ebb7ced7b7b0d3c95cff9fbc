@@ -1,0 +1,134 @@
+switch-paddle {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }
+  input:disabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0.5; }
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-transform: translateY(-50%);
+          transform: translateY(-50%); }
+
+.switch-active {
+  left: 8%;
+  display: none; }
+  input:checked + label > .switch-active {
+    display: block; }
+
+.switch-inactive {
+  right: 15%; }
+  input:checked + label > .switch-inactive {
+    display: none; }
+
+.switch.tiny {
+  height: 1.5rem; }
+  .switch.tiny .switch-paddle {
+    width: 3rem;
+    height: 1.5rem;
+    font-size: 0.625rem; }
+  .: block; }
+  table.stack td {
+    border-top: 0; } }
+
+table.sbroll {
+  display: block;
+  width: 100%;
+  overflow-x: auto; }
+
+table.hover thead tr:hover bold;
+    text-align: left; }
+  tbody th,
+  tbody td {
+    padding: 0.5rem 0.625rem 0.625rem; }
+  tbody tr:nth-child(even) {
+    border-bottom: 0;
+    background-color: #f1f1f1; }
+  table.unstriped tbody {
+    background-color: #fefefe; }
+    table.unstriped tbody tr {
+      border-bottom: 1px solid #f1f1f1;
+      background-color: #fefefe; }
+
+@media print, screen and (max-width: 63.99875em) {
+  table.stack thead {
+    display: none; }
+  tab   box-shadow: var(--shadow-active);
+  }
+  &:active:is([aria-pressed], [aria-expanded]) {
+    color: var(--accent);
+    box-shadow: var(--pressed-shadow-active);
+  }
+  &:where([aria-pressed=true], [aria-expanded=true]) {
+    box-shadow: var(--pressed-shadow);
+    background: var(--pressed-interactive-bg);
+    color: var(--accent);
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--pressed-shadow-focus);
+    }
+  }
+  &:disabled {
+    cursor: not-allowed;
+    --fg: var(--muted-fg);
+    box-shadow: var(--shadow-disabled);
+  }
+  &:is(.big, .\<big\>) {
+    min-block-size: calc(1.5 * var(--rhythm, 1rlh));
+    font-size: 1rem;
+    padding-inline: calc(.5 * var(--rhythm, 1rlh));
+    line-height: var(--rhythm, 1rlh);
+  }
+}
+a.\<button\>:not([specificity-hack]) {
+  cursor: default;
+}
+strong > :where(button, input[type=submit], input[type=reset], input[type=button], .\<button\>):not(.\<a\>) {
+  background: var(--accent);
+  color: var(--box-bg);
+  border-color: transparent;
+  font-weight: bold;
+  &:is(.plain, .info, .ok, .warn, .bad) {
+    --fg: var(--box-bg);
+    --muted-accent: var(--graphical-fg);
+  }
+  &:active:is([aria-pressed], [aria-expanded]) {
+    color: var(--graphical-fg);
+    box-shadow: var(--pressed-shadow-active);
+  }
+  &:where([aria-pressed=true], [aria-expanded=true]) {
+    box-shadow: var(--pressed-shadow);
+    background: var(--pressed-interactive-bg);
+    color: var(--graphical-fg);
+    border-color: var(--muted-fg);
+    &:hover,
+    &:focus-visible {
+      box-shadow: var(--pressed-shadow-focus);
+    }
+  }
+  &:disabled {
+  }
+}
+input::file-selector-button {
+  display: inline-block;
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  vertical-align: middle;
+  box-sizing: border-box;
+  font-size: .8rem;
+  line-height: 1.125em;
+  font-family: var(--secondary-font);
+  min-height: var(--rhythm, 1rlh);
+le.stack tfoot {
+    display: none; }
+  table.stack tr,
+  table.stack th,
+  table.  background: var(--interactive-bg);
+  color: var(--fg);
+  border: var(--interactive-border-width)stack var(--interactive-border-style) var(--muted-fg);
+  box-shadow: var( td {
+   --

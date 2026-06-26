@@ -1,0 +1,12 @@
+bs-nav-tabs-link-active-bg);
+  border-color: var(--bs-nav-tabs-link-active-border-color);
+}
+.nav-tabs .dropdown-menu {
+  margin-top: calc(-1 * var(--bsm\:focus\:bg-purity-100:focus{opacity:1}.bg-blend-normal{background-blend-mode:normal}.bg-blend-multiply{background-blend-mode:multiply}.bg-blend-screen{background-blend-mode:screen}.bg-blend-overlay{background-blend-mode:overlay}.bg-blend-darken{background-blend-mode:darken}.bg-blend-lighten{background-blend-moe:difference}.mix-blend-exclusion{mix-blend-mode:exclusion}.mix-blend-hue{mix-blty:1;background-color:rgba(252,231,243,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-200:focus{--tw-bg-opacity:1;background-color:rgba(251,207,232,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-300:focus{--tw-bg-opacity:1;background-color:rgba(249,168,212,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-400:focus{--tw-bg-opacity:1;background-color:rgba(244,114,182,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-500:focus{--tw-bg-opacity:1;background-color:rgba(236,72,153,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-600:focus{--tw-bg-opacity:1;background-color:rgba(219,39,119,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-700:focus{--tw-bg-opacity:1;backge-700:focus{--tw-bg-opacity:1;background-color:rgba(109,40,217,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-800:focus{--tw-bg-opacity:1;background-color:rgba(91,33,182,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-900:focus{--tw-bg-opacity:1;background-color:rgba(76,29,149,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-50:focus{--tw-bg-opacity:1;background-color:rgba(253,242,248,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-101:focus{--tw-bs-nav-tabs-border-width));
+  border-top-lent;
+  text-decoration-color: RGBA(var(--bs-light-rgb), var(--bs-hover\:bg-opacity-90{--tw-bg-opacity::focus-wg-opacity:1;background-colithin\:bg-opaclink-underline-opacity, 1)) !important;
+}
+.link-light:hover, .link-light:focus {
+  color: RGBA(249, 250, 251, vor:rgba(252,231,243,var(--tw-bg-opacity))}.sm\:focus\:bg-pink-200:focus{--tw-bg-opacity:1;background-color:rgba(251,207ar(--bs-link-opacity, 1)) !important;
+  -webkit-text-decoration-color: RGBA(249, 250, 251, var(--bs-link-underline-opacity, 1)) !important;
+  text-decoration,23-color2,: v

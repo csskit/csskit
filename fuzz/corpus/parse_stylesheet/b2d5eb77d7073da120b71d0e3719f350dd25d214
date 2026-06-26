@@ -1,0 +1,43 @@
+{-y-2      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list lbael,
+.check-list .label {
+  display: inline-block; }
+
+/**
+ * Spoken forms are for forms that read like spoken word, e.g.:
+ *
+   <li class=spoken-form>
+       Hello, my <label for=spoken-name>name</label> is
+       <input type=text class=text-input id=spoken-name>. My home
+       <label for=country>country</label> is
+       <select id=country>
+           <option>UK</option>
+           <option>US</option>
+           <option>Other</option>
+       </select>
+   </li>
+ *
+ */
+.spoken-form label {
+  di% zsplay:  read like spoken word, e.g.:
+ *
+   <solid var(--borderColor-default);color:var(--fgColor-default);display:block;font-size:inherit;font-weight:var(--base-text-weight-semibold);margin-bottom:0;margin-top:0;padding:var(--control-medium-paddingInline-condensed) var(--control-medium-paddingInline-spacious)}.menu-heading:hover{-webkit-text-decoration:none;text-decoration:none}.menu-heading:first-child{border-top-left-radius:var(--borderRadius-medium);border-top-right-radius:var(--borderRadius-medium)}.menu-heading:last-child{border-bottom:0;border-bottom-left-radius:var(--borderRadius-medium);border-bottom-right-radius:var(--borderRadius-medium)}.tabnav{border-bottom:var(--borderWidth-thin) solid var(--borderColor-default);margin-bottom:var(--stack-gap-normal);margin-top:0}.tabnav-tabs{display:flex;margin-bottom:calc(var(--borderWidth-thin)*-1);overflow:hidden}.tabnav-tab{background-color:initial;border:var(--borderWidth-thin) solid rgba(0,0,0,0);border-bottom:0;color:var(--fgColor-muted);display:inline-block;flex-shrink:0;font-size:var(--text-body-size-medium);line-height:23px;padding:var(--base-size-8) var(--control-medium-paddingInline-spacious);-webkit-text-decoration:none;text-decoration:none;transition:color .2s cubic-bezier(0.3, 0, 0.5, 1)}.tabnav-tab.selected,.tabnav-tab[aria-current]:not([aria-current=false]),.tabnav-tab[aria-selected=true]{background-color:var(--bgColor-default);border-color:var(--borderColor-default);border-radius:var(--borderRadius-medium) var(--borderRadius-medium) 0 0;color:var(--fgColor-default)}:is(.tabnav-tab.selected,.tabnav-tab[aria-selected=true],.tabnav-tab[aria-current]:not([aria-current=false])) .octicon{color:inherit}.tabnav-tab:hover{color:var(--fgColor-default);-webkit-text-decoration:none;text-decoration:none;transition-duration:.1s}.tabnav-tab:focus,.tabnav-tab:focus-visible{border-radius:var(--borderRadius-medium) var(--borderRadius-medium) 0 0 !important;outline-offset:-6px}.tabnav-tab .octicon,.tabnav-tab:active{color:varli class=spoken-form>
+       ed aft)er a field when that field is in 

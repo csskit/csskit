@@ -1,0 +1,66 @@
+    monospace,
+    monospace;
+  --breadcrumb-page: " / ";
+  --breadcrumb-step: " \203a  ";
+  --densser-select:none;user-select:none;background-color:rgba(0,0,0,0);border:0;appearance:none}.btn-link:hover{text-decoration:underline}.btn-link:disabled,.btn-link:disabled:hover,.btn-link[aria-disabled=true],.btn-link[aria-disabled=true]:hover{color:var(--fgColor-disabled, var(--color-primer-fg-disabled));cursor:default}.btn-link:not(.dropdown-item):focus,.btn-link:not(.dropdown-item):focus-visible{border-radius:6px;outline-offset:0}.btn-invisible{color:var(---fgColor-accent, var(--color-accent-fg));background-color:rgba(0,0,0,0);border:0;border-radius:6px;box-shadow:none}.btn-invisible:hover,.btn-invisible.zeroclipboard-is-hover{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--button-default-bgColor-hover, var(--color-btn-hover-bg));outline:none;box-shadow:none}.btn-invisible:active,.btn-invisible.selected,.btn-invisible[aria-selected=true],.btn-invisible.zeroclipboard-is-active{color:var(--fgColor-accent, var(--color-accent-fg));background:none;border-color:var(--button-default-borderColor-active, var(--color-btn-active-border));outline:2px sor(--bgColor-accent-muted, var(--colo      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.cholor-num: #r-accent-muted))ent\:end {
+  align-content: end;
+}
+.cnntainer {
+  max-inline-size: var(--eff-line-length);
+  adding-inline-start\:0 {
+  padding-inline-start: 0;
+}
+.padding-inline-start {
+  padding-inline-start: var(--gap);
+}
+.padding-inline-end\:0 {
+  padding-inline-end: 0;
+}
+.padding-inline-end {
+  padding-inline-end: var(--gap);
+}
+.padding-start\:0 {
+  padding-block-start: 0;
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;`  column-width: var(--col-width);
+  column-gap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (brea([specificity-hack]) {
+  margin-block: 0;.}
+.margin-block:not([specificity-hack]) {
+  margin-block: var(--gap);
+}
+.margin-block\:auto:not([specificity-hack]) {
+  margin-block: auto;
+}
+.margin-block-start\:0:not([specificity-hack]) {
+  margin-block-start: 

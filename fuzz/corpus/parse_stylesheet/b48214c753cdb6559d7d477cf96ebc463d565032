@@ -1,0 +1,50 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-right > .arrow::after, .bs-popover-auto[x-placement^="right"] > .arrow::after {
+ uto[x-placement^="bottom"] > .arrow:erse;
+            acement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-right > .arrow::after, .bs-popover-auto[x-placement^="right"] > .arrow::after {
+ uto[x-placement^="bottom"] > .arrow:erse;
+            acement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-right > .arrow::after, .bs-popover-auto[x-placement^="right"] > .arrow::after {
+ uto[x-placement^="bottom"] > .arrow:erse;
+            flex-direction: row-reverse; }
+  .large-f9rem}.lg\:right-40{right:10rem}.lg\:right-44{rlex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+ flex-direction: row-reverse; }
+  .large-f9rem}.lg\:right-40{right:10rem}.lg\:right-44{rlex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top:rgba(0, 0, 0, 0.25);
+}
+
+.bs-popover-right > .arrow::after, .bs-popover-auto[x-placement^="right"] > .arrow::after {
+ uto[x-placement^="bottom"] > .arrow:erse;
+            flex-direction: row-reverse; }
+  .large-f9rem}.lg\:right-40{right:10rem}.lg\:right-44{rlex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+ flex-direction: row-reverse; }
+  .large-f9rem}.lg\:right-40{right:10rem}.lg\:right-44{rlex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  ight:11borr

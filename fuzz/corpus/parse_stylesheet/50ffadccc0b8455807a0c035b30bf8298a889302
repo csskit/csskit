@@ -1,0 +1,59 @@
+0:focus-within{--tw-text-opacity:1;color:rgba(131,24,67,var(--tw-text-opacity))}.\32xl\:hover\:text-transparent:hover{color:transparent}.\32xl\:hover\:text-current:hover{color:currentColor}.\32xl\:hover\:text-black:hover{--tw-text-opacity:1;color:rgba(0,0,0,var(--tw-text-opacity))}.\32xl\:hover\:text-white:hover{--tw-text-opacity:1;color:rgba(255,255,255,var(--tw-text--text-opacity))}.\32xl\:hover\:text-gray-600:hover{--tw-text-opacity:1;color:rgba(75,85,99,var(--tw,text-opacity))}.\32xl\:hover\:text-gray-700:hover{--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-800:hover{--tw-text-opacity:1;color:rgba(31,41,55,var(--tw-text-opacity))}.\32xl\:hover\:text-gray-900:hover{--tw-text-opacity:1;color:rgba(17,24,39,var(--tw-text-opacity))}.\32xl\:hover\:text-red-50:hover{--tw-text-opacity:1;color:rgba(254,242,242,var(--tw-text-opacity))}.\32xl\:hover\:text-red-100:hover{--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity))}.\32xl\:hover\:text-red-200:hover{--tw-text-opacity:1;color:rgba(254,202,202,var(--tw-text-opacity))}.\32xl\:hover\:text-red-300:hover{--tw-text-opacity:1;color:rgba(252,165,165,var(--tw-text-opacity))}.\32xl\:hover\:text-red-400:hover{--tw-text-opacity:1;color:rgba(248,113,113,var(--tw-text-opacity))}.\32xl\:hover\:text-red-500:hover{--tw-text-opacity:1;color:rgba(
+}
+
+pre {
+  overflow: auto;
+  background: var(--secondary-back-color);
+  padding: calc(1.5 * var(--universal-padding));
+  margin: var(--universal-margin);
+  border: 0.0625reor: #0277bd;
+  --a-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+  font-size: 1em;
+}
+
+html, * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.5;
+  -webkit-text-sizet: 500;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  color: var(--secondary-fore-color);
+  display: block;
+  margin-top: -0.25rem;
+}
+
+h1 {
+  font-size: calc(1rem * var(--headiny:1;color:rgba(254,202,202,var(--tw-text-opacity))}.\32xl\:hover\:text-red-300:hover{--tw-text-opacity:1;color:rgba(252,165,165,var(--tw-text-opacity))}.\32xl\:hover\:text-red-400:hover{--tw-text-opacity:1;color:rgba(248,113,113,var(--tw-text-opacity))}.\32xl\:hover\:text-red-500:hover{--tw-text-opacity:1;color:rgba(
+}
+
+pre {
+  overflow: auto;
+  background: var(--secondary-back-color);
+  padding: calc(1.5 * var(--universal-padding));
+  margin: var(--universal-margin);
+  border: 0.0625reor: #0277bd;
+  --a-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+  font-size: 1em;
+}
+
+html, * {
+  font-family: -apple-system, BlinkMacSg-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem *tw-text-opacity))}.\32xl\:hover\:text-red-400:hover{--tw-text-opacity:1;color:rgba(248,113,113,var(--tw-text-opacity))}.\32xl\:hover\:text-red-500:hover{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}.\32xl\:hover\:text-red-600:hover{--tw-text-opacity:1;color:rgba(220,38,38,var(--tw-text-opacity))}.\32xl\:hover\:text-red-700:ho:1;color:rgba(209,250,229,var(--tw-text-opacity))}.\32xl\:hover\:text-green-200:hover{--tw-text-opacity:1;color:rgba(167,243,208,var(--tw-text-opacity))}.\32xl\:hover\:text-green-300:hover{--tw-text-opacity:1;color:rgba(110,231,183,var(--tw-text-opacity))}.\32xl\:hover\:text-green-400:hover{--tw-text-opacity:1;color:rgba(52,211,153,var(--tw-text-opacity))}.\32xl\:hover\:text-green-500:hover{--tw-text-opacity:1;color:rgba(16,185,129,var(--tw-text-opacity))}.\32xl\:hover\:text-green-600:hover{--tw-text-opacity:1;color:rgba(

@@ -1,0 +1,74 @@
+aceholder-opacity-30:focus::placeholder{--tw-placeholder-opacity:0.3}.lg\:focus\:placeholder-opacity-40:focus::placeholder{--tw-placeholder-opacity:0.4}.lg\:focus\:placeholder-opacity-50:focus::placeholder{--tw-placeholder-opacity:0.5}.lg\:focus\:placeholder-opacity-60:focus::placeholder{--tw-placeholder-opacity:0.6}.lg\:focus\:placeholder-opacity-70:focus::placeholder{--tw-placeholder-opacity:0.7}.lg\:focus\:placeholder-opacity-75:focus::placeholder{--tw-placeholder-opacity:0.75}.lg\:focus\:placeholder-opacity-80:focus::placeholder{--tw-placeholder-opacity:0.8}.lg\:focus\:placeholder-opacity-90:focus::placeholder{--tw-placeholder-opacit0;
+}
+
+blockquote {
+  margin: 0 0 1rem;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+small, .small {
+  font-size: 0.875em;
+}
+
+mark, .mark {
+  padding: 0.1875em;
+  background-color: var(--bs-highlight-bg);
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: baseline;
+y:0.9}.lg\:focus\:placeholder-opacity-95:focus::placeholder{--tw-placeholder-opacity:0.95}.lg\:focus\:placeholder-opacity-100:focus::placeholder{--tw-placeholder-opacity:1}.lg\:opacity-0{opacity:0}.lg\:opacity-5{opacity:.05}.lg\:opacity-10{opacity:.1}.lg\:opacity-20{opacity:.2}.lg\:opacity-25{opacity:.25}.lg\:opacity-30{opacity:.3}.lg\:opacity-40{opacity:.4}.lg\:opacity-50{opacity:.5}.lg\:opac}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+a {
+  color: rgba(var(--bs-link-color-rgb), var(--bs-link-opacity, 1));
+  text-decoration: underline;
+}
+a:hoverity-60{opacity:.6}.lg\:opacity-70{opacity:.7}.lg\:opacity-75{opacity:.75}.lg\:opacity-80{opacity:.8}.lg\:opacity-90{opacity:.9}.lg\:opacity-95{opacity:.9 {
+  --bs-link-color-rgb: var(--bs-link-hover-color-rgb);
+}
+
+a:not([href]):not([class]), a:not([href]):not([class]):hover {
+  color: inherit;
+  text-decoration: none;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: var(--bs-font-monospace);
+  font-size: 1em;
+}
+
+pre {
+  display: block;
+  margin-top: 0;
+  margin-bottom: 1rem;
+  overflow: auto;
+  font-size: 0.875em;
+}
+pre code {
+  font-size: inherit;
+  color: inherit;
+  word-break: normal;
+}
+
+code {
+  font-size: 0.875em5}.lg\:opacity-100{opacity:1}.group:hover .lg\:group-hover\:opacity-0{opacity:0}.group:hover .lg\:group-hover\:opacity-5{opacity:.05}.group:hover .lg\:group-hover\:opacity-10{opacity:.1}.group:hover .lg\:group-hover\:opacity-20{opacity:.2}.group:hover .lg\:group-hover\:opacity-25{opacity:.25}.group:hover .lg\:group-hover\:opacity-30{opacity:.3}.group:hover .lg\:group-hover\:opacity-40{opacity:.4}.grou;
+  color: var(-p:-hover b

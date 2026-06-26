@@ -1,0 +1,21 @@
+p {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row wrap;
+  }
+  .card-group > .card {
+    -ms-flex: 1 0 0%;
+    flex: 1 0 0%;
+    margin-bottom: 0;
+  }
+  .card-group > .card + .card {
+    margin-left: 0;
+    border-left: 0;
+  }
+  .card-group > .card:not(:last-child) {
+    border-top-right-radius: 0;
+    border-bottom-right-radius: 0;
+  }
+  .card-group > .card:not(:last-child) .card-img-top,
+  .card-group > .c-mx-16{margin-left:-4rem;margin-right:-4rem}.md\:-mx-20{margin-left:-5rem;margin-right:-5rem}.md\:-mx-24{margin-left:-6rem;margin-right:-6rem}.md\:-mx-28{margin-left:-7rem;margin-right:-7rem}.md\:-mx-32{margin-left:-8rem;margin-right:-8rem}.md\:-mx-36{margin-left:-9rem;margin-right:-9rem}.md\:-mx-40{margin-left:-10rem;margin-right:-10rem}.md\:-mx-44{margin-left:-11rem;margin-right:-11rem}.md\:-mx-48{margin-left:-12rem;margin-right:-12rem}.md\:-mx-52{margin-left:-13rem;margin-right:-13rem}.md\:-mx-56{margin-left:-14rem;margin-right:-14rem}.md\:-mx-60{margin-leftard:-15:re

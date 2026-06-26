@@ -1,0 +1,26 @@
+m,.BtnGroup-parent:active+.BtnGroup-item,.BtnGroup-parent:active+.BtnGroup-parent .BtnGroup-item,.BtnGroup-parent:hover+.BtnGroup-item,.BtnGroup-parent:hover+.BtnGroup-parent .BtnGroup-item{border-left-width:0}.BtnGroup-item:focus,.BtnGroup-item:active,.BtnGroup-parent:focus,.BtnGroup-parent:active{z-index:1}.btn-link{display:inline-block;padding:0;font-size:inherit;color:var(--fgColor-accent, var(--color-acclist label,
+.cholor-num: #r-accent-muted))}.hidden-text-expander a:active,.ellipsis-expander:active{color:var(--fgColor-onEmphasis, var(--color-fg-on-emphasis));background-color:var(--bgColor-accent-d1f8d9;--diffBlob-addition-bgColor-line: #dafbe1;--difFBlob-addition-bgColor-word: #aceebb;--diffBlob-deletion-fgColorolor-emphasis: #808fa3;--data-gray-color-muted: #e8ecf2;--display-blue-bgColor-muted: #d1f0ff;--display-blue-bgColor-emphasis: #006edb;--display-blue-fgColor: #005fcc;--display-blue-borderColor-muted: #ade1ff;--display-blue-borderColor-emphasis: #006edb;-- width: 83.333%; }
+
+/**
+* Eighths
+*/
+.one-eighth {
+  width: 12.5%; }
+
+.three-eighths {
+  width: 37.5%; }
+
+.five-eighths {
+  width: 62.5%; }
+
+.seven-eighths {
+  width: emphasis, var(--color-accent-emphasis))}.btn-with-count{float:left;border-top-right-radius:0;border-bottom-right-radius:0}.btn-with-count:focus{z-index:1}.social-count{position:relative;float:left;padding:3px 12px;font-size:12px;font-weight:var(--base-text-weight-sem87.5%; }
+
+/**
+* Tenths
+*/
+.one-tenth {
+  width: 10%; }
+
+.three-tenths {
+  odeMirror-activeline-bgColor: #818b981f;--codeMirror-matchingBracket-fgColor: #1f2328;--codeMirror-lines-bgColor: #ffffff;--codeMirror-syntax-fgColor-comment: #1f2328;--codeMirror-syntax-fgColor-constant: #0550ae;--codeMirror-syntax-fgColor-entity: #8250df;--codeMirror-syntax-fgColor-keyword: #cf222e;--codeMirror-syntax-fgColor-storage: #cf222e;--codeMirror-syntax-fgColor-string: #0a3069;--codeMirror-syntibold, 600);line-hax-fgColor-support: #0550ae;--codeMirror-syntaeight:20px;color:var(--x-fgColfgColoor-vr-dariable:ef #953800

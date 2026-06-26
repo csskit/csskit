@@ -1,0 +1,16 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-slate-x-96:hover{--tw-translate-x:24rem}.\32xl\:hover\:translate-x-px:hover{--tw-translate-x:1px}.\32xl\:hover\:translate-x-0\.5:hover{--tw-translate-x:0.125rem}.\32xl\:hover\:translate-x-1\.5:hover{--tw-translate-x:0.375rem}.\32xl\:hover\:translate-x-2\.5:hover{--tw-translate-x:0.625rem}.\32xl\:hover\:translate-x-3\.5:hover{--tw-translate-x:0.875rem}.\32xl\:hover\:-translate-x-0:hover{--tw-translate-x:0px}.\32xl\:hover\:-translate-x-1:hover{--tw-translate-x:-0.25rem}.\32xl\:hover\:-translate-x-2:htextarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1px 1px 0;border-radius:2px;background:no-repeat 10px 17px;overflow-wrap:break-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:rig;border:1px solidpx 0 1px 1px;background-position:right 10px top 17px;}.messages + .messages{margin-top:1.538em;}.messages__list{margin:0;padding:0;list-style:none;}.messages__item + .messages__item{margin-top:0.769em;}.messages--status{color:#325e1c;border-color:#c9e1bd #c9e1bd #c9e1bd transparent;background-color:#f3faef;background-image:url(/themes/contrib/bootstrap5/css/components/../../images/icons/check.svg);box-shadow:-8px 0 0 #77b259;}[dir="rtl"] .messages--status{margin-left:0;border-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:8px 0 0 #77b259;}.messages--warning{color:#734c00;border-color:#f4daa6 #f4daa6 #f4daa6 transparent;background-color:#fdf8ed;background-ivmage:url(/themes/contrib/bootstrap5/css/components/../../images/icons/warning.svg);box-shadow:-8px 0 0 #e09600;}[dir="rtl"] .messages--warning{border-color:#f4daa6 transparent #f4daa6 #f4daa6;box-shadow:8px 0 0 #e09600;}.messages--error{color:#a51b00;border-color:#f9c9bf #f9c9bf #f9c9bf transparent;background-color:#fcf4f2;background-image:url(/themes/contrib/bootstrap5/css/components/../../images/icons/error.svg);box-shadow:-8px 0 0 #e62600;}[dir="rtl"] .messages--error{border-color:#f9c9bf transparent #f9c9bf #f9c9bfover{--tw-translate-x:-0.5rem}.\32xl\:hover\:-translate-x-3:hover{--tw-translate-x:-0.75rem}.\32xl\:hover\:-translate-x-4:hover{--tw-translate-x:-1rem}.\32xl\:hover\:-translate-x-5:hover{--t
+h3 + h4,
+h4 + h5,
+h5 + h6,
+h1:first-chind,
+h2:first-child,
+h3:first-child,;box-shadow:8px 0 0 #e62600;}.messages--error p.error{color:#a51b00;}
+.node--unpublished{background-color:#fff4f4;}
+.progress_
+h4:firs_track{border-color:#b3b3b3;border-radt-child,
+h5:first-childius:10em;background-color:#f2f1eb;background-image:linear-gradient(#e7e7df,#,
+h6

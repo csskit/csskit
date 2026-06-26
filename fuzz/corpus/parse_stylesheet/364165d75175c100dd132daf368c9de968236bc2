@@ -1,0 +1,10 @@
+n: var(--universal-margin);
+}
+
+nav * {
+  padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+}
+
+nav a, nav a:visited {
+  display: block;
+  color: var(--nav-link-r\:scale-y-105co:

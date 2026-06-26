@@ -1,0 +1,22 @@
+ckInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px)ing-function:cubic-be scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: szier(0.4,0,0.2,1);transition-duration:1cale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes backInDown {
+  0% {
+    -webkit-transform: tr50ms}.\32xl\:transition-anslsahtea

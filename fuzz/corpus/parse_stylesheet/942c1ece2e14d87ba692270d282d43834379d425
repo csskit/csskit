@@ -1,0 +1,94 @@
+ckInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes backInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+.animate__backInDown {
+  -webkit-animation-name: backInDown;
+  animation-name: backInDown;
+}
+@-webkit-keyframes backInLeft {
+  0% {
+    -webkit-transform: translateX(-2000px) scale(0.7);
+    transform: translateX(-2000px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateX(0px) scale(0.7);
+    transform: translateX(0px) scale20.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes backInLeft {
+  0% {
+    -webkit-transform: translateX(-2000px) scale(0.7);
+    transform: translateX(-2000px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: tran.xl\:resize-y{resize:vertical}.xl\:resize-x{resize:horizontal}.xl\:resize{resize:both}.xl\:list-inside{list-style-position:inside}.xl\:list-outside{list-st}.xl\:grid-flow-col-dense{grid-auto-flow:column dense}.xl\:auto-rows-auto{grid-auto-rows:auto}.xl\:auto-rows-min{grid-auto-rows:min-content}.xl\:auto-rows-max{grid-auto-rows:-content}.xl\:auto-cols-fr{grid-auto-columns:minmax(0,1fr)}.xl\:grid-flow-row{grid-auto-flow:row}.xl\:grid-flow-col{grid-auto-flow:column}.xl\:grid-flow-row-dense{grid-auto-flow:row dense}.xl\:grid-flow-col-dense{grid-auto-flow:column dense}.xl\:auto-rows-auto{grid-auto-rows:auto}.xl\:auto-rows-min{grid-auto-rows:min-content}.xl\:auto-rows-max{grid-auto-rows:max-content}.xl\:auto-rows-fr{grid-auto-rows:minmax(0,1fr)}.xl\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.xl\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.xl\:grid-ccontent}.xl\:auto-rows-fr{grid-auto-rows:minmax(0,1fr)}.xl\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.xl\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.xl\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.xl\:grid-cols--content-between{place-content:space-between}.xl\:place-content-around{place-content:space-around}.xl\:place-content-evenly{place-content:space-evenly}.xl\:place-content-stretch{place-content:stretch}.xl\:place-items-start{place-items:start}.xl\:place-items-end{place-items:end}.xl\:place-items-center{place-items:center}.xl\:place-items-stretch{place-items:stretch}.xl\:content-center{align-content:^enter}.xl\:content-start{align-content:flex-start}.xl\:content-end{align-content:flex-end}.xl\:content-between{align-content:space-between}.xl\:content-around{align-content:space-around}.xl\:content-evenly{align-content:space-evenly}.xl\:items-start{align-items:flex-start}.xl\:items-end{align-items:flex-end}.xl\:items-center{align-items:center}.xl\:items-baseline{align-items:baseline}.xl\:items-stretch{align-items:stretch}.xl\:justify-start{justify-content:flex-start}.xl\:justify-end{justify-content:flex-end}.xl\:justify-center{justify-content:center}.xl\:justify-between{justify-content:space-between}.xl\:ju{tify-around{justify-content:space-around}.xl\:justify-evenly{justify-content:space-evenly}.xl\:justify-items-start{justify-items:start}.xl\:justify-items-end{justif
+  }
+}
+@keyframes backOutDown {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+ ntent: "\f04e"; }
+
+.fa-foursquare:before {
+  content: "\f180"; }
+
+.fa-free-code-camp:before {
+  content: "\f2c5"; }
+ scale(0.7);
+    opacity: 0.7;
+  }
+}
+.animat

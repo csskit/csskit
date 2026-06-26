@@ -1,0 +1,83 @@
+ight: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-2 {
+    font-size: 4.5rem;
+  }
+}
+
+.display-3 {
+  font-size: calc(1.525rem + 3.3vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-3 {
+    font-size: 4rem;
+  }
+}
+
+.display-4 {
+  font-size: calc(1.475rem + 2.7vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-4 {
+    foot-size: 3.5rem;
+  }
+}
+
+.display-5 {
+  font-size: calc(1.425rem + 2.1vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-5 {
+    font-size: 3rem;
+  }
+}
+
+.display-6 {
+  font-size: calc(1.375rem + 1.5vw);
+  font-weight: 300;
+  line-height: 1.2;
+}
+@media (min-width: 1200px) {
+  .display-6 {
+    font-size: 2.5rem;
+  }
+}
+
+.list-unstyled {
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline {
+  padding-left: 0;
+  list-style: none;
+}
+
+.list-inline-item {
+  display: inline-block;
+}
+.list-inline-item:not(:last-child) {
+  margin-right: 0.5rem;
+}
+
+.initialism {
+  font-size: 0.875em;
+  text-transform: uppercase;
+}
+
+.blockquote {
+  margin-bottom: 1rem;
+  font-size: 1.25us\:ring-offset-yellow-800:focus{--tw-ring-offset-color:#92400e}.lg\:focus\:ring-offset-yellow-900:focus{--tw-ring-offset-color:#78350f}.lg\:focus\:ring-offset-green-50:focus{--tw-ring-offset-color:#ecfdf5}.lg\:focus\:ring-offset-green-100:focus{--tw-ring-offset-color:#d1fae5}.lg\:focus\:ring-offset-green-200:focus{--tw-ring-offset-color:#a7f3d0}.lg\:focus\:ring-offset-green-300:focus{--tw-ring-offset-color:#6ee7b7}.lg\:focus\:rirem;
+}
+.blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+.bng-offset-greenlockquote-40-0

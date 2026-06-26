@@ -1,0 +1,70 @@
+content: space-between !important;
+  }
+  .justify-content-md-around {
+    -ms-flex-pack: distribute !important;
+    justify-content: space-around !important;
+  }
+  .align-items-md-start {
+    -ms-flex-align: start !important;
+    align-items: flex-start !important;
+  }
+  .align-items-md-end {
+    -ms-flex-align: end !important;
+    align-items: flex-end !important;
+  }
+  .align-items-md-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-md-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-md-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-md-start {
+    -ms-flex-line-pack: start !important;
+    align-content: flex-start !important;
+  }
+  .align-content-md-end {
+    -ms-flex-line-pack: end !important;
+    align-content: flex-end !important;
+  }
+  .align-content-md-center {
+    -ms-flex-line-pack: center !important;
+    align-content: center !important;
+  }
+  .align-content-md-between {
+    -ms-flex-line-pack: justify !important;
+    align-content: space-between !important;
+  }
+  .align-content-md-around {
+    -ms-flex-line-pack: distribute !important;
+    align-content: space-around !important;
+  }
+  .align-content-md-stretch {
+    -msgba(109, 40, 217, 0))}.\32xl\:hover\:from-purple-800:hover{--tw-gradient-from:#5b21b6;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(91, 33, 182, 0))}.\32xl\:hover\:from-purple-900:hover{--tw-gradient-from:#4c1d95;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(76, 29, 149, 0))}.\32xl\:hover\:from-pink-50:hover{--tw-gradient-from:#fdf2f8;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(253, 242, 248, 0))}.\32xl\:hover\:from-pink-100:hover{--tw-gradient-from:#fce7f3;--tw=gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(252, 231, 243, 0))}.\32xl\:hover\:from-pink-200:hover{--tw-gradient-from:#fbcfe8;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(251, 207, 232, 0))}.\32xl\:hover\:from-pink-300:hover{--tw-gradient-from:#f9a8d4;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(249, 168, 212, 0))}.\32xl\:hover\:from-pink-400:hover{--tw-gradient-from:#f472b6;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(244, 114, 182, 0))}.\32xl\:hover\:from-pink-500:hover{--tw-gradient-from:#ec4899;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(236, 72, 153, 0))}.\32xl\:hover\:from-pink-600:hover{--tw-gradient-from:#db2777;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(219, 39, 119, 0))}.\32xl\:hover\:from-pink-700:hover{--tw-gradient-from:#be185d;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(190, 24, 93, 0))}.\32xl\:hover\:from-pink-800:hover{--tw-gradient-from:#9d174d;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(157, 23, 77, 0))}.\32xl\:hover\:from-pink-900:hover{--tw-gradient-from:#831843;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(131, 24, 67, 0))}.\32xl\:focus\:from-transparent:focus{--tw-gradient-from:transparent;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(0, 0, 0, 0))}.\32xl\:focus\:from-current:focus{--tw-gradient-from:currentColor;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(255, 255, 255, 0))}.\32xl\:focus\:from-black:focus{x-end !important;
+  }
+  .justify-content-lg-center {
+    -ms-flex-pack: center !important;
+    justify-content: center !important;
+  }
+  .justify-content-lg-between {
+    -ms-flex-pack: justify !important;
+    justify-content: space-between !important;
+  }
+  .justify-content-lg-around {
+    -ms-flex-pack: distribute !important;
+    justify-content: space-around !important;
+  }
+  .align-items-lg-start {
+    -ms-flex-align: start !important;
+    align-items: flex-start !important;
+  }
+  .align-items-lg-end {
+    -ms-flex-align: end !important;
+    align-items: flex-end !important;
+  }
+  .al

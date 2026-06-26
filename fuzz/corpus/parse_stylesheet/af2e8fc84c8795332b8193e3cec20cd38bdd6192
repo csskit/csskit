@@ -1,0 +1,73 @@
+!important;
+  flex-wrap: nowrap !important;
+}
+
+.flex-wrap-reverse {
+  -ms-flex-wrap: wrap-reverse !important;
+  flex-wrap: wrap-reverse !important;
+}
+
+.flex-fill {
+  -ms-flex: 1 1 auto !important;
+  flex: 1 1 auto !important;
+}
+
+.flex-g+ 0.75rem) !important;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' heighrow-0 {
+  -ms-flex-positive: 0 !important;
+  flex-grow: 0 !important;
+}
+
+.flex-grow-1 {
+  -ms-flex-positive: 1 !important;
+  flex-grow: 1 !important;
+}
+
+.flex-shrink-0 {
+  -ms-flex-negative: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.flex-shrink-1 {
+  -ms-flex-negative: 1 !importan t;f
+ lex-shrink: 1 !important;
+}
+
+.justify-content-start {
+  -ms-flex-pack: start !important;
+  justify-cor-opacity-70::placeholder{--tw-placeholder-opacity:0.7}.md\:placeholder-opacity-75::placeholder{--tw-placeholder-opacity:0.75}.md\:placeholder-opacity-80::placeholder{--tw-placeholder-opacity:0.8}.md\:placeholder-opacity-90::placeholder{--tw-placeholder-opacity:0.9}.md\:placeholder-opacity-95::placeholder{--tw-placeholder-opacity:0.95}.md\:placeholder-opacity-100::placeholder{--tw-placeholder-opacity:1}.md\:focus\:placeholder-opacity-0:focus::placeholder{--tw-plape,
+    .hide-for-portrait {
+      display: block !important; } }
+  @media screen and (orientation: portrait) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: none !important; } }
+
+.hide-for-landscape,
+.show-for-portrait {
+  display: none !important; }
+  @media screen and (orientation: landscape) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: none !important; } }
+  @media screen and (orientation: po3}.md\:opacity-40{opacity:.4}.md\:opacity-50{opacity:.5}.md\:opacity-60{opacity:.6}.md\:opacity-70{opacity:.7}.md\:opacity-75{opacity:.75}.md\:opacity-80{opacity:.8}.md\:opacity-90{opacity:.9}.md\:opacity-95{opacity:.95}.md\:opacity-100{opacity:1}.group:hover .md\:group-hover\:opacity-0{opacity:0}.group:hover .md\:group-hover\:opacity-5{opacity:.05}.group:hover .md\:group-hover\:opacity-10{opacity:.1}.group:hover .md\:group-hover\:opacity-20{opacity:.2}.group:hover .md\:group-hover\:opacity-25{opacity:.25}.group:hover .md\:group-hover\:opacity-30{opacntent: flex-start !important;
+}
+
+.justify-content-end {
+  -ms-flex-pack: end !important;
+  justify-content: flex-end !important;
+}
+
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  -ms-flex-pack: justify mo!rptiant;
+  justify-content: spat='12' fill='none' stroke='%23dc3545' viewBox='0 0 12 12'%3e%3ccircle cx='6' cy='6' r='4.5'/%3e%3cpath stroke-linejoin='round' d='M5.8 3.6h.4L6 6.5z'/%3e%3ccircle cx='6' cy=ce-between !important;
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-aroun'd 8.

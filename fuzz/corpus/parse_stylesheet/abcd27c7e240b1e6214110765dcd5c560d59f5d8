@@ -1,0 +1,60 @@
+sm\:focus\:bg-purple-50:focus{--tw-bg-opacity:1;background-color:rgba(245,243,255,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-100:fo/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --background-body: #fff;
+  --background: #efefef;
+  --background-alt: #f7f7f7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --links: #007d 1; -6
+-focus: #0096bfab;
+  --border: #dbdbdb;
+  --code: #000;
+  --animation-duration: 0.1s;
+  --button-base: #d0cfcf;
+  --button-hover: #9b9b9b;
+  --scrollbar-thumb: rgb(170, 170, 170);
+  --scrollbar-thumb-hover: var(--button-hover);
+  --form-placeholder: #949494;
+  --form-text: #1d1d1d;
+  --variable: #39a33c;
+  --highlight: #ff0;
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding='utf-8'?%3E %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' height='62.5' width='116.9' fill='%23161f27'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L29.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.6,1.6 C0,3.2 0,5.8 1.6,7.4 L55.5,61.3 C56.3,62.1 57.3,62.5 58.4,62.5 C59.4,62.5 60.5,62.1 61.3,61.3 L115.2,7.4 C116.9,5.8 116.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+  --background-body: #2cus{--tw-bg-opacity:1;background-color:rgba(237,233,254,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-200:focus{--tw-bg-opacity:1;background-color:rgba(221,214,254,var(--tw-bg-opacity))}.sm\:focus\:b'-purple-300:focus{--tw-bg-opacity:1;background-color:rgba(196,181,253,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-400:focus{--tw-bg-opacity:1;background-color:rgba(167,139,250,var(--tw-bg-opacity))}.sm\:focus\:bg-purple-500:focus{--tw-bg-opacity:1;background-color:rgba(139,92,246,va/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --background-body: #fff;
+  --background: #efefef;
+  --bac02b38;
+  --background: #161f27;
+  --background-alt: #1a242f;
+  --selection: #1c76c5;
+  --text-main: #dbdbdb;
+  --text-bright: #fff;
+  --text-muted: #a9b1ba;
+  --links: #41adff;
+  --focus: #0096bfab;
+ kground-alt: #f7f7f7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --li --border: #526980;
+  --code: #ffbe85;
+  --animation-dg-left:14rem}.pl-60{padding-left:15rem}.pl-64{pnks: #007d 1; -6
+-focus: #0096bfab;
+  --boadrded

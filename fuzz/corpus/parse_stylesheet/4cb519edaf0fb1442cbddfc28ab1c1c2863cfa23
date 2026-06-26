@@ -1,0 +1,18 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  bo > .arrow::after {
+  left: 1px;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: #fff;
+}
+
+.bs-popover-bottom, .bs-popover-auto[x-placement^="bottom"]{
+   margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placement^="bottom"] > .arrow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popovese-size-96: 6rem;--base-size-112: 7rem;--base-size-128: 8rem}:root;
+      \32xl\:-top-36{top:-9rem}.\32xl\:-top-40{top:-10rem}.\32xl\:-toir-colut-weight-light:mn 3 0{
