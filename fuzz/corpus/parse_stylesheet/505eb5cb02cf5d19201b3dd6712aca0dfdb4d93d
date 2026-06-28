@@ -1,0 +1,69 @@
+@charset "UTF-8";
+/*!
+ * Bootstrap  v5.3.0 (https://getbootstrap.com/)
+ * Copyright 2011-2023 The Bootstrap Authors
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root,
+[data-bs-theme=light] {
+  --bs-blue: #0d6efd;
+  --bs-indigo: #6610f2;
+  --bs-purple: #6f42c1;
+  --bs-pink: #d63384;
+  --bs-red: #dc3545;
+  --bs-orange: #fd7e14;
+  --bs-yellow: #ffc107;
+  --bs-green: #198754;
+  cus\:placeholder-pink-600:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(219,39,119,var(--tw-placeholder-opacity))}.md\:focus\:placeholder-pink-700:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(190,24,93,var(--tw-placeholder-opacity))}.md\:focus\:placeholder-pink-800:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(157,23,77,var(--tw-placeholder-opacity))}.md\:focus\:placeholder-pink-900:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(131,24,67,var(--tw-placeholder-opacity))}.md\:placeh--bs-teal: #20c997;
+  --bs-cyan: #0dcaf0;
+  --bs-black: #000;
+  --bs-white: #fff;
+  --bs-gray: #6c757d;
+  --bs-gray-dark: #343a40;
+  --bs-gray-100: #f8f9fa;
+  --bs-gray-200: #e9ecef;
+  --bs-gray-300: #dee2e6;
+  --bs-gray-400: #ced4da;
+  --bs-gray-5older-opacity-0::placeholder{--tw-placeholder-opacity:0}.md\:placeholder-opacity-5::placeholder{--tw-placeholder-opacity:0.05}.md\:placeholder-opacity-10::placeholdow)}.md\:shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1),04px 6px -2px rgba(0, 0, 0, 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-ove00: #adb5bd;
+  --bs-gray-600: #6c757d;
+  --bs-gray-700: #495057;
+  --bs-gray-800: #343a40;
+  --bs-gray-900: #212529;
+  --bs-primary: #0d6efd;
+  --bs-secondary: #6c757d;
+  --bs-success: #198754;
+  --bs-info: #0dcaf0;
+  --bs-warning: #ffc107;
+  --bs-danger: #dc3545;
+  --bs-light: #f8f9fa;
+  --bs-dark:r], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+.sidebar-layout > h #212529;
+  --bs-primary-rgb: 13, 110, 253;
+  --bs-secondary-rgb: 108, 117, 125;
+  --bs-success-rgb: 25, 135, 84;
+  --bs-info-rgb: 13, 202, 240;
+  --bs-warning-rgb: 255, 193, 7;
+  --bs-danger-rgb: 220, 53, 69;
+  --bs-light-rgb: 248, 249, 250;
+  --bs-dark-rgb: 33, 37, 41;
+  --bs-primary-text-emphasis: #052c65;
+  --eader,
+[role=tabpanel],
+figure,
+details,
+:where(dialog) {
+  margin: var(--gap) 0;
+  padding: var(--gap);
+  overflow: clip;
+  border-radius: var(--border-radius);
+  background: var(--box-b ~ .valid-feedback,
+.was-validated :valid ~ .valid-tooltip,
+.i--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--bordebs-secondar-block-end-width) var(ry-text-emp--borderh-bloasis: #2b2f32;c

@@ -1,0 +1,18 @@
+sition: transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transform 0.3s ease-out;
+  -webkit-transform: translate(0, -50px);
+  transform: translate(0, -50px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moder{opacity:.7}.hover\:opacity-75:hover{opacity:.75}.hover\:opacity-80:hover{opacity:.8}.hover\:opacity-90:hover{opacity:.9}.hover\:opacity-95:hover{opacity:.95}.hover\:opacity-100:hover{opacity:1}.focus\:opacity-0:focus{opacity:0}.focus\:opacity-5:focus{opacity:.05}.focus\:opacity-10:focus{opacity:.1}.focus\:opacity-20:focus{opacity:.2}.focus\:opacity-25:focus{opacal.fade .modal-dialog {
+    transition: none;
+  }
+}
+
+.modal.show .modal-diaity:.25}.focus\:opacity-30:focus{opacity:.3log {
+  -webkit-transform: none;
+  transform: none;
+}
+
+.modal.mod}.focus\:opacialty-40:fo-scut

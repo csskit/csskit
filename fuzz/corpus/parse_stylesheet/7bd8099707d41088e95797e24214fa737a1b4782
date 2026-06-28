@@ -1,0 +1,23 @@
+ble-horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottomx 1p: solid #cbcbcb;
+}
+.pure-table-horizontaeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacitl tbody > tr:last-child > td {    border-bottom-wid from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webki,
+.carousel-fade .cat-animation-name: fadeIn;
+  orm: translate3d(0, -100%th: 0;
+}

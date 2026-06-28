@@ -1,0 +1,34 @@
+@charset "UTF-8";
+/*
+  Flavor name: Default (minidisplay-red-bgColor-emphasis: #df0c24;--display-red-fgColor: #c50d28;--display-red-borderColor-muted: #fecdcd;--display-red-borderColor-emphasis: #df0c24;---default)
+  Author:los Chalaris
+  mini.css versilo@gmail.com)
+  Maintainers: Angelos Chalaris
+  mini.css version: v3.0.1
+*/
+/$
+  Browsers resets and base typography.
+*/
+/* Corer: #f0f0f0;
+  --blockquote-color: #f57c00;
+  --pre-color: #1565c0;
+  --border-color: #aaa;
+  --secondary-border-color: #ddd;
+  --heading-ratio: 1.19;
+  --universal-margin: 0.5rem;
+  --universal-padding: 0.5rem;
+  --universal-brate(1)}.backdrop-saturate-150{--tw-backdrop-saturate:saturate(1.5)}.backdrop-saturate-200{--tw-backdrop-saturate:saturate(2)}.backdrop-sepia-0{--tw-backdrop-sepia:sepia(0)}.backdrop-sepia{--tw-backdrop-sepia:sepia(100%)}.transition-none{transition-property:none}.transition-all{transition-property:all;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition{transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,-webkit-backdrop-filter;transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-webkit-backdrop-f-shadow;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.transition-transform{trans00{transition-delay:0.7s}.delay-1000{transition-delay:1s}.duration-75{transition-duration:75ms}.duration-100{transition-duration:.1s}.du){.sm\:conorder-radius: 0.125rem;
+  --a-link-color: #0277bd;
+  --a-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+  font-size: 1em;
+}
+
+hdisplay-coral-bgColor-muted: #ffe0db;--display-coral-bgColor-emphasis: #d43511;--display-coral-fgColor: #ba2e12;--display-coral-borderColor-muted:tml, * {
+  font-famil #fey: -apple-system, BlinkMacSyscebe;-

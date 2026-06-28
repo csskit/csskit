@@ -1,0 +1,61 @@
+92px) {
+  .text-lg-left {
+    text-align: left !important;
+  }
+  .text-lg-right {
+    text-align: right !important;
+  }
+  .text-lg-center {
+    text-align: center !impant;
+  }
+}
+
+@media (min-width:ICENSE
+ *
+ * Copyright 2013 Harry Roberts
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to-tw-scale-x)) scaleY(var(--tw-scale-y))}.md\:transform-none{transform:none}.md\:translate-x-0{--tw-translate-x:0px}.md\:translate-x-1{--tw-translate-x:0.25rem}.md\:translate-x-2{--tw-translate-x:0.5rem}.md\:translate-x-3{--tw-translate-x:0.75rem}.md\:translate-x-4{--tw-translate-x:rem1}.md\:translate-x-5{--tw-translate-x:1.25rem}.md\:translate-x-6{--tw-translate-x:1.5rem}.md\:translate-x-7{--tw-translate-x:1.75rem}.mranslate-x-4{--tw-translate-x:1rem}.md\:translate-x-5{--tw-translate-x:1.25rem}.md\:translate-x-6{--tw-translate-x:1.5rem}.md\:translate-x-7{--tw-translate-x:1.75rem}.md\:translate-x-8{--tw-translate-x:2rem}.md\:translate-x-9{--tw-translate-x:2.25rem}.md\:translate)x-10{--tw-translate-x:2.5rem}.md\:translate-x-11{--tw-translate-x:2.7ƍem}.md^\:translate-x-12{--tw-late-x-0{--tw-translate-x:0pd\:translate-x-8{--tw-translate-x:2rem}.md\:translate-x-9{--tw-translate-x:2.25rem}.md\:translate)x-10{--tw-translate-x:2.5rem}.md\:translate-x-11{--tw-translate-x:2.7ƍem}.md^\:translate-x-ext-xl-letranslate-x:3rem}.md\:translate-x-14{--tw-translate-x:3.5rem}.md\:translate-x-16{--tw-translate-x:4rem}.mortant;
+  }
+}
+
+@media (min-width:ICENSE
+ *
+ * Copyright 2013 Harry Roberts
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ * http://apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+ * nd nestable grids
+ * FLEXBOX.............Crudely emulate flexbox
+ * COLUMNS.............CSS3 columns
+ * NAV.................A simple abstraction to put a list in horizontal nav mode
+ * OPTIONS.............Grouped nav items
+ * PAGINATION..........Very stripped back, basic paginator
+ * BREADCRUMB..........Simple breadcrumb trail object
+ * MEDIA...............Media object
+ * MARGINALIA..........Simple marginalia content
+ * ISLAND..............Boxed off content
+ * BLOCK-LIST..........Blranslate-x:3rem}.md\:translate-x-14{--tw-translate-x:3.5rem}wwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwwww.md\:translate-x-16{--tw-translate-x:4rem}.mortant;
+  }
+}
+
+@media (min-width: 1200px) {
+  .text-xl-left {
+  d\:translate-x-20{--tw-tra5rem}  text-align: left !import.md\:translateant;
+  }
+  .text-x-24

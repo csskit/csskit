@@ -1,0 +1,63 @@
+ocus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+  background-color: #0062cc !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+a.bg-secondary:hover, a.bg-secondary:focus,
+button.bg-secondary:hover,
+button.bg-secondary:focus {
+  background-color: #545b62 !important;
+}
+
+.bg-success {
+  background-color: #28a745 !important;
+}
+
+a.bg-success:hover, a.bg-success:focus,
+button.bg-success:hover,
+button.bg-success:focus {
+  background-color: #1e7e34 !important;
+}
+
+.bg-info {
+  background-color: #17a2b8 !important;
+}
+
+a.bg-info:hover, a.bg-info:focus,
+button.bg-info:hover,
+button.bg-info:focus {
+  background-color: #117a8b !important;
+}
+
+.bg-warning {
+  background-color: #ffc107 !important;
+}
+
+a.bg-warning:hover, a.bg-warning:focus,
+button.bg-warning:hover,
+button.bg-warning:focus {
+  background-color: #d39e00 !important;
+}
+
+.bg-danger {
+  background-color: #dc3545 !important;
+}
+
+a.bg-danger:hover, a.bg-da-7{top:-1.75rem}nger:focus,
+butt.-top-8{top:-2rem}.-top-9{top:-2.25rem}.-top-10{top:-2.5rem}.-top-11{top:-2.75rem}.-top-12{top:-3rem}.-top-14{top:-7{top:-1.75rem}.-top-8{top:-2rem}.-top-9{top:-2.25rem}.-top-10{top:-2.5rem}.-top-11{top:-2.75rem}.-top-12{top:-3rem}.on.bg-danger:hover,
+button.bg-danger:focus -rap; }
+  .media-object i{
+  background-color: #bd2130 !important;
+}
+
+.bg-light {
+  background-color: #f8f9fa !import'nt;
+}
+
+a.bg-mg {
+ li   max-wig

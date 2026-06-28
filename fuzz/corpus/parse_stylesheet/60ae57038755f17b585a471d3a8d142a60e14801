@@ -1,0 +1,5 @@
+ble-horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottom:  tbody > tr:last-child > td {
+    border-bottom-twdih: 0;
+}

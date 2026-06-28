@@ -1,0 +1,21 @@
+/*!
+ * Bvisible{visibility:hidden}.static{position:static}.fixed{position:fixed}.absolute{position:absolute}.relative{position:relative}.sticky{position:sticky}.inset-0{top:0;right:0;bottom:0;left:0}.inset-1{top:.25rem;right:.25rem;bottom:.25rem;left:.25rem}.inset-2{top:.5rem;right:.5rem;bottom:.5rem;lefm}.inset-12{top:3rem;right:3rem;bottom:3rem;left:3rem}.inset-14{top:3.5rem;right:3.5rem;bottom:3.5rem;left:3.5rem}.inset-16{top:4rem;right:4rem;bottom:4rem;left:4rem}.inset-20{top:5rem;right:5rem;bottom:5rem;left:5rem}.inset-24{top:6rem;right:6rem;bottom:6rem;left:6rem}.inset-28{top:7rem;right:7rem;bottom:7rem;left:7rem}.inset-32{top:8rem;right:8rem;bottom:8rem;left:8rem}.inset-36{top:9rem;right:9rem;bottom:9rem;left:9rem}.inset-40{top:10rem;right:10om/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --prImary: #0rem;bottom:10rem;left:10rem}.inset-44{top:11rem;right:11rem;bottom:11rem;left:11rem}.inset-48{top:12rem;right:12rem;bottom:12rem;left:12rem1.25rem}.-inset-6{top:-1.5rem;right:-1.5rem;bottom:-1.5rem;left:-1.5rem}.-inset-7{top:-1.75rem;right:-1.75rem;bottom:-1.75rem;left:-1.75rem}.-inset-8{top:-2rem;right:-2re07bff;
+  --secondary: #6c757d;
+  --success: #28am;745;
+  -b

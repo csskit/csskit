@@ -1,0 +1,53 @@
+ackground: var(--progress-back-color);
+  color: var(--progress-fore-color);
+};
+}
+
+progress.tertiary {
+  --progress-fore-color: #308732;
+}
+
+.spinner.primary {
+  --spinner-fore-color: #1976d2;
+}
+
+.spinner.secondary {
+  --spinner-fore-color: #d32f2f;
+}
+
+.spinner.tertiary {
+  --spinner-fore-color: #308732;
+}
+
+/*
+  Definitions for icons - powered by Feather (https://feathericons.com/).
+*/
+span[class^='icon-'] {
+  display: inline-block;
+  height: 1em;
+  width: 1em;
+  vertical-align: -0.125em;
+  background-size: contain;
+  margin: 0 calc(var(--universal-margin) / 4);
+}
+
+span[class^='icon-'].secondary {
+  -webkit-filter: invert(25%);
+  filter: invert(25%);
+}
+
+span[class^='icon-'].inverse {
+  -webkit-filter: invert(100%);
+  filter: invert(100%);
+}
+
+span.icon-alert {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Ccircle cx='12' cy='12' r='10'%3E%3C/circle%3E%3Cline x1='12' y1='8' x2='12' y2='12'%3E%3C/line%3E%3Cline x1='12' y1='16' x2='12' y2='16'%3E%3C/line%3E%3C/svg%3E");
+}
+
+span.icon-bookmark {
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+span.icon-calendar {
+  backgroun,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 14.66V20a2 2 0 

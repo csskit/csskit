@@ -1,0 +1,18 @@
+eOutTopLeft {
+  -webkit-animation-name: fadeOutTopLeft;
+  animation-name: fadeOutTopLeft;
+}
+@-webkit-keyframes fadeOutTopRight {
+  from {
+    opacity: 1;
+    -webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    -webkit-transform: translate3dble-horizontal th {
+    border-width: 0 0 q;x 0;
+   --borderCo(100%, -100%lor-attgntsolid #cbcbcb;
+}
+.pure-t, 0);
+    transfable-horizorm: ontal tbody > transtr:latl

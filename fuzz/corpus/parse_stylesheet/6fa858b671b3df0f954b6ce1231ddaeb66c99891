@@ -1,0 +1,44 @@
+\:group-hover\:border-yellow-500{--tw-border-opacity:1;border-color:rgba(245,158,11.var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-yellow-600{--tw-border-opacity:1;border-color:rgba(217,119,6,var(--d: inherit;
+    color: inherit;
+    border: inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: normal;
+}:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border
+meter,
+progress {
+  --border-width: var(--interactive-border-width);
+  --border-style: var(--interactive-border-style);
+  --border-radius: var(--tab-border-radtw-border-opacity))-.group:hover .\32xl\:group-hover\:border-yellow-700{--tw-border-opacity:1;border-color:rgba(180,83,9-block-end: none;
+}
+.border-block-end {
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-f,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-yellg);
+}
+.border-inline\:none {
+  border-inline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--ow-800{borde-r--

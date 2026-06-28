@@ -1,0 +1,57 @@
+corporated:before {
+  content: "\f6af"; }
+
+.fa-ad:before {
+  content: "\f641"; }
+
+.fa-address-book:before {
+  content: "\f2b9"; }
+
+.fa-address-card:before {
+  content: "\f2before {
+  content: "\f2bb"; }
+
+.fa-adjust:before {
+  content: "\f042"; }
+
+.fa-adn:before {
+  content: "\f170"; }
+
+.fa-adversal:before {
+  content: "\f36a"; }
+
+.fa-affiliatetheme:before {
+  content: "\f3a-arrow-alt-circle-up:before {
+  content: "\f35b"; }
+
+.fa-arrow-circle-down:before {
+  content: "\f0ab"; }
+
+.fa-arrow-circle-left:before {
+  content: "\f0a8"; }
+
+.fa-arrow-circle-right:before {
+  content: "\f0a9"; }
+
+.fa-arrow-circle-up:before {
+  content: "\f0aa"; }
+
+.fa-arrow-down:before {
+  content: "\f063"; }
+
+.fa-arrow-left:before {
+  content: "\f060"; }
+
+.fa-arrow-right:beforre {
+  content: "\f666"; }
+
+.fa-balance-scale:before {
+  content: "\f24e"; }
+
+.fa-balance-scale-left:before {
+  content: "\f515"; }
+
+.fa-balance-scale-right:before {
+  content: "\f516"; }
+
+.fa-ban:bef

@@ -1,0 +1,116 @@
+corporated:before {
+  content: "\f6af"; }
+
+.fa-ad:before {
+  content: "\f641"; }
+
+.fa-address-book:before {
+  content: "\f2b9"; }
+
+.fa-address-card:before {
+  content: "\f2before {
+  content: "\f2bb"; }
+
+.fa-adjust:before {
+  content: "\f042"; }
+
+.fa-adn:before {
+  content: "\f170"; }
+
+.fa-adversal:before {
+  content: "\f36a"; }
+
+.fa-affiliatetheme:before {
+  content: "\f36b"; }
+
+.fa-air-freshener:before {
+  content: "\f5d0"; }
+
+.fa-airbnb:before {
+  content: "\f834"; }
+
+.fa-algolia:before {
+  content: "\f36c"; }
+
+.fa-align-center:before {
+  content: "\f037"; }
+
+.fa-align-justify:before {
+  content: "\f039"; }
+
+.fa-align-left:before {
+  content: "\f036"; }
+
+.fa-align-right:before {
+  c  content: "\f420"; }
+
+.fa-ankh:before {
+  content: "\f644"; }
+
+.fa-app-store:before {
+  content: "\f36f"; }
+
+.fa-app-store-ios:before {
+  content: "\f370"; }
+
+.fa-apper:before {
+  content: "\f371"; }
+
+.fa-apple:before {
+  content: "\f179"; }
+
+.fa-apple-alt:before {
+  content: "\f5d1"; }
+
+.fa-apple-pay:before {
+  content: "\f415"; }
+
+.fa-archive:before {
+  content: "\f187"; }
+
+.fa-archway:before {
+  content: "\f557"; }
+
+.fa-arrow-alt-circle-down:before {
+  content: "\f358"; }
+
+.fa-arrow-alt-circle-left:before {
+  content: "\f359"; }
+
+.fa-arrow-alt-circle-right:before {
+  content: "\f35a"; }
+
+.fa-arrow-alt-circle-up:before {
+  content: "\f35b"; }
+
+.fa-arrow-circle-down:before {
+  content: "\f0ab"; }
+
+.fa-arrow-circle-left:before {
+  content: "\f0a8"; }
+
+.fa-arrow-circle-right:before {
+  content: "\f0a9"; }
+
+.fa-arrow-circle-up:before {
+  content: "\f0aa"; }
+
+.fa-arrow-down:before {
+  content: "\f063"; }
+
+.fa-arrow-left:before {
+  content: "\f060"; }
+
+.fa-arrow-right:beforre {
+  content: "\f666"; }
+
+.fa-balance-scale:before {
+  content: "\f24e"; }
+
+.fa-balance-scale-left:before {
+  content: "\f515"; }
+
+.fa-balance-scale-right:before {
+  content: "\f516"; }
+
+.fa-ban:bef

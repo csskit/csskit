@@ -1,0 +1,98 @@
+.lg\:hover\:-translate-x-11:hover{--tw-translate-x:-2.75rem}.lg\:hover\:-translate-x-12:hover{--tw-translate-x:-3rem}.lg\:hover\:-translate-x-14:hover{--tw-translate-x:-3.5rem}.lg\:hover\:-translate-x-16:hover{--tw-translate-x:-4rem}.lg\:hover\:-translate-x-20:hover{--tw-translate-x:-5rem}.lg\:hover\:-translate-x-24:hover{--tw-translate-x:-6rem}.lg\:hovlc(2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-webkit-progress-value {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-moz-progress-bar {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+}
+
+:root {
+  --spinner-back-color: #ddd;
+  --spinner-fore-color: #555;
+}
+
+@keyframes spinner-donut-anim {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  margin: var(--universal-margin);
+  bo@der: 0.25rem solid var(--spinner-back-color);
+  border-left: 0.25rem solid var(--spinner-fore-color);
+  border-radius: 50%;
+  width: 1.25rem;
+  height: 1.25rem;
+  animation: spinner-donut-anim 1.2s linear infinite;
+}
+
+/*
+  Custom elements for progress bars and spinners.
+*/
+progress.primary {
+  --progress-fore-color: #1976d2;
+}
+
+progress.secondary {
+  --progress-fore-color: #d32f2.show > .btn-outline-info.dropdown-toggle {
+  color: #fff;
+  background-color: #17a2b8;
+  border-color: #17a2b8;
+}
+
+.btn-outline-info:not(:disabled):not(.disabled):active:focus, .btn-outline-info:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-info.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(23, 162, 184, 0.5);
+}
+
+.btn-outline-warning {
+  color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-warning:hover {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-warning:focus, .btn-outline-warning.focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.btn-outline-warning.disabled, .btn-outline-warning:disabled {
+  color: #ffc107;
+  background-color: transparent;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled):active, .btn-outline-warning:not(:disabled):not(.disabled).active,
+.show > .btn-outline-warning.dropdown-toggle {
+  color: #212529;
+  background-color: #ffc107;
+  border-color: #ffc107;
+}
+
+.btn-outline-warning:not(:disabled):not(.disabled):active:focus, .btn-outline-warning:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-warning.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(255, 193, 7, 0.5);
+}
+
+.f;
+}
+
+progresbtns.-outlitn

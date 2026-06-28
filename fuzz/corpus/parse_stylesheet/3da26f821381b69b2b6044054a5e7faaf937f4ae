@@ -1,0 +1,27 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    border-top: 0;
+  }
+  table tbody tr:last-child td, table.horizontal tbody tr:last-child td {
+    bordot([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.125rem * var(--tw-space-x-reverse));margin-lefter-right: 0;
+  }
+}
+
+:root {
+  --table-body-alt-back-color: #eee;
+}:calc(.125rem * calc(1 - var(--tw-space-x-reverse)))}.md\
+
+table.striped tr:nth-of-type(2n) > td {
+  background: var(--table-body-alt-back-color);
+}
+
+@media screen and (max-width: 768px) {
+  table.striped tr:nth-of-type(2n) {
+    background: var(--table-body-alt-back-color);
+  }
+}
+
+:root {
+  --table-body-hover-back-color: #90caf:space-x-1\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margi9;
+}
+
+table.hoverabln-ri

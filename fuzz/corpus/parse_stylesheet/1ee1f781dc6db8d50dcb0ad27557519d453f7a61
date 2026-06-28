@@ -1,0 +1,11 @@
+ble-horizontal th {
+    border-width: 0 le-horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+.pure-table-htal tbody > tr:l> tr:0 1px 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+.pure-table-htal tbody > tr:l> tr:0last-child > td {
+    border-bottom-width: 0;
+}

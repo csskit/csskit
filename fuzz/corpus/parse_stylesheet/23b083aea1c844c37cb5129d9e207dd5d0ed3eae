@@ -1,0 +1,57 @@
+-spinner-animation-speed) linear infinite var(--bs-spinner-animation-name);
+}
+
+@keyframes spinner-border {
+  to {
+    transform: rotate(360deg) /* rtl:ignore */;
+  }
+}
+.spinner-border {
+  --bs-spinner-width: 2rem;
+  --bs-spinner-height: 2rem;
+  --bs-spinner-vertical-align: -0.125em;
+  --bs-spinner-border-width: 0.25em;
+  --bs-spinner-animation-speed: 0.75s;
+  --bs-spinner-animation-name: spinner-border;
+  border: var(--bs-spinner-border-width) solid currentcolor;
+  border-right-color: transparent;
+}
+
+.spinner-border-sm {
+  --bs-spinner-width: 1rem;
+  --bs-spinner-height: 1rem;
+  --bs-spinner-border-width: 0.2em;
+}
+
+@keyframes spinner-grow {
+  0% {
+    transform: scale(0);
+  }
+  50% {
+    opacity: 1;
+    transform: none;
+  }
+}
+.spinner-grow {
+  --bs-spinner-width: 2rem;
+  --bs-spinner-height: 2rem;
+  --bs-spinner-vertical-align: -0.125em;
+  --bs-spinner-animation-speed: 0.75s;
+  --bs-spinner-animation-name: spinner-grow;
+  backgroun00%);
+  }
+  .offcanvas-sm.offcanvas-top {
+    top: 0;
+    right: 0;
+    left: 0;
+    height: var(--bs-offcanvas-height);
+    max-height: 100%;
+    border-bottom: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+    transform: translateY(-100%);
+  }
+  .offcanvas-sm.offcanvas-bottom {
+    right: 0;
+    left: 0;
+    height: var(--bs-offcanvas-height);
+    max-height: 100%;
+    border-top: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-co32xl\:justify-self-stretch{justify-self:stretch}.\32xl\:overflow-auto{overflow:auto}.\32xl\:overflow-hidden{overflow:hidden}.\32xl\:overflow-visible{overflow:visible}.\32xl\:overflow-scroll{overflow:scroll}.\32xl\:overflow-x-auto{overflow-x:auto}.\32xl\:overflow-y-auto{overflow-y:auto}.\32xl\:overflow-x-hidden{overflow-x:hidden}.\32xl\:overflow-y-hidden{overflow-y:hidden}.\32xl\:overflow-x-visible{overflow-x:visible}.\32xl\:overflow-y-visible{overflow-y:visible}.\32xl\:overflow-x-scroll{overflow-x:scroll}.\32xl\:overflow-y-scroll{overflow-y:scroll}.\32xl\:overscroll-auto{overscroll-behavior:auto}.\32xl\:overscroll-contain{overscroll-behavior:contain}.\32xl\:overscroll-none{overscroll-behavior:none}.\32xl\:overscroll-y-auto{overscroll-behavior-y:auto}.\32xl\:overscroll-y-contain{overscroll-h: 100%;

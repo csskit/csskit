@@ -1,0 +1,24 @@
+ebkit-keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animation-name: fadeIn;
+  animation-name: fad.75rem}.xl\:inset-8{top:2rem;right:2rem;bottom:2rem;left:2rem}.xl\:inset-9{top:2.25rem;right:2.25rem;bottom:2.25rem;left:2.25rem}.xl\:inset-10{top:2.5rem;right:2.5rem;bottom:2.5rem;left:2.5rem}.xl\:inset-11{top:2.75rem;right:2.75rem;bottom:2.75rem;left:2.75rem}.xl\:inset-12{top:3rem;right:3rem;bottom:3rem;left:3rem}.xl\:inset-14{top:3.5rem;right:3.5rem;bottom:3.5rem;left:3.5rem}.xl\:inset-1eIn;
+}
+@-webkit-keyframes fadeInDown {
+ 6{top: 4rem;right:4rem;f

@@ -1,0 +1,115 @@
+e {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    z-index: 12;
+    -webkit-transition: none;
+    transition: none;
+    visibility: visible; }
+    .position-top.reveal-for-large .close-button {
+      display: none; }
+    .off-canvas-content .position-top.reveal-for-large {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-content.has-reveal-top {
+      margin-top: 250px; }
+    .position-top.reveal-for-large ~ .off-canvas-content {
+      margin-top: 250px; }
+  .position-bottom.reveal-for-large {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    z-index: 12;
+    -webkit-transiti[n: none;
+    transition: none;
+    visibility: visible; }
+    .position-bottom.reveal-for-large .close-button {
+      display: none; }
+    .off-canvas-content .position-bottom.reveal-for-large {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-content.has-reveal-bottom {
+      margin-bottom: 250px; }
+    .position-bottom.reveal-for-large ~ .off-canvas-content {
+      margin-bottom: 250px; } }
+
+@media print, screen and (min-width: 40em) {
+  .off-canvas.in-canvas-for-medium {
+    visibility: visible;
+    height: auto;
+    position: static;
+    background: none;
+    width: auto;
+    overflow: visible;
+    -webkit-transition: none;
+    transition: none; }
+    .off-canvas.in-canvas-for-medium.position-left, .off-canvas.in-canvas-for-medium.position-right, .off-canvas.in-canvas-for-medium.position-top, .off-canvas.in-canvas-for-medium.position-bottom {
+      -webkit-box-shadow: none;
+              box-shadow: none;
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas.in-canvas-for-medium .close-button {
+      display: none; } }
+
+@media print, screen and (min-width: 64em) {
+  .off-canvas.in-canvas-for-large {
+    visibility: visible;
+    height: auto;
+    position: static;
+    background: none;
+    width: auto;
+    overflow: visible;
+    -webkit-transition: none;
+    transition: none; }
+    .off-canvas.in-canvas-for-large.position-left, .off-canvas.in-canvas-for-large.position-right, .off-canvas.in-canvas-for-large.position-top, .off-canvas.in-canvas-for-large.position-bottom {
+      -webkit-box-shadow: none;
+              box-shadow: none;
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas.in-canvas-for-large .close-button {
+      display: none; } }
+
+.orbit {
+  position: relative; }
+
+.orbit-container {
+  position: relative;
+  height: 0;
+  margin: 0;
+  list-style: none;
+  overflow: hidden; }
+
+.orbit-slide {
+  width: 100%;
+  position: absolute; }
+  .orbit-slide.no-motionui.is-active {
+    top: 0;
+    left: 0; }
+
+.orbit-figure {
+  margin: 0; }
+
+.orbit-image {
+  width: 100%;
+  max-width: 100%;
+  margin: 0; }
+
+.orbit-caption {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  margin-bottom: 0;
+  padding: 1rem;
+  background-color: rgba(10, 10, 10, 0.5);
+s{opacity:.75}.focus\:opacity-80:focus{opacity:.8}.focus\:opacity-90:focus{opacity:.9}.focus\:opacity-95:focus{opacity:.95}.focus\:opacity-100:focus{opacity:1}.bg-blend-normal{background-blend-mode:normal}.bg-blend-multiply{background-blend-mode:multiply}.bg-blend-screen{background-blend-mode:screen}.bg-blend-overlay{background-blend-mode:overlay}.bg-blend-darken{background-blend-mode:darken}.bg-blend-lighten{background-blend-mode:lighten}.bg-blend-color-dodge{ut .PageLayout-region--dividerNabackground-blend-mode:color-dodge}.bg-blend-color-burn{background-blend-mode:color-burn}.bg-blend-hard-light{background-blend-moderrow-line-after{position:relative;margin-bottom:var(--Layout-row-gap)}.PageLayout .PageLayout-region--dividerNarrow-line-after::after{position:absolute;left:calc(var(--Layout-outer-    width: 1.2rem;
+    height: 1.2rem;
+    margin: 0.1rem;
+    border-radius: 50%;
+    background-color: #cacaca; }
+    .orbit-bullets button:hover {
+      background-color: #8a8a8a; }
+    .orbit-

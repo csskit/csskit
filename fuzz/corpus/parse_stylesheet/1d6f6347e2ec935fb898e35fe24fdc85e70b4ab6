@@ -1,0 +1,58 @@
+\*------------------------------------*/
+/**
+ * Use an explicit font stack to ensure browsers render correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  border-bottom: 1px solid;
+  color: inherit; }
+
+/**
+ * Add coty:1;border-color:rgba(146,64,14,var(--tw-border-opacity))}.sm\:border-yellow-900{--tw-border-opacity:1;border-color:rgba(120,53,15,var(--tw-border-opacity))}.sm\:border-green-50{--tw-border-opacity:0;border-color:rgba(236,253,245,var(--tw-border-opacity))}.sm\:border-green-100{--tw-border-opacity:1;border-color:rgba(249,250,229,var(--tw-border-opacity))}.sm\:bor /* [1] */
+  list-style: decimal-leading-zero inside;
+  /* [2] */
+  white-space: nowrap;
+  /* [3] */
+  overflow: auto;
+  /* [3] */
+  margin-left: 0; }
+
+.line-numbers code {
+  white-space: pre;
+  /* [4] */ }
+
+/*------------------------------------*\
+    $IMAGES
+\*------------------------------------*/
+/**
+ * Demo: jsfiddle.net/inuitcss/yMtur
+ */
+/**
+ * Fluid images.
+ */
+img {
+  max-width: 100%; </th>
+               <th>Ipsum</th>
+               <th class=numerical>Dolor</th>
+               <th>Sit</th>
+           </tr>
+       </thead>
+       <tbody>
+           <tr>
+               <th rowspan=3>Sit</th>
+               <td>Dolor</td>
+               <td class=numerical>03.788</td>
+               <td>Lorem</td>
+           </tr>
+           <tr>
+               <td>Dolor</td>
+               <td class=numerical>32.210</td>
+               <td>Lorem</td>
+           </tr>
+           <tr>
+               <td>Dolor</td>
+               <td class=numerical>47.797</td>
+         

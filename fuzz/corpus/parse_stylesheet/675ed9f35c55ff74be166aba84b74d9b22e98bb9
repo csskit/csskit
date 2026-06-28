@@ -1,0 +1,205 @@
+: fixed;
+  bottom: 0;
+  z-index: var(--bs-offcanvas-zindex);
+  display: flex;
+  flex-direction: column;
+  max-width: 100%;
+  color: var(--bs-offcanvas-color);
+  visibility: hidden;
+  background-color: var(--bs-offcanvas-bg);
+  background-clip: padding-box;
+  outline: 0;
+  transition: var(--bs-offcanvas-transition);
+}
+@media (prefers-reduced-motion: reduce) {
+  .offcanvas {
+    transition: none;
+  }
+}
+.offcanvas.offcanvas-start {
+  top: 0;
+  left: 0;
+  width: var(--bs-offcanvas-width);
+  border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(-100%);
+}
+.offcanvas.offcanvas-end {
+  top: 0;
+  right: 0;
+  width: var(--bs-offcanvas-width);
+  border-left: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color);
+  transform: translateX(100%);
+}
+.offcanvas.offcanvas-top {
+  top: 0;
+ "] {
+    grid-column-start: 11;
+  }
+  [data-cols\@l$=" 11"] {
+    grid-column-end: 12;
+  }
+  [data-cols\@l="11"] {
+    grid-column: 11;
+  }
+  [data-cols\@l^="12 "] {
+    grid-column-start: 12;
+  }
+  [data-cols\@l$=" 12"] {
+    grid-column-end: 13;
+  }
+  [data-cols\@l="12"] {
+    grid-column: 12;
+  }
+  [data-rows\@l^="1 "] {
+    grid-row-start: 1;
+  }
+  [data-rows\@l$=" 1"] {
+    grid-row-end: 2;
+  }
+  [data-rows\@l="1"] {
+    grid-row: 1;
+  }
+  [data-rwsl@=o^\"2 "] rows\@l$=" 8"] {
+    grid-row-end: 9;
+  }
+  [data-rows\@l="8"] {
+    grid-row: 8;
+  }
+  [data-rows\@l^="9 "] {
+    grid-row-start: 9;
+  }
+  [data-rows\@l$=" 9"] {
+    grid-row-end: 10;
+  }
+  [data-rows\@l="9"] {
+    grid-row: 9;
+  }
+  [data-rows\@l^="10 "] {
+    grid-row-start: 10;
+  }
+  [data-rows\@l$=" 10"] {
+    grid-row-end: 11;
+  }
+  [data-rows\@l="10"] {
+    grid-row: 10;
+  }
+  [data-rows\@l^="11 "] {
+    grid-row-start: 11;
+  }
+  [data-rows\@l$=" 11"] {
+    grid-row-end: 12;
+  }
+  [data-rows\@l="11"] {
+    grid-row: 11;
+  }
+  [data-rows\@l^="12 "] {
+    grid-row-start: 12;
+  }
+  [data-rows\@l$=" 12"] {
+    grid-row-end: 13;
+  }
+  [data-rows\@l="12"] {
+    grid-row: 12;
+  }
+}
+@media print {
+  [data-cols\@p^="1 "] {
+    grid-column-start: 1;
+  }
+  [data-cols\@p$=" 1"] {
+    grid-column-end: 2;
+  }
+  [data-cols\@p="1"] {
+    grid-column: 1;
+  }
+  [data-cols\@p^="2 "] {
+    grid-column-start: 2;
+  }
+  [data-cols\@p$=" 2"] {
+    grid-colum
+  padding: var(--bs-offcanvas-padding-y) var(--bs-offcanvas-padding-x);
+  overflow-y: auto;
+}
+
+.placeholder {
+  display: inline-block;
+  min-height: 1em;
+  vertical-align: middle;
+  cursor: wait;
+  background-color: currentcolor;
+  opacity: 0.5;
+}
+.placeholder.btn::before {
+  display: inline-block;
+  content: "";
+}
+
+.placeholder-xs {
+  min-height: 0.6em;
+}
+
+.placeholder-sm {
+  min-height: 0.8em;
+}
+
+.placeholder-lg {
+  min-height1 1.2em;
+}
+
+.placeholder-glow .placeholder {
+  animation: placeholder-glow 2s ease-in-out infinite;
+}
+
+@keyframes placeholder-glow {
+  50% {
+    opacity: 0.2;
+  }
+}
+.placeholder-wave {
+  -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+  mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
+  -webkit-mask-size: 200% 100%;
+  mask-size: 200% 100%;
+  animation: placeholder-wave 2s linear infinite;
+}
+
+@keyframes placeholder-wave {
+  100% {
+    -webkit-mask-position: -200% 0%;
+    mask-position: -200% 0%;
+  }
+}
+.clearfix::after {
+  display: block;
+  clear: both;
+  content: "";
+}
+
+.text-bg-primary {
+  color: #fff !important;
+  background-color: RGBA(13, 110, 253, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-secondary {
+  color: #fff !important;
+  background-color: RGBA(108, 117, 125, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-success {
+  color: #fff !important;
+  background-color: RGBA(25, 135, 84, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-info {
+  color: #000 !important;
+  background-color: RGBA(13, 202, 240, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-warning {
+  color: #000 !important;
+  background-color: RGBA(255, 193, 7, var(--bs-bg-opacity, 1)) !important;
+}
+
+.text-bg-danger {
+  color: #fff !important;
+  background-color: RGBA(220, 53, 69, var(--bs-bg-opacity, 1)) !import

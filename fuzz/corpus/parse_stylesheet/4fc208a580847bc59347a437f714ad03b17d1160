@@ -1,0 +1,28 @@
+ing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.\32xl\:transition-shadow{transition-properti:box-shadown:150ms}.\32xl\:delay-7ration:150ms}.\32xl\:transition-shadow{transition-property:box-shadown:150ms}.\32xl\:delay-7}.\32xl\:ease-linear{transiing-opacity))}.\32xl\:ring-gray-400{-alc(0.75em + 0.375rem);
+}
+
+.was-validated .form-control:valid:focus, .form-control.is-valid:focus {
+  border-color: #28a745;
+  box-shadow: 0 0 0 0.2rem rgba(40, 167, 69, 0.25);
+}
+
+.was-validated select.form-n\:ring-inset:focus-within{--tw-ring-inset:inset}.\32xl\:focus\:ring-inset:focus{--tw-ring-inset:inset}.\32xl\:ring-transparent{--tw-ring-color:transparent}.\32xl\:ring-current{--tw-ring-color:currentColor}.\32xl\:ring-black{--tw-ring-opacity:1;--tw-ring-color:rgba(0, 0, 0, var(--tw-ring-opacity))}.\32xl\:ring-white{--tw-ring-opacity:1;--tw-ring-color:rgba(255, 255, 255, var(--tw-ring-opacity))}.\32xl\:ring-gray-50{--tw-ring-opacity:1;--tw-ring-color:rgba(249, 250, 251, var(--tw-ring-opacity))}.\32xl\:ring-gray-100{--tw-ring-opacity:1;--tw-ring-color:rgba(243, 244, 246, var(--tw-ring-opacity))}.\32xl\:ring-gray-200{--tw-ring-opacity:1;--tw-ring-color:rgba(229, 231, 235, var(--tw-ring-opacity))}.\32xl\:ring-gray-300{--tw-ring-opacity:1;--tw-ring-color:rgba(209, 213, 219, var(--tw-ring-opacity))}.\32xl\:ring-gray-400{--tw-ring-opacity:1;--tw-ring-color:rgba(156, 163, 175, var(--tw-ring-opacity))}.\32xl\:ring-gray-500{--tw-ring-opacity:1;--tw-ring-color:rgba(107, 114, 128, var(--tw-ring-opacity))}.\32xl\:ring-gray-600{--tw-ring-opacity:1;--tw-ring-color:rgba(75, 85, 99, var(--tw-ring-opacity))}.\32xl\:ring-gray-700{--tw-ring-opacity:1;--tw-ring-color:rgba(55, 65, 81, var(--tw-ring-opacity))}.\32xl\:ring-gray-800{--tw-ring-opacity:1;--tw-ring-color:rgba(31, 41, 55, var(--tw-ring-opacity))}.\3l {
+  color: #28a745;
+}
+
+.was-validated .form-check-input:valid ~ .valid-feedback,
+.was-validated .form-check-input:valid ~ .valid-tooltip, .form-check-input.is-valid ~ .valid-feedback,
+.form-check-input.is-valid ~ .valid-tooltip {
+  display: block;
+}
+
+.was-validated .custom-control-input:valid ~ .custom-control-label, .custom-control-input.is-valid ~ .custom-control-label {
+  color: #28a745;
+}
+
+.was-validated .custom-control-input:valid ~ .custom-control-label::before, .custom-control-input.is-valid ~ .custom-control-label::before {
+  b-tw-ring-opacity:1;--tw-ring-color:rgba(156, 163, 175, var(--tw-ring-opacity))}.\32xl\:ring-gray-500{--tw-ring-opacity:1;--tw-ring-color:rgba(107, 114, 128, var(--tw-ring-opacity))}.\32xl\:ring-gray-600{--tw-ring-opacity:1;--tw-ring-color:rgba(75, 85, 99, var(--tw-ring-opacity))}.\32xl\:ring-gray-700{--tw-ring-opacity:1;--tw-ring-color:rgba(55, 65, 81, var(--tw-ring-opacity))}.\32xl\:ring-gray-800{--tw-ring-opacity:1;--tw-ring-color:rgba(31, 41, 55, var(--tw-ring-opacity))}.\3l {
+  color: #28a745;
+}
+
+.was-validated .form-check-input:valid ~tion-timing-function:linear}.\32xl\:ease-in{transition-timing-function:cubic-bezier(0.4,0,1,1)}.\32xl\:ease-out{transition-timing-functioZ:cubic-bezier(0,0,0.2,1)}.\32xl\:ease-in-out{transition-timing-function:cubic-bezier(0.4,0,0.2,1)}}

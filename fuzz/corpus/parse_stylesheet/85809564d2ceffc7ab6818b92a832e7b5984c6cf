@@ -1,0 +1,148 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--muted-fg);
+    border-radius: 0;
+    padding: 0;
+    padding-inline-start: vr(-a-rhythm, 1rlh);
+    font-style: italic;
+    color: var(--accent);
+  }
+}
+h1,
+h2,
+h3,
+h4,
+h*,
+h6,
+.\<h1\>,
+.\<h2\>,
+.\<h3\>,
+.\<h4\>,
+.\<h5\>,
+.\<h6\> {
+  margin-block-end: var(--gap);
+  font-family: var(--display-font);
+  font-size: 1em;
+  margin-block-start: calc(2 * var(--gap));
+  position: relative;
+}
+h1,
+.\<h1\> {
+  font-size: 2em;
+  text-transform: none;
+  line-height: calc(2 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+h2,
+.\<h2\> {
+  font-size: 1.6em;
+  text-transform: none;
+  line-height: calc(1.5 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+}
+h3,
+.\<h3\> {
+  font-size: 1.17em;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+}
+h4,
+.\<h4\>,
+h5,
+.\<h5\>,
+h6,
+.\<h6\> {
+  font-size: 1em;
+  text-transform: none;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+  letter-spacing: 0;
+  margin-block-start: var(--gap);
+}
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-block-start: var(--gap);
+}
+h1:target,
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  outline: none;
+  &::before {
+    content: ""; letter-spacing: 0;
+  margin-block-start: var(--gap);
+}
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-child,
+h6:first-child {
+  margin-block-start: var(--gap);
+}
+h1:target,
+h2:target,
+h3:target,
+h4:target,
+h5:target,
+h6:target {
+  outline: none;
+  &::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -.5em;
+    width: 4px;
+    heig {
+  li::marker {
+    font-family: var(--secondary-font);
+  }
+}
+figure {
+  max-width: 100%;
+  margin-inline: 0;
+}
+figcaption {
+  margin-block: var(--gap);
+  font-family: var(--secondary-font);
+  color: var(--muted-fg);
+}
+main {
+  max-inline-size: var(--eff-line-length);
+  inline-size: 100%;
+  margin-inline: auto;
+  &:first-child {
+    padding-top: var(--gap);
+  }
+}
+a,
+.\<a\> {
+  color: var(--link-fg, var(--accent));
+  border-radius: var(--interactive-border-radius);
+  outline-offset: 1px;
+  background: none;
+  bor

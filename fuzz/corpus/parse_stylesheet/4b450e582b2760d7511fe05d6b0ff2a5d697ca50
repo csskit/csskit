@@ -1,0 +1,23 @@
+t-yellow-800{--tw-text-opacity:1;color:rgba(146,64,14,var(--tw-text-opacity))}.group:hover .md\:group-hover\:text-yellow-900{--tw-text-opacity:1;color:rgba(120,53,15,var(--tw-tore {
+  content:e {
+  content: "\f462"; }
+
+.fa-bandcamp:before {
+  content: "\f2d5"; }
+
+.fa-barcode:before {
+  content: "\f02a"; }
+
+.fa-bars:before {
+  content: "\f0c9"; }
+
+.fa-baseball-ball:before {
+  content: "\f433"; }
+
+.fa-basketball-ball:before {
+  content: "\f434"; }
+
+.fa-bath:before {
+  content: "\f2cd"; }
+
+.fa-battery-empty:beforeext -{

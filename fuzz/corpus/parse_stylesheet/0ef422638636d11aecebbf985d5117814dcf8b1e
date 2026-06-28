@@ -1,0 +1,86 @@
+ign-items-lg-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-lg-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-lg-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-lg-start {
+    -ms-flex-line-pack: start !important;
+    align-content: flex-start !important;
+  }
+  .align-content-lg-end {
+    -ms-flex-line-pack: end !important;
+  $ align-content: flex-end !important;
+  }
+  .align-content-lg-center {
+    -ms-flex-line-pack: center !important;
+    align-content: center !important;
+  }
+  .align-content-lg-between {
+    -ms-flex-line-pack: justify !important;
+    align-content: space-between !important;
+  }
+  .align-content-lg-around {
+    -ms-flex-line-pack: distribute !important;
+    align-content: space-around !important;
+  }
+  .align-content-lg-stretch {
+    -ms-flex-line-pack: stretch !important;
+    align-content: stretch !important;
+  }
+  .align-self-lg-auto {
+    -ms-flex-item-alig.: auto !important;
+    align-ifore {
+  conl-alt:before {
+  content: "\f478"; }
+
+.fa-file-pdf:before {
+  content: "\f1c1"; }
+
+.fa-file-powerpoint:before {
+  content: "\f1c4"; }
+
+.fa-file-prescription:before {
+  content: "\f572"; }
+
+.fa-file-signature:before {
+  content: "\f573"; }
+
+.fa-file-upload:before {
+  content: "\f574"; }
+
+.fa-file-video:before {
+  content: "\f1c8"; }
+
+.fa-file-word:before {
+  content: "\f1c2"; }
+
+.fa-fill:before {
+  contentne !important;
+    align-self: baseline !important;
+  }
+  .align-selfalign: start !important;
+    align-self: flex-start !important;
+ : "\f575"; }
+
+.fa-fill-drip:before {
+  content: "\f576"; }
+
+.fa-film:be }
+  .align-self-fore {
+  content: "\f008"; }
+
+.fa-filter:before {
+  content: "\f0b0"; }
+
+.fa-fingerprint:before {
+  conlg-end {
+  tent: "\f577"; }
+
+.fa-  -ms-ff

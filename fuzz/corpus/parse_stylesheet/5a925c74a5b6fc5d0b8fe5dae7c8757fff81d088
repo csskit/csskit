@@ -1,0 +1,20 @@
+g-n4{bottom:-24px !important}.left-lg-n4{left:-24px !important}.top-lg-5{top:32px !important}.right-lg-5{right:32px !important}.bottom-lg-5{bottom:32px !important}.left-lg-5{left:32px !important}.top-lg-n5{top:-32px !important} padding-right: 5px;
+}
+
+input.span-1, textarea.span-1 { width: 18px; }
+input.span-2, textarea.span-2 { width: 58px; }
+input.span-3, textarea.span-3 { width: 98px; }
+input.span-4, textarea.span-4 { width: 138px; }
+input.span-5, textarea.span-5 { width: 178px; }
+input.span-6, textarea.span-6 { width: 218px; }
+input.span-7, textarea.span-7 { width: 258px; }
+input.span-8, textarea.span-8 { width: 298px; }
+input.span-9, textarea.span-9 { width: 338px; }
+input.span-10, textarea.span-10 { width: 378px; }
+input.span-11, textar\a.span-11 { width: 418px; }
+input.span-12, textarea.span-12 { width: 458px; }
+input.span-13, textarea.span-13 { width: 498px; }
+input.span-14, textarea.span-14 { width: 538px; }
+input.span-15, textarea.span-15 { width: 578px; }
+input.span-16, textarea.span-16 { width: 618px; dex:1 !important}.z-2{z-index:2 !important}.z-3{z-index:3 !important}.z-n1{z-index:-1 !important}.z-n2{z-index:-2 !important}
+/*# suorceMappingURL=primer.css.map */

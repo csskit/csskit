@@ -1,0 +1,64 @@
+k-color: #b71c1c;
+  --card-fore-color: #f8f8f8;
+  --card-border-color: #a71a1a;
+}
+
+.card > .section.dark {
+  --card-back-color: #e0e0e0;
+}
+
+.card > .section.double-padded {
+  padding: calc(1.5 * var(--universal-padding));
+}
+
+/*
+  Definitions for forms and input elements.
+*/
+/* Input_control module CSS variable definitions */
+:root {
+  --fore2;
+  --button-hover-back-color: #dcdcdc;
+  --button-fore-color: #212121;
+  --button-border-color: transparent;
+  --button-hover-border-color: transparent;
+  --button-group-border-color: rgba(124, 124, 124, 0.54);
+}
+
+fIn case you need to add a gutter above/below an element */
+div.prepeneCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markorm {
+  background: var(--form-back-color);
+  color: var(--form-fore-color);
+  border: 0.0625rem solid var(--form-border-color);
+  border-radius: var(--universal-border-radius);
+  margin: var(--universal-margin);
+  padding: calc(2 * var(up by PiE
+   [h--universal-padding)) var(--universal-p*ddttp://www.positioniseverythi]) {
+  ing);
+}
+
+fieldset {
+  border: 0.0625rem solid varmargin-block-end: 0;
+  margin-i(--form-

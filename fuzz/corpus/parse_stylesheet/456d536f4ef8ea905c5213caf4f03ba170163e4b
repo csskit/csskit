@@ -1,0 +1,49 @@
+media print, screen and (min-width: 64em) {
+  .large-grid-frame {
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    width: 100vw; }
+  .cell .large-grid-frame {
+    width: 100%; }
+  .large-cell-block {
+    overflow-x: auto;
+    max-width: 100%;
+    -webem;
+  margin-bottom: -0.625rem; }
+  @media print, screen and (min-width: 40em) {uto; }
+  .grid-margin-y > .shrink {
+    height: auto; }
+  .grid-margin-y > .small-1 {
+    height: calc(8.33333% - 1.25rem); }
+  .grid-margin-y > .small-2 {
+    height: calc(16.66667% - 1.25rem); }
+  .grid-margin-y > .small-3 {
+    height: calc(25% - 1.25rem); }
+  .grid-margin-y > .small-4 {
+    height: calc(33.33333% - 1.25rem); }
+  .grid-margin-y > .small-5 {
+    height: calc(41.66667% - 1.25rem); }
+  .grid-margin-y > .small-6 {
+    height: calc(50% - 1.25rem); }
+  .grid-margin-y > .small-7 {
+    height: calc(58.33333% - 1.25rem); }
+  .grid-margin-y > .small-8 {
+    height: calc(66.66667% - 1.25rem); }
+  .grid-margin-y > .small-9 {
+    height: calc(75% - 1.25rem); }
+  .grid-margin-y > .small-10 {
+    height: calc(83.33333% - 1.25rem); }
+  .grid-margin-y > .small-11 {
+    height: calc(91.66667% - 1.25rem); }
+  .grid-margin-y > .small-12 {
+    height: calc(100% - 1.25rem); }
+  @media print, screen and (min-width: 40em) {
+    .grid-margin-y > .auto {
+      h

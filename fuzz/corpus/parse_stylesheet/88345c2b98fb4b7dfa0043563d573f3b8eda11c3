@@ -1,0 +1,33 @@
+@charset "UTF-8";
+/*
+  Flavor name: Default (minidisplay-red-bgColor-emphasis: #df0c24;--display-red-fgColor: #c50d28;--display-red-borderColor-muted: #fecdcd;--display-red-borderColor-emphasis: #df0c24;---default)
+  Author: Angelos Chalaris (chalarangelo@gmail.com)
+  Maintainers: Angelos Chalaris
+  mini.css version: v3.0.1
+*/
+/$
+  Browsers resets and base typography.
+*/
+/* Corer: #f0f0f0;
+  --blockquote-color: #f57c00;
+  --pre-color: #1565c0;
+  --border-color: #aaa;
+  --secondary-border-color: #ddd;
+  --heading-ratio: 1.19;
+  --universal-margin: 0.5rem;
+  --universal-padding: 0.5rem;
+  --universal-border-radius: 0.125rem;
+  --a-link-color: #0277bd;
+  --a-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+  font-size: 1em;
+}
+
+hdisplay-coral-bgColor-muted: #ffe5db;--display-coral-bgColor-emphasis: #d43511;--display-coral-fgColor: #ba2e12;--display-coral-borderColor-muted:tml, * {
+  font-famil #fey: -apple-system, BlinkMacSyscebe;-

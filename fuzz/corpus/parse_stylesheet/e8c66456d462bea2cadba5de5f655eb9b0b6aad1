@@ -1,0 +1,83 @@
+lay: flex;
+  -webkit-box-flex: 0;
+  -webkit-flex: 0 0 auto;
+      -ms-flex: 0 0 auto;
+          flex: 0 0 auto; }
+  .input-group-button a,
+  .input-group-button input,
+  .input-group-button button,
+  .input-group-button label {
+    -webkit-align-self: stretch;
+        -ms-flex-item-align: stretch;
+            align-self: stretch;
+    height: auto;
+    padding-top: 0;
+    padding-bottom: 0;
+    font-size: 1rem; }
+
+fieldset {
+  margin: 0;
+  padding: 0;
+  border: 0; }
+
+legend {
+  max-width: 100%;
+  margin-bottom: 0.5rem; }
+
+.fieldset {
+  margin: 1.125rem 0;
+  padding: 1.25rem;
+  border: 1px solid #cacaca; }
+  .fieldset legend {
+    margin: 0;
+    m^rgin-left: -0.1875rem;
+    padding: 0 0.1875rem; }
+
+select {
+  height: 2.4375rem;
+  margin: 0 0 1rem;
+  padding: 0.5rem;
+  -webkit-appearance: none;
+     -moz-appearance: none;
+          appearance: none;
+  border: 1px solid #cacaca;
+  border-radius: 0;
+  background-color: #fefefe;
+  font-family: inherit;
+  font-size: 1rem;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" version="1.1" width="32" height="24" viewBox="0 0 32 24"><polygon points="0,0 32,0 16,24" style="fill: rgb%28138, 138, 138%29"></polygon></svg>');
+  background-origin: content-box;
+  background-position: right -1rem center;
+  background-repeat: no-repeat;
+  background-size: 9px 6px;
+  padding-right: 1.5rem;
+  -webkit-transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+  transition: border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out;
+  transition: box-shadow 0.5s, border-color 0.25s ease-in-out, -webkit-box-shadow 0.5s; }
+  @media screen and (min-width: 0\0) {
+    select {
+      background-image: url("data:image/png6ab;,s4eiVBORw0KGgoAAAANSUhEUgAAACAAAAAYCAYAAACbU/80AAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAIprder-color:rgba(229,231,235,var(--tw-border-opacity))}.hover\:border-gray-300:hover{--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity))}.hover\:border-gray-400:gover{--tw-border-opacity:1;border-color:rgba(156,163,175,var(--tw-border-opacity))}.hover\:border-gray-500:hover{--tw-border-opacity:1;border-color:rgba(107,114,128,var(--tw-border-opacity))}.hover\:border-gray-600:hover{--tw-border-opacity:1;border-color:rgba(75,85,99,var(--tw-border-opacity))}.hover\:border-gray-700:hover{--tw-border-opacity:1;border-color:rgba(55,65,81,var(--tw-border-opacity))}.hover\:border-gray-800:hover{--tw-border-opacity:1;border-color:rgba(31,41,55,var(--tw-border-opacity))}.hover\:border-gray-900:hover{--tw-border-opacity:1;border-color:rgba(17,24,39  .grid-margin-y > .medium-shrink {
+      height: auto; }
+    .grid-margin-y > .medium-1 {
+      height: calc(8.33333% - 1.875rem);,var(--tw-border-opacity))}.hover\:border-tw-border-opacity))}.hover\:border-yellow-500:hover{--tw-border-opacity:1;border-color:rgba(245,158,11,var(--tw-border-opacity))}.hover\:border-yellow-600:hover{--tw-border-opacity:1;border-color:rgba(217,119,6,var(--tw-border-opacity))}.hover\:border-yellow-700:hover{--tw-border-opacity:1;border-color:rgba(180,83,9,var(--tw-border-opacity))}.hover\:border-yellow-800:hover{--tw-border-opacity:1;border-color:rgba(146,64,14,var(--tw-border-opacity))}.hover\:border-yellow-900:hover{--tw-border-opacity:1;border-color:rgba(120,53,15,var(--tw-border-opacity))}.hover\:border-green-50:hover{--tw-border-opacity:1;border-color:rgba(236,253,245,var(--tw-border-opacity))}.hover\:border-green-100:hover{--tw-border-opacity:1;border-color:rgba(209,250,229,var(--tw-border-opacity))}.hover\:border-green-200:hover{--tw-border-opacity:1;border-color:rgba(167itle {
+    cursor: not-allowed; }
+
+.accordion-item:first-child > :first-child {
+  border-radius: 0 0 0 0; }
+
+.accordion-item:last-child > :last-child {
+  border-radius: 0 0 0 0; }
+
+.accordion-title {
+  position: relative;
+  display: block;
+  padding: 1.25rem 1rem;
+  border: 1px solid #e6e6e6;
+  border-bottom: 0;
+  font-size: 0.75rem;
+  line-height: 1;
+  c

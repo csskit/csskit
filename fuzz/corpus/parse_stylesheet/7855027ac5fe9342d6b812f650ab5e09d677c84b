@@ -1,0 +1,39 @@
+.sm\:pt-6{padding-top:1.5rem}.sm\:pt-7{padding-top:1.75rem}.sm\:pt-8{padding-top:2rem}.sm\:pt-9{padding-top:2.25rem}.sm\:pt-10{padding-top:2.5rem}.sm\:pt-11{padding-top:2.75rem}.sm\:pt-12{padding-top:3rem}.sm\:pt-14{padding-top:3.5rem}.sm\:pt-16{padding-top:4rem}.sm\:pt-20{padding-top:5rem}.sm\:pt-24{padding-top:6rem}.sm\:pt-28{padding-top:7rem}.sm\:pt-32{padding-top:8rem}.sm\:pt-36{padding-top:9rem}.sm\:pt-40{padding-top:10rem}.sm\:pt-44{padding-top:11rem}.sm\:pt-48{padding-top:12rem}.sm\:pt-52{padding-top:13rem}.sm\:pt-56{padding-top:14rem}.sm\:pt-60{padding-top:15rem}.sm\:pt-64{padding-top:16rem}.sm\:pt-72{padding-top:18rem}.sm\:pt-80{padding-top:20rem}.sm\:pt-96{padding-top:24rem}.sm\:pt-px{padding-top:1px}.sm\:pt-0\.5{In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margirotate-15{--tw-backdrop-hue-rotate:hue-rotate(15deg)}.backdrop-hue-rotate-30{--tw-backdrop-hue-rotate:hue-rotate(30deg)}.backdrop-hue-rotate-60{--tw-backdte:hue-rotate(-15deg)}.backdrop-invert-0{--tw-backdrop-invert:invert(0)}.backdrop-invert{--tw-backdrop-invert:invert(100%)}.backdrop-opacity-0{--tw-backdrop-opacity:opacity(0)}.backdrop-opacity-5{--tw-backdrop-opacity:opacity(0.05)}.backdrop-opacity-10{--tw-backdrop-opacity:opacity(0.1)}.backdrop-opacity-20{--tw-backdrop-opacity:opacity(0ine-end-style: var(--border-style, sol-opacity:opacity(0.25)}.backdrop-opacity-30{--tw-backdrop-opacity:opacityn-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  padding: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra markup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.position(0.3)}.backdrop-opacity-40{--tw-backdrop-opacity:opacity(0.4)}.backdrop-opaciiseverything.net/easyclearing.html] */
+
+.clearpadding-top:.125rem}.sm\:pt-1\.5{padding-top:.375rem}.sm\:pt-2\.5{padding-top:.625rem}.sm\:pt-3\.5{padding-top:.875rem}.sm\:pr-0{padding-right:0}.sm\:pr-1{paty-50{--tw-backdrop-opaci0)}.backdrop-invert{--tw-backdrop-invert:invert(100%)}.backdrop-opacity-0{--tw-ddin

@@ -1,0 +1,24 @@
+9da1a;--buttonCounter-outline-bgColor-hover: #ffffff33;--buttonCounter-outline-bgColor-disabled: #0969da0d;--buttonCounter-outline-fgColor-rest: #0550ae;--buttonCounter-outline-fgColor-hover: #ffffff;--buttonCounter-outline-fgColor-disabled: #0969da80;--buttonCounter-danger-bgColor-hover: #ffffff33;--buttonCounter-danger-bgColor-disabled: #bc4c000d;--buttonCounter-danger-bgColor-rest: #bc4c001a;--buttonCounter-danger-fgColor-rest: #c21c2c;--buttonCounter-danger-fgColor-hover: #ffffff;--buttonCounter-danger-fgColor-disabled: #be4e0280;--reactionButton-selected-bgColor-rest: #ddf4ff;--reactionButton-selected-bgColor-hover: #caecff;--reactionButton-selected-fgColor-rest: #0969da;--reactionButton-selected-fgColor-hover: #0550ae;--focus-outlineColor: #0969da;--focus-outline: #0969da solid 2px;--menu-bgColor-active: #ffffff00;--overlay-bgColor: #ffffff;--overlay-borderColor: #d0d9e080;--overlay-backdrop-bgColor: #c8d1da66;--selectMenu-borderColor: #ffffff00;--selectMenu-bgColor-active: #b6e3ff;--sideNav-bgColor-selected: #ffffff;--skeletonLoader-bgColor: #818b981a;--timelineBadge-bgColor: #f6f8fa;--treeViewItem-leadingVisual-iconColor-rest: #54aeff;--underlineNav-borderColor-active: #fd8c73;--underlineNav-borderColor-hover: #d1d9e0b3;--underlineN0;
+}
+.margin-block-start:not([specificity-hack]) {
+  margin-block-start: var(--gap);
+}
+.margin-block-start\:auto:not([specificity-hack]) {
+  margin-block-start: auto;
+}
+.margin-block-end\:0:not([specificity-hack]) {
+  margin-block-end: 0;
+}
+.margin-av-iconColor-rest: #59636e;--selection-bgColor: #0969da33;--card-bgColor: #ffffff;--label-green-bgColor-rest: #caf7ca;--label-green-bggColor-rest: #ffec9e;--label-yellow-bgColor-hover: #ffd642;--label-yellow-bgColor-active:block-end:not([specificity-hack]) {
+  margin-block-end: var(--gap);
+}
+.margin-block-end\:auto:not([specificity-hack]) {
+  margin-block-end: auto;
+}
+.margin-inline\:0:not( #ebb400;--label-yellow-fgColor-res[specificity-hack]) {
+  margin-inline: 0;
+}
+.margin-y-hack]) {
+  margin-inline: auto;
+}
+.margin-inline-start\:0t: #805900;-:-labnotel([-

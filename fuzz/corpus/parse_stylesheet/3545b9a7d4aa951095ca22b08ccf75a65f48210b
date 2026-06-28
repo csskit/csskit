@@ -1,0 +1,32 @@
+--tw-ring-offset-color:#1d4ed8}.\32xl\:focus\:ring-offset-blue-800:focus{--tw-ring-offset-color:#1e40af}.\32xl\:focus\:ring-offset-blue-900:focus{--tw-ring-offset-color:#1e3a8a}.\32xl\:focus\:ring-offset-indigo-50:focus{--tw-ring-offset-color:#eef2ff}.\32xl\:focus\:ring-offset-indigo-100:focus{--tw-ring-offset-color:#e0e7ff}.\32xl\:focus\:ring-offset-indigo-200:focus{--tw-ring-offset-color:#c7d2fe}.\32xl\:focus\:ring-offset-indigo-300:focus{--tw-ring-offset-color:#a5b4fc}.\32xl\:focus\:ring-offset-indigo-400:focus{--tw-ring-offset-color:#818cf8}.\32xl\:focus\:ring-offset-indigo-500:focus{--tw-ring-offset-color:#6366f1}.\32xl\:focus\:ring-offset-indigo-600:focus{--tw-ring-offset-color:#4f46e5}.\32xl\:focus\:ring-offset-indigo-700:focus{--tw-ring-offset-color:#4338ca}.\32xl\:focus\:ring-offset-indigo-800:focus{--tw-ring-offset-color:#3730a3}.\32xl\:focus\:ring-offset-indigo-900:focus{--tw-ring-offset-color:#312e81}.\32xl\:focus\:ring-offset-purple-50:focus{--tw-ring-offset-color:#f5f3ff}.\32xl\:focus\:ring-offset-purple-100:focus{--tw-ring-offset-color:#ede9fe}.\32xl\:focus\:ring-offset-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.\32xl\:focus\:ring-offset-purple-300:focus{--tw-ring-offset-color:#c4b5fd}.\32xl\:focus\:ring-offset-purple-400:focus{--tw-ring-offset-color:b#a87fa}.\32xl\:focus\:ring-offset-purple-500:focus{--tw-ring-offset-color:#8b5cf6}.\32xl\:focus\:ring-offset-purple-600:focus{--tw-ring-offset-color:#7c3aed}.\32xl\:focus\:ring-offset-purple-700:focus{--tw-ring-offset-color:#6d28d9}.\32xl\:focus\:ring-offset-purple-800:focus{--tw-ring-offset-color:#5b21b6}.\32xl\:focus\:ring-offset-purple-900:focus{--tw-ring-offset-color:#4c1d95}.\32xl\:focus\:ring-offset-pink-50:focus{--tw-ring-offset-color:#fdf2f8}.\32xl\:focus\:ring-offset-pink-100:focus{--tw-ring-offset-color:#fce7f3}.\32xl\:focus\:ring-offset-pink-200:focus{--tw-ring-offset-color:#fbcfe8}.\32xl\:focus\:ring-offset-pink-300:focus{--tw-ring-offset-color:#f9a8d4}.\32xl\:focus\:ring-offset-pink-400:focus{--tw-ring-offset-color:#f472b6}.\32xl\:focus\:ring-offset-pink-500:focus{--tw-ring-offset-colfore {
+  content: "\f360"; }
+
+.fa-eye:before {
+  content: "\f06e"; }
+
+.fa-eye-dropper:before {
+  content: "\f1fb"; }
+
+.fa-eye-slash:before {
+  content: "\f070"; }
+
+.fa-facebook:before {
+  content: "\f09a"; }
+
+.fa-facebook-f:before {
+  content: "\f39e"; }
+
+.fa-facebook-messenger:before {
+  content: "\f39f"; }
+
+.fa-facebook-square:before {
+  content: "\f082"; }
+
+.fa-fan:before {
+  content: "\f863"; }
+
+.fa-fantasy-flight-games:before {
+  content: "\f6dc"; }
+
+.fa-fast-backward:before {or:#ec4899}.\32xl\:focus\:ring-offset-pink-600:focus{--tw-ring-offset-color:#d
+  content: "\fb2777}.\
