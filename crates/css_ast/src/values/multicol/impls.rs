@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -38,26 +38,26 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "10px");
 		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "3");
 		assert_parse!(CssAtomSet::ATOMS, ColumnsStyleValue, "10px 3");
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnsStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnsStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnsStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnsStyleValue, "none");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnCountStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnCountStyleValue, "2.5");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnCountStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnCountStyleValue, "2.5");
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnCountStyleValue, "-1");
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnCountStyleValue, "0");
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnCountStyleValue, "1 234");
 
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnFillStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnFillStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnFillStyleValue, "auto balance");
 
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnSpanStyleValue, "none all");
 
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "10");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "10");
 		assert_parse_error!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "-20px");
-		assert_parse_error!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "30%");
+		assert_peek_false!(CssAtomSet::ATOMS, ColumnWidthStyleValue, "30%");
 	}
 }

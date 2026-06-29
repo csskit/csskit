@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -24,11 +24,11 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, SpatialNavigationActionStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, SpatialNavigationActionStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, SpatialNavigationActionStyleValue, "auto focus");
-		assert_parse_error!(CssAtomSet::ATOMS, SpatialNavigationContainStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, SpatialNavigationContainStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, SpatialNavigationContainStyleValue, "auto contain");
-		assert_parse_error!(CssAtomSet::ATOMS, SpatialNavigationFunctionStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, SpatialNavigationFunctionStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, SpatialNavigationFunctionStyleValue, "normal grid");
 	}
 }

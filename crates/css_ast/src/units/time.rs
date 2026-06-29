@@ -47,7 +47,7 @@ impl ToNumberValue for Time {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -64,8 +64,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, Time, "0");
-		assert_parse_error!(CssAtomSet::ATOMS, Time, "1");
-		assert_parse_error!(CssAtomSet::ATOMS, Time, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, Time, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, Time, "1");
+		assert_peek_false!(CssAtomSet::ATOMS, Time, "foo");
 	}
 }

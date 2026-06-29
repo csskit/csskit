@@ -13,7 +13,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	pub fn size_test() {
@@ -40,8 +40,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline-start");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline-end");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block inline");
-		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MarginTrimStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, MarginTrimStyleValue, "auto");
 	}
 
 	#[test]

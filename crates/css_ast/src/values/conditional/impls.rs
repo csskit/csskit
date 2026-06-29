@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	pub fn size_test() {
@@ -19,8 +19,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "scroll-state");
 		assert_parse!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "size scroll-state");
 		assert_parse!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "inline-size scroll-state");
-		assert_parse_error!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "auto");
 	}
 
 	#[test]
@@ -29,7 +29,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainerStyleValue, "sidebar");
 		assert_parse!(CssAtomSet::ATOMS, ContainerStyleValue, "sidebar / size");
 		assert_parse!(CssAtomSet::ATOMS, ContainerStyleValue, "none / inline-size");
-		assert_parse_error!(CssAtomSet::ATOMS, ContainerStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, ContainerStyleValue, "1px");
 	}
 
 	#[test]

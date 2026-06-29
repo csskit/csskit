@@ -18,7 +18,7 @@ impl<'a> Parse<'a> for TransformOriginStyleValue {
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -50,7 +50,7 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, TransformStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TransformStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, ScaleStyleValue, "none none");
 	}
 
@@ -100,10 +100,10 @@ mod tests {
 
 	#[test]
 	fn test_transform_origin_errors() {
+		assert_peek_false!(CssAtomSet::ATOMS, TransformOriginStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, TransformOriginStyleValue, "top top");
 		assert_parse_error!(CssAtomSet::ATOMS, TransformOriginStyleValue, "left left");
 		assert_parse_error!(CssAtomSet::ATOMS, TransformOriginStyleValue, "left top 50%");
-		assert_parse_error!(CssAtomSet::ATOMS, TransformOriginStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, TransformOriginStyleValue, "left top 0px extra");
 	}
 }

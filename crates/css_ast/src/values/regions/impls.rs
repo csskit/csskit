@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -31,7 +31,7 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, FlowFromStyleValue, "none myflow");
 		assert_parse_error!(CssAtomSet::ATOMS, FlowIntoStyleValue, "element myflow");
 		assert_parse_error!(CssAtomSet::ATOMS, FlowIntoStyleValue, "content myflow");
-		assert_parse_error!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, RegionFragmentStyleValue, "auto break");
 	}
 }

@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -129,8 +129,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "dashes");
 		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "stretch dashes");
 		assert_parse!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "stretch dashes gaps");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeDashJustifyStyleValue, "1px");
 	}
 
 	#[test]
@@ -139,20 +139,20 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "arcs");
 		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "miter");
 		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "crop bevel");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "1px");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, FillBreakStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FillBreakStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FillBreakStyleValue, "bounding-box slice");
-		assert_parse_error!(CssAtomSet::ATOMS, FillRuleStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FillRuleStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FillRuleStyleValue, "nonzero evenodd");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeAlignStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeAlignStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, StrokeAlignStyleValue, "center inset");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeBreakStyleValue, "none");
-		assert_parse_error!(CssAtomSet::ATOMS, StrokeLinecapStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeBreakStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, StrokeLinecapStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, StrokeLinecapStyleValue, "butt round");
 	}
 }

@@ -291,7 +291,7 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use bumpalo::collections::Vec;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use css_parse::{T, assert_parse, assert_parse_error, assert_peek_false};
 
 	type ExactOne = Exact<T![Number], 1>;
 	type RangedZeroOne = Ranged<T![Number], 0, 1>;
@@ -303,7 +303,7 @@ mod tests {
 
 	#[test]
 	fn test_exact_rejects_wrong_value() {
-		assert_parse_error!(CssAtomSet::ATOMS, ExactOne, "2");
+		assert_peek_false!(CssAtomSet::ATOMS, ExactOne, "2");
 	}
 
 	#[test]
@@ -313,7 +313,7 @@ mod tests {
 
 	#[test]
 	fn test_ranged_rejects_out_of_range() {
-		assert_parse_error!(CssAtomSet::ATOMS, RangedZeroOne, "1.5");
+		assert_peek_false!(CssAtomSet::ATOMS, RangedZeroOne, "1.5");
 	}
 
 	#[test]
@@ -363,6 +363,6 @@ mod tests {
 
 	#[test]
 	fn test_non_empty_rejects_empty() {
-		assert_parse_error!(CssAtomSet::ATOMS, NonEmpty<Vec<T![Ident]>>, "");
+		assert_peek_false!(CssAtomSet::ATOMS, NonEmpty<Vec<T![Ident]>>, "");
 	}
 }

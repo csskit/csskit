@@ -40,8 +40,8 @@
 /// // The result will be one of the variants in the enum, matching the keyword.
 /// assert_parse!(MyAtomSet::ATOMS, MyPseudoElement, "::bar");
 ///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoElement, "::bing");
+/// // Words that do not match will fail to Peek.
+/// assert_peek_false!(MyAtomSet::ATOMS, MyPseudoElement, "::bing");
 /// ```
 #[macro_export]
 macro_rules! pseudo_element {

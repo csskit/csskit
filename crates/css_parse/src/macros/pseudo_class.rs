@@ -40,14 +40,14 @@
 /// // Matches are case insensitive
 /// assert_parse!(MyAtomSet::ATOMS, MyPseudoClass, ":BaR");
 ///
-/// // Words that do not match will fail to parse.
-/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoClass, ":bing");
+/// // Words that do not match will fail to Peek.
+/// assert_peek_false!(MyAtomSet::ATOMS, MyPseudoClass, ":bing");
 ///
 /// // The `:` is also required
-/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoClass, "baz");
+/// assert_peek_false!(MyAtomSet::ATOMS, MyPseudoClass, "baz");
 ///
 /// // Any tokens between the `:` and ident result in a parse error:
-/// assert_parse_error!(MyAtomSet::ATOMS, MyPseudoClass, ": foo");
+/// assert_peek_false!(MyAtomSet::ATOMS, MyPseudoClass, ": foo");
 /// ```
 #[macro_export]
 macro_rules! pseudo_class {

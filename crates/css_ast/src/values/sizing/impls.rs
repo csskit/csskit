@@ -16,7 +16,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -48,7 +48,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "none none");
 		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicSizeStyleValue, "auto none 100px");
 		assert_parse_error!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "");
 	}
 
 	#[test]
@@ -57,8 +57,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "zero-if-scroll");
 		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "zero-if-extrinsic");
 		assert_parse!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "zero-if-scroll zero-if-extrinsic");
-		assert_parse_error!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, MinIntrinsicSizingStyleValue, "auto");
 	}
 
 	#[test]

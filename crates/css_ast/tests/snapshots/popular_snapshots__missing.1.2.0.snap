@@ -1,6 +1,7 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
+snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -10609,6 +10610,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   ),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(7436),
+                    len: 1,
+                  )),
                 ],
               ),
               block: ComponentValues(
@@ -32827,6 +32833,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   ),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(21880),
+                    len: 1,
+                  )),
                 ],
               ),
               block: ComponentValues(
@@ -34423,6 +34434,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   ),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(23232),
+                    len: 1,
+                  )),
                 ],
               ),
               block: ComponentValues(
@@ -35193,6 +35209,11 @@ StyleSheet(
                                   kind: "Dimension",
                                   offset: SourceOffset(23846),
                                   len: 2,
+                                )),
+                                Whitespace(Cursor(
+                                  kind: "Whitespace",
+                                  offset: SourceOffset(23848),
+                                  len: 1,
                                 )),
                               ],
                             ),
@@ -59727,6 +59748,11 @@ StyleSheet(
                                   len: 1,
                                 ))),
                               ),
+                              Whitespace(Cursor(
+                                kind: "Whitespace",
+                                offset: SourceOffset(41167),
+                                len: 1,
+                              )),
                             ],
                           ),
                           close: RightParen(Cursor(
@@ -59766,6 +59792,11 @@ StyleSheet(
                             len: 1,
                           )),
                         ),
+                        Whitespace(Cursor(
+                          kind: "Whitespace",
+                          offset: SourceOffset(41189),
+                          len: 1,
+                        )),
                       ],
                     ),
                     close: RightParen(Cursor(
@@ -60564,6 +60595,11 @@ StyleSheet(
                       len: 1,
                     ))),
                   ),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(41622),
+                    len: 1,
+                  )),
                 ],
               ),
               block: ComponentValues(
@@ -73533,6 +73569,11 @@ StyleSheet(
                   Semicolon(Cursor(
                     kind: "Semicolon",
                     offset: SourceOffset(50341),
+                    len: 1,
+                  )),
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(50342),
                     len: 1,
                   )),
                 ],

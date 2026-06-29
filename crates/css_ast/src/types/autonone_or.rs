@@ -44,7 +44,7 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use crate::Length;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use css_parse::{T, assert_parse, assert_parse_error, assert_peek_false};
 
 	type AuroNoneOrIdent = AutoNoneOr<T![Ident]>;
 	type AutoNoneOrNumber = AutoNoneOr<T![Number]>;
@@ -65,8 +65,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AuroNoneOrIdent, "");
-		assert_parse_error!(CssAtomSet::ATOMS, AuroNoneOrIdent, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, AuroNoneOrIdent, "");
+		assert_peek_false!(CssAtomSet::ATOMS, AuroNoneOrIdent, "0");
 		assert_parse_error!(CssAtomSet::ATOMS, AuroNoneOrIdent, "auto none");
 		assert_parse_error!(CssAtomSet::ATOMS, AuroNoneOrIdent, "none none");
 		assert_parse_error!(CssAtomSet::ATOMS, AuroNoneOrIdent, "auto auto");

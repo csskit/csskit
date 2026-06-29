@@ -1,7 +1,8 @@
 use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
+use css_lexer::KindSet;
 use css_parse::{
-	BumpBox, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, QualifiedRule,
+	BumpBox, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
 	Result as ParserResult, RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
 use csskit_derives::*;
@@ -22,6 +23,10 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleSheet<'a> {
 	fn metadata(&self) -> CssMetadata {
 		self.meta
 	}
+}
+
+impl<'a> Peek<'a> for StyleSheet<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::ANY;
 }
 
 // A StyleSheet represents the root node of a CSS-like language.
@@ -170,6 +175,10 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 	{
 		p.parse::<UnknownQualifiedRule>().map(Self::Unknown)
 	}
+}
+
+impl<'a> Peek<'a> for Rule<'a> {
+	const PEEK_KINDSET: KindSet = KindSet::ANY;
 }
 
 impl<'a> Parse<'a> for Rule<'a> {

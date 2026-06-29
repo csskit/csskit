@@ -16,7 +16,7 @@ pub enum Nth {
 }
 
 impl<'a> Peek<'a> for Nth {
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number, Kind::Ident]);
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number, Kind::Ident, Kind::Dimension, Kind::Delim]);
 }
 
 impl<'a> Parse<'a> for Nth {

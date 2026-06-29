@@ -111,18 +111,18 @@
 		"onLanguage:css"
 	],
 	"dependencies": {
-		"vscode-languageclient": "10.0.0"
+		"vscode-languageclient": "10.0.1"
 	},
 	"devDependencies": {
 		"@types/mocha": "10.0.10",
 		"@types/node": "24.12.4",
 		"@types/vscode": "1.120.0",
-		"@vscode/test-cli": "0.0.12",
+		"@vscode/test-cli": "0.0.15",
 		"@vscode/test-electron": "3.0.0",
 		"esbuild": "0.28.1",
 		"mocha": "11.7.6",
-		"oxlint": "1.67.0",
-		"prettier": "3.8.4",
+		"oxlint": "1.68.0",
+		"prettier": "3.8.5",
 		"tinyglobby": "0.2.17",
 		"typescript": "6.0.3"
 	},

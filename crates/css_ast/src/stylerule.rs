@@ -166,6 +166,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{a;b{}}");
 		// Bad Declarations should be parsable.
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, ":root{$(var)-size: 100%;}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, ".md{--:ra( ;86)}");
 	}
 
 	#[test]

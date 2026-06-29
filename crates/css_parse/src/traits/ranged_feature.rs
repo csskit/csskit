@@ -291,6 +291,15 @@ macro_rules! ranged_feature {
 			Exact($crate::T!['('], T![Ident], $crate::T![:], $value, $crate::T![')']),
 		}
 
+		impl<'a> $crate::Peek<'a> for $feature {
+			fn peek<Iter>(p: &$crate::Parser<'a, Iter>, c: $crate::Cursor) -> bool
+			where
+				Iter: Iterator<Item = $crate::Cursor> + Clone,
+			{
+				c == $crate::Kind::LeftParen && p.peek_n(2) == $crate::KindSet::new(&[$crate::Kind::Ident, $crate::Kind::Number, $crate::Kind::Dimension])
+			}
+		}
+
 		impl<'a> $crate::Parse<'a> for $feature {
 			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
 			where

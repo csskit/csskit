@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn test_writes() {
@@ -13,10 +13,14 @@ mod tests {
 	}
 
 	#[test]
+	fn test_peek() {
+		assert_peek_false!(CssAtomSet::ATOMS, WillChangeStyleValue, ""); // must be at-least-one
+		assert_peek_false!(CssAtomSet::ATOMS, WillChangeStyleValue, "0px 3px"); // dimensions not idents
+	}
+
+	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, WillChangeStyleValue, "auto auto"); // two autos is illegal
-		assert_parse_error!(CssAtomSet::ATOMS, WillChangeStyleValue, ""); // must be at-least-one
 		assert_parse_error!(CssAtomSet::ATOMS, WillChangeStyleValue, "transform filter"); // no commas
-		assert_parse_error!(CssAtomSet::ATOMS, WillChangeStyleValue, "0px 3px"); // dimensions not idents
 	}
 }

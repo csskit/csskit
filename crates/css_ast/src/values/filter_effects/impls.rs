@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -53,20 +53,20 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, ColorInterpolationFiltersStyleValue, "linearrgb srgb");
 
-		assert_parse_error!(CssAtomSet::ATOMS, FloodColorStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FloodColorStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FloodColorStyleValue, "black white");
 
 		assert_parse_error!(CssAtomSet::ATOMS, FloodOpacityStyleValue, "2 3");
 
-		assert_parse_error!(CssAtomSet::ATOMS, BackdropFilterStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, BackdropFilterStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, BackdropFilterStyleValue, "blur(10)");
 		assert_parse_error!(CssAtomSet::ATOMS, BackdropFilterStyleValue, "blur(-100px)");
 		assert_parse_error!(CssAtomSet::ATOMS, BackdropFilterStyleValue, "hue-rotate(90)");
 
-		assert_parse_error!(CssAtomSet::ATOMS, FilterStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, FilterStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, FilterStyleValue, "blur(10)");
 		assert_parse_error!(CssAtomSet::ATOMS, FilterStyleValue, "blur(-100px)");
 		assert_parse_error!(CssAtomSet::ATOMS, FilterStyleValue, "hue-rotate(90)");

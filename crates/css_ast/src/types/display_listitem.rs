@@ -53,7 +53,7 @@ pub enum DisplayListitemInside {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -88,8 +88,8 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "list item"); // missing hyphen
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "listitem"); // missing hyphen
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "block flow-root flow list-item");
-		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitemInside, "foo");
-		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitemInside, "list-item");
+		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitemInside, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitemInside, "list-item");
 
 		// These tests verify that `list-item` is required (the `&&` semantics).
 		// Without the explicit check for `list_item.is_some()`, these would incorrectly parse

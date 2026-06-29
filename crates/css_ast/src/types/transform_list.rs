@@ -17,7 +17,7 @@ pub struct TransformList<'a>(pub Vec<'a, TransformFunction<'a>>);
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -51,7 +51,7 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, TransformList, "rotate(45deg) auto");
-		assert_parse_error!(CssAtomSet::ATOMS, TransformList, "auto rotate(45deg)");
+		assert_peek_false!(CssAtomSet::ATOMS, TransformList, "auto rotate(45deg)");
 	}
 
 	#[test]

@@ -205,6 +205,10 @@ macro_rules! media_feature {
 
 apply_medias!(media_feature);
 
+impl<'a> Peek<'a> for MediaFeature {
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen]);
+}
+
 impl<'a> Parse<'a> for MediaFeature {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where

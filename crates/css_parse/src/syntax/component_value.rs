@@ -45,6 +45,13 @@ impl<'a> Peek<'a> for ComponentValue<'a> {
 		Kind::LeftParen,
 		Kind::LeftSquare,
 	]);
+	#[inline(always)]
+	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = Cursor> + Clone,
+	{
+		c == Self::PEEK_KINDSET || <T![' ']>::peek(p, c)
+	}
 }
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value

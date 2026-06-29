@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -64,8 +64,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextTransformStyleValue, "math-auto");
 		assert_parse!(CssAtomSet::ATOMS, TextTransformStyleValue, "capitalize full-width");
 		assert_parse!(CssAtomSet::ATOMS, TextTransformStyleValue, "full-width full-size-kana");
-		assert_parse_error!(CssAtomSet::ATOMS, TextTransformStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextTransformStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, TextTransformStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextTransformStyleValue, "1px");
 	}
 
 	#[test]
@@ -77,8 +77,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "allow-end");
 		assert_parse!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "first last");
 		assert_parse!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "first force-end last");
-		assert_parse_error!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, HangingPunctuationStyleValue, "force-end allow-end");
 	}
 
@@ -92,8 +92,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextJustifyStyleValue, "no-compress");
 		assert_parse!(CssAtomSet::ATOMS, TextJustifyStyleValue, "auto no-compress");
 		assert_parse!(CssAtomSet::ATOMS, TextJustifyStyleValue, "inter-word no-compress");
-		assert_parse_error!(CssAtomSet::ATOMS, TextJustifyStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, TextJustifyStyleValue, "left");
+		assert_peek_false!(CssAtomSet::ATOMS, TextJustifyStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextJustifyStyleValue, "left");
 	}
 
 	#[test]
@@ -103,7 +103,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextIndentStyleValue, "1em hanging");
 		assert_parse!(CssAtomSet::ATOMS, TextIndentStyleValue, "1em each-line");
 		assert_parse!(CssAtomSet::ATOMS, TextIndentStyleValue, "1em hanging each-line");
-		assert_parse_error!(CssAtomSet::ATOMS, TextIndentStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, TextIndentStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, TextIndentStyleValue, "hanging");
 	}
 
@@ -118,8 +118,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "wrap");
 		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "nowrap");
 		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "preserve nowrap");
-		assert_parse_error!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "1px");
+		assert_peek_false!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, WhiteSpaceStyleValue, "1px");
 	}
 
 	#[test]
@@ -130,8 +130,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "discard-inner");
 		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "discard-before discard-after");
 		assert_parse!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "discard-before discard-after discard-inner");
-		assert_parse_error!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, WhiteSpaceTrimStyleValue, "auto");
 	}
 
 	#[test]
@@ -141,8 +141,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "ideographic-space");
 		assert_parse!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "space auto-phrase");
 		assert_parse!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "ideographic-space auto-phrase");
-		assert_parse_error!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "");
-		assert_parse_error!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, WordSpaceTransformStyleValue, "auto");
 	}
 
 	#[test]
@@ -152,7 +152,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "auto 3");
 		assert_parse!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "5 2 2");
 		assert_parse!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "auto auto auto");
-		assert_parse_error!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "5 2 2 2");
 	}
 }

@@ -33,7 +33,7 @@ pub enum LineStyle {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -48,8 +48,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, LineStyle, "florp");
+		assert_peek_false!(CssAtomSet::ATOMS, LineStyle, "florp");
 		// Empty!
-		assert_parse_error!(CssAtomSet::ATOMS, LineStyle, "");
+		assert_peek_false!(CssAtomSet::ATOMS, LineStyle, "");
 	}
 }

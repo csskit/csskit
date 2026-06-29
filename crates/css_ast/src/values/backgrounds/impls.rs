@@ -7,7 +7,7 @@ use css_parse::{CommaSeparated, Parse};
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -45,6 +45,6 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BackgroundStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, BackgroundStyleValue, "");
 	}
 }

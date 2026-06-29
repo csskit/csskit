@@ -143,13 +143,8 @@ jobs:
       - name: Add wasm32 target
         run: rustup target add wasm32-unknown-unknown
 
-      - name: Install Dependencies
-        run: npm i
-        working-directory: ./packages/csskit
-
       - name: Build wasm
-        run: npm run build
-        working-directory: ./packages/csskit
+        run: mise run build-csskit-wasm
 
       - name: Release
         # SECURITY: mise tasks run with privileged secrets. This is safe only

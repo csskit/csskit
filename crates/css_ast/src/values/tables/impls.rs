@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -33,22 +33,22 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, BorderCollapseStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, BorderCollapseStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderCollapseStyleValue, "separate collapse");
 
-		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "10%");
+		assert_peek_false!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "10%");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "-20px");
-		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "30");
+		assert_peek_false!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "30");
 		assert_parse_error!(CssAtomSet::ATOMS, BorderSpacingStyleValue, "40px 50px 60px");
 
-		assert_parse_error!(CssAtomSet::ATOMS, CaptionSideStyleValue, "auto");
-		assert_parse_error!(CssAtomSet::ATOMS, CaptionSideStyleValue, "left");
+		assert_peek_false!(CssAtomSet::ATOMS, CaptionSideStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, CaptionSideStyleValue, "left");
 		assert_parse_error!(CssAtomSet::ATOMS, CaptionSideStyleValue, "top bottom");
 
-		assert_parse_error!(CssAtomSet::ATOMS, EmptyCellsStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, EmptyCellsStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, EmptyCellsStyleValue, "show hide");
 
-		assert_parse_error!(CssAtomSet::ATOMS, TableLayoutStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, TableLayoutStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, TableLayoutStyleValue, "auto fixed");
 	}
 }

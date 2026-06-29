@@ -155,7 +155,7 @@ pub struct MozFilterStyleValue<'a>;
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn test_moz_column_gap_parses() {
@@ -166,7 +166,7 @@ mod tests {
 
 	#[test]
 	fn test_moz_column_gap_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MozColumnGapStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MozColumnGapStyleValue, "invalid");
 	}
 
 	#[test]
@@ -189,7 +189,7 @@ mod tests {
 
 	#[test]
 	fn test_moz_user_select_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MozUserSelectStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MozUserSelectStyleValue, "invalid");
 	}
 
 	#[test]
@@ -200,7 +200,7 @@ mod tests {
 
 	#[test]
 	fn test_moz_appearance_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MozAppearanceStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MozAppearanceStyleValue, "invalid");
 	}
 
 	#[test]
@@ -211,7 +211,7 @@ mod tests {
 
 	#[test]
 	fn test_moz_osx_font_smoothing_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MozOsxFontSmoothingStyleValue, "antialiased");
+		assert_peek_false!(CssAtomSet::ATOMS, MozOsxFontSmoothingStyleValue, "antialiased");
 	}
 
 	#[test]
@@ -233,7 +233,7 @@ mod tests {
 
 	#[test]
 	fn test_moz_box_sizing_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MozBoxSizingStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MozBoxSizingStyleValue, "invalid");
 	}
 
 	#[test]
@@ -245,6 +245,6 @@ mod tests {
 
 	#[test]
 	fn test_moz_filter_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, MozFilterStyleValue, "invalid");
+		assert_peek_false!(CssAtomSet::ATOMS, MozFilterStyleValue, "invalid");
 	}
 }

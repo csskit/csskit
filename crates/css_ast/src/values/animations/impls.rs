@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -38,9 +38,9 @@ mod tests {
 
 	#[test]
 	fn test_animation_delay_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0px");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "infinite");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0px");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "infinite");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "1s 2s 3s");
 	}
 
@@ -55,7 +55,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_direction_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDirectionStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDirectionStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDirectionStyleValue, "normal reverse");
 	}
 
@@ -68,10 +68,10 @@ mod tests {
 
 	#[test]
 	fn test_animation_duration_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "0");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "0px");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "0px");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "-3s");
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "infinite");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "infinite");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationDurationStyleValue, "1s 2s");
 	}
 
@@ -86,7 +86,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_fill_mode_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationFillModeStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationFillModeStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationFillModeStyleValue, "forwards backwards");
 	}
 
@@ -101,7 +101,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_iteration_count_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationIterationCountStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationIterationCountStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationIterationCountStyleValue, "-2");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationIterationCountStyleValue, "3 4");
 	}
@@ -118,7 +118,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_name_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationNameStyleValue, "12");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationNameStyleValue, "12");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationNameStyleValue, "one two");
 	}
 
@@ -131,7 +131,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_play_state_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationPlayStateStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationPlayStateStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationPlayStateStyleValue, "paused running");
 	}
 
@@ -145,7 +145,7 @@ mod tests {
 
 	#[test]
 	fn test_animation_composition_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, AnimationCompositionStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationCompositionStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, AnimationCompositionStyleValue, "add replace");
 	}
 

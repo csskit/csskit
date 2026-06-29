@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn size_test() {
@@ -30,14 +30,14 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "header contents");
 		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "header string(chapter)");
 		assert_parse!(CssAtomSet::ATOMS, StringSetStyleValue, "header contents, footer string(chapter)");
-		assert_parse_error!(CssAtomSet::ATOMS, StringSetStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, StringSetStyleValue, "");
 	}
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, FootnoteDisplayStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FootnoteDisplayStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FootnoteDisplayStyleValue, "block inline");
-		assert_parse_error!(CssAtomSet::ATOMS, FootnotePolicyStyleValue, "none");
+		assert_peek_false!(CssAtomSet::ATOMS, FootnotePolicyStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FootnotePolicyStyleValue, "auto line");
 	}
 }

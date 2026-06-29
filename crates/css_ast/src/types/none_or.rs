@@ -40,7 +40,7 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use crate::Length;
-	use css_parse::{T, assert_parse, assert_parse_error};
+	use css_parse::{T, assert_parse, assert_parse_error, assert_peek_false};
 
 	type NoneOrIdent = NoneOr<T![Ident]>;
 	type NoneOrNumber = NoneOr<T![Number]>;
@@ -61,8 +61,8 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "");
-		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "0");
+		assert_peek_false!(CssAtomSet::ATOMS, NoneOrIdent, "");
+		assert_peek_false!(CssAtomSet::ATOMS, NoneOrIdent, "0");
 		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "none none");
 		assert_parse_error!(CssAtomSet::ATOMS, NoneOrIdent, "none all");
 	}
