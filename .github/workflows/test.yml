@@ -149,6 +149,23 @@ jobs:
       - name: Build
         run: set -euo pipefail; for d in crates/*/; do cargo build -p $(basename $d); done
 
+  build_benches:
+    name: Build benches
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          submodules: "true"
+
+      - name: Setup
+        uses: ./.github/actions/setup
+
+      - name: Build
+        run: cargo build --benches
+
   acceptance:
     name: Acceptance Tests
     needs: check-skip
@@ -227,7 +244,7 @@ jobs:
   results:
     name: CI Results
     if: always()
-    needs: [check-skip, build, build_default, build_nightly, build_each_lib, acceptance, fuzz_replay]
+    needs: [check-skip, build, build_default, build_nightly, build_each_lib, build_benches, acceptance, fuzz_replay]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -249,6 +266,7 @@ jobs:
             [build_default]="Build & Test (default features)"
             [build_nightly]="Build & Test (nightly)"
             [build_each_lib]="Build each library"
+            [build_benches]="Build benches"
             [acceptance]="Acceptance Tests"
             [fuzz_replay]="Fuzz Corpus Replay"
           )
@@ -256,7 +274,7 @@ jobs:
           TABLE="| Job | Result |\n|---|---|\n"
           FAILED_JOBS=""
 
-          for job in build build_default build_nightly build_each_lib acceptance fuzz_replay; do
+          for job in build build_default build_nightly build_each_lib build_benches acceptance fuzz_replay; do
             result=$(echo "$NEEDS" | jq -r ".${job}.result // \"skipped\"")
             name="${JOB_NAMES[$job]}"
             case "$result" in

@@ -86,7 +86,7 @@ serde = { version = "1.0.228" }
 serde_json = { version = "1.0.150" }
 toml = { version = "1.1.2+spec-1.1.0" }
 
-criterion = { version = "0.8.2" }  # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
+criterion = { version = "0.5.1" }  # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 dhat = { version = "0.3.3" }
 flate2 = { version = "1.1.9" }
 insta = { version = "1.48.0" }
