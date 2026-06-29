@@ -48,6 +48,14 @@ jobs:
               -- -max_total_time=30 || true
           done
 
+      - name: Minimise corpus
+        working-directory: fuzz
+        run: |
+          cargo +nightly fuzz cmin parse_stylesheet \
+            corpus/parse_stylesheet \
+            --target x86_64-unknown-linux-gnu \
+            -- -max_len=4096
+
       - name: Collect coverage
         continue-on-error: true
         working-directory: fuzz
@@ -111,7 +119,7 @@ jobs:
               cp "$f" "fuzz/corpus/parse_stylesheet/${name}"
             done
           } > /tmp/fuzz-pr-body-rendered.md
-          git add fuzz/corpus/parse_stylesheet/
+          git add -A fuzz/corpus/parse_stylesheet/
 
       - name: Open PR with findings
         if: steps.findings.outputs.found == 'true'
