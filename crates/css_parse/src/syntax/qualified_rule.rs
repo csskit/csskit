@@ -83,7 +83,7 @@ where
 					p.rewind(checkpoint.clone());
 					let start = p.peek_n(1);
 					p.parse::<BadDeclaration>()?;
-					let end = p.peek_n(0);
+					let end = p.peek_n(1);
 					Err(Diagnostic::new(start, Diagnostic::bad_declaration).with_end_cursor(end))?
 				// If nested is false, consume a block from input, and return nothing.
 				} else {
@@ -95,7 +95,7 @@ where
 					p.parse::<Block<'a, D, R, M>>()?;
 					let start = p.peek_n(1);
 					p.parse::<BadDeclaration>()?;
-					let end = p.peek_n(0);
+					let end = p.peek_n(1);
 					Err(Diagnostic::new(start, Diagnostic::bad_declaration).with_end_cursor(end))?
 				}
 			}
