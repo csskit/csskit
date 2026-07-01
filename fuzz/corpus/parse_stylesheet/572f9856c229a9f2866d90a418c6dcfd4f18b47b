@@ -1,0 +1,54 @@
+avbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+ h: auto !important;
+    heighfore {
+  content: "\f360"; }
+
+.fa-eye:before {
+  content: "\f06e"; }
+
+.fa-eye-dropper:before {
+  content: "\f1fb"; }
+
+.fa-eye-slash:before {
+  f070"; }
+
+\f  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: flex !important;
+    flex-basis: auto;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display: none;
+  }
+  .navbar-expand-lg .offcanvas {
+    position: static;
+    z-index: auto;
+    flex-grow: 1;
+    width: auto !important;
+    heighfore {
+  content: "\f360"; }
+
+.fa-eye:before {
+  content: "\f06e"; }
+
+.fa-eye-dropper:before {
+  content: "\f1fb"; }
+
+.fa-eye-slash:before {
+  f070"; }
+
+\f070"; }
+
+.fa-facebook:befot: auto !impore {
+  content: "\f09a"; }
+
+.fa-facebook-f:brtantefore {
+  content: "\f39e"; };
+    visibility: v
+
+i.fa-s

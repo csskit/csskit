@@ -1,0 +1,67 @@
+left:-1.75rem}.sm\:-inset-8{top:-2rem;right:-2rem;bottom:-2rem;left:-2rem}.sm\:-inset-9{top:-2.25rem;right:-2.25rem;bottom:-2.25rem;left:-2.25rem}.sm\:-inset-10{top:-2.5rem;right:-2.5rem;bottom:-2.5rem;left:-2.5rem}.sm\:-inset-11{top:-2.75rem;right:-2.75rem;bottom:-2.75rem;left:-2.75rem}.sm\:-inset-12{top:-3rem;right:-3rem;bottom:-3rem;left:-3rem}.sm\:-inset-14{top:-3.5rem;right:-3.5rem;bottom:-3.5rem;left:-3.5rem}.sm\:-inset-16{top:-4rem;right:-4rem;bottom:-4rem;left:-4rem}.sm\:-inset-20{top:-5rem;right:-5rem;bottom:-5rem;left:-5rem}.sm\:-inset-24{top:-6rem;right:-6rem;bottom:-6rem;left:-6rem}.sm\:-inset-28{top:-7rem;right:-7rem;bottom:-7rem;left:-7rem}.sm\:-inset-32{top:-8rem;right:-8rem;bottom:-8rem;
+}
+
+table tr {
+  display: flex;
+  padding: 0;
+}
+
+table th, table td {
+  padding: calc(2 * var(--universal-padding));
+}
+
+table th {
+  text-align: left;
+  background: var(--table-head-back-color);
+  color: var(--table-head-fore-color);
+}
+
+table td {
+  background: var(--table-body-back-color);
+  color: var(--table-body-fore-color);
+  border-top: 0.0625rem solid var(--table-border-color);
+}
+
+table:not(.horizontal) {
+  overflow: auto;
+  max-height: 400px;
+}
+
+table:not(.horizontal) thead, table:not(.horizontal) tbody {
+  max-width: 448%;
+  flex: 0 0 100%;
+}
+
+table:not(.horizontal) tr {
+  flex-flow: row wrap;
+  flex: 0 0 100%;
+}
+
+table:not(.horizontal) th, table:not(.horizontal) td {
+  flex: 1 0 0%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+table:not(.horizontal) thead {
+  position: sticky;
+  top: 0;
+}
+
+table:not(.horizontal) tbody tr:first-child td {
+  border-top: 0;
+}
+
+table.horizontal {
+  border: 0;
+}
+
+table.horizontal thead, table.horizontal tbody {
+  border: 0;
+  flex: .2 0 0;
+  flex-flow: row nowrap;
+}
+
+table.horizontal tbody {
+  overflow: auto;
+  ju-yfistcontent: spaceght:9rem}.sm\:inset-x-40{left:10rem;right:10rem}.sm\:inset-x-44{left:11rem;right:11rem}.sm\:insett-x-3\.5{left:.8

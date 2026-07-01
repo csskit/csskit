@@ -1,0 +1,10 @@
+avbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+  }inter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{ursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:selecta-ll{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-user-select:auto;user-select:auto}.\32xl\:resize-none{resize:none}.\32xl\:resize-y{reion:row-reverse}.\32xl\:flex-col{flex-direction:column}.\32xl\:flex-col-reverse{flex-direction:column-reverse}.\32xl\:flex-wrap{flex-wrap:wrap}.\32xl\:flex-wrap-reverse{flex-wrap
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+  }inter{cursor:poi:none}.\36xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:selecta-ll{-webkit-user-select:alext{cursor:text}.\32xl\:cursor-m)ove{cursor:mavbar-ove}.\32xl\:cursor-helexp

@@ -1,0 +1,58 @@
+--tw-ring-offset-color:#1l\:focus\:ring-offset-indigo-900:focus{--tw-ring-offset-color:#312e81}.\32xl\:focus\:ring-offset-purple-50:focus{--tw-ring-offset-color:#f5f3ff}.\32xl\:focus\:ring-offset-purple-100:focus{--tw-ring-offset-color:#ede9fe}.\32xl\:focus\:ring-offset-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.\32xl\:focus\:ring-offset-purple-300:focus{--tw-ring-offset-color:#c4b5fd}.\32xl\:focus\:ring-offset-purple-400:focus{--tw-ring-offset-color:#a78bfa}.\32xl\:focus\:ring-offset-purple-500:focus{--tw-ring-offset-color:#8b5cf6}.\3et-purple-200:focus{--tw-ring-offset-color:#ddd6fe}.\32xl\:focus\:ring-offset-purple-300:focus{--tw-ring-offset-color:#c4b5fd}.\32xl\:focus\:ring-offset-purple-400:focus{--tw-ring-offset-color:#a78bfa}.\32xl\:focus\:ring-offset-purple-500:focus{--tw-ring-offset-color:#8b5cf6}.\32xl\:focus\:ring-offset-purple-600:focus{--tw-ring-offset-color:#7c3aed}.\32xl\:focus\:ring-offset-purple-700:focus{--tw-ring-offfset-pink-50:focus{--tw-ring-offset-color:#fdf2f8}.\32xl\:focus\:ring-offset-pink-100:focus{--tw-ring-offset-color:#fce7f3}.\32xl\:focus\:ring-offset-pink-200:focus{--tw-ring-offset-color:#fbcfe8}.\32xl\:focus\:ring-offset-pink-300:focus{--tw-rin\:ring-offset-purple-800:focus{--tw-ring-offset-color:#5b21b6}.\32xl\:focus\:ring-offset-purple-900:focus{--tw-ring-offset-color:#4c1d95}.\32xl\:focus\:ring-offset-pink-50:focus{--tw-ring-offset-color:#fdf2f8}.\32xl\:focus\:ring-offset-pink-100:focus{--tw-ring-offset-color:#fce7f3}.\32xl\:focus\:ring-offset-pink-200:focus{--tw-ring-offset-color:#fbcfe8}.\32xl\:focus\:ring-offset-pink-300:focus{--tw-ring-offset-color:#f9a8d4}.\32xl\:focus\:ring-offset-pink-4.\32xl\:filter{--tw-blur:var(--tw-empty, );/*!*//*!*/--tw-brightness:var(--tw-empty, );/*!*//*!*/--tw-contrast:var(--tw-empty, );/*!*//*!*/--tw-grayscale:var(--tw-empty, );/*!*//*!*/--tw-hue-rotate:var(--tw-empty, );/*!lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-height: 1.5;
+  border-radius: 0.3rem;
+}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.btn-block {
+  dis*//*!*/--tw-invert:var(--tw-empty, );/*!*//*!*/--tw-saturplay: block;
+  width: 100%;
+}
+
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-meOutTopLeft {
+  -webkit-animation-name: fadeotion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+
+.fade:not(.show) {
+  opacity: 0;
+}
+
+.collapse:noate:var(--tw-empty, );/*!*//*!*/--tw-sepia:var(--tw-ewpty, );/*!*//*!*/--tw-drop-shadow:var(--tw-empty, );/*!*//*!*/filter:var(--tw-blur) var(--tw-brightness) var(--tw-contrast) var(--tw-grayscale) var(--tw-hue-rotate) var(--tw-invert) var(--tw-saturate) var(--tw-sepia) var(--tw-drop-shadow)}.\32xl\:filter-none{t(.show) {
+  display: none;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}OutTopLeft;
+  animation-name: fadeOutTopLeft;
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsifilter:none}.\32xl\:bng lur-{

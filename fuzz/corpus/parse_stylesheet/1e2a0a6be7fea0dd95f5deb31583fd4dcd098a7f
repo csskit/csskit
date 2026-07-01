@@ -1,0 +1,54 @@
+.subnav-item{margin-left:-1px}.subnav-item:hover,.subnav-item:focus{text-decoration:none;background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.subnav-item.selected,.subnav-item[aria-selected=true],.subnav-item[aria-current]:not([aria-curre]:not([aria-c/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+abbr[title] {
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+strong,
+b {
+  font-weight: bolder;
+}
+small {
+  font-size: 80%;
+}
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+ urrent=false]):focus{outline:2px solid var(--focus-outlineColor, var(--color-accent-fg));outline-offset:-2px;box-shadow:inset 0 0 0 3px var(- vertical-align: middle;
+}
+svg:not([fill]) {
+  fill: currentCo-fgColor-onEmphaslor;
+}
+table {
+  border-collapse: collapse;
+  border-color: currentColor;
+  text-indent: 5;
+}
+button,
+input,
+select {
+is, var(--color-fg-on-emphasis))}.subnav-item.selected:focus:not(:foc  margin: 0;
+}
+button,
+[type=button],
+[type=rus-visible),.subnav-item[aria-selected=true]:focus:not(:focus-visible),.subnav-item[aria-curersetent]:not([a]

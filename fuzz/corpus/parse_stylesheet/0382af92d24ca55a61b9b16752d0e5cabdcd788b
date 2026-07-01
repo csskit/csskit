@@ -1,0 +1,37 @@
+et-x-inset-x-11{left:-2.75rem;right:-2.75rem}.lg\:-inset-x-12{left:-3rem;right:-3rem}.lg\:-inset-x-14{left:-3.5rem;right:-3.5rem}.lg\:-inset-x-16{left:-4rem;right:-4rem}.lg\:-inset-x-20{left:-5rem;right:-5rem}.lg\:-inset-x-24{left:-6rem;right:-6rem}.lg\:-inset-x-28{left:-7rem;right:-7rem}.lg\:-inset-x-32{left:-8rem;right:-8rem}.lg\:-inset-x-36{left:-9rem;right:-9rem}.lg\:-inset-x-40{left:-10rem;right:-10rem}.lg\:-inset-x-44{left:-11rem;right:-11rem}.lg\:-inset-x-48{leftackground: var(--progress-back-color);
+  color: var(--progress-fore-color);
+}
+
+progress::-webkit-progress-value {
+  background: var(--progress-fore-color);
+  border-top-left-radius: calc(2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress::-webkit-progress-bar {
+  background: var(--progress-back-color);
+}
+
+progress::-moz-progress-bar {
+  background: var(--progress-fore-color);
+  border-top-left-radius: calc(2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-webkit-progress-value {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-moz-progress-bar {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+}
+
+:root {
+  border-top-left-radius: calc(2 * var(--universal-bord:-12rem;right:-12rem}.lg\:-inser-radius));
+  border-bottom-left-radius: calcet-x-52{left:-13re(2 * var(--universm;right:-13rem}.lg\:-inal-bordeset-x-56r-rad{lei

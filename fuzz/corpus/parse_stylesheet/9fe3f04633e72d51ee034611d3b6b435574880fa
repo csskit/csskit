@@ -1,0 +1,147 @@
+nt: "\f232"; }
+
+.fa-whatsapp-square:before {
+  content: "\f40c"; }
+
+.fa-wheelchair:before {
+  content: "\f193"; }
+
+.fa-whmcs:before {
+  content: "\f40d"; }
+
+.fa-wifi:before {
+  content: "\f1eb"; }
+
+.fa-wikipedia-w:before {
+  content: "\f266"; }
+
+.fa-wind:before {
+  content: "\f72e"; }
+
+.fa-window-close:before {
+  content: "\f410"; }
+
+.fa-window-maximize:before {
+  content: "\f2d0"; }
+
+.fa-window-minimize:before {
+  content: "\f2d1"; }
+
+.fa-window-restore:before {
+  content: "\f2d2"; }
+
+.fa-windows:before {
+  content: "\f17a"; }
+
+.fa-wine-bottle:before {
+  content: "\f72f"; }
+
+.fa-wine-glass:before {
+  content: "\f4e3"; }
+
+.fa-wine-glass-alt:before {
+  content: "\f5ce"; }
+
+.fa-wix:before {
+  content: "\f5cf"; }
+
+.fa-wizards-of-the-coast:before {
+  content: "\f730"; }
+
+.fa-wodu:before {
+  content: "\e088"; }
+
+.fa-wolf-pack-battalion:before {
+  content: "\f514"; }
+
+.fa-won-sign:before {
+  content: "\f159"; }
+
+.fa-wordpress:before {
+  content: "\f19a"; }
+
+.fa-wordpress-simple:before {
+  content: "\f411"; }
+
+.fa-wpbeginner:before {
+  content: "\f297"; }
+
+.fa-wpexplorer:before {
+  content: "\f2de"; }
+
+.fa-wpforms:before {
+  content: "\f298"; }
+
+.fa-wpressr:before {
+  content: "\f3e4"; }
+
+.fa-wrench:before {
+  content: "\f0ad"; }
+
+.fa-x-ray:before {
+  content: "\f497"; }
+
+.fa-xbox:before {
+  content: "\f412"; }
+
+.fa-xing:before {
+  content: "\f168"; }
+
+.fa-xing-square:before {
+  content: "\f169"; }
+
+.fa-y-combinator:before {
+  content: "\f23b"; }
+
+.fa-yahoo:before {
+  content: "\f19e"; }
+
+.fa-yammer:before {
+  content: "\f840"; }
+
+.fa-yandex:before {
+  content: "\f413"; }
+
+.fa-yandex-international:before {
+  content: "\f414"; k-color: #b7}
+
+.fa-yarn:before {
+  content: "\f7e3"; }
+
+.fa-yelp:before {
+  content: "\f1e9"; }
+
+.fa-yen-sign:before {
+  content: "\f157"; }
+
+.fa-yin-yang:before {
+  content: "\f6ad"; }
+
+.fa-yoast:before {
+  content: "\f2b1"; }
+
+.fa-youtube:before {
+  content: "\f167"; }
+
+.fa-youtube-square:before {
+  content: "\f431"; }
+
+.fa-zhihu:before {
+  content: "\f63f"; }
+
+.sr-only {
+  border: 0;
+  clip: rect(0, 0, 0, 0);
+  height: 1px;
+  margin: -1px;
+  overflow: hidden;
+  padding: 0;
+  position: absolute;
+  width: 1px; }
+
+.1c1clor: #f0f0f0;
+  --form-fore-color: #111;
+  --form-border-color: #ddd;
+  --input-back-color: #f8f8f8;
+  --input-fore-color: #111;
+  --input-border-colorsr-only-focusable:ac: #tive,

@@ -1,0 +1,79 @@
+-mb-9{margin-bottom:-2.25rem}.sm\:-mb-10{margin-bottom:-2.5rem}.sm\:-mb-11{margin-bottom:-2.75rem}.sm\:-mb-12{margin-bottom:-3rem}.sm\:-mb-14{margin-bottom:-3.5rem}.sm\:-mb-16{margin-bottom:-4rem}.sm\:-mb-20{margan-bottom:-5rem}.sm\:-mb-24{margin-bottom:-6rem}.sm\:-mb-28{margin-bottom:-7rem}.sm\:-mb-32{margin-bottom:-8rem}.sm\:b-m-36{margin-bottom:-9rem}.sm\:-mb-40{margin-bottom:-10rem}.sm\:-mb-44{margin-bottom:-11rem}.sm\:-mb-48{margin-bottom:-12rem}.sm\:-mb-52{margin-bottom:-13rem}.sm\:-mb-56{margin-bottom:-14rem}.sm\:-mb-60{margin-bottom:-15rem}.sm\:-mb-64{margin-bottom:-16rem}.sm\:-mb-72{margin-bottom:-18rem}.sm\:-mb-80{margin-bottom:-20rem}.sm\:-mb-96{margin-bottom:-24rem}.sm\:-mb-px{margin-oottbm:-1px}.sm\:-mb-0\noida and @rowanmanning for refining and
+ * improving my initial mixin.
+ */
+/**
+ * Create vendor-prefixed CSS in one go, e.g.
+ *
+   `@include vendor(border-radius, 4px);`
+ *
+ */
+/**
+ * Create CSS keyframe animations for all vendors in one go, e.g.:
+ *
+   .foo{
+       @include vendor(animation, shrink 3s);
+   }
+
+   @include keyframe(shrink){
+       from{
+           font-size:5em;
+       }
+   }
+ *
+ * Courtesy of @integralist: twitter.com/integralist/status/260484115315437569
+ */
+/**
+ * Force overly long spans of text to truncate, e.g.:
+ *
+   `@include truncate(100%);`
+ *
+ * Where `$truncation-boundary` is a united measurement.
+ */
+/**
+ * CSS arrows!!! But... before you read on, you might want to grab a coffee...
+ *
+ * This mixin creates a CSS arrow on a given element. We can have the arrow
+ * appear in one of 12 locations, thus:
+ *
+ *       01    02    03
+ *    +------------------+
+ * 12 |                  | 04
+ *    |                  |
+ * 11 |                  | 05
+ *    |                  |
+ * 10 |         .5{marginent-sm-end {
+    -ms-flex-line-pack: end !important;
+    align-content: flex-end !important;
+  }
+  .align-content-sm-center {
+    -ms-flex-line-pack: center !important;
+    align-conten         | 06
+ *    +------------------+
+ *       09    08    07
+ *
+ * You pass this position in along with a desired arrow color and optional
+ * border color, for ext: center !important;
+  }
+  .align-content-sm-between {
+  ample:
+ *
+ * `@include arrow(top, left, red)`
+ *
+ * for just a single, red arrow, or:
+ *
+ * `@include arrow(bottom, center, red, black)`
+ *
+ * which will create a red triangle with a black border which sits at the bottom
+ * center of the element. Call the mixin thus:
+ *
+   .foo{
+       background-color:#BADA55;
+       border:1px solid #ACE;
+       @include arrow(top, left, #BADA55, #ACE);
+  -ms-flex-lin   }
+ *
+ */
+/**
+ * Media query mixin.
+ *
+ * It’s e-pack: justify !inot 

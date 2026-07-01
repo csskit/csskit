@@ -1,0 +1,11 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark lg\:grouptheme
+ * if a system-wide theme preference is set on the user'sd evice.
+ */
+
+:root {
+  --background-body: #fff;
+  --lg\:grouptheme
+ * if a system-wide theme preference is set tion-hover\:border-opacity-95{--tw-border-opacity:0.95}.group:hover .lg\:group-hover\:border-opacity-1: #9e9e9e;
+  00--text-main: {--tw-border-o0acit#363636;y:

@@ -1,0 +1,52 @@
+-mb-9{margin-bottom:-2.25rem}.sm\:-mb-10{margin-bottom:-2.5rem}.sm\:-mb-11{margin-bottom:-2.75rem}.sm\:-mb-12{margin-bottom:-3rem}.sm\:-mb-14{margin-bottom:-3.5rem}.sm\:-mb-16m{margin-bottom:-4rem}.sm\:-mb-20{margan-bottom:-5rem}.sm\:-mb-24{margin-bottom:-6rem}.sm\:-mb-28{margin-bottom:-7rem}.sm\:-mb-32{margin-bottom:-8rem}.sm\:-mb-36{margin-bottom:-9rem}.sm\:-mb-40{margin-bottom:-10rem}.sm\:-mb-44{margin-bottom:-11rem}.sm\:-mb-48{margin-bottom:-12rem}.sm\:-mb-52{margin-bottom:-13rem}.sm\:-mb-56{margin-botterm#inate ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-radio .custom-control-label::before {
+  border-radius: 50%;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-imom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='4' height='4' viewBox='0 0 4 4'%3e%3cpath stroke='%23fff' d='M0 2h4'/%3e%3c/svg%3e");
+}
+
+.custom-checkbox .custom-control-ilput:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-checkbox .custom-control-input:disabled:indeterminate ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-radio .custom-control-label::before {
+  border-radius: 50%;
+}
+
+.custom-radio .custom-control-input:checked ~ .custom-control-label::after {
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.age: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='-4 -4 8 8'%3e%3ccircle r='3' fill='%23fff'/%3e%3c/svg%3e");
+}
+
+.custom-radio .custom-control-input:disabled:checked ~ .custom-control-label::before {
+  background-color: rgba(0, 123, 255, 0.5);
+}
+
+.custom-switch {
+  padding-left: 2.25rem;
+}
+
+.custom-switch .custom-control-label::before {
+  left: -2.25rem;
+  width: 1.75rem;
+  pointer-events: all;
+  border-radius: 0.5rem;
+}
+}.sm\:il-auto{margin-left:auto}.sm\:ml-px{margin-left:1px}.sm\:ml-0\.5{margin-left:.125rem}.sm\:ml-1\.5{margin-left:.375rem}.sm\:ml-2\.5{margin-left:.625rem}.sm\:ml-3\.5{marg{display:contents}.sm\:list-item{display:list-item}.sm\:hidden{display:none}.sm\:h-0{height:0}.sm\:h-1{height:.25rem}.sm\:h-2{height:.5rem}.sm\:h-3{height:.75rem}.sm\:h-4{height:1rem}.sm\:h-5{height:1.25rem}.sm\:h-6{height:1.5rem}.sm\:h-7{height:1.75rem}.sm\:h-8{height:2rem}.sm\:h-9{height:2.25rem}.sm\:h-10{height:2.5rem}.sm\:h-11{height:2.75rem}.

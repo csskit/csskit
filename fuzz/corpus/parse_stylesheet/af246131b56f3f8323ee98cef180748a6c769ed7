@@ -1,0 +1,144 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+html {
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+  margin: 0;
+---------
+
+   typography.css
+   * Sets up some sensible default typography.
+
+-------------------------------------------------------------- */
+
+/* Default font settings.
+   The font-size percentage is of 16px. (0.75 * 16px = 12px) */
+html { font-size:100.01%; }
+body {
+  font-size: 75%;
+  color: #222;
+  background: #fff;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+
+/* Heading-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }
+
+h1 img, h2 img, h3 img,
+h4 img, h5 img, h6 img {
+  margin: 0;
+}
+
+
+/* Text elements
+-------------------------------------------------------------- */
+
+p           { margin: 0 0 1.5em; }
+/*
+  These can be used to pull an image at the start of a paragraph, so
+  that the text flows around it (usage: <p><img class="left">Text</p>)
+ */
+.left       { float: left !important; }
+p .left     { margin: 1.5em 1.5em 1.5em 0; padding: 0; }
+.right      { float: right !important; }
+p .right    { margin: 1.5em 0 1.5em 1.5em; padding: 0; }
+
+a:focus,
+a:hover     { color: #09f; }
+a           { color: #06c; text-decoration: underline; }
+
+blockquote  { margin: 1.5em; color: #666; font-style: italic; }
+strong,dfn */
+.left       { float: left !important; }
+p .left     { margin: 1.5em 1.5em 1.5em 0; padding: 0; }
+.right      { float: right !important; }
+p .right    { margin: 1.5em 0 1.5em 1.5em; padding: 0; }
+
+a:focus,
+a:hover     { color: #09f; }
+a           { color: #06c; text-decoration: underline; }
+
+blockquote  { margin: 1.5em; color: #666; font-style: italic; }
+strong,dfn  { font-weight: bold; }
+em,dfn      { font-style: italic; }
+sup, sub    { line-height: 0; }
+
+abbr,
+acronym     { border-bottom: 1px dotted #666; }
+address     { margin: 0 0 1.5em; font-style: italic; }
+del         { color:#666; }
+
+pre         { margin: 1.5em 0; white-space: pre; }
+pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
+
+
+/* Lists
+-------------------------------------------------------------- */
+
+li ul,
+li ol  { margin: 0; }
+ul, ol { margin: 0 1.5em 1.5em 0; padding-left: 1.5em; }
+
+ul     { list-style-type: disc; }
+ol     { list-style-type: decimal; }
+
+dl     { margin: 0 0 1.5em 0; }
+dl dt  { font-weight: bold; }
+dd     { margin-left: 1.5em;}
+
+
+/* Tables
+-------------------------------------------------------------- */
+
+/*
+  Because of1.5em 0; padding: 0; }
+.right      { float: right !important; }
+p .right    { margin: 1.5em 0 1.5em 1.5em; padding: 0; }
+
+a:focus,
+a:hover     { color: #09f; }
+a           { color: #06c; text-decoration: underline; }
+
+blockquote  { margin: 1.5em; color: #666; font-style: italic; }
+strong,dfn  { font-weight: bold; }
+em,dfn      { font-style: italic; }
+sup, sub    { line-height: 0; }
+
+abbr,
+acronym--------------------------------------------------- */
+
+li ul,
+li ol  { margin: 0; }
+ul, ol { margin: 0 1.5em 1.5em 0; padding-left: 1.5em; }
+
+ul     { list-style-type: disc; }
+ol     { list-style-type: decimal; }
+
+dl     { margin: 0 0 1.5em 0; }
+dl dt  { font-weight: bold; }
+dd     { margin-left: 1.5em;}
+
+
+/* Tables
+-------------------------------------------------------------- */
+
+/*
+  Because of the need for padding on TH and TD, the vertical rhythm
+  on table cells has to be 27px, instead of the

@@ -1,0 +1,149 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  bac      <ul class=check-list>
+           <li>
+               <ikground-color: #f7f7f7;
+  background-color: var(--background-alt);
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  details {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+details[open] {
+  padding: 10px;
+}
+
+details > :last-child {
+  margin-bottom: 0;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background-color: #efefef;
+  background-color: var(--background);
+  padding: 10px;
+  margin: -10px -10px 0;
+  curror: pointer;
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary {
+  backgroundnput /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: n-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+summary:hover,
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+summary::one;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.check-list .label {
+  display: inline-block; }
+-webkit-details-marker {
+  color:en] {
+  padding: 10px;
+}
+
+details > :last-child {
+  margin-bottom: 0;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background-color: #efefef;
+  background-color: var(--background);
+  padding: 10px;
+  margin: -10px -10px 0;
+  curror: pointer;
+  outline: none;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary {
+  backgroundnput /> <label />
+           </li>
+           <li>
+               <input /> <label />
+  #36363
+/**
+ * Spo6;
+  color: var(--text-main);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary::-webkit-details-marker {
+  color: #k

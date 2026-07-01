@@ -1,0 +1,14 @@
+    -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+  .off-canvas-content .off-canvas.is-open {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+      ciansition-push {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+  .off-canvas-content .off-canvas.is-open {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+      city-20{--tw-bg-opacity:0.2}.xl\:bg-opa: 40em) {
+  .pcity-25{--tw-bg-opacity:0.25}.xl\:bg-opacityosi

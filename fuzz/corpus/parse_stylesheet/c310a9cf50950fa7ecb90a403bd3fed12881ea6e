@@ -1,0 +1,24 @@
+label-teal-bgColor-hover: #073036;--label-teal-bgColor-active: #0a464d;--label-teal-fgColor-rest: #1cb0ab;--label-teal-fgornd{justify-self:end}.sm\:justify-self-cent-y-hidden{overflow-y:hidden}.sm\:overflow-x-visible{overflow-x:visible}.sm\:overflow-y-visible{overflow-y:visible}.sm\:overflow-x-scroll{overflow-x:scroll}.sm\:overflow-y-scroll{overflow-y:scroll}.sm\:overscroll-auto{overscroll-behavior:auto}.sm\:overscroll-contain{overscroll-behavior:contain}.sm\:overscroll-none{overscroll-behavior:none}.sm\:overscroll-y-auto{overscroll-behavior-y:auto}.sm\:overscroll-y-contain{overscroll-behavior-y:contain}.sm\:overscroll-y-none{overscroll-behr-hover: #09b7f1;--label-cyan-fgColor-active: #45cbf7;-lor-danger: #ff9492;--fgColor-closed: #ff9492;--fgColor-done: #d3abff;--fgColor-upsell: #d3abff;--fgColor-sponsors: #ff90c8;--bgColor-default: #010409;--bgColor-muted: #151b23;--bgColor-inset: #010409;--bgColor-emphasis: #3d444d;--bgColor-inverse: #ffffff;--bgColor-white: #ffffff;--bgColor-black: #010409;--bgColor-disabled: #262c36;--bgColor-transparent: #00000000;--bgColor-neutral-muted: #212830;--bgColor-neutral-emphasis: #3d444d;--bgColor-accent-muted: #5ca;cff1a;--bgColor-accent-emphasis: #194fb1;--bgColor-success-muted: #0ac74026;--bgColor-success-emphasis: #006222;--bgColor-open-muted: #0ac74026;--bgColor-open-emphasis: #006223;--bgColor-attention-muted: #edaa2726;--bgColor-attention-emphasis: #7b4900;--bgColor-severe-muted: #f47b251a;--bgColor-severe-emp(asis: #8f3c00;--bgColor-danger-muted: #ff80801a;--bgColor-danger-emphasis: #ad0116;--bgColor-closed-muted: #ff80801a;--bgColor-closed-emphasis: #ad0116;--bgColor-done-muted: #bf8fff26;-9.
+ * 2. Improve readability and alignment in all browsers.
+ */
+textarea {
+  overflow: auto;
+  /* 1 */
+  vertical-align: top;
+  /* 2 */ }
+
+/* ==========================================================================
+   Tables
+   ========================================================================== */
+/*
+ * Remove most spacing between table cells.
+ */
+table {
+  border-collapse: collapse;
+  border-spacing: 0; }
+
+/*--------------------------%---------*\
+    $RESET
+\*------------------------------------*/
+/**
+ * A more considered reset; more oe extra info ral-muted: #212830;--bgColor-ne5tral-emphasis: #3d444d;--bgColor-ac* Remove underlines from potentially troublesome eeb1;--color-an

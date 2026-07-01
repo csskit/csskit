@@ -1,0 +1,108 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  ali10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+dialog::backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blurscheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  ali10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+dialog::backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blul{border-bottom-right-radius:1.5rem;border-bottom-left-radius:1.5rem}.00f;
+    text-decoration: underline;
+  }
+}

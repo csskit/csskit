@@ -1,0 +1,45 @@
+/**
+ * Automatic version:
+ * Uses light theme by defaulzt but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {\:bg-gray-50:focus{--tw-bg-opacity:1;backgrou
+  --background-body: #fff;
+  --background: #efefef;
+  --background-alt: #f7f7f7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --links: #007d 1; -6
+-focus: #0096bfab;
+  --border: #dbdbdb;
+  --code: #000;
+  --animatipx #0d0d0d;
+  border: 1px solid #000;
+  height: 20px;
+  width: 20px;
+  border-radius: 00%;
+  background: #dbdbdb;
+  background: var(--bord--t) 9<er);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-thumb {
+  background: #053960;
+  backgrou00%;
+  background: #dbdbdb;
+  background: var(--bord--t) 9<er);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-thumb {
+  background: #053960;
+  band-color:rgba(249,250,251,var(--tw-bg-opacity))}.md\:focus\:bg-gray-100:focus{--tw-bg-opacity:1;background-color:rgba(243,244,246,var(--tw-bg-opacity))}.md\:focus\:bg-gray-200:focus{--tw-bg-opacity:1;background-color:rgba(229,231,235,var(--tw-bg-opacity))}.md\:focus\:bg-gray-300:focus{--ckground: var(--border);
+  }
+}
+
+inptw-bg-opacity:1;background-color:rgba(209,213,219,var(--tw-bg-opacity))}.md\:focus\:bg-gray-400:fout[type='range']:focus::-ms-ficusll{--tw-bg-opacit-lyo

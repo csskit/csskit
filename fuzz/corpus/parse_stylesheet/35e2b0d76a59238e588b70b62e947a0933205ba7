@@ -1,0 +1,47 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  art {
+  border-block-start: varborder-block-end: none;
+}
+.border-block-end {
+*/
+:root {
+  --fg: light-dark(var(--gray-12), var(--gray-0));
+  --muted-fg: light-dark(var(--gray-10), var(--gray-2));
+  --faded-fg: light-dark(var(--gray-6), var(--gray-7));
+  --graphical-fg: var(--plain-graphical-fg);
+  --plain-fg: light-dark(var(--blue-10), vadth: var(--border-width, 1px);
+  --interactive-border-style: var(--border-style, solid);
+  --interactive-border-radius: .2rem;
+  --chip-border-width: var(--border-width, 1px);
+  --chip-border-style: var(--border-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--fg) inset;
+  --pressed-shadow-focus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

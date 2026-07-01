@@ -1,0 +1,31 @@
+.avatar.avatar-more:before{border-radius:2px;content:"";display:block;height:20px;outline:var(--borderWidth-thin) solid var(--bgColor-default);position:absolute}.avatar.avatar-more:before{background:var(--avatarStack-fade-bgColor-muted);width:17px}.avatar.avatar-more:after{background:var(--avatarStack-fade-bgColor-default);width:14px}.AvatarStack--right .AvatarStack-body{flex-direction:row-reverse;right:0}:is(.AvatarStack--right .AvatarStack-body):hover .avatar{margin-left:var(--base-size-4);margin-right:0}:is(.AvatarStack--right .AvatarStack-body) .avatar:nansition-push {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+  .off-canvas-content .off-canvas.is-open {
+    -webkit-transform: translate(, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+@media print, screen and (min-width: 40em) {
+  .position-left.reveal-for-medium {
+    -webkit-transform: none;
+        -ms-transform: none;
+         ot(:last-child){border-left:0}.AvatarStack--right .avatar.avatar-more{background:var(--avatarStack-fade-bgColor-defau   transform: none;
+    z-index: 12;
+    -webkit-transition: none;
+    transition: none;
+    visibility: visible; }
+    .position-left.reveal-for-medium .close-button {
+      display: none; lt)}:is(.AvatarStack--right .avatar.avatar-more):before{width:5px}:is(.AvatarStack--right .avatar.avatar-more):after{background:var(--bgColor-muted);width:2px}.AvatarStack--right .avatar{border-left:var(--borderWidth-thin) solid var(--bgColor-default);border-right:0;margin-left:-11px;margin-right:0}.CircleBadge{display:flex;align-items:center;justify-content:center;background-color:var(--bgColor-default, var(--color-canvas-default));border-radius:50%;box-shadow:var(--shadow-resting-medium, var(--color-shadow-medium))}.CircleBadge-icon{max-width:60% !important;height:auto !important;max-height:55% !important}.CircleBadge--small{width:56px;height:56px}.CircleBadge--medium{width:96px;height:96px}.CircleBadge--large{width:128px;height:128px}.DashedConnection{position:relative}.DashedConnection::before{position:absolute;top:50%;left:0;width:100%;content:"";border-bottom:2px dashed var(--borderColor-default, var(--color-border-default))}.DashedConnectionar-more:before{border-radius:2px;cont}
+    .off-canvas-content .position-left.reveal-for-medium {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-content.has-reveal-left {
+      margin-left: 250px; }
+    .position-left.reveal-for-medium ~ .off-canvas-content {
+      margin-left: 250px; }
+  .position-right.reveal-for-medium {
+    -webkit-transform:ent:"";display:block;height:20px; none;
+        -ms-transform: noneoutline:var(--borderWidth-thi;

@@ -1,0 +1,13 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgCol-3\.5{top:-.875rem;bottom:-.875rem}.xl\:inset-y-1\/2{top:50%;bottom:50%}.xl\:inset-y-1\/3{top:33.333333%;bottom:33.333333%
+ rest: #b69a6d;--label-brown-fgColor-hov width: 100%;
+}
+
+.offset-1 {
+  margin-left: 8.33333333%;
+}
+
+.offset-2 {
+  margin-left: 16.66666667%;
+}
+
+.er: #bfa77d;

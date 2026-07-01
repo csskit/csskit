@@ -1,0 +1,42 @@
+ocus,
+button.bg-primary:hover,
+button.bg-primary:focus {
+  background-color: #0062cc !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d !important;
+}
+
+a.bg-secondary:hover, a.bg-secondary:focus,
+button.bg-secondary:hover,
+button.bg-secondary:focus {
+ ble td {
+  padding: calc(2 * var(--universal-padding));
+}
+
+table th {
+  text-align: left;
+  background: var(--table-head-back-color);
+  color: var(--table-head-fore-color);
+}
+
+table td {
+  background: var(--table-body-back-color);
+  color: var(--table-body-fore-color);
+  border-top: 0.0625rem solid var(--table-border-color);
+}
+
+table:not(.horizontal) {
+  overflow: auto;
+  max-height: 400px;
+}
+
+table:not(.horizontal) thead, table:not(.horizontal) tbody {
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+table:not(,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-i{--ty-25% :flex-col{flex-ndexd

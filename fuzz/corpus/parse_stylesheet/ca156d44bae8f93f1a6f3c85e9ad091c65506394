@@ -1,0 +1,108 @@
+w pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */
+hr {
+  margin-bottom: 22px;
+  margin-bottom: 1.375rem; }
+
+/**
+ * Wherragraph)
+ * of a document slightly larger.
+ */
+.lede,
+.lead {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333; }
+
+/*------------------------------------*\
+    $SMALLPRINT
+\*------------------------------------*/
+/**
+ * A series of classes for setting tiny type; for use in smallprint etc.
+ */
+.smallprint,
+.milli {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 2; }
+
+.micro {
+  font-size: 10px;
+  font-size: 0.625rem;
+  line-height: 2.4; }
+
+/*------------------------------------*\
+    $QUOTES
+\*------------------------------------*/
+/**
+ * If English quotes are set in `_vars.scss`, define them here.
+ */
+/**
+ * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content: open-quote; }
+  q:after {
+    content: "’";
+    content: close-quote; }
+  q q:before {
+    content: "“";
+    content: open-quote; }
+  q q:after {
+    content: "”";
+    content:c lose-quote; }
+
+blockquote {
+  quotes: "“" "”"; }
+  blockquote p:before {
+    content: "“";
+    content: open-quote; }
+  blockquote p:after {
+    content: "";
+    content: no-close-quote; }
+  blockquox;
+  font-size: 0.875rem;
+  line-height: 1.71429; }
+
+/**
+ * Heading groups and generic any-heading class.
+ * To target any heading of any level simply apply a class of `.hN`, e.g.:
+ *
+   <hgroup>
+       <h1 class=hN>inuit.css</h1>
+       <h2 class=hN>Best. Framework. Ever!</h2>
+   </hgroup>
+ *
+ */
+hgrou h N.p{
+  margin-bottom: 0; }
+
+/**
+ * A series of classes for setting massive type; for use in heroes, mastheads,
+ * promos, etc.
+ */
+.giga {
+  font-size: 96px;
+  font-size: 6rem;
+  line-height: 1; }
+
+.mega {
+  font-size: 72ent: -0.41em; }
+  blockquote p:last-of-type {
+    margin-bottom: 0; }
+
+.source {
+  display: block;
+  text-indent: 0; }
+  .source:before {
+    content: "—"; }
+
+/*------------------------------------*\
+    $CODE

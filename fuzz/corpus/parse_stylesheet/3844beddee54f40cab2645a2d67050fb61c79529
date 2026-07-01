@@ -1,0 +1,39 @@
+us\:bg-opacity-95:focus{--tw-bg-opacity:0.95}.md\:focus\:bg-opacity-100:focus{--tw-bg-opacity:1}.md\:bg-none{background-image:none}.md\:bg-gradient-to-t{background-image:linear-gradient(to top,var(--tw-gradient-stops))}.md\:bg-gradient-to-tr{background-image:linear-gradient(to top right,var(--tw-gr0;
+}
+
+blockquote {
+  margin: 0 0 1rem;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+small, .small {
+  font-size: 0.875em;
+}
+
+mark, .mark {
+  padding: 0.1875em;
+  background-color: var(--bs-highlight-bg);
+}
+
+sub,
+sup {
+  position: relative;
+  font-size: 0.75em;
+  line-height: 0;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0adient-stops))}.md\:bg-gradient-to-r{background-image:linear-gradient(to right,var(--tw-gradient-stops))}.md\:bg-gradient-tob-r{background-image:l.5em;
+}
+
+a {
+  color: rgba(var(inear-gradient--bs-link-color-rgb), var(-(-b

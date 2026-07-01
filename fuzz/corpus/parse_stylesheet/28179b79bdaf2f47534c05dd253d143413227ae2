@@ -1,0 +1,82 @@
+    monospace,
+    monospace;
+  --breadcrumb-page: " / ";
+  --breadcrumb-step: " \203ac(-.5 * var(--full-width)));
+  border-radius: 0;
+  border-inline: none;
+}
+.fullscreen {
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50vw);
+  border-radius: 0;
+  border-inline: none;
+}
+.width\:100\% {
+  width: 100%;
+  max-width: 100%;
+}
+.height\:100\% {
+  height: 100%;
+  max-height: 100%;
+}
+:is(body, .box, [role=menu], .sidebar-layout > header, [role=tabpanel], figure, details, dialog, aside, fieldset, dd, td, th) {ock-start: var(--gap);
+}
+.padding-block-end\:0 {
+  padding-block-end: 0;
+}
+.padding-block-end {
+  padding-block-end: var(--gap);
+}
+.padding-inline\:0 {
+  padding-inline: 0;
+}
+.padding-inline {
+  padding-inline: var(--gap);
+}
+.padding-inline-start\:0 {
+  padding-inline-start: 0;
+}
+.padding-inline-start {
+  padding-inline-start: var(--gap);
+}
+.padding-inline-end\:0 {
+  padding-inline-end: 0;
+}
+.padding-inline-end {
+  padding-inline-end: var(--gap);
+}
+.padding-start\:0 {
+  padding-block-start: 0;
+  padding-inline-start: 0;
+}
+.padding-start {
+  padding-block-start: var(--gap);
+  padding-inline-start: var(--gor: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+  column-gap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (brea([specificity-hack]) {
+  margin-block: 0;
+}
+.margin-block:not([specificity-hack]) {
+  margin-block: var(--gap);
+}
+.margin-block\:auto:not([specificity-hack]) {
+  margin-block: auto;
+}
+.margin-block-start\:0:not([specificity-hack]) {
+  margin-block-start: 

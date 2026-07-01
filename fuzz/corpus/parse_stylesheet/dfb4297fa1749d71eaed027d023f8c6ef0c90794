@@ -1,0 +1,5 @@
+-property: opacity, -webkit-transform;
+  transition-property: opac/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wiity, de t-h

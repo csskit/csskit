@@ -1,0 +1,113 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+html {
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, code,
+del, dfn, em, img, q, dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, header,
+hgroup, nav, section {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  font-size: 100%;
+  font: inherit;
+  vertical-align:. */
+blockquote:before, blockquote:after, q:before, q:after { content: ''; }
+blockquote, q { quotes: "" ""; }
+
+/* Remove annoying border on linked images. */
+a img { border: none; }
+
+/* Remember to define your own focus styles! */
+:focus { outline: 0; }
+
+/* --------------------------------------------------------------
+
+   typography.css
+   * Sets up some sensible default typography.
+
+-------------------------------------------------------------- */
+
+/* Default font settings.
+   The font-size percentage is of 16px. (0.75 * 16px = 12px) */
+html { font-size:100.01%; }
+body {
+  font-size: 75%;
+  color: #222;
+  background: #fff;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
+
+h1 { font-size: 3em; line-height: 1; margin-bottom: 0.5em; }
+h2 { font-size: 2em; margin-bottom: 0.75em; }
+h3 { font-size: 1.5em; line-height: 1; margin-bottom: 1em; }
+h4 { font-size: 1.2em; line-height: 1.25; margin-bottom: 1.25em; }
+h5 { font-size: 1em; font-weight: bold; margin-bottom: 1.5em; }
+h6 { font-size: 1em; font-weight: bold; }
+
+h1 img, h2 img, h3 img,-border-size-2:2px;--border-size-3:5px;--border-size-4:10px;--border-size-5:25px;--radius-1:2px;--radius-2:5px;--radius-3:1rem;--radius-4:2rem;--radius-5:4rem;--radius-6:8rem;--radius-round:1e5px;--radius-blob-1:30% 70% 70% 30%/53% 30% 70% 47%;--radius-blob-2:53% 47%;--border-size-2:2px;--border-size-3:5px;--border-size-4:10px;--border-size-5:25px;--radius-1:2px;--radius-2:5px;--radius-3:1rem;--radius-4:2rem;--radius-5:4rem;--radius-6:8rem;--radius-round:1e5px;--radius-blob-1:30% 70% 70% 30%/53% 30% 70% 47%;--radius-blob-2:53% 47% 34% 66%/63% 46% 54% 37%;--radius-blob-3:37% 63% 56% 44%/49% 56% 44% 51%;--radius-blob-4:63% 37% 37% 63%/43% 37% 63% 57%;--rad
+h4 img, h5 img, h6 img {
+  margin: 0;
+}
+
+el, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, fig annoying border on linked images. */
+a img { border: none; }
+
+/* Remember to define your own focus styles! */
+:focus { outline: 0; }
+
+/* --------------------------------------------------------------
+
+   typography.css
+   * Sets up some sensible default typography.
+
+-------------------------------------------------------------- */
+
+/* Default font settings.
+   The font-size percentage is of 16px. (0.75 * 16px = 12px) */
+html { font-size:100.01%; }
+body {
+  font-size: 75%;
+  color: #222;
+  background: #fff;
+  font-family: "Helvetica Neue", Arial, Helvetica, sans-serif;
+}
+
+
+/* Headings
+-------------------------------------------------------------- */
+
+h1,h2,h3,h4,h5,h6 { font-weight: normal; color: #111; }
+
+h0 1.5em; font-style: italic; }
+del         { color:#666; }
+
+pre         { margin: 1.5em 0; white-space: pre; }
+pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }
+
+
+/* Lists
+----------------a browers */
+article, aside, detthe need for padding on TH and TD, the vertical rhythm
+  on table cells has to be 27px, instead of the

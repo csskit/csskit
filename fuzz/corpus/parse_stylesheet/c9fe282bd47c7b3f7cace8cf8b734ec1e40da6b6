@@ -1,0 +1,118 @@
+ semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span-15 {width: 590px;}
+.span-16 {width: 630px;}
+.spa{
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span--------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1.5)}.\32xl\:co.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span-15 {width: 590px;}
+.span-16 {width: 630px;}
+.spa{
+  width: 950px;
+  margin: 0 auto;
+}
+
+/* Use this class on any .span / container to see the grid. */
+.showgrid {
+  background: url(src/grid.png);
+}
+
+
+/* Columns
+-------------------------------------------------------------- */
+
+/* Sets up basic grid floating and margi4 {width: 150px;}
+.span-5 {width: 190px;}
+.span-6 {width: 230px;}
+.span-7 {width: 270px;}
+.span-8 {width: 310px;}
+.span-9 {width: 350px;}
+.span-10 {width: 390px;}
+.span-11 {width: 430px;}
+.span-12 {width: 470px;}
+.span-13 {width: 510px;}
+.span-14 {width: 550px;}
+.span {1w5-idth: 590px;}
+.span-16 {width: 630px;}
+.span-17 {width: 670px;}
+.span-18 {width: 710px;}
+҆pan-19 {width: 749px;}
+.span-2  {width: 790px;}
+.span-21 {width: 830px;}
+.span-22 {width: 870px;}
+.span-23 {width: 910px;}
+.span-24 {width:950px; margin-right:0;}
+
+/* Use these classes to set the width of an input. */
+input.span-1, textarea.span-1, input.span-2, textarea.span-2, input.span-3, textarea.span-3, input.span-4, textarea.span-4, input.span-5, textarea.span-5, input.span-6, textarea.span-6, input.span-7, textarea.span-7, input.span-8, textarea.span-8, input.span-9, textarea.span-9, input-15, textarea.span-15 { width: 578px; }
+input.span-16, textarea.span-16 { width: 618px; }
+input.span-17, textarea.span-17 { width: 658px; }
+input.span-18, textarea.span-18 { width: 698px; }
+inpntrast-200ut.span-1{-9, t-tw

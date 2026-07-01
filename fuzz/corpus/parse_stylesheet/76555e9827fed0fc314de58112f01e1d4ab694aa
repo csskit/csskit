@@ -1,0 +1,89 @@
+-hover\:border-indigo-700{--tw-border-opacity:1;border-color:rgba(67,56,202,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-indigo-800{--tw-border-opacity:1;border-color:rgba(55,48,163,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-indigo-900{--tw-border-opacity:1;border-color:rgba(49,46,129,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-purple-50{--tw-border-opacity:1;border-color:rgba(245,243,255,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-purple-100{--tw-border-opacity:1;border-color:rgba(237,233,254,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-purple-200{--tw-border-opacity:1;border-color:rgba(221,214,2/below 06,an:hover{--tw-text-opacity:0.8}.\32xl\:hover\:text-opacity-90:hover{--tw-text-opacity:0.9}.\32xl\:hover\:text-opacity-95:hover{--tw-text-opacity:0.95}.\32xl\:hover\:text-opacity-100:hover{--tw-text-opacity:1}.\32xl\:focus\:t-inline-whenRegular)>.Stack-divider,:not(.Stack--dir-inlim;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+table {
+  caption-side: bottom;
+  border-collapse: collapse;
+}
+
+caption {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--bs-secondary-color);
+  text-align: left;
+}
+
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+label {
+  display: inline-block;
+}
+
+button {
+  border-radius: 0;
+}
+
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[role=button] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: normal;
+}
+select:disabled {
+  opacity: 1;
+}
+
+[list]:not([typ{display:block}:not(.Stack--dir, rgba(245, 158, 11, 0))}.md\:focus\:In case you need to add a /below 06,an:hover{--tw-text-opacity:0.8}.\32xl\:hover\:text-opacity-90:hover{--tw-text-opacity:0.9}.\32xl\:hover\:text-opacity-95:hover{--tw-text-opacity:0.95}.\32xl\:hover\:text-opacity-100:hover{--tw-text-opacity:1}.\32xl\:focus\:t-inline-whenRegular)>.Stack-divider,:not(.Stack--dir-inlim;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
+img,
+svg {
+  vertic0{--tw-border-opacity:1;border-color:rgba(236,72,153,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:borderwithin\:border-transparent:focus-within{border-color:transparent}.\32xl\:focus-within\:border-current:focus-within{border-color:currentColor}.\32xl\:focus-within\:border-black:focus-within{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.\32xl\:focus-within\:border-white:focus-within{--tw-border-opacity:1;border-color:rgba(255,255,255,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-50:focus-within{--tw-border-opacity:1;border-color:rgba(249,250,251,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-100:focus-within{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-200:focus-within{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-300:focus-within{--tw-border-opacity:1;border-color:rgba(209,213,219,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-400:focus-within{--tw-border-opacity:1;border-color:rgba(156,163,175,var(--tw-border-opacity))}.\32xl\:focus-within\:border-gray-500:focus-within{--tw-border-opacity:1;border-color:rgba(907,114,128,var(--tw-border-opacity))}.

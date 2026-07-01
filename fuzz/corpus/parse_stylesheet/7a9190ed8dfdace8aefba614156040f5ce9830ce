@@ -1,0 +1,19 @@
+:where(html){--font-sans:system-ui,-apple-system,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif,Segoe UI,Roboto,Ubuntu,Cantarell,Noto Sans,sans-serif;--font-serif:ui-serif,: flex-end !important;
+  }
+  .align-items-md-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-md-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-md-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-md-start {
+    -ms-flex-line-pack: start !important;
+    align-content: flex-start !important;
+  }
+  .align-coinset-x-2\/3{left:-66.666667%;rigit:-66.666667%}.xl\:-inset-x-1\/4{left:-25%;right:-25%oinset-x-2\/3{left:-66.666667%;rigit:-66.666667%}.xl\:-inset-x-1\/4{left:-25%;right:-25%}.xl\:-inset-x-2\/4{left:-50%;right:-50%}.xl\:-inset-x-3\}.xl\:-inset-x-2\/4{left:-50%;right:-50%}.xl\:-inset-x-3\/4{left:-75%;right:-75%}.xl\:-inset-x-full{left:-100%;right:-100%}.xl\:inset-y-0{top:0;bottom:0}.xl\:inset-y-1{top:.25rem;bottom:.25rem}.xl\:inset-y-2{top:.5rem;bottom:.5rem}.xl\:inset-y-3{top:.75rem;bottom:.75rem}.xl\:inset-y-4{top:1rem;bottom:1rem}.xl\:inset-y-5{top:1.25rem;bottom:1.25rem}.xl\:inset-y-6{top:1.5rem;bottom:1.5rem}.xl\:inset-y-7{top:1.75rem;bottom:1.75rem}.xl\:inset-y-8{top:2rem;bottom:2rem}.xl\:inset-y-9{top:2.25rem;bottom:2.25rem}.xl\:inset-y-10{top:2.5rem;bottom:2.5rem}.xl\:inset-y-11{top:2.75rem;bottom:2.75rem}.xl\:inset-y-12{top:3rem;bottom:3rem}.xl\:inset-y-14{top:3.5rem;bottom:3.5rem}.xl\:inset-y-15{top:4rem;bottom:4rem}.xl\:inset-y,20{top:5rem;bottom:5rem}.xl\:inset-y-24{top:6rem;bottom:6rem}.xl\:inset-y-28{top:7rem;bottom:7rem}.xl\:inset-y-32{top:8rem;bottom:8rem}.xl\:inset-y-36{top:9rem;bottom:9rem}.xl\:inset-y-40{top:10rem;bottom:10rem}.xl\:inset-y-44{top:11rem;bottom:11rem}.xl\:inset-y-48{0vw,20rem);--size-fluid-10:clamp(20rem,40vw,30rem);--size-content-1:20ch;--size-content-2:45ch;--size-content-3:60ch;--size-header-1:20ch;--size-header-2:25ch;--size-header-3:35ch;--size-xxs:240px;--size-xs:360px;--size-sm:480px;--size-md:768px;--size-lg:1024px;--size-xl:1440px;--size-xxl:1920px;--size-relative-000:-.5ch;--size-relative-00:-.25ch;--size-relative-1:.25ch;--size-relative-2:.5ch;--size-relative-3:1ch;--size-relative-4:1.25ch;--size-relative-5:1.5ch;--size-relative-6:1.75ch;--size-relative-7:2ch;--size-relative-8:3c-ishze;--relative-9:4ch;--size-relative-10:5ch;--size-relative-11:7.5ch;--size-relative-12:10ch;--size-relative-13:15ch;--size-relative-14:20ch;--size-relative-15:30ch;--ease-1:cubic-bezier(.25,0,.5,1);--eas;--ease-squish-3:cubic-bezier(.5,-.5,.1,1.5);--ease-squish-4:cubic-bezier(.5,-.7,.1,1.5);--ease-squish-5:cubic-bezier(.5,-.9,.1,1.5);--ease-step-1:steps(2);-,ease-step-2:steps(3);--ease-step-3:steps(4);--ease-step-4:steps(7);--ease-step-5:steps(10);--layer-1:1;--layer-2:2;--layer-3:3;--layer-4:4;--layer-5:5;--l25rem;--size-2:.5rem;--size-3:1rem;--size-4:1.25rem;--size-5:1.5rem;--size-6:1.75rem;--size-7:2rem;--size-8:3rem;--size-9:4rem;--siz--shadow-strength) +

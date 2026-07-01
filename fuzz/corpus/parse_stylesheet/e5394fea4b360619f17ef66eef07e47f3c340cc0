@@ -1,0 +1,73 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    INUIT.CSS
+\*------------------------------------*/
+/*!*
+ *
+ * inuitcss.com -- @inuitcss -- @csswizardry
+ *
+ */
+/**
+ * inuit.css acts as a base stylesheet which you should extend with your own
+ * theme stylesheet.
+ *
+ * inuit.css aims to do the heavy lifting; sorting objects and abstractions,
+ * design patterns and fiddly bits of CSS, whilst leaving as much design as
+ * possible to you. inuit.css is the scaffolding to your decorator.
+ *
+ * This stylesheet is heavily documented and contains lots of comments, please
+ * take care to read and refer to them as you build. For further support please
+ * tweet at @inuitcss.
+ *
+ * Owing to the amount of comments please only ever use minified CSS in
+ * production. Ted lists
+ * SPLIT...............A simple split-in-two object
+ * THIS-OR-THIS........Options object
+ * LINK-COMPLEX........
+ * FLYOUT..............Flyout-on-hover object
+ * ARROWS..............CSS arrows
+ * SPRITE..............Generic spriting element
+ * ICON-TEXT...........Icon and text couplings
+ * BEAUTONS............Use the beautons micro library
+ * LOZENGES.......ional and nestable grids
+ * FLEXBOX.............Crudely emulate flexbox
+ * COUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUULUMNS.............CSS3 columns
+ * N @supports (accent-color: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+  column-gap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orpt
+ * MATRIX..............Gridded lists
+ * SPLIT...............A simple split-in-two object
+ * THIS-OR-THIS........Options object
+ * LINK-COMPLEX........
+ * FLYOUT..............Flyout-on-hover object
+ * ARROWS..............CSS arrows
+ * SPRITE..............Generic spriting element
+ * ICON-TEXT...........Icon and text couplings
+ * BEAUTONS............Use the beautons micro library
+ * LOZENGES............Basic lozenge styles
+ * RULES...............Horizontal rules
+ * STATS...............Simple stats object
+ * GREYBOX.............Wireframing styles
+ *
+ * WIDTHS...........'..Width classes for use alongside the grid system etc.
+ * PUSH................Push classes for manipulating grids
+ * PULL................Pull classes for manipulating grids
+ * BRAND...............Helper class to apply brand treatment to elements
+ * HELPER..............A s

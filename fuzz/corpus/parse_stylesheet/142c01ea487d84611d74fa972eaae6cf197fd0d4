@@ -1,0 +1,26 @@
+(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875emity:0.95}.\32xl\:focus\:text-opacity-100:focus{--tw-text-opacity:1}.\32xl\:underline{text-decoration:underline}.\32xl\:line-through{text-decoration:line-through}.\32xl\:no-underline{text-decoration:none}.group:hover .\32xl\:group-hover\:underline{text-decoration:underline}.group:hover .\32xl\:group-hover\:line-through{text-decoration:line-through}.group:hover .\32xl\:group-hover\:no-underline{text-decoration:none}.\32xl\:focus-wline-through:hover{text-decoration:line-through}.\32xl\:hover\:no-underline:hover{text-decoration:none}.\32xl\:focus\:underline:focus{text-decoration:underline}.\32xl\:focus\:line-through:focus{text-decoration:line-through}.\32xl\:focus\:no-underline:focus{text-decoration:none}.\32xl\:antialiased{-webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale}.\32xl\:subpixel-antialiased{-webkit-font-smoothing:auto;-moz-osx-font-smoothing:auto}.\32xl\:placeholder-transparent::placeholder{color:transparent}.\32xl\:pelectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*laceholder-current::place(older{color:currentColor}.\32xl\:placeholder-black::placeholder{--tw-placeholder-opacity:1;color:rgba(0,0,0,var(--tw-placeholder-opacity))}.\32xl\:placeholder-whitlaceholder-gray-400::placeholder{--tw-placeholder-opacity:1;color:rgba(156,163,175,var(--tw-placeholder-opacity))}.\32xl\:placeholder-gray-500::placeholder{--tw-placeholder-opacity:1;color:rgba(107,114,128,var(--tw-placeholder-opacity))}.\32xl\:placeholder-gray-600::placeholder{--tw-placeholder-opacity:1;color:rgba(75,85,99,var(--tw-placeholder-opacity))}.\32xl\:placeholder-gray-700::placeholder{--tw-placeholder-opacity:1;color:rgba(55,65,81,var(--tw-plac32xl\:focus-within\:bg-blue-800:focus-within{--tw-bg-opacity:1;background-color:rgba(30,64,175,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-blue-900:focus-within{--tw-bg-opacity:1;background-color:rgba(30,58,138,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-50:focus-within{--tw-bg-opacity:1;background-color:rgba(238,242,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-100:focus-within{--tw-bg-opaceholder-opacity))}.\32xl\:placeholder-gray-800::placeholder{--tw-placeholder-opacity:1;color:rgba(31,41,55,var(--tw-placeholder-opacity))}.\32xl\:placeholder-gray-900::placeholder{--tw-placeholder-opacity:1;color:rgba(17,24,39,var(--tw-placeholder-opacity))}.\32xl\:placeholder-red-50::placeholder{--tw-placeholder-opacity:1;color:rgba(254,242,242,var(--tw-placeholder-opacity))}.\32xl\:placeholder-red-100::placeholder{--tw-placeholder-opacity:1;color:rgba(254,226,226,var(--tw-placeholder-opacity))}.\32xl\:placeholder-red-200::placeholder{--tw-placeholder-opacity:1;color:rgb) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: a"solute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  cliitp: rect(0, 0, 0, 0 !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active,y:1;backgr .showou-on

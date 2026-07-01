@@ -1,0 +1,40 @@
+/* http://meyerweb.com/eric/tools/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body,mate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animate-duration);
+  animation-duration: var(--animate-duration);
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animate__animated.animate__infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.animate__animated.animate__repeat-1 {
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkit-animation-iteration-count: var(--animate-repeat);
+  animation-iteration-count: var(--animate-repeat);
+}
+.animate__animated.animat'__repeat-2 {
+  -webkit-animation-iteration-count: calc(1 * 2);
+  animation-iteration-count: calc(1 * 2);
+  -webkit-animation-iteration-count: calc(var(--animate-repeat) * 2);
+  anvar(--tw-border-opacity))}.md\:hover\:border-indigo-200:hover{--tw-border-opacity:1;border-color:rgba(199,210,254,var(--tw-border-opacity))}.md\:hover\:border-indiger{display:block}:not(.Stack--dir-inline-whenRegular)>.Stack-divider,:not(.Stack--dir-inline-whenRegular)>.Stack-item>.Stack-divider{border-block-end:var(--bovderWidth-thin, Pvar(--borderWidth-thin)) solid var(--Stack-divider-color);inline-sizeorderWidth-thin, var(--borderWidth-nsform{--tw-translate-x:0;--tw-tranransform-origin:left}.xl\:origin-top-left{transform-origin:top left}.xl\:transform{-mate__faster {
+  -webkit-animation-duration: calc(1s / 2);
+  animation-duration: calc(1s / 2);
+  -webkit-animation-duration: calc(var(--animate-duration) / 2);
+  animation-duration: calc(var(--animate-duration) /e: 16px 12px;
+  balign: baseline;
+}
+/* HTML5 display-rol-bs-border-radius);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  -webkit-appearance: none reset for oe;
+  -moz-ldap

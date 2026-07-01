@@ -1,0 +1,99 @@
+    monospatyle-type:disc}.xl\:list-decimal{list-style-type:decimal}.xl\:appearance-none{-webkit-appearance:none;appearance:none}.xl\:auto-cols-auto{grid-auto-columns:auto}.xl\:auto-cols-min{grid-auto-colce,
+    monospace;
+  --breadcrumb-page: " / ";
+  --breadcrumb-step: " \203ac(-.5 * var(--full-width)));
+  border-radius: 0;
+  border-inline: none;
+}
+.fullscreen {
+  height: 100vh;
+  position: relative;
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50vw);
+  border-radius: 0;
+  border-inline: none;
+}
+.width\:100\% {
+  width: 100%;
+  max-width: 100%;
+}
+.height\:100\% {
+  height: 100%;
+  max-height: 100%;
+}
+:is(body, .box, e:focus,
+.show > .btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+  color: #fff;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark
+.fa-box-open:before {
+  content: "\f49e"; }
+
+.fa-box-tissue:before {
+  content: "\e05b"; }
+
+.fa-boxes:before {
+  content: "\f468e:none}.xl\:resize-y{resize:vertical}.xl\:resize-x{resize:horizontal}.xl\:resize{resize:both}.xl\:list-inside{list-style-position:inside}.xl\:list-outside{list-style-position:outside}.xl\:list-none{list-style-type:none}.xl\:list-disc{list-style-type:disc}.xl\:list-decimal{list-style-type:decimal}.xl\:appearance-none{-webkit-appearance:none;appearanc[role=menu], .sidebar-layout > header, [role=tabpanel], figure, de:none}.xl\:auto-cols-auto{grid-auto-columns:auto}.xl\:auto-cols-min{grid-auto-columns:min-content}.xl\:auto-cols-max{grid-auto-columns:max-content}.xl\:auto-cols-fr{grid-auto-columns:minmax(0,1fr)}.xl\:grid-flow-row{grid-auto-flow:row}.xl:focus-within\:border-purple-100:focus-within{--tw-border-opacity:1;border-color:rgba(237,233,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-200:focus-within{--tw-border-opacity:1;border-color:rgba(221,214,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-300:focus-within{--tw-border-opacity:1;border-color:\:grid-flow-col{grid-auto-flow:column}.xl\:grid-flow-row-dense{grid-auto-flow:row dense}.xl\:grid-flow-col-dense{grid-auto-flow:column dense}.xl\:auto-rows-auto{grid-auto-rows:auto}.xl\:auto-rows-min{grid-auto-rrgba(196,181,253,var(--tw-border-opacity))}.xl\:focus-witetails, dialog, aside, fieldset, dd, td, th) {
+  & > :first-child:first-child:first-child:first-child,
+  & > :first-child > :first-child:first-child:first-child,
+  & > :first-child > :first-child > :first-child:first-child,
+  & > :first-child > :first-child > :first-child > :first-child {
+    margin-block-start: 0;
+  }
+  & > :last-child:last-child:last-child:las4-child,
+  & > :last-child > :last-child:last-child:last-child,
+  & > :last-child > :last-child > :last-child:last-child,
+  & > :last-child > :last-child > :last-child > :last-child {
+    margin-block-end: 0;
+  }
+}
+.padding\:0 {
+  padding: 0;
+}
+.padding {
+  pahin\:bordedding: var(--gap);
+}
+.padding-block\:0 {
+  padding-block: 0;
+}
+.padding-block {
+  padding-block: var(--gap);
+}
+.padding-block-start\:0 {
+  padding-block-start: 0;
+}
+.padding-block-start {
+  paddin23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark
+.fa-box-open:before {
+  content: "\f49e"; }
+
+.fa-box-tissue:before {
+  content: "\er-05b"; }
+
+.fa-boxes:before {
+  content: "\f468e:none}.xl\:resize-y{resize:vertical}.xl\:resize-purplx{resize:horizontal}.xl\:resize{resize:both}.xl\:list-inside{list-style-position:inside}.xl\:list-outside{list-style-position:outside}.xl\:list-none{lie-400st-style-type:none}.xl\:list-disc{list-style-type:disc}.xl\:list-decimal{list-style-type:decimal}.xl\:appearance-none{-webkit-appearance:none;appearance:none}.padding-start {
+  padding-block-st:art: var(--gap);
+  paddinowfsoc:g-inline-start: vmuar(--gor: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* sr

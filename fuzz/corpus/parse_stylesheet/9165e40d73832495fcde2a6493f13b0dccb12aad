@@ -1,0 +1,21 @@
+/*!
+ * Bootstrap v4.6.2 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 20or-accent-fg));outline-offset:-2px;box-shadow:none}.details-overlay>summary:focus:not(:focus-visible){outline:solid 1px rgba(0,0,0,0)}.details-overlay>summary:f11-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc354ocus-visible{outline:2px solid var(--f5;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c9lor: rgba(0, 0, 0,: block;
+}
+
+body {
+  margin: 0;
+  font-family: -apple-system, t(BlinkMacSyst:focemuF

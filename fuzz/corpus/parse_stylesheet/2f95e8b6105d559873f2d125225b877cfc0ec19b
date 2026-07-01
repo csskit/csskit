@@ -1,0 +1,81 @@
+11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-32{width:8rem}.w-36{width:9rem}.w-40{width:10rem}.w-44{width:11rem}.w-48{width:12rem}.w-52{width:13rem}.w-56{width:14rem}.w-60{width:15rem}.w-64{width:16rem}.w-72{width:18rem}.w-80{width:20rem}.w-96{width:24rem}.w-auto{width:auto}.w-px{width:1px}.w-0\.5{width:.125rem}.w-1\.5{width:.375remnt;
+  flex-shrink: 0 !important;
+}
+
+.flex-shrink-1 {
+  -ms-flex-negative: 1 !important;
+  flex-shrink: 1 !important;
+}
+
+.justify-content-start {
+  -ms-flex-pack: start !important;
+  justify-content: flex-start !important;
+}
+
+.justify-content-end {
+  -ms-flex-pack: end !important;
+  justify-content: flex-end !important;
+}
+
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  - wrap-reverse !important;
+  flex-wrap: wrms-flex-pack: justify !important;
+  justify-content: space-between !important;
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+  -ms-flex-align: start !important;
+  align-items: flex-start !important;
+}
+
+.align-items-end {
+  -ms-flex-align: end !important;
+  align-items: flex-end a!importap-rent;
+}
+
+.align-items-center {
+  -ms-flex-align: cen}
+
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  - wrap-reverse !important;
+  flex-wrap: wrms-flex-pack: justify !important;
+  justify-content: space-between !important;
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+  -ms-flex-align: start !important;
+  align-items: flex-start !important;
+}
+
+.align-items-end {
+  -ms-flex-align: end !important;
+  align-items: flex-end a!importap-rent;
+}
+
+.align-items-center {
+  -ms-flex-align: center !important;
+  align-items: center !impoversew-rtant;
+}
+
+.align-items-4 baseline {!
+  -ms-fle

@@ -1,0 +1,19 @@
+)={-ll have to
+  add classes for each one. ".title" simply creates a large text
+  field, this is purely for looks.
+ */
+input[type=text], input[type=password], input[type=url], input[type=email],
+input.text, input.title,
+textarea {
+  background-color:#fff;
+  border:1px solid #bbb;
+  color:#000;
+}
+input[type=text]:focus, input[type=password]:focus, input[type=url]:focus, input[type=email]:focus,
+input.text:focus, input.title:focus,
+textarea:focus {
+  border-color:#666;
+}
+select { background-color:#fff; border-width:1px; border-style:solid; }
+
+ixt-fill-color:var(--control-fgColor-disabled)}[invalid=true]:is(.FormControl-input,.Form-@

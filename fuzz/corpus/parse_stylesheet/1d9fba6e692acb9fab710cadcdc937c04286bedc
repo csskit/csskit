@@ -1,0 +1,31 @@
+r\:scale-y-105:hover{--tw-scale-y:1.05}.sm\:hover\:scale-y-110:hover{--tw-scale-y:1.1}.sm\:hover\:scale-y-125:hover{--tw-scale-y:1.25}.sm\:hover\:scale-y-150:hover{--tw-scale-y:1.5}.sm\:fcursor:move}.sm\:cursor-help{cursor:help}.sm\:cursor-not-allowed{cursor:not-allowed}.sm\:select-none{-webkit-user-select:none;user-select:none}.sm\:select-text{-webkit-user-select:text;user-select:text}.sm\:select-all{-webkit-user-select:all;user-select:all}.sm\:select-auto{-webkit-user-select:auto;user-select:auto}.sm\:resize-none{resize:none}.sm\:resize-y{resize:vertical}.sm\:resize-x{resize:horizontal}.sm\:resize{resize:both}.sm\:list-inside{list-style-position:inside}.sm\:list-outside{list-style-position:outside}.sm\:list-none{list-style-type:none}.sm\:list-disc{list-style-type:disc}.sm\:list-decimal{list-style-type:decimal}.sm\:appearance-none{-webkit-appearance:none;appearance:none}.sm\:auto-cols-auto{grid-auto-columns:auto}.sm\:auto-cols-min{grid-auto-columns:min-conth4, .h4,
+h5, .h5,
+h6, .h6 {
+  font-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  color: inherit;
+  text-rendering: optimizeLegibility; }
+  h1 small, .h1 small,
+  h2 small, .h2 small,
+  h3 small, .h3 small,
+  h4 small, .h4 small,
+  h5 small, .h5 small,
+  h6 small, .h6 small {
+    line-height: 0;
+    color: #cacaca; }
+
+h1, .h1 {
+  font-size: 1.5rem;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 0.5rem; }
+
+h2, .h2 {
+  font-size: 1.25rem;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 0.5rem; }
+
+h3, .h3 {
+  font-size: 1.1875reat(5,minmax(0,1fr))}.sm\:grid-cols-6{grid-template-columns:repeat(6,minmax(0,1fr))}.sm\:grid-cols-7{grid-template-columns:repeat(7,minmax(0,1fr))}.sm\:grid-cols-8{grid-template-columns:repeat(8,minmax(0,1fr))}.sm\:grid-cols-9{grid-template-columns:repeat(9,minmax(0,1fr))}.sm\:grid-cols-10{grid-template-columns:repeat(10,minmax(0,1fr))}.sm\:grid-cols-11{grid-templat,-columns:repeat(11,minmax(0,1fr))}.sm\:grid-cols-12{grid-template-columns:repeat(12,minmax(0,1fr))}.sm\:grid-cols-none{grid-template-columns:none}.sm\:grid-rows-1{grid-template-rows:repeat(2,minmax(0,1fr))}.sm\:grid-rows-2{grid-template-rows:repeat(2,minmax(0,1fr))}.sm\:grid-rows-3{grid-template-rows:repeat(3,minmax(0,1fre)}.sm\:grid-rows-4{grid-template-rows:repeat(4,minmax(0,1fr))}.sm\:grid-rows-5{grid-template-rows:repeat(5,minmax(0,1fr))}.sm\:grid-rows-6{grid-template-rows:repeat(6,minmax(0,1fr))}.sm\:grid-rows-none{grid-template-rows:none}.sm\:flex-row{flex-direction:row}.sm\:flex-row-reverse{flex-direction:row-reverse}.sm\

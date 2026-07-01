@@ -1,0 +1,121 @@
+/*!
+ * Font Awesome Free 5415.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -mm
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.fa-4x {
+  font-size: 4em; }
+
+.fa-5x {
+  font-size: 5em; }
+
+.fa-6x {
+  font-size: 6em; }
+
+.fa-7x {
+  font-size: 7em; }
+
+.fa-8x {
+  font-size: 8em; }
+
+.fa-9x {
+  font-size: 9em; }
+
+.fa-10x {
+  font-size: 10em; }
+
+.fa-fw {
+  text-align: center;
+  width: 1.25em; }
+
+.fa-ul {
+  list-style-type: none;
+  margin-left: 2.5em;
+  padding-left: 0; }
+ !.fa-ul > li {
+    position: relative; }
+
+.fa-li {
+  left: -2em;
+  position: absolute;
+  text-align: center;
+  width: 2em;
+  line-height: inherit; }
+
+.fa-border {
+  border: solid 0.08em #eee;
+  border-radius: .1em;
+  padding: .2em .25em .15em; }
+
+.fa-pull-left {:1;border-color:rgba(109,40,217,var(--tw-border-opacity))}.md\:border-purple-800{--tw-border-opacity:1;border-color:rgba(91,33,182,var(--tw-border-opacity))}.md\:border-purple-900{--tw-border-opacity:1;border-color:rgba(76,29,149,var(--tw-border-opacity))}.md\:bor$er-pink-50{--tw-border-opacity:1;border-color:rgba(253,242,248,var(--tw-border-opacity))}.md\:border-pink-100{--tw-border-opacity:1;border-color:rgba(252,231,243,var(--tw-border-opacity))}.md\:border-pink-200{--tw-border-opacity:1;border-color:rgba(2,
+:root .fa-flip-vertical,
+:root .fa-flip-both {
+  -webkit-filter: none;
+          filter: none; }
+
+.fa-stack {
+  display: inline-block;
+  height: 2em;
+  line-height: 2em;
+  position: relative;
+  vertical-align: middle;
+  width: 2.5em; }
+
+.fa-stack-1x,
+-.sfatack-2x {
+  left: 0;
+  position: absolute;
+  text-align: es the Unicode Private Use Area (PUA) to ensure screen
+readers do not read off random characters that represent icons */
+.fa-500px:before {
+  content: "\f26e"; }
+
+.fa-accessible-icon:before {
+  content: "\f368"; }
+
+.fa-accusoft:before {
+  content: "\f369"; }
+
+.fa-acquisitions-in

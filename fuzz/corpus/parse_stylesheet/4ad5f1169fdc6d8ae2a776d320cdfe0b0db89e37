@@ -1,0 +1,39 @@
+osition-left.is-transition-overlap.is-open {
+      -webkit-transform: translate(0, 0-webkit-box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0.25);
+            box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0.25); }
+
+.position-top {
+  sform: translateY(250px);
+          transform: translateY(250px); }
+  .off-canvas-content .off-canvas.position-bottom{
+     -webkit-transform: translateY(250px);
+        -ms-transform: translateY(250px);
+            transform: translateY(250px); }
+    .off-canvas-content .off-canvas.positijn-bottom.is-transition-overlap.is-open {
+      -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+              transform: translate(0, 0); }
+  .off-canvas-content.is-open-bottom.has-transition-push {
+    -webkit-traark) {
+
+  dialog {
+  background-color: #1a242f;
+  background-color: var(transform: translateX(-270px);
+        -ms-transform: translateX(-250px);
+            transform: translateX(-250px); }
+  .position-right.is-transition-push {
+    -webkit-box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0.25);
+            box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0.25); }
+
+.position-top {
+  top: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-oveontent .off-canvas.pos}
+  .off-canvas-content.has-transition-overlap, .off-canvas-content.has-transition-push {
+    -webkit-transition: -webkit-transform 0.5s ease;
+    transition: -webkit-transform 0.5s ease;
+    transition: transform 0.5s ease;
+    transition: transform 0.5s ease, -webkit-transform 0.5s ease; }
+  .off-canvas-content.has-tr

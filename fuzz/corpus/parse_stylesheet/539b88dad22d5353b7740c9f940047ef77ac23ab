@@ -1,0 +1,96 @@
+11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4rem}.w-20{width:5rem}.w-24{width:6rem}.w-28{width:7rem}.w-32{width:8rem}.w-36{width:9rem}.w-40{width:10rem}.w-44{width:11rem}.w-48{width:12rem}.w-52{width:13rem}.w-56{width:14rem}.w-60{width:15rem}.w-64{width:16rem}.w-72{width:18rem}.w-80{width:20rem}.w-96{width:2lor-scheme: dark) {
+
+  time {
+  color: #ffbe85;
+  color: var(--code);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  time {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+pre > code {
+  padding: 10px;
+  display: block;
+  overflow-x: auto;
+}
+
+var {
+  color: #39a33c;
+  color: var(--variable);
+  font-style: normal;
+  font-family: monospace;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  var {
+  color: #d941e2;
+  color: var(--variable);
+  }
+}
+
+kbd {
+  background: #efefef;
+  background: var(--background);
+  border: 1px solid #dbdbdb;
+  border: 1px solid var(--border);
+  border-radius: 2px;
+  color: #363636;
+  color: var(--text-main);
+  padding: 2px 4px 2px 4px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  border: 1px solid #526980;
+  border: 1px solid var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--b4rem}.w-auto{width:auto}.w-px{width:1px}.w-0\.5{width:.125rem}.w-1\.5{width:.375remorder);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  hr {
+  border-top: 1px solider {
+  background-color: #202b38;
+  backgro    text-rendering: auto;
+}
+
+/*css}.w-2\.5{width:.625rem}.w-3\.5{width:.875rem}.w-1\/2{width:50%}.w-1\/3{width:33.333333%}.w-2\/3{width:66.666667%}.w-1\/4{width:25%}.w-2\/4{width:50%}.w-3\/4{width:75%}.w-1\/5{width:20%}.w-2\/5{width:40%}.w-3\/5{width:60%}.w-4\/5{width:80%}.w-1\/6{width:16.666667%}.w-2\/6{width:33.333333%}.w-3\/6{width:50%}.w-4\/6{width:66.666667%}.w-5\/6{width:83.333333%}.w-1\/12{width:8.333333%}.w-2\/12{width:16.666667%}.w-lint outline-none:false*/
+
+.pure-button {
+    font-3\/1family:2

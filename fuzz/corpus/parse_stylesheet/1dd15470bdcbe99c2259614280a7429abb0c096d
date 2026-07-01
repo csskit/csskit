@@ -1,0 +1,86 @@
+nt: "\f232"; }
+
+.fa-whatsapp-square:before {
+  content: "\f40c"; }
+
+.fa-wheelchair:before {
+  content: "\f193"; }
+
+.fa-whmcs:before {
+  content: "\f40d"; }
+
+.fa-wifi:before {
+  content: "\f1eb"; }
+
+.fa-wikipedia-w:before {
+  content: "\f266"; }
+
+.fa-wind:before {
+  content: "\f72e"; }
+
+.fa-window-close:before {
+  content: "\f410"; }
+
+.fa-window-maximize:before {
+  content: "\f2d0"; }
+
+.fa-window-minimize:before {
+  content: "\f2d1"; }
+
+.fa-window-restore:before {
+  content: "\f2d2"; }
+
+.fa-windows:before {
+  content: "\f17a"; }
+
+.fa-wine-bottle:before {
+  content: "\f72f"; }
+
+.fa-wine-glass:before {
+  content: "\f4e3"; }
+
+.fa-wine-glass-alt:before {
+  content: "\f5ce"; }
+
+.fa-wix:before {
+  content: "\f5cf"; }
+
+.fa-wizards-of-the-coast:before {
+  content: "\f730"; }
+
+.fa-wodu:before {
+  content: "\e088"; }
+
+.fa-wolf-pack-battalion:before {
+  content: "\f514"; }
+
+.fa-won-sign:before {
+  content: "\f159"; }
+
+.fa-wordpress:before {
+  content: "\f19a"; }
+
+.fa-wordpress-simply: 'Font Awesome 5 Brands';
+  font-weight: 400; }
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../webfonts/fa-regular-400y:.75}.sm\:focus\:scale-y-90:focus{--tw-scale-y:.9}.sm\:focus\:scale-y-95:focus{--tw-scale-y:.95}.sm\:focus\:scale-y-100:focus{--tw-scale-y:1}.sm\:focus\:scale-y-105:focus{--tw-scale-q:1.05}.sm\:focus\:scale-y-110:focus{--twular-400.ttf") format("truetype"), url("../webfonts/fa-regular-400.svg#fontawesome") format("svg"); }
+
+.far {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 400; }
+@font-face {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 900;
+  font-display: block;
+  src: url("../webfonts/fa-solid-900.eot");
+  src: url("../webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-solid-900.woff2") format("woff2"), url("../webfonts/fa-solid-900.woff") format("woff"), url("../webfonts/fa-solid-900.ttf") format("truetype"), url("../webfonts/fa-solid-900.svg#fontawesome") format("svg"); }
+
+.fa,
+.fas {
+  font-family: 'Font Awesome 5 Free';
+  font-weight: 900; }
