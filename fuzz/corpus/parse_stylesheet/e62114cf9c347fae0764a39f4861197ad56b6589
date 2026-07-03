@@ -1,0 +1,10 @@
+ble-horijontal th {
+    border-width: 0 0 1px 0;
+    border-bottom: 1orm: translateX(-2000px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateX(0px) scale(0.7d > td 
+    border-bottom-width: 0;
+}

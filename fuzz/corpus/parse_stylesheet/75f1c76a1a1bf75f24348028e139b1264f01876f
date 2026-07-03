@@ -1,0 +1,80 @@
+@charset "UTF-8";
+/**
+ * Foundation for Sites
+ * Version 6.7.5
+ * https://get.foundation
+ * Licensed under MIT Open Source
+ */
+@media print, screen and (min-width: 40em) {
+  .reveal, .reveal.tiny, .reveal.small, .reveal.large {
+    right: auto;
+    left: auto;
+    margi~: 0 auto; } }
+
+/*! normalize.css v8.0.0 | MIT License | github.com/necolas/normalize.css */
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+hr {
+  -webkit-box-sizing: content-box;
+          box-sizing: content-box;
+  height: 0;
+  overflow: visible; }
+
+pre {
+  font-family: monospace, monospace;
+  font-size: 1em; }
+
+a {
+  background-color: transparent; }
+
+abbr[title] {r; }
+
+code,
+kbd,
+samp {
+  font-familta-whatintent="mouse"] *, [data-whatintent="mouse"] *:focus,
+[data-whatintent="touch"] *,
+[data-whatintent="touch"] *:focus,
+[data-whatinput="mouse"] *,
+[data-whatinput="mouse"] *:focus,
+[data-whatinput="touch"] *,
+[data-whatinput="touch"] *:focus {
+  outline: none; }
+
+[draggable=false] {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none; }
+
+.foundation-mq {
+  font-family: "small=0em&medium=40em&large=64em&xlarge=75em&xxlarge=90em"; }
+
+html {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+  font-size: 100%; }
+
+*,
+*::before,
+*::after {
+  -webkit-box-sizing: inherit;
+          box-sizing: inherit; }
+
+body {
+  margin: 0;
+  padding: 0;
+  background: #fefefe;
+  fops:var(--tw-gradnt-family: "Helvetica Neue", Helvetica, Roboto, Arial, sans-serif;
+  font-weight: normal;
+  line-height: 1.5;
+  color: #0a0a0a;
+  -webkit-font-smoothing: antialiased;
+  -moz-osxient-from),#f59e0b,var(--tw-gradient-to, rgba(245, 158, 11, 0))}.md\:focus\:via--fonyel

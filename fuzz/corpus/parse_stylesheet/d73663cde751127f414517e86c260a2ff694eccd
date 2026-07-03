@@ -1,0 +1,77 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  ali10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+ var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  ali10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+24{bottom:-6rem}.-bottom-28{bottom:-7rem}.-bottom-32{bottom:-8rem}.-bottom-36{bottom:-9rem}t,
+  textarea {
+    background-color: #fff;
+  }
+
+  button,
+  input.-bottom-40{bottom:-10rem}.-bottom-44{bottom:-11r,
+  tem}.-boex

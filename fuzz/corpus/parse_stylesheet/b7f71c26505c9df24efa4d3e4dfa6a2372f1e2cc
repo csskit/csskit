@@ -1,0 +1,94 @@
+(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0 !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-focus:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important; }
+
+.show-for-landscape,
+.hide-for-portrait {
+  display: block !important; }
+  @media screen and (orientation: landscape) {
+    .show-for-   display: none !important; } }
+
+.show-for-sticky {
+  display: none; }
+
+.is-stuck .show-for-sticky {
+  display: block; }
+
+.is-stuck .hide-for-sticky {
+  display: none; }
+
+.float-left {
+  float: left !important; }
+
+.float-right {
+  float: -timing-function: linear;
+  -webkit-transform: translateX(-100%);
+      -ms-transform: translateX(-100%);
+          transform: translateX(-100%);
+  -webkit-transition-property: opacity, -webkit-transform;
+  transition-property: opacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -webkit-transform
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animate-duration);
+  animation-duration: var(--animate-duration);
+  -webkit-animatioate-delay);
+}
+.animate__animated.animate__delay-2s {
+  -webkit-animatch{align-self:stretch !important}.flex-lg-order-1{order:1 !important}.flex-lg-order-2{order:2 !important}.flex-lg-order-none{order:inhtion-delay: calc(1s * 2);
+  animation-delay: calc(1s * 2);
+  -webkit-animation-delay: calc(var(--animate-delay) * 2);
+  animation-delay: calc(var(--animate-delay) * 2);
+}
+.animate__animated.animate__delay-3s {
+  -webkit-animation-erit !idelay: calc(1s * 3);
+  animation-delay: calc(1s * 3);
+  -webkit-an;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden; }
+
+.slide-in-left.mui-enter.mui-enter-active {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: tran

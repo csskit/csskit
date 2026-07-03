@@ -1,0 +1,88 @@
+\:group-hover\:border-yellow-500{--tw-border-opacity:1;border-color:rgba(245,158,11,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-yellow-600{--tw-border-opacity:1;border-color:rgba(217,119,6,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-yellow-700{--tw-border-opacity:1;border-color:rgba(180,83,9,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-yellow-800{--tw-b;
+  margin-top: 0;
+  margin-bottom: 0.5rem; }
+
+h5, .h5 {
+  font-size: 1.0625rem;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 0.5rem; }
+
+h6, .h6 {
+  font-size: 1rem;
+  line-height: 1.4;
+  margin-top: 0;
+  margin-bottom: 0.5rem; }
+
+@media print, screen and (min-width: 40em) {
+  h1, .h1 {
+    font-size: 3rem; }
+  h2, .h2 {
+    font-size: 2.5rem; }
+  h3, .h3 {
+    font-size: 1.9375rem; }
+  h4, .h4 {
+    font-size: 1.5625rem; }
+  h5, .h5 {
+    font-size: 1.25rem; }
+  h6, .h6 {
+    font-size: 1rem; } }
+
+a {
+  line-height: inherit;
+  color: #1779ba;
+  text-decoration: none;
+  cursor: pointer; }
+  a:hover, a:focus {
+    color: #1468a0; }
+  a img {
+    border: 0; }
+
+hr {
+  clear: both;
+  max-width: 75rem;
+  height: 0;
+  margin: 1.25rem auto;
+  border-top: 0;
+  border-right: 0;
+  border-bottom: 1px solid #cacaca;
+  border-left: 0; }
+
+ul,
+ol,
+dl {
+  margin-bottom: 1rem;
+  list-style-position: outside;
+  line-height: 1.6; }
+
+li {
+  font-size: inherit; }
+
+ul {
+  margin-left: 1.25rem;
+  list-style-type: disc; }
+
+ol {
+  margin-left: 1.25rem; }
+
+ul ul, ol ul, ul ol, ol ol {
+  margin-left: 1.25rem;
+  margin-bottom: 0; }
+
+dl {
+  margin-bottom: 1rem; }
+  dl dt {
+    margin-bottom: 0.3rem;
+    font-weight: bold; }
+
+blockquote {
+  margin: 0 0 1rem;
+  padding: 0.562reverse;
+        -ms-flex-direction: column-reverse;
+            flex-direction: column-reverse; } }
+
+div,
+dl,
+dt,
+dd,
+ulr-indigo-500{--tw-border-opacity:1;border-color:rgba(99,102,241,var(--tw-border-opacity))}.group:hover .\32xl\:group-hover\:border-indigo-600{--tw-border-opacity:1;border-color:rgba(79,70,229,var(--tw-border-opacity))}.group:hover .\32xl\:group

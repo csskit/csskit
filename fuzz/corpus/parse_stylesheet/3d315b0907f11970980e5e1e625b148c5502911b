@@ -1,0 +1,12 @@
+ntal > .list-group-item:last-child {
+  border-top-right-radius: 0.25rem;
+  border-bottom-lefup-horizontal > .list-group-item.active {
+  margin-top: 0;
+}
+
+.list-group-horizontal > .list-group-item + .list-group-item {
+  border-top-width: 1px;
+  border-left-width: 0;
+}
+
+pan-10{grid-column:span 10./s

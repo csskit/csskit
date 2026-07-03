@@ -1,0 +1,5 @@
+ [data-cols\@l^="8 "] {
+    grid-colbel-brown-bgColor-humn-start: 8;
+  }
+  [data-cols\@l$=" 8"] {
+    grid-over: #column-end: 3

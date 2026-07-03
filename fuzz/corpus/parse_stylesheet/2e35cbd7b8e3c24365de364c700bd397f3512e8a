@@ -1,0 +1,29 @@
+ble-horizontalbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbgap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (breaent\:center {
+  align-content: center;
+}
+.align-content\:end {
+  align-content: end;
+}
+.container {
+  max-inline-size: var(--eff-line-length);
+  margin-inline: auto;
+}
+.fullbleed:not([specificity-hack]) {
+  position: relative;
+  max-width: none;
+  width: var(--full-width);
+  left: 50%;
+  transform: translateX(calc(-.5 * var(--full-width)));
+  border-radius: 0;
+  border-inline: none;
+}
+.fulls th {
+    border-width: 0 0  tr:last-child > td {
+    border-bottom-twdih: 0;
+}

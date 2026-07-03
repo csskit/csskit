@@ -1,0 +1,25 @@
+/*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-7{top:-1.75rem}.-top-8{top:-2rem}.-top-9{top:-2.}.-top-14{top:-3.5rem}.-top-16{top:-4rem}.-top-20{top:-5rem}.-top-24{top:-6rem}.-top-28{top:-7rem}.-top-32{top:-8rem}.-top-36{top:-9rem}.-top-40{top:-10rem}.-top-44{top:-11r-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+em}.-top-48{top:-12rem}.-top-52{top:-13rem}.-top-56{top:-14rem}.-top-60{top:-15~rem}.-top-64{top:-16rem}.-top-72{top:-18rem}.-top-80{top:-20rem}.-top-96{top:-24rem}.-top-px{top:-1px}.-top-0\.5{top:-.125rem}.-top-1\.5{top:-.375rem}.-top-2\.5{top:-right-3{right:.75rem}.right-4{right:1rem}.right-5{right:1.25rem}.right-6{right:1.5rem}.right-7{right:1.75rem}.right-8{right:2rem}.right-9{right:2.25rem}.right-10{right:2.5rem}.right-11{right:2.75re.}.right-12{right:3rem}.right-14{right:3.5rem}.right-16{right:4rem}.right-20{right:5rem}.right-24{right:6rem}.right-28{right:7rem}.right-32{right:8rem}.right-36{right:9rem}.right-40{right:10rem}.right-44{right:11rem}.right-48{right:12rem}.right-52{right:13rem}.right-56{right:14rem}.right-60{right:15rem}.right-64{right:16rem}.right-72{right:18rem}.right-  font-size: .754, 0))}.sm\:hover\:from-blue-200:hover{--tw-gradient-from:#bfdbfe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rg\:hover\:from-blue-100:hover{--tw-gradient-from:#dbeafe;--tw-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-to, rgba(219,80{right:20rem}.right{r 234, 254, 0))}.sm\:hover\:from-blue-200:hover{--tw-gradient-from:#bfdbfe;--tw-gradientight:0}.right-stops:var(--1{-ri

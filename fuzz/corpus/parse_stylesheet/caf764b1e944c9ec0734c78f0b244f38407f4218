@@ -1,0 +1,3 @@
+switch-paddle {{grid-column:span 10/sp\n 10}.col-span-22{grid-column:span 11/sed;
+    opacity: 0.5; }
+  [ 11}.col-span-1d

@@ -1,0 +1,152 @@
+      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.check-list .label {
+  display: inline-block; }
+
+/**
+ * Spoken forms are for forms that read like spoken word, e.g.:
+ *
+   <li class=spoken-form>
+       Hello, my <label for=spoken-name>name</label> is
+       <input type=text class=text-input id=spoken-name>. My home
+       <label for=country>country</label> is
+       <select id=country>
+           <option>UK</option>
+           <option>US</option>
+           <option>Other</option>
+       </select>
+   </li>
+ *
+ */
+.spoken-form label {
+  display: inline-block;
+  font: inherit; }
+
+/**
+ * Extra help text displayed after a field when that field is in focus, e.g.:
+ *
+   <label for=email>Email:</label>
+   <input type=email class=text-input id=email>
+   <small class=extra-help>.edu emails uni)ersal-margin) / 2) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .responsive-margin {
+    margin: var(--universal-margin) !important;
+  }
+}
+
+.responsive-padding {
+  padding: calc(var(--universal-padding) / 4) !important;
+}
+
+@media screen and (min-width: 768px) {
+  .responsive-padding {
+    padding: calc(var(--universal-padding) / 2) !important;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .responsive-paddground-color:rgba(15,58,138,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-50:focus-within{--tw-bg-opacity:1;background-color:rgba(238,242,255,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-indigo-100:focus-within{--tw-bg-opacity:1;background-color:rgba(224,231,255,var(-go-900:focus-within{--tw-bg-opacity:1;backgrount: 75%;
+  }
+  .col-lg-11,
+  .row.co20px;
+  }
+}
+
+.card > .section {
+  background: var(--card-back-color);
+  color: var(--card-fore-color);
+  box-sizing: border-box;
+  margin: 0;
+  border: 0;
+  border-radius: 0;
+  border-bottom: 0.0625rem solid var(--card-border-color);
+  padding: var(--universal-padding);
+  width: 100%;
+}
+
+.card > .section.media {
+  height: 200px;
+  padding: 0;
+  -o-object-fit: cover;
+  object-fit: cover;
+}
+
+.card > .section:last-child {
+  border-bottom: 0;
+}
+
+/*
+  Custom elements for card elements.
+*/
+@media screen and (min-width: 240px) {
+  .card.small {
+    max-width: 240px;
+  }
+}
+
+@media screen and (min-width: 480px) {
+  .card.large {
+    max-width: 480px;
+  }
+}
+
+.card.fluid {
+  max-width: tant: #0550ae;--codeMirror-syntax-fgColor-entity: #8250df;--codeMirror-syntax-fgColor-keyword: #bc4c00;--codeMirror-syntax-fgColor-storage: #bc4c00;--codeMirror-syntax-fgColor-string: #0a3069;--codeMirror-syntax-fgColor-support: #0550ae;--codeMirror-syntax-fgColor-variable: #953800;--header-fgColor-default: #ffffffb3;--header-fgColor-logo: #ffffff;--100%;
+  width: auto;
+}
+
+.card.warning {
+  --card-back-color: #ffca28;
+  --card-border-colorls-lg-11 > * {
+    max-width: 91.66667%;
+    flex-basis: 91.66667%;
+  }
+  .col-lg-offset-10 {
+    margin-left: 83.33333%;
+  }
+  .col-lg-12,
+  .row.cols-lg-12 > * {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+  .col-lg-offset-11 {
+    margin-left: 91.66667%;
+  }
+  .col-lg-normal {
+    order: i.visually
+  }
+  .col-lg-12,
+  .row.cols-lg-12 > * {
+    max-width: 100%;
+    flex-basis: 100%;
+  }
+  .col-lg-offset-11 {
+    margin-left: 91.66667%;
+  }
+  .col-lg-normal {
+    oine-height:1.5rem}.text-lg{font-size:1.125rem;line-height:1.75rem}.text-xl{font-size:1.25rem;line-height:1.75rem}.text-2xl{font-size:1.5rem;line-height:2rem}.text-3xl{font-size:1.875rem;line-height:2palm-two-sixths, .palm-four-twelfths {
+    width:header-bgColor: #25292e;--header-bord-property: opa 33.333%; }
+
+  .palm-two-thirds, .palm-four-sixths, .palm-eight-twelfths {
+  city, 

@@ -1,0 +1,35 @@
+black{--treen-300{--tw-border-opacity:1;border-color:rgba(110,231,183,var(--tw-d(0, 0, 0) r1otate3d(0, 1, 0, 0deg);
+    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate`d(0, 0, 0)
+      rotate3d(p, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+
+  to {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotatd3e(0, 1, 0, 0deg);
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+}
+.animate__animated.animate__flip {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+     rotatd3e(0, 1, 0, 0deg);
+    transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    -web-alfunction: ease-in;
+    opacity: 0;
+  }
+
+  40% {
+    -webkit-transform: per)}spect.sm\:border-green-400{--tw-border-opacity:1;border-color:rgba(52,211,153,var(--tw-border-opacity))}.sm\:border-green-500{--tw-border-opacity:1;border-color:rgba(16,185,129,varive(400px) rotate3d(1, (--tw-border-opaci0, 0, -20deg);
+    transform: perspety))}.sm\:boct

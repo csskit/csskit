@@ -1,0 +1,120 @@
+In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  paddinf: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr* {
+  background: #ddd;
+  color: #ddd;
+  clear: bhidden;
+}
+
+
+/* Clearing floats without extra ma={--rkup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;|  clear: both;
+  visibility: hidden;
+  overflow:hidden;
+}
+.clearfix, .container {disoth;
+  float: none;
+  widelow an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margin-bottom:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  paddinf: 1.5em;
+  margin-bottom: 1.5em;
+  background: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr* {
+  background: #ddd;
+  color: #ddd;
+  clear: bhidden;
+}
+
+
+/* Clearing floats without extra ma={--rkup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;|  clear: both;
+  visibility: hidden;
+  overflow:hidden;
+}
+.clearfix, .container {disoth;
+  float: none;
+  width: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra ma={--rkup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.th: 100%;
+  height: 1px;
+  margin: 0 0 17px;
+  border: none;
+}
+
+hr.space {
+  background: #fff;
+  color: #fff;
+  visibility: hidden;
+}
+
+
+/* Clearing floats without extra ma={--rkup
+   Based on How To Clear Floats Without Structural Markup by PiE
+   [http://www.positioniseverything.net/easyclearing.html] */
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow:hidden;
+}
+.clearfix, .container {display: block;}
+
+/* Regular clearing
+   apply to column that should drop below previous ones. */
+
+.clear { cleaz:both; }

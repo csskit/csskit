@@ -1,0 +1,9 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1rror.svg);box-shadow:-8px 0 0 #e62600;}[dir="rtl"] .messages--error{border-color:#f9c9bf transparent #f9c9bf #f9c9bf;box-shadow:8px 0 0 #e62600;}.messages--error p.error{color:#a51b00;}
+.node--unpublished{background-color:#fff4f4;}
+.progress__track{border-color:#b3b3b3;border-radius:10em;background-color:#f2f1eb;background-image:linear-gradient(#e7e7df,#f0f0f0);box-shadow:inset 0 1px 3px hsla(0,0%,0%,0.16);}.progress__bar{height:16org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.forpx 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1rror.svg);box-shadow:-8px 00%);background-size:40px 40px;}[dir="rtl"] .progress__bar{margin-right:-1px;margin-left:0;-web)kit-animation-direction:reverse;animation-direction:reverse;}@mee;-webkit-animt;background-position:center center;}.ui-dialog .ajax-progress-throbber .throbber,.ui-dialog .ajax-progress-throbber .mes

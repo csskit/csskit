@@ -1,0 +1,47 @@
+noida and @rowanmanning for refining and
+ * improving my initial mixin.
+ */
+/**
+ * Create vendor-prefixed CSS in one go, e.g.
+ *
+   `@include vendor(border-radius, 4px);`
+ *
+ */
+/**
+ * Create CSS keyframe animations for all vendors in one go, e.g.:
+ *
+   .foo{
+       @include vendor(animation, shrink 3s);
+   }
+
+   @include keyframe(shrink){
+       from{
+           font-size:5em;
+       }
+ lock; }
+
+/*
+ * Prevent modern browsers from displaying `audio` without controls.
+ * Remove excess height in iOS 5 devices.
+ */
+audio:not([controls]) {
+  display: none;}.\32xl\:h-64{height:16rem}.\32xl\:h-72{height:18rem}.\32xl\:h-80{height:20rem}.\32xl\:h-96{height:24rem}.\32xl\:h-auto{height:auto}.\32xl\:h-px{height:1px}.\32xl\:h-0\.5{height:.125rem}.\32xl\:h-1\.5{height:.375rem}.\32xl\:h-2\.5{height:.625rem}.\32xl\:h-3\.5{height:.875rem}.\32xl\:h-1\/2{height:50%}.\32xl\:h-1\/3{height:33.333333%}.\32xl\:h-2\/3{height:66.666667%}.\32xl\:h-1\/4{hebling
+ *    user zoom.
+ */
+html {
+  font-family: sans-serif;
+  /* 1 */
+  -webkit-text-size-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */ }
+
+/*
+ * Remove default margin.
+ */
+body {
+  margin: 0; }
+
+/* ========================ght:.625rem}.\32xl\:h-3\.5{height:.875rem}.\32xl\:h-1\/2{height:50%}.=================== */
+/*
+ * Address `outlinealso mouse hovered in all browser

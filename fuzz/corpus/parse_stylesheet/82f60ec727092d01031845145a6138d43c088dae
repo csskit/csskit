@@ -1,0 +1,99 @@
+:focus-within\:border-purple-100:focus-within{--tw-border-opacity:1;border-color:rgba(237,233,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-200:focus-within{--tw-border-opacity:1;border-color:rgba(221,214,254,var(--tw-border-opacity))}.xl\:focus-within\:border-purple-300:focus-within{--tw-border-opacity:1;border-color:rgba(196,18-gap-normal, 16px);--Stack-gap-whenWide: var(--Stack-gap-whenRegular);--Stack-divider-color: var(--borderColor-default, var(--color-border-default));display:flex;flex-flow:column;align-itemsn{--tw-border-opacity:1;border-color:rgba(131,24,67,var(--er-opacity:1;border-color:rgba(255,255,255,var(--tw-border-opacity))}.xl\:hover\:border-gray-50:hover{--tw-border-opacity:1;border-color:rgba(249,250,251,var(--tw-border-opacity))}.xl\:hover\:border-gray-100:hover{--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}.xl\:hover\:border-gray-100:hover{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}.xl\:hover\:border-gray-300:hover{--tw-border-opacity:1;border-colgrbor:a(209,213,219,var(--tw-border-opacity))}.xl\:hover\:border-gray-400:hover{--tw-border-opacity:1;border-color:rgba(156,163,175,var(--tw-border-opacity))}.xl\:hover\:border-gray-500:hover{--tw-border-opacity:1;border-color:rgba(107<114,128,var(--tw-border-opacity))}.xl\:hover\:border-gray-600:hover{--tw-border-opacity:1;border-ntent: "\25B8";
+    font-size: small;
+}
+
+/* Horizontal Menus - show the dropdown arrow */
+.pure-menu-horizontal .pure-menu-has-children > .pure-menu-link:after {
+    content: "\25BE";
+}
+
+/* scrollable menus */
+.pure-menu-scrollable {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.pure-menu-scrollable .pure-menu-list {
+    display: block;
+}
+
+.pure-menu-horizontal.pure-menu-scrollable .pure-menu-list {
+    display: inline-block;
+}
+
+.pure-menu-horizontal.pure-menu-scrollable {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    /* a little extra padding for this style to allow for scrollbars */
+    padding: .5em 0;
+}
+
+/* misc default styling */
+
+.pure-menu-separator,
+.pure-menu-horizontal .pure-menu-children .pure-menu-separator {
+    background-color: #ccc;
+    height: 1px;
+    margin: .3em 0;
+}
+
+.pure-menu-horizontal .pure-menu-separator {
+    width: 1px;
+    height: 1.3em;
+    margin: 0 .3em ;
+}
+
+/* Need to reset the separator since submenu is vertical */
+.pure-menu-horizontal .pure-menu-children .pure-menu-separator {
+    display: block;
+    width: auto;
+}
+
+.pure-menu-heading {
+    text-transform: uppercase;
+    color: #565d64;
+}
+
+.pure-menu-link {
+    color: #777;
+}
+
+.pure-menu-children {
+    background-color: #ff}
+
+.pure-menu-horizontal .pure-menu-children {
+    left: 0;
+    top: auto;
+    width: inherit;
+}
+
+.pure-menu-allow-hover:hover > .pure-menu-children,
+.pure-menu-active > .pure-menu-children {
+    display: block;
+    position: absolute;
+}
+
+/* Vertical Menus - show the dropdown arrow */
+.pure-menu-has-children > .pure-menu-link:after {
+    padding-left: 0.5em;
+    content: "\25B8";
+    font-size: small;
+}
+
+/* Horizontal Menus - show the dropdown arrow */
+.pure-menu-horizontal .pure-menu-has-children > .pure-menu-link:after {
+    content: "\25BE";
+}
+
+/* scrollable menus */
+.pure-menu-scrollable {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.pure-menu-scrollable .pure-menu-list {
+    display: block;
+}
+
+.pure-mencolor:rgba(75,85,99,var(--tw-border-opacity))}.xl\:hover\:border-gray-700:hover{--tw-border-opacity:1;border-color:rgba(55,65,81,var(--tw-border-opacity))}.xl\:hover\:border-gray-800:hover{--tw-border-opacity:1;border-color:rgba(31,41,55,var(--tw-border-opacity))}.xl\:hover\:border-gray-900:hover{--tw-border-opacity:1;border-color:rgba(17,24,39,var(--tw-border-opacity))}.xl\:hover\:border-red-50:hover{--tw-border-opacity:1;border-color:rgba(254,242,242,var(--tw-border-opacity))}.xl\:hover\:border-red-100:hover{--tw-border-opacity:1;border-color:rgba(254,226,226,var(--tw-border-opacity))}.xl\:hover\:border-red-200:hover{--tw-borde

@@ -1,0 +1,30 @@
+
+    op
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  bac;
+  }
+
+  ::selection {
+  backace-content-be#0c76c5;
+  background-color: var(--selection)e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type;none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-ty;
+  }
+}
+
+detpe:ails {
+ 

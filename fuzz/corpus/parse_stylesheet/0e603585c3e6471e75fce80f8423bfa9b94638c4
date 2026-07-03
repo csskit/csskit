@@ -1,0 +1,70 @@
+e{list-style-position:inside}.md\:list-outside{list-style-positnt-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+  -ms-flex-align: start !important;
+  align-items: flex-start !important;
+}
+
+.align-items-end {
+  -ms-flex-align: end !important;
+  align-items: flex-end a!importap-rent;
+}
+
+.align-items-center {
+  -ms-flex-align: cen}
+
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  - wrap-reverse !important;
+  flex-wrap: wrms-flex-pack: justify !important;
+  justify-content: space-between !important;
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+ md\:place-content-evenly{place-content:space-evenly}.md\:place-content-stretch{place-content:stretch}.md\:place-items-start{place-items:start}.md\:place-items-end{place-items:end}.md\:place-items-center{place-items:cente.rm:d\}place-items-stretch{place-items:stretch}.md\:content-center{align-content:center}.md\:content-start{align-content:flex-start}.md\:content-end{align-content:flex-end}.md\:content-between{align-content:space-between}.md\:content-around{align-content:space-around}.md\:content-evenly{align-content:space-evenly}.md\:items-start{align-items:flex-start}.md\:items-end{align-items:flex-end}.md\:items-center{align-items:center}.md\:items-baseline{align-items:baseline}.md\:items-stretch{align-items:stretch}.md\:justify-start{justify-content:flex-start}.md\:justify-end{justify-content:flex-end}.md\:justify-center{justify-content:center}.md\:justify-between{justify-content:space-between}.md\:justify-around{justify-content:space-around}.md\:justify-evenly{justify-content:space-evenly}.md\:justify-items-start{justify-items:start}.md\:junt;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+  -ms-flex-align: start !important;
+  align-items: flex-start !important;
+}
+
+.align-items-end {
+  -ms-flex-align: end !important;
+  align-items: flex-end a!importap-rent;
+}
+
+.align-items-center {
+  -ms-flex-align: cen}
+
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  - wrap-reverse !important;
+  flex-wrap: wrms-flex-pack: justify !important;
+  justify-content: space-between !important;
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+ md\:place-content-evenly{place-content:space-evenly}.md\:place-content-stretch{place-content:stretch}.md\:place-items-start{place-items:start}.md\:place-items-end{place-items:end}.md\:place-items-center{place-items:cente.rm:d\}place-items-stretch{place-items:stretch}.md\:content-center{align-content:center}.md\:content-start{align-content:flex-start}.md\:content-end{align-content:flex-end}.md\:content-between{align-content:space-between}.md\:content-around{align-content:space-around}.md\:content-evenly{align-content:space-evenly}.md\:items-start{align-items:flex-start}.md\:items-end{align-items:flex-end}.md\:items-center{align-items:center}.md\:items-baseline{align-items:baseline}.md\:items-stretch{align-items:stretch}.md\:justify-start{justify-content:flex-start}.md\:justify-end{justify-content:flex-end}.md\:justify-center{justify-content:center}.md\:justify-between{justify-content:space-between}.md\:justify-around{justify-content:space-around}.md\:justify-evenly{justify-content:space-evenly}.md\:justify-items-start{justify-items:start}.md\:justify-items-end{justify-items:end}.md\:justify-items-center{justify-items:center}.md\:justify-items-stretch{justify-items:stretch}.md\:gap-0{gap:0}.md\:gap-1{gap:.25rem}.md\:gap-2{gap:.5rem}.md\:gap-3{gap:.75rem}.md\:gap-4{gap:1rem}.md\:gap-5{gap:1.25rem}.md\:gap-6{gap:1.5rem}.md\:gap-7{gap:1.75rem}.md\:gap-8{gap:2rem}.md\:gap-9{gap:2.25rem}.md\:gap-10{gap:2.5rem}.md\:gap-11{gap:2.75rem}.md\:gap-12{gap:3rem}.md\:gap-14{gap:3.5rem}.md\:gap-16{gap:4rem}.md\:gap-20{gap:5rem}.md\:gap-24{gap:6rem}.m

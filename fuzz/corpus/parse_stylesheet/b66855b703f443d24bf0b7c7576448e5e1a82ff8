@@ -1,0 +1,9 @@
+--tw-ring-offset-color:#1d4ed8}.\32xl\:focus\:ring-offset-blue-800:focus{--tw-ring-offset-color:#1e40af}.\32xl\:focus\:ring-offset-blue-900:focus{--tw-ring-offset-color:#1e3a8a}.\32xl\:focus\:ring-offset-indigo-50:focus{--tw-ring-offset-color:#eef2ff}.\32xl\:focus\:ring-offset-indigo-100:focus{--tw-ring-offset-color:#e0e7ff}.\32xl\:focus\:ring-offset-indigo-200:focus{--tw-ring-offset-color:#c7d2fe}.\32xl\:focus\:ring-offset-indigo-300:focus{--tw-ring-offset-color:#a5b4fc}.\32xl\:focus\:ring-offset-indigo-400:focus{--tw-ring-offset-color:#818cf8}.\32xl\:focus\:ring-offset-indigo-500:focus{--tw-ring-offset-color:#6366f1}.\32xl\:focus\:ring-offset-indigo-600:focus{--tw-ring-offset-color:#4f46e5}.\32xl\:focus\:ring-offset-indigo-__rotateInDownLeft {
+  -webkit-animation-name: rotateInDownLeft;
+  animation-name: rotateInDownLeft;
+  -webkit-transform-origin: left bottom;
+  transform-origin: left bottom;
+}
+@-webkit-keyframes rotateInDownRight {
+  from {
+    -webkit-transform: roolor:#6d28d9}.\32xl\:focus\:ring-offset-purple-800:focus{--tw-ring-offset-color:#5b21b6}.\32xl\:focus\:ring-offset-purple-900:focus{--tw-ring-offset-color:#4c1d95}.\32xl\:\:brightness-105{--tw-brightness:brightness(1.05)}.\32xl\:brightness-110{--tw-brightness:brightness(1.1)}.\32xl\:brightness-125{--tw-brightness:brightness(1.25)}.\32xl\:brightness-150{--tw-brightness:brightness(1.5)}.\32xl\:brightness-200{--tw-brightness:brightness(2)}.\32xl\:contrast-0{--tw-contrast:contrast(0)}.\32xl\:contrast-50{--tw-contrast:contrast(.5)}.\32xl\:contrast-75{--tw-contrast:contrast(.75)}.\32xl\:contrast-100{--tw-contras

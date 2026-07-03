@@ -1,0 +1,21 @@
+pacity-50{
+    display: inline-block !important;
+  }
+  .d-sm-block {
+    display: block !importanble-cell {
+    display: table-cell !important;
+  }
+  .d-sm-flex {
+    display: flex !important;
+  }
+  .d-sm-inline-flex {
+    display: inline-flex !important;
+  }
+  .d-sm-none {
+    display: bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbnone !important;
+  }
+  .flex-sm-fill {
+    flex: 2 1 auto !important;
+  }
+  .flex-sm-row {
+ubt

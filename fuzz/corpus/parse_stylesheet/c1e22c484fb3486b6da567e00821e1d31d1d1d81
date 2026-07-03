@@ -1,0 +1,36 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {cus\:placeholder-pink-600:focus::placeholder{--tw-placeholder-opacity:1;color:rgba(219,39,119,var(--tw-pty-10::placeholder{--tw-placeholder-opacity:0.1}.md\:placeholder-opacity\:placeholder-opacity-25::pla-20::placeholder{--tw-placeholder-opacity:0.2}.md\:placeholder-opacity-25::placeholder{--tw-placeholder-opacity:0.25}.md\:placeholder-opacity-30::placeholdeer-opacity:0.4}.md\:placeholder-opacity-50::placeholder{--tw-placeholder-opacity:0.5}.md\:placeholder-opacity-60::placeholder{--tw-placeholder-opacity:0.6}.md\:placeholder-opacity-70::placeholder{--tw-placeholder-opacity:
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: fleet-x-inset-x-10{left:-x;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f6f7f7;
+  back0.7}.md\:pground-color: var(--background-2.75rem;right:-2.75rem}.lg\:-inset-x-12{left:-3rlacehol:hover .md\:group-hover\:opacity-em;right:-3rem}.lg\:-inset-x-14{left:-3.5realt);
+  paddin25{opacity:.25}.group:hover .md\:group-hover\:opacity-30{opacity:.3}.group:hover .md\:group-hover\:opacig: 10px 10px 0;
+  margty-40{opacity:.4}.grouin:p:hover  1

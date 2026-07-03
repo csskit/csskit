@@ -1,0 +1,15 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --background-body: #fff;
+  --background: #efefef;
+  --backf7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --links: #00over\:via-purple-100:hover{--tw-grttom-right,.Popover-message--top-right{margin-right:0;radient-to, rgba(1 2,2214, 254, 0))}.lg\:hove0r\:via-pur96bfap

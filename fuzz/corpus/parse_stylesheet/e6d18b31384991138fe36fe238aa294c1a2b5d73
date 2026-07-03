@@ -1,0 +1,242 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--te{max-width:1280px;margin-right:auto;margin-left:auto}.col-1{width:8.33333333%}.col-2{width:16.66666666%}.col-3{width:24.99999999%}.col-4{width:33.33333332%}.col-5{width:41.66666665%}.col-6{width:49.99999998%}.col-7{width:58.33333331%}.col-8{width:66.66666664%}.col-dhi9tw{:74.99999997%}.col-10{width:83.3333333%}.colxt-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+  padding: 10px 10px 0;
+  margin: 1emk) {
+
+  dialog {
+  border-color: #526980;
+  border-color: var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+dialog > header:first-child {
+  background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+sumg {
+    color: #080;
+  }
+
+  summary::marker {
+    color: #000;
+  }
+
+  summary::-webkit-details-marker {
+    color: #000;
+  }
+
+ argin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  backg
+
+  a {
+    color: #00 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  details {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+details[open] {
+  padding: 10px;
+}
+
+details > :last-child {
+  margin-bottom: 0;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background-color: #efefef;
+  background-color: var(--background);
+  padding: 10px;
+  margin: -10px -10px 0;
+  cursor: pointer;
+  outline: none;}
+
+@media (prefers-color-scheme: dark) {
+
+  summary {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+summary:hovx);
+            transform: translateX(250px); }
+    .off-canvas-content .off-canvas.position-right.is-transition-overlap.is-open {
+     er,
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+summary::-webkit-details-marker {
+  color: #363636;
+  color: var(--text-main);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  summary::-webkit-details-marker {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+dialog {
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+  color: #363636;
+  color: var(--text-main);
+  border: none;
+  border-radius: 6px;
+  border-color: #dbdbdb;
+  border-color: var(--border);
+  padding: 10px 30px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  border-color: #526980;
+  border-color: var(--border);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+dialog > header:first-child {
+  background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@
+summary:focus {
+  text-decoration: underline;
+}
+
+details > :not(summary) {
+  margin-top: 0;
+}
+
+sumg {
+    color: #080;
+  }
+
+  summary::marker {
+    color: #000;
+  }
+
+  summary::-webkit-details-marker {
+    color: #000;
+  }
+
+ argin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  backg
+
+  a {
+    color: #00f;
+    text-decoration: underline;
+  }
+}

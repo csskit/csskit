@@ -1,0 +1,43 @@
+e:focus,
+.show > .btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(216, 217, 219, 0.5);
+}
+
+.btn-dark {
+  color: #fff;
+  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+  color: #fff;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark
+.fa-box-open:before {
+  content: "\f49e"; }
+
+.fa-box-tissue:before {
+  content: "\e05b"; }
+
+.fa-boxes:before {
+  content: "\f468"; }
+
+.fa-braille:before {
+  content: "\f2a1"; }
+
+.fa-brain:before {
+  content: "\f5dc"; }
+
+.fa-bread-slice:before {
+  content: "\f3ec"; }
+
+.fa-briefcase:before {
+  content: "\f0bound-color: #007bff;
+  border-color: #007bff;
+}
+
+.btn-outline-primary:not(:disabled):not(.disabled):active:focus, .btn-outline-primary:not(:disabled):not(.disabled).active:focus,
+.show > .btn-outline-t: p"

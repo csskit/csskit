@@ -1,0 +1,7 @@
+/*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com *//*! modern-normalize v1.1.0 | MIT Lice MIT License | https://tailwindcss.com .pure-menu-heading,
+.pure-menu-horizontal .pure-menu-separator {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+/* Submenus should still be display: bm/sindresorhus/modern-normalize */*,eries of helper c:e{list-style-posilasses 

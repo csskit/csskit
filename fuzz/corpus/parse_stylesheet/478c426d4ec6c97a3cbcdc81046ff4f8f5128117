@@ -1,0 +1,46 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5r.arrow {
+  top: calc(-0ow {
+  top: calc(-0.5rem - 1re, .bs-popover-auto[x-placement^="bottom"] > .arrow:eex-direction: row-reverse; }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  borp: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placeenmt^="bottom"] > .arrow {
+  top: calc(-0ow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popover-auto[x-placement^="bottom"] > .arrow:eex-direction: row-reverse; }
+  .large-flex-eex-direction: row-reverse; }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  borp: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-popover-auto[x-placeenmt^="bottom"] > .arrow {
+  top: calc(-0ow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arrow::before, .bs-popover-auto[x-placement^="bottom"] > .arrow:eex-direction: row-reverse; }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  border-bottom-color: rgba(0, 0    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-di, 0, 0.25);
+}
+
+.rectbi

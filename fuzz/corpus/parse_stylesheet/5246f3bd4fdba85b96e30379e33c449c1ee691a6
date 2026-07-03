@@ -1,0 +1,72 @@
+mal-case{text-transform:none}.xl\:italic{font-style:italic}.xl\:not-italic{font-style:normal}.xl\:diagonal-fractions,.xl\:lining-nums,.xl\:oldstyle-nums,.xl\:ordinal,.xl\:proportional-nums,.xl\:slashed-zero,.xl\:stacked-fractions,.xl\:tabular-nums{--tw-ordinal:var(--tw-empty, );/*!*//*!*/--tw-slashed-zero:var(--tw-empty, );/*!*//*!*/--tw-numeric-figure:var(--tw-empty, );/*!*//*!*/--tw-numeric-spacing:var(--tw-empty, );/*!*//*!*/--tw-numeric-fraction:var(--tw-empty, );/*!*//*!*/font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--tw-numeric-figure) var(--tw-numeric-spacing) var(--tw-numeric-fraction)}.xl\:normal-nums{font-variant-numeric:normal}.xl\:ordinal{--tw-ordinal:ordinal}.xl\:slashed-zero{--tw-slashed-zero:slashed-zero}.xl\:lining-nums{--tw-numeric-figure:lining-nums}.xl\:oldstyle-nums{--tw-numeric-figure:oldstyle-nums}.xl\:proportional-nums{--tw-numeric-spacing:proportional-nums}.xl\:tabular-nums{--tw-numeric-spacing:tabular-nums}.xl\:diagonal-fractions{--tw-numeric-fraction:diagonal-fractions}.xl\:stacked-fractions{--tw-numeric-fraction:stacked-fractions}.xl\:leading-3{line-height:.75rem}.xl\:leading-4{line-height:1rem}.xl\:leading-5{line-height:1.25rem}.xl\:leading-6{line-height:1.5rem}.xl\:leading-7{line-height:1.75rem}.xl\:leading-8{line-height:2rem}.xl\:leading-9{line-height:2.25rem}.xl\:leading-10{line-height:2.5rem}.xl\:leading-non0:focus{--tw-gradient-stops:var(--tw-grad.btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  border-radius: 0.2rem;
+}
+
+.btn-block {
+  display: block;
+  width: 100%;
+}
+
+.btn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+
+.fade:not(.show) {
+  opacity: 0;
+}
+
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsing {
+    tranu-sm-right {
+    right: 0;
+    left: auto;
+  }
+}
+
+@media (min-width: 768f3c7}.md\:to-yellow-200{--tw-gradient-to:#fde68a}.md\:to-yellow-300{--tw-gcity:1;color:rgba(229,231,235,var(--tw-text-opacity))}.xl\:text-gray-300{--tw-text-opacity:1;color:rgba(209,213,219,var(--tw-text-opacity))}.xl\:text-gray-400{--tw-text-opacity:1;color:rgba(156,163,175,var(--tw-text-opacity))}.xl\:text-gray-500{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}.xl\:text-gray-600{--tw-text-opacity:1;color:rgba(75,85,99,var(--tw-text-opacity))}.xl\:text-gray-700{--tw-text-opacity:1;color:rgba(55,65,81,vartn-block + .btn-block {
+  margin-top: 0.5rem;
+}
+
+input[type="submit"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.fade {
+  transition: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fade {
+    transition: no-red-100{--tw-text-opacity:1;color:rgba(254,226,226,var(--tw-text-opacity))}.xl\:text-red-200{--tw-text-opacity:1;color:rgba(254,202,202,var(--tw-text-opacity))}.xl\:text-red-300{--tw-text-opacity:1;color:rgba(252,165,165,var(--tw-text-opacity))}.xl\:text-red-400{--tw-text-opacity:1;color:rgba(248,113,113,var(--tw-text-opacity))}.xl\:text-red-500{--tw-text-opacity:1;color:rgba(239,68,68,var(--tw-text-opacity))}.xl\:text-red-600{--tw-text-opacity:1;color:rgba(220,38,38,var(--tw-text-opacity))}.xl\:text-red-700{--tw-text-opacity:1;color:rgba(185,28,28,var(--tw-text-opacity))}.xl\:text-red-800{--tw-text-opacity:1;color:rgba(153,27,27,var(--tw-text-opacity))}.xl\:text-red-900{--tw-text-opacity:1;color:rgba(127,29,29,var(--tw-text-opacity))}.xl\:text-yellow-50{--tw-text-opacity:1;color:rgba(255,251,235,var(--tw-text-opacity))}.xl\:text-yellow-100{--tw-text-opacity:1;color:rgba(254,243,199,var(--tw-text-opacity))}.xl\:text-yellow-200{--tw-text-opacity:1;color:rgba(253,230,138,var(--tw-text-opacity))}.xl\:text-yellow-300{--tw-text-opacity:1;color:rgba(252,211,77,var(--tw-text-opacity
