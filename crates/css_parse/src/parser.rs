@@ -352,16 +352,20 @@ where
 			}
 		}
 
+		let eof = eof_cursor(self.source_text.len());
 		loop {
 			let Some(c) = self.cursor_iter.next() else {
+				self.buffer = [eof; BUFFER_LEN];
+				self.buffer_index = 0;
 				return trivia;
 			};
 			if c == Kind::Eof {
+				self.buffer = [eof; BUFFER_LEN];
+				self.buffer_index = 0;
 				return trivia;
 			} else if c == self.skip {
 				trivia.push(c)
 			} else {
-				let eof = eof_cursor(self.source_text.len());
 				self.buffer[0] = c;
 				for i in 1..BUFFER_LEN {
 					self.buffer[i] = self.cursor_iter.next().unwrap_or(eof);

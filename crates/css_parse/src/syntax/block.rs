@@ -361,4 +361,14 @@ mod tests {
 			let _ = parser.parse::<Block<Decl, Rule, ()>>();
 		}
 	}
+
+	#[test]
+	fn test_trailing_error_kinds_do_not_oom() {
+		let bump = bumpalo::Bump::new();
+		for src in ["{)))))))))))))", "{))))))))))))))", "{\r)))))))))))))"] {
+			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
+			let mut parser = crate::Parser::new(&bump, src, lexer);
+			let _ = parser.parse::<Block<Decl, Rule, ()>>();
+		}
+	}
 }
