@@ -224,9 +224,6 @@ impl<'a> SelectorComponentTrait<'a> for SelectorComponent<'a> {
 mod tests {
 	use super::*;
 	use crate::{CssAtomSet, specificity::ToSpecificity};
-	use bumpalo::Bump;
-	use css_lexer::Lexer;
-	use css_parse::Parser;
 	use css_parse::assert_parse;
 
 	#[test]
@@ -286,6 +283,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "button:-moz-focusring");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::view-transition-group(*)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::view-transition-new(thing.foo.bar.baz)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":is(.a,#b)");
 	}
 
 	#[test]
@@ -320,26 +318,12 @@ mod tests {
 	}
 
 	macro_rules! assert_specificity {
-		($sel:literal, $a:literal, $b:literal, $c:literal) => {{
-			let bump = Bump::default();
-			let lexer = Lexer::new(&CssAtomSet::ATOMS, $sel);
-			let mut parser = Parser::new(&bump, $sel, lexer);
-			let result = parser.parse_entirely::<SelectorList>().with_trivia();
-			assert!(result.errors.is_empty(), "parse failed for {:?}: {:?}", $sel, result.errors);
-			let s = result.output.unwrap().specificity();
-			assert_eq!(
-				s,
-				Specificity($a, $b, $c),
-				"selector {:?}: expected ({},{},{}) got ({},{},{})",
-				$sel,
-				$a,
-				$b,
-				$c,
-				s.0,
-				s.1,
-				s.2
-			);
-		}};
+		($sel:literal, $a:literal, $b:literal, $c:literal) => {
+			assert_parse!(CssAtomSet::ATOMS, SelectorList, $sel, |s| assert_eq!(
+				s.specificity(),
+				Specificity($a, $b, $c)
+			));
+		};
 	}
 
 	#[test]
@@ -364,12 +348,12 @@ mod tests {
 		assert_specificity!("a.foo:hover", 0, 2, 1);
 		assert_specificity!("#a.b", 1, 1, 0);
 		assert_specificity!(":where(.a.b)", 0, 0, 0);
-		assert_specificity!(":is(.a, #b)", 1, 0, 0);
-		assert_specificity!(":not(.a, .b)", 0, 1, 0);
+		assert_specificity!(":is(.a,#b)", 1, 0, 0);
+		assert_specificity!(":not(.a,.b)", 0, 1, 0);
 		assert_specificity!("a:has(.b)", 0, 1, 1);
 		assert_specificity!(":nth-child(2)", 0, 1, 0);
 		assert_specificity!(":nth-of-type(2n+1)", 0, 1, 0);
-		assert_specificity!(".a, #b", 1, 0, 0);
+		assert_specificity!(".a,#b", 1, 0, 0);
 	}
 
 	#[test]
