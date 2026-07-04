@@ -1,5 +1,5 @@
 use crate::{FieldsExt, WhereCollector};
-use itertools::{Itertools, Position};
+use itertools::Itertools;
 use proc_macro2::TokenStream;
 use quote::quote;
 use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Result, parse_quote};
@@ -26,43 +26,55 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 					.iter()
 					.take_while_inclusive(|(_, is_option)| *is_option)
 					.with_position()
-					.map(|(position, (member, _))| match position {
-						Position::Only => quote! { let first = self.#member.to_span(); },
-						Position::First => quote! {
-							let first = if let Some(ref value) = self.#member {
-								value.to_span()
-							}
-						},
-						Position::Middle => quote! {
-							else if let Some(ref value) = self.#member {
-								value.to_span()
-							}
-						},
-						Position::Last => quote! {
-							else {
-								self.#member.to_span()
-							};
-						},
-					})
-					.chain(members.iter().rev().take_while_inclusive(|(_, is_option)| *is_option).with_position().map(
-						|(position, (member, _))| match position {
-							Position::Only => quote! { first + self.#member.to_span() },
-							Position::First => quote! {
-								let last = if let Some(ref value) = self.#member {
+					.map(|(position, (member, _))| {
+						if position.is_exactly_one() {
+							quote! { let first = self.#member.to_span(); }
+						} else if position.is_first {
+							quote! {
+								let first = if let Some(ref value) = self.#member {
 									value.to_span()
 								}
-							},
-							Position::Middle => quote! {
-								else if let Some(ref value) = self.#member {
-									value.to_span()
-								}
-							},
-							Position::Last => quote! {
+							}
+						} else if position.is_last() {
+							quote! {
 								else {
 									self.#member.to_span()
 								};
-								first + last
-							},
+							}
+						} else {
+							debug_assert!(position.is_middle());
+							quote! {
+							   else if let Some(ref value) = self.#member {
+								   value.to_span()
+							   }
+							}
+						}
+					})
+					.chain(members.iter().rev().take_while_inclusive(|(_, is_option)| *is_option).with_position().map(
+						|(position, (member, _))| {
+							if position.is_exactly_one() {
+								quote! { first + self.#member.to_span() }
+							} else if position.is_first() {
+								quote! {
+									let last = if let Some(ref value) = self.#member {
+										value.to_span()
+									}
+								}
+							} else if position.is_last() {
+								quote! {
+									else {
+										self.#member.to_span()
+									};
+									first + last
+								}
+							} else {
+								debug_assert!(position.is_middle());
+								quote! {
+									else if let Some(ref value) = self.#member {
+										value.to_span()
+									}
+								}
+							}
 						},
 					))
 					.collect()

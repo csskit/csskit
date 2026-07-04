@@ -530,7 +530,7 @@ struct AtomDispatchPlan<'a> {
 
 impl<'a> AtomDispatchPlan<'a> {
 	fn new(first_type: Type, variants: Vec<&'a VariantPlan>, position: &Position) -> Self {
-		Self { first_type, variants, is_last: matches!(position, Position::Last | Position::Only) }
+		Self { first_type, variants, is_last: position.is_last() || position.is_exactly_one() }
 	}
 }
 
@@ -592,7 +592,7 @@ struct PeekedFallbackPlan<'a> {
 
 impl<'a> PeekedFallbackPlan<'a> {
 	fn new(variants: Vec<&'a VariantPlan>, position: &Position) -> Self {
-		Self { variants, is_last: matches!(position, Position::Last | Position::Only) }
+		Self { variants, is_last: position.is_last() || position.is_exactly_one() }
 	}
 }
 
