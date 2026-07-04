@@ -116,7 +116,7 @@ pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 }
 
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-#[derive(ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum WebkitFunctionalPseudoClass<'a> {
 	Any(WebkitAnyFunctionalPseudoClass<'a>),
