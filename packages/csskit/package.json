@@ -1,39 +1,39 @@
 {
-	"name": "csskit",
-	"version": "0.0.26",
-	"description": "Refreshing CSS",
-	"keywords": [],
-	"repository": "https://github.com/csskit/csskit",
-	"funding": {
-		"url": "https://github.com/sponsors/keithamus"
-	},
-	"license": "MIT",
-	"author": "Keith Cirkel (https://keithcirkel.co.uk)",
-	"exports": {
-		".": "./index.js",
-		"./bundler": "./bundle/csskit_wasm.js",
-		"./wasm": "./bundle/csskit_wasm_bg.wasm",
-		"./bin/csskit": "./bin/csskit"
-	},
-	"main": "./index.js",
-	"bin": "./bin/csskit",
-	"files": [
-		"./bin",
-		"./index.js",
-		"./index.d.ts",
-		"./csskit_wasm_bg.wasm",
-		"./csskit_wasm_bg.wasm.d.ts",
-		"./bundle"
-	],
-	"optionalDependencies": {
-		"csskit-darwin-arm64": "0.0.26",
-		"csskit-darwin-x64": "0.0.26",
-		"csskit-linux-arm64": "0.0.26",
-		"csskit-linux-x64": "0.0.26",
-		"csskit-win32-arm64": "0.0.26",
-		"csskit-win32-x64": "0.0.26"
-	},
-	"allowScripts": {
-		"wasm-opt@1.4.0": true
-	}
+    "name": "csskit",
+    "version": "0.0.27",
+    "description": "Refreshing CSS",
+    "keywords": [],
+    "repository": "https://github.com/csskit/csskit",
+    "funding": {
+        "url": "https://github.com/sponsors/keithamus"
+    },
+    "license": "MIT",
+    "author": "Keith Cirkel (https://keithcirkel.co.uk)",
+    "exports": {
+        ".": "./index.js",
+        "./bundler": "./bundle/csskit_wasm.js",
+        "./wasm": "./bundle/csskit_wasm_bg.wasm",
+        "./bin/csskit": "./bin/csskit"
+    },
+    "main": "./index.js",
+    "bin": "./bin/csskit",
+    "files": [
+        "./bin",
+        "./index.js",
+        "./index.d.ts",
+        "./csskit_wasm_bg.wasm",
+        "./csskit_wasm_bg.wasm.d.ts",
+        "./bundle"
+    ],
+    "optionalDependencies": {
+        "csskit-darwin-arm64": "0.0.27",
+        "csskit-darwin-x64": "0.0.27",
+        "csskit-linux-arm64": "0.0.27",
+        "csskit-linux-x64": "0.0.27",
+        "csskit-win32-arm64": "0.0.27",
+        "csskit-win32-x64": "0.0.27"
+    },
+    "allowScripts": {
+        "wasm-opt@1.4.0": true
+    }
 }
