@@ -1,3 +1,36 @@
+## [0.0.27] - 2026-07-04
+
+### Other Changes
+- Fuzz: minimize corpus, and do so on nightly fuzz build (#1257) ([#1257](https://github.com/csskit/csskit/pull/1257))
+- CI: Ensure benches build (#1259) ([#1259](https://github.com/csskit/csskit/pull/1259))
+
+
+### Css_ast
+- css_ast/css_parse: Improve peeking robustness. (#1238) ([#1238](https://github.com/csskit/csskit/pull/1238))
+- Regenerate css_ast/src/values from csswg drafts (#1242) ([#1242](https://github.com/csskit/csskit/pull/1242))
+- Regenerate css_ast/src/values from csswg drafts (#1254) ([#1254](https://github.com/csskit/csskit/pull/1254))
+- fuzz: new parser findings 2026-06-19 (#1232) ([#1232](https://github.com/csskit/csskit/pull/1232))
+- css_ast: Refactor assert_specificity to use closure pattern (#1261) ([#1261](https://github.com/csskit/csskit/pull/1261))
+- css_ast: derive(ToSpan) on WebkitFunctionalPseudoClass (#1262) ([#1262](https://github.com/csskit/csskit/pull/1262))
+- Implement "VisitFlow" (#1263) ([#1263](https://github.com/csskit/csskit/pull/1263))
+
+
+### Css_parse
+- fuzz: new parser findings 2026-07-01 (#1260) ([#1260](https://github.com/csskit/csskit/pull/1260))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1243) ([#1243](https://github.com/csskit/csskit/pull/1243))
+
+
+### Csskit_derives
+- chore(deps): update rust crate itertools to 0.15.0 (#1246) ([#1246](https://github.com/csskit/csskit/pull/1246))
+
+
+### Csskit_vscode
+- chore(deps): update dependencies to v1.68.0 (#1247) ([#1247](https://github.com/csskit/csskit/pull/1247))
+- fix(deps): update dependencies (patch) (#1255) ([#1255](https://github.com/csskit/csskit/pull/1255))
+
 ## [0.0.26] - 2026-06-20
 
 ### Other Changes
@@ -22,6 +55,7 @@
 - csskit_wasm/csskit(node): Provide csskit library functions in csskit package (#1234) ([#1234](https://github.com/csskit/csskit/pull/1234))
 - csskit(node): manage wasm-opt with mise (#1235) ([#1235](https://github.com/csskit/csskit/pull/1235))
 - csskit(node): Move build script to Mise (#1237) ([#1237](https://github.com/csskit/csskit/pull/1237))
+- Release v0.0.26 (#1224) ([#1224](https://github.com/csskit/csskit/pull/1224))
 
 ## [0.0.25] - 2026-06-13
 
