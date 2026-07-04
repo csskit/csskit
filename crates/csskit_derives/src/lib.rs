@@ -16,6 +16,7 @@ mod semantic_eq;
 mod to_cursors;
 mod to_span;
 mod visitable;
+mod visitor;
 mod where_collector;
 
 use field_view::FieldsExt;
@@ -93,4 +94,10 @@ pub fn derive_declaration_metadata(stream: TokenStream) -> TokenStream {
 #[proc_macro_derive(SemanticEq, attributes(semantic_eq))]
 pub fn derive_semantic_eq(stream: TokenStream) -> TokenStream {
 	run(stream, semantic_eq::derive)
+}
+
+#[proc_macro_attribute]
+pub fn visitor(_attr: TokenStream, item: TokenStream) -> TokenStream {
+	let item = syn::parse_macro_input!(item as syn::ItemImpl);
+	visitor::expand(item).unwrap_or_else(|e| e.into_compile_error()).into()
 }

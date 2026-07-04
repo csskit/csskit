@@ -18,15 +18,15 @@ impl crate::VisitableMut for Display {
 }
 #[automatically_derived]
 impl crate::Visitable for Display {
-    fn accept<V: crate::Visit>(&self, v: &mut V) {
+    fn accept<V: crate::Visit>(&self, v: &mut V) -> visit_flow::VisitFlow {
         use crate::Visitable;
-        match self {
-            Self::Block(__binding_0) => {
-                __binding_0.accept(v);
-            }
-            Self::Inline(__binding_0) => {
-                __binding_0.accept(v);
-            }
-        }
+        visit_flow::try_visit!(
+            { match self { Self::Block(__binding_0) => {
+            visit_flow::try_visit!(__binding_0.accept(v)); < visit_flow::VisitFlow as
+            visit_flow::VisitFlowExt > ::DESCEND }, Self::Inline(__binding_0) => {
+            visit_flow::try_visit!(__binding_0.accept(v)); < visit_flow::VisitFlow as
+            visit_flow::VisitFlowExt > ::DESCEND }, } }
+        );
+        <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
     }
 }

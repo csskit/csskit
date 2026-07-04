@@ -158,7 +158,7 @@ impl Extract for Find {
 
 	fn build_context<'a>(&self, stylesheet: &StyleSheet<'a>, _src: &str) -> TokenHighlighter {
 		let mut highlighter = TokenHighlighter::new();
-		stylesheet.accept(&mut highlighter);
+		let _ = stylesheet.accept(&mut highlighter);
 		highlighter
 	}
 

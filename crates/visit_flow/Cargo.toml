@@ -1,0 +1,15 @@
+[package]
+name = "visit-flow"
+version.workspace = true
+authors.workspace = true
+description = "Zero-dependency visitor control-flow primitives: VisitFlow and the try_visit! macro."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]

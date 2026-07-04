@@ -1,0 +1,9 @@
+---
+source: crates/csskit_derives/src/test/test_visitor.rs
+expression: out
+---
+impl Visit for V {
+    fn consider_node(&self, q: VisitNode) -> VisitFlow {
+        VisitFlow::SKIP_CHILDREN
+    }
+}

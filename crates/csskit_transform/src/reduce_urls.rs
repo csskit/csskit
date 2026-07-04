@@ -18,14 +18,14 @@ where
 	}
 }
 
+#[visitor]
 impl<'a, 'ctx, N> Visit for ReduceUrls<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn visit_url_or_string(&mut self, url_or_string: &UrlOrString) {
-		let url = match url_or_string {
-			UrlOrString::Url(url) => url,
-			UrlOrString::String(_) => return,
+		let UrlOrString::Url(url) = url_or_string else {
+			return;
 		};
 		match url {
 			Url::UrlFunction(_, string, _) | Url::SrcFunction(_, string, _) => {

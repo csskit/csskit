@@ -19,6 +19,7 @@ css_ast = { workspace = true, features = [
 ] } # @release
 css_lexer = { workspace = true } # @release
 css_parse = { workspace = true } # @release
+visit_flow = { workspace = true } # @release
 chromashift = { workspace = true } # @release
 
 bitmask-enum = { workspace = true }

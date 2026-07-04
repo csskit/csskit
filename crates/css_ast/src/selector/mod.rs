@@ -363,4 +363,59 @@ mod tests {
 		assert_specificity!("table tr:not(:first-child):hover td:nth-child(2n+1)", 0, 3, 3);
 		assert_specificity!("input[type='checkbox'][checked]:indeterminate + label", 0, 3, 2);
 	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn visit_flow_baseline() {
+		use crate::test_helpers::{ControlFlowTestVisitor, assert_visit_flow};
+		assert_visit_flow!(
+			".foo, #bar", SelectorList, ControlFlowTestVisitor::new(),
+			entered: [SelectorList, CompoundSelector, Class, CompoundSelector, Id],
+			exited: [Class, CompoundSelector, Id, CompoundSelector, SelectorList],
+		);
+	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn visit_flow_stop() {
+		use crate::test_helpers::{ControlFlowTestVisitor, assert_visit_flow};
+		use visit_flow::{VisitBreak, VisitFlow, VisitFlowExt};
+		assert_visit_flow!(
+			".foo, #bar", SelectorList,
+			ControlFlowTestVisitor::with_callback(|id| {
+				if id == NodeId::CompoundSelector { VisitFlow::STOP } else { VisitFlow::DESCEND }
+			}),
+			entered: [SelectorList, CompoundSelector],
+			exited: [],
+			result: VisitFlow::Break(VisitBreak::Stop),
+		);
+	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn visit_flow_skip_children() {
+		use crate::test_helpers::{ControlFlowTestVisitor, assert_visit_flow};
+		use visit_flow::{VisitFlow, VisitFlowExt};
+		assert_visit_flow!(
+			".foo, #bar", SelectorList,
+			ControlFlowTestVisitor::with_callback(|id| {
+				if id == NodeId::CompoundSelector { VisitFlow::SKIP_CHILDREN } else { VisitFlow::DESCEND }
+			}),
+			entered: [SelectorList, CompoundSelector, CompoundSelector],
+			exited: [CompoundSelector, CompoundSelector, SelectorList],
+		);
+	}
+
+	#[test]
+	#[cfg(feature = "visitable")]
+	fn visit_flow_filter() {
+		use crate::test_helpers::{ControlFlowTestVisitor, assert_visit_flow};
+		use css_lexer::{SourceOffset, Span};
+		assert_visit_flow!(
+			".foo, #bar", SelectorList,
+			ControlFlowTestVisitor::with_span_filter(Span::new(SourceOffset(0), SourceOffset(4))),
+			entered: [SelectorList, CompoundSelector, Class],
+			exited: [Class, CompoundSelector, SelectorList],
+		);
+	}
 }

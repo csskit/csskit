@@ -108,7 +108,7 @@ macro_rules! assert_highlight {
 		let mut actual = String::new_in(&bump);
 		let mut cursors = HTMLHighlightCursorStream::new($str, &mut actual);
 		let node = result.output.clone().unwrap();
-		node.accept(&mut cursors.highlighter);
+		let _ = node.accept(&mut cursors.highlighter);
 		result.to_cursors(&mut cursors);
 		cursors.finish();
 		::insta::assert_snapshot!($name, actual)

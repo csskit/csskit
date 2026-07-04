@@ -2,7 +2,8 @@ use std::io::Read;
 
 use bumpalo::Bump;
 use clap::Args;
-use css_ast::visit::{QueryableNode, Visit, Visitable};
+use css_ast::VisitNode;
+use css_ast::visit::{Visit, Visitable, visitor};
 use css_ast::{CssAtomSet, PROPERTY_KIND_VARIANTS, PropertyKind, StyleSheet};
 use css_lexer::Lexer;
 use css_parse::{Cursor, Parser, ToSpan};
@@ -43,16 +44,17 @@ impl<'a> CollectionVisitor<'a> {
 		Self { source, nodes: Vec::new(), depth: 0 }
 	}
 
-	fn build_display<T: QueryableNode>(&self, node: &T) -> String {
-		let meta = node.self_metadata();
-		let mut display = node.node_id().tag_name().to_string();
+	fn build_display(&self, query: &VisitNode) -> String {
+		let meta = query.self_metadata();
+		let meta = &meta;
+		let mut display = query.node_id.expect("tree output only displays queryable nodes").tag_name().to_string();
 
 		// Attributes
 		for &kind in PROPERTY_KIND_VARIANTS {
 			if !meta.property_kinds.contains(kind) {
 				continue;
 			}
-			if let Some(cursor) = node.get_property(kind) {
+			if let Some(cursor) = query.property(kind) {
 				let value = self.cursor_to_str(cursor);
 				let attr_name = match kind {
 					PropertyKind::Name => "name",
@@ -63,11 +65,11 @@ impl<'a> CollectionVisitor<'a> {
 		}
 
 		// Pseudos
-		for name in QueryPseudoClass::matching_metadata_pseudos(&meta) {
+		for name in QueryPseudoClass::matching_metadata_pseudos(meta) {
 			display.push(':');
 			display.push_str(name);
 		}
-		if let Some(size) = QueryFunctionalPseudoClass::matching_size(&meta) {
+		if let Some(size) = QueryFunctionalPseudoClass::matching_size(meta) {
 			display.push_str(&format!(":size({})", size));
 		}
 
@@ -112,15 +114,16 @@ impl<'a> CollectionVisitor<'a> {
 	}
 }
 
+#[visitor]
 impl<'a> Visit for CollectionVisitor<'a> {
-	fn visit_queryable_node<T: QueryableNode>(&mut self, node: &T) {
-		let display = self.build_display(node);
+	fn enter_node(&mut self, query: VisitNode) {
+		let display = self.build_display(&query);
 		let node_info = NodeInfo { display, depth: self.depth, child_start_idx: self.nodes.len() + 1 };
 		self.nodes.push(node_info);
 		self.depth += 1;
 	}
 
-	fn exit_queryable_node<T: QueryableNode>(&mut self, _node: &T) {
+	fn exit_node(&mut self, _query: VisitNode) {
 		self.depth -= 1;
 	}
 }
@@ -146,7 +149,7 @@ impl Tree {
 
 			// Collect all nodes
 			let mut visitor = CollectionVisitor::new(&src);
-			stylesheet.accept(&mut visitor);
+			let _ = stylesheet.accept(&mut visitor);
 
 			// Print root
 			if let Some(root) = visitor.nodes.first() {

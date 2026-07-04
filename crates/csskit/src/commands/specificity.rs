@@ -3,7 +3,7 @@ use crate::commands::{Extract, OutputFormat};
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::specificity::ToSpecificity;
-use css_ast::{CssAtomSet, SelectorList, StyleRule, StyleSheet, Visit, Visitable};
+use css_ast::{CssAtomSet, SelectorList, StyleRule, StyleSheet, Visit, Visitable, visitor};
 use css_lexer::{Lexer, Span};
 use css_parse::{Parser, ToSpan};
 use serde::Serialize;
@@ -36,6 +36,7 @@ impl<'a, 'out> SpecificityVisitor<'a, 'out> {
 	}
 }
 
+#[visitor]
 impl<'src, 'out> Visit for SpecificityVisitor<'src, 'out> {
 	fn visit_style_rule<'a>(&mut self, rule: &StyleRule<'a>) {
 		extract_selector_list(&rule.rule.prelude, self.source, self.out);
@@ -77,7 +78,7 @@ impl Extract for Specificity {
 
 	fn extract<'a>(&self, stylesheet: &StyleSheet<'a>, src: &str, out: &mut Vec<(Span, Self::Row)>) {
 		let mut visitor = SpecificityVisitor::new(src, out);
-		stylesheet.accept(&mut visitor);
+		let _ = stylesheet.accept(&mut visitor);
 	}
 
 	fn render_text(&self, _ctx: &(), _file: &str, _src: &str, _span: Span, row: &Self::Row, _color: bool) {

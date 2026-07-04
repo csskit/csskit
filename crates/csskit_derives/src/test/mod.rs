@@ -4,6 +4,7 @@ mod test_semantic_eq;
 mod test_to_cursors;
 mod test_to_span;
 mod test_visitable;
+mod test_visitor;
 
 #[macro_export]
 macro_rules! to_deriveinput {

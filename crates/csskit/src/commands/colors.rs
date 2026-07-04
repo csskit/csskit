@@ -22,7 +22,7 @@ fn extract_colors(src: &str, bump: &Bump) -> Result<Vec<(Color, Span)>, Vec<Diag
 	let mut parser = Parser::new(bump, src, lexer);
 	let result = parser.parse_entirely::<bumpalo::collections::Vec<ASTColor>>();
 	if let Some(output) = result.output.filter(|_| result.errors.is_empty()) {
-		output.accept(&mut visitor);
+		let _ = output.accept(&mut visitor);
 		return Ok(visitor.colors);
 	}
 
@@ -31,7 +31,7 @@ fn extract_colors(src: &str, bump: &Bump) -> Result<Vec<(Color, Span)>, Vec<Diag
 	let mut parser = Parser::new(bump, src, lexer);
 	let result = parser.parse_entirely::<StyleSheet>();
 	if let Some(stylesheet) = result.output {
-		stylesheet.accept(&mut visitor);
+		let _ = stylesheet.accept(&mut visitor);
 		Ok(visitor.colors)
 	} else {
 		Err(result.errors.to_vec())
@@ -49,6 +49,7 @@ impl ColorExtractor {
 	}
 }
 
+#[css_ast::visitor]
 impl css_ast::Visit for ColorExtractor {
 	fn visit_color(&mut self, color: &ASTColor) {
 		if let Some(raw_color) = color.to_chromashift() {
