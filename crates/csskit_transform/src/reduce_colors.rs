@@ -7,9 +7,6 @@ use css_ast::{
 
 pub struct ReduceColors<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
-	/// When true, the outer color-mix() is being replaced entirely, so inner
-	/// `visit_color` calls should be suppressed to avoid overlapping edits.
-	replacing_outer: bool,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceColors<'a, 'ctx, N>
@@ -21,7 +18,7 @@ where
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
-		Self { transformer, replacing_outer: false }
+		Self { transformer }
 	}
 }
 
@@ -168,14 +165,12 @@ impl ToCss for chromashift::Color {
 	}
 }
 
+#[visitor]
 impl<'a, 'ctx, N> Visit for ReduceColors<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn visit_color(&mut self, color: &Color) {
-		if self.replacing_outer {
-			return;
-		}
 		// color-mix() is handled by visit_color_mix_function
 		if let Color::Function(colorfn) = color
 			&& matches!(**colorfn, ColorFunction::ColorMix(_))
@@ -205,7 +200,7 @@ where
 		}
 	}
 
-	fn visit_color_mix_function<'b>(&mut self, mix: &ColorMixFunction<'b>) {
+	fn visit_color_mix_function<'b>(&mut self, mix: &ColorMixFunction<'b>) -> VisitFlow {
 		let outer_span = mix.to_span();
 		let outer_len = outer_span.len() as usize;
 
@@ -236,8 +231,7 @@ where
 				});
 				self.transformer.clear_pending_edits(outer_span);
 				self.transformer.replace_parsed::<Color>(outer_span, &str);
-				self.replacing_outer = true;
-				return;
+				return VisitFlow::SKIP_CHILDREN;
 			}
 		}
 
@@ -254,8 +248,7 @@ where
 					});
 					self.transformer.clear_pending_edits(outer_span);
 					self.transformer.replace_parsed::<Color>(outer_span, &str);
-					self.replacing_outer = true;
-					return;
+					return VisitFlow::SKIP_CHILDREN;
 				}
 			}
 		}
@@ -275,8 +268,7 @@ where
 				&& candidate.len() < outer_len
 			{
 				self.transformer.replace_parsed::<Color>(outer_span, candidate);
-				self.replacing_outer = true;
-				return;
+				return VisitFlow::SKIP_CHILDREN;
 			}
 		}
 
@@ -298,10 +290,7 @@ where
 		{
 			self.transformer.delete(hue_method.to_span());
 		}
-	}
-
-	fn exit_color_mix_function<'b>(&mut self, _mix: &ColorMixFunction<'b>) {
-		self.replacing_outer = false;
+		VisitFlow::DESCEND
 	}
 }
 

@@ -83,7 +83,7 @@ fn has_feature_metadata(attrs: &[Attribute]) -> bool {
 	})
 }
 
-fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector) -> TokenStream {
+fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector, use_try_visit: bool) -> TokenStream {
 	match &s.ast().data {
 		Data::Struct(ds) => {
 			let steps: Vec<TokenStream> = ds
@@ -97,10 +97,18 @@ fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector) -> Tok
 					}
 					wc.add(&syn_field.ty);
 					let m = &view.member;
-					Some(quote! { self.#m.#accept(v); })
+					if use_try_visit {
+						Some(quote! { visit_flow::try_visit!(self.#m.#accept(v)); })
+					} else {
+						Some(quote! { self.#m.#accept(v); })
+					}
 				})
 				.collect();
-			quote! { #(#steps)* }
+			if use_try_visit {
+				quote! { #(#steps)* <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND }
+			} else {
+				quote! { #(#steps)* }
+			}
 		}
 		Data::Enum(_) => {
 			let arms: TokenStream = s
@@ -124,13 +132,23 @@ fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector) -> Tok
 									(quote! { #field_name: _ }, quote! {})
 								} else {
 									wc.add(&bi.ast().ty);
-									(quote! { #field_name: #binding }, quote! { #binding.#accept(v) })
+									let call = if use_try_visit {
+										quote! { visit_flow::try_visit!(#binding.#accept(v)) }
+									} else {
+										quote! { #binding.#accept(v) }
+									};
+									(quote! { #field_name: #binding }, call)
 								}
 							} else if skip_field {
 								(quote! { _ }, quote! {})
 							} else {
 								wc.add(&bi.ast().ty);
-								(quote! { #binding }, quote! { #binding.#accept(v) })
+								let call = if use_try_visit {
+									quote! { visit_flow::try_visit!(#binding.#accept(v)) }
+								} else {
+									quote! { #binding.#accept(v) }
+								};
+								(quote! { #binding }, call)
 							}
 						})
 						.unzip();
@@ -142,7 +160,11 @@ fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector) -> Tok
 					} else {
 						quote! { Self::#var_ident(#(#patterns),*) }
 					};
-					quote! { #pattern => { #(#calls;)* }, }
+					if use_try_visit {
+						quote! { #pattern => { #(#calls;)* <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND }, }
+					} else {
+						quote! { #pattern => { #(#calls;)* }, }
+					}
 				})
 				.collect();
 			quote! { match self { #arms } }
@@ -166,16 +188,10 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let ident = &input.ident;
 	let (impl_generics, type_generics, _) = input.generics.split_for_impl();
 
-	let (visit, exit) = if style.visit_self() {
+	let (visit_mut, exit_mut) = if style.visit_self() {
 		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
 		let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
 		(quote! { v.#visit_method(self); }, quote! { v.#exit_method(self); })
-	} else {
-		(quote! {}, quote! {})
-	};
-
-	let (visit_queryable, exit_queryable) = if is_queryable {
-		(quote! { v.visit_queryable_node(self); }, quote! { v.exit_queryable_node(self); })
 	} else {
 		(quote! {}, quote! {})
 	};
@@ -194,11 +210,50 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let (body_mut, body) = if style.visit_children() {
 		let accept_mut = format_ident!("accept_mut");
 		let accept = format_ident!("accept");
-		let b_mut = make_body(&s, &accept_mut, &mut wc);
-		let b = make_body(&s, &accept, &mut wc);
+		let b_mut = make_body(&s, &accept_mut, &mut wc, false);
+		let b = make_body(&s, &accept, &mut wc, true);
 		(b_mut, b)
 	} else {
-		(quote! {}, quote! {})
+		(quote! {}, quote! { <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND })
+	};
+
+	let accept_body = if is_queryable {
+		let node_var = quote! { __node };
+		let children_block = if style.visit_self() {
+			let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
+			let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
+			quote! {
+				if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.#visit_method(self)) {
+					visit_flow::try_visit!({ #body });
+				}
+				visit_flow::try_visit!(v.#exit_method(self));
+			}
+		} else {
+			quote! { visit_flow::try_visit!({ #body }); }
+		};
+		quote! {
+			let #node_var = crate::QueryableNode::visit_node(self);
+			if let visit_flow::VisitAction::SkipChildren = visit_flow::try_visit!(v.consider_node(#node_var)) {
+				return <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND;
+			}
+			#visit_feature
+			if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.enter_node(#node_var)) {
+				#children_block
+			}
+			visit_flow::try_visit!(v.exit_node(#node_var));
+			#exit_feature
+		}
+	} else if style.visit_self() {
+		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
+		let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
+		quote! {
+			if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.#visit_method(self)) {
+				visit_flow::try_visit!({ #body });
+			}
+			visit_flow::try_visit!(v.#exit_method(self));
+		}
+	} else {
+		quote! { visit_flow::try_visit!({ #body }); }
 	};
 
 	let where_clause = wc.extend_where_clause(&input.generics, parse_quote! { crate::Visitable });
@@ -222,23 +277,18 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		impl #impl_generics crate::VisitableMut for #ident #type_generics #mut_where_clause {
 			fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
 				use crate::VisitableMut;
-				#visit
+				#visit_mut
 				#body_mut
-				#exit
+				#exit_mut
 			}
 		}
 
 		#[automatically_derived]
 		impl #impl_generics crate::Visitable for #ident #type_generics #where_clause {
-			fn accept<V: crate::Visit>(&self, v: &mut V) {
+			fn accept<V: crate::Visit>(&self, v: &mut V) -> visit_flow::VisitFlow {
 				use crate::Visitable;
-				#visit_queryable
-				#visit_feature
-				#visit
-				#body
-				#exit
-				#exit_feature
-				#exit_queryable
+				#accept_body
+				<visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
 			}
 		}
 

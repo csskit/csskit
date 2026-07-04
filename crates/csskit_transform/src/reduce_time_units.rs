@@ -18,6 +18,7 @@ where
 	}
 }
 
+#[visitor]
 impl<'a, 'ctx, N> Visit for ReduceTimeUnits<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,

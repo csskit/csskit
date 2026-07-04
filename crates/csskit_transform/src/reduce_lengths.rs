@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use css_ast::{DeclarationValue, Length, QueryableNode, UnitlessZeroResolves, Visitable};
+use css_ast::{DeclarationValue, Length, UnitlessZeroResolves, VisitNode, Visitable};
 use css_parse::Declaration;
 use std::cell::Cell;
 
@@ -23,20 +23,23 @@ where
 	}
 }
 
+#[visitor]
 impl<'a, 'ctx, N> Visit for ReduceLengths<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
-	fn visit_declaration<'b, T: DeclarationValue<'b, CssMetadata> + QueryableNode>(
+	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
 		&mut self,
 		decl: &Declaration<'b, T, CssMetadata>,
+		_query: VisitNode,
 	) {
 		self.unitless_zero_resolves.set(decl.metadata().unitless_zero_resolves);
 	}
 
-	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata> + QueryableNode>(
+	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
 		&mut self,
 		_decl: &Declaration<'b, T, CssMetadata>,
+		_query: VisitNode,
 	) {
 		self.unitless_zero_resolves.set(UnitlessZeroResolves::Length);
 	}

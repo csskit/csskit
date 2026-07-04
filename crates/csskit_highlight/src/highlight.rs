@@ -14,7 +14,7 @@ pub struct CssHighlighter {
 impl CssHighlighter {
 	pub fn new(source: String, stylesheet: &StyleSheet) -> Self {
 		let mut token_colors = TokenHighlighter::new();
-		stylesheet.accept(&mut token_colors);
+		let _ = stylesheet.accept(&mut token_colors);
 		Self { source, token_colors }
 	}
 }

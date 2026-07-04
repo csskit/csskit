@@ -23,20 +23,19 @@ impl crate::VisitableMut for FlexWrap {
 }
 #[automatically_derived]
 impl crate::Visitable for FlexWrap {
-    fn accept<V: crate::Visit>(&self, v: &mut V) {
+    fn accept<V: crate::Visit>(&self, v: &mut V) -> visit_flow::VisitFlow {
         use crate::Visitable;
-        match self {
-            Self::Nowrap(__binding_0) => {
-                __binding_0.accept(v);
-            }
-            Self::Wrap { wrap: __binding_0, balance: __binding_1 } => {
-                __binding_0.accept(v);
-                __binding_1.accept(v);
-            }
-            Self::WrapReverse { wrap_reverse: __binding_0, balance: __binding_1 } => {
-                __binding_0.accept(v);
-                __binding_1.accept(v);
-            }
-        }
+        visit_flow::try_visit!(
+            { match self { Self::Nowrap(__binding_0) => {
+            visit_flow::try_visit!(__binding_0.accept(v)); < visit_flow::VisitFlow as
+            visit_flow::VisitFlowExt > ::DESCEND }, Self::Wrap { wrap : __binding_0,
+            balance : __binding_1 } => { visit_flow::try_visit!(__binding_0.accept(v));
+            visit_flow::try_visit!(__binding_1.accept(v)); < visit_flow::VisitFlow as
+            visit_flow::VisitFlowExt > ::DESCEND }, Self::WrapReverse { wrap_reverse :
+            __binding_0, balance : __binding_1 } => { visit_flow::try_visit!(__binding_0
+            .accept(v)); visit_flow::try_visit!(__binding_1.accept(v)); <
+            visit_flow::VisitFlow as visit_flow::VisitFlowExt > ::DESCEND }, } }
+        );
+        <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
     }
 }

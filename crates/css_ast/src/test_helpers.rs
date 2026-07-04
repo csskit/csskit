@@ -107,6 +107,35 @@ macro_rules! assert_visits {
 	}};
 }
 
+/// Parse `$source` as `$ty`, run a [`ControlFlowTestVisitor`] over it, and assert the
+/// `entered`/`exited` node sequences (and optionally the resulting [`VisitFlow`]).
+///
+/// Node names are bare idents; the macro prefixes them with `NodeId::`. The visitor is
+/// configured with either `descend` (no control flow), a `callback: |id| ...` returning
+/// a [`VisitFlow`], or a `span_filter: <Span>`.
+#[cfg(feature = "visitable")]
+macro_rules! assert_visit_flow {
+	($source:expr, $ty:ty, $visitor:expr,
+		entered: [$($enter:ident),* $(,)?],
+		exited: [$($exit:ident),* $(,)?]
+		$(, result: $result:pat)? $(,)?
+	) => {{
+		use $crate::Visitable;
+		use $crate::NodeId;
+		let bump = bumpalo::Bump::new();
+		let lexer = css_lexer::Lexer::new(&$crate::CssAtomSet::ATOMS, $source);
+		let mut parser = css_parse::Parser::new(&bump, $source, lexer);
+		let parsed = parser.parse_entirely::<$ty>().output.expect("parse failed");
+		let mut v = $visitor;
+		let _result = parsed.accept(&mut v);
+		assert_eq!(v.entered(), vec![$(NodeId::$enter),*], "entered mismatch for {:?}", $source);
+		assert_eq!(v.exited(), vec![$(NodeId::$exit),*], "exited mismatch for {:?}", $source);
+		$(assert!(matches!(_result, $result), "result mismatch for {:?}: got {:?}", $source, _result);)?
+	}};
+}
+#[cfg(feature = "visitable")]
+pub(crate) use assert_visit_flow;
+
 #[cfg(feature = "css_feature_data")]
 #[macro_export]
 macro_rules! assert_feature_id {
@@ -124,6 +153,71 @@ macro_rules! assert_feature_id {
 		}
 		assert_eq!(result.output.unwrap().to_css_feature().unwrap().id, $id);
 	}};
+}
+
+/// A visitor for testing `VisitFlow` control: `Stop`, `SkipChildren`, and span filtering.
+///
+/// Records enter/exit events for every queryable node visited. The `on_visit` callback
+/// controls what `VisitFlow` is returned from `enter_node`, allowing tests to
+/// simulate early termination or child-skipping without writing a bespoke visitor each time.
+#[cfg(feature = "visitable")]
+use visit_flow::{VisitFlow, VisitFlowExt};
+
+#[cfg(feature = "visitable")]
+pub(crate) struct ControlFlowTestVisitor {
+	pub events: Vec<(bool, crate::NodeId)>, // (is_enter, node_id)
+	span_filter: Option<css_lexer::Span>,
+	on_visit: Box<dyn Fn(crate::NodeId) -> VisitFlow>,
+}
+
+#[cfg(feature = "visitable")]
+impl ControlFlowTestVisitor {
+	/// Records all nodes without any control flow.
+	pub fn new() -> Self {
+		Self::with_callback(|_| VisitFlow::DESCEND)
+	}
+
+	pub fn with_callback(on_visit: impl Fn(crate::NodeId) -> VisitFlow + 'static) -> Self {
+		Self { events: Vec::new(), span_filter: None, on_visit: Box::new(on_visit) }
+	}
+
+	/// Only visit nodes whose span overlaps `span`.
+	pub fn with_span_filter(span: css_lexer::Span) -> Self {
+		Self { events: Vec::new(), span_filter: Some(span), on_visit: Box::new(|_| VisitFlow::DESCEND) }
+	}
+
+	pub fn entered(&self) -> Vec<crate::NodeId> {
+		self.events.iter().filter_map(|(enter, id)| enter.then_some(*id)).collect()
+	}
+
+	pub fn exited(&self) -> Vec<crate::NodeId> {
+		self.events.iter().filter_map(|(enter, id)| (!enter).then_some(*id)).collect()
+	}
+}
+
+#[cfg(feature = "visitable")]
+impl crate::Visit for ControlFlowTestVisitor {
+	fn consider_node(&self, node: crate::VisitNode) -> VisitFlow {
+		if let Some(filter_span) = self.span_filter {
+			let span = node.span;
+			// Prune if no overlap: span must share at least one byte with filter_span.
+			if span.start() >= filter_span.end() || filter_span.start() >= span.end() {
+				return VisitFlow::SKIP_CHILDREN;
+			}
+		}
+		VisitFlow::DESCEND
+	}
+
+	fn enter_node(&mut self, node: crate::VisitNode) -> VisitFlow {
+		let node_id = node.node_id.unwrap();
+		self.events.push((true, node_id));
+		(self.on_visit)(node_id)
+	}
+
+	fn exit_node(&mut self, query: crate::VisitNode) -> VisitFlow {
+		self.events.push((false, query.node_id.unwrap()));
+		VisitFlow::DESCEND
+	}
 }
 
 #[cfg(all(test, feature = "visitable"))]

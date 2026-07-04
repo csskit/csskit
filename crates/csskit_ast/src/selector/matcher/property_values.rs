@@ -1,5 +1,5 @@
 use crate::QueryAttribute;
-use css_ast::visit::QueryableNode;
+use css_ast::visit::VisitNode;
 use css_ast::{AttributeOperator, CssAtomSet, PropertyKind};
 use css_parse::{AtomSet, Cursor};
 
@@ -12,8 +12,8 @@ pub struct PropertyValues {
 
 impl PropertyValues {
 	#[inline]
-	pub(crate) fn from_node<T: QueryableNode>(node: &T) -> Self {
-		Self { name: node.get_property(PropertyKind::Name) }
+	pub(crate) fn from_query(node: &VisitNode) -> Self {
+		Self { name: node.property(PropertyKind::Name) }
 	}
 
 	#[inline]

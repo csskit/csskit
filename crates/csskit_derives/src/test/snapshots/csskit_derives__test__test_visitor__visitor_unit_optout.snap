@@ -1,0 +1,9 @@
+---
+source: crates/csskit_derives/src/test/test_visitor.rs
+expression: out
+---
+impl VisitMut for V {
+    fn visit_color(&mut self, c: &Color) -> () {
+        self.seen.push(c);
+    }
+}

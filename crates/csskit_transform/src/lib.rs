@@ -7,9 +7,10 @@ pub use transformer::*;
 
 pub(crate) mod prelude {
 	pub(crate) use crate::{CssMinifierFeature, Transform, Transformer};
-	pub(crate) use css_ast::{CssMetadata, Visit};
+	pub(crate) use css_ast::{CssMetadata, Visit, visitor};
 	pub(crate) use css_lexer::ToSpan;
 	pub(crate) use css_parse::NodeWithMetadata;
+	pub(crate) use visit_flow::{VisitFlow, VisitFlowExt};
 }
 
 mod css_minifier;

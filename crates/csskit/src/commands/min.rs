@@ -51,7 +51,7 @@ impl Min {
 				let mut str = String::new();
 				if color {
 					let mut highlighter = TokenHighlighter::new();
-					stylesheet.accept(&mut highlighter);
+					let _ = stylesheet.accept(&mut highlighter);
 					let ansi = AnsiHighlightCursorStream::new(&mut str, &highlighter, DefaultAnsiTheme);
 					{
 						let mut stream = CursorOverlaySink::new(

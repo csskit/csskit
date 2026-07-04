@@ -108,7 +108,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		});
 
 		let buckets = SelectorBuckets::new(&self.selectors);
-		let nodes = self.collect_nodes(root);
+		let nodes = self.collect_nodes(root, &buckets);
 		for (idx, node) in nodes.iter().enumerate() {
 			for selector in buckets.selectors_for_node(&node.data) {
 				if self.matches_selector(selector, idx, &nodes) {
@@ -126,9 +126,13 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		self.matches.into_iter()
 	}
 
-	fn collect_nodes<T: Visitable + NodeWithMetadata<CssMetadata>>(&self, root: &T) -> Vec<TreeNode> {
-		let mut collector = NodeCollector::new();
-		root.accept(&mut collector);
+	fn collect_nodes<T: Visitable + NodeWithMetadata<CssMetadata>>(
+		&self,
+		root: &T,
+		buckets: &SelectorBuckets<'a, 'b>,
+	) -> Vec<TreeNode> {
+		let mut collector = NodeCollector::new(buckets);
+		let _ = root.accept(&mut collector);
 		collector.finalize(self.needs_type_tracking)
 	}
 

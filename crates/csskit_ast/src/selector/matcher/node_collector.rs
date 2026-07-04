@@ -1,7 +1,9 @@
-use super::NodeData;
-use css_ast::visit::{NodeId, QueryableNode, Visit};
+use super::{NodeData, SelectorBuckets};
+use css_ast::VisitNode;
+use css_ast::visit::{NodeId, Visit, visitor};
 use smallvec::SmallVec;
 use std::collections::HashMap;
+use visit_flow::{VisitFlow, VisitFlowExt};
 
 /// Sibling position data, computed lazily only when needed.
 #[derive(Clone, Copy, Default)]
@@ -31,16 +33,18 @@ pub(crate) struct TreeNode {
 }
 
 /// Collector visitor for building the node tree.
-pub(crate) struct NodeCollector {
+pub(crate) struct NodeCollector<'x, 'a, 'b> {
 	/// All collected nodes.
 	nodes: Vec<TreeNode>,
 	/// Stack of (node_index, children_nested) for tracking parent during traversal.
 	stack: Vec<(usize, bool)>,
+	/// Bucketed selectors, consulted to skip subtrees that can't contain any match.
+	buckets: &'x SelectorBuckets<'a, 'b>,
 }
 
-impl NodeCollector {
-	pub fn new() -> Self {
-		Self { nodes: Vec::new(), stack: Vec::new() }
+impl<'x, 'a, 'b> NodeCollector<'x, 'a, 'b> {
+	pub fn new(buckets: &'x SelectorBuckets<'a, 'b>) -> Self {
+		Self { nodes: Vec::new(), stack: Vec::new(), buckets }
 	}
 
 	pub fn finalize(mut self, needs_type_tracking: bool) -> Vec<TreeNode> {
@@ -90,16 +94,26 @@ impl NodeCollector {
 	}
 }
 
-impl Visit for NodeCollector {
-	fn visit_queryable_node<T: QueryableNode>(&mut self, node: &T) {
-		let node_id = node.node_id();
+#[visitor]
+impl<'x, 'a, 'b> Visit for NodeCollector<'x, 'a, 'b> {
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		// Only prune queryable nodes (which carry aggregated subtree metadata).
+		// Transparent nodes use VisitNode::new_transparent with empty metadata,
+		// so we can't make any pruning decision from it.
+		if node.node_id.is_some() && !self.buckets.subtree_can_match(&node.subtree_metadata()) {
+			return VisitFlow::SKIP_CHILDREN;
+		}
+		VisitFlow::DESCEND
+	}
+
+	fn enter_node(&mut self, query: VisitNode) {
+		let node_id = query.node_id.expect("NodeCollector only visits queryable nodes");
 
 		let (parent_idx, parent_children_nested) =
 			self.stack.last().map(|&(idx, nested)| (Some(idx), nested)).unwrap_or((None, false));
 
-		let node_data = NodeData::from_node(node);
+		let node_data = NodeData::from_query(query);
 		let node_idx = self.nodes.len();
-
 		let is_nested = parent_children_nested;
 
 		self.nodes.push(TreeNode {
@@ -119,7 +133,7 @@ impl Visit for NodeCollector {
 		self.stack.push((node_idx, children_nested));
 	}
 
-	fn exit_queryable_node<T: QueryableNode>(&mut self, _: &T) {
+	fn exit_node(&mut self, _query: VisitNode) {
 		self.stack.pop();
 	}
 }

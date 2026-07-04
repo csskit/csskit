@@ -15,6 +15,7 @@ bench = false
 [dependencies]
 css_parse = { workspace = true }                         # @release
 css_lexer = { workspace = true }                         # @release
+visit_flow = { workspace = true }                        # @release
 csskit_proc_macro = { workspace = true }                 # @release
 csskit_derives = { workspace = true }                    # @release
 derive_atom_set = { workspace = true }                   # @release

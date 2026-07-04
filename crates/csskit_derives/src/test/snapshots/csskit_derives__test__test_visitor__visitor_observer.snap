@@ -1,0 +1,10 @@
+---
+source: crates/csskit_derives/src/test/test_visitor.rs
+expression: out
+---
+impl Visit for V {
+    fn visit_color(&mut self, c: &Color) -> ::visit_flow::VisitFlow {
+        self.seen.push(c);
+        <::visit_flow::VisitFlow as ::visit_flow::VisitFlowExt>::DESCEND
+    }
+}

@@ -82,7 +82,7 @@ impl File {
 								let _ = span.enter();
 								let mut highlighter = TokenHighlighter::new();
 								if let Some(stylesheet) = &result.output {
-									stylesheet.accept(&mut highlighter);
+									let _ = stylesheet.accept(&mut highlighter);
 									let mut current_line = 0;
 									let mut current_start = 0;
 									let data = highlighter

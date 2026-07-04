@@ -271,7 +271,7 @@ macro_rules! transformer {
 					$(
 						if $variant::may_change(transformer.features, node) {
 							let mut transform = $variant::new(transformer);
-							node.accept(&mut transform);
+							let _ = node.accept(&mut transform);
 						}
 					)+
 				}

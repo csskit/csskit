@@ -1,6 +1,6 @@
 use css_ast::{
-	CSSInt, Color, CssMetadata, Declaration, DeclarationValue, NodeId, PropertyRule, QueryableNode, StyleRule,
-	ToChromashift, Visit,
+	CSSInt, Color, CssMetadata, Declaration, DeclarationValue, NodeId, PropertyRule, StyleRule, ToChromashift, Visit,
+	VisitNode, visitor,
 };
 use css_lexer::ToSpan;
 use css_parse::NodeWithMetadata;
@@ -98,15 +98,15 @@ impl From<&CssMetadata> for SemanticModifier {
 	}
 }
 
+#[visitor]
 impl Visit for TokenHighlighter {
-	fn visit_queryable_node<T: QueryableNode>(&mut self, node: &T) {
-		let node_id = node.node_id();
-		let metadata = node.metadata();
-		let modifier = SemanticModifier::from(&metadata);
+	fn enter_node(&mut self, query: VisitNode) {
+		let node_id = query.node_id.unwrap();
+		let modifier = SemanticModifier::from(&query.self_metadata());
 		let kind = SemanticKind::from_node_id(node_id).unwrap_or(SemanticKind::None);
 
 		if !modifier.is_none() || kind != SemanticKind::None {
-			self.insert(node.to_span(), kind, modifier);
+			self.insert(query.span, kind, modifier);
 		}
 	}
 
@@ -119,9 +119,10 @@ impl Visit for TokenHighlighter {
 	}
 
 	// Visit Declarations to mark the name and colon
-	fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(
+	fn enter_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
 		property: &Declaration<'a, T, CssMetadata>,
+		_query: css_ast::VisitNode,
 	) {
 		let metadata = property.metadata();
 		let modifier = SemanticModifier::from(&metadata);

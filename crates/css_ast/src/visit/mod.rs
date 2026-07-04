@@ -7,8 +7,19 @@ use bumpalo::collections::Vec;
 use css_parse::{
 	Block, BumpBox, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup,
 	DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata,
-	Optionals2, Optionals3, Optionals4, Optionals5, QualifiedRule, RuleList, syntax::BadDeclaration, token_macros,
+	Optionals2, Optionals3, Optionals4, Optionals5, QualifiedRule, RuleList, ToSpan, syntax::BadDeclaration,
+	token_macros,
 };
+use visit_flow::{VisitFlow, try_visit};
+
+/// The `#[visitor]` attribute: observer methods without a return type
+/// auto-descend. Re-exported so visitor consumers need only depend on `css_ast`.
+pub use csskit_derives::visitor;
+pub use visit_flow::{VisitAction, VisitBreak, VisitFlowExt};
+
+mod visit_node;
+pub(crate) use visit_node::QueryNodeData;
+pub use visit_node::VisitNode;
 
 use crate::*;
 
@@ -38,28 +49,60 @@ macro_rules! visit_trait {
 		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
 		pub trait Visit: Sized {
-			/// Generic method for visiting queryable nodes. Override this to handle all queryable nodes uniformly.
-			/// Individual visit methods will delegate to this by default.
-			fn visit_queryable_node<T: QueryableNode>(&mut self, _node: &T) {}
+			/// Called before entering a node.
+			///
+			/// Return [`VisitFlow::SKIP_CHILDREN`] to prune the node and its entire subtree (it is
+			/// never entered). Return [`VisitFlow::STOP`] to halt the whole traversal. Default
+			/// considers everything.
+			fn consider_node(&self, _node: VisitNode) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
 
-			/// Generic method for exiting queryable nodes. Override this to handle all queryable nodes uniformly.
-			/// Individual exit methods will delegate to this by default.
-			fn exit_queryable_node<T: QueryableNode>(&mut self, _node: &T) {}
+			/// Called on entry to every queryable node. Override to handle all queryable nodes uniformly.
+			///
+			/// Receives a [`VisitNode`]; per-node metadata and properties are available lazily via
+			/// its methods. Return [`VisitFlow::SKIP_CHILDREN`] to skip the typed `visit_*` call and children.
+			fn enter_node(&mut self, _node: VisitNode) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
 
-			fn visit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
-			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata> + QueryableNode>(&mut self, _rule: &Declaration<'a, T, CssMetadata>) {}
+			/// Called on exit from every queryable node.
+			fn exit_node(&mut self, _node: VisitNode) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
 
-			fn visit_feature<T: FeatureMetadata + QueryableNode>(&mut self, _node: &T) {}
-			fn exit_feature<T: FeatureMetadata + QueryableNode>(&mut self, _node: &T) {}
+			fn enter_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>, _node: VisitNode) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn exit_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>, _node: VisitNode) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn exit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn visit_string(&mut self, _str: &token_macros::String) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn exit_string(&mut self, _str: &token_macros::String) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn visit_comparison(&mut self, _comparison: &Comparison) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
+			fn exit_comparison(&mut self, _comparison: &Comparison) -> VisitFlow {
+				VisitFlow::DESCEND
+			}
 
-			fn visit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
-			fn exit_bad_declaration<'a>(&mut self, _rule: &BadDeclaration<'a>) {}
-			fn visit_string(&mut self, _str: &token_macros::String) {}
-			fn exit_string(&mut self, _str: &token_macros::String) {}
-			fn visit_comparison(&mut self, _comparison: &Comparison) {}
-			fn exit_comparison(&mut self, _comparison: &Comparison) {}
+			fn visit_feature<T: FeatureMetadata>(&mut self, _node: &T) {}
+			fn exit_feature<T: FeatureMetadata>(&mut self, _node: &T) {}
+
 			$(
-				fn $name$(<$($gen),+>)?(&mut self, _rule: &$obj) {}
+				fn $name$(<$($gen),+>)?(&mut self, _rule: &$obj) -> VisitFlow {
+					VisitFlow::DESCEND
+				}
 			)+
 		}
 	}
@@ -71,21 +114,17 @@ pub trait VisitableMut {
 }
 
 pub trait Visitable {
-	fn accept<V: Visit>(&self, v: &mut V);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow;
 }
 
 /// Marker trait for AST nodes that can be queried with selectors.
 ///
-/// This trait extends `Visitable` and adds a unique identifier for the node type.
-/// It is automatically implemented by `#[derive(Visitable)]` for all nodes that
-/// are not marked with `#[visit(skip)]` or `#[visit(children)]`.
-pub trait QueryableNode: Visitable + NodeWithMetadata<CssMetadata> + ToSpan {
+/// Implemented by `#[derive(Visitable)]` for queryable nodes, and manually for nodes
+/// with `get_property` overrides (named at-rules, declarations).
+/// Not part of the `Visit` public API - visitors receive a [`VisitNode`] instead.
+pub(crate) trait QueryableNode: ToSpan + NodeWithMetadata<CssMetadata> {
 	/// Unique identifier for this node type.
 	const NODE_ID: NodeId;
-
-	fn node_id(&self) -> NodeId {
-		Self::NODE_ID
-	}
 
 	/// Returns a cursor for the given property kind, if the node has that property.
 	/// Used by attribute selectors to extract values from nodes.
@@ -94,6 +133,30 @@ pub trait QueryableNode: Visitable + NodeWithMetadata<CssMetadata> + ToSpan {
 	/// name for declarations, animation name for `@keyframes`).
 	fn get_property(&self, _kind: PropertyKind) -> Option<Cursor> {
 		None
+	}
+
+	/// Builds the [`VisitNode`] passed to every `Visit` callback for this node.
+	///
+	/// `subtree_metadata` (eager) uses `metadata()` (self + subtree) so the prune gate can
+	/// reject whole subtrees; `self_metadata`/properties are deferred to `&dyn` accessors so
+	/// they only cost anything when a visitor actually reads them.
+	fn visit_node(&self) -> VisitNode<'_>
+	where
+		Self: Sized,
+	{
+		VisitNode::new(self.to_span(), Self::NODE_ID, self.metadata(), self)
+	}
+}
+
+/// Blanket bridge so any [`QueryableNode`] can be held as a `&dyn` in [`VisitNode`].
+impl<T: QueryableNode> QueryNodeData for T {
+	#[inline]
+	fn self_metadata(&self) -> CssMetadata {
+		NodeWithMetadata::self_metadata(self)
+	}
+	#[inline]
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		QueryableNode::get_property(self, kind)
 	}
 }
 
@@ -116,9 +179,10 @@ macro_rules! impl_optionals {
 		{
 			#[allow(non_snake_case)]
 			#[allow(unused)]
-			fn accept<VI: Visit>(&self, v: &mut VI) {
+			fn accept<VI: Visit>(&self, v: &mut VI) -> VisitFlow {
 				let $N($($T),+) = self;
-				$($T.accept(v);)+;
+				$(try_visit!($T.accept(v));)+;
+				VisitFlow::DESCEND
 			}
 		}
 
@@ -142,7 +206,9 @@ impl_optionals!(Optionals4, T, U, V, W);
 impl_optionals!(Optionals5, T, U, V, W, X);
 
 impl Visitable for token_macros::Ident {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::Ident {
@@ -150,7 +216,9 @@ impl VisitableMut for token_macros::Ident {
 }
 
 impl Visitable for token_macros::Function {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::Function {
@@ -158,7 +226,9 @@ impl VisitableMut for token_macros::Function {
 }
 
 impl Visitable for token_macros::Comma {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::Comma {
@@ -166,7 +236,9 @@ impl VisitableMut for token_macros::Comma {
 }
 
 impl Visitable for token_macros::LeftParen {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::LeftParen {
@@ -174,7 +246,9 @@ impl VisitableMut for token_macros::LeftParen {
 }
 
 impl Visitable for token_macros::RightParen {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::RightParen {
@@ -182,7 +256,9 @@ impl VisitableMut for token_macros::RightParen {
 }
 
 impl Visitable for token_macros::Colon {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::Colon {
@@ -190,9 +266,10 @@ impl VisitableMut for token_macros::Colon {
 }
 
 impl Visitable for Comparison {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_comparison(self);
-		v.exit_comparison(self);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		try_visit!(v.visit_comparison(self));
+		try_visit!(v.exit_comparison(self));
+		VisitFlow::DESCEND
 	}
 }
 
@@ -204,7 +281,9 @@ impl VisitableMut for Comparison {
 }
 
 impl Visitable for token_macros::delim::Dash {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::delim::Dash {
@@ -212,7 +291,9 @@ impl VisitableMut for token_macros::delim::Dash {
 }
 
 impl Visitable for token_macros::delim::Slash {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::delim::Slash {
@@ -220,7 +301,9 @@ impl VisitableMut for token_macros::delim::Slash {
 }
 
 impl Visitable for token_macros::Number {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::Number {
@@ -228,7 +311,9 @@ impl VisitableMut for token_macros::Number {
 }
 
 impl Visitable for token_macros::Any {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl VisitableMut for token_macros::Any {
@@ -236,9 +321,10 @@ impl VisitableMut for token_macros::Any {
 }
 
 impl Visitable for token_macros::String {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_string(self);
-		v.exit_string(self);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		try_visit!(v.visit_string(self));
+		try_visit!(v.exit_string(self));
+		VisitFlow::DESCEND
 	}
 }
 
@@ -253,10 +339,11 @@ impl<T> Visitable for Option<T>
 where
 	T: Visitable,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		if let Some(node) = self {
-			node.accept(v)
+			try_visit!(node.accept(v));
 		}
+		VisitFlow::DESCEND
 	}
 }
 
@@ -267,7 +354,7 @@ impl<'a, T: VisitableMut> VisitableMut for BumpBox<'a, T> {
 }
 
 impl<'a, T: Visitable> Visitable for BumpBox<'a, T> {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		(**self).accept(v)
 	}
 }
@@ -287,10 +374,11 @@ impl<'a, T, const MIN: usize> Visitable for CommaSeparated<'a, T, MIN>
 where
 	T: Visitable + Peek<'a> + Parse<'a> + ToCursors + ToSpan,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		for (node, _) in self {
-			node.accept(v)
+			try_visit!(node.accept(v));
 		}
+		VisitFlow::DESCEND
 	}
 }
 
@@ -312,7 +400,7 @@ where
 	Left: Visitable,
 	Right: Visitable,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		match self {
 			Self::Left(t) => t.accept(v),
 			Self::Right(t) => t.accept(v),
@@ -337,15 +425,18 @@ where
 {
 	const NODE_ID: NodeId = NodeId::StyleValue;
 
-	fn node_id(&self) -> NodeId {
-		T::NODE_ID
-	}
-
 	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
 		match kind {
 			PropertyKind::Name => Some(self.name.into()),
 			_ => None,
 		}
+	}
+
+	fn visit_node(&self) -> VisitNode<'_> {
+		// Use T::NODE_ID so each declaration type has its own identity.
+		// Use metadata() (aggregated) for the eager subtree facts; self_metadata/properties
+		// stay deferred via the &dyn.
+		VisitNode::new(self.to_span(), T::NODE_ID, self.metadata(), self)
 	}
 }
 
@@ -353,12 +444,19 @@ impl<'a, T> Visitable for Declaration<'a, T, CssMetadata>
 where
 	T: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_queryable_node(self);
-		v.visit_declaration::<T>(self);
-		self.value.accept(v);
-		v.exit_declaration::<T>(self);
-		v.exit_queryable_node(self);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		let node = self.visit_node();
+		if let visit_flow::VisitAction::SkipChildren = try_visit!(v.consider_node(node)) {
+			return VisitFlow::DESCEND;
+		}
+		if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.enter_node(node)) {
+			if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.enter_declaration::<T>(self, node)) {
+				try_visit!(self.value.accept(v));
+			}
+			try_visit!(v.exit_declaration::<T>(self, node));
+		}
+		try_visit!(v.exit_node(node));
+		VisitFlow::DESCEND
 	}
 }
 
@@ -377,10 +475,11 @@ impl<'a, T> Visitable for DeclarationList<'a, T, CssMetadata>
 where
 	T: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		for declaration in &self.declarations {
-			declaration.accept(v);
+			try_visit!(declaration.accept(v));
 		}
+		VisitFlow::DESCEND
 	}
 }
 
@@ -399,8 +498,8 @@ where
 	T: Visitable + Parse<'a> + ToCursors + ToSpan + NodeWithMetadata<M>,
 	M: NodeMetadata,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		self.rules.accept(v);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		self.rules.accept(v)
 	}
 }
 
@@ -424,9 +523,9 @@ where
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 	Block<'a, D, R, CssMetadata>: Parse<'a> + ToCursors + ToSpan,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		self.prelude.accept(v);
-		self.block.accept(v);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		try_visit!(self.prelude.accept(v));
+		self.block.accept(v)
 	}
 }
 
@@ -450,13 +549,14 @@ where
 	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 	R: Visitable + Parse<'a> + ToCursors + ToSpan,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		for declaration in &self.declarations {
-			declaration.accept(v);
+			try_visit!(declaration.accept(v));
 		}
 		for rule in &self.rules {
-			rule.accept(v);
+			try_visit!(rule.accept(v));
 		}
+		VisitFlow::DESCEND
 	}
 }
 
@@ -475,10 +575,11 @@ impl<'a, T> Visitable for Vec<'a, T>
 where
 	T: Visitable,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		for node in self {
-			node.accept(v)
+			try_visit!(node.accept(v));
 		}
+		VisitFlow::DESCEND
 	}
 }
 
@@ -490,9 +591,10 @@ impl<'a> VisitableMut for BadDeclaration<'a> {
 }
 
 impl<'a> Visitable for BadDeclaration<'a> {
-	fn accept<V: Visit>(&self, v: &mut V) {
-		v.visit_bad_declaration(self);
-		v.exit_bad_declaration(self);
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		try_visit!(v.visit_bad_declaration(self));
+		try_visit!(v.exit_bad_declaration(self));
+		VisitFlow::DESCEND
 	}
 }
 
@@ -501,7 +603,9 @@ impl<'a> VisitableMut for ComponentValues<'a> {
 }
 
 impl<'a> Visitable for ComponentValues<'a> {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl<D, M> VisitableMut for NoBlockAllowed<D, M> {
@@ -509,7 +613,9 @@ impl<D, M> VisitableMut for NoBlockAllowed<D, M> {
 }
 
 impl<D, M> Visitable for NoBlockAllowed<D, M> {
-	fn accept<V: Visit>(&self, _: &mut V) {}
+	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+		VisitFlow::DESCEND
+	}
 }
 
 impl<'a, D> VisitableMut for DeclarationGroup<'a, D, CssMetadata>
@@ -527,10 +633,11 @@ impl<'a, D> Visitable for DeclarationGroup<'a, D, CssMetadata>
 where
 	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		for declaration in &self.declarations {
-			declaration.accept(v)
+			try_visit!(declaration.accept(v));
 		}
+		VisitFlow::DESCEND
 	}
 }
 
@@ -550,7 +657,7 @@ impl<'a, D> Visitable for DeclarationOrBad<'a, D, CssMetadata>
 where
 	D: Visitable + DeclarationValue<'a, CssMetadata> + QueryableNode,
 {
-	fn accept<V: Visit>(&self, v: &mut V) {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		match self {
 			Self::Declaration(d) => d.accept(v),
 			Self::Bad(b) => b.accept(v),
@@ -588,15 +695,16 @@ impl_tuple_mut!(T, U, V, W, X, Y, Z, A, B, C, D, E);
 
 macro_rules! impl_tuple {
     ($($T:ident),*) => {
-				impl<$($T),*> Visitable for ($($T),*)
+			impl<$($T),*> Visitable for ($($T),*)
         where
             $($T: Visitable,)*
         {
             #[allow(non_snake_case)]
             #[allow(unused)]
-						fn accept<VI: Visit>(&self, v: &mut VI) {
+					fn accept<VI: Visit>(&self, v: &mut VI) -> VisitFlow {
                 let ($($T),*) = self;
-                $($T.accept(v);)*
+                $(try_visit!($T.accept(v));)*
+                VisitFlow::DESCEND
             }
         }
     };

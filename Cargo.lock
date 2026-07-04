@@ -675,6 +675,7 @@ dependencies = [
  "smallvec",
  "syn",
  "thiserror 2.0.18",
+ "visit-flow",
 ]
 
 [[package]]
@@ -763,6 +764,7 @@ dependencies = [
  "strsim",
  "tracing",
  "tracing-subscriber",
+ "visit-flow",
 ]
 
 [[package]]
@@ -782,6 +784,7 @@ dependencies = [
  "miette",
  "pprof",
  "smallvec",
+ "visit-flow",
 ]
 
 [[package]]
@@ -816,6 +819,7 @@ dependencies = [
  "owo-colors",
  "similar 3.1.1",
  "strum",
+ "visit-flow",
 ]
 
 [[package]]
@@ -920,6 +924,7 @@ dependencies = [
  "serde",
  "serde_json",
  "similar 3.1.1",
+ "visit-flow",
 ]
 
 [[package]]
@@ -3625,6 +3630,10 @@ name = "version_check"
 version = "0.9.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
+
+[[package]]
+name = "visit-flow"
+version = "0.0.26"
 
 [[package]]
 name = "walkdir"
