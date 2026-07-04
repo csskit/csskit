@@ -6,7 +6,7 @@ use crate::{
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable, visit::NodeId};
-use css_lexer::{Cursor, Lexer, SourceOffset, Span};
+use css_lexer::{Cursor, Lexer, LineIndex, SourceOffset, Span};
 use css_parse::{NodeWithMetadata, Parser, SourceCursor, SourceCursorSink};
 use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
@@ -173,8 +173,17 @@ impl Extract for Find {
 		}
 	}
 
-	fn render_text(&self, ctx: &TokenHighlighter, _file: &str, src: &str, span: Span, _row: &FindData, color: bool) {
-		let (line, col) = span.line_and_column(src);
+	fn render_text(
+		&self,
+		ctx: &TokenHighlighter,
+		_file: &str,
+		src: &str,
+		index: &LineIndex,
+		span: Span,
+		_row: &FindData,
+		color: bool,
+	) {
+		let (line, col) = index.line_and_column(span);
 		let (start, end) = line_bounds(src, span.start().into());
 
 		if color {

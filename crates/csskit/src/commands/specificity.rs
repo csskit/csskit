@@ -4,7 +4,7 @@ use bumpalo::Bump;
 use clap::Args;
 use css_ast::specificity::ToSpecificity;
 use css_ast::{CssAtomSet, SelectorList, StyleRule, StyleSheet, Visit, Visitable, visitor};
-use css_lexer::{Lexer, Span};
+use css_lexer::{Lexer, LineIndex, Span};
 use css_parse::{Parser, ToSpan};
 use serde::Serialize;
 
@@ -81,7 +81,16 @@ impl Extract for Specificity {
 		let _ = stylesheet.accept(&mut visitor);
 	}
 
-	fn render_text(&self, _ctx: &(), _file: &str, _src: &str, _span: Span, row: &Self::Row, _color: bool) {
+	fn render_text(
+		&self,
+		_ctx: &(),
+		_file: &str,
+		_src: &str,
+		_index: &LineIndex,
+		_span: Span,
+		row: &Self::Row,
+		_color: bool,
+	) {
 		println!("{} ({},{},{})", row.selector, row.a, row.b, row.c);
 	}
 }

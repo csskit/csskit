@@ -2,7 +2,7 @@ use crate::{CliResult, GlobalConfig, InputArgs};
 use bumpalo::Bump;
 use clap::ValueEnum;
 use css_ast::{CssAtomSet, StyleSheet};
-use css_lexer::{Lexer, Span};
+use css_lexer::{Lexer, LineIndex, Span};
 use css_parse::Parser;
 use serde::Serialize;
 use std::io::Read;
@@ -17,8 +17,8 @@ pub struct Location {
 }
 
 impl Location {
-	pub fn from_span(span: Span, src: &str) -> Self {
-		let (line, col) = span.line_and_column(src);
+	pub fn from_span(span: Span, index: &LineIndex) -> Self {
+		let (line, col) = index.line_and_column(span);
 		Self { line: line + 1, column: col + 1, start: usize::from(span.start()), end: usize::from(span.end()) }
 	}
 }
@@ -116,7 +116,17 @@ pub trait Extract: Sized {
 	fn extract<'a>(&self, stylesheet: &StyleSheet<'a>, src: &str, out: &mut Vec<(Span, Self::Row)>);
 
 	/// Format one row for text output.
-	fn render_text(&self, ctx: &Self::FileContext, file: &str, src: &str, span: Span, row: &Self::Row, color: bool);
+	#[allow(clippy::too_many_arguments)]
+	fn render_text(
+		&self,
+		ctx: &Self::FileContext,
+		file: &str,
+		src: &str,
+		index: &LineIndex,
+		span: Span,
+		row: &Self::Row,
+		color: bool,
+	);
 
 	/// Build the per-file context from the parsed stylesheet and source.
 	fn build_context<'a>(&self, _stylesheet: &StyleSheet<'a>, _src: &str) -> Self::FileContext {
@@ -225,15 +235,17 @@ pub trait Extract: Sized {
 								}
 							}
 							self.render_file_preamble(filename, rows.len(), config.colors());
+							let index = LineIndex::new_in(&src, &bump);
 							for (span, row) in &rows {
-								self.render_text(&ctx, filename, &src, *span, row, config.colors());
+								self.render_text(&ctx, filename, &src, &index, *span, row, config.colors());
 							}
 						}
 					}
 					OutputFormat::Json => {
+						let index = LineIndex::new_in(&src, &bump);
 						let records = rows
 							.into_iter()
-							.map(|(span, data)| Record { location: Location::from_span(span, &src), data })
+							.map(|(span, data)| Record { location: Location::from_span(span, &index), data })
 							.collect();
 						envelopes.push(FileEnvelope::ok(filename, records));
 					}

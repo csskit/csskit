@@ -1,7 +1,7 @@
 use bumpalo::Bump;
 use crossbeam_channel::{Receiver, Sender, bounded};
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
-use css_lexer::Lexer;
+use css_lexer::{Lexer, LineIndex};
 use css_parse::{Parser, ParserReturn};
 use csskit_highlight::{Highlight, SemanticKind, SemanticModifier, TokenHighlighter};
 use dashmap::DashMap;
@@ -85,12 +85,13 @@ impl File {
 									let _ = stylesheet.accept(&mut highlighter);
 									let mut current_line = 0;
 									let mut current_start = 0;
+									let index_bump = Bump::new();
+									let line_index = LineIndex::new_in(&string, &index_bump);
 									let data = highlighter
 										.highlights()
 										.sorted_by(|a, b| Ord::cmp(&a.span(), &b.span()))
 										.map(|h| {
-											// TODO: figure out a more efficient way to get line/col
-											let (line, start) = h.span().line_and_column(&string);
+											let (line, start) = line_index.line_and_column(h.span());
 											let delta_line: Line = line - current_line;
 											current_line = line;
 											let delta_start: Col =

@@ -8,7 +8,7 @@ use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
 use css_ast::{Color as ASTColor, CssAtomSet, StyleSheet, ToChromashift, Visitable};
-use css_lexer::Lexer;
+use css_lexer::{Lexer, LineIndex};
 use css_parse::{Diagnostic, Parser, Span, ToSpan};
 use itertools::Itertools;
 use serde::Serialize;
@@ -408,9 +408,18 @@ impl Extract for ColorCommand {
 		// Unreachable: parse_and_extract_file is fully overridden.
 	}
 
-	fn render_text(&self, _ctx: &ColorContext, file: &str, src: &str, span: Span, row: &ColorData, color: bool) {
+	fn render_text(
+		&self,
+		_ctx: &ColorContext,
+		file: &str,
+		_src: &str,
+		index: &LineIndex,
+		span: Span,
+		row: &ColorData,
+		color: bool,
+	) {
 		let lc = if file != "<content>" && file != "-" {
-			let (line, col) = span.line_and_column(src);
+			let (line, col) = index.line_and_column(span);
 			Some((file, line, col))
 		} else {
 			None

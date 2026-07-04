@@ -88,6 +88,63 @@ impl Span {
 	}
 }
 
+/// Precomputed line-start offsets for a source string, enabling O(log lines) line/column lookup.
+///
+/// Building the index is a single linear pass over the source; each subsequent [`LineIndex::line_and_column`] is a
+/// binary search plus a per-line character count. Prefer this over [`Span::line_and_column`] whenever
+/// resolving more than a couple of spans against one source.
+#[derive(Debug, Clone)]
+pub struct LineIndex<'a> {
+	source: &'a str,
+	/// Byte offset of the start of each line. Always begins with 0.
+	#[cfg(feature = "bumpalo")]
+	line_starts: bumpalo::collections::Vec<'a, u32>,
+	#[cfg(not(feature = "bumpalo"))]
+	line_starts: Vec<u32>,
+}
+
+impl<'a> LineIndex<'a> {
+	/// Build a line index for `source` in a single pass.
+	#[cfg(not(feature = "bumpalo"))]
+	pub fn new(source: &'a str) -> Self {
+		let mut line_starts = Vec::with_capacity(source.len() / 32 + 1);
+		line_starts.push(0);
+		for (i, b) in source.bytes().enumerate() {
+			if b == b'\n' {
+				line_starts.push(i as u32 + 1);
+			}
+		}
+		Self { source, line_starts }
+	}
+
+	/// Build a line index for `source` in a single pass, allocating the backing table in `bump`.
+	#[cfg(feature = "bumpalo")]
+	pub fn new_in(source: &'a str, bump: &'a bumpalo::Bump) -> Self {
+		let mut line_starts = bumpalo::collections::Vec::with_capacity_in(source.len() / 32 + 1, bump);
+		line_starts.push(0);
+		for (i, b) in source.bytes().enumerate() {
+			if b == b'\n' {
+				line_starts.push(i as u32 + 1);
+			}
+		}
+		Self { source, line_starts }
+	}
+
+	/// Returns the zero-based `(line, column)` of the span's start, where column counts Unicode
+	/// scalar values from the line start. Matches [`Span::line_and_column`] exactly.
+	pub fn line_and_column(&self, span: Span) -> (u32, u32) {
+		let line_starts = &self.line_starts[..];
+		let offset = span.start().0;
+		// Largest line whose start is <= offset.
+		let line = line_starts.partition_point(|&start| start <= offset) - 1;
+		let line_start = line_starts[line] as usize;
+		let end = (offset as usize).min(self.source.len());
+		// Count characters (not bytes) within the line up to the offset.
+		let column = self.source[line_start..end].chars().count() as u32;
+		(line as u32, column)
+	}
+}
+
 /// Extends this [Span], ensuring that the resulting new [Span] is broader than both this and the given [Span].
 /// In other words the resulting span will always [Span::contains()] both [Spans][Span].
 impl Add for Span {
@@ -228,5 +285,44 @@ mod test {
 		vec.push(Span::new(SourceOffset(3), SourceOffset(10)));
 		vec.push(Span::new(SourceOffset(13), SourceOffset(15)));
 		assert_eq!(vec.to_span(), Span::new(SourceOffset(3), SourceOffset(15)));
+	}
+
+	#[cfg(feature = "bumpalo")]
+	fn line_index<'a>(bump: &'a bumpalo::Bump, source: &'a str) -> LineIndex<'a> {
+		LineIndex::new_in(source, bump)
+	}
+	#[cfg(not(feature = "bumpalo"))]
+	fn line_index<'a>(_bump: &'a (), source: &'a str) -> LineIndex<'a> {
+		LineIndex::new(source)
+	}
+
+	#[test]
+	fn line_index_matches_scan() {
+		#[cfg(feature = "bumpalo")]
+		let bump = bumpalo::Bump::new();
+		#[cfg(not(feature = "bumpalo"))]
+		let bump = ();
+		// Includes a multibyte char (é = 2 bytes) so column-by-char and byte offsets diverge.
+		let source = "a\nbc\n\ndéf\nghi";
+		let index = line_index(&bump, source);
+		for offset in 0..=source.len() as u32 {
+			// Only test offsets on char boundaries, as spans always land on them.
+			if !source.is_char_boundary(offset as usize) {
+				continue;
+			}
+			let span = Span::new(SourceOffset(offset), SourceOffset(offset));
+			assert_eq!(index.line_and_column(span), span.line_and_column(source), "offset {offset}");
+		}
+	}
+
+	#[test]
+	fn line_index_empty_source() {
+		#[cfg(feature = "bumpalo")]
+		let bump = bumpalo::Bump::new();
+		#[cfg(not(feature = "bumpalo"))]
+		let bump = ();
+		let index = line_index(&bump, "");
+		let span = Span::new(SourceOffset(0), SourceOffset(0));
+		assert_eq!(index.line_and_column(span), (0, 0));
 	}
 }
