@@ -9,7 +9,7 @@ use crate::{
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::CssAtomSet;
-use css_lexer::{DynAtomSet, Lexer, RegisteredAtomSet};
+use css_lexer::{DynAtomSet, Lexer, LineIndex, RegisteredAtomSet};
 use css_parse::Parser;
 use csskit_ast::{Collector, CsskitAtomSet, ResolvedDiagnosticLevel, StatType, sheet::Sheet};
 use csskit_highlight::CssHighlighter;
@@ -177,6 +177,7 @@ impl Check {
 
 			let mut file_failed = false;
 			let mut file_diagnostics: Vec<DiagnosticData> = Vec::new();
+			let line_index = matches!(format, OutputFormat::Json).then(|| LineIndex::new_in(&css_source, &bump));
 
 			for diagnostic in collector.diagnostics(&css_source) {
 				let is_error = matches!(diagnostic.severity, ResolvedDiagnosticLevel::Error);
@@ -190,10 +191,14 @@ impl Check {
 
 				match format {
 					OutputFormat::Json => {
+						let location = line_index
+							.as_ref()
+							.map(|index| Location::from_span(diagnostic.span, index))
+							.expect("line index is built for JSON output");
 						file_diagnostics.push(DiagnosticData {
 							severity: diagnostic.severity.to_string(),
 							message: diagnostic.message.clone(),
-							location: Location::from_span(diagnostic.span, &css_source),
+							location,
 						});
 					}
 					OutputFormat::Text => {
