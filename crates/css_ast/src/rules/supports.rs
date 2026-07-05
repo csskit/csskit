@@ -61,7 +61,9 @@ pub struct SupportsRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>
 pub enum SupportsCondition<'a> {
 	Is(SupportsFeature<'a>),
 	Not(#[atom(CssAtomSet::Not)] T![Ident], SupportsFeature<'a>),
+	#[peek(skip)]
 	And(Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>),
+	#[peek(skip)]
 	Or(Vec<'a, (SupportsFeature<'a>, Option<T![Ident]>)>),
 }
 

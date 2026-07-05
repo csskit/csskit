@@ -70,6 +70,25 @@ impl ToTokens for Atom {
 	}
 }
 
+pub fn extract_peek_skip(attrs: &[Attribute]) -> bool {
+	for attr in attrs.iter().filter(|a| a.path().is_ident("peek")) {
+		if let Meta::List(meta) = &attr.meta {
+			let mut skip = false;
+			meta.parse_nested_meta(|nested| {
+				if nested.path.is_ident("skip") {
+					skip = true;
+				}
+				Ok(())
+			})
+			.ok();
+			if skip {
+				return true;
+			}
+		}
+	}
+	false
+}
+
 pub fn extract_atom(attrs: &[Attribute]) -> Result<Option<Atom>> {
 	let Some(attr) = attrs.iter().find(|a| a.path().is_ident("atom")) else {
 		return Ok(None);

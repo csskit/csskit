@@ -189,6 +189,31 @@ fn peek_enum_with_multiple_identical_types() {
 }
 
 #[test]
+fn peek_enum_skip_variant() {
+	let data = to_deriveinput! {
+		enum Foo {
+			One(T),
+			#[peek(skip)]
+			Many(CommaSeparated<T>),
+		}
+	};
+	assert_peek_snapshot!(data, "peek_enum_skip_variant");
+}
+
+#[test]
+fn peek_struct_skip_field() {
+	let data = to_deriveinput! {
+		#[parse(all_must_occur)]
+		struct Foo {
+			keyword: Ident,
+			#[peek(skip)]
+			rest: Percentage,
+		}
+	};
+	assert_peek_snapshot!(data, "peek_struct_skip_field");
+}
+
+#[test]
 fn peek_enum_with_option_variants() {
 	let data = to_deriveinput! {
 		enum Foo {
