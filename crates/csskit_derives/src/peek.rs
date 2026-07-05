@@ -1,6 +1,6 @@
 use crate::{
 	FieldsExt, WhereCollector,
-	attributes::{Atom, extract_atom, extract_field_parse_mode},
+	attributes::{Atom, extract_atom, extract_field_parse_mode, extract_peek_skip},
 	ensure_lifetime_a,
 	field_view::option_inner,
 };
@@ -60,6 +60,9 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			let parse_mode = extract_field_parse_mode(&input.attrs)?;
 			let mut checks: Vec<TokenStream> = vec![];
 			for (view, syn_field) in fields.views().into_iter().zip(fields.iter()) {
+				if extract_peek_skip(&syn_field.attrs) {
+					continue;
+				}
 				let atom = extract_atom(&syn_field.attrs)?;
 				let atoms = atom.map(|a| vec![a]).unwrap_or_default();
 				let peek_ty = option_inner(view.ty).unwrap_or(view.ty);
@@ -111,9 +114,15 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			};
 
 			for variant in variants.iter() {
+				if extract_peek_skip(&variant.attrs) {
+					continue;
+				}
 				let views = variant.fields.views();
 				let parse_mode = extract_field_parse_mode(&variant.attrs)?;
 				for (view, syn_field) in views.iter().zip(variant.fields.iter()) {
+					if extract_peek_skip(&syn_field.attrs) {
+						continue;
+					}
 					let atom = match extract_atom(&variant.attrs)? {
 						Some(a) => Some(a),
 						None => extract_atom(&syn_field.attrs)?,
