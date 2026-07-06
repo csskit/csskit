@@ -373,7 +373,7 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chromashift"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -504,9 +504,9 @@ checksum = "e47641d3deaf41fb1538ac1f54735925e275eaf3bf4d55c81b137fba797e5cbb"
 
 [[package]]
 name = "console"
-version = "0.16.3"
+version = "0.16.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "d64e8af5551369d19cf50138de61f1c42074ab970f74e99be916646777f8fc87"
+checksum = "4fe5f465a4f6fee88fad41b85d990f84c835335e85b5d9e6e63e0d06d28cba7c"
 dependencies = [
  "encode_unicode",
  "libc",
@@ -646,7 +646,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -680,7 +680,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -689,7 +689,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
@@ -711,7 +711,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -729,7 +729,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "css_lexer",
  "heck",
@@ -743,7 +743,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "anstyle",
  "bumpalo",
@@ -769,7 +769,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -789,7 +789,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "darling",
  "heck",
@@ -804,7 +804,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -824,7 +824,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -855,7 +855,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -871,7 +871,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "glob",
  "grep-matcher",
@@ -887,7 +887,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "anyhow",
  "clap",
@@ -909,7 +909,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "bitmask-enum",
  "bumpalo",
@@ -929,7 +929,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "bumpalo",
  "console_error_panic_hook",
@@ -1027,7 +1027,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.26"
+version = "0.0.27"
 dependencies = [
  "heck",
  "itertools 0.15.0",
@@ -1783,7 +1783,7 @@ checksum = "3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46"
 dependencies = [
  "hermit-abi",
  "libc",
- "windows-sys 0.61.0",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -2749,7 +2749,7 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "webpki-root-certs",
- "windows-sys 0.61.0",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -3026,7 +3026,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "52d1cfed4120b4d927bf7c0f86d2087a4a7d6027c906d9f9d525a80573b9be51"
 dependencies = [
  "libc",
- "windows-sys 0.61.0",
+ "windows-sys 0.60.2",
 ]
 
 [[package]]
@@ -3633,7 +3633,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "visit-flow"
-version = "0.0.26"
+version = "0.0.27"
 
 [[package]]
 name = "walkdir"
@@ -3839,7 +3839,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.61.0",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
