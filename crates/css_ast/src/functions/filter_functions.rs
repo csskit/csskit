@@ -65,6 +65,7 @@ pub struct BlurFunction {
 	#[atom(CssAtomSet::Blur)]
 	pub name: T![Function],
 	pub radius: Option<NonNegative<Length>>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -77,6 +78,7 @@ pub struct BrightnessFunction {
 	#[atom(CssAtomSet::Brightness)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -89,6 +91,7 @@ pub struct ContrastFunction {
 	#[atom(CssAtomSet::Contrast)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -106,6 +109,7 @@ pub struct DropShadowFunction<'a> {
 	pub offset_x: Length,
 	pub offset_y: Length,
 	pub blur_radius: Option<NonNegative<Length>>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -118,6 +122,7 @@ pub struct GrayscaleFunction {
 	#[atom(CssAtomSet::Grayscale)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -130,6 +135,7 @@ pub struct HueRotateFunction {
 	#[atom(CssAtomSet::HueRotate)]
 	pub name: T![Function],
 	pub angle: Option<AngleOrZero>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -142,6 +148,7 @@ pub struct InvertFunction {
 	#[atom(CssAtomSet::Invert)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -154,6 +161,7 @@ pub struct OpacityFunction {
 	#[atom(CssAtomSet::Opacity)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -166,6 +174,7 @@ pub struct SaturateFunction {
 	#[atom(CssAtomSet::Saturate)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -178,6 +187,7 @@ pub struct SepiaFunction {
 	#[atom(CssAtomSet::Sepia)]
 	pub name: T![Function],
 	pub value: Option<NumberOrPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

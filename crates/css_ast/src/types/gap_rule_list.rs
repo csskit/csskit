@@ -41,9 +41,11 @@ pub struct GapRepeatRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub count: AutoOr<PositiveNonZeroInt>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub comma: T![,],
 	pub rules: CommaSeparated<'a, GapRule<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

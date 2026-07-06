@@ -70,8 +70,8 @@ impl ToTokens for Atom {
 	}
 }
 
-pub fn extract_peek_skip(attrs: &[Attribute]) -> bool {
-	for attr in attrs.iter().filter(|a| a.path().is_ident("peek")) {
+fn extract_skip(attrs: &[Attribute], attr_name: &str) -> bool {
+	for attr in attrs.iter().filter(|a| a.path().is_ident(attr_name)) {
 		if let Meta::List(meta) = &attr.meta {
 			let mut skip = false;
 			meta.parse_nested_meta(|nested| {
@@ -87,6 +87,17 @@ pub fn extract_peek_skip(attrs: &[Attribute]) -> bool {
 		}
 	}
 	false
+}
+
+pub fn extract_peek_skip(attrs: &[Attribute]) -> bool {
+	extract_skip(attrs, "peek")
+}
+
+/// `#[semantic_eq(skip)]` marks a field as excluded from `derive(SemanticEq)`
+/// comparisons, e.g. closing punctuation (`)` `}` `]`) whose kind is fixed and
+/// therefore never meaningfully differs between two parsed values.
+pub fn extract_semantic_eq_skip(attrs: &[Attribute]) -> bool {
+	extract_skip(attrs, "semantic_eq")
 }
 
 pub fn extract_atom(attrs: &[Attribute]) -> Result<Option<Atom>> {

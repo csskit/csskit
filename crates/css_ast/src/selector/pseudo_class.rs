@@ -79,7 +79,7 @@ macro_rules! define_pseudo_class {
 #[derive(csskit_derives::NodeWithMetadata)]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		pub enum PseudoClass {
-			$($(#[$meta])* $ident(T![:], T![Ident]),)+
+			$($(#[$meta])* $ident(#[semantic_eq(skip)] T![:], T![Ident]),)+
 			Webkit(WebkitPseudoClass),
 			Moz(MozPseudoClass),
 			Ms(MsPseudoClass),

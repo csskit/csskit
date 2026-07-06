@@ -12,6 +12,7 @@ use crate::units::CSSInt;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Ratio {
 	pub numerator: CSSInt,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub denominator: Option<CSSInt>,
 }

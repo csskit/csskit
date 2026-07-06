@@ -63,6 +63,7 @@ pub struct TargetCounterFunction<'a> {
 	#[atom(CssAtomSet::TargetCounter)]
 	pub name: T![Function],
 	pub params: TargetCounterParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -70,9 +71,9 @@ pub struct TargetCounterFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct TargetCounterParams<'a>(
 	TargetCounterKind,
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	T![Ident],
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	Option<CounterStyle<'a>>,
 );
 
@@ -84,6 +85,7 @@ pub struct TargetCountersFunction<'a> {
 	#[atom(CssAtomSet::TargetCounters)]
 	pub name: T![Function],
 	pub params: TargetCountersParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -91,11 +93,11 @@ pub struct TargetCountersFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct TargetCountersParams<'a>(
 	TargetCounterKind,
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	T![Ident],
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	T![String],
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	Option<CounterStyle<'a>>,
 );
 
@@ -107,12 +109,13 @@ pub struct TargetTextFunction {
 	#[atom(CssAtomSet::TargetText)]
 	pub name: T![Function],
 	pub params: TargetTextParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct TargetTextParams(TargetCounterKind, Option<T![,]>, Option<TextFunctionContent>);
+pub struct TargetTextParams(TargetCounterKind, #[semantic_eq(skip)] Option<T![,]>, Option<TextFunctionContent>);
 
 #[cfg(test)]
 mod tests {

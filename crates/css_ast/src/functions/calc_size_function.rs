@@ -17,6 +17,7 @@ pub struct CalcSizeFunction {
 	#[atom(CssAtomSet::CalcSize)]
 	pub name: T![Function],
 	pub params: Todo,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

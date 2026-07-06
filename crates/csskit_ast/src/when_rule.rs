@@ -114,10 +114,12 @@ impl<'a> Peek<'a> for WhenCondition<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[peek(Kind::LeftParen)]
 pub struct WhenFeature {
+	#[semantic_eq(skip)]
 	pub open: T!['('],
 	pub stat: T![DashedIdent],
 	pub operator: ComparisonOperator,
 	pub value: T![Number],
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -134,13 +136,13 @@ impl WhenFeature {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum ComparisonOperator {
 	/// `>`
-	GreaterThan(T![>]),
+	GreaterThan(#[semantic_eq(skip)] T![>]),
 	/// `<`
-	LessThan(T![<]),
+	LessThan(#[semantic_eq(skip)] T![<]),
 	/// `>=`
-	GreaterThanOrEqual(T![>=]),
+	GreaterThanOrEqual(#[semantic_eq(skip)] T![>=]),
 	/// `<=`
-	LessThanOrEqual(T![<=]),
+	LessThanOrEqual(#[semantic_eq(skip)] T![<=]),
 	/// `=`
-	Equal(T![=]),
+	Equal(#[semantic_eq(skip)] T![=]),
 }

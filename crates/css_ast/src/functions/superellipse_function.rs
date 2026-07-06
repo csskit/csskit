@@ -14,5 +14,6 @@ pub struct SuperellipseFunction {
 	#[atom(CssAtomSet::Superellipse)]
 	pub name: T![Function],
 	pub params: NumberOrInfinity,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

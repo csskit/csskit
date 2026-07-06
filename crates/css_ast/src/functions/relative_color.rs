@@ -252,6 +252,7 @@ pub struct RgbRelativeParams<'a> {
 	pub red: RelativeChannelValue<RgbChannelKeyword>,
 	pub green: RelativeChannelValue<RgbChannelKeyword>,
 	pub blue: RelativeChannelValue<RgbChannelKeyword>,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub alpha: Option<RelativeChannelValue<RgbChannelKeyword>>,
 }
@@ -270,6 +271,7 @@ pub struct HslRelativeParams<'a> {
 	pub hue: RelativeHueValue<HslChannelKeyword>,
 	pub saturation: RelativeChannelValue<HslChannelKeyword>,
 	pub lightness: RelativeChannelValue<HslChannelKeyword>,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub alpha: Option<RelativeChannelValue<HslChannelKeyword>>,
 }
@@ -288,6 +290,7 @@ pub struct HwbRelativeParams<'a> {
 	pub hue: RelativeHueValue<HwbChannelKeyword>,
 	pub whiteness: RelativeChannelValue<HwbChannelKeyword>,
 	pub blackness: RelativeChannelValue<HwbChannelKeyword>,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub alpha: Option<RelativeChannelValue<HwbChannelKeyword>>,
 }
@@ -306,6 +309,7 @@ pub struct LabRelativeParams<'a> {
 	pub l: RelativeChannelValue<LabChannelKeyword>,
 	pub a: RelativeChannelValue<LabChannelKeyword>,
 	pub b: RelativeChannelValue<LabChannelKeyword>,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub alpha: Option<RelativeChannelValue<LabChannelKeyword>>,
 }
@@ -324,6 +328,7 @@ pub struct LchRelativeParams<'a> {
 	pub lightness: RelativeChannelValue<LchChannelKeyword>,
 	pub chroma: RelativeChannelValue<LchChannelKeyword>,
 	pub hue: RelativeHueValue<LchChannelKeyword>,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub alpha: Option<RelativeChannelValue<LchChannelKeyword>>,
 }
@@ -346,6 +351,7 @@ pub struct ColorRelativeParams<'a> {
 	pub c1: RelativeChannelValue<ColorChannelKeyword>,
 	pub c2: RelativeChannelValue<ColorChannelKeyword>,
 	pub c3: RelativeChannelValue<ColorChannelKeyword>,
+	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
 	pub alpha: Option<RelativeChannelValue<ColorChannelKeyword>>,
 }
@@ -363,6 +369,7 @@ pub struct RgbRelativeFunction<'a> {
 	#[atom(CssAtomSet::Rgb)]
 	pub name: T![Function],
 	pub params: RgbRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -390,6 +397,7 @@ pub struct RgbaRelativeFunction<'a> {
 	#[atom(CssAtomSet::Rgba)]
 	pub name: T![Function],
 	pub params: RgbRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -417,6 +425,7 @@ pub struct HslRelativeFunction<'a> {
 	#[atom(CssAtomSet::Hsl)]
 	pub name: T![Function],
 	pub params: HslRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -444,6 +453,7 @@ pub struct HslaRelativeFunction<'a> {
 	#[atom(CssAtomSet::Hsla)]
 	pub name: T![Function],
 	pub params: HslRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -471,6 +481,7 @@ pub struct HwbRelativeFunction<'a> {
 	#[atom(CssAtomSet::Hwb)]
 	pub name: T![Function],
 	pub params: HwbRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -498,6 +509,7 @@ pub struct LabRelativeFunction<'a> {
 	#[atom(CssAtomSet::Lab)]
 	pub name: T![Function],
 	pub params: LabRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -525,6 +537,7 @@ pub struct LchRelativeFunction<'a> {
 	#[atom(CssAtomSet::Lch)]
 	pub name: T![Function],
 	pub params: LchRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -552,6 +565,7 @@ pub struct OklabRelativeFunction<'a> {
 	#[atom(CssAtomSet::Oklab)]
 	pub name: T![Function],
 	pub params: LabRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -579,6 +593,7 @@ pub struct OklchRelativeFunction<'a> {
 	#[atom(CssAtomSet::Oklch)]
 	pub name: T![Function],
 	pub params: LchRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -606,6 +621,7 @@ pub struct ColorRelativeFunction<'a> {
 	#[atom(CssAtomSet::Color)]
 	pub name: T![Function],
 	pub params: ColorRelativeParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

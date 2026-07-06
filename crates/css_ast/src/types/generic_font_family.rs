@@ -26,6 +26,7 @@ pub struct GenericScriptSpecific {
 	#[atom(CssAtomSet::Generic)]
 	pub name: T![Function],
 	pub params: GenericScriptSpecificKeyword,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

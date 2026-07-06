@@ -15,6 +15,7 @@ pub struct RepeatFunction<'a> {
 	#[atom(CssAtomSet::Repeat)]
 	pub name: T![Function],
 	pub params: RepeatFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -25,6 +26,7 @@ pub struct RepeatFunctionParams<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub count: AutoOr<PositiveNonZeroInt>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,
 	pub tracks: Vec<'a, LineWidth>,
 }

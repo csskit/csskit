@@ -828,15 +828,15 @@ pub struct SizeComparison {
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum SizeOperator {
 	/// `!=` operator (not equal)
-	NotEqual(T![!=]),
+	NotEqual(#[semantic_eq(skip)] T![!=]),
 	/// `>` operator (greater than)
-	GreaterThan(T![>]),
+	GreaterThan(#[semantic_eq(skip)] T![>]),
 	/// `<` operator (less than)
-	LessThan(T![<]),
+	LessThan(#[semantic_eq(skip)] T![<]),
 	/// `>=` operator (greater than or equal)
-	GreaterThanOrEqual(T![>=]),
+	GreaterThanOrEqual(#[semantic_eq(skip)] T![>=]),
 	/// `<=` operator (less than or equal)
-	LessThanOrEqual(T![<=]),
+	LessThanOrEqual(#[semantic_eq(skip)] T![<=]),
 }
 
 impl QuerySizePseudo {

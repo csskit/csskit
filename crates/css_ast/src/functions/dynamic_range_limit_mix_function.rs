@@ -13,6 +13,7 @@ pub struct DynamicRangeLimitMixFunction<'a> {
 	#[atom(CssAtomSet::DynamicRangeLimitMix)]
 	pub name: T![Function],
 	pub params: CommaSeparated<'a, DynamicRangeLimitMixFunctionParams<'a>>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

@@ -34,9 +34,10 @@ macro_rules! cursor_wrapped {
 	};
 }
 
-macro_rules! define_kinds {
-	($($(#[$meta:meta])* $ident:ident,)*) => {
-		$(
+/// Shared body for [define_kinds!] and [define_fixed_kinds!]; everything except the
+/// `SemanticEq` impl, which differs between the two (see [define_fixed_kinds!]).
+macro_rules! define_kind_common {
+	($(#[$meta:meta])* $ident:ident) => {
 		$(#[$meta])*
 		#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -94,10 +95,37 @@ macro_rules! define_kinds {
 				self.0.to_span()
 			}
 		}
+	};
+}
+
+macro_rules! define_kinds {
+	($($(#[$meta:meta])* $ident:ident,)*) => {
+		$(
+		define_kind_common!($(#[$meta])* $ident);
 
 		impl $crate::SemanticEq for $ident {
 			fn semantic_eq(&self, s: &Self) -> bool {
 				self.0.semantic_eq(&s.0)
+			}
+		}
+		)*
+	};
+}
+
+/// Like [define_kinds!], but for kinds whose content is entirely fixed by the Rust type - once
+/// parsing succeeds there is no varying data left to compare (e.g. a [Comma] is always just a
+/// `,`; the only bits that could otherwise differ are non-semantic associated-whitespace
+/// formatting hints). `semantic_eq` for these kinds is therefore always `true`, skipping the
+/// token comparison outright.
+macro_rules! define_fixed_kinds {
+	($($(#[$meta:meta])* $ident:ident,)*) => {
+		$(
+		define_kind_common!($(#[$meta])* $ident);
+
+		impl $crate::SemanticEq for $ident {
+			#[inline(always)]
+			fn semantic_eq(&self, _: &Self) -> bool {
+				true
 			}
 		}
 		)*
@@ -250,8 +278,11 @@ macro_rules! custom_delim {
 		}
 
 		impl $crate::SemanticEq for $ident {
-			fn semantic_eq(&self, other: &Self) -> bool {
-				self.0.semantic_eq(&other.0)
+			#[inline(always)]
+			fn semantic_eq(&self, _: &Self) -> bool {
+				// The character is fixed by the type itself (parsing only succeeds for
+				// `$ch`), so there is nothing left to compare.
+				true
 			}
 		}
 	};
@@ -331,8 +362,11 @@ macro_rules! custom_double_delim {
 		}
 
 		impl $crate::SemanticEq for $ident {
-			fn semantic_eq(&self, other: &Self) -> bool {
-				self.0.semantic_eq(&other.0) && self.1.semantic_eq(&other.1)
+			#[inline(always)]
+			fn semantic_eq(&self, _: &Self) -> bool {
+				// Both characters are fixed by the type itself (`$first` then `$second`), so
+				// there is nothing left to compare.
+				true
 			}
 		}
 	};
@@ -356,7 +390,9 @@ define_kinds! {
 
 	/// Represents a token with [Kind::Delim][Kind::Delim], can be any single character. Use [T![Delim]][crate::T] to refer to this.
 	Delim,
+}
 
+define_fixed_kinds! {
 	/// Represents a token with [Kind::Colon][Kind::Colon] - a `:` character. Use [T![:]][crate::T] to refer to this.
 	Colon,
 
@@ -825,8 +861,11 @@ pub mod double {
 	}
 
 	impl SemanticEq for ColonColon {
-		fn semantic_eq(&self, other: &Self) -> bool {
-			self.0.semantic_eq(&other.0) && self.1.semantic_eq(&other.1)
+		#[inline(always)]
+		fn semantic_eq(&self, _: &Self) -> bool {
+			// Both `:` characters are fixed by the type itself, so there is nothing left to
+			// compare.
+			true
 		}
 	}
 }
@@ -982,4 +1021,49 @@ macro_rules! T {
 	[!important] => { $crate::token_macros::double::BangImportant };
 
 	[$ident:ident] => { $crate::token_macros::$ident }
+}
+
+#[cfg(test)]
+mod fixed_kind_semantic_eq_tests {
+	use super::*;
+	use crate::SemanticEq;
+	use css_lexer::{AssociatedWhitespaceRules, SourceOffset};
+
+	// Colon, Semicolon, Comma, and the paren/curly/square brackets are "delim-like": they
+	// share Delim's bit layout and can carry non-semantic associated-whitespace formatting
+	// hints, which makes two otherwise-identical tokens compare unequal via plain `PartialEq`.
+	// `semantic_eq` must ignore this entirely for these kinds, since there is no other varying
+	// content once the type is known.
+	#[test]
+	fn fixed_punctuation_kinds_are_always_semantic_eq() {
+		macro_rules! check {
+			($ty:ident, $token:expr) => {{
+				let plain = $ty(Cursor::new(SourceOffset(0), $token));
+				let with_rule = $ty(Cursor::new(
+					SourceOffset(0),
+					$token.with_associated_whitespace(AssociatedWhitespaceRules::EnforceBefore),
+				));
+				assert_ne!(
+					plain,
+					with_rule,
+					"associated whitespace should still affect PartialEq for {}",
+					stringify!($ty)
+				);
+				assert!(
+					plain.semantic_eq(&with_rule),
+					"{} should always be semantic_eq regardless of associated whitespace",
+					stringify!($ty)
+				);
+			}};
+		}
+		check!(Colon, Token::COLON);
+		check!(Semicolon, Token::SEMICOLON);
+		check!(Comma, Token::COMMA);
+		check!(LeftCurly, Token::LEFT_CURLY);
+		check!(RightCurly, Token::RIGHT_CURLY);
+		check!(LeftSquare, Token::LEFT_SQUARE);
+		check!(RightSquare, Token::RIGHT_SQUARE);
+		check!(LeftParen, Token::LEFT_PAREN);
+		check!(RightParen, Token::RIGHT_PAREN);
+	}
 }

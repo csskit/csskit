@@ -17,6 +17,7 @@ pub struct StripesFunction<'a> {
 	pub name: T![Function],
 	pub params: CommaSeparated<'a, ColorStripe<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

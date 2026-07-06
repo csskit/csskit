@@ -14,6 +14,7 @@ pub struct ParamFunction<'a> {
 	#[atom(CssAtomSet::Param)]
 	pub name: T![Function],
 	pub params: ParamFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -21,6 +22,7 @@ pub struct ParamFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ParamFunctionParams<'a> {
 	pub ident: T![DashedIdent],
+	#[semantic_eq(skip)]
 	pub comma: T![,],
 	pub value: Option<ComponentValues<'a>>,
 }

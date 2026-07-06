@@ -27,15 +27,15 @@ pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 pub enum DocumentMatcher {
 	Url(T![Url]),
 	#[atom(CssAtomSet::Url)]
-	UrlFunction(T![Function], T![String], T![')']),
+	UrlFunction(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::UrlPrefix)]
-	UrlPrefix(T![Function], T![String], T![')']),
+	UrlPrefix(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::Domain)]
-	Domain(T![Function], T![String], T![')']),
+	Domain(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::MediaDocument)]
-	MediaDocument(T![Function], T![String], T![')']),
+	MediaDocument(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::Regexp)]
-	Regexp(T![Function], T![String], T![')']),
+	Regexp(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

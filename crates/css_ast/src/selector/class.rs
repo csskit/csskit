@@ -6,6 +6,7 @@ use csskit_derives::*;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Class {
+	#[semantic_eq(skip)]
 	pub dot: T![.],
 	pub name: T![Ident],
 }

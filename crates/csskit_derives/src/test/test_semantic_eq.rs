@@ -50,6 +50,32 @@ fn semantic_eq_enum_with_named_struct_variant_multiple_fields() {
 }
 
 #[test]
+fn semantic_eq_struct_skip_field() {
+	let data = to_deriveinput! {
+		struct StringFunction {
+			name: Ident,
+			#[semantic_eq(skip)]
+			close: T![')'],
+		}
+	};
+	assert_semantic_eq_snapshot!(data, "semantic_eq_struct_skip_field");
+}
+
+#[test]
+fn semantic_eq_enum_skip_field() {
+	let data = to_deriveinput! {
+		enum Foo {
+			Bar {
+				name: Ident,
+				#[semantic_eq(skip)]
+				close: T![')'],
+			},
+		}
+	};
+	assert_semantic_eq_snapshot!(data, "semantic_eq_enum_skip_field");
+}
+
+#[test]
 fn semantic_eq_enum_mixed_variants() {
 	let data = to_deriveinput! {
 		enum FlexWrap {

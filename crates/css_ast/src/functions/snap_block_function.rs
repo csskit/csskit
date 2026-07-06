@@ -14,12 +14,18 @@ pub struct SnapBlockFunction {
 	#[atom(CssAtomSet::SnapBlock)]
 	pub name: T![Function],
 	pub params: SnapBlockFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SnapBlockFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapBlockKeyword>, Option<T![,]>);
+pub struct SnapBlockFunctionParams(
+	LengthPercentage,
+	#[semantic_eq(skip)] Option<T![,]>,
+	Option<SnapBlockKeyword>,
+	#[semantic_eq(skip)] Option<T![,]>,
+);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

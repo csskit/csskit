@@ -71,10 +71,12 @@ impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HighlightPseudoElement {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::Highlight)]
 	pub function: T![Function],
 	pub value: T![Ident],
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -84,12 +86,14 @@ pub struct HighlightPseudoElement {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct SlottedPseudoElement<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Slotted)]
 	pub function: T![Function],
 	pub value: CompoundSelector<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -98,10 +102,12 @@ pub struct SlottedPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct PartPseudoElement<'a> {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::Part)]
 	pub function: T![Function],
 	pub value: Vec<'a, T![Ident]>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -110,10 +116,12 @@ pub struct PartPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct PickerPseudoElement {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::Picker)]
 	pub function: T![Function],
 	pub value: T![Ident],
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -122,10 +130,12 @@ pub struct PickerPseudoElement {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ViewTransitionGroupPseudoElement<'a> {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::ViewTransitionGroup)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -134,10 +144,12 @@ pub struct ViewTransitionGroupPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ViewTransitionImagePairPseudoElement<'a> {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::ViewTransitionImagePair)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -146,10 +158,12 @@ pub struct ViewTransitionImagePairPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ViewTransitionNewPseudoElement<'a> {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::ViewTransitionNew)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -158,10 +172,12 @@ pub struct ViewTransitionNewPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ViewTransitionOldPseudoElement<'a> {
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[atom(CssAtomSet::ViewTransitionOld)]
 	pub function: T![Function],
 	pub value: PtNameAndClassSelector<'a>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -170,7 +186,7 @@ pub struct ViewTransitionOldPseudoElement<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum PtNameAndClassSelector<'a> {
-	Wildcard(T![*]),
+	Wildcard(#[semantic_eq(skip)] T![*]),
 	Named(T![Ident], Vec<'a, (T![.], T![Ident])>),
 	Classes(Vec<'a, (T![.], T![Ident])>),
 }

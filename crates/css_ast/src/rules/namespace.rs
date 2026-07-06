@@ -19,6 +19,7 @@ pub struct NamespaceRule {
 	pub prefix: Option<T![Ident]>,
 	pub resource: UrlOrString,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub semicolon: Option<T![;]>,
 }
 

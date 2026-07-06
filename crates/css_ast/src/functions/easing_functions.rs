@@ -65,6 +65,7 @@ pub struct LinearFunction<'a> {
 	#[atom(CssAtomSet::Linear)]
 	pub name: T![Function],
 	pub params: CommaSeparated<'a, LinearFunctionParams>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -97,6 +98,7 @@ pub struct CubicBezierFunction {
 	#[atom(CssAtomSet::CubicBezier)]
 	pub name: T![Function],
 	pub params: CubicBezierFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -104,10 +106,13 @@ pub struct CubicBezierFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CubicBezierFunctionParams {
 	x1: T![Number],
+	#[semantic_eq(skip)]
 	c1: Option<T![,]>,
 	x2: T![Number],
+	#[semantic_eq(skip)]
 	c2: Option<T![,]>,
 	y1: T![Number],
+	#[semantic_eq(skip)]
 	c3: Option<T![,]>,
 	y2: T![Number],
 }
@@ -120,12 +125,13 @@ pub struct StepsFunction {
 	#[atom(CssAtomSet::Steps)]
 	pub name: T![Function],
 	pub params: StepsFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct StepsFunctionParams(CSSInt, Option<T![,]>, Option<StepPosition>);
+pub struct StepsFunctionParams(CSSInt, #[semantic_eq(skip)] Option<T![,]>, Option<StepPosition>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

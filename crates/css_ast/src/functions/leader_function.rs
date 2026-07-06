@@ -14,6 +14,7 @@ pub struct LeaderFunction {
 	#[atom(CssAtomSet::Leader)]
 	pub name: T![Function],
 	pub params: LeaderType,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

@@ -168,6 +168,7 @@ pub struct ColorFunctionColor {
 	#[atom(CssAtomSet::Color)]
 	pub name: T![Function],
 	pub params: ColorFunctionColorParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -256,7 +257,7 @@ pub struct ColorFunctionColorParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![/]>,
+	#[semantic_eq(skip)] pub Option<T![/]>,
 	pub Option<NoneOr<NumberOrPercentage>>,
 );
 
@@ -284,6 +285,7 @@ pub struct RgbFunction {
 	#[atom(CssAtomSet::Rgb)]
 	pub name: T![Function],
 	pub params: RgbFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -302,6 +304,7 @@ pub struct RgbaFunction {
 	#[atom(CssAtomSet::Rgba)]
 	pub name: T![Function],
 	pub params: RgbFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -318,9 +321,9 @@ impl crate::ToChromashift for RgbaFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct RgbFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub NoneOr<NumberOrPercentage>,
 	pub Option<CommaOrSlash>,
 	pub Option<NoneOr<NumberOrPercentage>>,
@@ -385,6 +388,7 @@ pub struct HslFunction {
 	#[atom(CssAtomSet::Hsl)]
 	pub name: T![Function],
 	pub params: HslFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -403,6 +407,7 @@ pub struct HslaFunction {
 	#[atom(CssAtomSet::Hsla)]
 	pub name: T![Function],
 	pub params: HslFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -419,9 +424,9 @@ impl crate::ToChromashift for HslaFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HslFunctionParams(
 	pub NoneOr<AngleOrNumber>,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub NoneOr<NumberOrPercentage>,
 	pub Option<CommaOrSlash>,
 	pub Option<NoneOr<NumberOrPercentage>>,
@@ -474,6 +479,7 @@ pub struct HwbFunction {
 	#[atom(CssAtomSet::Hwb)]
 	pub name: T![Function],
 	pub params: HwbFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -515,7 +521,7 @@ pub struct HwbFunctionParams(
 	pub NoneOr<AngleOrNumber>,
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![/]>,
+	#[semantic_eq(skip)] pub Option<T![/]>,
 	pub Option<NoneOr<NumberOrPercentage>>,
 );
 
@@ -535,6 +541,7 @@ pub struct LabFunction {
 	#[atom(CssAtomSet::Lab)]
 	pub name: T![Function],
 	pub params: LabFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -576,7 +583,7 @@ pub struct LabFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
-	pub Option<T![/]>,
+	#[semantic_eq(skip)] pub Option<T![/]>,
 	pub Option<NoneOr<NumberOrPercentage>>,
 );
 
@@ -596,6 +603,7 @@ pub struct LchFunction {
 	#[atom(CssAtomSet::Lch)]
 	pub name: T![Function],
 	pub params: LchFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -637,7 +645,7 @@ pub struct LchFunctionParams(
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<NumberOrPercentage>,
 	pub NoneOr<AngleOrNumber>,
-	pub Option<T![/]>,
+	#[semantic_eq(skip)] pub Option<T![/]>,
 	pub Option<NoneOr<NumberOrPercentage>>,
 );
 
@@ -657,6 +665,7 @@ pub struct OklabFunction {
 	#[atom(CssAtomSet::Oklab)]
 	pub name: T![Function],
 	pub params: LabFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -706,6 +715,7 @@ pub struct OklchFunction {
 	#[atom(CssAtomSet::Oklch)]
 	pub name: T![Function],
 	pub params: LchFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

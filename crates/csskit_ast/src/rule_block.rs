@@ -139,6 +139,7 @@ pub struct DiagnosticAttrFunction {
 	#[atom(CsskitAtomSet::Attr)]
 	pub open: T![Function],
 	pub name: T![Ident],
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -147,6 +148,7 @@ pub struct DiagnosticAttrFunction {
 pub struct DiagnosticSizeFunction {
 	#[atom(CsskitAtomSet::Size)]
 	pub open: T![Function],
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

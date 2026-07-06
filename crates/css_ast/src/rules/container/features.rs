@@ -224,25 +224,43 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ScrollStateFeature {
 	Stuck(
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Ident],
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![:]>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![:]>,
 		Option<StuckScrollStateFeatureKeyword>,
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 	Snapped(
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Ident],
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![:]>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![:]>,
 		Option<SnappedScrollStateFeatureKeyword>,
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 	Scrollable(
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Ident],
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![:]>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![:]>,
 		Option<ScrollableScrollStateFeatureKeyword>,
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 }
 

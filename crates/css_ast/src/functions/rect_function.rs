@@ -17,14 +17,18 @@ pub struct RectFunction {
 	pub name: T![Function],
 	pub top: AutoOr<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub comma1: Option<T![,]>,
 	pub right: AutoOr<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub comma2: Option<T![,]>,
 	pub bottom: AutoOr<Length>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub comma3: Option<T![,]>,
 	pub left: AutoOr<Length>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

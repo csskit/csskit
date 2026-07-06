@@ -14,6 +14,7 @@ pub struct SymbolsFunction<'a> {
 	#[atom(CssAtomSet::Symbols)]
 	pub name: T![Function],
 	pub params: SymbolsFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
