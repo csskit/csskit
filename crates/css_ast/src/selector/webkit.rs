@@ -107,11 +107,13 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colons: T![::],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub function: T![Function],
 	pub value: CompoundSelector<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 

@@ -13,6 +13,7 @@ pub struct ContentFunction {
 	#[atom(CssAtomSet::Content)]
 	pub name: T![Function],
 	pub params: Option<ContentKeyword>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

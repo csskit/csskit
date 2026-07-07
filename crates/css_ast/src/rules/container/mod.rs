@@ -149,12 +149,12 @@ macro_rules! container_feature {
 			Style(
 				#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 				StyleQuery<'a>,
-				#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+				#[cfg_attr(feature = "visitable", visit(skip))] #[semantic_eq(skip)] T![')'],
 			),
 			ScrollState(
 				#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 				ScrollStateQuery<'a>,
-				#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
+				#[cfg_attr(feature = "visitable", visit(skip))] #[semantic_eq(skip)] T![')'],
 			),
 		}
 	}

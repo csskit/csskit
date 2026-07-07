@@ -15,6 +15,7 @@ pub struct LayerRule<'a> {
 	#[metadata(delegate)]
 	pub block: Option<LayerRuleBlock<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub semicolon: Option<T![;]>,
 }
 

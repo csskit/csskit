@@ -14,9 +14,9 @@ use super::prelude::*;
 pub enum Url {
 	Url(T![Url]),
 	#[atom(CssAtomSet::Url)]
-	UrlFunction(T![Function], T![String], T![')']),
+	UrlFunction(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::Src)]
-	SrcFunction(T![Function], T![String], T![')']),
+	SrcFunction(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

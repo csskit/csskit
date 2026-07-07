@@ -16,9 +16,11 @@ pub struct ColorMixFunction<'a> {
 	pub name: T![Function],
 	pub interpolation: Option<ColorInterpolationMethod>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub interpolation_comma: Option<T![,]>,
 	pub parts: CommaSeparated<'a, ColorMixPart<'a>, 1>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

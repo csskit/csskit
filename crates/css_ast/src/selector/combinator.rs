@@ -7,11 +7,11 @@ use csskit_derives::*;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum Combinator {
-	Child(T![>]),
-	NextSibling(T![+]),
-	SubsequentSibling(T![~]),
-	Column(T![||]),
-	Nesting(T![&]),
+	Child(#[semantic_eq(skip)] T![>]),
+	NextSibling(#[semantic_eq(skip)] T![+]),
+	SubsequentSibling(#[semantic_eq(skip)] T![~]),
+	Column(#[semantic_eq(skip)] T![||]),
+	Nesting(#[semantic_eq(skip)] T![&]),
 	Descendant(T![' ']),
 }
 

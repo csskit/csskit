@@ -24,6 +24,7 @@ pub struct ImportRule<'a> {
 	pub supports_condition: Option<ImportSupportsFunction<'a>>,
 	pub media_condition: Option<MediaQueryList<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub semicolon: Option<T![;]>,
 }
 
@@ -49,6 +50,7 @@ pub struct ImportLayerFunction<'a> {
 	pub name: T![Function],
 	pub layer: LayerName<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -62,6 +64,7 @@ pub struct ImportSupportsFunction<'a> {
 	pub name: T![Function],
 	pub condition: SupportsCondition<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

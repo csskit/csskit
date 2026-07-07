@@ -14,12 +14,13 @@ pub struct CounterFunction<'a> {
 	#[atom(CssAtomSet::Counter)]
 	pub name: T![Function],
 	pub params: CounterFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CounterFunctionParams<'a>(T![Ident], Option<T![,]>, Option<CounterStyle<'a>>);
+pub struct CounterFunctionParams<'a>(T![Ident], #[semantic_eq(skip)] Option<T![,]>, Option<CounterStyle<'a>>);
 
 /// <https://drafts.csswg.org/css-lists-3/#counter-functions>
 ///
@@ -34,12 +35,19 @@ pub struct CountersFunction<'a> {
 	#[atom(CssAtomSet::Counters)]
 	pub name: T![Function],
 	pub params: CountersFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CountersFunctionParams<'a>(T![Ident], Option<T![,]>, T![String], Option<T![,]>, Option<CounterStyle<'a>>);
+pub struct CountersFunctionParams<'a>(
+	T![Ident],
+	#[semantic_eq(skip)] Option<T![,]>,
+	T![String],
+	#[semantic_eq(skip)] Option<T![,]>,
+	Option<CounterStyle<'a>>,
+);
 
 /// <https://drafts.csswg.org/css-lists-3/#counter-functions>
 ///

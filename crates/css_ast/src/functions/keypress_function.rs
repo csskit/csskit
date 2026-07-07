@@ -13,6 +13,7 @@ pub struct KeypressFunction {
 	#[atom(CssAtomSet::Keypress)]
 	pub name: T![Function],
 	pub params: T![String],
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

@@ -38,7 +38,7 @@ macro_rules! define_pseudo_element {
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 		pub enum PseudoElement {
-			$($(#[$meta])* $ident(T![::], T![Ident]),)+
+			$($(#[$meta])* $ident(#[semantic_eq(skip)] T![::], T![Ident]),)+
 			Webkit(WebkitPseudoElement),
 			Moz(MozPseudoElement),
 			Ms(MsPseudoElement),

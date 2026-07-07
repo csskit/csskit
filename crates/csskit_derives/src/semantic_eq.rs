@@ -1,4 +1,4 @@
-use crate::WhereCollector;
+use crate::{WhereCollector, attributes::extract_semantic_eq_skip};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{Data, DeriveInput, Error, Fields, Result, parse_quote};
@@ -25,8 +25,10 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		return Err(Error::new(input.ident.span(), "Cannot derive SemanticEq on a Union"));
 	}
 
-	let s_a = structure_with_prefix(&input, "a")?;
-	let s_b = structure_with_prefix(&input, "b")?;
+	let mut s_a = structure_with_prefix(&input, "a")?;
+	let mut s_b = structure_with_prefix(&input, "b")?;
+	s_a.filter(|bi| !extract_semantic_eq_skip(&bi.ast().attrs));
+	s_b.filter(|bi| !extract_semantic_eq_skip(&bi.ast().attrs));
 
 	let mut wc = WhereCollector::new();
 	for variant in s_a.variants() {
@@ -51,7 +53,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			.collect();
 		let a_pat = s_a.variants()[0].pat();
 		let b_pat = s_b.variants()[0].pat();
-		let body = steps.into_iter().reduce(|acc, item| quote! { #acc && #item }).unwrap_or_default();
+		let body = steps.into_iter().reduce(|acc, item| quote! { #acc && #item }).unwrap_or(quote! { true });
 		quote! {
 			let #a_pat = self;
 			let #b_pat = other;

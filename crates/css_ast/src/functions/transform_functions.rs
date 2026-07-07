@@ -44,6 +44,7 @@ pub struct MatrixFunction {
 	#[atom(CssAtomSet::Matrix)]
 	pub name: T![Function],
 	pub params: MatrixFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -51,15 +52,15 @@ pub struct MatrixFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MatrixFunctionParams(
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
 );
 
@@ -76,6 +77,7 @@ pub struct Matrix3dFunction {
 	#[atom(CssAtomSet::Matrix3d)]
 	pub name: T![Function],
 	pub params: Matrix3dFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -84,35 +86,35 @@ pub struct Matrix3dFunction {
 #[allow(clippy::type_complexity)] // TODO: simplify types
 pub struct Matrix3dFunctionParams(
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
 );
 
@@ -129,8 +131,10 @@ pub struct TranslateFunction {
 	#[atom(CssAtomSet::Translate)]
 	pub name: T![Function],
 	pub x: LengthPercentage,
+	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,
 	pub y: Option<LengthPercentage>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -147,6 +151,7 @@ pub struct Translate3dFunction {
 	#[atom(CssAtomSet::Translate3d)]
 	pub name: T![Function],
 	pub params: Translate3dFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -154,9 +159,9 @@ pub struct Translate3dFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Translate3dFunctionParams(
 	pub LengthPercentage,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub LengthPercentage,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub Length,
 );
 
@@ -173,6 +178,7 @@ pub struct TranslatexFunction {
 	#[atom(CssAtomSet::Translatex)]
 	pub name: T![Function],
 	pub params: LengthPercentage,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -189,6 +195,7 @@ pub struct TranslateyFunction {
 	#[atom(CssAtomSet::Translatey)]
 	pub name: T![Function],
 	pub params: LengthPercentage,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -205,6 +212,7 @@ pub struct TranslatezFunction {
 	#[atom(CssAtomSet::Translatez)]
 	pub name: T![Function],
 	pub params: Length,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -220,7 +228,9 @@ pub struct TranslatezFunction {
 pub struct ScaleFunction {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
+	#[semantic_eq(skip)]
 	pub params: (NumberOrPercentage, Option<T![,]>, Option<NumberOrPercentage>),
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -237,6 +247,7 @@ pub struct Scale3dFunction {
 	#[atom(CssAtomSet::Scale3d)]
 	pub name: T![Function],
 	pub params: Scale3dFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -244,9 +255,9 @@ pub struct Scale3dFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Scale3dFunctionParams(
 	pub NumberOrPercentage,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub NumberOrPercentage,
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub NumberOrPercentage,
 );
 
@@ -263,6 +274,7 @@ pub struct ScalexFunction {
 	#[atom(CssAtomSet::Scalex)]
 	pub name: T![Function],
 	pub params: NumberOrPercentage,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -279,6 +291,7 @@ pub struct ScaleyFunction {
 	#[atom(CssAtomSet::Scaley)]
 	pub name: T![Function],
 	pub params: NumberOrPercentage,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -295,6 +308,7 @@ pub struct ScalezFunction {
 	#[atom(CssAtomSet::Scalez)]
 	pub name: T![Function],
 	pub params: NumberOrPercentage,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -311,6 +325,7 @@ pub struct RotateFunction {
 	#[atom(CssAtomSet::Rotate)]
 	pub name: T![Function],
 	pub params: AngleOrZero,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -327,6 +342,7 @@ pub struct Rotate3dFunction {
 	#[atom(CssAtomSet::Rotate3d)]
 	pub name: T![Function],
 	pub params: Rotate3dFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -334,11 +350,11 @@ pub struct Rotate3dFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Rotate3dFunctionParams(
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub T![Number],
-	pub Option<T![,]>,
+	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub AngleOrZero,
 );
 
@@ -355,6 +371,7 @@ pub struct RotatexFunction {
 	#[atom(CssAtomSet::Rotatex)]
 	pub name: T![Function],
 	pub params: AngleOrZero,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -371,6 +388,7 @@ pub struct RotateyFunction {
 	#[atom(CssAtomSet::Rotatey)]
 	pub name: T![Function],
 	pub params: AngleOrZero,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -387,6 +405,7 @@ pub struct RotatezFunction {
 	#[atom(CssAtomSet::Rotatez)]
 	pub name: T![Function],
 	pub params: AngleOrZero,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -402,7 +421,9 @@ pub struct RotatezFunction {
 pub struct SkewFunction {
 	#[atom(CssAtomSet::Skew)]
 	pub name: T![Function],
+	#[semantic_eq(skip)]
 	pub params: (AngleOrZero, Option<T![,]>, Option<AngleOrZero>),
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -419,6 +440,7 @@ pub struct SkewxFunction {
 	#[atom(CssAtomSet::Skewx)]
 	pub name: T![Function],
 	pub params: AngleOrZero,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -435,6 +457,7 @@ pub struct SkewyFunction {
 	#[atom(CssAtomSet::Skewy)]
 	pub name: T![Function],
 	pub params: AngleOrZero,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -451,6 +474,7 @@ pub struct PerspectiveFunction {
 	#[atom(CssAtomSet::Perspective)]
 	pub name: T![Function],
 	pub params: NoneOr<Length>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

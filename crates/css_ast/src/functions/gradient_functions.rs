@@ -36,6 +36,7 @@ pub struct LinearGradientFunction<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
 	pub name: T![Function],
 	pub params: LinearGradientFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -43,7 +44,7 @@ pub struct LinearGradientFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
@@ -61,6 +62,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
 	pub name: T![Function],
 	pub params: RepeatingLinearGradientFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -68,7 +70,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingLinearGradientFunctionParams<'a>(
 	Option<LinearDirection>,
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
@@ -88,6 +90,7 @@ pub struct RadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RadialGradient)]
 	pub name: T![Function],
 	pub params: RadialGradientFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -98,7 +101,7 @@ pub struct RadialGradientFunctionParams<'a>(
 	Option<RadialShape>,
 	Option<T![Ident]>,
 	Option<Position>,
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 
@@ -118,6 +121,7 @@ pub struct RepeatingRadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
 	pub name: T![Function],
 	pub params: RepeatingRadialGradientFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -128,7 +132,7 @@ pub struct RepeatingRadialGradientFunctionParams<'a>(
 	Option<RadialShape>,
 	Option<T![Ident]>,
 	Option<Position>,
-	Option<T![,]>,
+	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
 

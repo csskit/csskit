@@ -14,6 +14,7 @@ pub struct ReversedCounterName {
 	#[atom(CssAtomSet::Reversed)]
 	pub function: T![Function],
 	pub name: CounterName,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

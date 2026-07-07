@@ -65,10 +65,10 @@ impl<'a> ToSpecificity for PageSelector<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PagePseudoClass {
-	Left(T![:], T![Ident]),
-	Right(T![:], T![Ident]),
-	First(T![:], T![Ident]),
-	Blank(T![:], T![Ident]),
+	Left(#[semantic_eq(skip)] T![:], T![Ident]),
+	Right(#[semantic_eq(skip)] T![:], T![Ident]),
+	First(#[semantic_eq(skip)] T![:], T![Ident]),
+	Blank(#[semantic_eq(skip)] T![:], T![Ident]),
 }
 
 impl ToSpecificity for PagePseudoClass {

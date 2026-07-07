@@ -14,6 +14,7 @@ pub struct FitContentFunction {
 	#[atom(CssAtomSet::FitContent)]
 	pub name: T![Function],
 	pub params: LengthPercentage,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

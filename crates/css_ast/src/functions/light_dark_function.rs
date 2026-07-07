@@ -15,8 +15,10 @@ pub struct LightDarkFunction<'a> {
 	pub name: T![Function],
 	pub light: Color<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub comma: T![,],
 	pub dark: Color<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 

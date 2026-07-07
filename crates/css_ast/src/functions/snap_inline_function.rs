@@ -14,12 +14,18 @@ pub struct SnapInlineFunction {
 	#[atom(CssAtomSet::SnapInline)]
 	pub name: T![Function],
 	pub params: SnapInlineFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SnapInlineFunctionParams(LengthPercentage, Option<T![,]>, Option<SnapInlineKeyword>, Option<T![,]>);
+pub struct SnapInlineFunctionParams(
+	LengthPercentage,
+	#[semantic_eq(skip)] Option<T![,]>,
+	Option<SnapInlineKeyword>,
+	#[semantic_eq(skip)] Option<T![,]>,
+);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

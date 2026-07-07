@@ -1,4 +1,4 @@
-use css_lexer::{Cursor, Kind};
+use css_lexer::{AssociatedWhitespaceRules, Cursor};
 
 /// Trait for semantic equality comparison that ignores source positions and whitespace.
 ///
@@ -14,15 +14,12 @@ pub trait SemanticEq {
 // Implement for Cursor - compare tokens without considering source offset
 impl SemanticEq for Cursor {
 	fn semantic_eq(&self, other: &Self) -> bool {
-		// For Delims, we ignore associated whitespace rules since
-		// those are formatting hints, not semantic content
-		match self.token().kind() {
-			Kind::Delim => {
-				self.token().with_associated_whitespace(css_lexer::AssociatedWhitespaceRules::none())
-					== other.token().with_associated_whitespace(css_lexer::AssociatedWhitespaceRules::none())
-			}
-			_ => self.token() == other.token(),
-		}
+		// Associated whitespace rules are formatting hints, not semantic content, so ignore
+		// them. `with_associated_whitespace` is a no-op for kinds that don't carry such rules
+		// (only "delim-like" kinds do: Delim, Colon, Semicolon, Comma, and the paren/curly/
+		// square brackets), so this is safe to apply unconditionally.
+		self.token().with_associated_whitespace(AssociatedWhitespaceRules::none())
+			== other.token().with_associated_whitespace(AssociatedWhitespaceRules::none())
 	}
 }
 
@@ -108,6 +105,35 @@ mod tests {
 
 		// Standard PartialEq should distinguish them
 		assert_ne!(cursor1, cursor2);
+	}
+
+	#[test]
+	fn test_cursor_semantic_eq_ignores_associated_whitespace_for_all_delim_like_kinds() {
+		// Colon, Semicolon, Comma, and the paren/curly/square brackets share Delim's bit
+		// layout and can also carry associated-whitespace formatting hints. Those hints are
+		// not semantic content, so two tokens differing only by them must compare equal.
+		for token in [
+			css_lexer::Token::COLON,
+			css_lexer::Token::SEMICOLON,
+			css_lexer::Token::COMMA,
+			css_lexer::Token::LEFT_PAREN,
+			css_lexer::Token::RIGHT_PAREN,
+			css_lexer::Token::LEFT_CURLY,
+			css_lexer::Token::RIGHT_CURLY,
+			css_lexer::Token::LEFT_SQUARE,
+			css_lexer::Token::RIGHT_SQUARE,
+		] {
+			let plain = Cursor::new(css_lexer::SourceOffset(0), token);
+			let with_whitespace_rule = Cursor::new(
+				css_lexer::SourceOffset(0),
+				token.with_associated_whitespace(css_lexer::AssociatedWhitespaceRules::EnforceBefore),
+			);
+			assert!(
+				plain.semantic_eq(&with_whitespace_rule),
+				"{:?} should be semantic_eq regardless of associated whitespace",
+				token.kind()
+			);
+		}
 	}
 
 	#[test]

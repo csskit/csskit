@@ -93,15 +93,60 @@ pseudo_element!(
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum MozFunctionalPseudoElement<'a> {
-	TreeCell(T![::], #[atom(CssAtomSet::TreeCell)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeCellText(T![::], #[atom(CssAtomSet::TreeCellText)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeCheckbox(T![::], #[atom(CssAtomSet::TreeCheckbox)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeColumn(T![::], #[atom(CssAtomSet::TreeColumn)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeImage(T![::], #[atom(CssAtomSet::TreeImage)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeLine(T![::], #[atom(CssAtomSet::TreeLine)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeRow(T![::], #[atom(CssAtomSet::TreeRow)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeSeparator(T![::], #[atom(CssAtomSet::TreeSeparator)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
-	TreeTwisty(T![::], #[atom(CssAtomSet::TreeTwisty)] T![Function], CommaSeparated<'a, T![Ident]>, T![')']),
+	TreeCell(
+		T![::],
+		#[atom(CssAtomSet::TreeCell)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeCellText(
+		T![::],
+		#[atom(CssAtomSet::TreeCellText)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeCheckbox(
+		T![::],
+		#[atom(CssAtomSet::TreeCheckbox)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeColumn(
+		T![::],
+		#[atom(CssAtomSet::TreeColumn)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeImage(
+		T![::],
+		#[atom(CssAtomSet::TreeImage)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeLine(
+		T![::],
+		#[atom(CssAtomSet::TreeLine)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeRow(
+		T![::],
+		#[atom(CssAtomSet::TreeRow)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeSeparator(
+		T![::],
+		#[atom(CssAtomSet::TreeSeparator)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
+	TreeTwisty(
+		T![::],
+		#[atom(CssAtomSet::TreeTwisty)] T![Function],
+		CommaSeparated<'a, T![Ident]>,
+		#[semantic_eq(skip)] T![')'],
+	),
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

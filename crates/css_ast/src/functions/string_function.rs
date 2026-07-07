@@ -13,6 +13,7 @@ pub struct StringFunction {
 	#[atom(CssAtomSet::String)]
 	pub name: T![Function],
 	pub params: StringFunctionParams,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -20,6 +21,7 @@ pub struct StringFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct StringFunctionParams {
 	pub ident: T![Ident],
+	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,
 	pub keyword: Option<StringKeyword>,
 }

@@ -16,19 +16,25 @@ pub struct AttrFunction<'a> {
 	#[atom(CssAtomSet::Attr)]
 	pub name: T![Function],
 	pub params: AttrFunctionParams<'a>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct AttrFunctionParams<'a>(AttrName, Option<AttrType>, Option<T![,]>, Option<ComponentValues<'a>>);
+pub struct AttrFunctionParams<'a>(
+	AttrName,
+	Option<AttrType>,
+	#[semantic_eq(skip)] Option<T![,]>,
+	Option<ComponentValues<'a>>,
+);
 
 /// ```text,ignore
 /// <attr-name> = [ <ident-token>? '|' ]? <ident-token>
 /// ```
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct AttrName(pub Option<T![Ident]>, pub Option<T![|]>, pub Option<T![Ident]>);
+pub struct AttrName(pub Option<T![Ident]>, #[semantic_eq(skip)] pub Option<T![|]>, pub Option<T![Ident]>);
 
 impl<'a> Peek<'a> for AttrName {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
@@ -67,7 +73,7 @@ impl<'a> Parse<'a> for AttrName {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttrType {
 	#[atom(CssAtomSet::Type)]
-	Type(T![Function], Syntax, T![')']),
+	Type(T![Function], Syntax, #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::RawString)]
 	RawString(T![Ident]),
 	Unit(T![Ident]),

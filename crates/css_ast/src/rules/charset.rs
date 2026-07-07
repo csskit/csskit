@@ -12,6 +12,7 @@ pub struct CharsetRule {
 	at_keyword: T![AtKeyword],
 	space: T![' '],
 	string: T![String],
+	#[semantic_eq(skip)]
 	semicolon: Option<T![;]>,
 }
 

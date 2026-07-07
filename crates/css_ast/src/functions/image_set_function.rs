@@ -15,6 +15,7 @@ pub struct ImageSetFunction<'a> {
 	#[atom(CssAtomSet::ImageSet)]
 	pub name: T![Function],
 	pub params: CommaSeparated<'a, ImageSetParams<'a>>,
+	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
@@ -29,7 +30,7 @@ pub enum ImageSetParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ResolutionOrType {
 	Resolution(Resolution),
-	Type(#[atom(CssAtomSet::Type)] T![Function], T![String], T![')']),
+	Type(#[atom(CssAtomSet::Type)] T![Function], T![String], #[semantic_eq(skip)] T![')']),
 }
 
 #[cfg(test)]

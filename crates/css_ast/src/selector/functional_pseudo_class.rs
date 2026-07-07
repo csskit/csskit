@@ -81,10 +81,12 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct DirPseudoFunction {
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[atom(CssAtomSet::Dir)]
 	pub function: T![Function],
 	pub value: DirValue,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -105,6 +107,7 @@ pub enum DirValue {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HasPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Has)]
@@ -112,6 +115,7 @@ pub struct HasPseudoFunction<'a> {
 	#[parse(state = State::DisallowRelativeSelector)]
 	pub value: RelativeSelector<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -121,12 +125,14 @@ pub struct HasPseudoFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HostPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Host)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -136,12 +142,14 @@ pub struct HostPseudoFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HostContextPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::HostContext)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -151,12 +159,14 @@ pub struct HostContextPseudoFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct IsPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Is)]
 	pub function: T![Function],
 	pub value: ForgivingSelector<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -165,10 +175,12 @@ pub struct IsPseudoFunction<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct LangPseudoFunction<'a> {
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[atom(CssAtomSet::Lang)]
 	pub function: T![Function],
 	pub value: LangValues<'a>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -189,12 +201,14 @@ pub enum LangValue {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NotPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Not)]
 	pub function: T![Function],
 	pub value: SelectorList<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -204,12 +218,14 @@ pub struct NotPseudoFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthChildPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::NthChild)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -219,12 +235,14 @@ pub struct NthChildPseudoFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthColPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::NthCol)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -234,12 +252,14 @@ pub struct NthColPseudoFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthLastChildPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::NthLastChild)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -249,12 +269,14 @@ pub struct NthLastChildPseudoFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthLastColPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::NthLastCol)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -264,12 +286,14 @@ pub struct NthLastColPseudoFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthLastOfTypePseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::NthLastOfType)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -279,12 +303,14 @@ pub struct NthLastOfTypePseudoFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct NthOfTypePseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::NthOfType)]
 	pub function: T![Function],
 	pub value: Nth,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -294,12 +320,14 @@ pub struct NthOfTypePseudoFunction {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WherePseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Where)]
 	pub function: T![Function],
 	pub value: ForgivingSelector<'a>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -308,10 +336,12 @@ pub struct WherePseudoFunction<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct StatePseudoFunction {
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[atom(CssAtomSet::State)]
 	pub function: T![Function],
 	pub value: T![Ident],
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 
@@ -320,10 +350,12 @@ pub struct StatePseudoFunction {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HeadingPseudoFunction<'a> {
+	#[semantic_eq(skip)]
 	pub colon: T![:],
 	#[atom(CssAtomSet::Heading)]
 	pub function: T![Function],
 	pub value: CommaSeparated<'a, Nth>,
+	#[semantic_eq(skip)]
 	pub close: Option<T![')']>,
 }
 

@@ -12,6 +12,7 @@ use crate::{BgPosition, BgSize};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BgPositionAndSize {
 	pub position: BgPosition,
+	#[semantic_eq(skip)]
 	pub size: Option<(T![/], BgSize)>,
 }
 

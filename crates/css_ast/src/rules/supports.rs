@@ -119,30 +119,52 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum SupportsFeature<'a> {
 	FontTech(
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 		ComponentValues<'a>,
-		#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		T![')'],
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 	FontFormat(
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 		ComponentValues<'a>,
-		#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		T![')'],
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 	Selector(
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T!['(']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 		ComplexSelector<'a>,
-		#[cfg_attr(feature = "visitable", visit(skip))] T![')'],
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		T![')'],
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 	Property(
-		#[cfg_attr(feature = "visitable", visit(skip))] T!['('],
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		T!['('],
 		BumpBox<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>,
-		#[cfg_attr(feature = "visitable", visit(skip))] Option<T![')']>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		Option<T![')']>,
 	),
 }
 

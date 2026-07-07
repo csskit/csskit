@@ -10,6 +10,7 @@ use super::NamespacePrefix;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Attribute {
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub open: T!['['],
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub namespace_prefix: Option<NamespacePrefix>,
@@ -19,6 +20,7 @@ pub struct Attribute {
 	pub value: Option<AttributeValue>,
 	pub modifier: Option<AttributeModifier>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	#[semantic_eq(skip)]
 	pub close: Option<T![']']>,
 }
 
@@ -54,12 +56,12 @@ impl<'a> Parse<'a> for Attribute {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum AttributeOperator {
-	Exact(T![=]),
-	SpaceList(T![~=]),
-	LangPrefix(T![|=]),
-	Prefix(T![^=]),
-	Suffix(T!["$="]),
-	Contains(T![*=]),
+	Exact(#[semantic_eq(skip)] T![=]),
+	SpaceList(#[semantic_eq(skip)] T![~=]),
+	LangPrefix(#[semantic_eq(skip)] T![|=]),
+	Prefix(#[semantic_eq(skip)] T![^=]),
+	Suffix(#[semantic_eq(skip)] T!["$="]),
+	Contains(#[semantic_eq(skip)] T![*=]),
 }
 
 #[derive(
