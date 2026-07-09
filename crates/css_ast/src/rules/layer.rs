@@ -53,7 +53,7 @@ impl<'a> Parse<'a> for LayerName<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LayerRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
+pub struct LayerRuleBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {
@@ -63,10 +63,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<LayerRule>(), 160);
+		assert_eq!(std::mem::size_of::<LayerRule>(), 192);
 		assert_eq!(std::mem::size_of::<LayerNameList>(), 32);
 		assert_eq!(std::mem::size_of::<LayerName>(), 48);
-		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 96);
+		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 128);
 	}
 
 	#[test]
