@@ -38189,36 +38189,23 @@ StyleSheet(
                 offset: SourceOffset(26584),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26585),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(26586),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(26592),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(26596),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(26586),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(26592),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(26596),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -38237,36 +38224,23 @@ StyleSheet(
                 offset: SourceOffset(26610),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26611),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(26612),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(26618),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(26622),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(26612),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(26618),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(26622),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -45801,36 +45775,23 @@ StyleSheet(
                       offset: SourceOffset(31965),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(31966),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(31967),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(31973),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(31977),
-                            len: 1,
-                          )),
-                        ),
-                      ],
-                    )),
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(31967),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(31973),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(31977),
+                        len: 1,
+                      )),
+                    )))), None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -45849,36 +45810,23 @@ StyleSheet(
                       offset: SourceOffset(31993),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(31994),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(31995),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(32001),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(32005),
-                            len: 1,
-                          )),
-                        ),
-                      ],
-                    )),
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(31995),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(32001),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(32005),
+                        len: 1,
+                      )),
+                    )))), None)),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -49904,36 +49852,23 @@ StyleSheet(
                 offset: SourceOffset(34948),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(34949),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(34950),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(34956),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(34960),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(34950),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(34956),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(34960),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -49952,36 +49887,23 @@ StyleSheet(
                 offset: SourceOffset(34974),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(34975),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(34976),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(34982),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(34986),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(34976),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(34982),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(34986),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -50566,36 +50488,23 @@ StyleSheet(
                 offset: SourceOffset(35325),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(35326),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(35327),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(35333),
-                          len: 2,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(35335),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(35327),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(35333),
+                  len: 2,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(35335),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -50614,36 +50523,23 @@ StyleSheet(
                 offset: SourceOffset(35349),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(35350),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(35351),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(35357),
-                          len: 2,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(35359),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(35351),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(35357),
+                  len: 2,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(35359),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -52150,36 +52046,23 @@ StyleSheet(
                 offset: SourceOffset(36355),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(36356),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(36357),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(36363),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(36367),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(36357),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(36363),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(36367),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -52198,36 +52081,23 @@ StyleSheet(
                 offset: SourceOffset(36381),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(36382),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(36383),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(36389),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(36393),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(36383),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(36389),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(36393),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -54819,36 +54689,23 @@ StyleSheet(
                 offset: SourceOffset(38236),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38237),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38238),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38244),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38248),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(38238),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(38244),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(38248),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -54867,36 +54724,23 @@ StyleSheet(
                 offset: SourceOffset(38262),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38263),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38264),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38270),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38274),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(38264),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(38270),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(38274),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -55720,36 +55564,23 @@ StyleSheet(
                 offset: SourceOffset(38891),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38892),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38893),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38899),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38903),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(38893),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(38899),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(38903),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -55768,36 +55599,23 @@ StyleSheet(
                 offset: SourceOffset(38917),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38918),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38919),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38925),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38929),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(38919),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(38925),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(38929),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -56450,36 +56268,23 @@ StyleSheet(
                 offset: SourceOffset(39484),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(39485),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(39486),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(39492),
-                          len: 2,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(39494),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(39486),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(39492),
+                  len: 2,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(39494),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -56498,36 +56303,23 @@ StyleSheet(
                 offset: SourceOffset(39508),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(39509),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(39510),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(39516),
-                          len: 2,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(39518),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(39510),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(39516),
+                  len: 2,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(39518),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -63207,52 +62999,35 @@ StyleSheet(
                 offset: SourceOffset(52737),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(52738),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(52739),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(52745),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(52749),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(52750),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(52751),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(52752),
-                    len: 9,
-                  )),
-                ],
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(52739),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(52745),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(52749),
+                  len: 1,
+                )),
+              )))), None)),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(52751),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(52752),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(52761),
@@ -63270,52 +63045,35 @@ StyleSheet(
                 offset: SourceOffset(52774),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(52775),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(52776),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(52782),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(52786),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(52787),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(52788),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(52789),
-                    len: 9,
-                  )),
-                ],
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(52776),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(52782),
+                  len: 4,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(52786),
+                  len: 1,
+                )),
+              )))), None)),
+              important: Some(BangImportant(
+                bang: Bang(Delim(Cursor(
+                  kind: "Delim",
+                  offset: SourceOffset(52788),
+                  len: 1,
+                ))),
+                important: Ident(Cursor(
+                  kind: "Ident",
+                  offset: SourceOffset(52789),
+                  len: 9,
+                )),
               )),
-              important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
                 offset: SourceOffset(52798),
@@ -65479,52 +65237,35 @@ StyleSheet(
                       offset: SourceOffset(54353),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54354),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(54355),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(54361),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(54365),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54366),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(54367),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(54368),
-                          len: 9,
-                        )),
-                      ],
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(54355),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(54361),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(54365),
+                        len: 1,
+                      )),
+                    )))), None)),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(54367),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(54368),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(54377),
@@ -65542,52 +65283,35 @@ StyleSheet(
                       offset: SourceOffset(54392),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54393),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(54394),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(54400),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(54404),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54405),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(54406),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(54407),
-                          len: 9,
-                        )),
-                      ],
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(54394),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(54400),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(54404),
+                        len: 1,
+                      )),
+                    )))), None)),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(54406),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(54407),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(54416),
@@ -66031,52 +65755,35 @@ StyleSheet(
                       offset: SourceOffset(54774),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54775),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(54776),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(54782),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(54786),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54787),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(54788),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(54789),
-                          len: 9,
-                        )),
-                      ],
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(54776),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(54782),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(54786),
+                        len: 1,
+                      )),
+                    )))), None)),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(54788),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(54789),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(54798),
@@ -66094,52 +65801,35 @@ StyleSheet(
                       offset: SourceOffset(54813),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54814),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(54815),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(54821),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(54825),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(54826),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(54827),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(54828),
-                          len: 9,
-                        )),
-                      ],
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(54815),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(54821),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(54825),
+                        len: 1,
+                      )),
+                    )))), None)),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(54827),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(54828),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(54837),
@@ -66556,52 +66246,35 @@ StyleSheet(
                       offset: SourceOffset(55172),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(55173),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(55174),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(55180),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(55184),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(55185),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(55186),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(55187),
-                          len: 9,
-                        )),
-                      ],
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(55174),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(55180),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(55184),
+                        len: 1,
+                      )),
+                    )))), None)),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(55186),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(55187),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(55196),
@@ -66619,52 +66292,35 @@ StyleSheet(
                       offset: SourceOffset(55211),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(55212),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(55213),
-                            len: 6,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(55219),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(55223),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(55224),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(55225),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(55226),
-                          len: 9,
-                        )),
-                      ],
+                    value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(55213),
+                        len: 6,
+                      )),
+                      params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(55219),
+                        len: 4,
+                      )))), None, None, None, None),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(55223),
+                        len: 1,
+                      )),
+                    )))), None)),
+                    important: Some(BangImportant(
+                      bang: Bang(Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(55225),
+                        len: 1,
+                      ))),
+                      important: Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(55226),
+                        len: 9,
+                      )),
                     )),
-                    important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
                       offset: SourceOffset(55235),

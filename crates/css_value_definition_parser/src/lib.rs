@@ -134,6 +134,8 @@ impl DefType {
 			| "BgLayer"  // contains BgImage<'a> and Color<'a>
 			| "FinalBgLayer"  // type alias for BgLayer<'a>
 			| "BgPositionAndSize" // contains BgPosition which contains Position
+			| "BasicShape"  // contains PolygonFunction<'a> and ShapeFunction<'a>
+			| "OffsetPath" // contains BasicShape<'a>
 		)
 	}
 }

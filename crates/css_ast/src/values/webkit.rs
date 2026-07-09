@@ -1223,10 +1223,23 @@ pub struct WebkitBackgroundSizeStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitPerspectiveStyleValue;
 
-// TODO: `-webkit-clip-path` — alias for `clip-path`.
-// Blocked on `<basic-shape>` and `<clip-source>` types (Todo stubs).
-// #[syntax(" none | <clip-source> | [ <basic-shape> || <geometry-box> ] ")]
-// pub enum WebkitClipPathStyleValue<'a> {}
+/// `-webkit-clip-path` — alias for `clip-path`.
+#[syntax(" none | <clip-source> | [ <basic-shape> || <geometry-box> ] ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Masking,
+    computed_value_type = SpecifiedWithAbsoluteUrls,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum WebkitClipPathStyleValue<'a> {}
 
 #[cfg(test)]
 mod tests {
