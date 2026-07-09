@@ -2191,7 +2191,7 @@ pub struct BorderRightWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderShapeStyleValue;
+pub struct BorderShapeStyleValue<'a>;
 
 /// Represents the style value for `border-start-end-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-start-end-radius).
 ///

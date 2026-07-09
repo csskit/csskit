@@ -125,7 +125,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<BorderImageOutsetStyleValue>(), 64);
 		assert_eq!(std::mem::size_of::<BorderImageRepeatStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<BorderImageStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<BorderShapeStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<BorderShapeStyleValue<'_>>(), 528);
 	}
 
 	#[test]

@@ -1,7 +1,7 @@
 use css_parse::BumpBox;
 
 use super::prelude::*;
-use crate::{Length, LengthPercentage};
+use crate::LengthPercentage;
 
 /// <https://drafts.csswg.org/css-images-3/#typedef-gradient>
 /// ```text-ignore,
@@ -158,17 +158,18 @@ pub enum LinearDirection {
 	Named(#[atom(CssAtomSet::To)] T![Ident], NamedDirection, Option<NamedDirection>),
 }
 
-/// <https://drafts.csswg.org/css-images-3/#typedef-radial-size>
+/// <https://drafts.csswg.org/css-images-4/#typedef-radial-size>
+/// <https://drafts.csswg.org/css-images-4/#radial-size>
 ///
 /// ```text,ignore
-/// <radial-size> = <radial-extent> | <length [0,∞]> | <length-percentage [0,∞]>{2}
+/// <radial-size> = <radial-extent>{1,2} | <length-percentage [0,∞]>{1,2}
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum RadialSize {
-	Extent(RadialExtent),
-	Circular(Length),
+	Extent(RadialExtent, Option<RadialExtent>),
+	Circular(LengthPercentage),
 	Elliptical(LengthPercentage, LengthPercentage),
 }
 
@@ -198,21 +199,14 @@ impl<'a> Parse<'a> for RadialSize {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		if let Some(extent) = p.parse_if_peek::<RadialExtent>()? {
-			return Ok(RadialSize::Extent(extent));
-		}
-		if p.peek::<Length>() {
-			let first_len = p.parse::<LengthPercentage>()?;
-			if !p.peek::<Length>()
-				&& let LengthPercentage::Length(len) = first_len
-			{
-				return Ok(Self::Circular(len));
-			}
-			let second_len = p.parse::<LengthPercentage>()?;
-			return Ok(Self::Elliptical(first_len, second_len));
+			let second = p.parse_if_peek::<RadialExtent>()?;
+			return Ok(RadialSize::Extent(extent, second));
 		}
 		let first = p.parse::<LengthPercentage>()?;
-		let second = p.parse::<LengthPercentage>()?;
-		Ok(Self::Elliptical(first, second))
+		if let Some(second) = p.parse_if_peek::<LengthPercentage>()? {
+			return Ok(Self::Elliptical(first, second));
+		}
+		Ok(Self::Circular(first))
 	}
 }
 
@@ -249,7 +243,7 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<Gradient>(), 24);
 		assert_eq!(std::mem::size_of::<LinearDirection>(), 44);
-		assert_eq!(std::mem::size_of::<RadialSize>(), 32);
+		assert_eq!(std::mem::size_of::<RadialSize>(), 36);
 		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 40);
 	}
 

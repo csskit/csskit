@@ -46,6 +46,17 @@ impl<'a> Parse<'a> for Position {
 	}
 }
 
+/// `at <position>`, as used by e.g. `circle()`/`ellipse()`/gradients.
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct AtPosition {
+	#[atom(CssAtomSet::At)]
+	pub keyword: T![Ident],
+	pub position: Position,
+}
+
 /// <https://drafts.csswg.org/css-values-5/#typedef-position-one>
 ///
 /// ```text,ignore

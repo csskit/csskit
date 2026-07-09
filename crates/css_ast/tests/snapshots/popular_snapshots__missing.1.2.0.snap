@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -72321,36 +72320,23 @@ StyleSheet(
                 offset: SourceOffset(49510),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(49511),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(49512),
-                      len: 6,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(49518),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(49521),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+              value: BasicShapeGeometryBox(Optionals2(Some(Rect(Inset(InsetFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(49512),
+                  len: 6,
+                )),
+                params: InsetFunctionParams(Percent(Percentage(Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(49518),
+                  len: 3,
+                )))), None, None, None, None),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(49521),
+                  len: 1,
+                )),
+              )))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
