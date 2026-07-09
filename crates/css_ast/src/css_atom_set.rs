@@ -2851,6 +2851,14 @@ pub enum CssAtomSet {
 	_MozMaxContent,
 	#[atom("-moz-max-device-pixel-ratio")]
 	_MozMaxDevicePixelRatio,
+	#[atom("-moz-meter-bar")]
+	_MozMeterBar,
+	#[atom("-moz-meter-optimum")]
+	_MozMeterOptimum,
+	#[atom("-moz-meter-sub-optimum")]
+	_MozMeterSubOptimum,
+	#[atom("-moz-meter-sub-sub-optimum")]
+	_MozMeterSubSubOptimum,
 	#[atom("-moz-min-content")]
 	_MozMinContent,
 	#[atom("-moz-min-device-pixel-ratio")]
