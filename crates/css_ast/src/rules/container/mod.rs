@@ -31,7 +31,7 @@ impl<'a> QueryableNode for ContainerRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ContainerRulesBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
+pub struct ContainerRulesBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -249,7 +249,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 144);
+		assert_eq!(std::mem::size_of::<ContainerRule>(), 176);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 32);
 		assert_eq!(std::mem::size_of::<ContainerCondition>(), 216);
 		assert_eq!(std::mem::size_of::<ContainerQuery>(), 200);

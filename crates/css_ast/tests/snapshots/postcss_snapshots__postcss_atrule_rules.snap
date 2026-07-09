@@ -1,7 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
 expression: result.output.unwrap()
-snapshot_kind: text
 ---
 StyleSheet(
   rules: [
@@ -47,12 +46,13 @@ StyleSheet(
         offset: SourceOffset(31),
         len: 1,
       ))))),
-      block: SupportsRuleBlock(RuleList(
+      block: SupportsRuleBlock(Block(
         open_curly: LeftCurly(Cursor(
           kind: "LeftCurly",
           offset: SourceOffset(33),
           len: 1,
         )),
+        declarations: [],
         rules: [
           UnknownAtRule(
             name: AtKeyword(Cursor(

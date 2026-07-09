@@ -52,7 +52,7 @@ pub struct SupportsRule<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SupportsRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
+pub struct SupportsRuleBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -234,9 +234,9 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 224);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 256);
 		assert_eq!(std::mem::size_of::<SupportsCondition>(), 112);
-		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 96);
+		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 128);
 	}
 
 	#[test]
