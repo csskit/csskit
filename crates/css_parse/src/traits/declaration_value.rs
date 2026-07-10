@@ -163,7 +163,7 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 		let checkpoint = p.checkpoint();
 		if let Ok(val) = Self::parse_specified_declaration_value(p, name) {
 			let c = p.peek_n(1);
-			if p.at_end() || c == KindSet::RIGHT_CURLY_OR_SEMICOLON || <T![!]>::peek(p, c) {
+			if p.at_end() || c == KindSet::RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN || <T![!]>::peek(p, c) {
 				return Ok(val);
 			}
 		}

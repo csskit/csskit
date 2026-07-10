@@ -38,6 +38,11 @@ impl KindSet {
 	/// stop-tokens, for example checking the end of a declaration.
 	pub const RIGHT_CURLY_OR_SEMICOLON: KindSet = KindSet::new(&[Kind::RightCurly, Kind::Semicolon]);
 
+	/// A [KindSet] that matches [Kind::RightCurly], [Kind::Semicolon] or [Kind::RightParen]. This is useful for
+	/// matching stop-tokens for a declaration.
+	pub const RIGHT_CURLY_SEMICOLON_OR_RIGHT_PAREN: KindSet =
+		KindSet::new(&[Kind::RightCurly, Kind::Semicolon, Kind::RightParen]);
+
 	/// A [KindSet] that matches either [Kind::LeftCurly] or [Kind::Semicolon]. This is useful for matching
 	/// stop-tokens, for example checking the end of an at-rule prelude.
 	pub const LEFT_CURLY_OR_SEMICOLON: KindSet = KindSet::new(&[Kind::LeftCurly, Kind::Semicolon]);
