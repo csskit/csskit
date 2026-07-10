@@ -380,6 +380,7 @@ impl Def {
 						| "ViewTimelineAxis"
 						| "ViewTimelineInset"
 						| "ViewTimelineName"
+						| "WebkitTextStrokeColor"
 				)
 			}
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),

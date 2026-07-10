@@ -1297,6 +1297,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct WebkitTextFillColorStyleValue < \'a > { }",
   "pub struct WebkitTextSizeAdjustStyleValue { }",
   "pub struct WebkitTextStrokeColorStyleValue < \'a > { }",
+  "pub struct WebkitTextStrokeStyleValue < \'a > { }",
   "pub struct WebkitTextStrokeWidthStyleValue { }",
   "pub struct WebkitTransformStyleValue < \'a > { }",
   "pub struct WebkitTransitionDelayStyleValue < \'a > { }",
