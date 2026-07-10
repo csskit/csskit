@@ -779,20 +779,19 @@ StyleSheet(
                 offset: SourceOffset(591),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(592),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+              value: FillStyleValue([
+                (FillLayer(
+                  image: None,
+                  position: None,
+                  repeat: None,
+                  origin: None,
+                  color: Some(Currentcolor(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(593),
                     len: 12,
-                  )),
-                ],
-              )),
+                  )))),
+                ), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

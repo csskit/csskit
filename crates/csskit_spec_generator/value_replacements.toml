@@ -11,3 +11,11 @@ background = "<bg-layer>#"
 # https://drafts.csswg.org/css-transforms-1/#transform-origin-property
 # transform-origin: uses a really awkward syntax when it can be simplified using `<position-one>` and `<position-two>`
 transform-origin = "<position-one> | <position-two> <length>?"
+
+[fill-stroke]
+# https://drafts.csswg.org/fill-stroke-3/#fill
+# fill/stroke: spec grammar is prose (`<'background'> with modifications`), not
+# machine-readable. Modelled on `background`'s own `<bg-layer>#` replacement above,
+# using hand-written FillLayer/StrokeLayer types.
+fill = "<fill-layer>#"
+stroke = "<stroke-layer>#"
