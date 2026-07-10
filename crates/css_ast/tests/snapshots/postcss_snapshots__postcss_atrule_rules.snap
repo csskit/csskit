@@ -25,20 +25,13 @@ StyleSheet(
           offset: SourceOffset(25),
           len: 1,
         )),
-        value: Unknown(ComponentValues(
-          values: [
-            Whitespace(Cursor(
-              kind: "Whitespace",
-              offset: SourceOffset(26),
-              len: 1,
-            )),
-            Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(27),
-              len: 4,
-            )),
-          ],
-        )),
+        value: AnimationNameStyleValue([
+          (r#Some(Ident(Ident(Cursor(
+            kind: "Ident",
+            offset: SourceOffset(27),
+            len: 4,
+          )))), None),
+        ]),
         important: None,
         semicolon: None,
       ), Some(RightParen(Cursor(

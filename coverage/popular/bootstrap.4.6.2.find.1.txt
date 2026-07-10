@@ -11,4 +11,8 @@ coverage/popular/bootstrap.4.6.2.css
 6704:3:  animation: .75s linear infinite spinner-border;
 6745:3:  -webkit-animation: .75s linear infinite spinner-grow;
 6746:3:  animation: .75s linear infinite spinner-grow;
-1:1:/*!
+10229:3:  font: 0/0 a;
+10276:5:    page-break-inside: avoid;
+10280:5:    page-break-inside: avoid;
+10290:5:    page-break-after: avoid;
+10293:5:    size: a3;

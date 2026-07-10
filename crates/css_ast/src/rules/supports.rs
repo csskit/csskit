@@ -106,9 +106,6 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		if p.peek::<T![Function]>() || p.peek::<T!['(']>() {
-			return Ok(Self::Is(p.parse::<SupportsFeature>()?));
-		}
 		Self::parse_condition(p)
 	}
 }
@@ -119,43 +116,25 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum SupportsFeature<'a> {
 	FontTech(
-		#[cfg_attr(feature = "visitable", visit(skip))]
-		#[semantic_eq(skip)]
-		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 		ComponentValues<'a>,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T![')'],
-		#[cfg_attr(feature = "visitable", visit(skip))]
-		#[semantic_eq(skip)]
-		Option<T![')']>,
 	),
 	FontFormat(
-		#[cfg_attr(feature = "visitable", visit(skip))]
-		#[semantic_eq(skip)]
-		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 		ComponentValues<'a>,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T![')'],
-		#[cfg_attr(feature = "visitable", visit(skip))]
-		#[semantic_eq(skip)]
-		Option<T![')']>,
 	),
 	Selector(
-		#[cfg_attr(feature = "visitable", visit(skip))]
-		#[semantic_eq(skip)]
-		Option<T!['(']>,
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
 		ComplexSelector<'a>,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T![')'],
-		#[cfg_attr(feature = "visitable", visit(skip))]
-		#[semantic_eq(skip)]
-		Option<T![')']>,
 	),
 	Property(
 		#[cfg_attr(feature = "visitable", visit(skip))]
@@ -166,30 +145,33 @@ pub enum SupportsFeature<'a> {
 		#[semantic_eq(skip)]
 		Option<T![')']>,
 	),
+	/// A parenthesized, nested `<supports-condition>`, e.g. the outer parens in
+	/// `(selector(a) or selector(b))`. This is `<supports-in-parens> = ( <supports-condition> )`.
+	Condition(
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		T!['('],
+		BumpBox<'a, SupportsCondition<'a>>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		#[semantic_eq(skip)]
+		T![')'],
+	),
 }
 
 impl<'a> Peek<'a> for SupportsFeature<'a> {
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen, Kind::Function, Kind::Ident]);
+	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen, Kind::Function]);
 
 	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let c2 = p.peek_n(2);
-		if <T!['(']>::peek(p, c) {
-			(<T![Function]>::peek(p, c2)
-				&& matches!(
-					p.to_atom::<CssAtomSet>(c2),
-					CssAtomSet::Selector | CssAtomSet::FontTech | CssAtomSet::FontFormat
-				)) || <Declaration<'a, StyleValue<'a>, CssMetadata>>::peek(p, c2)
-		} else {
-			(<T![Function]>::peek(p, c)
+		<T!['(']>::peek(p, c)
+			|| (<T![Function]>::peek(p, c)
 				&& matches!(
 					p.to_atom::<CssAtomSet>(c),
 					CssAtomSet::Selector | CssAtomSet::FontTech | CssAtomSet::FontFormat
-				)) || <Declaration<'a, StyleValue<'a>, CssMetadata>>::peek(p, c)
-		}
+				))
 	}
 }
 impl<'a> Parse<'a> for SupportsFeature<'a> {
@@ -197,16 +179,24 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let open = p.parse_if_peek::<T!['(']>()?;
+		if let Some(open) = p.parse_if_peek::<T!['(']>()? {
+			let is_declaration = p.peek_n(1) == Kind::Ident && p.peek_n(2) == Kind::Colon;
+			if is_declaration {
+				let property = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
+				let close = p.parse_if_peek::<T![')']>()?;
+				return Ok(Self::Property(open, BumpBox::new_in(p.bump(), property), close));
+			}
+			let condition = p.parse::<SupportsCondition>()?;
+			let close = p.parse::<T![')']>()?;
+			return Ok(Self::Condition(open, BumpBox::new_in(p.bump(), condition), close));
+		}
 		if p.peek::<T![Function]>() {
 			let function = p.parse::<T![Function]>()?;
-			match p.to_atom::<CssAtomSet>(function.into()) {
+			return match p.to_atom::<CssAtomSet>(function.into()) {
 				CssAtomSet::Selector => {
 					let selector = p.parse::<ComplexSelector>()?;
-					// End function
 					let close = p.parse::<T![')']>()?;
-					let open_close = if open.is_some() { Some(p.parse::<T![')']>()?) } else { None };
-					Ok(Self::Selector(open, function, selector, close, open_close))
+					Ok(Self::Selector(function, selector, close))
 				}
 				CssAtomSet::FontTech => {
 					todo!();
@@ -215,14 +205,9 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 					todo!();
 				}
 				_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_function))?,
-			}
-		} else if let Some(open) = open {
-			let property = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
-			let close = p.parse_if_peek::<T![')']>()?;
-			Ok(Self::Property(open, BumpBox::new_in(p.bump(), property), close))
-		} else {
-			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
+			};
 		}
+		Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 	}
 }
 
@@ -234,8 +219,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SupportsRule>(), 256);
-		assert_eq!(std::mem::size_of::<SupportsCondition>(), 112);
+		assert_eq!(std::mem::size_of::<SupportsRule>(), 224);
+		assert_eq!(std::mem::size_of::<SupportsCondition>(), 80);
 		assert_eq!(std::mem::size_of::<SupportsRuleBlock>(), 128);
 	}
 
@@ -243,15 +228,28 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(color:black){}");
 		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width:1px){body{width:1px}}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not (width:1--foo){}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 1--foo) or (width: 1foo) {\n\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 1--foo) and (width: 1foo) {\n\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 100vw) {\n\tbody {\n\t\twidth: 100vw;\n\t}\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not ((text-align-last: justify) or (-moz-text-align-last: justify)) {\n\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports((position:-webkit-sticky)or (position:sticky)) {}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports selector(h2 > p) {\n\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(selector(h2 > p)) {}", "@supports selector(h2 > p) {\n\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not selector(h2 > p) {\n\n}");
-		// assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not (selector(h2 > p)) {}", "@supports not selector(h2 > p) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not (width:1--foo){}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 1--foo) or (width: 1foo) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(width: 1--foo) and (width: 1foo) {\n\n}");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			SupportsRule,
+			"@supports(width: 100vw) {\n\tbody {\n\t\twidth: 100vw;\n\t}\n}"
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			SupportsRule,
+			"@supports not ((text-align-last: justify) or (-moz-text-align-last: justify)) {\n\n}"
+		);
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports((position:-webkit-sticky)or (position:sticky)) {}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports selector(h2 > p) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(selector(h2 > p)) {}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not selector(h2 > p) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports not (selector(h2 > p)) {}");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			SupportsRule,
+			"@supports (selector(::-moz-meter-bar) or selector(::-webkit-meter-bar)) {\n\n}"
+		);
 	}
 }
