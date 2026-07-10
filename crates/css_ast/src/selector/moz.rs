@@ -36,6 +36,7 @@ pseudo_element!(
 		ListBullet: CssAtomSet::_MozListBullet,
 		ListNumber: CssAtomSet::_MozListNumber,
 		MathmlAnonymousBlock: CssAtomSet::_MozMathmlAnonymousBlock,
+		MeterBar: CssAtomSet::_MozMeterBar,
 		NumberSpinBox: CssAtomSet::_MozNumberSpinBox,
 		NumberSpinDown: CssAtomSet::_MozNumberSpinDown,
 		NumberSpinUp: CssAtomSet::_MozNumberSpinUp,
@@ -226,6 +227,9 @@ pseudo_class!(
 		LwTheme: CssAtomSet::_MozLwtheme,
 		LwThemeBrighttext: CssAtomSet::_MozLwthemeBrighttext,
 		LwThemeDarktext: CssAtomSet::_MozLwthemeDarktext,
+		MeterOptimum: CssAtomSet::_MozMeterOptimum,
+		MeterSubOptimum: CssAtomSet::_MozMeterSubOptimum,
+		MeterSubSubOptimum: CssAtomSet::_MozMeterSubSubOptimum,
 		NativeAnonymous: CssAtomSet::_MozNativeAnonymous,
 		OnlyWhitespace: CssAtomSet::_MozOnlyWhitespace,
 		PlaceholderShown: CssAtomSet::_MozPlaceholderShown,
@@ -294,6 +298,10 @@ mod tests {
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, MozPseudoElement, "::-moz-anonymous-block");
+		assert_parse!(CssAtomSet::ATOMS, MozPseudoElement, "::-moz-meter-bar");
 		assert_parse!(CssAtomSet::ATOMS, MozFunctionalPseudoElement, "::-moz-tree-twisty(selected,focus)");
+		assert_parse!(CssAtomSet::ATOMS, MozPseudoClass, ":-moz-meter-optimum");
+		assert_parse!(CssAtomSet::ATOMS, MozPseudoClass, ":-moz-meter-sub-optimum");
+		assert_parse!(CssAtomSet::ATOMS, MozPseudoClass, ":-moz-meter-sub-sub-optimum");
 	}
 }
