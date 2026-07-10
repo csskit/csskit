@@ -6,6 +6,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
+		assert_eq!(std::mem::size_of::<FillStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<StrokeStyleValue>(), 32);
 		assert_eq!(std::mem::size_of::<FillBreakStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FillColorStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<FillOpacityStyleValue>(), 16);
@@ -34,6 +36,16 @@ mod tests {
 
 	#[test]
 	fn test_writes() {
+		// FillStyleValue: <fill-layer>#
+		assert_parse!(CssAtomSet::ATOMS, FillStyleValue, "currentcolor");
+		assert_parse!(CssAtomSet::ATOMS, FillStyleValue, "url(sprite.svg#icon)");
+		assert_parse!(CssAtomSet::ATOMS, FillStyleValue, "url(a.svg), url(b.svg) red");
+		assert_parse!(CssAtomSet::ATOMS, FillStyleValue, "url(a.svg) center / cover no-repeat fill-box red");
+
+		// StrokeStyleValue: <stroke-layer>#
+		assert_parse!(CssAtomSet::ATOMS, StrokeStyleValue, "blue");
+		assert_parse!(CssAtomSet::ATOMS, StrokeStyleValue, "url(x.svg) center / cover no-repeat stroke-box blue");
+
 		// FillBreakStyleValue: bounding-box | slice | clone
 		assert_parse!(CssAtomSet::ATOMS, FillBreakStyleValue, "bounding-box");
 		assert_parse!(CssAtomSet::ATOMS, FillBreakStyleValue, "slice");

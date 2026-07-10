@@ -136,6 +136,9 @@ impl DefType {
 			| "BgPositionAndSize" // contains BgPosition which contains Position
 			| "BasicShape"  // contains PolygonFunction<'a> and ShapeFunction<'a>
 			| "OffsetPath" // contains BasicShape<'a>
+			| "Paint" // contains Image<'a>
+			| "FillLayer" // contains Paint<'a> and Color<'a>
+			| "StrokeLayer" // contains Paint<'a> and Color<'a>
 		)
 	}
 }

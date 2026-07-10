@@ -13,9 +13,6 @@ properties = [
 [borders]
 properties = ["border-image"]
 
-[fill-stroke]
-properties = ["fill", "stroke"]
-
 [fonts]
 properties = [
   "font",
