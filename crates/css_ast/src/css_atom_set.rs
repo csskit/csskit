@@ -2682,6 +2682,8 @@ pub enum CssAtomSet {
 	_WebkitTextFillColor,
 	#[atom("-webkit-text-size-adjust")]
 	_WebkitTextSizeAdjust,
+	#[atom("-webkit-text-stroke")]
+	_WebkitTextStroke,
 	#[atom("-webkit-text-stroke-color")]
 	_WebkitTextStrokeColor,
 	#[atom("-webkit-text-stroke-width")]

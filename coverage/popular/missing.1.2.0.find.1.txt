@@ -8,4 +8,3 @@ coverage/popular/missing.1.2.0.css
 1307:1:chip {
 1535:3:  grid-template-columns: repeat(2, 1rem);
 2091:3:  role[menuitem] {
-2267:3:  -webkit-text-stroke: var(--stroke-width) var(--stroke-color);

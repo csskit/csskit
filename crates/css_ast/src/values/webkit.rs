@@ -1126,6 +1126,26 @@ pub enum WebkitTouchCalloutStyleValue {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitTextFillColorStyleValue<'a>;
 
+/// `-webkit-text-stroke` shorthand for `-webkit-text-stroke-width` and `-webkit-text-stroke-color`.
+#[syntax(" <'-webkit-text-stroke-width'> || <'-webkit-text-stroke-color'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits,
+    applies_to = Elements,
+    animation_type = Unknown,
+    longhands = _WebkitTextStrokeWidth|_WebkitTextStrokeColor,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct WebkitTextStrokeStyleValue<'a>;
+
 /// `-webkit-text-stroke-color` — non-standard text stroke colour.
 #[syntax(" <color> ")]
 #[derive(
@@ -1136,6 +1156,7 @@ pub struct WebkitTextFillColorStyleValue<'a>;
     inherits,
     applies_to = Elements,
     animation_type = ByComputedValue,
+    shorthand_group = _WebkitTextStroke,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1155,6 +1176,7 @@ pub struct WebkitTextStrokeColorStyleValue<'a>;
     inherits,
     applies_to = Elements,
     animation_type = Discrete,
+    shorthand_group = _WebkitTextStroke,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1598,5 +1620,18 @@ mod tests {
 	#[test]
 	fn test_webkit_perspective_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitPerspectiveStyleValue, "invalid");
+	}
+
+	#[test]
+	fn test_text_stroke_parses() {
+		assert_parse!(CssAtomSet::ATOMS, WebkitTextStrokeStyleValue, "1px");
+		assert_parse!(CssAtomSet::ATOMS, WebkitTextStrokeStyleValue, "red");
+		assert_parse!(CssAtomSet::ATOMS, WebkitTextStrokeStyleValue, "1px red");
+		assert_parse!(CssAtomSet::ATOMS, WebkitTextStrokeStyleValue, "red 1px");
+	}
+
+	#[test]
+	fn test_text_stroke_errors() {
+		assert_peek_false!(CssAtomSet::ATOMS, WebkitTextStrokeStyleValue, "");
 	}
 }
