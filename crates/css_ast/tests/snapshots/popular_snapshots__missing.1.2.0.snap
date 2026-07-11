@@ -40947,28 +40947,19 @@ StyleSheet(
                       offset: SourceOffset(28226),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(28227),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
+                    value: TrackList(TrackList(
+                      leading_names: None,
+                      items: [
+                        (Left(TrackBreadth(LengthPercentage(Length(Ch(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(28228),
                           len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(28232),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        ))))))), None),
+                        (Left(TrackBreadth(Auto(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(28233),
                           len: 4,
-                        )),
+                        ))))), None),
                       ],
                     )),
                     important: None,
@@ -50076,41 +50067,33 @@ StyleSheet(
                 offset: SourceOffset(34251),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(34252),
-                    len: 1,
-                  )),
-                  FunctionBlock(
+              value: TrackList(TrackList(
+                leading_names: None,
+                items: [
+                  (Right(RepeatFunction(
                     name: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(34253),
                       len: 7,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(34260),
-                          len: 1,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(34261),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(34262),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
+                    count: PositiveNonZeroInt(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(34260),
+                      len: 1,
+                    ))),
+                    comma: Comma(Cursor(
+                      kind: "Comma",
+                      offset: SourceOffset(34261),
+                      len: 1,
+                    )),
+                    items: NamedRepeatItems(
+                      leading_names: None,
+                      items: [
+                        (TrackBreadth(LengthPercentage(Length(Rem(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(34263),
                           len: 4,
-                        )),
+                        )))))), None),
                       ],
                     ),
                     close: RightParen(Cursor(
@@ -50118,7 +50101,7 @@ StyleSheet(
                       offset: SourceOffset(34267),
                       len: 1,
                     )),
-                  ),
+                  )), None),
                 ],
               )),
               important: None,
