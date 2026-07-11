@@ -3,8 +3,6 @@ find :unknown
 coverage/popular/missing.1.2.0.css
 1188:3:  animation: bg 2s;
 1195:1:dialog:not([popover], [open]),
-1263:5:    grid-template-columns: 25ch auto;
 1294:5:    display: inline list-item;
 1307:1:chip {
-1535:3:  grid-template-columns: repeat(2, 1rem);
 2091:3:  role[menuitem] {

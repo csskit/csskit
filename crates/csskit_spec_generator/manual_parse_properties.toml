@@ -13,3 +13,8 @@ properties = ["glyph-orientation-vertical"]
 # transform-origin: raw spec grammar produces ~25 colliding variants after distribution;
 # hand-written Parse using PositionOne/PositionHorizontal/PositionVertical is cleaner.
 properties = ["transform-origin"]
+
+[grid]
+# grid-template-columns/rows: needs to try_parse, so it can backtrack for ambiguous
+# repeat functions.
+properties = ["grid-template-columns", "grid-template-rows"]

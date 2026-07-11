@@ -139,6 +139,16 @@ impl DefType {
 			| "Paint" // contains Image<'a>
 			| "FillLayer" // contains Paint<'a> and Color<'a>
 			| "StrokeLayer" // contains Paint<'a> and Color<'a>
+			// css-grid track sizing types
+			| "LineNames" // LineNames<'a>, Vec<'a, CustomIdent>
+			| "TrackRepeat" // contains Vec<'a, ...> and LineNames<'a>
+			| "AutoRepeat" // contains Vec<'a, ...> and LineNames<'a>
+			| "FixedRepeat" // contains Vec<'a, ...> and LineNames<'a>
+			| "NameRepeat" // contains Vec<'a, LineNames<'a>>
+			| "TrackList" // contains Vec<'a, ...>, LineNames<'a> and TrackRepeat<'a>
+			| "AutoTrackList" // contains Vec<'a, ...>, LineNames<'a>, FixedRepeat<'a> and AutoRepeat<'a>
+			| "ExplicitTrackList" // contains Vec<'a, ...> and LineNames<'a>
+			| "LineNameList" // contains Vec<'a, ...>, LineNames<'a> and NameRepeat<'a>
 		)
 	}
 }
@@ -360,6 +370,10 @@ impl Def {
 						| "DynamicRangeLimit"
 						| "EventTriggerName"
 						| "EventTriggerSource"
+						| "GridAutoColumns"
+						| "GridAutoRows" | "GridTemplate"
+						| "GridTemplateColumns"
+						| "GridTemplateRows"
 						| "ListStyleImage" | "ListStyleType"
 						| "MaskBorderSource"
 						| "OutlineColor" | "PointerTimelineAxis"

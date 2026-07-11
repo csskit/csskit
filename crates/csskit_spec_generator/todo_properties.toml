@@ -31,9 +31,6 @@ properties = [
 ]
 
 
-[grid]
-properties = ["grid", "grid-template"]
-
 [inline]
 properties = ["initial-letter-align"]
 
