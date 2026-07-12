@@ -1,0 +1,15 @@
+---
+source: crates/csskit_derives/src/test/test_peek.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Peek<'a> for CalcFunction {
+    #[inline(always)]
+    fn peek<I>(p: &::css_parse::Parser<'a, I>, c: ::css_parse::Cursor) -> bool
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use ::css_parse::Peek;
+        (<Function>::peek(p, c) && (p.equals_atom(c.into(), &CssAtomSet::Calc)))
+    }
+}
