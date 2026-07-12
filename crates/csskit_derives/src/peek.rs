@@ -66,7 +66,9 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				let atom = extract_atom(&syn_field.attrs)?;
 				let atoms = atom.map(|a| vec![a]).unwrap_or_default();
 				let peek_ty = option_inner(view.ty).unwrap_or(view.ty);
-				if let Some(kind) = map_type_to_kind(peek_ty) {
+				if atoms.is_empty()
+					&& let Some(kind) = map_type_to_kind(peek_ty)
+				{
 					let ident = Ident::new(kind, Span::call_site());
 					kinds.push(quote! { ::css_lexer::Kind::#ident });
 				} else {

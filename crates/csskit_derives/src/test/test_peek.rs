@@ -110,6 +110,18 @@ fn peek_struct_all_must_occur() {
 }
 
 #[test]
+fn peek_struct_with_atom_on_kind_mapped_field() {
+	let data = to_deriveinput! {
+		struct CalcFunction {
+			#[atom(CssAtomSet::Calc)]
+			name: Function,
+			close: RightParen,
+		}
+	};
+	assert_peek_snapshot!(data, "peek_struct_with_atom_on_kind_mapped_field");
+}
+
+#[test]
 fn peek_enum_struct_variant_one_must_occur() {
 	let data = to_deriveinput! {
 		enum FlexWrap {
