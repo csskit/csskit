@@ -33,6 +33,12 @@ impl ToNumberValue for Percentage {
 	}
 }
 
+impl ToNormalisedValue for Percentage {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
+	}
+}
+
 #[derive(
 	Peek, Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -57,6 +63,12 @@ impl From<NumberPercentage> for f32 {
 impl ToNumberValue for NumberPercentage {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
+	}
+}
+
+impl ToNormalisedValue for NumberPercentage {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
 	}
 }
 

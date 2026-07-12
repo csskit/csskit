@@ -26,6 +26,12 @@ impl ToNumberValue for Flex {
 	}
 }
 
+impl ToNormalisedValue for Flex {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;

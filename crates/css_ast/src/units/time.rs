@@ -43,6 +43,12 @@ impl ToNumberValue for Time {
 	}
 }
 
+impl ToNormalisedValue for Time {
+	fn to_normalised_value(&self) -> Option<f32> {
+		Some(self.as_seconds())
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
