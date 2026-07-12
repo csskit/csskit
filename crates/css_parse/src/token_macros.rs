@@ -1,4 +1,6 @@
-use crate::{Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNumberValue, Token};
+use crate::{
+	Cursor, CursorSink, Kind, KindSet, Parse, Parser, Peek, Result, Span, ToNormalisedValue, ToNumberValue, Token,
+};
 
 macro_rules! cursor_wrapped {
 	($ident:ident) => {
@@ -629,6 +631,12 @@ impl PartialEq<f32> for Number {
 impl ToNumberValue for Number {
 	fn to_number_value(&self) -> Option<f32> {
 		Some(self.value())
+	}
+}
+
+impl ToNormalisedValue for Number {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
 	}
 }
 

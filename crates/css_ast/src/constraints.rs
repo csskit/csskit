@@ -1,5 +1,5 @@
 use crate::CssDiagnostic;
-use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result, ToNumberValue};
+use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result, ToNormalisedValue, ToNumberValue};
 use csskit_derives::*;
 
 /// A non-negative value wrapper.
@@ -147,7 +147,7 @@ impl<'a, T: Peek<'a>, const MIN: i32, const MAX: i32> Peek<'a> for Ranged<T, MIN
 	}
 }
 
-impl<'a, T: Parse<'a> + ToNumberValue, const MIN: i32, const MAX: i32> Parse<'a> for Ranged<T, MIN, MAX> {
+impl<'a, T: Parse<'a> + ToNormalisedValue, const MIN: i32, const MAX: i32> Parse<'a> for Ranged<T, MIN, MAX> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -155,7 +155,7 @@ impl<'a, T: Parse<'a> + ToNumberValue, const MIN: i32, const MAX: i32> Parse<'a>
 		let cursor = p.peek_n(1);
 		let value = p.parse::<T>()?;
 
-		if let Some(num) = value.to_number_value()
+		if let Some(num) = value.to_normalised_value()
 			&& (num < MIN as f32 || num > MAX as f32)
 		{
 			Err(Diagnostic::new(cursor, Diagnostic::number_out_of_bounds))?;

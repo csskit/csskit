@@ -112,6 +112,7 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 45px");
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 91deg");
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique -91deg");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 1turn");
 	}
 
 	#[test]

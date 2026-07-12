@@ -33,6 +33,12 @@ impl ToNumberValue for CSSInt {
 	}
 }
 
+impl ToNormalisedValue for CSSInt {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
+	}
+}
+
 impl<'a> Peek<'a> for CSSInt {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number]);
 

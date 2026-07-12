@@ -29,7 +29,8 @@ pub use time::*;
 mod prelude {
 	pub(crate) use crate::{CssAtomSet, Exact};
 	pub(crate) use css_parse::{
-		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue,
+		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, ToNormalisedValue,
+		ToNumberValue,
 	};
 	pub(crate) use csskit_derives::*;
 }

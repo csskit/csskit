@@ -131,6 +131,12 @@ impl ToNumberValue for Length {
 	}
 }
 
+impl ToNormalisedValue for Length {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
+	}
+}
+
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -158,6 +164,12 @@ impl From<LengthPercentage> for f32 {
 impl ToNumberValue for LengthPercentage {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
+	}
+}
+
+impl ToNormalisedValue for LengthPercentage {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
 	}
 }
 
@@ -217,6 +229,12 @@ impl ToNumberValue for LengthPercentageOrFlex {
 	}
 }
 
+impl ToNormalisedValue for LengthPercentageOrFlex {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
+	}
+}
+
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -241,6 +259,12 @@ impl From<NumberLength> for f32 {
 impl ToNumberValue for NumberLength {
 	fn to_number_value(&self) -> Option<f32> {
 		Some((*self).into())
+	}
+}
+
+impl ToNormalisedValue for NumberLength {
+	fn to_normalised_value(&self) -> Option<f32> {
+		self.to_number_value()
 	}
 }
 

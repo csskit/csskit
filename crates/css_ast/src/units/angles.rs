@@ -41,6 +41,12 @@ impl ToNumberValue for Angle {
 	}
 }
 
+impl ToNormalisedValue for Angle {
+	fn to_normalised_value(&self) -> Option<f32> {
+		Some(self.as_degrees())
+	}
+}
+
 impl Angle {
 	const DEG_GRAD: f32 = 0.9;
 	const DEG_RAD: f32 = 57.295_78;
