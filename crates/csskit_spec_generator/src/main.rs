@@ -403,6 +403,11 @@ async fn main() -> Result<()> {
 
 			println!("Generated feature data at {}", output_path.display());
 
+			// Inject properties not covered by any fetched spec (e.g. CSS2, non-standard aliases)
+			for prop in extra_property_atoms::get_extra_property_atoms() {
+				all_property_names.insert(prop);
+			}
+
 			// Generate property_atoms.rs
 			println!("\nGenerating property_atoms.rs...");
 			println!("  Collected {} unique property names from specs", all_property_names.len());
