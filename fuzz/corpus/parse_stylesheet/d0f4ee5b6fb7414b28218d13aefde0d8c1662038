@@ -1,0 +1,15 @@
+{
+    -webkit-transform: skewX(-5deg);
+    transfo
+@keyframes lightSpeedInRigrm: skewX(20deg);
+    opacity: 1;
+  }
+
+  80% {
+    -webkit-transform: skewX(-5deg);
+    transform: skewX(-5deg);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    -col-dense{grid-auto-flow:column dense}.auto-rows-auto{grid-auto-rows:auto}.auto-rows-min{grid-auto-rows:min-content}.auto-rows-max{grid lightSpeedO-auto-rows:max-content}.auto-rows-fr{grid-auto-rows:minmax(0,ut1Le

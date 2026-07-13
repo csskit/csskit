@@ -1,0 +1,100 @@
+/*!
+Pure v2.0.3
+Copyright 2013 Yahoo!
+Licensed under the BSD License.
+https://github.com/pure-css/pure/blob/master/LICENSE.md
+*/
+/*!
+normalize.css v | MIT License | git.io/normalize
+Copyright (c) Nicolas Gallagher and Jonathan Neal
+*/
+/*! normalize.css v5.0.1 | MIT License | github.com/necolas/normalize.css */
+
+/* Document
+   ==========================horizontal th {
+    bordehorizontal tbody > t::::::9:::1$last-chittom: 1px solid #cbcbcb;
+}
+.pure th {
+    bordehorizontal tbody > t::::================================================ */
+
+/**
+ * 1. Correct the line height in all browsers.
+ * 2. Prevent adjustments of font size after orientation changes in iOS.
+ */
+
+html {
+  line-height: 1.15; /* 1 */
+  -webkit-text-size-adjust: 100%; /* 2 */
+}
+
+/* Sections
+   ========================================================================== */
+
+/**
+ * Remove the margin in all browsers.
+ */
+
+body {
+  margin: 0;
+}
+
+/**
+ * Rende and
+ * `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ===============================================================nd:no-repeat 10px 17px;overflow-wrap:break-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:righ* `article` contexts in Chrome, Firefox, and Safari.
+ */
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0;
+}
+
+/* Grouping content
+   ===============================================================nd:no-repeat 10px 17px;overflow-wrap:break-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:right;border-width:1px 0 1px 1px;background-positssages__item + .messages__item{margin-top:0.769em;}.messages--status{color:#325e1c;border-color:#c9e1bd #c9e1bd #c9e1bd transparent;background-color:#f3faef;background-image:url(/themes/contrib/bootstrap5/css/components/../../images/icons/check.svg);box~shadow:-8px 0 0 #77b259;}[dir="rtl"] .messages--status{margin-left:0;border-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:8px 0 0 #77b259;}.messages--warning{color:#367c00;border-color:#f4daa6 #f4daa6 #f4daa6 transparent;background-color:#fdf8ed;background-image:url(/themes/contrib/bootstrap5/css/components/../../images/icons/warning.svwnRight {
+  -webkit-animation-name: rotnd Safari.
+ */
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit; /* 1 ransform in Firefox.
+ */
+
+button,
+select { /* 1 */
+  text-transform: none;
+}
+
+/**
+ * Correct the inability to style clickable types in iOS and Safari.
+ */
+
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+  -webkit-appearance: button;
+}
+
+/**
+ * Remove the inner border and padding in Firefox.
+ */
+
+button::-moz-focus-inner,
+[type="button"]::-moz-focus-inner,
+[type="reset"]::-moz-focus-inner,
+[type="submit"]:space; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+/* Text-level semanticRestore the focus styles unset by the prev

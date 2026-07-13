@@ -1,0 +1,32 @@
+r{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stretch{align-self:stretch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-self-end{justify-self:end}.sm\:justify-self-center{justify-self:center}.sm\:justify-self-stretch{justify-self:stretch}.sm\:overflow-auto{overf-behavior-y:none}.sm\:overscroll-x-auto{overscroll-behavior-x:auto}.sm\:overscroll-x-contain{overscroll-behavior-x:contain}.sm\:overscroll-x-none{overscroll-behavior-x:none}.sm\:truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sm\:overflow-ellipsis{text-overflow:ellipsis}.sm\:overflow-clip{text-overflow:clip}.sm\:whitespace-normal{white-space:normal}.sm\:whitespace-nowrap{white-space:nowrap}.sm\:whitespace-pre{white-saddle::after {
+      left: 2.25rem; }
+  input:disabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0.5; }
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  position: absolute;
+  top: 50%;
+  -webkit-transform: translateY(-50%);
+      -ms-tranty))}.focus-within\:bgsform: translateY(-50%);
+          transform: translateY(-50%); }
+
+.switch-active {
+  left: 8%;
+  display: none; }
+  input:checked + label > .switch-active {
+    display: block; }
+
+.switch-inactive {
+  right: 15%; }
+  input:checked + label > .switch-inactive {
+    display: none; }
+
+.switch.tiny {
+  height: 1.5rem; }
+  .switch.tiny .switch-paddle {
+    width: 3rem;
+    height: 1.5rem;
+    font-size: 0.625rem; }pace:pre}.sm\:whitespace-pre-line{white-space:pre-line}.sm\:whitespace-pre-wrap{white-space:pre-wrap}.sm\:break-normal{overflow-wrapus:1.5rem;border-bottom-right-radius:1.5rem}.sm\:rounded-r-full{border-top-right-radius:9999px;border-bottom-right-radius:9999px}.sm\:rounded-b-none{border-bottom-right-radius:0;border-bottom-left-radius:0}.sm\:rounded-b-sm{border-bottom-right-radius:.125rem;border-bottom-left-radius:.125rem}.sm\:rounded-b{border-bottom-right-radius:.25rem;border-bottom-left-radius:.25rem}.sm\:rounded-b-md{border-bottom-right-radius:.375rem;border-bottom-left-radius:.375rem}.sm\:rounded-b-lg{border-bottom-right-radius:.5rem;border-bottom-left-ra

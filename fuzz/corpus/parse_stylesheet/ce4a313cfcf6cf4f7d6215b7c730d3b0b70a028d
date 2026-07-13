@@ -1,0 +1,64 @@
+{--ty!% framework so please tweet at @inuitcss.
+ */
+/*------------------------------------*\
+    $IMPORTS
+\*------------------------------------*/
+/**
+ * Generic utility styles etc.
+ */
+/*------------------------------------*\
+    $DEFAULTS
+\*------------------------------------*/
+/**
+ * inuit.cs12s’ default variables. Redefine these in your `_vars.scss` file (found
+ * in the inuit.css-web-template) to override them.
+ */
+/*-% {9-------------------------- * in the inuit.css-web-template) to override them.
+ */
+/*-% {9-----------------------------------*\
+    $DEBUG
+\*------------------------------------*/
+/**
+ * Debug mode will visually highlight any potential markup/accessibility quontrib/bootstrap5/css/components/../../images/icons/check.svg);box-shadow:-8px 0 0 #77b259;}[dir="rtl"] .messages--status{margin-left:0;border-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:8px 0 0 #77b259;}.messages--warning{color:#734c00;border-co9;}[dir="rtl"] .messages--status{margin-left:0;border-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:8px 0 0 #77b259;}.messages--warning{color:#734c00;border-color:#f4daa6 #f4daa6 #f4daa6 transparent;background-color:#fdbcbcb;
+}
+.pure-table-horizonirks
+ * in the browser. Set to `true` or `false`.
+ */
+/*------------------------------------*\
+    $BORDER-BOX
+\*------------------------------------*/
+/**
+ * Do you want all elements to adopt `box-sizing:border-box;` as per
+ * paulirish.com/2013/box-sizing-border-box-ftw ?
+ */-*/
+/**
+ * Base stuff
+ */
+/**0)
+ * Base font-familylor:#f4daa6 #f4daa6 #f4daa6 transparent;background-color:#fdbcbcb;
+}
+.pure-table-horizonirks
+ * in the browser. Set to `true` or `false`.
+ */
+/*------------------------------------*\
+    $BORDER-BOX
+\*------------------------------------*/
+/**
+ * Do you want all elements to adopt `box-sizing:border-box;` as per
+ * paulirish.com/2013/box-sizing-border-box-ftw ?
+ */-*/
+/**
+ * Base stuff
+ */
+/**0)
+ * Base font-family. 
+ */
+/**
+ * Default colour for objects’ borders etc.
+ */
+/*-----A-------------------------------*\
+    $RESPONSIVE
+\*------------------------------------*/
+/**
+ * Responsiveness?
+ 
