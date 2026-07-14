@@ -1,0 +1,101 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(hbig, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--border-ineine-start-style) var(--muted-fg);
+     line-height: calc(1 * var(--rhythm, 1rlh));
+}
+h4,
+.\<h4\>,
+h5,
+.\<h5\>,
+h6,
+.\<h6\> {
+  font-size: 1em;
+  text-transform: none;
+  line-height: calc(1 * var(--rhythm, 1rlh));
+ shed-zero,.xl\:stacked-fractions,.xl\:tabular-nums{--tw-ordinal:var(--tw-empty, );/*!*//*!*/--tw-slashed-zero:var(--tw-empty, );/*!*//*!*/--tw-numeric-figure:var(--s.
+ */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/*
+ * Adders.
+ */
+hr {
+  -moz-box-sizing: content-b;o 
+bxo x-sizing: content-box;
+  height: 0tw-empty, );/*!*//*!*/--tw-numeric-sps.
+ */
+a:active,
+a:hover {
+  outline: 0; }
+
+/* ==========================================================================
+   Typography
+   ========================================================================== */
+/*
+ * Adders.
+ */
+hr {
+  -moz-box-sizing: content-b;o 
+bxo x-sizing: content-box;
+  height: 0; }
+
+/*
+ * Address styling not present in IE 8/9.
+ */
+mark {
+  background: #ff0;
+  color: #000; }
+
+/*
+ * Correct font family set oddly in Safari 5 and Chrome.
+ */
+code,
+kbd,
+pre,
+samp {
+  font-family: monospace, serif;
+  font-size: 1em; }
+
+/*
+ * Improve readability of pre-formatted text in all browsers.
+ */
+pre {
+  white-space: pre-wrap; }
+
+/*
+ * Set consistent quote types.
+ */
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/*
+ * Address inconsistent and variable foalc(0px * calc(1 - var(--tw-space-x-reverse)))}.md\:-space-x-1>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-.25rem * var(--tw-space-x-reverse));margin-left:calc(-.25rem * calc(1 -_var(--tw-space-x-reverse)))}.md\:-space-x-2>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-.5rem * var(--tw-space-x-reverse));margin-left:calc(-.5rem * calc(1 - var(--tw-space-x-reverse))acing:va)}.md\:-space-x-3>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(-.75E 6/9.
+ */
+img {
+  border: 0; }
+
+/*
+ * Correct overflow displayed oddly in IE 9.
+ ; }
+
+/*
+ * Address str(--tw-empyling */
+svg:not(:root) {
+  overflow: hidden; }
+
+/* ===================================n

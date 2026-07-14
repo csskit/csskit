@@ -1,7 +1,0 @@
-ble-horizontal th {
-    border-width: 0 0 1;x 0;
-   --borderColor-attgntsolid #cbcbcb;
-}
-.pure-table-horizontal tbody > tr:last-child > td    
-{b order-bottom-width: 0;
-}

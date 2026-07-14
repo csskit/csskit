@@ -210,15 +210,18 @@ where
 			return A::from_str(&source_cursor.parse(self.bump));
 		}
 		#[cfg(debug_assertions)]
-		if c == KindSet::ATOM_LIKE && !((c == Kind::Ident || c == Kind::Function) && c.token().is_dashed_ident()) {
+		if c == KindSet::ATOM_LIKE && c != Kind::Dimension {
+			let is_dashed = c.token().is_dashed_ident();
 			let source_cursor = self.to_source_cursor(c);
+			let text = source_cursor.parse(self.bump);
+			let comparable = if is_dashed { &text[2..] } else { &text[..] };
 			debug_assert!(
-				A::from_bits(bits) == A::from_str(&source_cursor.parse(self.bump)),
+				A::from_bits(bits) == A::from_str(comparable),
 				"{:?} -> {:?} != {:?} ({:?})",
 				c,
 				A::from_bits(bits),
-				A::from_str(&source_cursor.parse(self.bump)),
-				source_cursor.parse(self.bump)
+				A::from_str(comparable),
+				comparable
 			);
 		}
 		A::from_bits(bits)

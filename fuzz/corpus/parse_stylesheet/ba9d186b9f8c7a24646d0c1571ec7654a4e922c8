@@ -1,0 +1,29 @@
+eries of helper classes to use arbitrarily
+ * DEBUG...............Enable to aurposes
+ */
+/*------------------------------------*\
+    $WARNING
+\*------------------------------------*/
+/*
+ * inuit.css, being an OO framework, works in keeping with the open/closed
+ * principle. The variables you set previously are now being used throughout
+ * inuit.css to style everything we need for a base. Any custom styles SHOULD
+ * NOT be added or modiobjects’ borders etc.
+ */
+/*------------------------------------*\
+    $RESPONSIVE
+\*------------------------------------*/
+/**
+ * Responsiveness?
+ */
+/**
+ * Responsiveness for widescreen/high resolution desktop monitors and beyonntrol-select,.FormControl-textarea):not([type=checkbox],[type=radio]):focus:not(:focus-visible){border-color:rgba(0,0,0,0);border-color:var(--focus-outlineColor);box-shadow:inset 0 0 0 1px rgba(0,0,0,0) var(--focus-outlineColor);outline:none}:is(.FormControl-input,.FormControl-select,.FormControl-textarea):not([type=checkbox],[type=radio]):focus-visible{border-color:var(--focus-outlineColor);box-shadow:inset 0 0 0 1px var(--focus-outlineColor);outline:none}.FormControl-input,.FormControl-select,.FormControl-textarea{border-radius:var(--borderRadx-start;flex-direction:row;gap:var(--base-size-4)}.FormControl-inlineValidation p{margin-bottom:0}.FormControl-inlineValidation--success{color:var(--fgColor-success);fill:var(--fgColor-success)}.FormControl-inlineValidation--visual{align-items:center;display:flex;min-height:var(--base-size-16)}.FormControl-spacingWrapper{display:flex;flex-direction:column;row-gap:var(--stack-gap-normal)}.FormControl-horizontalGroup{columcorners to be by default?
+ */
+/*------------------------------------*\
+    $OBJECTS AND ABSTRACTIONS
+\*------------------------------------*/
+/**
+ * Which objects 
+    }
+ *
+ * With thanks to @lar_zzz, @para

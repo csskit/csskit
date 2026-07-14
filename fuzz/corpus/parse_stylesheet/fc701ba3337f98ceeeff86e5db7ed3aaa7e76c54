@@ -1,0 +1,17 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl\:pb-0{padding------------*\
+    $RESPONSIVE
+\*------------------------------------*/
+/**
+ * Responsivenesspadding-bottom:.75rem}.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25rem}.\32xl\:pb-6{padding-bottom:1.5rem}.\32xl\:pb-7{padding-bottom:1.75rem}.\32xl\:pb-8{paddmng-bottom:2rem}!% framework so please tweet at @inuitcss.
+ */
+/*-------------------------&-----------*\
+    $IMPORTS
+\*------------------------------------*/
+/**
+ * Generic utility styles etc.
+ */
+/*------------------------------------*\
+ (found
+ * in the inuit.css-web-template) to override them.
+ */
+/*-----------------------o---

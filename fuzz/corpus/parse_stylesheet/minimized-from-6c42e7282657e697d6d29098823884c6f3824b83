@@ -1,0 +1,8 @@
+wnRight {
+  -webkit-animatioebkit-animation-name: rotateOutUpLeft;
+  animation-name: rotateOutUpLeft;
+  -webkit-transform-origin: left bottom;
+  transform-origin: left bottom;
+}
+@--transform: rotate3d(0, 0, 1, 90deg);
+   uthored by Nick Pettit - h
