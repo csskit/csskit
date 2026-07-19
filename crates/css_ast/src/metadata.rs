@@ -570,6 +570,64 @@ mod tests {
 		assert!(metadata.used_at_rules.contains(AtRuleId::Media));
 	}
 
+	// Child leaf types carrying distinct node_kinds bits, used to verify delegation
+	// propagates and merges children's metadata upward.
+	#[derive(csskit_derives::NodeWithMetadata)]
+	#[metadata(node_kinds = StyleRule)]
+	struct ChildA;
+
+	#[derive(csskit_derives::NodeWithMetadata)]
+	#[metadata(node_kinds = AtRule)]
+	struct ChildB;
+
+	// Type-level delegate on a struct merges every field's metadata into self_metadata.
+	#[derive(csskit_derives::NodeWithMetadata)]
+	#[metadata(node_kinds = Function, delegate)]
+	struct StructDelegate {
+		a: ChildA,
+		b: ChildB,
+	}
+
+	// Enum delegate over a named-field variant and a tuple variant.
+	#[derive(csskit_derives::NodeWithMetadata)]
+	#[metadata(delegate)]
+	enum EnumDelegate {
+		Named { a: ChildA, b: ChildB },
+		Tuple(ChildA),
+		Empty,
+	}
+
+	#[test]
+	fn test_struct_type_level_delegate_merges_all_fields() {
+		let node = StructDelegate { a: ChildA, b: ChildB };
+		let meta = node.metadata();
+		// self_metadata bit plus both children.
+		assert!(meta.node_kinds.contains(NodeKinds::Function));
+		assert!(meta.node_kinds.contains(NodeKinds::StyleRule));
+		assert!(meta.node_kinds.contains(NodeKinds::AtRule));
+	}
+
+	#[test]
+	fn test_enum_delegate_named_variant() {
+		let meta = EnumDelegate::Named { a: ChildA, b: ChildB }.metadata();
+		assert!(meta.node_kinds.contains(NodeKinds::StyleRule));
+		assert!(meta.node_kinds.contains(NodeKinds::AtRule));
+		assert!(!meta.node_kinds.contains(NodeKinds::Function));
+	}
+
+	#[test]
+	fn test_enum_delegate_tuple_variant() {
+		let meta = EnumDelegate::Tuple(ChildA).metadata();
+		assert!(meta.node_kinds.contains(NodeKinds::StyleRule));
+		assert!(!meta.node_kinds.contains(NodeKinds::AtRule));
+	}
+
+	#[test]
+	fn test_enum_delegate_empty_variant() {
+		let meta = EnumDelegate::Empty.metadata();
+		assert!(meta.is_empty());
+	}
+
 	#[test]
 	fn test_vendor_prefixes_try_from() {
 		// Vendor-prefixed atoms should convert successfully

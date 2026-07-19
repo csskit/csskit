@@ -35,18 +35,17 @@ impl MetadataArgs {
 		}
 	}
 
-	/// Which struct field to delegate `metadata()` to, if any.
-	///
-	/// Generic newtypes (e.g. `NonNegative<T>`) auto-delegate so `T`'s metadata
-	/// propagates without an explicit attribute. Non-generic single-field structs
-	/// don't auto-delegate: their inner type may not implement `NodeWithMetadata`.
-	fn delegate_field(fields: &Fields, generics: &Generics) -> Option<TokenStream> {
+	/// Which struct fields to delegate `metadata()` to. The returned accessors are merged together with
+	/// `self_metadata()`.
+	fn delegate_fields(fields: &Fields, generics: &Generics) -> Vec<TokenStream> {
+		let mut explicit = Vec::new();
 		match fields {
 			Fields::Named(named) => {
 				for field in &named.named {
-					if MetadataArgs::from_attributes(&field.attrs).map(|a| a.delegate).unwrap_or(false) {
-						let ident = field.ident.as_ref()?;
-						return Some(quote! { #ident });
+					if MetadataArgs::from_attributes(&field.attrs).map(|a| a.delegate).unwrap_or(false)
+						&& let Some(ident) = field.ident.as_ref()
+					{
+						explicit.push(quote! { #ident });
 					}
 				}
 			}
@@ -54,17 +53,20 @@ impl MetadataArgs {
 				for (i, field) in unnamed.unnamed.iter().enumerate() {
 					if MetadataArgs::from_attributes(&field.attrs).map(|a| a.delegate).unwrap_or(false) {
 						let idx = Index::from(i);
-						return Some(quote! { #idx });
+						explicit.push(quote! { #idx });
 					}
 				}
 			}
-			Fields::Unit => return None,
+			Fields::Unit => return explicit,
+		}
+		if !explicit.is_empty() {
+			return explicit;
 		}
 
 		// Auto-delegate for generic single-field structs (newtypes).
 		let has_type_params = generics.type_params().next().is_some();
 		if !has_type_params {
-			return None;
+			return explicit;
 		}
 
 		let total_fields = match fields {
@@ -75,18 +77,18 @@ impl MetadataArgs {
 		if total_fields == 1 {
 			match fields {
 				Fields::Named(named) => {
-					let ident = named.named.first()?.ident.as_ref()?;
-					Some(quote! { #ident })
+					if let Some(ident) = named.named.first().and_then(|f| f.ident.as_ref()) {
+						explicit.push(quote! { #ident });
+					}
 				}
 				Fields::Unnamed(_) => {
 					let idx = Index::from(0);
-					Some(quote! { #idx })
+					explicit.push(quote! { #idx });
 				}
-				Fields::Unit => None,
+				Fields::Unit => {}
 			}
-		} else {
-			None
 		}
+		explicit
 	}
 
 	fn needs_delegation_bounds(&self, data: &Data, generics: &Generics) -> bool {
@@ -94,7 +96,7 @@ impl MetadataArgs {
 			return true;
 		}
 		if let Data::Struct(DataStruct { fields, .. }) = data {
-			return MetadataArgs::delegate_field(fields, generics).is_some();
+			return !MetadataArgs::delegate_fields(fields, generics).is_empty();
 		}
 		false
 	}
@@ -134,9 +136,9 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let declaration_kinds = MetadataArgs::pipe_tokens(&args.declaration_kinds, parse_quote! { crate::DeclarationKind });
 	let property_kinds = MetadataArgs::pipe_tokens(&args.property_kinds, parse_quote! { crate::PropertyKind });
 
-	let field_delegate = match &input.data {
-		Data::Struct(DataStruct { fields, .. }) => MetadataArgs::delegate_field(fields, &input.generics),
-		_ => None,
+	let field_delegates = match &input.data {
+		Data::Struct(DataStruct { fields, .. }) => MetadataArgs::delegate_fields(fields, &input.generics),
+		_ => Vec::new(),
 	};
 
 	let self_metadata = quote! {
@@ -188,8 +190,25 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 							expr
 						};
 
+						// Generate pattern based on whether variant has named or unnamed fields.
+						let pattern = match &variant.fields {
+							Fields::Named(named) => {
+								let field_bindings: Vec<_> = named
+									.named
+									.iter()
+									.zip(bindings.iter())
+									.map(|(field, binding)| {
+										let fname = field.ident.as_ref().unwrap();
+										quote! { #fname: #binding }
+									})
+									.collect();
+								quote! { Self::#variant_ident { #(#field_bindings),*, .. } }
+							}
+							_ => quote! { Self::#variant_ident(#(#bindings),*) },
+						};
+
 						quote! {
-							Self::#variant_ident(#(#bindings),*) => #metadata_expr,
+							#pattern => #metadata_expr,
 						}
 					}
 				})
@@ -202,20 +221,47 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 					}
 				}
 			}
+		} else if let Data::Struct(DataStruct { fields, .. }) = &input.data {
+			let field_accessors: Vec<TokenStream> = match fields {
+				Fields::Named(named) => {
+					named.named.iter().filter_map(|f| f.ident.as_ref().map(|i| quote! { #i })).collect()
+				}
+				Fields::Unnamed(unnamed) => (0..unnamed.unnamed.len())
+					.map(|i| {
+						let idx = Index::from(i);
+						quote! { #idx }
+					})
+					.collect(),
+				Fields::Unit => Vec::new(),
+			};
+			let child_meta = field_accessors.iter().fold(quote! { self.self_metadata() }, |acc, field_path| {
+				quote! {
+					css_parse::NodeMetadata::merge(
+						#acc,
+						<_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(&self.#field_path),
+					)
+				}
+			});
+			quote! {
+				fn metadata(&self) -> crate::CssMetadata {
+					#child_meta
+				}
+			}
 		} else {
-			return Err(Error::new_spanned(
-				ident,
-				"#[metadata(delegate)] on a type-level attribute can only be used on enums. Use field-level #[metadata(delegate)] for structs.",
-			));
+			return Err(Error::new_spanned(ident, "#[metadata(delegate)] can only be used on enums or structs."));
 		}
-	} else if let Some(field_path) = field_delegate {
-		let field_access = quote! { self.#field_path };
-		let child_meta_access =
-			quote! { <_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(&#field_access) };
+	} else if !field_delegates.is_empty() {
+		let child_meta = field_delegates.iter().fold(quote! { self.self_metadata() }, |acc, field_path| {
+			quote! {
+				css_parse::NodeMetadata::merge(
+					#acc,
+					<_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(&self.#field_path),
+				)
+			}
+		});
 		quote! {
 			fn metadata(&self) -> crate::CssMetadata {
-				let child_meta = #child_meta_access;
-				css_parse::NodeMetadata::merge(child_meta, self.self_metadata())
+				#child_meta
 			}
 		}
 	} else {
