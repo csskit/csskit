@@ -10,6 +10,7 @@ use css_parse::parse_optionals;
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct DisplayListitem {
 	pub outside: Option<DisplayOutside>,
 	pub inside: Option<DisplayListitemInside>,
@@ -42,6 +43,7 @@ impl<'a> Parse<'a> for DisplayListitem {
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum DisplayListitemInside {
 	#[atom(CssAtomSet::Flow)]
 	Flow(T![Ident]),

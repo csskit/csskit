@@ -22,6 +22,7 @@ pub enum GenericFontFamily {}
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct GenericScriptSpecific {
 	#[atom(CssAtomSet::Generic)]
 	pub name: T![Function],
@@ -37,6 +38,7 @@ pub struct GenericScriptSpecific {
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum GenericScriptSpecificKeyword {
 	#[atom(CssAtomSet::Fangsong)]
 	Fangsong(T![Ident]),
@@ -55,6 +57,7 @@ pub enum GenericScriptSpecificKeyword {
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum GenericComplete {
 	#[atom(CssAtomSet::Serif)]
 	Serif(T![Ident]),
@@ -79,6 +82,7 @@ pub enum GenericComplete {
 /// ```
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum GenericIncomplete {
 	#[atom(CssAtomSet::UiSerif)]
 	UiSerif(T![Ident]),
