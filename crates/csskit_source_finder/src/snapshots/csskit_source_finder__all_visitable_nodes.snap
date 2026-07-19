@@ -603,6 +603,8 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct AnchorName { }",
   "pub struct AnchorNameStyleValue < \'a > { }",
   "pub struct AnimationCompositionStyleValue < \'a > { }",
+  "pub struct AnimationDelayEndStyleValue < \'a > { }",
+  "pub struct AnimationDelayStartStyleValue < \'a > { }",
   "pub struct AnimationDelayStyleValue < \'a > { }",
   "pub struct AnimationDirectionStyleValue < \'a > { }",
   "pub struct AnimationDurationStyleValue < \'a > { }",

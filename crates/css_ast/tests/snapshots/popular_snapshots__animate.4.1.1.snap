@@ -1451,11 +1451,13 @@ StyleSheet(
                 len: 1,
               )),
               value: AnimationDelayStyleValue([
-                (S(Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(1499),
-                  len: 2,
-                ))), None),
+                (SingleAnimationDelayStyleValue(AnimationDelayStartStyleValue([
+                  (S(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(1499),
+                    len: 2,
+                  ))), None),
+                ]), None), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(

@@ -247460,11 +247460,13 @@ StyleSheet(
                 len: 1,
               )),
               value: AnimationDelayStyleValue([
-                (Ms(Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(198629),
-                  len: 5,
-                ))), None),
+                (SingleAnimationDelayStyleValue(AnimationDelayStartStyleValue([
+                  (Ms(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(198629),
+                    len: 5,
+                  ))), None),
+                ]), None), None),
               ]),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
@@ -247567,11 +247569,13 @@ StyleSheet(
                 len: 1,
               )),
               value: AnimationDelayStyleValue([
-                (Ms(Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(198736),
-                  len: 5,
-                ))), None),
+                (SingleAnimationDelayStyleValue(AnimationDelayStartStyleValue([
+                  (Ms(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(198736),
+                    len: 5,
+                  ))), None),
+                ]), None), None),
               ]),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
