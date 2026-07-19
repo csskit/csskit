@@ -168,14 +168,10 @@
 //!
 //! The `*List` traits are also available to more easily parse lists of things, such as preludes or blocks:
 //!
-//! - [PreludeList] - AST nodes representing a rule's prelude should use this. It simply repeatedly parses its items
-//!   until it enounters the start of a block (<{-token> or <;-token>).
 //! - [FeatureConditionList] - AST nodes representing a prelude "condition list" should use this. It parses the complex
 //!   condition logic in rules like `@media`, `@supports` or `@container`.
 //! - [DeclarationList] - AST nodes representing a block which can only accept "Declarations" should use this. This is
 //!   an implementation of [`<declaration-list>`][8].
-//! - [DeclarationRuleList] - AST nodes representing a block which can accept either "At Rules" or "Declarations" but
-//!   cannot accept "Qualified Rules" should use this. This is an implementation of [`<declaration-rule-list>`][11]
 //! - [RuleList] - AST nodes representing a block which can accept either "At Rules" or "Qualfiied Rules" but cannot
 //!   accept "Declarations" should use this. This is an implementation of [`<rule-list>`][12].
 //!
