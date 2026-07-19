@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{Image, Resolution};
+use crate::{CalcableValue, Image, Resolution};
 
 /// <https://drafts.csswg.org/css-images-4/#funcdef-image-set>
 ///
@@ -22,14 +22,14 @@ pub struct ImageSetFunction<'a> {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub enum ImageSetParams<'a> {
-	Image(Image<'a>, Option<ResolutionOrType>),
-	String(T![String], Option<ResolutionOrType>),
+	Image(Image<'a>, Option<ResolutionOrType<'a>>),
+	String(T![String], Option<ResolutionOrType<'a>>),
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum ResolutionOrType {
-	Resolution(Resolution),
+pub enum ResolutionOrType<'a> {
+	Resolution(CalcableValue<'a, Resolution>),
 	Type(#[atom(CssAtomSet::Type)] T![Function], T![String], #[semantic_eq(skip)] T![')']),
 }
 
@@ -53,5 +53,7 @@ mod tests {
 			"image-set(url('1.avif')type('image/avif'),url('2.jpg')type('image/jpeg'))"
 		);
 		assert_parse!(CssAtomSet::ATOMS, ImageSetFunction, "image-set(url(foo))");
+		assert_parse!(CssAtomSet::ATOMS, ImageSetFunction, "image-set('a.jpg'calc(1x * 2))");
+		assert_parse!(CssAtomSet::ATOMS, ImageSetFunction, "image-set('a.jpg'var(--dpi))");
 	}
 }

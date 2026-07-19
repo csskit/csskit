@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::Percentage;
+use crate::{CalcableValue, Percentage};
 
 /// <https://drafts.csswg.org/css-color-5/#color-mix>
 ///
@@ -162,18 +162,18 @@ pub enum HueInterpolationDirection {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ColorMixPart<'a> {
 	pub color: Color<'a>,
-	pub percentage: Option<Percentage>,
+	pub percentage: Option<CalcableValue<'a, Percentage>>,
 }
 
 impl<'a> Peek<'a> for ColorMixPart<'a> {
-	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(Percentage::PEEK_KINDSET);
+	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(CalcableValue::<Percentage>::PEEK_KINDSET);
 
 	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		Color::peek(p, c) || Percentage::peek(p, c)
+		Color::peek(p, c) || CalcableValue::<Percentage>::peek(p, c)
 	}
 }
 
@@ -184,7 +184,7 @@ impl<'a> Parse<'a> for ColorMixPart<'a> {
 	{
 		// Either order: <color> <percentage>? or <percentage> <color>
 		let mut color = p.parse_if_peek::<Color>()?;
-		let percentage = p.parse_if_peek::<Percentage>()?;
+		let percentage = p.parse_if_peek::<CalcableValue<Percentage>>()?;
 		if color.is_none() {
 			color = Some(p.parse::<Color>()?);
 		}
@@ -240,10 +240,18 @@ impl crate::ToChromashift for ColorMixFunction<'_> {
 		};
 
 		// Collect (color, percentage) pairs, defaulting missing percentages to None.
+		// A substituted/unresolved percentage cannot be statically resolved, so bail.
 		let parts: std::vec::Vec<(&Color<'_>, Option<f64>)> = (&self.parts)
 			.into_iter()
-			.map(|(p, _)| (&p.color, p.percentage.as_ref().map(|pct| pct.value() as f64)))
-			.collect();
+			.map(|(p, _)| {
+				let pct = match &p.percentage {
+					None => None,
+					Some(CalcableValue::Literal(pct)) => Some(pct.value() as f64),
+					Some(_) => return None,
+				};
+				Some((&p.color, pct))
+			})
+			.collect::<Option<_>>()?;
 
 		// Normalise percentages: fill missing as equal shares summing to 100.
 		let n = parts.len() as f64;
@@ -437,7 +445,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<PolarColorSpace>(), 16);
 		assert_eq!(std::mem::size_of::<HueInterpolationMethod>(), 28);
 		assert_eq!(std::mem::size_of::<HueInterpolationDirection>(), 16);
-		assert_eq!(std::mem::size_of::<ColorMixPart>(), 40);
+		assert_eq!(std::mem::size_of::<ColorMixPart<'_>>(), 48);
 	}
 
 	#[test]
@@ -511,5 +519,11 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, ColorMixFunction, "color-mix(srgb,red,blue)");
+	}
+
+	#[test]
+	fn substitution_in_percentage() {
+		assert_parse!(CssAtomSet::ATOMS, ColorMixFunction, "color-mix(in srgb,red calc(50%),blue)");
+		assert_parse!(CssAtomSet::ATOMS, ColorMixFunction, "color-mix(in srgb,red var(--p),blue)");
 	}
 }

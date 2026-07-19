@@ -14,7 +14,7 @@ use crate::{BgSize, Position};
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct PositionAndSize<'a> {
-	pub position: Position,
+	pub position: Position<'a>,
 	#[semantic_eq(skip)]
 	pub size: Option<(T![/], BgSize<'a>)>,
 }
@@ -27,7 +27,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PositionAndSize>(), 136);
+		assert_eq!(std::mem::size_of::<PositionAndSize>(), 152);
 	}
 
 	#[test]

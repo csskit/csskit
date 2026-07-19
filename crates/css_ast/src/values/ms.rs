@@ -397,10 +397,12 @@ impl<'a> Parse<'a> for MsTransformOriginStyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let first = p.parse::<PositionOne>()?;
-		let Some(second) = p.parse_if_peek::<PositionOne>()? else {
+		if !p.peek::<PositionOne>() {
 			return Ok(Self::PositionOne(crate::Value::Literal(first)));
-		};
-		let two = PositionTwo::from_two(p, first, second)?;
+		}
+		let second_c = p.peek_n(1);
+		let second = p.parse::<PositionOne>()?;
+		let two = PositionTwo::from_two(p, first, second, second_c)?;
 		Ok(Self::PositionTwo(crate::Value::Literal(two), p.parse_if_peek::<CalcableValue<Length>>()?))
 	}
 }

@@ -1,6 +1,6 @@
 #![allow(unused)]
 use super::prelude::*;
-use crate::{Angle, LengthPercentage, Position};
+use crate::{Angle, CalcableValue, LengthPercentage, Position};
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-command>
 ///
@@ -249,21 +249,21 @@ pub struct SmoothCommand<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ArcRadii {
+pub struct ArcRadii<'a> {
 	#[atom(CssAtomSet::Of)]
 	pub keyword: T![Ident],
-	pub horizontal: LengthPercentage,
-	pub vertical: Option<LengthPercentage>,
+	pub horizontal: CalcableValue<'a, LengthPercentage>,
+	pub vertical: Option<CalcableValue<'a, LengthPercentage>>,
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ArcRotate {
+pub struct ArcRotate<'a> {
 	#[atom(CssAtomSet::Rotate)]
 	pub keyword: T![Ident],
-	pub angle: Angle,
+	pub angle: CalcableValue<'a, Angle>,
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -271,11 +271,11 @@ pub struct ArcRotate {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ArcCommandParams {
-	pub radii: ArcRadii,
+pub struct ArcCommandParams<'a> {
+	pub radii: ArcRadii<'a>,
 	pub sweep: Option<ArcSweep>,
 	pub size: Option<ArcSize>,
-	pub rotate: Option<ArcRotate>,
+	pub rotate: Option<ArcRotate<'a>>,
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -286,7 +286,7 @@ pub struct ArcCommand<'a> {
 	#[atom(CssAtomSet::Arc)]
 	pub keyword: T![Ident],
 	pub point: CommandEndPoint<'a>,
-	pub params: ArcCommandParams,
+	pub params: ArcCommandParams<'a>,
 }
 
 #[cfg(test)]
@@ -309,6 +309,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ShapeCommand, "smooth by 10px 10px with 5px 5px");
 		assert_parse!(CssAtomSet::ATOMS, ShapeCommand, "arc to 10px 10px of 5px 5px");
 		assert_parse!(CssAtomSet::ATOMS, ShapeCommand, "arc to 10px 10px of 5px cw large rotate 10deg");
+		assert_parse!(CssAtomSet::ATOMS, ShapeCommand, "arc to 10px 10px of calc(5px) rotate var(--a)");
 	}
 
 	#[test]

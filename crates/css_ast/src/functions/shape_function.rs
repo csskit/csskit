@@ -20,7 +20,7 @@ pub struct ShapeFunction<'a> {
 	pub fill_rule: Option<FillRuleStyleValue>,
 	#[atom(CssAtomSet::From)]
 	pub from: T![Ident],
-	pub position: Position,
+	pub position: Position<'a>,
 	#[semantic_eq(skip)]
 	pub comma: T![,],
 	pub commands: CommaSeparated<'a, ShapeCommand<'a>>,

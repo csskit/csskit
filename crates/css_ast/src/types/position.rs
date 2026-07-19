@@ -1,22 +1,22 @@
 use super::prelude::*;
-use crate::LengthPercentage;
+use crate::{CalcableValue, LengthPercentage};
 
 /// <https://drafts.csswg.org/css-values-5/#typedef-position>
 ///
 /// ```text,ignore
 /// <position> = <position-one> | <position-two> | <position-four>
 /// ```
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum Position {
-	One(PositionOne),
-	Two(PositionTwo),
-	Four(PositionFour),
+pub enum Position<'a> {
+	One(PositionOne<'a>),
+	Two(PositionTwo<'a>),
+	Four(PositionFour<'a>),
 }
 
-impl<'a> Peek<'a> for Position {
+impl<'a> Peek<'a> for Position<'a> {
 	const PEEK_KINDSET: KindSet = PositionOne::PEEK_KINDSET;
 
 	#[inline(always)]
@@ -28,7 +28,7 @@ impl<'a> Peek<'a> for Position {
 	}
 }
 
-impl<'a> Parse<'a> for Position {
+impl<'a> Parse<'a> for Position<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -37,24 +37,25 @@ impl<'a> Parse<'a> for Position {
 		if !p.peek::<PositionOne>() {
 			return Ok(Self::One(first));
 		}
+		let second_c = p.peek_n(1);
 		let second = p.parse::<PositionOne>()?;
 		if !p.peek::<PositionOne>() {
-			return Ok(Self::Two(PositionTwo::from_two(p, first, second)?));
+			return Ok(Self::Two(PositionTwo::from_two(p, first, second, second_c)?));
 		}
 		// Four-value: first two tokens must form a keyword + LP pair
-		Ok(Self::Four(PositionFour::from_four(p, first, second)?))
+		Ok(Self::Four(PositionFour::from_four(p, first, second, second_c)?))
 	}
 }
 
 /// `at <position>`, as used by e.g. `circle()`/`ellipse()`/gradients.
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct AtPosition {
+pub struct AtPosition<'a> {
 	#[atom(CssAtomSet::At)]
 	pub keyword: T![Ident],
-	pub position: Position,
+	pub position: Position<'a>,
 }
 
 /// <https://drafts.csswg.org/css-values-5/#typedef-position-one>
@@ -68,13 +69,11 @@ pub struct AtPosition {
 ///   <length-percentage>
 /// ]
 /// ```
-#[derive(
-	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
+#[derive(Parse, Peek, ToSpan, SemanticEq, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionOne {
+pub enum PositionOne<'a> {
 	#[atom(CssAtomSet::Left)]
 	Left(T![Ident]),
 	#[atom(CssAtomSet::Right)]
@@ -105,92 +104,92 @@ pub enum PositionOne {
 	Start(T![Ident]),
 	#[atom(CssAtomSet::End)]
 	End(T![Ident]),
-	LengthPercentage(LengthPercentage),
+	LengthPercentage(CalcableValue<'a, LengthPercentage>),
 }
 
-impl PositionOne {
-	pub(crate) fn to_horizontal(self) -> Option<PositionHorizontal> {
+impl<'a> PositionOne<'a> {
+	pub(crate) fn to_horizontal(&self) -> Option<PositionHorizontal<'a>> {
 		match self {
-			Self::Left(t) => Some(PositionHorizontal::Left(t)),
-			Self::Right(t) => Some(PositionHorizontal::Right(t)),
-			Self::Center(t) => Some(PositionHorizontal::Center(t)),
-			Self::XStart(t) => Some(PositionHorizontal::XStart(t)),
-			Self::XEnd(t) => Some(PositionHorizontal::XEnd(t)),
-			Self::LengthPercentage(l) => Some(PositionHorizontal::LengthPercentage(l)),
+			Self::Left(t) => Some(PositionHorizontal::Left(*t)),
+			Self::Right(t) => Some(PositionHorizontal::Right(*t)),
+			Self::Center(t) => Some(PositionHorizontal::Center(*t)),
+			Self::XStart(t) => Some(PositionHorizontal::XStart(*t)),
+			Self::XEnd(t) => Some(PositionHorizontal::XEnd(*t)),
+			Self::LengthPercentage(l) => Some(PositionHorizontal::LengthPercentage(l.clone())),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_vertical(self) -> Option<PositionVertical> {
+	pub(crate) fn to_vertical(&self) -> Option<PositionVertical<'a>> {
 		match self {
-			Self::Top(t) => Some(PositionVertical::Top(t)),
-			Self::Bottom(t) => Some(PositionVertical::Bottom(t)),
-			Self::Center(t) => Some(PositionVertical::Center(t)),
-			Self::YStart(t) => Some(PositionVertical::YStart(t)),
-			Self::YEnd(t) => Some(PositionVertical::YEnd(t)),
-			Self::LengthPercentage(l) => Some(PositionVertical::LengthPercentage(l)),
+			Self::Top(t) => Some(PositionVertical::Top(*t)),
+			Self::Bottom(t) => Some(PositionVertical::Bottom(*t)),
+			Self::Center(t) => Some(PositionVertical::Center(*t)),
+			Self::YStart(t) => Some(PositionVertical::YStart(*t)),
+			Self::YEnd(t) => Some(PositionVertical::YEnd(*t)),
+			Self::LengthPercentage(l) => Some(PositionVertical::LengthPercentage(l.clone())),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_horizontal_keyword(self) -> Option<PositionHorizontalKeyword> {
+	pub(crate) fn to_horizontal_keyword(&self) -> Option<PositionHorizontalKeyword> {
 		match self {
-			Self::Left(t) => Some(PositionHorizontalKeyword::Left(t)),
-			Self::Right(t) => Some(PositionHorizontalKeyword::Right(t)),
-			Self::XStart(t) => Some(PositionHorizontalKeyword::XStart(t)),
-			Self::XEnd(t) => Some(PositionHorizontalKeyword::XEnd(t)),
+			Self::Left(t) => Some(PositionHorizontalKeyword::Left(*t)),
+			Self::Right(t) => Some(PositionHorizontalKeyword::Right(*t)),
+			Self::XStart(t) => Some(PositionHorizontalKeyword::XStart(*t)),
+			Self::XEnd(t) => Some(PositionHorizontalKeyword::XEnd(*t)),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_vertical_keyword(self) -> Option<PositionVerticalKeyword> {
+	pub(crate) fn to_vertical_keyword(&self) -> Option<PositionVerticalKeyword> {
 		match self {
-			Self::Top(t) => Some(PositionVerticalKeyword::Top(t)),
-			Self::Bottom(t) => Some(PositionVerticalKeyword::Bottom(t)),
-			Self::YStart(t) => Some(PositionVerticalKeyword::YStart(t)),
-			Self::YEnd(t) => Some(PositionVerticalKeyword::YEnd(t)),
+			Self::Top(t) => Some(PositionVerticalKeyword::Top(*t)),
+			Self::Bottom(t) => Some(PositionVerticalKeyword::Bottom(*t)),
+			Self::YStart(t) => Some(PositionVerticalKeyword::YStart(*t)),
+			Self::YEnd(t) => Some(PositionVerticalKeyword::YEnd(*t)),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_block_axis(self) -> Option<PositionBlockAxis> {
+	pub(crate) fn to_block_axis(&self) -> Option<PositionBlockAxis> {
 		match self {
-			Self::BlockStart(t) => Some(PositionBlockAxis::BlockStart(t)),
-			Self::BlockEnd(t) => Some(PositionBlockAxis::BlockEnd(t)),
-			Self::Center(t) => Some(PositionBlockAxis::Center(t)),
+			Self::BlockStart(t) => Some(PositionBlockAxis::BlockStart(*t)),
+			Self::BlockEnd(t) => Some(PositionBlockAxis::BlockEnd(*t)),
+			Self::Center(t) => Some(PositionBlockAxis::Center(*t)),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_inline_axis(self) -> Option<PositionInlineAxis> {
+	pub(crate) fn to_inline_axis(&self) -> Option<PositionInlineAxis> {
 		match self {
-			Self::InlineStart(t) => Some(PositionInlineAxis::InlineStart(t)),
-			Self::InlineEnd(t) => Some(PositionInlineAxis::InlineEnd(t)),
-			Self::Center(t) => Some(PositionInlineAxis::Center(t)),
+			Self::InlineStart(t) => Some(PositionInlineAxis::InlineStart(*t)),
+			Self::InlineEnd(t) => Some(PositionInlineAxis::InlineEnd(*t)),
+			Self::Center(t) => Some(PositionInlineAxis::Center(*t)),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_block_axis_keyword(self) -> Option<PositionBlockAxisKeyword> {
+	pub(crate) fn to_block_axis_keyword(&self) -> Option<PositionBlockAxisKeyword> {
 		match self {
-			Self::BlockStart(t) => Some(PositionBlockAxisKeyword::BlockStart(t)),
-			Self::BlockEnd(t) => Some(PositionBlockAxisKeyword::BlockEnd(t)),
+			Self::BlockStart(t) => Some(PositionBlockAxisKeyword::BlockStart(*t)),
+			Self::BlockEnd(t) => Some(PositionBlockAxisKeyword::BlockEnd(*t)),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_inline_axis_keyword(self) -> Option<PositionInlineAxisKeyword> {
+	pub(crate) fn to_inline_axis_keyword(&self) -> Option<PositionInlineAxisKeyword> {
 		match self {
-			Self::InlineStart(t) => Some(PositionInlineAxisKeyword::InlineStart(t)),
-			Self::InlineEnd(t) => Some(PositionInlineAxisKeyword::InlineEnd(t)),
+			Self::InlineStart(t) => Some(PositionInlineAxisKeyword::InlineStart(*t)),
+			Self::InlineEnd(t) => Some(PositionInlineAxisKeyword::InlineEnd(*t)),
 			_ => None,
 		}
 	}
 
-	pub(crate) fn to_logical(self) -> Option<PositionLogical> {
+	pub(crate) fn to_logical(&self) -> Option<PositionLogical> {
 		match self {
-			Self::Start(t) => Some(PositionLogical::Start(t)),
-			Self::End(t) => Some(PositionLogical::End(t)),
+			Self::Start(t) => Some(PositionLogical::Start(*t)),
+			Self::End(t) => Some(PositionLogical::End(*t)),
 			_ => None,
 		}
 	}
@@ -214,14 +213,14 @@ impl PositionOne {
 /// ```
 ///
 /// All forms normalise to (primary-axis, secondary-axis) order in the AST.
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionTwo {
+pub enum PositionTwo<'a> {
 	/// Physical horizontal/vertical axes, with optional `<length-percentage>`.
 	/// Stored horizontal-first regardless of source order.
-	Physical(PositionHorizontal, PositionVertical),
+	Physical(PositionHorizontal<'a>, PositionVertical<'a>),
 	/// Flow-relative block/inline axes.
 	/// Stored block-first regardless of source order.
 	FlowRelative(PositionBlockAxis, PositionInlineAxis),
@@ -229,7 +228,7 @@ pub enum PositionTwo {
 	Logical(PositionLogical, PositionLogical),
 }
 
-impl<'a> Peek<'a> for PositionTwo {
+impl<'a> Peek<'a> for PositionTwo<'a> {
 	const PEEK_KINDSET: KindSet = PositionOne::PEEK_KINDSET;
 
 	#[inline(always)]
@@ -241,8 +240,13 @@ impl<'a> Peek<'a> for PositionTwo {
 	}
 }
 
-impl PositionTwo {
-	pub(crate) fn from_two<'a, I>(_p: &mut Parser<'a, I>, first: PositionOne, second: PositionOne) -> ParserResult<Self>
+impl<'a> PositionTwo<'a> {
+	pub(crate) fn from_two<I>(
+		_p: &mut Parser<'a, I>,
+		first: PositionOne<'a>,
+		second: PositionOne<'a>,
+		second_c: Cursor,
+	) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
@@ -275,7 +279,7 @@ impl PositionTwo {
 		if let (Some(a), Some(b)) = (a, b) {
 			return Ok(Self::Logical(a, b));
 		}
-		Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
+		Err(Diagnostic::new(second_c, Diagnostic::unexpected))?
 	}
 }
 
@@ -294,81 +298,92 @@ impl PositionTwo {
 /// ```
 ///
 /// All forms stored with the first keyword-axis pair first.
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionFour {
+pub enum PositionFour<'a> {
 	/// `[left|right|x-start|x-end] <lp>` && `[top|bottom|y-start|y-end] <lp>`
 	/// Stored horizontal-first.
-	Physical(PositionHorizontalKeyword, LengthPercentage, PositionVerticalKeyword, LengthPercentage),
+	Physical(
+		PositionHorizontalKeyword,
+		CalcableValue<'a, LengthPercentage>,
+		PositionVerticalKeyword,
+		CalcableValue<'a, LengthPercentage>,
+	),
 	/// `[block-start|block-end] <lp>` && `[inline-start|inline-end] <lp>`
 	/// Stored block-first.
-	FlowRelative(PositionBlockAxisKeyword, LengthPercentage, PositionInlineAxisKeyword, LengthPercentage),
+	FlowRelative(
+		PositionBlockAxisKeyword,
+		CalcableValue<'a, LengthPercentage>,
+		PositionInlineAxisKeyword,
+		CalcableValue<'a, LengthPercentage>,
+	),
 	/// `[start|end] <lp>` × 2; first = block axis, second = inline axis.
-	Logical(PositionLogical, LengthPercentage, PositionLogical, LengthPercentage),
+	Logical(PositionLogical, CalcableValue<'a, LengthPercentage>, PositionLogical, CalcableValue<'a, LengthPercentage>),
 }
 
-impl PositionFour {
-	pub(crate) fn from_four<'a, I>(p: &mut Parser<'a, I>, first: PositionOne, second: PositionOne) -> ParserResult<Self>
+impl<'a> PositionFour<'a> {
+	pub(crate) fn from_four<I>(
+		p: &mut Parser<'a, I>,
+		first: PositionOne<'a>,
+		second: PositionOne<'a>,
+		second_c: Cursor,
+	) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		// second must be a <length-percentage> in all four-value forms except
-		// when the pair is reversed (vertical/block/logical first).
+		// second must be a <length-percentage> in all four-value forms.
 		// Pattern: <keyword> <lp> <keyword> <lp>  (or reversed)
-		let second_lp = if let PositionOne::LengthPercentage(lp) = second { Some(lp) } else { None };
-
-		if let Some(lp1) = second_lp {
-			let third = p.parse::<PositionOne>()?;
-			let fourth = p.parse::<LengthPercentage>()?;
-			// Physical: first=H keyword, third=V keyword
-			if let Some(h_kw) = first.to_horizontal_keyword()
-				&& let Some(v_kw) = third.to_vertical_keyword()
-			{
-				return Ok(Self::Physical(h_kw, lp1, v_kw, fourth));
-			}
-			// Physical reversed: first=V keyword, third=H keyword
-			if let Some(v_kw) = first.to_vertical_keyword()
-				&& let Some(h_kw) = third.to_horizontal_keyword()
-			{
-				return Ok(Self::Physical(h_kw, fourth, v_kw, lp1));
-			}
-			// Flow-relative: first=block keyword, third=inline keyword
-			if let Some(b_kw) = first.to_block_axis_keyword()
-				&& let Some(i_kw) = third.to_inline_axis_keyword()
-			{
-				return Ok(Self::FlowRelative(b_kw, lp1, i_kw, fourth));
-			}
-			// Flow-relative reversed: first=inline keyword, third=block keyword
-			if let Some(i_kw) = first.to_inline_axis_keyword()
-				&& let Some(b_kw) = third.to_block_axis_keyword()
-			{
-				return Ok(Self::FlowRelative(b_kw, fourth, i_kw, lp1));
-			}
-			// Logical: first=start|end, third=start|end
-			if let Some(a) = first.to_logical()
-				&& let Some(b) = third.to_logical()
-			{
-				return Ok(Self::Logical(a, lp1, b, fourth));
-			}
-			Err(Diagnostic::new(third.into(), Diagnostic::unexpected))?
-		} else {
-			// second is not LP — must be a keyword; first is the offset LP
-			// Pattern: <keyword> <keyword> <lp>  is invalid for four-value
-			Err(Diagnostic::new(second.into(), Diagnostic::unexpected))?
+		let PositionOne::LengthPercentage(lp1) = second else {
+			// second is not LP — must be a keyword; invalid for four-value.
+			return Err(Diagnostic::new(second_c, Diagnostic::unexpected))?;
+		};
+		let third_c = p.peek_n(1);
+		let third = p.parse::<PositionOne>()?;
+		let fourth = p.parse::<CalcableValue<LengthPercentage>>()?;
+		// Physical: first=H keyword, third=V keyword
+		if let Some(h_kw) = first.to_horizontal_keyword()
+			&& let Some(v_kw) = third.to_vertical_keyword()
+		{
+			return Ok(Self::Physical(h_kw, lp1, v_kw, fourth));
 		}
+		// Physical reversed: first=V keyword, third=H keyword
+		if let Some(v_kw) = first.to_vertical_keyword()
+			&& let Some(h_kw) = third.to_horizontal_keyword()
+		{
+			return Ok(Self::Physical(h_kw, fourth, v_kw, lp1));
+		}
+		// Flow-relative: first=block keyword, third=inline keyword
+		if let Some(b_kw) = first.to_block_axis_keyword()
+			&& let Some(i_kw) = third.to_inline_axis_keyword()
+		{
+			return Ok(Self::FlowRelative(b_kw, lp1, i_kw, fourth));
+		}
+		// Flow-relative reversed: first=inline keyword, third=block keyword
+		if let Some(i_kw) = first.to_inline_axis_keyword()
+			&& let Some(b_kw) = third.to_block_axis_keyword()
+		{
+			return Ok(Self::FlowRelative(b_kw, fourth, i_kw, lp1));
+		}
+		// Logical: first=start|end, third=start|end
+		if let Some(a) = first.to_logical()
+			&& let Some(b) = third.to_logical()
+		{
+			return Ok(Self::Logical(a, lp1, b, fourth));
+		}
+		Err(Diagnostic::new(third_c, Diagnostic::unexpected))?
 	}
 }
 
 /// Horizontal axis keywords and `<length-percentage>`.
 ///
 /// `left | center | right | x-start | x-end | <length-percentage>`
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionHorizontal {
+pub enum PositionHorizontal<'a> {
 	#[atom(CssAtomSet::Left)]
 	Left(T![Ident]),
 	#[atom(CssAtomSet::Right)]
@@ -379,17 +394,17 @@ pub enum PositionHorizontal {
 	XStart(T![Ident]),
 	#[atom(CssAtomSet::XEnd)]
 	XEnd(T![Ident]),
-	LengthPercentage(LengthPercentage),
+	LengthPercentage(CalcableValue<'a, LengthPercentage>),
 }
 
 /// Vertical axis keywords and `<length-percentage>`.
 ///
 /// `top | center | bottom | y-start | y-end | <length-percentage>`
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionVertical {
+pub enum PositionVertical<'a> {
 	#[atom(CssAtomSet::Top)]
 	Top(T![Ident]),
 	#[atom(CssAtomSet::Bottom)]
@@ -400,7 +415,7 @@ pub enum PositionVertical {
 	YStart(T![Ident]),
 	#[atom(CssAtomSet::YEnd)]
 	YEnd(T![Ident]),
-	LengthPercentage(LengthPercentage),
+	LengthPercentage(CalcableValue<'a, LengthPercentage>),
 }
 
 /// Block axis keywords (flow-relative).
@@ -524,7 +539,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Position>(), 68);
+		assert_eq!(std::mem::size_of::<Position<'_>>(), 88);
 	}
 
 	#[test]
@@ -549,7 +564,7 @@ mod tests {
 			CssAtomSet::ATOMS,
 			Position,
 			"50%",
-			Position::One(PositionOne::LengthPercentage(LengthPercentage::Percent(_)))
+			Position::One(PositionOne::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_))))
 		);
 		// Two-value physical
 		assert_parse!(
@@ -569,8 +584,8 @@ mod tests {
 			Position,
 			"50% 50%",
 			Position::Two(PositionTwo::Physical(
-				PositionHorizontal::LengthPercentage(LengthPercentage::Percent(_)),
-				PositionVertical::LengthPercentage(LengthPercentage::Percent(_))
+				PositionHorizontal::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_))),
+				PositionVertical::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_)))
 			))
 		);
 		assert_parse!(
@@ -578,8 +593,8 @@ mod tests {
 			Position,
 			"20px 30px",
 			Position::Two(PositionTwo::Physical(
-				PositionHorizontal::LengthPercentage(_),
-				PositionVertical::LengthPercentage(_)
+				PositionHorizontal::LengthPercentage(CalcableValue::Literal(_)),
+				PositionVertical::LengthPercentage(CalcableValue::Literal(_))
 			))
 		);
 		assert_parse!(
@@ -587,7 +602,7 @@ mod tests {
 			Position,
 			"2% bottom",
 			Position::Two(PositionTwo::Physical(
-				PositionHorizontal::LengthPercentage(LengthPercentage::Percent(_)),
+				PositionHorizontal::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_))),
 				PositionVertical::Bottom(_)
 			))
 		);
@@ -596,8 +611,8 @@ mod tests {
 			Position,
 			"-70% -180%",
 			Position::Two(PositionTwo::Physical(
-				PositionHorizontal::LengthPercentage(LengthPercentage::Percent(_)),
-				PositionVertical::LengthPercentage(LengthPercentage::Percent(_))
+				PositionHorizontal::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_))),
+				PositionVertical::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_)))
 			))
 		);
 		assert_parse!(
@@ -606,7 +621,7 @@ mod tests {
 			"right 8.5%",
 			Position::Two(PositionTwo::Physical(
 				PositionHorizontal::Right(_),
-				PositionVertical::LengthPercentage(LengthPercentage::Percent(_))
+				PositionVertical::LengthPercentage(CalcableValue::Literal(LengthPercentage::Percent(_)))
 			))
 		);
 		// Two-value physical with new keywords
@@ -649,9 +664,9 @@ mod tests {
 			"right -6px bottom 12vmin",
 			Position::Four(PositionFour::Physical(
 				PositionHorizontalKeyword::Right(_),
-				LengthPercentage::Length(_),
+				CalcableValue::Literal(LengthPercentage::Length(_)),
 				PositionVerticalKeyword::Bottom(_),
-				LengthPercentage::Length(_)
+				CalcableValue::Literal(LengthPercentage::Length(_))
 			))
 		);
 		assert_parse!(
@@ -660,9 +675,9 @@ mod tests {
 			"bottom 12vmin right -6px",
 			Position::Four(PositionFour::Physical(
 				PositionHorizontalKeyword::Right(_),
-				LengthPercentage::Length(_),
+				CalcableValue::Literal(LengthPercentage::Length(_)),
 				PositionVerticalKeyword::Bottom(_),
-				LengthPercentage::Length(_)
+				CalcableValue::Literal(LengthPercentage::Length(_))
 			))
 		);
 		// Four-value flow-relative
@@ -672,9 +687,9 @@ mod tests {
 			"block-start 10px inline-end 20px",
 			Position::Four(PositionFour::FlowRelative(
 				PositionBlockAxisKeyword::BlockStart(_),
-				LengthPercentage::Length(_),
+				CalcableValue::Literal(LengthPercentage::Length(_)),
 				PositionInlineAxisKeyword::InlineEnd(_),
-				LengthPercentage::Length(_)
+				CalcableValue::Literal(LengthPercentage::Length(_))
 			))
 		);
 		// Four-value logical
@@ -684,11 +699,21 @@ mod tests {
 			"start 10px end 20px",
 			Position::Four(PositionFour::Logical(
 				PositionLogical::Start(_),
-				LengthPercentage::Length(_),
+				CalcableValue::Literal(LengthPercentage::Length(_)),
 				PositionLogical::End(_),
-				LengthPercentage::Length(_)
+				CalcableValue::Literal(LengthPercentage::Length(_))
 			))
 		);
+	}
+
+	#[test]
+	fn test_substitution() {
+		// Substitution/math functions are permitted wherever a <length-percentage> appears.
+		assert_parse!(CssAtomSet::ATOMS, Position, "calc(50% + 10px)");
+		assert_parse!(CssAtomSet::ATOMS, Position, "var(--x)");
+		assert_parse!(CssAtomSet::ATOMS, Position, "calc(50% + 10px) calc(50% - 10px)");
+		assert_parse!(CssAtomSet::ATOMS, Position, "left calc(50% + 10px)");
+		assert_parse!(CssAtomSet::ATOMS, Position, "right var(--x) bottom calc(10px)");
 	}
 
 	#[test]
@@ -702,13 +727,14 @@ mod tests {
 
 	#[test]
 	fn test_spans() {
-		// Parsing should stop at var()
+		// var() parses as a substituted length-percentage, so the whole two-value
+		// position is consumed.
 		assert_parse_span!(
 			CssAtomSet::ATOMS,
 			Position,
 			r#"
 			right var(--foo)
-			^^^^^
+			^^^^^^^^^^^^^^^^
 		"#
 		);
 		// Parsing should stop at four values:

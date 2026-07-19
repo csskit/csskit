@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::OpentypeTag;
+use crate::{CalcableValue, OpentypeTag};
 
 /// Value for `font-variation-settings`: `<opentype-tag> <number>`
 ///
@@ -10,7 +10,7 @@ use crate::OpentypeTag;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct VariationTagValue(pub OpentypeTag, pub T![Number]);
+pub struct VariationTagValue<'a>(pub OpentypeTag, pub CalcableValue<'a, T![Number]>);
 
 #[cfg(test)]
 mod tests {
@@ -20,7 +20,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<VariationTagValue>(), 24);
+		assert_eq!(std::mem::size_of::<VariationTagValue>(), 40);
 	}
 
 	#[test]
@@ -30,6 +30,12 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, VariationTagValue, "\"slnt\" -12");
 		assert_parse!(CssAtomSet::ATOMS, VariationTagValue, "'ital' 1");
 		assert_parse!(CssAtomSet::ATOMS, VariationTagValue, "\"opsz\" 48");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, VariationTagValue, "\"wght\" var(--w)");
+		assert_parse!(CssAtomSet::ATOMS, VariationTagValue, "\"wght\" calc(400 + 300)");
 	}
 
 	#[test]

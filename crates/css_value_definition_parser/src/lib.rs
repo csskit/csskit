@@ -108,8 +108,10 @@ impl DefType {
 			| "BasicShapeRect"  // contains InsetFunction<'a>, ShapeRectFunction<'a>, XywhFunction<'a>
 			| "BgImage"  // contains Image<'a>
 			| "BgLayer"  // contains BgImage<'a> and Color<'a>
+			| "BgPosition" // BgPosition<'a> (contains CalcableValue<'a, LengthPercentage>)
 			| "BgPositionAndSize" // contains BgPosition which contains Position
 			| "BgSize"           // BgSize<'a>
+			| "BorderRadius"  // BorderRadius<'a> (contains CalcableValue<'a, LengthPercentage>)
 			| "Color"          // Color<'a>
 			| "ColorSchemeName"   // Other(Value<'a, CustomIdent>)
 			| "ContentAltItem"  // contains Counter<'a> and AttrFunction<'a>
@@ -124,6 +126,7 @@ impl DefType {
 			| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
 			| "DynamicRangeLimitMixFunction"  // contains allocating params
 			| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
+			| "FeatureTagValue"  // FeatureTagValue<'a> (contains CalcableValue<'a, NonNegative<CSSInt>>)
 			| "FilterFunction" // contains DropShadowFunction<'a>
 			| "FilterValue"  // contains FilterFunction<'a>
 			| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
@@ -133,10 +136,13 @@ impl DefType {
 			| "GapAutoRuleList"  // contains Vec<'a, ...>
 			| "GapRuleList"  // contains Vec<'a, ...>
 			| "GenericFontFamily" // contains Value<'a, _> alternatives
+			| "GenericVoice"  // GenericVoice<'a> (contains CalcableValue<'a, T![Number]>)
+			| "GridLine"  // GridLine<'a> (contains CalcableValue<'a, NonZero<CSSInt>>)
 			| "HorizontalLineCommand"  // HorizontalLineCommand<'a> (contains HorizontalLineClause<'a>)
 			| "HorizontalLineValue"  // HorizontalLineValue<'a> (contains LengthPercentage)
 			| "Image"          // contains Gradient<'a>
 			| "Image1d"  // contains StripesFunction<'a>
+			| "InsetValue"  // contains CalcableValue<'a, LengthPercentage>
 			| "LineCommand"  // LineCommand<'a> (contains CommandEndPoint<'a>)
 			| "LineWidthList"  // contains LineWidthOrRepeat<'a>
 			| "LineWidthOrRepeat"  // contains Repeat<'a>
@@ -145,10 +151,15 @@ impl DefType {
 			| "MoveCommand"  // MoveCommand<'a> (contains CommandEndPoint<'a>)
 			| "OffsetPath" // contains BasicShape<'a>
 			| "Outline"
+			| "Position"     // Position<'a> (contains CalcableValue<'a, LengthPercentage>)
+			| "PositionOne"  // PositionOne<'a>
+			| "PositionTwo"  // PositionTwo<'a>
 			| "Paint" // contains Image<'a>
 			| "FillLayer" // contains Paint<'a> and Color<'a>
 			| "StrokeLayer" // contains Paint<'a> and Color<'a>
+			| "RectFunction"  // RectFunction<'a> (contains AutoOr<CalcableValue<'a, Length>>)
 			| "RelativeControlPoint"  // RelativeControlPoint<'a> (contains CoordinatePair<'a>)
+			| "Ratio"  // Ratio<'a> (contains CalcableValue<'a, CSSInt>)
 			| "Shadow"       // Shadow<'a> (contains Color<'a>)
 			| "SingleTransition"
 			| "SmoothCommand"  // SmoothCommand<'a> (contains SmoothTarget<'a>)
@@ -377,7 +388,7 @@ impl Def {
 			// Functions that contain multipliers or known allocating types
 			Self::Function(_, inner) => inner.maybe_unsized(),
 			Self::FunctionType(ty) => {
-				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Repeat" | "Attr")
+				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Rect" | "Repeat" | "Attr")
 			}
 			// Every named <type> reference is wrapped in Value<'a, T> / CalcableValue<'a, T>,
 			// which always supplies 'a — so any container holding one is unsized.

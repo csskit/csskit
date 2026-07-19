@@ -31,7 +31,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FillLayer>(), 256);
+		assert_eq!(std::mem::size_of::<FillLayer>(), 272);
 	}
 
 	#[test]

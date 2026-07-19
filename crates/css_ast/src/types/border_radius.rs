@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::LengthPercentage;
+use crate::{CalcableValue, LengthPercentage};
 
 /// <https://drafts.csswg.org/css-borders-4/#typedef-border-radius>
 ///
@@ -12,7 +12,11 @@ use crate::LengthPercentage;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderRadius(pub LengthPercentage, pub Option<T![/]>, pub Option<LengthPercentage>);
+pub struct BorderRadius<'a>(
+	pub CalcableValue<'a, LengthPercentage>,
+	pub Option<T![/]>,
+	pub Option<CalcableValue<'a, LengthPercentage>>,
+);
 
 #[cfg(test)]
 mod tests {
@@ -22,7 +26,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BorderRadius>(), 48);
+		assert_eq!(std::mem::size_of::<BorderRadius>(), 64);
 	}
 
 	#[test]
@@ -30,6 +34,13 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, BorderRadius, "1px");
 		assert_parse!(CssAtomSet::ATOMS, BorderRadius, "1px 2px");
 		assert_parse!(CssAtomSet::ATOMS, BorderRadius, "1px / 2px");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, BorderRadius, "var(--r)");
+		assert_parse!(CssAtomSet::ATOMS, BorderRadius, "calc(1px + 2px)");
+		assert_parse!(CssAtomSet::ATOMS, BorderRadius, "1px / var(--y)");
 	}
 
 	#[test]

@@ -182,6 +182,14 @@ mod tests {
 	}
 
 	#[test]
+	fn substitution_in_channels() {
+		assert_parse!(CssAtomSet::ATOMS, Color, "rgb(calc(255/2) 0 0)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "rgb(var(--r) 0 0)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "hsl(calc(120deg) 50% 50%)");
+		assert_parse!(CssAtomSet::ATOMS, Color, "color-mix(in srgb,red calc(50%),blue)");
+	}
+
+	#[test]
 	fn test_recoverable_writes() {
 		// Missing /
 		assert_parse!(CssAtomSet::ATOMS, Color, "rgb(255 255 255 0.5)");

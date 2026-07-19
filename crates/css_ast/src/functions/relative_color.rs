@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
+use crate::{AngleOrNumber, CalcableValue, NoneOr, NumberOrPercentage};
 use css_parse::Box;
 
 /// The `from <color>` clause in relative color syntax.
@@ -175,21 +175,21 @@ pub enum ColorChannelKeyword {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RelativeChannelValue<K> {
+pub enum RelativeChannelValue<'a, K> {
 	Keyword(K),
-	Value(NoneOr<NumberOrPercentage>),
+	Value(NoneOr<CalcableValue<'a, NumberOrPercentage>>),
 }
 
-impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeChannelValue<K> {
+impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeChannelValue<'a, K> {
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		K::peek(p, c) || NoneOr::<NumberOrPercentage>::peek(p, c)
+		K::peek(p, c) || NoneOr::<CalcableValue<NumberOrPercentage>>::peek(p, c)
 	}
 }
 
-impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<K> {
+impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<'a, K> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -198,7 +198,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<K> {
 		if let Some(kw) = p.parse_if_peek::<K>()? {
 			Ok(Self::Keyword(kw))
 		} else {
-			Ok(Self::Value(p.parse::<NoneOr<NumberOrPercentage>>()?))
+			Ok(Self::Value(p.parse::<NoneOr<CalcableValue<NumberOrPercentage>>>()?))
 		}
 	}
 }
@@ -209,21 +209,21 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<K> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RelativeHueValue<K> {
+pub enum RelativeHueValue<'a, K> {
 	Keyword(K),
-	Value(NoneOr<AngleOrNumber>),
+	Value(NoneOr<CalcableValue<'a, AngleOrNumber>>),
 }
 
-impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeHueValue<K> {
+impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeHueValue<'a, K> {
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		K::peek(p, c) || NoneOr::<AngleOrNumber>::peek(p, c)
+		K::peek(p, c) || NoneOr::<CalcableValue<AngleOrNumber>>::peek(p, c)
 	}
 }
 
-impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeHueValue<K> {
+impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeHueValue<'a, K> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -231,7 +231,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeHueValue<K> {
 		if let Some(kw) = p.parse_if_peek::<K>()? {
 			Ok(Self::Keyword(kw))
 		} else {
-			Ok(Self::Value(p.parse::<NoneOr<AngleOrNumber>>()?))
+			Ok(Self::Value(p.parse::<NoneOr<CalcableValue<AngleOrNumber>>>()?))
 		}
 	}
 }
@@ -249,12 +249,12 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeHueValue<K> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct RgbRelativeParams<'a> {
 	pub origin: RelativeColorOrigin<'a>,
-	pub red: RelativeChannelValue<RgbChannelKeyword>,
-	pub green: RelativeChannelValue<RgbChannelKeyword>,
-	pub blue: RelativeChannelValue<RgbChannelKeyword>,
+	pub red: RelativeChannelValue<'a, RgbChannelKeyword>,
+	pub green: RelativeChannelValue<'a, RgbChannelKeyword>,
+	pub blue: RelativeChannelValue<'a, RgbChannelKeyword>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub alpha: Option<RelativeChannelValue<RgbChannelKeyword>>,
+	pub alpha: Option<RelativeChannelValue<'a, RgbChannelKeyword>>,
 }
 
 /// Relative color params for `hsl()` / `hsla()`.
@@ -268,12 +268,12 @@ pub struct RgbRelativeParams<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HslRelativeParams<'a> {
 	pub origin: RelativeColorOrigin<'a>,
-	pub hue: RelativeHueValue<HslChannelKeyword>,
-	pub saturation: RelativeChannelValue<HslChannelKeyword>,
-	pub lightness: RelativeChannelValue<HslChannelKeyword>,
+	pub hue: RelativeHueValue<'a, HslChannelKeyword>,
+	pub saturation: RelativeChannelValue<'a, HslChannelKeyword>,
+	pub lightness: RelativeChannelValue<'a, HslChannelKeyword>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub alpha: Option<RelativeChannelValue<HslChannelKeyword>>,
+	pub alpha: Option<RelativeChannelValue<'a, HslChannelKeyword>>,
 }
 
 /// Relative color params for `hwb()`.
@@ -287,12 +287,12 @@ pub struct HslRelativeParams<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HwbRelativeParams<'a> {
 	pub origin: RelativeColorOrigin<'a>,
-	pub hue: RelativeHueValue<HwbChannelKeyword>,
-	pub whiteness: RelativeChannelValue<HwbChannelKeyword>,
-	pub blackness: RelativeChannelValue<HwbChannelKeyword>,
+	pub hue: RelativeHueValue<'a, HwbChannelKeyword>,
+	pub whiteness: RelativeChannelValue<'a, HwbChannelKeyword>,
+	pub blackness: RelativeChannelValue<'a, HwbChannelKeyword>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub alpha: Option<RelativeChannelValue<HwbChannelKeyword>>,
+	pub alpha: Option<RelativeChannelValue<'a, HwbChannelKeyword>>,
 }
 
 /// Relative color params for `lab()` / `oklab()`.
@@ -306,12 +306,12 @@ pub struct HwbRelativeParams<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct LabRelativeParams<'a> {
 	pub origin: RelativeColorOrigin<'a>,
-	pub l: RelativeChannelValue<LabChannelKeyword>,
-	pub a: RelativeChannelValue<LabChannelKeyword>,
-	pub b: RelativeChannelValue<LabChannelKeyword>,
+	pub l: RelativeChannelValue<'a, LabChannelKeyword>,
+	pub a: RelativeChannelValue<'a, LabChannelKeyword>,
+	pub b: RelativeChannelValue<'a, LabChannelKeyword>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub alpha: Option<RelativeChannelValue<LabChannelKeyword>>,
+	pub alpha: Option<RelativeChannelValue<'a, LabChannelKeyword>>,
 }
 
 /// Relative color params for `lch()` / `oklch()`.
@@ -325,12 +325,12 @@ pub struct LabRelativeParams<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct LchRelativeParams<'a> {
 	pub origin: RelativeColorOrigin<'a>,
-	pub lightness: RelativeChannelValue<LchChannelKeyword>,
-	pub chroma: RelativeChannelValue<LchChannelKeyword>,
-	pub hue: RelativeHueValue<LchChannelKeyword>,
+	pub lightness: RelativeChannelValue<'a, LchChannelKeyword>,
+	pub chroma: RelativeChannelValue<'a, LchChannelKeyword>,
+	pub hue: RelativeHueValue<'a, LchChannelKeyword>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub alpha: Option<RelativeChannelValue<LchChannelKeyword>>,
+	pub alpha: Option<RelativeChannelValue<'a, LchChannelKeyword>>,
 }
 
 /// Relative color params for `color()`.
@@ -348,12 +348,12 @@ pub struct LchRelativeParams<'a> {
 pub struct ColorRelativeParams<'a> {
 	pub origin: RelativeColorOrigin<'a>,
 	pub colorspace: super::color_function::ColorSpace,
-	pub c1: RelativeChannelValue<ColorChannelKeyword>,
-	pub c2: RelativeChannelValue<ColorChannelKeyword>,
-	pub c3: RelativeChannelValue<ColorChannelKeyword>,
+	pub c1: RelativeChannelValue<'a, ColorChannelKeyword>,
+	pub c2: RelativeChannelValue<'a, ColorChannelKeyword>,
+	pub c3: RelativeChannelValue<'a, ColorChannelKeyword>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub alpha: Option<RelativeChannelValue<ColorChannelKeyword>>,
+	pub alpha: Option<RelativeChannelValue<'a, ColorChannelKeyword>>,
 }
 
 /// Relative colour syntax for `rgb()`.
@@ -748,32 +748,47 @@ mod chromashift_impl {
 		}
 	}
 
-	fn resolve_channel<K, O: ChannelMap<K>>(v: &RelativeChannelValue<K>, origin: &O, pct_scale: f32) -> Option<f32> {
+	fn resolve_channel<K, O: ChannelMap<K>>(
+		v: &RelativeChannelValue<'_, K>,
+		origin: &O,
+		pct_scale: f32,
+	) -> Option<f32> {
 		match v {
 			RelativeChannelValue::Keyword(kw) => Some(origin.channel(kw)),
 			RelativeChannelValue::Value(NoneOr::None(_)) => None,
-			RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Number(n))) => Some(n.value()),
-			RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Percentage(p))) => {
+			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n)))) => {
+				Some(n.value())
+			}
+			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p)))) => {
 				Some(p.value() / 100.0 * pct_scale)
 			}
+			RelativeChannelValue::Value(NoneOr::Some(_)) => None,
 		}
 	}
 
-	fn resolve_alpha<K, O: ChannelMap<K>>(v: &RelativeChannelValue<K>, origin: &O) -> Option<f32> {
+	fn resolve_alpha<K, O: ChannelMap<K>>(v: &RelativeChannelValue<'_, K>, origin: &O) -> Option<f32> {
 		match v {
 			RelativeChannelValue::Keyword(kw) => Some(origin.channel(kw)),
 			RelativeChannelValue::Value(NoneOr::None(_)) => None,
-			RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Number(n))) => Some(n.value() * 100.0),
-			RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Percentage(p))) => Some(p.value()),
+			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n)))) => {
+				Some(n.value() * 100.0)
+			}
+			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p)))) => {
+				Some(p.value())
+			}
+			RelativeChannelValue::Value(NoneOr::Some(_)) => None,
 		}
 	}
 
-	fn resolve_hue_channel<K, O: ChannelMap<K>>(v: &RelativeHueValue<K>, origin: &O) -> Option<f32> {
+	fn resolve_hue_channel<K, O: ChannelMap<K>>(v: &RelativeHueValue<'_, K>, origin: &O) -> Option<f32> {
 		match v {
 			RelativeHueValue::Keyword(kw) => Some(origin.channel(kw)),
 			RelativeHueValue::Value(NoneOr::None(_)) => None,
-			RelativeHueValue::Value(NoneOr::Some(AngleOrNumber::Number(n))) => Some(n.value()),
-			RelativeHueValue::Value(NoneOr::Some(AngleOrNumber::Angle(a))) => Some(a.as_degrees()),
+			RelativeHueValue::Value(NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(n)))) => Some(n.value()),
+			RelativeHueValue::Value(NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(a)))) => {
+				Some(a.as_degrees())
+			}
+			RelativeHueValue::Value(NoneOr::Some(_)) => None,
 		}
 	}
 
@@ -915,23 +930,31 @@ mod chromashift_impl {
 				}
 			};
 
-			let resolve_c = |v: &RelativeChannelValue<ColorChannelKeyword>| -> Option<f64> {
+			let resolve_c = |v: &RelativeChannelValue<'_, ColorChannelKeyword>| -> Option<f64> {
 				match v {
 					RelativeChannelValue::Keyword(kw) => Some(unit_from_kw(kw)),
 					RelativeChannelValue::Value(NoneOr::None(_)) => None,
-					RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Number(n))) => Some(n.value() as f64),
-					RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Percentage(p))) => {
-						Some(p.value() as f64 / 100.0)
-					}
+					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(
+						n,
+					)))) => Some(n.value() as f64),
+					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(
+						NumberOrPercentage::Percentage(p),
+					))) => Some(p.value() as f64 / 100.0),
+					RelativeChannelValue::Value(NoneOr::Some(_)) => None,
 				}
 			};
 
-			let resolve_a = |v: &RelativeChannelValue<ColorChannelKeyword>| -> Option<f32> {
+			let resolve_a = |v: &RelativeChannelValue<'_, ColorChannelKeyword>| -> Option<f32> {
 				match v {
 					RelativeChannelValue::Keyword(kw) => Some((unit_from_kw(kw) * 100.0) as f32),
 					RelativeChannelValue::Value(NoneOr::None(_)) => None,
-					RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Number(n))) => Some(n.value() * 100.0),
-					RelativeChannelValue::Value(NoneOr::Some(NumberOrPercentage::Percentage(p))) => Some(p.value()),
+					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(
+						n,
+					)))) => Some(n.value() * 100.0),
+					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(
+						NumberOrPercentage::Percentage(p),
+					))) => Some(p.value()),
+					RelativeChannelValue::Value(NoneOr::Some(_)) => None,
 				}
 			};
 
@@ -989,5 +1012,12 @@ mod tests {
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, RgbChannelKeyword, "h");
 		assert_peek_false!(CssAtomSet::ATOMS, HslChannelKeyword, "r");
+	}
+
+	#[test]
+	fn substitution_in_channels() {
+		// Math/substitution in relative-colour channels alongside channel keywords.
+		assert_parse!(CssAtomSet::ATOMS, RgbRelativeFunction, "rgb(from red calc(255/2) g var(--b))");
+		assert_parse!(CssAtomSet::ATOMS, HslRelativeFunction, "hsl(from red calc(120deg) s calc(50%))");
 	}
 }

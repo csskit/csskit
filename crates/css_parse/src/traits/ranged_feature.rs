@@ -276,9 +276,9 @@ macro_rules! ranged_feature {
 	(@parse_call $p:ident, $feature_name:path, $min_name:path, $max_name:path) => {
 		Self::parse_ranged_feature($p, &$feature_name, Some(&$min_name), Some(&$max_name))
 	};
-	($(#[$meta:meta])* $vis:vis enum $feature: ident{$feature_name: path $(| $min_name: path | $max_name: path)?, $value: ty}) => {
+	($(#[$meta:meta])* $vis:vis enum $feature: ident $(<$lt:lifetime>)? {$feature_name: path $(| $min_name: path | $max_name: path)?, $value: ty}) => {
 		$(#[$meta])*
-		$vis enum $feature {
+		$vis enum $feature $(<$lt>)? {
 			Left($crate::T!['('], T![Ident], $crate::Comparison, $value, $crate::T![')']),
 			Right($crate::T!['('], $value, $crate::Comparison, T![Ident], $crate::T![')']),
 			Range($crate::T!['('], $value, $crate::Comparison, T![Ident], $crate::Comparison, $value, $crate::T![')']),
@@ -291,7 +291,7 @@ macro_rules! ranged_feature {
 			Exact($crate::T!['('], T![Ident], $crate::T![:], $value, $crate::T![')']),
 		}
 
-		impl<'a> $crate::Peek<'a> for $feature {
+		impl<'a> $crate::Peek<'a> for $feature $(<$lt>)? {
 			fn peek<Iter>(p: &$crate::Parser<'a, Iter>, c: $crate::Cursor) -> bool
 			where
 				Iter: Iterator<Item = $crate::Cursor> + Clone,
@@ -300,7 +300,7 @@ macro_rules! ranged_feature {
 			}
 		}
 
-		impl<'a> $crate::Parse<'a> for $feature {
+		impl<'a> $crate::Parse<'a> for $feature $(<$lt>)? {
 			fn parse<I>(p: &mut $crate::Parser<'a, I>) -> $crate::Result<Self>
 			where
 				I: Iterator<Item = $crate::Cursor> + Clone,
@@ -310,7 +310,7 @@ macro_rules! ranged_feature {
 			}
 		}
 
-		impl<'a> $crate::RangedFeature<'a> for $feature {
+		impl<'a> $crate::RangedFeature<'a> for $feature $(<$lt>)? {
 			type Value = $value;
 
 			$(

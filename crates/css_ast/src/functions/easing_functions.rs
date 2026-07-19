@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::Percentage;
+use crate::{CalcableValue, Percentage};
 
 /// <https://drafts.csswg.org/css-easing-2/#typedef-easing-function>
 ///
@@ -52,9 +52,9 @@ pub enum EasingFunction<'a> {
 	#[atom(CssAtomSet::Linear)]
 	LinearFunction(LinearFunction<'a>),
 	#[atom(CssAtomSet::CubicBezier)]
-	CubicBezierFunction(CubicBezierFunction),
+	CubicBezierFunction(CubicBezierFunction<'a>),
 	#[atom(CssAtomSet::Steps)]
-	StepsFunction(StepsFunction),
+	StepsFunction(StepsFunction<'a>),
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -64,7 +64,7 @@ pub enum EasingFunction<'a> {
 pub struct LinearFunction<'a> {
 	#[atom(CssAtomSet::Linear)]
 	pub name: T![Function],
-	pub params: CommaSeparated<'a, LinearFunctionParams>,
+	pub params: CommaSeparated<'a, LinearFunctionParams<'a>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -73,18 +73,22 @@ pub struct LinearFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LinearFunctionParams(T![Number], Option<Percentage>, Option<Percentage>);
+pub struct LinearFunctionParams<'a>(
+	CalcableValue<'a, T![Number]>,
+	Option<CalcableValue<'a, Percentage>>,
+	Option<CalcableValue<'a, Percentage>>,
+);
 
-impl<'a> Parse<'a> for LinearFunctionParams {
+impl<'a> Parse<'a> for LinearFunctionParams<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let mut num = p.parse_if_peek::<T![Number]>()?;
-		let percent = p.parse_if_peek::<Percentage>()?;
-		let percent2 = p.parse_if_peek::<Percentage>()?;
+		let mut num = p.parse_if_peek::<CalcableValue<T![Number]>>()?;
+		let percent = p.parse_if_peek::<CalcableValue<Percentage>>()?;
+		let percent2 = p.parse_if_peek::<CalcableValue<Percentage>>()?;
 		if num.is_none() {
-			num = Some(p.parse::<T![Number]>()?);
+			num = Some(p.parse::<CalcableValue<T![Number]>>()?);
 		}
 		Ok(Self(num.unwrap(), percent, percent2))
 	}
@@ -94,44 +98,44 @@ impl<'a> Parse<'a> for LinearFunctionParams {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CubicBezierFunction {
+pub struct CubicBezierFunction<'a> {
 	#[atom(CssAtomSet::CubicBezier)]
 	pub name: T![Function],
-	pub params: CubicBezierFunctionParams,
+	pub params: CubicBezierFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct CubicBezierFunctionParams {
-	x1: T![Number],
+pub struct CubicBezierFunctionParams<'a> {
+	x1: CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
 	c1: Option<T![,]>,
-	x2: T![Number],
+	x2: CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
 	c2: Option<T![,]>,
-	y1: T![Number],
+	y1: CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
 	c3: Option<T![,]>,
-	y2: T![Number],
+	y2: CalcableValue<'a, T![Number]>,
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct StepsFunction {
+pub struct StepsFunction<'a> {
 	#[atom(CssAtomSet::Steps)]
 	pub name: T![Function],
-	pub params: StepsFunctionParams,
+	pub params: StepsFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct StepsFunctionParams(CSSInt, #[semantic_eq(skip)] Option<T![,]>, Option<StepPosition>);
+pub struct StepsFunctionParams<'a>(CalcableValue<'a, CSSInt>, #[semantic_eq(skip)] Option<T![,]>, Option<StepPosition>);
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -158,7 +162,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<EasingFunction>(), 120);
+		assert_eq!(std::mem::size_of::<EasingFunction>(), 168);
 	}
 
 	#[test]
@@ -174,6 +178,13 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "steps(10,jump-both)");
 		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "linear(0,0.25,1)");
 		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(0.1 -0.6 0.2 0)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "linear(var(--a),1)");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "cubic-bezier(calc(0.1 + 0.1),0.1,0.25,var(--y))");
+		assert_parse!(CssAtomSet::ATOMS, EasingFunction, "steps(calc(2 + 2),end)");
 	}
 
 	#[test]

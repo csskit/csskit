@@ -1,7 +1,7 @@
 use css_parse::Box;
 
 use super::prelude::*;
-use crate::LengthPercentage;
+use crate::{CalcableValue, LengthPercentage};
 
 /// <https://drafts.csswg.org/css-images-3/#typedef-gradient>
 /// ```text-ignore,
@@ -43,7 +43,7 @@ pub struct LinearGradientFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LinearGradientFunctionParams<'a>(
-	Option<LinearDirection>,
+	Option<LinearDirection<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
@@ -69,7 +69,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingLinearGradientFunctionParams<'a>(
-	Option<LinearDirection>,
+	Option<LinearDirection<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
@@ -97,10 +97,10 @@ pub struct RadialGradientFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RadialGradientFunctionParams<'a>(
-	Option<RadialSize>,
+	Option<RadialSize<'a>>,
 	Option<RadialShape>,
 	Option<T![Ident]>,
-	Option<Position>,
+	Option<Position<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
@@ -128,10 +128,10 @@ pub struct RepeatingRadialGradientFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingRadialGradientFunctionParams<'a>(
-	Option<RadialSize>,
+	Option<RadialSize<'a>>,
 	Option<RadialShape>,
 	Option<T![Ident]>,
-	Option<Position>,
+	Option<Position<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
 	CommaSeparated<'a, ColorStopOrHint<'a>>,
 );
@@ -151,10 +151,10 @@ pub enum NamedDirection {
 	Right(T![Ident]),
 }
 
-#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum LinearDirection {
-	Angle(Angle),
+pub enum LinearDirection<'a> {
+	Angle(CalcableValue<'a, Angle>),
 	Named(#[atom(CssAtomSet::To)] T![Ident], NamedDirection, Option<NamedDirection>),
 }
 
@@ -165,12 +165,12 @@ pub enum LinearDirection {
 /// <radial-size> = <radial-extent>{1,2} | <length-percentage [0,∞]>{1,2}
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
-#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum RadialSize {
+pub enum RadialSize<'a> {
 	Extent(RadialExtent, Option<RadialExtent>),
-	Circular(LengthPercentage),
-	Elliptical(LengthPercentage, LengthPercentage),
+	Circular(CalcableValue<'a, LengthPercentage>),
+	Elliptical(CalcableValue<'a, LengthPercentage>, CalcableValue<'a, LengthPercentage>),
 }
 
 /// <https://drafts.csswg.org/css-images-3/#typedef-radial-extent>
@@ -193,7 +193,7 @@ pub enum RadialExtent {
 	FarthestSide(T![Ident]),
 }
 
-impl<'a> Parse<'a> for RadialSize {
+impl<'a> Parse<'a> for RadialSize<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -202,8 +202,8 @@ impl<'a> Parse<'a> for RadialSize {
 			let second = p.parse_if_peek::<RadialExtent>()?;
 			return Ok(RadialSize::Extent(extent, second));
 		}
-		let first = p.parse::<LengthPercentage>()?;
-		if let Some(second) = p.parse_if_peek::<LengthPercentage>()? {
+		let first = p.parse::<CalcableValue<LengthPercentage>>()?;
+		if let Some(second) = p.parse_if_peek::<CalcableValue<LengthPercentage>>()? {
 			return Ok(Self::Elliptical(first, second));
 		}
 		Ok(Self::Circular(first))
@@ -229,8 +229,8 @@ pub enum RadialShape {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorStopOrHint<'a> {
-	Hint(LengthPercentage),
-	Stop(Color<'a>, Option<LengthPercentage>),
+	Hint(CalcableValue<'a, LengthPercentage>),
+	Stop(Color<'a>, Option<CalcableValue<'a, LengthPercentage>>),
 }
 
 #[cfg(test)]
@@ -242,9 +242,9 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<Gradient>(), 24);
-		assert_eq!(std::mem::size_of::<LinearDirection>(), 44);
-		assert_eq!(std::mem::size_of::<RadialSize>(), 36);
-		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 40);
+		assert_eq!(std::mem::size_of::<LinearDirection<'_>>(), 48);
+		assert_eq!(std::mem::size_of::<RadialSize<'_>>(), 48);
+		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 48);
 	}
 
 	#[test]
@@ -259,5 +259,13 @@ mod tests {
 			Gradient,
 			"radial-gradient(closest-corner circle,rgba(1,65,255,0.4),rgba(1,65,255,0))"
 		);
+	}
+
+	#[test]
+	fn test_substitution() {
+		// calc()/var() permitted in angle, stop-position, and radial-size slots.
+		assert_parse!(CssAtomSet::ATOMS, Gradient, "linear-gradient(calc(45deg),red,blue)");
+		assert_parse!(CssAtomSet::ATOMS, Gradient, "linear-gradient(red calc(20% + 5px),blue)");
+		assert_parse!(CssAtomSet::ATOMS, Gradient, "radial-gradient(calc(50px) circle,red,blue)");
 	}
 }

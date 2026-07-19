@@ -27,7 +27,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<MaxWidthStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<BoxSizingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 80);
 		assert_eq!(std::mem::size_of::<ContainIntrinsicBlockSizeStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ContainIntrinsicHeightStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ContainIntrinsicInlineSizeStyleValue>(), 40);

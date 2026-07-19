@@ -8,10 +8,12 @@ impl<'a> Parse<'a> for TransformOriginStyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let first = p.parse::<PositionOne>()?;
-		let Some(second) = p.parse_if_peek::<PositionOne>()? else {
+		if !p.peek::<PositionOne>() {
 			return Ok(Self::PositionOne(crate::Value::Literal(first)));
-		};
-		let two = PositionTwo::from_two(p, first, second)?;
+		}
+		let second_c = p.peek_n(1);
+		let second = p.parse::<PositionOne>()?;
+		let two = PositionTwo::from_two(p, first, second, second_c)?;
 		Ok(Self::PositionTwo(crate::Value::Literal(two), p.parse_if_peek::<CalcableValue<Length>>()?))
 	}
 }
@@ -32,7 +34,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<ScaleStyleValue>(), 72);
 		assert_eq!(std::mem::size_of::<TransformStyleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PerspectiveStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 72);
+		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 88);
 		assert_eq!(std::mem::size_of::<BackfaceVisibilityStyleValue>(), 16);
 	}
 

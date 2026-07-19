@@ -1,8 +1,8 @@
 use crate::prelude::*;
 use chromashift::{COLOR_EPSILON, ColorDistance, ColorSpace, Hex, Named, PerceptualRound, Srgb, ToAlpha, round_dp};
 use css_ast::{
-	Color, ColorFunction, ColorMixFunction, HueInterpolationDirection, InterpolationColorSpace, ToChromashift,
-	Visitable,
+	CalcableValue, Color, ColorFunction, ColorMixFunction, HueInterpolationDirection, InterpolationColorSpace,
+	ToChromashift, Visitable,
 };
 
 pub struct ReduceColors<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
@@ -207,14 +207,25 @@ where
 		let n = mix.parts.len();
 		let default_pct = 100.0 / n as f32;
 
+		// A percentage that is a substitution/math function (var()/calc()/...) can't be
+		// resolved statically, so none of the numeric reductions below are safe. Bail if any
+		// explicit percentage is not a plain literal.
+		let literal_pct = |pct: &CalcableValue<'b, css_ast::Percentage>| match pct {
+			CalcableValue::Literal(p) => Some(p.value()),
+			_ => None,
+		};
+		if (&mix.parts).into_iter().any(|(p, _)| p.percentage.as_ref().is_some_and(|pct| literal_pct(pct).is_none())) {
+			return VisitFlow::DESCEND;
+		}
+
 		// Resolve effective percentages
 		let explicit_sum: f32 =
-			(&mix.parts).into_iter().filter_map(|(p, _)| p.percentage.as_ref().map(|pct| pct.value())).sum();
+			(&mix.parts).into_iter().filter_map(|(p, _)| p.percentage.as_ref().and_then(&literal_pct)).sum();
 		let implicit_count = (&mix.parts).into_iter().filter(|(p, _)| p.percentage.is_none()).count();
 		let implicit_share = if implicit_count > 0 { (100.0 - explicit_sum) / implicit_count as f32 } else { 0.0 };
 		let pcts: Vec<f32> = (&mix.parts)
 			.into_iter()
-			.map(|(p, _)| p.percentage.as_ref().map(|pct| pct.value()).unwrap_or(implicit_share))
+			.map(|(p, _)| p.percentage.as_ref().and_then(&literal_pct).unwrap_or(implicit_share))
 			.collect();
 		let sum: f32 = pcts.iter().sum();
 

@@ -6,10 +6,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<OffsetAnchorStyleValue>(), 72);
+		assert_eq!(std::mem::size_of::<OffsetAnchorStyleValue>(), 88);
 		assert_eq!(std::mem::size_of::<OffsetDistanceStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<OffsetPathStyleValue<'_>>(), 64);
-		assert_eq!(std::mem::size_of::<OffsetPositionStyleValue>(), 72);
+		assert_eq!(std::mem::size_of::<OffsetPositionStyleValue>(), 88);
 		assert_eq!(std::mem::size_of::<OffsetRotateStyleValue>(), 48);
 	}
 

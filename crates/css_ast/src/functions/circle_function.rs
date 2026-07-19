@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AtPosition, LengthPercentage, RadialExtent};
+use crate::{AtPosition, CalcableValue, LengthPercentage, RadialExtent};
 
 /// <https://drafts.csswg.org/css-shapes/#funcdef-basic-shape-circle>
 ///
@@ -13,11 +13,11 @@ use crate::{AtPosition, LengthPercentage, RadialExtent};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CircleFunction {
+pub struct CircleFunction<'a> {
 	#[atom(CssAtomSet::Circle)]
 	pub name: T![Function],
-	pub radius: Option<CircleRadius>,
-	pub at: Option<AtPosition>,
+	pub radius: Option<CircleRadius<'a>>,
+	pub at: Option<AtPosition<'a>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -28,13 +28,13 @@ pub struct CircleFunction {
 /// ```text,ignore
 /// <radial-extent> | <length-percentage [0,∞]>
 /// ```
-#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CircleRadius {
+pub enum CircleRadius<'a> {
 	Extent(RadialExtent),
-	Length(LengthPercentage),
+	Length(CalcableValue<'a, LengthPercentage>),
 }
 
 #[cfg(test)]
@@ -50,6 +50,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, CircleFunction, "circle(50px at right center)");
 		assert_parse!(CssAtomSet::ATOMS, CircleFunction, "circle(closest-side at 5rem 6rem)");
 		assert_parse!(CssAtomSet::ATOMS, CircleFunction, "circle(at center)");
+		assert_parse!(CssAtomSet::ATOMS, CircleFunction, "circle(calc(50% - 10px))");
+		assert_parse!(CssAtomSet::ATOMS, CircleFunction, "circle(var(--r) at center)");
 	}
 
 	#[test]

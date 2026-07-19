@@ -1,13 +1,14 @@
 use super::prelude::*;
 use crate::{CalcableValue, Color, Length, NonNegative};
 
+/// `<length>{2} <length [0,∞]>? <length>?`: the x/y offsets, optional blur radius, optional
+/// spread. Each `<length>` slot is a [`CalcableValue`] so `calc()`/`var()`/etc. are permitted.
 type ShadowOffset<'a> = (
 	CalcableValue<'a, Length>,
 	CalcableValue<'a, Length>,
 	Option<CalcableValue<'a, NonNegative<Length>>>,
 	Option<CalcableValue<'a, Length>>,
 );
-
 /// <https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow>
 ///
 /// ```text,ignore

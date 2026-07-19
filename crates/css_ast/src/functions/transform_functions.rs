@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
+use crate::{AngleOrZero, CalcableValue, Length, LengthPercentage, NoneOr, NumberOrPercentage};
 use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions>
@@ -8,27 +8,27 @@ use css_parse::Box;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum TransformFunction<'a> {
-	Matrix(MatrixFunction),
-	Matrix3d(Box<'a, Matrix3dFunction>),
-	Translate(TranslateFunction),
-	Translate3d(Translate3dFunction),
-	TranslateX(TranslatexFunction),
-	TranslateY(TranslateyFunction),
-	TranslateZ(TranslatezFunction),
-	Scale(ScaleFunction),
-	Scale3d(Scale3dFunction),
-	ScaleX(ScalexFunction),
-	ScaleY(ScaleyFunction),
-	ScaleZ(ScalezFunction),
-	Rotate(RotateFunction),
-	Rotate3d(Rotate3dFunction),
-	RotateX(RotatexFunction),
-	RotateY(RotateyFunction),
-	RotateZ(RotatezFunction),
-	Skew(SkewFunction),
-	SkewX(SkewxFunction),
-	SkewY(SkewyFunction),
-	Perspective(PerspectiveFunction),
+	Matrix(MatrixFunction<'a>),
+	Matrix3d(Box<'a, Matrix3dFunction<'a>>),
+	Translate(TranslateFunction<'a>),
+	Translate3d(Translate3dFunction<'a>),
+	TranslateX(TranslatexFunction<'a>),
+	TranslateY(TranslateyFunction<'a>),
+	TranslateZ(TranslatezFunction<'a>),
+	Scale(ScaleFunction<'a>),
+	Scale3d(Scale3dFunction<'a>),
+	ScaleX(ScalexFunction<'a>),
+	ScaleY(ScaleyFunction<'a>),
+	ScaleZ(ScalezFunction<'a>),
+	Rotate(RotateFunction<'a>),
+	Rotate3d(Rotate3dFunction<'a>),
+	RotateX(RotatexFunction<'a>),
+	RotateY(RotateyFunction<'a>),
+	RotateZ(RotatezFunction<'a>),
+	Skew(SkewFunction<'a>),
+	SkewX(SkewxFunction<'a>),
+	SkewY(SkewyFunction<'a>),
+	Perspective(PerspectiveFunction<'a>),
 }
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-matrix>
@@ -40,28 +40,28 @@ pub enum TransformFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MatrixFunction {
+pub struct MatrixFunction<'a> {
 	#[atom(CssAtomSet::Matrix)]
 	pub name: T![Function],
-	pub params: MatrixFunctionParams,
+	pub params: MatrixFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct MatrixFunctionParams(
-	pub T![Number],
+pub struct MatrixFunctionParams<'a>(
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-matrix3d>
@@ -73,10 +73,10 @@ pub struct MatrixFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Matrix3dFunction {
+pub struct Matrix3dFunction<'a> {
 	#[atom(CssAtomSet::Matrix3d)]
 	pub name: T![Function],
-	pub params: Matrix3dFunctionParams,
+	pub params: Matrix3dFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -84,38 +84,38 @@ pub struct Matrix3dFunction {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::type_complexity)] // TODO: simplify types
-pub struct Matrix3dFunctionParams(
-	pub T![Number],
+pub struct Matrix3dFunctionParams<'a>(
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translate>
@@ -127,13 +127,13 @@ pub struct Matrix3dFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TranslateFunction {
+pub struct TranslateFunction<'a> {
 	#[atom(CssAtomSet::Translate)]
 	pub name: T![Function],
-	pub x: LengthPercentage,
+	pub x: CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,
-	pub y: Option<LengthPercentage>,
+	pub y: Option<CalcableValue<'a, LengthPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -147,22 +147,22 @@ pub struct TranslateFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Translate3dFunction {
+pub struct Translate3dFunction<'a> {
 	#[atom(CssAtomSet::Translate3d)]
 	pub name: T![Function],
-	pub params: Translate3dFunctionParams,
+	pub params: Translate3dFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Translate3dFunctionParams(
-	pub LengthPercentage,
+pub struct Translate3dFunctionParams<'a>(
+	pub CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub LengthPercentage,
+	pub CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub Length,
+	pub CalcableValue<'a, Length>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translatex>
@@ -174,10 +174,10 @@ pub struct Translate3dFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TranslatexFunction {
+pub struct TranslatexFunction<'a> {
 	#[atom(CssAtomSet::Translatex)]
 	pub name: T![Function],
-	pub params: LengthPercentage,
+	pub params: CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -191,10 +191,10 @@ pub struct TranslatexFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TranslateyFunction {
+pub struct TranslateyFunction<'a> {
 	#[atom(CssAtomSet::Translatey)]
 	pub name: T![Function],
-	pub params: LengthPercentage,
+	pub params: CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -208,10 +208,10 @@ pub struct TranslateyFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TranslatezFunction {
+pub struct TranslatezFunction<'a> {
 	#[atom(CssAtomSet::Translatez)]
 	pub name: T![Function],
-	pub params: Length,
+	pub params: CalcableValue<'a, Length>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -225,11 +225,11 @@ pub struct TranslatezFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScaleFunction {
+pub struct ScaleFunction<'a> {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
 	#[semantic_eq(skip)]
-	pub params: (NumberOrPercentage, Option<T![,]>, Option<NumberOrPercentage>),
+	pub params: (CalcableValue<'a, NumberOrPercentage>, Option<T![,]>, Option<CalcableValue<'a, NumberOrPercentage>>),
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -243,22 +243,22 @@ pub struct ScaleFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Scale3dFunction {
+pub struct Scale3dFunction<'a> {
 	#[atom(CssAtomSet::Scale3d)]
 	pub name: T![Function],
-	pub params: Scale3dFunctionParams,
+	pub params: Scale3dFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Scale3dFunctionParams(
-	pub NumberOrPercentage,
+pub struct Scale3dFunctionParams<'a>(
+	pub CalcableValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NumberOrPercentage,
+	pub CalcableValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NumberOrPercentage,
+	pub CalcableValue<'a, NumberOrPercentage>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scalex>
@@ -270,10 +270,10 @@ pub struct Scale3dFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScalexFunction {
+pub struct ScalexFunction<'a> {
 	#[atom(CssAtomSet::Scalex)]
 	pub name: T![Function],
-	pub params: NumberOrPercentage,
+	pub params: CalcableValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -287,10 +287,10 @@ pub struct ScalexFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScaleyFunction {
+pub struct ScaleyFunction<'a> {
 	#[atom(CssAtomSet::Scaley)]
 	pub name: T![Function],
-	pub params: NumberOrPercentage,
+	pub params: CalcableValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -304,10 +304,10 @@ pub struct ScaleyFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScalezFunction {
+pub struct ScalezFunction<'a> {
 	#[atom(CssAtomSet::Scalez)]
 	pub name: T![Function],
-	pub params: NumberOrPercentage,
+	pub params: CalcableValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -321,10 +321,10 @@ pub struct ScalezFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RotateFunction {
+pub struct RotateFunction<'a> {
 	#[atom(CssAtomSet::Rotate)]
 	pub name: T![Function],
-	pub params: AngleOrZero,
+	pub params: CalcableValue<'a, AngleOrZero>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -338,24 +338,24 @@ pub struct RotateFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Rotate3dFunction {
+pub struct Rotate3dFunction<'a> {
 	#[atom(CssAtomSet::Rotate3d)]
 	pub name: T![Function],
-	pub params: Rotate3dFunctionParams,
+	pub params: Rotate3dFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct Rotate3dFunctionParams(
-	pub T![Number],
+pub struct Rotate3dFunctionParams<'a>(
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub T![Number],
+	pub CalcableValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub AngleOrZero,
+	pub CalcableValue<'a, AngleOrZero>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-rotatex>
@@ -367,10 +367,10 @@ pub struct Rotate3dFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RotatexFunction {
+pub struct RotatexFunction<'a> {
 	#[atom(CssAtomSet::Rotatex)]
 	pub name: T![Function],
-	pub params: AngleOrZero,
+	pub params: CalcableValue<'a, AngleOrZero>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -384,10 +384,10 @@ pub struct RotatexFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RotateyFunction {
+pub struct RotateyFunction<'a> {
 	#[atom(CssAtomSet::Rotatey)]
 	pub name: T![Function],
-	pub params: AngleOrZero,
+	pub params: CalcableValue<'a, AngleOrZero>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -401,10 +401,10 @@ pub struct RotateyFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RotatezFunction {
+pub struct RotatezFunction<'a> {
 	#[atom(CssAtomSet::Rotatez)]
 	pub name: T![Function],
-	pub params: AngleOrZero,
+	pub params: CalcableValue<'a, AngleOrZero>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -418,11 +418,11 @@ pub struct RotatezFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SkewFunction {
+pub struct SkewFunction<'a> {
 	#[atom(CssAtomSet::Skew)]
 	pub name: T![Function],
 	#[semantic_eq(skip)]
-	pub params: (AngleOrZero, Option<T![,]>, Option<AngleOrZero>),
+	pub params: (CalcableValue<'a, AngleOrZero>, Option<T![,]>, Option<CalcableValue<'a, AngleOrZero>>),
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -436,10 +436,10 @@ pub struct SkewFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SkewxFunction {
+pub struct SkewxFunction<'a> {
 	#[atom(CssAtomSet::Skewx)]
 	pub name: T![Function],
-	pub params: AngleOrZero,
+	pub params: CalcableValue<'a, AngleOrZero>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -453,10 +453,10 @@ pub struct SkewxFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SkewyFunction {
+pub struct SkewyFunction<'a> {
 	#[atom(CssAtomSet::Skewy)]
 	pub name: T![Function],
-	pub params: AngleOrZero,
+	pub params: CalcableValue<'a, AngleOrZero>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -470,10 +470,10 @@ pub struct SkewyFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PerspectiveFunction {
+pub struct PerspectiveFunction<'a> {
 	#[atom(CssAtomSet::Perspective)]
 	pub name: T![Function],
-	pub params: NoneOr<Length>,
+	pub params: NoneOr<CalcableValue<'a, Length>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -486,7 +486,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformFunction>(), 176);
+		assert_eq!(std::mem::size_of::<TransformFunction>(), 248);
 	}
 
 	#[test]
@@ -526,6 +526,23 @@ mod tests {
 
 		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale3d(10%,10%,10%)");
 		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate3d(1,2,3,10deg)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		// Substitution/math functions permitted in <length[-percentage]> slots.
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translate(calc(10px + 5%))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translate(var(--x),var(--y))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translateX(calc(1rem * 2))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "translateZ(var(--z))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "perspective(calc(100px))");
+		// Substitution/math in number/angle/scale slots.
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate(calc(45deg))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate(var(--a))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale(calc(1 + 1),var(--y))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "skewX(calc(10deg))");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix(calc(1),2,3,4,5,6)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate3d(1,2,3,var(--a))");
 	}
 
 	#[test]

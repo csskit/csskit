@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{Color, Length, NonNegative, NoneOr};
+use crate::{CalcableValue, Color, Length, NonNegative, NoneOr};
 
 /// <https://drafts.csswg.org/css-borders-4/#typedef-spread-shadow>
 ///
@@ -13,9 +13,9 @@ use crate::{Color, Length, NonNegative, NoneOr};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct SpreadShadow<'a> {
 	pub color: Option<Color<'a>>,
-	pub offset: NoneOr<(Length, Length)>,
-	pub blur: Option<NonNegative<Length>>,
-	pub spread: Option<Length>,
+	pub offset: NoneOr<(CalcableValue<'a, Length>, CalcableValue<'a, Length>)>,
+	pub blur: Option<CalcableValue<'a, NonNegative<Length>>>,
+	pub spread: Option<CalcableValue<'a, Length>>,
 	pub position: Option<ShadowPosition>,
 }
 
@@ -39,7 +39,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SpreadShadow>(), 104);
+		assert_eq!(std::mem::size_of::<SpreadShadow>(), 136);
 	}
 
 	#[test]
@@ -65,6 +65,14 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "red 10px 20px inset");
 		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "0 0 0 .2rem rgba(0,123,255,.25)");
 		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "0 1px 1px rgba(0,0,0,.075)inset");
+	}
+
+	#[test]
+	fn test_substitution_offsets() {
+		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "calc(1px + 2px) 20px");
+		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "var(--x) var(--y)");
+		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "10px 20px max(1px, 2px) inset");
+		assert_parse!(CssAtomSet::ATOMS, SpreadShadow, "10px 20px 5px calc(3px) inset");
 	}
 
 	#[test]
