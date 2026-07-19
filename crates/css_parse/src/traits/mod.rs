@@ -1,6 +1,5 @@
 mod boolean_feature;
 mod cursor_sink;
-mod cursor_source;
 mod declaration_value;
 mod discrete_feature;
 mod lists;
@@ -17,7 +16,6 @@ mod to_number_value;
 
 pub use boolean_feature::*;
 pub use cursor_sink::*;
-pub use cursor_source::*;
 pub use declaration_value::*;
 pub use discrete_feature::*;
 pub use lists::*;
