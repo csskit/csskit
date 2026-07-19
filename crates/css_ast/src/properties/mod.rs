@@ -302,8 +302,6 @@ impl<'a> StyleValue<'a> {
 }
 
 impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
-	type ComputedValue = Computed<'a>;
-
 	fn declaration_metadata(decl: &Declaration<'a, Self, CssMetadata>) -> CssMetadata {
 		let mut meta = decl.value.metadata();
 		// Mark this node as a declaration
@@ -374,6 +372,13 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		p.parse::<Custom>().map(Self::Custom)
+	}
+
+	fn is_computed_declaration_value<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		<Computed>::peek(p, c)
 	}
 
 	fn parse_computed_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>

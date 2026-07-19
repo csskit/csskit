@@ -1,5 +1,4 @@
 use super::prelude::*;
-use crate::Computed;
 #[cfg(feature = "visitable")]
 use crate::visit::{NodeId, QueryableNode};
 
@@ -82,8 +81,6 @@ pub enum InheritsValue {
 pub struct SyntaxValue(T![String]);
 
 impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleStyleValue<'a> {
-	type ComputedValue = Computed<'a>;
-
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

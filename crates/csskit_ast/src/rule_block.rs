@@ -184,8 +184,6 @@ impl<'a> NodeWithMetadata<()> for RuleDeclarationValue<'a> {
 }
 
 impl<'a> DeclarationValue<'a, ()> for RuleDeclarationValue<'a> {
-	type ComputedValue = T![Eof];
-
 	fn is_initial(&self) -> bool {
 		false
 	}

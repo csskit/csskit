@@ -251,8 +251,6 @@ mod tests {
 	}
 
 	impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for Decl {
-		type ComputedValue = T![Eof];
-
 		fn is_initial(&self) -> bool {
 			false
 		}

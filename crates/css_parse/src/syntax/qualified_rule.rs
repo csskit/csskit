@@ -170,8 +170,6 @@ mod tests {
 	}
 
 	impl<'a> DeclarationValue<'a, ()> for Decl {
-		type ComputedValue = T![Eof];
-
 		fn is_initial(&self) -> bool {
 			false
 		}

@@ -1,7 +1,7 @@
 use css_parse::DeclarationValue;
 
 use super::prelude::*;
-use crate::{Computed, CssMetadata};
+use crate::CssMetadata;
 
 /// <https://drafts.csswg.org/css-fonts/#font-face-rule>
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -31,8 +31,6 @@ pub struct FontFaceRuleBlock<'a>(#[metadata(delegate)] DeclarationList<'a, FontF
 pub struct FontFaceRuleStyleValue<'a>(#[metadata(delegate)] pub StyleValue<'a>);
 
 impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
-	type ComputedValue = Computed<'a>;
-
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
