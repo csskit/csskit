@@ -47,8 +47,6 @@ impl NodeWithMetadata<()> for StatDeclarationValue {
 }
 
 impl<'a> DeclarationValue<'a, ()> for StatDeclarationValue {
-	type ComputedValue = T![Eof];
-
 	fn is_initial(&self) -> bool {
 		false
 	}

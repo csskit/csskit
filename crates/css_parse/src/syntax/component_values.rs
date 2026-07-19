@@ -58,8 +58,6 @@ impl<'a, M: NodeMetadata> NodeWithMetadata<M> for ComponentValues<'a> {
 }
 
 impl<'a> DeclarationValue<'a, ()> for ComponentValues<'a> {
-	type ComputedValue = ComponentValues<'a>;
-
 	fn is_initial(&self) -> bool {
 		false
 	}
@@ -89,6 +87,13 @@ impl<'a> DeclarationValue<'a, ()> for ComponentValues<'a> {
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
 		Self::parse(p)
+	}
+
+	fn is_computed_declaration_value<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
+		<Self as Peek>::peek(p, c)
 	}
 
 	fn parse_computed_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _name: Cursor) -> Result<Self>

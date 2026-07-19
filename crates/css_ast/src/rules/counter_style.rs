@@ -1,7 +1,7 @@
 use super::prelude::*;
 #[cfg(feature = "visitable")]
 use crate::visit::{NodeId, QueryableNode};
-use crate::{Computed, Inherits, PropertyGroup, Todo};
+use crate::{Inherits, PropertyGroup, Todo};
 use csskit_derives::*;
 use csskit_proc_macro::syntax;
 
@@ -67,8 +67,6 @@ pub enum CounterStyleRuleStyleValue<'a> {
 }
 
 impl<'a> DeclarationValue<'a, CssMetadata> for CounterStyleRuleStyleValue<'a> {
-	type ComputedValue = Computed<'a>;
-
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

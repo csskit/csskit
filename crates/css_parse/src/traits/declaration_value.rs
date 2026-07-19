@@ -7,8 +7,6 @@ use css_lexer::ToSpan;
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
 pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + ToSpan + ToCursors + SemanticEq {
-	type ComputedValue: Peek<'a>;
-
 	/// Returns metadata for this value when used in a declaration context.
 	/// This allows the value to inspect the declaration (e.g., checking for !important)
 	/// and include that information in the metadata.
@@ -102,6 +100,21 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 		Err(Diagnostic::new(c, Diagnostic::unexpected))?
 	}
 
+	/// Determines if the given [Cursor] begins a computed value (an arbitrary substitution function such as
+	/// `var()`/`env()`, or a typed math function such as `calc()`/`min()`).
+	///
+	/// This is used by [`parse_declaration_value`][DeclarationValue::parse_declaration_value] as the fallback check after
+	/// property-specific parsing fails or stops early: if this returns `true` the whole declaration is re-parsed via
+	/// [`parse_computed_declaration_value`][DeclarationValue::parse_computed_declaration_value].
+	///
+	/// The default implementation returns `false`, i.e. this DeclarationValue has no computed fallback.
+	fn is_computed_declaration_value<Iter>(_p: &Parser<'a, Iter>, _c: Cursor) -> bool
+	where
+		Iter: Iterator<Item = crate::Cursor> + Clone,
+	{
+		false
+	}
+
 	/// Like `parse()` but with the additional context of the `name` [Cursor]. This is only called before verifying that
 	/// the next token was peeked to be a ComputedValue, therefore this should return a `Self` reflecting a Computed
 	/// property. Alternatively, if this DeclarationValue disallows computed declarations then this is the right place to
@@ -147,6 +160,13 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 
 	// Like `parse()` but with the additional context of the `name` [Cursor] - the same [Cursor]
 	// passed to [DeclarationValue::valid_declaration_name()].
+	//
+	// Parsing order:
+	// 1. Custom properties (--dashed-ident)
+	// 2. Unknown property names
+	// 3. Property-specific parsing (via parse_specified_declaration_value)
+	// 4. Fallback to Computed for var/calc if property parsing failed/stopped early
+	// 5. Unknown as final fallback
 	fn parse_declaration_value<Iter>(p: &mut Parser<'a, Iter>, name: Cursor) -> Result<Self>
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
@@ -157,9 +177,6 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 		if !Self::valid_declaration_name(p, name) {
 			return Self::parse_unknown_declaration_value(p, name);
 		}
-		if <Self::ComputedValue>::peek(p, p.peek_n(1)) {
-			return Self::parse_computed_declaration_value(p, name);
-		}
 		let checkpoint = p.checkpoint();
 		if let Ok(val) = Self::parse_specified_declaration_value(p, name) {
 			let c = p.peek_n(1);
@@ -167,11 +184,11 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 				return Ok(val);
 			}
 		}
-		if <Self::ComputedValue>::peek(p, p.peek_n(1)) {
-			p.rewind(checkpoint.clone());
-			if let Ok(val) = Self::parse_computed_declaration_value(p, name) {
-				return Ok(val);
-			}
+		p.rewind(checkpoint.clone());
+		if Self::is_computed_declaration_value(p, p.peek_n(1))
+			&& let Ok(val) = Self::parse_computed_declaration_value(p, name)
+		{
+			return Ok(val);
 		}
 		p.rewind(checkpoint);
 		Self::parse_unknown_declaration_value(p, name)

@@ -1,4 +1,48 @@
 find :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
+130:3:  background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
+140:3:  border: 0.0625rem solid var(--secondary-border-color);
+141:3:  border-left: 0.375rem solid var(--blockquote-color);
+142:3:  border-radius: 0 var(--universal-border-radius) var(--universal-border-radius) 0;
+187:3:  border: 0.0625rem solid var(--secondary-border-color);
+188:3:  border-left: 0.25rem solid var(--pre-color);
+189:3:  border-radius: 0 var(--universal-border-radius) var(--universal-border-radius) 0;
+239:3:  padding: 0 calc(1.5 * var(--universal-padding));
+255:3:  padding: 0 calc(var(--universal-padding) / 2);
+404:5:    padding: 0 calc(var(--universal-padding) / 2);
+526:5:    padding: 0 calc(var(--universal-padding) / 2);
+657:3:  border: 0.0625rem solid var(--card-border-color);
+676:3:  border-bottom: 0.0625rem solid var(--card-border-color);
+755:3:  border: 0.0625rem solid var(--form-border-color);
+762:3:  border: 0.0625rem solid var(--form-border-color);
+835:3:  border: 0.0625rem solid var(--input-border-color);
+932:3:  border: 0.0625rem solid var(--button-border-color);
+957:3:  border: 0.0625rem solid var(--button-group-border-color);
+974:3:  border-left: 0.0625rem solid var(--button-group-border-color);
+983:5:    border-top: 0.0625rem solid var(--button-group-border-color);
+1064:3:  border-bottom: 0.0625rem solid var(--header-border-color);
+1104:3:  border: 0.0625rem solid var(--nav-border-color);
+1136:3:  border: 0.0625rem solid var(--nav-border-color);
+1151:3:  border: 0.0625rem solid var(--nav-border-color);
+1158:3:  border-top: 0.0625rem solid var(--footer-border-color);
+1216:3:  border: 0.0625rem solid var(--drawer-border-color);
+1309:3:  border: 0.0625rem solid var(--table-border-color);
+1315:3:  border-bottom: 0.0625rem solid var(--table-border-separator-color);
+1321:3:  border-radius: 0 0 var(--universal-border-radius) var(--universal-border-radius);
+1342:3:  border-top: 0.0625rem solid var(--table-border-color);
+1401:3:  border-bottom: 0.0625rem solid var(--table-border-color);
+1410:3:  border-left: 0.0625rem solid var(--table-border-color);
+1411:3:  border-right: 0.0625rem solid var(--table-border-separator-color);
+1419:3:  border-top: 0.0625rem solid var(--table-border-color);
+1423:3:  border-right: 0.0625rem solid var(--table-border-color);
+1467:5:    border: 0.0625rem solid var(--table-border-color);
+1743:3:  border: 0.0625rem solid var(--collapse-border-color);
+1778:3:  border: 0.0625rem solid var(--collapse-border-color);
+1796:3:  border-radius: 0 0 var(--universal-border-radius) var(--universal-border-radius);
+1808:3:  border-radius: 0 0 var(--universal-border-radius) var(--universal-border-radius);
+1898:3:  border: 0.25rem solid var(--spinner-back-color);
+1899:3:  border-left: 0.25rem solid var(--spinner-fore-color);
 1903:3:  animation: spinner-donut-anim 1.2s linear infinite;
+1942:3:  margin: 0 calc(var(--universal-margin) / 4);
+2062:3:  border: 0.0625rem solid var(--generic-border-color) !important;
