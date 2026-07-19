@@ -141,6 +141,8 @@ pub enum CssAtomSet {
 	Animation,
 	AnimationComposition,
 	AnimationDelay,
+	AnimationDelayEnd,
+	AnimationDelayStart,
 	AnimationDirection,
 	AnimationDuration,
 	AnimationFillMode,

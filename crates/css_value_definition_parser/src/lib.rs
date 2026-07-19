@@ -359,7 +359,9 @@ impl Def {
 			Self::StyleValue(ty) => {
 				matches!(
 					ty.ident_str(),
-					"AnimationRangeEnd"
+					"AnimationDelayStart"
+						| "AnimationDelayEnd"
+						| "AnimationRangeEnd"
 						| "AnimationRangeStart"
 						| "BorderBlockStart"
 						| "BorderImageSource"

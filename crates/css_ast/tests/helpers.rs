@@ -16,6 +16,6 @@ macro_rules! assert_snap_ast {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", $source_path, result.errors[0]);
 		}
 		#[cfg(feature = "serde")]
-		insta::assert_ron_snapshot!(result.output.unwrap())
+		insta::assert_ron_snapshot!(result.output.unwrap());
 	}};
 }
