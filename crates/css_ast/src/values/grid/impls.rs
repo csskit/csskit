@@ -50,12 +50,12 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<GridTemplateColumnsStyleValue>(), 320);
-		assert_eq!(std::mem::size_of::<GridTemplateRowsStyleValue>(), 320);
-		assert_eq!(std::mem::size_of::<GridTemplateAreasStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<GridTemplateColumnsStyleValue>(), 272);
+		assert_eq!(std::mem::size_of::<GridTemplateRowsStyleValue>(), 272);
+		assert_eq!(std::mem::size_of::<GridTemplateAreasStyleValue>(), 24);
 		// assert_eq!(std::mem::size_of::<GridTemplateStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<GridAutoColumnsStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<GridAutoColumnsStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<GridAutoFlowStyleValue>(), 36);
 		// assert_eq!(std::mem::size_of::<GridStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 44);

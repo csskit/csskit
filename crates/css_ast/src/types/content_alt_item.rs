@@ -26,7 +26,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContentAltItem>(), 160);
+		assert_eq!(std::mem::size_of::<ContentAltItem>(), 152);
 	}
 
 	#[test]

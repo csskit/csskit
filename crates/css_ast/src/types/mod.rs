@@ -292,7 +292,7 @@ pub use voice_family_name::*;
 
 mod prelude {
 	pub(crate) use crate::CssAtomSet;
-	pub(crate) use bumpalo::collections::Vec;
+	pub(crate) use css_parse::Vec;
 	pub(crate) use css_parse::{
 		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue,
 	};

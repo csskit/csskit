@@ -1,6 +1,6 @@
 use crate::{CsskitAtomSet, rule_block::RuleBlock};
-use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, KindSet};
+use css_parse::Vec;
 use css_parse::{FeatureConditionList, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::*;
 

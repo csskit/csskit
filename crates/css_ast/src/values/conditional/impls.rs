@@ -7,8 +7,8 @@ mod tests {
 	#[test]
 	pub fn size_test() {
 		assert_eq!(std::mem::size_of::<ContainerTypeStyleValue>(), 36);
-		assert_eq!(std::mem::size_of::<ContainerNameStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ContainerStyleValue>(), 80);
+		assert_eq!(std::mem::size_of::<ContainerNameStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<ContainerStyleValue>(), 72);
 	}
 
 	#[test]

@@ -22,9 +22,7 @@ expression: pretty
 pub enum FooKeywords {}
 #[derive(Parse)]
 struct Foo<'a>(
-    pub Option<
-        ::bumpalo::collections::Vec<'a, (::css_parse::T![Ident], ::css_parse::T![,])>,
-    >,
+    pub Option<::css_parse::Vec<'a, (::css_parse::T![Ident], ::css_parse::T![,])>>,
     #[atom(CssAtomSet::Bar)]
     pub FooKeywords,
 );

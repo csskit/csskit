@@ -34,6 +34,6 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AutoLineWidthList>(), 152);
+		assert_eq!(std::mem::size_of::<AutoLineWidthList>(), 128);
 	}
 }

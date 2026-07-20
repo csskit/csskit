@@ -1,3 +1,5 @@
+use crate::Vec;
+use allocator_api2::alloc::Allocator;
 use css_lexer::{AssociatedWhitespaceRules, Cursor};
 
 /// Trait for semantic equality comparison that ignores source positions and whitespace.
@@ -36,7 +38,7 @@ where
 	}
 }
 
-impl<'a, T> SemanticEq for bumpalo::collections::Vec<'a, T>
+impl<'a, T, A: Allocator> SemanticEq for Vec<'a, T, A>
 where
 	T: SemanticEq,
 {

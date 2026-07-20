@@ -290,7 +290,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<MozPseudoElement>(), 40);
-		assert_eq!(std::mem::size_of::<MozFunctionalPseudoElement>(), 88);
+		assert_eq!(std::mem::size_of::<MozFunctionalPseudoElement>(), 80);
 		assert_eq!(std::mem::size_of::<MozPseudoClass>(), 28);
 		assert_eq!(std::mem::size_of::<MozFunctionalPseudoClass>(), 56);
 	}

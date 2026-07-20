@@ -290,7 +290,7 @@ impl<T> NonEmpty<T> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use bumpalo::collections::Vec;
+	use css_parse::Vec;
 	use css_parse::{T, assert_parse, assert_parse_error, assert_peek_false};
 
 	type ExactOne = Exact<T![Number], 1>;

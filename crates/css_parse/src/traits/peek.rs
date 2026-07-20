@@ -1,4 +1,5 @@
-use crate::{Cursor, KindSet, Parser};
+use crate::{Cursor, KindSet, Parser, Vec};
+use allocator_api2::alloc::Allocator;
 
 /// This trait allows AST nodes to indicate whether the [Parser] is in the right position to potentially
 /// [Parse][crate::Parse] the node. Returning `true` from [Peek] is not a _guarantee_ that a node will successfully
@@ -50,7 +51,7 @@ impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
 	}
 }
 
-impl<'a, T: Peek<'a>> Peek<'a> for ::bumpalo::collections::Vec<'a, T> {
+impl<'a, T: Peek<'a>, A: Allocator> Peek<'a> for Vec<'a, T, A> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
 	#[inline(always)]

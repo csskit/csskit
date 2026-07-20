@@ -68,7 +68,6 @@ impl File {
 								let _ = span.enter();
 								// TODO! we should be able to optimize this by parsing a subset of the tree and mutating in
 								// place. For now though a partial parse request re-parses it all.
-								drop(result);
 								bump.reset();
 								string = rope.clone().into();
 								let lexer = Lexer::new(&CssAtomSet::ATOMS, &string);

@@ -18,7 +18,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<CueBeforeStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<CueAfterStyleValue>(), 56);
 		assert_eq!(std::mem::size_of::<CueStyleValue>(), 112);
-		assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 36);
 		// assert_eq!(std::mem::size_of::<VoicePitchStyleValue>(), 16);
 		// assert_eq!(std::mem::size_of::<VoiceRangeStyleValue>(), 16);

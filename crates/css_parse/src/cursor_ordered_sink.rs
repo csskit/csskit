@@ -1,5 +1,4 @@
-use crate::{Cursor, CursorSink, Kind, SourceOffset};
-use bumpalo::collections::Vec;
+use crate::{Arena, Cursor, CursorSink, Kind, SourceOffset, Vec};
 
 /// This is a [CursorSink] that buffers cursors and emits them in source order. It uses contiguous coverage tracking to
 /// eagerly emit cursors as soon as gaps are filled.
@@ -18,7 +17,7 @@ pub struct CursorOrderedSink<'a, S> {
 }
 
 impl<'a, S: CursorSink> CursorOrderedSink<'a, S> {
-	pub fn new(bump: &'a bumpalo::Bump, sink: &'a mut S) -> Self {
+	pub fn new(bump: &'a Arena, sink: &'a mut S) -> Self {
 		Self {
 			sink,
 			buffer: Vec::new_in(bump),
@@ -140,8 +139,9 @@ impl<'a, S: CursorSink> CursorSink for CursorOrderedSink<'a, S> {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::Vec as BumpVec;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, SourceCursor, ToCursors};
-	use bumpalo::{Bump, collections::Vec as BumpVec};
+	use bumpalo::Bump;
 	use css_lexer::Lexer;
 	use std::fmt::Write;
 

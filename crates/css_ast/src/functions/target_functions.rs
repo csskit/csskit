@@ -125,7 +125,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Target>(), 184);
+		assert_eq!(std::mem::size_of::<Target>(), 176);
 	}
 
 	#[test]

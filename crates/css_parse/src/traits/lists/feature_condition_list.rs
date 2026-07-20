@@ -1,5 +1,4 @@
-use crate::{Cursor, Parse, Parser, Peek, Result, token_macros::Ident};
-use bumpalo::collections::Vec;
+use crate::{Cursor, Parse, Parser, Peek, Result, Vec, token_macros::Ident};
 
 /// This trait can be used for AST nodes representing a list of "Feature Conditions". This is an amalgamation of
 /// [Supports Conditions][1], [Media Conditions][2], and [Container Queries][3]

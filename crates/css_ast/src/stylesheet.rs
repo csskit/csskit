@@ -1,6 +1,6 @@
 use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
-use bumpalo::collections::Vec;
 use css_lexer::KindSet;
+use css_parse::Vec;
 use css_parse::{
 	Box, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
 	Result as ParserResult, RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
@@ -199,7 +199,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StyleSheet>(), 64);
-		assert_eq!(std::mem::size_of::<Rule>(), 208);
+		assert_eq!(std::mem::size_of::<Rule>(), 192);
 	}
 
 	#[test]

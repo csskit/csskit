@@ -11,16 +11,16 @@ mod tests {
 		assert_eq!(std::mem::size_of::<GapStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ColumnRuleColorStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<ColumnRuleStyleStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<ColumnRuleWidthStyleValue>(), 152);
-		assert_eq!(std::mem::size_of::<ColumnRuleStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<ColumnRuleWidthStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<ColumnRuleStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<RowRuleColorStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<RowRuleStyleStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<RowRuleWidthStyleValue>(), 152);
-		assert_eq!(std::mem::size_of::<RowRuleStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<RowRuleWidthStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<RowRuleStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<RuleColorStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<RuleStyleStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<RuleWidthStyleValue>(), 152);
-		assert_eq!(std::mem::size_of::<RuleStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<RuleWidthStyleValue>(), 128);
+		assert_eq!(std::mem::size_of::<RuleStyleValue>(), 24);
 	}
 
 	#[test]

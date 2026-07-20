@@ -232,7 +232,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<CounterStyleName>(), 12);
 		assert_eq!(std::mem::size_of::<CounterStyleRuleBlock>(), 96);
 		assert_eq!(std::mem::size_of::<CounterStyleRuleStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<AdditiveSymbolsStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<AdditiveSymbolsStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<FallbackStyleValue>(), 12);
 		assert_eq!(std::mem::size_of::<NegativeStyleValue>(), 80);
 		assert_eq!(std::mem::size_of::<PadStyleValue>(), 56);
@@ -240,7 +240,7 @@ mod tests {
 		// assert_eq!(std::mem::size_of::<RangeStyleValue>(), 1);
 		assert_eq!(std::mem::size_of::<SpeakAsStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<SuffixStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<SymbolsStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<SymbolsStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<SystemStyleValue>(), 28);
 	}
 

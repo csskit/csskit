@@ -87,7 +87,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AttrFunction>(), 152);
+		assert_eq!(std::mem::size_of::<AttrFunction>(), 144);
 	}
 
 	#[test]

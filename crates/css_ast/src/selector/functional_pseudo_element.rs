@@ -1,6 +1,6 @@
 use crate::{CssAtomSet, CssDiagnostic};
-use bumpalo::collections::Vec;
 use css_lexer::Kind;
+use css_parse::Vec;
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::*;
 

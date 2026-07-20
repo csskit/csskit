@@ -21,7 +21,7 @@ fn extract_colors(src: &str, bump: &Bump) -> Result<Vec<(Color, Span)>, Vec<Diag
 	// Try parsing as a bare list of colors first.
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
 	let mut parser = Parser::new(bump, src, lexer);
-	let result = parser.parse_entirely::<bumpalo::collections::Vec<ASTColor>>();
+	let result = parser.parse_entirely::<css_parse::Vec<ASTColor>>();
 	if let Some(output) = result.output.filter(|_| result.errors.is_empty()) {
 		let _ = output.accept(&mut visitor);
 		return Ok(visitor.colors);

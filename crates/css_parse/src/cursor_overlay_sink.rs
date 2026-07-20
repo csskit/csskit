@@ -1,5 +1,4 @@
-use crate::{Cursor, CursorSink, Kind, SourceCursor, SourceCursorSink, SourceOffset, Span, ToSpan};
-use bumpalo::{Bump, collections::Vec};
+use crate::{Arena, Cursor, CursorSink, Kind, SourceCursor, SourceCursorSink, SourceOffset, Span, ToSpan, Vec};
 use std::collections::BTreeMap;
 
 #[derive(Debug)]
@@ -48,7 +47,7 @@ pub struct CursorOverlaySet<'a> {
 }
 
 impl<'a> CursorOverlaySet<'a> {
-	pub fn new(bump: &'a Bump) -> Self {
+	pub fn new(bump: &'a Arena) -> Self {
 		Self { segments: Vec::new_in(bump) }
 	}
 
@@ -182,11 +181,12 @@ impl<'a, 'o, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, 'o, T
 #[cfg(test)]
 mod test {
 	use super::*;
+	use crate::Vec;
 	use crate::{
 		ComponentValue, ComponentValues, CursorPrettyWriteSink, CursorToSourceCursorSink, CursorWriteSink,
 		EmptyAtomSet, Parser, QuoteStyle, T, ToCursors, ToSpan,
 	};
-	use bumpalo::{Bump, collections::Vec};
+	use bumpalo::Bump;
 	use css_lexer::Lexer;
 
 	fn snippet_cursors<'a>(bump: &'a Bump, snippet: &'a str) -> Vec<'a, SourceCursor<'a>> {

@@ -427,7 +427,7 @@ impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::token_macros::Right
 }
 
 impl<'a, T: css_parse::NodeWithMetadata<CssMetadata>> css_parse::NodeWithMetadata<CssMetadata>
-	for bumpalo::collections::Vec<'a, T>
+	for css_parse::Vec<'a, T>
 {
 	fn metadata(&self) -> CssMetadata {
 		self.iter().fold(CssMetadata::default(), |acc, item| NodeMetadata::merge(acc, item.metadata()))

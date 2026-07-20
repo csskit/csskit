@@ -2,7 +2,7 @@ use crate::{
 	CssMetadata,
 	specificity::{Specificity, ToSpecificity},
 };
-use bumpalo::collections::Vec;
+use css_parse::Vec;
 use css_parse::{
 	CompoundSelector as CompoundSelectorTrait, Cursor, NodeMetadata, NodeWithMetadata, Parse, Parser,
 	Result as ParserResult, SelectorComponent as SelectorComponentTrait, T, syntax::CommaSeparated,
@@ -228,10 +228,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SelectorList>(), 32);
-		assert_eq!(std::mem::size_of::<ComplexSelector>(), 32);
-		assert_eq!(std::mem::size_of::<ForgivingSelector>(), 32);
-		assert_eq!(std::mem::size_of::<RelativeSelector>(), 32);
+		assert_eq!(std::mem::size_of::<SelectorList>(), 24);
+		assert_eq!(std::mem::size_of::<ComplexSelector>(), 24);
+		assert_eq!(std::mem::size_of::<ForgivingSelector>(), 24);
+		assert_eq!(std::mem::size_of::<RelativeSelector>(), 24);
 		assert_eq!(std::mem::size_of::<SelectorComponent>(), 128);
 		assert_eq!(std::mem::size_of::<LegacyPseudoElement>(), 28);
 		assert_eq!(std::mem::size_of::<Combinator>(), 28);

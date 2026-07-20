@@ -60,8 +60,8 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContentList>(), 32);
-		assert_eq!(std::mem::size_of::<ContentListItem>(), 184);
+		assert_eq!(std::mem::size_of::<ContentList>(), 24);
+		assert_eq!(std::mem::size_of::<ContentListItem>(), 176);
 	}
 
 	#[test]

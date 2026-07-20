@@ -21,7 +21,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformList>(), 32);
+		assert_eq!(std::mem::size_of::<TransformList>(), 24);
 	}
 
 	#[test]

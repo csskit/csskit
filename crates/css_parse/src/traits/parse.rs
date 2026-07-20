@@ -1,5 +1,4 @@
-use crate::{Cursor, Parser, Peek, Result};
-use bumpalo::collections::Vec;
+use crate::{Cursor, Parser, Peek, Result, Vec};
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
 ///
