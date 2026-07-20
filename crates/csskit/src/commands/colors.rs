@@ -4,6 +4,7 @@ use crate::{
 	commands::{Extract, OutputFormat, extract::ErrorRecord},
 	dimmed, fg,
 };
+use allocator_api2::alloc::Allocator;
 use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
@@ -408,12 +409,12 @@ impl Extract for ColorCommand {
 		// Unreachable: parse_and_extract_file is fully overridden.
 	}
 
-	fn render_text(
+	fn render_text<A: Allocator>(
 		&self,
 		_ctx: &ColorContext,
 		file: &str,
 		_src: &str,
-		index: &LineIndex,
+		index: &LineIndex<'_, A>,
 		span: Span,
 		row: &ColorData,
 		color: bool,

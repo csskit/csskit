@@ -10,6 +10,7 @@ license.workspace = true
 repository.workspace = true
 
 [dependencies]
+allocator-api2 = { workspace = true }
 css_lexer = { workspace = true } # @release
 css_ast = { workspace = true, features = ["chromashift", "visitable", "miette"] } # @release
 css_parse = { workspace = true, features = ["miette", "egg"] } # @release

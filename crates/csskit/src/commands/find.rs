@@ -3,6 +3,7 @@ use crate::{
 	commands::{Extract, OutputFormat},
 	green,
 };
+use allocator_api2::alloc::Allocator;
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable, visit::NodeId};
@@ -173,12 +174,12 @@ impl Extract for Find {
 		}
 	}
 
-	fn render_text(
+	fn render_text<A: Allocator>(
 		&self,
 		ctx: &TokenHighlighter,
 		_file: &str,
 		src: &str,
-		index: &LineIndex,
+		index: &LineIndex<'_, A>,
 		span: Span,
 		_row: &FindData,
 		color: bool,

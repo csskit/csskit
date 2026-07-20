@@ -1,5 +1,6 @@
 use crate::InputArgs;
 use crate::commands::{Extract, OutputFormat};
+use allocator_api2::alloc::Allocator;
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::specificity::ToSpecificity;
@@ -81,12 +82,12 @@ impl Extract for Specificity {
 		let _ = stylesheet.accept(&mut visitor);
 	}
 
-	fn render_text(
+	fn render_text<A: Allocator>(
 		&self,
 		_ctx: &(),
 		_file: &str,
 		_src: &str,
-		_index: &LineIndex,
+		_index: &LineIndex<'_, A>,
 		_span: Span,
 		row: &Self::Row,
 		_color: bool,
