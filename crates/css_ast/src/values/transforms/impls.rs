@@ -22,7 +22,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<TransformStyleValue>(), 24);
 		// assert_eq!(std::mem::size_of::<TransformOriginStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TransformBoxStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TranslateStyleValue>(), 48);

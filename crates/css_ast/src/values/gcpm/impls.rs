@@ -9,7 +9,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<FootnoteDisplayStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FootnotePolicyStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<RunningStyleValue>(), 12);
-		assert_eq!(std::mem::size_of::<StringSetStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<StringSetStyleValue>(), 24);
 	}
 
 	#[test]

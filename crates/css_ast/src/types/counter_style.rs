@@ -124,7 +124,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CounterStyle>(), 72);
+		assert_eq!(std::mem::size_of::<CounterStyle>(), 64);
 	}
 
 	#[test]

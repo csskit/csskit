@@ -1,7 +1,7 @@
 use crate::{
-	CursorSink, DeclarationOrBad, DeclarationValue, NodeMetadata, NodeWithMetadata, SemanticEq, Span, ToCursors, ToSpan,
+	CursorSink, DeclarationOrBad, DeclarationValue, NodeMetadata, NodeWithMetadata, SemanticEq, Span, ToCursors,
+	ToSpan, Vec,
 };
-use bumpalo::collections::Vec;
 
 /// A group of declarations that can be interleaved with rules.
 ///

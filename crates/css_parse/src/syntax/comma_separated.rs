@@ -1,10 +1,6 @@
 use crate::{
-	Cursor, CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, ToCursors, ToSpan,
-	token_macros::Comma,
-};
-use bumpalo::{
-	Bump,
-	collections::{Vec, vec::IntoIter},
+	Arena, Cursor, CursorSink, IntoIter, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span,
+	ToCursors, ToSpan, Vec, token_macros::Comma,
 };
 use std::{
 	ops::{Index, IndexMut},
@@ -37,7 +33,7 @@ pub struct CommaSeparated<'a, T, const MIN: usize = 1> {
 }
 
 impl<'a, T, const MIN: usize> CommaSeparated<'a, T, MIN> {
-	pub fn new_in(bump: &'a Bump) -> Self {
+	pub fn new_in(bump: &'a Arena) -> Self {
 		Self { items: Vec::new_in(bump) }
 	}
 
@@ -113,7 +109,7 @@ impl<'a, T: SemanticEq, const MIN: usize> SemanticEq for CommaSeparated<'a, T, M
 	}
 }
 
-impl<'a, T, const MIN: usize> IntoIterator for CommaSeparated<'a, T, MIN> {
+impl<'a, T: 'a, const MIN: usize> IntoIterator for CommaSeparated<'a, T, MIN> {
 	type Item = (T, Option<Comma>);
 	type IntoIter = IntoIter<'a, Self::Item>;
 
@@ -169,7 +165,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CommaSeparated<T![Ident]>>(), 32);
+		assert_eq!(std::mem::size_of::<CommaSeparated<T![Ident]>>(), 24);
 	}
 
 	#[test]

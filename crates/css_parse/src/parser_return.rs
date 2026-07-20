@@ -1,5 +1,4 @@
-use crate::{Cursor, CursorInterleaveSink, CursorSink, Diagnostic, ToCursors};
-use bumpalo::collections::Vec;
+use crate::{Cursor, CursorInterleaveSink, CursorSink, Diagnostic, ToCursors, Vec};
 
 #[derive(Debug)]
 pub struct ParserReturn<'a, T>

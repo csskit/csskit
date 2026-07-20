@@ -58,7 +58,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FunctionBlock>(), 56);
+		assert_eq!(std::mem::size_of::<FunctionBlock>(), 48);
 	}
 
 	#[test]

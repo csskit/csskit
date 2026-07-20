@@ -1,5 +1,6 @@
-use bumpalo::{Bump, collections::Vec};
+use bumpalo::Bump;
 use css_lexer::{AtomSet, Cursor, DynAtomSet, KindSet, Lexer, ToSpan};
+use css_parse::Vec;
 use css_parse::{
 	CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment, Parse,
 	Parser, SourceCursor, SourceOffset, Span, ToCursors,

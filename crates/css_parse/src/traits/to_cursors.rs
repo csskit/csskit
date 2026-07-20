@@ -1,5 +1,5 @@
-use crate::{Cursor, CursorSink};
-use bumpalo::collections::Vec;
+use crate::{Cursor, CursorSink, Vec};
+use allocator_api2::alloc::Allocator;
 
 /// This trait allows AST nodes to decompose themselves back into a set of (ordered) [Cursors][crate::Cursor].
 ///
@@ -33,7 +33,7 @@ where
 	}
 }
 
-impl<'a, T> ToCursors for Vec<'a, T>
+impl<'a, T, A: Allocator> ToCursors for Vec<'a, T, A>
 where
 	T: ToCursors,
 {

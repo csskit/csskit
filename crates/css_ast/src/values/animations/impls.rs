@@ -6,17 +6,17 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AnimationNameStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationDurationStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationTimingFunctionStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationIterationCountStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationDirectionStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationPlayStateStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationDelayStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationFillModeStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<AnimationNameStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationDurationStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationTimingFunctionStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationIterationCountStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationDirectionStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationPlayStateStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationDelayStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationFillModeStyleValue>(), 24);
 		// assert_eq!(std::mem::size_of::<AnimationStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationCompositionStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationTimelineStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<AnimationCompositionStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<AnimationTimelineStyleValue>(), 24);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerBehaviorStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerTimelineStyleValue>(), 32);
 		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeStyleValue>(), 32);

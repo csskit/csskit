@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<LinkParametersStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<LinkParametersStyleValue>(), 24);
 	}
 
 	#[test]

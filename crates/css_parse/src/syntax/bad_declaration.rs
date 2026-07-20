@@ -1,8 +1,7 @@
 use crate::{
-	CursorSink, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, State, T, ToCursors, ToSpan,
+	CursorSink, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, State, T, ToCursors, ToSpan, Vec,
 	syntax::ComponentValue,
 };
-use bumpalo::collections::Vec;
 
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

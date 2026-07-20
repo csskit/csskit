@@ -1,9 +1,9 @@
 use crate::{
-	Cursor, Diagnostic, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, ToCursors,
+	Arena, Cursor, Diagnostic, Feature, Kind, KindSet, ParserCheckpoint, ParserReturn, Result, SourceOffset, ToCursors,
+	Vec,
 	traits::{Parse, Peek},
 };
 use bitmask_enum::bitmask;
-use bumpalo::{Bump, collections::Vec};
 use css_lexer::{AtomSet, DynAtomSet, SourceCursor};
 use std::mem;
 
@@ -32,7 +32,7 @@ pub struct Parser<'a, I: Iterator<Item = Cursor> + Clone> {
 
 	pub(crate) state: State,
 
-	pub(crate) bump: &'a Bump,
+	pub(crate) bump: &'a Arena,
 
 	skip: KindSet,
 
@@ -65,7 +65,7 @@ where
 	I: Iterator<Item = Cursor> + Clone,
 {
 	/// Create a new parser with an iterator over cursors
-	pub fn new(bump: &'a Bump, source_text: &'a str, mut cursor_iter: I) -> Self {
+	pub fn new(bump: &'a Arena, source_text: &'a str, mut cursor_iter: I) -> Self {
 		let eof_cursor = eof_cursor(source_text.len());
 		let mut buffer = [eof_cursor; BUFFER_LEN];
 		buffer.fill_with(|| cursor_iter.next().unwrap_or(eof_cursor));
@@ -104,7 +104,7 @@ where
 	}
 
 	#[inline]
-	pub fn bump(&self) -> &'a Bump {
+	pub fn bump(&self) -> &'a Arena {
 		self.bump
 	}
 

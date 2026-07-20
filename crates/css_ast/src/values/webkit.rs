@@ -1271,7 +1271,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<WebkitFilterStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<WebkitFilterStyleValue>(), 24);
 	}
 
 	#[test]
@@ -1362,7 +1362,7 @@ mod tests {
 
 	#[test]
 	fn size_test_transform() {
-		assert_eq!(std::mem::size_of::<WebkitTransformStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<WebkitTransformStyleValue>(), 24);
 	}
 
 	#[test]

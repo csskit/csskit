@@ -1,9 +1,8 @@
 use crate::{
 	BadDeclaration, CursorSink, Declaration, DeclarationGroup, DeclarationOrBad, DeclarationValue, Kind, KindSet,
 	NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, RuleVariants, SemanticEq, Span, State, T, ToCursors,
-	ToSpan, token_macros,
+	ToSpan, Vec, token_macros,
 };
-use bumpalo::collections::Vec;
 
 /// This trait provides an implementation for ["consuming a blocks contents"][1].
 ///
@@ -340,7 +339,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Block<Decl, Rule, ()>>(), 96);
+		assert_eq!(std::mem::size_of::<Block<Decl, Rule, ()>>(), 80);
 	}
 
 	#[test]

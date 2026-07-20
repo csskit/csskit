@@ -1,5 +1,5 @@
-use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, SourceOffset, Span};
+use css_parse::Vec;
 use css_parse::{
 	ComponentValues, CursorSink, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, RuleVariants,
 	SemanticEq, StyleSheet, ToCursors, ToSpan,

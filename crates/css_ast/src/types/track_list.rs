@@ -113,10 +113,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TrackList>(), 88);
-		assert_eq!(std::mem::size_of::<AutoTrackList>(), 320);
-		assert_eq!(std::mem::size_of::<ExplicitTrackList>(), 88);
-		assert_eq!(std::mem::size_of::<LineNameList>(), 32);
+		assert_eq!(std::mem::size_of::<TrackList>(), 72);
+		assert_eq!(std::mem::size_of::<AutoTrackList>(), 272);
+		assert_eq!(std::mem::size_of::<ExplicitTrackList>(), 72);
+		assert_eq!(std::mem::size_of::<LineNameList>(), 24);
 	}
 
 	#[test]

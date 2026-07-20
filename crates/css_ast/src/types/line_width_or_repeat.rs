@@ -24,7 +24,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<LineWidthOrRepeat>(), 88);
+		assert_eq!(std::mem::size_of::<LineWidthOrRepeat>(), 80);
 	}
 
 	#[test]

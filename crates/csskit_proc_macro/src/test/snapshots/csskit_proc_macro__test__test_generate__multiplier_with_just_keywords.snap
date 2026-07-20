@@ -25,4 +25,4 @@ pub enum FooKeywords {
     #[atom(CssAtomSet::Inset)]
     Inset(::css_parse::T![Ident]),
 }
-struct Foo<'a>(pub ::bumpalo::collections::Vec<'a, crate::FooKeywords>);
+struct Foo<'a>(pub ::css_parse::Vec<'a, crate::FooKeywords>);

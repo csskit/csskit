@@ -1,5 +1,4 @@
-use crate::{Cursor, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Result, T};
-use bumpalo::collections::Vec;
+use crate::{Cursor, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Result, T, Vec};
 
 /// This trait provides an implementation for parsing a [StyleSheet][1].
 ///

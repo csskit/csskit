@@ -75,7 +75,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ImportRule>(), 288);
+		assert_eq!(std::mem::size_of::<ImportRule>(), 264);
 	}
 
 	#[test]

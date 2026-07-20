@@ -15,7 +15,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<AutoRepeat>(), 144);
+		assert_eq!(std::mem::size_of::<AutoRepeat>(), 128);
 	}
 
 	#[test]

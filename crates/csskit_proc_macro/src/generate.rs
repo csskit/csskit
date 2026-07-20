@@ -262,10 +262,10 @@ impl ToType for Def {
 				let ty = def.deref().to_type();
 				match range {
 					DefRange::RangeFrom(f) if *f == 0.0 => {
-						vec![quote! { Option<::bumpalo::collections::Vec<'a, #ty>> }]
+						vec![quote! { Option<::css_parse::Vec<'a, #ty>> }]
 					}
 					_ => {
-						vec![quote! { ::bumpalo::collections::Vec<'a, #ty> }]
+						vec![quote! { ::css_parse::Vec<'a, #ty> }]
 					}
 				}
 			}
@@ -812,11 +812,11 @@ impl GenerateDefinition for Def {
 								}
 								DefMultiplierSeparator::None => match range {
 									DefRange::Range(Range { start, .. }) if *start == 0.0 => {
-										vec![quote! { Option<::bumpalo::collections::Vec<'a, #inner_type_ref>> }]
+										vec![quote! { Option<::css_parse::Vec<'a, #inner_type_ref>> }]
 									}
 									_ => {
 										dbg!(range);
-										vec![quote! { Option<::bumpalo::collections::Vec<'a, #inner_type_ref> }]
+										vec![quote! { Option<::css_parse::Vec<'a, #inner_type_ref> }]
 									}
 								},
 							};

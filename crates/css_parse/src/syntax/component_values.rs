@@ -1,8 +1,7 @@
 use crate::{
 	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, KindSet, NodeMetadata, NodeWithMetadata, Parse,
-	Parser, Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
+	Parser, Peek, Result, SemanticEq, Span, ToCursors, ToSpan, Vec,
 };
-use bumpalo::collections::Vec;
 
 use super::ComponentValue;
 
@@ -137,7 +136,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ComponentValues>(), 32);
+		assert_eq!(std::mem::size_of::<ComponentValues>(), 24);
 	}
 
 	#[test]

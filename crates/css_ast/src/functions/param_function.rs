@@ -35,7 +35,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ParamFunction>(), 80);
+		assert_eq!(std::mem::size_of::<ParamFunction>(), 72);
 	}
 
 	#[test]

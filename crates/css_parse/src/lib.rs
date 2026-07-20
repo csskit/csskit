@@ -284,6 +284,7 @@ pub use css_lexer::{
 };
 
 mod arena_box;
+mod arena_vec;
 mod comparison;
 mod cursor_compact_write_sink;
 #[cfg(feature = "egg")]
@@ -300,6 +301,7 @@ mod macros;
 mod parser;
 mod parser_checkpoint;
 mod parser_return;
+mod raw_vec;
 /// Various structs/enums that represent generic AST nodes.
 pub mod syntax;
 /// Test macros available if built with `features = ["testing"]`
@@ -315,6 +317,7 @@ pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 pub type Arena = bumpalo::Bump;
 
 pub use arena_box::*;
+pub use arena_vec::{Drain, IntoIter, Vec};
 pub use comparison::*;
 pub use cursor_compact_write_sink::*;
 #[cfg(feature = "egg")]

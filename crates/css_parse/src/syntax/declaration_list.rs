@@ -1,8 +1,7 @@
 use crate::{
 	CursorSink, Declaration, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
-	Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
+	Result, SemanticEq, Span, T, ToCursors, ToSpan, Vec, token_macros,
 };
-use bumpalo::collections::Vec;
 
 /// A generic struct that can be used for AST nodes representing a rule's block, that is only capable of having child
 /// declarations.

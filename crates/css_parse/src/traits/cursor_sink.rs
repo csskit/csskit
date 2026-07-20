@@ -1,5 +1,5 @@
-use crate::{Cursor, SourceCursor, Token};
-use bumpalo::collections::Vec;
+use crate::{Cursor, SourceCursor, Token, Vec};
+use allocator_api2::alloc::Allocator;
 
 /// This trait provides the generic `impl` that [ToCursors][crate::ToCursors] can use. This provides just enough API
 /// surface for nodes to put the cursors they represent into some buffer which can later be read, the details of which
@@ -14,7 +14,7 @@ pub trait SourceCursorSink<'a> {
 
 const SEPARATOR: Cursor = Cursor::dummy(Token::SPACE);
 
-impl<'a> CursorSink for Vec<'a, Cursor> {
+impl<'a, A: Allocator> CursorSink for Vec<'a, Cursor, A> {
 	fn append(&mut self, c: Cursor) {
 		// If two adjacent cursors which could not be re-tokenized in the same way if they were written out adjacently occur
 		// then they should be separated by some token.
@@ -27,7 +27,7 @@ impl<'a> CursorSink for Vec<'a, Cursor> {
 	}
 }
 
-impl<'a> SourceCursorSink<'a> for Vec<'a, SourceCursor<'a>> {
+impl<'a, A: Allocator> SourceCursorSink<'a> for Vec<'a, SourceCursor<'a>, A> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		// If two adjacent cursors which could not be re-tokenized in the same way if they were written out adjacently occur
 		// then they should be separated by some token.

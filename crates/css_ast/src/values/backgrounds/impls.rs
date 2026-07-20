@@ -12,18 +12,18 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<BackgroundColorStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<BackgroundImageStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundRepeatStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundAttachmentStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundPositionStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundClipStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundOriginStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundSizeStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundRepeatXStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundRepeatYStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundRepeatBlockStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BackgroundRepeatInlineStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<BackgroundImageStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundRepeatStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundAttachmentStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundPositionStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundClipStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundOriginStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundSizeStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundRepeatXStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundRepeatYStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundRepeatBlockStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BackgroundRepeatInlineStyleValue>(), 24);
 	}
 
 	#[test]

@@ -41,7 +41,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ImageSetFunction>(), 56);
+		assert_eq!(std::mem::size_of::<ImageSetFunction>(), 48);
 	}
 
 	#[test]

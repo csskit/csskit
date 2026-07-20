@@ -1,5 +1,4 @@
-use crate::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result};
-use bumpalo::collections::Vec;
+use crate::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, Vec};
 
 pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 	/// SelectorComponent represents a Selector, or Combinator.

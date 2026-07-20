@@ -6,12 +6,12 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransitionPropertyStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TransitionDurationStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TransitionTimingFunctionStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TransitionDelayStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TransitionStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TransitionBehaviorStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<TransitionPropertyStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TransitionDurationStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TransitionTimingFunctionStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TransitionDelayStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TransitionStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TransitionBehaviorStyleValue>(), 24);
 	}
 
 	#[test]

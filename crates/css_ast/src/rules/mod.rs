@@ -44,7 +44,7 @@ mod prelude {
 	#[cfg(feature = "visitable")]
 	pub(crate) use crate::PropertyKind;
 	pub(crate) use crate::{CssAtomSet, CssDiagnostic, CssMetadata, StyleValue, stylesheet::Rule};
-	pub(crate) use bumpalo::collections::Vec;
+	pub(crate) use css_parse::Vec;
 	pub(crate) use css_parse::{
 		Block, CommaSeparated, ComponentValues, Cursor, Declaration, DeclarationList, DeclarationValue, Diagnostic,
 		FeatureConditionList, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,

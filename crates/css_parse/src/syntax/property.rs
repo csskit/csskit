@@ -1,5 +1,4 @@
-use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, ToCursors, Cursor, Kind, BangImportant, diagnostics};
-use bumpalo::collections::{Vec, vec::IntoIter};
+use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, ToCursors, Cursor, Kind, BangImportant, diagnostics, Vec, IntoIter};
 
 /// This is a generic type that can be used for AST nodes representing a [Declaration][1], aka "property".
 ///

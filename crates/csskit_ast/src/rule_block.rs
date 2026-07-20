@@ -1,6 +1,6 @@
 use crate::{CsskitAtomSet, WhenRule};
-use bumpalo::collections::Vec;
 use css_lexer::{Cursor, Kind, KindSet};
+use css_parse::Vec;
 use css_parse::{
 	Block, ComponentValues, DeclarationValue, Diagnostic, NodeWithMetadata, Parse, Parser, Peek,
 	Result as ParserResult, RuleVariants, T,
