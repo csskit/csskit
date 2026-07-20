@@ -1,6 +1,6 @@
 use super::prelude::*;
 use crate::selector::ComplexSelector;
-use css_parse::BumpBox;
+use css_parse::Box;
 
 ///
 /// ```md
@@ -140,7 +140,7 @@ pub enum SupportsFeature<'a> {
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T!['('],
-		BumpBox<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>,
+		Box<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		Option<T![')']>,
@@ -151,7 +151,7 @@ pub enum SupportsFeature<'a> {
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T!['('],
-		BumpBox<'a, SupportsCondition<'a>>,
+		Box<'a, SupportsCondition<'a>>,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T![')'],
@@ -184,11 +184,11 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 			if is_declaration {
 				let property = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
 				let close = p.parse_if_peek::<T![')']>()?;
-				return Ok(Self::Property(open, BumpBox::new_in(p.bump(), property), close));
+				return Ok(Self::Property(open, Box::new_in(p.bump(), property), close));
 			}
 			let condition = p.parse::<SupportsCondition>()?;
 			let close = p.parse::<T![')']>()?;
-			return Ok(Self::Condition(open, BumpBox::new_in(p.bump(), condition), close));
+			return Ok(Self::Condition(open, Box::new_in(p.bump(), condition), close));
 		}
 		if p.peek::<T![Function]>() {
 			let function = p.parse::<T![Function]>()?;

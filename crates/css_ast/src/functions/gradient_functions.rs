@@ -1,4 +1,4 @@
-use css_parse::BumpBox;
+use css_parse::Box;
 
 use super::prelude::*;
 use crate::LengthPercentage;
@@ -13,13 +13,13 @@ use crate::LengthPercentage;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum Gradient<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
-	LinearGradientFunction(BumpBox<'a, LinearGradientFunction<'a>>),
+	LinearGradientFunction(Box<'a, LinearGradientFunction<'a>>),
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
-	RepeatingLinearGradientFunction(BumpBox<'a, RepeatingLinearGradientFunction<'a>>),
+	RepeatingLinearGradientFunction(Box<'a, RepeatingLinearGradientFunction<'a>>),
 	#[atom(CssAtomSet::RadialGradient)]
-	RadialGradientFunction(BumpBox<'a, RadialGradientFunction<'a>>),
+	RadialGradientFunction(Box<'a, RadialGradientFunction<'a>>),
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
-	RepeatingRadialGradientFunction(BumpBox<'a, RepeatingRadialGradientFunction<'a>>),
+	RepeatingRadialGradientFunction(Box<'a, RepeatingRadialGradientFunction<'a>>),
 }
 
 /// <https://drafts.csswg.org/css-images-3/#funcdef-linear-gradient>

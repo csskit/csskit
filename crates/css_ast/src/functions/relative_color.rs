@@ -1,6 +1,6 @@
 use super::prelude::*;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
-use css_parse::BumpBox;
+use css_parse::Box;
 
 /// The `from <color>` clause in relative color syntax.
 ///
@@ -645,16 +645,16 @@ impl<'a> Peek<'a> for ColorRelativeFunction<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum RelativeColorFunction<'a> {
-	Color(BumpBox<'a, ColorRelativeFunction<'a>>),
-	Rgb(BumpBox<'a, RgbRelativeFunction<'a>>),
-	Rgba(BumpBox<'a, RgbaRelativeFunction<'a>>),
-	Hsl(BumpBox<'a, HslRelativeFunction<'a>>),
-	Hsla(BumpBox<'a, HslaRelativeFunction<'a>>),
-	Hwb(BumpBox<'a, HwbRelativeFunction<'a>>),
-	Lab(BumpBox<'a, LabRelativeFunction<'a>>),
-	Lch(BumpBox<'a, LchRelativeFunction<'a>>),
-	Oklab(BumpBox<'a, OklabRelativeFunction<'a>>),
-	Oklch(BumpBox<'a, OklchRelativeFunction<'a>>),
+	Color(Box<'a, ColorRelativeFunction<'a>>),
+	Rgb(Box<'a, RgbRelativeFunction<'a>>),
+	Rgba(Box<'a, RgbaRelativeFunction<'a>>),
+	Hsl(Box<'a, HslRelativeFunction<'a>>),
+	Hsla(Box<'a, HslaRelativeFunction<'a>>),
+	Hwb(Box<'a, HwbRelativeFunction<'a>>),
+	Lab(Box<'a, LabRelativeFunction<'a>>),
+	Lch(Box<'a, LchRelativeFunction<'a>>),
+	Oklab(Box<'a, OklabRelativeFunction<'a>>),
+	Oklch(Box<'a, OklchRelativeFunction<'a>>),
 }
 
 #[cfg(feature = "chromashift")]

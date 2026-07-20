@@ -1,6 +1,6 @@
 use super::super::prelude::*;
 use crate::{types::Ratio, units::Length};
-use css_parse::{BumpBox, discrete_feature, ranged_feature};
+use css_parse::{Box, discrete_feature, ranged_feature};
 
 ranged_feature!(
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -93,7 +93,7 @@ impl<'a> Peek<'a> for StyleQuery<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum StyleFeature<'a> {
-	Declaration(BumpBox<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>),
+	Declaration(Box<'a, Declaration<'a, StyleValue<'a>, CssMetadata>>),
 	CustomProperty(T![Ident]),
 }
 
@@ -107,7 +107,7 @@ impl<'a> Parse<'a> for StyleFeature<'a> {
 			return Ok(Self::CustomProperty(p.parse::<T![Ident]>()?));
 		}
 		let decl = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
-		Ok(Self::Declaration(BumpBox::new_in(p.bump(), decl)))
+		Ok(Self::Declaration(Box::new_in(p.bump(), decl)))
 	}
 }
 

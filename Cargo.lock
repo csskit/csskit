@@ -713,6 +713,7 @@ dependencies = [
 name = "css_parse"
 version = "0.0.27"
 dependencies = [
+ "allocator-api2",
  "bitmask-enum",
  "bumpalo",
  "css_lexer",

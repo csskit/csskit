@@ -5,10 +5,9 @@ include!(concat!(env!("OUT_DIR"), "/css_apply_queryable_exit_methods.rs"));
 
 use bumpalo::collections::Vec;
 use css_parse::{
-	Block, BumpBox, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup,
-	DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata,
-	Optionals2, Optionals3, Optionals4, Optionals5, QualifiedRule, RuleList, ToSpan, syntax::BadDeclaration,
-	token_macros,
+	Block, Box, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup, DeclarationList,
+	DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2, Optionals3,
+	Optionals4, Optionals5, QualifiedRule, RuleList, ToSpan, syntax::BadDeclaration, token_macros,
 };
 use visit_flow::{VisitFlow, try_visit};
 
@@ -347,13 +346,13 @@ where
 	}
 }
 
-impl<'a, T: VisitableMut> VisitableMut for BumpBox<'a, T> {
+impl<'a, T: VisitableMut> VisitableMut for Box<'a, T> {
 	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
 		(**self).accept_mut(v)
 	}
 }
 
-impl<'a, T: Visitable> Visitable for BumpBox<'a, T> {
+impl<'a, T: Visitable> Visitable for Box<'a, T> {
 	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
 		(**self).accept(v)
 	}

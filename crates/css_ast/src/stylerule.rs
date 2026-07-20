@@ -3,7 +3,7 @@ use crate::{
 	rules,
 };
 use css_parse::{
-	BumpBox, Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
+	Box, Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
 	Result as ParserResult, RuleVariants,
 };
 use csskit_derives::*;
@@ -63,7 +63,7 @@ macro_rules! nested_group_rule {
 			$(
 				$name(rules::$ty$(<$a>)?),
 			)+
-			Supports(BumpBox<'a, rules::SupportsRule<'a>>),
+			Supports(Box<'a, rules::SupportsRule<'a>>),
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
 			Unknown(UnknownQualifiedRule<'a>),
@@ -87,7 +87,7 @@ impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
 			)+ ) => {
 				match p.to_atom::<CssAtomSet>(name) {
 					$(CssAtomSet::$name => p.parse::<rules::$ty>().map(Self::$name),)+
-					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(BumpBox::new_in(p.bump(), r))),
+					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(Box::new_in(p.bump(), r))),
 					_ => Err(Diagnostic::new(name.into(), Diagnostic::unexpected_at_rule))?,
 				}
 			}

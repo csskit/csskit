@@ -1,105 +1,126 @@
-use crate::{Cursor, CursorSink, Parse, Parser, Peek, SemanticEq, ToCursors};
-use bumpalo::Bump;
+use crate::{Arena, Cursor, CursorSink, Parse, Parser, Peek, SemanticEq, ToCursors};
+use allocator_api2::alloc::{Allocator, Layout};
 use css_lexer::{KindSet, Span, ToSpan};
-use std::fmt;
-use std::hash::{Hash, Hasher};
-use std::ops::{Deref, DerefMut};
+use std::{
+	fmt,
+	hash::{Hash, Hasher},
+	marker::PhantomData,
+	ops::{Deref, DerefMut},
+	ptr::NonNull,
+};
 
-/// An arena-allocated box that retains a reference to its [`Bump`] allocator, enabling [`Clone`] support.
+/// An arena-allocated box that retains a reference to its allocator, enabling [`Clone`] support.
 ///
 /// Unlike [`bumpalo::boxed::Box`], which only stores a mutable reference to the allocated value (and thus cannot
-/// implement [`Clone`] without the allocator), `BumpBox` stores both the allocator reference and the value pointer.
+/// implement [`Clone`] without the allocator), `Box` stores both the allocator reference and the value pointer.
 /// This allows it to allocate a new copy during [`Clone::clone`].
 ///
 /// This type is intended for recursive AST nodes (e.g. `color-mix()` containing nested `<color>` values) where
 /// indirection is required to break the cycle, but the allocation should still live in the parsing arena.
-pub struct BumpBox<'a, T> {
-	bump: &'a Bump,
-	ptr: &'a mut T,
+#[repr(C)]
+pub struct Box<'a, T, A: Allocator = &'a Arena> {
+	ptr: NonNull<T>,
+	alloc: A,
+	marker: PhantomData<&'a mut T>,
 }
 
-impl<'a, T> BumpBox<'a, T> {
-	/// Allocates a new value in the given bump allocator.
+impl<'a, T, A: Allocator> Box<'a, T, A> {
+	/// Allocate `value` in the given `alloc`.
 	#[inline]
-	pub fn new_in(bump: &'a Bump, value: T) -> Self {
-		Self { bump, ptr: bump.alloc(value) }
+	pub fn new_in(alloc: A, value: T) -> Self {
+		let ptr = alloc.allocate(Layout::new::<T>()).expect("arena exhausted").cast::<T>();
+		unsafe { ptr.as_ptr().write(value) };
+		Self { ptr, alloc, marker: PhantomData }
 	}
 }
 
-impl<T> Deref for BumpBox<'_, T> {
+impl<'a, T, A: Allocator> Deref for Box<'a, T, A> {
 	type Target = T;
 
 	#[inline]
 	fn deref(&self) -> &T {
-		self.ptr
+		unsafe { self.ptr.as_ref() }
 	}
 }
 
-impl<T> DerefMut for BumpBox<'_, T> {
+impl<'a, T, A: Allocator> DerefMut for Box<'a, T, A> {
 	#[inline]
 	fn deref_mut(&mut self) -> &mut T {
-		self.ptr
+		unsafe { self.ptr.as_mut() }
 	}
 }
 
-impl<T: Clone> Clone for BumpBox<'_, T> {
+impl<'a, T, A: Allocator> Drop for Box<'a, T, A> {
+	fn drop(&mut self) {
+		unsafe { self.ptr.as_ptr().drop_in_place() };
+	}
+}
+
+impl<'a, T: Clone, A: Allocator + Clone> Clone for Box<'a, T, A> {
 	fn clone(&self) -> Self {
-		let cloned = self.ptr.clone();
-		Self { bump: self.bump, ptr: self.bump.alloc(cloned) }
+		Box::new_in(self.alloc.clone(), (**self).clone())
 	}
 }
 
-impl<T: fmt::Debug> fmt::Debug for BumpBox<'_, T> {
+impl<'a, T: fmt::Debug, A: Allocator> fmt::Debug for Box<'a, T, A> {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
 		fmt::Debug::fmt(&**self, f)
 	}
 }
 
-impl<T: PartialEq> PartialEq for BumpBox<'_, T> {
+impl<'a, T: fmt::Display, A: Allocator> fmt::Display for Box<'a, T, A> {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		fmt::Display::fmt(&**self, f)
+	}
+}
+
+impl<'a, T: PartialEq, A: Allocator> PartialEq for Box<'a, T, A> {
 	fn eq(&self, other: &Self) -> bool {
 		(**self).eq(&**other)
 	}
 }
 
-impl<T: Eq> Eq for BumpBox<'_, T> {}
+impl<'a, T: Eq, A: Allocator> Eq for Box<'a, T, A> {}
 
-impl<T: PartialOrd> PartialOrd for BumpBox<'_, T> {
+impl<'a, T: PartialOrd, A: Allocator> PartialOrd for Box<'a, T, A> {
 	fn partial_cmp(&self, other: &Self) -> Option<std::cmp::Ordering> {
 		(**self).partial_cmp(&**other)
 	}
 }
 
-impl<T: Ord> Ord for BumpBox<'_, T> {
+impl<'a, T: Ord, A: Allocator> Ord for Box<'a, T, A> {
 	fn cmp(&self, other: &Self) -> std::cmp::Ordering {
 		(**self).cmp(&**other)
 	}
 }
 
-impl<T: Hash> Hash for BumpBox<'_, T> {
+impl<'a, T: Hash, A: Allocator> Hash for Box<'a, T, A> {
 	fn hash<H: Hasher>(&self, state: &mut H) {
-		(**self).hash(state)
+		(**self).hash(state);
 	}
 }
 
-impl<T: ToCursors> ToCursors for BumpBox<'_, T> {
+impl<'a, T: ToCursors, A: Allocator> ToCursors for Box<'a, T, A> {
 	fn to_cursors(&self, s: &mut impl CursorSink) {
 		(**self).to_cursors(s);
 	}
 }
 
-impl<T: SemanticEq> SemanticEq for BumpBox<'_, T> {
+impl<'a, T: SemanticEq, A: Allocator> SemanticEq for Box<'a, T, A> {
 	fn semantic_eq(&self, other: &Self) -> bool {
 		(**self).semantic_eq(other)
 	}
 }
 
-impl<T: ToSpan> ToSpan for BumpBox<'_, T> {
+impl<'a, T: ToSpan, A: Allocator> ToSpan for Box<'a, T, A> {
 	fn to_span(&self) -> Span {
 		(**self).to_span()
 	}
 }
 
-impl<M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>> crate::NodeWithMetadata<M> for BumpBox<'_, T> {
+impl<'a, M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>, A: Allocator> crate::NodeWithMetadata<M>
+	for Box<'a, T, A>
+{
 	fn self_metadata(&self) -> M {
 		(**self).self_metadata()
 	}
@@ -109,7 +130,7 @@ impl<M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>> crate::NodeWithMetad
 	}
 }
 
-impl<'a, T: Peek<'a>> Peek<'a> for BumpBox<'a, T> {
+impl<'a, T: Peek<'a>, A: Allocator> Peek<'a> for Box<'a, T, A> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
 	#[inline(always)]
@@ -121,18 +142,18 @@ impl<'a, T: Peek<'a>> Peek<'a> for BumpBox<'a, T> {
 	}
 }
 
-impl<'a, T: Parse<'a>> Parse<'a> for BumpBox<'a, T> {
+impl<'a, T: Parse<'a>> Parse<'a> for Box<'a, T> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> crate::Result<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let value = T::parse(p)?;
-		Ok(BumpBox::new_in(p.bump(), value))
+		Ok(Box::new_in(p.bump(), value))
 	}
 }
 
 #[cfg(feature = "serde")]
-impl<T: serde::Serialize> serde::Serialize for BumpBox<'_, T> {
+impl<'a, T: serde::Serialize, A: Allocator> serde::Serialize for Box<'a, T, A> {
 	fn serialize<S: serde::Serializer>(&self, serializer: S) -> std::result::Result<S::Ok, S::Error> {
 		(**self).serialize(serializer)
 	}

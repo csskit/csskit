@@ -16,7 +16,8 @@ bench = false
 [dependencies]
 css_lexer = { workspace = true, features = ["bumpalo"] } # @release
 
-bumpalo = { workspace = true }
+allocator-api2 = { workspace = true }
+bumpalo = { workspace = true, features = ["allocator-api2"] }
 smallvec = { workspace = true }
 
 miette = { workspace = true, features = ["derive"], optional = true }
