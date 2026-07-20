@@ -1,4 +1,5 @@
 use crate::{CliResult, GlobalConfig, InputArgs};
+use allocator_api2::alloc::Allocator;
 use bumpalo::Bump;
 use clap::ValueEnum;
 use css_ast::{CssAtomSet, StyleSheet};
@@ -17,7 +18,7 @@ pub struct Location {
 }
 
 impl Location {
-	pub fn from_span(span: Span, index: &LineIndex) -> Self {
+	pub fn from_span<A: Allocator>(span: Span, index: &LineIndex<'_, A>) -> Self {
 		let (line, col) = index.line_and_column(span);
 		Self { line: line + 1, column: col + 1, start: usize::from(span.start()), end: usize::from(span.end()) }
 	}
@@ -117,12 +118,12 @@ pub trait Extract: Sized {
 
 	/// Format one row for text output.
 	#[allow(clippy::too_many_arguments)]
-	fn render_text(
+	fn render_text<A: Allocator>(
 		&self,
 		ctx: &Self::FileContext,
 		file: &str,
 		src: &str,
-		index: &LineIndex,
+		index: &LineIndex<'_, A>,
 		span: Span,
 		row: &Self::Row,
 		color: bool,

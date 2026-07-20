@@ -1,4 +1,6 @@
 use crate::SourceOffset;
+use allocator_api2::alloc::{Allocator, Global};
+use allocator_api2::boxed::Box;
 use std::{fmt::Display, hash::Hash, marker::PhantomData, ops::Add};
 
 /// Represents a range of text within a document, as a Start and End offset.
@@ -94,40 +96,30 @@ impl Span {
 /// binary search plus a per-line character count. Prefer this over [`Span::line_and_column`] whenever
 /// resolving more than a couple of spans against one source.
 #[derive(Debug, Clone)]
-pub struct LineIndex<'a> {
+pub struct LineIndex<'a, A: Allocator = Global> {
 	source: &'a str,
 	/// Byte offset of the start of each line. Always begins with 0.
-	#[cfg(feature = "bumpalo")]
-	line_starts: bumpalo::collections::Vec<'a, u32>,
-	#[cfg(not(feature = "bumpalo"))]
-	line_starts: Vec<u32>,
+	line_starts: Box<[u32], A>,
 }
 
-impl<'a> LineIndex<'a> {
+impl<'a> LineIndex<'a, Global> {
 	/// Build a line index for `source` in a single pass.
-	#[cfg(not(feature = "bumpalo"))]
 	pub fn new(source: &'a str) -> Self {
-		let mut line_starts = Vec::with_capacity(source.len() / 32 + 1);
-		line_starts.push(0);
-		for (i, b) in source.bytes().enumerate() {
-			if b == b'\n' {
-				line_starts.push(i as u32 + 1);
-			}
-		}
-		Self { source, line_starts }
+		Self::new_in(source, Global)
 	}
+}
 
-	/// Build a line index for `source` in a single pass, allocating the backing table in `bump`.
-	#[cfg(feature = "bumpalo")]
-	pub fn new_in(source: &'a str, bump: &'a bumpalo::Bump) -> Self {
-		let mut line_starts = bumpalo::collections::Vec::with_capacity_in(source.len() / 32 + 1, bump);
+impl<'a, A: Allocator> LineIndex<'a, A> {
+	/// Build a line index for `source` in a single pass, allocating the backing table in `alloc`.
+	pub fn new_in(source: &'a str, alloc: A) -> Self {
+		let mut line_starts = allocator_api2::vec::Vec::with_capacity_in(source.len() / 32 + 1, alloc);
 		line_starts.push(0);
 		for (i, b) in source.bytes().enumerate() {
 			if b == b'\n' {
 				line_starts.push(i as u32 + 1);
 			}
 		}
-		Self { source, line_starts }
+		Self { source, line_starts: line_starts.into_boxed_slice() }
 	}
 
 	/// Returns the zero-based `(line, column)` of the span's start, where column counts Unicode
@@ -287,24 +279,11 @@ mod test {
 		assert_eq!(vec.to_span(), Span::new(SourceOffset(3), SourceOffset(15)));
 	}
 
-	#[cfg(feature = "bumpalo")]
-	fn line_index<'a>(bump: &'a bumpalo::Bump, source: &'a str) -> LineIndex<'a> {
-		LineIndex::new_in(source, bump)
-	}
-	#[cfg(not(feature = "bumpalo"))]
-	fn line_index<'a>(_bump: &'a (), source: &'a str) -> LineIndex<'a> {
-		LineIndex::new(source)
-	}
-
 	#[test]
 	fn line_index_matches_scan() {
-		#[cfg(feature = "bumpalo")]
-		let bump = bumpalo::Bump::new();
-		#[cfg(not(feature = "bumpalo"))]
-		let bump = ();
 		// Includes a multibyte char (é = 2 bytes) so column-by-char and byte offsets diverge.
 		let source = "a\nbc\n\ndéf\nghi";
-		let index = line_index(&bump, source);
+		let index = LineIndex::new(source);
 		for offset in 0..=source.len() as u32 {
 			// Only test offsets on char boundaries, as spans always land on them.
 			if !source.is_char_boundary(offset as usize) {
@@ -317,12 +296,21 @@ mod test {
 
 	#[test]
 	fn line_index_empty_source() {
-		#[cfg(feature = "bumpalo")]
-		let bump = bumpalo::Bump::new();
-		#[cfg(not(feature = "bumpalo"))]
-		let bump = ();
-		let index = line_index(&bump, "");
+		let index = LineIndex::new("");
 		let span = Span::new(SourceOffset(0), SourceOffset(0));
 		assert_eq!(index.line_and_column(span), (0, 0));
+	}
+
+	#[test]
+	fn line_index_new_in_matches_new() {
+		let source = "a\nbc\n\ndéf\nghi";
+		let index = LineIndex::new_in(source, Global);
+		for offset in 0..=source.len() as u32 {
+			if !source.is_char_boundary(offset as usize) {
+				continue;
+			}
+			let span = Span::new(SourceOffset(offset), SourceOffset(offset));
+			assert_eq!(index.line_and_column(span), span.line_and_column(source), "offset {offset}");
+		}
 	}
 }
