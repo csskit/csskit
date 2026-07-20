@@ -1,6 +1,6 @@
 use super::prelude::*;
 use crate::{AngleOrZero, Length, LengthPercentage, NoneOr, NumberOrPercentage};
-use css_parse::BumpBox;
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions>
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -9,7 +9,7 @@ use css_parse::BumpBox;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum TransformFunction<'a> {
 	Matrix(MatrixFunction),
-	Matrix3d(BumpBox<'a, Matrix3dFunction>),
+	Matrix3d(Box<'a, Matrix3dFunction>),
 	Translate(TranslateFunction),
 	Translate3d(Translate3dFunction),
 	TranslateX(TranslatexFunction),

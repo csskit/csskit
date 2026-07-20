@@ -3,7 +3,7 @@ use crate::functions::color_mix_function::ColorMixFunction;
 use crate::functions::light_dark_function::LightDarkFunction;
 use crate::functions::relative_color::RelativeColorFunction;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
-use css_parse::BumpBox;
+use css_parse::Box;
 
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -68,10 +68,10 @@ impl<'a> Parse<'a> for CommaOrSlash {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorFunction<'a> {
-	Relative(BumpBox<'a, RelativeColorFunction<'a>>),
-	Color(BumpBox<'a, ColorFunctionColor>),
-	ColorMix(BumpBox<'a, ColorMixFunction<'a>>),
-	LightDark(BumpBox<'a, LightDarkFunction<'a>>),
+	Relative(Box<'a, RelativeColorFunction<'a>>),
+	Color(Box<'a, ColorFunctionColor>),
+	ColorMix(Box<'a, ColorMixFunction<'a>>),
+	LightDark(Box<'a, LightDarkFunction<'a>>),
 	Rgb(RgbFunction),
 	Rgba(RgbaFunction),
 	Hsl(HslFunction),
@@ -89,16 +89,16 @@ impl<'a> Parse<'a> for ColorFunction<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		// Check for relative colour syntax first: any colour function with `from` as 2nd token.
-		if p.peek::<BumpBox<RelativeColorFunction>>() {
+		if p.peek::<Box<RelativeColorFunction>>() {
 			return Ok(Self::Relative(p.parse()?));
 		}
-		if p.peek::<BumpBox<ColorFunctionColor>>() {
+		if p.peek::<Box<ColorFunctionColor>>() {
 			return Ok(Self::Color(p.parse()?));
 		}
-		if p.peek::<BumpBox<ColorMixFunction>>() {
+		if p.peek::<Box<ColorMixFunction>>() {
 			return Ok(Self::ColorMix(p.parse()?));
 		}
-		if p.peek::<BumpBox<LightDarkFunction>>() {
+		if p.peek::<Box<LightDarkFunction>>() {
 			return Ok(Self::LightDark(p.parse()?));
 		}
 		if p.peek::<RgbFunction>() {

@@ -2,7 +2,7 @@ use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
 use bumpalo::collections::Vec;
 use css_lexer::KindSet;
 use css_parse::{
-	BumpBox, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
+	Box, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
 	Result as ParserResult, RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
 use csskit_derives::*;
@@ -120,8 +120,8 @@ macro_rules! rule {
 				$name(rules::$ty$(<$a>)?),
 			)+
 			// Boxed variants for rarely used rules
-			Import(BumpBox<'a, rules::ImportRule<'a>>),
-			Supports(BumpBox<'a, rules::SupportsRule<'a>>),
+			Import(Box<'a, rules::ImportRule<'a>>),
+			Supports(Box<'a, rules::SupportsRule<'a>>),
 
 			UnknownAt(UnknownAtRule<'a>),
 			Style(StyleRule<'a>),
@@ -146,8 +146,8 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 			)+ ) => {
 				match p.to_atom::<CssAtomSet>(c) {
 					$($atoms => p.parse::<rules::$ty>().map(Self::$name),)+
-					CssAtomSet::Import => p.parse::<rules::ImportRule>().map(|r| Self::Import(BumpBox::new_in(p.bump(), r))),
-					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(BumpBox::new_in(p.bump(), r))),
+					CssAtomSet::Import => p.parse::<rules::ImportRule>().map(|r| Self::Import(Box::new_in(p.bump(), r))),
+					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(Box::new_in(p.bump(), r))),
 					_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 				}
 			}

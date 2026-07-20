@@ -2,7 +2,7 @@ mod named;
 mod system;
 
 use crate::{ColorFunction, CssAtomSet};
-use css_parse::{BumpBox, T};
+use css_parse::{Box, T};
 use csskit_derives::*;
 
 pub use named::*;
@@ -24,7 +24,7 @@ pub enum Color<'a> {
 	Hex(T![Hash]),
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Named(NamedColor),
-	Function(BumpBox<'a, ColorFunction<'a>>),
+	Function(Box<'a, ColorFunction<'a>>),
 }
 
 impl Color<'_> {
