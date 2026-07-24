@@ -9,6 +9,7 @@ use crate::{
 			is_ident_start_sequence,
 		},
 		is_escape_sequence, is_non_printable, is_quote, is_url_ident, is_whitespace,
+		simd_scan::{scan_bad_url, scan_byte, scan_ident, scan_line_comment, scan_string, scan_url},
 		tables::{ASCII_NEWLINE, ASCII_WHITESPACE},
 	},
 };
@@ -214,14 +215,9 @@ impl<'a> ByteCursor<'a> {
 				dashed_ident = true;
 			}
 			let scan_start = i;
-			while i < end {
-				let byte = bytes[i];
-				if !is_ident_byte(byte) {
-					break;
-				}
-				contains_non_lower_ascii |= byte.wrapping_sub(b'A') < 26;
-				i += 1;
-			}
+			let (off, upper) = scan_ident(&bytes[i..]);
+			i += off;
+			contains_non_lower_ascii |= upper;
 
 			let ascii_len = (i - scan_start) as u32;
 			let len = i as u32;
@@ -438,18 +434,9 @@ impl<'a> ByteCursor<'a> {
 					}
 				}
 				_ => {
-					// Bulk scan: find next ), \, or space (most common terminators)
+					// Bulk scan: find the next byte that needs per-byte handling.
 					let remaining = self.remaining_bytes();
-					let scan_end = match memchr::memchr3(b')', b'\\', b' ', remaining) {
-						Some(offset) => offset,
-						None => remaining.len(),
-					};
-					// Within scanned range, check for rare sentinels:
-					// whitespace/control (<=0x20), quotes, (, DEL, non-ASCII
-					let safe_end = remaining[..scan_end]
-						.iter()
-						.position(|&b| b <= 0x20 || b == b'\'' || b == b'"' || b == b'(' || b == 0x7F || b >= 0x80)
-						.unwrap_or(scan_end);
+					let safe_end = scan_url(remaining);
 					if safe_end > 0 {
 						self.advance_n(safe_end);
 						len += safe_end as u32;
@@ -484,34 +471,31 @@ impl<'a> ByteCursor<'a> {
 				break;
 			}
 			// Bulk-skip to the next ')' or '\\' — the only bytes that need special handling.
-			match memchr::memchr2(b')', b'\\', remaining) {
-				Some(offset) => {
-					// Skip everything before the sentinel.
-					if offset > 0 {
-						self.advance_n(offset);
-						len += offset as u32;
-					}
-					let b = self.peek_byte(0);
-					if b == b')' {
-						self.pos += 1;
-						len += 1;
-						break;
-					}
-					// b == b'\\'
-					self.pos += 1;
-					let next = self.peek_char();
-					if is_escape_sequence('\\', next) {
-						len += self.consume_escape_sequence();
-					} else if let Some(ch2) = self.next_char() {
-						len += ch2.len_utf8() as u32 + 1;
-					}
-				}
-				None => {
-					// No ')' or '\\' in remaining input — consume it all.
-					len += remaining.len() as u32;
-					self.advance_n(remaining.len());
-					break;
-				}
+			let offset = scan_bad_url(remaining);
+			if offset == remaining.len() {
+				// No ')' or '\\' in remaining input — consume it all.
+				len += remaining.len() as u32;
+				self.advance_n(remaining.len());
+				break;
+			}
+			// Skip everything before the sentinel.
+			if offset > 0 {
+				self.advance_n(offset);
+				len += offset as u32;
+			}
+			let b = self.peek_byte(0);
+			if b == b')' {
+				self.pos += 1;
+				len += 1;
+				break;
+			}
+			// b == b'\\'
+			self.pos += 1;
+			let next = self.peek_char();
+			if is_escape_sequence('\\', next) {
+				len += self.consume_escape_sequence();
+			} else if let Some(ch2) = self.next_char() {
+				len += ch2.len_utf8() as u32 + 1;
 			}
 		}
 		Token::new_bad_url(len)
@@ -731,18 +715,9 @@ impl<'a> ByteCursor<'a> {
 					}
 				}
 				_ => {
-					// Bulk scan: find next delimiter, backslash, or newline
+					// Bulk scan: find the next byte that needs per-byte handling.
 					let remaining = self.remaining_bytes();
-					let scan_end = match memchr::memchr3(delimiter, b'\\', b'\n', remaining) {
-						Some(offset) => offset,
-						None => remaining.len(),
-					};
-					// Within the scanned range, check for rare sentinels:
-					// \r (0x0D), \x0C (FF), \0 (NUL), or non-ASCII (>= 0x80)
-					let safe_end = remaining[..scan_end]
-						.iter()
-						.position(|&b| (b < 0x0E && (b == 0 || b == 0x0D || b == 0x0C)) || b >= 0x80)
-						.unwrap_or(scan_end);
+					let safe_end = scan_string(remaining, delimiter);
 					if safe_end > 0 {
 						self.advance_n(safe_end);
 						len += safe_end as u32;
@@ -1033,22 +1008,19 @@ impl<'a> Lexer<'a> {
 						};
 						loop {
 							let remaining = cursor.remaining_bytes();
-							match memchr::memchr(b'*', remaining) {
-								Some(offset) => {
-									let advance = offset + 1;
-									cursor.advance_n(advance);
-									len += advance as u32;
-									if cursor.peek_byte(0) == b'/' {
-										cursor.advance_n(1);
-										len += 1;
-										break;
-									}
-								}
-								None => {
-									len += remaining.len() as u32;
-									cursor.advance_n(remaining.len());
-									break;
-								}
+							let offset = scan_byte(remaining, b'*');
+							if offset == remaining.len() {
+								len += remaining.len() as u32;
+								cursor.advance_n(remaining.len());
+								break;
+							}
+							let advance = offset + 1;
+							cursor.advance_n(advance);
+							len += advance as u32;
+							if cursor.peek_byte(0) == b'/' {
+								cursor.advance_n(1);
+								len += 1;
+								break;
 							}
 						}
 						Token::new_comment(comment_style, len)
@@ -1062,14 +1034,7 @@ impl<'a> Lexer<'a> {
 							_ => CommentStyle::Single,
 						};
 						let remaining = cursor.remaining_bytes();
-						let line_end = match memchr::memchr3(b'\n', b'\r', 0x0C, remaining) {
-							Some(offset) => offset,
-							None => remaining.len(),
-						};
-						let safe_end = match memchr::memchr(0, &remaining[..line_end]) {
-							Some(nul_pos) => nul_pos,
-							None => line_end,
-						};
+						let safe_end = scan_line_comment(remaining);
 						len += safe_end as u32;
 						cursor.advance_n(safe_end);
 						Token::new_comment(comment_style, len)
