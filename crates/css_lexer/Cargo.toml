@@ -22,8 +22,8 @@ bumpalo = { workspace = true, features = [
 ], optional = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true } # @release
+fearless_simd = { workspace = true }
 fnv = { workspace = true, optional = true }
-memchr = { workspace = true }
 
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }
