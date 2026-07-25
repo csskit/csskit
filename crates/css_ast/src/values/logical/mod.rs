@@ -37,7 +37,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BlockSizeStyleValue;
+pub struct BlockSizeStyleValue<'a>;
 
 /// Represents the style value for `inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#inline-size).
 ///
@@ -69,7 +69,7 @@ pub struct BlockSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InlineSizeStyleValue;
+pub struct InlineSizeStyleValue<'a>;
 
 /// Represents the style value for `margin-block` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block).
 ///
@@ -103,7 +103,7 @@ pub struct InlineSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginBlockStyleValue;
+pub struct MarginBlockStyleValue<'a>;
 
 /// Represents the style value for `margin-block-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block-end).
 ///
@@ -137,7 +137,7 @@ pub struct MarginBlockStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginBlockEndStyleValue;
+pub struct MarginBlockEndStyleValue<'a>;
 
 /// Represents the style value for `margin-block-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-block-start).
 ///
@@ -171,7 +171,7 @@ pub struct MarginBlockEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginBlockStartStyleValue;
+pub struct MarginBlockStartStyleValue<'a>;
 
 /// Represents the style value for `margin-inline` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-inline).
 ///
@@ -205,7 +205,7 @@ pub struct MarginBlockStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginInlineStyleValue;
+pub struct MarginInlineStyleValue<'a>;
 
 /// Represents the style value for `margin-inline-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-inline-end).
 ///
@@ -239,7 +239,7 @@ pub struct MarginInlineStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginInlineEndStyleValue;
+pub struct MarginInlineEndStyleValue<'a>;
 
 /// Represents the style value for `margin-inline-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#margin-inline-start).
 ///
@@ -273,7 +273,7 @@ pub struct MarginInlineEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginInlineStartStyleValue;
+pub struct MarginInlineStartStyleValue<'a>;
 
 /// Represents the style value for `max-block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#max-block-size).
 ///
@@ -306,7 +306,7 @@ pub struct MarginInlineStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-block-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MaxBlockSizeStyleValue;
+pub struct MaxBlockSizeStyleValue<'a>;
 
 /// Represents the style value for `max-inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#max-inline-size).
 ///
@@ -339,7 +339,7 @@ pub struct MaxBlockSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.max-inline-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MaxInlineSizeStyleValue;
+pub struct MaxInlineSizeStyleValue<'a>;
 
 /// Represents the style value for `min-block-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#min-block-size).
 ///
@@ -372,7 +372,7 @@ pub struct MaxInlineSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-block-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MinBlockSizeStyleValue;
+pub struct MinBlockSizeStyleValue<'a>;
 
 /// Represents the style value for `min-inline-size` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#min-inline-size).
 ///
@@ -405,7 +405,7 @@ pub struct MinBlockSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-inline-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MinInlineSizeStyleValue;
+pub struct MinInlineSizeStyleValue<'a>;
 
 /// Represents the style value for `padding-block` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-block).
 ///
@@ -439,7 +439,7 @@ pub struct MinInlineSizeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingBlockStyleValue;
+pub struct PaddingBlockStyleValue<'a>;
 
 /// Represents the style value for `padding-block-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-block-end).
 ///
@@ -473,7 +473,7 @@ pub struct PaddingBlockStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingBlockEndStyleValue;
+pub struct PaddingBlockEndStyleValue<'a>;
 
 /// Represents the style value for `padding-block-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-block-start).
 ///
@@ -507,7 +507,7 @@ pub struct PaddingBlockEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingBlockStartStyleValue;
+pub struct PaddingBlockStartStyleValue<'a>;
 
 /// Represents the style value for `padding-inline` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-inline).
 ///
@@ -541,7 +541,7 @@ pub struct PaddingBlockStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingInlineStyleValue;
+pub struct PaddingInlineStyleValue<'a>;
 
 /// Represents the style value for `padding-inline-end` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-inline-end).
 ///
@@ -575,7 +575,7 @@ pub struct PaddingInlineStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingInlineEndStyleValue;
+pub struct PaddingInlineEndStyleValue<'a>;
 
 /// Represents the style value for `padding-inline-start` as defined in [css-logical-1](https://drafts.csswg.org/css-logical-1/#padding-inline-start).
 ///
@@ -609,4 +609,4 @@ pub struct PaddingInlineEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingInlineStartStyleValue;
+pub struct PaddingInlineStartStyleValue<'a>;

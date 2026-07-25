@@ -11,13 +11,13 @@ use crate::{InflexibleBreadth, TrackBreadth};
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MinmaxFunction {
+pub struct MinmaxFunction<'a> {
 	#[atom(CssAtomSet::Minmax)]
 	pub name: T![Function],
-	pub min: InflexibleBreadth,
+	pub min: InflexibleBreadth<'a>,
 	#[semantic_eq(skip)]
 	pub comma: T![,],
-	pub max: TrackBreadth,
+	pub max: TrackBreadth<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -30,7 +30,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<MinmaxFunction>(), 68);
+		assert_eq!(std::mem::size_of::<MinmaxFunction>(), 96);
 	}
 
 	#[test]

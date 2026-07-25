@@ -63,7 +63,7 @@ pub struct BackgroundBlendModeStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.isolation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct IsolationStyleValue;
+pub struct IsolationStyleValue<'a>;
 
 /// Represents the style value for `mix-blend-mode` as defined in [compositing-2](https://drafts.csswg.org/compositing-2/#mix-blend-mode).
 ///
@@ -92,4 +92,4 @@ pub struct IsolationStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mix-blend-mode"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MixBlendModeStyleValue {}
+pub enum MixBlendModeStyleValue<'a> {}

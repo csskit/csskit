@@ -2,4 +2,4 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::Image<'a>>);
+struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::Value<'a, crate::Image<'a>>>);

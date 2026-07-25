@@ -7,5 +7,5 @@ enum Foo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
-    Color(crate::Color<'a>, crate::Color<'a>),
+    Color(crate::Value<'a, crate::Color<'a>>, crate::Value<'a, crate::Color<'a>>),
 }

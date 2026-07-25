@@ -65,6 +65,7 @@ pub trait GenerateDefinition {
 		generics: &Generics,
 		derives_parse: bool,
 		derives_visitable: bool,
+		derives_node_with_metadata: bool,
 	) -> TokenStream;
 }
 
@@ -286,14 +287,53 @@ impl ToType for Def {
 	}
 }
 
+/// The substitution wrapper a `<type>` reference should be wrapped in.
+#[derive(Clone, Copy, PartialEq, Eq)]
+enum WrapperKind {
+	/// `Value<'a, T>` — arbitrary substitution functions only (var/env/attr/if/first-valid).
+	Value,
+	/// `CalcableValue<'a, T>` — substitution functions plus typed math functions (calc/min/...).
+	Calcable,
+}
+
+/// The set of numeric `<type>` names that permit typed math functions (`calc()`, `min()`, ...)
+/// and therefore wrap in `CalcableValue<'a, T>` rather than `Value<'a, T>`.
+fn is_calcable_type(name: &str) -> bool {
+	matches!(
+		name,
+		"Integer"
+			| "Number"
+			| "Length"
+			| "LengthPercentage"
+			| "Percentage"
+			| "Angle" | "Time"
+			| "Frequency"
+			| "Flex" | "NumberLength"
+			| "NumberPercentage"
+			| "LengthPercentageOrFlex"
+			| "OpacityValue"
+			| "Resolution"
+	)
+}
+
+/// Every named `<type>` reference is wrapped: numeric types in `CalcableValue<'a, T>`,
+/// everything else in `Value<'a, T>`. The wrapper always supplies `'a`; whether the inner
+/// `T` carries its own lifetime is decided separately via `DefType::maybe_unsized`.
+fn value_wrapper_for(name: &str) -> WrapperKind {
+	if is_calcable_type(name) { WrapperKind::Calcable } else { WrapperKind::Value }
+}
+
 impl ToType for DefType {
 	fn to_types(&self) -> Vec<TokenStream> {
 		let ty = &self.ident;
-		let type_name = quote! { crate::#ty };
+		// Every named <type> is wrapped in Value<'a, T> / CalcableValue<'a, T>. The wrapper
+		// supplies 'a; the inner T carries its own <'a> only if it is intrinsically unsized
+		// (e.g. Color<'a>). Numeric primitives (Integer, Length, ...) carry no own lifetime.
+		let wrapper = value_wrapper_for(self.ident_str());
 		let generics = self.get_generics();
-		let base_type = quote! { #type_name #generics };
+		let base_type = quote! { crate::#ty #generics };
 
-		let wrapped_type = match self.range {
+		let range_wrapped = match self.range {
 			DefRange::None | DefRange::Fixed(_) => base_type,
 			DefRange::Range(Range { start, end }) => {
 				if start == end {
@@ -321,6 +361,11 @@ impl ToType for DefType {
 				let max = end as i32;
 				quote! { crate::Ranged<#base_type, #min, #max> }
 			}
+		};
+
+		let wrapped_type = match wrapper {
+			WrapperKind::Value => quote! { crate::Value<'a, #range_wrapped> },
+			WrapperKind::Calcable => quote! { crate::CalcableValue<'a, #range_wrapped> },
 		};
 
 		vec![wrapped_type]
@@ -590,7 +635,9 @@ impl DefExt for Def {
 					::csskit_derives::ToCursors,
 					::csskit_derives::ToSpan,
 					::csskit_derives::SemanticEq,
+					::csskit_derives::NodeWithMetadata,
 					Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+				#[metadata(delegate)]
 				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
 				pub enum #keyword_name {
@@ -639,7 +686,7 @@ impl DefExt for Def {
 		let single_type = if let Some(inner) = single_inner {
 			let single_ident = Self::single_ident(ident);
 			let generics = inner.get_generics();
-			let def = inner.generate_definition(vis, &single_ident, &generics, true, true);
+			let def = inner.generate_definition(vis, &single_ident, &generics, true, true, true);
 			quote! {
 				#[derive(
 					::csskit_derives::Parse,
@@ -647,7 +694,9 @@ impl DefExt for Def {
 					::csskit_derives::ToSpan,
 					::csskit_derives::ToCursors,
 					::csskit_derives::SemanticEq,
+					::csskit_derives::NodeWithMetadata,
 					Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+				#[metadata(delegate)]
 				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 				#def
@@ -678,7 +727,7 @@ impl DefExt for Def {
 					format_ident!("{}Options{}", ident, i + 1)
 				};
 				let generics = inner.get_generics();
-				let def = inner.generate_definition(vis, &opts_ident, &generics, true, true);
+				let def = inner.generate_definition(vis, &opts_ident, &generics, true, true, true);
 				result.extend(quote! {
 					#[derive(
 						::csskit_derives::Parse,
@@ -686,7 +735,9 @@ impl DefExt for Def {
 						::csskit_derives::ToSpan,
 						::csskit_derives::ToCursors,
 						::csskit_derives::SemanticEq,
+						::csskit_derives::NodeWithMetadata,
 						Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+					#[metadata(delegate)]
 					#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 					#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 					#def
@@ -710,6 +761,7 @@ impl GenerateDefinition for Def {
 		generics: &Generics,
 		derives_parse: bool,
 		derives_visitable: bool,
+		_derives_node_with_metadata: bool,
 	) -> TokenStream {
 		let (_, type_generics, where_clause) = generics.split_for_impl();
 		match self.suggested_data_type() {
@@ -734,13 +786,24 @@ impl GenerateDefinition for Def {
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Ordered) => {
 						let single_ident = Self::single_ident(ident);
+						// Check if the single helper struct needs a lifetime.
+						// The single inner is determined by find_map over defs with keyword_prefix_name.
+						let single_needs_lifetime = defs.iter().any(|d| match d {
+							Def::Optional(inner) => inner.keyword_prefix_name().is_some() && inner.maybe_unsized(),
+							other => other.keyword_prefix_name().is_some() && other.maybe_unsized(),
+						});
+						let single_generics = if single_needs_lifetime {
+							quote! { <'a> }
+						} else {
+							quote! {}
+						};
 						let types = defs.iter().map(|def| {
 							let ty = if let Self::Optional(inner) = def {
 								if matches!(inner.as_ref(), Self::Ident(_)) {
 									// Optional(Ident(kw)) references standalone keyword type
 									def.to_type()
 								} else if inner.keyword_prefix_name().is_some() {
-									quote! { Option<#single_ident> }
+									quote! { Option<#single_ident #single_generics> }
 								} else if inner.is_all_keywords() {
 									let keyword_name = Self::keyword_ident(ident);
 									quote! { Option<#keyword_name> }
@@ -748,7 +811,7 @@ impl GenerateDefinition for Def {
 									def.to_type()
 								}
 							} else if def.keyword_prefix_name().is_some() {
-								quote! { #single_ident }
+								quote! { #single_ident #single_generics }
 							} else if def.is_all_keywords() {
 								let keyword_name = Self::keyword_ident(ident);
 								quote! { #keyword_name }

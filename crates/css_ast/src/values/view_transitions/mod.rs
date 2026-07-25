@@ -61,7 +61,7 @@ pub struct ViewTransitionClassStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-group"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ViewTransitionGroupStyleValue {}
+pub enum ViewTransitionGroupStyleValue<'a> {}
 
 /// Represents the style value for `view-transition-name` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-name).
 ///
@@ -90,7 +90,7 @@ pub enum ViewTransitionGroupStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-name"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ViewTransitionNameStyleValue;
+pub struct ViewTransitionNameStyleValue<'a>;
 
 /// Represents the style value for `view-transition-scope` as defined in [css-view-transitions-2](https://drafts.csswg.org/css-view-transitions-2/#view-transition-scope).
 ///

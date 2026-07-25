@@ -3,4 +3,8 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
-struct Foo<'a>(pub crate::AutoOr<(crate::Color<'a>, crate::Color<'a>)>);
+struct Foo<'a>(
+    pub crate::AutoOr<
+        (crate::Value<'a, crate::Color<'a>>, crate::Value<'a, crate::Color<'a>>),
+    >,
+);

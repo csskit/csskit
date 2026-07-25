@@ -177,6 +177,7 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 		if !Self::valid_declaration_name(p, name) {
 			return Self::parse_unknown_declaration_value(p, name);
 		}
+
 		let checkpoint = p.checkpoint();
 		if let Ok(val) = Self::parse_specified_declaration_value(p, name) {
 			let c = p.peek_n(1);

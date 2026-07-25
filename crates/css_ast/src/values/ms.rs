@@ -4,7 +4,7 @@
 //! with legacy stylesheets targeting IE/Edge Legacy.
 
 use super::prelude::*;
-use crate::{FilterValueList, Length, PositionOne, PositionTwo};
+use crate::{CalcableValue, FilterValueList, Length, PositionOne, PositionTwo};
 use css_parse::{Cursor, Parse, Parser, Result as ParseResult, T};
 
 /// `-ms-overflow-style` — IE/Edge scrollbar display behaviour.
@@ -118,7 +118,7 @@ pub enum MsUserSelectStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsTextSizeAdjustStyleValue;
+pub struct MsTextSizeAdjustStyleValue<'a>;
 
 /// `-ms-flex` — IE10 alias for `flex`.
 #[syntax(" none | [ <'flex-grow'> <'flex-shrink'>? || <'flex-basis'> ] ")]
@@ -136,7 +136,7 @@ pub struct MsTextSizeAdjustStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsFlexStyleValue;
+pub struct MsFlexStyleValue<'a>;
 
 /// `-ms-flex-order` — IE10 alias for `order`.
 #[syntax(" <integer> ")]
@@ -154,7 +154,7 @@ pub struct MsFlexStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsFlexOrderStyleValue;
+pub struct MsFlexOrderStyleValue<'a>;
 
 /// `-ms-flex-direction` — IE10 alias for `flex-direction`.
 #[syntax(" row | row-reverse | column | column-reverse ")]
@@ -225,7 +225,7 @@ pub struct MsFlexFlowStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsFlexPositiveStyleValue;
+pub struct MsFlexPositiveStyleValue<'a>;
 
 /// `-ms-flex-negative` — IE10 alias for `flex-shrink`.
 #[syntax(" <number [0,∞]> ")]
@@ -243,7 +243,7 @@ pub struct MsFlexPositiveStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsFlexNegativeStyleValue;
+pub struct MsFlexNegativeStyleValue<'a>;
 
 /// `-ms-flex-preferred-size` — IE10 alias for `flex-basis`.
 #[syntax(" content | <'width'> ")]
@@ -261,7 +261,7 @@ pub struct MsFlexNegativeStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexPreferredSizeStyleValue {}
+pub enum MsFlexPreferredSizeStyleValue<'a> {}
 
 /// `-ms-flex-pack` — IE10 alias for `justify-content`.
 ///
@@ -389,17 +389,19 @@ pub struct MsTransformStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsTransformOriginStyleValue {}
+pub enum MsTransformOriginStyleValue<'a> {}
 
-impl<'a> Parse<'a> for MsTransformOriginStyleValue {
+impl<'a> Parse<'a> for MsTransformOriginStyleValue<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParseResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let first = p.parse::<PositionOne>()?;
-		let Some(second) = p.parse_if_peek::<PositionOne>()? else { return Ok(Self::PositionOne(first)) };
+		let Some(second) = p.parse_if_peek::<PositionOne>()? else {
+			return Ok(Self::PositionOne(crate::Value::Literal(first)));
+		};
 		let two = PositionTwo::from_two(p, first, second)?;
-		Ok(Self::PositionTwo(two, p.parse_if_peek::<Length>()?))
+		Ok(Self::PositionTwo(crate::Value::Literal(two), p.parse_if_peek::<CalcableValue<Length>>()?))
 	}
 }
 

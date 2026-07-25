@@ -63,7 +63,7 @@ pub enum BackfaceVisibilityStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.perspective"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PerspectiveStyleValue;
+pub struct PerspectiveStyleValue<'a>;
 
 /// Represents the style value for `perspective-origin` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#perspective-origin).
 ///
@@ -93,7 +93,7 @@ pub struct PerspectiveStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.perspective-origin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PerspectiveOriginStyleValue;
+pub struct PerspectiveOriginStyleValue<'a>;
 
 // /// Represents the style value for `rotate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#rotate).
 // ///
@@ -138,7 +138,7 @@ pub struct PerspectiveOriginStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum RotateStyleValue {}
+// pub enum RotateStyleValue<'a> {}
 
 /// Represents the style value for `scale` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#scale).
 ///
@@ -167,7 +167,7 @@ pub struct PerspectiveOriginStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scale"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScaleStyleValue;
+pub struct ScaleStyleValue<'a>;
 
 /// Represents the style value for `transform` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform).
 ///
@@ -256,7 +256,7 @@ pub enum TransformBoxStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-origin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TransformOriginStyleValue {}
+pub enum TransformOriginStyleValue<'a> {}
 
 /// Represents the style value for `transform-style` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-style).
 ///
@@ -315,4 +315,4 @@ pub enum TransformStyleStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.translate"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TranslateStyleValue;
+pub struct TranslateStyleValue<'a>;

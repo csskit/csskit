@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<PageStyleValue>(), 24);
 	}
 
 	#[test]

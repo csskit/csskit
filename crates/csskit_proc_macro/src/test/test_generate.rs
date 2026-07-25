@@ -27,7 +27,7 @@ macro_rules! assert_snapshot {
 #[test]
 fn value_lone_type() {
 	let syntax = to_valuedef! { <integer> };
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "value_lone_type");
 }
 
@@ -83,14 +83,14 @@ fn multiple_keywords_derive_parse() {
 #[test]
 fn value_group_type_keyword() {
 	let syntax = to_valuedef!( <length [1,]> | line-through );
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "value_group_type_keyword");
 }
 
 #[test]
 fn value_with_multiplier_range() {
 	let syntax = to_valuedef!( <length>{2,4} );
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "value_with_multiplier_range");
 }
 
@@ -111,14 +111,14 @@ fn keyword_or_type() {
 #[test]
 fn custom_type_with_checks() {
 	let syntax = to_valuedef!(" foo | <length-percentage [0,∞]> ");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "custom_type_with_checks");
 }
 
 #[test]
 fn custom_type_with_checks_derive_parse() {
 	let syntax = to_valuedef!(" foo | <length-percentage [0,∞]> ");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "custom_type_with_checks_derive_parse");
 }
 
@@ -147,6 +147,7 @@ fn custom_function_variant_with_multiplier_args() {
 fn custom_function_all_optionals() {
 	let syntax = to_valuedef!(" <'caret-color'> || <'caret-animation'> || <'caret-shape'> ");
 	let data = to_deriveinput! { struct Foo<'a>; };
+
 	assert_snapshot!(syntax, data, "custom_function_all_optionals");
 }
 
@@ -154,6 +155,7 @@ fn custom_function_all_optionals() {
 fn ordered_custom_function_last_option() {
 	let syntax = to_valuedef!(" <'caret-color'> <'caret-animation'>? ");
 	let data = to_deriveinput! { struct Foo<'a>; };
+
 	assert_snapshot!(syntax, data, "ordered_custom_function_last_option");
 }
 
@@ -188,14 +190,14 @@ fn bounded_range_multiplier_is_optimized_to_options() {
 #[test]
 fn bounded_range_multiplier_is_optimized_to_options_with_lifetimes_when_necessary() {
 	let syntax = to_valuedef!(" <'border-top-color'>{1,2} ");
-	let data = to_deriveinput! { struct Foo<'a> {} }; // Foo specifies lifetime
+	let data = to_deriveinput! { struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "bounded_range_multiplier_is_optimized_to_options_with_lifetimes_when_necessary");
 }
 
 #[test]
 fn bound_range_multiplier_with_keyword() {
 	let syntax = to_valuedef!(" <length>{1,2} | foo ");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "bound_range_multiplier_with_keyword");
 }
 
@@ -237,7 +239,7 @@ fn keyword_int_literal() {
 #[test]
 fn keyword_bounded_type() {
 	let syntax = to_valuedef! { foo | oblique <angle [-90deg,90deg]>? };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "keyword_bounded_type");
 }
 
@@ -259,6 +261,7 @@ fn literal_with_derive_parse() {
 fn combinator_optional_keyword() {
 	let syntax = to_valuedef! { foo | <color>? bar };
 	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
+
 	assert_snapshot!(syntax, data, "combinator_optional_keyword");
 }
 
@@ -266,6 +269,7 @@ fn combinator_optional_keyword() {
 fn combinator_optional_last_keyword() {
 	let syntax = to_valuedef! { foo | bar <color>? };
 	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
+
 	assert_snapshot!(syntax, data, "combinator_optional_last_keyword");
 }
 
@@ -273,6 +277,7 @@ fn combinator_optional_last_keyword() {
 fn combinator_optional2_keyword() {
 	let syntax = to_valuedef! { foo | <color>? <color>? bar };
 	let data = to_deriveinput! { #[derive(Visitable, Parse)] enum Foo<'a> {} };
+
 	assert_snapshot!(syntax, data, "combinator_optional2_keyword");
 }
 
@@ -280,6 +285,7 @@ fn combinator_optional2_keyword() {
 fn just_optional() {
 	let syntax = to_valuedef! { <color>? <color>? };
 	let data = to_deriveinput! { struct Foo<'a> {} };
+
 	assert_snapshot!(syntax, data, "just_optional");
 }
 
@@ -363,42 +369,42 @@ fn auto_or_none() {
 #[test]
 fn auto_or_none_or_type() {
 	let syntax = to_valuedef!( auto | none | <length> );
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_or_none_or_type");
 }
 
 #[test]
 fn auto_or_type_with_checks() {
 	let syntax = to_valuedef!( auto | <angle [-90deg,90deg]> );
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_or_type_with_checks");
 }
 
 #[test]
 fn auto_or_type_with_checks_derive_parse() {
 	let syntax = to_valuedef!( auto | <angle [-90deg,90deg]> );
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_or_type_with_checks_derive_parse");
 }
 
 #[test]
 fn alternatives_with_checks_derive_parse() {
 	let syntax = to_valuedef!( bar | <angle [-90deg,90deg]>? );
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "alternatives_with_checks_derive_parse");
 }
 
 #[test]
 fn ordered_combinator_with_checks_derives_parse() {
 	let syntax = to_valuedef!( bar | foo <angle [-90deg,90deg]>? );
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "ordered_combinator_with_checks_derives_parse");
 }
 
 #[test]
 fn all_must_occur_struct_with_range() {
 	let syntax = to_valuedef!(" auto && <percentage [0,100]> ");
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "all_must_occur_struct_with_range");
 }
 
@@ -413,6 +419,7 @@ fn auto_or_type() {
 fn auto_or_fixed_multiplier() {
 	let syntax = to_valuedef! { auto | <color>{2} };
 	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
+
 	assert_snapshot!(syntax, data, "auto_or_fixed_multiplier");
 }
 

@@ -4,7 +4,7 @@ expression: pretty
 ---
 #[automatically_derived]
 impl crate::VisitableMut for FlexWrap {
-    fn accept_mut<V: crate::VisitMut>(&mut self, v: &mut V) {
+    fn accept_mut<__V: crate::VisitMut>(&mut self, v: &mut __V) {
         use crate::VisitableMut;
         match self {
             Self::Nowrap(__binding_0) => {
@@ -23,7 +23,7 @@ impl crate::VisitableMut for FlexWrap {
 }
 #[automatically_derived]
 impl crate::Visitable for FlexWrap {
-    fn accept<V: crate::Visit>(&self, v: &mut V) -> visit_flow::VisitFlow {
+    fn accept<__V: crate::Visit>(&self, v: &mut __V) -> visit_flow::VisitFlow {
         use crate::Visitable;
         visit_flow::try_visit!(
             { match self { Self::Nowrap(__binding_0) => {

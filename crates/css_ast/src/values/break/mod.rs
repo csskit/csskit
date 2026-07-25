@@ -183,7 +183,7 @@ pub enum MarginBreakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.orphans"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OrphansStyleValue;
+pub struct OrphansStyleValue<'a>;
 
 /// Represents the style value for `widows` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#widows).
 ///
@@ -213,4 +213,4 @@ pub struct OrphansStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.widows"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WidowsStyleValue;
+pub struct WidowsStyleValue<'a>;

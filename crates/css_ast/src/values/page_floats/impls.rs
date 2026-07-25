@@ -9,8 +9,8 @@ mod tests {
 		assert_eq!(std::mem::size_of::<FloatReferenceStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<FloatStyleValue>(), 92);
 		assert_eq!(std::mem::size_of::<ClearStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<FloatDeferStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<FloatOffsetStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<FloatDeferStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<FloatOffsetStyleValue>(), 24);
 	}
 
 	#[test]

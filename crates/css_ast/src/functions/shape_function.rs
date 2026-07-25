@@ -23,7 +23,7 @@ pub struct ShapeFunction<'a> {
 	pub position: Position,
 	#[semantic_eq(skip)]
 	pub comma: T![,],
-	pub commands: CommaSeparated<'a, ShapeCommand>,
+	pub commands: CommaSeparated<'a, ShapeCommand<'a>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

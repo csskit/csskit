@@ -10,9 +10,9 @@ use crate::{FixedBreadth, MinmaxFunction};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FixedSize {
+pub enum FixedSize<'a> {
 	FixedBreadth(FixedBreadth),
-	MinmaxFunction(MinmaxFunction),
+	MinmaxFunction(MinmaxFunction<'a>),
 }
 
 #[cfg(test)]
@@ -23,7 +23,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FixedSize>(), 68);
+		assert_eq!(std::mem::size_of::<FixedSize>(), 96);
 	}
 
 	#[test]

@@ -12,10 +12,10 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ShapeRectFunction {
+pub struct ShapeRectFunction<'a> {
 	#[atom(CssAtomSet::Rect)]
 	pub name: T![Function],
-	pub params: ShapeRectFunctionParams,
+	pub params: ShapeRectFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -23,7 +23,7 @@ pub struct ShapeRectFunction {
 #[syntax(" [ <length-percentage> | auto ]{4} [ round <'border-radius'> ]? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct ShapeRectFunctionParams;
+pub struct ShapeRectFunctionParams<'a>;
 
 #[cfg(test)]
 mod tests {

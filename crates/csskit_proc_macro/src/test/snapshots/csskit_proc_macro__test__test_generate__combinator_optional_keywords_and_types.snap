@@ -2,10 +2,6 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-#[derive(Parse)]
-#[parse(one_must_occur)]
-struct Foo {
-    #[atom(CssAtomSet::Foo)]
-    pub foo: Option<::css_parse::T![Ident]>,
-    pub bar: Option<crate::Bar>,
+::core::compile_error! {
+    "this object needs the <'a> lifetime but it didn't have it. Add it"
 }

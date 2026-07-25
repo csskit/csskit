@@ -12,11 +12,11 @@ mod tests {
 	pub fn size_test() {
 		assert_eq!(std::mem::size_of::<AnchorNameStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<AnchorScopeStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<PositionAnchorStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PositionAreaStyleValue>(), 36);
+		assert_eq!(std::mem::size_of::<PositionAnchorStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<PositionAreaStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<PositionVisibilityStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<PositionTryFallbacksStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PositionTryOrderStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<PositionTryOrderStyleValue>(), 24);
 		// assert_eq!(std::mem::size_of::<PositionTryStyleValue>(), 1);
 	}
 

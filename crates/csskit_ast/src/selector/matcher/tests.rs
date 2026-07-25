@@ -569,8 +569,25 @@ fn property_type_pseudo() {
 
 #[test]
 fn computed_pseudo() {
-	assert_query!("a { width: calc(100% - 20px); }", "*:computed", 1, [NodeId::StyleValue]);
-	assert_query!("a { color: var(--primary); }", "*:computed", 1, [NodeId::StyleValue]);
+	assert_query!("a { width: calc(100% - 20px); }", "calc-function", 1, [NodeId::CalcFunction]);
+	assert_query!(
+		"a { width: calc(100% - 20px); }",
+		"*:computed",
+		3,
+		[NodeId::StyleValue, NodeId::MathFunction, NodeId::CalcFunction]
+	);
+	assert_query!("a { color: var(--primary); }", "*:computed", 2, [NodeId::StyleValue, NodeId::VarFunction]);
+}
+
+#[test]
+fn computed_pseudo_via_metadata() {
+	assert_query!(
+		"a { width: calc(100% - 20px); }",
+		"*:computed",
+		3,
+		[NodeId::StyleValue, NodeId::MathFunction, NodeId::CalcFunction]
+	);
+	assert_query!("a { color: var(--primary); }", "*:computed", 2, [NodeId::StyleValue, NodeId::VarFunction]);
 }
 
 #[test]
@@ -781,7 +798,6 @@ fn not_with_pseudo_custom() {
 
 #[test]
 fn not_with_pseudo_shorthand() {
-	// 16 nodes: includes Declaration nodes (visited as StyleValue) + their value children
 	let total = assert_query!("a { margin: 10px; color: red; }", "*", 16);
 	let shorthand = assert_query!("a { margin: 10px; color: red; }", "*:shorthand", 1, [NodeId::StyleValue]);
 	let longhand = assert_query!("a { margin: 10px; color: red; }", "*:longhand", 1, [NodeId::StyleValue]);

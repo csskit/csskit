@@ -26344,11 +26344,11 @@ StyleSheet(
                     offset: SourceOffset(17979),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17980),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -26413,7 +26413,7 @@ StyleSheet(
                     offset: SourceOffset(18017),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -26448,7 +26448,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -26467,11 +26467,11 @@ StyleSheet(
                     offset: SourceOffset(18050),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18051),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -26510,7 +26510,7 @@ StyleSheet(
                     offset: SourceOffset(18063),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -26545,7 +26545,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -26564,7 +26564,7 @@ StyleSheet(
                     offset: SourceOffset(18095),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -26599,7 +26599,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -26618,11 +26618,11 @@ StyleSheet(
                     offset: SourceOffset(18129),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18130),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -26661,7 +26661,7 @@ StyleSheet(
                     offset: SourceOffset(18141),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -26696,7 +26696,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -26715,11 +26715,11 @@ StyleSheet(
                     offset: SourceOffset(18171),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18172),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -26784,11 +26784,11 @@ StyleSheet(
                     offset: SourceOffset(18205),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18206),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -26853,7 +26853,7 @@ StyleSheet(
                     offset: SourceOffset(18244),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -26888,7 +26888,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -26907,11 +26907,11 @@ StyleSheet(
                     offset: SourceOffset(18277),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18278),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -26950,7 +26950,7 @@ StyleSheet(
                     offset: SourceOffset(18290),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -26985,7 +26985,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -27004,7 +27004,7 @@ StyleSheet(
                     offset: SourceOffset(18322),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27039,7 +27039,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -27058,11 +27058,11 @@ StyleSheet(
                     offset: SourceOffset(18356),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18357),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27101,7 +27101,7 @@ StyleSheet(
                     offset: SourceOffset(18368),
                     len: 1,
                   )),
-                  value: FilterStyleValue(r#Some(FilterValueList([
+                  value: FilterStyleValue(r#Some(Literal(FilterValueList([
                     FilterFunction(Brightness(BrightnessFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27136,7 +27136,7 @@ StyleSheet(
                         len: 1,
                       )),
                     ))),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -27155,11 +27155,11 @@ StyleSheet(
                     offset: SourceOffset(18398),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18399),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27224,7 +27224,7 @@ StyleSheet(
                     offset: SourceOffset(18434),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     Scale(ScaleFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27242,7 +27242,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27307,7 +27307,7 @@ StyleSheet(
                     offset: SourceOffset(18482),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     Scale(ScaleFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27325,7 +27325,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27390,7 +27390,7 @@ StyleSheet(
                     offset: SourceOffset(18531),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27408,7 +27408,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27473,7 +27473,7 @@ StyleSheet(
                     offset: SourceOffset(18589),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27491,7 +27491,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27556,7 +27556,7 @@ StyleSheet(
                     offset: SourceOffset(18647),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27574,7 +27574,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27639,7 +27639,7 @@ StyleSheet(
                     offset: SourceOffset(18704),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27657,7 +27657,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27722,7 +27722,7 @@ StyleSheet(
                     offset: SourceOffset(18759),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27740,7 +27740,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27805,7 +27805,7 @@ StyleSheet(
                     offset: SourceOffset(18815),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27823,7 +27823,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27888,7 +27888,7 @@ StyleSheet(
                     offset: SourceOffset(18873),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27906,7 +27906,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -27971,7 +27971,7 @@ StyleSheet(
                     offset: SourceOffset(18930),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -27989,7 +27989,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28063,7 +28063,7 @@ StyleSheet(
                     offset: SourceOffset(18983),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28081,7 +28081,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28120,7 +28120,7 @@ StyleSheet(
                     offset: SourceOffset(19011),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28138,7 +28138,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28177,7 +28177,7 @@ StyleSheet(
                     offset: SourceOffset(19041),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28195,7 +28195,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28234,7 +28234,7 @@ StyleSheet(
                     offset: SourceOffset(19070),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28252,7 +28252,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28291,7 +28291,7 @@ StyleSheet(
                     offset: SourceOffset(19100),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateX(TranslatexFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28309,7 +28309,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28383,7 +28383,7 @@ StyleSheet(
                     offset: SourceOffset(19151),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28401,7 +28401,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28440,7 +28440,7 @@ StyleSheet(
                     offset: SourceOffset(19179),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28458,7 +28458,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28497,7 +28497,7 @@ StyleSheet(
                     offset: SourceOffset(19209),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28515,7 +28515,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28554,7 +28554,7 @@ StyleSheet(
                     offset: SourceOffset(19238),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28572,7 +28572,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28611,7 +28611,7 @@ StyleSheet(
                     offset: SourceOffset(19268),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28629,7 +28629,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28694,7 +28694,7 @@ StyleSheet(
                     offset: SourceOffset(19313),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     Rotate(RotateFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28712,7 +28712,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28786,11 +28786,11 @@ StyleSheet(
                     offset: SourceOffset(19359),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(19360),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -28809,7 +28809,7 @@ StyleSheet(
                     offset: SourceOffset(19371),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     Scale(ScaleFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -28827,7 +28827,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28901,11 +28901,11 @@ StyleSheet(
                     offset: SourceOffset(19412),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(19413),
                     len: 1,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -28944,11 +28944,11 @@ StyleSheet(
                     offset: SourceOffset(19426),
                     len: 1,
                   )),
-                  value: OpacityStyleValue(Number(Number(Cursor(
+                  value: OpacityStyleValue(Literal(Number(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(19427),
                     len: 2,
-                  )))),
+                  ))))),
                   important: None,
                   semicolon: None,
                 ),
@@ -29013,7 +29013,7 @@ StyleSheet(
                     offset: SourceOffset(19461),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -29031,7 +29031,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -29096,7 +29096,7 @@ StyleSheet(
                     offset: SourceOffset(19511),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -29114,7 +29114,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -29153,7 +29153,7 @@ StyleSheet(
                     offset: SourceOffset(19542),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -29171,7 +29171,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -29228,7 +29228,7 @@ StyleSheet(
                     offset: SourceOffset(19578),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     TranslateY(TranslateyFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -29246,7 +29246,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),
@@ -29311,7 +29311,7 @@ StyleSheet(
                     offset: SourceOffset(19624),
                     len: 1,
                   )),
-                  value: TransformStyleValue(r#Some(TransformList([
+                  value: TransformStyleValue(r#Some(Literal(TransformList([
                     Scale(ScaleFunction(
                       name: Function(Cursor(
                         kind: "Function",
@@ -29329,7 +29329,7 @@ StyleSheet(
                         len: 1,
                       )),
                     )),
-                  ]))),
+                  ])))),
                   important: None,
                   semicolon: None,
                 ),

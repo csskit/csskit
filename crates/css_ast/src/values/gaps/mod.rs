@@ -36,7 +36,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-gap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnGapStyleValue {}
+pub enum ColumnGapStyleValue<'a> {}
 
 /// Represents the style value for `column-rule` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule).
 ///
@@ -127,7 +127,7 @@ pub enum ColumnRuleBreakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnRuleColorStyleValue {}
+pub enum ColumnRuleColorStyleValue<'a> {}
 
 /// Represents the style value for `column-rule-inset` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset).
 ///
@@ -158,7 +158,7 @@ pub enum ColumnRuleColorStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-inset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetStyleValue;
+pub struct ColumnRuleInsetStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-cap` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-cap).
 ///
@@ -189,7 +189,7 @@ pub struct ColumnRuleInsetStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-inset-cap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetCapStyleValue;
+pub struct ColumnRuleInsetCapStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-cap-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-cap-end).
 ///
@@ -219,7 +219,7 @@ pub struct ColumnRuleInsetCapStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-inset-cap-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetCapEndStyleValue;
+pub struct ColumnRuleInsetCapEndStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-cap-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-cap-start).
 ///
@@ -253,7 +253,7 @@ pub struct ColumnRuleInsetCapEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetCapStartStyleValue;
+pub struct ColumnRuleInsetCapStartStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-end).
 ///
@@ -284,7 +284,7 @@ pub struct ColumnRuleInsetCapStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-inset-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetEndStyleValue;
+pub struct ColumnRuleInsetEndStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-junction` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-junction).
 ///
@@ -319,7 +319,7 @@ pub struct ColumnRuleInsetEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetJunctionStyleValue;
+pub struct ColumnRuleInsetJunctionStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-junction-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-junction-end).
 ///
@@ -353,7 +353,7 @@ pub struct ColumnRuleInsetJunctionStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetJunctionEndStyleValue;
+pub struct ColumnRuleInsetJunctionEndStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-junction-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-junction-start).
 ///
@@ -387,7 +387,7 @@ pub struct ColumnRuleInsetJunctionEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetJunctionStartStyleValue;
+pub struct ColumnRuleInsetJunctionStartStyleValue<'a>;
 
 /// Represents the style value for `column-rule-inset-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-inset-start).
 ///
@@ -418,7 +418,7 @@ pub struct ColumnRuleInsetJunctionStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-inset-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColumnRuleInsetStartStyleValue;
+pub struct ColumnRuleInsetStartStyleValue<'a>;
 
 /// Represents the style value for `column-rule-style` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-style).
 ///
@@ -448,7 +448,7 @@ pub struct ColumnRuleInsetStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnRuleStyleStyleValue {}
+pub enum ColumnRuleStyleStyleValue<'a> {}
 
 /// Represents the style value for `column-rule-visibility-items` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-visibility-items).
 ///
@@ -542,7 +542,7 @@ pub enum ColumnRuleWidthStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.gap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GapStyleValue;
+pub struct GapStyleValue<'a>;
 
 /// Represents the style value for `row-gap` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-gap).
 ///
@@ -573,7 +573,7 @@ pub struct GapStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-gap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RowGapStyleValue {}
+pub enum RowGapStyleValue<'a> {}
 
 /// Represents the style value for `row-rule` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule).
 ///
@@ -662,7 +662,7 @@ pub enum RowRuleBreakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RowRuleColorStyleValue {}
+pub enum RowRuleColorStyleValue<'a> {}
 
 /// Represents the style value for `row-rule-inset` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset).
 ///
@@ -693,7 +693,7 @@ pub enum RowRuleColorStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetStyleValue;
+pub struct RowRuleInsetStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-cap` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-cap).
 ///
@@ -724,7 +724,7 @@ pub struct RowRuleInsetStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset-cap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetCapStyleValue;
+pub struct RowRuleInsetCapStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-cap-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-cap-end).
 ///
@@ -754,7 +754,7 @@ pub struct RowRuleInsetCapStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset-cap-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetCapEndStyleValue;
+pub struct RowRuleInsetCapEndStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-cap-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-cap-start).
 ///
@@ -784,7 +784,7 @@ pub struct RowRuleInsetCapEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset-cap-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetCapStartStyleValue;
+pub struct RowRuleInsetCapStartStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-end).
 ///
@@ -815,7 +815,7 @@ pub struct RowRuleInsetCapStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetEndStyleValue;
+pub struct RowRuleInsetEndStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-junction` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-junction).
 ///
@@ -846,7 +846,7 @@ pub struct RowRuleInsetEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset-junction"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetJunctionStyleValue;
+pub struct RowRuleInsetJunctionStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-junction-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-junction-end).
 ///
@@ -880,7 +880,7 @@ pub struct RowRuleInsetJunctionStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetJunctionEndStyleValue;
+pub struct RowRuleInsetJunctionEndStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-junction-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-junction-start).
 ///
@@ -914,7 +914,7 @@ pub struct RowRuleInsetJunctionEndStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetJunctionStartStyleValue;
+pub struct RowRuleInsetJunctionStartStyleValue<'a>;
 
 /// Represents the style value for `row-rule-inset-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-inset-start).
 ///
@@ -945,7 +945,7 @@ pub struct RowRuleInsetJunctionStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-inset-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RowRuleInsetStartStyleValue;
+pub struct RowRuleInsetStartStyleValue<'a>;
 
 /// Represents the style value for `row-rule-style` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-style).
 ///
@@ -974,7 +974,7 @@ pub struct RowRuleInsetStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RowRuleStyleStyleValue {}
+pub enum RowRuleStyleStyleValue<'a> {}
 
 /// Represents the style value for `row-rule-visibility-items` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-visibility-items).
 ///
@@ -1123,7 +1123,7 @@ pub struct RuleBreakStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleColorStyleValue;
+pub struct RuleColorStyleValue<'a>;
 
 /// Represents the style value for `rule-inset` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-inset).
 ///
@@ -1154,7 +1154,7 @@ pub struct RuleColorStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-inset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleInsetStyleValue;
+pub struct RuleInsetStyleValue<'a>;
 
 /// Represents the style value for `rule-inset-cap` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-inset-cap).
 ///
@@ -1185,7 +1185,7 @@ pub struct RuleInsetStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-inset-cap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleInsetCapStyleValue;
+pub struct RuleInsetCapStyleValue<'a>;
 
 /// Represents the style value for `rule-inset-end` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-inset-end).
 ///
@@ -1216,7 +1216,7 @@ pub struct RuleInsetCapStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-inset-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleInsetEndStyleValue;
+pub struct RuleInsetEndStyleValue<'a>;
 
 /// Represents the style value for `rule-inset-junction` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-inset-junction).
 ///
@@ -1247,7 +1247,7 @@ pub struct RuleInsetEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-inset-junction"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleInsetJunctionStyleValue;
+pub struct RuleInsetJunctionStyleValue<'a>;
 
 /// Represents the style value for `rule-inset-start` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-inset-start).
 ///
@@ -1278,7 +1278,7 @@ pub struct RuleInsetJunctionStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-inset-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleInsetStartStyleValue;
+pub struct RuleInsetStartStyleValue<'a>;
 
 /// Represents the style value for `rule-overlap` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-overlap).
 ///
@@ -1337,7 +1337,7 @@ pub enum RuleOverlapStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleStyleStyleValue;
+pub struct RuleStyleStyleValue<'a>;
 
 /// Represents the style value for `rule-visibility-items` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-visibility-items).
 ///

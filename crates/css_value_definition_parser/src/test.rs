@@ -543,8 +543,28 @@ fn def_returns_true_for_maybe_unsized() {
 	assert!(to_valuedef!(" <'bar'># ").maybe_unsized());
 	assert!(!to_valuedef!(" <'bar'> ").maybe_unsized());
 	assert!(to_valuedef!(" <bar>+ ").maybe_unsized());
-	assert!(!to_valuedef!(" <bar>{1,4} ").maybe_unsized());
-	assert!(!to_valuedef!(" [ <bar> | <baz> ]{1,4} ").maybe_unsized());
+	// Every `<type>` reference is wrapped in Value<'a, T> / CalcableValue<'a, T>, which
+	// supplies 'a, so any multiplier of a type — bounded or not — is unsized.
+	assert!(to_valuedef!(" <bar>{1,4} ").maybe_unsized());
+	assert!(to_valuedef!(" [ <bar> | <baz> ]{1,4} ").maybe_unsized());
+	// Types that use Specified values should need lifetimes
+	assert!(to_valuedef! { <number> }.maybe_unsized());
+	assert!(to_valuedef! { <length> }.maybe_unsized());
+	assert!(to_valuedef! { <number [0,]> }.maybe_unsized());
+	assert!(to_valuedef! { <length [0,]> }.maybe_unsized());
+	// Multiplier with range
+	assert!(to_valuedef!(" <length>{1,4} ").maybe_unsized());
+	assert!(to_valuedef!(" [ <length> ] ").maybe_unsized());
+	// <length> | <number> optimizes to NumberLength, which is now wrapped in
+	// CalcableValue<'a, NumberLength>, so it IS unsized (references 'a via the wrapper).
+	assert!(to_valuedef!(" <length> | <number> ").maybe_unsized());
+	assert!(to_valuedef!(" [ <length> | <number> ] ").maybe_unsized());
+	// Bounded multipliers {1,4} optimize to Ordered combinators with Optionals; the inner
+	// NumberLength wrapper still references 'a, so these are unsized too.
+	assert!(to_valuedef!(" [ <length> | <number> ]{1,4} ").maybe_unsized());
+	assert!(to_valuedef!(" [ <length [0,]> | <number [0,]> ]{1,4} ").maybe_unsized());
+	// Unbounded multipliers like + or {1,} DO need allocations
+	assert!(to_valuedef!(" [ <length> | <number> ]+ ").maybe_unsized());
 }
 
 #[test]

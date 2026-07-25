@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-content"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum AlignContentStyleValue {}
+pub enum AlignContentStyleValue<'a> {}
 
 /// Represents the style value for `align-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-items).
 ///
@@ -65,7 +65,7 @@ pub enum AlignContentStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum AlignItemsStyleValue {}
+pub enum AlignItemsStyleValue<'a> {}
 
 /// Represents the style value for `align-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#align-self).
 ///
@@ -95,7 +95,7 @@ pub enum AlignItemsStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.align-self"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum AlignSelfStyleValue {}
+pub enum AlignSelfStyleValue<'a> {}
 
 /// Represents the style value for `justify-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-content).
 ///
@@ -125,7 +125,7 @@ pub enum AlignSelfStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-content"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum JustifyContentStyleValue {}
+pub enum JustifyContentStyleValue<'a> {}
 
 /// Represents the style value for `justify-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-items).
 ///
@@ -157,7 +157,7 @@ pub enum JustifyContentStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum JustifyItemsStyleValue {}
+pub enum JustifyItemsStyleValue<'a> {}
 
 /// Represents the style value for `justify-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#justify-self).
 ///
@@ -187,7 +187,7 @@ pub enum JustifyItemsStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.justify-self"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum JustifySelfStyleValue {}
+pub enum JustifySelfStyleValue<'a> {}
 
 /// Represents the style value for `place-content` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-content).
 ///
@@ -217,7 +217,7 @@ pub enum JustifySelfStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-content"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PlaceContentStyleValue;
+pub struct PlaceContentStyleValue<'a>;
 
 /// Represents the style value for `place-items` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-items).
 ///
@@ -247,7 +247,7 @@ pub struct PlaceContentStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PlaceItemsStyleValue;
+pub struct PlaceItemsStyleValue<'a>;
 
 /// Represents the style value for `place-self` as defined in [css-align-3](https://drafts.csswg.org/css-align-3/#place-self).
 ///
@@ -277,4 +277,4 @@ pub struct PlaceItemsStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-self"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PlaceSelfStyleValue;
+pub struct PlaceSelfStyleValue<'a>;

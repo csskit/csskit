@@ -39,7 +39,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BottomStyleValue;
+pub struct BottomStyleValue<'a>;
 
 /// Represents the style value for `inset` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset).
 ///
@@ -71,7 +71,7 @@ pub struct BottomStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetStyleValue;
+pub struct InsetStyleValue<'a>;
 
 /// Represents the style value for `inset-block` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block).
 ///
@@ -104,7 +104,7 @@ pub struct InsetStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetBlockStyleValue;
+pub struct InsetBlockStyleValue<'a>;
 
 /// Represents the style value for `inset-block-end` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block-end).
 ///
@@ -138,7 +138,7 @@ pub struct InsetBlockStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetBlockEndStyleValue;
+pub struct InsetBlockEndStyleValue<'a>;
 
 /// Represents the style value for `inset-block-start` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-block-start).
 ///
@@ -172,7 +172,7 @@ pub struct InsetBlockEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetBlockStartStyleValue;
+pub struct InsetBlockStartStyleValue<'a>;
 
 /// Represents the style value for `inset-inline` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline).
 ///
@@ -205,7 +205,7 @@ pub struct InsetBlockStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetInlineStyleValue;
+pub struct InsetInlineStyleValue<'a>;
 
 /// Represents the style value for `inset-inline-end` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline-end).
 ///
@@ -239,7 +239,7 @@ pub struct InsetInlineStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetInlineEndStyleValue;
+pub struct InsetInlineEndStyleValue<'a>;
 
 /// Represents the style value for `inset-inline-start` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#inset-inline-start).
 ///
@@ -273,7 +273,7 @@ pub struct InsetInlineEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InsetInlineStartStyleValue;
+pub struct InsetInlineStartStyleValue<'a>;
 
 /// Represents the style value for `left` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#left).
 ///
@@ -307,7 +307,7 @@ pub struct InsetInlineStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LeftStyleValue;
+pub struct LeftStyleValue<'a>;
 
 /// Represents the style value for `overlay` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#overlay).
 ///
@@ -400,7 +400,7 @@ pub enum PositionStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RightStyleValue;
+pub struct RightStyleValue<'a>;
 
 /// Represents the style value for `top` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#top).
 ///
@@ -434,4 +434,4 @@ pub struct RightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TopStyleValue;
+pub struct TopStyleValue<'a>;

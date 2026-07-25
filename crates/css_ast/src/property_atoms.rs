@@ -15,6 +15,8 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	Animation,
 	AnimationComposition,
 	AnimationDelay,
+	AnimationDelayEnd,
+	AnimationDelayStart,
 	AnimationDirection,
 	AnimationDuration,
 	AnimationFillMode,

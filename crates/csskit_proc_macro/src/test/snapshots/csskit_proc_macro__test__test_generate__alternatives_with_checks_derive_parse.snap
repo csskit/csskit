@@ -3,8 +3,8 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
-enum Foo {
+enum Foo<'a> {
     #[atom(CssAtomSet::Bar)]
     Bar(::css_parse::T![Ident]),
-    Angle(Option<crate::Ranged<crate::Angle, -90i32, 90i32>>),
+    Angle(Option<crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>>),
 }

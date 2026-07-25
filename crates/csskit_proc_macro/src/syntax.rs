@@ -59,12 +59,32 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 	}
 	let derives_visitable = has_derive_of(attrs, "Visitable");
 	let derives_parse = has_derive_of(attrs, "Parse");
+	let derives_node_with_metadata = has_derive_of(attrs, "NodeWithMetadata");
 	let additonal_defs = defs.generate_additional_types(vis, ident, &ast.generics);
-	let def = defs.generate_definition(vis, ident, &ast.generics, derives_parse, derives_visitable);
+	let def = defs.generate_definition(
+		vis,
+		ident,
+		&ast.generics,
+		derives_parse,
+		derives_visitable,
+		derives_node_with_metadata,
+	);
+
+	// For types deriving NodeWithMetadata, add #[metadata(delegate)] so generated value fields
+	// propagate their metadata (e.g. DeclarationKind::Computed from var()/calc()). Enums delegate
+	// per-variant; structs merge all fields. All generated field types implement NodeWithMetadata
+	// (token types via no-op impls, value wrappers and helper types via their own impls).
+	let metadata_delegate = if derives_node_with_metadata {
+		quote! { #[metadata(delegate)] }
+	} else {
+		quote! {}
+	};
+
 	quote! {
 		#additonal_defs
 
 		#(#attrs)*
+		#metadata_delegate
 		#def
 	}
 }

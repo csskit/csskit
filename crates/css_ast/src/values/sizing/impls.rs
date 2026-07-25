@@ -20,19 +20,19 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<WidthStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<HeightStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MinWidthStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MinHeightStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MaxWidthStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<WidthStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<HeightStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<MinWidthStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<MinHeightStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<MaxWidthStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<BoxSizingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 60);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicBlockSizeStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicHeightStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicInlineSizeStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicSizeStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicWidthStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 64);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicBlockSizeStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicHeightStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicInlineSizeStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicSizeStyleValue>(), 80);
+		assert_eq!(std::mem::size_of::<ContainIntrinsicWidthStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<FrameSizingStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MinIntrinsicSizingStyleValue>(), 32);
 	}

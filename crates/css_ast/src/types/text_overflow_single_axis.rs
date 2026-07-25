@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::FadeFunction;
+use crate::{FadeFunction, Value};
 
 /// <https://drafts.csswg.org/css-overflow-4/#text-overflow>
 ///
@@ -10,14 +10,14 @@ use crate::FadeFunction;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextOverflowSingleAxis {
+pub enum TextOverflowSingleAxis<'a> {
 	#[atom(CssAtomSet::Clip)]
 	Clip(T![Ident]),
 	#[atom(CssAtomSet::Ellipsis)]
 	Ellipsis(T![Ident]),
 	#[atom(CssAtomSet::Fade)]
 	Fade(T![Ident]),
-	String(T![String]),
+	String(Value<'a, T![String]>),
 	#[atom(CssAtomSet::Fade)]
 	FadeFunction(FadeFunction),
 }
@@ -30,7 +30,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<TextOverflowSingleAxis>(), 16);
+		assert_eq!(std::mem::size_of::<TextOverflowSingleAxis>(), 24);
 	}
 
 	#[test]

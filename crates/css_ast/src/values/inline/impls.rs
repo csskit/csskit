@@ -6,19 +6,19 @@ mod tests {
 
 	#[test]
 	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<LineHeightStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextBoxStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AlignmentBaselineStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BaselineShiftStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<LineHeightStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<TextBoxStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<AlignmentBaselineStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<BaselineShiftStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<BaselineSourceStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<DominantBaselineStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InitialLetterStyleValue>(), 28);
-		assert_eq!(std::mem::size_of::<InitialLetterWrapStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<DominantBaselineStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InitialLetterStyleValue>(), 48);
+		assert_eq!(std::mem::size_of::<InitialLetterWrapStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<InlineSizingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<LineFitEdgeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextBoxEdgeStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<LineFitEdgeStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<TextBoxEdgeStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<TextBoxTrimStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<VerticalAlignStyleValue>(), 52);
+		assert_eq!(std::mem::size_of::<VerticalAlignStyleValue>(), 72);
 	}
 
 	#[test]

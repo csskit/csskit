@@ -155,7 +155,7 @@ pub struct FloodColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flood-opacity"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FloodOpacityStyleValue;
+pub struct FloodOpacityStyleValue<'a>;
 
 /// Represents the style value for `lighting-color` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#lighting-color).
 ///

@@ -36,7 +36,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FlexStyleValue;
+pub struct FlexStyleValue<'a>;
 
 /// Represents the style value for `flex-basis` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-basis).
 ///
@@ -67,7 +67,7 @@ pub struct FlexStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-basis"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FlexBasisStyleValue {}
+pub enum FlexBasisStyleValue<'a> {}
 
 /// Represents the style value for `flex-direction` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-direction).
 ///
@@ -159,7 +159,7 @@ pub struct FlexFlowStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-grow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FlexGrowStyleValue;
+pub struct FlexGrowStyleValue<'a>;
 
 /// Represents the style value for `flex-line-count` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-line-count).
 ///
@@ -186,7 +186,7 @@ pub struct FlexGrowStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-line-count"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FlexLineCountStyleValue;
+pub struct FlexLineCountStyleValue<'a>;
 
 /// Represents the style value for `flex-shrink` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-shrink).
 ///
@@ -216,7 +216,7 @@ pub struct FlexLineCountStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-shrink"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FlexShrinkStyleValue;
+pub struct FlexShrinkStyleValue<'a>;
 
 /// Represents the style value for `flex-wrap` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-wrap).
 ///

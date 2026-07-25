@@ -16,7 +16,7 @@ pub struct TrackList<'a> {
 	pub items: NonEmpty<Vec<'a, TrackListItem<'a>>>,
 }
 
-type TrackListItem<'a> = (Either<TrackSize, TrackRepeat<'a>>, Option<LineNames<'a>>);
+type TrackListItem<'a> = (Either<TrackSize<'a>, TrackRepeat<'a>>, Option<LineNames<'a>>);
 
 impl<'a> Peek<'a> for TrackList<'a> {
 	const PEEK_KINDSET: KindSet =
@@ -49,7 +49,7 @@ pub struct AutoTrackList<'a> {
 	pub end_items: Vec<'a, AutoTrackListItem<'a>>,
 }
 
-type AutoTrackListItem<'a> = (Either<FixedSize, FixedRepeat<'a>>, Option<LineNames<'a>>);
+type AutoTrackListItem<'a> = (Either<FixedSize<'a>, FixedRepeat<'a>>, Option<LineNames<'a>>);
 
 impl<'a> Peek<'a> for AutoTrackList<'a> {
 	const PEEK_KINDSET: KindSet = LineNames::PEEK_KINDSET
@@ -80,7 +80,7 @@ pub struct ExplicitTrackList<'a> {
 	pub items: NonEmpty<Vec<'a, ExplicitTrackListItem<'a>>>,
 }
 
-type ExplicitTrackListItem<'a> = (TrackSize, Option<LineNames<'a>>);
+type ExplicitTrackListItem<'a> = (TrackSize<'a>, Option<LineNames<'a>>);
 
 impl<'a> Peek<'a> for ExplicitTrackList<'a> {
 	const PEEK_KINDSET: KindSet = LineNames::PEEK_KINDSET.combine(TrackSize::PEEK_KINDSET);

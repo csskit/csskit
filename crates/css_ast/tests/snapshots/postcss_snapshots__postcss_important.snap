@@ -33,11 +33,11 @@ StyleSheet(
                 offset: SourceOffset(13),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Px(Dimension(Cursor(
+              value: LengthPercentage(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(15),
                 len: 3,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -67,11 +67,11 @@ StyleSheet(
                 offset: SourceOffset(39),
                 len: 1,
               )),
-              value: ColorStyleValue(Named(Black(Ident(Cursor(
+              value: ColorStyleValue(Literal(Named(Black(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(41),
                 len: 5,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -203,11 +203,11 @@ StyleSheet(
                 offset: SourceOffset(125),
                 len: 1,
               )),
-              value: MarginStyleValue(MarginTopStyleValue(r#Some(Length(Px(Dimension(Cursor(
+              value: MarginStyleValue(MarginTopStyleValue(r#Some(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(127),
                 len: 4,
-              )))))), None, None, None),
+              ))))))), None, None, None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -237,11 +237,11 @@ StyleSheet(
                 offset: SourceOffset(166),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Px(Dimension(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(168),
                 len: 4,
-              ))))), None, None, None),
+              )))))), None, None, None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -271,11 +271,11 @@ StyleSheet(
                 offset: SourceOffset(213),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Px(Dimension(Cursor(
+              value: LengthPercentage(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(215),
                 len: 5,
-              ))))),
+              )))))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -409,11 +409,11 @@ StyleSheet(
                 offset: SourceOffset(328),
                 len: 1,
               )),
-              value: PaddingStyleValue(PaddingTopStyleValue(Length(Px(Dimension(Cursor(
+              value: PaddingStyleValue(PaddingTopStyleValue(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(330),
                 len: 3,
-              ))))), None, None, None),
+              )))))), None, None, None),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",

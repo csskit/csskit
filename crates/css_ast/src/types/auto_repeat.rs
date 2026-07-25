@@ -5,7 +5,7 @@ use crate::{AutoFillOrFit, FixedSize, NamedRepeatItems, RepeatFunction};
 /// ```text,ignore
 /// <auto-repeat> = repeat( [ auto-fill | auto-fit ] , [ <line-names>? <fixed-size> ]+ <line-names>? )
 /// ```
-pub type AutoRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize>, AutoFillOrFit>;
+pub type AutoRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize<'a>>, AutoFillOrFit>;
 
 #[cfg(test)]
 mod tests {

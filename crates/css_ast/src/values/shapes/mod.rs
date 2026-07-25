@@ -34,7 +34,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-image-threshold"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ShapeImageThresholdStyleValue;
+pub struct ShapeImageThresholdStyleValue<'a>;
 
 /// Represents the style value for `shape-inside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-inside).
 ///
@@ -91,7 +91,7 @@ pub enum ShapeInsideStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ShapeMarginStyleValue;
+pub struct ShapeMarginStyleValue<'a>;
 
 /// Represents the style value for `shape-outside` as defined in [css-shapes-2](https://drafts.csswg.org/css-shapes-2/#shape-outside).
 ///
@@ -148,4 +148,4 @@ pub enum ShapeOutsideStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-padding"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ShapePaddingStyleValue;
+pub struct ShapePaddingStyleValue<'a>;

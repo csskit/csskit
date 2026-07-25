@@ -5,7 +5,7 @@ use crate::{NamedRepeatItems, RepeatFunction, TrackSize};
 /// ```text,ignore
 /// <track-repeat> = repeat( [ <integer [1,∞]> ] , [ <line-names>? <track-size> ]+ <line-names>? )
 /// ```
-pub type TrackRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, TrackSize>>;
+pub type TrackRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, TrackSize<'a>>>;
 
 #[cfg(test)]
 mod tests {

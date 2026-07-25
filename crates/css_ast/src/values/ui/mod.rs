@@ -64,7 +64,7 @@ pub struct AccentColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.appearance"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum AppearanceStyleValue {}
+pub enum AppearanceStyleValue<'a> {}
 
 /// Represents the style value for `caret` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret).
 ///
@@ -269,7 +269,7 @@ pub enum InteractivityStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InterestDelayStyleValue;
+pub struct InterestDelayStyleValue<'a>;
 
 /// Represents the style value for `interest-delay-end` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-end).
 ///
@@ -297,7 +297,7 @@ pub struct InterestDelayStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InterestDelayEndStyleValue;
+pub struct InterestDelayEndStyleValue<'a>;
 
 /// Represents the style value for `interest-delay-start` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay-start).
 ///
@@ -325,7 +325,7 @@ pub struct InterestDelayEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interest-delay-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InterestDelayStartStyleValue;
+pub struct InterestDelayStartStyleValue<'a>;
 
 // /// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
 // ///
@@ -368,7 +368,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavDownStyleValue {}
+// pub enum NavDownStyleValue<'a> {}
 
 // /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
 // ///
@@ -412,7 +412,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavLeftStyleValue {}
+// pub enum NavLeftStyleValue<'a> {}
 
 // /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
 // ///
@@ -456,7 +456,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavRightStyleValue {}
+// pub enum NavRightStyleValue<'a> {}
 
 // /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
 // ///
@@ -499,7 +499,7 @@ pub struct InterestDelayStartStyleValue;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavUpStyleValue {}
+// pub enum NavUpStyleValue<'a> {}
 
 /// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
 ///
@@ -588,7 +588,7 @@ pub struct OutlineColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-offset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OutlineOffsetStyleValue;
+pub struct OutlineOffsetStyleValue<'a>;
 
 /// Represents the style value for `outline-style` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-style).
 ///
@@ -618,7 +618,7 @@ pub struct OutlineOffsetStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OutlineStyleStyleValue;
+pub struct OutlineStyleStyleValue<'a>;
 
 /// Represents the style value for `outline-width` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline-width).
 ///
@@ -648,7 +648,7 @@ pub struct OutlineStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OutlineWidthStyleValue;
+pub struct OutlineWidthStyleValue<'a>;
 
 /// Represents the style value for `pointer-events` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#pointer-events).
 ///

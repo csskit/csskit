@@ -34,11 +34,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundImageStyleValue([
-                (r#Some(Url(Url(Url(Cursor(
+                (Literal(r#Some(Url(Url(Url(Cursor(
                   kind: "Url",
                   offset: SourceOffset(26),
                   len: 83,
-                ))))), None),
+                )))))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -59,7 +59,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundImageStyleValue([
-                (r#Some(Url(UrlFunction(Function(Cursor(
+                (Literal(r#Some(Url(UrlFunction(Function(Cursor(
                   kind: "Function",
                   offset: SourceOffset(133),
                   len: 4,
@@ -71,7 +71,7 @@ StyleSheet(
                   kind: "RightParen",
                   offset: SourceOffset(154),
                   len: 1,
-                ))))), None),
+                )))))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -92,7 +92,7 @@ StyleSheet(
                 len: 1,
               )),
               value: BackgroundImageStyleValue([
-                (r#Some(Url(UrlFunction(Function(Cursor(
+                (Literal(r#Some(Url(UrlFunction(Function(Cursor(
                   kind: "Function",
                   offset: SourceOffset(179),
                   len: 4,
@@ -104,7 +104,7 @@ StyleSheet(
                   kind: "RightParen",
                   offset: SourceOffset(202),
                   len: 1,
-                ))))), None),
+                )))))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(

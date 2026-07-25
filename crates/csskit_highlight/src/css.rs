@@ -137,7 +137,7 @@ impl Visit for TokenHighlighter {
 	}
 
 	// Visit Color nodes to decorate with the swatch
-	fn visit_color(&mut self, color: &Color) {
+	fn visit_color<'b>(&mut self, color: &Color<'b>) {
 		let metadata = color.metadata();
 		let modifier = SemanticModifier::from(&metadata);
 		if let Some(bg) = color.to_chromashift() {

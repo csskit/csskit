@@ -38,7 +38,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginStyleValue;
+pub struct MarginStyleValue<'a>;
 
 /// Represents the style value for `margin-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-bottom).
 ///
@@ -72,7 +72,7 @@ pub struct MarginStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginBottomStyleValue;
+pub struct MarginBottomStyleValue<'a>;
 
 /// Represents the style value for `margin-left` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-left).
 ///
@@ -106,7 +106,7 @@ pub struct MarginBottomStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginLeftStyleValue;
+pub struct MarginLeftStyleValue<'a>;
 
 /// Represents the style value for `margin-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-right).
 ///
@@ -140,7 +140,7 @@ pub struct MarginLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginRightStyleValue;
+pub struct MarginRightStyleValue<'a>;
 
 /// Represents the style value for `margin-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-top).
 ///
@@ -174,7 +174,7 @@ pub struct MarginRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MarginTopStyleValue;
+pub struct MarginTopStyleValue<'a>;
 
 /// Represents the style value for `margin-trim` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#margin-trim).
 ///
@@ -237,7 +237,7 @@ pub enum MarginTrimStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingStyleValue;
+pub struct PaddingStyleValue<'a>;
 
 /// Represents the style value for `padding-bottom` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-bottom).
 ///
@@ -271,7 +271,7 @@ pub struct PaddingStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingBottomStyleValue;
+pub struct PaddingBottomStyleValue<'a>;
 
 /// Represents the style value for `padding-left` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-left).
 ///
@@ -305,7 +305,7 @@ pub struct PaddingBottomStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingLeftStyleValue;
+pub struct PaddingLeftStyleValue<'a>;
 
 /// Represents the style value for `padding-right` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-right).
 ///
@@ -339,7 +339,7 @@ pub struct PaddingLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingRightStyleValue;
+pub struct PaddingRightStyleValue<'a>;
 
 /// Represents the style value for `padding-top` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding-top).
 ///
@@ -373,4 +373,4 @@ pub struct PaddingRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaddingTopStyleValue;
+pub struct PaddingTopStyleValue<'a>;

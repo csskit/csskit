@@ -754,11 +754,11 @@ FAIL values/0003
 +a{background:url(image.png)}
 
 FAIL values/0014
--a{width:calc(calc(100% - 20px)+ 10px)}
+-a{width:calc(calc(100% - 20px) + 10px)}
 +a{width:calc(100% - 10px)}
 
 FAIL values/0015
--a{width:calc(100px * 2)}
+-a{width:calc(100px*2)}
 +a{width:200px}
 
 FAIL values/0016
@@ -766,7 +766,7 @@ FAIL values/0016
 +a{width:100px}
 
 FAIL values/0017
--a{width:calc(((75.37% - 63.5px)- 900px)+ (2 * 100px))}
+-a{width:calc(((75.37% - 63.5px) - 900px) + (2*100px))}
 +a{width:calc(75.37% - 763.5px)}
 
 FAIL values/0019
@@ -776,10 +776,6 @@ FAIL values/0019
 FAIL values/0020
 -a{background-position:center center}
 +a{background-position:50%}
-
-FAIL values/0021
--a{width:calc(100% / 3)}
-+a{width:calc(100%/3)}
 
 FAIL values/0022
 -a{display:block flow}
@@ -842,7 +838,7 @@ FAIL values/0038
 +a{background-repeat:repeat-y}
 
 FAIL values/0039
--a{width:calc(100px * 1)}
+-a{width:calc(100px*1)}
 +a{width:100px}
 
 FAIL values/0040
@@ -850,23 +846,23 @@ FAIL values/0040
 +a{width:100px}
 
 FAIL values/0041
--a{margin-left:calc(-1 * (-10px))}
+-a{margin-left:calc(-1*(-10px))}
 +a{margin-left:10px}
 
 FAIL values/0042
--a{width:calc(1 / (1 / 50px))}
+-a{width:calc(1/(1/50px))}
 +a{width:50px}
 
 FAIL values/0043
--a{width:calc(calc(10px + 20px)+ calc(30px + 40px))}
+-a{width:calc(calc(10px + 20px) + calc(30px + 40px))}
 +a{width:100px}
 
 FAIL values/0044
--a{width:calc(2 * 3 * 10px)}
+-a{width:calc(2*3*10px)}
 +a{width:60px}
 
 FAIL values/0045
--a{width:calc(2 * (50px + 25px))}
+-a{width:calc(2*(50px + 25px))}
 +a{width:150px}
 
 FAIL values/0046
@@ -874,7 +870,7 @@ FAIL values/0046
 +a{width:75%}
 
 FAIL values/0047
--a{line-height:calc(10 / 2)}
+-a{line-height:calc(10/2)}
 +a{line-height:5}
 
 FAIL values/0048
@@ -882,15 +878,15 @@ FAIL values/0048
 +a{width:0}
 
 FAIL values/0049
--a{width:calc(100px * 0)}
+-a{width:calc(100px*0)}
 +a{width:0}
 
 FAIL values/0050
--a{width:calc(pi * 100px)}
+-a{width:calc(pi*100px)}
 +a{width:314.159px}
 
 FAIL values/0051
--a{width:calc(e * 100px)}
+-a{width:calc(e*100px)}
 +a{width:271.828px}
 
 FAIL values/0052
@@ -906,7 +902,7 @@ FAIL values/0054
 +a{width:100px}
 
 FAIL values/0055
--a{width:calc(100px / 4)}
+-a{width:calc(100px/4)}
 +a{width:25px}
 
 FAIL values/0056
@@ -944,10 +940,6 @@ FAIL values/0067
 FAIL values/0070
 -@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:rgb(0 0 0)}
 +@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:#000}
-
-FAIL whitespace/0012
--a{width:calc(100% * 2)}
-+a{width:calc(100%*2)}
 
 FAIL whitespace/0015
 -a{font:16px / 1.5 sans-serif}

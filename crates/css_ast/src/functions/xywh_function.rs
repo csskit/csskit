@@ -12,10 +12,10 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct XywhFunction {
+pub struct XywhFunction<'a> {
 	#[atom(CssAtomSet::Xywh)]
 	pub name: T![Function],
-	pub params: XywhFunctionParams,
+	pub params: XywhFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -23,7 +23,7 @@ pub struct XywhFunction {
 #[syntax(" <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <'border-radius'> ]? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct XywhFunctionParams;
+pub struct XywhFunctionParams<'a>;
 
 #[cfg(test)]
 mod tests {

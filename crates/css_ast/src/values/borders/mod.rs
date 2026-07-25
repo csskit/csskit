@@ -261,7 +261,7 @@ pub enum BorderBlockEndColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockEndRadiusStyleValue;
+pub struct BorderBlockEndRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-block-end-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-style).
 ///
@@ -293,7 +293,7 @@ pub struct BorderBlockEndRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockEndStyleStyleValue;
+pub struct BorderBlockEndStyleStyleValue<'a>;
 
 /// Represents the style value for `border-block-end-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-end-width).
 ///
@@ -325,7 +325,7 @@ pub struct BorderBlockEndStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockEndWidthStyleValue;
+pub struct BorderBlockEndWidthStyleValue<'a>;
 
 /// Represents the style value for `border-block-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start).
 ///
@@ -448,7 +448,7 @@ pub enum BorderBlockStartColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockStartRadiusStyleValue;
+pub struct BorderBlockStartRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-block-start-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-style).
 ///
@@ -480,7 +480,7 @@ pub struct BorderBlockStartRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockStartStyleStyleValue;
+pub struct BorderBlockStartStyleStyleValue<'a>;
 
 /// Represents the style value for `border-block-start-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-start-width).
 ///
@@ -512,7 +512,7 @@ pub struct BorderBlockStartStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockStartWidthStyleValue;
+pub struct BorderBlockStartWidthStyleValue<'a>;
 
 /// Represents the style value for `border-block-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-style).
 ///
@@ -546,7 +546,7 @@ pub struct BorderBlockStartWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockStyleStyleValue;
+pub struct BorderBlockStyleStyleValue<'a>;
 
 /// Represents the style value for `border-block-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-block-width).
 ///
@@ -580,7 +580,7 @@ pub struct BorderBlockStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBlockWidthStyleValue;
+pub struct BorderBlockWidthStyleValue<'a>;
 
 /// Represents the style value for `border-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom).
 ///
@@ -708,7 +708,7 @@ pub enum BorderBottomColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-left-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBottomLeftRadiusStyleValue;
+pub struct BorderBottomLeftRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-bottom-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-radius).
 ///
@@ -737,7 +737,7 @@ pub struct BorderBottomLeftRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBottomRadiusStyleValue;
+pub struct BorderBottomRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-bottom-right-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-right-radius).
 ///
@@ -775,7 +775,7 @@ pub struct BorderBottomRadiusStyleValue;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBottomRightRadiusStyleValue;
+pub struct BorderBottomRightRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-bottom-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-style).
 ///
@@ -807,7 +807,7 @@ pub struct BorderBottomRightRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBottomStyleStyleValue;
+pub struct BorderBottomStyleStyleValue<'a>;
 
 /// Represents the style value for `border-bottom-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-bottom-width).
 ///
@@ -839,7 +839,7 @@ pub struct BorderBottomStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderBottomWidthStyleValue;
+pub struct BorderBottomWidthStyleValue<'a>;
 
 /// Represents the style value for `border-clip` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-clip).
 ///
@@ -937,7 +937,7 @@ pub struct BorderColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-end-end-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderEndEndRadiusStyleValue;
+pub struct BorderEndEndRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-end-start-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-end-start-radius).
 ///
@@ -970,7 +970,7 @@ pub struct BorderEndEndRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-end-start-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderEndStartRadiusStyleValue;
+pub struct BorderEndStartRadiusStyleValue<'a>;
 
 // /// Represents the style value for `border-image` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image).
 // ///
@@ -1050,7 +1050,7 @@ pub struct BorderEndStartRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-outset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderImageOutsetStyleValue;
+pub struct BorderImageOutsetStyleValue<'a>;
 
 /// Represents the style value for `border-image-repeat` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image-repeat).
 ///
@@ -1113,7 +1113,7 @@ pub struct BorderImageRepeatStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-slice"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderImageSliceStyleValue;
+pub struct BorderImageSliceStyleValue<'a>;
 
 /// Represents the style value for `border-image-source` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image-source).
 ///
@@ -1176,7 +1176,7 @@ pub struct BorderImageSourceStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderImageWidthStyleValue;
+pub struct BorderImageWidthStyleValue<'a>;
 
 /// Represents the style value for `border-inline` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline).
 ///
@@ -1398,7 +1398,7 @@ pub enum BorderInlineEndColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineEndRadiusStyleValue;
+pub struct BorderInlineEndRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-inline-end-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-style).
 ///
@@ -1430,7 +1430,7 @@ pub struct BorderInlineEndRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineEndStyleStyleValue;
+pub struct BorderInlineEndStyleStyleValue<'a>;
 
 /// Represents the style value for `border-inline-end-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-end-width).
 ///
@@ -1462,7 +1462,7 @@ pub struct BorderInlineEndStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineEndWidthStyleValue;
+pub struct BorderInlineEndWidthStyleValue<'a>;
 
 /// Represents the style value for `border-inline-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start).
 ///
@@ -1589,7 +1589,7 @@ pub enum BorderInlineStartColorStyleValue<'a> {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineStartRadiusStyleValue;
+pub struct BorderInlineStartRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-inline-start-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-style).
 ///
@@ -1621,7 +1621,7 @@ pub struct BorderInlineStartRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineStartStyleStyleValue;
+pub struct BorderInlineStartStyleStyleValue<'a>;
 
 /// Represents the style value for `border-inline-start-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-start-width).
 ///
@@ -1653,7 +1653,7 @@ pub struct BorderInlineStartStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineStartWidthStyleValue;
+pub struct BorderInlineStartWidthStyleValue<'a>;
 
 /// Represents the style value for `border-inline-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-style).
 ///
@@ -1687,7 +1687,7 @@ pub struct BorderInlineStartWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineStyleStyleValue;
+pub struct BorderInlineStyleStyleValue<'a>;
 
 /// Represents the style value for `border-inline-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-inline-width).
 ///
@@ -1721,7 +1721,7 @@ pub struct BorderInlineStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderInlineWidthStyleValue;
+pub struct BorderInlineWidthStyleValue<'a>;
 
 /// Represents the style value for `border-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left).
 ///
@@ -1844,7 +1844,7 @@ pub enum BorderLeftColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderLeftRadiusStyleValue;
+pub struct BorderLeftRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-left-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-style).
 ///
@@ -1876,7 +1876,7 @@ pub struct BorderLeftRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderLeftStyleStyleValue;
+pub struct BorderLeftStyleStyleValue<'a>;
 
 /// Represents the style value for `border-left-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-left-width).
 ///
@@ -1908,7 +1908,7 @@ pub struct BorderLeftStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderLeftWidthStyleValue;
+pub struct BorderLeftWidthStyleValue<'a>;
 
 /// Represents the style value for `border-limit` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-limit).
 ///
@@ -1940,7 +1940,7 @@ pub struct BorderLeftWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-limit"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BorderLimitStyleValue {}
+pub enum BorderLimitStyleValue<'a> {}
 
 /// Represents the style value for `border-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-radius).
 ///
@@ -1973,7 +1973,7 @@ pub enum BorderLimitStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderRadiusStyleValue;
+pub struct BorderRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right).
 ///
@@ -2096,7 +2096,7 @@ pub enum BorderRightColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderRightRadiusStyleValue;
+pub struct BorderRightRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-right-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-style).
 ///
@@ -2128,7 +2128,7 @@ pub struct BorderRightRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderRightStyleStyleValue;
+pub struct BorderRightStyleStyleValue<'a>;
 
 /// Represents the style value for `border-right-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-right-width).
 ///
@@ -2160,7 +2160,7 @@ pub struct BorderRightStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderRightWidthStyleValue;
+pub struct BorderRightWidthStyleValue<'a>;
 
 /// Represents the style value for `border-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-shape).
 ///
@@ -2224,7 +2224,7 @@ pub struct BorderShapeStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-start-end-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderStartEndRadiusStyleValue;
+pub struct BorderStartEndRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-start-start-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-start-start-radius).
 ///
@@ -2257,7 +2257,7 @@ pub struct BorderStartEndRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-start-start-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderStartStartRadiusStyleValue;
+pub struct BorderStartStartRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-style).
 ///
@@ -2292,7 +2292,7 @@ pub struct BorderStartStartRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderStyleStyleValue;
+pub struct BorderStyleStyleValue<'a>;
 
 /// Represents the style value for `border-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top).
 ///
@@ -2420,7 +2420,7 @@ pub enum BorderTopColorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-left-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderTopLeftRadiusStyleValue;
+pub struct BorderTopLeftRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-top-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-radius).
 ///
@@ -2449,7 +2449,7 @@ pub struct BorderTopLeftRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderTopRadiusStyleValue;
+pub struct BorderTopRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-top-right-radius` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-right-radius).
 ///
@@ -2483,7 +2483,7 @@ pub struct BorderTopRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-right-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderTopRightRadiusStyleValue;
+pub struct BorderTopRightRadiusStyleValue<'a>;
 
 /// Represents the style value for `border-top-style` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-style).
 ///
@@ -2515,7 +2515,7 @@ pub struct BorderTopRightRadiusStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderTopStyleStyleValue;
+pub struct BorderTopStyleStyleValue<'a>;
 
 /// Represents the style value for `border-top-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-top-width).
 ///
@@ -2547,7 +2547,7 @@ pub struct BorderTopStyleStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderTopWidthStyleValue;
+pub struct BorderTopWidthStyleValue<'a>;
 
 /// Represents the style value for `border-width` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-width).
 ///
@@ -2582,7 +2582,7 @@ pub struct BorderTopWidthStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderWidthStyleValue;
+pub struct BorderWidthStyleValue<'a>;
 
 /// Represents the style value for `box-shadow` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#box-shadow).
 ///
@@ -2774,7 +2774,7 @@ pub struct BoxShadowSpreadStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerStyleValue;
+pub struct CornerStyleValue<'a>;
 
 /// Represents the style value for `corner-block-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end).
 ///
@@ -2803,7 +2803,7 @@ pub struct CornerStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBlockEndStyleValue;
+pub struct CornerBlockEndStyleValue<'a>;
 
 /// Represents the style value for `corner-block-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-end-shape).
 ///
@@ -2834,7 +2834,7 @@ pub struct CornerBlockEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-end-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBlockEndShapeStyleValue;
+pub struct CornerBlockEndShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-block-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start).
 ///
@@ -2863,7 +2863,7 @@ pub struct CornerBlockEndShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBlockStartStyleValue;
+pub struct CornerBlockStartStyleValue<'a>;
 
 /// Represents the style value for `corner-block-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-block-start-shape).
 ///
@@ -2894,7 +2894,7 @@ pub struct CornerBlockStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-block-start-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBlockStartShapeStyleValue;
+pub struct CornerBlockStartShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-bottom` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom).
 ///
@@ -2923,7 +2923,7 @@ pub struct CornerBlockStartShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBottomStyleValue;
+pub struct CornerBottomStyleValue<'a>;
 
 /// Represents the style value for `corner-bottom-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left).
 ///
@@ -2952,7 +2952,7 @@ pub struct CornerBottomStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBottomLeftStyleValue;
+pub struct CornerBottomLeftStyleValue<'a>;
 
 /// Represents the style value for `corner-bottom-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-left-shape).
 ///
@@ -2983,7 +2983,7 @@ pub struct CornerBottomLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-left-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBottomLeftShapeStyleValue;
+pub struct CornerBottomLeftShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-bottom-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right).
 ///
@@ -3012,7 +3012,7 @@ pub struct CornerBottomLeftShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBottomRightStyleValue;
+pub struct CornerBottomRightStyleValue<'a>;
 
 /// Represents the style value for `corner-bottom-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-right-shape).
 ///
@@ -3043,7 +3043,7 @@ pub struct CornerBottomRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-right-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBottomRightShapeStyleValue;
+pub struct CornerBottomRightShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-bottom-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-bottom-shape).
 ///
@@ -3074,7 +3074,7 @@ pub struct CornerBottomRightShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-bottom-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerBottomShapeStyleValue;
+pub struct CornerBottomShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-end-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end).
 ///
@@ -3103,7 +3103,7 @@ pub struct CornerBottomShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerEndEndStyleValue;
+pub struct CornerEndEndStyleValue<'a>;
 
 /// Represents the style value for `corner-end-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-end-shape).
 ///
@@ -3134,7 +3134,7 @@ pub struct CornerEndEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-end-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerEndEndShapeStyleValue;
+pub struct CornerEndEndShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-end-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start).
 ///
@@ -3163,7 +3163,7 @@ pub struct CornerEndEndShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerEndStartStyleValue;
+pub struct CornerEndStartStyleValue<'a>;
 
 /// Represents the style value for `corner-end-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-end-start-shape).
 ///
@@ -3194,7 +3194,7 @@ pub struct CornerEndStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-end-start-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerEndStartShapeStyleValue;
+pub struct CornerEndStartShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-inline-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end).
 ///
@@ -3223,7 +3223,7 @@ pub struct CornerEndStartShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerInlineEndStyleValue;
+pub struct CornerInlineEndStyleValue<'a>;
 
 /// Represents the style value for `corner-inline-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-end-shape).
 ///
@@ -3254,7 +3254,7 @@ pub struct CornerInlineEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-end-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerInlineEndShapeStyleValue;
+pub struct CornerInlineEndShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-inline-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start).
 ///
@@ -3283,7 +3283,7 @@ pub struct CornerInlineEndShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerInlineStartStyleValue;
+pub struct CornerInlineStartStyleValue<'a>;
 
 /// Represents the style value for `corner-inline-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-inline-start-shape).
 ///
@@ -3314,7 +3314,7 @@ pub struct CornerInlineStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-inline-start-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerInlineStartShapeStyleValue;
+pub struct CornerInlineStartShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left).
 ///
@@ -3343,7 +3343,7 @@ pub struct CornerInlineStartShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerLeftStyleValue;
+pub struct CornerLeftStyleValue<'a>;
 
 /// Represents the style value for `corner-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-left-shape).
 ///
@@ -3374,7 +3374,7 @@ pub struct CornerLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-left-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerLeftShapeStyleValue;
+pub struct CornerLeftShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right).
 ///
@@ -3403,7 +3403,7 @@ pub struct CornerLeftShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerRightStyleValue;
+pub struct CornerRightStyleValue<'a>;
 
 /// Represents the style value for `corner-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-right-shape).
 ///
@@ -3434,7 +3434,7 @@ pub struct CornerRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-right-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerRightShapeStyleValue;
+pub struct CornerRightShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-shape).
 ///
@@ -3464,7 +3464,7 @@ pub struct CornerRightShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerShapeStyleValue;
+pub struct CornerShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-start-end` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end).
 ///
@@ -3493,7 +3493,7 @@ pub struct CornerShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerStartEndStyleValue;
+pub struct CornerStartEndStyleValue<'a>;
 
 /// Represents the style value for `corner-start-end-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-end-shape).
 ///
@@ -3524,7 +3524,7 @@ pub struct CornerStartEndStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-end-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerStartEndShapeStyleValue;
+pub struct CornerStartEndShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-start-start` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start).
 ///
@@ -3553,7 +3553,7 @@ pub struct CornerStartEndShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-start"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerStartStartStyleValue;
+pub struct CornerStartStartStyleValue<'a>;
 
 /// Represents the style value for `corner-start-start-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-start-start-shape).
 ///
@@ -3584,7 +3584,7 @@ pub struct CornerStartStartStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-start-start-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerStartStartShapeStyleValue;
+pub struct CornerStartStartShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-top` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top).
 ///
@@ -3613,7 +3613,7 @@ pub struct CornerStartStartShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerTopStyleValue;
+pub struct CornerTopStyleValue<'a>;
 
 /// Represents the style value for `corner-top-left` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left).
 ///
@@ -3642,7 +3642,7 @@ pub struct CornerTopStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerTopLeftStyleValue;
+pub struct CornerTopLeftStyleValue<'a>;
 
 /// Represents the style value for `corner-top-left-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-left-shape).
 ///
@@ -3673,7 +3673,7 @@ pub struct CornerTopLeftStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-left-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerTopLeftShapeStyleValue;
+pub struct CornerTopLeftShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-top-right` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right).
 ///
@@ -3702,7 +3702,7 @@ pub struct CornerTopLeftShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerTopRightStyleValue;
+pub struct CornerTopRightStyleValue<'a>;
 
 /// Represents the style value for `corner-top-right-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-right-shape).
 ///
@@ -3733,7 +3733,7 @@ pub struct CornerTopRightStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-right-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerTopRightShapeStyleValue;
+pub struct CornerTopRightShapeStyleValue<'a>;
 
 /// Represents the style value for `corner-top-shape` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#corner-top-shape).
 ///
@@ -3764,4 +3764,4 @@ pub struct CornerTopRightShapeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.corner-top-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CornerTopShapeStyleValue;
+pub struct CornerTopShapeStyleValue<'a>;

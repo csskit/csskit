@@ -33,11 +33,11 @@ StyleSheet(
                 offset: SourceOffset(18),
                 len: 1,
               )),
-              value: LengthPercentage(Length(Px(Dimension(Cursor(
+              value: LengthPercentage(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(20),
                 len: 5,
-              ))))),
+              )))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -10,13 +10,12 @@ use crate::{BgPosition, BgSize};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BgPositionAndSize {
+pub struct BgPositionAndSize<'a> {
 	pub position: BgPosition,
-	#[semantic_eq(skip)]
-	pub size: Option<(T![/], BgSize)>,
+	pub size: Option<(T![/], BgSize<'a>)>,
 }
 
-impl<'a> Peek<'a> for BgPositionAndSize {
+impl<'a> Peek<'a> for BgPositionAndSize<'a> {
 	const PEEK_KINDSET: KindSet = BgPosition::PEEK_KINDSET;
 
 	#[inline(always)]
@@ -28,7 +27,7 @@ impl<'a> Peek<'a> for BgPositionAndSize {
 	}
 }
 
-impl<'a> Parse<'a> for BgPositionAndSize {
+impl<'a> Parse<'a> for BgPositionAndSize<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -53,7 +52,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgPositionAndSize>(), 112);
+		assert_eq!(std::mem::size_of::<BgPositionAndSize>(), 136);
 	}
 
 	#[test]

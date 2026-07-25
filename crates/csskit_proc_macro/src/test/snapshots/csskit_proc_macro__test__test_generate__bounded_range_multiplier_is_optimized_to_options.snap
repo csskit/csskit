@@ -2,8 +2,6 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-struct Foo(
-    pub crate::AnimateableFeature,
-    pub Option<crate::AnimateableFeature>,
-    pub Option<crate::AnimateableFeature>,
-);
+::core::compile_error! {
+    "this object needs the <'a> lifetime but it didn't have it. Add it"
+}

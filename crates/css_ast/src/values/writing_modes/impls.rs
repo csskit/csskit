@@ -51,7 +51,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<WritingModeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<TextOrientationStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<GlyphOrientationVerticalStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextCombineUprightStyleValue>(), 28);
+		assert_eq!(std::mem::size_of::<TextCombineUprightStyleValue>(), 40);
 	}
 
 	#[test]
@@ -76,8 +76,8 @@ mod tests {
 	#[test]
 	fn test_parse_error() {
 		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 1");
-		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 2 2");
 		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 5");
+		assert_parse_error!(CssAtomSet::ATOMS, TextCombineUprightStyleValue, "digits 2 2");
 	}
 
 	#[cfg(feature = "css_feature_data")]

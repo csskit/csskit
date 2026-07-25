@@ -4,7 +4,7 @@
 //! with legacy stylesheets.
 
 use super::prelude::*;
-use crate::{Length, PositionOne, PositionTwo};
+use crate::{CalcableValue, Length, PositionOne, PositionTwo};
 use css_parse::{Cursor, Parse, Parser, Result as ParseResult};
 
 /// Represents the style value for `-webkit-filter`.
@@ -57,7 +57,7 @@ pub struct WebkitFilterStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitFlexStyleValue;
+pub struct WebkitFlexStyleValue<'a>;
 
 /// Represents the style value for `-webkit-order`.
 ///
@@ -83,7 +83,7 @@ pub struct WebkitFlexStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitOrderStyleValue;
+pub struct WebkitOrderStyleValue<'a>;
 
 /// Represents the style value for `-webkit-transform-origin`.
 ///
@@ -109,17 +109,19 @@ pub struct WebkitOrderStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitTransformOriginStyleValue {}
+pub enum WebkitTransformOriginStyleValue<'a> {}
 
-impl<'a> Parse<'a> for WebkitTransformOriginStyleValue {
+impl<'a> Parse<'a> for WebkitTransformOriginStyleValue<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParseResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let first = p.parse::<PositionOne>()?;
-		let Some(second) = p.parse_if_peek::<PositionOne>()? else { return Ok(Self::PositionOne(first)) };
+		let Some(second) = p.parse_if_peek::<PositionOne>()? else {
+			return Ok(Self::PositionOne(crate::Value::Literal(first)));
+		};
 		let two = PositionTwo::from_two(p, first, second)?;
-		Ok(Self::PositionTwo(two, p.parse_if_peek::<Length>()?))
+		Ok(Self::PositionTwo(crate::Value::Literal(two), p.parse_if_peek::<CalcableValue<Length>>()?))
 	}
 }
 
@@ -172,7 +174,7 @@ pub struct WebkitTransitionStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitAppearanceStyleValue {}
+pub enum WebkitAppearanceStyleValue<'a> {}
 
 /// Represents the style value for `-webkit-transform`.
 ///
@@ -252,7 +254,7 @@ pub enum WebkitFontSmoothingStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitTextSizeAdjustStyleValue;
+pub struct WebkitTextSizeAdjustStyleValue<'a>;
 
 /// Represents the style value for `-webkit-animation-delay`.
 ///
@@ -558,7 +560,7 @@ pub enum WebkitFlexWrapStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitFlexBasisStyleValue {}
+pub enum WebkitFlexBasisStyleValue<'a> {}
 
 /// `-webkit-flex-flow` — alias for `flex-flow`.
 #[syntax(" <'flex-direction'> || <'flex-wrap'> ")]
@@ -593,7 +595,7 @@ pub struct WebkitFlexFlowStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitFlexGrowStyleValue;
+pub struct WebkitFlexGrowStyleValue<'a>;
 
 /// `-webkit-justify-content` — alias for `justify-content`.
 #[syntax(" normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] ")]
@@ -611,7 +613,7 @@ pub struct WebkitFlexGrowStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitJustifyContentStyleValue {}
+pub enum WebkitJustifyContentStyleValue<'a> {}
 
 /// `-webkit-align-items` — alias for `align-items`.
 #[syntax(" normal | stretch | <baseline-position> | <overflow-position>? <self-position> ")]
@@ -629,7 +631,7 @@ pub enum WebkitJustifyContentStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitAlignItemsStyleValue {}
+pub enum WebkitAlignItemsStyleValue<'a> {}
 
 /// `-webkit-align-self` — alias for `align-self`.
 #[syntax(" auto | <overflow-position>? [ normal | <self-position> ] | stretch | <baseline-position> ")]
@@ -647,7 +649,7 @@ pub enum WebkitAlignItemsStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitAlignSelfStyleValue {}
+pub enum WebkitAlignSelfStyleValue<'a> {}
 
 /// `-webkit-align-content` — alias for `align-content`.
 #[syntax(" normal | <baseline-position> | <content-distribution> | <overflow-position>? <content-position> ")]
@@ -665,7 +667,7 @@ pub enum WebkitAlignSelfStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitAlignContentStyleValue {}
+pub enum WebkitAlignContentStyleValue<'a> {}
 
 // ── Legacy box model ─────────────────────────────────────────────────────────
 
@@ -757,7 +759,7 @@ pub enum WebkitBoxAlignStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitBoxFlexStyleValue;
+pub struct WebkitBoxFlexStyleValue<'a>;
 
 /// `-webkit-box-ordinal-group` — legacy flexbox ordering.
 #[syntax(" <integer [1,∞]> ")]
@@ -775,7 +777,7 @@ pub struct WebkitBoxFlexStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitBoxOrdinalGroupStyleValue;
+pub struct WebkitBoxOrdinalGroupStyleValue<'a>;
 
 /// `-webkit-box-shadow` — alias for `box-shadow`.
 #[syntax(" <spread-shadow># ")]
@@ -962,7 +964,7 @@ pub enum WebkitTextDecorationSkipInkStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitColumnGapStyleValue {}
+pub enum WebkitColumnGapStyleValue<'a> {}
 
 /// `-webkit-column-count` — alias for `column-count`.
 #[syntax(" auto | <integer [1,∞]> ")]
@@ -980,7 +982,7 @@ pub enum WebkitColumnGapStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitColumnCountStyleValue;
+pub struct WebkitColumnCountStyleValue<'a>;
 
 /// `-webkit-margin-end` — alias for `margin-inline-end`.
 #[syntax(" <'margin-top'> ")]
@@ -998,7 +1000,7 @@ pub struct WebkitColumnCountStyleValue;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitMarginEndStyleValue;
+pub struct WebkitMarginEndStyleValue<'a>;
 
 /// `-webkit-mask-position` — alias for `mask-position`.
 #[syntax(" <position># ")]
@@ -1184,7 +1186,7 @@ pub struct WebkitTextStrokeColorStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitTextStrokeWidthStyleValue;
+pub struct WebkitTextStrokeWidthStyleValue<'a>;
 
 /// `-webkit-background-clip` — alias for `background-clip`.
 #[syntax(" <bg-clip># ")]
@@ -1243,7 +1245,7 @@ pub struct WebkitBackgroundSizeStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitPerspectiveStyleValue;
+pub struct WebkitPerspectiveStyleValue<'a>;
 
 /// `-webkit-clip-path` — alias for `clip-path`.
 #[syntax(" none | <clip-source> | [ <basic-shape> || <geometry-box> ] ")]
@@ -1271,7 +1273,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<WebkitFilterStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<WebkitFilterStyleValue>(), 32);
 	}
 
 	#[test]
@@ -1344,7 +1346,7 @@ mod tests {
 
 	#[test]
 	fn size_test_appearance() {
-		assert_eq!(std::mem::size_of::<WebkitAppearanceStyleValue>(), 20);
+		assert_eq!(std::mem::size_of::<WebkitAppearanceStyleValue>(), 32);
 	}
 
 	#[test]
@@ -1362,7 +1364,7 @@ mod tests {
 
 	#[test]
 	fn size_test_transform() {
-		assert_eq!(std::mem::size_of::<WebkitTransformStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<WebkitTransformStyleValue>(), 32);
 	}
 
 	#[test]
@@ -1397,7 +1399,7 @@ mod tests {
 
 	#[test]
 	fn size_test_text_size_adjust() {
-		assert_eq!(std::mem::size_of::<WebkitTextSizeAdjustStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<WebkitTextSizeAdjustStyleValue>(), 24);
 	}
 
 	#[test]

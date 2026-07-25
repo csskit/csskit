@@ -69,8 +69,8 @@ mod tests {
 	use crate::{CssAtomSet, FixedSize};
 	use css_parse::{assert_parse, assert_peek_false};
 
-	type FixedRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize>>;
-	type AutoRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize>, AutoFillOrFit>;
+	type FixedRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize<'a>>>;
+	type AutoRepeat<'a> = RepeatFunction<NamedRepeatItems<'a, FixedSize<'a>>, AutoFillOrFit>;
 
 	#[test]
 	fn test_count_disambiguates_same_named_function() {

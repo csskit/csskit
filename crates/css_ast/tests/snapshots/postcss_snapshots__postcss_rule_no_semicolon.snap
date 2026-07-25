@@ -33,11 +33,11 @@ StyleSheet(
                 offset: SourceOffset(7),
                 len: 1,
               )),
-              value: ColorStyleValue(Named(Black(Ident(Cursor(
+              value: ColorStyleValue(Literal(Named(Black(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(8),
                 len: 5,
-              ))))),
+              )))))),
               important: None,
               semicolon: None,
             ),

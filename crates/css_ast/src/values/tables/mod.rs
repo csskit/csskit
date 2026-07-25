@@ -67,7 +67,7 @@ pub enum BorderCollapseStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-spacing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderSpacingStyleValue;
+pub struct BorderSpacingStyleValue<'a>;
 
 /// Represents the style value for `caption-side` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#caption-side).
 ///

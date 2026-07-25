@@ -3,8 +3,11 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
-enum Foo {
-    Length(crate::Length, Option<crate::Length>),
+enum Foo<'a> {
+    Length(
+        crate::CalcableValue<'a, crate::Length>,
+        Option<crate::CalcableValue<'a, crate::Length>>,
+    ),
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
 }

@@ -2,15 +2,6 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-#[derive(Parse)]
-enum Foo {
-    #[atom(CssAtomSet::None)]
-    None(::css_parse::T![Ident]),
-    #[parse(one_must_occur)]
-    Flip {
-        angle: Option<crate::Angle>,
-        #[atom(CssAtomSet::Flip)]
-        flip: Option<::css_parse::T![Ident]>,
-    },
-    Length(crate::Length),
+::core::compile_error! {
+    "this object needs the <'a> lifetime but it didn't have it. Add it"
 }

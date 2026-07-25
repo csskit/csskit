@@ -181,7 +181,7 @@ pub enum FontKerningStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-language-override"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontLanguageOverrideStyleValue;
+pub struct FontLanguageOverrideStyleValue<'a>;
 
 /// Represents the style value for `font-optical-sizing` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-optical-sizing).
 ///
@@ -241,7 +241,7 @@ pub enum FontOpticalSizingStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-palette"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontPaletteStyleValue {}
+pub enum FontPaletteStyleValue<'a> {}
 
 /// Represents the style value for `font-size` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size).
 ///
@@ -273,7 +273,7 @@ pub enum FontPaletteStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontSizeStyleValue {}
+pub enum FontSizeStyleValue<'a> {}
 
 /// Represents the style value for `font-size-adjust` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-size-adjust).
 ///
@@ -303,7 +303,7 @@ pub enum FontSizeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-size-adjust"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontSizeAdjustStyleValue {}
+pub enum FontSizeAdjustStyleValue<'a> {}
 
 /// Represents the style value for `font-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-style).
 ///
@@ -334,7 +334,7 @@ pub enum FontSizeAdjustStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontStyleStyleValue {}
+pub enum FontStyleStyleValue<'a> {}
 
 /// Represents the style value for `font-synthesis` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis).
 ///
@@ -656,7 +656,7 @@ pub enum FontVariantCapsStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-east-asian"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontVariantEastAsianStyleValue;
+pub struct FontVariantEastAsianStyleValue<'a>;
 
 /// Represents the style value for `font-variant-emoji` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-emoji).
 ///
@@ -720,7 +720,7 @@ pub enum FontVariantEmojiStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-ligatures"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontVariantLigaturesStyleValue {}
+pub enum FontVariantLigaturesStyleValue<'a> {}
 
 /// Represents the style value for `font-variant-numeric` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-numeric).
 ///
@@ -753,7 +753,7 @@ pub enum FontVariantLigaturesStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-numeric"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontVariantNumericStyleValue;
+pub struct FontVariantNumericStyleValue<'a>;
 
 /// Represents the style value for `font-variant-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-position).
 ///
@@ -845,7 +845,7 @@ pub struct FontVariationSettingsStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-weight"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontWeightStyleValue {}
+pub enum FontWeightStyleValue<'a> {}
 
 /// Represents the style value for `font-width` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-width).
 ///
@@ -878,4 +878,4 @@ pub enum FontWeightStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontWidthStyleValue {}
+pub enum FontWidthStyleValue<'a> {}

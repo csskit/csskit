@@ -6,13 +6,13 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<OutlineStyleValue>(), 88);
-		assert_eq!(std::mem::size_of::<OutlineWidthStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<OutlineStyleStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<OutlineStyleValue>(), 104);
+		assert_eq!(std::mem::size_of::<OutlineWidthStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<OutlineStyleStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<OutlineColorStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<OutlineOffsetStyleValue>(), 16);
+		assert_eq!(std::mem::size_of::<OutlineOffsetStyleValue>(), 24);
 		assert_eq!(std::mem::size_of::<ResizeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<CursorStyleValue>(), 40);
+		assert_eq!(std::mem::size_of::<CursorStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<CaretColorStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<CaretAnimationStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<CaretShapeStyleValue>(), 16);
@@ -24,11 +24,11 @@ mod tests {
 		assert_eq!(std::mem::size_of::<UserSelectStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<PointerEventsStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<InteractivityStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InterestDelayStartStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InterestDelayEndStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<InterestDelayStyleValue>(), 32);
+		assert_eq!(std::mem::size_of::<InterestDelayStartStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InterestDelayEndStyleValue>(), 24);
+		assert_eq!(std::mem::size_of::<InterestDelayStyleValue>(), 48);
 		assert_eq!(std::mem::size_of::<AccentColorStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AppearanceStyleValue>(), 20);
+		assert_eq!(std::mem::size_of::<AppearanceStyleValue>(), 32);
 	}
 
 	#[test]

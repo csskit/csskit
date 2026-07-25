@@ -1,6 +1,6 @@
 use crate::{
 	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits, NodeKinds,
-	PropertyGroup, PropertyKind, VendorPrefixes, values,
+	PropertyGroup, PropertyKind, Unresolved, VendorPrefixes, values,
 };
 use css_lexer::Kind;
 use css_parse::{
@@ -18,48 +18,6 @@ include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Custom<'a>(pub ComponentValues<'a>);
-
-#[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
-pub struct Computed<'a>(pub ComponentValues<'a>);
-
-impl<'a> Peek<'a> for Computed<'a> {
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Function]);
-
-	#[inline(always)]
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		<T![Function]>::peek(p, c)
-			&& matches!(
-				p.to_atom::<CssAtomSet>(c),
-				CssAtomSet::Var
-					| CssAtomSet::Calc
-					| CssAtomSet::Min
-					| CssAtomSet::Max
-					| CssAtomSet::Clamp
-					| CssAtomSet::Round
-					| CssAtomSet::Mod
-					| CssAtomSet::Rem
-					| CssAtomSet::Sin
-					| CssAtomSet::Cos
-					| CssAtomSet::Tan
-					| CssAtomSet::Asin
-					| CssAtomSet::Atan
-					| CssAtomSet::Atan2
-					| CssAtomSet::Pow
-					| CssAtomSet::Sqrt
-					| CssAtomSet::Hypot
-					| CssAtomSet::Log
-					| CssAtomSet::Exp
-					| CssAtomSet::Abs
-					| CssAtomSet::Sign
-			)
-	}
-}
 
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -85,8 +43,11 @@ macro_rules! style_value {
 			RevertLayer(T![Ident]),
 			#[cfg_attr(feature = "serde", serde(untagged))]
 			Custom(Custom<'a>),
-			#[cfg_attr(feature = "serde", serde(untagged))]
-			Computed(Computed<'a>),
+			/// A whole-value substitution (e.g. `background: var(--a) var(--b) calc(..)`) whose slot assignment can't be
+			/// resolved at parse time.
+			#[cfg_attr(feature = "visitable", visit(skip))]
+		#[cfg_attr(feature = "serde", serde(untagged))]
+		Unresolved(Unresolved<'a>),
 			#[cfg_attr(feature = "serde", serde(untagged))]
 			Unknown(Unknown<'a>),
 			$(
@@ -120,9 +81,10 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 							..Default::default()
 						}
 					}
-					Self::Computed(_) => {
+					Self::Unresolved(_) => {
 						CssMetadata {
 							declaration_kinds: DeclarationKind::Computed,
+							uses_substitution: true,
 							..Default::default()
 						}
 					},
@@ -133,14 +95,14 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 						}
 					},
 					$(
-					Self::$name(_) => {
+					Self::$name(v) => {
 						let mut declaration_kinds = DeclarationKind::none();
 						if values::$ty::is_shorthand() {
 							declaration_kinds |= DeclarationKind::Shorthands;
 						} else {
 							declaration_kinds |= DeclarationKind::Longhands;
 						}
-						CssMetadata {
+						let self_meta = CssMetadata {
 							property_groups: values::$ty::property_group(),
 							applies_to: values::$ty::applies_to(),
 							box_sides: values::$ty::box_side(),
@@ -148,7 +110,9 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 							declaration_kinds,
 							unitless_zero_resolves: values::$ty::unitless_zero_resolves(),
 							..Default::default()
-						}
+						};
+						let inner_meta = v.metadata();
+						css_parse::NodeMetadata::merge(self_meta, inner_meta)
 					}
 					)+
 				}
@@ -364,7 +328,7 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	}
 
 	fn needs_computing(&self) -> bool {
-		matches!(self, Self::Computed(_))
+		self.metadata().has_computed()
 	}
 
 	fn parse_custom_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
@@ -378,14 +342,18 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		<Computed>::peek(p, c)
+		if !<T![Function]>::peek(p, c) {
+			return false;
+		}
+		let atom = p.to_atom::<CssAtomSet>(c);
+		values::is_substitution_function(atom) || crate::is_math_function(atom)
 	}
 
 	fn parse_computed_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		p.parse::<Computed>().map(Self::Computed)
+		p.parse::<Unresolved>().map(Self::Unresolved)
 	}
 
 	fn parse_specified_declaration_value<I>(p: &mut Parser<'a, I>, name: Cursor) -> ParserResult<Self>
@@ -433,7 +401,7 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 					(Self::Revert(_), Self::Revert(_)) => true,
 					(Self::RevertLayer(_), Self::RevertLayer(_)) => true,
 					(Self::Custom(a), Self::Custom(b)) => a.semantic_eq(b),
-					(Self::Computed(a), Self::Computed(b)) => a.semantic_eq(b),
+					(Self::Unresolved(a), Self::Unresolved(b)) => a.semantic_eq(b),
 					(Self::Unknown(a), Self::Unknown(b)) => a.semantic_eq(b),
 					$((Self::$name(a), Self::$name(b)) => a.semantic_eq(b),)+
 					(_, _) => false,
@@ -456,8 +424,10 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Property>(), 640);
-		assert_eq!(std::mem::size_of::<StyleValue>(), 568);
+		assert_eq!(std::mem::size_of::<Property>(), 824);
+		assert_eq!(std::mem::size_of::<StyleValue>(), 752);
+		assert_eq!(std::mem::size_of::<Property>(), 824);
+		assert_eq!(std::mem::size_of::<StyleValue>(), 752);
 	}
 
 	#[test]
@@ -475,12 +445,25 @@ mod tests {
 			"width:revert;",
 			Property { value: StyleValue::Revert(_), semicolon: Some(_), .. }
 		);
-		assert_parse!(CssAtomSet::ATOMS, Property, "width:var(--a)", Property { value: StyleValue::Computed(_), .. });
+		assert_parse!(CssAtomSet::ATOMS, Property, "width:var(--a)", Property { value: StyleValue::Width(_), .. });
+		assert_parse!(CssAtomSet::ATOMS, Property, "width: var(--a)", Property { value: StyleValue::Width(_), .. });
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"width: calc(100px + 50px)",
+			Property { value: StyleValue::Width(_), .. }
+		);
 
 		assert_parse!(CssAtomSet::ATOMS, Property, "float:none!important");
 		assert_parse!(CssAtomSet::ATOMS, Property, "width:1px");
 		assert_parse!(CssAtomSet::ATOMS, Property, "width:min(1px, 2px)");
 		assert_parse!(CssAtomSet::ATOMS, Property, "border:1px solid var(--red)");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"background:var(--background) var(--select-arrow) calc(100% - 12px) 50%",
+			Property { value: StyleValue::Unresolved(_), .. }
+		);
 		// Should still parse unknown properties
 		assert_parse!(CssAtomSet::ATOMS, Property, "dunno:like whatever");
 		assert_parse!(CssAtomSet::ATOMS, Property, "rotate:1.21gw");

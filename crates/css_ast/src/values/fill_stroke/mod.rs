@@ -149,7 +149,7 @@ pub struct FillImageStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.fill-opacity"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FillOpacityStyleValue;
+pub struct FillOpacityStyleValue<'a>;
 
 /// Represents the style value for `fill-origin` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#fill-origin).
 ///
@@ -434,7 +434,7 @@ pub struct StrokeColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-dash-corner"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct StrokeDashCornerStyleValue;
+pub struct StrokeDashCornerStyleValue<'a>;
 
 /// Represents the style value for `stroke-dash-justify` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-dash-justify).
 ///
@@ -524,7 +524,7 @@ pub struct StrokeDasharrayStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-dashoffset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct StrokeDashoffsetStyleValue;
+pub struct StrokeDashoffsetStyleValue<'a>;
 
 /// Represents the style value for `stroke-image` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-image).
 ///
@@ -642,7 +642,7 @@ pub enum StrokeLinejoinStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-miterlimit"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct StrokeMiterlimitStyleValue;
+pub struct StrokeMiterlimitStyleValue<'a>;
 
 /// Represents the style value for `stroke-opacity` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-opacity).
 ///
@@ -672,7 +672,7 @@ pub struct StrokeMiterlimitStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-opacity"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct StrokeOpacityStyleValue;
+pub struct StrokeOpacityStyleValue<'a>;
 
 /// Represents the style value for `stroke-origin` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-origin).
 ///

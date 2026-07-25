@@ -1,5 +1,12 @@
 use super::prelude::*;
-use crate::{Color, Length, NonNegative};
+use crate::{CalcableValue, Color, Length, NonNegative};
+
+type ShadowOffset<'a> = (
+	CalcableValue<'a, Length>,
+	CalcableValue<'a, Length>,
+	Option<CalcableValue<'a, NonNegative<Length>>>,
+	Option<CalcableValue<'a, Length>>,
+);
 
 /// <https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow>
 ///
@@ -13,7 +20,7 @@ use crate::{Color, Length, NonNegative};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Shadow<'a> {
 	pub color: Option<Color<'a>>,
-	pub offset: (Length, Length, Option<NonNegative<Length>>, Option<Length>),
+	pub offset: ShadowOffset<'a>,
 	#[atom(CssAtomSet::Inset)]
 	pub inset: Option<T![Ident]>,
 }
@@ -26,7 +33,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<Shadow<'_>>(), 104);
+		assert_eq!(std::mem::size_of::<Shadow<'_>>(), 136);
 	}
 
 	#[test]
@@ -49,6 +56,15 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Shadow, "0 0 0 0");
 		assert_parse!(CssAtomSet::ATOMS, Shadow, "1em 2em");
 		assert_parse!(CssAtomSet::ATOMS, Shadow, "1rem 2rem 0.5rem");
+	}
+
+	#[test]
+	fn test_substitution_offsets() {
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "calc(1px + 2px) 20px");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "10px calc(2px * 3)");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "var(--x) var(--y)");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "red var(--x) 20px calc(5px) 3px");
+		assert_parse!(CssAtomSet::ATOMS, Shadow, "10px 20px max(1px, 2px) inset");
 	}
 
 	#[test]

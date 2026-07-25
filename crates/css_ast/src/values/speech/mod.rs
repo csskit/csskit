@@ -32,7 +32,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.cue"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CueStyleValue;
+pub struct CueStyleValue<'a>;
 
 /// Represents the style value for `cue-after` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#cue-after).
 ///
@@ -59,7 +59,7 @@ pub struct CueStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.cue-after"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CueAfterStyleValue;
+pub struct CueAfterStyleValue<'a>;
 
 /// Represents the style value for `cue-before` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#cue-before).
 ///
@@ -86,7 +86,7 @@ pub struct CueAfterStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.cue-before"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CueBeforeStyleValue;
+pub struct CueBeforeStyleValue<'a>;
 
 /// Represents the style value for `pause` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#pause).
 ///
@@ -113,7 +113,7 @@ pub struct CueBeforeStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.pause"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PauseStyleValue;
+pub struct PauseStyleValue<'a>;
 
 /// Represents the style value for `pause-after` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#pause-after).
 ///
@@ -140,7 +140,7 @@ pub struct PauseStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.pause-after"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PauseAfterStyleValue {}
+pub enum PauseAfterStyleValue<'a> {}
 
 /// Represents the style value for `pause-before` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#pause-before).
 ///
@@ -167,7 +167,7 @@ pub enum PauseAfterStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.pause-before"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PauseBeforeStyleValue {}
+pub enum PauseBeforeStyleValue<'a> {}
 
 /// Represents the style value for `rest` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#rest).
 ///
@@ -194,7 +194,7 @@ pub enum PauseBeforeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rest"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RestStyleValue;
+pub struct RestStyleValue<'a>;
 
 /// Represents the style value for `rest-after` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#rest-after).
 ///
@@ -221,7 +221,7 @@ pub struct RestStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rest-after"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RestAfterStyleValue {}
+pub enum RestAfterStyleValue<'a> {}
 
 /// Represents the style value for `rest-before` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#rest-before).
 ///
@@ -248,7 +248,7 @@ pub enum RestAfterStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rest-before"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RestBeforeStyleValue {}
+pub enum RestBeforeStyleValue<'a> {}
 
 /// Represents the style value for `speak` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#speak).
 ///
@@ -306,7 +306,7 @@ pub enum SpeakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-balance"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VoiceBalanceStyleValue {}
+pub enum VoiceBalanceStyleValue<'a> {}
 
 /// Represents the style value for `voice-duration` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-duration).
 ///
@@ -333,7 +333,7 @@ pub enum VoiceBalanceStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-duration"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct VoiceDurationStyleValue;
+pub struct VoiceDurationStyleValue<'a>;
 
 /// Represents the style value for `voice-family` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-family).
 ///
@@ -409,7 +409,7 @@ pub enum VoiceFamilyStyleValue<'a> {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum VoicePitchStyleValue {}
+// pub enum VoicePitchStyleValue<'a> {}
 
 // /// Represents the style value for `voice-range` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-range).
 // ///
@@ -457,7 +457,7 @@ pub enum VoiceFamilyStyleValue<'a> {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum VoiceRangeStyleValue {}
+// pub enum VoiceRangeStyleValue<'a> {}
 
 /// Represents the style value for `voice-rate` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-rate).
 ///
@@ -486,7 +486,7 @@ pub enum VoiceFamilyStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-rate"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VoiceRateStyleValue {}
+pub enum VoiceRateStyleValue<'a> {}
 
 /// Represents the style value for `voice-stress` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-stress).
 ///
@@ -542,4 +542,4 @@ pub enum VoiceStressStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-volume"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VoiceVolumeStyleValue {}
+pub enum VoiceVolumeStyleValue<'a> {}

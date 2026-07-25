@@ -46,13 +46,13 @@ StyleSheet(
                 offset: SourceOffset(23),
                 len: 1,
               )),
-              value: ContentList(ContentList([
+              value: ContentList(Literal(ContentList([
                 String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(25),
                   len: 12,
                 ))),
-              ]), None),
+              ])), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -71,13 +71,13 @@ StyleSheet(
                 offset: SourceOffset(50),
                 len: 1,
               )),
-              value: ContentList(ContentList([
+              value: ContentList(Literal(ContentList([
                 String(String(Cursor(
                   kind: "String",
                   offset: SourceOffset(52),
                   len: 7,
                 ))),
-              ]), None),
+              ])), None),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
