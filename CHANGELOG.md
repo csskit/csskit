@@ -1,3 +1,66 @@
+## [0.0.28] - 2026-07-25
+
+### Other Changes
+- Chore(deps): update dependencies (patch) (#1300) ([#1300](https://github.com/csskit/csskit/pull/1300))
+
+
+### Css_ast
+- csskit_derives: Add peek(skip) attribute (#1266) ([#1266](https://github.com/csskit/csskit/pull/1266))
+- Regenerate css_ast/src/values from csswg drafts (#1267) ([#1267](https://github.com/csskit/csskit/pull/1267))
+- css_parse/csskit_derives: Add semantic_eq(skip) to derive(SemanticEq) (#1272) ([#1272](https://github.com/csskit/csskit/pull/1272))
+- css_ast: Implement various shape functions for clip-path, etc (#1275) ([#1275](https://github.com/csskit/csskit/pull/1275))
+- css_ast: Use blocks for Container & Style at rules (#1276) ([#1276](https://github.com/csskit/csskit/pull/1276))
+- css_ast: Add more -moz-meter-* pseudo elements/classes (#1277) ([#1277](https://github.com/csskit/csskit/pull/1277))
+- css_ast: Refactor and improve `@supports` parsing (#1278) ([#1278](https://github.com/csskit/csskit/pull/1278))
+- css_ast: Implement fill & stroke (#1279) ([#1279](https://github.com/csskit/csskit/pull/1279))
+- css_ast: Implement webkit-text-stroek (#1280) ([#1280](https://github.com/csskit/csskit/pull/1280))
+- css_ast Implement grid functions, track, line, etc (#1281) ([#1281](https://github.com/csskit/csskit/pull/1281))
+- css_ast/css_parse: Implement ToNormalisedValue trait (#1284) ([#1284](https://github.com/csskit/csskit/pull/1284))
+- Regenerate css_ast/src/values from csswg drafts (#1285) ([#1285](https://github.com/csskit/csskit/pull/1285))
+- Regenerate css_ast/src/values from csswg drafts (#1294) ([#1294](https://github.com/csskit/csskit/pull/1294))
+- csskit_derives: Allow multiple fields to delegate metadata (#1295) ([#1295](https://github.com/csskit/csskit/pull/1295))
+- css_parse: Reimplement computed value declaration peeking/parsing in DeclarationValue (#1298) ([#1298](https://github.com/csskit/csskit/pull/1298))
+- css_parse: Refactor BumpBox into generic Arena allocating Box. (#1304) ([#1304](https://github.com/csskit/csskit/pull/1304))
+- css_parse: Implement an Arena allocated Vec. (#1306) ([#1306](https://github.com/csskit/csskit/pull/1306))
+- css_ast: Build out substitution function architecture (#1308) ([#1308](https://github.com/csskit/csskit/pull/1308))
+- css_ast: Use Value/CalcableValue in most manual types (#1309) ([#1309](https://github.com/csskit/csskit/pull/1309))
+
+
+### Css_feature_data
+- Regenerate css_ast/src/values from csswg drafts (#1299) ([#1299](https://github.com/csskit/csskit/pull/1299))
+
+
+### Css_lexer
+- css_lexer/csskit: Implement LineIndex, precomputing line offsets (#1264) ([#1264](https://github.com/csskit/csskit/pull/1264))
+- css_lexer: Use a boxed slice in LineIndex, dropping Bumpalo's Vec. (#1305) ([#1305](https://github.com/csskit/csskit/pull/1305))
+- css_lexer: Implement fearless_simd paths for scanning (#1307) ([#1307](https://github.com/csskit/csskit/pull/1307))
+
+
+### Css_parse
+- fuzz: new parser findings 2026-07-13 (#1288) ([#1288](https://github.com/csskit/csskit/pull/1288))
+- css_parse: Drop CursorSource trait (#1296) ([#1296](https://github.com/csskit/csskit/pull/1296))
+- css_parse: Drop PreludeList, DeclarationRuleList (#1297) ([#1297](https://github.com/csskit/csskit/pull/1297))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1268) ([#1268](https://github.com/csskit/csskit/pull/1268))
+
+
+### Csskit_derives
+- csskit_derives: Ensure atom checks properly peek (#1282) ([#1282](https://github.com/csskit/csskit/pull/1282))
+
+
+### Csskit_spec_generator
+- csskit_spec_generator: Ensure property atoms includes the extra properties (#1283) ([#1283](https://github.com/csskit/csskit/pull/1283))
+
+
+### Csskit_vscode
+- chore(deps): update dependency @types/node to v24.13.2 (#1269) ([#1269](https://github.com/csskit/csskit/pull/1269))
+- chore(deps): update dependency @types/vscode to v1.125.0 (#1270) ([#1270](https://github.com/csskit/csskit/pull/1270))
+- chore(deps): update dependency typescript to v7 (#1273) ([#1273](https://github.com/csskit/csskit/pull/1273))
+- chore(deps): update dependencies (patch) (#1286) ([#1286](https://github.com/csskit/csskit/pull/1286))
+- chore(deps): update dependency oxlint to v1.69.0 (#1303) ([#1303](https://github.com/csskit/csskit/pull/1303))
+
 ## [0.0.27] - 2026-07-04
 
 ### Other Changes
@@ -21,6 +84,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1243) ([#1243](https://github.com/csskit/csskit/pull/1243))
+- Release v0.0.27 (#1239) ([#1239](https://github.com/csskit/csskit/pull/1239))
 
 
 ### Csskit_derives
