@@ -67,7 +67,7 @@ pub enum ClearStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FloatStyleValue {}
+pub enum FloatStyleValue<'a> {}
 
 /// Represents the style value for `float-defer` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float-defer).
 ///

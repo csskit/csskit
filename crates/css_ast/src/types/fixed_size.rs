@@ -11,7 +11,7 @@ use crate::{FixedBreadth, MinmaxFunction};
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FixedSize<'a> {
-	FixedBreadth(FixedBreadth),
+	FixedBreadth(FixedBreadth<'a>),
 	MinmaxFunction(MinmaxFunction<'a>),
 }
 

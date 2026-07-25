@@ -1,14 +1,13 @@
 use super::prelude::*;
 
 use super::Length;
+use crate::CalcableValue;
 
-#[derive(
-	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
+#[derive(Parse, Peek, ToSpan, SemanticEq, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum LineWidth {
+pub enum LineWidth<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Thin)]
 	Thin(T![Ident]),
@@ -18,7 +17,7 @@ pub enum LineWidth {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Thick)]
 	Thick(T![Ident]),
-	Length(Length),
+	Length(CalcableValue<'a, Length>),
 }
 
 // impl From<LineWidth> for Length {
@@ -40,12 +39,14 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<LineWidth>(), 16);
+		assert_eq!(std::mem::size_of::<LineWidth>(), 24);
 	}
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, LineWidth, "1px");
 		assert_parse!(CssAtomSet::ATOMS, LineWidth, "medium");
+		assert_parse!(CssAtomSet::ATOMS, LineWidth, "calc(1px + 2px)");
+		assert_parse!(CssAtomSet::ATOMS, LineWidth, "max(1px, 2px)");
 	}
 }
