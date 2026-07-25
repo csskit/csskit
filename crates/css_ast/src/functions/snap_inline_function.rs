@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::units::LengthPercentage;
+use crate::{CalcableValue, units::LengthPercentage};
 
 /// <https://drafts.csswg.org/css-page-floats-3/#funcdef-float-snap-inline>
 ///
@@ -10,18 +10,18 @@ use crate::units::LengthPercentage;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SnapInlineFunction {
+pub struct SnapInlineFunction<'a> {
 	#[atom(CssAtomSet::SnapInline)]
 	pub name: T![Function],
-	pub params: SnapInlineFunctionParams,
+	pub params: SnapInlineFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct SnapInlineFunctionParams(
-	LengthPercentage,
+pub struct SnapInlineFunctionParams<'a>(
+	CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)] Option<T![,]>,
 	Option<SnapInlineKeyword>,
 	#[semantic_eq(skip)] Option<T![,]>,
@@ -48,13 +48,19 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SnapInlineFunction>(), 88);
+		assert_eq!(std::mem::size_of::<SnapInlineFunction>(), 96);
 	}
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, SnapInlineFunction, "snap-inline(10%)");
 		assert_parse!(CssAtomSet::ATOMS, SnapInlineFunction, "snap-inline(10%,near)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, SnapInlineFunction, "snap-inline(calc(1px + 2%))");
+		assert_parse!(CssAtomSet::ATOMS, SnapInlineFunction, "snap-inline(var(--x))");
 	}
 
 	#[test]

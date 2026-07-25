@@ -121,6 +121,7 @@ impl DefType {
 			| "CoordinatePair"  // CoordinatePair<'a> (contains LengthPercentage pairs via CalcableValue)
 			| "Counter"  // Counter<'a> enum with CounterFunction/CountersFunction variants
 			| "CounterStyle"  // complex hand-written type
+			| "CornerShapeValue"  // CornerShapeValue<'a> (contains SuperellipseFunction<'a>)
 			| "CurveCommand"  // CurveCommand<'a> (contains CurveTarget<'a>)
 			| "CursorImage"  // contains Image<'a>
 			| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
@@ -144,6 +145,7 @@ impl DefType {
 			| "Image1d"  // contains StripesFunction<'a>
 			| "InsetValue"  // contains CalcableValue<'a, LengthPercentage>
 			| "LineCommand"  // LineCommand<'a> (contains CommandEndPoint<'a>)
+			| "LineWidth"  // LineWidth<'a> (Length variant wraps CalcableValue<'a, Length>)
 			| "LineWidthList"  // contains LineWidthOrRepeat<'a>
 			| "LineWidthOrRepeat"  // contains Repeat<'a>
 			| "MaskLayer"  // contains Image<'a>
@@ -161,6 +163,7 @@ impl DefType {
 			| "RelativeControlPoint"  // RelativeControlPoint<'a> (contains CoordinatePair<'a>)
 			| "Ratio"  // Ratio<'a> (contains CalcableValue<'a, CSSInt>)
 			| "Shadow"       // Shadow<'a> (contains Color<'a>)
+			| "SingleAnimationIterationCount"  // SingleAnimationIterationCount<'a> (Number wraps CalcableValue<'a, NonNegative<Number>>)
 			| "SingleTransition"
 			| "SmoothCommand"  // SmoothCommand<'a> (contains SmoothTarget<'a>)
 			| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)
@@ -388,7 +391,13 @@ impl Def {
 			// Functions that contain multipliers or known allocating types
 			Self::Function(_, inner) => inner.maybe_unsized(),
 			Self::FunctionType(ty) => {
-				matches!(ty.ident_str(), "DynamicRangeLimitMix" | "Param" | "Rect" | "Repeat" | "Attr")
+				matches!(
+					ty.ident_str(),
+					"DynamicRangeLimitMix"
+						| "Param" | "Rect" | "Repeat"
+						| "Attr" | "SnapBlock"
+						| "SnapInline" | "Superellipse"
+				)
 			}
 			// Every named <type> reference is wrapped in Value<'a, T> / CalcableValue<'a, T>,
 			// which always supplies 'a — so any container holding one is unsized.

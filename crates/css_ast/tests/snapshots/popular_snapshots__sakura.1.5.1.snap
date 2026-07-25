@@ -1614,11 +1614,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderBottomStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(1319),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1323),
@@ -1963,11 +1963,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderLeftStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(1609),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1613),
@@ -2883,11 +2883,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderBottomStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(2367),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2371),
@@ -2957,11 +2957,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(2448),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2452),
@@ -3049,11 +3049,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(2509),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2513),
@@ -3547,11 +3547,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(2872),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2876),
@@ -3947,11 +3947,11 @@ StyleSheet(
                 len: 1,
               )),
               value: OutlineStyleValue(
-                outline_width: Some(OutlineWidthStyleValue(Literal(Length(Zero(Number(Cursor(
+                outline_width: Some(OutlineWidthStyleValue(Literal(Length(Literal(Zero(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(3149),
                   len: 1,
-                ))))))),
+                )))))))),
                 outline_style: None,
                 outline_color: None,
               ),
@@ -4634,11 +4634,11 @@ StyleSheet(
                 offset: SourceOffset(3565),
                 len: 1,
               )),
-              value: OutlineWidthStyleValue(Literal(Length(Px(Dimension(Cursor(
+              value: OutlineWidthStyleValue(Literal(Length(Literal(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(3567),
                 len: 3,
-              )))))),
+              ))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4804,11 +4804,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(3765),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(3769),
@@ -4993,11 +4993,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Px(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(3908),
                   len: 3,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(3912),
@@ -5028,11 +5028,11 @@ StyleSheet(
                 len: 1,
               )),
               value: OutlineStyleValue(
-                outline_width: Some(OutlineWidthStyleValue(Literal(Length(Zero(Number(Cursor(
+                outline_width: Some(OutlineWidthStyleValue(Literal(Length(Literal(Zero(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(3938),
                   len: 1,
-                ))))))),
+                )))))))),
                 outline_style: None,
                 outline_color: None,
               ),
@@ -5121,11 +5121,11 @@ StyleSheet(
                 len: 1,
               )),
               value: OutlineStyleValue(
-                outline_width: Some(OutlineWidthStyleValue(Literal(Length(Px(Dimension(Cursor(
+                outline_width: Some(OutlineWidthStyleValue(Literal(Length(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(3984),
                   len: 3,
-                ))))))),
+                )))))))),
                 outline_style: Some(OutlineStyleStyleValue(r#Some(Literal(Dotted(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(3988),

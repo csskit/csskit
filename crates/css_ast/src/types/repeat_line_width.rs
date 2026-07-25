@@ -7,7 +7,7 @@ use crate::{AutoOr, LineWidth, NonEmpty, PositiveNonZeroInt, RepeatFunction};
 /// <repeat-line-width>        = repeat( [ <integer [1,∞]> ] , [ <line-width> ]+ )
 /// <auto-repeat-line-width>   = repeat( auto , [ <line-width> ]+ )
 /// ```
-pub type RepeatLineWidth<'a> = RepeatFunction<NonEmpty<Vec<'a, LineWidth>>, AutoOr<PositiveNonZeroInt>>;
+pub type RepeatLineWidth<'a> = RepeatFunction<NonEmpty<Vec<'a, LineWidth<'a>>>, AutoOr<PositiveNonZeroInt>>;
 
 #[cfg(test)]
 mod tests {

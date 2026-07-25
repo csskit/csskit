@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::NumberOrInfinity;
+use crate::{CalcableValue, NumberOrInfinity};
 
 /// <https://drafts.csswg.org/css-borders-4/#typedef-corner-shape-value>
 ///
@@ -10,10 +10,29 @@ use crate::NumberOrInfinity;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SuperellipseFunction {
+pub struct SuperellipseFunction<'a> {
 	#[atom(CssAtomSet::Superellipse)]
 	pub name: T![Function],
-	pub params: NumberOrInfinity,
+	pub params: CalcableValue<'a, NumberOrInfinity>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
+}
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+	use crate::CssAtomSet;
+	use css_parse::assert_parse;
+
+	#[test]
+	fn test_writes() {
+		assert_parse!(CssAtomSet::ATOMS, SuperellipseFunction, "superellipse(2)");
+		assert_parse!(CssAtomSet::ATOMS, SuperellipseFunction, "superellipse(infinity)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, SuperellipseFunction, "superellipse(calc(1 + 1))");
+		assert_parse!(CssAtomSet::ATOMS, SuperellipseFunction, "superellipse(var(--x))");
+	}
 }

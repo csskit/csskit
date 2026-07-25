@@ -17,8 +17,6 @@ coverage/popular/bootstrap.5.3.0.css
 4957:5:    background-position-x: 1rem;
 5009:3:  animation: 1s linear infinite progress-bar-stripes;
 5013:5:    animation: none;
-5842:3:  border-width: 0 calc(var(--bs-tooltip-arrow-width) * 0.5) var(--bs-tooltip-arrow-height);
-5965:3:  border-width: 0 calc(var(--bs-popover-arrow-width) * 0.5) var(--bs-popover-arrow-height);
 6830:3:  animation: placeholder-glow 2s ease-in-out infinite;
 6839:3:  -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
 6843:3:  animation: placeholder-wave 2s linear infinite;

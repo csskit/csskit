@@ -960,11 +960,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Zero(Number(Cursor(
+                line_width: Some(Literal(Length(Literal(Zero(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(631),
                   len: 1,
-                )))))),
+                ))))))),
                 line_style: None,
                 color: None,
               ),

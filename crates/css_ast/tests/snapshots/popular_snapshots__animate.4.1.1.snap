@@ -513,11 +513,11 @@ StyleSheet(
                 len: 1,
               )),
               value: WebkitAnimationIterationCountStyleValue([
-                (Literal(Number(Number(Cursor(
+                (Literal(Number(Literal(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(731),
                   len: 1,
-                )))), None),
+                ))))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -538,11 +538,11 @@ StyleSheet(
                 len: 1,
               )),
               value: AnimationIterationCountStyleValue([
-                (Literal(Number(Number(Cursor(
+                (Literal(Number(Literal(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(763),
                   len: 1,
-                )))), None),
+                ))))), None),
               ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
@@ -687,303 +687,234 @@ StyleSheet(
                 offset: SourceOffset(954),
                 len: 1,
               )),
-              value: Unresolved(
-                tokens: ComponentValues(
-                  values: [
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(955),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(956),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(961),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(962),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(963),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(964),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(965),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(966),
+              value: WebkitAnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(956),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Literal(Number(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(961),
                         len: 1,
-                      )),
+                      )))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(963),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(965),
+                          len: 1,
+                        ))))),
+                      ],
                     ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(967),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(968),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(971),
-                      len: 25,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(996),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(997),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(998),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1003),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1004),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1005),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1006),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1007),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1008),
-                        len: 1,
-                      )),
-                    ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1009),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1010),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(1013),
-                      len: 33,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(1046),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1047),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(1048),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          FunctionBlock(
-                            name: Function(Cursor(
-                              kind: "Function",
-                              offset: SourceOffset(1053),
-                              len: 4,
-                            )),
-                            params: ComponentValues(
-                              values: [
-                                Ident(Cursor(
-                                  kind: "Ident",
-                                  offset: SourceOffset(1057),
-                                  len: 16,
-                                )),
-                              ],
-                            ),
-                            close: RightParen(Cursor(
-                              kind: "RightParen",
-                              offset: SourceOffset(1073),
-                              len: 1,
-                            )),
-                          ),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1074),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1075),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1076),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1077),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1078),
-                        len: 1,
-                      )),
-                    ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1079),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1080),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(1083),
-                      len: 25,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(1108),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1109),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(1110),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          FunctionBlock(
-                            name: Function(Cursor(
-                              kind: "Function",
-                              offset: SourceOffset(1115),
-                              len: 4,
-                            )),
-                            params: ComponentValues(
-                              values: [
-                                Ident(Cursor(
-                                  kind: "Ident",
-                                  offset: SourceOffset(1119),
-                                  len: 16,
-                                )),
-                              ],
-                            ),
-                            close: RightParen(Cursor(
-                              kind: "RightParen",
-                              offset: SourceOffset(1135),
-                              len: 1,
-                            )),
-                          ),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1136),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1137),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1138),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1139),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1140),
-                        len: 1,
-                      )),
-                    ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1141),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1142),
-                      len: 1,
-                    )),
-                  ],
-                ),
-                expected: ExpectedTypes(
-                  bits: 4294967295,
-                ),
-              ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(966),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
               important: None,
-              semicolon: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(967),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(971),
+                len: 25,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(996),
+                len: 1,
+              )),
+              value: AnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(998),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Literal(Number(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(1003),
+                        len: 1,
+                      )))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1005),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1007),
+                          len: 1,
+                        ))))),
+                      ],
+                    ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1008),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1009),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1013),
+                len: 33,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1046),
+                len: 1,
+              )),
+              value: WebkitAnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(1048),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Substituted(Var(VarFunction(
+                        function: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(1053),
+                          len: 4,
+                        )),
+                        name: DashedIdent(DashedIdent(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(1057),
+                          len: 16,
+                        )))),
+                        comma: None,
+                        fallback: None,
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(1073),
+                          len: 1,
+                        )),
+                      ))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1075),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1077),
+                          len: 1,
+                        ))))),
+                      ],
+                    ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1078),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1079),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1083),
+                len: 25,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1108),
+                len: 1,
+              )),
+              value: AnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(1110),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Substituted(Var(VarFunction(
+                        function: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(1115),
+                          len: 4,
+                        )),
+                        name: DashedIdent(DashedIdent(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(1119),
+                          len: 16,
+                        )))),
+                        comma: None,
+                        fallback: None,
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(1135),
+                          len: 1,
+                        )),
+                      ))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1137),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1139),
+                          len: 1,
+                        ))))),
+                      ],
+                    ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1140),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1141),
+                len: 1,
+              ))),
             ),
           ],
           rules: [],
@@ -1043,303 +974,234 @@ StyleSheet(
                 offset: SourceOffset(1219),
                 len: 1,
               )),
-              value: Unresolved(
-                tokens: ComponentValues(
-                  values: [
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1220),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(1221),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1226),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1227),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1228),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1229),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1230),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1231),
+              value: WebkitAnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(1221),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Literal(Number(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(1226),
                         len: 1,
-                      )),
+                      )))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1228),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1230),
+                          len: 1,
+                        ))))),
+                      ],
                     ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1232),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1233),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(1236),
-                      len: 25,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(1261),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1262),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(1263),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1268),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1269),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1270),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1271),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1272),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1273),
-                        len: 1,
-                      )),
-                    ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1274),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1275),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(1278),
-                      len: 33,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(1311),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1312),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(1313),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          FunctionBlock(
-                            name: Function(Cursor(
-                              kind: "Function",
-                              offset: SourceOffset(1318),
-                              len: 4,
-                            )),
-                            params: ComponentValues(
-                              values: [
-                                Ident(Cursor(
-                                  kind: "Ident",
-                                  offset: SourceOffset(1322),
-                                  len: 16,
-                                )),
-                              ],
-                            ),
-                            close: RightParen(Cursor(
-                              kind: "RightParen",
-                              offset: SourceOffset(1338),
-                              len: 1,
-                            )),
-                          ),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1339),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1340),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1341),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1342),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1343),
-                        len: 1,
-                      )),
-                    ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1344),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1345),
-                      len: 3,
-                    )),
-                    Ident(Cursor(
-                      kind: "Ident",
-                      offset: SourceOffset(1348),
-                      len: 25,
-                    )),
-                    Colon(Cursor(
-                      kind: "Colon",
-                      offset: SourceOffset(1373),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1374),
-                      len: 1,
-                    )),
-                    FunctionBlock(
-                      name: Function(Cursor(
-                        kind: "Function",
-                        offset: SourceOffset(1375),
-                        len: 5,
-                      )),
-                      params: ComponentValues(
-                        values: [
-                          FunctionBlock(
-                            name: Function(Cursor(
-                              kind: "Function",
-                              offset: SourceOffset(1380),
-                              len: 4,
-                            )),
-                            params: ComponentValues(
-                              values: [
-                                Ident(Cursor(
-                                  kind: "Ident",
-                                  offset: SourceOffset(1384),
-                                  len: 16,
-                                )),
-                              ],
-                            ),
-                            close: RightParen(Cursor(
-                              kind: "RightParen",
-                              offset: SourceOffset(1400),
-                              len: 1,
-                            )),
-                          ),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1401),
-                            len: 1,
-                          )),
-                          Delim(Cursor(
-                            kind: "Delim",
-                            offset: SourceOffset(1402),
-                            len: 1,
-                          )),
-                          Whitespace(Cursor(
-                            kind: "Whitespace",
-                            offset: SourceOffset(1403),
-                            len: 1,
-                          )),
-                          Number(Cursor(
-                            kind: "Number",
-                            offset: SourceOffset(1404),
-                            len: 1,
-                          )),
-                        ],
-                      ),
-                      close: RightParen(Cursor(
-                        kind: "RightParen",
-                        offset: SourceOffset(1405),
-                        len: 1,
-                      )),
-                    ),
-                    Semicolon(Cursor(
-                      kind: "Semicolon",
-                      offset: SourceOffset(1406),
-                      len: 1,
-                    )),
-                    Whitespace(Cursor(
-                      kind: "Whitespace",
-                      offset: SourceOffset(1407),
-                      len: 1,
-                    )),
-                  ],
-                ),
-                expected: ExpectedTypes(
-                  bits: 4294967295,
-                ),
-              ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1231),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
               important: None,
-              semicolon: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1232),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1236),
+                len: 25,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1261),
+                len: 1,
+              )),
+              value: AnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(1263),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Literal(Number(Number(Cursor(
+                        kind: "Number",
+                        offset: SourceOffset(1268),
+                        len: 1,
+                      )))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1270),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1272),
+                          len: 1,
+                        ))))),
+                      ],
+                    ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1273),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1274),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1278),
+                len: 33,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1311),
+                len: 1,
+              )),
+              value: WebkitAnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(1313),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Substituted(Var(VarFunction(
+                        function: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(1318),
+                          len: 4,
+                        )),
+                        name: DashedIdent(DashedIdent(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(1322),
+                          len: 16,
+                        )))),
+                        comma: None,
+                        fallback: None,
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(1338),
+                          len: 1,
+                        )),
+                      ))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1340),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1342),
+                          len: 1,
+                        ))))),
+                      ],
+                    ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1343),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1344),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(1348),
+                len: 25,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(1373),
+                len: 1,
+              )),
+              value: AnimationIterationCountStyleValue([
+                (Literal(Number(Substituted(Math(CalcFunction(CalcFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(1375),
+                    len: 5,
+                  )),
+                  params: CalcSum(
+                    first: CalcProduct(
+                      first: Substituted(Var(VarFunction(
+                        function: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(1380),
+                          len: 4,
+                        )),
+                        name: DashedIdent(DashedIdent(Ident(Cursor(
+                          kind: "Ident",
+                          offset: SourceOffset(1384),
+                          len: 16,
+                        )))),
+                        comma: None,
+                        fallback: None,
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(1400),
+                          len: 1,
+                        )),
+                      ))),
+                      rest: [
+                        (Multiply(Star(Delim(Cursor(
+                          kind: "Delim",
+                          offset: SourceOffset(1402),
+                          len: 1,
+                        )))), Literal(Number(Number(Cursor(
+                          kind: "Number",
+                          offset: SourceOffset(1404),
+                          len: 1,
+                        ))))),
+                      ],
+                    ),
+                    rest: [],
+                  ),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(1405),
+                    len: 1,
+                  )),
+                )))))), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(1406),
+                len: 1,
+              ))),
             ),
           ],
           rules: [],
@@ -4079,11 +3941,11 @@ StyleSheet(
                       len: 1,
                     )),
                     value: WebkitAnimationIterationCountStyleValue([
-                      (Literal(Number(Number(Cursor(
+                      (Literal(Number(Literal(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(3752),
                         len: 1,
-                      )))), None),
+                      ))))), None),
                     ]),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(
@@ -4115,11 +3977,11 @@ StyleSheet(
                       len: 1,
                     )),
                     value: AnimationIterationCountStyleValue([
-                      (Literal(Number(Number(Cursor(
+                      (Literal(Number(Literal(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(3797),
                         len: 1,
-                      )))), None),
+                      ))))), None),
                     ]),
                     important: Some(BangImportant(
                       bang: Bang(Delim(Cursor(

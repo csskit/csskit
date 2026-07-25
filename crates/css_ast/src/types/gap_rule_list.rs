@@ -52,7 +52,7 @@ pub struct GapRepeatRule<'a> {
 /// ```text,ignore
 /// <gap-rule> = <line-width> || <line-style> || <color>
 /// ```
-pub type GapRule<'a> = Optionals3<LineWidth, LineStyle, Color<'a>>;
+pub type GapRule<'a> = Optionals3<LineWidth<'a>, LineStyle, Color<'a>>;
 
 #[cfg(test)]
 mod tests {
@@ -65,7 +65,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<GapRuleList>(), 24);
 		assert_eq!(std::mem::size_of::<GapRuleOrRepeat>(), 80);
 		assert_eq!(std::mem::size_of::<GapRepeatRule>(), 80);
-		assert_eq!(std::mem::size_of::<GapRule>(), 56);
+		assert_eq!(std::mem::size_of::<GapRule>(), 64);
 	}
 
 	#[test]

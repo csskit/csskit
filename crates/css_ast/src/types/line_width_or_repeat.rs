@@ -11,7 +11,7 @@ use crate::RepeatLineWidth;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum LineWidthOrRepeat<'a> {
-	LineWidth(crate::Value<'a, crate::LineWidth>),
+	LineWidth(crate::Value<'a, crate::LineWidth<'a>>),
 	RepeatFunction(RepeatLineWidth<'a>),
 }
 

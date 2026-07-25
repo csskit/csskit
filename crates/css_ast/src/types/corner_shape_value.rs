@@ -10,7 +10,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CornerShapeValue {}
+pub enum CornerShapeValue<'a> {}
 
 #[cfg(test)]
 mod tests {
@@ -20,7 +20,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CornerShapeValue>(), 40);
+		assert_eq!(std::mem::size_of::<CornerShapeValue>(), 48);
 	}
 
 	#[test]

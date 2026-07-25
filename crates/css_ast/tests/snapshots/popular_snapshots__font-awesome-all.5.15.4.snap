@@ -1543,11 +1543,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Em(Dimension(Cursor(
+                line_width: Some(Literal(Length(Literal(Em(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(1177),
                   len: 6,
-                )))))),
+                ))))))),
                 line_style: Some(Literal(Solid(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1171),
@@ -105180,11 +105180,11 @@ StyleSheet(
                 len: 1,
               )),
               value: BorderStyleValue(
-                line_width: Some(Literal(Length(Zero(Number(Cursor(
+                line_width: Some(Literal(Length(Literal(Zero(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(71654),
                   len: 1,
-                )))))),
+                ))))))),
                 line_style: None,
                 color: None,
               ),
