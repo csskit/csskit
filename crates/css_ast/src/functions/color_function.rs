@@ -2,7 +2,7 @@ use super::prelude::*;
 use crate::functions::color_mix_function::ColorMixFunction;
 use crate::functions::light_dark_function::LightDarkFunction;
 use crate::functions::relative_color::RelativeColorFunction;
-use crate::{AngleOrNumber, NoneOr, NumberOrPercentage};
+use crate::{AngleOrNumber, CalcableValue, NoneOr, NumberOrPercentage};
 use css_parse::Box;
 
 #[derive(
@@ -69,18 +69,18 @@ impl<'a> Parse<'a> for CommaOrSlash {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorFunction<'a> {
 	Relative(Box<'a, RelativeColorFunction<'a>>),
-	Color(Box<'a, ColorFunctionColor>),
+	Color(Box<'a, ColorFunctionColor<'a>>),
 	ColorMix(Box<'a, ColorMixFunction<'a>>),
 	LightDark(Box<'a, LightDarkFunction<'a>>),
-	Rgb(RgbFunction),
-	Rgba(RgbaFunction),
-	Hsl(HslFunction),
-	Hsla(HslaFunction),
-	Hwb(HwbFunction),
-	Lab(LabFunction),
-	Lch(LchFunction),
-	Oklab(OklabFunction),
-	Oklch(OklchFunction),
+	Rgb(RgbFunction<'a>),
+	Rgba(RgbaFunction<'a>),
+	Hsl(HslFunction<'a>),
+	Hsla(HslaFunction<'a>),
+	Hwb(HwbFunction<'a>),
+	Lab(LabFunction<'a>),
+	Lch(LchFunction<'a>),
+	Oklab(OklabFunction<'a>),
+	Oklch(OklchFunction<'a>),
 }
 
 impl<'a> Parse<'a> for ColorFunction<'a> {
@@ -92,7 +92,7 @@ impl<'a> Parse<'a> for ColorFunction<'a> {
 		if p.peek::<Box<RelativeColorFunction>>() {
 			return Ok(Self::Relative(p.parse()?));
 		}
-		if p.peek::<Box<ColorFunctionColor>>() {
+		if p.peek::<Box<ColorFunctionColor<'_>>>() {
 			return Ok(Self::Color(p.parse()?));
 		}
 		if p.peek::<Box<ColorMixFunction>>() {
@@ -164,16 +164,16 @@ impl crate::ToChromashift for ColorFunction<'_> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColorFunctionColor {
+pub struct ColorFunctionColor<'a> {
 	#[atom(CssAtomSet::Color)]
 	pub name: T![Function],
-	pub params: ColorFunctionColorParams,
+	pub params: ColorFunctionColorParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for ColorFunctionColor {
+impl crate::ToChromashift for ColorFunctionColor<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::{A98Rgb, DisplayP3, LinearRgb, ProphotoRgb, Rec2020, Srgb, XyzD50, XyzD65};
 
@@ -181,67 +181,71 @@ impl crate::ToChromashift for ColorFunctionColor {
 
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 
 		// Helper to extract a channel as f64 in 0.0-1.0 range
-		let channel_unit = |c: &NoneOr<NumberOrPercentage>| -> f64 {
+		let channel_unit = |c: &NoneOr<CalcableValue<'_, NumberOrPercentage>>| -> Option<f64> {
 			match c {
-				NoneOr::None(_) => 0.0,
-				NoneOr::Some(NumberOrPercentage::Number(n)) => n.value() as f64,
-				NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() as f64 / 100.0,
+				NoneOr::None(_) => Some(0.0),
+				NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => Some(n.value() as f64),
+				NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => {
+					Some(p.value() as f64 / 100.0)
+				}
+				NoneOr::Some(_) => None,
 			}
 		};
 
 		match space {
 			ColorSpace::Srgb(_) => {
-				let r = (channel_unit(c1) * 255.0).round() as u8;
-				let g = (channel_unit(c2) * 255.0).round() as u8;
-				let b = (channel_unit(c3) * 255.0).round() as u8;
+				let r = (channel_unit(c1)? * 255.0).round() as u8;
+				let g = (channel_unit(c2)? * 255.0).round() as u8;
+				let b = (channel_unit(c3)? * 255.0).round() as u8;
 				Some(chromashift::Color::Srgb(Srgb::new(r, g, b, alpha)))
 			}
 			ColorSpace::SrgbLinear(_) => {
-				let r = channel_unit(c1);
-				let g = channel_unit(c2);
-				let b = channel_unit(c3);
+				let r = channel_unit(c1)?;
+				let g = channel_unit(c2)?;
+				let b = channel_unit(c3)?;
 				Some(chromashift::Color::LinearRgb(LinearRgb::new(r, g, b, alpha)))
 			}
 			ColorSpace::DisplayP3(_) => {
-				let r = channel_unit(c1);
-				let g = channel_unit(c2);
-				let b = channel_unit(c3);
+				let r = channel_unit(c1)?;
+				let g = channel_unit(c2)?;
+				let b = channel_unit(c3)?;
 				Some(chromashift::Color::DisplayP3(DisplayP3::new(r, g, b, alpha)))
 			}
 			ColorSpace::A98Rgb(_) => {
-				let r = channel_unit(c1);
-				let g = channel_unit(c2);
-				let b = channel_unit(c3);
+				let r = channel_unit(c1)?;
+				let g = channel_unit(c2)?;
+				let b = channel_unit(c3)?;
 				Some(chromashift::Color::A98Rgb(A98Rgb::new(r, g, b, alpha)))
 			}
 			ColorSpace::ProphotoRgb(_) => {
-				let r = channel_unit(c1);
-				let g = channel_unit(c2);
-				let b = channel_unit(c3);
+				let r = channel_unit(c1)?;
+				let g = channel_unit(c2)?;
+				let b = channel_unit(c3)?;
 				Some(chromashift::Color::ProphotoRgb(ProphotoRgb::new(r, g, b, alpha)))
 			}
 			ColorSpace::Rec2020(_) => {
-				let r = channel_unit(c1);
-				let g = channel_unit(c2);
-				let b = channel_unit(c3);
+				let r = channel_unit(c1)?;
+				let g = channel_unit(c2)?;
+				let b = channel_unit(c3)?;
 				Some(chromashift::Color::Rec2020(Rec2020::new(r, g, b, alpha)))
 			}
 			ColorSpace::Xyz(_) | ColorSpace::XyzD65(_) => {
-				let x = channel_unit(c1) * 100.0;
-				let y = channel_unit(c2) * 100.0;
-				let z = channel_unit(c3) * 100.0;
+				let x = channel_unit(c1)? * 100.0;
+				let y = channel_unit(c2)? * 100.0;
+				let z = channel_unit(c3)? * 100.0;
 				Some(chromashift::Color::XyzD65(XyzD65::new(x, y, z, alpha)))
 			}
 			ColorSpace::XyzD50(_) => {
-				let x = channel_unit(c1) * 100.0;
-				let y = channel_unit(c2) * 100.0;
-				let z = channel_unit(c3) * 100.0;
+				let x = channel_unit(c1)? * 100.0;
+				let y = channel_unit(c2)? * 100.0;
+				let z = channel_unit(c3)? * 100.0;
 				Some(chromashift::Color::XyzD50(XyzD50::new(x, y, z, alpha)))
 			}
 		}
@@ -252,13 +256,13 @@ impl crate::ToChromashift for ColorFunctionColor {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColorFunctionColorParams(
+pub struct ColorFunctionColorParams<'a>(
 	pub ColorSpace,
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<NumberOrPercentage>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<NumberOrPercentage>>,
+	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-rgb>
@@ -281,16 +285,16 @@ pub struct ColorFunctionColorParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RgbFunction {
+pub struct RgbFunction<'a> {
 	#[atom(CssAtomSet::Rgb)]
 	pub name: T![Function],
-	pub params: RgbFunctionParams,
+	pub params: RgbFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for RgbFunction {
+impl crate::ToChromashift for RgbFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		self.params.to_chromashift()
 	}
@@ -300,16 +304,16 @@ impl crate::ToChromashift for RgbFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RgbaFunction {
+pub struct RgbaFunction<'a> {
 	#[atom(CssAtomSet::Rgba)]
 	pub name: T![Function],
-	pub params: RgbFunctionParams,
+	pub params: RgbFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for RgbaFunction {
+impl crate::ToChromashift for RgbaFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		self.params.to_chromashift()
 	}
@@ -319,43 +323,49 @@ impl crate::ToChromashift for RgbaFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RgbFunctionParams(
-	pub NoneOr<NumberOrPercentage>,
+pub struct RgbFunctionParams<'a>(
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<NumberOrPercentage>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<NumberOrPercentage>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	pub Option<CommaOrSlash>,
-	pub Option<NoneOr<NumberOrPercentage>>,
+	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
 );
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for RgbFunctionParams {
+impl crate::ToChromashift for RgbFunctionParams<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Srgb;
 		let Self(red, _, green, _, blue, _, alpha) = &self;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		let red = (match red {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(red)) => red.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(red)) => red.value() / 100.0 * 255.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(red))) => red.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(red))) => red.value() / 100.0 * 255.0,
+			NoneOr::Some(_) => return None,
 		})
 		.round() as u8;
 		let green = (match green {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(green)) => green.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(green)) => green.value() / 100.0 * 255.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(green))) => green.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(green))) => {
+				green.value() / 100.0 * 255.0
+			}
+			NoneOr::Some(_) => return None,
 		})
 		.round() as u8;
 		let blue = (match blue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(blue)) => blue.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(blue)) => blue.value() / 100.0 * 255.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(blue))) => blue.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(blue))) => blue.value() / 100.0 * 255.0,
+			NoneOr::Some(_) => return None,
 		})
 		.round() as u8;
 		Some(chromashift::Color::Srgb(Srgb::new(red, green, blue, alpha)))
@@ -384,16 +394,16 @@ impl crate::ToChromashift for RgbFunctionParams {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HslFunction {
+pub struct HslFunction<'a> {
 	#[atom(CssAtomSet::Hsl)]
 	pub name: T![Function],
-	pub params: HslFunctionParams,
+	pub params: HslFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for HslFunction {
+impl crate::ToChromashift for HslFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		self.params.to_chromashift()
 	}
@@ -403,16 +413,16 @@ impl crate::ToChromashift for HslFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HslaFunction {
+pub struct HslaFunction<'a> {
 	#[atom(CssAtomSet::Hsla)]
 	pub name: T![Function],
-	pub params: HslFunctionParams,
+	pub params: HslFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for HslaFunction {
+impl crate::ToChromashift for HslaFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		self.params.to_chromashift()
 	}
@@ -422,40 +432,44 @@ impl crate::ToChromashift for HslaFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HslFunctionParams(
-	pub NoneOr<AngleOrNumber>,
+pub struct HslFunctionParams<'a>(
+	pub NoneOr<CalcableValue<'a, AngleOrNumber>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<NumberOrPercentage>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<NumberOrPercentage>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	pub Option<CommaOrSlash>,
-	pub Option<NoneOr<NumberOrPercentage>>,
+	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
 );
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for HslFunctionParams {
+impl crate::ToChromashift for HslFunctionParams<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Hsl;
 		let Self(hue, _, saturation, _, lightness, _, alpha) = &self;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(AngleOrNumber::Number(hue)) => hue.value(),
-			NoneOr::Some(AngleOrNumber::Angle(d)) => d.as_degrees(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(_) => return None,
 		};
 		let saturation = match saturation {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		};
 		let lightness = match lightness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		};
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		Some(chromashift::Color::Hsl(Hsl::new(hue, saturation, lightness, alpha)))
@@ -475,38 +489,42 @@ impl crate::ToChromashift for HslFunctionParams {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HwbFunction {
+pub struct HwbFunction<'a> {
 	#[atom(CssAtomSet::Hwb)]
 	pub name: T![Function],
-	pub params: HwbFunctionParams,
+	pub params: HwbFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for HwbFunction {
+impl crate::ToChromashift for HwbFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Hwb;
 		let HwbFunctionParams(hue, whiteness, blackness, _, alpha) = &self.params;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(AngleOrNumber::Number(hue)) => hue.value(),
-			NoneOr::Some(AngleOrNumber::Angle(d)) => d.as_degrees(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(_) => return None,
 		};
 		let whiteness = match whiteness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		};
 		let blackness = match blackness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		};
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		Some(chromashift::Color::Hwb(Hwb::new(hue, whiteness, blackness, alpha)))
@@ -517,12 +535,12 @@ impl crate::ToChromashift for HwbFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HwbFunctionParams(
-	pub NoneOr<AngleOrNumber>,
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<NumberOrPercentage>,
+pub struct HwbFunctionParams<'a>(
+	pub NoneOr<CalcableValue<'a, AngleOrNumber>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<NumberOrPercentage>>,
+	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-lab>
@@ -537,38 +555,42 @@ pub struct HwbFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LabFunction {
+pub struct LabFunction<'a> {
 	#[atom(CssAtomSet::Lab)]
 	pub name: T![Function],
-	pub params: LabFunctionParams,
+	pub params: LabFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for LabFunction {
+impl crate::ToChromashift for LabFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Lab;
 		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
 		let l = match l {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let a = match a {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let b = match b {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		Some(chromashift::Color::Lab(Lab::new(l, a, b, alpha)))
@@ -579,12 +601,12 @@ impl crate::ToChromashift for LabFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LabFunctionParams(
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<NumberOrPercentage>,
+pub struct LabFunctionParams<'a>(
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<NumberOrPercentage>>,
+	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-lch>
@@ -599,38 +621,42 @@ pub struct LabFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LchFunction {
+pub struct LchFunction<'a> {
 	#[atom(CssAtomSet::Lch)]
 	pub name: T![Function],
-	pub params: LchFunctionParams,
+	pub params: LchFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for LchFunction {
+impl crate::ToChromashift for LchFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Lch;
 		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
 		let lightness = match lightness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let chroma = match chroma {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 150.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(AngleOrNumber::Number(hue)) => hue.value(),
-			NoneOr::Some(AngleOrNumber::Angle(d)) => d.as_degrees(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		Some(chromashift::Color::Lch(Lch::new(lightness, chroma, hue, alpha)))
@@ -641,12 +667,12 @@ impl crate::ToChromashift for LchFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LchFunctionParams(
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<NumberOrPercentage>,
-	pub NoneOr<AngleOrNumber>,
+pub struct LchFunctionParams<'a>(
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<CalcableValue<'a, AngleOrNumber>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<NumberOrPercentage>>,
+	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-oklab>
@@ -661,39 +687,43 @@ pub struct LchFunctionParams(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OklabFunction {
+pub struct OklabFunction<'a> {
 	#[atom(CssAtomSet::Oklab)]
 	pub name: T![Function],
-	pub params: LabFunctionParams,
+	pub params: LabFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for OklabFunction {
+impl crate::ToChromashift for OklabFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Oklab;
 		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		let l = match l {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let a = match a {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 0.4,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let b = match b {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 0.4,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		Some(chromashift::Color::Oklab(Oklab::new(l, a, b, alpha)))
 	}
@@ -711,38 +741,42 @@ impl crate::ToChromashift for OklabFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OklchFunction {
+pub struct OklchFunction<'a> {
 	#[atom(CssAtomSet::Oklch)]
 	pub name: T![Function],
-	pub params: LchFunctionParams,
+	pub params: LchFunctionParams<'a>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[cfg(feature = "chromashift")]
-impl crate::ToChromashift for OklchFunction {
+impl crate::ToChromashift for OklchFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Oklch;
 		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
 		let lightness = match lightness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let chroma = match chroma {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumberOrPercentage::Number(n)) => n.value(),
-			NoneOr::Some(NumberOrPercentage::Percentage(p)) => p.value() / 100.0 * 150.0,
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(AngleOrNumber::Number(hue)) => hue.value(),
-			NoneOr::Some(AngleOrNumber::Angle(d)) => d.as_degrees(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(_) => return None,
 		} as f64;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumberOrPercentage::Number(t))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumberOrPercentage::Percentage(t))) => t.value(),
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		Some(chromashift::Color::Oklch(Oklch::new(lightness, chroma, hue, alpha)))
@@ -755,16 +789,31 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorFunction<'_>>(), 144);
-		assert_eq!(std::mem::size_of::<ColorFunctionColor>(), 120);
-		assert_eq!(std::mem::size_of::<RgbFunction>(), 136);
-		assert_eq!(std::mem::size_of::<RgbaFunction>(), 136);
-		assert_eq!(std::mem::size_of::<HslFunction>(), 136);
-		assert_eq!(std::mem::size_of::<HslaFunction>(), 136);
-		assert_eq!(std::mem::size_of::<HwbFunction>(), 104);
-		assert_eq!(std::mem::size_of::<LabFunction>(), 104);
-		assert_eq!(std::mem::size_of::<LchFunction>(), 104);
-		assert_eq!(std::mem::size_of::<OklabFunction>(), 104);
-		assert_eq!(std::mem::size_of::<OklchFunction>(), 104);
+		assert_eq!(std::mem::size_of::<ColorFunction<'_>>(), 176);
+		assert_eq!(std::mem::size_of::<ColorFunctionColor<'_>>(), 152);
+		assert_eq!(std::mem::size_of::<RgbFunction<'_>>(), 168);
+		assert_eq!(std::mem::size_of::<RgbaFunction<'_>>(), 168);
+		assert_eq!(std::mem::size_of::<HslFunction<'_>>(), 168);
+		assert_eq!(std::mem::size_of::<HslaFunction<'_>>(), 168);
+		assert_eq!(std::mem::size_of::<HwbFunction<'_>>(), 136);
+		assert_eq!(std::mem::size_of::<LabFunction<'_>>(), 136);
+		assert_eq!(std::mem::size_of::<LchFunction<'_>>(), 136);
+		assert_eq!(std::mem::size_of::<OklabFunction<'_>>(), 136);
+		assert_eq!(std::mem::size_of::<OklchFunction<'_>>(), 136);
+	}
+
+	#[test]
+	fn substitution_in_channels() {
+		use css_parse::assert_parse;
+		// Math functions in channels.
+		assert_parse!(CssAtomSet::ATOMS, RgbFunction, "rgb(calc(255/2) 0 0)");
+		assert_parse!(CssAtomSet::ATOMS, HslFunction, "hsl(calc(120deg) 50% 50%)");
+		// Substitution functions in channels.
+		assert_parse!(CssAtomSet::ATOMS, RgbFunction, "rgb(var(--r) 0 0)");
+		assert_parse!(CssAtomSet::ATOMS, HwbFunction, "hwb(90deg calc(10%) var(--b))");
+		// Substitution in alpha.
+		assert_parse!(CssAtomSet::ATOMS, RgbFunction, "rgb(0 0 0/var(--a))");
+		// color() with math/substitution channels.
+		assert_parse!(CssAtomSet::ATOMS, ColorFunctionColor, "color(srgb calc(0.5) var(--g) 0)");
 	}
 }

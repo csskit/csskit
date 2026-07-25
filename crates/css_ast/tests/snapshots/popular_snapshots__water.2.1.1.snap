@@ -1653,27 +1653,27 @@ StyleSheet(
                   offset: SourceOffset(2281),
                   len: 4,
                 )),
-                params: RgbFunctionParams(r#Some(Number(Number(Cursor(
+                params: RgbFunctionParams(r#Some(Literal(Number(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(2285),
                   len: 3,
-                )))), Some(Comma(Cursor(
+                ))))), Some(Comma(Cursor(
                   kind: "Comma",
                   offset: SourceOffset(2288),
                   len: 1,
-                ))), r#Some(Number(Number(Cursor(
+                ))), r#Some(Literal(Number(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(2290),
                   len: 3,
-                )))), Some(Comma(Cursor(
+                ))))), Some(Comma(Cursor(
                   kind: "Comma",
                   offset: SourceOffset(2293),
                   len: 1,
-                ))), r#Some(Number(Number(Cursor(
+                ))), r#Some(Literal(Number(Number(Cursor(
                   kind: "Number",
                   offset: SourceOffset(2295),
                   len: 3,
-                )))), None, None),
+                ))))), None, None),
                 close: RightParen(Cursor(
                   kind: "RightParen",
                   offset: SourceOffset(2298),
@@ -3528,11 +3528,11 @@ StyleSheet(
                     offset: SourceOffset(4073),
                     len: 16,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(4090),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4095),
@@ -3551,11 +3551,11 @@ StyleSheet(
                     offset: SourceOffset(4107),
                     len: 12,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(4120),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4125),
@@ -3574,11 +3574,11 @@ StyleSheet(
                     offset: SourceOffset(4137),
                     len: 5,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(4143),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4148),
@@ -3597,11 +3597,11 @@ StyleSheet(
                     offset: SourceOffset(4160),
                     len: 10,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(4171),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4176),
@@ -3620,11 +3620,11 @@ StyleSheet(
                     offset: SourceOffset(4188),
                     len: 9,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(4198),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Ease(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4203),
@@ -3652,260 +3652,189 @@ StyleSheet(
                 offset: SourceOffset(4221),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4222),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+              value: TransitionStyleValue([
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4227),
                     len: 16,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4243),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(4244),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(4248),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(4248),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(4268),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4269),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4270),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(4276),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4277),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(4276),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4282),
                     len: 12,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4294),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(4295),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(4299),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(4299),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(4319),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4320),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4321),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(4327),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4328),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(4327),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4333),
                     len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4338),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(4339),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(4343),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(4343),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(4363),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4364),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4365),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(4371),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4372),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(4371),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4377),
                     len: 10,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4387),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(4388),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(4392),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(4392),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(4412),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4413),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4414),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(4420),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4421),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(4420),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4426),
                     len: 9,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4435),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(4436),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(4440),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(4440),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(4460),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(4461),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Ease(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4462),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4001,11 +3930,11 @@ StyleSheet(
                           offset: SourceOffset(4539),
                           len: 16,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(4556),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4561),
@@ -4024,11 +3953,11 @@ StyleSheet(
                           offset: SourceOffset(4573),
                           len: 12,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(4586),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4591),
@@ -4047,11 +3976,11 @@ StyleSheet(
                           offset: SourceOffset(4603),
                           len: 5,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(4609),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4614),
@@ -4070,11 +3999,11 @@ StyleSheet(
                           offset: SourceOffset(4626),
                           len: 10,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(4637),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4642),
@@ -4093,11 +4022,11 @@ StyleSheet(
                           offset: SourceOffset(4654),
                           len: 9,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(4664),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Ease(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4669),
@@ -4125,260 +4054,189 @@ StyleSheet(
                       offset: SourceOffset(4687),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4688),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                    value: TransitionStyleValue([
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4693),
                           len: 16,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4709),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(4710),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(4714),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(4714),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(4734),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4735),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4736),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(4742),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4743),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(4742),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4748),
                           len: 12,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4760),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(4761),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(4765),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(4765),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(4785),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4786),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4787),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(4793),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4794),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(4793),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4799),
                           len: 5,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4804),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(4805),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(4809),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(4809),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(4829),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4830),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4831),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(4837),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4838),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(4837),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4843),
                           len: 10,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4853),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(4854),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(4858),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(4858),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(4878),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4879),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4880),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(4886),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4887),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(4886),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4892),
                           len: 9,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4901),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(4902),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(4906),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(4906),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(4926),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(4927),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Ease(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(4928),
                           len: 4,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -4440,11 +4298,11 @@ StyleSheet(
                     offset: SourceOffset(4967),
                     len: 16,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(4984),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(4989),
@@ -4463,11 +4321,11 @@ StyleSheet(
                     offset: SourceOffset(5001),
                     len: 12,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5014),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5019),
@@ -4486,11 +4344,11 @@ StyleSheet(
                     offset: SourceOffset(5031),
                     len: 5,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5037),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5042),
@@ -4509,11 +4367,11 @@ StyleSheet(
                     offset: SourceOffset(5054),
                     len: 10,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5065),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5070),
@@ -4532,11 +4390,11 @@ StyleSheet(
                     offset: SourceOffset(5082),
                     len: 9,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5092),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Ease(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5097),
@@ -4564,260 +4422,189 @@ StyleSheet(
                 offset: SourceOffset(5115),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5116),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+              value: TransitionStyleValue([
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5121),
                     len: 16,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5137),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(5138),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(5142),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(5142),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(5162),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5163),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5164),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(5170),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5171),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(5170),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5176),
                     len: 12,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5188),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(5189),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(5193),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(5193),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(5213),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5214),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5215),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(5221),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5222),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(5221),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5227),
                     len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5232),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(5233),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(5237),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(5237),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(5257),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5258),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5259),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(5265),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5266),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(5265),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5271),
                     len: 10,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5281),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(5282),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(5286),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(5286),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(5306),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5307),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5308),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(5314),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5315),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(5314),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5320),
                     len: 9,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5329),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(5330),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(5334),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(5334),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(5354),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(5355),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Ease(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5356),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4913,11 +4700,11 @@ StyleSheet(
                           offset: SourceOffset(5432),
                           len: 16,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(5449),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5454),
@@ -4936,11 +4723,11 @@ StyleSheet(
                           offset: SourceOffset(5466),
                           len: 12,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(5479),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5484),
@@ -4959,11 +4746,11 @@ StyleSheet(
                           offset: SourceOffset(5496),
                           len: 5,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(5502),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5507),
@@ -4982,11 +4769,11 @@ StyleSheet(
                           offset: SourceOffset(5519),
                           len: 10,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(5530),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5535),
@@ -5005,11 +4792,11 @@ StyleSheet(
                           offset: SourceOffset(5547),
                           len: 9,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(5557),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Ease(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5562),
@@ -5037,260 +4824,189 @@ StyleSheet(
                       offset: SourceOffset(5580),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5581),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                    value: TransitionStyleValue([
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5586),
                           len: 16,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5602),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(5603),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(5607),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(5607),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(5627),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5628),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5629),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(5635),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5636),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(5635),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5641),
                           len: 12,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5653),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(5654),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(5658),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(5658),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(5678),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5679),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5680),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(5686),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5687),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(5686),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5692),
                           len: 5,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5697),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(5698),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(5702),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(5702),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(5722),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5723),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5724),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(5730),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5731),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(5730),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5736),
                           len: 10,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5746),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(5747),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(5751),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(5751),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(5771),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5772),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5773),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(5779),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5780),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(5779),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5785),
                           len: 9,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5794),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(5795),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(5799),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(5799),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(5819),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(5820),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Ease(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(5821),
                           len: 4,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -5352,11 +5068,11 @@ StyleSheet(
                     offset: SourceOffset(5863),
                     len: 16,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5880),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5885),
@@ -5375,11 +5091,11 @@ StyleSheet(
                     offset: SourceOffset(5897),
                     len: 12,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5910),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5915),
@@ -5398,11 +5114,11 @@ StyleSheet(
                     offset: SourceOffset(5927),
                     len: 5,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5933),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5938),
@@ -5421,11 +5137,11 @@ StyleSheet(
                     offset: SourceOffset(5950),
                     len: 10,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5961),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5966),
@@ -5444,11 +5160,11 @@ StyleSheet(
                     offset: SourceOffset(5978),
                     len: 9,
                   ))))),
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(5988),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: Some(Ease(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(5993),
@@ -5476,260 +5192,189 @@ StyleSheet(
                 offset: SourceOffset(6011),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6012),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+              value: TransitionStyleValue([
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6017),
                     len: 16,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6033),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(6034),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(6038),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(6038),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(6058),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6059),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6060),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(6066),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6067),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(6066),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6072),
                     len: 12,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6084),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(6085),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(6089),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(6089),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(6109),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6110),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6111),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(6117),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6118),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(6117),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6123),
                     len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6128),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(6129),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(6133),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(6133),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(6153),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6154),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6155),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(6161),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6162),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(6161),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6167),
                     len: 10,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6177),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(6178),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(6182),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(6182),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(6202),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6203),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6204),
                     len: 6,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(6210),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6211),
-                    len: 5,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(6210),
+                  len: 1,
+                )))),
+                (Literal(SingleTransition(
+                  property: Some(r#Some(CustomIdent(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6216),
                     len: 9,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6225),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
+                  ))))),
+                  duration: Some(Substituted(Var(VarFunction(
+                    function: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(6226),
                       len: 4,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Ident(Cursor(
-                          kind: "Ident",
-                          offset: SourceOffset(6230),
-                          len: 20,
-                        )),
-                      ],
-                    ),
+                    name: DashedIdent(DashedIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(6230),
+                      len: 20,
+                    )))),
+                    comma: None,
+                    fallback: None,
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(6250),
                       len: 1,
                     )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(6251),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  easing: Some(Ease(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(6252),
                     len: 4,
-                  )),
-                ],
-              )),
+                  )))),
+                  delay: None,
+                  behavior: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -5825,11 +5470,11 @@ StyleSheet(
                           offset: SourceOffset(6331),
                           len: 16,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(6348),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6353),
@@ -5848,11 +5493,11 @@ StyleSheet(
                           offset: SourceOffset(6365),
                           len: 12,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(6378),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6383),
@@ -5871,11 +5516,11 @@ StyleSheet(
                           offset: SourceOffset(6395),
                           len: 5,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(6401),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6406),
@@ -5894,11 +5539,11 @@ StyleSheet(
                           offset: SourceOffset(6418),
                           len: 10,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(6429),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6434),
@@ -5917,11 +5562,11 @@ StyleSheet(
                           offset: SourceOffset(6446),
                           len: 9,
                         ))))),
-                        duration: Some(S(Dimension(Cursor(
+                        duration: Some(Literal(S(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(6456),
                           len: 4,
-                        )))),
+                        ))))),
                         easing: Some(Ease(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6461),
@@ -5949,260 +5594,189 @@ StyleSheet(
                       offset: SourceOffset(6479),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6480),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                    value: TransitionStyleValue([
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6485),
                           len: 16,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6501),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(6502),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(6506),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(6506),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(6526),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6527),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6528),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(6534),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6535),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(6534),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6540),
                           len: 12,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6552),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(6553),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(6557),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(6557),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(6577),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6578),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6579),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(6585),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6586),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(6585),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6591),
                           len: 5,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6596),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(6597),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(6601),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(6601),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(6621),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6622),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6623),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(6629),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6630),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(6629),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6635),
                           len: 10,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6645),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(6646),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(6650),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(6650),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(6670),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6671),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Linear(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6672),
                           len: 6,
-                        )),
-                        Comma(Cursor(
-                          kind: "Comma",
-                          offset: SourceOffset(6678),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6679),
-                          len: 5,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), Some(Comma(Cursor(
+                        kind: "Comma",
+                        offset: SourceOffset(6678),
+                        len: 1,
+                      )))),
+                      (Literal(SingleTransition(
+                        property: Some(r#Some(CustomIdent(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6684),
                           len: 9,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6693),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
+                        ))))),
+                        duration: Some(Substituted(Var(VarFunction(
+                          function: Function(Cursor(
                             kind: "Function",
                             offset: SourceOffset(6694),
                             len: 4,
                           )),
-                          params: ComponentValues(
-                            values: [
-                              Ident(Cursor(
-                                kind: "Ident",
-                                offset: SourceOffset(6698),
-                                len: 20,
-                              )),
-                            ],
-                          ),
+                          name: DashedIdent(DashedIdent(Ident(Cursor(
+                            kind: "Ident",
+                            offset: SourceOffset(6698),
+                            len: 20,
+                          )))),
+                          comma: None,
+                          fallback: None,
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(6718),
                             len: 1,
                           )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(6719),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                        )))),
+                        easing: Some(Ease(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(6720),
                           len: 4,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        delay: None,
+                        behavior: None,
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -16401,132 +15975,87 @@ StyleSheet(
                 offset: SourceOffset(14124),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14125),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
-                    kind: "Hash",
-                    offset: SourceOffset(14126),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14133),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(14134),
-                      len: 4,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        String(Cursor(
-                          kind: "String",
-                          offset: SourceOffset(14138),
-                          len: 467,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(14605),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14606),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(14607),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(14612),
-                          len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(14616),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(14617),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(14618),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(14619),
-                          len: 4,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(14623),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14624),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(14625),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14628),
-                    len: 1,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(14629),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14630),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(14631),
+              value: BackgroundStyleValue([
+                (Literal(BgLayer(
+                  image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(14134),
                     len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(14635),
+                  )), String(Cursor(
+                    kind: "String",
+                    offset: SourceOffset(14138),
+                    len: 467,
+                  )), RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(14605),
                     len: 1,
+                  )))))),
+                  position: Some(BgPositionAndSize(
+                    position: Two(Physical(LengthPercentage(Substituted(Math(CalcFunction(CalcFunction(
+                      name: Function(Cursor(
+                        kind: "Function",
+                        offset: SourceOffset(14607),
+                        len: 5,
+                      )),
+                      params: CalcSum(
+                        first: CalcProduct(
+                          first: Literal(Typed(Percent(Percentage(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(14612),
+                            len: 4,
+                          )))))),
+                          rest: [],
+                        ),
+                        rest: [
+                          (Subtract(Dash(Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(14617),
+                            len: 1,
+                          )))), CalcProduct(
+                            first: Literal(Typed(Length(Px(Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(14619),
+                              len: 4,
+                            )))))),
+                            rest: [],
+                          )),
+                        ],
+                      ),
+                      close: RightParen(Cursor(
+                        kind: "RightParen",
+                        offset: SourceOffset(14623),
+                        len: 1,
+                      )),
+                    ))))), LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(14625),
+                      len: 3,
+                    )))))))),
+                    size: Some((Slash(Delim(Cursor(
+                      kind: "Delim",
+                      offset: SourceOffset(14629),
+                      len: 1,
+                    ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(14631),
+                      len: 4,
+                    )))))), None))),
                   )),
-                  Ident(Cursor(
+                  repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(14636),
                     len: 9,
-                  )),
-                ],
-              )),
+                  ))), None)),
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: Some(Hex(Hash(Cursor(
+                    kind: "Hash",
+                    offset: SourceOffset(14126),
+                    len: 7,
+                  )))),
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -16816,132 +16345,87 @@ StyleSheet(
                       offset: SourceOffset(14827),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(14828),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
-                          kind: "Hash",
-                          offset: SourceOffset(14829),
-                          len: 7,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(14836),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(14837),
-                            len: 4,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              String(Cursor(
-                                kind: "String",
-                                offset: SourceOffset(14841),
-                                len: 467,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(15308),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15309),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(15310),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(15315),
-                                len: 4,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(15319),
-                                len: 1,
-                              )),
-                              Delim(Cursor(
-                                kind: "Delim",
-                                offset: SourceOffset(15320),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(15321),
-                                len: 1,
-                              )),
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(15322),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(15326),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15327),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(15328),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15331),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(15332),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15333),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(15334),
+                    value: BackgroundStyleValue([
+                      (Literal(BgLayer(
+                        image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(14837),
                           len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15338),
+                        )), String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(14841),
+                          len: 467,
+                        )), RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(15308),
                           len: 1,
+                        )))))),
+                        position: Some(BgPositionAndSize(
+                          position: Two(Physical(LengthPercentage(Substituted(Math(CalcFunction(CalcFunction(
+                            name: Function(Cursor(
+                              kind: "Function",
+                              offset: SourceOffset(15310),
+                              len: 5,
+                            )),
+                            params: CalcSum(
+                              first: CalcProduct(
+                                first: Literal(Typed(Percent(Percentage(Dimension(Cursor(
+                                  kind: "Dimension",
+                                  offset: SourceOffset(15315),
+                                  len: 4,
+                                )))))),
+                                rest: [],
+                              ),
+                              rest: [
+                                (Subtract(Dash(Delim(Cursor(
+                                  kind: "Delim",
+                                  offset: SourceOffset(15320),
+                                  len: 1,
+                                )))), CalcProduct(
+                                  first: Literal(Typed(Length(Px(Dimension(Cursor(
+                                    kind: "Dimension",
+                                    offset: SourceOffset(15322),
+                                    len: 4,
+                                  )))))),
+                                  rest: [],
+                                )),
+                              ],
+                            ),
+                            close: RightParen(Cursor(
+                              kind: "RightParen",
+                              offset: SourceOffset(15326),
+                              len: 1,
+                            )),
+                          ))))), LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(15328),
+                            len: 3,
+                          )))))))),
+                          size: Some((Slash(Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(15332),
+                            len: 1,
+                          ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(15334),
+                            len: 4,
+                          )))))), None))),
                         )),
-                        Ident(Cursor(
+                        repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(15339),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        ))), None)),
+                        attachment: None,
+                        origin: None,
+                        clip: None,
+                        color: Some(Hex(Hash(Cursor(
+                          kind: "Hash",
+                          offset: SourceOffset(14829),
+                          len: 7,
+                        )))),
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -17209,132 +16693,87 @@ StyleSheet(
                       offset: SourceOffset(15511),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15512),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
-                          kind: "Hash",
-                          offset: SourceOffset(15513),
-                          len: 7,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15520),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(15521),
-                            len: 4,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              String(Cursor(
-                                kind: "String",
-                                offset: SourceOffset(15525),
-                                len: 467,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(15992),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(15993),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(15994),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(15999),
-                                len: 4,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(16003),
-                                len: 1,
-                              )),
-                              Delim(Cursor(
-                                kind: "Delim",
-                                offset: SourceOffset(16004),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(16005),
-                                len: 1,
-                              )),
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(16006),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(16010),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16011),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(16012),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16015),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(16016),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16017),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(16018),
+                    value: BackgroundStyleValue([
+                      (Literal(BgLayer(
+                        image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(15521),
                           len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16022),
+                        )), String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(15525),
+                          len: 467,
+                        )), RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(15992),
                           len: 1,
+                        )))))),
+                        position: Some(BgPositionAndSize(
+                          position: Two(Physical(LengthPercentage(Substituted(Math(CalcFunction(CalcFunction(
+                            name: Function(Cursor(
+                              kind: "Function",
+                              offset: SourceOffset(15994),
+                              len: 5,
+                            )),
+                            params: CalcSum(
+                              first: CalcProduct(
+                                first: Literal(Typed(Percent(Percentage(Dimension(Cursor(
+                                  kind: "Dimension",
+                                  offset: SourceOffset(15999),
+                                  len: 4,
+                                )))))),
+                                rest: [],
+                              ),
+                              rest: [
+                                (Subtract(Dash(Delim(Cursor(
+                                  kind: "Delim",
+                                  offset: SourceOffset(16004),
+                                  len: 1,
+                                )))), CalcProduct(
+                                  first: Literal(Typed(Length(Px(Dimension(Cursor(
+                                    kind: "Dimension",
+                                    offset: SourceOffset(16006),
+                                    len: 4,
+                                  )))))),
+                                  rest: [],
+                                )),
+                              ],
+                            ),
+                            close: RightParen(Cursor(
+                              kind: "RightParen",
+                              offset: SourceOffset(16010),
+                              len: 1,
+                            )),
+                          ))))), LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(16012),
+                            len: 3,
+                          )))))))),
+                          size: Some((Slash(Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(16016),
+                            len: 1,
+                          ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(16018),
+                            len: 4,
+                          )))))), None))),
                         )),
-                        Ident(Cursor(
+                        repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(16023),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        ))), None)),
+                        attachment: None,
+                        origin: None,
+                        clip: None,
+                        color: Some(Hex(Hash(Cursor(
+                          kind: "Hash",
+                          offset: SourceOffset(15513),
+                          len: 7,
+                        )))),
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -17602,132 +17041,87 @@ StyleSheet(
                       offset: SourceOffset(16195),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16196),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
-                          kind: "Hash",
-                          offset: SourceOffset(16197),
-                          len: 7,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16204),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(16205),
-                            len: 4,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              String(Cursor(
-                                kind: "String",
-                                offset: SourceOffset(16209),
-                                len: 467,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(16676),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16677),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(16678),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(16683),
-                                len: 4,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(16687),
-                                len: 1,
-                              )),
-                              Delim(Cursor(
-                                kind: "Delim",
-                                offset: SourceOffset(16688),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(16689),
-                                len: 1,
-                              )),
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(16690),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(16694),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16695),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(16696),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16699),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(16700),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16701),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(16702),
+                    value: BackgroundStyleValue([
+                      (Literal(BgLayer(
+                        image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(16205),
                           len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16706),
+                        )), String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(16209),
+                          len: 467,
+                        )), RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(16676),
                           len: 1,
+                        )))))),
+                        position: Some(BgPositionAndSize(
+                          position: Two(Physical(LengthPercentage(Substituted(Math(CalcFunction(CalcFunction(
+                            name: Function(Cursor(
+                              kind: "Function",
+                              offset: SourceOffset(16678),
+                              len: 5,
+                            )),
+                            params: CalcSum(
+                              first: CalcProduct(
+                                first: Literal(Typed(Percent(Percentage(Dimension(Cursor(
+                                  kind: "Dimension",
+                                  offset: SourceOffset(16683),
+                                  len: 4,
+                                )))))),
+                                rest: [],
+                              ),
+                              rest: [
+                                (Subtract(Dash(Delim(Cursor(
+                                  kind: "Delim",
+                                  offset: SourceOffset(16688),
+                                  len: 1,
+                                )))), CalcProduct(
+                                  first: Literal(Typed(Length(Px(Dimension(Cursor(
+                                    kind: "Dimension",
+                                    offset: SourceOffset(16690),
+                                    len: 4,
+                                  )))))),
+                                  rest: [],
+                                )),
+                              ],
+                            ),
+                            close: RightParen(Cursor(
+                              kind: "RightParen",
+                              offset: SourceOffset(16694),
+                              len: 1,
+                            )),
+                          ))))), LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(16696),
+                            len: 3,
+                          )))))))),
+                          size: Some((Slash(Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(16700),
+                            len: 1,
+                          ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(16702),
+                            len: 4,
+                          )))))), None))),
                         )),
-                        Ident(Cursor(
+                        repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(16707),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        ))), None)),
+                        attachment: None,
+                        origin: None,
+                        clip: None,
+                        color: Some(Hex(Hash(Cursor(
+                          kind: "Hash",
+                          offset: SourceOffset(16197),
+                          len: 7,
+                        )))),
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -17995,132 +17389,87 @@ StyleSheet(
                       offset: SourceOffset(16879),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16880),
-                          len: 1,
-                        )),
-                        Hash(Cursor(
-                          kind: "Hash",
-                          offset: SourceOffset(16881),
-                          len: 7,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(16888),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(16889),
-                            len: 4,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              String(Cursor(
-                                kind: "String",
-                                offset: SourceOffset(16893),
-                                len: 467,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(17360),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17361),
-                          len: 1,
-                        )),
-                        FunctionBlock(
-                          name: Function(Cursor(
-                            kind: "Function",
-                            offset: SourceOffset(17362),
-                            len: 5,
-                          )),
-                          params: ComponentValues(
-                            values: [
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(17367),
-                                len: 4,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(17371),
-                                len: 1,
-                              )),
-                              Delim(Cursor(
-                                kind: "Delim",
-                                offset: SourceOffset(17372),
-                                len: 1,
-                              )),
-                              Whitespace(Cursor(
-                                kind: "Whitespace",
-                                offset: SourceOffset(17373),
-                                len: 1,
-                              )),
-                              Dimension(Cursor(
-                                kind: "Dimension",
-                                offset: SourceOffset(17374),
-                                len: 4,
-                              )),
-                            ],
-                          ),
-                          close: RightParen(Cursor(
-                            kind: "RightParen",
-                            offset: SourceOffset(17378),
-                            len: 1,
-                          )),
-                        ),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17379),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(17380),
-                          len: 3,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17383),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(17384),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17385),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(17386),
+                    value: BackgroundStyleValue([
+                      (Literal(BgLayer(
+                        image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(16889),
                           len: 4,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(17390),
+                        )), String(Cursor(
+                          kind: "String",
+                          offset: SourceOffset(16893),
+                          len: 467,
+                        )), RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(17360),
                           len: 1,
+                        )))))),
+                        position: Some(BgPositionAndSize(
+                          position: Two(Physical(LengthPercentage(Substituted(Math(CalcFunction(CalcFunction(
+                            name: Function(Cursor(
+                              kind: "Function",
+                              offset: SourceOffset(17362),
+                              len: 5,
+                            )),
+                            params: CalcSum(
+                              first: CalcProduct(
+                                first: Literal(Typed(Percent(Percentage(Dimension(Cursor(
+                                  kind: "Dimension",
+                                  offset: SourceOffset(17367),
+                                  len: 4,
+                                )))))),
+                                rest: [],
+                              ),
+                              rest: [
+                                (Subtract(Dash(Delim(Cursor(
+                                  kind: "Delim",
+                                  offset: SourceOffset(17372),
+                                  len: 1,
+                                )))), CalcProduct(
+                                  first: Literal(Typed(Length(Px(Dimension(Cursor(
+                                    kind: "Dimension",
+                                    offset: SourceOffset(17374),
+                                    len: 4,
+                                  )))))),
+                                  rest: [],
+                                )),
+                              ],
+                            ),
+                            close: RightParen(Cursor(
+                              kind: "RightParen",
+                              offset: SourceOffset(17378),
+                              len: 1,
+                            )),
+                          ))))), LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(17380),
+                            len: 3,
+                          )))))))),
+                          size: Some((Slash(Delim(Cursor(
+                            kind: "Delim",
+                            offset: SourceOffset(17384),
+                            len: 1,
+                          ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                            kind: "Dimension",
+                            offset: SourceOffset(17386),
+                            len: 4,
+                          )))))), None))),
                         )),
-                        Ident(Cursor(
+                        repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(17391),
                           len: 9,
-                        )),
-                      ],
-                    )),
+                        ))), None)),
+                        attachment: None,
+                        origin: None,
+                        clip: None,
+                        color: Some(Hex(Hash(Cursor(
+                          kind: "Hash",
+                          offset: SourceOffset(16881),
+                          len: 7,
+                        )))),
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -18546,25 +17895,25 @@ StyleSheet(
                     offset: SourceOffset(17671),
                     len: 9,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17661),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17663),
                     len: 1,
-                  ))))),
-                  blur: Some(Zero(Number(Cursor(
+                  )))))),
+                  blur: Some(Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17665),
                     len: 1,
-                  )))),
-                  spread: Some(Px(Dimension(Cursor(
+                  ))))),
+                  spread: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(17667),
                     len: 3,
-                  )))),
+                  ))))),
                   position: None,
                 )), None),
               ]),
@@ -18760,25 +18109,25 @@ StyleSheet(
                           offset: SourceOffset(17802),
                           len: 9,
                         )))),
-                        offset: r#Some((Zero(Number(Cursor(
+                        offset: r#Some((Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(17792),
                           len: 1,
-                        ))), Zero(Number(Cursor(
+                        )))), Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(17794),
                           len: 1,
-                        ))))),
-                        blur: Some(Zero(Number(Cursor(
+                        )))))),
+                        blur: Some(Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(17796),
                           len: 1,
-                        )))),
-                        spread: Some(Px(Dimension(Cursor(
+                        ))))),
+                        spread: Some(Literal(Px(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(17798),
                           len: 3,
-                        )))),
+                        ))))),
                         position: None,
                       )), None),
                     ]),
@@ -18940,25 +18289,25 @@ StyleSheet(
                     offset: SourceOffset(17897),
                     len: 9,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17887),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17889),
                     len: 1,
-                  ))))),
-                  blur: Some(Zero(Number(Cursor(
+                  )))))),
+                  blur: Some(Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(17891),
                     len: 1,
-                  )))),
-                  spread: Some(Px(Dimension(Cursor(
+                  ))))),
+                  spread: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(17893),
                     len: 3,
-                  )))),
+                  ))))),
                   position: None,
                 )), None),
               ]),
@@ -19154,25 +18503,25 @@ StyleSheet(
                           offset: SourceOffset(18029),
                           len: 9,
                         )))),
-                        offset: r#Some((Zero(Number(Cursor(
+                        offset: r#Some((Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18019),
                           len: 1,
-                        ))), Zero(Number(Cursor(
+                        )))), Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18021),
                           len: 1,
-                        ))))),
-                        blur: Some(Zero(Number(Cursor(
+                        )))))),
+                        blur: Some(Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18023),
                           len: 1,
-                        )))),
-                        spread: Some(Px(Dimension(Cursor(
+                        ))))),
+                        spread: Some(Literal(Px(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(18025),
                           len: 3,
-                        )))),
+                        ))))),
                         position: None,
                       )), None),
                     ]),
@@ -19334,25 +18683,25 @@ StyleSheet(
                     offset: SourceOffset(18124),
                     len: 9,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18114),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18116),
                     len: 1,
-                  ))))),
-                  blur: Some(Zero(Number(Cursor(
+                  )))))),
+                  blur: Some(Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18118),
                     len: 1,
-                  )))),
-                  spread: Some(Px(Dimension(Cursor(
+                  ))))),
+                  spread: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(18120),
                     len: 3,
-                  )))),
+                  ))))),
                   position: None,
                 )), None),
               ]),
@@ -19548,25 +18897,25 @@ StyleSheet(
                           offset: SourceOffset(18256),
                           len: 9,
                         )))),
-                        offset: r#Some((Zero(Number(Cursor(
+                        offset: r#Some((Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18246),
                           len: 1,
-                        ))), Zero(Number(Cursor(
+                        )))), Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18248),
                           len: 1,
-                        ))))),
-                        blur: Some(Zero(Number(Cursor(
+                        )))))),
+                        blur: Some(Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18250),
                           len: 1,
-                        )))),
-                        spread: Some(Px(Dimension(Cursor(
+                        ))))),
+                        spread: Some(Literal(Px(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(18252),
                           len: 3,
-                        )))),
+                        ))))),
                         position: None,
                       )), None),
                     ]),
@@ -19728,25 +19077,25 @@ StyleSheet(
                     offset: SourceOffset(18353),
                     len: 9,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18343),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18345),
                     len: 1,
-                  ))))),
-                  blur: Some(Zero(Number(Cursor(
+                  )))))),
+                  blur: Some(Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(18347),
                     len: 1,
-                  )))),
-                  spread: Some(Px(Dimension(Cursor(
+                  ))))),
+                  spread: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(18349),
                     len: 3,
-                  )))),
+                  ))))),
                   position: None,
                 )), None),
               ]),
@@ -19942,25 +19291,25 @@ StyleSheet(
                           offset: SourceOffset(18487),
                           len: 9,
                         )))),
-                        offset: r#Some((Zero(Number(Cursor(
+                        offset: r#Some((Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18477),
                           len: 1,
-                        ))), Zero(Number(Cursor(
+                        )))), Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18479),
                           len: 1,
-                        ))))),
-                        blur: Some(Zero(Number(Cursor(
+                        )))))),
+                        blur: Some(Literal(Zero(Number(Cursor(
                           kind: "Number",
                           offset: SourceOffset(18481),
                           len: 1,
-                        )))),
-                        spread: Some(Px(Dimension(Cursor(
+                        ))))),
+                        spread: Some(Literal(Px(Dimension(Cursor(
                           kind: "Dimension",
                           offset: SourceOffset(18483),
                           len: 3,
-                        )))),
+                        ))))),
                         position: None,
                       )), None),
                     ]),
@@ -20416,11 +19765,11 @@ StyleSheet(
                     offset: SourceOffset(18745),
                     len: 11,
                   )),
-                  params: Length(Px(Dimension(Cursor(
+                  params: Literal(Length(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(18756),
                     len: 3,
-                  )))),
+                  ))))),
                   close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(18759),
@@ -22233,11 +21582,11 @@ StyleSheet(
               value: WebkitTransitionStyleValue([
                 (Literal(SingleTransition(
                   property: None,
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(20124),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: None,
                   delay: None,
                   behavior: None,
@@ -22264,11 +21613,11 @@ StyleSheet(
               value: TransitionStyleValue([
                 (Literal(SingleTransition(
                   property: None,
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(20144),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: None,
                   delay: None,
                   behavior: None,
@@ -22656,20 +22005,20 @@ StyleSheet(
                     offset: SourceOffset(20456),
                     len: 4,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(20446),
                     len: 1,
-                  ))), Px(Dimension(Cursor(
+                  )))), Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(20448),
                     len: 3,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(20452),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), Some(Comma(Cursor(
@@ -22683,20 +22032,20 @@ StyleSheet(
                     offset: SourceOffset(20470),
                     len: 7,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(20462),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(20464),
                     len: 1,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(20466),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), None),
@@ -23569,11 +22918,11 @@ StyleSheet(
               value: MozTransitionStyleValue([
                 (Literal(SingleTransition(
                   property: None,
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21151),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: None,
                   delay: None,
                   behavior: None,
@@ -23600,11 +22949,11 @@ StyleSheet(
               value: TransitionStyleValue([
                 (Literal(SingleTransition(
                   property: None,
-                  duration: Some(S(Dimension(Cursor(
+                  duration: Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21171),
                     len: 4,
-                  )))),
+                  ))))),
                   easing: None,
                   delay: None,
                   behavior: None,
@@ -23992,20 +23341,20 @@ StyleSheet(
                     offset: SourceOffset(21468),
                     len: 4,
                   )))),
-                  offset: r#Some((Px(Dimension(Cursor(
+                  offset: r#Some((Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21456),
                     len: 3,
-                  ))), Px(Dimension(Cursor(
+                  )))), Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21460),
                     len: 3,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21464),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), Some(Comma(Cursor(
@@ -24019,20 +23368,20 @@ StyleSheet(
                     offset: SourceOffset(21482),
                     len: 7,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(21474),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(21476),
                     len: 1,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(21478),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), None),
@@ -24817,20 +24166,20 @@ StyleSheet(
                     offset: SourceOffset(22082),
                     len: 4,
                   )))),
-                  offset: r#Some((Px(Dimension(Cursor(
+                  offset: r#Some((Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22070),
                     len: 3,
-                  ))), Px(Dimension(Cursor(
+                  )))), Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22074),
                     len: 3,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22078),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), Some(Comma(Cursor(
@@ -24844,20 +24193,20 @@ StyleSheet(
                     offset: SourceOffset(22096),
                     len: 7,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(22088),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(22090),
                     len: 1,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22092),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), None),
@@ -25279,20 +24628,20 @@ StyleSheet(
                     offset: SourceOffset(22423),
                     len: 4,
                   )))),
-                  offset: r#Some((Px(Dimension(Cursor(
+                  offset: r#Some((Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22411),
                     len: 3,
-                  ))), Px(Dimension(Cursor(
+                  )))), Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22415),
                     len: 3,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22419),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), Some(Comma(Cursor(
@@ -25306,20 +24655,20 @@ StyleSheet(
                     offset: SourceOffset(22437),
                     len: 7,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(22429),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(22431),
                     len: 1,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22433),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), None),
@@ -25611,20 +24960,20 @@ StyleSheet(
                     offset: SourceOffset(22650),
                     len: 4,
                   )))),
-                  offset: r#Some((Px(Dimension(Cursor(
+                  offset: r#Some((Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22638),
                     len: 3,
-                  ))), Px(Dimension(Cursor(
+                  )))), Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22642),
                     len: 3,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22646),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), Some(Comma(Cursor(
@@ -25638,20 +24987,20 @@ StyleSheet(
                     offset: SourceOffset(22664),
                     len: 7,
                   )))),
-                  offset: r#Some((Zero(Number(Cursor(
+                  offset: r#Some((Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(22656),
                     len: 1,
-                  ))), Zero(Number(Cursor(
+                  )))), Literal(Zero(Number(Cursor(
                     kind: "Number",
                     offset: SourceOffset(22658),
                     len: 1,
-                  ))))),
-                  blur: Some(Px(Dimension(Cursor(
+                  )))))),
+                  blur: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(22660),
                     len: 3,
-                  )))),
+                  ))))),
                   spread: None,
                   position: None,
                 )), None),
@@ -32367,27 +31716,27 @@ StyleSheet(
                       offset: SourceOffset(27644),
                       len: 4,
                     )),
-                    params: RgbFunctionParams(r#Some(Number(Number(Cursor(
+                    params: RgbFunctionParams(r#Some(Literal(Number(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(27648),
                       len: 3,
-                    )))), Some(Comma(Cursor(
+                    ))))), Some(Comma(Cursor(
                       kind: "Comma",
                       offset: SourceOffset(27651),
                       len: 1,
-                    ))), r#Some(Number(Number(Cursor(
+                    ))), r#Some(Literal(Number(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(27653),
                       len: 3,
-                    )))), Some(Comma(Cursor(
+                    ))))), Some(Comma(Cursor(
                       kind: "Comma",
                       offset: SourceOffset(27656),
                       len: 1,
-                    ))), r#Some(Number(Number(Cursor(
+                    ))), r#Some(Literal(Number(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(27658),
                       len: 3,
-                    )))), None, None),
+                    ))))), None, None),
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(27661),
@@ -33010,27 +32359,27 @@ StyleSheet(
                             offset: SourceOffset(28194),
                             len: 4,
                           )),
-                          params: RgbFunctionParams(r#Some(Number(Number(Cursor(
+                          params: RgbFunctionParams(r#Some(Literal(Number(Number(Cursor(
                             kind: "Number",
                             offset: SourceOffset(28198),
                             len: 1,
-                          )))), Some(Comma(Cursor(
+                          ))))), Some(Comma(Cursor(
                             kind: "Comma",
                             offset: SourceOffset(28199),
                             len: 1,
-                          ))), r#Some(Number(Number(Cursor(
+                          ))), r#Some(Literal(Number(Number(Cursor(
                             kind: "Number",
                             offset: SourceOffset(28201),
                             len: 1,
-                          )))), Some(Comma(Cursor(
+                          ))))), Some(Comma(Cursor(
                             kind: "Comma",
                             offset: SourceOffset(28202),
                             len: 1,
-                          ))), r#Some(Number(Number(Cursor(
+                          ))), r#Some(Literal(Number(Number(Cursor(
                             kind: "Number",
                             offset: SourceOffset(28204),
                             len: 1,
-                          )))), None, None),
+                          ))))), None, None),
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(28205),
@@ -33205,27 +32554,27 @@ StyleSheet(
                             offset: SourceOffset(28348),
                             len: 4,
                           )),
-                          params: RgbFunctionParams(r#Some(Number(Number(Cursor(
+                          params: RgbFunctionParams(r#Some(Literal(Number(Number(Cursor(
                             kind: "Number",
                             offset: SourceOffset(28352),
                             len: 1,
-                          )))), Some(Comma(Cursor(
+                          ))))), Some(Comma(Cursor(
                             kind: "Comma",
                             offset: SourceOffset(28353),
                             len: 1,
-                          ))), r#Some(Number(Number(Cursor(
+                          ))), r#Some(Literal(Number(Number(Cursor(
                             kind: "Number",
                             offset: SourceOffset(28355),
                             len: 1,
-                          )))), Some(Comma(Cursor(
+                          ))))), Some(Comma(Cursor(
                             kind: "Comma",
                             offset: SourceOffset(28356),
                             len: 1,
-                          ))), r#Some(Number(Number(Cursor(
+                          ))), r#Some(Literal(Number(Number(Cursor(
                             kind: "Number",
                             offset: SourceOffset(28358),
                             len: 1,
-                          )))), None, None),
+                          ))))), None, None),
                           close: RightParen(Cursor(
                             kind: "RightParen",
                             offset: SourceOffset(28359),
@@ -36699,11 +36048,11 @@ StyleSheet(
                   offset: SourceOffset(31249),
                   len: 5,
                 )),
-                radius: Some(Px(Dimension(Cursor(
+                radius: Some(Literal(Px(Dimension(Cursor(
                   kind: "Dimension",
                   offset: SourceOffset(31254),
                   len: 3,
-                )))),
+                ))))),
                 close: RightParen(Cursor(
                   kind: "RightParen",
                   offset: SourceOffset(31257),
@@ -36857,11 +36206,11 @@ StyleSheet(
                     offset: SourceOffset(31372),
                     len: 5,
                   )),
-                  radius: Some(Px(Dimension(Cursor(
+                  radius: Some(Literal(Px(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(31377),
                     len: 3,
-                  )))),
+                  ))))),
                   close: RightParen(Cursor(
                     kind: "RightParen",
                     offset: SourceOffset(31380),

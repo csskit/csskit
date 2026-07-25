@@ -1,4 +1,5 @@
 use super::prelude::*;
+use crate::CalcableValue;
 
 /// <https://drafts.csswg.org/css-speech-1/#typedef-voice-family-age>
 ///
@@ -41,17 +42,17 @@ pub enum VoiceGender {
 /// ```text,ignore
 /// <generic-voice> = <age>? <gender> <integer>?
 /// ```
-#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GenericVoice {
+pub struct GenericVoice<'a> {
 	pub age: Option<VoiceAge>,
 	pub gender: VoiceGender,
-	pub variant: Option<T![Number]>,
+	pub variant: Option<CalcableValue<'a, T![Number]>>,
 }
 
-impl<'a> Peek<'a> for GenericVoice {
+impl<'a> Peek<'a> for GenericVoice<'a> {
 	const PEEK_KINDSET: KindSet = VoiceAge::PEEK_KINDSET.combine(VoiceGender::PEEK_KINDSET);
 
 	#[inline(always)]
@@ -63,14 +64,14 @@ impl<'a> Peek<'a> for GenericVoice {
 	}
 }
 
-impl<'a> Parse<'a> for GenericVoice {
+impl<'a> Parse<'a> for GenericVoice<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let age = p.parse_if_peek::<VoiceAge>()?;
 		let gender = p.parse::<VoiceGender>()?;
-		let variant = p.parse_if_peek::<T![Number]>()?;
+		let variant = p.parse_if_peek::<CalcableValue<T![Number]>>()?;
 		Ok(Self { age, gender, variant })
 	}
 }
@@ -85,7 +86,7 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<VoiceAge>(), 16);
 		assert_eq!(std::mem::size_of::<VoiceGender>(), 16);
-		assert_eq!(std::mem::size_of::<GenericVoice>(), 48);
+		assert_eq!(std::mem::size_of::<GenericVoice>(), 56);
 	}
 
 	#[test]
@@ -96,6 +97,12 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, GenericVoice, "child male");
 		assert_parse!(CssAtomSet::ATOMS, GenericVoice, "young female 2");
 		assert_parse!(CssAtomSet::ATOMS, GenericVoice, "old neutral 1");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, GenericVoice, "male var(--n)");
+		assert_parse!(CssAtomSet::ATOMS, GenericVoice, "young female calc(1 + 1)");
 	}
 
 	#[test]

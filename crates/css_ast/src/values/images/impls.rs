@@ -7,7 +7,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ImageRenderingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ObjectPositionStyleValue>(), 72);
+		assert_eq!(std::mem::size_of::<ObjectPositionStyleValue>(), 88);
 		assert_eq!(std::mem::size_of::<ObjectViewBoxStyleValue>(), 352);
 		assert_eq!(std::mem::size_of::<ImageOrientationStyleValue>(), 40);
 		assert_eq!(std::mem::size_of::<ObjectFitStyleValue>(), 36);

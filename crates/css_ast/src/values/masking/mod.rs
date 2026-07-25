@@ -34,7 +34,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ClipStyleValue;
+pub struct ClipStyleValue<'a>;
 
 /// Represents the style value for `clip-path` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#clip-path).
 ///

@@ -139,7 +139,7 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 }
 
 macro_rules! container_feature {
-	( $($name: ident($typ: ident))+ ) => {
+	( $($name: ident($typ: ty))+ ) => {
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -200,12 +200,12 @@ impl<'a> Parse<'a> for ContainerFeature<'a> {
 		}
 		let mut c = p.peek_n(2);
 		macro_rules! match_feature {
-			( $($name: ident($typ: ident))+ ) => {
+			( $($name: ident($typ: ty))+ ) => {
 				// Only peek at the token as the underlying media feature parser needs to parse the leading keyword.
 				{
 					match p.to_atom::<CssAtomSet>(c) {
 						$(CssAtomSet::$name => {
-							let value = $typ::parse(p)?;
+							let value = <$typ>::parse(p)?;
 							Self::$name(value)
 						},)+
 						_ => Err(Diagnostic::new(c, Diagnostic::unexpected))?
@@ -234,7 +234,7 @@ macro_rules! apply_container_features {
 			Height(HeightContainerFeature)
 			InlineSize(InlineSizeContainerFeature)
 			BlockSize(BlockSizeContainerFeature)
-			AspectRatio(AspectRatioContainerFeature)
+			AspectRatio(AspectRatioContainerFeature<'a>)
 			Orientation(OrientationContainerFeature)
 		}
 	};
@@ -251,10 +251,8 @@ mod tests {
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<ContainerRule>(), 176);
 		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 24);
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 176);
-		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 24);
-		assert_eq!(std::mem::size_of::<ContainerCondition>(), 216);
-		assert_eq!(std::mem::size_of::<ContainerQuery>(), 200);
+		assert_eq!(std::mem::size_of::<ContainerCondition>(), 256);
+		assert_eq!(std::mem::size_of::<ContainerQuery>(), 240);
 	}
 
 	#[test]

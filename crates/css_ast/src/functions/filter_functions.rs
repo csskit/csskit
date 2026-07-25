@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AngleOrZero, Color, Length, NonNegative, NumberOrPercentage, Url};
+use crate::{AngleOrZero, CalcableValue, Color, Length, NonNegative, NumberOrPercentage, Url};
 
 /// <https://drafts.csswg.org/filter-effects-1/#typedef-filter-function>
 ///
@@ -14,25 +14,25 @@ use crate::{AngleOrZero, Color, Length, NonNegative, NumberOrPercentage, Url};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FilterFunction<'a> {
 	#[atom(CssAtomSet::Blur)]
-	Blur(BlurFunction),
+	Blur(BlurFunction<'a>),
 	#[atom(CssAtomSet::Brightness)]
-	Brightness(BrightnessFunction),
+	Brightness(BrightnessFunction<'a>),
 	#[atom(CssAtomSet::Contrast)]
-	Contrast(ContrastFunction),
+	Contrast(ContrastFunction<'a>),
 	#[atom(CssAtomSet::DropShadow)]
 	DropShadow(DropShadowFunction<'a>),
 	#[atom(CssAtomSet::Grayscale)]
-	Grayscale(GrayscaleFunction),
+	Grayscale(GrayscaleFunction<'a>),
 	#[atom(CssAtomSet::HueRotate)]
-	HueRotate(HueRotateFunction),
+	HueRotate(HueRotateFunction<'a>),
 	#[atom(CssAtomSet::Invert)]
-	Invert(InvertFunction),
+	Invert(InvertFunction<'a>),
 	#[atom(CssAtomSet::Opacity)]
-	Opacity(OpacityFunction),
+	Opacity(OpacityFunction<'a>),
 	#[atom(CssAtomSet::Saturate)]
-	Saturate(SaturateFunction),
+	Saturate(SaturateFunction<'a>),
 	#[atom(CssAtomSet::Sepia)]
-	Sepia(SepiaFunction),
+	Sepia(SepiaFunction<'a>),
 }
 
 /// <https://drafts.csswg.org/filter-effects-1/#typedef-filter-value-list>
@@ -61,10 +61,10 @@ pub enum FilterValue<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BlurFunction {
+pub struct BlurFunction<'a> {
 	#[atom(CssAtomSet::Blur)]
 	pub name: T![Function],
-	pub radius: Option<NonNegative<Length>>,
+	pub radius: Option<CalcableValue<'a, NonNegative<Length>>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -74,10 +74,10 @@ pub struct BlurFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BrightnessFunction {
+pub struct BrightnessFunction<'a> {
 	#[atom(CssAtomSet::Brightness)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -87,10 +87,10 @@ pub struct BrightnessFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ContrastFunction {
+pub struct ContrastFunction<'a> {
 	#[atom(CssAtomSet::Contrast)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -106,9 +106,9 @@ pub struct DropShadowFunction<'a> {
 	#[atom(CssAtomSet::DropShadow)]
 	pub name: T![Function],
 	pub color: Option<Color<'a>>,
-	pub offset_x: Length,
-	pub offset_y: Length,
-	pub blur_radius: Option<NonNegative<Length>>,
+	pub offset_x: CalcableValue<'a, Length>,
+	pub offset_y: CalcableValue<'a, Length>,
+	pub blur_radius: Option<CalcableValue<'a, NonNegative<Length>>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -118,10 +118,10 @@ pub struct DropShadowFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct GrayscaleFunction {
+pub struct GrayscaleFunction<'a> {
 	#[atom(CssAtomSet::Grayscale)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -131,10 +131,10 @@ pub struct GrayscaleFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct HueRotateFunction {
+pub struct HueRotateFunction<'a> {
 	#[atom(CssAtomSet::HueRotate)]
 	pub name: T![Function],
-	pub angle: Option<AngleOrZero>,
+	pub angle: Option<CalcableValue<'a, AngleOrZero>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -144,10 +144,10 @@ pub struct HueRotateFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct InvertFunction {
+pub struct InvertFunction<'a> {
 	#[atom(CssAtomSet::Invert)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -157,10 +157,10 @@ pub struct InvertFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OpacityFunction {
+pub struct OpacityFunction<'a> {
 	#[atom(CssAtomSet::Opacity)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -170,10 +170,10 @@ pub struct OpacityFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SaturateFunction {
+pub struct SaturateFunction<'a> {
 	#[atom(CssAtomSet::Saturate)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -183,10 +183,10 @@ pub struct SaturateFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SepiaFunction {
+pub struct SepiaFunction<'a> {
 	#[atom(CssAtomSet::Sepia)]
 	pub name: T![Function],
-	pub value: Option<NumberOrPercentage>,
+	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -199,7 +199,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<FilterFunction>(), 96);
+		assert_eq!(std::mem::size_of::<FilterFunction>(), 120);
 	}
 
 	#[test]
@@ -214,6 +214,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "drop-shadow(2px 4px 3px)");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "drop-shadow(red 2px 4px)");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "drop-shadow(red 2px 4px 5px)");
+		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "drop-shadow(calc(2px) var(--y))");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "grayscale(1)");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "grayscale(100%)");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "hue-rotate(90deg)");
@@ -226,6 +227,11 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "saturate(200%)");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "sepia(0.5)");
 		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "sepia(50%)");
+		// Substitution/math in value/radius/angle slots.
+		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "blur(calc(5px))");
+		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "brightness(var(--b))");
+		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "hue-rotate(calc(90deg))");
+		assert_parse!(CssAtomSet::ATOMS, FilterFunction, "opacity(var(--o))");
 	}
 
 	#[test]

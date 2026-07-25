@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{types::Color, units::LengthPercentageOrFlex};
+use crate::{CalcableValue, types::Color, units::LengthPercentageOrFlex};
 
 /// <https://drafts.csswg.org/css-images-4/#typedef-image-1d>
 ///
@@ -32,18 +32,18 @@ pub struct StripesFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ColorStripe<'a> {
 	pub color: Color<'a>,
-	pub thickness: Option<LengthPercentageOrFlex>,
+	pub thickness: Option<CalcableValue<'a, LengthPercentageOrFlex>>,
 }
 
 impl<'a> Peek<'a> for ColorStripe<'a> {
-	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(LengthPercentageOrFlex::PEEK_KINDSET);
+	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(CalcableValue::<LengthPercentageOrFlex>::PEEK_KINDSET);
 
 	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		Color::peek(p, c) || LengthPercentageOrFlex::peek(p, c)
+		Color::peek(p, c) || CalcableValue::<LengthPercentageOrFlex>::peek(p, c)
 	}
 }
 
@@ -53,7 +53,7 @@ impl<'a> Parse<'a> for ColorStripe<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let mut color = p.parse_if_peek::<Color>()?;
-		let thickness = p.parse_if_peek::<LengthPercentageOrFlex>()?;
+		let thickness = p.parse_if_peek::<CalcableValue<LengthPercentageOrFlex>>()?;
 		if color.is_none() {
 			color = Some(p.parse::<Color>()?);
 		}
@@ -70,7 +70,7 @@ mod tests {
 	#[test]
 	fn size_test() {
 		assert_eq!(std::mem::size_of::<StripesFunction>(), 48);
-		assert_eq!(std::mem::size_of::<ColorStripe>(), 40);
+		assert_eq!(std::mem::size_of::<ColorStripe>(), 48);
 	}
 
 	#[test]
@@ -78,5 +78,11 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StripesFunction, "stripes(red 1fr,green 2fr,blue 100px)");
 		assert_parse!(CssAtomSet::ATOMS, StripesFunction, "stripes(0.1fr red,0.2fr green,100px blue)");
 		assert_parse!(CssAtomSet::ATOMS, StripesFunction, "stripes(red 1fr,2fr green,blue 100px)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, StripesFunction, "stripes(red var(--t),green 2fr)");
+		assert_parse!(CssAtomSet::ATOMS, StripesFunction, "stripes(red calc(1px + 2px),blue 100px)");
 	}
 }

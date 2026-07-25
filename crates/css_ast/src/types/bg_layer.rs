@@ -139,7 +139,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgLayer>(), 280);
+		assert_eq!(std::mem::size_of::<BgLayer>(), 296);
 	}
 
 	#[test]

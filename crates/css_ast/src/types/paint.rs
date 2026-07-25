@@ -14,7 +14,7 @@ pub enum Paint<'a> {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),
 	Image(Image<'a>),
-	SvgPaint(SvgPaint),
+	SvgPaint(SvgPaint<'a>),
 }
 
 #[cfg(test)]

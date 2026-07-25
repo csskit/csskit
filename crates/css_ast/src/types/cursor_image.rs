@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{ImageSetFunction, Url};
+use crate::{CalcableValue, ImageSetFunction, Url};
 
 /// <https://drafts.csswg.org/css-ui-4/#typedef-cursor-cursor-image>
 ///
@@ -13,8 +13,16 @@ use crate::{ImageSetFunction, Url};
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum CursorImage<'a> {
-	Url(Url, #[cfg_attr(feature = "visitable", visit(skip))] Option<(T![Number], T![Number])>),
-	UrlSet(ImageSetFunction<'a>, #[cfg_attr(feature = "visitable", visit(skip))] Option<(T![Number], T![Number])>),
+	Url(
+		Url,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		Option<(CalcableValue<'a, T![Number]>, CalcableValue<'a, T![Number]>)>,
+	),
+	UrlSet(
+		ImageSetFunction<'a>,
+		#[cfg_attr(feature = "visitable", visit(skip))]
+		Option<(CalcableValue<'a, T![Number]>, CalcableValue<'a, T![Number]>)>,
+	),
 }
 
 impl<'a> Parse<'a> for CursorImage<'a> {
@@ -25,18 +33,18 @@ impl<'a> Parse<'a> for CursorImage<'a> {
 		if p.peek::<ImageSetFunction>() {
 			let image_set = p.parse::<ImageSetFunction>()?;
 			let mut numbers = None;
-			if p.peek::<T![Number]>() {
-				let a = p.parse::<T![Number]>()?;
-				let b = p.parse::<T![Number]>()?;
+			if p.peek::<CalcableValue<T![Number]>>() {
+				let a = p.parse::<CalcableValue<T![Number]>>()?;
+				let b = p.parse::<CalcableValue<T![Number]>>()?;
 				numbers = Some((a, b));
 			}
 			Ok(Self::UrlSet(image_set, numbers))
 		} else {
 			let url = p.parse::<Url>()?;
 			let mut numbers = None;
-			if p.peek::<T![Number]>() {
-				let a = p.parse::<T![Number]>()?;
-				let b = p.parse::<T![Number]>()?;
+			if p.peek::<CalcableValue<T![Number]>>() {
+				let a = p.parse::<CalcableValue<T![Number]>>()?;
+				let b = p.parse::<CalcableValue<T![Number]>>()?;
 				numbers = Some((a, b));
 			}
 			Ok(Self::Url(url, numbers))
@@ -52,13 +60,19 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<CursorImage>(), 80);
+		assert_eq!(std::mem::size_of::<CursorImage>(), 96);
 	}
 
 	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, CursorImage, "url(hyper.cur)");
 		assert_parse!(CssAtomSet::ATOMS, CursorImage, "url(hyper.png)2 3");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, CursorImage, "url(hyper.png)var(--x) 3");
+		assert_parse!(CssAtomSet::ATOMS, CursorImage, "url(hyper.png)calc(1 + 1) calc(2 + 1)");
 	}
 
 	#[test]

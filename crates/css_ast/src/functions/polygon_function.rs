@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{FillRuleStyleValue, Length, LengthPercentage};
+use crate::{CalcableValue, FillRuleStyleValue, Length, LengthPercentage};
 
 /// <https://drafts.csswg.org/css-shapes/#funcdef-basic-shape-polygon>
 ///
@@ -18,20 +18,20 @@ pub struct PolygonFunction<'a> {
 	#[atom(CssAtomSet::Polygon)]
 	pub name: T![Function],
 	pub fill_rule: Option<FillRuleStyleValue>,
-	pub round: Option<PolygonRound>,
+	pub round: Option<PolygonRound<'a>>,
 	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,
-	pub points: CommaSeparated<'a, (LengthPercentage, LengthPercentage)>,
+	pub points: CommaSeparated<'a, (CalcableValue<'a, LengthPercentage>, CalcableValue<'a, LengthPercentage>)>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
 
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct PolygonRound {
+pub struct PolygonRound<'a> {
 	#[atom(CssAtomSet::Round)]
 	pub keyword: T![Ident],
-	pub radius: Length,
+	pub radius: CalcableValue<'a, Length>,
 }
 
 #[cfg(test)]
@@ -45,6 +45,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, PolygonFunction, "polygon(0px 0px,100% 0px,100% 100%)");
 		assert_parse!(CssAtomSet::ATOMS, PolygonFunction, "polygon(nonzero,0 0,50% 0,100% 100%)");
 		assert_parse!(CssAtomSet::ATOMS, PolygonFunction, "polygon(evenodd round 5px,0 0,50% 0,100% 100%)");
+		assert_parse!(CssAtomSet::ATOMS, PolygonFunction, "polygon(round calc(5px),calc(0% + 1px) var(--y),100% 100%)");
 	}
 
 	#[test]

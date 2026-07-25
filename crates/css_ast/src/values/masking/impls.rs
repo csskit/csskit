@@ -6,7 +6,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<ClipStyleValue>(), 136);
+		assert_eq!(std::mem::size_of::<ClipStyleValue>(), 168);
 		assert_eq!(std::mem::size_of::<ClipRuleStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaskBorderModeStyleValue>(), 16);
 		assert_eq!(std::mem::size_of::<MaskBorderOutsetStyleValue>(), 96);

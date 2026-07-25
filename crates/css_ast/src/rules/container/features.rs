@@ -43,13 +43,13 @@ ranged_feature!(
 );
 
 ranged_feature!(
-	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
 	#[feature_metadata(CssAtomSet::AspectRatio)]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-	pub enum AspectRatioContainerFeature{CssAtomSet::AspectRatio, Ratio}
+	pub enum AspectRatioContainerFeature<'a>{CssAtomSet::AspectRatio, Ratio<'a>}
 );
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -417,7 +417,7 @@ mod tests {
 		assert_eq!(std::mem::size_of::<HeightContainerFeature>(), 124);
 		assert_eq!(std::mem::size_of::<InlineSizeContainerFeature>(), 124);
 		assert_eq!(std::mem::size_of::<BlockSizeContainerFeature>(), 124);
-		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 180);
+		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 224);
 		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
 		assert_eq!(std::mem::size_of::<StyleQuery>(), 40);
 		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 96);

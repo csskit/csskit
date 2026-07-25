@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AutoOr, Length};
+use crate::{AutoOr, CalcableValue, Length};
 
 /// <https://drafts.csswg.org/css-masking-1/#funcdef-rect>
 ///
@@ -11,23 +11,23 @@ use crate::{AutoOr, Length};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RectFunction {
+pub struct RectFunction<'a> {
 	#[atom(CssAtomSet::Rect)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![Function],
-	pub top: AutoOr<Length>,
+	pub top: AutoOr<CalcableValue<'a, Length>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
 	pub comma1: Option<T![,]>,
-	pub right: AutoOr<Length>,
+	pub right: AutoOr<CalcableValue<'a, Length>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
 	pub comma2: Option<T![,]>,
-	pub bottom: AutoOr<Length>,
+	pub bottom: AutoOr<CalcableValue<'a, Length>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
 	pub comma3: Option<T![,]>,
-	pub left: AutoOr<Length>,
+	pub left: AutoOr<CalcableValue<'a, Length>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -40,7 +40,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<RectFunction>(), 136);
+		assert_eq!(std::mem::size_of::<RectFunction>(), 168);
 	}
 
 	#[test]
@@ -50,6 +50,12 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(auto,auto,auto,auto)");
 		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(10px,auto,30px,auto)");
 		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(-10px,20px,-5px,0px)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(var(--t),20px,30px,40px)");
+		assert_parse!(CssAtomSet::ATOMS, RectFunction, "rect(calc(1px + 2px),auto,30px,auto)");
 	}
 
 	#[test]

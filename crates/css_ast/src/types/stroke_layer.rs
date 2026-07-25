@@ -32,7 +32,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<StrokeLayer>(), 256);
+		assert_eq!(std::mem::size_of::<StrokeLayer>(), 272);
 	}
 
 	#[test]

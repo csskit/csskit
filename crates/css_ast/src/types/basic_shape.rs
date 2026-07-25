@@ -14,8 +14,8 @@ use crate::{BasicShapeRect, CircleFunction, EllipseFunction, PathFunction, Polyg
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BasicShape<'a> {
 	Rect(BasicShapeRect<'a>),
-	Circle(CircleFunction),
-	Ellipse(EllipseFunction),
+	Circle(CircleFunction<'a>),
+	Ellipse(EllipseFunction<'a>),
 	Polygon(PolygonFunction<'a>),
 	Path(PathFunction),
 	Shape(ShapeFunction<'a>),

@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CSSInt, CustomIdent, NonZero, PositiveNonZeroInt};
+use crate::{CSSInt, CalcableValue, CustomIdent, NonZero, PositiveNonZeroInt};
 use css_parse::parse_optionals;
 
 /// <https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line>
@@ -11,14 +11,14 @@ use css_parse::parse_optionals;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum GridLine {
+pub enum GridLine<'a> {
 	Auto(T![Ident]),
-	Span(T![Ident], Option<PositiveNonZeroInt>, Option<T![Ident]>),
+	Span(T![Ident], Option<CalcableValue<'a, PositiveNonZeroInt>>, Option<T![Ident]>),
 	Area(CustomIdent),
-	Placement(NonZero<CSSInt>, Option<T![Ident]>),
+	Placement(CalcableValue<'a, NonZero<CSSInt>>, Option<T![Ident]>),
 }
 
-impl<'a> Parse<'a> for GridLine {
+impl<'a> Parse<'a> for GridLine<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -29,13 +29,13 @@ impl<'a> Parse<'a> for GridLine {
 				CssAtomSet::Auto => Ok(GridLine::Auto(p.parse::<T![Ident]>()?)),
 				CssAtomSet::Span => {
 					let keyword = p.parse::<T![Ident]>()?;
-					let (num, ident) = parse_optionals!(p, num: PositiveNonZeroInt, ident: T![Ident]);
+					let (num, ident) = parse_optionals!(p, num: CalcableValue<PositiveNonZeroInt>, ident: T![Ident]);
 					Ok(Self::Span(keyword, num, ident))
 				}
 				_ => Ok(Self::Area(p.parse::<CustomIdent>()?)),
 			};
 		}
-		let num = p.parse::<NonZero<CSSInt>>()?;
+		let num = p.parse::<CalcableValue<NonZero<CSSInt>>>()?;
 		Ok(Self::Placement(num, p.parse_if_peek::<T![Ident]>()?))
 	}
 }
@@ -48,7 +48,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<GridLine>(), 44);
+		assert_eq!(std::mem::size_of::<GridLine>(), 56);
 	}
 
 	#[test]
@@ -61,6 +61,14 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "baz");
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "1 baz");
 		assert_parse!(CssAtomSet::ATOMS, GridLine, "-1 baz");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "var(--n)");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "calc(1 + 1) baz");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span var(--n)");
+		assert_parse!(CssAtomSet::ATOMS, GridLine, "span calc(1 + 1) foo");
 	}
 
 	#[test]

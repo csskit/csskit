@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{Integer, Positive};
+use crate::{CalcableValue, Integer, Positive};
 
 /// <https://drafts.csswg.org/fill-stroke-3/#typedef-svg-paint>
 ///
@@ -10,10 +10,10 @@ use crate::{Integer, Positive};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SvgPaint {
+pub enum SvgPaint<'a> {
 	#[atom(CssAtomSet::Child)]
 	Child(T![Ident]),
-	ChildFunction(SvgPaintChildFunction),
+	ChildFunction(SvgPaintChildFunction<'a>),
 }
 
 /// `child( <integer> )` — refers to the nth child paint server element
@@ -24,10 +24,10 @@ pub enum SvgPaint {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SvgPaintChildFunction {
+pub struct SvgPaintChildFunction<'a> {
 	#[atom(CssAtomSet::Child)]
 	pub function: T![Function],
-	pub index: Positive<Integer>,
+	pub index: CalcableValue<'a, Positive<Integer>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -40,7 +40,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SvgPaint>(), 40);
+		assert_eq!(std::mem::size_of::<SvgPaint>(), 48);
 	}
 
 	#[test]
@@ -48,6 +48,12 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SvgPaint, "child");
 		assert_parse!(CssAtomSet::ATOMS, SvgPaint, "child(1)");
 		assert_parse!(CssAtomSet::ATOMS, SvgPaint, "child(3)");
+	}
+
+	#[test]
+	fn test_substitution() {
+		assert_parse!(CssAtomSet::ATOMS, SvgPaint, "child(var(--n))");
+		assert_parse!(CssAtomSet::ATOMS, SvgPaint, "child(calc(1 + 1))");
 	}
 
 	#[test]

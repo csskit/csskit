@@ -26420,11 +26420,11 @@ StyleSheet(
                         offset: SourceOffset(18018),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18029),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18030),
@@ -26437,11 +26437,11 @@ StyleSheet(
                         offset: SourceOffset(18032),
                         len: 5,
                       )),
-                      radius: Some(Px(Dimension(Cursor(
+                      radius: Some(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18037),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18041),
@@ -26517,11 +26517,11 @@ StyleSheet(
                         offset: SourceOffset(18064),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18075),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18076),
@@ -26534,11 +26534,11 @@ StyleSheet(
                         offset: SourceOffset(18078),
                         len: 5,
                       )),
-                      radius: Some(Px(Dimension(Cursor(
+                      radius: Some(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18083),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18087),
@@ -26571,11 +26571,11 @@ StyleSheet(
                         offset: SourceOffset(18096),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18107),
                         len: 2,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18109),
@@ -26588,11 +26588,11 @@ StyleSheet(
                         offset: SourceOffset(18111),
                         len: 5,
                       )),
-                      radius: Some(Px(Dimension(Cursor(
+                      radius: Some(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18116),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18120),
@@ -26668,11 +26668,11 @@ StyleSheet(
                         offset: SourceOffset(18142),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18153),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18154),
@@ -26685,11 +26685,11 @@ StyleSheet(
                         offset: SourceOffset(18156),
                         len: 5,
                       )),
-                      radius: Some(Zero(Number(Cursor(
+                      radius: Some(Literal(Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18161),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18162),
@@ -26860,11 +26860,11 @@ StyleSheet(
                         offset: SourceOffset(18245),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18256),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18257),
@@ -26877,11 +26877,11 @@ StyleSheet(
                         offset: SourceOffset(18259),
                         len: 5,
                       )),
-                      radius: Some(Px(Dimension(Cursor(
+                      radius: Some(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18264),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18268),
@@ -26957,11 +26957,11 @@ StyleSheet(
                         offset: SourceOffset(18291),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18302),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18303),
@@ -26974,11 +26974,11 @@ StyleSheet(
                         offset: SourceOffset(18305),
                         len: 5,
                       )),
-                      radius: Some(Px(Dimension(Cursor(
+                      radius: Some(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18310),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18314),
@@ -27011,11 +27011,11 @@ StyleSheet(
                         offset: SourceOffset(18323),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18334),
                         len: 2,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18336),
@@ -27028,11 +27028,11 @@ StyleSheet(
                         offset: SourceOffset(18338),
                         len: 5,
                       )),
-                      radius: Some(Px(Dimension(Cursor(
+                      radius: Some(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18343),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18347),
@@ -27108,11 +27108,11 @@ StyleSheet(
                         offset: SourceOffset(18369),
                         len: 11,
                       )),
-                      value: Some(Number(Number(Cursor(
+                      value: Some(Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18380),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18381),
@@ -27125,11 +27125,11 @@ StyleSheet(
                         offset: SourceOffset(18383),
                         len: 5,
                       )),
-                      radius: Some(Zero(Number(Cursor(
+                      radius: Some(Literal(Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18388),
                         len: 1,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18389),
@@ -27231,11 +27231,11 @@ StyleSheet(
                         offset: SourceOffset(18435),
                         len: 6,
                       )),
-                      params: (Number(Number(Cursor(
+                      params: (Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18441),
                         len: 4,
-                      ))), None, None),
+                      )))), None, None),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18445),
@@ -27314,11 +27314,11 @@ StyleSheet(
                         offset: SourceOffset(18483),
                         len: 6,
                       )),
-                      params: (Number(Number(Cursor(
+                      params: (Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18489),
                         len: 3,
-                      ))), None, None),
+                      )))), None, None),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18492),
@@ -27397,11 +27397,11 @@ StyleSheet(
                         offset: SourceOffset(18532),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18543),
                         len: 5,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18548),
@@ -27480,11 +27480,11 @@ StyleSheet(
                         offset: SourceOffset(18590),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18601),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18605),
@@ -27563,11 +27563,11 @@ StyleSheet(
                         offset: SourceOffset(18648),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18659),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18663),
@@ -27646,11 +27646,11 @@ StyleSheet(
                         offset: SourceOffset(18705),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18716),
                         len: 5,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18721),
@@ -27729,11 +27729,11 @@ StyleSheet(
                         offset: SourceOffset(18760),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18771),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18775),
@@ -27812,11 +27812,11 @@ StyleSheet(
                         offset: SourceOffset(18816),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18827),
                         len: 5,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18832),
@@ -27895,11 +27895,11 @@ StyleSheet(
                         offset: SourceOffset(18874),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18885),
                         len: 5,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18890),
@@ -27978,11 +27978,11 @@ StyleSheet(
                         offset: SourceOffset(18931),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(18942),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18946),
@@ -28070,11 +28070,11 @@ StyleSheet(
                         offset: SourceOffset(18984),
                         len: 11,
                       )),
-                      params: Zero(Number(Cursor(
+                      params: Literal(Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(18995),
                         len: 1,
-                      ))),
+                      )))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(18996),
@@ -28127,11 +28127,11 @@ StyleSheet(
                         offset: SourceOffset(19012),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19023),
                         len: 3,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19026),
@@ -28184,11 +28184,11 @@ StyleSheet(
                         offset: SourceOffset(19042),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19053),
                         len: 2,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19055),
@@ -28241,11 +28241,11 @@ StyleSheet(
                         offset: SourceOffset(19071),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19082),
                         len: 3,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19085),
@@ -28298,11 +28298,11 @@ StyleSheet(
                         offset: SourceOffset(19101),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19112),
                         len: 2,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19114),
@@ -28390,11 +28390,11 @@ StyleSheet(
                         offset: SourceOffset(19152),
                         len: 11,
                       )),
-                      params: Zero(Number(Cursor(
+                      params: Literal(Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19163),
                         len: 1,
-                      ))),
+                      )))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19164),
@@ -28447,11 +28447,11 @@ StyleSheet(
                         offset: SourceOffset(19180),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19191),
                         len: 3,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19194),
@@ -28504,11 +28504,11 @@ StyleSheet(
                         offset: SourceOffset(19210),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19221),
                         len: 2,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19223),
@@ -28561,11 +28561,11 @@ StyleSheet(
                         offset: SourceOffset(19239),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19250),
                         len: 3,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19253),
@@ -28618,11 +28618,11 @@ StyleSheet(
                         offset: SourceOffset(19269),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19280),
                         len: 2,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19282),
@@ -28701,11 +28701,11 @@ StyleSheet(
                         offset: SourceOffset(19314),
                         len: 7,
                       )),
-                      params: Angle(Turn(Dimension(Cursor(
+                      params: Literal(Angle(Turn(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19321),
                         len: 5,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19326),
@@ -28816,11 +28816,11 @@ StyleSheet(
                         offset: SourceOffset(19372),
                         len: 6,
                       )),
-                      params: (Number(Number(Cursor(
+                      params: (Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19378),
                         len: 1,
-                      ))), None, None),
+                      )))), None, None),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19379),
@@ -29020,11 +29020,11 @@ StyleSheet(
                         offset: SourceOffset(19462),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19473),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19477),
@@ -29103,11 +29103,11 @@ StyleSheet(
                         offset: SourceOffset(19512),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19523),
                         len: 4,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19527),
@@ -29160,11 +29160,11 @@ StyleSheet(
                         offset: SourceOffset(19543),
                         len: 11,
                       )),
-                      params: Percent(Percentage(Dimension(Cursor(
+                      params: Literal(Percent(Percentage(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(19554),
                         len: 3,
-                      )))),
+                      ))))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19557),
@@ -29235,11 +29235,11 @@ StyleSheet(
                         offset: SourceOffset(19579),
                         len: 11,
                       )),
-                      params: Zero(Number(Cursor(
+                      params: Literal(Zero(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19590),
                         len: 1,
-                      ))),
+                      )))),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19591),
@@ -29318,11 +29318,11 @@ StyleSheet(
                         offset: SourceOffset(19625),
                         len: 6,
                       )),
-                      params: (Number(Number(Cursor(
+                      params: (Literal(Number(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(19631),
                         len: 2,
-                      ))), None, None),
+                      )))), None, None),
                       close: RightParen(Cursor(
                         kind: "RightParen",
                         offset: SourceOffset(19633),

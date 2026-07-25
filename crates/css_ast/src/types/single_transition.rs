@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{EasingFunction, NoneOr, SingleTransitionProperty, Time, TransitionBehaviorValue};
+use crate::{CalcableValue, EasingFunction, NoneOr, SingleTransitionProperty, Time, TransitionBehaviorValue};
 use css_parse::parse_optionals;
 
 /// <https://drafts.csswg.org/css-transitions-2/#single-transition>
@@ -14,9 +14,9 @@ use css_parse::parse_optionals;
 pub struct SingleTransition<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub property: Option<NoneOr<SingleTransitionProperty>>,
-	pub duration: Option<Time>,
+	pub duration: Option<CalcableValue<'a, Time>>,
 	pub easing: Option<EasingFunction<'a>>,
-	pub delay: Option<Time>,
+	pub delay: Option<CalcableValue<'a, Time>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub behavior: Option<TransitionBehaviorValue>,
 }
@@ -24,14 +24,16 @@ pub struct SingleTransition<'a> {
 impl<'a> Peek<'a> for SingleTransition<'a> {
 	const PEEK_KINDSET: KindSet = <NoneOr<SingleTransitionProperty>>::PEEK_KINDSET
 		.combine(EasingFunction::PEEK_KINDSET)
-		.combine(Time::PEEK_KINDSET);
+		.combine(<CalcableValue<'a, Time>>::PEEK_KINDSET);
 
 	#[inline(always)]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		<NoneOr<SingleTransitionProperty>>::peek(p, c) || EasingFunction::peek(p, c) || Time::peek(p, c)
+		<NoneOr<SingleTransitionProperty>>::peek(p, c)
+			|| EasingFunction::peek(p, c)
+			|| <CalcableValue<'a, Time>>::peek(p, c)
 	}
 }
 
@@ -40,7 +42,7 @@ impl<'a> Parse<'a> for SingleTransition<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let (easing, property, duration, delay, behavior) = parse_optionals!(p, easing: EasingFunction, property: NoneOr<SingleTransitionProperty>, duration: Time, delay: Time, behavior: TransitionBehaviorValue);
+		let (easing, property, duration, delay, behavior) = parse_optionals!(p, easing: EasingFunction, property: NoneOr<SingleTransitionProperty>, duration: CalcableValue<Time>, delay: CalcableValue<Time>, behavior: TransitionBehaviorValue);
 		Ok(Self { easing, property, duration, delay, behavior })
 	}
 }
@@ -55,7 +57,7 @@ mod tests {
 
 	#[test]
 	fn size_test() {
-		assert_eq!(std::mem::size_of::<SingleTransition>(), 184);
+		assert_eq!(std::mem::size_of::<SingleTransition>(), 248);
 	}
 
 	#[test]
@@ -90,6 +92,9 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "none 1s");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "none 1s normal");
 		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "1s opacity allow-discrete");
+		// Substitution/math in the <time> slots.
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "opacity calc(1s + 200ms)");
+		assert_parse!(CssAtomSet::ATOMS, SingleTransition, "opacity var(--dur) ease-in var(--delay)");
 	}
 
 	#[test]
