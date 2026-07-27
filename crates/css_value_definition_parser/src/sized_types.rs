@@ -206,6 +206,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"NamespaceTag",
 	"NavControlsMediaFeature",
 	"NavControlsMediaFeatureKeyword",
+	"NodeKey",
 	"NodeKinds",
 	"NonEmpty",
 	"NonNegative",

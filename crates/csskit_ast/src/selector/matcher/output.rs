@@ -1,5 +1,5 @@
 use super::PropertyValues;
-use css_ast::NodeId;
+use css_ast::visit::{NodeId, NodeKey};
 use css_lexer::Span;
 use indexmap::IndexSet;
 use smallvec::SmallVec;
@@ -11,6 +11,8 @@ pub struct MatchOutput {
 	pub span: Span,
 	/// The type of the matched node.
 	pub node_id: NodeId,
+	/// Identity of the matched node, absent for synthetic matches.
+	pub node_key: Option<NodeKey>,
 	/// Property values for the matched node (used for diagnostic attr() function).
 	pub properties: PropertyValues,
 	/// Size of the matched node (number of children, declarations, selectors, etc.).

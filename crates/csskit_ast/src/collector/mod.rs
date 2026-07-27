@@ -404,6 +404,7 @@ impl<'a> Collector<'a> {
 			let mut match_output = MatchOutput {
 				span: parent_span,
 				node_id: css_ast::NodeId::StyleRule,
+				node_key: None,
 				properties: Default::default(),
 				size: 0,
 				stat_snapshot: SmallVec::new(),

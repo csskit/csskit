@@ -1,10 +1,42 @@
-use crate::assert_query;
-use css_ast::NodeId;
+use super::SelectorMatcher;
+use crate::{CsskitAtomSet, QuerySelectorList, assert_query};
+use css_ast::{NodeId, parse_root};
+use css_lexer::Lexer;
+use css_parse::{Arena, Parser};
 
 #[test]
 fn match_basic_types() {
 	assert_query!("a { color: red; }", "style-rule", 1, [NodeId::StyleRule]);
 	assert_query!("a, b { color: red; }", "selector-list", 1, [NodeId::SelectorList]);
+}
+
+#[test]
+fn erased_root_matches_preserve_node_identity() {
+	let arena = Arena::default();
+	let selector_arena = Arena::default();
+	let source = "a{}b{}";
+	let parsed = parse_root(NodeId::StyleSheet, &arena, source).expect("style-sheet is a root");
+	let root = parsed.root.expect("the source parses");
+
+	let selector_source = "style-rule";
+	let lexer = Lexer::new(&CsskitAtomSet::ATOMS, selector_source);
+	let selectors = Parser::new(&selector_arena, selector_source, lexer)
+		.parse_entirely::<QuerySelectorList>()
+		.output
+		.expect("the selector parses");
+
+	let match_keys = || {
+		SelectorMatcher::new(&selectors, selector_source, source)
+			.run(root)
+			.map(|matched| matched.node_key.expect("a matched node has identity"))
+			.collect::<std::vec::Vec<_>>()
+	};
+	let first_walk = match_keys();
+	let second_walk = match_keys();
+
+	assert_eq!(first_walk.len(), 2);
+	assert_ne!(first_walk[0], first_walk[1]);
+	assert_eq!(first_walk, second_walk);
 }
 
 #[test]
