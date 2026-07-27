@@ -2,7 +2,11 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Foo<'a>(
     pub crate::Value<'a, crate::Color<'a>>,
     pub crate::Value<'a, crate::Color<'a>>,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

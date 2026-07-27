@@ -1,0 +1,17 @@
+[package]
+name = "stable-type-layout"
+version.workspace = true
+authors.workspace = true
+description = "Layout descriptors for struct or enum types with an inventory registry."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+inventory = { workspace = true }
+stable_type_layout_derive = { workspace = true }  # @release

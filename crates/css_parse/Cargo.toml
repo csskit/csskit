@@ -38,7 +38,7 @@ derive_atom_set = { workspace = true } # @release
 insta = { workspace = true }
 glob = { workspace = true }
 dhat = { workspace = true }
-inventory = { workspace = true }
+stable_type_layout = { workspace = true }  # @release
 
 [features]
 default = ["bumpalo"]

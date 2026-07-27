@@ -1,0 +1,19 @@
+[package]
+name = "stable-type-layout-derive"
+version.workspace = true
+authors.workspace = true
+description = "Derive macro for stable-type-layout's TypeLayout trait."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+proc-macro = true
+
+[dependencies]
+syn = { workspace = true, features = ["derive", "parsing", "printing", "proc-macro"] }
+quote = { workspace = true }
+proc-macro2 = { workspace = true }

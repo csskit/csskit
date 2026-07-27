@@ -33,6 +33,8 @@ csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.28
 csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.0" }
 csskit_transform = { path = "crates/csskit_transform", version = "0.0.28" }  # @release
 derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.28" }  # @release
+stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.28" }  # @release
+stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.28" }  # @release
 visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.28" }  # @release
 
 # Memory

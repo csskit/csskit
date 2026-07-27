@@ -3,6 +3,8 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 enum Foo {
     #[atom(CssAtomSet::Legacy)]
     Legacy(::css_parse::T![Ident]),
@@ -28,3 +30,5 @@ enum Foo {
         ::css_parse::T![Ident],
     ),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo);

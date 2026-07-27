@@ -662,7 +662,6 @@ dependencies = [
  "glob",
  "heck",
  "insta",
- "inventory",
  "miette",
  "pprof",
  "prettyplease",
@@ -672,6 +671,7 @@ dependencies = [
  "serde_json",
  "similar 3.1.1",
  "smallvec",
+ "stable-type-layout",
  "syn 2.0.119",
  "thiserror 2.0.19",
  "visit-flow",
@@ -723,11 +723,11 @@ dependencies = [
  "dhat",
  "glob",
  "insta",
- "inventory",
  "miette",
  "serde",
  "serde_json",
  "smallvec",
+ "stable-type-layout",
  "thiserror 2.0.19",
 ]
 
@@ -3009,6 +3009,23 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d5fe4ccb98d9c292d56fec89a5e07da7fc4cf0dc11e156b41793132775d3e591"
 dependencies = [
  "lock_api",
+]
+
+[[package]]
+name = "stable-type-layout"
+version = "0.0.28"
+dependencies = [
+ "inventory",
+ "stable-type-layout-derive",
+]
+
+[[package]]
+name = "stable-type-layout-derive"
+version = "0.0.28"
+dependencies = [
+ "proc-macro2",
+ "quote",
+ "syn 2.0.119",
 ]
 
 [[package]]

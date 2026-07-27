@@ -3,6 +3,8 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 enum Foo {
     Literal0deg(#[atom(CssAtomSet::Deg)] crate::Exact<::css_parse::T![Dimension], 0i32>),
     Literal90deg(
@@ -10,3 +12,5 @@ enum Foo {
         crate::Exact<::css_parse::T![Dimension], 90i32>,
     ),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo);

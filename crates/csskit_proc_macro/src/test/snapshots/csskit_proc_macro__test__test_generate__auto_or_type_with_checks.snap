@@ -2,8 +2,12 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Foo<'a>(
     pub crate::AutoOr<
         crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>,
     >,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

@@ -1,3 +1,4 @@
+use crate::repr::{Shape, shape_to_repr};
 use crate::type_renames::get_type_rename;
 use css_value_definition_parser::*;
 use heck::{ToPascalCase, ToSnakeCase};
@@ -628,7 +629,9 @@ impl DefExt for Def {
 				})
 				.collect();
 			let keyword_name = Self::keyword_ident(ident);
+			let keyword_repr = shape_to_repr(Shape::DataEnum { variants: keywords.len() });
 			quote! {
+				#keyword_repr
 				#[derive(
 					::csskit_derives::Parse,
 					::csskit_derives::Peek,
@@ -906,7 +909,8 @@ impl GenerateDefinition for Def {
 						}
 					}
 				};
-				quote! { #struct_attrs #vis struct #ident #type_generics #where_clause #members }
+				let struct_repr = shape_to_repr(Shape::Struct);
+				quote! { #struct_repr #struct_attrs #vis struct #ident #type_generics #where_clause #members }
 			}
 			DataType::Enum => match self {
 				Self::Combinator(children, DefCombinatorStyle::Alternatives) => {
@@ -1069,7 +1073,8 @@ impl GenerateDefinition for Def {
 							}
 						})
 						.collect();
-					quote! { #vis enum #ident #type_generics #where_clause { #variants } }
+					let enum_repr = shape_to_repr(Shape::DataEnum { variants: children.len() });
+					quote! { #enum_repr #vis enum #ident #type_generics #where_clause { #variants } }
 				}
 				Self::Combinator(_, _) => {
 					Error::new(ident.span(), "cannot generate non-Alternatives combinators in enum")

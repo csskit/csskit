@@ -3,6 +3,8 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 enum Foo {
     #[atom(CssAtomSet::Black)]
     Black(::css_parse::T![Ident]),
@@ -13,3 +15,5 @@ enum Foo {
     #[atom(CssAtomSet::Pink)]
     Pink(::css_parse::T![Ident]),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo);

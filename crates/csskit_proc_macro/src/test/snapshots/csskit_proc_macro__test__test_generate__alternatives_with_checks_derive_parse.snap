@@ -3,8 +3,12 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 enum Foo<'a> {
     #[atom(CssAtomSet::Bar)]
     Bar(::css_parse::T![Ident]),
     Angle(Option<crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>>),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

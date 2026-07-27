@@ -80,6 +80,9 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 		quote! {}
 	};
 
+	let additonal_defs = crate::layout::annotate_items(&additonal_defs);
+	let def = crate::layout::annotate_items(&def);
+
 	quote! {
 		#additonal_defs
 

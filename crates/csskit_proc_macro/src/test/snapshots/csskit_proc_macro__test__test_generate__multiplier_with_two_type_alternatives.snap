@@ -2,9 +2,13 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Baz<'a>(
     pub ::css_parse::CommaSeparated<
         'a,
         ::css_parse::Either<crate::Value<'a, crate::Foo>, crate::Value<'a, crate::Bar>>,
     >,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Baz < 'static >);

@@ -3,9 +3,13 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 #[parse(all_must_occur)]
 struct Foo<'a>(
     #[atom(CssAtomSet::Auto)]
     pub ::css_parse::T![Ident],
     pub crate::CalcableValue<'a, crate::Ranged<crate::Percentage, 0i32, 100i32>>,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);
