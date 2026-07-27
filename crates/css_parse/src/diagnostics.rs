@@ -81,22 +81,29 @@ impl Diagnostic {
 		self
 	}
 
+	/// Render the code, message, help text and labels of this diagnostic against `source`.
+	pub fn meta(&self, source: &str) -> DiagnosticMeta {
+		(self.formatter)(self, source)
+	}
+
+	/// The source range this diagnostic covers, from the first cursor to the last cursor consumed to recover.
+	pub fn span(&self) -> Span {
+		self.start_cursor.span() + self.end_cursor.span()
+	}
+
 	/// Get formatted message
 	pub fn message(&self, source: &str) -> String {
-		let DiagnosticMeta { message, .. } = (self.formatter)(self, source);
-		message
+		self.meta(source).message
 	}
 
 	/// Get diagnostic code
 	pub fn code(&self, source: &str) -> &'static str {
-		let DiagnosticMeta { code, .. } = (self.formatter)(self, source);
-		code
+		self.meta(source).code
 	}
 
 	/// Get help text
 	pub fn help(&self, source: &str) -> String {
-		let DiagnosticMeta { help, .. } = (self.formatter)(self, source);
-		help
+		self.meta(source).help
 	}
 
 	/// Add a desired cursor (what was expected)
@@ -109,7 +116,7 @@ impl Diagnostic {
 	#[cfg(feature = "miette")]
 	pub fn into_diagnostic(self, source: &str) -> MietteDiagnostic {
 		use miette::LabeledSpan;
-		let DiagnosticMeta { code, message, help, mut labels } = (self.formatter)(&self, source);
+		let DiagnosticMeta { code, message, help, mut labels } = self.meta(source);
 		let miette_labels = labels.drain(0..).map(|(span, label)| LabeledSpan::new_with_span(Some(label), span));
 		MietteDiagnostic::new(message)
 			.with_code(code)

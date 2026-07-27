@@ -102,6 +102,6 @@ pub fn format_diagnostic_error(err: &Diagnostic, source: &str, file_name: &str) 
 	if handler.render_report(&mut report, &*err_with_source).is_ok() {
 		return report;
 	}
-	let DiagnosticMeta { code, message, help, .. } = (err.formatter)(err, source);
+	let DiagnosticMeta { code, message, help, .. } = err.meta(source);
 	format!("Error [{code}]: {message}\nHelp: {help}\n")
 }

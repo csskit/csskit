@@ -45,8 +45,8 @@ pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm
 		.errors
 		.iter()
 		.map(|err| {
-			let DiagnosticMeta { code, message, help, .. } = (err.formatter)(err, &source_text);
-			let span = err.start_cursor.span() + err.end_cursor.span();
+			let DiagnosticMeta { code, message, help, .. } = err.meta(&source_text);
+			let span = err.span();
 			let from = span.start().into();
 			let to = span.end().into();
 			SerializableDiagnostic {
@@ -109,7 +109,7 @@ fn format_with_options(source_text: &str, options: FormatOptions) -> Result<Stri
 	let result = Parser::new(&allocator, source_text, lexer).parse_entirely::<StyleSheet>();
 	if !result.errors.is_empty() {
 		let first_error = &result.errors[0];
-		let DiagnosticMeta { code, message, help, .. } = (first_error.formatter)(first_error, source_text);
+		let DiagnosticMeta { code, message, help, .. } = first_error.meta(source_text);
 		return Err(format!("Parse error [{}]: {} (Help: {})", code, message, help));
 	}
 	let mut output_string = String::new();
@@ -156,7 +156,7 @@ fn build_error(err: &Diagnostic, source: &str, w: &mut impl Write) {
 			return;
 		}
 	}
-	let DiagnosticMeta { code, message, help, .. } = (err.formatter)(err, source);
+	let DiagnosticMeta { code, message, help, .. } = err.meta(source);
 	write!(w, "Error [{code}]: {message}\nHelp: {help}\n").unwrap();
 }
 

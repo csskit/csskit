@@ -162,7 +162,7 @@ mod tests {
 		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, source);
 		let result = css_parse::Parser::new(&arena, source, lexer).parse_entirely::<PseudoClass>();
 		let error = result.errors.first().expect("a diagnostic");
-		let meta = (error.formatter)(error, source);
+		let meta = error.meta(source);
 		assert_eq!(meta.message, "Unexpected pseudo selector ':nonsense'");
 	}
 
