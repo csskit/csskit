@@ -118,7 +118,7 @@
 		"@types/node": "24.13.3",
 		"@types/vscode": "1.125.0",
 		"@vscode/test-cli": "0.0.15",
-		"@vscode/test-electron": "3.0.0",
+		"@vscode/test-electron": "3.1.0",
 		"esbuild": "0.28.1",
 		"mocha": "11.7.6",
 		"oxlint": "1.73.0",
