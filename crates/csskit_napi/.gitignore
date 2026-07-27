@@ -1,0 +1,6 @@
+node_modules/
+*.node
+# @napi-rs/cli-generated loader/types (this crate loads the .node directly via index.mjs)
+index.js
+index.d.ts
+package-lock.json

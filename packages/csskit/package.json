@@ -10,17 +10,42 @@
     "license": "MIT",
     "author": "Keith Cirkel (https://keithcirkel.co.uk)",
     "exports": {
-        ".": "./index.js",
+        ".": {
+            "types": "./index.d.ts",
+            "default": "./index.js"
+        },
+        "./nodes": {
+            "types": "./nodes.d.ts",
+            "default": "./nodes.js"
+        },
+        "./bundle": {
+            "types": "./bundle.d.ts",
+            "default": "./bundle.js"
+        },
         "./bundler": "./bundle/csskit_wasm.js",
         "./wasm": "./bundle/csskit_wasm_bg.wasm",
         "./bin/csskit": "./bin/csskit"
     },
     "main": "./index.js",
-    "bin": "./bin/csskit",
+    "types": "./index.d.ts",
+    "type": "module",
+    "scripts": {
+        "test": "npm run test:napi && npm run test:wasm",
+        "test:napi": "node --test tests/om.test.js",
+        "test:wasm": "node --test tests/bundle.test.js"
+    },
     "files": [
         "./bin",
+        "./addon.js",
+        "./om.js",
+        "./nodes.js",
+        "./nodes.d.ts",
         "./index.js",
         "./index.d.ts",
+        "./bundle.js",
+        "./bundle.d.ts",
+        "./wasm.js",
+        "./wasm.d.ts",
         "./csskit_wasm_bg.wasm",
         "./csskit_wasm_bg.wasm.d.ts",
         "./bundle"

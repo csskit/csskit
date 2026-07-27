@@ -11,6 +11,7 @@ hyperfine = "latest"
 "cargo:wasm-bindgen-cli" = "0.2.127"
 "aqua:WebAssembly/binaryen" = "131"
 "cargo:cargo-fuzz" = "0.13.2"
+"npm:@napi-rs/cli" = "3.7.4"
 
 [tasks.clean]
 confirm = 'Are you sure?'
@@ -41,6 +42,32 @@ description = "Run the test suite"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
 run = "cargo test --all-features"
 alias = "t"
+
+[tasks.build-napi]
+description = "Build the napi addon into the csskit npm package"
+dir = "{{config_root}}/crates/csskit_napi"
+sources = [
+  "{{config_root}}/Cargo.toml",
+  "{{config_root}}/crates/**/*.toml",
+  "{{config_root}}/crates/**/*.rs",
+]
+outputs = ["{{config_root}}/packages/csskit/csskit.node"]
+run = [
+  "napi build --features napi",
+  "cp csskit_napi.node {{config_root}}/packages/csskit/csskit.node",
+]
+
+[tasks.test-napi]
+depends = ["build-napi"]
+description = "Run the csskit native object model tests"
+dir = "{{config_root}}/packages/csskit"
+run = "npm run test:napi"
+
+[tasks.test-wasm]
+depends = ["build-csskit-wasm"]
+description = "Run the csskit WebAssembly bundle tests"
+dir = "{{config_root}}/packages/csskit"
+run = "npm run test:wasm"
 
 [tasks.bench]
 description = "Run the benchmark suite"
@@ -76,6 +103,13 @@ run = ["cargo run -p csskit_spec_generator generate-property-atoms"]
 description = "Generate the sized-types table from the css_ast source"
 run = ["REGENERATE_SIZED_TYPES=1 cargo test -p csskit_source_finder --test sized_types"]
 
+[tasks.generate-node-classes]
+description = "Generate the csskit npm package's node classes from css_ast's NodeId"
+sources = ["crates/css_ast/src/**/*.rs", "crates/csskit_napi/src/**/*.rs"]
+outputs = ["packages/csskit/nodes.js", "packages/csskit/nodes.d.ts"]
+run = [
+  "cargo run -p csskit_napi --bin generate_node_classes -- packages/csskit",
+]
 [tasks.fuzz]
 description = "Run the fuzzer (Ctrl-C to stop)"
 dir = "{{config_root}}/fuzz"
