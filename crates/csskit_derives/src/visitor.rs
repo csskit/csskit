@@ -1,5 +1,5 @@
 use proc_macro2::TokenStream;
-use quote::quote;
+use quote::{format_ident, quote};
 use syn::{
 	Expr, ImplItem, ItemImpl, Result, ReturnType, parse_quote,
 	spanned::Spanned,
@@ -75,5 +75,28 @@ pub fn expand(item: ItemImpl) -> Result<TokenStream> {
 			<::visit_flow::VisitFlow as ::visit_flow::VisitFlowExt>::DESCEND
 		});
 	}
-	Ok(quote! { #item })
+
+	let mut node_visitor = item.clone();
+	node_visitor.trait_ = Some((parse_quote!(NodeVisitor), Default::default()));
+	let is_core = |impl_item: &ImplItem| matches!(impl_item, ImplItem::Fn(method) if NODE_VISITOR_METHODS.iter().any(|(name, _)| method.sig.ident == name));
+	(node_visitor.items, item.items) = std::mem::take(&mut item.items).into_iter().partition(is_core);
+	for (name, receiver) in NODE_VISITOR_METHODS {
+		if node_visitor.items.iter().any(|item| matches!(item, ImplItem::Fn(method) if method.sig.ident == name)) {
+			continue;
+		}
+		let name = format_ident!("{name}");
+		let receiver: TokenStream = receiver.parse().expect("a receiver parses");
+		node_visitor.items.push(parse_quote!(
+			fn #name(#receiver, _node: VisitNode) -> ::visit_flow::VisitFlow {
+				<::visit_flow::VisitFlow as ::visit_flow::VisitFlowExt>::DESCEND
+			}
+		));
+	}
+
+	Ok(quote! { #node_visitor #item })
 }
+
+/// The `NodeVisitor` methods and their receivers. `NodeVisitor` declares no defaults, thus every
+/// impl states all three; the attribute writes the ones the visitor leaves out.
+const NODE_VISITOR_METHODS: [(&str, &str); 3] =
+	[("consider_node", "&self"), ("enter_node", "&mut self"), ("exit_node", "&mut self")];

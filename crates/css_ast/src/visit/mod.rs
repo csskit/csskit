@@ -15,7 +15,9 @@ use visit_flow::{VisitFlow, try_visit};
 pub use csskit_derives::visitor;
 pub use visit_flow::{VisitAction, VisitBreak, VisitFlowExt};
 
+mod root;
 mod visit_node;
+pub use root::{ErasedNode, ParsedRoot, parse_root};
 pub(crate) use visit_node::QueryNodeData;
 pub use visit_node::VisitNode;
 
@@ -42,32 +44,50 @@ macro_rules! visit_mut_trait {
 }
 apply_visit_methods!(visit_mut_trait);
 
+/// The object-safe core of [`Visit`].
+///
+/// [`Visit`] has methods that are type-specific. A visitor that needs the node kind and the span can implement just
+/// this trait, and can then walk a node whose type is erased, such as an [`ErasedNode`].
+///
+/// The methods have no defaults, thus an implementation cannot drop one by mistake.
+pub trait NodeVisitor {
+	/// Called before entering a node.
+	///
+	/// Return [`VisitFlow::SKIP_CHILDREN`] to prune the node and its entire subtree (it is never entered). Return
+	/// [`VisitFlow::STOP`] to halt the whole traversal.
+	fn consider_node(&self, node: VisitNode) -> VisitFlow;
+
+	/// Called on entry to every queryable node.
+	///
+	/// Receives a [`VisitNode`]; per-node metadata and properties are available via its methods. Return
+	/// [`VisitFlow::SKIP_CHILDREN`] to skip the typed `visit_*` call and children.
+	fn enter_node(&mut self, node: VisitNode) -> VisitFlow;
+
+	/// Called on exit from every queryable node.
+	fn exit_node(&mut self, node: VisitNode) -> VisitFlow;
+}
+
+impl NodeVisitor for &mut (dyn NodeVisitor + '_) {
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		(**self).consider_node(node)
+	}
+
+	fn enter_node(&mut self, node: VisitNode) -> VisitFlow {
+		(**self).enter_node(node)
+	}
+
+	fn exit_node(&mut self, node: VisitNode) -> VisitFlow {
+		(**self).exit_node(node)
+	}
+}
+
+impl Visit for &mut (dyn NodeVisitor + '_) {}
+
 macro_rules! visit_trait {
 	( $(
 		$name: ident$(<$($gen:tt),+>)?($obj: ty),
 	)+ ) => {
-		pub trait Visit: Sized {
-			/// Called before entering a node.
-			///
-			/// Return [`VisitFlow::SKIP_CHILDREN`] to prune the node and its entire subtree (it is
-			/// never entered). Return [`VisitFlow::STOP`] to halt the whole traversal. Default
-			/// considers everything.
-			fn consider_node(&self, _node: VisitNode) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-
-			/// Called on entry to every queryable node. Override to handle all queryable nodes uniformly.
-			///
-			/// Receives a [`VisitNode`]; per-node metadata and properties are available lazily via
-			/// its methods. Return [`VisitFlow::SKIP_CHILDREN`] to skip the typed `visit_*` call and children.
-			fn enter_node(&mut self, _node: VisitNode) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
-
-			/// Called on exit from every queryable node.
-			fn exit_node(&mut self, _node: VisitNode) -> VisitFlow {
-				VisitFlow::DESCEND
-			}
+		pub trait Visit: NodeVisitor + Sized {
 
 			fn enter_declaration<'a, T: DeclarationValue<'a, CssMetadata>>(&mut self, _rule: &Declaration<'a, T, CssMetadata>, _node: VisitNode) -> VisitFlow {
 				VisitFlow::DESCEND

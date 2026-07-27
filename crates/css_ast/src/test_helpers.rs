@@ -194,7 +194,10 @@ impl ControlFlowTestVisitor {
 }
 
 #[cfg(feature = "visitable")]
-impl crate::Visit for ControlFlowTestVisitor {
+impl crate::Visit for ControlFlowTestVisitor {}
+
+#[cfg(feature = "visitable")]
+impl crate::NodeVisitor for ControlFlowTestVisitor {
 	fn consider_node(&self, node: crate::VisitNode) -> VisitFlow {
 		if let Some(filter_span) = self.span_filter {
 			let span = node.span;
