@@ -6,6 +6,7 @@ use crate::{FixedBreadth, MinmaxFunction};
 /// ```text,ignore
 /// <fixed-size> = <fixed-breadth> | minmax( <fixed-breadth> , <track-breadth> ) | minmax( <inflexible-breadth> , <fixed-breadth> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -20,11 +21,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FixedSize>(), 96);
-	}
 
 	#[test]
 	fn test_writes() {

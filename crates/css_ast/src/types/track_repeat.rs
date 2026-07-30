@@ -14,11 +14,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<TrackRepeat>(), 120);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, TrackRepeat, "repeat(2,10px)");
 		assert_parse!(CssAtomSet::ATOMS, TrackRepeat, "repeat(3,[a] 10px)");

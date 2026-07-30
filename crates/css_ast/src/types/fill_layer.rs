@@ -10,6 +10,7 @@ use crate::{Color, FillOrigin, Paint, PositionAndSize, RepeatStyle};
 /// we parse it permissively on every layer, matching `BgLayer`'s approach.
 ///
 /// <https://drafts.csswg.org/fill-stroke-3/#fill>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[parse(all_must_occur)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -28,11 +29,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FillLayer>(), 272);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -6,6 +6,7 @@ use crate::{InsetFunction, ShapeRectFunction, XywhFunction};
 /// ```text,ignore
 /// <basic-shape-rect> = <inset()> | <rect()> | <xywh()>
 /// ```
+#[node]
 #[derive(Parse, Peek, SemanticEq, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

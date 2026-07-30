@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <numeric-figure-values> = [ lining-nums | oldstyle-nums ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -5,11 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<TextSizeAdjustStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_text_size_adjust_writes() {
 		assert_parse!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, TextSizeAdjustStyleValue, "none");

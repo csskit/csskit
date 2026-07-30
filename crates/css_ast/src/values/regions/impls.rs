@@ -5,13 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FlowFromStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<FlowIntoStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<RegionFragmentStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, FlowFromStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, FlowFromStyleValue, "myflow");

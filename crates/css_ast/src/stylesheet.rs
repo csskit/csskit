@@ -6,8 +6,10 @@ use css_parse::{
 	Result as ParserResult, RuleVariants, StyleSheet as StyleSheetTrait, T, UnknownRuleBlock,
 };
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 /// <https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface>
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -78,6 +80,7 @@ macro_rules! apply_rules {
 	};
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -89,6 +92,7 @@ pub struct UnknownAtRule<'a> {
 	block: ComponentValues<'a>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -110,6 +114,7 @@ macro_rules! rule {
         $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
 		/// <https://drafts.csswg.org/cssom-1/#the-cssrule-interface>
+		#[node]
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
@@ -195,12 +200,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<StyleSheet>(), 80);
-		assert_eq!(std::mem::size_of::<Rule>(), 224);
-	}
 
 	#[test]
 	fn test_writes() {

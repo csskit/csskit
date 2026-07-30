@@ -100,6 +100,7 @@ pub enum ArcSize {}
 /// entire body is a single leading literal keyword hits a bug in the
 /// `#[syntax]` macro's generated `ToSpan`/`Parse` impls for its synthesized
 /// keyword-marker type.
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -115,6 +116,7 @@ pub struct MoveCommand<'a> {
 /// ```text,ignore
 /// <line-command> = line <command-end-point>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -146,6 +148,7 @@ pub enum HorizontalLineValue<'a> {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum HorizontalLineClause<'a> {}
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -178,6 +181,7 @@ pub enum VerticalLineValue<'a> {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum VerticalLineClause<'a> {}
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -204,6 +208,7 @@ pub struct VerticalLineCommand<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum CurveTarget<'a> {}
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -228,6 +233,7 @@ pub struct CurveCommand<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum SmoothTarget<'a> {}
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -245,6 +251,7 @@ pub struct SmoothCommand<'a> {
 ///             [ [ of <length-percentage>{1,2} ]
 ///               && <arc-sweep>? && <arc-size>? && [rotate <angle>]? ]
 /// ```
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -256,6 +263,7 @@ pub struct ArcRadii<'a> {
 	pub vertical: Option<CalcableValue<'a, LengthPercentage>>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -266,6 +274,7 @@ pub struct ArcRotate<'a> {
 	pub angle: CalcableValue<'a, Angle>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[parse(all_must_occur)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -278,6 +287,7 @@ pub struct ArcCommandParams<'a> {
 	pub rotate: Option<ArcRotate<'a>>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]

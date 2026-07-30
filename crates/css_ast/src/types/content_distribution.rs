@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <content-distribution> = space-between | space-around | space-evenly | stretch
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

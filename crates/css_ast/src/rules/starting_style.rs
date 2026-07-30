@@ -1,6 +1,7 @@
 use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-transitions-2/#at-ruledef-starting-style>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -19,6 +20,7 @@ pub struct StartingStyleRule<'a> {
 	pub block: StartingStyleRuleBlock<'a>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -30,12 +32,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<StartingStyleRule>(), 128);
-		assert_eq!(std::mem::size_of::<StartingStyleRuleBlock>(), 112);
-	}
 
 	#[test]
 	fn test_writes() {

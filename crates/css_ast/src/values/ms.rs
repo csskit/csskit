@@ -417,6 +417,7 @@ impl<'a> Parse<'a> for MsTransformOriginStyleValue<'a> {
 /// ```text,ignore
 /// none | <string> | <filter-value-list>
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -14,6 +14,7 @@ type ShadowOffset<'a> = (
 /// ```text,ignore
 /// <shadow> = <color>? && [<length>{2} <length [0,∞]>? <length>?] && inset?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[parse(all_must_occur)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -31,11 +32,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Shadow<'_>>(), 136);
-	}
 
 	#[test]
 	fn test_writes() {

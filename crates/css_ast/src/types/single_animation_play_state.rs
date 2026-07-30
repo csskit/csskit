@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-play-state> = running | paused
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

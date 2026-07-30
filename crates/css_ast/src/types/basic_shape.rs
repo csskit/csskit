@@ -8,6 +8,7 @@ use crate::{BasicShapeRect, CircleFunction, EllipseFunction, PathFunction, Polyg
 /// ```text,ignore
 /// <basic-shape> = <basic-shape-rect> | <circle()> | <ellipse()> |  <polygon()> | <path()> | <shape()>
 /// ```
+#[node]
 #[derive(Parse, Peek, SemanticEq, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

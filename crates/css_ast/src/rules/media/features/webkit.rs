@@ -1,6 +1,7 @@
 use super::prelude::*;
 use crate::units::CSSFloat;
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -12,6 +13,7 @@ pub enum BooleanKeyword {
 }
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -22,6 +24,7 @@ discrete_feature!(
 );
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -32,6 +35,7 @@ discrete_feature!(
 );
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -42,6 +46,7 @@ discrete_feature!(
 );
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -52,6 +57,7 @@ discrete_feature!(
 );
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -61,6 +67,7 @@ discrete_feature!(
 	pub enum WebkitVideoPlayableInlineMediaFeature{CssAtomSet::_WebkitVideoPlayableInline, BooleanKeyword});
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]

@@ -5,17 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<BreakBeforeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BreakAfterStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BreakInsideStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<OrphansStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<WidowsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<BoxDecorationBreakStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<MarginBreakStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_break_after() {
 		assert_parse!(CssAtomSet::ATOMS, BreakAfterStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, BreakAfterStyleValue, "avoid");

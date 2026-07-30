@@ -14,6 +14,7 @@ use crate::{Attachment, BgClip, BgImage, BgPositionAndSize, Color, RepeatStyle, 
 /// The `color` field is `None` for non-final layers.
 ///
 /// <https://drafts.csswg.org/css-backgrounds-3/#typedef-bg-layer>
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -136,11 +137,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgLayer>(), 296);
-	}
 
 	#[test]
 	fn test_writes() {

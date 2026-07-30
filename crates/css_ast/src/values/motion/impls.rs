@@ -5,15 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<OffsetAnchorStyleValue>(), 88);
-		assert_eq!(std::mem::size_of::<OffsetDistanceStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<OffsetPathStyleValue<'_>>(), 64);
-		assert_eq!(std::mem::size_of::<OffsetPositionStyleValue>(), 88);
-		assert_eq!(std::mem::size_of::<OffsetRotateStyleValue>(), 48);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "left bottom");

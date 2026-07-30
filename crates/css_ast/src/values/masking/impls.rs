@@ -5,22 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ClipStyleValue>(), 168);
-		assert_eq!(std::mem::size_of::<ClipRuleStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<MaskBorderModeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<MaskBorderOutsetStyleValue>(), 96);
-		assert_eq!(std::mem::size_of::<MaskBorderRepeatStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<MaskBorderSourceStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MaskClipStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MaskOriginStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MaskPositionStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MaskRepeatStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MaskSizeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MaskTypeStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, ClipStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ClipStyleValue, "rect(10px,20px,30px,40px)");

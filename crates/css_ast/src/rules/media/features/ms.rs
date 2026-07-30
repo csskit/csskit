@@ -1,6 +1,7 @@
 use super::prelude::*;
 use crate::{CSSFloat, CSSInt};
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -12,6 +13,7 @@ pub enum MsHighContrastMediaFeatureKeyword {
 }
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -20,7 +22,7 @@ discrete_feature!(
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum MsHighContrastMediaFeature{CssAtomSet::_MsHighContrast, MsHighContrastMediaFeatureKeyword}
 );
-
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -34,6 +36,7 @@ pub enum MsViewStateMediaFeatureKeyword {
 }
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -43,12 +46,14 @@ discrete_feature!(
 	pub enum MsViewStateMediaFeature{CssAtomSet::_MsViewState, MsViewStateMediaFeatureKeyword}
 );
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 pub struct MsImeAlignMediaFeatureKeyword(#[atom(CssAtomSet::Auto)] T![Ident]);
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -59,6 +64,7 @@ discrete_feature!(
 );
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -69,6 +75,7 @@ ranged_feature!(
 );
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]

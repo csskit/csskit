@@ -2,7 +2,9 @@ use crate::{
 	CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T, ToCursors, ToSpan,
 	syntax::ComponentValues,
 };
+use csskit_proc_macro::node;
 
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct SimpleBlock<'a> {
@@ -60,11 +62,6 @@ mod tests {
 	use super::*;
 	use crate::EmptyAtomSet;
 	use crate::test_helpers::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<SimpleBlock>(), 56);
-	}
 
 	#[test]
 	fn test_writes() {

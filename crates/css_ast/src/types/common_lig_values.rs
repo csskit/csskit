@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <common-lig-values> = [ common-ligatures | no-common-ligatures ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

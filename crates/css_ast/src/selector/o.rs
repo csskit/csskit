@@ -1,8 +1,10 @@
 use crate::CssAtomSet;
 use css_parse::{Diagnostic, pseudo_class, pseudo_element};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 pseudo_element!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -20,6 +22,7 @@ pseudo_element!(
 );
 
 pseudo_class!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

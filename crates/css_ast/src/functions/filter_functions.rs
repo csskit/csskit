@@ -8,6 +8,7 @@ use crate::{AngleOrZero, CalcableValue, Color, Length, NonNegative, NumberOrPerc
 ///                   | <grayscale()> | <hue-rotate()> | <invert()> | <opacity()>
 ///                   | <saturate()> | <sepia()>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -40,6 +41,7 @@ pub enum FilterFunction<'a> {
 /// ```text,ignore
 /// <filter-value-list> = [ <filter-function> | <url> ]+
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -47,6 +49,7 @@ pub enum FilterFunction<'a> {
 pub struct FilterValueList<'a>(pub Vec<'a, FilterValue<'a>>);
 
 /// A single item in a `<filter-value-list>`: either a filter function or a URL.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -57,6 +60,7 @@ pub enum FilterValue<'a> {
 }
 
 /// `blur( <length [0,∞]>? )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -70,6 +74,7 @@ pub struct BlurFunction<'a> {
 }
 
 /// `brightness( <number [0,∞]> | <percentage [0,∞]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -83,6 +88,7 @@ pub struct BrightnessFunction<'a> {
 }
 
 /// `contrast( <number [0,∞]> | <percentage [0,∞]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -98,6 +104,7 @@ pub struct ContrastFunction<'a> {
 /// `drop-shadow( <color>? && <length>{2,3} )`
 ///
 /// Note: we parse color first (before offsets) as a simplification of the `&&` grammar.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -114,6 +121,7 @@ pub struct DropShadowFunction<'a> {
 }
 
 /// `grayscale( <number [0,1]> | <percentage [0,100]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -127,6 +135,7 @@ pub struct GrayscaleFunction<'a> {
 }
 
 /// `hue-rotate( <angle> | <zero> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -140,6 +149,7 @@ pub struct HueRotateFunction<'a> {
 }
 
 /// `invert( <number [0,1]> | <percentage [0,100]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -153,6 +163,7 @@ pub struct InvertFunction<'a> {
 }
 
 /// `opacity( <number [0,1]> | <percentage [0,100]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -166,6 +177,7 @@ pub struct OpacityFunction<'a> {
 }
 
 /// `saturate( <number [0,∞]> | <percentage [0,∞]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -179,6 +191,7 @@ pub struct SaturateFunction<'a> {
 }
 
 /// `sepia( <number [0,1]> | <percentage [0,100]> )`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -196,11 +209,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FilterFunction>(), 120);
-	}
 
 	#[test]
 	fn test_filter_function_parses() {

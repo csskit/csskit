@@ -5,15 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<BorderCollapseStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BorderSpacingStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<CaptionSideStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<EmptyCellsStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TableLayoutStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, BorderCollapseStyleValue, "separate");
 		assert_parse!(CssAtomSet::ATOMS, BorderCollapseStyleValue, "collapse");

@@ -3,6 +3,7 @@ use crate::CssMetadata;
 use css_parse::NodeWithMetadata;
 use css_parse::token_macros::Ident;
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -45,11 +46,6 @@ mod tests {
 	type AutoOrIdent = AutoOr<T![Ident]>;
 	type AutoOrNumber = AutoOr<T![Number]>;
 	type AutoOrLength = AutoOr<Length>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AutoOrIdent>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

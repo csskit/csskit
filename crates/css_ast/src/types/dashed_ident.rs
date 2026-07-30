@@ -3,6 +3,7 @@ use super::prelude::*;
 /// <https://drafts.csswg.org/css-values/#dashed-idents>
 ///
 /// Wraps `T![DashedIdent]`, but exists for the purposes of Visitable/VisitableMut.
+#[node]
 #[derive(
 	IntoCursor, ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -5,12 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<IsolationStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MixBlendModeStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_background_blend_mode() {
 		assert_parse!(CssAtomSet::ATOMS, BackgroundBlendModeStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, BackgroundBlendModeStyleValue, "multiply");

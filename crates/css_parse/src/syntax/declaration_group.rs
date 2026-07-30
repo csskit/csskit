@@ -2,6 +2,7 @@ use crate::{
 	CursorSink, DeclarationOrBad, DeclarationValue, NodeMetadata, NodeWithMetadata, SemanticEq, Span, ToCursors,
 	ToSpan, Vec,
 };
+use csskit_proc_macro::node;
 
 /// A group of declarations that can be interleaved with rules.
 ///
@@ -11,6 +12,7 @@ use crate::{
 ///
 /// For example, in `a { color: red; b { } color: blue; }`, the declarations need to be
 /// grouped separately before and after the nested `b` rule.
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 pub struct DeclarationGroup<'a, D, M>

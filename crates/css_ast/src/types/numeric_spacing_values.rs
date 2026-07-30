@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <numeric-spacing-values> = [ proportional-nums | tabular-nums ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -1,9 +1,12 @@
+use csskit_proc_macro::node;
+
 use crate::{CSSInt, CssAtomSet, CssDiagnostic};
 use css_parse::{
 	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T,
 	ToCursors, ToSpan,
 };
 
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -205,11 +208,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Nth>(), 60);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -1,3 +1,5 @@
+use csskit_proc_macro::node;
+
 use crate::{CssAtomSet, CssDiagnostic, DirValue};
 use css_parse::{
 	Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element, syntax::CommaSeparated,
@@ -6,6 +8,7 @@ use csskit_derives::*;
 
 pseudo_element!(
 	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -89,6 +92,7 @@ pseudo_element!(
 	}
 );
 
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -150,6 +154,7 @@ pub enum MozFunctionalPseudoElement<'a> {
 	),
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -205,6 +210,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoElement<'a> {
 }
 
 pseudo_class!(
+	#[node]
 	/// <https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes>
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -244,6 +250,7 @@ pseudo_class!(
 	}
 );
 
+#[node]
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -270,6 +277,7 @@ impl<'a> Parse<'a> for MozFunctionalPseudoClass {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -286,14 +294,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<MozPseudoElement>(), 40);
-		assert_eq!(std::mem::size_of::<MozFunctionalPseudoElement>(), 80);
-		assert_eq!(std::mem::size_of::<MozPseudoClass>(), 28);
-		assert_eq!(std::mem::size_of::<MozFunctionalPseudoClass>(), 56);
-	}
 
 	#[test]
 	fn test_writes() {

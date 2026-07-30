@@ -5,11 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_page_writes() {
 		assert_parse!(CssAtomSet::ATOMS, PageStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, PageStyleValue, "table");

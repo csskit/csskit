@@ -5,25 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<RowGapStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ColumnGapStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<GapStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<ColumnRuleColorStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ColumnRuleStyleStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ColumnRuleWidthStyleValue>(), 128);
-		assert_eq!(std::mem::size_of::<ColumnRuleStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RowRuleColorStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RowRuleStyleStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RowRuleWidthStyleValue>(), 128);
-		assert_eq!(std::mem::size_of::<RowRuleStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RuleColorStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RuleStyleStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<RuleWidthStyleValue>(), 128);
-		assert_eq!(std::mem::size_of::<RuleStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, RowGapStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, ColumnGapStyleValue, "1px");

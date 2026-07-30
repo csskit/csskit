@@ -2,6 +2,7 @@ use super::prelude::*;
 
 use crate::SymbolsFunction;
 
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -27,6 +28,7 @@ impl<'a> Peek<'a> for CounterStyle<'a> {
 }
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#predefined-counters>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum PredefinedCounter {
@@ -121,11 +123,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<CounterStyle>(), 64);
-	}
 
 	#[test]
 	fn test_writes() {

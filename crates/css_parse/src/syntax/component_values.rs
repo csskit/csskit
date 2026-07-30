@@ -4,8 +4,10 @@ use crate::{
 };
 
 use super::ComponentValue;
+use csskit_proc_macro::node;
 
 /// <https://drafts.csswg.org/css-syntax-3/#consume-list-of-components>
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ComponentValues<'a> {
@@ -133,11 +135,6 @@ impl<'a> SemanticEq for ComponentValues<'a> {
 mod tests {
 	use super::*;
 	use crate::{EmptyAtomSet, test_helpers::*};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ComponentValues>(), 24);
-	}
 
 	#[test]
 	fn test_writes() {

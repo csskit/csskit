@@ -2,6 +2,7 @@ use crate::{
 	Arena, Cursor, CursorSink, IntoIter, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span,
 	ToCursors, ToSpan, Vec, token_macros::Comma,
 };
+use csskit_proc_macro::node;
 use std::{
 	ops::{Index, IndexMut},
 	slice::{Iter, IterMut},
@@ -26,6 +27,7 @@ use std::{
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-at-rule-list
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 pub struct CommaSeparated<'a, T, const MIN: usize = 1> {
@@ -162,11 +164,6 @@ where
 mod tests {
 	use super::*;
 	use crate::{EmptyAtomSet, T, test_helpers::*};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<CommaSeparated<T![Ident]>>(), 24);
-	}
 
 	#[test]
 	fn test_writes() {

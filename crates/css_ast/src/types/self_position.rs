@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <self-position> = center | start | end | self-start | self-end | flex-start | flex-end
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -3,9 +3,11 @@ use css_lexer::Kind;
 use css_parse::Vec;
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 use super::CompoundSelector;
 
+#[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -66,6 +68,7 @@ impl<'a> Parse<'a> for FunctionalPseudoElement<'a> {
 	}
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -80,6 +83,7 @@ pub struct HighlightPseudoElement {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -97,6 +101,7 @@ pub struct SlottedPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -111,6 +116,7 @@ pub struct PartPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -125,6 +131,7 @@ pub struct PickerPseudoElement {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -139,6 +146,7 @@ pub struct ViewTransitionGroupPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -153,6 +161,7 @@ pub struct ViewTransitionImagePairPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -167,6 +176,7 @@ pub struct ViewTransitionNewPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -181,6 +191,7 @@ pub struct ViewTransitionOldPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

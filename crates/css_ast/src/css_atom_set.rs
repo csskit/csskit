@@ -14,6 +14,7 @@ use derive_atom_set::AtomSet;
 /// assert_eq!(CssAtomSet::Px.to_str(), "px");
 /// assert_eq!(CssAtomSet::Percentage.to_str(), "%");
 /// ```
+#[csskit_proc_macro::node]
 #[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum CssAtomSet {
 	#[default]

@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <historical-lig-values> = [ historical-ligatures | no-historical-ligatures ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

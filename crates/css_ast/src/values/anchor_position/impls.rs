@@ -9,18 +9,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<AnchorNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnchorScopeStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<PositionAnchorStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PositionAreaStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<PositionVisibilityStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<PositionTryFallbacksStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PositionTryOrderStyleValue>(), 24);
-		// assert_eq!(std::mem::size_of::<PositionTryStyleValue>(), 1);
-	}
-
-	#[test]
 	fn test_position_visibility() {
 		assert_parse!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "always");
 		assert_parse!(CssAtomSet::ATOMS, PositionVisibilityStyleValue, "anchor-valid");

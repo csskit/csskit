@@ -2,6 +2,7 @@ use super::prelude::*;
 use crate::units::CSSFloat;
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]

@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <display-inside> = flow | flow-root | table | flex | grid | ruby
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -31,11 +32,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<DisplayInside>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

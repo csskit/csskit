@@ -49,26 +49,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<GridTemplateColumnsStyleValue>(), 272);
-		assert_eq!(std::mem::size_of::<GridTemplateRowsStyleValue>(), 272);
-		assert_eq!(std::mem::size_of::<GridTemplateAreasStyleValue>(), 24);
-		// assert_eq!(std::mem::size_of::<GridTemplateStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<GridAutoColumnsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<GridAutoRowsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<GridAutoFlowStyleValue>(), 36);
-		// assert_eq!(std::mem::size_of::<GridStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<GridRowStartStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<GridColumnStartStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<GridRowEndStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<GridColumnEndStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<GridRowStyleValue>(), 128);
-		assert_eq!(std::mem::size_of::<GridColumnStyleValue>(), 128);
-		assert_eq!(std::mem::size_of::<GridAreaStyleValue>(), 272);
-		assert_eq!(std::mem::size_of::<FlowToleranceStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, GridTemplateAreasStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, GridTemplateAreasStyleValue, r#""foo""bar""#);

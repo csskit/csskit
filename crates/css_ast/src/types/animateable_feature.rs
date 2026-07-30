@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <animateable-feature> = scroll-position | contents | <custom-ident>
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

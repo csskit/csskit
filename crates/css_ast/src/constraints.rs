@@ -1,10 +1,12 @@
 use crate::CssDiagnostic;
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result, ToNormalisedValue, ToNumberValue};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 /// A non-negative value wrapper.
 ///
 /// This wrapper validates that literal values are >= 0 at parse time.
+#[node]
 #[derive(Peek, IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -43,6 +45,7 @@ impl<T> NonNegative<T> {
 /// A positive value wrapper.
 ///
 /// This wrapper validates that literal values are > 0 at parse time.
+#[node]
 #[derive(IntoCursor, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -82,6 +85,7 @@ impl<T> Positive<T> {
 /// A non-zero value wrapper.
 ///
 /// This wrapper validates that literal values are != 0 at parse time.
+#[node]
 #[derive(IntoCursor, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -121,6 +125,7 @@ impl<T> NonZero<T> {
 /// A range-constrained value wrapper using const generics.
 ///
 /// This wrapper validates that literal values fall within [MIN, MAX] at parse time.
+#[node]
 #[derive(ToSpan, IntoCursor, ToCursors, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -186,6 +191,7 @@ impl<T, const MIN: i32, const MAX: i32> Ranged<T, MIN, MAX> {
 /// An exact value wrapper using const generics.
 ///
 /// This wrapper validates that literal values are exactly equal to the specified VALUE at parse time.
+#[node]
 #[derive(IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -253,6 +259,7 @@ impl<T, const VALUE: i32> Exact<T, VALUE> {
 /// and validates at parse time that the collection contains at least one item.
 ///
 /// Works with [`bumpalo::collections::Vec`] and any other slice-backed type.
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]

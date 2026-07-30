@@ -6,6 +6,7 @@ use crate::{LineNames, NonEmpty};
 /// ```text,ignore
 /// <name-repeat> = repeat( [ <integer [1,∞]> | auto-fill ] , <line-names>+ )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -26,6 +27,7 @@ pub struct NameRepeat<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum NameRepeatCount<'a> {}
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -43,11 +45,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<NameRepeat>(), 88);
-	}
 
 	#[test]
 	fn test_writes() {

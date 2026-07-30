@@ -13,11 +13,4 @@ use super::prelude::*;
 pub struct LineWidthList<'a>;
 
 #[cfg(test)]
-mod tests {
-	use super::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<LineWidthList>(), 24);
-	}
-}
+mod tests {}

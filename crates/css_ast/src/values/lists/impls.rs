@@ -5,18 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<CounterIncrementStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<CounterResetStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<CounterSetStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ListStyleImageStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<ListStylePositionStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ListStyleStyleValue>(), 120);
-		assert_eq!(std::mem::size_of::<ListStyleTypeStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<MarkerSideStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_counter_reset() {
 		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, CounterResetStyleValue, "my-counter");

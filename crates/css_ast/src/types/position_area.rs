@@ -30,6 +30,7 @@ use super::prelude::*;
 ///   [ self-start | center | self-end | span-self-start | span-self-end | span-all ]{1,2}
 /// ]
 /// ```
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

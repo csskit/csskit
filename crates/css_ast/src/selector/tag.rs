@@ -1,7 +1,10 @@
+use csskit_proc_macro::node;
+
 use crate::CssAtomSet;
 use css_parse::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, T};
 use csskit_derives::*;
 
+#[node]
 #[derive(
 	Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -46,6 +49,7 @@ impl css_parse::NodeWithMetadata<crate::CssMetadata> for Tag {
 	}
 }
 
+#[node]
 #[derive(ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -131,6 +135,7 @@ impl<'a> Parse<'a> for CustomElementTag {
 }
 
 /// <https://html.spec.whatwg.org/multipage/indices.html#elements-3>
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -365,6 +370,7 @@ pub enum HtmlTag {
 }
 
 /// <https://html.spec.whatwg.org/multipage/obsolete.html#non-conforming-features>
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -433,6 +439,7 @@ pub enum HtmlNonConformingTag {
 	Xmp(T![Ident]),
 }
 
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -456,6 +463,7 @@ pub enum HtmlNonStandardTag {
 }
 
 /// <https://svgwg.org/svg2-draft/eltindex.html>
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -594,6 +602,7 @@ pub enum SvgTag {
 }
 
 /// <https://w3c.github.io/mathml/#mmlindex_elements>
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -919,6 +928,7 @@ pub enum MathmlTag {
 	Xo(T![Ident]),
 }
 
+#[node]
 #[derive(
 	ToCursors, Parse, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -937,17 +947,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Tag>(), 20);
-		assert_eq!(std::mem::size_of::<HtmlTag>(), 16);
-		assert_eq!(std::mem::size_of::<SvgTag>(), 16);
-		assert_eq!(std::mem::size_of::<MathmlTag>(), 16);
-		assert_eq!(std::mem::size_of::<CustomElementTag>(), 12);
-		assert_eq!(std::mem::size_of::<HtmlNonConformingTag>(), 16);
-		assert_eq!(std::mem::size_of::<HtmlNonStandardTag>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -297,6 +297,8 @@ mod cursor_to_source_cursor_sink;
 mod cursor_write_sink;
 mod diagnostics;
 mod feature;
+#[cfg(test)]
+mod layout_test;
 mod macros;
 mod parser;
 mod parser_checkpoint;

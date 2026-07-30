@@ -5,6 +5,7 @@ mod features;
 pub use features::*;
 
 /// <https://drafts.csswg.org/mediaqueries-4/>
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
@@ -33,16 +34,18 @@ impl<'a> NodeWithMetadata<CssMetadata> for MediaRule<'a> {
 	}
 }
 
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
-
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct MediaQueryList<'a>(pub CommaSeparated<'a, MediaQuery<'a>, 1>);
 
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -70,6 +73,7 @@ impl MediaType {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -83,6 +87,7 @@ pub enum MediaPreCondition {
 	Only(T![Ident]),
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -136,6 +141,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -192,6 +198,7 @@ impl<'a> Parse<'a> for MediaCondition<'a> {
 macro_rules! media_feature {
 	( $($name: ident($typ: ident): $pat: pat,)+) => {
 		/// <https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table>
+		#[node]
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -326,14 +333,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<MediaRule>(), 176);
-		assert_eq!(std::mem::size_of::<MediaQueryList>(), 24);
-		assert_eq!(std::mem::size_of::<MediaQuery>(), 192);
-		assert_eq!(std::mem::size_of::<MediaCondition>(), 144);
-	}
 
 	#[test]
 	fn test_writes() {

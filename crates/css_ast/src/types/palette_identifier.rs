@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <palette-identifier> = <dashed-ident>
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

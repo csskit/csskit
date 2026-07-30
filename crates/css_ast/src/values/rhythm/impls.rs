@@ -5,16 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<BlockStepAlignStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BlockStepInsertStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BlockStepRoundStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<BlockStepSizeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<BlockStepStyleValue>(), 72);
-		assert_eq!(std::mem::size_of::<LineHeightStepStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_block_step_size_writes() {
 		assert_parse!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "1px");
 		assert_parse!(CssAtomSet::ATOMS, BlockStepSizeStyleValue, "2em");

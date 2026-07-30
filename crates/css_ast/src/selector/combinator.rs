@@ -1,7 +1,10 @@
+use csskit_proc_macro::node;
+
 use css_parse::T;
 use csskit_derives::*;
 
 /// <https://drafts.csswg.org/selectors/#combinators>
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -20,11 +23,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Combinator>(), 28);
-	}
 
 	#[test]
 	fn test_writes() {

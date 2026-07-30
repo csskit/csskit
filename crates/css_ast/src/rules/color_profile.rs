@@ -5,12 +5,6 @@ pub type ColorProfileRule = Todo;
 
 #[cfg(test)]
 mod tests {
-	use super::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorProfileRule>(), 0);
-	}
 
 	#[test]
 	fn test_writes() {

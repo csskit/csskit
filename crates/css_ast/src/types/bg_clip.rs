@@ -7,6 +7,7 @@ use super::prelude::*;
 /// <bg-clip> = <visual-box> | border-area | text
 /// <visual-box> = <visual-box> | margin-box
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

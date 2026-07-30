@@ -5,11 +5,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<LinkParametersStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, LinkParametersStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, LinkParametersStyleValue, "param(--foo,var(--bar))");

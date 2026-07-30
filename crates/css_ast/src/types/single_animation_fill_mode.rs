@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-fill-mode> = none | forwards | backwards | both
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

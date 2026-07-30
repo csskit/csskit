@@ -7,6 +7,7 @@ use super::prelude::*;
 ///   destination-in | source-out | destination-out | source-atop | destination-atop |
 ///   xor | lighter | add
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

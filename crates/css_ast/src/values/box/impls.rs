@@ -16,21 +16,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<MarginTopStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MarginRightStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MarginBottomStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MarginLeftStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MarginStyleValue>(), 96);
-		assert_eq!(std::mem::size_of::<PaddingTopStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PaddingRightStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PaddingBottomStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PaddingLeftStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PaddingStyleValue>(), 96);
-		assert_eq!(std::mem::size_of::<MarginTrimStyleValue>(), 64);
-	}
-
-	#[test]
 	fn test_margin_trim() {
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block");

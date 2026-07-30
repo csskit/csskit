@@ -4,10 +4,12 @@ mod system;
 use crate::{ColorFunction, CssAtomSet};
 use css_parse::{Box, T};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 pub use named::*;
 pub use system::*;
 
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -144,11 +146,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Color<'_>>(), 24);
-	}
 
 	#[test]
 	fn test_writes() {

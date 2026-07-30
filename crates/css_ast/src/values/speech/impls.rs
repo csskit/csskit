@@ -5,28 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<VoiceVolumeStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<VoiceBalanceStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<SpeakStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PauseBeforeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PauseAfterStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PauseStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<RestBeforeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<RestAfterStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<RestStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<CueBeforeStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<CueAfterStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<CueStyleValue>(), 128);
-		assert_eq!(std::mem::size_of::<VoiceFamilyStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<VoiceRateStyleValue>(), 48);
-		// assert_eq!(std::mem::size_of::<VoicePitchStyleValue>(), 16);
-		// assert_eq!(std::mem::size_of::<VoiceRangeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<VoiceStressStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<VoiceDurationStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_voice_family() {
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "preserve");
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyStyleValue, "male");

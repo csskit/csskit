@@ -3,6 +3,7 @@ use crate::{
 	NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, RuleVariants, SemanticEq, Span, State, T, ToCursors,
 	ToSpan, Vec, token_macros,
 };
+use csskit_proc_macro::node;
 
 /// This trait provides an implementation for ["consuming a blocks contents"][1].
 ///
@@ -16,6 +17,7 @@ use crate::{
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-block-contents
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "serde", serde(bound(serialize = "D: serde::Serialize, R: serde::Serialize")))]
@@ -335,11 +337,6 @@ mod tests {
 	impl<'a> crate::RuleVariants<'a> for Rule {
 		type DeclarationValue = Decl;
 		type Metadata = ();
-	}
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Block<Decl, Rule, ()>>(), 80);
 	}
 
 	#[test]

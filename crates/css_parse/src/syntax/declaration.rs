@@ -2,6 +2,7 @@ use crate::{
 	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
 	Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
 };
+use csskit_proc_macro::node;
 use std::marker::PhantomData;
 
 /// This is a generic type that can be used for AST nodes representing a [Declaration][1], aka "property". This is
@@ -26,6 +27,7 @@ use std::marker::PhantomData;
 /// declaration value parsing step.
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#consume-a-declaration
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Declaration<'a, V, M>
@@ -240,11 +242,6 @@ mod tests {
 		fn semantic_eq(&self, other: &Self) -> bool {
 			self.0.semantic_eq(&other.0)
 		}
-	}
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Declaration<Decl, ()>>(), 80);
 	}
 
 	#[test]

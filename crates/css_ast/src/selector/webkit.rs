@@ -1,9 +1,12 @@
+use csskit_proc_macro::node;
+
 use crate::{CompoundSelector, CssAtomSet, CssDiagnostic};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element};
 use csskit_derives::*;
 
 pseudo_element!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -75,6 +78,7 @@ pseudo_element!(
 	}
 );
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -101,6 +105,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoElement<'a> {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -117,6 +122,7 @@ pub struct WebkitDistrubutedFunctionalPseudoElement<'a> {
 	pub close: Option<T![')']>,
 }
 
+#[node]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -142,6 +148,7 @@ impl<'a> Parse<'a> for WebkitFunctionalPseudoClass<'a> {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -155,6 +162,7 @@ pub struct WebkitAnyFunctionalPseudoClass<'a> {
 
 pseudo_class!(
 	/// <https://searchfox.org/wubkat/source/Source/WebCore/css/CSSPseudoSelectors.json>
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

@@ -297,7 +297,7 @@ mod prelude {
 		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, ToNumberValue,
 	};
 	pub(crate) use csskit_derives::*;
-	pub(crate) use csskit_proc_macro::syntax;
+	pub(crate) use csskit_proc_macro::{node, syntax};
 }
 
 // Type aliases for primitive CSS types referenced in syntax definitions

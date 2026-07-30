@@ -5,29 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<TextDecorationLineStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<TextDecorationStyleStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextDecorationColorStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TextDecorationStyleValue>(), 136);
-		assert_eq!(std::mem::size_of::<TextUnderlinePositionStyleValue>(), 36);
-		assert_eq!(std::mem::size_of::<TextEmphasisStyleStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<TextEmphasisColorStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TextEmphasisStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<TextEmphasisPositionStyleValue>(), 28);
-		assert_eq!(std::mem::size_of::<TextShadowStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TextDecorationThicknessStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TextUnderlineOffsetStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TextDecorationInsetStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<TextDecorationSkipStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextDecorationSkipSelfStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<TextDecorationSkipBoxStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextDecorationSkipSpacesStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<TextDecorationSkipInkStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextEmphasisSkipStyleValue>(), 64);
-	}
-
-	#[test]
 	fn test_text_underline_position() {
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "from-font");

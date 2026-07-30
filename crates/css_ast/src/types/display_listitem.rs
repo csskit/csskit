@@ -7,6 +7,7 @@ use css_parse::parse_optionals;
 /// ```text,ignore
 /// <display-listitem> = <display-outside>? && [ flow | flow-root ]? && list-item
 /// ```
+#[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -38,6 +39,7 @@ impl<'a> Parse<'a> for DisplayListitem {
 	}
 }
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -56,12 +58,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<DisplayListitem>(), 44);
-		assert_eq!(std::mem::size_of::<DisplayListitemInside>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

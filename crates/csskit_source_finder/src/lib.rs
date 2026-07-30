@@ -1,16 +1,12 @@
 #![deny(warnings)]
 use std::collections::HashSet;
-use std::io;
+use std::fs::read_to_string;
 use std::path::PathBuf;
-use std::str::from_utf8;
 
 use glob::glob;
-use grep_matcher::{Captures, Matcher};
-use grep_regex::{RegexMatcher, RegexMatcherBuilder};
-use grep_searcher::{Searcher, SearcherBuilder, Sink, SinkError, SinkMatch};
 use syn::{DeriveInput, parse_str};
 
-#[derive(Debug, Clone, PartialEq, Eq, Hash)]
+#[derive(Debug, Clone, Copy, PartialEq, Eq, Hash)]
 pub enum VisitMode {
 	/// `#[visit]` or `#[visit(self)]`
 	Self_,
@@ -20,14 +16,12 @@ pub enum VisitMode {
 	Skip,
 	/// `#[visit(children)]`
 	Children,
-	/// Manual impl VisitableTrait
-	Manual,
 }
 
 impl VisitMode {
 	/// Returns true if this mode makes the node queryable (has a visit_self call)
 	pub fn is_queryable(&self) -> bool {
-		matches!(self, VisitMode::Self_ | VisitMode::All | VisitMode::Manual)
+		matches!(self, VisitMode::Self_ | VisitMode::All)
 	}
 }
 
@@ -47,158 +41,143 @@ impl VisitableNode {
 	}
 }
 
-pub struct NodeMatcher<'a> {
-	matcher: &'a RegexMatcher,
-	matches: &'a mut HashSet<VisitableNode>,
+/// Parses a `pub struct`/`pub enum` declaration line into its kind keyword, name,
+/// and (optional) generics header. Everything from the name onwards is truncated
+/// at the body/where-clause so the reconstructed type carries only name + generics.
+fn parse_decl(line: &str) -> Option<(&'static str, String, String)> {
+	let mut rest = line.trim_start();
+	rest = rest.strip_prefix("pub")?;
+	// Optional visibility restriction, e.g. `pub(crate)`.
+	rest = rest.trim_start();
+	if let Some(after) = rest.strip_prefix('(') {
+		let close = after.find(')')?;
+		rest = after[close + 1..].trim_start();
+	}
+	let kind = if let Some(r) = rest.strip_prefix("enum") {
+		rest = r;
+		"enum"
+	} else if let Some(r) = rest.strip_prefix("struct") {
+		rest = r;
+		"struct"
+	} else {
+		return None;
+	};
+	// A keyword boundary must follow (whitespace before the name).
+	if !rest.starts_with(char::is_whitespace) {
+		return None;
+	}
+	rest = rest.trim_start();
+	let name_end = rest.find(|c: char| !(c.is_alphanumeric() || c == '_')).unwrap_or(rest.len());
+	let name = &rest[..name_end];
+	if name.is_empty() {
+		return None;
+	}
+	let after_name = &rest[name_end..];
+	// Capture a single-level generics header `<...>` if present, mirroring the
+	// legacy finder (no nested `>`), stopping before the body/where-clause.
+	let generics = if after_name.trim_start().starts_with('<') {
+		let start = after_name.find('<').unwrap();
+		match after_name[start..].find('>') {
+			Some(end) => after_name[start..=start + end].to_string(),
+			None => String::new(),
+		}
+	} else {
+		String::new()
+	};
+	Some((kind, name.to_string(), generics))
 }
 
-impl Sink for NodeMatcher<'_> {
-	type Error = io::Error;
-
-	fn matched(&mut self, _searcher: &Searcher, mat: &SinkMatch<'_>) -> Result<bool, io::Error> {
-		let mut captures = self.matcher.new_captures()?;
-		let line = match from_utf8(mat.bytes()) {
-			Ok(matched) => matched,
-			Err(err) => return Err(io::Error::error_message(err)),
-		};
-		self.matcher.captures_iter(mat.bytes(), &mut captures, |captures| -> bool {
-			// Group 1 contains everything between derive and pub struct/enum
-			let attrs_section = &line[captures.get(1).unwrap()];
-
-			// Search for visit attribute in the captured section
-			// The default (no visit attr) is Children mode per derive macro semantics
-			let visit_mode = if attrs_section.contains("visit(skip)") {
-				VisitMode::Skip
-			} else if attrs_section.contains("visit(children)") {
-				VisitMode::Children
-			} else if attrs_section.contains("visit(all)") {
-				VisitMode::All
-			} else if attrs_section.contains("visit(self)") {
-				VisitMode::Self_
-			} else if attrs_section.contains("visit") {
-				// Just `visit` (or `visit()`) means visit self AND children
-				VisitMode::Self_
-			} else {
-				// No visit attribute found - default is children only (not queryable)
-				VisitMode::Children
-			};
-
-			let capture = format!("{} {} {{}}", &line[captures.get(2).unwrap()], &line[captures.get(5).unwrap()]);
-			match parse_str::<DeriveInput>(&capture) {
-				Ok(input) => {
-					self.matches.insert(VisitableNode { input, visit_mode });
-				}
-				Err(err) => {
-					panic!("#[visit] or unknown: {capture} {err}");
-				}
-			}
-			true
-		})?;
-		Ok(true)
+/// Reads the `visit(...)` mode off a type's attribute block. `visit(skip)` beats
+/// `visit(children)` beats `visit(all)` beats `visit(self)`/bare `visit`; a
+/// visitable type with no `visit` at all defaults to children-only.
+///
+/// `feature = "visitable"` also contains the substring `visit`, so bare `visit`
+/// is detected as `visit)` (the token that closes its `cfg_attr`), never a raw
+/// `visit` substring.
+fn visit_mode(block: &str) -> VisitMode {
+	if block.contains("visit(skip)") {
+		VisitMode::Skip
+	} else if block.contains("visit(children)") {
+		VisitMode::Children
+	} else if block.contains("visit(all)") {
+		VisitMode::All
+	} else if ["visit(self)", "visit)", "visit,", "visit]"].iter().any(|p| block.contains(p)) {
+		VisitMode::Self_
+	} else {
+		VisitMode::Children
 	}
 }
 
-fn build_visit_attr_matcher() -> RegexMatcher {
-	RegexMatcherBuilder::new()
-		.multi_line(true)
-		.dot_matches_new_line(true)
-		.ignore_whitespace(true)
-		.build(
-			r#"
-			^\s*\#\[
-			# Match any type with derive(Visitable)
-			cfg_attr\([^,]+,\s*derive\((?:csskit_derives::)?Visitable\)
-			# Capture everything from here until the type declaration to search for visit attr
-			# This captures the visit attr whether it's on same line or separate line
-			([^\{\}]*?)
-			# Match the type declaration
-			(pub\s*(?:struct|enum)\s*)
-			# munch any comments/attributes between this and our name (for macros)
-			(:?\n?\s*(:?\/\/|\#)[^\n]*)*
-			# finally grab the word (plus any generics)
-			\s*(\w*(:?<[^>]+>)?)"#,
-		)
-		.unwrap()
+fn brackets(line: &str) -> i32 {
+	line.bytes().fold(0i32, |acc, b| match b {
+		b'(' | b'[' => acc + 1,
+		b')' | b']' => acc - 1,
+		_ => acc,
+	})
 }
 
-fn build_manual_impl_matcher() -> RegexMatcher {
-	RegexMatcherBuilder::new()
-		.multi_line(true)
-		.ignore_whitespace(true)
-		.build(
-			r#"
-			# Match manual impl VisitableTrait for Type
-			impl\s*(?:<[^>]+>\s*)?
-			VisitableTrait\s+for\s+
-			# Capture the type name with optional generics
-			(\w+)(?:<[^>]+>)?"#,
-		)
-		.unwrap()
-}
-
-pub struct ManualImplMatcher<'a> {
-	matcher: &'a RegexMatcher,
-	matches: &'a mut HashSet<VisitableNode>,
-}
-
-impl Sink for ManualImplMatcher<'_> {
-	type Error = io::Error;
-
-	fn matched(&mut self, _searcher: &Searcher, mat: &SinkMatch<'_>) -> Result<bool, io::Error> {
-		let mut captures = self.matcher.new_captures()?;
-		let line = match from_utf8(mat.bytes()) {
-			Ok(matched) => matched,
-			Err(err) => return Err(io::Error::error_message(err)),
-		};
-		self.matcher.captures_iter(mat.bytes(), &mut captures, |captures| -> bool {
-			let type_name = &line[captures.get(1).unwrap()];
-			// Skip if already found by attr matcher
-			if self.matches.iter().any(|n| n.input.ident == type_name) {
-				return true;
-			}
-			let capture = format!("pub struct {} {{}}", type_name);
-			match parse_str::<DeriveInput>(&capture) {
-				Ok(input) => {
-					self.matches.insert(VisitableNode { input, visit_mode: VisitMode::Manual });
-				}
-				Err(err) => {
-					panic!("manual impl VisitableTrait: {capture} {err}");
+/// Scans a source file for every `#[node]`/`#[syntax]`-tagged, `Visitable` node
+/// type, recording its name, generics and visit mode. Line based so it sees
+/// types written directly, inside `macro_rules!` templates, and inside
+/// `ranged_feature!`/`discrete_feature!`/`boolean_feature!` invocations alike.
+fn collect(content: &str, matches: &mut HashSet<VisitableNode>) {
+	let mut block: Vec<&str> = Vec::new();
+	let mut depth = 0i32;
+	for line in content.lines() {
+		if depth > 0 {
+			block.push(line);
+			depth = (depth + brackets(line)).max(0);
+			continue;
+		}
+		let t = line.trim_start();
+		if let Some((kind, name, generics)) = parse_decl(line) {
+			let has_marker = block.iter().any(|l| {
+				let l = l.trim_start();
+				l.starts_with("#[node]") || l.starts_with("#[syntax")
+			});
+			let joined =
+				block.iter().filter(|l| !l.trim_start().starts_with("//")).copied().collect::<Vec<_>>().join("\n");
+			if has_marker && joined.contains("Visitable") {
+				let src = format!("pub {kind} {name}{generics} {{}}");
+				match parse_str::<DeriveInput>(&src) {
+					Ok(input) => {
+						matches.insert(VisitableNode { input, visit_mode: visit_mode(&joined) });
+					}
+					Err(err) => panic!("could not reconstruct node type: {src} {err}"),
 				}
 			}
-			true
-		})?;
-		Ok(true)
+			block.clear();
+		} else if t.is_empty() {
+			block.clear();
+		} else if t.starts_with("#[") {
+			block.push(line);
+			depth = (depth + brackets(line)).max(0);
+		} else if t.starts_with("//") {
+			block.push(line);
+		} else {
+			block.clear();
+		}
 	}
 }
 
-/// Find all types with `#[visit]` attribute or manual VisitableTrait impl
+/// Find all visitable node types (`#[node]`/`#[syntax]` types carrying a
+/// `Visitable` derive), excluding `visit(children)`-only types.
 pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, path_callback: impl Fn(&PathBuf) + Copy) {
-	let attr_matcher = build_visit_attr_matcher();
-	let manual_matcher = build_manual_impl_matcher();
-	let mut searcher = SearcherBuilder::new().line_number(false).multi_line(true).build();
-	let entries: Vec<_> = glob(dir).unwrap().filter_map(|p| p.ok()).collect();
 	let mut all: HashSet<VisitableNode> = HashSet::new();
-	// First pass: find types with derive(Visitable)
-	for entry in &entries {
-		path_callback(entry);
-		let context = NodeMatcher { matcher: &attr_matcher, matches: &mut all };
-		searcher.search_path(&attr_matcher, entry, context).unwrap();
-	}
-	// Second pass: find types with manual impl VisitableTrait
-	for entry in &entries {
-		let context = ManualImplMatcher { matcher: &manual_matcher, matches: &mut all };
-		searcher.search_path(&manual_matcher, entry, context).unwrap();
+	for entry in glob(dir).unwrap().filter_map(|p| p.ok()) {
+		path_callback(&entry);
+		collect(&read_to_string(&entry).unwrap(), &mut all);
 	}
 	matches.extend(all.into_iter().filter(|node| !matches!(node.visit_mode, VisitMode::Children)));
 }
 
-/// Find types that are queryable (have `#[visit]`, `#[visit(self)]`, or `#[visit(all)]` - not skip/children)
+/// Find types that are queryable (`#[visit]`, `#[visit(self)]`, or `#[visit(all)]`
+/// - not skip/children).
 ///
 /// Queryable nodes are those that get a NodeId and can be matched by selectors.
 pub fn find_queryable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, path_callback: impl Fn(&PathBuf) + Copy) {
 	let mut all_visitable = HashSet::new();
 	find_visitable_nodes(dir, &mut all_visitable, path_callback);
-	// Filter to only queryable modes
 	matches.extend(all_visitable.into_iter().filter(|node| node.visit_mode.is_queryable()));
 }
 

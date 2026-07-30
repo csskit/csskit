@@ -1,6 +1,7 @@
 use crate::ExpectedTypes;
 use css_parse::{ComponentValues, Cursor, Parse, Parser, Result};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 /// ComponentValues, but with additional type information.
 ///
@@ -11,6 +12,7 @@ use csskit_derives::*;
 /// `tokens` preserves the original source tokens verbatim.
 /// `expected` records the set of CSS value types the position accepts, enabling
 /// downstream inference and diagnostics.
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
@@ -36,11 +38,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Unresolved>(), 32);
-	}
 
 	#[test]
 	fn test_expected_types_any() {

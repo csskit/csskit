@@ -1,6 +1,9 @@
+use csskit_proc_macro::node;
+
 use css_parse::{Cursor, Kind, KindSet, Parser, Peek, T};
 use csskit_derives::*;
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

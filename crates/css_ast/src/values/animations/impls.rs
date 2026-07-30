@@ -5,30 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AnimationNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationDurationStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationTimingFunctionStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationIterationCountStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationDirectionStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationPlayStateStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationDelayStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationFillModeStyleValue>(), 24);
-		// assert_eq!(std::mem::size_of::<AnimationStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<AnimationCompositionStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationTimelineStyleValue>(), 24);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerBehaviorStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerTimelineStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeStartStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerRangeEndStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerExitRangeStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerExitRangeStartStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerExitRangeEndStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<AnimationTriggerStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_animation_delay() {
 		assert_parse!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "-5ms");
 		assert_parse!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0s");

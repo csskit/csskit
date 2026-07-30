@@ -5,12 +5,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<OpacityStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_literal_colors() {
 		assert_parse!(CssAtomSet::ATOMS, ColorStyleValue, "red");
 		assert_parse!(CssAtomSet::ATOMS, ColorStyleValue, "#fff");

@@ -1,0 +1,10 @@
+---
+source: crates/css_parse/src/layout_test.rs
+expression: render()
+---
+BadDeclaration: 24
+BangImportant: 24
+ComponentValue: 56
+ComponentValues: 24
+FunctionBlock: 48
+SimpleBlock: 56

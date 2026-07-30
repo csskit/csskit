@@ -6,6 +6,7 @@ use super::prelude::*;
 /// leader() = leader( <leader-type> )
 /// <leader-type> = dotted | solid | space | <string>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -23,6 +24,7 @@ pub struct LeaderFunction {
 /// ```text,ignore
 /// <leader-type> = dotted | solid | space | <string>
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -42,12 +44,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<LeaderFunction>(), 40);
-		assert_eq!(std::mem::size_of::<LeaderType>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

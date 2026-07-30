@@ -4,6 +4,7 @@ use super::prelude::*;
 use crate::CssMetadata;
 
 /// <https://drafts.csswg.org/css-fonts/#font-face-rule>
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -18,12 +19,14 @@ pub struct FontFaceRule<'a> {
 	pub block: FontFaceRuleBlock<'a>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct FontFaceRuleBlock<'a>(#[metadata(delegate)] DeclarationList<'a, FontFaceRuleStyleValue<'a>, CssMetadata>);
 
+#[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -92,14 +95,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 
 #[cfg(test)]
 mod tests {
-	use super::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FontFaceRule>(), 128);
-		assert_eq!(std::mem::size_of::<FontFaceRuleStyleValue>(), 752);
-		assert_eq!(std::mem::size_of::<FontFaceRuleBlock>(), 112);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -19,11 +19,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<VoiceFamilyName>(), 32);
-	}
-
-	#[test]
 	fn test_parses() {
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyName, "\"Alice\"");
 		assert_parse!(CssAtomSet::ATOMS, VoiceFamilyName, "Alice");

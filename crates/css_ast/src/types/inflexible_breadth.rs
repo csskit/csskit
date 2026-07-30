@@ -19,11 +19,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<InflexibleBreadth>(), 24);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, InflexibleBreadth, "10px");
 		assert_parse!(CssAtomSet::ATOMS, InflexibleBreadth, "50%");

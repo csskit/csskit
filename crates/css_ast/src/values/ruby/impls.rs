@@ -5,14 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<RubyAlignStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<RubyMergeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<RubyOverhangStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<RubyPositionStyleValue>(), 36);
-	}
-
-	#[test]
 	fn test_ruby_align_writes() {
 		assert_parse!(CssAtomSet::ATOMS, RubyAlignStyleValue, "start");
 		assert_parse!(CssAtomSet::ATOMS, RubyAlignStyleValue, "center");

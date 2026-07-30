@@ -5,13 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerTypeStyleValue>(), 36);
-		assert_eq!(std::mem::size_of::<ContainerNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ContainerStyleValue>(), 72);
-	}
-
-	#[test]
 	fn test_container_type() {
 		assert_parse!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, ContainerTypeStyleValue, "size");

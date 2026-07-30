@@ -15,6 +15,7 @@ bench = false
 
 [dependencies]
 css_lexer = { workspace = true, features = ["bumpalo"] } # @release
+csskit_proc_macro = { workspace = true } # @release
 
 allocator-api2 = { workspace = true }
 bumpalo = { workspace = true, features = ["allocator-api2"] }
@@ -29,8 +30,10 @@ serde_json = { workspace = true, optional = true }
 [dev-dependencies]
 csskit_derives = { workspace = true }  # @release
 derive_atom_set = { workspace = true } # @release
+insta = { workspace = true }
 glob = { workspace = true }
 dhat = { workspace = true }
+inventory = { workspace = true }
 
 [features]
 default = []

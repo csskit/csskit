@@ -5,12 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<WrapFlowStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<WrapThroughStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, WrapFlowStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, WrapFlowStyleValue, "both");

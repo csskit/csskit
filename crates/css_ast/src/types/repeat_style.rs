@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <repeat-style> = repeat-x | repeat-y | <repetition>{1,2}
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -22,6 +23,7 @@ pub enum RepeatStyle {
 /// ```text,ignore
 /// <repetition> = repeat | space | round | no-repeat
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

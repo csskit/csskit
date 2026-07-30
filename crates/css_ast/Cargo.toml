@@ -50,6 +50,7 @@ insta = { workspace = true, features = ["ron"] }
 similar = { workspace = true }
 console = { workspace = true }
 dhat = { workspace = true }
+inventory = { workspace = true }
 
 [target.'cfg(target_family = "unix")'.dev-dependencies]
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }

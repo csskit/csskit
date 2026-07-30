@@ -7,6 +7,7 @@ use crate::{CalcableValue, Image, Resolution};
 /// <image-set()> = image-set( <image-set-option># )
 /// <image-set-option> = [ <image> | <string> ] [ <resolution> || type(<string>) ]?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -19,6 +20,7 @@ pub struct ImageSetFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub enum ImageSetParams<'a> {
@@ -26,6 +28,7 @@ pub enum ImageSetParams<'a> {
 	String(T![String], Option<ResolutionOrType<'a>>),
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ResolutionOrType<'a> {
@@ -38,11 +41,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ImageSetFunction>(), 48);
-	}
 
 	#[test]
 	fn test_writes() {

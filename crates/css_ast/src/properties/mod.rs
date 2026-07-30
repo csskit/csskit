@@ -8,17 +8,20 @@ use css_parse::{
 	Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
 use csskit_derives::*;
+use csskit_proc_macro::node;
 use std::{fmt::Debug, hash::Hash};
 
 // The build.rs generates a list of CSS properties from the value mods
 include!(concat!(env!("OUT_DIR"), "/css_apply_properties.rs"));
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
 pub struct Custom<'a>(pub ComponentValues<'a>);
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -27,6 +30,7 @@ pub struct Unknown<'a>(pub ComponentValues<'a>);
 
 macro_rules! style_value {
 	( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+		#[node]
 		#[derive(ToSpan, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -421,14 +425,6 @@ mod tests {
 	use css_parse::{Declaration, Parser, assert_parse};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Property>(), 824);
-		assert_eq!(std::mem::size_of::<StyleValue>(), 752);
-		assert_eq!(std::mem::size_of::<Property>(), 824);
-		assert_eq!(std::mem::size_of::<StyleValue>(), 752);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -7,6 +7,7 @@ use css_parse::{
 	Result as ParserResult, RuleVariants,
 };
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 /// Represents a "Style Rule", such as `body { width: 100% }`. See also the CSS-OM [CSSStyleRule][1] interface.
 ///
@@ -14,6 +15,7 @@ use csskit_derives::*;
 /// Each [Declaration][css_parse::Declaration] will have a [StyleValue], and each rule will be a [NestedGroupRule].
 ///
 /// [1]: https://drafts.csswg.org/cssom-1/#the-cssstylerule-interface
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -54,6 +56,7 @@ macro_rules! nested_group_rule {
         $name: ident($ty: ident$(<$a: lifetime>)?): $str: pat,
     )+ ) => {
 		/// <https://drafts.csswg.org/cssom-1/#the-cssrule-interface>
+		#[node]
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
@@ -144,11 +147,6 @@ mod tests {
 
 	#[cfg(feature = "visitable")]
 	use crate::assert_visits;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<StyleRule>(), 208);
-	}
 
 	#[test]
 	fn test_writes() {

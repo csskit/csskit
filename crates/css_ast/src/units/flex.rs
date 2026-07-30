@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <flex> = <dimension-token>
 /// ```
+#[node]
 #[derive(
 	IntoCursor, ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -37,11 +38,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Flex>(), 12);
-	}
 
 	#[test]
 	fn test_writes() {

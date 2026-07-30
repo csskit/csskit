@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// env() = env( <custom-ident> <integer [0,∞]>*, <declaration-value>? )
 /// ```
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -31,12 +32,6 @@ mod tests {
 
 	type EnvLength<'a> = EnvFunction<'a, Value<'a, Length>>;
 	type CalcableEnvLength<'a> = EnvFunction<'a, CalcableValue<'a, Length>>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<EnvLength>(), 96);
-		assert_eq!(std::mem::size_of::<CalcableEnvLength>(), 96);
-	}
 
 	#[test]
 	fn test_env_function() {

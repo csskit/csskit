@@ -6,6 +6,7 @@ use crate::{LineWidthOrRepeat, RepeatLineWidth};
 /// ```text,ignore
 /// <auto-line-width-list> = [ <line-width-or-repeat> ]* <auto-repeat-line-width> [ <line-width-or-repeat> ]*
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -29,11 +30,4 @@ impl<'a> Peek<'a> for AutoLineWidthList<'a> {
 }
 
 #[cfg(test)]
-mod tests {
-	use super::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AutoLineWidthList>(), 128);
-	}
-}
+mod tests {}

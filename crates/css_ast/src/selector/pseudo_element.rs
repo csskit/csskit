@@ -2,6 +2,7 @@ use crate::{CssAtomSet, CssDiagnostic, MozPseudoElement, MsPseudoElement, OPseud
 use css_lexer::Kind;
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 macro_rules! apply_pseudo_element {
 	($macro: ident) => {
@@ -32,6 +33,7 @@ macro_rules! apply_pseudo_element {
 
 macro_rules! define_pseudo_element {
 	( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
+		#[node]
 		#[derive(ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
@@ -99,6 +101,7 @@ impl<'a> Parse<'a> for PseudoElement {
 }
 
 pseudo_class!(
+	#[node]
 	#[derive(ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -117,12 +120,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<PseudoElement>(), 44);
-		assert_eq!(std::mem::size_of::<LegacyPseudoElement>(), 28);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <absolute-size> = [ xx-small | x-small | small | medium | large | x-large | xx-large ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <contextual-alt-values> = [ contextual | no-contextual ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

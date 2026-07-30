@@ -5,24 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AnimationTriggerStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<EventTriggerNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<EventTriggerSourceStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<EventTriggerStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerActivationRangeEndStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerActivationRangeStartStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerActivationRangeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerActiveRangeEndStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerActiveRangeStartStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerActiveRangeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerSourceStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineTriggerStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TriggerScopeStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_writes() {
 		// AnimationTriggerStyleValue: none | [ <dashed-ident> <animation-action>+ ]+  #
 		assert_parse!(CssAtomSet::ATOMS, AnimationTriggerStyleValue, "none");

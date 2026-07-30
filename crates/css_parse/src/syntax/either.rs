@@ -1,6 +1,8 @@
 use crate::{NodeMetadata, NodeWithMetadata, Parse, Peek, SemanticEq, ToCursors, ToNumberValue};
 use css_lexer::{Cursor, KindSet, ToSpan};
+use csskit_proc_macro::node;
 
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum Either<Left, Right> {
@@ -113,11 +115,6 @@ mod tests {
 
 	type IdentOrNumber = Either<T![Ident], T![Number]>;
 	type NumberOrDimension = Either<T![Number], T![Dimension]>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<IdentOrNumber>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

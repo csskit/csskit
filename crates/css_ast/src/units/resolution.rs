@@ -8,6 +8,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <resolution> = <dimension-token>
 /// ```
+#[node]
 #[derive(
 	ToCursors, Parse, Peek, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -42,11 +43,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Resolution>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

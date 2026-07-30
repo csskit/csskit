@@ -7,6 +7,7 @@ use crate::{AutoOr, CalcableValue, Length};
 /// rect() = rect( <top>, <right>, <bottom>, <left> )
 /// <top>, <right>, <bottom>, <left> = <length> | auto
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
@@ -37,11 +38,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<RectFunction>(), 168);
-	}
 
 	#[test]
 	fn test_writes() {

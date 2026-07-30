@@ -11,6 +11,7 @@ use crate::{LayerName, MediaQueryList, SupportsCondition, UrlOrString};
 /// <import-conditions>  = [ supports( [ <supports-condition> | <declaration> ] ) ]?
 ///                      <media-query-list>?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -28,6 +29,7 @@ pub struct ImportRule<'a> {
 	pub semicolon: Option<T![;]>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -40,6 +42,7 @@ pub enum ImportLayer<'a> {
 	LayerFunction(ImportLayerFunction<'a>),
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -54,6 +57,7 @@ pub struct ImportLayerFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -72,11 +76,6 @@ pub struct ImportSupportsFunction<'a> {
 mod tests {
 	use super::*;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ImportRule>(), 264);
-	}
 
 	#[test]
 	fn test_writes() {

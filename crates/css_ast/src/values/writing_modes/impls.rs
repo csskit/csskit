@@ -45,16 +45,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<DirectionStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<UnicodeBidiStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<WritingModeStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextOrientationStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<GlyphOrientationVerticalStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextCombineUprightStyleValue>(), 40);
-	}
-
-	#[test]
 	fn test_parse() {
 		assert_parse!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, GlyphOrientationVerticalStyleValue, "0");

@@ -3,6 +3,7 @@ use crate::{types::Ratio, units::Length};
 use css_parse::{Box, discrete_feature, ranged_feature};
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -13,6 +14,7 @@ ranged_feature!(
 );
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -23,6 +25,7 @@ ranged_feature!(
 );
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -33,6 +36,7 @@ ranged_feature!(
 );
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -43,6 +47,7 @@ ranged_feature!(
 );
 
 ranged_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -52,6 +57,7 @@ ranged_feature!(
 	pub enum AspectRatioContainerFeature<'a>{CssAtomSet::AspectRatio, Ratio<'a>}
 );
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -64,6 +70,7 @@ pub enum OrientationContainerFeatureKeyword {
 }
 
 discrete_feature!(
+	#[node]
 	#[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 	#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 	#[derive(csskit_derives::FeatureMetadata)]
@@ -73,6 +80,7 @@ discrete_feature!(
 	pub enum OrientationContainerFeature{CssAtomSet::Orientation, OrientationContainerFeatureKeyword}
 );
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -88,6 +96,7 @@ impl<'a> Peek<'a> for StyleQuery<'a> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen, Kind::Ident]);
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -154,6 +163,7 @@ impl<'a> Parse<'a> for StyleQuery<'a> {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -218,6 +228,7 @@ impl<'a> Parse<'a> for ScrollStateQuery<'a> {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -322,6 +333,7 @@ impl<'a> Parse<'a> for ScrollStateFeature {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -357,6 +369,7 @@ pub enum ScrollableScrollStateFeatureKeyword {
 	Discrete(T![Ident]),
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -378,6 +391,7 @@ pub enum SnappedScrollStateFeatureKeyword {
 	Discrete(T![Ident]),
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -410,19 +424,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<WidthContainerFeature>(), 124);
-		assert_eq!(std::mem::size_of::<HeightContainerFeature>(), 124);
-		assert_eq!(std::mem::size_of::<InlineSizeContainerFeature>(), 124);
-		assert_eq!(std::mem::size_of::<BlockSizeContainerFeature>(), 124);
-		assert_eq!(std::mem::size_of::<AspectRatioContainerFeature>(), 224);
-		assert_eq!(std::mem::size_of::<OrientationContainerFeature>(), 64);
-		assert_eq!(std::mem::size_of::<StyleQuery>(), 40);
-		assert_eq!(std::mem::size_of::<ScrollStateQuery>(), 96);
-		assert_eq!(std::mem::size_of::<ScrollStateFeature>(), 80);
-	}
 
 	#[test]
 	fn test_writes() {

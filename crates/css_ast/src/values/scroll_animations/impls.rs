@@ -5,20 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AnimationRangeEndStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationRangeStartStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<AnimationRangeStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ScrollTimelineAxisStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ScrollTimelineNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ScrollTimelineStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TimelineScopeStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<ViewTimelineAxisStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ViewTimelineInsetStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ViewTimelineNameStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_animation_range_start_writes() {
 		assert_parse!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, AnimationRangeStartStyleValue, "cover");

@@ -7,6 +7,7 @@ mod features;
 pub use features::*;
 
 /// <https://drafts.csswg.org/css-contain-3/#container-rule>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
@@ -27,17 +28,20 @@ impl<'a> QueryableNode for ContainerRule<'a> {
 	const NODE_ID: NodeId = NodeId::ContainerRule;
 }
 
+#[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ContainerRulesBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct ContainerConditionList<'a>(pub CommaSeparated<'a, ContainerCondition<'a>, 1>);
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -72,6 +76,7 @@ impl<'a> Parse<'a> for ContainerCondition<'a> {
 	}
 }
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -140,6 +145,7 @@ impl<'a> FeatureConditionList<'a> for ContainerQuery<'a> {
 
 macro_rules! container_feature {
 	( $($name: ident($typ: ty))+ ) => {
+		#[node]
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -246,14 +252,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContainerRule>(), 176);
-		assert_eq!(std::mem::size_of::<ContainerConditionList>(), 24);
-		assert_eq!(std::mem::size_of::<ContainerCondition>(), 256);
-		assert_eq!(std::mem::size_of::<ContainerQuery>(), 240);
-	}
 
 	#[test]
 	fn test_writes() {

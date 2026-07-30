@@ -19,11 +19,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<BgSize>(), 48);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, BgSize, "cover", BgSize::Cover(_));
 		assert_parse!(CssAtomSet::ATOMS, BgSize, "contain", BgSize::Contain(_));

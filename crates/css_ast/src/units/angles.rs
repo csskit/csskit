@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <angle> = <dimension-token>
 /// ```
+#[node]
 #[derive(
 	IntoCursor, ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -62,6 +63,7 @@ impl Angle {
 	}
 }
 
+#[node]
 #[derive(
 	IntoCursor, ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -74,6 +76,7 @@ pub enum AngleOrZero {
 	Zero(Exact<T![Number], 0>),
 }
 
+#[node]
 #[derive(
 	IntoCursor, ToSpan, SemanticEq, Parse, Peek, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -100,11 +103,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Angle>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {
