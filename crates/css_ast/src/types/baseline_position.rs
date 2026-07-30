@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <baseline-position> = [ first | last ]? && baseline
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

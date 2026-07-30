@@ -1,4 +1,7 @@
-use crate::{CursorSink, DeclarationValue, Parse, Parser, Peek, Result as ParserResult, ToCursors, Cursor, Kind, BangImportant, diagnostics, Vec, IntoIter};
+use crate::{
+	BangImportant, Cursor, CursorSink, DeclarationValue, IntoIter, Kind, Parse, Parser, Peek, Result as ParserResult,
+	ToCursors, Vec, diagnostics,
+};
 
 /// This is a generic type that can be used for AST nodes representing a [Declaration][1], aka "property".
 ///

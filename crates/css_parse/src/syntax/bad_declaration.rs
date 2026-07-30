@@ -2,7 +2,9 @@ use crate::{
 	CursorSink, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, State, T, ToCursors, ToSpan, Vec,
 	syntax::ComponentValue,
 };
+use csskit_proc_macro::node;
 
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct BadDeclaration<'a>(Vec<'a, ComponentValue<'a>>);

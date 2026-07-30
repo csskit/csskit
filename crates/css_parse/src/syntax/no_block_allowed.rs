@@ -1,4 +1,5 @@
 use crate::{CursorSink, Diagnostic, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan};
+use csskit_proc_macro::node;
 
 /// A struct to provide to rules to disallow blocks.
 ///
@@ -9,6 +10,7 @@ use crate::{CursorSink, Diagnostic, KindSet, Parse, Parser, Peek, Result, Semant
 ///
 /// The phantom data allows this type to be compatible with different declaration value and metadata types,
 /// even though it doesn't actually use them (since no block is allowed).
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct NoBlockAllowed<D = (), M = ()> {

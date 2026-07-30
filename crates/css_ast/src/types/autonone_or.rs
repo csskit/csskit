@@ -3,6 +3,7 @@ use crate::CssMetadata;
 use css_parse::NodeWithMetadata;
 use css_parse::token_macros::Ident;
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -49,11 +50,6 @@ mod tests {
 	type AuroNoneOrIdent = AutoNoneOr<T![Ident]>;
 	type AutoNoneOrNumber = AutoNoneOr<T![Number]>;
 	type AutoNoneOrLength = AutoNoneOr<Length>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AuroNoneOrIdent>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

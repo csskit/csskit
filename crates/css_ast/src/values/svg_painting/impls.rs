@@ -5,18 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorInterpolationStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<MarkerStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MarkerEndStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MarkerMidStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<MarkerStartStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<PaintOrderStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<ShapeRenderingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TextRenderingStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, ColorInterpolationStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ColorInterpolationStyleValue, "sRGB");

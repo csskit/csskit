@@ -7,6 +7,7 @@ use css_parse::Either;
 /// ```text,ignore
 /// <track-list> = [ <line-names>? [ <track-size> | <track-repeat> ] ]+ <line-names>?
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -37,6 +38,7 @@ impl<'a> Peek<'a> for TrackList<'a> {
 /// <auto-track-list> = [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>? <auto-repeat>
 ///                     [ <line-names>? [ <fixed-size> | <fixed-repeat> ] ]* <line-names>?
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -71,6 +73,7 @@ impl<'a> Peek<'a> for AutoTrackList<'a> {
 /// ```text,ignore
 /// <explicit-track-list> = [ <line-names>? <track-size> ]+ <line-names>?
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -99,6 +102,7 @@ impl<'a> Peek<'a> for ExplicitTrackList<'a> {
 /// ```text,ignore
 /// <line-name-list> = [ <line-names> | <name-repeat> ]+
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -110,14 +114,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<TrackList>(), 72);
-		assert_eq!(std::mem::size_of::<AutoTrackList>(), 272);
-		assert_eq!(std::mem::size_of::<ExplicitTrackList>(), 72);
-		assert_eq!(std::mem::size_of::<LineNameList>(), 24);
-	}
 
 	#[test]
 	fn test_writes_track_list() {

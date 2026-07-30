@@ -66,6 +66,7 @@ macro_rules! apply_lengths {
 
 macro_rules! define_length {
 	( $($name: ident),+ $(,)* ) => {
+		#[node]
 		#[derive(Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -137,6 +138,7 @@ impl ToNormalisedValue for Length {
 	}
 }
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -173,6 +175,7 @@ impl ToNormalisedValue for LengthPercentage {
 	}
 }
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -203,6 +206,7 @@ impl ToNumberValue for LengthPercentageNumber {
 	}
 }
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -235,6 +239,7 @@ impl ToNormalisedValue for LengthPercentageOrFlex {
 	}
 }
 
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -273,13 +278,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Length>(), 16);
-		assert_eq!(std::mem::size_of::<LengthPercentage>(), 16);
-		assert_eq!(std::mem::size_of::<NumberLength>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

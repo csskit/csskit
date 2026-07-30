@@ -36,6 +36,7 @@ visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.
 # Memory
 allocator-api2 = { version = "0.2.21" }  # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
 bumpalo = { version = "3.20.3" }
+inventory = { version = "0.3.24" }
 
 # Data structure libraries/helpers
 bitmask-enum = { version = "2.2.5" }

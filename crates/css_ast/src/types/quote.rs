@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <quote> = open-quote | close-quote | no-open-quote | no-close-quote
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -144,11 +144,6 @@ mod tests {
 	type CaseD = Optionals![Number, Ident, String, Ident, Dimension];
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Optionals2<Ident, Number>>(), 32);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(EmptyAtomSet::ATOMS, CaseA, "123 foo", Optionals2(Some(_), Some(_)));
 		assert_parse!(EmptyAtomSet::ATOMS, CaseA, "foo 123", Optionals2(Some(_), Some(_)));

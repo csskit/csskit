@@ -5,15 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<BookmarkLevelStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<BookmarkLabelStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<BookmarkStateStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ContentStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<QuotesStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, BookmarkLevelStyleValue, "1");
 		assert_parse!(CssAtomSet::ATOMS, BookmarkStateStyleValue, "open");

@@ -1,6 +1,7 @@
 use crate::{AssociatedWhitespaceRules, CommentStyle, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan, Token};
 
 /// Wraps [Token] with a [SourceOffset], allows it to reason about the character data of the source text.
+#[repr(C)]
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Cursor(SourceOffset, Token);
 

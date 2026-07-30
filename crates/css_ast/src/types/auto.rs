@@ -4,6 +4,7 @@ use super::prelude::*;
 ///
 /// Referenced by the proc macro codegen when `auto?` appears as an optional
 /// keyword prefix in a sequence grammar, e.g. `auto? [ none | <length> ]`.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]

@@ -6,6 +6,7 @@ use std::{fmt::Display, hash::Hash, marker::PhantomData, ops::Add};
 /// Represents a range of text within a document, as a Start and End offset.
 ///
 /// Effectively two [SourceOffsets][SourceOffset] in one struct.
+#[repr(C)]
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub struct Span {

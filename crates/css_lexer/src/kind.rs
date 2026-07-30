@@ -10,6 +10,7 @@ use crate::KindSet;
 /// Maintaining parity with the spec makes it easier to reason about logic around the parser, despite it being possible to
 /// group a bunch of these tokens into a single "delimiter" token. These Delim kinds, however, set the upper bit which
 /// means they cannot be inserted directly into a token. Instead a token.
+#[repr(u8)]
 #[derive(Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum Kind {
 	// Trivias (mask as 0b0_00XX)

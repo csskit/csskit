@@ -1,9 +1,12 @@
+use csskit_proc_macro::node;
+
 use crate::CssAtomSet;
 use css_parse::{Cursor, KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::*;
 
 use super::NamespacePrefix;
 
+#[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -51,6 +54,7 @@ impl<'a> Parse<'a> for Attribute {
 	}
 }
 
+#[node]
 #[derive(Parse, ToSpan, Peek, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -64,6 +68,7 @@ pub enum AttributeOperator {
 	Contains(#[semantic_eq(skip)] T![*=]),
 }
 
+#[node]
 #[derive(
 	Peek, Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -75,6 +80,7 @@ pub enum AttributeValue {
 	Ident(T![Ident]),
 }
 
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -100,14 +106,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Attribute>(), 128);
-		assert_eq!(std::mem::size_of::<AttributeOperator>(), 28);
-		assert_eq!(std::mem::size_of::<AttributeModifier>(), 16);
-		assert_eq!(std::mem::size_of::<AttributeValue>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

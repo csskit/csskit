@@ -2,6 +2,7 @@ use crate::{
 	CursorSink, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors,
 	ToSpan, Vec, token_macros,
 };
+use csskit_proc_macro::node;
 
 /// A struct representing an AST node block that only accepts child "Rules". This is defined as:
 ///
@@ -19,6 +20,7 @@ use crate::{
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-at-rule-list
 /// [2]: https://drafts.csswg.org/css-syntax-3/#typedef-qualified-rule-list
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(
 	feature = "serde",

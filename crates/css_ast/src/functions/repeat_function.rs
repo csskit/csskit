@@ -8,6 +8,7 @@ use crate::{LineNames, NonEmpty, PositiveNonZeroInt};
 /// <repeat-line-width>      = repeat( [ <integer [1,∞]> ] , [ <line-width> ]+ )
 /// <auto-repeat-line-width> = repeat( auto , [ <line-width> ]+ )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -41,6 +42,7 @@ impl<'a, Items, Count: Peek<'a>> Peek<'a> for RepeatFunction<Items, Count> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -50,6 +52,7 @@ pub struct NamedRepeatItems<'a, Item> {
 	pub items: NonEmpty<Vec<'a, (Item, Option<LineNames<'a>>)>>,
 }
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

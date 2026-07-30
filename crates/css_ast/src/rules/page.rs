@@ -5,6 +5,7 @@ use css_parse::RuleVariants;
 /// <https://drafts.csswg.org/cssom-1/#csspagerule>
 ///
 /// <https://drafts.csswg.org/css-page-3/#at-page-rule>
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -20,11 +21,13 @@ pub struct PageRule<'a> {
 	pub block: PageRuleBlock<'a>,
 }
 
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PageSelectorList<'a>(pub CommaSeparated<'a, PageSelector<'a>>);
 
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -82,6 +85,7 @@ impl ToSpecificity for PagePseudoClass {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -89,6 +93,7 @@ impl ToSpecificity for PagePseudoClass {
 pub struct PageRuleBlock<'a>(#[metadata(delegate)] Block<'a, StyleValue<'a>, MarginRule<'a>, CssMetadata>);
 
 /// <https://drafts.csswg.org/cssom-1/#cssmarginrule>
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -182,6 +187,7 @@ impl<'a> RuleVariants<'a> for MarginRule<'a> {
 	type Metadata = CssMetadata;
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -192,17 +198,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<PageRule>(), 176);
-		assert_eq!(std::mem::size_of::<PageSelectorList>(), 24);
-		assert_eq!(std::mem::size_of::<PageSelector>(), 40);
-		assert_eq!(std::mem::size_of::<PagePseudoClass>(), 28);
-		assert_eq!(std::mem::size_of::<PageRuleBlock>(), 128);
-		assert_eq!(std::mem::size_of::<MarginRule>(), 128);
-		assert_eq!(std::mem::size_of::<MarginRuleBlock>(), 112);
-	}
 
 	#[test]
 	fn test_writes() {

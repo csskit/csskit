@@ -25,20 +25,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransformStyleValue>(), 32);
-		// assert_eq!(std::mem::size_of::<TransformOriginStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TransformBoxStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<TranslateStyleValue>(), 72);
-		// assert_eq!(std::mem::size_of::<RotateStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ScaleStyleValue>(), 72);
-		assert_eq!(std::mem::size_of::<TransformStyleStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<PerspectiveStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<PerspectiveOriginStyleValue>(), 88);
-		assert_eq!(std::mem::size_of::<BackfaceVisibilityStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, TransformStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, TransformStyleValue, "scale(1)");

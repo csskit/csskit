@@ -5,6 +5,7 @@ use crate::visit::{NodeId, QueryableNode};
 use css_parse::NoBlockAllowed;
 
 /// <https://drafts.csswg.org/css-animations/#at-ruledef-keyframes>
+#[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
@@ -32,6 +33,7 @@ impl<'a> QueryableNode for KeyframesRule<'a> {
 	}
 }
 
+#[node]
 #[derive(Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -64,12 +66,14 @@ impl<'a> Parse<'a> for KeyframesName {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct KeyframesRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -79,11 +83,13 @@ pub struct Keyframe<'a>(
 	QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed<StyleValue<'a>, CssMetadata>, CssMetadata>,
 );
 
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 pub struct KeyframeSelectors<'a>(pub CommaSeparated<'a, KeyframeSelector>);
 
+#[node]
 #[derive(
 	Peek, Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -103,14 +109,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<KeyframesRule>(), 144);
-		assert_eq!(std::mem::size_of::<KeyframeSelector>(), 16);
-		assert_eq!(std::mem::size_of::<KeyframesName>(), 16);
-		assert_eq!(std::mem::size_of::<KeyframesRuleBlock>(), 112);
-	}
 
 	#[test]
 	fn test_writes() {

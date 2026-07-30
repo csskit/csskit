@@ -2,7 +2,9 @@ use crate::{
 	BadDeclaration, Block, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata, NodeWithMetadata,
 	Parse, Parser, Peek, Result, SemanticEq, Span, State, T, ToCursors, ToSpan,
 };
+use csskit_proc_macro::node;
 
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(
@@ -251,11 +253,6 @@ mod tests {
 	impl<'a> crate::RuleVariants<'a> for Rule {
 		type DeclarationValue = Decl;
 		type Metadata = ();
-	}
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<QualifiedRule<T![Ident], Decl, Rule, ()>>(), 96);
 	}
 
 	#[test]

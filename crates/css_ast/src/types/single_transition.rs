@@ -7,6 +7,7 @@ use css_parse::parse_optionals;
 /// ```text,ignore
 /// <single-transition> = [ none | <single-transition-property> ] || <time> || <easing-function> || <time> || <transition-behavior-value>
 /// ```
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -54,11 +55,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	type NoneOrSingleTransitionProperty = NoneOr<SingleTransitionProperty>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<SingleTransition>(), 248);
-	}
 
 	#[test]
 	fn test_writes() {

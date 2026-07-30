@@ -101,11 +101,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<GenericFontFamily>(), 40);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, GenericFontFamily, "sans-serif");
 		assert_parse!(CssAtomSet::ATOMS, GenericFontFamily, "ui-serif");

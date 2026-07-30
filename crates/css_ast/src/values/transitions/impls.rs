@@ -5,16 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<TransitionPropertyStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TransitionDurationStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TransitionTimingFunctionStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TransitionDelayStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TransitionStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<TransitionBehaviorStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_transition_delay() {
 		assert_parse!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "-5ms");
 		assert_parse!(CssAtomSet::ATOMS, TransitionDelayStyleValue, "0s");

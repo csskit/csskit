@@ -5,15 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<DisplayStyleValue>(), 56);
-		assert_eq!(std::mem::size_of::<OrderStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ReadingFlowStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ReadingOrderStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<VisibilityStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		// https://developer.mozilla.org/en-US/docs/Web/CSS/Reference/Properties/display#syntax
 		assert_parse!(CssAtomSet::ATOMS, DisplayStyleValue, "block");

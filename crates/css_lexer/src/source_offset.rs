@@ -3,6 +3,7 @@ use crate::{Cursor, Span, Token};
 /// Represents a position in the underlying source.
 ///
 /// This is just a [u32] but wrapped in a newtype struct to help differentiate it from other [u32s][u32].
+#[repr(transparent)]
 #[derive(Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 pub struct SourceOffset(pub u32);

@@ -14,11 +14,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AutoRepeat>(), 128);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, AutoRepeat, "repeat(auto-fill,10px)");
 		assert_parse!(CssAtomSet::ATOMS, AutoRepeat, "repeat(auto-fit,[a] 10px)");

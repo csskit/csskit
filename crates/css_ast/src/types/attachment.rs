@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <attachment> = scroll | fixed | local
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

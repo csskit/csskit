@@ -6,6 +6,7 @@ use crate::{CSSInt, CalcableValue, NonNegative, OpentypeTag};
 /// ```text,ignore
 /// <feature-tag-value> = <opentype-tag> [ <integer [0,∞]> | on | off ]?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -13,6 +14,7 @@ use crate::{CSSInt, CalcableValue, NonNegative, OpentypeTag};
 pub struct FeatureTagValue<'a>(pub OpentypeTag, pub Option<FeatureTagToggle<'a>>);
 
 /// The optional value for a feature tag: `<integer [0,∞]> | on | off`
+#[node]
 #[derive(Parse, Peek, ToSpan, SemanticEq, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -29,11 +31,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FeatureTagValue>(), 40);
-	}
 
 	#[test]
 	fn test_parses() {

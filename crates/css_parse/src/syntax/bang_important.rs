@@ -1,6 +1,7 @@
 use crate::{
 	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan,
 };
+use csskit_proc_macro::node;
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
 /// the value `important`. [CSS defines this as]:
@@ -20,6 +21,7 @@ use crate::{
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#!important-diagram
 ///
+#[node]
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct BangImportant {

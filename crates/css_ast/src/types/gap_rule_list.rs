@@ -9,6 +9,7 @@ use css_parse::{CommaSeparated, Optionals3};
 /// ```text,ignore
 /// <gap-rule-list> = <gap-rule-or-repeat>#
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -18,6 +19,7 @@ pub struct GapRuleList<'a>(pub CommaSeparated<'a, GapRuleOrRepeat<'a>>);
 /// ```text,ignore
 /// <gap-rule-or-repeat> = <gap-rule> | <gap-repeat-rule>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -30,6 +32,7 @@ pub enum GapRuleOrRepeat<'a> {
 /// ```text,ignore
 /// <gap-repeat-rule> = repeat( <integer [1,∞]> , <gap-rule># )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -59,14 +62,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<GapRuleList>(), 24);
-		assert_eq!(std::mem::size_of::<GapRuleOrRepeat>(), 80);
-		assert_eq!(std::mem::size_of::<GapRepeatRule>(), 80);
-		assert_eq!(std::mem::size_of::<GapRule>(), 64);
-	}
 
 	#[test]
 	fn test_writes() {

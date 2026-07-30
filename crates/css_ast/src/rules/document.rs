@@ -1,6 +1,7 @@
 use super::prelude::*;
 
 /// <https://www.w3.org/TR/2012/WD-css3-conditional-20120911/#at-document>
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -15,11 +16,13 @@ pub struct DocumentRule<'a> {
 	pub block: DocumentRuleBlock<'a>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -38,6 +41,7 @@ pub enum DocumentMatcher {
 	Regexp(T![Function], T![String], #[semantic_eq(skip)] T![')']),
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
@@ -49,13 +53,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<DocumentRule>(), 160);
-		assert_eq!(std::mem::size_of::<DocumentMatcher>(), 40);
-		assert_eq!(std::mem::size_of::<DocumentRuleBlock>(), 112);
-	}
 
 	#[test]
 	fn test_writes() {

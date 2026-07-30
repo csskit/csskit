@@ -37,11 +37,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<HackMediaFeature>(), 60);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, HackMediaFeature, "(min-width:0\\0)");
 	}

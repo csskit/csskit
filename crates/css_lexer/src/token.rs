@@ -276,6 +276,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// they probably should split it out, but we have a whole 32 bits to store the length so we may as well use it...
 ///
 /// [6]: https://developer.mozilla.org/en-US/docs/Web/HTTP/Basics_of_HTTP/Data_URLs#common_problems
+#[repr(C)]
 #[derive(Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct Token(u32, u32);
 

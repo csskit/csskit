@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <visual-box> = content-box | padding-box | border-box
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

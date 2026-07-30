@@ -19,25 +19,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<WidthStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<HeightStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<MinWidthStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<MinHeightStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<MaxWidthStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<MaxHeightStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<BoxSizingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<AspectRatioStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicBlockSizeStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicHeightStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicInlineSizeStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicSizeStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<ContainIntrinsicWidthStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<FrameSizingStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<MinIntrinsicSizingStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_contain_intrinsic() {
 		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, ContainIntrinsicWidthStyleValue, "100px");

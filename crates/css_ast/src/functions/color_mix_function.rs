@@ -6,6 +6,7 @@ use crate::{CalcableValue, Percentage};
 /// ```text,ignore
 /// color-mix() = color-mix( <color-interpolation-method>? , [ <color> && <percentage [0,100]>? ]# )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
@@ -29,6 +30,7 @@ pub struct ColorMixFunction<'a> {
 /// ```text,ignore
 /// <color-interpolation-method> = in [ <rectangular-color-space> | <polar-color-space> <hue-interpolation-method>? ]
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -44,6 +46,7 @@ pub struct ColorInterpolationMethod {
 /// ```text,ignore
 /// <rectangular-color-space> | <polar-color-space> <hue-interpolation-method>?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -59,6 +62,7 @@ pub enum InterpolationColorSpace {
 /// <rectangular-color-space> = srgb | srgb-linear | display-p3 | a98-rgb |
 ///     prophoto-rgb | rec2020 | lab | oklab | xyz | xyz-d50 | xyz-d65
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -95,6 +99,7 @@ pub enum RectangularColorSpace {
 /// ```text,ignore
 /// <polar-color-space> = hsl | hwb | lch | oklch
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -117,6 +122,7 @@ pub enum PolarColorSpace {
 /// ```text,ignore
 /// <hue-interpolation-method> = [ shorter | longer | increasing | decreasing ] hue
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -132,6 +138,7 @@ pub struct HueInterpolationMethod {
 /// ```text,ignore
 /// shorter | longer | increasing | decreasing
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -156,6 +163,7 @@ pub enum HueInterpolationDirection {
 /// ```
 ///
 /// The color and percentage can appear in either order.
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -435,18 +443,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorMixFunction>(), 120);
-		assert_eq!(std::mem::size_of::<ColorInterpolationMethod>(), 56);
-		assert_eq!(std::mem::size_of::<InterpolationColorSpace>(), 44);
-		assert_eq!(std::mem::size_of::<RectangularColorSpace>(), 16);
-		assert_eq!(std::mem::size_of::<PolarColorSpace>(), 16);
-		assert_eq!(std::mem::size_of::<HueInterpolationMethod>(), 28);
-		assert_eq!(std::mem::size_of::<HueInterpolationDirection>(), 16);
-		assert_eq!(std::mem::size_of::<ColorMixPart<'_>>(), 48);
-	}
 
 	#[test]
 	fn test_writes() {

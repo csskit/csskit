@@ -6,6 +6,7 @@ use crate::ShapeBox;
 /// ```text,ignore
 /// <geometry-box> = <shape-box> | fill-box | stroke-box | view-box
 /// ```
+#[node]
 #[derive(Parse, Peek, SemanticEq, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]

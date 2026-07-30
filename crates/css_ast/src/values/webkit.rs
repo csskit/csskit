@@ -1274,11 +1274,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<WebkitFilterStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitFilterStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, WebkitFilterStyleValue, "blur(4px)");
@@ -1290,14 +1285,6 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitFilterStyleValue, "invalid");
-	}
-
-	#[test]
-	fn size_test_transition() {
-		assert_eq!(
-			std::mem::size_of::<WebkitTransitionStyleValue>(),
-			std::mem::size_of::<crate::values::TransitionStyleValue>()
-		);
 	}
 
 	#[test]
@@ -1313,11 +1300,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_flex() {
-		assert_eq!(std::mem::size_of::<WebkitFlexStyleValue>(), std::mem::size_of::<crate::values::FlexStyleValue>());
-	}
-
-	#[test]
 	fn test_flex_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitFlexStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, WebkitFlexStyleValue, "1");
@@ -1330,11 +1312,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_order() {
-		assert_eq!(std::mem::size_of::<WebkitOrderStyleValue>(), std::mem::size_of::<crate::values::OrderStyleValue>());
-	}
-
-	#[test]
 	fn test_order_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitOrderStyleValue, "0");
 		assert_parse!(CssAtomSet::ATOMS, WebkitOrderStyleValue, "-1");
@@ -1344,11 +1321,6 @@ mod tests {
 	#[test]
 	fn test_order_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitOrderStyleValue, "none");
-	}
-
-	#[test]
-	fn size_test_appearance() {
-		assert_eq!(std::mem::size_of::<WebkitAppearanceStyleValue>(), 32);
 	}
 
 	#[test]
@@ -1365,11 +1337,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_transform() {
-		assert_eq!(std::mem::size_of::<WebkitTransformStyleValue>(), 32);
-	}
-
-	#[test]
 	fn test_transform_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitTransformStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, WebkitTransformStyleValue, "rotate(45deg)");
@@ -1379,11 +1346,6 @@ mod tests {
 	#[test]
 	fn test_transform_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitTransformStyleValue, "invalid");
-	}
-
-	#[test]
-	fn size_test_font_smoothing() {
-		assert_eq!(std::mem::size_of::<WebkitFontSmoothingStyleValue>(), 16);
 	}
 
 	#[test]
@@ -1400,11 +1362,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_text_size_adjust() {
-		assert_eq!(std::mem::size_of::<WebkitTextSizeAdjustStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_text_size_adjust_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitTextSizeAdjustStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, WebkitTextSizeAdjustStyleValue, "none");
@@ -1417,14 +1374,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_animation_delay() {
-		assert_eq!(
-			std::mem::size_of::<WebkitAnimationDelayStyleValue>(),
-			std::mem::size_of::<crate::values::AnimationDelayStyleValue>()
-		);
-	}
-
-	#[test]
 	fn test_animation_delay_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitAnimationDelayStyleValue, "0s");
 		assert_parse!(CssAtomSet::ATOMS, WebkitAnimationDelayStyleValue, "0.5s, 1s");
@@ -1433,14 +1382,6 @@ mod tests {
 	#[test]
 	fn test_animation_delay_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationDelayStyleValue, "invalid");
-	}
-
-	#[test]
-	fn size_test_animation_duration() {
-		assert_eq!(
-			std::mem::size_of::<WebkitAnimationDurationStyleValue>(),
-			std::mem::size_of::<crate::values::AnimationDurationStyleValue>()
-		);
 	}
 
 	#[test]
@@ -1456,14 +1397,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_animation_fill_mode() {
-		assert_eq!(
-			std::mem::size_of::<WebkitAnimationFillModeStyleValue>(),
-			std::mem::size_of::<crate::values::AnimationFillModeStyleValue>()
-		);
-	}
-
-	#[test]
 	fn test_animation_fill_mode_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitAnimationFillModeStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, WebkitAnimationFillModeStyleValue, "forwards");
@@ -1473,14 +1406,6 @@ mod tests {
 	#[test]
 	fn test_animation_fill_mode_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationFillModeStyleValue, "invalid");
-	}
-
-	#[test]
-	fn size_test_animation_iteration_count() {
-		assert_eq!(
-			std::mem::size_of::<WebkitAnimationIterationCountStyleValue>(),
-			std::mem::size_of::<crate::values::AnimationIterationCountStyleValue>()
-		);
 	}
 
 	#[test]
@@ -1496,14 +1421,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_animation_name() {
-		assert_eq!(
-			std::mem::size_of::<WebkitAnimationNameStyleValue>(),
-			std::mem::size_of::<crate::values::AnimationNameStyleValue>()
-		);
-	}
-
-	#[test]
 	fn test_animation_name_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "my-animation");
@@ -1513,14 +1430,6 @@ mod tests {
 	fn test_animation_name_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitAnimationNameStyleValue, "1px");
-	}
-
-	#[test]
-	fn size_test_animation_timing_function() {
-		assert_eq!(
-			std::mem::size_of::<WebkitAnimationTimingFunctionStyleValue>(),
-			std::mem::size_of::<crate::values::AnimationTimingFunctionStyleValue>()
-		);
 	}
 
 	#[test]
@@ -1537,14 +1446,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_backface_visibility() {
-		assert_eq!(
-			std::mem::size_of::<WebkitBackfaceVisibilityStyleValue>(),
-			std::mem::size_of::<crate::values::BackfaceVisibilityStyleValue>()
-		);
-	}
-
-	#[test]
 	fn test_backface_visibility_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitBackfaceVisibilityStyleValue, "visible");
 		assert_parse!(CssAtomSet::ATOMS, WebkitBackfaceVisibilityStyleValue, "hidden");
@@ -1553,14 +1454,6 @@ mod tests {
 	#[test]
 	fn test_backface_visibility_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitBackfaceVisibilityStyleValue, "invalid");
-	}
-
-	#[test]
-	fn size_test_tap_highlight_color() {
-		assert_eq!(
-			std::mem::size_of::<WebkitTapHighlightColorStyleValue>(),
-			std::mem::size_of::<crate::values::BackgroundColorStyleValue>()
-		);
 	}
 
 	#[test]
@@ -1576,14 +1469,6 @@ mod tests {
 	}
 
 	#[test]
-	fn size_test_transition_duration() {
-		assert_eq!(
-			std::mem::size_of::<WebkitTransitionDurationStyleValue>(),
-			std::mem::size_of::<crate::values::TransitionDurationStyleValue>()
-		);
-	}
-
-	#[test]
 	fn test_transition_duration_parses() {
 		assert_parse!(CssAtomSet::ATOMS, WebkitTransitionDurationStyleValue, "0s");
 		assert_parse!(CssAtomSet::ATOMS, WebkitTransitionDurationStyleValue, "0.3s");
@@ -1593,14 +1478,6 @@ mod tests {
 	#[test]
 	fn test_transition_duration_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, WebkitTransitionDurationStyleValue, "invalid");
-	}
-
-	#[test]
-	fn size_test_transition_timing_function() {
-		assert_eq!(
-			std::mem::size_of::<WebkitTransitionTimingFunctionStyleValue>(),
-			std::mem::size_of::<crate::values::TransitionTimingFunctionStyleValue>()
-		);
 	}
 
 	#[test]

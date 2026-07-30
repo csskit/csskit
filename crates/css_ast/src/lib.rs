@@ -4,6 +4,8 @@ mod constraints;
 mod css_atom_set;
 mod diagnostics;
 mod functions;
+#[cfg(test)]
+mod layout_test;
 mod metadata;
 mod properties;
 mod property_atoms;
@@ -41,6 +43,7 @@ pub use values::*;
 pub use visit::*;
 
 use crate::diagnostics::CssDiagnostic;
+use csskit_proc_macro::node;
 
 use css_parse::{
 	Cursor, CursorSink, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult,
@@ -48,6 +51,7 @@ use css_parse::{
 };
 
 // TODO! - delete this when we're done ;)
+#[node]
 #[derive(Default, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]

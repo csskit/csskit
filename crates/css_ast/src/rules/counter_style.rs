@@ -3,9 +3,10 @@ use super::prelude::*;
 use crate::visit::{NodeId, QueryableNode};
 use crate::{Inherits, PropertyGroup, Todo};
 use csskit_derives::*;
-use csskit_proc_macro::syntax;
+use csskit_proc_macro::{node, syntax};
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#the-counter-style-rule>
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit, queryable(skip))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -32,6 +33,7 @@ impl<'a> QueryableNode for CounterStyleRule<'a> {
 	}
 }
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -40,6 +42,7 @@ impl<'a> QueryableNode for CounterStyleRule<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CounterStyleName(T![Ident]);
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -48,6 +51,7 @@ pub struct CounterStyleRuleBlock<'a>(
 	#[metadata(delegate)] DeclarationList<'a, CounterStyleRuleStyleValue<'a>, CssMetadata>,
 );
 
+#[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -133,6 +137,7 @@ impl<'a> DeclarationValue<'a, CssMetadata> for CounterStyleRuleStyleValue<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct AdditiveSymbolsStyleValue<'a>;
 
+#[node]
 #[derive(
 	Peek, Parse, ToCursors, ToSpan, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -226,26 +231,6 @@ pub enum SystemStyleValue<'a> {}
 mod tests {
 	use super::*;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<CounterStyleRule>(), 144);
-		assert_eq!(std::mem::size_of::<CounterStyleName>(), 12);
-		assert_eq!(std::mem::size_of::<CounterStyleRuleBlock>(), 112);
-		assert_eq!(std::mem::size_of::<CounterStyleRuleStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<AdditiveSymbolsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<FallbackStyleValue>(), 12);
-		assert_eq!(std::mem::size_of::<NegativeStyleValue>(), 80);
-		assert_eq!(std::mem::size_of::<PadStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<PrefixStyleValue>(), 40);
-		// assert_eq!(std::mem::size_of::<RangeStyleValue>(), 1);
-		assert_eq!(std::mem::size_of::<SpeakAsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<SuffixStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<SymbolsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<SystemStyleValue>(), 40);
-		assert_eq!(std::mem::size_of::<SymbolsStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<SystemStyleValue>(), 40);
-	}
 
 	#[test]
 	fn test_writes() {

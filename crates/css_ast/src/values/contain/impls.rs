@@ -5,12 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ContentVisibilityStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ContainStyleValue>(), 68);
-	}
-
-	#[test]
 	fn test_content_visibility() {
 		assert_parse!(CssAtomSet::ATOMS, ContentVisibilityStyleValue, "visible");
 		assert_parse!(CssAtomSet::ATOMS, ContentVisibilityStyleValue, "hidden");

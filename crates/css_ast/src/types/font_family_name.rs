@@ -19,11 +19,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FontFamilyName>(), 32);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, FontFamilyName, "New Century Schoolbook");
 	}

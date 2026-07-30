@@ -5,17 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FlexDirectionStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<FlexWrapStyleValue>(), 36);
-		assert_eq!(std::mem::size_of::<FlexFlowStyleValue>(), 52);
-		assert_eq!(std::mem::size_of::<FlexStyleValue>(), 96);
-		assert_eq!(std::mem::size_of::<FlexGrowStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<FlexShrinkStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<FlexBasisStyleValue>(), 48);
-	}
-
-	#[test]
 	fn test_flex_wrap_writes() {
 		assert_parse!(CssAtomSet::ATOMS, FlexWrapStyleValue, "nowrap");
 		assert_parse!(CssAtomSet::ATOMS, FlexWrapStyleValue, "wrap");

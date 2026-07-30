@@ -8,6 +8,7 @@ use css_parse::{
 	ToNormalisedValue, ToNumberValue,
 };
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 /// Classifies a function atom as an arbitrary substitution function.
 #[inline]
@@ -43,6 +44,7 @@ pub(crate) use impl_value_slot_parse;
 /// (`var()`, `env()`, `attr()`, `if()`, `first-valid()`), but **not** typed math functions.
 ///
 /// <https://drafts.csswg.org/css-values-5/#arbitrary-substitution-function>
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -59,6 +61,7 @@ impl_value_slot_parse!(Value, SubstitutionFunction, T);
 ///
 /// Fallbacks recurse into the slot's own type (`Value<T>`), preserving maximal type information.
 /// Parse/Peek are derived: each variant is atom-dispatched by the leading function name.
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -77,6 +80,7 @@ pub enum SubstitutionFunction<'a, T> {
 /// `<time>`, `<angle>`, `<frequency>`, `<flex>`, `<alpha-value>`, etc.
 ///
 /// Structurally identical to [`Value`] except [`CalcableSubstitutionFunction`] adds a `Math` variant.
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -95,6 +99,7 @@ impl_value_slot_parse!(CalcableValue, CalcableSubstitutionFunction, T);
 /// trigonometric/exponential functions, and `abs()`/`sign()` (see [`MathFunction`]). It's
 /// parametrized by the same `T` as the surrounding [`CalcableValue`], since most of these
 /// functions are "type-transparent" (their arguments and result share `T`'s type).
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
@@ -199,11 +204,6 @@ mod tests {
 
 	type ValueColor<'a> = Value<'a, Color<'a>>;
 	type CalcLength<'a> = CalcableValue<'a, Length>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<CalcLength>(), 24);
-	}
 
 	#[test]
 	fn value_literal() {

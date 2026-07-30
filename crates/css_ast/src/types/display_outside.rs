@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <display-outside>  = block | inline | run-in
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

@@ -1,6 +1,7 @@
 use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-animations-2/#typedef-animation-action>
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

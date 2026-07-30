@@ -1,6 +1,7 @@
 use super::prelude::*;
 
 /// <https://drafts.csswg.org/css-cascade-5/#layering>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -19,11 +20,13 @@ pub struct LayerRule<'a> {
 	pub semicolon: Option<T![;]>,
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -49,6 +52,7 @@ impl<'a> Parse<'a> for LayerName<'a> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -60,14 +64,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<LayerRule>(), 192);
-		assert_eq!(std::mem::size_of::<LayerNameList>(), 24);
-		assert_eq!(std::mem::size_of::<LayerName>(), 40);
-		assert_eq!(std::mem::size_of::<LayerRuleBlock>(), 128);
-	}
 
 	#[test]
 	fn test_writes() {

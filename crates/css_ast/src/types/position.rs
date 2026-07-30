@@ -6,6 +6,7 @@ use crate::{CalcableValue, LengthPercentage};
 /// ```text,ignore
 /// <position> = <position-one> | <position-two> | <position-four>
 /// ```
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -48,6 +49,7 @@ impl<'a> Parse<'a> for Position<'a> {
 }
 
 /// `at <position>`, as used by e.g. `circle()`/`ellipse()`/gradients.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -69,6 +71,7 @@ pub struct AtPosition<'a> {
 ///   <length-percentage>
 /// ]
 /// ```
+#[node]
 #[derive(Parse, Peek, ToSpan, SemanticEq, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -213,6 +216,7 @@ impl<'a> PositionOne<'a> {
 /// ```
 ///
 /// All forms normalise to (primary-axis, secondary-axis) order in the AST.
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -298,6 +302,7 @@ impl<'a> PositionTwo<'a> {
 /// ```
 ///
 /// All forms stored with the first keyword-axis pair first.
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -379,6 +384,7 @@ impl<'a> PositionFour<'a> {
 /// Horizontal axis keywords and `<length-percentage>`.
 ///
 /// `left | center | right | x-start | x-end | <length-percentage>`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -400,6 +406,7 @@ pub enum PositionHorizontal<'a> {
 /// Vertical axis keywords and `<length-percentage>`.
 ///
 /// `top | center | bottom | y-start | y-end | <length-percentage>`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -421,6 +428,7 @@ pub enum PositionVertical<'a> {
 /// Block axis keywords (flow-relative).
 ///
 /// `block-start | block-end | center`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -437,6 +445,7 @@ pub enum PositionBlockAxis {
 /// Inline axis keywords (flow-relative).
 ///
 /// `inline-start | inline-end | center`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -456,6 +465,7 @@ pub enum PositionInlineAxis {
 ///
 /// When used in a two-value position, the first represents the block axis and
 /// the second the inline axis.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -470,6 +480,7 @@ pub enum PositionLogical {
 /// Horizontal edge keywords without `<length-percentage>` (for four-value syntax).
 ///
 /// `left | right | x-start | x-end`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -488,6 +499,7 @@ pub enum PositionHorizontalKeyword {
 /// Vertical edge keywords without `<length-percentage>` (for four-value syntax).
 ///
 /// `top | bottom | y-start | y-end`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -506,6 +518,7 @@ pub enum PositionVerticalKeyword {
 /// Block axis edge keywords without `center` (for four-value syntax).
 ///
 /// `block-start | block-end`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -520,6 +533,7 @@ pub enum PositionBlockAxisKeyword {
 /// Inline axis edge keywords without `center` (for four-value syntax).
 ///
 /// `inline-start | inline-end`
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -536,11 +550,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Position<'_>>(), 88);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-direction> = normal | reverse | alternate | alternate-reverse
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

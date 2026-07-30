@@ -18,13 +18,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<GapAutoRuleList>(), std::mem::size_of::<GapRuleList>());
-		assert_eq!(std::mem::size_of::<GapAutoRuleListItem>(), std::mem::size_of::<GapRuleOrRepeat>());
-		assert_eq!(std::mem::size_of::<GapAutoRepeatRule>(), std::mem::size_of::<GapRepeatRule>());
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, GapAutoRuleList, "repeat(auto, 1px solid red)");
 		assert_parse!(CssAtomSet::ATOMS, GapAutoRuleList, "1px solid red, repeat(auto, 2px dashed green)");

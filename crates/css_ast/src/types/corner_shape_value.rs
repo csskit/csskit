@@ -19,11 +19,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<CornerShapeValue>(), 48);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, CornerShapeValue, "square", CornerShapeValue::Square(_));
 		assert_parse!(CssAtomSet::ATOMS, CornerShapeValue, "squircle", CornerShapeValue::Squircle(_));

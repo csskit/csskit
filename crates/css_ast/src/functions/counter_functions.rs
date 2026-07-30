@@ -6,6 +6,7 @@ use crate::types::CounterStyle;
 /// ```text,ignore
 /// <counter()>  =  counter( <counter-name>, <counter-style>? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -18,6 +19,7 @@ pub struct CounterFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CounterFunctionParams<'a>(T![Ident], #[semantic_eq(skip)] Option<T![,]>, Option<CounterStyle<'a>>);
@@ -27,6 +29,7 @@ pub struct CounterFunctionParams<'a>(T![Ident], #[semantic_eq(skip)] Option<T![,
 /// ```text,ignore
 /// <counters()> = counters( <counter-name>, <string>, <counter-style>? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -39,6 +42,7 @@ pub struct CountersFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CountersFunctionParams<'a>(
@@ -54,6 +58,7 @@ pub struct CountersFunctionParams<'a>(
 /// ```text,ignore
 /// <counter> = <counter()> | <counters()>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -68,11 +73,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Counter>(), 144);
-	}
 
 	#[test]
 	fn test_writes() {

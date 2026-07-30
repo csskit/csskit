@@ -2,11 +2,13 @@ use crate::{
 	AssociatedWhitespaceRules, Cursor, CursorSink, Diagnostic, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
 	Result as ParserResult, SemanticEq, SimpleBlock, Span, State, T, ToCursors, ToSpan,
 };
+use csskit_proc_macro::node;
 
 /// <https://drafts.csswg.org/css-syntax-3/#consume-component-value>
 ///
 /// A compatible "Token" per CSS grammar, subsetted to the tokens possibly
 /// rendered by ComponentValue (so no pairwise, function tokens, etc).
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 pub enum ComponentValue<'a> {
@@ -176,11 +178,6 @@ impl<'a> SemanticEq for ComponentValue<'a> {
 mod tests {
 	use super::*;
 	use crate::{EmptyAtomSet, test_helpers::*};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ComponentValue>(), 56);
-	}
 
 	#[test]
 	fn test_writes() {

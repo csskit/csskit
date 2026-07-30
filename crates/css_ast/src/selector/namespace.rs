@@ -1,9 +1,12 @@
+use csskit_proc_macro::node;
+
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::*;
 
 use super::Tag;
 
 /// <https://drafts.csswg.org/selectors/#type-nmsp>
+#[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -43,6 +46,7 @@ impl<'a> Parse<'a> for Namespace {
 	}
 }
 
+#[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespacePrefix {
@@ -77,6 +81,7 @@ impl<'a> Parse<'a> for NamespacePrefix {
 	}
 }
 
+#[node]
 #[derive(Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum NamespaceTag {
@@ -102,11 +107,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Namespace>(), 48);
-	}
 
 	#[test]
 	fn test_writes() {

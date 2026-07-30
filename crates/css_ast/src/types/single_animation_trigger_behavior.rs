@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <single-animation-trigger-behavior> = once | repeat | alternate | state
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

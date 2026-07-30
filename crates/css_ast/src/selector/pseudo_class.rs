@@ -1,6 +1,7 @@
 use crate::{CssAtomSet, CssDiagnostic};
 use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
 use csskit_derives::*;
+use csskit_proc_macro::node;
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
 
@@ -73,6 +74,7 @@ macro_rules! apply_pseudo_class {
 
 macro_rules! define_pseudo_class {
 	( $($(#[$meta:meta])* $ident: ident: $pat: pat $(,)*)+ ) => {
+		#[node]
 		#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -130,11 +132,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<PseudoClass>(), 32);
-	}
 
 	#[test]
 	fn test_writes() {

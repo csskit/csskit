@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <spacing-trim> = space-all | normal | space-first | trim-start | trim-both | trim-all
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

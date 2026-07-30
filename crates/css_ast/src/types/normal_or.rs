@@ -3,6 +3,7 @@ use crate::CssMetadata;
 use css_parse::NodeWithMetadata;
 use css_parse::token_macros::Ident;
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -33,11 +34,6 @@ mod tests {
 	use css_parse::{T, assert_parse, assert_parse_error, assert_peek_false};
 
 	type NormalOrIdent = NormalOr<T![Ident]>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<NormalOrIdent>(), 16);
-	}
 
 	#[test]
 	fn test_parses() {

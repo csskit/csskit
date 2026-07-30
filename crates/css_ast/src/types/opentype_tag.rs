@@ -6,6 +6,7 @@ use super::prelude::*;
 /// exactly 4 ASCII characters (U+20-7E).
 ///
 /// Wraps `T![String]` for parsing purposes.
+#[node]
 #[derive(IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -47,11 +48,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<OpentypeTag>(), 12);
-	}
 
 	#[test]
 	fn test_parses() {

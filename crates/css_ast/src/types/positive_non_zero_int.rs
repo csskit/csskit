@@ -1,6 +1,7 @@
 use super::prelude::*;
 use crate::{CSSInt, Positive};
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct PositiveNonZeroInt(pub Positive<CSSInt>);
@@ -10,11 +11,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<PositiveNonZeroInt>(), 12);
-	}
 
 	#[test]
 	fn test_writes() {

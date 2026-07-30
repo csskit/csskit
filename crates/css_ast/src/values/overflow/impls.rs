@@ -5,36 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<OverflowXStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<OverflowYStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<OverflowBlockStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<OverflowInlineStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<OverflowStyleValue>(), 32);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<ScrollBehaviorStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ScrollbarGutterStyleValue>(), 28);
-		assert_eq!(std::mem::size_of::<TextOverflowStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginTopStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginRightStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginBottomStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginLeftStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginInlineStartStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockEndStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginInlineEndStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginInlineStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<OverflowClipMarginBlockStartStyleValue>(), 48);
-		assert_eq!(std::mem::size_of::<BlockEllipsisStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<LineClampStyleValue>(), 64);
-		assert_eq!(std::mem::size_of::<WebkitLineClampStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<MaxLinesStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ContinueStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ScrollTargetGroupStyleValue>(), 16);
-		assert_eq!(std::mem::size_of::<ScrollMarkerGroupStyleValue>(), 36);
-	}
-
-	#[test]
 	fn test_scrollbar_gutter() {
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "auto");
 		assert_parse!(CssAtomSet::ATOMS, ScrollbarGutterStyleValue, "stable");

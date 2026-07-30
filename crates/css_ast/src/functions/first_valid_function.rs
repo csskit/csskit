@@ -7,6 +7,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// first-valid() = first-valid( <declaration-value># )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -31,12 +32,6 @@ mod tests {
 
 	type FirstValidLength<'a> = FirstValidFunction<'a, Value<'a, Length>>;
 	type CalcableFirstValidLength<'a> = FirstValidFunction<'a, CalcableValue<'a, Length>>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<FirstValidLength>(), 48);
-		assert_eq!(std::mem::size_of::<CalcableFirstValidLength>(), 48);
-	}
 
 	#[test]
 	fn test_first_valid_function() {

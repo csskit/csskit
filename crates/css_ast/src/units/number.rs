@@ -1,6 +1,7 @@
 use super::prelude::*;
 use crate::Percentage;
 
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -13,6 +14,7 @@ pub enum NumberOrInfinity {
 	NegInfinity(T![Ident]),
 }
 
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -36,11 +38,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<NumberOrInfinity>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

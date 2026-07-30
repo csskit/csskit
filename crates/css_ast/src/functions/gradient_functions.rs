@@ -7,6 +7,7 @@ use crate::{CalcableValue, LengthPercentage};
 /// ```text-ignore,
 /// <gradient> = <linear-gradient()> | <repeating-linear-gradient()> | <radial-gradient()> | <repeating-radial-gradient()>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -28,6 +29,7 @@ pub enum Gradient<'a> {
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -40,6 +42,7 @@ pub struct LinearGradientFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct LinearGradientFunctionParams<'a>(
@@ -54,6 +57,7 @@ pub struct LinearGradientFunctionParams<'a>(
 /// <linear-gradient-syntax> = [ <angle> | <zero> | to <side-or-corner> ]? , <color-stop-list>
 /// <side-or-corner> = [left | right] || [top | bottom]
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -66,6 +70,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingLinearGradientFunctionParams<'a>(
@@ -82,6 +87,7 @@ pub struct RepeatingLinearGradientFunctionParams<'a>(
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -94,6 +100,7 @@ pub struct RadialGradientFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RadialGradientFunctionParams<'a>(
@@ -113,6 +120,7 @@ pub struct RadialGradientFunctionParams<'a>(
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// <radial-shape> = circle | ellipse
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -125,6 +133,7 @@ pub struct RepeatingRadialGradientFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct RepeatingRadialGradientFunctionParams<'a>(
@@ -137,6 +146,7 @@ pub struct RepeatingRadialGradientFunctionParams<'a>(
 );
 
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
@@ -151,6 +161,7 @@ pub enum NamedDirection {
 	Right(T![Ident]),
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum LinearDirection<'a> {
@@ -165,6 +176,7 @@ pub enum LinearDirection<'a> {
 /// <radial-size> = <radial-extent>{1,2} | <length-percentage [0,∞]>{1,2}
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
+#[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum RadialSize<'a> {
@@ -179,6 +191,7 @@ pub enum RadialSize<'a> {
 /// <radial-extent> = closest-corner | closest-side | farthest-corner | farthest-side
 /// ```
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
@@ -216,6 +229,7 @@ impl<'a> Parse<'a> for RadialSize<'a> {
 /// <radial-shape> = circle | ellipse
 /// ```
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
@@ -226,6 +240,7 @@ pub enum RadialShape {
 	Ellipse(T![Ident]),
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum ColorStopOrHint<'a> {
@@ -238,14 +253,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Gradient>(), 24);
-		assert_eq!(std::mem::size_of::<LinearDirection<'_>>(), 48);
-		assert_eq!(std::mem::size_of::<RadialSize<'_>>(), 48);
-		assert_eq!(std::mem::size_of::<ColorStopOrHint<'_>>(), 48);
-	}
 
 	#[test]
 	fn test_writes() {

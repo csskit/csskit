@@ -9,6 +9,7 @@ use css_parse::Box;
 /// ```text,ignore
 /// from <color>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -22,6 +23,7 @@ pub struct RelativeColorOrigin<'a> {
 /// Channel keyword for `rgb()` / `rgba()` relative color syntax.
 ///
 /// Valid keywords: `r`, `g`, `b`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -42,6 +44,7 @@ pub enum RgbChannelKeyword {
 /// Channel keyword for `hsl()` / `hsla()` relative color syntax.
 ///
 /// Valid keywords: `h`, `s`, `l`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -62,6 +65,7 @@ pub enum HslChannelKeyword {
 /// Channel keyword for `hwb()` relative color syntax.
 ///
 /// Valid keywords: `h`, `w`, `b`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -82,6 +86,7 @@ pub enum HwbChannelKeyword {
 /// Channel keyword for `lab()` / `oklab()` relative color syntax.
 ///
 /// Valid keywords: `l`, `a`, `b`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -102,6 +107,7 @@ pub enum LabChannelKeyword {
 /// Channel keyword for `lch()` / `oklch()` relative color syntax.
 ///
 /// Valid keywords: `l`, `c`, `h`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -122,6 +128,7 @@ pub enum LchChannelKeyword {
 /// Channel keyword for `color()` relative color syntax with xyz spaces.
 ///
 /// Valid keywords: `x`, `y`, `z`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -142,6 +149,7 @@ pub enum XyzChannelKeyword {
 /// Channel keyword for `color()` relative color syntax - union of predefined-rgb and xyz keywords.
 ///
 /// Valid keywords: `r`, `g`, `b`, `x`, `y`, `z`, `alpha`
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -171,6 +179,7 @@ pub enum ColorChannelKeyword {
 /// For rgb(): `<number> | <percentage> | none | r | g | b | alpha | <calc()>`
 /// For hsl(): `<hue> | <number> | <percentage> | none | h | s | l | alpha | <calc()>`
 /// etc.
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -205,6 +214,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<'a, K> {
 
 /// A hue-position channel value in relative color syntax.
 /// Accepts angle, number, `none`, or a channel keyword.
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -243,6 +253,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeHueValue<'a, K> {
 /// ```
 ///
 /// Where each channel can be a number, percentage, `none`, or a channel keyword (r, g, b, alpha).
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -262,6 +273,7 @@ pub struct RgbRelativeParams<'a> {
 /// ```text,ignore
 /// from <color> <hue-channel> <channel> <channel> [ / <alpha-channel> ]?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -281,6 +293,7 @@ pub struct HslRelativeParams<'a> {
 /// ```text,ignore
 /// from <color> <hue-channel> <channel> <channel> [ / <alpha-channel> ]?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -300,6 +313,7 @@ pub struct HwbRelativeParams<'a> {
 /// ```text,ignore
 /// from <color> <channel> <channel> <channel> [ / <alpha-channel> ]?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -319,6 +333,7 @@ pub struct LabRelativeParams<'a> {
 /// ```text,ignore
 /// from <color> <channel> <channel> <hue-channel> [ / <alpha-channel> ]?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -341,6 +356,7 @@ pub struct LchRelativeParams<'a> {
 ///
 /// Channel keywords are the union of predefined-rgb (`r`, `g`, `b`) and xyz (`x`, `y`, `z`)
 /// plus `alpha`, since the valid set depends on the colorspace.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -361,6 +377,7 @@ pub struct ColorRelativeParams<'a> {
 /// ```text,ignore
 /// rgb() = rgb( from <color> <channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -389,6 +406,7 @@ impl<'a> Peek<'a> for RgbRelativeFunction<'a> {
 /// ```text,ignore
 /// rgba() = rgba( from <color> <channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -417,6 +435,7 @@ impl<'a> Peek<'a> for RgbaRelativeFunction<'a> {
 /// ```text,ignore
 /// hsl() = hsl( from <color> <hue-channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -445,6 +464,7 @@ impl<'a> Peek<'a> for HslRelativeFunction<'a> {
 /// ```text,ignore
 /// hsla() = hsla( from <color> <hue-channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -473,6 +493,7 @@ impl<'a> Peek<'a> for HslaRelativeFunction<'a> {
 /// ```text,ignore
 /// hwb() = hwb( from <color> <hue-channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -501,6 +522,7 @@ impl<'a> Peek<'a> for HwbRelativeFunction<'a> {
 /// ```text,ignore
 /// lab() = lab( from <color> <channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -529,6 +551,7 @@ impl<'a> Peek<'a> for LabRelativeFunction<'a> {
 /// ```text,ignore
 /// lch() = lch( from <color> <channel> <channel> <hue-channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -557,6 +580,7 @@ impl<'a> Peek<'a> for LchRelativeFunction<'a> {
 /// ```text,ignore
 /// oklab() = oklab( from <color> <channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -585,6 +609,7 @@ impl<'a> Peek<'a> for OklabRelativeFunction<'a> {
 /// ```text,ignore
 /// oklch() = oklch( from <color> <channel> <channel> <hue-channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -613,6 +638,7 @@ impl<'a> Peek<'a> for OklchRelativeFunction<'a> {
 /// ```text,ignore
 /// color() = color( from <color> <colorspace> <channel> <channel> <channel> [ / <alpha-value> ]? )
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -640,6 +666,7 @@ impl<'a> Peek<'a> for ColorRelativeFunction<'a> {
 ///
 /// Mirrors the structure of `ColorFunction` but only matches when `from` is present.
 /// Relative variants are checked before their absolute counterparts in `ColorFunction`.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
@@ -989,17 +1016,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<RelativeColorOrigin>(), 40);
-		assert_eq!(std::mem::size_of::<RgbChannelKeyword>(), 16);
-		assert_eq!(std::mem::size_of::<HslChannelKeyword>(), 16);
-		assert_eq!(std::mem::size_of::<HwbChannelKeyword>(), 16);
-		assert_eq!(std::mem::size_of::<LabChannelKeyword>(), 16);
-		assert_eq!(std::mem::size_of::<LchChannelKeyword>(), 16);
-		assert_eq!(std::mem::size_of::<XyzChannelKeyword>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

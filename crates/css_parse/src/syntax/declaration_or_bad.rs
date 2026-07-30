@@ -2,11 +2,13 @@ use crate::{
 	BadDeclaration, CursorSink, Declaration, DeclarationValue, NodeMetadata, NodeWithMetadata, SemanticEq, Span,
 	ToCursors, ToSpan,
 };
+use csskit_proc_macro::node;
 
 /// Either a valid declaration or a bad declaration consumed for error recovery.
 ///
 /// Per the CSS spec, when parsing fails for both a declaration and a rule,
 /// we consume the remnants as a bad declaration to maintain error recovery.
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum DeclarationOrBad<'a, D, M>

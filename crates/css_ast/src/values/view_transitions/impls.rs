@@ -5,14 +5,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	#[test]
-	pub fn size_test() {
-		assert_eq!(std::mem::size_of::<ViewTransitionNameStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ViewTransitionClassStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ViewTransitionGroupStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ViewTransitionScopeStyleValue>(), 16);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, ViewTransitionNameStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, ViewTransitionNameStyleValue, "foo");

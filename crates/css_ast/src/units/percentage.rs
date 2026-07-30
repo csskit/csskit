@@ -1,5 +1,6 @@
 use super::prelude::*;
 
+#[node]
 #[derive(
 	Peek, Parse, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -39,6 +40,7 @@ impl ToNormalisedValue for Percentage {
 	}
 }
 
+#[node]
 #[derive(
 	Peek, Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -77,12 +79,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::assert_parse;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<Percentage>(), 12);
-		assert_eq!(std::mem::size_of::<NumberPercentage>(), 16);
-	}
 
 	#[test]
 	fn test_writes() {

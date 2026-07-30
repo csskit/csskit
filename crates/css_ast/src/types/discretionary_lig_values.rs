@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// <discretionary-lig-values> = [ discretionary-ligatures | no-discretionary-ligatures ]
 /// ```
+#[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]

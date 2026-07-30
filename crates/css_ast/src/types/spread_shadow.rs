@@ -6,6 +6,7 @@ use crate::{CalcableValue, Color, Length, NonNegative, NoneOr};
 /// ```text,ignore
 /// <spread-shadow> = <'box-shadow-color'>? && [ [ none | <length>{2} ] [ <'box-shadow-blur'> <'box-shadow-spread'>? ]? ] && <'box-shadow-position'>?
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[parse(all_must_occur)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -20,6 +21,7 @@ pub struct SpreadShadow<'a> {
 }
 
 /// The position of a shadow: `inset` or `outset`.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -36,11 +38,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<SpreadShadow>(), 136);
-	}
 
 	#[test]
 	fn test_offset_none() {

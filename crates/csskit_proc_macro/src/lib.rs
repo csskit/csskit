@@ -3,6 +3,7 @@ use proc_macro::TokenStream;
 use syn::{DeriveInput, parse_macro_input};
 
 mod generate;
+mod node;
 mod syntax;
 mod type_renames;
 
@@ -21,4 +22,10 @@ pub fn syntax(args: TokenStream, input: TokenStream) -> TokenStream {
 #[proc_macro_attribute]
 pub fn visit(_args: TokenStream, input: TokenStream) -> TokenStream {
 	input
+}
+
+#[proc_macro_attribute]
+pub fn node(_args: TokenStream, input: TokenStream) -> TokenStream {
+	let ast = parse_macro_input!(input as DeriveInput);
+	node::generate(ast).into()
 }

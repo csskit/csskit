@@ -15,6 +15,7 @@ use css_parse::{
 ///   media( <media-feature> | <media-condition> ) |
 ///   style( <style-query> )
 /// ```
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -131,6 +132,7 @@ impl<'a> Parse<'a> for IfTest<'a> {
 /// A `<boolean-expr[ <if-test> ]>`: one or more [`IfTest`]s combined with `not`/`and`/`or`.
 ///
 /// <https://drafts.csswg.org/css-values-5/#typedef-boolean-expr>
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -194,6 +196,7 @@ impl<'a> Parse<'a> for IfConditionExpr<'a> {
 /// An `<if-condition>`: either a `<boolean-expr[ <if-test> ]>` or the `else` keyword (always true).
 ///
 /// <https://drafts.csswg.org/css-values-5/#typedef-if-condition>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -207,6 +210,7 @@ pub enum IfCondition<'a> {
 /// enclosing value slot (e.g. `Value<'a, T>`), so substitution functions inside it are preserved.
 ///
 /// <https://drafts.csswg.org/css-values-5/#typedef-if-branch>
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -225,6 +229,7 @@ pub struct IfBranch<'a, V> {
 /// ```text,ignore
 /// <if()> = if( [ <if-branch> ; ]* <if-branch> ;? )
 /// ```
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -280,11 +285,6 @@ mod tests {
 	use css_parse::assert_parse;
 
 	type IfLength<'a> = IfFunction<'a, Value<'a, Length>>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<IfLength>(), 48);
-	}
 
 	#[test]
 	fn test_if_function() {

@@ -5,15 +5,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ShapeImageThresholdStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ShapeInsideStyleValue>(), 368);
-		assert_eq!(std::mem::size_of::<ShapeMarginStyleValue>(), 24);
-		assert_eq!(std::mem::size_of::<ShapeOutsideStyleValue>(), 376);
-		assert_eq!(std::mem::size_of::<ShapePaddingStyleValue>(), 24);
-	}
-
-	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "12.5");
 		assert_parse!(CssAtomSet::ATOMS, ShapeImageThresholdStyleValue, "-7");

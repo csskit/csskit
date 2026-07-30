@@ -8,6 +8,7 @@ use css_parse::ComponentValues;
 /// attr() = attr( <attr-name> <attr-type>? , <declaration-value>?)
 /// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -20,6 +21,7 @@ pub struct AttrFunction<'a> {
 	pub close: T![')'],
 }
 
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrFunctionParams<'a>(
@@ -32,6 +34,7 @@ pub struct AttrFunctionParams<'a>(
 /// ```text,ignore
 /// <attr-name> = [ <ident-token>? '|' ]? <ident-token>
 /// ```
+#[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrName(pub Option<T![Ident]>, #[semantic_eq(skip)] pub Option<T![|]>, pub Option<T![Ident]>);
@@ -69,6 +72,7 @@ impl<'a> Parse<'a> for AttrName {
 /// ```text,ignore
 /// <attr-type> = type( <syntax> ) | raw-string | <attr-unit>
 /// ```
+#[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub enum AttrType {
@@ -84,11 +88,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<AttrFunction>(), 144);
-	}
 
 	#[test]
 	fn test_writes() {

@@ -5,6 +5,7 @@ use crate::functions::relative_color::RelativeColorFunction;
 use crate::{AngleOrNumber, CalcableValue, NoneOr, NumberOrPercentage};
 use css_parse::Box;
 
+#[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
@@ -32,6 +33,7 @@ pub enum ColorSpace {
 	XyzD65(T![Ident]),
 }
 
+#[node]
 #[derive(IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -63,6 +65,7 @@ impl<'a> Parse<'a> for CommaOrSlash {
 }
 
 /// <https://drafts.csswg.org/css-color/#typedef-color-function>
+#[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
@@ -160,6 +163,7 @@ impl crate::ToChromashift for ColorFunction<'_> {
 /// <xyz-params> = <xyz-space> [ <number> | <percentage> | none ]{3}
 /// <xyz-space> = xyz | xyz-d50 | xyz-d65
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -252,6 +256,7 @@ impl crate::ToChromashift for ColorFunctionColor<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -281,6 +286,7 @@ pub struct ColorFunctionColorParams<'a>(
 ///   [ <number> | <percentage> | none]{3}
 ///   [ / [<alpha-value> | none] ]?  )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -300,6 +306,7 @@ impl crate::ToChromashift for RgbFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -319,6 +326,7 @@ impl crate::ToChromashift for RgbaFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -390,6 +398,7 @@ impl crate::ToChromashift for RgbFunctionParams<'_> {
 /// <legacy-hsl-syntax> = hsl( <hue>, <percentage>, <percentage>, <alpha-value>? )
 /// <legacy-hsla-syntax> = hsla( <hue>, <percentage>, <percentage>, <alpha-value>? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -409,6 +418,7 @@ impl crate::ToChromashift for HslFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -428,6 +438,7 @@ impl crate::ToChromashift for HslaFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -485,6 +496,7 @@ impl crate::ToChromashift for HslFunctionParams<'_> {
 ///  [<percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -531,6 +543,7 @@ impl crate::ToChromashift for HwbFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -551,6 +564,7 @@ pub struct HwbFunctionParams<'a>(
 ///  [ <percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -597,6 +611,7 @@ impl crate::ToChromashift for LabFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -617,6 +632,7 @@ pub struct LabFunctionParams<'a>(
 ///  [ <hue> | none]
 ///  [ / [<alpha-value> | none] ]? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -663,6 +679,7 @@ impl crate::ToChromashift for LchFunction<'_> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -683,6 +700,7 @@ pub struct LchFunctionParams<'a>(
 ///  [ <percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 ///  ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -737,6 +755,7 @@ impl crate::ToChromashift for OklabFunction<'_> {
 ///  [ <percentage> | <number> | none]
 ///  [ / [<alpha-value> | none] ]? )
 ///  ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
@@ -786,21 +805,6 @@ impl crate::ToChromashift for OklchFunction<'_> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<ColorFunction<'_>>(), 176);
-		assert_eq!(std::mem::size_of::<ColorFunctionColor<'_>>(), 152);
-		assert_eq!(std::mem::size_of::<RgbFunction<'_>>(), 168);
-		assert_eq!(std::mem::size_of::<RgbaFunction<'_>>(), 168);
-		assert_eq!(std::mem::size_of::<HslFunction<'_>>(), 168);
-		assert_eq!(std::mem::size_of::<HslaFunction<'_>>(), 168);
-		assert_eq!(std::mem::size_of::<HwbFunction<'_>>(), 136);
-		assert_eq!(std::mem::size_of::<LabFunction<'_>>(), 136);
-		assert_eq!(std::mem::size_of::<LchFunction<'_>>(), 136);
-		assert_eq!(std::mem::size_of::<OklabFunction<'_>>(), 136);
-		assert_eq!(std::mem::size_of::<OklchFunction<'_>>(), 136);
-	}
 
 	#[test]
 	fn substitution_in_channels() {

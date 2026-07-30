@@ -2,10 +2,12 @@ use crate::{
 	ComponentValues, Cursor, CursorSink, DeclarationValue, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
 	Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
 };
+use csskit_proc_macro::node;
 
 /// Wrapper type for using ComponentValues as a rule type parameter in unknown rules.
 /// This implements RuleVariants to allow ComponentValues to be used as the block type
 /// for unknown qualified rules, where the rule structure is not recognized.
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 pub struct UnknownRuleBlock<'a, D = ComponentValues<'a>, M = ()> {

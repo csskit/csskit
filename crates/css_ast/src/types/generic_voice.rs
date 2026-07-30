@@ -6,6 +6,7 @@ use crate::CalcableValue;
 /// ```text,ignore
 /// <age> = child | young | old
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -24,6 +25,7 @@ pub enum VoiceAge {
 /// ```text,ignore
 /// <gender> = male | female | neutral
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -42,6 +44,7 @@ pub enum VoiceGender {
 /// ```text,ignore
 /// <generic-voice> = <age>? <gender> <integer>?
 /// ```
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -81,13 +84,6 @@ mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<VoiceAge>(), 16);
-		assert_eq!(std::mem::size_of::<VoiceGender>(), 16);
-		assert_eq!(std::mem::size_of::<GenericVoice>(), 56);
-	}
 
 	#[test]
 	fn test_parses() {

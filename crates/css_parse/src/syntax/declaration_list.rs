@@ -2,6 +2,7 @@ use crate::{
 	CursorSink, Declaration, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
 	Result, SemanticEq, Span, T, ToCursors, ToSpan, Vec, token_macros,
 };
+use csskit_proc_macro::node;
 
 /// A generic struct that can be used for AST nodes representing a rule's block, that is only capable of having child
 /// declarations.
@@ -20,6 +21,7 @@ use crate::{
 /// ```
 ///
 /// [1]: https://drafts.csswg.org/css-syntax-3/#typedef-declaration-list
+#[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "serde", serde(bound(serialize = "V: serde::Serialize")))]

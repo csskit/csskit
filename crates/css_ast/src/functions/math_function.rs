@@ -33,6 +33,7 @@ use css_parse::SemanticEq;
 /// <calc-keyword> = e | pi | infinity | -infinity | NaN
 /// <rounding-strategy> = nearest | up | down | to-zero | line-width
 /// ```
+#[node]
 #[derive(Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -99,6 +100,7 @@ impl<'a, T> Peek<'a> for MathFunction<'a, T> {
 	}
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -114,6 +116,7 @@ pub struct CalcFunction<'a, T> {
 	pub close: RightParen,
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -129,6 +132,7 @@ pub struct MinFunction<'a, T> {
 	pub close: RightParen,
 }
 
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -149,6 +153,7 @@ pub struct MaxFunction<'a, T> {
 /// ```text,ignore
 /// clamp( [ <calc-sum> | none ], <calc-sum>, [ <calc-sum> | none ] )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -177,6 +182,7 @@ pub struct ClampFunction<'a, T> {
 /// ```text,ignore
 /// round( <rounding-strategy>?, <calc-sum>, <calc-sum>? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -205,6 +211,7 @@ pub struct RoundFunction<'a, T> {
 /// ```text,ignore
 /// mod( <calc-sum>, <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -229,6 +236,7 @@ pub struct ModFunction<'a, T> {
 /// ```text,ignore
 /// rem( <calc-sum>, <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -253,6 +261,7 @@ pub struct RemFunction<'a, T> {
 /// ```text,ignore
 /// sin( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -273,6 +282,7 @@ pub struct SinFunction<'a> {
 /// ```text,ignore
 /// cos( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -293,6 +303,7 @@ pub struct CosFunction<'a> {
 /// ```text,ignore
 /// tan( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -313,6 +324,7 @@ pub struct TanFunction<'a> {
 /// ```text,ignore
 /// asin( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -333,6 +345,7 @@ pub struct AsinFunction<'a> {
 /// ```text,ignore
 /// acos( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -353,6 +366,7 @@ pub struct AcosFunction<'a> {
 /// ```text,ignore
 /// atan( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -373,6 +387,7 @@ pub struct AtanFunction<'a> {
 /// ```text,ignore
 /// atan2( <calc-sum>, <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -397,6 +412,7 @@ pub struct Atan2Function<'a, T> {
 /// ```text,ignore
 /// pow( <calc-sum>, <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -421,6 +437,7 @@ pub struct PowFunction<'a> {
 /// ```text,ignore
 /// sqrt( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -441,6 +458,7 @@ pub struct SqrtFunction<'a> {
 /// ```text,ignore
 /// hypot( <calc-sum># )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -461,6 +479,7 @@ pub struct HypotFunction<'a, T> {
 /// ```text,ignore
 /// log( <calc-sum>, <calc-sum>? )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -485,6 +504,7 @@ pub struct LogFunction<'a> {
 /// ```text,ignore
 /// exp( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -505,6 +525,7 @@ pub struct ExpFunction<'a> {
 /// ```text,ignore
 /// abs( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -525,6 +546,7 @@ pub struct AbsFunction<'a, T> {
 /// ```text,ignore
 /// sign( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -545,6 +567,7 @@ pub struct SignFunction<'a, T> {
 /// ```text,ignore
 /// <calc-sum> = <calc-product> [ [ '+' | '-' ] <calc-product> ]*
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -559,6 +582,7 @@ pub struct CalcSum<'a, T> {
 /// Per <https://drafts.csswg.org/css-values-4/#calc-syntax>, whitespace is required on both sides
 /// of these operators (unlike `*` and `/`), since `1px -2px` (no space before `-`) must lex as two
 /// adjacent values rather than a subtraction. This is why `Parse`/`Peek` are hand-written here.
+#[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -602,6 +626,7 @@ impl<'a> Parse<'a> for CalcSumOperator {
 /// percentage, calc-keyword, or parenthesized `<calc-sum>`), or an arbitrary substitution
 /// function (`var()`/`env()`/`attr()`/`if()`/`first-valid()`) per
 /// <https://drafts.csswg.org/css-values-5/#arbitrary-substitution-function>.
+#[node]
 #[derive(Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -736,6 +761,7 @@ fn calc_sum_opt_eq<'a, T: SemanticEq>(
 }
 
 /// A substitution or nested math function appearing in a [`CalcOperand`] slot.
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -755,6 +781,7 @@ pub enum CalcOperandSubstitutionFunction<'a, T> {
 /// ```text,ignore
 /// <calc-product> = <calc-value> [ [ '*' | / ] <calc-value> ]*
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -772,6 +799,7 @@ impl<'a, T: SemanticEq> SemanticEq for CalcProduct<'a, T> {
 
 /// The `*` or `/` operator inside a `<calc-product>`. Unlike `+`/`-`, no surrounding whitespace is
 /// required.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -786,6 +814,7 @@ pub enum CalcProductOperator {
 /// ```text,ignore
 /// <calc-value> = <number> | <dimension> | <percentage> | <calc-keyword> | ( <calc-sum> )
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
@@ -799,6 +828,7 @@ pub enum CalcValue<'a, T> {
 }
 
 /// A parenthesized `<calc-sum>`, e.g. the `( 1px + 2px )` in `calc((1px + 2px) * 2)`.
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
@@ -817,6 +847,7 @@ pub struct CalcInParens<'a, T> {
 /// ```text,ignore
 /// <calc-keyword> = e | pi | infinity | -infinity | NaN
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -839,6 +870,7 @@ pub enum CalcKeyword {
 /// ```text,ignore
 /// <rounding-strategy> = nearest | up | down | to-zero | line-width
 /// ```
+#[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
@@ -863,11 +895,6 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error};
 
 	type LengthMathFunction<'a> = MathFunction<'a, Length>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<LengthMathFunction>(), 256);
-	}
 
 	#[test]
 	fn test_calc_functions() {

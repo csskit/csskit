@@ -5,6 +5,7 @@ use super::prelude::*;
 /// ```text,ignore
 /// var() = var( <custom-property-name> , <declaration-value>? )
 /// ```
+#[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -30,12 +31,6 @@ mod tests {
 
 	type VarLength<'a> = VarFunction<'a, Value<'a, Length>>;
 	type CalcableVarLength<'a> = VarFunction<'a, CalcableValue<'a, Length>>;
-
-	#[test]
-	fn size_test() {
-		assert_eq!(std::mem::size_of::<VarLength>(), 72);
-		assert_eq!(std::mem::size_of::<CalcableVarLength>(), 72);
-	}
 
 	#[test]
 	fn test_var_function() {
