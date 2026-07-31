@@ -56,11 +56,10 @@ fn parse_decl(line: &str) -> Option<(&'static str, String, String)> {
 	let kind = if let Some(r) = rest.strip_prefix("enum") {
 		rest = r;
 		"enum"
-	} else if let Some(r) = rest.strip_prefix("struct") {
+	} else {
+		let r = rest.strip_prefix("struct")?;
 		rest = r;
 		"struct"
-	} else {
-		return None;
 	};
 	// A keyword boundary must follow (whitespace before the name).
 	if !rest.starts_with(char::is_whitespace) {

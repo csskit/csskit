@@ -616,7 +616,7 @@ impl<'a> Parse<'a> for CalcSumOperator {
 			Self::Subtract(p.parse::<T![-]>()?.with_associated_whitespace(rules))
 		};
 		if p.peek_n_including_whitespace(1) != Kind::Whitespace {
-			return Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected_delim))?;
+			Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected_delim))?;
 		}
 		Ok(op)
 	}

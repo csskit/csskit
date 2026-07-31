@@ -22,10 +22,10 @@
 //! various base tokens (such as dimensions, and operators). These can be referred to via the [T!] macro, and each [T!]
 //! implements the necessary traits to be parsed as an AST node. For example [T![DashedIdent]][token_macros::DashedIdent]
 //! represents a CSS ident with two leading dashes, and can be parsed and decomposted into its constituent
-//! [Token][Token] (or [Cursor][Cursor] or [Span][Span]).
+//! [Token] (or [Cursor] or [Span]).
 //!
 //! Additionally some generic structs are available to implement the general-purpose parts of [CSS Syntax][1], such as
-//! [ComponentValues][syntax::ComponentValues]. More on that below in the section titled
+//! [ComponentValues]. More on that below in the section titled
 //! [Generic AST Nodes](#generic-ast-nodes).
 //!
 //! Lastly, traits and macros are provided to implement various parsing algorithms to make common parsing operations
@@ -107,7 +107,7 @@
 //! [Peek::peek] should only look ahead the smallest number of tokens to confidently know that it can begin parsing,
 //! rather than looking ahead a large number of tokens. For the most part peeking 1 or two tokens should be sufficient.
 //! An easy implementation for [Peek] is to simply set the [Peek::PEEK_KINDSET] const, which the provided
-//! implementation of [Peek::peek()] will use to check the cursor matches this [KindSet][KindSet].
+//! implementation of [Peek::peek()] will use to check the cursor matches this [KindSet].
 //!
 //! ```
 //! use css_parse::*;
@@ -126,7 +126,7 @@
 //! If a node represents just a single token, for example a keyword, then its [Parse] implementation
 //! should call [Parser::peek] to check if it can be parsed, then [Parser::next] to get the cursor, and construct
 //! the node from that cursor. The [Peek] trait should accurately determine if the Node can be parsed from the
-//! given [Cursor][Cursor]. Single token parsing may need to branch if it is an enum of variants:
+//! given [Cursor]. Single token parsing may need to branch if it is an enum of variants:
 //!
 //! ```
 //! use css_parse::*;

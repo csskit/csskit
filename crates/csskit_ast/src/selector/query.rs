@@ -751,7 +751,7 @@ impl<'a> Parse<'a> for QueryHasPseudo<'a> {
 	{
 		// Check for nested :has() which is disallowed by CSS spec
 		if p.is(State::DisallowRelativeSelector) {
-			return Err(Diagnostic::new(p.peek_n(2), Diagnostic::nested_has_not_allowed))?;
+			Err(Diagnostic::new(p.peek_n(2), Diagnostic::nested_has_not_allowed))?;
 		}
 		let colon = p.parse::<T![:]>()?;
 		let function = p.parse::<T![Function]>()?;
