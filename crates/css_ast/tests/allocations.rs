@@ -60,7 +60,16 @@ fn allocation_test() {
 	}
 
 	// XXX: If these fail because the numbers go down, great! If they go up, investigate why.
-	assert_eq!(simple_alloc.allocated_bytes(), simple_alloc_size);
-	assert_eq!(escaped_alloc.allocated_bytes(), escaped_alloc_size);
-	assert_eq!(big_alloc.allocated_bytes(), big_alloc_size);
+	#[cfg(feature = "csskit_arena")]
+	{
+		assert_eq!(simple_alloc.used_bytes(), 1216);
+		assert_eq!(escaped_alloc.used_bytes(), 6528);
+		assert_eq!(big_alloc.used_bytes(), 112_786_800);
+	}
+	#[cfg(all(feature = "bumpalo", not(feature = "csskit_arena")))]
+	{
+		assert_eq!(simple_alloc.allocated_bytes(), simple_alloc_size);
+		assert_eq!(escaped_alloc.allocated_bytes(), escaped_alloc_size);
+		assert_eq!(big_alloc.allocated_bytes(), big_alloc_size);
+	}
 }

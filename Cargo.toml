@@ -22,6 +22,7 @@ css_parse = { path = "crates/css_parse", version = "0.0.28" }  # @release
 css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.28" }  # @release
 # Local packages
 csskit = { path = "crates/csskit", version = "0.0.28" }  # @release
+csskit_arena = { path = "crates/csskit_arena", version = "0.0.28" }  # @release
 csskit_ast = { path = "crates/csskit_ast", version = "0.0.28" }  # @release
 csskit_derives = { path = "crates/csskit_derives", version = "0.0.28" }  # @release
 csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.28" }  # @release
@@ -37,6 +38,8 @@ visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.
 allocator-api2 = { version = "0.2.21" }  # Held back for bumpalo (https://github.com/fitzgen/bumpalo/pull/288)
 bumpalo = { version = "3.20.3" }
 inventory = { version = "0.3.24" }
+libc = { version = "0.2.186" }
+windows-sys = { version = "0.61.0" }
 
 # Data structure libraries/helpers
 bitmask-enum = { version = "2.2.5" }

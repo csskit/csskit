@@ -55,7 +55,11 @@ inventory = { workspace = true }
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [features]
-default = []
+default = ["bumpalo"]
+# Allocator backend: bumpalo (default).
+bumpalo = ["css_parse/bumpalo"]
+# Allocator backend: csskit_arena
+csskit_arena = ["css_parse/csskit_arena"]
 visitable = []
 serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
 miette = ["css_parse/miette"]
