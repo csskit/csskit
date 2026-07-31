@@ -4,6 +4,7 @@ use css_ast::{
 	CalcableValue, Color, ColorFunction, ColorMixFunction, HueInterpolationDirection, InterpolationColorSpace,
 	ToChromashift, Visitable,
 };
+use css_parse::{Arena, format_in};
 
 pub struct ReduceColors<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
@@ -22,16 +23,16 @@ where
 	}
 }
 
-trait Shortest {
-	fn shortest(&self) -> Option<String>;
+trait Shortest<'a> {
+	fn shortest(&self, arena: &'a Arena) -> Option<&'a str>;
 }
 
-impl Shortest for chromashift::Color {
-	fn shortest(&self) -> Option<String> {
+impl<'a> Shortest<'a> for chromashift::Color {
+	fn shortest(&self, arena: &'a Arena) -> Option<&'a str> {
 		[
-			Some(Hex::from(*self).to_string()),
-			Named::try_from(*self).ok().map(|named| named.to_string()),
-			Some(Srgb::from(*self).round().to_string()),
+			Some(format_in!(in arena, "{}", Hex::from(*self)).into_str()),
+			Named::try_from(*self).ok().map(|named| format_in!(in arena, "{named}").into_str()),
+			Some(format_in!(in arena, "{}", Srgb::from(*self).round()).into_str()),
 		]
 		.into_iter()
 		.flatten()
@@ -41,11 +42,11 @@ impl Shortest for chromashift::Color {
 
 /// Formats a CSS alpha value (0–1) from chromashift's internal 0–100 representation.
 /// Returns `None` when the alpha is fully opaque (100.0).
-fn css_alpha(alpha: f32) -> Option<String> {
+fn css_alpha(alpha: f32) -> Option<f64> {
 	if alpha >= 100.0 {
 		return None;
 	}
-	Some(format!("{}", round_dp(alpha as f64 / 100.0, 3)))
+	Some(round_dp(alpha as f64 / 100.0, 3))
 }
 
 /// Serialises a chromashift colour into valid CSS function syntax.
@@ -54,34 +55,48 @@ fn css_alpha(alpha: f32) -> Option<String> {
 /// compact writer will then minify (removing leading zeros, collapsing whitespace around `/`, etc.).
 ///
 /// Returns `None` for colour types that don't have a non-sRGB CSS function syntax (Hex, Named, Srgb, Hsv).
-trait ToCss {
-	fn to_css(&self) -> Option<String>;
+trait ToCss<'a> {
+	fn to_css(&self, arena: &'a Arena) -> Option<&'a str>;
 }
 
 macro_rules! impl_to_css_3ch {
 	($ty:ident, $name:literal, $c1:ident, $c2:ident, $c3:ident) => {
-		impl ToCss for chromashift::$ty {
-			fn to_css(&self) -> Option<String> {
+		impl<'a> ToCss<'a> for chromashift::$ty {
+			fn to_css(&self, arena: &'a Arena) -> Option<&'a str> {
 				let alpha = css_alpha(self.alpha);
 				if let Some(a) = alpha {
-					Some(format!(concat!($name, "({} {} {} / {})"), self.$c1, self.$c2, self.$c3, a))
+					Some(
+						format_in!(in arena, concat!($name, "({} {} {} / {})"), self.$c1, self.$c2, self.$c3, a)
+							.into_str(),
+					)
 				} else {
-					Some(format!(concat!($name, "({} {} {})"), self.$c1, self.$c2, self.$c3))
+					Some(format_in!(in arena, concat!($name, "({} {} {})"), self.$c1, self.$c2, self.$c3).into_str())
 				}
 			}
 		}
 	};
 	($ty:ident, $name:literal, $c1:ident, $c2:ident: $suf2:literal, $c3:ident: $suf3:literal) => {
-		impl ToCss for chromashift::$ty {
-			fn to_css(&self) -> Option<String> {
+		impl<'a> ToCss<'a> for chromashift::$ty {
+			fn to_css(&self, arena: &'a Arena) -> Option<&'a str> {
 				let alpha = css_alpha(self.alpha);
 				if let Some(a) = alpha {
-					Some(format!(
-						concat!($name, "({} {}", $suf2, " {}", $suf3, " / {})"),
-						self.$c1, self.$c2, self.$c3, a
-					))
+					Some(
+						format_in!(
+							in arena,
+							concat!($name, "({} {}", $suf2, " {}", $suf3, " / {})"),
+							self.$c1, self.$c2, self.$c3, a
+						)
+						.into_str(),
+					)
 				} else {
-					Some(format!(concat!($name, "({} {}", $suf2, " {}", $suf3, ")"), self.$c1, self.$c2, self.$c3))
+					Some(
+						format_in!(
+							in arena,
+							concat!($name, "({} {}", $suf2, " {}", $suf3, ")"),
+							self.$c1, self.$c2, self.$c3
+						)
+						.into_str(),
+					)
 				}
 			}
 		}
@@ -90,13 +105,27 @@ macro_rules! impl_to_css_3ch {
 
 macro_rules! impl_to_css_color_fn {
 	($ty:ident, $space:literal) => {
-		impl ToCss for chromashift::$ty {
-			fn to_css(&self) -> Option<String> {
+		impl<'a> ToCss<'a> for chromashift::$ty {
+			fn to_css(&self, arena: &'a Arena) -> Option<&'a str> {
 				let alpha = css_alpha(self.alpha);
 				if let Some(a) = alpha {
-					Some(format!(concat!("color(", $space, " {} {} {} / {})"), self.red, self.green, self.blue, a))
+					Some(
+						format_in!(
+							in arena,
+							concat!("color(", $space, " {} {} {} / {})"),
+							self.red, self.green, self.blue, a
+						)
+						.into_str(),
+					)
 				} else {
-					Some(format!(concat!("color(", $space, " {} {} {})"), self.red, self.green, self.blue))
+					Some(
+						format_in!(
+							in arena,
+							concat!("color(", $space, " {} {} {})"),
+							self.red, self.green, self.blue
+						)
+						.into_str(),
+					)
 				}
 			}
 		}
@@ -105,8 +134,8 @@ macro_rules! impl_to_css_color_fn {
 
 macro_rules! impl_to_css_xyz {
 	($ty:ident, $space:literal) => {
-		impl ToCss for chromashift::$ty {
-			fn to_css(&self) -> Option<String> {
+		impl<'a> ToCss<'a> for chromashift::$ty {
+			fn to_css(&self, arena: &'a Arena) -> Option<&'a str> {
 				let alpha = css_alpha(self.alpha);
 				// CSS color(xyz-*) uses 0–1 scale; chromashift stores 0–100 internally.
 				// After dividing, re-apply round_dp(4) to eliminate float display artifacts
@@ -115,9 +144,9 @@ macro_rules! impl_to_css_xyz {
 				let y = round_dp(self.y / 100.0, 4);
 				let z = round_dp(self.z / 100.0, 4);
 				if let Some(a) = alpha {
-					Some(format!(concat!("color(", $space, " {} {} {} / {})"), x, y, z, a))
+					Some(format_in!(in arena, concat!("color(", $space, " {} {} {} / {})"), x, y, z, a).into_str())
 				} else {
-					Some(format!(concat!("color(", $space, " {} {} {})"), x, y, z))
+					Some(format_in!(in arena, concat!("color(", $space, " {} {} {})"), x, y, z).into_str())
 				}
 			}
 		}
@@ -140,22 +169,22 @@ impl_to_css_color_fn!(Rec2020, "rec2020");
 impl_to_css_xyz!(XyzD50, "xyz-d50");
 impl_to_css_xyz!(XyzD65, "xyz-d65");
 
-impl ToCss for chromashift::Color {
-	fn to_css(&self) -> Option<String> {
+impl<'a> ToCss<'a> for chromashift::Color {
+	fn to_css(&self, arena: &'a Arena) -> Option<&'a str> {
 		match self {
-			chromashift::Color::Lab(c) => c.to_css(),
-			chromashift::Color::Lch(c) => c.to_css(),
-			chromashift::Color::Oklab(c) => c.to_css(),
-			chromashift::Color::Oklch(c) => c.to_css(),
-			chromashift::Color::Hsl(c) => c.to_css(),
-			chromashift::Color::Hwb(c) => c.to_css(),
-			chromashift::Color::DisplayP3(c) => c.to_css(),
-			chromashift::Color::LinearRgb(c) => c.to_css(),
-			chromashift::Color::A98Rgb(c) => c.to_css(),
-			chromashift::Color::ProphotoRgb(c) => c.to_css(),
-			chromashift::Color::Rec2020(c) => c.to_css(),
-			chromashift::Color::XyzD50(c) => c.to_css(),
-			chromashift::Color::XyzD65(c) => c.to_css(),
+			chromashift::Color::Lab(c) => c.to_css(arena),
+			chromashift::Color::Lch(c) => c.to_css(arena),
+			chromashift::Color::Oklab(c) => c.to_css(arena),
+			chromashift::Color::Oklch(c) => c.to_css(arena),
+			chromashift::Color::Hsl(c) => c.to_css(arena),
+			chromashift::Color::Hwb(c) => c.to_css(arena),
+			chromashift::Color::DisplayP3(c) => c.to_css(arena),
+			chromashift::Color::LinearRgb(c) => c.to_css(arena),
+			chromashift::Color::A98Rgb(c) => c.to_css(arena),
+			chromashift::Color::ProphotoRgb(c) => c.to_css(arena),
+			chromashift::Color::Rec2020(c) => c.to_css(arena),
+			chromashift::Color::XyzD50(c) => c.to_css(arena),
+			chromashift::Color::XyzD65(c) => c.to_css(arena),
 			// sRGB types don't need native-space CSS — they use Shortest
 			chromashift::Color::Hex(_)
 			| chromashift::Color::Named(_)
@@ -180,29 +209,31 @@ where
 		let Some(chroma_color) = color.to_chromashift() else {
 			return;
 		};
+		let arena = self.transformer.bump();
 		let len = color.to_span().len() as usize;
 
 		if chroma_color.in_gamut_of(ColorSpace::Srgb)
-			&& let Some(candidate) = chroma_color.shortest()
+			&& let Some(candidate) = chroma_color.shortest(arena)
 			&& candidate.len() < len
 		{
-			self.transformer.replace_parsed::<Color>(color.to_span(), &candidate);
+			self.transformer.replace_parsed::<Color>(color.to_span(), candidate);
 			return;
 		}
 
 		// Try the native-space rounded form. This preserves the original colour space
 		// while reducing precision to perceptually safe levels.
 		let rounded = chroma_color.round();
-		if let Some(css) = rounded.to_css()
+		if let Some(css) = rounded.to_css(arena)
 			&& css.len() < len
 		{
-			self.transformer.replace_parsed::<Color>(color.to_span(), &css);
+			self.transformer.replace_parsed::<Color>(color.to_span(), css);
 		}
 	}
 
 	fn visit_color_mix_function<'b>(&mut self, mix: &ColorMixFunction<'b>) -> VisitFlow {
 		let outer_span = mix.to_span();
 		let outer_len = outer_span.len() as usize;
+		let arena = self.transformer.bump();
 
 		let n = mix.parts.len();
 		let default_pct = 100.0 / n as f32;
@@ -236,12 +267,12 @@ where
 			{
 				let (part, _) = &mix.parts[dominant];
 				let chroma = part.color.to_chromashift();
-				let str = chroma.and_then(|c| c.shortest()).unwrap_or_else(|| {
+				let str = chroma.and_then(|c| c.shortest(arena)).unwrap_or_else(|| {
 					let span = part.color.to_span();
-					self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
+					&self.transformer.source_text[span.start().0 as usize..span.end().0 as usize]
 				});
 				self.transformer.clear_pending_edits(outer_span);
-				self.transformer.replace_parsed::<Color>(outer_span, &str);
+				self.transformer.replace_parsed::<Color>(outer_span, str);
 				return VisitFlow::SKIP_CHILDREN;
 			}
 		}
@@ -253,12 +284,12 @@ where
 				let first = chromata[0].unwrap();
 				if chromata[1..].iter().all(|c| c.unwrap().delta_e(first) < COLOR_EPSILON) {
 					let (part, _) = &mix.parts[0];
-					let str = first.shortest().unwrap_or_else(|| {
+					let str = first.shortest(arena).unwrap_or_else(|| {
 						let span = part.color.to_span();
-						self.transformer.source_text[span.start().0 as usize..span.end().0 as usize].to_string()
+						&self.transformer.source_text[span.start().0 as usize..span.end().0 as usize]
 					});
 					self.transformer.clear_pending_edits(outer_span);
-					self.transformer.replace_parsed::<Color>(outer_span, &str);
+					self.transformer.replace_parsed::<Color>(outer_span, str);
 					return VisitFlow::SKIP_CHILDREN;
 				}
 			}
@@ -271,11 +302,11 @@ where
 			let mixed_alpha = (mixed.to_alpha() as f64 / 100.0 * alpha_mult * 100.0) as f32;
 			let mixed = mixed.with_alpha(mixed_alpha);
 			let rounded = mixed.round();
-			let native_css = rounded.to_css();
-			let srgb_css = if mixed.in_gamut_of(ColorSpace::Srgb) { mixed.shortest() } else { None };
+			let native_css = rounded.to_css(arena);
+			let srgb_css = if mixed.in_gamut_of(ColorSpace::Srgb) { mixed.shortest(arena) } else { None };
 			let candidate =
 				native_css.into_iter().chain(srgb_css).min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)));
-			if let Some(ref candidate) = candidate
+			if let Some(candidate) = candidate
 				&& candidate.len() < outer_len
 			{
 				self.transformer.replace_parsed::<Color>(outer_span, candidate);

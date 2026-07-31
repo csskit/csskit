@@ -2,6 +2,7 @@ use crate::{Arena, Vec};
 use allocator_api2::alloc::Allocator;
 use std::fmt;
 use std::hash::{Hash, Hasher};
+use std::io;
 use std::ops::Deref;
 
 /// A growable, arena-allocated UTF-8 string.
@@ -12,7 +13,8 @@ use std::ops::Deref;
 ///
 /// The contents are always valid UTF-8: the only ways to append are [`String::push_str`], [`String::push`] and the
 /// [`fmt::Write`] impl, all of which take a `str` or a `char`, and nothing exposes the bytes mutably or truncates
-/// them. [`String::as_str`] and [`String::into_str`] rely on that invariant to hand out a `str` without revalidating.
+/// them. [`String::from_reader_in`] is the sole byte-wise entry point and validates before handing back a `String`.
+/// [`String::as_str`] and [`String::into_str`] rely on that invariant to hand out a `str` without revalidating.
 #[repr(C)]
 pub struct String<'a, A: Allocator = &'a Arena> {
 	bytes: Vec<'a, u8, A>,
@@ -29,6 +31,33 @@ impl<'a, A: Allocator> String<'a, A> {
 	#[inline]
 	pub fn with_capacity_in(cap: usize, alloc: A) -> Self {
 		Self { bytes: Vec::with_capacity_in(cap, alloc) }
+	}
+
+	/// Read `reader` to end into a new `String`, the arena equivalent of [`std::io::Read::read_to_string`].
+	///
+	/// The bytes are validated as UTF-8 once, on the whole buffer, before the `String` exists; an invalid stream is
+	/// reported as [`std::io::ErrorKind::InvalidData`] and no `String` is returned.
+	pub fn from_reader_in<R: io::Read>(mut reader: R, alloc: A) -> io::Result<Self> {
+		/// Bytes offered to each `read` call; the arena `Vec` doubles its capacity as this is appended.
+		const CHUNK: usize = 8 * 1024;
+		let mut bytes = Vec::new_in(alloc);
+		let mut filled = 0;
+		loop {
+			if filled == bytes.len() {
+				bytes.extend_from_slice(&[0; CHUNK]);
+			}
+			match reader.read(&mut bytes[filled..]) {
+				Ok(0) => break,
+				Ok(read) => filled += read,
+				Err(err) if err.kind() == io::ErrorKind::Interrupted => continue,
+				Err(err) => return Err(err),
+			}
+		}
+		bytes.truncate(filled);
+		match std::str::from_utf8(&bytes) {
+			Ok(_) => Ok(Self { bytes }),
+			Err(err) => Err(io::Error::new(io::ErrorKind::InvalidData, err)),
+		}
 	}
 
 	/// Length in bytes, not characters.
@@ -80,7 +109,8 @@ impl<'a, A: Allocator> String<'a, A> {
 	fn as_utf8(bytes: &[u8]) -> &str {
 		debug_assert!(std::str::from_utf8(bytes).is_ok(), "arena String must always hold valid UTF-8");
 		// SAFETY: the buffer only ever grows through `push_str`, `push` and the `fmt::Write` impl, each of which appends a
-		// `str` or a UTF-8 encoded `char`. Nothing hands the bytes out mutably or truncates them.
+		// `str` or a UTF-8 encoded `char`, or through `from_reader_in`, which validates the whole buffer before
+		// constructing the `String`. Nothing hands the bytes out mutably or truncates them.
 		unsafe { std::str::from_utf8_unchecked(bytes) }
 	}
 }
@@ -170,6 +200,29 @@ mod test {
 	use super::String;
 	use crate::Arena;
 	use std::fmt::Write;
+	use std::io::{self, Read};
+
+	/// Hands out one byte per `read`, with a single `Interrupted` in the middle, as a real socket may.
+	struct DribbleReader<'r> {
+		bytes: &'r [u8],
+		interrupt_at: usize,
+		reads: usize,
+	}
+
+	impl<'r> Read for DribbleReader<'r> {
+		fn read(&mut self, buf: &mut [u8]) -> io::Result<usize> {
+			self.reads += 1;
+			if self.reads == self.interrupt_at {
+				return Err(io::Error::from(io::ErrorKind::Interrupted));
+			}
+			let Some((first, rest)) = self.bytes.split_first() else {
+				return Ok(0);
+			};
+			buf[0] = *first;
+			self.bytes = rest;
+			Ok(1)
+		}
+	}
 
 	#[test]
 	fn new_is_empty_and_allocates_nothing() {
@@ -270,5 +323,40 @@ mod test {
 		assert_eq!(a, b);
 		assert_eq!(a, "same");
 		assert_eq!(a, *"same");
+	}
+
+	#[test]
+	fn from_reader_in_reads_to_end() {
+		let alloc = Arena::default();
+		let str = String::from_reader_in("body{color:blue}".as_bytes(), &alloc).unwrap();
+		assert_eq!(str.as_str(), "body{color:blue}");
+		assert_eq!(str.len(), 16);
+	}
+
+	#[test]
+	fn from_reader_in_rejects_invalid_utf8() {
+		let alloc = Arena::default();
+		let err = String::from_reader_in(&[b'a', 0xff, b'b'][..], &alloc).unwrap_err();
+		assert_eq!(err.kind(), io::ErrorKind::InvalidData);
+	}
+
+	#[test]
+	fn from_reader_in_grows_past_one_chunk() {
+		let alloc = Arena::default();
+		// A multibyte codepoint straddles the 8KiB read boundary, so a chunk-local decode would split it.
+		let mut expected = std::string::String::from("x".repeat(8 * 1024 - 2));
+		expected.push('😀');
+		expected.push_str(&"y".repeat(4096));
+		let str = String::from_reader_in(expected.as_bytes(), &alloc).unwrap();
+		assert_eq!(str.len(), expected.len());
+		assert_eq!(str.as_str(), expected);
+	}
+
+	#[test]
+	fn from_reader_in_handles_partial_reads_and_interruptions() {
+		let alloc = Arena::default();
+		let reader = DribbleReader { bytes: "a£😀b".as_bytes(), interrupt_at: 3, reads: 0 };
+		let str = String::from_reader_in(reader, &alloc).unwrap();
+		assert_eq!(str.as_str(), "a£😀b");
 	}
 }

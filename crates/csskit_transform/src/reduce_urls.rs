@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use css_ast::{Url, UrlOrString, Visitable};
+use css_parse::format_in;
 
 pub struct ReduceUrls<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
@@ -27,17 +28,16 @@ where
 		let UrlOrString::Url(url) = url_or_string else {
 			return;
 		};
+		let arena = self.transformer.bump();
 		match url {
 			Url::UrlFunction(_, string, _) | Url::SrcFunction(_, string, _) => {
+				let sc = self.transformer.to_source_cursor((*string).into());
+				let token = sc.token();
+				let start = token.leading_len() as usize;
+				let end = sc.source().len() - token.trailing_len() as usize;
 				self.transformer.replace_parsed::<UrlOrString>(
 					url_or_string.to_span(),
-					&format!("\"{}\"", {
-						let sc = self.transformer.to_source_cursor((*string).into());
-						let token = sc.token();
-						let start = token.leading_len() as usize;
-						let end = sc.source().len() - token.trailing_len() as usize;
-						&sc.source()[start..end]
-					}),
+					format_in!(in arena, "\"{}\"", &sc.source()[start..end]).into_str(),
 				);
 			}
 			Url::Url(url_token) => {
@@ -47,8 +47,10 @@ where
 				let trailing_len = token.trailing_len() as usize;
 				let url_content = &sc.source()[leading_len..(sc.source().len() - trailing_len)];
 				let url_content = url_content.trim();
-				self.transformer
-					.replace_parsed::<UrlOrString>(url_or_string.to_span(), &format!("\"{}\"", url_content));
+				self.transformer.replace_parsed::<UrlOrString>(
+					url_or_string.to_span(),
+					format_in!(in arena, "\"{url_content}\"").into_str(),
+				);
 			}
 		}
 	}

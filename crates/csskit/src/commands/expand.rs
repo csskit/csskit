@@ -4,7 +4,6 @@ use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
 use css_parse::{CursorExpandedWriteSink, Parser, ToCursors};
-use std::io::Read;
 
 /// Expand CSS files to their most verbose form (the opposite of minify).
 #[derive(Debug, Args)]
@@ -40,15 +39,13 @@ impl Expand {
 			eprintln!("Ignoring output option, because check was passed");
 		}
 		let mut checks = 0;
-		for (file_name, mut source) in content.sources()? {
-			let mut source_string = String::new();
-			source.read_to_string(&mut source_string)?;
-			let source_text = source_string.as_str();
+		for (file_name, source) in content.sources()? {
+			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(ref _stylesheet) = result.output {
-				let mut str = String::new();
+				let mut str = css_parse::String::new_in(&bump);
 				let mut stream = CursorExpandedWriteSink::new(source_text, &mut str)
 					.with_extra_semicolons(*semicolons)
 					.with_escape_idents(*escape_idents);
@@ -65,7 +62,7 @@ impl Expand {
 				}
 			} else {
 				for compact_err in result.errors {
-					let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
+					let report = crate::commands::format_diagnostic_error(&compact_err, source_text, file_name);
 					println!("{report}");
 				}
 			}

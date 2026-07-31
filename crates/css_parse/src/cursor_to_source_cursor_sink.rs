@@ -1,4 +1,5 @@
 use crate::{Cursor, CursorSink, SourceCursor, SourceCursorSink};
+use allocator_api2::alloc::Allocator;
 use std::fmt::Write;
 
 pub struct CursorToSourceCursorSink<'a, T: SourceCursorSink<'a>> {
@@ -19,6 +20,12 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorToSourceCursorSink<'a, T>
 }
 
 impl<'a> SourceCursorSink<'a> for String {
+	fn append(&mut self, c: SourceCursor<'a>) {
+		let _ = write!(self, "{c}");
+	}
+}
+
+impl<'a, 'alloc, A: Allocator> SourceCursorSink<'a> for crate::String<'alloc, A> {
 	fn append(&mut self, c: SourceCursor<'a>) {
 		let _ = write!(self, "{c}");
 	}
@@ -46,6 +53,20 @@ mod test {
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
 		let mut parser = Parser::new(&bump, source_text, lexer);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
+		assert_eq!(str, "black white");
+	}
+
+	#[test]
+	fn test_source_cursor_sink_for_arena_string() {
+		let source_text = "black white";
+		let bump = Bump::default();
+		let mut str = crate::String::new_in(&bump);
+		{
+			let mut transform = CursorToSourceCursorSink::new(source_text, &mut str);
+			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+			let mut parser = Parser::new(&bump, source_text, lexer);
+			parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
+		}
 		assert_eq!(str, "black white");
 	}
 }

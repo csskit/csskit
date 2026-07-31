@@ -5,7 +5,6 @@ use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_lexer::{Lexer, QuoteStyle};
 use css_parse::{CursorPrettyWriteSink, Parser, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
-use std::io::Read;
 
 /// Format CSS files to make them more readable.
 #[derive(Debug, Args)]
@@ -42,15 +41,13 @@ impl Fmt {
 			eprintln!("Ignoring output option, because check was passed");
 		}
 		let mut checks = 0;
-		for (file_name, mut source) in content.sources()? {
-			let mut source_string = String::new();
-			source.read_to_string(&mut source_string)?;
-			let source_text = source_string.as_str();
+		for (file_name, source) in content.sources()? {
+			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(stylesheet) = result.output.as_ref() {
-				let mut str = String::new();
+				let mut str = css_parse::String::new_in(&bump);
 				if color {
 					let mut highlighter = TokenHighlighter::new();
 					let _ = stylesheet.accept(&mut highlighter);
@@ -73,7 +70,7 @@ impl Fmt {
 				}
 			} else {
 				for compact_err in result.errors {
-					let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
+					let report = crate::commands::format_diagnostic_error(&compact_err, source_text, file_name);
 					println!("{report}");
 				}
 			}
