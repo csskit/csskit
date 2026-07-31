@@ -36,7 +36,7 @@ fn popular(c: &mut Criterion) {
 				{
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 					let mut result = Parser::new(&bump, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
-					let mut string = bumpalo::collections::String::new_in(&bump);
+					let mut string = css_parse::String::new_in(&bump);
 					if let Some(stylesheet) = result.output.as_mut() {
 						// let mut transformer = ReduceInitial::default();
 						// TODO! Re-introduce minifyer

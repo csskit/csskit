@@ -284,6 +284,7 @@ pub use css_lexer::{
 };
 
 mod arena_box;
+mod arena_string;
 mod arena_vec;
 mod comparison;
 mod cursor_compact_write_sink;
@@ -319,6 +320,7 @@ pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 pub type Arena = bumpalo::Bump;
 
 pub use arena_box::*;
+pub use arena_string::String;
 pub use arena_vec::{Drain, IntoIter, Vec};
 pub use comparison::*;
 pub use cursor_compact_write_sink::*;
