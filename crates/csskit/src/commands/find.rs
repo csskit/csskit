@@ -66,7 +66,7 @@ impl Find {
 			if let Some(err) = result.errors.first() {
 				eprintln!("error: {}", err.message(&self.selector));
 			} else {
-				eprintln!("Invalid selector '{}'", &self.selector);
+				eprintln!("Invalid selector '{}'", self.selector);
 			}
 			self.suggest_types(&self.selector);
 			return Err(CliError::ParseFailed);

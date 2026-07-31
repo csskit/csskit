@@ -5,12 +5,7 @@ use std::ops::ControlFlow;
 pub enum VisitAction {
 	/// Recurse into children (default).
 	Descend,
-	/// Skip children; `exit_*` is still called.
-	///
-	/// When returned from [`Visit::filter`], this means skip self _and_ children
-	/// (prune the entire subtree). The positional distinction: a visitor returning
-	/// `SkipChildren` from `visit_*` has already seen the node; a filter returning
-	/// it has not.
+	/// Skip recursing into children.
 	SkipChildren,
 }
 
