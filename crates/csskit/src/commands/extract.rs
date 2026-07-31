@@ -6,7 +6,6 @@ use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Lexer, LineIndex, Span};
 use css_parse::Parser;
 use serde::Serialize;
-use std::io::Read;
 
 /// Position metadata for a single result within a file.
 #[derive(Serialize, Debug, Clone)]
@@ -194,31 +193,33 @@ pub trait Extract: Sized {
 		let mut envelopes: Vec<FileEnvelope<Self::Row>> = Vec::new();
 		let mut first_file = true;
 
-		for (filename, mut source) in self.input().sources()? {
-			let mut src = String::new();
-			if let Err(e) = source.read_to_string(&mut src) {
-				match self.format() {
-					OutputFormat::Json => {
-						envelopes.push(FileEnvelope::err(
-							filename,
-							ErrorRecord { kind: ErrorKind::Io, message: e.to_string() },
-						));
+		for (filename, source) in self.input().sources()? {
+			let src = match css_parse::String::from_reader_in(source, &bump) {
+				Ok(src) => src.into_str(),
+				Err(e) => {
+					match self.format() {
+						OutputFormat::Json => {
+							envelopes.push(FileEnvelope::err(
+								filename,
+								ErrorRecord { kind: ErrorKind::Io, message: e.to_string() },
+							));
+						}
+						OutputFormat::Text => {
+							eprintln!("{filename}: {e}");
+						}
 					}
-					OutputFormat::Text => {
-						eprintln!("{filename}: {e}");
-					}
+					continue;
 				}
-				continue;
-			}
+			};
 
 			let mut ctx = Self::FileContext::default();
 			let mut on_stylesheet = |ss: &StyleSheet| {
 				if matches!(self.format(), OutputFormat::Text) {
-					ctx = self.build_context(ss, &src);
+					ctx = self.build_context(ss, src);
 				}
 			};
 
-			match self.parse_and_extract_file(filename, &src, &bump, &mut on_stylesheet) {
+			match self.parse_and_extract_file(filename, src, &bump, &mut on_stylesheet) {
 				Ok(rows) => match self.format() {
 					OutputFormat::Text => {
 						if rows.is_empty() {
@@ -236,14 +237,14 @@ pub trait Extract: Sized {
 								}
 							}
 							self.render_file_preamble(filename, rows.len(), config.colors());
-							let index = LineIndex::new_in(&src, &bump);
+							let index = LineIndex::new_in(src, &bump);
 							for (span, row) in &rows {
-								self.render_text(&ctx, filename, &src, &index, *span, row, config.colors());
+								self.render_text(&ctx, filename, src, &index, *span, row, config.colors());
 							}
 						}
 					}
 					OutputFormat::Json => {
-						let index = LineIndex::new_in(&src, &bump);
+						let index = LineIndex::new_in(src, &bump);
 						let records = rows
 							.into_iter()
 							.map(|(span, data)| Record { location: Location::from_span(span, &index), data })

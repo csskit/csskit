@@ -1,5 +1,3 @@
-use std::io::Read;
-
 use bumpalo::Bump;
 use clap::Args;
 use css_ast::VisitNode;
@@ -132,23 +130,22 @@ impl Tree {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
 		let bump = Bump::default();
 
-		for (filename, mut source) in self.input.sources()? {
-			let mut src = String::new();
-			source.read_to_string(&mut src)?;
+		for (filename, source) in self.input.sources()? {
+			let src = css_parse::String::from_reader_in(source, &bump)?.into_str();
 
-			let lexer = Lexer::new(&CssAtomSet::ATOMS, &src);
-			let mut parser = Parser::new(&bump, &src, lexer);
+			let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
+			let mut parser = Parser::new(&bump, src, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 
 			let Some(stylesheet) = result.output.as_ref() else {
 				for err in result.errors {
-					eprintln!("{}", crate::commands::format_diagnostic_error(&err, &src, filename));
+					eprintln!("{}", crate::commands::format_diagnostic_error(&err, src, filename));
 				}
 				return Err(CliError::ParseFailed);
 			};
 
 			// Collect all nodes
-			let mut visitor = CollectionVisitor::new(&src);
+			let mut visitor = CollectionVisitor::new(src);
 			let _ = stylesheet.accept(&mut visitor);
 
 			// Print root

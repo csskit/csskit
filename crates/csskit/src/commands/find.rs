@@ -13,7 +13,6 @@ use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use itertools::Itertools;
 use serde::Serialize;
-use std::io::Read;
 use strsim::levenshtein;
 
 #[derive(Debug, Args)]
@@ -91,14 +90,13 @@ impl Find {
 		let mut total = 0;
 		let mut files = 0;
 
-		for (filename, mut source) in self.input.sources()? {
-			let mut src = String::new();
-			source.read_to_string(&mut src)?;
+		for (filename, source) in self.input.sources()? {
+			let src = css_parse::String::from_reader_in(source, &bump)?.into_str();
 
-			let lexer = Lexer::new(&CssAtomSet::ATOMS, &src);
-			let mut parser = Parser::new(&bump, &src, lexer);
+			let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
+			let mut parser = Parser::new(&bump, src, lexer);
 			let Some(stylesheet) = parser.parse_entirely::<StyleSheet>().output else { continue };
-			let count = SelectorMatcher::new(selectors, &self.selector, &src).run(&stylesheet).count();
+			let count = SelectorMatcher::new(selectors, &self.selector, src).run(&stylesheet).count();
 			if count == 0 {
 				continue;
 			}

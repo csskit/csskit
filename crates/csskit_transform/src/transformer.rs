@@ -166,12 +166,11 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		self.edits.borrow_mut().push(TransformEdit::InsertAfter { anchor, cursors });
 	}
 
-	pub fn replace_parsed<T>(&self, span: impl ToSpan, css: &str)
+	pub fn replace_parsed<T>(&self, span: impl ToSpan, css: &'a str)
 	where
 		T: Parse<'a> + ToCursors,
 	{
-		let owned = self.bump.alloc_str(css);
-		self.replace(span, self.parse_value::<T>(owned));
+		self.replace(span, self.parse_value::<T>(css));
 	}
 
 	pub fn commit_overlays(&self) -> Result<(), CommitError> {

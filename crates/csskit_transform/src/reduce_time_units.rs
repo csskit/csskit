@@ -1,5 +1,6 @@
 use crate::prelude::*;
 use css_ast::{Time, Visitable};
+use css_parse::format_in;
 
 pub struct ReduceTimeUnits<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
@@ -25,17 +26,22 @@ where
 {
 	fn visit_time(&mut self, time: &Time) {
 		if let Time::Ms(dim) = time {
+			let arena = self.transformer.bump();
 			let seconds = time.as_seconds();
 			let sc = self.transformer.to_source_cursor((*dim).into());
-			let value = if seconds.fract() == 0.0 { format!("{}", seconds as i64) } else { format!("{seconds}") };
+			let value = if seconds.fract() == 0.0 {
+				format_in!(in arena, "{}", seconds as i64)
+			} else {
+				format_in!(in arena, "{seconds}")
+			};
 			let seconds_len = value.len() - value.starts_with("0.") as usize - value.starts_with("-0.") as usize + 1;
 			let ms_len = if sc.may_compact() {
-				format!("{}", self.transformer.to_source_cursor((*dim).into()).compact()).len()
+				format_in!(in arena, "{}", self.transformer.to_source_cursor((*dim).into()).compact()).len()
 			} else {
 				sc.token().len() as usize
 			};
 			if seconds_len < ms_len {
-				self.transformer.replace_parsed::<Time>(time.to_span(), &format!("{value}s"));
+				self.transformer.replace_parsed::<Time>(time.to_span(), format_in!(in arena, "{value}s").into_str());
 			}
 		}
 	}

@@ -103,13 +103,13 @@ impl Check {
 		let bump = Bump::new();
 
 		// Read and parse the csskit sheet
-		let rule_source = fs::read_to_string(sheet)?;
-		let rule_lexer = Lexer::new(CsskitAtomSet::get_dyn_set(), &rule_source);
-		let mut rule_parser = Parser::new(&bump, &rule_source, rule_lexer);
+		let rule_source = css_parse::String::from_reader_in(fs::File::open(sheet)?, &bump)?.into_str();
+		let rule_lexer = Lexer::new(CsskitAtomSet::get_dyn_set(), rule_source);
+		let mut rule_parser = Parser::new(&bump, rule_source, rule_lexer);
 		let rule_result = rule_parser.parse_entirely::<Sheet>();
 		let parsed_rules = rule_result.output.ok_or_else(|| {
 			if let Some(e) = rule_result.errors.first() {
-				eprintln!("{}", format_diagnostic_error(e, &rule_source, sheet));
+				eprintln!("{}", format_diagnostic_error(e, rule_source, sheet));
 			}
 			hint_bad_sheet(sheet, input, &config);
 			CliError::ParseFailed
@@ -120,28 +120,29 @@ impl Check {
 		let mut file_envelopes: Vec<CheckFileEnvelope> = Vec::new();
 
 		for css_file_path in input.iter() {
-			let css_source = match fs::read_to_string(css_file_path) {
-				Ok(s) => s,
-				Err(e) => {
-					match format {
-						OutputFormat::Json => {
-							file_envelopes.push(CheckFileEnvelope {
-								file: css_file_path.clone(),
-								ok: false,
-								error: Some(ErrorRecord { kind: ErrorKind::Io, message: e.to_string() }),
-								diagnostics: Vec::new(),
-								stats: Vec::new(),
-							});
+			let css_source =
+				match fs::File::open(css_file_path).and_then(|file| css_parse::String::from_reader_in(file, &bump)) {
+					Ok(source) => source.into_str(),
+					Err(e) => {
+						match format {
+							OutputFormat::Json => {
+								file_envelopes.push(CheckFileEnvelope {
+									file: css_file_path.clone(),
+									ok: false,
+									error: Some(ErrorRecord { kind: ErrorKind::Io, message: e.to_string() }),
+									diagnostics: Vec::new(),
+									stats: Vec::new(),
+								});
+							}
+							OutputFormat::Text => eprintln!("{css_file_path}: {e}"),
 						}
-						OutputFormat::Text => eprintln!("{css_file_path}: {e}"),
+						error_count += 1;
+						continue;
 					}
-					error_count += 1;
-					continue;
-				}
-			};
+				};
 
-			let css_lexer = Lexer::new(&CssAtomSet::ATOMS, &css_source);
-			let mut css_parser = Parser::new(&bump, &css_source, css_lexer);
+			let css_lexer = Lexer::new(&CssAtomSet::ATOMS, css_source);
+			let mut css_parser = Parser::new(&bump, css_source, css_lexer);
 			let css_result = css_parser.parse_entirely();
 
 			let stylesheet = match css_result.output {
@@ -151,8 +152,8 @@ impl Check {
 						.errors
 						.first()
 						.map(|e| {
-							eprintln!("{}", format_diagnostic_error(e, &css_source, css_file_path));
-							e.message(&css_source).to_string()
+							eprintln!("{}", format_diagnostic_error(e, css_source, css_file_path));
+							e.message(css_source).to_string()
 						})
 						.unwrap_or_else(|| "parse failed".to_string());
 					match format {
@@ -172,14 +173,14 @@ impl Check {
 				}
 			};
 
-			let mut collector = Collector::new(&parsed_rules, &rule_source, &bump);
-			collector.collect(&stylesheet, &css_source);
+			let mut collector = Collector::new(&parsed_rules, rule_source, &bump);
+			collector.collect(&stylesheet, css_source);
 
 			let mut file_failed = false;
 			let mut file_diagnostics: Vec<DiagnosticData> = Vec::new();
-			let line_index = matches!(format, OutputFormat::Json).then(|| LineIndex::new_in(&css_source, &bump));
+			let line_index = matches!(format, OutputFormat::Json).then(|| LineIndex::new_in(css_source, &bump));
 
-			for diagnostic in collector.diagnostics(&css_source) {
+			for diagnostic in collector.diagnostics(css_source) {
 				let is_error = matches!(diagnostic.severity, ResolvedDiagnosticLevel::Error);
 				let is_warning = matches!(diagnostic.severity, ResolvedDiagnosticLevel::Warning);
 				let counts_as_failure = is_error || (*deny_warnings && is_warning);
@@ -203,7 +204,7 @@ impl Check {
 					}
 					OutputFormat::Text => {
 						let handler = if config.colors() {
-							let highlighter = CssHighlighter::new(css_source.clone(), &stylesheet);
+							let highlighter = CssHighlighter::new(css_source.to_string(), &stylesheet);
 							GraphicalReportHandler::new_themed(GraphicalTheme::unicode())
 								.with_syntax_highlighting(highlighter)
 						} else {
@@ -211,7 +212,7 @@ impl Check {
 						};
 
 						let miette_diag = diagnostic.into_miette();
-						let named_source = NamedSource::new(css_file_path, css_source.clone());
+						let named_source = NamedSource::new(css_file_path, css_source.to_string());
 						let report = Report::new(miette_diag).with_source_code(named_source);
 						let mut output = String::new();
 						if handler.render_report(&mut output, &*report).is_ok() {

@@ -4,7 +4,6 @@ use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
 use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
-use std::io::Read;
 
 /// Convert one or more CSS files into production ready CSS.
 #[derive(Debug, Args)]
@@ -22,12 +21,10 @@ impl Build {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
 		let Build { content, output } = self;
 		let bump = Bump::default();
-		let mut str = String::new();
+		let mut str = css_parse::String::new_in(&bump);
 		let start = std::time::Instant::now();
-		for (file_name, mut source) in content.sources()? {
-			let mut source_string = String::new();
-			source.read_to_string(&mut source_string)?;
-			let source_text = source_string.as_str();
+		for (file_name, source) in content.sources()? {
+			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 			let mut parser = Parser::new(&bump, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
@@ -36,7 +33,7 @@ impl Build {
 				result.with_trivia().to_cursors(&mut stream);
 			} else {
 				for compact_err in result.errors {
-					let report = crate::commands::format_diagnostic_error(&compact_err, &source_string, file_name);
+					let report = crate::commands::format_diagnostic_error(&compact_err, source_text, file_name);
 					println!("{report}");
 				}
 				Err(CliError::ParseFailed)?;
