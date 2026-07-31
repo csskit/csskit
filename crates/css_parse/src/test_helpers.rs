@@ -29,17 +29,17 @@ macro_rules! assert_parse {
 	($atomset: path, $ty: ty, $str: literal, $expected: literal) => {
 		{
 			let source_text = $str;
-			let bump = ::bumpalo::Bump::default();
+			let alloc = $crate::Arena::default();
 			let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
-			let mut parser = $crate::Parser::new(&bump, &source_text, lexer);
+			let mut parser = $crate::Parser::new(&alloc, &source_text, lexer);
 			let result = parser.parse_entirely::<$ty>().with_trivia();
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 			}
-			let mut actual = $crate::String::new_in(&bump);
+			let mut actual = $crate::String::new_in(&alloc);
 			{
 				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
-				let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+				let mut ordered_sink = $crate::CursorOrderedSink::new(&alloc, &mut write_sink);
 				use $crate::ToCursors;
 				result.to_cursors(&mut ordered_sink);
 			}
@@ -54,17 +54,17 @@ macro_rules! assert_parse {
 	($atomset: path, $ty: ty, $str: literal, |$node: ident| $body: expr) => {
 		{
 			let source_text = $str;
-			let bump = ::bumpalo::Bump::default();
+			let alloc = $crate::Arena::default();
 			let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
-			let mut parser = $crate::Parser::new(&bump, &source_text, lexer);
+			let mut parser = $crate::Parser::new(&alloc, &source_text, lexer);
 			let result = parser.parse_entirely::<$ty>().with_trivia();
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 			}
-			let mut actual = $crate::String::new_in(&bump);
+			let mut actual = $crate::String::new_in(&alloc);
 			{
 				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
-				let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+				let mut ordered_sink = $crate::CursorOrderedSink::new(&alloc, &mut write_sink);
 				use $crate::ToCursors;
 				result.to_cursors(&mut ordered_sink);
 			}
@@ -78,9 +78,9 @@ macro_rules! assert_parse {
 	($atomset: path, $ty: ty, $str: literal, $($ast: pat)+) => {
 		{
 			let source_text = $str;
-			let bump = ::bumpalo::Bump::default();
+			let alloc = $crate::Arena::default();
 			let lexer = css_lexer::Lexer::new(&$atomset, &source_text);
-			let mut parser = $crate::Parser::new(&bump, &source_text, lexer);
+			let mut parser = $crate::Parser::new(&alloc, &source_text, lexer);
 			if !parser.peek::<$ty>() {
 				panic!("\n\nParse failed because Type didn't peek!\n\n   parser input: {:?}\n", source_text);
 			}
@@ -88,10 +88,10 @@ macro_rules! assert_parse {
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 			}
-			let mut actual = $crate::String::new_in(&bump);
+			let mut actual = $crate::String::new_in(&alloc);
 			{
 				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
-				let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+				let mut ordered_sink = $crate::CursorOrderedSink::new(&alloc, &mut write_sink);
 				use $crate::ToCursors;
 				result.to_cursors(&mut ordered_sink);
 			}
@@ -128,19 +128,19 @@ pub(crate) use assert_parse;
 macro_rules! assert_parse_error {
 	($atomset: path, $ty: ty, $str: literal) => {
 		let source_text = $str;
-		let bump = ::bumpalo::Bump::default();
+		let alloc = $crate::Arena::default();
 		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
-		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
+		let mut parser = $crate::Parser::new(&alloc, source_text, lexer);
 		if !parser.peek::<$ty>() {
 			panic!("\n\n.\n\nPeek returned false, please don't use `assert_parse_error` - use `assert_peek_false` instead: {:?}", source_text);
 		}
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {
-				let mut actual = $crate::String::new_in(&bump);
+				let mut actual = $crate::String::new_in(&alloc);
 				{
 					let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
-					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+					let mut ordered_sink = $crate::CursorOrderedSink::new(&alloc, &mut write_sink);
 					use $crate::ToCursors;
 					result.to_cursors(&mut ordered_sink);
 				}
@@ -165,19 +165,19 @@ pub(crate) use assert_parse_error;
 macro_rules! assert_peek_false {
 	($atomset: path, $ty: ty, $str: literal) => {
 		let source_text = $str;
-		let bump = ::bumpalo::Bump::default();
+		let alloc = $crate::Arena::default();
 		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
-		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
+		let mut parser = $crate::Parser::new(&alloc, source_text, lexer);
 		if parser.peek::<$ty>() {
 			panic!("\n\n.\n\nPeek returned true! You might want `assert_parse_error` instead: {:?}", source_text);
 		}
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {
-				let mut actual = $crate::String::new_in(&bump);
+				let mut actual = $crate::String::new_in(&alloc);
 				{
 					let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
-					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
+					let mut ordered_sink = $crate::CursorOrderedSink::new(&alloc, &mut write_sink);
 					use $crate::ToCursors;
 					result.to_cursors(&mut ordered_sink);
 				}
@@ -207,9 +207,9 @@ macro_rules! assert_parse_span {
 	($atomset: path, $ty: ty, $str: literal) => {
 		let expected = $str;
 		let source_text = expected.lines().find(|line| !line.trim().is_empty()).unwrap_or("");
-		let bump = ::bumpalo::Bump::default();
+		let alloc = $crate::Arena::default();
 		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
-		let mut parser = $crate::Parser::new(&bump, source_text, lexer);
+		let mut parser = $crate::Parser::new(&alloc, source_text, lexer);
 		let result = parser.parse::<$ty>();
 		match result {
 			Ok(result) => {

@@ -81,7 +81,7 @@ impl<'a> Peek<'a> for CustomElementTag {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let str = p.to_source_cursor(c).parse(p.bump());
+		let str = p.to_source_cursor(c).parse(p.alloc());
 		if Self::is_invalid(p.to_atom(c)) {
 			return false;
 		}

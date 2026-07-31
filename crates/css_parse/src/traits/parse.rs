@@ -49,7 +49,7 @@ where
 	where
 		Iter: Iterator<Item = Cursor> + Clone,
 	{
-		let mut vec = Vec::new_in(p.bump());
+		let mut vec = Vec::new_in(p.alloc());
 		while let Some(item) = p.parse_if_peek::<T>()? {
 			vec.push(item);
 		}

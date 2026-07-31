@@ -1,13 +1,12 @@
 #[cfg(test)]
 macro_rules! assert_transform {
 	($features: ident :: $transform: ident, $atoms: ident, $node: ident, $str: literal, $expected: literal) => {{
-		use bumpalo::Bump;
 		use css_lexer::{Lexer, QuoteStyle};
-		use css_parse::{CursorOverlaySink, CursorPrettyWriteSink, Parser, ToCursors};
+		use css_parse::{Arena, CursorOverlaySink, CursorPrettyWriteSink, Parser, ToCursors};
 
 		let source_text = $str;
 
-		let allocator = Bump::default();
+		let allocator = Arena::default();
 		let lexer = Lexer::new(&$atoms::ATOMS, source_text);
 		let mut parser = Parser::new(&allocator, source_text, lexer);
 		let mut result = parser.parse_entirely::<$node>();
@@ -62,13 +61,12 @@ pub(crate) use assert_transform;
 #[cfg(test)]
 macro_rules! assert_no_transform {
 	($features: ident :: $transform: ident, $atoms: ident, $node: ident, $str: literal) => {{
-		use bumpalo::Bump;
 		use css_lexer::{Lexer, QuoteStyle};
-		use css_parse::{CursorOverlaySink, CursorPrettyWriteSink, Parser, ToCursors};
+		use css_parse::{Arena, CursorOverlaySink, CursorPrettyWriteSink, Parser, ToCursors};
 
 		let source_text = $str;
 
-		let allocator = Bump::default();
+		let allocator = Arena::default();
 		let lexer = Lexer::new(&$atoms::ATOMS, source_text);
 		let mut parser = Parser::new(&allocator, source_text, lexer);
 		let mut result = parser.parse_entirely::<$node>();

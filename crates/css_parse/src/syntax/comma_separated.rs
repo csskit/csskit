@@ -35,8 +35,8 @@ pub struct CommaSeparated<'a, T, const MIN: usize = 1> {
 }
 
 impl<'a, T, const MIN: usize> CommaSeparated<'a, T, MIN> {
-	pub fn new_in(bump: &'a Arena) -> Self {
-		Self { items: Vec::new_in(bump) }
+	pub fn new_in(alloc: &'a Arena) -> Self {
+		Self { items: Vec::new_in(alloc) }
 	}
 
 	pub fn is_empty(&self) -> bool {
@@ -65,7 +65,7 @@ impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
-		let mut items = Self::new_in(p.bump());
+		let mut items = Self::new_in(p.alloc());
 		if MIN == 0 && !<T>::peek(p, p.peek_n(1)) {
 			return Ok(items);
 		}

@@ -68,8 +68,8 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorExpandedWriteSi
 #[cfg(test)]
 mod test {
 	use super::*;
+	use crate::Arena;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
 
 	macro_rules! assert_expand {
@@ -78,11 +78,11 @@ mod test {
 		};
 		($struct: ident, $before: literal, $after: literal) => {
 			let source_text = $before;
-			let bump = Bump::default();
+			let alloc = Arena::default();
 			let mut sink = String::new();
 			let mut stream = CursorExpandedWriteSink::new(source_text, &mut sink).with_escape_idents(true);
 			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			parser.parse_entirely::<$struct>().output.unwrap().to_cursors(&mut stream);
 			assert_eq!(sink, $after);
 		};

@@ -44,18 +44,18 @@ impl<'a, T: Write> SourceCursorSink<'a> for CursorWriteSink<'a, T> {
 #[cfg(test)]
 mod test {
 	use super::*;
+	use crate::Arena;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
 
 	#[test]
 	fn test() {
 		let source_text = "foo{bar:baz();}";
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let mut str = String::new();
 		let mut stream = CursorWriteSink::new(source_text, &mut str);
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
+		let mut parser = Parser::new(&alloc, source_text, lexer);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut stream);
 		assert_eq!(str, "foo{bar:baz();}");
 	}

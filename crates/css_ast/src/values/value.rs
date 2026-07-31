@@ -27,11 +27,11 @@ macro_rules! impl_value_slot_parse {
 			{
 				if p.peek::<$sub<T>>() {
 					if !p.enter_substitution() {
-						return Ok(Self::Unresolved(::css_parse::Box::new_in(p.bump(), p.parse::<Unresolved>()?)));
+						return Ok(Self::Unresolved(::css_parse::Box::new_in(p.alloc(), p.parse::<Unresolved>()?)));
 					}
 					let sub = p.parse::<$sub<T>>();
 					p.exit_substitution();
-					return Ok(Self::Substituted(::css_parse::Box::new_in(p.bump(), sub?)));
+					return Ok(Self::Substituted(::css_parse::Box::new_in(p.alloc(), sub?)));
 				}
 				Ok(Self::Literal(p.parse::<$lit>()?))
 			}
@@ -270,9 +270,8 @@ mod tests {
 	#[test]
 	fn depth_limit_rejects_to_unresolved() {
 		// Build var(--a, var(--a, ... )) nested past MAX_SUBSTITUTION_DEPTH.
-		use bumpalo::Bump;
 		use css_lexer::Lexer;
-		use css_parse::Parser;
+		use css_parse::{Arena, Parser};
 
 		let depth = (Parser::<std::vec::IntoIter<css_parse::Cursor>>::MAX_SUBSTITUTION_DEPTH as usize) + 5;
 		let mut input = String::new();
@@ -284,9 +283,9 @@ mod tests {
 			input.push(')');
 		}
 
-		let bump = Bump::new();
+		let alloc = Arena::new();
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, &input);
-		let mut p = Parser::new(&bump, &input, lexer);
+		let mut p = Parser::new(&alloc, &input, lexer);
 		// Must not stack-overflow; deepest level degrades to Unresolved rather than recursing.
 		let result = p.parse_entirely::<ValueColor>();
 		assert!(result.output.is_some(), "expected parse to succeed via Unresolved degradation");

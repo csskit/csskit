@@ -13,9 +13,9 @@ pub struct DbgLex {
 impl DbgLex {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
 		let DbgLex { content } = self;
-		let bump = css_parse::Arena::default();
+		let alloc = css_parse::Arena::default();
 		for (_file_name, source) in content.sources()? {
-			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let source_text = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 			let mut lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 
 			loop {

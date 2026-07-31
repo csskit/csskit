@@ -26,7 +26,7 @@ pub trait StyleSheet<'a, M: NodeMetadata>: Sized + Parse<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let mut rules: Vec<'a, Self::Rule> = Vec::new_in(p.bump());
+		let mut rules: Vec<'a, Self::Rule> = Vec::new_in(p.alloc());
 		let mut meta: M = Default::default();
 		loop {
 			// While by default the parser will skip whitespace, the Rule type may be a whitespace sensitive

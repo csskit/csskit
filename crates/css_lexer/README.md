@@ -14,7 +14,7 @@ A spec-compliant CSS tokenizer with zero-copy cursors and optional feature gates
 ## Optional Features
 
 - `miette` - Enables `From<>` implementations for miette span types
-- `bump` - Enables `From<>` implementations for bump Vec
+- `bumpalo` - Enables `From<>` implementations for bumpalo Vec
 - `serde` - Enables serialization/deserialization support
 
 ## Part of csskit

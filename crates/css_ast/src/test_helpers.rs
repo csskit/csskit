@@ -72,15 +72,14 @@ apply_visit_methods!(visit_mut_trait);
 #[cfg(feature = "visitable")]
 macro_rules! assert_visits {
 	($source: expr, $parse_type: ty $(, $visit_type: ty)* $(,)?) => {{
-		use bumpalo::Bump;
+		use css_parse::{Arena, Parser};
 		use css_lexer::Lexer;
-		use css_parse::Parser;
 		use $crate::VisitableMut;
 
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let source_text = $source;
 		let lexer = Lexer::new(&$crate::CssAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
+		let mut parser = Parser::new(&alloc, source_text, lexer);
 		let result = parser.parse_entirely::<$parse_type>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", source_text, result.errors[0]);
@@ -122,9 +121,9 @@ macro_rules! assert_visit_flow {
 	) => {{
 		use $crate::Visitable;
 		use $crate::NodeId;
-		let bump = bumpalo::Bump::new();
+		let alloc = ::css_parse::Arena::new();
 		let lexer = css_lexer::Lexer::new(&$crate::CssAtomSet::ATOMS, $source);
-		let mut parser = css_parse::Parser::new(&bump, $source, lexer);
+		let mut parser = css_parse::Parser::new(&alloc, $source, lexer);
 		let parsed = parser.parse_entirely::<$ty>().output.expect("parse failed");
 		let mut v = $visitor;
 		let _result = parsed.accept(&mut v);
@@ -140,13 +139,12 @@ pub(crate) use assert_visit_flow;
 #[macro_export]
 macro_rules! assert_feature_id {
 	($source: expr, $ty: ty, $id: literal) => {{
-		use bumpalo::Bump;
 		use css_lexer::Lexer;
-		use css_parse::Parser;
-		let bump = Bump::default();
+		use css_parse::{Arena, Parser};
+		let alloc = Arena::default();
 		let source_text = $source;
 		let lexer = Lexer::new(&$crate::CssAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
+		let mut parser = Parser::new(&alloc, source_text, lexer);
 		let result = parser.parse_entirely::<$ty>();
 		if !result.errors.is_empty() {
 			panic!("\n\nParse {:?} failed. Saw error {:?}", source_text, result.errors[0]);
@@ -224,8 +222,7 @@ impl crate::Visit for ControlFlowTestVisitor {
 mod tests {
 	use super::*;
 	use crate::{Color, VisitMut, VisitableMut};
-	use bumpalo::Bump;
-	use css_parse::{Parse, Parser};
+	use css_parse::{Arena, Parse, Parser};
 
 	// Test visitor that intentionally skips exit calls
 	struct UnbalancedVisitor {
@@ -251,10 +248,10 @@ mod tests {
 	fn test_unbalanced_visitor_panics() {
 		use css_lexer::Lexer;
 
-		let arena = Bump::new();
+		let alloc = Arena::new();
 		let input = "red";
 		let lexer = Lexer::new(&crate::CssAtomSet::ATOMS, input);
-		let mut parser = Parser::new(&arena, input, lexer);
+		let mut parser = Parser::new(&alloc, input, lexer);
 
 		let mut color = Color::parse(&mut parser).unwrap();
 		let mut visitor = UnbalancedVisitor::new();
@@ -268,10 +265,10 @@ mod tests {
 	fn test_balanced_visitor_succeeds() {
 		use css_lexer::Lexer;
 
-		let arena = Bump::new();
+		let alloc = Arena::new();
 		let input = "red";
 		let lexer = Lexer::new(&crate::CssAtomSet::ATOMS, input);
-		let mut parser = Parser::new(&arena, input, lexer);
+		let mut parser = Parser::new(&alloc, input, lexer);
 
 		let mut color = Color::parse(&mut parser).unwrap();
 		let mut visitor = TestVisitor::new();

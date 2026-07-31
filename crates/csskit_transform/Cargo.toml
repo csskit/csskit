@@ -17,7 +17,6 @@ css_ast = { workspace = true, features = ["visitable", "chromashift"] }
 css_parse = { workspace = true }
 visit_flow = { workspace = true }
 css_lexer = { workspace = true }
-bumpalo = { workspace = true }
 bitmask-enum = { workspace = true }
 chromashift = { workspace = true }
 

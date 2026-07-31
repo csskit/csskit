@@ -648,7 +648,6 @@ name = "css_ast"
 version = "0.0.28"
 dependencies = [
  "bitmask-enum",
- "bumpalo",
  "chromashift",
  "console",
  "criterion",
@@ -751,7 +750,6 @@ version = "0.0.28"
 dependencies = [
  "allocator-api2",
  "anstyle",
- "bumpalo",
  "chromashift",
  "clap",
  "css_ast",
@@ -777,7 +775,6 @@ name = "csskit_ast"
 version = "0.0.28"
 dependencies = [
  "bitmask-enum",
- "bumpalo",
  "criterion",
  "css_ast",
  "css_lexer",
@@ -813,7 +810,6 @@ version = "0.0.28"
 dependencies = [
  "anstyle",
  "bitmask-enum",
- "bumpalo",
  "chromashift",
  "console",
  "css_ast",
@@ -832,7 +828,6 @@ name = "csskit_lsp"
 version = "0.0.28"
 dependencies = [
  "bitmask-enum",
- "bumpalo",
  "console",
  "criterion",
  "crossbeam-channel",
@@ -913,7 +908,6 @@ name = "csskit_transform"
 version = "0.0.28"
 dependencies = [
  "bitmask-enum",
- "bumpalo",
  "chromashift",
  "criterion",
  "css_ast",
@@ -932,7 +926,6 @@ dependencies = [
 name = "csskit_wasm"
 version = "0.0.28"
 dependencies = [
- "bumpalo",
  "console_error_panic_hook",
  "css_ast",
  "css_lexer",

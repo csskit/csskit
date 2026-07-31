@@ -1,7 +1,6 @@
-use bumpalo::Bump;
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use css_lexer::Lexer;
-use css_parse::Parser;
+use css_parse::{Arena, Parser};
 use csskit_ast::CsskitAtomSet;
 use csskit_ast::sheet::Sheet;
 use glob::glob;
@@ -33,7 +32,7 @@ fn parse_sheet(c: &mut Criterion) {
 		group.throughput(Throughput::Bytes(file.source_text.len() as u64));
 		group.bench_with_input(BenchmarkId::from_parameter(&file.name), &file.source_text, |b, source_text| {
 			b.iter_with_large_drop(|| {
-				let allocator = Bump::default();
+				let allocator = Arena::default();
 				let lexer = Lexer::new(&CsskitAtomSet::ATOMS, &source_text);
 				let _ = Parser::new(&allocator, source_text, lexer).parse_entirely::<Sheet>();
 

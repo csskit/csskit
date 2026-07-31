@@ -66,7 +66,7 @@ impl<'a> Parse<'a> for Nth {
 			a = if c.token().is_int() { c.token().value() as i32 } else { 1 };
 		} else {
 			let source_cursor = p.to_source_cursor(c);
-			let anb = source_cursor.parse(p.bump());
+			let anb = source_cursor.parse(p.alloc());
 			let mut chars = anb.chars();
 			let mut char = chars.next();
 			a = if c.token().is_int() {

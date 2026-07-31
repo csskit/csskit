@@ -1,7 +1,7 @@
-use bumpalo::Bump;
 use crossbeam_channel::{Receiver, Sender, bounded};
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_lexer::{Lexer, LineIndex};
+use css_parse::Arena;
 use css_parse::{Parser, ParserReturn};
 use csskit_highlight::{Highlight, SemanticKind, SemanticModifier, TokenHighlighter};
 use dashmap::DashMap;
@@ -56,11 +56,11 @@ impl File {
 			thread: Builder::new()
 				.name("LspDocumentHandler".into())
 				.spawn(move || {
-					let mut bump = Bump::default();
+					let mut alloc = Arena::default();
 					let mut string: String = "".into();
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, "");
 					let mut result: ParserReturn<'_, StyleSheet<'_>> =
-						Parser::new(&bump, "", lexer).parse_entirely::<StyleSheet>();
+						Parser::new(&alloc, "", lexer).parse_entirely::<StyleSheet>();
 					while let Ok(call) = read_receiver.recv() {
 						match call {
 							FileCall::RopeChange(rope) => {
@@ -68,10 +68,10 @@ impl File {
 								let _ = span.enter();
 								// TODO! we should be able to optimize this by parsing a subset of the tree and mutating in
 								// place. For now though a partial parse request re-parses it all.
-								bump.reset();
+								alloc.reset();
 								string = rope.clone().into();
 								let lexer = Lexer::new(&CssAtomSet::ATOMS, &string);
-								result = Parser::new(&bump, &string, lexer).parse_entirely::<StyleSheet>();
+								result = Parser::new(&alloc, &string, lexer).parse_entirely::<StyleSheet>();
 								// if let Some(stylesheet) = &result.output {
 								// 	trace!("Sucessfully parsed stylesheet: {:#?}", &stylesheet);
 								// }
@@ -84,8 +84,8 @@ impl File {
 									let _ = stylesheet.accept(&mut highlighter);
 									let mut current_line = 0;
 									let mut current_start = 0;
-									let index_bump = Bump::new();
-									let line_index = LineIndex::new_in(&string, &index_bump);
+									let index_alloc = Arena::new();
+									let line_index = LineIndex::new_in(&string, &index_alloc);
 									let data = highlighter
 										.highlights()
 										.sorted_by(|a, b| Ord::cmp(&a.span(), &b.span()))

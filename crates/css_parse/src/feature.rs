@@ -10,12 +10,11 @@ use bitmask_enum::bitmask;
 /// ```
 /// use css_lexer::Lexer;
 /// use css_parse::*;
-/// use bumpalo::Bump;
-/// let bump = Bump::default();
+/// let alloc = Arena::default();
 /// let features = Feature::SingleLineComments | Feature::SeparateWhitespace;
 /// let source_text = "// foo";
 /// let lexer = Lexer::new_with_features(&EmptyAtomSet::ATOMS, &source_text, features.into());
-/// let mut parser = Parser::new(&bump, &source_text, lexer).with_features(features);
+/// let mut parser = Parser::new(&alloc, &source_text, lexer).with_features(features);
 /// ```
 #[bitmask(u8)]
 pub enum Feature {

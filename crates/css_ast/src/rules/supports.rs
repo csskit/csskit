@@ -188,11 +188,11 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 			if is_declaration {
 				let property = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
 				let close = p.parse_if_peek::<T![')']>()?;
-				return Ok(Self::Property(open, Box::new_in(p.bump(), property), close));
+				return Ok(Self::Property(open, Box::new_in(p.alloc(), property), close));
 			}
 			let condition = p.parse::<SupportsCondition>()?;
 			let close = p.parse::<T![')']>()?;
-			return Ok(Self::Condition(open, Box::new_in(p.bump(), condition), close));
+			return Ok(Self::Condition(open, Box::new_in(p.alloc(), condition), close));
 		}
 		if p.peek::<T![Function]>() {
 			let function = p.parse::<T![Function]>()?;

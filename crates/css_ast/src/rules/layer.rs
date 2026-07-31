@@ -38,7 +38,7 @@ impl<'a> Parse<'a> for LayerName<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let mut parts = Vec::new_in(p.bump());
+		let mut parts = Vec::new_in(p.alloc());
 		let first = p.parse::<T![Ident]>()?;
 		loop {
 			if p.peek::<T![.]>() {

@@ -116,7 +116,7 @@ impl<'a> Parse<'a> for StyleFeature<'a> {
 			return Ok(Self::CustomProperty(p.parse::<T![Ident]>()?));
 		}
 		let decl = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
-		Ok(Self::Declaration(Box::new_in(p.bump(), decl)))
+		Ok(Self::Declaration(Box::new_in(p.alloc(), decl)))
 	}
 }
 

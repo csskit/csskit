@@ -32,7 +32,7 @@ pub struct Parser<'a, I: Iterator<Item = Cursor> + Clone> {
 
 	pub(crate) state: State,
 
-	pub(crate) bump: &'a Arena,
+	pub(crate) alloc: &'a Arena,
 
 	skip: KindSet,
 
@@ -69,7 +69,7 @@ where
 	I: Iterator<Item = Cursor> + Clone,
 {
 	/// Create a new parser with an iterator over cursors
-	pub fn new(bump: &'a Arena, source_text: &'a str, mut cursor_iter: I) -> Self {
+	pub fn new(alloc: &'a Arena, source_text: &'a str, mut cursor_iter: I) -> Self {
 		let eof_cursor = eof_cursor(source_text.len());
 		let mut buffer = [eof_cursor; BUFFER_LEN];
 		buffer.fill_with(|| cursor_iter.next().unwrap_or(eof_cursor));
@@ -78,15 +78,15 @@ where
 			source_text,
 			cursor_iter,
 			features: Feature::none(),
-			errors: Vec::new_in(bump),
-			trivia: Vec::new_in(bump),
+			errors: Vec::new_in(alloc),
+			trivia: Vec::new_in(alloc),
 			state: State::none(),
 			skip: KindSet::TRIVIA,
 			stop: KindSet::NONE,
 			buffer,
 			buffer_index: 0,
 			substitution_depth: 0,
-			bump,
+			alloc,
 			#[cfg(debug_assertions)]
 			last_cursor: None,
 		}
@@ -109,8 +109,8 @@ where
 	}
 
 	#[inline]
-	pub fn bump(&self) -> &'a Arena {
-		self.bump
+	pub fn alloc(&self) -> &'a Arena {
+		self.alloc
 	}
 
 	/// Maximum nesting depth of substitution functions before parsing bails to `Unresolved`.
@@ -193,8 +193,8 @@ where
 				self.errors.push(Diagnostic::new(start, Diagnostic::expected_end).with_end_cursor(end));
 			}
 		}
-		let errors = mem::replace(&mut self.errors, Vec::new_in(self.bump));
-		let trivia = mem::replace(&mut self.trivia, Vec::new_in(self.bump));
+		let errors = mem::replace(&mut self.errors, Vec::new_in(self.alloc));
+		let trivia = mem::replace(&mut self.trivia, Vec::new_in(self.alloc));
 		ParserReturn::new(output, self.source_text, errors, trivia)
 	}
 
@@ -225,7 +225,7 @@ where
 				return false;
 			}
 			let source_cursor = self.to_source_cursor(c);
-			cursor_bits = atom.str_to_bits(&source_cursor.parse(self.bump));
+			cursor_bits = atom.str_to_bits(&source_cursor.parse(self.alloc));
 		}
 		cursor_bits == atom.bits()
 	}
@@ -237,13 +237,13 @@ where
 				return A::from_bits(0);
 			}
 			let source_cursor = self.to_source_cursor(c);
-			return A::from_str(&source_cursor.parse(self.bump));
+			return A::from_str(&source_cursor.parse(self.alloc));
 		}
 		#[cfg(debug_assertions)]
 		if c == KindSet::ATOM_LIKE && c != Kind::Dimension {
 			let is_dashed = c.token().is_dashed_ident();
 			let source_cursor = self.to_source_cursor(c);
-			let text = source_cursor.parse(self.bump);
+			let text = source_cursor.parse(self.alloc);
 			let comparable = if is_dashed { &text[2..] } else { &text[..] };
 			debug_assert!(
 				A::from_bits(bits) == A::from_str(comparable),
@@ -370,7 +370,7 @@ where
 	}
 
 	pub fn consume_trivia(&mut self) -> Vec<'a, Cursor> {
-		let mut trivia = Vec::new_in(self.bump);
+		let mut trivia = Vec::new_in(self.alloc);
 		for i in self.buffer_index..BUFFER_LEN {
 			let c = self.buffer[i];
 			if c == Kind::Eof {
@@ -424,7 +424,7 @@ where
 	#[allow(clippy::should_implement_trait)]
 	pub fn next(&mut self) -> Cursor {
 		// Collect trivia that should be associated with the next content token
-		let mut pending_trivia = Vec::new_in(self.bump);
+		let mut pending_trivia = Vec::new_in(self.alloc);
 
 		loop {
 			if self.buffer_index >= BUFFER_REFILL_INDEX {
@@ -475,9 +475,9 @@ where
 #[test]
 fn test_filling_buffer_with_skip_tokens() {
 	let str = "/*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*//*x*/a";
-	let bump = bumpalo::Bump::default();
+	let alloc = crate::Arena::default();
 	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str);
-	let mut p = Parser::new(&bump, str, lexer);
+	let mut p = Parser::new(&alloc, str, lexer);
 	let c = p.next();
 	assert_eq!(c.token(), Kind::Ident);
 	// Must not panic:
@@ -488,9 +488,9 @@ fn test_filling_buffer_with_skip_tokens() {
 #[test]
 fn peek_and_next() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
-	let bump = bumpalo::Bump::default();
+	let alloc = crate::Arena::default();
 	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &str);
-	let mut p = Parser::new(&bump, &str, lexer);
+	let mut p = Parser::new(&alloc, &str, lexer);
 	assert_eq!(p.at_end(), false);
 	assert_eq!(p.offset(), 0);
 	for n in 0..=1 {
@@ -528,9 +528,9 @@ fn peek_and_next() {
 #[test]
 fn peek_and_next_with_whitsespace() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
-	let bump = bumpalo::Bump::default();
+	let alloc = crate::Arena::default();
 	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &str);
-	let mut p = Parser::new(&bump, &str, lexer);
+	let mut p = Parser::new(&alloc, &str, lexer);
 	p.set_skip(KindSet::COMMENTS);
 	assert_eq!(p.at_end(), false);
 	assert_eq!(p.offset(), 0);

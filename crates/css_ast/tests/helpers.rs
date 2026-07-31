@@ -1,13 +1,12 @@
 #[macro_export]
 macro_rules! assert_snap_ast {
 	($source_path: literal) => {{
-		use bumpalo::Bump;
 		use css_ast::{CssAtomSet, StyleSheet};
 		use css_lexer::Lexer;
-		use css_parse::Parser;
+		use css_parse::{Arena, Parser};
 		use std::fs::read_to_string;
 
-		let allocator = Bump::default();
+		let allocator = Arena::default();
 		let source_text = read_to_string($source_path).unwrap();
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, &source_text);
 		let mut parser = Parser::new(&allocator, &source_text, lexer);

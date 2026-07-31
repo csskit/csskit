@@ -1,9 +1,8 @@
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
 use css_lexer::{Lexer, QuoteStyle};
-use css_parse::{CursorPrettyWriteSink, Parser, ToCursors};
+use css_parse::{Arena, CursorPrettyWriteSink, Parser, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 
 /// Format CSS files to make them more readable.
@@ -34,7 +33,7 @@ impl Fmt {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
 		let Fmt { content, output, check, expand_tab, single_quotes } = self;
 		let color = config.colors() && output.is_none() && !*check;
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let start = std::time::Instant::now();
 		let quotes = if *single_quotes { QuoteStyle::Single } else { QuoteStyle::Double };
 		if *check && output.is_some() {
@@ -42,12 +41,12 @@ impl Fmt {
 		}
 		let mut checks = 0;
 		for (file_name, source) in content.sources()? {
-			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let source_text = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(stylesheet) = result.output.as_ref() {
-				let mut str = css_parse::String::new_in(&bump);
+				let mut str = css_parse::String::new_in(&alloc);
 				if color {
 					let mut highlighter = TokenHighlighter::new();
 					let _ = stylesheet.accept(&mut highlighter);

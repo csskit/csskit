@@ -6,11 +6,10 @@ use crate::{
 		format_diagnostic_error,
 	},
 };
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::CssAtomSet;
 use css_lexer::{DynAtomSet, Lexer, LineIndex, RegisteredAtomSet};
-use css_parse::Parser;
+use css_parse::{Arena, Parser};
 use csskit_ast::{Collector, CsskitAtomSet, ResolvedDiagnosticLevel, StatType, sheet::Sheet};
 use csskit_highlight::CssHighlighter;
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource, Report};
@@ -100,12 +99,12 @@ impl Check {
 			return Err(CliError::ParseFailed);
 		}
 
-		let bump = Bump::new();
+		let alloc = Arena::new();
 
 		// Read and parse the csskit sheet
-		let rule_source = css_parse::String::from_reader_in(fs::File::open(sheet)?, &bump)?.into_str();
+		let rule_source = css_parse::String::from_reader_in(fs::File::open(sheet)?, &alloc)?.into_str();
 		let rule_lexer = Lexer::new(CsskitAtomSet::get_dyn_set(), rule_source);
-		let mut rule_parser = Parser::new(&bump, rule_source, rule_lexer);
+		let mut rule_parser = Parser::new(&alloc, rule_source, rule_lexer);
 		let rule_result = rule_parser.parse_entirely::<Sheet>();
 		let parsed_rules = rule_result.output.ok_or_else(|| {
 			if let Some(e) = rule_result.errors.first() {
@@ -121,7 +120,7 @@ impl Check {
 
 		for css_file_path in input.iter() {
 			let css_source =
-				match fs::File::open(css_file_path).and_then(|file| css_parse::String::from_reader_in(file, &bump)) {
+				match fs::File::open(css_file_path).and_then(|file| css_parse::String::from_reader_in(file, &alloc)) {
 					Ok(source) => source.into_str(),
 					Err(e) => {
 						match format {
@@ -142,7 +141,7 @@ impl Check {
 				};
 
 			let css_lexer = Lexer::new(&CssAtomSet::ATOMS, css_source);
-			let mut css_parser = Parser::new(&bump, css_source, css_lexer);
+			let mut css_parser = Parser::new(&alloc, css_source, css_lexer);
 			let css_result = css_parser.parse_entirely();
 
 			let stylesheet = match css_result.output {
@@ -173,12 +172,12 @@ impl Check {
 				}
 			};
 
-			let mut collector = Collector::new(&parsed_rules, rule_source, &bump);
+			let mut collector = Collector::new(&parsed_rules, rule_source, &alloc);
 			collector.collect(&stylesheet, css_source);
 
 			let mut file_failed = false;
 			let mut file_diagnostics: Vec<DiagnosticData> = Vec::new();
-			let line_index = matches!(format, OutputFormat::Json).then(|| LineIndex::new_in(css_source, &bump));
+			let line_index = matches!(format, OutputFormat::Json).then(|| LineIndex::new_in(css_source, &alloc));
 
 			for diagnostic in collector.diagnostics(css_source) {
 				let is_error = matches!(diagnostic.severity, ResolvedDiagnosticLevel::Error);

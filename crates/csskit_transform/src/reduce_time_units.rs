@@ -26,7 +26,7 @@ where
 {
 	fn visit_time(&mut self, time: &Time) {
 		if let Time::Ms(dim) = time {
-			let arena = self.transformer.bump();
+			let arena = self.transformer.alloc();
 			let seconds = time.as_seconds();
 			let sc = self.transformer.to_source_cursor((*dim).into());
 			let value = if seconds.fract() == 0.0 {

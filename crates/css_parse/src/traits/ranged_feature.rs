@@ -197,7 +197,6 @@ pub trait RangedFeature<'a>: Sized {
 ///
 /// ```
 /// use css_parse::*;
-/// use bumpalo::Bump;
 /// use csskit_derives::{ToCursors, ToSpan};
 /// use derive_atom_set::AtomSet;
 ///
@@ -237,7 +236,6 @@ pub trait RangedFeature<'a>: Sized {
 /// use css_parse::*;
 /// use csskit_derives::*;
 /// use derive_atom_set::*;
-/// use bumpalo::Bump;
 ///
 /// #[derive(Debug, Default, AtomSet, Copy, Clone, PartialEq)]
 /// pub enum MyAtomSet {

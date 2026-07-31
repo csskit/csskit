@@ -7,6 +7,29 @@ use std::hash::{Hash, Hasher};
 use std::ops::{Deref, DerefMut};
 use std::ptr::NonNull;
 
+/// A `bumpalo::vec!`-style constructor for the arena [`Vec`], generic over the allocator backend.
+///
+/// - `vec_in![in alloc]` -> empty
+/// - `vec_in![in alloc; elem; n]` -> `n` clones of `elem`
+/// - `vec_in![in alloc; a, b, c]` -> the listed elements, in order
+#[macro_export]
+macro_rules! vec_in {
+	(in $alloc:expr $(,)?) => { $crate::Vec::new_in($alloc) };
+	(in $alloc:expr; $elem:expr; $n:expr) => {{
+		let n = $n;
+		let mut v = $crate::Vec::with_capacity_in(n, $alloc);
+		for _ in 0..n {
+			v.push(::core::clone::Clone::clone(&$elem));
+		}
+		v
+	}};
+	(in $alloc:expr; $($x:expr),+ $(,)?) => {{
+		let mut v = $crate::Vec::new_in($alloc);
+		$( v.push($x); )+
+		v
+	}};
+}
+
 /// A growable, arena-allocated contiguous array, generic over any [`Allocator`].
 ///
 /// Unlike `std`'s `Vec`, this never runs element destructors: values live in the arena and are released wholesale when
@@ -511,8 +534,8 @@ mod test {
 
 	#[test]
 	fn new_is_empty_and_allocates_nothing() {
-		let arena = Arena::new();
-		let v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let v: Vec<i32> = Vec::new_in(&alloc);
 		assert!(v.is_empty());
 		assert_eq!(v.len(), 0);
 		assert_eq!(v.capacity(), 0);
@@ -521,8 +544,8 @@ mod test {
 
 	#[test]
 	fn with_capacity_reserves_but_stays_empty() {
-		let arena = Arena::new();
-		let v: Vec<i32> = Vec::with_capacity_in(16, &arena);
+		let alloc = Arena::new();
+		let v: Vec<i32> = Vec::with_capacity_in(16, &alloc);
 		assert!(v.is_empty());
 		assert_eq!(v.len(), 0);
 		assert!(v.capacity() >= 16);
@@ -530,15 +553,15 @@ mod test {
 
 	#[test]
 	fn with_capacity_zero_allocates_nothing() {
-		let arena = Arena::new();
-		let v: Vec<i32> = Vec::with_capacity_in(0, &arena);
+		let alloc = Arena::new();
+		let v: Vec<i32> = Vec::with_capacity_in(0, &alloc);
 		assert_eq!(v.capacity(), 0);
 	}
 
 	#[test]
 	fn push_grows_and_preserves_order() {
-		let arena = Arena::new();
-		let mut v: Vec<u32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<u32> = Vec::new_in(&alloc);
 		for i in 0..1000u32 {
 			v.push(i);
 		}
@@ -551,8 +574,8 @@ mod test {
 
 	#[test]
 	fn pop_returns_last_then_none() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([10, 20, 30]);
 		assert_eq!(v.pop(), Some(30));
 		assert_eq!(v.pop(), Some(20));
@@ -563,8 +586,8 @@ mod test {
 
 	#[test]
 	fn insert_at_boundaries_and_middle() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		v.insert(0, 0); // front
 		assert_eq!(&*v, &[0, 1, 2, 3]);
@@ -576,16 +599,16 @@ mod test {
 
 	#[test]
 	fn insert_into_empty() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.insert(0, 42);
 		assert_eq!(&*v, &[42]);
 	}
 
 	#[test]
 	fn insert_out_of_bounds_panics() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2]);
 		let result = catch_unwind(AssertUnwindSafe(|| v.insert(3, 0)));
 		assert!(result.is_err());
@@ -593,8 +616,8 @@ mod test {
 
 	#[test]
 	fn remove_at_boundaries_and_middle() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4]);
 		assert_eq!(v.remove(0), 0); // front
 		assert_eq!(&*v, &[1, 2, 3, 4]);
@@ -606,8 +629,8 @@ mod test {
 
 	#[test]
 	fn remove_out_of_bounds_panics() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2]);
 		let result = catch_unwind(AssertUnwindSafe(|| v.remove(2)));
 		assert!(result.is_err());
@@ -615,9 +638,9 @@ mod test {
 
 	#[test]
 	fn truncate_shortens_without_dropping() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..5 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -628,8 +651,8 @@ mod test {
 
 	#[test]
 	fn truncate_longer_than_len_is_noop() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		v.truncate(10);
 		assert_eq!(&*v, &[1, 2, 3]);
@@ -637,9 +660,9 @@ mod test {
 
 	#[test]
 	fn clear_empties_without_dropping() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..3 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -650,8 +673,8 @@ mod test {
 
 	#[test]
 	fn extend_from_slice_clones_elements() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.push(1);
 		v.extend_from_slice(&[2, 3, 4]);
 		assert_eq!(&*v, &[1, 2, 3, 4]);
@@ -659,8 +682,8 @@ mod test {
 
 	#[test]
 	fn extend_with_accurate_size_hint_reserves_once() {
-		let arena = Arena::new();
-		let mut v: Vec<u32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<u32> = Vec::new_in(&alloc);
 		v.extend(0..64u32);
 		assert_eq!(v.len(), 64);
 		for i in 0..64u32 {
@@ -670,8 +693,8 @@ mod test {
 
 	#[test]
 	fn extend_empty_iterator_is_noop() {
-		let arena = Arena::new();
-		let mut v: Vec<u32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<u32> = Vec::new_in(&alloc);
 		v.extend(std::iter::empty::<u32>());
 		assert!(v.is_empty());
 		assert_eq!(v.capacity(), 0);
@@ -679,8 +702,8 @@ mod test {
 
 	#[test]
 	fn retain_keeps_matching_and_shifts() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4, 5, 6, 7]);
 		v.retain(|&x| x % 2 == 0);
 		assert_eq!(&*v, &[0, 2, 4, 6]);
@@ -688,8 +711,8 @@ mod test {
 
 	#[test]
 	fn retain_all_and_none() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		v.retain(|_| true);
 		assert_eq!(&*v, &[1, 2, 3]);
@@ -699,9 +722,9 @@ mod test {
 
 	#[test]
 	fn retain_drops_removed_exactly_once() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..6 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -714,9 +737,9 @@ mod test {
 
 	#[test]
 	fn retain_panic_drops_no_element_twice() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..5 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -738,8 +761,8 @@ mod test {
 
 	#[test]
 	fn drain_empty_range() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		let drained: std::vec::Vec<i32> = v.drain(1..1).collect();
 		assert!(drained.is_empty());
@@ -748,8 +771,8 @@ mod test {
 
 	#[test]
 	fn drain_suffix() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4]);
 		let drained: std::vec::Vec<i32> = v.drain(3..).collect();
 		assert_eq!(drained, vec![3, 4]);
@@ -758,8 +781,8 @@ mod test {
 
 	#[test]
 	fn drain_inclusive_bound() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4]);
 		let drained: std::vec::Vec<i32> = v.drain(1..=3).collect();
 		assert_eq!(drained, vec![1, 2, 3]);
@@ -768,8 +791,8 @@ mod test {
 
 	#[test]
 	fn drain_start_after_end_panics() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2]);
 		use std::ops::Bound;
 		let bad_range = (Bound::Included(2u32), Bound::Excluded(1u32));
@@ -781,8 +804,8 @@ mod test {
 
 	#[test]
 	fn drain_out_of_bounds_panics() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2]);
 		let result = catch_unwind(AssertUnwindSafe(|| {
 			let _ = v.drain(1..99);
@@ -792,9 +815,9 @@ mod test {
 
 	#[test]
 	fn drain_yielded_and_remaining_drop_exactly_once() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..6 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -812,9 +835,9 @@ mod test {
 
 	#[test]
 	fn drain_fully_consumed_then_no_extra_drops() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..4 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -830,8 +853,8 @@ mod test {
 
 	#[test]
 	fn drain_size_hint_not_relied_on_but_iteration_correct() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([5, 6, 7, 8]);
 		let mut iter = v.drain(0..4);
 		assert_eq!(iter.next(), Some(5));
@@ -843,8 +866,8 @@ mod test {
 
 	#[test]
 	fn drain_prefix_shifts_tail() {
-		let arena = Arena::default();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::default();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4, 5]);
 		let drained: std::vec::Vec<i32> = v.drain(0..2).collect();
 		assert_eq!(drained, vec![0, 1]);
@@ -853,8 +876,8 @@ mod test {
 
 	#[test]
 	fn drain_middle_shifts_tail() {
-		let arena = Arena::default();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::default();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4, 5]);
 		let drained: std::vec::Vec<i32> = v.drain(2..4).collect();
 		assert_eq!(drained, vec![2, 3]);
@@ -863,8 +886,8 @@ mod test {
 
 	#[test]
 	fn drain_full_range() {
-		let arena = Arena::default();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::default();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		let drained: std::vec::Vec<i32> = v.drain(..).collect();
 		assert_eq!(drained, vec![1, 2, 3]);
@@ -873,8 +896,8 @@ mod test {
 
 	#[test]
 	fn drain_dropped_without_iterating_still_shifts() {
-		let arena = Arena::default();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::default();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([0, 1, 2, 3, 4]);
 		drop(v.drain(1..3));
 		assert_eq!(&*v, &[0, 3, 4]);
@@ -882,8 +905,8 @@ mod test {
 
 	#[test]
 	fn retain_preserves_length_when_predicate_panics() {
-		let arena = Arena::new();
-		let mut values = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut values = Vec::new_in(&alloc);
 		values.extend([0, 1, 2]);
 		let calls = Cell::new(0);
 
@@ -905,8 +928,8 @@ mod test {
 
 	#[test]
 	fn into_iter_yields_all_in_order() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3, 4]);
 		let collected: std::vec::Vec<i32> = v.into_iter().collect();
 		assert_eq!(collected, vec![1, 2, 3, 4]);
@@ -914,8 +937,8 @@ mod test {
 
 	#[test]
 	fn into_iter_size_hint_is_exact() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		let mut iter = v.into_iter();
 		assert_eq!(iter.size_hint(), (3, Some(3)));
@@ -925,9 +948,9 @@ mod test {
 
 	#[test]
 	fn into_iter_partial_consume_drops_remainder_once() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..5 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -945,9 +968,9 @@ mod test {
 
 	#[test]
 	fn into_iter_fully_consumed_no_leak() {
-		let arena = Arena::new();
+		let alloc = Arena::new();
 		let drops = Rc::new(Cell::new(0));
-		let mut v: Vec<DropCounter> = Vec::new_in(&arena);
+		let mut v: Vec<DropCounter> = Vec::new_in(&alloc);
 		for i in 0..4 {
 			v.push(DropCounter::new(i, &drops));
 		}
@@ -959,8 +982,8 @@ mod test {
 
 	#[test]
 	fn clone_is_independent_copy() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([1, 2, 3]);
 		let mut c = v.clone();
 		c.push(4);
@@ -970,13 +993,13 @@ mod test {
 
 	#[test]
 	fn eq_and_ord_delegate_to_slice() {
-		let arena = Arena::new();
-		let mut a: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut a: Vec<i32> = Vec::new_in(&alloc);
 		a.extend([1, 2, 3]);
-		let mut b: Vec<i32> = Vec::new_in(&arena);
+		let mut b: Vec<i32> = Vec::new_in(&alloc);
 		b.extend([1, 2, 3]);
 		assert_eq!(a, b);
-		let mut c: Vec<i32> = Vec::new_in(&arena);
+		let mut c: Vec<i32> = Vec::new_in(&alloc);
 		c.extend([1, 2, 4]);
 		assert!(a < c);
 		assert_ne!(a, c);
@@ -984,8 +1007,8 @@ mod test {
 
 	#[test]
 	fn index_and_index_mut() {
-		let arena = Arena::new();
-		let mut v: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
 		v.extend([10, 20, 30]);
 		assert_eq!(v[1], 20);
 		v[1] = 99;
@@ -997,10 +1020,10 @@ mod test {
 	fn hash_matches_equal_vecs() {
 		use std::collections::hash_map::DefaultHasher;
 		use std::hash::{Hash, Hasher};
-		let arena = Arena::new();
-		let mut a: Vec<i32> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut a: Vec<i32> = Vec::new_in(&alloc);
 		a.extend([1, 2, 3]);
-		let mut b: Vec<i32> = Vec::new_in(&arena);
+		let mut b: Vec<i32> = Vec::new_in(&alloc);
 		b.extend([1, 2, 3]);
 		let mut ha = DefaultHasher::new();
 		let mut hb = DefaultHasher::new();
@@ -1011,8 +1034,8 @@ mod test {
 
 	#[test]
 	fn realloc_preserves_boxed_contents() {
-		let arena = Arena::new();
-		let mut v: Vec<std::boxed::Box<u32>> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<std::boxed::Box<u32>> = Vec::new_in(&alloc);
 		for i in 0..512u32 {
 			v.push(std::boxed::Box::new(i));
 		}
@@ -1025,8 +1048,8 @@ mod test {
 
 	#[test]
 	fn zero_sized_type_push_pop_len() {
-		let arena = Arena::new();
-		let mut v: Vec<()> = Vec::new_in(&arena);
+		let alloc = Arena::new();
+		let mut v: Vec<()> = Vec::new_in(&alloc);
 		for _ in 0..100 {
 			v.push(());
 		}

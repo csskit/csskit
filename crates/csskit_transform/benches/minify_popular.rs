@@ -1,8 +1,7 @@
-use bumpalo::Bump;
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{CursorWriteSink, Parser, ToCursors};
+use css_parse::{Arena, CursorWriteSink, Parser, ToCursors};
 use glob::glob;
 #[cfg(target_family = "unix")]
 use pprof::criterion::{Output, PProfProfiler};
@@ -32,11 +31,11 @@ fn popular(c: &mut Criterion) {
 		group.throughput(Throughput::Bytes(file.source_text.len() as u64));
 		group.bench_with_input(BenchmarkId::from_parameter(&file.name), &file.source_text, |b, source_text| {
 			b.iter_with_large_drop(|| {
-				let bump = Bump::default();
+				let alloc = Arena::default();
 				{
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-					let mut result = Parser::new(&bump, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
-					let mut string = css_parse::String::new_in(&bump);
+					let mut result = Parser::new(&alloc, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
+					let mut string = css_parse::String::new_in(&alloc);
 					if let Some(stylesheet) = result.output.as_mut() {
 						// let mut transformer = ReduceInitial::default();
 						// TODO! Re-introduce minifyer
@@ -45,7 +44,7 @@ fn popular(c: &mut Criterion) {
 						stylesheet.to_cursors(&mut sink);
 					}
 				}
-				bump
+				alloc
 			});
 		});
 	}

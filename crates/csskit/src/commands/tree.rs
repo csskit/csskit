@@ -1,10 +1,9 @@
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::VisitNode;
 use css_ast::visit::{Visit, Visitable, visitor};
 use css_ast::{CssAtomSet, PROPERTY_KIND_VARIANTS, PropertyKind, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{Cursor, Parser, ToSpan};
+use css_parse::{Arena, Cursor, Parser, ToSpan};
 use csskit_ast::{QueryFunctionalPseudoClass, QueryPseudoClass};
 
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
@@ -128,13 +127,13 @@ impl<'a> Visit for CollectionVisitor<'a> {
 
 impl Tree {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
-		let bump = Bump::default();
+		let alloc = Arena::default();
 
 		for (filename, source) in self.input.sources()? {
-			let src = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let src = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
-			let mut parser = Parser::new(&bump, src, lexer);
+			let mut parser = Parser::new(&alloc, src, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 
 			let Some(stylesheet) = result.output.as_ref() else {

@@ -213,7 +213,6 @@ macro_rules! define_kind_idents {
 ///
 /// ```
 /// use css_parse::*;
-/// use bumpalo::Bump;
 /// custom_delim!{
 ///   /// A £ character.
 ///   PoundSterling, '£'
@@ -307,7 +306,6 @@ macro_rules! custom_delim {
 ///
 /// ```
 /// use css_parse::*;
-/// use bumpalo::Bump;
 /// custom_double_delim!{
 ///   /// Two % adjacent symbols
 ///   DoublePercent, '%', '%'

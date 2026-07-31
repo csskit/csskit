@@ -1,9 +1,8 @@
-use bumpalo::Bump;
 use css_lexer::{AtomSet, Cursor, DynAtomSet, KindSet, Lexer, ToSpan};
 use css_parse::Vec;
 use css_parse::{
-	CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment, Parse,
-	Parser, SourceCursor, SourceOffset, Span, ToCursors,
+	Arena, CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment,
+	Parse, Parser, SourceCursor, SourceOffset, Span, ToCursors,
 };
 use std::{cell::RefCell, marker::PhantomData};
 
@@ -36,7 +35,7 @@ pub trait TransformerFeatures<M, N>: Sized + Default + Copy {
 }
 
 pub struct Transformer<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> {
-	bump: &'a Bump,
+	alloc: &'a Arena,
 	atoms: &'static dyn DynAtomSet,
 	pub(crate) features: F,
 	changed: RefCell<bool>,
@@ -47,14 +46,14 @@ pub struct Transformer<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: Transform
 }
 
 impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> Transformer<'a, M, N, F> {
-	pub fn new_in(bump: &'a Bump, features: F, atoms: &'static dyn DynAtomSet, source_text: &'a str) -> Self {
+	pub fn new_in(alloc: &'a Arena, features: F, atoms: &'static dyn DynAtomSet, source_text: &'a str) -> Self {
 		Self {
-			bump,
+			alloc,
 			features,
 			atoms,
 			changed: RefCell::new(false),
-			overlays: RefCell::new(CursorOverlaySet::new(bump)),
-			edits: RefCell::new(Vec::new_in(bump)),
+			overlays: RefCell::new(CursorOverlaySet::new(alloc)),
+			edits: RefCell::new(Vec::new_in(alloc)),
 			source_text,
 			_phantom: PhantomData,
 		}
@@ -72,8 +71,8 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		*self.changed.borrow()
 	}
 
-	pub fn bump(&self) -> &'a Bump {
-		self.bump
+	pub fn alloc(&self) -> &'a Arena {
+		self.alloc
 	}
 
 	pub fn to_source_cursor(&self, cursor: Cursor) -> SourceCursor<'a> {
@@ -81,7 +80,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	}
 
 	pub fn to_source_cursors(&self, parsed: &impl ToCursors) -> Vec<'a, SourceCursor<'a>> {
-		let mut cursors = Vec::new_in(self.bump());
+		let mut cursors = Vec::new_in(self.alloc());
 		let mut sink = CursorToSourceCursorSink::new(self.source_text, &mut cursors);
 		parsed.to_cursors(&mut sink);
 		cursors
@@ -94,7 +93,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 				return A::from_bits(0);
 			}
 			let source_cursor = self.to_source_cursor(c);
-			return A::from_str(&source_cursor.parse(self.bump));
+			return A::from_str(&source_cursor.parse(self.alloc));
 		}
 		A::from_bits(bits)
 	}
@@ -108,7 +107,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		T: Parse<'a> + ToCursors,
 	{
 		let lexer = Lexer::new(self.atoms, source);
-		let mut parser = Parser::new(self.bump, source, lexer);
+		let mut parser = Parser::new(self.alloc, source, lexer);
 		let parsed = parser.parse_entirely::<T>();
 		debug_assert!(
 			parsed.output.is_some(),
@@ -116,7 +115,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 			source,
 			parsed.errors
 		);
-		let mut cursors = Vec::new_in(self.bump());
+		let mut cursors = Vec::new_in(self.alloc());
 		let mut sink = CursorToSourceCursorSink::new(source, &mut cursors);
 		parsed.to_cursors(&mut sink);
 		cursors
@@ -179,7 +178,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 			return Ok(());
 		}
 
-		let mut pending_segments: Vec<'a, PendingSegment<'a>> = Vec::with_capacity_in(edits.len(), self.bump);
+		let mut pending_segments: Vec<'a, PendingSegment<'a>> = Vec::with_capacity_in(edits.len(), self.alloc);
 
 		for (order, edit) in edits.drain(..).enumerate() {
 			match edit {
@@ -207,7 +206,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 						span: target,
 						intent: OverlayKind::Replace,
 						order,
-						cursors: Vec::with_capacity_in(0, self.bump()),
+						cursors: Vec::with_capacity_in(0, self.alloc()),
 					});
 				}
 			}
@@ -284,15 +283,14 @@ mod tests {
 	use crate::CssMinifierFeature;
 
 	use super::*;
-	use bumpalo::Bump;
 	use css_ast::{CssAtomSet, CssMetadata};
-	use css_parse::{ComponentValues, SourceOffset, Span};
+	use css_parse::{Arena, ComponentValues, SourceOffset, Span};
 
 	#[test]
 	fn commit_overlays_rejects_overlapping_edits() {
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let context: Transformer<CssMetadata, ComponentValues, CssMinifierFeature> =
-			Transformer::new_in(&bump, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
+			Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
 		let first = context.parse_value::<ComponentValues>("a");
 		let second = context.parse_value::<ComponentValues>("b");
 
@@ -311,9 +309,9 @@ mod tests {
 
 	#[test]
 	fn commit_overlays_preserves_insert_order() {
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let context: Transformer<CssMetadata, ComponentValues, CssMinifierFeature> =
-			Transformer::new_in(&bump, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
+			Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
 		let anchor = SourceOffset(5);
 
 		context.insert_before(anchor, context.parse_value::<ComponentValues>("A"));

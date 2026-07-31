@@ -1,9 +1,8 @@
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{CursorCompactWriteSink, Parser, ToCursors};
+use css_parse::{Arena, CursorCompactWriteSink, Parser, ToCursors};
 
 /// Convert one or more CSS files into production ready CSS.
 #[derive(Debug, Args)]
@@ -20,13 +19,13 @@ pub struct Build {
 impl Build {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
 		let Build { content, output } = self;
-		let bump = Bump::default();
-		let mut str = css_parse::String::new_in(&bump);
+		let alloc = Arena::default();
+		let mut str = css_parse::String::new_in(&alloc);
 		let start = std::time::Instant::now();
 		for (file_name, source) in content.sources()? {
-			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let source_text = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut str);

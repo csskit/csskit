@@ -128,8 +128,8 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for CursorCompactWriteSin
 #[cfg(test)]
 mod test {
 	use super::*;
+	use crate::Arena;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
 
 	macro_rules! assert_format {
@@ -138,12 +138,12 @@ mod test {
 		};
 		($struct: ident, $before: literal, $after: literal) => {
 			let source_text = $before;
-			let bump = Bump::default();
+			let alloc = Arena::default();
 			let mut sink = String::new();
 			{
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
 				let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-				let mut parser = Parser::new(&bump, source_text, lexer);
+				let mut parser = Parser::new(&alloc, source_text, lexer);
 				parser.parse_entirely::<$struct>().with_trivia().to_cursors(&mut stream);
 			}
 			assert_eq!(sink, $after.trim());

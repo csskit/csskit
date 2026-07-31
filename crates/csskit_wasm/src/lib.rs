@@ -1,10 +1,10 @@
 #![deny(warnings)]
-use bumpalo::Bump;
 use core::fmt::Write;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Kind, Lexer, QuoteStyle};
 use css_parse::{
-	CursorCompactWriteSink, CursorOverlaySink, CursorPrettyWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors,
+	Arena, CursorCompactWriteSink, CursorOverlaySink, CursorPrettyWriteSink, Diagnostic, DiagnosticMeta, Parser,
+	ToCursors,
 };
 use csskit_transform::{CssMinifierFeature, Transformer};
 #[cfg(all(feature = "miette", not(feature = "fancy")))]
@@ -37,7 +37,7 @@ pub fn lex(source_text: String) -> Result<JsValue, serde_wasm_bindgen::Error> {
 
 #[wasm_bindgen]
 pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm_bindgen::Error> {
-	let allocator = Bump::default();
+	let allocator = Arena::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
 	let result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
 	let serializer = serde_wasm_bindgen::Serializer::json_compatible();
@@ -66,7 +66,7 @@ pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm
 
 #[wasm_bindgen]
 pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> {
-	let allocator = Bump::default();
+	let allocator = Arena::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
 	let mut result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
 	if !result.errors.is_empty() {
@@ -104,7 +104,7 @@ pub fn format(source_text: String, options: JsValue) -> Result<String, serde_was
 }
 
 fn format_with_options(source_text: &str, options: FormatOptions) -> Result<String, String> {
-	let allocator = Bump::default();
+	let allocator = Arena::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 	let result = Parser::new(&allocator, source_text, lexer).parse_entirely::<StyleSheet>();
 	if !result.errors.is_empty() {
@@ -131,7 +131,7 @@ fn format_with_options(source_text: &str, options: FormatOptions) -> Result<Stri
 
 #[wasm_bindgen]
 pub fn parse_error_report(source_text: String) -> String {
-	let allocator = Bump::default();
+	let allocator = Arena::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
 	let result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
 	let mut report = String::new();

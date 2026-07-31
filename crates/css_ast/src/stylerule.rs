@@ -90,7 +90,7 @@ impl<'a> RuleVariants<'a> for NestedGroupRule<'a> {
 			)+ ) => {
 				match p.to_atom::<CssAtomSet>(name) {
 					$(CssAtomSet::$name => p.parse::<rules::$ty>().map(Self::$name),)+
-					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(Box::new_in(p.bump(), r))),
+					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(Box::new_in(p.alloc(), r))),
 					_ => Err(Diagnostic::new(name.into(), Diagnostic::unexpected_at_rule))?,
 				}
 			}
