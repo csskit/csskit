@@ -81,7 +81,6 @@ pub trait BooleanFeature<'a>: Sized {
 /// use css_parse::*;
 /// use csskit_derives::*;
 /// use derive_atom_set::*;
-/// use bumpalo::Bump;
 ///
 /// #[derive(Debug, Default, AtomSet, Copy, Clone, PartialEq)]
 /// pub enum MyAtomSet {
@@ -101,7 +100,7 @@ pub trait BooleanFeature<'a>: Sized {
 /// }
 ///
 /// // Test!
-/// let allocator = Bump::new();
+/// let allocator = Arena::new();
 /// let source_text = "(test-feature)";
 /// let lexer = Lexer::new( &MyAtomSet::ATOMS, &source_text);
 /// let mut p = Parser::new(&allocator, &source_text, lexer);

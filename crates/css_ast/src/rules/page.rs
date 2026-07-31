@@ -46,7 +46,7 @@ impl<'a> Parse<'a> for PageSelector<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let mut pseudos = Vec::new_in(p.bump());
+		let mut pseudos = Vec::new_in(p.alloc());
 		let page_type = p.parse_if_peek::<T![Ident]>()?;
 		loop {
 			if p.peek::<T![:]>() {

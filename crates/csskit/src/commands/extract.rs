@@ -1,10 +1,9 @@
 use crate::{CliResult, GlobalConfig, InputArgs};
 use allocator_api2::alloc::Allocator;
-use bumpalo::Bump;
 use clap::ValueEnum;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Lexer, LineIndex, Span};
-use css_parse::Parser;
+use css_parse::{Arena, Parser};
 use serde::Serialize;
 
 /// Position metadata for a single result within a file.
@@ -146,7 +145,7 @@ pub trait Extract: Sized {
 
 	/// Try parsing source as raw content before falling back to StyleSheet.
 	/// Return true if handled.
-	fn try_content(&self, _src: &str, _bump: &Bump, _out: &mut Vec<(Span, Self::Row)>) -> bool {
+	fn try_content(&self, _src: &str, _alloc: &Arena, _out: &mut Vec<(Span, Self::Row)>) -> bool {
 		false
 	}
 
@@ -156,16 +155,16 @@ pub trait Extract: Sized {
 		&self,
 		file: &str,
 		src: &str,
-		bump: &Bump,
+		alloc: &Arena,
 		on_stylesheet: &mut dyn for<'a> FnMut(&StyleSheet<'a>),
 	) -> Result<Vec<(Span, Self::Row)>, ErrorRecord> {
 		let mut rows = Vec::new();
-		if self.try_content(src, bump, &mut rows) {
+		if self.try_content(src, alloc, &mut rows) {
 			return Ok(rows);
 		}
 
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
-		let mut parser = Parser::new(bump, src, lexer);
+		let mut parser = Parser::new(alloc, src, lexer);
 		let result = parser.parse_entirely::<StyleSheet>();
 
 		if let Some(stylesheet) = result.output {
@@ -189,12 +188,12 @@ pub trait Extract: Sized {
 
 	/// Run the command: loop files, parse, extract, render.
 	fn run(&self, config: GlobalConfig) -> CliResult {
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let mut envelopes: Vec<FileEnvelope<Self::Row>> = Vec::new();
 		let mut first_file = true;
 
 		for (filename, source) in self.input().sources()? {
-			let src = match css_parse::String::from_reader_in(source, &bump) {
+			let src = match css_parse::String::from_reader_in(source, &alloc) {
 				Ok(src) => src.into_str(),
 				Err(e) => {
 					match self.format() {
@@ -219,7 +218,7 @@ pub trait Extract: Sized {
 				}
 			};
 
-			match self.parse_and_extract_file(filename, src, &bump, &mut on_stylesheet) {
+			match self.parse_and_extract_file(filename, src, &alloc, &mut on_stylesheet) {
 				Ok(rows) => match self.format() {
 					OutputFormat::Text => {
 						if rows.is_empty() {
@@ -237,14 +236,14 @@ pub trait Extract: Sized {
 								}
 							}
 							self.render_file_preamble(filename, rows.len(), config.colors());
-							let index = LineIndex::new_in(src, &bump);
+							let index = LineIndex::new_in(src, &alloc);
 							for (span, row) in &rows {
 								self.render_text(&ctx, filename, src, &index, *span, row, config.colors());
 							}
 						}
 					}
 					OutputFormat::Json => {
-						let index = LineIndex::new_in(src, &bump);
+						let index = LineIndex::new_in(src, &alloc);
 						let records = rows
 							.into_iter()
 							.map(|(span, data)| Record { location: Location::from_span(span, &index), data })

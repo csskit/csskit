@@ -17,10 +17,10 @@ pub struct CursorOrderedSink<'a, S> {
 }
 
 impl<'a, S: CursorSink> CursorOrderedSink<'a, S> {
-	pub fn new(bump: &'a Arena, sink: &'a mut S) -> Self {
+	pub fn new(alloc: &'a Arena, sink: &'a mut S) -> Self {
 		Self {
 			sink,
-			buffer: Vec::new_in(bump),
+			buffer: Vec::new_in(alloc),
 			committed_position: SourceOffset(0),
 			#[cfg(debug_assertions)]
 			seen_eof: false,
@@ -139,21 +139,21 @@ impl<'a, S: CursorSink> CursorSink for CursorOrderedSink<'a, S> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::Vec as BumpVec;
+	use crate::Arena;
+	use crate::Vec as ArenaVec;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, SourceCursor, ToCursors};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
 	use std::fmt::Write;
 
 	#[test]
 	fn test_basic() {
 		let source_text = "foo bar";
-		let bump = Bump::default();
-		let mut output = BumpVec::new_in(&bump);
+		let alloc = Arena::default();
+		let mut output = ArenaVec::new_in(&alloc);
 		{
-			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
+			let mut ordered_sink = CursorOrderedSink::new(&alloc, &mut output);
 			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut ordered_sink);
 			ordered_sink.flush();
 		}
@@ -168,10 +168,10 @@ mod tests {
 	fn test_manual_flush() {
 		use crate::{SourceOffset, Token};
 
-		let bump = Bump::default();
-		let mut output = BumpVec::new_in(&bump);
+		let alloc = Arena::default();
+		let mut output = ArenaVec::new_in(&alloc);
 		{
-			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
+			let mut ordered_sink = CursorOrderedSink::new(&alloc, &mut output);
 			let cursor1 = Cursor::new(SourceOffset(0), Token::SPACE); // position 0, length 1
 			let cursor2 = Cursor::new(SourceOffset(10), Token::SPACE); // position 10, length 1
 			let cursor3 = Cursor::new(SourceOffset(4), Token::SPACE); // position 4, length 1
@@ -191,10 +191,10 @@ mod tests {
 	#[test]
 	fn test_contiguous_eager_emission() {
 		use crate::{SourceOffset, Token};
-		let bump = Bump::default();
-		let mut output = BumpVec::new_in(&bump);
+		let alloc = Arena::default();
+		let mut output = ArenaVec::new_in(&alloc);
 		{
-			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
+			let mut ordered_sink = CursorOrderedSink::new(&alloc, &mut output);
 			// Create cursors that form a contiguous sequence
 			let cursor_at_0 = Cursor::new(SourceOffset(0), Token::SPACE);
 			let cursor_at_1 = Cursor::new(SourceOffset(1), Token::SPACE);
@@ -210,11 +210,11 @@ mod tests {
 	#[test]
 	fn test_gap_filling() {
 		use crate::{SourceOffset, Token};
-		let bump = Bump::default();
-		let mut output = BumpVec::new_in(&bump);
+		let alloc = Arena::default();
+		let mut output = ArenaVec::new_in(&alloc);
 
 		{
-			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
+			let mut ordered_sink = CursorOrderedSink::new(&alloc, &mut output);
 			// Create cursors with a gap, then fill the gap
 			let cursor_at_0 = Cursor::new(SourceOffset(0), Token::SPACE); // ends at 1
 			let cursor_at_2 = Cursor::new(SourceOffset(2), Token::SPACE); // ends at 3
@@ -233,10 +233,10 @@ mod tests {
 	#[test]
 	fn test_sequential() {
 		use crate::{SourceOffset, Token};
-		let bump = Bump::default();
-		let mut output = BumpVec::new_in(&bump);
+		let alloc = Arena::default();
+		let mut output = ArenaVec::new_in(&alloc);
 		{
-			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
+			let mut ordered_sink = CursorOrderedSink::new(&alloc, &mut output);
 			let cursor1 = Cursor::new(SourceOffset(0), Token::SPACE);
 			let cursor2 = Cursor::new(SourceOffset(1), Token::SPACE);
 			let cursor3 = Cursor::new(SourceOffset(2), Token::SPACE);
@@ -254,10 +254,10 @@ mod tests {
 	#[test]
 	fn test_varied_order() {
 		use crate::{SourceOffset, Token};
-		let bump = Bump::default();
-		let mut output = BumpVec::new_in(&bump);
+		let alloc = Arena::default();
+		let mut output = ArenaVec::new_in(&alloc);
 		{
-			let mut ordered_sink = CursorOrderedSink::new(&bump, &mut output);
+			let mut ordered_sink = CursorOrderedSink::new(&alloc, &mut output);
 			let cursor_at_4 = Cursor::new(SourceOffset(4), Token::SPACE); // ends at 5
 			let cursor_at_0 = Cursor::new(SourceOffset(0), Token::SPACE); // ends at 1
 			let cursor_at_6 = Cursor::new(SourceOffset(6), Token::SPACE); // ends at 7

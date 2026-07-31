@@ -18,7 +18,6 @@ css_ast = { workspace = true, features = ["visitable"] } # @release
 css_lexer = { workspace = true }                         # @release
 csskit_highlight = { workspace = true }                  # @release
 
-bumpalo = { workspace = true, features = ["collections", "boxed"] }
 miette = { workspace = true, features = ["derive"] }
 
 bitmask-enum = { workspace = true }

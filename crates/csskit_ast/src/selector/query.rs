@@ -140,7 +140,7 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let mut parts = Vec::new_in(p.bump());
+		let mut parts = Vec::new_in(p.alloc());
 		let mut metadata = QuerySelectorMetadata::default();
 
 		// Build segments in forward order. Each segment stores the combinator that follows it.

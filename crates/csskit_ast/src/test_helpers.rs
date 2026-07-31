@@ -19,21 +19,20 @@ macro_rules! assert_query {
 	};
 
 	($source:expr, $selector:expr => $parse_type:ty, $expected:expr, [$($node_id:expr),* $(,)?]) => {{
-		use bumpalo::Bump;
+		use css_parse::{Arena, Parser};
 		use css_ast::CssAtomSet;
 		use css_lexer::Lexer;
-		use css_parse::Parser;
 
-		let bump = Bump::new();
-		let selector_bump = Bump::new();
+		let alloc = Arena::new();
+		let selector_alloc = Arena::new();
 		let source = $source;
 		let selector_str: &str = $selector;
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, source);
-		let mut parser = Parser::new(&bump, source, lexer);
+		let mut parser = Parser::new(&alloc, source, lexer);
 		let parsed = parser.parse::<$parse_type>().expect("failed to parse CSS");
 
 		let selector_lexer = Lexer::new(&$crate::CsskitAtomSet::ATOMS, selector_str);
-		let mut selector_parser = Parser::new(&selector_bump, selector_str, selector_lexer);
+		let mut selector_parser = Parser::new(&selector_alloc, selector_str, selector_lexer);
 		let selector_result = selector_parser.parse_entirely::<$crate::selector::QuerySelectorList>();
 		let selectors = selector_result.output.expect("failed to parse selector");
 

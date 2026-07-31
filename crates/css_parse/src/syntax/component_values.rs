@@ -24,7 +24,7 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 	where
 		Iter: Iterator<Item = Cursor> + Clone,
 	{
-		let mut values = Vec::new_in(p.bump());
+		let mut values = Vec::new_in(p.alloc());
 		let mut last_was_whitespace = false;
 
 		loop {

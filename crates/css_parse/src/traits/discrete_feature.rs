@@ -77,7 +77,6 @@ pub trait DiscreteFeature<'a>: Sized {
 ///
 /// ```
 /// use css_parse::*;
-/// use bumpalo::Bump;
 /// use csskit_derives::{ToCursors, ToSpan};
 /// use derive_atom_set::AtomSet;
 ///

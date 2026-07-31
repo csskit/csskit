@@ -1,9 +1,8 @@
 use crate::{CliError, CliResult, GlobalConfig, InputArgs};
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{CursorExpandedWriteSink, Parser, ToCursors};
+use css_parse::{Arena, CursorExpandedWriteSink, Parser, ToCursors};
 
 /// Expand CSS files to their most verbose form (the opposite of minify).
 #[derive(Debug, Args)]
@@ -33,19 +32,19 @@ pub struct Expand {
 impl Expand {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
 		let Expand { content, output, check, semicolons, escape_idents } = self;
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let start = std::time::Instant::now();
 		if *check && output.is_some() {
 			eprintln!("Ignoring output option, because check was passed");
 		}
 		let mut checks = 0;
 		for (file_name, source) in content.sources()? {
-			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let source_text = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(ref _stylesheet) = result.output {
-				let mut str = css_parse::String::new_in(&bump);
+				let mut str = css_parse::String::new_in(&alloc);
 				let mut stream = CursorExpandedWriteSink::new(source_text, &mut str)
 					.with_extra_semicolons(*semicolons)
 					.with_escape_idents(*escape_idents);

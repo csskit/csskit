@@ -40,18 +40,18 @@ impl<'a, T: SourceCursorSink<'a>> SourceCursorSink<'a> for &mut T {
 #[cfg(test)]
 mod test {
 	use super::*;
+	use crate::Arena;
 	use crate::{ComponentValues, EmptyAtomSet, Parser, ToCursors};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
 
 	#[test]
 	fn test_source_cursor_sink_for_string() {
 		let source_text = "black white";
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let mut str = String::new();
 		let mut transform = CursorToSourceCursorSink::new(source_text, &mut str);
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
+		let mut parser = Parser::new(&alloc, source_text, lexer);
 		parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
 		assert_eq!(str, "black white");
 	}
@@ -59,12 +59,12 @@ mod test {
 	#[test]
 	fn test_source_cursor_sink_for_arena_string() {
 		let source_text = "black white";
-		let bump = Bump::default();
-		let mut str = crate::String::new_in(&bump);
+		let alloc = crate::Arena::default();
+		let mut str = crate::String::new_in(&alloc);
 		{
 			let mut transform = CursorToSourceCursorSink::new(source_text, &mut str);
 			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			parser.parse_entirely::<ComponentValues>().output.unwrap().to_cursors(&mut transform);
 		}
 		assert_eq!(str, "black white");

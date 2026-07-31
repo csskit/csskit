@@ -47,8 +47,8 @@ pub struct CursorOverlaySet<'a> {
 }
 
 impl<'a> CursorOverlaySet<'a> {
-	pub fn new(bump: &'a Arena) -> Self {
-		Self { segments: Vec::new_in(bump) }
+	pub fn new(alloc: &'a Arena) -> Self {
+		Self { segments: Vec::new_in(alloc) }
 	}
 
 	pub fn insert(&mut self, span: Span, cursors: Vec<'a, SourceCursor<'a>>) {
@@ -181,19 +181,19 @@ impl<'a, 'o, T: SourceCursorSink<'a>> CursorSink for CursorOverlaySink<'a, 'o, T
 #[cfg(test)]
 mod test {
 	use super::*;
+	use crate::Arena;
 	use crate::Vec;
 	use crate::{
 		ComponentValue, ComponentValues, CursorPrettyWriteSink, CursorToSourceCursorSink, CursorWriteSink,
 		EmptyAtomSet, Parser, QuoteStyle, T, ToCursors, ToSpan,
 	};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
 
-	fn snippet_cursors<'a>(bump: &'a Bump, snippet: &'a str) -> Vec<'a, SourceCursor<'a>> {
+	fn snippet_cursors<'a>(alloc: &'a Arena, snippet: &'a str) -> Vec<'a, SourceCursor<'a>> {
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, snippet);
-		let mut parser = Parser::new(bump, snippet, lexer);
+		let mut parser = Parser::new(alloc, snippet, lexer);
 		let parsed = parser.parse_entirely::<ComponentValues<'a>>();
-		let mut cursors = Vec::new_in(bump);
+		let mut cursors = Vec::new_in(alloc);
 		let mut sink = CursorToSourceCursorSink::new(snippet, &mut cursors);
 		parsed.to_cursors(&mut sink);
 		cursors
@@ -202,19 +202,19 @@ mod test {
 	#[test]
 	fn test_basic() {
 		let source_text = "black white";
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
+		let mut p = Parser::new(&alloc, source_text, lexer);
 		let output = p.parse_entirely::<(T![Ident], T![Ident])>().output.unwrap();
 
 		let overlay_text = "green";
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, overlay_text);
-		let mut p = Parser::new(&bump, overlay_text, lexer);
+		let mut p = Parser::new(&alloc, overlay_text, lexer);
 		let overlay = p.parse_entirely::<T![Ident]>();
-		let mut source_cursors = Vec::new_in(&bump);
+		let mut source_cursors = Vec::new_in(&alloc);
 		let mut sink = CursorToSourceCursorSink::new(overlay_text, &mut source_cursors);
 		overlay.to_cursors(&mut sink);
-		let mut overlays = CursorOverlaySet::new(&bump);
+		let mut overlays = CursorOverlaySet::new(&alloc);
 		overlays.insert(output.1.to_span(), source_cursors);
 
 		let mut str = String::new();
@@ -227,20 +227,20 @@ mod test {
 	#[test]
 	fn test_with_pretty_writer() {
 		let source_text = "foo{use:other;}";
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut p = Parser::new(&bump, source_text, lexer);
+		let mut p = Parser::new(&alloc, source_text, lexer);
 		let output = p.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
 		let ComponentValue::SimpleBlock(ref block) = output[1] else { panic!("output[1] was not a block") };
 
 		let overlay_text = "inner{foo: bar;}";
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, overlay_text);
-		let mut p = Parser::new(&bump, overlay_text, lexer);
+		let mut p = Parser::new(&alloc, overlay_text, lexer);
 		let overlay = p.parse_entirely::<Vec<'_, ComponentValue>>();
-		let mut source_cursors = Vec::new_in(&bump);
+		let mut source_cursors = Vec::new_in(&alloc);
 		let mut sink = CursorToSourceCursorSink::new(overlay_text, &mut source_cursors);
 		overlay.to_cursors(&mut sink);
-		let mut overlays = CursorOverlaySet::new(&bump);
+		let mut overlays = CursorOverlaySet::new(&alloc);
 		overlays.insert(block.values.to_span(), source_cursors);
 
 		let mut str = String::new();
@@ -267,20 +267,20 @@ foo {
 	#[test]
 	fn test_insert_before_and_after() {
 		let source_text = "ab";
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
+		let mut parser = Parser::new(&alloc, source_text, lexer);
 		let output = parser.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
 
-		let mut overlays = CursorOverlaySet::new(&bump);
+		let mut overlays = CursorOverlaySet::new(&alloc);
 		overlays.push_segment(OverlaySegment::new(
 			Span::new(SourceOffset(0), SourceOffset(0)),
-			snippet_cursors(&bump, "pre"),
+			snippet_cursors(&alloc, "pre"),
 			OverlayKind::InsertBefore,
 		));
 		overlays.push_segment(OverlaySegment::new(
 			Span::new(SourceOffset(2), SourceOffset(2)),
-			snippet_cursors(&bump, "post"),
+			snippet_cursors(&alloc, "post"),
 			OverlayKind::InsertAfter,
 		));
 
@@ -293,30 +293,30 @@ foo {
 	#[test]
 	fn test_multiple_inserts_preserve_order() {
 		let source_text = "x";
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
-		let mut parser = Parser::new(&bump, source_text, lexer);
+		let mut parser = Parser::new(&alloc, source_text, lexer);
 		let output = parser.parse_entirely::<Vec<'_, ComponentValue>>().output.unwrap();
 
-		let mut overlays = CursorOverlaySet::new(&bump);
+		let mut overlays = CursorOverlaySet::new(&alloc);
 		overlays.push_segment(OverlaySegment::new(
 			Span::new(SourceOffset(0), SourceOffset(0)),
-			snippet_cursors(&bump, "A"),
+			snippet_cursors(&alloc, "A"),
 			OverlayKind::InsertBefore,
 		));
 		overlays.push_segment(OverlaySegment::new(
 			Span::new(SourceOffset(0), SourceOffset(0)),
-			snippet_cursors(&bump, "B"),
+			snippet_cursors(&alloc, "B"),
 			OverlayKind::InsertBefore,
 		));
 		overlays.push_segment(OverlaySegment::new(
 			Span::new(SourceOffset(1), SourceOffset(1)),
-			snippet_cursors(&bump, "C"),
+			snippet_cursors(&alloc, "C"),
 			OverlayKind::InsertAfter,
 		));
 		overlays.push_segment(OverlaySegment::new(
 			Span::new(SourceOffset(1), SourceOffset(1)),
-			snippet_cursors(&bump, "D"),
+			snippet_cursors(&alloc, "D"),
 			OverlayKind::InsertAfter,
 		));
 

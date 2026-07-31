@@ -209,7 +209,7 @@ where
 		let Some(chroma_color) = color.to_chromashift() else {
 			return;
 		};
-		let arena = self.transformer.bump();
+		let arena = self.transformer.alloc();
 		let len = color.to_span().len() as usize;
 
 		if chroma_color.in_gamut_of(ColorSpace::Srgb)
@@ -233,7 +233,7 @@ where
 	fn visit_color_mix_function<'b>(&mut self, mix: &ColorMixFunction<'b>) -> VisitFlow {
 		let outer_span = mix.to_span();
 		let outer_len = outer_span.len() as usize;
-		let arena = self.transformer.bump();
+		let arena = self.transformer.alloc();
 
 		let n = mix.parts.len();
 		let default_pct = 100.0 / n as f32;

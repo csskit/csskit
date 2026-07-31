@@ -151,8 +151,8 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 			)+ ) => {
 				match p.to_atom::<CssAtomSet>(c) {
 					$($atoms => p.parse::<rules::$ty>().map(Self::$name),)+
-					CssAtomSet::Import => p.parse::<rules::ImportRule>().map(|r| Self::Import(Box::new_in(p.bump(), r))),
-					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(Box::new_in(p.bump(), r))),
+					CssAtomSet::Import => p.parse::<rules::ImportRule>().map(|r| Self::Import(Box::new_in(p.alloc(), r))),
+					CssAtomSet::Supports => p.parse::<rules::SupportsRule>().map(|r| Self::Supports(Box::new_in(p.alloc(), r))),
 					_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?,
 				}
 			}

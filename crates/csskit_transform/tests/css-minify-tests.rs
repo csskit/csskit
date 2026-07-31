@@ -1,7 +1,6 @@
-use bumpalo::Bump;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
 use csskit_transform::{CssMinifierFeature, Transformer};
 use glob::glob;
 use similar::{ChangeTag, TextDiff};
@@ -40,10 +39,10 @@ fn get_tests() -> Vec<CssMinifyTestCase> {
 }
 
 fn minify(source_text: &str) -> String {
-	let bump = Bump::default();
-	let mut transformer = Transformer::new_in(&bump, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
+	let alloc = Arena::default();
+	let mut transformer = Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-	let mut parser = Parser::new(&bump, source_text, lexer);
+	let mut parser = Parser::new(&alloc, source_text, lexer);
 	let mut result = parser.parse_entirely::<StyleSheet>().with_trivia();
 	let mut output = String::new();
 	if let Some(ref mut node) = result.output {

@@ -1,6 +1,5 @@
-use bumpalo::Bump;
 use css_lexer::Lexer;
-use css_parse::{ComponentValues, EmptyAtomSet, Parser};
+use css_parse::{Arena, ComponentValues, EmptyAtomSet, Parser};
 #[cfg(feature = "_dhat-heap-testing")]
 use dhat::{Alloc, HeapStats, Profiler, assert_eq};
 use std::fs::read_to_string;
@@ -11,23 +10,23 @@ static ALLOC: Alloc = Alloc;
 
 #[test]
 fn allocation_test() {
-	let simple_bump_size = 960;
-	let simple_bump = Bump::with_capacity(simple_bump_size);
+	let simple_alloc_size = 960;
+	let simple_alloc = Arena::with_capacity(simple_alloc_size);
 	let simple_str = "body{color:blue}";
 	let simple_lexer = Lexer::new(&EmptyAtomSet::ATOMS, simple_str);
-	let mut simple_parser = Parser::new(&simple_bump, simple_str, simple_lexer);
+	let mut simple_parser = Parser::new(&simple_alloc, simple_str, simple_lexer);
 
-	let escaped_bump_size = 960;
-	let escaped_bump = Bump::with_capacity(escaped_bump_size);
+	let escaped_alloc_size = 960;
+	let escaped_alloc = Arena::with_capacity(escaped_alloc_size);
 	let escaped_str = "bo\\d y{background-image:\\75\\52\\6c(a);width:1\\70\\78}";
 	let escaped_lexer = Lexer::new(&EmptyAtomSet::ATOMS, escaped_str);
-	let mut escape_parser = Parser::new(&escaped_bump, escaped_str, escaped_lexer);
+	let mut escape_parser = Parser::new(&escaped_alloc, escaped_str, escaped_lexer);
 
-	let big_bump_size = 100_003_776;
-	let big_bump = Bump::with_capacity(big_bump_size);
+	let big_alloc_size = 100_003_776;
+	let big_alloc = Arena::with_capacity(big_alloc_size);
 	let big_str = read_to_string("../../coverage/popular/tailwind.2.2.19.min.css").unwrap();
 	let big_lexer = Lexer::new(&EmptyAtomSet::ATOMS, &big_str);
-	let mut big_parser = Parser::new(&big_bump, &big_str, big_lexer);
+	let mut big_parser = Parser::new(&big_alloc, &big_str, big_lexer);
 
 	#[cfg(feature = "_dhat-heap-testing")]
 	let _profiler = Profiler::builder()
@@ -60,7 +59,7 @@ fn allocation_test() {
 	}
 
 	// XXX: If these fail because the numbers go down, great! If they go up, investigate why.
-	assert_eq!(simple_bump.allocated_bytes(), simple_bump_size);
-	assert_eq!(escaped_bump.allocated_bytes(), escaped_bump_size);
-	assert_eq!(big_bump.allocated_bytes(), big_bump_size);
+	assert_eq!(simple_alloc.allocated_bytes(), simple_alloc_size);
+	assert_eq!(escaped_alloc.allocated_bytes(), escaped_alloc_size);
+	assert_eq!(big_alloc.allocated_bytes(), big_alloc_size);
 }

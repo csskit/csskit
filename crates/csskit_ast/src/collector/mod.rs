@@ -8,9 +8,9 @@ use crate::{
 	sheet::{Rule, Sheet},
 	when_rule::{ComparisonOperator, WhenCondition, WhenFeature},
 };
-use bumpalo::{Bump, collections::Vec, vec};
 use css_ast::{AtomSet, PropertyKind, StyleSheet};
 use css_lexer::{Atom, Cursor, RegisteredAtomSet, SourceCursor, SourceOffset, Span, ToSpan};
+use css_parse::{Arena, Vec, vec_in};
 #[cfg(feature = "miette")]
 use miette::{LabeledSpan, MietteDiagnostic, Severity as MietteSeverity};
 use smallvec::SmallVec;
@@ -139,7 +139,7 @@ pub struct Collector<'a> {
 	/// All collection rules (both with and without selectors)
 	collection_rules: Vec<'a, CollectionRule<'a>>,
 	/// Allocator for string parsing
-	allocator: &'a Bump,
+	allocator: &'a Arena,
 }
 
 impl<'a> Collector<'a> {
@@ -205,7 +205,7 @@ impl<'a> Collector<'a> {
 						diagnostic_stats: rule_data.diagnostic_stats,
 						conditions: conditions.clone(),
 						parent_span: node_span,
-						matches: vec![in self.allocator],
+						matches: vec_in![in self.allocator],
 					});
 
 					self.process_nested_rules(&node_rule.block.rules, conditions, node_span);
@@ -227,7 +227,7 @@ impl<'a> Collector<'a> {
 							diagnostic_stats: rule_data.diagnostic_stats,
 							conditions: combined_conditions.clone(),
 							parent_span,
-							matches: vec![in self.allocator],
+							matches: vec_in![in self.allocator],
 						});
 					}
 
@@ -239,9 +239,9 @@ impl<'a> Collector<'a> {
 	}
 
 	/// Create a new Collector from a parsed Sheet.
-	pub fn new(sheet: &'a Sheet<'a>, source: &'a str, allocator: &'a Bump) -> Self {
+	pub fn new(sheet: &'a Sheet<'a>, source: &'a str, allocator: &'a Arena) -> Self {
 		let stats = HashMap::new();
-		let collection_rules = vec![in allocator];
+		let collection_rules = vec_in![in allocator];
 		let mut collector = Self { source, stats, collection_rules, allocator };
 
 		for rule in sheet.rules.iter() {
@@ -272,19 +272,19 @@ impl<'a> Collector<'a> {
 						collectors: rule_data.collectors,
 						diagnostic: rule_data.diagnostic,
 						diagnostic_stats: rule_data.diagnostic_stats,
-						conditions: vec![in allocator],
+						conditions: vec_in![in allocator],
 						parent_span: node_span,
-						matches: vec![in allocator],
+						matches: vec_in![in allocator],
 					});
 
-					collector.process_nested_rules(&node_rule.block.rules, &vec![in allocator], node_span);
+					collector.process_nested_rules(&node_rule.block.rules, &vec_in![in allocator], node_span);
 				}
 				Rule::WhenRule(when_rule) => {
 					if !when_rule.condition.is_valid(source) {
 						continue;
 					}
 
-					let conditions = vec![in allocator; &when_rule.condition];
+					let conditions = vec_in![in allocator; &when_rule.condition];
 
 					let rule_data = collector.extract_rule_data(&when_rule.block.declarations);
 					if !rule_data.collectors.is_empty() || rule_data.diagnostic.is_some() {
@@ -296,7 +296,7 @@ impl<'a> Collector<'a> {
 							conditions: conditions.clone(),
 							// Use a placeholder span - will be updated with stylesheet span in collect()
 							parent_span: Span::new(SourceOffset(0), SourceOffset(0)),
-							matches: vec![in allocator],
+							matches: vec_in![in allocator],
 						});
 					}
 
@@ -485,7 +485,7 @@ impl<'a> Collector<'a> {
 			}
 		}
 
-		let mut processed = vec![in self.allocator; false; self.collection_rules.len()];
+		let mut processed = vec_in![in self.allocator; false; self.collection_rules.len()];
 
 		// First, execute all unconditional rules (conditions is empty)
 		for idx in 0..self.collection_rules.len() {
@@ -524,10 +524,10 @@ impl<'a> Collector<'a> {
 	pub fn diagnostics<'b>(&'b self, css_source: &'b str) -> impl Iterator<Item = CollectorDiagnostic> + 'b {
 		self.collection_rules.iter().flat_map(move |rule| {
 			let Some((severity, components)) = &rule.diagnostic else {
-				return vec![in self.allocator].into_iter();
+				return vec_in![in self.allocator].into_iter();
 			};
 
-			let mut diagnostics = vec![in self.allocator];
+			let mut diagnostics = vec_in![in self.allocator];
 			for match_output in rule.matches.iter() {
 				let message = self.resolve_diagnostic_message(components, match_output, css_source);
 				diagnostics.push(CollectorDiagnostic::new(*severity, match_output.span, message));

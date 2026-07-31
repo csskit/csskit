@@ -4,11 +4,10 @@ use crate::{
 	green,
 };
 use allocator_api2::alloc::Allocator;
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet, Visitable, visit::NodeId};
 use css_lexer::{Cursor, Lexer, LineIndex, SourceOffset, Span};
-use css_parse::{NodeWithMetadata, Parser, SourceCursor, SourceCursorSink};
+use css_parse::{Arena, NodeWithMetadata, Parser, SourceCursor, SourceCursorSink};
 use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use itertools::Itertools;
@@ -56,9 +55,9 @@ fn line_bounds(source: &str, offset: usize) -> (usize, usize) {
 
 impl Find {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
-		let selector_bump = Bump::default();
+		let selector_alloc = Arena::default();
 		let lexer = Lexer::new(&CsskitAtomSet::ATOMS, &self.selector);
-		let mut parser = Parser::new(&selector_bump, &self.selector, lexer);
+		let mut parser = Parser::new(&selector_alloc, &self.selector, lexer);
 		let result = parser.parse_entirely::<QuerySelectorList>();
 
 		if !result.errors.is_empty() || result.output.as_ref().is_some_and(|n| n.metadata().is_invalid) {
@@ -86,15 +85,15 @@ impl Find {
 	}
 
 	fn output_count(&self, selectors: &QuerySelectorList) -> CliResult {
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		let mut total = 0;
 		let mut files = 0;
 
 		for (filename, source) in self.input.sources()? {
-			let src = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let src = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
-			let mut parser = Parser::new(&bump, src, lexer);
+			let mut parser = Parser::new(&alloc, src, lexer);
 			let Some(stylesheet) = parser.parse_entirely::<StyleSheet>().output else { continue };
 			let count = SelectorMatcher::new(selectors, &self.selector, src).run(&stylesheet).count();
 			if count == 0 {
@@ -136,9 +135,9 @@ impl Find {
 		eprintln!("\nRun 'csskit tree' to see all node types.");
 	}
 
-	fn parsed_selectors<'b>(&'b self, bump: &'b Bump) -> Option<QuerySelectorList<'b>> {
+	fn parsed_selectors<'b>(&'b self, alloc: &'b Arena) -> Option<QuerySelectorList<'b>> {
 		let lexer = Lexer::new(&CsskitAtomSet::ATOMS, &self.selector);
-		let mut parser = Parser::new(bump, &self.selector, lexer);
+		let mut parser = Parser::new(alloc, &self.selector, lexer);
 		parser.parse_entirely::<QuerySelectorList>().output
 	}
 }
@@ -162,8 +161,8 @@ impl Extract for Find {
 	}
 
 	fn extract<'a>(&self, stylesheet: &StyleSheet<'a>, src: &str, out: &mut Vec<(Span, FindData)>) {
-		let bump = Bump::default();
-		let Some(selectors) = self.parsed_selectors(&bump) else { return };
+		let alloc = Arena::default();
+		let Some(selectors) = self.parsed_selectors(&alloc) else { return };
 		for m in SelectorMatcher::new(&selectors, &self.selector, src).run(stylesheet) {
 			let start = usize::from(m.span.start());
 			let end = usize::from(m.span.end());

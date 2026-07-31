@@ -10,7 +10,7 @@
 //! [1]: https://drafts.csswg.org/css-syntax-3/
 //! [2]: https://en.wikipedia.org/wiki/Recursive_descent_parser
 //!
-//! Parsing requires a heap allocator to allocate into, [bumpalo::Bump] being the allocator of choice. This needs to be
+//! Parsing requires a heap allocator to allocate into, [Arena] being the allocator of choice. This needs to be
 //! created before parsing, the parser result will have a lifetime bound to the allocator.
 //!
 //! The [Parser] _may_ be configured with additional [Features][Feature] to allow for different parsing or lexing

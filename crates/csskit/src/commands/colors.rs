@@ -5,22 +5,21 @@ use crate::{
 	dimmed, fg,
 };
 use allocator_api2::alloc::Allocator;
-use bumpalo::Bump;
 use chromashift::*;
 use clap::Args;
 use css_ast::{Color as ASTColor, CssAtomSet, StyleSheet, ToChromashift, Visitable};
 use css_lexer::{Lexer, LineIndex};
-use css_parse::{Diagnostic, Parser, Span, ToSpan};
+use css_parse::{Arena, Diagnostic, Parser, Span, ToSpan};
 use itertools::Itertools;
 use serde::Serialize;
 use std::collections::HashSet;
 
-fn extract_colors(src: &str, bump: &Bump) -> Result<Vec<(Color, Span)>, Vec<Diagnostic>> {
+fn extract_colors(src: &str, alloc: &Arena) -> Result<Vec<(Color, Span)>, Vec<Diagnostic>> {
 	let mut visitor = ColorExtractor::new();
 
 	// Try parsing as a bare list of colors first.
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
-	let mut parser = Parser::new(bump, src, lexer);
+	let mut parser = Parser::new(alloc, src, lexer);
 	let result = parser.parse_entirely::<css_parse::Vec<ASTColor>>();
 	if let Some(output) = result.output.filter(|_| result.errors.is_empty()) {
 		let _ = output.accept(&mut visitor);
@@ -29,7 +28,7 @@ fn extract_colors(src: &str, bump: &Bump) -> Result<Vec<(Color, Span)>, Vec<Diag
 
 	// Fall back to full stylesheet parse.
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
-	let mut parser = Parser::new(bump, src, lexer);
+	let mut parser = Parser::new(alloc, src, lexer);
 	let result = parser.parse_entirely::<StyleSheet>();
 	if let Some(stylesheet) = result.output {
 		let _ = stylesheet.accept(&mut visitor);
@@ -360,11 +359,11 @@ impl Extract for ColorCommand {
 		&self,
 		file: &str,
 		src: &str,
-		bump: &Bump,
+		alloc: &Arena,
 		_on_stylesheet: &mut dyn for<'a> FnMut(&StyleSheet<'a>),
 	) -> Result<Vec<(Span, ColorData)>, ErrorRecord> {
 		use crate::commands::extract::ErrorKind;
-		match extract_colors(src, bump) {
+		match extract_colors(src, alloc) {
 			Ok(colors) => {
 				let mut seen: HashSet<Hex> = HashSet::new();
 				Ok(colors

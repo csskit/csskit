@@ -15,7 +15,7 @@ impl<'a> Parse<'a> for BadDeclaration<'a> {
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
-		let mut values = Vec::new_in(p.bump());
+		let mut values = Vec::new_in(p.alloc());
 		// To consume the remnants of a bad declaration from a token stream input, given a bool nested:
 		//
 		// Process input:

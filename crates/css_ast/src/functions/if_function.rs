@@ -90,7 +90,7 @@ impl<'a> Parse<'a> for IfTest<'a> {
 			let open = p.parse::<LeftParen>()?;
 			let expr = p.parse::<IfConditionExpr>()?;
 			let close = p.parse::<RightParen>()?;
-			return Ok(Self::Group(open, Box::new_in(p.bump(), expr), close));
+			return Ok(Self::Group(open, Box::new_in(p.alloc(), expr), close));
 		}
 		let function = p.parse::<Function>()?;
 		match p.to_atom::<CssAtomSet>(function.into()) {
@@ -102,7 +102,7 @@ impl<'a> Parse<'a> for IfTest<'a> {
 				if c == Kind::Ident && p.peek_n(2) == Kind::Colon {
 					let decl = p.parse::<Declaration<'a, StyleValue<'a>, CssMetadata>>()?;
 					let close = p.parse::<RightParen>()?;
-					Ok(Self::SupportsDeclaration(function, Box::new_in(p.bump(), decl), close))
+					Ok(Self::SupportsDeclaration(function, Box::new_in(p.alloc(), decl), close))
 				} else {
 					let condition = p.parse::<SupportsCondition>()?;
 					let close = p.parse::<RightParen>()?;
@@ -263,7 +263,7 @@ impl<'a, V: Parse<'a> + Peek<'a>> Parse<'a> for IfFunction<'a, V> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let name = p.parse::<Function>()?;
-		let mut branches = Vec::new_in(p.bump());
+		let mut branches = Vec::new_in(p.alloc());
 		loop {
 			let branch = p.parse::<IfBranch<'a, V>>()?;
 			let semicolon = p.parse_if_peek::<Semicolon>()?;

@@ -63,20 +63,21 @@ where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
 		let open_curly = p.parse::<T!['{']>()?;
-		let mut declarations = Vec::new_in(p.bump());
-		let mut rules = Vec::new_in(p.bump());
+		let mut declarations = Vec::new_in(p.alloc());
+		let mut rules = Vec::new_in(p.alloc());
 		let mut meta = M::default();
 
 		// Per CSS Syntax spec: maintain a buffer of declarations to flush when we encounter rules.
 		// This enables proper interleaving of declarations and rules.
-		let mut decls: Vec<'a, DeclarationOrBad<'a, D, M>> = Vec::new_in(p.bump());
+		let mut decls: Vec<'a, DeclarationOrBad<'a, D, M>> = Vec::new_in(p.alloc());
 
 		// Flush the decls buffer into the rules list as a DeclarationGroup.
 		// Per spec: "If decls is not empty, append it to rules, and set decls to a fresh empty list"
 		macro_rules! flush_decls {
 			() => {
 				if !decls.is_empty() {
-					let group = DeclarationGroup { declarations: std::mem::replace(&mut decls, Vec::new_in(p.bump())) };
+					let group =
+						DeclarationGroup { declarations: std::mem::replace(&mut decls, Vec::new_in(p.alloc())) };
 					if let Some(rule) = R::from_declaration_group(group) {
 						meta = meta.merge(rule.metadata());
 						rules.push(rule);
@@ -346,22 +347,22 @@ mod tests {
 
 	#[test]
 	fn test_bad_string_in_block_does_not_hang() {
-		let bump = bumpalo::Bump::new();
+		let alloc = crate::Arena::new();
 		for src in
 			[":{\".\n", "am:{\"\n", "alm:{\"\n", "alm:{\";.\n", "alm:{\"; }.\n", "alm:s {\n \x16\x00\x00:\";\n }\n"]
 		{
 			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
-			let mut parser = crate::Parser::new(&bump, src, lexer);
+			let mut parser = crate::Parser::new(&alloc, src, lexer);
 			let _ = parser.parse::<Block<Decl, Rule, ()>>();
 		}
 	}
 
 	#[test]
 	fn test_trailing_error_kinds_do_not_oom() {
-		let bump = bumpalo::Bump::new();
+		let alloc = crate::Arena::new();
 		for src in ["{)))))))))))))", "{))))))))))))))", "{\r)))))))))))))"] {
 			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
-			let mut parser = crate::Parser::new(&bump, src, lexer);
+			let mut parser = crate::Parser::new(&alloc, src, lexer);
 			let _ = parser.parse::<Block<Decl, Rule, ()>>();
 		}
 	}

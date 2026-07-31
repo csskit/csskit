@@ -258,7 +258,7 @@ impl<T, const VALUE: i32> Exact<T, VALUE> {
 /// Wraps any collection type that derefs to a slice (`Deref<Target = [_]>`)
 /// and validates at parse time that the collection contains at least one item.
 ///
-/// Works with [`bumpalo::collections::Vec`] and any other slice-backed type.
+/// Works with [`css_parse::Vec`] and any other slice-backed type.
 #[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]

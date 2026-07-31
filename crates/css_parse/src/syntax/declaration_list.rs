@@ -65,7 +65,7 @@ where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
 		let open_curly = p.parse::<T!['{']>()?;
-		let mut declarations = Vec::new_in(p.bump());
+		let mut declarations = Vec::new_in(p.alloc());
 		let mut meta: M = Default::default();
 		loop {
 			if p.at_end() {

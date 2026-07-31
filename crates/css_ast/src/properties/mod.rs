@@ -420,9 +420,8 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 mod tests {
 	use super::*;
 	use crate::{CssAtomSet, CssMetadata};
-	use bumpalo::Bump;
 	use css_lexer::Lexer;
-	use css_parse::{Declaration, Parser, assert_parse};
+	use css_parse::{Arena, Declaration, Parser, assert_parse};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
 
@@ -469,29 +468,29 @@ mod tests {
 
 	#[test]
 	fn test_property_validation() {
-		let bump = Bump::new();
+		let alloc = Arena::new();
 
 		let input = "width:1px";
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
-		let mut p = Parser::new(&bump, input, lexer);
+		let mut p = Parser::new(&alloc, input, lexer);
 		let decl = p.parse::<Property>().unwrap();
 		assert!(!decl.value.is_unknown(), "width should be recognized as a known property");
 
 		let input = "notarealproperty:value";
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
-		let mut p = Parser::new(&bump, input, lexer);
+		let mut p = Parser::new(&alloc, input, lexer);
 		let decl = p.parse::<Property>().unwrap();
 		assert!(decl.value.is_unknown(), "notarealproperty should be parsed as unknown");
 
 		let input = "-webkit-filter:blur(4px)";
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
-		let mut p = Parser::new(&bump, input, lexer);
+		let mut p = Parser::new(&alloc, input, lexer);
 		let decl = p.parse::<Property>().unwrap();
 		assert!(!decl.value.is_unknown(), "-webkit-filter should be recognized as a known property");
 
 		let input = "--custom:value";
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, input);
-		let mut p = Parser::new(&bump, input, lexer);
+		let mut p = Parser::new(&alloc, input, lexer);
 		let decl = p.parse::<Property>().unwrap();
 		assert!(decl.value.is_custom(), "--custom should be parsed as custom property");
 	}

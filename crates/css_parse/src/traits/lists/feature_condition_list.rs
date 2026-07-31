@@ -81,7 +81,7 @@ where
 		let c = p.peek_n(1);
 		if Ident::peek(p, c) {
 			if Self::keyword_is_and(p, c) {
-				let mut features = Vec::new_in(p.bump());
+				let mut features = Vec::new_in(p.alloc());
 				let mut keyword = p.parse::<Ident>()?;
 				loop {
 					features.push((feature, Some(keyword)));
@@ -94,7 +94,7 @@ where
 					keyword = p.parse::<Ident>()?
 				}
 			} else if Self::keyword_is_or(p, c) {
-				let mut features = Vec::new_in(p.bump());
+				let mut features = Vec::new_in(p.alloc());
 				let mut keyword = p.parse::<Ident>()?;
 				loop {
 					features.push((feature, Some(keyword)));

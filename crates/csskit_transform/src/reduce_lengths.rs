@@ -86,7 +86,7 @@ where
 		if can_reduce_to_unitless && matches!(resolved, ResolvedType::UnitedZero | ResolvedType::Resolved(0.0)) {
 			self.transformer.replace(length, self.transformer.parse_value::<Length>("0"));
 		} else if let ResolvedType::Resolved(px) = resolved {
-			let replacement = format_in!(in self.transformer.bump(), "{}px", px);
+			let replacement = format_in!(in self.transformer.alloc(), "{}px", px);
 			let original_span = length.to_span();
 			let original_len = (original_span.end().0 - original_span.start().0) as usize;
 			if replacement.len() <= original_len {

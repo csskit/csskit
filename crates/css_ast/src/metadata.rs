@@ -615,7 +615,7 @@ mod tests {
 	use super::*;
 	use crate::{CssAtomSet, StyleSheet};
 	use css_lexer::Lexer;
-	use css_parse::{NodeMetadata, NodeWithMetadata, Parser};
+	use css_parse::{Arena, NodeMetadata, NodeWithMetadata, Parser};
 
 	#[test]
 	fn test_block_metadata_merge() {
@@ -642,9 +642,9 @@ mod tests {
 	#[test]
 	fn test_stylesheet_metadata_simple() {
 		let css = "body { color: red; width: 100px; }";
-		let bump = bumpalo::Bump::new();
+		let alloc = Arena::new();
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
-		let mut parser = Parser::new(&bump, css, lexer);
+		let mut parser = Parser::new(&alloc, css, lexer);
 		let stylesheet = parser.parse::<StyleSheet>().unwrap();
 
 		let metadata = stylesheet.metadata();
@@ -658,9 +658,9 @@ mod tests {
 	#[test]
 	fn test_stylesheet_metadata_with_important() {
 		let css = "body { color: red !important; }";
-		let bump = bumpalo::Bump::new();
+		let alloc = Arena::new();
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
-		let mut parser = Parser::new(&bump, css, lexer);
+		let mut parser = Parser::new(&alloc, css, lexer);
 		let stylesheet = parser.parse::<StyleSheet>().unwrap();
 
 		let metadata = stylesheet.metadata();
@@ -672,9 +672,9 @@ mod tests {
 	#[test]
 	fn test_stylesheet_metadata_custom_properties() {
 		let css = "body { --custom: value; }";
-		let bump = bumpalo::Bump::new();
+		let alloc = Arena::new();
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
-		let mut parser = Parser::new(&bump, css, lexer);
+		let mut parser = Parser::new(&alloc, css, lexer);
 		let stylesheet = parser.parse::<StyleSheet>().unwrap();
 
 		let metadata = stylesheet.metadata();
@@ -685,9 +685,9 @@ mod tests {
 	#[test]
 	fn test_stylesheet_metadata_nested_media() {
 		let css = "@media screen { body { color: red; } }";
-		let bump = bumpalo::Bump::new();
+		let alloc = Arena::new();
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
-		let mut parser = Parser::new(&bump, css, lexer);
+		let mut parser = Parser::new(&alloc, css, lexer);
 		let stylesheet = parser.parse::<StyleSheet>().unwrap();
 
 		let metadata = stylesheet.metadata();

@@ -20,7 +20,6 @@ visit_flow = { workspace = true } # @release
 css_ast = { workspace = true, features = ["visitable"] } # @release
 csskit_derives = { workspace = true } # @release
 derive_atom_set = { workspace = true } # @release
-bumpalo = { workspace = true, features = ["collections", "boxed"] }
 indexmap = { workspace = true }
 smallvec = { workspace = true }
 miette = { workspace = true, optional = true }

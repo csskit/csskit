@@ -1,12 +1,11 @@
 use crate::InputArgs;
 use crate::commands::{Extract, OutputFormat};
 use allocator_api2::alloc::Allocator;
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::specificity::ToSpecificity;
 use css_ast::{CssAtomSet, SelectorList, StyleRule, StyleSheet, Visit, Visitable, visitor};
 use css_lexer::{Lexer, LineIndex, Span};
-use css_parse::{Parser, ToSpan};
+use css_parse::{Arena, Parser, ToSpan};
 use serde::Serialize;
 
 #[derive(Serialize, Debug)]
@@ -66,9 +65,9 @@ impl Extract for Specificity {
 		self.format
 	}
 
-	fn try_content(&self, src: &str, bump: &Bump, out: &mut Vec<(Span, Self::Row)>) -> bool {
+	fn try_content(&self, src: &str, alloc: &Arena, out: &mut Vec<(Span, Self::Row)>) -> bool {
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
-		let mut parser = Parser::new(bump, src, lexer);
+		let mut parser = Parser::new(alloc, src, lexer);
 		let result = parser.parse_entirely::<SelectorList>();
 		if let Some(selector_list) = result.output.filter(|_| result.errors.is_empty()) {
 			extract_selector_list(&selector_list, src, out);

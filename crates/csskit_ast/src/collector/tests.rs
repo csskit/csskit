@@ -1,23 +1,22 @@
 use super::*;
-use bumpalo::Bump;
 use css_ast::CssAtomSet;
 use css_lexer::Lexer;
-use css_parse::Parser;
+use css_parse::{Arena, Parser, vec_in};
 
-fn run<'a>(bump: &'a Bump, source: &'a str, css_source: &'a str) -> (Stats, Vec<'a, CollectorDiagnostic>) {
+fn run<'a>(alloc: &'a Arena, source: &'a str, css_source: &'a str) -> (Stats, Vec<'a, CollectorDiagnostic>) {
 	let sheet = {
 		let lexer = Lexer::new(CsskitAtomSet::get_dyn_set(), source);
-		let mut parser = Parser::new(bump, source, lexer);
+		let mut parser = Parser::new(alloc, source, lexer);
 		parser.parse_entirely::<crate::sheet::Sheet>().with_trivia().output.unwrap()
 	};
 	let stylesheet = {
 		let lexer = Lexer::new(&CssAtomSet::ATOMS, css_source);
-		let mut parser = Parser::new(bump, css_source, lexer);
+		let mut parser = Parser::new(alloc, css_source, lexer);
 		parser.parse_entirely::<StyleSheet>().with_trivia().output.unwrap()
 	};
-	let mut collector = Collector::new(&sheet, source, bump);
+	let mut collector = Collector::new(&sheet, source, alloc);
 	collector.collect(&stylesheet, css_source);
-	let mut diagnostics = bumpalo::vec![in bump];
+	let mut diagnostics = vec_in![in alloc];
 	for diagnostic in collector.diagnostics(css_source) {
 		diagnostics.push(diagnostic);
 	}
@@ -26,7 +25,7 @@ fn run<'a>(bump: &'a Bump, source: &'a str, css_source: &'a str) -> (Stats, Vec<
 
 #[test]
 fn test_basic() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --total-rules { type: counter; }
 		style-rule { collect: --total-rules; }
@@ -36,7 +35,7 @@ fn test_basic() {
 		#bar {}
 		.baz {}
 	"#;
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("total-rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
@@ -44,7 +43,7 @@ fn test_basic() {
 
 #[test]
 fn test_implicit_counter() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --total-rules; }
 	"#;
@@ -53,7 +52,7 @@ fn test_implicit_counter() {
 		#bar {}
 		.baz {}
 	"#;
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("total-rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
@@ -61,13 +60,13 @@ fn test_implicit_counter() {
 
 #[test]
 fn test_bytes() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rule-bytes { type: bytes; }
 		style-rule { collect: --rule-bytes; }
 	"#;
 	let css_source = ".a{}.bb{}";
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	// .a{} = 4 bytes, .bb{} = 5 bytes, total = 9 bytes
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rule-bytes");
 	assert_eq!(counters.get(&a), Some(&(StatType::Bytes, 9)));
@@ -76,7 +75,7 @@ fn test_bytes() {
 
 #[test]
 fn test_lines() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rule-lines { type: lines; }
 		style-rule { collect: --rule-lines; }
@@ -86,7 +85,7 @@ fn test_lines() {
 
 }
 .bb{}";
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rule-lines");
 	assert_eq!(counters.get(&a), Some(&(StatType::Lines, 4)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
@@ -94,7 +93,7 @@ fn test_lines() {
 
 #[test]
 fn test_diagnostics_with_string() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule {
 			level: warning;
@@ -103,7 +102,7 @@ fn test_diagnostics_with_string() {
 	"#;
 	let css_source = ".foo {} .bar {}";
 
-	let (_, diagnostics) = run(&bump, source, css_source);
+	let (_, diagnostics) = run(&alloc, source, css_source);
 	assert_eq!(diagnostics.len(), 2);
 	assert_eq!(diagnostics[0].message, "Found a style rule");
 	assert_eq!(diagnostics[0].severity, ResolvedDiagnosticLevel::Warning);
@@ -113,7 +112,7 @@ fn test_diagnostics_with_string() {
 
 #[test]
 fn test_diagnostics_with_attr() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		[name] {
 			level: error;
@@ -122,7 +121,7 @@ fn test_diagnostics_with_attr() {
 	"#;
 	let css_source = ".foo { color: red; margin: 0; }";
 
-	let (_, diagnostics) = run(&bump, source, css_source);
+	let (_, diagnostics) = run(&alloc, source, css_source);
 	assert_eq!(diagnostics.len(), 2);
 	assert_eq!(diagnostics[0].message, "Property color found");
 	assert_eq!(diagnostics[0].severity, ResolvedDiagnosticLevel::Error);
@@ -132,7 +131,7 @@ fn test_diagnostics_with_attr() {
 
 #[test]
 fn test_diagnostics_with_size() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		selector-list {
 			level: advice;
@@ -141,7 +140,7 @@ fn test_diagnostics_with_size() {
 	"#;
 	let css_source = ".foo {}";
 
-	let (_, diagnostics) = run(&bump, source, css_source);
+	let (_, diagnostics) = run(&alloc, source, css_source);
 	assert_eq!(diagnostics.len(), 1);
 	assert_eq!(diagnostics[0].message, "Selector list has 1 selectors");
 	assert_eq!(diagnostics[0].severity, ResolvedDiagnosticLevel::Advice);
@@ -149,7 +148,7 @@ fn test_diagnostics_with_size() {
 
 #[test]
 fn test_diagnostics_with_size_various() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		selector-list {
 			level: error;
@@ -162,7 +161,7 @@ fn test_diagnostics_with_size_various() {
 		.d, .e, .f {}
 	"#;
 
-	let (_, diagnostics) = run(&bump, source, css_source);
+	let (_, diagnostics) = run(&alloc, source, css_source);
 	assert_eq!(diagnostics.len(), 3);
 	assert_eq!(diagnostics[0].message, "1 selectors");
 	assert_eq!(diagnostics[1].message, "2 selectors");
@@ -171,7 +170,7 @@ fn test_diagnostics_with_size_various() {
 
 #[test]
 fn test_diagnostics_with_stat_reference() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --total { type: counter; }
 		style-rule {
@@ -182,7 +181,7 @@ fn test_diagnostics_with_stat_reference() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("total");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 
@@ -194,7 +193,7 @@ fn test_diagnostics_with_stat_reference() {
 
 #[test]
 fn test_when_rule_true_condition() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --rules; }
 		@when (--rules > 1) {
@@ -204,7 +203,7 @@ fn test_when_rule_true_condition() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 1);
@@ -214,7 +213,7 @@ fn test_when_rule_true_condition() {
 
 #[test]
 fn test_when_rule_false_condition() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --rules; }
 		@when (--rules > 10) {
@@ -224,7 +223,7 @@ fn test_when_rule_false_condition() {
 	"#;
 	let css_source = ".a {} .b {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 2)));
 	assert_eq!(diagnostics.len(), 0);
@@ -232,7 +231,7 @@ fn test_when_rule_false_condition() {
 
 #[test]
 fn test_when_rule_with_nested_selector() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --rules; }
 		@when (--rules > 1) {
@@ -245,7 +244,7 @@ fn test_when_rule_with_nested_selector() {
 	"#;
 	let css_source = ".a {} #foo {} .b {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let ids = CsskitAtomSet::get_dyn_set().atom_from_str("id-selectors");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
@@ -257,7 +256,7 @@ fn test_when_rule_with_nested_selector() {
 
 #[test]
 fn test_when_rule_equal_comparison() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --rules; }
 		@when (--rules = 2) {
@@ -267,14 +266,14 @@ fn test_when_rule_equal_comparison() {
 	"#;
 	let css_source = ".a {} .b {}";
 
-	let (_, diagnostics) = run(&bump, source, css_source);
+	let (_, diagnostics) = run(&alloc, source, css_source);
 	assert_eq!(diagnostics.len(), 1);
 	assert_eq!(diagnostics[0].message, "Exactly 2 rules");
 }
 
 #[test]
 fn test_nested_if_in_style_rule() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule {
 			collect: --foo;
@@ -286,7 +285,7 @@ fn test_nested_if_in_style_rule() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let foo = CsskitAtomSet::get_dyn_set().atom_from_str("foo");
 	assert_eq!(counters.get(&foo), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 1);
@@ -296,7 +295,7 @@ fn test_nested_if_in_style_rule() {
 
 #[test]
 fn test_nested_selector_in_style_rule() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --color-decls { type: counter; }
 		style-rule {
@@ -309,7 +308,7 @@ fn test_nested_selector_in_style_rule() {
 	"#;
 	let css_source = ".a { color: red; } .b { background: blue; } .c { color: green; }";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 
 	// Verify stats - only color declarations should be counted
 	let color_decls = CsskitAtomSet::get_dyn_set().atom_from_str("color-decls");
@@ -323,7 +322,7 @@ fn test_nested_selector_in_style_rule() {
 
 #[test]
 fn test_nested_if_with_combined_conditions() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rules { type: counter; }
 		@stat --decls { type: counter; }
@@ -338,7 +337,7 @@ fn test_nested_if_with_combined_conditions() {
 	"#;
 	let css_source = ".a { color: red; } .b { background: blue; font-size: 12px; }";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let decls = CsskitAtomSet::get_dyn_set().atom_from_str("decls");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 2)));
@@ -349,7 +348,7 @@ fn test_nested_if_with_combined_conditions() {
 
 #[test]
 fn test_conditional_nested_selector() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rules { type: counter; }
 		@stat --color-decls { type: counter; }
@@ -366,7 +365,7 @@ fn test_conditional_nested_selector() {
 	"#;
 	let css_source = ".a { color: red; } .b { background: blue; } .c { color: green; }";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let color_decls = CsskitAtomSet::get_dyn_set().atom_from_str("color-decls");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
@@ -378,7 +377,7 @@ fn test_conditional_nested_selector() {
 
 #[test]
 fn test_reactive_conditional_chain() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rules { type: counter; }
 		@stat --warnings { type: counter; }
@@ -404,7 +403,7 @@ fn test_reactive_conditional_chain() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let warnings = CsskitAtomSet::get_dyn_set().atom_from_str("warnings");
 	let critical = CsskitAtomSet::get_dyn_set().atom_from_str("critical");
@@ -420,7 +419,7 @@ fn test_reactive_conditional_chain() {
 
 #[test]
 fn test_nested_not_condition_preserved() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rules { type: counter; }
 		@stat --nested-matches { type: counter; }
@@ -439,7 +438,7 @@ fn test_nested_not_condition_preserved() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let nested = CsskitAtomSet::get_dyn_set().atom_from_str("nested-matches");
@@ -450,7 +449,7 @@ fn test_nested_not_condition_preserved() {
 
 #[test]
 fn test_nested_not_condition_unmatched() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --rules { type: counter; }
 		@stat --nested-matches { type: counter; }
@@ -467,7 +466,7 @@ fn test_nested_not_condition_unmatched() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let nested = CsskitAtomSet::get_dyn_set().atom_from_str("nested-matches");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
@@ -477,7 +476,7 @@ fn test_nested_not_condition_unmatched() {
 
 #[test]
 fn test_cycles_direct() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --a; }
 		@when (--a > 0) {
@@ -489,7 +488,7 @@ fn test_cycles_direct() {
 	"#;
 	let css_source = ".x {} .y {} .z {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("a");
 	let b = CsskitAtomSet::get_dyn_set().atom_from_str("b");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 6))); // 3 unconditional + 3 from second @when
@@ -498,7 +497,7 @@ fn test_cycles_direct() {
 
 #[test]
 fn test_cycle_prevention_indirect() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --a; }
 		@when (--a > 0) {
@@ -513,7 +512,7 @@ fn test_cycle_prevention_indirect() {
 	"#;
 	let css_source = ".x {} .y {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let a = CsskitAtomSet::get_dyn_set().atom_from_str("a");
 	let b = CsskitAtomSet::get_dyn_set().atom_from_str("b");
 	let c = CsskitAtomSet::get_dyn_set().atom_from_str("c");
@@ -524,7 +523,7 @@ fn test_cycle_prevention_indirect() {
 
 #[test]
 fn test_cycle_prevention_self_referential() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --count; }
 		@when (--count > 1) {
@@ -533,14 +532,14 @@ fn test_cycle_prevention_self_referential() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 6)));
 }
 
 #[test]
 fn test_equality_vs_range_semantics() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --rules; }
 		@when (--rules = 1) {
@@ -552,7 +551,7 @@ fn test_equality_vs_range_semantics() {
 	"#;
 	let css_source = ".a {} .b {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
 	let equal = CsskitAtomSet::get_dyn_set().atom_from_str("equal-triggered");
 	let greater = CsskitAtomSet::get_dyn_set().atom_from_str("greater-triggered");
@@ -563,7 +562,7 @@ fn test_equality_vs_range_semantics() {
 
 #[test]
 fn test_equality_intermediate_value_does_not_trigger() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --count; }
 		@when (--count = 2) {
@@ -572,7 +571,7 @@ fn test_equality_intermediate_value_does_not_trigger() {
 	"#;
 	let css_source = ".a {} .b {} .c {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
 	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("triggered");
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 3)));
@@ -581,7 +580,7 @@ fn test_equality_intermediate_value_does_not_trigger() {
 
 #[test]
 fn test_equality_does_trigger_on_exact_match() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		style-rule { collect: --count; }
 		@when (--count = 2) {
@@ -590,7 +589,7 @@ fn test_equality_does_trigger_on_exact_match() {
 	"#;
 	let css_source = ".a {} .b {}"; // Exactly 2 rules
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
 	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("triggered");
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 2)));
@@ -599,7 +598,7 @@ fn test_equality_does_trigger_on_exact_match() {
 
 #[test]
 fn test_equality_triggers_once_then_becomes_false() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --count { type: counter; }
 		@stat --trigger { type: counter; }
@@ -621,7 +620,7 @@ fn test_equality_triggers_once_then_becomes_false() {
 	"#;
 	let css_source = ".a {} .b {}";
 
-	let (counters, diagnostics) = run(&bump, source, css_source);
+	let (counters, diagnostics) = run(&alloc, source, css_source);
 	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
 	let hit = CsskitAtomSet::get_dyn_set().atom_from_str("hit");
 	assert_eq!(counters.get(&hit), Some(&(StatType::Counter, 0)));
@@ -631,7 +630,7 @@ fn test_equality_triggers_once_then_becomes_false() {
 
 #[test]
 fn test_when_only_rules_with_bytes_and_lines() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --trigger { type: counter; }
 		@stat --byte-count { type: bytes; }
@@ -648,7 +647,7 @@ fn test_when_only_rules_with_bytes_and_lines() {
 	"#;
 	let css_source = ".a {} .b {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let trigger = CsskitAtomSet::get_dyn_set().atom_from_str("trigger");
 	let bytes = CsskitAtomSet::get_dyn_set().atom_from_str("byte-count");
 	let lines = CsskitAtomSet::get_dyn_set().atom_from_str("line-count");
@@ -666,7 +665,7 @@ fn test_when_only_rules_with_bytes_and_lines() {
 
 #[test]
 fn test_invalid_when_threshold_skipped() {
-	let bump = Bump::new();
+	let alloc = Arena::new();
 	let source = r#"
 		@stat --count { type: counter; }
 		@stat --triggered { type: counter; }
@@ -679,7 +678,7 @@ fn test_invalid_when_threshold_skipped() {
 	"#;
 	let css_source = ".a {} .b {}";
 
-	let (counters, _diagnostics) = run(&bump, source, css_source);
+	let (counters, _diagnostics) = run(&alloc, source, css_source);
 	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
 	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("triggered");
 

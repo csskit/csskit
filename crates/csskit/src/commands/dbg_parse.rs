@@ -1,9 +1,8 @@
 use crate::{CliResult, GlobalConfig, InputArgs};
-use bumpalo::Bump;
 use clap::Args;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::Parser;
+use css_parse::{Arena, Parser};
 
 /// Show the debug output for a parsed file
 #[derive(Debug, Args)]
@@ -15,11 +14,11 @@ pub struct DbgParse {
 impl DbgParse {
 	pub fn run(&self, _config: GlobalConfig) -> CliResult {
 		let DbgParse { content } = self;
-		let bump = Bump::default();
+		let alloc = Arena::default();
 		for (file_name, source) in content.sources()? {
-			let source_text = css_parse::String::from_reader_in(source, &bump)?.into_str();
+			let source_text = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-			let mut parser = Parser::new(&bump, source_text, lexer);
+			let mut parser = Parser::new(&alloc, source_text, lexer);
 			let result = parser.parse_entirely::<StyleSheet>();
 			if let Some(stylesheet) = &result.output {
 				println!("{stylesheet:#?}");

@@ -29,8 +29,6 @@ anstyle = { workspace = true, optional = true }
 owo-colors = { workspace = true, optional = true }
 strsim = { workspace = true }
 
-bumpalo = { workspace = true, features = ["collections", "boxed"] }
-
 serde = { workspace = true }
 serde_json = { workspace = true }
 

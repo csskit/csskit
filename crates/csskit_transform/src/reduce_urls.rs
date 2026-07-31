@@ -28,7 +28,7 @@ where
 		let UrlOrString::Url(url) = url_or_string else {
 			return;
 		};
-		let arena = self.transformer.bump();
+		let arena = self.transformer.alloc();
 		match url {
 			Url::UrlFunction(_, string, _) | Url::SrcFunction(_, string, _) => {
 				let sc = self.transformer.to_source_cursor((*string).into());

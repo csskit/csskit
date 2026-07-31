@@ -148,7 +148,7 @@ impl<'a, T: Parse<'a>> Parse<'a> for Box<'a, T> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let value = T::parse(p)?;
-		Ok(Box::new_in(p.bump(), value))
+		Ok(Box::new_in(p.alloc(), value))
 	}
 }
 

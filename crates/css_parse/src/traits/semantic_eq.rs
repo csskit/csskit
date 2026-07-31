@@ -85,13 +85,13 @@ impl_tuple!(A[sa,oa], B[sb,ob], C[sc,oc], D[sd,od], E[se,oe], F[sf,of], G[sg,og]
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use crate::Arena;
 	use crate::{ComponentValues, Parse, Parser, ToCursors};
-	use bumpalo::Bump;
 	use css_lexer::EmptyAtomSet;
 
-	fn parse<'a, T: Parse<'a> + ToCursors>(bump: &'a Bump, source: &'a str) -> T {
+	fn parse<'a, T: Parse<'a> + ToCursors>(alloc: &'a Arena, source: &'a str) -> T {
 		let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, source);
-		let mut parser = Parser::new(bump, source, lexer);
+		let mut parser = Parser::new(alloc, source, lexer);
 		let result = parser.parse_entirely::<T>();
 		result.output.unwrap()
 	}
@@ -143,9 +143,9 @@ mod tests {
 		let source1 = "1px solid red";
 		let source2 = "1px  solid  red"; // Extra whitespace
 
-		let bump = Bump::new();
-		let values1 = parse::<ComponentValues>(&bump, source1);
-		let values2 = parse::<ComponentValues>(&bump, source2);
+		let alloc = Arena::new();
+		let values1 = parse::<ComponentValues>(&alloc, source1);
+		let values2 = parse::<ComponentValues>(&alloc, source2);
 
 		// Semantically equal despite whitespace
 		assert!(values1.semantic_eq(&values2));
@@ -156,9 +156,9 @@ mod tests {
 		let source1 = "1px solid red";
 		let source2 = "2px solid red";
 
-		let bump = Bump::new();
-		let values1 = parse::<ComponentValues>(&bump, source1);
-		let values2 = parse::<ComponentValues>(&bump, source2);
+		let alloc = Arena::new();
+		let values1 = parse::<ComponentValues>(&alloc, source1);
+		let values2 = parse::<ComponentValues>(&alloc, source2);
 
 		// Should NOT be equal due to different values
 		assert!(!values1.semantic_eq(&values2));

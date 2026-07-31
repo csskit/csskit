@@ -1,8 +1,7 @@
-use bumpalo::Bump;
 use criterion::{BenchmarkId, Criterion, Throughput, black_box, criterion_group, criterion_main};
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::Parser;
+use css_parse::{Arena, Parser};
 use csskit_ast::sheet::Sheet;
 use csskit_ast::{Collector, CsskitAtomSet};
 use glob::glob;
@@ -60,7 +59,7 @@ fn collector(c: &mut Criterion) {
 
 			group.bench_function(BenchmarkId::from_parameter(&combined_name), |b| {
 				b.iter_with_large_drop(|| {
-					let allocator = Bump::default();
+					let allocator = Arena::default();
 					{
 						// Parse the CSS stylesheet
 						let css_lexer = Lexer::new(&CssAtomSet::ATOMS, &css_file.source_text);
