@@ -93,7 +93,7 @@ impl<'a, T: fmt::Write> CursorSink for HTMLHighlightCursorStream<'a, T> {
 
 macro_rules! assert_highlight {
 	($name: literal, $str: literal $(,)*) => {
-		use bumpalo::{Bump, collections::String};
+		use bumpalo::Bump;
 		use css_ast::{CssAtomSet, StyleSheet, Visitable};
 		use css_lexer::Lexer;
 		use css_parse::{Parser, ToCursors};
@@ -105,7 +105,7 @@ macro_rules! assert_highlight {
 		if !result.errors.is_empty() {
 			panic!("\n\nParse on {}:{} failed. ({:?}) saw error {:?}", file!(), line!(), $str, result.errors[0]);
 		}
-		let mut actual = String::new_in(&bump);
+		let mut actual = css_parse::String::new_in(&bump);
 		let mut cursors = HTMLHighlightCursorStream::new($str, &mut actual);
 		let node = result.output.clone().unwrap();
 		let _ = node.accept(&mut cursors.highlighter);

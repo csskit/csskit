@@ -36,7 +36,7 @@ macro_rules! assert_parse {
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 			}
-			let mut actual = ::bumpalo::collections::String::new_in(&bump);
+			let mut actual = $crate::String::new_in(&bump);
 			{
 				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
 				let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
@@ -61,7 +61,7 @@ macro_rules! assert_parse {
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 			}
-			let mut actual = ::bumpalo::collections::String::new_in(&bump);
+			let mut actual = $crate::String::new_in(&bump);
 			{
 				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
 				let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
@@ -88,7 +88,7 @@ macro_rules! assert_parse {
 			if !result.errors.is_empty() {
 				panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
 			}
-			let mut actual = ::bumpalo::collections::String::new_in(&bump);
+			let mut actual = $crate::String::new_in(&bump);
 			{
 				let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
 				let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
@@ -137,7 +137,7 @@ macro_rules! assert_parse_error {
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {
-				let mut actual = ::bumpalo::collections::String::new_in(&bump);
+				let mut actual = $crate::String::new_in(&bump);
 				{
 					let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
 					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);
@@ -174,7 +174,7 @@ macro_rules! assert_peek_false {
 		let result = parser.parse::<$ty>();
 		if parser.at_end() {
 			if let Ok(result) = result {
-				let mut actual = ::bumpalo::collections::String::new_in(&bump);
+				let mut actual = $crate::String::new_in(&bump);
 				{
 					let mut write_sink = $crate::CursorWriteSink::new(&source_text, &mut actual);
 					let mut ordered_sink = $crate::CursorOrderedSink::new(&bump, &mut write_sink);

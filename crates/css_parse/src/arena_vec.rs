@@ -218,6 +218,18 @@ impl<'a, T, A: Allocator> Vec<'a, T, A> {
 			marker: std::marker::PhantomData,
 		}
 	}
+
+	/// Consume the `Vec`, returning its contents as a slice borrowed from the arena for `'a`.
+	///
+	/// Use this to hand arena-allocated data to an API wanting `&'a [T]`: the elements outlive this handle because they
+	/// belong to the arena, not to the `Vec`.
+	#[inline]
+	pub fn into_slice(self) -> &'a [T] {
+		// SAFETY: `ptr` is aligned and points at `len` initialised `T`s living in the arena for `'a` (or is dangling when
+		// `len` is 0, which `from_raw_parts` permits). `Vec` has no `Drop`, so nothing destroys the elements behind the
+		// returned reference.
+		unsafe { std::slice::from_raw_parts(self.raw.ptr.as_ptr(), self.raw.len as usize) }
+	}
 }
 
 impl<'a, T: Clone, A: Allocator> Vec<'a, T, A> {
