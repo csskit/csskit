@@ -121,7 +121,11 @@ web-sys = { version = "0.3.103" }
 browserslist-rs = { version = "0.19.0" }
 chrono = { version = "0.4.45" }
 
-# For faster compiles during development, opt-level some dynamic libraries
+# For faster compiles during development, opt-level some dynamic libraries and limit debug generation
+
+[profile.dev]
+debug = "line-tables-only"
+
 [profile.dev.package]
 criterion.opt-level = 3
 insta.opt-level = 3
