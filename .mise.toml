@@ -33,7 +33,7 @@ run = "cargo build --all-features --release"
 [tasks.build-release-debug]
 description = "Build release-debug"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
-outputs = ["target/release/csskit"]
+outputs = ["target/release-debug/csskit"]
 run = "cargo build --all-features --profile release-debug"
 
 [tasks.test]

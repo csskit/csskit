@@ -1,5 +1,5 @@
 #!/bin/bash
-#MISE depends=["build-release", "build-release-debug"]
+#MISE depends=["build-release"]
 #MISE description="Collect benchmark results for historical tracking"
 
 CSSKIT_BIN="./target/release/csskit"
