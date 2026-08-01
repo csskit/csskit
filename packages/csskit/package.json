@@ -32,8 +32,5 @@
         "csskit-linux-x64": "0.0.28",
         "csskit-win32-arm64": "0.0.28",
         "csskit-win32-x64": "0.0.28"
-    },
-    "allowScripts": {
-        "wasm-opt@1.4.0": true
     }
 }

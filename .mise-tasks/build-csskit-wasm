@@ -25,14 +25,14 @@ wasm-bindgen \
   --target bundler \
   "$REPO_ROOT/target/wasm32-unknown-unknown/release/csskit_wasm.wasm"
 
-npx --yes wasm-opt@1.4.0 \
+wasm-opt \
   --enable-bulk-memory \
   --enable-nontrapping-float-to-int \
   -Oz \
   -o "$PKG/csskit_wasm_bg.wasm" \
   "$PKG/csskit_wasm_bg.wasm"
 
-npx --yes wasm-opt@1.4.0 \
+wasm-opt \
   --enable-bulk-memory \
   --enable-nontrapping-float-to-int \
   -Oz \
