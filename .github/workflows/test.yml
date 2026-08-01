@@ -147,7 +147,7 @@ jobs:
         uses: ./.github/actions/setup
 
       - name: Build
-        run: set -euo pipefail; for d in crates/*/; do pkg=$(cargo metadata --no-deps --manifest-path $d/Cargo.toml --format-version 1 2>/dev/null | jq -r '.packages[0].name'); cargo build -p $pkg; done
+        run: set -euo pipefail; for d in crates/*/ tools/*/; do pkg=$(cargo metadata --no-deps --manifest-path $d/Cargo.toml --format-version 1 2>/dev/null | jq -r '.packages[0].name'); cargo build -p $pkg; done
 
   build_benches:
     name: Build benches
