@@ -716,6 +716,7 @@ dependencies = [
  "bitmask-enum",
  "bumpalo",
  "css_lexer",
+ "csskit_arena",
  "csskit_derives",
  "csskit_proc_macro",
  "derive_atom_set",
@@ -768,6 +769,15 @@ dependencies = [
  "tracing",
  "tracing-subscriber",
  "visit-flow",
+]
+
+[[package]]
+name = "csskit_arena"
+version = "0.0.28"
+dependencies = [
+ "allocator-api2",
+ "libc",
+ "windows-sys 0.61.0",
 ]
 
 [[package]]

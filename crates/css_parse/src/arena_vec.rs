@@ -506,9 +506,11 @@ impl<'a, T: serde::Serialize, A: Allocator> serde::Serialize for Vec<'a, T, A> {
 
 #[cfg(test)]
 mod test {
+	#[cfg(feature = "bumpalo")]
 	use super::super::arena_box::Box;
 	use super::Vec;
 	use crate::Arena;
+	#[cfg(feature = "bumpalo")]
 	use bumpalo::Bump;
 	use std::cell::Cell;
 	use std::panic::{AssertUnwindSafe, catch_unwind};
@@ -1060,13 +1062,14 @@ mod test {
 		assert_eq!(v.pop(), None);
 	}
 
+	#[cfg(feature = "bumpalo")]
 	#[test]
 	fn footprint_matches_bumpalo_vec() {
 		let a = Bump::new();
 		{
-			let mut outer: Vec<u32> = Vec::new_in(&a);
+			let mut outer: Vec<u32, &Bump> = Vec::new_in(&a);
 			for i in 0..5u32 {
-				let mut inner: Vec<u32> = Vec::new_in(&a);
+				let mut inner: Vec<u32, &Bump> = Vec::new_in(&a);
 				for j in 0..7u32 {
 					inner.push(j);
 				}
@@ -1093,5 +1096,22 @@ mod test {
 			a.allocated_bytes(),
 			b.allocated_bytes()
 		);
+	}
+
+	#[cfg(feature = "csskit_arena")]
+	#[test]
+	fn parsing_beyond_default_arena_capacity_does_not_panic() {
+		use crate::{ComponentValues, EmptyAtomSet, Parser};
+		use css_lexer::Lexer;
+
+		let source = "a ".repeat(16_384);
+		let result = catch_unwind(AssertUnwindSafe(|| {
+			let arena = Arena::new();
+			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, &source);
+			let mut parser = Parser::new(&arena, &source, lexer);
+			let _ = parser.parse_entirely::<ComponentValues>();
+		}));
+
+		assert!(result.is_ok(), "arena exhaustion must not abort parsing");
 	}
 }

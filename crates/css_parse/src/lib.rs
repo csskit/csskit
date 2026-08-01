@@ -316,8 +316,14 @@ mod traits;
 
 pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 
-/// The arena allocator backing parsed AST nodes.
+#[cfg(not(any(feature = "bumpalo", feature = "csskit_arena")))]
+compile_error!("one of the features `bumpalo` or `csskit_arena` must be enabled");
+
+#[cfg(all(feature = "bumpalo", not(feature = "csskit_arena")))]
 pub type Arena = bumpalo::Bump;
+
+#[cfg(feature = "csskit_arena")]
+pub type Arena = csskit_arena::Arena;
 
 pub use arena_box::*;
 pub use arena_string::String;

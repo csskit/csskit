@@ -1,0 +1,22 @@
+[package]
+name = "csskit_arena"
+version.workspace = true
+authors.workspace = true
+description = "A contiguous bump allocator for zero-copy memory transfer across bindings."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+allocator-api2 = { workspace = true }
+
+[target.'cfg(unix)'.dependencies]
+libc = { workspace = true }
+
+[target.'cfg(windows)'.dependencies]
+windows-sys = { workspace = true, features = ["Win32_System_Memory"] }
