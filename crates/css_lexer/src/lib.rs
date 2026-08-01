@@ -275,7 +275,7 @@ fn size_test() {
 #[test]
 fn test_smallstr_buf_overflow() {
 	let mut source = String::from("a");
-	source.extend(std::iter::repeat('\0').take(86));
+	source.extend(std::iter::repeat_n('\0', 86));
 	let lexer = Lexer::new(&EmptyAtomSet::ATOMS, &source);
 	for cursor in lexer {
 		let _ = cursor;

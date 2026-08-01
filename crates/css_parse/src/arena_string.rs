@@ -344,7 +344,7 @@ mod test {
 	fn from_reader_in_grows_past_one_chunk() {
 		let alloc = Arena::default();
 		// A multibyte codepoint straddles the 8KiB read boundary, so a chunk-local decode would split it.
-		let mut expected = std::string::String::from("x".repeat(8 * 1024 - 2));
+		let mut expected = "x".repeat(8 * 1024 - 2);
 		expected.push('😀');
 		expected.push_str(&"y".repeat(4096));
 		let str = String::from_reader_in(expected.as_bytes(), &alloc).unwrap();

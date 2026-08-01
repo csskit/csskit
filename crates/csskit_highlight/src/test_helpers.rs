@@ -18,23 +18,22 @@ impl<'a, T: fmt::Write> HTMLHighlightCursorStream<'a, T> {
 	}
 
 	pub fn finish(&mut self) {
-		if self.err.is_none() {
-			if let Err(err) = self.writer.write_str(
+		if self.err.is_none()
+			&& let Err(err) = self.writer.write_str(
 				r#"
 		</code>
 	</pre>
 </body>"#,
 			) {
-				self.err = Some(err);
-			}
+			self.err = Some(err);
 		}
 	}
 }
 
 impl<'a, T: fmt::Write> CursorSink for HTMLHighlightCursorStream<'a, T> {
 	fn append(&mut self, c: Cursor) {
-		if self.last_token.is_none() {
-			if let Err(err) = self.writer.write_str(
+		if self.last_token.is_none()
+			&& let Err(err) = self.writer.write_str(
 				r#"
 <!DOCTYPE html>
 <head>
@@ -55,38 +54,35 @@ impl<'a, T: fmt::Write> CursorSink for HTMLHighlightCursorStream<'a, T> {
 		<code>
 			"#,
 			) {
-				self.err = Some(err);
-			}
+			self.err = Some(err);
 		}
 		if self.err.is_some() {
 			return;
 		}
-		if let Some(last) = self.last_token {
-			if last.needs_separator_for(c.into()) {
-				if let Err(err) = self.writer.write_char(' ') {
-					self.err = Some(err);
-				}
-			}
+		if let Some(last) = self.last_token
+			&& last.needs_separator_for(c.into())
+			&& let Err(err) = self.writer.write_char(' ')
+		{
+			self.err = Some(err);
 		}
 		if self.err.is_some() {
 			return;
 		}
 		self.last_token = Some(c.into());
 		let highlight = self.highlighter.get(c.into());
-		if let Some(highlight) = highlight {
-			if let Err(err) =
+		if let Some(highlight) = highlight
+			&& let Err(err) =
 				self.writer.write_str(format!(r#"<span class="{}{}">"#, highlight.kind, highlight.modifier).as_str())
-			{
-				self.err = Some(err);
-			}
+		{
+			self.err = Some(err);
 		}
 		if let Err(err) = write!(&mut self.writer, "{}", SourceCursor::from(c, c.str_slice(self.source_text))) {
 			self.err = Some(err);
 		}
-		if highlight.is_some() {
-			if let Err(err) = self.writer.write_str(r#"</span>"#) {
-				self.err = Some(err);
-			}
+		if highlight.is_some()
+			&& let Err(err) = self.writer.write_str(r#"</span>"#)
+		{
+			self.err = Some(err);
 		}
 	}
 }

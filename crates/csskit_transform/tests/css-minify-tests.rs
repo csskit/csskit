@@ -20,8 +20,8 @@ impl CssMinifyTestCase {
 		let path = source_path.parent().unwrap();
 		let name = format!(
 			"{}/{}",
-			&path.parent().unwrap().file_name().unwrap().to_str().unwrap(),
-			&path.file_name().unwrap().to_str().unwrap()
+			path.parent().unwrap().file_name().unwrap().to_str().unwrap(),
+			path.file_name().unwrap().to_str().unwrap()
 		);
 		let source_text = read_to_string(&source_path).unwrap();
 		let expected = read_to_string(expected_path).unwrap().trim_end().to_string();
@@ -50,7 +50,7 @@ fn minify(source_text: &str) -> String {
 		let overlays = transformer.overlays();
 		{
 			let mut overlay_stream =
-				CursorOverlaySink::new(source_text, &*overlays, CursorCompactWriteSink::new(source_text, &mut output));
+				CursorOverlaySink::new(source_text, &overlays, CursorCompactWriteSink::new(source_text, &mut output));
 			result.to_cursors(&mut overlay_stream);
 		}
 	} else {

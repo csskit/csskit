@@ -32,7 +32,7 @@ fn popular(c: &mut Criterion) {
 		group.bench_with_input(BenchmarkId::from_parameter(&file.name), &file.source_text, |b, source_text| {
 			b.iter_with_large_drop(|| {
 				let allocator = Arena::default();
-				let lexer = Lexer::new(&CssAtomSet::ATOMS, &source_text);
+				let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
 				let _ = Parser::new(&allocator, source_text, lexer).parse_entirely::<StyleSheet>();
 
 				allocator
