@@ -44,7 +44,7 @@ mod tests {
 			{
 				let mut overlay_stream = CursorOverlaySink::new(
 					source_text,
-					&*overlays,
+					&overlays,
 					CursorCompactWriteSink::new(source_text, &mut output),
 				);
 				result.to_cursors(&mut overlay_stream);

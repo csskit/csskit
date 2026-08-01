@@ -489,9 +489,9 @@ fn test_filling_buffer_with_skip_tokens() {
 fn peek_and_next() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
 	let alloc = crate::Arena::default();
-	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &str);
-	let mut p = Parser::new(&alloc, &str, lexer);
-	assert_eq!(p.at_end(), false);
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str);
+	let mut p = Parser::new(&alloc, str, lexer);
+	assert!(!p.at_end());
 	assert_eq!(p.offset(), 0);
 	for n in 0..=1 {
 		let c = p.checkpoint();
@@ -529,10 +529,10 @@ fn peek_and_next() {
 fn peek_and_next_with_whitsespace() {
 	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
 	let alloc = crate::Arena::default();
-	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &str);
-	let mut p = Parser::new(&alloc, &str, lexer);
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str);
+	let mut p = Parser::new(&alloc, str, lexer);
 	p.set_skip(KindSet::COMMENTS);
-	assert_eq!(p.at_end(), false);
+	assert!(!p.at_end());
 	assert_eq!(p.offset(), 0);
 	for n in 0..=1 {
 		let c = p.checkpoint();

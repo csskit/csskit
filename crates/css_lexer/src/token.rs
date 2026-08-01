@@ -1464,14 +1464,14 @@ fn test_new_dimension() {
 #[test]
 fn test_bad_bits() {
 	let token = Token::new_dimension(false, false, 5, 2, 8191.0, 42);
-	assert_eq!(token.is_bad(), false);
+	assert!(!token.is_bad());
 	assert_eq!(token.kind(), Kind::Dimension);
 	assert_eq!(Kind::from_bits(token.kind_bits()), Kind::Dimension);
-	assert_eq!(token.is_bad(), false);
+	assert!(!token.is_bad());
 	assert_eq!(token.len(), 7);
 	assert_eq!(token.numeric_len(), 5);
 	let bad_token = token.with_bad_flag();
-	assert_eq!(bad_token.is_bad(), true);
+	assert!(bad_token.is_bad());
 	assert_eq!(bad_token.kind(), Kind::BadDimension);
 	assert_eq!(Kind::from_bits(bad_token.kind_bits()), Kind::BadDimension);
 	assert_eq!(bad_token.len(), 7);
@@ -1479,10 +1479,10 @@ fn test_bad_bits() {
 	assert_eq!(bad_token.atom_bits(), 42);
 
 	let token = Token::new_delim('(');
-	assert_eq!(token.is_bad(), false);
+	assert!(!token.is_bad());
 	let bad_token = token.with_bad_flag();
-	assert_eq!(token.is_bad(), false);
-	assert_eq!(bad_token.is_bad(), true);
+	assert!(!token.is_bad());
+	assert!(bad_token.is_bad());
 	assert_eq!(bad_token.kind(), Kind::BadLeftParen);
 
 	let token = Token::new_delim('[');

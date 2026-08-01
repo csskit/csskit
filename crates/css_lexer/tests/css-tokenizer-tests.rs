@@ -127,8 +127,8 @@ impl CSSTokenizerTestCase {
 		let path = source_path.parent().unwrap();
 		let name = format!(
 			"{}-{}",
-			&path.parent().unwrap().file_name().unwrap().to_str().unwrap(),
-			&path.file_name().unwrap().to_str().unwrap()
+			path.parent().unwrap().file_name().unwrap().to_str().unwrap(),
+			path.file_name().unwrap().to_str().unwrap()
 		);
 		let source_text = read_to_string(&source_path).unwrap();
 		let desired: Vec<CSSTokenizerTestToken> = from_str(read_to_string(json_path.clone()).unwrap().as_str())
