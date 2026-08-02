@@ -3,9 +3,13 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Visitable, Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 enum Foo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
     Color(crate::Value<'a, crate::Color<'a>>, crate::Value<'a, crate::Color<'a>>),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

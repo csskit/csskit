@@ -1,9 +1,12 @@
 ---
 source: crates/csskit_proc_macro/src/test/test_generate.rs
-assertion_line: 157
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Foo<'a>(
     pub crate::CaretColorStyleValue<'a>,
     pub Option<crate::CaretAnimationStyleValue>,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

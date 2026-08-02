@@ -2,7 +2,11 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 enum Foo<'a> {
     Color(crate::Value<'a, crate::Color<'a>>),
     Image1d(crate::Value<'a, crate::Image1d<'a>>),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

@@ -2,6 +2,8 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C, u8)]
 #[derive(
     ::csskit_derives::Parse,
     ::csskit_derives::Peek,
@@ -27,10 +29,16 @@ pub enum FooKeywords {
     #[atom(CssAtomSet::Bar)]
     Bar(::css_parse::T![Ident]),
 }
+#[cfg(test)]
+::stable_type_layout::register!(FooKeywords);
 #[derive(Visitable, Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Foo<'a>(
     #[cfg_attr(feature = "visitable", visit(skip))]
     pub FooKeywords,
     #[cfg_attr(feature = "visitable", visit(skip))]
     pub Option<FooKeywords>,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

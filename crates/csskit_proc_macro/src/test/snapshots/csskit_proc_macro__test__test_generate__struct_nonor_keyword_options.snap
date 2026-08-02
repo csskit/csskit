@@ -2,6 +2,7 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
 #[derive(
     ::csskit_derives::Parse,
     ::csskit_derives::Peek,
@@ -20,6 +21,7 @@ expression: pretty
 #[metadata(delegate)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
+#[repr(C)]
 #[parse(one_must_occur)]
 struct FooOptions {
     #[cfg_attr(feature = "visitable", visit(skip))]
@@ -35,5 +37,11 @@ struct FooOptions {
     #[atom(CssAtomSet::Position)]
     pub position: Option<::css_parse::T![Ident]>,
 }
+#[cfg(test)]
+::stable_type_layout::register!(FooOptions);
 #[derive(Parse)]
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Foo(pub crate::NoneOr<crate::FooOptions>);
+#[cfg(test)]
+::stable_type_layout::register!(Foo);

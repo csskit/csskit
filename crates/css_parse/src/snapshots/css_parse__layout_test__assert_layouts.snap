@@ -2,9 +2,38 @@
 source: crates/css_parse/src/layout_test.rs
 expression: render()
 ---
-BadDeclaration: 24
-BangImportant: 24
-ComponentValue: 56
-ComponentValues: 24
-FunctionBlock: 48
-SimpleBlock: 56
+BadDeclaration: size=24 align=8 {
+    0: 0
+}
+BangImportant: size=24 align=4 {
+    bang: 0
+    important: 12
+}
+ComponentValue: size=64 align=8
+    0: SimpleBlock
+    1: Function
+    2: Whitespace
+    3: Number
+    4: Dimension
+    5: Ident
+    6: AtKeyword
+    7: Hash
+    8: String
+    9: Url
+    10: Delim
+    11: Colon
+    12: Semicolon
+    13: Comma
+ComponentValues: size=24 align=8 {
+    values: 0
+}
+FunctionBlock: size=56 align=8 {
+    name: 0
+    params: 16
+    close: 40
+}
+SimpleBlock: size=56 align=8 {
+    open: 0
+    values: 16
+    close: 40
+}

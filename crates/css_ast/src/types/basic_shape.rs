@@ -1,7 +1,6 @@
-#![allow(unused)]
 use super::prelude::*;
-
 use crate::{BasicShapeRect, CircleFunction, EllipseFunction, PathFunction, PolygonFunction, ShapeFunction};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes-1/#typedef-basic-shape>
 ///
@@ -14,7 +13,7 @@ use crate::{BasicShapeRect, CircleFunction, EllipseFunction, PathFunction, Polyg
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BasicShape<'a> {
-	Rect(BasicShapeRect<'a>),
+	Rect(Box<'a, BasicShapeRect<'a>>),
 	Circle(CircleFunction<'a>),
 	Ellipse(EllipseFunction<'a>),
 	Polygon(PolygonFunction<'a>),

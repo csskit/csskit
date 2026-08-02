@@ -3,7 +3,9 @@ use proc_macro::TokenStream;
 use syn::{DeriveInput, parse_macro_input};
 
 mod generate;
+mod layout;
 mod node;
+mod repr;
 mod syntax;
 mod type_renames;
 

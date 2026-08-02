@@ -2,6 +2,8 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
+#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[repr(C)]
 struct Foo<'a>(
     pub ::css_parse::CommaSeparated<
         'a,
@@ -9,3 +11,5 @@ struct Foo<'a>(
         0usize,
     >,
 );
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

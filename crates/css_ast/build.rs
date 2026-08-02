@@ -25,10 +25,14 @@ fn main() {
 	find_visitable_nodes("src/**/*.rs", &mut all_visitable, |path: &PathBuf| {
 		println!("cargo::rerun-if-changed={}", path.display());
 	});
+	let mut all_visitable = all_visitable.into_iter().collect::<Vec<_>>();
+	all_visitable.sort_unstable_by_key(|node| node.ident().to_string());
 
 	// Find only queryable nodes (for NodeId enum and QueryableNode trait)
 	let mut queryable = HashSet::<_>::new();
 	find_queryable_nodes("src/**/*.rs", &mut queryable, |_| {});
+	let mut queryable = queryable.into_iter().collect::<Vec<_>>();
+	queryable.sort_unstable_by_key(|node| node.ident().to_string());
 
 	// NodeId enum - only queryable types
 	{
