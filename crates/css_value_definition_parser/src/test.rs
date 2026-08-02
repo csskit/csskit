@@ -541,7 +541,8 @@ fn def_returns_true_for_maybe_unsized() {
 	assert!(to_valuedef! { <foo> <bar># }.maybe_unsized());
 	assert!(to_valuedef! { <foo> <bar()># }.maybe_unsized());
 	assert!(to_valuedef!(" <'bar'># ").maybe_unsized());
-	assert!(!to_valuedef!(" <'bar'> ").maybe_unsized());
+	// A `<'prop'>` StyleValue references always can use a Value<'a, T> so must be unsized
+	assert!(to_valuedef!(" <'bar'> ").maybe_unsized());
 	assert!(to_valuedef!(" <bar>+ ").maybe_unsized());
 	// Every `<type>` reference is wrapped in Value<'a, T> / CalcableValue<'a, T>, which
 	// supplies 'a, so any multiplier of a type — bounded or not — is unsized.

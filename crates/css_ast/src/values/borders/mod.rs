@@ -1081,7 +1081,7 @@ pub struct BorderImageOutsetStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image-repeat"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct BorderImageRepeatStyleValue;
+pub struct BorderImageRepeatStyleValue<'a>;
 
 /// Represents the style value for `border-image-slice` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image-slice).
 ///

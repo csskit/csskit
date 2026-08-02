@@ -204,7 +204,7 @@ pub struct MarginTopStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-trim"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MarginTrimStyleValue {}
+pub enum MarginTrimStyleValue<'a> {}
 
 /// Represents the style value for `padding` as defined in [css-box-4](https://drafts.csswg.org/css-box-4/#padding).
 ///

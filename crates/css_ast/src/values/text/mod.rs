@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hanging-punctuation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum HangingPunctuationStyleValue {}
+pub enum HangingPunctuationStyleValue<'a> {}
 
 /// Represents the style value for `hyphenate-character` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#hyphenate-character).
 ///
@@ -123,7 +123,7 @@ pub struct HyphenateLimitCharsStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphenate-limit-last"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum HyphenateLimitLastStyleValue {}
+pub enum HyphenateLimitLastStyleValue<'a> {}
 
 /// Represents the style value for `hyphenate-limit-lines` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#hyphenate-limit-lines).
 ///
@@ -210,7 +210,7 @@ pub struct HyphenateLimitZoneStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.hyphens"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum HyphensStyleValue {}
+pub enum HyphensStyleValue<'a> {}
 
 /// Represents the style value for `letter-spacing` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#letter-spacing).
 ///
@@ -271,7 +271,7 @@ pub struct LetterSpacingStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum LineBreakStyleValue {}
+pub enum LineBreakStyleValue<'a> {}
 
 /// Represents the style value for `line-padding` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#line-padding).
 ///
@@ -329,7 +329,7 @@ pub struct LinePaddingStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverflowWrapStyleValue {}
+pub enum OverflowWrapStyleValue<'a> {}
 
 /// Represents the style value for `tab-size` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#tab-size).
 ///
@@ -451,7 +451,7 @@ pub enum TextAlignAllStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-align-last"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextAlignLastStyleValue {}
+pub enum TextAlignLastStyleValue<'a> {}
 
 /// Represents the style value for `text-autospace` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#text-autospace).
 ///
@@ -538,7 +538,7 @@ pub struct TextFitStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-group-align"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextGroupAlignStyleValue {}
+pub enum TextGroupAlignStyleValue<'a> {}
 
 /// Represents the style value for `text-indent` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#text-indent).
 ///
@@ -599,7 +599,7 @@ pub struct TextIndentStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-justify"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextJustifyStyleValue {}
+pub enum TextJustifyStyleValue<'a> {}
 
 /// Represents the style value for `text-spacing` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#text-spacing).
 ///
@@ -687,7 +687,7 @@ pub struct TextSpacingTrimStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-transform"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextTransformStyleValue {}
+pub enum TextTransformStyleValue<'a> {}
 
 /// Represents the style value for `text-wrap` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#text-wrap).
 ///
@@ -719,7 +719,7 @@ pub enum TextTransformStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextWrapStyleValue;
+pub struct TextWrapStyleValue<'a>;
 
 /// Represents the style value for `text-wrap-mode` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#text-wrap-mode).
 ///
@@ -750,7 +750,7 @@ pub struct TextWrapStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-mode"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextWrapModeStyleValue {}
+pub enum TextWrapModeStyleValue<'a> {}
 
 /// Represents the style value for `text-wrap-style` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#text-wrap-style).
 ///
@@ -781,7 +781,7 @@ pub enum TextWrapModeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextWrapStyleStyleValue {}
+pub enum TextWrapStyleStyleValue<'a> {}
 
 /// Represents the style value for `white-space` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#white-space).
 ///
@@ -813,7 +813,7 @@ pub enum TextWrapStyleStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WhiteSpaceStyleValue {}
+pub enum WhiteSpaceStyleValue<'a> {}
 
 /// Represents the style value for `white-space-collapse` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#white-space-collapse).
 ///
@@ -843,7 +843,7 @@ pub enum WhiteSpaceStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-collapse"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WhiteSpaceCollapseStyleValue {}
+pub enum WhiteSpaceCollapseStyleValue<'a> {}
 
 /// Represents the style value for `white-space-trim` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#white-space-trim).
 ///
@@ -870,7 +870,7 @@ pub enum WhiteSpaceCollapseStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.white-space-trim"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WhiteSpaceTrimStyleValue;
+pub struct WhiteSpaceTrimStyleValue<'a>;
 
 /// Represents the style value for `word-break` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#word-break).
 ///
@@ -900,7 +900,7 @@ pub struct WhiteSpaceTrimStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WordBreakStyleValue {}
+pub enum WordBreakStyleValue<'a> {}
 
 /// Represents the style value for `word-space-transform` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#word-space-transform).
 ///
@@ -928,7 +928,7 @@ pub enum WordBreakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.word-space-transform"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WordSpaceTransformStyleValue {}
+pub enum WordSpaceTransformStyleValue<'a> {}
 
 /// Represents the style value for `word-spacing` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#word-spacing).
 ///
@@ -986,7 +986,7 @@ pub struct WordSpacingStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-after"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WrapAfterStyleValue {}
+pub enum WrapAfterStyleValue<'a> {}
 
 /// Represents the style value for `wrap-before` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#wrap-before).
 ///
@@ -1013,7 +1013,7 @@ pub enum WrapAfterStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-before"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WrapBeforeStyleValue {}
+pub enum WrapBeforeStyleValue<'a> {}
 
 /// Represents the style value for `wrap-inside` as defined in [css-text-5](https://drafts.csswg.org/css-text-5/#wrap-inside).
 ///
@@ -1040,4 +1040,4 @@ pub enum WrapBeforeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-inside"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WrapInsideStyleValue {}
+pub enum WrapInsideStyleValue<'a> {}

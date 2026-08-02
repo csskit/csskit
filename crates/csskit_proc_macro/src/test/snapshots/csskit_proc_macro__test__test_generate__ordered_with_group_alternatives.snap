@@ -2,6 +2,27 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::core::compile_error! {
-    "this object needs the <'a> lifetime but it didn't have it. Add it"
+#[derive(Parse)]
+#[derive(::stable_type_layout::TypeLayout)]
+#[repr(C, u8)]
+enum Foo<'a> {
+    #[atom(CssAtomSet::Normal)]
+    Normal(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
+    ContentDistribution(crate::Value<'a, crate::ContentDistribution>),
+    ContentPosition(
+        Option<crate::Value<'a, crate::OverflowPosition>>,
+        crate::Value<'a, crate::ContentPosition>,
+    ),
+    Left(
+        Option<crate::Value<'a, crate::OverflowPosition>>,
+        #[atom(CssAtomSet::Left)]
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
+    ),
+    Right(
+        Option<crate::Value<'a, crate::OverflowPosition>>,
+        #[atom(CssAtomSet::Right)]
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
+    ),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

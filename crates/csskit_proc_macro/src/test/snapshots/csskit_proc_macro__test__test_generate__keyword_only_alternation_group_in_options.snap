@@ -5,21 +5,21 @@ expression: pretty
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[parse(one_must_occur)]
     Wrap {
         #[atom(CssAtomSet::Wrap)]
-        wrap: Option<::css_parse::T![Ident]>,
+        wrap: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         #[atom(CssAtomSet::Balance)]
-        balance: Option<::css_parse::T![Ident]>,
+        balance: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     },
     #[parse(one_must_occur)]
     WrapReverse {
         #[atom(CssAtomSet::WrapReverse)]
-        wrap_reverse: Option<::css_parse::T![Ident]>,
+        wrap_reverse: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         #[atom(CssAtomSet::Balance)]
-        balance: Option<::css_parse::T![Ident]>,
+        balance: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     },
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

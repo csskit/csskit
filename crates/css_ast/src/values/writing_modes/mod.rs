@@ -34,7 +34,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.direction"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum DirectionStyleValue {}
+pub enum DirectionStyleValue<'a> {}
 
 /// Represents the style value for `glyph-orientation-vertical` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#glyph-orientation-vertical).
 ///
@@ -66,7 +66,7 @@ pub enum DirectionStyleValue {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum GlyphOrientationVerticalStyleValue {}
+pub enum GlyphOrientationVerticalStyleValue<'a> {}
 
 /// Represents the style value for `text-combine-upright` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#text-combine-upright).
 ///
@@ -124,7 +124,7 @@ pub enum TextCombineUprightStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-orientation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextOrientationStyleValue {}
+pub enum TextOrientationStyleValue<'a> {}
 
 /// Represents the style value for `unicode-bidi` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#unicode-bidi).
 ///
@@ -152,7 +152,7 @@ pub enum TextOrientationStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.unicode-bidi"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum UnicodeBidiStyleValue {}
+pub enum UnicodeBidiStyleValue<'a> {}
 
 /// Represents the style value for `writing-mode` as defined in [css-writing-modes-4](https://drafts.csswg.org/css-writing-modes-4/#writing-mode).
 ///
@@ -181,4 +181,4 @@ pub enum UnicodeBidiStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.writing-mode"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WritingModeStyleValue {}
+pub enum WritingModeStyleValue<'a> {}

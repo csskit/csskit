@@ -228,7 +228,7 @@ pub struct WebkitTransformStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitFontSmoothingStyleValue {}
+pub enum WebkitFontSmoothingStyleValue<'a> {}
 
 /// Represents the style value for `-webkit-text-size-adjust`.
 ///
@@ -431,7 +431,7 @@ pub struct WebkitAnimationTimingFunctionStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBackfaceVisibilityStyleValue {}
+pub enum WebkitBackfaceVisibilityStyleValue<'a> {}
 
 /// Represents the style value for `-webkit-tap-highlight-color`.
 ///
@@ -526,7 +526,7 @@ pub struct WebkitTransitionTimingFunctionStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitFlexDirectionStyleValue {}
+pub enum WebkitFlexDirectionStyleValue<'a> {}
 
 /// `-webkit-flex-wrap` — alias for `flex-wrap`.
 #[syntax(" nowrap | wrap | wrap-reverse ")]
@@ -544,7 +544,7 @@ pub enum WebkitFlexDirectionStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitFlexWrapStyleValue {}
+pub enum WebkitFlexWrapStyleValue<'a> {}
 
 /// `-webkit-flex-basis` — alias for `flex-basis`.
 #[syntax(" content | <'width'> ")]
@@ -579,7 +579,7 @@ pub enum WebkitFlexBasisStyleValue<'a> {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct WebkitFlexFlowStyleValue;
+pub struct WebkitFlexFlowStyleValue<'a>;
 
 /// `-webkit-flex-grow` — alias for `flex-grow`.
 #[syntax(" <number [0,∞]> ")]
@@ -689,7 +689,7 @@ pub enum WebkitAlignContentStyleValue<'a> {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBoxOrientStyleValue {}
+pub enum WebkitBoxOrientStyleValue<'a> {}
 
 /// `-webkit-box-direction` — legacy flexbox item order direction.
 #[syntax(" normal | reverse ")]
@@ -707,7 +707,7 @@ pub enum WebkitBoxOrientStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBoxDirectionStyleValue {}
+pub enum WebkitBoxDirectionStyleValue<'a> {}
 
 /// `-webkit-box-pack` — legacy flexbox main-axis alignment.
 #[syntax(" start | end | center | justify ")]
@@ -725,7 +725,7 @@ pub enum WebkitBoxDirectionStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBoxPackStyleValue {}
+pub enum WebkitBoxPackStyleValue<'a> {}
 
 /// `-webkit-box-align` — legacy flexbox cross-axis alignment.
 #[syntax(" stretch | start | end | center | baseline ")]
@@ -743,7 +743,7 @@ pub enum WebkitBoxPackStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBoxAlignStyleValue {}
+pub enum WebkitBoxAlignStyleValue<'a> {}
 
 /// `-webkit-box-flex` — legacy flexbox grow factor.
 #[syntax(" <number> ")]
@@ -815,7 +815,7 @@ pub struct WebkitBoxShadowStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBoxSizingStyleValue {}
+pub enum WebkitBoxSizingStyleValue<'a> {}
 
 /// `-webkit-box-decoration-break` — alias for `box-decoration-break`.
 #[syntax(" clone | slice ")]
@@ -833,7 +833,7 @@ pub enum WebkitBoxSizingStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitBoxDecorationBreakStyleValue {}
+pub enum WebkitBoxDecorationBreakStyleValue<'a> {}
 
 // ── Misc aliases ─────────────────────────────────────────────────────────────
 
@@ -853,7 +853,7 @@ pub enum WebkitBoxDecorationBreakStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitUserSelectStyleValue {}
+pub enum WebkitUserSelectStyleValue<'a> {}
 
 /// `-webkit-overflow-scrolling` — non-standard momentum scrolling on iOS.
 #[syntax(" auto | touch ")]
@@ -871,7 +871,7 @@ pub enum WebkitUserSelectStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitOverflowScrollingStyleValue {}
+pub enum WebkitOverflowScrollingStyleValue<'a> {}
 
 /// `-webkit-print-color-adjust` — alias for `print-color-adjust`.
 #[syntax(" economy | exact ")]
@@ -890,7 +890,7 @@ pub enum WebkitOverflowScrollingStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitPrintColorAdjustStyleValue {}
+pub enum WebkitPrintColorAdjustStyleValue<'a> {}
 
 /// `-webkit-text-decoration` — alias for `text-decoration`.
 #[syntax(
@@ -948,7 +948,7 @@ pub struct WebkitTextDecorationColorStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitTextDecorationSkipInkStyleValue {}
+pub enum WebkitTextDecorationSkipInkStyleValue<'a> {}
 
 /// `-webkit-column-gap` — alias for `column-gap`.
 #[syntax(" normal | <length-percentage [0,∞]> | <line-width> ")]
@@ -1090,7 +1090,7 @@ pub struct WebkitTransitionDelayStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitUserDragStyleValue {}
+pub enum WebkitUserDragStyleValue<'a> {}
 
 /// `-webkit-touch-callout` — non-standard iOS touch callout behaviour.
 #[syntax(" default | none ")]
@@ -1109,7 +1109,7 @@ pub enum WebkitUserDragStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WebkitTouchCalloutStyleValue {}
+pub enum WebkitTouchCalloutStyleValue<'a> {}
 
 /// `-webkit-text-fill-color` — non-standard text fill colour.
 #[syntax(" <color> ")]

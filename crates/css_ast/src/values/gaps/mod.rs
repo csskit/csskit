@@ -97,7 +97,7 @@ pub struct ColumnRuleStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnRuleBreakStyleValue {}
+pub enum ColumnRuleBreakStyleValue<'a> {}
 
 /// Represents the style value for `column-rule-color` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-color).
 ///
@@ -481,7 +481,7 @@ pub enum ColumnRuleStyleStyleValue<'a> {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnRuleVisibilityItemsStyleValue {}
+pub enum ColumnRuleVisibilityItemsStyleValue<'a> {}
 
 /// Represents the style value for `column-rule-width` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#column-rule-width).
 ///
@@ -633,7 +633,7 @@ pub struct RowRuleStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RowRuleBreakStyleValue {}
+pub enum RowRuleBreakStyleValue<'a> {}
 
 /// Represents the style value for `row-rule-color` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-color).
 ///
@@ -1003,7 +1003,7 @@ pub enum RowRuleStyleStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.row-rule-visibility-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RowRuleVisibilityItemsStyleValue {}
+pub enum RowRuleVisibilityItemsStyleValue<'a> {}
 
 /// Represents the style value for `row-rule-width` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#row-rule-width).
 ///
@@ -1093,7 +1093,7 @@ pub struct RuleStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleBreakStyleValue;
+pub struct RuleBreakStyleValue<'a>;
 
 /// Represents the style value for `rule-color` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-color).
 ///
@@ -1307,7 +1307,7 @@ pub struct RuleInsetStartStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-overlap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RuleOverlapStyleValue {}
+pub enum RuleOverlapStyleValue<'a> {}
 
 /// Represents the style value for `rule-style` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-style).
 ///
@@ -1368,7 +1368,7 @@ pub struct RuleStyleStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-visibility-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct RuleVisibilityItemsStyleValue;
+pub struct RuleVisibilityItemsStyleValue<'a>;
 
 /// Represents the style value for `rule-width` as defined in [css-gaps-1](https://drafts.csswg.org/css-gaps-1/#rule-width).
 ///

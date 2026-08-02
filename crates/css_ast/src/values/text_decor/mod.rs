@@ -127,7 +127,7 @@ pub struct TextDecorationInsetStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-line"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationLineStyleValue {}
+pub enum TextDecorationLineStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip).
 ///
@@ -155,7 +155,7 @@ pub enum TextDecorationLineStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationSkipStyleValue {}
+pub enum TextDecorationSkipStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-skip-box` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-box).
 ///
@@ -183,7 +183,7 @@ pub enum TextDecorationSkipStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-box"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationSkipBoxStyleValue {}
+pub enum TextDecorationSkipBoxStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-skip-ink` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-ink).
 ///
@@ -213,7 +213,7 @@ pub enum TextDecorationSkipBoxStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-ink"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationSkipInkStyleValue {}
+pub enum TextDecorationSkipInkStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-skip-self` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-self).
 ///
@@ -240,7 +240,7 @@ pub enum TextDecorationSkipInkStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-skip-self"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationSkipSelfStyleValue {}
+pub enum TextDecorationSkipSelfStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-skip-spaces` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-skip-spaces).
 ///
@@ -272,7 +272,7 @@ pub enum TextDecorationSkipSelfStyleValue {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationSkipSpacesStyleValue {}
+pub enum TextDecorationSkipSpacesStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-style).
 ///
@@ -302,7 +302,7 @@ pub enum TextDecorationSkipSpacesStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextDecorationStyleStyleValue {}
+pub enum TextDecorationStyleStyleValue<'a> {}
 
 /// Represents the style value for `text-decoration-thickness` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-decoration-thickness).
 ///
@@ -425,7 +425,7 @@ pub struct TextEmphasisColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextEmphasisPositionStyleValue {}
+pub enum TextEmphasisPositionStyleValue<'a> {}
 
 /// Represents the style value for `text-emphasis-skip` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-skip).
 ///
@@ -453,7 +453,7 @@ pub enum TextEmphasisPositionStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis-skip"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct TextEmphasisSkipStyleValue;
+pub struct TextEmphasisSkipStyleValue<'a>;
 
 /// Represents the style value for `text-emphasis-style` as defined in [css-text-decor-4](https://drafts.csswg.org/css-text-decor-4/#text-emphasis-style).
 ///
@@ -574,4 +574,4 @@ pub struct TextUnderlineOffsetStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-underline-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextUnderlinePositionStyleValue {}
+pub enum TextUnderlinePositionStyleValue<'a> {}

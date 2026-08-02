@@ -7,7 +7,7 @@ expression: pretty
 #[repr(C, u8)]
 enum Foo<'a> {
     #[atom(CssAtomSet::Foo)]
-    Foo(::css_parse::T![Ident]),
+    Foo(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     CalcSizeFunction(crate::CalcSizeFunction<'a>),
 }
 #[cfg(test)]

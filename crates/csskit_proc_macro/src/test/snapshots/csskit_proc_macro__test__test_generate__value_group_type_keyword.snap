@@ -8,7 +8,7 @@ expression: pretty
 enum Foo<'a> {
     Length(crate::CalcableValue<'a, crate::Positive<crate::Length>>),
     #[atom(CssAtomSet::LineThrough)]
-    LineThrough(::css_parse::T![Ident]),
+    LineThrough(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
 }
 #[cfg(test)]
 ::stable_type_layout::register!(Foo < 'static >);

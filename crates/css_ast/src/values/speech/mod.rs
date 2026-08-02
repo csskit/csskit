@@ -278,7 +278,7 @@ pub enum RestBeforeStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.speak"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SpeakStyleValue {}
+pub enum SpeakStyleValue<'a> {}
 
 /// Represents the style value for `voice-balance` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-balance).
 ///
@@ -514,7 +514,7 @@ pub enum VoiceRateStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-stress"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VoiceStressStyleValue {}
+pub enum VoiceStressStyleValue<'a> {}
 
 /// Represents the style value for `voice-volume` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-volume).
 ///

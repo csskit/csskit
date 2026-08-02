@@ -119,4 +119,4 @@ pub struct ViewTransitionNameStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.view-transition-scope"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ViewTransitionScopeStyleValue {}
+pub enum ViewTransitionScopeStyleValue<'a> {}

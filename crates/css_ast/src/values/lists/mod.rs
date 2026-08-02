@@ -186,7 +186,7 @@ pub struct ListStyleImageStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.list-style-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ListStylePositionStyleValue {}
+pub enum ListStylePositionStyleValue<'a> {}
 
 /// Represents the style value for `list-style-type` as defined in [css-lists-3](https://drafts.csswg.org/css-lists-3/#list-style-type).
 ///
@@ -245,4 +245,4 @@ pub enum ListStyleTypeStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.marker-side"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MarkerSideStyleValue {}
+pub enum MarkerSideStyleValue<'a> {}

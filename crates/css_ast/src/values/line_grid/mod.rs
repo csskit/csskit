@@ -33,7 +33,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-snap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BoxSnapStyleValue {}
+pub enum BoxSnapStyleValue<'a> {}
 
 /// Represents the style value for `line-grid` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#line-grid).
 ///
@@ -60,7 +60,7 @@ pub enum BoxSnapStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-grid"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum LineGridStyleValue {}
+pub enum LineGridStyleValue<'a> {}
 
 /// Represents the style value for `line-snap` as defined in [css-line-grid-1](https://drafts.csswg.org/css-line-grid-1/#line-snap).
 ///
@@ -88,4 +88,4 @@ pub enum LineGridStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.line-snap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum LineSnapStyleValue {}
+pub enum LineSnapStyleValue<'a> {}

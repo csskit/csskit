@@ -25,7 +25,7 @@ expression: pretty
 enum SingleFoo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
-    Foo(::css_parse::T![Ident]),
+    Foo(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     Bar(crate::Value<'a, crate::Bar<'a>>),
 }
 #[cfg(test)]

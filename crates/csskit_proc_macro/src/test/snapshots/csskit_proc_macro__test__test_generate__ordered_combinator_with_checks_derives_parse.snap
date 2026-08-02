@@ -7,10 +7,10 @@ expression: pretty
 #[repr(C, u8)]
 enum Foo<'a> {
     #[atom(CssAtomSet::Bar)]
-    Bar(::css_parse::T![Ident]),
+    Bar(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     Foo(
         #[atom(CssAtomSet::Foo)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
         Option<crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>>,
     ),
 }

@@ -6,13 +6,11 @@ use super::prelude::*;
 /// <timeline-range-center-subject> = source | target
 /// ```
 #[syntax(" source | target ")]
-#[derive(
-	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
-)]
+#[derive(Parse, Peek, ToSpan, SemanticEq, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TimelineRangeCenterSubject {}
+pub enum TimelineRangeCenterSubject<'a> {}
 
 #[cfg(test)]
 mod tests {

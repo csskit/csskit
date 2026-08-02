@@ -248,4 +248,4 @@ pub struct PositionTryOrderStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-visibility"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionVisibilityStyleValue {}
+pub enum PositionVisibilityStyleValue<'a> {}

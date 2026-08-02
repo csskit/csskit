@@ -5,30 +5,30 @@ expression: pretty
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[atom(CssAtomSet::Legacy)]
-    Legacy(::css_parse::T![Ident]),
+    Legacy(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[parse(all_must_occur)]
     LegacyLeft(
         #[atom(CssAtomSet::Legacy)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Left)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
     ),
     #[parse(all_must_occur)]
     LegacyRight(
         #[atom(CssAtomSet::Legacy)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Right)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
     ),
     #[parse(all_must_occur)]
     LegacyCenter(
         #[atom(CssAtomSet::Legacy)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
         #[atom(CssAtomSet::Center)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
     ),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

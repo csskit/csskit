@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverscrollBehaviorStyleValue;
+pub struct OverscrollBehaviorStyleValue<'a>;
 
 /// Represents the style value for `overscroll-behavior-block` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-block).
 ///
@@ -66,7 +66,7 @@ pub struct OverscrollBehaviorStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverscrollBehaviorBlockStyleValue {}
+pub enum OverscrollBehaviorBlockStyleValue<'a> {}
 
 /// Represents the style value for `overscroll-behavior-inline` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-inline).
 ///
@@ -101,7 +101,7 @@ pub enum OverscrollBehaviorBlockStyleValue {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverscrollBehaviorInlineStyleValue {}
+pub enum OverscrollBehaviorInlineStyleValue<'a> {}
 
 /// Represents the style value for `overscroll-behavior-x` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-x).
 ///
@@ -132,7 +132,7 @@ pub enum OverscrollBehaviorInlineStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-x"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverscrollBehaviorXStyleValue {}
+pub enum OverscrollBehaviorXStyleValue<'a> {}
 
 /// Represents the style value for `overscroll-behavior-y` as defined in [css-overscroll-1](https://drafts.csswg.org/css-overscroll-1/#overscroll-behavior-y).
 ///
@@ -163,4 +163,4 @@ pub enum OverscrollBehaviorXStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior-y"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverscrollBehaviorYStyleValue {}
+pub enum OverscrollBehaviorYStyleValue<'a> {}

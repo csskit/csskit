@@ -4,9 +4,9 @@ expression: pretty
 ---
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
-    Keyword(::css_parse::T![Ident]),
+enum Foo<'a> {
+    Keyword(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     Literal2(crate::Exact<crate::CSSInt, 2i32>),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

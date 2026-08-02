@@ -5,13 +5,13 @@ expression: pretty
 #[derive(Parse, Visitable)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Auto)]
-    Auto(::css_parse::T![Ident]),
+    Auto(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::None)]
-    None(::css_parse::T![Ident]),
+    None(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

@@ -97,7 +97,7 @@ pub enum FlexBasisStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-direction"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FlexDirectionStyleValue {}
+pub enum FlexDirectionStyleValue<'a> {}
 
 /// Represents the style value for `flex-flow` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-flow).
 ///
@@ -129,7 +129,7 @@ pub enum FlexDirectionStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-flow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FlexFlowStyleValue;
+pub struct FlexFlowStyleValue<'a>;
 
 /// Represents the style value for `flex-grow` as defined in [css-flexbox-2](https://drafts.csswg.org/css-flexbox-2/#flex-grow).
 ///
@@ -246,4 +246,4 @@ pub struct FlexShrinkStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FlexWrapStyleValue {}
+pub enum FlexWrapStyleValue<'a> {}

@@ -151,7 +151,7 @@ pub struct FontFeatureSettingsStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-kerning"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontKerningStyleValue {}
+pub enum FontKerningStyleValue<'a> {}
 
 /// Represents the style value for `font-language-override` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-language-override).
 ///
@@ -211,7 +211,7 @@ pub struct FontLanguageOverrideStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-optical-sizing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontOpticalSizingStyleValue {}
+pub enum FontOpticalSizingStyleValue<'a> {}
 
 /// Represents the style value for `font-palette` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-palette).
 ///
@@ -365,7 +365,7 @@ pub enum FontStyleStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontSynthesisStyleValue;
+pub struct FontSynthesisStyleValue<'a>;
 
 /// Represents the style value for `font-synthesis-position` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-position).
 ///
@@ -396,7 +396,7 @@ pub struct FontSynthesisStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontSynthesisPositionStyleValue {}
+pub enum FontSynthesisPositionStyleValue<'a> {}
 
 /// Represents the style value for `font-synthesis-small-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-small-caps).
 ///
@@ -427,7 +427,7 @@ pub enum FontSynthesisPositionStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-small-caps"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontSynthesisSmallCapsStyleValue {}
+pub enum FontSynthesisSmallCapsStyleValue<'a> {}
 
 /// Represents the style value for `font-synthesis-style` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-style).
 ///
@@ -458,7 +458,7 @@ pub enum FontSynthesisSmallCapsStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontSynthesisStyleStyleValue {}
+pub enum FontSynthesisStyleStyleValue<'a> {}
 
 /// Represents the style value for `font-synthesis-weight` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-synthesis-weight).
 ///
@@ -489,7 +489,7 @@ pub enum FontSynthesisStyleStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-synthesis-weight"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontSynthesisWeightStyleValue {}
+pub enum FontSynthesisWeightStyleValue<'a> {}
 
 // /// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
 // ///
@@ -625,7 +625,7 @@ pub enum FontSynthesisWeightStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-caps"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontVariantCapsStyleValue {}
+pub enum FontVariantCapsStyleValue<'a> {}
 
 /// Represents the style value for `font-variant-east-asian` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-east-asian).
 ///
@@ -687,7 +687,7 @@ pub struct FontVariantEastAsianStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-emoji"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontVariantEmojiStyleValue {}
+pub enum FontVariantEmojiStyleValue<'a> {}
 
 /// Represents the style value for `font-variant-ligatures` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-ligatures).
 ///
@@ -784,7 +784,7 @@ pub struct FontVariantNumericStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FontVariantPositionStyleValue {}
+pub enum FontVariantPositionStyleValue<'a> {}
 
 /// Represents the style value for `font-variation-settings` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variation-settings).
 ///

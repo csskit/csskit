@@ -24,7 +24,7 @@ use css_parse::{Cursor, Parse, Parser, Result as ParseResult, T};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsOverflowStyleStyleValue {}
+pub enum MsOverflowStyleStyleValue<'a> {}
 
 /// `-ms-interpolation-mode` - IE image scaling algorithm.
 #[syntax(" nearest-neighbor | bicubic ")]
@@ -42,7 +42,7 @@ pub enum MsOverflowStyleStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsInterpolationModeStyleValue {}
+pub enum MsInterpolationModeStyleValue<'a> {}
 
 /// `-ms-box-sizing` — alias for `box-sizing`.
 #[syntax(" content-box | border-box ")]
@@ -60,7 +60,7 @@ pub enum MsInterpolationModeStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsBoxSizingStyleValue {}
+pub enum MsBoxSizingStyleValue<'a> {}
 
 /// `-ms-touch-action` — alias for `touch-action`.
 #[syntax(
@@ -80,7 +80,7 @@ pub enum MsBoxSizingStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsTouchActionStyleValue {}
+pub enum MsTouchActionStyleValue<'a> {}
 
 /// `-ms-user-select` — alias for `user-select`.
 #[syntax(" auto | text | none | all ")]
@@ -98,7 +98,7 @@ pub enum MsTouchActionStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsUserSelectStyleValue {}
+pub enum MsUserSelectStyleValue<'a> {}
 
 /// `-ms-text-size-adjust` — alias for `text-size-adjust`.
 #[syntax(" auto | none | <percentage [0,∞]> ")]
@@ -172,7 +172,7 @@ pub struct MsFlexOrderStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexDirectionStyleValue {}
+pub enum MsFlexDirectionStyleValue<'a> {}
 
 /// `-ms-flex-wrap` — IE10 alias for `flex-wrap`.
 #[syntax(" nowrap | wrap | wrap-reverse ")]
@@ -190,7 +190,7 @@ pub enum MsFlexDirectionStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexWrapStyleValue {}
+pub enum MsFlexWrapStyleValue<'a> {}
 
 /// `-ms-flex-flow` — IE10 alias for `flex-flow`.
 #[syntax(" <'flex-direction'> || <'flex-wrap'> ")]
@@ -207,7 +207,7 @@ pub enum MsFlexWrapStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MsFlexFlowStyleValue;
+pub struct MsFlexFlowStyleValue<'a>;
 
 /// `-ms-flex-positive` — IE10 alias for `flex-grow`.
 #[syntax(" <number [0,∞]> ")]
@@ -282,7 +282,7 @@ pub enum MsFlexPreferredSizeStyleValue<'a> {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexPackStyleValue {}
+pub enum MsFlexPackStyleValue<'a> {}
 
 /// `-ms-flex-align` — IE10 alias for `align-items`.
 ///
@@ -303,7 +303,7 @@ pub enum MsFlexPackStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexAlignStyleValue {}
+pub enum MsFlexAlignStyleValue<'a> {}
 
 /// `-ms-flex-item-align` — IE10 alias for `align-self`.
 ///
@@ -324,7 +324,7 @@ pub enum MsFlexAlignStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexItemAlignStyleValue {}
+pub enum MsFlexItemAlignStyleValue<'a> {}
 
 /// `-ms-flex-line-pack` — IE10 alias for `align-content`.
 ///
@@ -345,7 +345,7 @@ pub enum MsFlexItemAlignStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsFlexLinePackStyleValue {}
+pub enum MsFlexLinePackStyleValue<'a> {}
 
 /// `-ms-transform` — IE9 alias for `transform`.
 #[syntax(" none | <transform-list> ")]
@@ -455,7 +455,7 @@ pub enum MsFilterStyleValue<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MsWordBreakStyleValue {}
+pub enum MsWordBreakStyleValue<'a> {}
 
 /// `-ms-transition` — IE10 alias for `transition`.
 #[syntax(" <single-transition># ")]

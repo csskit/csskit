@@ -33,7 +33,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ContainStyleValue {}
+pub enum ContainStyleValue<'a> {}
 
 /// Represents the style value for `content-visibility` as defined in [css-contain-4](https://drafts.csswg.org/css-contain-4/#content-visibility).
 ///
@@ -62,4 +62,4 @@ pub enum ContainStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.content-visibility"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ContentVisibilityStyleValue {}
+pub enum ContentVisibilityStyleValue<'a> {}

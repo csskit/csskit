@@ -185,7 +185,9 @@ impl ToFieldName for Def {
 
 impl ToType for DefIdent {
 	fn to_types(&self) -> Vec<TokenStream> {
-		vec![quote! { ::css_parse::T![Ident] }]
+		// Bare keywords live in a KeywordValue slot so a substitution function (var/env/...) or the
+		// ident() function can occupy the keyword position and stay typed to the enclosing style value.
+		vec![quote! { crate::KeywordValue<'a, ::css_parse::T![Ident]> }]
 	}
 }
 
@@ -659,11 +661,11 @@ impl DefExt for Def {
 					::csskit_derives::ToSpan,
 					::csskit_derives::SemanticEq,
 					::csskit_derives::NodeWithMetadata,
-					Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+					Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 				#[metadata(delegate)]
 				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
-				pub enum #keyword_name {
+				pub enum #keyword_name<'a> {
 					#(#keywords)*
 				}
 			}
@@ -829,7 +831,7 @@ impl GenerateDefinition for Def {
 									quote! { Option<#single_ident #single_generics> }
 								} else if inner.is_all_keywords() {
 									let keyword_name = Self::keyword_ident(ident);
-									quote! { Option<#keyword_name> }
+									quote! { Option<#keyword_name<'a>> }
 								} else {
 									def.to_type()
 								}
@@ -837,7 +839,7 @@ impl GenerateDefinition for Def {
 								quote! { #single_ident #single_generics }
 							} else if def.is_all_keywords() {
 								let keyword_name = Self::keyword_ident(ident);
-								quote! { #keyword_name }
+								quote! { #keyword_name<'a> }
 							} else {
 								def.to_type()
 							};
@@ -1116,11 +1118,8 @@ impl GenerateDefinition for Def {
 impl DefTypeExt for DefType {
 	fn get_generics(&self) -> Generics {
 		// `FooKeywords` enums are generated inside this same expansion, so the css_ast source scan
-		// behind `maybe_unsized` cannot see them. They are C-like keyword enums with no lifetime.
-		if self.maybe_unsized() && !self.ident_str().ends_with("Keywords") {
-			parse_quote!(<'a>)
-		} else {
-			Default::default()
-		}
+		// behind `maybe_unsized` cannot see them. They carry `<'a>` like every other value type
+		// (each keyword variant lives in a `Value<'a, _>` slot), so a reference must supply it.
+		if self.maybe_unsized() { parse_quote!(<'a>) } else { Default::default() }
 	}
 }

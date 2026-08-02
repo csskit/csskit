@@ -21,7 +21,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OObjectFitStyleValue {}
+pub enum OObjectFitStyleValue<'a> {}
 
 /// `-o-box-sizing` — alias for `box-sizing`.
 #[syntax(" content-box | border-box ")]
@@ -39,7 +39,7 @@ pub enum OObjectFitStyleValue {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OBoxSizingStyleValue {}
+pub enum OBoxSizingStyleValue<'a> {}
 
 /// `-o-filter` - alias for `filter`.
 #[syntax(" none | <filter-value-list> ")]

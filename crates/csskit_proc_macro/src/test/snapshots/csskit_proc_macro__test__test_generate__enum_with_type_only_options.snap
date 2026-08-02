@@ -2,6 +2,19 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::core::compile_error! {
-    "this object needs the <'a> lifetime but it didn't have it. Add it"
+#[derive(Parse)]
+#[derive(::stable_type_layout::TypeLayout)]
+#[repr(C, u8)]
+enum Foo<'a> {
+    #[atom(CssAtomSet::None)]
+    None(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
+    AnglePercentage(
+        ::css_parse::Optionals![
+            crate ::CalcableValue < 'a, crate ::Angle >, crate ::CalcableValue < 'a,
+            crate ::Percentage >
+        ],
+    ),
+    Length(crate::CalcableValue<'a, crate::Length>),
 }
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

@@ -1,5 +1,5 @@
 use crate::{
-	AttrFunction, CssAtomSet, CssMetadata, EnvFunction, FirstValidFunction, IfFunction, MathFunction,
+	AttrFunction, CssAtomSet, CssMetadata, EnvFunction, FirstValidFunction, IdentFunction, IfFunction, MathFunction,
 	TreeCountingFunction, Unresolved, VarFunction,
 };
 use css_lexer::ToSpan;
@@ -148,6 +148,44 @@ pub enum NumericSubstitutionFunction<'a, T> {
 	FirstValid(FirstValidFunction<'a, NumericValue<'a, T>>),
 }
 
+/// Generic wrapper for CSS keyword values whose grammar permits arbitrary substitution functions
+/// **and** the `ident()` function, which constructs a `<custom-ident>` from several parts and is
+/// resolved just as late.
+///
+/// Used for bare keyword slots, so a substitution function or `ident()` can occupy the keyword
+/// position and stay typed to the enclosing style value.
+///
+/// <https://drafts.csswg.org/css-values-5/#ident-fn>
+#[node]
+#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+pub enum KeywordValue<'a, T> {
+	Literal(T),
+	Substituted(Box<'a, KeywordSubstitutionFunction<'a, T>>),
+	#[peek(skip)]
+	Unresolved(Box<'a, Unresolved<'a>>),
+}
+
+impl_value_slot_parse!(KeywordValue, KeywordSubstitutionFunction, T);
+
+/// An `ident()` or substitution function appearing in a [`KeywordValue`] slot.
+///
+/// Identical to [`SubstitutionFunction`] except for the `Ident` variant, which is not a
+/// substitution function but is resolved just as late.
+#[node]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+pub enum KeywordSubstitutionFunction<'a, T> {
+	Ident(IdentFunction<'a>),
+	Var(VarFunction<'a, KeywordValue<'a, T>>),
+	Env(EnvFunction<'a, KeywordValue<'a, T>>),
+	Attr(AttrFunction<'a>),
+	If(IfFunction<'a, KeywordValue<'a, T>>),
+	FirstValid(FirstValidFunction<'a, KeywordValue<'a, T>>),
+}
+
 /// Generates the value-behaviour trait impls (`ToNumberValue`, `ToNormalisedValue`,
 /// `NodeWithMetadata`, `DeclarationValue`) shared verbatim by every value-slot enum.
 macro_rules! impl_value_slot_traits {
@@ -232,6 +270,7 @@ macro_rules! impl_value_slot_traits {
 impl_value_slot_traits!(Value);
 impl_value_slot_traits!(CalcableValue);
 impl_value_slot_traits!(NumericValue);
+impl_value_slot_traits!(KeywordValue);
 
 #[cfg(test)]
 mod tests {
@@ -242,6 +281,7 @@ mod tests {
 	type ValueColor<'a> = Value<'a, Color<'a>>;
 	type CalcLength<'a> = CalcableValue<'a, Length>;
 	type NumericInt<'a> = NumericValue<'a, CSSInt>;
+	type KeywordIdent<'a> = KeywordValue<'a, css_parse::T![Ident]>;
 
 	#[test]
 	fn value_literal() {
@@ -373,5 +413,35 @@ mod tests {
 		// Must not stack-overflow; deepest level degrades to Unresolved rather than recursing.
 		let result = p.parse_entirely::<ValueColor>();
 		assert!(result.output.is_some(), "expected parse to succeed via Unresolved degradation");
+	}
+
+	#[test]
+	fn keyword_literal() {
+		assert_parse!(CssAtomSet::ATOMS, KeywordIdent, "flex", |v| {
+			assert!(matches!(v, KeywordValue::Literal(_)));
+		});
+	}
+
+	#[test]
+	fn keyword_ident_function() {
+		assert_parse!(CssAtomSet::ATOMS, KeywordIdent, "ident('vtl-'sibling-index())", |v| {
+			let KeywordValue::Substituted(sub) = v else { panic!("expected Substituted") };
+			assert!(matches!(&*sub, KeywordSubstitutionFunction::Ident(_)));
+		});
+	}
+
+	#[test]
+	fn keyword_substituted_var_typed_fallback() {
+		// Fallback recurses into the keyword slot and stays typed.
+		assert_parse!(CssAtomSet::ATOMS, KeywordIdent, "var(--k, flex)", |v| {
+			let KeywordValue::Substituted(sub) = v else { panic!("expected Substituted") };
+			let KeywordSubstitutionFunction::Var(var) = &*sub else { panic!("expected Var") };
+			assert!(matches!(var.fallback.as_deref(), Some(KeywordValue::Literal(_))));
+		});
+	}
+
+	#[test]
+	fn keyword_rejects_tree_counting_functions() {
+		assert_peek_false!(CssAtomSet::ATOMS, KeywordIdent, "sibling-index()");
 	}
 }

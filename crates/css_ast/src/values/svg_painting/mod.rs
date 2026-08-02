@@ -31,7 +31,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-interpolation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColorInterpolationStyleValue {}
+pub enum ColorInterpolationStyleValue<'a> {}
 
 /// Represents the style value for `marker` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#marker).
 ///
@@ -171,7 +171,7 @@ pub struct MarkerStartStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.paint-order"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PaintOrderStyleValue;
+pub struct PaintOrderStyleValue<'a>;
 
 /// Represents the style value for `shape-rendering` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#shape-rendering).
 ///
@@ -199,7 +199,7 @@ pub struct PaintOrderStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.shape-rendering"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ShapeRenderingStyleValue {}
+pub enum ShapeRenderingStyleValue<'a> {}
 
 /// Represents the style value for `text-rendering` as defined in [SVG 2 Painting](https://w3c.github.io/svgwg/svg2-draft/painting.html#text-rendering).
 ///
@@ -227,4 +227,4 @@ pub enum ShapeRenderingStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-rendering"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextRenderingStyleValue {}
+pub enum TextRenderingStyleValue<'a> {}

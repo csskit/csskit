@@ -34,7 +34,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.backface-visibility"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BackfaceVisibilityStyleValue {}
+pub enum BackfaceVisibilityStyleValue<'a> {}
 
 /// Represents the style value for `perspective` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#perspective).
 ///
@@ -226,7 +226,7 @@ pub struct TransformStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-box"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TransformBoxStyleValue {}
+pub enum TransformBoxStyleValue<'a> {}
 
 /// Represents the style value for `transform-origin` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#transform-origin).
 ///
@@ -285,7 +285,7 @@ pub enum TransformOriginStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transform-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TransformStyleStyleValue {}
+pub enum TransformStyleStyleValue<'a> {}
 
 /// Represents the style value for `translate` as defined in [css-transforms-2](https://drafts.csswg.org/css-transforms-2/#translate).
 ///

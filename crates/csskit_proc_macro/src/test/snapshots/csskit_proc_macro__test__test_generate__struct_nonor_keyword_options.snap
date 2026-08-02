@@ -23,25 +23,25 @@ expression: pretty
 #[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 #[repr(C)]
 #[parse(one_must_occur)]
-struct FooOptions {
+struct FooOptions<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Weight)]
-    pub weight: Option<::css_parse::T![Ident]>,
+    pub weight: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Style)]
-    pub style: Option<::css_parse::T![Ident]>,
+    pub style: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::SmallCaps)]
-    pub small_caps: Option<::css_parse::T![Ident]>,
+    pub small_caps: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Position)]
-    pub position: Option<::css_parse::T![Ident]>,
+    pub position: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
 }
 #[cfg(test)]
-::stable_type_layout::register!(FooOptions);
+::stable_type_layout::register!(FooOptions < 'static >);
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
-struct Foo(pub crate::NoneOr<crate::FooOptions>);
+struct Foo<'a>(pub crate::NoneOr<crate::FooOptions<'a>>);
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

@@ -16,7 +16,7 @@ pub enum SingleAnimationTriggerRange<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Normal)]
 	Normal(T![Ident]),
-	Named(TimelineRangeName, Option<CalcableValue<'a, LengthPercentage>>),
+	Named(TimelineRangeName<'a>, Option<CalcableValue<'a, LengthPercentage>>),
 	LengthPercentage(CalcableValue<'a, LengthPercentage>),
 }
 

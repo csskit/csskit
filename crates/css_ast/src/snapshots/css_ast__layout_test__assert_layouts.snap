@@ -39,7 +39,7 @@ AlignSelfStyleValue: size=64 align=8
 AlignmentBaselineStyleValue: size=32 align=8
     0: Baseline
     1: BaselineMetric
-AllStyleValue: size=16 align=4
+AllStyleValue: size=32 align=8
     0: Initial
     1: Inherit
     2: Unset
@@ -180,16 +180,16 @@ AppearanceStyleValue: size=32 align=8
     3: BaseSelect
     4: CompatAuto
     5: CompatSpecial
-ArcCommand: size=312 align=8 {
+ArcCommand: size=352 align=8 {
     keyword: 0
     point: 16
-    params: 160
+    params: 168
 }
-ArcCommandParams: size=152 align=8 {
+ArcCommandParams: size=184 align=8 {
     radii: 0
     sweep: 80
-    size: 96
-    rotate: 112
+    size: 112
+    rotate: 144
 }
 ArcRadii: size=80 align=8 {
     keyword: 0
@@ -200,10 +200,10 @@ ArcRotate: size=40 align=8 {
     keyword: 0
     angle: 16
 }
-ArcSize: size=16 align=4
+ArcSize: size=32 align=8
     0: Large
     1: Small
-ArcSweep: size=16 align=4
+ArcSweep: size=32 align=8
     0: Cw
     1: Ccw
 AsinFunction: size=144 align=8 {
@@ -223,9 +223,9 @@ AspectRatioMediaFeature: size=240 align=8
     3: Min
     4: Max
     5: Exact
-AspectRatioStyleValue: size=88 align=8 {
+AspectRatioStyleValue: size=96 align=8 {
     auto: 0
-    ratio: 16
+    ratio: 24
 }
 AtPosition: size=128 align=8 {
     keyword: 0
@@ -295,14 +295,14 @@ AutoTrackList: size=296 align=8 {
     end_leading_names: 216
     end_items: 272
 }
-Autospace: size=68 align=4
+Autospace: size=104 align=8
     0: NoAutospace
     1: Insert
     2: Replace
 BackdropFilterStyleValue: size=40 align=8 {
     0: 0
 }
-BackfaceVisibilityStyleValue: size=16 align=4
+BackfaceVisibilityStyleValue: size=32 align=8
     0: Visible
     1: Hidden
 BackgroundAttachmentStyleValue: size=24 align=8 {
@@ -371,7 +371,7 @@ BaselineShiftStyleValue: size=40 align=8
     3: Top
     4: Center
     5: Bottom
-BaselineSourceStyleValue: size=16 align=4
+BaselineSourceStyleValue: size=32 align=8
     0: Auto
     1: First
     2: Last
@@ -382,7 +382,7 @@ BasicShape: size=240 align=8
     3: Polygon
     4: Path
     5: Shape
-BasicShapeRect: size=488 align=8
+BasicShapeRect: size=496 align=8
     0: Inset
     1: Rect
     2: Xywh
@@ -444,27 +444,27 @@ BlockSizeContainerFeature: size=128 align=4
 BlockSizeStyleValue: size=288 align=8 {
     0: 0
 }
-BlockStepAlignStyleValue: size=16 align=4
+BlockStepAlignStyleValue: size=32 align=8
     0: Auto
     1: Center
     2: Start
     3: End
-BlockStepInsertStyleValue: size=16 align=4
+BlockStepInsertStyleValue: size=32 align=8
     0: MarginBox
     1: PaddingBox
     2: ContentBox
-BlockStepRoundStyleValue: size=16 align=4
+BlockStepRoundStyleValue: size=32 align=8
     0: Up
     1: Down
     2: Nearest
 BlockStepSizeStyleValue: size=32 align=8 {
     0: 0
 }
-BlockStepStyleValue: size=80 align=8 {
+BlockStepStyleValue: size=128 align=8 {
     block_step_size: 0
     block_step_insert: 32
-    block_step_align: 48
-    block_step_round: 64
+    block_step_align: 64
+    block_step_round: 96
 }
 BlurFunction: size=56 align=8 {
     name: 0
@@ -477,7 +477,7 @@ BookmarkLabelStyleValue: size=32 align=8 {
 BookmarkLevelStyleValue: size=32 align=8 {
     0: 0
 }
-BookmarkStateStyleValue: size=16 align=4
+BookmarkStateStyleValue: size=32 align=8
     0: Open
     1: Closed
 BooleanKeyword: size=16 align=4
@@ -573,14 +573,14 @@ BorderBottomStyleValue: size=96 align=8 {
 BorderBottomWidthStyleValue: size=40 align=8 {
     0: 0
 }
-BorderBoundaryStyleValue: size=16 align=4
+BorderBoundaryStyleValue: size=32 align=8
     0: None
     1: Parent
     2: Display
 BorderClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderCollapseStyleValue: size=16 align=4
+BorderCollapseStyleValue: size=32 align=8
     0: Separate
     1: Collapse
 BorderColorStyleValue: size=288 align=8 {
@@ -601,16 +601,16 @@ BorderImageOutsetStyleValue: size=128 align=8 {
     2: 64
     3: 96
 }
-BorderImageRepeatStyleValue: size=32 align=4 {
+BorderImageRepeatStyleValue: size=64 align=8 {
     0: 0
-    1: 16
+    1: 32
 }
-BorderImageRepeatStyleValueKeywords: size=16 align=4
+BorderImageRepeatStyleValueKeywords: size=32 align=8
     0: Stretch
     1: Repeat
     2: Round
     3: Space
-BorderImageSliceStyleValue: size=112 align=8 {
+BorderImageSliceStyleValue: size=120 align=8 {
     0: 0
     1: 96
 }
@@ -707,7 +707,7 @@ BorderLeftStyleValue: size=96 align=8 {
 BorderLeftWidthStyleValue: size=40 align=8 {
     0: 0
 }
-BorderLimitStyleValue: size=56 align=8
+BorderLimitStyleValue: size=64 align=8
     0: All
     1: Sides
     2: Corners
@@ -810,7 +810,7 @@ BorderWidthStyleValue: size=160 align=8 {
 BottomStyleValue: size=40 align=8 {
     0: 0
 }
-BoxDecorationBreakStyleValue: size=16 align=4
+BoxDecorationBreakStyleValue: size=32 align=8
     0: Slice
     1: Clone
 BoxShadowBlurStyleValue: size=24 align=8 {
@@ -825,7 +825,7 @@ BoxShadowOffsetStyleValue: size=24 align=8 {
 BoxShadowPositionStyleValue: size=24 align=8 {
     0: 0
 }
-BoxShadowPositionStyleValueKeywords: size=16 align=4
+BoxShadowPositionStyleValueKeywords: size=32 align=8
     0: Outset
     1: Inset
 BoxShadowSpreadStyleValue: size=24 align=8 {
@@ -834,17 +834,17 @@ BoxShadowSpreadStyleValue: size=24 align=8 {
 BoxShadowStyleValue: size=24 align=8 {
     0: 0
 }
-BoxSizingStyleValue: size=16 align=4
+BoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
-BoxSnapStyleValue: size=16 align=4
+BoxSnapStyleValue: size=32 align=8
     0: None
     1: BlockStart
     2: BlockEnd
     3: Center
     4: Baseline
     5: LastBaseline
-BreakAfterStyleValue: size=16 align=4
+BreakAfterStyleValue: size=32 align=8
     0: Auto
     1: Avoid
     2: Always
@@ -859,7 +859,7 @@ BreakAfterStyleValue: size=16 align=4
     11: Column
     12: AvoidRegion
     13: Region
-BreakBeforeStyleValue: size=16 align=4
+BreakBeforeStyleValue: size=32 align=8
     0: Auto
     1: Avoid
     2: Always
@@ -874,7 +874,7 @@ BreakBeforeStyleValue: size=16 align=4
     11: Column
     12: AvoidRegion
     13: Region
-BreakInsideStyleValue: size=16 align=4
+BreakInsideStyleValue: size=32 align=8
     0: Auto
     1: Avoid
     2: AvoidPage
@@ -918,24 +918,24 @@ CalcSizeOperand: size=24 align=4
 CalcSumOperator: size=16 align=4
     0: Add
     1: Subtract
-CaptionSideStyleValue: size=16 align=4
+CaptionSideStyleValue: size=32 align=8
     0: Top
     1: Bottom
-CaretAnimationStyleValue: size=16 align=4
+CaretAnimationStyleValue: size=32 align=8
     0: Auto
     1: Manual
 CaretColorStyleValue: size=80 align=8 {
     0: 0
 }
-CaretShapeStyleValue: size=16 align=4
+CaretShapeStyleValue: size=32 align=8
     0: Auto
     1: Bar
     2: Block
     3: Underscore
-CaretStyleValue: size=112 align=8 {
+CaretStyleValue: size=144 align=8 {
     caret_color: 0
     caret_animation: 80
-    caret_shape: 96
+    caret_shape: 112
 }
 CfImage: size=80 align=8 {
     image: 0
@@ -963,7 +963,7 @@ Class: size=24 align=4 {
     dot: 0
     name: 12
 }
-ClearStyleValue: size=16 align=4
+ClearStyleValue: size=32 align=8
     0: InlineStart
     1: InlineEnd
     2: BlockStart
@@ -980,7 +980,7 @@ ClipPathStyleValue: size=288 align=8
     0: ClipSource
     1: BasicShapeGeometryBox
     2: None
-ClipRuleStyleValue: size=16 align=4
+ClipRuleStyleValue: size=32 align=8
     0: Nonzero
     1: Evenodd
 ClipStyleValue: size=216 align=8 {
@@ -993,7 +993,7 @@ Color: size=24 align=8
     3: Hex
     4: Named
     5: Function
-ColorAdjustStyleValue: size=16 align=4 {
+ColorAdjustStyleValue: size=32 align=8 {
     0: 0
 }
 ColorChannelKeyword: size=16 align=4
@@ -1045,7 +1045,7 @@ ColorIndexMediaFeature: size=120 align=4
     3: Min
     4: Max
     5: Exact
-ColorInterpolationFiltersStyleValue: size=16 align=4
+ColorInterpolationFiltersStyleValue: size=32 align=8
     0: Auto
     1: Srgb
     2: Linearrgb
@@ -1053,7 +1053,7 @@ ColorInterpolationMethod: size=60 align=4 {
     in_keyword: 0
     color_space: 12
 }
-ColorInterpolationStyleValue: size=16 align=4
+ColorInterpolationStyleValue: size=32 align=8
     0: Auto
     1: Srgb
     2: Linearrgb
@@ -1112,7 +1112,7 @@ ColorSchemeName: size=32 align=8
     0: Light
     1: Dark
     2: Other
-ColorSchemeStyleValue: size=48 align=8 {
+ColorSchemeStyleValue: size=56 align=8 {
     0: 0
 }
 ColorSpace: size=16 align=4
@@ -1138,7 +1138,7 @@ ColorStyleValue: size=32 align=8 {
 ColumnCountStyleValue: size=32 align=8 {
     0: 0
 }
-ColumnFillStyleValue: size=16 align=4
+ColumnFillStyleValue: size=32 align=8
     0: Auto
     1: Balance
     2: BalanceAll
@@ -1149,7 +1149,7 @@ ColumnGapStyleValue: size=48 align=8
 ColumnHeightStyleValue: size=32 align=8 {
     0: 0
 }
-ColumnRuleBreakStyleValue: size=16 align=4
+ColumnRuleBreakStyleValue: size=32 align=8
     0: None
     1: Normal
     2: Intersection
@@ -1192,7 +1192,7 @@ ColumnRuleStyleStyleValue: size=40 align=8
 ColumnRuleStyleValue: size=32 align=8 {
     0: 0
 }
-ColumnRuleVisibilityItemsStyleValue: size=16 align=4
+ColumnRuleVisibilityItemsStyleValue: size=32 align=8
     0: All
     1: Around
     2: Between
@@ -1208,7 +1208,7 @@ ColumnSpanStyleValue: size=32 align=8
 ColumnWidthStyleValue: size=32 align=8 {
     0: 0
 }
-ColumnWrapStyleValue: size=16 align=4
+ColumnWrapStyleValue: size=32 align=8
     0: Auto
     1: Nowrap
     2: Wrap
@@ -1226,7 +1226,7 @@ Combinator: size=28 align=4
 CommaOrSlash: size=12 align=4 {
     0: 0
 }
-CommandEndPoint: size=144 align=8
+CommandEndPoint: size=152 align=8
     0: ToPosition
     1: ByCoordinatePair
 CommonLigValues: size=16 align=4
@@ -1265,27 +1265,27 @@ CompositingOperator: size=16 align=4
 CompoundSelector: size=24 align=8 {
     0: 0
 }
-ContainIntrinsicBlockSizeStyleValue: size=48 align=8 {
+ContainIntrinsicBlockSizeStyleValue: size=56 align=8 {
     0: 0
-    1: 16
+    1: 24
 }
-ContainIntrinsicHeightStyleValue: size=48 align=8 {
+ContainIntrinsicHeightStyleValue: size=56 align=8 {
     0: 0
-    1: 16
+    1: 24
 }
-ContainIntrinsicInlineSizeStyleValue: size=48 align=8 {
+ContainIntrinsicInlineSizeStyleValue: size=56 align=8 {
     0: 0
-    1: 16
+    1: 24
 }
-ContainIntrinsicSizeStyleValue: size=96 align=8 {
+ContainIntrinsicSizeStyleValue: size=112 align=8 {
     0: 0
-    1: 48
+    1: 56
 }
-ContainIntrinsicWidthStyleValue: size=48 align=8 {
+ContainIntrinsicWidthStyleValue: size=56 align=8 {
     0: 0
-    1: 16
+    1: 24
 }
-ContainStyleValue: size=68 align=4
+ContainStyleValue: size=104 align=8
     0: None
     1: Strict
     2: Content
@@ -1323,11 +1323,11 @@ ContainerRule: size=176 align=16 {
 ContainerRulesBlock: size=128 align=16 {
     0: 0
 }
-ContainerStyleValue: size=80 align=8 {
+ContainerStyleValue: size=104 align=8 {
     0: 0
     1: 32
 }
-ContainerTypeStyleValue: size=36 align=4
+ContainerTypeStyleValue: size=56 align=8
     0: Normal
     1: Size
     2: InlineSize
@@ -1383,14 +1383,14 @@ ContentStyleValue: size=104 align=8
     1: None
     2: ContentReplacement
     3: ContentList
-ContentVisibilityStyleValue: size=16 align=4
+ContentVisibilityStyleValue: size=32 align=8
     0: Visible
     1: Auto
     2: Hidden
 ContextualAltValues: size=16 align=4
     0: Contextual
     1: NoContextual
-ContinueStyleValue: size=16 align=4
+ContinueStyleValue: size=32 align=8
     0: Auto
     1: Discard
     2: Collapse
@@ -4476,11 +4476,11 @@ CursorStyleValue: size=48 align=8 {
     0: 0
     1: 24
 }
-CurveCommand: size=464 align=8 {
+CurveCommand: size=480 align=8 {
     keyword: 0
     target: 16
 }
-CurveTarget: size=448 align=8
+CurveTarget: size=464 align=8
     0: ToPositionWithControlPoint
     1: ByCoordinatePairWithRelativeControlPointRelativeControlPoint
 Custom: size=24 align=8 {
@@ -4531,7 +4531,7 @@ DirPseudoFunction: size=56 align=4 {
 DirValue: size=16 align=4
     0: Rtl
     1: Ltr
-DirectionStyleValue: size=16 align=4
+DirectionStyleValue: size=32 align=8
     0: Ltr
     1: Rtl
 DiscretionaryLigValues: size=16 align=4
@@ -4691,7 +4691,7 @@ EllipseFunction: size=232 align=8 {
     at: 88
     close: 216
 }
-EmptyCellsStyleValue: size=16 align=4
+EmptyCellsStyleValue: size=32 align=8
     0: Show
     1: Hide
 EnvironmentBlendingMediaFeature: size=68 align=4
@@ -4741,10 +4741,10 @@ FeatureTagValue: size=48 align=8 {
     0: 0
     1: 16
 }
-FieldSizingStyleValue: size=16 align=4
+FieldSizingStyleValue: size=32 align=8
     0: Fixed
     1: Content
-FillBreakStyleValue: size=16 align=4
+FillBreakStyleValue: size=32 align=8
     0: BoundingBox
     1: Slice
     2: Clone
@@ -4771,7 +4771,7 @@ FillOrigin: size=16 align=4
     3: ContentBox
     4: PaddingBox
     5: BorderBox
-FillOriginStyleValue: size=16 align=4
+FillOriginStyleValue: size=32 align=8
     0: MatchParent
     1: FillBox
     2: StrokeBox
@@ -4784,7 +4784,7 @@ FillPositionStyleValue: size=24 align=8 {
 FillRepeatStyleValue: size=24 align=8 {
     0: 0
 }
-FillRuleStyleValue: size=16 align=4
+FillRuleStyleValue: size=32 align=8
     0: Nonzero
     1: Evenodd
 FillSizeStyleValue: size=24 align=8 {
@@ -4827,14 +4827,14 @@ Flex: size=12 align=4 {
 FlexBasisStyleValue: size=296 align=8
     0: Content
     1: Width
-FlexDirectionStyleValue: size=16 align=4
+FlexDirectionStyleValue: size=32 align=8
     0: Row
     1: RowReverse
     2: Column
     3: ColumnReverse
-FlexFlowStyleValue: size=52 align=4 {
+FlexFlowStyleValue: size=88 align=8 {
     flex_direction: 0
-    flex_wrap: 16
+    flex_wrap: 32
 }
 FlexGrowStyleValue: size=24 align=8 {
     0: 0
@@ -4852,7 +4852,7 @@ FlexStyleValueOptions: size=344 align=8 {
     flex_grow: 0
     flex_basis: 48
 }
-FlexWrapStyleValue: size=36 align=4
+FlexWrapStyleValue: size=56 align=8
     0: Nowrap
     1: Wrap
     2: WrapReverse
@@ -4863,7 +4863,7 @@ FloatDeferStyleValue: size=32 align=8
 FloatOffsetStyleValue: size=32 align=8 {
     0: 0
 }
-FloatReferenceStyleValue: size=16 align=4
+FloatReferenceStyleValue: size=32 align=8
     0: Inline
     1: Column
     2: Region
@@ -4891,7 +4891,7 @@ FloodOpacityStyleValue: size=24 align=8 {
 FlowFromStyleValue: size=32 align=8 {
     0: 0
 }
-FlowIntoStyleValue: size=48 align=8
+FlowIntoStyleValue: size=56 align=8
     0: None
     1: CustomIdentElement
     2: CustomIdentContent
@@ -4976,14 +4976,14 @@ FontFeatureValuesRuleBlock: size=128 align=16 {
 FontFeatureValuesRuleStyleValue: size=32 align=8
     0: FontDisplay
     1: Unknown
-FontKerningStyleValue: size=16 align=4
+FontKerningStyleValue: size=32 align=8
     0: Auto
     1: Normal
     2: None
 FontLanguageOverrideStyleValue: size=32 align=8 {
     0: 0
 }
-FontOpticalSizingStyleValue: size=16 align=4
+FontOpticalSizingStyleValue: size=32 align=8
     0: Auto
     1: None
 FontPaletteStyleValue: size=240 align=8
@@ -5008,7 +5008,7 @@ FontPaletteValuesRuleStyleValue: size=40 align=8
     1: BasePalette
     2: OverrideColors
     3: Unknown
-FontSizeAdjustStyleValue: size=48 align=8
+FontSizeAdjustStyleValue: size=56 align=8
     0: None
     1: ExHeightFromFont
     2: CapHeightFromFont
@@ -5027,35 +5027,35 @@ FontSizeStyleValue: size=40 align=8
     1: RelativeSize
     2: LengthPercentage
     3: Math
-FontStyleStyleValue: size=48 align=8
+FontStyleStyleValue: size=56 align=8
     0: Normal
     1: Italic
     2: Left
     3: Right
     4: Oblique
-FontSynthesisPositionStyleValue: size=16 align=4
+FontSynthesisPositionStyleValue: size=32 align=8
     0: Auto
     1: None
-FontSynthesisSmallCapsStyleValue: size=16 align=4
+FontSynthesisSmallCapsStyleValue: size=32 align=8
     0: Auto
     1: None
-FontSynthesisStyleStyleValue: size=16 align=4
+FontSynthesisStyleStyleValue: size=32 align=8
     0: Auto
     1: None
     2: ObliqueOnly
-FontSynthesisStyleValue: size=68 align=4 {
+FontSynthesisStyleValue: size=104 align=8 {
     0: 0
 }
-FontSynthesisStyleValueOptions: size=64 align=4 {
+FontSynthesisStyleValueOptions: size=96 align=8 {
     weight: 0
-    style: 16
-    small_caps: 32
-    position: 48
+    style: 24
+    small_caps: 48
+    position: 72
 }
-FontSynthesisWeightStyleValue: size=16 align=4
+FontSynthesisWeightStyleValue: size=32 align=8
     0: Auto
     1: None
-FontVariantCapsStyleValue: size=16 align=4
+FontVariantCapsStyleValue: size=32 align=8
     0: Normal
     1: SmallCaps
     2: AllSmallCaps
@@ -5063,15 +5063,15 @@ FontVariantCapsStyleValue: size=16 align=4
     4: AllPetiteCaps
     5: Unicase
     6: TitlingCaps
-FontVariantEastAsianStyleValue: size=72 align=8 {
+FontVariantEastAsianStyleValue: size=80 align=8 {
     0: 0
 }
-FontVariantEastAsianStyleValueOptions: size=64 align=8 {
+FontVariantEastAsianStyleValueOptions: size=72 align=8 {
     east_asian_variant_values: 0
     east_asian_width_values: 24
     ruby: 48
 }
-FontVariantEmojiStyleValue: size=16 align=4
+FontVariantEmojiStyleValue: size=32 align=8
     0: Normal
     1: Text
     2: Emoji
@@ -5080,17 +5080,17 @@ FontVariantLigaturesStyleValue: size=104 align=8
     0: Normal
     1: None
     2: CommonLigValuesDiscretionaryLigValuesHistoricalLigValuesContextualAltValues
-FontVariantNumericStyleValue: size=112 align=8 {
+FontVariantNumericStyleValue: size=128 align=8 {
     0: 0
 }
-FontVariantNumericStyleValueOptions: size=104 align=8 {
+FontVariantNumericStyleValueOptions: size=120 align=8 {
     numeric_figure_values: 0
     numeric_spacing_values: 24
     numeric_fraction_values: 48
     ordinal: 72
-    slashed_zero: 88
+    slashed_zero: 96
 }
-FontVariantPositionStyleValue: size=16 align=4
+FontVariantPositionStyleValue: size=32 align=8
     0: Normal
     1: Sub
     2: Super
@@ -5116,15 +5116,15 @@ FontWidthStyleValue: size=32 align=8
     7: Expanded
     8: ExtraExpanded
     9: UltraExpanded
-FootnoteDisplayStyleValue: size=16 align=4
+FootnoteDisplayStyleValue: size=32 align=8
     0: Block
     1: Inline
     2: Compact
-FootnotePolicyStyleValue: size=16 align=4
+FootnotePolicyStyleValue: size=32 align=8
     0: Auto
     1: Line
     2: Block
-ForcedColorAdjustStyleValue: size=16 align=4
+ForcedColorAdjustStyleValue: size=32 align=8
     0: Auto
     1: None
     2: PreserveParentColor
@@ -5134,7 +5134,7 @@ ForcedColorsMediaFeature: size=68 align=4
 ForcedColorsMediaFeatureKeyword: size=16 align=4
     0: None
     1: Active
-FrameSizingStyleValue: size=16 align=4
+FrameSizingStyleValue: size=32 align=8
     0: Auto
     1: ContentWidth
     2: ContentHeight
@@ -5200,7 +5200,7 @@ GeometryBox: size=24 align=4
     1: FillBox
     2: StrokeBox
     3: ViewBox
-GlyphOrientationVerticalStyleValue: size=16 align=4
+GlyphOrientationVerticalStyleValue: size=32 align=8
     0: Auto
     1: Literal0deg
     2: Literal90deg
@@ -5225,7 +5225,7 @@ GridAreaStyleValue: size=336 align=8 {
 GridAutoColumnsStyleValue: size=24 align=8 {
     0: 0
 }
-GridAutoFlowStyleValue: size=36 align=4
+GridAutoFlowStyleValue: size=56 align=8
     0: Row
     1: Column
 GridAutoRowsStyleValue: size=24 align=8 {
@@ -5280,7 +5280,7 @@ GridTemplateStyleValue: size=648 align=8
     0: None
     1: GridTemplateRowsGridTemplateColumns
     2: String
-HangingPunctuationStyleValue: size=52 align=4
+HangingPunctuationStyleValue: size=80 align=8
     0: None
     1: ForceEnd
     2: AllowEnd
@@ -5331,10 +5331,10 @@ HighlightPseudoElement: size=60 align=4 {
 HistoricalLigValues: size=16 align=4
     0: HistoricalLigatures
     1: NoHistoricalLigatures
-HorizontalLineClause: size=72 align=8
+HorizontalLineClause: size=80 align=8
     0: ToHorizontalLineValue
     1: ByLengthPercentage
-HorizontalLineCommand: size=88 align=8 {
+HorizontalLineCommand: size=96 align=8 {
     keyword: 0
     clause: 16
 }
@@ -5612,7 +5612,7 @@ HyphenateLimitCharsStyleValue: size=96 align=8 {
     1: 32
     2: 64
 }
-HyphenateLimitLastStyleValue: size=16 align=4
+HyphenateLimitLastStyleValue: size=32 align=8
     0: None
     1: Always
     2: Column
@@ -5624,12 +5624,21 @@ HyphenateLimitLinesStyleValue: size=32 align=8
 HyphenateLimitZoneStyleValue: size=32 align=8 {
     0: 0
 }
-HyphensStyleValue: size=16 align=4
+HyphensStyleValue: size=32 align=8
     0: None
     1: Manual
     2: Auto
 Id: size=12 align=4 {
     0: 0
+}
+IdentArg: size=32 align=8
+    0: String
+    1: Integer
+    2: Keyword
+IdentFunction: size=56 align=8 {
+    name: 0
+    args: 16
+    close: 40
 }
 IfCondition: size=240 align=8
     0: Else
@@ -5656,7 +5665,7 @@ Image: size=48 align=8
 Image1d: size=56 align=8 {
     0: 0
 }
-ImageAnimationStyleValue: size=16 align=4
+ImageAnimationStyleValue: size=32 align=8
     0: Normal
     1: Paused
     2: Stopped
@@ -5672,19 +5681,19 @@ ImageFunctionParams: size=104 align=8 {
     comma: 60
     color: 80
 }
-ImageOrientationStyleValue: size=48 align=8
+ImageOrientationStyleValue: size=56 align=8
     0: FromImage
     1: None
     2: Flip
-ImageRenderingStyleValue: size=16 align=4
+ImageRenderingStyleValue: size=32 align=8
     0: Auto
     1: Smooth
     2: HighQuality
     3: Pixelated
     4: CrispEdges
-ImageResolutionStyleValue: size=56 align=8 {
+ImageResolutionStyleValue: size=72 align=8 {
     0: 0
-    1: 40
+    1: 48
 }
 ImageSetFunction: size=56 align=8 {
     name: 0
@@ -5746,10 +5755,10 @@ InlineSizeContainerFeature: size=128 align=4
 InlineSizeStyleValue: size=288 align=8 {
     0: 0
 }
-InlineSizingStyleValue: size=16 align=4
+InlineSizingStyleValue: size=32 align=8
     0: Normal
     1: Stretch
-InputSecurityStyleValue: size=16 align=4
+InputSecurityStyleValue: size=32 align=8
     0: Auto
     1: None
 InsetBlockEndStyleValue: size=40 align=8 {
@@ -5762,12 +5771,12 @@ InsetBlockStyleValue: size=80 align=8 {
     0: 0
     1: 40
 }
-InsetFunction: size=448 align=8 {
+InsetFunction: size=456 align=8 {
     name: 0
     params: 16
-    close: 432
+    close: 440
 }
-InsetFunctionParams: size=416 align=8 {
+InsetFunctionParams: size=424 align=8 {
     0: 0
     1: 32
     2: 64
@@ -5796,7 +5805,7 @@ InsetValue: size=40 align=8
 IntegerOrInfinite: size=32 align=8
     0: Infinite
     1: Number
-InteractivityStyleValue: size=16 align=4
+InteractivityStyleValue: size=32 align=8
     0: Auto
     1: Inert
 InterestDelayEndStyleValue: size=32 align=8 {
@@ -5809,7 +5818,7 @@ InterestDelayStyleValue: size=64 align=8 {
     0: 0
     1: 32
 }
-InterpolateSizeStyleValue: size=16 align=4
+InterpolateSizeStyleValue: size=32 align=8
     0: NumericOnly
     1: AllowKeywords
 InterpolationColorSpace: size=48 align=4
@@ -6075,13 +6084,13 @@ LightDarkFunction: size=96 align=8 {
 LightingColorStyleValue: size=32 align=8 {
     0: 0
 }
-LineBreakStyleValue: size=16 align=4
+LineBreakStyleValue: size=32 align=8
     0: Auto
     1: Loose
     2: Normal
     3: Strict
     4: Anywhere
-LineClampStyleValue: size=80 align=8 {
+LineClampStyleValue: size=88 align=8 {
     0: 0
 }
 LineColorList: size=24 align=8 {
@@ -6090,14 +6099,14 @@ LineColorList: size=24 align=8 {
 LineColorOrRepeat: size=88 align=8
     0: Color
     1: RepeatFunction
-LineCommand: size=160 align=8 {
+LineCommand: size=168 align=8 {
     keyword: 0
     point: 16
 }
-LineFitEdgeStyleValue: size=48 align=8
+LineFitEdgeStyleValue: size=72 align=8
     0: Leading
     1: TextEdge
-LineGridStyleValue: size=16 align=4
+LineGridStyleValue: size=32 align=8
     0: MatchParent
     1: Create
 LineHeightStepStyleValue: size=24 align=8 {
@@ -6118,7 +6127,7 @@ LineNames: size=56 align=8 {
 LinePaddingStyleValue: size=24 align=8 {
     0: 0
 }
-LineSnapStyleValue: size=16 align=4
+LineSnapStyleValue: size=32 align=8
     0: None
     1: Baseline
     2: Contain
@@ -6179,13 +6188,13 @@ LinkParametersStyleValue: size=32 align=8 {
 ListStyleImageStyleValue: size=64 align=8 {
     0: 0
 }
-ListStylePositionStyleValue: size=16 align=4
+ListStylePositionStyleValue: size=32 align=8
     0: Inside
     1: Outside
-ListStyleStyleValue: size=176 align=8 {
+ListStyleStyleValue: size=192 align=8 {
     list_style_position: 0
-    list_style_image: 16
-    list_style_type: 80
+    list_style_image: 32
+    list_style_type: 96
 }
 ListStyleTypeStyleValue: size=96 align=8
     0: CounterStyle
@@ -6211,7 +6220,7 @@ MarginBlockStyleValue: size=80 align=8 {
 MarginBottomStyleValue: size=40 align=8 {
     0: 0
 }
-MarginBreakStyleValue: size=16 align=4
+MarginBreakStyleValue: size=32 align=8
     0: Auto
     1: Keep
     2: Discard
@@ -6260,7 +6269,7 @@ MarginStyleValue: size=160 align=8 {
 MarginTopStyleValue: size=40 align=8 {
     0: 0
 }
-MarginTrimStyleValue: size=68 align=4
+MarginTrimStyleValue: size=104 align=8
     0: None
     1: BlockInline
     2: BlockStartInlineStartBlockEndInlineEnd
@@ -6270,7 +6279,7 @@ MarkerEndStyleValue: size=56 align=8 {
 MarkerMidStyleValue: size=56 align=8 {
     0: 0
 }
-MarkerSideStyleValue: size=16 align=4
+MarkerSideStyleValue: size=32 align=8
     0: MatchSelf
     1: MatchParent
 MarkerStartStyleValue: size=56 align=8 {
@@ -6279,16 +6288,16 @@ MarkerStartStyleValue: size=56 align=8 {
 MarkerStyleValue: size=56 align=8 {
     0: 0
 }
-MaskBorderModeStyleValue: size=16 align=4
+MaskBorderModeStyleValue: size=32 align=8
     0: Luminance
     1: Alpha
 MaskBorderOutsetStyleValue: size=128 align=8 {
     0: 0
 }
-MaskBorderRepeatStyleValue: size=32 align=4 {
+MaskBorderRepeatStyleValue: size=64 align=8 {
     0: 0
 }
-MaskBorderSliceStyleValue: size=112 align=8 {
+MaskBorderSliceStyleValue: size=120 align=8 {
     0: 0
 }
 MaskBorderSourceStyleValue: size=64 align=8 {
@@ -6336,7 +6345,7 @@ MaskSizeStyleValue: size=24 align=8 {
 MaskStyleValue: size=24 align=8 {
     0: 0
 }
-MaskTypeStyleValue: size=16 align=4
+MaskTypeStyleValue: size=32 align=8
     0: Luminance
     1: Alpha
 MaskingMode: size=16 align=4
@@ -6702,7 +6711,7 @@ MinHeightStyleValue: size=288 align=8
 MinInlineSizeStyleValue: size=288 align=8 {
     0: 0
 }
-MinIntrinsicSizingStyleValue: size=36 align=4
+MinIntrinsicSizingStyleValue: size=56 align=8
     0: Legacy
     1: ZeroIfScrollZeroIfExtrinsic
 MinWidthStyleValue: size=288 align=8
@@ -6736,7 +6745,7 @@ MonochromeMediaFeature: size=120 align=4
     3: Min
     4: Max
     5: Exact
-MoveCommand: size=160 align=8 {
+MoveCommand: size=168 align=8 {
     keyword: 0
     point: 16
 }
@@ -6747,7 +6756,7 @@ MozAppearanceStyleValue: size=32 align=8
     3: BaseSelect
     4: CompatAuto
     5: CompatSpecial
-MozBoxSizingStyleValue: size=16 align=4
+MozBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
 MozColumnCountStyleValue: size=32 align=8 {
@@ -6824,7 +6833,7 @@ MozOsVersionMediaFeatureKeyword: size=16 align=4
     2: WindowsWin7
     3: WindowsWin8
     4: WindowsWin10
-MozOsxFontSmoothingStyleValue: size=16 align=4
+MozOsxFontSmoothingStyleValue: size=32 align=8
     0: Auto
     1: Grayscale
 MozPseudoClass: size=28 align=4
@@ -6940,12 +6949,12 @@ MozTouchEnabledMediaFeature: size=64 align=4
 MozTransitionStyleValue: size=24 align=8 {
     0: 0
 }
-MozUserSelectStyleValue: size=16 align=4
+MozUserSelectStyleValue: size=32 align=8
     0: Auto
     1: Text
     2: None
     3: All
-MsBoxSizingStyleValue: size=16 align=4
+MsBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
 MsColumnCountMediaFeature: size=120 align=4
@@ -6966,29 +6975,29 @@ MsFilterStyleValue: size=32 align=8
     0: None
     1: String
     2: FilterValueList
-MsFlexAlignStyleValue: size=16 align=4
+MsFlexAlignStyleValue: size=32 align=8
     0: Start
     1: End
     2: Center
     3: Stretch
     4: Baseline
-MsFlexDirectionStyleValue: size=16 align=4
+MsFlexDirectionStyleValue: size=32 align=8
     0: Row
     1: RowReverse
     2: Column
     3: ColumnReverse
-MsFlexFlowStyleValue: size=52 align=4 {
+MsFlexFlowStyleValue: size=88 align=8 {
     flex_direction: 0
-    flex_wrap: 16
+    flex_wrap: 32
 }
-MsFlexItemAlignStyleValue: size=16 align=4
+MsFlexItemAlignStyleValue: size=32 align=8
     0: Auto
     1: Start
     2: End
     3: Center
     4: Stretch
     5: Baseline
-MsFlexLinePackStyleValue: size=16 align=4
+MsFlexLinePackStyleValue: size=32 align=8
     0: Start
     1: End
     2: Center
@@ -7001,7 +7010,7 @@ MsFlexNegativeStyleValue: size=24 align=8 {
 MsFlexOrderStyleValue: size=24 align=8 {
     0: 0
 }
-MsFlexPackStyleValue: size=16 align=4
+MsFlexPackStyleValue: size=32 align=8
     0: Start
     1: End
     2: Center
@@ -7020,7 +7029,7 @@ MsFlexStyleValueOptions: size=344 align=8 {
     flex_grow: 0
     flex_basis: 48
 }
-MsFlexWrapStyleValue: size=16 align=4
+MsFlexWrapStyleValue: size=32 align=8
     0: Nowrap
     1: Wrap
     2: WrapReverse
@@ -7036,10 +7045,10 @@ MsImeAlignMediaFeature: size=64 align=4
 MsImeAlignMediaFeatureKeyword: size=12 align=4 {
     0: 0
 }
-MsInterpolationModeStyleValue: size=16 align=4
+MsInterpolationModeStyleValue: size=32 align=8
     0: NearestNeighbor
     1: Bicubic
-MsOverflowStyleStyleValue: size=16 align=4
+MsOverflowStyleStyleValue: size=32 align=8
     0: Auto
     1: None
     2: Scrollbar
@@ -7069,7 +7078,7 @@ MsPseudoElement: size=40 align=4
 MsTextSizeAdjustStyleValue: size=32 align=8 {
     0: 0
 }
-MsTouchActionStyleValue: size=52 align=4
+MsTouchActionStyleValue: size=80 align=8
     0: Auto
     1: None
     2: PanXPanY
@@ -7091,7 +7100,7 @@ MsTransformStyleValue: size=40 align=8 {
 MsTransitionStyleValue: size=24 align=8 {
     0: 0
 }
-MsUserSelectStyleValue: size=16 align=4
+MsUserSelectStyleValue: size=32 align=8
     0: Auto
     1: Text
     2: None
@@ -7103,7 +7112,7 @@ MsViewStateMediaFeatureKeyword: size=16 align=4
     0: Snapped
     1: FullscreenPortait
     2: FullscreenLandscape
-MsWordBreakStyleValue: size=16 align=4
+MsWordBreakStyleValue: size=32 align=8
     0: Normal
     1: BreakAll
     2: KeepAll
@@ -7383,7 +7392,7 @@ NumericFractionValues: size=16 align=4
 NumericSpacingValues: size=16 align=4
     0: ProportionalNums
     1: TabularNums
-OBoxSizingStyleValue: size=16 align=4
+OBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
 ODevicePixelRatioMediaFeature: size=120 align=4
@@ -7396,7 +7405,7 @@ ODevicePixelRatioMediaFeature: size=120 align=4
 OFilterStyleValue: size=40 align=8 {
     0: 0
 }
-OObjectFitStyleValue: size=36 align=4
+OObjectFitStyleValue: size=56 align=8
     0: Fill
     1: None
     2: Contain
@@ -7412,7 +7421,7 @@ OPseudoElement: size=40 align=4
     5: ScrollbarTrack
     6: ScrollbarTrackPiece
     7: Selection
-ObjectFitStyleValue: size=36 align=4
+ObjectFitStyleValue: size=56 align=8
     0: Fill
     1: None
     2: Contain
@@ -7420,7 +7429,7 @@ ObjectFitStyleValue: size=36 align=4
 ObjectPositionStyleValue: size=120 align=8 {
     0: 0
 }
-ObjectViewBoxStyleValue: size=504 align=8 {
+ObjectViewBoxStyleValue: size=512 align=8 {
     0: 0
 }
 OffsetAnchorStyleValue: size=128 align=8 {
@@ -7440,7 +7449,7 @@ OffsetPositionStyleValue: size=128 align=8
     0: Normal
     1: Auto
     2: Position
-OffsetRotateStyleValue: size=48 align=8
+OffsetRotateStyleValue: size=56 align=8
     0: Auto
     1: Reverse
 OklabFunction: size=176 align=8 {
@@ -7523,7 +7532,7 @@ OutlineStyleValue: size=152 align=8 {
 OutlineWidthStyleValue: size=40 align=8 {
     0: 0
 }
-OverflowAnchorStyleValue: size=16 align=4
+OverflowAnchorStyleValue: size=32 align=8
     0: Auto
     1: None
 OverflowBlockMediaFeature: size=68 align=4
@@ -7533,7 +7542,7 @@ OverflowBlockMediaFeatureKeyword: size=16 align=4
     0: None
     1: Scroll
     2: Paged
-OverflowBlockStyleValue: size=16 align=4
+OverflowBlockStyleValue: size=32 align=8
     0: Visible
     1: Hidden
     2: Clip
@@ -7589,7 +7598,7 @@ OverflowInlineMediaFeature: size=68 align=4
 OverflowInlineMediaFeatureKeyword: size=16 align=4
     0: None
     1: Scroll
-OverflowInlineStyleValue: size=16 align=4
+OverflowInlineStyleValue: size=32 align=8
     0: Visible
     1: Hidden
     2: Clip
@@ -7598,57 +7607,57 @@ OverflowInlineStyleValue: size=16 align=4
 OverflowPosition: size=16 align=4
     0: Unsafe
     1: Safe
-OverflowStyleValue: size=32 align=4 {
+OverflowStyleValue: size=64 align=8 {
     0: 0
-    1: 16
+    1: 32
 }
-OverflowWrapStyleValue: size=16 align=4
+OverflowWrapStyleValue: size=32 align=8
     0: Normal
     1: BreakWord
     2: Anywhere
-OverflowXStyleValue: size=16 align=4
+OverflowXStyleValue: size=32 align=8
     0: Visible
     1: Hidden
     2: Clip
     3: Scroll
     4: Auto
-OverflowYStyleValue: size=16 align=4
+OverflowYStyleValue: size=32 align=8
     0: Visible
     1: Hidden
     2: Clip
     3: Scroll
     4: Auto
-OverlayStyleValue: size=16 align=4
+OverlayStyleValue: size=32 align=8
     0: None
     1: Auto
 OverrideColorsValue: size=24 align=8 {
     0: 0
 }
-OverscrollBehaviorBlockStyleValue: size=16 align=4
+OverscrollBehaviorBlockStyleValue: size=32 align=8
     0: Contain
     1: None
     2: Auto
     3: Chain
-OverscrollBehaviorInlineStyleValue: size=16 align=4
+OverscrollBehaviorInlineStyleValue: size=32 align=8
     0: Contain
     1: None
     2: Auto
     3: Chain
-OverscrollBehaviorStyleValue: size=32 align=4 {
+OverscrollBehaviorStyleValue: size=64 align=8 {
     0: 0
-    1: 16
+    1: 32
 }
-OverscrollBehaviorStyleValueKeywords: size=16 align=4
+OverscrollBehaviorStyleValueKeywords: size=32 align=8
     0: Contain
     1: None
     2: Auto
     3: Chain
-OverscrollBehaviorXStyleValue: size=16 align=4
+OverscrollBehaviorXStyleValue: size=32 align=8
     0: Contain
     1: None
     2: Auto
     3: Chain
-OverscrollBehaviorYStyleValue: size=16 align=4
+OverscrollBehaviorYStyleValue: size=32 align=8
     0: Contain
     1: None
     2: Auto
@@ -7723,13 +7732,13 @@ PaintBox: size=16 align=4
     2: BorderBox
     3: FillBox
     4: StrokeBox
-PaintOrderStyleValue: size=52 align=4 {
+PaintOrderStyleValue: size=80 align=8 {
     0: 0
 }
-PaintOrderStyleValueOptions: size=48 align=4 {
+PaintOrderStyleValueOptions: size=72 align=8 {
     fill: 0
-    stroke: 16
-    markers: 32
+    stroke: 24
+    markers: 48
 }
 PaletteIdentifier: size=12 align=4 {
     0: 0
@@ -7768,12 +7777,12 @@ PartPseudoElement: size=80 align=8 {
     value: 40
     close: 64
 }
-PathFunction: size=68 align=4 {
+PathFunction: size=88 align=8 {
     name: 0
-    fill_rule: 12
-    comma: 28
-    path: 44
-    close: 56
+    fill_rule: 16
+    comma: 48
+    path: 64
+    close: 76
 }
 PauseAfterStyleValue: size=32 align=8
     0: Time
@@ -7827,7 +7836,7 @@ PlaceSelfStyleValue: size=120 align=8 {
     0: 0
     1: 64
 }
-PointerEventsStyleValue: size=16 align=4
+PointerEventsStyleValue: size=32 align=8
     0: Auto
     1: None
     2: All
@@ -7849,7 +7858,7 @@ PointerMediaFeatureKeyword: size=16 align=4
 PointerTimelineAxisStyleValue: size=24 align=8 {
     0: 0
 }
-PointerTimelineAxisStyleValueKeywords: size=16 align=4
+PointerTimelineAxisStyleValueKeywords: size=32 align=8
     0: Block
     1: Inline
     2: X
@@ -7865,13 +7874,13 @@ PolarColorSpace: size=16 align=4
     1: Hwb
     2: Lch
     3: Oklch
-PolygonFunction: size=128 align=8 {
+PolygonFunction: size=144 align=8 {
     name: 0
-    fill_rule: 12
-    round: 32
-    comma: 72
-    points: 88
-    close: 112
+    fill_rule: 16
+    round: 48
+    comma: 88
+    points: 104
+    close: 128
 }
 PolygonRound: size=40 align=8 {
     keyword: 0
@@ -7950,7 +7959,7 @@ PositionOne: size=40 align=8
     13: Start
     14: End
     15: LengthPercentage
-PositionStyleValue: size=16 align=4
+PositionStyleValue: size=32 align=8
     0: Static
     1: Relative
     2: Absolute
@@ -7983,7 +7992,7 @@ PositionVerticalKeyword: size=16 align=4
     1: Bottom
     2: YStart
     3: YEnd
-PositionVisibilityStyleValue: size=52 align=4
+PositionVisibilityStyleValue: size=80 align=8
     0: Always
     1: AnchorValidAnchorVisibleNoOverflow
 PositiveNonZeroInt: size=12 align=4 {
@@ -8074,7 +8083,7 @@ PrefersReducedTransparencyMediaFeatureKeyword: size=16 align=4
 PrefixStyleValue: size=64 align=8 {
     0: 0
 }
-PrintColorAdjustStyleValue: size=16 align=4
+PrintColorAdjustStyleValue: size=32 align=8
     0: Economy
     1: Exact
 PropertyPrelude: size=12 align=4 {
@@ -8247,7 +8256,7 @@ RaySize: size=16 align=4
     2: FarthestSide
     3: FarthestCorner
     4: Sides
-ReadingFlowStyleValue: size=16 align=4
+ReadingFlowStyleValue: size=32 align=8
     0: Normal
     1: SourceOrder
     2: FlexVisual
@@ -8281,7 +8290,7 @@ RectangularColorSpace: size=16 align=4
     8: Xyz
     9: XyzD50
     10: XyzD65
-RegionFragmentStyleValue: size=16 align=4
+RegionFragmentStyleValue: size=32 align=8
     0: Auto
     1: Break
 RelativeColorFunction: size=24 align=8
@@ -8299,11 +8308,11 @@ RelativeColorOrigin: size=40 align=8 {
     from_keyword: 0
     color: 16
 }
-RelativeControlPoint: size=88 align=8 {
+RelativeControlPoint: size=104 align=8 {
     0: 0
     1: 72
 }
-RelativeControlPointKeywords: size=16 align=4
+RelativeControlPointKeywords: size=32 align=8
     0: Start
     1: End
     2: Origin
@@ -8347,7 +8356,7 @@ Repetition: size=16 align=4
     1: Space
     2: Round
     3: NoRepeat
-ResizeStyleValue: size=16 align=4
+ResizeStyleValue: size=32 align=8
     0: None
     1: Both
     2: Horizontal
@@ -8486,7 +8495,7 @@ RowGapStyleValue: size=48 align=8
     0: Normal
     1: LengthPercentage
     2: LineWidth
-RowRuleBreakStyleValue: size=16 align=4
+RowRuleBreakStyleValue: size=32 align=8
     0: None
     1: Normal
     2: Intersection
@@ -8529,7 +8538,7 @@ RowRuleStyleStyleValue: size=40 align=8
 RowRuleStyleValue: size=32 align=8 {
     0: 0
 }
-RowRuleVisibilityItemsStyleValue: size=16 align=4
+RowRuleVisibilityItemsStyleValue: size=32 align=8
     0: All
     1: Around
     2: Between
@@ -8537,20 +8546,20 @@ RowRuleVisibilityItemsStyleValue: size=16 align=4
 RowRuleWidthStyleValue: size=40 align=8
     0: LineWidthList
     1: AutoLineWidthList
-RubyAlignStyleValue: size=16 align=4
+RubyAlignStyleValue: size=32 align=8
     0: Start
     1: Center
     2: SpaceBetween
     3: SpaceAround
-RubyMergeStyleValue: size=16 align=4
+RubyMergeStyleValue: size=32 align=8
     0: Separate
     1: Merge
     2: Auto
-RubyOverhangStyleValue: size=16 align=4
+RubyOverhangStyleValue: size=32 align=8
     0: Auto
     1: Spaces
     2: None
-RubyPositionStyleValue: size=36 align=4
+RubyPositionStyleValue: size=56 align=8
     0: Over
     1: Under
     2: InterCharacter
@@ -8578,7 +8587,7 @@ Rule: size=224 align=16
     20: UnknownAt
     21: Style
     22: Unknown
-RuleBreakStyleValue: size=16 align=4 {
+RuleBreakStyleValue: size=32 align=8 {
     0: 0
 }
 RuleColorStyleValue: size=40 align=8 {
@@ -8599,7 +8608,7 @@ RuleInsetStartStyleValue: size=48 align=8 {
 RuleInsetStyleValue: size=208 align=8 {
     0: 0
 }
-RuleOverlapStyleValue: size=16 align=4
+RuleOverlapStyleValue: size=32 align=8
     0: RowOverColumn
     1: ColumnOverRow
 RuleStyleStyleValue: size=40 align=8 {
@@ -8608,7 +8617,7 @@ RuleStyleStyleValue: size=40 align=8 {
 RuleStyleValue: size=32 align=8 {
     0: 0
 }
-RuleVisibilityItemsStyleValue: size=16 align=4 {
+RuleVisibilityItemsStyleValue: size=32 align=8 {
     0: 0
 }
 RuleWidthStyleValue: size=40 align=8 {
@@ -8690,13 +8699,13 @@ ScriptingMediaFeatureKeyword: size=16 align=4
     0: None
     1: InitialOnly
     2: Enabled
-ScrollAxisLockStyleValue: size=16 align=4
+ScrollAxisLockStyleValue: size=32 align=8
     0: Auto
     1: None
-ScrollBehaviorStyleValue: size=16 align=4
+ScrollBehaviorStyleValue: size=32 align=8
     0: Auto
     1: Smooth
-ScrollInitialTargetStyleValue: size=16 align=4
+ScrollInitialTargetStyleValue: size=32 align=8
     0: None
     1: Nearest
 ScrollMarginBlockEndStyleValue: size=24 align=8 {
@@ -8737,7 +8746,7 @@ ScrollMarginStyleValue: size=96 align=8 {
 ScrollMarginTopStyleValue: size=24 align=8 {
     0: 0
 }
-ScrollMarkerGroupStyleValue: size=36 align=4
+ScrollMarkerGroupStyleValue: size=56 align=8
     0: None
     1: BeforeLinks
     2: BeforeTabs
@@ -8781,19 +8790,19 @@ ScrollPaddingStyleValue: size=160 align=8 {
 ScrollPaddingTopStyleValue: size=40 align=8 {
     0: 0
 }
-ScrollSnapAlignStyleValue: size=32 align=4 {
+ScrollSnapAlignStyleValue: size=64 align=8 {
     0: 0
-    1: 16
+    1: 32
 }
-ScrollSnapAlignStyleValueKeywords: size=16 align=4
+ScrollSnapAlignStyleValueKeywords: size=32 align=8
     0: None
     1: Start
     2: End
     3: Center
-ScrollSnapStopStyleValue: size=16 align=4
+ScrollSnapStopStyleValue: size=32 align=8
     0: Normal
     1: Always
-ScrollSnapTypeStyleValue: size=28 align=4
+ScrollSnapTypeStyleValue: size=56 align=8
     0: None
     1: XMandatory
     2: XProximity
@@ -8819,13 +8828,13 @@ ScrollStateQuery: size=104 align=8
     1: Not
     2: And
     3: Or
-ScrollTargetGroupStyleValue: size=16 align=4
+ScrollTargetGroupStyleValue: size=32 align=8
     0: None
     1: Auto
 ScrollTimelineAxisStyleValue: size=24 align=8 {
     0: 0
 }
-ScrollTimelineAxisStyleValueKeywords: size=16 align=4
+ScrollTimelineAxisStyleValueKeywords: size=32 align=8
     0: Block
     1: Inline
     2: X
@@ -8854,10 +8863,10 @@ ScrollableScrollStateFeatureKeyword: size=16 align=4
 ScrollbarColorStyleValue: size=72 align=8 {
     0: 0
 }
-ScrollbarGutterStyleValue: size=32 align=4 {
+ScrollbarGutterStyleValue: size=56 align=8 {
     0: 0
 }
-ScrollbarWidthStyleValue: size=16 align=4
+ScrollbarWidthStyleValue: size=32 align=8
     0: Auto
     1: Thin
     2: None
@@ -8901,7 +8910,7 @@ ShadowPosition: size=16 align=4
 ShapeBox: size=20 align=4
     0: VisualBox
     1: MarginBox
-ShapeCommand: size=480 align=8
+ShapeCommand: size=496 align=8
     0: MoveCommand
     1: LineCommand
     2: Close
@@ -8910,19 +8919,19 @@ ShapeCommand: size=480 align=8
     5: CurveCommand
     6: SmoothCommand
     7: ArcCommand
-ShapeFunction: size=208 align=8 {
+ShapeFunction: size=232 align=8 {
     name: 0
-    fill_rule: 12
-    from: 28
-    position: 40
-    comma: 152
-    commands: 168
-    close: 192
+    fill_rule: 16
+    from: 48
+    position: 64
+    comma: 176
+    commands: 192
+    close: 216
 }
 ShapeImageThresholdStyleValue: size=24 align=8 {
     0: 0
 }
-ShapeInsideStyleValue: size=272 align=8
+ShapeInsideStyleValue: size=280 align=8
     0: Auto
     1: OutsideShape
     2: ShapeBox
@@ -8938,19 +8947,19 @@ ShapeOutsideStyleValue: size=288 align=8
 ShapePaddingStyleValue: size=32 align=8 {
     0: 0
 }
-ShapeRectFunction: size=480 align=8 {
+ShapeRectFunction: size=488 align=8 {
     name: 0
     params: 16
-    close: 464
+    close: 472
 }
-ShapeRectFunctionParams: size=448 align=8 {
+ShapeRectFunctionParams: size=456 align=8 {
     0: 0
     1: 40
     2: 80
     3: 120
     4: 160
 }
-ShapeRenderingStyleValue: size=16 align=4
+ShapeRenderingStyleValue: size=32 align=8
     0: Auto
     1: Optimizespeed
     2: Crispedges
@@ -8999,15 +9008,15 @@ SingleAnimationIterationCount: size=32 align=8
 SingleAnimationPlayState: size=16 align=4
     0: Running
     1: Paused
-SingleAnimationRangeCenterStyleValue: size=64 align=8
+SingleAnimationRangeCenterStyleValue: size=80 align=8
     0: Normal
     1: LengthPercentage
     2: TimelineRangeCenterSubject
-SingleAnimationRangeEndStyleValue: size=64 align=8
+SingleAnimationRangeEndStyleValue: size=80 align=8
     0: Normal
     1: LengthPercentage
     2: TimelineRangeName
-SingleAnimationRangeStartStyleValue: size=64 align=8
+SingleAnimationRangeStartStyleValue: size=80 align=8
     0: Normal
     1: LengthPercentage
     2: TimelineRangeName
@@ -9027,7 +9036,7 @@ SingleAnimationTriggerBehavior: size=16 align=4
     1: Repeat
     2: Alternate
     3: State
-SingleAnimationTriggerRange: size=56 align=8
+SingleAnimationTriggerRange: size=72 align=8
     0: Normal
     1: Named
     2: LengthPercentage
@@ -9040,9 +9049,9 @@ SingleAnimationTriggerType: size=16 align=4
     1: Repeat
     2: Alternate
     3: State
-SingleContainIntrinsicSizeStyleValue: size=48 align=8 {
+SingleContainIntrinsicSizeStyleValue: size=56 align=8 {
     0: 0
-    1: 16
+    1: 24
 }
 SingleMaskClipStyleValue: size=32 align=8
     0: CoordBox
@@ -9059,11 +9068,11 @@ SingleScrollTimelineStyleValue: size=48 align=8 {
     0: 0
     1: 24
 }
-SingleTimelineTriggerActivationRangeEndStyleValue: size=64 align=8
+SingleTimelineTriggerActivationRangeEndStyleValue: size=80 align=8
     0: Normal
     1: LengthPercentage
     2: TimelineRangeName
-SingleTimelineTriggerActivationRangeStartStyleValue: size=64 align=8
+SingleTimelineTriggerActivationRangeStartStyleValue: size=80 align=8
     0: Normal
     1: LengthPercentage
     2: TimelineRangeName
@@ -9071,12 +9080,12 @@ SingleTimelineTriggerActivationRangeStyleValue: size=48 align=8 {
     0: 0
     1: 24
 }
-SingleTimelineTriggerActiveRangeEndStyleValue: size=64 align=8
+SingleTimelineTriggerActiveRangeEndStyleValue: size=80 align=8
     0: Auto
     1: Normal
     2: LengthPercentage
     3: TimelineRangeName
-SingleTimelineTriggerActiveRangeStartStyleValue: size=64 align=8
+SingleTimelineTriggerActiveRangeStartStyleValue: size=80 align=8
     0: Auto
     1: Normal
     2: LengthPercentage
@@ -9129,7 +9138,7 @@ SkewyFunction: size=64 align=8 {
     params: 16
     close: 48
 }
-SliderOrientationStyleValue: size=16 align=4
+SliderOrientationStyleValue: size=32 align=8
     0: Auto
     1: LeftToRight
     2: RightToLeft
@@ -9141,11 +9150,11 @@ SlottedPseudoElement: size=80 align=8 {
     value: 40
     close: 64
 }
-SmoothCommand: size=312 align=8 {
+SmoothCommand: size=328 align=8 {
     keyword: 0
     target: 16
 }
-SmoothTarget: size=296 align=8
+SmoothTarget: size=312 align=8
     0: ToPosition
     1: ByCoordinatePairWithRelativeControlPoint
 SnapBlockFunction: size=112 align=8 {
@@ -9193,14 +9202,14 @@ SpacingTrim: size=16 align=4
     3: TrimStart
     4: TrimBoth
     5: TrimAll
-SpatialNavigationActionStyleValue: size=16 align=4
+SpatialNavigationActionStyleValue: size=32 align=8
     0: Auto
     1: Focus
     2: Scroll
-SpatialNavigationContainStyleValue: size=16 align=4
+SpatialNavigationContainStyleValue: size=32 align=8
     0: Auto
     1: Contain
-SpatialNavigationFunctionStyleValue: size=16 align=4
+SpatialNavigationFunctionStyleValue: size=32 align=8
     0: Normal
     1: Grid
 SpeakAsStyleValue: size=32 align=8
@@ -9210,7 +9219,7 @@ SpeakAsStyleValue: size=32 align=8
     3: Words
     4: SpellOut
     5: CounterStyleName
-SpeakStyleValue: size=16 align=4
+SpeakStyleValue: size=32 align=8
     0: Auto
     1: Never
     2: Always
@@ -9279,11 +9288,11 @@ StripesFunction: size=56 align=8 {
     params: 16
     close: 40
 }
-StrokeAlignStyleValue: size=16 align=4
+StrokeAlignStyleValue: size=32 align=8
     0: Center
     1: Inset
     2: Outset
-StrokeBreakStyleValue: size=16 align=4
+StrokeBreakStyleValue: size=32 align=8
     0: BoundingBox
     1: Slice
     2: Clone
@@ -9293,7 +9302,7 @@ StrokeColorStyleValue: size=24 align=8 {
 StrokeDashCornerStyleValue: size=32 align=8 {
     0: 0
 }
-StrokeDashJustifyStyleValue: size=52 align=4
+StrokeDashJustifyStyleValue: size=80 align=8
     0: None
     1: Stretch
     2: Compress
@@ -9313,11 +9322,11 @@ StrokeLayer: size=368 align=8 {
     origin: 324
     color: 344
 }
-StrokeLinecapStyleValue: size=16 align=4
+StrokeLinecapStyleValue: size=32 align=8
     0: Butt
     1: Round
     2: Square
-StrokeLinejoinStyleValue: size=36 align=4
+StrokeLinejoinStyleValue: size=56 align=8
     0: CropBevel
     1: CropRound
     2: CropFallback
@@ -9333,7 +9342,7 @@ StrokeMiterlimitStyleValue: size=24 align=8 {
 StrokeOpacityStyleValue: size=24 align=8 {
     0: 0
 }
-StrokeOriginStyleValue: size=16 align=4
+StrokeOriginStyleValue: size=32 align=8
     0: MatchParent
     1: FillBox
     2: StrokeBox
@@ -10368,7 +10377,7 @@ SystemColor: size=16 align=4
     16: Selecteditem
     17: Selecteditemtext
     18: Visitedtext
-SystemStyleValue: size=48 align=8
+SystemStyleValue: size=56 align=8
     0: Cyclic
     1: Numeric
     2: Alphabetic
@@ -10379,7 +10388,7 @@ SystemStyleValue: size=48 align=8
 TabSizeStyleValue: size=32 align=8 {
     0: 0
 }
-TableLayoutStyleValue: size=16 align=4
+TableLayoutStyleValue: size=32 align=8
     0: Auto
     1: Fixed
 Tag: size=20 align=4
@@ -10445,7 +10454,7 @@ TextAlignAllStyleValue: size=32 align=8
     6: Justify
     7: MatchParent
     8: _WebkitMatchParent
-TextAlignLastStyleValue: size=16 align=4
+TextAlignLastStyleValue: size=32 align=8
     0: Auto
     1: Start
     2: End
@@ -10465,22 +10474,22 @@ TextAlignStyleValue: size=32 align=8
     7: MatchParent
     8: JustifyAll
     9: _WebkitMatchParent
-TextAutospaceStyleValue: size=88 align=8
+TextAutospaceStyleValue: size=120 align=8
     0: Normal
     1: Autospace
     2: Auto
-TextBoxEdgeStyleValue: size=48 align=8 {
+TextBoxEdgeStyleValue: size=72 align=8 {
     0: 0
 }
-TextBoxStyleValue: size=72 align=8 {
+TextBoxStyleValue: size=112 align=8 {
     0: 0
 }
-TextBoxTrimStyleValue: size=16 align=4
+TextBoxTrimStyleValue: size=32 align=8
     0: None
     1: TrimStart
     2: TrimEnd
     3: TrimBoth
-TextCombineUprightStyleValue: size=48 align=8
+TextCombineUprightStyleValue: size=56 align=8
     0: None
     1: All
     2: Digits
@@ -10490,48 +10499,48 @@ TextDecorationColorStyleValue: size=32 align=8 {
 TextDecorationInsetStyleValue: size=72 align=8 {
     0: 0
 }
-TextDecorationLineStyleValue: size=68 align=4
+TextDecorationLineStyleValue: size=104 align=8
     0: None
     1: UnderlineOverlineLineThroughBlink
     2: SpellingError
     3: GrammarError
-TextDecorationSkipBoxStyleValue: size=16 align=4
+TextDecorationSkipBoxStyleValue: size=32 align=8
     0: None
     1: All
-TextDecorationSkipInkStyleValue: size=16 align=4
+TextDecorationSkipInkStyleValue: size=32 align=8
     0: Auto
     1: None
     2: All
-TextDecorationSkipSelfStyleValue: size=52 align=4
+TextDecorationSkipSelfStyleValue: size=80 align=8
     0: Auto
     1: SkipAll
     2: SkipUnderlineSkipOverlineSkipLineThrough
     3: NoSkip
-TextDecorationSkipSpacesStyleValue: size=36 align=4
+TextDecorationSkipSpacesStyleValue: size=56 align=8
     0: None
     1: All
     2: StartEnd
-TextDecorationSkipStyleValue: size=16 align=4
+TextDecorationSkipStyleValue: size=32 align=8
     0: None
     1: Auto
-TextDecorationStyleStyleValue: size=16 align=4
+TextDecorationStyleStyleValue: size=32 align=8
     0: Solid
     1: Double
     2: Dotted
     3: Dashed
     4: Wavy
-TextDecorationStyleValue: size=168 align=8 {
+TextDecorationStyleValue: size=216 align=8 {
     text_decoration_line: 0
-    text_decoration_thickness: 72
-    text_decoration_style: 120
-    text_decoration_color: 136
+    text_decoration_thickness: 104
+    text_decoration_style: 152
+    text_decoration_color: 184
 }
 TextDecorationThicknessStyleValue: size=48 align=8
     0: Auto
     1: FromFont
     2: LengthPercentage
     3: LineWidth
-TextEdge: size=28 align=4
+TextEdge: size=56 align=8
     0: TextText
     1: TextIdeographic
     2: TextIdeographicInk
@@ -10558,20 +10567,20 @@ TextEdge: size=28 align=4
 TextEmphasisColorStyleValue: size=32 align=8 {
     0: 0
 }
-TextEmphasisPositionStyleValue: size=28 align=4
+TextEmphasisPositionStyleValue: size=56 align=8
     0: OverRight
     1: OverLeft
     2: Over
     3: UnderRight
     4: UnderLeft
     5: Under
-TextEmphasisSkipStyleValue: size=64 align=4 {
+TextEmphasisSkipStyleValue: size=96 align=8 {
     spaces: 0
-    punctuation: 16
-    symbols: 32
-    narrow: 48
+    punctuation: 24
+    symbols: 48
+    narrow: 72
 }
-TextEmphasisStyleStyleValue: size=40 align=8
+TextEmphasisStyleStyleValue: size=56 align=8
     0: None
     1: FilledDot
     2: FilledCircle
@@ -10584,16 +10593,16 @@ TextEmphasisStyleStyleValue: size=40 align=8
     9: OpenTriangle
     10: OpenSesame
     11: String
-TextEmphasisStyleValue: size=72 align=8 {
+TextEmphasisStyleValue: size=88 align=8 {
     text_emphasis_style: 0
-    text_emphasis_color: 40
+    text_emphasis_color: 56
 }
-TextFitStyleValue: size=56 align=8 {
+TextFitStyleValue: size=88 align=8 {
     0: 0
-    1: 16
-    2: 32
+    1: 32
+    2: 64
 }
-TextFitStyleValueKeywords: size=16 align=4
+TextFitStyleValueKeywords: size=32 align=8
     0: None
     1: Grow
     2: Shrink
@@ -10605,25 +10614,25 @@ TextFunctionContent: size=16 align=4
     1: Before
     2: After
     3: FirstLetter
-TextGroupAlignStyleValue: size=16 align=4
+TextGroupAlignStyleValue: size=32 align=8
     0: None
     1: Start
     2: End
     3: Left
     4: Right
     5: Center
-TextIndentStyleValue: size=64 align=8 {
+TextIndentStyleValue: size=80 align=8 {
     0: 0
     1: 32
-    2: 48
+    2: 56
 }
-TextJustifyStyleValue: size=36 align=4
+TextJustifyStyleValue: size=56 align=8
     0: Auto
     1: None
     2: InterWord
     3: InterCharacter
     4: Ruby
-TextOrientationStyleValue: size=16 align=4
+TextOrientationStyleValue: size=32 align=8
     0: Mixed
     1: Upright
     2: Sideways
@@ -10637,7 +10646,7 @@ TextOverflowStyleValue: size=144 align=8 {
     0: 0
     1: 72
 }
-TextRenderingStyleValue: size=16 align=4
+TextRenderingStyleValue: size=32 align=8
     0: Auto
     1: Optimizespeed
     2: Optimizelegibility
@@ -10648,13 +10657,13 @@ TextShadowStyleValue: size=32 align=8 {
 TextSizeAdjustStyleValue: size=32 align=8 {
     0: 0
 }
-TextSpacingStyleValue: size=112 align=8 {
+TextSpacingStyleValue: size=144 align=8 {
     0: 0
 }
 TextSpacingTrimStyleValue: size=32 align=8 {
     0: 0
 }
-TextTransformStyleValue: size=52 align=4
+TextTransformStyleValue: size=80 align=8
     0: None
     1: Capitalize
     2: Uppercase
@@ -10663,32 +10672,32 @@ TextTransformStyleValue: size=52 align=4
 TextUnderlineOffsetStyleValue: size=40 align=8 {
     0: 0
 }
-TextUnderlinePositionStyleValue: size=36 align=4
+TextUnderlinePositionStyleValue: size=56 align=8
     0: Auto
     1: FromFontLeft
     2: FromFontRight
     3: UnderLeft
     4: UnderRight
-TextWrapModeStyleValue: size=16 align=4
+TextWrapModeStyleValue: size=32 align=8
     0: Wrap
     1: Nowrap
-TextWrapStyleStyleValue: size=16 align=4
+TextWrapStyleStyleValue: size=32 align=8
     0: Auto
     1: Balance
     2: Stable
     3: Pretty
     4: AvoidOrphans
-TextWrapStyleValue: size=32 align=4 {
+TextWrapStyleValue: size=64 align=8 {
     text_wrap_mode: 0
-    text_wrap_style: 16
+    text_wrap_style: 32
 }
 Time: size=16 align=4
     0: Ms
     1: S
-TimelineRangeCenterSubject: size=16 align=4
+TimelineRangeCenterSubject: size=32 align=8
     0: Source
     1: Target
-TimelineRangeName: size=16 align=4
+TimelineRangeName: size=32 align=8
     0: Cover
     1: Contain
     2: Entry
@@ -10730,7 +10739,7 @@ TimelineTriggerStyleValue: size=32 align=8 {
 TopStyleValue: size=40 align=8 {
     0: 0
 }
-TouchActionStyleValue: size=52 align=4
+TouchActionStyleValue: size=80 align=8
     0: Auto
     1: None
     2: PanXPanY
@@ -10757,7 +10766,7 @@ TrackSize: size=136 align=8
     0: TrackBreadth
     1: MinmaxFunction
     2: FitContentFunction
-TransformBoxStyleValue: size=16 align=4
+TransformBoxStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
     2: FillBox
@@ -10791,7 +10800,7 @@ TransformList: size=24 align=8 {
 TransformOriginStyleValue: size=128 align=8
     0: PositionOne
     1: PositionTwo
-TransformStyleStyleValue: size=16 align=4
+TransformStyleStyleValue: size=32 align=8
     0: Flat
     1: Preserve3d
 TransformStyleValue: size=40 align=8 {
@@ -10874,7 +10883,7 @@ TryTactic: size=80 align=4 {
     flip_x: 48
     flip_y: 64
 }
-UnicodeBidiStyleValue: size=16 align=4
+UnicodeBidiStyleValue: size=32 align=8
     0: Normal
     1: Embed
     2: Isolate
@@ -10913,7 +10922,7 @@ Url: size=40 align=4
 UrlOrString: size=44 align=4
     0: Url
     1: String
-UserSelectStyleValue: size=16 align=4
+UserSelectStyleValue: size=32 align=8
     0: Auto
     1: Text
     2: None
@@ -10923,13 +10932,13 @@ VariationTagValue: size=40 align=8 {
     0: 0
     1: 16
 }
-VerticalAlignStyleValue: size=96 align=8
+VerticalAlignStyleValue: size=104 align=8
     0: First
     1: Last
-VerticalLineClause: size=72 align=8
+VerticalLineClause: size=80 align=8
     0: ToVerticalLineValue
     1: ByLengthPercentage
-VerticalLineCommand: size=88 align=8 {
+VerticalLineCommand: size=96 align=8 {
     keyword: 0
     clause: 16
 }
@@ -10963,7 +10972,7 @@ VideoDynamicRangeMediaFeatureKeyword: size=16 align=4
 ViewTimelineAxisStyleValue: size=24 align=8 {
     0: 0
 }
-ViewTimelineAxisStyleValueKeywords: size=16 align=4
+ViewTimelineAxisStyleValueKeywords: size=32 align=8
     0: Block
     1: Inline
     2: X
@@ -11012,10 +11021,10 @@ ViewTransitionOldPseudoElement: size=104 align=8 {
     value: 40
     close: 88
 }
-ViewTransitionScopeStyleValue: size=16 align=4
+ViewTransitionScopeStyleValue: size=32 align=8
     0: None
     1: All
-VisibilityStyleValue: size=16 align=4
+VisibilityStyleValue: size=32 align=8
     0: Visible
     1: Hidden
     2: ForceHidden
@@ -11048,20 +11057,20 @@ VoiceGender: size=16 align=4
     0: Male
     1: Female
     2: Neutral
-VoiceRateStyleValue: size=48 align=8
+VoiceRateStyleValue: size=56 align=8
     0: Normal
     1: XSlow
     2: Slow
     3: Medium
     4: Fast
     5: XFast
-VoiceStressStyleValue: size=16 align=4
+VoiceStressStyleValue: size=32 align=8
     0: Normal
     1: Strong
     2: Moderate
     3: None
     4: Reduced
-VoiceVolumeStyleValue: size=48 align=8
+VoiceVolumeStyleValue: size=56 align=8
     0: Silent
     1: XSoft
     2: Soft
@@ -11117,7 +11126,7 @@ WebkitAppearanceStyleValue: size=32 align=8
     3: BaseSelect
     4: CompatAuto
     5: CompatSpecial
-WebkitBackfaceVisibilityStyleValue: size=16 align=4
+WebkitBackfaceVisibilityStyleValue: size=32 align=8
     0: Visible
     1: Hidden
 WebkitBackgroundClipStyleValue: size=24 align=8 {
@@ -11126,16 +11135,16 @@ WebkitBackgroundClipStyleValue: size=24 align=8 {
 WebkitBackgroundSizeStyleValue: size=24 align=8 {
     0: 0
 }
-WebkitBoxAlignStyleValue: size=16 align=4
+WebkitBoxAlignStyleValue: size=32 align=8
     0: Stretch
     1: Start
     2: End
     3: Center
     4: Baseline
-WebkitBoxDecorationBreakStyleValue: size=16 align=4
+WebkitBoxDecorationBreakStyleValue: size=32 align=8
     0: Clone
     1: Slice
-WebkitBoxDirectionStyleValue: size=16 align=4
+WebkitBoxDirectionStyleValue: size=32 align=8
     0: Normal
     1: Reverse
 WebkitBoxFlexStyleValue: size=24 align=8 {
@@ -11144,12 +11153,12 @@ WebkitBoxFlexStyleValue: size=24 align=8 {
 WebkitBoxOrdinalGroupStyleValue: size=24 align=8 {
     0: 0
 }
-WebkitBoxOrientStyleValue: size=16 align=4
+WebkitBoxOrientStyleValue: size=32 align=8
     0: Horizontal
     1: Vertical
     2: InlineAxis
     3: BlockAxis
-WebkitBoxPackStyleValue: size=16 align=4
+WebkitBoxPackStyleValue: size=32 align=8
     0: Start
     1: End
     2: Center
@@ -11157,7 +11166,7 @@ WebkitBoxPackStyleValue: size=16 align=4
 WebkitBoxShadowStyleValue: size=24 align=8 {
     0: 0
 }
-WebkitBoxSizingStyleValue: size=16 align=4
+WebkitBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
 WebkitClipPathStyleValue: size=288 align=8
@@ -11190,14 +11199,14 @@ WebkitFilterStyleValue: size=40 align=8 {
 WebkitFlexBasisStyleValue: size=296 align=8
     0: Content
     1: Width
-WebkitFlexDirectionStyleValue: size=16 align=4
+WebkitFlexDirectionStyleValue: size=32 align=8
     0: Row
     1: RowReverse
     2: Column
     3: ColumnReverse
-WebkitFlexFlowStyleValue: size=52 align=4 {
+WebkitFlexFlowStyleValue: size=88 align=8 {
     flex_direction: 0
-    flex_wrap: 16
+    flex_wrap: 32
 }
 WebkitFlexGrowStyleValue: size=24 align=8 {
     0: 0
@@ -11209,11 +11218,11 @@ WebkitFlexStyleValueOptions: size=344 align=8 {
     flex_grow: 0
     flex_basis: 48
 }
-WebkitFlexWrapStyleValue: size=16 align=4
+WebkitFlexWrapStyleValue: size=32 align=8
     0: Nowrap
     1: Wrap
     2: WrapReverse
-WebkitFontSmoothingStyleValue: size=16 align=4
+WebkitFontSmoothingStyleValue: size=32 align=8
     0: Auto
     1: None
     2: Antialiased
@@ -11248,13 +11257,13 @@ WebkitMaskSizeStyleValue: size=24 align=8 {
 WebkitOrderStyleValue: size=24 align=8 {
     0: 0
 }
-WebkitOverflowScrollingStyleValue: size=16 align=4
+WebkitOverflowScrollingStyleValue: size=32 align=8
     0: Auto
     1: Touch
 WebkitPerspectiveStyleValue: size=32 align=8 {
     0: 0
 }
-WebkitPrintColorAdjustStyleValue: size=16 align=4
+WebkitPrintColorAdjustStyleValue: size=32 align=8
     0: Economy
     1: Exact
 WebkitPseudoClass: size=28 align=4
@@ -11340,15 +11349,15 @@ WebkitTapHighlightColorStyleValue: size=32 align=8 {
 WebkitTextDecorationColorStyleValue: size=32 align=8 {
     0: 0
 }
-WebkitTextDecorationSkipInkStyleValue: size=16 align=4
+WebkitTextDecorationSkipInkStyleValue: size=32 align=8
     0: Auto
     1: None
     2: All
-WebkitTextDecorationStyleValue: size=168 align=8 {
+WebkitTextDecorationStyleValue: size=216 align=8 {
     text_decoration_line: 0
-    text_decoration_thickness: 72
-    text_decoration_style: 120
-    text_decoration_color: 136
+    text_decoration_thickness: 104
+    text_decoration_style: 152
+    text_decoration_color: 184
 }
 WebkitTextFillColorStyleValue: size=32 align=8 {
     0: 0
@@ -11366,7 +11375,7 @@ WebkitTextStrokeStyleValue: size=72 align=8 {
 WebkitTextStrokeWidthStyleValue: size=40 align=8 {
     0: 0
 }
-WebkitTouchCalloutStyleValue: size=16 align=4
+WebkitTouchCalloutStyleValue: size=32 align=8
     0: Default
     1: None
 WebkitTransform2dMediaFeature: size=68 align=4
@@ -11399,11 +11408,11 @@ WebkitTransitionStyleValue: size=24 align=8 {
 WebkitTransitionTimingFunctionStyleValue: size=24 align=8 {
     0: 0
 }
-WebkitUserDragStyleValue: size=16 align=4
+WebkitUserDragStyleValue: size=32 align=8
     0: Auto
     1: None
     2: Element
-WebkitUserSelectStyleValue: size=16 align=4
+WebkitUserSelectStyleValue: size=32 align=8
     0: Auto
     1: Text
     2: None
@@ -11417,26 +11426,26 @@ WherePseudoFunction: size=64 align=8 {
     value: 24
     close: 48
 }
-WhiteSpaceCollapseStyleValue: size=16 align=4
+WhiteSpaceCollapseStyleValue: size=32 align=8
     0: Collapse
     1: Discard
     2: Preserve
     3: PreserveBreaks
     4: PreserveSpaces
     5: BreakSpaces
-WhiteSpaceStyleValue: size=88 align=4
+WhiteSpaceStyleValue: size=152 align=8
     0: Normal
     1: Pre
     2: PreWrap
     3: PreLine
     4: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim
-WhiteSpaceTrimStyleValue: size=52 align=4 {
+WhiteSpaceTrimStyleValue: size=80 align=8 {
     0: 0
 }
-WhiteSpaceTrimStyleValueOptions: size=48 align=4 {
+WhiteSpaceTrimStyleValueOptions: size=72 align=8 {
     discard_before: 0
-    discard_after: 16
-    discard_inner: 32
+    discard_after: 24
+    discard_inner: 48
 }
 WidowsStyleValue: size=24 align=8 {
     0: 0
@@ -11473,42 +11482,42 @@ Wildcard: size=12 align=4 {
 WillChangeStyleValue: size=32 align=8 {
     0: 0
 }
-WindowDragStyleValue: size=16 align=4
+WindowDragStyleValue: size=32 align=8
     0: None
     1: Move
-WordBreakStyleValue: size=16 align=4
+WordBreakStyleValue: size=32 align=8
     0: Normal
     1: BreakAll
     2: KeepAll
     3: Manual
     4: AutoPhrase
     5: BreakWord
-WordSpaceTransformStyleValue: size=32 align=4
+WordSpaceTransformStyleValue: size=56 align=8
     0: None
     1: SpaceAutoPhrase
     2: IdeographicSpaceAutoPhrase
 WordSpacingStyleValue: size=40 align=8 {
     0: 0
 }
-WordWrapStyleValue: size=16 align=4
+WordWrapStyleValue: size=32 align=8
     0: Normal
     1: BreakWord
     2: Anywhere
-WrapAfterStyleValue: size=16 align=4
+WrapAfterStyleValue: size=32 align=8
     0: Auto
     1: Avoid
     2: AvoidLine
     3: AvoidFlex
     4: Line
     5: Flex
-WrapBeforeStyleValue: size=16 align=4
+WrapBeforeStyleValue: size=32 align=8
     0: Auto
     1: Avoid
     2: AvoidLine
     3: AvoidFlex
     4: Line
     5: Flex
-WrapFlowStyleValue: size=16 align=4
+WrapFlowStyleValue: size=32 align=8
     0: Auto
     1: Both
     2: Start
@@ -11516,24 +11525,24 @@ WrapFlowStyleValue: size=16 align=4
     4: Minimum
     5: Maximum
     6: Clear
-WrapInsideStyleValue: size=16 align=4
+WrapInsideStyleValue: size=32 align=8
     0: Auto
     1: Avoid
-WrapThroughStyleValue: size=16 align=4
+WrapThroughStyleValue: size=32 align=8
     0: Wrap
     1: None
-WritingModeStyleValue: size=16 align=4
+WritingModeStyleValue: size=32 align=8
     0: HorizontalTb
     1: VerticalRl
     2: VerticalLr
     3: SidewaysRl
     4: SidewaysLr
-XywhFunction: size=448 align=8 {
+XywhFunction: size=456 align=8 {
     name: 0
     params: 16
-    close: 432
+    close: 440
 }
-XywhFunctionParams: size=416 align=8 {
+XywhFunctionParams: size=424 align=8 {
     0: 0
     1: 64
     2: 96

@@ -9,14 +9,14 @@ enum Foo<'a> {
     #[parse(one_must_occur)]
     First {
         #[atom(CssAtomSet::First)]
-        first: Option<::css_parse::T![Ident]>,
+        first: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         alignment_baseline: Option<crate::AlignmentBaselineStyleValue<'a>>,
         baseline_shift: Option<crate::BaselineShiftStyleValue<'a>>,
     },
     #[parse(one_must_occur)]
     Last {
         #[atom(CssAtomSet::Last)]
-        last: Option<::css_parse::T![Ident]>,
+        last: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         alignment_baseline: Option<crate::AlignmentBaselineStyleValue<'a>>,
         baseline_shift: Option<crate::BaselineShiftStyleValue<'a>>,
     },

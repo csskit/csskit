@@ -18,7 +18,7 @@ use crate::{FillRuleStyleValue, Position, ShapeCommand};
 pub struct ShapeFunction<'a> {
 	#[atom(CssAtomSet::Shape)]
 	pub name: T![Function],
-	pub fill_rule: Option<FillRuleStyleValue>,
+	pub fill_rule: Option<FillRuleStyleValue<'a>>,
 	#[atom(CssAtomSet::From)]
 	pub from: T![Ident],
 	pub position: Position<'a>,

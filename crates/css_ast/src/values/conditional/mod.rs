@@ -95,4 +95,4 @@ pub struct ContainerNameStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.container-type"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ContainerTypeStyleValue {}
+pub enum ContainerTypeStyleValue<'a> {}

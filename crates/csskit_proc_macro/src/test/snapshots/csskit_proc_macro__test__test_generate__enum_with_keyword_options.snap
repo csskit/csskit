@@ -5,24 +5,24 @@ expression: pretty
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[atom(CssAtomSet::None)]
-    None(::css_parse::T![Ident]),
+    None(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[parse(one_must_occur)]
     UnderlineOverlineLineThroughBlink {
         #[atom(CssAtomSet::Underline)]
-        underline: Option<::css_parse::T![Ident]>,
+        underline: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         #[atom(CssAtomSet::Overline)]
-        overline: Option<::css_parse::T![Ident]>,
+        overline: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         #[atom(CssAtomSet::LineThrough)]
-        line_through: Option<::css_parse::T![Ident]>,
+        line_through: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
         #[atom(CssAtomSet::Blink)]
-        blink: Option<::css_parse::T![Ident]>,
+        blink: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     },
     #[atom(CssAtomSet::SpellingError)]
-    SpellingError(::css_parse::T![Ident]),
+    SpellingError(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[atom(CssAtomSet::GrammarError)]
-    GrammarError(::css_parse::T![Ident]),
+    GrammarError(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

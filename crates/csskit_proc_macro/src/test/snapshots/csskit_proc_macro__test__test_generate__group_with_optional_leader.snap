@@ -2,6 +2,16 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-::core::compile_error! {
-    "this object needs the <'a> lifetime but it didn't have it. Add it"
-}
+#[derive(Parse)]
+#[derive(::stable_type_layout::TypeLayout)]
+#[repr(C)]
+struct Foo<'a>(
+    pub crate::NormalOr<
+        (
+            Option<crate::Value<'a, crate::OverflowPosition>>,
+            crate::Value<'a, crate::SelfPosition>,
+        ),
+    >,
+);
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

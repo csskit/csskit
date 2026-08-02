@@ -5,11 +5,11 @@ expression: pretty
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[atom(CssAtomSet::Foo)]
-    Foo(::css_parse::T![Ident]),
+    Foo(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[atom(CssAtomSet::Bar)]
-    Bar(::css_parse::T![Ident]),
+    Bar(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

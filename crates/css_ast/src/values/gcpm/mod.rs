@@ -59,7 +59,7 @@ pub struct CopyIntoStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.footnote-display"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FootnoteDisplayStyleValue {}
+pub enum FootnoteDisplayStyleValue<'a> {}
 
 /// Represents the style value for `footnote-policy` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#footnote-policy).
 ///
@@ -86,7 +86,7 @@ pub enum FootnoteDisplayStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.footnote-policy"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FootnotePolicyStyleValue {}
+pub enum FootnotePolicyStyleValue<'a> {}
 
 /// Represents the style value for `running` as defined in [css-gcpm-4](https://drafts.csswg.org/css-gcpm-4/#running).
 ///
