@@ -3,7 +3,7 @@ rust = { version = "1.97.1", components = "rustfmt,clippy", targets = "wasm32-un
 node = "26.5.1"
 npm = "12.0.2"
 hyperfine = "latest"
-"cargo:cargo-insta" = "1.43.1"
+"cargo:cargo-insta" = "1.44.3"
 "cargo:cargo-expand" = "1.0.114"
 "cargo:cargo-edit" = "0.13.6"
 "cargo:git-cliff" = "2.10.1"
