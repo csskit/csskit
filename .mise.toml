@@ -4,13 +4,13 @@ node = "26.5.1"
 npm = "12.0.2"
 hyperfine = "latest"
 "cargo:cargo-insta" = "1.46.3"
-"cargo:cargo-expand" = "1.0.114"
-"cargo:cargo-edit" = "0.13.6"
+"cargo:cargo-expand" = "1.0.124"
+"cargo:cargo-edit" = "0.13.13"
 "cargo:git-cliff" = "2.10.1"
 "cargo:samply" = "0.13.1"
-"cargo:wasm-bindgen-cli" = "0.2.122"
+"cargo:wasm-bindgen-cli" = "0.2.126"
 "aqua:WebAssembly/binaryen" = "131"
-"cargo:cargo-fuzz" = "0.13.1"
+"cargo:cargo-fuzz" = "0.13.2"
 
 [tasks.clean]
 confirm = 'Are you sure?'
