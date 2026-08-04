@@ -1004,6 +1004,10 @@ impl GenerateDefinition for Def {
 								let members: Vec<_> = opts_children
 									.iter()
 									.flat_map(|child| {
+										let child = match child {
+											Def::Group(inner, _) => inner.as_ref(),
+											other => other,
+										};
 										if let Def::Combinator(nested, DefCombinatorStyle::Options) = child {
 											nested
 												.iter()
