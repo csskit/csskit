@@ -55,11 +55,9 @@ stable_type_layout = { workspace = true }  # @release
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [features]
-default = ["bumpalo"]
-# Allocator backend: bumpalo (default).
+default = []
+# Use bumpalo instead of the default csskit_arena allocator.
 bumpalo = ["css_parse/bumpalo"]
-# Allocator backend: csskit_arena
-csskit_arena = ["css_parse/csskit_arena"]
 visitable = []
 serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
 miette = ["css_parse/miette"]

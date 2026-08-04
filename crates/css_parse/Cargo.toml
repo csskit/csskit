@@ -16,7 +16,6 @@ bench = false
 [dependencies]
 csskit_proc_macro = { workspace = true } # @release
 css_lexer = { workspace = true } # @release
-csskit_arena = { workspace = true, optional = true } # @release
 
 allocator-api2 = { workspace = true }
 bumpalo = { workspace = true, features = [
@@ -32,6 +31,11 @@ bitmask-enum = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
 
+# The default allocator backend. Only pulled in where its virtual memory APIs exist; elsewhere
+# (e.g. wasm32) the `bumpalo` feature is mandatory.
+[target.'cfg(any(unix, windows))'.dependencies]
+csskit_arena = { workspace = true } # @release
+
 [dev-dependencies]
 csskit_derives = { workspace = true }  # @release
 derive_atom_set = { workspace = true } # @release
@@ -41,10 +45,10 @@ dhat = { workspace = true }
 stable_type_layout = { workspace = true }  # @release
 
 [features]
-default = ["bumpalo"]
+default = []
 testing = []
+# Allocator backend override: use bumpalo instead of the default csskit_arena.
 bumpalo = ["dep:bumpalo", "css_lexer/bumpalo"]
-csskit_arena = ["dep:csskit_arena"]
 # Easter egg feature for CSS expansion (opposite of minification)
 egg = ["css_lexer/egg"]
 miette = ["dep:miette", "dep:thiserror", "css_lexer/miette"]
