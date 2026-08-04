@@ -1098,7 +1098,7 @@ mod test {
 		);
 	}
 
-	#[cfg(feature = "csskit_arena")]
+	#[cfg(not(feature = "bumpalo"))]
 	#[test]
 	fn parsing_beyond_default_arena_capacity_does_not_panic() {
 		use crate::{ComponentValues, EmptyAtomSet, Parser};

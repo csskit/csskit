@@ -316,13 +316,13 @@ mod traits;
 
 pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 
-#[cfg(not(any(feature = "bumpalo", feature = "csskit_arena")))]
-compile_error!("one of the features `bumpalo` or `csskit_arena` must be enabled");
+#[cfg(all(not(feature = "bumpalo"), not(any(unix, windows))))]
+compile_error!("the `bumpalo` feature is required on targets csskit_arena cannot support");
 
-#[cfg(all(feature = "bumpalo", not(feature = "csskit_arena")))]
+#[cfg(feature = "bumpalo")]
 pub type Arena = bumpalo::Bump;
 
-#[cfg(feature = "csskit_arena")]
+#[cfg(not(feature = "bumpalo"))]
 pub type Arena = csskit_arena::Arena;
 
 pub use arena_box::*;
