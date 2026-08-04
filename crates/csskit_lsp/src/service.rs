@@ -59,6 +59,7 @@ impl File {
 					let mut alloc = Arena::default();
 					let mut string: String = "".into();
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, "");
+					let mut line_index = LineIndex::new_in(&string, &alloc);
 					let mut result: ParserReturn<'_, StyleSheet<'_>> =
 						Parser::new(&alloc, "", lexer).parse_entirely::<StyleSheet>();
 					while let Ok(call) = read_receiver.recv() {
@@ -68,9 +69,11 @@ impl File {
 								let _ = span.enter();
 								// TODO! we should be able to optimize this by parsing a subset of the tree and mutating in
 								// place. For now though a partial parse request re-parses it all.
+								drop(line_index);
 								alloc.reset();
 								string = rope.clone().into();
 								let lexer = Lexer::new(&CssAtomSet::ATOMS, &string);
+								line_index = LineIndex::new_in(&string, &alloc);
 								result = Parser::new(&alloc, &string, lexer).parse_entirely::<StyleSheet>();
 								// if let Some(stylesheet) = &result.output {
 								// 	trace!("Sucessfully parsed stylesheet: {:#?}", &stylesheet);
@@ -84,8 +87,6 @@ impl File {
 									let _ = stylesheet.accept(&mut highlighter);
 									let mut current_line = 0;
 									let mut current_start = 0;
-									let index_alloc = Arena::new();
-									let line_index = LineIndex::new_in(&string, &index_alloc);
 									let data = highlighter
 										.highlights()
 										.sorted_by(|a, b| Ord::cmp(&a.span(), &b.span()))
