@@ -125,7 +125,7 @@ fn custom_type_with_checks_derive_parse() {
 #[test]
 fn custom_function_type() {
 	let syntax = to_valuedef!(" foo | <calc-size()> ");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "custom_function_type");
 }
 

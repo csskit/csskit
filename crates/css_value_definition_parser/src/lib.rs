@@ -393,7 +393,8 @@ impl Def {
 			Self::FunctionType(ty) => {
 				matches!(
 					ty.ident_str(),
-					"DynamicRangeLimitMix"
+					"CalcSize"
+						| "DynamicRangeLimitMix"
 						| "Param" | "Rect" | "Repeat"
 						| "Attr" | "PaletteMix"
 						| "SnapBlock" | "SnapInline"

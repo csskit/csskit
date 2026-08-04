@@ -5,10 +5,10 @@ expression: pretty
 #[derive(Parse)]
 #[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
-    CalcSizeFunction(crate::CalcSizeFunction),
+    CalcSizeFunction(crate::CalcSizeFunction<'a>),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);
