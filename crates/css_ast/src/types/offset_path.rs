@@ -13,7 +13,7 @@ use css_parse::Box;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum OffsetPath<'a> {
-	RayFunction(RayFunction),
+	RayFunction(Box<'a, RayFunction<'a>>),
 	Url(Url),
 	BasicShape(Box<'a, BasicShape<'a>>),
 }

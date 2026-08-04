@@ -43,6 +43,9 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "view-box");
 		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "url(\"path.svg\")");
 		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "url(\"path.svg\") fill-box");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "ray(45deg)");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "ray(45deg closest-side contain)");
+		assert_parse!(CssAtomSet::ATOMS, OffsetPathStyleValue, "ray(45deg at center)border-box");
 	}
 
 	#[test]

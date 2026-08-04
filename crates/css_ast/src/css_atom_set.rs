@@ -1728,6 +1728,7 @@ pub enum CssAtomSet {
 	Raise,
 	Range,
 	RawString,
+	Ray,
 	Rb,
 	ReadOnly,
 	ReadWrite,
