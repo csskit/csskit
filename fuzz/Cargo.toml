@@ -16,7 +16,6 @@ path = "fuzz_targets/parse_stylesheet.rs"
 test = false
 
 [dependencies]
-bumpalo = { version = "3.20.3" }
 css_ast = { path = "../crates/css_ast" }
 css_lexer = { path = "../crates/css_lexer" }
 css_parse = { path = "../crates/css_parse" }
