@@ -25,6 +25,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum AttributeOperator { }",
   "pub enum AttributeValue { }",
   "pub enum AutoFillOrFit { }",
+  "pub enum Autospace { }",
   "pub enum BackfaceVisibilityStyleValue { }",
   "pub enum BaselineMetric { }",
   "pub enum BaselinePosition { }",

@@ -116,4 +116,27 @@ mod tests {
 		assert_peek_false!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, HyphenateLimitCharsStyleValue, "5 2 2 2");
 	}
+
+	#[test]
+	fn test_text_autospace() {
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "no-autospace");
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "ideograph-alpha");
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "ideograph-alpha ideograph-numeric");
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "punctuation replace");
+		assert_parse!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "insert");
+		assert_peek_false!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, TextAutospaceStyleValue, "insert replace");
+	}
+
+	#[test]
+	fn test_text_spacing() {
+		assert_parse!(CssAtomSet::ATOMS, TextSpacingStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, TextSpacingStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, TextSpacingStyleValue, "trim-start");
+		assert_parse!(CssAtomSet::ATOMS, TextSpacingStyleValue, "no-autospace");
+		assert_parse!(CssAtomSet::ATOMS, TextSpacingStyleValue, "trim-start ideograph-alpha");
+		assert_peek_false!(CssAtomSet::ATOMS, TextSpacingStyleValue, "");
+	}
 }
