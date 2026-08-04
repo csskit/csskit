@@ -1616,6 +1616,7 @@ pub enum CssAtomSet {
 	Painted,
 	Palegoldenrod,
 	Palegreen,
+	PaletteMix,
 	Paleturquoise,
 	Palevioletred,
 	PanDown,
