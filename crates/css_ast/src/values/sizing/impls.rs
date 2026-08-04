@@ -59,6 +59,10 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-webkit-max-content");
 		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-moz-min-content");
 		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "-moz-max-content");
+		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "calc-size(auto, size/2)");
+		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "calc-size(any, size + 10px)");
+		assert_parse!(CssAtomSet::ATOMS, HeightStyleValue, "calc-size(fit-content, size*2)");
+		assert_parse!(CssAtomSet::ATOMS, MaxWidthStyleValue, "calc-size(max-content, size)");
 
 		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto 1/5");
 		assert_parse!(CssAtomSet::ATOMS, AspectRatioStyleValue, "auto 1/2");

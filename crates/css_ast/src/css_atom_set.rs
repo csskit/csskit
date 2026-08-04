@@ -170,6 +170,7 @@ pub enum CssAtomSet {
 	AnnotationXml,
 	Antialiased,
 	Antiquewhite,
+	Any,
 	AnyHover,
 	AnyLink,
 	AnyPointer,
