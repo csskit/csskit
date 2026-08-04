@@ -44,6 +44,16 @@ mod tests {
 	}
 
 	#[test]
+	fn test_font_palette() {
+		assert_parse!(CssAtomSet::ATOMS, FontPaletteStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, FontPaletteStyleValue, "light");
+		assert_parse!(CssAtomSet::ATOMS, FontPaletteStyleValue, "dark");
+		assert_parse!(CssAtomSet::ATOMS, FontPaletteStyleValue, "--blues");
+		assert_parse!(CssAtomSet::ATOMS, FontPaletteStyleValue, "palette-mix(in lch,--blues 30%,--reds 70%)");
+		assert_parse_error!(CssAtomSet::ATOMS, FontPaletteStyleValue, "palette-mix(in lch,--blues 30%)");
+	}
+
+	#[test]
 	fn test_font_variant_ligatures() {
 		assert_parse!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantLigaturesStyleValue, "none");
