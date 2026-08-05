@@ -874,6 +874,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct EventTriggerStyleValue < \'a > { }",
   "pub struct ExpFunction < \'a > { }",
   "pub struct ExplicitTrackList < \'a > { }",
+  "pub struct FadeFunction < \'a > { }",
   "pub struct FallbackStyleValue { }",
   "pub struct FeatureTagValue < \'a > { }",
   "pub struct FillColorStyleValue < \'a > { }",
