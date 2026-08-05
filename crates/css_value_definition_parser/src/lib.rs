@@ -115,6 +115,7 @@ impl DefType {
 			| "Color"          // Color<'a>
 			| "ColorSchemeName"   // Other(Value<'a, CustomIdent>)
 			| "ContentAltItem"  // contains Counter<'a> and AttrFunction<'a>
+			| "ContentLevel"  // contains AttrFunction<'a>, CounterFunction<'a>, CountersFunction<'a>
 			| "ContentList"  // Vec<'a, ContentListItem<'a>>
 			| "ContentReplacement"  // type alias for Image<'a>
 			| "ControlPoint"  // ControlPoint<'a> (contains RelativeControlPoint<'a>)

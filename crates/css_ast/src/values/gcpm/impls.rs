@@ -26,6 +26,18 @@ mod tests {
 	}
 
 	#[test]
+	fn test_copy_into() {
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header element");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header content");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header text");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header attr(title)");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header counter(page)");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header counters(page,'.')");
+		assert_parse!(CssAtomSet::ATOMS, CopyIntoStyleValue, "header element, footer text");
+	}
+
+	#[test]
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, FootnoteDisplayStyleValue, "none");
 		assert_parse_error!(CssAtomSet::ATOMS, FootnoteDisplayStyleValue, "block inline");
