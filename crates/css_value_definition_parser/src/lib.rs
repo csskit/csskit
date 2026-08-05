@@ -170,6 +170,7 @@ impl DefType {
 			| "RelativeControlPoint"  // RelativeControlPoint<'a> (contains CoordinatePair<'a>)
 			| "Ratio"  // Ratio<'a> (contains CalcableValue<'a, CSSInt>)
 			| "Shadow"       // Shadow<'a> (contains Color<'a>)
+			| "SingleAnimation"  // SingleAnimation<'a> (contains CalcableValue<'a, Time>)
 			| "SingleAnimationIterationCount"  // SingleAnimationIterationCount<'a> (Number wraps CalcableValue<'a, NonNegative<Number>>)
 			| "SingleTransition"
 			| "SmoothCommand"  // SmoothCommand<'a> (contains SmoothTarget<'a>)

@@ -2,4 +2,3 @@ find :unknown
 ---
 coverage/popular/mini.css.3.0.1.css
 130:3:  background: linear-gradient(to right, transparent, var(--border-color) 20%, var(--border-color) 80%, transparent);
-1903:3:  animation: spinner-donut-anim 1.2s linear infinite;

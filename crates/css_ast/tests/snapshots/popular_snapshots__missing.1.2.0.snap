@@ -35470,30 +35470,27 @@ StyleSheet(
                 offset: SourceOffset(26542),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26543),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(26544),
-                    len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(26546),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: AnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(26547),
                     len: 2,
-                  )),
-                ],
-              )),
+                  )))))),
+                  easing: None,
+                  delay: None,
+                  iteration_count: None,
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(26544),
+                    len: 2,
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
