@@ -639,3 +639,17 @@ fn parse_enum_all_must_occur_non_atom_only_input() {
 	};
 	assert_parse_snapshot!(data, "parse_enum_all_must_occur_non_atom_only_input");
 }
+
+#[test]
+fn parse_keyword_pair_alternation() {
+	let data = to_deriveinput! {
+		enum Foo {
+			TextText(#[atom(FooAtoms::Text)] Ident, #[atom(FooAtoms::Text)] Ident),
+			TextAlphabetic(#[atom(FooAtoms::Text)] Ident, #[atom(FooAtoms::Alphabetic)] Ident),
+			CapText(#[atom(FooAtoms::Cap)] Ident, #[atom(FooAtoms::Text)] Ident),
+			CapAlphabetic(#[atom(FooAtoms::Cap)] Ident, #[atom(FooAtoms::Alphabetic)] Ident),
+			Text(#[atom(FooAtoms::Text)] Ident),
+		}
+	};
+	assert_parse_snapshot!(data, "parse_keyword_pair_alternation");
+}

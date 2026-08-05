@@ -510,6 +510,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum TextDecorationSkipStyleValue { }",
   "pub enum TextDecorationStyleStyleValue { }",
   "pub enum TextDecorationThicknessStyleValue < \'a > { }",
+  "pub enum TextEdge { }",
   "pub enum TextEmphasisPositionStyleValue { }",
   "pub enum TextEmphasisStyleStyleValue < \'a > { }",
   "pub enum TextFunctionContent { }",

@@ -1,0 +1,69 @@
+---
+source: crates/csskit_derives/src/test/test_parse.rs
+expression: pretty
+---
+#[automatically_derived]
+impl<'a> ::css_parse::Parse<'a> for Foo {
+    fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
+    where
+        I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
+    {
+        use css_parse::{Parse, Peek};
+        if p.peek::<Ident>() {
+            let c = p.peek_n(1);
+            match p.to_atom::<FooAtoms>(c) {
+                FooAtoms::Text => {
+                    let v0 = p.parse::<Ident>()?;
+                    let c = p.peek_n(1);
+                    match p.to_atom::<FooAtoms>(c) {
+                        FooAtoms::Text => {
+                            let v1 = p.parse::<Ident>()?;
+                            return Ok(Self::TextText { 0: v0, 1: v1 });
+                        }
+                        FooAtoms::Alphabetic => {
+                            let v1 = p.parse::<Ident>()?;
+                            return Ok(Self::TextAlphabetic {
+                                0: v0,
+                                1: v1,
+                            });
+                        }
+                        _ => {
+                            return Ok(Self::Text { 0: v0 });
+                        }
+                    }
+                }
+                FooAtoms::Cap => {
+                    let v0 = p.parse::<Ident>()?;
+                    let c = p.peek_n(1);
+                    match p.to_atom::<FooAtoms>(c) {
+                        FooAtoms::Text => {
+                            let v1 = p.parse::<Ident>()?;
+                            return Ok(Self::CapText { 0: v0, 1: v1 });
+                        }
+                        FooAtoms::Alphabetic => {
+                            let v1 = p.parse::<Ident>()?;
+                            return Ok(Self::CapAlphabetic {
+                                0: v0,
+                                1: v1,
+                            });
+                        }
+                        _ => {
+                            Err(
+                                crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                            )?
+                        }
+                    }
+                }
+                _ => {
+                    return Err(
+                        crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
+                    )?;
+                }
+            }
+        } else {
+            return Err(
+                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+            )?;
+        }
+    }
+}
