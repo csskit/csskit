@@ -9,7 +9,7 @@ use darling::FromAttributes;
 use itertools::{Itertools, Position};
 use proc_macro2::{Ident, TokenStream};
 use quote::{format_ident, quote};
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Result, Type, Variant, parse_quote};
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, ExprPath, Fields, Result, Type, Variant, parse_quote};
 
 trait Plan {
 	fn render(&self, wc: &mut WhereCollector) -> TokenStream;
@@ -545,12 +545,24 @@ impl<'a> Plan for AtomDispatchPlan<'a> {
 			.map(|atom| atom.to_atom(format_ident!("c")))
 			.collect();
 
-		let atom_arms: TokenStream = self
-			.variants
+		let mut groups: Vec<(String, ExprPath, Vec<&VariantPlan>)> = Vec::new();
+		for v in &self.variants {
+			let path = v.effective_atom.as_ref().expect("AtomDispatch variant must have atom").path();
+			let key = quote!(#path).to_string();
+			if let Some((_, _, group)) = groups.iter_mut().find(|(k, _, _)| *k == key) {
+				group.push(v);
+			} else {
+				groups.push((key, path, vec![v]));
+			}
+		}
+
+		let atom_arms: TokenStream = groups
 			.iter()
-			.map(|v| {
-				let atom_path = v.effective_atom.as_ref().expect("AtomDispatch variant must have atom").path();
-				let body = v.body(wc);
+			.map(|(_, atom_path, group)| {
+				let body = match AtomPrefixPlan::try_new(group) {
+					Some(plan) => plan.render(wc),
+					None => group[0].body(wc),
+				};
 				quote! { #atom_path => { #body }, }
 			})
 			.collect();
@@ -798,6 +810,117 @@ impl<'a> SharedAtomHoistPlan<'a> {
 		};
 
 		quote! { #atom_preloop #type_preloop }
+	}
+}
+
+/// Atom-prefix plan: variants in an `AtomDispatch` group that share the same
+/// effective (first) atom, differing only by a subsequent atom field — or having
+/// no second field at all, the bare fallback.
+///
+/// e.g. `[ text | cap ] [ text | alphabetic ] | text` generates:
+///   `TextText(#[atom(Text)] Ident, #[atom(Text)] Ident)`
+///   `TextAlphabetic(#[atom(Text)] Ident, #[atom(Alphabetic)] Ident)`
+///   `CapText(#[atom(Cap)] Ident, #[atom(Text)] Ident)`
+///   `CapAlphabetic(#[atom(Cap)] Ident, #[atom(Alphabetic)] Ident)`
+///   `#[atom(Text)] Text(Ident)`
+///
+/// The `Text`-keyed group would otherwise dispatch on the first atom alone,
+/// making every variant but the first unreachable.  This consumes the shared
+/// first token, then atom-dispatches on the next one.
+struct AtomPrefixPlan<'a> {
+	prefix_ty: Type,
+	/// Variants that have a second field with a distinguishing atom.
+	atom_variants: Vec<&'a VariantPlan>,
+	/// Variant with only the prefix field (no second field), if any.
+	bare_variant: Option<&'a VariantPlan>,
+}
+
+impl<'a> AtomPrefixPlan<'a> {
+	fn try_new(variants: &[&'a VariantPlan]) -> Option<Self> {
+		if variants.len() < 2 {
+			return None;
+		}
+		let first_field = variants[0].fields.first()?;
+		let first_ty = &first_field.ty;
+		let prefix_ty_str = quote!(#first_ty).to_string();
+		let mut atom_variants = Vec::new();
+		let mut bare_variant = None;
+		for v in variants {
+			if v.parse_mode != FieldParseMode::Sequential {
+				return None;
+			}
+			let ty = &v.fields.first()?.ty;
+			if quote!(#ty).to_string() != prefix_ty_str {
+				return None;
+			}
+			match v.fields.as_slice() {
+				[_prefix] => {
+					if bare_variant.is_some() {
+						return None; // two bare variants — ambiguous
+					}
+					bare_variant = Some(*v);
+				}
+				[_prefix, second] if second.atom.is_some() && !second.ty.is_option() => {
+					atom_variants.push(*v);
+				}
+				_ => return None, // more complex structure — don't handle here
+			}
+		}
+		if atom_variants.is_empty() {
+			return None;
+		}
+		Some(Self { prefix_ty: first_field.ty.clone(), atom_variants, bare_variant })
+	}
+}
+
+impl<'a> Plan for AtomPrefixPlan<'a> {
+	fn render(&self, wc: &mut WhereCollector) -> TokenStream {
+		let prefix_ty = &self.prefix_ty;
+		wc.add(prefix_ty);
+		let atom_set = self.atom_variants[0].fields[1]
+			.atom
+			.as_ref()
+			.expect("atom_variants guaranteed to have atom on field 1")
+			.first_segment();
+
+		let atom_arms: TokenStream = self
+			.atom_variants
+			.iter()
+			.map(|v| {
+				let atom_path = v.fields[1].atom.as_ref().expect("checked above").path();
+				let ident = &v.ident;
+				let second_ty = &v.fields[1].ty;
+				wc.add(second_ty);
+				let (m0, m1) = (&v.members[0], &v.members[1]);
+				let post_parse_steps = &v.post_parse_steps;
+				quote! {
+					#atom_path => {
+						let v1 = p.parse::<#second_ty>()?;
+						#post_parse_steps
+						return Ok(Self::#ident { #m0: v0, #m1: v1 });
+					}
+				}
+			})
+			.collect();
+
+		let default_arm: TokenStream = if let Some(bare) = self.bare_variant {
+			let ident = &bare.ident;
+			let m0 = &bare.members[0];
+			let post_parse_steps = &bare.post_parse_steps;
+			quote! { _ => { #post_parse_steps return Ok(Self::#ident { #m0: v0 }); } }
+		} else {
+			let unexpected = unexpected_at_c();
+			quote! { _ => { #unexpected } }
+		};
+
+		quote! {
+			let v0 = p.parse::<#prefix_ty>()?;
+			let c = p.peek_n(1);
+			match p.to_atom::<#atom_set>(c) {
+				#atom_arms
+				#default_arm
+			}
+		}
 	}
 }
 

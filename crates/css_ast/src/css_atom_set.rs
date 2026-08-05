@@ -1035,6 +1035,7 @@ pub enum CssAtomSet {
 	IdeographAlpha,
 	IdeographNumeric,
 	Ideographic,
+	IdeographicInk,
 	IdeographicSpace,
 	If,
 	Iframe,
