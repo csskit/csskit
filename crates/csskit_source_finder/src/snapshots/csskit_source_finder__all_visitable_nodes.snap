@@ -104,6 +104,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum ContentAltItem < \'a > { }",
   "pub enum ContentDistribution { }",
   "pub enum ContentKeyword { }",
+  "pub enum ContentLevel < \'a > { }",
   "pub enum ContentListItem < \'a > { }",
   "pub enum ContentPosition { }",
   "pub enum ContentStyleValue < \'a > { }",

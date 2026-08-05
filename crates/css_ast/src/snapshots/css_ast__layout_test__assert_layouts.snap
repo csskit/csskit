@@ -1316,6 +1316,13 @@ ContentKeyword: size=16 align=4
     2: After
     3: FirstLetter
     4: Marker
+ContentLevel: size=176 align=8
+    0: Element
+    1: Content
+    2: Text
+    3: Attr
+    4: Counter
+    5: Counters
 ContentList: size=24 align=8 {
     0: 0
 }
@@ -1371,7 +1378,7 @@ CoordinatePair: size=64 align=8 {
     0: 0
     1: 32
 }
-CopyIntoStyleValue: size=80 align=8 {
+CopyIntoStyleValue: size=240 align=8 {
     0: 0
 }
 CornerBlockEndShapeStyleValue: size=144 align=8 {
