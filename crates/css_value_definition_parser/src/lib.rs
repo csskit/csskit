@@ -403,10 +403,10 @@ impl Def {
 					ty.ident_str(),
 					"CalcSize"
 						| "DynamicRangeLimitMix"
-						| "Param" | "Rect" | "Repeat"
-						| "Attr" | "PaletteMix"
-						| "SnapBlock" | "SnapInline"
-						| "Superellipse"
+						| "Fade" | "Param" | "Rect"
+						| "Repeat" | "Attr"
+						| "PaletteMix" | "SnapBlock"
+						| "SnapInline" | "Superellipse"
 				)
 			}
 			// Every named <type> reference is wrapped in Value<'a, T> / CalcableValue<'a, T>,

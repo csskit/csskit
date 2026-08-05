@@ -20,7 +20,7 @@ pub enum TextOverflowSingleAxis<'a> {
 	Fade(T![Ident]),
 	String(Value<'a, T![String]>),
 	#[atom(CssAtomSet::Fade)]
-	FadeFunction(FadeFunction),
+	FadeFunction(FadeFunction<'a>),
 }
 
 #[cfg(test)]
@@ -35,7 +35,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowSingleAxis, "ellipsis");
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowSingleAxis, "fade");
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowSingleAxis, "'foo'");
-		// assert_parse!(CssAtomSet::ATOMS, TextOverflowSingleAxis, "fade()");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowSingleAxis, "fade(2em)");
 	}
 
 	#[test]

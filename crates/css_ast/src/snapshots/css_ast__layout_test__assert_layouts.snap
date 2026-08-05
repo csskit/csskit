@@ -4667,6 +4667,11 @@ ExplicitTrackList: size=80 align=8 {
     leading_names: 0
     items: 56
 }
+FadeFunction: size=64 align=8 {
+    name: 0
+    params: 16
+    close: 48
+}
 FallbackStyleValue: size=12 align=4 {
     0: 0
 }
@@ -10400,15 +10405,15 @@ TextOrientationStyleValue: size=16 align=4
     0: Mixed
     1: Upright
     2: Sideways
-TextOverflowSingleAxis: size=32 align=8
+TextOverflowSingleAxis: size=72 align=8
     0: Clip
     1: Ellipsis
     2: Fade
     3: String
     4: FadeFunction
-TextOverflowStyleValue: size=64 align=8 {
+TextOverflowStyleValue: size=144 align=8 {
     0: 0
-    1: 32
+    1: 72
 }
 TextRenderingStyleValue: size=16 align=4
     0: Auto

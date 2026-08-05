@@ -53,6 +53,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "clip clip");
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "\"...\" ellipsis");
 		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "fade");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "fade(2em)");
+		assert_parse!(CssAtomSet::ATOMS, TextOverflowStyleValue, "clip fade(10%)");
 		assert_peek_false!(CssAtomSet::ATOMS, TextOverflowStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, TextOverflowStyleValue, "1px");
 	}
