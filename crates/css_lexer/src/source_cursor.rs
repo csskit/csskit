@@ -824,29 +824,6 @@ mod test {
 	}
 
 	#[test]
-	#[cfg(feature = "bumpalo")]
-	fn test_bumpalo_compatibility() {
-		use bumpalo::Bump;
-
-		// Test that Bumpalo's Bump can be used as an allocator
-		let bump = Bump::new();
-		let c = Cursor::new(SourceOffset(0), Token::new_ident(true, false, false, 0, 3));
-
-		// Test that the old interface still works
-		assert_eq!(SourceCursor::from(c, "FoO").parse(&bump), "FoO");
-		assert_eq!(SourceCursor::from(c, "FoO").parse_ascii_lower(&bump), "foo");
-
-		// Test that the new interface works with Bumpalo too
-		assert_eq!(&*SourceCursor::from(c, "FoO").parse(&bump), "FoO");
-		assert_eq!(&*SourceCursor::from(c, "FoO").parse_ascii_lower(&bump), "foo");
-
-		// Test with escape sequences
-		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 7));
-		assert_eq!(SourceCursor::from(c, "b\\61\\72").parse(&bump), "bar");
-		assert_eq!(&*SourceCursor::from(c, "b\\61\\72").parse(&bump), "bar");
-	}
-
-	#[test]
 	fn test_compact_ident_with_escapes() {
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
 		let sc = SourceCursor::from(c, r"\66oo");

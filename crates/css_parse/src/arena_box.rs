@@ -11,10 +11,6 @@ use std::{
 
 /// An arena-allocated box that retains a reference to its allocator, enabling [`Clone`] support.
 ///
-/// Unlike [`bumpalo::boxed::Box`], which only stores a mutable reference to the allocated value (and thus cannot
-/// implement [`Clone`] without the allocator), `Box` stores both the allocator reference and the value pointer.
-/// This allows it to allocate a new copy during [`Clone::clone`].
-///
 /// This type is intended for recursive AST nodes (e.g. `color-mix()` containing nested `<color>` values) where
 /// indirection is required to break the cycle, but the allocation should still live in the parsing arena.
 #[repr(C)]

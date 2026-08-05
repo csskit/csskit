@@ -196,21 +196,6 @@ impl<T: ToSpan, A: allocator_api2::alloc::Allocator> ToSpan for allocator_api2::
 	}
 }
 
-#[cfg(feature = "bumpalo")]
-impl<'a, T: ToSpan> ToSpan for bumpalo::collections::Vec<'a, T> {
-	fn to_span(&self) -> Span {
-		let mut span = Span::ZERO;
-		for item in self {
-			if span == Span::ZERO {
-				span = item.to_span();
-			} else {
-				span = span + item.to_span()
-			}
-		}
-		span
-	}
-}
-
 macro_rules! impl_tuple {
     ($len:tt: $($name:ident),+) => {
         impl<$($name: ToSpan),+> ToSpan for ($($name),+) {

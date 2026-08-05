@@ -1,10 +1,17 @@
 //! Virtual memory reservation for the [`Arena`][crate::Arena] region.
 //!
-//! The region is reserved at its full size up front, because a single-chunk arena can never grow. Reserving it through
-//! the system allocator would ask for real memory: Windows has no overcommit and charges every byte of a `HeapAlloc`
-//! against the commit limit, so a handful of live arenas exhausts memory. Reserving address space directly costs
-//! nothing until the pages are touched.
+//! The region is reserved at its full size up front, because a chunk can never grow. Reserving it through the system
+//! allocator would ask for real memory: Windows has no overcommit and charges every byte of a `HeapAlloc` against the
+//! commit limit, so a handful of live arenas exhausts memory. Reserving address space directly costs nothing until the
+//! pages are touched.
+//!
+//! Reserving needs a 64 bit address space (a 4 GiB alignment does not fit in a 32 bit pointer) and the unix or windows
+//! APIs. Where either is missing (wasm32 above all) [`reserve`] always fails and the arena falls back to chunks from
+//! the global allocator, which it has to grow into as it fills.
 use std::ptr::NonNull;
+
+/// Whether this target can reserve address space lazily, and so hold a whole arena in one chunk.
+pub(crate) const RESERVABLE: bool = cfg!(all(target_pointer_width = "64", any(unix, windows)));
 
 /// A reserved region of address space, plus the 4 GiB-aligned window inside it that the arena allocates from.
 pub(crate) struct Reservation {
@@ -16,12 +23,14 @@ pub(crate) struct Reservation {
 	pub(crate) base: NonNull<u8>,
 }
 
+/// Only the reserving implementations round anything up.
+#[cfg(all(target_pointer_width = "64", any(unix, windows)))]
 #[inline]
 fn align_up(addr: usize, align: usize) -> usize {
 	(addr + align - 1) & !(align - 1)
 }
 
-#[cfg(unix)]
+#[cfg(all(target_pointer_width = "64", unix))]
 mod imp {
 	use super::{Reservation, align_up};
 	use crate::BLOCK_ALIGN;
@@ -83,7 +92,7 @@ mod imp {
 	}
 }
 
-#[cfg(windows)]
+#[cfg(all(target_pointer_width = "64", windows))]
 mod imp {
 	use super::{Reservation, align_up};
 	use crate::BLOCK_ALIGN;
@@ -122,6 +131,29 @@ mod imp {
 		// SAFETY: `MEM_RELEASE` requires the base of the reservation and a zero size.
 		unsafe { VirtualFree(reservation.as_ptr().cast(), 0, MEM_RELEASE) };
 	}
+}
+
+/// No lazy reservation here, so [`reserve`] always fails and [`Arena`][crate::Arena] allocates its chunks from the
+/// global allocator instead. The rest exists only so its callers need no `cfg` of their own; none of it runs.
+#[cfg(not(all(target_pointer_width = "64", any(unix, windows))))]
+mod imp {
+	use super::Reservation;
+	use std::ptr::NonNull;
+
+	pub(crate) fn reserve(_size: usize) -> Option<Reservation> {
+		None
+	}
+
+	/// # Safety
+	/// Never call this: [`reserve`] never succeeds here, so there is nothing to commit.
+	#[cfg(windows)]
+	pub(crate) unsafe fn commit(_ptr: NonNull<u8>, _len: usize) -> bool {
+		false
+	}
+
+	/// # Safety
+	/// Never call this: [`reserve`] never succeeds here, so there is nothing to release.
+	pub(crate) unsafe fn release(_reservation: NonNull<u8>, _reserved: usize) {}
 }
 
 #[cfg(windows)]
