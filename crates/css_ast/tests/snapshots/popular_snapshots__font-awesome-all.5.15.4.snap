@@ -2224,50 +2224,35 @@ StyleSheet(
                 offset: SourceOffset(1638),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1639),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1640),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1647),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: AnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(1648),
                     len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1650),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1651),
-                    len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1659),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1660),
                     len: 6,
-                  )),
-                ],
-              )),
+                  )))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1651),
+                    len: 8,
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1640),
+                    len: 7,
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2399,66 +2384,47 @@ StyleSheet(
                 offset: SourceOffset(1753),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1754),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1755),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1762),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: AnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(1763),
                     len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1765),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1766),
-                    len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1774),
-                    len: 1,
-                  )),
-                  FunctionBlock(
+                  )))))),
+                  easing: Some(StepsFunction(StepsFunction(
                     name: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(1775),
                       len: 6,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(1781),
-                          len: 1,
-                        )),
-                      ],
-                    ),
+                    params: StepsFunctionParams(Literal(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(1781),
+                      len: 1,
+                    ))), None, None),
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(1782),
                       len: 1,
                     )),
-                  ),
-                ],
-              )),
+                  ))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1766),
+                    len: 8,
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1755),
+                    len: 7,
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

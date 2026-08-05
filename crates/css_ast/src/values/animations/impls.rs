@@ -5,6 +5,21 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
+	fn test_animation() {
+		assert_parse!(CssAtomSet::ATOMS, AnimationStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, AnimationStyleValue, "slidein");
+		assert_parse!(CssAtomSet::ATOMS, AnimationStyleValue, "3s ease-in 1s 2 reverse both paused slidein");
+		assert_parse!(CssAtomSet::ATOMS, AnimationStyleValue, "slidein 3s,fadeout 1s linear");
+		assert_parse!(CssAtomSet::ATOMS, AnimationStyleValue, "3s linear infinite slidein");
+	}
+
+	#[test]
+	fn test_animation_errors() {
+		assert_peek_false!(CssAtomSet::ATOMS, AnimationStyleValue, "10px");
+		assert_parse_error!(CssAtomSet::ATOMS, AnimationStyleValue, "slidein slideout");
+	}
+
+	#[test]
 	fn test_animation_delay() {
 		assert_parse!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "-5ms");
 		assert_parse!(CssAtomSet::ATOMS, AnimationDelayStyleValue, "0s");

@@ -818,7 +818,7 @@ FAIL values/0033
 +a{display:inline-block}
 
 FAIL values/0034
--a{animation:fade steps(1,start)}
+-a{animation:steps(1,start)fade}
 +a{animation:fade step-start}
 
 FAIL values/0035

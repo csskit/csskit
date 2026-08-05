@@ -8733,6 +8733,17 @@ SingleAdditiveSymbolsStyleValue: size=88 align=8 {
     0: 0
     1: 24
 }
+SingleAnimation: size=360 align=8 {
+    duration: 0
+    easing: 32
+    delay: 216
+    iteration_count: 240
+    direction: 272
+    fill_mode: 288
+    play_state: 304
+    name: 320
+    timeline: 340
+}
 SingleAnimationComposition: size=16 align=4
     0: Replace
     1: Add
@@ -8776,11 +8787,23 @@ SingleAnimationRangeStyleValue: size=48 align=8 {
 SingleAnimationTimeline: size=16 align=4
     0: Auto
     1: None
+SingleAnimationTrigger: size=64 align=8 {
+    behavior: 0
+    timeline: 16
+}
 SingleAnimationTriggerBehavior: size=16 align=4
     0: Once
     1: Repeat
     2: Alternate
     3: State
+SingleAnimationTriggerRange: size=56 align=8
+    0: Normal
+    1: Named
+    2: LengthPercentage
+SingleAnimationTriggerTimeline: size=48 align=8
+    0: None
+    1: Auto
+    2: Named
 SingleAnimationTriggerType: size=16 align=4
     0: Once
     1: Repeat
