@@ -56,8 +56,6 @@ pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [features]
 default = []
-# Use bumpalo instead of the default csskit_arena allocator.
-bumpalo = ["css_parse/bumpalo"]
 visitable = []
 serde = ["dep:serde", "dep:serde_json", "css_parse/serde", "smallvec/serde"]
 miette = ["css_parse/miette"]

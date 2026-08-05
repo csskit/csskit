@@ -15,11 +15,6 @@ bench = false
 
 [dependencies]
 allocator-api2 = { workspace = true }
-bumpalo = { workspace = true, features = [
-	"boxed",
-	"collections",
-	"allocator-api2",
-], optional = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true } # @release
 fearless_simd = { workspace = true }
@@ -48,9 +43,7 @@ default = []
 egg = []
 # Provides `From<>` implementations for the [SourceSpan] into [miette::SourceSpan] and [Span] into [miette::Span]
 miette = ["dep:miette"]
-# Provides `From<>` implementations for [Vec]
-bumpalo = ["dep:bumpalo"]
-serde = ["dep:serde", "dep:serde_json", "bumpalo/serde", "miette/serde"]
+serde = ["dep:serde", "dep:serde_json", "miette/serde"]
 # Enables dynamic atom interning via DynAtomRegistry
 dynamic-atoms = ["dep:fnv"]
 # Test only features

@@ -506,12 +506,8 @@ impl<'a, T: serde::Serialize, A: Allocator> serde::Serialize for Vec<'a, T, A> {
 
 #[cfg(test)]
 mod test {
-	#[cfg(feature = "bumpalo")]
-	use super::super::arena_box::Box;
 	use super::Vec;
 	use crate::Arena;
-	#[cfg(feature = "bumpalo")]
-	use bumpalo::Bump;
 	use std::cell::Cell;
 	use std::panic::{AssertUnwindSafe, catch_unwind};
 	use std::rc::Rc;
@@ -1062,43 +1058,6 @@ mod test {
 		assert_eq!(v.pop(), None);
 	}
 
-	#[cfg(feature = "bumpalo")]
-	#[test]
-	fn footprint_matches_bumpalo_vec() {
-		let a = Bump::new();
-		{
-			let mut outer: Vec<u32, &Bump> = Vec::new_in(&a);
-			for i in 0..5u32 {
-				let mut inner: Vec<u32, &Bump> = Vec::new_in(&a);
-				for j in 0..7u32 {
-					inner.push(j);
-				}
-				let _b = Box::new_in(&a, inner);
-				outer.push(i);
-			}
-		}
-		let b = Bump::new();
-		{
-			let mut outer: bumpalo::collections::Vec<u32> = bumpalo::collections::Vec::new_in(&b);
-			for i in 0..5u32 {
-				let mut inner: bumpalo::collections::Vec<u32> = bumpalo::collections::Vec::new_in(&b);
-				for j in 0..7u32 {
-					inner.push(j);
-				}
-				let _b = bumpalo::boxed::Box::new_in(inner, &b);
-				outer.push(i);
-			}
-		}
-		assert_eq!(
-			a.allocated_bytes(),
-			b.allocated_bytes(),
-			"arena_vec={} bumpalo::collections::Vec={}",
-			a.allocated_bytes(),
-			b.allocated_bytes()
-		);
-	}
-
-	#[cfg(not(feature = "bumpalo"))]
 	#[test]
 	fn parsing_beyond_default_arena_capacity_does_not_panic() {
 		use crate::{ComponentValues, EmptyAtomSet, Parser};
