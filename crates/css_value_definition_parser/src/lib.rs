@@ -103,6 +103,8 @@ impl DefType {
 			self.ident_str(),
 			"AnchorName"        // Value<'a, DashedIdent>
 			| "ArcCommand"  // ArcCommand<'a> (contains CommandEndPoint<'a>)
+			| "AutoLineColorList"  // contains RepeatLineColor<'a> and LineColorOrRepeat<'a>
+			| "AutoLineStyleList"  // contains RepeatLineStyle<'a> and LineStyleOrRepeat<'a>
 			| "AutoLineWidthList"  // contains Repeat<'a> and LineWidthOrRepeat<'a>
 			| "BasicShape"  // contains PolygonFunction<'a> and ShapeFunction<'a>
 			| "BasicShapeRect"  // contains InsetFunction<'a>, ShapeRectFunction<'a>, XywhFunction<'a>
@@ -145,6 +147,10 @@ impl DefType {
 			| "Image"          // contains Gradient<'a>
 			| "Image1d"  // contains StripesFunction<'a>
 			| "InsetValue"  // contains CalcableValue<'a, LengthPercentage>
+			| "LineColorList"  // contains LineColorOrRepeat<'a>
+			| "LineColorOrRepeat"  // contains Color<'a> and RepeatLineColor<'a>
+			| "LineStyleList"  // contains LineStyleOrRepeat<'a>
+			| "LineStyleOrRepeat"  // contains RepeatLineStyle<'a>
 			| "LineCommand"  // LineCommand<'a> (contains CommandEndPoint<'a>)
 			| "LineWidth"  // LineWidth<'a> (Length variant wraps CalcableValue<'a, Length>)
 			| "LineWidthList"  // contains LineWidthOrRepeat<'a>
