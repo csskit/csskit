@@ -281,11 +281,6 @@ Auto: size=12 align=4 {
 AutoFillOrFit: size=16 align=4
     0: AutoFill
     1: AutoFit
-AutoLineWidthList: size=128 align=8 {
-    start_items: 0
-    auto_repeat: 24
-    end_items: 104
-}
 AutoTrackList: size=296 align=8 {
     start_leading_names: 0
     start_items: 56
@@ -1121,7 +1116,7 @@ ColumnRuleBreakStyleValue: size=16 align=4
     0: None
     1: Normal
     2: Intersection
-ColumnRuleColorStyleValue: size=32 align=8
+ColumnRuleColorStyleValue: size=40 align=8
     0: LineColorList
     1: AutoLineColorList
 ColumnRuleInsetCapEndStyleValue: size=48 align=8 {
@@ -1154,7 +1149,7 @@ ColumnRuleInsetStyleValue: size=208 align=8 {
     0: 0
     1: 96
 }
-ColumnRuleStyleStyleValue: size=32 align=8
+ColumnRuleStyleStyleValue: size=40 align=8
     0: LineStyleList
     1: AutoLineStyleList
 ColumnRuleStyleValue: size=32 align=8 {
@@ -1165,7 +1160,7 @@ ColumnRuleVisibilityItemsStyleValue: size=16 align=4
     1: Around
     2: Between
     3: Normal
-ColumnRuleWidthStyleValue: size=144 align=8
+ColumnRuleWidthStyleValue: size=40 align=8
     0: LineWidthList
     1: AutoLineWidthList
 ColumnSpanStyleValue: size=32 align=8
@@ -5914,6 +5909,12 @@ LineBreakStyleValue: size=16 align=4
 LineClampStyleValue: size=80 align=8 {
     0: 0
 }
+LineColorList: size=24 align=8 {
+    0: 0
+}
+LineColorOrRepeat: size=88 align=8
+    0: Color
+    1: RepeatFunction
 LineCommand: size=160 align=8 {
     keyword: 0
     point: 16
@@ -5957,6 +5958,12 @@ LineStyle: size=16 align=4
     7: Ridge
     8: Inset
     9: Outset
+LineStyleList: size=24 align=8 {
+    0: 0
+}
+LineStyleOrRepeat: size=88 align=8
+    0: LineStyle
+    1: RepeatFunction
 LineWidth: size=32 align=8
     0: Thin
     1: Medium
@@ -8275,7 +8282,7 @@ RowRuleBreakStyleValue: size=16 align=4
     0: None
     1: Normal
     2: Intersection
-RowRuleColorStyleValue: size=32 align=8
+RowRuleColorStyleValue: size=40 align=8
     0: LineColorList
     1: AutoLineColorList
 RowRuleInsetCapEndStyleValue: size=48 align=8 {
@@ -8308,7 +8315,7 @@ RowRuleInsetStyleValue: size=208 align=8 {
     0: 0
     1: 96
 }
-RowRuleStyleStyleValue: size=32 align=8
+RowRuleStyleStyleValue: size=40 align=8
     0: LineStyleList
     1: AutoLineStyleList
 RowRuleStyleValue: size=32 align=8 {
@@ -8319,7 +8326,7 @@ RowRuleVisibilityItemsStyleValue: size=16 align=4
     1: Around
     2: Between
     3: Normal
-RowRuleWidthStyleValue: size=144 align=8
+RowRuleWidthStyleValue: size=40 align=8
     0: LineWidthList
     1: AutoLineWidthList
 RubyAlignStyleValue: size=16 align=4
@@ -8366,7 +8373,7 @@ Rule: size=224 align=16
 RuleBreakStyleValue: size=16 align=4 {
     0: 0
 }
-RuleColorStyleValue: size=32 align=8 {
+RuleColorStyleValue: size=40 align=8 {
     0: 0
 }
 RuleInsetCapStyleValue: size=96 align=8 {
@@ -8387,7 +8394,7 @@ RuleInsetStyleValue: size=208 align=8 {
 RuleOverlapStyleValue: size=16 align=4
     0: RowOverColumn
     1: ColumnOverRow
-RuleStyleStyleValue: size=32 align=8 {
+RuleStyleStyleValue: size=40 align=8 {
     0: 0
 }
 RuleStyleValue: size=32 align=8 {
@@ -8396,7 +8403,7 @@ RuleStyleValue: size=32 align=8 {
 RuleVisibilityItemsStyleValue: size=16 align=4 {
     0: 0
 }
-RuleWidthStyleValue: size=144 align=8 {
+RuleWidthStyleValue: size=40 align=8 {
     0: 0
 }
 RunningStyleValue: size=24 align=8 {
