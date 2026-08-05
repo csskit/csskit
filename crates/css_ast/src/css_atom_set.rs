@@ -604,6 +604,7 @@ pub enum CssAtomSet {
 	CrispEdges,
 	Crispedges,
 	Crop,
+	CrossFade,
 	Crosshair,
 	Cs,
 	Csymbol,
