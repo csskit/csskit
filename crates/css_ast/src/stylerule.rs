@@ -46,7 +46,7 @@ macro_rules! apply_rules {
 			Container(ContainerRule<'a>): "container",
 			Layer(LayerRule<'a>): "layer",
 			Media(MediaRule<'a>): "media",
-			Scope(ScopeRule): "scope",
+			Scope(ScopeRule<'a>): "scope",
 		}
 	};
 }
@@ -169,6 +169,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@supports selector(a){color:red;b{color:blue;}}}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@container (width>0){color:red;}}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@layer foo{color:red;}}");
+		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@scope(.card) to (img){color:red;}}");
 	}
 
 	#[test]

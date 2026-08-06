@@ -65,7 +65,7 @@ macro_rules! apply_rules {
 			Namespace(NamespaceRule): CssAtomSet::Namespace,
 			Page(PageRule<'a>): CssAtomSet::Page,
 			Property(PropertyRule<'a>): CssAtomSet::Property,
-			Scope(ScopeRule): CssAtomSet::Scope,
+			Scope(ScopeRule<'a>): CssAtomSet::Scope,
 			StartingStyle(StartingStyleRule<'a>): CssAtomSet::StartingStyle,
 
 			// Deprecated Rules

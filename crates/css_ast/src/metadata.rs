@@ -75,6 +75,7 @@ impl NodeId {
 			Self::NamespaceRule => Some(AtRuleId::Namespace),
 			Self::PageRule => Some(AtRuleId::Page),
 			Self::PropertyRule => Some(AtRuleId::Property),
+			Self::ScopeRule => Some(AtRuleId::Scope),
 			Self::StartingStyleRule => Some(AtRuleId::StartingStyle),
 			Self::SupportsRule => Some(AtRuleId::Supports),
 			Self::WebkitKeyframesRule => Some(AtRuleId::WebkitKeyframes),

@@ -8532,6 +8532,26 @@ ScanMediaFeature: size=68 align=4
 ScanMediaFeatureKeyword: size=16 align=4
     0: Interlace
     1: Progressive
+ScopeEnd: size=64 align=8 {
+    0: 0
+    1: 12
+    2: 24
+    3: 48
+}
+ScopeRule: size=176 align=16 {
+    name: 0
+    start: 16
+    end: 32
+    block: 48
+}
+ScopeRuleBlock: size=128 align=16 {
+    0: 0
+}
+ScopeStart: size=56 align=8 {
+    0: 0
+    1: 16
+    2: 40
+}
 ScriptingMediaFeature: size=68 align=4
     0: WithValue
     1: Bare
