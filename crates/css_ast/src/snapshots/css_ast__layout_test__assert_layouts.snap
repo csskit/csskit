@@ -216,6 +216,13 @@ AspectRatioContainerFeature: size=240 align=8
     1: Right
     2: Range
     3: Exact
+AspectRatioMediaFeature: size=240 align=8
+    0: Left
+    1: Right
+    2: Range
+    3: Min
+    4: Max
+    5: Exact
 AspectRatioStyleValue: size=88 align=8 {
     auto: 0
     ratio: 16
@@ -4450,6 +4457,13 @@ DashedIdent: size=12 align=4 {
 Decibel: size=12 align=4 {
     0: 0
 }
+DeviceAspectRatioMediaFeature: size=240 align=8
+    0: Left
+    1: Right
+    2: Range
+    3: Min
+    4: Max
+    5: Exact
 DeviceHeightMediaFeature: size=128 align=4
     0: Left
     1: Right
@@ -5500,15 +5514,15 @@ HyphensStyleValue: size=16 align=4
 Id: size=12 align=4 {
     0: 0
 }
-IfCondition: size=224 align=8
+IfCondition: size=240 align=8
     0: Else
     1: Expr
-IfConditionExpr: size=216 align=8
+IfConditionExpr: size=232 align=8
     0: Is
     1: Not
     2: And
     3: Or
-IfTest: size=192 align=8
+IfTest: size=208 align=8
     0: SupportsDeclaration
     1: Supports
     2: Media
@@ -6461,12 +6475,12 @@ MaxWidthStyleValue: size=288 align=8
     10: _MozMaxContent
     11: _WebkitMinContent
     12: _MozMinContent
-MediaCondition: size=152 align=8
+MediaCondition: size=168 align=8
     0: Is
     1: Not
     2: And
     3: Or
-MediaFeature: size=132 align=4
+MediaFeature: size=144 align=8
     0: AnyHover
     1: AnyPointer
     2: AspectRatio
@@ -6526,7 +6540,7 @@ MediaFeature: size=132 align=4
 MediaPreCondition: size=16 align=4
     0: Not
     1: Only
-MediaQuery: size=200 align=8 {
+MediaQuery: size=216 align=8 {
     precondition: 0
     media_type: 16
     and: 32
@@ -8214,6 +8228,16 @@ Resolution: size=16 align=4
     1: Dpcm
     2: Dppx
     3: X
+ResolutionMediaFeature: size=136 align=4
+    0: Left
+    1: Right
+    2: Range
+    3: Min
+    4: Max
+    5: Exact
+ResolutionMediaFeatureValue: size=20 align=4
+    0: Infinite
+    1: Resolution
 ResolutionOrType: size=48 align=8
     0: Resolution
     1: Type
@@ -10688,6 +10712,13 @@ Unresolved: size=32 align=8 {
     tokens: 0
     expected: 24
 }
+UpdateMediaFeature: size=68 align=4
+    0: WithValue
+    1: Bare
+UpdateMediaFeatureKeyword: size=16 align=4
+    0: None
+    1: Slow
+    2: Fast
 Url: size=40 align=4
     0: Url
     1: UrlFunction

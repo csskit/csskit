@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{AtRuleId, NodeKinds};
+use css_parse::Box;
 
 mod features;
 pub use features::*;
@@ -146,14 +147,14 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 pub enum MediaCondition<'a> {
-	Is(MediaFeature),
-	Not(T![Ident], MediaFeature),
-	And(Vec<'a, (MediaFeature, Option<T![Ident]>)>),
-	Or(Vec<'a, (MediaFeature, Option<T![Ident]>)>),
+	Is(MediaFeature<'a>),
+	Not(T![Ident], MediaFeature<'a>),
+	And(Vec<'a, (MediaFeature<'a>, Option<T![Ident]>)>),
+	Or(Vec<'a, (MediaFeature<'a>, Option<T![Ident]>)>),
 }
 
 impl<'a> FeatureConditionList<'a> for MediaCondition<'a> {
-	type FeatureCondition = MediaFeature;
+	type FeatureCondition = MediaFeature<'a>;
 	fn keyword_is_not<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -172,16 +173,16 @@ impl<'a> FeatureConditionList<'a> for MediaCondition<'a> {
 	{
 		p.equals_atom(c, &CssAtomSet::Or)
 	}
-	fn build_is(feature: MediaFeature) -> Self {
+	fn build_is(feature: MediaFeature<'a>) -> Self {
 		Self::Is(feature)
 	}
-	fn build_not(keyword: T![Ident], feature: MediaFeature) -> Self {
+	fn build_not(keyword: T![Ident], feature: MediaFeature<'a>) -> Self {
 		Self::Not(keyword, feature)
 	}
-	fn build_and(feature: Vec<'a, (MediaFeature, Option<T![Ident]>)>) -> Self {
+	fn build_and(feature: Vec<'a, (MediaFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::And(feature)
 	}
-	fn build_or(feature: Vec<'a, (MediaFeature, Option<T![Ident]>)>) -> Self {
+	fn build_or(feature: Vec<'a, (MediaFeature<'a>, Option<T![Ident]>)>) -> Self {
 		Self::Or(feature)
 	}
 }
@@ -196,13 +197,13 @@ impl<'a> Parse<'a> for MediaCondition<'a> {
 }
 
 macro_rules! media_feature {
-	( $($name: ident($typ: ident): $pat: pat,)+) => {
+	( $($name: ident($typ: ty): $pat: pat,)+) => {
 		/// <https://drafts.csswg.org/mediaqueries-5/#media-descriptor-table>
 		#[node]
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
-		pub enum MediaFeature {
+		pub enum MediaFeature<'a> {
 			$($name($typ),)+
 			#[cfg_attr(feature = "visitable", visit(skip))]
 			Hack(HackMediaFeature),
@@ -212,11 +213,11 @@ macro_rules! media_feature {
 
 apply_medias!(media_feature);
 
-impl<'a> Peek<'a> for MediaFeature {
+impl<'a> Peek<'a> for MediaFeature<'a> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::LeftParen]);
 }
 
-impl<'a> Parse<'a> for MediaFeature {
+impl<'a> Parse<'a> for MediaFeature<'a> {
 	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -224,11 +225,11 @@ impl<'a> Parse<'a> for MediaFeature {
 		let checkpoint = p.checkpoint();
 		let mut c = p.peek_n(2);
 		macro_rules! match_media {
-			( $($name: ident($typ: ident): $pat: pat,)+) => {
+			( $($name: ident($typ: ty): $pat: pat,)+) => {
 				// Only peek at the token as the underlying media feature parser needs to parse the leading ident.
 				{
 					match p.to_atom::<CssAtomSet>(c) {
-						$($pat => $typ::parse(p).map(Self::$name),)+
+						$($pat => <$typ>::parse(p).map(Self::$name),)+
 						_ => Err(Diagnostic::new(c, Diagnostic::expected_ident))?
 					}
 				}
@@ -241,10 +242,11 @@ impl<'a> Parse<'a> for MediaFeature {
 			})?;
 			Ok(value)
 		} else {
-			// Styles like (1em < width < 1em) or (1em <= width <= 1em)
-			c = p.peek_n(4);
-			if c != Kind::Ident {
-				c = p.peek_n(5)
+			// Styles like (1em < width < 1em), (1em <= width <= 1em) or (1/1 <= aspect-ratio <= 2/1)
+			let mut n = 3;
+			while c != Kind::Ident && c != Kind::RightParen && n <= 7 {
+				c = p.peek_n(n);
+				n += 1;
 			}
 			if c != Kind::Ident {
 				c = p.next();
@@ -262,11 +264,11 @@ macro_rules! apply_medias {
 
 			AnyHover(AnyHoverMediaFeature): CssAtomSet::AnyHover,
 			AnyPointer(AnyPointerMediaFeature): CssAtomSet::AnyPointer,
-			AspectRatio(AspectRatioMediaFeature): CssAtomSet::AspectRatio | CssAtomSet::MinAspectRatio | CssAtomSet::MaxAspectRatio,
+			AspectRatio(Box<'a, AspectRatioMediaFeature<'a>>): CssAtomSet::AspectRatio | CssAtomSet::MinAspectRatio | CssAtomSet::MaxAspectRatio,
 			Color(ColorMediaFeature): CssAtomSet::Color | CssAtomSet::MaxColor | CssAtomSet::MinColor,
 			ColorGamut(ColorGamutMediaFeature): CssAtomSet::ColorGamut,
 			ColorIndex(ColorIndexMediaFeature): CssAtomSet::ColorIndex | CssAtomSet::MaxColorIndex | CssAtomSet::MinColorIndex,
-			DeviceAspectRatio(DeviceAspectRatioMediaFeature): CssAtomSet::DeviceAspectRatio | CssAtomSet::MaxDeviceAspectRatio | CssAtomSet::MinDeviceAspectRatio,
+			DeviceAspectRatio(Box<'a, DeviceAspectRatioMediaFeature<'a>>): CssAtomSet::DeviceAspectRatio | CssAtomSet::MaxDeviceAspectRatio | CssAtomSet::MinDeviceAspectRatio,
 			DeviceHeight(DeviceHeightMediaFeature): CssAtomSet::DeviceHeight | CssAtomSet::MaxDeviceHeight | CssAtomSet::MinDeviceHeight,
 			DeviceWidth(DeviceWidthMediaFeature): CssAtomSet::DeviceWidth | CssAtomSet::MaxDeviceWidth | CssAtomSet::MinDeviceWidth,
 			DisplayMode(DisplayModeMediaFeature): CssAtomSet::DisplayMode,
@@ -401,6 +403,30 @@ mod tests {
 		);
 		assert_parse!(CssAtomSet::ATOMS, MediaQuery, "(hover)and (pointer)");
 		assert_parse!(CssAtomSet::ATOMS, MediaQuery, "(hover)or (pointer)");
+		assert_parse!(CssAtomSet::ATOMS, MediaFeature, "(aspect-ratio:16/9)", MediaFeature::AspectRatio(_));
+		assert_parse!(CssAtomSet::ATOMS, MediaFeature, "(1/1<aspect-ratio<16/9)", MediaFeature::AspectRatio(_));
+		assert_parse!(CssAtomSet::ATOMS, MediaFeature, "(1/1<=aspect-ratio<=16/9)", MediaFeature::AspectRatio(_));
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			MediaFeature,
+			"(min-device-aspect-ratio:16/9)",
+			MediaFeature::DeviceAspectRatio(_)
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			MediaFeature,
+			"(min-resolution:2dppx)",
+			MediaFeature::Resolution(ResolutionMediaFeature::Min(..))
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			MediaFeature,
+			"(2dppx<resolution)",
+			MediaFeature::Resolution(ResolutionMediaFeature::Right(..))
+		);
+		assert_parse!(CssAtomSet::ATOMS, MediaFeature, "(update:fast)", MediaFeature::Update(_));
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(aspect-ratio:16/9){a{color:red}}");
+		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media(update:none)and (resolution>=2x){}");
 		// assert_parse!(CssAtomSet::ATOMS, MediaQuery, "not ((width: 2px) or (width: 3px))");
 		// assert_parse!(CssAtomSet::ATOMS, MediaQuery, "not ((hover) or (pointer))");
 		assert_parse!(CssAtomSet::ATOMS, MediaRule, "@media print{}");
