@@ -6172,6 +6172,18 @@ MaskCompositeStyleValue: size=24 align=8 {
 MaskImageStyleValue: size=24 align=8 {
     0: 0
 }
+MaskLayer: size=392 align=8 {
+    image: 0
+    position: 56
+    repeat: 272
+    origin: 308
+    clip: 332
+    composite: 360
+    mode: 376
+}
+MaskLayerClip: size=28 align=4
+    0: GeometryBox
+    1: NoClip
 MaskModeStyleValue: size=24 align=8 {
     0: 0
 }
