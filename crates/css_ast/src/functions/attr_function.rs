@@ -26,7 +26,7 @@ pub struct AttrFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct AttrFunctionParams<'a>(
 	AttrName,
-	Option<AttrType>,
+	Option<AttrType<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
 	Option<ComponentValues<'a>>,
 );
@@ -75,9 +75,9 @@ impl<'a> Parse<'a> for AttrName {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub enum AttrType {
+pub enum AttrType<'a> {
 	#[atom(CssAtomSet::Type)]
-	Type(T![Function], Syntax, #[semantic_eq(skip)] T![')']),
+	Type(T![Function], Syntax<'a>, #[semantic_eq(skip)] T![')']),
 	#[atom(CssAtomSet::RawString)]
 	RawString(T![Ident]),
 	Unit(T![Ident]),

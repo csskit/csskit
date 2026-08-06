@@ -10,9 +10,9 @@ use derive_atom_set::AtomSet;
 /// use css_parse::AtomSet;
 ///
 /// assert_eq!(CssAtomSet::from_str("px"), CssAtomSet::Px);
-/// assert_eq!(CssAtomSet::from_str("%"), CssAtomSet::Percentage);
+/// assert_eq!(CssAtomSet::from_str("%"), CssAtomSet::Percent);
 /// assert_eq!(CssAtomSet::Px.to_str(), "px");
-/// assert_eq!(CssAtomSet::Percentage.to_str(), "%");
+/// assert_eq!(CssAtomSet::Percent.to_str(), "%");
 /// ```
 #[csskit_proc_macro::node]
 #[derive(AtomSet, Debug, Default, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -59,7 +59,7 @@ pub enum CssAtomSet {
 	Ms,
 	Pc,
 	#[atom("%")]
-	Percentage,
+	Percent,
 	Pt,
 	Px,
 	Q,
@@ -137,6 +137,7 @@ pub enum CssAtomSet {
 	AnchorValid,
 	AnchorVisible,
 	And,
+	Angle,
 	Animate,
 	Animatemotion,
 	Animatetransform,
@@ -620,6 +621,7 @@ pub enum CssAtomSet {
 	Cursor,
 	Curve,
 	Custom,
+	CustomIdent,
 	Cw,
 	Cyan,
 	Cyclic,
@@ -1091,6 +1093,7 @@ pub enum CssAtomSet {
 	InsetInlineStart,
 	Inside,
 	Int,
+	Integer,
 	InterCharacter,
 	InterWord,
 	Interactivity,
@@ -1178,6 +1181,8 @@ pub enum CssAtomSet {
 	Legacy,
 	Legend,
 	Lemonchiffon,
+	Length,
+	LengthPercentage,
 	Leq,
 	Less,
 	LetterSpacing,
@@ -1509,6 +1514,7 @@ pub enum CssAtomSet {
 	NthLastCol,
 	NthLastOfType,
 	NthOfType,
+	Number,
 	Numbers,
 	Numeric,
 	NumericOnly,
@@ -1650,6 +1656,7 @@ pub enum CssAtomSet {
 	Peachpuff,
 	PerLine,
 	PerLineAll,
+	Percentage,
 	Perceptual,
 	Performance,
 	Permission,
@@ -2252,6 +2259,8 @@ pub enum CssAtomSet {
 	Traditional,
 	Transform,
 	TransformBox,
+	TransformFunction,
+	TransformList,
 	TransformOrigin,
 	TransformStyle,
 	Transition,
@@ -3200,7 +3209,7 @@ fn test_css_atom_set() {
 	assert_eq!(CssAtomSet::from_str("url"), CssAtomSet::Url);
 	assert_eq!(CssAtomSet::from_str("uRl"), CssAtomSet::Url);
 	assert_eq!(CssAtomSet::from_str("URL"), CssAtomSet::Url);
-	assert_eq!(CssAtomSet::from_str("%"), CssAtomSet::Percentage);
+	assert_eq!(CssAtomSet::from_str("%"), CssAtomSet::Percent);
 	assert_eq!(CssAtomSet::from_str("q"), CssAtomSet::Q);
 	assert_eq!(CssAtomSet::from_str("Q"), CssAtomSet::Q);
 	assert_eq!(CssAtomSet::from_str("s"), CssAtomSet::S);
@@ -3220,7 +3229,7 @@ fn test_css_atom_set() {
 	assert_eq!(CssAtomSet::from_str("grad"), CssAtomSet::Grad);
 
 	assert_eq!(CssAtomSet::_None.len(), 0);
-	assert_eq!(CssAtomSet::Percentage.len(), 1);
+	assert_eq!(CssAtomSet::Percent.len(), 1);
 	assert_eq!(CssAtomSet::Q.len(), 1);
 	assert_eq!(CssAtomSet::S.len(), 1);
 	assert_eq!(CssAtomSet::X.len(), 1);
@@ -3243,7 +3252,7 @@ fn test_css_atom_set() {
 		CssAtomSet::Px,
 		CssAtomSet::Em,
 		CssAtomSet::Rem,
-		CssAtomSet::Percentage,
+		CssAtomSet::Percent,
 		CssAtomSet::Url,
 		CssAtomSet::Turn,
 		CssAtomSet::Grad,
@@ -3262,11 +3271,11 @@ fn test_css_atom_set() {
 	assert_eq!(CssAtomSet::from_bits(0), CssAtomSet::_None);
 	assert_eq!(CssAtomSet::from_bits(9999), CssAtomSet::_None);
 
-	assert_eq!(CssAtomSet::Percentage.len(), 1);
+	assert_eq!(CssAtomSet::Percent.len(), 1);
 
 	assert_eq!(CssAtomSet::Px.to_str(), "px");
 	assert_eq!(CssAtomSet::Em.to_str(), "em");
-	assert_eq!(CssAtomSet::Percentage.to_str(), "%");
+	assert_eq!(CssAtomSet::Percent.to_str(), "%");
 	assert_eq!(CssAtomSet::Url.to_str(), "url");
 	assert_eq!(CssAtomSet::_None.to_str(), "");
 	assert_eq!(CssAtomSet::Cqmax.to_str(), "cqmax");
