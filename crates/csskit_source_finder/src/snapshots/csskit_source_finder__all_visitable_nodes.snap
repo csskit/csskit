@@ -1207,6 +1207,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct ScalexFunction < \'a > { }",
   "pub struct ScaleyFunction < \'a > { }",
   "pub struct ScalezFunction < \'a > { }",
+  "pub struct ScopeRule < \'a > { }",
   "pub struct ScrollMarginBlockEndStyleValue < \'a > { }",
   "pub struct ScrollMarginBlockStartStyleValue < \'a > { }",
   "pub struct ScrollMarginBlockStyleValue < \'a > { }",
