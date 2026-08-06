@@ -10475,6 +10475,9 @@ TextWrapStyleValue: size=32 align=4 {
 Time: size=16 align=4
     0: Ms
     1: S
+TimelineRangeCenterSubject: size=16 align=4
+    0: Source
+    1: Target
 TimelineRangeName: size=16 align=4
     0: Cover
     1: Contain
