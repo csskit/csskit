@@ -70,6 +70,7 @@ impl NodeId {
 			Self::DocumentRule => Some(AtRuleId::Document),
 			Self::FontFaceRule => Some(AtRuleId::FontFace),
 			Self::FontFeatureValuesRule => Some(AtRuleId::FontFeatureValues),
+			Self::FontPaletteValuesRule => Some(AtRuleId::FontPaletteValues),
 			Self::KeyframesRule => Some(AtRuleId::Keyframes),
 			Self::LayerRule => Some(AtRuleId::Layer),
 			Self::MediaRule => Some(AtRuleId::Media),
