@@ -41,6 +41,8 @@ impl SemanticKind {
 			| NodeId::KeyframesRule
 			| NodeId::SupportsRule
 			| NodeId::FontFaceRule
+			| NodeId::FontFeatureValuesRule
+			| NodeId::FontFeatureValueTypeRule
 			| NodeId::ContainerRule
 			| NodeId::PageRule
 			| NodeId::LayerRule

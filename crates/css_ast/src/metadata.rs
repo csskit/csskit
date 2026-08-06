@@ -69,6 +69,7 @@ impl NodeId {
 			Self::CounterStyleRule => Some(AtRuleId::CounterStyle),
 			Self::DocumentRule => Some(AtRuleId::Document),
 			Self::FontFaceRule => Some(AtRuleId::FontFace),
+			Self::FontFeatureValuesRule => Some(AtRuleId::FontFeatureValues),
 			Self::KeyframesRule => Some(AtRuleId::Keyframes),
 			Self::LayerRule => Some(AtRuleId::Layer),
 			Self::MediaRule => Some(AtRuleId::Media),
