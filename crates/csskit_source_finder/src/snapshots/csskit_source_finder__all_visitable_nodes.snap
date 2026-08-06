@@ -531,6 +531,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum TextWrapModeStyleValue { }",
   "pub enum TextWrapStyleStyleValue { }",
   "pub enum Time { }",
+  "pub enum TimelineRangeCenterSubject { }",
   "pub enum TimelineRangeName { }",
   "pub enum TimelineScopeStyleValue < \'a > { }",
   "pub enum Todo { }",
