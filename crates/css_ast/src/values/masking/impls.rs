@@ -33,6 +33,15 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, MaskPositionStyleValue, "-20% -30px");
 		assert_parse!(CssAtomSet::ATOMS, MaskPositionStyleValue, "left center");
 		assert_parse!(CssAtomSet::ATOMS, MaskPositionStyleValue, "center center");
+
+		assert_parse!(CssAtomSet::ATOMS, MaskStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, MaskStyleValue, "url(mask.svg) luminance");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			MaskStyleValue,
+			"url(mask.svg) center / cover no-repeat border-box no-clip add alpha"
+		);
+		assert_parse!(CssAtomSet::ATOMS, MaskStyleValue, "url(a.svg), url(b.svg) add");
 	}
 
 	#[test]
@@ -57,5 +66,8 @@ mod tests {
 		assert_peek_false!(CssAtomSet::ATOMS, MaskPositionStyleValue, "auto");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskPositionStyleValue, "1px 2px 3px");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskPositionStyleValue, "left right");
+
+		assert_peek_false!(CssAtomSet::ATOMS, MaskStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, MaskStyleValue, "url(a.svg) url(b.svg)");
 	}
 }
