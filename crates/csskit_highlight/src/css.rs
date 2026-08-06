@@ -51,6 +51,7 @@ impl SemanticKind {
 			| NodeId::PropertyRule
 			| NodeId::CounterStyleRule
 			| NodeId::NamespaceRule
+			| NodeId::ColorProfileRule
 			| NodeId::ScopeRule
 			| NodeId::StartingStyleRule => Some(SemanticKind::AtKeyword),
 

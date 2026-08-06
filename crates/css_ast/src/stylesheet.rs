@@ -53,7 +53,7 @@ macro_rules! apply_rules {
 	($macro: ident) => {
 		$macro! {
 			Charset(CharsetRule): CssAtomSet::Charset,
-			ColorProfile(ColorProfileRule): CssAtomSet::ColorProfile,
+			ColorProfile(ColorProfileRule<'a>): CssAtomSet::ColorProfile,
 			Container(ContainerRule<'a>): CssAtomSet::Container,
 			CounterStyle(CounterStyleRule<'a>): CssAtomSet::CounterStyle,
 			FontFace(FontFaceRule<'a>): CssAtomSet::FontFace,

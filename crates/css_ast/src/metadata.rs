@@ -64,6 +64,7 @@ impl NodeId {
 	pub fn to_at_rule_id(self) -> Option<AtRuleId> {
 		match self {
 			Self::CharsetRule => Some(AtRuleId::Charset),
+			Self::ColorProfileRule => Some(AtRuleId::ColorProfile),
 			Self::ContainerRule => Some(AtRuleId::Container),
 			Self::CounterStyleRule => Some(AtRuleId::CounterStyle),
 			Self::DocumentRule => Some(AtRuleId::Document),

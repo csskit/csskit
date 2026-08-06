@@ -188,7 +188,10 @@ fn main() {
 			let ident = node.ident();
 			if matches!(
 				ident.to_string().as_str(),
-				"FontFaceRuleStyleValue" | "PropertyRuleStyleValue" | "CounterStyleRuleStyleValue"
+				"FontFaceRuleStyleValue"
+					| "PropertyRuleStyleValue"
+					| "CounterStyleRuleStyleValue"
+					| "ColorProfileRuleStyleValue"
 			) {
 				return None;
 			}
