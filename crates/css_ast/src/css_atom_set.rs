@@ -674,6 +674,7 @@ pub enum CssAtomSet {
 	Determinant,
 	Devanagari,
 	DeviceAspectRatio,
+	DeviceCmyk,
 	DeviceHeight,
 	DeviceWidth,
 	Dfn,
