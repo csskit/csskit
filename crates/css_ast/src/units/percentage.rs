@@ -8,7 +8,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Dimension)]
-pub struct Percentage(#[atom(CssAtomSet::Percentage)] T![Dimension]);
+pub struct Percentage(#[atom(CssAtomSet::Percent)] T![Dimension]);
 
 impl Percentage {
 	pub fn value(&self) -> f32 {
