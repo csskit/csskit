@@ -72,6 +72,7 @@ mod image;
 mod image_1d;
 mod inflexible_breadth;
 mod inset_value;
+mod integer_or_infinite;
 mod isolation_mode;
 mod layout_box;
 mod line_color_list;
@@ -222,6 +223,7 @@ pub use image::*;
 pub use image_1d::*;
 pub use inflexible_breadth::*;
 pub use inset_value::*;
+pub use integer_or_infinite::*;
 pub use isolation_mode::*;
 pub use layout_box::*;
 pub use line_color_list::*;
@@ -310,6 +312,7 @@ mod prelude {
 
 // Type aliases for primitive CSS types referenced in syntax definitions
 pub type Integer = crate::CSSInt;
+pub type IntegerInfinite<'a> = crate::IntegerOrInfinite<'a>;
 pub type String = css_parse::T![String];
 pub type Number = css_parse::T![Number];
 pub type Uri = crate::Url;

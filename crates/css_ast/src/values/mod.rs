@@ -165,7 +165,7 @@ pub use writing_modes::*;
 // Re-export counter_style rules
 pub use crate::rules::{
 	AdditiveSymbolsStyleValue, FallbackStyleValue, NegativeStyleValue, PadStyleValue, PrefixStyleValue,
-	SpeakAsStyleValue, SuffixStyleValue, SymbolsStyleValue, SystemStyleValue,
+	RangeStyleValue, SpeakAsStyleValue, SuffixStyleValue, SymbolsStyleValue, SystemStyleValue,
 };
 
 mod prelude {
