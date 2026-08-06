@@ -58,7 +58,7 @@ macro_rules! apply_rules {
 			CounterStyle(CounterStyleRule<'a>): CssAtomSet::CounterStyle,
 			FontFace(FontFaceRule<'a>): CssAtomSet::FontFace,
 			FontFeatureValues(FontFeatureValuesRule<'a>): CssAtomSet::FontFeatureValues,
-			FontPaletteValues(FontPaletteValuesRule): CssAtomSet::FontPaletteValues,
+			FontPaletteValues(FontPaletteValuesRule<'a>): CssAtomSet::FontPaletteValues,
 			Keyframes(KeyframesRule<'a>): CssAtomSet::Keyframes,
 			Layer(LayerRule<'a>): CssAtomSet::Layer,
 			Media(MediaRule<'a>): CssAtomSet::Media,

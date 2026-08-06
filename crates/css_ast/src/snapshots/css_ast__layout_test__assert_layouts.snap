@@ -347,6 +347,10 @@ BackgroundSizeStyleValue: size=24 align=8 {
 BackgroundStyleValue: size=24 align=8 {
     0: 0
 }
+BasePaletteValue: size=32 align=8
+    0: Light
+    1: Dark
+    2: Integer
 BaselineMetric: size=16 align=4
     0: TextBottom
     1: Alphabetic
@@ -4976,6 +4980,22 @@ FontPaletteStyleValue: size=240 align=8
     2: Dark
     3: PaletteIdentifier
     4: PaletteMixFunction
+FontPaletteValuesFontFamilyValue: size=24 align=8 {
+    0: 0
+}
+FontPaletteValuesRule: size=144 align=16 {
+    name: 0
+    prelude: 12
+    block: 32
+}
+FontPaletteValuesRuleBlock: size=112 align=16 {
+    0: 0
+}
+FontPaletteValuesRuleStyleValue: size=40 align=8
+    0: FontFamily
+    1: BasePalette
+    2: OverrideColors
+    3: Unknown
 FontSizeAdjustStyleValue: size=48 align=8
     0: None
     1: ExHeightFromFont
@@ -7589,6 +7609,9 @@ OverflowYStyleValue: size=16 align=4
 OverlayStyleValue: size=16 align=4
     0: None
     1: Auto
+OverrideColorsValue: size=24 align=8 {
+    0: 0
+}
 OverscrollBehaviorBlockStyleValue: size=16 align=4
     0: Contain
     1: None
@@ -9009,6 +9032,10 @@ SingleContainIntrinsicSizeStyleValue: size=48 align=8 {
 SingleMaskClipStyleValue: size=32 align=8
     0: CoordBox
     1: NoClip
+SingleOverrideColorsValue: size=56 align=8 {
+    0: 0
+    1: 24
+}
 SinglePointerTimelineStyleValue: size=48 align=8 {
     0: 0
     1: 24

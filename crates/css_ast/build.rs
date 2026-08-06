@@ -193,6 +193,7 @@ fn main() {
 					| "CounterStyleRuleStyleValue"
 					| "ColorProfileRuleStyleValue"
 					| "FontFeatureValuesRuleStyleValue"
+					| "FontPaletteValuesRuleStyleValue"
 			) {
 				return None;
 			}

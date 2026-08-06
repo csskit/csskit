@@ -43,6 +43,7 @@ impl SemanticKind {
 			| NodeId::FontFaceRule
 			| NodeId::FontFeatureValuesRule
 			| NodeId::FontFeatureValueTypeRule
+			| NodeId::FontPaletteValuesRule
 			| NodeId::ContainerRule
 			| NodeId::PageRule
 			| NodeId::LayerRule
