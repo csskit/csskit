@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AngleOrNumber, CalcableValue, NoneOr, NumberOrPercentage};
+use crate::{AngleOrNumber, NoneOr, NumberOrPercentage, NumericValue};
 use css_parse::Box;
 
 /// The `from <color>` clause in relative color syntax.
@@ -186,7 +186,7 @@ pub enum ColorChannelKeyword {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum RelativeChannelValue<'a, K> {
 	Keyword(K),
-	Value(NoneOr<CalcableValue<'a, NumberOrPercentage>>),
+	Value(NoneOr<NumericValue<'a, NumberOrPercentage>>),
 }
 
 impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeChannelValue<'a, K> {
@@ -194,7 +194,7 @@ impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeChannelValue<'a, K> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		K::peek(p, c) || NoneOr::<CalcableValue<NumberOrPercentage>>::peek(p, c)
+		K::peek(p, c) || NoneOr::<NumericValue<NumberOrPercentage>>::peek(p, c)
 	}
 }
 
@@ -207,7 +207,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<'a, K> {
 		if let Some(kw) = p.parse_if_peek::<K>()? {
 			Ok(Self::Keyword(kw))
 		} else {
-			Ok(Self::Value(p.parse::<NoneOr<CalcableValue<NumberOrPercentage>>>()?))
+			Ok(Self::Value(p.parse::<NoneOr<NumericValue<NumberOrPercentage>>>()?))
 		}
 	}
 }
@@ -221,7 +221,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeChannelValue<'a, K> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum RelativeHueValue<'a, K> {
 	Keyword(K),
-	Value(NoneOr<CalcableValue<'a, AngleOrNumber>>),
+	Value(NoneOr<NumericValue<'a, AngleOrNumber>>),
 }
 
 impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeHueValue<'a, K> {
@@ -229,7 +229,7 @@ impl<'a, K: Peek<'a> + Parse<'a>> Peek<'a> for RelativeHueValue<'a, K> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		K::peek(p, c) || NoneOr::<CalcableValue<AngleOrNumber>>::peek(p, c)
+		K::peek(p, c) || NoneOr::<NumericValue<AngleOrNumber>>::peek(p, c)
 	}
 }
 
@@ -241,7 +241,7 @@ impl<'a, K: Parse<'a> + Peek<'a>> Parse<'a> for RelativeHueValue<'a, K> {
 		if let Some(kw) = p.parse_if_peek::<K>()? {
 			Ok(Self::Keyword(kw))
 		} else {
-			Ok(Self::Value(p.parse::<NoneOr<CalcableValue<AngleOrNumber>>>()?))
+			Ok(Self::Value(p.parse::<NoneOr<NumericValue<AngleOrNumber>>>()?))
 		}
 	}
 }
@@ -783,10 +783,10 @@ mod chromashift_impl {
 		match v {
 			RelativeChannelValue::Keyword(kw) => Some(origin.channel(kw)),
 			RelativeChannelValue::Value(NoneOr::None(_)) => None,
-			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n)))) => {
+			RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n)))) => {
 				Some(n.value())
 			}
-			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p)))) => {
+			RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p)))) => {
 				Some(p.value() / 100.0 * pct_scale)
 			}
 			RelativeChannelValue::Value(NoneOr::Some(_)) => None,
@@ -797,10 +797,10 @@ mod chromashift_impl {
 		match v {
 			RelativeChannelValue::Keyword(kw) => Some(origin.channel(kw)),
 			RelativeChannelValue::Value(NoneOr::None(_)) => None,
-			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n)))) => {
+			RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n)))) => {
 				Some(n.value() * 100.0)
 			}
-			RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p)))) => {
+			RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p)))) => {
 				Some(p.value())
 			}
 			RelativeChannelValue::Value(NoneOr::Some(_)) => None,
@@ -811,8 +811,8 @@ mod chromashift_impl {
 		match v {
 			RelativeHueValue::Keyword(kw) => Some(origin.channel(kw)),
 			RelativeHueValue::Value(NoneOr::None(_)) => None,
-			RelativeHueValue::Value(NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(n)))) => Some(n.value()),
-			RelativeHueValue::Value(NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(a)))) => {
+			RelativeHueValue::Value(NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(n)))) => Some(n.value()),
+			RelativeHueValue::Value(NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(a)))) => {
 				Some(a.as_degrees())
 			}
 			RelativeHueValue::Value(NoneOr::Some(_)) => None,
@@ -961,10 +961,10 @@ mod chromashift_impl {
 				match v {
 					RelativeChannelValue::Keyword(kw) => Some(unit_from_kw(kw)),
 					RelativeChannelValue::Value(NoneOr::None(_)) => None,
-					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(
-						n,
-					)))) => Some(n.value() as f64),
-					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(
+					RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n)))) => {
+						Some(n.value() as f64)
+					}
+					RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(
 						NumberOrPercentage::Percentage(p),
 					))) => Some(p.value() as f64 / 100.0),
 					RelativeChannelValue::Value(NoneOr::Some(_)) => None,
@@ -975,10 +975,10 @@ mod chromashift_impl {
 				match v {
 					RelativeChannelValue::Keyword(kw) => Some((unit_from_kw(kw) * 100.0) as f32),
 					RelativeChannelValue::Value(NoneOr::None(_)) => None,
-					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(
-						n,
-					)))) => Some(n.value() * 100.0),
-					RelativeChannelValue::Value(NoneOr::Some(CalcableValue::Literal(
+					RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n)))) => {
+						Some(n.value() * 100.0)
+					}
+					RelativeChannelValue::Value(NoneOr::Some(NumericValue::Literal(
 						NumberOrPercentage::Percentage(p),
 					))) => Some(p.value()),
 					RelativeChannelValue::Value(NoneOr::Some(_)) => None,

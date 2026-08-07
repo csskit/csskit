@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CSSInt, CalcableValue};
+use crate::{CSSInt, NumericValue};
 
 /// ```text,ignore
 /// <integer-infinite> = infinite | <integer>
@@ -12,7 +12,7 @@ use crate::{CSSInt, CalcableValue};
 pub enum IntegerOrInfinite<'a> {
 	#[atom(CssAtomSet::Infinite)]
 	Infinite(T![Ident]),
-	Number(CalcableValue<'a, CSSInt>),
+	Number(NumericValue<'a, CSSInt>),
 }
 
 #[cfg(test)]

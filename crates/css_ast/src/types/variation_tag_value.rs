@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CalcableValue, OpentypeTag};
+use crate::{NumericValue, OpentypeTag};
 
 /// Value for `font-variation-settings`: `<opentype-tag> <number>`
 ///
@@ -11,7 +11,7 @@ use crate::{CalcableValue, OpentypeTag};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct VariationTagValue<'a>(pub OpentypeTag, pub CalcableValue<'a, T![Number]>);
+pub struct VariationTagValue<'a>(pub OpentypeTag, pub NumericValue<'a, T![Number]>);
 
 #[cfg(test)]
 mod tests {

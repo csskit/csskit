@@ -1,6 +1,6 @@
 use crate::{
-	AttrFunction, CssAtomSet, CssMetadata, EnvFunction, FirstValidFunction, IfFunction, MathFunction, Unresolved,
-	VarFunction,
+	AttrFunction, CssAtomSet, CssMetadata, EnvFunction, FirstValidFunction, IfFunction, MathFunction,
+	TreeCountingFunction, Unresolved, VarFunction,
 };
 use css_lexer::ToSpan;
 use css_parse::{
@@ -112,6 +112,42 @@ pub enum CalcableSubstitutionFunction<'a, T> {
 	FirstValid(FirstValidFunction<'a, CalcableValue<'a, T>>),
 }
 
+/// Generic wrapper for CSS values whose grammar is an `<integer>` or `<number>`, which permit
+/// everything a [`CalcableValue`] does plus the tree-counting functions (`sibling-count()`,
+/// `sibling-index()`).
+///
+/// <https://drafts.csswg.org/css-values-5/#tree-counting>
+#[node]
+#[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+pub enum NumericValue<'a, T> {
+	Literal(T),
+	Substituted(Box<'a, NumericSubstitutionFunction<'a, T>>),
+	#[peek(skip)]
+	Unresolved(Box<'a, Unresolved<'a>>),
+}
+
+impl_value_slot_parse!(NumericValue, NumericSubstitutionFunction, T);
+
+/// A tree-counting, substitution, or math function appearing in a [`NumericValue`] slot.
+///
+/// Identical to [`CalcableSubstitutionFunction`] except for the `TreeCounting` variant, which is
+/// not a substitution function but is resolved just as late.
+#[node]
+#[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+pub enum NumericSubstitutionFunction<'a, T> {
+	TreeCounting(TreeCountingFunction),
+	Math(MathFunction<'a, T>),
+	Var(VarFunction<'a, NumericValue<'a, T>>),
+	Env(EnvFunction<'a, NumericValue<'a, T>>),
+	Attr(AttrFunction<'a>),
+	If(IfFunction<'a, NumericValue<'a, T>>),
+	FirstValid(FirstValidFunction<'a, NumericValue<'a, T>>),
+}
+
 /// Generates the value-behaviour trait impls (`ToNumberValue`, `ToNormalisedValue`,
 /// `NodeWithMetadata`, `DeclarationValue`) shared verbatim by every value-slot enum.
 macro_rules! impl_value_slot_traits {
@@ -195,15 +231,17 @@ macro_rules! impl_value_slot_traits {
 
 impl_value_slot_traits!(Value);
 impl_value_slot_traits!(CalcableValue);
+impl_value_slot_traits!(NumericValue);
 
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{Color, Length};
-	use css_parse::assert_parse;
+	use crate::{CSSInt, Color, Length};
+	use css_parse::{assert_parse, assert_peek_false};
 
 	type ValueColor<'a> = Value<'a, Color<'a>>;
 	type CalcLength<'a> = CalcableValue<'a, Length>;
+	type NumericInt<'a> = NumericValue<'a, CSSInt>;
 
 	#[test]
 	fn value_literal() {
@@ -265,6 +303,52 @@ mod tests {
 			let CalcableSubstitutionFunction::Var(var) = &*sub else { panic!() };
 			assert!(matches!(var.fallback.as_deref(), Some(CalcableValue::Literal(_))));
 		});
+	}
+
+	#[test]
+	fn numeric_tree_counting_functions() {
+		assert_parse!(CssAtomSet::ATOMS, NumericInt, "sibling-index()", |v| {
+			let NumericValue::Substituted(sub) = v else { panic!() };
+			assert!(matches!(&*sub, NumericSubstitutionFunction::TreeCounting(_)));
+		});
+		assert_parse!(CssAtomSet::ATOMS, NumericInt, "sibling-count()");
+	}
+
+	#[test]
+	fn numeric_covers_alternations_containing_number() {
+		// <number-percentage> and <alpha-value> both admit a bare <number>, so the
+		// tree-counting functions stand in for them too.
+		type NumericNumberPercentage<'a> = NumericValue<'a, crate::NumberPercentage>;
+		type NumericAlpha<'a> = NumericValue<'a, crate::OpacityValue>;
+		assert_parse!(CssAtomSet::ATOMS, NumericNumberPercentage, "sibling-index()");
+		assert_parse!(CssAtomSet::ATOMS, NumericNumberPercentage, "50%");
+		assert_parse!(CssAtomSet::ATOMS, NumericAlpha, "sibling-count()");
+		assert_parse!(CssAtomSet::ATOMS, NumericAlpha, "0.5");
+	}
+
+	#[test]
+	fn numeric_keeps_literal_and_calcable_behaviour() {
+		assert_parse!(CssAtomSet::ATOMS, NumericInt, "3", |v| {
+			assert!(matches!(v, NumericValue::Literal(_)));
+		});
+		assert_parse!(CssAtomSet::ATOMS, NumericInt, "calc(sibling-index() + 1)", |v| {
+			let NumericValue::Substituted(sub) = v else { panic!() };
+			assert!(matches!(&*sub, NumericSubstitutionFunction::Math(_)));
+		});
+	}
+
+	#[test]
+	fn numeric_fallback_recurses_into_numeric_slot() {
+		assert_parse!(CssAtomSet::ATOMS, NumericInt, "var(--i, sibling-index())", |v| {
+			let NumericValue::Substituted(sub) = v else { panic!() };
+			let NumericSubstitutionFunction::Var(var) = &*sub else { panic!() };
+			assert!(matches!(var.fallback.as_deref(), Some(NumericValue::Substituted(_))));
+		});
+	}
+
+	#[test]
+	fn calcable_rejects_tree_counting_functions() {
+		assert_peek_false!(CssAtomSet::ATOMS, CalcLength, "sibling-index()");
 	}
 
 	#[test]

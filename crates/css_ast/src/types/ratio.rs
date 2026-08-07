@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CalcableValue, units::CSSInt};
+use crate::{NumericValue, units::CSSInt};
 
 /// <https://drafts.csswg.org/css-values-4/#ratios>
 ///
@@ -12,10 +12,10 @@ use crate::{CalcableValue, units::CSSInt};
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Ratio<'a> {
-	pub numerator: CalcableValue<'a, CSSInt>,
+	pub numerator: NumericValue<'a, CSSInt>,
 	#[semantic_eq(skip)]
 	pub slash: Option<T![/]>,
-	pub denominator: Option<CalcableValue<'a, CSSInt>>,
+	pub denominator: Option<NumericValue<'a, CSSInt>>,
 }
 
 #[cfg(test)]

@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AngleOrZero, CalcableValue, Color, Length, NonNegative, NumberOrPercentage, Url};
+use crate::{AngleOrZero, CalcableValue, Color, Length, NonNegative, NumberOrPercentage, NumericValue, Url};
 
 /// <https://drafts.csswg.org/filter-effects-1/#typedef-filter-function>
 ///
@@ -82,7 +82,7 @@ pub struct BlurFunction<'a> {
 pub struct BrightnessFunction<'a> {
 	#[atom(CssAtomSet::Brightness)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -96,7 +96,7 @@ pub struct BrightnessFunction<'a> {
 pub struct ContrastFunction<'a> {
 	#[atom(CssAtomSet::Contrast)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -129,7 +129,7 @@ pub struct DropShadowFunction<'a> {
 pub struct GrayscaleFunction<'a> {
 	#[atom(CssAtomSet::Grayscale)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -157,7 +157,7 @@ pub struct HueRotateFunction<'a> {
 pub struct InvertFunction<'a> {
 	#[atom(CssAtomSet::Invert)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -171,7 +171,7 @@ pub struct InvertFunction<'a> {
 pub struct OpacityFunction<'a> {
 	#[atom(CssAtomSet::Opacity)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -185,7 +185,7 @@ pub struct OpacityFunction<'a> {
 pub struct SaturateFunction<'a> {
 	#[atom(CssAtomSet::Saturate)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -199,7 +199,7 @@ pub struct SaturateFunction<'a> {
 pub struct SepiaFunction<'a> {
 	#[atom(CssAtomSet::Sepia)]
 	pub name: T![Function],
-	pub value: Option<CalcableValue<'a, NumberOrPercentage>>,
+	pub value: Option<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

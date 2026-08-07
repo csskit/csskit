@@ -1979,6 +1979,8 @@ pub enum CssAtomSet {
 	Shorter,
 	Show,
 	Shrink,
+	SiblingCount,
+	SiblingIndex,
 	Sides,
 	Sideways,
 	SidewaysLr,

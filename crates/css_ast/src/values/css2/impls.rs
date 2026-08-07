@@ -14,6 +14,13 @@ mod tests {
 	}
 
 	#[test]
+	fn test_z_index_tree_counting() {
+		assert_parse!(CssAtomSet::ATOMS, ZIndexStyleValue, "sibling-index()");
+		assert_parse!(CssAtomSet::ATOMS, ZIndexStyleValue, "sibling-count()");
+		assert_parse!(CssAtomSet::ATOMS, ZIndexStyleValue, "calc(sibling-index() + 1)");
+	}
+
+	#[test]
 	fn test_z_index_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, ZIndexStyleValue, "none");
 		assert_peek_false!(CssAtomSet::ATOMS, ZIndexStyleValue, "1.5");

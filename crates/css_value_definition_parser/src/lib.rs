@@ -130,7 +130,7 @@ impl DefType {
 			| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
 			| "DynamicRangeLimitMixFunction"  // contains allocating params
 			| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
-			| "FeatureTagValue"  // FeatureTagValue<'a> (contains CalcableValue<'a, NonNegative<CSSInt>>)
+			| "FeatureTagValue"  // FeatureTagValue<'a> (contains NumericValue<'a, NonNegative<CSSInt>>)
 			| "FilterFunction" // contains DropShadowFunction<'a>
 			| "FilterValue"  // contains FilterFunction<'a>
 			| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
@@ -140,8 +140,8 @@ impl DefType {
 			| "GapAutoRuleList"  // contains Vec<'a, ...>
 			| "GapRuleList"  // contains Vec<'a, ...>
 			| "GenericFontFamily" // contains Value<'a, _> alternatives
-			| "GenericVoice"  // GenericVoice<'a> (contains CalcableValue<'a, T![Number]>)
-			| "GridLine"  // GridLine<'a> (contains CalcableValue<'a, NonZero<CSSInt>>)
+			| "GenericVoice"  // GenericVoice<'a> (contains NumericValue<'a, T![Number]>)
+			| "GridLine"  // GridLine<'a> (contains NumericValue<'a, NonZero<CSSInt>>)
 			| "HorizontalLineCommand"  // HorizontalLineCommand<'a> (contains HorizontalLineClause<'a>)
 			| "HorizontalLineValue"  // HorizontalLineValue<'a> (contains LengthPercentage)
 			| "Image"          // contains Gradient<'a>
@@ -168,10 +168,10 @@ impl DefType {
 			| "StrokeLayer" // contains Paint<'a> and Color<'a>
 			| "RectFunction"  // RectFunction<'a> (contains AutoOr<CalcableValue<'a, Length>>)
 			| "RelativeControlPoint"  // RelativeControlPoint<'a> (contains CoordinatePair<'a>)
-			| "Ratio"  // Ratio<'a> (contains CalcableValue<'a, CSSInt>)
+			| "Ratio"  // Ratio<'a> (contains NumericValue<'a, CSSInt>)
 			| "Shadow"       // Shadow<'a> (contains Color<'a>)
 			| "SingleAnimation"  // SingleAnimation<'a> (contains CalcableValue<'a, Time>)
-			| "SingleAnimationIterationCount"  // SingleAnimationIterationCount<'a> (Number wraps CalcableValue<'a, NonNegative<Number>>)
+			| "SingleAnimationIterationCount"  // SingleAnimationIterationCount<'a> (Number wraps NumericValue<'a, NonNegative<Number>>)
 			| "SingleTransition"
 			| "SmoothCommand"  // SmoothCommand<'a> (contains SmoothTarget<'a>)
 			| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)

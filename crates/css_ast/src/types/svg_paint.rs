@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CalcableValue, Integer, Positive};
+use crate::{Integer, NumericValue, Positive};
 
 /// <https://drafts.csswg.org/fill-stroke-3/#typedef-svg-paint>
 ///
@@ -29,7 +29,7 @@ pub enum SvgPaint<'a> {
 pub struct SvgPaintChildFunction<'a> {
 	#[atom(CssAtomSet::Child)]
 	pub function: T![Function],
-	pub index: CalcableValue<'a, Positive<Integer>>,
+	pub index: NumericValue<'a, Positive<Integer>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

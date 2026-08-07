@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CSSInt, CalcableValue, CustomIdent, NonZero, PositiveNonZeroInt};
+use crate::{CSSInt, CustomIdent, NonZero, NumericValue, PositiveNonZeroInt};
 use css_parse::parse_optionals;
 
 /// <https://drafts.csswg.org/css-grid-2/#typedef-grid-row-start-grid-line>
@@ -14,9 +14,9 @@ use css_parse::parse_optionals;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum GridLine<'a> {
 	Auto(T![Ident]),
-	Span(T![Ident], Option<CalcableValue<'a, PositiveNonZeroInt>>, Option<T![Ident]>),
+	Span(T![Ident], Option<NumericValue<'a, PositiveNonZeroInt>>, Option<T![Ident]>),
 	Area(CustomIdent),
-	Placement(CalcableValue<'a, NonZero<CSSInt>>, Option<T![Ident]>),
+	Placement(NumericValue<'a, NonZero<CSSInt>>, Option<T![Ident]>),
 }
 
 impl<'a> Parse<'a> for GridLine<'a> {
@@ -30,13 +30,13 @@ impl<'a> Parse<'a> for GridLine<'a> {
 				CssAtomSet::Auto => Ok(GridLine::Auto(p.parse::<T![Ident]>()?)),
 				CssAtomSet::Span => {
 					let keyword = p.parse::<T![Ident]>()?;
-					let (num, ident) = parse_optionals!(p, num: CalcableValue<PositiveNonZeroInt>, ident: T![Ident]);
+					let (num, ident) = parse_optionals!(p, num: NumericValue<PositiveNonZeroInt>, ident: T![Ident]);
 					Ok(Self::Span(keyword, num, ident))
 				}
 				_ => Ok(Self::Area(p.parse::<CustomIdent>()?)),
 			};
 		}
-		let num = p.parse::<CalcableValue<NonZero<CSSInt>>>()?;
+		let num = p.parse::<NumericValue<NonZero<CSSInt>>>()?;
 		Ok(Self::Placement(num, p.parse_if_peek::<T![Ident]>()?))
 	}
 }

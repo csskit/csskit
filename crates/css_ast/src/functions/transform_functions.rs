@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{AngleOrZero, CalcableValue, Length, LengthPercentage, NoneOr, NumberOrPercentage};
+use crate::{AngleOrZero, CalcableValue, Length, LengthPercentage, NoneOr, NumberOrPercentage, NumericValue};
 use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-transforms-1/#two-d-transform-functions>
@@ -54,17 +54,17 @@ pub struct MatrixFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct MatrixFunctionParams<'a>(
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-matrix3d>
@@ -90,37 +90,37 @@ pub struct Matrix3dFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::type_complexity)] // TODO: simplify types
 pub struct Matrix3dFunctionParams<'a>(
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-1/#funcdef-transform-translate>
@@ -241,7 +241,7 @@ pub struct ScaleFunction<'a> {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
 	#[semantic_eq(skip)]
-	pub params: (CalcableValue<'a, NumberOrPercentage>, Option<T![,]>, Option<CalcableValue<'a, NumberOrPercentage>>),
+	pub params: (NumericValue<'a, NumberOrPercentage>, Option<T![,]>, Option<NumericValue<'a, NumberOrPercentage>>),
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -268,11 +268,11 @@ pub struct Scale3dFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Scale3dFunctionParams<'a>(
-	pub CalcableValue<'a, NumberOrPercentage>,
+	pub NumericValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, NumberOrPercentage>,
+	pub NumericValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, NumberOrPercentage>,
+	pub NumericValue<'a, NumberOrPercentage>,
 );
 
 /// <https://drafts.csswg.org/css-transforms-2/#funcdef-scalex>
@@ -288,7 +288,7 @@ pub struct Scale3dFunctionParams<'a>(
 pub struct ScalexFunction<'a> {
 	#[atom(CssAtomSet::Scalex)]
 	pub name: T![Function],
-	pub params: CalcableValue<'a, NumberOrPercentage>,
+	pub params: NumericValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -306,7 +306,7 @@ pub struct ScalexFunction<'a> {
 pub struct ScaleyFunction<'a> {
 	#[atom(CssAtomSet::Scaley)]
 	pub name: T![Function],
-	pub params: CalcableValue<'a, NumberOrPercentage>,
+	pub params: NumericValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -324,7 +324,7 @@ pub struct ScaleyFunction<'a> {
 pub struct ScalezFunction<'a> {
 	#[atom(CssAtomSet::Scalez)]
 	pub name: T![Function],
-	pub params: CalcableValue<'a, NumberOrPercentage>,
+	pub params: NumericValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -369,11 +369,11 @@ pub struct Rotate3dFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct Rotate3dFunctionParams<'a>(
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub CalcableValue<'a, T![Number]>,
+	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
 	pub CalcableValue<'a, AngleOrZero>,
 );
@@ -548,6 +548,7 @@ mod tests {
 
 		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "scale3d(10%,10%,10%)");
 		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "rotate3d(1,2,3,10deg)");
+		assert_parse!(CssAtomSet::ATOMS, TransformFunction, "matrix3d(1,0,0,0,0,1,0,0,0,0,1,0,10,20,30,1)");
 	}
 
 	#[test]

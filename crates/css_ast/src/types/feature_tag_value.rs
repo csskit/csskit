@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CSSInt, CalcableValue, NonNegative, OpentypeTag};
+use crate::{CSSInt, NonNegative, NumericValue, OpentypeTag};
 
 /// `<feature-tag-value>` as defined in [css-fonts-4](https://drafts.csswg.org/css-fonts-4/#font-feature-settings-prop).
 ///
@@ -23,7 +23,7 @@ pub enum FeatureTagToggle<'a> {
 	On(T![Ident]),
 	#[atom(CssAtomSet::Off)]
 	Off(T![Ident]),
-	Integer(CalcableValue<'a, NonNegative<CSSInt>>),
+	Integer(NumericValue<'a, NonNegative<CSSInt>>),
 }
 
 #[cfg(test)]
