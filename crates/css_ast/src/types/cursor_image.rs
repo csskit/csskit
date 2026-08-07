@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CalcableValue, ImageSetFunction, Url};
+use crate::{ImageSetFunction, NumericValue, Url};
 
 /// <https://drafts.csswg.org/css-ui-4/#typedef-cursor-cursor-image>
 ///
@@ -17,12 +17,12 @@ pub enum CursorImage<'a> {
 	Url(
 		Url,
 		#[cfg_attr(feature = "visitable", visit(skip))]
-		Option<(CalcableValue<'a, T![Number]>, CalcableValue<'a, T![Number]>)>,
+		Option<(NumericValue<'a, T![Number]>, NumericValue<'a, T![Number]>)>,
 	),
 	UrlSet(
 		ImageSetFunction<'a>,
 		#[cfg_attr(feature = "visitable", visit(skip))]
-		Option<(CalcableValue<'a, T![Number]>, CalcableValue<'a, T![Number]>)>,
+		Option<(NumericValue<'a, T![Number]>, NumericValue<'a, T![Number]>)>,
 	),
 }
 
@@ -34,18 +34,18 @@ impl<'a> Parse<'a> for CursorImage<'a> {
 		if p.peek::<ImageSetFunction>() {
 			let image_set = p.parse::<ImageSetFunction>()?;
 			let mut numbers = None;
-			if p.peek::<CalcableValue<T![Number]>>() {
-				let a = p.parse::<CalcableValue<T![Number]>>()?;
-				let b = p.parse::<CalcableValue<T![Number]>>()?;
+			if p.peek::<NumericValue<T![Number]>>() {
+				let a = p.parse::<NumericValue<T![Number]>>()?;
+				let b = p.parse::<NumericValue<T![Number]>>()?;
 				numbers = Some((a, b));
 			}
 			Ok(Self::UrlSet(image_set, numbers))
 		} else {
 			let url = p.parse::<Url>()?;
 			let mut numbers = None;
-			if p.peek::<CalcableValue<T![Number]>>() {
-				let a = p.parse::<CalcableValue<T![Number]>>()?;
-				let b = p.parse::<CalcableValue<T![Number]>>()?;
+			if p.peek::<NumericValue<T![Number]>>() {
+				let a = p.parse::<NumericValue<T![Number]>>()?;
+				let b = p.parse::<NumericValue<T![Number]>>()?;
 				numbers = Some((a, b));
 			}
 			Ok(Self::Url(url, numbers))

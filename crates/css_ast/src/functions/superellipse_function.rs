@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CalcableValue, NumberOrInfinity};
+use crate::{NumberOrInfinity, NumericValue};
 
 /// <https://drafts.csswg.org/css-borders-4/#typedef-corner-shape-value>
 ///
@@ -14,7 +14,7 @@ use crate::{CalcableValue, NumberOrInfinity};
 pub struct SuperellipseFunction<'a> {
 	#[atom(CssAtomSet::Superellipse)]
 	pub name: T![Function],
-	pub params: CalcableValue<'a, NumberOrInfinity>,
+	pub params: NumericValue<'a, NumberOrInfinity>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

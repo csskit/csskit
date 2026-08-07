@@ -15,6 +15,12 @@ mod tests {
 	}
 
 	#[test]
+	fn test_line_height_tree_counting() {
+		assert_parse!(CssAtomSet::ATOMS, LineHeightStyleValue, "sibling-index()");
+		assert_parse!(CssAtomSet::ATOMS, LineHeightStyleValue, "sibling-count()");
+	}
+
+	#[test]
 	fn test_vertical_align() {
 		use css_parse::{assert_parse_error, assert_peek_false};
 		// [ first | last ] || <'alignment-baseline'> || <'baseline-shift'>

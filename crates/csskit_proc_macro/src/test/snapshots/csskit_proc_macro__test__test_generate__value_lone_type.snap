@@ -4,6 +4,6 @@ expression: pretty
 ---
 #[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
 #[repr(C)]
-struct Foo<'a>(pub crate::CalcableValue<'a, crate::Integer>);
+struct Foo<'a>(pub crate::NumericValue<'a, crate::Integer>);
 #[cfg(test)]
 ::stable_type_layout::register!(Foo < 'static >);

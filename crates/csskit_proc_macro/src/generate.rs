@@ -295,6 +295,9 @@ enum WrapperKind {
 	Value,
 	/// `CalcableValue<'a, T>` — substitution functions plus typed math functions (calc/min/...).
 	Calcable,
+	/// `NumericValue<'a, T>` — as `Calcable`, plus the tree-counting functions
+	/// (`sibling-count()`/`sibling-index()`), which stand in for an `<integer>`.
+	Numeric,
 }
 
 /// The set of numeric `<type>` names that permit typed math functions (`calc()`, `min()`, ...)
@@ -317,11 +320,27 @@ fn is_calcable_type(name: &str) -> bool {
 	)
 }
 
-/// Every named `<type>` reference is wrapped: numeric types in `CalcableValue<'a, T>`,
-/// everything else in `Value<'a, T>`. The wrapper always supplies `'a`; whether the inner
-/// `T` carries its own lifetime is decided separately via `DefType::maybe_unsized`.
+/// The `<type>` names the tree-counting functions can stand in for: they resolve to an
+/// `<integer>`, so they're valid anywhere a grammar accepts a plain `<integer>` or `<number>` —
+/// including alternations that merely *contain* one (`<number-percentage>`, `<alpha-value>`).
+///
+/// <https://drafts.csswg.org/css-values-5/#tree-counting>
+fn is_numeric_type(name: &str) -> bool {
+	matches!(name, "Integer" | "Number" | "NumberPercentage" | "NumberLength" | "OpacityValue")
+}
+
+/// Every named `<type>` reference is wrapped: types accepting a bare `<integer>`/`<number>` in
+/// `NumericValue<'a, T>`, other numeric types in `CalcableValue<'a, T>`, everything else in
+/// `Value<'a, T>`. The wrapper always supplies `'a`; whether the inner `T` carries its own
+/// lifetime is decided separately via `DefType::maybe_unsized`.
 fn value_wrapper_for(name: &str) -> WrapperKind {
-	if is_calcable_type(name) { WrapperKind::Calcable } else { WrapperKind::Value }
+	if is_numeric_type(name) {
+		WrapperKind::Numeric
+	} else if is_calcable_type(name) {
+		WrapperKind::Calcable
+	} else {
+		WrapperKind::Value
+	}
 }
 
 impl ToType for DefType {
@@ -367,6 +386,7 @@ impl ToType for DefType {
 		let wrapped_type = match wrapper {
 			WrapperKind::Value => quote! { crate::Value<'a, #range_wrapped> },
 			WrapperKind::Calcable => quote! { crate::CalcableValue<'a, #range_wrapped> },
+			WrapperKind::Numeric => quote! { crate::NumericValue<'a, #range_wrapped> },
 		};
 
 		vec![wrapped_type]

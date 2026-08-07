@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{CalcableValue, Percentage};
+use crate::{CalcableValue, NumericValue, Percentage};
 
 /// <https://drafts.csswg.org/css-easing-2/#typedef-easing-function>
 ///
@@ -77,7 +77,7 @@ pub struct LinearFunction<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct LinearFunctionParams<'a>(
-	CalcableValue<'a, T![Number]>,
+	NumericValue<'a, T![Number]>,
 	Option<CalcableValue<'a, Percentage>>,
 	Option<CalcableValue<'a, Percentage>>,
 );
@@ -87,11 +87,11 @@ impl<'a> Parse<'a> for LinearFunctionParams<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		let mut num = p.parse_if_peek::<CalcableValue<T![Number]>>()?;
+		let mut num = p.parse_if_peek::<NumericValue<T![Number]>>()?;
 		let percent = p.parse_if_peek::<CalcableValue<Percentage>>()?;
 		let percent2 = p.parse_if_peek::<CalcableValue<Percentage>>()?;
 		if num.is_none() {
-			num = Some(p.parse::<CalcableValue<T![Number]>>()?);
+			num = Some(p.parse::<NumericValue<T![Number]>>()?);
 		}
 		Ok(Self(num.unwrap(), percent, percent2))
 	}
@@ -114,16 +114,16 @@ pub struct CubicBezierFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct CubicBezierFunctionParams<'a> {
-	x1: CalcableValue<'a, T![Number]>,
+	x1: NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
 	c1: Option<T![,]>,
-	x2: CalcableValue<'a, T![Number]>,
+	x2: NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
 	c2: Option<T![,]>,
-	y1: CalcableValue<'a, T![Number]>,
+	y1: NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
 	c3: Option<T![,]>,
-	y2: CalcableValue<'a, T![Number]>,
+	y2: NumericValue<'a, T![Number]>,
 }
 
 #[node]
@@ -142,7 +142,7 @@ pub struct StepsFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-pub struct StepsFunctionParams<'a>(CalcableValue<'a, CSSInt>, #[semantic_eq(skip)] Option<T![,]>, Option<StepPosition>);
+pub struct StepsFunctionParams<'a>(NumericValue<'a, CSSInt>, #[semantic_eq(skip)] Option<T![,]>, Option<StepPosition>);
 
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

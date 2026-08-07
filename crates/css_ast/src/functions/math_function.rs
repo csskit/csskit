@@ -1,6 +1,7 @@
 use super::prelude::*;
 use crate::{
-	AngleOrNumber, AttrFunction, EnvFunction, FirstValidFunction, IfFunction, NoneOr, Number, Unresolved, VarFunction,
+	AngleOrNumber, AttrFunction, EnvFunction, FirstValidFunction, IfFunction, NoneOr, Number, TreeCountingFunction,
+	Unresolved, VarFunction,
 };
 use css_parse::SemanticEq;
 
@@ -661,6 +662,7 @@ fn calc_value_eq<'a, T: SemanticEq>(a: &CalcValue<'a, T>, b: &CalcValue<'a, T>) 
 		(CalcValue::Number(a), CalcValue::Number(b)) => a.semantic_eq(b),
 		(CalcValue::Typed(a), CalcValue::Typed(b)) => a.semantic_eq(b),
 		(CalcValue::Keyword(a), CalcValue::Keyword(b)) => a.semantic_eq(b),
+		(CalcValue::TreeCounting(a), CalcValue::TreeCounting(b)) => a.semantic_eq(b),
 		(CalcValue::Parenthesized(a), CalcValue::Parenthesized(b)) => calc_in_parens_eq(a, b),
 		_ => false,
 	}
@@ -813,6 +815,7 @@ pub enum CalcProductOperator {
 ///
 /// ```text,ignore
 /// <calc-value> = <number> | <dimension> | <percentage> | <calc-keyword> | ( <calc-sum> )
+///              | <sibling-count()> | <sibling-index()>
 /// ```
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -824,6 +827,7 @@ pub enum CalcValue<'a, T> {
 	Number(Number),
 	Typed(T),
 	Keyword(CalcKeyword),
+	TreeCounting(TreeCountingFunction),
 	Parenthesized(CalcInParens<'a, T>),
 }
 
@@ -973,6 +977,13 @@ mod tests {
 	#[test]
 	fn test_calc_nested_math_function() {
 		assert_parse!(CssAtomSet::ATOMS, LengthMathFunction, "calc(min(1px, 2px) + 3px)");
+	}
+
+	#[test]
+	fn test_calc_tree_counting_functions() {
+		assert_parse!(CssAtomSet::ATOMS, LengthMathFunction, "calc(sibling-index() * 10px)");
+		assert_parse!(CssAtomSet::ATOMS, LengthMathFunction, "calc(10px * sibling-count())");
+		assert_parse!(CssAtomSet::ATOMS, LengthMathFunction, "min(sibling-index(), 4)");
 	}
 
 	#[test]

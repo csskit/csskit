@@ -556,7 +556,7 @@ fn def_returns_true_for_maybe_unsized() {
 	assert!(to_valuedef!(" <length>{1,4} ").maybe_unsized());
 	assert!(to_valuedef!(" [ <length> ] ").maybe_unsized());
 	// <length> | <number> optimizes to NumberLength, which is now wrapped in
-	// CalcableValue<'a, NumberLength>, so it IS unsized (references 'a via the wrapper).
+	// NumericValue<'a, NumberLength>, so it IS unsized (references 'a via the wrapper).
 	assert!(to_valuedef!(" <length> | <number> ").maybe_unsized());
 	assert!(to_valuedef!(" [ <length> | <number> ] ").maybe_unsized());
 	// Bounded multipliers {1,4} optimize to Ordered combinators with Optionals; the inner

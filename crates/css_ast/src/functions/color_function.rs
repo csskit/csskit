@@ -2,7 +2,7 @@ use super::prelude::*;
 use crate::functions::color_mix_function::ColorMixFunction;
 use crate::functions::light_dark_function::LightDarkFunction;
 use crate::functions::relative_color::RelativeColorFunction;
-use crate::{AngleOrNumber, CalcableValue, NoneOr, NumberOrPercentage};
+use crate::{AngleOrNumber, NoneOr, NumberOrPercentage, NumericValue};
 use css_parse::Box;
 
 #[node]
@@ -185,18 +185,18 @@ impl crate::ToChromashift for ColorFunctionColor<'_> {
 
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 
 		// Helper to extract a channel as f64 in 0.0-1.0 range
-		let channel_unit = |c: &NoneOr<CalcableValue<'_, NumberOrPercentage>>| -> Option<f64> {
+		let channel_unit = |c: &NoneOr<NumericValue<'_, NumberOrPercentage>>| -> Option<f64> {
 			match c {
 				NoneOr::None(_) => Some(0.0),
-				NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => Some(n.value() as f64),
-				NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => {
+				NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => Some(n.value() as f64),
+				NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => {
 					Some(p.value() as f64 / 100.0)
 				}
 				NoneOr::Some(_) => None,
@@ -263,11 +263,11 @@ impl crate::ToChromashift for ColorFunctionColor<'_> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ColorFunctionColorParams<'a>(
 	pub ColorSpace,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
+	pub Option<NoneOr<NumericValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-rgb>
@@ -332,13 +332,13 @@ impl crate::ToChromashift for RgbaFunction<'_> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct RgbFunctionParams<'a>(
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	pub Option<CommaOrSlash>,
-	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
+	pub Option<NoneOr<NumericValue<'a, NumberOrPercentage>>>,
 );
 
 #[cfg(feature = "chromashift")]
@@ -348,31 +348,29 @@ impl crate::ToChromashift for RgbFunctionParams<'_> {
 		let Self(red, _, green, _, blue, _, alpha) = &self;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		let red = (match red {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(red))) => red.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(red))) => red.value() / 100.0 * 255.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(red))) => red.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(red))) => red.value() / 100.0 * 255.0,
 			NoneOr::Some(_) => return None,
 		})
 		.round() as u8;
 		let green = (match green {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(green))) => green.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(green))) => {
-				green.value() / 100.0 * 255.0
-			}
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(green))) => green.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(green))) => green.value() / 100.0 * 255.0,
 			NoneOr::Some(_) => return None,
 		})
 		.round() as u8;
 		let blue = (match blue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(blue))) => blue.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(blue))) => blue.value() / 100.0 * 255.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(blue))) => blue.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(blue))) => blue.value() / 100.0 * 255.0,
 			NoneOr::Some(_) => return None,
 		})
 		.round() as u8;
@@ -444,13 +442,13 @@ impl crate::ToChromashift for HslaFunction<'_> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HslFunctionParams<'a>(
-	pub NoneOr<CalcableValue<'a, AngleOrNumber>>,
+	pub NoneOr<NumericValue<'a, AngleOrNumber>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	pub Option<CommaOrSlash>,
-	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
+	pub Option<NoneOr<NumericValue<'a, NumberOrPercentage>>>,
 );
 
 #[cfg(feature = "chromashift")]
@@ -460,26 +458,26 @@ impl crate::ToChromashift for HslFunctionParams<'_> {
 		let Self(hue, _, saturation, _, lightness, _, alpha) = &self;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
 			NoneOr::Some(_) => return None,
 		};
 		let saturation = match saturation {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		};
 		let lightness = match lightness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		};
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
@@ -516,26 +514,26 @@ impl crate::ToChromashift for HwbFunction<'_> {
 		let HwbFunctionParams(hue, whiteness, blackness, _, alpha) = &self.params;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
 			NoneOr::Some(_) => return None,
 		};
 		let whiteness = match whiteness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		};
 		let blackness = match blackness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		};
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
@@ -549,11 +547,11 @@ impl crate::ToChromashift for HwbFunction<'_> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct HwbFunctionParams<'a>(
-	pub NoneOr<CalcableValue<'a, AngleOrNumber>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, AngleOrNumber>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
+	pub Option<NoneOr<NumericValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-lab>
@@ -584,26 +582,26 @@ impl crate::ToChromashift for LabFunction<'_> {
 		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
 		let l = match l {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let a = match a {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let b = match b {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
@@ -617,11 +615,11 @@ impl crate::ToChromashift for LabFunction<'_> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct LabFunctionParams<'a>(
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
+	pub Option<NoneOr<NumericValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-lch>
@@ -652,26 +650,26 @@ impl crate::ToChromashift for LchFunction<'_> {
 		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
 		let lightness = match lightness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let chroma = match chroma {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
@@ -685,11 +683,11 @@ impl crate::ToChromashift for LchFunction<'_> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct LchFunctionParams<'a>(
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, NumberOrPercentage>>,
-	pub NoneOr<CalcableValue<'a, AngleOrNumber>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, NumberOrPercentage>>,
+	pub NoneOr<NumericValue<'a, AngleOrNumber>>,
 	#[semantic_eq(skip)] pub Option<T![/]>,
-	pub Option<NoneOr<CalcableValue<'a, NumberOrPercentage>>>,
+	pub Option<NoneOr<NumericValue<'a, NumberOrPercentage>>>,
 );
 
 /// <https://drafts.csswg.org/css-color/#funcdef-oklab>
@@ -720,27 +718,27 @@ impl crate::ToChromashift for OklabFunction<'_> {
 		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};
 		let l = match l {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let a = match a {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let b = match b {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		Some(chromashift::Color::Oklab(Oklab::new(l, a, b, alpha)))
@@ -775,26 +773,26 @@ impl crate::ToChromashift for OklchFunction<'_> {
 		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
 		let lightness = match lightness {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let chroma = match chroma {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
+			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let hue = match hue {
 			NoneOr::None(_) => 0.0,
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(CalcableValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
+			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
 			NoneOr::Some(_) => return None,
 		} as f64;
 		let alpha = match alpha {
 			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(CalcableValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
+			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
 			Some(NoneOr::Some(_)) => return None,
 			None => 100.0,
 		};

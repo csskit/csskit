@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::CalcableValue;
+use crate::NumericValue;
 
 /// <https://drafts.csswg.org/css-speech-1/#typedef-voice-family-age>
 ///
@@ -52,7 +52,7 @@ pub enum VoiceGender {
 pub struct GenericVoice<'a> {
 	pub age: Option<VoiceAge>,
 	pub gender: VoiceGender,
-	pub variant: Option<CalcableValue<'a, T![Number]>>,
+	pub variant: Option<NumericValue<'a, T![Number]>>,
 }
 
 impl<'a> Peek<'a> for GenericVoice<'a> {
@@ -74,7 +74,7 @@ impl<'a> Parse<'a> for GenericVoice<'a> {
 	{
 		let age = p.parse_if_peek::<VoiceAge>()?;
 		let gender = p.parse::<VoiceGender>()?;
-		let variant = p.parse_if_peek::<CalcableValue<T![Number]>>()?;
+		let variant = p.parse_if_peek::<NumericValue<T![Number]>>()?;
 		Ok(Self { age, gender, variant })
 	}
 }
