@@ -451,6 +451,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"ScanMediaFeatureKeyword",
 	"ScriptingMediaFeature",
 	"ScriptingMediaFeatureKeyword",
+	"ScrollAxisLockStyleValue",
 	"ScrollBehaviorStyleValue",
 	"ScrollInitialTargetStyleValue",
 	"ScrollMarkerGroupStyleValue",

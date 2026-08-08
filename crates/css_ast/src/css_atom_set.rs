@@ -1897,6 +1897,7 @@ pub enum CssAtomSet {
 	Script,
 	Scripting,
 	Scroll,
+	ScrollAxisLock,
 	ScrollBehavior,
 	ScrollInitialTarget,
 	ScrollMargin,
