@@ -26,7 +26,7 @@ enum SingleFoo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
     Foo(::css_parse::T![Ident]),
-    Bar(crate::Value<'a, crate::Bar>),
+    Bar(crate::Value<'a, crate::Bar<'a>>),
 }
 #[cfg(test)]
 ::stable_type_layout::register!(SingleFoo < 'static >);

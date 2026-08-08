@@ -14,6 +14,7 @@ use syn::{
 	parse2, token,
 };
 
+mod sized_types;
 #[cfg(test)]
 mod test;
 
@@ -98,104 +99,7 @@ impl DefType {
 	/// `Value<'a, T>` substitution wrapper, which always supplies `'a` separately. Numeric
 	/// primitives (`Integer`, `Length`, ...), `Url`, and `String` carry **no** own lifetime.
 	pub fn maybe_unsized(&self) -> bool {
-		// Check for specific types that require allocations
-		matches!(
-			self.ident_str(),
-			"AnchorName"        // Value<'a, DashedIdent>
-			| "ArcCommand"  // ArcCommand<'a> (contains CommandEndPoint<'a>)
-			| "AutoLineColorList"  // contains RepeatLineColor<'a> and LineColorOrRepeat<'a>
-			| "AutoLineStyleList"  // contains RepeatLineStyle<'a> and LineStyleOrRepeat<'a>
-			| "AutoLineWidthList"  // contains Repeat<'a> and LineWidthOrRepeat<'a>
-			| "BasicShape"  // contains PolygonFunction<'a> and ShapeFunction<'a>
-			| "BasicShapeRect"  // contains InsetFunction<'a>, ShapeRectFunction<'a>, XywhFunction<'a>
-			| "BgImage"  // contains Image<'a>
-			| "BgLayer"  // contains BgImage<'a> and Color<'a>
-			| "BgPosition" // BgPosition<'a> (contains CalcableValue<'a, LengthPercentage>)
-			| "BgPositionAndSize" // contains BgPosition which contains Position
-			| "BgSize"           // BgSize<'a>
-			| "BorderRadius"  // BorderRadius<'a> (contains CalcableValue<'a, LengthPercentage>)
-			| "Color"          // Color<'a>
-			| "ColorSchemeName"   // Other(Value<'a, CustomIdent>)
-			| "ContentAltItem"  // contains Counter<'a> and AttrFunction<'a>
-			| "ContentLevel"  // contains AttrFunction<'a>, CounterFunction<'a>, CountersFunction<'a>
-			| "ContentList"  // Vec<'a, ContentListItem<'a>>
-			| "ContentReplacement"  // type alias for Image<'a>
-			| "ControlPoint"  // ControlPoint<'a> (contains RelativeControlPoint<'a>)
-			| "CoordinatePair"  // CoordinatePair<'a> (contains LengthPercentage pairs via CalcableValue)
-			| "Counter"  // Counter<'a> enum with CounterFunction/CountersFunction variants
-			| "CounterStyle"  // complex hand-written type
-			| "CornerShapeValue"  // CornerShapeValue<'a> (contains SuperellipseFunction<'a>)
-			| "CurveCommand"  // CurveCommand<'a> (contains CurveTarget<'a>)
-			| "CursorImage"  // contains Image<'a>
-			| "DynamicRangeLimit"  // contains DynamicRangeLimitMixFunction<'a>
-			| "DynamicRangeLimitMixFunction"  // contains allocating params
-			| "EasingFunction"  // contains LinearFunction<'a> with CommaSeparated
-			| "FeatureTagValue"  // FeatureTagValue<'a> (contains NumericValue<'a, NonNegative<CSSInt>>)
-			| "FilterFunction" // contains DropShadowFunction<'a>
-			| "FilterValue"  // contains FilterFunction<'a>
-			| "FilterValueList"  // contains Vec<'a, FilterValue<'a>>
-			| "FinalBgLayer"  // type alias for BgLayer<'a>
-			| "FontFamilyName"  // may contain allocating elements
-			| "FontWeightAbsolute" // FontWeightAbsolute<'a>
-			| "GapAutoRuleList"  // contains Vec<'a, ...>
-			| "GapRuleList"  // contains Vec<'a, ...>
-			| "GenericFontFamily" // contains Value<'a, _> alternatives
-			| "GenericVoice"  // GenericVoice<'a> (contains NumericValue<'a, T![Number]>)
-			| "GridLine"  // GridLine<'a> (contains NumericValue<'a, NonZero<CSSInt>>)
-			| "HorizontalLineCommand"  // HorizontalLineCommand<'a> (contains HorizontalLineClause<'a>)
-			| "HorizontalLineValue"  // HorizontalLineValue<'a> (contains LengthPercentage)
-			| "Image"          // contains Gradient<'a>
-			| "Image1d"  // contains StripesFunction<'a>
-			| "InsetValue"  // contains CalcableValue<'a, LengthPercentage>
-			| "LineColorList"  // contains LineColorOrRepeat<'a>
-			| "LineColorOrRepeat"  // contains Color<'a> and RepeatLineColor<'a>
-			| "LineStyleList"  // contains LineStyleOrRepeat<'a>
-			| "LineStyleOrRepeat"  // contains RepeatLineStyle<'a>
-			| "LineCommand"  // LineCommand<'a> (contains CommandEndPoint<'a>)
-			| "LineWidth"  // LineWidth<'a> (Length variant wraps CalcableValue<'a, Length>)
-			| "LineWidthList"  // contains LineWidthOrRepeat<'a>
-			| "LineWidthOrRepeat"  // contains Repeat<'a>
-			| "MaskLayer"  // contains Image<'a>
-			| "MaskReference"  // contains Image<'a>
-			| "MoveCommand"  // MoveCommand<'a> (contains CommandEndPoint<'a>)
-			| "OffsetPath" // contains BasicShape<'a>
-			| "Outline"
-			| "Position"     // Position<'a> (contains CalcableValue<'a, LengthPercentage>)
-			| "PositionOne"  // PositionOne<'a>
-			| "PositionTwo"  // PositionTwo<'a>
-			| "Paint" // contains Image<'a>
-			| "FillLayer" // contains Paint<'a> and Color<'a>
-			| "StrokeLayer" // contains Paint<'a> and Color<'a>
-			| "RectFunction"  // RectFunction<'a> (contains AutoOr<CalcableValue<'a, Length>>)
-			| "RelativeControlPoint"  // RelativeControlPoint<'a> (contains CoordinatePair<'a>)
-			| "Ratio"  // Ratio<'a> (contains NumericValue<'a, CSSInt>)
-			| "Shadow"       // Shadow<'a> (contains Color<'a>)
-			| "SingleAnimation"  // SingleAnimation<'a> (contains CalcableValue<'a, Time>)
-			| "SingleAnimationIterationCount"  // SingleAnimationIterationCount<'a> (Number wraps NumericValue<'a, NonNegative<Number>>)
-			| "SingleTransition"
-			| "SmoothCommand"  // SmoothCommand<'a> (contains SmoothTarget<'a>)
-			| "SpreadShadow"   // SpreadShadow<'a> (contains Color<'a>)
-			| "Symbol" // Symbol<'a>
-			| "TransformList"
-			| "VerticalLineCommand"  // VerticalLineCommand<'a> (contains VerticalLineClause<'a>)
-			| "VerticalLineValue"  // VerticalLineValue<'a> (contains LengthPercentage)
-			| "VoiceFamilyName" // may contain allocating elements
-			// css-grid track sizing types
-			| "LineNames" // LineNames<'a>, Vec<'a, CustomIdent>
-			| "TrackRepeat" // contains Vec<'a, ...> and LineNames<'a>
-			| "AutoRepeat" // contains Vec<'a, ...> and LineNames<'a>
-			| "FixedRepeat" // contains Vec<'a, ...> and LineNames<'a>
-			| "FixedSize" // contains MinmaxFunction<'a>
-			| "NameRepeat" // contains Vec<'a, LineNames<'a>>
-			| "NameRepeatCount" // contains CalcableValue<'a, ...> via <integer>
-			| "TrackList" // contains Vec<'a, ...>, LineNames<'a> and TrackRepeat<'a>
-			| "AutoTrackList" // contains Vec<'a, ...>, LineNames<'a>, FixedRepeat<'a> and AutoRepeat<'a>
-			| "ExplicitTrackList" // contains Vec<'a, ...> and LineNames<'a>
-			| "LineNameList" // contains Vec<'a, ...>, LineNames<'a> and NameRepeat<'a>
-			| "TrackSize" // contains CalcableValue<'a, ...> via <track-breadth>/<length-percentage>
-			| "TrackBreadth" // contains CalcableValue<'a, ...> via <length-percentage>/<flex>
-			| "InflexibleBreadth" // contains CalcableValue<'a, ...> via <length-percentage>
-		)
+		!sized_types::is_sized_type(self.ident_str())
 	}
 }
 

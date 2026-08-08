@@ -72,6 +72,10 @@ run = ["cargo run -p csskit_spec_generator generate-all"]
 description = "Generate property_atoms.rs from CSS specs"
 run = ["cargo run -p csskit_spec_generator generate-property-atoms"]
 
+[tasks.generate-sized-types]
+description = "Generate the sized-types table from the css_ast source"
+run = ["REGENERATE_SIZED_TYPES=1 cargo test -p csskit_source_finder --test sized_types"]
+
 [tasks.fuzz]
 description = "Run the fuzzer (Ctrl-C to stop)"
 dir = "{{config_root}}/fuzz"

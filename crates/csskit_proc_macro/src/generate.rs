@@ -1115,6 +1115,12 @@ impl GenerateDefinition for Def {
 
 impl DefTypeExt for DefType {
 	fn get_generics(&self) -> Generics {
-		if self.maybe_unsized() { parse_quote!(<'a>) } else { Default::default() }
+		// `FooKeywords` enums are generated inside this same expansion, so the css_ast source scan
+		// behind `maybe_unsized` cannot see them. They are C-like keyword enums with no lifetime.
+		if self.maybe_unsized() && !self.ident_str().ends_with("Keywords") {
+			parse_quote!(<'a>)
+		} else {
+			Default::default()
+		}
 	}
 }

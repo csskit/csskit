@@ -7,7 +7,10 @@ expression: pretty
 struct Baz<'a>(
     pub ::css_parse::CommaSeparated<
         'a,
-        ::css_parse::Either<crate::Value<'a, crate::Foo>, crate::Value<'a, crate::Bar>>,
+        ::css_parse::Either<
+            crate::Value<'a, crate::Foo<'a>>,
+            crate::Value<'a, crate::Bar<'a>>,
+        >,
     >,
 );
 #[cfg(test)]
