@@ -170,16 +170,6 @@ pub fn find_visitable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, pat
 	matches.extend(all.into_iter().filter(|node| !matches!(node.visit_mode, VisitMode::Children)));
 }
 
-/// Find types that are queryable (`#[visit]`, `#[visit(self)]`, or `#[visit(all)]`
-/// - not skip/children).
-///
-/// Queryable nodes are those that get a NodeId and can be matched by selectors.
-pub fn find_queryable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, path_callback: impl Fn(&PathBuf) + Copy) {
-	let mut all_visitable = HashSet::new();
-	find_visitable_nodes(dir, &mut all_visitable, path_callback);
-	matches.extend(all_visitable.into_iter().filter(|node| node.visit_mode.is_queryable()));
-}
-
 /// Extracts the name of a `struct`/`enum`/`type` declaration on `line` along with whether its
 /// generics include a lifetime parameter (`Foo<'a, ...>`). Text-based so it also sees declarations
 /// nested inside macro invocations, which a `syn` item walk would miss.

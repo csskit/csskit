@@ -119,3 +119,23 @@ impl CsskitAtomSet {
 		}
 	}
 }
+
+#[cfg(test)]
+mod tests {
+	use super::*;
+
+	#[test]
+	fn every_node_tag_maps_to_its_node_id() {
+		for id in NodeId::all_variants() {
+			assert_eq!(CsskitAtomSet::from_str(id.tag_name()).to_node_id(), Some(id), "{}", id.tag_name());
+		}
+	}
+
+	#[test]
+	fn non_node_atoms_have_no_node_id() {
+		assert_eq!(CsskitAtomSet::_None.to_node_id(), None);
+		assert_eq!(CsskitAtomSet::Webkit.to_node_id(), None);
+		assert_eq!(CsskitAtomSet::Important.to_node_id(), None);
+		assert_eq!(CsskitAtomSet::WritingModes.to_node_id(), None);
+	}
+}

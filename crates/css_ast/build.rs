@@ -1,5 +1,5 @@
 #![deny(warnings)]
-use csskit_source_finder::{find_queryable_nodes, find_visitable_nodes};
+use csskit_source_finder::find_visitable_nodes;
 use heck::{ToKebabCase, ToSnakeCase};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -28,55 +28,42 @@ fn main() {
 	let mut all_visitable = all_visitable.into_iter().collect::<Vec<_>>();
 	all_visitable.sort_unstable_by_key(|node| node.ident().to_string());
 
-	// Find only queryable nodes (for NodeId enum and QueryableNode trait)
-	let mut queryable = HashSet::<_>::new();
-	find_queryable_nodes("src/**/*.rs", &mut queryable, |_| {});
-	let mut queryable = queryable.into_iter().collect::<Vec<_>>();
-	queryable.sort_unstable_by_key(|node| node.ident().to_string());
+	let queryable = all_visitable.iter().filter(|node| node.visit_mode.is_queryable()).cloned().collect::<Vec<_>>();
 
 	// NodeId enum - only queryable types
 	{
+		let count = queryable.len();
 		let variants = queryable.iter().enumerate().map(|(idx, node)| {
 			let ident = node.ident();
-			let discriminant = idx as isize;
+			let discriminant = idx as u16;
 			quote! { #ident = #discriminant }
 		});
 
-		let tag_name_cases = queryable.iter().map(|node| {
-			let ident = node.ident();
-			let tag_name = ident.to_string().to_kebab_case();
-			quote! { Self::#ident => #tag_name }
-		});
-
-		let from_tag_name_cases = queryable.iter().map(|node| {
-			let ident = node.ident();
-			let tag_name = ident.to_string().to_kebab_case();
-			quote! { #tag_name => Some(Self::#ident) }
-		});
-
-		let all_tags = queryable.iter().map(|node| {
-			let ident = node.ident();
-			quote! { Self::#ident }
-		});
-
-		let display_arms = queryable.iter().map(|node| {
+		let type_names = queryable.iter().map(|node| {
 			let ident = node.ident();
 			let generics = node.generics();
 			if generics.type_params().next().is_some() || generics.const_params().next().is_some() {
-				let ident_str = ident.to_string();
-				return quote! { Self::#ident => f.write_str(#ident_str) };
+				let name = ident.to_string();
+				return quote! { #name };
 			}
-			let statics = std::iter::repeat_n(quote! { 'static }, generics.lifetimes().count()).collect::<Vec<_>>();
-			let ty = if statics.is_empty() {
-				quote! { #ident }
-			} else {
-				quote! { #ident<#(#statics),*> }
+			let ty = match generics.lifetimes().count() {
+				0 => quote! { #ident },
+				lifetimes => {
+					let statics = std::iter::repeat_n(quote! { 'static }, lifetimes);
+					quote! { #ident<#(#statics),*> }
+				}
 			};
-			quote! {
-				Self::#ident => f.write_str(
-					<crate::#ty as ::stable_type_layout::TypeLayout>::TYPE_LAYOUT.name
-				)
-			}
+			quote! { <crate::#ty as ::stable_type_layout::TypeLayout>::TYPE_LAYOUT.name }
+		});
+
+		let tag_names = queryable.iter().map(|node| node.ident().to_string().to_kebab_case());
+
+		let mut tag_order = (0..count as u16).collect::<Vec<_>>();
+		tag_order.sort_unstable_by_key(|index| queryable[*index as usize].ident().to_string().to_kebab_case());
+
+		let all = queryable.iter().map(|node| {
+			let ident = node.ident();
+			quote! { NodeId::#ident }
 		});
 
 		#[rustfmt::skip]
@@ -88,41 +75,102 @@ fn main() {
 			/// Each variant has a unique discriminant value assigned at build time.
 			#[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 			#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+			#[repr(u16)]
 			pub enum NodeId {
 				#(#variants),*
 			}
 
+			const TYPE_NAMES: &[&str] = &[#(#type_names),*];
+			const TAG_NAMES: &[&str] = &[#(#tag_names),*];
+			const TAG_ORDER: &[u16] = &[#(#tag_order),*];
+			const ALL: &[NodeId] = &[#(#all),*];
+
 			impl std::fmt::Display for NodeId {
 				fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-					match self {
-						#(#display_arms),*
-					}
+					f.write_str(self.type_name())
 				}
 			}
 
 			impl NodeId {
+				/// The number of node kinds, i.e. the number of variants of this enum.
+				pub const COUNT: usize = #count;
+
 				/// Returns the kebab-case tag name for this node type.
-				///
-				/// This is used in selector matching (e.g., "style-rule", "declaration").
 				pub const fn tag_name(self) -> &'static str {
-					match self {
-						#(#tag_name_cases),*
-					}
+					TAG_NAMES[self as usize]
 				}
 
 				/// Attempts to parse a tag name string into a NodeId.
-				///
-				/// Returns `None` if the tag name doesn't match any known node type.
 				pub fn from_tag_name(name: &str) -> Option<Self> {
-					match name {
-						#(#from_tag_name_cases),*,
-						_ => None
-					}
+					let order = TAG_ORDER.binary_search_by(|index| TAG_NAMES[*index as usize].cmp(name)).ok()?;
+					Some(ALL[TAG_ORDER[order] as usize])
+				}
+
+				/// Returns the Rust type name for this node type (e.g., "StyleRule", "Declaration").
+				pub const fn type_name(self) -> &'static str {
+					TYPE_NAMES[self as usize]
+				}
+
+				/// Attempts to resolve a Rust type name into a NodeId.
+				///
+				/// Returns `None` if the type name doesn't match any known node type.
+				pub fn from_type_name(name: &str) -> Option<Self> {
+					Some(ALL[TYPE_NAMES.binary_search(&name).ok()?])
+				}
+
+				/// Resolves a discriminant back into its NodeId.
+				///
+				/// Returns `None` if the index is not valid.
+				pub const fn from_index(index: u16) -> Option<Self> {
+					if (index as usize) < Self::COUNT { Some(ALL[index as usize]) } else { None }
 				}
 
 				/// Returns an iterator over all possible NodeId values.
 				pub fn all_variants() -> impl Iterator<Item = Self> {
-					[#(#all_tags),*].into_iter()
+					ALL.iter().copied()
+				}
+			}
+
+			#[cfg(test)]
+			mod node_id_tests {
+				use super::{ALL, NodeId, TAG_NAMES, TAG_ORDER, TYPE_NAMES};
+
+				#[test]
+				fn every_name_round_trips() {
+					for id in NodeId::all_variants() {
+						assert_eq!(NodeId::from_type_name(id.type_name()), Some(id), "{}", id.type_name());
+						assert_eq!(NodeId::from_tag_name(id.tag_name()), Some(id), "{}", id.tag_name());
+						assert_eq!(NodeId::from_index(id as u16), Some(id), "{}", id.type_name());
+					}
+				}
+
+				#[test]
+				fn tables_are_indexed_by_discriminant() {
+					assert_eq!(ALL.len(), NodeId::COUNT);
+					assert_eq!(TYPE_NAMES.len(), NodeId::COUNT);
+					assert_eq!(TAG_NAMES.len(), NodeId::COUNT);
+					assert_eq!(TAG_ORDER.len(), NodeId::COUNT);
+					for (index, id) in ALL.iter().enumerate() {
+						assert_eq!(*id as usize, index);
+					}
+				}
+
+				#[test]
+				fn lookup_tables_are_sorted() {
+					assert!(TYPE_NAMES.is_sorted(), "TYPE_NAMES must be sorted for from_type_name");
+					assert!(
+						TAG_ORDER.windows(2).all(|pair| TAG_NAMES[pair[0] as usize] < TAG_NAMES[pair[1] as usize]),
+						"TAG_ORDER must be sorted by tag name, with no duplicate tags, for from_tag_name"
+					);
+				}
+
+				#[test]
+				fn unknown_names_are_none() {
+					assert_eq!(NodeId::from_type_name("NotANodeType"), None);
+					assert_eq!(NodeId::from_tag_name("not-a-node-type"), None);
+					assert_eq!(NodeId::from_type_name(""), None);
+					assert_eq!(NodeId::from_tag_name(""), None);
+					assert_eq!(NodeId::from_index(NodeId::COUNT as u16), None);
 				}
 			}
 		};
