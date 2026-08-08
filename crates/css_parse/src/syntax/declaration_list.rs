@@ -1,8 +1,5 @@
-use crate::{
-	CursorSink, Declaration, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek,
-	Result, SemanticEq, Span, T, ToCursors, ToSpan, Vec, token_macros,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{Declaration, token_macros};
 
 /// A generic struct that can be used for AST nodes representing a rule's block, that is only capable of having child
 /// declarations.

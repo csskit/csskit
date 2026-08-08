@@ -1,8 +1,5 @@
-use crate::{
-	CursorSink, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T, ToCursors, ToSpan,
-	syntax::ComponentValues,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{Result, syntax::ComponentValues};
 
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -19,7 +16,7 @@ impl<'a> Peek<'a> for SimpleBlock<'a> {
 
 // https://drafts.csswg.org/css-syntax-3/#consume-a-simple-block
 impl<'a> Parse<'a> for SimpleBlock<'a> {
-	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{

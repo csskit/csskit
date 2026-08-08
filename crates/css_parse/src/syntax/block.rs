@@ -1,9 +1,5 @@
-use crate::{
-	BadDeclaration, CursorSink, Declaration, DeclarationGroup, DeclarationOrBad, DeclarationValue, Kind, KindSet,
-	NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, RuleVariants, SemanticEq, Span, State, T, ToCursors,
-	ToSpan, Vec, token_macros,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{BadDeclaration, Declaration, DeclarationGroup, DeclarationOrBad, RuleVariants, token_macros};
 
 /// This trait provides an implementation for ["consuming a blocks contents"][1].
 ///

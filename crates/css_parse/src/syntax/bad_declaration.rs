@@ -1,8 +1,5 @@
-use crate::{
-	CursorSink, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, State, T, ToCursors, ToSpan, Vec,
-	syntax::ComponentValue,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{Result, syntax::ComponentValue};
 
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -11,7 +8,7 @@ pub struct BadDeclaration<'a>(Vec<'a, ComponentValue<'a>>);
 
 // https://drafts.csswg.org/css-syntax-3/#consume-the-remnants-of-a-bad-declaration
 impl<'a> Parse<'a> for BadDeclaration<'a> {
-	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{

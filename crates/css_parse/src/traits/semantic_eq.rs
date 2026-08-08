@@ -1,6 +1,5 @@
-use crate::Vec;
-use allocator_api2::alloc::Allocator;
-use css_lexer::{AssociatedWhitespaceRules, Cursor};
+use super::prelude::*;
+use css_lexer::AssociatedWhitespaceRules;
 
 /// Trait for semantic equality comparison that ignores source positions and whitespace.
 ///

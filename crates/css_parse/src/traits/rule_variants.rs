@@ -1,4 +1,5 @@
-use crate::{BadDeclaration, Cursor, Diagnostic, Parser, Peek, Result, State, T, ToCursors, ToSpan};
+use super::prelude::*;
+use crate::{BadDeclaration, State, ToCursors, ToSpan};
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.

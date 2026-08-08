@@ -1,4 +1,4 @@
-use crate::{Cursor, Parser, Peek, Result, Vec};
+use super::prelude::*;
 
 /// This trait allows AST nodes to construct themselves from a mutable [Parser] instance.
 ///

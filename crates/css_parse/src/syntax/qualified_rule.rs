@@ -1,8 +1,5 @@
-use crate::{
-	BadDeclaration, Block, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata, NodeWithMetadata,
-	Parse, Parser, Peek, Result, SemanticEq, Span, State, T, ToCursors, ToSpan,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{BadDeclaration, Block};
 
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

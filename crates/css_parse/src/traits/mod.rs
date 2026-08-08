@@ -29,3 +29,8 @@ pub use semantic_eq::*;
 pub use style_sheet::*;
 pub use to_cursors::*;
 pub use to_number_value::*;
+
+mod prelude {
+	pub(crate) use crate::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T, Vec};
+	pub(crate) use allocator_api2::alloc::Allocator;
+}

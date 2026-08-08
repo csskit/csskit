@@ -1,5 +1,4 @@
-use crate::Cursor;
-use crate::{Diagnostic, Parser, Peek, Result, T};
+use super::prelude::*;
 use css_lexer::DynAtomSet;
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Boolean" context][1]. This is

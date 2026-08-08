@@ -1,4 +1,5 @@
-use crate::{Cursor, Kind, NodeMetadata, NodeWithMetadata, Parse, Parser, Result, T, Vec};
+use super::prelude::*;
+use crate::{Kind, NodeMetadata, NodeWithMetadata};
 
 /// This trait provides an implementation for parsing a [StyleSheet][1].
 ///

@@ -1,4 +1,5 @@
-use crate::{AtomSet, Comparison, Diagnostic, Parse, Parser, Peek, Result as ParserResult, T};
+use super::prelude::*;
+use crate::{AtomSet, Comparison, Result};
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Range" context][1].
 ///
@@ -70,35 +71,17 @@ pub trait RangedFeature<'a>: Sized {
 	type Value: Parse<'a>;
 
 	/// Method for constructing a "legacy max" media feature. Legacy features always include a colon token.
-	fn new_max(
-		_open: T!['('],
-		name: T![Ident],
-		_colon: T![:],
-		_value: Self::Value,
-		_close: T![')'],
-	) -> ParserResult<Self> {
+	fn new_max(_open: T!['('], name: T![Ident], _colon: T![:], _value: Self::Value, _close: T![')']) -> Result<Self> {
 		Err(Diagnostic::new(name.into(), Diagnostic::unexpected_ident))?
 	}
 
 	/// Method for constructing a "legacy min" media feature. Legacy features always include a colon token.
-	fn new_min(
-		_open: T!['('],
-		name: T![Ident],
-		_colon: T![:],
-		_value: Self::Value,
-		_close: T![')'],
-	) -> ParserResult<Self> {
+	fn new_min(_open: T!['('], name: T![Ident], _colon: T![:], _value: Self::Value, _close: T![')']) -> Result<Self> {
 		Err(Diagnostic::new(name.into(), Diagnostic::unexpected_ident))?
 	}
 
 	/// Method for constructing a "exact" media feature. Exact features always include a colon token.
-	fn new_exact(
-		open: T!['('],
-		name: T![Ident],
-		colon: T![:],
-		value: Self::Value,
-		close: T![')'],
-	) -> ParserResult<Self>;
+	fn new_exact(open: T!['('], name: T![Ident], colon: T![:], value: Self::Value, close: T![')']) -> Result<Self>;
 
 	/// Method for constructing a "left" media feature. This method is called when the parsed tokens encountered
 	/// the `<value>` token before the `<feature-name>`.
@@ -108,7 +91,7 @@ pub trait RangedFeature<'a>: Sized {
 		comparison: Comparison,
 		value: Self::Value,
 		close: T![')'],
-	) -> ParserResult<Self>;
+	) -> Result<Self>;
 
 	/// Method for constructing a "right" media feature. This method is called when the parsed tokens
 	/// encountered the `<feature-name>` token before the `<value>`.
@@ -118,7 +101,7 @@ pub trait RangedFeature<'a>: Sized {
 		comparison: Comparison,
 		name: T![Ident],
 		close: T![')'],
-	) -> ParserResult<Self>;
+	) -> Result<Self>;
 
 	/// Method for constructing a "ranged" media feature. This method is called when the parsed tokens
 	/// encountered the `<value>` token, followed by a `<comparison>`, followed by a `<feature-name>`, followed by a
@@ -131,14 +114,14 @@ pub trait RangedFeature<'a>: Sized {
 		right_comparison: Comparison,
 		value: Self::Value,
 		close: T![')'],
-	) -> ParserResult<Self>;
+	) -> Result<Self>;
 
 	fn parse_ranged_feature<I, A: AtomSet + PartialEq>(
 		p: &mut Parser<'a, I>,
 		name: &A,
 		min: Option<&A>,
 		max: Option<&A>,
-	) -> ParserResult<Self>
+	) -> Result<Self>
 	where
 		I: Iterator<Item = crate::Cursor> + Clone,
 	{

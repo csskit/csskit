@@ -1,8 +1,5 @@
-use crate::{
-	CursorSink, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, T, ToCursors,
-	ToSpan, Vec, token_macros,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::token_macros;
 
 /// A struct representing an AST node block that only accepts child "Rules". This is defined as:
 ///
