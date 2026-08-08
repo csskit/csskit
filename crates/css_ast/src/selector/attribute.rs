@@ -1,8 +1,4 @@
-use csskit_proc_macro::node;
-
-use crate::CssAtomSet;
-use css_parse::{Cursor, KindSet, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::*;
+use super::prelude::*;
 
 use super::NamespacePrefix;
 

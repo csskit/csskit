@@ -1,10 +1,7 @@
-use csskit_proc_macro::node;
+use super::prelude::*;
 
-use crate::{CSSInt, CssAtomSet, CssDiagnostic};
-use css_parse::{
-	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span, T,
-	ToCursors, ToSpan,
-};
+use crate::CSSInt;
+use css_parse::{CursorSink, SemanticEq, Span, ToCursors, ToSpan};
 
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

@@ -10,6 +10,15 @@ use css_parse::{
 use csskit_derives::*;
 use csskit_proc_macro::node;
 
+mod prelude {
+	pub(crate) use crate::{CssAtomSet, diagnostics::CssDiagnostic};
+	pub(crate) use css_parse::{
+		Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result as ParserResult, T, pseudo_class, pseudo_element,
+	};
+	pub(crate) use csskit_derives::*;
+	pub(crate) use csskit_proc_macro::node;
+}
+
 mod attribute;
 mod class;
 mod combinator;

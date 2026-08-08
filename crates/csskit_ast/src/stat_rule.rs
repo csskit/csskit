@@ -1,8 +1,5 @@
-use css_lexer::{Cursor, Kind, KindSet};
-use css_parse::{DeclarationList, DeclarationValue, NodeWithMetadata, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::*;
-
-use crate::CsskitAtomSet;
+use crate::prelude::*;
+use css_parse::{DeclarationList, DeclarationValue};
 
 /// The `@stat` rule defines a named statistic for collecting CSS metrics.
 ///

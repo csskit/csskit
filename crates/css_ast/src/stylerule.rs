@@ -1,6 +1,6 @@
 use crate::{
-	CssAtomSet, CssDiagnostic, CssMetadata, NodeKinds, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule,
-	rules,
+	CssAtomSet, CssMetadata, NodeKinds, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule,
+	diagnostics::CssDiagnostic, rules,
 };
 use css_parse::{
 	Box, Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,

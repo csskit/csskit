@@ -1,9 +1,5 @@
-use crate::{CssAtomSet, CssDiagnostic};
-use css_lexer::Kind;
+use super::prelude::*;
 use css_parse::Vec;
-use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, T};
-use csskit_derives::*;
-use csskit_proc_macro::node;
 
 use super::CompoundSelector;
 

@@ -1,11 +1,6 @@
-use crate::{CsskitAtomSet, WhenRule};
-use css_lexer::{Cursor, Kind, KindSet};
-use css_parse::Vec;
-use css_parse::{
-	Block, ComponentValues, DeclarationValue, Diagnostic, NodeWithMetadata, Parse, Parser, Peek,
-	Result as ParserResult, RuleVariants, T,
-};
-use csskit_derives::*;
+use crate::WhenRule;
+use crate::prelude::*;
+use css_parse::{Block, ComponentValues, DeclarationValue, Diagnostic, RuleVariants};
 
 /// A block containing declarations and optionally nested node rules.
 ///

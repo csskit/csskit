@@ -537,7 +537,6 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"Time",
 	"TimelineRangeCenterSubject",
 	"TimelineRangeName",
-	"Todo",
 	"TouchActionStyleValue",
 	"TransformBoxStyleValue",
 	"TransformStyleStyleValue",

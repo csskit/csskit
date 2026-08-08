@@ -1,8 +1,6 @@
-use csskit_proc_macro::node;
+use super::prelude::*;
 
-use crate::CssAtomSet;
-use css_parse::{Cursor, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, T};
-use csskit_derives::*;
+use css_parse::Result;
 
 #[node]
 #[derive(
