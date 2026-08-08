@@ -3,15 +3,10 @@ use std::{env, fs, path::Path};
 fn main() {
 	println!("cargo::rerun-if-changed=build.rs");
 	let mut node_type_variants = String::new();
-	let mut match_arms = String::new();
-	for name in css_ast::NodeId::all_variants() {
-		node_type_variants.push_str(&format!("\t{},\n", name));
-		match_arms.push_str(&format!("\t\t\tSelf::{} => Some(NodeId::{}),\n", name, name));
+	for id in css_ast::NodeId::all_variants() {
+		node_type_variants.push_str(&format!("\t{id},\n"));
 	}
-
-	if node_type_variants.is_empty() {
-		panic!("node_type_variants is empty!");
-	}
+	let first_node_type = css_ast::NodeId::from_index(0).expect("css_ast has no node types!");
 
 	let content = format!(
 		r#"
@@ -165,10 +160,7 @@ impl CsskitAtomSet {{
 	/// Generated at build time from all NodeId variants in css_ast.
 	/// Returns None if the selector is invalid (not a valid NodeId).
 	pub fn to_node_id(self) -> Option<NodeId> {{
-		match self {{
-{match_arms}
-			_ => None,
-		}}
+		NodeId::from_index((self as u16).checked_sub(Self::{first_node_type} as u16)?)
 	}}
 }}
 "#,
