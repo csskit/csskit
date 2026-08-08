@@ -1,5 +1,4 @@
 use super::prelude::*;
-
 /// <https://drafts.csswg.org/css-inline-3/#typedef-text-edge>
 ///
 /// ```text,ignore
@@ -12,7 +11,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextEdge {}
+pub enum TextEdge<'a> {}
 
 #[cfg(test)]
 mod tests {

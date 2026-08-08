@@ -63,7 +63,7 @@ pub struct FillStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.fill-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FillBreakStyleValue {}
+pub enum FillBreakStyleValue<'a> {}
 
 /// Represents the style value for `fill-color` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#fill-color).
 ///
@@ -176,7 +176,7 @@ pub struct FillOpacityStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.fill-origin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FillOriginStyleValue {}
+pub enum FillOriginStyleValue<'a> {}
 
 /// Represents the style value for `fill-position` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#fill-position).
 ///
@@ -262,7 +262,7 @@ pub struct FillRepeatStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.fill-rule"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FillRuleStyleValue {}
+pub enum FillRuleStyleValue<'a> {}
 
 /// Represents the style value for `fill-size` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#fill-size).
 ///
@@ -348,7 +348,7 @@ pub struct StrokeStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-align"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum StrokeAlignStyleValue {}
+pub enum StrokeAlignStyleValue<'a> {}
 
 /// Represents the style value for `stroke-break` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-break).
 ///
@@ -376,7 +376,7 @@ pub enum StrokeAlignStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum StrokeBreakStyleValue {}
+pub enum StrokeBreakStyleValue<'a> {}
 
 /// Represents the style value for `stroke-color` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-color).
 ///
@@ -462,7 +462,7 @@ pub struct StrokeDashCornerStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-dash-justify"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum StrokeDashJustifyStyleValue {}
+pub enum StrokeDashJustifyStyleValue<'a> {}
 
 /// Represents the style value for `stroke-dasharray` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-dasharray).
 ///
@@ -582,7 +582,7 @@ pub struct StrokeImageStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-linecap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum StrokeLinecapStyleValue {}
+pub enum StrokeLinecapStyleValue<'a> {}
 
 /// Represents the style value for `stroke-linejoin` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-linejoin).
 ///
@@ -612,7 +612,7 @@ pub enum StrokeLinecapStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-linejoin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum StrokeLinejoinStyleValue {}
+pub enum StrokeLinejoinStyleValue<'a> {}
 
 /// Represents the style value for `stroke-miterlimit` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-miterlimit).
 ///
@@ -699,7 +699,7 @@ pub struct StrokeOpacityStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.stroke-origin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum StrokeOriginStyleValue {}
+pub enum StrokeOriginStyleValue<'a> {}
 
 /// Represents the style value for `stroke-position` as defined in [fill-stroke-3](https://drafts.csswg.org/fill-stroke-3/#stroke-position).
 ///

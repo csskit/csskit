@@ -86,7 +86,7 @@ pub struct BookmarkLevelStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.bookmark-state"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BookmarkStateStyleValue {}
+pub enum BookmarkStateStyleValue<'a> {}
 
 /// Represents the style value for `content` as defined in [css-content-3](https://drafts.csswg.org/css-content-3/#content).
 ///

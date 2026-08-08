@@ -34,7 +34,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-decoration-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BoxDecorationBreakStyleValue {}
+pub enum BoxDecorationBreakStyleValue<'a> {}
 
 /// Represents the style value for `break-after` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-after).
 ///
@@ -65,7 +65,7 @@ pub enum BoxDecorationBreakStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.break-after"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BreakAfterStyleValue {}
+pub enum BreakAfterStyleValue<'a> {}
 
 /// Represents the style value for `break-before` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-before).
 ///
@@ -96,7 +96,7 @@ pub enum BreakAfterStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.break-before"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BreakBeforeStyleValue {}
+pub enum BreakBeforeStyleValue<'a> {}
 
 /// Represents the style value for `break-inside` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#break-inside).
 ///
@@ -125,7 +125,7 @@ pub enum BreakBeforeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.break-inside"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BreakInsideStyleValue {}
+pub enum BreakInsideStyleValue<'a> {}
 
 /// Represents the style value for `margin-break` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#margin-break).
 ///
@@ -153,7 +153,7 @@ pub enum BreakInsideStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MarginBreakStyleValue {}
+pub enum MarginBreakStyleValue<'a> {}
 
 /// Represents the style value for `orphans` as defined in [css-break-4](https://drafts.csswg.org/css-break-4/#orphans).
 ///

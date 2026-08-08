@@ -36,7 +36,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-collapse"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BorderCollapseStyleValue {}
+pub enum BorderCollapseStyleValue<'a> {}
 
 /// Represents the style value for `border-spacing` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#border-spacing).
 ///
@@ -97,7 +97,7 @@ pub struct BorderSpacingStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caption-side"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CaptionSideStyleValue {}
+pub enum CaptionSideStyleValue<'a> {}
 
 /// Represents the style value for `empty-cells` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#empty-cells).
 ///
@@ -127,7 +127,7 @@ pub enum CaptionSideStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.empty-cells"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum EmptyCellsStyleValue {}
+pub enum EmptyCellsStyleValue<'a> {}
 
 /// Represents the style value for `table-layout` as defined in [css-tables-3](https://drafts.csswg.org/css-tables-3/#table-layout).
 ///
@@ -156,4 +156,4 @@ pub enum EmptyCellsStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.table-layout"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TableLayoutStyleValue {}
+pub enum TableLayoutStyleValue<'a> {}

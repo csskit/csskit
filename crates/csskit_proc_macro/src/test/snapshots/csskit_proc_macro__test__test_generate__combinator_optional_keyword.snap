@@ -8,12 +8,12 @@ expression: pretty
 enum Foo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
-    Foo(::css_parse::T![Ident]),
+    Foo(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     Bar(
         Option<crate::Value<'a, crate::Color<'a>>>,
         #[cfg_attr(feature = "visitable", visit(skip))]
         #[atom(CssAtomSet::Bar)]
-        ::css_parse::T![Ident],
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
     ),
 }
 #[cfg(test)]

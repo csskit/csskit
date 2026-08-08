@@ -18,7 +18,7 @@ use crate::{CalcableValue, FillRuleStyleValue, Length, LengthPercentage};
 pub struct PolygonFunction<'a> {
 	#[atom(CssAtomSet::Polygon)]
 	pub name: T![Function],
-	pub fill_rule: Option<FillRuleStyleValue>,
+	pub fill_rule: Option<FillRuleStyleValue<'a>>,
 	pub round: Option<PolygonRound<'a>>,
 	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,

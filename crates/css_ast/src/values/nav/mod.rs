@@ -32,7 +32,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.spatial-navigation-action"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SpatialNavigationActionStyleValue {}
+pub enum SpatialNavigationActionStyleValue<'a> {}
 
 /// Represents the style value for `spatial-navigation-contain` as defined in [css-nav-1](https://drafts.csswg.org/css-nav-1/#spatial-navigation-contain).
 ///
@@ -63,7 +63,7 @@ pub enum SpatialNavigationActionStyleValue {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SpatialNavigationContainStyleValue {}
+pub enum SpatialNavigationContainStyleValue<'a> {}
 
 /// Represents the style value for `spatial-navigation-function` as defined in [css-nav-1](https://drafts.csswg.org/css-nav-1/#spatial-navigation-function).
 ///
@@ -94,4 +94,4 @@ pub enum SpatialNavigationContainStyleValue {}
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SpatialNavigationFunctionStyleValue {}
+pub enum SpatialNavigationFunctionStyleValue<'a> {}

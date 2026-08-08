@@ -17,7 +17,7 @@ pub enum BasicShape<'a> {
 	Circle(CircleFunction<'a>),
 	Ellipse(EllipseFunction<'a>),
 	Polygon(PolygonFunction<'a>),
-	Path(PathFunction),
+	Path(PathFunction<'a>),
 	Shape(ShapeFunction<'a>),
 }
 

@@ -12,7 +12,6 @@ expression: pretty
     ::csskit_derives::SemanticEq,
     ::csskit_derives::NodeWithMetadata,
     Debug,
-    Copy,
     Clone,
     PartialEq,
     Eq,
@@ -23,16 +22,21 @@ expression: pretty
 #[metadata(delegate)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
-pub enum FooKeywords {}
+pub enum FooKeywords<'a> {}
 #[cfg(test)]
-::stable_type_layout::register!(FooKeywords);
+::stable_type_layout::register!(FooKeywords < 'static >);
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
 struct Foo<'a>(
-    pub Option<::css_parse::Vec<'a, (::css_parse::T![Ident], ::css_parse::T![,])>>,
+    pub Option<
+        ::css_parse::Vec<
+            'a,
+            (crate::KeywordValue<'a, ::css_parse::T![Ident]>, ::css_parse::T![,]),
+        >,
+    >,
     #[atom(CssAtomSet::Bar)]
-    pub FooKeywords,
+    pub FooKeywords<'a>,
 );
 #[cfg(test)]
 ::stable_type_layout::register!(Foo < 'static >);

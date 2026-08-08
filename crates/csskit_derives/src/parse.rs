@@ -487,6 +487,39 @@ impl VariantPlan {
 			return Ok(Self::#ident { #(#members: #assignments),* });
 		}
 	}
+
+	/// Like [`return_with_hoisted_only`], but for a group that is **not** the last: if hoisted
+	/// shared fields were consumed we must construct here (those tokens are already eaten and
+	/// would otherwise be lost), yet when nothing was consumed we fall through to the next group
+	/// rather than erroring.
+	fn return_if_hoisted(&self, hoisted: &[&Ident]) -> TokenStream {
+		let ident = &self.ident;
+		let members = &self.members;
+		let post_parse_steps = &self.post_parse_steps;
+		let none_checks: Vec<_> =
+			self.fields.iter().filter(|f| hoisted.contains(&&f.var)).map(Field::none_check).collect();
+		if none_checks.is_empty() {
+			return TokenStream::new();
+		}
+		let assignments: Vec<TokenStream> = self
+			.fields
+			.iter()
+			.map(|f| {
+				if hoisted.contains(&&f.var) {
+					let v = &f.var;
+					quote! { #v }
+				} else {
+					quote! { None }
+				}
+			})
+			.collect();
+		quote! {
+			if !(#(#none_checks)&&*) {
+				#post_parse_steps
+				return Ok(Self::#ident { #(#members: #assignments),* });
+			}
+		}
+	}
 }
 
 /// Top-level enum-variant group: dispatches between `AtomDispatchPlan` (variants
@@ -670,6 +703,8 @@ impl<'a, 'b> Plan for MultiVariantBlocksPlan<'a, 'b> {
 
 		let trailing = if self.is_last {
 			quote! { #fallback }
+		} else if !all_hoisted_var_names.is_empty() {
+			self.variants[0].return_if_hoisted(&all_hoisted_var_names)
 		} else {
 			TokenStream::new()
 		};
@@ -1240,6 +1275,64 @@ fn derive_struct_body(
 	})
 }
 
+/// True when `ty` is a substitution value-slot wrapper (`Value<..>` / `CalcableValue<..>`).
+/// These slots peek broadly (they match any substitution/math function), so an enum with
+/// several of them cannot pick the right variant for a leading function by peek alone.
+fn type_is_value_slot(ty: &Type) -> bool {
+	matches!(ty, Type::Path(tp) if tp.path.segments.last().is_some_and(|s| {
+		let n = s.ident.to_string();
+		n == "Value" || n == "CalcableValue"
+	}))
+}
+
+/// Emits a pre-dispatch that resolves a leading substitution/math function to the correct
+/// value-slot variant by *trying* each slot (rewinding on failure) rather than committing to
+/// the first whose peek matches. Only single-field `Value`/`CalcableValue` variants participate.
+///
+/// Typed slots (no keyword atom) are tried before keyword slots (`Value<T![Ident]>`), so e.g.
+/// `var(--a, small)` in `font-size` lands in the typed `<absolute-size>` slot, and only a
+/// keyword-only enum falls back to a (deliberately arbitrary) keyword slot. Restricting the
+/// probe to `Kind::Function` leads keeps ordinary literal/keyword dispatch untouched.
+fn substitution_predispatch(
+	plans: &[VariantPlan],
+	post_parse_steps: &TokenStream,
+	wc: &mut WhereCollector,
+) -> TokenStream {
+	let mut typed: Vec<&VariantPlan> = Vec::new();
+	let mut keyword: Vec<&VariantPlan> = Vec::new();
+	for plan in plans {
+		if plan.fields.len() != 1 || !type_is_value_slot(&plan.first_type) {
+			continue;
+		}
+		if plan.effective_atom.is_some() { keyword.push(plan) } else { typed.push(plan) }
+	}
+	if typed.is_empty() && keyword.is_empty() {
+		return TokenStream::new();
+	}
+	// Keyword slots are interchangeable `Value<T![Ident]>`; the first is enough.
+	let attempts: TokenStream = typed
+		.into_iter()
+		.chain(keyword.into_iter().take(1))
+		.map(|plan| {
+			let ty = &plan.first_type;
+			wc.add(ty);
+			let ident = &plan.ident;
+			let member = &plan.members[0];
+			quote! {
+				if let Ok(v) = p.try_parse::<#ty>() {
+					#post_parse_steps
+					return Ok(Self::#ident { #member: v });
+				}
+			}
+		})
+		.collect();
+	quote! {
+		if p.peek_n(1) == ::css_parse::Kind::Function {
+			#attempts
+		}
+	}
+}
+
 fn derive_enum_body(
 	data: &DataEnum,
 	post_parse_steps: &TokenStream,
@@ -1269,7 +1362,8 @@ fn derive_enum_body(
 			Ok(EnumGroupPlan::new(no_atom, variants, &position).render(where_collector))
 		})
 		.collect::<Result<TokenStream>>()?;
-	Ok(ts)
+	let predispatch = substitution_predispatch(&plans, post_parse_steps, where_collector);
+	Ok(quote! { #predispatch #ts })
 }
 
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {

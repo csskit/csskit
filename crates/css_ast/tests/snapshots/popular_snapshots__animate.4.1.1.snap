@@ -69726,11 +69726,11 @@ StyleSheet(
                 offset: SourceOffset(58686),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(58688),
                 len: 7,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -69749,11 +69749,11 @@ StyleSheet(
                 offset: SourceOffset(58718),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(58720),
                 len: 7,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -71837,11 +71837,11 @@ StyleSheet(
                 offset: SourceOffset(60618),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(60620),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -71871,11 +71871,11 @@ StyleSheet(
                 offset: SourceOffset(60661),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(60663),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -73970,11 +73970,11 @@ StyleSheet(
                 offset: SourceOffset(62578),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(62580),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -74004,11 +74004,11 @@ StyleSheet(
                 offset: SourceOffset(62621),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(62623),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -75473,11 +75473,11 @@ StyleSheet(
                 offset: SourceOffset(63903),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(63905),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -75507,11 +75507,11 @@ StyleSheet(
                 offset: SourceOffset(63946),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(63948),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -76876,11 +76876,11 @@ StyleSheet(
                 offset: SourceOffset(65102),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(65104),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -76910,11 +76910,11 @@ StyleSheet(
                 offset: SourceOffset(65145),
                 len: 1,
               )),
-              value: Visible(Ident(Cursor(
+              value: Visible(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(65147),
                 len: 7,
-              ))),
+              )))),
               important: Some(BangImportant(
                 bang: Bang(Delim(Cursor(
                   kind: "Delim",
@@ -105471,11 +105471,11 @@ StyleSheet(
                     offset: SourceOffset(90749),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(90751),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -105780,11 +105780,11 @@ StyleSheet(
                     offset: SourceOffset(90998),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(91000),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -106174,11 +106174,11 @@ StyleSheet(
                     offset: SourceOffset(91351),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(91353),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -106483,11 +106483,11 @@ StyleSheet(
                     offset: SourceOffset(91600),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(91602),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -106877,11 +106877,11 @@ StyleSheet(
                     offset: SourceOffset(91952),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(91954),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -107186,11 +107186,11 @@ StyleSheet(
                     offset: SourceOffset(92200),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(92202),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -107580,11 +107580,11 @@ StyleSheet(
                     offset: SourceOffset(92552),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(92554),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -107889,11 +107889,11 @@ StyleSheet(
                     offset: SourceOffset(92797),
                     len: 1,
                   )),
-                  value: Visible(Ident(Cursor(
+                  value: Visible(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(92799),
                     len: 7,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -108307,11 +108307,11 @@ StyleSheet(
                     offset: SourceOffset(93169),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(93171),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -108616,11 +108616,11 @@ StyleSheet(
                     offset: SourceOffset(93416),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(93418),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -109010,11 +109010,11 @@ StyleSheet(
                     offset: SourceOffset(93770),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(93772),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -109319,11 +109319,11 @@ StyleSheet(
                     offset: SourceOffset(94019),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(94021),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -109713,11 +109713,11 @@ StyleSheet(
                     offset: SourceOffset(94376),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(94378),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -110022,11 +110022,11 @@ StyleSheet(
                     offset: SourceOffset(94624),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(94626),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -110416,11 +110416,11 @@ StyleSheet(
                     offset: SourceOffset(94979),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(94981),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",
@@ -110725,11 +110725,11 @@ StyleSheet(
                     offset: SourceOffset(95226),
                     len: 1,
                   )),
-                  value: Hidden(Ident(Cursor(
+                  value: Hidden(Literal(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(95228),
                     len: 6,
-                  ))),
+                  )))),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",

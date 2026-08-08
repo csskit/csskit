@@ -69,14 +69,14 @@ fn enum_type_with_lifetime() {
 #[test]
 fn multiple_keywords() {
 	let syntax = to_valuedef!("black | white | line-through | pink");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "multiple_keywords");
 }
 
 #[test]
 fn multiple_keywords_derive_parse() {
 	let syntax = to_valuedef!("black | white | line-through | pink");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "multiple_keywords_derive_parse");
 }
 
@@ -104,7 +104,7 @@ fn value_with_multiplier_oneormore() {
 #[test]
 fn keyword_or_type() {
 	let syntax = to_valuedef!( foo | <custom-ident> );
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "keyword_or_type");
 }
 
@@ -211,14 +211,14 @@ fn value_fixed_range_color2_optimized() {
 #[test]
 fn value_with_derive_visitable_adds_attributes() {
 	let syntax = to_valuedef! { foo | bar };
-	let data = to_deriveinput! { #[derive(Parse, Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse, Visitable)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "value_with_derive_visitable_adds_attributes");
 }
 
 #[test]
 fn value_with_derive_parse_skips_impl() {
 	let syntax = to_valuedef! { foo | bar };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "value_with_derive_parse_skips_impl");
 }
 
@@ -232,7 +232,7 @@ fn value_fixed_range_auto_color2_optimized() {
 #[test]
 fn keyword_int_literal() {
 	let syntax = to_valuedef! { keyword | 2 };
-	let data = to_deriveinput! { enum Foo {} };
+	let data = to_deriveinput! { enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "keyword_int_literal");
 }
 
@@ -246,14 +246,14 @@ fn keyword_bounded_type() {
 #[test]
 fn keyword_int_literal_dimension_literal() {
 	let syntax = to_valuedef! { keyword | 1 | 1deg };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "keyword_int_literal_dimension_literal");
 }
 
 #[test]
 fn literal_with_derive_parse() {
 	let syntax = to_valuedef!(" 0deg | 90deg ");
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "literal_with_derive_parse");
 }
 
@@ -292,21 +292,21 @@ fn just_optional() {
 #[test]
 fn combinator_optional_all_keywords() {
 	let syntax = to_valuedef! { foo || bar || baz };
-	let data = to_deriveinput! { #[derive(Visitable, Parse)] struct Foo {} };
+	let data = to_deriveinput! { #[derive(Visitable, Parse)] struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "combinator_optional_all_keywords");
 }
 
 #[test]
 fn combinator_optional_all_keywords_with_derive_parse() {
 	let syntax = to_valuedef! { foo || bar || baz };
-	let data = to_deriveinput! { #[derive(Parse, Visitable)] struct Foo {} };
+	let data = to_deriveinput! { #[derive(Parse, Visitable)] struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "combinator_optional_all_keywords_with_derive_parse");
 }
 
 #[test]
 fn combinator_optional_keywords_and_types() {
 	let syntax = to_valuedef! { foo || <bar> };
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a> {} };
 	assert_snapshot!(syntax, data, "combinator_optional_keywords_and_types");
 }
 
@@ -348,21 +348,21 @@ fn multiplier_with_two_type_alternatives() {
 #[test]
 fn group_with_optional_leader() {
 	let syntax = to_valuedef! { normal | [ <overflow-position>? <self-position> ] };
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "group_with_optional_leader");
 }
 
 #[test]
 fn none_or_type() {
 	let syntax = to_valuedef!( none | <custom-ident> );
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "none_or_type");
 }
 
 #[test]
 fn auto_or_none() {
 	let syntax = to_valuedef!(auto | none);
-	let data = to_deriveinput! { #[derive(Parse, Visitable)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse, Visitable)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "auto_or_none");
 }
 
@@ -411,7 +411,7 @@ fn all_must_occur_struct_with_range() {
 #[test]
 fn auto_or_type() {
 	let syntax = to_valuedef!( auto | <custom-ident> );
-	let data = to_deriveinput! { struct Foo; };
+	let data = to_deriveinput! { struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "auto_or_type");
 }
 
@@ -448,28 +448,28 @@ fn auto_and_length_with_range() {
 fn ordered_with_group_alternatives() {
 	let syntax =
 		to_valuedef! { normal | <content-distribution> | <overflow-position>? [ <content-position> | left | right ] };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "ordered_with_group_alternatives");
 }
 
 #[test]
 fn all_must_occur_with_group_alternatives() {
 	let syntax = to_valuedef! { legacy | legacy && [ left | right | center ] };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "all_must_occur_with_group_alternatives");
 }
 
 #[test]
 fn mixed_ordered_and_all_must_occur_distribution() {
 	let syntax = to_valuedef! { normal | <overflow-position>? [ <self-position> | left | right ] | legacy && [ left | right | center ] };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "mixed_ordered_and_all_must_occur_distribution");
 }
 
 #[test]
 fn enum_with_ordered_punct() {
 	let syntax = to_valuedef! { none | <number> / <number> | <length> };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_ordered_punct");
 }
 
@@ -477,42 +477,42 @@ fn enum_with_ordered_punct() {
 fn enum_with_keyword_options() {
 	let syntax =
 		to_valuedef! { none | [ underline || overline || line-through || blink ] | spelling-error | grammar-error };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_keyword_options");
 }
 
 #[test]
 fn enum_with_mixed_options() {
 	let syntax = to_valuedef! { none | [ <angle> || flip ] | <length> };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_mixed_options");
 }
 
 #[test]
 fn enum_with_type_only_options() {
 	let syntax = to_valuedef! { none | [ <angle> || <percentage> ] | <length> };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_type_only_options");
 }
 
 #[test]
 fn struct_nonor_keyword_options() {
 	let syntax = to_valuedef! { none | [ weight || style || small-caps || position ] };
-	let data = to_deriveinput! { #[derive(Parse)] struct Foo; };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
 	assert_snapshot!(syntax, data, "struct_nonor_keyword_options");
 }
 
 #[test]
 fn enum_with_keyword_group_in_options() {
 	let syntax = to_valuedef! { nowrap | [ wrap | wrap-reverse ] || balance };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "enum_with_keyword_group_in_options");
 }
 
 #[test]
 fn keyword_only_alternation_group_in_options() {
 	let syntax = to_valuedef! { [ wrap | wrap-reverse ] || balance };
-	let data = to_deriveinput! { #[derive(Parse)] enum Foo {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
 	assert_snapshot!(syntax, data, "keyword_only_alternation_group_in_options");
 }
 
@@ -540,7 +540,7 @@ fn struct_keyword_group_list() {
 #[test]
 fn vendor_prefixed_keyword_enum() {
 	let syntax = to_valuedef!(" foo | -webkit-sticky ");
-	let data = to_deriveinput! { #[derive(Parse)] enum TestValue {} };
+	let data = to_deriveinput! { #[derive(Parse)] enum TestValue<'a> {} };
 	let file = ::syn::parse2::<syn::File>(generate(syntax, data)).unwrap();
 	let pretty = ::prettyplease::unparse(&file);
 	assert!(pretty.contains("_WebkitSticky"), "expected _WebkitSticky in:\n{}", pretty);

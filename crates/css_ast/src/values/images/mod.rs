@@ -65,7 +65,7 @@ pub enum ImageOrientationStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-rendering"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ImageRenderingStyleValue {}
+pub enum ImageRenderingStyleValue<'a> {}
 
 /// Represents the style value for `image-resolution` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#image-resolution).
 ///
@@ -122,7 +122,7 @@ pub struct ImageResolutionStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.object-fit"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ObjectFitStyleValue {}
+pub enum ObjectFitStyleValue<'a> {}
 
 /// Represents the style value for `object-position` as defined in [css-images-5](https://drafts.csswg.org/css-images-5/#object-position).
 ///

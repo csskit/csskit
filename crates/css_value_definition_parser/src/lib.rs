@@ -94,10 +94,11 @@ impl DefType {
 		self.ident.0.as_str()
 	}
 
-	/// Returns true if this type *intrinsically* carries its own `'a` lifetime (i.e. the
-	/// hand-written or generated type is declared as `Foo<'a>`). This is independent of the
-	/// `Value<'a, T>` substitution wrapper, which always supplies `'a` separately. Numeric
-	/// primitives (`Integer`, `Length`, ...), `Url`, and `String` carry **no** own lifetime.
+	/// Returns true if this type *intrinsically* carries its own `'a` lifetime (i.e. the hand-written or generated type
+	/// is declared as `Foo<'a>`). This is independent of the `Value<'a, T>` substitution wrapper, which always supplies
+	/// `'a` separately. Almost every value type is unsized; the sized minority (numeric primitives like `Integer` and
+	/// `Length`, keyword enums, `Url`, ident newtypes) is enumerated in `sized_types`, so a type is unsized unless it
+	/// appears there.
 	pub fn maybe_unsized(&self) -> bool {
 		!sized_types::is_sized_type(self.ident_str())
 	}
@@ -299,7 +300,8 @@ impl Def {
 	/// to contain a full representation.
 	pub fn maybe_unsized(&self) -> bool {
 		match self {
-			Self::Ident(_) | Self::IntLiteral(_) | Self::DimensionLiteral(_, _) | Self::Punct(_) => false,
+			Self::IntLiteral(_) | Self::DimensionLiteral(_, _) | Self::Punct(_) => false,
+			Self::Ident(_) => true,
 			// Functions that contain multipliers or known allocating types
 			Self::Function(_, inner) => inner.maybe_unsized(),
 			Self::FunctionType(ty) => {
@@ -313,119 +315,8 @@ impl Def {
 						| "SnapInline" | "Superellipse"
 				)
 			}
-			// Every named <type> reference is wrapped in Value<'a, T> / CalcableValue<'a, T>,
-			// which always supplies 'a — so any container holding one is unsized.
 			Self::Type(_) => true,
-			Self::StyleValue(ty) => {
-				matches!(
-					ty.ident_str(),
-					"AnimationDelayStart"
-						| "AnimationDelayEnd"
-						| "AnimationRangeEnd"
-						| "AnimationRangeStart"
-						| "BorderBlockStart"
-						| "BorderImageSource"
-						| "BorderTopClip" | "BorderTopColor"
-						| "CaretColor" | "ColumnRule"
-						| "ColumnRuleWidth"
-						| "Container" | "ContainerName"
-						| "DynamicRangeLimit"
-						| "EventTriggerName"
-						| "EventTriggerSource"
-						| "GridAutoColumns"
-						| "GridAutoRows" | "GridTemplate"
-						| "GridTemplateColumns"
-						| "GridTemplateRows"
-						| "ListStyleImage" | "ListStyleType"
-						| "MaskBorderSource"
-						| "OutlineColor" | "PointerTimelineAxis"
-						| "PointerTimelineName"
-						| "PositionTryFallbacks"
-						| "RowRule" | "ScrollTimelineAxis"
-						| "ScrollTimelineName"
-						| "TextDecorationColor"
-						| "TextEmphasisColor"
-						| "TimelineTriggerActivationRange"
-						| "TimelineTriggerActivationRangeEnd"
-						| "TimelineTriggerActivationRangeStart"
-						| "TimelineTriggerActiveRange"
-						| "TimelineTriggerActiveRangeEnd"
-						| "TimelineTriggerActiveRangeStart"
-						| "TimelineTriggerName"
-						| "TimelineTriggerSource"
-						| "ViewTimelineAxis"
-						| "ViewTimelineInset"
-						| "ViewTimelineName"
-						| "WebkitTextStrokeColor"
-						| "WebkitTextStrokeWidth"
-					| "MarginTop" | "MarginRight" | "MarginBottom" | "MarginLeft"
-					| "PaddingTop" | "PaddingRight" | "PaddingBottom" | "PaddingLeft"
-					// Sizing properties that use Value<Length> or Value<LengthPercentage>
-					| "Width" | "Height" | "MaxWidth" | "MaxHeight" | "MinWidth" | "MinHeight"
-					| "ContainIntrinsicBlockSize" | "ContainIntrinsicWidth"
-					| "ContainIntrinsicHeight" | "ContainIntrinsicInlineSize"
-					// Flex properties
-					| "FlexGrow" | "FlexShrink" | "FlexBasis" | "FlexLineCount"
-					// Column/gap properties
-					| "ColumnGap" | "RowGap"
-					| "ColumnWidth" | "ColumnCount" | "ColumnHeight"
-					// Inline/typography properties
-					| "BaselineShift" | "LineHeight" | "InitialLetter" | "InitialLetterWrap"
-					| "LetterSpacing" | "LinePadding" | "TextAlign" | "TextAlignAll"
-					| "TextFit" | "TextIndent" | "WordSpacing"
-					| "HyphenateCharacter" | "HyphenateLimitChars" | "HyphenateLimitLines"
-					| "HyphenateLimitZone"
-					// Position properties
-					| "Top" | "Bottom" | "Left" | "Right" | "Inset" | "InsetBlock" | "InsetInline"
-					// Font properties
-					| "FontSize" | "FontSizeAdjust" | "FontWeight" | "FontWidth"
-					| "FontLanguageOverride"
-					// Speech properties
-					| "VoiceBalance" | "VoiceRate"
-					// Transform properties
-					| "Perspective" | "Translate"
-					// Text decoration
-					| "TextDecorationThickness"
-					// Rhythm
-					| "BlockStepSize"
-					// Borders radius
-					| "BorderBlockEndRadius" | "BorderBlockStartRadius" | "BorderBottomRadius"
-					| "BorderInlineEndRadius" | "BorderInlineStartRadius" | "BorderLeftRadius"
-					| "BorderLimit" | "BorderRadius" | "BorderRightRadius" | "BorderTopRadius"
-					// Webkit
-					| "WebkitOrder" | "WebkitTextSizeAdjust" | "WebkitFlex"
-					// Shorthand properties that reference unsized style values
-					| "Flex" | "Columns" | "Gap"
-					| "VerticalAlign"
-					| "BlockEllipsis"
-					| "Cue" | "CueBefore" | "CueAfter"
-					| "LineClamp"
-					| "TextEmphasis" | "TextEmphasisStyle"
-					// Properties whose StyleValue gained 'a via Value<'a, T> wrapping of
-					// angle/time/frequency/flex/number-length/number-percentage numerics.
-					| "BorderImageOutset" | "BorderImageSlice"
-					| "PauseBefore" | "PauseAfter" | "RestBefore" | "RestAfter"
-					| "InterestDelayStart" | "InterestDelayEnd"
-					// Shorthands referencing other now-unsized StyleValues (transitively gained 'a
-					// once every <type> reference became Value<'a, T> / CalcableValue<'a, T>).
-					// Names are the *referenced* property (the `<'prop'>` inside the grammar).
-					// minimal: name table, collapses once <'prop'> references are wrapped too.
-					| "AlignContent" | "JustifyContent" | "AlignItems" | "JustifyItems"
-					| "AlignSelf" | "JustifySelf"
-					| "BorderImageWidth"
-					| "BorderTopLeftRadius" | "CornerTopLeftShape"
-					| "CornerShape" | "CornerTopShape"
-					| "ColumnRuleInset"
-					| "BorderTopStyle" | "BorderTopWidth"
-					| "ColumnRuleColor" | "ColumnRuleInsetCap" | "ColumnRuleInsetJunction"
-					| "ColumnRuleInsetEnd" | "ColumnRuleInsetStart" | "ColumnRuleStyle"
-					| "AlignmentBaseline"
-					| "MixBlendMode" | "TextBoxEdge"
-					| "Opacity"
-					| "OutlineWidth" | "OutlineStyle"
-					| "PositionTryOrder"
-				)
-			}
+			Self::StyleValue(_) => true,
 			Self::AutoOr(d) | Self::NoneOr(d) | Self::AutoNoneOr(d) | Self::NormalOr(d) => d.maybe_unsized(),
 			Self::Optional(d) => d.maybe_unsized(),
 			Self::Combinator(ds, _) => ds.iter().any(|d| d.maybe_unsized()),

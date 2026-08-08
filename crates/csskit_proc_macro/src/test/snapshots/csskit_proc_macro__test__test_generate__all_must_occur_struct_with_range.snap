@@ -8,7 +8,7 @@ expression: pretty
 #[parse(all_must_occur)]
 struct Foo<'a>(
     #[atom(CssAtomSet::Auto)]
-    pub ::css_parse::T![Ident],
+    pub crate::KeywordValue<'a, ::css_parse::T![Ident]>,
     pub crate::CalcableValue<'a, crate::Ranged<crate::Percentage, 0i32, 100i32>>,
 );
 #[cfg(test)]

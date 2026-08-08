@@ -5,15 +5,15 @@ expression: pretty
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     #[atom(CssAtomSet::Black)]
-    Black(::css_parse::T![Ident]),
+    Black(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[atom(CssAtomSet::White)]
-    White(::css_parse::T![Ident]),
+    White(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[atom(CssAtomSet::LineThrough)]
-    LineThrough(::css_parse::T![Ident]),
+    LineThrough(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
     #[atom(CssAtomSet::Pink)]
-    Pink(::css_parse::T![Ident]),
+    Pink(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

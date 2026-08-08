@@ -72,11 +72,11 @@ pub struct RelativeControlPoint<'a>;
 /// <arc-sweep> = cw | ccw
 /// ```
 #[syntax(" cw | ccw ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ArcSweep {}
+pub enum ArcSweep<'a> {}
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-arc-size>
 ///
@@ -84,11 +84,11 @@ pub enum ArcSweep {}
 /// <arc-size> = large | small
 /// ```
 #[syntax(" large | small ")]
-#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ArcSize {}
+pub enum ArcSize<'a> {}
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-move-command>
 ///
@@ -282,8 +282,8 @@ pub struct ArcRotate<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct ArcCommandParams<'a> {
 	pub radii: ArcRadii<'a>,
-	pub sweep: Option<ArcSweep>,
-	pub size: Option<ArcSize>,
+	pub sweep: Option<ArcSweep<'a>>,
+	pub size: Option<ArcSize<'a>>,
 	pub rotate: Option<ArcRotate<'a>>,
 }
 

@@ -93,7 +93,7 @@ pub struct OrderStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.reading-flow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ReadingFlowStyleValue {}
+pub enum ReadingFlowStyleValue<'a> {}
 
 /// Represents the style value for `reading-order` as defined in [css-display-4](https://drafts.csswg.org/css-display-4/#reading-order).
 ///
@@ -152,4 +152,4 @@ pub struct ReadingOrderStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.visibility"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum VisibilityStyleValue {}
+pub enum VisibilityStyleValue<'a> {}

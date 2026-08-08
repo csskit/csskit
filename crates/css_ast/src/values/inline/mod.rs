@@ -93,7 +93,7 @@ pub enum BaselineShiftStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.baseline-source"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BaselineSourceStyleValue {}
+pub enum BaselineSourceStyleValue<'a> {}
 
 /// Represents the style value for `dominant-baseline` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#dominant-baseline).
 ///
@@ -196,7 +196,7 @@ pub enum InitialLetterStyleValue<'a> {}
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct InitialLetterAlignStyleValue;
+// pub struct InitialLetterAlignStyleValue<'a>;
 
 /// Represents the style value for `initial-letter-wrap` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-wrap).
 ///
@@ -253,7 +253,7 @@ pub enum InitialLetterWrapStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inline-sizing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum InlineSizingStyleValue {}
+pub enum InlineSizingStyleValue<'a> {}
 
 /// Represents the style value for `line-fit-edge` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#line-fit-edge).
 ///
@@ -405,7 +405,7 @@ pub struct TextBoxEdgeStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box-trim"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum TextBoxTrimStyleValue {}
+pub enum TextBoxTrimStyleValue<'a> {}
 
 /// Represents the style value for `vertical-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#vertical-align).
 ///

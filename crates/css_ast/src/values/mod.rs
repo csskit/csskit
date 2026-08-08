@@ -151,7 +151,8 @@ pub use transforms::*;
 pub use transitions::*;
 pub use ui::*;
 pub use value::{
-	CalcableSubstitutionFunction, CalcableValue, NumericSubstitutionFunction, NumericValue, SubstitutionFunction, Value,
+	CalcableSubstitutionFunction, CalcableValue, KeywordSubstitutionFunction, KeywordValue,
+	NumericSubstitutionFunction, NumericValue, SubstitutionFunction, Value,
 };
 pub(crate) use value::{impl_value_slot_parse, is_substitution_function};
 pub use values::*;

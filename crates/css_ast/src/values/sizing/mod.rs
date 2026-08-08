@@ -63,7 +63,7 @@ pub struct AspectRatioStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.box-sizing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BoxSizingStyleValue {}
+pub enum BoxSizingStyleValue<'a> {}
 
 /// Represents the style value for `contain-intrinsic-block-size` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#contain-intrinsic-block-size).
 ///
@@ -254,7 +254,7 @@ pub struct ContainIntrinsicWidthStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.frame-sizing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FrameSizingStyleValue {}
+pub enum FrameSizingStyleValue<'a> {}
 
 /// Represents the style value for `height` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#height).
 ///
@@ -417,7 +417,7 @@ pub enum MinHeightStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.min-intrinsic-sizing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MinIntrinsicSizingStyleValue {}
+pub enum MinIntrinsicSizingStyleValue<'a> {}
 
 /// Represents the style value for `min-width` as defined in [css-sizing-4](https://drafts.csswg.org/css-sizing-4/#min-width).
 ///

@@ -36,7 +36,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clear"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ClearStyleValue {}
+pub enum ClearStyleValue<'a> {}
 
 /// Represents the style value for `float` as defined in [css-page-floats-3](https://drafts.csswg.org/css-page-floats-3/#float).
 ///
@@ -149,4 +149,4 @@ pub struct FloatOffsetStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.float-reference"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FloatReferenceStyleValue {}
+pub enum FloatReferenceStyleValue<'a> {}

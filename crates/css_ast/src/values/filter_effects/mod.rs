@@ -68,7 +68,7 @@ pub struct BackdropFilterStyleValue<'a>;
 )]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColorInterpolationFiltersStyleValue {}
+pub enum ColorInterpolationFiltersStyleValue<'a> {}
 
 /// Represents the style value for `filter` as defined in [filter-effects-2](https://drafts.csswg.org/filter-effects-2/#filter).
 ///

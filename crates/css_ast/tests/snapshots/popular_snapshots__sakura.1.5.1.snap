@@ -818,11 +818,11 @@ StyleSheet(
                 offset: SourceOffset(806),
                 len: 1,
               )),
-              value: BreakWord(Ident(Cursor(
+              value: BreakWord(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(808),
                 len: 10,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -841,11 +841,11 @@ StyleSheet(
                 offset: SourceOffset(831),
                 len: 1,
               )),
-              value: BreakWord(Ident(Cursor(
+              value: BreakWord(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(833),
                 len: 10,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -864,11 +864,11 @@ StyleSheet(
                 offset: SourceOffset(861),
                 len: 1,
               )),
-              value: BreakAll(Ident(Cursor(
+              value: BreakAll(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(863),
                 len: 9,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -887,11 +887,11 @@ StyleSheet(
                 offset: SourceOffset(886),
                 len: 1,
               )),
-              value: BreakWord(Ident(Cursor(
+              value: BreakWord(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(888),
                 len: 10,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1443,11 +1443,11 @@ StyleSheet(
                 len: 1,
               )),
               value: TextDecorationStyleValue(
-                text_decoration_line: Some(r#None(Ident(Cursor(
+                text_decoration_line: Some(r#None(Literal(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(1216),
                   len: 4,
-                )))),
+                ))))),
                 text_decoration_thickness: None,
                 text_decoration_style: None,
                 text_decoration_color: None,
@@ -2143,11 +2143,11 @@ StyleSheet(
                 offset: SourceOffset(1744),
                 len: 1,
               )),
-              value: Auto(Ident(Cursor(
+              value: Auto(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(1746),
                 len: 4,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2332,11 +2332,11 @@ StyleSheet(
                 offset: SourceOffset(1918),
                 len: 1,
               )),
-              value: Auto(Ident(Cursor(
+              value: Auto(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(1920),
                 len: 4,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2547,11 +2547,11 @@ StyleSheet(
                 offset: SourceOffset(2093),
                 len: 1,
               )),
-              value: PreWrap(Ident(Cursor(
+              value: PreWrap(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2095),
                 len: 8,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2654,11 +2654,11 @@ StyleSheet(
                 offset: SourceOffset(2181),
                 len: 1,
               )),
-              value: Pre(Ident(Cursor(
+              value: Pre(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2183),
                 len: 3,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2728,11 +2728,11 @@ StyleSheet(
                 offset: SourceOffset(2242),
                 len: 1,
               )),
-              value: Justify(Ident(Cursor(
+              value: Justify(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2244),
                 len: 7,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2774,11 +2774,11 @@ StyleSheet(
                 offset: SourceOffset(2285),
                 len: 1,
               )),
-              value: Collapse(Ident(Cursor(
+              value: Collapse(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2287),
                 len: 8,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3403,11 +3403,11 @@ StyleSheet(
                 offset: SourceOffset(2735),
                 len: 1,
               )),
-              value: Center(Ident(Cursor(
+              value: Center(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2737),
                 len: 6,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3427,11 +3427,11 @@ StyleSheet(
                 len: 1,
               )),
               value: TextDecorationStyleValue(
-                text_decoration_line: Some(r#None(Ident(Cursor(
+                text_decoration_line: Some(r#None(Literal(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(2764),
                   len: 4,
-                )))),
+                ))))),
                 text_decoration_thickness: None,
                 text_decoration_style: None,
                 text_decoration_color: None,
@@ -3454,11 +3454,11 @@ StyleSheet(
                 offset: SourceOffset(2783),
                 len: 1,
               )),
-              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Ident(Cursor(
+              value: WhiteSpaceCollapseTextWrapModeWhiteSpaceTrim(Optionals3(None, Some(Nowrap(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2785),
                 len: 6,
-              )))), None)),
+              ))))), None)),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3604,11 +3604,11 @@ StyleSheet(
                 offset: SourceOffset(2922),
                 len: 1,
               )),
-              value: BorderBox(Ident(Cursor(
+              value: BorderBox(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(2924),
                 len: 10,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4892,11 +4892,11 @@ StyleSheet(
                 offset: SourceOffset(3838),
                 len: 1,
               )),
-              value: BorderBox(Ident(Cursor(
+              value: BorderBox(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(3840),
                 len: 10,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

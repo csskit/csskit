@@ -64,7 +64,7 @@ pub struct ColumnCountStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-fill"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnFillStyleValue {}
+pub enum ColumnFillStyleValue<'a> {}
 
 /// Represents the style value for `column-height` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#column-height).
 ///
@@ -177,7 +177,7 @@ pub struct ColumnWidthStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ColumnWrapStyleValue {}
+pub enum ColumnWrapStyleValue<'a> {}
 
 /// Represents the style value for `columns` as defined in [css-multicol-2](https://drafts.csswg.org/css-multicol-2/#columns).
 ///

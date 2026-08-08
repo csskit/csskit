@@ -59,7 +59,7 @@ pub struct BlockStepStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-align"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BlockStepAlignStyleValue {}
+pub enum BlockStepAlignStyleValue<'a> {}
 
 /// Represents the style value for `block-step-insert` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-insert).
 ///
@@ -86,7 +86,7 @@ pub enum BlockStepAlignStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-insert"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BlockStepInsertStyleValue {}
+pub enum BlockStepInsertStyleValue<'a> {}
 
 /// Represents the style value for `block-step-round` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-round).
 ///
@@ -113,7 +113,7 @@ pub enum BlockStepInsertStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.block-step-round"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum BlockStepRoundStyleValue {}
+pub enum BlockStepRoundStyleValue<'a> {}
 
 /// Represents the style value for `block-step-size` as defined in [css-rhythm-1](https://drafts.csswg.org/css-rhythm-1/#block-step-size).
 ///

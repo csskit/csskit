@@ -557,6 +557,7 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	RuleWidth,
 	Running,
 	Scale,
+	ScrollAxisLock,
 	ScrollBehavior,
 	ScrollInitialTarget,
 	ScrollMargin,
@@ -729,4 +730,5 @@ pub const CSS_PROPERTY_ATOMS: &[crate::CssAtomSet] = &[
 	WritingMode,
 	ZIndex,
 	Zoom,
+	_WebkitLineClamp,
 ];

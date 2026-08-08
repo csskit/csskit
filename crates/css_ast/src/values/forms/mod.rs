@@ -34,7 +34,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.field-sizing"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum FieldSizingStyleValue {}
+pub enum FieldSizingStyleValue<'a> {}
 
 /// Represents the style value for `input-security` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#input-security).
 ///
@@ -61,7 +61,7 @@ pub enum FieldSizingStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.input-security"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum InputSecurityStyleValue {}
+pub enum InputSecurityStyleValue<'a> {}
 
 /// Represents the style value for `slider-orientation` as defined in [css-forms-1](https://drafts.csswg.org/css-forms-1/#slider-orientation).
 ///
@@ -88,4 +88,4 @@ pub enum InputSecurityStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.slider-orientation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum SliderOrientationStyleValue {}
+pub enum SliderOrientationStyleValue<'a> {}

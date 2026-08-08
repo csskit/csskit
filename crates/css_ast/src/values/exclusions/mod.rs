@@ -32,7 +32,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-flow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WrapFlowStyleValue {}
+pub enum WrapFlowStyleValue<'a> {}
 
 /// Represents the style value for `wrap-through` as defined in [css-exclusions-1](https://drafts.csswg.org/css-exclusions-1/#wrap-through).
 ///
@@ -59,4 +59,4 @@ pub enum WrapFlowStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.wrap-through"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WrapThroughStyleValue {}
+pub enum WrapThroughStyleValue<'a> {}

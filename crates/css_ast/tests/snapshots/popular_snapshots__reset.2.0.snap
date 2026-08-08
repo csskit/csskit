@@ -1034,11 +1034,11 @@ StyleSheet(
               )),
               value: First(
                 first: None,
-                alignment_baseline: Some(Baseline(Ident(Cursor(
+                alignment_baseline: Some(Baseline(Literal(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(685),
                   len: 8,
-                )))),
+                ))))),
                 baseline_shift: None,
               ),
               important: None,
@@ -1376,11 +1376,11 @@ StyleSheet(
                 offset: SourceOffset(936),
                 len: 1,
               )),
-              value: r#None(Ident(Cursor(
+              value: r#None(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(938),
                 len: 4,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1521,11 +1521,11 @@ StyleSheet(
                 offset: SourceOffset(1025),
                 len: 1,
               )),
-              value: r#None(Ident(Cursor(
+              value: r#None(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(1027),
                 len: 4,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1572,11 +1572,11 @@ StyleSheet(
                 offset: SourceOffset(1059),
                 len: 1,
               )),
-              value: Collapse(Ident(Cursor(
+              value: Collapse(Literal(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(1061),
                 len: 8,
-              ))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

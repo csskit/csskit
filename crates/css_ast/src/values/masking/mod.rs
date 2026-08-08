@@ -93,7 +93,7 @@ pub enum ClipPathStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.clip-rule"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ClipRuleStyleValue {}
+pub enum ClipRuleStyleValue<'a> {}
 
 /// Represents the style value for `mask` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask).
 ///
@@ -200,7 +200,7 @@ pub struct MaskStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-border-mode"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MaskBorderModeStyleValue {}
+pub enum MaskBorderModeStyleValue<'a> {}
 
 /// Represents the style value for `mask-border-outset` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border-outset).
 ///
@@ -260,7 +260,7 @@ pub struct MaskBorderOutsetStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-border-repeat"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct MaskBorderRepeatStyleValue;
+pub struct MaskBorderRepeatStyleValue<'a>;
 
 /// Represents the style value for `mask-border-slice` as defined in [css-masking-1](https://drafts.csswg.org/css-masking-1/#mask-border-slice).
 ///
@@ -622,4 +622,4 @@ pub struct MaskSizeStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.mask-type"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MaskTypeStyleValue {}
+pub enum MaskTypeStyleValue<'a> {}

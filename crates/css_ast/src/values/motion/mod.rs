@@ -55,7 +55,7 @@ use impls::*;
 // )]
 // #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 // #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct OffsetStyleValue;
+// pub struct OffsetStyleValue<'a>;
 
 /// Represents the style value for `offset-anchor` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-anchor).
 ///

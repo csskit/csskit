@@ -36,7 +36,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.color-adjust"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColorAdjustStyleValue;
+pub struct ColorAdjustStyleValue<'a>;
 
 /// Represents the style value for `color-scheme` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#color-scheme).
 ///
@@ -95,7 +95,7 @@ pub struct ColorSchemeStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.forced-color-adjust"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ForcedColorAdjustStyleValue {}
+pub enum ForcedColorAdjustStyleValue<'a> {}
 
 /// Represents the style value for `print-color-adjust` as defined in [css-color-adjust-1](https://drafts.csswg.org/css-color-adjust-1/#print-color-adjust).
 ///
@@ -125,4 +125,4 @@ pub enum ForcedColorAdjustStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.print-color-adjust"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PrintColorAdjustStyleValue {}
+pub enum PrintColorAdjustStyleValue<'a> {}

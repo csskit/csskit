@@ -6,8 +6,8 @@ expression: pretty
 #[repr(C)]
 struct Foo<'a> {
     pub caret_color: Option<crate::CaretColorStyleValue<'a>>,
-    pub caret_animation: Option<crate::CaretAnimationStyleValue>,
-    pub caret_shape: Option<crate::CaretShapeStyleValue>,
+    pub caret_animation: Option<crate::CaretAnimationStyleValue<'a>>,
+    pub caret_shape: Option<crate::CaretShapeStyleValue<'a>>,
 }
 #[cfg(test)]
 ::stable_type_layout::register!(Foo < 'static >);

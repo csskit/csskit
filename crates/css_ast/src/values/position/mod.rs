@@ -336,7 +336,7 @@ pub struct LeftStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overlay"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverlayStyleValue {}
+pub enum OverlayStyleValue<'a> {}
 
 /// Represents the style value for `position` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#position).
 ///
@@ -366,7 +366,7 @@ pub enum OverlayStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionStyleValue {}
+pub enum PositionStyleValue<'a> {}
 
 /// Represents the style value for `right` as defined in [css-position-4](https://drafts.csswg.org/css-position-4/#right).
 ///

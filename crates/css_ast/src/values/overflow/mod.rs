@@ -88,7 +88,7 @@ pub enum BlockEllipsisStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.continue"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ContinueStyleValue {}
+pub enum ContinueStyleValue<'a> {}
 
 /// Represents the style value for `line-clamp` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#line-clamp).
 ///
@@ -175,7 +175,7 @@ pub struct MaxLinesStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OverflowStyleValue;
+pub struct OverflowStyleValue<'a>;
 
 /// Represents the style value for `overflow-block` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-block).
 ///
@@ -206,7 +206,7 @@ pub struct OverflowStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverflowBlockStyleValue {}
+pub enum OverflowBlockStyleValue<'a> {}
 
 /// Represents the style value for `overflow-clip-margin` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-clip-margin).
 ///
@@ -597,7 +597,7 @@ pub struct OverflowClipMarginTopStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverflowInlineStyleValue {}
+pub enum OverflowInlineStyleValue<'a> {}
 
 /// Represents the style value for `overflow-x` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-x).
 ///
@@ -628,7 +628,7 @@ pub enum OverflowInlineStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-x"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverflowXStyleValue {}
+pub enum OverflowXStyleValue<'a> {}
 
 /// Represents the style value for `overflow-y` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#overflow-y).
 ///
@@ -659,7 +659,7 @@ pub enum OverflowXStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow-y"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum OverflowYStyleValue {}
+pub enum OverflowYStyleValue<'a> {}
 
 /// Represents the style value for `scroll-axis-lock` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-axis-lock).
 ///
@@ -686,7 +686,7 @@ pub enum OverflowYStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-axis-lock"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollAxisLockStyleValue {}
+pub enum ScrollAxisLockStyleValue<'a> {}
 
 /// Represents the style value for `scroll-behavior` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-behavior).
 ///
@@ -714,7 +714,7 @@ pub enum ScrollAxisLockStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-behavior"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollBehaviorStyleValue {}
+pub enum ScrollBehaviorStyleValue<'a> {}
 
 /// Represents the style value for `scroll-marker-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-marker-group).
 ///
@@ -743,7 +743,7 @@ pub enum ScrollBehaviorStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-marker-group"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollMarkerGroupStyleValue {}
+pub enum ScrollMarkerGroupStyleValue<'a> {}
 
 /// Represents the style value for `scroll-target-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-target-group).
 ///
@@ -772,7 +772,7 @@ pub enum ScrollMarkerGroupStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-target-group"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollTargetGroupStyleValue {}
+pub enum ScrollTargetGroupStyleValue<'a> {}
 
 /// Represents the style value for `scrollbar-gutter` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scrollbar-gutter).
 ///
@@ -801,7 +801,7 @@ pub enum ScrollTargetGroupStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scrollbar-gutter"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollbarGutterStyleValue;
+pub struct ScrollbarGutterStyleValue<'a>;
 
 /// Represents the style value for `text-overflow` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#text-overflow).
 ///

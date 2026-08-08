@@ -5,7 +5,7 @@ expression: pretty
 #[derive(Parse)]
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
-enum Foo {
+enum Foo<'a> {
     Literal0deg(#[atom(CssAtomSet::Deg)] crate::Exact<::css_parse::T![Dimension], 0i32>),
     Literal90deg(
         #[atom(CssAtomSet::Deg)]
@@ -13,4 +13,4 @@ enum Foo {
     ),
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

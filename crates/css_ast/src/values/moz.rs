@@ -57,7 +57,7 @@ pub struct MozColumnCountStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MozUserSelectStyleValue {}
+pub enum MozUserSelectStyleValue<'a> {}
 
 /// `-moz-appearance` — alias for `appearance`.
 #[syntax(" none | auto | base | base-select | <compat-auto> | <compat-special> ")]
@@ -96,7 +96,7 @@ pub enum MozAppearanceStyleValue<'a> {}
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MozOsxFontSmoothingStyleValue {}
+pub enum MozOsxFontSmoothingStyleValue<'a> {}
 
 /// `-moz-transition` — alias for `transition`.
 #[syntax(" <single-transition># ")]
@@ -131,7 +131,7 @@ pub struct MozTransitionStyleValue<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum MozBoxSizingStyleValue {}
+pub enum MozBoxSizingStyleValue<'a> {}
 
 /// `-moz-filter` - alias for `filter`.
 #[syntax(" none | <filter-value-list> ")]

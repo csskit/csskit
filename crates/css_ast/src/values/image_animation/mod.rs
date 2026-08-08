@@ -33,4 +33,4 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.image-animation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ImageAnimationStyleValue {}
+pub enum ImageAnimationStyleValue<'a> {}

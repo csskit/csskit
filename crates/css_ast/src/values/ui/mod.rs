@@ -120,7 +120,7 @@ pub struct CaretStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-animation"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CaretAnimationStyleValue {}
+pub enum CaretAnimationStyleValue<'a> {}
 
 /// Represents the style value for `caret-color` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#caret-color).
 ///
@@ -180,7 +180,7 @@ pub struct CaretColorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.caret-shape"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum CaretShapeStyleValue {}
+pub enum CaretShapeStyleValue<'a> {}
 
 /// Represents the style value for `cursor` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#cursor).
 ///
@@ -240,7 +240,7 @@ pub struct CursorStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.interactivity"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum InteractivityStyleValue {}
+pub enum InteractivityStyleValue<'a> {}
 
 /// Represents the style value for `interest-delay` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#interest-delay).
 ///
@@ -680,7 +680,7 @@ pub struct OutlineWidthStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.pointer-events"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PointerEventsStyleValue {}
+pub enum PointerEventsStyleValue<'a> {}
 
 /// Represents the style value for `resize` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#resize).
 ///
@@ -709,7 +709,7 @@ pub enum PointerEventsStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.resize"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ResizeStyleValue {}
+pub enum ResizeStyleValue<'a> {}
 
 /// Represents the style value for `user-select` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#user-select).
 ///
@@ -738,7 +738,7 @@ pub enum ResizeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.user-select"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum UserSelectStyleValue {}
+pub enum UserSelectStyleValue<'a> {}
 
 /// Represents the style value for `window-drag` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#window-drag).
 ///
@@ -766,4 +766,4 @@ pub enum UserSelectStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.window-drag"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum WindowDragStyleValue {}
+pub enum WindowDragStyleValue<'a> {}

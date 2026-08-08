@@ -35,7 +35,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-align"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RubyAlignStyleValue {}
+pub enum RubyAlignStyleValue<'a> {}
 
 /// Represents the style value for `ruby-merge` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-merge).
 ///
@@ -63,7 +63,7 @@ pub enum RubyAlignStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-merge"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RubyMergeStyleValue {}
+pub enum RubyMergeStyleValue<'a> {}
 
 /// Represents the style value for `ruby-overhang` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-overhang).
 ///
@@ -93,7 +93,7 @@ pub enum RubyMergeStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-overhang"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RubyOverhangStyleValue {}
+pub enum RubyOverhangStyleValue<'a> {}
 
 /// Represents the style value for `ruby-position` as defined in [css-ruby-1](https://drafts.csswg.org/css-ruby-1/#ruby-position).
 ///
@@ -123,4 +123,4 @@ pub enum RubyOverhangStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.ruby-position"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum RubyPositionStyleValue {}
+pub enum RubyPositionStyleValue<'a> {}

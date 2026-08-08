@@ -6,16 +6,16 @@ expression: pretty
 #[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
 #[parse(one_must_occur)]
-struct Foo {
+struct Foo<'a> {
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Foo)]
-    pub foo: Option<::css_parse::T![Ident]>,
+    pub foo: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Bar)]
-    pub bar: Option<::css_parse::T![Ident]>,
+    pub bar: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
     #[cfg_attr(feature = "visitable", visit(skip))]
     #[atom(CssAtomSet::Baz)]
-    pub baz: Option<::css_parse::T![Ident]>,
+    pub baz: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
 }
 #[cfg(test)]
-::stable_type_layout::register!(Foo);
+::stable_type_layout::register!(Foo < 'static >);

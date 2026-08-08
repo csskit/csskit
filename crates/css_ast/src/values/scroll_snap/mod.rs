@@ -33,7 +33,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-initial-target"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollInitialTargetStyleValue {}
+pub enum ScrollInitialTargetStyleValue<'a> {}
 
 /// Represents the style value for `scroll-margin` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-margin).
 ///
@@ -781,7 +781,7 @@ pub struct ScrollPaddingTopStyleValue<'a>;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-align"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScrollSnapAlignStyleValue;
+pub struct ScrollSnapAlignStyleValue<'a>;
 
 /// Represents the style value for `scroll-snap-stop` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-stop).
 ///
@@ -810,7 +810,7 @@ pub struct ScrollSnapAlignStyleValue;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-stop"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollSnapStopStyleValue {}
+pub enum ScrollSnapStopStyleValue<'a> {}
 
 /// Represents the style value for `scroll-snap-type` as defined in [css-scroll-snap-2](https://drafts.csswg.org/css-scroll-snap-2/#scroll-snap-type).
 ///
@@ -839,4 +839,4 @@ pub enum ScrollSnapStopStyleValue {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-snap-type"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollSnapTypeStyleValue {}
+pub enum ScrollSnapTypeStyleValue<'a> {}
