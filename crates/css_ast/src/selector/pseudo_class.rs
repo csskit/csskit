@@ -1,7 +1,4 @@
-use crate::{CssAtomSet, CssDiagnostic};
-use css_parse::{Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T};
-use csskit_derives::*;
-use csskit_proc_macro::node;
+use super::prelude::*;
 
 use super::{moz::MozPseudoClass, ms::MsPseudoClass, o::OPseudoClass, webkit::WebkitPseudoClass};
 

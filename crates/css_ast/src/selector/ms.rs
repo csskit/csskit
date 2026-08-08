@@ -1,7 +1,4 @@
-use crate::CssAtomSet;
-use css_parse::{Diagnostic, pseudo_class, pseudo_element};
-use csskit_derives::*;
-use csskit_proc_macro::node;
+use super::prelude::*;
 
 pseudo_element!(
 	#[node]

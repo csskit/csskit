@@ -1,7 +1,4 @@
-use csskit_proc_macro::node;
-
-use css_parse::{Cursor, Kind, KindSet, Parser, Peek, T};
-use csskit_derives::*;
+use super::prelude::*;
 
 #[node]
 #[derive(Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

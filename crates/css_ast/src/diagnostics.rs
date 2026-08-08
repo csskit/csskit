@@ -1,7 +1,6 @@
 use css_parse::{Diagnostic, DiagnosticMeta, SourceCursor};
 
 pub trait CssDiagnostic {
-	fn unimplemented(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_pseudo_class(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_pseudo_element(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_at_rule(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
@@ -17,15 +16,6 @@ pub trait CssDiagnostic {
 }
 
 impl CssDiagnostic for Diagnostic {
-	fn unimplemented(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
-		DiagnosticMeta {
-			code: "Unimplemented",
-			message: "This cannot yet be parsed by the parser :(".into(),
-			help: "This feature needs to be implemented within csskit. This file won't parse without it.".into(),
-			labels: vec![],
-		}
-	}
-
 	fn unexpected_pseudo_class(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
 			code: "UnexpectedPseudo",

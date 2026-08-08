@@ -1,10 +1,7 @@
-use csskit_proc_macro::node;
+use super::prelude::*;
 
-use crate::{CssAtomSet, CssDiagnostic, DirValue};
-use css_parse::{
-	Cursor, Diagnostic, Parse, Parser, Result as ParserResult, T, pseudo_class, pseudo_element, syntax::CommaSeparated,
-};
-use csskit_derives::*;
+use crate::DirValue;
+use css_parse::syntax::CommaSeparated;
 
 pseudo_element!(
 	/// https://developer.mozilla.org/en-US/docs/Web/CSS/Mozilla_Extensions#pseudo-elements_and_pseudo-classes

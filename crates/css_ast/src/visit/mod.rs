@@ -7,7 +7,8 @@ use css_parse::Vec;
 use css_parse::{
 	Block, Box, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup, DeclarationList,
 	DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2, Optionals3,
-	Optionals4, Optionals5, QualifiedRule, RuleList, ToSpan, syntax::BadDeclaration, token_macros,
+	Optionals4, Optionals5, Parse, Peek, QualifiedRule, RuleList, ToCursors, ToSpan, syntax::BadDeclaration,
+	token_macros,
 };
 use visit_flow::{VisitFlow, try_visit};
 

@@ -10722,8 +10722,6 @@ TimelineTriggerSourceStyleValue: size=24 align=8 {
 TimelineTriggerStyleValue: size=32 align=8 {
     0: 0
 }
-Todo: size=1 align=1
-    0: Todo = 0
 TopStyleValue: size=40 align=8 {
     0: 0
 }

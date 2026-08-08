@@ -1,12 +1,7 @@
-use css_lexer::{Cursor, Kind, SourceOffset, Span};
-use css_parse::Vec;
-use css_parse::{
-	ComponentValues, CursorSink, NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, RuleVariants,
-	SemanticEq, StyleSheet, ToCursors, ToSpan,
-};
-use csskit_derives::*;
+use crate::prelude::*;
+use css_lexer::{SourceOffset, Span};
+use css_parse::{ComponentValues, CursorSink, RuleVariants, SemanticEq, StyleSheet, ToCursors, ToSpan};
 
-use crate::CsskitAtomSet;
 use crate::node_rule::NodeRule;
 use crate::stat_rule::StatRule;
 use crate::when_rule::WhenRule;

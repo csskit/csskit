@@ -1,11 +1,6 @@
-use crate::{
-	CssAtomSet,
-	specificity::{Specificity, ToSpecificity},
-};
-use css_lexer::Kind;
-use css_parse::{CommaSeparated, Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result as ParserResult, State, T};
-use csskit_derives::*;
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::specificity::{Specificity, ToSpecificity};
+use css_parse::{CommaSeparated, State};
 
 use super::{ForgivingSelector, Nth, RelativeSelector, SelectorList};
 

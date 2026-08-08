@@ -1,7 +1,4 @@
-use csskit_proc_macro::node;
-
-use css_parse::T;
-use csskit_derives::*;
+use super::prelude::*;
 
 /// <https://drafts.csswg.org/selectors/#combinators>
 #[node]

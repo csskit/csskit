@@ -24,3 +24,10 @@ pub use when_rule::*;
 
 // Re-export for derive macros
 pub use css_parse::Diagnostic;
+
+mod prelude {
+	pub(crate) use crate::CsskitAtomSet;
+	pub(crate) use css_lexer::{Cursor, Kind, KindSet};
+	pub(crate) use css_parse::{NodeWithMetadata, Parse, Parser, Peek, Result as ParserResult, T, Vec};
+	pub(crate) use csskit_derives::*;
+}

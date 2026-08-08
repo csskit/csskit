@@ -550,7 +550,6 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum TimelineRangeCenterSubject { }",
   "pub enum TimelineRangeName { }",
   "pub enum TimelineScopeStyleValue < \'a > { }",
-  "pub enum Todo { }",
   "pub enum TouchActionStyleValue { }",
   "pub enum TrackBreadth < \'a > { }",
   "pub enum TrackSize < \'a > { }",

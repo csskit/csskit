@@ -1,7 +1,5 @@
+use crate::prelude::*;
 use crate::{QuerySelectorList, rule_block::RuleBlock};
-use css_lexer::Cursor;
-use css_parse::{Parse, Parser, Result as ParserResult};
-use csskit_derives::*;
 
 /// A node rule for collecting stats.
 ///

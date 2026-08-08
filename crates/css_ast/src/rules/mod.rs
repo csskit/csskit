@@ -43,7 +43,7 @@ pub use webkit::*;
 mod prelude {
 	#[cfg(feature = "visitable")]
 	pub(crate) use crate::PropertyKind;
-	pub(crate) use crate::{CssAtomSet, CssDiagnostic, CssMetadata, StyleValue, stylesheet::Rule};
+	pub(crate) use crate::{CssAtomSet, CssMetadata, StyleValue, diagnostics::CssDiagnostic, stylesheet::Rule};
 	pub(crate) use css_parse::Vec;
 	pub(crate) use css_parse::{
 		Block, CommaSeparated, ComponentValues, Cursor, Declaration, DeclarationList, DeclarationValue, Diagnostic,

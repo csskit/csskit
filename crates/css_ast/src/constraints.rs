@@ -1,4 +1,4 @@
-use crate::CssDiagnostic;
+use crate::diagnostics::CssDiagnostic;
 use css_parse::{Cursor, Diagnostic, KindSet, Parse, Parser, Peek, Result, ToNormalisedValue, ToNumberValue};
 use csskit_derives::*;
 use csskit_proc_macro::node;
