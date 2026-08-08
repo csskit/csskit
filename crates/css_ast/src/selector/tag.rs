@@ -766,8 +766,6 @@ pub enum MathmlTag {
 	Mfenced(T![Ident]),
 	#[atom(CssAtomSet::Mfrac)]
 	Mfrac(T![Ident]),
-	#[atom(CssAtomSet::Mfraction)]
-	Mfraction(T![Ident]),
 	#[atom(CssAtomSet::Mglyph)]
 	Mglyph(T![Ident]),
 	#[atom(CssAtomSet::Mi)]
@@ -922,8 +920,8 @@ pub enum MathmlTag {
 	Vector(T![Ident]),
 	#[atom(CssAtomSet::Vectorproduct)]
 	Vectorproduct(T![Ident]),
-	#[atom(CssAtomSet::Xo)]
-	Xo(T![Ident]),
+	#[atom(CssAtomSet::Xor)]
+	Xor(T![Ident]),
 }
 
 #[node]
