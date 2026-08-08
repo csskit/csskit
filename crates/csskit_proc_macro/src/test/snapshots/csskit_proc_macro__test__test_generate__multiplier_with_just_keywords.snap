@@ -2,7 +2,7 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[repr(C, u8)]
 #[derive(
     ::csskit_derives::Parse,
@@ -31,7 +31,7 @@ pub enum FooKeywords {
 }
 #[cfg(test)]
 ::stable_type_layout::register!(FooKeywords);
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
 struct Foo<'a>(pub ::css_parse::Vec<'a, crate::Value<'a, crate::FooKeywords>>);
 #[cfg(test)]

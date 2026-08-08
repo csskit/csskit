@@ -30,6 +30,7 @@ serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
 
 bitmask-enum = { workspace = true }
+stable_type_layout = { workspace = true } # @release
 
 [build-dependencies]
 csskit_source_finder = { workspace = true } # @release
@@ -49,7 +50,6 @@ insta = { workspace = true, features = ["ron"] }
 similar = { workspace = true }
 console = { workspace = true }
 dhat = { workspace = true }
-stable_type_layout = { workspace = true }  # @release
 
 [target.'cfg(target_family = "unix")'.dev-dependencies]
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }

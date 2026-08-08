@@ -3,7 +3,7 @@ source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
 #[derive(Parse)]
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
 #[parse(all_must_occur)]
 struct Foo<'a>(

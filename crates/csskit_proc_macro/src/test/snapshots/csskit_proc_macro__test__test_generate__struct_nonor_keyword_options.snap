@@ -2,7 +2,7 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[derive(
     ::csskit_derives::Parse,
     ::csskit_derives::Peek,
@@ -40,7 +40,7 @@ struct FooOptions {
 #[cfg(test)]
 ::stable_type_layout::register!(FooOptions);
 #[derive(Parse)]
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
 struct Foo(pub crate::NoneOr<crate::FooOptions>);
 #[cfg(test)]
