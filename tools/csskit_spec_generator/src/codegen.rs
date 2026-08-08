@@ -1088,19 +1088,17 @@ fn browser_version_tokens(version: Option<&str>) -> TokenStream {
 	quote! { BrowserVersion(0, 0) }
 }
 
-pub fn generate_property_atoms(property_names: &std::collections::HashSet<String>) -> String {
-	use heck::ToKebabCase;
+pub fn generate_property_atoms(
+	property_names: &std::collections::HashSet<String>,
+	workspace_root: &std::path::Path,
+) -> String {
 	use quote::{format_ident, quote};
 	use std::collections::HashSet;
 
-	let css_atom_set_path = std::path::Path::new(env!("CARGO_MANIFEST_DIR"))
-		.parent()
-		.unwrap()
-		.join("css_ast")
-		.join("src")
-		.join("css_atom_set.rs");
+	let css_atom_set_path = workspace_root.join("crates").join("css_ast").join("src").join("css_atom_set.rs");
 
-	let css_atom_set_content = std::fs::read_to_string(&css_atom_set_path).expect("Failed to read css_atom_set.rs");
+	let css_atom_set_content = std::fs::read_to_string(&css_atom_set_path)
+		.unwrap_or_else(|e| panic!("Failed to read {}: {e}", css_atom_set_path.display()));
 
 	let existing_variants: HashSet<String> = css_atom_set_content
 		.lines()
@@ -1138,9 +1136,7 @@ pub fn generate_property_atoms(property_names: &std::collections::HashSet<String
 				return None;
 			}
 
-			let kebab = pascal.to_kebab_case();
-			let needs_prefix = matches!(kebab.split("-").next().unwrap_or_default(), "Webkit" | "Moz" | "Ms" | "O");
-			let variant_name = if needs_prefix { format!("_{}", pascal) } else { pascal };
+			let variant_name = if name.starts_with('-') { format!("_{}", pascal) } else { pascal };
 
 			if !existing_variants.contains(&variant_name) {
 				return None;

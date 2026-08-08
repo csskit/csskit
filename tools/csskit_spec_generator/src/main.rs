@@ -411,7 +411,7 @@ async fn main() -> Result<()> {
 			// Generate property_atoms.rs
 			println!("\nGenerating property_atoms.rs...");
 			println!("  Collected {} unique property names from specs", all_property_names.len());
-			let property_atoms_code = generate_property_atoms(&all_property_names);
+			let property_atoms_code = generate_property_atoms(&all_property_names, &workspace_root);
 			let property_atoms_path =
 				workspace_root.join("crates").join("css_ast").join("src").join("property_atoms.rs");
 			write(&property_atoms_path, property_atoms_code)?;
@@ -469,7 +469,7 @@ async fn main() -> Result<()> {
 			println!("\nCollected {} unique property names from specs", all_property_names.len());
 
 			let workspace_root = find_workspace_root()?;
-			let property_atoms_code = generate_property_atoms(&all_property_names);
+			let property_atoms_code = generate_property_atoms(&all_property_names, &workspace_root);
 			let property_atoms_path =
 				workspace_root.join("crates").join("css_ast").join("src").join("property_atoms.rs");
 			write(&property_atoms_path, property_atoms_code)?;
