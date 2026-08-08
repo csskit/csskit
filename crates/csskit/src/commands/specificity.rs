@@ -1,11 +1,10 @@
-use crate::InputArgs;
+use super::prelude::*;
 use crate::commands::{Extract, OutputFormat};
 use allocator_api2::alloc::Allocator;
-use clap::Args;
 use css_ast::specificity::ToSpecificity;
-use css_ast::{CssAtomSet, SelectorList, StyleRule, StyleSheet, Visit, Visitable, visitor};
-use css_lexer::{Lexer, LineIndex, Span};
-use css_parse::{Arena, Parser, ToSpan};
+use css_ast::{SelectorList, StyleRule, Visit, Visitable, visitor};
+use css_lexer::{LineIndex, Span};
+use css_parse::ToSpan;
 use serde::Serialize;
 
 #[derive(Serialize, Debug)]

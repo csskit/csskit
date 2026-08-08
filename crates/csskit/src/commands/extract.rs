@@ -1,9 +1,7 @@
-use crate::{CliResult, GlobalConfig, InputArgs};
+use super::prelude::*;
 use allocator_api2::alloc::Allocator;
 use clap::ValueEnum;
-use css_ast::{CssAtomSet, StyleSheet};
-use css_lexer::{Lexer, LineIndex, Span};
-use css_parse::{Arena, Parser};
+use css_lexer::{LineIndex, Span};
 use serde::Serialize;
 
 /// Position metadata for a single result within a file.

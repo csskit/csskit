@@ -1,8 +1,4 @@
-use crate::{CliResult, GlobalConfig, InputArgs};
-use clap::Args;
-use css_ast::{CssAtomSet, StyleSheet};
-use css_lexer::Lexer;
-use css_parse::{Arena, Parser};
+use super::prelude::*;
 
 /// Show the debug output for a parsed file
 #[derive(Debug, Args)]

@@ -1,15 +1,13 @@
+use super::prelude::*;
 use crate::{
-	CliError, CliResult, GlobalConfig, bold_green, bold_red,
+	bold_green, bold_red,
 	commands::{
 		OutputFormat,
 		extract::{ErrorKind, ErrorRecord, Location},
 		format_diagnostic_error,
 	},
 };
-use clap::Args;
-use css_ast::CssAtomSet;
-use css_lexer::{DynAtomSet, Lexer, LineIndex, RegisteredAtomSet};
-use css_parse::{Arena, Parser};
+use css_lexer::{DynAtomSet, LineIndex, RegisteredAtomSet};
 use csskit_ast::{Collector, CsskitAtomSet, ResolvedDiagnosticLevel, StatType, sheet::Sheet};
 use csskit_highlight::CssHighlighter;
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource, Report};

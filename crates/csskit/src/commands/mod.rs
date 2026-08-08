@@ -18,6 +18,14 @@ mod tree;
 
 pub use extract::{Extract, OutputFormat};
 
+mod prelude {
+	pub(crate) use crate::{CliError, CliResult, GlobalConfig, InputArgs};
+	pub(crate) use clap::Args;
+	pub(crate) use css_ast::{CssAtomSet, StyleSheet};
+	pub(crate) use css_lexer::Lexer;
+	pub(crate) use css_parse::{Arena, Parser};
+}
+
 #[derive(Subcommand, Debug)]
 pub enum Commands {
 	/// Report potential issues around some CSS files

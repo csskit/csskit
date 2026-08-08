@@ -1,13 +1,12 @@
+use super::prelude::*;
 use crate::{
-	CliError, CliResult, GlobalConfig, InputArgs,
 	commands::{Extract, OutputFormat},
 	green,
 };
 use allocator_api2::alloc::Allocator;
-use clap::Args;
-use css_ast::{CssAtomSet, StyleSheet, Visitable, visit::NodeId};
-use css_lexer::{Cursor, Lexer, LineIndex, SourceOffset, Span};
-use css_parse::{Arena, NodeWithMetadata, Parser, SourceCursor, SourceCursorSink};
+use css_ast::{Visitable, visit::NodeId};
+use css_lexer::{Cursor, LineIndex, SourceOffset, Span};
+use css_parse::{NodeWithMetadata, SourceCursor, SourceCursorSink};
 use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use itertools::Itertools;
