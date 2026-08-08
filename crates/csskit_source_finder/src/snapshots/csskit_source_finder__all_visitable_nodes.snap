@@ -459,6 +459,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum ScanMediaFeatureKeyword { }",
   "pub enum ScriptingMediaFeature { }",
   "pub enum ScriptingMediaFeatureKeyword { }",
+  "pub enum ScrollAxisLockStyleValue { }",
   "pub enum ScrollBehaviorStyleValue { }",
   "pub enum ScrollInitialTargetStyleValue { }",
   "pub enum ScrollMarkerGroupStyleValue { }",
