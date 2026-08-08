@@ -1,7 +1,5 @@
-use crate::{
-	Cursor, Declaration, Diagnostic, KindSet, NodeMetadata, NodeWithMetadata, Parser, Peek, Result, SemanticEq, T,
-	ToCursors,
-};
+use super::prelude::*;
+use crate::{Declaration, KindSet, NodeMetadata, NodeWithMetadata, SemanticEq, ToCursors};
 use css_lexer::ToSpan;
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some

@@ -1,5 +1,5 @@
-use crate::{Cursor, CursorSink, Vec};
-use allocator_api2::alloc::Allocator;
+use super::prelude::*;
+use crate::CursorSink;
 
 /// This trait allows AST nodes to decompose themselves back into a set of (ordered) [Cursors][crate::Cursor].
 ///

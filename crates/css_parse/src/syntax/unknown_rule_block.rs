@@ -1,8 +1,5 @@
-use crate::{
-	ComponentValues, Cursor, CursorSink, DeclarationValue, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
-	Peek, Result, SemanticEq, Span, ToCursors, ToSpan,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::ComponentValues;
 
 /// Wrapper type for using ComponentValues as a rule type parameter in unknown rules.
 /// This implements RuleVariants to allow ComponentValues to be used as the block type

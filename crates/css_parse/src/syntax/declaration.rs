@@ -1,8 +1,5 @@
-use crate::{
-	BangImportant, Cursor, CursorSink, DeclarationValue, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
-	Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan, token_macros,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{BangImportant, token_macros};
 use std::marker::PhantomData;
 
 /// This is a generic type that can be used for AST nodes representing a [Declaration][1], aka "property". This is

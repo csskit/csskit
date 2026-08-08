@@ -33,3 +33,11 @@ pub use qualified_rule::*;
 pub use rule_list::*;
 pub use simple_block::*;
 pub use unknown_rule_block::*;
+
+mod prelude {
+	pub(crate) use crate::{
+		Cursor, CursorSink, DeclarationValue, Diagnostic, Kind, KindSet, NodeMetadata, NodeWithMetadata, Parse, Parser,
+		Peek, Result, SemanticEq, Span, State, T, ToCursors, ToSpan, Vec,
+	};
+	pub(crate) use csskit_proc_macro::node;
+}

@@ -1,8 +1,5 @@
-use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, Diagnostic, FunctionBlock, Kind, KindSet, Parse, Parser, Peek,
-	Result as ParserResult, SemanticEq, SimpleBlock, Span, State, T, ToCursors, ToSpan,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{AssociatedWhitespaceRules, FunctionBlock, Result, SimpleBlock};
 
 /// <https://drafts.csswg.org/css-syntax-3/#consume-component-value>
 ///
@@ -58,7 +55,7 @@ impl<'a> Peek<'a> for ComponentValue<'a> {
 
 // https://drafts.csswg.org/css-syntax-3/#consume-component-value
 impl<'a> Parse<'a> for ComponentValue<'a> {
-	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
 		Iter: Iterator<Item = Cursor> + Clone,
 	{

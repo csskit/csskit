@@ -1,8 +1,5 @@
-use crate::{
-	BadDeclaration, CursorSink, Declaration, DeclarationValue, NodeMetadata, NodeWithMetadata, SemanticEq, Span,
-	ToCursors, ToSpan,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{BadDeclaration, Declaration};
 
 /// Either a valid declaration or a bad declaration consumed for error recovery.
 ///

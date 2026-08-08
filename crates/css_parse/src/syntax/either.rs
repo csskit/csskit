@@ -1,6 +1,5 @@
-use crate::{NodeMetadata, NodeWithMetadata, Parse, Peek, SemanticEq, ToCursors, ToNumberValue};
-use css_lexer::{Cursor, KindSet, ToSpan};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::ToNumberValue;
 
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

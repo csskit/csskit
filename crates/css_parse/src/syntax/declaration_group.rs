@@ -1,8 +1,5 @@
-use crate::{
-	CursorSink, DeclarationOrBad, DeclarationValue, NodeMetadata, NodeWithMetadata, SemanticEq, Span, ToCursors,
-	ToSpan, Vec,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::DeclarationOrBad;
 
 /// A group of declarations that can be interleaved with rules.
 ///

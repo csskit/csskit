@@ -1,8 +1,5 @@
-use crate::{
-	Arena, Cursor, CursorSink, IntoIter, KindSet, Parse, Parser, Peek, Result as ParserResult, SemanticEq, Span,
-	ToCursors, ToSpan, Vec, token_macros::Comma,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
+use crate::{Arena, IntoIter, Result, token_macros::Comma};
 use std::{
 	ops::{Index, IndexMut},
 	slice::{Iter, IterMut},
@@ -61,7 +58,7 @@ impl<'a, T: Peek<'a>, const MIN: usize> Peek<'a> for CommaSeparated<'a, T, MIN> 
 }
 
 impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated<'a, T, MIN> {
-	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> ParserResult<Self>
+	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{

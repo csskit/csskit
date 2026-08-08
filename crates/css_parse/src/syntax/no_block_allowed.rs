@@ -1,5 +1,4 @@
-use crate::{CursorSink, Diagnostic, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan};
-use csskit_proc_macro::node;
+use super::prelude::*;
 
 /// A struct to provide to rules to disallow blocks.
 ///

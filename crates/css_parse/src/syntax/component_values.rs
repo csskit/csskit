@@ -1,10 +1,7 @@
-use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, DeclarationValue, KindSet, NodeMetadata, NodeWithMetadata, Parse,
-	Parser, Peek, Result, SemanticEq, Span, ToCursors, ToSpan, Vec,
-};
+use super::prelude::*;
+use crate::AssociatedWhitespaceRules;
 
 use super::ComponentValue;
-use csskit_proc_macro::node;
 
 /// <https://drafts.csswg.org/css-syntax-3/#consume-list-of-components>
 #[node]

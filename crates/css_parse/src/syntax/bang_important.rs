@@ -1,7 +1,4 @@
-use crate::{
-	Cursor, CursorSink, Diagnostic, Kind, KindSet, Parse, Parser, Peek, Result, SemanticEq, Span, T, ToCursors, ToSpan,
-};
-use csskit_proc_macro::node;
+use super::prelude::*;
 
 /// Represents a two tokens, the first being [Kind::Delim] where the char is `!`, and the second being an `Ident` with
 /// the value `important`. [CSS defines this as]:
