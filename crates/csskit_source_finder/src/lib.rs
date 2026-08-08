@@ -180,6 +180,68 @@ pub fn find_queryable_nodes(dir: &str, matches: &mut HashSet<VisitableNode>, pat
 	matches.extend(all_visitable.into_iter().filter(|node| node.visit_mode.is_queryable()));
 }
 
+/// Extracts the name of a `struct`/`enum`/`type` declaration on `line` along with whether its
+/// generics include a lifetime parameter (`Foo<'a, ...>`). Text-based so it also sees declarations
+/// nested inside macro invocations, which a `syn` item walk would miss.
+fn decl_name(line: &str) -> Option<(&str, bool)> {
+	let line = line.trim_start();
+	let line = if let Some(rest) = line.strip_prefix("pub(") {
+		match rest.find(')') {
+			Some(i) => rest[i + 1..].trim_start(),
+			None => rest,
+		}
+	} else if let Some(rest) = line.strip_prefix("pub ") {
+		rest.trim_start()
+	} else {
+		line
+	};
+	let rest = ["struct ", "enum ", "type "].iter().find_map(|kw| line.strip_prefix(kw))?;
+	let rest = rest.trim_start();
+	let name_end = rest.find(|c: char| !(c.is_ascii_alphanumeric() || c == '_'))?;
+	let name = &rest[..name_end];
+	if name.is_empty() {
+		return None;
+	}
+	// A lifetime parameter, if present, is the first generic argument, so it lands within the
+	// first `<...>` group after the name.
+	let has_lifetime = rest[name_end..]
+		.trim_start()
+		.strip_prefix('<')
+		.and_then(|generics| generics.find('>').map(|end| generics[..end].contains('\'')))
+		.unwrap_or(false);
+	Some((name, has_lifetime))
+}
+
+/// Find the names of every `struct`/`enum`/`type` declaration that carries no lifetime parameter in
+/// *any* of its declarations across all `.rs` files matching `dir` (a glob), including declarations
+/// produced inside macro invocations.
+///
+/// A `<type>` grammar reference resolves to an AST type; the overwhelming majority carry their own
+/// `'a` (and so must be emitted as `Name<'a>` inside a value slot). The sized minority is the
+/// exception, so we enumerate it directly and treat everything else as unsized by default. When a
+/// listed type later gains a lifetime it simply drops out of this set and is treated as unsized
+/// automatically. A name declared both with and without a lifetime (e.g. a real `Foo<'a>` type plus
+/// a lifetime-free macro-template stub) counts as unsized.
+pub fn find_sized_types(dir: &str, path_callback: impl Fn(&PathBuf) + Copy) -> std::collections::BTreeSet<String> {
+	let mut sized = std::collections::BTreeSet::new();
+	let mut unsized_names = std::collections::BTreeSet::new();
+	for entry in glob(dir).unwrap().filter_map(|p| p.ok()) {
+		path_callback(&entry);
+		let Ok(source) = std::fs::read_to_string(&entry) else { continue };
+		for line in source.lines() {
+			if let Some((name, has_lifetime)) = decl_name(line) {
+				if has_lifetime {
+					unsized_names.insert(name.to_string());
+				} else {
+					sized.insert(name.to_string());
+				}
+			}
+		}
+	}
+	sized.retain(|name| !unsized_names.contains(name));
+	sized
+}
+
 #[test]
 fn test_find_visitable_nodes() {
 	use itertools::Itertools;
@@ -190,4 +252,15 @@ fn test_find_visitable_nodes() {
 		"all_visitable_nodes",
 		matches.iter().map(|node| node.input.to_token_stream().to_string()).sorted().collect::<Vec<_>>()
 	);
+}
+
+#[test]
+fn test_find_sized_types() {
+	let types = find_sized_types("../css_ast/src/**/*.rs", |_| {});
+	// Sized numeric primitives and keyword enums must be present.
+	assert!(types.contains("Length"), "expected sized Length to be found");
+	// Lifetime-carrying types must be absent.
+	assert!(!types.contains("Color"), "Color carries a lifetime and must not appear");
+	// A macro-defined lifetime-carrying declaration must also be absent.
+	assert!(!types.contains("Rule"), "macro-defined Rule carries a lifetime and must not appear");
 }
