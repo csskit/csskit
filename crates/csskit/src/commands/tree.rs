@@ -1,12 +1,9 @@
-use clap::Args;
+use super::prelude::*;
 use css_ast::VisitNode;
 use css_ast::visit::{Visit, Visitable, visitor};
-use css_ast::{CssAtomSet, PROPERTY_KIND_VARIANTS, PropertyKind, StyleSheet};
-use css_lexer::Lexer;
-use css_parse::{Arena, Cursor, Parser, ToSpan};
+use css_ast::{PROPERTY_KIND_VARIANTS, PropertyKind};
+use css_parse::{Cursor, ToSpan};
 use csskit_ast::{QueryFunctionalPseudoClass, QueryPseudoClass};
-
-use crate::{CliError, CliResult, GlobalConfig, InputArgs};
 
 /// Display CSS AST as a tree structure
 ///

@@ -1,15 +1,14 @@
-use super::GlobalConfig;
+use super::prelude::*;
 use crate::{
-	CliResult, InputArgs, bg, bold,
+	bg, bold,
 	commands::{Extract, OutputFormat, extract::ErrorRecord},
 	dimmed, fg,
 };
 use allocator_api2::alloc::Allocator;
 use chromashift::*;
-use clap::Args;
-use css_ast::{Color as ASTColor, CssAtomSet, StyleSheet, ToChromashift, Visitable};
-use css_lexer::{Lexer, LineIndex};
-use css_parse::{Arena, Diagnostic, Parser, Span, ToSpan};
+use css_ast::{Color as ASTColor, ToChromashift, Visitable};
+use css_lexer::LineIndex;
+use css_parse::{Diagnostic, Span, ToSpan};
 use itertools::Itertools;
 use serde::Serialize;
 use std::collections::HashSet;

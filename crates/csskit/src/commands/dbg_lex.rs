@@ -1,7 +1,5 @@
-use crate::{CliResult, GlobalConfig, InputArgs};
-use clap::Args;
-use css_ast::CssAtomSet;
-use css_lexer::{Kind, Lexer};
+use super::prelude::*;
+use css_lexer::Kind;
 
 /// Show the debug output for lexed tokens from a file
 #[derive(Debug, Args)]

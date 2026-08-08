@@ -1,5 +1,5 @@
-use crate::{CliResult, GlobalConfig};
-use clap::{Args, crate_version};
+use super::prelude::*;
+use clap::crate_version;
 use csskit_lsp::{LSPService, Server};
 use std::io::stderr;
 use tracing::{level_filters::LevelFilter, trace};
