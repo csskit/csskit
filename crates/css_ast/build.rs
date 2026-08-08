@@ -61,8 +61,22 @@ fn main() {
 
 		let display_arms = queryable.iter().map(|node| {
 			let ident = node.ident();
-			let ident_str = ident.to_string();
-			quote! { Self::#ident => write!(f, #ident_str) }
+			let generics = node.generics();
+			if generics.type_params().next().is_some() || generics.const_params().next().is_some() {
+				let ident_str = ident.to_string();
+				return quote! { Self::#ident => f.write_str(#ident_str) };
+			}
+			let statics = std::iter::repeat_n(quote! { 'static }, generics.lifetimes().count()).collect::<Vec<_>>();
+			let ty = if statics.is_empty() {
+				quote! { #ident }
+			} else {
+				quote! { #ident<#(#statics),*> }
+			};
+			quote! {
+				Self::#ident => f.write_str(
+					<crate::#ty as ::stable_type_layout::TypeLayout>::TYPE_LAYOUT.name
+				)
+			}
 		});
 
 		#[rustfmt::skip]

@@ -26,6 +26,7 @@ thiserror = { workspace = true, optional = true }
 bitmask-enum = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
+stable_type_layout = { workspace = true } # @release
 
 [dev-dependencies]
 csskit_derives = { workspace = true }  # @release
@@ -33,7 +34,6 @@ derive_atom_set = { workspace = true } # @release
 insta = { workspace = true }
 glob = { workspace = true }
 dhat = { workspace = true }
-stable_type_layout = { workspace = true }  # @release
 
 [features]
 default = []

@@ -25,7 +25,7 @@ pub fn derive_attr(generics: &Generics) -> TokenStream {
 	if lifetimes(generics).is_none() {
 		return quote! {};
 	}
-	quote! { #[cfg_attr(test, derive(::stable_type_layout::TypeLayout))] }
+	quote! { #[derive(::stable_type_layout::TypeLayout)] }
 }
 
 /// Registers a node type's layout with the crate's `layout_test` collector so its

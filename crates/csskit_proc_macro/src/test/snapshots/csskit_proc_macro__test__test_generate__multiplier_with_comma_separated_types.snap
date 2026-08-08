@@ -2,7 +2,7 @@
 source: crates/csskit_proc_macro/src/test/test_generate.rs
 expression: pretty
 ---
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[derive(
     ::csskit_derives::Parse,
     ::csskit_derives::Peek,
@@ -30,7 +30,7 @@ enum SingleFoo<'a> {
 }
 #[cfg(test)]
 ::stable_type_layout::register!(SingleFoo < 'static >);
-#[cfg_attr(test, derive(::stable_type_layout::TypeLayout))]
+#[derive(::stable_type_layout::TypeLayout)]
 #[repr(C)]
 struct Foo<'a>(pub ::css_parse::CommaSeparated<'a, crate::SingleFoo<'a>>);
 #[cfg(test)]
