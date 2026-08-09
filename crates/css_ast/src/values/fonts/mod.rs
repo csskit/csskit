@@ -491,55 +491,39 @@ pub enum FontSynthesisStyleStyleValue<'a> {}
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontSynthesisWeightStyleValue<'a> {}
 
-// /// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
-// ///
-// /// The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-variant
-// #[syntax(
-//     " normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     shorthand_group = Font,
-//     longhands = FontVariantAlternates|FontVariantCaps|FontVariantEastAsian|FontVariantEmoji|FontVariantLigatures|FontVariantNumeric|FontVariantPosition,
-//     property_group = Fonts,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-variant")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontVariantStyleValue<'a> {}
+/// Represents the style value for `font-variant` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant).
+///
+/// The font-variant CSS property is a shorthand for font-variant-alternates, font-variant-caps, font-variant-east-asian, font-variant-emoji, font-variant-ligatures, font-variant-numeric, and font-variant-position.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ]
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-variant
+#[syntax(
+	" normal | none | [ [ <common-lig-values> || <discretionary-lig-values> || <historical-lig-values> || <contextual-alt-values> ] || [ small-caps | all-small-caps | petite-caps | all-petite-caps | unicase | titling-caps ] || [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] || [ <numeric-figure-values> || <numeric-spacing-values> || <numeric-fraction-values> || ordinal || slashed-zero ] || [ <east-asian-variant-values> || <east-asian-width-values> || ruby ] || [ sub | super ] || [ text | emoji | unicode ] ] "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    shorthand_group = Font,
+    longhands = FontVariantAlternates|FontVariantCaps|FontVariantEastAsian|FontVariantEmoji|FontVariantLigatures|FontVariantNumeric|FontVariantPosition,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum FontVariantStyleValue<'a> {}
 
 /// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
 ///

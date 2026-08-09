@@ -222,20 +222,11 @@ StyleSheet(
                 offset: SourceOffset(360),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(361),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(362),
-                    len: 6,
-                  )),
-                ],
-              )),
+              value: Normal(Literal(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(362),
+                len: 6,
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -42,6 +42,25 @@ mod tests {
 	}
 
 	#[test]
+	fn test_font_variant() {
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "small-caps");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "sub");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "super");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "emoji");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "common-ligatures");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "swash(fancy)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "all-small-caps super unicode");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "no-common-ligatures ruby slashed-zero");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantStyleValue, "titling-caps historical-forms ordinal sub text");
+		assert_parse_error!(CssAtomSet::ATOMS, FontVariantStyleValue, "sub super");
+		assert_parse_error!(CssAtomSet::ATOMS, FontVariantStyleValue, "small-caps petite-caps");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, FontVariantStyleValue, "bold");
+	}
+
+	#[test]
 	fn test_font_variant_numeric() {
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "lining-nums");
