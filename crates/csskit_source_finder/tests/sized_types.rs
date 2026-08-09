@@ -22,7 +22,7 @@ fn render(names: &BTreeSet<String>) -> String {
 		 \n\
 		 /// Returns `true` if `name` is a css_ast type that carries no `'a` lifetime parameter, and so\n\
 		 /// must be referenced as `name` (not `name<'a>`) when substituted into a value slot.\n\
-		 pub(crate) fn is_sized_type(name: &str) -> bool {\n\
+		 pub fn is_sized_type(name: &str) -> bool {\n\
 		 \tSIZED_TYPES.binary_search(&name).is_ok()\n\
 		 }\n",
 	);

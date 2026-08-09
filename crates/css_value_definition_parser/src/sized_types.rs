@@ -277,7 +277,6 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"PositionHorizontalKeyword",
 	"PositionInlineAxis",
 	"PositionInlineAxisKeyword",
-	"PositionLogical",
 	"PositionVerticalKeyword",
 	"Positive",
 	"PositiveNonZeroInt",
@@ -340,6 +339,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"SnappedScrollStateFeatureKeyword",
 	"SpacingTrim",
 	"Specificity",
+	"StartEnd",
 	"StatePseudoFunction",
 	"StepPosition",
 	"String",
@@ -402,6 +402,6 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 
 /// Returns `true` if `name` is a css_ast type that carries no `'a` lifetime parameter, and so
 /// must be referenced as `name` (not `name<'a>`) when substituted into a value slot.
-pub(crate) fn is_sized_type(name: &str) -> bool {
+pub fn is_sized_type(name: &str) -> bool {
 	SIZED_TYPES.binary_search(&name).is_ok()
 }

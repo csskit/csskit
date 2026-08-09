@@ -24,10 +24,21 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, BackgroundStyleValue, "red, none");
 		assert_parse!(CssAtomSet::ATOMS, BackgroundStyleValue, "center center");
 		assert_parse!(CssAtomSet::ATOMS, BackgroundStyleValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionXStyleValue, "center");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionXStyleValue, "left");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionXStyleValue, "x-end 10px");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionXStyleValue, "50%");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionXStyleValue, "left 10px, center, 25%");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionYStyleValue, "bottom");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionYStyleValue, "y-start 2em");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionBlockStyleValue, "start 10px");
+		assert_parse!(CssAtomSet::ATOMS, BackgroundPositionInlineStyleValue, "end, center");
 	}
 
 	#[test]
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, BackgroundStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, BackgroundPositionXStyleValue, "top");
+		assert_peek_false!(CssAtomSet::ATOMS, BackgroundPositionYStyleValue, "left");
 	}
 }

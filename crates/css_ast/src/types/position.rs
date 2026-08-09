@@ -189,10 +189,10 @@ impl<'a> PositionOne<'a> {
 		}
 	}
 
-	pub(crate) fn to_logical(&self) -> Option<PositionLogical> {
+	pub(crate) fn to_logical(&self) -> Option<StartEnd> {
 		match self {
-			Self::Start(t) => Some(PositionLogical::Start(*t)),
-			Self::End(t) => Some(PositionLogical::End(*t)),
+			Self::Start(t) => Some(StartEnd::Start(*t)),
+			Self::End(t) => Some(StartEnd::End(*t)),
 			_ => None,
 		}
 	}
@@ -229,7 +229,7 @@ pub enum PositionTwo<'a> {
 	/// Stored block-first regardless of source order.
 	FlowRelative(PositionBlockAxis, PositionInlineAxis),
 	/// Axis-ambiguous `start`/`end` pair; first = block axis, second = inline axis.
-	Logical(PositionLogical, PositionLogical),
+	Logical(StartEnd, StartEnd),
 }
 
 impl<'a> Peek<'a> for PositionTwo<'a> {
@@ -325,7 +325,7 @@ pub enum PositionFour<'a> {
 		CalcableValue<'a, LengthPercentage>,
 	),
 	/// `[start|end] <lp>` × 2; first = block axis, second = inline axis.
-	Logical(PositionLogical, CalcableValue<'a, LengthPercentage>, PositionLogical, CalcableValue<'a, LengthPercentage>),
+	Logical(StartEnd, CalcableValue<'a, LengthPercentage>, StartEnd, CalcableValue<'a, LengthPercentage>),
 }
 
 impl<'a> PositionFour<'a> {
@@ -470,7 +470,7 @@ pub enum PositionInlineAxis {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum PositionLogical {
+pub enum StartEnd {
 	#[atom(CssAtomSet::Start)]
 	Start(T![Ident]),
 	#[atom(CssAtomSet::End)]
@@ -664,7 +664,7 @@ mod tests {
 			CssAtomSet::ATOMS,
 			Position,
 			"start end",
-			Position::Two(PositionTwo::Logical(PositionLogical::Start(_), PositionLogical::End(_)))
+			Position::Two(PositionTwo::Logical(StartEnd::Start(_), StartEnd::End(_)))
 		);
 		// Four-value physical
 		assert_parse!(
@@ -707,9 +707,9 @@ mod tests {
 			Position,
 			"start 10px end 20px",
 			Position::Four(PositionFour::Logical(
-				PositionLogical::Start(_),
+				StartEnd::Start(_),
 				CalcableValue::Literal(LengthPercentage::Length(_)),
-				PositionLogical::End(_),
+				StartEnd::End(_),
 				CalcableValue::Literal(LengthPercentage::Length(_))
 			))
 		);

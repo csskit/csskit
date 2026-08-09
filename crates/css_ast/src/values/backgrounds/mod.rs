@@ -219,195 +219,131 @@ pub struct BackgroundOriginStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BackgroundPositionStyleValue<'a>;
 
-// /// Represents the style value for `background-position-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-block).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ center | [ [ start | end ]? <length-percentage>? ]! ]#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-backgrounds-4/#background-position-block
-// #[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0%",
-//     applies_to = Elements,
-//     animation_type = RepeatableList,
-//     percentages = BackgroundPositioningArea,
-//     property_group = Backgrounds,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     logical_property_group = BackgroundPosition,
-//     box_side = BlockStart|BlockEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.background-position-block")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackgroundPositionBlockStyleValue<'a>;
+/// Represents the style value for `background-position-block` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-block).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ center | [ [ start | end ]? <length-percentage>? ]! ]#
+/// ```
+///
+/// https://drafts.csswg.org/css-backgrounds-4/#background-position-block
+#[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0%",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    percentages = BackgroundPositioningArea,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundPosition,
+    box_side = BlockStart|BlockEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-block"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackgroundPositionBlockStyleValue<'a>;
 
-// /// Represents the style value for `background-position-inline` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-inline).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ center | [ [ start | end ]? <length-percentage>? ]! ]#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-backgrounds-4/#background-position-inline
-// #[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0%",
-//     applies_to = Elements,
-//     animation_type = RepeatableList,
-//     percentages = BackgroundPositioningArea,
-//     property_group = Backgrounds,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     logical_property_group = BackgroundPosition,
-//     box_side = InlineStart|InlineEnd,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.background-position-inline")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackgroundPositionInlineStyleValue<'a>;
+/// Represents the style value for `background-position-inline` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-inline).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ center | [ [ start | end ]? <length-percentage>? ]! ]#
+/// ```
+///
+/// https://drafts.csswg.org/css-backgrounds-4/#background-position-inline
+#[syntax(" [ center | [ [ start | end ]? <length-percentage>? ]! ]# ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0%",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    percentages = BackgroundPositioningArea,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundPosition,
+    box_side = InlineStart|InlineEnd,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(
+	feature = "css_feature_data",
+	derive(ToCSSFeature),
+	css_feature("css.properties.background-position-inline")
+)]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackgroundPositionInlineStyleValue<'a>;
 
-// /// Represents the style value for `background-position-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-x).
-// ///
-// /// The background-position CSS property offsets the initial position of background images relative to the background origin.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-backgrounds-4/#background-position-x
-// #[syntax(
-//     " [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]# "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0%",
-//     applies_to = Elements,
-//     animation_type = RepeatableList,
-//     percentages = BackgroundPositioningArea,
-//     property_group = Backgrounds,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     logical_property_group = BackgroundPosition,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.background-position-x")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackgroundPositionXStyleValue<'a>;
+/// Represents the style value for `background-position-x` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-x).
+///
+/// The background-position CSS property offsets the initial position of background images relative to the background origin.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]#
+/// ```
+///
+/// https://drafts.csswg.org/css-backgrounds-4/#background-position-x
+#[syntax(" [ center | [ [ left | right | x-start | x-end ]? <length-percentage>? ]! ]# ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0%",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    percentages = BackgroundPositioningArea,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundPosition,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-x"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackgroundPositionXStyleValue<'a>;
 
-// /// Represents the style value for `background-position-y` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-y).
-// ///
-// /// The background-position CSS property offsets the initial position of background images relative to the background origin.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-backgrounds-4/#background-position-y
-// #[syntax(
-//     " [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]# "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "0%",
-//     applies_to = Elements,
-//     animation_type = RepeatableList,
-//     percentages = BackgroundPositioningArea,
-//     property_group = Backgrounds,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     logical_property_group = BackgroundPosition,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.background-position-y")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct BackgroundPositionYStyleValue<'a>;
+/// Represents the style value for `background-position-y` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-position-y).
+///
+/// The background-position CSS property offsets the initial position of background images relative to the background origin.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]#
+/// ```
+///
+/// https://drafts.csswg.org/css-backgrounds-4/#background-position-y
+#[syntax(" [ center | [ [ top | bottom | y-start | y-end ]? <length-percentage>? ]! ]# ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0%",
+    applies_to = Elements,
+    animation_type = RepeatableList,
+    percentages = BackgroundPositioningArea,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BackgroundPosition,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background-position-y"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct BackgroundPositionYStyleValue<'a>;
 
 /// Represents the style value for `background-repeat` as defined in [css-backgrounds-4](https://drafts.csswg.org/css-backgrounds-4/#background-repeat).
 ///

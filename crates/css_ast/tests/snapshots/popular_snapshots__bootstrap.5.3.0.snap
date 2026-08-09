@@ -1,5 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
+assertion_line: 33
 expression: result.output.unwrap()
 ---
 StyleSheet(
@@ -143563,20 +143564,13 @@ StyleSheet(
                     offset: SourceOffset(122440),
                     len: 1,
                   )),
-                  value: Unknown(ComponentValues(
-                    values: [
-                      Whitespace(Cursor(
-                        kind: "Whitespace",
-                        offset: SourceOffset(122441),
-                        len: 1,
-                      )),
-                      Dimension(Cursor(
-                        kind: "Dimension",
-                        offset: SourceOffset(122442),
-                        len: 4,
-                      )),
-                    ],
-                  )),
+                  value: BackgroundPositionXStyleValue([
+                    (PositionHorizontalKeyword(None, Some(Literal(Length(Rem(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(122442),
+                      len: 4,
+                    ))))))), None),
+                  ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
                     kind: "Semicolon",

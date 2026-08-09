@@ -1,5 +1,6 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
+assertion_line: 241
 expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
 ---
 [
@@ -406,7 +407,6 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum PositionHorizontalKeyword { }",
   "pub enum PositionInlineAxis { }",
   "pub enum PositionInlineAxisKeyword { }",
-  "pub enum PositionLogical { }",
   "pub enum PositionOne < \'a > { }",
   "pub enum PositionStyleValue < \'a > { }",
   "pub enum PositionTwo < \'a > { }",
@@ -506,6 +506,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum SpatialNavigationFunctionStyleValue < \'a > { }",
   "pub enum SpeakAsStyleValue < \'a > { }",
   "pub enum SpeakStyleValue < \'a > { }",
+  "pub enum StartEnd { }",
   "pub enum StrokeAlignStyleValue < \'a > { }",
   "pub enum StrokeBreakStyleValue < \'a > { }",
   "pub enum StrokeDashJustifyStyleValue < \'a > { }",
@@ -690,7 +691,11 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct BackgroundColorStyleValue < \'a > { }",
   "pub struct BackgroundImageStyleValue < \'a > { }",
   "pub struct BackgroundOriginStyleValue < \'a > { }",
+  "pub struct BackgroundPositionBlockStyleValue < \'a > { }",
+  "pub struct BackgroundPositionInlineStyleValue < \'a > { }",
   "pub struct BackgroundPositionStyleValue < \'a > { }",
+  "pub struct BackgroundPositionXStyleValue < \'a > { }",
+  "pub struct BackgroundPositionYStyleValue < \'a > { }",
   "pub struct BackgroundRepeatBlockStyleValue < \'a > { }",
   "pub struct BackgroundRepeatInlineStyleValue < \'a > { }",
   "pub struct BackgroundRepeatStyleValue < \'a > { }",
