@@ -20,7 +20,8 @@
 //!
 //! - [`Arena::new`] / [`Arena::default`]: self-allocated, as large a first chunk as the target allows.
 //! - [`Arena::with_capacity`]: self-allocated, exactly the given size, never grows. Useful for tests.
-//! - [`Arena::from_raw_parts`]: borrows caller-owned memory (useful for e.g. NAPI where V8 owns the `ArrayBuffer`).
+//! - [`Arena::with_initial_capacity`]: self-allocated. The first chunk has the given size. The arena adds more chunks.
+//! - [`Arena::from_raw_parts`]: borrows memory from the caller. Use this if a different allocator owns the block.
 //!
 //! All modes yield the same [`Arena`] type; they differ only in where the first chunk comes from and whether the arena
 //! may add another.
@@ -117,6 +118,20 @@ impl Arena {
 		let size = size.clamp(1, MAX_BLOCK_SIZE);
 		let (base, backing) = Self::new_chunk(size).expect("arena backing reservation failed");
 		Self::from_chunk(base, size, backing, false)
+	}
+
+	/// Create a self-allocated arena. The first chunk has `size` usable bytes (clamped to [`MAX_BLOCK_SIZE`]).
+	///
+	/// [`Arena::with_capacity`] does not grow, but this arena adds more chunks when the first chunk is full. `size` is
+	/// the initial size and not a limit. Use this function if you can calculate an approximate size from the input, but
+	/// the arena must be able to use more memory.
+	///
+	/// # Panics
+	/// Panics if the backing allocation fails.
+	pub fn with_initial_capacity(size: usize) -> Self {
+		let size = size.clamp(1, MAX_BLOCK_SIZE);
+		let (base, backing) = Self::new_chunk(size).expect("arena backing reservation failed");
+		Self::from_chunk(base, size, backing, true)
 	}
 
 	/// Take `size` usable bytes for a chunk: reserved address space where the target has it, a block from the global
@@ -652,6 +667,16 @@ mod test {
 		assert!((&arena).allocate(Layout::from_size_align(64, 1).unwrap()).is_ok());
 		// Second overflows the 128-byte region, which was asked for a fixed size and so cannot grow.
 		assert!((&arena).allocate(Layout::from_size_align(128, 1).unwrap()).is_err());
+	}
+
+	#[test]
+	fn an_initial_capacity_sets_the_first_chunk_size_but_not_a_limit() {
+		let arena = Arena::with_initial_capacity(128);
+		assert_eq!(arena.capacity(), 128, "the first chunk has the requested size");
+		assert!((&arena).allocate(Layout::from_size_align(64, 1).unwrap()).is_ok());
+		assert!((&arena).allocate(Layout::from_size_align(128, 1).unwrap()).is_ok());
+		assert!(arena.capacity() > 128, "the arena added a chunk");
+		assert_eq!(arena.used_bytes(), 192, "the count includes the bytes in the full chunk");
 	}
 
 	#[test]
