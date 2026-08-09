@@ -520,6 +520,7 @@ impl DefExt for Def {
 		let atom = match self {
 			Def::Type(ty) => match ty.ident_str() {
 				"Decibel" => quote! { #[atom(CssAtomSet::Db)] },
+				"Semitones" => quote! { #[atom(CssAtomSet::St)] },
 				_ => quote! {},
 			},
 			Def::DimensionLiteral(_, unit) if derives_parse => {

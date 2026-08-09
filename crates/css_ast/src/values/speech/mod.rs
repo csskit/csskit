@@ -363,101 +363,69 @@ pub struct VoiceDurationStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum VoiceFamilyStyleValue<'a> {}
 
-// /// Represents the style value for `voice-pitch` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-pitch).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /**<frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] ||
-// [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ]*/
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-speech-1/#voice-pitch
-// #[syntax(
-//     " <frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "medium",
-//     inherits,
-//     applies_to = Elements,
-//     animation_type = ByComputedValue,
-//     percentages = Unknown,
-//     property_group = Speech,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.voice-pitch")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum VoicePitchStyleValue<'a> {}
+/// Represents the style value for `voice-pitch` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-pitch).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/**<frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] ||
+[ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ]*/
+/// ```
+///
+/// https://drafts.csswg.org/css-speech-1/#voice-pitch
+#[syntax(
+	" <frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ] "
+)]
+#[derive(
+	Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "medium",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = Unknown,
+    property_group = Speech,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-pitch"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum VoicePitchStyleValue<'a> {}
 
-// /// Represents the style value for `voice-range` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-range).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /**<frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] ||
-// [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ]*/
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-speech-1/#voice-range
-// #[syntax(
-//     " <frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "medium",
-//     inherits,
-//     applies_to = Elements,
-//     animation_type = ByComputedValue,
-//     percentages = Unknown,
-//     property_group = Speech,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.voice-range")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum VoiceRangeStyleValue<'a> {}
+/// Represents the style value for `voice-range` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-range).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/**<frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] ||
+[ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ]*/
+/// ```
+///
+/// https://drafts.csswg.org/css-speech-1/#voice-range
+#[syntax(
+	" <frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ] "
+)]
+#[derive(
+	Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "medium",
+    inherits,
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = Unknown,
+    property_group = Speech,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.voice-range"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum VoiceRangeStyleValue<'a> {}
 
 /// Represents the style value for `voice-rate` as defined in [css-speech-1](https://drafts.csswg.org/css-speech-1/#voice-rate).
 ///

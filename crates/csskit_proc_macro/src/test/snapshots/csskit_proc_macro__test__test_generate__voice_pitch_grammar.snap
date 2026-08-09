@@ -1,0 +1,112 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+#[derive(::stable_type_layout::TypeLayout)]
+#[repr(C, u8)]
+enum VoicePitchStyleValue<'a> {
+    #[parse(all_must_occur)]
+    FrequencyAbsolute(
+        crate::CalcableValue<'a, crate::NonNegative<crate::Frequency>>,
+        #[atom(CssAtomSet::Absolute)]
+        crate::KeywordValue<'a, ::css_parse::T![Ident]>,
+    ),
+    #[parse(one_must_occur)]
+    XLow {
+        #[atom(CssAtomSet::XLow)]
+        x_low: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        frequency: Option<crate::CalcableValue<'a, crate::NonNegative<crate::Frequency>>>,
+    },
+    #[parse(one_must_occur)]
+    XLow1 {
+        #[atom(CssAtomSet::XLow)]
+        x_low: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::St)]
+        semitones: Option<crate::Value<'a, crate::Semitones>>,
+    },
+    #[parse(one_must_occur)]
+    XLow2 {
+        #[atom(CssAtomSet::XLow)]
+        x_low: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        percentage: Option<crate::CalcableValue<'a, crate::Percentage>>,
+    },
+    #[parse(one_must_occur)]
+    Low {
+        #[atom(CssAtomSet::Low)]
+        low: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        frequency: Option<crate::CalcableValue<'a, crate::NonNegative<crate::Frequency>>>,
+    },
+    #[parse(one_must_occur)]
+    Low1 {
+        #[atom(CssAtomSet::Low)]
+        low: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::St)]
+        semitones: Option<crate::Value<'a, crate::Semitones>>,
+    },
+    #[parse(one_must_occur)]
+    Low2 {
+        #[atom(CssAtomSet::Low)]
+        low: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        percentage: Option<crate::CalcableValue<'a, crate::Percentage>>,
+    },
+    #[parse(one_must_occur)]
+    Medium {
+        #[atom(CssAtomSet::Medium)]
+        medium: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        frequency: Option<crate::CalcableValue<'a, crate::NonNegative<crate::Frequency>>>,
+    },
+    #[parse(one_must_occur)]
+    Medium1 {
+        #[atom(CssAtomSet::Medium)]
+        medium: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::St)]
+        semitones: Option<crate::Value<'a, crate::Semitones>>,
+    },
+    #[parse(one_must_occur)]
+    Medium2 {
+        #[atom(CssAtomSet::Medium)]
+        medium: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        percentage: Option<crate::CalcableValue<'a, crate::Percentage>>,
+    },
+    #[parse(one_must_occur)]
+    High {
+        #[atom(CssAtomSet::High)]
+        high: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        frequency: Option<crate::CalcableValue<'a, crate::NonNegative<crate::Frequency>>>,
+    },
+    #[parse(one_must_occur)]
+    High1 {
+        #[atom(CssAtomSet::High)]
+        high: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::St)]
+        semitones: Option<crate::Value<'a, crate::Semitones>>,
+    },
+    #[parse(one_must_occur)]
+    High2 {
+        #[atom(CssAtomSet::High)]
+        high: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        percentage: Option<crate::CalcableValue<'a, crate::Percentage>>,
+    },
+    #[parse(one_must_occur)]
+    XHigh {
+        #[atom(CssAtomSet::XHigh)]
+        x_high: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        frequency: Option<crate::CalcableValue<'a, crate::NonNegative<crate::Frequency>>>,
+    },
+    #[parse(one_must_occur)]
+    XHigh1 {
+        #[atom(CssAtomSet::XHigh)]
+        x_high: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::St)]
+        semitones: Option<crate::Value<'a, crate::Semitones>>,
+    },
+    #[parse(one_must_occur)]
+    XHigh2 {
+        #[atom(CssAtomSet::XHigh)]
+        x_high: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        percentage: Option<crate::CalcableValue<'a, crate::Percentage>>,
+    },
+}
+#[cfg(test)]
+::stable_type_layout::register!(VoicePitchStyleValue < 'static >);

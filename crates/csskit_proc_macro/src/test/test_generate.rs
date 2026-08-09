@@ -556,6 +556,15 @@ fn transform_origin_grammar() {
 }
 
 #[test]
+fn voice_pitch_grammar() {
+	let syntax = to_valuedef!(
+		" <frequency [0Hz,∞]> && absolute | [ [ x-low | low | medium | high | x-high ] || [ <frequency [0Hz,∞]> | <semitones> | <percentage> ] ] "
+	);
+	let data = to_deriveinput! { #[derive(Parse)] enum VoicePitchStyleValue<'a> {} };
+	assert_snapshot!(syntax, data, "voice_pitch_grammar");
+}
+
+#[test]
 fn transform_origin_replacement() {
 	let syntax = to_valuedef!(" <position-one> | <position-two> <length>? ");
 	let data = to_deriveinput! { #[derive(Parse)] enum TransformOriginStyleValue {} };

@@ -323,6 +323,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"ScrollStateFeature",
 	"ScrollableScrollStateFeatureKeyword",
 	"SelfPosition",
+	"Semitones",
 	"ShadowPosition",
 	"ShapeBox",
 	"SingleAnimationComposition",

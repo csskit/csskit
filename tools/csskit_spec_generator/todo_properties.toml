@@ -34,10 +34,6 @@ properties = [
 [inline]
 properties = ["initial-letter-align"]
 
-
-[speech]
-properties = ["voice-pitch", "voice-range"]
-
 [variables]
 properties = ["--*"]
 

@@ -10,11 +10,23 @@ use super::prelude::*;
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Dimension)]
 pub enum Frequency {
 	#[atom(CssAtomSet::Hz)]
 	Hz(T![Dimension]),
 	#[atom(CssAtomSet::Khz)]
 	Khz(T![Dimension]),
+}
+
+impl Frequency {
+	pub fn as_hertz(&self) -> f32 {
+		match self {
+			Self::Hz(f) => (*f).into(),
+			Self::Khz(f) => Into::<f32>::into(*f) * 1000.0,
+		}
+	}
 }
 
 impl From<Frequency> for f32 {
@@ -23,6 +35,18 @@ impl From<Frequency> for f32 {
 			Frequency::Hz(f) => f.into(),
 			Frequency::Khz(f) => f.into(),
 		}
+	}
+}
+
+impl ToNumberValue for Frequency {
+	fn to_number_value(&self) -> Option<f32> {
+		Some((*self).into())
+	}
+}
+
+impl ToNormalisedValue for Frequency {
+	fn to_normalised_value(&self) -> Option<f32> {
+		Some(self.as_hertz())
 	}
 }
 
