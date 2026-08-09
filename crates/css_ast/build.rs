@@ -1,5 +1,5 @@
 #![deny(warnings)]
-use csskit_source_finder::find_visitable_nodes;
+use csskit_source_finder::{VisitMode, VisitableNode, find_visitable_nodes};
 use heck::{ToKebabCase, ToSnakeCase};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -10,6 +10,7 @@ use std::{
 	io::Error,
 	path::{Path, PathBuf},
 };
+use syn::parse_str;
 
 fn write_tokens(file: &str, source: TokenStream) -> Result<(), Error> {
 	let contents = syn::parse_file(&source.to_string()).map_err(|e| Error::other(e.to_string()))?;
@@ -26,6 +27,15 @@ fn main() {
 		println!("cargo::rerun-if-changed={}", path.display());
 	});
 	let mut all_visitable = all_visitable.into_iter().collect::<Vec<_>>();
+	// Include nodes from css_parse
+	all_visitable.push(VisitableNode {
+		input: parse_str("pub struct ComponentValues<'a>;").unwrap(),
+		visit_mode: VisitMode::All,
+	});
+	all_visitable.push(VisitableNode {
+		input: parse_str("pub enum ComponentValue<'a> {}").unwrap(),
+		visit_mode: VisitMode::Self_,
+	});
 	all_visitable.sort_unstable_by_key(|node| node.ident().to_string());
 
 	let queryable = all_visitable.iter().filter(|node| node.visit_mode.is_queryable()).cloned().collect::<Vec<_>>();

@@ -3,10 +3,10 @@ include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
 
 use css_parse::Vec;
 use css_parse::{
-	Block, Box, CommaSeparated, Comparison, ComponentValues, Cursor, Declaration, DeclarationGroup, DeclarationList,
-	DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata, Optionals2, Optionals3,
-	Optionals4, Optionals5, Parse, Peek, QualifiedRule, RuleList, ToCursors, ToSpan, syntax::BadDeclaration,
-	token_macros,
+	Block, Box, CommaSeparated, Comparison, ComponentValue, ComponentValues, Cursor, Declaration, DeclarationGroup,
+	DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata,
+	Optionals2, Optionals3, Optionals4, Optionals5, Parse, Peek, QualifiedRule, RuleList, ToCursors, ToSpan,
+	syntax::BadDeclaration, token_macros,
 };
 use visit_flow::{VisitFlow, try_visit};
 
@@ -607,11 +607,75 @@ impl<'a> Visitable for BadDeclaration<'a> {
 }
 
 impl<'a> VisitableMut for ComponentValues<'a> {
-	fn accept_mut<V: VisitMut>(&mut self, _: &mut V) {}
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_component_values(self);
+		for value in &mut self.values {
+			value.accept_mut(v);
+		}
+		v.exit_component_values(self);
+	}
+}
+
+impl<'a> QueryableNode for ComponentValues<'a> {
+	const NODE_ID: NodeId = NodeId::ComponentValues;
 }
 
 impl<'a> Visitable for ComponentValues<'a> {
-	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		let node = QueryableNode::visit_node(self);
+		if let VisitAction::SkipChildren = try_visit!(v.consider_node(node)) {
+			return VisitFlow::DESCEND;
+		}
+		if let VisitAction::Descend = try_visit!(v.enter_node(node)) {
+			if let VisitAction::Descend = try_visit!(v.visit_component_values(self)) {
+				for value in &self.values {
+					try_visit!(value.accept(v));
+				}
+			}
+			try_visit!(v.exit_component_values(self));
+		}
+		try_visit!(v.exit_node(node));
+		VisitFlow::DESCEND
+	}
+}
+
+impl<'a> VisitableMut for ComponentValue<'a> {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_component_value(self);
+		match self {
+			ComponentValue::SimpleBlock(block) => block.values.accept_mut(v),
+			ComponentValue::Function(function) => function.params.accept_mut(v),
+			_ => {}
+		}
+		v.exit_component_value(self);
+	}
+}
+
+impl<'a> QueryableNode for ComponentValue<'a> {
+	const NODE_ID: NodeId = NodeId::ComponentValue;
+}
+
+impl<'a> Visitable for ComponentValue<'a> {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		let node = QueryableNode::visit_node(self);
+		if let VisitAction::SkipChildren = try_visit!(v.consider_node(node)) {
+			return VisitFlow::DESCEND;
+		}
+		if let VisitAction::Descend = try_visit!(v.enter_node(node)) {
+			if let VisitAction::Descend = try_visit!(v.visit_component_value(self)) {
+				match self {
+					ComponentValue::SimpleBlock(block) => {
+						try_visit!(block.values.accept(v));
+					}
+					ComponentValue::Function(function) => {
+						try_visit!(function.params.accept(v));
+					}
+					_ => {}
+				}
+			}
+			try_visit!(v.exit_component_value(self));
+		}
+		try_visit!(v.exit_node(node));
 		VisitFlow::DESCEND
 	}
 }
