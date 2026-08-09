@@ -790,8 +790,9 @@ fn not_with_pseudo_important() {
 
 #[test]
 fn not_with_pseudo_custom() {
-	// 14 nodes: includes Declaration nodes (visited as StyleValue) + their value children
-	let total = assert_query!("a { --color: red; margin: 10px; }", "*", 14);
+	// 17 nodes: includes Declaration nodes (visited as StyleValue) + their value children, and the
+	// custom property's ComponentValues plus its two ComponentValue children (whitespace, `red`)
+	let total = assert_query!("a { --color: red; margin: 10px; }", "*", 17);
 	let custom = assert_query!("a { --color: red; margin: 10px; }", "*:custom", 1, [NodeId::StyleValue]);
 	assert_query!("a { --color: red; margin: 10px; }", "*:not(:custom)", total.len() - custom.len());
 }
@@ -1442,4 +1443,12 @@ fn unknown_type_selector_matches_nothing() {
 	assert_query!(".a {} #foo {} .b {}", "foo", 0);
 	assert_query!(".a {} #foo {} .b {}", "unknown-node-type", 0);
 	assert_query!("@media screen {}", "media-rule-invalid", 0);
+}
+
+#[test]
+fn component_values_are_queryable() {
+	assert_query!("a { --x: red; }", "component-values", 1, [NodeId::ComponentValues]);
+	assert_query!("a { --x: red; }", "component-value", 2, [NodeId::ComponentValue, NodeId::ComponentValue]);
+	assert_query!("a { --x: foo(1px); }", "component-values", 2, [NodeId::ComponentValues, NodeId::ComponentValues]);
+	assert_query!("a { --x: foo(1px); }", "component-value component-value", 1, [NodeId::ComponentValue]);
 }

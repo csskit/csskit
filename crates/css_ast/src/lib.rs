@@ -26,7 +26,7 @@ pub mod visit;
 
 pub use constraints::*;
 pub use css_atom_set::*;
-pub use css_parse::{Declaration, DeclarationValue, Diagnostic};
+pub use css_parse::{ComponentValue, ComponentValues, Declaration, DeclarationValue, Diagnostic};
 pub use functions::*;
 pub use metadata::*;
 pub use properties::*;

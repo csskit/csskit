@@ -25,6 +25,12 @@ pub enum ComponentValue<'a> {
 	Comma(T![,]),
 }
 
+impl<'a, M: NodeMetadata> NodeWithMetadata<M> for ComponentValue<'a> {
+	fn metadata(&self) -> M {
+		M::default()
+	}
+}
+
 impl<'a> Peek<'a> for ComponentValue<'a> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[
 		Kind::Whitespace,

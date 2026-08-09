@@ -8,7 +8,7 @@ use super::ComponentValue;
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 pub struct ComponentValues<'a> {
-	values: Vec<'a, ComponentValue<'a>>,
+	pub values: Vec<'a, ComponentValue<'a>>,
 }
 
 impl<'a> Peek<'a> for ComponentValues<'a> {
