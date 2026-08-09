@@ -356,6 +356,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"SystemColor",
 	"Tag",
 	"TargetCounterKind",
+	"TargetName",
 	"TargetTextFunction",
 	"TargetTextParams",
 	"TestVisitor",

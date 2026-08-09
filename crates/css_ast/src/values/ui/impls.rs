@@ -10,6 +10,11 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "grab");
 		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "-webkit-grab");
 		assert_parse!(CssAtomSet::ATOMS, CursorStyleValue, "-webkit-grabbing");
+		assert_parse!(CssAtomSet::ATOMS, NavDownStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, NavUpStyleValue, "#foo");
+		assert_parse!(CssAtomSet::ATOMS, NavLeftStyleValue, "#foo current");
+		assert_parse!(CssAtomSet::ATOMS, NavRightStyleValue, "#foo root");
+		assert_parse!(CssAtomSet::ATOMS, NavRightStyleValue, "#foo \"frame\"");
 	}
 
 	#[test]

@@ -327,179 +327,115 @@ pub struct InterestDelayEndStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct InterestDelayStartStyleValue<'a>;
 
-// /// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-ui-4/#nav-down
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = Ui,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.nav-down")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavDownStyleValue<'a> {}
+/// Represents the style value for `nav-down` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-down).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <id> [ current | root | <target-name> ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-ui-4/#nav-down
+#[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-down"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum NavDownStyleValue<'a> {}
 
-// /// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-ui-4/#nav-left
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = Ui,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     box_side = Left,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.nav-left")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavLeftStyleValue<'a> {}
+/// Represents the style value for `nav-left` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-left).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <id> [ current | root | <target-name> ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-ui-4/#nav-left
+#[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    box_side = Left,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-left"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum NavLeftStyleValue<'a> {}
 
-// /// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-ui-4/#nav-right
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = Ui,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-//     box_side = Right,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.nav-right")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavRightStyleValue<'a> {}
+/// Represents the style value for `nav-right` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-right).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <id> [ current | root | <target-name> ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-ui-4/#nav-right
+#[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+    box_side = Right,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-right"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum NavRightStyleValue<'a> {}
 
-// /// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// auto | <id> [ current | root | <target-name> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-ui-4/#nav-up
-// #[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "auto",
-//     applies_to = Elements,
-//     animation_type = Discrete,
-//     property_group = Ui,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.nav-up")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum NavUpStyleValue<'a> {}
+/// Represents the style value for `nav-up` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#nav-up).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// auto | <id> [ current | root | <target-name> ]?
+/// ```
+///
+/// https://drafts.csswg.org/css-ui-4/#nav-up
+#[syntax(" auto | <id> [ current | root | <target-name> ]? ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = Discrete,
+    property_group = Ui,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.nav-up"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum NavUpStyleValue<'a> {}
 
 /// Represents the style value for `outline` as defined in [css-ui-4](https://drafts.csswg.org/css-ui-4/#outline).
 ///
