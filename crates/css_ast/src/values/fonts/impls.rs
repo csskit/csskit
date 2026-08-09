@@ -27,6 +27,21 @@ mod tests {
 	}
 
 	#[test]
+	fn test_font_variant_alternates() {
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "normal");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "historical-forms");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "stylistic(user-defined-ident)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "styleset(alt-a,alt-b)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "character-variant(alt-a,alt-b)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "swash(fancy)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "ornaments(bullets)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "annotation(circled)");
+		assert_parse!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "swash(fancy) historical-forms");
+		assert_parse_error!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "normal historical-forms");
+		assert_parse_error!(CssAtomSet::ATOMS, FontVariantAlternatesStyleValue, "swash(fancy) swash(fancy)");
+	}
+
+	#[test]
 	fn test_font_variant_numeric() {
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "normal");
 		assert_parse!(CssAtomSet::ATOMS, FontVariantNumericStyleValue, "lining-nums");
