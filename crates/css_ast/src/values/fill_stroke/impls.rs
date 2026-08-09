@@ -121,6 +121,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "arcs");
 		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "miter");
 		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "crop bevel");
+		assert_parse!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "bevel crop");
 		assert_peek_false!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, StrokeLinejoinStyleValue, "1px");
 	}

@@ -1,0 +1,25 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(Parse)]
+#[derive(::stable_type_layout::TypeLayout)]
+#[repr(C, u8)]
+enum Foo<'a> {
+    #[parse(one_must_occur)]
+    Sub {
+        #[atom(CssAtomSet::Sub)]
+        sub: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::Ruby)]
+        ruby: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+    },
+    #[parse(one_must_occur)]
+    Super {
+        #[atom(CssAtomSet::Super)]
+        super_: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+        #[atom(CssAtomSet::Ruby)]
+        ruby: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+    },
+}
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);

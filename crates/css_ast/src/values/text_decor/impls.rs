@@ -10,6 +10,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "from-font");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "under");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "from-font left");
+		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "right under");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "left");
 		assert_parse!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "right");
 		assert_peek_false!(CssAtomSet::ATOMS, TextUnderlinePositionStyleValue, "");

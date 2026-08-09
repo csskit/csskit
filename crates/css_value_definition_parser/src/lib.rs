@@ -565,13 +565,16 @@ impl Def {
 						extractable.iter().all(|(alts, _)| *alts == first)
 					}
 				};
+				let exempt_keyword_groups = matches!(style, DefCombinatorStyle::Options)
+					&& optimized.iter().filter(|c| Self::is_keyword_group(c)).count() >= 2;
 				if !matches!(style, DefCombinatorStyle::Alternatives)
 					&& !is_repeated_multiplier
-					&& let Some((group_idx, alts, wrap_optional)) = optimized
-						.iter()
-						.enumerate()
-						.find_map(|(i, c)| Self::extract_distributable(c, *style).map(|(alts, wrap)| (i, alts, wrap)))
-				{
+					&& let Some((group_idx, alts, wrap_optional)) = optimized.iter().enumerate().find_map(|(i, c)| {
+						if exempt_keyword_groups && Self::is_keyword_group(c) {
+							return None;
+						}
+						Self::extract_distributable(c, *style).map(|(alts, wrap)| (i, alts, wrap))
+					}) {
 					let prefix = &optimized[..group_idx];
 					let suffix = &optimized[group_idx + 1..];
 					let mut distributed: Vec<Def> = alts
@@ -650,6 +653,11 @@ impl Def {
 			}
 			_ => None,
 		}
+	}
+
+	fn is_keyword_group(def: &Def) -> bool {
+		Self::extract_alternatives(def)
+			.is_some_and(|(alts, wrapped)| !wrapped && alts.iter().all(|d| matches!(d, Def::Ident(_))))
 	}
 
 	/// Extracts alternatives that need distribution for the given combinator style.

@@ -1,6 +1,5 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
-assertion_line: 33
 expression: result.output.unwrap()
 ---
 StyleSheet(
@@ -180086,13 +180085,13 @@ StyleSheet(
                 offset: SourceOffset(158769),
                 len: 1,
               )),
-              value: PanXPanY(
-                pan_x: None,
-                pan_y: Some(Literal(Ident(Cursor(
+              value: PinchZoom(
+                pan_x_pan_left_pan_right: None,
+                pan_y_pan_up_pan_down: Some(PanY(Literal(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(158771),
                   len: 5,
-                )))),
+                ))))),
                 pinch_zoom: None,
               ),
               important: None,

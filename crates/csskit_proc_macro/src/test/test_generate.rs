@@ -570,3 +570,10 @@ fn transform_origin_replacement() {
 	let data = to_deriveinput! { #[derive(Parse)] enum TransformOriginStyleValue {} };
 	assert_snapshot!(syntax, data, "transform_origin_replacement");
 }
+
+#[test]
+fn keyword_group_with_rust_keyword() {
+	let syntax = to_valuedef! { [ sub | super ] || ruby };
+	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
+	assert_snapshot!(syntax, data, "keyword_group_with_rust_keyword");
+}

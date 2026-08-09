@@ -3,7 +3,7 @@ use crate::type_renames::get_type_rename;
 use css_value_definition_parser::*;
 use heck::{ToPascalCase, ToSnakeCase};
 use itertools::Itertools;
-use proc_macro2::{Punct, Spacing, TokenStream};
+use proc_macro2::{Punct, Spacing, Span, TokenStream};
 use quote::{format_ident, quote};
 use std::ops::{Deref, Range};
 use syn::{Error, Generics, Ident, Visibility, parse_quote};
@@ -15,6 +15,17 @@ pub fn pluralize(str: String) -> String {
 pub fn keyword_to_pascal(s: &str) -> String {
 	let pascal = s.to_lowercase().to_pascal_case();
 	if s.starts_with('-') { format!("_{pascal}") } else { pascal }
+}
+
+/// Builds a struct field ident from a snake_cased grammar name, escaping Rust keywords.
+///
+/// Most keywords survive as raw identifiers (`r#type`), but `crate`, `self`, `Self` and
+/// `super` cannot be raw, so they gain a trailing underscore instead.
+fn member_ident(name: &str) -> Ident {
+	match name {
+		"crate" | "self" | "Self" | "super" => format_ident!("{}_", name),
+		_ => syn::parse_str::<Ident>(name).unwrap_or_else(|_| Ident::new_raw(name, Span::call_site())),
+	}
 }
 
 /// Returns a structural suffix used to disambiguate colliding variant names.
@@ -77,7 +88,7 @@ pub trait ToFieldName {
 
 	/// Generates an Ident suitable for naming a struct member.
 	fn to_member_name(&self, size_hint: usize) -> Ident {
-		format_ident!("{}", self.to_variant_name(size_hint).to_string().to_snake_case())
+		member_ident(&self.to_variant_name(size_hint).to_string().to_snake_case())
 	}
 }
 
@@ -444,6 +455,84 @@ fn find_options_with_keywords(def: &Def) -> Vec<&Def> {
 	}
 }
 
+/// The Options (`||`) combinators that a definition for `def` renders inline: either `def` itself,
+/// or the Options children of an Alternatives that become struct variants.
+fn inline_options(def: &Def) -> Vec<&Def> {
+	fn unwrap_group(def: &Def) -> &Def {
+		if let Def::Group(inner, _) = def { unwrap_group(inner) } else { def }
+	}
+	match def {
+		Def::Combinator(_, DefCombinatorStyle::Options) => vec![def],
+		Def::Combinator(children, DefCombinatorStyle::Alternatives) => children
+			.iter()
+			.map(unwrap_group)
+			.filter(|d| matches!(d, Def::Combinator(_, DefCombinatorStyle::Options)))
+			.collect(),
+		_ => vec![],
+	}
+}
+
+/// All-keyword alternation groups (e.g. `[ sub | super ]`) sitting inside the Options combinators
+/// `def` renders inline, paired with the ident of the enum hoisted to hold them. `Def::optimize`
+/// leaves such groups undistributed when one `||` list holds more than one, because distributing
+/// them would produce a cartesian product of indistinguishable variants.
+fn hoisted_keyword_groups<'d>(def: &'d Def, ident: &Ident) -> Vec<(&'d Def, Ident)> {
+	let mut groups: Vec<&Def> = vec![];
+	for options in inline_options(def) {
+		let Def::Combinator(children, _) = options else { continue };
+		for child in children {
+			let child = if let Def::Group(inner, _) = child { inner.deref() } else { child };
+			if matches!(child, Def::Combinator(alts, DefCombinatorStyle::Alternatives) if alts.iter().all(|d| matches!(d, Def::Ident(_))))
+				&& !groups.contains(&child)
+			{
+				groups.push(child);
+			}
+		}
+	}
+	groups.into_iter().enumerate().map(|(i, g)| (g, format_ident!("{}Keywords{}", ident, i + 1))).collect()
+}
+
+/// The hoisted enum type referencing `child`, when it is one of the groups in `groups`.
+fn hoisted_keyword_type(groups: &[(&Def, Ident)], child: &Def) -> Option<TokenStream> {
+	let child = if let Def::Group(inner, _) = child { inner.deref() } else { child };
+	groups.iter().find(|(group, _)| *group == child).map(|(_, ident)| quote! { crate::#ident<'a> })
+}
+
+/// Emits a keyword-only enum: one variant per keyword, each tagged with its atom.
+fn keyword_enum(name: &Ident, keywords: Vec<&Def>) -> TokenStream {
+	let variants: Vec<TokenStream> = keywords
+		.iter()
+		.unique_by(|def| if let Def::Ident(DefIdent(str)) = def { str } else { "" })
+		.filter_map(|def| {
+			if let Def::Ident(def) = def {
+				let ident = format_ident!("{}", keyword_to_pascal(&def.to_string()));
+				let ty = def.to_type();
+				Some(quote! { #[atom(CssAtomSet::#ident)] #ident(#ty), })
+			} else {
+				None
+			}
+		})
+		.collect();
+	let repr = shape_to_repr(Shape::DataEnum { variants: variants.len() });
+	quote! {
+		#repr
+		#[derive(
+			::csskit_derives::Parse,
+			::csskit_derives::Peek,
+			::csskit_derives::ToCursors,
+			::csskit_derives::ToSpan,
+			::csskit_derives::SemanticEq,
+			::csskit_derives::NodeWithMetadata,
+			Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+		#[metadata(delegate)]
+		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+		#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
+		pub enum #name<'a> {
+			#(#variants)*
+		}
+	}
+}
+
 /// For a list of sibling `Combinator(Options, ...)` children, compute each child's
 /// distinguishing keyword set: the keywords that appear in this child but NOT in some other
 /// sibling. Used to derive concise variant names when distribution produces multiple Options
@@ -658,42 +747,16 @@ impl DefExt for Def {
 			_ => false,
 		};
 		let keyword_type = if needs_keyword_type {
-			let keywords: Vec<TokenStream> = self
-				.gather_keywords()
-				.iter()
-				.unique_by(|def| if let Self::Ident(DefIdent(str)) = def { str } else { "" })
-				.filter_map(|def| {
-					if let Self::Ident(def) = def {
-						let ident = format_ident!("{}", keyword_to_pascal(&def.to_string()));
-						let ty = def.to_type();
-						Some(quote! { #[atom(CssAtomSet::#ident)] #ident(#ty), })
-					} else {
-						None
-					}
-				})
-				.collect();
-			let keyword_name = Self::keyword_ident(ident);
-			let keyword_repr = shape_to_repr(Shape::DataEnum { variants: keywords.len() });
-			quote! {
-				#keyword_repr
-				#[derive(
-					::csskit_derives::Parse,
-					::csskit_derives::Peek,
-					::csskit_derives::ToCursors,
-					::csskit_derives::ToSpan,
-					::csskit_derives::SemanticEq,
-					::csskit_derives::NodeWithMetadata,
-					Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-				#[metadata(delegate)]
-				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
-				pub enum #keyword_name<'a> {
-					#(#keywords)*
-				}
-			}
+			keyword_enum(&Self::keyword_ident(ident), self.gather_keywords())
 		} else {
 			quote! {}
 		};
+		// Keyword alternation groups left undistributed inside an Options (`||`) list are referenced
+		// through a hoisted enum, which is emitted here.
+		let hoisted_keyword_types: TokenStream = hoisted_keyword_groups(self, ident)
+			.into_iter()
+			.map(|(group, name)| keyword_enum(&name, group.gather_keywords()))
+			.collect();
 		// Determine if a Single* helper struct is needed, and which Def to generate it from.
 		let single_inner: Option<&Def> = match self {
 			Self::Multiplier(defs, _, range) => match defs.deref() {
@@ -734,7 +797,12 @@ impl DefExt for Def {
 			let single_ident = Self::single_ident(ident);
 			let generics = inner.get_generics();
 			let def = inner.generate_definition(vis, &single_ident, &generics, true, true, true);
+			let hoisted: TokenStream = hoisted_keyword_groups(inner, &single_ident)
+				.into_iter()
+				.map(|(group, name)| keyword_enum(&name, group.gather_keywords()))
+				.collect();
 			quote! {
+				#hoisted
 				#[derive(
 					::csskit_derives::Parse,
 					::csskit_derives::Peek,
@@ -775,7 +843,12 @@ impl DefExt for Def {
 				};
 				let generics = inner.get_generics();
 				let def = inner.generate_definition(vis, &opts_ident, &generics, true, true, true);
+				let hoisted: TokenStream = hoisted_keyword_groups(inner, &opts_ident)
+					.into_iter()
+					.map(|(group, name)| keyword_enum(&name, group.gather_keywords()))
+					.collect();
 				result.extend(quote! {
+					#hoisted
 					#[derive(
 						::csskit_derives::Parse,
 						::csskit_derives::Peek,
@@ -794,6 +867,7 @@ impl DefExt for Def {
 		};
 		quote! {
 			#keyword_type
+			#hoisted_keyword_types
 			#single_type
 			#options_types
 		}
@@ -820,9 +894,10 @@ impl GenerateDefinition for Def {
 							.into_compile_error()
 					}
 					Self::Combinator(defs, DefCombinatorStyle::Options) => {
+						let hoisted = hoisted_keyword_groups(self, ident);
 						let members = defs.iter().map(|def| {
 							let name = def.to_member_name(0);
-							let ty = def.to_type();
+							let ty = hoisted_keyword_type(&hoisted, def).unwrap_or_else(|| def.to_type());
 							let attrs = def.type_attributes(derives_parse, derives_visitable);
 							quote! { #attrs pub #name: Option<#ty> }
 						});
@@ -1047,6 +1122,7 @@ impl GenerateDefinition for Def {
 								};
 								let name_str = name.to_string();
 								let name = format_ident!("{}", get_type_rename(&name_str).unwrap_or(&name_str));
+								let hoisted = hoisted_keyword_groups(self, ident);
 								let members: Vec<_> = opts_children
 									.iter()
 									.flat_map(|child| {
@@ -1059,7 +1135,8 @@ impl GenerateDefinition for Def {
 												.iter()
 												.map(|nc| {
 													let member_name = nc.to_member_name(0);
-													let ty = nc.to_type();
+													let ty = hoisted_keyword_type(&hoisted, nc)
+														.unwrap_or_else(|| nc.to_type());
 													let field_attrs =
 														nc.type_attributes(derives_parse, derives_visitable);
 													quote! { #field_attrs #member_name: Option<#ty> }
@@ -1067,7 +1144,8 @@ impl GenerateDefinition for Def {
 												.collect::<Vec<_>>()
 										} else {
 											let member_name = child.to_member_name(0);
-											let ty = child.to_type();
+											let ty = hoisted_keyword_type(&hoisted, child)
+												.unwrap_or_else(|| child.to_type());
 											let field_attrs = child.type_attributes(derives_parse, derives_visitable);
 											vec![quote! { #field_attrs #member_name: Option<#ty> }]
 										}

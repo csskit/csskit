@@ -19,6 +19,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before");
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "after");
 		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "before links");
+		assert_parse!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "tabs after");
 		assert_peek_false!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, ScrollMarkerGroupStyleValue, "1px");
 	}
