@@ -240,7 +240,8 @@ impl ToType for Def {
 					vec![quote! { ::css_parse::Either<#left, #right> }]
 				} else {
 					let ident = self.to_variant_name(0);
-					let generics = self.get_generics();
+					let generics =
+						if is_sized_type(&ident.to_string()) { Default::default() } else { self.get_generics() };
 					vec![quote! { crate::#ident #generics }]
 				}
 			}
@@ -1057,6 +1058,10 @@ impl GenerateDefinition for Def {
 								};
 								quote! { #variant_attrs #name { #(#members),* }, }
 							} else {
+								if derives_parse && matches!(d, Self::Group(_, DefGroupStyle::OneMustOccur)) {
+									let existing = attrs.take().unwrap_or_default();
+									attrs = Some(quote! { #existing #[parse(one_must_occur)] });
+								}
 								let types = match d {
 									Self::Combinator(defs, DefCombinatorStyle::Ordered) => defs
 										.iter()

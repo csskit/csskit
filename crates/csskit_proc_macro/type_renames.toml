@@ -10,3 +10,5 @@
 "ClipEllipsisStringFadeFadeFunction" = "TextOverflowSingleAxis"
 "LeftCenterRightTopBottomLengthPercentage" = "PositionOne"
 "LightDarkCustomIdent" = "ColorSchemeName"
+"LeftRightXStartXEnd" = "PositionHorizontalKeyword"
+"TopBottomYStartYEnd" = "PositionVerticalKeyword"

@@ -14,7 +14,6 @@ coverage/popular/bootstrap.5.3.0.css
 2931:3:  background-position: right 0.75rem center, center right 2.25rem;
 2936:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
 2950:3:  box-shadow: 0 0 0 0.25rem rgba(var(--bs-danger-rgb), 0.25);
-4957:5:    background-position-x: 1rem;
 6839:3:  -webkit-mask-image: linear-gradient(130deg, #000 55%, rgba(0, 0, 0, 0.8) 75%, #000 95%);
 6899:3:  color: RGBA(var(--bs-primary-rgb), var(--bs-link-opacity, 1)) !important;
 6900:3:  -webkit-text-decoration-color: RGBA(var(--bs-primary-rgb), var(--bs-link-underline-opacity, 1)) !important;

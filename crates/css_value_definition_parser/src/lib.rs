@@ -15,6 +15,7 @@ use syn::{
 };
 
 mod sized_types;
+pub use sized_types::is_sized_type;
 #[cfg(test)]
 mod test;
 
