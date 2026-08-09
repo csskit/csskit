@@ -9,7 +9,6 @@ properties = ["border-image"]
 properties = [
   "font",
   "font-variant",
-  "font-variant-alternates",
   # Font properties with complex grammars that cause panics or use unsupported operators like /
   "superscript-size-override",
   "superscript-position-override",

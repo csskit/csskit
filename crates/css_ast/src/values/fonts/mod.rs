@@ -541,60 +541,44 @@ pub enum FontSynthesisWeightStyleValue<'a> {}
 // #[derive(csskit_derives::NodeWithMetadata)]
 // pub enum FontVariantStyleValue<'a> {}
 
-// /// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
-// ///
-// /// The font-variant-alternates CSS property, along with the @font-feature-values at-rule, chooses when to use a font's alternate glyphs.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /**normal | [ stylistic(<font-feature-value-name>) ||
-// historical-forms ||
-// styleset(<font-feature-value-name>#) ||
-// character-variant(<font-feature-value-name>#) ||
-// swash(<font-feature-value-name>) ||
-// ornaments(<font-feature-value-name>) ||
-// annotation(<font-feature-value-name>) ]*/
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
-// #[syntax(
-//     " normal | [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "normal",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Discrete,
-//     shorthand_group = Font,
-//     property_group = Fonts,
-//     computed_value_type = AsSpecified,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font-variant-alternates")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct FontVariantAlternatesStyleValue<'a>;
+/// Represents the style value for `font-variant-alternates` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-alternates).
+///
+/// The font-variant-alternates CSS property, along with the @font-feature-values at-rule, chooses when to use a font's alternate glyphs.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/**normal | [ stylistic(<font-feature-value-name>) ||
+historical-forms ||
+styleset(<font-feature-value-name>#) ||
+character-variant(<font-feature-value-name>#) ||
+swash(<font-feature-value-name>) ||
+ornaments(<font-feature-value-name>) ||
+annotation(<font-feature-value-name>) ]*/
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font-variant-alternates
+#[syntax(
+	" normal | [ stylistic(<font-feature-value-name>) || historical-forms || styleset(<font-feature-value-name>#) || character-variant(<font-feature-value-name>#) || swash(<font-feature-value-name>) || ornaments(<font-feature-value-name>) || annotation(<font-feature-value-name>) ] "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    shorthand_group = Font,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font-variant-alternates"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct FontVariantAlternatesStyleValue<'a>;
 
 /// Represents the style value for `font-variant-caps` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-variant-caps).
 ///
