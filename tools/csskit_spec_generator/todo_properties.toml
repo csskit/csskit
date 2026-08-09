@@ -29,8 +29,5 @@ properties = ["initial-letter-align"]
 [variables]
 properties = ["--*"]
 
-[motion]
-properties = ["offset"]
-
 [masking]
 properties = ["mask-border"]
