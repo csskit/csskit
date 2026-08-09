@@ -743,7 +743,7 @@ pub enum ScrollBehaviorStyleValue<'a> {}
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-marker-group"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub enum ScrollMarkerGroupStyleValue<'a> {}
+pub struct ScrollMarkerGroupStyleValue<'a>;
 
 /// Represents the style value for `scroll-target-group` as defined in [css-overflow-5](https://drafts.csswg.org/css-overflow-5/#scroll-target-group).
 ///

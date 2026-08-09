@@ -7143,19 +7143,19 @@ MsPseudoElement: size=40 align=4
 MsTextSizeAdjustStyleValue: size=32 align=8 {
     0: 0
 }
-MsTouchActionStyleValue: size=80 align=8
+MsTouchActionStyleValue: size=96 align=8
     0: Auto
     1: None
-    2: PanXPanY
-    3: PanXPanUp
-    4: PanXPanDown
-    5: PanLeftPanY
-    6: PanLeftPanUp
-    7: PanLeftPanDown
-    8: PanRightPanY
-    9: PanRightPanUp
-    10: PanRightPanDown
-    11: Manipulation
+    2: PinchZoom
+    3: Manipulation
+MsTouchActionStyleValueKeywords1: size=32 align=8
+    0: PanX
+    1: PanLeft
+    2: PanRight
+MsTouchActionStyleValueKeywords2: size=32 align=8
+    0: PanY
+    1: PanUp
+    2: PanDown
 MsTransformOriginStyleValue: size=128 align=8
     0: PositionOne
     1: PositionTwo
@@ -8866,12 +8866,19 @@ ScrollMarginStyleValue: size=96 align=8 {
 ScrollMarginTopStyleValue: size=24 align=8 {
     0: 0
 }
-ScrollMarkerGroupStyleValue: size=56 align=8
-    0: None
-    1: BeforeLinks
-    2: BeforeTabs
-    3: AfterLinks
-    4: AfterTabs
+ScrollMarkerGroupStyleValue: size=72 align=8 {
+    0: 0
+}
+ScrollMarkerGroupStyleValueOptions: size=64 align=8 {
+    before_after: 0
+    links_tabs: 32
+}
+ScrollMarkerGroupStyleValueOptionsKeywords1: size=32 align=8
+    0: Before
+    1: After
+ScrollMarkerGroupStyleValueOptionsKeywords2: size=32 align=8
+    0: Links
+    1: Tabs
 ScrollPaddingBlockEndStyleValue: size=40 align=8 {
     0: 0
 }
@@ -9464,16 +9471,18 @@ StrokeLinecapStyleValue: size=32 align=8
     0: Butt
     1: Round
     2: Square
-StrokeLinejoinStyleValue: size=56 align=8
-    0: CropBevel
-    1: CropRound
-    2: CropFallback
-    3: ArcsBevel
-    4: ArcsRound
-    5: ArcsFallback
-    6: MiterBevel
-    7: MiterRound
-    8: MiterFallback
+StrokeLinejoinStyleValue: size=64 align=8 {
+    crop_arcs_miter: 0
+    bevel_round_fallback: 32
+}
+StrokeLinejoinStyleValueKeywords1: size=32 align=8
+    0: Crop
+    1: Arcs
+    2: Miter
+StrokeLinejoinStyleValueKeywords2: size=32 align=8
+    0: Bevel
+    1: Round
+    2: Fallback
 StrokeMiterlimitStyleValue: size=24 align=8 {
     0: 0
 }
@@ -10751,22 +10760,22 @@ TextEmphasisSkipStyleValue: size=96 align=8 {
     symbols: 48
     narrow: 72
 }
-TextEmphasisStyleStyleValue: size=56 align=8
+TextEmphasisStyleStyleValue: size=72 align=8
     0: None
-    1: FilledDot
-    2: FilledCircle
-    3: FilledDoubleCircle
-    4: FilledTriangle
-    5: FilledSesame
-    6: OpenDot
-    7: OpenCircle
-    8: OpenDoubleCircle
-    9: OpenTriangle
-    10: OpenSesame
-    11: String
-TextEmphasisStyleValue: size=88 align=8 {
+    1: FillShape
+    2: String
+TextEmphasisStyleStyleValueKeywords1: size=32 align=8
+    0: Filled
+    1: Open
+TextEmphasisStyleStyleValueKeywords2: size=32 align=8
+    0: Dot
+    1: Circle
+    2: DoubleCircle
+    3: Triangle
+    4: Sesame
+TextEmphasisStyleValue: size=104 align=8 {
     text_emphasis_style: 0
-    text_emphasis_color: 56
+    text_emphasis_color: 72
 }
 TextFitStyleValue: size=88 align=8 {
     0: 0
@@ -10843,12 +10852,19 @@ TextTransformStyleValue: size=80 align=8
 TextUnderlineOffsetStyleValue: size=40 align=8 {
     0: 0
 }
-TextUnderlinePositionStyleValue: size=56 align=8
-    0: Auto
-    1: FromFontLeft
-    2: FromFontRight
-    3: UnderLeft
-    4: UnderRight
+TextUnderlinePositionStyleValue: size=72 align=8 {
+    0: 0
+}
+TextUnderlinePositionStyleValueOptions: size=64 align=8 {
+    from_font_under: 0
+    left_right: 32
+}
+TextUnderlinePositionStyleValueOptionsKeywords1: size=32 align=8
+    0: FromFont
+    1: Under
+TextUnderlinePositionStyleValueOptionsKeywords2: size=32 align=8
+    0: Left
+    1: Right
 TextWrapModeStyleValue: size=32 align=8
     0: Wrap
     1: Nowrap
@@ -10910,19 +10926,19 @@ TimelineTriggerStyleValue: size=32 align=8 {
 TopStyleValue: size=40 align=8 {
     0: 0
 }
-TouchActionStyleValue: size=80 align=8
+TouchActionStyleValue: size=96 align=8
     0: Auto
     1: None
-    2: PanXPanY
-    3: PanXPanUp
-    4: PanXPanDown
-    5: PanLeftPanY
-    6: PanLeftPanUp
-    7: PanLeftPanDown
-    8: PanRightPanY
-    9: PanRightPanUp
-    10: PanRightPanDown
-    11: Manipulation
+    2: PinchZoom
+    3: Manipulation
+TouchActionStyleValueKeywords1: size=32 align=8
+    0: PanX
+    1: PanLeft
+    2: PanRight
+TouchActionStyleValueKeywords2: size=32 align=8
+    0: PanY
+    1: PanUp
+    2: PanDown
 TrackBreadth: size=40 align=8
     0: LengthPercentage
     1: Flex

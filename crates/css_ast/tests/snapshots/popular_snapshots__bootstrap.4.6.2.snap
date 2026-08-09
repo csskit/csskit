@@ -167102,13 +167102,13 @@ StyleSheet(
                 offset: SourceOffset(133267),
                 len: 1,
               )),
-              value: PanXPanY(
-                pan_x: None,
-                pan_y: Some(Literal(Ident(Cursor(
+              value: PinchZoom(
+                pan_x_pan_left_pan_right: None,
+                pan_y_pan_up_pan_down: Some(PanY(Literal(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(133269),
                   len: 5,
-                )))),
+                ))))),
                 pinch_zoom: None,
               ),
               important: None,
@@ -167129,13 +167129,13 @@ StyleSheet(
                 offset: SourceOffset(133290),
                 len: 1,
               )),
-              value: PanXPanY(
-                pan_x: None,
-                pan_y: Some(Literal(Ident(Cursor(
+              value: PinchZoom(
+                pan_x_pan_left_pan_right: None,
+                pan_y_pan_up_pan_down: Some(PanY(Literal(Ident(Cursor(
                   kind: "Ident",
                   offset: SourceOffset(133292),
                   len: 5,
-                )))),
+                ))))),
                 pinch_zoom: None,
               ),
               important: None,
