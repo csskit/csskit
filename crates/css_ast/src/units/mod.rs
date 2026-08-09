@@ -10,6 +10,7 @@ mod line_width;
 mod number;
 mod percentage;
 mod resolution;
+mod semitones;
 mod time;
 
 pub use angles::*;
@@ -24,6 +25,7 @@ pub use line_width::*;
 pub use number::*;
 pub use percentage::*;
 pub use resolution::*;
+pub use semitones::*;
 pub use time::*;
 
 mod prelude {
