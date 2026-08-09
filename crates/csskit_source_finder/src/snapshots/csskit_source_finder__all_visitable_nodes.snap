@@ -190,6 +190,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum FontVariantEmojiStyleValue < \'a > { }",
   "pub enum FontVariantLigaturesStyleValue < \'a > { }",
   "pub enum FontVariantPositionStyleValue < \'a > { }",
+  "pub enum FontVariantStyleValue < \'a > { }",
   "pub enum FontWeightAbsolute < \'a > { }",
   "pub enum FontWeightStyleValue < \'a > { }",
   "pub enum FontWidthStyleValue < \'a > { }",

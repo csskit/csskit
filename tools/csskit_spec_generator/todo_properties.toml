@@ -5,7 +5,6 @@
 [fonts]
 properties = [
   "font",
-  "font-variant",
   # Font properties with complex grammars that cause panics or use unsupported operators like /
   "superscript-size-override",
   "superscript-position-override",
