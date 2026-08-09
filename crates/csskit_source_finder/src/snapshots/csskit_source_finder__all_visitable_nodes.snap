@@ -1,6 +1,5 @@
 ---
 source: crates/csskit_source_finder/src/lib.rs
-assertion_line: 241
 expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()).sorted().collect::<Vec<_>>()"
 ---
 [
@@ -1121,6 +1120,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct OffsetAnchorStyleValue < \'a > { }",
   "pub struct OffsetDistanceStyleValue < \'a > { }",
   "pub struct OffsetPathStyleValue < \'a > { }",
+  "pub struct OffsetStyleValue < \'a > { }",
   "pub struct OklabFunction < \'a > { }",
   "pub struct OklabRelativeFunction < \'a > { }",
   "pub struct OklchFunction < \'a > { }",

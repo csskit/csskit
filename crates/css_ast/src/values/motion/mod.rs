@@ -7,55 +7,39 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `offset` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset).
-// ///
-// /// The offset CSS property animates an element along a defined motion path.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?
-// /// ```
-// ///
-// /// https://drafts.csswg.org/motion-1/#offset
-// #[syntax(
-//     " [ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]? "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     inherits = Unknown,
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = OffsetAnchor|OffsetDistance|OffsetPath|OffsetPosition|OffsetRotate,
-//     property_group = Motion,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.offset")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct OffsetStyleValue<'a>;
+/// Represents the style value for `offset` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset).
+///
+/// The offset CSS property animates an element along a defined motion path.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]?
+/// ```
+///
+/// https://drafts.csswg.org/motion-1/#offset
+#[syntax(
+	" [ <'offset-position'>? [ <'offset-path'> [ <'offset-distance'> || <'offset-rotate'> ]? ]? ]! [ / <'offset-anchor'> ]? "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = OffsetAnchor|OffsetDistance|OffsetPath|OffsetPosition|OffsetRotate,
+    property_group = Motion,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct OffsetStyleValue<'a>;
 
 /// Represents the style value for `offset-anchor` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-anchor).
 ///

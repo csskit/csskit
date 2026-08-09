@@ -49,6 +49,21 @@ mod tests {
 	}
 
 	#[test]
+	fn test_offset() {
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "auto none");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "auto none 100px");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "auto none 100px 45deg");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "auto none 45deg 100px");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "none/auto");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "10px 20px none 50%/left top");
+		assert_parse!(CssAtomSet::ATOMS, OffsetStyleValue, "ray(45deg)");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, OffsetStyleValue, "/auto");
+	}
+
+	#[test]
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "none");
 		assert_peek_false!(CssAtomSet::ATOMS, OffsetAnchorStyleValue, "30deg");

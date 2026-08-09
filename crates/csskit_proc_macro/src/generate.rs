@@ -191,6 +191,26 @@ impl ToType for DefIdent {
 	}
 }
 
+/// A `[ a? b? ]!` group has no dedicated field attribute, so as a struct field it maps to
+/// `Optionals![A, B]`, which enforces "at least one" the same way `#[parse(one_must_occur)]`
+/// does for enum variants. Returns `None` for shapes that keep their existing lowering.
+fn one_must_occur_type(def: &Def) -> Option<TokenStream> {
+	let Def::Group(inner, DefGroupStyle::OneMustOccur) = def else {
+		return None;
+	};
+	let Def::Combinator(children, DefCombinatorStyle::Ordered) = inner.deref() else {
+		return None;
+	};
+	if children.iter().any(|d| !matches!(d, Def::Optional(_)) || d.is_all_keywords()) {
+		return None;
+	}
+	let types = children.iter().map(|d| {
+		let Def::Optional(inner) = d else { unreachable!("checked above") };
+		inner.deref().to_type()
+	});
+	Some(quote! { ::css_parse::Optionals![#(#types),*] })
+}
+
 impl ToType for Def {
 	fn to_types(&self) -> Vec<TokenStream> {
 		match self {
@@ -825,7 +845,9 @@ impl GenerateDefinition for Def {
 							quote! {}
 						};
 						let types = defs.iter().map(|def| {
-							let ty = if let Self::Optional(inner) = def {
+							let ty = if let Some(ty) = one_must_occur_type(def) {
+								ty
+							} else if let Self::Optional(inner) = def {
 								if matches!(inner.as_ref(), Self::Ident(_)) {
 									// Optional(Ident(kw)) references standalone keyword type
 									def.to_type()
