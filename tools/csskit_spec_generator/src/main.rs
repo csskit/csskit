@@ -276,10 +276,12 @@ async fn main() -> Result<()> {
 		Commands::GenerateSpec { name, verbose } => {
 			println!("Generating spec: {}", name);
 			let specs = get_spec_versions(&client).await?;
+			let csswg_sha = get_csswg_commit_sha(&client).await?;
 			match specs.get(&name) {
 				Some(versions) => {
 					println!("Found {} version(s) for spec '{}'", versions.len(), name);
-					generate_single_spec(&client, &name, versions, verbose, &property_descriptions, None).await?;
+					generate_single_spec(&client, &name, versions, verbose, &property_descriptions, Some(&csswg_sha))
+						.await?;
 					println!("  Spec generation complete");
 				}
 				None => {
