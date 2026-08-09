@@ -155,6 +155,17 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, PseudoClass, ":valid");
 	}
 
+	#[test]
+	fn unknown_pseudo_class_names_only_the_bad_token() {
+		let source = ":nonsense";
+		let arena = css_parse::Arena::default();
+		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, source);
+		let result = css_parse::Parser::new(&arena, source, lexer).parse_entirely::<PseudoClass>();
+		let error = result.errors.first().expect("a diagnostic");
+		let meta = (error.formatter)(error, source);
+		assert_eq!(meta.message, "Unexpected pseudo selector ':nonsense'");
+	}
+
 	#[cfg(feature = "css_feature_data")]
 	#[test]
 	fn test_feature_data() {
