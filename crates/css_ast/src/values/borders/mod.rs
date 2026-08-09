@@ -972,54 +972,38 @@ pub struct BorderEndEndRadiusStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BorderEndStartRadiusStyleValue<'a>;
 
-// /// Represents the style value for `border-image` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image).
-// ///
-// /// The border-image CSS property draws an image around an element.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-borders-4/#border-image
-// #[syntax(
-//     " <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "See individual properties",
-//     applies_to = Unknown,
-//     animation_type = Unknown,
-//     longhands = BorderImageOutset|BorderImageRepeat|BorderImageSlice|BorderImageSource|BorderImageWidth,
-//     property_group = Borders,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-//     box_portion = Border,
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.border-image")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum BorderImageStyleValue<'a> {}
+/// Represents the style value for `border-image` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image).
+///
+/// The border-image CSS property draws an image around an element.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'>
+/// ```
+///
+/// https://drafts.csswg.org/css-borders-4/#border-image
+#[syntax(
+	" <'border-image-source'> || <'border-image-slice'> [ / <'border-image-width'> | / <'border-image-width'>? / <'border-image-outset'> ]? || <'border-image-repeat'> "
+)]
+#[derive(
+	Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "See individual properties",
+    applies_to = Unknown,
+    animation_type = Unknown,
+    longhands = BorderImageOutset|BorderImageRepeat|BorderImageSlice|BorderImageSource|BorderImageWidth,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum BorderImageStyleValue<'a> {}
 
 /// Represents the style value for `border-image-outset` as defined in [css-borders-4](https://drafts.csswg.org/css-borders-4/#border-image-outset).
 ///

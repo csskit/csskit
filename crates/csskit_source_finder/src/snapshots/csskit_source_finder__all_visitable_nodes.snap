@@ -51,6 +51,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum BorderBottomColorStyleValue < \'a > { }",
   "pub enum BorderBoundaryStyleValue < \'a > { }",
   "pub enum BorderCollapseStyleValue < \'a > { }",
+  "pub enum BorderImageStyleValue < \'a > { }",
   "pub enum BorderInlineEndColorStyleValue < \'a > { }",
   "pub enum BorderInlineStartColorStyleValue < \'a > { }",
   "pub enum BorderLeftColorStyleValue < \'a > { }",
