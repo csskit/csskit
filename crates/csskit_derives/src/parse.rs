@@ -970,10 +970,17 @@ impl<'a> Plan for AtomPrefixPlan<'a> {
 ///   `CustomIdent(CustomIdent)`
 ///
 /// This should consume `CustomIdent` first, then atom-dispatch on next token.
+///
+/// A trailing alternative may also be a type rather than a keyword, as in
+/// `auto | <id> [ current | root | <target-name> ]?`, which additionally generates
+/// `IdTargetName(Id, TargetName)`. Keyword arms take priority; the typed tail is
+/// peeked only once no atom matched.
 struct SharedPrefixPlan<'a> {
 	prefix_ty: Type,
 	/// Variants that have a second field with a distinguishing atom.
 	atom_variants: Vec<&'a VariantPlan>,
+	/// Variant whose second field is a type rather than a keyword, if any.
+	typed_variant: Option<&'a VariantPlan>,
 	/// Variant with only the prefix field (no second field), if any.
 	bare_variant: Option<&'a VariantPlan>,
 	is_last: bool,
@@ -1001,6 +1008,7 @@ impl<'a> SharedPrefixPlan<'a> {
 			return None;
 		}
 		let mut atom_variants = Vec::new();
+		let mut typed_variant = None;
 		let mut bare_variant = None;
 		for v in variants {
 			match v.fields.as_slice() {
@@ -1013,6 +1021,12 @@ impl<'a> SharedPrefixPlan<'a> {
 				[_prefix, second] if second.atom.is_some() => {
 					atom_variants.push(*v);
 				}
+				[_prefix, _second] => {
+					if typed_variant.is_some() {
+						return None; // two typed tails — ambiguous
+					}
+					typed_variant = Some(*v);
+				}
 				_ => return None, // more complex structure — don't handle here
 			}
 		}
@@ -1020,7 +1034,10 @@ impl<'a> SharedPrefixPlan<'a> {
 		if atom_variants.is_empty() {
 			return None;
 		}
-		Some(Self { prefix_ty: first_field.ty.clone(), atom_variants, bare_variant, is_last })
+		if typed_variant.is_some() && bare_variant.is_none() {
+			return None;
+		}
+		Some(Self { prefix_ty: first_field.ty.clone(), atom_variants, typed_variant, bare_variant, is_last })
 	}
 }
 
@@ -1052,14 +1069,28 @@ impl<'a> Plan for SharedPrefixPlan<'a> {
 			})
 			.collect();
 
+		let typed_probe: TokenStream = if let Some(typed) = self.typed_variant {
+			let ident = &typed.ident;
+			let second_ty = &typed.fields[1].ty;
+			where_collector.add(second_ty);
+			quote! {
+				if p.peek::<#second_ty>() {
+					let v1 = p.parse::<#second_ty>()?;
+					return Ok(Self::#ident(v0, v1));
+				}
+			}
+		} else {
+			TokenStream::new()
+		};
+
 		let default_arm: TokenStream = if let Some(bare) = self.bare_variant {
 			let ident = &bare.ident;
-			quote! { _ => return Ok(Self::#ident(v0)), }
+			quote! { _ => { #typed_probe return Ok(Self::#ident(v0)); } }
 		} else if is_last {
 			let unexpected = unexpected_at_c();
-			quote! { _ => { let c = p.peek_n(1); #unexpected } }
+			quote! { _ => { #typed_probe let c = p.peek_n(1); #unexpected } }
 		} else {
-			quote! { _ => {} }
+			quote! { _ => { #typed_probe } }
 		};
 
 		let else_branch = if is_last {

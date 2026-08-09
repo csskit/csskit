@@ -21,7 +21,9 @@ impl<'a> ::css_parse::Parse<'a> for FlowInto {
                     let v1 = p.parse::<Ident>()?;
                     return Ok(Self::WithContent(v0, v1));
                 }
-                _ => return Ok(Self::Bare(v0)),
+                _ => {
+                    return Ok(Self::Bare(v0));
+                }
             }
         }
         if p.peek::<Ident>() {

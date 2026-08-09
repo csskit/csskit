@@ -38,9 +38,6 @@ properties = ["initial-letter-align"]
 [speech]
 properties = ["voice-pitch", "voice-range"]
 
-[ui]
-properties = ["nav-down", "nav-left", "nav-right", "nav-up"]
-
 [variables]
 properties = ["--*"]
 
