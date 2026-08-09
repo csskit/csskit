@@ -12,7 +12,9 @@ properties = ["glyph-orientation-vertical"]
 [transforms]
 # transform-origin: raw spec grammar produces ~25 colliding variants after distribution;
 # hand-written Parse using PositionOne/PositionHorizontal/PositionVertical is cleaner.
-properties = ["transform-origin"]
+# rotate: `[ x | y | z | <number>{3} ] && <angle>` is order-independent, but the distributed
+# variants are shadowed by the earlier bare `<angle>` alternative during enum dispatch.
+properties = ["transform-origin", "rotate"]
 
 [grid]
 # grid-template-columns/rows: needs to try_parse, so it can backtrack for ambiguous

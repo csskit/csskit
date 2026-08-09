@@ -443,6 +443,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub enum RestAfterStyleValue < \'a > { }",
   "pub enum RestBeforeStyleValue < \'a > { }",
   "pub enum RgbChannelKeyword { }",
+  "pub enum RotateStyleValue < \'a > { }",
   "pub enum RoundingStrategy { }",
   "pub enum RowGapStyleValue < \'a > { }",
   "pub enum RowRuleBreakStyleValue < \'a > { }",
