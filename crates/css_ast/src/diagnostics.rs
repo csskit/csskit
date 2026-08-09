@@ -1,4 +1,4 @@
-use css_parse::{Diagnostic, DiagnosticMeta, SourceCursor};
+use css_parse::{Diagnostic, DiagnosticMeta};
 
 pub trait CssDiagnostic {
 	fn unexpected_pseudo_class(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
@@ -17,9 +17,13 @@ pub trait CssDiagnostic {
 
 impl CssDiagnostic for Diagnostic {
 	fn unexpected_pseudo_class(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta {
+		let cursor = diagnostic.start_cursor;
+		let start = cursor.offset().0 as usize;
+		let len = cursor.token().len() as usize;
+		let text = if start + len <= source.len() { &source[start..start + len] } else { "<unknown>" };
 		DiagnosticMeta {
 			code: "UnexpectedPseudo",
-			message: format!("Unexpected pseudo selector ':{}'", SourceCursor::from(diagnostic.start_cursor, source)),
+			message: format!("Unexpected pseudo selector ':{text}'"),
 			help: "This isn't a valid psuedo selector for this rule.".into(),
 			labels: vec![],
 		}
