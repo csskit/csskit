@@ -202,48 +202,6 @@ fn main() {
 		write_tokens("css_apply_visit_methods.rs", source).unwrap();
 	}
 
-	// apply_queryable_visit_methods - only queryable types (with NodeId)
-	{
-		let methods = queryable.iter().map(|node| {
-			let ident = node.ident();
-			let method_name = format_ident!("visit_{}", node.ident().to_string().to_snake_case());
-			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
-			quote! { #method_name #impl_generics (#ident #ty_generics) }
-		});
-		let source = quote! {
-			#[allow(unused_macros)]
-			macro_rules! apply_queryable_visit_methods {
-				($macro: ident) => {
-					$macro! {
-						#(#methods,)*
-					}
-				}
-			}
-		};
-		write_tokens("css_apply_queryable_visit_methods.rs", source).unwrap();
-	}
-
-	// apply_queryable_exit_methods - only queryable types exit methods
-	{
-		let methods = queryable.iter().map(|node| {
-			let ident = node.ident();
-			let method_name = format_ident!("exit_{}", node.ident().to_string().to_snake_case());
-			let (impl_generics, ty_generics, _) = node.generics().split_for_impl();
-			quote! { #method_name #impl_generics (#ident #ty_generics) }
-		});
-		let source = quote! {
-			#[allow(unused_macros)]
-			macro_rules! apply_queryable_exit_methods {
-				($macro: ident) => {
-					$macro! {
-						#(#methods,)*
-					}
-				}
-			}
-		};
-		write_tokens("css_apply_queryable_exit_methods.rs", source).unwrap();
-	}
-
 	{
 		let mut vendor_atoms: Vec<proc_macro2::Ident> = Vec::new();
 		let variants = all_visitable.iter().filter_map(|node| {
