@@ -1,3 +1,65 @@
+use super::{
+	BorderImageOutsetStyleValue, BorderImageRepeatStyleValue, BorderImageSliceStyleValue, BorderImageSourceStyleValue,
+	BorderImageStyleValue, BorderImageWidthStyleValue,
+};
+use css_parse::{Cursor, Diagnostic, Optionals3, Parse, Parser, Result as ParseResult, T};
+
+impl<'a> Parse<'a> for BorderImageStyleValue<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParseResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		let mut source = None;
+		let mut slice = None;
+		let mut width = None;
+		let mut outset = None;
+		let mut repeat = None;
+		loop {
+			if source.is_none() && p.peek::<BorderImageSourceStyleValue>() {
+				source = Some(p.parse::<BorderImageSourceStyleValue>()?);
+			} else if slice.is_none() && p.peek::<BorderImageSliceStyleValue>() {
+				slice = Some(p.parse::<BorderImageSliceStyleValue>()?);
+				if p.peek::<T![/]>() {
+					let slash = p.parse::<T![/]>()?;
+					let first = p.parse_if_peek::<BorderImageWidthStyleValue>()?;
+					if p.peek::<T![/]>() {
+						let second_slash = p.parse::<T![/]>()?;
+						outset = Some((slash, first, second_slash, p.parse::<BorderImageOutsetStyleValue>()?));
+					} else if let Some(first) = first {
+						width = Some((slash, first));
+					} else {
+						Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected))?
+					}
+				}
+			} else if repeat.is_none() && p.peek::<BorderImageRepeatStyleValue>() {
+				repeat = Some(p.parse::<BorderImageRepeatStyleValue>()?);
+			} else {
+				break;
+			}
+		}
+		if let Some(outset) = outset {
+			let slice = slice.expect("outset is only parsed after slice");
+			return Ok(Self::BorderImageSourceBorderImageSliceBorderImageOutsetBorderImageRepeat {
+				border_image_source: source,
+				border_image_slice_border_image_outset: Some((slice, outset)),
+				border_image_repeat: repeat,
+			});
+		}
+		if let Some(width) = width {
+			let slice = slice.expect("width is only parsed after slice");
+			return Ok(Self::BorderImageSourceBorderImageSliceBorderImageWidthBorderImageRepeat {
+				border_image_source: source,
+				border_image_slice_border_image_width: Some((slice, width)),
+				border_image_repeat: repeat,
+			});
+		}
+		if source.is_none() && slice.is_none() && repeat.is_none() {
+			Err(Diagnostic::new(p.peek_n(1), Diagnostic::unexpected))?
+		}
+		Ok(Self::BorderImageSourceBorderImageSliceBorderImageRepeat(Optionals3(source, slice, repeat)))
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::super::*;
@@ -86,6 +148,23 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "auto 10px 1 50%");
 		assert_peek_false!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, BorderImageWidthStyleValue, "none");
+	}
+
+	#[test]
+	fn test_border_image() {
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg)");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30 fill");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30 / 10px");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30 / 10px / 2");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30 / / 2");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30 round");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(border.svg) 30 / 10px repeat");
+		assert_parse!(CssAtomSet::ATOMS, BorderImageStyleValue, "stretch");
+		assert_peek_false!(CssAtomSet::ATOMS, BorderImageStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, BorderImageStyleValue, "/ 10px");
+		assert_parse_error!(CssAtomSet::ATOMS, BorderImageStyleValue, "url(a.svg) url(b.svg)");
 	}
 
 	#[test]

@@ -2,9 +2,6 @@
 # Once we figure out how to parse them in csskit_proc_macro/src/def.rs, we can
 # remove them from this file and the generator will uncomment them.
 
-[borders]
-properties = ["border-image"]
-
 [fonts]
 properties = [
   "font",

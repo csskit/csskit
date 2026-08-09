@@ -4,6 +4,12 @@
 # to express using the derive(Parse) macro. For these properties, we exclude Parse
 # from the generated derive list, allowing developers to provide custom implementations.
 
+[borders]
+# border-image: `[ / <width> | / <width>? / <outset> ]?` is three indistinguishable
+# Options variants, requiring manual parse to avoid complexity in trying to disambiguate
+# in generated code.
+properties = ["border-image"]
+
 [writing-modes]
 # Properties with hand-written Parse implementations
 # glyph-orientation-vertical: Requires special handling for literal integers and dimensions
