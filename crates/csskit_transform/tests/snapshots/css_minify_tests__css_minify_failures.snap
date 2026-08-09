@@ -602,7 +602,7 @@ FAIL shorthands/0048
 +a{font:14px/1.4 Georgia,serif;font-kerning:none}
 
 FAIL shorthands/0049
--a{mask-border:url(mask.png)25 / 10px round;mask-image:linear-gradient(black,transparent);mask-size:cover;mask-repeat:no-repeat}
+-a{mask-border:url(mask.png)25/10px round;mask-image:linear-gradient(black,transparent);mask-size:cover;mask-repeat:no-repeat}
 +a{mask:linear-gradient(#000,transparent) no-repeat/cover;mask-border:url(mask.png) 25/10px round}
 
 FAIL shorthands/0050

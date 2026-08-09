@@ -27,6 +27,3 @@ properties = ["initial-letter-align"]
 
 [variables]
 properties = ["--*"]
-
-[masking]
-properties = ["mask-border"]

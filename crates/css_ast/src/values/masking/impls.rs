@@ -42,6 +42,17 @@ mod tests {
 			"url(mask.svg) center / cover no-repeat border-box no-clip add alpha"
 		);
 		assert_parse!(CssAtomSet::ATOMS, MaskStyleValue, "url(a.svg), url(b.svg) add");
+
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg)");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30 fill");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30 / 10px");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30 / 10px / 2");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30 / / 2");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30 round");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(border.svg) 30 / 10px repeat alpha");
+		assert_parse!(CssAtomSet::ATOMS, MaskBorderStyleValue, "stretch luminance");
 	}
 
 	#[test]
@@ -69,5 +80,9 @@ mod tests {
 
 		assert_peek_false!(CssAtomSet::ATOMS, MaskStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, MaskStyleValue, "url(a.svg) url(b.svg)");
+
+		assert_peek_false!(CssAtomSet::ATOMS, MaskBorderStyleValue, "");
+		assert_peek_false!(CssAtomSet::ATOMS, MaskBorderStyleValue, "/ 10px");
+		assert_parse_error!(CssAtomSet::ATOMS, MaskBorderStyleValue, "url(a.svg) url(b.svg)");
 	}
 }

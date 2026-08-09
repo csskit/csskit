@@ -1067,6 +1067,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct MaskBorderRepeatStyleValue < \'a > { }",
   "pub struct MaskBorderSliceStyleValue < \'a > { }",
   "pub struct MaskBorderSourceStyleValue < \'a > { }",
+  "pub struct MaskBorderStyleValue < \'a > { }",
   "pub struct MaskBorderWidthStyleValue < \'a > { }",
   "pub struct MaskClipStyleValue < \'a > { }",
   "pub struct MaskCompositeStyleValue < \'a > { }",

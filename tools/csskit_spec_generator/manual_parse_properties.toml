@@ -20,3 +20,6 @@ properties = ["transform-origin", "rotate"]
 # grid-template-columns/rows: needs to try_parse, so it can backtrack for ambiguous
 # repeat functions.
 properties = ["grid-template-columns", "grid-template-rows"]
+
+[speech]
+properties = ["voice-pitch", "voice-range"]
