@@ -69,26 +69,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontFeatureValuesRuleStyleValue<'
 		matches!(self, Self::Unknown(_))
 	}
 
-	fn is_initial(&self) -> bool {
-		false
-	}
-
-	fn is_inherit(&self) -> bool {
-		false
-	}
-
-	fn is_unset(&self) -> bool {
-		false
-	}
-
-	fn is_revert(&self) -> bool {
-		false
-	}
-
-	fn is_revert_layer(&self) -> bool {
-		false
-	}
-
 	fn needs_computing(&self) -> bool {
 		matches!(self, Self::Unknown(_))
 	}
@@ -313,26 +293,6 @@ macro_rules! font_feature_value {
 		impl<'a> DeclarationValue<'a, CssMetadata> for $value<'a> {
 			fn is_unknown(&self) -> bool {
 				matches!(self, Self::Unknown(_))
-			}
-
-			fn is_initial(&self) -> bool {
-				false
-			}
-
-			fn is_inherit(&self) -> bool {
-				false
-			}
-
-			fn is_unset(&self) -> bool {
-				false
-			}
-
-			fn is_revert(&self) -> bool {
-				false
-			}
-
-			fn is_revert_layer(&self) -> bool {
-				false
 			}
 
 			fn needs_computing(&self) -> bool {

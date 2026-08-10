@@ -179,30 +179,6 @@ impl<'a> NodeWithMetadata<()> for RuleDeclarationValue<'a> {
 }
 
 impl<'a> DeclarationValue<'a, ()> for RuleDeclarationValue<'a> {
-	fn is_initial(&self) -> bool {
-		false
-	}
-
-	fn is_inherit(&self) -> bool {
-		false
-	}
-
-	fn is_unset(&self) -> bool {
-		false
-	}
-
-	fn is_revert(&self) -> bool {
-		false
-	}
-
-	fn is_revert_layer(&self) -> bool {
-		false
-	}
-
-	fn needs_computing(&self) -> bool {
-		false
-	}
-
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

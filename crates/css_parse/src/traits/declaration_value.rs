@@ -50,40 +50,60 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 	/// Determines if the parsed Self was parsed as the "initial" keyword.
 	///
 	/// If implementing a set of declarations where the "initial" keyword is accepted this method can be used to signal
-	/// that to upstream consumers of this trait.
-	fn is_initial(&self) -> bool;
+	/// that to upstream consumers of this trait. Defaults to returning false.
+	fn is_initial(&self) -> bool {
+		false
+	}
 
 	/// Determines if the parsed Self was parsed as the "inherit" keyword.
 	///
 	/// If implementing a set of declarations where the "inherit" keyword is accepted this method can be used to signal
-	/// that to upstream consumers of this trait.
-	fn is_inherit(&self) -> bool;
+	/// that to upstream consumers of this trait. Defaults to returning false.
+	fn is_inherit(&self) -> bool {
+		false
+	}
 
 	/// Determines if the parsed Self was parsed as the "unset" keyword.
 	///
 	/// If implementing a set of declarations where the "unset" keyword is accepted this method can be used to signal
-	/// that to upstream consumers of this trait.
-	fn is_unset(&self) -> bool;
+	/// that to upstream consumers of this trait. Defaults to returning false.
+	fn is_unset(&self) -> bool {
+		false
+	}
 
 	/// Determines if the parsed Self was parsed as the "revert" keyword.
 	///
 	/// If implementing a set of declarations where the "revert" keyword is accepted this method can be used to signal
-	/// that to upstream consumers of this trait.
-	fn is_revert(&self) -> bool;
+	/// that to upstream consumers of this trait. Defaults to returning false.
+	fn is_revert(&self) -> bool {
+		false
+	}
 
-	/// Determines if the parsed Self was parsed as the "revert" keyword.
+	/// Determines if the parsed Self was parsed as the "revert-layer" keyword.
 	///
-	/// If implementing a set of declarations where the "revert" keyword is accepted this method can be used to signal
-	/// that to upstream consumers of this trait.
-	fn is_revert_layer(&self) -> bool;
+	/// If implementing a set of declarations where the "revert-layer" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait. Defaults to returning false.
+	fn is_revert_layer(&self) -> bool {
+		false
+	}
+
+	/// Determines if the parsed Self was parsed as the "revert-rule" keyword.
+	///
+	/// If implementing a set of declarations where the "revert-rule" keyword is accepted this method can be used to signal
+	/// that to upstream consumers of this trait. Defaults to returning false.
+	fn is_revert_rule(&self) -> bool {
+		false
+	}
 
 	/// Determines if the parsed Self is not a valid literal production of the grammar, and instead some of its
 	/// constituent parts will need additional computation to reify into a known value.
 	///
 	/// CSS properties are allowed to include substitutions, such as `calc()` or `var()`. These are not defined in the
 	/// declaration's grammar but are instead stored so that when a style object is reified the declarations that had
-	/// those tokens can be recomputed against the context of their node.
-	fn needs_computing(&self) -> bool;
+	/// those tokens can be recomputed against the context of their node. Defaults to returning false.
+	fn needs_computing(&self) -> bool {
+		false
+	}
 
 	/// Like `parse()` but with the additional context of the `name` [Cursor]. This cursor is known to be dashed ident,
 	/// therefore this should return a `Self` reflecting a Custom property. Alternatively, if this DeclarationValue

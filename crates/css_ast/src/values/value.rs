@@ -253,6 +253,9 @@ macro_rules! impl_value_slot_traits {
 			fn is_revert_layer(&self) -> bool {
 				matches!(self, Self::Literal(t) if t.is_revert_layer())
 			}
+			fn is_revert_rule(&self) -> bool {
+				matches!(self, Self::Literal(t) if t.is_revert_rule())
+			}
 			fn needs_computing(&self) -> bool {
 				!matches!(self, Self::Literal(_))
 			}

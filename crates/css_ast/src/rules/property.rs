@@ -98,26 +98,6 @@ impl<'a, M: NodeMetadata> DeclarationValue<'a, M> for PropertyRuleStyleValue<'a>
 		matches!(self, Self::Unknown(_))
 	}
 
-	fn is_initial(&self) -> bool {
-		false
-	}
-
-	fn is_inherit(&self) -> bool {
-		false
-	}
-
-	fn is_unset(&self) -> bool {
-		false
-	}
-
-	fn is_revert(&self) -> bool {
-		false
-	}
-
-	fn is_revert_layer(&self) -> bool {
-		false
-	}
-
 	fn needs_computing(&self) -> bool {
 		matches!(self, Self::Unknown(_))
 	}
