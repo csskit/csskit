@@ -11381,6 +11381,9 @@ WebkitAnimationMediaFeature: size=68 align=4
 WebkitAnimationNameStyleValue: size=24 align=8 {
     0: 0
 }
+WebkitAnimationStyleValue: size=24 align=8 {
+    0: 0
+}
 WebkitAnimationTimingFunctionStyleValue: size=24 align=8 {
     0: 0
 }

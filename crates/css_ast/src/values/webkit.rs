@@ -1226,10 +1226,9 @@ pub struct WebkitBackgroundClipStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitBackgroundSizeStyleValue<'a>;
 
-// TODO: `-webkit-animation` — alias for `animation`.
-// Blocked on `<single-animation>` type (animation shorthand not yet implemented).
-// #[syntax(" <single-animation># ")]
-// pub struct WebkitAnimationStyleValue<'a>;
+// `-webkit-animation` — alias for `animation`.
+#[syntax(" <single-animation># ")]
+pub struct WebkitAnimationStyleValue<'a>;
 
 /// `-webkit-perspective` — alias for `perspective`.
 #[syntax(" none | <length [0,∞]> ")]
