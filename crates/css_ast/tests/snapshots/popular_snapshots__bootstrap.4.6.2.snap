@@ -143109,50 +143109,35 @@ StyleSheet(
                 offset: SourceOffset(112824),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(112825),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: WebkitAnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(112826),
                     len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(112828),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(112829),
                     len: 6,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(112835),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(112836),
                     len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(112844),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(112845),
                     len: 20,
-                  )),
-                ],
-              )),
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -143295,20 +143280,23 @@ StyleSheet(
                       offset: SourceOffset(113014),
                       len: 1,
                     )),
-                    value: Unknown(ComponentValues(
-                      values: [
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(113015),
-                          len: 1,
-                        )),
-                        Ident(Cursor(
+                    value: WebkitAnimationStyleValue([
+                      (Literal(SingleAnimation(
+                        duration: None,
+                        easing: None,
+                        delay: None,
+                        iteration_count: None,
+                        direction: None,
+                        fill_mode: Some(r#None(Ident(Cursor(
                           kind: "Ident",
                           offset: SourceOffset(113016),
                           len: 4,
-                        )),
-                      ],
-                    )),
+                        )))),
+                        play_state: None,
+                        name: None,
+                        timeline: None,
+                      )), None),
+                    ]),
                     important: None,
                     semicolon: Some(Semicolon(Cursor(
                       kind: "Semicolon",
@@ -171997,50 +171985,35 @@ StyleSheet(
                 offset: SourceOffset(137811),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(137812),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: WebkitAnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(137813),
                     len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(137817),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(137818),
                     len: 6,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(137824),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(137825),
                     len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(137833),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(137834),
                     len: 14,
-                  )),
-                ],
-              )),
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -172844,50 +172817,35 @@ StyleSheet(
                 offset: SourceOffset(138530),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(138531),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: WebkitAnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(138532),
                     len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(138536),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(138537),
                     len: 6,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(138543),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(138544),
                     len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(138552),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(138553),
                     len: 12,
-                  )),
-                ],
-              )),
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

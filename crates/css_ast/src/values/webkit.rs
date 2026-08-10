@@ -1228,6 +1228,20 @@ pub struct WebkitBackgroundSizeStyleValue<'a>;
 
 // `-webkit-animation` — alias for `animation`.
 #[syntax(" <single-animation># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    property_group = Backgrounds,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct WebkitAnimationStyleValue<'a>;
 
 /// `-webkit-perspective` — alias for `perspective`.
