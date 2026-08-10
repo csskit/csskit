@@ -169,30 +169,6 @@ mod tests {
 	}
 
 	impl<'a> DeclarationValue<'a, ()> for Decl {
-		fn is_initial(&self) -> bool {
-			false
-		}
-
-		fn is_inherit(&self) -> bool {
-			false
-		}
-
-		fn is_unset(&self) -> bool {
-			false
-		}
-
-		fn is_revert(&self) -> bool {
-			false
-		}
-
-		fn is_revert_layer(&self) -> bool {
-			false
-		}
-
-		fn needs_computing(&self) -> bool {
-			false
-		}
-
 		fn parse_specified_declaration_value<Iter>(p: &mut Parser<'a, Iter>, _: Cursor) -> Result<Self>
 		where
 			Iter: Iterator<Item = crate::Cursor> + Clone,

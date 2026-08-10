@@ -45,6 +45,8 @@ macro_rules! style_value {
 			Revert(T![Ident]),
 			#[cfg_attr(feature = "visitable", visit(skip))]
 			RevertLayer(T![Ident]),
+			#[cfg_attr(feature = "visitable", visit(skip))]
+			RevertRule(T![Ident]),
 			#[cfg_attr(feature = "serde", serde(untagged))]
 			Custom(Custom<'a>),
 			/// A whole-value substitution (e.g. `background: var(--a) var(--b) calc(..)`) whose slot assignment can't be
@@ -74,6 +76,12 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 					Self::Unset(_)|
 					Self::Revert(_)|
 					Self::RevertLayer(_) => {
+						CssMetadata {
+							declaration_kinds: DeclarationKind::CssWideKeywords,
+							..Default::default()
+						}
+					}
+					Self::RevertRule(_) => {
 						CssMetadata {
 							declaration_kinds: DeclarationKind::CssWideKeywords,
 							..Default::default()
@@ -331,6 +339,10 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 		matches!(self, Self::RevertLayer(_))
 	}
 
+	fn is_revert_rule(&self) -> bool {
+		matches!(self, Self::RevertRule(_))
+	}
+
 	fn needs_computing(&self) -> bool {
 		self.metadata().has_computed()
 	}
@@ -372,6 +384,7 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 				CssAtomSet::Unset => return Ok(Self::Unset(p.parse::<T![Ident]>()?)),
 				CssAtomSet::Revert => return Ok(Self::Revert(p.parse::<T![Ident]>()?)),
 				CssAtomSet::RevertLayer => return Ok(Self::RevertLayer(p.parse::<T![Ident]>()?)),
+				CssAtomSet::RevertRule => return Ok(Self::RevertRule(p.parse::<T![Ident]>()?)),
 				_ => {}
 			}
 		}
@@ -404,6 +417,7 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 					(Self::Unset(_), Self::Unset(_)) => true,
 					(Self::Revert(_), Self::Revert(_)) => true,
 					(Self::RevertLayer(_), Self::RevertLayer(_)) => true,
+					(Self::RevertRule(_), Self::RevertRule(_)) => true,
 					(Self::Custom(a), Self::Custom(b)) => a.semantic_eq(b),
 					(Self::Unresolved(a), Self::Unresolved(b)) => a.semantic_eq(b),
 					(Self::Unknown(a), Self::Unknown(b)) => a.semantic_eq(b),
