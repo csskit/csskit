@@ -274,6 +274,7 @@ pub struct WebkitTextSizeAdjustStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
+    shorthand_group = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -299,6 +300,7 @@ pub struct WebkitAnimationDelayStyleValue<'a>;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
+    shorthand_group = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -324,6 +326,7 @@ pub struct WebkitAnimationDurationStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
+    shorthand_group = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -349,6 +352,7 @@ pub struct WebkitAnimationFillModeStyleValue<'a>;
 #[declaration_metadata(
     initial = "1",
     applies_to = Elements,
+    shorthand_group = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -374,6 +378,7 @@ pub struct WebkitAnimationIterationCountStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
+    shorthand_group = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -399,6 +404,7 @@ pub struct WebkitAnimationNameStyleValue<'a>;
 #[declaration_metadata(
     initial = "ease",
     applies_to = Elements,
+    shorthand_group = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
