@@ -113,9 +113,13 @@ impl ToFieldName for DefIdent {
 	}
 }
 
+pub fn renamed_type_name(ty: &DefType) -> &str {
+	get_type_rename(ty.ident_str()).unwrap_or(ty.ident_str())
+}
+
 impl ToFieldName for DefType {
 	fn to_variant_name(&self, size_hint: usize) -> Ident {
-		let str = self.ident.to_string();
+		let str = renamed_type_name(self).to_owned();
 		format_ident!("{}", if size_hint > 0 { pluralize(str) } else { str })
 	}
 }
@@ -156,7 +160,7 @@ impl ToFieldName for Def {
 						.filter(|d| !matches!(d, Def::Punct(_)))
 						.map(|d| d.to_variant_name(0).to_string())
 						.collect();
-					format_ident!("{}", name)
+					format_ident!("{}", get_type_rename(&name).unwrap_or(&name))
 				} else {
 					let (optional, others): (Vec<&Def>, Vec<&Def>) =
 						ds.iter().filter(|d| !matches!(d, Def::Punct(_))).partition(|d| matches!(d, Def::Optional(_)));
@@ -178,7 +182,7 @@ impl ToFieldName for Def {
 					.filter(|d| !matches!(d, Def::Punct(_)))
 					.map(|d| d.to_variant_name(0).to_string())
 					.collect();
-				format_ident!("{}", name)
+				format_ident!("{}", get_type_rename(&name).unwrap_or(&name))
 			}
 			Self::Combinator(ds, DefCombinatorStyle::Alternatives) => {
 				let auto_generated_name: String = ds
@@ -379,7 +383,7 @@ fn value_wrapper_for(name: &str) -> WrapperKind {
 
 impl ToType for DefType {
 	fn to_types(&self) -> Vec<TokenStream> {
-		let ty = &self.ident;
+		let ty = format_ident!("{}", renamed_type_name(self));
 		// Every named <type> is wrapped in Value<'a, T> / CalcableValue<'a, T>. The wrapper
 		// supplies 'a; the inner T carries its own <'a> only if it is intrinsically unsized
 		// (e.g. Color<'a>). Numeric primitives (Integer, Length, ...) carry no own lifetime.
@@ -1226,6 +1230,6 @@ impl DefTypeExt for DefType {
 		// `FooKeywords` enums are generated inside this same expansion, so the css_ast source scan
 		// behind `maybe_unsized` cannot see them. They carry `<'a>` like every other value type
 		// (each keyword variant lives in a `Value<'a, _>` slot), so a reference must supply it.
-		if self.maybe_unsized() { parse_quote!(<'a>) } else { Default::default() }
+		if is_sized_type(renamed_type_name(self)) { Default::default() } else { parse_quote!(<'a>) }
 	}
 }

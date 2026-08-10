@@ -3913,60 +3913,39 @@ StyleSheet(
                 offset: SourceOffset(3500),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3501),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(3502),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3505),
-                    len: 1,
-                  )),
-                  String(Cursor(
+              value: FontShorthand(None, LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(3502),
+                len: 3,
+              )))))), None, [
+                (FontFamilyStyleValue([
+                  (Left(Literal(String(Literal(String(Cursor(
                     kind: "String",
                     offset: SourceOffset(3506),
                     len: 13,
-                  )),
-                  Comma(Cursor(
+                  )))))), Some(Comma(Cursor(
                     kind: "Comma",
                     offset: SourceOffset(3519),
                     len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3520),
-                    len: 1,
-                  )),
-                  String(Cursor(
+                  )))),
+                  (Left(Literal(String(Literal(String(Cursor(
                     kind: "String",
                     offset: SourceOffset(3521),
                     len: 16,
-                  )),
-                  Comma(Cursor(
+                  )))))), Some(Comma(Cursor(
                     kind: "Comma",
                     offset: SourceOffset(3537),
                     len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(3538),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(3539),
-                    len: 9,
-                  )),
-                ],
-              )),
+                  )))),
+                  (Left(Literal(CustomIdents([
+                    Literal(CustomIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(3539),
+                      len: 9,
+                    )))),
+                  ]))), None),
+                ]), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

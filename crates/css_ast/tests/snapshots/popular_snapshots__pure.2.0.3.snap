@@ -25927,65 +25927,44 @@ StyleSheet(
                 offset: SourceOffset(27645),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27646),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(27647),
-                    len: 6,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27653),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(27654),
-                    len: 3,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(27657),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(27658),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27659),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(27660),
-                    len: 5,
-                  )),
-                  Comma(Cursor(
+              value: FontShorthand(Some(Optionals4(Some(Italic(Literal(Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(27647),
+                len: 6,
+              ))))), None, None, None)), LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(27654),
+                len: 3,
+              )))))), Some((Slash(Delim(Cursor(
+                kind: "Delim",
+                offset: SourceOffset(27657),
+                len: 1,
+              ))), Number(Literal(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(27658),
+                len: 1,
+              )))))), [
+                (FontFamilyStyleValue([
+                  (Left(Literal(CustomIdents([
+                    Literal(CustomIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(27660),
+                      len: 5,
+                    )))),
+                  ]))), Some(Comma(Cursor(
                     kind: "Comma",
                     offset: SourceOffset(27665),
                     len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(27666),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(27667),
-                    len: 10,
-                  )),
-                ],
-              )),
+                  )))),
+                  (Left(Literal(CustomIdents([
+                    Literal(CustomIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(27667),
+                      len: 10,
+                    )))),
+                  ]))), None),
+                ]), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
