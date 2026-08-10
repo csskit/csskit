@@ -7,60 +7,39 @@
 mod impls;
 use super::prelude::*;
 use impls::*;
-// /// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
-// ///
-// /// The font CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /**[ [ <'font-style'> ||
-// <font-variant-css2> ||
-// <'font-weight'> ||
-// <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]?
-// <'font-family'># ] |
-// <system-font-family-name>*/
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-fonts-5/#font
-// #[syntax(
-//     " [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name> "
-// )]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "see individual properties",
-//     inherits,
-//     applies_to = Elements|Text,
-//     animation_type = Unknown,
-//     percentages = Unknown,
-//     longhands = FontFamily|FontSize|FontStretch|FontStyle|FontVariant|FontVariantAlternates|FontVariantCaps|FontVariantEastAsian|FontVariantEmoji|FontVariantLigatures|FontVariantNumeric|FontVariantPosition|FontWeight|LineHeight,
-//     property_group = Fonts,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.font")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub enum FontStyleValue<'a> {}
+/// Represents the style value for `font` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font).
+///
+/// The font CSS property shorthand sets multiple font properties, including style, weight, size, and font family.
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name>
+/// ```
+///
+/// https://drafts.csswg.org/css-fonts-5/#font
+#[syntax(
+	" [ [ <'font-style'> || <font-variant-css2> || <'font-weight'> || <font-width-css3> ]? <'font-size'> [ / <'line-height'> ]? <'font-family'># ] | <system-font-family-name> "
+)]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Unknown,
+    percentages = Unknown,
+    longhands = FontFamily|FontSize|FontStyle|FontVariant|FontVariantAlternates|FontVariantCaps|FontVariantEastAsian|FontVariantEmoji|FontVariantLigatures|FontVariantNumeric|FontVariantPosition|FontWeight|FontWidth|LineHeight,
+    property_group = Fonts,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.font"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum FontStyleValue<'a> {}
 
 /// Represents the style value for `font-family` as defined in [css-fonts-5](https://drafts.csswg.org/css-fonts-5/#font-family).
 ///

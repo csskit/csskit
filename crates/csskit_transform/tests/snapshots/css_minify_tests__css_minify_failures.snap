@@ -940,7 +940,3 @@ FAIL values/0067
 FAIL values/0070
 -@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:rgb(0 0 0)}
 +@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:#000}
-
-FAIL whitespace/0015
--a{font:16px / 1.5 sans-serif}
-+a{font:16px/1.5 sans-serif}

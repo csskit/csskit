@@ -5841,40 +5841,29 @@ StyleSheet(
                 offset: SourceOffset(20985),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20986),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(20987),
-                    len: 3,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(20990),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(20991),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(20994),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(20995),
-                    len: 10,
-                  )),
-                ],
-              )),
+              value: FontShorthand(None, LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(20987),
+                len: 3,
+              )))))), Some((Slash(Delim(Cursor(
+                kind: "Delim",
+                offset: SourceOffset(20990),
+                len: 1,
+              ))), Number(Literal(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(20991),
+                len: 3,
+              )))))), [
+                (FontFamilyStyleValue([
+                  (Left(Literal(CustomIdents([
+                    Literal(CustomIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(20995),
+                      len: 10,
+                    )))),
+                  ]))), None),
+                ]), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -12680,40 +12669,29 @@ StyleSheet(
                 offset: SourceOffset(30924),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(30925),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(30926),
-                    len: 4,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(30930),
-                    len: 1,
-                  )),
-                  Number(Cursor(
-                    kind: "Number",
-                    offset: SourceOffset(30931),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(30934),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(30935),
-                    len: 10,
-                  )),
-                ],
-              )),
+              value: FontShorthand(None, LengthPercentage(Literal(Length(Px(Dimension(Cursor(
+                kind: "Dimension",
+                offset: SourceOffset(30926),
+                len: 4,
+              )))))), Some((Slash(Delim(Cursor(
+                kind: "Delim",
+                offset: SourceOffset(30930),
+                len: 1,
+              ))), Number(Literal(Number(Cursor(
+                kind: "Number",
+                offset: SourceOffset(30931),
+                len: 3,
+              )))))), [
+                (FontFamilyStyleValue([
+                  (Left(Literal(CustomIdents([
+                    Literal(CustomIdent(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(30935),
+                      len: 10,
+                    )))),
+                  ]))), None),
+                ]), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

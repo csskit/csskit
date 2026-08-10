@@ -1,4 +1,2 @@
 find :unknown
 ---
-coverage/popular/blueprint.1.0.1.css
-131:15:pre,code,tt { font: 1em 'andale mono', 'lucida console', monospace; line-height: 1.5; }

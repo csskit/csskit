@@ -12,3 +12,6 @@
 "LightDarkCustomIdent" = "ColorSchemeName"
 "LeftRightXStartXEnd" = "PositionHorizontalKeyword"
 "TopBottomYStartYEnd" = "PositionVerticalKeyword"
+"FontVariantCss2" = "FontVariantKeyword"
+"FontWidthCss3" = "FontWidthKeyword"
+"FontStyleFontVariantKeywordFontWeightFontWidthKeywordFontSizeLineHeightFontFamilys" = "FontShorthand"

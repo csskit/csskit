@@ -120,6 +120,22 @@ mod tests {
 	}
 
 	#[test]
+	fn test_font() {
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "caption");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "status-bar");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "12px serif");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "medium sans-serif");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "12px/1.5 serif");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "bold 12px serif");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "italic small-caps bold condensed 12px/1.5 serif");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleValue, "12px \"Helvetica Neue\",serif");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleValue, "12px");
+		assert_peek_false!(CssAtomSet::ATOMS, FontStyleValue, "serif");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleValue, "bold 12px");
+		assert_peek_false!(CssAtomSet::ATOMS, FontStyleValue, "");
+	}
+
+	#[test]
 	fn test_errors() {
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 45px");
 		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 91deg");

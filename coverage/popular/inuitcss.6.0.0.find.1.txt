@@ -1,7 +1,5 @@
 find :unknown
 ---
 coverage/popular/inuitcss.6.0.0.css
-822:3:  font: 1em/1.5 sans-serif;
 1021:3:  filter: alpha(opacity=75); }
-1344:3:  font: 12px/1.5 sans-serif; }
 2381:3:  filter: alpha(opacity=50) !important; }
