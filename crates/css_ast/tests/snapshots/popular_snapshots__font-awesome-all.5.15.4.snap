@@ -2153,50 +2153,35 @@ StyleSheet(
                 offset: SourceOffset(1589),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1590),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1591),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1598),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: WebkitAnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(1599),
                     len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1601),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1602),
-                    len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1610),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
+                  )))))),
+                  easing: Some(Linear(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(1611),
                     len: 6,
-                  )),
-                ],
-              )),
+                  )))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1602),
+                    len: 8,
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1591),
+                    len: 7,
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2297,66 +2282,47 @@ StyleSheet(
                 offset: SourceOffset(1702),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1703),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1704),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1711),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
+              value: WebkitAnimationStyleValue([
+                (Literal(SingleAnimation(
+                  duration: Some(r#Some(Literal(S(Dimension(Cursor(
                     kind: "Dimension",
                     offset: SourceOffset(1712),
                     len: 2,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1714),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(1715),
-                    len: 8,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(1723),
-                    len: 1,
-                  )),
-                  FunctionBlock(
+                  )))))),
+                  easing: Some(StepsFunction(StepsFunction(
                     name: Function(Cursor(
                       kind: "Function",
                       offset: SourceOffset(1724),
                       len: 6,
                     )),
-                    params: ComponentValues(
-                      values: [
-                        Number(Cursor(
-                          kind: "Number",
-                          offset: SourceOffset(1730),
-                          len: 1,
-                        )),
-                      ],
-                    ),
+                    params: StepsFunctionParams(Literal(Number(Cursor(
+                      kind: "Number",
+                      offset: SourceOffset(1730),
+                      len: 1,
+                    ))), None, None),
                     close: RightParen(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(1731),
                       len: 1,
                     )),
-                  ),
-                ],
-              )),
+                  ))),
+                  delay: None,
+                  iteration_count: Some(Infinite(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1715),
+                    len: 8,
+                  )))),
+                  direction: None,
+                  fill_mode: None,
+                  play_state: None,
+                  name: Some(r#Some(Ident(Ident(Cursor(
+                    kind: "Ident",
+                    offset: SourceOffset(1704),
+                    len: 7,
+                  ))))),
+                  timeline: None,
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

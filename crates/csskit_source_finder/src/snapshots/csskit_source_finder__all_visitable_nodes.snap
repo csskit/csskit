@@ -1406,6 +1406,7 @@ expression: "matches.iter().map(|node|\nnode.input.to_token_stream().to_string()
   "pub struct WebkitAnimationFillModeStyleValue < \'a > { }",
   "pub struct WebkitAnimationIterationCountStyleValue < \'a > { }",
   "pub struct WebkitAnimationNameStyleValue < \'a > { }",
+  "pub struct WebkitAnimationStyleValue < \'a > { }",
   "pub struct WebkitAnimationTimingFunctionStyleValue < \'a > { }",
   "pub struct WebkitAnyFunctionalPseudoClass < \'a > { }",
   "pub struct WebkitBackgroundClipStyleValue < \'a > { }",
