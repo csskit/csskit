@@ -218,13 +218,32 @@ pub fn find_sized_types(dir: &str, path_callback: impl Fn(&PathBuf) + Copy) -> s
 	for entry in glob(dir).unwrap().filter_map(|p| p.ok()) {
 		path_callback(&entry);
 		let Ok(source) = std::fs::read_to_string(&entry) else { continue };
+		let mut depth = 0i32;
+		let mut test_depth = None;
+		let mut pending_test_attr = false;
 		for line in source.lines() {
-			if let Some((name, has_lifetime)) = decl_name(line) {
+			let trimmed = line.trim();
+			if test_depth.is_none() {
+				if pending_test_attr && trimmed.starts_with("mod ") {
+					test_depth = Some(depth);
+				} else if trimmed.starts_with("#[cfg(") && trimmed.contains("test") {
+					pending_test_attr = true;
+				} else if !trimmed.is_empty() && !trimmed.starts_with("#[") {
+					pending_test_attr = false;
+				}
+			}
+			if test_depth.is_none()
+				&& let Some((name, has_lifetime)) = decl_name(line)
+			{
 				if has_lifetime {
 					unsized_names.insert(name.to_string());
 				} else {
 					sized.insert(name.to_string());
 				}
+			}
+			depth += line.matches('{').count() as i32 - line.matches('}').count() as i32;
+			if test_depth.is_some_and(|d| depth <= d) {
+				test_depth = None;
 			}
 		}
 	}
