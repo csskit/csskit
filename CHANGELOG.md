@@ -1,3 +1,108 @@
+## [0.0.29] - 2026-08-14
+
+### Other Changes
+- Csskit_spec_generator: Move out of crates/ into tools/ (#1331) ([#1331](https://github.com/csskit/csskit/pull/1331))
+- Default debug builds to line-tables-only (#1333) ([#1333](https://github.com/csskit/csskit/pull/1333))
+- Chore(deps): update dependencies (patch) (#1335) ([#1335](https://github.com/csskit/csskit/pull/1335))
+- Fuzz: Use css_parse sepcified allocator (#1339) ([#1339](https://github.com/csskit/csskit/pull/1339))
+- Csskit_spec_generator: Pass workspace_root to generate_property_atoms (#1368) ([#1368](https://github.com/csskit/csskit/pull/1368))
+- Csskit_spec_generator: Read & emit commit sha when generating individual specs (#1383) ([#1383](https://github.com/csskit/csskit/pull/1383))
+
+
+### Chromashift
+- css_parse/css_ast: Use a #[node] tag to simplify csskit_source_finder, size tests (#1323) ([#1323](https://github.com/csskit/csskit/pull/1323))
+
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#1311) ([#1311](https://github.com/csskit/csskit/pull/1311))
+- chore(deps): update dependency rust to v1.97.1 (#1322) ([#1322](https://github.com/csskit/csskit/pull/1322))
+- css_parse: Re-export `Arena` as Bumpalo, rename `bump` to `alloc` (#1326) ([#1326](https://github.com/csskit/csskit/pull/1326))
+- csskit_arena: Introduce csskit_arena (#1327) ([#1327](https://github.com/csskit/csskit/pull/1327))
+- Fix clippy errors (#1329) ([#1329](https://github.com/csskit/csskit/pull/1329))
+- css_ast: repr(C) all nodes, introduce stable-type-layout. (#1334) ([#1334](https://github.com/csskit/csskit/pull/1334))
+- css_parse/css_ast/csskit_wasm: Make csskit_arena default allocator (#1340) ([#1340](https://github.com/csskit/csskit/pull/1340))
+- css_ast: Implement ray() function (#1342) ([#1342](https://github.com/csskit/csskit/pull/1342))
+- css_ast: Implement palette-mix() function (#1343) ([#1343](https://github.com/csskit/csskit/pull/1343))
+- css_ast: Implement calc-size() function (#1344) ([#1344](https://github.com/csskit/csskit/pull/1344))
+- css_ast: Implement Autospace (#1345) ([#1345](https://github.com/csskit/csskit/pull/1345))
+- css_ast: Implement TextEdge (#1346) ([#1346](https://github.com/csskit/csskit/pull/1346))
+- css_ast: Implement ContentLevel (#1347) ([#1347](https://github.com/csskit/csskit/pull/1347))
+- csskit_arena/css_parse/css_lexer/css_ast: Implement chunk based allocations, drop bumpalo (#1348) ([#1348](https://github.com/csskit/csskit/pull/1348))
+- css_ast: Implement [Auto]Line(Width|Style|Color)(List|OrRepeat) (#1349) ([#1349](https://github.com/csskit/csskit/pull/1349))
+- css_ast: Implement SingleAnimation (#1350) ([#1350](https://github.com/csskit/csskit/pull/1350))
+- css_ast: Implement CSS 4 images functions (#1351) ([#1351](https://github.com/csskit/csskit/pull/1351))
+- css_ast: Implement fade() function (#1352) ([#1352](https://github.com/csskit/csskit/pull/1352))
+- css_ast: Implement mask-layer() (#1353) ([#1353](https://github.com/csskit/csskit/pull/1353))
+- css_ast: Implement TimelineRangeCenterSubject (#1354) ([#1354](https://github.com/csskit/csskit/pull/1354))
+- css_ast: Implement remaining todo media features (#1355) ([#1355](https://github.com/csskit/csskit/pull/1355))
+- css_ast: Implement @scope rule (#1356) ([#1356](https://github.com/csskit/csskit/pull/1356))
+- css_ast: Implement @color-profile rule (#1357) ([#1357](https://github.com/csskit/csskit/pull/1357))
+- css_ast: Implement IntegerOrInfinite, uncomment RangeStyleValue (#1358) ([#1358](https://github.com/csskit/csskit/pull/1358))
+- css_ast: Implement @font-feature-values (#1359) ([#1359](https://github.com/csskit/csskit/pull/1359))
+- css_ast: Implement @font-palette-values (#1360) ([#1360](https://github.com/csskit/csskit/pull/1360))
+- css_ast: Implement Syntax (#1361) ([#1361](https://github.com/csskit/csskit/pull/1361))
+- css_ast: Implement tree counting functions, NumericValue<T> (#1362) ([#1362](https://github.com/csskit/csskit/pull/1362))
+- css_ast: Drop Todo, clean up imports (#1364) ([#1364](https://github.com/csskit/csskit/pull/1364))
+- csskit_ast: Unflag stable_type_layout from test. (#1367) ([#1367](https://github.com/csskit/csskit/pull/1367))
+- Regenerate css_ast/src/values & css_feature_data from csswg drafts (#1369) ([#1369](https://github.com/csskit/csskit/pull/1369))
+- css_ast: Generate Value<> slots for all keywords (#1370) ([#1370](https://github.com/csskit/csskit/pull/1370))
+- css_ast: Fix errors in MathML tags (#1371) ([#1371](https://github.com/csskit/csskit/pull/1371))
+- css_ast: Add new pseudo classes from various specs (#1372) ([#1372](https://github.com/csskit/csskit/pull/1372))
+- css_ast/csskit_ast: Optimise NodeId code (#1373) ([#1373](https://github.com/csskit/csskit/pull/1373))
+- css_ast: Fix panic in unexpected_pseudo_class diagnostic (#1374) ([#1374](https://github.com/csskit/csskit/pull/1374))
+- css_ast: Delete dead macro code (#1376) ([#1376](https://github.com/csskit/csskit/pull/1376))
+- css_parse/css_ast: Ensure ComponentValue(s) are visitable nodes (#1377) ([#1377](https://github.com/csskit/csskit/pull/1377))
+- css_ast: Implement RotateStyleValue (#1378) ([#1378](https://github.com/csskit/csskit/pull/1378))
+- css_ast: Implement nav-* style values (#1379) ([#1379](https://github.com/csskit/csskit/pull/1379))
+- css_ast: Implement voice-pitch/voice-range, with semitones, fixing frequency (#1380) ([#1380](https://github.com/csskit/csskit/pull/1380))
+- css_ast: Implement remaining background properties (#1381) ([#1381](https://github.com/csskit/csskit/pull/1381))
+- css_ast: Implement offset style value (#1382) ([#1382](https://github.com/csskit/csskit/pull/1382))
+- css_ast: IMplement font-variant-alternates style value (#1384) ([#1384](https://github.com/csskit/csskit/pull/1384))
+- css_ast: Implement mask-border style value (#1385) ([#1385](https://github.com/csskit/csskit/pull/1385))
+- css_ast: Implement border-image style value (#1386) ([#1386](https://github.com/csskit/csskit/pull/1386))
+- csskit_proc_macro: Don't eagerly optimise alternates (#1387) ([#1387](https://github.com/csskit/csskit/pull/1387))
+- css_ast: Implement FontVariantStyleValue (#1388) ([#1388](https://github.com/csskit/csskit/pull/1388))
+- css_ast: Add revert-rule keyword (#1393) ([#1393](https://github.com/csskit/csskit/pull/1393))
+- css_ast: Add missing pseudo elements from various specs (#1394) ([#1394](https://github.com/csskit/csskit/pull/1394))
+- css_ast: Implement -webkit-animation style value (#1396) ([#1396](https://github.com/csskit/csskit/pull/1396))
+- css_ast: ...actually implement -webkit-animation (#1397) ([#1397](https://github.com/csskit/csskit/pull/1397))
+- css_ast: Group -webkit-animation properties (#1398) ([#1398](https://github.com/csskit/csskit/pull/1398))
+- css_ast: Implement font shorthand (#1399) ([#1399](https://github.com/csskit/csskit/pull/1399))
+- css_ast: Implement @font-face style values (#1403) ([#1403](https://github.com/csskit/csskit/pull/1403))
+
+
+### Css_parse
+- css_parse: Implement an Arena allocated String (#1324) ([#1324](https://github.com/csskit/csskit/pull/1324))
+- css_parse/csskit/csskit_transform: Use css_parse::String where possible (#1325) ([#1325](https://github.com/csskit/csskit/pull/1325))
+- css_parse: Clean up imports with preludes (#1365) ([#1365](https://github.com/csskit/csskit/pull/1365))
+
+
+### Css_value_definition_parser
+- csskit_source_finder/css_value_definition_parser: Autogeenerate list of sized types (#1363) ([#1363](https://github.com/csskit/csskit/pull/1363))
+- csskit_source_finder: Ignore types inside test modules (#1400) ([#1400](https://github.com/csskit/csskit/pull/1400))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1312) ([#1312](https://github.com/csskit/csskit/pull/1312))
+- csskit-wasm: Fix wasm-opt errors (#1330) ([#1330](https://github.com/csskit/csskit/pull/1330))
+- csskit: Clean up imports with preludes (#1366) ([#1366](https://github.com/csskit/csskit/pull/1366))
+
+
+### Csskit_arena
+- csskit_arena: Add with_initial_capacity (#1375) ([#1375](https://github.com/csskit/csskit/pull/1375))
+
+
+### Csskit_lsp
+- csskit_lsp: Don't create new Arenas for each LineIndex (#1341) ([#1341](https://github.com/csskit/csskit/pull/1341))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.73.0 (#1318) ([#1318](https://github.com/csskit/csskit/pull/1318))
+- chore(deps): update dependency @vscode/test-electron to v3.1.0 (#1313) ([#1313](https://github.com/csskit/csskit/pull/1313))
+- chore(deps): update dependency oxlint to v1.75.0 (#1320) ([#1320](https://github.com/csskit/csskit/pull/1320))
+- chore(deps): update dependency prettier to v3.9.6 (#1321) ([#1321](https://github.com/csskit/csskit/pull/1321))
+- chore(deps): update dependencies (patch) (#1389) ([#1389](https://github.com/csskit/csskit/pull/1389))
+
 ## [0.0.28] - 2026-07-25
 
 ### Other Changes
@@ -24,6 +129,7 @@
 - css_parse: Implement an Arena allocated Vec. (#1306) ([#1306](https://github.com/csskit/csskit/pull/1306))
 - css_ast: Build out substitution function architecture (#1308) ([#1308](https://github.com/csskit/csskit/pull/1308))
 - css_ast: Use Value/CalcableValue in most manual types (#1309) ([#1309](https://github.com/csskit/csskit/pull/1309))
+- css_ast: Add value slots for more types (#1310) ([#1310](https://github.com/csskit/csskit/pull/1310))
 
 
 ### Css_feature_data
@@ -44,6 +150,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1268) ([#1268](https://github.com/csskit/csskit/pull/1268))
+- Release v0.0.28 (#1265) ([#1265](https://github.com/csskit/csskit/pull/1265))
 
 
 ### Csskit_derives
