@@ -42,7 +42,7 @@
 		"glob": "13.0.6",
 		"html-minifier": "4.0.0",
 		"open-props": "1.7.23",
-		"postcss-import": "16.1.1",
+		"postcss-import": "17.0.0",
 		"postcss-jit-props": "1.0.16",
 		"postcss-preset-env": "11.3.2",
 		"sharp": "0.35.3"
