@@ -2,21 +2,6 @@
 # Once we figure out how to parse them in csskit_proc_macro/src/def.rs, we can
 # remove them from this file and the generator will uncomment them.
 
-[fonts]
-properties = [
-  # Font properties with complex grammars that cause panics or use unsupported operators like /
-  "superscript-size-override",
-  "superscript-position-override",
-  "ascent-override",
-  "line-gap-override",
-  "subscript-size-override",
-  "descent-override",
-  "subscript-position-override",
-  "unicode-range",  # Requires UnicodeRangeToken type
-  "src",  # Requires FontSrcList type
-]
-
-
 [inline]
 properties = ["initial-letter-align"]
 

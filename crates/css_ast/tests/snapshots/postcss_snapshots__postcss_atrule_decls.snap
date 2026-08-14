@@ -174,7 +174,7 @@ StyleSheet(
               offset: SourceOffset(115),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
+            value: Unknown(Unknown(ComponentValues(
               values: [
                 Whitespace(Cursor(
                   kind: "Whitespace",

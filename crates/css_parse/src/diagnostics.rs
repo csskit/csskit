@@ -264,4 +264,13 @@ impl Diagnostic {
 			labels: vec![],
 		}
 	}
+
+	pub fn invalid_unicode_range(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "InvalidUnicodeRange",
+			message: "Invalid unicode-range".to_string(),
+			help: "A unicode range looks like `U+0-7F`, `U+30??` or `U+4E00-9FFF`.".into(),
+			labels: vec![],
+		}
+	}
 }

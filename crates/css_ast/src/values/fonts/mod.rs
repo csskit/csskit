@@ -30,7 +30,7 @@ use impls::*;
     applies_to = Elements|Text,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = FontFamily|FontSize|FontStyle|FontVariant|FontVariantAlternates|FontVariantCaps|FontVariantEastAsian|FontVariantEmoji|FontVariantLigatures|FontVariantNumeric|FontVariantPosition|FontWeight|FontWidth|LineHeight,
+    longhands = FontFamily|FontSize|FontStretch|FontStyle|FontVariant|FontVariantAlternates|FontVariantCaps|FontVariantEastAsian|FontVariantEmoji|FontVariantLigatures|FontVariantNumeric|FontVariantPosition|FontWeight|LineHeight,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

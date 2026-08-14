@@ -105564,13 +105564,11 @@ StyleSheet(
               offset: SourceOffset(71968),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(FontFamilyStyleValue([
-              (Left(Literal(String(Literal(String(Cursor(
-                kind: "String",
-                offset: SourceOffset(71970),
-                len: 23,
-              )))))), None),
-            ])),
+            value: FontFamily(FontFaceFontFamilyDescriptor(Literal(String(Literal(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(71970),
+              len: 23,
+            ))))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -105589,7 +105587,7 @@ StyleSheet(
               offset: SourceOffset(72007),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Normal(Literal(Ident(Cursor(
+            value: FontStyle(Normal(Literal(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72009),
               len: 6,
@@ -105612,11 +105610,11 @@ StyleSheet(
               offset: SourceOffset(72030),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(FontWeightAbsolute(Literal(Number(Literal(Number(Cursor(
+            value: FontWeight(FontFaceFontWeightDescriptor(r#Some((Literal(Number(Literal(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(72032),
               len: 3,
-            ))))))),
+            ))))), None)))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -105635,20 +105633,11 @@ StyleSheet(
               offset: SourceOffset(72051),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72052),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(72053),
-                  len: 5,
-                )),
-              ],
-            ))),
+            value: FontDisplay(Block(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(72053),
+              len: 5,
+            )))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -105667,36 +105656,21 @@ StyleSheet(
               offset: SourceOffset(72065),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72066),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72067),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72071),
-                        len: 31,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72102),
-                    len: 1,
-                  )),
-                ),
-              ],
-            ))),
+            value: Src(FontFaceSrcDescriptor(Literal(FontSrcList([
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72067),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72071),
+                len: 31,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72102),
+                len: 1,
+              ))), None, None), None),
+            ])))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -105715,290 +105689,169 @@ StyleSheet(
               offset: SourceOffset(72110),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72111),
+            value: Src(FontFaceSrcDescriptor(Literal(FontSrcList([
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72112),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72116),
+                len: 38,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72154),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72156),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72163),
+                  len: 19,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72182),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72112),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72116),
-                        len: 38,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72154),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72155),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72183),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72185),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72189),
+                len: 33,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72222),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72224),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72231),
+                  len: 7,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72238),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72156),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72163),
-                        len: 19,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72182),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72183),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72239),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72241),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72245),
+                len: 32,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72277),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72279),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72286),
+                  len: 6,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72292),
                   len: 1,
                 )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72184),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72293),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72295),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72299),
+                len: 31,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72330),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72332),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72339),
+                  len: 10,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72349),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72185),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72189),
-                        len: 33,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72222),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72223),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72350),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72352),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72356),
+                len: 43,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72399),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72401),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72408),
+                  len: 5,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72413),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72224),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72231),
-                        len: 7,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72238),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72239),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72240),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72241),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72245),
-                        len: 32,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72277),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72278),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72279),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72286),
-                        len: 6,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72292),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72293),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72294),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72295),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72299),
-                        len: 31,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72330),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72331),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72332),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72339),
-                        len: 10,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72349),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72350),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72351),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72352),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72356),
-                        len: 43,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72399),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72400),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72401),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72408),
-                        len: 5,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72413),
-                    len: 1,
-                  )),
-                ),
-              ],
-            ))),
+              )), None), None),
+            ])))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106121,13 +105974,11 @@ StyleSheet(
               offset: SourceOffset(72514),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(FontFamilyStyleValue([
-              (Left(Literal(String(Literal(String(Cursor(
-                kind: "String",
-                offset: SourceOffset(72516),
-                len: 21,
-              )))))), None),
-            ])),
+            value: FontFamily(FontFaceFontFamilyDescriptor(Literal(String(Literal(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(72516),
+              len: 21,
+            ))))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106146,7 +105997,7 @@ StyleSheet(
               offset: SourceOffset(72551),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Normal(Literal(Ident(Cursor(
+            value: FontStyle(Normal(Literal(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(72553),
               len: 6,
@@ -106169,11 +106020,11 @@ StyleSheet(
               offset: SourceOffset(72574),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(FontWeightAbsolute(Literal(Number(Literal(Number(Cursor(
+            value: FontWeight(FontFaceFontWeightDescriptor(r#Some((Literal(Number(Literal(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(72576),
               len: 3,
-            ))))))),
+            ))))), None)))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106192,20 +106043,11 @@ StyleSheet(
               offset: SourceOffset(72595),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72596),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(72597),
-                  len: 5,
-                )),
-              ],
-            ))),
+            value: FontDisplay(Block(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(72597),
+              len: 5,
+            )))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106224,36 +106066,21 @@ StyleSheet(
               offset: SourceOffset(72609),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72610),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72611),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72615),
-                        len: 32,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72647),
-                    len: 1,
-                  )),
-                ),
-              ],
-            ))),
+            value: Src(FontFaceSrcDescriptor(Literal(FontSrcList([
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72611),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72615),
+                len: 32,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72647),
+                len: 1,
+              ))), None, None), None),
+            ])))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106272,290 +106099,169 @@ StyleSheet(
               offset: SourceOffset(72655),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72656),
+            value: Src(FontFaceSrcDescriptor(Literal(FontSrcList([
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72657),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72661),
+                len: 39,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72700),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72702),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72709),
+                  len: 19,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72728),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72657),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72661),
-                        len: 39,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72700),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72701),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72729),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72731),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72735),
+                len: 34,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72769),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72771),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72778),
+                  len: 7,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72785),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72702),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72709),
-                        len: 19,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72728),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72729),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72786),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72788),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72792),
+                len: 33,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72825),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72827),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72834),
+                  len: 6,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72840),
                   len: 1,
                 )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72730),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72841),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72843),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72847),
+                len: 32,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72879),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72881),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72888),
+                  len: 10,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72898),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72731),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72735),
-                        len: 34,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72769),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72770),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(72899),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(72901),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(72905),
+                len: 44,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(72949),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(72951),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(72958),
+                  len: 5,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(72963),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72771),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72778),
-                        len: 7,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72785),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72786),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72787),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72788),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72792),
-                        len: 33,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72825),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72826),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72827),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72834),
-                        len: 6,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72840),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72841),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72842),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72843),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72847),
-                        len: 32,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72879),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72880),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72881),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72888),
-                        len: 10,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72898),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(72899),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72900),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72901),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72905),
-                        len: 44,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72949),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(72950),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(72951),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(72958),
-                        len: 5,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(72963),
-                    len: 1,
-                  )),
-                ),
-              ],
-            ))),
+              )), None), None),
+            ])))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106678,13 +106384,11 @@ StyleSheet(
               offset: SourceOffset(73062),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(FontFamilyStyleValue([
-              (Left(Literal(String(Literal(String(Cursor(
-                kind: "String",
-                offset: SourceOffset(73064),
-                len: 21,
-              )))))), None),
-            ])),
+            value: FontFamily(FontFaceFontFamilyDescriptor(Literal(String(Literal(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(73064),
+              len: 21,
+            ))))))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106703,7 +106407,7 @@ StyleSheet(
               offset: SourceOffset(73099),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Normal(Literal(Ident(Cursor(
+            value: FontStyle(Normal(Literal(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(73101),
               len: 6,
@@ -106726,11 +106430,11 @@ StyleSheet(
               offset: SourceOffset(73122),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(FontWeightAbsolute(Literal(Number(Literal(Number(Cursor(
+            value: FontWeight(FontFaceFontWeightDescriptor(r#Some((Literal(Number(Literal(Number(Cursor(
               kind: "Number",
               offset: SourceOffset(73124),
               len: 3,
-            ))))))),
+            ))))), None)))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106749,20 +106453,11 @@ StyleSheet(
               offset: SourceOffset(73143),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73144),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(73145),
-                  len: 5,
-                )),
-              ],
-            ))),
+            value: FontDisplay(Block(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(73145),
+              len: 5,
+            )))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106781,36 +106476,21 @@ StyleSheet(
               offset: SourceOffset(73157),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73158),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73159),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73163),
-                        len: 30,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73193),
-                    len: 1,
-                  )),
-                ),
-              ],
-            ))),
+            value: Src(FontFaceSrcDescriptor(Literal(FontSrcList([
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(73159),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(73163),
+                len: 30,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(73193),
+                len: 1,
+              ))), None, None), None),
+            ])))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",
@@ -106829,290 +106509,169 @@ StyleSheet(
               offset: SourceOffset(73201),
               len: 1,
             )),
-            value: FontFaceRuleStyleValue(Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73202),
+            value: Src(FontFaceSrcDescriptor(Literal(FontSrcList([
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(73203),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(73207),
+                len: 37,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(73244),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(73246),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(73253),
+                  len: 19,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(73272),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73203),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73207),
-                        len: 37,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73244),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73245),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(73273),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(73275),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(73279),
+                len: 32,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(73311),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(73313),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(73320),
+                  len: 7,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(73327),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73246),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73253),
-                        len: 19,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73272),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(73273),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(73328),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(73330),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(73334),
+                len: 31,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(73365),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(73367),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(73374),
+                  len: 6,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(73380),
                   len: 1,
                 )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73274),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(73381),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(73383),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(73387),
+                len: 30,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(73417),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(73419),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(73426),
+                  len: 10,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(73436),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73275),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73279),
-                        len: 32,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73311),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73312),
+              )), None), Some(Comma(Cursor(
+                kind: "Comma",
+                offset: SourceOffset(73437),
+                len: 1,
+              )))),
+              (Url(UrlFunction(Function(Cursor(
+                kind: "Function",
+                offset: SourceOffset(73439),
+                len: 4,
+              )), String(Cursor(
+                kind: "String",
+                offset: SourceOffset(73443),
+                len: 42,
+              )), RightParen(Cursor(
+                kind: "RightParen",
+                offset: SourceOffset(73485),
+                len: 1,
+              ))), Some(FormatFunction(
+                name: Function(Cursor(
+                  kind: "Function",
+                  offset: SourceOffset(73487),
+                  len: 7,
+                )),
+                params: Literal(String(String(Cursor(
+                  kind: "String",
+                  offset: SourceOffset(73494),
+                  len: 5,
+                )))),
+                close: RightParen(Cursor(
+                  kind: "RightParen",
+                  offset: SourceOffset(73499),
                   len: 1,
                 )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73313),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73320),
-                        len: 7,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73327),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(73328),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73329),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73330),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73334),
-                        len: 31,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73365),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73366),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73367),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73374),
-                        len: 6,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73380),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(73381),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73382),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73383),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73387),
-                        len: 30,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73417),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73418),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73419),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73426),
-                        len: 10,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73436),
-                    len: 1,
-                  )),
-                ),
-                Comma(Cursor(
-                  kind: "Comma",
-                  offset: SourceOffset(73437),
-                  len: 1,
-                )),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73438),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73439),
-                    len: 4,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73443),
-                        len: 42,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73485),
-                    len: 1,
-                  )),
-                ),
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(73486),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(73487),
-                    len: 7,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      String(Cursor(
-                        kind: "String",
-                        offset: SourceOffset(73494),
-                        len: 5,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(73499),
-                    len: 1,
-                  )),
-                ),
-              ],
-            ))),
+              )), None), None),
+            ])))),
             important: None,
             semicolon: Some(Semicolon(Cursor(
               kind: "Semicolon",

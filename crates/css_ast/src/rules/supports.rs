@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::selector::ComplexSelector;
+use crate::{FontFormat, FontTech};
 use css_parse::Box;
 
 ///
@@ -121,14 +122,14 @@ impl<'a> Parse<'a> for SupportsCondition<'a> {
 pub enum SupportsFeature<'a> {
 	FontTech(
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
-		ComponentValues<'a>,
+		FontTech,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T![')'],
 	),
 	FontFormat(
 		#[cfg_attr(feature = "visitable", visit(skip))] T![Function],
-		ComponentValues<'a>,
+		FontFormat,
 		#[cfg_attr(feature = "visitable", visit(skip))]
 		#[semantic_eq(skip)]
 		T![')'],
@@ -203,10 +204,14 @@ impl<'a> Parse<'a> for SupportsFeature<'a> {
 					Ok(Self::Selector(function, selector, close))
 				}
 				CssAtomSet::FontTech => {
-					todo!();
+					let tech = p.parse::<FontTech>()?;
+					let close = p.parse::<T![')']>()?;
+					Ok(Self::FontTech(function, tech, close))
 				}
 				CssAtomSet::FontFormat => {
-					todo!();
+					let format = p.parse::<FontFormat>()?;
+					let close = p.parse::<T![')']>()?;
+					Ok(Self::FontFormat(function, format, close))
 				}
 				_ => Err(Diagnostic::new(p.next(), Diagnostic::unexpected_function))?,
 			};
@@ -248,5 +253,9 @@ mod tests {
 			SupportsRule,
 			"@supports (selector(::-moz-meter-bar) or selector(::-webkit-meter-bar)) {\n\n}"
 		);
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports font-tech(color-COLRv1) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(font-tech(variations)) {}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports font-format(woff2) {\n\n}");
+		assert_parse!(CssAtomSet::ATOMS, SupportsRule, "@supports(font-format(\"woff2-variations\")) {}");
 	}
 }

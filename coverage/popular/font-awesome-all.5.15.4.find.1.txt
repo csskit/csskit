@@ -1,12 +1,2 @@
 find :unknown
 ---
-coverage/popular/font-awesome-all.5.15.4.css
-4587:3:  font-display: block;
-4588:3:  src: url("../webfonts/fa-brands-400.eot");
-4589:3:  src: url("../webfonts/fa-brands-400.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-brands-400.woff2") format("woff2"), url("../webfonts/fa-brands-400.woff") format("woff"), url("../webfonts/fa-brands-400.ttf") format("truetype"), url("../webfonts/fa-brands-400.svg#fontawesome") format("svg"); }
-4598:3:  font-display: block;
-4599:3:  src: url("../webfonts/fa-regular-400.eot");
-4600:3:  src: url("../webfonts/fa-regular-400.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-regular-400.woff2") format("woff2"), url("../webfonts/fa-regular-400.woff") format("woff"), url("../webfonts/fa-regular-400.ttf") format("truetype"), url("../webfonts/fa-regular-400.svg#fontawesome") format("svg"); }
-4609:3:  font-display: block;
-4610:3:  src: url("../webfonts/fa-solid-900.eot");
-4611:3:  src: url("../webfonts/fa-solid-900.eot?#iefix") format("embedded-opentype"), url("../webfonts/fa-solid-900.woff2") format("woff2"), url("../webfonts/fa-solid-900.woff") format("woff"), url("../webfonts/fa-solid-900.ttf") format("truetype"), url("../webfonts/fa-solid-900.svg#fontawesome") format("svg"); }

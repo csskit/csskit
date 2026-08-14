@@ -156,7 +156,7 @@ FAIL font-face/0004
 +@font-face{font-family:Custom;src:url(font.woff2)format(woff2)}
 
 FAIL font-face/0006
--@font-face{font-family:test;src:local(test);unicode-range:U0 -0FF}
+-@font-face{font-family:test;src:local(test);unicode-range:U+0000-00FF}
 +@font-face{font-family:test;src:local(test);unicode-range:U+??}
 
 FAIL gradients/0001

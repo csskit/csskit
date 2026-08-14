@@ -143,6 +143,12 @@ where
 		self.features.contains(other)
 	}
 
+	/// The full source text the parser is reading from.
+	#[inline]
+	pub fn source_text(&self) -> &'a str {
+		self.source_text
+	}
+
 	#[inline]
 	pub fn is(&self, state: State) -> bool {
 		self.state.contains(state)
