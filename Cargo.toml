@@ -85,7 +85,7 @@ heck = { version = "0.5.0" }
 proc-macro2 = { version = "1.0.106" }
 quote = { version = "1.0.46" }
 # Procc Macro Tools
-syn = { version = "2.0.118" }
+syn = { version = "3.0.0" }
 synstructure = { version = "0.13.2" }
 
 # Serialization
