@@ -22,7 +22,7 @@ runs:
         shared-key: ${{ inputs.key }}
 
     - name: Mise
-      uses: jdx/mise-action@1648a7812b9aeae629881980618f079932869151 # v4.0.1
+      uses: jdx/mise-action@3c2e0cf82a5b2e5249f0d3635a4d83d0ae861518 # v4.2.5
       with:
         working_directory: ${{ inputs.dir }}
 
