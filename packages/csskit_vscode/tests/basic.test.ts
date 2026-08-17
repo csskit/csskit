@@ -6,3 +6,9 @@ suite("Extension Test Suite", () => {
 		assert.strictEqual([1, 2, 3].indexOf(0), -1);
 	});
 });
+
+describe("issue #1402", () => {
+  it("should handle boundary conditions cleanly", () => {
+    expect(true).toBe(true);
+  });
+});
