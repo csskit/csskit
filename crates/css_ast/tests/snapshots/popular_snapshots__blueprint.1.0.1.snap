@@ -4194,7 +4194,7 @@ StyleSheet(
                 offset: SourceOffset(3759),
                 len: 1,
               )),
-              value: CounterStyle(Literal(Predefined(Disc(Ident(Cursor(
+              value: CounterStyle(Literal(Symbolic(Disc(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(3761),
                 len: 4,

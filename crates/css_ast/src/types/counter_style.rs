@@ -11,6 +11,8 @@ pub enum CounterStyle<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	Predefined(PredefinedCounter),
 	#[cfg_attr(feature = "visitable", visit(skip))]
+	Symbolic(SymbolicCounterStyle),
+	#[cfg_attr(feature = "visitable", visit(skip))]
 	Named(T![Ident]),
 	SymbolsFunction(SymbolsFunction<'a>),
 }
@@ -104,18 +106,25 @@ pub enum PredefinedCounter {
 	Katakana(T![Ident]),
 	#[atom(CssAtomSet::KatakanaIroha)]
 	KatakanaIroha(T![Ident]),
-	#[atom(CssAtomSet::Disc)]
-	Disc(T![Ident]),
-	#[atom(CssAtomSet::Square)]
-	Square(T![Ident]),
-	#[atom(CssAtomSet::DisclousureOpen)]
-	DisclousureOpen(T![Ident]),
-	#[atom(CssAtomSet::DisclousureClosed)]
-	DisclousureClosed(T![Ident]),
 	#[atom(CssAtomSet::CjkEarthlyBranch)]
 	CjkEarthlyBranch(T![Ident]),
 	#[atom(CssAtomSet::CjkHeavenlyStem)]
 	CjkHeavenlyStem(T![Ident]),
+}
+
+/// <https://drafts.csswg.org/css-counter-styles-3/#predefined-counters>
+#[node]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+pub enum SymbolicCounterStyle {
+	#[atom(CssAtomSet::Disc)]
+	Disc(T![Ident]),
+	#[atom(CssAtomSet::Square)]
+	Square(T![Ident]),
+	#[atom(CssAtomSet::DisclosureOpen)]
+	DisclosureOpen(T![Ident]),
+	#[atom(CssAtomSet::DisclosureClosed)]
+	DisclosureClosed(T![Ident]),
 }
 
 #[cfg(test)]
@@ -128,6 +137,7 @@ mod tests {
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, CounterStyle, "cjk-heavenly-stem");
 		assert_parse!(CssAtomSet::ATOMS, CounterStyle, "foobar");
+		assert_parse!(CssAtomSet::ATOMS, CounterStyle, "disc");
 		assert_parse!(CssAtomSet::ATOMS, CounterStyle, "symbols(symbolic'+')");
 	}
 }

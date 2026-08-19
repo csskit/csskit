@@ -1398,6 +1398,7 @@ ContentListItem: size=264 align=8
     7: StringFunction
     8: ContentFunction
     9: Counter
+    10: Symbolic
 ContentPosition: size=16 align=4
     0: Center
     1: Start
@@ -1612,8 +1613,9 @@ CounterSetStyleValue: size=32 align=8 {
 }
 CounterStyle: size=80 align=8
     0: Predefined
-    1: Named
-    2: SymbolsFunction
+    1: Symbolic
+    2: Named
+    3: SymbolsFunction
 CounterStyleName: size=12 align=4 {
     0: 0
 }
@@ -2335,8 +2337,8 @@ CssAtomSet: size=4 align=4
     677: DiscardAfter = 738
     678: DiscardBefore = 739
     679: DiscardInner = 740
-    680: DisclousureClosed = 741
-    681: DisclousureOpen = 742
+    680: DisclosureClosed = 741
+    681: DisclosureOpen = 742
     682: Discrete = 743
     683: DiscretionaryLigatures = 744
     684: Display = 745
@@ -8342,12 +8344,8 @@ PredefinedCounter: size=16 align=4
     33: HiraganaIroha
     34: Katakana
     35: KatakanaIroha
-    36: Disc
-    37: Square
-    38: DisclousureOpen
-    39: DisclousureClosed
-    40: CjkEarthlyBranch
-    41: CjkHeavenlyStem
+    36: CjkEarthlyBranch
+    37: CjkHeavenlyStem
 PrefersColorSchemeMediaFeature: size=68 align=4
     0: WithValue
     1: Bare
@@ -10711,6 +10709,11 @@ SwashFunction: size=56 align=8 {
 Symbol: size=56 align=8
     0: String
     1: Image
+SymbolicCounterStyle: size=16 align=4
+    0: Disc
+    1: Square
+    2: DisclosureOpen
+    3: DisclosureClosed
 SymbolsFunction: size=72 align=8 {
     name: 0
     params: 16
