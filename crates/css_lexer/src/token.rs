@@ -813,6 +813,27 @@ impl Token {
 		}
 	}
 
+	/// If the [Token] is a [Kind::Whitespace] then this returns true if that whitespace is significant; i.e. it must be
+	/// preserved during minification. Descendant combinators (`a b`) and the space in `@charset "utf-8";` are examples
+	/// of this.
+	///
+	/// If the [Token] is not a [Kind::Whitespace] this will return `false`.
+	#[inline]
+	pub const fn whitespace_is_significant(&self) -> bool {
+		self.kind_bits() == Kind::Whitespace as u8 && self.0 & 1 == 1
+	}
+
+	/// Returns a new [Token] with the `whitespace_is_significant` flag set.
+	///
+	/// If the [Token] is not a [Kind::Whitespace] this will return the same [Token].
+	#[inline]
+	pub const fn with_significant_whitespace(&self, significant: bool) -> Token {
+		if self.kind_bits() != Kind::Whitespace as u8 {
+			return *self;
+		}
+		if significant { Token(self.0 | 1, self.1) } else { Token(self.0 & !1, self.1) }
+	}
+
 	/// Returns the [AssociatedWhitespaceRules].
 	///
 	/// If the [Kind] is not "Delim Like" (i.e. it is not [Kind::Delim], [Kind::Colon], [Kind::Semicolon], [Kind::Comma],
@@ -1199,7 +1220,13 @@ impl core::fmt::Debug for Token {
 				.field("end", &format_args!("U+{:X}", self.unicode_range_end()))
 				.field("len", &self.len()),
 			Kind::CdcOrCdo => d.field("is_cdc", &self.first_flag()).field("len", &self.len()),
-			Kind::Whitespace => d.field("contains", &self.whitespace_style()).field("len", &self.len()),
+			Kind::Whitespace => {
+				d.field("contains", &self.whitespace_style());
+				if self.whitespace_is_significant() {
+					d.field("significant", &true);
+				}
+				d.field("len", &self.len())
+			}
 			_ => d
 				.field("flag_0", &self.first_flag())
 				.field("flag_1", &self.second_flag())
@@ -1426,6 +1453,26 @@ fn test_with_quotes() {
 		Token::new_string(QuoteStyle::Double, true, true, 8).with_quotes(QuoteStyle::Single),
 		Token::new_string(QuoteStyle::Single, true, true, 8),
 	);
+}
+
+#[test]
+fn test_with_significant_whitespace() {
+	for len in [1, 3, 4, 255, 256, 0xFF_FFFF, u32::MAX] {
+		for style in [Whitespace::Space, Whitespace::Tab, Whitespace::Space | Whitespace::Newline] {
+			let token = Token::new_whitespace(style, len);
+			let significant = token.with_significant_whitespace(true);
+			assert!(!token.whitespace_is_significant());
+			assert!(significant.whitespace_is_significant());
+			assert_eq!(token.len(), len);
+			assert_eq!(significant.len(), len);
+			assert_eq!(significant.whitespace_style(), style);
+			assert_eq!(significant.kind(), Kind::Whitespace);
+			assert_eq!(significant.with_significant_whitespace(false), token);
+		}
+	}
+	let ident = Token::new_interned(Kind::Ident, 1, 3);
+	assert_eq!(ident.with_significant_whitespace(true), ident);
+	assert!(!ident.whitespace_is_significant());
 }
 
 #[test]

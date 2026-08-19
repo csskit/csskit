@@ -23,6 +23,7 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 	{
 		let mut values = Vec::new_in(p.alloc());
 		let mut last_was_whitespace = false;
+		let mut trailing_whitespace = None;
 
 		loop {
 			if p.at_end() {
@@ -39,10 +40,34 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 					let rules = d.associated_whitespace() | AssociatedWhitespaceRules::EnforceBefore;
 					value = ComponentValue::Delim(d.with_associated_whitespace(rules))
 				}
-				last_was_whitespace = matches!(value, ComponentValue::Whitespace(_));
+				// Whitespace at either edge of the list separates nothing - CSS discards it when consuming a
+				// declaration value or an at-rule prelude - so it is trivia and a minifier can remove it.
+				// Whitespace between two values is grammar (`foo(.a .b)` is not `foo(.a.b)`) and stays significant.
+				last_was_whitespace = match value {
+					ComponentValue::Whitespace(ws) => {
+						if values.is_empty() {
+							value = ComponentValue::Whitespace(ws.with_significant_whitespace(false));
+						} else if trailing_whitespace.is_none() {
+							trailing_whitespace = Some(values.len());
+						}
+						true
+					}
+					_ => {
+						trailing_whitespace = None;
+						false
+					}
+				};
 				values.push(value);
 			} else {
 				break;
+			}
+		}
+
+		if let Some(index) = trailing_whitespace {
+			for value in &mut values[index..] {
+				if let ComponentValue::Whitespace(ws) = value {
+					*value = ComponentValue::Whitespace(ws.with_significant_whitespace(false));
+				}
 			}
 		}
 		Ok(Self { values })

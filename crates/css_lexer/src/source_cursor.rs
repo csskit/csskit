@@ -129,6 +129,16 @@ impl<'a> SourceCursor<'a> {
 		}
 	}
 
+	pub fn with_significant_whitespace(&self, significant: bool) -> Self {
+		Self {
+			cursor: self.cursor.with_significant_whitespace(significant),
+			source: self.source,
+			should_compact: self.should_compact,
+			#[cfg(feature = "egg")]
+			should_expand: self.should_expand,
+		}
+	}
+
 	/// Returns a new `SourceCursor` with the `should_compact` flag set.
 	///
 	/// With the `should_compact` flag set, the cursor will format with optimised displays of:

@@ -97,6 +97,21 @@ impl Cursor {
 		Self::new(self.offset(), self.token().with_sign_required())
 	}
 
+	/// Returns a new [Cursor] with the `whitespace_is_significant` flag set to `significant` on the token.
+	/// This indicates that the whitespace must be preserved during minification.
+	pub fn with_significant_whitespace(&self, significant: bool) -> Self {
+		debug_assert!(self.1 == Kind::Whitespace);
+		if self.1.whitespace_is_significant() == significant {
+			return *self;
+		}
+		Self::new(self.offset(), self.token().with_significant_whitespace(significant))
+	}
+
+	#[inline]
+	pub fn whitespace_is_significant(&self) -> bool {
+		self.1.whitespace_is_significant()
+	}
+
 	#[inline]
 	pub fn atom_bits(&self) -> u32 {
 		self.1.atom_bits()
