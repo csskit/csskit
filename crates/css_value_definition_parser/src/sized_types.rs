@@ -336,6 +336,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"StringKeyword",
 	"StuckScrollStateFeatureKeyword",
 	"SvgTag",
+	"SymbolicCounterStyle",
 	"SymbolsType",
 	"SyntaxComponent",
 	"SyntaxMultiplier",

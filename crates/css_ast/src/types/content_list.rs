@@ -1,5 +1,7 @@
 use super::prelude::*;
-use crate::{AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, Target};
+use crate::{
+	AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, SymbolicCounterStyle, Target,
+};
 
 /// <https://drafts.csswg.org/css-content-3/#content-values>
 ///
@@ -52,6 +54,8 @@ pub enum ContentListItem<'a> {
 	/// ```
 	ContentFunction(ContentFunction),
 	Counter(Counter<'a>),
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	Symbolic(SymbolicCounterStyle),
 }
 
 #[cfg(test)]
@@ -77,6 +81,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContentList, "counters(foo,'bar',decimal)");
 		assert_parse!(CssAtomSet::ATOMS, ContentList, "leader('.')'foo'counter(section,decimal)");
 		assert_parse!(CssAtomSet::ATOMS, ContentList, "attr(foo)");
+		assert_parse!(CssAtomSet::ATOMS, ContentList, "disc");
 	}
 
 	#[test]
