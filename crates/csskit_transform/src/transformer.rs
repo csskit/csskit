@@ -267,8 +267,12 @@ macro_rules! transformer {
 				N: $($node)+ + ::css_parse::NodeWithMetadata<$metadata>
 			{
 				fn transforms<'a, 'ctx>(self, transformer: &'ctx $crate::Transformer<'a, $metadata, N, Self>, node: &N) {
+					let metadata = ::css_parse::NodeWithMetadata::metadata(node);
 					$(
-						if $variant::may_change(transformer.features, node) {
+						if self.contains(Self::$variant)
+							&& !<$variant<'a, 'ctx, N> as $crate::Transform<'a, 'ctx, $metadata, N, Self>>::skips_subtree(
+								&metadata,
+							) {
 							let mut transform = $variant::new(transformer);
 							let _ = node.accept(&mut transform);
 						}

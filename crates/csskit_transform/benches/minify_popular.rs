@@ -1,7 +1,8 @@
 use criterion::{BenchmarkId, Criterion, Throughput, criterion_group, criterion_main};
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{Arena, CursorWriteSink, Parser, ToCursors};
+use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+use csskit_transform::{CssMinifierFeature, Transformer};
 use glob::glob;
 #[cfg(target_family = "unix")]
 use pprof::criterion::{Output, PProfProfiler};
@@ -33,15 +34,21 @@ fn popular(c: &mut Criterion) {
 			b.iter_with_large_drop(|| {
 				let alloc = Arena::default();
 				{
+					let mut transformer =
+						Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, source_text);
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
-					let mut result = Parser::new(&alloc, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
+					let mut result =
+						Parser::new(&alloc, source_text.as_str(), lexer).parse_entirely::<StyleSheet>().with_trivia();
 					let mut string = css_parse::String::new_in(&alloc);
 					if let Some(stylesheet) = result.output.as_mut() {
-						// let mut transformer = ReduceInitial::default();
-						// TODO! Re-introduce minifyer
-						// stylesheet.accept_mut(&mut transformer);
-						let mut sink = CursorWriteSink::new(&file.source_text, &mut string);
-						stylesheet.to_cursors(&mut sink);
+						transformer.transform(stylesheet);
+						let overlays = transformer.overlays();
+						let mut sink = CursorOverlaySink::new(
+							source_text,
+							&overlays,
+							CursorCompactWriteSink::new(source_text, &mut string),
+						);
+						result.to_cursors(&mut sink);
 					}
 				}
 				alloc

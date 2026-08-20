@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use css_ast::{DeclarationValue, Length, MathFunction, UnitlessZeroResolves, VisitNode, Visitable};
+use css_ast::{CssTypes, DeclarationValue, Length, MathFunction, UnitlessZeroResolves, VisitNode, Visitable};
 use css_parse::{Declaration, format_in};
 use std::cell::Cell;
 
@@ -18,8 +18,8 @@ impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for Re
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
-	fn may_change(features: CssMinifierFeature, _node: &N) -> bool {
-		features.contains(CssMinifierFeature::ReduceLengths)
+	fn skips_subtree(metadata: &CssMetadata) -> bool {
+		!metadata.has_value_kinds(CssTypes::Length)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
@@ -32,6 +32,13 @@ impl<'a, 'ctx, N> Visit for ReduceLengths<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+			return VisitFlow::SKIP_CHILDREN;
+		}
+		VisitFlow::DESCEND
+	}
+
 	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
 		&mut self,
 		decl: &Declaration<'b, T, CssMetadata>,
