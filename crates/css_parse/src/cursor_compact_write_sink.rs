@@ -18,13 +18,30 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 const PENDING_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::Whitespace]);
 // `;` is redundant immediately before/after these.
 const REDUNDANT_SEMI_KINDSET: KindSet = KindSet::new(&[Kind::Semicolon, Kind::RightCurly]);
-// Whitespace immediately before these tokens can always be removed (overrides any
-// `AssociatedWhitespaceRules::EnforceBefore` annotations carried from the source).
-const NO_WHITESPACE_BEFORE_KINDSET: KindSet =
-	KindSet::new(&[Kind::Whitespace, Kind::Colon, Kind::Delim, Kind::LeftCurly, Kind::RightCurly, Kind::Eof]);
-// Whitespace immediately after these tokens can always be removed.
-const NO_WHITESPACE_AFTER_KINDSET: KindSet =
-	KindSet::new(&[Kind::Comma, Kind::RightParen, Kind::RightCurly, Kind::LeftCurly, Kind::Colon]);
+// Whitespace immediately before these tokens is never meaningful in any CSS grammar, so it can always be removed -
+// even when the parser marked it significant. `:` is absent because `.a :hover` is not `.a:hover`, and `)`/`]` only
+// appear here as the *closing* token of a block, where `foo( a )` is always `foo(a)`.
+const NO_WHITESPACE_BEFORE_KINDSET: KindSet = KindSet::new(&[
+	Kind::Whitespace,
+	Kind::Comma,
+	Kind::Semicolon,
+	Kind::LeftCurly,
+	Kind::RightCurly,
+	Kind::RightParen,
+	Kind::RightSquare,
+	Kind::Eof,
+]);
+// Whitespace immediately after these tokens is never meaningful. `)`/`]` are absent because `:is(a) b` and `[x] b`
+// require a space, therefore we cannot reliable elide them.
+const NO_WHITESPACE_AFTER_KINDSET: KindSet = KindSet::new(&[
+	Kind::Comma,
+	Kind::Semicolon,
+	Kind::Colon,
+	Kind::LeftCurly,
+	Kind::RightCurly,
+	Kind::LeftParen,
+	Kind::LeftSquare,
+]);
 
 impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 	pub fn new(source_text: &'a str, sink: T) -> Self {
@@ -70,16 +87,14 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 
 		let enforce_before = c.token() == AssociatedWhitespaceRules::EnforceBefore;
 		let suppress_separator = self.last_forbids_ws_after() && !enforce_before;
+		let significant_pending_whitespace = self.pending.is_some_and(|p| p.token().whitespace_is_significant());
 		if let Some(prev) = self.pending.take() {
 			let keep = match prev.token().kind() {
 				Kind::Semicolon => {
 					c != REDUNDANT_SEMI_KINDSET && self.last_token.is_some_and(|t| t != REDUNDANT_SEMI_KINDSET)
 				}
-				_ => {
-					!suppress_separator
-						&& (enforce_before || c != NO_WHITESPACE_BEFORE_KINDSET)
-						&& self.needs_separator(c.token())
-				}
+				_ if suppress_separator || (!enforce_before && c == NO_WHITESPACE_BEFORE_KINDSET) => false,
+				_ => (significant_pending_whitespace && self.last_token.is_some()) || self.needs_separator(c.token()),
 			};
 			if keep {
 				self.emit(prev.compact());
@@ -87,7 +102,12 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		}
 
 		if c == PENDING_KINDSET {
-			self.pending = Some(c);
+			// Adjacent whitespace tokens collapse into one, which stays significant if either part was.
+			self.pending = Some(if significant_pending_whitespace && c == Kind::Whitespace {
+				c.with_significant_whitespace(true)
+			} else {
+				c
+			});
 			return;
 		}
 		if c == Kind::Eof {
@@ -180,6 +200,7 @@ mod test {
 		"#,
 			"body > div{bar:baz}"
 		);
+		assert_format!(".a   .b", ".a .b");
 	}
 
 	#[test]
@@ -194,9 +215,10 @@ mod test {
 	}
 
 	#[test]
-	fn test_removes_whitespace_after_right_paren() {
-		assert_format!("foo() bar", "foo()bar");
-		assert_format!("rgb(0, 0, 0) solid", "rgb(0,0,0)solid");
+	fn test_keeps_whitespace_after_right_paren_and_square() {
+		assert_format!("foo() bar", "foo() bar");
+		assert_format!("rgb(0, 0, 0) solid", "rgb(0,0,0) solid");
+		assert_format!("[x] bar", "[x] bar");
 	}
 
 	#[test]
@@ -283,7 +305,7 @@ mod test {
 		);
 		assert_format!(
 			"@media (prefers-reduced-motion:no-preference){:root{}}",
-			"@media(prefers-reduced-motion:no-preference){:root{}}"
+			"@media (prefers-reduced-motion:no-preference){:root{}}"
 		);
 		assert_format!("@media(min-width:576px){}", "@media(min-width:576px){}");
 	}

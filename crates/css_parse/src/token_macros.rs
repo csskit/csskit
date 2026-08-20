@@ -464,6 +464,17 @@ define_kind_idents! {
 pub struct Whitespace(Cursor);
 cursor_wrapped!(Whitespace);
 
+impl Whitespace {
+	/// Returns a new [Whitespace] with the significance flag set to `significant`.
+	///
+	/// Whitespace parsed with [Parse] is significant by default: a [Whitespace] in an AST node carries meaning
+	/// (a descendant combinator, or the space in `@charset "utf-8";`) and minifiers must keep it. Set this to
+	/// `false` for whitespace kept only as trivia, which a minifier is free to remove.
+	pub fn with_significant_whitespace(&self, significant: bool) -> Self {
+		Self(self.0.with_significant_whitespace(significant))
+	}
+}
+
 impl<'a> Peek<'a> for Whitespace {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Whitespace]);
 
@@ -490,7 +501,7 @@ impl<'a> Parse<'a> for Whitespace {
 		if c != Kind::Whitespace {
 			Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
 		}
-		Ok(Self(c))
+		Ok(Self(c.with_significant_whitespace(true)))
 	}
 }
 

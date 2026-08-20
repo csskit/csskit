@@ -78,4 +78,45 @@ mod tests {
 		let (_, changed) = minify(input, CssMinifierFeature::all_bits());
 		assert!(!changed, "Should report no changes when no optimizations apply");
 	}
+
+	#[test]
+	fn test_keeps_significant_whitespace() {
+		for input in [
+			"@charset \"utf-8\";",
+			":is(a) b{color:red}",
+			"[x] d{color:red}",
+			"* e{color:red}",
+			"a:not(.x) f{color:red}",
+			"a.b c{color:red}",
+			".a :hover{color:red}",
+			"@supports foo(.a .b){a{color:red}}",
+		] {
+			let (output, _) = minify(input, CssMinifierFeature::none());
+			assert_eq!(output, input);
+		}
+	}
+
+	#[test]
+	fn test_compacts_significant_whitespace() {
+		for (input, expected) in
+			[(".a   .b{color:red}", ".a .b{color:red}"), ("a{--custom:.a\n\t.b}", "a{--custom:.a .b}")]
+		{
+			let (output, _) = minify(input, CssMinifierFeature::none());
+			assert_eq!(output, expected);
+		}
+	}
+
+	#[test]
+	fn test_removes_trivia_whitespace() {
+		for (input, expected) in [
+			("a  ,  b {color: red}", "a,b{color:red}"),
+			("a{color: rgb(255, 128, 0)}", "a{color:rgb(255,128,0)}"),
+			("a{margin:  0   0 }", "a{margin:0 0}"),
+			("a{color:red}\n\nb{color:blue}", "a{color:red}b{color:blue}"),
+			("@media screen {\n\ta {\n\t\tcolor: red;\n\t}\n}", "@media screen{a{color:red}}"),
+		] {
+			let (output, _) = minify(input, CssMinifierFeature::none());
+			assert_eq!(output, expected);
+		}
+	}
 }

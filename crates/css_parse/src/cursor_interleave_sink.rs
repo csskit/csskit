@@ -38,7 +38,7 @@ impl<'a, S: CursorSink> CursorSink for CursorInterleaveSink<'a, S> {
 		// Check if this content cursor has associated trivia
 		while self.current_index < self.interleave.len() {
 			let (trivia, associated_cursor) = &self.interleave[self.current_index];
-			if *associated_cursor == c {
+			if associated_cursor.offset() == c.offset() && associated_cursor.token().kind() == c.token().kind() {
 				for cursor in trivia {
 					self.sink.append(*cursor);
 				}

@@ -18,11 +18,11 @@ FAIL anchor/0004
 -@position-try --empty{}
 
 FAIL charset/0001
--@charset"UTF-8";a{color:red}
+-@charset "UTF-8";a{color:red}
 +a{color:red}
 
 FAIL charset/0002
--@charset"ISO-8859-1";@charset"ISO-8859-15";a{color:red}
+-@charset "ISO-8859-1";@charset "ISO-8859-15";a{color:red}
 +@charset "ISO-8859-1";a{color:red}
 
 FAIL colors/0031
@@ -96,7 +96,7 @@ FAIL duplicates/0008
 +a{transform:rotate(45deg)}
 
 FAIL duplicates/0009
--.nav.item,.footer,.nav.item{color:red}
+-.nav .item,.footer,.nav .item{color:red}
 +.nav .item,.footer{color:red}
 
 FAIL duplicates/0010
@@ -104,7 +104,7 @@ FAIL duplicates/0010
 +h1,h2{color:red}
 
 FAIL duplicates/0011
--.foo.bar{color:red}.foo{.bar{color:red}}
+-.foo .bar{color:red}.foo{.bar{color:red}}
 +.foo .bar{color:red}
 
 FAIL duplicates/0012
@@ -112,7 +112,7 @@ FAIL duplicates/0012
 +a{color:red;font-size:1rem}
 
 FAIL duplicates/0013
--a{--color:blue;--color:red!important}
+-a{--color:blue;--color:red !important}
 +a{--color:red !important}
 
 FAIL duplicates/0014
@@ -180,7 +180,7 @@ FAIL gradients/0005
 +a{background:radial-gradient(red,#00f)}
 
 FAIL import/0005
--@import url("foo.css")layer(base)supports(foo:bar);
+-@import url("foo.css") layer(base) supports(foo:bar);
 +@import"foo.css"layer(base)supports(foo:bar);
 
 FAIL keyframes/0001
@@ -305,10 +305,6 @@ FAIL nesting/0019
 
 FAIL page/0003
 -@page{}
-
-FAIL scope/0002
--@scope(.card)to (.card.content){a{color:red}}
-+@scope(.card)to (.card .content){a{color:red}}
 
 FAIL scope/0003
 -@scope(.card){}
