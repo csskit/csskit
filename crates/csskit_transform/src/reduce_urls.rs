@@ -1,5 +1,5 @@
 use crate::prelude::*;
-use css_ast::{Url, UrlOrString, Visitable};
+use css_ast::{CssTypes, Url, UrlOrString, VisitNode, Visitable};
 use css_parse::format_in;
 
 pub struct ReduceUrls<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
@@ -10,8 +10,8 @@ impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for Re
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
-	fn may_change(features: CssMinifierFeature, _node: &N) -> bool {
-		features.contains(CssMinifierFeature::ReduceUrls)
+	fn skips_subtree(metadata: &CssMetadata) -> bool {
+		!metadata.has_value_kinds(CssTypes::Url)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
@@ -24,6 +24,13 @@ impl<'a, 'ctx, N> Visit for ReduceUrls<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+			return VisitFlow::SKIP_CHILDREN;
+		}
+		VisitFlow::DESCEND
+	}
+
 	fn visit_url_or_string(&mut self, url_or_string: &UrlOrString) {
 		let UrlOrString::Url(url) = url_or_string else {
 			return;

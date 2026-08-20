@@ -1,8 +1,8 @@
 use crate::prelude::*;
 use chromashift::{COLOR_EPSILON, ColorDistance, ColorSpace, Hex, Named, PerceptualRound, Srgb, ToAlpha, round_dp};
 use css_ast::{
-	CalcableValue, Color, ColorFunction, ColorMixFunction, HueInterpolationDirection, InterpolationColorSpace,
-	ToChromashift, Visitable,
+	CalcableValue, Color, ColorFunction, ColorMixFunction, CssTypes, HueInterpolationDirection,
+	InterpolationColorSpace, ToChromashift, VisitNode, Visitable,
 };
 use css_parse::{Arena, format_in};
 
@@ -14,8 +14,8 @@ impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for Re
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
-	fn may_change(features: CssMinifierFeature, _node: &N) -> bool {
-		features.contains(CssMinifierFeature::ReduceColors)
+	fn skips_subtree(metadata: &CssMetadata) -> bool {
+		!metadata.has_value_kinds(CssTypes::Color)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
@@ -199,6 +199,13 @@ impl<'a, 'ctx, N> Visit for ReduceColors<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+			return VisitFlow::SKIP_CHILDREN;
+		}
+		VisitFlow::DESCEND
+	}
+
 	fn visit_color(&mut self, color: &Color) {
 		// color-mix() is handled by visit_color_mix_function
 		if let Color::Function(colorfn) = color
