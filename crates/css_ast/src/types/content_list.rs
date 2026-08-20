@@ -2,6 +2,7 @@ use super::prelude::*;
 use crate::{
 	AttrFunction, ContentFunction, Counter, Image, LeaderFunction, Quote, StringFunction, SymbolicCounterStyle, Target,
 };
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-content-3/#content-values>
 ///
@@ -28,7 +29,7 @@ pub struct ContentList<'a>(pub Vec<'a, ContentListItem<'a>>);
 pub enum ContentListItem<'a> {
 	String(T![String]),
 	Image(Image<'a>),
-	AttrFunction(AttrFunction<'a>),
+	AttrFunction(Box<'a, AttrFunction<'a>>),
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Contents)]
 	Contents(T![Ident]),

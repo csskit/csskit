@@ -68,7 +68,7 @@ impl_value_slot_parse!(Value, SubstitutionFunction, T);
 pub enum SubstitutionFunction<'a, T> {
 	Var(VarFunction<'a, Value<'a, T>>),
 	Env(EnvFunction<'a, Value<'a, T>>),
-	Attr(AttrFunction<'a>),
+	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, Value<'a, T>>),
 	FirstValid(FirstValidFunction<'a, Value<'a, T>>),
 }
@@ -107,7 +107,7 @@ pub enum CalcableSubstitutionFunction<'a, T> {
 	Math(MathFunction<'a, T>),
 	Var(VarFunction<'a, CalcableValue<'a, T>>),
 	Env(EnvFunction<'a, CalcableValue<'a, T>>),
-	Attr(AttrFunction<'a>),
+	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, CalcableValue<'a, T>>),
 	FirstValid(FirstValidFunction<'a, CalcableValue<'a, T>>),
 }
@@ -143,7 +143,7 @@ pub enum NumericSubstitutionFunction<'a, T> {
 	Math(MathFunction<'a, T>),
 	Var(VarFunction<'a, NumericValue<'a, T>>),
 	Env(EnvFunction<'a, NumericValue<'a, T>>),
-	Attr(AttrFunction<'a>),
+	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, NumericValue<'a, T>>),
 	FirstValid(FirstValidFunction<'a, NumericValue<'a, T>>),
 }
@@ -181,7 +181,7 @@ pub enum KeywordSubstitutionFunction<'a, T> {
 	Ident(IdentFunction<'a>),
 	Var(VarFunction<'a, KeywordValue<'a, T>>),
 	Env(EnvFunction<'a, KeywordValue<'a, T>>),
-	Attr(AttrFunction<'a>),
+	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, KeywordValue<'a, T>>),
 	FirstValid(FirstValidFunction<'a, KeywordValue<'a, T>>),
 }

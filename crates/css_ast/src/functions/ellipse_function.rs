@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{AtPosition, RadialSize};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes/#funcdef-basic-shape-ellipse>
 ///
@@ -17,8 +18,8 @@ use crate::{AtPosition, RadialSize};
 pub struct EllipseFunction<'a> {
 	#[atom(CssAtomSet::Ellipse)]
 	pub name: T![Function],
-	pub size: Option<RadialSize<'a>>,
-	pub at: Option<AtPosition<'a>>,
+	pub size: Option<Box<'a, RadialSize<'a>>>,
+	pub at: Option<Box<'a, AtPosition<'a>>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{AttrFunction, Counter};
+use css_parse::Box;
 
 /// One item in the alt-text portion of a `content` declaration.
 ///
@@ -16,9 +17,8 @@ use crate::{AttrFunction, Counter};
 pub enum ContentAltItem<'a> {
 	String(T![String]),
 	Counter(Counter<'a>),
-	AttrFunction(AttrFunction<'a>),
+	AttrFunction(Box<'a, AttrFunction<'a>>),
 }
-
 #[cfg(test)]
 mod tests {
 	use super::*;

@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{AtPosition, CalcableValue, LengthPercentage, RadialExtent};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes/#funcdef-basic-shape-circle>
 ///
@@ -18,7 +19,7 @@ pub struct CircleFunction<'a> {
 	#[atom(CssAtomSet::Circle)]
 	pub name: T![Function],
 	pub radius: Option<CircleRadius<'a>>,
-	pub at: Option<AtPosition<'a>>,
+	pub at: Option<Box<'a, AtPosition<'a>>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

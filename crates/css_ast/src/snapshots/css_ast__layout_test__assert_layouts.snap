@@ -185,7 +185,7 @@ AppearanceStyleValue: size=32 align=8
     3: BaseSelect
     4: CompatAuto
     5: CompatSpecial
-ArcCommand: size=352 align=8 {
+ArcCommand: size=184 align=8 {
     keyword: 0
     point: 16
     params: 168
@@ -392,14 +392,14 @@ BaselineSourceStyleValue: size=32 align=8
     0: Auto
     1: First
     2: Last
-BasicShape: size=240 align=8
+BasicShape: size=128 align=8
     0: Rect
     1: Circle
     2: Ellipse
     3: Polygon
     4: Path
     5: Shape
-BasicShapeRect: size=496 align=8
+BasicShapeRect: size=24 align=8
     0: Inset
     1: Rect
     2: Xywh
@@ -409,14 +409,14 @@ BgClip: size=16 align=4
     2: BorderBox
     3: BorderArea
     4: Text
-BgLayer: size=384 align=8 {
+BgLayer: size=184 align=8 {
     image: 0
     position: 56
-    repeat: 272
-    attachment: 308
-    origin: 324
-    clip: 340
-    color: 360
+    repeat: 72
+    attachment: 108
+    origin: 124
+    clip: 140
+    color: 160
 }
 BgPosition: size=112 align=8
     0: One
@@ -770,7 +770,7 @@ BorderRightStyleValue: size=96 align=8 {
 BorderRightWidthStyleValue: size=40 align=8 {
     0: 0
 }
-BorderShapeStyleValue: size=568 align=8 {
+BorderShapeStyleValue: size=344 align=8 {
     0: 0
 }
 BorderSpacingStyleValue: size=48 align=8 {
@@ -976,11 +976,11 @@ CharsetRule: size=52 align=4 {
     string: 24
     semicolon: 36
 }
-CircleFunction: size=200 align=8 {
+CircleFunction: size=88 align=8 {
     name: 0
     radius: 16
     at: 56
-    close: 184
+    close: 72
 }
 CircleRadius: size=40 align=8
     0: Extent
@@ -1002,7 +1002,7 @@ ClearStyleValue: size=32 align=8
     9: BothBlock
     10: Both
     11: None
-ClipPathStyleValue: size=288 align=8
+ClipPathStyleValue: size=176 align=8
     0: ClipSource
     1: BasicShapeGeometryBox
     2: None
@@ -1357,7 +1357,7 @@ ContainerTypeStyleValue: size=56 align=8
     0: Normal
     1: Size
     2: InlineSize
-ContentAltItem: size=264 align=8
+ContentAltItem: size=32 align=8
     0: String
     1: Counter
     2: AttrFunction
@@ -1377,7 +1377,7 @@ ContentKeyword: size=16 align=4
     2: After
     3: FirstLetter
     4: Marker
-ContentLevel: size=264 align=8
+ContentLevel: size=24 align=8
     0: Element
     1: Content
     2: Text
@@ -1387,7 +1387,7 @@ ContentLevel: size=264 align=8
 ContentList: size=24 align=8 {
     0: 0
 }
-ContentListItem: size=264 align=8
+ContentListItem: size=88 align=8
     0: String
     1: Image
     2: AttrFunction
@@ -1440,7 +1440,7 @@ CoordinatePair: size=64 align=8 {
     0: 0
     1: 32
 }
-CopyIntoStyleValue: size=328 align=8 {
+CopyIntoStyleValue: size=88 align=8 {
     0: 0
 }
 CornerBlockEndShapeStyleValue: size=144 align=8 {
@@ -1586,7 +1586,7 @@ CosFunction: size=144 align=8 {
     params: 16
     close: 128
 }
-Counter: size=176 align=8
+Counter: size=24 align=8
     0: Counter
     1: Counters
 CounterFunction: size=144 align=8 {
@@ -4569,7 +4569,7 @@ CursorStyleValue: size=48 align=8 {
     0: 0
     1: 24
 }
-CurveCommand: size=480 align=8 {
+CurveCommand: size=32 align=8 {
     keyword: 0
     target: 16
 }
@@ -4752,7 +4752,7 @@ DynamicRangeMediaFeature: size=68 align=4
 DynamicRangeMediaFeatureKeyword: size=16 align=4
     0: Standard
     1: High
-EasingFunction: size=184 align=8
+EasingFunction: size=96 align=8
     0: Linear
     1: Ease
     2: EaseIn
@@ -4778,11 +4778,11 @@ ElementFunction: size=36 align=4 {
     id: 12
     close: 24
 }
-EllipseFunction: size=232 align=8 {
+EllipseFunction: size=64 align=8 {
     name: 0
     size: 16
-    at: 88
-    close: 216
+    at: 32
+    close: 48
 }
 EmptyCellsStyleValue: size=32 align=8
     0: Show
@@ -4847,12 +4847,12 @@ FillColorStyleValue: size=32 align=8 {
 FillImageStyleValue: size=24 align=8 {
     0: 0
 }
-FillLayer: size=368 align=8 {
+FillLayer: size=168 align=8 {
     image: 0
     position: 72
-    repeat: 288
-    origin: 324
-    color: 344
+    repeat: 88
+    origin: 124
+    color: 144
 }
 FillOpacityStyleValue: size=24 align=8 {
     0: 0
@@ -6584,14 +6584,14 @@ MaskCompositeStyleValue: size=24 align=8 {
 MaskImageStyleValue: size=24 align=8 {
     0: 0
 }
-MaskLayer: size=392 align=8 {
+MaskLayer: size=192 align=8 {
     image: 0
     position: 56
-    repeat: 272
-    origin: 308
-    clip: 332
-    composite: 360
-    mode: 376
+    repeat: 72
+    origin: 108
+    clip: 132
+    composite: 160
+    mode: 176
 }
 MaskLayerClip: size=28 align=4
     0: GeometryBox
@@ -7725,7 +7725,7 @@ ObjectFitStyleValue: size=56 align=8
 ObjectPositionStyleValue: size=120 align=8 {
     0: 0
 }
-ObjectViewBoxStyleValue: size=512 align=8 {
+ObjectViewBoxStyleValue: size=40 align=8 {
     0: 0
 }
 OffsetAnchorStyleValue: size=128 align=8 {
@@ -8179,13 +8179,13 @@ PolarColorSpace: size=16 align=4
     1: Hwb
     2: Lch
     3: Oklch
-PolygonFunction: size=144 align=8 {
+PolygonFunction: size=120 align=8 {
     name: 0
     fill_rule: 16
     round: 48
-    comma: 88
-    points: 104
-    close: 128
+    comma: 64
+    points: 80
+    close: 104
 }
 PolygonRound: size=40 align=8 {
     keyword: 0
@@ -9258,7 +9258,7 @@ ShadowPosition: size=16 align=4
 ShapeBox: size=20 align=4
     0: VisualBox
     1: MarginBox
-ShapeCommand: size=496 align=8
+ShapeCommand: size=200 align=8
     0: MoveCommand
     1: LineCommand
     2: Close
@@ -9279,7 +9279,7 @@ ShapeFunction: size=232 align=8 {
 ShapeImageThresholdStyleValue: size=24 align=8 {
     0: 0
 }
-ShapeInsideStyleValue: size=280 align=8
+ShapeInsideStyleValue: size=168 align=8
     0: Auto
     1: OutsideShape
     2: ShapeBox
@@ -9288,7 +9288,7 @@ ShapeInsideStyleValue: size=280 align=8
 ShapeMarginStyleValue: size=32 align=8 {
     0: 0
 }
-ShapeOutsideStyleValue: size=288 align=8
+ShapeOutsideStyleValue: size=176 align=8
     0: None
     1: BasicShapeShapeBox
     2: Image
@@ -9321,16 +9321,16 @@ SingleAdditiveSymbolsStyleValue: size=88 align=8 {
     0: 0
     1: 24
 }
-SingleAnimation: size=360 align=8 {
+SingleAnimation: size=272 align=8 {
     duration: 0
     easing: 32
-    delay: 216
-    iteration_count: 240
-    direction: 272
-    fill_mode: 288
-    play_state: 304
-    name: 320
-    timeline: 340
+    delay: 128
+    iteration_count: 152
+    direction: 184
+    fill_mode: 200
+    play_state: 216
+    name: 232
+    timeline: 252
 }
 SingleAnimationComposition: size=16 align=4
     0: Replace
@@ -9454,12 +9454,12 @@ SingleTimelineTriggerActiveRangeStyleValue: size=48 align=8 {
     0: 0
     1: 24
 }
-SingleTransition: size=272 align=8 {
+SingleTransition: size=184 align=8 {
     property: 0
     duration: 24
     easing: 48
-    delay: 232
-    behavior: 256
+    delay: 144
+    behavior: 168
 }
 SingleTransitionProperty: size=16 align=4
     0: All
@@ -9510,7 +9510,7 @@ SlottedPseudoElement: size=80 align=8 {
     value: 40
     close: 64
 }
-SmoothCommand: size=328 align=8 {
+SmoothCommand: size=32 align=8 {
     keyword: 0
     target: 16
 }
@@ -9678,12 +9678,12 @@ StrokeDashoffsetStyleValue: size=32 align=8 {
 StrokeImageStyleValue: size=24 align=8 {
     0: 0
 }
-StrokeLayer: size=368 align=8 {
+StrokeLayer: size=168 align=8 {
     image: 0
     position: 72
-    repeat: 288
-    origin: 324
-    color: 344
+    repeat: 88
+    origin: 124
+    color: 144
 }
 StrokeLinecapStyleValue: size=32 align=8
     0: Butt
@@ -10815,7 +10815,7 @@ TanFunction: size=144 align=8 {
     params: 16
     close: 128
 }
-Target: size=208 align=8
+Target: size=80 align=8
     0: TargetCounter
     1: TargetCounters
     2: TargetText
@@ -11198,7 +11198,7 @@ TransformBoxStyleValue: size=32 align=8
     2: FillBox
     3: StrokeBox
     4: ViewBox
-TransformFunction: size=264 align=8
+TransformFunction: size=192 align=8
     0: Matrix
     1: Matrix3d
     2: Translate
@@ -11635,7 +11635,7 @@ WebkitBoxShadowStyleValue: size=24 align=8 {
 WebkitBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
-WebkitClipPathStyleValue: size=288 align=8
+WebkitClipPathStyleValue: size=176 align=8
     0: None
     1: ClipSource
     2: BasicShapeGeometryBox

@@ -1,6 +1,7 @@
 #![allow(unused)]
 use super::prelude::*;
 use crate::{Angle, CalcableValue, LengthPercentage, Position};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-command>
 ///
@@ -216,7 +217,7 @@ pub enum CurveTarget<'a> {}
 pub struct CurveCommand<'a> {
 	#[atom(CssAtomSet::Curve)]
 	pub keyword: T![Ident],
-	pub target: CurveTarget<'a>,
+	pub target: Box<'a, CurveTarget<'a>>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-smooth-command>
@@ -241,7 +242,7 @@ pub enum SmoothTarget<'a> {}
 pub struct SmoothCommand<'a> {
 	#[atom(CssAtomSet::Smooth)]
 	pub keyword: T![Ident],
-	pub target: SmoothTarget<'a>,
+	pub target: Box<'a, SmoothTarget<'a>>,
 }
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-arc-command>
@@ -296,7 +297,7 @@ pub struct ArcCommand<'a> {
 	#[atom(CssAtomSet::Arc)]
 	pub keyword: T![Ident],
 	pub point: CommandEndPoint<'a>,
-	pub params: ArcCommandParams<'a>,
+	pub params: Box<'a, ArcCommandParams<'a>>,
 }
 
 #[cfg(test)]

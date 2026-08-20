@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{Color, FillOrigin, Paint, PositionAndSize, RepeatStyle};
+use css_parse::Box;
 
 /// Represents a single layer of the `stroke` shorthand.
 ///
@@ -19,7 +20,7 @@ use crate::{Color, FillOrigin, Paint, PositionAndSize, RepeatStyle};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct StrokeLayer<'a> {
 	pub image: Option<Paint<'a>>,
-	pub position: Option<PositionAndSize<'a>>,
+	pub position: Option<Box<'a, PositionAndSize<'a>>>,
 	pub repeat: Option<RepeatStyle>,
 	pub origin: Option<FillOrigin>,
 	pub color: Option<Color<'a>>,

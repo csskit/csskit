@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{Attachment, BgClip, BgImage, BgPositionAndSize, Color, RepeatStyle, VisualBox};
+use css_parse::Box;
 
 /// Represents `<bg-layer>` and `<final-bg-layer>` from css-backgrounds-3.
 ///
@@ -21,7 +22,7 @@ use crate::{Attachment, BgClip, BgImage, BgPositionAndSize, Color, RepeatStyle, 
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct BgLayer<'a> {
 	pub image: Option<BgImage<'a>>,
-	pub position: Option<BgPositionAndSize<'a>>,
+	pub position: Option<Box<'a, BgPositionAndSize<'a>>>,
 	pub repeat: Option<RepeatStyle>,
 	pub attachment: Option<Attachment>,
 	pub origin: Option<VisualBox>,
@@ -59,7 +60,7 @@ impl<'a> Parse<'a> for BgLayer<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let mut image: Option<BgImage<'a>> = None;
-		let mut position: Option<BgPositionAndSize> = None;
+		let mut position: Option<Box<'a, BgPositionAndSize<'a>>> = None;
 		let mut repeat: Option<RepeatStyle> = None;
 		let mut attachment: Option<Attachment> = None;
 		let mut origin: Option<VisualBox> = None;
@@ -78,7 +79,7 @@ impl<'a> Parse<'a> for BgLayer<'a> {
 			if position.is_none()
 				&& let Some(v) = p.parse_if_peek::<BgPositionAndSize>()?
 			{
-				position = Some(v);
+				position = Some(Box::new_in(p.alloc(), v));
 				any = true;
 				continue;
 			}

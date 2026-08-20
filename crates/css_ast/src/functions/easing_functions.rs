@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{CalcableValue, NumericValue, Percentage};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-easing-2/#typedef-easing-function>
 ///
@@ -53,7 +54,7 @@ pub enum EasingFunction<'a> {
 	#[atom(CssAtomSet::Linear)]
 	LinearFunction(LinearFunction<'a>),
 	#[atom(CssAtomSet::CubicBezier)]
-	CubicBezierFunction(CubicBezierFunction<'a>),
+	CubicBezierFunction(Box<'a, CubicBezierFunction<'a>>),
 	#[atom(CssAtomSet::Steps)]
 	StepsFunction(StepsFunction<'a>),
 }
