@@ -1,4 +1,5 @@
 use super::prelude::*;
+use css_parse::Box;
 
 use crate::{AttrFunction, CounterFunction, CountersFunction};
 
@@ -19,9 +20,9 @@ pub enum ContentLevel<'a> {
 	Content(T![Ident]),
 	#[atom(CssAtomSet::Text)]
 	Text(T![Ident]),
-	Attr(AttrFunction<'a>),
-	Counter(CounterFunction<'a>),
-	Counters(CountersFunction<'a>),
+	Attr(Box<'a, AttrFunction<'a>>),
+	Counter(Box<'a, CounterFunction<'a>>),
+	Counters(Box<'a, CountersFunction<'a>>),
 }
 
 #[cfg(test)]

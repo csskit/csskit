@@ -18,7 +18,7 @@ pub enum BasicShape<'a> {
 	Ellipse(EllipseFunction<'a>),
 	Polygon(PolygonFunction<'a>),
 	Path(PathFunction<'a>),
-	Shape(ShapeFunction<'a>),
+	Shape(Box<'a, ShapeFunction<'a>>),
 }
 
 #[cfg(test)]

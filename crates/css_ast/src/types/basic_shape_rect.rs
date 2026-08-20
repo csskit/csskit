@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{InsetFunction, ShapeRectFunction, XywhFunction};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes-1/#typedef-basic-shape-rect>
 ///
@@ -12,11 +13,10 @@ use crate::{InsetFunction, ShapeRectFunction, XywhFunction};
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum BasicShapeRect<'a> {
-	Inset(InsetFunction<'a>),
-	Rect(ShapeRectFunction<'a>),
-	Xywh(XywhFunction<'a>),
+	Inset(Box<'a, InsetFunction<'a>>),
+	Rect(Box<'a, ShapeRectFunction<'a>>),
+	Xywh(Box<'a, XywhFunction<'a>>),
 }
-
 #[cfg(test)]
 mod tests {
 	use super::*;

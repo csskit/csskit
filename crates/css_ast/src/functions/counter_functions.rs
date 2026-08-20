@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::types::CounterStyle;
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-lists-3/#counter-functions>
 ///
@@ -64,8 +65,8 @@ pub struct CountersFunctionParams<'a>(
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum Counter<'a> {
-	Counter(CounterFunction<'a>),
-	Counters(CountersFunction<'a>),
+	Counter(Box<'a, CounterFunction<'a>>),
+	Counters(Box<'a, CountersFunction<'a>>),
 }
 
 #[cfg(test)]

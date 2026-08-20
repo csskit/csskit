@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{CompositingOperator, GeometryBox, MaskReference, MaskingMode, PositionAndSize, RepeatStyle};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-masking-1/#typedef-mask-layer>
 ///
@@ -19,7 +20,7 @@ use crate::{CompositingOperator, GeometryBox, MaskReference, MaskingMode, Positi
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct MaskLayer<'a> {
 	pub image: Option<MaskReference<'a>>,
-	pub position: Option<PositionAndSize<'a>>,
+	pub position: Option<Box<'a, PositionAndSize<'a>>>,
 	pub repeat: Option<RepeatStyle>,
 	pub origin: Option<GeometryBox>,
 	pub clip: Option<MaskLayerClip>,

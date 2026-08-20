@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{CalcableValue, FillRuleStyleValue, Length, LengthPercentage};
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes/#funcdef-basic-shape-polygon>
 ///
@@ -19,7 +20,7 @@ pub struct PolygonFunction<'a> {
 	#[atom(CssAtomSet::Polygon)]
 	pub name: T![Function],
 	pub fill_rule: Option<FillRuleStyleValue<'a>>,
-	pub round: Option<PolygonRound<'a>>,
+	pub round: Option<Box<'a, PolygonRound<'a>>>,
 	#[semantic_eq(skip)]
 	pub comma: Option<T![,]>,
 	pub points: CommaSeparated<'a, (CalcableValue<'a, LengthPercentage>, CalcableValue<'a, LengthPercentage>)>,

@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{CssAtomSet, types::CounterStyle};
+use css_parse::Box;
 
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -42,13 +43,13 @@ pub enum Target<'a> {
 	/// ```text,ignore
 	/// target-counter() = target-counter( [ <string> | <url> ] , <custom-ident> , <counter-style>? )
 	/// ```
-	TargetCounter(TargetCounterFunction<'a>),
+	TargetCounter(Box<'a, TargetCounterFunction<'a>>),
 	/// <https://drafts.csswg.org/css-content-3/#target-counters>
 	///
 	/// ```text,ignore
 	/// target-counters() = target-counters( [ <string> | <url> ] , <custom-ident> , <string> , <counter-style>? )
 	/// ```
-	TargetCounters(TargetCountersFunction<'a>),
+	TargetCounters(Box<'a, TargetCountersFunction<'a>>),
 	/// <https://drafts.csswg.org/css-content-3/#target-text>
 	///
 	/// ```text,ignore

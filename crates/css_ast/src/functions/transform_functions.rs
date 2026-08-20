@@ -9,7 +9,7 @@ use css_parse::Box;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum TransformFunction<'a> {
-	Matrix(MatrixFunction<'a>),
+	Matrix(Box<'a, MatrixFunction<'a>>),
 	Matrix3d(Box<'a, Matrix3dFunction<'a>>),
 	Translate(TranslateFunction<'a>),
 	Translate3d(Translate3dFunction<'a>),
