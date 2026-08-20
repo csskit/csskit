@@ -34,6 +34,7 @@ macro_rules! define_functional_pseudo_class {
 		#[derive( ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.selectors"))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+		#[derive(csskit_derives::NodeWithMetadata)]
 		pub enum FunctionalPseudoClass<'a> {
 			$($ident($ty),)+
 		}
@@ -191,11 +192,13 @@ pub struct LangPseudoFunction<'a> {
 #[node]
 #[derive(ToSpan, Parse, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct LangValues<'a>(pub CommaSeparated<'a, LangValue>);
 
 #[node]
 #[derive(Parse, ToSpan, Peek, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum LangValue {
 	Ident(T![Ident]),
 	String(T![String]),

@@ -16,7 +16,7 @@ use css_lexer::{Feature as LexerFeature, Lexer, SourceOffset};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct UnicodeRange(Cursor);
+pub struct UnicodeRange(#[metadata(skip)] Cursor);
 
 impl UnicodeRange {
 	/// The first code point of the range.

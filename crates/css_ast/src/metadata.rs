@@ -187,7 +187,7 @@ pub const PROPERTY_KIND_VARIANTS: &[PropertyKind] = &[PropertyKind::Name];
 #[bitmask(u32)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
-pub enum ExpectedTypes {
+pub enum CssTypes {
 	Length,
 	Percentage,
 	Number,
@@ -203,9 +203,9 @@ pub enum ExpectedTypes {
 	String,
 }
 
-impl ExpectedTypes {
+impl CssTypes {
 	/// All bits set - use for untyped contexts (custom declarations, substitution internals).
-	pub const ANY: ExpectedTypes = ExpectedTypes { bits: !0 };
+	pub const ANY: CssTypes = CssTypes { bits: !0 };
 }
 
 /// Aggregated metadata computed from declarations within a block.
@@ -232,6 +232,8 @@ pub struct CssMetadata {
 	pub node_kinds: NodeKinds,
 	/// Bitwise OR of queryable properties present
 	pub property_kinds: PropertyKind,
+	/// Bitwise OR of literal value kinds present in this node and its subtree
+	pub value_kinds: CssTypes,
 	/// How unitless zero resolves in this context (Length or Number)
 	pub unitless_zero_resolves: UnitlessZeroResolves,
 	/// Size of vector-based nodes (e.g., number of declarations, selector list length)
@@ -239,9 +241,9 @@ pub struct CssMetadata {
 	/// True if any substitution function (var(), env(), attr(), etc.) or Unresolved node is present.
 	/// Enables subtree-skip optimisations in visitors and the minifier.
 	pub uses_substitution: bool,
-	/// OR-union of all ExpectedTypes bits for substitution positions in this node.
+	/// OR-union of all CssTypes bits for substitution positions in this node.
 	/// Accumulates upward through CssMetadata::merge for type inference.
-	pub expected_types: ExpectedTypes,
+	pub expected_value_kinds: CssTypes,
 }
 
 impl Default for CssMetadata {
@@ -256,10 +258,11 @@ impl Default for CssMetadata {
 			vendor_prefixes: VendorPrefixes::none(),
 			node_kinds: NodeKinds::none(),
 			property_kinds: PropertyKind::none(),
+			value_kinds: CssTypes::none(),
 			unitless_zero_resolves: UnitlessZeroResolves::default(),
 			size: 0,
 			uses_substitution: false,
-			expected_types: ExpectedTypes::none(),
+			expected_value_kinds: CssTypes::none(),
 		}
 	}
 }
@@ -280,7 +283,8 @@ impl CssMetadata {
 			&& self.unitless_zero_resolves == UnitlessZeroResolves::Length
 			&& self.size == 0
 			&& !self.uses_substitution
-			&& self.expected_types == ExpectedTypes::none()
+			&& self.expected_value_kinds == CssTypes::none()
+			&& self.value_kinds == CssTypes::none()
 	}
 
 	/// Returns true if this block modifies any positioning-related properties.
@@ -401,6 +405,12 @@ impl CssMetadata {
 		self.uses_substitution
 	}
 
+	/// Returns true if this node or its subtree contains any of the given value kinds.
+	#[inline]
+	pub fn has_value_kinds(&self, kinds: CssTypes) -> bool {
+		self.value_kinds.intersects(kinds)
+	}
+
 	/// Returns true if this is an empty container (no declarations, no nested rules).
 	#[inline]
 	pub fn is_empty_container(&self) -> bool {
@@ -426,13 +436,14 @@ impl NodeMetadata for CssMetadata {
 		self.vendor_prefixes |= other.vendor_prefixes;
 		self.node_kinds |= other.node_kinds;
 		self.property_kinds |= other.property_kinds;
+		self.value_kinds |= other.value_kinds;
 		// For unitless_zero_resolves, we keep Number if either side has it (conservative)
 		if other.unitless_zero_resolves == UnitlessZeroResolves::Number {
 			self.unitless_zero_resolves = UnitlessZeroResolves::Number;
 		}
 		self.size = self.size.max(other.size);
 		self.uses_substitution |= other.uses_substitution;
-		self.expected_types |= other.expected_types;
+		self.expected_value_kinds |= other.expected_value_kinds;
 		self
 	}
 
@@ -453,17 +464,17 @@ impl ToSpan for CssMetadata {
 	}
 }
 
-// ExpectedTypes is not serialized to tokens; these no-op impls let it sit as a
+// CssTypes is not serialized to tokens; these no-op impls let it sit as a
 // non-node field on Unresolved under derive(ToCursors)/derive(ToSpan).
-impl ToCursors for ExpectedTypes {
+impl ToCursors for CssTypes {
 	fn to_cursors(&self, _: &mut impl css_parse::CursorSink) {}
 }
-impl ToSpan for ExpectedTypes {
+impl ToSpan for CssTypes {
 	fn to_span(&self) -> Span {
 		Span::DUMMY
 	}
 }
-impl SemanticEq for ExpectedTypes {
+impl SemanticEq for CssTypes {
 	fn semantic_eq(&self, other: &Self) -> bool {
 		self == other
 	}
@@ -507,8 +518,7 @@ impl_token_metadata!(
 	LeftParen
 );
 
-// Delim subtypes (T![/] etc.) — defined by custom_delim! in css_parse, not covered by T![$token] expansion
-macro_rules! impl_delim_metadata {
+macro_rules! impl_leaf_metadata {
 	($($t:ty),* $(,)?) => {
 		$(
 			impl css_parse::NodeWithMetadata<CssMetadata> for $t {
@@ -519,7 +529,7 @@ macro_rules! impl_delim_metadata {
 		)*
 	};
 }
-impl_delim_metadata!(
+impl_leaf_metadata!(
 	css_parse::token_macros::delim::Slash,
 	css_parse::token_macros::delim::Or,
 	css_parse::token_macros::delim::Plus,
@@ -540,13 +550,21 @@ impl_delim_metadata!(
 	css_parse::token_macros::delim::Percent,
 	css_parse::token_macros::delim::Hash,
 	css_parse::token_macros::delim::Backtick,
+	css_parse::token_macros::double::ColonColon,
+	css_parse::token_macros::double::PipePipe,
+	css_parse::token_macros::double::EqualEqual,
+	css_parse::token_macros::double::BangEqual,
+	css_parse::token_macros::double::TildeEqual,
+	css_parse::token_macros::double::PipeEqual,
+	css_parse::token_macros::double::CaretEqual,
+	css_parse::token_macros::double::DollarEqual,
+	css_parse::token_macros::double::StarEqual,
+	css_parse::token_macros::Any,
+	css_parse::token_macros::DashedIdent,
+	css_parse::token_macros::Whitespace,
+	css_parse::token_macros::RightParen,
+	css_parse::Comparison,
 );
-
-impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::token_macros::RightParen {
-	fn metadata(&self) -> CssMetadata {
-		CssMetadata::default()
-	}
-}
 
 impl<'a, T: css_parse::NodeWithMetadata<CssMetadata>> css_parse::NodeWithMetadata<CssMetadata>
 	for css_parse::Vec<'a, T>
@@ -710,26 +728,34 @@ mod tests {
 	#[metadata(node_kinds = AtRule)]
 	struct ChildB;
 
-	// Type-level delegate on a struct merges every field's metadata into self_metadata.
+	// Structs merge every field's metadata into self_metadata.
 	#[derive(csskit_derives::NodeWithMetadata)]
-	#[metadata(node_kinds = Function, delegate)]
-	struct StructDelegate {
+	#[metadata(node_kinds = Function)]
+	struct StructParent {
 		a: ChildA,
 		b: ChildB,
 	}
 
-	// Enum delegate over a named-field variant and a tuple variant.
+	// Fields marked #[metadata(skip)] contribute nothing.
 	#[derive(csskit_derives::NodeWithMetadata)]
-	#[metadata(delegate)]
-	enum EnumDelegate {
+	struct StructSkippedField {
+		a: ChildA,
+		#[metadata(skip)]
+		#[allow(dead_code)]
+		b: ChildB,
+	}
+
+	// Enums merge the active variant's fields into self_metadata.
+	#[derive(csskit_derives::NodeWithMetadata)]
+	enum EnumParent {
 		Named { a: ChildA, b: ChildB },
 		Tuple(ChildA),
 		Empty,
 	}
 
 	#[test]
-	fn test_struct_type_level_delegate_merges_all_fields() {
-		let node = StructDelegate { a: ChildA, b: ChildB };
+	fn test_struct_merges_all_fields() {
+		let node = StructParent { a: ChildA, b: ChildB };
 		let meta = node.metadata();
 		// self_metadata bit plus both children.
 		assert!(meta.node_kinds.contains(NodeKinds::Function));
@@ -738,23 +764,30 @@ mod tests {
 	}
 
 	#[test]
-	fn test_enum_delegate_named_variant() {
-		let meta = EnumDelegate::Named { a: ChildA, b: ChildB }.metadata();
+	fn test_struct_skips_marked_field() {
+		let meta = StructSkippedField { a: ChildA, b: ChildB }.metadata();
+		assert!(meta.node_kinds.contains(NodeKinds::StyleRule));
+		assert!(!meta.node_kinds.contains(NodeKinds::AtRule));
+	}
+
+	#[test]
+	fn test_enum_named_variant() {
+		let meta = EnumParent::Named { a: ChildA, b: ChildB }.metadata();
 		assert!(meta.node_kinds.contains(NodeKinds::StyleRule));
 		assert!(meta.node_kinds.contains(NodeKinds::AtRule));
 		assert!(!meta.node_kinds.contains(NodeKinds::Function));
 	}
 
 	#[test]
-	fn test_enum_delegate_tuple_variant() {
-		let meta = EnumDelegate::Tuple(ChildA).metadata();
+	fn test_enum_tuple_variant() {
+		let meta = EnumParent::Tuple(ChildA).metadata();
 		assert!(meta.node_kinds.contains(NodeKinds::StyleRule));
 		assert!(!meta.node_kinds.contains(NodeKinds::AtRule));
 	}
 
 	#[test]
-	fn test_enum_delegate_empty_variant() {
-		let meta = EnumDelegate::Empty.metadata();
+	fn test_enum_empty_variant() {
+		let meta = EnumParent::Empty.metadata();
 		assert!(meta.is_empty());
 	}
 
@@ -783,15 +816,16 @@ mod tests {
 
 	#[test]
 	fn size_baseline_css_metadata() {
-		// S1 baseline: CssMetadata must stay <=48 bytes after adding uses_substitution + expected_types.
-		assert!(std::mem::size_of::<CssMetadata>() <= 48, "CssMetadata size = {}", std::mem::size_of::<CssMetadata>());
+		// `property_groups` is a u128 bitmask, so CssMetadata is align 16 and rounds up to 48 bytes.
+		// The payload is well under that, leaving spare bytes for new flag fields at no cost.
+		assert_eq!(std::mem::size_of::<CssMetadata>(), 48);
 	}
 
 	#[test]
 	fn test_substitution_fields_default() {
 		let meta = CssMetadata::default();
 		assert!(!meta.uses_substitution);
-		assert_eq!(meta.expected_types, ExpectedTypes::none());
+		assert_eq!(meta.expected_value_kinds, CssTypes::none());
 		assert!(meta.is_empty());
 	}
 
@@ -799,17 +833,17 @@ mod tests {
 	fn test_substitution_fields_merge() {
 		let meta1 = CssMetadata {
 			uses_substitution: true,
-			expected_types: ExpectedTypes::Length | ExpectedTypes::Percentage,
+			expected_value_kinds: CssTypes::Length | CssTypes::Percentage,
 			..Default::default()
 		};
 
-		let meta2 = CssMetadata { expected_types: ExpectedTypes::Color, ..Default::default() };
+		let meta2 = CssMetadata { expected_value_kinds: CssTypes::Color, ..Default::default() };
 
 		let merged = NodeMetadata::merge(meta1, meta2);
 		assert!(merged.uses_substitution);
-		assert!(merged.expected_types.contains(ExpectedTypes::Length));
-		assert!(merged.expected_types.contains(ExpectedTypes::Percentage));
-		assert!(merged.expected_types.contains(ExpectedTypes::Color));
+		assert!(merged.expected_value_kinds.contains(CssTypes::Length));
+		assert!(merged.expected_value_kinds.contains(CssTypes::Percentage));
+		assert!(merged.expected_value_kinds.contains(CssTypes::Color));
 	}
 
 	#[test]
@@ -826,7 +860,7 @@ mod tests {
 		assert!(meta.is_empty());
 		meta.uses_substitution = true;
 		assert!(!meta.is_empty());
-		let meta2 = CssMetadata { expected_types: ExpectedTypes::Number, ..Default::default() };
+		let meta2 = CssMetadata { expected_value_kinds: CssTypes::Number, ..Default::default() };
 		assert!(!meta2.is_empty());
 	}
 }

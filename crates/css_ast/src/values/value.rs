@@ -65,6 +65,7 @@ impl_value_slot_parse!(Value, SubstitutionFunction, T);
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SubstitutionFunction<'a, T> {
 	Var(VarFunction<'a, Value<'a, T>>),
 	Env(EnvFunction<'a, Value<'a, T>>),
@@ -103,6 +104,7 @@ impl_value_slot_parse!(CalcableValue, CalcableSubstitutionFunction, T);
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum CalcableSubstitutionFunction<'a, T> {
 	Math(MathFunction<'a, T>),
 	Var(VarFunction<'a, CalcableValue<'a, T>>),
@@ -138,6 +140,7 @@ impl_value_slot_parse!(NumericValue, NumericSubstitutionFunction, T);
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NumericSubstitutionFunction<'a, T> {
 	TreeCounting(TreeCountingFunction),
 	Math(MathFunction<'a, T>),
@@ -177,6 +180,7 @@ impl_value_slot_parse!(KeywordValue, KeywordSubstitutionFunction, T);
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum KeywordSubstitutionFunction<'a, T> {
 	Ident(IdentFunction<'a>),
 	Var(VarFunction<'a, KeywordValue<'a, T>>),
@@ -209,14 +213,22 @@ macro_rules! impl_value_slot_traits {
 		}
 
 		impl<'a, T: NodeWithMetadata<CssMetadata>> NodeWithMetadata<CssMetadata> for $ty<'a, T> {
-			fn metadata(&self) -> CssMetadata {
+			fn self_metadata(&self) -> CssMetadata {
 				match self {
-					Self::Literal(t) => t.metadata(),
+					Self::Literal(_) => CssMetadata::default(),
 					Self::Substituted(_) | Self::Unresolved(_) => CssMetadata {
 						uses_substitution: true,
 						declaration_kinds: crate::DeclarationKind::Computed,
 						..CssMetadata::default()
 					},
+				}
+			}
+
+			fn metadata(&self) -> CssMetadata {
+				match self {
+					Self::Literal(t) => t.metadata(),
+					Self::Substituted(f) => css_parse::NodeMetadata::merge(f.metadata(), self.self_metadata()),
+					Self::Unresolved(_) => self.self_metadata(),
 				}
 			}
 		}

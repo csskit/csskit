@@ -29,6 +29,7 @@ pub struct LeaderFunction {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum LeaderType {
 	#[atom(CssAtomSet::Dotted)]
 	Dotted(T![Ident]),

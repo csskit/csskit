@@ -22,6 +22,7 @@ pub enum TextFunctionContent {
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum TargetCounterKind {
 	String(T![String]),
 	Url(T![Url]),
@@ -74,6 +75,7 @@ pub struct TargetCounterFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TargetCounterParams<'a>(
 	TargetCounterKind,
 	#[semantic_eq(skip)] Option<T![,]>,
@@ -98,6 +100,7 @@ pub struct TargetCountersFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TargetCountersParams<'a>(
 	TargetCounterKind,
 	#[semantic_eq(skip)] Option<T![,]>,
@@ -124,6 +127,7 @@ pub struct TargetTextFunction {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct TargetTextParams(TargetCounterKind, #[semantic_eq(skip)] Option<T![,]>, Option<TextFunctionContent>);
 
 #[cfg(test)]

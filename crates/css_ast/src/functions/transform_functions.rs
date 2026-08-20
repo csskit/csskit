@@ -53,6 +53,7 @@ pub struct MatrixFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct MatrixFunctionParams<'a>(
 	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
@@ -89,6 +90,7 @@ pub struct Matrix3dFunction<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[allow(clippy::type_complexity)] // TODO: simplify types
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Matrix3dFunctionParams<'a>(
 	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
@@ -165,6 +167,7 @@ pub struct Translate3dFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Translate3dFunctionParams<'a>(
 	pub CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
@@ -267,6 +270,7 @@ pub struct Scale3dFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Scale3dFunctionParams<'a>(
 	pub NumericValue<'a, NumberOrPercentage>,
 	#[semantic_eq(skip)] pub Option<T![,]>,
@@ -368,6 +372,7 @@ pub struct Rotate3dFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Rotate3dFunctionParams<'a>(
 	pub NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)] pub Option<T![,]>,

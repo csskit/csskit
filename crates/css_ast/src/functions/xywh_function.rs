@@ -24,6 +24,7 @@ pub struct XywhFunction<'a> {
 #[syntax(" <length-percentage>{2} <length-percentage [0,∞]>{2} [ round <'border-radius'> ]? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct XywhFunctionParams<'a>;
 
 #[cfg(test)]

@@ -16,7 +16,6 @@ pub struct FontFaceRule<'a> {
 	#[atom(CssAtomSet::FontFace)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![AtKeyword],
-	#[metadata(delegate)]
 	pub block: FontFaceRuleBlock<'a>,
 }
 
@@ -25,13 +24,14 @@ pub struct FontFaceRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontFaceRuleBlock<'a>(#[metadata(delegate)] DeclarationList<'a, FontFaceRuleStyleValue<'a>, CssMetadata>);
+pub struct FontFaceRuleBlock<'a>(DeclarationList<'a, FontFaceRuleStyleValue<'a>, CssMetadata>);
 
 /// The descriptors allowed inside a [`FontFaceRule`] block.
 #[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontFaceRuleStyleValue<'a> {
 	AscentOverride(FontFaceAscentOverrideDescriptor<'a>),
 	DescentOverride(FontFaceDescentOverrideDescriptor<'a>),
@@ -144,12 +144,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontFaceRuleStyleValue<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		p.parse::<Unknown>().map(Self::Unknown)
-	}
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for FontFaceRuleStyleValue<'a> {
-	fn metadata(&self) -> CssMetadata {
-		CssMetadata::default()
 	}
 }
 

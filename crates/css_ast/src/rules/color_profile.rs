@@ -28,7 +28,6 @@ pub struct ColorProfileRule<'a> {
 	#[atom(CssAtomSet::ColorProfile)]
 	pub name: T![AtKeyword],
 	pub prelude: ColorProfilePrelude,
-	#[metadata(delegate)]
 	pub block: ColorProfileRuleBlock<'a>,
 }
 
@@ -70,14 +69,13 @@ impl ColorProfilePrelude {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ColorProfileRuleBlock<'a>(
-	#[metadata(delegate)] DeclarationList<'a, ColorProfileRuleStyleValue<'a>, CssMetadata>,
-);
+pub struct ColorProfileRuleBlock<'a>(DeclarationList<'a, ColorProfileRuleStyleValue<'a>, CssMetadata>);
 
 #[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorProfileRuleStyleValue<'a> {
 	Src(ColorProfileSrcValue),
 	RenderingIntent(RenderingIntentValue),
@@ -143,12 +141,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for ColorProfileRuleStyleValue<'a> {
 			CssAtomSet::Components => Self::Components(p.parse::<ComponentsValue<'a>>()?),
 			_ => Self::Unknown(p.parse::<ComponentValues<'a>>()?),
 		})
-	}
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for ColorProfileRuleStyleValue<'a> {
-	fn metadata(&self) -> CssMetadata {
-		CssMetadata::default()
 	}
 }
 

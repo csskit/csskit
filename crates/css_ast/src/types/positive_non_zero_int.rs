@@ -4,6 +4,7 @@ use crate::{CSSInt, Positive};
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PositiveNonZeroInt(pub Positive<CSSInt>);
 
 #[cfg(test)]

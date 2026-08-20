@@ -13,7 +13,6 @@ pub struct LayerRule<'a> {
 	#[atom(CssAtomSet::Layer)]
 	pub name: T![AtKeyword],
 	pub prelude: LayerNameList<'a>,
-	#[metadata(delegate)]
 	pub block: Option<LayerRuleBlock<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -24,6 +23,7 @@ pub struct LayerRule<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
 
 #[node]
@@ -57,7 +57,7 @@ impl<'a> Parse<'a> for LayerName<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LayerRuleBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
+pub struct LayerRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {

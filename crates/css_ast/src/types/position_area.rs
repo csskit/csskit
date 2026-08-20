@@ -100,6 +100,7 @@ impl<'a> Parse<'a> for PositionArea {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaPhsyicalHorizontal {
 	#[atom(CssAtomSet::Left)]
 	Left(T![Ident]),
@@ -135,6 +136,7 @@ pub enum PositionAreaPhsyicalHorizontal {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaPhsyicalVertical {
 	#[atom(CssAtomSet::Top)]
 	Top(T![Ident]),
@@ -170,6 +172,7 @@ pub enum PositionAreaPhsyicalVertical {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaBlock {
 	#[atom(CssAtomSet::BlockStart)]
 	BlockStart(T![Ident]),
@@ -189,6 +192,7 @@ pub enum PositionAreaBlock {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaInline {
 	#[atom(CssAtomSet::InlineStart)]
 	InlineStart(T![Ident]),
@@ -208,6 +212,7 @@ pub enum PositionAreaInline {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaSelfBlock {
 	#[atom(CssAtomSet::SelfBlockStart)]
 	SelfBlockStart(T![Ident]),
@@ -227,6 +232,7 @@ pub enum PositionAreaSelfBlock {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaSelfInline {
 	#[atom(CssAtomSet::SelfInlineStart)]
 	SelfInlineStart(T![Ident]),
@@ -246,6 +252,7 @@ pub enum PositionAreaSelfInline {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaPosition {
 	#[atom(CssAtomSet::Start)]
 	Start(T![Ident]),
@@ -265,6 +272,7 @@ pub enum PositionAreaPosition {
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PositionAreaSelfPosition {
 	#[atom(CssAtomSet::SelfStart)]
 	SelfStart(T![Ident]),

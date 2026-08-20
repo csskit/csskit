@@ -28,7 +28,6 @@ pub struct FontFeatureValuesRule<'a> {
 	#[atom(CssAtomSet::FontFeatureValues)]
 	pub name: T![AtKeyword],
 	pub prelude: FontFeatureValuesPrelude<'a>,
-	#[metadata(delegate)]
 	pub block: FontFeatureValuesRuleBlock<'a>,
 }
 
@@ -36,6 +35,7 @@ pub struct FontFeatureValuesRule<'a> {
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct FontFeatureValuesPrelude<'a>(pub CommaSeparated<'a, FontFamilyName<'a>>);
 
 #[node]
@@ -44,7 +44,7 @@ pub struct FontFeatureValuesPrelude<'a>(pub CommaSeparated<'a, FontFamilyName<'a
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct FontFeatureValuesRuleBlock<'a>(
-	#[metadata(delegate)] Block<'a, FontFeatureValuesRuleStyleValue<'a>, FontFeatureValueTypeRule<'a>, CssMetadata>,
+	Block<'a, FontFeatureValuesRuleStyleValue<'a>, FontFeatureValueTypeRule<'a>, CssMetadata>,
 );
 
 /// The descriptors allowed directly inside an [`FontFeatureValuesRule`] block.
@@ -52,6 +52,7 @@ pub struct FontFeatureValuesRuleBlock<'a>(
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontFeatureValuesRuleStyleValue<'a> {
 	FontDisplay(FontDisplayValue),
 	Unknown(ComponentValues<'a>),
@@ -81,12 +82,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontFeatureValuesRuleStyleValue<'
 			CssAtomSet::FontDisplay => Self::FontDisplay(p.parse::<FontDisplayValue>()?),
 			_ => Self::Unknown(p.parse::<ComponentValues<'a>>()?),
 		})
-	}
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for FontFeatureValuesRuleStyleValue<'a> {
-	fn metadata(&self) -> CssMetadata {
-		CssMetadata::default()
 	}
 }
 
@@ -206,7 +201,7 @@ impl<'a> Parse<'a> for FontFeatureValueTypeRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontFeatureValueBlock<'a>(#[metadata(delegate)] DeclarationList<'a, FontFeatureValue<'a>, CssMetadata>);
+pub struct FontFeatureValueBlock<'a>(DeclarationList<'a, FontFeatureValue<'a>, CssMetadata>);
 
 /// The block of `@character-variant`, each declaration of which takes one or two `<font-feature-index>`es.
 #[node]
@@ -214,9 +209,7 @@ pub struct FontFeatureValueBlock<'a>(#[metadata(delegate)] DeclarationList<'a, F
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontFeatureValuePairBlock<'a>(
-	#[metadata(delegate)] DeclarationList<'a, FontFeatureValuePair<'a>, CssMetadata>,
-);
+pub struct FontFeatureValuePairBlock<'a>(DeclarationList<'a, FontFeatureValuePair<'a>, CssMetadata>);
 
 /// The block of `@styleset`, each declaration of which takes any number of `<font-feature-index>`es.
 #[node]
@@ -224,9 +217,7 @@ pub struct FontFeatureValuePairBlock<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontFeatureValueListBlock<'a>(
-	#[metadata(delegate)] DeclarationList<'a, FontFeatureValueList<'a>, CssMetadata>,
-);
+pub struct FontFeatureValueListBlock<'a>(DeclarationList<'a, FontFeatureValueList<'a>, CssMetadata>);
 
 /// ```text,ignore
 /// <font-feature-index> = <integer [0,∞]>
@@ -316,7 +307,10 @@ macro_rules! font_feature_value {
 
 		impl<'a> NodeWithMetadata<CssMetadata> for $value<'a> {
 			fn metadata(&self) -> CssMetadata {
-				CssMetadata::default()
+				match self {
+					Self::Index(index) => index.metadata(),
+					Self::Unknown(_) => CssMetadata::default(),
+				}
 			}
 		}
 	};

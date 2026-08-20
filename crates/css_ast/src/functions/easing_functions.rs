@@ -114,6 +114,7 @@ pub struct CubicBezierFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CubicBezierFunctionParams<'a> {
 	x1: NumericValue<'a, T![Number]>,
 	#[semantic_eq(skip)]
@@ -143,11 +144,13 @@ pub struct StepsFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct StepsFunctionParams<'a>(NumericValue<'a, CSSInt>, #[semantic_eq(skip)] Option<T![,]>, Option<StepPosition>);
 
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum StepPosition {
 	#[atom(CssAtomSet::JumpStart)]
 	JumpStart(T![Ident]),

@@ -12,7 +12,6 @@ pub struct DocumentRule<'a> {
 	#[atom(CssAtomSet::Document)]
 	pub name: T![AtKeyword],
 	pub prelude: DocumentMatcherList<'a>,
-	#[metadata(delegate)]
 	pub block: DocumentRuleBlock<'a>,
 }
 
@@ -20,6 +19,7 @@ pub struct DocumentRule<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct DocumentMatcherList<'a>(pub CommaSeparated<'a, DocumentMatcher>);
 
 #[node]
@@ -46,7 +46,7 @@ pub enum DocumentMatcher {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct DocumentRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
+pub struct DocumentRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {

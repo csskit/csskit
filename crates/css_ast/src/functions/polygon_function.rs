@@ -31,6 +31,7 @@ pub struct PolygonFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PolygonRound<'a> {
 	#[atom(CssAtomSet::Round)]
 	pub keyword: T![Ident],

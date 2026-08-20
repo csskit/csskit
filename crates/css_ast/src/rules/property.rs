@@ -15,7 +15,6 @@ pub struct PropertyRule<'a> {
 	#[atom(CssAtomSet::Property)]
 	pub name: T![AtKeyword],
 	pub prelude: PropertyPrelude,
-	#[metadata(delegate)]
 	pub block: PropertyRuleBlock<'a>,
 }
 
@@ -50,7 +49,7 @@ impl PropertyPrelude {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PropertyRuleBlock<'a>(#[metadata(delegate)] DeclarationList<'a, PropertyRuleStyleValue<'a>, CssMetadata>);
+pub struct PropertyRuleBlock<'a>(DeclarationList<'a, PropertyRuleStyleValue<'a>, CssMetadata>);
 
 #[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

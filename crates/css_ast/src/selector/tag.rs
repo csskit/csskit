@@ -22,7 +22,6 @@ impl<'a> Peek<'a> for Tag {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 }
 
-#[cfg(feature = "visitable")]
 impl css_parse::NodeWithMetadata<crate::CssMetadata> for Tag {
 	fn metadata(&self) -> crate::CssMetadata {
 		let mut metadata = crate::CssMetadata::default();

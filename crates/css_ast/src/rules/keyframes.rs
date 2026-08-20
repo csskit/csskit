@@ -17,7 +17,6 @@ pub struct KeyframesRule<'a> {
 	#[atom(CssAtomSet::Keyframes)]
 	pub name: T![AtKeyword],
 	pub prelude: KeyframesName,
-	#[metadata(delegate)]
 	pub block: KeyframesRuleBlock<'a>,
 }
 
@@ -71,7 +70,7 @@ impl<'a> Parse<'a> for KeyframesName {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct KeyframesRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Keyframe<'a>, CssMetadata>);
+pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -79,7 +78,6 @@ pub struct KeyframesRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Keyfram
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Keyframe<'a>(
-	#[metadata(delegate)]
 	QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed<StyleValue<'a>, CssMetadata>, CssMetadata>,
 );
 

@@ -17,7 +17,6 @@ pub struct PageRule<'a> {
 	#[atom(CssAtomSet::Page)]
 	pub name: T![AtKeyword],
 	pub prelude: Option<PageSelectorList<'a>>,
-	#[metadata(delegate)]
 	pub block: PageRuleBlock<'a>,
 }
 
@@ -25,6 +24,7 @@ pub struct PageRule<'a> {
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct PageSelectorList<'a>(pub CommaSeparated<'a, PageSelector<'a>>);
 
 #[node]
@@ -67,6 +67,7 @@ impl<'a> ToSpecificity for PageSelector<'a> {
 
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum PagePseudoClass {
 	Left(#[semantic_eq(skip)] T![:], T![Ident]),
 	Right(#[semantic_eq(skip)] T![:], T![Ident]),
@@ -90,7 +91,7 @@ impl ToSpecificity for PagePseudoClass {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct PageRuleBlock<'a>(#[metadata(delegate)] Block<'a, StyleValue<'a>, MarginRule<'a>, CssMetadata>);
+pub struct PageRuleBlock<'a>(Block<'a, StyleValue<'a>, MarginRule<'a>, CssMetadata>);
 
 /// <https://drafts.csswg.org/cssom-1/#cssmarginrule>
 #[node]

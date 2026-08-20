@@ -26,6 +26,7 @@ pub struct Custom<'a>(pub ComponentValues<'a>);
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[parse(state = State::Nested, stop = KindSet::RIGHT_CURLY_OR_SEMICOLON)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct Unknown<'a>(pub ComponentValues<'a>);
 
 macro_rules! style_value {

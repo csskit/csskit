@@ -1,4 +1,4 @@
-use crate::ExpectedTypes;
+use crate::CssTypes;
 use css_parse::{ComponentValues, Cursor, Parse, Parser, Result};
 use csskit_derives::*;
 use csskit_proc_macro::node;
@@ -20,7 +20,8 @@ pub struct Unresolved<'a> {
 	pub tokens: ComponentValues<'a>,
 	#[peek(skip)]
 	#[semantic_eq(skip)]
-	pub expected: ExpectedTypes,
+	#[metadata(skip)]
+	pub expected: CssTypes,
 }
 
 impl<'a> Parse<'a> for Unresolved<'a> {
@@ -29,7 +30,7 @@ impl<'a> Parse<'a> for Unresolved<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let tokens = p.parse::<ComponentValues>()?;
-		Ok(Self { tokens, expected: ExpectedTypes::ANY })
+		Ok(Self { tokens, expected: CssTypes::ANY })
 	}
 }
 
@@ -41,15 +42,15 @@ mod tests {
 
 	#[test]
 	fn test_expected_types_any() {
-		assert_eq!(ExpectedTypes::ANY.bits(), !0u32);
+		assert_eq!(CssTypes::ANY.bits(), !0u32);
 	}
 
 	#[test]
 	fn test_expected_types_compose() {
-		let lp = ExpectedTypes::Length | ExpectedTypes::Percentage;
-		assert!(lp.contains(ExpectedTypes::Length));
-		assert!(lp.contains(ExpectedTypes::Percentage));
-		assert!(!lp.contains(ExpectedTypes::Color));
+		let lp = CssTypes::Length | CssTypes::Percentage;
+		assert!(lp.contains(CssTypes::Length));
+		assert!(lp.contains(CssTypes::Percentage));
+		assert!(!lp.contains(CssTypes::Color));
 	}
 
 	#[test]

@@ -23,6 +23,7 @@ pub struct CounterFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CounterFunctionParams<'a>(T![Ident], #[semantic_eq(skip)] Option<T![,]>, Option<CounterStyle<'a>>);
 
 /// <https://drafts.csswg.org/css-lists-3/#counter-functions>
@@ -46,6 +47,7 @@ pub struct CountersFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CountersFunctionParams<'a>(
 	T![Ident],
 	#[semantic_eq(skip)] Option<T![,]>,

@@ -12,7 +12,7 @@ pub enum Nth {
 	Odd(T![Ident]),
 	Even(T![Ident]),
 	Integer(CSSInt),
-	Anb(i32, i32, [Cursor; 4]),
+	Anb(#[metadata(skip)] i32, #[metadata(skip)] i32, #[metadata(skip)] [Cursor; 4]),
 }
 
 impl<'a> Peek<'a> for Nth {

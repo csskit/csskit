@@ -19,7 +19,6 @@ expression: pretty
     Ord,
     Hash
 )]
-#[metadata(delegate)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
 pub enum FooKeywords<'a> {}

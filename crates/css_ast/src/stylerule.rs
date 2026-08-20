@@ -61,7 +61,6 @@ macro_rules! nested_group_rule {
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		#[derive(csskit_derives::NodeWithMetadata)]
-		#[metadata(delegate)]
 		pub enum NestedGroupRule<'a> {
 			$(
 				$name(rules::$ty$(<$a>)?),

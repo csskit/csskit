@@ -6,6 +6,7 @@ use crate::Percentage;
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NumberOrInfinity {
 	Number(T![Number]),
 	#[atom(CssAtomSet::Infinity)]
@@ -19,6 +20,7 @@ pub enum NumberOrInfinity {
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NumberOrPercentage {
 	Number(T![Number]),
 	Percentage(Percentage),

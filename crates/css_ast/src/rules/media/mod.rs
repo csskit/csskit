@@ -31,7 +31,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for MediaRule<'a> {
 	}
 
 	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.self_metadata())
+		self.block.0.metadata().merge(self.prelude.metadata()).merge(self.self_metadata())
 	}
 }
 
@@ -44,6 +44,7 @@ pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadat
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct MediaQueryList<'a>(pub CommaSeparated<'a, MediaQuery<'a>, 1>);
 
 #[node]
@@ -92,6 +93,7 @@ pub enum MediaPreCondition {
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct MediaQuery<'a> {
 	precondition: Option<MediaPreCondition>,
 	media_type: Option<MediaType>,
@@ -146,6 +148,7 @@ impl<'a> Parse<'a> for MediaQuery<'a> {
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum MediaCondition<'a> {
 	Is(MediaFeature<'a>),
 	Not(T![Ident], MediaFeature<'a>),
@@ -203,6 +206,7 @@ macro_rules! media_feature {
 		#[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+		#[derive(csskit_derives::NodeWithMetadata)]
 		pub enum MediaFeature<'a> {
 			$($name($typ),)+
 			#[cfg_attr(feature = "visitable", visit(skip))]

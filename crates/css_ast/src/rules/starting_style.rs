@@ -16,7 +16,6 @@ pub struct StartingStyleRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::StartingStyle)]
 	pub name: T![AtKeyword],
-	#[metadata(delegate)]
 	pub block: StartingStyleRuleBlock<'a>,
 }
 
@@ -25,7 +24,7 @@ pub struct StartingStyleRule<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct StartingStyleRuleBlock<'a>(#[metadata(delegate)] pub RuleList<'a, Rule<'a>, CssMetadata>);
+pub struct StartingStyleRuleBlock<'a>(pub RuleList<'a, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {

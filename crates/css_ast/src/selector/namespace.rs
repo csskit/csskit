@@ -46,6 +46,7 @@ impl<'a> Parse<'a> for Namespace {
 #[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NamespacePrefix {
 	None(#[semantic_eq(skip)] T![|]),
 	Name(T![Ident], #[semantic_eq(skip)] T![|]),
@@ -81,6 +82,7 @@ impl<'a> Parse<'a> for NamespacePrefix {
 #[node]
 #[derive(Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NamespaceTag {
 	Wildcard(#[semantic_eq(skip)] T![*]),
 	Tag(Tag),
