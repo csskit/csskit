@@ -25,6 +25,18 @@ FAIL charset/0002
 -@charset "ISO-8859-1";@charset "ISO-8859-15";a{color:red}
 +@charset "ISO-8859-1";a{color:red}
 
+FAIL charset/0003
+-a{color:red}@charset "iso-8859-15";
++@charset "iso-8859-15";a{color:red}
+
+FAIL charset/0005
+-@charset "ISO-8859-1";.foo:before{content:""}
++@charset "ISO-8859-1";.foo:before{content:"\e61d"}
+
+FAIL charset/0006
+-.foo{color:red}@charset "ISO-8859-15";.bar{color:tan}@charset "ISO-8859-1";.baz{background:red}
++@charset 'ISO-8859-15';.foo{color:red}.bar{color:tan}.baz{background:red}
+
 FAIL colors/0031
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
 +a{color:color-mix(in oklch,#fff,var(--foo))}
@@ -44,6 +56,50 @@ FAIL colors/0034
 FAIL colors/0035
 -a{color:color(display-p3 1.2 -.3 .5)}
 +a{color:color(display-p3 1.2-.3 .5)}
+
+FAIL colors/0064
+-p{color:#5987FC00;background:#85283700;border-color:#00808000}
++p{color:#5987fc00;background:#85283700;border-color:#00808000}
+
+FAIL colors/0065
+-a{background:light-dark(var(--foo),var(--foo));color:light-dark(red,red)}
++a{background:var(--foo);color:red}
+
+FAIL colors/0067
+-a{color:light-dark(red,red)}
++a{color:red}
+
+FAIL colors/0068
+-a{color:hsl(from rebeccapurple calc(h) calc(s * 1) calc(l + 0) / calc(1 / 1))}
++a{color:#639}
+
+FAIL colors/0069
+-a{--red:#f01;--h:10;color:hsl(from var(--red) calc(var(--h)) calc(s * 2) calc(l + 1) / .6)}
++a{--red:#f01;--h:10;color:hsl(from var(--red)calc(var(--h))calc(s*2)calc(l + 1)/.6)}
+
+FAIL colors/0080
+-.b{color:oklch(62.796 .258 29.2);background:oklch(78.619 .064 74.6)}
++.b{color:red;background:tan}
+
+FAIL colors/0081
+-.c{color:oklch(.628 .2577 29.23);background:tan}
++.c{color:red;background:tan}
+
+FAIL combined/0001
+-div,span,:where(td):where(.error){border:1px dashed red;color:red}:is(div,span){border-color:red;border-style:dashed;border-width:1px;color:red}
++div,span,:where(td.error){border:1px dashed red;color:red}
+
+FAIL combined/0002
+-.a{color:red}.b{color:red}.c{color:red}.d{color:red}.e{color:red}.f{color:red}.g{color:red}.h{color:red}.i{color:red}.j{color:red}.k{color:red}.l{color:red}.m{color:red}.n{color:red}.o{color:light-dark(red,red)}.p{color:red}.q{color:red}.r{color:red}.s{color:red}.t{color:red}.u{color:red}.v{color:red}
++.a,.b,.c,.d,.e,.f,.g,.h,.i,.j,.k,.l,.m,.n,.o,.p,.q,.r,.s,.t,.u,.v{color:red}
+
+FAIL combined/0003
+-.foo{color:#001}.foo h1,.foo h2{color:#002}.foo h1{color:#003}.foo h2{color:#004}
++.foo{color:#001;h1{color:#003}h2{color:#004}}
+
+FAIL combined/0004
+-p{background:linear-gradient(to bottom,#ff0000 0%,hsl(0,100%,50%)25%,rgb(255,0,0)50%,blue 50%,#0000ff 100%);background-position:right bottom}
++p{background:linear-gradient(red 50%,#00f 0) 100% 100%}
 
 FAIL comments/0003
 -a{color:red}
@@ -80,8 +136,8 @@ FAIL duplicates/0003
 +b{margin:0}a{color:#00f;font-size:16px}
 
 FAIL duplicates/0004
--h1,h2,h3,h4,h5,h5,h6{color:red}
-+h1,h2,h3,h4,h5,h6{color:red}
+-h1,h2,h3,h4,h5,h5{color:red}
++h1,h2,h3,h4,h5{color:red}
 
 FAIL duplicates/0006
 -a{color:red!important;color:blue}
@@ -123,6 +179,18 @@ FAIL duplicates/0019
 -a{color:var(--x);color:var(--x)}
 +a{color:var(--x)}
 
+FAIL duplicates/0020
+-h1,h2{color:#001}h1{color:#002}h2{color:#003}h3,h4{margin:1rem;padding:1px}h3{padding:2px}h4{padding:3px}
++h1{color:#002}h2{color:#003}h3,h4{margin:1rem}h3{padding:2px}h4{padding:3px}
+
+FAIL duplicates/0021
+-h1::before,h1:before{content:"j"}
++h1:before{content:"j"}
+
+FAIL duplicates/0022
+-h2:before{content:"i"}h2::before{content:"j"}
++h2:before{content:"j"}
+
 FAIL empty-rules/0001
 -a{}b{color:red}
 +b{color:red}
@@ -139,9 +207,22 @@ FAIL empty-rules/0004
 -a{color:red;&b{}}
 +a{color:red}
 
+FAIL empty-rules/0005
+-nav{a{}}
+
+FAIL empty-rules/0006
+-kbd{}ul li:nth-of-type(2n){}fieldset>legend{}input[type="checkbox"]{}input[type=radio]{}legend,option{}*,*:before,*:after{}button.secondary{}#unique{}details[open]{}:focus{}a[href*=".pdf"]:after{}:is(html,body):has(:modal){}
+
+FAIL empty-rules/0007
+-@keyframes fade{0%{}50%{}100%{}}
+
 FAIL escaping/0013
 -[href="#"],[href="/"],[href="file.html"],[href=https\:\/\/example\.com]{color:red}
 +[href=\#],[href=\/],[href=file\.html],[href="https://example.com"]{color:red}
+
+FAIL escaping/0014
+-p[style$="maroon;"]{background:red}p[style="color:maroon;padding:1px;"]{background:tan}
++p[style$=maroon\;]{background:red}p[style="color:maroon;padding:1px;"]{background:tan}
 
 FAIL font-face/0002
 -@font-face{font-family:"Custom";font-display:swap}
@@ -159,6 +240,34 @@ FAIL font-face/0006
 -@font-face{font-family:test;src:local(test);unicode-range:U+0000-00FF}
 +@font-face{font-family:test;src:local(test);unicode-range:U+??}
 
+FAIL font-face/0007
+-@font-face{unicode-range:U+1F170,U+1F172,U+1F173,U+1F175,U+1F177,U+1F178,U+1F179,U+1F17A,U+1F17C-1F180}
++@font-face{unicode-range:U+1F170,U+1F172-1F173,U+1F175,U+1F177-1F17A,U+1F17C-1F180}
+
+FAIL font-face/0008
+-@font-face{unicode-range:U+2001,U+2001}
++@font-face{unicode-range:U+2001}
+
+FAIL font-face/0009
+-@font-face{unicode-range:U+2000-2002,U+2001}
++@font-face{unicode-range:U+2000-2002}
+
+FAIL font-face/0010
+-@font-face{unicode-range:U+2000-2002,U+2001-2004}
++@font-face{unicode-range:U+2000-2004}
+
+FAIL font-face/0011
+-@font-face{unicode-range:U+4??,U+399-500}
++@font-face{unicode-range:U+399-500}
+
+FAIL font-face/0012
+-@font-face{unicode-range:U+4??,U+455-555}
++@font-face{unicode-range:U+400-555}
+
+FAIL font-face/0013
+-@font-face{unicode-range:U+500-503,U+504-5FF}
++@font-face{unicode-range:U+5??}
+
 FAIL gradients/0001
 -a{background:linear-gradient(to bottom,red,blue)}
 +a{background:linear-gradient(red,#00f)}
@@ -172,12 +281,36 @@ FAIL gradients/0003
 +a{background:linear-gradient(90deg,red,#00f)}
 
 FAIL gradients/0004
--a{background:linear-gradient(red 0%,blue 100%)}
-+a{background:linear-gradient(red,#00f)}
+-a{background:linear-gradient(red 0%,tan 25%,#00f 100%)}
++a{background:linear-gradient(red,tan 25%,#00f)}
 
 FAIL gradients/0005
 -a{background:radial-gradient(ellipse at center,red,blue)}
 +a{background:radial-gradient(red,#00f)}
+
+FAIL gradients/0006
+-p{background:linear-gradient(red 0%,red 50%,tan 50%,tan 100%)}
++p{background:linear-gradient(red 50%,tan 0)}
+
+FAIL gradients/0007
+-p{background:linear-gradient(#fff,red 25%,red 35%,red 50%,tan 50%,tan 75%,tan 85%,#fff)}
++p{background:linear-gradient(#fff,red 25% 50%,tan 0 85%,#fff)}
+
+FAIL gradients/0008
+-p{background:linear-gradient(red 0% 40%,tan 0 70%,#00f 0 100%)}
++p{background:linear-gradient(red 40%,tan 0 70%,#00f 0)}
+
+FAIL gradients/0009
+-p{background:linear-gradient(red 40%,tan 40% 70%,#00f 70%)}
++p{background:linear-gradient(red 40%,tan 0 70%,#00f 0)}
+
+FAIL gradients/0010
+-p{background:radial-gradient(circle farthest-side at 0% 0%,#000 0% 25%,#ff0 50% 100%,#000 100% 100%)}
++p{background:radial-gradient(circle farthest-side at 0% 0%,#000 25%,#ff0 50% 100%,#000)}
+
+FAIL gradients/0011
+-p{background:radial-gradient(circle farthest-side at 0% 0%,#0ff 0% 0%,#000 0% 25%,#ff0 50%)}
++p{background:radial-gradient(circle farthest-side at 0% 0%,#0ff,#000 0 25%,#ff0 50%)}
 
 FAIL import/0005
 -@import url("foo.css") layer(base) supports(foo:bar);
@@ -199,13 +332,9 @@ FAIL layer/0002
 -@layer base{a{color:blue}}@layer utilities{a{color:red}}@layer base{a{font-weight:bold}}
 +@layer base{a{color:#00f;font-weight:700}}@layer utilities{a{color:red}}
 
-FAIL media/0002
--@media screen{@media(width>=768px){a{color:red}}}
-+@media screen{@media (width>=768px){a{color:red}}}
-
 FAIL media/0003
 -@media all and (width>=500px){a{color:red}}
-+@media (width>=500px){a{color:red}}
++@media(width>=500px){a{color:red}}
 
 FAIL media/0004
 -@media screen and (width>=768px){a{color:red}}@media screen and (width>=768px){b{margin:0}}
@@ -213,23 +342,27 @@ FAIL media/0004
 
 FAIL media/0005
 -@media(min-width:768px){a{color:red}}
-+@media (width>=768px){a{color:red}}
++@media(width>=768px){a{color:red}}
 
 FAIL media/0006
 -@media(max-width:1024px){a{color:red}}
-+@media (width<=1024px){a{color:red}}
++@media(width<=1024px){a{color:red}}
 
 FAIL media/0007
 -@media(min-height:600px){a{color:red}}
-+@media (height>=600px){a{color:red}}
++@media(height>=600px){a{color:red}}
 
 FAIL media/0008
 -@media(max-height:900px){a{color:red}}
-+@media (height<=900px){a{color:red}}
++@media(height<=900px){a{color:red}}
 
 FAIL media/0009
 -@media(min-width:768px)and (max-width:1024px){a{color:red}}
-+@media (768px<=width<=1024px){a{color:red}}
++@media(768px<=width<=1024px){a{color:red}}
+
+FAIL media/0010
+-@custom-media --modern (color),(hover);@media (--modern){a{color:red}}
++@custom-media --modern (color),(hover);@media(--modern){a{color:red}}
 
 FAIL merging/0001
 -a{color:red}a{font-size:16px}
@@ -254,10 +387,6 @@ FAIL merging/0005
 FAIL merging/0006
 -@keyframes fade{0%{opacity:0}100%{opacity:1}}@keyframes fade{0%{opacity:.5}100%{opacity:1}}
 +@keyframes fade{0%{opacity:.5}to{opacity:1}}
-
-FAIL merging/0008
--@media(width>=1px){a{color:red}}a{color:green}@media(width>=1px){a{background:#0b0}}
-+@media (width>=1px){a{color:red}}a{color:green}@media (width>=1px){a{background:#0b0}}
 
 FAIL nesting/0007
 -.foo{color:red;&.bar{margin:0}}
@@ -303,8 +432,65 @@ FAIL nesting/0019
 -.foo{.bar{color:red;font-size:1rem}.bar{color:red;font-size:1rem}}
 +.foo .bar{color:red;font-size:1rem}
 
+FAIL nesting/0020
+-.foo .a{margin:1px}.foo .b{margin:2px}.foo .c{margin:3px}.foo .d{margin:4px}
++.foo{.a{margin:1px}.b{margin:2px}.c{margin:3px}.d{margin:4px}}
+
+FAIL nesting/0021
+-.a{.b.c{color:red}.d.e,.f.g{color:red}}
++.a{.b.c,.d.e,.f.g{color:red}}
+
+FAIL nesting/0023
+-.a{#b.c{color:red}.d.e,#f.g{color:red}}
++.a{#b.c,.d.e,#f.g{color:red}}
+
+FAIL nesting/0024
+-.foo{color:red;&::after{content:""}&::before{content:""}}
++.foo{color:red;&:after,&:before{content:""}}
+
+FAIL nesting/0025
+-input{&:not(:active){opacity:.5}&[disabled]{opacity:.5}}
++input{&:not(:active),&[disabled]{opacity:.5}}
+
+FAIL nesting/0026
+-a{&:hover{color:red}}
++a:hover{color:red}
+
+FAIL nesting/0027
+-.foo{&.bar{color:red}}
++.foo.bar{color:red}
+
+FAIL nesting/0028
+-.a{color:red}.a~.b{color:tan}
++.a{color:red;~.b{color:tan}}
+
+FAIL nesting/0029
+-.foo{color:red;&p{margin:0}&#bar{padding:0}&*{border:0}}
++.foo{color:red;p{margin:0}#bar{padding:0}*{border:0}}
+
+FAIL nesting/0030
+-.foo{color:#000;.bar{color:red}}.foo .bar{color:red}
++.foo{color:#000;.bar{color:red}}
+
+FAIL nesting/0032
+-:is(#a,.b),.c{.d{color:red}}
++#a,.b,.c{.d{color:red}}
+
 FAIL page/0003
 -@page{}
+
+FAIL property/0004
+-@property --foo{}
+
+FAIL property/0005
+-@property --foo{inherits:false;initial-value:16px}
+
+FAIL property/0006
+-@property --foo{syntax:"<length>";initial-value:16px}
+
+FAIL property/0007
+-@property --foo{syntax:"<length> | <percentage>";inherits:false;initial-value:16px}
++@property --foo{syntax:"<length>|<percentage>";inherits:false;initial-value:16px}
 
 FAIL scope/0003
 -@scope(.card){}
@@ -354,8 +540,8 @@ FAIL selectors-advanced/0014
 +:is(.bar,.example,.foo,:visited,a,h1,h2,p){color:red}
 
 FAIL selectors-advanced/0015
--:is(h1,h1,h2){color:red}
-+:is(h1,h2){color:red}
+-:is(.foo,.foo,h1,h1){color:red}
++:is(.foo,h1){color:red}
 
 FAIL selectors-advanced/0016
 -:is(:visited,:link,:where(.link)){color:red}
@@ -365,6 +551,30 @@ FAIL selectors-advanced/0017
 -:is(h2,:link,h1,:visited,h1,:any-link,div){color:red}
 +:is(:any-link,div,h1,h2){color:red}
 
+FAIL selectors-advanced/0018
+-:where(.foo):where([bar]){color:red}
++:where(.foo[bar]){color:red}
+
+FAIL selectors-advanced/0019
+-:where(.foo):where(.bar,.baz){color:red}
++:where(.foo.bar,.foo.baz){color:red}
+
+FAIL selectors-advanced/0021
+-:where(:hover):where(a){color:red}
++:where(a:hover){color:red}
+
+FAIL selectors-advanced/0023
+-:is(div,span,div,span){color:red}:is(.bar,.foo,.bar,.foo){color:tan}
++div,span{color:red}.bar,.foo{color:tan}
+
+FAIL selectors-advanced/0024
+-:is(custom-component,custom-component,div,div){color:red}
++custom-component,div{color:red}
+
+FAIL selectors-advanced/0025
+-:is(:foo,:foo,:hover,:hover){color:red}
++:is(:foo,:hover){color:red}
+
 FAIL selectors/0001
 -a:nth-child(2n+ 1){color:red}
 +a:nth-child(odd){color:red}
@@ -372,10 +582,6 @@ FAIL selectors/0001
 FAIL selectors/0002
 -a:nth-child(2n+ 0){color:red}
 +a:nth-child(2n){color:red}
-
-FAIL selectors/0003
--a:nth-child(+ 5){color:red}
-+a:nth-child(5){color:red}
 
 FAIL selectors/0004
 -a:nth-child(0n+ 3){color:red}
@@ -412,6 +618,10 @@ FAIL selectors/0013
 FAIL selectors/0014
 -a[href="foo"]{color:red}
 +a[href=foo]{color:red}
+
+FAIL selectors/0016
+-[class="foo bar"]{color:red}
++[class=foo\ bar]{color:red}
 
 FAIL shorthands/0001
 -a{margin:10px 10px 10px 10px}
@@ -579,7 +789,7 @@ FAIL shorthands/0043
 
 FAIL shorthands/0044
 -a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:#0000}
-+a{border:4px solid transparent;border-image:url(border.png) 30 round}
++a{border:4px solid #0000;border-image:url(border.png) 30 round}
 
 FAIL shorthands/0045
 -a{font-variant-ligatures:no-common-ligatures;font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
@@ -598,16 +808,16 @@ FAIL shorthands/0048
 +a{font:14px/1.4 Georgia,serif;font-kerning:none}
 
 FAIL shorthands/0049
--a{mask-border:url(mask.png)25/10px round;mask-image:linear-gradient(black,transparent);mask-size:cover;mask-repeat:no-repeat}
-+a{mask:linear-gradient(#000,transparent) no-repeat/cover;mask-border:url(mask.png) 25/10px round}
+-a{mask-border:url(mask.png)25/10px round;mask-image:linear-gradient(#000,#0000);mask-size:cover;mask-repeat:no-repeat}
++a{mask:linear-gradient(#000,#0000) no-repeat/cover;mask-border:url(mask.png) 25/10px round}
 
 FAIL shorthands/0050
--a{mask-image:linear-gradient(black,transparent);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
-+a{mask:linear-gradient(#000,transparent) no-repeat;mask-border:url(mask.png) 25 round}
+-a{mask-image:linear-gradient(#000,#0000);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
++a{mask:linear-gradient(#000,#0000) no-repeat;mask-border:url(mask.png) 25 round}
 
 FAIL shorthands/0051
--a{mask-border:url(mask.png)25 round;mask:linear-gradient(black,transparent)}
-+a{mask:linear-gradient(#000,transparent)}
+-a{mask-border:url(mask.png)25 round;mask:linear-gradient(#000,#0000)}
++a{mask:linear-gradient(#000,#0000)}
 
 FAIL shorthands/0052
 -a{font-variation-settings:"wght"600,"wdth"75;font-style:normal;font-weight:400;font-size:18px;line-height:1.6;font-family:Inter,sans-serif}
@@ -676,6 +886,22 @@ FAIL shorthands/0073
 FAIL shorthands/0074
 -a{flex:0 0 0}
 +a{flex:0 0}
+
+FAIL shorthands/0075
+-a{background-position-x:100%;background-position-y:100%}
++a{background-position:100% 100%}
+
+FAIL shorthands/0076
+-a{background-color:red;background-image:linear-gradient(red,tan);background-position-x:100%;background-position-y:100%;background-repeat:no-repeat;background-attachment:fixed;background-size:contain;background-origin:padding-box;background-clip:content-box}
++a{background:red linear-gradient(red,tan)100% 100%/contain no-repeat fixed padding-box content-box}
+
+FAIL shorthands/0078
+-div{border-top:1px solid red;border-right:1px solid red;border-bottom:1px solid red;border-left:1px solid red}
++div{border:1px solid red}
+
+FAIL shorthands/0079
+-a{border-width:50px;border-style:solid;border-color:#0000 red}
++a{border:50px solid #0000;border-color:#0000 red}
 
 FAIL supports/0001
 -@supports(hanging-punctuation:first){a{hanging-punctuation:first}}
@@ -815,7 +1041,7 @@ FAIL values/0033
 
 FAIL values/0034
 -a{animation:steps(1,start)fade}
-+a{animation:fade step-start}
++a{animation:step-start fade}
 
 FAIL values/0035
 -a{background-position:left top}
@@ -933,6 +1159,46 @@ FAIL values/0067
 -a{margin:initial}
 +a{margin:0}
 
+FAIL values/0068
+-a{background-color:initial}
++a{background-color:#0000}
+
 FAIL values/0070
 -@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:rgb(0 0 0)}
 +@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:#000}
+
+FAIL values/0071
+-.a{transition-duration:0s}.b{transition:color 99ms}.c{transition:color .1s}.d{transition-duration:2s}.e{transition-delay:1234ms}
++.a{transition-duration:0s}.b{transition:color 99ms}.c{transition:color .1s}.d{transition-duration:2s}.e{transition-delay:1.234s}
+
+FAIL values/0072
+-.a{background-position:left}.b{background-position:center}.c{background-position:bottom}.d{background-position:left top}.e{background-position:center center}.f{background-position:right bottom}.g{background-position:10px top}.h{background-position:right 10% bottom 20%}
++.a{background-position:0}.b{background-position:50%}.c{background-position:bottom}.d{background-position:0 0}.e{background-position:50%}.f{background-position:100% 100%}.g{background-position:top 10px}.h{background-position:right 10% bottom 20%}
+
+FAIL values/0074
+-.a{quotes:"a";color:red}.b{quotes:"a" "b" "c";color:tan}
++.a{color:red}.b{color:tan}
+
+FAIL values/0075
+-.a{quotes:""""}.b{color:red}.c{quotes:""""""""}.d{color:tan}.e{quotes:none}
++.a{quotes:none}.b{color:red}.c{quotes:none}.d{color:tan}.e{quotes:none}
+
+FAIL values/0076
+-a{background-image:url(./folder/file.png)}
++a{background-image:url(folder/file.png)}
+
+FAIL values/0077
+-.a{background-image:url("no-spaces.png")}.b{mask-image:url("one space.svg")}.c{background-image:url("more than one space.png")}
++.a{background-image:url(no-spaces.png)}.b{mask-image:url(one\ space.svg)}.c{background-image:url("more than one space.png")}
+
+FAIL whitespace/0020
+-:root{--dropShadow:.02em -.02em .015em #45A6,-.02em .02em .015em #45A6,-.02em -.02em .02em #DEFA,.02em .02em .03em #106A,.1em .1em .09em #246A}
++:root{--dropShadow:.02em -.02em .015em #45A6, -.02em .02em .015em #45A6, -.02em -.02em .020em #DEFA, .02em .02em .030em #106A, .10em .10em .090em #246A}
+
+FAIL whitespace/0021
+-a{--foo:(var(--bar,1.5) * 1em)}
++a{--foo:( var(--bar,1.5) * 1em )}
+
+FAIL zero-units/0013
+-.a{transition:color 0s}.b{transition:background 0s}
++.a{transition:color}.b{transition:background}
