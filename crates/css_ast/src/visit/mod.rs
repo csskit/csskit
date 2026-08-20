@@ -135,14 +135,13 @@ pub(crate) trait QueryableNode: ToSpan + NodeWithMetadata<CssMetadata> {
 
 	/// Builds the [`VisitNode`] passed to every `Visit` callback for this node.
 	///
-	/// `subtree_metadata` (eager) uses `metadata()` (self + subtree) so the prune gate can
-	/// reject whole subtrees; `self_metadata`/properties are deferred to `&dyn` accessors so
-	/// they only cost anything when a visitor actually reads them.
+	/// Metadata and properties are reached through `&dyn` accessors, so they only cost anything
+	/// when a visitor actually reads them - `subtree_metadata` in particular walks the subtree.
 	fn visit_node(&self) -> VisitNode<'_>
 	where
 		Self: Sized,
 	{
-		VisitNode::new(self.to_span(), Self::NODE_ID, self.metadata(), self)
+		VisitNode::new(self.to_span(), Self::NODE_ID, self)
 	}
 }
 
@@ -151,6 +150,10 @@ impl<T: QueryableNode> QueryNodeData for T {
 	#[inline]
 	fn self_metadata(&self) -> CssMetadata {
 		NodeWithMetadata::self_metadata(self)
+	}
+	#[inline]
+	fn subtree_metadata(&self) -> CssMetadata {
+		NodeWithMetadata::metadata(self)
 	}
 	#[inline]
 	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
@@ -442,9 +445,7 @@ where
 
 	fn visit_node(&self) -> VisitNode<'_> {
 		// Use T::NODE_ID so each declaration type has its own identity.
-		// Use metadata() (aggregated) for the eager subtree facts; self_metadata/properties
-		// stay deferred via the &dyn.
-		VisitNode::new(self.to_span(), T::NODE_ID, self.metadata(), self)
+		VisitNode::new(self.to_span(), T::NODE_ID, self)
 	}
 }
 

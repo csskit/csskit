@@ -4,6 +4,7 @@ use super::prelude::*;
 #[derive(ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct CSSFloat(T![Number]);
 
 impl CSSFloat {

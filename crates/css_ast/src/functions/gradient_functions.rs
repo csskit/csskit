@@ -45,6 +45,7 @@ pub struct LinearGradientFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct LinearGradientFunctionParams<'a>(
 	Option<LinearDirection<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
@@ -73,6 +74,7 @@ pub struct RepeatingLinearGradientFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RepeatingLinearGradientFunctionParams<'a>(
 	Option<LinearDirection<'a>>,
 	#[semantic_eq(skip)] Option<T![,]>,
@@ -103,6 +105,7 @@ pub struct RadialGradientFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RadialGradientFunctionParams<'a>(
 	Option<RadialSize<'a>>,
 	Option<RadialShape>,
@@ -136,6 +139,7 @@ pub struct RepeatingRadialGradientFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct RepeatingRadialGradientFunctionParams<'a>(
 	Option<RadialSize<'a>>,
 	Option<RadialShape>,
@@ -150,6 +154,7 @@ pub struct RepeatingRadialGradientFunctionParams<'a>(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum NamedDirection {
 	#[atom(CssAtomSet::Bottom)]
 	Bottom(T![Ident]),
@@ -164,6 +169,7 @@ pub enum NamedDirection {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum LinearDirection<'a> {
 	Angle(CalcableValue<'a, Angle>),
 	Named(#[atom(CssAtomSet::To)] T![Ident], NamedDirection, Option<NamedDirection>),
@@ -179,6 +185,7 @@ pub enum LinearDirection<'a> {
 #[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum RadialSize<'a> {
 	Extent(RadialExtent, Option<RadialExtent>),
 	Circular(CalcableValue<'a, LengthPercentage>),
@@ -195,6 +202,7 @@ pub enum RadialSize<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum RadialExtent {
 	#[atom(CssAtomSet::ClosestCorner)]
 	ClosestCorner(T![Ident]),
@@ -233,6 +241,7 @@ impl<'a> Parse<'a> for RadialSize<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum RadialShape {
 	#[atom(CssAtomSet::Circle)]
 	Circle(T![Ident]),
@@ -243,6 +252,7 @@ pub enum RadialShape {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ColorStopOrHint<'a> {
 	Hint(CalcableValue<'a, LengthPercentage>),
 	Stop(Color<'a>, Option<CalcableValue<'a, LengthPercentage>>),

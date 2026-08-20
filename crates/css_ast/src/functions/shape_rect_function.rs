@@ -24,6 +24,7 @@ pub struct ShapeRectFunction<'a> {
 #[syntax(" [ <length-percentage> | auto ]{4} [ round <'border-radius'> ]? ")]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ShapeRectFunctionParams<'a>;
 
 #[cfg(test)]

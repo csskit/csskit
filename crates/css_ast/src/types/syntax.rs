@@ -19,6 +19,7 @@ use super::prelude::*;
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum Syntax<'a> {
 	Universal(T![*]),
 	Components(SyntaxComponent, Vec<'a, (T![|], SyntaxComponent)>),
@@ -35,6 +36,7 @@ pub enum Syntax<'a> {
 #[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SyntaxComponent {
 	Type(T![<], SyntaxTypeName, T![>], Option<SyntaxMultiplier>),
 	TransformList(T![<], T![Ident], T![>]),
@@ -101,6 +103,7 @@ impl<'a> Parse<'a> for SyntaxComponent {
 	Parse, Peek, IntoCursor, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SyntaxTypeName {
 	#[atom(CssAtomSet::Angle)]
 	Angle(T![Ident]),
@@ -140,6 +143,7 @@ pub enum SyntaxTypeName {
 	Parse, Peek, IntoCursor, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum SyntaxMultiplier {
 	Hash(T![#]),
 	Plus(T![+]),

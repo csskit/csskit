@@ -14,6 +14,7 @@ pub use system::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(NodeWithMetadata)]
+#[metadata(value_kinds = Color)]
 pub enum Color<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Currentcolor)]

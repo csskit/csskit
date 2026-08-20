@@ -38,7 +38,7 @@ pub enum ColorSpace {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CommaOrSlash(Cursor);
+pub struct CommaOrSlash(#[metadata(skip)] Cursor);
 
 impl<'a> Peek<'a> for CommaOrSlash {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Delim]);

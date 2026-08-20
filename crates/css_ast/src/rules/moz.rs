@@ -12,7 +12,6 @@ pub struct MozDocumentRule<'a> {
 	#[atom(CssAtomSet::_MozDocument)]
 	pub name: T![AtKeyword],
 	pub prelude: DocumentMatcherList<'a>,
-	#[metadata(delegate)]
 	pub block: DocumentRuleBlock<'a>,
 }
 

@@ -14,6 +14,7 @@ discrete_feature!(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[node]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum AnyPointerMediaFeatureKeyword {
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),

@@ -22,6 +22,7 @@ pub struct SnapBlockFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct SnapBlockFunctionParams<'a>(
 	CalcableValue<'a, LengthPercentage>,
 	#[semantic_eq(skip)] Option<T![,]>,

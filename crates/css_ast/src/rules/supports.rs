@@ -46,7 +46,6 @@ pub struct SupportsRule<'a> {
 	#[atom(CssAtomSet::Supports)]
 	pub name: T![AtKeyword],
 	pub prelude: SupportsCondition<'a>,
-	#[metadata(delegate)]
 	pub block: SupportsRuleBlock<'a>,
 }
 
@@ -55,7 +54,7 @@ pub struct SupportsRule<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct SupportsRuleBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
+pub struct SupportsRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

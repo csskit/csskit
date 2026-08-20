@@ -23,6 +23,7 @@ pub struct ImageSetFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ImageSetParams<'a> {
 	Image(Image<'a>, Option<ResolutionOrType<'a>>),
 	String(T![String], Option<ResolutionOrType<'a>>),
@@ -31,6 +32,7 @@ pub enum ImageSetParams<'a> {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum ResolutionOrType<'a> {
 	Resolution(CalcableValue<'a, Resolution>),
 	Type(#[atom(CssAtomSet::Type)] T![Function], T![String], #[semantic_eq(skip)] T![')']),

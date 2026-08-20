@@ -24,7 +24,6 @@ pub struct ScopeRule<'a> {
 	pub name: T![AtKeyword],
 	pub start: Option<Box<'a, ScopeStart<'a>>>,
 	pub end: Option<Box<'a, ScopeEnd<'a>>>,
-	#[metadata(delegate)]
 	pub block: ScopeRuleBlock<'a>,
 }
 
@@ -32,6 +31,7 @@ pub struct ScopeRule<'a> {
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScopeStart<'a>(
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -46,6 +46,7 @@ pub struct ScopeStart<'a>(
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ScopeEnd<'a>(
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::To)]
@@ -64,7 +65,7 @@ pub struct ScopeEnd<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct ScopeRuleBlock<'a>(#[metadata(delegate)] pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
+pub struct ScopeRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 
 #[cfg(test)]
 mod tests {

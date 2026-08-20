@@ -18,6 +18,7 @@ pub struct FeatureTagValue<'a>(pub OpentypeTag, pub Option<FeatureTagToggle<'a>>
 #[derive(Parse, Peek, ToSpan, SemanticEq, ToCursors, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum FeatureTagToggle<'a> {
 	#[atom(CssAtomSet::On)]
 	On(T![Ident]),

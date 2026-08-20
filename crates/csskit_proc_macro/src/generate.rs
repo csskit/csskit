@@ -528,7 +528,6 @@ fn keyword_enum(name: &Ident, keywords: Vec<&Def>) -> TokenStream {
 			::csskit_derives::SemanticEq,
 			::csskit_derives::NodeWithMetadata,
 			Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-		#[metadata(delegate)]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(skip))]
 		pub enum #name<'a> {
@@ -815,7 +814,6 @@ impl DefExt for Def {
 					::csskit_derives::SemanticEq,
 					::csskit_derives::NodeWithMetadata,
 					Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-				#[metadata(delegate)]
 				#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 				#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 				#def
@@ -861,7 +859,6 @@ impl DefExt for Def {
 						::csskit_derives::SemanticEq,
 						::csskit_derives::NodeWithMetadata,
 						Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-					#[metadata(delegate)]
 					#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 					#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
 					#def

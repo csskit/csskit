@@ -22,6 +22,7 @@ pub struct ParamFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct ParamFunctionParams<'a> {
 	pub ident: T![DashedIdent],
 	#[semantic_eq(skip)]

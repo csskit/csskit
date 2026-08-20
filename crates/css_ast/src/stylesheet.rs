@@ -99,7 +99,6 @@ pub struct UnknownAtRule<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Unknown)]
 pub struct UnknownQualifiedRule<'a>(
-	#[metadata(delegate)]
 	QualifiedRule<
 		'a,
 		UnknownRuleBlock<'a>,
@@ -119,7 +118,6 @@ macro_rules! rule {
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(untagged))]
 		#[derive(csskit_derives::NodeWithMetadata)]
-		#[metadata(delegate)]
 		pub enum Rule<'a> {
 			$(
 				$name(rules::$ty$(<$a>)?),

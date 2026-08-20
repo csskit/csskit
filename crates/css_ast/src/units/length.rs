@@ -71,7 +71,7 @@ macro_rules! define_length {
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 		#[derive(csskit_derives::NodeWithMetadata)]
-		#[metadata(node_kinds = Dimension)]
+		#[metadata(node_kinds = Dimension, value_kinds = Length)]
 		pub enum Length {
 			Zero(Exact<T![Number], 0>),
 			$(

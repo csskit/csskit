@@ -144903,7 +144903,7 @@ StyleSheet(
                     )),
                   ],
                 ),
-                expected: ExpectedTypes(
+                expected: CssTypes(
                   bits: 4294967295,
                 ),
               ),
@@ -185581,7 +185581,7 @@ StyleSheet(
                     )),
                   ],
                 ),
-                expected: ExpectedTypes(
+                expected: CssTypes(
                   bits: 4294967295,
                 ),
               ),
@@ -211545,7 +211545,7 @@ StyleSheet(
                     )),
                   ],
                 ),
-                expected: ExpectedTypes(
+                expected: CssTypes(
                   bits: 4294967295,
                 ),
               ),

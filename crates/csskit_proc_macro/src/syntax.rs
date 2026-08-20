@@ -70,16 +70,6 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 		derives_node_with_metadata,
 	);
 
-	// For types deriving NodeWithMetadata, add #[metadata(delegate)] so generated value fields
-	// propagate their metadata (e.g. DeclarationKind::Computed from var()/calc()). Enums delegate
-	// per-variant; structs merge all fields. All generated field types implement NodeWithMetadata
-	// (token types via no-op impls, value wrappers and helper types via their own impls).
-	let metadata_delegate = if derives_node_with_metadata {
-		quote! { #[metadata(delegate)] }
-	} else {
-		quote! {}
-	};
-
 	let additonal_defs = crate::layout::annotate_items(&additonal_defs);
 	let def = crate::layout::annotate_items(&def);
 
@@ -87,7 +77,6 @@ pub fn generate(defs: Def, ast: DeriveInput) -> TokenStream {
 		#additonal_defs
 
 		#(#attrs)*
-		#metadata_delegate
 		#def
 	}
 }

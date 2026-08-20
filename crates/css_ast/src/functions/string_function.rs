@@ -21,6 +21,7 @@ pub struct StringFunction {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct StringFunctionParams {
 	pub ident: T![Ident],
 	#[semantic_eq(skip)]
@@ -31,6 +32,7 @@ pub struct StringFunctionParams {
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum StringKeyword {
 	#[atom(CssAtomSet::First)]
 	First(T![Ident]),

@@ -28,7 +28,6 @@ pub struct FontPaletteValuesRule<'a> {
 	#[atom(CssAtomSet::FontPaletteValues)]
 	pub name: T![AtKeyword],
 	pub prelude: PaletteIdentifier,
-	#[metadata(delegate)]
 	pub block: FontPaletteValuesRuleBlock<'a>,
 }
 
@@ -49,15 +48,14 @@ impl<'a> QueryableNode for FontPaletteValuesRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct FontPaletteValuesRuleBlock<'a>(
-	#[metadata(delegate)] DeclarationList<'a, FontPaletteValuesRuleStyleValue<'a>, CssMetadata>,
-);
+pub struct FontPaletteValuesRuleBlock<'a>(DeclarationList<'a, FontPaletteValuesRuleStyleValue<'a>, CssMetadata>);
 
 /// The descriptors allowed inside a [`FontPaletteValuesRule`] block.
 #[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum FontPaletteValuesRuleStyleValue<'a> {
 	FontFamily(FontPaletteValuesFontFamilyValue<'a>),
 	BasePalette(BasePaletteValue<'a>),
@@ -94,12 +92,6 @@ impl<'a> DeclarationValue<'a, CssMetadata> for FontPaletteValuesRuleStyleValue<'
 			CssAtomSet::OverrideColors => Self::OverrideColors(p.parse::<OverrideColorsValue<'a>>()?),
 			_ => Self::Unknown(p.parse::<ComponentValues<'a>>()?),
 		})
-	}
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for FontPaletteValuesRuleStyleValue<'a> {
-	fn metadata(&self) -> CssMetadata {
-		CssMetadata::default()
 	}
 }
 

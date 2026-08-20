@@ -24,6 +24,7 @@ pub struct AttrFunction<'a> {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct AttrFunctionParams<'a>(
 	AttrName,
 	Option<AttrType<'a>>,
@@ -37,6 +38,7 @@ pub struct AttrFunctionParams<'a>(
 #[node]
 #[derive(ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct AttrName(pub Option<T![Ident]>, #[semantic_eq(skip)] pub Option<T![|]>, pub Option<T![Ident]>);
 
 impl<'a> Peek<'a> for AttrName {
@@ -75,6 +77,7 @@ impl<'a> Parse<'a> for AttrName {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub enum AttrType<'a> {
 	#[atom(CssAtomSet::Type)]
 	Type(T![Function], Syntax<'a>, #[semantic_eq(skip)] T![')']),
