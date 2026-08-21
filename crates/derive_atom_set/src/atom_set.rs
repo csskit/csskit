@@ -1,6 +1,6 @@
 use heck::ToKebabCase;
 use itertools::Itertools;
-use proc_macro2::TokenStream as TokenStream2;
+use proc_macro2::{Literal, TokenStream as TokenStream2};
 use quote::{format_ident, quote};
 use syn::{Attribute, Data, DeriveInput, LitStr, Variant};
 
@@ -67,11 +67,42 @@ fn string_to_multi_u128_keys(s: &str) -> Vec<u128> {
 	keys
 }
 
+// The u64/u128 lookups case fold with `b |= (b & 0x40) >> 1`, which also folds the punctuation
+// either side of A-Z. A byte is safe for that fold if the set of inputs folding to it is exactly
+// the set of its ASCII case variants; atoms holding any other byte match byte-wise instead.
+fn is_fold_safe(s: &str) -> bool {
+	s.bytes().map(|b| b.to_ascii_lowercase()).all(|atom_byte| {
+		(0..=u8::MAX).all(|b| ((b | ((b & 0x40) >> 1)) == atom_byte) == (b.to_ascii_lowercase() == atom_byte))
+	})
+}
+
+// A byte is safe for the `& 0x40` fold if the set of inputs that fold to it is exactly the set of
+// its ASCII case variants. Groups holding any other byte fold with a wider sequence that touches
+// only A-Z, and that cannot carry between lanes.
+fn generate_fold(fold_safe: bool, width: usize) -> TokenStream2 {
+	let repeat =
+		|byte: u8| Literal::u128_unsuffixed((0..width).fold(0u128, |acc, i| acc | ((byte as u128) << (i * 8))));
+	if fold_safe {
+		let ones = repeat(0x40);
+		quote! { key |= (key & #ones) >> 1; }
+	} else {
+		let low_bits = repeat(0x7f);
+		let ge_a = repeat(0x3f);
+		let gt_z = repeat(0x25);
+		let high_bits = repeat(0x80);
+		quote! {
+			let low = key & #low_bits;
+			key |= ((low + #ge_a) & !(low + #gt_z) & !key & #high_bits) >> 2;
+		}
+	}
+}
+
 fn generate_u64_lookup_fn(
 	fn_name: &proc_macro2::Ident,
 	group: &[(&proc_macro2::Ident, String)],
 	len: usize,
 	default_variant: &proc_macro2::Ident,
+	fold_safe: bool,
 ) -> TokenStream2 {
 	let keys: Vec<u64> = group
 		.iter()
@@ -93,12 +124,13 @@ fn generate_u64_lookup_fn(
 			let mut key = u64::from_le_bytes(bytes);
 		}
 	};
+	let fold = generate_fold(fold_safe, 8);
 
 	quote! {
 	#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
 			#key_computation
-			key |= (key & 0x4040404040404040) >> 1;
+			#fold
 			match key {
 				#( #keys => Self::#variants, )*
 				_ => Self::#default_variant,
@@ -112,6 +144,7 @@ fn generate_u128_lookup_fn(
 	group: &[(&proc_macro2::Ident, String)],
 	len: usize,
 	default_variant: &proc_macro2::Ident,
+	fold_safe: bool,
 ) -> TokenStream2 {
 	let keys: Vec<u128> = group
 		.iter()
@@ -133,12 +166,13 @@ fn generate_u128_lookup_fn(
 			let mut key = u128::from_le_bytes(bytes);
 		}
 	};
+	let fold = generate_fold(fold_safe, 16);
 
 	quote! {
 	#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
 			#key_computation
-			key |= (key & 0x40404040404040404040404040404040) >> 1;
+			#fold
 			match key {
 				#( #keys => Self::#variants, )*
 				_ => Self::#default_variant,
@@ -259,6 +293,7 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 
 			let len_usize = len as usize;
 			let fn_name = format_ident!("match_str_of_len_{}", len_usize);
+			let fold_safe = group.iter().all(|(_, string)| is_fold_safe(string));
 
 			// Choose the appropriate strategy based on string length
 			let fn_match = if len_usize == 1 {
@@ -266,16 +301,17 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 				generate_ascii_table_1char_fn(&fn_name, &group, default_variant, ident)
 			} else if len_usize <= 8 {
 				// Use u64 lookup table for strings 4-8 chars
-				generate_u64_lookup_fn(&fn_name, &group, len_usize, default_variant)
+				generate_u64_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe)
 			} else if len_usize <= 16 {
 				// Use u128 lookup table for strings 9-16 chars
-				generate_u128_lookup_fn(&fn_name, &group, len_usize, default_variant)
+				generate_u128_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe)
 			} else {
 				// Use multiple u128 chunks for very long strings (>16)
 				generate_multi_u128_lookup_fn(&fn_name, &group, len_usize, default_variant)
 			};
 
 			let idents: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
+
 			Some((
 				fn_match,
 				(
@@ -331,5 +367,23 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 				*self as u32
 			}
 		}
+	}
+}
+
+#[cfg(test)]
+mod tests {
+	use super::is_fold_safe;
+
+	#[test]
+	fn fold_safety_follows_the_reachable_byte_set() {
+		assert!(is_fold_safe("border-block-end-width"));
+		assert!(is_fold_safe("ADD"));
+		assert!(is_fold_safe("100%"));
+		assert!(is_fold_safe(":"));
+
+		assert!(!is_fold_safe("a_b"));
+		assert!(!is_fold_safe("a[b"));
+		assert!(!is_fold_safe("a{b"));
+		assert!(!is_fold_safe("café"));
 	}
 }
