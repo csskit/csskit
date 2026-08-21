@@ -90,3 +90,62 @@ fn test() {
 	assert_eq!(TestAtomSet::ExtremelyLongAtomString.to_str(), "extremely-long-atom-string");
 	assert_eq!(TestAtomSet::SuperLongAtomStringForTesting.to_str(), "super-long-atom-string-for-testing");
 }
+
+#[derive(AtomSet, Debug, Clone, Copy, PartialEq, Eq)]
+enum PunctuationAtomSet {
+	#[default]
+	_None,
+
+	#[atom("_")]
+	Underscore,
+	#[atom("a_b")]
+	ShortUnderscore,
+	#[atom("a[b")]
+	ShortBracket,
+	#[atom("under_score_x")]
+	MediumUnderscore,
+	#[atom("very_long_under_score_atom")]
+	LongUnderscore,
+	#[atom("café")]
+	NonAscii,
+	#[atom("abcde")]
+	AsciiSibling,
+	#[atom("ünder_score_ünder_score")]
+	LongNonAscii,
+}
+
+#[test]
+fn matches_atoms_with_punctuation() {
+	assert_eq!(PunctuationAtomSet::from_str("_"), PunctuationAtomSet::Underscore);
+	assert_eq!(PunctuationAtomSet::from_str("a_b"), PunctuationAtomSet::ShortUnderscore);
+	assert_eq!(PunctuationAtomSet::from_str("a[b"), PunctuationAtomSet::ShortBracket);
+	assert_eq!(PunctuationAtomSet::from_str("under_score_x"), PunctuationAtomSet::MediumUnderscore);
+	assert_eq!(PunctuationAtomSet::from_str("very_long_under_score_atom"), PunctuationAtomSet::LongUnderscore);
+
+	assert_eq!(PunctuationAtomSet::from_str("A_B"), PunctuationAtomSet::ShortUnderscore);
+	assert_eq!(PunctuationAtomSet::from_str("UNDER_SCORE_X"), PunctuationAtomSet::MediumUnderscore);
+	assert_eq!(PunctuationAtomSet::from_str("VERY_LONG_UNDER_SCORE_ATOM"), PunctuationAtomSet::LongUnderscore);
+}
+
+#[test]
+fn matches_atoms_with_non_ascii_bytes() {
+	assert_eq!(PunctuationAtomSet::from_str("café"), PunctuationAtomSet::NonAscii);
+	assert_eq!(PunctuationAtomSet::from_str("CAFé"), PunctuationAtomSet::NonAscii);
+	assert_eq!(PunctuationAtomSet::from_str("CAFÉ"), PunctuationAtomSet::_None);
+	assert_eq!(PunctuationAtomSet::from_str("abcde"), PunctuationAtomSet::AsciiSibling);
+	assert_eq!(PunctuationAtomSet::from_str("ABCDE"), PunctuationAtomSet::AsciiSibling);
+	assert_eq!(PunctuationAtomSet::from_str("ünder_score_ünder_score"), PunctuationAtomSet::LongNonAscii);
+	assert_eq!(PunctuationAtomSet::from_str("üNDER_SCORE_üNDER_SCORE"), PunctuationAtomSet::LongNonAscii);
+}
+
+#[test]
+fn matches_atoms_with_unicode() {
+	assert_eq!(PunctuationAtomSet::from_str("\u{7f}"), PunctuationAtomSet::_None);
+	assert_eq!(PunctuationAtomSet::from_str("a\u{7f}b"), PunctuationAtomSet::_None);
+	assert_eq!(PunctuationAtomSet::from_str("a{b"), PunctuationAtomSet::_None);
+	assert_eq!(PunctuationAtomSet::from_str("under\u{7f}score\u{7f}x"), PunctuationAtomSet::_None);
+	assert_eq!(
+		PunctuationAtomSet::from_str("very\u{7f}long\u{7f}under\u{7f}score\u{7f}atom"),
+		PunctuationAtomSet::_None
+	);
+}
