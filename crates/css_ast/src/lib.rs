@@ -3,6 +3,7 @@
 mod constraints;
 mod css_atom_set;
 mod diagnostics;
+mod encoding_label;
 mod functions;
 #[cfg(test)]
 mod layout_test;
@@ -27,6 +28,7 @@ pub mod visit;
 pub use constraints::*;
 pub use css_atom_set::*;
 pub use css_parse::{ComponentValue, ComponentValues, Declaration, DeclarationValue, Diagnostic};
+pub use encoding_label::*;
 pub use functions::*;
 pub use metadata::*;
 pub use properties::*;

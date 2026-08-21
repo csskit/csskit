@@ -17,25 +17,9 @@ FAIL anchor/0003
 FAIL anchor/0004
 -@position-try --empty{}
 
-FAIL charset/0001
--@charset "UTF-8";a{color:red}
-+a{color:red}
-
-FAIL charset/0002
--@charset "ISO-8859-1";@charset "ISO-8859-15";a{color:red}
-+@charset "ISO-8859-1";a{color:red}
-
-FAIL charset/0003
--a{color:red}@charset "iso-8859-15";
-+@charset "iso-8859-15";a{color:red}
-
 FAIL charset/0005
--@charset "ISO-8859-1";.foo:before{content:""}
-+@charset "ISO-8859-1";.foo:before{content:"\e61d"}
-
-FAIL charset/0006
--.foo{color:red}@charset "ISO-8859-15";.bar{color:tan}@charset "ISO-8859-1";.baz{background:red}
-+@charset 'ISO-8859-15';.foo{color:red}.bar{color:tan}.baz{background:red}
+-@charset "gbk";.foo:before{content:""}
++@charset "gbk";.foo:before{content:"\e61d"}
 
 FAIL colors/0031
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}

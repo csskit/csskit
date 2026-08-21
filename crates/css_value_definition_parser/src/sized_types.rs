@@ -100,6 +100,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"EastAsianVariantValues",
 	"EastAsianWidthValues",
 	"ElementFunction",
+	"EncodingLabel",
 	"EnvironmentBlendingMediaFeature",
 	"EnvironmentBlendingMediaFeatureKeyword",
 	"Error",
