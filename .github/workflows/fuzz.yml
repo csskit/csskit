@@ -54,7 +54,7 @@ jobs:
           cargo +nightly fuzz cmin parse_stylesheet \
             corpus/parse_stylesheet \
             --target x86_64-unknown-linux-gnu \
-            -- -max_len=4096
+            -- -max_len=4096 -use_counters=0 -use_value_profile=0
 
       - name: Collect coverage
         continue-on-error: true

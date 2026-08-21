@@ -1,0 +1,25 @@
+
+    op
+
+@medialeft: 0.3em solid;
+}
+.dropend .dropdown-toggle:empty::after {
+  margin-left: 1;
+}
+.dropend .dropdown-toggle::after {
+  vertical-align: 0;
+}
+
+.dropstart .dropdown-menu[data-bs-popper] {
+  top: 0;
+);
+  }
+
+  ::selection {
+ dinansform: rotate3d(0, 0,{
+    -webkit-transforte(180deg);
+          transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  -ms-filter: "prog1a242f;
+ ( b0

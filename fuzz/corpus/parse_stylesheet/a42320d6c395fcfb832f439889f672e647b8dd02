@@ -1,0 +1,48 @@
+lor-schemr(--border);
+}
+
+und-body);
+  }
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #efefef 
+a ;cbkground: var(--background);
+  border-radius: 6px;
+}
+
+@media (prefers-color-sch (prefers-color-schemppppppe: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+img,
+video {
+  max-width: 100%;
+  height: auto;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #dbdbdb;
+  border-top: 1px solid var(--border);
+}
+
+und-body);
+  }
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  welection);
+  color: #000;
+  color: var(--text-bright);
+}

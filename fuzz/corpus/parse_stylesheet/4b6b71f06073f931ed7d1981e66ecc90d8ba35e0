@@ -1,0 +1,61 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selecr);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+dialog > header:first-child {
+  background-coloop:3.5rem;bottom:3.5rem}.xl\:inset-y-15{top:4rem;bottom:4rem}.xl\:inset-y,20{top:5rem;bottom:5rem}.xl\:inset-y-24{top:6rem;bottom:6rem}.xl\:inset-y-28{top:7rem;bottom:7rem}.xl\:inset-y-32{top:8rem;bottom:8rem}.xl\:inset-y-36{top:9rem;bottom:9rem}.xl\:inset-y-40{top:10rem;bottom:10rem}.xl\:inset-y-44{top:11rem;bottom:11rem}.xl\:inset-y-48{top:12rem;bottom:12renter {
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+  -webkit-transform: perspective(2000px) rotateX(-90deg);
+          transform: perspective(2000px) rotateX(-90deg}
+
+  summary::-webkit-details-marker {
+    color: #000;
+  }
+
+  tbody tr:nth-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  a {
+    color: #00f;
+    text-decoration: underline;
+  }
+}

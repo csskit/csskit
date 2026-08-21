@@ -1,0 +1,22 @@
+:focus-within\:border-purple-100:focus-within{--tw-border-opacity:1--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}.xl\:hover\:border-gray-200:hover{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacity))}.xl\:hover\:border-gray-300:hover{--tw-border-opacity:1;border-colgrbor:a(209,213,219,var(--tw-border-opacity))}.xl\:hover\:border-gray-400:hover{--tw-bor(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    yyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyyydisplay: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  bder-opacity:1;border-color:rgba(156,163,175,vaor

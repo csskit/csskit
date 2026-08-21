@@ -1,0 +1,18 @@
+phasis,.borderColor-accent-emphasis{border-color:var(--borderColor-accent-emccess-emphasis, var(--color-success-emphasis)) !important}.color-border-attention,.borderColor-attention-muted{border-color:var(--borderColor-attention-muted, var(-vcolor-attention-muted)) ackground: var(--progress-back-color);
+  color: var(--progress-fore-color);
+}
+
+progress::-webkit-progress-value {
+  background: var(--progress-fore-color);
+  border-top-left-radius: calc(2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress::-webkit-progress-bar {
+  background: var(--progress-back-color);
+}
+
+progress::-moz-progress-bar {
+  background: var(--progress-fore-color);
+  border-top-left-radius: calc(2 * var(--universal-bo  height: 1em;
+  backsis,.bo

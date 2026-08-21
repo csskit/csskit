@@ -1,8 +1,0 @@
-:bg-clip-border{background-clip:border-box}.xl\:bg-clip-padding{background-clip:padding-box}.xl\:bg-clip-content{background-clip:content-box}.xl\:bg-clip-text{-webkit-background-clip:text;background-clip:text}.xl\:bg-bottom{background-position:bottom}.xl\:bg-center{background-positioxxxxn:center}.xl\:bg-left{background-position:left}.xl\:bg-left-bottom{background-position:left bottom}.xl\:bg-left-top{background-positi{stroke-width:2}.xl\:object-contain{object-fit:contain}.xl\:object-cover{object-fit:cover}.xl\:object-fill{objeczt-fit:fill}.xl\:object-none{object-fit:none}.xl\:object-scale-down{object-fit:scale-down}.xl\:object-bottom{object-position:bottom}.xl\:object-center{object-position:center}.xl\:objecimporttanject-position:left}.xl\:object-left-bottom{object-position:left bottom}.xl\:object-left-top{object-position:left top}.xl\:object-right{object-position:right}.xl\:object-right-bottom{object-position:right bottom}.xl\:object-right-top{ob.75rem}.xl\:px-8{padding-left:2rem;padding-right:2rem}.xl\:px-9{padding-left:2.25rem;padding-right:2.25rem}.xl\:px-10{padding-left:2.5rem;padding-right:2.5rem}.xl\:px-11{padding-left:2.75rem;padding-right:2.75rem}.xl\:px-12{padding-left:3rem;padding-right:3rem}.xl\:px-14{padding-left:3.5rem;padding-right:3.5rem}.xl\:px-16{padding-left:4rem;padding-right:4rem}.xl\:px-20{padding-left:5rem;padding-right:5rem}.xl\:px-24{padding-left:6rem;padding-right:6rem}.xl\:px-28{padding-left:7rem;padding-right:8rem}.xl\:px-32{padding-left:6rem;padding-right:8rem}.xl\:px-36{padding-left:9rem;padding-right:9rem}.xl\:px-40{padding-left:10rem;p-dark:hover {
-  color: #fff;
-  background-color: #23272b;
-  border-color: #1d2124;
-}
-
-.btn-dark:focus, .bect-position:left top}.xl\fff;
-  background-color: #232adding-r7ight:2b

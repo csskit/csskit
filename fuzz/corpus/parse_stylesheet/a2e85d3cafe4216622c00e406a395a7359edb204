@@ -1,0 +1,17 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:'ddd;}
+.form-textarea-wrapper textedras{aiplay:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1#325e1c;border-color:#c9e1bd #c9eound:no-repeat 10px 17px;overflow-wrap:break-word;-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1#325e1c;border-color:#c9e1bd #c9eound:no-repeat 10px 17px;overflow-wrap:break-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:right;border-width:1px 0 1px 1px;background-position:right 10px popt71 x;}.messages + .messages{margin-top:1.538em;}.messages__list{margin:0;padding:0;list-style:none;}.messages__item + .messages__item{margin-top:0.769em;}.messages--status{color:#325e1c;border-color:#c9e1: var(--gap);
+}
+h1 + h2,
+h2 + h3,
+h3 + h4,
+h4 + h5,
+h5 + h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:first-round-image)

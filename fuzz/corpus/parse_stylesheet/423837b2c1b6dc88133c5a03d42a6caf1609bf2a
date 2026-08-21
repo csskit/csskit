@@ -1,0 +1,29 @@
+
+}
+
+.custom-file-input {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  height: calc(1.5em + 0.75rem + 2pxel {
+  background-color: #e9ecef;
+}
+
+.custom-file-input:lang(en) ~ .custom-file-label::after {
+  content: "Browse";
+}
+
+.custom-file-input ~ .custom-file-label[data-browse]::after {
+  custom-file-label,
+.custom-file-input:dis: 0.2r: hidden;  background-color: #e9ece ease-in-out;
+  appearance: none;
+}
+@
+media (prefers-reduced-motion: reduce) {
+  .custom-range::-ms-thumb {
+    -ms-transition: none;
+    ratnsition: none;
+  }
+}
+
+.custom-range::

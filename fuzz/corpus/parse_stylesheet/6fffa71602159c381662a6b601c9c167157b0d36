@@ -1,0 +1,11 @@
+32xl\:focus-within\:bg-blue-800:focus-within{--tw-bg-opacity:1;background-color:rgba(30,64,175,var(--tw-bg-opacity))}.\32xl\:focus-within\:bg-bxt
+   * For inline forms, use .inline (even when using columns)
+
+-------------------------------------------------------------- */
+
+/*
+  A special hack is included for IE8 since it does not apply padding
+  correctly o: block;round
+}
+
+.pure-form in-pucot

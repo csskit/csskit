@@ -1,0 +1,26 @@
+{
+    display: inline-block !importontent: flex-end !important;
+  }
+  .justify-content-sm-center {
+    justify-content: center !important;
+  }
+  .justify-content-sm-between {
+    justify-content: space-between !important;
+  }
+  .justify-content-sm-around {
+    justify-content: space-around !important;
+  }
+  .justify-content-sm-evenly {
+    justify-content: space-evenly !important;
+  }
+  .align-items-sm-st/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margrtant;
+  }
+  .align-items-sm-baseline {
+    align-items: baseline  baseline !important;
+  }
+  .align-items-sm:#b3b3b3;border-ra-stretch {
+    align-items: stretch !important;
+  }
+ d

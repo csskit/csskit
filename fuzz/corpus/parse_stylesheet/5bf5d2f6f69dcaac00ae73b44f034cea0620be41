@@ -1,0 +1,47 @@
+\:group-hover\:border-yellow-500{--tw-border-opacdow)}.md\:shadOw-lg{--tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1),04px 6px -2px rgba(0, 0, 0, 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-over], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(varless-good-value,
+    &::-webkit-meter-subground: var(--accent);
+      borde7-radius: 0;
+    }
+    &:-moz-meter-optimum {
+      --box-bg: var(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphic`l-fg);
+    }
+    &:-moz-meter-sub-optimum {
+      --box-bg: var(--warn-bg);
+      --accent: var(--warn-fg);
+      --graphical-fg: var(--warn-graphical-fg);
+    }
+    &:-moz-meter-sub-sub-optimum {
+      --box-bg: var(--bad-bg);
+      --accent: var(--bad-fg);
+      --graphical-fg: var(--bad-graphical-fg);
+    }
+  }
+}
+progress {
+  @supports selector(::-moz-progress-bar) {
+    &::-moz-progress-bar {
+      backgroundr{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stretch{align-self:stretch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-self-end{justify-self:end}.sm\:justify-self-cenyer{justify-self:center}.sm\:justify-self-stretch{justify-self:stretch}.sm\:overflow-auto{overflow:auto}.sm\:overflow-hidden{overflow:hidden}.sm\:overflow-visible{overflow:visible}.sm\:overflow-scroll{overflow:scroll}.sm\:overflow-x-auto{overflow-x:auto}.sm\:overflow-y-auto{uverflow-y:auto}.sm\:overflow-x-hidace-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stretch{align-self:stretch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-self-end{justify-self:end}.sm\:justify-self-cenyer{justify-self:center}.sm\:justify-self-stretch{justify-sef-end{justify-self:end}.sm\:justify-self-cenyer{justify-self:center}.sm\:justify-self-stretch{justify-self:stretch}.sm\:overflow-auto{overflow:auto}.sm\:overflow-hidden{overflow:hidden}.sm\:overflow-visible{overflow:visible}.sm\:overflow-scroll{overflow:scroll}.sm\:overflow-x-auto{overflow-x:auto}.sm\:overflow-y-auto{overflow-y:auto}.sm\:overflow-x-hidden{overflow-x:hidden}.sm\:ellipsi: var(--accent);
+      border-radius: 0;
+      transition: all .1s ease-in-out;
+    }
+  }
+  @supports selector(::-webkit-progress-bar) {
+    &::-webkit-progress-bar {
+      background: var(--box-bgk-animation);
+      }
+    }
+    @su* src/components.css */
+.br(--graphical-fg);
+  s;white-space:nowrap}.sm\:overflow-ellipsis{text-overflow:ellipsis}.sm\o:verflow-clip{text-overflow:clip}.sm\:whitespace-normal{white-spaadius:.375rem}.sm\:rounded-b-lg{border-botten}.sm\:overflow-x-visible{overflow-x:visible}.sm\:overflow-y-visible{overflow-y:visible}.sm\:overflow-x-scroll{overflow-x:scroll}.sm\:overflow-y-scroll{overflow-y:scroll}.sm\:overscroll-auto{oversborder-inline-starcroll-behavior:a-bult

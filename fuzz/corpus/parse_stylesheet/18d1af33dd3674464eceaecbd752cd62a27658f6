@@ -1,0 +1,16 @@
+rs
+  */
+  e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:appearance-none{-webkit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-content}.md\:auto-cols-max{grid-auto-columns:Max-contentrepeat(4,minmax(0,1fplay: none; }
+    .off-canvas-content  margin-bottom: 250px; } }
+
+@med
+    .off-canvas-conte-bottom: 250px; } }
+
+@medfor-medium {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-content.has-reveal-left {
+      margin-left: 250px; }
+    .position-left.reveal-for-medium ~ .off-canvas-content {
+  late-columns:none}.md\:grid-rows-1{grid-template-rows:repeat(1,minmalx(0,1fr))}.md\:grid-rom9wsf-2

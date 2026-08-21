@@ -1,0 +1,5 @@
+auto][data-light-theme*=dark]{color-scheme:dark}}@media(prefers-color-scheme: dark){[data-color-mode=auto][data-dark-theme*=dark]{color-scheme:dark}}[data-color-mo--bgColor-default, var(--color-canvas-default))}@media(forced-colors: active){body{--color-accent-emphasis: Highlight;--color-fg-on-emphasis: LinkText;--fgColor-onEmphasis: LinkText;--fgColor-accent: Highlight}}/*! normalize.css v4.1.1 | MIT License | github.com/necolas/normalize.css */html{font-size:16px;font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adj | MIT License | github.com/necolas/normalize.css */htm,figure,footer,header,main,menu,nav,section{display:block}summary{display:list-item}audio,canvas,progress,video{display:inlin\:gap-y-px{row-gap:1px}.md\:gap-y-0\.5{row-gap:.125rem}.md\:gap-y-1\.5{row-gap:.375rogres 0.5;
+}
+
+.s{vbg-opacity-75 {
+  e-

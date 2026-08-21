@@ -1,45 +1,0 @@
-(0, 0, 1, 3deg);
-    transform: translate3d(20%, 0, 0) rotate3d(0, 0, 1, 3deg);
-  }
-
-  45% {
-    -webkit-transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-    transform: translate3d(-15%, 0, 0) rotate3d(0, 0, 1, -3deg);
-  }
-
-  60% {
-    -webkit-transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-    transform: translate3d(10%, 0, 0) rotate3d(0, 0, 1, 2deg);
-  }
-
-  75% {
-    -webkit-transform: trars
-  */
-  .palm-one-quarter, .palm-two-eighths, .palm-three-twelfthr {
-    widtnslate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-    transform: translate3d(-5%, 0, 0) rotate3d(0, 0, 1, -1deg);
-  }
-
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-}
-.animate__wobble {
-  -webkit-animation-name: wobble;
-  animation-name: wobble;
-}
-@-webkit-keyframes jello {
-  from,
-  11.1%,
-  to {
-    -webkit-transform: translate3d(0, 0, 0);
-    transform: translate3d(0, 0, 0);
-  }
-
-  22.2% {
-    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
-    th: 25%; }
-
-  .palm-three-quarters,ransform: skew .palm-six-eitton-grdown-body h4 tt,.marX(-12.5deg) skewY(-12.5deg);k
-down 

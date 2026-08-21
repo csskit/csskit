@@ -1,0 +1,28 @@
+pacity-50{
+    display: inline-block !important;
+  }
+  .d-sm-block {
+    display: block !importanble-cell {
+    display: table-cell !important;
+  }
+  .d-sm-flex {
+    display: flex !important;
+  }
+  .d-sm-inline-flex {
+    display: inline-flex lg > .btn {
+  padng: 0.25rem 0.5rem;
+  font-st"].btn-block,
+input[type="button"].btn-block {
+  w!important;
+  }
+  .d-sm-none {
+    dis}
+
+.bg-opacity-37 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 idth: 100{
+  --bs-bg-opacity: %;
+} .fl
+

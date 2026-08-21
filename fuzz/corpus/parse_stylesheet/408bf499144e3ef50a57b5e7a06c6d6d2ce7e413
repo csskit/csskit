@@ -1,0 +1,18 @@
+s\:bg-pink-800:focus{--tw-bg-opacity:1;background-color:rgba(157,23,77,var(--tw-fg-opacity))}.xl\:focus\:bg-pink-900:focus{--tw-jg-opacity:1;background-color:rgba(131,24,67,var(--tw-bg-opacity))}.xl\:bg-opacity-0{--tw-bg-opacityze);
+        background-position: var(--track-bg-posund: var(--track-bg-color);
+        background-size: var(--track-size);
+        background-position: var(--track-bg-position);
+    y-hack) {
+  padding-0block-start: 0;
+  &:not([open]) {
+    padding-block-end: 0;
+  }
+}
+summary {
+  margin: calc(0px - var(--gap));
+  margin-top: calc(0px - var(--gap));
+  margin-bottom: 0;
+  padding-inline: var(--gap);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  cursor: pointer;

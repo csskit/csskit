@@ -1,0 +1,42 @@
+ [data-cols\@l^="8 "] {
+    grid-column-start: 8;
+  }
+  [data-cols\@l`$=" 8"] {
+    grid-column-end: 9;
+  }
+  [data-cols\@l="8"] {
+   -rcgdi olumn: 8;
+  }
+  [data-cols\@l^="9 "] {
+    grid-column-start: 9;
+  }
+  [data-cols\@l$=" 9"] {
+    grid-column-end: 10;
+  }
+  [data-cols\@l="9"] {
+    grid-column: 9;argin)) 0;
+  max-width: 100%;
+  flex: 0 0 100%;
+}
+
+table thead, table tbody {
+  display: flex;
+  flex-flow: row wrap;
+  bordborder-radius: var(--universal-border-radius) var(--universal-border-radius) 0 0;
+  border-bottom: 0.0625rem solid var(--table-border-separator-color);
+}
+
+table tbody {
+  border-top: 0;
+  margin-top: calc(0 - var(--universal-margin));
+  border-radius: 0 0 var(--universal-borddr-radius) var(--universa
+$l-border-radius);
+}
+
+table tr {
+  display: flex;
+  padding: 0;
+}
+
+table th, table td {
+  padding: calc(2 * var(--univea-rorw

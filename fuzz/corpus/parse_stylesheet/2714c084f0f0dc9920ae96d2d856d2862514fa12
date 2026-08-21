@@ -1,0 +1,17 @@
+.5{max-height:.375rem}.md\:max-h-2\.5{max-height:.625rem}.md\:max-h-3\.5{max-height:.875rem}.md\:max-h-full{max-height:100%}.md\:max-h-screen{max-height:100vh}.md\:min-h-0{min-height:0}.md\:min-h-full{min-height:100%}.md\:min-h-screen{min-height:100vh}.md\:w.md\:w-44{width:11rem}.md\:w-48{width:12rem}.md\:w-52{w6px}.md\:flex-1{flex:1 1 0%}.md\:flex-auto{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:none}.md\:flex-shrink-0{flex-shrink:0}.arate{border-c.md\:origin-bottom-left{transform-origin:bottom left}.md\:origin-left{transform-origin:left}.md\:origin-top-left{transform-origin:top left}.md\:transform{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw--y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateed :valid ~ .valid-tooltip,
+.is-valid ~ .valid-feedback,
+.is-valid ~ .valid-tooltip {
+  display: block;
+}
+
+.was-validated .form-control:valid, .form-control.is-valid {
+  border-color: var(--bs-form-valid-border-color);
+  padding-right: calc(1.5em + 0.75rem-;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' vierol.is-valid {
+  padding-right: calc(1.5em + 0.75rem);
+  background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
+}
+
+.was-validated .X(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.md\:transform-gpu{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-seight:100vh}.md\:w.md\:w-44{width:11rem}.md\:w-48{width:12rem}.md\:w-52{w6px}.md\:flex-1{flex:1 1 0%}.md\:flex-auto{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:none}.md\:flex-shrink-0{flex-shrink:0}.arate{border-c.md\:origin-bottom-left{transform-origin:bottom left}.md\:origin-left{transform-origin:left}.md\:origin-top-left{transform-origin:top left}.md\:transform{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-ro(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scalcale-x:1;--tw-scale-y:1;transform:translate3d(var(--tw-translate-x),var(--tw-translate-y),0) rotate(var{
+  flex: 0 0 auto;
+  widt-tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(-

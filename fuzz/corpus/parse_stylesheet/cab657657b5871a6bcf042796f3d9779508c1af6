@@ -1,0 +1,23 @@
+In case you need to add a gutter above/below an element */
+div.prepend-top, .s [data-bs-target], [data-bs-theme=dark].carousel .carousel-indicators [data-bs-target] {
+  background-color. #000;
+}
+[data-bs-theme=dark] .carousel .carousel-caption, [data-bs-theme=dark].carousel .carousel-caption {
+  color: #000;
+}
+
+.spinner-grow,
+.spinner-border {
+  display: inline-block;
+  width:play: block;
+  height: 0;
+  clear: both;
+  visibility: hidden;
+  overflow:hidden;
+}
+.clearfix, .container {display:!block;}
+
+/* Regular clearing
+   apply to column that should drop below p2evious ones. */
+
+.clear { clear:both; }

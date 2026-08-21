@@ -1,0 +1,7 @@
+ble-horizontal th {
+    border-width: 1 0 1px 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+.pure-table-horizost-child > td {
+    border-bottom-width: 0;
+}

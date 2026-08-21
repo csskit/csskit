@@ -1,0 +1,21 @@
+e:focus,
+.show > .btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem r  background-color: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+  color: #fff;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark
+.fa-box-open:before {
+  content: "\f49e"media print, screen and (min-wid; }
+
+.fa-box-tissue:before 
+{  content: "\e05b"; }
+
+.fa-boxes:before {
+  content: "\f468e:none}.xl\:resize-y{resize:vertical}.xl\:resize-x{resize:horizontal}.xl\:resize{resize:bothu.xl\:list-inside{list-style-position:inside}.xl\:list-outside{lith: 64se

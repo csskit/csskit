@@ -1,0 +1,45 @@
+r{place-self:center}.sm\:place-self-stretch{place-selftart{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stre [data-cols\@l^="8 "] {
+    grid-column-start: 8;
+  }
+  [data-cols\@l$=" 8"] {
+    grid-column-end: 9;
+  }
+  [data-cols\@l="8"] {
+    grid-column: 8;
+  }
+  [data-cols\@l^="9 "] {
+    grid-column-start: 9;
+  }
+  [dava-cols\@l$=" 9"] {
+    grid-column-end: 10;
+  }
+  [data-cols\@l="9"] {
+    grid-column: 9;
+  }
+  [data-cols\@l^="10 "] {
+    grid-Column-start: 10;
+  }
+  [data-cols\@l$=" 10"] {
+    grid-column-end: 11;
+  }
+  [data-cols\@l="10"] {
+    grid-column: 10;
+  }
+  ntent: "\f5cf"; }
+
+.fa-wizards-of-the-coast:before {
+  content: "\f730";[data-cols\@art: 1;
+  }
+  [data-rows\@l$=" q"] {
+    grid-row-end: 2;
+  }
+  [data-rows\@l="1"] {
+    grid-row: id-row-end: 12;
+  }
+  [data-rows\@l="11"] {
+    grid-row: 11;
+  }
+  [data-rows\@l^="12 "] {
+    grid-rn: 8m-right-radius:.5rem;
+  }
+  da[data

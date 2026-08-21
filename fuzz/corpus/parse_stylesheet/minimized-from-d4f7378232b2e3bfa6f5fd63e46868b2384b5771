@@ -1,7 +1,0 @@
-wnRight {
-  -webkit-animatioebkit-animation-name: rotateOutUpLeft;
-  animation-n(0, 0, 1, 90deg);
-   uthored by Nick Pettit - hom;
-}
-@--transform: rotate3d(0, 0, 1, 90deg);
-   uthored by Nick Pettit - h

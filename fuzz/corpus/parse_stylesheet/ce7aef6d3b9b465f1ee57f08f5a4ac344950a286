@@ -1,0 +1,6 @@
+e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-typep: 24px;
+}
+
+h1 {
+  color: #000;
+  kit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-content}.md\:auto-cols-ma{xgrid-auto-columns:max-content}.md\:.5{max-height:.375rem}.md\:max-h-2\.5{max-height:.625rem}.md\:max-h-auto-cols-fr{grid-auto-columns:minmax(0,1fr)}HHHHHHHHHHHHHHHHHHHHHHHHHHHHHHHecimx-heai

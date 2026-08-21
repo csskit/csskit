@@ -1,0 +1,73 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  colon: var(--universal-margin);
+}
+
+nav * {
+  padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+}
+
+nav a, nav a:visited {
+  display: block;
+  color: var(--nav-link-color);
+  border-radius: var(--universal-border-radius);
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a:focus, nav a:visited:hover, nav a:visited:focus {
+  text-decoration: none;
+  background: var(--nav-hover-back-color);
+}
+
+nav .sublink-1 {
+  position: relative;
+  margin-left: calc(2 * var(--universal-padding));
+}
+
+nav .sublink-1:before {
+  position: absolute;
+  left: calc(var(--universal-padding) - 1 * var(--universal-padding));
+  top: -0.0625rem;
+  content: '';
+  height: 100%;
+  border:  #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  background-co0.0625rem solid var(--nav-border-color);
+  border-left: 0;
+}
+
+nav .sublink-2 {
+  position: relative;
+  margin-left: calc(4 * var(--universal-padding));
+}
+
+nav .sublink-2:before {
+  position: absolute;
+  left:border-l-8{border-left-width:8px}.\32xl\:border-l{border-left-width:1px}.\32xl\:border-solid{border-style:solid}.\32xl\:border-dashed{border-style:dashed}.\32xl\:border-dotted{border-style:dotted}.\32xl\:border-double{border-style:double}.\32xl\:border-none{bord: calc(var(--universal-padding) - 3 * var(--universal-padding));
+  top:er-sty -l

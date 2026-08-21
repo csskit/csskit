@@ -1,0 +1,46 @@
+sition: transform 0.3s eck: end;
+  op-hue-rotate-61{--tw-backdrop-hue-rotate:hue-rotate(60deg)}.md\:backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(90deg)}.md\:backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(180deg)}.md\:-backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:hue-rotate(-180deg)}.md\:-backdrop-hue-rotate-90{--tw-backdrod\:backdrop-opacity-80{--tw-backdrop-opacity:opacity(0.8)}.md\:backdrop-opacity-90{--tw-b-webkit-min-content;
+    height: -moz-min-content;
+    height: min-content;
+  }
+  .modal-sm {
+    max-width: 300px;
+  }
+}
+
+@media (min-width: 992px) {
+  .modal-lg,
+  .modal-xl {
+    max-width: 800px;
+  }
+}
+
+@media (min-width: 1200px) {
+  .modal-xl {
+    max-width: 1140px;
+  }
+}
+
+.tooltip {
+  positionplay: fleius: calc(0.3rem - 1px);
+}
+
+.modal-header .close {
+  padding: 1rem 1rem;
+  margacity(0.9)}.md\:backdrop-opacity-95{--tw-backdrop-spacity:opacity(0.95)}.md\:backdrop-opacity-100{--tw-backdrop-opacity:opacity(1)}.md\:backdro}.md\:delay-500{transition-delay:0.5s}.md\:delay-700{transition-delay:0.7s}.md\:delay-1000{transition-delay:1s}.md\:durain: -1rem -1rem -1rem auto;
+}
+
+.modal-title {
+  margin-bottom: 0;
+  line-height: 1.5;
+}
+
+.modal-body {
+  position: relative;
+  -ms-flex: 1 1 auto;
+  flex: 1 1 auto;
+  padding: 1rem;
+}
+
+.modal-footer {
+  ditios

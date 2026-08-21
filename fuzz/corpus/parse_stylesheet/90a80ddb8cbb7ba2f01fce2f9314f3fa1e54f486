@@ -1,0 +1,7 @@
+ble-horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottomx 1p: s(min-width: 768px){.float-md-left{float:left !imorptant}.float-md-right{float:right !important}.float-md-none{float:none !important}}@media(min-width: 1012px){.float-lg-le !important}.direc--base-size-4, 4px) !important}.ml-1{margin-left:var(--base-size-4, 4px) !important}.mt-n1{margin-top:calc(-1*var(--base-size-4, 4px)) !impoutant}.mb-n1{margin-bottom:calc(-1*var-(-base-size-4, 4px)) !important}.mr-n1{margin-right:calc(-1*vasize-4, 4px) !important;olid #cbcbcb;
+}
+.pure-table-horizontal tbody > tr:last-childz> td {
+    border-bottom-width: 0;
+}
