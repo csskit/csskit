@@ -35917,165 +35917,165 @@ StyleSheet(
         ))),
       )),
     ),
-    UnknownQualifiedRule(QualifiedRule(
-      prelude: ComponentValues(
-        values: [
-          Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(31132),
-            len: 6,
-          )),
-          Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(31138),
+    StyleRule(
+      rule: QualifiedRule(
+        prelude: SelectorList([
+          (CompoundSelector([
+            Tag(Html(Dialog(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(31132),
+              len: 6,
+            ))))),
+            PseudoElement(Webkit(Backdrop(ColonColon(Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(31138),
+              len: 1,
+            )), Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(31139),
+              len: 1,
+            ))), Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(31140),
+              len: 16,
+            ))))),
+          ]), None),
+        ]),
+        block: Block(
+          open_curly: LeftCurly(Cursor(
+            kind: "LeftCurly",
+            offset: SourceOffset(31157),
             len: 1,
           )),
-          Colon(Cursor(
-            kind: "Colon",
-            offset: SourceOffset(31139),
-            len: 1,
-          )),
-          Ident(Cursor(
-            kind: "Ident",
-            offset: SourceOffset(31140),
-            len: 16,
-          )),
-        ],
-      ),
-      block: Block(
-        open_curly: LeftCurly(Cursor(
-          kind: "LeftCurly",
-          offset: SourceOffset(31157),
-          len: 1,
-        )),
-        declarations: [
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(31161),
-              len: 10,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(31171),
-              len: 1,
-            )),
-            value: BackgroundStyleValue([
-              (Literal(BgLayer(
-                image: None,
-                position: None,
-                repeat: None,
-                attachment: None,
-                origin: None,
-                clip: None,
-                color: Some(Hex(Hash(Cursor(
-                  kind: "Hash",
-                  offset: SourceOffset(31173),
-                  len: 9,
-                )))),
-              )), None),
-            ]),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(31182),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(31186),
-              len: 23,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(31209),
-              len: 1,
-            )),
-            value: Unknown(ComponentValues(
-              values: [
-                Whitespace(Cursor(
-                  kind: "Whitespace",
-                  offset: SourceOffset(31210),
-                  len: 1,
-                )),
-                FunctionBlock(
-                  name: Function(Cursor(
-                    kind: "Function",
-                    offset: SourceOffset(31211),
-                    len: 5,
-                  )),
-                  params: ComponentValues(
-                    values: [
-                      Dimension(Cursor(
-                        kind: "Dimension",
-                        offset: SourceOffset(31216),
-                        len: 3,
-                      )),
-                    ],
-                  ),
-                  close: RightParen(Cursor(
-                    kind: "RightParen",
-                    offset: SourceOffset(31219),
+          declarations: [
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(31161),
+                len: 10,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(31171),
+                len: 1,
+              )),
+              value: BackgroundStyleValue([
+                (Literal(BgLayer(
+                  image: None,
+                  position: None,
+                  repeat: None,
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: Some(Hex(Hash(Cursor(
+                    kind: "Hash",
+                    offset: SourceOffset(31173),
+                    len: 9,
+                  )))),
+                )), None),
+              ]),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(31182),
+                len: 1,
+              ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(31186),
+                len: 23,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(31209),
+                len: 1,
+              )),
+              value: Unknown(ComponentValues(
+                values: [
+                  Whitespace(Cursor(
+                    kind: "Whitespace",
+                    offset: SourceOffset(31210),
                     len: 1,
                   )),
-                ),
-              ],
-            )),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(31220),
-              len: 1,
-            ))),
-          ),
-          Declaration(
-            name: Ident(Cursor(
-              kind: "Ident",
-              offset: SourceOffset(31232),
-              len: 15,
-            )),
-            colon: Colon(Cursor(
-              kind: "Colon",
-              offset: SourceOffset(31247),
-              len: 1,
-            )),
-            value: BackdropFilterStyleValue(r#Some(Literal(FilterValueList([
-              FilterFunction(Blur(BlurFunction(
-                name: Function(Cursor(
-                  kind: "Function",
-                  offset: SourceOffset(31249),
-                  len: 5,
-                )),
-                radius: Some(Literal(Px(Dimension(Cursor(
-                  kind: "Dimension",
-                  offset: SourceOffset(31254),
-                  len: 3,
-                ))))),
-                close: RightParen(Cursor(
-                  kind: "RightParen",
-                  offset: SourceOffset(31257),
-                  len: 1,
-                )),
+                  FunctionBlock(
+                    name: Function(Cursor(
+                      kind: "Function",
+                      offset: SourceOffset(31211),
+                      len: 5,
+                    )),
+                    params: ComponentValues(
+                      values: [
+                        Dimension(Cursor(
+                          kind: "Dimension",
+                          offset: SourceOffset(31216),
+                          len: 3,
+                        )),
+                      ],
+                    ),
+                    close: RightParen(Cursor(
+                      kind: "RightParen",
+                      offset: SourceOffset(31219),
+                      len: 1,
+                    )),
+                  ),
+                ],
+              )),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(31220),
+                len: 1,
               ))),
-            ])))),
-            important: None,
-            semicolon: Some(Semicolon(Cursor(
-              kind: "Semicolon",
-              offset: SourceOffset(31258),
-              len: 1,
-            ))),
-          ),
-        ],
-        rules: [],
-        close_curly: Some(RightCurly(Cursor(
-          kind: "RightCurly",
-          offset: SourceOffset(31260),
-          len: 1,
-        ))),
+            ),
+            Declaration(
+              name: Ident(Cursor(
+                kind: "Ident",
+                offset: SourceOffset(31232),
+                len: 15,
+              )),
+              colon: Colon(Cursor(
+                kind: "Colon",
+                offset: SourceOffset(31247),
+                len: 1,
+              )),
+              value: BackdropFilterStyleValue(r#Some(Literal(FilterValueList([
+                FilterFunction(Blur(BlurFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(31249),
+                    len: 5,
+                  )),
+                  radius: Some(Literal(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(31254),
+                    len: 3,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(31257),
+                    len: 1,
+                  )),
+                ))),
+              ])))),
+              important: None,
+              semicolon: Some(Semicolon(Cursor(
+                kind: "Semicolon",
+                offset: SourceOffset(31258),
+                len: 1,
+              ))),
+            ),
+          ],
+          rules: [],
+          close_curly: Some(RightCurly(Cursor(
+            kind: "RightCurly",
+            offset: SourceOffset(31260),
+            len: 1,
+          ))),
+        ),
       ),
-    )),
+    ),
     StyleRule(
       rule: QualifiedRule(
         prelude: SelectorList([
