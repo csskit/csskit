@@ -61,9 +61,13 @@ where
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
+		let nested = p.is(State::Nested);
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.alloc());
 		let mut meta: M = Default::default();
+		if nested {
+			meta = meta.with_nested();
+		}
 		loop {
 			if p.at_end() {
 				meta = meta.with_size(declarations.len().min(u16::MAX as usize) as u16);

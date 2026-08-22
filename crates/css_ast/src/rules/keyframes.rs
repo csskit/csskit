@@ -17,6 +17,7 @@ pub struct KeyframesRule<'a> {
 	#[atom(CssAtomSet::Keyframes)]
 	pub name: T![AtKeyword],
 	pub prelude: KeyframesName,
+	#[metadata(block)]
 	pub block: KeyframesRuleBlock<'a>,
 }
 
@@ -78,6 +79,7 @@ pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct Keyframe<'a>(
+	#[metadata(block)]
 	QualifiedRule<'a, KeyframeSelectors<'a>, StyleValue<'a>, NoBlockAllowed<StyleValue<'a>, CssMetadata>, CssMetadata>,
 );
 

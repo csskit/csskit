@@ -19,6 +19,7 @@ pub struct ContainerRule<'a> {
 	#[atom(CssAtomSet::Container)]
 	pub name: T![AtKeyword],
 	pub prelude: ContainerConditionList<'a>,
+	#[metadata(block)]
 	pub block: ContainerRulesBlock<'a>,
 }
 

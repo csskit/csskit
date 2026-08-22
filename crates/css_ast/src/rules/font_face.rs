@@ -16,6 +16,7 @@ pub struct FontFaceRule<'a> {
 	#[atom(CssAtomSet::FontFace)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	pub name: T![AtKeyword],
+	#[metadata(block)]
 	pub block: FontFaceRuleBlock<'a>,
 }
 

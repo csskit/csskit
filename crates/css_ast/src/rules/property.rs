@@ -15,6 +15,7 @@ pub struct PropertyRule<'a> {
 	#[atom(CssAtomSet::Property)]
 	pub name: T![AtKeyword],
 	pub prelude: PropertyPrelude,
+	#[metadata(block)]
 	pub block: PropertyRuleBlock<'a>,
 }
 

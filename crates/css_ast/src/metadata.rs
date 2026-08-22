@@ -417,6 +417,19 @@ impl CssMetadata {
 		self.node_kinds.contains(NodeKinds::EmptyBlock)
 	}
 
+	/// Returns true if this node, or a node in its subtree, is nested inside another node.
+	#[inline]
+	pub fn is_nested(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Nested)
+	}
+
+	/// Returns true if this node has a prelude which covers no source text, such as the omitted
+	/// selector of `@page {}` or the anonymous layer of `@layer {}`.
+	#[inline]
+	pub fn has_empty_prelude(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::EmptyPrelude)
+	}
+
 	/// Returns true if this node can be a container (has StyleRule or AtRule kind).
 	#[inline]
 	pub fn can_be_empty(&self) -> bool {
@@ -450,6 +463,18 @@ impl NodeMetadata for CssMetadata {
 	#[inline]
 	fn with_size(mut self, size: u16) -> Self {
 		self.size = size;
+		self
+	}
+
+	#[inline]
+	fn with_declaration(mut self) -> Self {
+		self.node_kinds |= NodeKinds::Declaration;
+		self
+	}
+
+	#[inline]
+	fn with_nested(mut self) -> Self {
+		self.node_kinds |= NodeKinds::Nested;
 		self
 	}
 }
@@ -716,6 +741,68 @@ mod tests {
 
 		assert!(metadata.property_groups.contains(PropertyGroup::Color));
 		assert!(metadata.used_at_rules.contains(AtRuleId::Media));
+	}
+
+	fn first_rule_metadata(css: &str) -> CssMetadata {
+		let alloc = Arena::new();
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
+		let mut parser = Parser::new(&alloc, css, lexer);
+		let stylesheet = parser.parse::<StyleSheet>().unwrap();
+		match stylesheet.rules.first().expect("stylesheet has no rules") {
+			crate::Rule::Style(rule) => rule.self_metadata(),
+			crate::Rule::Media(rule) => rule.self_metadata(),
+			crate::Rule::FontFace(rule) => rule.self_metadata(),
+			crate::Rule::Keyframes(rule) => rule.self_metadata(),
+			crate::Rule::Layer(rule) => rule.self_metadata(),
+			crate::Rule::Page(rule) => rule.self_metadata(),
+			crate::Rule::Scope(rule) => rule.self_metadata(),
+			rule => panic!("unexpected rule kind {rule:?}"),
+		}
+	}
+
+	fn stylesheet_metadata(css: &str) -> CssMetadata {
+		let alloc = Arena::new();
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
+		let mut parser = Parser::new(&alloc, css, lexer);
+		parser.parse::<StyleSheet>().unwrap().metadata()
+	}
+
+	#[test]
+	fn nested_rules_are_marked_nested() {
+		assert!(!stylesheet_metadata("a { color: red }").is_nested());
+		assert!(!stylesheet_metadata("@media screen { color: red }").is_nested());
+		assert!(stylesheet_metadata("a { b { color: red } }").is_nested());
+		assert!(stylesheet_metadata("@media screen { a { color: red } }").is_nested());
+	}
+
+	#[test]
+	fn omitted_preludes_are_marked_empty() {
+		assert!(first_rule_metadata("@page {}").has_empty_prelude());
+		assert!(first_rule_metadata("@layer { a { color: red } }").has_empty_prelude());
+		assert!(first_rule_metadata("@scope { a { color: red } }").has_empty_prelude());
+	}
+
+	#[test]
+	fn written_preludes_are_not_marked_empty() {
+		assert!(!first_rule_metadata("@page :left {}").has_empty_prelude());
+		assert!(!first_rule_metadata("@layer base { a { color: red } }").has_empty_prelude());
+		assert!(!first_rule_metadata("@scope (.card) { a { color: red } }").has_empty_prelude());
+	}
+
+	#[test]
+	fn rules_with_an_empty_block_are_marked_empty() {
+		assert!(first_rule_metadata("a {}").is_empty_container());
+		assert!(first_rule_metadata("@media screen {}").is_empty_container());
+		assert!(first_rule_metadata("@page {}").is_empty_container());
+		assert!(first_rule_metadata("@keyframes fade {}").is_empty_container());
+	}
+
+	#[test]
+	fn rules_with_a_filled_block_are_not_marked_empty() {
+		assert!(!first_rule_metadata("a { color: red }").is_empty_container());
+		assert!(!first_rule_metadata("nav { a {} }").is_empty_container());
+		assert!(!first_rule_metadata("@media screen { a { color: red } }").is_empty_container());
+		assert!(!first_rule_metadata("@font-face { font-display: swap }").is_empty_container());
 	}
 
 	// Child leaf types carrying distinct node_kinds bits, used to verify delegation

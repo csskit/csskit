@@ -1,10 +1,9 @@
 use crate::{
-	CssAtomSet, CssMetadata, NodeKinds, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule,
-	diagnostics::CssDiagnostic, rules,
+	CssAtomSet, CssMetadata, SelectorList, StyleValue, UnknownAtRule, UnknownQualifiedRule, diagnostics::CssDiagnostic,
+	rules,
 };
 use css_parse::{
-	Box, Cursor, DeclarationGroup, Diagnostic, NodeMetadata, NodeWithMetadata, Parse, Parser, QualifiedRule,
-	Result as ParserResult, RuleVariants,
+	Box, Cursor, DeclarationGroup, Diagnostic, Parse, Parser, QualifiedRule, Result as ParserResult, RuleVariants,
 };
 use csskit_derives::*;
 use csskit_proc_macro::node;
@@ -19,24 +18,11 @@ use csskit_proc_macro::node;
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = StyleRule)]
 pub struct StyleRule<'a> {
+	#[metadata(block)]
 	pub rule: QualifiedRule<'a, SelectorList<'a>, StyleValue<'a>, NestedGroupRule<'a>, CssMetadata>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for StyleRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		let child_meta = self.rule.metadata();
-		let is_empty = child_meta.declaration_kinds.is_none() && !child_meta.has_rules();
-		let mut node_kinds = NodeKinds::StyleRule;
-		if is_empty {
-			node_kinds |= NodeKinds::EmptyBlock;
-		}
-		CssMetadata { node_kinds, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.rule.metadata().merge(self.self_metadata())
-	}
 }
 
 // https://drafts.csswg.org/css-nesting/#conditionals

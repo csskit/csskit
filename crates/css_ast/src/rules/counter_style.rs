@@ -17,6 +17,7 @@ pub struct CounterStyleRule<'a> {
 	#[atom(CssAtomSet::CounterStyle)]
 	pub name: T![AtKeyword],
 	pub prelude: CounterStyleName,
+	#[metadata(block)]
 	pub block: CounterStyleRuleBlock<'a>,
 }
 

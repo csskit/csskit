@@ -8,6 +8,18 @@ pub trait NodeMetadata: Sized + Copy + Default {
 	fn with_size(self, _size: u16) -> Self {
 		self
 	}
+
+	/// Marks this metadata as describing a declaration.
+	/// Default implementation is a no-op for metadata types that don't track node kinds.
+	fn with_declaration(self) -> Self {
+		self
+	}
+
+	/// Marks this metadata as describing a node nested inside another node.
+	/// Default implementation is a no-op for metadata types that don't track node kinds.
+	fn with_nested(self) -> Self {
+		self
+	}
 }
 
 /// A Node that has NodeMetadata

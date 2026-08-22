@@ -1,5 +1,4 @@
 use super::prelude::*;
-use crate::{AtRuleId, NodeKinds};
 use css_parse::Box;
 
 mod features;
@@ -11,34 +10,22 @@ pub use features::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(::csskit_derives::ToCSSFeature), css_feature("css.at-rules.media"))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = AtRule, used_at_rules = Media)]
 pub struct MediaRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Media)]
 	pub name: T![AtKeyword],
 	pub prelude: MediaQueryList<'a>,
+	#[metadata(block)]
 	pub block: MediaRuleBlock<'a>,
-}
-
-impl<'a> NodeWithMetadata<CssMetadata> for MediaRule<'a> {
-	fn self_metadata(&self) -> CssMetadata {
-		let child_meta = self.block.0.metadata();
-		let is_empty = child_meta.declaration_kinds.is_none() && !child_meta.has_rules();
-		let mut node_kinds = NodeKinds::AtRule;
-		if is_empty {
-			node_kinds |= NodeKinds::EmptyBlock;
-		}
-		CssMetadata { used_at_rules: AtRuleId::Media, node_kinds, ..Default::default() }
-	}
-
-	fn metadata(&self) -> CssMetadata {
-		self.block.0.metadata().merge(self.prelude.metadata()).merge(self.self_metadata())
-	}
 }
 
 #[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
+#[derive(csskit_derives::NodeWithMetadata)]
 pub struct MediaRuleBlock<'a>(pub Block<'a, StyleValue<'a>, Rule<'a>, CssMetadata>);
 #[node]
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]

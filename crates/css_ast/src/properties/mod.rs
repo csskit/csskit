@@ -4,8 +4,8 @@ use crate::{
 };
 use css_lexer::Kind;
 use css_parse::{
-	AtomSet, ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeWithMetadata, Parser,
-	Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
+	AtomSet, ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeMetadata,
+	NodeWithMetadata, Parser, Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
 use csskit_derives::*;
 use csskit_proc_macro::node;
@@ -280,9 +280,8 @@ impl<'a> StyleValue<'a> {
 
 impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	fn declaration_metadata(decl: &Declaration<'a, Self, CssMetadata>) -> CssMetadata {
-		let mut meta = decl.value.metadata();
 		// Mark this node as a declaration
-		meta.node_kinds |= NodeKinds::Declaration;
+		let mut meta = decl.value.metadata().with_declaration();
 		if decl.important.is_some() {
 			meta.declaration_kinds |= DeclarationKind::Important;
 		}

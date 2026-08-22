@@ -573,6 +573,12 @@ impl NodeWithMetadata<QuerySelectorMetadata> for QueryPseudoClass {
 				structure,
 				..Default::default()
 			},
+			Self::Nested(..) => QuerySelectorMetadata {
+				requirements: SelectorRequirements::Nested,
+				self_requirements: SelectorRequirements::Nested,
+				structure,
+				..Default::default()
+			},
 			Self::FirstOfType(..) => {
 				QuerySelectorMetadata { deferred: true, needs_type_tracking: true, structure, ..Default::default() }
 			}
