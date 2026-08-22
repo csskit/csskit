@@ -19,8 +19,7 @@
 //! # Ownership modes
 //!
 //! - [`Arena::new`] / [`Arena::default`]: self-allocated, as large a first chunk as the target allows.
-//! - [`Arena::with_capacity`]: self-allocated, exactly the given size, never grows. Useful for tests.
-//! - [`Arena::with_initial_capacity`]: self-allocated. The first chunk has the given size. The arena adds more chunks.
+//! - [`Arena::with_capacity`]: self-allocated, growable capacity hint. Useful for sized input.
 //! - [`Arena::from_raw_parts`]: borrows memory from the caller. Use this if a different allocator owns the block.
 //!
 //! All modes yield the same [`Arena`] type; they differ only in where the first chunk comes from and whether the arena
@@ -55,23 +54,26 @@ const CHUNK_ALIGN: usize = 16;
 /// How a chunk's memory was obtained, which determines what (if anything) happens on drop.
 #[derive(Clone, Copy)]
 enum Backing {
-	/// Address space reserved by this crate. `reservation` and `reserved` are the base and length of the whole
-	/// reservation, both of which are needed to release it, and `size` is the usable region at the chunk's base,
-	/// which is what the pool keeps it under.
-	Owned { reservation: NonNull<u8>, reserved: usize, size: usize },
+	/// Address space reserved by this crate. `reservation` and `reserved` identify the whole reservation.
+	Reservation { reservation: NonNull<u8>, reserved: usize },
 	/// A block from the global allocator, for targets that cannot reserve address space lazily.
 	Heap(Layout),
 	/// Memory owned by the caller (e.g. a V8 `ArrayBuffer`). Never freed by the arena.
 	Borrowed,
 }
 
-/// A chunk the arena has bumped past, kept in a chain so every chunk is released when the arena is.
-struct Chunk {
+#[derive(Clone, Copy)]
+struct Region {
 	base: NonNull<u8>,
 	size: usize,
+	backing: Backing,
+}
+
+/// A chunk the arena has bumped past, kept in a chain so every chunk is released when the arena is.
+struct Chunk {
+	region: Region,
 	/// High-water mark of bytes handed out from the chunk, which is how much of it is resident.
 	used: usize,
-	backing: Backing,
 	prev: Option<NonNull<Chunk>>,
 }
 
@@ -80,10 +82,8 @@ struct Chunk {
 /// deallocation of individual items is a no-op (every chunk is freed at once on drop; or never if using borrowed
 /// memory).
 pub struct Arena {
-	/// Base of the usable region of the chunk being bumped from.
-	base: Cell<NonNull<u8>>,
-	/// Usable size of that chunk in bytes.
-	size: Cell<usize>,
+	/// Current region: base, size, and backing.
+	region: Cell<Region>,
 	/// Bump cursor: byte offset of the next free position within the chunk.
 	cursor: Cell<usize>,
 	/// High-water mark of [`Arena::cursor`] for this chunk. A reset rewinds the cursor but not the pages behind it, so
@@ -92,14 +92,11 @@ pub struct Arena {
 	/// Bytes of the chunk backed by physical memory. Windows has no lazy commit, so the arena commits as it bumps.
 	#[cfg(windows)]
 	committed: Cell<usize>,
-	backing: Cell<Backing>,
 	/// Chunks the arena has bumped past. `None` unless it ran out of room and had to add one.
 	prev: Cell<Option<NonNull<Chunk>>>,
 	/// Bytes handed out from, and total usable size of, the chunks in `prev`.
 	prev_used: Cell<usize>,
 	prev_size: Cell<usize>,
-	/// Whether a full chunk may be retired in favour of a fresh, larger one.
-	growable: bool,
 }
 
 impl Arena {
@@ -111,52 +108,35 @@ impl Arena {
 	#[inline]
 	pub fn new() -> Self {
 		let size = if vm::RESERVABLE { MAX_BLOCK_SIZE } else { INITIAL_COMMIT };
-		let (base, backing) = Self::new_chunk(size).expect("arena backing reservation failed");
-		Self::from_chunk(base, size, backing, true)
+		let region = Self::new_chunk(size).expect("arena backing reservation failed");
+		Self::from_region(region)
 	}
 
-	/// Create a self-allocated arena of exactly `size` usable bytes (clamped to [`MAX_BLOCK_SIZE`]).
+	/// Create a self-allocated arena from a capacity hint.
 	///
-	/// The arena never grows: once `size` bytes are handed out, allocation fails.
+	/// On targets with virtual memory the hint is rounded up to a reusable size class. Elsewhere it is used exactly.
+	/// The arena may add chunks when the initial region fills.
 	///
 	/// # Panics
 	/// Panics if the backing allocation fails.
 	pub fn with_capacity(size: usize) -> Self {
-		let size = size.clamp(1, MAX_BLOCK_SIZE);
-		let (base, backing) = Self::new_chunk(size).expect("arena backing reservation failed");
-		Self::from_chunk(base, size, backing, false)
-	}
-
-	/// Create a self-allocated arena. The first chunk has `size` usable bytes (clamped to [`MAX_BLOCK_SIZE`]).
-	///
-	/// [`Arena::with_capacity`] does not grow, but this arena adds more chunks when the first chunk is full. `size` is
-	/// the initial size and not a limit. Use this function if you can calculate an approximate size from the input, but
-	/// the arena must be able to use more memory.
-	///
-	/// # Panics
-	/// Panics if the backing allocation fails.
-	pub fn with_initial_capacity(size: usize) -> Self {
-		let size = size.clamp(1, MAX_BLOCK_SIZE);
-		let (base, backing) = Self::new_chunk(size).expect("arena backing reservation failed");
-		Self::from_chunk(base, size, backing, true)
+		let requested = size.clamp(1, MAX_BLOCK_SIZE);
+		let region = Self::new_chunk(requested).expect("arena backing reservation failed");
+		Self::from_region(region)
 	}
 
 	/// Take `size` usable bytes for a chunk: reserved address space where the target has it, a block from the global
 	/// allocator otherwise.
-	fn new_chunk(size: usize) -> Option<(NonNull<u8>, Backing)> {
-		pool::take(size)
-			.or_else(|| vm::reserve(size))
-			.map(|reservation| {
-				debug_assert!(
-					(reservation.base.as_ptr() as usize).is_multiple_of(BLOCK_ALIGN),
-					"arena base must be 4 GiB aligned"
-				);
-				let backing = Backing::Owned {
-					reservation: reservation.reservation,
-					reserved: reservation.reserved,
-					size: reservation.size,
-				};
-				(reservation.base, backing)
+	fn new_chunk(size: usize) -> Option<Region> {
+		let size = size.clamp(1, MAX_BLOCK_SIZE);
+		let reservation_size =
+			if vm::RESERVABLE { size.max(INITIAL_COMMIT).next_power_of_two().min(MAX_BLOCK_SIZE) } else { size };
+		pool::take(reservation_size)
+			.or_else(|| vm::reserve(reservation_size))
+			.map(|reservation| Region {
+				base: reservation.base,
+				size: reservation.size,
+				backing: Backing::Reservation { reservation: reservation.reservation, reserved: reservation.reserved },
 			})
 			.or_else(|| Self::heap_chunk(size, CHUNK_ALIGN))
 	}
@@ -165,26 +145,23 @@ impl Arena {
 	///
 	/// `None` for a zero-sized or otherwise unrepresentable request: a chunk with no room is no use to the arena, and
 	/// the global allocator may not be asked for zero bytes.
-	fn heap_chunk(size: usize, align: usize) -> Option<(NonNull<u8>, Backing)> {
+	fn heap_chunk(size: usize, align: usize) -> Option<Region> {
 		let layout = Layout::from_size_align(size, align).ok().filter(|layout| layout.size() > 0)?;
 		// SAFETY: the layout is not zero sized.
 		let base = NonNull::new(unsafe { std::alloc::alloc(layout) })?;
-		Some((base, Backing::Heap(layout)))
+		Some(Region { base, size: layout.size(), backing: Backing::Heap(layout) })
 	}
 
-	fn from_chunk(base: NonNull<u8>, size: usize, backing: Backing, growable: bool) -> Self {
+	fn from_region(region: Region) -> Self {
 		Self {
-			base: Cell::new(base),
-			size: Cell::new(size),
+			region: Cell::new(region),
 			cursor: Cell::new(0),
 			resident: Cell::new(0),
 			#[cfg(windows)]
-			committed: Cell::new(if matches!(backing, Backing::Owned { .. }) { 0 } else { size }),
-			backing: Cell::new(backing),
+			committed: Cell::new(if matches!(region.backing, Backing::Reservation { .. }) { 0 } else { region.size }),
 			prev: Cell::new(None),
 			prev_used: Cell::new(0),
 			prev_size: Cell::new(0),
-			growable,
 		}
 	}
 
@@ -199,13 +176,12 @@ impl Arena {
 	pub unsafe fn from_raw_parts(ptr: NonNull<u8>, size: usize) -> Self {
 		debug_assert!((ptr.as_ptr() as usize).is_multiple_of(BLOCK_ALIGN), "borrowed arena base must be 4 GiB aligned");
 		debug_assert!(size <= MAX_BLOCK_SIZE, "borrowed arena must not exceed MAX_BLOCK_SIZE");
-		Self::from_chunk(ptr, size, Backing::Borrowed, false)
+		Self::from_region(Region { base: ptr, size, backing: Backing::Borrowed })
 	}
-
-	/// The base address of the usable region.
+	/// The base address of the current usable region.
 	#[inline]
 	pub fn base_ptr(&self) -> NonNull<u8> {
-		self.base.get()
+		self.region.get().base
 	}
 
 	/// Whether every allocation lives in one region starting at [`Arena::base_ptr`], and so whether the low 32 bits of
@@ -225,7 +201,8 @@ impl Arena {
 		}
 		// `BLOCK_ALIGN` is 1 without a reservation, so the alignment alone would wave anything through; and a
 		// reservation that fell back to the global allocator is unaligned even though `RESERVABLE` holds.
-		let base = self.base.get().as_ptr() as usize;
+		let region = self.region.get();
+		let base = region.base.as_ptr() as usize;
 		(vm::RESERVABLE && self.prev.get().is_none() && base.is_multiple_of(BLOCK_ALIGN)).then_some(base)
 	}
 
@@ -234,11 +211,10 @@ impl Arena {
 	pub fn used_bytes(&self) -> usize {
 		self.prev_used.get() + self.cursor.get()
 	}
-
 	/// Total usable capacity of every chunk in bytes.
 	#[inline]
 	pub fn capacity(&self) -> usize {
-		self.prev_size.get() + self.size.get()
+		self.prev_size.get() + self.region.get().size
 	}
 
 	/// Release every allocation at once by rewinding the bump cursor to the start of the first chunk, freeing any chunk
@@ -253,14 +229,13 @@ impl Arena {
 			// the chunk being dropped is still live.
 			let chunk = *unsafe { Box::from_raw(node.as_ptr()) };
 			// SAFETY: as above.
-			unsafe { release(self.base.get(), self.backing.replace(chunk.backing), self.resident.get()) };
-			self.base.set(chunk.base);
-			self.size.set(chunk.size);
+			unsafe { release(self.region.get(), self.resident.get()) };
+			self.region.set(chunk.region);
 			self.resident.set(chunk.used);
 			self.prev.set(chunk.prev);
 			// Every chunk the arena added comes from the global allocator, so is backed in full.
 			#[cfg(windows)]
-			self.committed.set(chunk.size);
+			self.committed.set(chunk.region.size);
 		}
 		self.prev_used.set(0);
 		self.prev_size.set(0);
@@ -277,12 +252,12 @@ impl Arena {
 /// OS otherwise. `used` is how many bytes of the chunk were handed out.
 ///
 /// # Safety
-/// `base` and `backing` must be exactly what the chunk was built with, and nothing allocated from it may outlive the
+/// `region` must be exactly what the chunk was built with, and nothing allocated from it may outlive the
 /// call.
-unsafe fn release(base: NonNull<u8>, backing: Backing, used: usize) {
-	match backing {
-		Backing::Owned { reservation, reserved, size } => {
-			let kept = vm::Reservation { reservation, reserved, base, size };
+unsafe fn release(region: Region, used: usize) {
+	match region.backing {
+		Backing::Reservation { reservation, reserved } => {
+			let kept = vm::Reservation { reservation, reserved, base: region.base, size: region.size };
 			// SAFETY: the caller guarantees nothing allocated from the chunk is live.
 			if unsafe { pool::give(kept, used) } {
 				return;
@@ -291,7 +266,7 @@ unsafe fn release(base: NonNull<u8>, backing: Backing, used: usize) {
 			unsafe { vm::release(reservation, reserved) };
 		}
 		// SAFETY: `base`/`layout` are exactly what the global allocator was asked for.
-		Backing::Heap(layout) => unsafe { std::alloc::dealloc(base.as_ptr(), layout) },
+		Backing::Heap(layout) => unsafe { std::alloc::dealloc(region.base.as_ptr(), layout) },
 		Backing::Borrowed => {}
 	}
 }
@@ -319,10 +294,11 @@ impl Arena {
 	#[cold]
 	#[inline(never)]
 	fn commit_to(&self, end: usize) -> bool {
+		let region = self.region.get();
 		let committed = self.committed.get();
-		let target = commit_target(end, committed, self.size.get());
+		let target = commit_target(end, committed, region.size);
 		// SAFETY: `committed <= target <= size`, so the range lies within the reservation.
-		let ptr = unsafe { NonNull::new_unchecked(self.base.get().as_ptr().add(committed)) };
+		let ptr = unsafe { NonNull::new_unchecked(region.base.as_ptr().add(committed)) };
 		// SAFETY: ditto.
 		if !unsafe { vm::commit(ptr, target - committed) } {
 			return false;
@@ -330,12 +306,12 @@ impl Arena {
 		self.committed.set(target);
 		true
 	}
-
 	/// Retire the current chunk and bump from a fresh, larger one able to serve `layout`.
 	#[cold]
 	#[inline(never)]
 	fn grow_chunk(&self, layout: Layout) -> Option<NonNull<[u8]>> {
-		if !self.growable {
+		let region = self.region.get();
+		if matches!(region.backing, Backing::Borrowed) {
 			return None;
 		}
 		let total = self.capacity();
@@ -349,25 +325,18 @@ impl Arena {
 			return None;
 		}
 		// Aligning the chunk to the request means the allocation fits at its base.
-		let (base, backing) = Self::heap_chunk(size, layout.align().max(CHUNK_ALIGN))?;
-		let retired = Chunk {
-			base: self.base.get(),
-			size: self.size.get(),
-			used: self.resident_bytes(),
-			backing: self.backing.replace(backing),
-			prev: self.prev.get(),
-		};
+		let new_region = Self::heap_chunk(size, layout.align().max(CHUNK_ALIGN))?;
+		let retired = Chunk { region, used: self.resident_bytes(), prev: self.prev.get() };
 		self.prev_used.set(self.prev_used.get() + self.cursor.get());
 		self.prev_size.set(total);
 		// SAFETY: `Box::into_raw` never returns null.
 		self.prev.set(Some(unsafe { NonNull::new_unchecked(Box::into_raw(Box::new(retired))) }));
-		self.base.set(base);
-		self.size.set(size);
+		self.region.set(new_region);
 		self.cursor.set(0);
 		self.resident.set(0);
 		// A chunk from the global allocator is backed in full.
 		#[cfg(windows)]
-		self.committed.set(size);
+		self.committed.set(new_region.size);
 		// The fresh chunk is big enough and aligned for `layout`, so this cannot recurse again.
 		self.bump(layout)
 	}
@@ -380,14 +349,14 @@ impl Arena {
 		let align = layout.align();
 		let bytes = layout.size();
 		debug_assert!(align.is_power_of_two(), "Layout alignment is always a power of two");
-		let base = self.base.get();
+		let region = self.region.get();
 		let start = self.cursor.get();
-		debug_assert!(start <= self.size.get(), "cursor must never exceed the chunk size");
+		debug_assert!(start <= region.size, "cursor must never exceed the chunk size");
 		// Round the cursor up to the requested alignment. It is the address that is rounded rather than the offset: a
 		// chunk from the global allocator is only CHUNK_ALIGN aligned, so an aligned offset within it need not be one.
-		let aligned = start + pad_to(base.as_ptr() as usize + start, align);
+		let aligned = start + pad_to(region.base.as_ptr() as usize + start, align);
 		let end = aligned.checked_add(bytes)?;
-		if end > self.size.get() {
+		if end > region.size {
 			return self.grow_chunk(layout);
 		}
 		#[cfg(windows)]
@@ -397,7 +366,7 @@ impl Arena {
 		debug_assert!(aligned >= start && end >= aligned, "bump must advance the cursor monotonically");
 		self.cursor.set(end);
 		// SAFETY: `aligned + bytes <= size`, so the range is within the chunk.
-		let ptr = unsafe { NonNull::new_unchecked(base.as_ptr().add(aligned)) };
+		let ptr = unsafe { NonNull::new_unchecked(region.base.as_ptr().add(aligned)) };
 		debug_assert_eq!(ptr.as_ptr() as usize % align, 0, "returned pointer must satisfy the requested alignment");
 		Some(NonNull::slice_from_raw_parts(ptr, bytes))
 	}
@@ -409,14 +378,14 @@ impl Arena {
 	/// offsets are the low 32 bits of every pointer.
 	#[inline]
 	fn empty(&self, align: usize) -> Option<NonNull<[u8]>> {
-		let base = self.base.get();
+		let region = self.region.get();
 		let start = self.cursor.get();
-		let aligned = start + pad_to(base.as_ptr() as usize + start, align);
-		if aligned > self.size.get() {
+		let aligned = start + pad_to(region.base.as_ptr() as usize + start, align);
+		if aligned > region.size {
 			return None;
 		}
 		// SAFETY: `aligned <= size`, so the address is within the chunk.
-		let ptr = unsafe { NonNull::new_unchecked(base.as_ptr().add(aligned)) };
+		let ptr = unsafe { NonNull::new_unchecked(region.base.as_ptr().add(aligned)) };
 		Some(NonNull::slice_from_raw_parts(ptr, 0))
 	}
 }
@@ -437,14 +406,14 @@ impl Default for Arena {
 impl Drop for Arena {
 	fn drop(&mut self) {
 		// SAFETY: `&mut self` proves every allocation is dead.
-		unsafe { release(self.base.get(), self.backing.get(), self.resident_bytes()) };
+		unsafe { release(self.region.get(), self.resident_bytes()) };
 		let mut node = self.prev.get();
 		while let Some(chunk) = node {
 			// SAFETY: every chunk in the chain came from `Box::into_raw` and has not been freed.
 			let chunk = *unsafe { Box::from_raw(chunk.as_ptr()) };
 			node = chunk.prev;
 			// SAFETY: as above; every allocation from the chunk is dead.
-			unsafe { release(chunk.base, chunk.backing, chunk.used) };
+			unsafe { release(chunk.region, chunk.used) };
 		}
 	}
 }
@@ -483,13 +452,14 @@ unsafe impl Allocator for &Arena {
 		// stranding the old bytes. This is the common case for a `Vec` growing while it is the last
 		// thing allocated. A pointer from a chunk the arena has bumped past falls through to the copy
 		// below: chunks never overlap, so its offset within this one cannot also be the live cursor.
+		let region = self.region.get();
 		let addr = ptr.as_ptr() as usize;
-		let base = self.base.get().as_ptr() as usize;
+		let base = region.base.as_ptr() as usize;
 		let offset = addr.wrapping_sub(base);
 		if new_layout.align() <= old_layout.align()
-			&& offset < self.size.get()
+			&& offset < region.size
 			&& offset + old_layout.size() == self.cursor.get()
-			&& offset + new_layout.size() <= self.size.get()
+			&& offset + new_layout.size() <= region.size
 		{
 			let end = offset + new_layout.size();
 			#[cfg(windows)]
@@ -519,8 +489,8 @@ mod test {
 	/// A growing arena over a chunk from the global allocator, which unlike a reservation is only `CHUNK_ALIGN` aligned
 	/// and small enough to outgrow. This is what [`Arena::new`] builds where nothing can be reserved.
 	fn growing(size: usize) -> Arena {
-		let (base, backing) = Arena::heap_chunk(size, crate::CHUNK_ALIGN).unwrap();
-		Arena::from_chunk(base, size, backing, true)
+		let region = Arena::heap_chunk(size, crate::CHUNK_ALIGN).unwrap();
+		Arena::from_region(region)
 	}
 
 	#[test]
@@ -641,6 +611,7 @@ mod test {
 	#[test]
 	fn from_raw_parts_over_borrowed_memory_never_frees() {
 		let backing = Arena::with_capacity(8192);
+		let backing_cap = backing.capacity();
 		let borrowed = unsafe { Arena::from_raw_parts(backing.base_ptr(), 4096) };
 		let a = (&borrowed).allocate(Layout::from_size_align(256, 1).unwrap()).unwrap();
 		assert_eq!(a.len(), 256);
@@ -648,11 +619,12 @@ mod test {
 		assert!((&borrowed).allocate(Layout::from_size_align(8192, 1).unwrap()).is_err());
 		drop(borrowed);
 		// `backing` owns the memory, so dropping the borrow left it alone: it still hands out bytes, and they are still
-		// writable.
-		assert_eq!(backing.capacity(), 8192);
-		let b = (&backing).allocate(Layout::from_size_align(8192, 1).unwrap()).unwrap();
+		// writable. Capacity is at least 8192 (the requested hint).
+		assert_eq!(backing.capacity(), backing_cap, "capacity unchanged after dropping borrow");
+		assert!(backing_cap >= 8192, "capacity is at least the requested hint");
+		let b = (&backing).allocate(Layout::from_size_align(backing_cap, 1).unwrap()).unwrap();
 		// SAFETY: the allocation is live and exclusively owned here.
-		unsafe { b.cast::<u8>().write_bytes(0x44, 8192) };
+		unsafe { b.cast::<u8>().write_bytes(0x44, backing_cap) };
 	}
 
 	#[test]
@@ -692,22 +664,32 @@ mod test {
 	}
 
 	#[test]
-	fn exhaustion_returns_alloc_error() {
-		let arena = Arena::with_capacity(128);
-		// First alloc fits.
-		assert!((&arena).allocate(Layout::from_size_align(64, 1).unwrap()).is_ok());
-		// Second overflows the 128-byte region, which was asked for a fixed size and so cannot grow.
-		assert!((&arena).allocate(Layout::from_size_align(128, 1).unwrap()).is_err());
+	fn borrowed_arena_exhaustion_returns_alloc_error() {
+		let backing = Arena::new();
+		let borrowed = unsafe { Arena::from_raw_parts(backing.base_ptr(), 128) };
+		assert!((&borrowed).allocate(Layout::from_size_align(64, 1).unwrap()).is_ok());
+		assert!((&borrowed).allocate(Layout::from_size_align(128, 1).unwrap()).is_err());
 	}
 
 	#[test]
-	fn an_initial_capacity_sets_the_first_chunk_size_but_not_a_limit() {
-		let arena = Arena::with_initial_capacity(128);
-		assert_eq!(arena.capacity(), 128, "the first chunk has the requested size");
-		assert!((&arena).allocate(Layout::from_size_align(64, 1).unwrap()).is_ok());
-		assert!((&arena).allocate(Layout::from_size_align(128, 1).unwrap()).is_ok());
-		assert!(arena.capacity() > 128, "the arena added a chunk");
-		assert_eq!(arena.used_bytes(), 192, "the count includes the bytes in the full chunk");
+	fn with_capacity_is_a_growable_hint() {
+		let arena = Arena::with_capacity(128);
+		let initial = arena.capacity();
+		assert!((&arena).allocate(Layout::from_size_align(initial, 1).unwrap()).is_ok());
+		assert!((&arena).allocate(Layout::from_size_align(1, 1).unwrap()).is_ok());
+		assert!(arena.capacity() > initial, "the arena added a chunk when the initial region filled");
+		assert_eq!(arena.used_bytes(), initial + 1);
+	}
+
+	#[test]
+	fn capacity_hints_use_reusable_size_classes() {
+		if !vm::RESERVABLE {
+			return;
+		}
+		let above_initial = Arena::with_capacity(INITIAL_COMMIT + 1);
+		let next_class = Arena::with_capacity(INITIAL_COMMIT * 2);
+		assert_eq!(above_initial.capacity(), INITIAL_COMMIT * 2);
+		assert_eq!(above_initial.capacity(), next_class.capacity());
 	}
 
 	#[test]
