@@ -9,6 +9,7 @@ pseudo_element!(
 	#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 	pub enum WebkitPseudoElement {
+		Backdrop: CssAtomSet::_WebkitBackdrop,
 		CalendarDatePickerIndicator: CssAtomSet::_WebkitCalendarPickerIndicator,
 		CapsLockIndicator: CssAtomSet::_WebkitCapsLockIndicator,
 		ColorSwatch: CssAtomSet::_WebkitColorSwatch,
@@ -59,6 +60,7 @@ pseudo_element!(
 		SearchCancelButton: CssAtomSet::_WebkitSearchCancelButton,
 		SearchDecoration: CssAtomSet::_WebkitSearchDecoration,
 		SearchResultsButton: CssAtomSet::_WebkitSearchResultsButton,
+		Selection: CssAtomSet::_WebkitSelection,
 		SliderContainer: CssAtomSet::_WebkitSliderContainer,
 		SliderRunnableTrack: CssAtomSet::_WebkitSliderRunnableTrack,
 		SliderThumb: CssAtomSet::_WebkitSliderThumb,

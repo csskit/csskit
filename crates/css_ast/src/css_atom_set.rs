@@ -2564,6 +2564,8 @@ pub enum CssAtomSet {
 	_WebkitAutofillStrongPassword,
 	#[atom("-webkit-autofill-strong-password-viewable")]
 	_WebkitAutofillStrongPasswordViewable,
+	#[atom("-webkit-backdrop")]
+	_WebkitBackdrop,
 	#[atom("-webkit-backdrop-filter")]
 	_WebkitBackdropFilter,
 	#[atom("-webkit-backface-visibility")]
@@ -2776,6 +2778,8 @@ pub enum CssAtomSet {
 	_WebkitSearchDecoration,
 	#[atom("-webkit-search-results-button")]
 	_WebkitSearchResultsButton,
+	#[atom("-webkit-selection")]
+	_WebkitSelection,
 	#[atom("-webkit-slider-container")]
 	_WebkitSliderContainer,
 	#[atom("-webkit-slider-runnable-track")]
