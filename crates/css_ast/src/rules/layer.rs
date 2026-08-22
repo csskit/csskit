@@ -24,7 +24,7 @@ pub struct LayerRule<'a> {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable))]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>>);
+pub struct LayerNameList<'a>(pub CommaSeparated<'a, LayerName<'a>, 0>);
 
 #[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -72,5 +72,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo,bar;");
 		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo.bar,baz.bing.baz;");
 		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer foo.bar{body{color:black}}");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer{}");
+		assert_parse!(CssAtomSet::ATOMS, LayerRule, "@layer{body{color:black}}");
 	}
 }
