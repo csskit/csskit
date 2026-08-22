@@ -21,12 +21,10 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block-start");
 		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block-start block-end");
-		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline");
-		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline-start");
-		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline-end");
-		assert_parse!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block inline");
 		assert_peek_false!(CssAtomSet::ATOMS, MarginTrimStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, MarginTrimStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, MarginTrimStyleValue, "inline");
+		assert_parse_error!(CssAtomSet::ATOMS, MarginTrimStyleValue, "block inline");
 	}
 
 	#[test]
