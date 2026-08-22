@@ -91,8 +91,6 @@ mod quote_style;
 mod simd;
 mod small_str_buf;
 mod source_cursor;
-mod source_offset;
-mod span;
 mod syntax;
 mod token;
 mod whitespace_style;
@@ -104,7 +102,7 @@ pub use associated_whitespace_rules::AssociatedWhitespaceRules;
 pub use atom_set::{AtomSet, DynAtomSet};
 pub use comment_style::CommentStyle;
 pub use cow::CowStr;
-pub use cursor::Cursor;
+pub type Cursor = source_tools::Cursor<Token>;
 #[cfg(feature = "dynamic-atoms")]
 pub use dyn_atom_registry::{Atom, DynAtomRegistry, RegisteredAtomSet};
 pub use empty_atom_set::EmptyAtomSet;
@@ -114,8 +112,7 @@ pub use kindset::KindSet;
 pub use pairwise::PairWise;
 pub use quote_style::QuoteStyle;
 pub use source_cursor::SourceCursor;
-pub use source_offset::SourceOffset;
-pub use span::{LineIndex, Span, ToSpan};
+pub use source_tools::{LineIndex, SourceOffset, Span, ToSpan};
 pub use token::Token;
 pub use whitespace_style::Whitespace;
 

@@ -21,6 +21,7 @@ css_feature_data = { path = "crates/css_feature_data", version = "0.0.29" }
 css_lexer = { path = "crates/css_lexer", version = "0.0.29" }
 css_parse = { path = "crates/css_parse", version = "0.0.29" }
 css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.29" }
+source_tools = { path = "crates/source_tools", version = "0.0.29" }
 # Local packages
 csskit = { path = "crates/csskit", version = "0.0.29" }
 csskit_arena = { path = "crates/csskit_arena", version = "0.0.29" }

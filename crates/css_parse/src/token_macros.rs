@@ -55,7 +55,7 @@ macro_rules! define_kind_common {
 			}
 
 			pub fn with_associated_whitespace(&self, rules: $crate::AssociatedWhitespaceRules) -> Self {
-				Self(self.0.with_associated_whitespace(rules))
+				Self(self.0.map_token(|t| t.with_associated_whitespace(rules)))
 			}
 		}
 
@@ -471,7 +471,7 @@ impl Whitespace {
 	/// (a descendant combinator, or the space in `@charset "utf-8";`) and minifiers must keep it. Set this to
 	/// `false` for whitespace kept only as trivia, which a minifier is free to remove.
 	pub fn with_significant_whitespace(&self, significant: bool) -> Self {
-		Self(self.0.with_significant_whitespace(significant))
+		Self(self.0.map_token(|t| t.with_significant_whitespace(significant)))
 	}
 }
 
@@ -501,7 +501,7 @@ impl<'a> Parse<'a> for Whitespace {
 		if c != Kind::Whitespace {
 			Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
 		}
-		Ok(Self(c.with_significant_whitespace(true)))
+		Ok(Self(c.map_token(|t| t.with_significant_whitespace(true))))
 	}
 }
 
@@ -611,7 +611,7 @@ impl Number {
 	}
 
 	pub fn preserve_sign(self) -> Self {
-		if self.has_sign() { Self(self.0.with_sign_required()) } else { self }
+		if self.has_sign() { Self(self.0.map_token(|t| t.with_sign_required())) } else { self }
 	}
 }
 

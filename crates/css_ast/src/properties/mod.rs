@@ -295,7 +295,8 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 		}
 		// Extract vendor prefix from property name cursor
 		let cursor: Cursor = decl.name.into();
-		meta.vendor_prefixes = CssAtomSet::from_bits(cursor.atom_bits()).try_into().unwrap_or(VendorPrefixes::none());
+		meta.vendor_prefixes =
+			CssAtomSet::from_bits(cursor.token().atom_bits()).try_into().unwrap_or(VendorPrefixes::none());
 		// Declarations always have a name property
 		meta.property_kinds |= PropertyKind::Name;
 		meta

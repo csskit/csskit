@@ -1,0 +1,23 @@
+[package]
+name = "source_tools"
+version.workspace = true
+authors.workspace = true
+description = "Shared source locations and generic token cursors."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+allocator-api2 = { workspace = true }
+miette = { workspace = true, optional = true }
+serde = { workspace = true, features = ["derive"], optional = true }
+
+[features]
+default = []
+miette = ["dep:miette"]
+serde = ["dep:serde"]

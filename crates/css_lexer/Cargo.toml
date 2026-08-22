@@ -19,11 +19,11 @@ bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true }
 fearless_simd = { workspace = true }
 fnv = { workspace = true, optional = true }
+source_tools = { workspace = true }
 
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }
 serde_json = { workspace = true, optional = true }
-
 [dev-dependencies]
 glob = { workspace = true }
 serde = { workspace = true, features = ["derive"] }
@@ -42,8 +42,8 @@ default = []
 # Easter egg feature for CSS expansion (opposite of minification)
 egg = []
 # Provides `From<>` implementations for the [SourceSpan] into [miette::SourceSpan] and [Span] into [miette::Span]
-miette = ["dep:miette"]
-serde = ["dep:serde", "dep:serde_json", "miette/serde"]
+miette = ["dep:miette", "source_tools/miette"]
+serde = ["dep:serde", "dep:serde_json", "miette/serde", "source_tools/serde"]
 # Enables dynamic atom interning via DynAtomRegistry
 dynamic-atoms = ["dep:fnv"]
 # Test only features

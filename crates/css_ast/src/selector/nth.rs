@@ -109,7 +109,7 @@ impl<'a> Parse<'a> for Nth {
 			}
 			// If the number has a sign (like +1 or -1), mark it as required for minification
 			if c.token().has_sign() {
-				c = c.with_sign_required();
+				c = c.map_token(|t| t.with_sign_required());
 			}
 			cursors[3] = c;
 			if b_sign == 0 {
