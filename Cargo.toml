@@ -5,7 +5,7 @@ default-members = ["crates/*"]
 exclude = ["packages/csskit_zed"]
 
 [workspace.package]
-version = "0.0.29"
+version = "0.0.30"
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)"]
 edition = "2024"
 description = "Refreshing CSS!"
@@ -15,29 +15,28 @@ license = "MIT"
 keywords = ["CSS", "parser"]
 
 [workspace.dependencies]
-chromashift = { path = "crates/chromashift", version = "0.0.29" }
-css_ast = { path = "crates/css_ast", version = "0.0.29" }
-css_feature_data = { path = "crates/css_feature_data", version = "0.0.29" }
-css_lexer = { path = "crates/css_lexer", version = "0.0.29" }
-css_parse = { path = "crates/css_parse", version = "0.0.29" }
-css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.29" }
-source_tools = { path = "crates/source_tools", version = "0.0.29" }
-# Local packages
-csskit = { path = "crates/csskit", version = "0.0.29" }
-csskit_arena = { path = "crates/csskit_arena", version = "0.0.29" }
-csskit_ast = { path = "crates/csskit_ast", version = "0.0.29" }
-csskit_derives = { path = "crates/csskit_derives", version = "0.0.29" }
-csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.29" }
-csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.29" }
-csskit_napi = { path = "crates/csskit_napi", version = "0.0.29" }
-csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.29" }
-csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.29" }
+chromashift = { path = "crates/chromashift", version = "0.0.30" }
+css_ast = { path = "crates/css_ast", version = "0.0.30" }
+css_feature_data = { path = "crates/css_feature_data", version = "0.0.30" }
+css_lexer = { path = "crates/css_lexer", version = "0.0.30" }
+css_parse = { path = "crates/css_parse", version = "0.0.30" }
+css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.30" }
+csskit = { path = "crates/csskit", version = "0.0.30" }
+csskit_arena = { path = "crates/csskit_arena", version = "0.0.30" }
+csskit_ast = { path = "crates/csskit_ast", version = "0.0.30" }
+csskit_derives = { path = "crates/csskit_derives", version = "0.0.30" }
+csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.30" }
+csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.30" }
+csskit_napi = { path = "crates/csskit_napi", version = "0.0.30" }
+csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.30" }
+csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.30" }
 csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.0" }
-csskit_transform = { path = "crates/csskit_transform", version = "0.0.29" }
-derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.29" }
-stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.29" }
-stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.29" }
-visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.29" }
+csskit_transform = { path = "crates/csskit_transform", version = "0.0.30" }
+derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.30" }
+source_tools = { path = "crates/source_tools", version = "0.0.30" }
+stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.30" }
+stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.30" }
+visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.30" }
 
 # Memory
 allocator-api2 = { version = "0.4.0" }
