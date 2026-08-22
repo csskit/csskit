@@ -225,7 +225,7 @@ where
 	}
 
 	pub fn equals_atom(&self, c: Cursor, atom: &'static dyn DynAtomSet) -> bool {
-		let mut cursor_bits = c.atom_bits();
+		let mut cursor_bits = c.token().atom_bits();
 		if cursor_bits == 0 {
 			if c != KindSet::ATOM_LIKE {
 				return false;
@@ -237,7 +237,7 @@ where
 	}
 
 	pub fn to_atom<A: AtomSet + PartialEq>(&self, c: Cursor) -> A {
-		let bits = c.atom_bits();
+		let bits = c.token().atom_bits();
 		if bits == 0 {
 			if c != KindSet::ATOM_LIKE {
 				return A::from_bits(0);

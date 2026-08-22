@@ -87,7 +87,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	}
 
 	pub fn to_atom<A: AtomSet + PartialEq>(&self, c: Cursor) -> A {
-		let bits = c.atom_bits();
+		let bits = c.token().atom_bits();
 		if bits == 0 {
 			if c != KindSet::ATOM_LIKE {
 				return A::from_bits(0);

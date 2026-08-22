@@ -155,7 +155,8 @@ impl<'a> Collector<'a> {
 		for decl in declarations {
 			match &decl.value {
 				RuleDeclarationValue::Collect(dashed_ident) => {
-					let name = CsskitAtomSet::get_dyn_set().atom_from_bits(Cursor::from(*dashed_ident).atom_bits());
+					let name =
+						CsskitAtomSet::get_dyn_set().atom_from_bits(Cursor::from(*dashed_ident).token().atom_bits());
 					collectors.push(name);
 					self.stats.entry(name).or_insert((StatType::Counter, 0));
 				}
@@ -175,7 +176,7 @@ impl<'a> Collector<'a> {
 		if let Some((_, components)) = &diagnostic {
 			for component in *components {
 				if let DiagnosticComponent::DashedIdent(dashed_ident) = component {
-					diagnostic_stats.insert(Cursor::from(*dashed_ident).atom_bits());
+					diagnostic_stats.insert(Cursor::from(*dashed_ident).token().atom_bits());
 				}
 			}
 		}
@@ -248,7 +249,7 @@ impl<'a> Collector<'a> {
 			match rule {
 				Rule::Stat(stat_rule) => {
 					let cursor = Cursor::from(stat_rule.name);
-					let name = CsskitAtomSet::get_dyn_set().atom_from_bits(cursor.atom_bits());
+					let name = CsskitAtomSet::get_dyn_set().atom_from_bits(cursor.token().atom_bits());
 					let mut stat_type = StatType::Counter;
 					for decl in &stat_rule.block.declarations {
 						match &decl.value {
@@ -330,7 +331,7 @@ impl<'a> Collector<'a> {
 					message.push_str(source_cursor.parse(self.allocator).as_str());
 				}
 				DiagnosticComponent::DashedIdent(dashed_ident) => {
-					let stat_bits = Cursor::from(*dashed_ident).atom_bits();
+					let stat_bits = Cursor::from(*dashed_ident).token().atom_bits();
 					let count = match_output
 						.stat_snapshot
 						.iter()
@@ -341,7 +342,7 @@ impl<'a> Collector<'a> {
 				}
 				DiagnosticComponent::Function(func) => match func {
 					DiagnosticFunction::Attr(attr_func) => {
-						let atom = CsskitAtomSet::from_bits(Cursor::from(attr_func.name).atom_bits());
+						let atom = CsskitAtomSet::from_bits(Cursor::from(attr_func.name).token().atom_bits());
 						let property_kind = atom.to_property_kind();
 						let value = match property_kind {
 							Some(PropertyKind::Name) => match_output.properties.name,
@@ -362,7 +363,7 @@ impl<'a> Collector<'a> {
 
 	/// Evaluate a single if condition feature against stats.
 	fn evaluate_if_feature(&self, feature: &WhenFeature) -> bool {
-		let stat_bits = Cursor::from(feature.stat).atom_bits();
+		let stat_bits = Cursor::from(feature.stat).token().atom_bits();
 		let stat_name = CsskitAtomSet::get_dyn_set().atom_from_bits(stat_bits);
 		let stat_value = self.stats.get(&stat_name).map(|(_, count)| *count).unwrap_or(0);
 

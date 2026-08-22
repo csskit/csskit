@@ -76,7 +76,8 @@ impl<'a, 'b> Matcher<'a, 'b> for QueryPrefixedPseudo {
 	fn matches(&self, ctx: &MatchContext<'a, 'b>) -> bool {
 		self.vendor_prefix().is_some_and(|v| ctx.node.metadata.vendor_prefixes.contains(v))
 			|| ctx.node.properties.vendor_prefix(ctx.source).is_some_and(|prefix| {
-				CsskitAtomSet::from_str(prefix) == CsskitAtomSet::from_bits(Cursor::from(self.vendor).atom_bits())
+				CsskitAtomSet::from_str(prefix)
+					== CsskitAtomSet::from_bits(Cursor::from(self.vendor).token().atom_bits())
 			})
 	}
 }

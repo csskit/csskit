@@ -9,14 +9,14 @@ use crate::{
 	},
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
+use source_tools::SourceCursor as GenericSourceCursor;
 use std::char::REPLACEMENT_CHARACTER;
 use std::fmt::{Display, Formatter, Result, Write};
 
 /// Wraps [Cursor] with a [str] that represents the underlying character data for this cursor.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub struct SourceCursor<'a> {
-	cursor: Cursor,
-	source: &'a str,
+	inner: GenericSourceCursor<'a, Token>,
 	should_compact: bool,
 	#[cfg(feature = "egg")]
 	should_expand: bool,
@@ -24,7 +24,7 @@ pub struct SourceCursor<'a> {
 
 impl<'a> ToSpan for SourceCursor<'a> {
 	fn to_span(&self) -> Span {
-		self.cursor.to_span()
+		self.inner.cursor().to_span()
 	}
 }
 
@@ -40,13 +40,13 @@ impl<'a> Display for SourceCursor<'a> {
 			//  2. Some strings may not have the closing quote, which should be corrected.
 			Kind::String => match self.token().quote_style() {
 				QuoteStyle::Single => {
-					let inner =
-						&self.source[1..(self.token().len() as usize) - self.token().has_close_quote() as usize];
+					let inner = &self.inner.source()
+						[1..(self.token().len() as usize) - self.token().has_close_quote() as usize];
 					write!(f, "'{inner}'")
 				}
 				QuoteStyle::Double => {
-					let inner =
-						&self.source[1..(self.token().len() as usize) - self.token().has_close_quote() as usize];
+					let inner = &self.inner.source()
+						[1..(self.token().len() as usize) - self.token().has_close_quote() as usize];
 					write!(f, "\"{inner}\"")
 				}
 				// Strings must always be quoted!
@@ -65,7 +65,7 @@ impl<'a> Display for SourceCursor<'a> {
 			_ if self.should_compact => self.fmt_compacted(f),
 			#[cfg(feature = "egg")]
 			_ if self.should_expand => self.fmt_expanded(f),
-			_ => f.write_str(self.source),
+			_ => f.write_str(self.inner.source()),
 		}
 	}
 }
@@ -82,12 +82,11 @@ impl<'a> SourceCursor<'a> {
 	#[inline(always)]
 	pub const fn from(cursor: Cursor, source: &'a str) -> Self {
 		debug_assert!(
-			(cursor.len() as usize) == source.len(),
+			(cursor.token().len() as usize) == source.len(),
 			"A SourceCursor should be constructed with a source that matches the length of the cursor!"
 		);
 		Self {
-			cursor,
-			source,
+			inner: GenericSourceCursor::new(cursor, source),
 			should_compact: false,
 			#[cfg(feature = "egg")]
 			should_expand: false,
@@ -96,23 +95,23 @@ impl<'a> SourceCursor<'a> {
 
 	#[inline(always)]
 	pub const fn cursor(&self) -> Cursor {
-		self.cursor
+		self.inner.cursor()
 	}
 
 	#[inline(always)]
 	pub const fn token(&self) -> Token {
-		self.cursor.token()
+		self.inner.cursor().token()
 	}
 
 	#[inline(always)]
 	pub const fn source(&self) -> &'a str {
-		self.source
+		self.inner.source()
 	}
 
 	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Self {
+		let cursor = self.inner.cursor().map_token(|token| token.with_quotes(quote_style));
 		Self {
-			cursor: self.cursor.with_quotes(quote_style),
-			source: self.source,
+			inner: GenericSourceCursor::new(cursor, self.inner.source()),
 			should_compact: self.should_compact,
 			#[cfg(feature = "egg")]
 			should_expand: self.should_expand,
@@ -120,9 +119,9 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Self {
+		let cursor = self.inner.cursor().map_token(|token| token.with_associated_whitespace(rules));
 		Self {
-			cursor: self.cursor.with_associated_whitespace(rules),
-			source: self.source,
+			inner: GenericSourceCursor::new(cursor, self.inner.source()),
 			should_compact: self.should_compact,
 			#[cfg(feature = "egg")]
 			should_expand: self.should_expand,
@@ -130,9 +129,9 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	pub fn with_significant_whitespace(&self, significant: bool) -> Self {
+		let cursor = self.inner.cursor().map_token(|token| token.with_significant_whitespace(significant));
 		Self {
-			cursor: self.cursor.with_significant_whitespace(significant),
-			source: self.source,
+			inner: GenericSourceCursor::new(cursor, self.inner.source()),
 			should_compact: self.should_compact,
 			#[cfg(feature = "egg")]
 			should_expand: self.should_expand,
@@ -149,8 +148,7 @@ impl<'a> SourceCursor<'a> {
 	///
 	pub fn compact(&self) -> SourceCursor<'a> {
 		Self {
-			cursor: self.cursor,
-			source: self.source,
+			inner: self.inner,
 			should_compact: true,
 			#[cfg(feature = "egg")]
 			should_expand: false,
@@ -167,7 +165,7 @@ impl<'a> SourceCursor<'a> {
 	///
 	#[cfg(feature = "egg")]
 	pub fn expand(&self) -> SourceCursor<'a> {
-		Self { cursor: self.cursor, source: self.source, should_compact: false, should_expand: true }
+		Self { inner: self.inner, should_compact: false, should_expand: true }
 	}
 
 	/// Checks if calling `compact().fmt(..)` _might_ produce different output than `fmt(..)`.
@@ -187,7 +185,9 @@ impl<'a> SourceCursor<'a> {
 			Kind::Number => self.can_compact_number(),
 			Kind::Dimension => {
 				self.can_compact_number()
-					|| self.source[(self.token().numeric_len() as usize)..].bytes().any(|b| b == b'\\' || b == 0)
+					|| self.inner.source()[(self.token().numeric_len() as usize)..]
+						.bytes()
+						.any(|b| b == b'\\' || b == 0)
 			}
 			_ => false,
 		}
@@ -200,7 +200,7 @@ impl<'a> SourceCursor<'a> {
 		let value = token.value();
 		let num_len = token.numeric_len() as usize;
 		if value > -1.0 && value < 1.0 && value != 0.0 {
-			let bytes = self.source.as_bytes();
+			let bytes = self.inner.source().as_bytes();
 			if bytes.first() == Some(&b'.') {
 				return false;
 			}
@@ -238,7 +238,7 @@ impl<'a> SourceCursor<'a> {
 				self.fmt_compacted_ident(f)
 			}
 			Kind::Url => self.fmt_compacted_url(f),
-			_ => f.write_str(self.source),
+			_ => f.write_str(self.inner.source()),
 		}
 	}
 
@@ -273,8 +273,8 @@ impl<'a> SourceCursor<'a> {
 	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
 		let start = token.leading_len() as usize;
-		let end = self.source.len() - token.trailing_len() as usize;
-		let source = &self.source[start..end];
+		let end = self.inner.source().len() - token.trailing_len() as usize;
+		let source = &self.inner.source()[start..end];
 
 		match token.kind() {
 			Kind::AtKeyword => f.write_str("@")?,
@@ -335,7 +335,7 @@ impl<'a> SourceCursor<'a> {
 		let leading_len = token.leading_len() as usize;
 		let trailing_len = token.trailing_len() as usize;
 		f.write_str("url(")?;
-		let url_content = &self.source[leading_len..(self.source.len() - trailing_len)];
+		let url_content = &self.inner.source()[leading_len..(self.inner.source().len() - trailing_len)];
 		f.write_str(url_content.trim())?;
 		if token.url_has_closing_paren() {
 			f.write_str(")")?;
@@ -345,7 +345,7 @@ impl<'a> SourceCursor<'a> {
 
 	fn fmt_compacted_string(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
-		let inner = &self.source[1..(token.len() as usize) - token.has_close_quote() as usize];
+		let inner = &self.inner.source()[1..(token.len() as usize) - token.has_close_quote() as usize];
 		let quote = match token.quote_style() {
 			QuoteStyle::Single => '\'',
 			QuoteStyle::Double => '"',
@@ -396,7 +396,7 @@ impl<'a> SourceCursor<'a> {
 				self.fmt_expanded_ident(f)
 			}
 			Kind::Url => self.fmt_expanded_url(f),
-			_ => f.write_str(self.source),
+			_ => f.write_str(self.inner.source()),
 		}
 	}
 
@@ -426,8 +426,8 @@ impl<'a> SourceCursor<'a> {
 	fn fmt_expanded_ident(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
 		let start = token.leading_len() as usize;
-		let end = self.source.len() - token.trailing_len() as usize;
-		let source = &self.source[start..end];
+		let end = self.inner.source().len() - token.trailing_len() as usize;
+		let source = &self.inner.source()[start..end];
 
 		match token.kind() {
 			Kind::AtKeyword => f.write_str("@")?,
@@ -465,8 +465,8 @@ impl<'a> SourceCursor<'a> {
 		let token = self.token();
 		let leading_len = token.leading_len() as usize;
 		let trailing_len = token.trailing_len() as usize;
-		let url_prefix = &self.source[..leading_len];
-		let url_content = &self.source[leading_len..(self.source.len() - trailing_len)];
+		let url_prefix = &self.inner.source()[..leading_len];
+		let url_content = &self.inner.source()[leading_len..(self.inner.source().len() - trailing_len)];
 		f.write_str(url_prefix)?;
 		f.write_str("   ")?;
 		f.write_str(url_content.trim())?;
@@ -480,7 +480,7 @@ impl<'a> SourceCursor<'a> {
 	#[cfg(feature = "egg")]
 	fn fmt_expanded_string(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
-		let inner = &self.source[1..(token.len() as usize) - token.has_close_quote() as usize];
+		let inner = &self.inner.source()[1..(token.len() as usize) - token.has_close_quote() as usize];
 		// Use the opposite quote style to maximize escaping opportunity
 		let (open_quote, close_quote, escape_char) = match token.quote_style() {
 			QuoteStyle::Single => ('"', '"', '"'),
@@ -508,18 +508,18 @@ impl<'a> SourceCursor<'a> {
 		debug_assert!(self.token() != Kind::Delim && self.token() != Kind::Url);
 		debug_assert!(other.to_ascii_lowercase() == other);
 		let start = self.token().leading_len() as usize;
-		let end = self.source.len() - self.token().trailing_len() as usize;
+		let end = self.inner.source().len() - self.token().trailing_len() as usize;
 		if !self.token().contains_escape_chars() {
 			if end - start != other.len() {
 				return false;
 			}
 			if self.token().is_lower_case() {
-				debug_assert!(self.source[start..end].to_ascii_lowercase() == self.source[start..end]);
-				return &self.source[start..end] == other;
+				debug_assert!(self.source()[start..end].to_ascii_lowercase() == self.source()[start..end]);
+				return &self.inner.source()[start..end] == other;
 			}
-			return self.source[start..end].eq_ignore_ascii_case(other);
+			return self.inner.source()[start..end].eq_ignore_ascii_case(other);
 		}
-		let mut chars = self.source[start..end].chars().peekable();
+		let mut chars = self.inner.source()[start..end].chars().peekable();
 		let mut other_chars = other.chars();
 		let mut i = 0;
 		while let Some(c) = chars.next() {
@@ -549,7 +549,7 @@ impl<'a> SourceCursor<'a> {
 								i += 1;
 							}
 							i += 2;
-							chars = self.source[(start + i)..end].chars().peekable();
+							chars = self.inner.source()[(start + i)..end].chars().peekable();
 							continue;
 						}
 					} else {
@@ -557,9 +557,9 @@ impl<'a> SourceCursor<'a> {
 					}
 				}
 				i += 1;
-				let (ch, n) = self.source[(start + i)..].chars().parse_escape_sequence();
+				let (ch, n) = self.inner.source()[(start + i)..].chars().parse_escape_sequence();
 				i += n as usize;
-				chars = self.source[(start + i)..end].chars().peekable();
+				chars = self.inner.source()[(start + i)..end].chars().peekable();
 				if (ch == '\0' && REPLACEMENT_CHARACTER != o) || ch != o {
 					return false;
 				}
@@ -576,11 +576,11 @@ impl<'a> SourceCursor<'a> {
 	pub fn parse<A: Allocator + Clone + 'a>(&self, allocator: A) -> CowStr<'a, A> {
 		debug_assert!(self.token() != Kind::Delim);
 		let start = self.token().leading_len() as usize;
-		let end = self.source.len() - self.token().trailing_len() as usize;
+		let end = self.inner.source().len() - self.token().trailing_len() as usize;
 		if !self.token().contains_escape_chars() {
-			return CowStr::<A>::Borrowed(&self.source[start..end]);
+			return CowStr::<A>::Borrowed(&self.inner.source()[start..end]);
 		}
-		let mut chars = self.source[start..end].chars().peekable();
+		let mut chars = self.inner.source()[start..end].chars().peekable();
 		let mut i = 0;
 		let mut vec: Option<Vec<u8, A>> = None;
 		while let Some(c) = chars.next() {
@@ -591,7 +591,7 @@ impl<'a> SourceCursor<'a> {
 					} else {
 						Some({
 							let mut v = Vec::new_in(allocator.clone());
-							v.extend(self.source[start..(start + i)].bytes());
+							v.extend(self.inner.source()[start..(start + i)].bytes());
 							v
 						})
 					}
@@ -607,7 +607,7 @@ impl<'a> SourceCursor<'a> {
 					} else {
 						Some({
 							let mut v = Vec::new_in(allocator.clone());
-							v.extend(self.source[start..(start + i)].bytes());
+							v.extend(self.inner.source()[start..(start + i)].bytes());
 							v
 						})
 					}
@@ -627,7 +627,7 @@ impl<'a> SourceCursor<'a> {
 								i += 1;
 							}
 							i += 2;
-							chars = self.source[(start + i)..end].chars().peekable();
+							chars = self.inner.source()[(start + i)..end].chars().peekable();
 							continue;
 						}
 					} else {
@@ -635,12 +635,12 @@ impl<'a> SourceCursor<'a> {
 					}
 				}
 				i += 1;
-				let (ch, n) = self.source[(start + i)..].chars().parse_escape_sequence();
+				let (ch, n) = self.inner.source()[(start + i)..].chars().parse_escape_sequence();
 				let mut buf = [0; 4];
 				let bytes = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch }.encode_utf8(&mut buf).as_bytes();
 				vec.as_mut().unwrap().extend_from_slice(bytes);
 				i += n as usize;
-				chars = self.source[(start + i)..end].chars().peekable();
+				chars = self.inner.source()[(start + i)..end].chars().peekable();
 			} else {
 				if let Some(bytes) = &mut vec {
 					let mut buf = [0; 4];
@@ -656,7 +656,7 @@ impl<'a> SourceCursor<'a> {
 				// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
 				unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
 			}
-			None => CowStr::Borrowed(&self.source[start..start + i]),
+			None => CowStr::Borrowed(&self.inner.source()[start..start + i]),
 		}
 	}
 
@@ -664,11 +664,11 @@ impl<'a> SourceCursor<'a> {
 	pub fn parse_ascii_lower<A: Allocator + Clone + 'a>(&self, allocator: A) -> CowStr<'a, A> {
 		debug_assert!(self.token() != Kind::Delim);
 		let start = self.token().leading_len() as usize;
-		let end = self.source.len() - self.token().trailing_len() as usize;
+		let end = self.inner.source().len() - self.token().trailing_len() as usize;
 		if !self.token().contains_escape_chars() && self.token().is_lower_case() {
-			return CowStr::Borrowed(&self.source[start..end]);
+			return CowStr::Borrowed(&self.inner.source()[start..end]);
 		}
-		let mut chars = self.source[start..end].chars().peekable();
+		let mut chars = self.inner.source()[start..end].chars().peekable();
 		let mut i = 0;
 		let mut vec: Vec<u8, A> = Vec::new_in(allocator.clone());
 		while let Some(c) = chars.next() {
@@ -693,7 +693,7 @@ impl<'a> SourceCursor<'a> {
 								i += 1;
 							}
 							i += 2;
-							chars = self.source[(start + i)..end].chars().peekable();
+							chars = self.inner.source()[(start + i)..end].chars().peekable();
 							continue;
 						}
 					} else {
@@ -701,13 +701,13 @@ impl<'a> SourceCursor<'a> {
 					}
 				}
 				i += 1;
-				let (ch, n) = self.source[(start + i)..].chars().parse_escape_sequence();
+				let (ch, n) = self.inner.source()[(start + i)..].chars().parse_escape_sequence();
 				let char_to_push = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch.to_ascii_lowercase() };
 				let mut buf = [0; 4];
 				let bytes = char_to_push.encode_utf8(&mut buf).as_bytes();
 				vec.extend_from_slice(bytes);
 				i += n as usize;
-				chars = self.source[(start + i)..end].chars().peekable();
+				chars = self.inner.source()[(start + i)..end].chars().peekable();
 			} else {
 				let mut buf = [0; 4];
 				let bytes = c.to_ascii_lowercase().encode_utf8(&mut buf).as_bytes();

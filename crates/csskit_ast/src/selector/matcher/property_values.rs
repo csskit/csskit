@@ -46,7 +46,7 @@ impl PropertyValues {
 			AttributeOperator::Exact(_) => {
 				let expected_atom = CssAtomSet::from_str(expected_value);
 				if expected_atom != CssAtomSet::_None {
-					return CssAtomSet::from_bits(cursor.atom_bits()) == expected_atom;
+					return CssAtomSet::from_bits(cursor.token().atom_bits()) == expected_atom;
 				}
 				actual.eq_ignore_ascii_case(expected)
 			}

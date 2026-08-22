@@ -701,6 +701,7 @@ dependencies = [
  "serde",
  "serde_json",
  "similar 3.1.2",
+ "source_tools",
 ]
 
 [[package]]
@@ -2978,6 +2979,15 @@ checksum = "52d1cfed4120b4d927bf7c0f86d2087a4a7d6027c906d9f9d525a80573b9be51"
 dependencies = [
  "libc",
  "windows-sys 0.61.2",
+]
+
+[[package]]
+name = "source_tools"
+version = "0.0.29"
+dependencies = [
+ "allocator-api2",
+ "miette",
+ "serde",
 ]
 
 [[package]]

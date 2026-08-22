@@ -2,6 +2,7 @@ use crate::{
 	AssociatedWhitespaceRules, CommentStyle, Cursor, Kind, KindSet, PairWise, QuoteStyle, SourceOffset, Whitespace,
 	constants::SINGLE_CHAR_KINDS,
 };
+use source_tools::SourceToken as SourceTokenTrait;
 use std::char::REPLACEMENT_CHARACTER;
 
 /// An abstract representation of the chunk of the source text, retaining certain "facts" about the source.
@@ -1535,4 +1536,29 @@ fn test_bad_bits() {
 	let token = Token::new_delim('[');
 	assert_eq!(token, Kind::LeftSquare);
 	assert_eq!(token.with_bad_flag().kind(), Kind::BadLeftSquare);
+}
+
+impl SourceTokenTrait for Token {
+	type Kind = crate::Kind;
+	const EMPTY: Self = Token::EMPTY;
+
+	fn kind(self) -> Self::Kind {
+		Token::kind(&self)
+	}
+
+	fn len(self) -> u32 {
+		Token::len(&self)
+	}
+
+	fn kind_name(self) -> &'static str {
+		Token::kind(&self).as_str()
+	}
+
+	fn leading_len(self) -> u32 {
+		Token::leading_len(&self)
+	}
+
+	fn trailing_len(self) -> u32 {
+		Token::trailing_len(&self)
+	}
 }

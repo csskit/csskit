@@ -183,7 +183,7 @@ impl<'a> Parse<'a> for QueryCompoundSelector<'a> {
 			match &component {
 				QuerySelectorComponent::Type(t) => {
 					let c: Cursor = t.0.into();
-					let node_id = CsskitAtomSet::from_bits(c.atom_bits()).to_node_id();
+					let node_id = CsskitAtomSet::from_bits(c.token().atom_bits()).to_node_id();
 					if rightmost_type.is_none() {
 						rightmost_type = node_id;
 					}
@@ -365,7 +365,7 @@ pub struct QueryType(pub T![Ident]);
 impl QueryType {
 	pub fn node_id(&self, _source: &str) -> Option<NodeId> {
 		let c: Cursor = self.0.into();
-		CsskitAtomSet::from_bits(c.atom_bits()).to_node_id()
+		CsskitAtomSet::from_bits(c.token().atom_bits()).to_node_id()
 	}
 }
 
@@ -439,7 +439,7 @@ impl QueryAttribute {
 	/// Returns the attribute name atom.
 	pub fn property_kind(&self) -> Option<PropertyKind> {
 		let c: Cursor = self.attr_name.into();
-		CsskitAtomSet::from_bits(c.atom_bits()).to_property_kind()
+		CsskitAtomSet::from_bits(c.token().atom_bits()).to_property_kind()
 	}
 
 	/// Returns the attribute operator, or None for presence-only selectors like `[name]`.
@@ -466,7 +466,7 @@ impl QueryAttribute {
 impl NodeWithMetadata<QuerySelectorMetadata> for QueryAttribute {
 	fn self_metadata(&self) -> QuerySelectorMetadata {
 		let cursor: Cursor = self.attr_name.into();
-		let atom = CsskitAtomSet::from_bits(cursor.atom_bits());
+		let atom = CsskitAtomSet::from_bits(cursor.token().atom_bits());
 		let attribute_filter = atom.to_property_kind().unwrap_or(PropertyKind::none());
 		QuerySelectorMetadata {
 			structure: SelectorStructure::HasAttribute,
@@ -793,7 +793,7 @@ impl QueryPropertyTypePseudo {
 	/// Returns the PropertyGroup for this pseudo-class, or None if unknown.
 	pub fn property_group(&self) -> Option<PropertyGroup> {
 		let c: Cursor = self.group.into();
-		let atom = CsskitAtomSet::from_bits(c.atom_bits());
+		let atom = CsskitAtomSet::from_bits(c.token().atom_bits());
 		atom.to_property_group()
 	}
 }
@@ -811,7 +811,7 @@ impl QueryPrefixedPseudo {
 	/// Returns the VendorPrefixes for this pseudo-class, or None if unknown.
 	pub fn vendor_prefix(&self) -> Option<VendorPrefixes> {
 		let c: Cursor = self.vendor.into();
-		let atom = CsskitAtomSet::from_bits(c.atom_bits());
+		let atom = CsskitAtomSet::from_bits(c.token().atom_bits());
 		atom.to_vendor_prefix()
 	}
 }
