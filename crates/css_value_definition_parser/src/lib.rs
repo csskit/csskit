@@ -342,11 +342,22 @@ impl Def {
 	pub fn optimize(&self) -> Self {
 		if let Self::Combinator(defs, DefCombinatorStyle::Alternatives) = self {
 			let optimized: Vec<Def> = defs.iter().map(Self::optimize).collect();
-			if optimized.iter().any(|d| matches!(d, Def::Combinator(_, DefCombinatorStyle::Alternatives))) {
+			let is_nested_alternatives = |def: &Def| match def {
+				Def::Combinator(_, DefCombinatorStyle::Alternatives) => true,
+				Def::Group(inner, DefGroupStyle::None) => {
+					matches!(inner.as_ref(), Def::Combinator(_, DefCombinatorStyle::Alternatives))
+				}
+				_ => false,
+			};
+			if optimized.iter().any(is_nested_alternatives) {
 				let flat: Vec<Def> = optimized
 					.into_iter()
 					.flat_map(|d| match d {
 						Def::Combinator(inner, DefCombinatorStyle::Alternatives) => inner,
+						Def::Group(inner, DefGroupStyle::None) => match *inner {
+							Def::Combinator(inner, DefCombinatorStyle::Alternatives) => inner,
+							other => vec![Def::Group(Box::new(other), DefGroupStyle::None)],
+						},
 						other => vec![other],
 					})
 					.collect();
@@ -624,6 +635,31 @@ impl Def {
 				return Self::Multiplier(Box::new(inner.optimize()), *sep, range.clone());
 			}
 			Self::Optional(inner) => return Self::Optional(Box::new(inner.optimize())),
+			Self::Group(inner, DefGroupStyle::OneMustOccur)
+				if matches!(inner.as_ref(), Self::Combinator(defs, DefCombinatorStyle::Ordered)
+					if defs.iter().any(|def| matches!(def, Self::Optional(_)))) =>
+			{
+				let Self::Combinator(defs, _) = inner.as_ref() else { unreachable!("guarded above") };
+				let mut alternatives = Vec::with_capacity(defs.len());
+				for (i, def) in defs.iter().enumerate() {
+					let mut children = Vec::with_capacity(defs.len() - i);
+					children.push(if let Self::Optional(required) = def {
+						required.deref().clone()
+					} else {
+						def.clone()
+					});
+					children.extend_from_slice(&defs[i + 1..]);
+					alternatives.push(if children.len() == 1 {
+						children.remove(0)
+					} else {
+						Self::Combinator(children, DefCombinatorStyle::Ordered)
+					});
+					if !matches!(def, Self::Optional(_)) {
+						break;
+					}
+				}
+				Self::Combinator(alternatives, DefCombinatorStyle::Alternatives)
+			}
 			Self::Group(inner, style) => return Self::Group(Box::new(inner.optimize()), *style),
 			_ => return self.clone(),
 		}
