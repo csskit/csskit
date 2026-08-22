@@ -6,7 +6,7 @@ use crate::{
 };
 use allocator_api2::alloc::Allocator;
 use chromashift::*;
-use css_ast::{Color as ASTColor, ToChromashift, Visitable};
+use css_ast::{Color as ASTColor, NodeVisitor, ToChromashift, VisitNode, Visitable};
 use css_lexer::LineIndex;
 use css_parse::{Diagnostic, Span, ToSpan};
 use itertools::Itertools;

@@ -1,6 +1,6 @@
 use css_ast::{
-	CSSInt, Color, CssMetadata, Declaration, DeclarationValue, NodeId, PropertyRule, StyleRule, ToChromashift, Visit,
-	VisitNode, visitor,
+	CSSInt, Color, CssMetadata, Declaration, DeclarationValue, NodeId, NodeVisitor, PropertyRule, StyleRule,
+	ToChromashift, Visit, VisitNode, visitor,
 };
 use css_lexer::ToSpan;
 use css_parse::NodeWithMetadata;

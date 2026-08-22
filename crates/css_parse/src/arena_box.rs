@@ -30,6 +30,18 @@ impl<'a, T, A: Allocator> Box<'a, T, A> {
 	}
 }
 
+impl<'a, T> Box<'a, T> {
+	/// Gives up ownership of the value. The value stays in the arena, thus its `Drop` does not run.
+	#[inline]
+	pub fn leak(self) -> &'a mut T {
+		let ptr = self.ptr;
+		std::mem::forget(self);
+		// SAFETY: `ptr` addresses a live value in an arena that outlives `'a`, and this `Box` was the
+		// only owner of it. The arena frees the whole region at once.
+		unsafe { &mut *ptr.as_ptr() }
+	}
+}
+
 impl<'a, T, A: Allocator> Deref for Box<'a, T, A> {
 	type Target = T;
 

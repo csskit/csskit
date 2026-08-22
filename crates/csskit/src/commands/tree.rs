@@ -1,6 +1,6 @@
 use super::prelude::*;
 use css_ast::VisitNode;
-use css_ast::visit::{Visit, Visitable, visitor};
+use css_ast::visit::{NodeVisitor, Visit, Visitable, visitor};
 use css_ast::{PROPERTY_KIND_VARIANTS, PropertyKind};
 use css_parse::{Cursor, ToSpan};
 use csskit_ast::{QueryFunctionalPseudoClass, QueryPseudoClass};

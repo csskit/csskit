@@ -1,9 +1,17 @@
 ---
 source: crates/csskit_derives/src/test/test_visitor.rs
+assertion_line: 33
 expression: out
 ---
-impl Visit for V {
+impl NodeVisitor for V {
     fn consider_node(&self, q: VisitNode) -> VisitFlow {
         VisitFlow::SKIP_CHILDREN
     }
+    fn enter_node(&mut self, _node: VisitNode) -> ::visit_flow::VisitFlow {
+        <::visit_flow::VisitFlow as ::visit_flow::VisitFlowExt>::DESCEND
+    }
+    fn exit_node(&mut self, _node: VisitNode) -> ::visit_flow::VisitFlow {
+        <::visit_flow::VisitFlow as ::visit_flow::VisitFlowExt>::DESCEND
+    }
 }
+impl Visit for V {}

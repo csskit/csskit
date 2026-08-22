@@ -213,6 +213,40 @@ fn main() {
 	}
 
 	{
+		let parse_arms = queryable
+			.iter()
+			.filter_map(|node| {
+				let ident = node.ident();
+				let generics = node.generics();
+				if generics.type_params().next().is_some() || generics.const_params().next().is_some() {
+					return None;
+				}
+				let ty = match generics.lifetimes().count() {
+					0 => quote! { #ident },
+					lifetimes => {
+						let each = std::iter::repeat_n(quote! { 'a }, lifetimes);
+						quote! { #ident<#(#each),*> }
+					}
+				};
+				Some(quote! { NodeId::#ident => ErasedNodeParser::<#ty>(PhantomData).parse(arena, source) })
+			})
+			.collect::<Vec<_>>();
+		#[rustfmt::skip]
+		let source = quote! {
+			/// Parses `source` as the node kind that `id` names, into `arena`.
+			///
+			/// Returns `None` if the kind has no standalone grammar.
+			pub fn parse_root<'a>(id: NodeId, arena: &'a Arena, source: &'a str) -> Option<ParsedRoot<'a>> {
+				match id {
+					#(#parse_arms,)*
+					_ => None,
+				}
+			}
+		};
+		write_tokens("css_root_dispatch.rs", source).unwrap();
+	}
+
+	{
 		let mut vendor_atoms: Vec<proc_macro2::Ident> = Vec::new();
 		let variants = all_visitable.iter().filter_map(|node| {
 			let ident = node.ident();

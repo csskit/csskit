@@ -76,6 +76,27 @@ fn explicit_unit_return_opts_out() {
 }
 
 #[test]
+fn impl_attributes_apply_to_both_generated_impls() {
+	let out = expand(quote! {
+		#[cfg(feature = "visitor")]
+		#[allow(dead_code)]
+		impl Visit for V {}
+	});
+	let file = syn::parse_file(&out).unwrap();
+	let impls = file.items.iter().filter_map(|item| match item {
+		syn::Item::Impl(item) => Some(item),
+		_ => None,
+	});
+	let mut count = 0;
+	for item in impls {
+		count += 1;
+		assert!(item.attrs.iter().any(|attr| attr.path().is_ident("cfg")));
+		assert!(item.attrs.iter().any(|attr| attr.path().is_ident("allow")));
+	}
+	assert_eq!(count, 2);
+}
+
+#[test]
 fn rejects_inherent_impl() {
 	let item = syn::parse2::<syn::ItemImpl>(quote! {
 		impl V {

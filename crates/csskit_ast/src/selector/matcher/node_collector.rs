@@ -1,6 +1,6 @@
 use super::{NodeData, SelectorBuckets};
 use css_ast::VisitNode;
-use css_ast::visit::{NodeId, Visit, visitor};
+use css_ast::visit::{NodeId, NodeVisitor, Visit, visitor};
 use smallvec::SmallVec;
 use std::collections::HashMap;
 use visit_flow::{VisitFlow, VisitFlowExt};
