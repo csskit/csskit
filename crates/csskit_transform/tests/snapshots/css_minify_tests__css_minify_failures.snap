@@ -104,9 +104,6 @@ FAIL container/0006
 -@container sidebar (min-width:700px){a{color:red}}
 +@container sidebar (width>=700px){a{color:red}}
 
-FAIL counter-style/0002
--@counter-style empty{}
-
 FAIL duplicates/0001
 -a{color:red;color:blue}
 +a{color:#00f}
@@ -174,31 +171,6 @@ FAIL duplicates/0021
 FAIL duplicates/0022
 -h2:before{content:"i"}h2::before{content:"j"}
 +h2:before{content:"j"}
-
-FAIL empty-rules/0001
--a{}b{color:red}
-+b{color:red}
-
-FAIL empty-rules/0002
--a{}b{color:red}
-+b{color:red}
-
-FAIL empty-rules/0003
--@media screen{}b{color:red}
-+b{color:red}
-
-FAIL empty-rules/0004
--a{color:red;&b{}}
-+a{color:red}
-
-FAIL empty-rules/0005
--nav{a{}}
-
-FAIL empty-rules/0006
--kbd{}ul li:nth-of-type(2n){}fieldset>legend{}input[type="checkbox"]{}input[type=radio]{}legend,option{}*,*:before,*:after{}button.secondary{}#unique{}details[open]{}:focus{}a[href*=".pdf"]:after{}:is(html,body):has(:modal){}
-
-FAIL empty-rules/0007
--@keyframes fade{0%{}50%{}100%{}}
 
 FAIL escaping/0013
 -[href="#"],[href="/"],[href="file.html"],[href=https\:\/\/example\.com]{color:red}
@@ -360,10 +332,6 @@ FAIL merging/0003
 -@media screen{a{color:red}}@media screen{b{margin:0}}
 +@media screen{a{color:red}b{margin:0}}
 
-FAIL merging/0004
--@media screen{}a{color:red}
-+a{color:red}
-
 FAIL merging/0005
 -a{color:red}b{color:red;font-size:16px}
 +a,b{color:red}b{font-size:16px}
@@ -460,12 +428,6 @@ FAIL nesting/0032
 -:is(#a,.b),.c{.d{color:red}}
 +#a,.b,.c{.d{color:red}}
 
-FAIL page/0003
--@page{}
-
-FAIL property/0004
--@property --foo{}
-
 FAIL property/0005
 -@property --foo{inherits:false;initial-value:16px}
 
@@ -475,9 +437,6 @@ FAIL property/0006
 FAIL property/0007
 -@property --foo{syntax:"<length> | <percentage>";inherits:false;initial-value:16px}
 +@property --foo{syntax:"<length>|<percentage>";inherits:false;initial-value:16px}
-
-FAIL scope/0003
--@scope(.card){}
 
 FAIL selectors-advanced/0001
 -:is(a,b){color:red}
@@ -890,10 +849,6 @@ FAIL shorthands/0079
 FAIL supports/0001
 -@supports(hanging-punctuation:first){a{hanging-punctuation:first}}
 +@supports (hanging-punctuation:first){a{hanging-punctuation:first}}
-
-FAIL supports/0002
--@supports(display:grid){}a{color:red}
-+a{color:red}
 
 FAIL supports/0003
 -@supports(display:grid){a{display:grid}}

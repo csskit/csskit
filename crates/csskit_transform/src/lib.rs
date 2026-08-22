@@ -19,6 +19,7 @@ mod reduce_colors;
 mod reduce_lengths;
 mod reduce_time_units;
 mod reduce_urls;
+mod remove_inert_nodes;
 
 pub use css_minifier::*;
 pub use reduce_charset_rule::*;
@@ -26,6 +27,7 @@ pub use reduce_colors::*;
 pub use reduce_lengths::*;
 pub use reduce_time_units::*;
 pub use reduce_urls::*;
+pub use remove_inert_nodes::*;
 
 #[cfg(test)]
 pub mod test_helpers;
