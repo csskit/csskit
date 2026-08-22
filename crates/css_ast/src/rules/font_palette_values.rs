@@ -28,6 +28,7 @@ pub struct FontPaletteValuesRule<'a> {
 	#[atom(CssAtomSet::FontPaletteValues)]
 	pub name: T![AtKeyword],
 	pub prelude: PaletteIdentifier,
+	#[metadata(block)]
 	pub block: FontPaletteValuesRuleBlock<'a>,
 }
 

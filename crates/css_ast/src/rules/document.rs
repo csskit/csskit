@@ -12,6 +12,7 @@ pub struct DocumentRule<'a> {
 	#[atom(CssAtomSet::Document)]
 	pub name: T![AtKeyword],
 	pub prelude: DocumentMatcherList<'a>,
+	#[metadata(block)]
 	pub block: DocumentRuleBlock<'a>,
 }
 

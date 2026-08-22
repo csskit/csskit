@@ -28,6 +28,7 @@ pub struct FontFeatureValuesRule<'a> {
 	#[atom(CssAtomSet::FontFeatureValues)]
 	pub name: T![AtKeyword],
 	pub prelude: FontFeatureValuesPrelude<'a>,
+	#[metadata(block)]
 	pub block: FontFeatureValuesRuleBlock<'a>,
 }
 

@@ -53,9 +53,10 @@ where
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
+		let nested = p.is(State::Nested);
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut rules = Vec::new_in(p.alloc());
-		let mut meta = M::default();
+		let mut meta = if nested { M::default().with_nested() } else { M::default() };
 		loop {
 			p.parse_if_peek::<T![;]>().ok();
 			if p.at_end() {

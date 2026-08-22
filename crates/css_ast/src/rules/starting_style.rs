@@ -16,6 +16,7 @@ pub struct StartingStyleRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::StartingStyle)]
 	pub name: T![AtKeyword],
+	#[metadata(block)]
 	pub block: StartingStyleRuleBlock<'a>,
 }
 

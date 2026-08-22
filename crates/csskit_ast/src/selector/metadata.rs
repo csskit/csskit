@@ -131,6 +131,7 @@ pub enum SelectorRequirements {
 	Rule,
 	AtRule,
 	Empty,
+	Nested,
 }
 
 impl SelectorRequirements {
@@ -147,6 +148,7 @@ impl SelectorRequirements {
 			&& (!self.contains(Self::Rule) || meta.has_rules())
 			&& (!self.contains(Self::AtRule) || meta.has_at_rules())
 			&& (!self.contains(Self::Empty) || meta.is_empty_container())
+			&& (!self.contains(Self::Nested) || meta.is_nested())
 	}
 }
 

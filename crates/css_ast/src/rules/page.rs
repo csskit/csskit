@@ -16,7 +16,9 @@ pub struct PageRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Page)]
 	pub name: T![AtKeyword],
+	#[metadata(prelude)]
 	pub prelude: Option<PageSelectorList<'a>>,
+	#[metadata(block)]
 	pub block: PageRuleBlock<'a>,
 }
 

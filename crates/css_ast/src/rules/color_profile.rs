@@ -28,6 +28,7 @@ pub struct ColorProfileRule<'a> {
 	#[atom(CssAtomSet::ColorProfile)]
 	pub name: T![AtKeyword],
 	pub prelude: ColorProfilePrelude,
+	#[metadata(block)]
 	pub block: ColorProfileRuleBlock<'a>,
 }
 

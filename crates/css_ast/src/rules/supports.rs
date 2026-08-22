@@ -46,6 +46,7 @@ pub struct SupportsRule<'a> {
 	#[atom(CssAtomSet::Supports)]
 	pub name: T![AtKeyword],
 	pub prelude: SupportsCondition<'a>,
+	#[metadata(block)]
 	pub block: SupportsRuleBlock<'a>,
 }
 

@@ -58,10 +58,11 @@ where
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,
 	{
+		let nested = p.is(State::Nested);
 		let open_curly = p.parse::<T!['{']>()?;
 		let mut declarations = Vec::new_in(p.alloc());
 		let mut rules = Vec::new_in(p.alloc());
-		let mut meta = M::default();
+		let mut meta = if nested { M::default().with_nested() } else { M::default() };
 
 		// Per CSS Syntax spec: maintain a buffer of declarations to flush when we encounter rules.
 		// This enables proper interleaving of declarations and rules.

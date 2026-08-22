@@ -17,6 +17,7 @@ pub struct WebkitKeyframesRule<'a> {
 	#[atom(CssAtomSet::_WebkitKeyframes)]
 	pub name: T![AtKeyword],
 	pub prelude: KeyframesName,
+	#[metadata(block)]
 	pub block: KeyframesRuleBlock<'a>,
 }
 

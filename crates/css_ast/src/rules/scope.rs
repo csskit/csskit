@@ -22,8 +22,11 @@ pub struct ScopeRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Scope)]
 	pub name: T![AtKeyword],
+	#[metadata(prelude)]
 	pub start: Option<Box<'a, ScopeStart<'a>>>,
+	#[metadata(prelude)]
 	pub end: Option<Box<'a, ScopeEnd<'a>>>,
+	#[metadata(block)]
 	pub block: ScopeRuleBlock<'a>,
 }
 
@@ -83,5 +86,6 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope(.card){color:black}");
 		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope(.card){img{color:black}}");
 		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope(){}");
+		assert_parse!(CssAtomSet::ATOMS, ScopeRule, "@scope{img{color:black}}");
 	}
 }

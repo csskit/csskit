@@ -12,6 +12,7 @@ pub struct LayerRule<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Layer)]
 	pub name: T![AtKeyword],
+	#[metadata(prelude)]
 	pub prelude: LayerNameList<'a>,
 	pub block: Option<LayerRuleBlock<'a>>,
 	#[cfg_attr(feature = "visitable", visit(skip))]

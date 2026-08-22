@@ -9,9 +9,10 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 	/// This allows the value to inspect the declaration (e.g., checking for !important)
 	/// and include that information in the metadata.
 	///
-	/// The default implementation just returns the value's metadata, ignoring the declaration context.
+	/// The default implementation returns the value's metadata marked as a declaration, ignoring the
+	/// declaration context.
 	fn declaration_metadata(declaration: &Declaration<'a, Self, M>) -> M {
-		declaration.value.metadata()
+		declaration.value.metadata().with_declaration()
 	}
 
 	/// Determines if the given [Cursor] represents a valid [Ident][crate::token_macros::Ident] matching a known property
