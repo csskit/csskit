@@ -13,14 +13,11 @@ repository.workspace = true
 bench = false
 
 [dependencies]
-css_ast = { workspace = true, features = [
-	"chromashift",
-	"visitable",
-] } # @release
-css_lexer = { workspace = true } # @release
-css_parse = { workspace = true } # @release
-visit_flow = { workspace = true } # @release
-chromashift = { workspace = true } # @release
+css_ast = { workspace = true, features = ["chromashift", "visitable"] }
+css_lexer = { workspace = true }
+css_parse = { workspace = true }
+visit_flow = { workspace = true }
+chromashift = { workspace = true }
 
 bitmask-enum = { workspace = true }
 strum = { workspace = true, features = ["derive"] }

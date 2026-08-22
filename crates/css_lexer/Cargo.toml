@@ -16,7 +16,7 @@ bench = false
 [dependencies]
 allocator-api2 = { workspace = true }
 bitmask-enum = { workspace = true }
-derive_atom_set = { workspace = true } # @release
+derive_atom_set = { workspace = true }
 fearless_simd = { workspace = true }
 fnv = { workspace = true, optional = true }
 

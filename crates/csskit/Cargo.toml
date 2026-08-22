@@ -11,15 +11,19 @@ repository.workspace = true
 
 [dependencies]
 allocator-api2 = { workspace = true }
-css_lexer = { workspace = true } # @release
-css_ast = { workspace = true, features = ["chromashift", "visitable", "miette"] } # @release
-css_parse = { workspace = true, features = ["miette", "egg"] } # @release
-visit_flow = { workspace = true }                              # @release
-csskit_ast = { workspace = true, features = ["miette"] } # @release
-csskit_lsp = { workspace = true } # @release
-csskit_highlight = { workspace = true, features = ["miette"] } # @release
-csskit_transform = { workspace = true } # @release
-chromashift = { workspace = true } # @release
+css_lexer = { workspace = true }
+css_ast = { workspace = true, features = [
+	"chromashift",
+	"visitable",
+	"miette",
+] }
+css_parse = { workspace = true, features = ["miette", "egg"] }
+visit_flow = { workspace = true }
+csskit_ast = { workspace = true, features = ["miette"] }
+csskit_lsp = { workspace = true }
+csskit_highlight = { workspace = true, features = ["miette"] }
+csskit_transform = { workspace = true }
+chromashift = { workspace = true }
 
 itertools = { workspace = true }
 
@@ -38,7 +42,11 @@ tracing-subscriber = { workspace = true }
 [features]
 default = ["fancy", "owo-colors"]
 anstyle = ["dep:anstyle", "csskit_highlight/anstyle", "chromashift/anstyle"]
-owo-colors = ["dep:owo-colors", "csskit_highlight/owo-colors", "chromashift/owo-colors"]
+owo-colors = [
+	"dep:owo-colors",
+	"csskit_highlight/owo-colors",
+	"chromashift/owo-colors",
+]
 miette = ["css_parse/miette", "css_ast/miette"]
 fancy = ["miette", "miette/fancy"]
 
