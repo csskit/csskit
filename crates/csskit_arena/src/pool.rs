@@ -23,27 +23,52 @@ const KEEP: usize = 4 * 1024 * 1024;
 
 /// The reservations this thread is holding. Dropping it hands them all back, so a thread that ends does not leak
 /// what it kept.
-struct Cache(Vec<Reservation>);
+struct Cache {
+	slots: [Option<Reservation>; CAPACITY],
+}
+
+impl Cache {
+	const fn new() -> Self {
+		Self { slots: [None; CAPACITY] }
+	}
+
+	#[cfg(test)]
+	fn len(&self) -> usize {
+		self.slots.iter().filter(|slot| slot.is_some()).count()
+	}
+
+	fn take_exact(&mut self, size: usize) -> Option<Reservation> {
+		self.slots
+			.iter_mut()
+			.find(|slot| slot.as_ref().is_some_and(|reservation| reservation.size == size))
+			.and_then(Option::take)
+	}
+
+	fn vacant(&mut self) -> Option<&mut Option<Reservation>> {
+		self.slots.iter_mut().find(|slot| slot.is_none())
+	}
+}
 
 impl Drop for Cache {
 	fn drop(&mut self) {
-		for reservation in self.0.drain(..) {
-			// SAFETY: a reservation in the cache belongs to no arena, thus nothing is allocated from it.
-			unsafe { vm::release(reservation.reservation, reservation.reserved) };
+		for slot in &mut self.slots {
+			if let Some(reservation) = slot.take() {
+				// SAFETY: a reservation in the cache belongs to no arena, thus nothing is allocated from it.
+				unsafe { vm::release(reservation.reservation, reservation.reserved) };
+			}
 		}
 	}
 }
 
 thread_local! {
-	static FREE: RefCell<Cache> = const { RefCell::new(Cache(Vec::new())) };
+	static FREE: RefCell<Cache> = const { RefCell::new(Cache::new()) };
 }
 
 /// A reservation of exactly `size` usable bytes, if this thread is holding one.
 pub(crate) fn take(size: usize) -> Option<Reservation> {
 	FREE.try_with(|free| {
 		let mut free = free.try_borrow_mut().ok()?;
-		let found = free.0.iter().position(|reservation| reservation.size == size)?;
-		Some(free.0.swap_remove(found))
+		free.take_exact(size)
 	})
 	.ok()
 	.flatten()
@@ -60,9 +85,9 @@ pub(crate) unsafe fn give(reservation: Reservation, used: usize) -> bool {
 		let Ok(mut free) = free.try_borrow_mut() else {
 			return false;
 		};
-		if free.0.len() >= CAPACITY {
+		let Some(slot) = free.vacant() else {
 			return false;
-		}
+		};
 		if let Some(tail) = used.checked_sub(KEEP).filter(|tail| *tail > 0) {
 			// Only what a document of ordinary size would not have touched goes back: the first [`KEEP`] bytes stay
 			// resident, so the next parse writes to pages it already has, and one huge document does not leave its
@@ -72,7 +97,7 @@ pub(crate) unsafe fn give(reservation: Reservation, used: usize) -> bool {
 			// SAFETY: as above.
 			unsafe { vm::discard(tail_base, tail) };
 		}
-		free.0.push(reservation);
+		*slot = Some(reservation);
 		true
 	})
 	.unwrap_or(false)
@@ -132,7 +157,7 @@ mod test {
 		isolated(|| {
 			let arenas: Vec<Arena> = (0..CAPACITY + 2).map(|_| Arena::new()).collect();
 			drop(arenas);
-			let kept = FREE.with(|free| free.borrow().0.len());
+			let kept = FREE.with(|free| free.borrow().len());
 			assert_eq!(kept, CAPACITY, "a thread keeps the cap and no more");
 		});
 	}
@@ -179,7 +204,7 @@ mod test {
 				vec.extend_from_slice(&[3u8; KEEP * 2]);
 				assert_eq!(vec.len(), KEEP * 2);
 			}
-			assert_eq!(FREE.with(|free| free.borrow().0.len()), 1, "the reservation was kept");
+			assert_eq!(FREE.with(|free| free.borrow().len()), 1, "the reservation was kept");
 			let arena = Arena::new();
 			let mut vec = allocator_api2::vec::Vec::new_in(&arena);
 			vec.extend_from_slice(&[5u8; KEEP * 2]);
