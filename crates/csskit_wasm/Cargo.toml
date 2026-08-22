@@ -19,10 +19,10 @@ miette = ["css_parse/miette", "css_ast/miette"]
 fancy = ["miette", "miette/fancy-no-syscall"]
 
 [dependencies]
-css_lexer = { workspace = true } # @release
-css_ast = { workspace = true, features = ["visitable"] } # @release
-css_parse = { workspace = true } # @release
-csskit_transform = { workspace = true } # @release
+css_lexer = { workspace = true }
+css_ast = { workspace = true, features = ["visitable"] }
+css_parse = { workspace = true }
+csskit_transform = { workspace = true }
 
 miette = { workspace = true, features = ["derive"] }
 serde = { workspace = true, features = ["derive"] }
@@ -39,4 +39,3 @@ web-sys = { workspace = true, features = ["console"], optional = true }
 
 [dev-dependencies]
 wasm-bindgen-test = { workspace = true }
-

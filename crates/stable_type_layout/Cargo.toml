@@ -14,4 +14,4 @@ bench = false
 
 [dependencies]
 inventory = { workspace = true }
-stable_type_layout_derive = { workspace = true }  # @release
+stable_type_layout_derive = { workspace = true }

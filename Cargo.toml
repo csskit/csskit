@@ -5,7 +5,7 @@ default-members = ["crates/*"]
 exclude = ["packages/csskit_zed"]
 
 [workspace.package]
-version = "0.0.29"  # @release
+version = "0.0.29"
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)"]
 edition = "2024"
 description = "Refreshing CSS!"
@@ -15,27 +15,27 @@ license = "MIT"
 keywords = ["CSS", "parser"]
 
 [workspace.dependencies]
-chromashift = { path = "crates/chromashift", version = "0.0.29" }  # @release
-css_ast = { path = "crates/css_ast", version = "0.0.29" }  # @release
-css_feature_data = { path = "crates/css_feature_data", version = "0.0.29" }  # @release
-css_lexer = { path = "crates/css_lexer", version = "0.0.29" }  # @release
-css_parse = { path = "crates/css_parse", version = "0.0.29" }  # @release
-css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.29" }  # @release
+chromashift = { path = "crates/chromashift", version = "0.0.29" }
+css_ast = { path = "crates/css_ast", version = "0.0.29" }
+css_feature_data = { path = "crates/css_feature_data", version = "0.0.29" }
+css_lexer = { path = "crates/css_lexer", version = "0.0.29" }
+css_parse = { path = "crates/css_parse", version = "0.0.29" }
+css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.29" }
 # Local packages
-csskit = { path = "crates/csskit", version = "0.0.29" }  # @release
-csskit_arena = { path = "crates/csskit_arena", version = "0.0.29" }  # @release
-csskit_ast = { path = "crates/csskit_ast", version = "0.0.29" }  # @release
-csskit_derives = { path = "crates/csskit_derives", version = "0.0.29" }  # @release
-csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.29" }  # @release
-csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.29" }  # @release
-csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.29" }  # @release
-csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.29" }  # @release
+csskit = { path = "crates/csskit", version = "0.0.29" }
+csskit_arena = { path = "crates/csskit_arena", version = "0.0.29" }
+csskit_ast = { path = "crates/csskit_ast", version = "0.0.29" }
+csskit_derives = { path = "crates/csskit_derives", version = "0.0.29" }
+csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.29" }
+csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.29" }
+csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.29" }
+csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.29" }
 csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.0" }
-csskit_transform = { path = "crates/csskit_transform", version = "0.0.29" }  # @release
-derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.29" }  # @release
-stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.29" }  # @release
-stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.29" }  # @release
-visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.29" }  # @release
+csskit_transform = { path = "crates/csskit_transform", version = "0.0.29" }
+derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.29" }
+stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.29" }
+stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.29" }
+visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.29" }
 
 # Memory
 allocator-api2 = { version = "0.4.0" }
@@ -46,7 +46,7 @@ windows-sys = { version = "0.61.0" }
 # Data structure libraries/helpers
 bitmask-enum = { version = "2.2.5" }
 fnv = { version = "1.0.7" }
-fearless_simd = { version = "0.6.0" }
+fearless_simd = { version = "0.7.0" }
 indexmap = { version = "2.14.0" }
 itertools = { version = "0.15.0" }
 phf = { version = "0.14.0" }
@@ -80,25 +80,25 @@ anyhow = { version = "1.0.103" }
 miette = { version = "7.6.0", default-features = false }
 thiserror = { version = "2.0.18" }
 
-darling = { version = "0.23.0" }
+darling = { version = "0.24.1" }
 heck = { version = "0.5.0" }
 proc-macro2 = { version = "1.0.106" }
 quote = { version = "1.0.46" }
 # Procc Macro Tools
-syn = { version = "2.0.118" }
-synstructure = { version = "0.13.2" }
+syn = { version = "3.0.0" }
+synstructure = { version = "0.14.0" }
 
 # Serialization
 serde = { version = "1.0.228" }
 serde_json = { version = "1.0.150" }
 toml = { version = "1.1.2+spec-1.1.0" }
 
-criterion = { version = "0.5.1" }  # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
+criterion = { version = "0.5.1" }    # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 dhat = { version = "0.3.3" }
 flate2 = { version = "1.1.9" }
 insta = { version = "1.48.0" }
 pprof = { version = "0.15.0" }
-prettyplease = { version = "0.2.37" }
+prettyplease = { version = "0.3.0" }
 # Testing, benchmarking
 similar = { version = "3.1.1" }
 
@@ -119,7 +119,7 @@ wasm-bindgen-test = { version = "0.3.76" }
 web-sys = { version = "0.3.103" }
 
 # CSS Feature Data packages
-browserslist-rs = { version = "0.19.0" }
+browserslist-rs = { version = "0.20.0" }
 chrono = { version = "0.4.45" }
 
 # For faster compiles during development, opt-level some dynamic libraries and limit debug generation
@@ -139,7 +139,7 @@ opt-level = 3
 debug = false
 strip = "symbols"
 lto = "fat"
-panic = "abort"  # Let it crash and force ourselves to write safe Rust.
+panic = "abort"   # Let it crash and force ourselves to write safe Rust.
 codegen-units = 1
 
 # Use the `--profile release-debug` flag to show symbols in release mode.

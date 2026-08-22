@@ -14,18 +14,18 @@ bench = false
 
 [dependencies]
 bitmask-enum = { workspace = true }
-css_lexer = { workspace = true, features = ["dynamic-atoms"] } # @release
-css_parse = { workspace = true } # @release
-visit_flow = { workspace = true } # @release
-css_ast = { workspace = true, features = ["visitable"] } # @release
-csskit_derives = { workspace = true } # @release
-derive_atom_set = { workspace = true } # @release
+css_lexer = { workspace = true, features = ["dynamic-atoms"] }
+css_parse = { workspace = true }
+visit_flow = { workspace = true }
+css_ast = { workspace = true, features = ["visitable"] }
+csskit_derives = { workspace = true }
+derive_atom_set = { workspace = true }
 indexmap = { workspace = true }
 smallvec = { workspace = true }
 miette = { workspace = true, optional = true }
 
 [dev-dependencies]
-css_parse = { workspace = true, features = ["testing"] } # @release
+css_parse = { workspace = true, features = ["testing"] }
 glob = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
 
@@ -33,7 +33,7 @@ criterion = { workspace = true, features = ["html_reports"] }
 pprof = { workspace = true, features = ["flamegraph", "criterion"] }
 
 [build-dependencies]
-css_ast = { workspace = true, features = ["visitable"] } # @release
+css_ast = { workspace = true, features = ["visitable"] }
 
 [features]
 default = []

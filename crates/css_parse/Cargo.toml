@@ -14,9 +14,9 @@ exclude = ["tests/*", "bench/*"]
 bench = false
 
 [dependencies]
-csskit_proc_macro = { workspace = true } # @release
-css_lexer = { workspace = true } # @release
-csskit_arena = { workspace = true } # @release
+csskit_proc_macro = { workspace = true }
+css_lexer = { workspace = true }
+csskit_arena = { workspace = true }
 
 allocator-api2 = { workspace = true }
 smallvec = { workspace = true }
@@ -26,11 +26,11 @@ thiserror = { workspace = true, optional = true }
 bitmask-enum = { workspace = true }
 serde = { workspace = true, optional = true }
 serde_json = { workspace = true, optional = true }
-stable_type_layout = { workspace = true } # @release
+stable_type_layout = { workspace = true }
 
 [dev-dependencies]
-csskit_derives = { workspace = true }  # @release
-derive_atom_set = { workspace = true } # @release
+csskit_derives = { workspace = true }
+derive_atom_set = { workspace = true }
 insta = { workspace = true }
 glob = { workspace = true }
 dhat = { workspace = true }

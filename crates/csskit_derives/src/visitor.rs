@@ -29,7 +29,7 @@ impl VisitMut for ReturnRewriter {
 }
 
 fn trait_name(item: &ItemImpl) -> Result<&syn::Ident> {
-	let Some((_, path, _)) = &item.trait_ else {
+	let Some((path, _)) = &item.trait_ else {
 		return Err(syn::Error::new(item.impl_token.span(), "#[visitor] requires an impl Visit block"));
 	};
 	path.segments
