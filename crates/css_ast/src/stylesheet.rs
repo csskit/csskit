@@ -85,7 +85,7 @@ macro_rules! apply_rules {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(node_kinds = Unknown)]
+#[metadata(node_kinds = Unknown | Effective)]
 pub struct UnknownAtRule<'a> {
 	name: T![AtKeyword],
 	prelude: ComponentValues<'a>,
@@ -97,7 +97,7 @@ pub struct UnknownAtRule<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(node_kinds = Unknown)]
+#[metadata(node_kinds = Unknown | Effective)]
 pub struct UnknownQualifiedRule<'a>(
 	QualifiedRule<
 		'a,

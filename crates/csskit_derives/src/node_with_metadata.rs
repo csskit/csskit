@@ -176,12 +176,21 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		Data::Union(_) => Vec::new(),
 	};
 
-	// `EmptyBlock` marks a rule whose block holds neither declarations nor rules.
+	let declares_rule = args
+		.node_kinds
+		.as_ref()
+		.is_some_and(|kinds| kinds.0.iter().any(|kind| kind == "AtRule" || kind == "StyleRule"));
+
+	// `Inert` marks a rule which renders nothing, `Effective` a rule which renders something, so
+	// that a rule holding only inert rules is itself detectable as inert. `EmptyBlock` is the
+	// narrower "holds nothing at all". A rule without a block always has an effect on the rule
+	// containing it.
 	let node_kinds = if let Some(block) = &block {
 		quote! {
 			{
 				let child = <_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(&self.#block);
 				let mut kinds = #node_kinds;
+				kinds |= if child.has_effect() { crate::NodeKinds::Effective } else { crate::NodeKinds::Inert };
 				if !child.node_kinds.intersects(
 					crate::NodeKinds::Declaration | crate::NodeKinds::StyleRule | crate::NodeKinds::AtRule,
 				) {
@@ -190,6 +199,8 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				kinds
 			}
 		}
+	} else if declares_rule {
+		quote! { #node_kinds | crate::NodeKinds::Effective }
 	} else {
 		node_kinds
 	};

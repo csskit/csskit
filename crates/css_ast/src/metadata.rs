@@ -132,7 +132,7 @@ pub enum DeclarationKind {
 }
 
 /// Categories of nodes present in metadata, used for selector filtering.
-#[bitmask(u16)]
+#[bitmask(u32)]
 #[bitmask_config(vec_debug)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
 pub enum NodeKinds {
@@ -148,7 +148,7 @@ pub enum NodeKinds {
 	Function,
 	/// Node has an empty prelude
 	EmptyPrelude,
-	/// Node has an empty block (no declarations, no nested rules)
+	/// Node has a block which contains no declarations and no rules
 	EmptyBlock,
 	/// Node is nested within another node
 	Nested,
@@ -162,6 +162,12 @@ pub enum NodeKinds {
 	Dimension,
 	/// Node is a custom element or custom property
 	Custom,
+	/// Node has an effect on rendering: a declaration, or a rule which is not inert. Rules without
+	/// a block (`@import`, `@layer a;`) always have an effect.
+	Effective,
+	/// Node has no effect on rendering: a rule whose block holds no declarations, and no rules
+	/// other than inert ones. An inert node can be removed without changing what the sheet does.
+	Inert,
 }
 
 /// Queryable properties a node exposes for selector matching.
@@ -417,6 +423,22 @@ impl CssMetadata {
 		self.node_kinds.contains(NodeKinds::EmptyBlock)
 	}
 
+	/// Returns true if anything in this node or its subtree has an effect on rendering.
+	#[inline]
+	pub fn has_effect(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Effective)
+	}
+
+	/// Returns true if this node has no effect on rendering, so it can be removed.
+	///
+	/// For [self metadata](css_parse::NodeWithMetadata::self_metadata) this describes the node
+	/// itself. Node kinds aggregate upwards, so for a subtree it only says that the subtree holds
+	/// an inert node somewhere.
+	#[inline]
+	pub fn is_inert(&self) -> bool {
+		self.node_kinds.contains(NodeKinds::Inert)
+	}
+
 	/// Returns true if this node, or a node in its subtree, is nested inside another node.
 	#[inline]
 	pub fn is_nested(&self) -> bool {
@@ -468,7 +490,7 @@ impl NodeMetadata for CssMetadata {
 
 	#[inline]
 	fn with_declaration(mut self) -> Self {
-		self.node_kinds |= NodeKinds::Declaration;
+		self.node_kinds |= NodeKinds::Declaration | NodeKinds::Effective;
 		self
 	}
 
@@ -803,6 +825,70 @@ mod tests {
 		assert!(!first_rule_metadata("nav { a {} }").is_empty_container());
 		assert!(!first_rule_metadata("@media screen { a { color: red } }").is_empty_container());
 		assert!(!first_rule_metadata("@font-face { font-display: swap }").is_empty_container());
+	}
+
+	#[test]
+	fn a_rule_is_either_inert_or_effective_never_both() {
+		for (css, inert) in [("a {}", true), ("a { color: red }", false), ("nav { a {} }", true)] {
+			let meta = first_rule_metadata(css);
+			assert_eq!(meta.is_inert(), inert, "{css}");
+			assert_eq!(meta.has_effect(), !inert, "{css}");
+		}
+	}
+
+	#[test]
+	fn a_subtree_can_hold_both_inert_and_effective_nodes() {
+		// Node kinds merge with OR, so for anything but a node's own metadata the two bits answer
+		// separate existential questions and are not complements: this sheet holds one of each.
+		// Deciding a rule is inert needs "holds nothing effective", which the `Inert` bit alone
+		// cannot answer.
+		let meta = stylesheet_metadata("a {}\nb { color: red }");
+		assert!(meta.is_inert());
+		assert!(meta.has_effect());
+	}
+
+	#[test]
+	fn rule_holding_only_empty_rules_is_inert_but_not_empty() {
+		let meta = first_rule_metadata("nav { a {} }");
+		assert!(meta.is_inert());
+		// The block holds a rule, so it is not an empty container in the literal sense `:empty`
+		// matches on.
+		assert!(!meta.is_empty_container());
+	}
+
+	#[test]
+	fn rule_with_unknown_value_has_effect() {
+		let meta = first_rule_metadata("a { color: fnord }");
+		assert!(meta.has_effect());
+		assert!(!meta.is_inert());
+	}
+
+	#[test]
+	fn at_rule_descriptors_have_effect() {
+		let meta = first_rule_metadata("@font-face { font-display: swap }");
+		assert!(meta.has_effect());
+		assert!(!meta.is_inert());
+	}
+
+	#[test]
+	fn keyframes_with_only_empty_keyframes_is_inert() {
+		let meta = first_rule_metadata("@keyframes fade { 0% {} 100% {} }");
+		assert!(meta.is_inert());
+	}
+
+	#[test]
+	fn statement_at_rule_keeps_containing_rule_effective() {
+		let meta = first_rule_metadata("@media screen { @layer a; }");
+		assert!(meta.has_effect());
+		assert!(!meta.is_inert());
+	}
+
+	#[test]
+	fn unmarked_block_rules_are_never_inert() {
+		// `@layer a {}` declares layer order, so it must survive even when empty.
+		let meta = first_rule_metadata("@layer a {}");
+		assert!(meta.has_effect());
+		assert!(!meta.is_inert());
 	}
 
 	// Child leaf types carrying distinct node_kinds bits, used to verify delegation
