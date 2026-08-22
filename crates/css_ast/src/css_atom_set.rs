@@ -214,6 +214,7 @@ pub enum CssAtomSet {
 	AvoidOrphans,
 	AvoidPage,
 	AvoidRegion,
+	AvoidShortLastLine,
 	Azure,
 	B,
 	Back,
