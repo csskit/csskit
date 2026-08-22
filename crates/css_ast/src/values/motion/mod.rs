@@ -39,7 +39,7 @@ use impls::*;
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.offset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct OffsetStyleValue<'a>;
+pub enum OffsetStyleValue<'a> {}
 
 /// Represents the style value for `offset-anchor` as defined in [motion-1](https://drafts.csswg.org/motion-1/#offset-anchor).
 ///

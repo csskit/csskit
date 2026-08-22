@@ -33,4 +33,19 @@ mod tests {
 		assert_peek_false!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "");
 		assert_parse_error!(CssAtomSet::ATOMS, VerticalAlignStyleValue, "first last");
 	}
+
+	#[test]
+	fn test_initial_letter_align() {
+		use css_parse::{assert_parse_error, assert_peek_false};
+		// [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]!
+		assert_parse!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "border-box");
+		assert_parse!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "alphabetic");
+		assert_parse!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "ideographic");
+		assert_parse!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "hanging");
+		assert_parse!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "leading");
+		assert_parse!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "border-box hanging");
+		assert_peek_false!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "");
+		assert_parse_error!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "hanging border-box");
+		assert_parse_error!(CssAtomSet::ATOMS, InitialLetterAlignStyleValue, "border-box border-box");
+	}
 }

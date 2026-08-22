@@ -154,49 +154,33 @@ pub struct DominantBaselineStyleValue<'a>;
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum InitialLetterStyleValue<'a> {}
 
-// /// Represents the style value for `initial-letter-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-align).
-// ///
-// /// The grammar is defined as:
-// ///
-// /// ```text,ignore
-// /// [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]!
-// /// ```
-// ///
-// /// https://drafts.csswg.org/css-inline-3/#initial-letter-align
-// #[syntax(" [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]! ")]
-// #[derive(
-//     Parse,
-//     Peek,
-//     ToSpan,
-//     ToCursors,
-//     DeclarationMetadata,
-//     SemanticEq,
-//     Debug,
-//     Clone,
-//     PartialEq,
-//     Eq,
-//     PartialOrd,
-//     Ord,
-//     Hash,
-// )]
-// #[declaration_metadata(
-//     initial = "alphabetic",
-//     inherits,
-//     applies_to = Unknown,
-//     animation_type = Discrete,
-//     property_group = Inline,
-//     computed_value_type = Unknown,
-//     canonical_order = "per grammar",
-// )]
-// #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-// #[cfg_attr(
-//     feature = "css_feature_data",
-//     derive(ToCSSFeature),
-//     css_feature("css.properties.initial-letter-align")
-// )]
-// #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
-// #[derive(csskit_derives::NodeWithMetadata)]
-// pub struct InitialLetterAlignStyleValue<'a>;
+/// Represents the style value for `initial-letter-align` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-align).
+///
+/// The grammar is defined as:
+///
+/// ```text,ignore
+/// [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]!
+/// ```
+///
+/// https://drafts.csswg.org/css-inline-3/#initial-letter-align
+#[syntax(" [ border-box? [ alphabetic | ideographic | hanging | leading ]? ]! ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "alphabetic",
+    inherits,
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Inline,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.initial-letter-align"))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum InitialLetterAlignStyleValue<'a> {}
 
 /// Represents the style value for `initial-letter-wrap` as defined in [css-inline-3](https://drafts.csswg.org/css-inline-3/#initial-letter-wrap).
 ///

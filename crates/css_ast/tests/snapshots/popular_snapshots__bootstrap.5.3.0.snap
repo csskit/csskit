@@ -143564,11 +143564,11 @@ StyleSheet(
                     len: 1,
                   )),
                   value: BackgroundPositionXStyleValue([
-                    (PositionHorizontalKeyword(None, Some(Literal(Length(Rem(Dimension(Cursor(
+                    (LengthPercentage(Literal(Length(Rem(Dimension(Cursor(
                       kind: "Dimension",
                       offset: SourceOffset(122442),
                       len: 4,
-                    ))))))), None),
+                    )))))), None),
                   ]),
                   important: None,
                   semicolon: Some(Semicolon(Cursor(
