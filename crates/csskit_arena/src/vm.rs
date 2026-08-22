@@ -14,6 +14,7 @@ use std::ptr::NonNull;
 pub(crate) const RESERVABLE: bool = cfg!(all(target_pointer_width = "64", any(unix, windows)));
 
 /// A reserved region of address space, plus the 4 GiB-aligned window inside it that the arena allocates from.
+#[derive(Clone, Copy)]
 pub(crate) struct Reservation {
 	/// Start of the whole reservation, needed to hand the address space back.
 	pub(crate) reservation: NonNull<u8>,
@@ -21,6 +22,8 @@ pub(crate) struct Reservation {
 	pub(crate) reserved: usize,
 	/// The 4 GiB-aligned base of the usable region.
 	pub(crate) base: NonNull<u8>,
+	/// Usable bytes at [`Reservation::base`], which is what was asked for.
+	pub(crate) size: usize,
 }
 
 /// Only the reserving implementations round anything up.
@@ -81,7 +84,26 @@ mod imp {
 		}
 		// SAFETY: `mmap` succeeded, so `aligned` is a live, non-null address within the mapping.
 		let base = unsafe { NonNull::new_unchecked(aligned as *mut u8) };
-		Some(Reservation { reservation: base, reserved: len, base })
+		// `size` is what was asked for, and so what the pool keeps the reservation under; `len` is the page-rounded
+		// mapping, which is what `munmap` needs.
+		Some(Reservation { reservation: base, reserved: len, base, size })
+	}
+
+	/// Tell the kernel the first `len` bytes at `base` hold nothing worth keeping.
+	///
+	/// The pages stay mapped and stay usable, so the next write to one costs no fault, but the kernel may take them
+	/// back under memory pressure. Where `MADV_FREE` is missing the pages go back at once instead, which costs a fault
+	/// to touch again but is still correct.
+	///
+	/// # Safety
+	/// The range must lie within a live reservation, and nothing allocated from it may still be in use.
+	pub(crate) unsafe fn discard(base: NonNull<u8>, len: usize) {
+		#[cfg(any(target_os = "android", target_os = "linux", target_os = "macos", target_os = "freebsd"))]
+		let advice = libc::MADV_FREE;
+		#[cfg(not(any(target_os = "android", target_os = "linux", target_os = "macos", target_os = "freebsd")))]
+		let advice = libc::MADV_DONTNEED;
+		// SAFETY: the caller guarantees the range is a live mapping whose contents are dead.
+		unsafe { libc::madvise(base.as_ptr().cast(), len, advice) };
 	}
 
 	/// # Safety
@@ -98,7 +120,7 @@ mod imp {
 	use crate::BLOCK_ALIGN;
 	use std::ptr::{self, NonNull};
 	use windows_sys::Win32::System::Memory::{
-		MEM_COMMIT, MEM_RELEASE, MEM_RESERVE, PAGE_READWRITE, VirtualAlloc, VirtualFree,
+		MEM_COMMIT, MEM_DECOMMIT, MEM_RELEASE, MEM_RESERVE, PAGE_READWRITE, VirtualAlloc, VirtualFree,
 	};
 
 	/// Reserve `size` bytes of address space at a 4 GiB-aligned base, committing none of it.
@@ -113,7 +135,7 @@ mod imp {
 		// SAFETY: the reservation spans `size + BLOCK_ALIGN` bytes, so `aligned` and the `size` bytes after it are
 		// inside it.
 		let base = unsafe { NonNull::new_unchecked(aligned as *mut u8) };
-		Some(Reservation { reservation, reserved: over, base })
+		Some(Reservation { reservation, reserved: over, base, size })
 	}
 
 	/// Back `len` bytes at `ptr` with physical memory. Committing an already-committed page is a no-op.
@@ -123,6 +145,17 @@ mod imp {
 	pub(crate) unsafe fn commit(ptr: NonNull<u8>, len: usize) -> bool {
 		// SAFETY: the caller guarantees the range is inside the reservation.
 		!unsafe { VirtualAlloc(ptr.as_ptr().cast(), len, MEM_COMMIT, PAGE_READWRITE) }.is_null()
+	}
+
+	/// Hand the physical memory behind the first `len` bytes at `base` back, leaving the address space reserved.
+	///
+	/// The next write to one of those pages commits it again, which [`commit`] does as the arena bumps.
+	///
+	/// # Safety
+	/// The range must lie within a live reservation, and nothing allocated from it may still be in use.
+	pub(crate) unsafe fn discard(base: NonNull<u8>, len: usize) {
+		// SAFETY: the caller guarantees the range is inside a live reservation whose contents are dead.
+		unsafe { VirtualFree(base.as_ptr().cast(), len, MEM_DECOMMIT) };
 	}
 
 	/// # Safety
@@ -152,10 +185,14 @@ mod imp {
 	}
 
 	/// # Safety
+	/// Never call this: [`reserve`] never succeeds here, so there is nothing to discard.
+	pub(crate) unsafe fn discard(_base: NonNull<u8>, _len: usize) {}
+
+	/// # Safety
 	/// Never call this: [`reserve`] never succeeds here, so there is nothing to release.
 	pub(crate) unsafe fn release(_reservation: NonNull<u8>, _reserved: usize) {}
 }
 
 #[cfg(windows)]
 pub(crate) use imp::commit;
-pub(crate) use imp::{release, reserve};
+pub(crate) use imp::{discard, release, reserve};

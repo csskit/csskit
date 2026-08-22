@@ -30,6 +30,7 @@ use std::alloc::Layout;
 use std::cell::Cell;
 use std::ptr::NonNull;
 
+mod pool;
 mod vm;
 
 /// Required alignment of the arena region (4 GiB), so that `ptr as u32` equals the byte offset
@@ -55,8 +56,9 @@ const CHUNK_ALIGN: usize = 16;
 #[derive(Clone, Copy)]
 enum Backing {
 	/// Address space reserved by this crate. `reservation` and `reserved` are the base and length of the whole
-	/// reservation, both of which are needed to release it.
-	Owned { reservation: NonNull<u8>, reserved: usize },
+	/// reservation, both of which are needed to release it, and `size` is the usable region at the chunk's base,
+	/// which is what the pool keeps it under.
+	Owned { reservation: NonNull<u8>, reserved: usize, size: usize },
 	/// A block from the global allocator, for targets that cannot reserve address space lazily.
 	Heap(Layout),
 	/// Memory owned by the caller (e.g. a V8 `ArrayBuffer`). Never freed by the arena.
@@ -67,6 +69,8 @@ enum Backing {
 struct Chunk {
 	base: NonNull<u8>,
 	size: usize,
+	/// High-water mark of bytes handed out from the chunk, which is how much of it is resident.
+	used: usize,
 	backing: Backing,
 	prev: Option<NonNull<Chunk>>,
 }
@@ -82,6 +86,9 @@ pub struct Arena {
 	size: Cell<usize>,
 	/// Bump cursor: byte offset of the next free position within the chunk.
 	cursor: Cell<usize>,
+	/// High-water mark of [`Arena::cursor`] for this chunk. A reset rewinds the cursor but not the pages behind it, so
+	/// this and not the cursor is how much of the chunk is resident.
+	resident: Cell<usize>,
 	/// Bytes of the chunk backed by physical memory. Windows has no lazy commit, so the arena commits as it bumps.
 	#[cfg(windows)]
 	committed: Cell<usize>,
@@ -137,13 +144,18 @@ impl Arena {
 	/// Take `size` usable bytes for a chunk: reserved address space where the target has it, a block from the global
 	/// allocator otherwise.
 	fn new_chunk(size: usize) -> Option<(NonNull<u8>, Backing)> {
-		vm::reserve(size)
+		pool::take(size)
+			.or_else(|| vm::reserve(size))
 			.map(|reservation| {
 				debug_assert!(
 					(reservation.base.as_ptr() as usize).is_multiple_of(BLOCK_ALIGN),
 					"arena base must be 4 GiB aligned"
 				);
-				let backing = Backing::Owned { reservation: reservation.reservation, reserved: reservation.reserved };
+				let backing = Backing::Owned {
+					reservation: reservation.reservation,
+					reserved: reservation.reserved,
+					size: reservation.size,
+				};
 				(reservation.base, backing)
 			})
 			.or_else(|| Self::heap_chunk(size, CHUNK_ALIGN))
@@ -165,6 +177,7 @@ impl Arena {
 			base: Cell::new(base),
 			size: Cell::new(size),
 			cursor: Cell::new(0),
+			resident: Cell::new(0),
 			#[cfg(windows)]
 			committed: Cell::new(if matches!(backing, Backing::Owned { .. }) { 0 } else { size }),
 			backing: Cell::new(backing),
@@ -233,14 +246,17 @@ impl Arena {
 	///
 	/// Takes `&mut self` so no allocation can outlive the reset. The first chunk's memory is retained.
 	pub fn reset(&mut self) {
+		self.resident.set(self.resident_bytes());
+		self.cursor.set(0);
 		while let Some(node) = self.prev.get() {
 			// SAFETY: every chunk in the chain came from `Box::into_raw`, and `&mut self` proves nothing allocated from
 			// the chunk being dropped is still live.
 			let chunk = *unsafe { Box::from_raw(node.as_ptr()) };
 			// SAFETY: as above.
-			unsafe { release(self.base.get(), self.backing.replace(chunk.backing)) };
+			unsafe { release(self.base.get(), self.backing.replace(chunk.backing), self.resident.get()) };
 			self.base.set(chunk.base);
 			self.size.set(chunk.size);
+			self.resident.set(chunk.used);
 			self.prev.set(chunk.prev);
 			// Every chunk the arena added comes from the global allocator, so is backed in full.
 			#[cfg(windows)]
@@ -248,19 +264,32 @@ impl Arena {
 		}
 		self.prev_used.set(0);
 		self.prev_size.set(0);
-		self.cursor.set(0);
+	}
+
+	/// How many bytes of the chunk being bumped from have ever been handed out, and so how much of it is resident.
+	#[inline]
+	fn resident_bytes(&self) -> usize {
+		self.resident.get().max(self.cursor.get())
 	}
 }
 
-/// Give a chunk's memory back.
+/// Give a chunk's memory back to the thread's pool where it is reserved address space and the pool has room, and to the
+/// OS otherwise. `used` is how many bytes of the chunk were handed out.
 ///
 /// # Safety
 /// `base` and `backing` must be exactly what the chunk was built with, and nothing allocated from it may outlive the
 /// call.
-unsafe fn release(base: NonNull<u8>, backing: Backing) {
+unsafe fn release(base: NonNull<u8>, backing: Backing, used: usize) {
 	match backing {
-		// SAFETY: `reservation`/`reserved` are exactly what `vm::reserve` returned.
-		Backing::Owned { reservation, reserved } => unsafe { vm::release(reservation, reserved) },
+		Backing::Owned { reservation, reserved, size } => {
+			let kept = vm::Reservation { reservation, reserved, base, size };
+			// SAFETY: the caller guarantees nothing allocated from the chunk is live.
+			if unsafe { pool::give(kept, used) } {
+				return;
+			}
+			// SAFETY: `reservation`/`reserved` are exactly what `vm::reserve` returned.
+			unsafe { vm::release(reservation, reserved) };
+		}
 		// SAFETY: `base`/`layout` are exactly what the global allocator was asked for.
 		Backing::Heap(layout) => unsafe { std::alloc::dealloc(base.as_ptr(), layout) },
 		Backing::Borrowed => {}
@@ -324,6 +353,7 @@ impl Arena {
 		let retired = Chunk {
 			base: self.base.get(),
 			size: self.size.get(),
+			used: self.resident_bytes(),
 			backing: self.backing.replace(backing),
 			prev: self.prev.get(),
 		};
@@ -334,6 +364,7 @@ impl Arena {
 		self.base.set(base);
 		self.size.set(size);
 		self.cursor.set(0);
+		self.resident.set(0);
 		// A chunk from the global allocator is backed in full.
 		#[cfg(windows)]
 		self.committed.set(size);
@@ -406,14 +437,14 @@ impl Default for Arena {
 impl Drop for Arena {
 	fn drop(&mut self) {
 		// SAFETY: `&mut self` proves every allocation is dead.
-		unsafe { release(self.base.get(), self.backing.get()) };
+		unsafe { release(self.base.get(), self.backing.get(), self.resident_bytes()) };
 		let mut node = self.prev.get();
 		while let Some(chunk) = node {
 			// SAFETY: every chunk in the chain came from `Box::into_raw` and has not been freed.
 			let chunk = *unsafe { Box::from_raw(chunk.as_ptr()) };
 			node = chunk.prev;
 			// SAFETY: as above; every allocation from the chunk is dead.
-			unsafe { release(chunk.base, chunk.backing) };
+			unsafe { release(chunk.base, chunk.backing, chunk.used) };
 		}
 	}
 }
