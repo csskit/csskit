@@ -97,7 +97,9 @@ impl<'a, T: ToCursors, const MIN: usize> ToCursors for CommaSeparated<'a, T, MIN
 
 impl<'a, T: ToSpan, const MIN: usize> ToSpan for CommaSeparated<'a, T, MIN> {
 	fn to_span(&self) -> Span {
-		let first = self.items[0].to_span();
+		let Some(first) = self.items.first().map(ToSpan::to_span) else {
+			return Span::ZERO;
+		};
 		first + self.items.last().map(|t| t.to_span()).unwrap_or(first)
 	}
 }
