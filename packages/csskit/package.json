@@ -44,10 +44,6 @@
         "./index.d.ts",
         "./bundle.js",
         "./bundle.d.ts",
-        "./wasm.js",
-        "./wasm.d.ts",
-        "./csskit_wasm_bg.wasm",
-        "./csskit_wasm_bg.wasm.d.ts",
         "./bundle"
     ],
     "optionalDependencies": {
