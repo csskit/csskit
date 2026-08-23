@@ -11,7 +11,6 @@ hyperfine = "latest"
 "cargo:wasm-bindgen-cli" = "0.2.127"
 "aqua:WebAssembly/binaryen" = "131"
 "cargo:cargo-fuzz" = "0.13.2"
-"npm:@napi-rs/cli" = "3.7.4"
 
 [tasks.clean]
 confirm = 'Are you sure?'
@@ -53,7 +52,8 @@ sources = [
 ]
 outputs = ["{{config_root}}/packages/csskit/csskit.node"]
 run = [
-  "napi build --features napi",
+  "npm ci",
+  "npm run build:debug",
   "cp csskit_napi.node {{config_root}}/packages/csskit/csskit.node",
 ]
 

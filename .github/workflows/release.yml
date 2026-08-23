@@ -64,7 +64,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: release-${{ matrix.target }}
-          tools: rust node npm npm:@napi-rs/cli
+          tools: rust node npm
           components: ""
 
       - name: Rustup target
@@ -73,9 +73,13 @@ jobs:
       - name: Build Binary
         run: cargo build --release --target ${{ matrix.target }} -p csskit
 
+      - name: Install native addon dependencies
+        working-directory: crates/csskit_napi
+        run: npm ci
+
       - name: Build native addon
         working-directory: crates/csskit_napi
-        run: napi build --release --target ${{ matrix.target }} --features napi
+        run: npm run build -- --target ${{ matrix.target }}
 
       - name: Stage native addon
         shell: bash
