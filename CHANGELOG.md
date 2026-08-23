@@ -1,3 +1,44 @@
+## [0.0.30] - 2026-08-22
+
+### Css_ast
+- css_ast: Allow symbolic-counter-style in content syntax (#1419) ([#1419](https://github.com/csskit/csskit/pull/1419))
+- css_ast: Boxup rare nodes to reduce allocation size (#1421) ([#1421](https://github.com/csskit/csskit/pull/1421))
+- css_ast: Clean up & improve NodeWithMetadata derives, add value_kinds (#1422) ([#1422](https://github.com/csskit/csskit/pull/1422))
+- csskit_transform: implement ReduceCharsetRule (#1427) ([#1427](https://github.com/csskit/csskit/pull/1427))
+- css_ast: Add missing webkit pseudo elements (#1428) ([#1428](https://github.com/csskit/csskit/pull/1428))
+- css_ast: Implement InitialLetterAlignStyleValue (#1429) ([#1429](https://github.com/csskit/csskit/pull/1429))
+- css_ast: Allow prelude-less `@layer` (#1434) ([#1434](https://github.com/csskit/csskit/pull/1434))
+
+
+### Css_lexer
+- css_lexer/css_parse: Ensure parsed whitespace survives minification (#1420) ([#1420](https://github.com/csskit/csskit/pull/1420))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1407) ([#1407](https://github.com/csskit/csskit/pull/1407))
+
+
+### Csskit_arena
+- csskit_arena: Reuse reservations across arenas (#1430) ([#1430](https://github.com/csskit/csskit/pull/1430))
+- csskit_arena: Clean up and consolidate allocation modes (#1431) ([#1431](https://github.com/csskit/csskit/pull/1431))
+- csskit_arena: Add a detailed readme (#1433) ([#1433](https://github.com/csskit/csskit/pull/1433))
+
+
+### Csskit_transform
+- coverage: update css-minify-tests (#1423) ([#1423](https://github.com/csskit/csskit/pull/1423))
+- csskit_transform: skip subtrees which don't match metadata (#1424) ([#1424](https://github.com/csskit/csskit/pull/1424))
+
+
+### Csskit_vscode
+- chore(deps): update dependency mocha to v11.8.0 (#1410) ([#1410](https://github.com/csskit/csskit/pull/1410))
+- chore(deps): update dependency oxlint to v1.76.0 (#1411) ([#1411](https://github.com/csskit/csskit/pull/1411))
+- chore(deps): update dependency oxlint to v1.78.0 (#1413) ([#1413](https://github.com/csskit/csskit/pull/1413))
+
+
+### Derive_atom_set
+- derive_atom_set: Don't case fold on punctuation. (#1426) ([#1426](https://github.com/csskit/csskit/pull/1426))
+- derive_atom_set: Expand readme with more detail (#1432) ([#1432](https://github.com/csskit/csskit/pull/1432))
+
 ## [0.0.29] - 2026-08-14
 
 ### Other Changes
@@ -86,6 +127,7 @@
 - chore(deps): update dependencies (patch) (#1312) ([#1312](https://github.com/csskit/csskit/pull/1312))
 - csskit-wasm: Fix wasm-opt errors (#1330) ([#1330](https://github.com/csskit/csskit/pull/1330))
 - csskit: Clean up imports with preludes (#1366) ([#1366](https://github.com/csskit/csskit/pull/1366))
+- Release v0.0.29 (#1314) ([#1314](https://github.com/csskit/csskit/pull/1314))
 
 
 ### Csskit_arena
