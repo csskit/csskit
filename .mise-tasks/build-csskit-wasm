@@ -1,9 +1,10 @@
 #!/usr/bin/env bash
-set -eu pipefail
+set -euo pipefail
 #MISE description="Build csskit wasm for the csskit npm package (node + bundler targets)"
 
 REPO_ROOT="$(git rev-parse --show-toplevel)"
 PKG="$REPO_ROOT/packages/csskit"
+NODE_OUT="$REPO_ROOT/target/wasm-bindgen-node"
 
 cargo build \
   --target wasm32-unknown-unknown \
@@ -12,13 +13,19 @@ cargo build \
   --no-default-features \
   --features serde
 
+# The node target is built into a scratch dir because wasm-bindgen drops its own package.json
+# alongside the output, which would clobber the package's.
+rm -rf "$NODE_OUT"
 wasm-bindgen \
-  --out-dir "$PKG" \
-  --target nodejs \
+  --out-dir "$NODE_OUT" \
+  --target experimental-nodejs-module \
   "$REPO_ROOT/target/wasm32-unknown-unknown/release/csskit_wasm.wasm"
 
-mv "$PKG/csskit_wasm.js" "$PKG/index.js"
-mv "$PKG/csskit_wasm.d.ts" "$PKG/index.d.ts"
+mv "$NODE_OUT/csskit_wasm.js" "$PKG/wasm.js"
+mv "$NODE_OUT/csskit_wasm.d.ts" "$PKG/wasm.d.ts"
+mv "$NODE_OUT/csskit_wasm_bg.wasm" "$PKG/csskit_wasm_bg.wasm"
+mv "$NODE_OUT/csskit_wasm_bg.wasm.d.ts" "$PKG/csskit_wasm_bg.wasm.d.ts"
+rm -rf "$NODE_OUT"
 
 wasm-bindgen \
   --out-dir "$PKG/bundle" \

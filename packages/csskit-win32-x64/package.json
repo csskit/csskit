@@ -19,7 +19,8 @@
         "csskit": "./bin/csskit.exe"
     },
     "files": [
-        "./bin"
+        "./bin",
+        "./csskit.node"
     ],
     "funding": {
         "url": "https://github.com/sponsors/keithamus"

@@ -78,6 +78,16 @@ jobs:
         env:
           CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
 
+      - name: Build native addon
+        working-directory: crates/csskit_napi
+        run: napi build --release --target ${{ matrix.target }} --features napi
+        env:
+          CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
+
+      - name: Stage native addon
+        shell: bash
+        run: cp crates/csskit_napi/*.node "csskit-${{ matrix.code-target }}.node"
+
       - name: Archive Binary
         if: runner.os == 'Windows'
         shell: bash
@@ -124,9 +134,11 @@ jobs:
             package_dir="packages/csskit-${platform}"
             mkdir -p "${package_dir}/bin"
 
-            # Copy and rename binary to just 'csskit' or 'csskit.exe' for clean help text
+            # Copy the CLI binary to bin/, and the native addon to the package root
             for binary in "${artifact_dir}"/*; do
-              if [[ "$binary" == *.exe ]]; then
+              if [[ "$binary" == *.node ]]; then
+                cp "$binary" "${package_dir}/csskit.node"
+              elif [[ "$binary" == *.exe ]]; then
                 cp "$binary" "${package_dir}/bin/csskit.exe"
               else
                 cp "$binary" "${package_dir}/bin/csskit"

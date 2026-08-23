@@ -1,0 +1,34 @@
+[package]
+name = "csskit_napi"
+version.workspace = true
+authors.workspace = true
+edition.workspace = true
+description = "NAPI bindings exposing csskit to Node."
+homepage.workspace = true
+repository.workspace = true
+license.workspace = true
+keywords.workspace = true
+
+[lib]
+bench = false
+crate-type = ["cdylib", "rlib"]
+
+[dependencies]
+css_ast = { workspace = true }
+css_lexer = { workspace = true }
+css_parse = { workspace = true }
+csskit_ast = { workspace = true }
+visit_flow = { workspace = true }
+
+napi = { workspace = true, optional = true }
+napi-derive = { workspace = true, optional = true }
+self_cell = { workspace = true, optional = true }
+
+[build-dependencies]
+napi-build = { workspace = true }
+
+[features]
+default = []
+# Build the native Node addon (pulls the `napi` runtime). Off by default so `cargo test`/`cargo build`
+# of the workspace need no Node symbols to link; the addon is built with `--features napi`.
+napi = ["dep:napi", "dep:napi-derive", "dep:self_cell"]

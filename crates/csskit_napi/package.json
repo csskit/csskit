@@ -1,0 +1,19 @@
+{
+	"name": "@csskit/napi",
+	"version": "0.0.28",
+	"private": true,
+	"description": "NAPI bindings exposing csskit to Node.",
+	"scripts": {
+		"build": "napi build --release --features napi",
+		"build:debug": "napi build --features napi"
+	},
+	"devDependencies": {
+		"@napi-rs/cli": "3.7.4"
+	},
+	"napi": {
+		"binaryName": "csskit_napi",
+		"targets": [
+			"x86_64-unknown-linux-gnu"
+		]
+	}
+}

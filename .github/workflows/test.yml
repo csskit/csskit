@@ -36,7 +36,7 @@ jobs:
             echo "skip-build=false" >> $GITHUB_OUTPUT
             echo "Initial commit, running builds"
           # Check if any build-relevant files were changed
-          elif git diff --name-only HEAD~1 HEAD | grep -qE '\.(rs|toml|css|snap)$|^\.github/|^mise-tasks/|^coverage/|^Cargo\.lock$'; then
+          elif git diff --name-only HEAD~1 HEAD | grep -qE '\.(rs|toml|css|snap)$|^\.github/|^mise-tasks/|^coverage/|^packages/|^Cargo\.lock$'; then
             echo "skip-build=false" >> $GITHUB_OUTPUT
             echo "Build-relevant files changed, running builds"
           else
@@ -241,10 +241,73 @@ jobs:
       - name: Dry run publish
         run: cargo publish --workspace --dry-run --allow-dirty
 
+  build_wasm:
+    name: Wasm Build & JS Tests
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: "true"
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: test-wasm32-unknown-unknown
+
+      - name: Install wasm32 target
+        run: rustup target add wasm32-unknown-unknown
+
+      - name: Build wasm and run JS tests
+        run: mise r test-wasm
+
+  test_napi:
+    name: Napi Addon & JS Tests
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: "true"
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: test-napi
+
+      - name: Build addon and run native object model tests
+        run: mise r test-napi
+
+  generated_files:
+    name: Generated File Drift
+    needs: check-skip
+    if: needs.check-skip.outputs.skip-build != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          submodules: "true"
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: generated-files
+
+      - name: Regenerate node classes
+        run: mise run generate-node-classes
+
+      - name: Check for drift
+        run: git diff --exit-code -- packages/csskit/nodes.js packages/csskit/nodes.d.ts
+
   results:
     name: CI Results
     if: always()
-    needs: [check-skip, build, build_default, build_nightly, build_each_lib, build_benches, acceptance, fuzz_replay]
+    needs: [check-skip, build, build_default, build_nightly, build_each_lib, build_benches, acceptance, fuzz_replay, build_wasm, test_napi, generated_files]
     runs-on: ubuntu-latest
     permissions:
       pull-requests: write
@@ -269,12 +332,15 @@ jobs:
             [build_benches]="Build benches"
             [acceptance]="Acceptance Tests"
             [fuzz_replay]="Fuzz Corpus Replay"
+            [build_wasm]="Wasm Build & JS Tests"
+            [test_napi]="Napi Addon & JS Tests"
+            [generated_files]="Generated File Drift"
           )
 
           TABLE="| Job | Result |\n|---|---|\n"
           FAILED_JOBS=""
 
-          for job in build build_default build_nightly build_each_lib build_benches acceptance fuzz_replay; do
+          for job in build build_default build_nightly build_each_lib build_benches acceptance fuzz_replay build_wasm test_napi generated_files; do
             result=$(echo "$NEEDS" | jq -r ".${job}.result // \"skipped\"")
             name="${JOB_NAMES[$job]}"
             case "$result" in
