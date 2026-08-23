@@ -11,6 +11,7 @@ use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use itertools::Itertools;
 use serde::Serialize;
+use std::collections::BTreeMap;
 use strsim::levenshtein;
 
 #[derive(Debug, Args)]
@@ -31,8 +32,12 @@ pub struct Find {
 	input: InputArgs,
 
 	/// Show match count per file instead of matches
-	#[arg(long)]
+	#[arg(long, conflicts_with = "group")]
 	count: bool,
+
+	/// Show a count per node type and name instead of matches
+	#[arg(long)]
+	group: bool,
 
 	/// Output format
 	#[arg(short, long, value_enum, default_value_t = OutputFormat::Text)]
@@ -50,6 +55,33 @@ fn line_bounds(source: &str, offset: usize) -> (usize, usize) {
 	let start = source[..offset].rfind('\n').map_or(0, |i| i + 1);
 	let end = source[offset..].find('\n').map_or(source.len(), |i| offset + i);
 	(start, end)
+}
+
+const GROUP_TEXT_LIMIT: usize = 120;
+
+/// Collapse the source text of a match onto a single line, truncating nodes that carry a whole block.
+fn one_line(text: &str) -> String {
+	let mut out = String::new();
+	let mut len = 0;
+	let mut space = false;
+	for ch in text.chars() {
+		if ch.is_whitespace() {
+			space = !out.is_empty();
+			continue;
+		}
+		if space {
+			out.push(' ');
+			len += 1;
+			space = false;
+		}
+		if len >= GROUP_TEXT_LIMIT {
+			out.push_str("...");
+			break;
+		}
+		out.push(ch);
+		len += 1;
+	}
+	out
 }
 
 impl Find {
@@ -75,12 +107,43 @@ impl Find {
 			return Err(CliError::ParseFailed);
 		};
 
-		// In JSON mode, --count is ignored: consumers derive counts from results array length.
-		if self.count && !matches!(self.format, OutputFormat::Json) {
+		if matches!(self.format, OutputFormat::Json) {
+			// In JSON mode, --count and --group are ignored: consumers derive
+			// both from the results array.
+			Extract::run(self, config)
+		} else if self.count {
 			self.output_count(&selectors)
+		} else if self.group {
+			self.output_group(&selectors)
 		} else {
 			Extract::run(self, config)
 		}
+	}
+
+	fn output_group(&self, selectors: &QuerySelectorList) -> CliResult {
+		let alloc = Arena::default();
+		let mut groups: BTreeMap<(&'static str, String), usize> = BTreeMap::new();
+		let mut total = 0;
+
+		for (_, source) in self.input.sources()? {
+			let src = css_parse::String::from_reader_in(source, &alloc)?.into_str();
+
+			let lexer = Lexer::new(&CssAtomSet::ATOMS, src);
+			let mut parser = Parser::new(&alloc, src, lexer);
+			let Some(stylesheet) = parser.parse_entirely::<StyleSheet>().output else { continue };
+			for m in SelectorMatcher::new(selectors, &self.selector, src).run(&stylesheet) {
+				let text = &src[usize::from(m.span.start())..usize::from(m.span.end())];
+				*groups.entry((m.node_id.tag_name(), one_line(text))).or_default() += 1;
+				total += 1;
+			}
+		}
+
+		for ((kind, text), count) in &groups {
+			println!("{count}\t{kind}\t{text}");
+		}
+		println!("\nTotal: {total}");
+
+		Ok(())
 	}
 
 	fn output_count(&self, selectors: &QuerySelectorList) -> CliResult {

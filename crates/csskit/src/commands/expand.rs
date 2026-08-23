@@ -35,6 +35,7 @@ impl Expand {
 			eprintln!("Ignoring output option, because check was passed");
 		}
 		let mut checks = 0;
+		let mut parse_failures = 0;
 		for (file_name, source) in content.sources()? {
 			let source_text = css_parse::String::from_reader_in(source, &alloc)?.into_str();
 			let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);
@@ -57,6 +58,7 @@ impl Expand {
 					println!("{str}");
 				}
 			} else {
+				parse_failures += 1;
 				for compact_err in result.errors {
 					let report = crate::commands::format_diagnostic_error(&compact_err, source_text, file_name);
 					println!("{report}");
@@ -64,6 +66,12 @@ impl Expand {
 			}
 		}
 		eprintln!("Bloated your CSS in {:?}! Chunky!", start.elapsed());
-		if checks > 0 { Err(CliError::Checks(checks))? } else { Ok(()) }
+		if parse_failures > 0 {
+			Err(CliError::ParseFailed)?
+		} else if checks > 0 {
+			Err(CliError::Checks(checks))?
+		} else {
+			Ok(())
+		}
 	}
 }
