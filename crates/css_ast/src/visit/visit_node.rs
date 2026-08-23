@@ -14,6 +14,22 @@ pub(crate) trait QueryNodeData {
 	fn get_property(&self, kind: PropertyKind) -> Option<Cursor>;
 }
 
+/// Identity of one node within a parsed tree.
+///
+/// Keys remain valid while the tree lives. They are opaque and meaningful only among nodes from
+/// the same tree.
+#[derive(Clone, Copy, Debug, PartialEq, Eq, Hash)]
+pub struct NodeKey {
+	address: usize,
+	node_id: NodeId,
+}
+
+impl NodeKey {
+	fn of<T: ?Sized>(value: &T, node_id: NodeId) -> Self {
+		Self { address: (std::ptr::from_ref(value) as *const ()).addr(), node_id }
+	}
+}
+
 /// The single node view passed to every [`Visit`](super::Visit) callback.
 #[derive(Clone, Copy)]
 pub struct VisitNode<'n> {
@@ -33,6 +49,12 @@ impl<'n> VisitNode<'n> {
 	#[inline]
 	pub fn new_transparent(span: Span) -> Self {
 		Self { span, node_id: None, source: None }
+	}
+
+	/// The identity of this queryable node, or `None` for a transparent node.
+	#[inline]
+	pub fn key(&self) -> Option<NodeKey> {
+		self.source.zip(self.node_id).map(|(source, node_id)| NodeKey::of(source, node_id))
 	}
 
 	/// Aggregated metadata for this node *and its entire subtree*.

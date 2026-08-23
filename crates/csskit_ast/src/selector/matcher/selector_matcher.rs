@@ -3,8 +3,8 @@ use crate::{
 	QueryCombinator, QueryCompoundSelector, QueryFunctionalPseudoClass, QuerySelectorComponent, QuerySelectorList,
 	SelectorRequirements, SelectorSegment,
 };
-use css_ast::visit::{NodeId, Visitable};
-use css_ast::{CssMetadata, PropertyKind};
+use css_ast::PropertyKind;
+use css_ast::visit::{ErasedNode, NodeId};
 use css_parse::NodeWithMetadata;
 use smallvec::SmallVec;
 
@@ -91,7 +91,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		}
 	}
 
-	pub fn run<T: Visitable + NodeWithMetadata<CssMetadata>>(mut self, root: &T) -> impl Iterator<Item = MatchOutput> {
+	pub fn run<T: ErasedNode + ?Sized>(mut self, root: &T) -> impl Iterator<Item = MatchOutput> {
 		let css_meta = root.metadata();
 		self.selectors.retain(|s| {
 			let m = s.metadata();
@@ -115,6 +115,7 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 					self.matches.insert(MatchOutput {
 						span: node.data.span,
 						node_id: node.data.node_id,
+						node_key: Some(node.data.node_key),
 						properties: node.data.properties,
 						size: node.data.metadata.size,
 						stat_snapshot: SmallVec::new(),
@@ -126,13 +127,9 @@ impl<'a, 'b> SelectorMatcher<'a, 'b> {
 		self.matches.into_iter()
 	}
 
-	fn collect_nodes<T: Visitable + NodeWithMetadata<CssMetadata>>(
-		&self,
-		root: &T,
-		buckets: &SelectorBuckets<'a, 'b>,
-	) -> Vec<TreeNode> {
+	fn collect_nodes<T: ErasedNode + ?Sized>(&self, root: &T, buckets: &SelectorBuckets<'a, 'b>) -> Vec<TreeNode> {
 		let mut collector = NodeCollector::new(buckets);
-		let _ = root.accept(&mut collector);
+		let _ = root.accept_dyn(&mut collector);
 		collector.finalize(self.needs_type_tracking)
 	}
 

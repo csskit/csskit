@@ -19,7 +19,7 @@ mod root;
 mod visit_node;
 pub use root::{ErasedNode, ParsedRoot, parse_root};
 pub(crate) use visit_node::QueryNodeData;
-pub use visit_node::VisitNode;
+pub use visit_node::{NodeKey, VisitNode};
 
 use crate::*;
 
