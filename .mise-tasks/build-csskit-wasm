@@ -13,31 +13,18 @@ cargo build \
   --no-default-features \
   --features serde
 
-# The node target is built into a scratch dir because wasm-bindgen drops its own package.json
-# alongside the output, which would clobber the package's.
-rm -rf "$NODE_OUT"
 wasm-bindgen \
   --out-dir "$NODE_OUT" \
   --target experimental-nodejs-module \
   "$REPO_ROOT/target/wasm32-unknown-unknown/release/csskit_wasm.wasm"
-
-mv "$NODE_OUT/csskit_wasm.js" "$PKG/wasm.js"
-mv "$NODE_OUT/csskit_wasm.d.ts" "$PKG/wasm.d.ts"
-mv "$NODE_OUT/csskit_wasm_bg.wasm" "$PKG/csskit_wasm_bg.wasm"
-mv "$NODE_OUT/csskit_wasm_bg.wasm.d.ts" "$PKG/csskit_wasm_bg.wasm.d.ts"
-rm -rf "$NODE_OUT"
 
 wasm-bindgen \
   --out-dir "$PKG/bundle" \
   --target bundler \
   "$REPO_ROOT/target/wasm32-unknown-unknown/release/csskit_wasm.wasm"
 
-wasm-opt \
-  --enable-bulk-memory \
-  --enable-nontrapping-float-to-int \
-  -Oz \
-  -o "$PKG/csskit_wasm_bg.wasm" \
-  "$PKG/csskit_wasm_bg.wasm"
+mv "$NODE_OUT/csskit_wasm.js" "$PKG/bundle/csskit_wasm_node.js"
+rm -rf "$NODE_OUT"
 
 wasm-opt \
   --enable-bulk-memory \
@@ -45,3 +32,6 @@ wasm-opt \
   -Oz \
   -o "$PKG/bundle/csskit_wasm_bg.wasm" \
   "$PKG/bundle/csskit_wasm_bg.wasm"
+
+rm -f "$PKG/wasm.js" "$PKG/wasm.d.ts" "$PKG/csskit_wasm_bg.wasm.d.ts"
+rm -f "$PKG/csskit_wasm_bg.wasm"
