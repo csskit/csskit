@@ -11,7 +11,6 @@ hyperfine = "latest"
 "cargo:wasm-bindgen-cli" = "0.2.127"
 "aqua:WebAssembly/binaryen" = "131"
 "cargo:cargo-fuzz" = "0.13.2"
-"npm:@napi-rs/cli" = "3.7.4"
 
 [tasks.clean]
 confirm = 'Are you sure?'
@@ -45,7 +44,6 @@ alias = "t"
 
 [tasks.build-napi]
 description = "Build the napi addon into the csskit npm package"
-dir = "{{config_root}}/crates/csskit_napi"
 sources = [
   "{{config_root}}/Cargo.toml",
   "{{config_root}}/crates/**/*.toml",
@@ -53,8 +51,8 @@ sources = [
 ]
 outputs = ["{{config_root}}/packages/csskit/csskit.node"]
 run = [
-  "napi build --features napi",
-  "cp csskit_napi.node {{config_root}}/packages/csskit/csskit.node",
+  "cargo build -p csskit_napi --features napi",
+  "for file in \"{{config_root}}/target/debug/libcsskit_napi.so\" \"{{config_root}}/target/debug/libcsskit_napi.dylib\" \"{{config_root}}/target/debug/csskit_napi.dll\"; do if [ -f \"$file\" ]; then cp \"$file\" \"{{config_root}}/packages/csskit/csskit.node\"; exit 0; fi; done; exit 1",
 ]
 
 [tasks.test-napi]
