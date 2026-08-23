@@ -47,4 +47,100 @@ expression: tokens
     kind: "RightCurly",
     len: 1,
   ),
+  Token(
+    kind: "Ident",
+    len: 3,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 2,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "LeftCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "Colon",
+    len: 1,
+  ),
+  Token(
+    kind: "Ident",
+    len: 1,
+  ),
+  Token(
+    kind: "RightCurly",
+    len: 1,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
+  Token(
+    kind: "AtKeyword",
+    len: 2,
+  ),
+  Token(
+    kind: "Ident",
+    len: 4,
+  ),
+  Token(
+    kind: "Semicolon",
+    len: 1,
+  ),
 ]

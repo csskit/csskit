@@ -33,7 +33,10 @@ pub trait StyleSheet<'a, M: NodeMetadata>: Sized + Parse<'a> {
 			// While by default the parser will skip whitespace, the Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
 			// Rules are parsed.
-			if p.parse_if_peek::<T![' ']>()?.is_some() || p.parse_if_peek::<T![CdcOrCdo]>()?.is_some() {
+			if p.parse_if_peek::<T![' ']>()?.is_some()
+				|| p.parse_if_peek::<T![CdcOrCdo]>()?.is_some()
+				|| p.parse_if_peek::<T![;]>()?.is_some()
+			{
 				continue;
 			}
 
