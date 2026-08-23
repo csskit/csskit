@@ -368,7 +368,7 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chromashift"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -650,7 +650,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "bitmask-enum",
  "chromashift",
@@ -684,7 +684,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -693,7 +693,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
@@ -715,7 +715,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
@@ -737,7 +737,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "css_lexer",
  "heck",
@@ -751,7 +751,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "anstyle",
@@ -777,7 +777,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_arena"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "libc",
@@ -786,7 +786,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "bitmask-enum",
  "criterion",
@@ -805,7 +805,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "darling",
  "heck",
@@ -820,7 +820,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -839,7 +839,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "bitmask-enum",
  "console",
@@ -869,7 +869,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_napi"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "css_ast",
  "css_lexer",
@@ -884,7 +884,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -900,7 +900,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "glob",
  "insta",
@@ -912,7 +912,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "anyhow",
  "clap",
@@ -934,7 +934,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "bitmask-enum",
  "chromashift",
@@ -953,7 +953,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "console_error_panic_hook",
  "css_ast",
@@ -1056,7 +1056,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "heck",
  "itertools 0.15.0",
@@ -3092,7 +3092,7 @@ dependencies = [
 
 [[package]]
 name = "source_tools"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "miette",
@@ -3110,7 +3110,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "inventory",
  "stable-type-layout-derive",
@@ -3118,7 +3118,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout-derive"
-version = "0.0.29"
+version = "0.0.30"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3748,7 +3748,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "visit-flow"
-version = "0.0.29"
+version = "0.0.30"
 
 [[package]]
 name = "walkdir"
