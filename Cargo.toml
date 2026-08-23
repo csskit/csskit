@@ -144,7 +144,7 @@ similar.opt-level = 3
 opt-level = "s"
 debug = false
 strip = "symbols"
-lto = "fat"
+lto = "thin"
 panic = "abort"   # Let it crash and force ourselves to write safe Rust.
 codegen-units = 1
 
