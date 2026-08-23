@@ -288,6 +288,10 @@ FAIL layer/0002
 -@layer base{a{color:blue}}@layer utilities{a{color:red}}@layer base{a{font-weight:bold}}
 +@layer base{a{color:#00f;font-weight:700}}@layer utilities{a{color:red}}
 
+FAIL layer/0004
+-@layer reset,base;
++@layer reset,base
+
 FAIL media/0003
 -@media all and (width>=500px){a{color:red}}
 +@media(width>=500px){a{color:red}}
@@ -428,11 +432,16 @@ FAIL nesting/0032
 -:is(#a,.b),.c{.d{color:red}}
 +#a,.b,.c{.d{color:red}}
 
+FAIL property/0002
+-@property --size{syntax:"<length>";inherits:true;initial-value:16px}
++@property --size{syntax:"<length>";initial-value:16px}
+
 FAIL property/0005
--@property --foo{inherits:false;initial-value:16px}
+-@property --foo{inherits:true}@property --bar{syntax:"*"}@property --baz{syntax:"*";inherits:true}
 
 FAIL property/0006
--@property --foo{syntax:"<length>";initial-value:16px}
+-@property --foo{syntax:"*";inherits:false}@property --bar{syntax:"*";initial-value:red}@property --baz{syntax:"*";inherits:false;initial-value:red}
++@property --foo{inherits:false}@property --bar{initial-value:red}@property --baz{inherits:false;initial-value:red}
 
 FAIL property/0007
 -@property --foo{syntax:"<length> | <percentage>";inherits:false;initial-value:16px}
@@ -837,6 +846,10 @@ FAIL shorthands/0075
 FAIL shorthands/0076
 -a{background-color:red;background-image:linear-gradient(red,tan);background-position-x:100%;background-position-y:100%;background-repeat:no-repeat;background-attachment:fixed;background-size:contain;background-origin:padding-box;background-clip:content-box}
 +a{background:red linear-gradient(red,tan)100% 100%/contain no-repeat fixed padding-box content-box}
+
+FAIL shorthands/0077
+-div{border-color:inherit;border-style:inherit;border-width:2px}
++div{border:inherit;border-width:2px}
 
 FAIL shorthands/0078
 -div{border-top:1px solid red;border-right:1px solid red;border-bottom:1px solid red;border-left:1px solid red}

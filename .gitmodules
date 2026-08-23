@@ -1,15 +1,20 @@
-[submodule "tasks/coverage/css-tokenizer-tests"]
+[submodule "coverage/css-tokenizer-tests"]
 	path = coverage/css-tokenizer-tests
 	url = https://github.com/romainmenke/css-tokenizer-tests
-[submodule "tasks/coverage/postcss-parser-tests"]
+	shallow = true
+[submodule "coverage/postcss-parser-tests"]
 	path = coverage/postcss-parser-tests
 	url = https://github.com/postcss/postcss-parser-tests
+	shallow = true
 [submodule "coverage/postcss-autprefixer-tests"]
 	path = coverage/postcss-autprefixer-tests
 	url = https://github.com/postcss/autoprefixer/
+	shallow = true
 [submodule "coverage/css-import-tests"]
 	path = coverage/css-import-tests
 	url = https://github.com/romainmenke/css-import-tests
+	shallow = true
 [submodule "coverage/css-minify-tests"]
 	path = coverage/css-minify-tests
 	url = https://github.com/keithamus/css-minify-tests
+	shallow = true
