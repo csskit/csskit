@@ -1,5 +1,3 @@
-#![deny(warnings)]
-
 use core::fmt;
 mod a98_rgb;
 mod channels;

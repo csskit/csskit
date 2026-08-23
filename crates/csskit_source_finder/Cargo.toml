@@ -9,15 +9,18 @@ keywords.workspace = true
 license.workspace = true
 repository.workspace = true
 
+[lints]
+workspace = true
+
 [lib]
 bench = false
 
 [dependencies]
 glob = { workspace = true }
 syn = { workspace = true, features = ["full", "extra-traits"] }
-quote = { workspace = true }
 
 [dev-dependencies]
 serde = { workspace = true }
 insta = { workspace = true, features = ["ron"] }
 itertools = { workspace = true }
+quote = { workspace = true }

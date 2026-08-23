@@ -1,4 +1,3 @@
-#![deny(warnings)]
 mod transform;
 mod transformer;
 

@@ -1,4 +1,3 @@
-#![deny(warnings)]
 use proc_macro::TokenStream;
 use syn::{DeriveInput, Generics, Result, parse_quote};
 

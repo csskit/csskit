@@ -1,4 +1,3 @@
-#![deny(warnings)]
 use csskit_source_finder::{VisitMode, VisitableNode, find_visitable_nodes};
 use heck::{ToKebabCase, ToSnakeCase};
 use proc_macro2::TokenStream;

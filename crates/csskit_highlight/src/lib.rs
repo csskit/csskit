@@ -1,4 +1,3 @@
-#![deny(warnings)]
 use bitmask_enum::bitmask;
 use chromashift::Hex;
 use core::fmt;

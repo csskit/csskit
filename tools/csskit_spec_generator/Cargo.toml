@@ -10,6 +10,9 @@ keywords.workspace = true
 license.workspace = true
 repository.workspace = true
 
+[lints]
+workspace = true
+
 [[bin]]
 name = "csskit_spec_generator"
 path = "src/main.rs"

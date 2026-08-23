@@ -1,4 +1,3 @@
-#![deny(warnings)]
 use core::fmt::Write;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Kind, Lexer, QuoteStyle};

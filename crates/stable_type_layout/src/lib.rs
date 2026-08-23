@@ -1,4 +1,3 @@
-#![deny(warnings)]
 //! Layout descriptors for struct or enum types with an inventory registry.
 //!
 //! [`TypeLayout`] is derivable and exposes a `const` [`TypeLayoutInfo`] holding a type's name, size, minimum alignment,

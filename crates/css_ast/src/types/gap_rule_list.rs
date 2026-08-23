@@ -1,4 +1,3 @@
-#![allow(unused)]
 use super::prelude::*;
 
 use crate::{AutoOr, Color, LineStyle, LineWidth, PositiveNonZeroInt};

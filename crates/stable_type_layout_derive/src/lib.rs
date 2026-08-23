@@ -1,4 +1,3 @@
-#![deny(warnings)]
 //! Derive macro for `stable_type_layout::TypeLayout`.
 //!
 //! Use it through the [`stable-type-layout`](https://docs.rs/stable-type-layout) crate, which re-exports this macro

@@ -1,4 +1,3 @@
-#![deny(warnings)]
 use heck::ToPascalCase;
 use proc_macro2::{Span, TokenStream};
 use quote::{ToTokens, TokenStreamExt, format_ident};
