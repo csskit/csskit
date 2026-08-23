@@ -9,9 +9,6 @@ on:
 permissions:
   contents: read
 
-env:
-  CARGO_TARGET_AARCH64_UNKNOWN_LINUX_GNU_LINKER: aarch64-linux-gnu-gcc
-
 jobs:
   check-skip:
     name: Check if build is needed
@@ -57,7 +54,7 @@ jobs:
             target: x86_64-pc-windows-msvc
             code-target: win32-x64
 
-          - os: windows-latest
+          - os: windows-11-arm
             target: aarch64-pc-windows-msvc
             code-target: win32-arm64
 
@@ -65,11 +62,11 @@ jobs:
             target: x86_64-unknown-linux-gnu
             code-target: linux-x64
 
-          - os: ubuntu-latest
+          - os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-gnu
             code-target: linux-arm64
 
-          - os: macos-latest
+          - os: macos-26-intel
             target: x86_64-apple-darwin
             code-target: darwin-x64
 
@@ -92,6 +89,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: test-${{ matrix.target }}
+          tools: rust
+          components: ""
 
       - name: Test
         run: cargo test --all-features
@@ -109,6 +108,9 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          tools: rust
+          components: ""
 
       - name: Test
         run: cargo test
@@ -128,6 +130,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           nightly: "true"
+          tools: rust
+          components: ""
 
       - name: Test
         run: cargo +nightly test --all-features
@@ -145,6 +149,9 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          tools: rust
+          components: ""
 
       - name: Build
         run: set -euo pipefail; for d in crates/*/ tools/*/; do pkg=$(cargo metadata --no-deps --manifest-path $d/Cargo.toml --format-version 1 2>/dev/null | jq -r '.packages[0].name'); cargo build -p $pkg; done
@@ -162,6 +169,9 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          tools: rust
+          components: ""
 
       - name: Build
         run: cargo build --benches
@@ -179,6 +189,9 @@ jobs:
 
       - name: Setup
         uses: ./.github/actions/setup
+        with:
+          tools: rust
+          components: ""
 
       - name: Run acceptance tests
         run: mise r csskit-acceptance
@@ -207,6 +220,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           nightly: "true"
+          tools: rust cargo:cargo-fuzz
+          components: ""
 
       - name: Replay corpus
         if: steps.check-fuzz.outputs.changed == 'true'
@@ -229,6 +244,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: deploy-dryrun
+          tools: rust cargo:cargo-edit
+          components: ""
 
       - name: Set canary version
         run: |
@@ -256,6 +273,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: test-wasm32-unknown-unknown
+          tools: rust node npm cargo:wasm-bindgen-cli aqua:WebAssembly/binaryen
+          components: ""
 
       - name: Install wasm32 target
         run: rustup target add wasm32-unknown-unknown
@@ -278,6 +297,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: test-napi
+          tools: rust node npm npm:@napi-rs/cli
+          components: ""
 
       - name: Build addon and run native object model tests
         run: mise r test-napi
@@ -297,6 +318,8 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: generated-files
+          tools: rust
+          components: ""
 
       - name: Regenerate node classes
         run: mise run generate-node-classes
