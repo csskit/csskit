@@ -17,7 +17,7 @@ proc-macro = true
 css_lexer.workspace = true
 css_value_definition_parser.workspace = true
 
-syn = { workspace = true, features = ["extra-traits"] }
+syn = { workspace = true, features = ["extra-traits", "full"] }
 quote = { workspace = true }
 proc-macro2 = { workspace = true }
 itertools = { workspace = true }
