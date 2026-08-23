@@ -1,0 +1,27 @@
+rder-radius: var(--bs-border-radius);
+}
+
+.was-validated :valid ~ .valid-feedback,
+.was-validated :valid ~ .valid-tooltip,
+.is-valid ~ .valid-feedback,
+.is-valid ~ .valid-t9600;}.messages--error{color:#a51b00;borderd .form-control:valid, .form-control.is-valid {
+  border-color: var(--bs-form-valid-border-color);
+  padding-right: calc(1.5em + 0.75rem-;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' vierol.is-valid {
+  padding-right: calc(1.5em + 0.75rem);
+  background-position: top calc(0.375em + 0.1875rem) right calc(0.375em + 0.1875rem);
+}
+
+.was-validated .fo var(--bs-danger);
+  border-radius: var(--bs-border-radius);
+}
+
+.was-validated :invalid ~ .invalid-feedback,
+.was-validated :invalid ~ .invalid-tooltip,
+.is-invalid ~ .invalid-feedback,
+.is-invalid ~ .invalid-tooltip {
+  display: block;
+}
+
+.was-validated .form-control:invalid, .form-control.is-invalid {
+  border-coder-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:8px 0 0 #77b259;}.messages--warning{color:#734c00;border-color:#fxml,%3csvg xmlns='http://www.w3.org/2000/svg' vi

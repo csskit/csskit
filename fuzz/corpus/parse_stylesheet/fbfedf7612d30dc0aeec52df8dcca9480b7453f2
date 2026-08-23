@@ -1,0 +1,29 @@
+
+    op
+
+@media (prefers-color-sch  -webkit-margin-end: 1rem;
+  margin-inline-end: 1rem;
+}
+.form-control-lg::file-selector-button {
+  padding: 0.5rem 1rem;
+  marght: calc(1.5em + 0.75rem + calc(var(--bs-border-width) * 2));
+}
+textarea.form-control-sm {
+  min-height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * ());
+}
+textarea.form-control-lg {
+  min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 2));
+}
+
+.form-control-color {
+  width: 3rem;
+  height: calc(1.5em + 0.75rem + calc(var(--bs-border-width) * 2));
+  padding: 0.375rem;
+}
+.form-control-color:not(:disabled):not([readonly]) {
+  cursor: pointer;
+}
+.form-control-color::-moz-color-swatch {
+  border: 0 !important;
+,
+.carousel-fade .carousel-item-prev.c?rousel-ite  borm-end

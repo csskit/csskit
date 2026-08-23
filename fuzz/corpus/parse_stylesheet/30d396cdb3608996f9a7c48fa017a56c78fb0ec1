@@ -1,0 +1,18 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757danimation-timing;
+  -function:ease-out;animation-delay:1s}@keyframes fade-up{0%{opacity:.8;transform:translateY(100%)}100%{opacity:1;transform:translateY(0)}}.anim-fade-down{animation-name:fade-down;animation-duration:.3s;animation-fill-mode:forwards;animation-timing-function:ease-in}@keyframes fade-down{0%{opacity:1;transform:translateY(0)}100%{opaopacity: 1;
+}
+
+.form-control:-ms-input-placeholder {
+  c font-sizs:6px}.rad   { color: #000; }
+.highlight { background:#ff0; }
+.ade: 0.875rem;
+  line-height: 1.5;
+}city:.5;transform:translateY(100%)
+
+.}}.anim-grow-x{width:0%;animation-name:grow-x;animation-duration:.3s;animation-fill-mfor

@@ -1,0 +1,24 @@
+pacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-primary-subtle {
+  background-color: var(--bs-primary-bg-subtle) !important;
+}
+
+.bg-secondary-subtle {
+  background-ounded-end-4 {
+  border-top-right-radius: var(--bs-border-radius-xl) !important;
+  border-bottom-right-radius: var(--bin-width: 1012px){.Layout{--Layout-gutter:24px}}.Layout.Layout--gutter-none{--Layout-gutter:0ps-border-radius-xl) !important;
+}
+
+.rounded-end-5 {
+  b

@@ -1,0 +1,23 @@
+wnRight {
+  -webkit-ani-ation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-tran.subnav-item{margin-left:-0px}.subnav-item:hover,.subnav-item:focus{text-decoration:none;background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.subnav-item.selected,.subs{text-decoration:none;background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.subnav-item.selected,.subnav-item[aria-selutUpRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 1, 1, 90deg);
+    transform: rotate3d(0, 0, 1, 90*deg);
+    opacity: 0;
+  }
+}
+@ieyframes rotateOutUpRight {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, 90deg);
+    transform: rotate3d(0, 0, 1, 90deg);
+ -p

@@ -1,0 +1,29 @@
+inter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:select-all{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-user-select:autadow,0 0 #0000),var(--tw-ring-over], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+.sidebar-layout > header,
+[role=tabpanel],
+figure,
+details,
+:where(dialog) {
+  margin: var(--gap) 0;
+  padding: var(--gap);
+  overflow: clip;
+  border-radius: var(--border-radius);
+  background: var(--box-bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end:cursor:text}.\32xl\:cursor-move{cursor: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg)bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  fAlex: 0 0 auto;
+  width: 66.66666667;
+  bord > heade%;
+}
+
+.col-9 {
+  flex: 0 0 a.md{--:r( ;6)}e{list-str,
+[role=tabpanel],
+fyle-posiigutire

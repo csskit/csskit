@@ -1,0 +1,39 @@
+lg > .btn {
+  padding: 0t"].btn-block,
+input[type="reset"].btn-block,
+input[type="button"].btn-block {
+  width: 100%;
+}
+
+.fade {
+  transinion: opacity 0.15s linear;
+}
+
+@media (prefers-reduced-meOutTopLeft {
+  -webkit-animation-name: fadeotion: reduce) {
+  .fade {
+    transition: none;
+  }
+}
+
+.fade:not(.show) {
+  opacity: 0;
+}
+
+.collapse:not(.show) {
+  display: none;
+}
+
+.collapsing {
+  position: relative;
+  height: 0;
+  overflow: hidden;
+  transition: height 0.35s ease;
+}OutTopLeft;
+  animation-name: fadeOutTopLeft;
+
+@media (prefers-reduced-motion: reduce) {
+  .collapsing {
+    tranu-sm-righ
+}
+@-webkit-keyft ra

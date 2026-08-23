@@ -1,0 +1,18 @@
+form-control-lg {
+  min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 2));
+  padding: 0.5rem 1rem;
+  font-size: 0.25rem;
+  border-radius: var(--bs-border-radius-lg);
+}
+.form-control-lg::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  margin: -0.5rem -1rem;
+  -webkit-margin-end: 1rem;
+  margin-inline-end: 1rem;
+}
+.form-control-lg::file-selector-button {
+  padding: 0.5rem 1rem;
+  margin: -0.5rem -1rem;
+  -webkit-margin-end: 1rem;
+  margin-inline-end: 1rem.sm\:overflow-x-hidden{overflow-x:hidden}.sm\:over-4rem * var(--tw-space-y-reverse))}.md\:-space-y-20>:not([hidden])~:not([hidden]){--tw-space-y-reverse:0;margin-top:calc(-5rem * calc(1 - va-w--t(srpace-y-reverse)));margin-bottom:calc(-56 6-6'/%3e%3c/svg%3rem e");
+  di* 

@@ -1,0 +1,16 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-tran.subnav-item{margin-left:-1px}.subnav-item:hover,.subnav-item:focus{text-decoration:none;background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.subnav-item.selected,.subnav-item[aria-selected=true],.subnav-item[aria-current]:not([aria-current=false]){z-index:2;color:var(--sform-origin: right bottom;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: UpRight;
+  animation-name: rotateOutUpRight;
+  -webkit-transform-origin: right bottom;
+  tranop-hue-rotate-60{--tw-backdr-hpoue-rotate:hue-rotate(60deg)}.md\:backdrop-hue-rosform-origin: right botttate-9om0;{--

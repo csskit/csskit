@@ -1,0 +1,45 @@
+/* Sakura.css v1.5.1
+ * ================
+ * Minimal css theme.
+ * Project: https://github.com/oxalorg/sakura/
+ */
+/* Body */
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sns", sans-serif;
+  font-weight: 700;
+  margin-top: 3rem;
+  margin-bottom: 1.5rem;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+  -ms-word-break: break-all;
+  word-break: break-word;
+}
+
+h1 {
+  font-size: 2.35em;
+}
+
+h2 {
+  font-size: 2em;
+}
+
+h3 {
+  font-size: 1.75em;
+}
+
+h4 {
+  font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1.25em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+p {
+  margin-top: 0px;
+  margin-bottrt{align-self:flex-start}.sm\:self-end{alignetch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-selr{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-end}.sm\:self-center{align-self:center}.sm\:self-stretch{align-self:stretch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-self-end{justify-self:end}.sm\:justify-self-cenyer{justify-self:center}.sm\:justify-self-stretch{justify-self:stretch}.sm\:overflow-auto{overflf-end{justify-self:end}.sm\:jusow:auto}.sm\:overflowtify-self-c-eny

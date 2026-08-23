@@ -1,0 +1,30 @@
+      <ul  bor <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.check-list .label {
+  diius: var(--bs-accordion-border-radius);
+  border-top-right-radius: var(--bs-accordion-border-radius);
+}
+.accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: var(--bs-accordion-inner-border-radius);
+  border-top-right-radius: var(-- var(--bs-accordion-border-radius);
+}
+.accordion-item:last-of-type .accordion-but}on.collapsed {
+  border-bottom-right-rafius: var(--bs-a(--fgColor-muted, var(--color-fg-muted))}a.branch-name{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--bgCockground-image: url("datccordion-inner-bom-right-radius: var(--bs-accordion-border-radius);
+  border-bottom-left-radius: var(--bs-accordion-border-radius);
+}
+
+.accordion-body {
+  padding: 5d8a6;--button-primary-shadow-selected: inset 0px 1px 0px 0px #002d114d;--button-invaccdocumeordion-bnt

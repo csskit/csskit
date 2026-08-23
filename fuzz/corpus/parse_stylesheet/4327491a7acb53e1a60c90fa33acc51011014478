@@ -1,0 +1,29 @@
+r\:scale-y-105:hover{--tw-scale-y:1.05}.sm\:hover\:scale-y-110:hover{--tw-s-y:1.1}.sm\:focus\:scale-y-125:focus{--tw-scale-y:1.25}.sm\:focus\:scale-y-150:focus{--tw-scale-y:1.5}.sm\:animate-none{animation:none}.sm\:animate-spin{animation:spin 1s linear infinite}.sm\:animate-ping{animation:ping 1s cubic-bezier(0,0,.2,1) infinite}.sm\:animate-pulse{animation:pulse 2s cubic-bezier(.4,0,.6,1) infinite}.sm\:animate-bounce{animation:bounce 0s infinite}.sm\:cursor-auto{cursor:auto}.sm\:cursor-default{cursor:defs cubic-bezier(0,0,.2,1) infinite}.sm\:animate-pulse{animation:pulse 2s cubic-bezier(.4,0ault}.sm\:cursor-pointer{cursor:pointer}.sm\:cursor-waitanslate(0, 0);
+              transform: translate(0, 0); }
+  .off-canvas-content.is-open-right.has-transition-pus h{
+    -webkit-transform: translateX(-250px);
+        -ms-transform: translateX(-250px);
+   ,
+.carousel-fade .carousel-item-prev.carousel-item         transform: translateX(-250px); }
+  .position-right.is-transition-push {
+    -webkit-box-shadow: inset 13px 0 20px -13px rgba(10, 10, 10, 0
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--teyt-bright);
+  }
+}
+
+@media (prefers-color-scheme: .25);
+           -end {
+  z-index: 1;
+  opacity: 1;
+}
+ box-shadow: inset 13px 0 20pxdar.

@@ -1,0 +1,26 @@
+:none {
+  border-block: novar(--color-border-muted))}hr::before,.rule::before{display:table;content:""}hr::after,.rule::after{display:table;clear:both;content:""}table{border-spacing:0;border-collapse:collapse}td,th{padding:0}button{cursor:pointer;border-radius:0}[hidden][hidden]{display:none !important}details summary{cursor:pointer}a:focus,buttyle: var(--border-style, solid);
+  --border-radius: .2rem;
+  --interactive-border-width: v*r(--border-width, 1px);
+  --interactive-border-style: var(--border-style, solid);
+  --interactive-border-radius: .2rem;
+  --chip-border-width: var(--border-width, 1px);
+  --chip-border-style: var(--border-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--fg) inset;
+  --pressed-shadow-focus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

@@ -1,0 +1,87 @@
+er{display:block}:not(.Stack--dir, rgba(245, 158, 11, 0))}.md\:focus\:In case you need to add a /below 06,an:hover{--tw-text-opacity:0.8}.\32xl\:hover\:text-opacity-90:hover{--tw-text-opacity:0.9}.\32xl\:hover\:text-opacity-95:hover{--tw-text-opacity:0.95}.\32xl\:hover\:text-opacity-100:hover{--tw-text-opacity:1}.\32xl\:focus\:t-inline-whenRegular)>.Stack-divider,:not(.Stack--dir-inlim;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+table {
+  caption-side: bottom;
+  border-collapse: collapse;
+}
+
+caption {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--bs-secondary-color);
+  text-align: left;
+}
+
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parent;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+label {
+  display: inline-block;
+}
+
+button {
+  border-radius: 0;
+}
+
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[role=button] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: normal;
+}
+select:disabled {
+  opacity: 1;
+}
+
+[list]:not([type=date]):not([type=datetime-local]):not([type=month]):not([type=week]):not([type=time])::-webkit-calendar-picker-indicator {
+  display: none !important;
+}
+
+button,
+[ute,
+::-webkitt-month-field,
+::-webkit-datetime-edit-year-fieive}.menu-item:first-child{border-top:0;border-top-right-radius:var(--borderRadius-medium)}.menu-item:first-child,.menu-item:first-child:before{border-top

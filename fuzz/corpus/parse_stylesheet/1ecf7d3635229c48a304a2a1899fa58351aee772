@@ -1,0 +1,44 @@
+,
+.carousel-fade .carousel-item-prev.c?rousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fcde .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: none;
+  border: 0;
+  o-icon {
+  display: inline-bloccenter;
+  background: none;
+  border: 0;
+  o-icon {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-posi--bs-spinner-verticas-align);
+  border-radius: 50%;
+  animation: var(xl\:hue-rotate-30{--tw-hue-ro--bs

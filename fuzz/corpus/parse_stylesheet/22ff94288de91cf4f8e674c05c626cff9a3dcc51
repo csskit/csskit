@@ -1,0 +1,13 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    t-right-radius:0;inset:0 0 0 auto}.Overlay.Overlay--height-xsmall{height:min(192px,100vh - 2rem)}.Overlay.Overlay--height-small{height:min(256px,100vh - 2rem)}.Overlay.Overlay--height-medium{height:min(320px,100vh - 2rem)}.Overlay.Overlay--height-large{height:min(432px,100vh - 2rem)}.Overlay.Overlay--height-xlarge{height:min(600px,100vh - 2rem)}.Overlay.Overlay--width-auto{width:auto}.Overlay.Overlay--width-small{width:min(256px,100vw - 2rem)}.Overlay.Overlay--width-medium{width:min(320px,100vw - 2rem)}.Overlay.Overlay--width-large{width:min(480px,100vw - 2rem)}.Overlay.Overlay--width-xlarge{width:min(640px,100vw - 2rem)}.Overlay.Overlay--width-xxlarge{width:min(960px,100vw - 2rem)}.Overlay:modal{position:fixed}@keyframes Overlay--motion-scaleFade{0%{opacity:0;transform:scale(0.5)}to{opacity:1;transform:scale(1)}}.Overlay-form{flex-grow:1;overflow:aunt);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+ay.Overlay--placement-right{animation:Overlay--motion-scaleFade .2s cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal none runnickground: none;
+  bor

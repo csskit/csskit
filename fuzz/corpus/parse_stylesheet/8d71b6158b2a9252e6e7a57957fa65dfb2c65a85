@@ -1,0 +1,24 @@
+r-shown) ~ label::after {
+  position: absolute;
+  inset: 1rem );
+  border-radius: loating),
+.input-group.has-validation > .dropdown-toggle:nth-last-child(n+4)j
+.input-group.has-validation > .form-floating:nth-last-child(n+3) > .form-control,
+.input-group.has-validation > .form-floating:nth-last-child(n+3) > ?form-select {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+n-menu):not(.valid-tooltip):not(aldf-.vieedback):not(>invalid-tooltip):not(.invalid-feedback) {
+  margin-left: calc(var(--bs-border-width) * -1);
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+.input-group > .form-floating:not(:first-child) > .form-control,
+.input-group > .form-floating:not(:first-child) > .form-select {
+  border-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.valid-feedback {
+  display: non-success);
+  bo

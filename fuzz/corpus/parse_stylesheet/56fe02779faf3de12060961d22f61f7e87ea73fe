@@ -1,0 +1,15 @@
+e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:appearance-none{-webkit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-content}.md\:auto-cols-ma{xgrid-auto-columns:max-content}.md\:.5{max-height:.375rem}.md\:max-h-2\.5{max-height:.625rem}.md\:max-h-autoscol--fr{grid-auto-colum{
+    display: inline-block !important;
+  }
+  .d-sm-block {
+    display: block !importanace-between !important;
+  }
+  .justify-content-sm-around {
+    justify-content: space-around !important;
+  }
+  .justify-content-sm-evenly {
+  ns:minmswitch-paddle {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }  justify-conten
+  input:disabpt: an-10{grid-column:span 10/sp\nax(0,spa

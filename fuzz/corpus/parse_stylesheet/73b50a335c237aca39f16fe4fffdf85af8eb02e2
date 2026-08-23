@@ -1,0 +1,68 @@
+{--ty-25% :flex-col{flex-direction:column}.sm\:flex-col-reverse{flex-direction:column-reverse}.sm\:flex-wrap{flex-wrap:wrap}.sm\:fleOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOx-wrap-reverse{flex-wrap:wrap-reverse}.sm\:flex-nowrap{flex-wrap:nowrap}.sm
+body {
+  margin: 0;
+  color: var(--fore-color);
+  background: var(--back-color);
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline var(--heading-ratio));
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: calc(1rem / var(--heading-ratio));
+}
+
+p {
+  margin: var(--universal-margin);
+}
+
+ol, ul {
+  margin: var(--unont-size: 0.85em;
+}
+
+code {
+  background: var(--secondary-back-color);
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 5) calc(var(--universal-padding) / 2);
+}
+
+kbd {
+  background: var(--fore-color);
+  color: var(--back-color);
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calc(var(--universal-padding) / 2);
+}
+
+pre {
+  overflow: auto;
+  background: var(--secondary-back-color);
+  padding: calc(1.5 * var(--universal-padding));
+  margin: var(--universal-margin);
+  border: 0.0625rem solid var(--secondary-border-color);
+  border-left: 0.25rem solid var(--pre-color);
+  border-radius: 0 var(--universal-border-radius) var(--universal-border-radius) 0;
+}
+
+sup, sub, codersal-border-radius: 0.125rem;
+  --a-link-col}
+
+p {
+  margin: var(--universal-margin);
+}
+
+ol, ul {
+  margin: var(--unont-sm\:gap-x-10{column-gap:2.5rem}.sm\:gap-x-11{column-gap:2.75rem}.

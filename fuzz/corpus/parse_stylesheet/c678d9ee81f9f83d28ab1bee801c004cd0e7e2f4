@@ -1,0 +1,37 @@
+d `letter-spacing` side-effects. */
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: horizontal;
+    -webkit-box-direction: normal;
+        -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+
+    /* Prevents distributing space between rows */
+    -ms-flex-line-pack: start;
+        align-content: flex-start;
+}
+
+/* IE10 display: -ms-flexbox (and display: flex in IE 11) does not work inside a table; fall back to block and rely on font hack */
+@media all and (-ms-high-contrast: none)re-u-11-12,
+.pure-u-1-24,
+.pure-u-2-24,
+.pure-u-3-24,
+.pure-u-4-24,
+.putton::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+/* Inherit .pure-g styles */
+.pure-button-group {
+    letter-spacing: -0.31em; /* Webkit: collapse white-space between units */
+    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+}
+
+.opera-only :-o-prefocus,
+.pure-button-group {
+    word-spacing: -0.43em;
+}
+
+.-ubeprut

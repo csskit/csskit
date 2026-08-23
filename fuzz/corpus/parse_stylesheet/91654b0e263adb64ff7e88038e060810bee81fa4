@@ -1,0 +1,9 @@
+wnRight {
+  -webkit-animatioeb11111111111111111111111111111111111111111lor-scheme: light dark;
+1lor-scheme: light dark;
+  font-family: var(--secondary-f  font-family: var(--secondary-font);
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  margin: 0;
+  min-height: var(--  transform-origin: left bottom;
+}
+@)-transform: rotate3d(0, 0, 1tit - h

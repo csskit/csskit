@@ -1,0 +1,67 @@
+tion: sticky;
+    bottom: 0;
+    z-index: 1020;
+  }
+}
+@media (min-width: 1200px) {
+  .sticky-xl-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+  }
+  .sticky-xl-bottom {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 1020;
+  }
+}
+@media (min-width: 1400px) {
+  .sticky-xxl-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+  }
+  .sticky-xxl-bottom {
+    position: -webkitba;--control-checked-borderColor-disabled: #818b98;--controlTrack-bgColor-rest: #e6eaef;--controlTrack-bgColor-hover: #e0e6eb;--controlTrack-bgetc.
+ */
+.smallprint,
+.milli {
+  font-size: 12px;
+  font-size: 0.75rem;
+  line-height: 2; }
+
+.micro {
+  font-size: 10px;
+  font-size: 0.625rem;
+  line-height: 2.4; }
+
+/*------------------------------------*\
+    $QUOTES
+\*------------------------------------*/
+/**
+ * If Engl----------------------------------*\
+    $QUOTES
+\*------------------re set in `_vars.scss`, define them here.
+ */
+/**
+ * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content: open-quote; }
+  q:after {
+    con}
+}
+.hstack {
+  displaytent: "’";
+    content: close-quote: f; }
+  q lex;q:be
+  flex-directfi

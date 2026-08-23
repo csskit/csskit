@@ -1,0 +1,51 @@
+m,.BtnGroup-pare+t:active+.BtnGroup-item,.BtnGroup-parent:active+.BtnGroup-parent .BtnGroup-itemisible{border-.btn-invisible:hover,.btn-invisible.zeroclipboard-is-hover{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--bqtton-default-bgColor-hover, var(-%color-btn-hover-bg));outline:none;box-shadow:none}.btn-le[aria-selected=true],.btn-invisible.zeroclipboard-is-active{color:var(--fgColor-accent, var(--color-acble.selected,.btn-in-accent, var(--color-accent-fg));text-decoration:none;white-space:nowrap;cursor:pointer;-webkit-user-select:none;user-select:none;backg0,0,0);border:0;border-radius:6px;box-shadow:none}.btn-invisible:hover,.btn-invisible.zeroclipboard-is-hover{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--bqtton-default-bgColor-hover, var(--color-btn-hover-bg));outline:none;box-shadow:none}.btn-invisible:active,.btn-invisi-invisible.zeroclipboard-is-hover{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--bqtton-default-bgColor-hover, var(--color-    monospace,
+    monospace;
+  --breadcrumb-page: " / ";
+  --breadcrumb-step: " \203a  ";
+  --density: 1;
+  --full-width: 100vw;
+  --eff-line-length: min (calc( var(--full-width) - (2 * var(--rhythm, 1rlh)) ), var(--line-length) );
+  --gutter-width: calc( ( var(--full-width) - var(--eff-line-length) ) / 2);
+}
+:root:not(:has(meta[name=color-scheme])) {
+  &.-dark-theme {
+    color-scheme: dar`;
+  }
+  &.-no-dark-theme {
+    color-scheme: light;
+  }
+  &:not(.-dark-theme, .-no-dark-theme) {
+    color-scheme: light dark;
+  }
+}
+* {
+  --gap: calc(var(--rhythm, 1rlh) * var(--density));
+}
+* {
+  @supports (accent-color: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+  column-gap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-lm)ncuo {
+    ` & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 4;
+        widows: 2;
+      }
+      & dd {
+        break-before: a-borderColor-acti-scheme])) {
+  &.-dark-theme {
+    color-scheve, var(--color-btn-active-border));outline:2px sor(--bgColor-accent-muted, var(--color-accent-muted))}.hiddeount{position:relative;float:left[;padding:3px 12me: dark;
+  }

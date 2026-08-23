@@ -1,0 +1,14 @@
+switch-paddle {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }
+  input:disabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0\0; }
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  po/*!
+ * Bootstrap v4.6.2 (https://getbootstrasition: absolute;
+  topp.

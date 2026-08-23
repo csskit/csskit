@@ -1,0 +1,28 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--jorder-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-widtnd: var(--bora-cols\@l^="11 "] {
+   tart {
+  border-block-start: var(--border-block-start-widtnd: var(--bora-cols\@l^="11 "] {
+    grid-column-start: 11;
+  }
+  [data-cols\@l$=" 11"] {
+    grid-column-end: 11;
+  }
+  [data-cols\@l="11"] {
+    grid-column: 11;
+  }h, 1px);
+  --border-inline-end-width: var(--border-widt-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

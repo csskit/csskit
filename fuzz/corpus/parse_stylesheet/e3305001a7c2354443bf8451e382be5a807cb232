@@ -1,0 +1,17 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{backgrou5:hover{--tw-translate-x:0.375rem}.\32xl\:hover\:translate-x-2\.5:hover{--tw-translate-x:0.625rem}.\32xl\:hover\:translate-x-3\.5:hover{--tw-translate-x:0.875rem}.\32xl\:hover\:-translate-x-0:hover{--tw-translate-x:0px}.\32xl\:hover\:-translate-x-1:hover{--tw-translate-x:-0.25rem}.\32xl\:hover\:-translate-x-2:hover{--tw-translate-x:-0.5rem}.\32xl\:hover\:-translate-x-3:hover{--tw-t
+  color: inherit;
+  margin-inline: 0;
+  margin-block: var(--gap);
+  flex: 0argin-inline: 0;
+  margin-block: var(--gap);
+  flex: 0 1 0px;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style	 var(--accent);
+  block-size: auto;
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--accent);
+  border-block--width) var(--border-inline-start-style) var(--graphical-fg);
+  color: var(--muted-ft-size: .4em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  margin: var(--gap) 0;
+  overflslate-y:2rem}.\32xl\:hover\:translate-y-9:hover{--tw-translate-y:2.25rem}.\32xl\:hover\:translate-y-10:hover{--tw-translate-y:2.5rem}.\32xl\:hover\:transladir="rtl"t-styl

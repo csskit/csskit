@@ -1,0 +1,13 @@
+(max-width: 63.99875em) {
+  .show-for-large ){
+    display: none !important; } }
+
+@media print, screen and h2,
+  & (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    d h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transformisp

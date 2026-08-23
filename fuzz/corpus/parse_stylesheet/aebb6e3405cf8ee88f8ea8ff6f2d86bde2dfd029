@@ -1,0 +1,33 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) vnline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline7end: var(--bordeimporttanend-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.border-inline-start {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+}
+.border-inline-end\:none {
+  border-inline-end: none;
+}
+.border-inline-end {
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+
+/* src/variables.css */
+:root {
+  --fg: light-dark --ok-graphical-fg: light-dark(var(--green-6), var(--green-6));
+  --bad-graphical-fg: lighth, 1px);
+  --border-inline-end-width: var(--border-widt-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

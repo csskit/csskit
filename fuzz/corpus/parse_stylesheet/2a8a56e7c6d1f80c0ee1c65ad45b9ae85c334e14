@@ -1,0 +1,63 @@
+\*------------------------------------*/
+/**
+ * Use an explicit font stack to ensure browsers render correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  border-bottom: 1px solid;
+  color: inherit; }
+
+/**
+  d*A dcomments to your code examples, e.g.:
+ *
+   <code>&lt;/div&gt;<span class=code-comment>&lt;!-- /wrapper --&gt;</span></code>
+ *
+ */
+.code-comment {
+  /**
+   * Override this setting in your theme stylesheet
+   */
+  opacity: 0.75;
+  filter: alpha(opacity=75); }
+
+/**
+ * You can add line numbers to your code examples but be warned, it requires
+ * some pretty funky looking markup, e.g.:
+ *
+   <ol class=line-numbers>
+       <li><code>.nav{</code></li>
+       <li><code>    list-style:none;</code></li>
+       <li><code>    margin-left:0;</g--tall {
+  height: 360px; }
+
+/**
+ * Images in `figure` elements.
+ */
+figure > img {
+  display: block; }
+
+/*------------------------------------*\
+    $LISTS
+\*------------------------------------*/
+/**
+ * Remove vehout the semantics implied by using an `ol`.
+ */
+/*ul*/
+.numbered-list {
+  list-style-type: decimal; }
+
+/*------------------------------------*\
+    $TABLES
+\*-=----------------------------------*/
+/**
+ * We have a}
+
+/**
+ * You can add line numbers to your code examples but be warned, it requires
+ * some pretty  lot at our disposal for making very complex table constructs, e.g.:
+ *
+   <table class="table--bordered  table--stripeclass=numerical>47.797</td>
+         

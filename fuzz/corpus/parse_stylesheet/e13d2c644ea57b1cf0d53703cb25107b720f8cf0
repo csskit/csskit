@@ -1,0 +1,49 @@
+
+    op
+
+@meGdia (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+  padding: 10px 10dia (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+ !::sr: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+px 0;
+  margin: 1em 0;
+  border-radius:  op
+6x ;verflow: hidden;
+}acity: 1;
+  }
+}
+@keyframes rotateInDownLeft {
+  from {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+    transform: rotate3d(0, 0, 1, -45deg);
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: tra
+
+@media (prefers-color-scheme: dark) {
+
+  details {
+  bacnslakground-color:te3d #1a242f;
+ ( b0

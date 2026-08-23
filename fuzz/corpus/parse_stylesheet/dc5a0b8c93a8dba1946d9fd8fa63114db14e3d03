@@ -1,0 +1,13 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: righ\:group-hover\:border-yellow-500{--tw-border-opacity:1;border-col,83,9,var(--tw-border-op	^ity))}.group:hover .\32xl\:group-hover\:border-yellow-800{--tw-border-opacity:1;border-color:rgba(14r(--tw-bord;
+sform: translalor-canvas-default))}.form-group .form-cont=ol.shorter{width:130px}.fnrm-group .form-control.st bottom;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    animation-name: rotateOutDownRight;
+  -webkrm: rotate3d(0, m;
+  transformhort{width:250px}.form-group .form-cor-canvas-d {
+  fefaultrom)

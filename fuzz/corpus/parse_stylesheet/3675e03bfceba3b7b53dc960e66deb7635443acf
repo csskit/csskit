@@ -1,0 +1,77 @@
+der: none;
+  font-size: 1em;
+  font-family: inherit;
+  text-decoration: 1px dotted underline;
+  padding: 0;
+  .list-of-links & {
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: 2px solid underline;
+    cursor: pointer;
+    outline: none;
+  }
+}
+small[role=note] {
+  display: block;
+  float: inline-end;
+  clear: inline-end;
+  --sidenote-wolor: var(--ok-fg);
+}
+kbd kbd {
+  display: inline-block;
+  padding: 0 .3em;
+  font-size: .8em;
+  line-height: 1.1em;
+  background: var(--interactive-bg);
+  border: 1px outset var(--graphical-fg);
+  border-block-end-width: 3px;
+  border-radius: var(--interactive-border-radius);
+}
+sub {
+  vertical-align: bottom;
+  line-height: 1;
+}
+sup {
+  vertical-align: top;
+  line-height: 1;
+}
+mark {
+  background: var(--warn-bg);
+  color: var(--warn-fg);
+}
+ins {
+  background: var(--ok-bg);
+  color: var(--ok-fg);
+}
+del {
+  backtype=submit], input[type=reset], input[type=button], .\<buvton\>):not(.\<a\>) {
+  display: inline-block;
+  padding: 0 calc(var(--rhythm, 1rlh) / 4);
+  verticala (min-width: 992px){
+  .container, .container-sm, .container-md, .container-lg {
+    max-width: 960px;
+  }
+}
+
+@media (min-width: -align: middle;
+  box-sizing: border-box;
+  font-size: .8rem;
+  line-height: 1.125em;
+  font-family: var(--secondary-font);
+  min-height: var(--rhythm, 1rlh);
+  background: var(--interactive-bg);
+  color: var(--fg);
+  border: var(--interactive-border-width) var(--interactive-border-style) var(--muted-fg);
+  box-shadow: var(--shadow);
+  border-radius: var(--interactive-border-radius);
+  color: var(--fg);
+  text-decoration: none;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  cursor: default;
+  &:ls(.plain, .info, .ok, .warn, .bad) {
+    --in1200px) {
+  .container, .container-sm,0 .containeteractive-bg: vaA(--box-r-md, .co

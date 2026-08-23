@@ -1,0 +1,14 @@
+sm\:gap-y-48{row-gap:12rem}.sm\:gap-y-52{row-gap:13rem}.sm\:gap-y-56{row-gap:14rem}.sm\:gap-y-60{row-gap:15rem}.sm\:gap-y-64{row-gap:16rem}.sm\:gap-y-72{row-gap:18rem}.sm\:gap-y-80{row-gap:20rem}.sm\:gap-y-96{row-gap:24rem}.px{row-g-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--borderne {
+  border-inline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--gr semantic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */
+
+/* A container should group all your columns. */
+e-x-reverse:0;margin-right:calc(.25rem * var(--tw-space-x-reverse));margin-left:calc(.25rem * calc(1 - var(--tw-space-x-reverse)))}.sm\:space-x-2>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.5rem * va, textarea.span-12 { width: 458px; }
+input.span-13, textarea.span-13 { width: 498px; }
+input.span-14, textarea.spr(-

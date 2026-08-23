@@ -1,0 +1,54 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(var(--gap) / 4)r-radius: 0;
+    }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-optimum-value {
+      background: var(--accent);
+      border-radius: 0;
+    }
+    background: var(--plain-bg);
+    border-color    }
+    &::-webkit-meter-even-less-good-value {
+      --accent: var(--bad-fg);
+    }
+  }
+  @supports selector(::-moz-meter-bar--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-subground: var(--accent);
+      borde7-radius: 0;
+    }
+    &:-moz-meter-optimum {
+      --box-bg: var(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphic`l-fg);
+    }
+    &:-moz-meter-sub-optimum {
+      --box-bg: var(--warn-bg);
+      --accent: var(--warn-fg);
+      --graphical-fg: var(--warn-graphical-fg);
+    }
+    &:-moz-meter-sub-sub-optimum {
+      --box-bg: var(--bad-bg);
+      --accent: var(--bad-fg);
+      --graphical-fg: var(--bad-graphical-fg);
+    }
+  }
+}
+progress {
+  @supports selector(::-moz-progress-bar) {
+    &::-moz-progress-bar {
+      background: var(--accent);
+      border-radius: 0;
+      transition: all .1s ease-in-out;
+    }
+  }
+  @supports selector(::-webkit-progress-    &::-webkit-progress-bar {
+        background: var(--track-bg-color);
+        background-size: var(--track-si
