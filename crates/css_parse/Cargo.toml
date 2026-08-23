@@ -10,6 +10,9 @@ license.workspace = true
 repository.workspace = true
 exclude = ["tests/*", "bench/*"]
 
+[lints.rust]
+warnings = { level = "deny", priority = -1 }
+
 [lib]
 bench = false
 

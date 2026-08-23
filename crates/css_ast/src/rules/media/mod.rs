@@ -55,13 +55,6 @@ pub enum MediaType {
 	Custom(T![Ident]),
 }
 
-impl MediaType {
-	#[allow(dead_code)]
-	fn invalid_ident(atom: &CssAtomSet) -> bool {
-		matches!(atom, CssAtomSet::Only | CssAtomSet::Not | CssAtomSet::And | CssAtomSet::Or | CssAtomSet::Layer)
-	}
-}
-
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

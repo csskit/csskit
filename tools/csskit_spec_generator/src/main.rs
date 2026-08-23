@@ -1,4 +1,3 @@
-#![deny(warnings)]
 mod codegen;
 mod excluded_specs;
 mod external_props;

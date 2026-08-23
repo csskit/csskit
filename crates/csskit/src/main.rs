@@ -1,4 +1,3 @@
-#![deny(warnings)]
 use clap::{Args, ColorChoice, Parser};
 pub use errors::{CliError, CliResult};
 use std::io::{IsTerminal, stderr};

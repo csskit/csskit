@@ -1,4 +1,3 @@
-#![deny(warnings)]
 mod jsonrpc;
 mod server;
 mod service;

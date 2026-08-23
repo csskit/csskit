@@ -1,4 +1,3 @@
-#![deny(warnings)]
 //! CSS Feature Data
 //!
 //! This crate provides comprehensive data about CSS features and their browser support, based on the

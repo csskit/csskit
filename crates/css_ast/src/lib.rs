@@ -1,5 +1,3 @@
-#![deny(warnings)]
-
 mod constraints;
 mod css_atom_set;
 mod diagnostics;

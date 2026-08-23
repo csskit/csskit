@@ -1,5 +1,3 @@
-#![deny(warnings)]
-
 //! CSS AST query utilities using selector-like syntax.
 
 mod collector;

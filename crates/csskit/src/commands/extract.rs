@@ -35,10 +35,7 @@ pub struct Record<T: Serialize> {
 pub enum ErrorKind {
 	ParseError,
 	Io,
-	#[allow(dead_code)]
-	Internal,
 }
-
 /// Machine-readable error attached to a file envelope on failure.
 #[derive(Serialize, Debug)]
 pub struct ErrorRecord {

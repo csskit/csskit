@@ -448,15 +448,15 @@ fn map_to_gamut_outside_gamut_oklch() {
 
 #[test]
 fn test_map_to_gamut_okclh_hex() {
-	assert_map_to_gamut!(Oklch::new(0.8, 0.436, 87.0, 100.0), Hex::new(0xebb500FF));
-	assert_map_to_gamut!(Oklch::new(0.8, 1.5, 113.0, 100.0), Hex::new(0xbfc800FF));
-	assert_map_to_gamut!(Oklch::new(0.95, 0.4, 150.0, 100.0), Hex::new(0xc7ffd1FF));
-	assert_map_to_gamut!(Oklch::new(0.95, 0.35, 30.0, 100.0), Hex::new(0xffe9e5FF));
-	assert_map_to_gamut!(Oklch::new(0.85, 0.4, 270.0, 100.0), Hex::new(0xbbccffFF));
-	assert_map_to_gamut!(Oklch::new(0.7, 0.45, 330.0, 100.0), Hex::new(0xff12f7FF));
-	assert_map_to_gamut!(Oklch::new(0.8, 0.38, 90.0, 100.0), Hex::new(0xe6b700FF));
-	assert_map_to_gamut!(Oklch::new(0.6, 0.42, 300.0, 100.0), Hex::new(0x9c44ffFF));
-	assert_map_to_gamut!(Oklch::new(0.75, 0.40, 180.0, 100.0), Hex::new(0x00c9b1FF));
+	assert_map_to_gamut!(Oklch::new(0.8, 0.436, 87.0, 100.0), Hex::new(0xebb500ff));
+	assert_map_to_gamut!(Oklch::new(0.8, 1.5, 113.0, 100.0), Hex::new(0xbfc800ff));
+	assert_map_to_gamut!(Oklch::new(0.95, 0.4, 150.0, 100.0), Hex::new(0xc7ffd1ff));
+	assert_map_to_gamut!(Oklch::new(0.95, 0.35, 30.0, 100.0), Hex::new(0xffe9e5ff));
+	assert_map_to_gamut!(Oklch::new(0.85, 0.4, 270.0, 100.0), Hex::new(0xbbccffff));
+	assert_map_to_gamut!(Oklch::new(0.7, 0.45, 330.0, 100.0), Hex::new(0xff12f7ff));
+	assert_map_to_gamut!(Oklch::new(0.8, 0.38, 90.0, 100.0), Hex::new(0xe6b700ff));
+	assert_map_to_gamut!(Oklch::new(0.6, 0.42, 300.0, 100.0), Hex::new(0x9c44ffff));
+	assert_map_to_gamut!(Oklch::new(0.75, 0.40, 180.0, 100.0), Hex::new(0x00c9b1ff));
 }
 
 #[test]

@@ -1,6 +1,5 @@
-#![allow(unused)]
 use super::prelude::*;
-use crate::{Angle, CalcableValue, LengthPercentage, Position};
+use crate::{Angle, CalcableValue, LengthPercentage};
 use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-shapes/#typedef-shape-command>
