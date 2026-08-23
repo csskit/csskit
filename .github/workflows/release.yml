@@ -31,26 +31,32 @@ jobs:
           - os: windows-latest
             target: x86_64-pc-windows-msvc
             code-target: win32-x64
+            addon: csskit_napi.dll
 
           - os: windows-11-arm
             target: aarch64-pc-windows-msvc
             code-target: win32-arm64
+            addon: csskit_napi.dll
 
           - os: ubuntu-latest
             target: x86_64-unknown-linux-gnu
             code-target: linux-x64
+            addon: libcsskit_napi.so
 
           - os: ubuntu-24.04-arm
             target: aarch64-unknown-linux-gnu
             code-target: linux-arm64
+            addon: libcsskit_napi.so
 
           - os: macos-26-intel
             target: x86_64-apple-darwin
             code-target: darwin-x64
+            addon: libcsskit_napi.dylib
 
           - os: macos-latest
             target: aarch64-apple-darwin
             code-target: darwin-arm64
+            addon: libcsskit_napi.dylib
 
     name: Package ${{ matrix.code-target }}
     runs-on: ${{ matrix.os }}
@@ -64,7 +70,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: release-${{ matrix.target }}
-          tools: rust node npm npm:@napi-rs/cli
+          tools: rust
           components: ""
 
       - name: Rustup target
@@ -74,12 +80,11 @@ jobs:
         run: cargo build --release --target ${{ matrix.target }} -p csskit
 
       - name: Build native addon
-        working-directory: crates/csskit_napi
-        run: napi build --release --target ${{ matrix.target }} --features napi
+        run: cargo build --release --target ${{ matrix.target }} -p csskit_napi --features napi
 
       - name: Stage native addon
         shell: bash
-        run: cp crates/csskit_napi/*.node "csskit-${{ matrix.code-target }}.node"
+        run: cp target/${{ matrix.target }}/release/${{ matrix.addon }} "csskit-${{ matrix.code-target }}.node"
 
       - name: Archive Binary
         if: runner.os == 'Windows'

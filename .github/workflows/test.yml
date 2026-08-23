@@ -297,7 +297,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: test-napi
-          tools: rust node npm npm:@napi-rs/cli
+          tools: rust node npm
           components: ""
 
       - name: Build addon and run native object model tests
