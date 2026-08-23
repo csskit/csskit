@@ -594,6 +594,7 @@ pub enum CssAtomSet {
 	CornerInlineStartShape,
 	CornerLeft,
 	CornerLeftShape,
+	CornerPresent,
 	CornerRight,
 	CornerRightShape,
 	CornerShape,
@@ -676,6 +677,7 @@ pub enum CssAtomSet {
 	DecimalLeadingZero,
 	Declare,
 	Decreasing,
+	Decrement,
 	Deeppink,
 	Deepskyblue,
 	Default,
@@ -734,6 +736,7 @@ pub enum CssAtomSet {
 	Dot,
 	Dotted,
 	Double,
+	DoubleButton,
 	DoubleCircle,
 	Down,
 	Drop,
@@ -1086,6 +1089,7 @@ pub enum CssAtomSet {
 	Import,
 	InRange,
 	Increasing,
+	Increment,
 	Incremental,
 	Indeterminate,
 	Indianred,
@@ -1516,6 +1520,7 @@ pub enum CssAtomSet {
 	Never,
 	Nextid,
 	NoAutospace,
+	NoButton,
 	NoClip,
 	NoCloseQuote,
 	NoCommonLigatures,
@@ -2036,6 +2041,7 @@ pub enum CssAtomSet {
 	Silver,
 	Simplified,
 	Sin,
+	SingleButton,
 	Size,
 	SizeAdjust,
 	Skew,
@@ -2461,6 +2467,7 @@ pub enum CssAtomSet {
 	Width,
 	WillChange,
 	WindowDrag,
+	WindowInactive,
 	WindowsVista,
 	WindowsWin10,
 	WindowsWin7,
@@ -2717,6 +2724,8 @@ pub enum CssAtomSet {
 	_WebkitMaxContent,
 	#[atom("-webkit-max-device-pixel-ratio")]
 	_WebkitMaxDevicePixelRatio,
+	#[atom("-webkit-media-controls")]
+	_WebkitMediaControls,
 	#[atom("-webkit-media-text-track-container")]
 	_WebkitMediaTextTrackContainer,
 	#[atom("-webkit-media-text-track-display")]
@@ -2779,6 +2788,8 @@ pub enum CssAtomSet {
 	_WebkitSearchDecoration,
 	#[atom("-webkit-search-results-button")]
 	_WebkitSearchResultsButton,
+	#[atom("-webkit-search-results-decoration")]
+	_WebkitSearchResultsDecoration,
 	#[atom("-webkit-selection")]
 	_WebkitSelection,
 	#[atom("-webkit-slider-container")]
@@ -2789,6 +2800,8 @@ pub enum CssAtomSet {
 	_WebkitSliderThumb,
 	#[atom("-webkit-sticky")]
 	_WebkitSticky,
+	#[atom("-webkit-strong-password-auto-fill-button")]
+	_WebkitStrongPasswordAutoFillButton,
 	#[atom("-webkit-tap-highlight-color")]
 	_WebkitTapHighlightColor,
 	#[atom("-webkit-text-decoration")]
@@ -2864,6 +2877,8 @@ pub enum CssAtomSet {
 	_MozAnyLink,
 	#[atom("-moz-appearance")]
 	_MozAppearance,
+	#[atom("-moz-autofill-preview")]
+	_MozAutofillPreview,
 	#[atom("-moz-block-inside-inline-wrapper")]
 	_MozBlockInsideInlineWrapper,
 	#[atom("-moz-block-ruby-content")]
@@ -2896,6 +2911,14 @@ pub enum CssAtomSet {
 	_MozDeviceOrientation,
 	#[atom("-moz-device-pixel-ratio")]
 	_MozDevicePixelRatio,
+	#[atom("-moz-devtools-highlighted")]
+	_MozDevtoolsHighlighted,
+	#[atom("-moz-dir-attr-like-auto")]
+	_MozDirAttrLikeAuto,
+	#[atom("-moz-dir-attr-ltr")]
+	_MozDirAttrLtr,
+	#[atom("-moz-dir-attr-rtl")]
+	_MozDirAttrRtl,
 	#[atom("-moz-document")]
 	_MozDocument,
 	#[atom("-moz-drag-over")]
@@ -2904,6 +2927,8 @@ pub enum CssAtomSet {
 	_MozDropdownList,
 	#[atom("-moz-fieldset-content")]
 	_MozFieldsetContent,
+	#[atom("-moz-file-content")]
+	_MozFileContent,
 	#[atom("-moz-filter")]
 	_MozFilter,
 	#[atom("-moz-first-letter-continuation")]
@@ -2932,6 +2957,8 @@ pub enum CssAtomSet {
 	_MozHandlerCrashed,
 	#[atom("-moz-handler-disabled")]
 	_MozHandlerDisabled,
+	#[atom("-moz-has-dir-attr")]
+	_MozHasDirAttr,
 	#[atom("-moz-hframeset-border")]
 	_MozHframesetBorder,
 	#[atom("-moz-html-canvas-content")]
@@ -2944,6 +2971,10 @@ pub enum CssAtomSet {
 	_MozInlineStack,
 	#[atom("-moz-inline-table")]
 	_MozInlineTable,
+	#[atom("-moz-inert")]
+	_MozInert,
+	#[atom("-moz-is-html")]
+	_MozIsHtml,
 	#[atom("-moz-last-node")]
 	_MozLastNode,
 	#[atom("-moz-line-frame")]
@@ -2968,6 +2999,8 @@ pub enum CssAtomSet {
 	_MozMaemoClassicTheme,
 	#[atom("-moz-mathml-anonymous-block")]
 	_MozMathmlAnonymousBlock,
+	#[atom("-moz-math-increment-script-level")]
+	_MozMathIncrementScriptLevel,
 	#[atom("-moz-max-content")]
 	_MozMaxContent,
 	#[atom("-moz-max-device-pixel-ratio")]
@@ -3032,6 +3065,8 @@ pub enum CssAtomSet {
 	_MozReadWrite,
 	#[atom("-moz-reveal")]
 	_MozReveal,
+	#[atom("-moz-revealed")]
+	_MozRevealed,
 	#[atom("-moz-ruby")]
 	_MozRuby,
 	#[atom("-moz-ruby-base")]
@@ -3050,22 +3085,34 @@ pub enum CssAtomSet {
 	_MozScrolledPageSequence,
 	#[atom("-moz-search-clear-button")]
 	_MozSearchClearButton,
+	#[atom("-moz-select-content")]
+	_MozSelectContent,
+	#[atom("-moz-select-list-box")]
+	_MozSelectListBox,
 	#[atom("-moz-selection")]
 	_MozSelection,
+	#[atom("-moz-snapshot-containing-block")]
+	_MozSnapshotContainingBlock,
 	#[atom("-moz-submit-invalid")]
 	_MozSubmitInvalid,
+	#[atom("-moz-styleeditor-transitioning")]
+	_MozStyleeditorTransitioning,
 	#[atom("-moz-suppressed")]
 	_MozSuppressed,
+	#[atom("-moz-suppress-for-print-selection")]
+	_MozSuppressForPrintSelection,
 	#[atom("-moz-svg-foreign-content")]
 	_MozSvgForeignContent,
 	#[atom("-moz-svg-marker-anon-child")]
 	_MozSvgMarkerAnonChild,
-	#[atom("-moz-svg-marker-outer-svg-anon-child")]
-	_MozSvgMarkerOuterSvgAnonChild,
+	#[atom("-moz-svg-outer-svg-anon-child")]
+	_MozSvgOuterSvgAnonChild,
 	#[atom("-moz-svg-text")]
 	_MozSvgText,
 	#[atom("-moz-table")]
 	_MozTable,
+	#[atom("-moz-table-border-nonzero")]
+	_MozTableBorderNonzero,
 	#[atom("-moz-table-cell")]
 	_MozTableCell,
 	#[atom("-moz-table-column")]
@@ -3084,8 +3131,12 @@ pub enum CssAtomSet {
 	_MozTextControlEditingRoot,
 	#[atom("-moz-text-control-preview")]
 	_MozTextControlPreview,
+	#[atom("-moz-text")]
+	_MozText,
 	#[atom("-moz-touch-enabled")]
 	_MozTouchEnabled,
+	#[atom("-moz-topmost-modal")]
+	_MozTopmostModal,
 	#[atom("-moz-transition")]
 	_MozTransition,
 	#[atom("-moz-tree-cell")]
@@ -3124,6 +3175,8 @@ pub enum CssAtomSet {
 	_MozViewport,
 	#[atom("-moz-viewport-scroll")]
 	_MozViewportScroll,
+	#[atom("-moz-value-empty")]
+	_MozValueEmpty,
 	#[atom("-moz-window-inactive")]
 	_MozWindowInactive,
 
