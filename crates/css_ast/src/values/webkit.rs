@@ -1241,7 +1241,7 @@ pub struct WebkitBackgroundSizeStyleValue<'a>;
     initial = "auto",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    property_group = Backgrounds,
+    property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]

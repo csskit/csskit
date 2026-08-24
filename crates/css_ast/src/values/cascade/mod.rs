@@ -28,6 +28,8 @@ use impls::*;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
+    shorthand = true,
+    shorthand_resets_all = true,
     property_group = Cascade,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
