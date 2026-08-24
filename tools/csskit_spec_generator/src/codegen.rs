@@ -1,6 +1,6 @@
 use crate::ignore_properties::get_ignore_properties;
 use crate::manual_parse_properties::get_manual_parse_properties;
-use crate::shorthands::get_shorthand_properties;
+use crate::shorthands::get_shorthand_graph;
 use crate::spec_parser::PropertyDefinition;
 use crate::todo_properties::get_todo_properties;
 use crate::value_extensions::get_value_extensions;
@@ -16,38 +16,6 @@ use syn::{File, parse2};
 /// Strips the "css-" prefix from a spec name if present
 fn strip_css_prefix(name: &str) -> &str {
 	name.strip_prefix("css-").unwrap_or(name)
-}
-
-/// Recursively expand longhands to get all transitive longhands
-fn expand_longhands_recursive(
-	property: &str,
-	direct_longhands: &HashMap<String, HashSet<String>>,
-	visited: &mut HashSet<String>,
-	result: &mut Vec<String>,
-) {
-	if let Some(longhands) = direct_longhands.get(property) {
-		for longhand in longhands {
-			if visited.insert(longhand.clone()) {
-				result.push(longhand.clone());
-				expand_longhands_recursive(longhand, direct_longhands, visited, result);
-			}
-		}
-	}
-}
-
-/// Compute expanded (transitive) longhands for all properties
-fn compute_all_expanded_longhands(shorthands: &HashMap<String, HashSet<String>>) -> HashMap<String, Vec<String>> {
-	let mut expanded_longhands: HashMap<String, Vec<String>> = HashMap::new();
-	for prop_name in shorthands.keys() {
-		let mut visited = HashSet::new();
-		let mut result = Vec::new();
-		expand_longhands_recursive(prop_name, shorthands, &mut visited, &mut result);
-		if !result.is_empty() {
-			result.sort();
-			expanded_longhands.insert(prop_name.clone(), result);
-		}
-	}
-	expanded_longhands
 }
 
 /// Generate Rust code for a CSS spec module
@@ -95,15 +63,13 @@ pub fn generate_spec_module(
 	let manual_parse_properties = get_manual_parse_properties();
 	let should_skip_parse: HashSet<String> = manual_parse_properties.get(lookup_name).cloned().unwrap_or_default();
 
-	let shorthands = get_shorthand_properties();
-	let expanded_longhands_map = compute_all_expanded_longhands(&shorthands);
+	let shorthand_graph = get_shorthand_graph();
 
 	let property_types = filtered_properties.iter().map(|prop| {
 		let description = property_descriptions.get(&prop.name);
 		let extension = spec_extensions.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
 		let replacement = spec_replacement.and_then(|ext| ext.get(&prop.name).map(|s| s.as_str()));
 		let skip_parse = should_skip_parse.contains(&prop.name);
-		let expanded_longhands = expanded_longhands_map.get(&prop.name);
 		generate_property_type(
 			&base_url,
 			&label,
@@ -113,7 +79,9 @@ pub fn generate_spec_module(
 			replacement,
 			extension,
 			skip_parse,
-			expanded_longhands,
+			shorthand_graph.shorthand(&prop.name),
+			shorthand_graph.shorthand_group(&prop.name),
+			shorthand_graph.relationships(&prop.name),
 		)
 	});
 
@@ -504,28 +472,6 @@ fn determine_box_side(property_name: &str) -> Option<TokenStream> {
 	None
 }
 
-/// Find the root shorthand for a property by recursively traversing the shorthand hierarchy.
-/// For example, for `border-left-color`:
-/// - It's a longhand of `border-color` and `border-left`
-/// - `border-color` is a longhand of `border`
-/// - `border-left` is a longhand of `border`
-/// - So the root shorthand is `border`
-fn find_root_shorthand(property_name: &str, shorthands: &HashMap<String, HashSet<String>>) -> Option<String> {
-	let mut shorthands: Vec<String> = shorthands
-		.iter()
-		.filter(|(_, longhands)| longhands.contains(property_name))
-		.map(|(shorthand, _)| {
-			// Recursively find if this shorthand is itself a longhand of another shorthand
-			find_root_shorthand(shorthand, shorthands).unwrap_or_else(|| shorthand.clone())
-		})
-		.collect();
-
-	shorthands.sort();
-	shorthands.dedup();
-
-	shorthands.into_iter().min_by_key(|s| (s.len(), s.clone()))
-}
-
 /// Detect whether unitless zero resolves to a number for this property.
 ///
 /// This returns `Some(quote! { unitless_zero_resolves = Number })` when `<number>` appears before `<length>`. In CSS
@@ -651,10 +597,10 @@ fn generate_property_type(
 	value_replacement: Option<&str>,
 	value_extension: Option<&str>,
 	skip_parse: bool,
-	expanded_longhands: Option<&Vec<String>>,
+	shorthand_metadata: Option<crate::shorthands::ShorthandMetadata>,
+	shorthand_group: Option<String>,
+	shorthand_relationships: crate::shorthands::ShorthandRelationships,
 ) -> TokenStream {
-	let shorthands = get_shorthand_properties();
-
 	let type_name_base = if prop.name == "--*" { "Custom".to_string() } else { prop.name.to_pascal_case() };
 
 	let property_id = if prop.name == "--*" { "defining-variables" } else { &prop.name };
@@ -695,17 +641,40 @@ fn generate_property_type(
 	let inherits_attr = convert_inherited(&prop.inherited);
 	let applies_to_attr = convert_applies_to(&prop.applies_to);
 	let percentages_attr = convert_percentages(&prop.percentages);
-	let shorthand_group_attr = find_root_shorthand(&prop.name, &shorthands).map(|shorthand| {
-		let ident = format_ident!("{}", shorthand.to_pascal_case());
-		quote! { shorthand_group = #ident }
+	let shorthand_attr = shorthand_metadata
+		.as_ref()
+		.filter(|metadata| metadata.longhands.is_empty())
+		.map(|_| quote! { shorthand = true });
+	let longhands_attr = shorthand_metadata.as_ref().and_then(|metadata| {
+		let longhands =
+			metadata.longhands.iter().map(|name| format_ident!("{}", name.to_pascal_case())).collect::<Vec<_>>();
+		(!longhands.is_empty()).then(|| quote! { longhands = #(#longhands)|* })
 	});
-	let longhands_attr = expanded_longhands.and_then(|strings| {
-		if strings.is_empty() {
-			return None;
-		};
-		let idents = strings.iter().map(|string| format_ident!("{}", string.to_pascal_case())).collect::<Vec<_>>();
-		Some(quote! { longhands = #(#idents)|* })
+	let shorthand_group_attr = shorthand_group.map(|name| {
+		let shorthand = format_ident!("{}", name.to_pascal_case());
+		quote! { shorthand_group = #shorthand }
 	});
+	let shorthand_resets_known_attr = shorthand_metadata
+		.as_ref()
+		.filter(|metadata| metadata.resets.is_some())
+		.map(|_| quote! { shorthand_resets_known = true });
+	let shorthand_resets_attr = shorthand_metadata.as_ref().and_then(|metadata| {
+		let resets =
+			metadata.resets.as_ref()?.iter().map(|name| format_ident!("{}", name.to_pascal_case())).collect::<Vec<_>>();
+		(!resets.is_empty()).then(|| quote! { shorthand_resets = #(#resets)|* })
+	});
+	let shorthand_resets_all_attr = shorthand_metadata
+		.as_ref()
+		.filter(|metadata| metadata.resets_all)
+		.map(|_| quote! { shorthand_resets_all = true });
+	let reset_by_shorthands_attr = {
+		let shorthands = shorthand_relationships
+			.reset_by
+			.iter()
+			.map(|name| format_ident!("{}", name.to_pascal_case()))
+			.collect::<Vec<_>>();
+		(!shorthands.is_empty()).then(|| quote! { reset_by_shorthands = #(#shorthands)|* })
+	};
 	let animation_type_attr = prop.animation_type.as_ref().and_then(|a| convert_animation_type(a));
 	let computed_value_attr = prop.computed_value.as_ref().and_then(|cv| convert_computed_value(cv));
 	let canonical_order_attr = prop.canonical_order.as_ref().map(|order| {
@@ -731,8 +700,13 @@ fn generate_property_type(
 		applies_to_attr,
 		animation_type_attr,
 		percentages_attr,
-		shorthand_group_attr,
+		shorthand_attr,
 		longhands_attr,
+		shorthand_group_attr,
+		shorthand_resets_known_attr,
+		shorthand_resets_attr,
+		shorthand_resets_all_attr,
+		reset_by_shorthands_attr,
 		property_group_attr,
 		computed_value_attr,
 		canonical_order_attr,

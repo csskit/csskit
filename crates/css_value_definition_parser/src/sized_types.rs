@@ -315,6 +315,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"Semitones",
 	"ShadowPosition",
 	"ShapeBox",
+	"ShorthandReset",
 	"SingleAnimationComposition",
 	"SingleAnimationDirection",
 	"SingleAnimationFillMode",

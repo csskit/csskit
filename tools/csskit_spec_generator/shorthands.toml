@@ -4,6 +4,7 @@
 [[shorthand]]
 name = "all"
 # Special case: affects all CSS properties except unicode-bidi, direction, and custom properties
+resets_all = true
 longhands = []
 
 [[shorthand]]
@@ -47,6 +48,7 @@ longhands = [
     "border-style",
     "border-color",
 ]
+resets = ["border-image"]
 
 [[shorthand]]
 name = "border-block"
@@ -366,6 +368,7 @@ longhands = [
     "mask-repeat",
     "mask-size",
 ]
+resets = ["mask-border"]
 
 [[shorthand]]
 name = "mask-border"

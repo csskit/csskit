@@ -1,6 +1,6 @@
 use crate::{
 	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits, NodeKinds,
-	PropertyGroup, PropertyKind, Unresolved, VendorPrefixes, values,
+	PropertyGroup, PropertyKind, ShorthandReset, Unresolved, VendorPrefixes, values,
 };
 use css_lexer::Kind;
 use css_parse::{
@@ -276,6 +276,36 @@ impl<'a> StyleValue<'a> {
 		}
 		apply_properties!(get_is_shorthand_by_name)
 	}
+
+	/// Returns reset coverage for a shorthand property name.
+	pub fn shorthand_reset_by_name(property_name: CssAtomSet) -> ShorthandReset {
+		macro_rules! get_shorthand_reset_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => values::$ty::shorthand_reset(),
+					)+
+					_ => ShorthandReset::Unknown,
+				}
+			};
+		}
+		apply_properties!(get_shorthand_reset_by_name)
+	}
+
+	/// Returns shorthands that reset a given property name without expressing it.
+	pub fn reset_by_shorthands_by_name(property_name: CssAtomSet) -> &'static [CssAtomSet] {
+		macro_rules! get_reset_by_shorthands_by_name {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match property_name {
+					$(
+					CssAtomSet::$name => values::$ty::reset_by_shorthands(),
+					)+
+					_ => &[],
+				}
+			};
+		}
+		apply_properties!(get_reset_by_shorthands_by_name)
+	}
 }
 
 impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
@@ -434,7 +464,7 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{CssAtomSet, CssMetadata};
+	use crate::{CssAtomSet, CssMetadata, ShorthandReset};
 	use css_lexer::Lexer;
 	use css_parse::{Arena, Declaration, Parser, assert_parse};
 
@@ -508,5 +538,19 @@ mod tests {
 		let mut p = Parser::new(&alloc, input, lexer);
 		let decl = p.parse::<Property>().unwrap();
 		assert!(decl.value.is_custom(), "--custom should be parsed as custom property");
+	}
+	#[test]
+	fn exposes_additive_shorthand_reset_metadata() {
+		let border = StyleValue::longhands_by_name(CssAtomSet::Border).unwrap();
+		assert!(border.contains(&CssAtomSet::BorderWidth));
+		assert!(border.contains(&CssAtomSet::BorderTopWidth));
+		assert_eq!(StyleValue::shorthand_group_by_name(CssAtomSet::BorderLeftColor), CssAtomSet::Border);
+		assert_eq!(
+			StyleValue::shorthand_reset_by_name(CssAtomSet::Border),
+			ShorthandReset::Properties(&[CssAtomSet::BorderImage])
+		);
+		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::Margin), ShorthandReset::Unknown);
+		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::All), ShorthandReset::All);
+		assert_eq!(StyleValue::reset_by_shorthands_by_name(CssAtomSet::BorderImageSource), [CssAtomSet::Border]);
 	}
 }

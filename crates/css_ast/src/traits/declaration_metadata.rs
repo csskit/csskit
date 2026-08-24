@@ -260,6 +260,17 @@ pub enum BoxPortion {
 	/// Affects the position/placement of the box
 	Position,
 }
+/// Reset coverage recorded for a shorthand property.
+#[derive(Clone, Copy, Debug, Default, Eq, PartialEq)]
+pub enum ShorthandReset {
+	/// Reset coverage has not been audited.
+	#[default]
+	Unknown,
+	/// Properties reset in addition to the expressible longhands.
+	Properties(&'static [CssAtomSet]),
+	/// All properties are reset except the exclusions defined for `all`.
+	All,
+}
 
 pub trait DeclarationMetadata: Sized {
 	/// Returns the initial value of this property, as a string
@@ -309,6 +320,16 @@ pub trait DeclarationMetadata: Sized {
 	/// If this is not a longhand then it will be `CssAtomSet::_None`.
 	fn shorthand_group() -> CssAtomSet {
 		CssAtomSet::_None
+	}
+
+	/// Returns how this property may reset others, if this is a shorthand property.
+	fn shorthand_reset() -> ShorthandReset {
+		ShorthandReset::Unknown
+	}
+
+	/// Returns shorthands that will reset this property.
+	fn reset_by_shorthands() -> &'static [CssAtomSet] {
+		&[]
 	}
 
 	/// Returns which CSS specification(s) this property belongs to.
