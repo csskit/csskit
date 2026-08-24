@@ -2,6 +2,12 @@ use super::prelude::*;
 
 use css_parse::Result;
 
+#[cfg(feature = "visitable")]
+use crate::{
+	PropertyKind,
+	visit::{NodeId, QueryableNode},
+};
+
 #[node]
 #[derive(
 	Parse, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -928,10 +934,22 @@ pub enum MathmlTag {
 	ToCursors, Parse, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), queryable(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(node_kinds = Unknown)]
+#[metadata(node_kinds = Unknown, property_kinds = Name)]
 pub struct UnknownTag(T![Ident]);
+
+#[cfg(feature = "visitable")]
+impl QueryableNode for UnknownTag {
+	const NODE_ID: NodeId = NodeId::UnknownTag;
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => Some(self.0.into()),
+			_ => None,
+		}
+	}
+}
 
 impl<'a> Peek<'a> for UnknownTag {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);

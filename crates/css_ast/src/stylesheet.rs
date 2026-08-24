@@ -8,6 +8,12 @@ use css_parse::{
 use csskit_derives::*;
 use csskit_proc_macro::node;
 
+#[cfg(feature = "visitable")]
+use crate::{
+	PropertyKind,
+	visit::{NodeId, QueryableNode},
+};
+
 /// <https://drafts.csswg.org/cssom-1/#the-cssstylesheet-interface>
 #[node]
 #[derive(ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -83,13 +89,25 @@ macro_rules! apply_rules {
 #[node]
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self), queryable(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(node_kinds = Unknown | Effective)]
+#[metadata(node_kinds = Unknown | Effective, property_kinds = Name)]
 pub struct UnknownAtRule<'a> {
 	name: T![AtKeyword],
 	prelude: ComponentValues<'a>,
 	block: ComponentValues<'a>,
+}
+
+#[cfg(feature = "visitable")]
+impl<'a> QueryableNode for UnknownAtRule<'a> {
+	const NODE_ID: NodeId = NodeId::UnknownAtRule;
+
+	fn get_property(&self, kind: PropertyKind) -> Option<Cursor> {
+		match kind {
+			PropertyKind::Name => Some(self.name.into()),
+			_ => None,
+		}
+	}
 }
 
 #[node]
