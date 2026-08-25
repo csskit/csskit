@@ -28,6 +28,8 @@ trait must be in scope where the derive is used. `DeriveAtomSet` will impl this
 trait, generating implementations bespoke to your enums discriminants:
 
 ```rust
+use derive_atom_set::AtomSet;
+
 pub trait AtomSet: Default + std::fmt::Debug {
  fn from_str(keyword: &str) -> Self;
  fn to_str(self) -> &'static str;
@@ -36,7 +38,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
  fn as_bits(&self) -> u32;
 }
 
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, DeriveAtomSet)]
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, AtomSet)]
 enum Unit {
     #[default]
     Unknown,
@@ -65,7 +67,7 @@ trait.
 
 Use `#[atom("...")]` to override a non-default variant's string:
 
-```rust
+```rust,ignore
 #[atom("%")]
 Percentage,
 ```

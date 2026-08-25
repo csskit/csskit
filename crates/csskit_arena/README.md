@@ -166,7 +166,7 @@ to growable chunks from the global allocator. On 32-bit targets, pointers are
 already representable as 32-bit offsets from zero. On 64-bit targets without a
 usable reservation, `transfer_base()` returns `None`.
 
-The 4 GiB-aligned reservation technique is adapted from [`oxc_allocator`].
+The 4 GiB-aligned reservation technique is adapted from [oxc_allocator].
 
 ## Part of csskit
 
