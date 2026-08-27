@@ -1,6 +1,7 @@
 use crate::{
 	CommentStyle, DynAtomSet, Feature, Lexer, QuoteStyle, Token, Whitespace,
 	constants::SINGLE_CHAR_TOKENS,
+	scan::{scan_bad_url, scan_ident, scan_line_comment, scan_string, scan_url},
 	small_str_buf::SmallStrBuf,
 	syntax::{
 		CR, EOF, FF, LF, SPACE, TAB,
@@ -9,10 +10,10 @@ use crate::{
 			is_ident_start_sequence,
 		},
 		is_escape_sequence, is_non_printable, is_quote, is_url_ident, is_whitespace,
-		simd_scan::{scan_bad_url, scan_byte, scan_ident, scan_line_comment, scan_string, scan_url},
 		tables::{ASCII_NEWLINE, ASCII_WHITESPACE},
 	},
 };
+use bytescan::scan_byte;
 use std::char::REPLACEMENT_CHARACTER;
 
 // 7 makes size_of::<SmallStrBuf<8>>() == size_of::<usize>()

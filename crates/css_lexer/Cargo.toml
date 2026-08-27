@@ -20,7 +20,7 @@ bench = false
 allocator-api2 = { workspace = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true }
-fearless_simd = { workspace = true }
+bytescan = { workspace = true }
 fnv = { workspace = true, optional = true }
 source_tools = { workspace = true }
 

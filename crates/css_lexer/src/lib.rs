@@ -87,7 +87,7 @@ mod kindset;
 mod pairwise;
 mod private;
 mod quote_style;
-mod simd;
+mod scan;
 mod small_str_buf;
 mod source_cursor;
 mod syntax;
