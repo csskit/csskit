@@ -337,6 +337,13 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
+name = "bytescan"
+version = "0.0.30"
+dependencies = [
+ "fearless_simd",
+]
+
+[[package]]
 name = "cast"
 version = "0.3.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -697,11 +704,11 @@ version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "bitmask-enum",
+ "bytescan",
  "console",
  "criterion",
  "derive_atom_set",
  "dhat",
- "fearless_simd",
  "fnv",
  "glob",
  "insta",

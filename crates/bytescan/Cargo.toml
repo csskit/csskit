@@ -1,0 +1,16 @@
+[package]
+name = "bytescan"
+version.workspace = true
+authors.workspace = true
+description = "Fast byte scanning primitives for strings."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lib]
+bench = false
+
+[dependencies]
+fearless_simd = { workspace = true }

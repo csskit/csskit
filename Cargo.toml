@@ -37,11 +37,11 @@ csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.30
 csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.0" }
 csskit_transform = { path = "crates/csskit_transform", version = "0.0.30" }
 derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.30" }
+bytescan = { path = "crates/bytescan", version = "0.0.30" }
 source_tools = { path = "crates/source_tools", version = "0.0.30" }
 stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.30" }
 stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.30" }
 visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.30" }
-
 # Memory
 allocator-api2 = { version = "0.4.0" }
 inventory = { version = "0.3.24" }

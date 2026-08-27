@@ -1,6 +1,5 @@
 pub mod identifier;
 pub mod parse_escape;
-pub mod simd_scan;
 pub mod tables;
 
 pub use parse_escape::*;
