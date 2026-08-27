@@ -1,29 +1,5 @@
-//! A contiguous memory Arena for zero-copy access in binding layers.
-//!
-//! For "raw transfer" (reading objects directly from a binding layer without any serialisation), non-Rust code can
-//! reinterpret the low 32 bits of every native pointer as a byte offset into a single contiguous arena buffer. For this
-//! to work every interior pointer must share the same upper 32 bits, which is guaranteed if the whole arena lives
-//! inside a single region that is:
-//!
-//! - **4 GiB aligned** (so the base address has zero in its low 32 bits), and
-//! - **at most 2 GiB** in size (so no allocation crosses a 4 GiB boundary).
-//!
-//! This concept is shamelessly stolen from
-//! [oxc_allocator](https://github.com/oxc-project/oxc/tree/main/crates/oxc_allocator) which introduces this concept for
-//! their JS parser. Credit to the oxc project for this technique.
-//!
-//! [`Arena`] can be used in several modes, predominantly as a single-chunk bump allocator that satisfies both
-//! constraints. In this mode it never grows or relocates. For systems without virtual memory, or for 32-bit systems, it
-//! can devolve into a chunk based allocator, or can borrow a block of memory to allocate into.
-//!
-//! # Ownership modes
-//!
-//! - [`Arena::new`] / [`Arena::default`]: self-allocated, as large a first chunk as the target allows.
-//! - [`Arena::with_capacity`]: self-allocated, growable capacity hint. Useful for sized input.
-//! - [`Arena::from_raw_parts`]: borrows memory from the caller. Use this if a different allocator owns the block.
-//!
-//! All modes yield the same [`Arena`] type; they differ only in where the first chunk comes from and whether the arena
-//! may add another.
+#![doc = include_str!("../README.md")]
+
 use allocator_api2::alloc::{AllocError, Allocator};
 use std::alloc::Layout;
 use std::cell::Cell;
