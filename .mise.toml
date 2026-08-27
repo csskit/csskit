@@ -1,5 +1,5 @@
 [tools]
-rust = { version = "1.97.1", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
+rust = { version = "1.98.0", components = "rustfmt,clippy", targets = "wasm32-unknown-unknown" }
 node = "26.5.1"
 npm = "12.0.2"
 hyperfine = "latest"
@@ -45,14 +45,14 @@ alias = "t"
 [tasks.build-napi]
 description = "Build the napi addon into the csskit npm package"
 sources = [
-  "{{config_root}}/Cargo.toml",
-  "{{config_root}}/crates/**/*.toml",
-  "{{config_root}}/crates/**/*.rs",
+	"{{config_root}}/Cargo.toml",
+	"{{config_root}}/crates/**/*.toml",
+	"{{config_root}}/crates/**/*.rs",
 ]
 outputs = ["{{config_root}}/packages/csskit/csskit.node"]
 run = [
-  "cargo build -p csskit_napi --features napi",
-  "for file in \"{{config_root}}/target/debug/libcsskit_napi.so\" \"{{config_root}}/target/debug/libcsskit_napi.dylib\" \"{{config_root}}/target/debug/csskit_napi.dll\"; do if [ -f \"$file\" ]; then cp \"$file\" \"{{config_root}}/packages/csskit/csskit.node\"; exit 0; fi; done; exit 1",
+	"cargo build -p csskit_napi --features napi",
+	"for file in \"{{config_root}}/target/debug/libcsskit_napi.so\" \"{{config_root}}/target/debug/libcsskit_napi.dylib\" \"{{config_root}}/target/debug/csskit_napi.dll\"; do if [ -f \"$file\" ]; then cp \"$file\" \"{{config_root}}/packages/csskit/csskit.node\"; exit 0; fi; done; exit 1",
 ]
 
 [tasks.test-napi]
@@ -99,14 +99,16 @@ run = ["cargo run -p csskit_spec_generator generate-property-atoms"]
 
 [tasks.generate-sized-types]
 description = "Generate the sized-types table from the css_ast source"
-run = ["REGENERATE_SIZED_TYPES=1 cargo test -p csskit_source_finder --test sized_types"]
+run = [
+	"REGENERATE_SIZED_TYPES=1 cargo test -p csskit_source_finder --test sized_types",
+]
 
 [tasks.generate-node-classes]
 description = "Generate the csskit npm package's node classes from css_ast's NodeId"
 sources = ["crates/css_ast/src/**/*.rs", "crates/csskit_napi/src/**/*.rs"]
 outputs = ["packages/csskit/nodes.js", "packages/csskit/nodes.d.ts"]
 run = [
-  "cargo run -p csskit_napi --bin generate_node_classes -- packages/csskit",
+	"cargo run -p csskit_napi --bin generate_node_classes -- packages/csskit",
 ]
 [tasks.fuzz]
 description = "Run the fuzzer (Ctrl-C to stop)"
