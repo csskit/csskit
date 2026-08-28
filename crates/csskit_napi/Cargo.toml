@@ -16,6 +16,11 @@ workspace = true
 bench = false
 crate-type = ["cdylib", "rlib"]
 
+[[bin]]
+name = "generate_node_classes"
+path = "src/bin/generate_node_classes.rs"
+bench = false
+
 [dependencies]
 css_ast = { workspace = true }
 css_lexer = { workspace = true }
