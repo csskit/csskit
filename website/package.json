@@ -24,7 +24,7 @@
 		"@codemirror/lint": "6.8.5",
 		"@codemirror/state": "6.5.4",
 		"@codemirror/view": "6.38.8",
-		"@mdit/plugin-alert": "^1.0.0",
+		"@mdit/plugin-alert": "^2.0.0",
 		"apexcharts": "^7.0.0",
 		"codemirror": "6.0.2",
 		"csskit": "../packages/csskit/",
