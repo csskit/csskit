@@ -1,5 +1,6 @@
 use crate::{
-	ReduceCharsetRule, ReduceColors, ReduceLengths, ReduceTimeUnits, ReduceUrls, RemoveInertNodes, transformer,
+	ReduceCharsetRule, ReduceColors, ReduceLengths, ReduceTimeUnits, ReduceUrls, RemoveInertNodes,
+	RemoveOverriddenDeclarations, transformer,
 };
 use bitmask_enum::bitmask;
 use css_ast::{CssMetadata, Visitable};
@@ -17,6 +18,8 @@ transformer!(
 		ReduceTimeUnits,
 		/// Enables the [ReduceUrls] transformer.
 		ReduceUrls,
+		/// Enables the [RemoveOverriddenDeclarations] transformer.
+		RemoveOverriddenDeclarations,
 		/// Enables the [RemoveInertNodes] transformer.
 		RemoveInertNodes,
 	}
