@@ -282,9 +282,7 @@ pub use css_lexer::{
 	SourceOffset, Span, ToSpan, Token, Whitespace,
 };
 
-mod arena_box;
-mod arena_string;
-mod arena_vec;
+mod arena_impls;
 mod comparison;
 mod cursor_compact_write_sink;
 #[cfg(feature = "egg")]
@@ -303,7 +301,6 @@ mod macros;
 mod parser;
 mod parser_checkpoint;
 mod parser_return;
-mod raw_vec;
 /// Various structs/enums that represent generic AST nodes.
 pub mod syntax;
 /// Test macros available if built with `features = ["testing"]`
@@ -317,10 +314,8 @@ pub type Result<T> = std::result::Result<T, diagnostics::Diagnostic>;
 
 pub type Arena = csskit_arena::Arena;
 
-pub use arena_box::*;
-pub use arena_string::String;
-pub use arena_vec::{Drain, IntoIter, Vec};
 pub use comparison::*;
+pub use csskit_arena::{Box, Drain, IntoIter, String, Vec, format_in, vec_in};
 pub use cursor_compact_write_sink::*;
 #[cfg(feature = "egg")]
 pub use cursor_expanded_write_sink::*;

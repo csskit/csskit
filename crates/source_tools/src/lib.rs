@@ -1,5 +1,7 @@
 #![doc = include_str!("../README.md")]
 
+#[cfg(feature = "csskit_arena")]
+mod arena;
 mod cursor;
 mod source_cursor;
 mod source_offset;

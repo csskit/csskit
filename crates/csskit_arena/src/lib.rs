@@ -5,8 +5,23 @@ use std::alloc::Layout;
 use std::cell::Cell;
 use std::ptr::NonNull;
 
+#[cfg(feature = "collections")]
+mod arena_box;
+#[cfg(feature = "collections")]
+mod arena_string;
+#[cfg(feature = "collections")]
+mod arena_vec;
 mod pool;
+#[cfg(feature = "collections")]
+mod raw_vec;
 mod vm;
+
+#[cfg(feature = "collections")]
+pub use arena_box::Box;
+#[cfg(feature = "collections")]
+pub use arena_string::String;
+#[cfg(feature = "collections")]
+pub use arena_vec::{Drain, IntoIter, Vec};
 
 /// Required alignment of the arena region (4 GiB), so that `ptr as u32` equals the byte offset
 /// within the region. Where nothing is reserved or 32-bit targets that already express 4gb, this is `1`.
@@ -203,7 +218,7 @@ impl Arena {
 		while let Some(node) = self.prev.get() {
 			// SAFETY: every chunk in the chain came from `Box::into_raw`, and `&mut self` proves nothing allocated from
 			// the chunk being dropped is still live.
-			let chunk = *unsafe { Box::from_raw(node.as_ptr()) };
+			let chunk = *unsafe { std::boxed::Box::from_raw(node.as_ptr()) };
 			// SAFETY: as above.
 			unsafe { release(self.region.get(), self.resident.get()) };
 			self.region.set(chunk.region);
@@ -306,7 +321,8 @@ impl Arena {
 		self.prev_used.set(self.prev_used.get() + self.cursor.get());
 		self.prev_size.set(total);
 		// SAFETY: `Box::into_raw` never returns null.
-		self.prev.set(Some(unsafe { NonNull::new_unchecked(Box::into_raw(Box::new(retired))) }));
+		self.prev
+			.set(Some(unsafe { NonNull::new_unchecked(std::boxed::Box::into_raw(std::boxed::Box::new(retired))) }));
 		self.region.set(new_region);
 		self.cursor.set(0);
 		self.resident.set(0);
@@ -386,7 +402,7 @@ impl Drop for Arena {
 		let mut node = self.prev.get();
 		while let Some(chunk) = node {
 			// SAFETY: every chunk in the chain came from `Box::into_raw` and has not been freed.
-			let chunk = *unsafe { Box::from_raw(chunk.as_ptr()) };
+			let chunk = *unsafe { std::boxed::Box::from_raw(chunk.as_ptr()) };
 			node = chunk.prev;
 			// SAFETY: as above; every allocation from the chunk is dead.
 			unsafe { release(chunk.region, chunk.used) };

@@ -1,6 +1,5 @@
-use crate::{Arena, Cursor, CursorSink, Parse, Parser, Peek, SemanticEq, ToCursors};
+use crate::Arena;
 use allocator_api2::alloc::{Allocator, Layout};
-use css_lexer::{KindSet, Span, ToSpan};
 use std::{
 	fmt,
 	hash::{Hash, Hasher},
@@ -105,58 +104,6 @@ impl<'a, T: Ord, A: Allocator> Ord for Box<'a, T, A> {
 impl<'a, T: Hash, A: Allocator> Hash for Box<'a, T, A> {
 	fn hash<H: Hasher>(&self, state: &mut H) {
 		(**self).hash(state);
-	}
-}
-
-impl<'a, T: ToCursors, A: Allocator> ToCursors for Box<'a, T, A> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
-		(**self).to_cursors(s);
-	}
-}
-
-impl<'a, T: SemanticEq, A: Allocator> SemanticEq for Box<'a, T, A> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		(**self).semantic_eq(other)
-	}
-}
-
-impl<'a, T: ToSpan, A: Allocator> ToSpan for Box<'a, T, A> {
-	fn to_span(&self) -> Span {
-		(**self).to_span()
-	}
-}
-
-impl<'a, M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>, A: Allocator> crate::NodeWithMetadata<M>
-	for Box<'a, T, A>
-{
-	fn self_metadata(&self) -> M {
-		(**self).self_metadata()
-	}
-
-	fn metadata(&self) -> M {
-		(**self).metadata()
-	}
-}
-
-impl<'a, T: Peek<'a>, A: Allocator> Peek<'a> for Box<'a, T, A> {
-	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
-
-	#[inline(always)]
-	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		T::peek(p, c)
-	}
-}
-
-impl<'a, T: Parse<'a>> Parse<'a> for Box<'a, T> {
-	fn parse<I>(p: &mut Parser<'a, I>) -> crate::Result<Self>
-	where
-		I: Iterator<Item = Cursor> + Clone,
-	{
-		let value = T::parse(p)?;
-		Ok(Box::new_in(p.alloc(), value))
 	}
 }
 

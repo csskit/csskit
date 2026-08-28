@@ -95,6 +95,8 @@ The crate has no default features.
 - `miette`: conversions from `SourceOffset`, `Span`, and `Cursor<T>` to miette
   source-location types.
 - `serde`: serialization for `SourceOffset`, `Span`, and `Cursor<T>`.
+- `csskit_arena`: `ToSpan` impls for the `csskit_arena` `Box` and `Vec`
+  collections.
 
 ## Design boundary
 

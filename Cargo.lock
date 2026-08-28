@@ -738,6 +738,7 @@ dependencies = [
  "serde",
  "serde_json",
  "smallvec",
+ "source_tools",
  "stable-type-layout",
  "thiserror 2.0.20",
 ]
@@ -788,6 +789,7 @@ version = "0.0.30"
 dependencies = [
  "allocator-api2",
  "libc",
+ "serde",
  "windows-sys 0.61.2",
 ]
 
@@ -3102,6 +3104,7 @@ name = "source_tools"
 version = "0.0.30"
 dependencies = [
  "allocator-api2",
+ "csskit_arena",
  "miette",
  "serde",
 ]
