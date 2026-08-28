@@ -579,53 +579,9 @@ FAIL selectors/0016
 -[class="foo bar"]{color:red}
 +[class=foo\ bar]{color:red}
 
-FAIL shorthand-values/0001
--a{margin:10px 10px 10px 10px}
-+a{margin:10px}
-
-FAIL shorthand-values/0002
--a{margin:10px 20px 10px 20px}
-+a{margin:10px 20px}
-
-FAIL shorthand-values/0003
--a{margin:10px 20px 30px 20px}
-+a{margin:10px 20px 30px}
-
 FAIL shorthand-values/0004
 -a{background:none}
 +a{background:0 0}
-
-FAIL shorthand-values/0006
--a{inset:0 0 0 0}
-+a{inset:0}
-
-FAIL shorthand-values/0007
--a{padding:10px 10px 10px 10px}
-+a{padding:10px}
-
-FAIL shorthand-values/0008
--a{padding:5px 10px 5px 10px}
-+a{padding:5px 10px}
-
-FAIL shorthand-values/0009
--a{padding:5px 10px 15px 10px}
-+a{padding:5px 10px 15px}
-
-FAIL shorthand-values/0010
--a{border-radius:5px 10px 5px 10px}
-+a{border-radius:5px 10px}
-
-FAIL shorthand-values/0011
--a{border-radius:10px 10px 10px 10px/5px 5px 5px 5px}
-+a{border-radius:10px/5px}
-
-FAIL shorthand-values/0012
--a{inset:10px 20px 10px 20px}
-+a{inset:10px 20px}
-
-FAIL shorthand-values/0013
--a{margin:10px 10px}
-+a{margin:10px}
 
 FAIL shorthand-values/0014
 -a{border:medium solid red}
@@ -638,22 +594,6 @@ FAIL shorthand-values/0015
 FAIL shorthand-values/0016
 -a{font:normal normal 16px/1.5 Arial,sans-serif}
 +a{font:16px/1.5 Arial,sans-serif}
-
-FAIL shorthand-values/0018
--a{margin:0 auto 0 auto}
-+a{margin:0 auto}
-
-FAIL shorthand-values/0019
--a{border-color:red red red red}
-+a{border-color:red}
-
-FAIL shorthand-values/0020
--a{gap:10px 10px}
-+a{gap:10px}
-
-FAIL shorthand-values/0021
--a{overflow:hidden hidden}
-+a{overflow:hidden}
 
 FAIL shorthand-values/0022
 -a{transition:all 0s}
