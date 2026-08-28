@@ -21,51 +21,51 @@ FAIL charset/0005
 -@charset "gbk";.foo:before{content:""}
 +@charset "gbk";.foo:before{content:"\e61d"}
 
-FAIL colors/0031
+FAIL colors/0029
 -a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
 +a{color:color-mix(in oklch,#fff,var(--foo))}
 
-FAIL colors/0032
+FAIL colors/0030
 -a{color:color-mix(in srgb,hsl(0,100%,50%),var(--foo))}
 +a{color:color-mix(in srgb,red,var(--foo))}
 
-FAIL colors/0033
+FAIL colors/0031
 -a{color:color-mix(in oklab,var(--a),var(--b))}
 +a{color:color-mix(var(--a),var(--b))}
 
-FAIL colors/0034
+FAIL colors/0032
 -a{border:1px solid blue}
 +a{border:1px solid#00f}
 
-FAIL colors/0035
+FAIL colors/0033
 -a{color:color(display-p3 1.2 -.3 .5)}
 +a{color:color(display-p3 1.2-.3 .5)}
 
-FAIL colors/0064
+FAIL colors/0051
 -p{color:#5987FC00;background:#85283700;border-color:#00808000}
 +p{color:#5987fc00;background:#85283700;border-color:#00808000}
 
-FAIL colors/0065
+FAIL colors/0052
 -a{background:light-dark(var(--foo),var(--foo));color:light-dark(red,red)}
 +a{background:var(--foo);color:red}
 
-FAIL colors/0067
+FAIL colors/0054
 -a{color:light-dark(red,red)}
 +a{color:red}
 
-FAIL colors/0068
+FAIL colors/0055
 -a{color:hsl(from rebeccapurple calc(h) calc(s * 1) calc(l + 0) / calc(1 / 1))}
 +a{color:#639}
 
-FAIL colors/0069
+FAIL colors/0056
 -a{--red:#f01;--h:10;color:hsl(from var(--red) calc(var(--h)) calc(s * 2) calc(l + 1) / .6)}
 +a{--red:#f01;--h:10;color:hsl(from var(--red)calc(var(--h))calc(s*2)calc(l + 1)/.6)}
 
-FAIL colors/0080
+FAIL colors/0067
 -.b{color:oklch(62.796 .258 29.2);background:oklch(78.619 .064 74.6)}
 +.b{color:red;background:tan}
 
-FAIL colors/0081
+FAIL colors/0068
 -.c{color:oklch(.628 .2577 29.23);background:tan}
 +.c{color:red;background:tan}
 
@@ -171,6 +171,10 @@ FAIL duplicates/0021
 FAIL duplicates/0022
 -h2:before{content:"i"}h2::before{content:"j"}
 +h2:before{content:"j"}
+
+FAIL duplicates/0024
+-p{scrollbar-gutter:auto;scrollbar-gutter:stable;scrollbar-gutter:stable both-edges}
++p{scrollbar-gutter:stable both-edges}
 
 FAIL escaping/0013
 -[href="#"],[href="/"],[href="file.html"],[href=https\:\/\/example\.com]{color:red}
@@ -575,289 +579,317 @@ FAIL selectors/0016
 -[class="foo bar"]{color:red}
 +[class=foo\ bar]{color:red}
 
-FAIL shorthands/0001
+FAIL shorthand-values/0001
 -a{margin:10px 10px 10px 10px}
 +a{margin:10px}
 
-FAIL shorthands/0002
+FAIL shorthand-values/0002
 -a{margin:10px 20px 10px 20px}
 +a{margin:10px 20px}
 
-FAIL shorthands/0003
+FAIL shorthand-values/0003
 -a{margin:10px 20px 30px 20px}
 +a{margin:10px 20px 30px}
 
-FAIL shorthands/0004
+FAIL shorthand-values/0004
 -a{background:none}
 +a{background:0 0}
 
-FAIL shorthands/0006
+FAIL shorthand-values/0006
 -a{inset:0 0 0 0}
 +a{inset:0}
 
-FAIL shorthands/0007
+FAIL shorthand-values/0007
 -a{padding:10px 10px 10px 10px}
 +a{padding:10px}
 
-FAIL shorthands/0008
--a{overflow-x:hidden;overflow-y:hidden}
-+a{overflow:hidden}
-
-FAIL shorthands/0009
--a{row-gap:10px;column-gap:10px}
-+a{gap:10px}
-
-FAIL shorthands/0010
--a{flex-grow:1;flex-shrink:0;flex-basis:auto}
-+a{flex:1 0 auto}
-
-FAIL shorthands/0011
--a{outline-width:1px;outline-style:solid;outline-color:red}
-+a{outline:1px solid red}
-
-FAIL shorthands/0012
--a{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px}
-+a{border-radius:5px}
-
-FAIL shorthands/0013
--a{margin-top:10px;margin-right:20px;margin-bottom:10px;margin-left:20px}
-+a{margin:10px 20px}
-
-FAIL shorthands/0014
--a{text-decoration-line:underline;text-decoration-style:solid;text-decoration-color:red}
-+a{text-decoration:underline red}
-
-FAIL shorthands/0015
--a{padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:10px}
-+a{padding:5px 10px}
-
-FAIL shorthands/0016
--a{border-top-width:1px;border-right-width:1px;border-bottom-width:1px;border-left-width:1px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:red;border-right-color:red;border-bottom-color:red;border-left-color:red}
-+a{border:1px solid red}
-
-FAIL shorthands/0017
+FAIL shorthand-values/0008
 -a{padding:5px 10px 5px 10px}
 +a{padding:5px 10px}
 
-FAIL shorthands/0018
+FAIL shorthand-values/0009
 -a{padding:5px 10px 15px 10px}
 +a{padding:5px 10px 15px}
 
-FAIL shorthands/0019
+FAIL shorthand-values/0010
 -a{border-radius:5px 10px 5px 10px}
 +a{border-radius:5px 10px}
 
-FAIL shorthands/0020
+FAIL shorthand-values/0011
 -a{border-radius:10px 10px 10px 10px/5px 5px 5px 5px}
 +a{border-radius:10px/5px}
 
-FAIL shorthands/0021
+FAIL shorthand-values/0012
 -a{inset:10px 20px 10px 20px}
 +a{inset:10px 20px}
 
-FAIL shorthands/0022
+FAIL shorthand-values/0013
 -a{margin:10px 10px}
 +a{margin:10px}
 
-FAIL shorthands/0023
--a{align-items:center;justify-items:center}
-+a{place-items:center}
-
-FAIL shorthands/0024
--a{align-content:center;justify-content:center}
-+a{place-content:center}
-
-FAIL shorthands/0025
--a{align-self:center;justify-self:center}
-+a{place-self:center}
-
-FAIL shorthands/0026
--a{column-gap:10px;row-gap:20px}
-+a{gap:20px 10px}
-
-FAIL shorthands/0027
--a{column-width:auto;column-count:3}
-+a{columns:auto 3}
-
-FAIL shorthands/0028
--a{list-style-type:disc;list-style-position:inside;list-style-image:none}
-+a{list-style:inside}
-
-FAIL shorthands/0029
--a{background-color:red;background-image:none;background-repeat:repeat;background-position:0% 0%;background-attachment:scroll}
-+a{background:red}
-
-FAIL shorthands/0030
--a{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
-+a{font:italic 700 16px/1.5 Arial,sans-serif}
-
-FAIL shorthands/0031
--a{transition-property:opacity;transition-duration:.3s;transition-timing-function:ease;transition-delay:0s}
-+a{transition:opacity .3s}
-
-FAIL shorthands/0032
--a{animation-name:slide;animation-duration:1s;animation-timing-function:ease;animation-delay:0s;animation-iteration-count:1;animation-direction:normal;animation-fill-mode:none;animation-play-state:running}
-+a{animation:slide 1s}
-
-FAIL shorthands/0033
+FAIL shorthand-values/0014
 -a{border:medium solid red}
 +a{border:solid red}
 
-FAIL shorthands/0034
+FAIL shorthand-values/0015
 -a{background:url(bg.png)0% 0% repeat scroll red}
 +a{background:red url(bg.png)}
 
-FAIL shorthands/0035
+FAIL shorthand-values/0016
 -a{font:normal normal 16px/1.5 Arial,sans-serif}
 +a{font:16px/1.5 Arial,sans-serif}
 
-FAIL shorthands/0037
+FAIL shorthand-values/0018
 -a{margin:0 auto 0 auto}
 +a{margin:0 auto}
 
-FAIL shorthands/0038
+FAIL shorthand-values/0019
 -a{border-color:red red red red}
 +a{border-color:red}
 
-FAIL shorthands/0039
+FAIL shorthand-values/0020
 -a{gap:10px 10px}
 +a{gap:10px}
 
-FAIL shorthands/0040
+FAIL shorthand-values/0021
 -a{overflow:hidden hidden}
 +a{overflow:hidden}
 
-FAIL shorthands/0041
--a{border-image:url(border.png)30 round;border-width:1px;border-style:solid;border-color:red}
-+a{border:1px solid red;border-image:url(border.png) 30 round}
-
-FAIL shorthands/0042
--a{border-width:1px;border-style:solid;border-color:red;border-image:url(border.png)30 round}
-+a{border:1px solid red;border-image:url(border.png) 30 round}
-
-FAIL shorthands/0043
--a{border-image:url(border.png)30 round;border:1px solid red}
-+a{border:1px solid red}
-
-FAIL shorthands/0044
--a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:#0000}
-+a{border:4px solid #0000;border-image:url(border.png) 30 round}
-
-FAIL shorthands/0045
--a{font-variant-ligatures:no-common-ligatures;font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
-+a{font:italic 700 16px/1.5 Arial,sans-serif;font-variant-ligatures:no-common-ligatures}
-
-FAIL shorthands/0046
--a{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif;font-feature-settings:"smcp"1}
-+a{font:italic 700 16px/1.5 Arial,sans-serif;font-feature-settings:"smcp" 1}
-
-FAIL shorthands/0047
--a{font-variant-numeric:tabular-nums;font:italic 16px/1.5 Arial,sans-serif}
-+a{font:italic 16px/1.5 Arial,sans-serif}
-
-FAIL shorthands/0048
--a{font-style:normal;font-weight:400;font-size:14px;line-height:1.4;font-family:Georgia,serif;font-kerning:none}
-+a{font:14px/1.4 Georgia,serif;font-kerning:none}
-
-FAIL shorthands/0049
--a{mask-border:url(mask.png)25/10px round;mask-image:linear-gradient(#000,#0000);mask-size:cover;mask-repeat:no-repeat}
-+a{mask:linear-gradient(#000,#0000) no-repeat/cover;mask-border:url(mask.png) 25/10px round}
-
-FAIL shorthands/0050
--a{mask-image:linear-gradient(#000,#0000);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
-+a{mask:linear-gradient(#000,#0000) no-repeat;mask-border:url(mask.png) 25 round}
-
-FAIL shorthands/0051
--a{mask-border:url(mask.png)25 round;mask:linear-gradient(#000,#0000)}
-+a{mask:linear-gradient(#000,#0000)}
-
-FAIL shorthands/0052
--a{font-variation-settings:"wght"600,"wdth"75;font-style:normal;font-weight:400;font-size:18px;line-height:1.6;font-family:Inter,sans-serif}
-+a{font:18px/1.6 Inter,sans-serif;font-variation-settings:"wght" 600,"wdth" 75}
-
-FAIL shorthands/0054
--a{font-weight:bold;font:14px serif}
-+a{font:14px serif}
-
-FAIL shorthands/0056
--a{margin-top:10px!important;margin-right:20px;margin-bottom:10px;margin-left:20px}
-+a{margin:10px 20px;margin-top:10px!important}
-
-FAIL shorthands/0061
--@property --pt{syntax:"<length>";inherits:false;initial-value:0px}@property --pr{syntax:"<length>";inherits:false;initial-value:0px}@property --pb{syntax:"<length>";inherits:false;initial-value:0px}@property --pl{syntax:"<length>";inherits:false;initial-value:0px}a{padding-top:var(--pt);padding-right:var(--pr);padding-bottom:var(--pb);padding-left:var(--pl)}
-+@property --pt{syntax:"<length>";inherits:false;initial-value:0px}@property --pr{syntax:"<length>";inherits:false;initial-value:0px}@property --pb{syntax:"<length>";inherits:false;initial-value:0px}@property --pl{syntax:"<length>";inherits:false;initial-value:0px}a{padding:var(--pt) var(--pr) var(--pb) var(--pl)}
-
-FAIL shorthands/0062
--@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:black}a{border-width:var(--bw);border-style:var(--bs);border-color:var(--bc)}
-+@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:#000}a{border:var(--bw) var(--bs) var(--bc)}
-
-FAIL shorthands/0063
--a{top:0;right:0;bottom:0;left:0}
-+a{inset:0}
-
-FAIL shorthands/0064
--a{margin-inline-start:10px;margin-inline-end:10px}
-+a{margin-inline:10px}
-
-FAIL shorthands/0065
--a{position-try-order:normal;position-try-fallbacks:flip-block,--custom}
-+a{position-try:flip-block,--custom}
-
-FAIL shorthands/0066
--a{border-top:1px solid blue;border:2px solid red}
-+a{border:2px solid red}
-
-FAIL shorthands/0067
--a{border-block-start:1px solid blue;border-block:2px solid red}
-+a{border-block:2px solid red}
-
-FAIL shorthands/0068
--a{padding-inline-start:10px;padding-inline:20px}
-+a{padding-inline:20px}
-
-FAIL shorthands/0069
--a{margin-top:10px;margin:20px}
-+a{margin:20px}
-
-FAIL shorthands/0070
--a{border-top-width:1px;border-width:2px}
-+a{border-width:2px}
-
-FAIL shorthands/0071
--a{border-top-color:blue;border-top:2px solid red}
-+a{border-top:2px solid red}
-
-FAIL shorthands/0072
--a{inset-block-start:10px;inset-block:20px}
-+a{inset-block:20px}
-
-FAIL shorthands/0073
+FAIL shorthand-values/0022
 -a{transition:all 0s}
 +a{transition:all}
 
-FAIL shorthands/0074
+FAIL shorthand-values/0023
 -a{flex:0 0 0}
 +a{flex:0 0}
 
-FAIL shorthands/0075
+FAIL shorthand-values/0024
 -a{background-position-x:100%;background-position-y:100%}
 +a{background-position:100% 100%}
 
-FAIL shorthands/0076
+FAIL shorthands-unsafe/0007
+-.a{border-image:url(border.png)30 round}.b{border-top-width:1px;border-right-width:1px;border-bottom-width:1px;border-left-width:1px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:red;border-right-color:red;border-bottom-color:red;border-left-color:red}
++.a{border-image:url(border.png) 30 round}.b{border-width:1px;border-style:solid;border-color:red}
+
+FAIL shorthands-unsafe/0008
+-.a{font-kerning:none}.b{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
++.a{font-kerning:none}.b{font-style:italic;font-weight:700;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
+
+FAIL shorthands-unsafe/0010
+-.a{mask-border:url(mask.png)25/10px round}.b{mask-image:url(mask.svg);mask-position:center;mask-size:cover;mask-repeat:no-repeat;mask-origin:border-box;mask-clip:border-box;mask-composite:add;mask-mode:alpha}
++.a{mask-border:url(mask.png) 25/10px round}.b{mask-image:url(mask.svg);mask-position:center;mask-size:cover;mask-repeat:no-repeat;mask-origin:border-box;mask-clip:border-box;mask-composite:add;mask-mode:alpha}
+
+FAIL shorthands/0001
+-a{overflow-x:hidden;overflow-y:hidden}
++a{overflow:hidden}
+
+FAIL shorthands/0002
+-a{row-gap:10px;column-gap:10px}
++a{gap:10px}
+
+FAIL shorthands/0003
+-a{flex-grow:1;flex-shrink:0;flex-basis:auto}
++a{flex:1 0 auto}
+
+FAIL shorthands/0004
+-a{outline-width:1px;outline-style:solid;outline-color:red}
++a{outline:1px solid red}
+
+FAIL shorthands/0005
+-a{border-top-left-radius:5px;border-top-right-radius:5px;border-bottom-right-radius:5px;border-bottom-left-radius:5px}
++a{border-radius:5px}
+
+FAIL shorthands/0006
+-a{margin-top:10px;margin-right:20px;margin-bottom:10px;margin-left:20px}
++a{margin:10px 20px}
+
+FAIL shorthands/0007
+-a{text-decoration-line:underline;text-decoration-style:solid;text-decoration-color:red}
++a{text-decoration:underline red}
+
+FAIL shorthands/0008
+-a{padding-top:5px;padding-right:10px;padding-bottom:5px;padding-left:10px}
++a{padding:5px 10px}
+
+FAIL shorthands/0009
+-a{border-top-width:1px;border-right-width:1px;border-bottom-width:1px;border-left-width:1px;border-top-style:solid;border-right-style:solid;border-bottom-style:solid;border-left-style:solid;border-top-color:red;border-right-color:red;border-bottom-color:red;border-left-color:red}
++a{border:1px solid red}
+
+FAIL shorthands/0010
+-a{align-items:center;justify-items:center}
++a{place-items:center}
+
+FAIL shorthands/0011
+-a{align-content:center;justify-content:center}
++a{place-content:center}
+
+FAIL shorthands/0012
+-a{align-self:center;justify-self:center}
++a{place-self:center}
+
+FAIL shorthands/0013
+-a{column-gap:10px;row-gap:20px}
++a{gap:20px 10px}
+
+FAIL shorthands/0014
+-a{column-width:auto;column-count:3}
++a{columns:auto 3}
+
+FAIL shorthands/0015
+-a{list-style-type:disc;list-style-position:inside;list-style-image:none}
++a{list-style:inside}
+
+FAIL shorthands/0016
+-a{background-color:red;background-image:none;background-repeat:repeat;background-position:0% 0%;background-attachment:scroll}
++a{background:red}
+
+FAIL shorthands/0017
+-a{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
++a{font:italic 700 16px/1.5 Arial,sans-serif}
+
+FAIL shorthands/0018
+-a{transition-property:opacity;transition-duration:.3s;transition-timing-function:ease;transition-delay:0s}
++a{transition:opacity .3s}
+
+FAIL shorthands/0019
+-a{animation-name:slide;animation-duration:1s;animation-timing-function:ease;animation-delay:0s;animation-iteration-count:1;animation-direction:normal;animation-fill-mode:none;animation-play-state:running}
++a{animation:slide 1s}
+
+FAIL shorthands/0020
+-a{border-image:url(border.png)30 round;border-width:1px;border-style:solid;border-color:red}
++a{border:1px solid red;border-image:url(border.png) 30 round}
+
+FAIL shorthands/0021
+-a{border-width:1px;border-style:solid;border-color:red;border-image:url(border.png)30 round}
++a{border:1px solid red;border-image:url(border.png) 30 round}
+
+FAIL shorthands/0022
+-a{border-image:url(border.png)30 round;border:1px solid red}
++a{border:1px solid red}
+
+FAIL shorthands/0023
+-a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:#0000}
++a{border:4px solid #0000;border-image:url(border.png) 30 round}
+
+FAIL shorthands/0024
+-a{font-variant-ligatures:no-common-ligatures;font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
++a{font:italic 700 16px/1.5 Arial,sans-serif;font-variant-ligatures:no-common-ligatures}
+
+FAIL shorthands/0025
+-a{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif;font-feature-settings:"smcp"1}
++a{font:italic 700 16px/1.5 Arial,sans-serif;font-feature-settings:"smcp" 1}
+
+FAIL shorthands/0026
+-a{font-variant-numeric:tabular-nums;font:italic 16px/1.5 Arial,sans-serif}
++a{font:italic 16px/1.5 Arial,sans-serif}
+
+FAIL shorthands/0027
+-a{font-style:normal;font-weight:400;font-size:14px;line-height:1.4;font-family:Georgia,serif;font-kerning:none}
++a{font:14px/1.4 Georgia,serif;font-kerning:none}
+
+FAIL shorthands/0028
+-a{mask-border:url(mask.png)25/10px round;mask-image:linear-gradient(#000,#0000);mask-size:cover;mask-repeat:no-repeat}
++a{mask:linear-gradient(#000,#0000) no-repeat/cover;mask-border:url(mask.png) 25/10px round}
+
+FAIL shorthands/0029
+-a{mask-image:linear-gradient(#000,#0000);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
++a{mask:linear-gradient(#000,#0000) no-repeat;mask-border:url(mask.png) 25 round}
+
+FAIL shorthands/0030
+-a{mask-border:url(mask.png)25 round;mask:linear-gradient(#000,#0000)}
++a{mask:linear-gradient(#000,#0000)}
+
+FAIL shorthands/0031
+-a{font-variation-settings:"wght"600,"wdth"75;font-style:normal;font-weight:400;font-size:18px;line-height:1.6;font-family:Inter,sans-serif}
++a{font:18px/1.6 Inter,sans-serif;font-variation-settings:"wght" 600,"wdth" 75}
+
+FAIL shorthands/0032
+-a{font-weight:bold;font:14px serif}
++a{font:14px serif}
+
+FAIL shorthands/0033
+-a{margin-top:10px!important;margin-right:20px;margin-bottom:10px;margin-left:20px}
++a{margin:10px 20px;margin-top:10px!important}
+
+FAIL shorthands/0034
+-@property --pt{syntax:"<length>";inherits:false;initial-value:0px}@property --pr{syntax:"<length>";inherits:false;initial-value:0px}@property --pb{syntax:"<length>";inherits:false;initial-value:0px}@property --pl{syntax:"<length>";inherits:false;initial-value:0px}a{padding-top:var(--pt);padding-right:var(--pr);padding-bottom:var(--pb);padding-left:var(--pl)}
++@property --pt{syntax:"<length>";inherits:false;initial-value:0px}@property --pr{syntax:"<length>";inherits:false;initial-value:0px}@property --pb{syntax:"<length>";inherits:false;initial-value:0px}@property --pl{syntax:"<length>";inherits:false;initial-value:0px}a{padding:var(--pt) var(--pr) var(--pb) var(--pl)}
+
+FAIL shorthands/0035
+-@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:black}a{border-width:var(--bw);border-style:var(--bs);border-color:var(--bc)}
++@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:#000}a{border:var(--bw) var(--bs) var(--bc)}
+
+FAIL shorthands/0036
+-a{top:0;right:0;bottom:0;left:0}
++a{inset:0}
+
+FAIL shorthands/0037
+-a{margin-inline-start:10px;margin-inline-end:10px}
++a{margin-inline:10px}
+
+FAIL shorthands/0038
+-a{position-try-order:normal;position-try-fallbacks:flip-block,--custom}
++a{position-try:flip-block,--custom}
+
+FAIL shorthands/0039
+-a{border-top:1px solid blue;border:2px solid red}
++a{border:2px solid red}
+
+FAIL shorthands/0040
+-a{border-block-start:1px solid blue;border-block:2px solid red}
++a{border-block:2px solid red}
+
+FAIL shorthands/0041
+-a{padding-inline-start:10px;padding-inline:20px}
++a{padding-inline:20px}
+
+FAIL shorthands/0042
+-a{margin-top:10px;margin:20px}
++a{margin:20px}
+
+FAIL shorthands/0043
+-a{border-top-width:1px;border-width:2px}
++a{border-width:2px}
+
+FAIL shorthands/0044
+-a{border-top-color:blue;border-top:2px solid red}
++a{border-top:2px solid red}
+
+FAIL shorthands/0045
+-a{inset-block-start:10px;inset-block:20px}
++a{inset-block:20px}
+
+FAIL shorthands/0046
 -a{background-color:red;background-image:linear-gradient(red,tan);background-position-x:100%;background-position-y:100%;background-repeat:no-repeat;background-attachment:fixed;background-size:contain;background-origin:padding-box;background-clip:content-box}
 +a{background:red linear-gradient(red,tan)100% 100%/contain no-repeat fixed padding-box content-box}
 
-FAIL shorthands/0077
+FAIL shorthands/0047
 -div{border-color:inherit;border-style:inherit;border-width:2px}
 +div{border:inherit;border-width:2px}
 
-FAIL shorthands/0078
+FAIL shorthands/0048
 -div{border-top:1px solid red;border-right:1px solid red;border-bottom:1px solid red;border-left:1px solid red}
 +div{border:1px solid red}
 
-FAIL shorthands/0079
+FAIL shorthands/0049
 -a{border-width:50px;border-style:solid;border-color:#0000 red}
 +a{border:50px solid #0000;border-color:#0000 red}
+
+FAIL shorthands/0050
+-a{marker-start:url(x);marker-mid:url(x);marker-end:url(x)}
++a{marker:url(x)}
+
+FAIL shorthands/0051
+-a{column-rule-color:red;row-rule-color:red}b{column-rule-style:solid;row-rule-style:solid}c{column-rule-width:1px;row-rule-width:1px}d{column-rule-break:intersection;row-rule-break:intersection}e{column-rule-visibility-items:all;row-rule-visibility-items:all}
++a{rule-color:red}b{rule-style:solid}c{rule-width:1px}d{rule-break:intersection}e{rule-visibility-items:all}
+
+FAIL shorthands/0052
+-a{animation-timeline:scroll();animation-range:entry;animation-name:spin;animation-duration:1s}
++a{animation:spin 1s;animation-timeline:scroll();animation-range:entry}
+
+FAIL shorthands/0053
+-a{padding:10px;padding-right:20px}b{padding:10000px;padding-right:200px}c{padding:10px;padding-top:20px}d{padding:1px 2px 3px 4px;padding-right:4px}e{padding:inherit;padding-right:20px}f{padding:var(--padding);padding-right:20px}g{padding:10px;padding-right:20px!important}
++a{padding:10px 20px 10px 10px}b{padding:10000px;padding-right:200px}c{padding:20px 10px 10px}d{padding:1px 4px 3px}e{padding:inherit;padding-right:20px}f{padding:var(--padding);padding-right:20px}g{padding:10px;padding-right:20px!important}
 
 FAIL supports/0001
 -@supports(hanging-punctuation:first){a{hanging-punctuation:first}}
@@ -1020,8 +1052,8 @@ FAIL values/0040
 +a{width:100px}
 
 FAIL values/0041
--a{margin-left:calc(-1*(-10px))}
-+a{margin-left:10px}
+-a{margin-left:calc(-1*(-10px));margin-right:calc(-10*(-10px))}
++a{margin-left:10px;margin-right:100px}
 
 FAIL values/0042
 -a{width:calc(1/(1/50px))}
