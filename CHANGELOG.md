@@ -1,4 +1,51 @@
-## [0.0.30] - 2026-08-22
+## [0.0.31] - 2026-08-28
+
+### Bytescan
+- bytescan/css_lexer: Factor out SIMD scanning into new library (#1466) ([#1466](https://github.com/csskit/csskit/pull/1466))
+
+
+### Chromashift
+- workspace: Globalise linting and clean up warnings (#1455) ([#1455](https://github.com/csskit/csskit/pull/1455))
+
+
+### Css_ast
+- css_parse: Consume multiple semicolons loose in Stylesheet (#1452) ([#1452](https://github.com/csskit/csskit/pull/1452))
+- css_ast: Add more missing pseudos (#1453) ([#1453](https://github.com/csskit/csskit/pull/1453))
+- css_ast: implement QueryableNode for unknown tag/at-rule nodes (#1457) ([#1457](https://github.com/csskit/csskit/pull/1457))
+- csskit_spec_generator/css_ast: Add concept of shorthand resets (#1461) ([#1461](https://github.com/csskit/csskit/pull/1461))
+- css_ast/csskit_spec_generator: Complete shorthand/longhand metadata (#1470) ([#1470](https://github.com/csskit/csskit/pull/1470))
+
+
+### Csskit
+- csskit: separate parse/check failures, add find --group (#1460) ([#1460](https://github.com/csskit/csskit/pull/1460))
+- chore(deps): update dependencies (patch) (#1458) ([#1458](https://github.com/csskit/csskit/pull/1458))
+
+
+### Csskit_arena
+- csskit_area/derive_atom_set: Fold readme into lib docs (#1462) ([#1462](https://github.com/csskit/csskit/pull/1462))
+
+
+### Csskit_napi
+- chore(deps): update dependency @napi-rs/cli to v3.8.6 (#1459) ([#1459](https://github.com/csskit/csskit/pull/1459))
+- csskit_napi: Add binary to cargo.toml (#1468) ([#1468](https://github.com/csskit/csskit/pull/1468))
+
+
+### Csskit_proc_macro
+- csskit_proc_macro: Add full feature flag to syn dep (#1454) ([#1454](https://github.com/csskit/csskit/pull/1454))
+
+
+### Csskit_transform
+- coverage: update css-minify-tests (#1469) ([#1469](https://github.com/csskit/csskit/pull/1469))
+- csskit_transform: Introduce RemoveOveriddenDeclarations transform (#1471) ([#1471](https://github.com/csskit/csskit/pull/1471))
+- csskit_transform: Introduce ReduceShorthandValues (#1472) ([#1472](https://github.com/csskit/csskit/pull/1472))
+
+## [0.0.30] - 2026-08-23
+
+### Other Changes
+- Fuzz: Minify corpus (#1444) ([#1444](https://github.com/csskit/csskit/pull/1444))
+- Build: optimise for size, not speed (#1448) ([#1448](https://github.com/csskit/csskit/pull/1448))
+- Build: lto=thin (#1449) ([#1449](https://github.com/csskit/csskit/pull/1449))
+
 
 ### Css_ast
 - css_ast: Allow symbolic-counter-style in content syntax (#1419) ([#1419](https://github.com/csskit/csskit/pull/1419))
@@ -8,6 +55,14 @@
 - css_ast: Add missing webkit pseudo elements (#1428) ([#1428](https://github.com/csskit/csskit/pull/1428))
 - css_ast: Implement InitialLetterAlignStyleValue (#1429) ([#1429](https://github.com/csskit/csskit/pull/1429))
 - css_ast: Allow prelude-less `@layer` (#1434) ([#1434](https://github.com/csskit/csskit/pull/1434))
+- css_ast/css_parse/csskit_derives: Derive empty block, prelude, nested metadata kinds (#1435) ([#1435](https://github.com/csskit/csskit/pull/1435))
+- css_ast/csskit_derives: Add Effective/Inert NodeKind flags (#1436) ([#1436](https://github.com/csskit/csskit/pull/1436))
+-  chore(deps): update Rust deps & format caro files (#1437) ([#1437](https://github.com/csskit/csskit/pull/1437))
+- Regenerate css_ast/src/values from csswg drafts (#1439) ([#1439](https://github.com/csskit/csskit/pull/1439))
+- css_parse: Expose diagnostic details (#1440) ([#1440](https://github.com/csskit/csskit/pull/1440))
+- source_tools: Extract out Cursor/Span/LineIndex etc into source_tools crate (#1441) ([#1441](https://github.com/csskit/csskit/pull/1441))
+- css_ast: Support dynamically Visiting & Parsing (#1442) ([#1442](https://github.com/csskit/csskit/pull/1442))
+- csskit_ast: Use ErasedNode in selector matching, add NodeKey for identity (#1443) ([#1443](https://github.com/csskit/csskit/pull/1443))
 
 
 ### Css_lexer
@@ -16,6 +71,9 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1407) ([#1407](https://github.com/csskit/csskit/pull/1407))
+- csskit_napi: Add native Node.js bindings (#1445) ([#1445](https://github.com/csskit/csskit/pull/1445))
+- Release v0.0.30 (#1415) ([#1415](https://github.com/csskit/csskit/pull/1415))
+- node: Stop doubling wasm builds! (#1447) ([#1447](https://github.com/csskit/csskit/pull/1447))
 
 
 ### Csskit_arena
@@ -27,6 +85,7 @@
 ### Csskit_transform
 - coverage: update css-minify-tests (#1423) ([#1423](https://github.com/csskit/csskit/pull/1423))
 - csskit_transform: skip subtrees which don't match metadata (#1424) ([#1424](https://github.com/csskit/csskit/pull/1424))
+- csskit_transform: implement RemoveInertNodes (#1438) ([#1438](https://github.com/csskit/csskit/pull/1438))
 
 
 ### Csskit_vscode
