@@ -615,6 +615,10 @@ FAIL shorthands-unsafe/0008
 -.a{font-kerning:none}.b{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
 +.a{font-kerning:none}.b{font-style:italic;font-weight:700;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
 
+FAIL shorthands-unsafe/0013
+-a{mask-position:10px;mask-image:url(mask.svg);mask-repeat:repeat-x}
++a{mask:url(mask.svg)repeat-x;mask-position:10px}
+
 FAIL shorthands/0001
 -a{overflow-x:hidden;overflow-y:hidden}
 +a{overflow:hidden}
@@ -668,8 +672,8 @@ FAIL shorthands/0013
 +a{gap:20px 10px}
 
 FAIL shorthands/0014
--a{column-width:auto;column-count:3}
-+a{columns:auto 3}
+-a{column-width:10px;column-count:3}
++a{columns:10px 3}
 
 FAIL shorthands/0015
 -a{list-style-type:disc;list-style-position:inside;list-style-image:none}
@@ -782,6 +786,14 @@ FAIL shorthands/0052
 FAIL shorthands/0053
 -a{padding:10px;padding-right:20px}b{padding:10000px;padding-right:200px}c{padding:10px;padding-top:20px}d{padding:1px 2px 3px 4px;padding-right:4px}e{padding:inherit;padding-right:20px}f{padding:var(--padding);padding-right:20px}g{padding:10px;padding-right:20px!important}
 +a{padding:10px 20px 10px 10px}b{padding:10000px;padding-right:200px}c{padding:20px 10px 10px}d{padding:1px 4px 3px}e{padding:inherit;padding-right:20px}f{padding:var(--padding);padding-right:20px}g{padding:10px;padding-right:20px!important}
+
+FAIL shorthands/0054
+-a{border-top:1px solid red;border-right:2px dotted blue;border-bottom:1px solid red;border-left:2px dotted blue}
++a{border-color:red blue;border-style:solid dotted;border-width:1px 2px}
+
+FAIL shorthands/0055
+-a{column-width:auto;column-count:3;column-height:auto}
++a{columns:3}
 
 FAIL supports/0001
 -@supports(hanging-punctuation:first){a{hanging-punctuation:first}}
