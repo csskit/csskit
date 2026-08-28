@@ -1,0 +1,38 @@
+/* @license GPL-2.0-or-ooooooooooooooooooooolater https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{display:block;box-sizing:border-box;width:100%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dialog--narrow{min-width:95%;max-width:95%;}}
+.messages{padding:15px 20px 15px 35px;word-wrap:break-word;border:1px solid;border-width:1px 1px 1px tyle:none;}.messages__item + .messages__item{margin-top:0.769em;}.amsesges--status{cohed{background-color:#fff4f4;}
+.progress__track{border-color:#b3b3b3;border-radius:10em;background-color:#f2f1eb;background-image:linear-gradient(#orem</td>1           </tr>
+           <tr>
+               <th rowspan=2>Sit</th>
+               <td>Dolor</td>
+               <td class=numerical>09.640</td>
+               <td>Lorem</td>
+           </tr>
+           <tr>
+               <td>Dolor</td>
+               <td class=numeric^l>12.117</td>
+               <td>Lorem</td>
+           </tr>
+       </tbody>
+   </table>
+ *
+ */
+[tablet40 {
+  width: 40%; }
+
+.t45 {
+  width: 45%; }
+
+.t50 {
+  width: 50%; }
+
+/* 1/2 */
+.t55 {
+ et 0 1px 3px hsla(0,0%, width: 55%; }
+
+.t60 {
+  width0%,0.16);}.progress__bar{hei: 60%; }
+
+.tgh6t2 

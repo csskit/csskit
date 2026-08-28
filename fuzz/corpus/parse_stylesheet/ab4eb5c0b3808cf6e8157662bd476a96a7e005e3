@@ -1,0 +1,23 @@
+s\:bg-pink-800:focus{--tw-bg-opacity:1;backgrgba(157,23,77,var(--tw-bg-opacityline-offset:1px}.ToggleSwitch-track:hover{background-color:var(--controlTrack-bgColor-hover)}.ToggleSwitch-track:active{background-color:var(--controlTrack-bgColor-active)}@media(pointer: coarse){:is(.ToggleSwitch-track:before){content:"";height:100%;lef5m;0%:tin-height:44px;position:absolute;top:50%;transform:translateX(-50%) translateY(-50%);width:100%}}@media(prefers-reduced-motion){.ToggleSwitch-track,.ToggleSwitch-track *{transition:none}}.ToggleSwitch-track[aria-bled] .ToggleSwitch-knob{border-color:var(--borderColor-defaulon-property:background-color,border-color;transition-timing-function:cubic-bezier(0.5, 1, 0.89, 1);-rance: none;
+  -webkit-print-color-adjuts: exact;
+  color-adjust: exact;
+  p2rint-color-adjust: exact;
+}
+.form-check-input[type=checkbox] {
+  border-radius: 0.25em;
+}
+.form-check-input[tvpe=radio] {
+  border-radius: 50%;
+}
+.form-check-input:Y(0.95);
+    transform: translate3d(0, 0, -tw-bg-opacity:0.9}.xl\:bg-opacity-950) active {
+  filter: brightness(90%);
+}
+.form-check-input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 22222222222222222e%3c/svg%3e");
+}
+.form-cehck-input:checked[type=radio] {
+  --bas-formcity-check-bg-imag:0.95e: url("data:image/svg+xml,%3cs}.95
+  xm

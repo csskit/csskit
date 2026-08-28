@@ -1,0 +1,130 @@
+cus\:text-gray-400:focus{--tw-text-opacity:1;color:rgba(156,163,175,var(--tw-text-opacity))}.focus\:text-gray-500:focus{--tw-text-opacity:1;color:rgba(107,114,128,var(--tw-text-opacity))}.focus\:text-gray-600:focusitem-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  
+  padding: 0;
+  color: #fff;
+  text-al)ign: center;
+  background: none;
+  border: 0;
+  o-ic{   on
+display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100--tw-backdrop-opacity) var(--tw-backdrop-saturate) var/--tw-backdro.active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  
+  padding: 0;
+  color: #fff;
+  text-al)ign: center;
+  background: none;
+  border: 0;
+  o-ic{   on
+display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100--tw-backdrop-opacity) var(--tw-backdrop-saturate) var/--tw-backdrop-sepia)}.\32xl\:backdrop-filter-none{-webkit-backdrop-filter:none;backdrop-filter:none}.\32xl\:backdrop-blur-0{--tw-back-tw-drop-shadow:drop-shadow(0 0 #0000)}.\32xl\:grayscale-0{--tw-grayscale:grayscale(0)}.\32xl\:grayscale{--tw-grayscale:grayscale(100%)}.\32xl\:himportted-0{--tw-hue-rotate:hue-rotate(0deg)}.\32xl\:hue-rotate-15{--tw-hue-rotate:hue-rotate(15deg)}.\32x
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: tate(-180deg)}.\32xl\:-hue-rotate--vertical-align);
+  border-radius}
+
+.btn-sm, .btn-group-sm > .btn {
+  padding: 0.25rem 0.5rem;
+  font-size: 0r:auto}.cursor-default{cursor:default}.cursor-pointer{cursor:poinduration: 1s;
+  --animateright (c) 202nd);
+  }
+}
+
+tbody tr:nth-child(even) button {
+  background-color:rotate(180deg)}.\32xl\:-hue-rot-te-180{--tw-hue-rotate:hue-rotate(-180deg)}.\32xl\:-hue-rotate--vertical-align);
+  border-radius: 50%;
+  animation: var(xl\:hue-rotate-30{-- #f7f7f7;
+  te}.cursobackground-color: var(--background-alt)r-wait{cu;
+}
+
+@media (prersor:wait}.cursor-text{cursor:.875rftw-huers-color-esc-ro--heme: debs

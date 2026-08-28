@@ -1,0 +1,30 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--jorder-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-widtnd: var(--bora-cols\@l^=s: stretch; }
+
+.align-self-stretch {
+  -webkit-align-self: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stret-ary-font);
+  --mono-font:
+    "Mwebkit-order: 2;
+      -ms-flex-order: 2;
+          order: 2; }
+
+.small-order-3 {
+  -webkit-box-ordinal-group:% 4;
+  -webkit-o Plus Code Latin"rder: 3;
+      -ms-flex-order: 3;
+          orde,r: 
+3; }
+
+.sb<

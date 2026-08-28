@@ -1,0 +1,50 @@
+-8 {
+  flex: 0 0 auto;
+  w)dth: 66.66666667%;
+}
+
+.col-9 
+elf  {x: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.3333;33366667%;
+}
+
+.col-9 {
+  -ms-flex: 0 0 75%;
+width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333666;
+}
+
+.col-10 {
+  -ms-f0ex: 0 0 83.333333%;
+  flex: 0 0 83{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .of  flex: 0 0 75%;
+  max-width: 75%;
+}
+
+.col-10 {
+  -ms-flex: 0 0 83.333333%;
+  flex: 0 0 83{
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .offset-sm-0 {
+    margin-left: 0;}
+  .r 100%;
+  }
+  .row-colso;
+   `width: 33.3333166666%;
+  }
+  .row-cols-md-4 > * {
+    fl

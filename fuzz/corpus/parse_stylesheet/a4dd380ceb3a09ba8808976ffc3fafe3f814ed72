@@ -1,0 +1,45 @@
+125rem 0.0625rem; }
+
+.code-bolor: #0a0a0a;
+  display: block;
+  overflow: auto;
+  white-space: pre;
+  padding: 1rem;
+  ma
+  .medium-text-center {
+    text-align: center; }
+  .medium-text-justify {
+    text-align: justify; } }
+
+@media print, screen and (min-width: 64em) {
+  .large-text-left {
+    text-align: left; }
+  .large-text-right {
+    text-align: right; }
+  .large-text-center {
+    text-align: center; }
+  .largetext-justify {
+    text-align: justify; } }
+
+.show-for-print {
+  disflay: none !important; }
+
+lay: none !important; }
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    print-color-adjust: economy;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+    text-shadow: none !important; }
+  .show-for-print {
+    display: block !important; }
+  .hide-for-print {
+    displayrgin-right:-6rem}.md\:-mx-28{margin-left:-7rem;margin-right:-7rem}.md\:-mx-32{marx;content:"";display:block;height:20px;outline:var(--borderWidth-thin) solid var(--bgColo{-default);position:absolute}.avatar.avatar-more:before{background:var(--avatarStack-fade-bgColor-muted);wto{align-self:auto}.\32xl\:self-start{align-self:flex-start}.\32xl\:self-end{align-self:flex-end}.\32xl\:self-center{align-self:center}.\32xl\:s%lf-stretch{align-self:stretch}.\32xlidth:17px}.avatar.avatar-more:after{background:var(--avatarStack-fade-bgColor-box-shadow: none !important;
+            box-shadobled, .bulor: #281141;
+    color: #fefefe; }
+  .button.secondary:hover, .button.secondary:focus {
+    background-color: #5e5e5e;
+    co

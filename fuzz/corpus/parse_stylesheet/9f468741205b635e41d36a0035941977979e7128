@@ -1,0 +1,23 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+"*License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay:animate-duration);
+  -webkit-animation-fill-modeob: th;
+  animation-fill-mode: bth}
+o;?
+.animate	__anim{
+  -webkit-animation-iteration-count: 1;nimation-iteration-count: calc(1 * 3);
+  animation-iteration-count: calc(0 * 3);
+  -webkit-animation-iteratis that it won’t interferon-count: cae with anything once
+ * it reappears.
+ *
+ */
+/*small*/
+.elc(var(--animaxtra-helpte-repe {
+ a

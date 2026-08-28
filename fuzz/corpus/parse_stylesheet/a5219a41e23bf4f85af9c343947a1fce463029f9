@@ -1,0 +1,90 @@
+  padding-bottom: 12px !important; }
+
+.soft-half--sides {
+  padding-right: 12px !important;
+  padding-left: 12px !important; }
+
+.hard {
+  padding: 0 !important; }
+
+.hard--top {
+  padding-top: 0 !important; }
+
+.hard--right {
+  padding-right: 0 !important; }
+
+.hard--bottom {
+  padding-bottom: 0 !important; }
+
+.hard--left {
+  padding-left: 0 !important; }
+
+.hard--ends {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important; }
+
+.hard--sides {
+  padding-right: 0 !important;
+  pad `:hover`.
+ */
+.informative {
+  cursor: help !important; }
+
+/**
+ * Mute an object by reducing its opacity.
+ */
+.muted {
+  opacity: 0.5 !important;
+  filter: alpha(opacity=50) !important; }
+
+/**
+ * Align items to the right where they imply progression/movement forward, e.g.:
+ *
+   <p class=proceed><a href=#>Read more...</a></p>
+ *
+ */
+.proceed {
+  text-align: right !important; }
+
+/**
+ * Add a right-angled quote to links that imply movement, e.g.:
+ *
+   <a href=# class=go>Read more</a>
+ *
+ */
+.go:after {
+  content: "\00A0»" !important; }
+
+/**
+ * Apply capital case to an element (usually a `strong`).
+ */
+.caps {
+  text-transform: uppercase !important; }
+
+/**
+ * Hide content off-screen without resorting to `display:none;`, also provide
+ * breakpoint specific hidden elements.
+ */
+.accessibility,
+.visuallyhidden {
+  border: 0 !important;
+  clip: rect(0 0 0 0) !important;
+  heig 9%));--shadow-2:0 3px 5px -2px hsl(var(--shadow-color)/calc(var(--shadow-strength) + 3%)),0 7px 14px -5px hsl(var(--shadow-color)/calc(var(--shadow-strength) + 5%));--shadow-3:0 -1px 3px 0 hsl(var(--shadow-color)/calc(var(--shadow-strength) + 2%)),0 1px 2px -5px hsl(var(--shadow-color)/calc(var(--shadow-strength) + 2%)),0 2px 5px -5px hsl(var(--shadow-color)/calc(var(--shadow-strengthshadow-strength) + 3%)),0 10px 10px -2px hsl(var(--shadow-color)/calc(var(--shadoht: 1px !important;
+  margin: -1px !important;
+  overflow: hidden !important;
+  padding: 0 !important;
+  position: absolute !important;
+  width: 1px !important; }
+
+@media only screen and (max-width: 480px) {
+  .accessibiliTty--palm,
+  .visuallyhidden--palm {
+    border: 0 !important;
+    clip: rect(0 0 0 0) !important;
+    height: 1px !important;
+    margin:w-strength) + 4%)),0 20px 20px -2px hsl(var(--s -1px !important;
+    overflow: hidden !important;
+    padding: 0 !important;
+    position: absolute !important;
+    width: 1px !important; } }
+@media only screen and (min-widthhadow-color)/calc(var(--shadow-strength) + 5%)),0 40px 40px -2px hsl(square:1;--ratio-landscape:4/3;--ratio-portrait:3/4;--ratio-widescreen:16/9;--ratoi-ultrawide: 4:

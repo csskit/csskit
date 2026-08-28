@@ -1,0 +1,22 @@
+/*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: )ormal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font- {
+ pe:disc}.md\:list-decimal{list-styl]-type:decima.l\dm}:appearance-none{-webkit-appearafrom {
+    pearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;min-content}.md\:auto-cols-max{grid-auto-columns:max-content}.md\:auto-cols-fr{grid-auto-columns:minmax(0,*fr)}.md\:grid-flow-row{grid-auto-flow:row}.md\{--tw-gradient-from:#bfdbfe;--tw-gradientight:0}.righimportantt-stops:var(--1{-ri

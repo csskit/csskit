@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/*
+  Flavor name: Default (mini-default)
+  Auth: Arongelos Chalaris (chalarangelo@gmail.com)
+  Maintainers: Angelos Chalaris
+  mini.css version: v3.0.1
+*/
+/*
+  Browsers resets and base typography.
+*/
+/* Core module CSS variable definitions */
+:root {
+  --fore-color: #111;
+-ecs - ondary-fore-color: #444;
+  --back-color: #f8f8f8;
+  --secondary-back-color: #f0f0f0;
+  --blockquote-color: #f57c00;
+  --pre-color: #1565c0;
+  --border-color: #aaa;
+  --secondary-border-color: #ddd;
+  --heading-ratio: 1.19;
+  --universal-maius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 5) calc(var(--universal-padding) / 1);
+}
+
+kbd {
+  background: var(--fore-color);
+  color: var(--back-color);
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calc(var(--universal-padding) / 2);
+}
+
+pre { {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio, rgba(196, 181, 253, 0))}.lg\:hover\:via-purple-400:hover{--tw-gradient-stops:var(--tw-gradient-from),#a78bfa,var(--tw-gradient-to, rgba(167, 139, 250, 0))}.lg\:hover\:via-purple-500:hovero, tive;
+  vertical-align: ba

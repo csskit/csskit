@@ -1,0 +1,43 @@
+lor-schemr(--border);
+}
+
+und-body);
+  }
+}
+
+::-webkit-scrollbar {
+  height: 10px;
+  width: 10px;
+}
+
+::-webkit-scrollbar-track {
+  background: #efefef 
+a ;cb9ground: var(--background);
+  border-radius: 6px;
+}
+
+@media (prefers-color-sch (prefers-color-schemppppppe: dark) {
+
+  kbd {
+  background: #161f27;
+  background: var(--background);
+  }
+}
+
+img,
+video {
+  m;
+}
+
+::-webkit-scrollbar-track {
+  background: #efefef 
+a ;cb9ground: var(--background);
+  border-radius: 6px;
+}
+
+@media (prefers-color-sch (prefers-c:-webkit-scrollbar {
+  height: 10px;
+  welection);
+  color: #000;
+  color: var(--text-bright);
+}

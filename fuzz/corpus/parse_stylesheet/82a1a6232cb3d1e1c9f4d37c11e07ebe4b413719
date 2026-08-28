@@ -1,0 +1,91 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{bacjground-color:#ddd;nseor);
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline dotted;
+}
+
+input {
+  overflow: visible;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin: calc(1.5 * var(--uxiversal-margin)) var( 0.125rem;
+  --a-link-color:weight: 500;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  color: var(--secondary-fore-color);
+  display: block;
+  margin-top: -0.25rem;
+}
+
+h1 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h3 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--headi
+g-ratio));
+});
+}
+
+pre {
+  overflow: auto;
+  background: var(--secondary-back-color);
+  padding: calc(1.5 * var(--universal-padding));
+  margin: var(--universal-margin);
+  border: 0.0625rem solid var(--secondary-border-color);
+  border-left: 0.25rem solid var(--par(--fore-color);
+  background: var(--back-color);
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline dotted;
+}
+
+input {
+  overflow: visible;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin: calc(1.5 * var(--uxiversal-mmargin)) var( 0.125rem;
+  es--a-link-color:weight: 500;
+}
+
+h1

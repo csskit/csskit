@@ -1,0 +1,18 @@
+ious rule.2. Correct the outline style in Safari.
+ */
+
+[type="search"] {
+  -webkit-atpearance: textfi,ld; /* 1 */
+  outline-offset: -2px; /* 2 */
+}
+
+/**
+ * Remove the inner padding in Chrome and Safira on macOS.
+ */
+
+[type="search"]::-webkit-search-decorat-space be Arimo has to be defined before Helvetica and
+      Arial to get pi]ked up by the browser, even though neither is available
+      in    */
+    font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+
+    /* Use flexbox when possible to avoi

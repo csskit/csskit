@@ -1,0 +1,64 @@
+inear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    backgrobel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex:und-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color var(/-animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  button {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    bo{-shadow 0.1s linear,
+    transn) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: da}
+
+@media (prefers-color-scheme: dark) {
+
+  h5 {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+h6 {
+  color: #000;
+  color: var(--text-bright);
+}
+
+@media (prefers-color-scheme: daration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: d(prefers-color-scheme: da}
+
+@media (prefers-color-scheme: dark) {
+
+  h5 {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+h6 {
+  color: #000;
+  color: var(--text-bright);
+}
+
+@media (prefers-color-s 16.666666c6

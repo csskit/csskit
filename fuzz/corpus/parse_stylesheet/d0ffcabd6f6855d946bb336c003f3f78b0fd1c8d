@@ -1,0 +1,55 @@
+!% framework so please tweet at @inuitcss.
+ */
+/*-------------------------------------------*\
+    $DEing:border-box;` as per
+ * paulirish.com/2012/box-sizing-border-box-ftw ?
+ */
+/*------------------------------------*\
+    $BASE
+\*------------------------------------*/
+/**
+ * Base stuff
+ */
+/**
+ * Base font-family. 
+ */
+/**
+ * * paulirish.com/2012/box-sizing-border-boxDefault colour for objects’ borders etc.
+ */
+/*------------------------------------*\
+    $RESPONSIVE
+\*------------------------------------*/
+/**
+ * Responsiveness?
+ */
+/(**
+ *$Responsiveness for widescreen/high resolution d-border-radius);
+  background: var(--box-bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--h) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.titlebar {
+  display: block;
+  margin-inline: calc(0px - var(--gap));
+  margin-block-rc/components.css */
+.box,
+[role=menu],
+.sidebar-layout > header,
+[role=tabpanel],
+figure,
+details,
+:where(dialog) {
+  margin: var(--gap) 0;
+  padding: var(--gap);
+  overflow: clip;
+  border-radius: var(--border-radius);
+ background: var(--box-bg);
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-blborder-block-end-style) var{background-position:center}.sm\:bg-lefte{background-position:left}.sm\:bg-left-bottom{background-posre
+ * because Sass needs them.
+ */
+/**
+ * If you need non-English quotes, please alter the following values accordingly:
+ */
+/*-------------/----e headings(1, 3){

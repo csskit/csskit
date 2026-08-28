@@ -1,0 +1,22 @@
+\:pr-2\.5{padding-right:.625rem}.\32xl\:pr-3\.5{padding-right:.875rem}.\32xl.r-end-10{grid-column-end:10}.col-end-11{grid-column-end:11}.col-end-12{grid-column-end:2oc}1.l-end-13{grid-column-end:1-row-start:4}.row-start-5{grid-row-start:5}.row-start-6{grid-row-start:6}.row-start-7{grid-row-start:7}.row-start-auto{grid-ro|-start:auto}.row-end-1{grid-row-end:1}g-n6{left:-40px !i\:pb-0{direction: row; }
+  .menu.vertical {
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-orient: vertical;padding-bottom:0}.\32xl\:pb-1{padding-bottom:.25rem}.\32xl\:pb-2{padding-bottom:.5rem}.\32xl\:pb-3{padding-bottom:.75rem}.\32xl\:pb-4{padding-bottom:1rem}.\32xl\:pb-5{padding-bottom:1.25rem}.\32xl\:pb-6{padding-bottom:1.5rem}.\3direction: row; }
+  .menu.vertical {
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column; }
+    .menu.vertical.icon-top li a img,
+    .menu.vertical.icon-top li a i,
+    .menu.vertical.icon-top li a svg, .menu.vertical.icon-bottom li a img,
+    .menu.verti
+ cal.icon-bottom li a i,
+    .menu.vertic4xl\:pb-7{padding-bottom:1.75rem}.\32xl\:pb-8{padding-bottom:2rem}.\32xl\:pb-9{padding-bottom:2   -w.2ebkit-box-direction: normal;
+    -w5e

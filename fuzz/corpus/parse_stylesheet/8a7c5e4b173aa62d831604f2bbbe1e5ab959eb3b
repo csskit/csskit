@@ -1,0 +1,50 @@
+lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 0.25rem;
+  line-heitransparent;
+}
+
+.dropdown-toggle:empty::after {
+  margin-left: 0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  floa 5 Brands';
+  font-weight: th: 10rem;
+  paddin0 :g.5rem 0;
+  margin: 0  margin-bottom: 0.125rem;
+}
+
+.dropup         align-items flex-staown-toggle:empty::after {
+  margin-left: 0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  floa 5 Brands';
+  font-weight: 400; }
+@font-face {
+  fnmto-afily: 'Font Awesome 5 Free';
+  font-style:ix") format("embedded-o
+  min-width: rt; }
+
+.align-self-top {
+  -webkit-align-self: flex-start;
+   top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  float: left;
+  min-width: 10rem;
+  padding% 0.5rem 0;
+  margin: center;
+  -nw:

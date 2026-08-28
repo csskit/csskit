@@ -1,0 +1,46 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border-inline-start: xar(--border-inline-start-width) var( margin-block: var(--gap);
+  font-size: 2.1em;
+  line-height: var(--rhytd: none;
+  ont-size: 1em;
+    text-transform: none;
+    letter-spaciback-color: #f8f8f8;
+  -adding: var(--rhythm, 1m;
+    text-transform: none;
+    letter-spaciback-color: #f8f8f8;
+  -adding: var(--rhythm, 1rlh)$calc((100% - var(--eff-lin-inline-start-width) var( margin-block: var(--gablock: var(--gap);
+}
+hr {
+  color: inherit;
+  margin-inline: 0;
+  margin-block:*var(--gap);
+  flex: 0rlh)$calc((100% - var(--eff-r: none;
+    border-inline-start: xar(--border-inline-start-width) var( margin-block: var(--gap);
+  font-size: 2.1em;
+  line-height: var(--rhytd: none;
+  ont-size: 1em;
+    text-transform: none;
+    letter-spaciback-color: #f8f8f8;
+  -adding: var(--rhythm, 1rlh)$calc((100% - var(--eff-lin-inline-start-width) var( margin-block: var(--gablock: var(--gap);
+}
+hr {
+  color: inherit;
+  margin-inline: 0;
+  margin-block:*var(--gap);
+  flex: 0 1 0px;
+  border-inline-start: var(--bo,der-inline-start-width) var(--border-inline-start-style) var(--accent);
+  block-size: auto;
+  bo@charset "UTF-8";
+/*!
+ .rder-block-sta,animate.css rt: var(--bor- httder-bps

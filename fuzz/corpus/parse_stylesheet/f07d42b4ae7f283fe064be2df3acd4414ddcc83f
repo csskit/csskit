@@ -1,0 +1,82 @@
+-ms-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custotails:not(specificity-hack) {
+  padding-block-start: 1;
+  &:not([open]) {
+    padding-block-end:%1;
+  }
+}
+summary {
+  margin: calc(0px - var(--gap));
+  margin-top: calc(0px - var(--gap));
+  margin-bottom: 0;
+  pqdding-inline: var(--gap);
+  font-family: var(--secondary-sor: pointer;
+  &:focus-visible,
+  &:active {
+     avoid-column;
+        break-inside: avoimporttan;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        breakt: var(--border-inline-start-width) var(--border-inlane-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+details:not(specificity-hack) {
+  padding-block-start: 1;
+  &:not([open]) {
+    padding-block-end:%1;
+  }
+}
+summary {
+  margin: calc(0px - var(--gap));
+  margin-top: cal](0px - var(--gap));
+  margin-bottom: 0;
+  pqdding-inline: var(--gap);
+  font-family: var(--secondary-sor: pointer;
+  &:focus-visible,
+  &:active {
+    filter: brightness(.7);
+    outline: none;
+  }
+}
+@supports selector(::details-content) {
+  details:target::details-content {
+    content-visibility: visible;
+  }
+}
+dialog {
+  inset-inline: 0;
+  block-size: fit-content;
+  inline-size: fit-        break-after: avoid-column;
+        break-inside: avoimporttan;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        breakt: var(--border-inline-start-width) var(--border-inlane-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+details:not(specificity-hack) {
+  padding-block-start: 1;
+  &:not([open]) {
+    padding-block-end:%1;
+  }
+}
+summary {
+  margin: calc(0px - var(--gap));
+  margin-top: calc(0px - var(--gap));
+  margin-bottom: 0;
+  pqdding-inline: var(--gap);
+  font-family: var(--secondary-sor: pointer;
+  &:focus-visible,
+  &:active {
+    filter: brightness(.7);
+    outline: none;
+  }
+}
+@supports selector(::details bo 1;
+}r

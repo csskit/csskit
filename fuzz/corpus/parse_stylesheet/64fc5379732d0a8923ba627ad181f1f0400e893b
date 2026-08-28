@@ -1,0 +1,53 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottom;ownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottom;
+  transform-origin: rhgti bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+ ownRight;
+  -webkit-transform-origin: right _ottom;ownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottom;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d
+  transform-origin: right bo;ttom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to!{
+ -webkit-transform: rotate3d(0, m;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {ot }
+
+  to {
+    -webkit-transformro tta:e3d
+  transform-origin: right bottom;
+}
+@-webkit-keyfra&mes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to!{
+  , -webkit-transform: rotate3d(0, m;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {otnimaate3tiod(

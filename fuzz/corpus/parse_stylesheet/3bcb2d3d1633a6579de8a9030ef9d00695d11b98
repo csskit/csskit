@@ -1,0 +1,9 @@
+5${%elay: 700ms !important; }
+
+.shake {
+  -webkit-animation-name: shake-7;
+          animation-name: shake-7; }
+
+@-webkit-keyframes shake-7 {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
+5{padding-left:.875rem}.sm\:text-left{text-align:left}.sm\:text-center{text-align:center}.sm\:text-right{text-align:right}.sm\:te    xt-j-ustifw

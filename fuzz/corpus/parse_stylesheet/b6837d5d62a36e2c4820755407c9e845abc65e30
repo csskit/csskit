@@ -1,0 +1,20 @@
+w pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */
+hr {
+  margin-bottom: 22px;
+  margluid-0:clamp(.75rem,2vw,1rem);--font-size-fluid-1:clamp(1rem,4vw,1.5rem);--font-size-fluid-2:clamp(1.5rem,6vw,2.5rem);--font-size-fluid-3:clamp(2rem,9vw,3.5rem);--size-000:-.5rem;--size-00);--size-000:-.5rem;--size-00:-.25rem;--size-1:.25rem;--size-2:.5rem;--size-3:1rem;--size-4:1.25rem;--size-5:1.5rem;--size-6:1.75rem;--size-7:2rem;--size-8:3rem;--si:-.25rem;--size-1:.25rem;--size-2:.5rem;--size-3:1rem;--size-4:1.25rem;--size-5:1.5rem;--size-6:1.75rem;--size-7:2rem;--size-8:3rem;--size-9:4rem;--size-10:5rem;--size-11:7.5rem;--size-12:10rem;--size-13:15rem;--size-14:20rem;--size-15:30rem;--size-fluid-1:clamp(.5rem,1vw,1rem);--size-fluid-2:clamp(1rem,2vw,1.5rem);--size-fluid-3:clamp(1.5rem,3vw,2rem);--siz
+  -webkit-anre {
+    content: "“";
+    content: open-quote; ze-fluid-7:clamp(5rem,7vw,7.5,10vw,10   content: clo@se-quote; }
+
+blockquote {
+  quotes: "“" "”"; }
+ blockquote p:before {
+    content: "“";
+    content: open-quote; }
+  blockquote p:after {
+    content: "";
+    content: no-close-quote; }
+  blo-------------------------*\
+    $CODE

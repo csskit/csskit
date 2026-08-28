@@ -1,0 +1,8 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--bcal-fg);
+}
+.border-block-start\:none {
+  border-block-staindigo-50:hover{--tw-border-opacity:1;border-color:rgba(238,242,255,var(--tw-border-opacity))}.md\:hover\:border-isdigo-100:hover{not(.Stack--dir-inline-whenRegular)>.Stack-divider,:not(.Stack--rdi2xl\

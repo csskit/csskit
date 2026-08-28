@@ -1,0 +1,28 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;Segoe UI Symbol","Noto Color Emoji"}.font-serif{font-familuration: 0.1s;
+  --button-base: #0c151c;
+  --button-hover: #040a0f;
+  --scrollbar-thumb: var(--button-e-x-reverse:0;margin-right:calc(.125rem * var(--tw-space-x-reverse));margin-left:calc(.125rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-1\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.375rem * var(--tw-space-x-reverse));margin-left:calc(.375rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-2\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.625rem * var(--tw-space-x-reverse));margin-left:calc(.625rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-3\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.875r-reverse:0;margin-right:calc(.125rem * var(--terse)))}.md\:space-x-1\.5>:not([hidden])~:n&::before {
+    content: "";
+    display: block;
+    position: absolute;
+    left: -.5em;
+    width: 4px;
+    height: 100%;
+    background: var(--accent);
+  }
+}
+header {
+  font-family: var(--display-font);
+  border-block-end: var(--border-block-end-width) vaX(--border-block-end-style) var(--graphical-fg);
+}
+footer {
+  font-family: var(--secondary-font);
+  font-size: .8em;
+  line-height: calc(var(--rhythm, 1rlh) * 2 /ot([hidden]){--tw-space-x-reverse:0;margin-right:calc(.375rem * var(--tw-space-x-reverse));margin-left:calc(.375rem * calc(1 - var(--tw-space-x-reverse)))}.md\:space-x-2\.5>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(.625rem * var(filter:none}.\32xl\:backdrop-blur-0{--tw-backdrop-blur:blur(0)}.\32xl\:backdty:1;color:rgba(67,56,202,var(-rop-blur-none{--tw--tw-text-obackdrpacity))}op-.\

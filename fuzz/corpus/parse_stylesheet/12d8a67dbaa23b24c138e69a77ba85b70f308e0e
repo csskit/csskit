@@ -1,0 +1,28 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color:  top: auto; }
+  .tooltip.align-left::before {
+    left: 10%;
+    right: auto; }
+  .tooltip.align-right::before {
+    leftx-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-aligo: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  padding: 0.5rem;
+  -webkit-flex-wrap: wrap;
+  stacked-for-large {
+      -webkit-flex-wap: wrap;
+          -ms-flex-wrap: wrap;
+              flex-wrap: wrap; }
+      .top-bar.sta;
+  background-colocr: vaked

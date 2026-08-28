@@ -1,0 +1,6 @@
+e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:appearance-none{-webkit-amal-case{text-transform:none}.xl\:italic{font-style:italic}.xl\:not-italic{fppearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-content}.md\:auto-cols-max{grid-auto-columns:max-content}.md\:auto-cols-fr{grid-auto-columns:minmax(0,1min( camc( var(--full-width) - (2 * var(--rhythm, 1rlh)) ), var(--line-lengtrid-flow-col-dense{grid-auto-flow:column dense}.ml\:auto-ont-style:normal}.xl@\:diagonal-fractions,.xl\:lininrows-auto{grid-auto-rownt);
+  }
+}
+figure {
+  max-widthg-nums,: 10.1%;
+  max

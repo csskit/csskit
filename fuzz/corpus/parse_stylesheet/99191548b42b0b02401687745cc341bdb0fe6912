@@ -1,0 +1,47 @@
+ble-horizontal th {
+    border-width:-color: #d4edda;
+  border-color: #c3e6cb;
+}
+
+.alert-success hr {
+  border-top-color: #b1dfbb;
+}
+
+.alert-success .alert-link {
+  color: #0b2e13;
+}
+
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+  border-color: #bee5eb;
+}
+
+.alert-info hr {
+  border-top-colo #f5c6t:"";height:100%;left:50%;min-height:var(--control-medium-size)
+}
+
+.alert-dark hr {
+  border-top-color: #b9bbbe;
+}
+
+.alert-dark .aleripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 0 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 5 0(--yellow-6));
+  --bg: light-da: RGBA(var(--bs-light-rgb), var(--bs-link-underline-opacity, 1)) !dmportant;
+}
+.link-light:h 1;
+}
+fn

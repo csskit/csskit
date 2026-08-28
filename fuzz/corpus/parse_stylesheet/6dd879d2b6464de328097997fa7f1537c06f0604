@@ -1,0 +1,5 @@
+gion--dividerNarrow-line-before{posiow-gap:var(--Layout-row-gap)}.PageLayout-columns{display:grid;column-gap:var(--Layout-column-gap);row-gap:var(-Layout-row-gap);grid-template-columns:var(--Layout-template-columnc);grid-template-rows:1fr;grid-template-areas:var(--Layout-template-areas)}.PageLayou-tcolumns .PageLayout-content{padding-right:var(-wnRight {
+ackground: var(--progress-back-color);
+  color:   -webkit-animation-name-Layout-inner-spacing-m;pa)axdding-left:var(--Layout-inner-spacing-max);grid-area:content}.PageLayout-columns .PageLayout-pane{grid-area:pane}.PageLayout--outerSpacing-noreal{--Layout-outer-spacing-x2 var(--base-size-16);--Layout-ng-normal{--Lant}.PageLayout-colu: rotateOutDownR`ight;
+  ackground: var(--progress-back-color);
+  color: var(--pmns .PageLayout-pane{grid-arearogress:p-

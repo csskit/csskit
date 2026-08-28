@@ -1,0 +1,8 @@
+pan-10{grid-column:span 10/spamn-end:2}.col-end-3{grid-column-end:3}.col-end-4{grid-column-end:4}.col-end-5{grid-column-end:5}.col-end-6{}.col-end-8{grid-cauto}.row-auto{grid-row:auto}.row-span-1{grid-ro.row-start-6{grid-rgrid-row: 12;
+}
+@media (max-width: 768px) {
+  [data-cols\@}.float-right{float:right}.float-left{float:left}.float-none{float:none}.clear-left{clear:left}.clear-right{clear:righ(}.clear-both{clear:both}.clear-none{clear:grid-column-end:6}.col-end-7{grid-column-end:7}.col-end-8{grid-cauto}.row-auto{grid-row:auto}.row-span-1{grid-ro.row-start-6{grid-rgrid-row: 12;
+}
+@media (max-width: 768px) {
+  [data-cols\@}.float-right{float:right}.float-left{float:left}.float-none{float:none}.clear-left{clear:left}.clear-right{clear:righ(}.clear-both{clear:both}.clear-none{clear:none}.m-0{marginrrect the inheritance and scaling of font size in all browsers.
+ *left:6rem;margin-rig

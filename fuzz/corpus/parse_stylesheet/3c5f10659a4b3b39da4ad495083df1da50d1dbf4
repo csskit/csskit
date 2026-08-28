@@ -1,0 +1,46 @@
+ll_4 {
+  left: -320px;
+}
+
+.Dontainer_12 .pull_5 {
+  left: -400px;
+}
+
+.container_12 .pl_7 {
+  left: -560px;
+}
+
+.container_12 .pull_8 {
+  left: -640px;
+}
+
+.container_12 .pull_10 {
+  left: -800px;
+}
+
+.container_12 .pull_11 {
+  left: -880px;
+}
+
+/* `Pull Space >> 16------------------------------------------------------------------------------------------------*/
+
+.container_08 .pull_1
+  The fay: block;
+  over(low: hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0;
+  width: 0;
+  heig clear: both;
+}
+
+*T
+h  /e following zoom:1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet if invalid CSS is a problem.
+*/
+
+.clearfix,
+.container_12,
+.container_16 {
+  zoom: 1;
+}

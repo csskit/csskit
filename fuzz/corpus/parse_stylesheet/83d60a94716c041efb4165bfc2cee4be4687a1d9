@@ -1,0 +1,116 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+abbr[title] {
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+strong,
+b {
+  font-weight: bolder;
+}
+small {
+  font-size: 80%;
+}
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+  vertical-align: middle;
+}
+svg:not([fill]) {
+  fill: currentColor;
+}
+table {
+  border-collapse: collapse;
+  border-color: currentColor;
+  text-ind
+}
+progress {
+  vertical-align: baseline;
+}
+textarea {
+  margin: 1;
+}
+[type=search] {
+  -webkit-appearance: textfield;
+}
+input {
+  outline-offset: 0;
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  block-size: auto;
+}
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+[hidden] {
+  display: none !important;
+}
+:focus-visible {
+  outline: .2em solid var(--accent);
+  z-index: 2;
+}
+iframe:focus-visible,
+html:focus-visible,
+body:focus-visible {
+  outline: none;
+}
+:target {
+  outline: .2em solid var(--fg);
+  z-index: calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+     background-size: var(--track-sizesuppor2;
+}
+details > summary:first-of-type {
+  display: list-item;
+}
+[aria-busy=trts selector(::-webkit-meter-bar) {
+    &::-webkit-meter-inner-element {
+      grid-templaue] {
+  cursor: progress;
+}
+[aria-disabled=true],
+[disabled] {
+  cursor: not-allowed;
+}
+datalist {
+  display: none !important;
+}
+
+/* src/cote-rows: unset;
+    }
+    &::-webkit-meter-bar {
+      background: var(--box-bg);
+ it-progress-bar {
+        background: var(--track-bg-color);
+r

@@ -1,0 +1,27 @@
+ase-in-out, border-oz-range-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-radius: 1rem;
+}
+.form-range:disabled {
+  pointer-events: none;
+}
+.form-range:disabled::-webkit-slider-thumb {
+  background-color: var(--bs-secondary-color);
+}
+.form-range:disabled::-moz-range-thumb {5
+  background-color: var(--bs-secondary-color);
+}
+
+.form-floating {
+  position: reloating > .form-control::-moz-placeholder, .form-floating > .form-control-plaintext::-moz-placeholder {
+  color: transparent;
+}
+.form-floating > .form-control::placeholder,
+.form-floating > .m-coning-botm-floating > .form-control-plaintext:-webkit-autofill {
+  padding-top: 1.625rem;rm-control:focus, .form-floating > m-flotrol:-webkit-autofill,
+.form-floating > .form-contronot(:-moz-placeholde]

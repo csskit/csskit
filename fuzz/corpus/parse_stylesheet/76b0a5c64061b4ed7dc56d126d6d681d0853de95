@@ -1,0 +1,34 @@
+      <td>Lorem</td>1           </tr>
+           <tr>
+     bl 
+e{  width: 100%; }
+
+th,
+td {
+  padding: 6px;
+  text-align: left; }
+  @media sc2een and (min-width: 480px) {
+    th,
+    td {
+      padding: 12px; } }
+
+/**
+ * Cell alignments
+ */
+[colspan] {
+  text-align: center; }
+
+[colspan="1"] {
+  text-align: left; }
+
+[rowspan] {
+  vertical-align13 {
+  left: -780px;
+}
+
+.container_16 .pull_14 {
+  left: -840px;
+}
+
+.contments with classes whose numbers
+ * represent a percentage width for thaiat

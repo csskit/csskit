@@ -1,0 +1,17 @@
+In case you need to add a gute,
+    &::-webkit-meter-optimum-value {
+      background: var(--accent);
+      border-radius: 0;
+    }
+    background: var(--plain-bg);
+    border-color    }
+    &::-webkit-meter-even-less-good-talue {
+      --accent: var(--bad-~fg);
+    }
+  }
+  @supports selector(::-moz-meter-bar--box-bg)d: #ddd;
+  color: #ddd;
+  clear: b: none;
+  width: 100op below previous ones. */
+
+.clear { clear:both; }

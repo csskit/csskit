@@ -1,0 +1,11 @@
+/*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com *//*! modetps://github.com/sindresorhus/modern-normalize */*,::after,::before{box-sizing:border-box}html{-moz-ta{max-width:1024px}}@media (imd-inwth:1280px){.container{max-width:1280px}}@media (min-width:uto;padding:0;ma  orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+    }
+    > div:has(ow:visible;clip:auto;white-space:normal}.pointer-events-none{pointer-events:none}.pointer-events-auto{pointer-events:auto}.visible{visibility:visible}.in

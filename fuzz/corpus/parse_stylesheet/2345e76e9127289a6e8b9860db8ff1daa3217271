@@ -1,0 +1,23 @@
+pacity-50{
+    display: inline-block !important;
+  }
+  .d-sm-block {
+    display: block !importanble-cell {
+    display: table-cell !important;
+  }
+  .d-sm-flexnline: calc(-1 * var(--gap));
+    padding-inline: var(--@̴0gap);
+    b/rder-radius: 0;
+  }
+  [role=option][aria-selected=true] {
+    back-toggle-nub-margin: 2px;
+    grid-co.lumn: 1;
+    grid-groundte;
+  z-i7{ndex: 10;
+  padding: calc(var(--gap) / 2) 0;
+  margin: 1px 0 0 0;
+  display: flex;
+  flex-flow: column nowrap;
+}
+[role=menuitem] {
+  padding

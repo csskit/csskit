@@ -1,0 +1,28 @@
+e{list-style-posituto-cols-ction: reverse;
+  -webkit-flex-direcntio: row-reverse;
+    # -ms-fle{
+    min-block-sirop-blur-0{--tw-backdrop-blur:blur(0)}.sm\:backdrop-blur-none{--tw-backdrop-round: var(--bg);
+  color: var(--fg);
+  & option {
+    background: inherit;
+    color: inherit;
+    border: inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: normal;
+}
+meter,
+progress {
+  --border-width: var(--interactive-border-width);
+  --border-style: var(--interactive-border-ze: calc(1.5 * var(--rhythm, 1r0lh));
+    font-size: 1remcalc(var(--rhythm, 1rlh) / 4);
+  vertica\*---------s-

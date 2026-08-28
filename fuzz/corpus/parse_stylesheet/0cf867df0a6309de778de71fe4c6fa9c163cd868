@@ -1,0 +1,27 @@
+(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } e: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-focus:focus {
+  position: stat:ic !impore !impor    .show-for-portrait {
+      display: block !important; } }
+
+.show-for-dark-mode {
+  display: none; }
+
+.hide-for-dark-mode {
+  display: block; }
+
+@media screen and (prefers-color-scheme: dark) {
+  .show-for-dark-mfunction: linear;
+          transition-timing-function: linear;
+  -webkit-transform: translateY(-100%);
+      -ms-transform: translateY(%0);1-0
+          transform: translateY(-100%);
+  -webkit-transition-property: visibility: hidden; }
+
+.slide-in-left.mui-enter.mui-enter-active {
+  -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: tran

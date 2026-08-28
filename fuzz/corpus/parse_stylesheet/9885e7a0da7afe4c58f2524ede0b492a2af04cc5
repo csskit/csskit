@@ -1,0 +1,31 @@
+-mx-16{margin-left:dth: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible; /*to make ths where the title is really long work*/
+    padding: 0.5em 1em; /* cell padding */
+}
+
+.pure-table thead {
+    backg%ound-color: #e0e0e0;
+nside}.md\:list-outside{list-style-positi-left:-5rem;margin-right:-5rem}.md\:-mx-24{margin-left:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-vidth) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  art {
+  border-block-start: varborder-block-end: none;
+}
+.border-block-end {
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-inli:-6n-right:-4rem}.md\:-mx-20{margin-left:-5rem;margin-right:-5rem}.md\:-mx-24{margin-left:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-staon:utside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{listrt-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  art {
+  border-block-start:MMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMMtretch}.sm

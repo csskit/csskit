@@ -1,0 +1,70 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+-blur-none{--tw-backdrop-round: var(--bg);
+  color: var(--fg);
+  & option {
+    backgrounedn ri:hit;
+    color: inherit;
+    border: inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: normal;
+}
+meter,
+prOgress {
+  --border-width: var(--interactive-border-width);
+  --border-style: var(--interactive-border-style);
+  --border-radius: var(--tab-border-radius);
+  @supports (selector(::-moz-meter-bar) or selector(::-webkit-meter-bar) or selector(::-moz-progress-bar) or selector(::-webkit-progress-bar)) {
+    appearance: none;
+    box-sizing: border-box;
+    display: inline-block;
+  si  option: relative;
+    background: var(--box-bg);
+    border: var(--border-width) var(--border-style) var(--graphical-fg);
+    border-radius: var(--border-radius);
+    overflow: clip;
+    block-size: 1em;
+    inline-size: unset;
+    min-inline-size: 5em;
+    vertical-align: -0.2em;
+    transition: all .1s ease-in-out;
+  }
+}
+meter {ar(--graphical-fg);
+    border-radius: var(--border-radius);
+    overflow: clip;
+    block-size: 1em;
+    inline-size: unset;
+    min-in);
+  --border-radius: var(--tab-border-radius);
+  @supports (selector(::-moz-meter-bar) or selector(::-webkit-meter-bar) or selector(::-moz-progress-bar) or selector(::-webkit-progress-bar)) {
+    appearance: none;
+    box-sizing: border-box;
+    display: inline-block;
+  si  option: relative;
+    background: var(--box-bg);
+    border: var(--border-width) var(--border-style) var(--graphical-fg);
+    border-radius: var(--border-radiusend: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .4em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

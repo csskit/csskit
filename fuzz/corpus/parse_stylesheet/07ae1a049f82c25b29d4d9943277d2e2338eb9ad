@@ -1,0 +1,26 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:80px) {
+    th,
+    td {
+      padding: 12px; } }
+
+/**
+ * Cell alignments
+ */
+[colspan] {
+  text-align: center; }
+
+[colspan="1"] {
+ -offset:2px}.sm\:outline-white{outline:2px dotted white;outline-offset:2px}.sm\:outline-black{outline:2px dotted black;outline-offset:2px}.sm\:focus-within\:outline-none:focus-within{outline:2px solid transparent;outline-offset:2px}.sm\:focus-within\:outline-white:focus-within{outline:2px dotted white;outline-offset:2px}.sm\:focus-within\:outline-black:focus-within{outline:2px dotted black;outline-offset:2px}.sm\:focus\:outline-none:focus{outline:2px solid transparent;outline-offset:2w-shadow:0 25px 50px -12px rgba(tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.sm\:focus\:shadow-inner:focus{--tw-shadow:inset 0 2px 4px 0 rgba(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.sm\:focus\:shadow-none:focus{--tw-shadw-shadowransparent;outline-offset:2px}.sm\:outline-white{outline:2px dotted wow:0 0 #0000;box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.sm\:outline-none{outline:2px solid transparent;outline-offset:2px width: 45%; }
+
+.t50 {
+  width: 50%; }
+
+/* 1/2 */
+.t55 {
+ et 0 1px 3px hsla(0,0%, width: 55%; }
+
+.t60 {
+  width0%,0.16);}.progress__bar{hei: 60%; }
+
+.tgh6t2 

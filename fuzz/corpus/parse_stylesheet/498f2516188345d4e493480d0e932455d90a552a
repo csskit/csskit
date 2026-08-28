@@ -1,0 +1,58 @@
+5${%elay: 700ms !important; }
+
+.shake {
+  -webkit-animation-name: shake-7;
+          animation-name: shake-7; }
+
+@-webkit-keyframes shake-7 {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
+5{padding-left:.875rem}.sm\:text-left{text-align:left}.sm\:tht: 0;
+  position: relative;
+  veror);
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calc(var(--universal-pa0.5rem;
+  --universal-border-radius: 0.125rem;
+  --a-link-col}
+
+p {
+  margin: var(--unive000000000000000000rsal-margin);
+}
+
+ol, ul {
+  margin:us: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 5) calc(var(--universal-padding) / 2);
+}
+
+kbd {
+  background: var(--fore-color);
+  color: var(--back-color);
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calc(var(--universal-padding) / 2);
+}
+
+pre {
+  overflow: auto;
+  background: var(--secondary-back-color);
+  padding: calc(1.5 * var(--universal-padding));
+  margin: var(--universal-margin);
+  border: 0.0625reor: #0277bd;
+  --a-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+  font-size: 1em;
+}
+
+html, * {
+  fo {
+  background: var(--fore-color);
+  color: var(--back-color);
+  border-radius: var(--universal-bordea-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;ext-center{text-align:center}.sm\:text-right{text-align:right}.sm\:te    xt-j-ustifw

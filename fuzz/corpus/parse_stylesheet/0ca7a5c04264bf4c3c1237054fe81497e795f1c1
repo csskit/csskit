@@ -1,0 +1,92 @@
+black{--treen-300{--tw-border-opacity:1;border-color:rgba(110,231,183,var(--tw-border-opacity)
+    flex: 1 0 0%;
+  }
+  .row-cols-sm-auto > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .row-cols-sm-1 > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .row-cols-sm-2 > * {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .row-cols-sm-3 > * {
+    flex: 0 0 auto;
+    width: 33.3333333333%;
+  }
+  .row-cols-sm-4 > * {
+    flex: 0 0 auto;
+    width: 25%;
+  }
+  .row-cols-sm-5 > * {
+    flex: 0 0 auto;
+    width: 20%;
+  }
+  .row-cols-sm-6 > * {
+    flex: 0 0 auto;
+    width: 16.6666666667%;
+  }
+  .col-sm-auto {
+    flex: 0 0 auto;
+  emibold, auto;
+  }
+  .coanimation-timing-function: ease-out;
+  }
+
+ & 50% {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1)
+      translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+    transform: perspeoctive(400p) scale3d(1, 1, 1) traQslate3d(0, 0, 150px)
+      rotate3d(0, 1, 0, -170deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-itming-function: ease-in;
+  }
+
+  80% {
+    -webkit-transform: perspective(400px) scale3d(0.95, 0.95, 0.95)
+      translate3d(0, 0, 0) rotate3d(0, 1, 0, 0deg);
+    transform: perspective(400px) scale3d(0.95, 0.95, 0.95) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 0deg);
+    -webkit-animation-timing-function: ease-in;
+    animation-timing-fu:oi ntncease-in;
+  }
+
+  to {
+    -webkit-transform: perspective(400px	 scale3d(1, 1,:1;border-color:rgba(110,231,183,var(--tw-border-opacity)
+    flex: 1 0 0%;
+  }
+  .row-cols-sm-auto > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .row-cols-sm-1 > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .coanimation-timing-function: ease-out;
+  }
+
+ & 50% {
+    -webkit-transform: perspective(400px) scale3d(1, 1, 1)
+      translate3d(0, 0, 150px) rotate3d(0, 1, 0, -170deg);
+    transform: perspeoctive(400p) scale3d(1, 1, 1) traQslate3d(0, 0, 150px)
+      rotate3d(0, 1, 0, -170deg);
+: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(4 41.66666667%;
+}
+
+.offset-6 {
+  margin-le00pxft: 50%;
+}
+
+.offset) -7ro

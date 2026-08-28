@@ -1,0 +1,30 @@
+ractions,.md\:lining-nums,.md\:oldstyle-nums,.md\:ordinal,.md\:proportional-nums,.md\:slashed-zero,.md\:stacked-fractions,.md\:tabular-nums{--tw-ordinal:var(--tw-empty, );/*!*//*!*/-@charset "UTF-8";
+/*!
+ * animate.css - https://animate0style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}[.animate__animated {
+  -webkit-animation-durition: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animate-duration);
+  animation-duration: var(--animate-duration);
+  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animate__animated.animate__infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.animate__animated.animate__repeaordinal{--tw-ordinal:ordinal}.md\:slashed-zero{--tw-slashed-zero:slashed-zero}.md\-height:1.375}.md\:leading-normal{line-height:1.5}.md\:leading-relaxed{line-height:1.625}.md\:leading-loose{line-height:2}.md\:tracking-tighter{letter-spacing:-.05em}.md\:trackight:1.625}.md\:leading-loose{line-height:2}.md\:tracking-tighter{letter-spacing:-.05em}.m\td:racking-tight{letter-spacing:-.025em}.md\:tracking-normal{letter-nite;
+}
+.animate__animated.animate__repeat-1 {
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-count: 1;
+  -webkspacing:0}.md\it-animation:tracking-wide-ite{l

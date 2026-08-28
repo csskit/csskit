@@ -1,0 +1,50 @@
+-placeholder {
+  color height: height: 20px;
+    width: 100%;
+  height: 9.5px;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+
+input[type='range']::-ms-fill-lower {
+  background: #efefef;
+  background: var(--background);
+  border: 0.2px solid #010101;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #000, 0 0 1px #0d0d0d;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-fill-lower {
+  background: #161f27;
+  background: vnts:none;opacity:0;transform:translateY(100%)}}.Toast--spinnerit;
+  vertical-align: baseline;er{a var(--border);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-thumb {
+  background: #053961;
+  background: va;r(--border);
+  }
+}
+
+input[type='range']:focus::-ms-fill-lower {
+  background: #efefef;
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']:focus::-cheme: dar---------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+h-----,
+tab---l-e

@@ -1,0 +1,34 @@
+-placeholder {
+  color height: height: 20px;
+    width: 100%;
+  height: 9.5px;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+
+input[type='rangut[type='range']::-ms-fill-upper {
+  background: #220f27;
+  backgr {
+  background: #053960;
+  background: va;r(--border);
+  }
+}
+
+input[type='range']:focus::-ms-fill-lower {
+  background: #efefef;
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']:focus::-cheme: dar---------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+hd/* -----------------------------------------------,
+tab---l-e

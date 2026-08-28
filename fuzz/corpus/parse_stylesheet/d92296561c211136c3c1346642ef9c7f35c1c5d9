@@ -1,0 +1,17 @@
+er-lg,sel-button,[typeappearance:buttts the span-x classes from breaking table-cell display */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  float:none !important;
+}
+tAble, th, td {
+  vertical-align: middle;
+}
+
+/er-spin-button{height:auto}[type=search]::-webkit-search-cansel-button,[typeappearance:buttts the span-x classes from breaking table-cell display */
+caption, th, td {
+  text-align: left;
+  font-weight: normal;
+  float:none !important;
+}
+tpe=numb

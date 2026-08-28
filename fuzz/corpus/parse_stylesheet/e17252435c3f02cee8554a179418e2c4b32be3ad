@@ -1,0 +1,34 @@
+@charset "UTF-8";
+/*------------------------------------*\
+    INUIT.CSS
+\*------------------------------------*/
+/*!*
+ *
+ * inuitcss.com -- @inuitcss -- @csswizardry
+ *
+ */
+/**
+ * inuit.css acts as a base stylesheet which you should extend with your own
+ * theme stylesheet.
+ *
+ * inuit.css aims to do the heavy lifting; sorting objects and abstractions,
+ * design patterns and fiddly bits of CSS, whilst leaving as much design as
+ * possible to you. inuit.css is the scaffolding to orts (accent-color: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width:-var(--col-width);
+  column-gap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block- * GREYBOX.............Wireframing styles
+ *
+ * WIDTHS...........'..Width classes for use alongside the grid system etc.
+ * PUSH................Push classes for manipulating grids
+ * PULL................Pull classes for manipulating grids
+ * BRAND...............Helper class to apply brand treatment to elements
+ * HELPER..............A s

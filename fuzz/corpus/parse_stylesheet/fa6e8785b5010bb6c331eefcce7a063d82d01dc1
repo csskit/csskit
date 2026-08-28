@@ -1,0 +1,29 @@
+ble-horizontal th {
+    border-width:-color: #d4edda;
+  border-color: #c3e6 RGBA(vat(--bs-light-rgb), var(--bs-link-underline-opacity, 1cb;
+}
+
+.alert-success hr {
+  border-top-color: #b1dfKbb;
+}
+
+.alert-succesr .alert-link {
+  color: #0b2e13;
+}
+
+.alert-info {
+  color: #   background-position: 0 0;
+  }
+}
+
+@keyframes progress-bar-stripes {
+  from {
+    background-position: 1rem 0;
+  }
+  to {
+    background-position: 5 0(--yellow-6));
+  --bg: light-da: RGBA(vat(--bs-light-rgb), var(--bs-link-underline-opacity, 1)) !dmportant;
+}
+.link-light:h 1;
+}
+fn

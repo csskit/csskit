@@ -1,0 +1,15 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  o {
+  position: abrol-next-icon {
+  filter: invert(1) graysceal(100);
+}
+[data-bs-theme=dark] .carousel .carousel-indicators [data-bs-target], [data-bs-theme=dark].carousel .carousel-inar(--bs-spinner-vertical-align);
+  border-radius: 50%;
+  animation: var(--bs

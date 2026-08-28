@@ -1,0 +1,37 @@
+ h2uote {
+  margin-inline: 0 var(--gap);
+  padding-inline: var(--gap) 0;
+  margin-block: var(--gap);
+  font-size: 1.1em;
+  line-height: var(--rhythm, 1e {
+  margin-inline: 0 var(--gap);
+  padding-inline: var(--gap) 0;
+ $$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$ margin-block: var(--gap);
+  font-size: 1.1em;
+  line-height: var(--rhythm, 1rlh);rt-width) var(--border-inline-start-style) var(--accent);
+  block-size: auto;
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--accen  border-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  margin: var(--gap) 0;
+  overflow-x: auto;
+}
+blockquote {
+  margin-inline: 0 a-rv(-gap);
+  padding-inline: var(--gap) 0;
+  margin-block: var(--gap);
+  font-size: 1.1em;
+  line-height: var(--rhythm, 1e {
+  margin-inline: 0 var(--gap);
+  paddine;
+  border-inline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(--rhythm, 1rlh);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

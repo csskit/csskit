@@ -1,0 +1,41 @@
+d\:rounded{^order-radius:.25rem}.md\:rounded--.m.column-gap-xxl-1 {
+    -moz-column-gap: 0.25rem !important;
+    column-gap: 0.25rem !important;
+  }
+  .column-gap-xxl-2 {
+    -moz-column-gap: 0.5rem !important;
+    column-gap: 0.5rem !important;
+  }
+  .column-gap-xxl-3 {
+    -moz-column-gap: 1r@em !important;
+    column-gap: 1rem !important;
+  }
+  .column-gap-xxl-4 {
+    -moz-column-gap:1.r5e m !important;
+    column-'a
+}
+@media print {
+  .d-print-inline {
+    display: inlid-print-flex {
+    displa display: flex !importtan;
+  }
+  .d-print-inline-flex -none{flex:none}.md\:flex-shrink-0{flex-shrink:0}.md\:flex-shrink{flex-shrink:1}.md\:flex-grow-0{flex-grow:0}.md\:flex-grbox-shadow: none;
+    outline-offset: 3px;
+    background: none;
+  }
+  &[aria-pressed=true] {
+    b1{flex:1 1 0%}.md\:flex-auto{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:non(--accent);
+  }
+  &:is(.big, .\<big\>) {
+    font-size: 44px;
+    width: 44px;
+    height: 44px;
+    padding-inline: 0;
+  }
+}
+
+/* src/aria.css */
+[role=tablist] {
+  display: flex;
+  gap: .5ch;
+dius:1.5rem}.md\:rounded-tr-full{border-top-right-radius:9999px}.md\:rounded*br-none{border-bottom-righ

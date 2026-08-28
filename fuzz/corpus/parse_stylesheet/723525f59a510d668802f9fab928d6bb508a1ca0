@@ -1,0 +1,34 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textacurrent{border-color:currentColor}.\32xl\:border-black{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.\32xl\:border-white{--tw-border-opacity:1;border-color:rgba(255,255,255,var(--tw-border-opacity))}.\32xl\:border-gray-50{--tw-border-opacity:1;border-color:rgba(249,250,251,var(--tw-border-opacity))}.\32xl\:border-gray-100{--tw-border-opacity:1;border-color:rgba(ba(var(--bs-warning-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-danger {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-light {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-dark {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-dark-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-black {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-black-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-white {
+  --bs-text-opacity: 1;
+  :border-l-8{border-left-width:8px}.\32xl\:border-l{border-left-width:1px}color: rgba(var(--bs-white-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-body {
+  --bs-text-opacity: 1;
+  color: rgb.\32xl\:border-solid{border-style:solid}.\32xl\:border-dashed{border-style:dashed}.\32xl\:border-dotted{border-style:dotted}.\32xl\:border-double{border-style:double}.\32xl\:border-none{border-style:none}.\32xl\:border-transparent{border-color:transparent}.\32xl\:border-current{border-color:a(var(--bs-body-color-rgb), var(--bs-text-opacity)) !importcurrentColor}.\32xl\:bordear-black{--tw-bont;
+r

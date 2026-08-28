@@ -1,0 +1,8 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    t-right-radius:0;inset:0 0 0 auto}.Overlay.Overlay--height-xsmall{height:min(192px,100vh - 2rem)}.Overlay.Overlay--height-small{height:min(256px,100vh - 2rem)}.Overlay.Overlay--height-medium{height:min(320px,100vh - 2rem)}.Overlay.Overlay--height-large{height:min(432px,100vh - 2rem)}.Overlay.Overlay--height-xlarge{height:min(600px,sform:scale(1)}}.Overlay-form{flex-gro1;overflow68, 1) 0s 1 normal none runnickground: none;
+  bor

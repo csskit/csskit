@@ -1,0 +1,28 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.form-control:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0 center(;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+        -

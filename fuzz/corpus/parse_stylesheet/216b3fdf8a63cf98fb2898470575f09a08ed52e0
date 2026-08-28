@@ -1,0 +1,53 @@
+er-lg, .navbar-expand-lg > .container-xl {
+    -ms-flex-wrap: nowraublic domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2p;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collap/* http://meyerweb.com/eric/toolT/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, "lockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, heaform-control-lg {
+  min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 2));
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: var(--bs-border-radius-lg);
+}
+.oo-nfmrctrol-lg::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  margin: -0.5rem -1rem;
+  -webkit-margin-en1.5em + 1rem + calc(var(--bs-border-width) * 2));
+  padding: 0.5rem 1rem;
+nof  t-size: 1.25rem;
+  border-radius: var(--bs-border-radius-lg);
+}
+.form-control-lg::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  margin: -0.5rem -1rem;
+  -webkit-margin-end: 1rem;
+  margin-inliadius);
+}
+.form-control-color::-webkit-color-swatch {
+  border: 0 !important;
+  border-radius: -(-abvrs-border-radius);
+}
+.form-control-color.form-control-sm {
+  height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2)l-color.form-control-lg {
+-exg/2pand-xl > 0

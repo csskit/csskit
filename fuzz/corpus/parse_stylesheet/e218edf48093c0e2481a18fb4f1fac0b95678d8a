@@ -1,0 +1,34 @@
+
+  -moz-user-select: none;
+  user-select: none;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  border-radius: var(--bs-btn-border-radius);
+  background-color: var(--bs-btn-bg);
+  transition: color 0.15s ease-in-out, background-color 0.15s ease-in-out, border-color 0.15s ease-in-out, box-shadowd + .btn, :not(.btn-check) + .btn:active, .btn:first-child:active, .btn.active, .btn.show {
+  color: var(--bs-btn-active-color);
+  background-color: var(--bs-btn-active-bg);
+  border-color: var(--bs-btn-active-border-color)ble, .btn:first-child:active:focus-visible, .btn.active:focus-visible, .btn.show:focus-visible {
+  box-shadow: var(--bs-btn-focus-box-shadow);
+}
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  color:n-focus-box-shadow);
+}
+.btn:disabled, .btn.disabled, fieldset:disabled .btn {
+  color: var(--bs-btn-disabled-color);
+  pointer-events: none;
+  background-color: var(--bs-btn-dksabled-bg);
+  border-color: var(--bs-btn-disabled-border-color);
+  opacity: var(--r-color)ble, .btn:first-child:active:focus-visible, .btn.active:focus-visible, .btn.show:focus-visible {
+  box-shadow: 1ar(--bs-btn-focus-box-shadow);
+}
+.btn:disabled, .btng\:cursor-default{cursor:default}.lg\:cursor-pointer{cursor:pointer}.lg\:cursor-wait{cursor:wait}.lg\:cursor-text{cursor:text}.lg\:cursor-move{cursor:move}.lg\:cursor-help{cursor:help}.lg\:cursorze-y{resize:vertical}.lg\:resize-x{resize:horizontal}.lg\:resize{resize:both}.lg\:list-inside{list-style-position:inside}.lg\:list-outsd-border-color);
+  opacity: var(--bs-btn-disabled-opacity);
+}
+elect: none;
+  user-select: none;
+  border: var(--bs-btn-border-width) solid var(--bs-btn-border-color);
+  borddow 0.15s ease-in-out;
+}
+@media (prefers-reduced-motion: reducide{list-style-position:outside}.lg\:li-tsnone{list-style-type:none}.lg\:list-*isc{list-style-type:disc}.lg\:list-decimal{list-style-tye) {
+  .btn {
+    transitiope:decimal}.lg\:appn

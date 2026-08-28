@@ -1,0 +1,35 @@
+.5{max-height:.375rem}.md\:max-h-2\.5{might:0}.md\:min-h-full{min-height:100%}.md\:min-h-screen{min-height:100vh}.md\:w-0{width:0}.md\:w-1{wi:w-24{width:6rem}.md\:w-28{width:7rem}.md\:w-32{width:8rem}.md\:w-36bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbargin-left: 0;
+  mbbbbbbbbbbbbbbbbbbbbbbargin-lefdth:10rem}.md\:w-44{width:11rem}.md\:w-48{width:12rem}.md\:w-52{width:13rem}.md\:w-56{width:14rem}.md\:w-60{wi-screen-2xl{max-width:1536px}.md\:fl125rem 0.0625rem; }
+
+.code-block {
+  border: 0px solid #cacaca;
+  background-color: #e6e6e6;
+  font-family: Consolas, "Liberation Mono", Courier, monospace;
+  font-weight: normal;
+  color: #0a0a0a;
+  display: block;
+  overflow: auto;
+  white-space: pre;
+  padding: 1rem;
+  ma
+  .medium-text-center {
+    text-align: center; }
+  .medium-text-justify {
+    text-align: justify; } }
+
+@media print, screen and (min-width: 64em) {
+  .large-text-left {
+    text-align: left; }
+  .large-text-right {
+    text-align: right; }
+  .large-text-center {
+    text-align:isplay: table-header-group; }
+  tr,
+  img {
+    page-break-inside: avoid; }
+  img {
+    m-axwidth: 100% !important; }
+  @page {
+    mduration);
+  animation-duraex-1{flex:1 1 0%}.md\:flex-auto{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:none}.md\:flex-shrink-0{flex-shrink:0}.md\:flex-shrink{flex-shrtion: var(--animate-duration);
+  -webkinit-ank:1}

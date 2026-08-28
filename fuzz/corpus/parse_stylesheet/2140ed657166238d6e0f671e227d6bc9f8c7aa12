@@ -1,0 +1,21 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottom;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, m;
+  transform {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    -webkit-transform: rotate3d(0, 0, 1, -45deg);
+teIty:0;transform:translateY(100%)}}.Toast--animateOut{a    transform: rotnimaate3tiod(

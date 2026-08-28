@@ -1,0 +1,24 @@
+medium-auto {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0;
+        -ms-flex: 1 1 0px;
+            flex: 1 1 0;
+    width: auto; }
+  .grid-x > .medium-shrink, .grid-x > .medium-1, .grid-x > .medium-2, .grid-x > .medium-3, .grid-x > .medium-4, .grid-x > .medium-5, .grid-x > .medium-6, .grid-x > .medium-7, .grid-x > .medium-8, .grid-x > .medium-9, .grid-x > .medium-10, .grid-x > .medium-11, .grid-x > .medium-12 {
+    -webkit-box-flex: 0;
+    -webkit-flex: 0 0 auto;
+        -ms-flex:ebkit-box-flex: 1;
+    -webkit-flex: 1 1 0;
+        -ms-flex: 1 1 0px;
+            flex: 1 1 0;
+    width: auto; }
+  .grid-x > .medium-shrink, .grid-x > .medium-1, .grid-x > .medium-2, .grid-x > .medium-3, .grid-x > .medium-4, .grid-x >webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    -webkit-anilation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06)on: cubic-bezier(0.215, 0.61, th: 75%; }
+  .grid-x > .medium-10 {
+    wid0.355, 1);
+  th: 

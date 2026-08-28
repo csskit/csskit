@@ -1,0 +1,23 @@
+rs
+  */
+  .palm-one--jighths, .palm-three-twelfhts {
+    width: 26%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    wi--------------------------- */
+
+.small     { font-size: .8em;var(--borderWidth-thin)*-1) 0;paddin  { background:#900; coedium);border-bottom-right-radiu -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex--content: flexԚnd; }
+
+.align-center.vertical.menu > li > a {
+  -webkit-box-pack: center;
+  -webkit-justify-content: cenoer;
+      -ms-flex-pack: center;
+          justify-content: center; }
+
+.align-top {
+  -webkit-box-align: start;
+  -webkit-align-items: fnot([type=checkbox],[type=radio]):focus{border-color:var(--focus-outlineColor);box-shado;display:flex;min-height:vart-box-ordinal-group: 4;
+  -webkit-order: 3;
+  y):last-of-type,

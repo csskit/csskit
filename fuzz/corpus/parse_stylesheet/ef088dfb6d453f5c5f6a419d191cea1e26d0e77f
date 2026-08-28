@@ -1,0 +1,13 @@
+switch-paddle {
+    background: #1779ba; }
+    input:ch left: 2.25rem; }
+  inabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0\0; }
+  [data-e::after {
+      left: 2.25rem; }
+  inabled ~ .switch-paddle {
+0; }
+
+.switlute;
+  topp.

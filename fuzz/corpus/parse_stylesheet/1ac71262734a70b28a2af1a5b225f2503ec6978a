@@ -1,0 +1,104 @@
+adow: none;
+    color: var(--accent);
+    text-decoration: underline;
+  }
+}
+[role=tabpanel] {
+  margin-block-start: 0;
+  border-start-start-radius: 0;
+  border-start-end-radius: 0;
+  z-index: 1;
+}
+[role=menu] {
+  position: absolute;
+  z-index: 10;
+  padding: calc(var(--gap) / 2) 0;
+  margin: 1px 0 0 0;
+  display: flex;
+  flex-flow: column nowrap;
+}
+[role=menuitem] {
+  padding: 0 calc(var(--gap) / 2
+    --temporary-accent: var(--muted-accent);
+    --temporary-muted-accent: var(--box-bg);
+    background: var(--temporary-bg);
+    color: var(--temporary-fg);
+    > * {
+      --bg: var(--temporary-bg);
+      --fg: var(--temporary-fg);
+      --accent: var(--temporary-accent);
+      --muted-accent: var(--temporary-muted-accent);
+    }
+  }
+}
+[aria-orientation=vertical] {
+  flex-direction: column;
+  width: fit-content;
+  text-align: center;
+}
+input[type=checkbox][role=switch] {
+  all: unset;
+  appearance: none;
+  display: inline-grid;
+  vertical-align: middle;
+  grid-template-columns: repeat(2, 1rem);
+  aspect-ratio: 2 / 1;
+  margin-block: auto;
+  &::beforn 2;
+    grid-row: 1;
+    border: var(--interactive-border-width) var(--interactive-border-style) var(--graphical-fg);
+    background: var(--bg);
+    border-radius: 9999rem;
+  }
+  &::after {
+    --toggle-nub-margin: 2px;
+    grid-column: 1;
+    grid-row: 1;
+    margin: var(--toggle-nub-margin);
+    border-radius: 99999rem;
+    background: var(--graphical-fg);
+  }
+  &:checked {
+    &::before {
+      border-color: var(--accent);
+      background: var(--accent);
+    }
+    &::after {
+      transform: translateX(calc(100% + 2 * var(--toggle-nub-margin)));
+      background: var(--bg);
+    }
+  }
+  &:indeterminate {
+    &::before {
+      border: var(--interactive-border-width) var(--interactive-border-style) var(--interactive-bg);
+    }
+    &::after {
+      transform: translateX(calc(50% + var(--toggle-nub-margin)));
+      background: var(--interactive-bg);
+    }
+  }
+  &:is(label > *):not(#specificity-hack) {
+    margin-block-end: auto;
+  }
+  &:not(label > *) {
+    padding-block: calc(var(--gap) / 4 + (var(--rhythm, 1rlh) - 1em) / 2);
+  }
+  :is(label:has(> &)) {
+    display: flex;
+    gap: var(--gap);
+    flex-direction: row;
+  }
+  :is(label:has(+ &)) {
+    width: 100%;
+  }
+}
+
+/* src/colorways.css */
+.plain {
+  --box-bg: var(--plain-bg);
+  --acceeractive-bg);
+    }
+    &::after {
+      transform: translateX(cafg);
+}
+.border-block\

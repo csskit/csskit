@@ -1,0 +1,21 @@
+-placeholder {
+  color height: height: 2ackground: var(--background);
+  border: 0.2px solid #010101;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #000,  #000, 0 0 1px #0d0d0d;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-fill-lower {
+  background: #161f27;
+eak-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:right;border-width:1porm-control-lg::file-selector-butmd\:p-6{px 0 1px 1px;background-position:right 10px popt71 x;}.messages + .messages{margin-top:1.538em;}.messages__list{margin:0op:0.769em;}.messages--status{color:#325e1cadding:1.5re;border-color:#c9e1bd #c9e1bd #c9e1bd transparent;background-color:#f3faef;background-image:url(/themes/contrib/bootstrap1/css/components/../../border: 0.2px solid #010101;
+  border-radius: 3px;
+  box-shadow: 1px 1px 1px #000, 0 0 1px #0d0drop-brightness-110{--tw-backdrop-brightness:brightness(1.1)}.\32xl\:backdrop-brightnes0d;
+}
+
+@medias-125 (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-fill-lower {
+  background: #161f27;
+eak-word{--tw-ba;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-align:right;border-width:1porm-cockdrop-brintrol

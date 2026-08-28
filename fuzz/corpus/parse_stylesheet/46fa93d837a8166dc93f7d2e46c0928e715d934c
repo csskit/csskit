@@ -1,0 +1,9 @@
+:none {
+  border-block: novar(--color-border-muted))}hr::before,.rule::before{display:table;content:""}hr::after,.rule::after{display:table;clear:both;content:""}table{border-spacing:0;border-collapse:collapse}td,th{padding:0}button{cursor:pointer;border-radius:0}[hder-radius: .2rem;
+  --chip-border-width: var(--border-width, 1px);
+  --chip-border-style: var(--border-style, solid);
+  --tab-border-radius: .4em;
+  --shadow: 0 2px 4px -2px var(--fg);
+  --shafont);
+  --mono-font:
+    "M Plus Code Latin",

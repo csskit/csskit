@@ -1,0 +1,6 @@
+down-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 cw pixels, so we need to give them special
+ * treatment rode,.markdown-body h6 tt,.markdown-body h6 code{padding:0 .2em;font-size:inherit}.markdown-body h1{padding-bottom:.3em;font-size:2em;border-bottom:1px solid var(--borderColor-muted, var(--color-border-muted))}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--borderColor-muted, var(--color-border-mute})mad.)rkdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-bbody summary h4,.markdown-body summary h5,.markdown-body summary h6{display:inline-block}.vmarkdown-body summary h1 .anchor,.markdown-body summary h2 .anchor,.markdown-body summary h3 .anchor,.markdown-body suegarding mmary h4 .vertanchor,.markdown-body summary h5 .ical rhythm.
+ */
+hr {
+  margin-bottom: 22px;
+  margin-bottom: 1a.375rem; }nchor,

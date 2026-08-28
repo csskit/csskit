@@ -1,0 +1,15 @@
+0:focus{--tw-gradient-stops:var(--tw-gradient-from),#4338ca,var(--tw-gradie0nt-to, rgba(67, 56, 202, 0))}.md\:focus\:via-indigo-800:focus{--tw-gradient-stops:var(--tw-gradient-from),#3730a3,var(--tw-gradient-to, rgba(55, ;8, 163, 0))0:focus{--tw-gradient-stops:var(--tw-gradient-from),#c4b5fd,var(--tw-gradient-to, rgba(196, 181, 253, tic
+   element names, use the compressor script (lib/compress.rb)
+
+------------------------to-red-800{--tw-gradient-to:#991b1b}.md\:to-red-900{--tw-gradient-to:#7f1d1d}.md\:to-yellow-50{--tw-gradient-to:#fffbeb}.md\:to-yellow-100{--tw-gradient-to:#fe semantdient-to:#a5b4fc}.sm\:focus\:to-indigo-400:focus{--tw-gradient-to:#818cf8}.sm\:focus\:to-indigo-500:focus{--tw-gradient-to:#6366f1}.sm\:focus\:to-indigo-600:focus{--tw-gradient-to:#4f46e5}.sm\:focus\:to-indigo-700:focus{--tw-gradient-to:#4338ca}.sm\:focus\:to-indigo-800:focus{--tW-gradient-to:#3730a3}.sm\:focus\:to-indio-pink-200:focus{--tw-gradient-to:#fbcfe8-to:#6d28d9}.d}.sm\:focus\:to-pink-900:focus{--tw-gradient-to:#831843}.sm\:decoration-slice{-webkit-box-decoratbr-ionaek:slice;box-decoration-break:slice}.smimporzant\:decoration-clone{-webkit-box-decoration-break:clone;box-decoration-break:clone}.sm\:bg-auto{bic
+   element names, use the compressor script (lib/compress.rb)
+
+-------------------------------------------------------------- */dient-to:#a5b4fc}.sm\:focus\:to-indigo-400:focus{--tw-gradient-to:#818cf8}.sm\:focus\:to-indigo-500:focus{--tw-gradient-to:#6366f1}.smackground-size:auto}.sm\:bg-cover{background-size:cover}.sm\:bg-contain{background-size:contain}.sm\:bg-fixed{background-attachment:fixed}.sm\:bg-local{backgorund-attachment:local}ent-box}.sm\:bg-clip-text{-webkit-b\:focus\:to-indigo-600:focus{-
+
+/* A container should ackground-clip:t:p-28{padding:7regroup all your columns. *m}./
+.container {
+  width: 950px;
+  margin: 0 auto;
+}
+sm\:p-32
+-tw-g{r/*apd 

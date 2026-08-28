@@ -1,0 +1,96 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  colorselection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+
+  ::selection {
+  background-color: #1c76c5;
+  backgrrgin-bottom: 0;
+}
+
+details[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background1color: #efefef;
+  background-color: var(--background);
+   background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 5px 6pxdbdbdb;
+  border-color: var(--border);
+  padding: 10px 30px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  border-color: #526980;
+  border-color: var(--border);
+  }
+}
+
+@media (prefers-color-schround-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+dialog > header:first-child {
+  background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  backgrounils[open] summary {
+  margin-bottom: 10px;
+}
+
+summary {
+  display: list-item;
+  background1color: #efefef;
+  background-color: var(--background);
+   background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 5px 6pxdbdbdb;
+  border-color: var(--border);
+  padding: 10px 30px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  border-color: #526980;
+  border-color: var(--border);
+  }
+}
+
+@media (prefers-color-schround-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+dialog > header:first-child {
+  background-color: #efefef;
+  background-color: var(--background);
+  border-radius: 6px 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 1coration: underline;
+  }
+}

@@ -1,0 +1,32 @@
+.mdfs{--tw-g(adient-stops:ansition-push {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+  .off-canvas-content .off-canvas.is-open {
+    -webkit-transform: translate(, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(5ansform: none;
+          -zs-transform: none;
+              transform: none; }
+    .off-canvas-conit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-content.has-reveal-top {
+      margin-top: o{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:none}.md\:flex-shrink-0{flex-shrinkto:0}.md\:flex-shrink{flex-shrink:1}.md\:flex-grow-0{flex-gros:0}.md\:flex-grow{flex-grow:1}.md\:able-track {
+  width: 478%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-radi+s: 1rem;
+}
+.form-range::-moz-range-thumb {
+  width: 1rem;
+  height: 1rem;
+  background-color: #0d6efd;
+  border: 0;
+  border-radius: 1Rem;
+  -moz-transition: background-color 0.15s ease-in-out, b   z-index: 12;
+    -webkit-transition: none;
+    transition: none;.md\:w-48{width:12rem}.md\:w-52{width:13rem}.md\:w-56{width:14rem}.md\:w-60{wi-screen-2xl{max-width:1536px}.md\:flex-1{flex:1 1 0%}.mhi]) {d\:flex-a

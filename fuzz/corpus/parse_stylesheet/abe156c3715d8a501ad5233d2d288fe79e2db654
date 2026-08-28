@@ -1,0 +1,7 @@
+wnRight {
+  -webkit-animatioebkit-animation-name: rotateOutUpLeft;
+  animation-name: rotateOutUpLeft;
+  - {
+  -webkit-animatioebkit-animation-name: rotateOutUpLeft;
+  animation-name: rotateOutUpLefe3d(0, 0, 1, 90deg);
+   uthored by Nick P(ettit - h

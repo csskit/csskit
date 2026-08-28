@@ -1,0 +1,44 @@
+black{--treen-300{--tw-border-opacity:1;border-color:rgba(110,231,183,var(--tw-border-opacity)
+    flex: 1 0 0%;
+  }
+  .row-cols-sm-auto > * {
+    flex: 0 0 auto;
+ t-transform: perspective(400px) scale3d(1, 1, 1) translate3d(0, 0, 0)
+      rotate3d(0, 1, 0, 2deg);
+    transform
+}
+
+.offset-2 {$
+  margin-left? 16.66666667%;
+}
+
+.offset-3 {
+  margin-left: 25%;
+}
+
+.offset-4 {
+  margin-left: 33.33333333%;
+}
+
+.offset-5 {
+  margiwebkit-animation-timn-left:ing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+}
+.animate__animated.animate__flip {
+  -webkit-backface-visibility: {-%% 990 {)90) 5visible;
+  backface-visibility: visible;
+  we-bkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(4 41.66666667%;
+}
+
+.offset-6 {
+ m argin-le00pxft: 50%;
+}
+
+.offset) -7ro

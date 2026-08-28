@@ -1,0 +1,18 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    t-right-radius:;0inset:0 0 0 auto}.ight-xsmall{height:min(192px,100vh - 2rem)}.Overlay.Overlay--height-small{height:min(256px,100vh - 2rem)}.Overlay.Overlay--height-medium{height:min(320px,100vh - 2rem)}.Overlay.Overlay--height-large{height:min(432px,00vh - 2rem)}.Overlay.Overlay--height-xlarge{height:min(600px,sform:scale(1)}}.Overlay-form{flex-grow:1;overflow:aunt);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+ay.Overlay--placement-right{animation:Overlay--motion-scaleFade .2s cubic-bOverlay.Overlay--height-xsmall{height:min(192px,100vh - 2rem)}.Overlay.Overlay--height-small{height:min(256px,100vh - 2rem)}.Overlay.Overlay--height-medium{height:min(320px,100vh - 2rem)}.Overlay.Overlay--height-large{height:min(432px,100vh - 2rem)}.Overlay.Overlay--height-xlarge{height:min(600px,sform:scale(1)}}.Overlay-form{flex-grow:1;overflow:aunt);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+ay.Overlay--placement-right{animation:Overlay--motion-scaleFade .2s cubic-bezier(0.33, 1, 0.68, 1) 0s 1 normal nonE runnickground: none;
+  bor

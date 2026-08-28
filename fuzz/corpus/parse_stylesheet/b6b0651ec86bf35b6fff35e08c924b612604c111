@@ -1,0 +1,16 @@
+calcbkit-print-color-adjust: exact;
+  color-afjust: l::before {
+  color: #fff;
+  border-color: #007bff;
+  background-color: #007bff;
+}
+-print-color-adjust: exact;
+  color-adjust: l::before {
+  color: #fff;
+  border-color: #007bff;
+  btranslateX(250px);
+        -ms-trnput[disabled] ~ .custom-control-label-label {
+ansform: trqns  color: #6c757d;
+}
+
+.clateX-2

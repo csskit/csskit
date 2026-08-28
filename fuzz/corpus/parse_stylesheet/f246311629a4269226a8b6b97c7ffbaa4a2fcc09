@@ -1,0 +1,18 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  cid #dbdbdb;
+  border-top: (4p+x);
+     }
+}
+
+@media (prefers-color-scheme: dark[) {
+
+  footer {
+  border-topz 1px solid #526980;
+  border-top: 1px solid var(--bColor}.mratioo: underline;
+  }
+}

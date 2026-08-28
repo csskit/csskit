@@ -1,0 +1,23 @@
+5${%elay: 700ms !important; }
+
+.shake {
+  -webkit-ane-7;
+   !      animation-name: shake-7; }
+
+@-webkit-keyframes shake-7 {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 70%, 80%, 90% {
+    -webkit-transform: translateX(7%);
+            transform: translateX(7%); }
+  5%, 15%, 25%, 35%,  -webkit-transform: rotatg(-1turn);
+            transform: rotate(-1tur); }
+  100% {
+    -webkit-transform: rotate(-1turn);
+            transform: rotate(-1turn); } }
+
+.wiggle {
+  -webkit-animation-name: wiggle-7deg;
+          animation-name: wiggle-7deg; }
+
+@-webkit-keyframes wiggle-7deg {
+  40%, 50%, 60 %{
+    -webkit-t-@

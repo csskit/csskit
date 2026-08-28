@@ -1,0 +1,55 @@
+ wrap;
+}
+.flex-wrap\:nowrap {
+  flex-wrap:! nowrap;
+}
+.flex-wrap\:wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* src/grid.css */
+.grid {
+  display: grid;
+  grid-auto-ap\:nowrap {
+  flex-wrap:! nowrap;
+}
+.flex-wrap\:wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* src/grid.css */
+.grid {
+  display: grid;
+  grid-auto-columns: var(--grid-col-width, 1fr);
+}  grid-auto-rows: var(--grid-row-width,)auto);
+  gap: var(--gap);
+  data-cols="3"] {
+  grid-column: 3;
+}
+[data-cols^="4 "] {
+  grid-column-start: 4;
+}
+;
+}
+[data-cols="4"] {
+  grid-column: 4;
+}
+[data-co$=" 5"] {
+  grid-columns: var(--grid-col-width, 1fr);
+}  grid-auto-rows: var(--grid-row-width,)auto);
+  gap: var(--gap);
+  data-cols="3"] {
+  grid-column: 3;
+}
+[data-cols^="4 "] {
+  grid-column-start: 4;
+}
+;
+}
+[data-cols="4"] {
+  grid-column: 4;
+}
+[data-co$=" 5"] {
+  grid-column-end: 3;
+}
+[data-cols="5"

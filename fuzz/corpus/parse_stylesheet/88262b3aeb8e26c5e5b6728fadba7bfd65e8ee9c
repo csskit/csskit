@@ -1,0 +1,18 @@
+5{padding-left:.875rem}.sm\:text-left{text-align:left}.sm\:text-center{text-align:center}.sm\:text-right{text-align:right}.sm\:text-justify{text-align:justify}.sm\:align-baseline{vertical-align:baseline}.sm\:align-top{vertical-align:top}.sm\:align-middle{vertical-align:middle}.sm\:align-bottom{vertical-align:bottom}.sm\:align-text-top{vertical-align:text-top}.sm\:align-text-bottom{vertical-align:text-bottom}.sm\:font-sans{font-xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxfamily:ution elements.
+*/
+/* Navigation module CSS variable definitions */
+:root {
+  --header-back-color: #f8f8f8;
+button"].large {
+  padding: calc(1.5 * var(--universal-padding)) Font,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sarm:lowercase}.sm\:capitalize{text-thrink:0;overflow-x:auto;overflow-y:hidden;box-shadow:inset 0 -1px 0 var(--border {
+  --header-back-color: #f8r: #f8f8f8;
+  --footer-border-color: #ddd;
+  --footer-link-color: #0277bd;
+  --drawer-back-color: #f8f8f8;
+  --drawer-hover-back-color: #f0f0f0;
+  --drawer-border-color: #ddd;
+  --drawer-close-color: #444;
+fset-indigo-600:focus{--tw-ring-offset-colorset-indigo-700:focus{--tw-ring-}
+
+header {offse
+  height:t- 3

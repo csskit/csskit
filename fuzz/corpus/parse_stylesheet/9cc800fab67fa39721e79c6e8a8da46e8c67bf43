@@ -1,0 +1,60 @@
+\:group-hover\:border-yellow-500{--tw-border-opacdow)}.md\:shadOw-lg{--tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1),04px 6px -2px rgba(0, 0, 0, 0.05);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-over], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(varless-good-value,
+    &::-webkit-meter-subground: var(--accent);
+      borde7-radius: 0;
+    }
+    &:-moz-meter-optimum {
+      --box-bg: var(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphic`l-fg);
+    }
+    &:-moz-meter-sub-optimum {
+      --box-bg: var(--warn-bg);
+      --accent: var(--warn-fg);
+      --graphical-fg: var(--warn-graphical-fg);
+    }
+    &:-moz-meter-sub-sub-optimum {
+      --box-bg: var(--bad-bg);
+      --accent: var(--bad-fg);
+      --graphical-fg: var(--bad-graphical-fg);
+    }
+  }
+}
+progress {
+  @supports selector(::-moz-progress-bar) {
+    &::-moz-progress-bar {
+      backgroundr{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-end{align-self:flex-ow-scroll{overflow:scroll}.sm\:overflow-x-auto{overflow-x:auto}.sm\:overflow-y-auto{overflow-y:auto}.sm\:overflow-x-hidden{overflow-x:hidden}.sm\:ellipsi: var(--accent);
+      border-radius: 0;
+    ion > .custom-file:nth-last-child(n + 3) .custom-file-label::aftCer {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group-prepend,
+.input-group-append {
+  display: -ms-flexbox;
+  display: flex;
+}
+
+.input-group-prepend .btn,
+.input-group-append .btn {
+  position: relative;
+  z-index: 2;
+}
+
+.input-group-prepend .btn:focus,
+.input-group-append .btn:focus {
+  z-index: 3;
+}
+
+.input-group-prepend .btn + .btn,
+.input-group-prepend .btn + .input-flow-y-visible{overflow-y:visible}.sm\:overflow-x-scroll{overflow-x:scroll}.sm\:overflow-y-scroll{overflow-y:scroll}.sm\:overscroll-auto{oversborder-inline-starcroll-behavior:a-bult

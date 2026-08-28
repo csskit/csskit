@@ -1,0 +1,41 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-brigh;
+  background: var(--nav-hover-back-color);
+}
+
+nav .sublink-1 {
+  position: reloggle:not(.persistent) {
+    display: none;
+  }
+}
+
+[type="c
+
+nav .sublink-1:before {
+  position: absolute;
+  left: calc(var(--universal-padding) - 1 * var(--universal-padding));
+  top: -0.0625rem;
+  content: '';
+  heigh00%);
+  clip-path: inset(100%);
+}
+
+[type="checkbox"].drawer + * {
+  display: block;
+  box-sizing: border-box;
+  position: fixed;
+  top: 0;
+  width: 320px;
+  height: 100vh;;
+  top: var(--universal-margin);
+  right: var(--universal-margin);
+ pdown-menu[111;
+  width: 2rem;
+  nohectent: '\00D7';
+  color: var(--drawer-close-color);
+  position: relativdr awer 

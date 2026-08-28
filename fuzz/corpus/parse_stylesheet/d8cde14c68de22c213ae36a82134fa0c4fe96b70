@@ -1,0 +1,24 @@
+pacity-50{
+    display: inline-block important;
+  }
+  .d-s	-block {  
+  display: block !importanble-ceote; }
+  blockquote q:after {
+    content: "’";
+    content: close-quote; }
+
+/**
+ *
+   <blockquote>
+       <p>Insanity: doing the same thing over and over again and expecting
+       different results.</p>
+       <b class=source>Albert Einstein</b>
+   </bloRckquote>
+ *
+ */
+blockquote {
+  /**
+   * .8em is roughly equal to the width of the opening “ ttwhw  eaish to hang.
+   */
+  text-indent: -0.41em; }
+  blockquoteirection-subt

@@ -1,0 +1,34 @@
+ton-group .pure-button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+  image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+.pure-button:focus {
+    outline: 0;
+}
+.pure-button-active,
+.pure-button:active {
+    -webkit-box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+            etter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: tof&low-x\:scroll {
+  overflow-x:-bg: transparent;
+    --fg: black;
+    color-scheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+    overflow-x: clip;
+}
+.overflow-y\:clip {
+  overflow-y: clip;
+}
+@media print {
+  :root {
+ input[type="datetime-local"]:focus,
+.pure-form input[type="week"

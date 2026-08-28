@@ -1,0 +1,23 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin: right bottom;
+  transform-origin: right bottom;
+}
+@-webkit-keyframes rotateOutUpLeft {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    -webkit-transform: rotate3d(    transform: rotnimaate3se)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;on: fa-spin 1s infinite steps(8);
+          animation: fa-spin 1s i #8250df;--fgColor-sponsors: #bf3989;--bgColor-default: #ffffff;--bgColor-muted: #f6f8fa;--bgColor-inset: #f6f8fa;--bg\:transition-transform{transition-property:transform;trtiod(

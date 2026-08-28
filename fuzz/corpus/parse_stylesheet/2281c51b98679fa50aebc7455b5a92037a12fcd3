@@ -1,0 +1,25 @@
+e:focus,
+.show > .btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0r: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+ #color: #ff[f;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark:focus, .btn-dark.focus {
+  lor: #23272b;
+  border-color: #1d2124;
+}
+k.focus {
+  color: #fff;
+  background-c{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{t% {{{{{{{{{{{{{{{9{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{olor: #23272b;
+  border-color: #1d2124;
+  box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+}
+
+.be0d):not(.disabled):active:focus, .btn-outlin:focus,
+.show > .btn-outli)ne-t: p"

@@ -1,0 +1,114 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decoration: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: break-word;
+  -webkit-tap-highlight-color: transparent;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+abbr[title] {
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+strong,
+b {
+  font-weight: bolder;0: #f8f0fc;
+  --purple-1: #f3d9fa;
+  --purple-2: #eebefa;
+  --purpl-3: #e599f7;
+  --purple-4: #da77f2;
+  --puill]) {
+  fill: currentColor;
+}
+table {
+  border-collapse: collapse;
+  border-color: currentColor;
+  text-ind
+}
+progress {
+  vertical-align: baseline;
+}
+textarea {
+  margin: 1;
+}
+[type=search] {
+  -webkit-appearance: textfield;
+}
+input {
+  outline-offset: 0;
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  block-size: auto;
+}
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+[hidden] {
+  display: none !important;
+}
+:focus-visible {
+  outline: .2em solid var(--accent);
+  z-index: 2;
+}
+iframe:focus-visible,
+html:focus-visible,
+body:focus-visible {
+  outline: none;
+}
+:target {
+  outline: .2em solid var(--fg);
+  z-index: 2;
+}
+details > summary:first-of-type {
+  display: list-item;
+}
+[aria-busy=true] {
+  cursor: progress;
+}
+[aria-disabled=true],
+[disabled] {
+  cursor: not-allowed;
+}
+datalist {
+  display: none !important;
+}
+
+/* src/core/colors.css */
+:root {
+  --gray-0: #f8fafb;
+  --gray-1: #f2f4f6;
+  --gray-2: #ebedef;
+  --gray-3: #e0e4e5;
+  --gray-4: #d1d6d8;
+  --gray-5: #b1b6b9;
+  --gray-6: #979b9d;
+  --gray-7: #7e8282;
+  --gray-8: #666968;
+  --gray-9: #50514f;
+  --gray-10: #3a3a37;
+  --gray-11: #252521;
+  --gray-12: #121210;
+  --red-0: #fff5f5;
+  --red-1: #ffe3e3;
+  --red-2: #ffc-0: #e6fcf5;
+  --teal-1: #c3f
