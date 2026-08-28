@@ -763,10 +763,6 @@ FAIL shorthands/0021
 -a{border-width:1px;border-style:solid;border-color:red;border-image:url(border.png)30 round}
 +a{border:1px solid red;border-image:url(border.png) 30 round}
 
-FAIL shorthands/0022
--a{border-image:url(border.png)30 round;border:1px solid red}
-+a{border:1px solid red}
-
 FAIL shorthands/0023
 -a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:#0000}
 +a{border:4px solid #0000;border-image:url(border.png) 30 round}
@@ -778,10 +774,6 @@ FAIL shorthands/0024
 FAIL shorthands/0025
 -a{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif;font-feature-settings:"smcp"1}
 +a{font:italic 700 16px/1.5 Arial,sans-serif;font-feature-settings:"smcp" 1}
-
-FAIL shorthands/0026
--a{font-variant-numeric:tabular-nums;font:italic 16px/1.5 Arial,sans-serif}
-+a{font:italic 16px/1.5 Arial,sans-serif}
 
 FAIL shorthands/0027
 -a{font-style:normal;font-weight:400;font-size:14px;line-height:1.4;font-family:Georgia,serif;font-kerning:none}
@@ -795,17 +787,9 @@ FAIL shorthands/0029
 -a{mask-image:linear-gradient(#000,#0000);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
 +a{mask:linear-gradient(#000,#0000) no-repeat;mask-border:url(mask.png) 25 round}
 
-FAIL shorthands/0030
--a{mask-border:url(mask.png)25 round;mask:linear-gradient(#000,#0000)}
-+a{mask:linear-gradient(#000,#0000)}
-
 FAIL shorthands/0031
 -a{font-variation-settings:"wght"600,"wdth"75;font-style:normal;font-weight:400;font-size:18px;line-height:1.6;font-family:Inter,sans-serif}
 +a{font:18px/1.6 Inter,sans-serif;font-variation-settings:"wght" 600,"wdth" 75}
-
-FAIL shorthands/0032
--a{font-weight:bold;font:14px serif}
-+a{font:14px serif}
 
 FAIL shorthands/0033
 -a{margin-top:10px!important;margin-right:20px;margin-bottom:10px;margin-left:20px}
@@ -830,34 +814,6 @@ FAIL shorthands/0037
 FAIL shorthands/0038
 -a{position-try-order:normal;position-try-fallbacks:flip-block,--custom}
 +a{position-try:flip-block,--custom}
-
-FAIL shorthands/0039
--a{border-top:1px solid blue;border:2px solid red}
-+a{border:2px solid red}
-
-FAIL shorthands/0040
--a{border-block-start:1px solid blue;border-block:2px solid red}
-+a{border-block:2px solid red}
-
-FAIL shorthands/0041
--a{padding-inline-start:10px;padding-inline:20px}
-+a{padding-inline:20px}
-
-FAIL shorthands/0042
--a{margin-top:10px;margin:20px}
-+a{margin:20px}
-
-FAIL shorthands/0043
--a{border-top-width:1px;border-width:2px}
-+a{border-width:2px}
-
-FAIL shorthands/0044
--a{border-top-color:blue;border-top:2px solid red}
-+a{border-top:2px solid red}
-
-FAIL shorthands/0045
--a{inset-block-start:10px;inset-block:20px}
-+a{inset-block:20px}
 
 FAIL shorthands/0046
 -a{background-color:red;background-image:linear-gradient(red,tan);background-position-x:100%;background-position-y:100%;background-repeat:no-repeat;background-attachment:fixed;background-size:contain;background-origin:padding-box;background-clip:content-box}

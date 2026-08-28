@@ -134,9 +134,14 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	pub fn clear_pending_edits(&self, span: Span) -> bool {
 		let mut edits = self.edits.borrow_mut();
 		let len_before = edits.len();
-		edits.retain(|edit| match edit {
-			TransformEdit::Replace { target, .. } | TransformEdit::Delete { target } => target != &span,
-			_ => true,
+		edits.retain(|edit| {
+			let inner = match edit {
+				TransformEdit::Replace { target, .. } | TransformEdit::Delete { target } => *target,
+				TransformEdit::InsertBefore { anchor, .. } | TransformEdit::InsertAfter { anchor, .. } => {
+					Span::new(*anchor, *anchor)
+				}
+			};
+			!(span.start() <= inner.start() && inner.end() <= span.end())
 		});
 		len_before != edits.len()
 	}
