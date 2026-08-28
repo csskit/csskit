@@ -51,6 +51,36 @@ is dropped. Allocator-aware owners still drop their values normally, but the
 underlying storage remains. The arena can be reset, which rewinds the cursor,
 or dropped, which releases any Owned underlying storage to a pool for re-use.
 
+## Features
+
+The crate has no default features. The allocator itself is always available.
+
+- `collections`: the arena-backed `Box`, `Vec`, and `String`, plus the `vec_in!`
+  and `format_in!` macros.
+- `serde`: serialization for those collections (implies `collections`).
+
+### Why not the `allocator_api2` collections?
+
+`allocator_api2::boxed::Box` and `allocator_api2::vec::Vec` work with `&Arena`
+and are the right choice for general use, but the `collections` feature of this
+crate provides the same types with some subtle but important differences:
+
+- **Stable layout.** Every type is `#[repr(C)]`. This is important for bindings,
+  as the layout can be read from other runtimes.
+- **32-bit lengths.** `Vec` and `String` count elements in `u32`, halving the
+  header size of an AST node. This makes sense given the Arena's limitation of
+  ~2GB owned size, but this comes with the perhaps obvious limitation that
+  these cannot grow above `u32::MAX` elements.
+- **No deallocation.** Dropping a collection never calls `deallocate`, because
+  the arena releases everything at once. `Vec` and `String` also never run
+  element destructors, so `T` must not own resources outside the arena. `Box`
+  does run the destructor of the value it holds.
+- **Panic, not abort.** Exhausting the arena panics, which parsing can unwind
+  from. The `allocator_api2` collections call `handle_alloc_error`, which
+  aborts the process.
+- **`Sized` only.** There is no unsizing coercion, so no `Box<dyn Trait>` and no
+  `Box<[T]>`. Cloning is supported, since each value keeps its allocator.
+
 ## Raw transfer
 
 On supported targets, the arena reserves one region beginning at a 4 GiB-aligned

@@ -1,7 +1,6 @@
 use crate::Arena;
 use crate::raw_vec::RawVec;
 use allocator_api2::alloc::Allocator;
-use css_lexer::{Span, ToSpan};
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::ops::{Deref, DerefMut};
@@ -212,6 +211,34 @@ impl<'a, T, A: Allocator> Vec<'a, T, A> {
 		drop(g);
 	}
 
+	/// Remove consecutive elements that compare equal, keeping the first of each run.
+	pub fn dedup(&mut self)
+	where
+		T: PartialEq,
+	{
+		if self.raw.len < 2 {
+			return;
+		}
+		let base = self.raw.ptr.as_ptr();
+		let mut write = 1usize;
+		for read in 1..self.raw.len as usize {
+			// SAFETY: `read` is below the length, and every index below `write` holds a live element that
+			// was either never moved or written by an earlier step of this loop.
+			let duplicate = unsafe { *base.add(read) == *base.add(write - 1) };
+			if duplicate {
+				// SAFETY: as above; the element is live and is not read again.
+				unsafe { base.add(read).drop_in_place() };
+				continue;
+			}
+			if write != read {
+				// SAFETY: as above; `write` is behind `read`, so the read and the write do not alias.
+				unsafe { base.add(write).write(base.add(read).read()) };
+			}
+			write += 1;
+		}
+		self.raw.len = write as u32;
+	}
+
 	/// Remove the elements in `range`, yielding them by value. Elements after the range are shifted
 	/// down to fill the gap when the returned [`Drain`] is dropped.
 	///
@@ -361,20 +388,6 @@ impl<'a, T, A: Allocator, I: std::slice::SliceIndex<[T]>> std::ops::IndexMut<I> 
 impl<'a, T: Hash, A: Allocator> Hash for Vec<'a, T, A> {
 	fn hash<H: Hasher>(&self, state: &mut H) {
 		(**self).hash(state);
-	}
-}
-
-impl<'a, T: ToSpan, A: Allocator> ToSpan for Vec<'a, T, A> {
-	fn to_span(&self) -> Span {
-		let mut span = Span::ZERO;
-		for item in self.iter() {
-			if span == Span::ZERO {
-				span = item.to_span();
-			} else {
-				span = span + item.to_span();
-			}
-		}
-		span
 	}
 }
 
@@ -705,6 +718,30 @@ mod test {
 		v.extend([0, 1, 2, 3, 4, 5, 6, 7]);
 		v.retain(|&x| x % 2 == 0);
 		assert_eq!(&*v, &[0, 2, 4, 6]);
+	}
+
+	#[test]
+	fn dedup_collapses_consecutive_runs_only() {
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
+		v.extend([1, 1, 2, 3, 3, 3, 1, 1]);
+		v.dedup();
+		assert_eq!(&*v, &[1, 2, 3, 1]);
+	}
+
+	#[test]
+	fn dedup_leaves_short_and_distinct_vectors_alone() {
+		let alloc = Arena::new();
+		let mut v: Vec<i32> = Vec::new_in(&alloc);
+		v.dedup();
+		assert!(v.is_empty());
+		v.extend([1, 2, 3]);
+		v.dedup();
+		assert_eq!(&*v, &[1, 2, 3]);
+		let mut same: Vec<i32> = Vec::new_in(&alloc);
+		same.extend([7, 7, 7]);
+		same.dedup();
+		assert_eq!(&*same, &[7]);
 	}
 
 	#[test]
@@ -1056,21 +1093,5 @@ mod test {
 			assert_eq!(v.pop(), Some(()));
 		}
 		assert_eq!(v.pop(), None);
-	}
-
-	#[test]
-	fn parsing_beyond_default_arena_capacity_does_not_panic() {
-		use crate::{ComponentValues, EmptyAtomSet, Parser};
-		use css_lexer::Lexer;
-
-		let source = "a ".repeat(16_384);
-		let result = catch_unwind(AssertUnwindSafe(|| {
-			let arena = Arena::new();
-			let lexer = Lexer::new(&EmptyAtomSet::ATOMS, &source);
-			let mut parser = Parser::new(&arena, &source, lexer);
-			let _ = parser.parse_entirely::<ComponentValues>();
-		}));
-
-		assert!(result.is_ok(), "arena exhaustion must not abort parsing");
 	}
 }

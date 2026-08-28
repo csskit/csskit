@@ -19,7 +19,8 @@ bench = false
 [dependencies]
 csskit_proc_macro = { workspace = true }
 css_lexer = { workspace = true }
-csskit_arena = { workspace = true }
+csskit_arena = { workspace = true, features = ["collections"] }
+source_tools = { workspace = true, features = ["csskit_arena"] }
 
 allocator-api2 = { workspace = true }
 smallvec = { workspace = true }
@@ -44,7 +45,7 @@ testing = []
 # Easter egg feature for CSS expansion (opposite of minification)
 egg = ["css_lexer/egg"]
 miette = ["dep:miette", "dep:thiserror", "css_lexer/miette"]
-serde = ["dep:serde", "dep:serde_json", "css_lexer/serde"]
+serde = ["dep:serde", "dep:serde_json", "css_lexer/serde", "csskit_arena/serde"]
 fancy = ["miette", "miette/fancy-no-backtrace"]
 # Test only features
 _dhat-heap-testing = []

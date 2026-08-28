@@ -17,10 +17,13 @@ bench = false
 
 [dependencies]
 allocator-api2 = { workspace = true }
+csskit_arena = { workspace = true, optional = true }
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }
 
 [features]
 default = []
 miette = ["dep:miette"]
+# The `ToSpan` impls for the `csskit_arena` collections.
+csskit_arena = ["dep:csskit_arena", "csskit_arena/collections"]
 serde = ["dep:serde"]

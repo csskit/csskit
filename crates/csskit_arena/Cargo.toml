@@ -17,6 +17,13 @@ bench = false
 
 [dependencies]
 allocator-api2 = { workspace = true }
+serde = { workspace = true, features = ["derive"], optional = true }
+
+[features]
+default = []
+# The arena-backed `Box`, `Vec` and `String`, and the `vec_in!` and `format_in!` macros.
+collections = []
+serde = ["dep:serde", "collections"]
 
 [target.'cfg(all(unix, target_pointer_width = "64"))'.dependencies]
 libc = { workspace = true }

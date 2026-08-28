@@ -33,6 +33,14 @@ impl<'a, A: Allocator> String<'a, A> {
 		Self { bytes: Vec::with_capacity_in(cap, alloc) }
 	}
 
+	/// Create a `String` holding a copy of `str`.
+	#[inline]
+	pub fn from_str_in(str: &str, alloc: A) -> Self {
+		let mut out = Self::with_capacity_in(str.len(), alloc);
+		out.push_str(str);
+		out
+	}
+
 	/// Read `reader` to end into a new `String`, the arena equivalent of [`std::io::Read::read_to_string`].
 	///
 	/// The bytes are validated as UTF-8 once, on the whole buffer, before the `String` exists; an invalid stream is
@@ -115,6 +123,14 @@ impl<'a, A: Allocator> String<'a, A> {
 	}
 }
 
+impl<'a, A: Allocator> Extend<char> for String<'a, A> {
+	fn extend<I: IntoIterator<Item = char>>(&mut self, iter: I) {
+		for char in iter {
+			self.push(char);
+		}
+	}
+}
+
 impl<'a, A: Allocator> Deref for String<'a, A> {
 	type Target = str;
 
@@ -180,7 +196,7 @@ impl<'a, A: Allocator> Hash for String<'a, A> {
 /// A [`std::format!`]-style constructor for the arena [`String`].
 ///
 /// ```
-/// use css_parse::{Arena, format_in};
+/// use csskit_arena::{Arena, format_in};
 /// let alloc = Arena::default();
 /// let str = format_in!(in &alloc, "{}px", 12);
 /// assert_eq!(str.as_str(), "12px");
@@ -253,6 +269,23 @@ mod test {
 		assert_eq!(str.as_str(), "a£😀");
 		// 1 + 2 + 4 bytes, so length counts bytes rather than characters.
 		assert_eq!(str.len(), 7);
+	}
+
+	#[test]
+	fn from_str_in_copies_the_source() {
+		let alloc = Arena::default();
+		let str = String::from_str_in("hello", &alloc);
+		assert_eq!(str.as_str(), "hello");
+		assert_eq!(str.len(), 5);
+	}
+
+	#[test]
+	fn extend_appends_each_char() {
+		let alloc = Arena::default();
+		let mut str = String::from_str_in("hello ", &alloc);
+		str.extend("wörld".chars());
+		assert_eq!(str.as_str(), "hello wörld");
+		assert_eq!(str.len(), 12);
 	}
 
 	#[test]
