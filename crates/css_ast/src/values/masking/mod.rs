@@ -116,7 +116,6 @@ pub enum ClipRuleStyleValue<'a> {}
     animation_type = Unknown,
     percentages = Unknown,
     longhands = MaskClip|MaskComposite|MaskImage|MaskMode|MaskOrigin|MaskPosition|MaskRepeat|MaskSize,
-    shorthand_resets_known = true,
     shorthand_resets = MaskBorder,
     property_group = Masking,
     computed_value_type = Unknown,

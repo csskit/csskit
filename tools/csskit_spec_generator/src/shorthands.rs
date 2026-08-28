@@ -6,7 +6,7 @@ pub(crate) struct Shorthand {
 	pub(crate) name: String,
 	pub(crate) longhands: Vec<String>,
 	#[serde(default)]
-	pub(crate) resets: Option<Vec<String>>,
+	pub(crate) resets: Vec<String>,
 	#[serde(default)]
 	pub(crate) resets_all: bool,
 }
@@ -19,7 +19,7 @@ struct Shorthands {
 #[derive(Clone, Debug)]
 pub(crate) struct ShorthandMetadata {
 	pub(crate) longhands: Vec<String>,
-	pub(crate) resets: Option<Vec<String>>,
+	pub(crate) resets: Vec<String>,
 	pub(crate) resets_all: bool,
 }
 
@@ -64,11 +64,11 @@ impl ShorthandGraph {
 	pub(crate) fn relationships(&self, property: &str) -> ShorthandRelationships {
 		let mut reset_by = Vec::new();
 		for (name, shorthand) in &self.shorthands {
-			if shorthand.resets.as_ref().is_some_and(|resets| {
-				resets
-					.iter()
-					.any(|reset| reset == property || self.contains_descendant(std::slice::from_ref(reset), property))
-			}) {
+			if shorthand
+				.resets
+				.iter()
+				.any(|reset| reset == property || self.contains_descendant(std::slice::from_ref(reset), property))
+			{
 				reset_by.push(name.clone());
 			}
 		}
@@ -135,13 +135,11 @@ impl ShorthandGraph {
 
 	fn validate(&self) {
 		for (name, shorthand) in &self.shorthands {
-			assert!(!(shorthand.resets_all && shorthand.resets.is_some()), "{name} cannot set resets and resets_all");
+			assert!(!(shorthand.resets_all && !shorthand.resets.is_empty()), "{name} cannot set resets and resets_all");
 			self.collect_terminal_longhands(name, &mut BTreeSet::new(), &mut BTreeSet::new());
-			if let Some(resets) = &shorthand.resets {
-				let expressible = self.terminal_longhands(&shorthand.longhands).into_iter().collect::<BTreeSet<_>>();
-				let reset = self.terminal_longhands(resets).into_iter().collect::<BTreeSet<_>>();
-				assert!(expressible.is_disjoint(&reset), "{name} resets an expressible longhand");
-			}
+			let expressible = self.terminal_longhands(&shorthand.longhands).into_iter().collect::<BTreeSet<_>>();
+			let reset = self.terminal_longhands(&shorthand.resets).into_iter().collect::<BTreeSet<_>>();
+			assert!(expressible.is_disjoint(&reset), "{name} resets an expressible longhand");
 		}
 	}
 }
@@ -159,7 +157,7 @@ mod tests {
 	#[test]
 	fn registry_contains_expected_shorthands() {
 		let graph = get_shorthand_graph();
-		assert_eq!(graph.shorthands.len(), 71);
+		assert_eq!(graph.shorthands.len(), 80);
 	}
 
 	#[test]
@@ -188,29 +186,20 @@ mod tests {
 	}
 
 	#[test]
-	fn distinguishes_unknown_known_and_universal_resets() {
+	fn distinguishes_empty_and_universal_resets() {
 		let graph = get_shorthand_graph();
-		assert!(graph.shorthand("margin").unwrap().resets.is_none());
-		assert_eq!(graph.shorthand("border").unwrap().resets.unwrap(), ["border-image"]);
+		assert!(graph.shorthand("grid").unwrap().resets.is_empty());
+		assert!(graph.shorthand("margin").unwrap().resets.is_empty());
+		assert_eq!(graph.shorthand("border").unwrap().resets, ["border-image"]);
 		assert!(graph.shorthand("all").unwrap().resets_all);
-	}
-	#[test]
-	fn preserves_known_empty_resets() {
-		let graph = ShorthandGraph::new(vec![Shorthand {
-			name: "pair".into(),
-			longhands: vec!["first".into(), "second".into()],
-			resets: Some(vec![]),
-			resets_all: false,
-		}]);
-		assert_eq!(graph.shorthand("pair").unwrap().resets, Some(vec![]));
 	}
 
 	#[test]
 	#[should_panic(expected = "shorthand cycle")]
 	fn rejects_component_cycles() {
 		ShorthandGraph::new(vec![
-			Shorthand { name: "first".into(), longhands: vec!["second".into()], resets: None, resets_all: false },
-			Shorthand { name: "second".into(), longhands: vec!["first".into()], resets: None, resets_all: false },
+			Shorthand { name: "first".into(), longhands: vec!["second".into()], resets: vec![], resets_all: false },
+			Shorthand { name: "second".into(), longhands: vec!["first".into()], resets: vec![], resets_all: false },
 		]);
 	}
 }

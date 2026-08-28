@@ -654,13 +654,8 @@ fn generate_property_type(
 		let shorthand = format_ident!("{}", name.to_pascal_case());
 		quote! { shorthand_group = #shorthand }
 	});
-	let shorthand_resets_known_attr = shorthand_metadata
-		.as_ref()
-		.filter(|metadata| metadata.resets.is_some())
-		.map(|_| quote! { shorthand_resets_known = true });
 	let shorthand_resets_attr = shorthand_metadata.as_ref().and_then(|metadata| {
-		let resets =
-			metadata.resets.as_ref()?.iter().map(|name| format_ident!("{}", name.to_pascal_case())).collect::<Vec<_>>();
+		let resets = metadata.resets.iter().map(|name| format_ident!("{}", name.to_pascal_case())).collect::<Vec<_>>();
 		(!resets.is_empty()).then(|| quote! { shorthand_resets = #(#resets)|* })
 	});
 	let shorthand_resets_all_attr = shorthand_metadata
@@ -703,7 +698,6 @@ fn generate_property_type(
 		shorthand_attr,
 		longhands_attr,
 		shorthand_group_attr,
-		shorthand_resets_known_attr,
 		shorthand_resets_attr,
 		shorthand_resets_all_attr,
 		reset_by_shorthands_attr,

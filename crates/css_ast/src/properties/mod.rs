@@ -285,7 +285,7 @@ impl<'a> StyleValue<'a> {
 					$(
 					CssAtomSet::$name => values::$ty::shorthand_reset(),
 					)+
-					_ => ShorthandReset::Unknown,
+					_ => ShorthandReset::Properties(&[]),
 				}
 			};
 		}
@@ -549,7 +549,7 @@ mod tests {
 			StyleValue::shorthand_reset_by_name(CssAtomSet::Border),
 			ShorthandReset::Properties(&[CssAtomSet::BorderImage])
 		);
-		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::Margin), ShorthandReset::Unknown);
+		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::Margin), ShorthandReset::Properties(&[]));
 		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::All), ShorthandReset::All);
 		assert_eq!(StyleValue::reset_by_shorthands_by_name(CssAtomSet::BorderImageSource), [CssAtomSet::Border]);
 	}

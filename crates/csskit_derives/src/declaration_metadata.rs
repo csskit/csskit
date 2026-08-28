@@ -25,8 +25,6 @@ struct MetadataArg {
 	#[darling(default)]
 	shorthand_group: Option<Ident>,
 	#[darling(default)]
-	shorthand_resets_known: bool,
-	#[darling(default)]
 	shorthand_resets: Option<PipeList<Ident>>,
 	#[darling(default)]
 	shorthand_resets_all: bool,
@@ -78,16 +76,12 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	});
 	let shorthand_reset = {
 		let resets_opt = attrs.shorthand_resets.map(|PipeList(values)| values);
-		let should_emit = attrs.shorthand_resets_known || resets_opt.is_some() || attrs.shorthand_resets_all;
 		let reset = if attrs.shorthand_resets_all {
-			quote! { crate::ShorthandReset::All }
-		} else if attrs.shorthand_resets_known || resets_opt.is_some() {
-			let resets = resets_opt.unwrap_or_default();
-			quote! { crate::ShorthandReset::Properties(&[#(CssAtomSet::#resets),*]) }
+			Some(quote! { crate::ShorthandReset::All })
 		} else {
-			quote! { crate::ShorthandReset::Unknown }
+			resets_opt.map(|resets| quote! { crate::ShorthandReset::Properties(&[#(CssAtomSet::#resets),*]) })
 		};
-		should_emit.then(|| {
+		reset.map(|reset| {
 			quote! {
 				fn shorthand_reset() -> crate::ShorthandReset {
 					#reset

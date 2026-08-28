@@ -26,6 +26,7 @@ use impls::*;
     initial = "see individual properties",
     applies_to = Elements,
     longhands = AnimationDelay|AnimationDirection|AnimationDuration|AnimationFillMode|AnimationIterationCount|AnimationName|AnimationPlayState|AnimationTimeline|AnimationTimingFunction,
+    shorthand_resets = AnimationRange,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
