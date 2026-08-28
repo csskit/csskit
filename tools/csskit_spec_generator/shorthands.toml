@@ -20,6 +20,7 @@ longhands = [
     "animation-play-state",
     "animation-timeline",
 ]
+resets = ["animation-range"]
 
 [[shorthand]]
 name = "animation-range"
@@ -73,6 +74,30 @@ longhands = [
     "border-block-start-style",
     "border-block-start-width",
 ]
+[[shorthand]]
+name = "border-block-color"
+longhands = [
+    "border-block-start-color",
+    "border-block-end-color",
+]
+resets = []
+
+[[shorthand]]
+name = "border-block-style"
+longhands = [
+    "border-block-start-style",
+    "border-block-end-style",
+]
+resets = []
+
+[[shorthand]]
+name = "border-block-width"
+longhands = [
+    "border-block-start-width",
+    "border-block-end-width",
+]
+resets = []
+
 
 [[shorthand]]
 name = "border-bottom"
@@ -141,6 +166,7 @@ longhands = [
     "border-bottom-right-radius",
     "border-bottom-left-radius",
 ]
+resets = []
 
 [[shorthand]]
 name = "border-right"
@@ -190,6 +216,7 @@ longhands = [
     "column-count",
     "column-width",
 ]
+resets = []
 
 [[shorthand]]
 name = "contain-intrinsic-size"
@@ -212,6 +239,7 @@ longhands = [
     "flex-shrink",
     "flex-basis",
 ]
+resets = []
 
 [[shorthand]]
 name = "flex-flow"
@@ -230,6 +258,14 @@ longhands = [
     "font-variant",
     "font-weight",
     "line-height",
+]
+resets = [
+    "font-feature-settings",
+    "font-kerning",
+    "font-language-override",
+    "font-optical-sizing",
+    "font-size-adjust",
+    "font-variation-settings",
 ]
 
 [[shorthand]]
@@ -259,6 +295,7 @@ longhands = [
     "row-gap",
     "column-gap",
 ]
+resets = []
 
 [[shorthand]]
 name = "grid"
@@ -310,6 +347,7 @@ longhands = [
     "bottom",
     "left",
 ]
+resets = []
 
 [[shorthand]]
 name = "inset-block"
@@ -332,6 +370,7 @@ longhands = [
     "list-style-position",
     "list-style-type",
 ]
+resets = []
 
 [[shorthand]]
 name = "margin"
@@ -341,6 +380,7 @@ longhands = [
     "margin-bottom",
     "margin-left",
 ]
+resets = []
 
 [[shorthand]]
 name = "margin-block"
@@ -355,6 +395,7 @@ longhands = [
     "margin-inline-start",
     "margin-inline-end",
 ]
+resets = []
 
 [[shorthand]]
 name = "mask"
@@ -398,6 +439,7 @@ longhands = [
     "outline-style",
     "outline-color",
 ]
+resets = []
 
 [[shorthand]]
 name = "overflow"
@@ -405,6 +447,7 @@ longhands = [
     "overflow-x",
     "overflow-y",
 ]
+resets = []
 
 [[shorthand]]
 name = "overscroll-behavior"
@@ -421,6 +464,7 @@ longhands = [
     "padding-bottom",
     "padding-left",
 ]
+resets = []
 
 [[shorthand]]
 name = "padding-block"
@@ -442,6 +486,7 @@ longhands = [
     "align-content",
     "justify-content",
 ]
+resets = []
 
 [[shorthand]]
 name = "place-items"
@@ -449,6 +494,7 @@ longhands = [
     "align-items",
     "justify-items",
 ]
+resets = []
 
 [[shorthand]]
 name = "place-self"
@@ -456,6 +502,7 @@ longhands = [
     "align-self",
     "justify-self",
 ]
+resets = []
 
 [[shorthand]]
 name = "position-try"
@@ -463,6 +510,47 @@ longhands = [
     "position-try-order",
     "position-try-fallbacks",
 ]
+resets = []
+[[shorthand]]
+name = "rule-break"
+longhands = [
+    "column-rule-break",
+    "row-rule-break",
+]
+resets = []
+
+[[shorthand]]
+name = "rule-color"
+longhands = [
+    "column-rule-color",
+    "row-rule-color",
+]
+resets = []
+
+[[shorthand]]
+name = "rule-style"
+longhands = [
+    "column-rule-style",
+    "row-rule-style",
+]
+resets = []
+
+[[shorthand]]
+name = "rule-visibility-items"
+longhands = [
+    "column-rule-visibility-items",
+    "row-rule-visibility-items",
+]
+resets = []
+
+[[shorthand]]
+name = "rule-width"
+longhands = [
+    "column-rule-width",
+    "row-rule-width",
+]
+resets = []
+
 
 [[shorthand]]
 name = "scroll-margin"
@@ -532,6 +620,7 @@ longhands = [
     "text-decoration-style",
     "text-decoration-thickness",
 ]
+resets = []
 
 [[shorthand]]
 name = "text-emphasis"
@@ -564,6 +653,15 @@ longhands = [
     "view-timeline-axis",
     "view-timeline-inset",
 ]
+
+[[shorthand]]
+name = "marker"
+longhands = [
+    "marker-start",
+    "marker-mid",
+    "marker-end",
+]
+resets = []
 
 [[shorthand]]
 name = "-webkit-text-stroke"
