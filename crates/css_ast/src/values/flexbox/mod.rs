@@ -27,7 +27,7 @@ use impls::*;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    longhands = FlexBasis|FlexGrow|FlexShrink,
+    longhands = FlexGrow|FlexShrink|FlexBasis,
     property_group = Flexbox,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

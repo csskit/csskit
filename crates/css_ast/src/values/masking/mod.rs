@@ -148,7 +148,7 @@ pub struct MaskStyleValue<'a>;
     initial = "See individual properties",
     applies_to = Unknown,
     animation_type = Unknown,
-    longhands = MaskBorderMode|MaskBorderOutset|MaskBorderRepeat|MaskBorderSlice|MaskBorderSource|MaskBorderWidth,
+    longhands = MaskBorderSource|MaskBorderSlice|MaskBorderWidth|MaskBorderOutset|MaskBorderRepeat|MaskBorderMode,
     reset_by_shorthands = Mask,
     property_group = Masking,
     computed_value_type = Unknown,

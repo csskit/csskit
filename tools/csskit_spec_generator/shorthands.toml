@@ -23,6 +23,13 @@ longhands = [
 resets = ["animation-range"]
 
 [[shorthand]]
+name = "animation-delay"
+longhands = [
+    "animation-delay-start",
+    "animation-delay-end",
+]
+
+[[shorthand]]
 name = "animation-range"
 longhands = [
     "animation-range-start",
@@ -153,9 +160,9 @@ longhands = [
 [[shorthand]]
 name = "border-left"
 longhands = [
-    "border-left-color",
-    "border-left-style",
     "border-left-width",
+    "border-left-style",
+    "border-left-color",
 ]
 
 [[shorthand]]
@@ -171,9 +178,9 @@ resets = []
 [[shorthand]]
 name = "border-right"
 longhands = [
-    "border-right-color",
-    "border-right-style",
     "border-right-width",
+    "border-right-style",
+    "border-right-color",
 ]
 
 [[shorthand]]
@@ -188,9 +195,9 @@ longhands = [
 [[shorthand]]
 name = "border-top"
 longhands = [
-    "border-top-color",
-    "border-top-style",
     "border-top-width",
+    "border-top-style",
+    "border-top-color",
 ]
 
 [[shorthand]]
@@ -205,16 +212,17 @@ longhands = [
 [[shorthand]]
 name = "column-rule"
 longhands = [
-    "column-rule-color",
-    "column-rule-style",
     "column-rule-width",
+    "column-rule-style",
+    "column-rule-color",
 ]
 
 [[shorthand]]
 name = "columns"
 longhands = [
-    "column-count",
     "column-width",
+    "column-count",
+    "column-height",
 ]
 resets = []
 

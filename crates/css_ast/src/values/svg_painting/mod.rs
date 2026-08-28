@@ -53,7 +53,7 @@ pub enum ColorInterpolationStyleValue<'a> {}
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    longhands = MarkerEnd|MarkerMid|MarkerStart,
+    longhands = MarkerStart|MarkerMid|MarkerEnd,
     property_group = SvgPainting,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
