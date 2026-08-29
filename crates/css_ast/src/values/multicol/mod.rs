@@ -26,7 +26,7 @@ use impls::*;
     initial = "auto",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Columns,
+    shorthands = Columns,
     property_group = Multicol,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -83,7 +83,7 @@ pub enum ColumnFillStyleValue<'a> {}
     initial = "auto",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Columns,
+    shorthands = Columns,
     property_group = Multicol,
     computed_value_type = SpecifiedKeywordPlusAbsoluteLength,
     canonical_order = "per grammar",
@@ -142,7 +142,7 @@ pub enum ColumnSpanStyleValue<'a> {}
     initial = "auto",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Columns,
+    shorthands = Columns,
     property_group = Multicol,
     computed_value_type = SpecifiedKeywordPlusAbsoluteLength,
     canonical_order = "per grammar",
@@ -206,6 +206,7 @@ pub enum ColumnWrapStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(ColumnWidth?, ColumnCount?, "/" ColumnHeight?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.columns"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

@@ -56,6 +56,7 @@ pub enum ColorInterpolationStyleValue<'a> {}
     longhands = MarkerStart|MarkerMid|MarkerEnd,
     property_group = SvgPainting,
 )]
+#[declaration_writes(same)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.marker"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -82,7 +83,7 @@ pub struct MarkerStyleValue<'a>;
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Marker,
+    shorthands = Marker,
     property_group = SvgPainting,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -111,7 +112,7 @@ pub struct MarkerEndStyleValue<'a>;
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Marker,
+    shorthands = Marker,
     property_group = SvgPainting,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
@@ -140,7 +141,7 @@ pub struct MarkerMidStyleValue<'a>;
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Marker,
+    shorthands = Marker,
     property_group = SvgPainting,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]

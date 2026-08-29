@@ -461,6 +461,7 @@ pub enum NavUpStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(OutlineWidth?, OutlineStyle?, OutlineColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.outline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -486,7 +487,7 @@ pub struct OutlineStyleValue<'a>;
     initial = "auto",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = Outline,
+    shorthands = Outline,
     property_group = Ui,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -545,7 +546,7 @@ pub struct OutlineOffsetStyleValue<'a>;
     initial = "none",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = Outline,
+    shorthands = Outline,
     property_group = Ui,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -575,7 +576,7 @@ pub struct OutlineStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = Outline,
+    shorthands = Outline,
     property_group = Ui,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",

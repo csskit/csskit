@@ -99,6 +99,7 @@ pub struct InlineSizeStyleValue<'a>;
     box_side = BlockStart|BlockEnd,
     box_portion = Margin,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -125,7 +126,7 @@ pub struct MarginBlockStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = MarginBlock,
+    shorthands = MarginBlock,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -159,7 +160,7 @@ pub struct MarginBlockEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = MarginBlock,
+    shorthands = MarginBlock,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -201,6 +202,7 @@ pub struct MarginBlockStartStyleValue<'a>;
     box_side = InlineStart|InlineEnd,
     box_portion = Margin,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -227,7 +229,7 @@ pub struct MarginInlineStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = MarginInline,
+    shorthands = MarginInline,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -261,7 +263,7 @@ pub struct MarginInlineEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = MarginInline,
+    shorthands = MarginInline,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -435,6 +437,7 @@ pub struct MinInlineSizeStyleValue<'a>;
     box_side = BlockStart|BlockEnd,
     box_portion = Padding,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -461,7 +464,7 @@ pub struct PaddingBlockStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = PaddingBlock,
+    shorthands = PaddingBlock,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -495,7 +498,7 @@ pub struct PaddingBlockEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = PaddingBlock,
+    shorthands = PaddingBlock,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -537,6 +540,7 @@ pub struct PaddingBlockStartStyleValue<'a>;
     box_side = InlineStart|InlineEnd,
     box_portion = Padding,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -563,7 +567,7 @@ pub struct PaddingInlineStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = PaddingInline,
+    shorthands = PaddingInline,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -597,7 +601,7 @@ pub struct PaddingInlineEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = PaddingInline,
+    shorthands = PaddingInline,
     property_group = Logical,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

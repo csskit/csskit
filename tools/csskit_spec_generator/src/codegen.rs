@@ -1,12 +1,12 @@
 use crate::ignore_properties::get_ignore_properties;
 use crate::manual_parse_properties::get_manual_parse_properties;
-use crate::shorthands::get_shorthand_graph;
+use crate::shorthands::{Writes, atom_ident, get_shorthand_graph};
 use crate::spec_parser::PropertyDefinition;
 use crate::todo_properties::get_todo_properties;
 use crate::value_extensions::get_value_extensions;
 use crate::value_replacements::get_value_replacements;
 use crate::web_features_data::{BaselineStatus, FeatureData, StringOrArray, WebFeaturesData};
-use css_value_definition_parser::{Def, DefCombinatorStyle};
+use css_value_definition_parser::{Def, DefCombinatorStyle, StrWrapped};
 use heck::ToPascalCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -79,9 +79,7 @@ pub fn generate_spec_module(
 			replacement,
 			extension,
 			skip_parse,
-			shorthand_graph.shorthand(&prop.name),
-			shorthand_graph.shorthand_group(&prop.name),
-			shorthand_graph.relationships(&prop.name),
+			&shorthand_graph,
 		)
 	});
 
@@ -94,7 +92,7 @@ pub fn generate_spec_module(
 		#(#property_types)*
 	};
 
-	let file: File = syn::parse2(tokens).expect("generated code should parse");
+	let file: File = parse2(tokens).expect("generated code should parse");
 	let mut code = prettyplease::unparse(&file);
 
 	code = format!("{}{}{}\n{}", autogen_notice, "#![allow(warnings)]\n", module_doc, code);
@@ -597,9 +595,7 @@ fn generate_property_type(
 	value_replacement: Option<&str>,
 	value_extension: Option<&str>,
 	skip_parse: bool,
-	shorthand_metadata: Option<crate::shorthands::ShorthandMetadata>,
-	shorthand_group: Option<String>,
-	shorthand_relationships: crate::shorthands::ShorthandRelationships,
+	shorthand_graph: &crate::shorthands::ShorthandGraph,
 ) -> TokenStream {
 	let type_name_base = if prop.name == "--*" { "Custom".to_string() } else { prop.name.to_pascal_case() };
 
@@ -613,8 +609,7 @@ fn generate_property_type(
 	let extended_value =
 		if let Some(replacement) = value_replacement { replacement.to_string() } else { extended_value };
 
-	let grammar_cleaned = extended_value.replace("'", "\"").replace("∞", "");
-	let parsed_def = grammar_cleaned.parse::<TokenStream>().ok().and_then(|tokens| parse2::<Def>(tokens).ok());
+	let parsed_def = parse2::<StrWrapped<Def>>(::quote::quote! { #extended_value }).map(|wrapped| wrapped.0).ok();
 
 	let (is_enum, needs_lifetime) = match &parsed_def {
 		Some(def) => {
@@ -641,35 +636,34 @@ fn generate_property_type(
 	let inherits_attr = convert_inherited(&prop.inherited);
 	let applies_to_attr = convert_applies_to(&prop.applies_to);
 	let percentages_attr = convert_percentages(&prop.percentages);
-	let shorthand_attr = shorthand_metadata
-		.as_ref()
-		.filter(|metadata| metadata.longhands.is_empty())
-		.map(|_| quote! { shorthand = true });
+	let shorthand_metadata = shorthand_graph.shorthand(&prop.name);
 	let longhands_attr = shorthand_metadata.as_ref().and_then(|metadata| {
-		let longhands =
-			metadata.longhands.iter().map(|name| format_ident!("{}", name.to_pascal_case())).collect::<Vec<_>>();
+		let longhands = metadata.longhands.iter().map(|name| format_ident!("{}", atom_ident(name))).collect::<Vec<_>>();
 		(!longhands.is_empty()).then(|| quote! { longhands = #(#longhands)|* })
 	});
-	let shorthand_group_attr = shorthand_group.map(|name| {
-		let shorthand = format_ident!("{}", name.to_pascal_case());
-		quote! { shorthand_group = #shorthand }
-	});
-	let shorthand_resets_attr = shorthand_metadata.as_ref().and_then(|metadata| {
-		let resets = metadata.resets.iter().map(|name| format_ident!("{}", name.to_pascal_case())).collect::<Vec<_>>();
-		(!resets.is_empty()).then(|| quote! { shorthand_resets = #(#resets)|* })
-	});
-	let shorthand_resets_all_attr = shorthand_metadata
-		.as_ref()
-		.filter(|metadata| metadata.resets_all)
-		.map(|_| quote! { shorthand_resets_all = true });
-	let reset_by_shorthands_attr = {
-		let shorthands = shorthand_relationships
-			.reset_by
+	let shorthands_attr = {
+		let shorthands = shorthand_graph
+			.shorthands(&prop.name)
 			.iter()
-			.map(|name| format_ident!("{}", name.to_pascal_case()))
+			.map(|name| format_ident!("{}", atom_ident(name)))
 			.collect::<Vec<_>>();
-		(!shorthands.is_empty()).then(|| quote! { reset_by_shorthands = #(#shorthands)|* })
+		(!shorthands.is_empty()).then(|| quote! { shorthands = #(#shorthands)|* })
 	};
+	let resets_attr = shorthand_metadata.as_ref().and_then(|metadata| {
+		let resets = metadata.resets.iter().map(|name| format_ident!("{}", atom_ident(name))).collect::<Vec<_>>();
+		(!resets.is_empty()).then(|| quote! { resets = #(#resets)|* })
+	});
+	let resets_all_attr =
+		shorthand_metadata.as_ref().filter(|metadata| metadata.resets_all).map(|_| quote! { resets_all = true });
+	let reset_by_attr = {
+		let shorthands = shorthand_graph
+			.reset_by(&prop.name)
+			.iter()
+			.map(|name| format_ident!("{}", atom_ident(name)))
+			.collect::<Vec<_>>();
+		(!shorthands.is_empty()).then(|| quote! { reset_by = #(#shorthands)|* })
+	};
+	let writes_attr = shorthand_graph.writes(&prop.name).map(|writes| writes_attribute(&writes));
 	let animation_type_attr = prop.animation_type.as_ref().and_then(|a| convert_animation_type(a));
 	let computed_value_attr = prop.computed_value.as_ref().and_then(|cv| convert_computed_value(cv));
 	let canonical_order_attr = prop.canonical_order.as_ref().map(|order| {
@@ -695,12 +689,11 @@ fn generate_property_type(
 		applies_to_attr,
 		animation_type_attr,
 		percentages_attr,
-		shorthand_attr,
 		longhands_attr,
-		shorthand_group_attr,
-		shorthand_resets_attr,
-		shorthand_resets_all_attr,
-		reset_by_shorthands_attr,
+		shorthands_attr,
+		resets_attr,
+		resets_all_attr,
+		reset_by_attr,
 		property_group_attr,
 		computed_value_attr,
 		canonical_order_attr,
@@ -779,11 +772,32 @@ fn generate_property_type(
 		#[syntax(#syntax_value)]
 		#[derive(#(#derives,)*)]
 		#[declaration_metadata(#(#metadata_attrs,)*)]
+		#writes_attr
 		#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 		#[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature(#css_feature))]
 		#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 		#[derive(csskit_derives::NodeWithMetadata)]
 		pub #keyword #type_name #lifetime #suffix
+	}
+}
+
+/// The `declaration_writes` attribute of a shorthand, which states the property each value of its
+/// grammar sets: string literals for the tokens the grammar writes before and after a value, and
+/// `?` for a value it may leave out to state the initial value.
+fn writes_attribute(writes: &Writes) -> TokenStream {
+	match writes {
+		Writes::Repeat => quote! { #[declaration_writes(repeat)] },
+		Writes::Same => quote! { #[declaration_writes(same)] },
+		Writes::Slots(slots) => {
+			let slots = slots.iter().map(|slot| {
+				let property = format_ident!("{}", atom_ident(&slot.property));
+				let before = (!slot.before.is_empty()).then(|| proc_macro2::Literal::string(&slot.before));
+				let after = (!slot.after.is_empty()).then(|| proc_macro2::Literal::string(&slot.after));
+				let optional = slot.optional.then(|| quote! { ? });
+				quote! { #before #property #optional #after }
+			});
+			quote! { #[declaration_writes(#(#slots),*)] }
+		}
 	}
 }
 

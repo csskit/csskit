@@ -31,6 +31,7 @@ use impls::*;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overscroll-behavior"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -122,7 +123,7 @@ pub enum OverscrollBehaviorInlineStyleValue<'a> {}
     initial = "auto",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = OverscrollBehavior,
+    shorthands = OverscrollBehavior,
     property_group = Overscroll,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -153,7 +154,7 @@ pub enum OverscrollBehaviorXStyleValue<'a> {}
     initial = "auto",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = OverscrollBehavior,
+    shorthands = OverscrollBehavior,
     property_group = Overscroll,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",

@@ -85,7 +85,7 @@ pub fn derive_css_feature(stream: TokenStream) -> TokenStream {
 	run(stream, css_feature::derive)
 }
 
-#[proc_macro_derive(DeclarationMetadata, attributes(declaration_metadata))]
+#[proc_macro_derive(DeclarationMetadata, attributes(declaration_metadata, declaration_writes))]
 pub fn derive_declaration_metadata(stream: TokenStream) -> TokenStream {
 	run(stream, declaration_metadata::derive)
 }

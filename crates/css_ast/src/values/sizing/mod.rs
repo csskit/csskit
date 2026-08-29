@@ -119,7 +119,7 @@ pub struct ContainIntrinsicBlockSizeStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = ContainIntrinsicSize,
+    shorthands = ContainIntrinsicSize,
     property_group = Sizing,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -192,6 +192,7 @@ pub struct ContainIntrinsicInlineSizeStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.contain-intrinsic-size"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -217,7 +218,7 @@ pub struct ContainIntrinsicSizeStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = ContainIntrinsicSize,
+    shorthands = ContainIntrinsicSize,
     property_group = Sizing,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",

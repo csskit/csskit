@@ -32,6 +32,7 @@ use impls::*;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(FlexGrow, FlexShrink, FlexBasis)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -58,7 +59,7 @@ pub struct FlexStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = FlexContainer,
-    shorthand_group = Flex,
+    shorthands = Flex,
     property_group = Flexbox,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -88,7 +89,7 @@ pub enum FlexBasisStyleValue<'a> {}
     initial = "row",
     applies_to = Flex,
     animation_type = Discrete,
-    shorthand_group = FlexFlow,
+    shorthands = FlexFlow,
     property_group = Flexbox,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -125,6 +126,7 @@ pub enum FlexDirectionStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(FlexDirection?, FlexWrap?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.flex-flow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -150,7 +152,7 @@ pub struct FlexFlowStyleValue<'a>;
     initial = "0",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Flex,
+    shorthands = Flex,
     property_group = Flexbox,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -207,7 +209,7 @@ pub struct FlexLineCountStyleValue<'a>;
     initial = "1",
     applies_to = Unknown,
     animation_type = Number,
-    shorthand_group = Flex,
+    shorthands = Flex,
     property_group = Flexbox,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -237,7 +239,7 @@ pub struct FlexShrinkStyleValue<'a>;
     initial = "nowrap",
     applies_to = Flex,
     animation_type = Discrete,
-    shorthand_group = FlexFlow,
+    shorthands = FlexFlow,
     property_group = Flexbox,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

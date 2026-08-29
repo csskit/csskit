@@ -115,11 +115,12 @@ pub struct CounterSetStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = ListStyleImage|ListStylePosition|ListStyleType,
+    longhands = ListStylePosition|ListStyleImage|ListStyleType,
     property_group = Lists,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(ListStylePosition?, ListStyleImage?, ListStyleType?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.list-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -146,7 +147,7 @@ pub struct ListStyleStyleValue<'a>;
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = ListStyle,
+    shorthands = ListStyle,
     property_group = Lists,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -177,7 +178,7 @@ pub struct ListStyleImageStyleValue<'a>;
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = ListStyle,
+    shorthands = ListStyle,
     property_group = Lists,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -208,7 +209,7 @@ pub enum ListStylePositionStyleValue<'a> {}
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = ListStyle,
+    shorthands = ListStyle,
     property_group = Lists,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",

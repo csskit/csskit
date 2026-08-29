@@ -33,6 +33,7 @@ use impls::*;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(ContainerName, "/" ContainerType?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.container"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -57,7 +58,7 @@ pub struct ContainerStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
-    shorthand_group = Container,
+    shorthands = Container,
     property_group = Conditional,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -86,7 +87,7 @@ pub struct ContainerNameStyleValue<'a>;
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
-    shorthand_group = Container,
+    shorthands = Container,
     property_group = Conditional,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

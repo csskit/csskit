@@ -288,7 +288,7 @@ pub enum LineFitEdgeStyleValue<'a> {}
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = FontSize,
-    shorthand_group = Font,
+    shorthands = Font,
     property_group = Inline,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -324,6 +324,7 @@ pub enum LineHeightStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(TextBoxTrim?, TextBoxEdge?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-box"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -350,7 +351,7 @@ pub struct TextBoxStyleValue<'a>;
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = TextBox,
+    shorthands = TextBox,
     property_group = Inline,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -380,7 +381,7 @@ pub struct TextBoxEdgeStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = TextBox,
+    shorthands = TextBox,
     property_group = Inline,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

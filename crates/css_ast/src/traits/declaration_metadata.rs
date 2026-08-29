@@ -269,6 +269,63 @@ pub enum ShorthandReset {
 	All,
 }
 
+/// The part of a shorthand's value that represents the longhand property that part sets.
+///
+/// The slots of `font`, for example, report that it writes an optional style and weight, then a size, then an optional
+/// line height after a `/`, then a family.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct Slot {
+	pub property: CssAtomSet,
+	/// The token the grammar writes before this slot to tell it apart from the slot before it, such as the `/` of
+	/// `font`'s line height. Empty when the grammar writes nothing.
+	pub before: &'static str,
+	/// The token the grammar writes after this slot. Empty when the grammar writes nothing.
+	pub after: &'static str,
+	/// True when the grammar lets the slot be left out, which sets its property to the initial value.
+	pub optional: bool,
+}
+
+/// How a shorthand's value writes the longhands it sets.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub enum Writes {
+	/// The value writes one value per slot, in this order.
+	Slots(&'static [Slot]),
+	/// The value takes one to as many values as the shorthand sets longhands, and the position of each value picks the
+	/// longhand in [Shorthand::longhands] it sets, as `margin`'s `<'margin-top'>{1,4}` does. A left-out position takes
+	/// the value of an earlier one.
+	Repeat,
+	/// The value is written once and every longhand takes it, as `marker`'s `none | <url>` does.
+	Same,
+}
+
+/// What a shorthand property does to the properties it covers.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct Shorthand {
+	/// Every property it sets.
+	///
+	/// Nested shorthands are included with the properties they set, so `border` states `border-width` as well as
+	/// `border-top-width`.
+	pub longhands: &'static [CssAtomSet],
+	/// How its value writes them, when that is stated. Every longhand it sets is written, so a grammar which states only
+	/// some of them states none.
+	pub writes: Option<Writes>,
+	/// What it resets besides them. In some cases a shorthand will reset properties it cannot express itself, such as
+	/// `border` resetting `border-image`.
+	pub resets: ShorthandReset,
+}
+
+/// What the shorthands which cover a property do to it.
+///
+/// A shorthand may have one of these as well, since a shorthand can be nested inside another: `border-width` is both a
+/// shorthand of `border-top-width` and a longhand of `border`.
+#[derive(Clone, Copy, Debug, Eq, PartialEq)]
+pub struct Longhand {
+	/// Every shorthand which expresses this property, narrowest first.
+	pub shorthands: &'static [CssAtomSet],
+	/// Every shorthand which resets this property without expressing it.
+	pub reset_by: &'static [CssAtomSet],
+}
+
 pub trait DeclarationMetadata: Sized {
 	/// Returns the initial value of this property, as a string
 	fn initial() -> &'static str;
@@ -295,38 +352,16 @@ pub trait DeclarationMetadata: Sized {
 		AnimationType::None
 	}
 
-	/// Determines if this style value is a "shorthand" value, meaning it is comprised of other "longhand" style values.
-	fn is_shorthand() -> bool {
-		false
-	}
-
-	/// Determines if this style value is a "longhand" value, meaning a "shorthand" style value exists that could also
-	/// express this.
-	fn is_longhand() -> bool {
-		Self::shorthand_group() == CssAtomSet::_None
-	}
-
-	/// Returns all transitive longhands for a shorthand property.
-	/// For nested shorthands (e.g., `border-width`), this recursively expands to include
-	/// all nested longhands (e.g., `border-top-width`, `border-left-width`, etc.).
-	fn longhands() -> Option<&'static [CssAtomSet]> {
+	/// Returns what this property does to the properties it covers, or [None] if it is not a
+	/// shorthand.
+	fn shorthand() -> Option<&'static Shorthand> {
 		None
 	}
 
-	/// Returns the declaration ID of the shorthand that this property is part of.
-	/// If this is not a longhand then it will be `CssAtomSet::_None`.
-	fn shorthand_group() -> CssAtomSet {
-		CssAtomSet::_None
-	}
-
-	/// Returns how this property may reset others, if this is a shorthand property.
-	fn shorthand_reset() -> ShorthandReset {
-		ShorthandReset::Properties(&[])
-	}
-
-	/// Returns shorthands that will reset this property.
-	fn reset_by_shorthands() -> &'static [CssAtomSet] {
-		&[]
+	/// Returns what the shorthands which cover this property do to it, or [None] if no shorthand
+	/// covers it.
+	fn longhand() -> Option<&'static Longhand> {
+		None
 	}
 
 	/// Returns which CSS specification(s) this property belongs to.

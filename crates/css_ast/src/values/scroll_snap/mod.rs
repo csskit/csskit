@@ -59,6 +59,7 @@ pub enum ScrollInitialTargetStyleValue<'a> {}
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -90,6 +91,7 @@ pub struct ScrollMarginStyleValue<'a>;
     canonical_order = "per grammar",
     box_side = BlockStart|BlockEnd,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -115,7 +117,7 @@ pub struct ScrollMarginBlockStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMarginBlock,
+    shorthands = ScrollMarginBlock,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -147,7 +149,7 @@ pub struct ScrollMarginBlockEndStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMarginBlock,
+    shorthands = ScrollMarginBlock,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -179,7 +181,7 @@ pub struct ScrollMarginBlockStartStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMargin,
+    shorthands = ScrollMargin,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -217,6 +219,7 @@ pub struct ScrollMarginBottomStyleValue<'a>;
     canonical_order = "per grammar",
     box_side = InlineStart|InlineEnd,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-margin-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -242,7 +245,7 @@ pub struct ScrollMarginInlineStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMarginInline,
+    shorthands = ScrollMarginInline,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -274,7 +277,7 @@ pub struct ScrollMarginInlineEndStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMarginInline,
+    shorthands = ScrollMarginInline,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -310,7 +313,7 @@ pub struct ScrollMarginInlineStartStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMargin,
+    shorthands = ScrollMargin,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -342,7 +345,7 @@ pub struct ScrollMarginLeftStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMargin,
+    shorthands = ScrollMargin,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -374,7 +377,7 @@ pub struct ScrollMarginRightStyleValue<'a>;
     initial = "0",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = ScrollMargin,
+    shorthands = ScrollMargin,
     property_group = ScrollSnap,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -412,6 +415,7 @@ pub struct ScrollMarginTopStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -444,6 +448,7 @@ pub struct ScrollPaddingStyleValue<'a>;
     canonical_order = "per grammar",
     box_side = BlockStart|BlockEnd,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -470,7 +475,7 @@ pub struct ScrollPaddingBlockStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPaddingBlock,
+    shorthands = ScrollPaddingBlock,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -503,7 +508,7 @@ pub struct ScrollPaddingBlockEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPaddingBlock,
+    shorthands = ScrollPaddingBlock,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -540,7 +545,7 @@ pub struct ScrollPaddingBlockStartStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPadding,
+    shorthands = ScrollPadding,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -579,6 +584,7 @@ pub struct ScrollPaddingBottomStyleValue<'a>;
     canonical_order = "per grammar",
     box_side = InlineStart|InlineEnd,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.scroll-padding-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -605,7 +611,7 @@ pub struct ScrollPaddingInlineStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPaddingInline,
+    shorthands = ScrollPaddingInline,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -638,7 +644,7 @@ pub struct ScrollPaddingInlineEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPaddingInline,
+    shorthands = ScrollPaddingInline,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -675,7 +681,7 @@ pub struct ScrollPaddingInlineStartStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPadding,
+    shorthands = ScrollPadding,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -708,7 +714,7 @@ pub struct ScrollPaddingLeftStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPadding,
+    shorthands = ScrollPadding,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -741,7 +747,7 @@ pub struct ScrollPaddingRightStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Scrollport,
-    shorthand_group = ScrollPadding,
+    shorthands = ScrollPadding,
     property_group = ScrollSnap,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

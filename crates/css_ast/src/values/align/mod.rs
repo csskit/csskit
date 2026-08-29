@@ -26,7 +26,7 @@ use impls::*;
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = PlaceContent,
+    shorthands = PlaceContent,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -56,7 +56,7 @@ pub enum AlignContentStyleValue<'a> {}
     initial = "normal",
     applies_to = Elements,
     animation_type = Discrete,
-    shorthand_group = PlaceItems,
+    shorthands = PlaceItems,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -86,7 +86,7 @@ pub enum AlignItemsStyleValue<'a> {}
     initial = "auto",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = PlaceSelf,
+    shorthands = PlaceSelf,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -116,7 +116,7 @@ pub enum AlignSelfStyleValue<'a> {}
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = PlaceContent,
+    shorthands = PlaceContent,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -148,7 +148,7 @@ pub enum JustifyContentStyleValue<'a> {}
     initial = "legacy",
     applies_to = Elements,
     animation_type = Discrete,
-    shorthand_group = PlaceItems,
+    shorthands = PlaceItems,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -178,7 +178,7 @@ pub enum JustifyItemsStyleValue<'a> {}
     initial = "auto",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = PlaceSelf,
+    shorthands = PlaceSelf,
     property_group = Align,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -213,6 +213,7 @@ pub enum JustifySelfStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-content"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -243,6 +244,7 @@ pub struct PlaceContentStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -273,6 +275,7 @@ pub struct PlaceItemsStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.place-self"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

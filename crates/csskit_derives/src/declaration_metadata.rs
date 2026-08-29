@@ -1,9 +1,78 @@
 use darling::FromAttributes;
 use proc_macro2::TokenStream;
 use quote::quote;
-use syn::{DeriveInput, Ident, Result};
+use syn::parse::{Parse, ParseStream};
+use syn::punctuated::Punctuated;
+use syn::{DeriveInput, Ident, LitStr, Result, Token};
 
 use crate::darling_ext::{InheritsArg, PipeList};
+
+/// One slot of a shorthand's grammar: the property the slot sets, between string literals of the tokens the grammar
+/// writes before and after it, and followed by `?` when leaving it out states the initial value.
+struct SlotArg {
+	before: TokenStream,
+	property: Ident,
+	optional: bool,
+	after: TokenStream,
+}
+
+impl Parse for SlotArg {
+	fn parse(input: ParseStream) -> Result<Self> {
+		let before = match input.parse::<Option<LitStr>>()? {
+			Some(before) => quote! { #before },
+			None => quote! { "" },
+		};
+		let property = input.parse::<Ident>()?;
+		let optional = input.parse::<Option<Token![?]>>()?.is_some();
+		let after = match input.parse::<Option<LitStr>>()? {
+			Some(after) => quote! { #after },
+			None => quote! { "" },
+		};
+		Ok(Self { before, property, optional, after })
+	}
+}
+
+/// The whole `declaration_writes` attribute: the slots, `repeat` for a grammar which repeats one longhand over the
+/// positions of the shorthand's longhands, or `same` for a grammar whose one value every longhand takes.
+enum WritesArg {
+	Repeat,
+	Same,
+	Slots(Punctuated<SlotArg, Token![,]>),
+}
+
+impl Parse for WritesArg {
+	fn parse(input: ParseStream) -> Result<Self> {
+		if input.peek(Ident) {
+			match input.fork().parse::<Ident>()? {
+				keyword if keyword == "repeat" => {
+					input.parse::<Ident>()?;
+					return Ok(Self::Repeat);
+				}
+				keyword if keyword == "same" => {
+					input.parse::<Ident>()?;
+					return Ok(Self::Same);
+				}
+				_ => {}
+			}
+		}
+		Ok(Self::Slots(Punctuated::parse_terminated(input)?))
+	}
+}
+
+impl WritesArg {
+	fn to_metadata(&self) -> TokenStream {
+		match self {
+			Self::Repeat => quote! { crate::Writes::Repeat },
+			Self::Same => quote! { crate::Writes::Same },
+			Self::Slots(slots) => {
+				let slots = slots.iter().map(|SlotArg { before, property, optional, after }| {
+					quote! { crate::Slot { property: CssAtomSet::#property, before: #before, after: #after, optional: #optional } }
+				});
+				quote! { crate::Writes::Slots(&[#(#slots),*]) }
+			}
+		}
+	}
+}
 
 #[derive(Debug, Default, FromAttributes)]
 #[darling(attributes(declaration_metadata))]
@@ -19,17 +88,15 @@ struct MetadataArg {
 	#[darling(default)]
 	percentages: Option<Ident>,
 	#[darling(default)]
-	shorthand: bool,
-	#[darling(default)]
 	longhands: Option<PipeList<Ident>>,
 	#[darling(default)]
-	shorthand_group: Option<Ident>,
+	shorthands: Option<PipeList<Ident>>,
 	#[darling(default)]
-	shorthand_resets: Option<PipeList<Ident>>,
+	resets: Option<PipeList<Ident>>,
 	#[darling(default)]
-	shorthand_resets_all: bool,
+	resets_all: bool,
 	#[darling(default)]
-	reset_by_shorthands: Option<PipeList<Ident>>,
+	reset_by: Option<PipeList<Ident>>,
 	#[darling(default)]
 	property_group: Option<Ident>,
 	#[darling(default)]
@@ -48,6 +115,9 @@ struct MetadataArg {
 
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let attrs = MetadataArg::from_attributes(&input.attrs)?;
+	let writes_attr = input.attrs.iter().find(|attr| attr.path().is_ident("declaration_writes"));
+	let writes =
+		writes_attr.map(|attr| attr.parse_args::<WritesArg>()).transpose()?.as_ref().map(WritesArg::to_metadata);
 	let ident = &input.ident;
 	let (impl_generics, type_generics, where_clause) = input.generics.split_for_impl();
 	let initial = attrs.initial.map(|initial| quote! { fn initial() -> &'static str { #initial } });
@@ -62,40 +132,44 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		.map(|animation_type| quote! { fn animation_type() -> AnimationType { AnimationType::#animation_type } });
 	let percentages =
 		attrs.percentages.map(|percentages| quote! { fn percentages() -> Percentages { Percentages::#percentages } });
-	let longhands = attrs.longhands.map(|PipeList(values)| {
-		quote! {
-			fn longhands() -> Option<&'static [CssAtomSet]> {
-				Some(&[#(CssAtomSet::#values),*])
-			}
-			fn is_shorthand() -> bool { true }
-		}
-	});
-	let shorthand = attrs.shorthand.then(|| quote! { fn is_shorthand() -> bool { true } });
-	let shorthand_group = attrs.shorthand_group.map(|shorthand_group| {
-		quote! { fn shorthand_group() -> CssAtomSet { CssAtomSet::#shorthand_group } }
-	});
-	let shorthand_reset = {
-		let resets_opt = attrs.shorthand_resets.map(|PipeList(values)| values);
-		let reset = if attrs.shorthand_resets_all {
+	let shorthand = {
+		let longhands = attrs.longhands.map(|PipeList(values)| quote! { &[#(CssAtomSet::#values),*] });
+		let resets = if attrs.resets_all {
 			Some(quote! { crate::ShorthandReset::All })
 		} else {
-			resets_opt.map(|resets| quote! { crate::ShorthandReset::Properties(&[#(CssAtomSet::#resets),*]) })
+			attrs
+				.resets
+				.map(|PipeList(values)| quote! { crate::ShorthandReset::Properties(&[#(CssAtomSet::#values),*]) })
 		};
-		reset.map(|reset| {
+		(longhands.is_some() || resets.is_some()).then(|| {
+			let longhands = longhands.unwrap_or_else(|| quote! { &[] });
+			let writes = writes.map_or_else(|| quote! { None }, |writes| quote! { Some(#writes) });
+			let resets = resets.unwrap_or_else(|| quote! { crate::ShorthandReset::Properties(&[]) });
 			quote! {
-				fn shorthand_reset() -> crate::ShorthandReset {
-					#reset
+				fn shorthand() -> Option<&'static crate::Shorthand> {
+					Some(&crate::Shorthand { longhands: #longhands, writes: #writes, resets: #resets })
 				}
 			}
 		})
 	};
-	let reset_by_shorthands = attrs.reset_by_shorthands.map(|PipeList(values)| {
-		quote! {
-			fn reset_by_shorthands() -> &'static [CssAtomSet] {
-				&[#(CssAtomSet::#values),*]
+	if shorthand.is_none()
+		&& let Some(attr) = writes_attr
+	{
+		return Err(syn::Error::new_spanned(attr, "declaration_writes states no longhands for the value to write"));
+	}
+	let longhand = {
+		let shorthands = attrs.shorthands.map(|PipeList(values)| quote! { &[#(CssAtomSet::#values),*] });
+		let reset_by = attrs.reset_by.map(|PipeList(values)| quote! { &[#(CssAtomSet::#values),*] });
+		(shorthands.is_some() || reset_by.is_some()).then(|| {
+			let shorthands = shorthands.unwrap_or_else(|| quote! { &[] });
+			let reset_by = reset_by.unwrap_or_else(|| quote! { &[] });
+			quote! {
+				fn longhand() -> Option<&'static crate::Longhand> {
+					Some(&crate::Longhand { shorthands: #shorthands, reset_by: #reset_by })
+				}
 			}
-		}
-	});
+		})
+	};
 	let property_group = attrs
 		.property_group
 		.map(|property_group| quote! { fn property_group() -> PropertyGroup { PropertyGroup::#property_group } });
@@ -128,11 +202,8 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			#applies_to
 			#animation_type
 			#percentages
-			#longhands
 			#shorthand
-			#shorthand_group
-			#shorthand_reset
-			#reset_by_shorthands
+			#longhand
 			#property_group
 			#computed_value_type
 			#canonical_order

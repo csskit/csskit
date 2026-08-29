@@ -1,3 +1,4 @@
+mod test_declaration_metadata;
 mod test_parse;
 mod test_peek;
 mod test_semantic_eq;
