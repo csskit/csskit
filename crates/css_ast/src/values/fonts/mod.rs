@@ -346,7 +346,7 @@ pub enum FontStyleStyleValue<'a> {}
     inherits,
     applies_to = Elements|Text,
     animation_type = Discrete,
-    longhands = FontSynthesisPosition|FontSynthesisSmallCaps|FontSynthesisStyle|FontSynthesisWeight,
+    longhands = FontSynthesisWeight|FontSynthesisStyle|FontSynthesisSmallCaps|FontSynthesisPosition,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

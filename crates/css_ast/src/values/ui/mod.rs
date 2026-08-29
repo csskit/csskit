@@ -456,7 +456,7 @@ pub enum NavUpStyleValue<'a> {}
     initial = "see individual properties",
     applies_to = Elements,
     animation_type = Unknown,
-    longhands = OutlineColor|OutlineStyle|OutlineWidth,
+    longhands = OutlineWidth|OutlineStyle|OutlineColor,
     property_group = Ui,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

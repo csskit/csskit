@@ -25,7 +25,7 @@ use impls::*;
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
-    longhands = AnimationDelay|AnimationDirection|AnimationDuration|AnimationFillMode|AnimationIterationCount|AnimationName|AnimationPlayState|AnimationTimeline|AnimationTimingFunction,
+    longhands = AnimationName|AnimationDuration|AnimationTimingFunction|AnimationDelay|AnimationDelayStart|AnimationDelayEnd|AnimationIterationCount|AnimationDirection|AnimationFillMode|AnimationPlayState|AnimationTimeline,
     shorthand_resets = AnimationRange,
     property_group = Animations,
     computed_value_type = Unknown,
@@ -86,6 +86,7 @@ pub struct AnimationCompositionStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
+    longhands = AnimationDelayStart|AnimationDelayEnd,
     shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
@@ -113,6 +114,7 @@ pub struct AnimationDelayStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -139,6 +141,7 @@ pub struct AnimationDelayEndStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
+    shorthand_group = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

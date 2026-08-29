@@ -535,7 +535,7 @@ pub enum ColumnRuleWidthStyleValue<'a> {}
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContentArea,
-    longhands = ColumnGap|RowGap,
+    longhands = RowGap|ColumnGap,
     property_group = Gaps,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

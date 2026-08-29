@@ -319,7 +319,7 @@ pub enum LineHeightStyleValue<'a> {}
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    longhands = TextBoxEdge|TextBoxTrim,
+    longhands = TextBoxTrim|TextBoxEdge,
     property_group = Inline,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

@@ -75,21 +75,18 @@ impl ShorthandGraph {
 		ShorthandRelationships { reset_by }
 	}
 	fn expanded_longhands(&self, properties: &[String]) -> Vec<String> {
-		let mut longhands = BTreeSet::new();
+		let mut longhands = Vec::new();
 		for property in properties {
 			self.collect_expanded_longhands(property, &mut BTreeSet::new(), &mut longhands);
 		}
-		longhands.into_iter().collect()
+		longhands
 	}
 
-	fn collect_expanded_longhands(
-		&self,
-		property: &str,
-		visiting: &mut BTreeSet<String>,
-		longhands: &mut BTreeSet<String>,
-	) {
+	fn collect_expanded_longhands(&self, property: &str, visiting: &mut BTreeSet<String>, longhands: &mut Vec<String>) {
 		assert!(visiting.insert(property.to_string()), "shorthand cycle at {property}");
-		longhands.insert(property.to_string());
+		if !longhands.iter().any(|seen| seen == property) {
+			longhands.push(property.to_string());
+		}
 		if let Some(shorthand) = self.shorthands.get(property) {
 			for longhand in &shorthand.longhands {
 				self.collect_expanded_longhands(longhand, visiting, longhands);
@@ -157,7 +154,7 @@ mod tests {
 	#[test]
 	fn registry_contains_expected_shorthands() {
 		let graph = get_shorthand_graph();
-		assert_eq!(graph.shorthands.len(), 80);
+		assert_eq!(graph.shorthands.len(), 81);
 	}
 
 	#[test]
@@ -172,6 +169,35 @@ mod tests {
 		let border = graph.shorthand("border").unwrap();
 		assert!(border.longhands.contains(&"border-top-width".to_string()));
 		assert!(border.longhands.contains(&"border-width".to_string()));
+	}
+
+	#[test]
+	fn expands_longhands_in_grammar_order() {
+		let graph = get_shorthand_graph();
+		assert_eq!(
+			graph.shorthand("margin").unwrap().longhands,
+			["margin-top", "margin-right", "margin-bottom", "margin-left"]
+		);
+		assert_eq!(
+			graph.shorthand("border").unwrap().longhands,
+			[
+				"border-width",
+				"border-top-width",
+				"border-right-width",
+				"border-bottom-width",
+				"border-left-width",
+				"border-style",
+				"border-top-style",
+				"border-right-style",
+				"border-bottom-style",
+				"border-left-style",
+				"border-color",
+				"border-top-color",
+				"border-right-color",
+				"border-bottom-color",
+				"border-left-color",
+			]
+		);
 	}
 
 	#[test]

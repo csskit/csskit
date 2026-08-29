@@ -187,7 +187,7 @@ pub struct ContainIntrinsicInlineSizeStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = ContainIntrinsicHeight|ContainIntrinsicWidth,
+    longhands = ContainIntrinsicWidth|ContainIntrinsicHeight,
     property_group = Sizing,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
