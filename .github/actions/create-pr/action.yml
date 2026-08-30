@@ -69,17 +69,21 @@ runs:
         fi
 
         # Upsert: edit if PR already exists, create otherwise
-        gh pr edit "${{ inputs.branch }}" \
-          --title "${{ inputs.title }}" \
-          "${BODY_ARGS[@]}" \
-          2>/dev/null || \
-        gh pr create \
-          --title "${{ inputs.title }}" \
-          "${BODY_ARGS[@]}" \
-          --base "${{ inputs.base }}" \
-          --head "${{ inputs.branch }}" \
-          "${LABEL_ARGS[@]}"
+        OPEN_PR=$(gh pr list --head "${{ inputs.branch }}" --state open --json number --jq '.[0].number // empty')
+        if [ -n "$OPEN_PR" ]; then
+          gh pr edit "$OPEN_PR" \
+            --title "${{ inputs.title }}" \
+            "${BODY_ARGS[@]}"
+        else
+          gh pr create \
+            --title "${{ inputs.title }}" \
+            "${BODY_ARGS[@]}" \
+            --base "${{ inputs.base }}" \
+            --head "${{ inputs.branch }}" \
+            "${LABEL_ARGS[@]}"
+        fi
 
         if [ "${{ inputs.auto-merge }}" = "true" ]; then
-          gh pr merge --auto --delete-branch --squash "${{ inputs.branch }}"
+          PR_NUMBER=$(gh pr list --head "${{ inputs.branch }}" --state open --json number --jq '.[0].number')
+          gh pr merge --auto --delete-branch --squash "$PR_NUMBER"
         fi
