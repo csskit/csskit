@@ -29,8 +29,8 @@ macro_rules! cursor_wrapped {
 		}
 
 		impl $crate::SemanticEq for $ident {
-			fn semantic_eq(&self, s: &Self) -> bool {
-				self.0.semantic_eq(&s.0)
+			fn semantic_eq(&self, s: &Self, source_text: &str) -> bool {
+				self.0.semantic_eq(&s.0, source_text)
 			}
 		}
 	};
@@ -106,8 +106,8 @@ macro_rules! define_kinds {
 		define_kind_common!($(#[$meta])* $ident);
 
 		impl $crate::SemanticEq for $ident {
-			fn semantic_eq(&self, s: &Self) -> bool {
-				self.0.semantic_eq(&s.0)
+			fn semantic_eq(&self, s: &Self, source_text: &str) -> bool {
+				self.0.semantic_eq(&s.0, source_text)
 			}
 		}
 		)*
@@ -126,7 +126,7 @@ macro_rules! define_fixed_kinds {
 
 		impl $crate::SemanticEq for $ident {
 			#[inline(always)]
-			fn semantic_eq(&self, _: &Self) -> bool {
+			fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 				true
 			}
 		}
@@ -188,8 +188,8 @@ macro_rules! define_kind_idents {
 		}
 
 		impl $crate::SemanticEq for $ident {
-			fn semantic_eq(&self, s: &Self) -> bool {
-				self.0.semantic_eq(&s.0)
+			fn semantic_eq(&self, s: &Self, source_text: &str) -> bool {
+				self.0.semantic_eq(&s.0, source_text)
 			}
 		}
 
@@ -290,7 +290,7 @@ macro_rules! custom_delim {
 
 		impl $crate::SemanticEq for $ident {
 			#[inline(always)]
-			fn semantic_eq(&self, _: &Self) -> bool {
+			fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 				// The character is fixed by the type itself (parsing only succeeds for
 				// `$ch`), so there is nothing left to compare.
 				true
@@ -373,7 +373,7 @@ macro_rules! custom_double_delim {
 
 		impl $crate::SemanticEq for $ident {
 			#[inline(always)]
-			fn semantic_eq(&self, _: &Self) -> bool {
+			fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 				// Both characters are fixed by the type itself (`$first` then `$second`), so
 				// there is nothing left to compare.
 				true
@@ -889,7 +889,7 @@ pub mod double {
 
 	impl SemanticEq for ColonColon {
 		#[inline(always)]
-		fn semantic_eq(&self, _: &Self) -> bool {
+		fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 			// Both `:` characters are fixed by the type itself, so there is nothing left to
 			// compare.
 			true
@@ -1077,7 +1077,7 @@ mod fixed_kind_semantic_eq_tests {
 					stringify!($ty)
 				);
 				assert!(
-					plain.semantic_eq(&with_rule),
+					plain.semantic_eq(&with_rule, ""),
 					"{} should always be semantic_eq regardless of associated whitespace",
 					stringify!($ty)
 				);

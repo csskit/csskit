@@ -10,8 +10,8 @@ impl<'a, T: ToCursors, A: Allocator> ToCursors for Box<'a, T, A> {
 }
 
 impl<'a, T: SemanticEq, A: Allocator> SemanticEq for Box<'a, T, A> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		(**self).semantic_eq(other)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		(**self).semantic_eq(other, source_text)
 	}
 }
 

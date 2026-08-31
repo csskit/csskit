@@ -113,9 +113,9 @@ where
 	V: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.open_curly.semantic_eq(&other.open_curly)
-			&& self.declarations.semantic_eq(&other.declarations)
-			&& self.close_curly.semantic_eq(&other.close_curly)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.open_curly.semantic_eq(&other.open_curly, source_text)
+			&& self.declarations.semantic_eq(&other.declarations, source_text)
+			&& self.close_curly.semantic_eq(&other.close_curly, source_text)
 	}
 }

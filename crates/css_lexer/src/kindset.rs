@@ -65,6 +65,28 @@ impl KindSet {
 	/// [Token::atom_bits][crate::Token::atom_bits] may return a non-zero value.
 	pub const ATOM_LIKE: KindSet = KindSet::new(&[Kind::Ident, Kind::Function, Kind::AtKeyword, Kind::Dimension]);
 
+	/// A [KindSet] that matches the kinds which name something, such as [Kind::Ident] or
+	/// [Kind::String].
+	pub const NAMED: KindSet = KindSet::new(&[
+		Kind::Ident,
+		Kind::Function,
+		Kind::AtKeyword,
+		Kind::Hash,
+		Kind::String,
+		Kind::Url,
+		Kind::Comment,
+		Kind::UnicodeRange,
+		Kind::Dimension,
+		Kind::BadIdent,
+		Kind::BadFunction,
+		Kind::BadAtKeyword,
+		Kind::BadHash,
+		Kind::BadString,
+		Kind::BadUrl,
+		Kind::BadComment,
+		Kind::BadDimension,
+	]);
+
 	/// A [KindSet] that matches any single character token, such as [Kind::Delim] or [Kind::Colon] - [Kind::RightCurly].
 	pub const DELIM_LIKE: KindSet = KindSet::new(&[
 		Kind::Delim,

@@ -93,13 +93,13 @@ impl ToSpan for Comparison {
 }
 
 impl SemanticEq for Comparison {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		match (self, other) {
-			(Self::LessThan(a), Self::LessThan(b)) => a.semantic_eq(b),
-			(Self::GreaterThan(a), Self::GreaterThan(b)) => a.semantic_eq(b),
-			(Self::GreaterThanEqual(a), Self::GreaterThanEqual(b)) => a.semantic_eq(b),
-			(Self::LessThanEqual(a), Self::LessThanEqual(b)) => a.semantic_eq(b),
-			(Self::Equal(a), Self::Equal(b)) => a.semantic_eq(b),
+			(Self::LessThan(a), Self::LessThan(b)) => a.semantic_eq(b, source_text),
+			(Self::GreaterThan(a), Self::GreaterThan(b)) => a.semantic_eq(b, source_text),
+			(Self::GreaterThanEqual(a), Self::GreaterThanEqual(b)) => a.semantic_eq(b, source_text),
+			(Self::LessThanEqual(a), Self::LessThanEqual(b)) => a.semantic_eq(b, source_text),
+			(Self::Equal(a), Self::Equal(b)) => a.semantic_eq(b, source_text),
 			_ => false,
 		}
 	}

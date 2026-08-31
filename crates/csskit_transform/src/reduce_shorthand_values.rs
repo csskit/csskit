@@ -27,7 +27,7 @@ where
 		T: SemanticEq + ToSpan,
 	{
 		if let Some(second) = second
-			&& second.semantic_eq(first)
+			&& second.semantic_eq(first, self.transformer.source_text)
 		{
 			self.delete(second);
 		}
@@ -39,13 +39,13 @@ where
 	{
 		if let Some(fourth) = fourth {
 			let Some(second) = second else { return };
-			if !fourth.semantic_eq(second) {
+			if !fourth.semantic_eq(second, self.transformer.source_text) {
 				return;
 			}
 			self.delete(fourth);
 		}
 		if let Some(third) = third {
-			if !third.semantic_eq(first) {
+			if !third.semantic_eq(first, self.transformer.source_text) {
 				return;
 			}
 			self.delete(third);
@@ -115,7 +115,7 @@ where
 
 	fn visit_gap_style_value(&mut self, value: &GapStyleValue) {
 		if let Some(second) = &value.1
-			&& gap_values_equal(&value.0, second)
+			&& gap_values_equal(&value.0, second, self.transformer.source_text)
 		{
 			self.delete(second);
 		}
@@ -126,13 +126,21 @@ where
 	}
 }
 
-pub(crate) fn gap_values_equal<'a>(first: &RowGapStyleValue<'a>, second: &ColumnGapStyleValue<'a>) -> bool {
+pub(crate) fn gap_values_equal<'a>(
+	first: &RowGapStyleValue<'a>,
+	second: &ColumnGapStyleValue<'a>,
+	source_text: &str,
+) -> bool {
 	match (first, second) {
-		(RowGapStyleValue::Normal(first), ColumnGapStyleValue::Normal(second)) => first.semantic_eq(second),
-		(RowGapStyleValue::LengthPercentage(first), ColumnGapStyleValue::LengthPercentage(second)) => {
-			first.semantic_eq(second)
+		(RowGapStyleValue::Normal(first), ColumnGapStyleValue::Normal(second)) => {
+			first.semantic_eq(second, source_text)
 		}
-		(RowGapStyleValue::LineWidth(first), ColumnGapStyleValue::LineWidth(second)) => first.semantic_eq(second),
+		(RowGapStyleValue::LengthPercentage(first), ColumnGapStyleValue::LengthPercentage(second)) => {
+			first.semantic_eq(second, source_text)
+		}
+		(RowGapStyleValue::LineWidth(first), ColumnGapStyleValue::LineWidth(second)) => {
+			first.semantic_eq(second, source_text)
+		}
 		_ => false,
 	}
 }

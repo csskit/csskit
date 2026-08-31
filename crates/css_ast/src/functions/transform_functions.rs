@@ -243,7 +243,6 @@ pub struct TranslatezFunction<'a> {
 pub struct ScaleFunction<'a> {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
-	#[semantic_eq(skip)]
 	pub params: (NumericValue<'a, NumberOrPercentage>, Option<T![,]>, Option<NumericValue<'a, NumberOrPercentage>>),
 	#[semantic_eq(skip)]
 	pub close: T![')'],
@@ -450,7 +449,6 @@ pub struct RotatezFunction<'a> {
 pub struct SkewFunction<'a> {
 	#[atom(CssAtomSet::Skew)]
 	pub name: T![Function],
-	#[semantic_eq(skip)]
 	pub params: (CalcableValue<'a, AngleOrZero>, Option<T![,]>, Option<CalcableValue<'a, AngleOrZero>>),
 	#[semantic_eq(skip)]
 	pub close: T![')'],
@@ -514,7 +512,7 @@ pub struct PerspectiveFunction<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
+	use css_parse::{assert_parse, assert_parse_error, assert_parse_span, assert_semantic_eq, assert_semantic_ne};
 
 	#[test]
 	fn test_writes() {
@@ -632,5 +630,16 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewX(foo)");
 		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewY()");
 		assert_parse_error!(CssAtomSet::ATOMS, TransformFunction, "skewY(foo)");
+	}
+
+	#[test]
+	fn test_semantic_eq_reads_parameters() {
+		assert_semantic_eq!(CssAtomSet::ATOMS, TransformFunction, "scale(2)", "scale(2)");
+		assert_semantic_ne!(CssAtomSet::ATOMS, TransformFunction, "scale(.5)", "scale(1.5)");
+		assert_semantic_ne!(CssAtomSet::ATOMS, TransformFunction, "scale(2,3)", "scale(3,2)");
+		assert_semantic_ne!(CssAtomSet::ATOMS, TransformFunction, "scale(-1,-1)", "scale(1,-1)");
+		assert_semantic_ne!(CssAtomSet::ATOMS, TransformFunction, "scale(1)", "scale(1,2)");
+		assert_semantic_eq!(CssAtomSet::ATOMS, TransformFunction, "skew(1deg)", "skew(1deg)");
+		assert_semantic_ne!(CssAtomSet::ATOMS, TransformFunction, "skew(1deg)", "skew(2deg)");
 	}
 }

@@ -4,14 +4,19 @@ expression: pretty
 ---
 #[automatically_derived]
 impl ::css_parse::SemanticEq for FlexWrap {
-    fn semantic_eq(&self, other: &Self) -> bool {
+    fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
         match (self, other) {
-            (FlexWrap::Nowrap(a0), FlexWrap::Nowrap(b0)) => a0.semantic_eq(&b0),
+            (FlexWrap::Nowrap(a0), FlexWrap::Nowrap(b0)) => {
+                a0.semantic_eq(&b0, source_text)
+            }
             (
                 FlexWrap::Wrap { wrap: a_wrap, balance: a_balance },
                 FlexWrap::Wrap { wrap: b_wrap, balance: b_balance },
-            ) => a_wrap.semantic_eq(&b_wrap) && a_balance.semantic_eq(&b_balance),
+            ) => {
+                a_wrap.semantic_eq(&b_wrap, source_text)
+                    && a_balance.semantic_eq(&b_balance, source_text)
+            }
             (
                 FlexWrap::WrapReverse {
                     wrap_reverse: a_wrap_reverse,
@@ -22,8 +27,8 @@ impl ::css_parse::SemanticEq for FlexWrap {
                     balance: b_balance,
                 },
             ) => {
-                a_wrap_reverse.semantic_eq(&b_wrap_reverse)
-                    && a_balance.semantic_eq(&b_balance)
+                a_wrap_reverse.semantic_eq(&b_wrap_reverse, source_text)
+                    && a_balance.semantic_eq(&b_balance, source_text)
             }
             _ => false,
         }

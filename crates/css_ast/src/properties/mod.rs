@@ -392,7 +392,7 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 }
 
 impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		macro_rules! semantic_eq {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 				match (self, other) {
@@ -402,10 +402,10 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 					(Self::Revert(_), Self::Revert(_)) => true,
 					(Self::RevertLayer(_), Self::RevertLayer(_)) => true,
 					(Self::RevertRule(_), Self::RevertRule(_)) => true,
-					(Self::Custom(a), Self::Custom(b)) => a.semantic_eq(b),
-					(Self::Unresolved(a), Self::Unresolved(b)) => a.semantic_eq(b),
-					(Self::Unknown(a), Self::Unknown(b)) => a.semantic_eq(b),
-					$((Self::$name(a), Self::$name(b)) => a.semantic_eq(b),)+
+					(Self::Custom(a), Self::Custom(b)) => a.semantic_eq(b, source_text),
+					(Self::Unresolved(a), Self::Unresolved(b)) => a.semantic_eq(b, source_text),
+					(Self::Unknown(a), Self::Unknown(b)) => a.semantic_eq(b, source_text),
+					$((Self::$name(a), Self::$name(b)) => a.semantic_eq(b, source_text),)+
 					(_, _) => false,
 				}
 			};

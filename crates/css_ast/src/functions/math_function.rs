@@ -643,109 +643,132 @@ pub enum CalcOperand<'a, T> {
 crate::values::impl_value_slot_parse!(CalcOperand, CalcOperandSubstitutionFunction, CalcValue<T>);
 
 impl<'a, T: SemanticEq> SemanticEq for CalcOperand<'a, T> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		calc_operand_eq(self, other)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		calc_operand_eq(self, other, source_text)
 	}
 }
 
-fn calc_operand_eq<'a, T: SemanticEq>(a: &CalcOperand<'a, T>, b: &CalcOperand<'a, T>) -> bool {
+fn calc_operand_eq<'a, T: SemanticEq>(a: &CalcOperand<'a, T>, b: &CalcOperand<'a, T>, source_text: &str) -> bool {
 	match (a, b) {
-		(CalcOperand::Literal(a), CalcOperand::Literal(b)) => calc_value_eq(a, b),
-		(CalcOperand::Substituted(a), CalcOperand::Substituted(b)) => calc_operand_substitution_eq(a, b),
-		(CalcOperand::Unresolved(a), CalcOperand::Unresolved(b)) => a.semantic_eq(b),
+		(CalcOperand::Literal(a), CalcOperand::Literal(b)) => calc_value_eq(a, b, source_text),
+		(CalcOperand::Substituted(a), CalcOperand::Substituted(b)) => calc_operand_substitution_eq(a, b, source_text),
+		(CalcOperand::Unresolved(a), CalcOperand::Unresolved(b)) => a.semantic_eq(b, source_text),
 		_ => false,
 	}
 }
 
-fn calc_value_eq<'a, T: SemanticEq>(a: &CalcValue<'a, T>, b: &CalcValue<'a, T>) -> bool {
+fn calc_value_eq<'a, T: SemanticEq>(a: &CalcValue<'a, T>, b: &CalcValue<'a, T>, source_text: &str) -> bool {
 	match (a, b) {
-		(CalcValue::Number(a), CalcValue::Number(b)) => a.semantic_eq(b),
-		(CalcValue::Typed(a), CalcValue::Typed(b)) => a.semantic_eq(b),
-		(CalcValue::Keyword(a), CalcValue::Keyword(b)) => a.semantic_eq(b),
-		(CalcValue::TreeCounting(a), CalcValue::TreeCounting(b)) => a.semantic_eq(b),
-		(CalcValue::Parenthesized(a), CalcValue::Parenthesized(b)) => calc_in_parens_eq(a, b),
+		(CalcValue::Number(a), CalcValue::Number(b)) => a.semantic_eq(b, source_text),
+		(CalcValue::Typed(a), CalcValue::Typed(b)) => a.semantic_eq(b, source_text),
+		(CalcValue::Keyword(a), CalcValue::Keyword(b)) => a.semantic_eq(b, source_text),
+		(CalcValue::TreeCounting(a), CalcValue::TreeCounting(b)) => a.semantic_eq(b, source_text),
+		(CalcValue::Parenthesized(a), CalcValue::Parenthesized(b)) => calc_in_parens_eq(a, b, source_text),
 		_ => false,
 	}
 }
 
-fn calc_in_parens_eq<'a, T: SemanticEq>(a: &CalcInParens<'a, T>, b: &CalcInParens<'a, T>) -> bool {
-	a.open.semantic_eq(&b.open) && calc_sum_eq(&a.sum, &b.sum)
+fn calc_in_parens_eq<'a, T: SemanticEq>(a: &CalcInParens<'a, T>, b: &CalcInParens<'a, T>, source_text: &str) -> bool {
+	a.open.semantic_eq(&b.open, source_text) && calc_sum_eq(&a.sum, &b.sum, source_text)
 }
 
-fn calc_sum_eq<'a, T: SemanticEq>(a: &CalcSum<'a, T>, b: &CalcSum<'a, T>) -> bool {
+fn calc_sum_eq<'a, T: SemanticEq>(a: &CalcSum<'a, T>, b: &CalcSum<'a, T>, source_text: &str) -> bool {
 	if a.rest.len() != b.rest.len() {
 		return false;
 	}
-	calc_product_eq(&a.first, &b.first)
-		&& a.rest.iter().zip(b.rest.iter()).all(|((op_a, p_a), (op_b, p_b))| op_a == op_b && calc_product_eq(p_a, p_b))
+	calc_product_eq(&a.first, &b.first, source_text)
+		&& a.rest
+			.iter()
+			.zip(b.rest.iter())
+			.all(|((op_a, p_a), (op_b, p_b))| op_a == op_b && calc_product_eq(p_a, p_b, source_text))
 }
 
-fn calc_product_eq<'a, T: SemanticEq>(a: &CalcProduct<'a, T>, b: &CalcProduct<'a, T>) -> bool {
+fn calc_product_eq<'a, T: SemanticEq>(a: &CalcProduct<'a, T>, b: &CalcProduct<'a, T>, source_text: &str) -> bool {
 	if a.rest.len() != b.rest.len() {
 		return false;
 	}
-	calc_operand_eq(&a.first, &b.first)
-		&& a.rest.iter().zip(b.rest.iter()).all(|((op_a, p_a), (op_b, p_b))| op_a == op_b && calc_operand_eq(p_a, p_b))
+	calc_operand_eq(&a.first, &b.first, source_text)
+		&& a.rest
+			.iter()
+			.zip(b.rest.iter())
+			.all(|((op_a, p_a), (op_b, p_b))| op_a == op_b && calc_operand_eq(p_a, p_b, source_text))
 }
 
 fn calc_operand_substitution_eq<'a, T: SemanticEq>(
 	a: &CalcOperandSubstitutionFunction<'a, T>,
 	b: &CalcOperandSubstitutionFunction<'a, T>,
+	source_text: &str,
 ) -> bool {
 	match (a, b) {
-		(CalcOperandSubstitutionFunction::Math(a), CalcOperandSubstitutionFunction::Math(b)) => math_function_eq(a, b),
-		(CalcOperandSubstitutionFunction::Var(a), CalcOperandSubstitutionFunction::Var(b)) => a.semantic_eq(b),
-		(CalcOperandSubstitutionFunction::Env(a), CalcOperandSubstitutionFunction::Env(b)) => a.semantic_eq(b),
-		(CalcOperandSubstitutionFunction::Attr(a), CalcOperandSubstitutionFunction::Attr(b)) => a.semantic_eq(b),
-		(CalcOperandSubstitutionFunction::If(a), CalcOperandSubstitutionFunction::If(b)) => a.semantic_eq(b),
+		(CalcOperandSubstitutionFunction::Math(a), CalcOperandSubstitutionFunction::Math(b)) => {
+			math_function_eq(a, b, source_text)
+		}
+		(CalcOperandSubstitutionFunction::Var(a), CalcOperandSubstitutionFunction::Var(b)) => {
+			a.semantic_eq(b, source_text)
+		}
+		(CalcOperandSubstitutionFunction::Env(a), CalcOperandSubstitutionFunction::Env(b)) => {
+			a.semantic_eq(b, source_text)
+		}
+		(CalcOperandSubstitutionFunction::Attr(a), CalcOperandSubstitutionFunction::Attr(b)) => {
+			a.semantic_eq(b, source_text)
+		}
+		(CalcOperandSubstitutionFunction::If(a), CalcOperandSubstitutionFunction::If(b)) => {
+			a.semantic_eq(b, source_text)
+		}
 		(CalcOperandSubstitutionFunction::FirstValid(a), CalcOperandSubstitutionFunction::FirstValid(b)) => {
-			a.semantic_eq(b)
+			a.semantic_eq(b, source_text)
 		}
 		_ => false,
 	}
 }
 
-fn math_function_eq<'a, T: SemanticEq>(a: &MathFunction<'a, T>, b: &MathFunction<'a, T>) -> bool {
+fn math_function_eq<'a, T: SemanticEq>(a: &MathFunction<'a, T>, b: &MathFunction<'a, T>, source_text: &str) -> bool {
 	use MathFunction::*;
 	match (a, b) {
-		(CalcFunction(a), CalcFunction(b)) => calc_sum_eq(&a.params, &b.params),
-		(MinFunction(a), MinFunction(b)) => a.params.semantic_eq(&b.params),
-		(MaxFunction(a), MaxFunction(b)) => a.params.semantic_eq(&b.params),
+		(CalcFunction(a), CalcFunction(b)) => calc_sum_eq(&a.params, &b.params, source_text),
+		(MinFunction(a), MinFunction(b)) => a.params.semantic_eq(&b.params, source_text),
+		(MaxFunction(a), MaxFunction(b)) => a.params.semantic_eq(&b.params, source_text),
 		(ClampFunction(a), ClampFunction(b)) => {
-			calc_sum_or_none_eq(&a.min, &b.min)
-				&& calc_sum_eq(&a.value, &b.value)
-				&& calc_sum_or_none_eq(&a.max, &b.max)
+			calc_sum_or_none_eq(&a.min, &b.min, source_text)
+				&& calc_sum_eq(&a.value, &b.value, source_text)
+				&& calc_sum_or_none_eq(&a.max, &b.max, source_text)
 		}
 		(RoundFunction(a), RoundFunction(b)) => {
-			a.strategy == b.strategy && calc_sum_eq(&a.value, &b.value) && calc_sum_opt_eq(&a.step, &b.step)
+			a.strategy == b.strategy
+				&& calc_sum_eq(&a.value, &b.value, source_text)
+				&& calc_sum_opt_eq(&a.step, &b.step, source_text)
 		}
 		(ModFunction(a), ModFunction(b)) => {
-			calc_sum_eq(&a.dividend, &b.dividend) && calc_sum_eq(&a.divisor, &b.divisor)
+			calc_sum_eq(&a.dividend, &b.dividend, source_text) && calc_sum_eq(&a.divisor, &b.divisor, source_text)
 		}
 		(RemFunction(a), RemFunction(b)) => {
-			calc_sum_eq(&a.dividend, &b.dividend) && calc_sum_eq(&a.divisor, &b.divisor)
+			calc_sum_eq(&a.dividend, &b.dividend, source_text) && calc_sum_eq(&a.divisor, &b.divisor, source_text)
 		}
-		(SinFunction(a), SinFunction(b)) => a.semantic_eq(b),
-		(CosFunction(a), CosFunction(b)) => a.semantic_eq(b),
-		(TanFunction(a), TanFunction(b)) => a.semantic_eq(b),
-		(AsinFunction(a), AsinFunction(b)) => a.semantic_eq(b),
-		(AcosFunction(a), AcosFunction(b)) => a.semantic_eq(b),
-		(AtanFunction(a), AtanFunction(b)) => a.semantic_eq(b),
-		(Atan2Function(a), Atan2Function(b)) => a.semantic_eq(b),
-		(PowFunction(a), PowFunction(b)) => a.semantic_eq(b),
-		(SqrtFunction(a), SqrtFunction(b)) => a.semantic_eq(b),
-		(HypotFunction(a), HypotFunction(b)) => a.semantic_eq(b),
-		(LogFunction(a), LogFunction(b)) => a.semantic_eq(b),
-		(ExpFunction(a), ExpFunction(b)) => a.semantic_eq(b),
-		(AbsFunction(a), AbsFunction(b)) => a.semantic_eq(b),
-		(SignFunction(a), SignFunction(b)) => calc_sum_eq(&a.params, &b.params),
+		(SinFunction(a), SinFunction(b)) => a.semantic_eq(b, source_text),
+		(CosFunction(a), CosFunction(b)) => a.semantic_eq(b, source_text),
+		(TanFunction(a), TanFunction(b)) => a.semantic_eq(b, source_text),
+		(AsinFunction(a), AsinFunction(b)) => a.semantic_eq(b, source_text),
+		(AcosFunction(a), AcosFunction(b)) => a.semantic_eq(b, source_text),
+		(AtanFunction(a), AtanFunction(b)) => a.semantic_eq(b, source_text),
+		(Atan2Function(a), Atan2Function(b)) => a.semantic_eq(b, source_text),
+		(PowFunction(a), PowFunction(b)) => a.semantic_eq(b, source_text),
+		(SqrtFunction(a), SqrtFunction(b)) => a.semantic_eq(b, source_text),
+		(HypotFunction(a), HypotFunction(b)) => a.semantic_eq(b, source_text),
+		(LogFunction(a), LogFunction(b)) => a.semantic_eq(b, source_text),
+		(ExpFunction(a), ExpFunction(b)) => a.semantic_eq(b, source_text),
+		(AbsFunction(a), AbsFunction(b)) => a.semantic_eq(b, source_text),
+		(SignFunction(a), SignFunction(b)) => calc_sum_eq(&a.params, &b.params, source_text),
 		_ => false,
 	}
 }
 
-fn calc_sum_or_none_eq<'a, T: SemanticEq>(a: &NoneOr<CalcSum<'a, T>>, b: &NoneOr<CalcSum<'a, T>>) -> bool {
+fn calc_sum_or_none_eq<'a, T: SemanticEq>(
+	a: &NoneOr<CalcSum<'a, T>>,
+	b: &NoneOr<CalcSum<'a, T>>,
+	source_text: &str,
+) -> bool {
 	match (a, b) {
-		(NoneOr::Some(a), NoneOr::Some(b)) => calc_sum_eq(a, b),
+		(NoneOr::Some(a), NoneOr::Some(b)) => calc_sum_eq(a, b, source_text),
 		(NoneOr::None(_), NoneOr::None(_)) => true,
 		_ => false,
 	}
@@ -754,10 +777,11 @@ fn calc_sum_or_none_eq<'a, T: SemanticEq>(a: &NoneOr<CalcSum<'a, T>>, b: &NoneOr
 fn calc_sum_opt_eq<'a, T: SemanticEq>(
 	a: &Option<Box<'a, CalcSum<'a, T>>>,
 	b: &Option<Box<'a, CalcSum<'a, T>>>,
+	source_text: &str,
 ) -> bool {
 	match (a, b) {
 		(None, None) => true,
-		(Some(a), Some(b)) => calc_sum_eq(a, b),
+		(Some(a), Some(b)) => calc_sum_eq(a, b, source_text),
 		_ => false,
 	}
 }
@@ -794,8 +818,8 @@ pub struct CalcProduct<'a, T> {
 }
 
 impl<'a, T: SemanticEq> SemanticEq for CalcProduct<'a, T> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		calc_product_eq(self, other)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		calc_product_eq(self, other, source_text)
 	}
 }
 

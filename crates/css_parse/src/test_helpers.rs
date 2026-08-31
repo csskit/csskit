@@ -244,3 +244,69 @@ macro_rules! assert_parse_span {
 }
 #[cfg(test)]
 pub(crate) use assert_parse_span;
+
+/// (Requires feature "testing") Given a Node and two strings, this will expand to code that sets up a parser, parses
+/// both strings as the given Node from a single source text, and asserts that the two parsed Nodes are equal according
+/// to [SemanticEq][crate::SemanticEq]. If either parse fails, or the nodes are not semantically equal, this macro will
+/// [panic] with a readable failure.
+///
+/// ```
+/// use css_parse::*;
+/// assert_semantic_eq!(EmptyAtomSet::ATOMS, T![Ident], "foo", "FoO");
+/// ```
+#[macro_export]
+macro_rules! assert_semantic_eq {
+	($atomset: path, $ty: ty, $a: literal, $b: literal) => {
+		$crate::__assert_semantic!($atomset, $ty, $a, $b, true);
+	};
+}
+
+/// (Requires feature "testing") Given a Node and two strings, this will expand to code that sets up a parser, parses
+/// both strings as the given Node from a single source text, and asserts that the two parsed Nodes are _not_ equal
+/// according to [SemanticEq][crate::SemanticEq]. If either parse fails, or the nodes are semantically equal, this
+/// macro will [panic] with a readable failure.
+///
+/// ```
+/// use css_parse::*;
+/// assert_semantic_ne!(EmptyAtomSet::ATOMS, T![Ident], "foo", "bar");
+/// ```
+#[macro_export]
+macro_rules! assert_semantic_ne {
+	($atomset: path, $ty: ty, $a: literal, $b: literal) => {
+		$crate::__assert_semantic!($atomset, $ty, $a, $b, false);
+	};
+}
+
+#[doc(hidden)]
+#[macro_export]
+macro_rules! __assert_semantic {
+	($atomset: path, $ty: ty, $a: literal, $b: literal, $expected: literal) => {{
+		let source_text = concat!($a, ",", $b);
+		let alloc = $crate::Arena::default();
+		let lexer = css_lexer::Lexer::new(&$atomset, source_text);
+		let mut parser = $crate::Parser::new(&alloc, source_text, lexer);
+		let result = parser.parse_entirely::<$crate::CommaSeparated<$ty>>();
+		if !result.errors.is_empty() {
+			panic!("\n\nParse failed. ({:?}) saw error {:?}", source_text, result.errors[0]);
+		}
+		let list = result.output.expect("parse succeeded");
+		if list.len() != 2 {
+			panic!("\n\nExpected exactly two nodes but {:?} parsed as {} nodes.", source_text, list.len());
+		}
+		use $crate::SemanticEq;
+		let semantically_equal = list[0].0.semantic_eq(&list[1].0, source_text);
+		if semantically_equal != $expected {
+			if $expected {
+				panic!(
+					"\n\nExpected nodes to be semantically equal, but they were not:\n\n   left: {:?}\n  right: {:?}\n",
+					$a, $b
+				);
+			} else {
+				panic!(
+					"\n\nExpected nodes to be semantically unequal, but they were equal:\n\n   left: {:?}\n  right: {:?}\n",
+					$a, $b
+				);
+			}
+		}
+	}};
+}

@@ -16,7 +16,6 @@ use crate::{BgSize, Position};
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct PositionAndSize<'a> {
 	pub position: Position<'a>,
-	#[semantic_eq(skip)]
 	pub size: Option<(T![/], BgSize<'a>)>,
 }
 
@@ -24,7 +23,7 @@ pub struct PositionAndSize<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_peek_false};
+	use css_parse::{assert_parse, assert_peek_false, assert_semantic_eq, assert_semantic_ne};
 
 	#[test]
 	fn test_writes() {
@@ -37,5 +36,11 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, PositionAndSize, "");
+	}
+
+	#[test]
+	fn test_semantic_eq_reads_the_size() {
+		assert_semantic_ne!(CssAtomSet::ATOMS, PositionAndSize, "center/cover", "center/contain");
+		assert_semantic_eq!(CssAtomSet::ATOMS, PositionAndSize, "center/cover", "center/cover");
 	}
 }

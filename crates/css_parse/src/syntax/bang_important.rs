@@ -71,7 +71,7 @@ impl ToSpan for BangImportant {
 }
 
 impl SemanticEq for BangImportant {
-	fn semantic_eq(&self, _: &Self) -> bool {
+	fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 		// The presence of !important is semantic in of itself, so this is just always true
 		true
 	}

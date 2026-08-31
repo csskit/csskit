@@ -105,8 +105,8 @@ impl<'a, T: ToSpan, const MIN: usize> ToSpan for CommaSeparated<'a, T, MIN> {
 }
 
 impl<'a, T: SemanticEq, const MIN: usize> SemanticEq for CommaSeparated<'a, T, MIN> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.items.semantic_eq(&other.items)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.items.semantic_eq(&other.items, source_text)
 	}
 }
 

@@ -226,11 +226,11 @@ where
 	R: SemanticEq,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.open_curly.semantic_eq(&other.open_curly)
-			&& self.close_curly.semantic_eq(&other.close_curly)
-			&& self.declarations.semantic_eq(&other.declarations)
-			&& self.rules.semantic_eq(&other.rules)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.open_curly.semantic_eq(&other.open_curly, source_text)
+			&& self.close_curly.semantic_eq(&other.close_curly, source_text)
+			&& self.declarations.semantic_eq(&other.declarations, source_text)
+			&& self.rules.semantic_eq(&other.rules, source_text)
 	}
 }
 
@@ -271,8 +271,8 @@ mod tests {
 	}
 
 	impl SemanticEq for Decl {
-		fn semantic_eq(&self, other: &Self) -> bool {
-			self.0.semantic_eq(&other.0)
+		fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+			self.0.semantic_eq(&other.0, source_text)
 		}
 	}
 

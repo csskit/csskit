@@ -4,10 +4,10 @@ expression: pretty
 ---
 #[automatically_derived]
 impl ::css_parse::SemanticEq for StringFunction {
-    fn semantic_eq(&self, other: &Self) -> bool {
+    fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
         let StringFunction { name: a_name, .. } = self;
         let StringFunction { name: b_name, .. } = other;
-        a_name.semantic_eq(&b_name)
+        a_name.semantic_eq(&b_name, source_text)
     }
 }

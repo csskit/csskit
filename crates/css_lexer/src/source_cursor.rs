@@ -512,6 +512,41 @@ impl<'a> SourceCursor<'a> {
 		Ok(())
 	}
 
+	/// Returns `true` if `self` and `other` have the same content, with escape codes parsed out.
+	///
+	/// The content of a [SourceCursor] is its source text, ignoring characters that make this token kind, such as the
+	/// quotes of a [Kind::String], the `#` of a [Kind::Hash], the `url(` and `)` of a [Kind::Url], or the number of a
+	/// [Kind::Dimension].
+	///
+	/// All content is parsed, and escape codes resolved, So `'a'` and `"\61"` hold the same content.
+	pub fn eq_parsed(&self, other: &SourceCursor) -> bool {
+		if !self.token().contains_escape_chars() && !other.token().contains_escape_chars() {
+			return self.content_slice() == other.content_slice();
+		}
+		self.content_chars().eq(other.content_chars())
+	}
+
+	/// Like [SourceCursor::eq_parsed], but ASCII letters compare without case, so `1Px` and `1px` would return `true`.
+	pub fn eq_parsed_ignore_ascii_case(&self, other: &SourceCursor) -> bool {
+		if !self.token().contains_escape_chars() && !other.token().contains_escape_chars() {
+			let a = self.content_slice();
+			let b = other.content_slice();
+			if self.token().is_lower_case() && other.token().is_lower_case() {
+				return a == b;
+			}
+			return a.eq_ignore_ascii_case(b);
+		}
+		let mut a = self.content_chars();
+		let mut b = other.content_chars();
+		loop {
+			match (a.next(), b.next()) {
+				(None, None) => return true,
+				(Some(x), Some(y)) if x.eq_ignore_ascii_case(&y) => {}
+				_ => return false,
+			}
+		}
+	}
+
 	pub fn eq_ignore_ascii_case(&self, other: &str) -> bool {
 		debug_assert!(self.token() != Kind::Delim && self.token() != Kind::Url);
 		debug_assert!(other.to_ascii_lowercase() == other);
@@ -601,6 +636,10 @@ impl<'a> SourceCursor<'a> {
 
 	fn parsed_chars(&self) -> ParsedChars<'a> {
 		ParsedChars::new(self.content_slice(), self.token().kind() == Kind::String)
+	}
+
+	fn content_chars(&self) -> impl Iterator<Item = char> + 'a {
+		self.parsed_chars().map(|(c, _)| c)
 	}
 }
 
@@ -715,6 +754,44 @@ mod test {
 
 		let c = Cursor::new(SourceOffset(3), Token::new_ident(false, false, true, 0, 7));
 		assert!(SourceCursor::from(c, "b\\41\\52").eq_ignore_ascii_case("bar"));
+	}
+
+	#[test]
+	fn eq_parsed() {
+		let ident = Cursor::new(SourceOffset(0), Token::new_ident(false, false, false, 0, 3));
+		let hash = Cursor::new(SourceOffset(0), Token::new_hash(false, true, false, 4, 0));
+		assert!(SourceCursor::from(hash, "#foo").eq_parsed(&SourceCursor::from(ident, "foo")));
+		let dimension = Cursor::new(SourceOffset(0), Token::new_dimension(true, false, 3, 2, 1.0, 0));
+		let px_hash = Cursor::new(SourceOffset(0), Token::new_hash(false, true, false, 3, 0));
+		assert!(SourceCursor::from(dimension, "1.0px").eq_parsed(&SourceCursor::from(px_hash, "#px")));
+
+		let url = Cursor::new(SourceOffset(0), Token::new_url(true, false, false, 4, 1, 6));
+		assert!(SourceCursor::from(url, "URL(a)").eq_parsed(&SourceCursor::from(url, "url(a)")));
+
+		let single = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, false, 3));
+		let double = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, false, 3));
+		assert!(SourceCursor::from(single, "'a'").eq_parsed(&SourceCursor::from(double, "\"a\"")));
+		let open = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, false, false, 2));
+		assert!(SourceCursor::from(open, "'a").eq_parsed(&SourceCursor::from(single, "'a'")));
+
+		let escaped = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
+		assert!(SourceCursor::from(escaped, "b\\61r").eq_parsed(&SourceCursor::from(ident, "bar")));
+		let escaped = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 5));
+		assert!(SourceCursor::from(escaped, "'\\61'").eq_parsed(&SourceCursor::from(single, "'a'")));
+
+		assert!(!SourceCursor::from(ident, "bar").eq_parsed(&SourceCursor::from(ident, "foo")));
+	}
+
+	#[test]
+	fn eq_parsed_ignore_ascii_case() {
+		let upper = Cursor::new(SourceOffset(0), Token::new_ident(true, false, false, 0, 3));
+		let lower = Cursor::new(SourceOffset(9), Token::new_ident(false, false, false, 0, 3));
+		assert!(SourceCursor::from(upper, "FoO").eq_parsed_ignore_ascii_case(&SourceCursor::from(lower, "foo")));
+		assert!(!SourceCursor::from(upper, "FoO").eq_parsed(&SourceCursor::from(lower, "foo")));
+
+		let escaped = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 5));
+		assert!(SourceCursor::from(escaped, "b\\41r").eq_parsed_ignore_ascii_case(&SourceCursor::from(lower, "bar")));
+		assert!(!SourceCursor::from(escaped, "b\\41r").eq_parsed(&SourceCursor::from(lower, "bar")));
 	}
 
 	#[test]

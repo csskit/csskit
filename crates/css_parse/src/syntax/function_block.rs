@@ -42,10 +42,10 @@ impl<'a> ToSpan for FunctionBlock<'a> {
 }
 
 impl<'a> SemanticEq for FunctionBlock<'a> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.name.semantic_eq(&other.name)
-			&& self.params.semantic_eq(&other.params)
-			&& self.close.semantic_eq(&other.close)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.name.semantic_eq(&other.name, source_text)
+			&& self.params.semantic_eq(&other.params, source_text)
+			&& self.close.semantic_eq(&other.close, source_text)
 	}
 }
 

@@ -46,11 +46,11 @@ impl ToSpan for Sheet<'_> {
 }
 
 impl SemanticEq for Sheet<'_> {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		if self.rules.len() != other.rules.len() {
 			return false;
 		}
-		self.rules.iter().zip(other.rules.iter()).all(|(a, b)| a.semantic_eq(b))
+		self.rules.iter().zip(other.rules.iter()).all(|(a, b)| a.semantic_eq(b, source_text))
 	}
 }
 

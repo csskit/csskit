@@ -48,10 +48,10 @@ where
 	D: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		match (self, other) {
-			(Self::Declaration(a), Self::Declaration(b)) => a.semantic_eq(b),
-			(Self::Bad(a), Self::Bad(b)) => a.semantic_eq(b),
+			(Self::Declaration(a), Self::Declaration(b)) => a.semantic_eq(b, source_text),
+			(Self::Bad(a), Self::Bad(b)) => a.semantic_eq(b, source_text),
 			_ => false,
 		}
 	}

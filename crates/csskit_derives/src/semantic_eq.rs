@@ -48,7 +48,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			.map(|(a, b)| {
 				let a_name = &a.binding;
 				let b_name = &b.binding;
-				quote! { #a_name.semantic_eq(&#b_name) }
+				quote! { #a_name.semantic_eq(&#b_name, source_text) }
 			})
 			.collect();
 		let a_pat = s_a.variants()[0].pat();
@@ -74,7 +74,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 					.map(|(a, b)| {
 						let a_name = &a.binding;
 						let b_name = &b.binding;
-						quote! { #a_name.semantic_eq(&#b_name) }
+						quote! { #a_name.semantic_eq(&#b_name, source_text) }
 					})
 					.collect();
 				let body = steps.into_iter().reduce(|acc, item| quote! { #acc && #item }).unwrap_or(quote! { true });
@@ -94,7 +94,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::SemanticEq for #ident #type_generics #where_clause {
-			fn semantic_eq(&self, other: &Self) -> bool {
+			fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 				use ::css_parse::SemanticEq;
 				#body
 			}
