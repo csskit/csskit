@@ -1458,11 +1458,16 @@ fn tokenizes_atoms_correctly() {
 
 	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "--baz");
 	let token = lexer.advance();
-	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Baz);
+	assert!(token.is_dashed_ident());
+	assert_eq!(token.atom_bits(), 0);
 
 	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "18foo");
 	let token = lexer.advance();
 	assert_eq!(CustomAtom::from_bits(token.atom_bits()), CustomAtom::Foo);
+
+	let mut lexer = Lexer::new(&CUSTOM_ATOMS, "18--foo");
+	let token = lexer.advance();
+	assert_eq!(token.atom_bits(), 0);
 }
 
 #[test]

@@ -228,8 +228,7 @@ impl<'a> ByteCursor<'a> {
 					// SAFETY: the fast path only scans ASCII ident bytes, which are valid UTF-8.
 					let ident_str = unsafe { std::str::from_utf8_unchecked(&bytes[..i]) };
 					self.advance_n(i);
-					let atom_bits =
-						if dashed_ident { atoms.str_to_bits(&ident_str[2..]) } else { atoms.str_to_bits(ident_str) };
+					let atom_bits = atoms.str_to_bits(ident_str);
 					return (
 						len,
 						contains_non_lower_ascii,
@@ -261,15 +260,14 @@ impl<'a> ByteCursor<'a> {
 				let next = self.peek_char_at(1);
 				self.pos += 1;
 				len += 1;
+				small_ident.append(c);
 				if next == '-' {
 					self.pos += 1;
 					len += 1;
 					dashed_ident = true;
-					// Reset the small_ident buffer as dashed_idents always begin with two dashes.
-					small_ident = SmallStrBuf::<MAX_SMALL_IDENT_SIZE>::new();
+					small_ident.append(next);
 					continue;
 				}
-				small_ident.append(c);
 			} else if is_ident(c) {
 				let clen = c.len_utf8();
 				self.advance_n(clen);
@@ -305,10 +303,6 @@ impl<'a> ByteCursor<'a> {
 		// so it should be used over the str slice as it will have parsed escape sequences
 		let (is_url, atom_bits) = if let Some(ident) = small_ident.as_str() {
 			(is_url_ident(ident), atoms.str_to_bits(ident))
-		} else if dashed_ident {
-			// For dashed identifiers, skip the leading "--" for atom lookup
-			let slice = &str[2..len as usize];
-			(false, atoms.str_to_bits(slice))
 		} else {
 			// We intentionally make the small_ident buffer large enough to capture the `url` ident an unescape it,
 			// so this branch would never be hit with a valid URL, we can guarantee this ident is not a URL.

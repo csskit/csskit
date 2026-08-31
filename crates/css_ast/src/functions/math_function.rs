@@ -896,7 +896,7 @@ pub enum RoundingStrategy {
 mod tests {
 	use super::*;
 	use crate::{CssAtomSet, Length};
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	type LengthMathFunction<'a> = MathFunction<'a, Length>;
 
@@ -999,5 +999,6 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, LengthMathFunction, "calc()");
 		assert_parse_error!(CssAtomSet::ATOMS, LengthMathFunction, "clamp(1px, 2px)");
 		assert_parse_error!(CssAtomSet::ATOMS, LengthMathFunction, "calc(1px + 10%)");
+		assert_peek_false!(CssAtomSet::ATOMS, LengthMathFunction, "--calc(1px)");
 	}
 }

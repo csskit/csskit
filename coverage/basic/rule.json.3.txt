@@ -8,7 +8,7 @@ check coverage/basic/basic-stats.cks --format json
       "diagnostics": [],
       "stats": [
         {
-          "name": "total-rules",
+          "name": "--total-rules",
           "value": 1,
           "unit": null
         }
@@ -17,7 +17,7 @@ check coverage/basic/basic-stats.cks --format json
   ],
   "aggregate_stats": [
     {
-      "name": "total-rules",
+      "name": "--total-rules",
       "value": 1,
       "unit": null
     }

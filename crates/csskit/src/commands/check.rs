@@ -276,7 +276,7 @@ impl Check {
 							StatType::Bytes => " bytes",
 							StatType::Lines => " lines",
 						};
-						println!("  --{}: {}{}", name, count, type_label);
+						println!("  {}: {}{}", name, count, type_label);
 					}
 				}
 			}
@@ -293,7 +293,7 @@ fn print_stats_text(stats: &[StatRecord]) {
 	println!("\nStatistics:");
 	for stat in stats {
 		let unit = stat.unit.map(|u| format!(" {u}")).unwrap_or_default();
-		println!("  --{}: {}{}", stat.name, stat.value, unit);
+		println!("  {}: {}{}", stat.name, stat.value, unit);
 	}
 }
 
