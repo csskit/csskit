@@ -65,8 +65,8 @@ impl<'a> ToCursors for BadDeclaration<'a> {
 }
 
 impl<'a> SemanticEq for BadDeclaration<'a> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.0.semantic_eq(&other.0)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.0.semantic_eq(&other.0, source_text)
 	}
 }
 

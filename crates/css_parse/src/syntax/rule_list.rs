@@ -111,9 +111,9 @@ where
 	R: NodeWithMetadata<M> + SemanticEq,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.open_curly.semantic_eq(&other.open_curly)
-			&& self.rules.semantic_eq(&other.rules)
-			&& self.close_curly.semantic_eq(&other.close_curly)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.open_curly.semantic_eq(&other.open_curly, source_text)
+			&& self.rules.semantic_eq(&other.rules, source_text)
+			&& self.close_curly.semantic_eq(&other.close_curly, source_text)
 	}
 }

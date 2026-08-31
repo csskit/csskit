@@ -124,8 +124,8 @@ impl<'a> ToSpan for ComponentValues<'a> {
 
 // Implement for ComponentValues - compare sequences, ignoring whitespace
 impl<'a> SemanticEq for ComponentValues<'a> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.values.semantic_eq(&other.values)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.values.semantic_eq(&other.values, source_text)
 	}
 }
 

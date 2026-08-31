@@ -47,8 +47,8 @@ where
 	D: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.declarations.semantic_eq(&other.declarations)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.declarations.semantic_eq(&other.declarations, source_text)
 	}
 }
 

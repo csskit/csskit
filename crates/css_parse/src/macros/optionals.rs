@@ -56,10 +56,10 @@ macro_rules! impl_optionals {
 			where
 				$($T: SemanticEq,)+
 			{
-				fn semantic_eq(&self, o: &Self) -> bool {
+				fn semantic_eq(&self, o: &Self, source_text: &str) -> bool {
 					let $name($($A),+) = self;
 					let $name($($B),+) = o;
-					$($A.semantic_eq($B))&&+
+					$($A.semantic_eq($B, source_text))&&+
 				}
 			}
 

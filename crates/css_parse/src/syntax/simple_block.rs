@@ -47,10 +47,10 @@ impl<'a> ToSpan for SimpleBlock<'a> {
 }
 
 impl<'a> SemanticEq for SimpleBlock<'a> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.open.semantic_eq(&other.open)
-			&& self.values.semantic_eq(&other.values)
-			&& self.close.semantic_eq(&other.close)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.open.semantic_eq(&other.open, source_text)
+			&& self.values.semantic_eq(&other.values, source_text)
+			&& self.close.semantic_eq(&other.close, source_text)
 	}
 }
 

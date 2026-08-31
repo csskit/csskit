@@ -155,21 +155,21 @@ impl<'a> ToSpan for ComponentValue<'a> {
 }
 
 impl<'a> SemanticEq for ComponentValue<'a> {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		match (self, other) {
-			(Self::SimpleBlock(a), Self::SimpleBlock(b)) => a.semantic_eq(b),
-			(Self::Function(a), Self::Function(b)) => a.semantic_eq(b),
-			(Self::Number(a), Self::Number(b)) => a.semantic_eq(b),
-			(Self::Dimension(a), Self::Dimension(b)) => a.semantic_eq(b),
-			(Self::Ident(a), Self::Ident(b)) => a.semantic_eq(b),
-			(Self::AtKeyword(a), Self::AtKeyword(b)) => a.semantic_eq(b),
-			(Self::Hash(a), Self::Hash(b)) => a.semantic_eq(b),
-			(Self::String(a), Self::String(b)) => a.semantic_eq(b),
-			(Self::Url(a), Self::Url(b)) => a.semantic_eq(b),
-			(Self::Delim(a), Self::Delim(b)) => a.semantic_eq(b),
-			(Self::Colon(a), Self::Colon(b)) => a.semantic_eq(b),
-			(Self::Semicolon(a), Self::Semicolon(b)) => a.semantic_eq(b),
-			(Self::Comma(a), Self::Comma(b)) => a.semantic_eq(b),
+			(Self::SimpleBlock(a), Self::SimpleBlock(b)) => a.semantic_eq(b, source_text),
+			(Self::Function(a), Self::Function(b)) => a.semantic_eq(b, source_text),
+			(Self::Number(a), Self::Number(b)) => a.semantic_eq(b, source_text),
+			(Self::Dimension(a), Self::Dimension(b)) => a.semantic_eq(b, source_text),
+			(Self::Ident(a), Self::Ident(b)) => a.semantic_eq(b, source_text),
+			(Self::AtKeyword(a), Self::AtKeyword(b)) => a.semantic_eq(b, source_text),
+			(Self::Hash(a), Self::Hash(b)) => a.semantic_eq(b, source_text),
+			(Self::String(a), Self::String(b)) => a.semantic_eq(b, source_text),
+			(Self::Url(a), Self::Url(b)) => a.semantic_eq(b, source_text),
+			(Self::Delim(a), Self::Delim(b)) => a.semantic_eq(b, source_text),
+			(Self::Colon(a), Self::Colon(b)) => a.semantic_eq(b, source_text),
+			(Self::Semicolon(a), Self::Semicolon(b)) => a.semantic_eq(b, source_text),
+			(Self::Comma(a), Self::Comma(b)) => a.semantic_eq(b, source_text),
 			// Whitespace has no semantic relevance, other than its presence, so it should always be true
 			(Self::Whitespace(_), Self::Whitespace(_)) => true,
 			_ => false, // Different variants are never equal

@@ -151,8 +151,8 @@ where
 	R: SemanticEq,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.prelude.semantic_eq(&other.prelude) && self.block.semantic_eq(&other.block)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.prelude.semantic_eq(&other.prelude, source_text) && self.block.semantic_eq(&other.block, source_text)
 	}
 }
 
@@ -190,8 +190,8 @@ mod tests {
 	}
 
 	impl SemanticEq for Decl {
-		fn semantic_eq(&self, other: &Self) -> bool {
-			self.0.semantic_eq(&other.0)
+		fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+			self.0.semantic_eq(&other.0, source_text)
 		}
 	}
 

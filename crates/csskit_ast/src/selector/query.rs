@@ -126,7 +126,7 @@ impl ToSpan for QueryCompoundSelector<'_> {
 }
 
 impl SemanticEq for QueryCompoundSelector<'_> {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, _source_text: &str) -> bool {
 		self.parts == other.parts && self.segments == other.segments
 	}
 }

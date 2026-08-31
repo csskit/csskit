@@ -81,10 +81,10 @@ where
 }
 
 impl<Left: SemanticEq, Right: SemanticEq> SemanticEq for Either<Left, Right> {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		match (self, other) {
-			(Self::Left(a), Self::Left(b)) => a.semantic_eq(b),
-			(Self::Right(a), Self::Right(b)) => a.semantic_eq(b),
+			(Self::Left(a), Self::Left(b)) => a.semantic_eq(b, source_text),
+			(Self::Right(a), Self::Right(b)) => a.semantic_eq(b, source_text),
 			_ => false,
 		}
 	}

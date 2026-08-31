@@ -39,8 +39,8 @@ impl<'a, D, M> ToSpan for UnknownRuleBlock<'a, D, M> {
 }
 
 impl<'a, D, M> SemanticEq for UnknownRuleBlock<'a, D, M> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.values.semantic_eq(&other.values)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.values.semantic_eq(&other.values, source_text)
 	}
 }
 

@@ -171,11 +171,11 @@ where
 	V: DeclarationValue<'a, M>,
 	M: NodeMetadata,
 {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		// Semicolon is not semantically relevant!
-		self.name.semantic_eq(&other.name)
-			&& self.value.semantic_eq(&other.value)
-			&& self.important.semantic_eq(&other.important)
+		self.name.semantic_eq(&other.name, source_text)
+			&& self.value.semantic_eq(&other.value, source_text)
+			&& self.important.semantic_eq(&other.important, source_text)
 	}
 }
 
@@ -217,8 +217,8 @@ mod tests {
 	}
 
 	impl SemanticEq for Decl {
-		fn semantic_eq(&self, other: &Self) -> bool {
-			self.0.semantic_eq(&other.0)
+		fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+			self.0.semantic_eq(&other.0, source_text)
 		}
 	}
 

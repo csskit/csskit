@@ -34,6 +34,8 @@ pub enum AssociatedWhitespaceRules {
 }
 
 impl AssociatedWhitespaceRules {
+	pub const NONE: AssociatedWhitespaceRules = AssociatedWhitespaceRules::none();
+
 	pub(crate) const fn from_bits(bits: u8) -> Self {
 		Self { bits: bits & 0b111 }
 	}

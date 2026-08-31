@@ -170,11 +170,11 @@ impl Nth {
 }
 
 impl SemanticEq for Nth {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		match (self, other) {
-			(Self::Odd(a), Self::Odd(b)) => a.semantic_eq(b),
-			(Self::Even(a), Self::Even(b)) => a.semantic_eq(b),
-			(Self::Integer(a), Self::Integer(b)) => a.semantic_eq(b),
+			(Self::Odd(a), Self::Odd(b)) => a.semantic_eq(b, source_text),
+			(Self::Even(a), Self::Even(b)) => a.semantic_eq(b, source_text),
+			(Self::Integer(a), Self::Integer(b)) => a.semantic_eq(b, source_text),
 			(Self::Anb(a1, b1, _), Self::Anb(a2, b2, _)) => a1 == a2 && b1 == b2,
 			_ => false,
 		}

@@ -522,13 +522,13 @@ impl ToSpan for CssTypes {
 	}
 }
 impl SemanticEq for CssTypes {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, _source_text: &str) -> bool {
 		self == other
 	}
 }
 
 impl SemanticEq for CssMetadata {
-	fn semantic_eq(&self, other: &Self) -> bool {
+	fn semantic_eq(&self, other: &Self, _source_text: &str) -> bool {
 		self == other
 	}
 }

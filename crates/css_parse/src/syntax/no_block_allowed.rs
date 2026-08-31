@@ -51,8 +51,8 @@ impl<D, M> ToSpan for NoBlockAllowed<D, M> {
 }
 
 impl<D, M> SemanticEq for NoBlockAllowed<D, M> {
-	fn semantic_eq(&self, other: &Self) -> bool {
-		self.semicolon.semantic_eq(&other.semicolon)
+	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
+		self.semicolon.semantic_eq(&other.semicolon, source_text)
 	}
 }
 
