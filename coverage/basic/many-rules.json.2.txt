@@ -17,7 +17,7 @@ check coverage/basic/warn-many-rules.cks --format json
       ],
       "stats": [
         {
-          "name": "rule-count",
+          "name": "--rule-count",
           "value": 3,
           "unit": null
         }
@@ -26,7 +26,7 @@ check coverage/basic/warn-many-rules.cks --format json
   ],
   "aggregate_stats": [
     {
-      "name": "rule-count",
+      "name": "--rule-count",
       "value": 3,
       "unit": null
     }

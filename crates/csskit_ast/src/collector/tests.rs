@@ -36,7 +36,7 @@ fn test_basic() {
 		.baz {}
 	"#;
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("total-rules");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--total-rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
 }
@@ -53,7 +53,7 @@ fn test_implicit_counter() {
 		.baz {}
 	"#;
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("total-rules");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--total-rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
 }
@@ -68,7 +68,7 @@ fn test_bytes() {
 	let css_source = ".a{}.bb{}";
 	let (counters, diagnostics) = run(&alloc, source, css_source);
 	// .a{} = 4 bytes, .bb{} = 5 bytes, total = 9 bytes
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rule-bytes");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--rule-bytes");
 	assert_eq!(counters.get(&a), Some(&(StatType::Bytes, 9)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
 }
@@ -86,7 +86,7 @@ fn test_lines() {
 }
 .bb{}";
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rule-lines");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--rule-lines");
 	assert_eq!(counters.get(&a), Some(&(StatType::Lines, 4)));
 	assert_eq!(diagnostics.len(), 0, "No diagnostics should be generated");
 }
@@ -182,7 +182,7 @@ fn test_diagnostics_with_stat_reference() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("total");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--total");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 
 	assert_eq!(diagnostics.len(), 3);
@@ -204,7 +204,7 @@ fn test_when_rule_true_condition() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 1);
 	assert_eq!(diagnostics[0].message, "Too many rules: 3");
@@ -224,7 +224,7 @@ fn test_when_rule_false_condition() {
 	let css_source = ".a {} .b {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 2)));
 	assert_eq!(diagnostics.len(), 0);
 }
@@ -245,8 +245,8 @@ fn test_when_rule_with_nested_selector() {
 	let css_source = ".a {} #foo {} .b {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let ids = CsskitAtomSet::get_dyn_set().atom_from_str("id-selectors");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let ids = CsskitAtomSet::get_dyn_set().atom_from_str("--id-selectors");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&ids), Some(&(StatType::Counter, 1)));
 	assert_eq!(diagnostics.len(), 1);
@@ -286,7 +286,7 @@ fn test_nested_if_in_style_rule() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let foo = CsskitAtomSet::get_dyn_set().atom_from_str("foo");
+	let foo = CsskitAtomSet::get_dyn_set().atom_from_str("--foo");
 	assert_eq!(counters.get(&foo), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 1);
 	assert_eq!(diagnostics[0].message, "bar");
@@ -311,7 +311,7 @@ fn test_nested_selector_in_style_rule() {
 	let (counters, diagnostics) = run(&alloc, source, css_source);
 
 	// Verify stats - only color declarations should be counted
-	let color_decls = CsskitAtomSet::get_dyn_set().atom_from_str("color-decls");
+	let color_decls = CsskitAtomSet::get_dyn_set().atom_from_str("--color-decls");
 	assert_eq!(counters.get(&color_decls), Some(&(StatType::Counter, 2)));
 
 	// Verify diagnostics for each color declaration
@@ -338,8 +338,8 @@ fn test_nested_if_with_combined_conditions() {
 	let css_source = ".a { color: red; } .b { background: blue; font-size: 12px; }";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let decls = CsskitAtomSet::get_dyn_set().atom_from_str("decls");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let decls = CsskitAtomSet::get_dyn_set().atom_from_str("--decls");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 2)));
 	assert_eq!(counters.get(&decls), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 1);
@@ -366,8 +366,8 @@ fn test_conditional_nested_selector() {
 	let css_source = ".a { color: red; } .b { background: blue; } .c { color: green; }";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let color_decls = CsskitAtomSet::get_dyn_set().atom_from_str("color-decls");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let color_decls = CsskitAtomSet::get_dyn_set().atom_from_str("--color-decls");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&color_decls), Some(&(StatType::Counter, 2)));
 	assert_eq!(diagnostics.len(), 2);
@@ -404,9 +404,9 @@ fn test_reactive_conditional_chain() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let warnings = CsskitAtomSet::get_dyn_set().atom_from_str("warnings");
-	let critical = CsskitAtomSet::get_dyn_set().atom_from_str("critical");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let warnings = CsskitAtomSet::get_dyn_set().atom_from_str("--warnings");
+	let critical = CsskitAtomSet::get_dyn_set().atom_from_str("--critical");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&warnings), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&critical), Some(&(StatType::Counter, 3)));
@@ -440,8 +440,8 @@ fn test_nested_not_condition_preserved() {
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
 
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let nested = CsskitAtomSet::get_dyn_set().atom_from_str("nested-matches");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let nested = CsskitAtomSet::get_dyn_set().atom_from_str("--nested-matches");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&nested), Some(&(StatType::Counter, 3)));
 	assert_eq!(diagnostics.len(), 3);
@@ -467,8 +467,8 @@ fn test_nested_not_condition_unmatched() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let nested = CsskitAtomSet::get_dyn_set().atom_from_str("nested-matches");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let nested = CsskitAtomSet::get_dyn_set().atom_from_str("--nested-matches");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&nested), Some(&(StatType::Counter, 0)));
 	assert_eq!(diagnostics.len(), 0);
@@ -489,8 +489,8 @@ fn test_cycles_direct() {
 	let css_source = ".x {} .y {} .z {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("a");
-	let b = CsskitAtomSet::get_dyn_set().atom_from_str("b");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--a");
+	let b = CsskitAtomSet::get_dyn_set().atom_from_str("--b");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 6))); // 3 unconditional + 3 from second @when
 	assert_eq!(counters.get(&b), Some(&(StatType::Counter, 3))); // 3 from first @when
 }
@@ -513,9 +513,9 @@ fn test_cycle_prevention_indirect() {
 	let css_source = ".x {} .y {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let a = CsskitAtomSet::get_dyn_set().atom_from_str("a");
-	let b = CsskitAtomSet::get_dyn_set().atom_from_str("b");
-	let c = CsskitAtomSet::get_dyn_set().atom_from_str("c");
+	let a = CsskitAtomSet::get_dyn_set().atom_from_str("--a");
+	let b = CsskitAtomSet::get_dyn_set().atom_from_str("--b");
+	let c = CsskitAtomSet::get_dyn_set().atom_from_str("--c");
 	assert_eq!(counters.get(&a), Some(&(StatType::Counter, 4)));
 	assert_eq!(counters.get(&b), Some(&(StatType::Counter, 2)));
 	assert_eq!(counters.get(&c), Some(&(StatType::Counter, 2)));
@@ -533,7 +533,7 @@ fn test_cycle_prevention_self_referential() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
+	let count = CsskitAtomSet::get_dyn_set().atom_from_str("--count");
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 6)));
 }
 
@@ -552,9 +552,9 @@ fn test_equality_vs_range_semantics() {
 	let css_source = ".a {} .b {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("rules");
-	let equal = CsskitAtomSet::get_dyn_set().atom_from_str("equal-triggered");
-	let greater = CsskitAtomSet::get_dyn_set().atom_from_str("greater-triggered");
+	let rules = CsskitAtomSet::get_dyn_set().atom_from_str("--rules");
+	let equal = CsskitAtomSet::get_dyn_set().atom_from_str("--equal-triggered");
+	let greater = CsskitAtomSet::get_dyn_set().atom_from_str("--greater-triggered");
 	assert_eq!(counters.get(&rules), Some(&(StatType::Counter, 2)));
 	assert_eq!(counters.get(&equal), Some(&(StatType::Counter, 0))); // Created but never triggered
 	assert_eq!(counters.get(&greater), Some(&(StatType::Counter, 2)));
@@ -572,8 +572,8 @@ fn test_equality_intermediate_value_does_not_trigger() {
 	let css_source = ".a {} .b {} .c {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
-	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("triggered");
+	let count = CsskitAtomSet::get_dyn_set().atom_from_str("--count");
+	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("--triggered");
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 3)));
 	assert_eq!(counters.get(&triggered), Some(&(StatType::Counter, 0))); // Never triggered
 }
@@ -590,8 +590,8 @@ fn test_equality_does_trigger_on_exact_match() {
 	let css_source = ".a {} .b {}"; // Exactly 2 rules
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
-	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("triggered");
+	let count = CsskitAtomSet::get_dyn_set().atom_from_str("--count");
+	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("--triggered");
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 2)));
 	assert_eq!(counters.get(&triggered), Some(&(StatType::Counter, 2)));
 }
@@ -621,8 +621,8 @@ fn test_equality_triggers_once_then_becomes_false() {
 	let css_source = ".a {} .b {}";
 
 	let (counters, diagnostics) = run(&alloc, source, css_source);
-	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
-	let hit = CsskitAtomSet::get_dyn_set().atom_from_str("hit");
+	let count = CsskitAtomSet::get_dyn_set().atom_from_str("--count");
+	let hit = CsskitAtomSet::get_dyn_set().atom_from_str("--hit");
 	assert_eq!(counters.get(&hit), Some(&(StatType::Counter, 0)));
 	assert_eq!(diagnostics.len(), 0);
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 3)));
@@ -648,10 +648,10 @@ fn test_when_only_rules_with_bytes_and_lines() {
 	let css_source = ".a {} .b {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let trigger = CsskitAtomSet::get_dyn_set().atom_from_str("trigger");
-	let bytes = CsskitAtomSet::get_dyn_set().atom_from_str("byte-count");
-	let lines = CsskitAtomSet::get_dyn_set().atom_from_str("line-count");
-	let counter = CsskitAtomSet::get_dyn_set().atom_from_str("counter");
+	let trigger = CsskitAtomSet::get_dyn_set().atom_from_str("--trigger");
+	let bytes = CsskitAtomSet::get_dyn_set().atom_from_str("--byte-count");
+	let lines = CsskitAtomSet::get_dyn_set().atom_from_str("--line-count");
+	let counter = CsskitAtomSet::get_dyn_set().atom_from_str("--counter");
 
 	assert_eq!(counters.get(&trigger), Some(&(StatType::Counter, 2)));
 	// For @when-only rules without selectors:
@@ -679,8 +679,8 @@ fn test_invalid_when_threshold_skipped() {
 	let css_source = ".a {} .b {}";
 
 	let (counters, _diagnostics) = run(&alloc, source, css_source);
-	let count = CsskitAtomSet::get_dyn_set().atom_from_str("count");
-	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("triggered");
+	let count = CsskitAtomSet::get_dyn_set().atom_from_str("--count");
+	let triggered = CsskitAtomSet::get_dyn_set().atom_from_str("--triggered");
 
 	assert_eq!(counters.get(&count), Some(&(StatType::Counter, 2)));
 	// Invalid threshold should skip the @when rule entirely, so --triggered should not exist or be 0
