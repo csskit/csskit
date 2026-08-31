@@ -27,7 +27,7 @@ use impls::*;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = Gap,
+    shorthands = Gap,
     property_group = Gaps,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -64,6 +64,7 @@ pub enum ColumnGapStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(ColumnRuleWidth?, ColumnRuleStyle?, ColumnRuleColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.column-rule"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -89,7 +90,7 @@ pub struct ColumnRuleStyleValue<'a>;
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = RuleBreak,
+    shorthands = RuleBreak,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -119,7 +120,7 @@ pub enum ColumnRuleBreakStyleValue<'a> {}
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = RepeatableList,
-    shorthand_group = RuleColor,
+    shorthands = RuleColor|ColumnRule,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -440,7 +441,7 @@ pub struct ColumnRuleInsetStartStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = RuleStyle,
+    shorthands = RuleStyle|ColumnRule,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -470,7 +471,7 @@ pub enum ColumnRuleStyleStyleValue<'a> {}
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = RuleVisibilityItems,
+    shorthands = RuleVisibilityItems,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -504,7 +505,7 @@ pub enum ColumnRuleVisibilityItemsStyleValue<'a> {}
     initial = "medium",
     applies_to = Unknown,
     animation_type = RepeatableList,
-    shorthand_group = RuleWidth,
+    shorthands = RuleWidth|ColumnRule,
     property_group = Gaps,
     computed_value_type = ListOfAbsoluteLengths,
     canonical_order = "per grammar",
@@ -540,6 +541,7 @@ pub enum ColumnRuleWidthStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.gap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -566,7 +568,7 @@ pub struct GapStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = Unknown,
-    shorthand_group = Gap,
+    shorthands = Gap,
     property_group = Gaps,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -627,7 +629,7 @@ pub struct RowRuleStyleValue<'a>;
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = RuleBreak,
+    shorthands = RuleBreak,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -657,7 +659,7 @@ pub enum RowRuleBreakStyleValue<'a> {}
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = RepeatableList,
-    shorthand_group = RuleColor,
+    shorthands = RuleColor,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -970,7 +972,7 @@ pub struct RowRuleInsetStartStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = RuleStyle,
+    shorthands = RuleStyle,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -1000,7 +1002,7 @@ pub enum RowRuleStyleStyleValue<'a> {}
     initial = "normal",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = RuleVisibilityItems,
+    shorthands = RuleVisibilityItems,
     property_group = Gaps,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -1030,7 +1032,7 @@ pub enum RowRuleVisibilityItemsStyleValue<'a> {}
     initial = "medium",
     applies_to = Unknown,
     animation_type = RepeatableList,
-    shorthand_group = RuleWidth,
+    shorthands = RuleWidth,
     property_group = Gaps,
     computed_value_type = ListOfAbsoluteLengths,
     canonical_order = "per grammar",
@@ -1097,6 +1099,7 @@ pub struct RuleStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(same)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-break"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1128,6 +1131,7 @@ pub struct RuleBreakStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(same)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1343,6 +1347,7 @@ pub enum RuleOverlapStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(same)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1375,6 +1380,7 @@ pub struct RuleStyleStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(same)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-visibility-items"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1406,6 +1412,7 @@ pub struct RuleVisibilityItemsStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(same)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.rule-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

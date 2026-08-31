@@ -30,10 +30,16 @@ use impls::*;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = TextDecorationLine|TextDecorationColor|TextDecorationStyle|TextDecorationThickness,
+    longhands = TextDecorationLine|TextDecorationThickness|TextDecorationStyle|TextDecorationColor,
     property_group = TextDecor,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
+)]
+#[declaration_writes(
+    TextDecorationLine?,
+    TextDecorationThickness?,
+    TextDecorationStyle?,
+    TextDecorationColor?
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-decoration"))]
@@ -60,7 +66,7 @@ pub struct TextDecorationStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = TextDecoration,
+    shorthands = TextDecoration,
     property_group = TextDecor,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -118,7 +124,7 @@ pub struct TextDecorationInsetStyleValue<'a>;
     initial = "none",
     applies_to = Elements,
     animation_type = Discrete,
-    shorthand_group = TextDecoration,
+    shorthands = TextDecoration,
     property_group = TextDecor,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -293,7 +299,7 @@ pub enum TextDecorationSkipSpacesStyleValue<'a> {}
     initial = "solid",
     applies_to = Elements,
     animation_type = Discrete,
-    shorthand_group = TextDecoration,
+    shorthands = TextDecoration,
     property_group = TextDecor,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -323,7 +329,7 @@ pub enum TextDecorationStyleStyleValue<'a> {}
     initial = "auto",
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = TextDecoration,
+    shorthands = TextDecoration,
     property_group = TextDecor,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -360,6 +366,7 @@ pub enum TextDecorationThicknessStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(TextEmphasisStyle?, TextEmphasisColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-emphasis"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -386,7 +393,7 @@ pub struct TextEmphasisStyleValue<'a>;
     inherits,
     applies_to = Text,
     animation_type = ByComputedValue,
-    shorthand_group = TextEmphasis,
+    shorthands = TextEmphasis,
     property_group = TextDecor,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -475,7 +482,7 @@ pub struct TextEmphasisSkipStyleValue<'a>;
     inherits,
     applies_to = Text,
     animation_type = Discrete,
-    shorthand_group = TextEmphasis,
+    shorthands = TextEmphasis,
     property_group = TextDecor,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

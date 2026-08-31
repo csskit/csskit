@@ -1,6 +1,6 @@
 use crate::{
-	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits, NodeKinds,
-	PropertyGroup, PropertyKind, ShorthandReset, Unresolved, VendorPrefixes, values,
+	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits, Longhand,
+	NodeKinds, PropertyGroup, PropertyKind, Shorthand, Unresolved, VendorPrefixes, values,
 };
 use css_lexer::Kind;
 use css_parse::{
@@ -110,7 +110,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 					$(
 					Self::$name(v) => {
 						let mut declaration_kinds = DeclarationKind::none();
-						if values::$ty::is_shorthand() {
+						if values::$ty::shorthand().is_some() {
 							declaration_kinds |= DeclarationKind::Shorthands;
 						} else {
 							declaration_kinds |= DeclarationKind::Longhands;
@@ -228,83 +228,36 @@ impl<'a> StyleValue<'a> {
 		apply_properties!(get_box_portion_by_name)
 	}
 
-	/// Returns the shorthand group for a given property name.
-	/// For longhand properties, returns the shorthand they belong to (e.g., MarginTop -> Margin).
-	/// For shorthands and non-longhand properties, returns CssAtomSet::_None.
-	pub fn shorthand_group_by_name(property_name: CssAtomSet) -> CssAtomSet {
-		macro_rules! get_shorthand_group_by_name {
+	/// Returns what a shorthand property does to the properties it covers, or [None] if the
+	/// property is not a shorthand.
+	pub fn shorthand_by_name(property_name: CssAtomSet) -> Option<&'static Shorthand> {
+		macro_rules! get_shorthand_by_name {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 				match property_name {
 					$(
-					CssAtomSet::$name => values::$ty::shorthand_group(),
-					)+
-					_ => CssAtomSet::_None,
-				}
-			};
-		}
-		apply_properties!(get_shorthand_group_by_name)
-	}
-
-	/// Returns the longhands for a given shorthand property name.
-	/// For shorthand properties, returns Some(&[...]) with the list of longhands.
-	/// For non-shorthand properties, returns None.
-	pub fn longhands_by_name(property_name: CssAtomSet) -> Option<&'static [CssAtomSet]> {
-		macro_rules! get_longhands_by_name {
-			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				match property_name {
-					$(
-					CssAtomSet::$name => values::$ty::longhands(),
+					CssAtomSet::$name => values::$ty::shorthand(),
 					)+
 					_ => None,
 				}
 			};
 		}
-		apply_properties!(get_longhands_by_name)
+		apply_properties!(get_shorthand_by_name)
 	}
 
-	/// Returns whether a given property name is a shorthand.
-	pub fn is_shorthand_by_name(property_name: CssAtomSet) -> bool {
-		macro_rules! get_is_shorthand_by_name {
+	/// Returns what the shorthands which cover a given property name do to it, or [None] if no
+	/// shorthand covers it.
+	pub fn longhand_by_name(property_name: CssAtomSet) -> Option<&'static Longhand> {
+		macro_rules! get_longhand_by_name {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 				match property_name {
 					$(
-					CssAtomSet::$name => values::$ty::is_shorthand(),
+					CssAtomSet::$name => values::$ty::longhand(),
 					)+
-					_ => false,
+					_ => None,
 				}
 			};
 		}
-		apply_properties!(get_is_shorthand_by_name)
-	}
-
-	/// Returns reset coverage for a shorthand property name.
-	pub fn shorthand_reset_by_name(property_name: CssAtomSet) -> ShorthandReset {
-		macro_rules! get_shorthand_reset_by_name {
-			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				match property_name {
-					$(
-					CssAtomSet::$name => values::$ty::shorthand_reset(),
-					)+
-					_ => ShorthandReset::Properties(&[]),
-				}
-			};
-		}
-		apply_properties!(get_shorthand_reset_by_name)
-	}
-
-	/// Returns shorthands that reset a given property name without expressing it.
-	pub fn reset_by_shorthands_by_name(property_name: CssAtomSet) -> &'static [CssAtomSet] {
-		macro_rules! get_reset_by_shorthands_by_name {
-			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
-				match property_name {
-					$(
-					CssAtomSet::$name => values::$ty::reset_by_shorthands(),
-					)+
-					_ => &[],
-				}
-			};
-		}
-		apply_properties!(get_reset_by_shorthands_by_name)
+		apply_properties!(get_longhand_by_name)
 	}
 }
 
@@ -464,7 +417,7 @@ impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 #[cfg(test)]
 mod tests {
 	use super::*;
-	use crate::{CssAtomSet, CssMetadata, ShorthandReset};
+	use crate::{CssAtomSet, CssMetadata, ShorthandReset, Writes};
 	use css_lexer::Lexer;
 	use css_parse::{Arena, Declaration, Parser, assert_parse};
 
@@ -539,18 +492,217 @@ mod tests {
 		let decl = p.parse::<Property>().unwrap();
 		assert!(decl.value.is_custom(), "--custom should be parsed as custom property");
 	}
+
 	#[test]
 	fn exposes_additive_shorthand_reset_metadata() {
-		let border = StyleValue::longhands_by_name(CssAtomSet::Border).unwrap();
-		assert!(border.contains(&CssAtomSet::BorderWidth));
-		assert!(border.contains(&CssAtomSet::BorderTopWidth));
-		assert_eq!(StyleValue::shorthand_group_by_name(CssAtomSet::BorderLeftColor), CssAtomSet::Border);
+		let border = StyleValue::shorthand_by_name(CssAtomSet::Border).unwrap();
+		assert!(border.longhands.contains(&CssAtomSet::BorderWidth));
+		assert!(border.longhands.contains(&CssAtomSet::BorderTopWidth));
+		assert_eq!(border.resets, ShorthandReset::Properties(&[CssAtomSet::BorderImage]));
 		assert_eq!(
-			StyleValue::shorthand_reset_by_name(CssAtomSet::Border),
-			ShorthandReset::Properties(&[CssAtomSet::BorderImage])
+			StyleValue::longhand_by_name(CssAtomSet::BorderLeftColor).unwrap().shorthands,
+			[CssAtomSet::BorderLeft, CssAtomSet::BorderColor, CssAtomSet::Border]
 		);
-		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::Margin), ShorthandReset::Properties(&[]));
-		assert_eq!(StyleValue::shorthand_reset_by_name(CssAtomSet::All), ShorthandReset::All);
-		assert_eq!(StyleValue::reset_by_shorthands_by_name(CssAtomSet::BorderImageSource), [CssAtomSet::Border]);
+		assert_eq!(StyleValue::shorthand_by_name(CssAtomSet::Margin).unwrap().resets, ShorthandReset::Properties(&[]));
+		assert_eq!(StyleValue::shorthand_by_name(CssAtomSet::All).unwrap().resets, ShorthandReset::All);
+		assert_eq!(StyleValue::longhand_by_name(CssAtomSet::BorderImageSource).unwrap().reset_by, [CssAtomSet::Border]);
+		assert!(StyleValue::shorthand_by_name(CssAtomSet::FontSize).is_none());
+	}
+
+	#[test]
+	fn exposes_slots_of_shorthand() {
+		use crate::Slot;
+		assert_eq!(
+			StyleValue::shorthand_by_name(CssAtomSet::Font).unwrap().writes,
+			Some(Writes::Slots(&[
+				Slot { property: CssAtomSet::FontStyle, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::FontVariant, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::FontWeight, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::FontWidth, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::FontSize, before: "", after: "", optional: false },
+				Slot { property: CssAtomSet::LineHeight, before: "/", after: "", optional: true },
+				Slot { property: CssAtomSet::FontFamily, before: "", after: "", optional: false },
+			]))
+		);
+		assert_eq!(
+			StyleValue::shorthand_by_name(CssAtomSet::Flex).unwrap().writes,
+			Some(Writes::Slots(&[
+				Slot { property: CssAtomSet::FlexGrow, before: "", after: "", optional: false },
+				Slot { property: CssAtomSet::FlexShrink, before: "", after: "", optional: false },
+				Slot { property: CssAtomSet::FlexBasis, before: "", after: "", optional: false },
+			]))
+		);
+
+		assert_eq!(StyleValue::shorthand_by_name(CssAtomSet::Margin).unwrap().writes, Some(Writes::Repeat));
+		assert_eq!(
+			StyleValue::shorthand_by_name(CssAtomSet::Margin).unwrap().longhands,
+			[CssAtomSet::MarginTop, CssAtomSet::MarginRight, CssAtomSet::MarginBottom, CssAtomSet::MarginLeft]
+		);
+
+		assert_eq!(
+			StyleValue::shorthand_by_name(CssAtomSet::Border).unwrap().writes,
+			Some(Writes::Slots(&[
+				Slot { property: CssAtomSet::BorderWidth, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::BorderStyle, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::BorderColor, before: "", after: "", optional: true },
+			]))
+		);
+
+		assert_eq!(StyleValue::shorthand_by_name(CssAtomSet::BorderColor).unwrap().writes, Some(Writes::Repeat));
+		assert_eq!(
+			StyleValue::shorthand_by_name(CssAtomSet::BorderColor).unwrap().longhands,
+			[
+				CssAtomSet::BorderTopColor,
+				CssAtomSet::BorderRightColor,
+				CssAtomSet::BorderBottomColor,
+				CssAtomSet::BorderLeftColor,
+			]
+		);
+	}
+
+	#[test]
+	fn longhand_by_name_maps_to_shorthands() {
+		for (longhand, shorthands) in [
+			(CssAtomSet::MarginTop, &[CssAtomSet::Margin][..]),
+			(CssAtomSet::JustifyItems, &[CssAtomSet::PlaceItems][..]),
+			(CssAtomSet::ColumnGap, &[CssAtomSet::Gap][..]),
+			(CssAtomSet::RowRuleColor, &[CssAtomSet::RuleColor][..]),
+			(CssAtomSet::LineHeight, &[CssAtomSet::Font][..]),
+			(CssAtomSet::ColumnHeight, &[CssAtomSet::Columns][..]),
+			(CssAtomSet::TextDecorationThickness, &[CssAtomSet::TextDecoration][..]),
+			(CssAtomSet::Top, &[CssAtomSet::Inset][..]),
+		] {
+			assert_eq!(StyleValue::longhand_by_name(longhand).unwrap().shorthands, shorthands, "{}", longhand.to_str());
+		}
+	}
+
+	macro_rules! every_property {
+		( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+			[$((CssAtomSet::$name, values::$ty::shorthand())),+]
+		};
+	}
+
+	fn leaves(property: CssAtomSet, out: &mut Vec<CssAtomSet>) {
+		match StyleValue::shorthand_by_name(property) {
+			Some(shorthand) => {
+				for longhand in shorthand.longhands {
+					leaves(*longhand, out);
+				}
+			}
+			None => out.push(property),
+		}
+	}
+
+	#[test]
+	fn every_shorthand_writes_every_longhand_it_sets() {
+		let mut fails = Vec::new();
+		for (property, shorthand) in apply_properties!(every_property) {
+			let Some(shorthand) = shorthand else { continue };
+			let name = property.to_str();
+			let mut set = Vec::new();
+			leaves(property, &mut set);
+			let written = match shorthand.writes {
+				Some(Writes::Slots(slots)) => Some(slots.iter().map(|slot| slot.property).collect::<Vec<_>>()),
+				Some(Writes::Repeat) => Some(shorthand.longhands.to_vec()),
+				Some(Writes::Same) | None => None,
+			};
+			if let Some(written) = written {
+				let mut expanded = Vec::new();
+				for property in &written {
+					leaves(*property, &mut expanded);
+				}
+				for property in &set {
+					if !expanded.contains(property) {
+						fails.push(format!("{name} states no value for {}", property.to_str()));
+					}
+				}
+				for property in &expanded {
+					if !set.contains(property) {
+						fails.push(format!("{name} writes {}, which it does not set", property.to_str()));
+					}
+				}
+				if matches!(shorthand.writes, Some(Writes::Repeat)) && written.len() != expanded.len() {
+					fails.push(format!("{name} repeats its values over a shorthand of its own"));
+				}
+			}
+			if let ShorthandReset::Properties(resets) = shorthand.resets {
+				for reset in resets {
+					if shorthand.longhands.contains(reset) {
+						fails.push(format!("{name} both sets and resets {}", reset.to_str()));
+					}
+				}
+			}
+		}
+		assert_eq!(fails, Vec::<String>::new(), "fails should be empty");
+	}
+
+	#[test]
+	fn every_shorthand_and_longhand_reflect_each_other() {
+		let mut fails = Vec::new();
+		for (property, shorthand) in apply_properties!(every_property) {
+			let name = property.to_str();
+			for longhand in shorthand.map(|shorthand| shorthand.longhands).unwrap_or_default() {
+				let states_it =
+					StyleValue::longhand_by_name(*longhand).is_some_and(|record| record.shorthands.contains(&property));
+				if !states_it {
+					fails.push(format!("{name} sets {}, which does not state it", longhand.to_str()));
+				}
+			}
+			let Some(longhand) = StyleValue::longhand_by_name(property) else { continue };
+			for shorthand in longhand.shorthands {
+				match StyleValue::shorthand_by_name(*shorthand) {
+					Some(record) if !record.longhands.contains(&property) => {
+						fails.push(format!("{name} states the shorthand {}, which does not set it", shorthand.to_str()))
+					}
+					Some(_) => {}
+					None => fails.push(format!("{name} states the shorthand {}, which is not one", shorthand.to_str())),
+				}
+			}
+			for shorthand in longhand.reset_by {
+				match StyleValue::shorthand_by_name(*shorthand) {
+					Some(record) if record.longhands.contains(&property) => {
+						fails.push(format!("{name} is reset by {}, which expresses it instead", shorthand.to_str()))
+					}
+					Some(_) => {}
+					None => fails.push(format!("{name} is reset by {}, which is not a shorthand", shorthand.to_str())),
+				}
+			}
+		}
+		assert_eq!(fails, Vec::<String>::new());
+	}
+
+	#[test]
+	fn lists_the_shorthands_which_state_no_writes() {
+		let mut missing = apply_properties!(every_property)
+			.into_iter()
+			.filter(|(_, shorthand)| shorthand.is_some_and(|shorthand| shorthand.writes.is_none()))
+			.map(|(property, _)| property.to_str())
+			.collect::<Vec<_>>();
+		missing.sort_unstable();
+		assert_eq!(
+			missing,
+			[
+				"-webkit-animation",
+				"all",
+				"animation",
+				"animation-delay",
+				"animation-range",
+				"background",
+				"border-image",
+				"border-radius",
+				"font-synthesis",
+				"font-variant",
+				"grid",
+				"grid-area",
+				"grid-column",
+				"grid-row",
+				"grid-template",
+				"mask",
+				"offset",
+				"scroll-timeline",
+				"transition",
+				"view-timeline",
+			]
+		);
 	}
 }

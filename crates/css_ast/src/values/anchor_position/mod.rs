@@ -152,6 +152,7 @@ pub struct PositionAreaStyleValue<'a>;
     canonical_order = "per grammar",
     box_portion = Position,
 )]
+#[declaration_writes(PositionTryOrder?, PositionTryFallbacks)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.position-try"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -177,7 +178,7 @@ pub struct PositionTryStyleValue<'a>;
     initial = "none",
     applies_to = AbsPos,
     animation_type = Discrete,
-    shorthand_group = PositionTry,
+    shorthands = PositionTry,
     property_group = AnchorPosition,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -208,7 +209,7 @@ pub struct PositionTryFallbacksStyleValue<'a>;
     initial = "normal",
     applies_to = AbsPos,
     animation_type = Discrete,
-    shorthand_group = PositionTry,
+    shorthands = PositionTry,
     property_group = AnchorPosition,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",

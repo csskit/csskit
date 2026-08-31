@@ -34,6 +34,7 @@ use impls::*;
     box_side = Top|Bottom|Left|Right,
     box_portion = Margin,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.margin"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -60,7 +61,7 @@ pub struct MarginStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Margin,
+    shorthands = Margin,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -94,7 +95,7 @@ pub struct MarginBottomStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Margin,
+    shorthands = Margin,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -128,7 +129,7 @@ pub struct MarginLeftStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Margin,
+    shorthands = Margin,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -162,7 +163,7 @@ pub struct MarginRightStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Margin,
+    shorthands = Margin,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -233,6 +234,7 @@ pub enum MarginTrimStyleValue<'a> {}
     box_side = Top|Bottom|Left|Right,
     box_portion = Padding,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.padding"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -259,7 +261,7 @@ pub struct PaddingStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Padding,
+    shorthands = Padding,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -293,7 +295,7 @@ pub struct PaddingBottomStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Padding,
+    shorthands = Padding,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -327,7 +329,7 @@ pub struct PaddingLeftStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Padding,
+    shorthands = Padding,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -361,7 +363,7 @@ pub struct PaddingRightStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Padding,
+    shorthands = Padding,
     property_group = Box,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

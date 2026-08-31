@@ -274,7 +274,7 @@ pub struct WebkitTextSizeAdjustStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
-    shorthand_group = _WebkitAnimation,
+    shorthands = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -300,7 +300,7 @@ pub struct WebkitAnimationDelayStyleValue<'a>;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
-    shorthand_group = _WebkitAnimation,
+    shorthands = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -326,7 +326,7 @@ pub struct WebkitAnimationDurationStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
-    shorthand_group = _WebkitAnimation,
+    shorthands = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -352,7 +352,7 @@ pub struct WebkitAnimationFillModeStyleValue<'a>;
 #[declaration_metadata(
     initial = "1",
     applies_to = Elements,
-    shorthand_group = _WebkitAnimation,
+    shorthands = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -378,7 +378,7 @@ pub struct WebkitAnimationIterationCountStyleValue<'a>;
 #[declaration_metadata(
     initial = "none",
     applies_to = Elements,
-    shorthand_group = _WebkitAnimation,
+    shorthands = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -404,7 +404,7 @@ pub struct WebkitAnimationNameStyleValue<'a>;
 #[declaration_metadata(
     initial = "ease",
     applies_to = Elements,
-    shorthand_group = _WebkitAnimation,
+    shorthands = _WebkitAnimation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1151,6 +1151,7 @@ pub struct WebkitTextFillColorStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(_WebkitTextStrokeWidth?, _WebkitTextStrokeColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
@@ -1166,7 +1167,7 @@ pub struct WebkitTextStrokeStyleValue<'a>;
     inherits,
     applies_to = Elements,
     animation_type = ByComputedValue,
-    shorthand_group = _WebkitTextStroke,
+    shorthands = _WebkitTextStroke,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1186,7 +1187,7 @@ pub struct WebkitTextStrokeColorStyleValue<'a>;
     inherits,
     applies_to = Elements,
     animation_type = Discrete,
-    shorthand_group = _WebkitTextStroke,
+    shorthands = _WebkitTextStroke,
     property_group = Fonts,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1242,6 +1243,7 @@ pub struct WebkitBackgroundSizeStyleValue<'a>;
     applies_to = Elements,
     animation_type = ByComputedValue,
     property_group = Animations,
+    longhands = _WebkitAnimationName|_WebkitAnimationDuration|_WebkitAnimationTimingFunction|_WebkitAnimationDelay|_WebkitAnimationIterationCount|_WebkitAnimationFillMode,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]

@@ -166,6 +166,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"LengthPercentageNumber",
 	"LengthPercentageOrFlex",
 	"LineStyle",
+	"Longhand",
 	"MaskLayerClip",
 	"MaskSource",
 	"MaskingMode",
@@ -315,6 +316,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"Semitones",
 	"ShadowPosition",
 	"ShapeBox",
+	"Shorthand",
 	"ShorthandReset",
 	"SingleAnimationComposition",
 	"SingleAnimationDirection",
@@ -325,6 +327,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"SingleAnimationTriggerType",
 	"SingleTransitionProperty",
 	"SizeKeyword",
+	"Slot",
 	"SnapBlockKeyword",
 	"SnapInlineKeyword",
 	"SnappedScrollStateFeatureKeyword",
@@ -389,6 +392,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"WidthContainerFeature",
 	"WidthMediaFeature",
 	"Wildcard",
+	"Writes",
 	"XyzChannelKeyword",
 ];
 

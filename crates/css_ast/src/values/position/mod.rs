@@ -27,7 +27,7 @@ use impls::*;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Inset,
+    shorthands = Inset,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -67,6 +67,7 @@ pub struct BottomStyleValue<'a>;
     canonical_order = "per grammar",
     box_portion = Position,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -100,6 +101,7 @@ pub struct InsetStyleValue<'a>;
     box_side = BlockStart|BlockEnd,
     box_portion = Position,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -126,7 +128,7 @@ pub struct InsetBlockStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = InsetBlock,
+    shorthands = InsetBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -160,7 +162,7 @@ pub struct InsetBlockEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = InsetBlock,
+    shorthands = InsetBlock,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -201,6 +203,7 @@ pub struct InsetBlockStartStyleValue<'a>;
     box_side = InlineStart|InlineEnd,
     box_portion = Position,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.inset-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -227,7 +230,7 @@ pub struct InsetInlineStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = InsetInline,
+    shorthands = InsetInline,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -261,7 +264,7 @@ pub struct InsetInlineEndStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = InsetInline,
+    shorthands = InsetInline,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -295,7 +298,7 @@ pub struct InsetInlineStartStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Inset,
+    shorthands = Inset,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -388,7 +391,7 @@ pub enum PositionStyleValue<'a> {}
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Inset,
+    shorthands = Inset,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -422,7 +425,7 @@ pub struct RightStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = ContainingBlock,
-    shorthand_group = Inset,
+    shorthands = Inset,
     property_group = Position,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

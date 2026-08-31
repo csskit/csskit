@@ -1,5 +1,24 @@
-# Properties that are known shorthands, that expand into various longhand values.
+# Properties that are known shorthands, that expand into various longhand properties.
 # All shorthands must specify their constituent longhand properties.
+#
+# A shorthand also states which longhand each value of its grammar sets, as `writes`:
+#
+#   writes = "any"     one optional value per longhand, in `longhands` order, as `border`'s
+#                      `<'border-width'> || <'border-style'> || <'border-color'>` writes.
+#   writes = "repeat"  one to as many values as there are longhands; the position of each value
+#                      picks the longhand in `longhands` order, and a left-out position takes the
+#                      value of an earlier one, as `margin`'s `<'margin-top'>{1,4}` does.
+#   writes = "same"    the one value the grammar takes sets every longhand, as `marker`'s
+#                      `none | <url>` does.
+#   writes = [ { property = "...", optional = true, before = "/" }, ... ]
+#                      the slots stated one by one, in the order the grammar writes them, for a
+#                      grammar the keywords cannot state, such as `font`'s. `before` and `after`
+#                      are the tokens the grammar writes around a slot, and `optional` marks a
+#                      value that may be left out to state the initial value of its property.
+#
+# Stated slots must cover every longhand the shorthand sets; generation fails if one is left out.
+# A shorthand whose values cannot be read as one value per longhand - a layer list such as
+# `background`, or a grammar which chooses between shapes such as `grid` - states no `writes`.
 
 [[shorthand]]
 name = "all"
@@ -57,30 +76,35 @@ longhands = [
     "border-color",
 ]
 resets = ["border-image"]
+writes = "any"
 
 [[shorthand]]
 name = "border-block"
 longhands = [
-    "border-block-color",
-    "border-block-style",
     "border-block-width",
+    "border-block-style",
+    "border-block-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-block-end"
 longhands = [
-    "border-block-end-color",
-    "border-block-end-style",
     "border-block-end-width",
+    "border-block-end-style",
+    "border-block-end-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-block-start"
 longhands = [
-    "border-block-start-color",
-    "border-block-start-style",
     "border-block-start-width",
+    "border-block-start-style",
+    "border-block-start-color",
 ]
+writes = "any"
+
 [[shorthand]]
 name = "border-block-color"
 longhands = [
@@ -88,6 +112,7 @@ longhands = [
     "border-block-end-color",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "border-block-style"
@@ -96,6 +121,7 @@ longhands = [
     "border-block-end-style",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "border-block-width"
@@ -104,7 +130,7 @@ longhands = [
     "border-block-end-width",
 ]
 resets = []
-
+writes = "repeat"
 
 [[shorthand]]
 name = "border-bottom"
@@ -113,6 +139,7 @@ longhands = [
     "border-bottom-style",
     "border-bottom-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-color"
@@ -122,6 +149,7 @@ longhands = [
     "border-bottom-color",
     "border-left-color",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "border-image"
@@ -136,26 +164,56 @@ longhands = [
 [[shorthand]]
 name = "border-inline"
 longhands = [
-    "border-inline-color",
-    "border-inline-style",
     "border-inline-width",
+    "border-inline-style",
+    "border-inline-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-inline-end"
 longhands = [
-    "border-inline-end-color",
-    "border-inline-end-style",
     "border-inline-end-width",
+    "border-inline-end-style",
+    "border-inline-end-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-inline-start"
 longhands = [
-    "border-inline-start-color",
-    "border-inline-start-style",
     "border-inline-start-width",
+    "border-inline-start-style",
+    "border-inline-start-color",
 ]
+writes = "any"
+
+[[shorthand]]
+name = "border-inline-color"
+longhands = [
+    "border-inline-start-color",
+    "border-inline-end-color",
+]
+resets = []
+writes = "repeat"
+
+[[shorthand]]
+name = "border-inline-style"
+longhands = [
+    "border-inline-start-style",
+    "border-inline-end-style",
+]
+resets = []
+writes = "repeat"
+
+[[shorthand]]
+name = "border-inline-width"
+longhands = [
+    "border-inline-start-width",
+    "border-inline-end-width",
+]
+resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "border-left"
@@ -164,6 +222,7 @@ longhands = [
     "border-left-style",
     "border-left-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-radius"
@@ -182,6 +241,7 @@ longhands = [
     "border-right-style",
     "border-right-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-style"
@@ -191,6 +251,7 @@ longhands = [
     "border-bottom-style",
     "border-left-style",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "border-top"
@@ -199,6 +260,7 @@ longhands = [
     "border-top-style",
     "border-top-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "border-width"
@@ -208,6 +270,7 @@ longhands = [
     "border-bottom-width",
     "border-left-width",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "column-rule"
@@ -216,6 +279,7 @@ longhands = [
     "column-rule-style",
     "column-rule-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "columns"
@@ -225,6 +289,11 @@ longhands = [
     "column-height",
 ]
 resets = []
+writes = [
+    { property = "column-width", optional = true },
+    { property = "column-count", optional = true },
+    { property = "column-height", optional = true, before = "/" },
+]
 
 [[shorthand]]
 name = "contain-intrinsic-size"
@@ -232,12 +301,17 @@ longhands = [
     "contain-intrinsic-width",
     "contain-intrinsic-height",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "container"
 longhands = [
     "container-name",
     "container-type",
+]
+writes = [
+    { property = "container-name" },
+    { property = "container-type", optional = true, before = "/" },
 ]
 
 [[shorthand]]
@@ -248,6 +322,11 @@ longhands = [
     "flex-basis",
 ]
 resets = []
+writes = [
+    { property = "flex-grow" },
+    { property = "flex-shrink" },
+    { property = "flex-basis" },
+]
 
 [[shorthand]]
 name = "flex-flow"
@@ -255,13 +334,14 @@ longhands = [
     "flex-direction",
     "flex-wrap",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "font"
 longhands = [
     "font-family",
     "font-size",
-    "font-stretch",
+    "font-width",
     "font-style",
     "font-variant",
     "font-weight",
@@ -274,6 +354,15 @@ resets = [
     "font-optical-sizing",
     "font-size-adjust",
     "font-variation-settings",
+]
+writes = [
+    { property = "font-style", optional = true },
+    { property = "font-variant", optional = true },
+    { property = "font-weight", optional = true },
+    { property = "font-width", optional = true },
+    { property = "font-size" },
+    { property = "line-height", optional = true, before = "/" },
+    { property = "font-family" },
 ]
 
 [[shorthand]]
@@ -304,6 +393,7 @@ longhands = [
     "column-gap",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "grid"
@@ -356,6 +446,7 @@ longhands = [
     "left",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "inset-block"
@@ -363,6 +454,7 @@ longhands = [
     "inset-block-start",
     "inset-block-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "inset-inline"
@@ -370,15 +462,17 @@ longhands = [
     "inset-inline-start",
     "inset-inline-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "list-style"
 longhands = [
-    "list-style-image",
     "list-style-position",
+    "list-style-image",
     "list-style-type",
 ]
 resets = []
+writes = "any"
 
 [[shorthand]]
 name = "margin"
@@ -389,6 +483,7 @@ longhands = [
     "margin-left",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "margin-block"
@@ -396,6 +491,7 @@ longhands = [
     "margin-block-start",
     "margin-block-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "margin-inline"
@@ -404,6 +500,7 @@ longhands = [
     "margin-inline-end",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "mask"
@@ -429,6 +526,14 @@ longhands = [
     "mask-border-repeat",
     "mask-border-mode",
 ]
+writes = [
+    { property = "mask-border-source" },
+    { property = "mask-border-slice" },
+    { property = "mask-border-width", before = "/" },
+    { property = "mask-border-outset", before = "/" },
+    { property = "mask-border-repeat" },
+    { property = "mask-border-mode" },
+]
 
 [[shorthand]]
 name = "offset"
@@ -448,6 +553,7 @@ longhands = [
     "outline-color",
 ]
 resets = []
+writes = "any"
 
 [[shorthand]]
 name = "overflow"
@@ -456,6 +562,7 @@ longhands = [
     "overflow-y",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "overscroll-behavior"
@@ -463,6 +570,7 @@ longhands = [
     "overscroll-behavior-x",
     "overscroll-behavior-y",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "padding"
@@ -473,6 +581,7 @@ longhands = [
     "padding-left",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "padding-block"
@@ -480,6 +589,7 @@ longhands = [
     "padding-block-start",
     "padding-block-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "padding-inline"
@@ -487,6 +597,7 @@ longhands = [
     "padding-inline-start",
     "padding-inline-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "place-content"
@@ -495,6 +606,7 @@ longhands = [
     "justify-content",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "place-items"
@@ -503,6 +615,7 @@ longhands = [
     "justify-items",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "place-self"
@@ -511,6 +624,7 @@ longhands = [
     "justify-self",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "position-try"
@@ -519,6 +633,11 @@ longhands = [
     "position-try-fallbacks",
 ]
 resets = []
+writes = [
+    { property = "position-try-order", optional = true },
+    { property = "position-try-fallbacks" },
+]
+
 [[shorthand]]
 name = "rule-break"
 longhands = [
@@ -526,6 +645,7 @@ longhands = [
     "row-rule-break",
 ]
 resets = []
+writes = "same"
 
 [[shorthand]]
 name = "rule-color"
@@ -534,6 +654,7 @@ longhands = [
     "row-rule-color",
 ]
 resets = []
+writes = "same"
 
 [[shorthand]]
 name = "rule-style"
@@ -542,6 +663,7 @@ longhands = [
     "row-rule-style",
 ]
 resets = []
+writes = "same"
 
 [[shorthand]]
 name = "rule-visibility-items"
@@ -550,6 +672,7 @@ longhands = [
     "row-rule-visibility-items",
 ]
 resets = []
+writes = "same"
 
 [[shorthand]]
 name = "rule-width"
@@ -558,7 +681,7 @@ longhands = [
     "row-rule-width",
 ]
 resets = []
-
+writes = "same"
 
 [[shorthand]]
 name = "scroll-margin"
@@ -568,6 +691,7 @@ longhands = [
     "scroll-margin-bottom",
     "scroll-margin-left",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "scroll-margin-block"
@@ -575,6 +699,7 @@ longhands = [
     "scroll-margin-block-start",
     "scroll-margin-block-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "scroll-margin-inline"
@@ -582,6 +707,7 @@ longhands = [
     "scroll-margin-inline-start",
     "scroll-margin-inline-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "scroll-padding"
@@ -591,6 +717,7 @@ longhands = [
     "scroll-padding-bottom",
     "scroll-padding-left",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "scroll-padding-block"
@@ -598,6 +725,7 @@ longhands = [
     "scroll-padding-block-start",
     "scroll-padding-block-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "scroll-padding-inline"
@@ -605,6 +733,7 @@ longhands = [
     "scroll-padding-inline-start",
     "scroll-padding-inline-end",
 ]
+writes = "repeat"
 
 [[shorthand]]
 name = "scroll-timeline"
@@ -619,16 +748,18 @@ longhands = [
     "text-box-trim",
     "text-box-edge",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "text-decoration"
 longhands = [
     "text-decoration-line",
-    "text-decoration-color",
-    "text-decoration-style",
     "text-decoration-thickness",
+    "text-decoration-style",
+    "text-decoration-color",
 ]
 resets = []
+writes = "any"
 
 [[shorthand]]
 name = "text-emphasis"
@@ -636,6 +767,7 @@ longhands = [
     "text-emphasis-style",
     "text-emphasis-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "text-wrap"
@@ -643,6 +775,7 @@ longhands = [
     "text-wrap-mode",
     "text-wrap-style",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "transition"
@@ -670,6 +803,7 @@ longhands = [
     "marker-end",
 ]
 resets = []
+writes = "same"
 
 [[shorthand]]
 name = "-webkit-text-stroke"
@@ -677,6 +811,7 @@ longhands = [
     "-webkit-text-stroke-width",
     "-webkit-text-stroke-color",
 ]
+writes = "any"
 
 [[shorthand]]
 name = "-webkit-border-before"

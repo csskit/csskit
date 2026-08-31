@@ -715,6 +715,7 @@ pub enum TextTransformStyleValue<'a> {}
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(TextWrapMode?, TextWrapStyle?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.text-wrap"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -741,7 +742,7 @@ pub struct TextWrapStyleValue<'a>;
     inherits,
     applies_to = Text,
     animation_type = Discrete,
-    shorthand_group = TextWrap,
+    shorthands = TextWrap,
     property_group = Text,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -772,7 +773,7 @@ pub enum TextWrapModeStyleValue<'a> {}
     inherits,
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = TextWrap,
+    shorthands = TextWrap,
     property_group = Text,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

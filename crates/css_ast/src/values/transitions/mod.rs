@@ -54,7 +54,7 @@ pub struct TransitionStyleValue<'a>;
 #[declaration_metadata(
     initial = "normal",
     applies_to = Elements,
-    shorthand_group = Transition,
+    shorthands = Transition,
     property_group = Transitions,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",
@@ -83,7 +83,7 @@ pub struct TransitionBehaviorStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
-    shorthand_group = Transition,
+    shorthands = Transition,
     property_group = Transitions,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -112,7 +112,7 @@ pub struct TransitionDelayStyleValue<'a>;
 #[declaration_metadata(
     initial = "0s",
     applies_to = Elements,
-    shorthand_group = Transition,
+    shorthands = Transition,
     property_group = Transitions,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -141,7 +141,7 @@ pub struct TransitionDurationStyleValue<'a>;
 #[declaration_metadata(
     initial = "all",
     applies_to = Elements,
-    shorthand_group = Transition,
+    shorthands = Transition,
     property_group = Transitions,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -170,7 +170,7 @@ pub struct TransitionPropertyStyleValue<'a>;
 #[declaration_metadata(
     initial = "ease",
     applies_to = Elements,
-    shorthand_group = Transition,
+    shorthands = Transition,
     property_group = Transitions,
     computed_value_type = AsSpecified,
     canonical_order = "per grammar",

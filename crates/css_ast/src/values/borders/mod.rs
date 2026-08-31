@@ -29,13 +29,14 @@ use impls::*;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderWidth|BorderTopWidth|BorderRightWidth|BorderBottomWidth|BorderLeftWidth|BorderStyle|BorderTopStyle|BorderRightStyle|BorderBottomStyle|BorderLeftStyle|BorderColor|BorderTopColor|BorderRightColor|BorderBottomColor|BorderLeftColor,
-    shorthand_resets = BorderImage,
+    resets = BorderImage,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = Top|Bottom|Left|Right,
     box_portion = Border,
 )]
+#[declaration_writes(BorderWidth?, BorderStyle?, BorderColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -63,13 +64,14 @@ pub struct BorderStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = BorderBlockColor|BorderBlockStartColor|BorderBlockEndColor|BorderBlockStyle|BorderBlockStartStyle|BorderBlockEndStyle|BorderBlockWidth|BorderBlockStartWidth|BorderBlockEndWidth,
+    longhands = BorderBlockWidth|BorderBlockStartWidth|BorderBlockEndWidth|BorderBlockStyle|BorderBlockStartStyle|BorderBlockEndStyle|BorderBlockColor|BorderBlockStartColor|BorderBlockEndColor,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = BlockStart|BlockEnd,
     box_portion = Border,
 )]
+#[declaration_writes(BorderBlockWidth?, BorderBlockStyle?, BorderBlockColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -129,13 +131,14 @@ pub struct BorderBlockClipStyleValue<'a>;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderBlockStartColor|BorderBlockEndColor,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = BlockStart|BlockEnd,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -161,13 +164,14 @@ pub struct BorderBlockColorStyleValue<'a>;
     initial = "See individual properties",
     applies_to = Unknown,
     animation_type = Unknown,
-    longhands = BorderBlockEndColor|BorderBlockEndStyle|BorderBlockEndWidth,
+    longhands = BorderBlockEndWidth|BorderBlockEndStyle|BorderBlockEndColor,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = BlockEnd,
     box_portion = Border,
 )]
+#[declaration_writes(BorderBlockEndWidth?, BorderBlockEndStyle?, BorderBlockEndColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-end"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -223,7 +227,7 @@ pub struct BorderBlockEndClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlockColor|BorderBlockEnd|BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -284,7 +288,7 @@ pub struct BorderBlockEndRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlockStyle|BorderBlockEnd|BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -316,7 +320,7 @@ pub struct BorderBlockEndStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlockWidth|BorderBlockEnd|BorderBlock,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -348,12 +352,17 @@ pub struct BorderBlockEndWidthStyleValue<'a>;
     initial = "See individual properties",
     applies_to = Unknown,
     animation_type = Unknown,
-    longhands = BorderBlockStartColor|BorderBlockStartStyle|BorderBlockStartWidth,
+    longhands = BorderBlockStartWidth|BorderBlockStartStyle|BorderBlockStartColor,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = BlockStart,
     box_portion = Border,
+)]
+#[declaration_writes(
+    BorderBlockStartWidth?,
+    BorderBlockStartStyle?,
+    BorderBlockStartColor?
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-start"))]
@@ -410,7 +419,7 @@ pub struct BorderBlockStartClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlockColor|BorderBlockStart|BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -471,7 +480,7 @@ pub struct BorderBlockStartRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlockStyle|BorderBlockStart|BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -503,7 +512,7 @@ pub struct BorderBlockStartStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlockWidth|BorderBlockStart|BorderBlock,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -538,13 +547,14 @@ pub struct BorderBlockStartWidthStyleValue<'a>;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderBlockStartStyle|BorderBlockEndStyle,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = BlockStart|BlockEnd,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -573,13 +583,14 @@ pub struct BorderBlockStyleStyleValue<'a>;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderBlockStartWidth|BorderBlockEndWidth,
-    shorthand_group = BorderBlock,
+    shorthands = BorderBlock,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = BlockStart|BlockEnd,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-block-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -612,6 +623,7 @@ pub struct BorderBlockWidthStyleValue<'a>;
     box_side = Bottom,
     box_portion = Border,
 )]
+#[declaration_writes(BorderBottomWidth?, BorderBottomStyle?, BorderBottomColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-bottom"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -667,7 +679,7 @@ pub struct BorderBottomClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = Border,
+    shorthands = BorderBottom|BorderColor|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -700,7 +712,7 @@ pub enum BorderBottomColorStyleValue<'a> {}
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderBox,
-    shorthand_group = BorderRadius,
+    shorthands = BorderRadius,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -763,7 +775,7 @@ pub struct BorderBottomRadiusStyleValue<'a>;
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderBox,
-    shorthand_group = BorderRadius,
+    shorthands = BorderRadius,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -800,7 +812,7 @@ pub struct BorderBottomRightRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Border,
+    shorthands = BorderBottom|BorderStyle|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -832,7 +844,7 @@ pub struct BorderBottomStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Border,
+    shorthands = BorderBottom|BorderWidth|Border,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -897,13 +909,14 @@ pub struct BorderClipStyleValue<'a>;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderTopColor|BorderRightColor|BorderBottomColor|BorderLeftColor,
-    shorthand_group = Border,
+    shorthands = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = Top|Bottom|Left|Right,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -998,7 +1011,7 @@ pub struct BorderEndStartRadiusStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     longhands = BorderImageSource|BorderImageSlice|BorderImageWidth|BorderImageOutset|BorderImageRepeat,
-    reset_by_shorthands = Border,
+    reset_by = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1029,8 +1042,8 @@ pub enum BorderImageStyleValue<'a> {}
     initial = "0",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = BorderImage,
-    reset_by_shorthands = Border,
+    shorthands = BorderImage,
+    reset_by = Border,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -1061,8 +1074,8 @@ pub struct BorderImageOutsetStyleValue<'a>;
     initial = "stretch",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = BorderImage,
-    reset_by_shorthands = Border,
+    shorthands = BorderImage,
+    reset_by = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1094,8 +1107,8 @@ pub struct BorderImageRepeatStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = BorderImageArea,
-    shorthand_group = BorderImage,
-    reset_by_shorthands = Border,
+    shorthands = BorderImage,
+    reset_by = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1126,8 +1139,8 @@ pub struct BorderImageSliceStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = BorderImage,
-    reset_by_shorthands = Border,
+    shorthands = BorderImage,
+    reset_by = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1159,8 +1172,8 @@ pub struct BorderImageSourceStyleValue<'a>;
     applies_to = Unknown,
     animation_type = ByComputedValue,
     percentages = BorderImageArea,
-    shorthand_group = BorderImage,
-    reset_by_shorthands = Border,
+    shorthands = BorderImage,
+    reset_by = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1193,13 +1206,14 @@ pub struct BorderImageWidthStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    longhands = BorderInlineColor|BorderInlineStyle|BorderInlineWidth,
+    longhands = BorderInlineWidth|BorderInlineStartWidth|BorderInlineEndWidth|BorderInlineStyle|BorderInlineStartStyle|BorderInlineEndStyle|BorderInlineColor|BorderInlineStartColor|BorderInlineEndColor,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = InlineStart|InlineEnd,
     box_portion = Border,
 )]
+#[declaration_writes(BorderInlineWidth?, BorderInlineStyle?, BorderInlineColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1258,13 +1272,15 @@ pub struct BorderInlineClipStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    shorthand_group = BorderInline,
+    longhands = BorderInlineStartColor|BorderInlineEndColor,
+    shorthands = BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = InlineStart|InlineEnd,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-color"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1290,12 +1306,17 @@ pub struct BorderInlineColorStyleValue<'a>;
     initial = "See individual properties",
     applies_to = Unknown,
     animation_type = Unknown,
-    longhands = BorderInlineEndColor|BorderInlineEndStyle|BorderInlineEndWidth,
+    longhands = BorderInlineEndWidth|BorderInlineEndStyle|BorderInlineEndColor,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = InlineEnd,
     box_portion = Border,
+)]
+#[declaration_writes(
+    BorderInlineEndWidth?,
+    BorderInlineEndStyle?,
+    BorderInlineEndColor?
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-end"))]
@@ -1352,7 +1373,7 @@ pub struct BorderInlineEndClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = BorderInlineEnd,
+    shorthands = BorderInlineColor|BorderInlineEnd|BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1413,7 +1434,7 @@ pub struct BorderInlineEndRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = BorderInlineEnd,
+    shorthands = BorderInlineStyle|BorderInlineEnd|BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1445,7 +1466,7 @@ pub struct BorderInlineEndStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = BorderInlineEnd,
+    shorthands = BorderInlineWidth|BorderInlineEnd|BorderInline,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -1477,12 +1498,17 @@ pub struct BorderInlineEndWidthStyleValue<'a>;
     initial = "See individual properties",
     applies_to = Unknown,
     animation_type = Unknown,
-    longhands = BorderInlineStartColor|BorderInlineStartStyle|BorderInlineStartWidth,
+    longhands = BorderInlineStartWidth|BorderInlineStartStyle|BorderInlineStartColor,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = InlineStart,
     box_portion = Border,
+)]
+#[declaration_writes(
+    BorderInlineStartWidth?,
+    BorderInlineStartStyle?,
+    BorderInlineStartColor?
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-start"))]
@@ -1539,7 +1565,7 @@ pub struct BorderInlineStartClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = BorderInlineStart,
+    shorthands = BorderInlineColor|BorderInlineStart|BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1604,7 +1630,7 @@ pub struct BorderInlineStartRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = BorderInlineStart,
+    shorthands = BorderInlineStyle|BorderInlineStart|BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1636,7 +1662,7 @@ pub struct BorderInlineStartStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = BorderInlineStart,
+    shorthands = BorderInlineWidth|BorderInlineStart|BorderInline,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -1670,13 +1696,15 @@ pub struct BorderInlineStartWidthStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    shorthand_group = BorderInline,
+    longhands = BorderInlineStartStyle|BorderInlineEndStyle,
+    shorthands = BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = InlineStart|InlineEnd,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1704,13 +1732,15 @@ pub struct BorderInlineStyleStyleValue<'a>;
     applies_to = Unknown,
     animation_type = Unknown,
     percentages = Unknown,
-    shorthand_group = BorderInline,
+    longhands = BorderInlineStartWidth|BorderInlineEndWidth,
+    shorthands = BorderInline,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = InlineStart|InlineEnd,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-inline-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1743,6 +1773,7 @@ pub struct BorderInlineWidthStyleValue<'a>;
     box_side = Left,
     box_portion = Border,
 )]
+#[declaration_writes(BorderLeftWidth?, BorderLeftStyle?, BorderLeftColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-left"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1798,7 +1829,7 @@ pub struct BorderLeftClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = Border,
+    shorthands = BorderLeft|BorderColor|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1859,7 +1890,7 @@ pub struct BorderLeftRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Border,
+    shorthands = BorderLeft|BorderStyle|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -1891,7 +1922,7 @@ pub struct BorderLeftStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Border,
+    shorthands = BorderLeft|BorderWidth|Border,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -1995,6 +2026,7 @@ pub struct BorderRadiusStyleValue<'a>;
     box_side = Right,
     box_portion = Border,
 )]
+#[declaration_writes(BorderRightWidth?, BorderRightStyle?, BorderRightColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-right"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -2050,7 +2082,7 @@ pub struct BorderRightClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = Border,
+    shorthands = BorderRight|BorderColor|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2111,7 +2143,7 @@ pub struct BorderRightRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Border,
+    shorthands = BorderRight|BorderStyle|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2143,7 +2175,7 @@ pub struct BorderRightStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Border,
+    shorthands = BorderRight|BorderWidth|Border,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -2275,13 +2307,14 @@ pub struct BorderStartStartRadiusStyleValue<'a>;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderTopStyle|BorderRightStyle|BorderBottomStyle|BorderLeftStyle,
-    shorthand_group = Border,
+    shorthands = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = Top|Bottom|Left|Right,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-style"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -2314,6 +2347,7 @@ pub struct BorderStyleStyleValue<'a>;
     box_side = Top,
     box_portion = Border,
 )]
+#[declaration_writes(BorderTopWidth?, BorderTopStyle?, BorderTopColor?)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-top"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -2369,7 +2403,7 @@ pub struct BorderTopClipStyleValue<'a>;
     initial = "currentcolor",
     applies_to = Unknown,
     animation_type = Unknown,
-    shorthand_group = Border,
+    shorthands = BorderTop|BorderColor|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2402,7 +2436,7 @@ pub enum BorderTopColorStyleValue<'a> {}
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderBox,
-    shorthand_group = BorderRadius,
+    shorthands = BorderRadius,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2465,7 +2499,7 @@ pub struct BorderTopRadiusStyleValue<'a>;
     applies_to = Elements,
     animation_type = ByComputedValue,
     percentages = BorderBox,
-    shorthand_group = BorderRadius,
+    shorthands = BorderRadius,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2498,7 +2532,7 @@ pub struct BorderTopRightRadiusStyleValue<'a>;
     initial = "none",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Border,
+    shorthands = BorderTop|BorderStyle|Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -2530,7 +2564,7 @@ pub struct BorderTopStyleStyleValue<'a>;
     initial = "medium",
     applies_to = Unknown,
     animation_type = ByComputedValue,
-    shorthand_group = Border,
+    shorthands = BorderTop|BorderWidth|Border,
     property_group = Borders,
     computed_value_type = AbsoluteLength,
     canonical_order = "per grammar",
@@ -2565,13 +2599,14 @@ pub struct BorderTopWidthStyleValue<'a>;
     animation_type = Unknown,
     percentages = Unknown,
     longhands = BorderTopWidth|BorderRightWidth|BorderBottomWidth|BorderLeftWidth,
-    shorthand_group = Border,
+    shorthands = Border,
     property_group = Borders,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
     box_side = Top|Bottom|Left|Right,
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-width"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

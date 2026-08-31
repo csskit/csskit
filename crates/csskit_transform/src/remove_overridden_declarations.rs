@@ -41,15 +41,19 @@ where
 		if earlier_name == later_name {
 			return false;
 		}
-		StyleValue::longhands_by_name(later_name).is_some_and(|later_longhands| {
-			StyleValue::longhands_by_name(earlier_name).map_or_else(
-				|| later_longhands.contains(&earlier_name),
-				|earlier_longhands| {
-					!earlier_longhands.is_empty()
-						&& earlier_longhands.iter().all(|longhand| later_longhands.contains(longhand))
-				},
-			)
-		}) || StyleValue::reset_by_shorthands_by_name(earlier_name).contains(&later_name)
+		if let Some(later) = StyleValue::shorthand_by_name(later_name) {
+			let covered = match StyleValue::shorthand_by_name(earlier_name) {
+				// `all` expresses no property of its own, and the properties it resets are not recorded,
+				// so no later declaration is known to cover it.
+				Some(earlier) if earlier.longhands.is_empty() => false,
+				Some(earlier) => earlier.longhands.iter().all(|longhand| later.longhands.contains(longhand)),
+				None => later.longhands.contains(&earlier_name),
+			};
+			if covered {
+				return true;
+			}
+		}
+		StyleValue::longhand_by_name(earlier_name).is_some_and(|earlier| earlier.reset_by.contains(&later_name))
 	}
 
 	fn remove_overridden<'b, 's, I>(&self, declarations: I)

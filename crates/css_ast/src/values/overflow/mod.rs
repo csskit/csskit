@@ -171,6 +171,7 @@ pub struct MaxLinesStyleValue<'a>;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.overflow"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -618,7 +619,7 @@ pub enum OverflowInlineStyleValue<'a> {}
     initial = "visible",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Overflow,
+    shorthands = Overflow,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
@@ -649,7 +650,7 @@ pub enum OverflowXStyleValue<'a> {}
     initial = "visible",
     applies_to = Unknown,
     animation_type = Discrete,
-    shorthand_group = Overflow,
+    shorthands = Overflow,
     property_group = Overflow,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
