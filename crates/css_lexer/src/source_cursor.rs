@@ -10,8 +10,62 @@ use crate::{
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use source_tools::SourceCursor as GenericSourceCursor;
-use std::char::REPLACEMENT_CHARACTER;
 use std::fmt::{Display, Formatter, Result, Write};
+use std::{char::REPLACEMENT_CHARACTER, str::Chars};
+
+struct ParsedChars<'a> {
+	chars: Chars<'a>,
+	is_string: bool,
+}
+
+impl<'a> ParsedChars<'a> {
+	fn new(source: &'a str, is_string: bool) -> Self {
+		Self { chars: source.chars(), is_string }
+	}
+
+	fn as_str(&self) -> &'a str {
+		self.chars.as_str()
+	}
+}
+
+impl Iterator for ParsedChars<'_> {
+	// The decoded code point, and whether it came from an escape sequence.
+	type Item = (char, bool);
+
+	fn next(&mut self) -> Option<(char, bool)> {
+		loop {
+			let before = self.chars.clone();
+			let c = self.chars.next()?;
+			if c == '\0' {
+				return Some((REPLACEMENT_CHARACTER, false));
+			}
+			if c != '\\' {
+				return Some((c, false));
+			}
+			if self.is_string {
+				// When the token is a string, an escaped EOF is not consumed and an escaped
+				// newline is consumed without producing a code point.
+				// https://drafts.csswg.org/css-syntax-3/#consume-string-token
+				match self.chars.clone().next() {
+					None => {
+						self.chars = before;
+						return None;
+					}
+					Some(c2) if is_newline(c2) => {
+						self.chars.next();
+						if c2 == '\r' && self.chars.as_str().starts_with('\n') {
+							self.chars.next();
+						}
+						continue;
+					}
+					_ => {}
+				}
+			}
+			let (c, _) = self.chars.parse_escape_sequence();
+			return Some((if c == '\0' { REPLACEMENT_CHARACTER } else { c }, true));
+		}
+	}
+}
 
 /// Wraps [Cursor] with a [str] that represents the underlying character data for this cursor.
 #[derive(Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -272,9 +326,7 @@ impl<'a> SourceCursor<'a> {
 
 	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
-		let start = token.leading_len() as usize;
-		let end = self.inner.source().len() - token.trailing_len() as usize;
-		let source = &self.inner.source()[start..end];
+		let source = self.content_slice();
 
 		match token.kind() {
 			Kind::AtKeyword => f.write_str("@")?,
@@ -282,19 +334,12 @@ impl<'a> SourceCursor<'a> {
 			_ => {}
 		}
 
-		let mut chars = source.chars().peekable();
-		let mut i = 0;
+		let mut chars = self.parsed_chars();
 		let mut char_i = 0;
-		while let Some(c) = chars.next() {
-			if c == '\0' {
-				write!(f, "{}", REPLACEMENT_CHARACTER)?;
-				i += 1;
-			} else if c == '\\' {
-				i += 1;
-				let (ch, n) = source[i..].chars().parse_escape_sequence();
-				i += n as usize;
-				chars = source[i..].chars().peekable();
-				let ch = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
+		while let Some((ch, escaped)) = chars.next() {
+			if !escaped {
+				f.write_char(ch)?;
+			} else {
 				// Check if the decoded character is valid at this position unescaped.
 				let valid_unescaped = if ch == '-' && char_i == 0 {
 					true
@@ -304,21 +349,18 @@ impl<'a> SourceCursor<'a> {
 					is_ident(ch)
 				};
 				if valid_unescaped {
-					write!(f, "{}", ch)?;
+					f.write_char(ch)?;
 				} else if !ch.is_ascii_hexdigit() && !ch.is_ascii_whitespace() && !is_newline(ch) {
 					write!(f, "\\{}", ch)?;
 				} else {
 					write!(f, "\\{:x}", ch as u32)?;
 					// A trailing space is needed if the next character is a hex digit
 					// or whitespace, to prevent it from being consumed as part of the escape.
-					let next_char = chars.peek().copied();
+					let next_char = chars.as_str().chars().next();
 					if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
 						f.write_char(' ')?;
 					}
 				}
-			} else {
-				write!(f, "{}", c)?;
-				i += c.len_utf8();
 			}
 			char_i += 1;
 		}
@@ -344,40 +386,23 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	fn fmt_compacted_string(&self, f: &mut Formatter<'_>) -> Result {
-		let token = self.token();
-		let inner = &self.inner.source()[1..(token.len() as usize) - token.has_close_quote() as usize];
-		let quote = match token.quote_style() {
+		let quote = match self.token().quote_style() {
 			QuoteStyle::Single => '\'',
 			QuoteStyle::Double => '"',
 			QuoteStyle::None => unreachable!(),
 		};
 		f.write_char(quote)?;
-		// Decode escape sequences
-		let mut chars = inner.chars().peekable();
-		let mut i = 0;
-		while let Some(c) = chars.next() {
-			if c == '\0' {
-				write!(f, "{}", REPLACEMENT_CHARACTER)?;
-				i += 1;
-			} else if c == '\\' {
-				i += 1;
-				let (ch, n) = inner[i..].chars().parse_escape_sequence();
-				i += n as usize;
-				chars = inner[i..].chars().peekable();
-				let ch = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch };
-				if is_newline(ch) || ch == quote || ch == '\\' {
-					write!(f, "\\{:x}", ch as u32)?;
-					// Trailing space needed if next char is a hex digit.
-					let next_char = chars.peek().copied();
-					if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
-						f.write_char(' ')?;
-					}
-				} else {
-					write!(f, "{}", ch)?;
+		let mut chars = self.parsed_chars();
+		while let Some((ch, escaped)) = chars.next() {
+			if escaped && (is_newline(ch) || ch == quote || ch == '\\') {
+				write!(f, "\\{:x}", ch as u32)?;
+				// Trailing space needed if next char is a hex digit.
+				let next_char = chars.as_str().chars().next();
+				if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
+					f.write_char(' ')?;
 				}
 			} else {
-				write!(f, "{}", c)?;
-				i += c.len_utf8();
+				f.write_char(ch)?;
 			}
 		}
 		f.write_char(quote)?;
@@ -425,9 +450,6 @@ impl<'a> SourceCursor<'a> {
 	#[cfg(feature = "egg")]
 	fn fmt_expanded_ident(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
-		let start = token.leading_len() as usize;
-		let end = self.inner.source().len() - token.trailing_len() as usize;
-		let source = &self.inner.source()[start..end];
 
 		match token.kind() {
 			Kind::AtKeyword => f.write_str("@")?,
@@ -435,22 +457,8 @@ impl<'a> SourceCursor<'a> {
 			_ => {}
 		}
 
-		let mut chars = source.chars().peekable();
-		let mut i = 0;
-		while let Some(c) = chars.next() {
-			if c == '\0' {
-				write!(f, "\\{:06x} ", 0xFFFDu32)?;
-				i += 1;
-			} else if c == '\\' {
-				i += 1;
-				let (ch, n) = source[i..].chars().parse_escape_sequence();
-				write!(f, "\\{:06x} ", if ch == '\0' { REPLACEMENT_CHARACTER } else { ch } as u32)?;
-				i += n as usize;
-				chars = source[i..].chars().peekable();
-			} else {
-				write!(f, "\\{:06x} ", c as u32)?;
-				i += c.len_utf8();
-			}
+		for (ch, _) in self.parsed_chars() {
+			write!(f, "\\{:06x} ", ch as u32)?;
 		}
 
 		if token.kind() == Kind::Function {
@@ -507,148 +515,56 @@ impl<'a> SourceCursor<'a> {
 	pub fn eq_ignore_ascii_case(&self, other: &str) -> bool {
 		debug_assert!(self.token() != Kind::Delim && self.token() != Kind::Url);
 		debug_assert!(other.to_ascii_lowercase() == other);
-		let start = self.token().leading_len() as usize;
-		let end = self.inner.source().len() - self.token().trailing_len() as usize;
+		let source = self.content_slice();
 		if !self.token().contains_escape_chars() {
-			if end - start != other.len() {
+			if source.len() != other.len() {
 				return false;
 			}
 			if self.token().is_lower_case() {
-				debug_assert!(self.source()[start..end].to_ascii_lowercase() == self.source()[start..end]);
-				return &self.inner.source()[start..end] == other;
+				debug_assert!(source.to_ascii_lowercase() == source);
+				return source == other;
 			}
-			return self.inner.source()[start..end].eq_ignore_ascii_case(other);
+			return source.eq_ignore_ascii_case(other);
 		}
-		let mut chars = self.inner.source()[start..end].chars().peekable();
+		let mut chars = self.parsed_chars();
 		let mut other_chars = other.chars();
-		let mut i = 0;
-		while let Some(c) = chars.next() {
-			let o = other_chars.next();
-			if o.is_none() {
-				return false;
-			}
-			let o = o.unwrap();
-			if c == '\0' {
-				if REPLACEMENT_CHARACTER != o {
-					return false;
-				}
-				i += 1;
-			} else if c == '\\' {
-				// String has special rules
-				// https://drafts.csswg.org/css-syntax-3/#consume-string-token
-				if self.token().kind_bits() == Kind::String as u8 {
-					// When the token is a string, escaped EOF points are not consumed
-					// U+005C REVERSE SOLIDUS (\)
-					//   If the next input code point is EOF, do nothing.
-					//   Otherwise, if the next input code point is a newline, consume it.
-					let c = chars.peek();
-					if let Some(c) = c {
-						if is_newline(*c) {
-							chars.next();
-							if chars.peek() == Some(&'\n') {
-								i += 1;
-							}
-							i += 2;
-							chars = self.inner.source()[(start + i)..end].chars().peekable();
-							continue;
-						}
-					} else {
-						break;
+		loop {
+			match (chars.next(), other_chars.next()) {
+				(None, None) => return true,
+				(Some((c, _)), Some(o)) => {
+					if !c.eq_ignore_ascii_case(&o) {
+						return false;
 					}
 				}
-				i += 1;
-				let (ch, n) = self.inner.source()[(start + i)..].chars().parse_escape_sequence();
-				i += n as usize;
-				chars = self.inner.source()[(start + i)..end].chars().peekable();
-				if (ch == '\0' && REPLACEMENT_CHARACTER != o) || ch != o {
-					return false;
-				}
-			} else if c != o {
-				return false;
-			} else {
-				i += c.len_utf8();
+				_ => return false,
 			}
 		}
-		other_chars.next().is_none()
 	}
 
 	/// Parse the cursor's content using any allocator that implements the Allocator trait.
 	pub fn parse<A: Allocator + Clone + 'a>(&self, allocator: A) -> CowStr<'a, A> {
 		debug_assert!(self.token() != Kind::Delim);
-		let start = self.token().leading_len() as usize;
-		let end = self.inner.source().len() - self.token().trailing_len() as usize;
+		let source = self.content_slice();
 		if !self.token().contains_escape_chars() {
-			return CowStr::<A>::Borrowed(&self.inner.source()[start..end]);
+			return CowStr::Borrowed(source);
 		}
-		let mut chars = self.inner.source()[start..end].chars().peekable();
-		let mut i = 0;
+		let mut chars = self.parsed_chars();
 		let mut vec: Option<Vec<u8, A>> = None;
-		while let Some(c) = chars.next() {
-			if c == '\0' {
-				if vec.is_none() {
-					vec = if i == 0 {
-						Some(Vec::new_in(allocator.clone()))
-					} else {
-						Some({
-							let mut v = Vec::new_in(allocator.clone());
-							v.extend(self.inner.source()[start..(start + i)].bytes());
-							v
-						})
-					}
-				}
+		let mut yielded_len = 0;
+		loop {
+			let rest = chars.as_str();
+			let Some((c, escaped)) = chars.next() else { break };
+			if let Some(vec) = &mut vec {
 				let mut buf = [0; 4];
-				let bytes = REPLACEMENT_CHARACTER.encode_utf8(&mut buf).as_bytes();
-				vec.as_mut().unwrap().extend_from_slice(bytes);
-				i += 1;
-			} else if c == '\\' {
-				if vec.is_none() {
-					vec = if i == 0 {
-						Some(Vec::new_in(allocator.clone()))
-					} else {
-						Some({
-							let mut v = Vec::new_in(allocator.clone());
-							v.extend(self.inner.source()[start..(start + i)].bytes());
-							v
-						})
-					}
-				}
-				// String has special rules
-				// https://drafts.csswg.org/css-syntax-3/#consume-string-cursor
-				if self.token().kind_bits() == Kind::String as u8 {
-					// When the token is a string, escaped EOF points are not consumed
-					// U+005C REVERSE SOLIDUS (\)
-					//   If the next input code point is EOF, do nothing.
-					//   Otherwise, if the next input code point is a newline, consume it.
-					let c = chars.peek();
-					if let Some(c) = c {
-						if is_newline(*c) {
-							chars.next();
-							if chars.peek() == Some(&'\n') {
-								i += 1;
-							}
-							i += 2;
-							chars = self.inner.source()[(start + i)..end].chars().peekable();
-							continue;
-						}
-					} else {
-						break;
-					}
-				}
-				i += 1;
-				let (ch, n) = self.inner.source()[(start + i)..].chars().parse_escape_sequence();
+				vec.extend_from_slice(c.encode_utf8(&mut buf).as_bytes());
+			} else if escaped || rest.len() - chars.as_str().len() != c.len_utf8() {
+				let mut v = Vec::new_in(allocator.clone());
+				v.extend_from_slice(&source.as_bytes()[..source.len() - rest.len()]);
 				let mut buf = [0; 4];
-				let bytes = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch }.encode_utf8(&mut buf).as_bytes();
-				vec.as_mut().unwrap().extend_from_slice(bytes);
-				i += n as usize;
-				chars = self.inner.source()[(start + i)..end].chars().peekable();
-			} else {
-				if let Some(bytes) = &mut vec {
-					let mut buf = [0; 4];
-					let char_bytes = c.encode_utf8(&mut buf).as_bytes();
-					bytes.extend_from_slice(char_bytes);
-				}
-				i += c.len_utf8();
+				v.extend_from_slice(c.encode_utf8(&mut buf).as_bytes());
+				vec = Some(v);
 			}
+			yielded_len = source.len() - chars.as_str().len();
 		}
 		match vec {
 			Some(vec) => {
@@ -656,68 +572,35 @@ impl<'a> SourceCursor<'a> {
 				// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
 				unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
 			}
-			None => CowStr::Borrowed(&self.inner.source()[start..start + i]),
+			None => CowStr::Borrowed(&source[..yielded_len]),
 		}
 	}
 
 	/// Parse the cursor's content to ASCII lowercase using any allocator that implements the Allocator trait.
 	pub fn parse_ascii_lower<A: Allocator + Clone + 'a>(&self, allocator: A) -> CowStr<'a, A> {
 		debug_assert!(self.token() != Kind::Delim);
-		let start = self.token().leading_len() as usize;
-		let end = self.inner.source().len() - self.token().trailing_len() as usize;
+		let source = self.content_slice();
 		if !self.token().contains_escape_chars() && self.token().is_lower_case() {
-			return CowStr::Borrowed(&self.inner.source()[start..end]);
+			return CowStr::Borrowed(source);
 		}
-		let mut chars = self.inner.source()[start..end].chars().peekable();
-		let mut i = 0;
 		let mut vec: Vec<u8, A> = Vec::new_in(allocator.clone());
-		while let Some(c) = chars.next() {
-			if c == '\0' {
-				let mut buf = [0; 4];
-				let bytes = REPLACEMENT_CHARACTER.encode_utf8(&mut buf).as_bytes();
-				vec.extend_from_slice(bytes);
-				i += 1;
-			} else if c == '\\' {
-				// String has special rules
-				// https://drafts.csswg.org/css-syntax-3/#consume-string-cursor
-				if self.token().kind_bits() == Kind::String as u8 {
-					// When the token is a string, escaped EOF points are not consumed
-					// U+005C REVERSE SOLIDUS (\)
-					//   If the next input code point is EOF, do nothing.
-					//   Otherwise, if the next input code point is a newline, consume it.
-					let c = chars.peek();
-					if let Some(c) = c {
-						if is_newline(*c) {
-							chars.next();
-							if chars.peek() == Some(&'\n') {
-								i += 1;
-							}
-							i += 2;
-							chars = self.inner.source()[(start + i)..end].chars().peekable();
-							continue;
-						}
-					} else {
-						break;
-					}
-				}
-				i += 1;
-				let (ch, n) = self.inner.source()[(start + i)..].chars().parse_escape_sequence();
-				let char_to_push = if ch == '\0' { REPLACEMENT_CHARACTER } else { ch.to_ascii_lowercase() };
-				let mut buf = [0; 4];
-				let bytes = char_to_push.encode_utf8(&mut buf).as_bytes();
-				vec.extend_from_slice(bytes);
-				i += n as usize;
-				chars = self.inner.source()[(start + i)..end].chars().peekable();
-			} else {
-				let mut buf = [0; 4];
-				let bytes = c.to_ascii_lowercase().encode_utf8(&mut buf).as_bytes();
-				vec.extend_from_slice(bytes);
-				i += c.len_utf8();
-			}
+		for (c, _) in self.parsed_chars() {
+			let mut buf = [0; 4];
+			vec.extend_from_slice(c.to_ascii_lowercase().encode_utf8(&mut buf).as_bytes());
 		}
 		let boxed_slice = vec.into_boxed_slice();
 		// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
 		unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
+	}
+
+	fn content_slice(&self) -> &'a str {
+		let start = self.token().leading_len() as usize;
+		let end = self.source().len() - self.token().trailing_len() as usize;
+		&self.source()[start..end]
+	}
+
+	fn parsed_chars(&self) -> ParsedChars<'a> {
+		ParsedChars::new(self.content_slice(), self.token().kind() == Kind::String)
 	}
 }
 
@@ -750,6 +633,21 @@ mod test {
 	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
 	use allocator_api2::alloc::Global;
 	use std::fmt::Write;
+
+	#[test]
+	fn parse_string_line_continuation() {
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		assert_eq!(SourceCursor::from(c, "\"foo\\\n\"").parse(Global), "foo");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 8));
+		assert_eq!(SourceCursor::from(c, "\"foo\\\r\n\"").parse(Global), "foo");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
+		assert_eq!(SourceCursor::from(c, "\"fo\\\no\"").parse(Global), "foo");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, false, true, 5));
+		assert_eq!(SourceCursor::from(c, "\"foo\\").parse(Global), "foo");
+	}
 
 	#[test]
 	fn parse_str_lower() {
@@ -810,6 +708,13 @@ mod test {
 
 		let c = Cursor::new(SourceOffset(3), Token::new_ident(false, false, true, 0, 7));
 		assert!(SourceCursor::from(c, "b\\61\\72").eq_ignore_ascii_case("bar"));
+
+		let c = Cursor::new(SourceOffset(3), Token::new_ident(false, false, true, 0, 5));
+		assert!(SourceCursor::from(c, "b\\41r").eq_ignore_ascii_case("bar"));
+		assert!(!SourceCursor::from(c, "b\\42r").eq_ignore_ascii_case("bar"));
+
+		let c = Cursor::new(SourceOffset(3), Token::new_ident(false, false, true, 0, 7));
+		assert!(SourceCursor::from(c, "b\\41\\52").eq_ignore_ascii_case("bar"));
 	}
 
 	#[test]
@@ -1021,6 +926,22 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
 		let sc = SourceCursor::from(c, "\"\x5c0oo\"");
 		assert_eq!(format!("{}", sc.compact()), "\"\u{FFFD}oo\"");
+	}
+
+	#[test]
+	fn test_compact_string_line_continuation() {
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 6));
+		let sc = SourceCursor::from(c, "'a\\\nb'");
+		assert_eq!(format!("{}", sc), "'a\\\nb'");
+		assert_eq!(format!("{}", sc.compact()), "'ab'");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 7));
+		let sc = SourceCursor::from(c, "'a\\\r\nb'");
+		assert_eq!(format!("{}", sc.compact()), "'ab'");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 7));
+		let sc = SourceCursor::from(c, "'a\\a b'");
+		assert_eq!(format!("{}", sc.compact()), "'a\\a b'");
 	}
 
 	#[test]
