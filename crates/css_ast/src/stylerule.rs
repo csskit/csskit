@@ -128,7 +128,7 @@ impl<'a> Parse<'a> for NestedGroupRule<'a> {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_span};
 
 	#[cfg(feature = "visitable")]
 	use crate::assert_visits;
@@ -155,6 +155,34 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@container (width>0){color:red;}}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@layer foo{color:red;}}");
 		assert_parse!(CssAtomSet::ATOMS, StyleRule, "a{@scope(.card) to (img){color:red;}}");
+	}
+
+	#[test]
+	fn test_spans() {
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			StyleRule,
+			r#"
+			body{} a{}
+			^^^^^^
+		"#
+		);
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			StyleRule,
+			r#"
+			ul li:nth-of-type(2n) {} a{}
+			^^^^^^^^^^^^^^^^^^^^^^^^
+		"#
+		);
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			StyleRule,
+			r#"
+			:nth-child(-2n+1){opacity:0;}
+			^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+		"#
+		);
 	}
 
 	#[test]

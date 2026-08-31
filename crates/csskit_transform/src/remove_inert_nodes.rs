@@ -58,6 +58,17 @@ mod tests {
 	}
 
 	#[test]
+	fn removes_consecutive_empty_style_rules() {
+		assert_transform!(
+			CssMinifierFeature::RemoveInertNodes,
+			CssAtomSet,
+			StyleSheet,
+			"kbd {}\nul li:nth-of-type(2n) {}\nfieldset > legend {}",
+			""
+		);
+	}
+
+	#[test]
 	fn removes_empty_media_rule() {
 		assert_transform!(
 			CssMinifierFeature::RemoveInertNodes,

@@ -7,12 +7,12 @@ impl ::css_parse::ToSpan for FlexWrap {
     fn to_span(&self) -> ::css_parse::Span {
         use ::css_parse::{Span, ToSpan};
         match self {
-            FlexWrap::Nowrap(val) => val.to_span(),
-            FlexWrap::Wrap { wrap: first, balance: last } => {
-                first.to_span() + last.to_span()
+            FlexWrap::Nowrap(v0) => ToSpan::to_span(v0),
+            FlexWrap::Wrap { wrap, balance, .. } => {
+                ToSpan::to_span(wrap) + ToSpan::to_span(balance)
             }
-            FlexWrap::WrapReverse { wrap_reverse: first, balance: last } => {
-                first.to_span() + last.to_span()
+            FlexWrap::WrapReverse { wrap_reverse, balance, .. } => {
+                ToSpan::to_span(wrap_reverse) + ToSpan::to_span(balance)
             }
         }
     }

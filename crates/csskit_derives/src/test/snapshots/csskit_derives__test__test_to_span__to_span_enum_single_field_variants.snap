@@ -7,9 +7,9 @@ impl ::css_parse::ToSpan for Display {
     fn to_span(&self) -> ::css_parse::Span {
         use ::css_parse::{Span, ToSpan};
         match self {
-            Display::Block(val) => val.to_span(),
-            Display::Inline(val) => val.to_span(),
-            Display::None(val) => val.to_span(),
+            Display::Block(v0) => ToSpan::to_span(v0),
+            Display::Inline(v0) => ToSpan::to_span(v0),
+            Display::None(v0) => ToSpan::to_span(v0),
         }
     }
 }

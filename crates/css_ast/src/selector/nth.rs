@@ -188,7 +188,7 @@ impl ToSpan for Nth {
 			Nth::Even(c) => c.to_span(),
 			Nth::Integer(c) => c.to_span(),
 			Nth::Anb(_, _, cursors) => {
-				let mut span = Span::ZERO;
+				let mut span = Span::DUMMY;
 				for c in cursors {
 					if *c != Cursor::EMPTY {
 						span = span + (*c).into()
@@ -204,7 +204,7 @@ impl ToSpan for Nth {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_parse_span};
 
 	#[test]
 	fn test_writes() {
@@ -249,6 +249,50 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Nth, "n- 10");
 		assert_parse!(CssAtomSet::ATOMS, Nth, "-n\n- 1");
 		assert_parse!(CssAtomSet::ATOMS, Nth, " 23n\n\n+\n\n123 ");
+	}
+
+	#[test]
+	fn test_spans() {
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			Nth,
+			r#"
+			odd
+			^^^
+		"#
+		);
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			Nth,
+			r#"
+			5
+			^
+		"#
+		);
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			Nth,
+			r#"
+			2n
+			^^
+		"#
+		);
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			Nth,
+			r#"
+			-2n+1 foo
+			^^^^^
+		"#
+		);
+		assert_parse_span!(
+			CssAtomSet::ATOMS,
+			Nth,
+			r#"
+			n- 10
+			^^^^^
+		"#
+		);
 	}
 
 	#[test]
