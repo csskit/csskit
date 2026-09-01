@@ -146,7 +146,7 @@ impl KindSet {
 	}
 
 	/// Check if a [KindSet] contains the subpplied [Kind].
-	pub fn contains(&self, kind: Kind) -> bool {
+	pub const fn contains(&self, kind: Kind) -> bool {
 		self.0 & (1 << (kind as u8 & 0b111111)) != 0
 	}
 
