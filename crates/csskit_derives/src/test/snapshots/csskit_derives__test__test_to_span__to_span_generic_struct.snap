@@ -3,12 +3,13 @@ source: crates/csskit_derives/src/test/test_to_span.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl ::css_parse::ToSpan for BorderStyle {
+impl<T, U> ::css_parse::ToSpan for Pair<T, U>
+where
+    T: ::css_parse::ToSpan,
+    U: ::css_parse::ToSpan,
+{
     fn to_span(&self) -> ::css_parse::Span {
         use ::css_parse::{Span, ToSpan};
-        match self {
-            BorderStyle::Solid => Span::DUMMY,
-            BorderStyle::Dashed { width, .. } => ToSpan::to_span(width),
-        }
+        ToSpan::to_span(&self.left) + ToSpan::to_span(&self.right)
     }
 }

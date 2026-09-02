@@ -1,8 +1,28 @@
 use crate::{FieldsExt, WhereCollector};
-use itertools::Itertools;
 use proc_macro2::TokenStream;
 use quote::quote;
 use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Result, parse_quote};
+
+/// Indexes of the fields which can bound a node's span: the leading run of optional fields up to and
+/// including the first field which is always present, and the same run taken from the end.
+///
+/// Span addition takes the lowest start and the highest end, and absorbs `Span::DUMMY`, which is what
+/// an absent field gives. Adding these fields therefore gives the whole node's span without visiting
+/// the fields between them.
+fn bounding(optional: &[bool]) -> impl Iterator<Item = usize> {
+	let head = optional.iter().position(|optional| !optional).map_or(optional.len(), |i| i + 1);
+	let tail = optional.iter().rposition(|optional| !optional).unwrap_or(0).max(head);
+	(0..head).chain(tail..optional.len())
+}
+
+/// Builds the expression for the span a node covers, from the accessors for its bounding fields.
+fn span_of(accesses: &[TokenStream]) -> TokenStream {
+	if accesses.is_empty() {
+		quote! { Span::DUMMY }
+	} else {
+		quote! { #(ToSpan::to_span(#accesses))+* }
+	}
+}
 
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let mut where_collector = WhereCollector::new();
@@ -16,69 +36,15 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			for syn_field in fields.iter() {
 				where_collector.add(&syn_field.ty);
 			}
-			let members: Vec<_> = fields.views().into_iter().map(|v| (v.member, v.is_option)).collect();
-
-			if members.len() == 1 || members.iter().all(|(_, is_option)| *is_option) {
-				let members = members.iter().map(|(m, _)| m);
-				quote! { #(self.#members.to_span())+* }
-			} else {
-				members
-					.iter()
-					.take_while_inclusive(|(_, is_option)| *is_option)
-					.with_position()
-					.map(|(position, (member, _))| {
-						if position.is_exactly_one() {
-							quote! { let first = self.#member.to_span(); }
-						} else if position.is_first {
-							quote! {
-								let first = if let Some(ref value) = self.#member {
-									value.to_span()
-								}
-							}
-						} else if position.is_last() {
-							quote! {
-								else {
-									self.#member.to_span()
-								};
-							}
-						} else {
-							debug_assert!(position.is_middle());
-							quote! {
-							   else if let Some(ref value) = self.#member {
-								   value.to_span()
-							   }
-							}
-						}
-					})
-					.chain(members.iter().rev().take_while_inclusive(|(_, is_option)| *is_option).with_position().map(
-						|(position, (member, _))| {
-							if position.is_exactly_one() {
-								quote! { first + self.#member.to_span() }
-							} else if position.is_first() {
-								quote! {
-									let last = if let Some(ref value) = self.#member {
-										value.to_span()
-									}
-								}
-							} else if position.is_last() {
-								quote! {
-									else {
-										self.#member.to_span()
-									};
-									first + last
-								}
-							} else {
-								debug_assert!(position.is_middle());
-								quote! {
-									else if let Some(ref value) = self.#member {
-										value.to_span()
-									}
-								}
-							}
-						},
-					))
-					.collect()
-			}
+			let views = fields.views();
+			let optional: Vec<bool> = views.iter().map(|view| view.is_option).collect();
+			let accesses: Vec<_> = bounding(&optional)
+				.map(|i| {
+					let member = &views[i].member;
+					quote! { &self.#member }
+				})
+				.collect();
+			span_of(&accesses)
 		}
 
 		Data::Enum(DataEnum { variants, .. }) => {
@@ -86,38 +52,36 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				.iter()
 				.map(|variant| {
 					let variant_ident = &variant.ident;
-					let views = variant.fields.views();
-					let len = views.len();
 					for syn_field in variant.fields.iter() {
 						where_collector.add(&syn_field.ty);
 					}
+					let views = variant.fields.views();
+					let optional: Vec<bool> = views.iter().map(|view| view.is_option).collect();
+					let bound: Vec<usize> = bounding(&optional).collect();
+					let accesses: Vec<_> = bound
+						.iter()
+						.map(|&i| {
+							let binding = &views[i].binding;
+							quote! { #binding }
+						})
+						.collect();
+					let body = span_of(&accesses);
 					match &variant.fields {
+						Fields::Unit => quote! { #ident::#variant_ident => #body, },
 						Fields::Named(_) => {
-							if len == 1 {
-								let m = &views[0].member;
-								quote! { #ident::#variant_ident { #m: val } => val.to_span(), }
-							} else {
-								let first_m = &views[0].member;
-								let last_m = &views[len - 1].member;
-								let rest_pats = views[1..len - 1].iter().map(|v| {
-									let m = &v.member;
-									quote! { #m: _ }
-								});
-								quote! {
-									#ident::#variant_ident { #first_m: first, #(#rest_pats,)* #last_m: last }
-										=> first.to_span() + last.to_span(),
-								}
-							}
+							let bindings = bound.iter().map(|&i| &views[i].binding);
+							quote! { #ident::#variant_ident { #(#bindings,)* .. } => #body, }
 						}
-						_ => {
-							if len == 1 {
-								quote! { #ident::#variant_ident(val) => val.to_span(), }
-							} else {
-								let rest = (2..len).map(|_| quote! { _ }).chain([quote! { last }]);
-								quote! {
-									#ident::#variant_ident(first, #(#rest),*) => first.to_span() + last.to_span(),
+						Fields::Unnamed(_) => {
+							let bindings = views.iter().enumerate().map(|(i, view)| {
+								let binding = &view.binding;
+								if bound.contains(&i) {
+									quote! { #binding }
+								} else {
+									quote! { _ }
 								}
-							}
+							});
+							quote! { #ident::#variant_ident(#(#bindings),*) => #body, }
 						}
 					}
 				})
