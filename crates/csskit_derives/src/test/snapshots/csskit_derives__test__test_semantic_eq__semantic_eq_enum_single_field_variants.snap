@@ -7,11 +7,11 @@ impl ::css_parse::SemanticEq for Display {
     fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
         match (self, other) {
-            (Display::Block(a0), Display::Block(b0)) => a0.semantic_eq(&b0, source_text),
-            (Display::Inline(a0), Display::Inline(b0)) => {
-                a0.semantic_eq(&b0, source_text)
+            (Self::Block(a_v0), Self::Block(b_v0)) => a_v0.semantic_eq(b_v0, source_text),
+            (Self::Inline(a_v0), Self::Inline(b_v0)) => {
+                a_v0.semantic_eq(b_v0, source_text)
             }
-            (Display::None(a0), Display::None(b0)) => a0.semantic_eq(&b0, source_text),
+            (Self::None(a_v0), Self::None(b_v0)) => a_v0.semantic_eq(b_v0, source_text),
             _ => false,
         }
     }

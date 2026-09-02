@@ -7,10 +7,9 @@ impl ::css_parse::SemanticEq for Foo {
     fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
         match (self, other) {
-            (Foo::Bar { name: a_name, .. }, Foo::Bar { name: b_name, .. }) => {
-                a_name.semantic_eq(&b_name, source_text)
+            (Self::Bar { name: a_name, .. }, Self::Bar { name: b_name, .. }) => {
+                a_name.semantic_eq(b_name, source_text)
             }
-            _ => false,
         }
     }
 }

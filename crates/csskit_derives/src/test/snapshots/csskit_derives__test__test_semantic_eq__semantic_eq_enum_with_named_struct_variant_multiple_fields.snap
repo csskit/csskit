@@ -7,13 +7,13 @@ impl ::css_parse::SemanticEq for BorderStyle {
     fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
         match (self, other) {
-            (BorderStyle::Solid, BorderStyle::Solid) => true,
+            (Self::Solid, Self::Solid) => true,
             (
-                BorderStyle::Dotted { radius: a_radius, spacing: a_spacing },
-                BorderStyle::Dotted { radius: b_radius, spacing: b_spacing },
+                Self::Dotted { radius: a_radius, spacing: a_spacing, .. },
+                Self::Dotted { radius: b_radius, spacing: b_spacing, .. },
             ) => {
-                a_radius.semantic_eq(&b_radius, source_text)
-                    && a_spacing.semantic_eq(&b_spacing, source_text)
+                a_radius.semantic_eq(b_radius, source_text)
+                    && a_spacing.semantic_eq(b_spacing, source_text)
             }
             _ => false,
         }
