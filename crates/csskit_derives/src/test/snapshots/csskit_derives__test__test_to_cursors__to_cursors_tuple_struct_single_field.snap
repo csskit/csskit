@@ -5,9 +5,9 @@ expression: pretty
 #[automatically_derived]
 impl ::css_parse::ToCursors for Length {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        match *self {
-            Length(ref __binding_0) => {
-                ::css_parse::ToCursors::to_cursors(__binding_0, s);
+        match self {
+            Self(v0) => {
+                ::css_parse::ToCursors::to_cursors(v0, s);
             }
         }
     }
