@@ -5,21 +5,11 @@ expression: pretty
 #[automatically_derived]
 impl ::css_parse::ToCursors for Color {
     fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
-        match *self {
-            Color {
-                red: ref __binding_0,
-                green: ref __binding_1,
-                blue: ref __binding_2,
-            } => {
-                {
-                    ::css_parse::ToCursors::to_cursors(__binding_0, s);
-                }
-                {
-                    ::css_parse::ToCursors::to_cursors(__binding_1, s);
-                }
-                {
-                    ::css_parse::ToCursors::to_cursors(__binding_2, s);
-                }
+        match self {
+            Self { red, green, blue, .. } => {
+                ::css_parse::ToCursors::to_cursors(red, s);
+                ::css_parse::ToCursors::to_cursors(green, s);
+                ::css_parse::ToCursors::to_cursors(blue, s);
             }
         }
     }
