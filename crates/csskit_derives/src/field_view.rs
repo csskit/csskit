@@ -46,7 +46,6 @@ impl FieldsExt for Fields {
 /// its fields.
 pub struct Arm<'a> {
 	pub path: TokenStream,
-	#[allow(dead_code)]
 	pub attrs: &'a [Attribute],
 	pub fields: &'a Fields,
 }

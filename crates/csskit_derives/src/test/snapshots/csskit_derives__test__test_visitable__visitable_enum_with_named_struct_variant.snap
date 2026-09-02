@@ -7,16 +7,16 @@ impl crate::VisitableMut for FlexWrap {
     fn accept_mut<__V: crate::VisitMut>(&mut self, v: &mut __V) {
         use crate::VisitableMut;
         match self {
-            Self::Nowrap(__binding_0) => {
-                __binding_0.accept_mut(v);
+            Self::Nowrap(v0) => {
+                v0.accept_mut(v);
             }
-            Self::Wrap { wrap: __binding_0, balance: __binding_1 } => {
-                __binding_0.accept_mut(v);
-                __binding_1.accept_mut(v);
+            Self::Wrap { wrap, balance, .. } => {
+                wrap.accept_mut(v);
+                balance.accept_mut(v);
             }
-            Self::WrapReverse { wrap_reverse: __binding_0, balance: __binding_1 } => {
-                __binding_0.accept_mut(v);
-                __binding_1.accept_mut(v);
+            Self::WrapReverse { wrap_reverse, balance, .. } => {
+                wrap_reverse.accept_mut(v);
+                balance.accept_mut(v);
             }
         }
     }
@@ -25,17 +25,19 @@ impl crate::VisitableMut for FlexWrap {
 impl crate::Visitable for FlexWrap {
     fn accept<__V: crate::Visit>(&self, v: &mut __V) -> visit_flow::VisitFlow {
         use crate::Visitable;
-        visit_flow::try_visit!(
-            { match self { Self::Nowrap(__binding_0) => {
-            visit_flow::try_visit!(__binding_0.accept(v)); < visit_flow::VisitFlow as
-            visit_flow::VisitFlowExt > ::DESCEND }, Self::Wrap { wrap : __binding_0,
-            balance : __binding_1 } => { visit_flow::try_visit!(__binding_0.accept(v));
-            visit_flow::try_visit!(__binding_1.accept(v)); < visit_flow::VisitFlow as
-            visit_flow::VisitFlowExt > ::DESCEND }, Self::WrapReverse { wrap_reverse :
-            __binding_0, balance : __binding_1 } => { visit_flow::try_visit!(__binding_0
-            .accept(v)); visit_flow::try_visit!(__binding_1.accept(v)); <
-            visit_flow::VisitFlow as visit_flow::VisitFlowExt > ::DESCEND }, } }
-        );
+        match self {
+            Self::Nowrap(v0) => {
+                visit_flow::try_visit!(v0.accept(v));
+            }
+            Self::Wrap { wrap, balance, .. } => {
+                visit_flow::try_visit!(wrap.accept(v));
+                visit_flow::try_visit!(balance.accept(v));
+            }
+            Self::WrapReverse { wrap_reverse, balance, .. } => {
+                visit_flow::try_visit!(wrap_reverse.accept(v));
+                visit_flow::try_visit!(balance.accept(v));
+            }
+        }
         <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
     }
 }
