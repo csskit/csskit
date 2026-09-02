@@ -6,8 +6,8 @@ expression: pretty
 impl ::css_parse::SemanticEq for Length {
     fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
-        let Length(a0) = self;
-        let Length(b0) = other;
-        a0.semantic_eq(&b0, source_text)
+        match (self, other) {
+            (Self(a_v0), Self(b_v0)) => a_v0.semantic_eq(b_v0, source_text),
+        }
     }
 }

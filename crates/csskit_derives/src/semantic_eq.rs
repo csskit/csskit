@@ -1,102 +1,59 @@
-use crate::{WhereCollector, attributes::extract_semantic_eq_skip};
+use crate::{FieldsExt, WhereCollector, attributes::extract_semantic_eq_skip, field_view::Arm};
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
 use syn::{Data, DeriveInput, Error, Fields, Result, parse_quote};
-use synstructure::{AddBounds, BindStyle, Structure};
 
-fn structure_with_prefix<'a>(input: &'a DeriveInput, prefix: &'static str) -> Result<Structure<'a>> {
-	let mut s = Structure::try_new(input)?;
-	s.add_bounds(AddBounds::None);
-	s.bind_with(|_| BindStyle::Move);
-	s.binding_name(move |field, i| match &field.ident {
-		Some(name) => format_ident!("{prefix}_{name}"),
-		None => format_ident!("{prefix}{i}"),
-	});
-	Ok(s)
-}
-
+/// Two values are semantically equal when they are the same arm and every field which is not
+/// skipped is semantically equal to its counterpart.
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
-	if let Data::Struct(ref s) = input.data
+	if let Data::Struct(s) = &input.data
 		&& matches!(s.fields, Fields::Unit)
 	{
 		return Err(Error::new(input.ident.span(), "Cannot derive SemanticEq on this struct"));
 	}
-	if matches!(input.data, Data::Union(_)) {
-		return Err(Error::new(input.ident.span(), "Cannot derive SemanticEq on a Union"));
-	}
-
-	let mut s_a = structure_with_prefix(&input, "a")?;
-	let mut s_b = structure_with_prefix(&input, "b")?;
-	s_a.filter(|bi| !extract_semantic_eq_skip(&bi.ast().attrs));
-	s_b.filter(|bi| !extract_semantic_eq_skip(&bi.ast().attrs));
+	let arms = Arm::all(&input)?;
 
 	let mut wc = WhereCollector::new();
-	for variant in s_a.variants() {
-		for bi in variant.bindings() {
-			wc.add(&bi.ast().ty);
-		}
-	}
-
-	let ident = &input.ident;
-	let (impl_generics, type_generics, _) = input.generics.split_for_impl();
-
-	let body = if matches!(input.data, Data::Struct(_)) {
-		let steps: Vec<TokenStream> = s_a.variants()[0]
-			.bindings()
-			.iter()
-			.zip(s_b.variants()[0].bindings().iter())
-			.map(|(a, b)| {
-				let a_name = &a.binding;
-				let b_name = &b.binding;
-				quote! { #a_name.semantic_eq(&#b_name, source_text) }
-			})
-			.collect();
-		let a_pat = s_a.variants()[0].pat();
-		let b_pat = s_b.variants()[0].pat();
-		let body = steps.into_iter().reduce(|acc, item| quote! { #acc && #item }).unwrap_or(quote! { true });
-		quote! {
-			let #a_pat = self;
-			let #b_pat = other;
-			#body
-		}
-	} else {
-		let arms: TokenStream = s_a
-			.variants()
-			.iter()
-			.zip(s_b.variants().iter())
-			.map(|(va, vb)| {
-				let a_pat = va.pat();
-				let b_pat = vb.pat();
-				let steps: Vec<TokenStream> = va
-					.bindings()
-					.iter()
-					.zip(vb.bindings().iter())
-					.map(|(a, b)| {
-						let a_name = &a.binding;
-						let b_name = &b.binding;
-						quote! { #a_name.semantic_eq(&#b_name, source_text) }
-					})
-					.collect();
-				let body = steps.into_iter().reduce(|acc, item| quote! { #acc && #item }).unwrap_or(quote! { true });
-				quote! { (#a_pat, #b_pat) => { #body } }
-			})
-			.collect();
-		quote! {
-			match (self, other) {
-				#arms
-				_ => false,
+	let matches: Vec<TokenStream> = arms
+		.iter()
+		.map(|arm| {
+			let compared: Vec<bool> = arm.fields.iter().map(|field| !extract_semantic_eq_skip(&field.attrs)).collect();
+			for (field, _) in arm.fields.iter().zip(&compared).filter(|(_, compared)| **compared) {
+				wc.add(&field.ty);
 			}
-		}
-	};
+			let a = arm.pattern(|i, view| compared[i].then(|| format_ident!("a_{}", view.binding)));
+			let b = arm.pattern(|i, view| compared[i].then(|| format_ident!("b_{}", view.binding)));
+			let (a_bindings, b_bindings): (Vec<_>, Vec<_>) = arm
+				.fields
+				.views()
+				.iter()
+				.zip(&compared)
+				.filter(|(_, compared)| **compared)
+				.map(|(view, _)| (format_ident!("a_{}", view.binding), format_ident!("b_{}", view.binding)))
+				.unzip();
+			let equal = if a_bindings.is_empty() {
+				quote! { true }
+			} else {
+				quote! { #(#a_bindings.semantic_eq(#b_bindings, source_text))&&* }
+			};
+			quote! { (#a, #b) => #equal, }
+		})
+		.collect();
+	let fallback = (arms.len() > 1).then(|| quote! { _ => false, });
 
 	let where_clause = wc.extend_where_clause(&input.generics, parse_quote! { ::css_parse::SemanticEq });
+	let ident = &input.ident;
+	let (impl_generics, type_generics, _) = input.generics.split_for_impl();
 
 	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::SemanticEq for #ident #type_generics #where_clause {
 			fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 				use ::css_parse::SemanticEq;
-				#body
+				match (self, other) {
+					#(#matches)*
+					#fallback
+				}
 			}
 		}
 	})

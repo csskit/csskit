@@ -7,11 +7,11 @@ impl ::css_parse::SemanticEq for BorderStyle {
     fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
         use ::css_parse::SemanticEq;
         match (self, other) {
-            (BorderStyle::Solid, BorderStyle::Solid) => true,
+            (Self::Solid, Self::Solid) => true,
             (
-                BorderStyle::Dashed { width: a_width },
-                BorderStyle::Dashed { width: b_width },
-            ) => a_width.semantic_eq(&b_width, source_text),
+                Self::Dashed { width: a_width, .. },
+                Self::Dashed { width: b_width, .. },
+            ) => a_width.semantic_eq(b_width, source_text),
             _ => false,
         }
     }
