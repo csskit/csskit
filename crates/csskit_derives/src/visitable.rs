@@ -1,4 +1,4 @@
-use crate::{FieldsExt, WhereCollector};
+use crate::{FieldsExt, WhereCollector, field_view::Arm};
 use heck::ToSnakeCase;
 use proc_macro2::TokenStream;
 use quote::{format_ident, quote};
@@ -8,7 +8,6 @@ use syn::{
 	parse_quote,
 	token::SelfValue,
 };
-use synstructure::{AddBounds, Structure};
 
 #[derive(Clone, Debug, Default, PartialEq, Eq)]
 enum VisitStyle {
@@ -76,122 +75,63 @@ fn has_feature_metadata(attrs: &[Attribute]) -> bool {
 			return false;
 		}
 		let Meta::List(list) = &attr.meta else { return false };
-		// Parse as comma-separated paths and check for FeatureMetadata
 		list.parse_args_with(syn::punctuated::Punctuated::<syn::Path, syn::Token![,]>::parse_terminated)
 			.map(|paths| paths.iter().any(|p| p.is_ident("FeatureMetadata")))
 			.unwrap_or(false)
 	})
 }
 
-fn make_body(s: &Structure, accept: &syn::Ident, wc: &mut WhereCollector, use_try_visit: bool) -> TokenStream {
-	match &s.ast().data {
-		Data::Struct(ds) => {
-			let steps: Vec<TokenStream> = ds
-				.fields
-				.views()
-				.into_iter()
-				.zip(ds.fields.iter())
-				.filter_map(|(view, syn_field)| {
-					if VisitStyle::from(syn_field.attrs.as_slice()) == VisitStyle::Skip {
-						return None;
-					}
-					wc.add(&syn_field.ty);
-					let m = &view.member;
-					if use_try_visit {
-						Some(quote! { visit_flow::try_visit!(self.#m.#accept(v)); })
-					} else {
-						Some(quote! { self.#m.#accept(v); })
-					}
-				})
-				.collect();
-			if use_try_visit {
-				quote! { #(#steps)* <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND }
-			} else {
-				quote! { #(#steps)* }
-			}
-		}
-		Data::Enum(_) => {
-			let arms: TokenStream = s
-				.variants()
-				.iter()
-				.map(|variant| {
-					let var_ident = variant.ast().ident;
-					let skip_variant = VisitStyle::from(variant.ast().attrs) == VisitStyle::Skip;
-					let bindings: Vec<_> = variant.bindings().iter().collect();
-					let named = bindings.first().and_then(|bi| bi.ast().ident.as_ref()).is_some();
-
-					let (patterns, calls): (Vec<TokenStream>, Vec<TokenStream>) = bindings
-						.iter()
-						.map(|bi| {
-							let skip_field =
-								skip_variant || VisitStyle::from(bi.ast().attrs.as_slice()) == VisitStyle::Skip;
-							let binding = &bi.binding;
-							if named {
-								let field_name = bi.ast().ident.as_ref().unwrap();
-								if skip_field {
-									(quote! { #field_name: _ }, quote! {})
-								} else {
-									wc.add(&bi.ast().ty);
-									let call = if use_try_visit {
-										quote! { visit_flow::try_visit!(#binding.#accept(v)) }
-									} else {
-										quote! { #binding.#accept(v) }
-									};
-									(quote! { #field_name: #binding }, call)
-								}
-							} else if skip_field {
-								(quote! { _ }, quote! {})
-							} else {
-								wc.add(&bi.ast().ty);
-								let call = if use_try_visit {
-									quote! { visit_flow::try_visit!(#binding.#accept(v)) }
-								} else {
-									quote! { #binding.#accept(v) }
-								};
-								(quote! { #binding }, call)
-							}
-						})
-						.unzip();
-
-					let pattern = if bindings.is_empty() {
-						quote! { Self::#var_ident }
-					} else if named {
-						quote! { Self::#var_ident { #(#patterns),* } }
-					} else {
-						quote! { Self::#var_ident(#(#patterns),*) }
-					};
-					if use_try_visit {
-						quote! { #pattern => { #(#calls;)* <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND }, }
-					} else {
-						quote! { #pattern => { #(#calls;)* }, }
-					}
-				})
-				.collect();
-			quote! { match self { #arms } }
-		}
-		Data::Union(_) => unreachable!("checked above"),
-	}
+/// A `match` over every arm which calls `visit` on each field that is not skipped.
+fn visit_children(arms: &[Arm], visit: impl Fn(&Ident) -> TokenStream) -> TokenStream {
+	let arms = arms.iter().map(|arm| {
+		let skip_arm = VisitStyle::from(arm.attrs) == VisitStyle::Skip;
+		let visited: Vec<bool> = arm
+			.fields
+			.iter()
+			.map(|field| !skip_arm && VisitStyle::from(field.attrs.as_slice()) != VisitStyle::Skip)
+			.collect();
+		let pattern = arm.pattern(|i, view| visited[i].then(|| view.binding.clone()));
+		let calls = arm
+			.fields
+			.views()
+			.into_iter()
+			.zip(&visited)
+			.filter(|(_, visited)| **visited)
+			.map(|(view, _)| visit(&view.binding));
+		quote! { #pattern => { #(#calls;)* } }
+	});
+	quote! { match self { #(#arms)* } }
 }
 
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
-	if matches!(input.data, Data::Union(_)) {
-		return Err(Error::new(input.ident.span(), "Cannot derive Visitable on a Union"));
-	}
-	if let Data::Struct(ref s) = input.data
+	if let Data::Struct(s) = &input.data
 		&& matches!(s.fields, Fields::Unit)
 	{
 		return Err(Error::new(input.ident.span(), "Cannot derive Visitable on this struct"));
 	}
+	let arms = Arm::all(&input)?;
 
-	let style: VisitStyle = VisitStyle::from(input.attrs.as_slice());
-	let is_queryable = style.visit_self();
+	let style = VisitStyle::from(input.attrs.as_slice());
 	let ident = &input.ident;
 	let (impl_generics, type_generics, _) = input.generics.split_for_impl();
+	let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
+	let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
 
-	let (visit_mut, exit_mut) = if style.visit_self() {
-		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
-		let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
-		(quote! { v.#visit_method(self); }, quote! { v.#exit_method(self); })
+	let mut wc = WhereCollector::new();
+	let (children_mut, children) = if style.visit_children() {
+		for arm in &arms {
+			if VisitStyle::from(arm.attrs) != VisitStyle::Skip {
+				for field in
+					arm.fields.iter().filter(|field| VisitStyle::from(field.attrs.as_slice()) != VisitStyle::Skip)
+				{
+					wc.add(&field.ty);
+				}
+			}
+		}
+		(
+			visit_children(&arms, |binding| quote! { #binding.accept_mut(v) }),
+			visit_children(&arms, |binding| quote! { visit_flow::try_visit!(#binding.accept(v)) }),
+		)
 	} else {
 		(quote! {}, quote! {})
 	};
@@ -202,65 +142,34 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		(quote! {}, quote! {})
 	};
 
-	let mut s = Structure::try_new(&input)?;
-	s.add_bounds(AddBounds::None);
-
-	let mut wc = WhereCollector::new();
-
-	let (body_mut, body) = if style.visit_children() {
-		let accept_mut = format_ident!("accept_mut");
-		let accept = format_ident!("accept");
-		let b_mut = make_body(&s, &accept_mut, &mut wc, false);
-		let b = make_body(&s, &accept, &mut wc, true);
-		(b_mut, b)
-	} else {
-		(quote! {}, quote! { <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND })
-	};
-
-	let accept_body = if is_queryable {
-		let node_var = quote! { __node };
-		let children_block = if style.visit_self() {
-			let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
-			let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
+	let (accept_mut_body, accept_body) = if style.visit_self() {
+		(
 			quote! {
-				if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.#visit_method(self)) {
-					visit_flow::try_visit!({ #body });
+				v.#visit_method(self);
+				#children_mut
+				v.#exit_method(self);
+			},
+			quote! {
+				let __node = crate::QueryableNode::visit_node(self);
+				if let visit_flow::VisitAction::SkipChildren = visit_flow::try_visit!(v.consider_node(__node)) {
+					return <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND;
 				}
-				visit_flow::try_visit!(v.#exit_method(self));
-			}
-		} else {
-			quote! { visit_flow::try_visit!({ #body }); }
-		};
-		quote! {
-			let #node_var = crate::QueryableNode::visit_node(self);
-			if let visit_flow::VisitAction::SkipChildren = visit_flow::try_visit!(v.consider_node(#node_var)) {
-				return <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND;
-			}
-			#visit_feature
-			if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.enter_node(#node_var)) {
-				#children_block
-			}
-			visit_flow::try_visit!(v.exit_node(#node_var));
-			#exit_feature
-		}
-	} else if style.visit_self() {
-		let visit_method = format_ident!("visit_{}", ident.to_string().to_snake_case());
-		let exit_method = format_ident!("exit_{}", ident.to_string().to_snake_case());
-		quote! {
-			if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.#visit_method(self)) {
-				visit_flow::try_visit!({ #body });
-			}
-			visit_flow::try_visit!(v.#exit_method(self));
-		}
+				#visit_feature
+				if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.enter_node(__node)) {
+					if let visit_flow::VisitAction::Descend = visit_flow::try_visit!(v.#visit_method(self)) {
+						#children
+					}
+					visit_flow::try_visit!(v.#exit_method(self));
+				}
+				visit_flow::try_visit!(v.exit_node(__node));
+				#exit_feature
+			},
+		)
 	} else {
-		quote! { visit_flow::try_visit!({ #body }); }
+		(children_mut, children)
 	};
 
 	let mut_where_clause = wc.extend_where_clause(&input.generics, parse_quote! { crate::VisitableMut });
-
-	let skip_queryable = has_queryable_skip(&input.attrs);
-	let queryable = is_queryable && !skip_queryable;
-
 	// Any type parameter that must be `Visitable` for this impl's fields must also satisfy
 	// `ToSpan` and `NodeWithMetadata<CssMetadata>`. This is required directly when this node is
 	// itself queryable (`accept()`'s body calls `QueryableNode::visit_node(self)`, and
@@ -270,39 +179,26 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	// this one, invoking `field.accept(v)`, must prove it too). Since field queryability isn't
 	// visible from here, bundle all three bounds together unconditionally for every `T` that
 	// needs `Visitable` at all.
-	let where_clause = {
-		let to_span_clause = wc.extend_where_clause(&input.generics, parse_quote! { ::css_parse::ToSpan });
-		let metadata_clause =
-			wc.extend_where_clause(&input.generics, parse_quote! { css_parse::NodeWithMetadata<crate::CssMetadata> });
-		let mut merged = wc.extend_where_clause(&input.generics, parse_quote! { crate::Visitable });
-		for extra in [to_span_clause, metadata_clause].into_iter().flatten() {
-			match &mut merged {
-				Some(merged) => merged.predicates.extend(extra.predicates),
-				None => merged = Some(extra),
-			}
-		}
-		merged
-	};
+	let where_clause = wc.extend_where_clause(
+		&input.generics,
+		parse_quote! { crate::Visitable + ::css_parse::ToSpan + css_parse::NodeWithMetadata<crate::CssMetadata> },
+	);
 
-	let queryable_impl = if queryable {
+	let queryable_impl = (style.visit_self() && !has_queryable_skip(&input.attrs)).then(|| {
 		quote! {
 			#[automatically_derived]
 			impl #impl_generics crate::QueryableNode for #ident #type_generics #where_clause {
 				const NODE_ID: crate::NodeId = crate::NodeId::#ident;
 			}
 		}
-	} else {
-		quote! {}
-	};
+	});
 
 	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics crate::VisitableMut for #ident #type_generics #mut_where_clause {
 			fn accept_mut<__V: crate::VisitMut>(&mut self, v: &mut __V) {
 				use crate::VisitableMut;
-				#visit_mut
-				#body_mut
-				#exit_mut
+				#accept_mut_body
 			}
 		}
 
