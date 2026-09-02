@@ -1,9 +1,9 @@
 use darling::FromAttributes;
 use proc_macro2::TokenStream;
-use quote::{format_ident, quote};
-use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Ident, Index, Path, Result, Type, parse_quote};
+use quote::quote;
+use syn::{Data, DataEnum, DataStruct, DeriveInput, Error, Fields, Ident, Member, Path, Result, parse_quote};
 
-use crate::{darling_ext::PipeList, where_collector::WhereCollector};
+use crate::{FieldsExt, darling_ext::PipeList, field_view::Arm, where_collector::WhereCollector};
 
 #[derive(Debug, Default, FromAttributes)]
 #[darling(attributes(metadata))]
@@ -51,52 +51,10 @@ impl MetadataArgs {
 	}
 }
 
-/// Accessors (`self.<member>`) of every field that contributes metadata, plus their types.
-fn aggregated_fields(fields: &Fields) -> Vec<(TokenStream, &Type)> {
-	match fields {
-		Fields::Named(named) => named
-			.named
-			.iter()
-			.filter(|f| !MetadataArgs::field_is_skipped(&f.attrs))
-			.filter_map(|f| f.ident.as_ref().map(|i| (quote! { #i }, &f.ty)))
-			.collect(),
-		Fields::Unnamed(unnamed) => unnamed
-			.unnamed
-			.iter()
-			.enumerate()
-			.filter(|(_, f)| !MetadataArgs::field_is_skipped(&f.attrs))
-			.map(|(i, f)| {
-				let idx = Index::from(i);
-				(quote! { #idx }, &f.ty)
-			})
-			.collect(),
-		Fields::Unit => Vec::new(),
-	}
-}
-
-/// Accessors (`self.<member>`) of every field, paired with the field itself.
-fn members(fields: &Fields) -> Vec<(TokenStream, &syn::Field)> {
-	match fields {
-		Fields::Named(named) => {
-			named.named.iter().filter_map(|f| f.ident.as_ref().map(|i| (quote! { #i }, f))).collect()
-		}
-		Fields::Unnamed(unnamed) => unnamed
-			.unnamed
-			.iter()
-			.enumerate()
-			.map(|(i, f)| {
-				let idx = Index::from(i);
-				(quote! { #idx }, f)
-			})
-			.collect(),
-		Fields::Unit => Vec::new(),
-	}
-}
-
-/// Accessor (`self.<member>`) of the field marked `#[metadata(block)]`, if any.
-fn block_field(fields: &Fields) -> Result<Option<TokenStream>> {
-	let mut found: Option<TokenStream> = None;
-	for (member, field) in members(fields) {
+/// Member of the field marked `#[metadata(block)]`, if any.
+fn block_field(fields: &Fields) -> Result<Option<Member>> {
+	let mut found = None;
+	for (view, field) in fields.views().into_iter().zip(fields.iter()) {
 		if !MetadataArgs::field_is_block(&field.attrs) {
 			continue;
 		}
@@ -106,17 +64,19 @@ fn block_field(fields: &Fields) -> Result<Option<TokenStream>> {
 		if found.is_some() {
 			return Err(Error::new_spanned(field, "#[metadata(block)] can only be applied to one field."));
 		}
-		found = Some(member);
+		found = Some(view.member);
 	}
 	Ok(found)
 }
 
-/// Accessors (`self.<member>`) of every field marked `#[metadata(prelude)]`.
-fn prelude_fields(fields: &Fields) -> Vec<TokenStream> {
-	members(fields)
+/// Members of every field marked `#[metadata(prelude)]`.
+fn prelude_fields(fields: &Fields) -> Vec<Member> {
+	fields
+		.views()
 		.into_iter()
+		.zip(fields.iter())
 		.filter(|(_, field)| MetadataArgs::field_is_prelude(&field.attrs))
-		.map(|(member, _)| member)
+		.map(|(view, _)| view.member)
 		.collect()
 }
 
@@ -132,7 +92,7 @@ fn merge_expr(base: TokenStream, values: impl IntoIterator<Item = TokenStream>) 
 }
 
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
-	let ident = input.ident;
+	let ident = &input.ident;
 	let args = MetadataArgs::from_attributes(&input.attrs)?;
 
 	if args.skip {
@@ -237,89 +197,27 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		}
 	};
 
+	// A node's metadata is its own merged with that of every field which is not skipped.
 	let mut wc = WhereCollector::new();
-	let metadata_body = match &input.data {
-		Data::Struct(DataStruct { fields, .. }) => {
-			let members = aggregated_fields(fields);
-			for (_, ty) in &members {
-				wc.add(ty);
+	let arms: Vec<TokenStream> = Arm::all(&input)?
+		.iter()
+		.map(|arm| {
+			let skip_arm = MetadataArgs::from_attributes(arm.attrs).map(|a| a.skip).unwrap_or(false);
+			let merged: Vec<bool> =
+				arm.fields.iter().map(|field| !skip_arm && !MetadataArgs::field_is_skipped(&field.attrs)).collect();
+			for (field, _) in arm.fields.iter().zip(&merged).filter(|(_, merged)| **merged) {
+				wc.add(&field.ty);
 			}
-			let body =
-				merge_expr(quote! { self.self_metadata() }, members.iter().map(|(member, _)| quote! { &self.#member }));
-			quote! {
-				fn metadata(&self) -> crate::CssMetadata {
-					#body
-				}
-			}
-		}
-		Data::Enum(DataEnum { variants, .. }) => {
-			let arms: TokenStream = variants
-				.iter()
-				.map(|variant| {
-					let variant_ident = &variant.ident;
-					if MetadataArgs::from_attributes(&variant.attrs).map(|a| a.skip).unwrap_or(false) {
-						let pattern = match &variant.fields {
-							Fields::Unit => quote! { Self::#variant_ident },
-							_ => quote! { Self::#variant_ident(..) },
-						};
-						return quote! { #pattern => crate::CssMetadata::default(), };
-					}
-					let bindings: Vec<_> = variant
-						.fields
-						.iter()
-						.enumerate()
-						.map(|(i, field)| {
-							if MetadataArgs::field_is_skipped(&field.attrs) {
-								None
-							} else {
-								wc.add(&field.ty);
-								Some(format_ident!("v{}", i))
-							}
-						})
-						.collect();
-					let pattern = match &variant.fields {
-						Fields::Unit => quote! { Self::#variant_ident },
-						Fields::Named(named) => {
-							let field_bindings: Vec<TokenStream> = named
-								.named
-								.iter()
-								.zip(bindings.iter())
-								.filter_map(|(field, binding)| {
-									let name = field.ident.as_ref()?;
-									let binding = binding.as_ref()?;
-									Some(quote! { #name: #binding })
-								})
-								.collect();
-							quote! { Self::#variant_ident { #(#field_bindings,)* .. } }
-						}
-						Fields::Unnamed(_) => {
-							let positional: Vec<TokenStream> = bindings
-								.iter()
-								.map(|binding| match binding {
-									Some(binding) => quote! { #binding },
-									None => quote! { _ },
-								})
-								.collect();
-							quote! { Self::#variant_ident(#(#positional),*) }
-						}
-					};
-					let body = merge_expr(
-						quote! { self.self_metadata() },
-						bindings.iter().flatten().map(|binding| quote! { #binding }),
-					);
-					quote! { #pattern => #body, }
-				})
-				.collect();
-			quote! {
-				fn metadata(&self) -> crate::CssMetadata {
-					match self {
-						#arms
-					}
-				}
-			}
-		}
-		Data::Union(_) => return Err(Error::new_spanned(ident, "NodeWithMetadata cannot be derived for unions.")),
-	};
+			let pattern = arm.pattern(|i, view| merged[i].then(|| view.binding.clone()));
+			let bindings =
+				arm.fields.views().into_iter().zip(&merged).filter(|(_, merged)| **merged).map(|(view, _)| {
+					let binding = view.binding;
+					quote! { #binding }
+				});
+			let body = merge_expr(quote! { self.self_metadata() }, bindings);
+			quote! { #pattern => #body, }
+		})
+		.collect();
 
 	let where_clause =
 		wc.extend_where_clause(&input.generics, parse_quote!(css_parse::NodeWithMetadata<crate::CssMetadata>));
@@ -330,7 +228,9 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 		impl #impl_generics css_parse::NodeWithMetadata<crate::CssMetadata> for #ident #type_generics #where_clause {
 			#self_metadata
 
-			#metadata_body
+			fn metadata(&self) -> crate::CssMetadata {
+				match self { #(#arms)* }
+			}
 		}
 	})
 }
