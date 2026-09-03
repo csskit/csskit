@@ -9,31 +9,31 @@ impl<'a> ::css_parse::Parse<'a> for StableWithOptionalEdges {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let mut stable: Option<Ident> = None;
-        let mut both_edges: Option<Ident> = None;
+        let mut v0: Option<Ident> = None;
+        let mut v1: Option<Ident> = None;
         loop {
             let c = p.peek_n(1);
-            if stable.is_none() && p.peek::<Ident>()
+            if v0.is_none() && p.peek::<Ident>()
                 && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Stable
             {
-                stable = Some(p.parse::<Ident>()?);
+                v0 = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if both_edges.is_none() && p.peek::<Ident>()
+            if v1.is_none() && p.peek::<Ident>()
                 && p.to_atom::<CssAtomSet>(c) == CssAtomSet::BothEdges
             {
-                both_edges = Some(p.parse::<Ident>()?);
+                v1 = Some(p.parse::<Ident>()?);
                 continue;
             }
             break;
         }
-        if stable.is_none() {
+        if v0.is_none() {
             let c = p.peek_n(1);
-            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+            Err(::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected))?
         }
         return Ok(Self {
-            stable: stable.unwrap(),
-            both_edges: both_edges,
+            stable: v0.unwrap(),
+            both_edges: v1,
         });
     }
 }

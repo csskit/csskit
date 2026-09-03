@@ -54,11 +54,6 @@ impl Atom {
 		quote! { p.equals_atom(#cursor.into(), &#atom) }
 	}
 
-	pub fn to_atom(&self, cursor: Ident) -> TokenStream {
-		let atom_set = self.first_segment();
-		quote! { p.to_atom::<#atom_set>(#cursor) }
-	}
-
 	pub fn first_segment(&self) -> Ident {
 		self.0.path.segments.first().expect("atom path must have at least one segment").ident.clone()
 	}

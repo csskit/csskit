@@ -11,9 +11,9 @@ impl<'a> ::css_parse::Parse<'a> for RuleContent {
         use css_parse::{Parse, Peek};
         let stop = p.set_stop(KindSet::new(&[Kind::RightBrace]));
         let state = p.set_state(State::InRule);
-        let declarations = p.parse::<Vec<String>>()?;
+        let v0 = p.parse::<Vec<String>>()?;
         p.set_state(state);
         p.set_stop(stop);
-        return Ok(Self { declarations: declarations });
+        return Ok(Self { declarations: v0 });
     }
 }

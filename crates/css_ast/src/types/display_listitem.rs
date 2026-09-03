@@ -15,6 +15,7 @@ use css_parse::parse_optionals;
 pub struct DisplayListitem {
 	pub outside: Option<DisplayOutside>,
 	pub inside: Option<DisplayListitemInside>,
+	#[atom(CssAtomSet::ListItem)]
 	pub list_item: T![Ident],
 }
 
@@ -78,13 +79,13 @@ mod tests {
 
 	#[test]
 	fn test_errors() {
-		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitem, "foo");
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "list-item list-item");
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "flow flow list-item");
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "block inline list-item");
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "list-item flow flow-root");
-		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "list item"); // missing hyphen
-		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "listitem"); // missing hyphen
+		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitem, "list item"); // missing hyphen
+		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitem, "listitem"); // missing hyphen
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayListitem, "block flow-root flow list-item");
 		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitemInside, "foo");
 		assert_peek_false!(CssAtomSet::ATOMS, DisplayListitemInside, "list-item");

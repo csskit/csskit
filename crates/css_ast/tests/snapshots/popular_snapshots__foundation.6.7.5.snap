@@ -1196,11 +1196,11 @@ StyleSheet(
                 offset: SourceOffset(1025),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1027),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -80670,11 +80670,11 @@ StyleSheet(
                 offset: SourceOffset(62720),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(62722),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -207507,11 +207507,11 @@ StyleSheet(
                 offset: SourceOffset(160614),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(160616),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -208021,7 +208021,7 @@ StyleSheet(
               offset: SourceOffset(161039),
               len: 1,
             )))),
-            Tag(Mathml(Image(Ident(Cursor(
+            Tag(Svg(Image(Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(161040),
               len: 5,

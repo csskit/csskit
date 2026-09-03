@@ -11,13 +11,10 @@ impl<'a> ::css_parse::Parse<'a> for Declaration {
         use css_parse::{Parse, Peek};
         let stop = p.set_stop(KindSet::DeclarationEnd);
         let state = p.set_state(State::InDeclaration);
-        let property = p.parse::<Ident>()?;
-        let value = p.parse::<CSSValue>()?;
+        let v0 = p.parse::<Ident>()?;
+        let v1 = p.parse::<CSSValue>()?;
         p.set_state(state);
         p.set_stop(stop);
-        return Ok(Self {
-            property: property,
-            value: value,
-        });
+        return Ok(Self { property: v0, value: v1 });
     }
 }

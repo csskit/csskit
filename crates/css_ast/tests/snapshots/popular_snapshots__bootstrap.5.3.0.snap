@@ -10850,11 +10850,11 @@ StyleSheet(
                 offset: SourceOffset(8462),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(8464),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

@@ -19,67 +19,65 @@ impl<'a> ::css_parse::Parse<'a> for MarginTrim {
                 _ => {}
             }
         }
-        let c = p.peek_n(1);
-        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Block
-            || p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Inline
-        {
-            let mut block: Option<Ident> = None;
-            let mut inline: Option<Ident> = None;
+        let checkpoint = p.checkpoint();
+        if let Ok(v) = (|| -> ::css_parse::Result<Self> {
+            let mut v0: Option<Ident> = None;
+            let mut v1: Option<Ident> = None;
             loop {
                 let c = p.peek_n(1);
-                if block.is_none() && p.peek::<Ident>()
+                if v0.is_none() && p.peek::<Ident>()
                     && p.to_atom::<FooAtoms>(c) == FooAtoms::Block
                 {
-                    block = Some(p.parse::<Ident>()?);
+                    v0 = Some(p.parse::<Ident>()?);
                     continue;
                 }
-                if inline.is_none() && p.peek::<Ident>()
+                if v1.is_none() && p.peek::<Ident>()
                     && p.to_atom::<FooAtoms>(c) == FooAtoms::Inline
                 {
-                    inline = Some(p.parse::<Ident>()?);
+                    v1 = Some(p.parse::<Ident>()?);
                     continue;
                 }
                 break;
             }
-            if block.is_none() && inline.is_none() {
+            if v0.is_none() && v1.is_none() {
                 let c = p.peek_n(1);
-                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+                Err(
+                    ::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected),
+                )?
             }
             return Ok(Self::BlockInline {
-                block: block,
-                inline: inline,
+                block: v0,
+                inline: v1,
             });
+        })() {
+            return Ok(v);
         }
-        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockStart
-            || p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockEnd
-        {
-            let mut block_start: Option<Ident> = None;
-            let mut block_end: Option<Ident> = None;
-            loop {
-                let c = p.peek_n(1);
-                if block_start.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockStart
-                {
-                    block_start = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                if block_end.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockEnd
-                {
-                    block_end = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                break;
+        p.rewind(checkpoint);
+        let mut v0: Option<Ident> = None;
+        let mut v1: Option<Ident> = None;
+        loop {
+            let c = p.peek_n(1);
+            if v0.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockStart
+            {
+                v0 = Some(p.parse::<Ident>()?);
+                continue;
             }
-            if block_start.is_none() && block_end.is_none() {
-                let c = p.peek_n(1);
-                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+            if v1.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::BlockEnd
+            {
+                v1 = Some(p.parse::<Ident>()?);
+                continue;
             }
-            return Ok(Self::BlockStartBlockEnd {
-                block_start: block_start,
-                block_end: block_end,
-            });
+            break;
         }
-        return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
+        if v0.is_none() && v1.is_none() {
+            let c = p.peek_n(1);
+            Err(::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected))?
+        }
+        return Ok(Self::BlockStartBlockEnd {
+            block_start: v0,
+            block_end: v1,
+        });
     }
 }

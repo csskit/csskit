@@ -5,15 +5,14 @@ expression: pretty
 #[automatically_derived]
 impl<'a, T> ::css_parse::Parse<'a> for Wrapper<T>
 where
-    T: ::css_parse::Parse<'a>,
-    T: ::css_parse::Peek<'a>,
+    T: ::css_parse::Parse<'a> + ::css_parse::Peek<'a>,
 {
     fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
     where
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let value = p.parse::<T>()?;
-        return Ok(Self { value: value });
+        let v0 = p.parse::<T>()?;
+        return Ok(Self { value: v0 });
     }
 }

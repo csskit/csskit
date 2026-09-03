@@ -831,18 +831,20 @@ pub struct SizeComparison {
 	pub value: T![Number],
 }
 
+/// Variants are tried in order, so the two-token operators come before the one-token operators
+/// which start them.
 #[derive(Peek, Parse, ToSpan, ToCursors, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 pub enum SizeOperator {
 	/// `!=` operator (not equal)
 	NotEqual(#[semantic_eq(skip)] T![!=]),
-	/// `>` operator (greater than)
-	GreaterThan(#[semantic_eq(skip)] T![>]),
-	/// `<` operator (less than)
-	LessThan(#[semantic_eq(skip)] T![<]),
 	/// `>=` operator (greater than or equal)
 	GreaterThanOrEqual(#[semantic_eq(skip)] T![>=]),
 	/// `<=` operator (less than or equal)
 	LessThanOrEqual(#[semantic_eq(skip)] T![<=]),
+	/// `>` operator (greater than)
+	GreaterThan(#[semantic_eq(skip)] T![>]),
+	/// `<` operator (less than)
+	LessThan(#[semantic_eq(skip)] T![<]),
 }
 
 impl QuerySizePseudo {

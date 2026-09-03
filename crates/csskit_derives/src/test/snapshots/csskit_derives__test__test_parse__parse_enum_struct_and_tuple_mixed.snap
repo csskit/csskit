@@ -15,22 +15,26 @@ impl<'a> ::css_parse::Parse<'a> for FlexValue {
         }
         if p.peek::<Length>() {
             let v0 = p.parse::<Length>()?;
+            if p.peek::<Length>() {
+                let v1 = p.parse::<Length>()?;
+                return Ok(Self::MinMax { min: v0, max: v1 });
+            }
             return Ok(Self::Length { 0: v0 });
-        }
-        if p.peek::<Length>() {
-            let min = p.parse::<Length>()?;
-            let max = p.parse::<Length>()?;
-            return Ok(Self::MinMax { min: min, max: max });
         }
         if p.peek::<Percentage>() {
             let v0 = p.parse::<Percentage>()?;
             return Ok(Self::Percentage { 0: v0 });
         }
-        let expr = p.parse::<String>()?;
-        let unit = p.parse::<Unit>()?;
-        return Ok(Self::Calc {
-            expr: expr,
-            unit: unit,
-        });
+        if p.peek::<String>() {
+            let v0 = p.parse::<String>()?;
+            let v1 = p.parse::<Unit>()?;
+            return Ok(Self::Calc { expr: v0, unit: v1 });
+        }
+        return Err(
+            ::css_parse::Diagnostic::new(
+                p.peek_n(1),
+                ::css_parse::Diagnostic::unexpected,
+            ),
+        )?;
     }
 }

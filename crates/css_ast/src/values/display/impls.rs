@@ -2,7 +2,7 @@
 mod tests {
 	use super::super::*;
 	use crate::CssAtomSet;
-	use css_parse::{assert_parse, assert_parse_error};
+	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	#[test]
 	fn test_writes() {
@@ -57,6 +57,6 @@ mod tests {
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayStyleValue, "flex flex");
 		assert_parse_error!(CssAtomSet::ATOMS, DisplayStyleValue, "flow flex");
 
-		assert_parse_error!(CssAtomSet::ATOMS, DisplayStyleValue, "inherit");
+		assert_peek_false!(CssAtomSet::ATOMS, DisplayStyleValue, "inherit");
 	}
 }

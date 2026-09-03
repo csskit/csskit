@@ -14,7 +14,9 @@ impl<'a> ::css_parse::Parse<'a> for AxisWithOptionalSnap {
             if p.equals_atom(c.into(), &CssAtomSet::X) {
                 p.parse::<Ident>()?
             } else {
-                return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
+                return Err(
+                    ::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected),
+                )?;
             }
         };
         let v1 = {

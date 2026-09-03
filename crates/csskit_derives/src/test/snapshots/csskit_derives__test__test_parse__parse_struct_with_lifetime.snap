@@ -9,7 +9,7 @@ impl<'a> ::css_parse::Parse<'a> for Value<'a> {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let content = p.parse::<Ident>()?;
-        return Ok(Self { content: content });
+        let v0 = p.parse::<Ident>()?;
+        return Ok(Self { content: v0 });
     }
 }

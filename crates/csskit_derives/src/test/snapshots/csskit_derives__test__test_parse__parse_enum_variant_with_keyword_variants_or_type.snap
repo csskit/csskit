@@ -23,7 +23,15 @@ impl<'a> ::css_parse::Parse<'a> for NewtypeEnum {
                 _ => {}
             }
         }
-        let v0 = p.parse::<Length>()?;
-        return Ok(Self::Length { 0: v0 });
+        if p.peek::<Length>() {
+            let v0 = p.parse::<Length>()?;
+            return Ok(Self::Length { 0: v0 });
+        }
+        return Err(
+            ::css_parse::Diagnostic::new(
+                p.peek_n(1),
+                ::css_parse::Diagnostic::unexpected,
+            ),
+        )?;
     }
 }

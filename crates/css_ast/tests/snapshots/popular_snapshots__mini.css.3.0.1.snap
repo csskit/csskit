@@ -4995,11 +4995,11 @@ StyleSheet(
                 offset: SourceOffset(4049),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(4051),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -43977,7 +43977,7 @@ StyleSheet(
                       offset: SourceOffset(32661),
                       len: 1,
                     )),
-                    value: ContentList(Substituted(Attr(AttrFunction(
+                    value: ContentReplacement(Substituted(Attr(AttrFunction(
                       name: Function(Cursor(
                         kind: "Function",
                         offset: SourceOffset(32663),
@@ -47991,7 +47991,7 @@ StyleSheet(
                 offset: SourceOffset(35675),
                 len: 1,
               )),
-              value: ContentList(Substituted(Attr(AttrFunction(
+              value: ContentReplacement(Substituted(Attr(AttrFunction(
                 name: Function(Cursor(
                   kind: "Function",
                   offset: SourceOffset(35677),

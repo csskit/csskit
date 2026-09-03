@@ -38820,7 +38820,7 @@ StyleSheet(
                                 offset: SourceOffset(28921),
                                 len: 1,
                               )),
-                              value: ContentList(Substituted(Var(VarFunction(
+                              value: ContentReplacement(Substituted(Var(VarFunction(
                                 function: Function(Cursor(
                                   kind: "Function",
                                   offset: SourceOffset(28923),
@@ -38889,7 +38889,7 @@ StyleSheet(
                                 offset: SourceOffset(28983),
                                 len: 1,
                               )),
-                              value: ContentList(Substituted(Var(VarFunction(
+                              value: ContentReplacement(Substituted(Var(VarFunction(
                                 function: Function(Cursor(
                                   kind: "Function",
                                   offset: SourceOffset(28985),
