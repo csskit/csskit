@@ -604,7 +604,7 @@ pub enum SvgTag {
 	View(T![Ident]),
 }
 
-/// <https://w3c.github.io/mathml/#mmlindex_elements>
+/// <https://w3c.github.io/mathml-core/#mathml-elements>
 #[node]
 #[derive(
 	Parse, Peek, ToCursors, IntoCursor, ToSpan, SemanticEq, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -613,138 +613,10 @@ pub enum SvgTag {
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum MathmlTag {
-	#[atom(CssAtomSet::Abs)]
-	Abs(T![Ident]),
-	#[atom(CssAtomSet::And)]
-	And(T![Ident]),
 	#[atom(CssAtomSet::Annotation)]
 	Annotation(T![Ident]),
 	#[atom(CssAtomSet::AnnotationXml)]
 	AnnotationXml(T![Ident]),
-	#[atom(CssAtomSet::Apply)]
-	Apply(T![Ident]),
-	#[atom(CssAtomSet::Approx)]
-	Approx(T![Ident]),
-	#[atom(CssAtomSet::Arg)]
-	Arg(T![Ident]),
-	#[atom(CssAtomSet::Bind)]
-	Bind(T![Ident]),
-	#[atom(CssAtomSet::Bvar)]
-	Bvar(T![Ident]),
-	#[atom(CssAtomSet::Card)]
-	Card(T![Ident]),
-	#[atom(CssAtomSet::Cartesianproduct)]
-	Cartesianproduct(T![Ident]),
-	#[atom(CssAtomSet::Cbytes)]
-	Cbytes(T![Ident]),
-	#[atom(CssAtomSet::Ceiling)]
-	Ceiling(T![Ident]),
-	#[atom(CssAtomSet::Cerror)]
-	Cerror(T![Ident]),
-	#[atom(CssAtomSet::Ci)]
-	Ci(T![Ident]),
-	#[atom(CssAtomSet::Cn)]
-	Cn(T![Ident]),
-	#[atom(CssAtomSet::Codomain)]
-	Codomain(T![Ident]),
-	#[atom(CssAtomSet::Compose)]
-	Compose(T![Ident]),
-	#[atom(CssAtomSet::Condition)]
-	Condition(T![Ident]),
-	#[atom(CssAtomSet::Conjugate)]
-	Conjugate(T![Ident]),
-	#[atom(CssAtomSet::Cs)]
-	Cs(T![Ident]),
-	#[atom(CssAtomSet::Csymbol)]
-	Csymbol(T![Ident]),
-	#[atom(CssAtomSet::Curl)]
-	Curl(T![Ident]),
-	#[atom(CssAtomSet::Declare)]
-	Declare(T![Ident]),
-	#[atom(CssAtomSet::Degree)]
-	Degree(T![Ident]),
-	#[atom(CssAtomSet::Determinant)]
-	Determinant(T![Ident]),
-	#[atom(CssAtomSet::Diff)]
-	Diff(T![Ident]),
-	#[atom(CssAtomSet::Divergence)]
-	Divergence(T![Ident]),
-	#[atom(CssAtomSet::Divide)]
-	Divide(T![Ident]),
-	#[atom(CssAtomSet::Domain)]
-	Domain(T![Ident]),
-	#[atom(CssAtomSet::Domainofapplication)]
-	Domainofapplication(T![Ident]),
-	#[atom(CssAtomSet::Emptyset)]
-	Emptyset(T![Ident]),
-	#[atom(CssAtomSet::Eq)]
-	Eq(T![Ident]),
-	#[atom(CssAtomSet::Equivalent)]
-	Equivalent(T![Ident]),
-	#[atom(CssAtomSet::Exists)]
-	Exists(T![Ident]),
-	#[atom(CssAtomSet::Exp)]
-	Exp(T![Ident]),
-	#[atom(CssAtomSet::Factorial)]
-	Factorial(T![Ident]),
-	#[atom(CssAtomSet::Factorof)]
-	Factorof(T![Ident]),
-	#[atom(CssAtomSet::Floor)]
-	Floor(T![Ident]),
-	#[atom(CssAtomSet::Fn)]
-	Fn(T![Ident]),
-	#[atom(CssAtomSet::Forall)]
-	Forall(T![Ident]),
-	#[atom(CssAtomSet::Gcd)]
-	Gcd(T![Ident]),
-	#[atom(CssAtomSet::Geq)]
-	Geq(T![Ident]),
-	#[atom(CssAtomSet::Grad)]
-	Grad(T![Ident]),
-	#[atom(CssAtomSet::Gt)]
-	Gt(T![Ident]),
-	#[atom(CssAtomSet::Ident)]
-	Ident(T![Ident]),
-	#[atom(CssAtomSet::Image)]
-	Image(T![Ident]),
-	#[atom(CssAtomSet::Imaginary)]
-	Imaginary(T![Ident]),
-	#[atom(CssAtomSet::Img)]
-	Img(T![Ident]),
-	#[atom(CssAtomSet::Implies)]
-	Implies(T![Ident]),
-	#[atom(CssAtomSet::In)]
-	In(T![Ident]),
-	#[atom(CssAtomSet::Int)]
-	Int(T![Ident]),
-	#[atom(CssAtomSet::Intersect)]
-	Intersect(T![Ident]),
-	#[atom(CssAtomSet::Interval)]
-	Interval(T![Ident]),
-	#[atom(CssAtomSet::Inverse)]
-	Inverse(T![Ident]),
-	#[atom(CssAtomSet::Lambda)]
-	Lambda(T![Ident]),
-	#[atom(CssAtomSet::Laplacian)]
-	Laplacian(T![Ident]),
-	#[atom(CssAtomSet::Lcm)]
-	Lcm(T![Ident]),
-	#[atom(CssAtomSet::Leq)]
-	Leq(T![Ident]),
-	#[atom(CssAtomSet::Limit)]
-	Limit(T![Ident]),
-	#[atom(CssAtomSet::List)]
-	List(T![Ident]),
-	#[atom(CssAtomSet::Ln)]
-	Ln(T![Ident]),
-	#[atom(CssAtomSet::Log)]
-	Log(T![Ident]),
-	#[atom(CssAtomSet::Logbase)]
-	Logbase(T![Ident]),
-	#[atom(CssAtomSet::Lowlimit)]
-	Lowlimit(T![Ident]),
-	#[atom(CssAtomSet::Lt)]
-	Lt(T![Ident]),
 	#[atom(CssAtomSet::Maction)]
 	Maction(T![Ident]),
 	#[atom(CssAtomSet::Maligngroup)]
@@ -753,16 +625,6 @@ pub enum MathmlTag {
 	Malignmark(T![Ident]),
 	#[atom(CssAtomSet::Math)]
 	Math(T![Ident]),
-	#[atom(CssAtomSet::Matrix)]
-	Matrix(T![Ident]),
-	#[atom(CssAtomSet::Matrixrow)]
-	Matrixrow(T![Ident]),
-	#[atom(CssAtomSet::Max)]
-	Max(T![Ident]),
-	#[atom(CssAtomSet::Mean)]
-	Mean(T![Ident]),
-	#[atom(CssAtomSet::Median)]
-	Median(T![Ident]),
 	#[atom(CssAtomSet::Menclose)]
 	Menclose(T![Ident]),
 	#[atom(CssAtomSet::Merror)]
@@ -775,10 +637,6 @@ pub enum MathmlTag {
 	Mglyph(T![Ident]),
 	#[atom(CssAtomSet::Mi)]
 	Mi(T![Ident]),
-	#[atom(CssAtomSet::Min)]
-	Min(T![Ident]),
-	#[atom(CssAtomSet::Minus)]
-	Minus(T![Ident]),
 	#[atom(CssAtomSet::Mlabeledtr)]
 	Mlabeledtr(T![Ident]),
 	#[atom(CssAtomSet::Mlongdiv)]
@@ -789,12 +647,6 @@ pub enum MathmlTag {
 	Mn(T![Ident]),
 	#[atom(CssAtomSet::Mo)]
 	Mo(T![Ident]),
-	#[atom(CssAtomSet::Mode)]
-	Mode(T![Ident]),
-	#[atom(CssAtomSet::Moment)]
-	Moment(T![Ident]),
-	#[atom(CssAtomSet::Momentabout)]
-	Momentabout(T![Ident]),
 	#[atom(CssAtomSet::Mover)]
 	Mover(T![Ident]),
 	#[atom(CssAtomSet::Mpadded)]
@@ -845,88 +697,10 @@ pub enum MathmlTag {
 	Munder(T![Ident]),
 	#[atom(CssAtomSet::Munderover)]
 	Munderover(T![Ident]),
-	#[atom(CssAtomSet::Neq)]
-	Neq(T![Ident]),
 	#[atom(CssAtomSet::None)]
 	None(T![Ident]),
-	#[atom(CssAtomSet::Not)]
-	Not(T![Ident]),
-	#[atom(CssAtomSet::Notin)]
-	Notin(T![Ident]),
-	#[atom(CssAtomSet::Notprsubset)]
-	Notprsubset(T![Ident]),
-	#[atom(CssAtomSet::Notsubset)]
-	Notsubset(T![Ident]),
-	#[atom(CssAtomSet::Or)]
-	Or(T![Ident]),
-	#[atom(CssAtomSet::Otherwise)]
-	Otherwise(T![Ident]),
-	#[atom(CssAtomSet::Outerproduct)]
-	Outerproduct(T![Ident]),
-	#[atom(CssAtomSet::Partialdiff)]
-	Partialdiff(T![Ident]),
-	#[atom(CssAtomSet::Piece)]
-	Piece(T![Ident]),
-	#[atom(CssAtomSet::Piecewise)]
-	Piecewise(T![Ident]),
-	#[atom(CssAtomSet::Plus)]
-	Plus(T![Ident]),
-	#[atom(CssAtomSet::Power)]
-	Power(T![Ident]),
-	#[atom(CssAtomSet::Product)]
-	Product(T![Ident]),
-	#[atom(CssAtomSet::Prsubset)]
-	Prsubset(T![Ident]),
-	#[atom(CssAtomSet::Quotient)]
-	Quotient(T![Ident]),
-	#[atom(CssAtomSet::Real)]
-	Real(T![Ident]),
-	#[atom(CssAtomSet::Reln)]
-	Reln(T![Ident]),
-	#[atom(CssAtomSet::Rem)]
-	Rem(T![Ident]),
-	#[atom(CssAtomSet::Root)]
-	Root(T![Ident]),
-	#[atom(CssAtomSet::Scalarproduct)]
-	Scalarproduct(T![Ident]),
-	#[atom(CssAtomSet::Sdev)]
-	Sdev(T![Ident]),
-	#[atom(CssAtomSet::Selector)]
-	Selector(T![Ident]),
 	#[atom(CssAtomSet::Semantics)]
 	Semantics(T![Ident]),
-	#[atom(CssAtomSet::Sep)]
-	Sep(T![Ident]),
-	#[atom(CssAtomSet::Set)]
-	Set(T![Ident]),
-	#[atom(CssAtomSet::Setdiff)]
-	Setdiff(T![Ident]),
-	#[atom(CssAtomSet::Share)]
-	Share(T![Ident]),
-	#[atom(CssAtomSet::Sin)]
-	Sin(T![Ident]),
-	#[atom(CssAtomSet::Subset)]
-	Subset(T![Ident]),
-	#[atom(CssAtomSet::Sum)]
-	Sum(T![Ident]),
-	#[atom(CssAtomSet::Tendsto)]
-	Tendsto(T![Ident]),
-	#[atom(CssAtomSet::Times)]
-	Times(T![Ident]),
-	#[atom(CssAtomSet::Transpose)]
-	Transpose(T![Ident]),
-	#[atom(CssAtomSet::Union)]
-	Union(T![Ident]),
-	#[atom(CssAtomSet::Uplimit)]
-	Uplimit(T![Ident]),
-	#[atom(CssAtomSet::Variance)]
-	Variance(T![Ident]),
-	#[atom(CssAtomSet::Vector)]
-	Vector(T![Ident]),
-	#[atom(CssAtomSet::Vectorproduct)]
-	Vectorproduct(T![Ident]),
-	#[atom(CssAtomSet::Xor)]
-	Xor(T![Ident]),
 }
 
 #[node]
