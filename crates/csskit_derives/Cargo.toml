@@ -28,7 +28,6 @@ proc-macro2 = { workspace = true }
 itertools = { workspace = true }
 heck = { workspace = true }
 darling = { workspace = true }
-synstructure.workspace = true
 
 [dev-dependencies]
 prettyplease = { workspace = true }
