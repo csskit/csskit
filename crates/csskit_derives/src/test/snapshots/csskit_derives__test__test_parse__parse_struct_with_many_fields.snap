@@ -9,25 +9,25 @@ impl<'a> ::css_parse::Parse<'a> for Transform {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let rotate_x = p.parse::<Angle>()?;
-        let rotate_y = p.parse::<Angle>()?;
-        let rotate_z = p.parse::<Angle>()?;
-        let translate_x = p.parse::<Length>()?;
-        let translate_y = p.parse::<Length>()?;
-        let translate_z = p.parse::<Length>()?;
-        let scale_x = p.parse::<Number>()?;
-        let scale_y = p.parse::<Number>()?;
-        let scale_z = p.parse::<Number>()?;
+        let v0 = p.parse::<Angle>()?;
+        let v1 = p.parse::<Angle>()?;
+        let v2 = p.parse::<Angle>()?;
+        let v3 = p.parse::<Length>()?;
+        let v4 = p.parse::<Length>()?;
+        let v5 = p.parse::<Length>()?;
+        let v6 = p.parse::<Number>()?;
+        let v7 = p.parse::<Number>()?;
+        let v8 = p.parse::<Number>()?;
         return Ok(Self {
-            rotate_x: rotate_x,
-            rotate_y: rotate_y,
-            rotate_z: rotate_z,
-            translate_x: translate_x,
-            translate_y: translate_y,
-            translate_z: translate_z,
-            scale_x: scale_x,
-            scale_y: scale_y,
-            scale_z: scale_z,
+            rotate_x: v0,
+            rotate_y: v1,
+            rotate_z: v2,
+            translate_x: v3,
+            translate_y: v4,
+            translate_z: v5,
+            scale_x: v6,
+            scale_y: v7,
+            scale_z: v8,
         });
     }
 }

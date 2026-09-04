@@ -3356,11 +3356,11 @@ StyleSheet(
                 offset: SourceOffset(2743),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(2745),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105944,7 +105944,7 @@ StyleSheet(
                 offset: SourceOffset(82500),
                 len: 1,
               )),
-              value: ContentList(Substituted(Attr(AttrFunction(
+              value: ContentReplacement(Substituted(Attr(AttrFunction(
                 name: Function(Cursor(
                   kind: "Function",
                   offset: SourceOffset(82502),
@@ -142242,11 +142242,11 @@ StyleSheet(
                 offset: SourceOffset(112040),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Zero(Number(Cursor(
+              value: Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(112042),
                 len: 1,
-              ))))),
+              )))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -248188,11 +248188,11 @@ StyleSheet(
                 kind: "Delim",
                 offset: SourceOffset(198775),
                 len: 1,
-              ))), LengthPercentage(Literal(Zero(Number(Cursor(
+              ))), Number(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(198776),
                 len: 1,
-              ))))))), [
+              )))))), [
                 (FontFamilyStyleValue([
                   (Left(Literal(CustomIdents([
                     Literal(CustomIdent(Ident(Cursor(

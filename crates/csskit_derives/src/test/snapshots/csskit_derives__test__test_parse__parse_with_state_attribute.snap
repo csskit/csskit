@@ -10,8 +10,8 @@ impl<'a> ::css_parse::Parse<'a> for ValueInState {
     {
         use css_parse::{Parse, Peek};
         let state = p.set_state(State::InValue);
-        let content = p.parse::<String>()?;
+        let v0 = p.parse::<String>()?;
         p.set_state(state);
-        return Ok(Self { content: content });
+        return Ok(Self { content: v0 });
     }
 }

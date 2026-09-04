@@ -9,13 +9,13 @@ impl<'a> ::css_parse::Parse<'a> for Color {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let red = p.parse::<CSSInt>()?;
-        let green = p.parse::<CSSInt>()?;
-        let blue = p.parse::<CSSInt>()?;
+        let v0 = p.parse::<CSSInt>()?;
+        let v1 = p.parse::<CSSInt>()?;
+        let v2 = p.parse::<CSSInt>()?;
         return Ok(Self {
-            red: red,
-            green: green,
-            blue: blue,
+            red: v0,
+            green: v1,
+            blue: v2,
         });
     }
 }

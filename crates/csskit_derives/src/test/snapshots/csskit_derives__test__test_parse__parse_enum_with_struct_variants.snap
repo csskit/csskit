@@ -14,13 +14,14 @@ impl<'a> ::css_parse::Parse<'a> for BorderStyle {
             return Ok(Self::Solid { 0: v0 });
         }
         if p.peek::<Length>() {
-            let width = p.parse::<Length>()?;
-            return Ok(Self::Dashed { width: width });
+            let v0 = p.parse::<Length>()?;
+            return Ok(Self::Dashed { width: v0 });
         }
-        if p.peek::<Length>() {
-            let radius = p.parse::<Length>()?;
-            return Ok(Self::Dotted { radius: radius });
-        }
-        return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
+        return Err(
+            ::css_parse::Diagnostic::new(
+                p.peek_n(1),
+                ::css_parse::Diagnostic::unexpected,
+            ),
+        )?;
     }
 }

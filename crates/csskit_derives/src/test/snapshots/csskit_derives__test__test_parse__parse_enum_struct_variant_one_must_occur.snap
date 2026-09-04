@@ -19,31 +19,31 @@ impl<'a> ::css_parse::Parse<'a> for FlexWrap {
                 _ => {}
             }
         }
-        let mut wrap: Option<Ident> = None;
-        let mut balance: Option<Ident> = None;
+        let mut v0: Option<Ident> = None;
+        let mut v1: Option<Ident> = None;
         loop {
             let c = p.peek_n(1);
-            if wrap.is_none() && p.peek::<Ident>()
+            if v0.is_none() && p.peek::<Ident>()
                 && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap
             {
-                wrap = Some(p.parse::<Ident>()?);
+                v0 = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if balance.is_none() && p.peek::<Ident>()
+            if v1.is_none() && p.peek::<Ident>()
                 && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance
             {
-                balance = Some(p.parse::<Ident>()?);
+                v1 = Some(p.parse::<Ident>()?);
                 continue;
             }
             break;
         }
-        if wrap.is_none() && balance.is_none() {
+        if v0.is_none() && v1.is_none() {
             let c = p.peek_n(1);
-            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+            Err(::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected))?
         }
         return Ok(Self::Wrap {
-            wrap: wrap,
-            balance: balance,
+            wrap: v0,
+            balance: v1,
         });
     }
 }

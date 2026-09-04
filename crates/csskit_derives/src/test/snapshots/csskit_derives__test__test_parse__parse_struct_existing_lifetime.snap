@@ -9,7 +9,7 @@ impl<'a> ::css_parse::Parse<'a> for Token<'a> {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let span = p.parse::<str>()?;
-        return Ok(Self { span: span });
+        let v0 = p.parse::<str>()?;
+        return Ok(Self { span: v0 });
     }
 }

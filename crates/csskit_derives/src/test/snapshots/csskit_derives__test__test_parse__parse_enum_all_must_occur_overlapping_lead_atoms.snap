@@ -9,43 +9,52 @@ impl<'a> ::css_parse::Parse<'a> for Foo {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let mut wrap: Option<Ident> = None;
-        let mut a: Option<Ident> = None;
-        let mut b: Option<Ident> = None;
+        let mut u0: Option<Ident> = None;
+        let mut u1: Option<Ident> = None;
+        let mut u2: Option<Ident> = None;
         let mut _alternative: usize = 0;
         loop {
             let c = p.peek_n(1);
-            if wrap.is_none() && p.peek::<Ident>()
+            if u0.is_none() && p.peek::<Ident>()
                 && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap
             {
-                wrap = Some(p.parse::<Ident>()?);
+                u0 = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if (a.is_none() && _alternative == 0 && p.peek::<Ident>()
-                && p.to_atom::<FooAtoms>(c) == FooAtoms::A)
+            if u1.is_none() && _alternative == 0 && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::A
             {
                 _alternative = 1usize;
-                a = Some(p.parse::<Ident>()?);
+                u1 = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if (b.is_none() && _alternative == 0 && p.peek::<Ident>()
-                && p.to_atom::<FooAtoms>(c) == FooAtoms::B)
+            if u2.is_none() && _alternative == 0 && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::B
             {
                 _alternative = 2usize;
-                b = Some(p.parse::<Ident>()?);
+                u2 = Some(p.parse::<Ident>()?);
                 continue;
             }
             break;
         }
-        if wrap.is_none() && a.is_none() && b.is_none() {
+        if u0.is_none() && u1.is_none() && u2.is_none() {
             return Err(
-                crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected),
+                ::css_parse::Diagnostic::new(
+                    p.peek_n(1),
+                    ::css_parse::Diagnostic::unexpected,
+                ),
             )?;
         }
         match _alternative {
-            1usize => return Ok(Self::WrapA { wrap: wrap, a: a }),
-            2usize => return Ok(Self::WrapB { wrap: wrap, b: b }),
-            _ => return Ok(Self::WrapA { wrap: wrap, a: a }),
+            1usize => {
+                return Ok(Self::WrapA { wrap: u0, a: u1 });
+            }
+            2usize => {
+                return Ok(Self::WrapB { wrap: u0, b: u2 });
+            }
+            _ => {
+                return Ok(Self::WrapA { wrap: u0, a: u1 });
+            }
         }
     }
 }

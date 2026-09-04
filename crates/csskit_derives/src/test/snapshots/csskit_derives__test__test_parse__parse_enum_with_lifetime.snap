@@ -9,22 +9,26 @@ impl<'a> ::css_parse::Parse<'a> for CssValue<'a> {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
+        if p.peek::<String>() {
+            let v0 = p.parse::<String>()?;
+            if p.peek::<Vec<String>>() {
+                let v1 = p.parse::<Vec<String>>()?;
+                return Ok(Self::Function {
+                    name: v0,
+                    args: v1,
+                });
+            }
+            return Ok(Self::Keyword { 0: v0 });
+        }
         if p.peek::<Length>() {
             let v0 = p.parse::<Length>()?;
             return Ok(Self::Length { 0: v0 });
         }
-        if p.peek::<String>() {
-            let v0 = p.parse::<String>()?;
-            return Ok(Self::Keyword { 0: v0 });
-        }
-        if p.peek::<String>() {
-            let name = p.parse::<String>()?;
-            let args = p.parse::<Vec<String>>()?;
-            return Ok(Self::Function {
-                name: name,
-                args: args,
-            });
-        }
-        return Err(crate::Diagnostic::new(p.peek_n(1), crate::Diagnostic::unexpected))?;
+        return Err(
+            ::css_parse::Diagnostic::new(
+                p.peek_n(1),
+                ::css_parse::Diagnostic::unexpected,
+            ),
+        )?;
     }
 }

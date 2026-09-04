@@ -5,8 +5,7 @@ expression: pretty
 #[automatically_derived]
 impl<'a, T> ::css_parse::Parse<'a> for Container<T>
 where
-    T: ::css_parse::Parse<'a>,
-    T: ::css_parse::Peek<'a>,
+    T: ::css_parse::Parse<'a> + ::css_parse::Peek<'a>,
 {
     fn parse<I>(p: &mut css_parse::Parser<'a, I>) -> css_parse::Result<Self>
     where
@@ -14,14 +13,20 @@ where
     {
         use css_parse::{Parse, Peek};
         if p.peek::<T>() {
-            let v0 = p.parse::<Option<T>>()?;
-            return Ok(Self::Optional { 0: v0 });
-        }
-        if p.peek::<T>() {
             let v0 = p.parse::<T>()?;
             return Ok(Self::Single { 0: v0 });
         }
-        let v0 = p.parse::<Vec<T>>()?;
-        return Ok(Self::Multiple { 0: v0 });
+        if p.peek::<Vec<T>>() {
+            let v0 = p.parse::<Vec<T>>()?;
+            return Ok(Self::Multiple { 0: v0 });
+        }
+        let v0 = p.parse::<Option<T>>()?;
+        return Ok(Self::Optional { 0: v0 });
+        return Err(
+            ::css_parse::Diagnostic::new(
+                p.peek_n(1),
+                ::css_parse::Diagnostic::unexpected,
+            ),
+        )?;
     }
 }

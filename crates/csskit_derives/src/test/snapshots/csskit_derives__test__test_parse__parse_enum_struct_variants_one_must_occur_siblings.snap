@@ -19,75 +19,61 @@ impl<'a> ::css_parse::Parse<'a> for FlexWrap {
                 _ => {}
             }
         }
-        let mut balance: Option<Ident> = None;
-        {
+        let mut u0: Option<Ident> = None;
+        let mut u1: Option<Ident> = None;
+        let mut u2: Option<Ident> = None;
+        let mut _alternative: usize = 0;
+        loop {
             let c = p.peek_n(1);
-            if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance {
-                balance = Some(p.parse::<Ident>()?);
+            if u0.is_none() && _alternative == 0 && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap
+            {
+                _alternative = 1usize;
+                u0 = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            if u1.is_none() && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance
+            {
+                u1 = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            if u2.is_none() && _alternative == 0 && p.peek::<Ident>()
+                && p.to_atom::<FooAtoms>(c) == FooAtoms::WrapReverse
+            {
+                _alternative = 2usize;
+                u2 = Some(p.parse::<Ident>()?);
+                continue;
+            }
+            break;
+        }
+        if u0.is_none() && u1.is_none() && u2.is_none() {
+            return Err(
+                ::css_parse::Diagnostic::new(
+                    p.peek_n(1),
+                    ::css_parse::Diagnostic::unexpected,
+                ),
+            )?;
+        }
+        match _alternative {
+            1usize => {
+                return Ok(Self::Wrap {
+                    wrap: u0,
+                    balance: u1,
+                });
+            }
+            2usize => {
+                return Ok(Self::WrapReverse {
+                    wrap_reverse: u2,
+                    balance: u1,
+                });
+            }
+            _ => {
+                return Ok(Self::Wrap {
+                    wrap: u0,
+                    balance: u1,
+                });
             }
         }
-        let c = p.peek_n(1);
-        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap {
-            let mut wrap: Option<Ident> = None;
-            loop {
-                let c = p.peek_n(1);
-                if wrap.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Wrap
-                {
-                    wrap = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                if balance.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance
-                {
-                    balance = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                break;
-            }
-            if wrap.is_none() && balance.is_none() {
-                let c = p.peek_n(1);
-                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
-            }
-            return Ok(Self::Wrap {
-                wrap: wrap,
-                balance: balance,
-            });
-        }
-        if p.peek::<Ident>() && p.to_atom::<FooAtoms>(c) == FooAtoms::WrapReverse {
-            let mut wrap_reverse: Option<Ident> = None;
-            loop {
-                let c = p.peek_n(1);
-                if wrap_reverse.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<FooAtoms>(c) == FooAtoms::WrapReverse
-                {
-                    wrap_reverse = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                if balance.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<FooAtoms>(c) == FooAtoms::Balance
-                {
-                    balance = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                break;
-            }
-            if wrap_reverse.is_none() && balance.is_none() {
-                let c = p.peek_n(1);
-                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
-            }
-            return Ok(Self::WrapReverse {
-                wrap_reverse: wrap_reverse,
-                balance: balance,
-            });
-        }
-        if balance.is_none() {
-            let c = p.peek_n(1);
-            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
-        }
-        return Ok(Self::Wrap {
-            wrap: None,
-            balance: balance,
-        });
     }
 }

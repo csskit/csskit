@@ -9,92 +9,73 @@ impl<'a> ::css_parse::Parse<'a> for VerticalAlign {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let mut alignment_baseline: Option<AlignmentBaseline> = None;
-        let mut baseline_shift: Option<BaselineShift> = None;
+        let checkpoint = p.checkpoint();
+        if let Ok(v) = (|| -> ::css_parse::Result<Self> {
+            let mut v0: Option<Ident> = None;
+            let mut v1: Option<AlignmentBaseline> = None;
+            let mut v2: Option<BaselineShift> = None;
+            loop {
+                let c = p.peek_n(1);
+                if v0.is_none() && p.peek::<Ident>()
+                    && p.to_atom::<CssAtomSet>(c) == CssAtomSet::First
+                {
+                    v0 = Some(p.parse::<Ident>()?);
+                    continue;
+                }
+                if v1.is_none() && p.peek::<AlignmentBaseline>() {
+                    v1 = Some(p.parse::<AlignmentBaseline>()?);
+                    continue;
+                }
+                if v2.is_none() && p.peek::<BaselineShift>() {
+                    v2 = Some(p.parse::<BaselineShift>()?);
+                    continue;
+                }
+                break;
+            }
+            if v0.is_none() && v1.is_none() && v2.is_none() {
+                let c = p.peek_n(1);
+                Err(
+                    ::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected),
+                )?
+            }
+            return Ok(Self::First {
+                first: v0,
+                alignment_baseline: v1,
+                baseline_shift: v2,
+            });
+        })() {
+            return Ok(v);
+        }
+        p.rewind(checkpoint);
+        let mut v0: Option<Ident> = None;
+        let mut v1: Option<AlignmentBaseline> = None;
+        let mut v2: Option<BaselineShift> = None;
         loop {
             let c = p.peek_n(1);
-            if alignment_baseline.is_none() && <AlignmentBaseline>::peek(p, c) {
-                alignment_baseline = Some(p.parse::<AlignmentBaseline>()?);
+            if v0.is_none() && p.peek::<Ident>()
+                && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Last
+            {
+                v0 = Some(p.parse::<Ident>()?);
                 continue;
             }
-            if baseline_shift.is_none() && <BaselineShift>::peek(p, c) {
-                baseline_shift = Some(p.parse::<BaselineShift>()?);
+            if v1.is_none() && p.peek::<AlignmentBaseline>() {
+                v1 = Some(p.parse::<AlignmentBaseline>()?);
+                continue;
+            }
+            if v2.is_none() && p.peek::<BaselineShift>() {
+                v2 = Some(p.parse::<BaselineShift>()?);
                 continue;
             }
             break;
         }
-        let c = p.peek_n(1);
-        if p.peek::<Ident>() && p.to_atom::<CssAtomSet>(c) == CssAtomSet::First {
-            let mut first: Option<Ident> = None;
-            loop {
-                let c = p.peek_n(1);
-                if first.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<CssAtomSet>(c) == CssAtomSet::First
-                {
-                    first = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                if alignment_baseline.is_none() && <AlignmentBaseline>::peek(p, c) {
-                    alignment_baseline = Some(p.parse::<AlignmentBaseline>()?);
-                    continue;
-                }
-                if baseline_shift.is_none() && <BaselineShift>::peek(p, c) {
-                    baseline_shift = Some(p.parse::<BaselineShift>()?);
-                    continue;
-                }
-                break;
-            }
-            if first.is_none() && alignment_baseline.is_none()
-                && baseline_shift.is_none()
-            {
-                let c = p.peek_n(1);
-                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
-            }
-            return Ok(Self::First {
-                first: first,
-                alignment_baseline: alignment_baseline,
-                baseline_shift: baseline_shift,
-            });
-        }
-        if p.peek::<Ident>() && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Last {
-            let mut last: Option<Ident> = None;
-            loop {
-                let c = p.peek_n(1);
-                if last.is_none() && p.peek::<Ident>()
-                    && p.to_atom::<CssAtomSet>(c) == CssAtomSet::Last
-                {
-                    last = Some(p.parse::<Ident>()?);
-                    continue;
-                }
-                if alignment_baseline.is_none() && <AlignmentBaseline>::peek(p, c) {
-                    alignment_baseline = Some(p.parse::<AlignmentBaseline>()?);
-                    continue;
-                }
-                if baseline_shift.is_none() && <BaselineShift>::peek(p, c) {
-                    baseline_shift = Some(p.parse::<BaselineShift>()?);
-                    continue;
-                }
-                break;
-            }
-            if last.is_none() && alignment_baseline.is_none() && baseline_shift.is_none()
-            {
-                let c = p.peek_n(1);
-                Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
-            }
-            return Ok(Self::Last {
-                last: last,
-                alignment_baseline: alignment_baseline,
-                baseline_shift: baseline_shift,
-            });
-        }
-        if alignment_baseline.is_none() && baseline_shift.is_none() {
+        if v0.is_none() && v1.is_none() && v2.is_none() {
             let c = p.peek_n(1);
-            Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?
+            Err(::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected))?
         }
-        return Ok(Self::First {
-            first: None,
-            alignment_baseline: alignment_baseline,
-            baseline_shift: baseline_shift,
+        return Ok(Self::Last {
+            last: v0,
+            alignment_baseline: v1,
+            baseline_shift: v2,
         });
     }
 }

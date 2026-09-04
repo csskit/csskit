@@ -9,18 +9,17 @@ impl<'a> ::css_parse::Parse<'a> for RegularKeywordTest {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use css_parse::{Parse, Peek};
-        let auto_value = {
+        let v0 = {
             let c = p.peek_n(1);
             if p.equals_atom(c.into(), &FooKeywords::Auto) {
                 p.parse::<AutoValue>()?
             } else {
-                return Err(crate::Diagnostic::new(c, crate::Diagnostic::unexpected))?;
+                return Err(
+                    ::css_parse::Diagnostic::new(c, ::css_parse::Diagnostic::unexpected),
+                )?;
             }
         };
-        let length = p.parse::<Length>()?;
-        return Ok(Self {
-            auto_value: auto_value,
-            length: length,
-        });
+        let v1 = p.parse::<Length>()?;
+        return Ok(Self { auto_value: v0, length: v1 });
     }
 }

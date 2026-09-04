@@ -13,26 +13,25 @@ impl<'a> ::css_parse::Parse<'a> for TestEnum {
             let c = p.peek_n(1);
             match p.to_atom::<FooKeywords>(c) {
                 FooKeywords::None => {
-                    let none_value = {
-                        let c = p.peek_n(1);
-                        if p.equals_atom(c.into(), &FooKeywords::None) {
-                            p.parse::<NoneValue>()?
-                        } else {
-                            return Err(
-                                crate::Diagnostic::new(c, crate::Diagnostic::unexpected),
-                            )?;
-                        }
-                    };
-                    let other_field = p.parse::<Length>()?;
+                    let v0 = p.parse::<NoneValue>()?;
+                    let v1 = p.parse::<Length>()?;
                     return Ok(Self::WithKeyword {
-                        none_value: none_value,
-                        other_field: other_field,
+                        none_value: v0,
+                        other_field: v1,
                     });
                 }
                 _ => {}
             }
         }
-        let v0 = p.parse::<String>()?;
-        return Ok(Self::Normal { 0: v0 });
+        if p.peek::<String>() {
+            let v0 = p.parse::<String>()?;
+            return Ok(Self::Normal { 0: v0 });
+        }
+        return Err(
+            ::css_parse::Diagnostic::new(
+                p.peek_n(1),
+                ::css_parse::Diagnostic::unexpected,
+            ),
+        )?;
     }
 }
