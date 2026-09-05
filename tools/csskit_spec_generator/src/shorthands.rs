@@ -48,10 +48,12 @@ pub(crate) struct SlotDef {
 	/// The token the grammar writes after this slot.
 	#[serde(default)]
 	pub(crate) after: String,
-	/// True when the grammar lets the slot be left out, which sets its property to the initial
-	/// value.
+	/// True when the grammar lets the slot be left out, which sets its property to the initial value.
 	#[serde(default)]
 	pub(crate) optional: bool,
+	/// True when leaving the slot out gives its property the value of the slot before it, rather than the initial value.
+	#[serde(default)]
+	pub(crate) copies: bool,
 }
 
 #[derive(Debug, Deserialize)]
@@ -149,6 +151,7 @@ impl ShorthandGraph {
 						before: String::new(),
 						after: String::new(),
 						optional: true,
+						copies: false,
 					})
 					.collect(),
 			)),
@@ -372,8 +375,19 @@ mod tests {
 	}
 
 	#[test]
+	fn reports_a_slot_which_copies_the_one_before_it() {
+		let Some(Writes::Slots(slots)) = get_shorthand_graph().writes("background") else {
+			panic!("background states its slots");
+		};
+		let clip = slots.iter().find(|slot| slot.property == "background-clip").unwrap();
+		assert!(clip.copies);
+		let origin = slots.iter().find(|slot| slot.property == "background-origin").unwrap();
+		assert!(!origin.copies);
+	}
+
+	#[test]
 	fn reports_no_writes_when_the_registry_states_none() {
-		assert!(get_shorthand_graph().writes("background").is_none());
+		assert!(get_shorthand_graph().writes("grid").is_none());
 	}
 
 	#[test]
@@ -424,6 +438,7 @@ mod tests {
 				before: String::new(),
 				after: String::new(),
 				optional: false,
+				copies: false,
 			}])),
 		}]);
 	}

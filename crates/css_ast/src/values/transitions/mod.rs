@@ -30,6 +30,13 @@ use impls::*;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(
+    TransitionProperty?,
+    TransitionDuration?,
+    TransitionTimingFunction?,
+    TransitionDelay?,
+    TransitionBehavior?
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.transition"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

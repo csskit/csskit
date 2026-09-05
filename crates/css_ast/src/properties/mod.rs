@@ -515,21 +515,21 @@ mod tests {
 		assert_eq!(
 			StyleValue::shorthand_by_name(CssAtomSet::Font).unwrap().writes,
 			Some(Writes::Slots(&[
-				Slot { property: CssAtomSet::FontStyle, before: "", after: "", optional: true },
-				Slot { property: CssAtomSet::FontVariant, before: "", after: "", optional: true },
-				Slot { property: CssAtomSet::FontWeight, before: "", after: "", optional: true },
-				Slot { property: CssAtomSet::FontWidth, before: "", after: "", optional: true },
-				Slot { property: CssAtomSet::FontSize, before: "", after: "", optional: false },
-				Slot { property: CssAtomSet::LineHeight, before: "/", after: "", optional: true },
-				Slot { property: CssAtomSet::FontFamily, before: "", after: "", optional: false },
+				Slot { property: CssAtomSet::FontStyle, before: "", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::FontVariant, before: "", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::FontWeight, before: "", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::FontWidth, before: "", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::FontSize, before: "", after: "", optional: false, copies: false },
+				Slot { property: CssAtomSet::LineHeight, before: "/", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::FontFamily, before: "", after: "", optional: false, copies: false },
 			]))
 		);
 		assert_eq!(
 			StyleValue::shorthand_by_name(CssAtomSet::Flex).unwrap().writes,
 			Some(Writes::Slots(&[
-				Slot { property: CssAtomSet::FlexGrow, before: "", after: "", optional: false },
-				Slot { property: CssAtomSet::FlexShrink, before: "", after: "", optional: false },
-				Slot { property: CssAtomSet::FlexBasis, before: "", after: "", optional: false },
+				Slot { property: CssAtomSet::FlexGrow, before: "", after: "", optional: false, copies: false },
+				Slot { property: CssAtomSet::FlexShrink, before: "", after: "", optional: false, copies: false },
+				Slot { property: CssAtomSet::FlexBasis, before: "", after: "", optional: false, copies: false },
 			]))
 		);
 
@@ -542,9 +542,9 @@ mod tests {
 		assert_eq!(
 			StyleValue::shorthand_by_name(CssAtomSet::Border).unwrap().writes,
 			Some(Writes::Slots(&[
-				Slot { property: CssAtomSet::BorderWidth, before: "", after: "", optional: true },
-				Slot { property: CssAtomSet::BorderStyle, before: "", after: "", optional: true },
-				Slot { property: CssAtomSet::BorderColor, before: "", after: "", optional: true },
+				Slot { property: CssAtomSet::BorderWidth, before: "", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::BorderStyle, before: "", after: "", optional: true, copies: false },
+				Slot { property: CssAtomSet::BorderColor, before: "", after: "", optional: true, copies: false },
 			]))
 		);
 
@@ -684,12 +684,8 @@ mod tests {
 			[
 				"-webkit-animation",
 				"all",
-				"animation",
 				"animation-delay",
 				"animation-range",
-				"background",
-				"border-image",
-				"border-radius",
 				"font-synthesis",
 				"font-variant",
 				"grid",
@@ -697,10 +693,8 @@ mod tests {
 				"grid-column",
 				"grid-row",
 				"grid-template",
-				"mask",
 				"offset",
 				"scroll-timeline",
-				"transition",
 				"view-timeline",
 			]
 		);

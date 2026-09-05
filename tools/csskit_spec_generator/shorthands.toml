@@ -37,9 +37,18 @@ longhands = [
     "animation-direction",
     "animation-fill-mode",
     "animation-play-state",
-    "animation-timeline",
 ]
-resets = ["animation-range"]
+resets = ["animation-range", "animation-timeline"]
+writes = [
+    { property = "animation-name", optional = true },
+    { property = "animation-duration", optional = true },
+    { property = "animation-timing-function", optional = true },
+    { property = "animation-delay", optional = true },
+    { property = "animation-iteration-count", optional = true },
+    { property = "animation-direction", optional = true },
+    { property = "animation-fill-mode", optional = true },
+    { property = "animation-play-state", optional = true },
+]
 
 [[shorthand]]
 name = "animation-delay"
@@ -66,6 +75,16 @@ longhands = [
     "background-position",
     "background-repeat",
     "background-size",
+]
+writes = [
+    { property = "background-color", optional = true },
+    { property = "background-image", optional = true },
+    { property = "background-position", optional = true },
+    { property = "background-size", optional = true, before = "/" },
+    { property = "background-repeat", optional = true },
+    { property = "background-attachment", optional = true },
+    { property = "background-origin", optional = true },
+    { property = "background-clip", optional = true, copies = true },
 ]
 
 [[shorthand]]
@@ -160,6 +179,13 @@ longhands = [
     "border-image-outset",
     "border-image-repeat",
 ]
+writes = [
+    { property = "border-image-source", optional = true },
+    { property = "border-image-slice", optional = true },
+    { property = "border-image-width", optional = true, before = "/" },
+    { property = "border-image-outset", optional = true, before = "/" },
+    { property = "border-image-repeat", optional = true },
+]
 
 [[shorthand]]
 name = "border-inline"
@@ -233,6 +259,7 @@ longhands = [
     "border-bottom-left-radius",
 ]
 resets = []
+writes = "repeat"
 
 [[shorthand]]
 name = "border-right"
@@ -515,6 +542,16 @@ longhands = [
     "mask-size",
 ]
 resets = ["mask-border"]
+writes = [
+    { property = "mask-image", optional = true },
+    { property = "mask-position", optional = true },
+    { property = "mask-size", optional = true, before = "/" },
+    { property = "mask-repeat", optional = true },
+    { property = "mask-origin", optional = true },
+    { property = "mask-clip", optional = true, copies = true },
+    { property = "mask-composite", optional = true },
+    { property = "mask-mode", optional = true },
+]
 
 [[shorthand]]
 name = "mask-border"
@@ -785,6 +822,13 @@ longhands = [
     "transition-duration",
     "transition-property",
     "transition-timing-function",
+]
+writes = [
+    { property = "transition-property", optional = true },
+    { property = "transition-duration", optional = true },
+    { property = "transition-timing-function", optional = true },
+    { property = "transition-delay", optional = true },
+    { property = "transition-behavior", optional = true },
 ]
 
 [[shorthand]]
