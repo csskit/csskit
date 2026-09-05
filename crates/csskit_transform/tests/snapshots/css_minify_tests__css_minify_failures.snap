@@ -85,6 +85,14 @@ FAIL combined/0004
 -p{background:linear-gradient(to bottom,#ff0000 0%,hsl(0,100%,50%)25%,rgb(255,0,0)50%,blue 50%,#0000ff 100%);background-position:right bottom}
 +p{background:linear-gradient(red 50%,#00f 0) 100% 100%}
 
+FAIL combined/0005
+-body{line-height:1.5}html{color:red}body{font-size:75%;font-family:sans-serif}
++html{color:red}body{font:75%/1.5 sans-serif}
+
+FAIL combined/0006
+-:is(.x){:is(.y){color:red}}
++.x .y{color:red}
+
 FAIL comments/0003
 -a{color:red}
 +/*! important */a{color:red}
@@ -340,6 +348,10 @@ FAIL merging/0003
 -@media screen{a{color:red}}@media screen{b{margin:0}}
 +@media screen{a{color:red}b{margin:0}}
 
+FAIL merging/0004
+-.x{color:#0f0}p{color:#00f}#foo{padding:2px}.x{background:#0ff}
++p{color:#00f}#foo{padding:2px}.x{color:#0f0;background:#0ff}
+
 FAIL merging/0005
 -a{color:red}b{color:red;font-size:16px}
 +a,b{color:red}b{font-size:16px}
@@ -347,6 +359,18 @@ FAIL merging/0005
 FAIL merging/0006
 -@keyframes fade{0%{opacity:0}100%{opacity:1}}@keyframes fade{0%{opacity:.5}100%{opacity:1}}
 +@keyframes fade{0%{opacity:.5}to{opacity:1}}
+
+FAIL merging/0017
+-.x{color:#0f0}.y{color:#00f}#foo{padding:2px}.x{background:#0ff}
++.x{color:#0f0;background:#0ff}.y{color:#00f}#foo{padding:2px}
+
+FAIL merging/0018
+-.x{background:#0ff}.y{color:#00f}#foo{padding:2px}.x{color:#0f0}
++.y{color:#00f}#foo{padding:2px}.x{background:#0ff;color:#0f0}
+
+FAIL merging/0019
+-.x{margin:1px}.y{color:red}.x{padding:1px}
++.y{color:red}.x{margin:1px;padding:1px}
 
 FAIL nesting/0007
 -.foo{color:red;&.bar{margin:0}}
@@ -487,10 +511,6 @@ FAIL selectors-advanced/0012
 -:is(textarea,input):not(:required){color:red}
 +:is(textarea,input):optional{color:red}
 
-FAIL selectors-advanced/0013
--h1,h2,h3,h4,h5,h6{color:red}
-+:heading{color:red}
-
 FAIL selectors-advanced/0014
 -:is(h2,a,h1,.foo,:visited,p,.example,.bar){color:red}
 +:is(.bar,.example,.foo,:visited,a,h1,h2,p){color:red}
@@ -530,6 +550,10 @@ FAIL selectors-advanced/0024
 FAIL selectors-advanced/0025
 -:is(:foo,:foo,:hover,:hover){color:red}
 +:is(:foo,:hover){color:red}
+
+FAIL selectors-advanced/0026
+-h1,h2,h3,.foo{color:red}h2{color:tan}.foo{color:#123;padding:1px}
++h1,h3{color:red}h2{color:tan}.foo{color:#123;padding:1px}
 
 FAIL selectors/0001
 -a:nth-child(2n+ 1){color:red}
@@ -579,6 +603,18 @@ FAIL selectors/0016
 -[class="foo bar"]{color:red}
 +[class=foo\ bar]{color:red}
 
+FAIL selectors/0018
+-:is(.x) :is(:unknown){color:red}
++.x :unknown{color:red}
+
+FAIL selectors/0019
+-:is(.x) :is(:unknown),.y{color:red}
++.x :is(:unknown),.y{color:red}
+
+FAIL selectors/0020
+-:is(:hover,:visited){color:red}
++:hover,:visited{color:red}
+
 FAIL shorthand-values/0004
 -a{background:none}
 +a{background:0 0}
@@ -614,10 +650,6 @@ FAIL shorthands-unsafe/0007
 FAIL shorthands-unsafe/0008
 -.a{font-kerning:none}.b{font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
 +.a{font-kerning:none}.b{font-style:italic;font-weight:700;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
-
-FAIL shorthands-unsafe/0013
--a{mask-position:10px;mask-image:url(mask.svg);mask-repeat:repeat-x}
-+a{mask:url(mask.svg)repeat-x;mask-position:10px}
 
 FAIL shorthands/0001
 -a{overflow-x:hidden;overflow-y:hidden}
@@ -705,7 +737,7 @@ FAIL shorthands/0021
 
 FAIL shorthands/0023
 -a{border-image-source:url(border.png);border-image-slice:30;border-image-repeat:round;border-width:4px;border-style:solid;border-color:#0000}
-+a{border:4px solid #0000;border-image:url(border.png) 30 round}
++a{border:4px solid#0000;border-image:url(border.png)30 round}
 
 FAIL shorthands/0024
 -a{font-variant-ligatures:no-common-ligatures;font-style:italic;font-weight:bold;font-size:16px;line-height:1.5;font-family:Arial,sans-serif}
@@ -721,7 +753,7 @@ FAIL shorthands/0027
 
 FAIL shorthands/0028
 -a{mask-border:url(mask.png)25/10px round;mask-image:linear-gradient(#000,#0000);mask-size:cover;mask-repeat:no-repeat}
-+a{mask:linear-gradient(#000,#0000)no-repeat/cover;mask-border:url(mask.png)25/10px round}
++a{mask:linear-gradient(#000,#0000)0 0/cover no-repeat;mask-border:url(mask.png)25/10px round}
 
 FAIL shorthands/0029
 -a{mask-image:linear-gradient(#000,#0000);mask-repeat:no-repeat;mask-border:url(mask.png)25 round}
@@ -729,7 +761,7 @@ FAIL shorthands/0029
 
 FAIL shorthands/0031
 -a{font-variation-settings:"wght"600,"wdth"75;font-style:normal;font-weight:400;font-size:18px;line-height:1.6;font-family:Inter,sans-serif}
-+a{font:18px/1.6 Inter,sans-serif;font-variation-settings:"wght" 600,"wdth" 75}
++a{font:18px/1.6 Inter,sans-serif;font-variation-settings:"wght"600,"wdth"75}
 
 FAIL shorthands/0033
 -a{margin-top:10px!important;margin-right:20px;margin-bottom:10px;margin-left:20px}
@@ -740,8 +772,8 @@ FAIL shorthands/0034
 +@property --pt{syntax:"<length>";inherits:false;initial-value:0px}@property --pr{syntax:"<length>";inherits:false;initial-value:0px}@property --pb{syntax:"<length>";inherits:false;initial-value:0px}@property --pl{syntax:"<length>";inherits:false;initial-value:0px}a{padding:var(--pt) var(--pr) var(--pb) var(--pl)}
 
 FAIL shorthands/0035
--@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:black}a{border-width:var(--bw);border-style:var(--bs);border-color:var(--bc)}
-+@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:#000}a{border:var(--bw) var(--bs) var(--bc)}
+-@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:red}a{border-width:var(--bw);border-style:var(--bs);border-color:var(--bc)}
++@property --bw{syntax:"<length>";inherits:false;initial-value:0px}@property --bs{syntax:"<custom-ident>";inherits:false;initial-value:none}@property --bc{syntax:"<color>";inherits:false;initial-value:red}a{border:var(--bw)var(--bs)var(--bc)}
 
 FAIL shorthands/0036
 -a{top:0;right:0;bottom:0;left:0}
@@ -769,7 +801,7 @@ FAIL shorthands/0048
 
 FAIL shorthands/0049
 -a{border-width:50px;border-style:solid;border-color:#0000 red}
-+a{border:50px solid #0000;border-color:#0000 red}
++a{border:50px solid#0000;border-color:#0000 red}
 
 FAIL shorthands/0050
 -a{marker-start:url(x);marker-mid:url(x);marker-end:url(x)}
@@ -789,11 +821,15 @@ FAIL shorthands/0053
 
 FAIL shorthands/0054
 -a{border-top:1px solid red;border-right:2px dotted blue;border-bottom:1px solid red;border-left:2px dotted blue}
-+a{border-color:red blue;border-style:solid dotted;border-width:1px 2px}
++a{border-width:1px 2px;border-style:solid dotted;border-color:red blue}
 
 FAIL shorthands/0055
 -a{column-width:auto;column-count:3;column-height:auto}
 +a{columns:3}
+
+FAIL shorthands/0056
+-a{mask-position:10px;mask-image:url(mask.svg);mask-repeat:repeat-x}
++a{mask:url(mask.svg)10px repeat-x}
 
 FAIL supports/0001
 -@supports(hanging-punctuation:first){a{hanging-punctuation:first}}
