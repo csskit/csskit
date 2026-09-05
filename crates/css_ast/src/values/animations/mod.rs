@@ -25,11 +25,21 @@ use impls::*;
 #[declaration_metadata(
     initial = "see individual properties",
     applies_to = Elements,
-    longhands = AnimationName|AnimationDuration|AnimationTimingFunction|AnimationDelay|AnimationDelayStart|AnimationDelayEnd|AnimationIterationCount|AnimationDirection|AnimationFillMode|AnimationPlayState|AnimationTimeline,
-    resets = AnimationRange,
+    longhands = AnimationName|AnimationDuration|AnimationTimingFunction|AnimationDelay|AnimationDelayStart|AnimationDelayEnd|AnimationIterationCount|AnimationDirection|AnimationFillMode|AnimationPlayState,
+    resets = AnimationRange|AnimationTimeline,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
+)]
+#[declaration_writes(
+    AnimationName?,
+    AnimationDuration?,
+    AnimationTimingFunction?,
+    AnimationDelay?,
+    AnimationIterationCount?,
+    AnimationDirection?,
+    AnimationFillMode?,
+    AnimationPlayState?
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.animation"))]
@@ -344,7 +354,7 @@ pub struct AnimationPlayStateStyleValue<'a>;
 #[declaration_metadata(
     initial = "auto",
     applies_to = Elements,
-    shorthands = Animation,
+    reset_by = Animation,
     property_group = Animations,
     computed_value_type = Unknown,
     canonical_order = "per grammar",

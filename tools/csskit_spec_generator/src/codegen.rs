@@ -782,8 +782,9 @@ fn generate_property_type(
 }
 
 /// The `declaration_writes` attribute of a shorthand, which states the property each value of its
-/// grammar sets: string literals for the tokens the grammar writes before and after a value, and
-/// `?` for a value it may leave out to state the initial value.
+/// grammar sets: string literals for the tokens the grammar writes before and after a value, `?` for
+/// a value it may leave out to state the initial value, and `=` for one which takes the value before
+/// it when it is left out.
 fn writes_attribute(writes: &Writes) -> TokenStream {
 	match writes {
 		Writes::Repeat => quote! { #[declaration_writes(repeat)] },
@@ -791,10 +792,11 @@ fn writes_attribute(writes: &Writes) -> TokenStream {
 		Writes::Slots(slots) => {
 			let slots = slots.iter().map(|slot| {
 				let property = format_ident!("{}", atom_ident(&slot.property));
+				let copies = slot.copies.then(|| quote! { = });
 				let before = (!slot.before.is_empty()).then(|| proc_macro2::Literal::string(&slot.before));
 				let after = (!slot.after.is_empty()).then(|| proc_macro2::Literal::string(&slot.after));
 				let optional = slot.optional.then(|| quote! { ? });
-				quote! { #before #property #optional #after }
+				quote! { #copies #before #property #optional #after }
 			});
 			quote! { #[declaration_writes(#(#slots),*)] }
 		}

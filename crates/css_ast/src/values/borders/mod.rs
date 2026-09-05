@@ -1017,6 +1017,15 @@ pub struct BorderEndStartRadiusStyleValue<'a>;
     canonical_order = "per grammar",
     box_portion = Border,
 )]
+#[declaration_writes(
+    BorderImageSource?,
+    BorderImageSlice?,
+    "/"
+    BorderImageWidth?,
+    "/"
+    BorderImageOutset?,
+    BorderImageRepeat?
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-image"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
@@ -1994,6 +2003,7 @@ pub enum BorderLimitStyleValue<'a> {}
     canonical_order = "per grammar",
     box_portion = Border,
 )]
+#[declaration_writes(repeat)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.border-radius"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

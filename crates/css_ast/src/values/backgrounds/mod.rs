@@ -32,6 +32,17 @@ use impls::*;
     computed_value_type = Unknown,
     canonical_order = "per grammar",
 )]
+#[declaration_writes(
+    BackgroundColor?,
+    BackgroundImage?,
+    BackgroundPosition?,
+    "/"
+    BackgroundSize?,
+    BackgroundRepeat?,
+    BackgroundAttachment?,
+    BackgroundOrigin?,
+    = BackgroundClip?
+)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "css_feature_data", derive(ToCSSFeature), css_feature("css.properties.background"))]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]

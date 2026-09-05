@@ -281,8 +281,10 @@ pub struct Slot {
 	pub before: &'static str,
 	/// The token the grammar writes after this slot. Empty when the grammar writes nothing.
 	pub after: &'static str,
-	/// True when the grammar lets the slot be left out, which sets its property to the initial value.
+	/// True when the grammar lets the slot be left out.
 	pub optional: bool,
+	/// True when leaving the slot out gives its property the value of the slot before it, rather than the initial value.
+	pub copies: bool,
 }
 
 /// How a shorthand's value writes the longhands it sets.

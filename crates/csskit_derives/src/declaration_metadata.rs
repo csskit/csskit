@@ -8,16 +8,19 @@ use syn::{DeriveInput, Ident, LitStr, Result, Token};
 use crate::darling_ext::{InheritsArg, PipeList};
 
 /// One slot of a shorthand's grammar: the property the slot sets, between string literals of the tokens the grammar
-/// writes before and after it, and followed by `?` when leaving it out states the initial value.
+/// writes before and after it, followed by `?` when leaving it out states the initial value. A `=` before the property
+/// marks a slot which takes the value of the slot before it when it is left out.
 struct SlotArg {
 	before: TokenStream,
 	property: Ident,
 	optional: bool,
+	copies: bool,
 	after: TokenStream,
 }
 
 impl Parse for SlotArg {
 	fn parse(input: ParseStream) -> Result<Self> {
+		let copies = input.parse::<Option<Token![=]>>()?.is_some();
 		let before = match input.parse::<Option<LitStr>>()? {
 			Some(before) => quote! { #before },
 			None => quote! { "" },
@@ -28,7 +31,7 @@ impl Parse for SlotArg {
 			Some(after) => quote! { #after },
 			None => quote! { "" },
 		};
-		Ok(Self { before, property, optional, after })
+		Ok(Self { before, property, optional, copies, after })
 	}
 }
 
@@ -65,8 +68,8 @@ impl WritesArg {
 			Self::Repeat => quote! { crate::Writes::Repeat },
 			Self::Same => quote! { crate::Writes::Same },
 			Self::Slots(slots) => {
-				let slots = slots.iter().map(|SlotArg { before, property, optional, after }| {
-					quote! { crate::Slot { property: CssAtomSet::#property, before: #before, after: #after, optional: #optional } }
+				let slots = slots.iter().map(|SlotArg { before, property, optional, copies, after }| {
+					quote! { crate::Slot { property: CssAtomSet::#property, before: #before, after: #after, optional: #optional, copies: #copies } }
 				});
 				quote! { crate::Writes::Slots(&[#(#slots),*]) }
 			}
