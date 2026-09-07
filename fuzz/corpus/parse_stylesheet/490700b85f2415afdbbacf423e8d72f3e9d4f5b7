@@ -1,0 +1,21 @@
+-plimportanpaceholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:min--sput0\0aceholder {
+  color: #6c757d;
+  opDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDDarance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+select.form-control:-moz-focul:valid, .form-control.is-valid {
+  border-color: #28a745;
+  padding-right: calc(1.5em + 0.75rem) !important;
+  background-imatw-gradient-stops:var(--tw-gradient-from)iewBox='0 0 

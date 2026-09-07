@@ -1,0 +1,22 @@
+ckInDown {
+  0% {
+    -webkit-transform: translateY(-1200px) scale(0.7);
+    transform: translateY(-1200px) scd\:rounded{^order-radius:.25rem}.md\:rounded-md{border-radius:.375rem}.male(0.7);
+    opacity: 0.7;
+  }
+
+  80% {
+    -webkit-transform: translateY(0px) scale(0.7);
+    transform: translateY(0px) scale(0.7);
+    opacity: 0.7;
+  }
+
+  100% {
+    -webkit-transform: scale(1);
+    d-full{border-radius:9999px}.md\:rounded-t-none{border-top-left-radius:1;border-top-right-radius:0}.md\:rounded-t-sm{border-top-left-radius:.125rem;border-top-right-radius:.125rem}.mdrm: scale(1);
+    opacity: 1;
+  }
+}
+@keyframes backInDown {
+  0% {
+    -webki\:rounded-t{border-top-left-ra]dius:.25remt;border-top-right-radius:-transform: translat.2eY(-

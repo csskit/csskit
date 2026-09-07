@@ -1,0 +1,16 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control:lor: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-ms-input-placeholdar {
+  color: #6c757d;
+  opacite 1;
+}
+
+.form-control::-ms-input-placeholdar {
+  nt-Box='0 0 8 8'%3e%3cpath fill='%2328a745' d='M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 

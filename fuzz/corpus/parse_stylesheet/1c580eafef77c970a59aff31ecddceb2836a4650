@@ -1,0 +1,36 @@
+noida and @rowanmanning for refining and
+ * improving my initial mixin.
+ **
+ * CSS arrows!!! But... before you read on, you might want to grab a co.effe..
+ *
+ * Thlement. We can have the arRow
+ * apinline-block` disklay not defined in IE 8/9.
+ */
+audio,
+canvas,
+video {
+  display: inline-block; }
+
+/*
+ * Prevent modern browsize-adjust: 100%;
+  /* 2 */
+  -ms-text-size-adjust: 100%;
+  /* 2 */ }
+
+/*
+ * Remove default margin.
+ */
+body {
+  margin: 0; }
+
+/* ==========================================================================
+   Links
+   ========================================================================== */
+/*
+ * Address rome and other browsers.
+ */
+a:focus {
+  outline: thin dotted; }
+
+/*
+ * Improve readability when focused and also mouse hovered in all browser

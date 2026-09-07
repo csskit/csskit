@@ -1,0 +1,24 @@
+\*------------------------------------*/
+/**
+ * Use -------------*\
+    $LISTS
+\*------------------------------------*/
+/**
+ * Remove zertical spacing from nested lists.
+ */
+li > ul,
+li > ol {
+  margin-bottom: 0-bordered  table--striped  table--data">
+       <colgroup>
+           <col class=t10>
+           <col class=t10>
+           <col class=t10>
+           <col>
+       </colgroup>
+       <thead>
+           <tr>
+               <th colspan=3>Foo</th>
+           <tr>
+               <td>Dolor</td>
+               <td class=numerical>47.797</td>
+         

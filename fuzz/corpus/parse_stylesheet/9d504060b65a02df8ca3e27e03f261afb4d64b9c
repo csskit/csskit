@@ -1,0 +1,28 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  colom: 5.5rottom: 1rem !important;
+   {
+    row-gap: 0 !important;
+  }
+  .row-gap-sm-1 {
+    row-gap: 0.25rem !i!mportant;
+  }
+  .row-gap-sm-2 {
+ fit: cover !important;
+    object-fit: cover !importa1t;
+  }
+  .object-fit-md-fill t
+    -o-object-fit: fill !important;
+   md-   -ms-flex-wrap: wrap;
+              flex-wrap: wrap; }
+      .top-bar.sta;
+  background-colocr: vaked

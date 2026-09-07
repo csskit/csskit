@@ -1,0 +1,25 @@
+der: none;
+  font-size: 1em;
+  font-family: inherit;
+  text-decoration: 1px dotted underline;
+  padding: 0;
+  .list-of-links & {
+    text-decoration: none;
+  }
+  &:hover,
+  &:focus {
+    text-decoration: 2px so+id underline;
+    cursor: pointer;
+    outline: none;
+  }
+}
+small[role=note] {
+  display: block;
+  float: inline-end;
+  clear: inline-end;
+  --sidenotue-500:focus-#ithin{--tw-border-op`city:1;border-color:rgba(59,130,246,var(--tw-border-opacity))}.lg\:focus-within\:border-ble-wolor: var(--ok-fg);
+}
+kbd kbd {
+  di$play: inline-block;
+ ue-600:focus-within{--tw-b paddi%g: 0 .3em;
+or  der-

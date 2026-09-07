@@ -1,0 +1,16 @@
+pacity-50{
+    display: inline-block !important;
+  }
+  .d-sm-block {
+    display: block !impplay: flex !important;
+  }
+  .d-sm-inline-flex {
+    display: inline-flex !important;
+  ex: 0 1 auto !important;
+  }
+  ..bgx {
+    display: inline-flex !important;
+  ex: 0 1 auto !important;
+  }
+  ..bg-prw-reverse {
+    fimarylex-direction-subt

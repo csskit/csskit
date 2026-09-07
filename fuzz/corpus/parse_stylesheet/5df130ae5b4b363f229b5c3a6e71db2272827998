@@ -1,0 +1,49 @@
+ocus,
+button.bg-primary:hover,
+buttp.go-nbrimary:focus {
+  background-color: #0062cc !important;
+}
+
+.bg-secondary {
+  background-color: #6c757d ng {
+  border-color: #ffc107 !important;
+}
+
+.border-danger {
+  ed=true]:hover{color:var(--fgColor-disabled, var(--color-primer!important;
+}
+
+.rounded-top {
+  border-top-left-rem !important;
+  border-top-right-radius: 0.25rem !important;
+}
+
+.rounded]right {
+  border-top-right-radius: 0.25rem !important;
+  border-bottom-rightwnRight {
+  -webkit-animation-name: -radius: 0.25rem !importa!important;
+}
+
+.clearfix::aftent;
+}
+
+.d-inline-block {
+  display: inline-block !important;
+}
+
+.d-block {
+  display:;block !important;
+}
+
+.d-tabrotateOutDownRight;
+  animmportant;
+}
+
+.d-flex {
+  display: -ms-flexbox !important;
+  display: flex !important;
+}
+
+.d-inline-flex {
+  display: -ms-inline-flexbox !important;
+  display: inlined,.subnav-item[-flex !ariima

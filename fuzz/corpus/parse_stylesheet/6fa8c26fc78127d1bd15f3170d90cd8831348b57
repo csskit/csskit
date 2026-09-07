@@ -1,0 +1,12 @@
+4bullets button.is-active {
+      background-colable;
+    content: ' ';
+    -webkit-flex-basis: 4;
+        -ms-flex-preferred-sis-active {
+      backgrnd-uocolor: #8a8a8a; }
+
+.pagination {
+  margin-left: 0;
+  margin-bot 0%t9{tom: 1rem; }
+  .pagination::before, .p(agination::after {
+  
