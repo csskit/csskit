@@ -2,6 +2,13 @@
 source: crates/css_parse/src/layout_test.rs
 expression: render()
 ---
+AttributeOperator: size=28 align=4
+    0: Exact
+    1: SpaceList
+    2: LangPrefix
+    3: Prefix
+    4: Suffix
+    5: Contains
 BadDeclaration: size=24 align=8 {
     0: 0
 }

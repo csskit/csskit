@@ -1,12 +1,12 @@
 use super::metadata::{QuerySelectorMetadata, SelectorRequirements, SelectorStructure};
 use crate::{CsskitAtomSet, diagnostics::QueryDiagnostic};
-use css_ast::{AttributeOperator, CssMetadata, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
+use css_ast::{CssMetadata, Nth, PropertyGroup, PropertyKind, VendorPrefixes, visit::NodeId};
 use css_lexer::{Span, ToSpan};
 use css_parse::Vec;
 use css_parse::{
-	AtomSet, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, KindSet, NodeMetadata,
-	NodeWithMetadata, Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait, SemanticEq, State, T,
-	ToCursors, pseudo_class, syntax::CommaSeparated,
+	AtomSet, AttributeOperator, CompoundSelector as CompoundSelectorTrait, Cursor, CursorSink, Diagnostic, KindSet,
+	NodeMetadata, NodeWithMetadata, Parse, Parser, Peek, Result, SelectorComponent as SelectorComponentTrait,
+	SemanticEq, State, T, ToCursors, pseudo_class, syntax::CommaSeparated,
 };
 use csskit_derives::*;
 use smallvec::SmallVec;

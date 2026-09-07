@@ -1,6 +1,7 @@
 use super::prelude::*;
 
 use super::NamespacePrefix;
+use css_parse::AttributeOperator;
 
 #[node]
 #[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -48,20 +49,6 @@ impl<'a> Parse<'a> for Attribute {
 		let close = p.parse_if_peek::<T![']']>()?;
 		Ok(Self { open, namespace_prefix, attribute, operator, value, modifier, close })
 	}
-}
-
-#[node]
-#[derive(Parse, ToSpan, Peek, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
-#[derive(csskit_derives::NodeWithMetadata)]
-pub enum AttributeOperator {
-	Exact(#[semantic_eq(skip)] T![=]),
-	SpaceList(#[semantic_eq(skip)] T![~=]),
-	LangPrefix(#[semantic_eq(skip)] T![|=]),
-	Prefix(#[semantic_eq(skip)] T![^=]),
-	Suffix(#[semantic_eq(skip)] T!["$="]),
-	Contains(#[semantic_eq(skip)] T![*=]),
 }
 
 #[node]

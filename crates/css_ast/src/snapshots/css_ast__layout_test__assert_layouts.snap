@@ -277,13 +277,6 @@ Attribute: size=128 align=4 {
 AttributeModifier: size=16 align=4
     0: Sensitive
     1: Insensitive
-AttributeOperator: size=28 align=4
-    0: Exact
-    1: SpaceList
-    2: LangPrefix
-    3: Prefix
-    4: Suffix
-    5: Contains
 AttributeValue: size=16 align=4
     0: String
     1: Ident
