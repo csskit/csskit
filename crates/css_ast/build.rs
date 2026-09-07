@@ -35,6 +35,10 @@ fn main() {
 		input: parse_str("pub enum ComponentValue<'a> {}").unwrap(),
 		visit_mode: VisitMode::Self_,
 	});
+	all_visitable.push(VisitableNode {
+		input: parse_str("pub enum AttributeOperator {}").unwrap(),
+		visit_mode: VisitMode::Self_,
+	});
 	all_visitable.sort_unstable_by_key(|node| node.ident().to_string());
 
 	let queryable = all_visitable.iter().filter(|node| node.visit_mode.is_queryable()).cloned().collect::<Vec<_>>();

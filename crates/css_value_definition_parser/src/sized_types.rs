@@ -19,7 +19,6 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"AttrName",
 	"Attribute",
 	"AttributeModifier",
-	"AttributeOperator",
 	"AttributeValue",
 	"Auto",
 	"AutoFillOrFit",

@@ -3,10 +3,10 @@ include!(concat!(env!("OUT_DIR"), "/css_apply_visit_methods.rs"));
 
 use css_parse::Vec;
 use css_parse::{
-	Block, Box, CommaSeparated, Comparison, ComponentValue, ComponentValues, Cursor, Declaration, DeclarationGroup,
-	DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata, NodeWithMetadata,
-	Optionals2, Optionals3, Optionals4, Optionals5, Parse, Peek, QualifiedRule, RuleList, ToCursors, ToSpan,
-	syntax::BadDeclaration, token_macros,
+	AttributeOperator, Block, Box, CommaSeparated, Comparison, ComponentValue, ComponentValues, Cursor, Declaration,
+	DeclarationGroup, DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata,
+	NodeWithMetadata, Optionals2, Optionals3, Optionals4, Optionals5, Parse, Peek, QualifiedRule, RuleList, ToCursors,
+	ToSpan, syntax::BadDeclaration, token_macros,
 };
 use visit_flow::{VisitFlow, try_visit};
 
@@ -695,6 +695,32 @@ impl<'a> Visitable for ComponentValue<'a> {
 				}
 			}
 			try_visit!(v.exit_component_value(self));
+		}
+		try_visit!(v.exit_node(node));
+		VisitFlow::DESCEND
+	}
+}
+
+impl VisitableMut for AttributeOperator {
+	fn accept_mut<V: VisitMut>(&mut self, v: &mut V) {
+		v.visit_attribute_operator(self);
+		v.exit_attribute_operator(self);
+	}
+}
+
+impl QueryableNode for AttributeOperator {
+	const NODE_ID: NodeId = NodeId::AttributeOperator;
+}
+
+impl Visitable for AttributeOperator {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		let node = QueryableNode::visit_node(self);
+		if let VisitAction::SkipChildren = try_visit!(v.consider_node(node)) {
+			return VisitFlow::DESCEND;
+		}
+		if let VisitAction::Descend = try_visit!(v.enter_node(node)) {
+			try_visit!(v.visit_attribute_operator(self));
+			try_visit!(v.exit_attribute_operator(self));
 		}
 		try_visit!(v.exit_node(node));
 		VisitFlow::DESCEND

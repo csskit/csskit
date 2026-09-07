@@ -1,7 +1,7 @@
 use crate::QueryAttribute;
 use css_ast::visit::VisitNode;
-use css_ast::{AttributeOperator, CssAtomSet, PropertyKind};
-use css_parse::{AtomSet, Cursor};
+use css_ast::{CssAtomSet, PropertyKind};
+use css_parse::{AtomSet, AttributeOperator, Cursor};
 
 /// Stores queryable property values extracted from a node.
 #[derive(Debug, Clone, Copy, Default, PartialEq, Eq, Hash)]

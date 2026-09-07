@@ -1,3 +1,4 @@
+mod attribute_operator;
 mod bad_declaration;
 mod bang_important;
 mod block;
@@ -16,6 +17,7 @@ mod rule_list;
 mod simple_block;
 mod unknown_rule_block;
 
+pub use attribute_operator::*;
 pub use bad_declaration::*;
 pub use bang_important::*;
 pub use block::*;
