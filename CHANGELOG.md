@@ -1,4 +1,44 @@
+## [0.0.32] - 2026-09-05
+
+### Css_ast
+- csskit_spec_generator: Ensure longhand emission is ordered (#1478) ([#1478](https://github.com/csskit/csskit/pull/1478))
+- Regenerate css_ast/src/values from csswg drafts (#1480) ([#1480](https://github.com/csskit/csskit/pull/1480))
+- csskit_spec_generator/csskit_derives/csskit_ast: Rewrite shorthand/longhand meta (#1486) ([#1486](https://github.com/csskit/csskit/pull/1486))
+- css_lexer: keep the `--` of a dashed ident in its atom (#1489) ([#1489](https://github.com/csskit/csskit/pull/1489))
+- css_parse: compare SemanticEq nodes through their source text (#1490) ([#1490](https://github.com/csskit/csskit/pull/1490))
+- csskit_derives/css_parse: rewrite derive(ToSpan) (#1492) ([#1492](https://github.com/csskit/csskit/pull/1492))
+- csskit_derives: rewrite derive(Parse) (#1499) ([#1499](https://github.com/csskit/csskit/pull/1499))
+- css_ast: Drop mathml extended elements (#1502) ([#1502](https://github.com/csskit/csskit/pull/1502))
+
+
+### Css_lexer
+- css_lexer: DRY up token parsing with ParsedChars iterator (#1487) ([#1487](https://github.com/csskit/csskit/pull/1487))
+- css_lexer: Mark KindSet::contains const (#1491) ([#1491](https://github.com/csskit/csskit/pull/1491))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1482) ([#1482](https://github.com/csskit/csskit/pull/1482))
+
+
+### Csskit_derives
+- csskit_derives: rewrite derive(ToCursors) (#1493) ([#1493](https://github.com/csskit/csskit/pull/1493))
+- csskit_derives: rewrite derive(SemanticEq) (#1494) ([#1494](https://github.com/csskit/csskit/pull/1494))
+- csskit_derives: rewrite derive(Visitable) (#1495) ([#1495](https://github.com/csskit/csskit/pull/1495))
+- csskit_derives: derive(NodeWithMetadata) metadata body (#1496) ([#1496](https://github.com/csskit/csskit/pull/1496))
+- csskit_derives: rewrite derive(Peek) (#1497) ([#1497](https://github.com/csskit/csskit/pull/1497))
+- csskit_derives: drop synstructure (#1498) ([#1498](https://github.com/csskit/csskit/pull/1498))
+
+
+### Csskit_vscode
+- chore(deps): update dependency @types/vscode to v1.134.0 (#1483) ([#1483](https://github.com/csskit/csskit/pull/1483))
+- chore(deps): update dependency oxlint to v1.79.0 (#1485) ([#1485](https://github.com/csskit/csskit/pull/1485))
+- chore(deps): update dependency mocha to v12 (#1488) ([#1488](https://github.com/csskit/csskit/pull/1488))
+
 ## [0.0.31] - 2026-08-28
+
+### Other Changes
+- Release: re-add `@release comments` (#1475) ([#1475](https://github.com/csskit/csskit/pull/1475))
+
 
 ### Bytescan
 - bytescan/css_lexer: Factor out SIMD scanning into new library (#1466) ([#1466](https://github.com/csskit/csskit/pull/1466))
@@ -16,9 +56,14 @@
 - css_ast/csskit_spec_generator: Complete shorthand/longhand metadata (#1470) ([#1470](https://github.com/csskit/csskit/pull/1470))
 
 
+### Css_parse
+- css_parse/csskit_arena/source_tools: Move Vec/Box/String into csskit_arena (#1473) ([#1473](https://github.com/csskit/csskit/pull/1473))
+
+
 ### Csskit
 - csskit: separate parse/check failures, add find --group (#1460) ([#1460](https://github.com/csskit/csskit/pull/1460))
 - chore(deps): update dependencies (patch) (#1458) ([#1458](https://github.com/csskit/csskit/pull/1458))
+- Release v0.0.31 (#1456) ([#1456](https://github.com/csskit/csskit/pull/1456))
 
 
 ### Csskit_arena
@@ -28,6 +73,7 @@
 ### Csskit_napi
 - chore(deps): update dependency @napi-rs/cli to v3.8.6 (#1459) ([#1459](https://github.com/csskit/csskit/pull/1459))
 - csskit_napi: Add binary to cargo.toml (#1468) ([#1468](https://github.com/csskit/csskit/pull/1468))
+- csskit_napi: Don't publish to registry (#1477) ([#1477](https://github.com/csskit/csskit/pull/1477))
 
 
 ### Csskit_proc_macro
@@ -38,6 +84,8 @@
 - coverage: update css-minify-tests (#1469) ([#1469](https://github.com/csskit/csskit/pull/1469))
 - csskit_transform: Introduce RemoveOveriddenDeclarations transform (#1471) ([#1471](https://github.com/csskit/csskit/pull/1471))
 - csskit_transform: Introduce ReduceShorthandValues (#1472) ([#1472](https://github.com/csskit/csskit/pull/1472))
+- release: re-add `@release comments` (#1474) ([#1474](https://github.com/csskit/csskit/pull/1474))
+- coverage: update css-minify-tests (#1476) ([#1476](https://github.com/csskit/csskit/pull/1476))
 
 ## [0.0.30] - 2026-08-23
 
