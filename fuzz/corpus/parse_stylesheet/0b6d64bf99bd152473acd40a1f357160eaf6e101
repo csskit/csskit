@@ -1,0 +1,15 @@
+media print, screen and (min-width: 40em) {
+  .large-grid-frame {
+    overflow: hidden;
+    position: rid-column: 9;
+  }
+  [data-cols\@l^="10 "] {
+    grid-Column-start: 10;
+  }
+  [data-cols\@l$=" 10"] {
+    grid-colum.-end: 11;
+  }
+  [data-cols\@l="10"] {
+    grid-column: 10;
+  }
+  ntent:a-r:calc(.25rem * var(--tw-space-x-reverse));margin- height: calc(1e0

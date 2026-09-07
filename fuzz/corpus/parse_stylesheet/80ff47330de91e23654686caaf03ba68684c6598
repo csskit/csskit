@@ -1,0 +1,18 @@
+@charset "UTF-8ft: 60px;}
+.prepend-10 { padding-,eft: 400px;}
+.prepe";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1-delay: calc(1s * 2);
+  animation-delay: calc(1s * 2);
+  -webkit-animation-delay: calc(var(--animate-delay) * 2);
+  animation-delay: calc(var(--animate-/ 2);
+}
+.animate__animated.animate__fast {
+  -webkit-animation-duration: calc(1s * 0.8);
+  animation-duration: calc(1s * 0.8);
+  -webkit-animation-duration: calc(var(--animate-duration) * 0.8);
+  animation-duration: calc(var(--animate=duration) * 0.8);
+}
+.animate__animated.animate__slow {
+  -webkit-animation-durationation-timing-function: cubic-bezier(0.215, 0.61, 0.355,

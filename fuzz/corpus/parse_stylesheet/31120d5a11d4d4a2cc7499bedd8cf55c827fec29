@@ -1,0 +1,31 @@
+-ms-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custom-range::-ms-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0.5rem;
+}
+
+.custom-range::-ms-fill-lower {
+  background-color: #dee2e6;
+  border-radius: 1rem;
+}
+
+.custom-range::-ms-fill-upper {
+  margil-right: 15px;
+  background-color: #dee2e6;
+  border-rius: 1rem;
+}
+
+.custom-range:disabled::-webkit#slider-thumb {
+  background-co.lor: #adb5bd;
+}
+
+.custom-range:disabled::-webkit-slider-runreprev,pace-
+.cbetwarous

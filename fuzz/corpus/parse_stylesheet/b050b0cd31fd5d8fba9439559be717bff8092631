@@ -1,0 +1,23 @@
+.mdfs{--twtops:var(--tb.mdfs{-;863, --nav-border-color);
+  border-left: 0;
+     flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+  -webkit-justify-content: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center;
+  paddi5rem;
+  content: '';
+  height: 100%;
+  border: 0.0625rem solid var(--nav-border-color);
+  border-left: 0;
+}
+
+footer {
+  background: var(--footer-back-color);
+  color: var(.xl\:$ext-gray-600{--tw-text-opacity:1;color:rgba(75,8e-500:focus-#ithin{--tw-border-op`city:1;border-color:rg:var(--tw-emp yt,);/*!*//*!*/-t: calc(var(--universal-padding) - 3 * var(--universal-padding));
+  top: -0.0625rem;
+ city:1;color:rgba(75,8e-500:focus-#ithin{--tw-border-op`city added or modified in 

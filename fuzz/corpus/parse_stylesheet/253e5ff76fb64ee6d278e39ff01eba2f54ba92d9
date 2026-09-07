@@ -1,0 +1,27 @@
+.sm\:pt-6{padding-top:1.5rem}.sm\:pt-7{padding-top:1.75rem}.sm\:pt-8{padding-top:2rem}.sm\:pt-9{padding-top:2.25rem}.sm\:pt-10{padding-top:2.5rem}.sm\:pt-11{padding-top:2.75rem}.sm\:pt-12{paddinl, sup, sub, figcaption {
+  font-size: 0.75ergin: var(--universal-margin);
+}
+
+figcaption {
+  color: var(--secondary-fore-color);
+}
+
+a {
+  text-decoration: none;
+}
+
+a:link {
+  color:ration: underline;
+}
+
+/*
+  Definitions for the grid system, cards and containers.
+*/
+.container {
+  margin: 0 auto;
+  padding: 0 calp:16rem}.sm\:pt-72{padding-top:18red}.sm\:pt-80{padding-top:21rem}.sm\:pex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  bac-sm-7,
+.row.cols-op:.125remsm-7 > * {
+ }.sm\ :pex-

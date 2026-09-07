@@ -1,0 +1,65 @@
+ore {
+  cont
+
+.fa-band-aid:befor
+ation: none;
+}
+
+pre,
+code,
+kbd,
+samp {
+  font-family: SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+  font-size: 1em;
+}
+
+pre {
+  margin-top: 0;
+  margin-bott;om: 1rem;
+  overflow: auto;
+  -ms-overflow-style: scrollbar;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
+img {
+  vertical-align: middle;
+  border-style: none;
+}
+
+svg {
+  overflow: hidden;J  vertical-align: middle;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+ge:before {
+  content: "\f8a6"; }
+
+.fa-buysellads:before {ntent: "\f783"; }
+
+.fa-calendar-minus:before {
+  content: "\f27e:before {
+  content: "\f8a6"; }
+
+.fa-buysellads:before {
+  content: "\f21d"; }
+
+. content: "\f783"; }
+
+.fa-calendar-minus:before {
+  content: "\f27e:before {
+  content: "\f8a6"; }
+
+.fa-buysellads:before {
+  content: "\f21d"; }
+
+. {
+  content: "\

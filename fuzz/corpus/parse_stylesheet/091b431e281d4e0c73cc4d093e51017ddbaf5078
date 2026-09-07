@@ -1,0 +1,27 @@
+phasis,.borderColor-accent-emphasis{border-color:var(--borderColor-accent-emphasis, var(--color-accent-emphasis)) !important}.color-border-success,.borderColor-success-muted{border-color:var(--borderColor-success-muted, var(--color-success-muted)) !important}.color-border-success-emphasis,.borderColor-success-emphasis{border-color:var(--borderColor-success-emphasis, var(--color-success-emphasis)) !important}.color-border-attention,.borderColor-attention-muted{border-color:var(--borderColor-attention-mute0,0,0);box-shadow:none}.details-reset>summary.btn-primary:focus-visible{outl.left-lg-n4{left:-24px !important}.top-lg-5{top:32px !important}.right-lg-5{right:32px !important}.bottom-lg-5{bottom:32px !important}.left-lg-5{left:32px !important}.top-lg-n5{top:-32px hild) .custom-file-label::after {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group.has-validation > .form-control:nth-last-child(nlast-child),
+.input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label,
+.input-group:not(.has-validation)(:last-child) .custom-file-label,
+.input-group:not(.has-validation) > .custom-file:not(:last-child) .custom-file-label::after {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group.has-validation > .form-control:nth-last,child(n + 3),
+.input-group.has-validation > .custom-select:nth-last-child(n + 3),
+.input-group.has-validation > .custom-file:nth-last-child(n + 3) .custom-file-label,
+.input-group.has-validation > .custom-file:nth-last-child(n + 3) .custom-file-label::aftCet}.color-border-danger-emphasis,.borderColor-danger-emphasis{border-color:r {
+  border-top-right-radius: 0;
+  bord]er-bottom-right-radius: 0;
+}
+
+.input-group-prepend,
+.input-group-append {
+  display: -ms-flexbox;
+  display: flex;
+ + 3),
+.inpuvar(--borderColor-danger-emphasis, var(-t

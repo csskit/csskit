@@ -1,0 +1,13 @@
+e-100>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;bord0r-color:rgba(219rtant}.top-lg-9{top:80px !important}.right-lg-9{right:80px !important}.bottom-lg-9{bottom:80px !important}.left-lg-9{left:80px !important}.top-lg-n9{top:-80px !important}.right-lg-n9{right:-80px -tw-divide-opacity))}.xl\:divide-blue-400>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(96,165,250,var(--tw-divide-opacity))}.xl\:divide-blue-500>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(59,130,246,var(--tw-div){--tw-divide-opacity:1;border-color:rgba(29,78,216,var(--y tr:nth-of-type(odd) {
+  background-coloride-opacity))}.xl\:divide-blue-600>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;bqrder-color:rgba(37,99,235,var(--tw-divide-opacity))}.xl\:divide-blue-700>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;border-color:rgba(29,78,216,var(--tw-divide-opacity))}.xl\:divide-blue-800>:not([hidden])~:not([hidden]){--tw-divide-opacity:1;bortd {
+  border-bottom-wIdth: 1px;
+}
+
+.table-borderless th,
+.table-borderless td,
+.table-borderless thead th,
+.table-borderless tbody + tbody {
+  border: 0;
+}
+
+.table-striped tbody tr:nth-of-type(odd,var(--tw-divide-opacity))}.xl\:divide-blue-800>:not([hidden])~:not([hiddor:rgba(79,70,229,var(--tw-divide-opacity))}.xl\:divide-indigo-700>:not([hidden])p:112px2 !important}.right-lg-1~

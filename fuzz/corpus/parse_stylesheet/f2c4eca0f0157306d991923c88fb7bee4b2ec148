@@ -1,0 +1,17 @@
+form-control-lg {
+  min-height: )c(1.5em + 1rem + calc(var(--bs-border-width) * 2));
+  padding: 0-8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.adius-lg);
+}
+.form-control-lg::-wcol-10 {
+  flex: 0 0 auto;
+  width: 83l-eb

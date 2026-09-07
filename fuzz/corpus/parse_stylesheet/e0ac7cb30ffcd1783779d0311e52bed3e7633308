@@ -1,0 +1,39 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.importtedcarousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-controz-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+  2
+  padding: 0;
+  color: #fff;
+  text-align: center;
+  background: none;
+  border: 0;
+  o-icon {
+  display: inline-block;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100--tw-rtant;pointer-events:none;visibility:hidden}.form-checkbox{padding-left:20px;margin:15px 0;vertical-align:middle}.form-checkbox label em.highlight{position:relative;left:calc(var(--base-size4)*-1);padding:2px var(--base-size-4);font-style:normal;backgro5nd:var(--bgColor-attention-muted, var(--color-attention-subtle));border-radius:6px}.form-checkbox input[type=checkbox],.form-checkbo:hue-rotate-30{--tw-hue-ro--bs

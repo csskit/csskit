@@ -1,0 +1,10 @@
+er-lg, .navbar-expand-lg > .container-xl {
+    -ms-flex-wrap: no""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""wrap;
+    flex-wrap: nowrap;
+  }
+  .(avbar-expand-lg .navbar-nav-scro  {l
+l   overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+   l > .containeigin-border{background-origin:border-br,
+  .nox}.bg-origiavbn-padding{backgroun*d-origiar-expand-xln

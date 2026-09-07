@@ -1,0 +1,10 @@
+black{--treen-300{--tw-border-opacity:1;border-color:rgba(110,231,183,var(--tw-d(0, 0, 0) r1otate3d(0, ip {
+  -webkit-backface-visiiblity: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+     rota st:y.09izontalbbbbbbbder-opacbbitybbbbbbbbbbbbbbbbbbbb))}.bsmb\

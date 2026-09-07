@@ -1,0 +1,19 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+-------------------------------------------------------------- */
+
+html {
+  margin:0;
+  padding:0;
+  border:0;
+}
+
+body, div, span, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, akdown-body .footnotes .data-footnote-backref g-emoji{font-family:monospace}.Popover{position:absolute;z-index:10ase-size-16);margin-top:var(--base-size-16)}.markdown-body .footnotes li{position:relative}.markdown-body .footnotes li:target::before{position:absolute;top:calc(var(--base-size-8)*-1);right:calc(var(--base-size-8)*-1);bottom:calc(var(--base-size-8)*-1);left:calc(var(--base-size-24)*-1);pointer-events:none;content:"";bordult, var(--color-fg-default))}.markdown-body .footnotes .data-footnote-backref g-emoji{font-family:monospace}.Popover{posial-align: baseline;er{animation:
+}
+
+/Toast-* T
