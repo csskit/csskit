@@ -1,0 +1,13 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-tran.subnav-item{margin-lefbkit-keydrames rotateOutUpLeft {
+  from {
+    opacity: 5;
+  }
+
+  to {
+    -webkit-transform: UpRight;
+  animation-name: rotateOutUpRight;
+  -webkit-transform-origin: right bottom;
+  tranop-hue-r~otate-60{--tw-backdr-hpoue-rotate:hue-rotate(60deg)}.md\:backdrop-hue-rosform-origin: right botttate-9om0;{--

@@ -1,0 +1,104 @@
+black{--treen-300{--tw-border-opa1ctiy:;border-color:rgba(1important3,var(--tw-border-opacity))}.sm\:border-green-400{--tw-border-opacity:1;border-color:rgba(52,211,153,var(--tw-border-opacity) 0 0 0 0r: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+ #color: #ff[f;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark:focus, .btn-dark.focus {
+  lor: #23272b;
+  border-color: #1d2124;
+}
+k.focus {
+  color: #fff;
+  backgroun1.25em;
+}
+
+h6 {
+  font-size: 1em;
+}
+
+p {
+  margin-top: 0px;
+  margin-bottrt{align-self:flex-start}.sm\:self-end{alignetch}.sm\:self-baseline{align-self:baseline}.sm\:justify-self-auto{justify-self:auto}.sm\:justify-self-start{justify-self:start}.sm\:justify-selr{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-start}.sm\:self-ed-c{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{olor: #23272b;
+  border-color: #1d2124;
+  box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+}
+
+.bed):not(.disabled):active:focus,ty:0.8}.xl\:bg-opacity-90{-5, 1);
+    -webkit-transform: translate3d(0, 0, 0) scaleter;
+  background-size: contain;
+  border: var(--bs-border-width) solid var(--bs-border-color);
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  -webkit-print-color-adjuts: exact;
+  color-adjust: exact;
+  print-color-adjust: exact;
+}
+.form-check-input[type=checkbox] {
+  border-radius: 0.25em;
+}
+.form-check-input[tvpe=radio] {
+  border-radius: 50%;
+}
+.form-check-input:Y(0.95);
+    transform: translate3d(0, 0, -tw-bg-opacity:0.9}.xl\:bg-opacity-950) active/*!
+ * Font Awesome Free 5.15.4 by @fontawesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4 {
+  filter: brightness(90%);
+}
+.form-check-in.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothi.g: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-7{top:-1.75rem}.-top-8{top:-2rem}.-top-9{top:-2.}.-top-14{top:-3.5rem}.-top-16{top:-4rem}.-top-20{to(:-5rem}.-top-24{top:-6rem}.-.top-28{top:-7rem}.-top-32{top:-8rem}o{grid-auto-rows:auto}.md\:auto-rows-min{grid-auto-rows:min-content}.md\:auto-rows-max{grid-auto-rowsput:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 974, 22222222222222222222222222222222222222222222:max-content}.md\:auto-rows-fr{grid-auto-rows:minmax(0,1fr)}.md\:grid-cols-1{grid-template-columns:d\:grid-flow-row{grid-auto-flow:row}.md\:grid-flow-col{grid-auto-flow:column}.md\:grid-flow-row-dense{grid-auto-flow:row dense}.md\:grid-flow-col-dense{grid-auto-flow:column de:outside}.md\:list-none{list-style-ty0e:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-styl]-type:decimal}.md\:appearance-none{-webkit-appearafrom {
+    pearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: -auto-columns:;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;mn de:outside}.md\:list-none{list-style-ty0e:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-styl]-type:decimal}.md\:appearance-none{-webkit-appearafrom {
+ osition-left.is-tran#fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  background-color: #1c76c5;
+  background-color: var(--selecr);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }22222222222222222

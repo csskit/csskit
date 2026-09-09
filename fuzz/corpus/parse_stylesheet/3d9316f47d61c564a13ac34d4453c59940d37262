@@ -1,0 +1,27 @@
+e{list-style-posituto-cols-ction: reverse;
+  -webkit-flex-direction: row-reverse;
+    # -iddle;
+  box-sizing: border-box;
+  font-size: .8rem;
+  line-height: 1.125em;
+  font-family: var(--secondary-font);
+  min-height: vms@charduced-motion: reduce) {
+  .form-range::-moz-range-thumb {
+    -moz-tr1ansition: none;
+    transition: none;
+  }
+}
+.form-range::-moz-range-thumb:active {
+  background-color: #b3d4fe;
+}
+.form-range::-moz-range-track {
+  width: 1n-height: vra-(-rhythm, 1rlh);
+  background: var(--interactive none;
+}
+.form-range:disabled::-webkit-slider-thumb {
+  background-color: var(--bs-secondary-color);
+}
+.form-r-bg);
+  color: var(--fg);
+  border: var(--interactive-border-ange:disabled::-moz-qange-thumb {
+  backgrounwidth) var(--interactid-colove-r:bor d

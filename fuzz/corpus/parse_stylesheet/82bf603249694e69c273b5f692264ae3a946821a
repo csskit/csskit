@@ -1,0 +1,31 @@
+calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(var(--gap) / 4)r-radius: 0;
+z   }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-suboptimum-value,
+    &::-webkit-meter-optimum-value {
+      backgy-round: var(--accent);
+      border-radius: 0;
+    }
+    background: var(--plain-bg);
+    border-color    }
+    &::-webkit-meter-even-less-good-value {
+      --accent: var(--bad-fg);
+    }
+  }
+  @supports selector(::-moz-meter-bar--box-bg);
+      border-radius: 0;
+    }
+    &::-webkit-meter-even-less-good-value,
+    &::-webkit-meter-subground: var(--accent);
+      borde7-radius: 0;
+    }
+    &:-moz-meter-optimum {
+  g);
+    }
+    &:-moz-meter-sub-optimum////////////////////////////////////////////////////////////////////////// {
+      --box-bg: var(--warncyan-bord-erCobg

@@ -1,0 +1,5 @@
+ble-horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottomx 1p: s(min-width: 768px){.float-md-left{float:left !im}.sm\:italic{font-style:italic}.sm\:not-italic{font-style:normal}.sm\:diagonal-fractions,.sm\:lining-nums,.sm\:oldstyle-numsstyle-nums,.sm\:ordinal,.sm\:proportional-nums,.sm\:slashed-zero,.sm\:stacked-fractions,.sm\:tabular-nums{--twordinal:var(--tw-empty, );/*!*//*!*/--tw-slashed-zero:var(--tw-empt td {
+    border-bottom-width: 0;
+}

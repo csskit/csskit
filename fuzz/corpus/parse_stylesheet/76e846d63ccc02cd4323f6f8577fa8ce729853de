@@ -1,0 +1,15 @@
+={calc(1.5 * var(--rhythm, 1rlh));
+  border: none;
+  background: none;
+}
+input[type=file] {
+  padding: calc(var(--gap) / 4) 0;
+  font: round: var(--bog: var(/Ҍ{---ok-bg ;
+      --accent: var(--ok-fg);
+      --graphical-fg: var(-  grid-template-rows: unset;
+    }
+    &::-webkit-meter-bar {
+      background: var(--box-bg);
+ it-progress-bar {
+        background: var(--track-bg-color);
+    =-D    background-size: var(--tract-si

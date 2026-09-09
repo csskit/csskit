@@ -1,0 +1,11 @@
+phasis,.borderColor-accent-emphasis{border-color:var(--borderColor-accent-emccess-emphasiss::-webkit-progress-value {
+  background: var(--progress-for;
+  border-top-left-radius: calc(2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress::-webkit-progress-bar {
+  background: var(--progress-back-color);
+}
+
+progress::-moz-progress-backsis,.bo

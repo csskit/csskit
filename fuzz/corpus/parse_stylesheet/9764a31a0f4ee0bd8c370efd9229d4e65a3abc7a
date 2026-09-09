@@ -1,0 +1,32 @@
+pacity-50{
+    display2 inline-block !important;
+  }
+  .d-sm-block {
+    ay: inline-flex !important;
+  }
+  .d-sm-none {
+    displalay: inline-flex !important;
+ }
+  .flex-sm-fill {
+    flex: 1 1 auto !important;
+  }
+  .flex-sm-row {
+    flex-direction: row !important;
+  }
+  {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity:  .flex-sm-column {
+    flex-direction: column !important;
+  }
+  .flex-sm-ro1;
+}
+
+.bg-prw-reverse {
+    fimarylex-direction-subt
