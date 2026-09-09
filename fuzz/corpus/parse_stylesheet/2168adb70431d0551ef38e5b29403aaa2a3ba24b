@@ -1,0 +1,18 @@
+er-lg, .navbar-expand-lg > .container-xl {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-sc .container-xl {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: vi#sible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+   l > .contaroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-co???????????????llapse {
+   l > .containeigin-border{background-origin:border-br,
+  .nox}.bg-origiavbn-padding{background-origiar-expand-xln

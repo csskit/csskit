@@ -1,0 +1,83 @@
+rs
+  */
+  .palm-one-quarter, .palm-two-jighths, .palm-three-twelfhts {
+    width: 26%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    wi--------------------------- */
+
+.small     { font-size: .8em; margin-bottom: 66; }
+.loud      { color: #000; }
+.highlight { background:#ff0; }
+.added     { background:#120; color: #fff; }
+.removed ius-medium);border-width:var(--borderWidth-thin);margin:calc(var(--borderWidth-thin)*-1) calc(var(--borderWidth-thin)*-1) 0;paddin  { background:#900; color: #fff; }
+
+.fg:var(--stack-padding-normal)}.Box-title{font-size:var(--text-body-size-medium);font-weight:var(--base-text-weight-semibold)}.Box-body{border-bottom:var(--borderWidth-thin) solid var(--borderColor-de 0;
+  margin-bottom: 1rem; }
+  .pagination::before, .pagination::after {
+    display: table;
+    content: ' ';
+    -webkit-flex-basis: 0;
+        -ms-bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
+}
+
+.col-11 {
+  flex: 0 00auto;
+  width: 91.66666667%;
+}
+
+.cflex-preferred-size: 0;
+   ol-12 {
+  flex: 0 0 auto;
+ rest: #b69a6d;gination::before, .pagination::after {
+    display: table;
+    content: ' ';
+    -web--label-brown-fgColor-hov width: 100%;
+}
+
+.off         flex-basis: 0;
+    -webkit-boxa8a8a; }
+
+.pagination {
+  margin-left: 0;
+  margin-bottom: 1rem; }
+  .pagination::before, .pagination::after {
+    display: table;
+    content: ' ';
+    -webkit-flex-basis: 0;
+        -ms-bel-brown-bgColor-hover: #ize: 0.875rem;
+    display: none;set-1 {
+  margin-left: 8.33333333%;
+bel-brown-or--8 {
+  flex: 0 0 auto;
+  width+: 66.666666}
+
+.offset-2 {
+  margi }
+    .pna padding-top:0; }
+.bottom    { margin-bottom:ng}.Box-row.navig67g;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+wti d h: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1.5)}.\32xl\:con70;
+}
+
+blation-focus.sortable-chosen,.Box-row.navigation-focus.sockquoteortabl e

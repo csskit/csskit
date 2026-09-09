@@ -1,0 +1,18 @@
+eo[x-placarge-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 0.5rem 0.5retop: 0;
+  border-width: 0 ction: normal;
+     -webkit-box-dire }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 ction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-di, 0, 0.25);
+}
+
+.rectbi

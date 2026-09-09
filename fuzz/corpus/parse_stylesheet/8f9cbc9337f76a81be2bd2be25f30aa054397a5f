@@ -1,0 +1,50 @@
+media print, screen and (min-width: 64em) {
+  .large-grid-frame {
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+    -style: -ms-autohiding-scrollbar; } }
+
+.grid-y.grid-frame {
+  overflow: hidden;
+  position: relative;
+  -webkit-flex-wrap: nowrap;
+      -ms-flex-wrap: nowrap;
+          flex-wrap: nowrap;
+  -webkit-box-align: stretch;
+  -webkit-align-items: stretch;
+      -ms-flex-align: stretch;
+          align-items: stretch;
+  height: 100vh;
+  width: auto; }
+
+@media print, screen and (min-width: 40em) {
+  .grid-y.medium-grid-frame {
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+            align-items: stretch;
+    height: 100vh;
+    width: auto; } }
+
+@media print, screen and (min-width: 64em) {
+  .grid-y.large-grid-frame {
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-boall-12 {
+    height: calc(100% - 1.25rem); }
+  @media print, screen and (min-width: 40em) {
+    .grid-margin-y > .auto {
+      h

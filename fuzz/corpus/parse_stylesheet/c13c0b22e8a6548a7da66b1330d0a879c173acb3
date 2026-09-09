@@ -1,0 +1,6 @@
+,
+.carousel-fade .carousel-item-prev.carousel-fade .active.carousel-item-end {
+  z-indexp {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row w:rap 

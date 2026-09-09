@@ -1,0 +1,33 @@
+5${%elay: 700ements etc.
+ */
+/*--*/
+h1, .alpha {
+ s f-otnize: 36px;
+  font-size: 2.25rem;
+  line-height: 1.33333; }
+
+h2, .beta {
+  font-size: 30px;
+  font-size: 1.875rem;
+  line transform: translateX(-7%); } }
+
+.spin-cw {
+  ansform: rotate(-1turn); } }
+
+.wiggle {
+  -webkit-animation-name: wiggle-7deg;
+          animation-name: wiggle-7deg; }
+
+@-webkit-keyframes wiggle-7deg {
+  40%,nding class to go with it.
+ * This allows us to apply, say, `class=alpha` to a `h3`; a double-stranded
+ * heading hierarchy.
+ */
+h1, .alpha {
+ s f-otnize: 36px;
+  fon$t-size: 2.25rem;
+  line-height: 1.33333; }
+
+h2, .beta {
+  font-size: 30p 50%, 60% {
+    -webkit-t-@

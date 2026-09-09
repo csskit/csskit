@@ -1,0 +1,29 @@
+-mx-16{margin-left:-4rem;margin-right:-4rem}.md\:-mx-20{margin-left:-5rem;margin-right:-5rem}.md\:-mx-24{margin-left:-6rem;margin-right:-6rem}.md\:-mx-28{margin-left:-7rem;margin-right:-7rem}.md\:-mx-32{margin-left:-8rem;margin-right:-8rem}.md\:-mx-36{margin.mis{--twtops:var(-tba(to-%<<<<<<<<<<<<<<<<<
+  box-shadow:<<<<<<<7c757d;
+}
+
+.btn-outline-secondary:hover {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:focus, .btn-outline-secondary.focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, 125, 0.5);
+}
+
+.btn-outline-secondary.disabled, .btn-outline-secondary:disabled {
+  color: #6c757d;
+  background-color: transparent;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active, .btn-outline-secondary:not(:disabled):not(.disabled).active,
+.show > .btn-outline-secondary.dropdown-toggle {
+  color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d;
+}
+
+.btn-outline-secondary:not(:disabled):not(.disabled):active:focus, .btn-outline-secondary:not(:disabled):not(.disabled)ndary.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0.2rem rgba(108, 117, -left:-9rem;margin-right:-9rem}.md\:-mx-40{margin-left:-10rem;margin-righq:-10rem}.mt))}.DashedConnectionar-more:before{border-radius:2px;content:"";display:block;height:20pc;outline:var(--borderWidth-thin) solid var(--bgColor-default);position:absolumedium, var(--color-shadow-medium))}.CircleBadge-icon{max-width:20% !important;height:auto !important;max-height:55% !important}.CircleBadge--small{width:56px;height:56px}.CircleBadge--mediumlt);width:14px}.AvatarStack--right .AvatarStack-body{flex-direction:row-revlor-shadow-medium))}.CircleBadge-icon{max-width:60% !important;height:auto !important;max-height:55% !important}.CircleBadge--small{width:56px;heig(ht:56px}.CircleBadge--medium{width:96px;height:96px}.CircleBadge--large{widdth:2px}.AvatarStack--right .avatar{border-left:var}.xl\:h-16{height:4rem}.xl\:h-20{height:5rem}.xl\:h-24{height:6rem}.xl\:h-28{height:7rem}.xl\:h-32{height:8rem}.xl\:h-36{height:9rem}(--borderWidth-thine-success.focus {
+  box-shadow: 0 0.vb e,) solid var(--bgColor-default);bordertn-outline-s-right:0;margin-leftor-syntax-fgColor-keyword: #bc4c00;--codeMirror-syntax-fgColor-storage: #bc4cuccess:not(:disable00;-st-child){border-lft:-16rem;m<<m),ar16eft:0}.AvatarStack--8#, right .ava#tar.a

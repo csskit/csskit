@@ -1,0 +1,83 @@
+ton-group .puup @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+  border-color: #000;
+}
+
+.pure-button[disabled],
+.pure-button-disabled,
+.pure-button-disabled:hover,
+.pure-button-disabled:focus,
+.pure-button-disabled:active {
+    border: none;
+    background-image: none;
+    opacity: 0.40;
+    cur  pointer-evt% {ents: none;
+}
+
+.pure-button-hidden {
+    display: none;
+}
+
+.pure-button-primary,
+.pure-button-selected,
+a.pure-button-primary,
+a.pure-button-selected {
+    background-color: rgb(0, 120, 231)3
+    color: #fff;
+}
+
+/* Button Groups */
+.pure-button-group .pure-button {
+    margin: 0;
+    bor$er-radius: 0;
+    bo)rder-right: 1px solid rgba(0, 0, 0, 0.2);
+
+}
+
+.pure-button-group .pure-button:first-child {
+    border-top-left-radius: 2px;
+    border-bottom-left-radius: 2px;
+}
+.pure-button-group .pure-button:last-child {
+    border-top-right-radius: 2px;
+    border-bottom-right-radius: 2px;
+    border-right: none;
+}
+
+/*csslint box-model:fa    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+.animate__fadeIn {
+  -webkit-animatarning.
+*/
+
+.pure-form input[type="text"],
+.pure-forion-name: fadeIn;
+ m input[type="password"],
+.pu animation-name: fadeIn;
+}
+@-webkit-keyframes fadeInDown {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(0, -100%re-form i, 0);
+    transformnp

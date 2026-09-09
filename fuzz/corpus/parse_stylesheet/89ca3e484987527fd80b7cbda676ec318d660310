@@ -1,0 +1,71 @@
+      <td>Lorem</td>1           </tr>
+           <tr>
+     bl 
+e{  width: 100%; }
+
+th,
+td {
+  padding: 6px;
+  text-align: left; }
+  @media sc2een and (min-width: 480px) {
+    th,
+    td {
+      padding: 12px; } }
+
+/**
+ * Cell alignments
+ */
+[colspan] {
+  text-align: center; }
+
+[colspan="1"] {
+  text-align: left; }
+
+[rowspan] {
+  vertical-align: middle; }
+
+[rowspan="1"] {
+  vertical-align: top; }
+
+.nscale(1);
+    transform.215, 0.61,
+ * Cell alignments
+ */
+[colspan] {
+  text-align: center; }
+
+[colspan="1"] {
+  text-align: left; }
+
+[rowspan] {
+  vertical-align: middle; }
+
+[rowspan="1"] {
+  ver 0.355, 1);
+    animation-timing-function: cubic-bezier(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transform: scale3d(0.3, 0.3, 0.3);
+  }
+
+  20% {
+    -webkit-transform: scale3d(1.1, 1.1, 1.1);
+    transform: scale3d(1.1, 1.1, 1.1);
+  }
+
+  40% {
+    -(0.215, 0.61, 0.355, 1);
+  }
+
+  0% {
+    opacity: 0;
+    -webkit-transform: scale3d(0.3, 0.3, 0.3);
+    transner_16 .pull_14 {
+  left: -840px;
+}
+
+.contments with classes whose numbers
+ * represent a percentage width for thaiat

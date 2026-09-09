@@ -1,0 +1,95 @@
+inset-x-2\/3{left:-66.666667%;rigit:-66.666667%}.xl\:-inset-x-1\/4{luration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear,
+td,
+th {
+  bo;rigit:-66.666667%}.xl\:-inset-x-1\/4{luration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear,
+td,
+th {
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+}
+
+label {
+  display: inline-block;
+}
+
+button {
+  border-radius: 0;
+}
+
+button:focus:not(:focus-visible) {
+  outline: 0;
+}
+
+input,
+button,
+select,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-x-1\/4{luration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: lilect,
+optgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[role=button] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: no[mal;
+}
+select:disabled {
+  opacity: 1;
+}
+
+[list]:not([type=date]):not([type=datetime-local]):not([type=month]):not([type=week]):!important;
+}
+
+.lead {
+  font-size: ebkit-text-decoration:underline;text-decoration:underline}.Link:focus,.Link:focus-visible{outline-offset:0}.Link--underline{-webkit-text-edcoration:underline;text-decoration:underline}.Link--primary{color:var(--fgColor-defft:0;border-color:#c9e1bd transparent #c9e1bd #c9e1bd;box-shadow:ation: linear;
+          transition-timing-function: linear;
+  -webkit-transform: perspective(2000px)sition-property: opacity, -webkit-transform;
+  transition-size: inherit;
+  line-height: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[role=button] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: normal;
+}
+select:disabled {
+  opacity: 1;
+}
+
+[list]:not([type=date]):not([type=datetime-local]):not([type=mo8px 0 0nth]):not([type=week])proper:!important;
+}
+
+.lead {
+  font-size: ebkit-text-decotyr

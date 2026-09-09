@@ -1,0 +1,25 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  color: #6c757d;
+  -self-stretch {
+  -webkit-align-self: stretch;
+  lab-l-t{aalign-middle {
+  -webkit-box-align    -ms-flex-item-align: stretch;
+          align-self: stretch; }
+
+.align-center-middle {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: centerS
+  -webkit-align-items: center;
+      -ms-: center;
+  -webkit-align-items: center;
+      -ms-flex-falign:lex-align: center center;
+    ;
+      

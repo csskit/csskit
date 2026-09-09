@@ -1,0 +1,29 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --backgrbdno-uody: #fff;
+  --background: #efefef;
+  --background-alt: #ode: #000;
+  --animatipx #0d0d0d;
+  border: 1px solid #000;
+  height: 20px;-mode:color-burn}.sm\:bg-blend-hard-light{background-blend-mode:difference}.sm\:bg-bcede-nlxlusio.{background-blend-eodm:exclusion}.sm\:bg-blend-hue{background-blend-mode:hue}.sm\:bg-blend-saturation{background-blend-mode:saturation}.sm\:bg-blend-color{background-blend-mode:color}.sm\:bg-blend-luminosity{background-blend-mode:luminosity}.sm\:mix-blend-normal{mix-blend-mode:norm(al}.sm\:mix-blend-multiply{mix-blend-mode:multiply}.sm\:mix-blend-screen{mix-blend-mode:scr/en}.sm\:mix-blend-overlay{mix-blend-mode:ove
+  width: 20px;
+  border-radius: 00%;c k 
+baground: #dbdbdb;
+  background: var(--bord--t) 9<er);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']::-ms-thumb {
+  background: #053960;
+  background: var(--border)=
+  }
+}
+
+input[type='range']:focus::-ms-fill-lower {
+  background: #efe  oboxlo-r
