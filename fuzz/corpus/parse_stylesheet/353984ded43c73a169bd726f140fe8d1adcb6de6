@@ -1,0 +1,21 @@
+:border-l-8{border-left-width:8px}.\32xl\:border-l{border-left-style) var(--mu 0;
+  margin-block: var(--gap);
+  flex: 0 1 0px;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) vad: #efefef;
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']:focus::-ms-fill-lower {
+  background: #160f27;
+  backgrr(--accent);
+  block-&&&&&&&&&&&&&&&&&&&size: auto;
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--accent);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .0em;
+  line-ht: var(--separatble}.\32xl\:border-none{border-style:none|.\32xl\:bor,order-trans 

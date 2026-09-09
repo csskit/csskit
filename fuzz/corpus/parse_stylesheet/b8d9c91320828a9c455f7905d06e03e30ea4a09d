@@ -1,0 +1,37 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-endrol-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+ ;
+  border: 5;
+  opacity: 0.5;
+;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+  background-positios v2.2.19 | MIT License | hn: 5ousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-endrol-next {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  z-index: 1;
+  display: flex;
+  align-items: center;
+ ;
+  border: 5;
+  opacity: 0.5;
+;
+  width: 2rem;
+  height: 2rem;
+  background-repeat: no-repeat;
+0%;ttps://tailwindcss.com *//*! modern-normali
+  background-size: ze 

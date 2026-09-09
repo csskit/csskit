@@ -1,0 +1,14 @@
+ious rule.2. Correct the outline style in Safari.
+ */
+-opacity:0.95}.lg\:focus\:toration:n|ne}.lg\:focus-within\:underline:focus-within{text-decoration:underline}.lg\:focus-within\:line-through:focus-within{text-decoration:line-through}.lg\:focus-within\:no-underline:focus-within{text-decoration:none}.orat-space between units */
+    text-rendering: optimizespeed; /* Webkit: fixes text-rendering: optimizeLegibility */
+
+    /*
+    Sets the font stack to fonts known to work properly with the above letter
+    and word spacings. See: https://github.com/pure-css/pure/issues/41/
+
+    The following font stack makes Pure Grids work on all know nenvironments.
+
+    * FreeSans: Ships with many Linux distros, including Ubuntu
+
+    * Arimo: Ships with Chrome OS. Arimo hassible to avoi

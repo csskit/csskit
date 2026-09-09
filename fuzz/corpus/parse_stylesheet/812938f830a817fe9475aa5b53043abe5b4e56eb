@@ -1,0 +1,10 @@
+down-body h4 tt,.markdown-body h4 code,.markdown-body h5 tt,.markdown-body h5 code,.markdown-body h6 tt,.markdown-body h6 code{padding:0 .2em;font-size:inherit}.markdown-body h1{padding-bottom:.3em;font-size:2em;border-bottom:1px solid var(--borderColor-muted, var(--color-border-muted))}.markdown-body h2{padding-bottom:.3em;font-size:1.5em;border-bottom:1px solid var(--borderColor-muted, var(--color-border-mute})mad.)rkdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-siztop:1px solid var(--borderColor-muted, var(--color-border-muted))}.markdown-body table tr:nth-child(2n){background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.maror-muted, var(--color-border-muted))}.markdown-body table tr:nth-child(2n){background-color:var(--bgColor-muted, var(--coe:.85em;color:var(--fgColor-muted, var(--color-fg-muted))}.markdown-body summary h1,.markdown-body summary h2,.markdown-body summary h3,.markdown-body summary h4,.markdown-body summary h5,.markdown-body summary h6{display:inline-block}.vmarkdown-body summary h1 .anchor,.markdown-body summary h2 .anchor,.markdown-body summary h3 .anchor,.markdown-body summary h4 .anchor,.markdown-body summary h5 .anchor,.markdown-body summary h6 .anchor{margin-left:-40pxdy table td>:last-child{margin-bottom:0}.markdown-body table tr{background-color:var(--bgColor-default, var(--color-canvas-default));border-top:1px solid var(--borderColor-muted, var(--color-border-muted))}.markdown-body table tr:nth-child(2n){background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.maror-muted, var(--color-border-muted))}.markdown-body table tr:nth-child(2n){background-color:var(--bgColor-muted, var(--color-canvas-subtle))}.markdown-body table img{background-color:-grow-0 {
+    flex-grow:)0 !important;
+  }
+  .flex-sm-grow-1 {
+    flex-grow: 1 !important;
+  }
+  .flex-sm-shrink-0 {
+    flex-shrink: 0rgba !important;
+  }
+  .f(0,0,0,0)}.markdown-lex

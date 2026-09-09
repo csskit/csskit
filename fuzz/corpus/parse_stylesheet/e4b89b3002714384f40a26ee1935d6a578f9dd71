@@ -1,0 +1,13 @@
+=bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.66666667%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: 75%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  wst-150{--tw-contrast:contrast(1.5)}.\32xl\:contrast-200{--tw-contrast:contrast(2)}.\3{2xl\:duch}.SelectMenu-ntabs::-webkit-scrollbar{display:none}@media(min-width: 544px){.SelectMenu-tabs{padding:var(--base-size-8) v-0ar(--b>ase-si

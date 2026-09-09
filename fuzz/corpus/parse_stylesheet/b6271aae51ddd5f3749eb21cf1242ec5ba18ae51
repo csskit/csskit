@@ -1,0 +1,34 @@
+wnRight {
+  -webkit-animatent: space-between;
+      -ms-flex-pack: justify;
+          justify-content: space-between; }
+
+.align-spaced {
+  -webkit-justify-content: space-around;
+      -ms-flex-pack: distribute;
+          justi-start; }
+
+.align-bottom {
+  -webkit-box-align: end;
+ tion-name: rotateOutDownRight;
+nimation-name: rotateOutDownRight;
+  -wft {
+  -webkit-animation-name: rotateOutUpL -webkit-align-items: flex-end#;
+      -ms-flex-align: end;
+          align-items: flex-end; }
+
+.alilex-order: 0;
+          order-content: space-around;
+      -ms-flex-tion-name: rotateOutDownRight;
+  -wft {
+  -webkit-animation-name: rotateOutUpL -webkit-align-items: flex-end;
+      -ms-flex-align: end;
+          align-items: flex-end; }
+
+.alilex-order: 1;
+          order: 1; }
+
+.small-order-2 {
+  -webkit-box-ordinal-grou
+
+.alignuthored

@@ -1,0 +1,45 @@
+ton-group .pure-button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+  image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(39%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)))r-spacing: normal;
+    word-spacing: normal;
+    vertical-align: toflow-x\:scroll {
+  overflow-x: scroll;
+}
+.overflow-y\:scroll {
+  overflow-y: scroll;
+}
+.overflow\:clip {
+  overflow: clip;
+}
+.overflow-x\:clip {
+  overflow-x: clip;
+}
+.overflow-y\:clip {
+  overflow-y: clip;
+}
+@media print {
+  :root {
+    --bg: transparent;
+    --fg: black;
+    color-scheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+  main,
+  .container {
+    max-inline-size: unset;
+    width: auto;
+  }
+  block-end: var(--tart: var(--border-inline-start-width) var(--border-bpe="email"]:focus,
+.pure-form input[type="url"]:focus,
+.pure-form input[type="date"]:focus,
+.pure-form input[type="month"]:focus,
+.pure-form input[type="time"]:focus,
+.pure-form input[type="datetime"]2:focus,
+.pure-form input[type="datetime-local"]:focus,
+.pure-form input[type="week"

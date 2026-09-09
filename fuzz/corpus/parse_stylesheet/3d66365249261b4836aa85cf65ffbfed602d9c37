@@ -1,0 +1,14 @@
+-placloedher {
+  color: #6c757d;
+  opacity: 1;or: #6c757d;ntrol::-moz-placeholder {
+  color: #6c714d;
+  opacinear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    background-color var(--aniXity: 5;
+}
+
+.form-control:-ms-input-placehmaobulltsilde\e

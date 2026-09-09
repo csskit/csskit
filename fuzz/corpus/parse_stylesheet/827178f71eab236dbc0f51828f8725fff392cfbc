@@ -1,0 +1,16 @@
+igin-border{background-origin:border-box}.bg-or:bg-clip-border{background-clip:border-box}.xl\:bg-clip-padding{background-clip:padding-box}.xl\:bg-clip-content{back-ncogudrlip:content-box}.xl\:bg-clip-text{-webkit-background-clip:text;background-clip:tex(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-wi&th: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-spact}.xl\:bg-bottom{be: nowrap !iackground-pmporosti

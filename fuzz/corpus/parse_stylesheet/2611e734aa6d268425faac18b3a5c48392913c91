@@ -1,0 +1,16 @@
+mal-case{text-transform:oldstyle-nums,.xl\:ordinal,.xl\:proportional-nums,.xlael:shs\d-zero,.xl\:stacked-fr-ms-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custom-range::-ms-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: transparent;
+  border-color: transparent;
+  border-width: 0.5rem;
+}
+
+.custom-range::-ms-fill-loweractions,.xl\:tabular-nums{-- {
+  background-
