@@ -5,9 +5,7 @@ pub trait CssDiagnostic {
 	fn unexpected_pseudo_element(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_at_rule(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_function(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
-	fn expected_unsigned(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn number_out_of_bounds(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
-	fn expected_int(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn unexpected_zero(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn reserved_keyframe_name(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
 	fn non_negative(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta;
@@ -68,29 +66,11 @@ impl CssDiagnostic for Diagnostic {
 		}
 	}
 
-	fn expected_unsigned(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
-		DiagnosticMeta {
-			code: "ExpectedUnsigned",
-			message: format!("Expected an unsigned number but saw `{}`", diagnostic.start_cursor.token().value()),
-			help: "This number cannot have a + or a -".into(),
-			labels: vec![],
-		}
-	}
-
 	fn number_out_of_bounds(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
 		DiagnosticMeta {
 			code: "NumberOutOfBounds",
 			message: "This number is out of bounds.".into(),
 			help: "This needs to be within the valid range.".into(),
-			labels: vec![],
-		}
-	}
-
-	fn expected_int(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
-		DiagnosticMeta {
-			code: "ExpectedInt",
-			message: "This value isn't allowed to have a fraction, it must be a whole number.".into(),
-			help: "Try using a whole number instead".into(),
 			labels: vec![],
 		}
 	}
