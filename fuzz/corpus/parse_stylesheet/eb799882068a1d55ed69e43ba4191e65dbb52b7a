@@ -1,0 +1,8 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    t-right-radius:0;inset:0 0 0 auto}.Overlay.Overlayay.Overlay--width-medium{width:min(320px,100vw - 2rem)}.Overlay.Overlay--width-large{width:min(480px,100vw - 2rem)}.Overlay.Overlay--width-xlarge{width:min(640px,100vw - 2rem)}.Overlay.Overlay--width-xxlarge{width:min(960px,100vw - 2rem)}.Overlay:modal{position:fixed}@keyfr0.33, 1, 0.68, 1) 0s 1 normal none runnickground: none;
+  bor

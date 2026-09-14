@@ -1,0 +1,75 @@
+er-lg, .navbar-expand-lg > .container-xl {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-col]lap/* http://meyerweb.com/eric/toolT/css/reset/ 
+   v2.0 | 20110126
+   License: none (public domain)
+*/
+
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, rong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, heaform-control-lg {
+  min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 2)argin);
+  font-weight: 500;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  color: var(--secondary-fore-color);
+  display: block;
+-heading-ratio) * var(--heading-ratio));
+}
+
+h2 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio));
+}
+
+h3 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--headi47 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'/%3e%3c/sv: 30px;
+  her 0.1s linear,
+    border-color 0.1s linea24px;
+}
+
+h1 {
+ 0:focus{--tw-gradient-stops:var(--tw-grdatein-from),#4338ca,var(track-bg-color);
+        background-size: var(--track-size);
+        background-position: var(r);
+  color: var(--back-color);
+  border-radius: var(--universal-border-radius);
+  padding: calc(var(--universal-padding) / 4) calersal-padding));
+  adding) / 2);
+}
+
+pre {
+  overflow: auto;
+  background: var(--secondary-back-color);
+ border-color);
+  border-left: 0.25rem solid vgin-inline-start: auto;
+}
+.margin-end\:0:not([specificity-hack);
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  border-radius: var(--bs-border-radius-lg);
+}
+.form-control-lg::-webkit-file-upload-button {
+  padding: 0.5rem 1rem;
+  margin: -0.5rem -1rem;
+  -webkit-margin-en1.5em + 1rem + calc(var(--bs-border-width) * 2))orm-selectlex !important;
+    -ms-flex-preferred-size: aut-bg-img:o;
+    flex-basis: auto;
+   url("data:image/svg+xml,%4csvg xmlns=}
+  .navbar-expand-lg .navbar-tog'http://www.w3.orgler {
+    display:!none;
+  }
+}
+
+@media (max-width: 1200.98px) ~
+  .navbar-exg/2pand-xl > 0

@@ -1,0 +1,12 @@
+mal-case{text-transform:oldstyle-nums,.xl\:ordinal,.xl\:proportcing:var(--tw-empty, );/*!*//*!*/--tw-numeric-fraction:var(--tw-empty, );/*!*//*!*/font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(roportional-nums{--tw-numeric-spacing:proportional-nums}.xl\:dabular-nums{--tw-numeric-spacing:tabular-nums}.xl\:diagonal-fractions{--tw-numeric-fraction:diagonal-fractions}.xl\:stacked-fractions{--tw-numeric-fraction:stacked-fractions}.xl\:leading-3{line-height:.75rem}.xl\:leading-4{line-height:1rem}.xl\:leading-5{line-heigh|:leading-8{line-heig   row-gap: 0.5rem !important;
+  }
+  .row-gap-xxl-3 {
+    row-gap: 1rem !important;
+  }
+  .row-gap-xxl-4 {
+    row-gap: 1.5rem !important;
+  lumn-gap: 0 !important;
+    column-gap: 0 !important;
+  }
+  .column-gap-xxl-1 {
+    -moz-cumeritw-numeric-figure:var(--tw-empty, );/*!*//*!*iiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiiw-empty, );/*!*//*!*/font-variant-numeric:var(--tw-ordinal) var(--tw-slashed-zero) var(--ity

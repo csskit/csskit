@@ -1,0 +1,6 @@
+s\:bg-pink-800:     &::-moz-progress-bar {
+        background: var(--track-bg-color);
+        background-size: var(--tr calc(0px - var(--gap));
+  margin-bottom: 0;
+  padding-inlinight: bolbar {
+        binter;

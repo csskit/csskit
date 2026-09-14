@@ -1,0 +1,6 @@
+:none {
+  border-block: novar(--color-border-muted))}hr::before,.rule::before{display:table;content:""}hr::after,.rule::after{display:table;clear:both;content:""}table{border-spacllapse}td,th{padding:0}button{cursor:pointer;border-radius:0}[hidden][hidden]{display:none !i
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

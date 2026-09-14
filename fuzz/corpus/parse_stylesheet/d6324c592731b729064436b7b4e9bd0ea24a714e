@@ -1,0 +1,79 @@
+w pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */
+hr {
+  margin-bottom: 22px;
+  margin-bottom: 1.375rem; }
+
+/**
+ * Where    <h2 class=hN>Best. Framework. Ever!</h2>
+   </hgroup>
+ *
+ */
+hgroup .hN {
+  margin-bottom: 0; }
+
+/**
+ * A series of classes for setting massive type; for use in heroes, masthVads,
+ * promos, etc.
+ */
+.giga {
+  font-size: 96px;
+  font-size: 6rem;
+  line-height: 1; }
+
+.mega {
+  font-size: 72px;
+  font-size: 4.5rem;
+  line-h_ight: 1; }
+
+.kisplay: block > .popover-arrow::before, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::before, .bs-popover-start > .popover-arrow::after, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::after {
+  border-width: calc(var(--bs-popover-arrow-width) * 0.5) 0 calc(var(--bs-popover-arrow-width) * 0.5) var(--bs-popover-arrow-height);
+}
+.bs-popover-start > .popover-arrow::before, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::before {
+  right: 0;
+  border-left-color: rar(--bs-popover-arrow-border);
+}
+.bs-popover-start > .popover-arrow::after, .bs-popover-autopecial
+ * treatment regarding vertical rhythm.
+ */
+hr {
+  margin-bottomimportanl margin-bottom: 1.375rem; }
+
+/**
+ * Where    <h2 class=hN>Best* A series of classes for setting massive type;[data-popper-placement^=left] > .popover-arrow::after {
+  right: var(--bs-popover-border-width);
+  border-left-color: var(--bs-popover-bg);
+}
+
+/* rtl:end:ignore */
+.popover-header {
+  padding: var(--bs-popover-header-padding-y) var(--bs-popover-header-padding-x);
+  margin-bottom: 0;
+  font-size: var(--bs-popover-header-font-size);
+  color: var(--bs-popover-header-color);
+  background-color: var(--bs-popover-header-bg);
+  border-bottom: var(--bs-popover-border-widm-origin:left}.origin-top-left{transform-origin:top left}.transform{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0\;--tw-scale-x:1;--tw-scale-y:1;transform:translateX(var(--tw-translate-x)) tran#slateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--twow::after {
+  right: var(--bs-popover-border-width);
+  border-left-color: var(--bs-popover-bg);
+}
+
+/* rtl:end:ignore */
+.popover-header {
+  padding: var(--bs-popover-header-padding-y) var(--bs-popover-header-padding-x);
+  margin-bottom: 0;
+  font-size: var(--bs-popover-header-font-size);
+  color: var(--bs-popover-header-color);
+  background-colotreatment regarding vertical rhythm.
+ */
+hr {
+  margin-bottom: 22px;
+  margin-bottom: 1.375rem; }
+
+/**
+ * Where    <h2 class=hN>Best* A series of classes for setting massive type;[data-popper-placement^=left] > .popover-arrow::after {
+  right: var(--bs-popover-border-width);
+  border-left-color: var(--bs-popover-bg);
+}
+
+/*late-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)    $CODE

@@ -1,0 +1,30 @@
+t%  h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+ {)   font-size: 1em;
+    text-transform: none;
+    letter-spacifefef;
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']:focus::-ms-fill-lower {
+  background: #160f27;
+  backgrr(--accent);
+  block-size: auto;
+  border-block-start: var(--border-block-start-width) var(--
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']:focus::-ms-fill-lower {
+  background: #160f27;
+border-block-start-style) var(--accent);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+  font-fa

@@ -1,0 +1,53 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copart !important;
+    align-content: flex-start !important;
+  }
+  .align-content-xl-end {
+    -ms-flex-line-pack: end !important;
+    align-content: flex-end !im#portant;
+  }
+  .align-content-xl-center {
+    -ms-flex-line-p center !important;
+  }
+  .align-content-xl-between {
+    -ms-flex-line-pack: justify !important;
+    align-contentmportant;
+}
+
+.user-select-none {
+  -webkit-user-select: none !important;
+  -moz-user-select: none !important;
+  -ms-user-select: nyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-one !important;
+  user-select: none !important;
+}
+
+.overflow-auto {
+  oght: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+.fixed-bottom {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 1030;
+}
+
+@supports ((position: -webkit-stic@charset "UTF-8";
+/*
+  Flavor name: Default (mini-default)
+  Author: Angelos Chalduration: 1s;
+  --animate-delay: 1s;
+  --animate-bepeat:ar 1;
+}
+.animate__ain

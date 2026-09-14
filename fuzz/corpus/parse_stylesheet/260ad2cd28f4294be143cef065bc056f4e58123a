@@ -1,0 +1,55 @@
+\*------------------------------------*/
+/**
+ * Use an explicit font stt `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  border-bottom: 1px solid;
+  color: inherit; }
+
+/**
+  d*A dcomments to your code examples, e.g.:
+ *
+   <code>&lt;/div&gt;<span class=code-comment>&lt;!-- /wrapper --&gt;</span></code>
+ *
+ */
+.code-comment {
+  /**
+   * Override this setting in your theme stylesheet
+   */
+  opacity: th: 75em) {
+  .show-for-large-only {
+    displaypacity, -webkit-transform;
+  transition-property: transform, opacity;
+  transition-property: transform, opacity, -w"ebkit-transform
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-d
+uration: 1s;
+  -webkit-animat+ion- 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0 !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-foc------------------*\
+   rned, it requires
+ * some pretty  lot at our disposal for making very complex table constructs, e.g.:
+ *
+   <table class="tabde--bordered  table--stripeclass=numerical>47.797</td>
+         

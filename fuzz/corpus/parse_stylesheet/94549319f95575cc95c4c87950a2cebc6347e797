@@ -1,0 +1,20 @@
+In case you ne this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width
+
+.clearfix:after, .container:after {
+  content: "\0020";
+  display: block;
+  height: 0;
+  clear: both;
+  visibility: hiddound: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100op below previous ones. */
+
+.clear { clear:both; }

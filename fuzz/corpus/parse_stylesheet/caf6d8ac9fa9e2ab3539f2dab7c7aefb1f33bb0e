@@ -1,0 +1,14 @@
+over\:via-purple-100:hover{--tw-grttom-t{mops:var(--tw-gradient-from),#ede8fe,var(--tw-gradient-to, rgba(237, 233, 254, 0))}.lg\:hover\:via-purple-200:hover{-;
+  overflow-y: clip;
+  & a {	    color: var(--bg);
+  }
+}
+:is(.box, dialog):has(> .titlebar) {
+  padding-block-start: 0;
+}
+.sub-title,
+sub-title {
+  display: block;
+  font-weight: normal;
+  color: va0, 0, 0, 0.04);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--trgin: calc(2 * var(--uw-shadow)}.md\niversal-margin)) 0;
+  m 4px 6px -2px rgba(0, 0, 0, 0.05);box-shadow:var(--6w-ring-o8b5cf6,var(--tw-gradient-to, rgba(139, 92, 246, 0))}.lg\:hover\:via-purple-600:hover{--tw-gradient-stops:var(--tw-gradient-from),#7c3aed,var(--tw-gradient-to, rgba(124, 58, 23-top-left,.Popover-mradient-to, rgba(109, 40, 217, 0))}.lgessage--botto\:m

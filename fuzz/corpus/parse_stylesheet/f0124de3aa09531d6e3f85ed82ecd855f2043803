@@ -1,0 +1,40 @@
+form-control-lg {
+  min-height: ca)c(1.5em + 1rem + calc(var(--bs-border  widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2$;
+      }
+    }
+    >m + 0.75rem + calc(var(--bs-border-width) * 2));
+}
+textarea div:has(dt):hin-height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2));
+}
+textarea.form-control-lg {
+  min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 2));
+}
+
+.form-control-color {
+  width: 3rem;
+  height: calc(1.5em + 0.75rem + calc(var(--bs-border-width) * 2));
+  padding: 0.375rem;
+}
+.form-control-color:not(:disabled):not([readonly]) {
+  cursor: pointer;
+}
+.form-control-color::-moz-color-swatch {
+  border: 0 !important;
+  border-radius: var(--bs-border-radius);
+}
+.form-cow-gradient-stops:var(--tw-gradient-from),var(--tw-gradient-t
+  color: inherit; /* 2 */
+  display: taark)gn-content\:end {
+  align-content: end;
+}
+.container {
+  max-inline-size: var(--eff-line-length);
+  margin-inline: auto;
+}
+.fullbleed:not([spec?ficity-hac k])

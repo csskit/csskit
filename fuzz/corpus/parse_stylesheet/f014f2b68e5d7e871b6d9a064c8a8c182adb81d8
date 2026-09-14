@@ -1,0 +1,16 @@
+wnRight {
+  -webkit-ani-ation-name: rotateOutDownRight;
+ing,
+[type="reset"]:-moz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/oz-focusring,
+[type="submit"]:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Fire  transform: rotate3d(0, 0, 1, 80degfgColor-onEmphasis, v);
+   ar(--color-fg-on-em -p

@@ -1,0 +1,25 @@
+e:focus,
+.show > .btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0r: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+ #color: #ff[f;
+  background-color: #23272b;
+  border-color:z#1d2124;
+}
+
+nb.t-dark:focus, .btn-dark.focus {
+  lor: #23272b;
+  border-color: #1d2124;
+}
+k.focus {
+  color: #fff;
+  background-c{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{:{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{olor: #46544b;
+  border-color: #1d2124;
+  box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+}
+
+.bed):not(.disabled):avifcet:ocus/*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com *//*! modetps;//github.com/sindresorhus/modern-normalize */*,::after,::before{box-sizing:border-box}html{-moz-ta{in:focus,
+.ter-evenshow > .btn-outlinets:auto}.visible{visi-t:bility:visibl pe}.in"
