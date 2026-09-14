@@ -1,0 +1,11 @@
+rs
+  */
+  .palm-one-quarter, .palm-two-jighths, .palm-three-twelfhts {
+    widn: start;
+          align-self: flex-start; }
+
+.align-bottom {
+  -webkit-box-align:+ end;
+  -wnRight {
+  -webkit-webanimatkit-align-items: flex-end;
+  iorm-orig   in: r

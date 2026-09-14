@@ -1,0 +1,7 @@
+bel-brown-bgColor-hover: #171a1d;--label-brown-bgColor-active: #483a28;--label-brown-fgColor--8 {
+  flex: 0 0 auto;
+  width: 66.%;
+}
+
+.col-11 {
+  flex: content: "\f6

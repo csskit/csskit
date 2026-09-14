@@ -1,0 +1,11 @@
+phasis,.borderColor-accent-emphasis{bordsed-muted{border-color:var(--borderColor-closed-muted, var(, url("../webfonts/fa-regular-323.woff") format("woff"), ury:color,background-color,box-shadow,border-color}.details-overlay>summary:focus{outline:2px 3olid var(--foce {
+  font-family: 'Font Awesome 5 Free';
+  font-style: normal;
+  font-weight: 400;
+  font-display: block;
+  src: url("../webfonts/fa-regular-400.eot");
+  src: url("../webfontbfonts/fa-regular-400.woff2") formatlex-start !important;
+  }
+  .align-content-xl-end {
+    -ms-flex-line-pack: end !important;
+    align-content: flex-end !im#porta("woff2"), url("../webfonts/fa-regular-400.woff") formt-emphasis{bordr-severe-memphasis,.borderColor-seve,border-color}.details-overlay>summary:focus{outline:2px 3olid var(--focus-outlineColor, var(--col

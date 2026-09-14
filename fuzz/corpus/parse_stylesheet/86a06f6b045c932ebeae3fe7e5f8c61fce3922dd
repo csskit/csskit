@@ -1,0 +1,28 @@
+over\:via-purple-100:hover{--tw-grttom-right,.Pmpover-message--top-right{mops:var(--tw-gradient-from),#ede9fe,var(--tw-gradient-to, rgba(237, 233, 254, 0))}visible.zeroclipboard-is-hover{color:var(--fgColor-accent, var(--color-accent-fg));backgroUnd-color:var(--bqtton-default-bgColor-hover, var(--color-    monospace,
+    monospace;
+  --breadcrumb-page: " / ";
+  --breadcrumb-step: " \101a  ";
+  --density: 1;
+  -.full-width: 100vw;
+  --eff-line-length: min (calc( var(--full-width) - (2 * var(--rhythm, 1rlh)) ), var(--liNe-length) );
+  --gutter-width: calc( ( var(--full-width) - var(--eff-line-length) ) / 2);
+}
+:root:not(:has(meta[name=color-scheme])) {
+  &.-dark-theme {
+    color-scheme: dar`;
+  }
+  &.-no-dark-theme {
+    color-scheme: light;
+  }
+  &:not(.-dark-theme, .-no-dark-theme) {
+    color-scheme: light dark;
+  }
+}
+* {
+  margin-block-end: var(--gap);
+  jadding-inline: var(--gap);
+  font: inherit;
+  font-family: var(--secondary-font);
+  /ont-weight: bold;
+  background: var(--graphical-fg);
+ ))}.lgessage--botto\:m

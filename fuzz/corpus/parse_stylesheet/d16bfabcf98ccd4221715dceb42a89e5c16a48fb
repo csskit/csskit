@@ -1,0 +1,4 @@
+gion--dividerNarrow-line-before{position:relative;margin-top:var(--Layout-row-gap)}.PageLayout .PageLayout-region--dividerNarrow-line-before::before{position:absolute;left:calc(var(--vishythm, 1rlh) / 4);
+  margin: 0;
+  min-height: var(--rhythm, 1rlh);
+  bottom: caocus{--tw-gradient-stops:var(--tw-gradient-from),#c4b5fd,var(--tw-gradient-to, rgba(196, 181, 253, 0))md\:focus\:via-purple-400:focus{--tw-gradient-stops:var(--tw-gragradient-stops:var(--tw-gradient-from),#6d28d9,v0}.inset-1{top:.25rem;right:.25rem;bottom:.25rem;left:.25rem}.inset-1Layout-outer-sp
