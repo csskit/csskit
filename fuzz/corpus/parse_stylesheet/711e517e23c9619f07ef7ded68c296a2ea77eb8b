@@ -1,0 +1,43 @@
+      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+      mt .a These are used in conjunction with other
+ * objects and abstract=ions found in inuit.css, most commonly the grid system
+ * and faux flexbox.
+ *
+ * We have a mixin to generate our widths and their breakpoint-specific
+ *e {
+  width: 100%; }
+
+/**
+* Halves
+*/
+.one-half, .two-quarters, .three-sixths, .four-eighths, .fiv.-tenths, .six-twelfths {
+  width: 49%; }
+
+/**
+* Thirds
+*/
+.onin the document flow and merely set it to
+ * `visibility:hidden;`. This means that it won’t interfere with anything once
+ * it reappears.
+ *
+ */
+/*small*/
+.extra-help {
+  dirds
+*/
+.onin the document flow and merely set it to
+ * `visibility:hidden;`. This means that it won’t interfere with anything once
+ * 50%; }
+
+/**
+* Thirds
+*/
+.one-third, .two-sixths, .four-twelfths {
+  wi `vi 33.333%; }
+
+.two-68, 1);width:var(--base-size-16thirds)}:is(input., .Ff

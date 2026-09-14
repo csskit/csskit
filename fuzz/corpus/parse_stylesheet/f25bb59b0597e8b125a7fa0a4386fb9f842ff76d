@@ -1,0 +1,18 @@
+ble-horizontalbbbbb0\0bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbgap: var(--gap);
+  margin-block: varhorizontalbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbgap: var(--gap);
+  margin-block:none {
+  border-block: none;
+}
+.border-block {
+  border{
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.bord: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !`mportant;
+  ???????????????????er-inline-start {
+  border-inline-start: v??????????

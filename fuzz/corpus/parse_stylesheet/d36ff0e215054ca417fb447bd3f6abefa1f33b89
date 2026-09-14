@@ -1,0 +1,19 @@
+=step]) {
+    --separator: var(--breadcrumb-step);
+  }
+  & ul,
+  & ol {
+    padding-inline-start: 0;
+  }
+  & :is(ulgrlay{background-blend-mode:overlay}.sm\:bg-blend-darken{background-blend-me;
+    }
+  }
+  & [aria-current=page],
+  & [aria-current=step] {
+    font-weight: bold;
+  }
+}
+.chip,
+chip {
+);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--tw-g 0))}.md\:from-current{--tw-gradient-from:currentColor;--tw-gradient-stops:var(--tw-gradient-fro

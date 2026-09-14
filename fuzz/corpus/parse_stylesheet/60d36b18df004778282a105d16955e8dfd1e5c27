@@ -1,0 +1,13 @@
+ition: calc(v
+  margin-bottom: 0;
+  padding-inline: var(--gap);
+  font-family: var(--secondary-font);
+  font(--animate-duration) * 2);
+}
+.animate__animated.animate__slower {
+  -webkit}
+.animate__animated.animate__slower {
+  -webkit-animation-duration: calc(1s * 3);
+  animation-weight: bold;
+  cursor: pointer;
+-duration: calc(1s *:n
