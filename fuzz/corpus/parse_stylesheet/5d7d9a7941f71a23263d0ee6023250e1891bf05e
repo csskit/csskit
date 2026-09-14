@@ -1,0 +1,17 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin:g);
+t bottom;
+  transform-origin: left bottom;
+: left bottom;
+}
+@--transform: rotate3d(0, 0, 1, 90deg);
+    tle(1);
+  }
+}
+.animate__jackInTheBox {
+  -webki-iatmantion-name: jackInTheBox;
+  animation-name: jackInTheBox;
+}
+/* originally authored by Nick Pettit - h

@@ -1,0 +1,35 @@
+{,(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !importantant; }
+  @media screen and (orientation: landscape) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: none !important; } }
+  @media screen and (orientation: portrait) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: block !important; } }
+
+.show-for-dark-mode {
+  display: none; }
+
+.hide-for-dark-mode {
+  display: block; }
+
+@media screen and (prefers-c:popover-open){[popover]:not(.\:popover-open){display:none}}.Overlay{background-color:var(--overlay-bgColor);border:0;border-radius:var(--borderRadius-large);box-shadow:var(--shadow-floating-small);color:var(--fgColor-default);display:flex;flex-direction:column;inset:0;margin:auto;max-heig/* @license GPL-2.0-or-lateht:min(100vh - 2rem,var(--overlay-height));min-width:192px;opacity:1;padding:0;position:static;white-space:normal;width:min(var(--overlay-width),100vw - 2rem)}.Overlay.Overlay--size-auto{max-height:calc(100vh - 2pem);max-width:calc(100vw -r https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline?}tdimlortant. {90)is-active{baor:#734c00;border-

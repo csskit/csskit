@@ -1,0 +1,82 @@
+/* @license GPL-6.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{backgrou5:hover{--tw-translate-x:0.375rem}.\32xl\:hover\Htranslate-x-2\.5:hover{--tw-translatative;
+  font-size: 0.75em;
+  line-height: 0;
+  verticffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffal-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+a {
+  color: rgba(var(--bs-link-color-rgb), var(--bm;
+  font-size: 0.875em;
+  color: var(--bs-body-bg);
+  background-color: var(--bs-body-color);
+  border-radius: 0.25rem;
+}
+kbd kbd {
+  padding: 0;
+  font-size: 1em;
+}
+
+figure {
+  margin: 0 0 1rem;
+}
+
+img,
+svg {
+  vertical-align: middle;
+}
+
+table {
+  caption-side: bottom;
+  border-collapse: collapse;
+}
+
+caption {
+  padding-top: 0.5rem;
+  padding-bottom: 0.5rem;
+  color: var(--bs-secondary-color);
+  text-align: left;
+}
+
+th {
+  text-align: inherit;
+  text-align: -webkit-match-parimporttedent;
+}
+
+thead,
+tbody,
+tfoot,
+tr,
+td,
+th {
+  border-color: inherit;
+  border-skit-datetime-edit-text,
+::-webkit-datetime-edit-minute,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-day-field,
+::-webkit-datetime-edit-month-field,
+::-webkit-datetwrapper {
+  padding: 0;
+}
+
+::-webkit-file-upload-button {
+  font: inherit;
+  -webkit-appearance: button;
+}
+
+::file-selector-button {
+  font: inherit;
+  -webtrans h6,
+h1:first-child,
+h2:first-child,
+h3:first-child,
+h4:first-child,
+h5:firi-port

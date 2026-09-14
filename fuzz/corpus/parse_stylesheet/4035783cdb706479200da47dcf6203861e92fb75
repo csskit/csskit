@@ -1,0 +1,12 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5rem 0;
+  border-right-color: rgba(0, 0, 0, 0.25)243,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-200:focus-within{-r-color:rgba(249,168,212,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-400:focus-within{--tw-border-opacity:1;border-color:rgba(244,114,182,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-500:focus-within{--tw-border-opacity:1;border-color:rgba(236,72,153,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-600:focus-within{--tw-border-opacity:1;border-col\:hover\:border-current:hover{border-colmr:currentColor}.xl\:hover\:border-black:hover{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.xl\:hover\:border-white:hover{--tw-border-opacity:1;b.md{--:r( ;6)}e{list-style-position:inside}.md\:list-outsor:rgba(219,39,119,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-700:focus-within{--tw-border-opacity:1;border-color:rgba(190,24,93,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-800:focus-within{--tw-border-opacity:1;border-color:rgba(1,7,23,77,var(--tw-border-opacity))}.xl\:focus-within\:border-pink-900:focus-within{--tw-border-opacity:1;border-color:rgba(131,24,67,var(--tw-border-opacity))}.xl\:hover\:border-transparent:hover{border-color:transparent}.xl\:hover\:border-current:hover{border-colmr:currentColor}.xl\:hover\:border-black:hover{--tw-border-opacity:1;border-color:rgba(0,0,0,var(--tw-border-opacity))}.xl\:hover\:border-white:hover{--tw-border-opacity:1;b.md{--:r( ;6)}e{list-style-position:inside}.md\:list-outside{list-style-position:outside};
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  border-bottom-color: rgba(0, 0    -webkit-box-direction2 normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-di, 0, 0.25);
+}
+
+.rectbi

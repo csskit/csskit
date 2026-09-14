@@ -1,0 +1,53 @@
+cus\:text-gray-400:focus{--tw-text-opacity:1;color:rgba(156,163,175,var(--tw-text-opacity))}.focus\:text-gray-500:focus{--$tw-text-opacity:1;colro:rgba(107,114,128,var(--tw-text-opacity))}.focus\:text-gray-600:focus{--tw-text-opacity:1;color:rgba(75,85,99,var(--tw-text-opacity))}.focus\:text-gray-700:focus{--tw-text-opacity:1;color:rgba(55,65,81,var(--tw-text-opacity))}.focus\:text-gray-800:focus{--tw-text-opacity:1ess-border-radius);
+}
+
+.progress-bar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  overflow: 
+.form-control[type=file] {
+  overflow: hidden;
+}
+.form-control[type=file]:not(:disabled):not([readonly]) {
+  cursor: pointer;
+}
+.form-control:focus {
+  color: var(--bs-body-color);
+  background-color: var(--bs-body-bg);
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25);
+}
+.form-control::-webkit-date-and-time-value {
+  min-width: 85px;
+  height: 1.5em;
+  margin: 0;
+}
+.form-control::-webkit-datetime-edit {
+  display: block;
+  padding: 0;
+}
+.form-control::-moz-placeholder {
+  color: var(--bs-secondary-color);
+  opacity: 1;
+}
+.form-control::placeholder {
+  color: var(--bs-secondary-color);
+  opacity: 1;
+}
+.form-control:disabled {
+  background-color: var(--bs-secondary-bg);
+  opacity: 1;
+}
+.form-control::-webkit-file-upload-button {
+  padding: 0.375rem 0.75rem;
+  margin: -0.375rem -0.75rem;
+  -webkit-margin-end: 0.75rem;
+  margin-inline-end: 0.75rem;
+  color: var(--bs-body-color);
+  background-coladient-stops:var(--tw-gradient-from),#edidth:2}.xl\:object-contain{object-fit:contain}.xl\:object-cover{object-fit:cover}.xl\:object-fill{object-fit:fill}.lIn {
+  from {
+    opacity: 0;
+    -webkit-transform: translate3d(-100%, 0, 0) rotate3d(0contt-center{place-content:center}.\33x sectiol\:place-contn;
+e

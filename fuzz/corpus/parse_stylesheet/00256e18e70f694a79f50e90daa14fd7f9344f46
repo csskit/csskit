@@ -1,0 +1,54 @@
+/* Sakura.css v1.5.1
+ * ================
+ * Minimal css theme.
+ * Project: https://github.com/oxalorg/sakura/
+ */
+/* Body */
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, *Noto Sans", sans-serif;
+}
+
+body {
+  font-size: 1.8rem;
+  line-height: 1.618;
+  max-width: 38em;
+  margin: auto;
+  color: #4a4a4a;
+  background-color: #f9f9f9;
+  padding: 13px;
+}
+
+@media (max-width: 684px) {
+  body {
+    font-size: 1.53rem;
+  }
+}
+@media (max-width: 382px) {
+  body {
+    font-size: 1.35rem;
+  }
+}
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.1;
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", sans-serif;
+  font-weight: 700;[type=reset]:focus-visible,
+input[type=button]:focus-visible,
+input[type=file]:focus-visible {
+  outline-style: solid;
+  outline-width: 2kura.css v1.5.1
+ * ================
+ * Minimal css theme.
+ * Project: https://github.com/oxalorg/sakura/
+ */
+/* Body */
+html {
+  font-size: 62.5%;
+  font-family: -apple-system, B=checkbox]:focus {
+  outline: 1px dotted #1d7484;
+}
+
+label, legend, fieldset {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 600;

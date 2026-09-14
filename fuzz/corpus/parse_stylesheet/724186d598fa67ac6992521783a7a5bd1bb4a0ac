@@ -1,0 +1,5 @@
+:none {
+  border-block: novar(--color-border-muted))}hr::befosar(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

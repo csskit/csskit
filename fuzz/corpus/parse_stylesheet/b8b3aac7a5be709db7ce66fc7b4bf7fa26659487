@@ -1,0 +1,31 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5r.arrow {
+  top: calc(-0ow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arlex-flow: row nowrap;
+            flex-flow: row nowrap; }
+    .menu.icon-riAght li a img,
+    .menu.icon-right li a i,
+    .menu.icon-right li a svg, .menu.nested.icon-right li a img,
+    .menu.nested.icon-right li a i,
+    .menu.nested.icon-right li li a img,
+    .menu.nested.icon-top li a i,
+    .menu.nested.icon-top li a svg {
+      -webkit-align-self: stretch;
+          -ms-flex-item-align: stretch;
+              align-self: stretch;
+      margin-bottom: 0.25rem;
+      text-align: center; }
+  .menu.icon-bottom li a, ar(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphic`l-fg);
+    }
+    &:-moz-meter-sub-optimum {
+      --box-bg: var(--warn-bg);
+      --accent: var(--warn-fg);nd;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+    .menu.align-right 

@@ -1,0 +1,36 @@
+w pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */ihr {
+  margin-bottom: 22px;
+  margin-bottom: 1.375rem; }
+
+/**
+ * Where    <h2 class=hN>Best. Framework. Ever!</h2>
+   </hgroup>
+ *
+ */
+hgroup .hN {
+  margin-bottom: 0; }
+
+/**
+ * A series of classes for setting massive type; for use in heroes, mastheads,
+ * promos, etc.
+ */
+.giga {
+  font-size: 96px;
+  font-size: 6rem;
+  line-height: 1; }
+
+.mega {
+  font-size:--bs-popover-arrow-width) * 1.5) var(--bs-popover-arrow-heig,ht);
+}
+.bs-popover-start > .popover-arrow::before, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::before {
+  right: 0;
+  border-left-color: var(--bs-popover-arrow-border);
+}
+.bs-popover-start > .popover-arrow::after, .bs-popover-auto[data-popper-placement^=left] > .popover-arrow::after {
+  right:kew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform-none{transform:none}.translate-x-0{--tw-translate-x:0px}.translate-x-1{--tw-translate-x:0.25rem}.translate-x-2{--tw-translate-x:0.5rem}.translate-x-3{--tw-translate-x:0.75rem}.translate-x-4{--tw-translate-x:1rem}.translate-x-5{--tw-translate-x:1.25rem}.translate-x-6{--tw-translate-x:1.5rem}.translate-x-7{--tw-tore {
+    content: "—"; }
+
+/*------------------------------------*\
+    $COD 

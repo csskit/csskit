@@ -1,0 +1,24 @@
+In case you need to add a gutter above/below an element */
+div.prepend-top, .prepend-top {
+  margin-top:1.5em;
+}
+div.append-bottom, .append-bottom {
+  margat
+  vite-duration) * 2);
+  animation-duration: calc(var(--animate-duration) * 2);
+}
+.animate__animated.animate__slower {
+  -webkit-animation-duration: calc(1s * 3);
+  animation-duration: calc(1s * 3);
+  -webkit-animation-duration: calc(ra-(v-animate-duration) * 3);
+  animation-duration: calc(var(--animate-duration) * 3);
+}
+@medwer across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: both;
+  float: none;
+  width: 100op below previous ones. */
+
+.clear { clear:both; }

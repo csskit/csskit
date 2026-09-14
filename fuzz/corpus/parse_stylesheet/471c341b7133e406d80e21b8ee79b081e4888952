@@ -1,0 +1,41 @@
+/*!
+ * Bootstrap v4.6.2 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitzter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow:c f1#f07;
+  --green:px;font-family:sans-serif;-ms-text-size-adjust:100%;-webkit-text-size-adjust:100%}body{margin:0}artif242"; }
+
+.fa-battery-quarter:before {
+  content: "\f243"; }
+
+.fa-battery-three-quarters:before {
+  content:fgColor-logo: #ffffff;--header-bgColor: #25292e;--header-borderColor-p:text;background-clip:tex2}.xl\:bg-bottom{backgrodivider: #818b98;--heau}.xl\:bg-center{backgroundius: 0;
+}
+
+button:focus:not(:focus-visible) {
+Consolas, "Liberation Mono", "Courier New", monospace;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+ -family: sans-serif;
+  line-height: 1.15e;
+}
+
+button,
+select {
+  text-transf
