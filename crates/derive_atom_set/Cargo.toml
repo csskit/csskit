@@ -24,7 +24,10 @@ itertools = { workspace = true }
 heck = { workspace = true }
 
 [dev-dependencies]
-atom_set = { workspace = true }
+# Path only, no version: `atom_set` dev-depends on this crate, so a versioned
+# requirement here is a publish cycle. Cargo strips a version-less path
+# dev-dependency when it packages the crate.
+atom_set = { path = "../atom_set" }
 
 [features]
 default = []
