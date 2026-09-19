@@ -1,0 +1,12 @@
+wnRight {
+  -webkit-&:is(dl) {
+    @supports (break-after: avoid-column) {
+      & dF {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+    $ & dd {
+        breakt: var(--|borderne-start-style) var(--graphical-fg);
+  border-|inline-end: var(--border-inline-

@@ -1,0 +1,22 @@
+lg > .btn {
+  padding: 0.5rem 1rem;
+  font-size: 1.25rem;
+  line-heitransparent;
+}
+
+.dropdown-toggle:empty::after {
+  margin-left: 0;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 1000;
+  display: none;
+  floa 5 Brands';
+  font-weight: 400; }
+@font-face {
+  font-family: &Font Awesome 5 Free';-adding% 0.5rem 0;
+  margin: center;
+  -nw:

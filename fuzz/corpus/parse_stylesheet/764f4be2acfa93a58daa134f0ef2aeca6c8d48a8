@@ -1,0 +1,27 @@
+(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 65em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    displa@l$=" 9"] {
+    grid-column-end: 10;
+  }
+  [data-cols\@l="9"] {
+    grid-column: 9;
+  }
+  [data-cols\@lmportant; }
+  .hide-for-ie {
+    display: none !important; } }
+
+.show-for-sticky {
+  display: none; }
+
+.i] {
+    grid-row-end: 3;
+  }
+  [data-rows\@l="2"] {
+    grid-row: 2;
+  }
+  [data-rows\@l^="3s-stuck .show-for-sticky {
+  display: blo c"

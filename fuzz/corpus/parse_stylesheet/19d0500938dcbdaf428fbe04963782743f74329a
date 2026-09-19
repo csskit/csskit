@@ -1,0 +1,15 @@
+
+
+@media (prefers-color-scheme) {
+
+  dialog {
+  color: #dbdbdb;
+  color: var(--text-main);
+  }
+}
+
+@media (prefers-color-scheme: dark) {  font-family: -around-alt);
+  }
+}
+
+dialog > header:first Robo to, backg

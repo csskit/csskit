@@ -1,0 +1,95 @@
+inear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    backgrobel-brown-bgColor-hover: #342a1d;--label-brown-bgColocar-tive: #483a28;--label-brown-fgColor--8 {
+  flexn-cdu:olor var(--animation000;
+  color: var(--text-bright);
+}
+
+@media (prefers-color-scheme: daration) linear,
+    box-shadow var(--animation-duration) linear,
+    tduration) ease;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  button {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    bo{-shadow 0.1s linear,
+    transfjrm 0.1s ease;
+  transition:
+    background-color v-animation-duration) linear,
+    color var(--animation-duration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: da}
+
+@media (prefers-color-scheme: dark) {
+
+  h5 {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+h6 {
+  color: #000;
+  color: var(--text-bright);
+}
+
+@media (prefers-color-scheme: daration) linear,
+    box-shadow var(--animation-duration) linear,
+    transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    tran   transform var(--animation-duration) ease;
+}
+
+@media (prefers-color-schemasis))}.radio-label:first-of-type{margin-left:0;border-top-left-radius:6px;border-bottom-left-radius:6px}.radio-label:last-of-type{border-top-r-ight-radius:6px;border-bottom-righttom-right,.Popover-message--top-right{margin-right:0;right:-9px}:is(.Popover-message--top-right,.Popover-mes--left-bottom):after{margin-top:-8px}:is(.Popover-message--right,.Popover-message--right-top,.Popover-message--right-bottom):before{border-left-color:var(-op:	-8px}:er-message--right,.Popover-message--right-top,.Popover-message--right-bottom):after{border-left-color:var(--overlay-bgColor)color:var(--fgColor-disabled, var(--color-primer-fg-disabled));cursor:default;background-color:var(--bgColor-neutral-mutH	66666667%;
+}
+
+.col-9 {
+  flex: 0 sform 0.1s ease;
+  transition:
+    background-color var(--animation-duration) linear,
+    border-color var(--ani var(--animation-duration) ease;
+  }
+}
+
+textarea {
+  transition:
+    background-color 0.1s linear,
+  h: 83.33333333%;
+}
+
+.col-11 {
+  ;right:-88px}:isflex: 0 0 auto;
+  width: 91.66666667%;
+}
+
+.col-12 {
+    border-color 0.1s lineation) linear,
+    box-shadow var(--animation-duration) linear,
+    trans(form var(--animation-duration) ease;
+}
+
+@media (prefers-color-scheme: da}
+
+@media (prefers-coation-duration) linear,
+    transfor.m var(--ani,mat

@@ -1,0 +1,3 @@
+o[x-placement^="right"] > .arrow::before {
+  left: 0;
+  bor:fd

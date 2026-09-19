@@ -1,0 +1,3 @@
+r{placeoverscroll-behavior-x:none}.sm\:truncate{overflow:hiddenow-ellipsis{text-overflow:ellipsis}.sm\:overflow-clip{text-overflow:clip}.sm\:whitespace-normal{wcursor: not-allowed;
+    opacity: 0.5; }
+  [data-whatinput='mouse'] input:focus ~ .switch-pads{text-overflow:ellipsis}.sm\:overflow-clip{text-overflow:clip}.sm\:whitespace-normal{sm\:rounded-b-lg{border-bottom-right-radius:.5rem;border-bottom-left-ra

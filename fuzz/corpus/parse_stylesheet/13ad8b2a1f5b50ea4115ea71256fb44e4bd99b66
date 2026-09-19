@@ -1,0 +1,13 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--bordergraphical-fg);
+}
+.border-inline-end\:none {
+  border-inline-end: none;
+}
+.bordnline-end\:none {
+  border-inline-end: none;
+}
+.border-inline-end {er-inrderr(--borderg

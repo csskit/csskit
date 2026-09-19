@@ -1,0 +1,28 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.e{list-style-positut1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration:UUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUUanimation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animate-duratio
+);n  animation-duration: var(--animate-duration);
+  -webkit-animation-fill-mode: boo-cols-ction: reverse;
+  -webkith;
+  animation-fill-mode: both;
+}
+.animate__animated.animate__infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteratjon-count: infinite;
+}
+.animate__animated.animate__repeat-1rs
+  */
+  .palm-one-quarter, .palm-two-jighths,  {
+  -webkit-animation-iteration-count: 1;
+  animation-iteration-cot-flunt: 1;
+  -webkit-animation-iteration-count: ex-directiovar(infinn: row-reverse;
+    # -ms-flex-directioni:te; r
