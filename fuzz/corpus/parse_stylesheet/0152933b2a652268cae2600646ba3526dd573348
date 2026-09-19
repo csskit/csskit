@@ -1,0 +1,16 @@
+ackground: var(--progress-back-color);
+  cos: calc(2 * var(--universal-for progress bars and spinners.
+*/
+progress.primary {
+  --progress-fore-color: #1976d2;
+}
+
+progress.secondary {
+  --progress-fore-color: #d32f2f{
+}
+
+progress.tertiary{
+  --progress-fore-color: #154366;
+}
+
+.sp111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='1' y='4' width='22' height='16' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='1' y1='10' x2='23' y2='10'%3E%3C//dth='24' height='24' viewBox='0 0 24 24' fi4' height='24' viewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 14.66V20a2 2 0 

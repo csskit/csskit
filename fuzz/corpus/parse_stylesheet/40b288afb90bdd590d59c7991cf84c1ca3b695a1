@@ -1,0 +1,12 @@
+p {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row w  -webkit-column-count: 3;
+    -moz-column-cout: 3;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-ggroundte;
+  z-index: 10;
+  padding: calc(var(-gination-sm .page-item:first-child .page-link {
+  border-top-left-radius: 0.2rem;
+  border-bottom-l

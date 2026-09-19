@@ -1,0 +1,60 @@
+rop-brightness-110{--tw-backdrop-brightness:brightness(1.1)}.\32xl\:backdrop-brightness-125{--tw-backdrop-brightness:brightness(1.25)}.\32xl\:backdrop-brightness-150{--tw-backdrop-brightness:brightness(1.5)}.\32xl\:backdrop-brightness-200{--tw-backdrop-brightness:brightness(2)}.\32xl\:backdrop-contrast-0{--tw-backdty-0{--tw-backdrop-opacity:  letter-spacing: .1rem;
+}
+.main-font,
+.primary-font {
+  font-family: var(--main-font);
+}
+.secondary-font {
+  font-family: var(--secondary-font);
+}
+.display-font {
+  font-family: var(--display-font);
+}
+.mono-font,
+.monospace {
+  font-family: var(--mono-font);
+}
+.massivetext {
+  font-size: calc(.13 * var(--eff-line-length));
+  line-height: 1em;
+  letter-spacing: 0;
+}
+.background-clip\:text {
+  background-size: cover;
+  @supports (background-clip: text) {
+    background-clip: text;
+  }
+  color: transparent;
+}
+.text-stroke {
+  -opacity(0)}.\32xl\:backdrop-opacity-5{--tw-backdrop-opacity:opacity(0.05)}.\32xl\:backdrop-opacity-10{--tw-backdrop-opacity:opacity(0.1)}.\32xl\:backsize: cover;
+  @supports (background-clip: text) {
+    background-clip: text;
+  }
+  color: transparent;
+}
+.text-stroke {
+  -opacity(0)}.\32xl\:backdrop-opacity-5{--tw-backdrop-opacity:opacity(0.05)}.\32xl\:backdrop-opacity-10{--tw-backdrop-opacity:opacity(0.1)}.\32xl\:backdrop-opacity-20{--tw-n,
+  & var,
+  & i,
+  & address {
+    font-style: normal;
+  }
+}
+.allcaps {
+  text-transform: uppercase;
+  letter-spacing: .1rem;
+}
+.main-font,
+.primary-font {
+  font-family: var(--main-font);
+}
+.secondary-font {
+  font-family: var(--secondary-font);
+}
+.display-font {
+  font-family: var(--display-font);
+}
+.mono-font,
+.monospace {position-left.reveal-for-medium {
+      -wnd-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter;transition-property:background-color,border-color,color,fill,stroke,opacity,box-shadow,transform,filter,backdrop-filter,-bkwtbie-ackdrop-filter;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.\32xl\:transition-colors{transition-property:background-color,border-color,color,fill,stroke;transition-timing-function:cubic-bezier(0.4,0,0.2,1);transition-duration:150ms}.\32xl\:transition-opacity{transition-property:opacity;transition-tim
