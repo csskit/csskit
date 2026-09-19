@@ -7,7 +7,8 @@ use crate::{
 		format_diagnostic_error,
 	},
 };
-use css_lexer::{DynAtomSet, LineIndex, RegisteredAtomSet};
+use atom_set::DynAtomSet;
+use css_lexer::{LineIndex, RegisteredAtomSet};
 use csskit_ast::{Collector, CsskitAtomSet, ResolvedDiagnosticLevel, StatType, sheet::Sheet};
 use csskit_highlight::CssHighlighter;
 use miette::{GraphicalReportHandler, GraphicalTheme, NamedSource, Report};

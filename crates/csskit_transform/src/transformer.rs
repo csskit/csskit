@@ -1,4 +1,5 @@
-use css_lexer::{AtomSet, Cursor, DynAtomSet, KindSet, Lexer, ToSpan};
+use atom_set::{AtomSet, DynAtomSet};
+use css_lexer::{Cursor, KindSet, Lexer, ToSpan};
 use css_parse::Vec;
 use css_parse::{
 	Arena, CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment,

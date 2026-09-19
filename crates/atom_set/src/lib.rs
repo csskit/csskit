@@ -1,3 +1,5 @@
+#![doc = include_str!("../README.md")]
+
 /// Object-safe version of AtomSet for use with trait objects. This trait mirrors the functionality of AtomSet but is
 /// compatible with `dyn` trait objects.
 pub trait DynAtomSet: std::fmt::Debug {
@@ -17,7 +19,7 @@ pub trait DynAtomSet: std::fmt::Debug {
 ///
 /// ```rust
 /// use derive_atom_set::AtomSet;
-/// use css_lexer::AtomSet;
+/// use atom_set::AtomSet;
 ///
 /// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
 /// pub enum Units {
@@ -44,7 +46,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
 	/// # Examples
 	///
 	/// ```rust
-	/// # use css_lexer::{AtomSet};
+	/// # use atom_set::AtomSet;
 	/// use derive_atom_set::*;
 	///
 	/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
@@ -68,7 +70,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
 	/// # Examples
 	///
 	/// ```rust
-	/// # use css_lexer::AtomSet;
+	/// # use atom_set::AtomSet;
 	/// use derive_atom_set::*;
 	///
 	/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
@@ -93,7 +95,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
 	/// # Examples
 	///
 	/// ```rust
-	/// # use css_lexer::AtomSet;
+	/// # use atom_set::AtomSet;
 	/// use derive_atom_set::*;
 	///
 	/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
@@ -114,7 +116,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
 	/// # Examples
 	///
 	/// ```rust
-	/// # use css_lexer::AtomSet;
+	/// # use atom_set::AtomSet;
 	/// use derive_atom_set::*;
 	///
 	/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
@@ -138,7 +140,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
 	/// # Examples
 	///
 	/// ```rust
-	/// # use css_lexer::AtomSet;
+	/// # use atom_set::AtomSet;
 	/// use derive_atom_set::*;
 	///
 	/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
@@ -161,7 +163,7 @@ pub trait AtomSet: Default + std::fmt::Debug {
 	/// # Examples
 	///
 	/// ```rust
-	/// # use css_lexer::AtomSet;
+	/// # use atom_set::AtomSet;
 	/// use derive_atom_set::*;
 	///
 	/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]

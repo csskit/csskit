@@ -1,4 +1,4 @@
-pub use css_lexer::AtomSet;
+pub use atom_set::AtomSet;
 use derive_atom_set::AtomSet as DeriveAtomSet;
 
 /// Every label in the [Encoding Standard], matched ASCII case-insensitively.

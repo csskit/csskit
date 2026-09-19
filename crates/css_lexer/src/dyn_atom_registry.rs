@@ -1,5 +1,5 @@
 use crate::token::ATOM_DYNAMIC_BIT;
-use crate::{AtomSet, DynAtomSet};
+use atom_set::{AtomSet, DynAtomSet};
 use fnv::FnvHashMap;
 use std::fmt::{Debug, Formatter, Result};
 use std::marker::PhantomData;
@@ -45,7 +45,8 @@ impl<T: AtomSet> Atom<T> {
 /// # Example
 ///
 /// ```rust
-/// use css_lexer::{AtomSet, Atom, DynAtomRegistry, RegisteredAtomSet, register_atom_set};
+/// use atom_set::AtomSet;
+/// use css_lexer::{Atom, DynAtomRegistry, RegisteredAtomSet, register_atom_set};
 /// use derive_atom_set::AtomSet as DeriveAtomSet;
 ///
 /// #[derive(Debug, Default, Copy, Clone, PartialEq, DeriveAtomSet)]
@@ -192,7 +193,8 @@ pub trait RegisteredAtomSet: AtomSet + 'static {
 /// # Example
 ///
 /// ```rust
-/// use css_lexer::{AtomSet, RegisteredAtomSet, register_atom_set};
+/// use atom_set::AtomSet;
+/// use css_lexer::{RegisteredAtomSet, register_atom_set};
 /// use derive_atom_set::AtomSet as DeriveAtomSet;
 ///
 /// #[derive(Debug, Default, Copy, Clone, PartialEq, DeriveAtomSet)]

@@ -73,7 +73,6 @@
 //! [2]: https://en.wikipedia.org/wiki/Undefined_behavior
 
 mod associated_whitespace_rules;
-mod atom_set;
 mod comment_style;
 mod constants;
 mod cow;
@@ -97,8 +96,9 @@ mod whitespace_style;
 /// A convenience alias for the most common use case - a Lexer
 pub type BasicLexer<'a> = Lexer<'a>;
 
+use atom_set::DynAtomSet;
+
 pub use associated_whitespace_rules::AssociatedWhitespaceRules;
-pub use atom_set::{AtomSet, DynAtomSet};
 pub use comment_style::CommentStyle;
 pub use cow::CowStr;
 pub type Cursor = source_tools::Cursor<Token>;

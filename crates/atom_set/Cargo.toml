@@ -1,0 +1,19 @@
+[package]
+name = "atom_set"
+version.workspace = true
+authors.workspace = true
+description = "Traits for sets of interned keywords, matched ASCII case-insensitively."
+edition.workspace = true
+homepage.workspace = true
+keywords.workspace = true
+license.workspace = true
+repository.workspace = true
+
+[lints]
+workspace = true
+
+[lib]
+bench = false
+
+[dev-dependencies]
+derive_atom_set = { workspace = true }

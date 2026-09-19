@@ -1,5 +1,5 @@
 use crate::{
-	CommentStyle, DynAtomSet, Feature, Lexer, QuoteStyle, Token, Whitespace,
+	CommentStyle, Feature, Lexer, QuoteStyle, Token, Whitespace,
 	constants::SINGLE_CHAR_TOKENS,
 	scan::{scan_bad_url, scan_ident, scan_line_comment, scan_string, scan_url},
 	small_str_buf::SmallStrBuf,
@@ -13,6 +13,7 @@ use crate::{
 		tables::{ASCII_NEWLINE, ASCII_WHITESPACE},
 	},
 };
+use atom_set::DynAtomSet;
 use bytescan::scan_byte;
 use std::char::REPLACEMENT_CHARACTER;
 

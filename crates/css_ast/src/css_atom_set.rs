@@ -1,4 +1,4 @@
-pub use css_lexer::AtomSet;
+pub use atom_set::AtomSet;
 use derive_atom_set::AtomSet;
 
 /// Atoms used by the CSS AST, extending the lexer's atom set with additional CSS-specific atoms.

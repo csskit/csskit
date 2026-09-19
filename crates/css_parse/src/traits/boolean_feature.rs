@@ -1,5 +1,5 @@
 use super::prelude::*;
-use css_lexer::DynAtomSet;
+use atom_set::DynAtomSet;
 
 /// This trait provides an implementation for parsing a ["Media Feature" in the "Boolean" context][1]. This is
 /// complementary to the other media features: [RangedFeature][crate::RangedFeature] and
@@ -77,6 +77,7 @@ pub trait BooleanFeature<'a>: Sized {
 ///
 /// ```
 /// use css_lexer::*;
+/// use atom_set::AtomSet;
 /// use css_parse::*;
 /// use csskit_derives::*;
 /// use derive_atom_set::*;

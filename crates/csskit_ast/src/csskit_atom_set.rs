@@ -1,5 +1,4 @@
 use css_ast::{NodeId, PropertyGroup, PropertyKind, VendorPrefixes};
-use css_parse::AtomSet;
 use derive_atom_set::AtomSet;
 
 include!(concat!(env!("OUT_DIR"), "/csskit_atom_set.rs"));
@@ -123,6 +122,7 @@ impl CsskitAtomSet {
 #[cfg(test)]
 mod tests {
 	use super::*;
+	use atom_set::AtomSet;
 
 	#[test]
 	fn every_node_tag_maps_to_its_node_id() {

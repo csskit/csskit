@@ -145,13 +145,13 @@ use std::char::REPLACEMENT_CHARACTER;
 /// ### Value Data for [Kind::Ident], [Kind::Function], [Kind::AtKeyword]
 ///
 /// If the [Kind] is [Kind::Ident], [Kind::Function], or [Kind::AtKeyword] then Value Data represents the Ident's "Atom
-/// Data". When lexing one of these tokens the Lexer will pass the string slice to [DynAtomSet][crate::DynAtomSet] and
-/// set this bits accordingly. This allows implementations to provide a [DynAtomSet][crate::DynAtomSet] of interned
-/// strings to improve performance of string comparisons. The `ATOM_DYNAMIC_BIT` can be used to dynamically intern
-/// strings during runtime (this behaviour is abstracted by [DynAtomRegistry][crate::DynAtomRegistry]). This 24-bits
-/// allows for ~16MM unique strings, but with the `ATOM_DYNAMIC_BIT` this becomes ~8MM static atoms and ~8MM dynamic
-/// atoms (very unlikely CSS will ever reach even 10k predefined keywords, and most CSS files will have less than 1000
-/// unique strings).
+/// Data". When lexing one of these tokens the Lexer will pass the string slice to [DynAtomSet][atom_set::DynAtomSet]
+/// and set this bits accordingly. This allows implementations to provide a [DynAtomSet][atom_set::DynAtomSet] of
+/// interned strings to improve performance of string comparisons. The `ATOM_DYNAMIC_BIT` can be used to dynamically
+/// intern strings during runtime (this behaviour is abstracted by [DynAtomRegistry][crate::DynAtomRegistry]). This
+/// 24-bits allows for ~16MM unique strings, but with the `ATOM_DYNAMIC_BIT` this becomes ~8MM static atoms and ~8MM
+/// dynamic atoms (very unlikely CSS will ever reach even 10k predefined keywords, and most CSS files will have less
+/// than 1000 unique strings).
 ///
 /// ### Value Data for [Kind::Number]
 ///
@@ -236,7 +236,7 @@ use std::char::REPLACEMENT_CHARACTER;
 /// encoded differently. Instead of just containing the dimension unit length, which requires consulting the underlying
 /// `&str` to get the actual dimension, it will be used to store an Atom - but only the first 7 bits (the KNOWN
 /// portion), which for an Atom must be a Dimension atom (an assummption made on anything that implements
-/// [AtomSet][crate::AtomSet] is that all dimension units should be stored in the byte values of 1-127, so that they
+/// [AtomSet][atom_set::AtomSet] is that all dimension units should be stored in the byte values of 1-127, so that they
 /// can be encoded in this space). Dimension units _can_ be escape encoded, and so the underlying character data may
 /// differ from the unescaped unit length, as such 5-bit KDUL portion represents character data length, in other words
 /// `KNOWN.len()` may not always equal KDUL`.

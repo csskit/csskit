@@ -19,6 +19,7 @@ bench = false
 [dependencies]
 csskit_proc_macro = { workspace = true }
 css_lexer = { workspace = true }
+atom_set = { workspace = true }
 csskit_arena = { workspace = true, features = ["collections"] }
 source_tools = { workspace = true, features = ["csskit_arena"] }
 

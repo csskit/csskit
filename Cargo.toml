@@ -19,6 +19,7 @@ warnings = { level = "deny", priority = -1 }
 unsafe_code = "deny"
 
 [workspace.dependencies]
+atom_set = { path = "crates/atom_set", version = "0.0.31" }                                                                          # @release
 chromashift = { path = "crates/chromashift", version = "0.0.31" }                                                                    # @release
 css_ast = { path = "crates/css_ast", version = "0.0.31" }                                                                            # @release
 css_feature_data = { path = "crates/css_feature_data", version = "0.0.31" }                                                          # @release
