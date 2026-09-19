@@ -23,22 +23,14 @@ matching.
 
 ## Usage
 
-The macro implements an `AtomSet` trait supplied by the consuming crate. That
-trait must be in scope where the derive is used. `DeriveAtomSet` will impl this
-trait, generating implementations bespoke to your enums discriminants:
+The macro implements the `AtomSet` trait from the [`atom_set`] crate,
+generating implementations bespoke to your enums discriminants:
 
 ```rust
-use derive_atom_set::AtomSet;
+use atom_set::AtomSet;
+use derive_atom_set::AtomSet as DeriveAtomSet;
 
-pub trait AtomSet: Default + std::fmt::Debug {
- fn from_str(keyword: &str) -> Self;
- fn to_str(self) -> &'static str;
- fn len(&self) -> u32;
- fn from_bits(bits: u32) -> Self;
- fn as_bits(&self) -> u32;
-}
-
-#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, AtomSet)]
+#[derive(Debug, Default, Copy, Clone, PartialEq, Eq, DeriveAtomSet)]
 enum Unit {
     #[default]
     Unknown,
@@ -121,6 +113,7 @@ The csskit workspace uses the macro for its full CSS atom set. See
 and the [crate documentation] for API details.
 
 [`CssAtomSet`]: ../css_ast/src/css_atom_set.rs
+[`atom_set`]: https://csskit.rs/docs/internal/atom_set/
 [crate documentation]: https://csskit.rs/docs/internal/derive_atom_set/
 
 ## Part of csskit

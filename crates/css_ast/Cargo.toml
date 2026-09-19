@@ -18,6 +18,7 @@ bench = false
 [dependencies]
 css_parse = { workspace = true }
 css_lexer = { workspace = true }
+atom_set = { workspace = true }
 visit_flow = { workspace = true }
 csskit_proc_macro = { workspace = true }
 csskit_derives = { workspace = true }

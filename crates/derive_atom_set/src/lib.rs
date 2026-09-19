@@ -5,7 +5,7 @@ use syn::{DeriveInput, parse_macro_input};
 
 mod atom_set;
 
-/// Derives an efficient `AtomSet` implementation for interned CSS identifiers.
+/// Derives an efficient `AtomSet` implementation (the trait from the `atom_set` crate) for interned identifiers.
 ///
 /// This proc macro automatically generates optimized string-to-enum matching code.
 ///
@@ -24,17 +24,10 @@ mod atom_set;
 /// # Example
 ///
 /// ```rust
-/// // Provide this trait definition:
-/// trait AtomSet {
-///     fn from_str(keyword: &str) -> Self;
-///     fn to_str(self) -> &'static str;
-///     fn len(&self) -> u32;
-///     fn from_bits(bits: u32) -> Self;
-///     fn as_bits(&self) -> u32;
-/// }
-/// use derive_atom_set::AtomSet;
+/// use atom_set::AtomSet;
+/// use derive_atom_set::AtomSet as DeriveAtomSet;
 ///
-/// #[derive(Debug, Default, Copy, Clone, PartialEq, AtomSet)]
+/// #[derive(Debug, Default, Copy, Clone, PartialEq, DeriveAtomSet)]
 /// pub enum MyAtomSet {
 ///     #[default]
 ///     Unknown, // Must provide an empty default!

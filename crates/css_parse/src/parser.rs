@@ -3,8 +3,9 @@ use crate::{
 	Vec,
 	traits::{Parse, Peek},
 };
+use atom_set::{AtomSet, DynAtomSet};
 use bitmask_enum::bitmask;
-use css_lexer::{AtomSet, DynAtomSet, SourceCursor};
+use css_lexer::SourceCursor;
 use std::mem;
 
 // This is chosen rather arbitrarily, but:

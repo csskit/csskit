@@ -15,6 +15,7 @@ workspace = true
 [dependencies]
 allocator-api2 = { workspace = true }
 css_lexer = { workspace = true }
+atom_set = { workspace = true }
 css_ast = { workspace = true, features = [
 	"chromashift",
 	"visitable",

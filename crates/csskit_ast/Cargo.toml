@@ -18,6 +18,7 @@ bench = false
 [dependencies]
 bitmask-enum = { workspace = true }
 css_lexer = { workspace = true, features = ["dynamic-atoms"] }
+atom_set = { workspace = true }
 css_parse = { workspace = true }
 visit_flow = { workspace = true }
 css_ast = { workspace = true, features = ["visitable"] }

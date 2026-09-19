@@ -329,7 +329,7 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 			#(#match_fns)*
 		}
 
-		impl AtomSet for #ident {
+		impl ::atom_set::AtomSet for #ident {
 			#[inline]
 			fn from_str(s: &str) -> Self {
 				let b = s.as_bytes();

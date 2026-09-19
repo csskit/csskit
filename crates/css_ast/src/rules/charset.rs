@@ -45,7 +45,8 @@ impl CharsetRule {
 	/// ```rust
 	/// # use css_ast::{CharsetRule, CssAtomSet};
 	/// # use css_parse::{Arena, Parser};
-	/// # use css_lexer::{AtomSet, Lexer};
+	/// # use atom_set::AtomSet;
+	/// # use css_lexer::Lexer;
 	/// let source_text = "@charset \"ISO-8859-1\";";
 	/// let alloc = Arena::default();
 	/// let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text);

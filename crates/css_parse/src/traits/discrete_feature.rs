@@ -1,5 +1,5 @@
 use super::prelude::*;
-use css_lexer::DynAtomSet;
+use atom_set::DynAtomSet;
 
 /// This trait provides an implementation for parsing a ["Media Feature" that has a discrete keyword][1]. This is
 /// complementary to the other media features: [BooleanFeature][crate::BooleanFeature] and

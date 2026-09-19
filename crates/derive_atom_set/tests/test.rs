@@ -1,18 +1,7 @@
-use derive_atom_set::AtomSet;
+use atom_set::AtomSet;
+use derive_atom_set::AtomSet as DeriveAtomSet;
 
-// Define the trait that our derive macro implements
-pub trait AtomSet {
-	fn from_str(s: &str) -> Self;
-	fn to_str(self) -> &'static str;
-	fn len(&self) -> u32;
-	fn from_bits(value: u32) -> Self;
-	fn as_bits(&self) -> u32;
-	fn is_empty(&self) -> bool {
-		self.len() == 0
-	}
-}
-
-#[derive(AtomSet, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(DeriveAtomSet, Debug, Default, Clone, Copy, PartialEq, Eq)]
 enum TestAtomSet {
 	#[default]
 	_None,
@@ -91,7 +80,7 @@ fn test() {
 	assert_eq!(TestAtomSet::SuperLongAtomStringForTesting.to_str(), "super-long-atom-string-for-testing");
 }
 
-#[derive(AtomSet, Debug, Clone, Copy, PartialEq, Eq)]
+#[derive(DeriveAtomSet, Debug, Default, Clone, Copy, PartialEq, Eq)]
 enum PunctuationAtomSet {
 	#[default]
 	_None,

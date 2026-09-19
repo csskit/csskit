@@ -23,5 +23,8 @@ proc-macro2 = { workspace = true }
 itertools = { workspace = true }
 heck = { workspace = true }
 
+[dev-dependencies]
+atom_set = { workspace = true }
+
 [features]
 default = []

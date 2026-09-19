@@ -172,6 +172,13 @@ dependencies = [
 ]
 
 [[package]]
+name = "atom_set"
+version = "0.0.31"
+dependencies = [
+ "derive_atom_set",
+]
+
+[[package]]
 name = "atomic-waker"
 version = "1.1.2"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -659,6 +666,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 name = "css_ast"
 version = "0.0.31"
 dependencies = [
+ "atom_set",
  "bitmask-enum",
  "chromashift",
  "console",
@@ -703,6 +711,7 @@ name = "css_lexer"
 version = "0.0.31"
 dependencies = [
  "allocator-api2",
+ "atom_set",
  "bitmask-enum",
  "bytescan",
  "console",
@@ -725,6 +734,7 @@ name = "css_parse"
 version = "0.0.31"
 dependencies = [
  "allocator-api2",
+ "atom_set",
  "bitmask-enum",
  "css_lexer",
  "csskit_arena",
@@ -763,6 +773,7 @@ version = "0.0.31"
 dependencies = [
  "allocator-api2",
  "anstyle",
+ "atom_set",
  "chromashift",
  "clap",
  "css_ast",
@@ -797,6 +808,7 @@ dependencies = [
 name = "csskit_ast"
 version = "0.0.31"
 dependencies = [
+ "atom_set",
  "bitmask-enum",
  "criterion",
  "css_ast",
@@ -944,6 +956,7 @@ dependencies = [
 name = "csskit_transform"
 version = "0.0.31"
 dependencies = [
+ "atom_set",
  "bitmask-enum",
  "chromashift",
  "criterion",
@@ -1066,6 +1079,7 @@ dependencies = [
 name = "derive_atom_set"
 version = "0.0.31"
 dependencies = [
+ "atom_set",
  "heck",
  "itertools 0.15.0",
  "proc-macro2",

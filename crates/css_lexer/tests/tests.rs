@@ -1,6 +1,7 @@
 use allocator_api2::alloc::Global;
-use css_lexer::{AtomSet, CommentStyle, EmptyAtomSet, Feature, Kind, Lexer, QuoteStyle, SourceCursor, SourceOffset};
-use derive_atom_set::AtomSet;
+use atom_set::AtomSet;
+use css_lexer::{CommentStyle, EmptyAtomSet, Feature, Kind, Lexer, QuoteStyle, SourceCursor, SourceOffset};
+use derive_atom_set::AtomSet as DeriveAtomSet;
 
 #[test]
 fn tokenizes_empty() {
@@ -1425,7 +1426,7 @@ fn tokenizes_hex_values_correctly() {
 
 #[test]
 fn tokenizes_atoms_correctly() {
-	#[derive(AtomSet, Debug, Default, PartialEq, Copy, Clone)]
+	#[derive(DeriveAtomSet, Debug, Default, PartialEq, Copy, Clone)]
 	enum CustomAtom {
 		#[default]
 		Empty,
@@ -1472,7 +1473,7 @@ fn tokenizes_atoms_correctly() {
 
 #[test]
 fn tokenizes_escaped_dimensions_into_token_bytes() {
-	#[derive(AtomSet, Debug, Default, PartialEq, Copy, Clone)]
+	#[derive(DeriveAtomSet, Debug, Default, PartialEq, Copy, Clone)]
 	enum CustomAtom {
 		#[default]
 		None,

@@ -138,7 +138,7 @@ mod tests {
 	use super::*;
 	use crate::Arena;
 	use crate::{ComponentValues, Parse, Parser, SimpleBlock, T, ToCursors, assert_semantic_eq, assert_semantic_ne};
-	use css_lexer::{AtomSet, EmptyAtomSet};
+	use css_lexer::EmptyAtomSet;
 
 	fn parse<'a, T: Parse<'a> + ToCursors>(alloc: &'a Arena, source: &'a str) -> T {
 		let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, source);

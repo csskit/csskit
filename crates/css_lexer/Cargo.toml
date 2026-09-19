@@ -18,6 +18,7 @@ bench = false
 
 [dependencies]
 allocator-api2 = { workspace = true }
+atom_set = { workspace = true }
 bitmask-enum = { workspace = true }
 derive_atom_set = { workspace = true }
 bytescan = { workspace = true }

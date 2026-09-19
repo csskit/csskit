@@ -277,9 +277,10 @@
 //! ```
 
 // Re-export commonly used components from css_lexer:
+pub use atom_set::AtomSet;
 pub use css_lexer::{
-	AssociatedWhitespaceRules, AtomSet, Cursor, EmptyAtomSet, Kind, KindSet, PairWise, QuoteStyle, SourceCursor,
-	SourceOffset, Span, ToSpan, Token, Whitespace,
+	AssociatedWhitespaceRules, Cursor, EmptyAtomSet, Kind, KindSet, PairWise, QuoteStyle, SourceCursor, SourceOffset,
+	Span, ToSpan, Token, Whitespace,
 };
 
 mod arena_impls;
