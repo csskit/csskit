@@ -1,3 +1,8 @@
+## [0.0.33] - 2026-09-19
+
+### Derive_atom_set
+- derive_atom_set: Fix devdep version (#1522) ([#1522](https://github.com/csskit/csskit/pull/1522))
+
 ## [0.0.32] - 2026-09-19
 
 ### Atom_set
@@ -24,6 +29,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1482) ([#1482](https://github.com/csskit/csskit/pull/1482))
+- Release v0.0.32 (#1479) ([#1479](https://github.com/csskit/csskit/pull/1479))
 
 
 ### Csskit_derives
