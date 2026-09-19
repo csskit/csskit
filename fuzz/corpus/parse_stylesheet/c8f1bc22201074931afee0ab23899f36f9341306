@@ -1,0 +1,15 @@
+ wrap;
+}
+.flex-wrap\:nowrap {
+  flex-wrap: nowrap;
+}
+.flex-wrap\:wrap-reverse {
+  flex-wrap: wrap-reverse;
+}
+
+/* src/grid.css */
+.grid {
+  display: grid;
+  grid-auto-columns: var(--grid-col-width, 1fr);
+}  grid-auto-rows: var(--grid-row-width, auto);
+  gap: va

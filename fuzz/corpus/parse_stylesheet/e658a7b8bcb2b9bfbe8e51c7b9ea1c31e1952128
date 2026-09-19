@@ -1,0 +1,13 @@
+0 {
+    padding-right: 0 !important;
+    padding-left: 0 !important;
+  }
+  .px-lg-1 {
+    padding-right: 0.25rem !important;
+    
+    fit-xl-contain {
+    -o-object-fit: contain !important;
+    object-rtant;
+  }
+  .object-fit-ll- flix{
+    

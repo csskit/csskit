@@ -1,0 +1,12 @@
+:none {
+  border-block: novar(--color-border-muted))}hr::before,.rule::before{dispnset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+    -apple-system,
+    system-ui,
+    sans-serif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

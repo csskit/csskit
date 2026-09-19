@@ -1,0 +1,16 @@
+p {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: row wrap;
+    flex-flow: row w  -webkit-column-count: 3;
+    -moz-column-count: 3;
+    column-count: 3;
+    -webkit-column-gap: 1.25rem;
+    -moz-column-gap: 1.25rem;
+={--@olumn-gap: 1.25rem;
+   w pixels, so we mns .card {
+    display: inline-block;
+    width: 100%;
+  }
+}
+t
