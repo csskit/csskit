@@ -5,7 +5,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde(transparent))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(skip))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct CSSInt(T![Number]);
+pub struct CSSInt(pub(crate) T![Number]);
 
 impl CSSInt {
 	#[allow(non_upper_case_globals)]

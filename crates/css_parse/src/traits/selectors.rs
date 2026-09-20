@@ -186,3 +186,135 @@ pub trait SelectorComponent<'a>: Sized {
 		}
 	}
 }
+
+/// An `<an+b>` value, such as the `2n+1` of `:nth-child(2n+1)`.
+///
+/// <https://drafts.csswg.org/css-syntax-3/#anb-microsyntax>
+pub trait Nth<'a>: Sized {
+	/// The set of [Kinds][Kind] that can start an `<an+b>` value.
+	const NTH_KINDSET: KindSet = KindSet::new(&[Kind::Number, Kind::Ident, Kind::Dimension, Kind::Delim]);
+
+	/// Returns true if the cursor is the `odd` keyword.
+	fn peek_odd<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone;
+
+	/// Returns true if the cursor is the `even` keyword.
+	fn peek_even<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone;
+
+	fn build_odd(node: T![Ident]) -> Self;
+	fn build_even(node: T![Ident]) -> Self;
+	fn build_integer(node: T![Number]) -> Self;
+	fn build_anb(a: i32, b: i32, cursors: [Cursor; 4]) -> Self;
+
+	/// Returns true if the 1-based `index` is one of the indices selected by `an+b`.
+	fn anb_matches(a: i32, b: i32, index: i32) -> bool {
+		if a == 0 {
+			index == b
+		} else {
+			let diff = index - b;
+			diff % a == 0 && diff / a >= 0
+		}
+	}
+
+	fn parse_nth<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		if p.peek::<T![Number]>() && p.peek_n(1).token().is_int() {
+			return p.parse::<T![Number]>().map(Self::build_integer);
+		} else if p.peek::<T![Ident]>() {
+			let peek_cursor = p.peek_n(1);
+			if Self::peek_odd(p, peek_cursor) {
+				return p.parse::<T![Ident]>().map(Self::build_odd);
+			} else if Self::peek_even(p, peek_cursor) {
+				return p.parse::<T![Ident]>().map(Self::build_even);
+			}
+		}
+
+		let mut c = p.next();
+
+		let mut b_sign = 0;
+		let mut cursors = [c, Cursor::EMPTY, Cursor::EMPTY, Cursor::EMPTY];
+
+		if c == '+' {
+			let skip = p.set_skip(KindSet::NONE);
+			c = p.next();
+			p.set_skip(skip);
+			debug_assert!(cursors[1] == Cursor::EMPTY);
+			cursors[1] = c;
+		}
+		if !matches!(c.token().kind(), Kind::Number | Kind::Dimension | Kind::Ident) {
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?
+		}
+		if c.token().is_float() {
+			Err(Diagnostic::new(c, Diagnostic::expected_int))?
+		}
+
+		let source_cursor = p.to_source_cursor(c);
+		let anb = source_cursor.parse(p.alloc());
+		let mut chars = anb.chars();
+		let mut char = chars.next();
+		let a = if c.token().is_int() {
+			c.token().value() as i32
+		} else if char == Some('-') {
+			char = chars.next();
+			-1
+		} else {
+			1
+		};
+		if !matches!(char, Some('n') | Some('N')) {
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?
+		}
+		let rest = chars.as_str();
+		if rest == "-" {
+			// A trailing `-` on the unit, as in `n-`, `-n-` or `5n-`, makes b negative and leaves its
+			// digits to arrive as a separate unsigned token.
+			b_sign = -1;
+		} else if let Ok(b) = rest.parse::<i32>() {
+			return Ok(Self::build_anb(a, b, cursors));
+		} else if !rest.is_empty() {
+			Err(Diagnostic::new(c, Diagnostic::unexpected))?
+		}
+
+		if b_sign == 0 {
+			if p.peek::<T![+]>() {
+				b_sign = 1;
+				c = p.parse::<T![+]>()?.into();
+				debug_assert!(cursors[2] == Cursor::EMPTY);
+				cursors[2] = c;
+			} else if p.peek::<T![-]>() {
+				b_sign = -1;
+				c = p.parse::<T![-]>()?.into();
+				debug_assert!(cursors[2] == Cursor::EMPTY);
+				cursors[2] = c;
+			}
+		}
+
+		let b = if p.peek::<T![Number]>() {
+			c = p.parse::<T![Number]>()?.into();
+			debug_assert!(cursors[3] == Cursor::EMPTY);
+			if c.token().is_float() {
+				Err(Diagnostic::new(c, Diagnostic::expected_int))?
+			}
+			if c.token().has_sign() && b_sign != 0 {
+				Err(Diagnostic::new(c, Diagnostic::expected_unsigned))?
+			}
+			// If the number has a sign (like +1 or -1), mark it as required for minification
+			if c.token().has_sign() {
+				c = c.map_token(|t| t.with_sign_required());
+			}
+			cursors[3] = c;
+			if b_sign == 0 {
+				b_sign = 1;
+			}
+			let i = c.token().value();
+			(i.abs() as i32) * b_sign
+		} else {
+			0
+		};
+		Ok(Self::build_anb(a, b, cursors))
+	}
+}

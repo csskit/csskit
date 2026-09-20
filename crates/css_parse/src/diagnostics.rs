@@ -136,6 +136,24 @@ impl Diagnostic {
 		}
 	}
 
+	pub fn expected_int(_diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "ExpectedInt",
+			message: "This value isn't allowed to have a fraction, it must be a whole number.".into(),
+			help: "Try using a whole number instead".into(),
+			labels: vec![],
+		}
+	}
+
+	pub fn expected_unsigned(diagnostic: &Diagnostic, _source: &str) -> DiagnosticMeta {
+		DiagnosticMeta {
+			code: "ExpectedUnsigned",
+			message: format!("Expected an unsigned number but saw `{}`", diagnostic.start_cursor.token().value()),
+			help: "This number cannot have a + or a -".into(),
+			labels: vec![],
+		}
+	}
+
 	pub fn unexpected_ident(diagnostic: &Diagnostic, source: &str) -> DiagnosticMeta {
 		let cursor = diagnostic.start_cursor;
 		let start = cursor.offset().0 as usize;

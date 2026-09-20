@@ -87,15 +87,10 @@ pub enum CssAtomSet {
 	Vw,
 	X,
 
-	// n- is _not_ a dimension, but it needs to be in the lower bitset to ensure that if
-	// nth parses a Dimension that `n-` can be compared without hitting a debug_assert!
-	#[atom("n-")]
-	_NDash = 127,
-
 	// ^^^ Only dimensions go above here! ^^^
 
 	// CSS Keywords
-	A,
+	A = 128,
 	A98Rgb,
 	Abbr,
 	Abs,

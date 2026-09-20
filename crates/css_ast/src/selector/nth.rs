@@ -1,7 +1,7 @@
 use super::prelude::*;
 
 use crate::CSSInt;
-use css_parse::{CursorSink, SemanticEq, Span, ToCursors, ToSpan};
+use css_parse::{CursorSink, Nth as NthTrait, SemanticEq, Span, ToCursors, ToSpan};
 
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -16,7 +16,39 @@ pub enum Nth {
 }
 
 impl<'a> Peek<'a> for Nth {
-	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Number, Kind::Ident, Kind::Dimension, Kind::Delim]);
+	const PEEK_KINDSET: KindSet = <Self as NthTrait<'a>>::NTH_KINDSET;
+}
+
+impl<'a> NthTrait<'a> for Nth {
+	fn peek_odd<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		p.to_atom::<CssAtomSet>(c) == CssAtomSet::Odd
+	}
+
+	fn peek_even<I>(p: &Parser<'a, I>, c: Cursor) -> bool
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		p.to_atom::<CssAtomSet>(c) == CssAtomSet::Even
+	}
+
+	fn build_odd(node: T![Ident]) -> Self {
+		Self::Odd(node)
+	}
+
+	fn build_even(node: T![Ident]) -> Self {
+		Self::Even(node)
+	}
+
+	fn build_integer(node: T![Number]) -> Self {
+		Self::Integer(CSSInt(node))
+	}
+
+	fn build_anb(a: i32, b: i32, cursors: [Cursor; 4]) -> Self {
+		Self::Anb(a, b, cursors)
+	}
 }
 
 impl<'a> Parse<'a> for Nth {
@@ -24,103 +56,7 @@ impl<'a> Parse<'a> for Nth {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		if p.peek::<CSSInt>() {
-			return Ok(Self::Integer(p.parse::<CSSInt>()?));
-		} else if p.peek::<T![Ident]>() {
-			let peek_cursor = p.peek_n(1);
-			let atom = p.to_atom::<CssAtomSet>(peek_cursor);
-			if atom == CssAtomSet::Odd {
-				let ident = p.parse::<T![Ident]>()?;
-				return Ok(Self::Odd(ident));
-			} else if atom == CssAtomSet::Even {
-				let ident = p.parse::<T![Ident]>()?;
-				return Ok(Self::Even(ident));
-			}
-		}
-
-		let mut c = p.next();
-
-		let a;
-		let mut b_sign = 0;
-		let mut cursors = [c, Cursor::EMPTY, Cursor::EMPTY, Cursor::EMPTY];
-
-		if c == '+' {
-			let skip = p.set_skip(KindSet::NONE);
-			c = p.next();
-			p.set_skip(skip);
-			debug_assert!(cursors[1] == Cursor::EMPTY);
-			cursors[1] = c;
-		}
-		if !matches!(c.token().kind(), Kind::Number | Kind::Dimension | Kind::Ident) {
-			Err(Diagnostic::new(c, Diagnostic::unexpected))?
-		}
-		if c.token().is_float() {
-			Err(Diagnostic::new(c, Diagnostic::expected_int))?
-		}
-
-		if p.equals_atom(c, &CssAtomSet::_NDash) {
-			b_sign = -1;
-			a = if c.token().is_int() { c.token().value() as i32 } else { 1 };
-		} else {
-			let source_cursor = p.to_source_cursor(c);
-			let anb = source_cursor.parse(p.alloc());
-			let mut chars = anb.chars();
-			let mut char = chars.next();
-			a = if c.token().is_int() {
-				c.token().value() as i32
-			} else if char == Some('-') {
-				char = chars.next();
-				-1
-			} else {
-				1
-			};
-			if !matches!(char, Some('n') | Some('N')) {
-				Err(Diagnostic::new(c, Diagnostic::unexpected))?
-			}
-			if let Ok(b) = chars.as_str().parse::<i32>() {
-				return Ok(Self::Anb(a, b, cursors));
-			} else if !chars.as_str().is_empty() {
-				Err(Diagnostic::new(c, Diagnostic::unexpected))?
-			}
-		}
-
-		if b_sign == 0 {
-			if p.peek::<T![+]>() {
-				b_sign = 1;
-				c = p.parse::<T![+]>()?.into();
-				debug_assert!(cursors[2] == Cursor::EMPTY);
-				cursors[2] = c;
-			} else if p.peek::<T![-]>() {
-				b_sign = -1;
-				c = p.parse::<T![-]>()?.into();
-				debug_assert!(cursors[2] == Cursor::EMPTY);
-				cursors[2] = c;
-			}
-		}
-
-		let b = if p.peek::<T![Number]>() {
-			c = p.parse::<T![Number]>()?.into();
-			debug_assert!(cursors[3] == Cursor::EMPTY);
-			if c.token().is_float() {
-				Err(Diagnostic::new(c, Diagnostic::expected_int))?
-			}
-			if c.token().has_sign() && b_sign != 0 {
-				Err(Diagnostic::new(c, Diagnostic::expected_unsigned))?
-			}
-			// If the number has a sign (like +1 or -1), mark it as required for minification
-			if c.token().has_sign() {
-				c = c.map_token(|t| t.with_sign_required());
-			}
-			cursors[3] = c;
-			if b_sign == 0 {
-				b_sign = 1;
-			}
-			let i = c.token().value();
-			(i.abs() as i32) * b_sign
-		} else {
-			0
-		};
-		Ok(Self::Anb(a, b, cursors))
+		Self::parse_nth(p)
 	}
 }
 
@@ -155,16 +91,7 @@ impl Nth {
 			Self::Odd(_) => index % 2 == 1,
 			Self::Even(_) => index % 2 == 0,
 			Self::Integer(n) => index == i32::from(*n),
-			Self::Anb(a, b, _) => {
-				if *a == 0 {
-					// 0n+b just matches index b
-					index == *b
-				} else {
-					// Check if (index - b) / a is a non-negative integer
-					let diff = index - b;
-					diff % a == 0 && diff / a >= 0
-				}
-			}
+			Self::Anb(a, b, _) => Self::anb_matches(*a, *b, index),
 		}
 	}
 }
@@ -249,6 +176,10 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Nth, "n- 10");
 		assert_parse!(CssAtomSet::ATOMS, Nth, "-n\n- 1");
 		assert_parse!(CssAtomSet::ATOMS, Nth, " 23n\n\n+\n\n123 ");
+		// A `-` closing the unit makes b negative, whether or not a is signed or spelled out.
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-n- 4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "5n- 4");
+		assert_parse!(CssAtomSet::ATOMS, Nth, "-5n- 4");
 	}
 
 	#[test]
