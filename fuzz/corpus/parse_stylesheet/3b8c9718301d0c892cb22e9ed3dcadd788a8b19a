@@ -1,0 +1,58 @@
+\*------------------------------------*/
+/**
+ * Use an explicit font stack to ensure browsers render correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+
+pre mark {
+  background: none;
+  border-bottom: 1px solid;igure > img {
+  display: block; }
+
+/*------------------------------------*\
+    $LISTS
+\*------------------------------------*/
+/**
+ * 0emove vertical spacing from nested lists.
+ */
+li > ul,
+li > ol {
+ absolute;
+  top: 50%;
+  -webkit-transform: tran1;
+  color: rgba(var(--bs-danger-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-light {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-light-rgb), var(--bs-text-opacity)) !important;
+}
+
+.text-dark {
+  --bs-text-opacity: 1;
+  coar(--bs-text-opacity)) !important;
+}
+
+.text-body {
+  --bs-text-opacity: 1;
+  color: rgba(var(--bs-body-color-rgb/li>
+       <li><code>        }</code></li>
+   </ol>
+ *
+ * 1. Make the list look like code.
+ * 2. Give the stli flush numbers with a leading zero.
+ * 3. Make sure lines of code don’t wrap.
+ * 4. Give the code form by forcing the `code` to honour white-space.
+ */
+.line-numbers {
+  font-family: monospace, serif;
+  /* [1] */
+  list-style: decimal-leading-zero inside;
+  /erical>32.210</td>
+               <td>Lorem</td>
+           </tr>
+           <tr>
+               <td>Dolor</td>
+               <td class=numerical>47.797</td>
+         

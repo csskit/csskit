@@ -1,0 +1,18 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) vnline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline7end: var(--bordeimporttanend-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.border-inline-start\:none {
+  border-inline-start: none;
+}
+.border-inline-start {
+  border-inline-start: var(--bofont);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

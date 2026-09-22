@@ -1,0 +1,19 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ *License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(-f:auto}.\32xl\:self-start{align-self:flex-start}.\32xl\:self-end{align-self:flex-end}.\32xl\:self-center{align-self:center}.\32ion-duration: var(--animate-dura], select[readonly] {
+  bn-fill-modeob: th;
+  animat -webkit-animation-iteration-cxl\:self-stretch{align-selFount: infinite;
+  animation:s-

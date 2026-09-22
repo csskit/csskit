@@ -1,0 +1,27 @@
+ c
+   eQ c
+   elemens, use lemens, use the compressase-in-out, border-oz-range-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-radius: 1rem;
+}
+.form-range:disabled {
+  pointer-events: none;
+}
+.form-range:disabled::-webkit-slider-thumb {
+  background-color: var(--bs-secondary-color);
+}
+.form-range:disabled::-moz-range-thumb {5
+  background-color: var(--bs-secondary-color);
+}
+
+.form-floating {
+  position: reloating > .form-control::-moz-placeholder, .form-floating > .form-control-plainteo
+    xt::-moz-placeholder {
+  color: transparent;
+}
+.fr socrirm-

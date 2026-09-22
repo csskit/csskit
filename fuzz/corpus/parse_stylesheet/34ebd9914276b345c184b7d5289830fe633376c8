@@ -1,0 +1,28 @@
+ious rule.2. Correct the outline style in Safari.
+ */
+?
+[type="search"] {
+  -webkit-atpearance: textfi,ld; /* 1 */
+  outline-offset: -2px; /* 2 */
+s: Angelos Chalaris
+  mini.css version: v3.0.1
+*/
+/*
+  Browsers resets and base typographgion--dividerNarrow-lineayout .PageLayout-region--diviy.
+*/
+/* Core module CSS variable definitions */
+:root {
+  --fore-colorU: #111;
+  --secondHelvetica Neue",derNarrow-line-before::before{position:absolute;left:calc(var(--Layout-outer-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:1px;content: Helvetica, sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  font-size: 1rem;
+}
+
+body {
+  margin: 0;
+  color: var(--fore-color);
+  background: var(--back-colo"";background-rco);l

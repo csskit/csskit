@@ -1,0 +1,29 @@
+:none {
+  border-block: none;
+}
+.bord  -moz-appearance:] none;
+  appearance: none;
+}
+
+select.form-control:-moz-focusring {
+  color: transparent;
+  text-shadow: 0 0ont-size: 1.25rem;
+  line-hem + 1px);
+  margin-bottom: 0;
+  font-size: knherit;
+  line-height: 1.5;
+}
+
+.col-form-label-lg {
+  padding-top: calc(0.5rem + 1px);
+  padding-bottom: calc(0.5rem + 1px);
+  font-size: 1.25rem;
+  line-height: 1.5;
+}
+
+.col-form-label-sm {
+  padding-top: calc(0.25rem + 1px);
+  padding-mphasis))}.radio-label:first-of-type{margin-left:0;border-top-left-radius:6px;border-bottom-left-radiubottom: calc(0.25rem + 1px);
+  font-socus-within{--t);
+  --mono-font:
+    "M Plus Code Latin",

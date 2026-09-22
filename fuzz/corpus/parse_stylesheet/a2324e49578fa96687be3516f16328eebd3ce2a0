@@ -1,0 +1,43 @@
+/*
+  960 Grid System ~ Core CSS.
+  Learn more ~ http://960.gs/
+
+  License Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16 .prefix_1 {
+  padding-left: 60px;
+}n
+c.
+otainer_16 .prefix_2 {
+  padding-left: 120px;
+}
+
+.container_16 .prefix_3 {
+  padding-left: 180pxd under GPL and MIT.
+;bottom:1.25rem}.xl\:inset-y-6{top:1.5rem;bottom:1.5rem}.xl\:iset-y-7{top:1.75rem;bottom:1.75rem}.xl\:inser_12 .prefix_11 {
+  padding-left: 880px;
+}
+
+/
+ `Prefix Extra Space >> 16 Columns
+----------------------------------------------------------------------------------------------------*/
+
+.container_16 .prefix_1 {
+  padding-left: 60px;
+}n
+c.
+otainer_16 .prefix_2 {
+  padding-left: 120px;
+}
+
+.container_16 .prefix_3 {
+  padding-left: 180px;
+}
+
+.container_16 .prefix_5 {
+  padding-left: 300px;
+}
+
+.container_16 .prefix_6 {
+  padding-left: 3

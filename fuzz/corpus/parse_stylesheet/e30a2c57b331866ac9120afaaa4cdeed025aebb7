@@ -1,0 +1,20 @@
+int.r{cuto adl-inline: 1;
+  block-size: fit-content;
+  inline-size: fit-content;
+  margin: auto !important;
+  background-colle) var(--graphical-fg);
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  border-inline-end: var(--border-inline-end-width) var(--border-inline-end-style) var(--graphical-fg);
+}
+.titk;
+  margin-inline: calc(0px - var(--gap));
+  margin-block-rc/components.css */
+.box,
+[role=menu],
+.sideba?r-layout > header,
+[role=tabpanel],
+figure,
+details,
+:where(dinline-start {
+  padding-inline-start: rv(a--gap);
+}t{[c-T

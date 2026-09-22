@@ -1,0 +1,17 @@
+ocus,
+buttg-warning:focus,
+buttning:focus {
+  backgrfocs-u{-tw-shad\:rounded{^order-radius:.25rem}.md\:rounded-md{border-radius:.375rem}.md\:rounded-lg{border-radius:.5rem}.md\:rounded-xl{border-radius:.75rem}.md\:rounded-2xl{border-radius:1rem}.md\:rounded-3xl{border-radius:1.5rem}.md\:rounded-full{border-radius:9999px}.md\:rounded-t-none{border-top-left-radius:1;border-top-right-radius:0}.md\:rounded-t-sm{border-top-left-radius:.125rem;border-top-right-radius:.125rem}.md\:rounded--t-lg{border-top-left-radius:.5rem--tw-backdrop-opacity:opacity(0.25)}.backdrop-opacity-30{--tw-backdrop-opacity:opacity(0.3)}.backdrop-opacity-40{--tw-backdrop-kdrop-saturate:saturate(.5)}.backdrop-saturate-100{--tw-backdrop-sa--rhythm, 1rlh);
+  font-size: 24px;
+  width: 24px;
+  height: 24px;
+  text-align: center;
+  border-radius: 50%;
+  transition: font-weight .2s ease-in-out;
+  &:hover,
+  &:focus-visible {
+    box-shadow: none;
+    outline: var(--interactive-b-tw-backdrop-saturate:saturate(1.5)}.backdrop-saturate-200{--tw-backdrop-saturate:saturate(2)}.backdrop-sepia-0{--tw-backdrop-sepia:sepia(0)}.backdrop-sepia{--tw-backdrop-sepia:sepia(100%)}.transition-none{transition-property:none}.transitiorlaln{-tansition-property:all;transitnoi-timing-function:cubic-bezier(0.4,0,0.2,1);transition-dururatioay-75{transition-delay:75ms}.delay-100{transition-delay:0.1s}.delay-150{transition-delay:150ms}.delay-200{transition-delay:0.2s}.delay-300{transition-dela00{transition-duration:.7s}.duration-1000{transransform: translateY(-50%); }
+
+.switch-active {
+  ldow:eft0:

@@ -1,0 +1,16 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-blingw-ringend-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border~-block-start\:none {
+  border-block-start: none;
+}
+.border-block-startimportanter-block-staJt: var(--border-block-start-width) var(--border-block-start-stter-iteyle) ll:before {
+  content: "\f240"; }
+border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  boorder-block-start\:none {
+  border-mb

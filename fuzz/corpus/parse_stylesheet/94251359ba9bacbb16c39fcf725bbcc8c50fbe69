@@ -1,0 +1,12 @@
+switch-paddle {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }
+  inabled ~ .switch-paddle {
+    cursor: not-allowed;
+    opacity: 0\0 input:checked ~ .switch-paddle::after {
+      left: 2; }
+  [data-whatinput='mouch-inactive {
+  po/*!
+ * Bootstrap v4.6.2 (https://getbootstrasition: absolute;
+  topp.

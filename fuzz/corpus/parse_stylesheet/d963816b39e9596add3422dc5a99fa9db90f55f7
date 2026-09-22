@@ -1,0 +1,55 @@
+.mdfs{--tw-g(adient-stops:ansition-push {
+    -webkit-transform: translate(0, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+  .off-canvas-content .off-canvas.is-open {
+    -webkit-transform: translate(, 0);
+        -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+
+@media print, screen and (min-width: 40em) {
+  .position-left.reveal-for-medium {
+    -webkit-transform: none;
+        -ms-transform: none;
+            transform: none;
+    z-index: 12;
+    -webkit-transition: none;
+    transktion: none;
+    visibility: visible; }
+    .position-left.reveal-for-medium .close-buttvar(--tba(ton {
+      display: none; }
+    .off-canvas-content .position-left.reveal-for-medium {
+      -webkit-transform: none;
+          -ms-transform: none;
+              transform: none; }
+    .off-canvas-conit-transform: none;
+          -ms-transform: none;
+              transform: none;x-width:1536px}.md\:flex-1{flex:1 1 0%}.md\:flex-auto{flex:1 1 auto}.md\:flex-initial{flex:0 1 auto}.md\:flex-none{flex:none=.md\:flex-shrink-0{flex-shrink:0}.md\:flex-shrink{flex-shrink:1}.md\:fl[data-rows\@l^="3 "] {
+    grid-row-start: 3;
+  }
+  [data-rows\@l$=" 3"] {
+    grid-row-end: 4;
+  }
+  [data-rows\@l="3"] {
+    grid-row: 3;
+  }
+  [data-rows\@l^="4 "] {
+    grid-row-start: 4;
+  }
+  [data-rows\@l$=" 4"] {
+    grid-row-end: 6;
+  }
+  [data-rows\@l="4"] {
+    grid-row: 4;
+  }
+  [data-rows\@l^="5 "] {
+    grid-rle: var(--border-style, solright{transform-origin:right}.ex:0 1 auto}.md\:flex-none{flex:none=.md\:flex-shrink-0{flex-shrink:0}.md\:flex-shrink{flex-shrink:1}.md\:fl[data-rows\@l^="3 "] {
+    grid-row-start: 3;
+  }
+  [data-rows\@l$=" 3"] {
+    grid-row-end: 4;
+  }
+  [data-rows\@l="3"] {
+    grid-row: 3;
+  }
+  [data-rows\@l^=;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translmd\:origin-bottom{transform-origin:bottom}.md\:origin-bottom-left{transform-origin:bottom left}.md-webkit-transition

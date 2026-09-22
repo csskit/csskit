@@ -1,0 +1,30 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 5;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  ebkit-backdrop-filter:none;backdrop-filter:none}.\32xl\:backdrop-blur-0{--tw-back-tw-drop-shadow:drop-shadow(0 0 #0000)}.\32xl\:grayscale-0{--tw-grayscale:grayscale(0)}.\32xl\:grayscale{--tw-grayscale:grayscale(100%)}.\32xl\:hue-rotate-0{--tw-hue-rotate:hue-rotate(0deg)}.\32xl\:hue-rotate-15{--tw-hue-rotate:hue-rotate(15deg)}.\32xl\:hue-rotate-30{--tw-hue-rotate:hue-rotate(30deg)}.\32xl\:hue-rotate-60{--tw-hue-rotate:tom > .arrow, .bs-pops:2px;background:no-repeat 10px 17px;overflow-wrap:break-wohue-rotate(60deg)}.\32xlY:hue-rotate-90{--tw-hue-rotate:hue-rotate(90deg)}.\32xl\:hue-rotate-180{--tw-huerem}.lg\:right-48{right:12rem}.lg\nt^="bottom"]{
+   margin-top: 0.5rem;
+}
+
+.bs-popover-bottom > .arrow, .bs-pops:2px;background:no-repeat 10px 17px;overflow-wrap:break-word;}[dir="rtl"] .messages{padding-right:35px;padding-left:20px;text-al:right-52{right:13rem}.lg\:right-56{right:14rem$.lg\:r:1;color:rgba(250%;margin:0;}
+.ui-dialog--narrow{max-width:500px;}@media screen and (max-width:600px){.ui-dide{--Layout-sidebar-width:336px}}.Layout.Layout--sidebarPosition-start .Layout-sidebar{grid-column:1}.Layout.Lbs-target], [data-bs-theme=dark].carousel .carousel-inar(--bs-spinner-vertical-align);
+  border-radius: 50%;
+  animation: var(xl\:hue-rotate-30{--tw-hue-ro--bs

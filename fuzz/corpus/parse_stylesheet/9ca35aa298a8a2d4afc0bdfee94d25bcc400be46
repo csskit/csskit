@@ -1,0 +1,13 @@
+switch-pa {
+    background: #1779ba; }
+    input:checked ~ .switch-paddle::after {
+      left: 2.25rem; }
+  input:disabled ~ .switch-pa
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  po/*!
+ * Bohtswitch-paddle {
+    outline: 0;te;
+  topp.

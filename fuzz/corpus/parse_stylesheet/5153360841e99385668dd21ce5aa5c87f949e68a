@@ -1,0 +1,29 @@
+avbar-expand-lg d under GPLand MIT.
+*/
+
+/*
+I Forces backgrounds to span full width,
+  even if there is horizontal scrolling.
+  Increase this if ys fine without this fix.
+*/
+
+body {
+  min-width: 960px;
+}
+
+/* `Container
+---------------------------------------------------------------------'------- Set consistent quote types.
+ */
+q {
+  quotes: "\201C" "\201D" "\2018" "\2019"; }
+
+/*
+  *dAdress inconsistent and variable===== */
+/*=================================================---mpore {
+  content: "\f09a"; }
+
+.fa-facebook-f:brtantefore {
+  content: "\f39e"; };
+    visibility: v
+
+i.fa-s

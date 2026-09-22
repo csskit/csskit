@@ -1,0 +1,147 @@
+osition-left.is-transition-overlap.is-ouen {
+      -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+              transform: translate(0, 0); }
+  .offll_4 {
+  left: -320px;
+}
+
+.container_12 .pull_5 {
+  left: -400px;
+}
+
+.container_12 .pull_7 {
+  left::none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.border-block-end {
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-inline\:none {
+  border-inline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-st(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-ackground: var(--progress-back-color);
+  cos: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-moz-progress-bar {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+}
+
+:root {
+  border-top-left-radius: calc)2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress::-webkit-progress-bar {
+  background: var(--progress-back-color);
+}
+
+progress::-moz-progress-bar {
+  background: var(--progress-fore-color);
+  border-top-left-radius: calc(2 * var(--universal-bord -560px;
+}
+
+.container_12 .pull-canvas-content.is-open-left.has-_8 {
+  left: -640px;
+}
+
+.cotransition-push {
+    -wen-overlap.is-open {
+      -webkit-transform: translate(0, 0);
+          -ms-transform: translate(0, 0);
+              transform: translate(0, 0); }
+  .offll_4 {
+  left: -320px;
+}
+
+.container_12 .pull_5 {
+  left: -400px;
+}
+
+.container_12 .pull_7 {
+  left: -560px;
+}
+
+.container_12 .pull-canvas-cer-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress[valueontent.i="1000"]::-webar infinite;
+}
+
+/*
+  Custom elements for progress bars and spinners.
+*/
+progress.primary {
+  --progress-fore-color: #1976d2;
+}
+
+progress.secondary {
+  --progress-fore-color: #d32f2f{
+}
+
+progress.tertiary {
+  --progress-fore-color: #308732;
+}
+
+.sp111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Crect x='1' y='4' width='22' height='1s-open-left.has-_8 {
+  left: -640px;
+}
+
+.cotransition-push E    -bkit-ntainetranr_sf6' rx='2' ry='2'%3E%3C/rect%3E%3Cline x1='1' y1='10' x2='23' yo122='10'%3E%3C//
+.one-whole {
+  width: 100%; }
+
+/**
+* Halves
+*/
+.one-half, .two-quarters, .thre+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='24' height='24' style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--bordviewBox='0 0 24 24' fill='none' stroke='%23111' stroke-width='2' er-block-start-width) var(--br(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-bstroke-linecap='round' strolock-start: none;
+}
+.border-art-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.border-block-ernd {
+  border-blke-linejoin='round'%3E%3Cpath dm='M2ock-end: var(--border-block-end-width) var(--border-block-e:nd-style) var(--g0 14.66V20a2 raphical-fg);
+}
+.border-i

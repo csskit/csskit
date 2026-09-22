@@ -1,0 +1,9 @@
+er-lg, .navbar-expand-lg > .container-xl {
+    -ms-fleo-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: -ms-flexbox !impop{font-family:monospace;font-size:1em}figure{margin:1em var(--base-size-40)}hr{box-sizing:content-box;height:0;overflow:visible}button,input,select,textarea{font:inherit;margin:0}optgroup{font-weight:var(-in:0 2px;padding:.35em .62%em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:1htntckground-origiar-expand-xln

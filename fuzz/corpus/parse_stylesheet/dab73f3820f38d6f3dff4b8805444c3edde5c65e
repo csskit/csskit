@@ -1,0 +1,12 @@
+media print, screen and (min-width: 64em) {
+  .large-grid-frame {
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-wrap: nowrap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-align: stretch;
+    -webkit-align-items: stretch;
+        -ms-flex-align: stretch;
+            align-itgradient-stops))}.md\:bg-gradient-to-r{background-image:linear-gradient(to right,5rem; }
+  @media print, screen and (sm\:gap-y-48{row-gap:12rem}.sm\:gap-y-52{row-gap:13rem}.sm\:gap-y-56{row-gap:14rem}.sm\:gap-y-60{row-everse)))}.sm\:space-x-32>:not([hidden])~:not([hidden]){--tw-space-x-reverse:0;margin-right:calc(8reen])~:not([hidden]){--tw-space-x-reverse:0;mardin-right:calc(0px * var(--tw-space-x-reverse));margin-left:calc(0px * calc(1 - var(--tw-space-x-reverse)))}.sm\:spece-x-1>:not([hidden])~:not([hidden]){-(-tw-space-x-reverse:0;margin-right:calc(.25rem * var(--tw-space-x-reverse));margin- height: calc(1e0

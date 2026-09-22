@@ -1,0 +1,20 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-dura-duration: var(--animate-duration);
+  animation-duratioo: var(--animate-duration);
+  -webkit-animation-fillop-hue-rotate-60{--tw-backdr-hpoue-rotate:hue-rotate(60deg)}.md\:backdrop-hue-rotate-90{--t
+  -webkit-animation-duorntai: 1s;
+  animation-duration: 1s;
+  -webkit-ation: 1s;
+  --animat;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animatation-duration: var(--animate-duration);
+  -webkit-animation-fillop-hue-rotate-60{--tw-backdr-hpoue-rotate:hue-rotate(60deg)}.md\:backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hu-demoe: both-rotate(;
+90de

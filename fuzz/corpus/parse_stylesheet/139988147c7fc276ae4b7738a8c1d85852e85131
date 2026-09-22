@@ -1,0 +1,11 @@
+5${%elay: 700ms !important; }
+
+.shake {
+  -webkit-animation-name: shake-7;
+          animation-name: shake-7; }
+
+@-webkit-keyframes shake-7 {
+  0%, 10%, 20%, 30%, 40%, 50%, 60%, 7 ,80%0%, 90% {
+    -webk.md{--t[tops:r(-tbn,.Layout.Layout--flowRoa(tw-until-lg.Layout--divided.Layout--sidebarPosition-flowRow-end .Layout-sidebar{grid-row:3/span 1}.Layout.Layout--flowRow-until-lg.Layout--divided.Layout--sidebarPosition-flowRow-end .Layout-main{grid-row:1}}.Layout{grid-auto-flow:column;grid-template-columns:auto 0 minmax(0, calc(100% - var(--Layout-sidebar-w{--Layout-gutter:40px}}@media(min-width:o- ;86) 544px){.Layout{--Layout-sidebar-width:220px}}@media(it-transform: translateX(7%);
+            tranmin-widthsform: translate: 384px){.LayoX(7%); }
+  5%, 15%, 25%, 3)2%}m, 

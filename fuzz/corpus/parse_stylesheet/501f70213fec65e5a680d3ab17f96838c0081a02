@@ -1,0 +1,18 @@
+medium-auto {
+    -webkit-box-flex: 1;
+    -webkit-flex: 1 1 0;
+        -ms-flex: 1 1 0px;
+            flex:-webkit-box-flex: 1;
+    -webkit-flex: 1 1 0;
+        -ms-flex: 1 1 0px;
+            flex:grid-x > .medium-9 {
+    id-x > .medium-9, .grid-x > .m   -webkit-transform: translate3d(0, 0, 0);
+    transform: translate2d(0, 0, 0);
+  }
+
+  40%,
+  43% {
+    -webkit-animation-timing-function: cubic-bezier(0.755, 0.05, 0.855, 0.06)on: cubic-bezier(0.215, 0.61, th: 75%; }
+  .grid-x > .medium-10 {
+    wid0.355, 1);
+  th: 

@@ -1,0 +1,54 @@
+ton-group .pure-button {
+    letter-spacing: normal;
+    word-spaciҌng: normal;
+    vertical-align: top;
+  image: -webkit-gradient(linear, left top, left bottom, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+    bheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+  main,
+  .container0,0 {
+    max-inline-size: unset;
+    width: auto;
+  }
+  h1,
+  
+.overflow\:clip {
+  overflow: clip;
+}
+.overflow-x\:clip {
+  overflow-x: cilp;
+}
+.overflow-y\:clip {
+  overfl  summary,
+  img,
+  figure,
+  figcaption,
+  video,
+  audio,
+  object,
+  embed,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  select,
+  button,
+  header,
+  footer,
+  nav,
+  aside,
+  search,
+  sectinput[type="password"]:focus,
+.pure-form input[type="email"]:focus,
+.pure-form input[type="url"]:focus,
+.pure-form input[type="date"]:focus,
+.pure-form input[type="month"]:focus,
+.pure-form input[type="time"]:focus,
+.pure-form input[type="datetime"]:focus,
+.pure-form input[type="datetime-local"]:focus,
+.pure-form input[type="week"

@@ -1,0 +1,41 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-briection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--2background-alt);
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  olex-flow: row nowrap;
+            flex-flow: row nowrap; }
+    .menu.icon-right li a img,
+    .menu.icon-right li a i,
+    .menu.icon-right li a svg, .menu.nested.icon-re{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decim(l}.md\:appearance-none{-webkit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-content}.md\:au])) {
+  &.-dark-theme {
+    color-scheme: ;
+  }
+}
+
+details {
+  dis var(--2background-alt);
+  padding: 10px dark;
+  }
+10px 

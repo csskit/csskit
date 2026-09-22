@@ -1,5 +1,0 @@
-(--fontStack-monospace, ui-monospace, SFMono-Regular, SF Mono, Menlo, Consolas, Liberation Mono, monospace);color:var(--fgColor-muted, var(--color-fg-muted));word-break:break-all;background-color:var(--bgColor-accent-muted, var(--color-accent-subtle));border-radius:6px}.branch-name .octicon0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34'%3E%3C/path%3E%3Cpolygon points='18 2 22 6 12 16 8 16 8 12 18 2'%3E%3C/polygon%3E%3C/svg%3E");
-}
-
-span.icon-link {
-  ba{margin:1px -2px 0 0;color:var(--fgColor-muted, var(--color-fg-muted))}a.branch-name{color:var(--fgColor-accent, var(--color-accent-fg));background-color:var(--bgCockground-image: url("data:image/slor-accvg+xml,ent-%m3
