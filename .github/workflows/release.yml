@@ -201,11 +201,14 @@ jobs:
       - name: Print packages/ tree
         run: tree packages/
 
+      - name: Set up Crates.io Trusted Publishing
+        uses: rust-lang/crates-io-auth-action@v1
+        id: auth
       - name: Release
         # SECURITY: mise tasks run with privileged secrets. This is safe only
         # because CODEOWNERS (* @keithamus) prevents merging .mise-tasks/
         # changes without explicit review. Do not relax CODEOWNERS.
         run: mise r release-automation
         env:
-          CARGO_REGISTRY_TOKEN: ${{ secrets.CARGO_REGISTRY_TOKEN }}
+          CARGO_REGISTRY_TOKEN: ${{ steps.auth.outputs.token }}
           GH_TOKEN: ${{ secrets.RELEASE_PR_PAT }}
