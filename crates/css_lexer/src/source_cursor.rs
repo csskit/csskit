@@ -1,6 +1,5 @@
 use crate::{
-	AssociatedWhitespaceRules, CommentStyle, CowStr, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan,
-	Token,
+	AssociatedWhitespaceRules, CommentStyle, Cursor, Kind, KindSet, QuoteStyle, SourceOffset, Span, ToSpan, Token,
 	small_str_buf::SmallStrBuf,
 	syntax::{
 		ParseEscape,
@@ -9,6 +8,7 @@ use crate::{
 	},
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
+use csskit_area::CowStr;
 use source_tools::SourceCursor as GenericSourceCursor;
 use std::fmt::{Display, Formatter, Result, Write};
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};

@@ -75,7 +75,6 @@
 mod associated_whitespace_rules;
 mod comment_style;
 mod constants;
-mod cow;
 mod cursor;
 #[cfg(feature = "dynamic-atoms")]
 mod dyn_atom_registry;
@@ -100,7 +99,6 @@ use atom_set::DynAtomSet;
 
 pub use associated_whitespace_rules::AssociatedWhitespaceRules;
 pub use comment_style::CommentStyle;
-pub use cow::CowStr;
 pub type Cursor = source_tools::Cursor<Token>;
 #[cfg(feature = "dynamic-atoms")]
 pub use dyn_atom_registry::{Atom, DynAtomRegistry, RegisteredAtomSet};

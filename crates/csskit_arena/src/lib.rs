@@ -11,6 +11,8 @@ mod arena_box;
 mod arena_string;
 #[cfg(feature = "collections")]
 mod arena_vec;
+#[cfg(feature = "collections")]
+mod cow;
 mod pool;
 #[cfg(feature = "collections")]
 mod raw_vec;
@@ -22,6 +24,8 @@ pub use arena_box::Box;
 pub use arena_string::String;
 #[cfg(feature = "collections")]
 pub use arena_vec::{Drain, IntoIter, Vec};
+#[cfg(feature = "collections")]
+pub use cow::CowStr;
 
 /// Required alignment of the arena region (4 GiB), so that `ptr as u32` equals the byte offset
 /// within the region. Where nothing is reserved or 32-bit targets that already express 4gb, this is `1`.
