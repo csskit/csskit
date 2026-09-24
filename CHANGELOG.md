@@ -1,4 +1,13 @@
+## [0.0.34] - 2026-09-20
+
+### Css_ast
+- css_parse/css_ast: move the <an+b> parse driver into a trait (#1524) ([#1524](https://github.com/csskit/csskit/pull/1524))
+
 ## [0.0.33] - 2026-09-19
+
+### Csskit
+- Release v0.0.33 (#1523) ([#1523](https://github.com/csskit/csskit/pull/1523))
+
 
 ### Derive_atom_set
 - derive_atom_set: Fix devdep version (#1522) ([#1522](https://github.com/csskit/csskit/pull/1522))
