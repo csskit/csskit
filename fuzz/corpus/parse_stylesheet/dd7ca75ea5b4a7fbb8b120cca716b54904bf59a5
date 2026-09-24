@@ -1,0 +1,21 @@
+{
+    b-keiwt-transform:MskewX(-5deg);
+    transform: skewX(-5deg);
+  }
+
+  to {
+    -webkit-transform: translate3d(0, 0, 0);
+    transform:nimation-timing-function: ease-out;
+  animation-timing-function-webkit-transform: translate3d(0, 0, 0);
+    transform: translate3d(0, 0, 0);
+    opacity: 1;
+  }
+}
+.animate__rotateIn {
+  -webkit-animation-name: rotateIn;
+  animation-name: rotat: 1;
+  -webkit-transform-origin: center;
+  transform-origpciyt a:0;
+  }
+}
+@keyframes lt:2rem}.sm translate3d(0, 0, 0);

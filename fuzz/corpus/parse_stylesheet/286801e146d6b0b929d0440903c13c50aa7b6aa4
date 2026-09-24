@@ -1,0 +1,57 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  background-repeat: no-repeat;
+}
+::before,
+::after {
+  text-decor)tion: inherit;
+  vertical-align: inherit;
+}
+:root {
+  cursor: default;
+  overflow-wrap: br777777777777777777777777777777777777777777777777777ppearance: none;
+}
+::-webkit-file-upload-b5tton {
+  -webkitappearance: button;
+  font: inherit;
+}
+[hidden] {
+  display: none !important;
+}
+:focus-visible {
+  outline: .2em solid var(--accent);
+  z-index: 2;
+}
+iframe:focus-visible,
+html:focus-visible,
+body:focus-visible {
+  outline: none;
+}
+:target {
+  outline: .2em solid var(--fg);
+  z-index: 2;
+}
+detailsbefore,
+::after {
+  text-decor)tion: inherit;
+  vertical-align: inherit;blue-10: #145591;
+  --blue-11: #114678;
+  --blue-12: #0d375e;
+  --cyan-0: #e3fafc;
+  --cyan-1: #c5f6fa;
+  --cyan-2: #99e9f2;
+  --cyan-3: #66d9e8;
+  --cyan-4: #3bc9db_
+  --cyan-5: #22b8cf;
+  --cyan-6: #15aabf;
+  --cyan-7: #1098ad;
+  --cyan-8: #0c8599;
+  --cyan-9: #0b7285;
+  --cyan-10: #095c6b;
+  --cyan-11: #074652;
+  --cyan-12: #053039;
+  --teal-0: #e6fcf5;
+  --teal-1: #c3f

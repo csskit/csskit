@@ -1,0 +1,50 @@
+bel-brown-bgColor-hover: #342a1d;--label-brown-bgColor-active: #483a28;--l {
+7%;
+}
+
+.col-9 {
+  flex: 0 0 auto;
+  width: w5%;
+}
+
+.col-10 {
+  flauto;
+  width: 7 h2,OOOOOOOOOOOOOOOOOOumiversal-padding));
+  margin: var(--universal-margin);
+}
+
+/*
+  Definitions for navigation elements.
+*/
+/* Navigation module CSS variable definitions */
+:root {
+  --header-bacimportantont);
+  font-size: .8em;
+  linbled,.btn.disabled,.btn[arie--primary-bsize-4);color:var(--fgColor-muted, var(--color-fg-muted));vertical-a5%;
+}
+
+.col-10 {
+  flex: 0 0 auto;
+  width: 83.33333333%;
+}
+
+.col-1! {
+  flex: 0 0 auto;
+  width: 91lign:text-bottom}.btn .octicon:only-child{margin-right:0}.btn .Counter{margin-adow-inset, var(--color-primer-shadow-inset))}.btn:disabled,.btn.disabled,.btar(--border-inline-start-style) var(--accent);
+  blo.6666666%%%%% {
+  2 {
+  mar}
+
+.er: #bfa77dck-size: auto;
+  Lorder-block-start: var(--border-block-start-width) var(=--border-block-start-style) var(--accent);
+  border-block-end: none;
+  border-inline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(-;-rhythm, 1rlh);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

@@ -1,0 +1,16 @@
+over\:via-purple-100:hover{--tw-grttom-rt-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  -ms-touch-action: none;
+      touch-action: none; }
+
+.slider-fill {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  max-width: 100%;
+  height: 0.5rem;
+  backgrer-color:var(--borderColor-accent-emphasis, val.is-dragging {
+    -webkit-transition-muted{border-color:var(--borderColor-attention-muted, va: alr(--color-attention-muted)) !il 0s 

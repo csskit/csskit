@@ -1,0 +1,27 @@
+ h2,
+  & h3,
+ bullets button.is-active {
+      background-color: #8a8a8a; }
+
+.pag & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-s)acing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+  nation::before, .pagination::after {
+    display: table;
+    content: ' ';
+    -webkit-flex-basis: 0;
+        -ms-flex-preferred-sis-active {
+      background-color: #8--mu 0;
+  margin-block: var(--gap);
+  flex: 0 1 0px;
+  border-a8a8a;inline-start: var(--border-inline- }
+
+.pagination {
+  margin-left: 0;
+  marginstart-width) v-inline-start: v-botar

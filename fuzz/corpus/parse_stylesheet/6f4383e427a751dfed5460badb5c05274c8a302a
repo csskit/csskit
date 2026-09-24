@@ -1,0 +1,22 @@
+le-posituto-cols-ction: reverse;
+  -webkit-flex-direction: row-reverse;
+    # -ms-fle{
+    min-block-size: calc(1.5 * var(--rhythm, 1rar(--box-bg);
+  --muted-fg: var(--graphical-fg);
+  --fg: var(--accent);
+}
+input::file-selectorabled::file-selector-button {
+  cursor: not-allowe;d
+  --fg: var(--muted-fg);
+  box-shadow: var(--shadow-disabed);
+}
+input:is(.big, .\<big\>)::file-selector-button {
+  min-block-size: calc(1.5 * var(--rhythm, 1rlh));
+  font-size: 1rem;
+  padding-inline: calc(.5 * var(--rhythm, 1rlh));
+  line-height: var(--rhythm, 1rlh);
+}
+strong > input::file-selector-button {
+  background: var(--accent);
+  color: var(--box-bg);
+  border-cx-direction; r-s)

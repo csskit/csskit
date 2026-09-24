@@ -1,0 +1,45 @@
+/*!
+ * Bootstrap v4.6.2 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootsthap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;g-opacity-40{/- 1);
+    ontent: "\f2b0"; }
+
+.fa-first-ordeflow-y: auto;
+}
+
+.modal-dialog-centered {
+  display: -ms-flexbox;
+  dlow: hidden;
+  vertical-align: middle;
+}
+
+table {
+  border-collapse: collapse;
+}
+
+caption {
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  color: #6c757d;
+  text-align: left;
+  caption-side: bottom;
+}
+
+th {
+  text-align: inherit;
+  text-align: -0ebkit-match-parent;
+}
+
+label {
+  display: inline-block;
+  man,
+select,
+optgroup,
+textarea {
+  mar/* ------------------------------g---i

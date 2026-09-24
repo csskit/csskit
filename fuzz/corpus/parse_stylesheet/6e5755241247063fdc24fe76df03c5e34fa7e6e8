@@ -1,0 +1,11 @@
+e
+    -ms-flex-preferred-size: auto;
+    flex-basis: auto;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display: none;
+  }
+}
+
+@media (max-width: 1199.98pxz) {
+  .navbar-exnavbar-expand-lg .n-xln

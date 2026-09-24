@@ -1,0 +1,46 @@
+ .input-group-append > .input-group-text,
+.input-grogroup.has-validation > .input-group-append:nth-last-child(n + 3) > .btn,
+.input-group.has-validation > .input-group-append:nth-last-child(n + 3) > .input-group-text,
+.input-group > .input-group-append:last-child > .btn:not(:last-child):not(.dropdowimary-borderColor-rest: #Gf2isabled: #92caff;--button-primary-borderColor-rest: #Gf232826;--button-piml:focus{--tw-]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]]32826;--button-piml:focus{--tw-]]]]]]
+}
+
+.custom-control {
+  position: relative;
+  z-index: 1;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  -webkit-print-color-adjust: exact;
+  color-adjust: l::before {
+  color: #fff;
+  bord:{@
+{@er-color: #007bff;
+  background-color: #007bff;
+}
+
+.custo.custom-control-input[disabled] ~ .custom-control-label, .custom-cor: #e9ecef;
+}
+
+.custom-control-label {
+  position: relative;
+  margin-bottom: 0;
+  vertical-align: top;
+}
+
+.custom-control-label::before {
+  position: absolute;
+  top: 0.25rem;
+  left: -1.5rem;
+  display: block;
+  width: 1rem;
+  height: 1rem;
+  pointer-events: none;
+  content: "";
+  background-color: #fff;
+  border: 1px solid #adb5bd;
+}
+
+.custom-control-label::af
+ter {
+  position: absolute;
+  t

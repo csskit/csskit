@@ -1,0 +1,21 @@
+eOutTopLeft {
+  -webkit-animation-name: fadeOutTopLeft;
+  animation-name: fadeOutTopLeft;
+}
+@-webkit-keyframes fadeOutTopRight {
+  from {
+    opacity: 1;
+    -webbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbkit-transform: translate3d(0, 0, 0);
+    transform translate3d(0, 0, 0);
+  }
+  to {
+    opacity: 0;
+    -wetransform: translate3d(100%, 100%, 0);
+    transform: translate3d(100%, 100%, 0);
+  }
+}
+.animate__fadeOutBottomRight {
+  -webkit-animation-name: fadeOutBottomRight;
+  animation-name: fadeOutBottomRight;
+}
+@-weborder-left-wyle:dotted}.\32xl\:border-double{border-style:double}.\32xorder-l{border-left-wyle:dotted}.\32xl\:border-double{border-style:doutble}.i\32xlo
