@@ -210,7 +210,7 @@ impl ByteClass for NoBytes {
 
 	#[inline(always)]
 	fn mask<S: Simd, V: ByteVector<S>>(self, value: V) -> V::Mask {
-		V::Mask::splat(value.witness(), false)
+		V::Mask::splat(value.token(), false)
 	}
 }
 
@@ -242,8 +242,8 @@ fn scan_vectors<S: Simd, V: ByteVector<S>, C: ByteClass, M: ByteClass>(
 ) -> (usize, bool, bool) {
 	let mut marked = false;
 	let mut offset = 0;
-	#[allow(clippy::chunks_exact_to_as_chunks)] // V::N is a generic const, as_chunks needs generic_const_exprs
-	for chunk in bytes.chunks_exact(V::N) {
+	#[allow(clippy::chunks_exact_to_as_chunks)] // V::LEN is a generic const, as_chunks needs generic_const_exprs
+	for chunk in bytes.chunks_exact(V::LEN) {
 		let value = V::from_slice(simd, chunk);
 		let stop_mask = stop.mask(value).to_bitmask();
 		let mark_mask = mark.mask(value).to_bitmask();
@@ -253,7 +253,7 @@ fn scan_vectors<S: Simd, V: ByteVector<S>, C: ByteClass, M: ByteClass>(
 			return (offset + lane, marked, true);
 		}
 		marked |= mark_mask != 0;
-		offset += V::N;
+		offset += V::LEN;
 	}
 	(offset, marked, false)
 }
@@ -264,7 +264,7 @@ fn scan<S: Simd, C: ByteClass, M: ByteClass>(simd: S, bytes: &[u8], stop: C, mar
 	if stopped {
 		return (offset, marked);
 	}
-	if <S::u8s as SimdBase<S>>::N > <u8x16<S> as SimdBase<S>>::N {
+	if <S::u8s as SimdBase<S>>::LEN > <u8x16<S> as SimdBase<S>>::LEN {
 		let (block, block_marked, stopped) = scan_vectors::<S, u8x16<S>, C, M>(simd, &bytes[offset..], stop, mark);
 		offset += block;
 		marked |= block_marked;
