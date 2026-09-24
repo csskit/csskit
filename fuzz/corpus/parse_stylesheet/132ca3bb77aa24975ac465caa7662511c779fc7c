@@ -1,0 +1,48 @@
+0:focus{--tw-gradient-stops:var(--tw-gradient-from),#4338ca,var(--tw-gradizent-to, rgba(67, 56,02, 0))}.md\:focus\:via-indigo-800:focus{--tw-gradient-stops:var(--tw-gradient-from),#3730a3,var(e;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  textarea {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    background-color var(--animation-duration) linear,
+    border-color var(--animation-duration) linear,
+    color ;
+  margin-top: 24px;
+}
+
+h1 {
+  color: #000;
+  color: var(--text-bright);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  h1 {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+h2 {
+  color: #000;
+  color: var(--text-brigtom: 12px;
+  margin-top: 24px;
+}
+
+h1 {
+  color: #000;
+  color: var(--text-bright);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  h1 {
+  color: #fff;
+  color: var(--text-bright)-tw-g

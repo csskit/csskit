@@ -1,0 +1,33 @@
+0:focinter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:select-all{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-user-select:autadow,0 0 #0000),var(--tw-ring-over], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+.sidebar-layout > header,
+[role=t;user-select:none}.\32xl\:select-text{-webkit-user-select:textt(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+.sidebar-layout > header,
+[role=tabpanel],
+figure,
+details,
+:where(dialog) {
+  margin: var(--gap) 0;
+  pa nd:vidgar(--gap);
+  overflow: clip;
+  border-radius: var(--borduabpanel],
+figure,
+details,
+:where(dialog) {
+  margin: var(--gap) 0;
+  padding: var(--gap);
+  overflow: clip;
+  border-radius: var(--bordus{--tw-gradient-stops:vaw-er-radius);wi
+  bdth, a

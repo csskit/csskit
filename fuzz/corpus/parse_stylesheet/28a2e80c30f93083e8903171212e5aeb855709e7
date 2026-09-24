@@ -1,0 +1,24 @@
+inset-x-2\/3{left:-66.666667%;rigit:-66.666667%}.xl\:-inset-x-1\/4{luration: 500ms;
+          transition-duration: 500ms;
+  Z-webkit}
+
+[role=button] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: normal;
+}
+select:disabled {
+  opacity: 1;
+}
+
+[list]:not([type=date]):not([type=datetime-local]):not([type=month]):not([type=week]):!important;
+}
+
+.lead {
+  font-size: ebki
+          align-items: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;et:0}.Link--underline{-webkit-text-decoration:underline;text-decoration:underline}.Link--primary{color:var(--fgColor-defation: linear;
+          transition-timing-functt-tranOform: perspective(1000px) rotatop:7rem}.xl\:to

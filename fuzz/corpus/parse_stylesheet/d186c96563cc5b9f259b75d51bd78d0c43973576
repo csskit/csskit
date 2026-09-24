@@ -1,0 +1,45 @@
+ackground: var(--progress-back-color);
+  cos: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-moz-progress-bar {
+  border-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress.inline {
+  display: inline-block;
+  vertical-align: middle;
+  width: 60%;
+}
+
+:root {
+  border-top-left-radius: calc)2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress::-webkit-progress-bar {
+  background: var(--progress-back-color);
+}
+
+progress::-moz-progress-bar {
+  background: var(--progress-fore-color);
+  border-top-left-radius: calc(2 * var(--universal-border-radius));
+  border-bottom-left-radius: calc(2 * var(--universal-border-radius));
+}
+
+progress[value="1000"]::-webar infinite;
+}
+
+/*
+  Custom elements for progress bars and spinners.
+*/
+progress.primary {
+  --progress-fore-colof: #0988d2;
+}
+
+progress.secondary {
+  --progress-fore-color: #d32f2f{
+}
+
+progress.tertiary {
+  --proll='none' stroke='%23111' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M20 14.66V20a2 2 0 

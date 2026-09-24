@@ -1,0 +1,74 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-tqrta: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+.border-block-end\:none {
+  border-block-end: none;
+}
+.bo/*!
+ * Font Awesome Free 5.15.4 by @fontapesome - https://fontawesome.com
+ * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
+ */
+.fa,
+.fas,
+.far,
+.fal,
+.fad,
+.fab {
+  -moz-osx-font-smoothing: grayscale;
+  -webkit-font-smoothing: antialiased;
+  display: inline-block;
+  font-style: normal;
+  font-variant: normal;
+  text-rendering: auto;
+  line-height: 1; }
+
+.fa-lg {
+  font-size: 1.33333em;
+  line-height: 0.75em;
+  vertical-align: -.0667em; }
+
+.fa-xs {
+  font-size: .75em; }
+
+.fa-sm {
+  font-size: .875em; }
+
+.fa-1x {
+  font-size: 1em; }
+
+.fa-2x {
+  font-size: 2em; }
+
+.fa-3x {
+  font-size: 3em; }
+
+.f.fa-rotate-90 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg); }
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXI      focus\:to-purple-400:focus{--tw-gradient-to:#a78bfa}.md\:focus\:to-purple-500:focus{--tw-gradient-to:#8b5cf6}.md\:focus\:to-purple-600:focus{--tw-gradient-to:#7c3aed}.md\:focus\:to-purple-700:focus{--tw-gradient-to:#6d28d9}.md\:focus\:to-purple-800:focus{--tw-gradient-to:#5b21b6}.md\:focus\:to-purple-900:focus{--tw-gradient-to:#4c1d95}.md\:focus\:to-pink-50:focus{--tw-gradient-to:#fdf2f8}.md\:focus\:to-pink-100:focus{--tw-gradient-to:#fce7f3}.md\:focus\:to-pink-200:focus{--tw-gradient-to:#fbcfe8}.md\:focus\:to-pink-300:focus{--tw-gradient-to:#f9a8d4}.md\:focus\:to-pink-400:focus{--tw-gradient-to:#f472b6}.md\:focus\:to-pink-500:focus{--tw-gradient-to:#ec4899}.md\:focus\:to-pink-600:focus{--tw-gradient-to:#db2777}.md\:focus\:to-pink-700:focus{--tw-gradient-to:#be185d}.md\:focus\:to-pink-800:focus{--tw-gradient-to:#9d174:to-green-600:focus{--tw-gradient-to:#059669}.md\:focus\:to-green-700:focus{--tw-gradient-to:#047857}.md\:focus\:rple-300:focus{--tw-gradient-to:#c4b5fd}.md\:focus\:to-purple-400:focus{--tw-gradient-to:#a78bfa}.md\:focus\:to-purple-500:focus{--tw-gradient-to:#8b5cf6}.md\:focus\:to-purple-600:focus{--tw-gradient-to:#7c3aed}.md\:focus\:to-purple-700:focus{--tw-gradient-to:#6d28d9}.md\:focus\:to-purple-800:focus{--tw-gradient-to:#5b21b6}.md\:focus\:to-purple-900:focuotation=1)";
+  -webkit-transform: rotate(90deg);
+          transform: rotate(90deg); }
+
+.fa-rotate-180 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rotation=2)";
+  -webkit-transform: rotate(180deg);
+          transform: rotate(180deg); }
+
+.fa-rotate-270 {
+  -ms-filter: "progid:DXImageTransform.Microsoft.BasicImage(rocrosoft.BasicImage(rotation=2, mirror=1)"rder-;
+  -webkit-transform: s@cale(-1, -1);
+      block-end {
+    b  

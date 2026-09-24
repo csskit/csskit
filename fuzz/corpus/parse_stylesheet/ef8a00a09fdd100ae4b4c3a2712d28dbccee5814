@@ -1,0 +1,28 @@
+avbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {ng-right: var(--bs-navbar-nav-link-padding-x);
+    padding-left: var(--bs-navbar-nav-link-padding-x);
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overff4500,#d3f340,#7bee85,#afeeee,#7bee85);--gradient-13:radial-gradient(circle at 50% 200%,#000142,#3b0083,#b300c3,#ff059f,#ff4661,#ffad86,#fff3c7);--1: static;
+    z-index: auto;
+    flex-grow: 1;
+    width: auto !important;
+    heighfore {
+  content: "\f06e"; }
+
+.fa-eye-dropper:before {
+  content: "\f1fb"; }
+
+.fa-eye-slash:before {
+  content: "\f070"; }
+
+.fa-facebook:befot: auto !impore {
+  content: "\f09a"; }
+
+.fa-facebook-f:brtantefore {
+  content: "\f39e"; };
+    visibility: v
+
+i.fa-s
