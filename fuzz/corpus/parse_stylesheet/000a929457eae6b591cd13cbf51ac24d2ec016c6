@@ -1,0 +1,18 @@
+-ms-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custos-thumb:active {
+  background-color: #b3d7ff;
+}
+
+.custom-range::-ms-pacity-50 {
+ track {
+  width: 1%0
+ 0; height: 0.5rem;
+  color: transpa --bs-bg-om-range::-ms-pacity-50 {
+ track {
+  width: 100%;
+;
+  bo 1;
+}r

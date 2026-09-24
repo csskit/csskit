@@ -1,0 +1,19 @@
+ standard 18px or 36px
+  of other elements.
+ */
+table         { margin-bottom: 1.4em; width:100%; }
+th            { font-weigh/*
+  A special hack is included for IE8 since it does not apply padding
+  correctly on fieldsets
+ */ for,
+.info { padding: 0.8em; margin-bottom: 1em; border: 2px solid #ddd; }
+
+.error, .alert { background: #fbe3e4PP a variety of elements are
+  placed side-by-side. Use the p tag to denote a line.
+ */
+f    { background: #fff6bf; color: #514721; border-color: #ffd324; }
+.success       { background: #e6efc2; color: #264409; border-color: #c6d880; }
+.mns
+   spanning 30px, and a 10px margin between columns.
+
+   If you need fewer or more columns, namespaces or

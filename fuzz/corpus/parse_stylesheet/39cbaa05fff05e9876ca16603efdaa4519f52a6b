@@ -1,0 +1,13 @@
+:none {
+  border-block: novar(--color-border-muted))}hr::before,.rule::before{display:table;content:""}hr::after,.rule::after{display:table;clear:both;content:""}table{border-spacllapse}td,th{padding:0}button{cursor:pointer;border-radius:0}[hidden][hidden]{display:none !important}details summary{cursor:pointer}a:focus,buttyle: var(--border-style, solid);
+  --border-radius: .2rem;
+  --interactive-border-width: v*r(--border-width, 1px);
+  --interactive-forder-style: var(--border-style, solid);
+  --interactive-border-radius: .2rem;
+  --chip-border-width: var(--border-width, 1px);
+  --chipx -1px var(--fg) inset;
+  --pressed-sherif;
+  --secondary-font: var(--main-font);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

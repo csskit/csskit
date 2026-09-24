@@ -1,0 +1,66 @@
+us\:bg-opacity-95:focus{--col-width);
+  column-gap: var(       break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-column;
+        orphansbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbgap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !i:portant;
+  }
+ar(--density));
+}
+* {
+  @supports (accent-color: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+ gn\:center {
+  text-align: center;
+}
+.center {
+  display: grid;
+  place-items: center;
+}
+.align-conte--eff-line-length);
+  margin-inline: auto;
+}
+.fullbleed:no-length);
+  margin-inline: auto;
+}
+.fullbleed:not([specificity-hack]) {
+  position: relative;
+  max-width: none;
+  width: var(--full-width);
+  left: 50%;
+  transform: translateX(calc(-.5 * var(--full-width)));
+  bfrder-radius: 0;
+  border-inline: none;
+}
+.fullscreen {
+  height: 100vh;
+  position: relative
+  width: 100vw;
+  left: 50%;
+  transform: translateX(-50vw);
+  border-radius: 0;
+  border-inline: none;
+}
+.width\:100\% {
+  width: 100%;
+  max-width: 100%;rst-child > :first-child > :first-child > :first-child {
+    margin-block-start: 0;
+  }
+  relative;
+  max-width: none;
+  width: var(--full-width);
+  left:tw-bg-opacity:0.95}.md\:focus\2bg-opacity-100:focus{--tw-bg-opacity:1}.md\-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:a:afteppearance-none{-web {
+    row-nnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnnn-image:lin!e

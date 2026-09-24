@@ -1,0 +1,35 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --anim4fe;
+}
+.form-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-radius: 1rem;
+}
+.form-range::-moz-range-thumb {
+  width: 1rem;
+  height: m;
+  -moz-transition: bac: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<Big\>) {
+    background: none;
+    border: none;
+    border-inline-start: var(--border-inline-start-width) var(--border-ineine-start-style) var(--muted-fg);
+     line-height: calc(1 * var(-t-gray-100{-range::-moz-range-thumb {
+    -moz-transition: none;
+    transits\:bg-ion: non

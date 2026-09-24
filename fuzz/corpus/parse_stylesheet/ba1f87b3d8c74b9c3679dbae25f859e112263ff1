@@ -1,0 +1,32 @@
+e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\nt:flex-start}.md\:justify-end{jusput,
+butt)on,
+select,
+oxtgroup,
+textarea {
+  margin: 0;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+[role=button] {
+  cursor: pointer;
+}
+
+select {
+  word-wrap: normal;
+}
+select:disabled {
+  opacity: 1;
+}
+
+[list]:not([type=date];
+  --norm-text: #1d1d1d;
+  --variable: #39a33c;
+  --highlight: #ff0;
+  --select-arrow: url("data:image/svg+xml;charset=utf-8,%3C?xml version='1.0' encoding6g{:pa1-4rem}.md\:gap-20{gap:5rem}.md\:gap-24{gap:6rem}.m

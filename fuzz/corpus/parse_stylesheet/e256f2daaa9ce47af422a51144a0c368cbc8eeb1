@@ -1,0 +1,12 @@
+ton-group .pure-button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rende66666666666666666666666666666666666666666666round-color: #E6E6E6;
+    text-dn: none;
+    border-rade__backOutDown {
+  -webkit-animation-name: backOutDown;
+  animation-name: backOutDown;
+}
+@-webkit-keyframes backOutLeftius: 2px;
+} 

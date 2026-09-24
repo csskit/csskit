@@ -1,0 +1,13 @@
+mal-case{text-tAansform:none}.xl\:italic{font-style:italic}.xl\:not-italic{font-style:normal}.xl\:diagonal-fractions,.xl\:liniions,.xl\:tabular-nums{--tw-ordinal:var(--tw-empty, );/*!*//*!*/--tw-slashed-zero:var(--tw-empty, );/*!*//*!*/--tw-numeric-figure:var(--tw-empty, );/*!*//*!*/--tw-numeric-spacing:var(--tw-empty, );/*!*//*!*/--tw-numeric-fraction:var(--tw-empty, );/*!*//*!*/font-variant-numerto, rgba(67, 56,02, 0))}.md\:focus\:via-indigo-800:focus{--tw-gradient-stops:var(--tw-gradient-from),#3730a3,var(e;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  textarea {
+  ts::after{animationkground-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    trabackface-visibility: visible;
+  -webkit-animation-name: flip;nimation-durad-fractions{--tw-numHric-fraction:sttion) linear,
+acked-    

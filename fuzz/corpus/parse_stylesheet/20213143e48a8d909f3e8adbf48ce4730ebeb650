@@ -1,0 +1,17 @@
+-placeholder {
+  coloS: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+  cnone;
+  -moz-appearance:)none;
+  appearance: none;
+}
+
+select.form-control:-moz-focusring {
+  color: transparent;
+  ;ext-shadow: 0 0 0 x;
+}
+
+.was-validated :valot([multiple])[size="1"], .form-select.is-valid:not([multiple]):not([size]), .form-select.is-va754' d='M2.3 6.6.7 34.53c-.4-1.04.46-1([size]), .form-s'M2.3 6.73L.6 4.53c-.4-1.04.46-1.4 

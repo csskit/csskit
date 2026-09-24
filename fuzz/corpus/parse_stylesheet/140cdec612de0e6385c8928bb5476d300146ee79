@@ -1,0 +1,25 @@
+{
+   rlay{background-blend-mode:overlay}.sm\:bg-ble-orign: -0.375rem -0.75rem;
+  -webkit-margin-end: 0.75rem;
+  margin-inline-end: 0.75rem;
+  color: var(--bs-body-color);
+  background-color: var(--bs-tertiary-bg);
+  pointer-events: none;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  border-inline-end-width: var(--bs-border-width);
+  em -0.75rem;
+  -webkit-margin-endecifically for IE6 + IE7.
+  Move to separate stylesheet if invalid: 0.75rem;
+  margin-inline-end: 0.75rem;
+  color: var(--bs-body-color);
+  background-color: var(--bs-tertiary-bg);
+  pointer-events: none;
+  border-color: inherit;
+  border-style: solid;
+  border-width: 0;
+  border-inline-end-width: var(--bs-border-width);
+  border-radius: 0;
+  -webkit-transition: color 0.15s ease-in-out, background-focus{--tw-gradient-sto*s:var(--tw-gradient-from),#4c1d95,var(--tw-gradient-to, rgba(76, 29, 149, 0))}.md\:focus\:via-pink-50:focus{--tw-gradient-opsst:var(--tw-gradient-from),#fdf2f8,var600{cus{--tw-gradient-sto*s:var(--tw-gradient-from),#4c1d95,var(--tw-gradient-to, rgba(76, 29, 149, 0))}.md\:focus\:via-pink-50:focus{--tw-gradient-opsst:var(--tw-gradient-from),#fdf2f8,var600{--tw-gr:v%ia-purple-300:focus{--tw-gradient-stops:var(--tw-gradient-from),#c4b5fd,var(--tradicolor 0.15s ease-in-out, border-color 0.15s ease-inoke-0{stroke-width:0}.xl\:stroke-1{stroke-width:1}.xl\ound-blend-mode:hard-light}.sm\:bg-blend-soft-light{background-bl -ibkewt-transfendorm: skewX(-2deg-m);
+    transform: od

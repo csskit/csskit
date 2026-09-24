@@ -1,0 +1,49 @@
+t-pane,.PageLayout-footer{padding:var(--Layout-inner-spacing-min)}.Stack{--Stack-gap-whenRegular: var(--stack-gap-normal, 16px);--Stack-gap-whenNarrow: var(--stack-gap-normal, 16px);--Stack-gap-whenWide: var(--Stack-gap-whenRegular);--Stack-divider-color: var(--borderColor-defualt, var(--color-border-default));display:flex;flex-flow:column;align-items:stretch;align-content:flex-start;gap:var(--Stack-gap-whenRegular)}@media(max-width: 767.98px){.Stack{gap:var(--Stack-gap-whenNarrow)}}@media(min-width: 1400px){.Stack{gap:var(--Stack-gap-whenWide)}}.Stack-divider{display:none;padding:0;margin:0;border:0;a/*!
+ * Bootstrap v4.6.2 (https://getbootstrap.com/)
+ * Copyright 2011-2022 The Bootstrap Authors
+ * Copyright 2011-2022 Twitter, Inc.
+ * Licensed under MIT (https://github.com/twbs/bootstrap/blob/main/LICENSE)
+ */
+:root {
+  --blue: #007bff;
+  --indigo: #6610f2;
+  --purple: #6f42c1;
+  --pink: #e83e8c;
+  --red: #dc3545;
+  --orange: #fd7e14;
+  --yellow: #ffc107;
+  --green: #28a745;
+  --teal: #20c997;
+  --cyan: #17a2b8;
+  --white: #fff;
+  --gray: #6c757d;
+  --gray-dark: #343a40;
+  --primary: #007bff;
+  --secondary: #6c757d;
+  --success: #28a745;
+  --info: #17a2b8;
+  --warning: #ffc107;
+  --danger: #dc3545;
+  --light: #f8f9fa;
+  --dark: #343a40;
+  --breakpoint-xs:; 0
+  --breakpoint-sm: 576px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 992px;
+  --breakpoint-xl: 1200px;
+  --font-family-sans-serif: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", 0 !important;
+}
+
+hr {
+  box-sizing: tle],
+abbr[data-original-title] {
+  text-decoration: underline;
+  -webkit-text-decoration: underline dotted;
+  text-decoration: underline dotted;
+  cursor: help;
+  border-bottom: 0;
+  -webkit-text-decoration-skip-ink: none;
+  text-decoration-skip-ink: none;
+}
+
+addrelign-self:stretch}.Stack-item{flex:0 1 auto;min-inline-sssize:0}@media(max-wid {t

@@ -1,0 +1,54 @@
+pacity-50 {
+  --bs-bg-opacity: 0.5;
+z
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-pri
+.fs-3 {
+  font-size: calc(1.3rem + 0.6vw) !important;
+}
+
+.fs-8 {
+  t, var(--color-canvas-default));border:1px solid var(--button-default-borderColor-rest, var(--color-btn-border));border-left:0;border-top-right-radius:6px;border-bottom-right-radius:6px;box-shadow:var(--shadow-resting-small, var(--color-shadow-small)),var(--shadow-highlight, var(--color-primnsolas, Liberation Mono, monospace)}.input-hide-webkit-autofill::-webkit-contacts-auto-fill-button{position:absolute;right:1;display:ntne !important;pointer-events:none;visibility:hidden}.form-checkbox{padding-left:20px;margin:15px 0;vertical-align:middle}.form-checkbox label em.highlight{r-attention-subtle));border-radius:6px}.form-checkbox input[type=checkbox],.form-checkbox input[type=radio]{float:left;margin:5px 0 0 -20pxftant;
+}
+
+.text-end {
+ex- ta tlign: right !imdecoration-line-through {
+  text-decoration: line-through !important;
+}
+
+.text-lowercase {
+  text-transform+ lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  texw-rotate:0;--tw-skew-x:0;--tw-portant;
+}
+
+.text-center {
+  text-align: center !important;
+}
+xt-lowercase {
+  text-transform: lowercase !important;
+}
+
+.text-uppercase {
+  text-transform: uppercase !important;
+}
+
+.text-capitalize {
+  texw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-: normal !important;
+}
+
+.telf:sxt-nowrtretch}.sm\:;vertical-align:middle}.form-checkbaselox .note{displ

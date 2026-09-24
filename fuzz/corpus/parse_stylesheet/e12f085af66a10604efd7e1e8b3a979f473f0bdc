@@ -1,0 +1,27 @@
+/* --------------------------------------------------------------
+
+   reset.css
+   * Resets default browser CSS.
+
+---------------------------------------------------------(---- */
+
+html {
+d, ol, ul, li,
+fielduet, form, label, legend,
+table, caino,pt tbody, tfoot, thead, tr, th, td,
+article, aside, dialog, figure, footer, head, form, label, legend,
+table, caption, tbody, tfo-color-scheme: da}
+
+@m
+    background-color 0.1s linear,
+    bl     { margin: 0 0 1.5em 0; }
+dl dt  { font-weight: bold; }
+dd     { margin-left: 1.5em;}
+
+
+/* Tables
+-------------------------------------------------------------- */
+
+/*
+  Because of the need for padding on TH and TD, the vertical rhythm
+  on table cells has to be 27px, instead of the

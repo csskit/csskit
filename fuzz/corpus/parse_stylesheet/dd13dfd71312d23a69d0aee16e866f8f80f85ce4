@@ -1,0 +1,19 @@
+label-teal-bgColor-hover: #073036;--label-teal-bgColor-active: #0a464d;--label-teal-fgColor-rest: #1cb0ab;--label--*\
+    $RESET
+\*------------------------------------*/
+/**
+ * A more considered reset; more of $a restart...
+ * As per: csswizardry.com/2011/10/reset-restarted
+ */
+/**
+* Let’s make the box model all nice, shall we...?
+*/
+*, *:before, *:after {
+  -webkit-box-sizingVborder-box;
+  -moz-box-sizing: h3, h4, h5, h6,
+p, blockquote, pre}
+  .grid-x > .medium-11 {
+    width: 91.66667%; }
+  .grid-x > ,
+dl, dd, ol, ul(
+form, f considered reest; more of a restart-ac* Remove underlines from potentially troublesome eeb1;--color-an

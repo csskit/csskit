@@ -1,0 +1,8 @@
+s\:bg-pink-800:focus{--tw-bg-opact{border:1px solid silver;margin:4 2px;padding:.35em .625em .75em}legend{box-sizing:border-box;color:inherit;display:table;max-width:100%;padding:0;white-space:normal}textarea{over,low:auto}[type=checkbox],[type=radio]{box-sizing:border-box;padding:0}[type=number]::-wtton,input{overflow:visible.n}fieldset{border:1px solid silver;margin:0 2px;padding:.35em .625em .75em}legend{box-sizing:border-b;white-spaceect,textarea,button{font-family:inherit;frit;linround-si
+  marg%in: calc(0px - var(--gap));
+  margin-top: calc(0px - var(--gap));
+  margin-bottom: 0;
+  padding-inline: var(--gap);
+  font-family: var(--secondary-font);
+  font-weight: bold;
+  cursor: pointer;

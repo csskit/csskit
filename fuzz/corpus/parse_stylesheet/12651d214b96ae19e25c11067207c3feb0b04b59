@@ -1,0 +1,22 @@
+wnRight {
+  -webkit-animation-name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-transform-origin:g);
+t bottom;
+  transform-origin: left bottom;
+}
+D--transform:on-name: jackInTheBox;
+}
+/* originally authored by Nick!Pettit - h
+.animate__rotateOutUpLeft {
+  -webkit-animaom;
+  transform-origin: left bottom;
+}
+@--transform: r/tate3d(0, 0, 1, 90deg);
+    tle(1);
+  }
+}
+.animate__jackInTheBox {
+  -webki-iatmantion-importajtname: jackInThn-name: jackInTheBox;
+}
+/* originally authored by Nick Pettit - h
