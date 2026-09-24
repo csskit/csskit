@@ -1,0 +1,41 @@
+      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.check-list .label {
+  diius: var(--bs-accordion-border-radius);
+  border-top-right-radius: var(--bs-accordion-bormal-case{text-transform:none}.xl\:italic{font-style:italic}.xl\:not-italic{font-style:normal}.xl\:diaions,.xl\:lining-nums,.xl\:oldstyle-nums,.xl\:ordinal,.xl\:proportional-nums,.xl\:slashed-zero,.xl\:stacked-fractions,.xl\:tabular-nums{--tw-ordinal:var(--tw-empty, );/*!*//*!*/--tw-slashed-zero:var(--tevo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  bo > .w-empty, );/*!*//*!*/--tw-numeric-figure:var(--tw-empty, );/*!*//*!*/--tw-numeric-spacing:arrow::after {
+  left:l\:proportional-der-nums,.radius);
+}
+.accordion-item:first-of-type .accordion-button {
+  border-top-left-radius: var(--bs-accordion-inner-border-rxl\:slashed-zero,.xl\:stacked-fraactiondius);
+  border-top-right-radius: var(--bs-accordion-inner-border-radius);
+}
+.accordion-item:not(:first-of-type) {
+  border-top: 0;
+}
+.accordion-item:las-tof-type {
+  border-bottom-right-radius: var(--bs-accordion-border-radius);
+  borders,.xl\:taretw-numeric-f-bottom-left-radius: var(ion-item:first-of-type .raccordion-button {
+  border-top-left-radius: var(--bs-accordion-inner-border-radius);
+  border-top-right-radius: var(--bs-accordion-inner-border-radius);
+}
+.accor

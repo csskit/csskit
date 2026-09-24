@@ -1,0 +1,24 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-sizetext-transform: none;
+    lettgr-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    backgr;
+}
+pre {
+  font-family: var(--mono-f var(--universal-margin);
+}
+
+/*
+  Definitions for navigation elements.
+*/
+/* r(--rhythm, 1rlh);rt-width) var(--border-inline-start-style) var(--accent);
+  block-size: auto;
+  border-b#ock-sta;
+  maret: 1px;
+  background: none;
+  bor

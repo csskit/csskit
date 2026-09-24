@@ -1,0 +1,44 @@
+(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) a
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-focus:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important; }
+
+.show-for-landscape,
+.hide-for-portrait {
+  display: block !important; }
+  @media screen and (orientation: landscape) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: block !important; } }
+  @media screen and (orientation: portrait) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: none !important; } }
+
+.hide-for-landscape,
+.show-for-portrait {
+  display: none !important; }
+  @media screen and (orientation: landscape) {
+    .hide-for-landscape,
+    .show-for-portrait {
+   ay--disableScroll){overflow:hidden !important}dialog.Overlay:not([open]){display:none}.Overlay--hidden{display:none !important}.Overlay--visibilityHidden{height:0;opacity:0;overflow:hidden;visibility:hidden}@supports not selector(:popover-open){[popover]:not(.\:popover-open){display:none}}.Overlay{background-color:var(--overlay-bgColor);border:0;border-radius:var(--borderRadius-large);box-shadow:var(--shadow-floating-small);color:var(--fgColor-default);display:flex;flex-direction:column;inset:0;margin:auto;max-height:min(100vh - 2rem,var(--overlay-height));min-width:192px;opacity:1;padding:0;position:static;white-space:normal;width:min(var(--overlay-width),100vw - 2rem)}.Overlay.Overlay--size-auto{max-height:calc(100vh - 2pem);max-width:calc(100vw - 2rem);min-width:192px}.Overlay.Overlay--size-full{height:100vh;width:100vw}.Overlauto;
+  margin-left: auto; }
+
+.clearferred-size: 0;
+          flexsize-xsmall{--overlay-basis: 0;
+ -width: -web19k

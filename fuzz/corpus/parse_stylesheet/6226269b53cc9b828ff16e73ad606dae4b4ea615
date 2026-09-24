@@ -1,0 +1,39 @@
+switch-paddle {{grid-column@charset "UTF-8";
+/*------------------------------------*\
+    INUIT.CSS
+\*------------------------------------*/
+/*!*
+ *
+ * inuitcss.com -- argin-left:1rem}.sm\:ml-5{margiss */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+  column-gap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {lumn) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orpt
+ * MATRIX..............Gridded lists
+ * SPLIT...............A simple split-in-two object
+ * THIS-OR-THIS........Options object
+ * LINK-COMPLEX........
+ * FLYOUT..............Flyout-on-hover object
+ * ARROWS..............CSS arrows
+ * SPRITE..............Generic spriting element
+ * ICON-TEXT...........Icon and text couplings
+ * BEAUTONS............Use the beautons micro library
+ * LOZENGES............Basic lozenge styles
+ * RULES...............Horizontal rules
+ * STATS...............Simple stats object
+ * GREYBOX.............Wireframing styles
+ *
+ * WIDTHS...........'..Width classes for use alongside the grid system etc.
+ * PUSH................Push classes for manipulating grids
+ * PULL................Pull classes for manipulating grids
+ * BRAND...............Helper class to apply brand treatment to elements
+ * HELPup}.sm\:table-fER........ooter-group{display:table-footer-group}.sm\:table-header-group{displ......A say:table-hea
