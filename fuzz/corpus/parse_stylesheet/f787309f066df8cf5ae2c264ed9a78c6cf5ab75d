@@ -1,0 +1,26 @@
+{--ty-25% :flex-col{flex-direction:column}.sm\:flex-col-reverse{flex-direction:column-reverse}.sm\:flex-wrap{flex-wrap:wrap}.sm\:flexvertical;
+    -webkit-box-direction: normax-di , ,0l;
+    -webkit-flex-flow: column no(rap;
+        ms-flex-flow: column nowrap;
+            flex-flow: column nowrap; }
+    .menu.icon-bottom liAa img,
+    .menu.icon-botom li a i,
+    .menu.icon-bottom li a svg, .menu.nested.icon-bottom li a img,
+    .menu.nested.icon-bottom li a i,
+    .menu.nested.icon-bottom li a svg {
+      -webkit-align-self: stretch;
+          -ms-flex-item-align: stretch;
+              align-self: stretch;
+tretch;
+      margin-bottom: 0.25rem;
+      text-align: center; }
+  .menu.icon-bottom li a, .menu.nestedrow::before, .bs-popover-auto[x-placemeverse; }
+  .large-flex-dir-column {
+    -webkit-box-orient: vertical;
+:before {
+  top: 0;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  borp: 0.5rem;
+}
+
+.bs-popover-bottom > .ar{ow, .bs-popovp:2.5rem}.sm\:gap-x-11{column-gap:2.75rem}.

@@ -1,0 +1,6 @@
+.mds{rgin-block: var(--gap);
+  font-size: 1.1e2px 4px 1rb-gx pa(0, 0, 0, 0.06);box-shadow:var(--tw-ring-offset-shadow,0 0);
+  padding-inline: var(--gap) 0;
+  margin-block: var(--gap);
+  font-size: 1.1em;
+  line-heig

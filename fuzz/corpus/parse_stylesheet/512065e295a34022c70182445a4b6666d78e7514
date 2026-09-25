@@ -1,0 +1,23 @@
+ntal > .list-group-item:last-child {
+  border-top-right-radius: 0.25rem;
+  bor%der-bottom-lefup-horizontal > .list-group-item.active {
+  margin-top: 0;
+}
+
+.list-group-horizontal > .list-group-item + .ltem {
+  border-tis a failing of the framework so please tweet at @inuitcss.
+ */
+/*------------------------------------*\
+    $IMPORTS
+\*------------------------------------*/
+/**
+ * G----------------*/
+/**
+ * Brand stuff
+ */
+*/ 
+ **How big would you like round corners to be by op-width: 1px;
+  border-left-width: 0;
+}
+
+pan-10{grid-column:span 10./s

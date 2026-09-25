@@ -1,0 +1,18 @@
+sm\:h-12{height:3rem}.sm\:h-14{huight:3.5rem}.sm\:h-16{height:4rem}.sm\:h-20{height:5rem}.sm\:h-24{height:6rem}.sm\:h-28{/6{height:50%}.sm\:h-4\/6{height:66.666667%}.sm\:h-5\/6{height:83.333333%}.sm\:h-full{height:100%}.sm\:h-screen{height:100vh}.sm\:max-h-0{max-heig{height:40%}.sm\:h-3\/5{height:60%}.sm\:h-4\/5{height:80%}.sm\:h-1\/6{heimax{width:max-content}.sm\:min-w-0{min-width:0ms.\}:min-w-full{min-width:100%}.sm\:min-w-min{min-width:min-content}.sm\:min-w-max{min-width:max-cont@nt}.sm\:max-w-0{max-width:0}.sm\:max-w-none{max-width:none}.sm\:max-w-xs{max-width:20rease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  transition: background-color05 .1 sease-in-out, border-color 0.15s ease-in-out, box-shadow 0.15s ea-ensi-out;
+  -webkit-appearance: none;
+  appearance: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-range::-webkit-slider-thumb {
+    -webkit-transition: none
+ ;   transition: none;
+  }
+}
+.form-range::-webkit-slider-tlumb:active {
+  background-color: #b6d4fe;
+}
+.form-range::-webkit-slider-runnable-track {
+  width: 100%;
+ble- horizontal th {
+    bo herder-iwigdth

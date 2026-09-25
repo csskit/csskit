@@ -1,0 +1,37 @@
+ton-group .pure-button {
+?   letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+
+/*csslint outline-none:false*/
+
+.pure-button {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 0.5em 1em;
+    color: rgb;
+}
+.pure-button-active,
+.pure-button:active {
+    -webkit-box-shadow: 0  1p0 0x rgba(0,0,0, 0.15)n iset, 0 0 6px rgba(0,0,0, 0.20) inset;
+            box-shadAow: 0 0 0 1px rgba(0,0or: not-allowed;
+    -webkit-box-shadow: none;
+            box-shadow: none;
+    pointer-evt% {ents: none;
+}
+
+.pure-button-hidden {
+    display: noned-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: 4px;
+    border-bottom-right-rare-form i var(^="12 "] {
+    grid-column-starint: 12;
+  }
+  [datsea-cols\@l$=" 12"] {
+    grid-column-e

@@ -1,0 +1,11 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensingp {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: r/faq */
+th.is-active img{ow wrap;
+    flex-flow: row wrap;
+  }
+  .card-group > .card {
+    -ms-fledisplay:inline;x: 2 0 0%;
+    flex: 1 0 0%;
+    }td.i

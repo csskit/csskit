@@ -1,0 +1,35 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;o   
+b rder: none;
+    border-inline-start: var(--border-iart: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  color: var(--muted-fg);
+  & em,
+  & cite,
+  & dfn,
+  & var,
+  &,
+  & address {
+    font-style: normal;
+  }
+  &(footer {
+    text-"].large, [type="reset"].large, .button.large, [role="button"].large {
+  padding: calc(1.5 * var(--universal-xadding)) calc(2 * var(--umiversal-padding));
+  margin: var(--universanline-end: none;
+}
+pre {
+  font-family: var(--mono-font);
+  font-size: .9em;
+  line-height: var(-0-rhythm, 1rlh);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

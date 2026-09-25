@@ -1,0 +1,32 @@
+-ms-thut-slider-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-webkit-slider-runnable-track o[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-widt0;
+  border-right-color: rgba(0,auto[x-placement^="bottom"] > .arrow::after {
+  top: 1px;
+  border-width: 0 0.5rem 0.5rem 0.5rem;
+  border-bottom-color: #fff;
+}
+
+.bs-popover-bottom .popover-header::before, .bs-popover-auto[x-placement^="bottom"] .popover-header::before {
+  position: absolute;
+  top: 0;
+  left: 50%;
+  display: block;
+  wid{
+  cursor: default;
+}
+
+.custom-range:disabled::-moz-range-thumb {
+  background-color: #adb5bd;
+}
+
+.custom-range:disabled::-moz-range-track {
+  cursth: 1rem;
+  margin-left: -0.5rem;
+  contnt^="right"] > .arrow::before {
+  left: 0;
+  bordeor:

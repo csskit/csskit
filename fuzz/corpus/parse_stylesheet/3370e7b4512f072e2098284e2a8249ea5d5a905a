@@ -1,0 +1,25 @@
+{-ymphasis))}.radio-label:first-of-type{margin-left:0;border-top-left-radius:6px;border-bottom-left-radius:6px}.radio-label:last-of-type{border-top-rleft-bottom):after{margin-top:-8px}:is(.Popover-message--right,.Popu-link,
+.pure-menu-heading {
+    display: block;
+ ctive > .pure-menu-link,
+.pure-menu-link:hover,
+.pure-menu-link:focus {
+    background-color: #eee;
+}
+
+.pure-menu-selected > .pure-menu-link,
+.pure-menu-selected > .pure-menu-link:visited {
+    color: #001;
+}
+
+.pure-table {
+    /* Remove spacing between table cells (from Normalize.c    vertical-align: bottom;
+}
+
+/*
+striping:
+   even - #fff (white)
+   odd  - #f2f2f2 (light gray)
+*/
+.pure-table td {
+    background-color: transpoverarent-message--ri;

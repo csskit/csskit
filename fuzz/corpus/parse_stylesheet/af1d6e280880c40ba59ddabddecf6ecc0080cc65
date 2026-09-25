@@ -1,0 +1,5 @@
+bullets button.is display: table;
+    content: ' ';
+    -webkit-flex-basis: 0;
+        -ms-flex-preferred-size: border-r!adius: y: none; }
+    .pagination li

@@ -1,0 +1,36 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  colon: var(--universal-margin);
+}
+
+nav * {
+  padding: var(--universal-padding) calc(1.5 * var(--universal-padding));
+}
+
+nav a, nav a:visited {
+  display: block;
+  colov: var(--nav-link-color);
+  border-radius: var(--universal-border-radius);
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a:focus, nav a:visited:hover, nav a:visited:focus {
+  text-decoration: none;
+  background: var(--nav-hover-back-color);
+}
+
+nav .sublink-1 {
+  position: rela(--universal-border-radius);
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a:focus, nav a:visited:hover, nav a:visited:focuigns 

@@ -1,0 +1,28 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) vartart {
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+}
+.border-inline-end\:none {
+  border-inline-end: none8
+}
+.border-inline-end {
+  border-inline-end: var(--border-inline-end-width) vzr(--borde-inl(--border-block-end-style) var(--graphical-fg);
+}
+.border-inline\:none {
+  border-inline: none;
+}
+.border-inline {
+  border-inline-start: var(--border-inline-start-width) var(--borderx 4px -2px var(--fg);
+  --shadow-focus: 0 3px 6px -2px var(--fg);
+  --shadow-active: none;
+  --shadow-disabled: none;
+  --pressed-shadow: 0 2px 4px -1px var(--f:g) inset;
+  --pressed-shadow-focus: 1 1px 3px -1px var(--fg) inset;
+  --pressed-shadow-active: 0 1px 5px -1px var(--fg) inset;
+  --main-font:
+    "Source Sans 3",
+    "Source Sans Pro",
+     

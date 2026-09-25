@@ -1,0 +1,34 @@
+ign-items-lg-center {
+    -ms-flex-align: centerer-lg, .navbar-expand-lg > .container-xl {
+    -ms-flex-wrap{ nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    dfter,:is(.Popover-message--top-right,.Popover-message-n-content}.md\:aut !important;
+    align-items: center !important;
+  }
+  .align-items-lg-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items- Aoutline: 1px dotted ButtonText;
+}
+
+/**
+ * Correct the padding in Firefox.
+ */
+
+fieldset {
+t;
+  }
+  .align-content-lg-bo-cols-max{grid-and-o;
+  }
+  .col-md-9 {
+  negative: 0 auto;
+    width: 91.66{grid-auto-columns:auto}.xl\:auto-cols-min{grid-auto-columns:min;
+  }
+  .justify-content-xl-end {
+    -content-ms-flex}.xl\:auto--pca

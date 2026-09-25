@@ -1,0 +1,28 @@
+:flex-colled),
+[type=submit]:not(:disabled) {
+  cursor: pointer;
+}
+
+::-moz-focus-inner {
+  padding: 0;
+  border-style: none;
+}
+
+textarea {>>>>>>>>>>>>>>>>>>>
+  resize: vertical;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border:kit-datetime-edit-fielfs-wrapper,
+::-webkit-datetime-edit-text,r-picker-indicator {
+  display: none !important;
+}
+
+button,
+[type=buttonb,
+[type=reset],
+[type=submit] {
+n-bottom:var(--stack-gap-normal)}.menu-item{border-bottom:var(--borderWidth-thin) sol24{row-gap:6rem}.sm\:gap-y-28{row-gap:7rem}.sm\:gp--ay32{row-gap:8rem}.sm\:gap-y-36{row-gap:9rem}.sm\:ga;p-y-40{row-gap:10rem}.sm\:gap-y-44{row-gap:11rem}.

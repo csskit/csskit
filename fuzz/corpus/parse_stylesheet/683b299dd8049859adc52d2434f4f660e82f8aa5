@@ -1,0 +1,69 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  height='62.5' width='116.9' fill='%23efefef'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.
+select::-ms-expand {
+  display: none;
+}
+
+select[multiple] {
+  padding-right: 10px;
+  background-image: none;
+  overflow-y: auto;
+}
+
+input:focus {
+  box-shadow: 0 0 0 2px #0096bfab;
+  box-shadow: 0 0 0 2px var(--focus);
+}
+
+@media (prefers-colordia (prefers-color-scheme: dark) {
+
+  textarea:focus {
+  box-shadow: 0 0 0 2px #0096bfab;
+  box-shadow: 0 0 0 2px var(--focus);
+  }
+}
+
+input[type='checkbox']:active,
+input[type='radio']:active,
+input[typepx var(--focus) solid;
+  border-radius: 6px;
+  margin: 0;
+  margin-bottom: 12px;
+  padding: 10px;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  fieldset {
+  border: 1px #0096bfab solid;
+  b='62.5' width='116.9' fill='%23efefef'%3E %3Cpath d='M115.3,1.6 C113.7,0 111.1,0 109.5,1.6 L58.5,52.7 L7.4,1.6 C5.8,0 3.2,0 1.
+select::-ms-expand {
+  display: none;
+}
+
+select[multiple] {
+  padding-right: 10px;
+  background-image: none;
+  overflow-y: auto;
+}
+
+input:focus {
+  box-shadow:  ::selection {
+0 0 0 2px #0096bfab;
+  box-shadow: 0 0 0 2px var(--focus);
+}
+
+@media (prefers-colordia (p  color: #fff;
+  coolr: rop-filter: blur(4px);
+}
+
+dialog::backdrop {
+  background: #000refers-color-scheme: dark)0009c

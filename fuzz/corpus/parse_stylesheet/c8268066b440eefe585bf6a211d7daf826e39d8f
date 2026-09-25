@@ -1,0 +1,15 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  co);
+adius);
+  transition: bacla(--universal-border-radius);
+  transition: bacla(--un, nav a:visited:hover, nav a:visited:focuigns 

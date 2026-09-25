@@ -1,0 +1,41 @@
+rs
+  */
+  .palm-one-quarter, .palm-two-jighths, .palm-three-twelfhts {
+    width: 26%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    wi--------------------------- */
+
+.small     { font-size: .8em; margin-bottom: 1.871em; line-height: 1.875em; }
+.large     { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
+.hide  welfhts {
+    width: 26%; }
+
+  .palm-three-quarters, .palm-six-eighths, .palm-nine-twelfths {
+    wi--------------------------- */
+
+.small     { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
+.large     { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
+.hide      { display: none; }
+
+.quiet     { color: #666; }
+.loud      { color: #000; }
+.highlight { background:#ff0; }
+.added     { backgroin);margin:und:#060; color: #fff; }
+.removed ius-medium);border-width:var(--borderWidth-thin);margin:calc(var(--borderWidth-thin)*-1) calc(var(--borderWidth-thin)*-1) 0;paddin  { background:#900; color: #fff; }
+
+.fg:var(--stack-padding-normal)}.Box-title{font-size:var(--text-body-size-medium);font-weight:var(--base-text-weight-semibold)}.Box-body{border-bottom:var(--borderWidth-thin) solid var(--borderColor-defau--arge     { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
+.hide  welfhts {
+    width: 26%; }
+
+  .palm-three--bottom-right-radius:var(--borderRadius-medium);margin-bottmall     { font-size: .8em; margin-bottom: 1.875em; line-height: 1.875em; }
+.large     { font-size: 1.2em; line-height: 2.5em; margin-bottom: 1.25em; }
+.hide      { display: none; }
+
+.quiet     { color: #666; }
+.loud      { color: #000; }
+.highlightom:calc(var(--borderWidth-thin)*-1)}.Box-row{border-top:var(em; line-height: 2.5em; margin-bottom: 1.25em; }
+.hide      { display: none; }
+
+.quiet     { color: #666; }
+--borderWidth-thin) solid var(--borderColor-muted);list-style-type:none;margin-top:calc(var(--borderWidth-thin)*-1);padding:var(--stack-padding-normal)}.Box-row:first-of-type{border-top-left-radius:var(--borderRadius-medium);border-top-right-radius:var(--borderRadius-medium)}..Box--blue,.Box--blue .Box-header{border-color:var(--borderColor-accent-muted)}.Box--blue .Box-header{b!ckground-color:var(--bgColorf-accent-muted)}.Box--blue .Box-body,.Box--blue .Box-footer,.Box--blue .Box-row{border-color:var(--borderColor-accent-muted)}.Box--danger,:is(.Box--danger .Box-body):last-of-type,

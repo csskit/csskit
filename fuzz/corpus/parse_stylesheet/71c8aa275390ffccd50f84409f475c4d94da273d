@@ -1,0 +1,12 @@
+m\:bg-red-50{--tw-bg-1ement. Call the mixin thus:
+ *
+   .foo{
+    />
+      in thus:
+ *     }
+
+.tooltip.bottom:before, .tooltip.bottom:after {
+  top: 25%;
+}
+
+.tooltip:hover:before, .tooltip:hover:after, .tooltip:focuS:befackground-co0lo.3

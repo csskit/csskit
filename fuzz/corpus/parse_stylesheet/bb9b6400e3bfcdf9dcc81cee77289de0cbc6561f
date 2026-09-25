@@ -1,0 +1,9 @@
+inter{cuselect-all{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-user-select:auto;user-select:auto}.\32xl\:resize-none{resize:none}.\32xl\:resize-y{reion:row-reverse}.\31xl\:flex-col{flex-disize-y{reion:row-reverse}.\31xl\:flex-col{flex-direction:colcontent: space-between !important;
+  }
+  .justify-content-md-around {
+    -ms-flex-pack:  !important;
+    alignent-content: space-around !important;
+  }
+  .align-content-md-stretch {
+    -ms-flex-line-pack: streer {
+  -webkit-transition-duration: 50t

@@ -1,0 +1,30 @@
+@charset "UTF-8";
+/**
+ * Foundation for Sites
+ * Version 6.7.5
+ * https://get.foundation
+ * Licensed under MIT Open Source
+ */
+@media print, screen and (min-width: 40em) {
+  .reveal, .15;
+  -webkit-text-size-adjust: 100%; }
+
+body {
+  margin: 0; }
+
+h1 {
+  font-size: 2em;
+  margin: 0.67em 0; }
+
+hr {
+  -webkit-box-sizing: content-box;
+          box-siz font-family: mon0%; }
+
+*,
+*::before,
+*::after {
+: 0; }
+
+h1 {
+  font-size: 2emwebkit-box-sizing: content-box;
+          box-siz   -webkit-appearance: n

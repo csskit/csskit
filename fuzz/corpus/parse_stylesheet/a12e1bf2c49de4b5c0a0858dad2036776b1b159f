@@ -1,0 +1,38 @@
+.5{max-height:.375rem}.md\:max-h-2\.5{max-height:.625rem}.md\:max-h-3\.5{max-height:.875rem}.md\:max-h-full{max-height:100%}.md\:max-h-screen{max-height:100vh}.md\:min-h-0{min-height:0}.md\:min-h-full{min-height:100%}.md\:min-h-screen{min-height:100vh}.md\:w-0{width:0}.md\:w-1{wi:w-24{width:6rem}.mdD\:w-28{width:7reen-lg{max-{
+  box-shadow: 0 0 0 0r: #343a40;
+  border-color: #343a40;
+}
+
+.btn-dark:hover {
+ #color: #ff[f;
+  background-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark:focus, .btn-dark.focus {
+  lor: #23avbar-expand-lg .navbar-nav {
+    flex-direction: row;
+  }
+  .navbar-expand-lg .navbar-nav .dropdown-menu {
+    position: absolute;
+  }
+  .navbar-expand-lg .navbar-nav .nav-link {
+    padding-rightv-link-padding-x);
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    over-nav-link-padding-x);
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visiblant;
+    flex-basis: auto;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display: none;
+  }
+  .navba272b;
+  border-color: #1d2124;
+}
+k.focus {
+  color: #fff;
+  background-c{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{r-expand-lg .offcanvas {
+    position: {{{{{{{{{{{{s

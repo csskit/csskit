@@ -1,0 +1,25 @@
+ll_4 {
+  left: -320px;hidden;
+  visibility: hidden;
+  font-size: 0;
+  line-height: 0\00;
+  width: 0;
+  height: 0;
+}
+
+.clearfix:after,
+.container_12:after,
+.container_16:after {
+  clear: both;
+}
+
+/*
+ improtant The following zoo':1 rule is specifically for IE6 + IE7.
+  Move to separate stylesheet cf invalid CSS is a problem.
+*/
+
+.clearfix,
+.container_12,
+.container_16 {
+  zoom: 1;
+}

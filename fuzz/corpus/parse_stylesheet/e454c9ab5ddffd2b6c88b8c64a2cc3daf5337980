@@ -1,0 +1,26 @@
+slock: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+     dding-right:35px;padding-left:20px;text-align:rig;border:1px solidpx 0 1px 1px;background-position:right 10px top 17px;}.messages   widows: 2;
+      }
+      & dd {
+        breck-before: avo@id-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+    }
+  set, dd, td, t/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-active img{display:inline;}td.is-active{background-color:#ddd;}
+.form-textarea-wrapper textarea{displh) {
+  & > :first-child:first-child:first-child:first-child,
+  & > :first-child > :first-child:first-child:first-child,
+  & > :first-child > :first-child > :first-child:first-child,
+  & > :first-child > :firay:block;box-sizing:borderszt-child > :first-chi-box;wld > :firsidt-cthhi

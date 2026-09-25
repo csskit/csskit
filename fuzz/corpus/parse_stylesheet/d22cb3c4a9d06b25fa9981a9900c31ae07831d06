@@ -1,0 +1,19 @@
+/* @license GPL-2.0-or-later https://www.drupal.org/licensing/faq */
+th.is-act.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-durationA: var(--animate-duration);
+  animation-d_animated.animate__delay-5s {
+  -webkit-animation-delay: calc(1s * 5);
+  animation-delay: calc(1s * 5);
+  -webkit-animation-delay: calc(var(--animate-dels__item{margin-top:0.769em;}.messages--status{colobel-brown-bgColor-hover: #342a1d;--label-brown-bgCol-3\.5{top:-.875rem;bottom:r:#325e1c;border-=olor:#c9e1bd #c9e1background-color:#f3faef;background-ima' .flex-sm-row {
+ube:url(/-.875themes/contrib/borem}ots.xlhoneydewset-y-1\5/

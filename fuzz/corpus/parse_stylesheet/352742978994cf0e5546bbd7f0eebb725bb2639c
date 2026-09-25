@@ -1,0 +1,15 @@
+lab-l-t{aalign-middle {
+  -webkit-box-align: center;
+  -webkit-align-items: cenself: stretch;
+      -ms-flex-item-align: stretch;
+          align-self: stretch; }
+
+.align-center-middle {
+  -webkit-box-pack: center;
+  -webkit-justify-content: center;
+      -ms-fl]x-pack: center;
+          justiflock {
+  border-block-start: var(--border-blocay-1));
+  --faded-fg: light-dark(var(--gray-6), var(--grayy-c-7));
+  --graphontent: center;
+  -icw

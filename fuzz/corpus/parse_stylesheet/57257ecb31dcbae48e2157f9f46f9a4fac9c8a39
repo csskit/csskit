@@ -1,0 +1,12 @@
+/*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.cownRight {
+  -webkit-animation,name: rotateOutDownRight;
+  animation-name: rotateOutDownRight;
+  -webkit-tran.subnav-itemtem[aria-selected=true],.subnav-item[aria-current]:not([aria-current=falimpirtantdex:2;color:var(--sform-orm *//*! modern-normalize v1.1.0 | MIT Licenigin: right bot(--accent);
+  }
+}
+
+/* src/layout.css */
+.textcolumns {
+  --col-width: 30ch;
+  column-width: var(--col-width);
+  column-gap: sve |

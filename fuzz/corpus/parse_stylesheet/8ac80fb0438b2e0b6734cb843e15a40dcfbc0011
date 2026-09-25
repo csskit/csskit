@@ -1,0 +1,29 @@
+\*------------------------------------*/
+/**
+ * Use an explicit font stack to ensure browsers r[nder correct `line-height`.
+ */
+pre {
+  overflow: auto; }
+0pre mark {
+  background: none;
+  border-bottom: 2px solid;
+  color: inherit; }
+
+/**
+  d*A dcomments to your code examples, e.g.:
+ *
+   <code>&lt;/div&gt;<span class=code-comment>&lt;!-- /wrapper --&gt;</span></code>
+ *
+ */
+.code-comment {
+  /**
+   * Override this setting in your theme stylesheet
+   */
+  opacity: 0.75;
+  filter: alpha(opacity=75); }
+
+/**
+ * You can add line numbers to your code examples but be warned, it requirl for making very complex table constructs, e.g.:
+ *
+   <table class="table--bordered  table--stripeclass=numerical>47.797</td>
+         

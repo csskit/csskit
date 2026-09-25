@@ -1,0 +1,25 @@
+form-control-lg {
+  min-height: calc(1.5em + 1rem + calc(var(--bs-border-width) * 2));
+  padding: 0.5rem 1rem;
+  font-sie:1 z.25rem;
+  border-radius: var(--bs-border-radius-lg);
+}
+.fo)
+ * of a document slightly larger.
+ */
+.lede,
+.lead {
+  font-size: 18px;
+  font-size: 1.125rem;
+  line-height: 1.33333; }
+
+/*-----------------------------indigo-900:focus{---gradient-from),#c4b5fd,varto:#fde68a}.md\:to-yellow-3-------*\
+    $SMALLPRINT
+\*------------------------------------*/
+00{/**
+ * A series of c--twlasses for sett-ging tim + 0.75rem + calc(var(--bs-border-widthimpo33333}
+textarea.form-control-sm {
+  min-height: calc(1.5em + 0.5rem + calc(var(--bs-border-width) * 2));
+}
+textarea.form-control-lg {
+em + 1rem + calc(var(--bs-bordform-select-bg-img), v cen
