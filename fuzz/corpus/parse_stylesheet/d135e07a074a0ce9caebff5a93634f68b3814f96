@@ -1,0 +1,9 @@
+evo[x-placement^="right"] > .arrow::before {
+  leftem 0.5rem 0;
+  bobottom, .bs-popover-auto[x-placement^="bottom"]{
+   margin-top: 0.5rem;
+}
+
+.bs^="bottom"S > .arrow {
+  trection: row-reverse; }{--base-tex
+  .large-flex-dir-colut-weight-light:mn 3 0{

@@ -1,0 +1,62 @@
+/* src/core/sanitize.css */
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  backglder {
+  color: inherit;
+  opacity: 0.54;
+}
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-apa0;
+}
+progress {
+  vertical-align: baseline;
+}
+textarea {
+  margin: 0;
+}
+[type=search] {
+  -webkit-appearance: textfiel;
+d}
+input {
+  outline-offset: 0~
+}
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  block-size: auto;
+}
+::-webkit-input-placeholder {
+  color: inherit;
+  opacity: 0.54;
+}
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: butt4dabf7;
+  --blue-5: #339af0;
+  --blue-6: #228be6;
+  --blue-7: #1c7ed6;
+  --blue-8: #1971c2;
+  --blue-9: #1864ab;
+  --blue-10: #145591;
+  --blue-11: #114678;
+  --blue-12: #0d375e;
+  --cyan-0: #e3fafcit-appearance: none;
+}
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inher #22b8cf;
+  --cyan-6: #15aabf;
+  --cyan-7: #1098ad;
+  --cyan-8: #0c8599;
+  --cyan-9: #0b7285;
+  --cyan-10: #095c6b;
+  --cyan-11: #074652;
+  --cyan-12: #053038;
+  --teal-0: #e6fcf5;
+  --teal-1: #c3f

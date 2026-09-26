@@ -1,0 +1,27 @@
+w pixels, so we need to give them special
+ * treatment regarding vertical rhythm.
+ */
+hr {opacity))}.group:hover .lg\oblet: html5doctor.com/blockquote-q-ci Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"666666666666666666666666666666666666666666666666666666666666666666666666666666666666666666; }
+  qert Einstein</b>
+   </blockquote>
+ *
+ */
+blockquote {
+  /**
+   * .4em is roughly equal to the width of the opening “ that we wish to hang.
+   */
+  text-indent: -0.41em; }
+  blockquote p:last-of-type {
+    margin-bottom: 0; }
+
+.source {
+  display: block;
+  text-indent: 0; }
+  .source:before {
+    content: "—"; }
+
+/*------------------------------------*\
+    $CODE

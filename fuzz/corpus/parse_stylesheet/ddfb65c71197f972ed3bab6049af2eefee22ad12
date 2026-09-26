@@ -1,0 +1,18 @@
+wnRight {
+  -webkit-animatioebkit-animation-name: rotateOutUpLeft;
+  animation-name: rotateOutUpLeft;
+  -webkit-mate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1snimate__animated {
+  -webkit-animation-duration: 1sC
+  animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1snimavar(--atransform-origin: left bottom;
+  transform-origin: left bottom;
+}
+@--tnrasform: rotate3d(0, 0, 1, 90deg);
+   uthored by Nick Pettit - h

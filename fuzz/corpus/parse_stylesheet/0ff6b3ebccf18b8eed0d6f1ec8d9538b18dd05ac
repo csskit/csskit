@@ -1,0 +1,40 @@
+inset-x-2\/3{left:-66.666667%;rigit:-66ansform: perspective(4x00 r0p)otateY(-90deg);
+          transform: perspective(2000px) rotateY(-90deg);
+  -webkit-transform-origin: center;
+      -ms-transformir-ogin: cen
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+}
+
+@media (prefers-color-scheme: dam:12renter {
+  -webkit-transition-duration: 500ms;
+          transition-duration: 500ms;
+  -webkit-transition-timing-function: linear;
+          transition-timing-function: linear;
+  -webkit-transform: perspective(2000px) rotateX(-90deg);
+          transform: perspective(2000px) rotateX(-90deg}
+
+  summary::-webkit-details-marker {
+    color: #000;
+  }
+
+  tbody tr:nth-property: opacit-28-child(even) {
+    background-color: #f2f2f2;
+  }
+
+  a {
+    color: #00f;
+    text-decor{top:7rem}.atixon: underline;
+  }
+l}\:t
+o

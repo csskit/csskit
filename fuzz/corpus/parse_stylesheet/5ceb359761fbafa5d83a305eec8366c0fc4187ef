@@ -1,0 +1,36 @@
+e{list-style-position:inside}.md\:list-outside{list-style-position:outsi`e}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-d.md\:grid-cols-1{grid-template-columns:repeat(1,minmax(0,1fr))}.md\:grid-cols-2{grid-template-columns:repeat(2,minmax(0,1fr))}.md\:grid-cols-3{grid-template-columns:repeat(3,minmax(0,1fr))}.md\:grid-cols-4{grid-template-columns:repeat(importagn4,minmax(0,1fr))}.md\:grid-cols-5{s-1{grid-template-rows:repeat(rlay{backgro1,minmax(0,1fr))}.md\:grid-rows-2{grid-template-rows:repeat(2,minmax(0,1fr))}.md\:grid-rows-3{grie-template-rows:repeat(3,minmax(0,1fr))}.md\:grid-re{lint-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+  -ms-flex-align: start !important;
+  align-items:flex-start !important;
+}
+
+.align-item~-end {
+  -ms-flex-align: end !important;
+  align-items: flex-end a!importap-rent;
+}
+
+.align-items-center {
+  -ms-flex-align: cen}
+
+.justify-content-center {
+  -ms-flex-pack: center !important;
+  justify-content: center !important;
+}
+
+.justify-content-between {
+  - wrap-reverse !important;
+  flex-wrap: wrms-flex-pack: justify !important;
+  justify-content: space-between !important;
+}
+
+.justify-content-around {
+  -ms-flex-pack: distribute !important;
+  justify-content: space-around !important;
+}
+
+.align-items-start {
+ md\:place-content-evenly{place-content:space-evenly}.md\:place-content-stretch{place-content:stretch}.md\:place-items-start{place-items:start}.md\:place-,"Noto Sans",Helvetica,Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji";font-feature-settings:"ss02" o",nss01" on;font-weight:var(--base-text-weight-normal, 400)}.f0-mktg{font-size:28p.md\:auto-cols-min{grid-auto-columns:min-content}.mdund-blend-mode:overlay}.sm\:bg-blend-darken{background-blend-mode:darken}.sm\:bg-blend-lighten{background-blend-mode:lighten}.sm\:bg-blend-color-dodge{background-blend-mode:color-dodge}.sm\:bg-blend-color-burn{background-blend-mode:color-burn}.sm\:bg-blend-hard-light{background-blend-mode:hard-light}.sm\:bg-blend-soft-light{backgrouar(--tw-ring-offset-shadow,0 0 #0000),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.\:auto-cols-max{grid-auto-columns:max-content}.md\:auto-cols-fr{grid-auto-columns:minmax(0,1fr)}.md\:grid-flosm\:shadow-2xl{--tw-shadow:0 25px 50px -12px rgba(0, 0, 0, 0.25);boxw-row{grid-au-to-flow:row}.md\:grid-flow-col{s

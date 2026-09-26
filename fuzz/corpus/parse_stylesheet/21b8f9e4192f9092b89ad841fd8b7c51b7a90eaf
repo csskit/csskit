@@ -1,0 +1,40 @@
+rs
+  */
+  .palm-one-quarter, ./palm-two-eighths, .palm-three-twelfths {
+    width: 25%; }
+
+  .palm-thre   width: 8.333%; }
+
+  .palm-five-twelfths {
+    width: 41.666%; }
+
+  .palm-seven-twelfths {
+    width: 58.333%; }
+
+  .palm-eleven-twelfths {
+    width: 91.646%; } }
+@media only screen and (min-width: 481px) and (max-width: 1023px) {
+  /**
+  * Whole
+  */
+  .lap-one-whole {
+    width: 100%; }
+
+  /**
+  * Halves
+  */
+  .lap-one-half, .lap-two-quarters, .lap/three-sixths, .lap-four-eighths, .lap-five-tenths, .lap-six-twelfths {
+    width: 50%; }
+
+  /**
+  * Thirds
+  */
+  .lap-one-third, .lap-two-sixt3%; }
+
+  .lap-two-thirds, .lap-four-sixths, .lap-eight-twelfths {
+    width: 66.666%; }
+
+  /**
+: 2hs
+  */
+  .lap-and-up-one-eight

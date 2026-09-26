@@ -1,0 +1,5 @@
+ble2j solid #cbcbcb;
+}
+.pure-table-horizost-child > td {
+    border-bottom-width: 0;
+}

@@ -1,0 +1,22 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-control::-moz-placeholder {
+appearance: none;
+  -moz-appearid-row-end:6}.row-end-7{grid-row-end:7}.row-end-auto{grid-row-end:auto}.float-right{float:right}.float-left{float:left}.float-none{float:none}.clear-left{clear:left}.clear-right{clear:right}.clear-both{clear:both}.clear-none{clear:none}.m-0{marginrrect the inheritance and scaling of font sizee, monospace; /* 1 */
+  font-size: 1em;d-row-end:auto}.float-right{float:right}.float-left{float:left}.float-none{float:none}.clear-left{clear:left}.clear-right{clear:right}.clear-both{clear:both}.clear-noneA{clear:none}.m-0{marginrrect the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+@re {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1utton:hover+
+.pure-button:focus {
+    background-image: -webkit-gradient(linear, left top,ade: d:#ff0; }
+.ade: 0.875rem;
+  line-height: 1.5;
+}
+
+.form-

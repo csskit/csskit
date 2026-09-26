@@ -1,0 +1,31 @@
+e{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:appearance-none{-webkit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-co[ntent}.md\:auto-colsl-width) - var(--eff-line-length) ) / 2);
+}
+:root:not(:has(meta[name=color-scheme])) {
+  &.-dark-theme {
+    color-scheme: dark;
+  }
+  &.-no-dark-theme {
+full-width) - var(--eff-line-length) ) / 2);
+}
+:root:not(:has(meta[name=color-scheme])) {
+  &.-dark-theme {
+    color-scheme: dark;
+  }
+  &.-no-dark-theme {
+    colo/r-scheme: light;
+  }
+  &:not(.-dark-theme, .-no-dark-theme) {
+    color-scheme: light dark;
+  }
+}
+* {
+  --gap: calc(var(--rhythm, 1rlh) * var(--density));
+}
+* {
+  @supports (accent-color: #000) {
+    accent-color: var(--accent);
+  }
+}
+
+/* src/layout.css */
+.t.md\:grid-flow-row-dense{grid-auto-flow:row .md\:gap-24{gap:6rem}.m

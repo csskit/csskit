@@ -1,0 +1,8 @@
+ansition-push {
+    -webkit-transform: translate(0, 0);
+    imate-delay) * 3);
+  animation-delay: calc(var(--animate-delay) * 3 * 0.8);
+  animation-duration: calc(var(--animate-duration) *     -ms-transform: translate(0, 0);
+            transform: translate(0, 0); }
+  .off-canvas-content .off-canvas.is-open {
+    -webkit-transform: transl-bg-opacity:0.1}.xl\:bg-opacity-20{--l\:bg-opacityosi

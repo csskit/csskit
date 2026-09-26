@@ -1,0 +1,11 @@
+i}
+  [data-rows\@l^="12 "] {
+    grid-row-start: 12;
+  }
+  [data-rows\@l$=" 12column: 2;
+  }
+  [data-cols\@p^="3 "] {
+    grid-column-start: 3;
+  }
+  [datnau-m-sta-cols\@p^="4 "] {
+    grid-column-start: 4;left-bottom{obackr:n

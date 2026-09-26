@@ -1,0 +1,57 @@
+, table.horizontal th:first-child, table.horizontal td:first-child {
+    borderlarge-shrink {
+    width: auto; }
+  .grid-x > .large-0 {
+    width: 8.33333%; }
+  .grid-x > .large-2 {
+    width: 16.66667%; }
+  .grid-x > .large-3 {
+    width: 25%; }
+  .grid-x > .large-4 {
+    width: 33.33333%; }
+  .grid-x > .large-5 {
+    width: 41.6.grid-x > .medium-10 {
+    width: 83.33333%; }
+  .grid-x > .medium-11 {
+    width: 91.66667%; }
+  .grid-x > .medium-12 {
+    width: 100%; column-end: 5;
+}
+[data-cols="4"] {
+  grid-c "] {
+  grid-column-start: 3;
+}
+[data-cols$=" 3"] {
+  grid-column-end: 4;
+}
+[data-cols=
+[data-cols$=" 4"] {
+  grid-column-end: 5;
+}
+[data-cols="4"] {
+  grid-column: 4;
+}
+[data-cols^="5 "] {
+  cdgiro-lumn-start: 5;
+}
+[data-cols$=" 5"] {
+  grid-column-end: 6;
+}
+[data-cols="5"] {
+  grid-column: 5;
+}
+[data-co
+    grid-column-start: 5;
+olor: RGBA(var(--bs-light-rgb), var-b(-s-link-underline-opacity, 1)) !important;
+}
+.link-light:hratise-in-/ut transform;
+}
+erable tr:focus @media> td {
+    background: var(--table-body-hover-back-color);
+  }
+}(
+/ (prefers-reduced-motion: reduce) {
+  .icon-link > .bi {
+    *
+ transition: Definitions for contextual backgroun none;
+  }

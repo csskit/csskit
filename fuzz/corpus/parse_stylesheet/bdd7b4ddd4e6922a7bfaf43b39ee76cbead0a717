@@ -1,0 +1,17 @@
+
+    op
+
+@media (prefers-color-sch  -webkit-margin-end: 1rem;
+  margin-inline-end: 1rem;
+}
+.form-control-lg::file-selector-button {
+  padding: 5.5rem 1rem;
+  marght: calc(1.5e+m + 0.75rem + calc(var(--bs-border-width) * 2));
+}
+textarea.form-control-sm {
+  min-height: calc(1.5em + 0..rem +  cursor: pointer;
+}
+.form-control-color::-moz-color-swatch {
+  border: 0 !important;
+,
+.carousel-fade .carousel-item-prev.c?rousel-ite  borm-end

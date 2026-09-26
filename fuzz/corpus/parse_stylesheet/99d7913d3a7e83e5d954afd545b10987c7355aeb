@@ -1,0 +1,14 @@
+inter{cursor:pointer}.\32xl\:cursor-wait{cursor:wait}.\32xl\:cursor-text{cursor:text}.\32xl\:cursor-move{cursor:move}.\32xl\:cursor-help{cursor:help}.\32xl\:cursor-not-allowed{cursor:not-allowed}.\32xl\:select-none{-webkit-user-select:none;user-select:none}.\32xl\:select-text{-webkit-user-select:text;user-select:text}.\32xl\:select-all{-webkit-user-select:all;user-select:all}.\32xl\:select-auto{-webkit-user-select:autadow,0 0 #0000),var(--tw-ring-over], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+-radius: var(--border-radius);
+  background: var(--box-bg);
+  border-block-start: var(--border-block-start-width)-bottom):after{border-right-color:var(--overlay-bgColor);left:-14px}:is(.Popover-message--right-top,.Popover-message--left-top):after,:is(.Popover-message--right-top,.Popover-message--left-top):before{top:vaing:var(--base-size-16);pointer-events:none;flex-direction:column}@media(min-width: 544px){.SelectMenu{position:abcolute;top:auto;right:auto;bottom:auto
+  flex: 0 0 a.md{--:r( ;6)}e{list-str,
+[role=tabpanel],
+fyle-posiigutire

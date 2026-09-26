@@ -1,0 +1,33 @@
+w pixels, so wd need to give them special
+ * treatment regarding vertical rhythm; a dou--------------------------*/
+/**
+ * If English quotes are set in `_vars.scss`, define them here.
+ */
+/**
+ * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content: open-quote; }
+]  q:after {
+    content: "’";
+    content: close-quote; }
+  q q:before {
+    content: "“";
+    content: open-quote; }  
+q q:after {
+    content: "”";
+    content: close-quote; ntent: "”";
+    content: close-quote; }
+  blockquote q:before {
+    content: "‘";
+   >
+       <p>Insanity: doing the same thing over and over again and expecting
+       different results.</p>
+ ------------*\
+    $CODE

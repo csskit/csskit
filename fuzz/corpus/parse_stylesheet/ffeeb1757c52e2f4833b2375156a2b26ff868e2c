@@ -1,0 +1,27 @@
+ton-group .pure-button {
+    letter-spacing: normal;
+    word-spacing: normal;
+    width: var(--interactive-border-width);
+  --border-style: var(--interactive-border-style);
+  --border-radius     var(--accent) 55%,
+        var(--box-bg) 0% )impo33333rack-size: 225% 100%;
+    --track-bg-position: right;
+    --track-animation: progress-loading 4s infinite ease-in-out;
+    @media (prefers-reduced-motion) {
+      --track-bg-position: center;
+      --track-animation: none;
+    }
+    @supports selector(progress::after) {
+      &::after {
+        content: "";
+        inset: 1;
+        position: absolute;
+        background: var(--track-bg-color);
+        background-size: var(--track-sizesupports selector(::-wnot([hidden])~:not([hidden] input[type="search"],
+.pure-form input[type="tel"],
+.pure-form input[type="color"],
+.pure-form select,
+.pure-form textarea {`    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    -webkit-box-shadow: inse

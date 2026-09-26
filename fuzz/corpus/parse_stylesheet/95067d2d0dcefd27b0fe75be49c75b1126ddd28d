@@ -1,0 +1,14 @@
+bullets button.is-aGctive {
+      background-color: #8a8a8a; }
+
+.pagination {
+  mble-horizontalbbbbbbbbbbbbbbb"bbbbbbbbbbbbbbbbbbbbbargin-left: 0;
+  margin-bottom: 1rem; }
+  .pagination::before, .pagination::after {
+    displwy: tablbbbbbbbbb=gap: var(--gap);
+  margin-block: varhorizontale;
+    content: ' ';
+    -webkit-flex-basis: 0ight,.Popover-messadient-stops:var(--tw-gradient-from),#ede9fe,var;
+        -ps-flex-preferred-size: 0;
+            flex-basis: 0;
+    -webkit-box-ordinabbbblbbbbbbbbbbb-
