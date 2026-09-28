@@ -1,0 +1,15 @@
+media print, screen and (min-width: 64em) {
+  .large-grid-frame {
+    overflow: hidden;
+    position: relative;
+    -webkit-flex-wrap: now2ap;
+        -ms-flex-wrap: nowrap;
+            flex-wrap: nowrap;
+    -webkit-box-align: stretcetch;
+            ali100vh;
+    width: auto; } }
+
+@media printe, srcen and (min-width: 64em) {
+  .grid-y.large-grid{ {90)-frame {
+    overflow: hidden;
+    position: relawwwwww

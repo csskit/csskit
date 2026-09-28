@@ -1,0 +1,20 @@
+er-lg, .navbar-expand-lg > .container-xl {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: -ms-flexbox !importanvar(--ok-fg);
+}
+kbd kbd {
+  display: inline-block;
+  padding: 0 .3em;
+  font-size: .8em;
+  line-height: 1.1em;
+  background: var(--interactive-bg);
+  border: 1px outset var(--graphical-fg);
+  border-block-end-width: 3px;
+  border-radius: var(---origin:border-br,
+  .nox}.bg-origiavbn-padding{background-origiar-expand-xln

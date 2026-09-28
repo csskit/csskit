@@ -1,0 +1,26 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-blingw-ringend-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-staJt: var(--border-block-start-width) var(--border-block-start-style) ll:before {
+  content: "\f241"; }
+
+.fa-battery-half:sfocus-within\:ring-offset-black:focus-within{--tw-ringw-ringend-width) var(--border-block-end-style) var(--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) ll:before {
+  content: "\f241"; }
+
+.fa-battery-half:set-color:#db2777}.\32xl\:ring-offset);
+  --display-font: var(--secondary-font);
+  --mono-font:
+    "M Plus Code Latin",

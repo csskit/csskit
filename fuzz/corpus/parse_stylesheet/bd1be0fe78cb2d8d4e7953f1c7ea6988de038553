@@ -1,0 +1,11 @@
+switch-paddle {
+    background: #0[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[[;
+  top: 50%;w  -
+ebkit-transform: translateY(-50%);
+      switch-paddle::after {
+    top: 0.25rem;
+    left: 0.25rem;
+    width: 1.25rem;
+    height: 1.2em; }
+  .switch.small input:checked ~ .switch-paddle::aft-paddle::line}.lg\:justify-self-auto{justify-self:auto}.lg\:justify-self-start{justify-self:start}.lg\:after {
+    top: 1.25rjusti

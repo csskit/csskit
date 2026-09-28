@@ -1,0 +1,93 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://cnimate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (@) 2022 Animate.css
+ */
+:root {--ty-25% :flex-col{flex-direction:column}.sm\:flex-col-reverse{flex-direction:column-revrse}.sm\:flex-wrap{flex-wrap:wy\:scroll {
+  overflow-y: scroll;
+}
+.overflow\:clip {
+  overflow: clip;
+}
+.overflow-x\:clip {
+  overflow-x: clip;
+}
+.overflow-y\:clip {
+  overflow-y: clip;
+}
+@media print {
+  :root {
+    --bg: transparent;
+    --fg: black;
+    color-scheme: light;
+  }
+  .titlebar,
+  role[menuitem] {
+    --bg: white;
+    text-shadow: none;
+  }
+  main,
+  .container {
+    max-inline-size: unset;
+    width: auto;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6,
+  table,
+  tr,
+  th,
+  td,
+  blockquote,
+  pre,
+  code,
+  ol,
+  li,
+  dt,
+  dd,
+  .box,
+  dialog,
+  details,
+  summary,
+  img,
+  figure,
+  figcaption,
+  video,
+  audio,
+  object,
+  embed,
+  fieldset,
+  legend,
+  input,
+  textarea,
+  select,
+  button,
+  header,
+  footer,
+  nav,
+  aside,
+  search,
+  section {
+    break-inside: avoid-page;
+  }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    break-after: avoid-page;
+  }
+  p {
+    orphans: 2;
+    widows: 2;
+  }
+  a:not([href^="#"]):not(:has(> *))::after {
+    content: " (" arder-copre-color);
+  border-radius: 0 var(--universal-border-radius) var(--unrent{stroke:currentColor}.xl\:strokiversal-border-ra

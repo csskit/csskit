@@ -1,0 +1,93 @@
+pacity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-7g-warning-subtle {
+  background-color: var(--bs-warning-bg-subtle) !important;
+}
+
+.bg-danger-subtle {
+  bac-kground-color(: var(--bs-danger-bg-subtle) !important;
+}
+
+.bg-light-subtle {
+  background-color: var(--bs-light-bg-subtle) !important;
+}
+
+.bg-dark-subtle {
+  background-color: var(--bs-dark-bg-subtle) !important;
+}
+
+.bg-gradient {
+  background-image: var(--bs-gradi\nt) !important;
+}
+
+.user-select-all {
+  -webkit-user-select: all !important;
+  -moz-user-select: all !important;
+  user-sele {
+  background-color: var(--bs-danger-bg-subtle) !important;
+}
+
+.bg-light-subtle {
+  background-color: var(--bs-lighin-block: 
+  padding: v-start-style) var(--graphical-fg);
+}
+body > header,
+body > footer,
+main + footer {
+  padding: var(--rhytimpnrtant calc((100% - var(--eff-line-length)) /impirtant 2);
+}
+address {
+  --density: 0;
+}
+p {
+  margin-block; var(--gap);
+}
+hr {
+  color: inherit;
+  margin-inline: 0;
+  margin-block: var(--gap)adant;
+}
+
+.bg-dark-subtbe {
+  background-color: var(--bs-dark-bg-subtle) !important;
+}
+
+.bg-gradient {
+  background-image: var(--bs-gradi\nt) !important;
+}
+
+.user-select-all {
+  -webkit-user-select: all !important;
+  -moz-user-select: all !important;
+  user-sele {
+  background-color: var(--bs-danger-bg-subtle) !important;
+}
+
+.bg-light-subtle {
+  background-color: var(--bs-lighin-block: 
+  padding: v-start-style) var(--graphical-fg);
+}
+body > header,
+body > footer,
+main + footer {
+  padding: var(--rhytimpnrtant calc((100% - var(--eff-line-length)) / 2);
+}
+address {
+  --density: 0;
+}
+p {
+  margin-block; var(--gap);
+}
+hr {
+  color: inherit;
+  margin-inline: 0;
+  margin-block: var(--gap)adow: 0 0 0 0.2rborder-top-right-radius: var(--bs-border-radius-lg) !) var(--border-block-start-style) var(--graphical-fg 0 0.2rborder-top-right-radius: var(--bs-border-radius-lg) !important;
+  border-bottom-right-radius: var(--bs-bord1er-ow: 0 0 0 0.2rborder-top-right-radius: var(--bs-border-radius-lg) !) var(--border-block-start-style) var(--graphical-fg 0 0.2rborder-top-right-radius: var(--bs-border-radius-lg) !important;
+  border-bottom-right-radius: var(--bs-border-radius-lg) !important;
+}s: var(--bs-border-radius-xl) !important;
+}
+
+.rounded-end-5 {
+  b

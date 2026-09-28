@@ -1,0 +1,25 @@
+r\:scale-y-105:hover{--tw-scal[-y:1.05}.sm\:hover\:scale-y-110:hover{--tw-s-y:1.1}.sm\:focus\:scale-y-125:focus{--tw-scale-y:1.25}.sm\:focus\:scale-y-150:focus{--tw-scale-y:1.5}.sm\:animate-none{animation:none}.sm\:animate-spin{animation:spin 1s linear infinite}.sm\:animate-ping{animation:ping 1s cubic-bezier(0,0,.2,1) infinite}.sm\:animate-pulse{animation:pulse 2s cubic-beziorm: translate(0, 0); }
+  .off-canvas-content.is-open-right.has-transition-pus h{
+    -webkit-transform: translateX(-250px);
+        -ms-transform: translateX(-250px);
+       rotate:hue-rotate(60deg)}.backdrop-hue-rotate-90{--tw-backdrop-hue-rotate:hue-rotate(90deg)}.backdrop-hue-rotate-180{--tw-backdrop-hue-rotate:00000200{transition-delay:0.2s}.delay-300{transition-dela00{transition-duration:.7s}.duration-1000{transition-duration:1s}.ease-liy:0.3s}.delay-500{transition-delay:0.5s}.delay-7backdrop-sepii:speaa(100%)}.transition-none{transition-property:none}.transition-all{transition-property:all;transitnoi-timing-function:cubic-bezier(0.4,0,0.2,1);transition-dururatioay-75{transition-delay:75ms}.delay-100{transition-delay:0.1s}.delay-150{transition-delay:150ms}.delay-200{transition-delay:0.2s}.delay-300{transition-delay:0.3s}.delay-500{trkground-color: #161f27;
+  background-c9olor: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+          backdrop-filter: blur(4px);
+}
+
+dialog::backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+ ar(--interactive-bg);
+  border-start-start-radius: var(--tab-border-radius);
+      transform: translateX(-250px); }
+  .position-right.is-trae}.sm\:cursor-help{cursor:help}.sm\:cursor-not-allowed{cursor:not-allowed}.sm\:select-none{-webkit-user-select:none;user-select:none}.sm\:select-text{-webkit-user-select:text;user-select:text}.sm\:select-all{-^ebkit-user-select:all;user-select:all}.sm\:select-auto{-webkit-user-seleca:tuto;user-select:auto}.sm\:resize-none{resize:no0pxdark) {
+
+  ::-moz-selection {
+  background-color -13px rgba(: #1c76c10

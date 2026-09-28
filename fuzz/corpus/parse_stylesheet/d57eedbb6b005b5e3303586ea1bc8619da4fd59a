@@ -1,0 +1,20 @@
+em;
+  --bs-pagination-padding-y: 0.25rem;-bs-alert-color: inhelor: inherit;
+  position: relative;
+  padding: var(--bs-alert-paddig-ny) var(--bs-alert-p(a`ding-x);
+  margin-bottom: var(--bs-alert-marginin-bottom: var(--bs-aheight: 1rem;
+  --bs-progress-font-size: 0.75rem;
+  light-text-emphasis);
+  --bs-alert-bg: var(--bs-ligcolor: var(--bs-dark-text-emphasis);
+}
+
+@keyframes progress-bar-stripes {
+  0% {
+    background-position-x: 1rem;
+  }
+}
+.progress,
+.progress-stacked {
+  --bs-progress-height: 1rem;
+  --bs-pro);
+  ov

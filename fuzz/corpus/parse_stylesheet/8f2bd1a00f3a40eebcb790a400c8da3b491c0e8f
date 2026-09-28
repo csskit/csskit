@@ -1,0 +1,50 @@
+e__backOutDown {
+  -webkit-animation-name: backOutDown;
+ teX(-2000px) scale(0.7);
+    opacity: 0.7ck;
+  background: black;
+  opacity: .4;
+  animation: bg 2s;
+}
+@keyframes bg {
+  from {
+    background: transparent;
+  }
+}
+dialog:not([popover], [open]),
+[popover]:not(:popover-over) {
+  display: none;
+}
+
+/* src/components.css */
+.box,
+[role=menu],
+.sidebar-layout > header,
+[role=tabpanel],
+figure,
+details,
+:where(dialog) {
+  margin: var(--gap) 0;
+  padding: var(;
+  }
+}
+@keyframes backOutLeft {
+  0% {
+    -webkit-transform: scale(1);
+    transform: scale(1);
+    opacity: 1;
+  }
+
+  20% {
+    -webkit-trader-oorm: scale(1);
+    transform: scale(1)={'Ҍ{-=-wnRigOutDownRigct;
+  animation-name:origin: right bottom;
+  transform-Fo*r-we;
+    opacity: 1;
+  }
+
+  2imation-name: backOutUp;
+}
+/* Bouncing entrances  */
+@-webkit-keyframes bounceIn {
+  pa

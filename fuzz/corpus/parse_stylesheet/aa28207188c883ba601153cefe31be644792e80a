@@ -1,0 +1,26 @@
+      <ul class=check-list>
+           <li>
+               <input /> <label />
+           </li>
+           <li>
+               <input /> <label />
+           </li>
+       </ul>
+   </li>
+ *
+ */
+.check-list {
+  list-style: none;
+  margin: 0; }
+
+/*
+ * Labels in check-lists
+ */
+.check-label,
+.check-list label,
+.check-list .e-100>:not([hllowed{cu{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{rsor:not-allowed}.\label {
+  diius: var(32xl\:select-none{-l{fley-direct--bs-accordion-border-radius);
+  border-top-right-radius: var(--bs-accordion-border-radius);
+}
+.accordion-item:first-of-type .accordion-button {
+  border-top-ion:column}.\32xl\:flex-col-relverse{flex-direef

@@ -1,0 +1,9 @@
+calc(1ector-accent);
+      border-radius: 0;
+    }
+    &:-moz-meter-optimun {
+      --box-bg: var(--ok-bg);
+      --accent: var(--ok-fg);
+      --graphical-fg: var(--ok-grap"";ogress-bar {
+        background: var(--track-bg-color);
+        background-size: var(--track-si

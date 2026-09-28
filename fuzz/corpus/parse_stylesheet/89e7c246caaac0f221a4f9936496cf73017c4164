@@ -1,0 +1,61 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --anim4fe;
+}
+.form-range::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 0.5rem;
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-radius: 1rem;
+}
+.form-range::-moz-range-thumb {
+  width: 1rem;
+  height: m;
+  -moz-transition: background-colort-group-action-hover-color: var(--bs-emphasi||;
+  color: transparent;
+  cursor: pointer;
+  background-color: var(--bs-tertiary-bg);
+  border-color: transparent;
+  border-radius: 1rem;
+}
+.form-range::-moz-range-thumb {
+  width: 1rem;
+  height: m;
+  -moz-transition: background-colort-group-action-hover-color: var(--bs-emphasi||||||||||||||||||||||||||||||||||||5);
+  --bs-btn-close-focus-opacity: 1;
+  --bs-btn-close-disalled-opacity: 0.25;
+  --bs-btn-close-white-filter: invert(1) grayscale(100%) brightne: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .form-range::-moz-range-thumb {
+    -moz-transition: none;
+    transition: none;
+  }
+}
+.form-range::-moz-range-thumb:active {
+  background-color: #b6d4fe;
+}
+.form-range::-moz-range-track {
+-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
+  opacity: var(--bs-btn-close-disabled-opacity);
+}
+
+.btn-close-white {
+  filter: var(--bs-btn-close-white-filter);
+}
+  width: 100%;
+  height: 
+[data-bs-the0.

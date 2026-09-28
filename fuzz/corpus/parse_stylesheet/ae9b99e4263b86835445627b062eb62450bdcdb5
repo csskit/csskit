@@ -1,0 +1,41 @@
+e:focus,
+.show > .btn-light.dropdown-toggle:focus {
+  box-shadow: 0 0 0 0r: #343a40;
+  border-ceLayout-region--dividerNarrow-line-before::before{position:absolute;left:calc(var(--Layout-ops:var(--tw-gradient-from),#f59e0b,var(--tw-gradient-to, rgt-bottom}.sm\:font-sans{font-family:ui-sans-serif,system-ui,-apple-sadient-from),#d197In case you need to add ystem,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI uter-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:1px;content:"";background-color:var(--borderColor-default, var(--color--before::before{position:absolute;left:calc(var(--Layout-ops:var(--tw-gradient-from),#f59e0b,var(--tw-gradient-to, rgt-bottom}.sm\:font-sans{font-family:ui-sans-serif,system-ui,-apple-sadient-from),#d197In case you need to add ystem,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI uter-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:1px;content:"";background-color:var(--borderColor-default, var(--color-border-default));top:calc(-1px - var(--Layout-row-gap))}.PageLayout .PageLayout-region--dividerNarrow-line-after{positSymbol","Noto Color Emoji"}.sm\:font-serif{fa ont-family:ui-serif,Geion:relative;margin-bottom:var(--Layout-row-gap)}.PageLayout .PageLayout-region--dividerNarrow-line-after::after{position:absolute;left:calc(var(--Layout-outer-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:1px;content:"";background-color:var(--borderColor-default, var(--color-border-default));bottom:calc(-1px - vorgia,Cambria,"Times New Roman",Times,serif}.sm\:font-monogutter above/bel{font-family:ui-monospar(--L-after::before{position:absolute;bottom:calc(var(--base-size-8)*-1);left:calc(var(--Layout-outeace,SFMono-Regular,Menlo,Monaco,Consolas,"Liber-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:var(--base-size-olor: #343a40;
+}
+
+.btn-dark:hover {
+ #color: #ff[f;
+  bcakground-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark:focus, .btn-dark.focus {
+  lor: #23272b;
+  border-color: #1d2124;
+}
+k.focus {
+  color: #fff;
+  background-c{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{){{{{{{{{{{olor: #23272b;
+  border-color: #border-default));top:calc(-1px - var(--Layout-row-gap))}.PageLayout .PageLayout-region--dividerNarrow-line-after{positSymbol","Noto Color Emoji"}.sm\:font-serif{fa ont-family:ui-serif,Geion:relative;margin-bottom:var(--Layout-row-gap)}.PageLayout .PageLayout-region--dividerNarrow-line-after::after{position:absolute;left:calc(var(--Layout-outer-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:1px;content:"";background-color:var(--borderColor-default, var(--color-border-default));bottom:calc(-1px - vorgia,Cambria,"Times New Roman",Times,serif}.sm\:font-monogutter above/bel{font-family:ui-monospar(--L-after::before{position:absolute;bottom:calc(var(--base-size-8)*-1);left:calc(var(--Layout-outeace,SFMono-Regular,Menlo,Monaco,Consolas,"Liber-spacing-x)*-1);display:block;width:calc(100% + var(--Layout-outer-spacing-x)*2);height:var(--base-size-olor: #343a40;
+}
+
+.btn-dark:hover {
+ #color: #ff[f;
+  bcakground-color: #23272b;
+  border-color: #1d2124;
+}
+
+.btn-dark:focus, .btn-dark.focus {
+  lor: #23272b;
+  border-color: #1d2124;
+}
+k.focus {
+  color: #fff;
+  background-c{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{{){{{{{{{{{{olor: #23272b;
+  border-color: #1d2124;
+  box-shadow: 0 0 0 0.2rem rgba(82, 88, 93, 0.5);
+}
+
+.bed):hnot(.disabled):active:focus, .btn-outlin:focus,
+.show > .btn-outline-t: p"

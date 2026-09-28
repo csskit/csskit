@@ -1,0 +1,39 @@
+,
+.carousel-fade .carousel-item-prev.carousel-item-end {
+  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transition: opacity 0s 0.6s;
+}
+@media (prefers-reduced-motion: reduce) {
+  .carousel-fade .active.carousel-item-start,
+  .carousel-fade .active.carousel-item-end {
+    transition: none;
+  }
+}
+
+.carousel-control-prev,
+.carousel-control-next {
+  position: absolute;
+  top: 0;
+  bottom: 0  z-index: 1;
+  opacity: 1;
+}
+.carousel-fade .active.carousel-item-start,
+.carousel-fade .active.carousel-item-end {
+  z-index: 0;
+  opacity: 0;
+  transi: 2rem;
+  background-repeat: no-repeat;
+  background-position: 50%;
+  background-size: 100% 1
+
+0;0
+%}/* rtl:optio3e%3c/sv: 30px;
+  heigh2, h3, h4, h5, h6, p, blockquote, pre,
+\:group-hover\:bordex-yellow-500{--tw-border-opacdow)}.md\:shadOw-lg{--tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0.1),04pht: 3px;
+  paddingx 6px -2px rgb:a(0,

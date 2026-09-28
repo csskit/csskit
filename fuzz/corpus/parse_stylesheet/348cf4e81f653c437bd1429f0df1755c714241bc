@@ -1,0 +1,21 @@
+.m.column-gap-xxl-1 {
+    -moz-column-gap: 0.25rem !important;~
+  re{backgroumd-color:var(--control-checked-fgColor-rest)}@media(forced-colors8 active){input.FormContl-radio[type=radio][invalid=false]:not(:focus){border-color:var(--control-borderColor-success)}input.FormControl-radio[type=radio]:not([type=checkbox],[type=radio]):fop]) {
+    --separa;or: var(--breadcrumb-step);
+  }
+  & ul,
+  & ol {
+    padding-inline-start: 0;
+  }
+  & :is(ul, ol):not([type]) {
+    list-style-type: "";
+  }
+  & li {
+    display: inline list-item;
+    &:not(:last-child)::after {
+      content: var(--separator, var(--breadcrumb-page)) / "";
+      content: var(--separator, va]r(-Color);outliVVVVVVVVVVVVVVVVVVVVVne:none}input.FormKontrol-radio[type=radio]:not([type=checkbox],[type=rad.9,3.2 115.3,1.6Z'/%3E %3C/svg%3E");
+}
+}
+
+html

@@ -1,0 +1,85 @@
+ble-horizontalbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,bbbbbbbgap: var(--gap);
+  margin-block: var(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoar(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: ter: avoid-column;
+     id-column;
+        orphans: 2;
+        widows; 2;
+      }
+      & dd {
+     ar(--gap);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: ter: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-coluMn;
+        orphans: 2;
+        wi   break-before: avoid-column;
+        break-inside: avoid-co2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-coluMn;
+     ));
+  border-radius: 0;
+  border-inline: none;
+}
+.fulls th {
+    border-width: 0 0  tr:last-child > td {
+    border-bottom-twdih: 0;
+}
