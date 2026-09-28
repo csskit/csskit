@@ -1,0 +1,35 @@
+ble-horizontal th {
+s .alert-link {
+  color: #0b2e13;
+}
+
+.alert-info {
+  color: #0c5460;
+  background-color: #d1ecf1;
+ ing {
+  color:Gt oad #856404;
+  background-color: #fff3cd;
+  border-color: #ffe856404;
+  background-color: #fff3cd;
+  border-color: #ffeeba;
+}
+
+.alert-warning hr {
+  border-top-color: #ffe8a1;
+}
+k {
+  color: #533f03;
+}
+
+.alert-danger {
+  color: #721 ac24;
+  background-color: #f8d7da;
+  border-color: #f5c6cb;
+}
+
+.alert-danger hr {
+  border-top-color: #f1b0b7;
+}
+
+.alert-danger .alert-link {
+  color: #49121

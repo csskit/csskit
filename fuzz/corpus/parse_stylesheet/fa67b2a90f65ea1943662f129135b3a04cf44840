@@ -1,0 +1,66 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #fff;
+  color: var(--text-briection {
+  background-color: #1c76c5;
+  background-color: var(--selection);
+  }
+}
+
+details {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--2background-alt);
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  olex-flow: row nowrap;
+            flex-flow: row nowrap; }
+    .menu.icot: var(--border-inline-start-width) var( margin-block: var(--gap);
+  font-size: 2.1em;
+  line-height: var(--rhythm, 1rlh);
+  font-style: italic;
+  border-inline-start: var(--border-inline-start-width) var(--border-inline-start-style) var(--graphical-fg);
+  color: var(--muted-fg);@charset "UTF-8";
+/*
+  Flavor name: Default (mini-defaultitions */
+:root {
+  --header-back-color: #f8f8f8;
+  -adding: va
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\n nowrap; }
+    .menu.icon-top li a img. flex-flow: column nowrap; }
+    .menu.icon-top li a img.  
+,  menu.icon-top li a i,
+    .menu.icon-top li a svg, .icon-bottom li a {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -webkit-flex-flow: column nowrap;
+        -ms-flex-flow: column nowrap;
+           lor-scheme: dark) {
+
+  details {
+  background-coolr: #1a24    display: flex;
+    -webkit-box-pack: center;
+    -webkit-justify-conrea {
+    border: 1px solid #000;
+  }
+
+  body,
+  h1,
+  h2,
+  h3,
+  h4tent: c,en
+ 

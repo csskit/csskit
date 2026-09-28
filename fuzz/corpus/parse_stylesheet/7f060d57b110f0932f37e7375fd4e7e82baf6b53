@@ -1,0 +1,13 @@
+r{place-self:center}.sm\:place-self-stretch{place-self:stretch}.sm\:self-auto{align-self:auto}.sm\:self-start{align-self:flex-sontain{overscroll-behavior-x:contain}.seomv\:rscroll-x-none{overscroll-behavior-x:none}.sm\:truncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sm\:overflow-ellipsis{text-overflow:ellipsis}.sm\:overflow-clip{text-overflow:clip}.sm\:whitespace-nouncate{overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.sm\:overflow-ellipsis{text-overflow:ellipsis}.smrsor: not-allowed;
+    opacity: 0.5; }
+  [data-whatinput='mouse'] input:focus ~ .switch-paddle {
+    outline: 0; }
+
+.switch-active, .switch-inactive {
+  position: absolute;
+  top: 50%;
+  -webkit-transform:sform: translateY(-50%);
+          transform: translateY(-50%); }
+
+.switch-active {
+  leradius:.375rem;border-bottom-left-radius:.375rem}.sm\:rounded-b-lg{border-bottom-right-radius:.5rem;border-bottom-left-ra

@@ -1,0 +1,41 @@
+e{list-style-position:inside}.md\:list-outsing-inline-end\:0 {
+  padding-inline-end: 0;
+}
+.padding-inl0:not([specificity-hack]) {
+  margin: 0;
+}
+.margin:not([specificitye;
+  background: var(--nav-hover-back-color);
+}
+
+nav .sublink-1 {
+  position: rela(--universal-border-radius);
+  transition: background 0.3s;
+}
+
+nav a:hover, nav a:focus, nav a:visited:hover, nav a:visited:focus {
+  text-decoration: none;
+  background: var(--nav-hover-back-color);
+}
+
+nav .sublink-1 {
+  position: reloggle:not(.persistent) {
+    display: none;
+  }
+}
+
+[type="c
+
+nav .sublink-1:before {
+  position: absolute;
+  left: calc(var(--universal-padding) - 1 * var(--universal-padding));
+  top: -0.0625rem;
+  content: '';
+  heigh00%);
+  clip-path: inset(100%);
+}
+
+[tyap:2.5rem}.md\:gap-11{gap:2.75rem}.md\:gap-12{gap:3rem}.md\:gnone;appearance:none}.md\:auto-cols-auto{grid-auto-col5rem}.md\:gap-24{gap;
+}
+
+}.m

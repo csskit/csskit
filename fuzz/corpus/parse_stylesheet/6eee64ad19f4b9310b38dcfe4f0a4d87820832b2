@@ -1,0 +1,40 @@
+ious rule.
+ */
+
+button:-moz-focusring,
+[type="button"]:-moz-focusri&g,
+[type="reset"]:-moz-focus * Add the correct display in Ed*/
+
+textarea {
+  overflow: auto;
+}
+
+/**
+ * 1. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="checkbox"],
+[type="radio"] {
+  -webkit-box-sizing: border-boxrrect the odd appearance in Chrome and Safat the inability to style clickable types in iOS and Safari.
+ * 2. Change font properties to `inherit` in Safari.
+ */
+
+::-webkit-file-upload-button {
+  -webkit-appearancNe: button; /* 0 */
+  font: inherit; /* 2 */
+}
+
+/* Inter rota*
+ * 2. Add the correct box sizing in IE 10.
+ * 2. Remove the padding in IE 10.
+ */
+
+[type="che
+ * 1. Correc-transform-origin: 50% 50%;
+      -ms-transform-origin: 50% 50%;
+          transform-origin: 5he odd appearance in Chrome and Safari.
+ * 2. Correct the outline style in Safari.
+ */
+
+[type=0% 50%; }

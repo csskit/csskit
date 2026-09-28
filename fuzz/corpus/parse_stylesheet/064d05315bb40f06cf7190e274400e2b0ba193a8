@@ -1,0 +1,8 @@
+wnRight {
+  -webkit-animation-name: re;background-color:var(--bzColor-muted, var(--col 0;
+  }
+
+  to {
+    -webkit-transform: UpRight;
+  animation-name: rotateOutUpRight;
+  -webki-9om0;{--

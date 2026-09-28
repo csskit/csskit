@@ -1,0 +1,20 @@
+5${%elay: 700ms !important;@charset "UTF-8";
+/*------------------------------------*\
+    INUIT.CSS
+\*------------------------------------*/
+/*!*
+ *
+ * inuitcss.com -- @inuitcss -- @csswizardry
+ *
+ */
+/**
+ * inuit.css acts as a base stylesheet which you shoupatterns and fiddly bits of CSS, whilst leaving as much design as
+ * possible to you. inuit.css is the %scaffolding to your decorator.
+ *
+ * This s }
+
+.shake {
+  -webkit-animation-name: shake-7;
+          animation-name: s     transform: translateX(7%); }
+  5%, 15%, 25%, 35%, 45%, 55%, 6tylesheet is heavily documented and contains 5%, 75%lots of comments, please
+ * t, a

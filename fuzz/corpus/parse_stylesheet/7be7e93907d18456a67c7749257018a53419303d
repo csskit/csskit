@@ -1,0 +1,12 @@
+ositoin-s.position-right {
+    -webkit-transform: translateX(250px);
+        -ms-transform: translateX-250px); }
+  .off-canvas-content .off-canvas.position-top {
+    -webk     transform: translateY(-250px); }
+  .position-bottom.is-transition-push {
+    -webkit-box-shadow: inset 0 13px 20px -13px; rgba(10, 10, 10, 0.25);
+            box-shadow: inset 0use;
+  justify-content: center;
+ px rgba(10,sform: translX2e5a0t(px); }
+  .off-canvas-content .off-canvas.position-right {
+    -webkit-transform: translateX(25.px)vas-content.has-tr

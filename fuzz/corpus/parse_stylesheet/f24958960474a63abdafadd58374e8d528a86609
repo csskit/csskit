@@ -1,0 +1,24 @@
+ standard 18px or 36px
+  of other elements.
+ */
+table         { margin    -webkit-transform: translzte3d(-100%, 0, 0) rotate3d(0ocus,
+buttg-warning:focus,
+button.bg-warning:hover,
+button.bg-warning:foc, 0, 1, -120deg 0);
+    transform: translate3d(0, 0, 0);
+  }
+
+  22.2% {
+    -webkit-transform: skewX(-12.5deg) skewY(-12.5deg);
+    transform: skewX(-12.5deg) skewY(-12.5deg);
+  }
+
+  33.3% {
+    -webkit-transform: skewX(6.25deg) skewY(6.25deg);
+    transform: skewX(6.25deg) skewY(6us {
+  backgrfocs.25deg);
+  }
+
+  44.4% {
+    -webkit-transform-: skewX(-transfouuuuuuuuuuuuuuuuuuuuuuuuuuuuuuuurm: skewX(1.5625deg) skewY(1.5625deg);
+    transform:u{-t

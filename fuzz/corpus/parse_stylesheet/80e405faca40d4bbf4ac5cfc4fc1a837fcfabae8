@@ -1,0 +1,37 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(--text-bright);
+  }
+
+  ::selection {
+  color: #falign-items: flex-start;
+  background-color: #f7f7f7;
+  background-color: var(--background-alt);
+  padding: 10px 10px 0;
+  margin: 1em 0;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  details {
+  background-color: #1a242f;
+  background-color: var(--background-alt);
+  }
+}
+
+details[open] {
+1  padding: 10px;
+}
+
+details > :last-chil/*! tailwindcss v2.2.19 | MIT License | https://tailwindcss.com *//*! modekn~normalize v1.1.0 | MIT License | https://githubd.com/sindresorhus/modern-normalize */*,::after,::before{box-sizing:border-box}ht {
+  margin-bottom: 0;
+}
+
+details[open] sum
+  pmladding:{

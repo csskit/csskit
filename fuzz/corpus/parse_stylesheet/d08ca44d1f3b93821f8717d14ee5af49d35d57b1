@@ -1,0 +1,42 @@
+(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 77em) {
+  .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0 !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-'range']:focus::-ms-fill-lower {
+  background: #161f27;
+  background: var(--ba0),var(--tw-ring-shadow,0 0 #0000),var(--tw-shadow)}.md\:hover\:shadow-md:hover{--tw-shadow0vw;
+  --eff-line-length: min( calc( var(--full-width) - (2 * var(--rhythm, 1rlh)) ), var(--line-length) );
+  --gutter-width: calc( ( var(--ful04);box-shadow:var(--tw-ring-offset-shadow,0 0 #0000),var(--tw-rickground);
+  }
+}
+
+input[type='range']:focus::-ms-fill-upper {
+  background: #efefef;
+  background: var(--background);
+}
+
+@media (prefers-color-scheme: dark) {
+
+  input[type='range']:focus::-ms-fill-upper {
+  backgro -webkit-transform: translateX(0);
+      -ms-transform: translateX(0);
+          transform: tran

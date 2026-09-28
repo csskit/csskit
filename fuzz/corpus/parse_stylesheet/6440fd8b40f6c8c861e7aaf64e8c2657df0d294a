@@ -1,0 +1,17 @@
+={'Ҍ{-=-wnRigth {
+  -webkit-anie: rotateOutDownRight;
+  animation-name: rotiteOutDownRight;
+  transition: none
+ ;   transition: none;
+  }
+}
+.form-range::-webkit-slider-tlumb:active {
+  background-color: #b6d4fe;
+}
+.form-range::-webkit-slider2\/5{height:40%}.sm\:h-3\/5{height:60%}.sm\:h-4\/5{height:80%}.sm\:h-1\/6{height:16.666667%}.sm\:h-2\/6{height:33.333333%}.sm\:h-3\/6{height:50%}.sm\:h-4\/6{height:66.666667%}.sm\:h-5\/6{height:83.333333%}.sm\:h-full{height:100%}.sm\:h-screen{height:100vh}.sm\:max-h-0{max-heig{height:40%}.sm\:h-3\/5{height:60%}.sm\:h-4\/5{height:80%}.sm\:h-1\/6{heimax{width:max-contens ease-in-out, box-shadow 0.15s ea-ensi-out;
+  -webkit-appearance: none;
+  appearance: none;
+}
+@media (prefers-reduced-motion: reduce bottom;
+}
+@-webk

@@ -1,0 +1,21 @@
+ble-horizontal th er-lg, .navbar-expand.mds{- 0.25); }
+
+.position-right {
+  top: 0;
+  right: 0;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+  width: 250px;
+  -webkit-transform: translateX(250px);
+  rgba(10, 10, 10, 0.25); }
+
+.position-bottom {
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scroll-lg > .container-xl {
+herit;margin90}optgroup{font-weight:var(--base-teing: touch;
+  ansition-push {
+    -webkit-box-shado:nwi set -13px 0 20pxt-weight-semibold, 600)}bx -13px rgbutton,a(10, 

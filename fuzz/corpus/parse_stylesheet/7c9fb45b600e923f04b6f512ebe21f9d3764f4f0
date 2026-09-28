@@ -1,0 +1,13 @@
+.5{max-height:.375rem}.md\:max-h-2\.5{max-height:.625rem}.md\:max-h-3\.5{max-height:.875rem}.md\:max-h-full{max-he  -webkit-animation-fill-mode: both;
+  animation-fill-mode: both;
+}
+.animate__animated.animate__infinite {
+  -webkit-animation-iteration-count: infinite;
+  animation-iteration-count: infinite;
+}
+.animate__animated.animate__repeat-1 {
+  -webkit-animation-iteration#000) {
+    accent-color: var(--accent);
+  }
+}
+king-wide{letter-spacing:.025em}.xl\:tracking-wider{letter-spacing:.05e(var(-

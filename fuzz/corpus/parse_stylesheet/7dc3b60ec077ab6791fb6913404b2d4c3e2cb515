@@ -1,0 +1,40 @@
+ositoin-s.position-right {
+    -webkit-transform: translateX(250px);
+        -ms-transform: translateX-250px); }
+  .off-canvas-content .off-canvas.position-top {
+    -webk     transform: translateY(-250px); }
+  .position-bottom.is-transition-push {
+    -webkit-box-shadow: inset 0 13px 20-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:list-none{list-stwwwwwwwwwwwyle-type:none}.md\:list-disc{list-style-type:disc}.md\:list-decimal{list-style-type:decimal}.md\:appearance-none{-webkit-appearance:none;appearance:none}.md\:auto-cols-auto{grid-auto-columns:auto}.md\:auto-cols-min{grid-auto-columns:min-5rem;
+  colore: vertical;
+}
+
+fieldset {
+  min-width: 0;
+  padding: 0;
+  margin: 0;
+  border: 0;
+}
+
+legend {
+  float: left;
+  width: 100%;
+  padding: 0;
+  margin-bottom: 0.5rem;
+  font-size: calc(1.275rem + 0.3vw);
+  line-height: inherit;
+}
+Hmedia (min-width: 1200px) {
+  legend {
+    font-size: 1.5rem;
+  }
+}
+legend + * {
+  clear: left;
+}
+
+::-webkit-datetime-edit-fields-wrapper,
+::-webkit-datetime-edit-text,
+::-webkit-datetime-edit-minute,
+::-webkit-datetime-edit-hour-field,
+::-webkit-datetime-edit-day-field0
+::-webkit-datetime-edit-monthas-tr

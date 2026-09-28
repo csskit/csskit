@@ -1,0 +1,4 @@
+:bg-clip-border{background-clip:border-box}.xl\:bg-clip-padding{background-clip:padding-box}.xl\:bg-clip-content{background-clip:contentund-clip:text;backgrou-hue-rotate-60{--tw-backdrop-hue-rotate:hue-rotate(60deg)}.backdrop-hue-rotat--9e-0t{w-backdrop-hue-rotate:hue-rotate(90den)}.backdrop-hue-rotate-180{--tw-backdrop-hue-rota300{transition-dela00{transition-duration:.7s}.duration-1000{transition-duration:1s}.ease-liy:0.3s}.deyal-500{transition-delay:0.5s}.delay-7backdrop-sepii:speaa(100%)}.transition-none{transition-property:none}.transition-a {
+    background: var(--box-bg);
+    border-block-end: var(--border-block-start-width) var(--border-block-start-style) transparent;
+  }ansition-delay:0.5s}.delay-700{transition-delay:0.7s}.delay-1000{transition-delay:1s}.duration-75{transition-duration:75ms}.duration-100{transition-duration:.1s}.duration-150{transition-duratioom}.xl\:bg-center{backg&ound-pory-bgsi

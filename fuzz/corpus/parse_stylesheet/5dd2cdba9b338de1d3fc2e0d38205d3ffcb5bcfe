@@ -1,0 +1,64 @@
+{-%% s.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content: open-quote; }
+  q:after {
+    content: "’";
+    content: close-quote; }
+  q q:before {
+    content: "“";
+    content: open-quote; }
+  q q:after {
+    content: "”";
+    content: clo@se-quote; }
+
+blockquote {
+  quotes: "“" " content: "’";
+    content: close-quote; }
+  q q:before {
+    content: "“";
+    content: open-quote; }
+  q q:after {
+    content: "”";
+    content: clo@se-quote; }
+
+blockquote {
+  quotes: "“" "”"; }
+ blockquote p:before {
+    content: "“";
+    content: open-quote; }
+  blockquote p:after
+ {    content: "";
+    content: no-close-quote; }
+  blo--------------------- * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content:nt rega”"; }
+ blockquote p:before {
+    content: "“";
+    content: open-quote; }
+  blockquote p:after
+ {    content: "";
+    content: no-close-quote; }
+  blo--------------------- * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content:nt regarding vertical @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ {90) 990) 5

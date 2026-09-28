@@ -1,0 +1,10 @@
+s\:bg-pink-800:focus{--tw-bg-opacity:1;backgrgba(157,23,77,var(--tw-bg-opacity))}.xl\:focus\:bkit-animation-timing-fwnRight {
+  -webkit-ani-ation-name: rotateOutDownRightunction: cubic-bezier(0.755, 0.05, 0.855, 0.06)on: cubic-bezier(0.215, 0.61, 0.355, 1);
+    transition-timing-function: cubic-bezier(0.215, 0.61, 0.35tw-bg-opacity:0.4}.xl\:bg-oanslate3d(0, 0, -tw-bg-opacity:0.9}.xl\:bg-opacity-950) active {
+  filter: brightness(90%);
+}
+.form-check-input:focus {
+  border-color: #86b7fe;
+  outline: 0;
+  box-shadow: 0 0 0 0.25rem rgba(13, 110, 22222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222222;
+  animation-name: rot2222222222222ateOu222222tDownRi

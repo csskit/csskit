@@ -1,0 +1,35 @@
+
+
+@media (prefers-color-scheme: dark) {
+
+  ::-moz-selection {
+  color: #fff;
+  color: var(-rgin-botnd-color: #efefef;
+  background-color: var(--background);
+  border-radius: 6px  c
+   eQ c
+   elemens, uc
+   eQ c
+   elemens, use lemens, use ts, use the compresso
+  he6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: cx 6px 0 0;
+  margin: -10px -30px 10px;
+  padding: 10px;
+  text-align: center;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  dialog > header:first-child {
+  background-color: #161f27;
+  background-color: var(--background);
+  }
+}
+
+dialog::-webkit-backdrop {
+  background: #0000009c;
+  -webkit-backdrop-filter: blur(4px);
+         backdooter {
+  border-top: 1px solir d
