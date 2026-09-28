@@ -117,13 +117,25 @@ where
 			let old_state = p.set_state(State::Nested);
 			let checkpoint = p.checkpoint();
 			if <T![AtKeyword]>::peek(p, c) {
-				// At-rule: flush pending declarations and parse the rule
-				flush_decls!();
 				let rule = p.parse::<R>();
 				p.set_state(old_state);
-				let rule = rule?;
-				meta = meta.merge(rule.metadata());
-				rules.push(rule);
+				match rule {
+					Ok(rule) => {
+						flush_decls!();
+						meta = meta.merge(rule.metadata());
+						rules.push(rule);
+					}
+					// An at-rule that cannot be parsed, even as an unknown at-rule, is not an error for the block that
+					// contains it. Consume it as a bad declaration to avoid propagating it.
+					Err(_) => {
+						p.rewind(checkpoint);
+						p.set_state(State::Nested);
+						if let Ok(bad_decl) = p.parse::<BadDeclaration>() {
+							p.set_state(old_state);
+							decls.push(DeclarationOrBad::Bad(bad_decl));
+						}
+					}
+				}
 			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<'a, D, M>>() {
 				// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
 				// Parsing a declaration can result in an error, at which point the parser must be rewound and a Rule parse
@@ -337,6 +349,16 @@ mod tests {
 			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
 			let mut parser = crate::Parser::new(&alloc, src, lexer);
 			let _ = parser.parse::<Block<Decl, Rule, ()>>();
+		}
+	}
+
+	#[test]
+	fn test_unparseable_at_rule_does_not_fail_the_block() {
+		let alloc = crate::Arena::new();
+		for src in ["{@x}", "{@x (}", "{a:b;@x (}", "{@x (", "{@x{a:b}}"] {
+			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, src);
+			let mut parser = crate::Parser::new(&alloc, src, lexer);
+			assert!(parser.parse::<Block<Decl, Rule, ()>>().is_ok(), "{src:?} should parse as a Block");
 		}
 	}
 }
