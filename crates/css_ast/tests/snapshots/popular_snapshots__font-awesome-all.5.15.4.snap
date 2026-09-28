@@ -1153,11 +1153,11 @@ StyleSheet(
                 offset: SourceOffset(907),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(909),
                 len: 6,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -1452,11 +1452,11 @@ StyleSheet(
                 offset: SourceOffset(1114),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(1116),
                 len: 3,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4027,11 +4027,11 @@ StyleSheet(
                 offset: SourceOffset(3493),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+              value: HeightStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(3495),
                 len: 3,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4123,11 +4123,11 @@ StyleSheet(
                 offset: SourceOffset(3575),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(3577),
                 len: 5,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -4268,11 +4268,11 @@ StyleSheet(
                 offset: SourceOffset(3678),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(3680),
                 len: 4,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105194,11 +105194,11 @@ StyleSheet(
                 offset: SourceOffset(71691),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Px(Dimension(Cursor(
+              value: HeightStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(71693),
                 len: 3,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105309,11 +105309,11 @@ StyleSheet(
                 offset: SourceOffset(71777),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Px(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(71779),
                 len: 3,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -105426,7 +105426,7 @@ StyleSheet(
                 offset: SourceOffset(71863),
                 len: 1,
               )),
-              value: Auto(Literal(Ident(Cursor(
+              value: HeightStyleValue(Auto(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(71865),
                 len: 4,
@@ -105518,7 +105518,7 @@ StyleSheet(
                 offset: SourceOffset(71932),
                 len: 1,
               )),
-              value: Auto(Literal(Ident(Cursor(
+              value: WidthStyleValue(Auto(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(71934),
                 len: 4,

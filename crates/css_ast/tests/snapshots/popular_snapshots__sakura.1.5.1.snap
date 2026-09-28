@@ -228,11 +228,11 @@ StyleSheet(
                 offset: SourceOffset(336),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Length(Em(Dimension(Cursor(
+              value: MaxWidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Length(Em(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(338),
                 len: 4,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2143,7 +2143,7 @@ StyleSheet(
                 offset: SourceOffset(1744),
                 len: 1,
               )),
-              value: Auto(Literal(Ident(Cursor(
+              value: HeightStyleValue(Auto(Ident(Cursor(
                 kind: "Ident",
                 offset: SourceOffset(1746),
                 len: 4,
@@ -2166,11 +2166,11 @@ StyleSheet(
                 offset: SourceOffset(1763),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+              value: MaxWidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(1765),
                 len: 4,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -2751,11 +2751,11 @@ StyleSheet(
                 offset: SourceOffset(2260),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(2262),
                 len: 4,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -3111,11 +3111,11 @@ StyleSheet(
                 offset: SourceOffset(2549),
                 len: 1,
               )),
-              value: LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
+              value: WidthStyleValue(r#Some(Literal(LengthPercentage(Literal(Percent(Percentage(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(2551),
                 len: 4,
-              )))))),
+              ))))))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

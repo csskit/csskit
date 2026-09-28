@@ -200,6 +200,7 @@ export declare class BoxShadowOffsetStyleValue extends Node { static readonly ta
 export declare class BoxShadowPositionStyleValue extends Node { static readonly tag: 'box-shadow-position-style-value'; }
 export declare class BoxShadowSpreadStyleValue extends Node { static readonly tag: 'box-shadow-spread-style-value'; }
 export declare class BoxShadowStyleValue extends Node { static readonly tag: 'box-shadow-style-value'; }
+export declare class BoxSize extends Node { static readonly tag: 'box-size'; }
 export declare class BoxSizingStyleValue extends Node { static readonly tag: 'box-sizing-style-value'; }
 export declare class BoxSnapStyleValue extends Node { static readonly tag: 'box-snap-style-value'; }
 export declare class BreakAfterStyleValue extends Node { static readonly tag: 'break-after-style-value'; }
@@ -729,6 +730,7 @@ export declare class MaxFunction extends Node { static readonly tag: 'max-functi
 export declare class MaxHeightStyleValue extends Node { static readonly tag: 'max-height-style-value'; }
 export declare class MaxInlineSizeStyleValue extends Node { static readonly tag: 'max-inline-size-style-value'; }
 export declare class MaxLinesStyleValue extends Node { static readonly tag: 'max-lines-style-value'; }
+export declare class MaxSizeStyleValue extends Node { static readonly tag: 'max-size-style-value'; }
 export declare class MaxWidthStyleValue extends Node { static readonly tag: 'max-width-style-value'; }
 export declare class MediaPreCondition extends Node { static readonly tag: 'media-pre-condition'; }
 export declare class MediaRule extends Node { static readonly tag: 'media-rule'; }
@@ -738,6 +740,7 @@ export declare class MinFunction extends Node { static readonly tag: 'min-functi
 export declare class MinHeightStyleValue extends Node { static readonly tag: 'min-height-style-value'; }
 export declare class MinInlineSizeStyleValue extends Node { static readonly tag: 'min-inline-size-style-value'; }
 export declare class MinIntrinsicSizingStyleValue extends Node { static readonly tag: 'min-intrinsic-sizing-style-value'; }
+export declare class MinSizeStyleValue extends Node { static readonly tag: 'min-size-style-value'; }
 export declare class MinWidthStyleValue extends Node { static readonly tag: 'min-width-style-value'; }
 export declare class MinmaxFunction extends Node { static readonly tag: 'minmax-function'; }
 export declare class MixBlendModeStyleValue extends Node { static readonly tag: 'mix-blend-mode-style-value'; }
@@ -1111,6 +1114,7 @@ export declare class SingleAnimationTriggerRange extends Node { static readonly 
 export declare class SingleAnimationTriggerTimeline extends Node { static readonly tag: 'single-animation-trigger-timeline'; }
 export declare class SingleTransition extends Node { static readonly tag: 'single-transition'; }
 export declare class SingleTransitionProperty extends Node { static readonly tag: 'single-transition-property'; }
+export declare class SizeStyleValue extends Node { static readonly tag: 'size-style-value'; }
 export declare class SkewFunction extends Node { static readonly tag: 'skew-function'; }
 export declare class SkewxFunction extends Node { static readonly tag: 'skewx-function'; }
 export declare class SkewyFunction extends Node { static readonly tag: 'skewy-function'; }
