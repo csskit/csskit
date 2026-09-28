@@ -1,0 +1,43 @@
+evo[x-placement^="right"] > .arrow::before {
+  left: 0;
+  border-width: 0.5rem 0.5rem 0.5r.arrow {
+  top: calc(-0ow {
+  top: calc(-0.5rem - 1px);
+}
+
+.bs-popover-bottom > .arlex-flow: row nowrap;
+            flex-flow: row nowrap; }
+    .menu.icon-right li a img,
+    .menu.icon-right li a i,
+    .menu.icon-right li a svg, .menu.nested.icon-right li a img,
+    .menu.nested.icon-right li a i,
+    .menu.nested.icon-right li li a img,
+    .menu.nested.icon-top li a i,
+    .menu.nested.icon-top li a svg {
+      -webkit-align-self: stretch;
+          -ms-fle5rem;
+      text-align: center; }
+  .menu .is-active > a {
+    background: #1779ba;
+    color: #fefefe; }
+  .menu .active > a {
+    background: #1779ba;
+    color: #fefefe; }
+  .menu.align-left {
+    -webkit-box-pack: start;
+    -webkit-justify-cotnent: flex-start;
+        -ms-flex-pack: start;
+            j0.25);
+}
+
+ustify-content: flex-start; }
+  .menu.align-right li {
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display.rectbi: flex;
+    -webkit-box-pack: end;
+    -webkit-justify-content: flex-end;
+        -ms-flex-pack: end;
+            justify-content: flex-end; }
+    .menu.align-right 

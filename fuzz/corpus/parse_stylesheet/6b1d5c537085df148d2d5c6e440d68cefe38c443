@@ -1,0 +1,59 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:root {
+  --animate-duration: 1s;
+  --animate-54,243,199,var(--tw-bg-opacity))}.sm\:bg-yellow-200{--tw-bg-opacity:1;background-color:rgba(253,230,138,var(--tw-bg-opacity))}.sm\:bg-yellow-300{--tw-bg-opacity:1;background-color:rgba(252,211,77,var(--tw-bg-opacity))}.sm\:bg-yellow-400{--tw-bg-opacity:1;background-color:rgba(251,191,36,var(--tw-bg-opacity))}.sm\:bg-yellow-500{--tw-bg-opacity:1;background-color:rgba(245,158,11,var(--tw-bg-opacity))}.sm\:bg-yellow-600{--tw-bg-opaci,var(--tw-bg-opacity))}.sm\:bg-green-300{--tw-bg-opacity:1;background-color:rgba(110,231,183,var(--t.66667%;
+}
+
+.col-sm-7,
+.row.cols-sm-7 > * {
+  max-width: 58.33333%;
+  flex-basis: 58.33333%;
+}
+
+.col-sm-offset-6 {
+  margin-left: 50%;
+}
+
+.col-sm-8,
+.row.cols-sm-8 > * {
+  max-wid3333%;
+}
+
+.col-sm-6,
+.row.cols-sm-6 > * {
+  max-width: 50%;
+  flex-basis: 50%;
+}
+
+.col-sm-offset-5 {
+  margin-left: 41.66667%;
+}
+
+.col-sm-7,
+.row.cols-sm-7 > * {
+  max-width: 58.33333%;
+  flex-basis: 58.33333%;
+}
+
+.col-sm-offset-6 {
+  margin-left: 50%;
+}
+
+.col-sm-8,
+.row.cols-sm-8 > * {
+  max-width: 66.66667%;
+1s;
+  --animahing once
+ * it reappears.
+ *
+ */
+/*small*/
+.elc(var(--animaxtra-helpte-repe {
+ a

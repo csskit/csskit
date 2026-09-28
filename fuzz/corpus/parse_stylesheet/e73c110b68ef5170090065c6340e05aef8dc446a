@@ -1,0 +1,9 @@
+inter{cursor:pointer}.\32 grid-row: 11;
+  }
+  [data-rows\@l^="12 "] 4;
+  }
+  [data-cols\@p="3"] {
+    grid-column: 3;
+  }
+  [data-cols\@p^="4 "] {
+    grid-column-start: 4;left-bottom{obackr:n

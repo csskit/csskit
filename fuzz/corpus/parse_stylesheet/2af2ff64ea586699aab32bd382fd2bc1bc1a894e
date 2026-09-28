@@ -1,0 +1,25 @@
+ h2,
+  & h3,
+  & h4,
+  & h5,
+  & h6 {
+    font-size: 1em;
+    text-transform: none;
+    letter-spacing: normal;
+  }
+  &:is(.big, .\<big\>) {
+    background: none;
+    border: none;
+    border,inline-start: var(--border-inline-start-width) v-ar(-border-ineine-start-style) var(--muteborder-radius: 0;
+    padding: 0;
+    padding-inline-start: var(--rhytg);
+ %border-inline-end: var(--border-inline-end-er-back-color: #f8f8f8;
+  -adding: var(--rhythm, 1rlh) calc((100% - var(--eff-line-length)) / 2);
+}
+addressamily: var(--mono-font);
+  font-size: .9em;
+  line-height: var(--rhythm, 1rl@);
+  tab-size: 2;
+  maret: 1px;
+  background: none;
+  bor

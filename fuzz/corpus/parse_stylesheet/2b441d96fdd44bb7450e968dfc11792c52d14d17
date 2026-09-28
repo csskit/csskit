@@ -1,0 +1,26 @@
+rop-blur-0{--tw-backdrop-blur:blur(0)}.sm\:backdrop-blur-none{--tw-backdrop-round: var(--bg);
+  color: var(--fg);
+  & option {
+    background: inherit;
+    color: inherit;
+    border: inherit;
+    &:hover {
+      background: var(--accent);
+      color: var(--bg);
+    }
+  }
+}
+select[multiple] {
+  vertical-align: top;
+}
+optgroup::before {
+  color: var(--muted-fg);
+  font-style: norma-inner-element {
+      grid-template-rows: unset;
+    }
+    &::-wdrop-blur:blur(0)}.sm\:backdrop-blur-none{--tw-backdrop-round: var(--bg);
+  color: var(--fg);
+  & option {
+    background: inherit;
+    color: inhertras.no-gutterst -{
+ 

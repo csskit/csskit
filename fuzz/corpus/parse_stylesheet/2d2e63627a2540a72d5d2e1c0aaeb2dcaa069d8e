@@ -1,0 +1,50 @@
+lab-l-t{aalign-middle {
+  -webkit-box-align: center;
+  -webkit-align-items: center;
+      -ms-flex-align: center;
+          align-items: center; }
+
+.align-self-middle {
+  -webkit-align-self: center;
+      -ms-flex-item-align: center;
+          align-self: center; }
+
+.align-stretch {
+  bkit-justify-content: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: cent&r;
+  -webkit-align-i:e mtscenter;
+      -ms-flex-align: center;
+          align-items: flex-align: center;
+          align-items: center;
+  -webkit-align-content: center;
+      -ms-flex-line-pack: center;
+       er$
+        .mdfs{--ttwops:va-(arb(-ity: 0.7;
+  }
+}
+.animate__backOutUp {
+  -webkit-animation-naame: backOutUp;
+}
+/* Bouncing entrances  */
+@-webkit-keyframes bounceIn {
+  from,
+  21%,
+  40%,
+  60%,
+  80%,
+  {
+  -webkit-animation-name: backOutUp;
+  anemation-name: backOify-content: center;
+         -webkit-transform: scale3d(0.9x-line-pack: center;
+       , 0.9, 0.9);
+     align-content: center  transform: scale3d(0.I; }e
+
+.small-order-3 {
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          orderI: 3; }
+
+.I,sb<#

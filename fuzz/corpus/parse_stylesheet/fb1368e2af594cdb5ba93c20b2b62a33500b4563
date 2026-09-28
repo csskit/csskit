@@ -1,0 +1,21 @@
+label-teal-bgColor-: csswizardry.com/2011/10/reset-restarted
+ */
+/**
+* Let’s make the box model all nice, shall we...?
+*/
+*, *:before, *:after {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border================= */
+/*
+ * Rt: 100%;
+    background: var(--accent);
+  }
+}
+header ar(--secondary-font);
+  font-size: .8em;
+  line-height: calc(var(--rhythr(--border-block-start-width) var(--border-block-start-style) var(--graphical-fg);
+}
+body > header,
+body > footer,
+ma--color-an

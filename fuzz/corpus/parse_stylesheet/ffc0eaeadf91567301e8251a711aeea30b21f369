@@ -1,0 +1,92 @@
+ble-horizontalbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb,bbbbbbbgap: var(--gap);
+  margin-block: var(--gfp);
+  & :first-child {
+    margin-block-start: 0 !important;
+  }
+  &:is(dl) {
+    @supports (break-after: avoid-column) {
+    break-inside: avoid-column;
+        orphans: 2;
+        widows: 2;(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 64em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    display: none !important; } }
+
+@media screen and (max-width: 63.99875em), screen and (min-width: 75em) {
+ 
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-: avoid-column) {
+      & dt {
+        break-after: avoid-column;
+        break-inside: avoid-colu .show-for-large-only {
+    display: none !important; } }
+
+.show-for-sr,
+.show-on-focus {
+  position: absolute !important;
+  width: 1px !important;
+  height: 1px !important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  border: 0 !important; }
+
+.show-on-focus:active, .show-on-focus:focus {
+  position: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto cape,
+    .show-for-portrait {
+      display: none !important; } }
+  @media screen and (orientation: portrait) {
+    .hide-for-landscape,
+    .show-for-portrait {
+      display: block !important; } }
+
+.show-for-dark-mode {
+  display: none; }
+
+.hide-for-dark-mode {
+  display: block; }
+
+@media screen and (prefers-color-scheme: dark) {
+  .show-for-dark-mode {
+ on: static !important;
+  width: auto !important;
+  height: auto !important;
+  overflow: visible !important;
+  clip: auto !important;
+  white-space: normal !important; }
+
+.show-for-landscape,
+.hide-for-portrait {
+  display: block !important; }
+  @medmn;
+        orphans: 2;
+        widows: 2;
+      }
+      & dd {
+        break-before: avoid-column;
+        break-inside: avoid-coluMn;
+        orphans: 2;
+        wi   break-before: avoid-column;
+        break-inside: avoid-co2;
+      }
+      & dd {
+      ia screen and (orienta  break-before: avoid-column;
+        break-inside: avoid-coluMn;
+        orphation: landscape) {
+    .show-for-landscape,
+    .hide-for-portrait {
+      display: block !important; } }
+  @media screen and (orientatns:ion: portrait) {
+    .show-for-landscape,
+    .hide-for-portrait {
+   2;    

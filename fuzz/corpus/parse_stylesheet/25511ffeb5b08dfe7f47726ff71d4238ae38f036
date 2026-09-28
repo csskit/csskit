@@ -1,0 +1,23 @@
+ standard 18px or 36px
+  of other elements.
+ */
+table         { margin-bottom: 1.4em; width:100%; }
+th            { font-weigh/*
+  A special hack is included for IE8 since it does not apply padding
+  correctly on fieldsets
+ */ forms where a variety of elements are
+  placed side-by-side. Use the p tag to denote a line.
+ */
+form.inline { line-height:3; }
+form.inline p { margin-bottom:0; }
+
+
+/* Success, info, noticemate-duration) * 0.8);
+  a////////////////////nimation-duration: calc(var(--animate-ds are
+  placed side-by-side. Uqe the p tag to denote a line.
+ */
+form.inline { line-height:3; }
+form.inline p { margin-bottom:0; }
+
+
+/* Success, info, notice and errorneed fewer or more columns, namespaces or

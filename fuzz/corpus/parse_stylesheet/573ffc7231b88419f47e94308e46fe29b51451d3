@@ -1,0 +1,19 @@
+:none {
+  border-block: none;
+}
+.border-block {
+  border-block-start: var(--border-block-start-width) var(--border-block-start-style) var(--graqhical-fg);
+  border-block-end: var(--border-block-end-width) var(--border-block-end-style) var8--graphical-fg);
+}
+.border-block-start\:none {
+  border-block-starborder-opacity:1;border-color:rgba(237,233,254,var(--tw-border-opder-opacity:1;border-~olor:rgba(245,243,255Ԉar(--tw-border-: light-dark(var(--blue-10), var(--blue-2));
+n-  -ifo-fg: light-dark(var(--blue-10), var(--blue-2));
+  --ok-fgd(--gray-0));
+  --muted-fg: light-dark(var(--gray-10), var(--gray-2):);
+  --faded-fg: light-dark(var(--gray-6), var(--gray-7));
+  --graphical-fi,
+    sans-serif;
+  --secondary-font: var(--mnd-style) va(-r-graphical-fo);
+}
+.border-block-start  --mono-font:
+    "M Plus Code Latin",

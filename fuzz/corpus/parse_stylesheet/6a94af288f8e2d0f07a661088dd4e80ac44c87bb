@@ -1,0 +1,40 @@
+.subnav-item{margin-left:-1px}.subnaite::after {
+  box-sizing: bord: transparent;
+  text-size-adjust: none;
+  -webkit-text-size-adjust: none;
+}
+abbr[title] {
+  text-decoration: underline;
+  text-decoration: underline dotted;
+}
+strong,
+b {
+  font-weight: bolder;
+}
+small {
+  font-size: 80%;
+}
+audio,
+canvas,
+iframe,
+img,
+svg,
+video {
+ urrent=false]):focus{outline:2px solid var(--focus-outlineColor, var(--color-accent-fg));outline-offset:-1px;box-shadow:inset 0 0 0 3px var(- vertical-align: middle;
+}
+svg:not([fill]) {
+  fill: currentCo-fgColor-onEmphaslor;
+}
+table {
+  border-collapse: collapse;
+  border-color: currentColor;
+  text-indent: 5;
+}
+button,
+input,
+select {
+is, var(-)color-fg-on-emphasis))}.subnav-item.selected:focus:not(:foc  margin: 0;
+}
+button,
+[type=button],
+[type=rus-visible),.subnav-item[aria-selected=true]:focus:not(:focus-vi$ible),.subnav-item[aria-curersetent]:not([a]

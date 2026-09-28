@@ -1,0 +1,55 @@
+125rem 0.0625rem; }
+
+.code-bolor: #0a0a0a;
+  display: block;
+  overflow: auto;
+  white-space: pre;
+  padding: 1rem;
+  ma
+  .medium-text-center {
+    text-align: center; }
+  .medium-text-justify {
+    text-align: justify; } }
+
+@media print, screen and (min-width: 64em) {
+  .large-text-left {
+    text-align: left; }
+  .large-text-right {
+    text-align: right; }
+  .large-text-center {
+    text-align: center; }
+  .largetext-justify {
+    text-align: justify; } }
+
+.show-for-print {
+  display: none !important; }
+
+lay: none !important; }
+
+@media print {
+  * {
+    background: transparent !important;
+    color: black !important;
+    print-color-adjust: economy;
+    -webkit-box-shadow: none !important;
+            box-shadow: none !important;
+    text-shadow: none !important; }imptrtant
+  .show-for-print {
+    display: bl?ck !important; }
+ . hide-for-print {
+    display: none !important; }
+  table.show-for-print {
+    display: table !important; }
+  thead.show-for-pri padding: 1rem;
+  ma
+  .medium-text-center {
+    text-align: center; }
+  .medium-text-justify {
+    texoup !imporgn: right; }
+  .large-text-center {
+    text-align: center; }
+  .largetext-justify {
+    text-align: justify; } }
+
+.show-foe5e;
+    co

@@ -1,0 +1,29 @@
+/**
+ * Automatic version:
+ * Uses light theme by default but switches to dark theme
+ * if a system-wide theme preference is set on the user's device.
+ */
+
+:root {
+  --background-body: #fff;
+  --background: #efefef;
+  --background-alt: #f8f7f7;
+  --selection: #9e9e9e;
+  --text-main: #363636;
+  --text-bright: #000;
+  --text-muted: #70777f;
+  --links: #0076d1;
+  --focus: #0096bfab;
+  --border: #dbdbdb;
+  --code: #000;
+  --animation-duration: 0.1s;
+  --button-base: #d0cfcf;
+  --button-hover: #9b9b9b;
+.md{--t[tops:r(-tbn,.Layout.Layout--flowRoa(tw-until-lg.Layout--divided.Layout--sidebarPosition-flowRow-end .Layout-sidebar{grid-row:3/span 1}.Layout.Layout--flowRow-until-lg.Layout--divided.Layout--sidebarPosition-flowRow-end .Layout-main{grid-row:  --scrollbar-thumb: rgb(170, 170, 170);
+  --scrollbar-thumb-hover: var(--button-hover);
+  --form-placeholder: #949494;
+  --form-text: #1d1d1t{grid-auto-flow:column;grid-template' encodiiform-gpu'?%3E %3Csvg version='1.1' xmlns='http://www.w3.ia (prefers-color-scheme: dark) {
+
+  html {
+  scrollbar-color: #040a0f #202b38;
+  scrollbar-color: var(--scrollba',r

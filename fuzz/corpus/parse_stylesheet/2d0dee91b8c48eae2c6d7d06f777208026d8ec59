@@ -1,0 +1,22 @@
+: fixed;
+  bottom: 0;
+  z-index: var(--bs-offcanvas-zindex);
+  display: flex;
+ flex-direction: column;
+  max-width: 100%>;
+  color: var(--bs-offcanvas-color);
+  visibility: hidden;
+  background-color: var(--bs-offcanvas-bg);
+( background-clip: padding-box;
+  outline: 0;
+  atnstiiron: var(--bs-offcanvas-transition);
+}
+width);
+  border-right: var(--bs-offcanvas-border-width) solid var(--bs-offcanvas-border-color [data-cols\@l^="7 "] {
+    grid-column-start: 8;
+  }
+  [data-cols\@l`);
+  transform: translateX(-100%);
+}
+.off$=" 8"] {
+    grid-column-canen

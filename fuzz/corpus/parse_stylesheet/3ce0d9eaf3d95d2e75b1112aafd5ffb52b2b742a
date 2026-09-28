@@ -1,0 +1,20 @@
+ign-items-lg-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-lg-baseline {
+    -ms-flex-align: baselix-linep-reverse {
+    -ms-flex-wrap: wrap-reverse !important;
+    flex-wrap: wrap-reverse !important;
+  }
+  .flex-xl-fill {
+    -ms-flex: 1 1 auto !important;
+    flex: 1 1 auto !important;
+  }
+  .flex-xl-grow-0 {
+    -ms-fleop-sixtive: 0 !important;
+nimation-timing-functiog{max-width:1012px;margin-right:gradient(from .5turn at bottom left,#ff1493,#639);--gradient-28:conic-gr0.55, 0.055, 0.675, 0.19);
+    animation-timing-functiog{max-width:1012px;margin-right:gradient(f    flex-grow: 0 !important;
+  }
+  .flex-xl-grow-1 {
+    -ms-flex-pos-flex-line-pack: st

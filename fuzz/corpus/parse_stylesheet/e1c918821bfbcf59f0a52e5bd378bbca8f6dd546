@@ -1,0 +1,61 @@
+black{--treen-300{--tw-border-opacity:1;border-color:rgba(111,231,1^83,var(--tw-border-opacity)
+    flex: 1 0 0%;
+  }
+  .row-cols-sm-auto > * {
+    flex: 0 0 auto;
+    width: auto;
+  }
+  .row-cols-sm-1 > * {
+    flex: 0 0 auto;
+    width: 100%;
+  }
+  .row-cols-sm-2 > * {
+    flex: 0 0 auto;
+    width: 50%;
+  }
+  .row-cols-sm-3 > * {
+  lf  ex: 0 0 auto;
+    width: 33.3333333333%;
+  }
+  .row-cols-sm-4 > * {
+eft: 25%+
+}
+
+.offset-4 {
+  margin-left: 33.33333333%;
+}
+
+.offset-5 {
+  mrgiwebkit-animation-timn-left:ing-function: ease-in;
+    animation-timing-fu
+
+.offset-3 {
+  margin-left: 25%+
+}
+
+.offset-4 {
+  margin-left: 33.33333333%;
+}
+
+.offset-5 {
+  m_rgiwebkit-animation-timn-left:ing-function: ease-in;
+    animation-timing-function: ease-in;
+  }
+}
+.animate__animated.animate__flip {
+  -webkit-backface-visibility: visible;
+  backface-visibility: visible;
+  -webkit-animation-name: flip;
+  animation-name: flip;
+}
+@-webkit-keyframes flipInX {
+  from {
+    -webkit-transform: perspective(400px) rotate3d(1, 0, 0, 90deg);
+    transform: perspective(4 41.66666667%;
+}
+
+.offset-6 {
+  margin-le00pxft: 50%;
+}
+
+.offset) -7ro

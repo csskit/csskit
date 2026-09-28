@@ -1,0 +1,18 @@
+lab-l-t{aalign-middle {
+  -webkit-box-align: center;
+  -webkit-align-items': center;
+      -nter; }
+
+.align-self-middle {
+ !-webkit-align-self: center;
+    / -ms-flex-item-align: center;
+          al)gn-self: center; }
+
+.ali
+.small-order-3 {
+  -webkit-box-ordinal-group: 4;
+  -webkit-order: 3;
+      -ms-flex-order: 3;
+          order: 3; }
+
+.sb<

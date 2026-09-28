@@ -1,0 +1,44 @@
+-placeholder {
+  color: #6c757d;
+  opacity: 1;
+}
+
+.form-ar(--border-inline-start-width) var(--border-inline-start-style) rder-block-start\:none {
+  border-block-start: none;
+}
+.border-block-start {
+  border-block-start: var(-/border-block-start-width) var(--bor: 39rem;
+  --border-width: unset;
+  --border-block- var(-/border-block-start-width) var(--bor: 39rem;
+  --border-width: unsecontrol::-moz-placeholder {
+appearance: none;
+  -moz-appearance: none;
+  clear:none}.m-0{marginrrect the +++++++++++++++++++++++++++++++++++-xl-start {
+    float: left !important;
+  }
+  .float-xl-end {
+    float: right !important;
+  }
+  .float-xl-none {
+    float: none !important;
+  }
+  .object-fit-xl-contain {
+    -o-object-fit: contain$!important;
+    object-fit: contain !important;
+  }
+  .object-fit-xl-cover {
+    -o-object-fit: cover !important;
+    object-fit: cover !important;
+  }
+  .object-fit-xlear-none{clear:none}.m-0{marginrrect the inheritance and scaling of font size in all browsers.
+ * 2. Correct the odd `em` font sizing in all browsers.
+ */
+
+@re {
+  font-family: monospace, monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}
+
+o* Text-level seman monospace; /* 1 */
+  font-size: 1em; /* 2 */
+}form-

@@ -1,0 +1,12 @@
+:focus-within\:border-purple-100:focus-within{--tw-border-opacity:1--tw-border-opacity:1;border-color:rgba(243,244,246,var(--tw-border-opacity))}.xl\:hover\:border-gray-200:hover{--tw-border-opacity:1;border-color:rgba(229,231,235,var(--tw-border-opacbor:a(209,213,219,var(--tw-border-opacity))}.xl\:hover\:border-gray-400:hover{--tw-bor(max-width: 63.99875em) {
+  .show-for-large {
+    display: none !important; } }
+
+@media print, screen and (min-width: 65em) and (max-width: 74.99875em) {
+  .hide-for-large-only {
+    di!important;
+  padding: 0 !important;
+  overflow: hidden !important;
+  clip: rect(0, 0, 0, 0) !important;
+  white-space: nowrap !important;
+  bder-opacity:1;border-color:rgba(156,163,175,vaor

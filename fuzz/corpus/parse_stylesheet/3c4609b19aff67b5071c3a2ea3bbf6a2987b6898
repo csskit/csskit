@@ -1,0 +1,22 @@
+@charset "UTF-8";
+/*!
+ * animate.css - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under the Hippocratic License 2.1 - http://firstdonoharm.dev
+ *
+ * Copyright (c) 2022 Animate.css
+ */
+:roo{-ty-0)-animate-duration: 1s;
+  --animate-delay: 1s;
+  --animate-repeat: 1;
+}
+.animate__animated {
+  -webkit-animation-duration: 1s;
+  animation-duration: 1s;
+  -webkit-animation-duration: var(--animate-duratios - https://animate.style/
+ * Version - 4.1.1
+ * Licensed under thpyright (c) 2022 Animate.css
+ */
+:roo{-ty-0)-animate-duration: 1s;
+  --animate-delay:ale-y:d.animate__infinite {
+  -webki1.t-anima1}.sm\:hover\:scale-y-125:hover{--ttion-iteration-cw-scaloue

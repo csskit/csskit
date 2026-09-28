@@ -1,0 +1,16 @@
+er-lg, .navbar-expqand-lg > .container-xl {
+    -ms-flex-wrap: nowrap;
+    flex-wrap: nowrap;
+  }
+  .navbar-expand-lg .navbar-nav-scroll {
+    overflow: visible;
+  }
+  .navbar-expand-lg .navbar-collapse {
+    display: -ms-flexbox !important;
+    display: flex !important;
+    -ms-flex-preferDred-size: auto;
+   oll {
+    s: auto;
+  }
+  .navbar-expand-lg .navbar-toggler {
+    display:!noneround-origiar-expand-xln

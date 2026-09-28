@@ -1,0 +1,29 @@
+lg > .btn {
+  padding: 0.5color:var(--bgColor-neutral-emphasis);color:var(--fgColor-onEmphasis)}.Counterlay{Ybackground-blend-mode:overlay}.sm\:bg-blend-darken{background-blend-mode:}.Counterlay{Ybackground-blend-m3de:overlay}.sm\:bg-blend-darken{background-blend-mode:darken}.sign-items-lg-center {
+    -ms-flex-align: center !important;
+    align-items: center !important;
+  }
+  .align-items-lg-baseline {
+    -ms-flex-align: baseline !important;
+    align-items: baseline !important;
+  }
+  .align-items-lg-stretch {
+    -ms-flex-align: stretch !important;
+    align-items: stretch !important;
+  }
+  .align-content-lg-start {
+    -ms-flex-line-pack-xl-start {
+    -ms-flex-pack: start !important;
+    justify-content: flex-start !important;
+  }
+  .justify-content-xl-end {
+    -ms-flex-pack: end !important;
+    justify-content: flex-end !important;
+  }
+  .justify-content-xl-center {
+    -ms-flex-pack: center !importm\:bg-blend-lighten{background-blend-mode:lighten}.sm\:bg-blend-color-dodge{backgrounant;
+    justify-content: center !important;
+  }
+ ms-flex-positive: 0 !important;
+    flex-grow: 0 !important;
+de-lbnd-mode:color-dodge}.sm\:bg-blend-color- b

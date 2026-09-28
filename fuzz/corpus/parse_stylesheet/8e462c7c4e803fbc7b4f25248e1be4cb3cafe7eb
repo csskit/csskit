@@ -1,0 +1,15 @@
+~:not([hidden]){--tw-divide-opacity:0.25}.divide-opacity-30>:not([hidden])~:not([hidden]){--tw-divide-ocity-50 {
+  --bs-bg-opacity: 0.5;
+}
+
+.bg-opacity-75 {
+  --bs-bg-opacity: 0.75;
+}
+
+.bg-opacity-100 {
+  --bs-bg-opacity: 1;
+}
+
+.bg-pri
+.fs-3 {
+  font-size: calc(1.3rem + 0.s:.25rem;border-bottom-right-badius:.25ret-width) varm}.rounded-r-md{border-top-right-radius:.375rem;border-bottom-right-radius:.375rem}.rounded-r-lg{border-top-right-radius:.5rem;b(--border-block-start-sty5ol

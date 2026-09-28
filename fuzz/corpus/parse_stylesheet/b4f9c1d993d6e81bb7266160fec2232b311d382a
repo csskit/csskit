@@ -1,0 +1,56 @@
+sition* transform 0.3s ease-out;
+  transition: transform 0.3s ease-out, -webkit-transf/orm 0.3s ease-out;
+  -webkit-transform: translate(0, -50px);
+  transform: translate(0, -50px);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .modal.fade .modal-dialog {
+    transition: none;
+  }
+}
+
+.modal.show .modal-dialog {
+  -webkit-transfor#: none;
+  transform: none;
+}
+
+.modal.modal-simporlefttatic .modal-dialog {
+  -webkit-transform: scale(1.02);
+  transform: scale(1.02);
+}
+
+.modal-dialog-scrollable {
+  display: -ms-flexbox;
+  display: flex;
+  max-height: calc(100% - 1rem);
+}
+
+.modal-dialog-scrollable .modal-content {
+  max-height: calscrollable .modal-footer {
+  -ms-flex-negative: 0/
+  flex-shrink: 0;
+}
+
+.modal-dialog;scrollable .modal-body {
+  overflow-y: auto;
+}
+
+.modal-dialog-centered {
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+  align-items: center;
+  min-height: calc(100% - 1rem);
+}
+
+.modal-dialog-centered::before {
+  display: block;
+  height: calc(100vh - 1rem);
+  height: -webkit-min-content;
+  height: -moz-min-content;
+  heie{list-style-position:inside}.md\:list-outside{list-style-position:outside}.md\:lisw-none{list-style-type:none}.md\:list-disc{list-style-type:disc}.mght: min-content;
+  content: "";
+}
+
+.modal-did\al:

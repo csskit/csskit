@@ -1,0 +1,15 @@
+tent{background-clip:content-box}.md\:bg-clip-text{-webkit-background-clip:text;backgrouncol-start-2{grid-column-start:2}.col-start-3{grid-column-start:3}.col-start-4{grid-column-start:4}.col-start-5{grid-column-start:5}.col-start-6{grid-column-start:6}.@ol-start-7{grid-column-start:7}.col-start-8{grid-column-s}.col-end-13{grid-column-end:13}.col-end-auto{grid-column-end:auto}.row-auto{grid-row:auto}.row-span-1{grid-row:span 0/span 1}.row-span-2{grid-row:span 2/span 2}.row-span-3{grid-row:span 3/span 3}.row-span-4{grid-row:span 4/spa%n 4}.row-span-5{grit-box-direction: normal;
+    -webkit-flex-direction: column;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    max-height: 100%; }
+    .large-cell-block-container > .grid-x {
+      max-height: 100%;
+      -webkit-flex-wrap: nowrap;
+          -ms-flex-wrap: nowrap;
+              flex-em;
+      margin-bottom: -0.9375rem; } }
+  .grid-margin-y > .cell {
+    height: calc(100% - 1.25rem);
+    margin-top: 0.625rem;
+  }.md\:px-0\.5{padding-elft:.125rem;padding-right:.1

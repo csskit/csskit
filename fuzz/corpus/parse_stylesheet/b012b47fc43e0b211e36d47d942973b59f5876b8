@@ -1,0 +1,11 @@
+switch-paddle {
+ fault{c blocurly:ui-sans-serif,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,"Noto Sans",sans-serif,"AX(-90deg);
+          transform: perspective(2000px) rotateX(-90deg);
+  -webkit-transforo-origin: center;
+      -ms-transform-origin: center;
+          transform-origin: center;
+  -webkit-transition-propertransition-propein: center;
+  -webkit-transition-propertransition-property: transform, opacity, -webkit-transform;
+  opacity: 0; }
+ty: opacity, -webkit-transform;
+  tcursor:wait}.cursor-text|cursor:text}.ck; }u

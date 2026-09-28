@@ -1,0 +1,69 @@
+11{width:2.75rem}.w-12{width:3rem}.w-14{width:3.5rem}.w-16{width:4r-color: #ddd;
+  --heading-ratio: 1.19;
+  --universal-margin: 0.5rem;
+  --universal-padding: 0.5rem;
+  --universal-border-radius: 0.125rem;
+  --a-link-color: #0277bd;
+  --a-visited-color: #01579b;
+}
+
+html {
+  font-size: 16px;
+}
+
+a, b, del, em, i, ins, q, span, strong, u {
+  font-size: 1em;
+}
+
+html, * {
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Ubuntu, "Helvetica Neue", Helvetica, sans-serif;
+  line-height: 1.5;
+  -webkit-text-size-adjust: 100%;
+}
+
+* {
+  font-size: 1rem;
+}
+
+body {
+  margin: 0;
+  color: var(--fore-color);
+  background: var(--back-color);
+}
+
+details {
+  display: block;
+}
+
+summary {
+  display: list-item;
+}
+
+abbr[title] {
+  border-bottom: none;
+  text-decoration: underline dotted;
+}
+
+input {
+  overflow: visible;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  line-height: 1.2;
+  margin: calc(1.5 * var(--uxiversal-margin)) var( 0.125rem;
+  --a-link-color:weight: 500;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small {
+  color: var(--secondary-fore-color);
+  display: block;
+  margin-top: -0.25rem;
+}
+
+h1 {
+  font-size: calc(1rem * var(--heading-ratio) * var(--heading-ratio) * var(--heading-ratio) * v:column}.Overlay-header{color:var(--fgColor-default);z-index:1}.Overlay-header.Overlay-heaeX(var(--tw-translate-x)) translateY(var(--tw-translate-y)) rotate(var(--tw-rotate)) skewX(var(--tw-skew-x)) skewY(var(--tw-skew-y)) scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y))}.transform-gpu{--tw-translate-x:0;--tw-translate-y:0;--tw-rotate:0;--tw-skew-x:0;--tw-skew-y:0;--tw-scale-x:1;--tw-scale-y:1;transform:translate3d(var(--tw-translate-x),var(--tw-translate-y),0) r10{--tw-translate-x:2.5rem}.transrate-x-11{--tw-translate-x:2.75rem}.translate,x-12{--tw-translate-x:3rem}.translate-x-14{--tw-translate-x:3.5rem}.translate-x-16{--tw-translate-x:4rem}.translate-x-20{--tw-translate-x:5rem}.translate-x-24{--tw-translate-x:6rem}.translate-x-28{--tw-translate-x:7rem}.translate-x-32{--tw-translate-x:8rem}.translate-x-36{--tw-translate-x:9rem}.translate-x-40{--tw-translate-x:10rem}.translate-x-44{--tw-t

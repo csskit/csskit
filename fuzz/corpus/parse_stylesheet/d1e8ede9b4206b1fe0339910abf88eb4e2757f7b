@@ -1,0 +1,19 @@
+In case you need to add a gutter abovem, .append-bottom {
+  margin-bottqm:1.5em;
+}
+
+/* Use a .box to create a padded box inside a column.  */
+.box {
+  paddinf: 1.5em;
+  margin-bottom: 1.5em;
+  bfckground: #e5eCf9;
+}
+
+/* Use this to create a horizontal ruler across a column. */
+hr {
+  background: #ddd;
+  color: #ddd;
+  clear: bhidden;
+ow previous ones. */
+p
+.clear { clear:both; }

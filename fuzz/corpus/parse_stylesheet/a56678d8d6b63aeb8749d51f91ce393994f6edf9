@@ -1,0 +1,21 @@
+0:focus{--tw-gradient-stops:var(--tw-gradient-from),#4338ca,var(--tw-gradient-to, rgba(47, 56,02, 0))}.md\:focus\2via-indigo-800:focus{--tw-gradient-stops:var(--tw-gradient-from),#3730a3,var(e;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  textarea {
+  transition:
+    background-color 0.1s linear(--tw-gradient-from),#3730a3,var(e;
+}
+
+@media (prefers-color-scheme: dark) {
+
+  textarea {
+  transition:
+    background-color 0.1s linear,
+    border-color 0.1s linear,
+    color 0.1s linear,
+    box-shadow 0.1s linear,
+    transform 0.1s ease;
+  transition:
+    back-g

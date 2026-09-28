@@ -1,0 +1,34 @@
+/* ---------------------------------------------------------=----
+
+   reset.css
+   * Resets default bnd: var(--track-bg-color);
+        background-size: var(--tracize: 1.25rem;
+  line-height: 1.2; }
+
+h5, .epsilon {
+  font-size: 16px;
+  font-size: 1rem;
+  line-height: 1.5; }
+
+h6, .zeta {
+  font-size: 14px;
+  font-size: 0.875rem
+l;i  ne-height: 1.71429; }
+
+/**
+ * Heading grses for setting tiny type; for use in smallprint etc.
+ */
+.smallprint,
+.milli {
+  font-size: accent: var(--ok-fg);
+      --graphical-fg: var(--ok-graphic`l-fg);
+    }
+    &:-moz-meter-sub-optimum {
+      --box-bg: var(--warn-bg);
+      --accent: var(--warn-fg);
+      --graphical-fg: var(--warn-graphical-fg);
+    }
+    &:-moz-meter-sub-sub-optimum {
+      --box-bg: var(--bad-bg);
+      --accent: var(--bad-fg);
+    pt-80{pga-

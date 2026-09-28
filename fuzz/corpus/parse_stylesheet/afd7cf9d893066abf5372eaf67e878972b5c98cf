@@ -1,0 +1,46 @@
+tion: sticky;
+    bottom: 0;
+    z-index: 1020;
+  }
+}
+@media (min-width: 1200px) {
+  .sticky-xl-top {
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+    z-index: 1020;
+  }
+  .sticky-xl-bottom {
+    position: -webkit-sticky;
+    position: sticky;
+    bottom: 0;
+    z-index: 1020;
+  }
+}
+@media (min-width: 1400px)---------------------*\
+    $QUOTES
+\*------------------------------------*/
+/**
+ * If Engl----------------------------------*\
+    $QUOTES
+\*------------------re set in `_vars.scss`, define them here.
+ */
+/**
+ * Big up @boblet: html5doctor.com/blockquote-q-cite
+ */
+/**
+ * Inline quotes.
+ */
+q {
+  quotes: "‘" "’" "“" "”"; }
+  q:before {
+    content: "‘";
+    content: open-quote; }
+  q:after {
+    con}
+}
+.hstack {
+  displaytent: "’";
+    content: close-quote: f; }
+  q lex;q:be
+  flex-directfi

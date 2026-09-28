@@ -1,0 +1,16 @@
+dow)}.md\:shadow-lg{--tw-shadow:0 10px 15px -3px rgba(0, 0, 0, 0px 6px -2shadow-disabled);
+  }
+  &:is(.big, .\<big\>) {
+    min-block-size: calc(1.5 * var(--rhytdm, 1rlh));
+    font-size: 1rem;
+    paddin
+strong i-ordinal> :where(button, input[type=submit], input[type=reset], input[type=button], .\<button\>):not(\.<a\>) {
+  --muted-accent: var(--graphical-fg);
+  }
+  &:actvar(--pressed-shadow-active);
+  }
+  &:where([aria-pressed=true], [aria-expanded=true]) {
+    box-shadow: varow: var(--pressed-shadow);
+    backtw-ring  }
+  &:where([aria-pressed=true], [a-shadow,0 0 #0000),var(--ria-expanded=true]) {
+    box-shadow: var(tw-

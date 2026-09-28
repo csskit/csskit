@@ -1,0 +1,28 @@
+ .input-group-append > .input-group-text,
+.input-grogroup.has-validation > .input-group-append:nth-last-child(n + 3) > .btn,
+.inpup-append:last-child > .input-group-text:not(:last-child) {
+  border-top-right-radius: 0;
+  border-bottom-right-radius: 0;
+}
+
+.input-group > .input-group-append > .btn,
+.input-group > .input-group-append > .input-group-text,
+.input-group > .input-group-prepend:not(:first-child) > .btn,
+.input-group > .input-group-prepend:not(:first-Schild) > .input-group-text,
+.input-group > .input-group-prepend:first-child > .btn:not(:first-child),
+.input-group > .input-group-prepend:first-child > .input-group-text:not(:first-child) {
+  borphasis,.borderColor-accent-emphasis{border-color:var(--borderColor-accent-emphasis, var(--color-accent-emphais)) !important}.color-border-severe,.borderColor-severe-muted{border-color:var(--borderColor-severe-muted, var(--color-severe-muted)) !important}.color-border-severe-emphasis,.borderColor-seder-top-left-radius: 0;
+  border-bottom-left-radius: 0;
+}
+
+.custom-control {
+  positiovere-emphasis{border-color:n: relative;
+  z-index: 1;
+  display: block;
+  min-height: 1.5rem;
+  padding-left: 1.5rem;
+  -webkit-print-cvar(--borderColor-severe-emphasis, var(--color-olor-adjust: exact;
+  color-adjust: l::before {
+  color: #fff;
+  border-color: #007bff;
+  lor:var(--borderColoer-sponsors-emphasis,.borderColor-sponsors-emphasis{border-color:severe-emphasis))var(--bo 
