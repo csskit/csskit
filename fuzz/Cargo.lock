@@ -15,6 +15,10 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c3d036a3c4ab069c7b410a2ce876bd74808d2d0888a82667669f8e783a898bf1"
 
 [[package]]
+name = "atom_set"
+version = "0.0.33"
+
+[[package]]
 name = "bitmask-enum"
 version = "2.2.5"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -26,7 +30,7 @@ dependencies = [
 
 [[package]]
 name = "bytescan"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "fearless_simd",
 ]
@@ -51,8 +55,9 @@ checksum = "9330f8b2ff13f34540b44e946ef35111825727b38d33286ef986142615121801"
 
 [[package]]
 name = "css_ast"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
+ "atom_set",
  "bitmask-enum",
  "css_lexer",
  "css_parse",
@@ -74,9 +79,10 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "allocator-api2",
+ "atom_set",
  "bitmask-enum",
  "bytescan",
  "derive_atom_set",
@@ -85,9 +91,10 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "allocator-api2",
+ "atom_set",
  "bitmask-enum",
  "css_lexer",
  "csskit_arena",
@@ -99,7 +106,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "css_lexer",
  "heck",
@@ -121,7 +128,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_arena"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "allocator-api2",
  "libc",
@@ -130,7 +137,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "darling",
  "heck",
@@ -142,7 +149,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -156,7 +163,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "glob",
  "syn 3.0.4",
@@ -198,7 +205,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "heck",
  "itertools",
@@ -221,9 +228,9 @@ checksum = "877a4ace8713b0bcf2a4e7eec82529c029f1d0619886d18145fea96c3ffe5c0f"
 
 [[package]]
 name = "fearless_simd"
-version = "0.7.0"
+version = "1.0.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "f4beca3cb2444e3304ac30843cc091f44ed58932353cd492ce740067bfce6b12"
+checksum = "f3772b63c40606beea8fe1f7b06a60de27ceb9bfc2d9dad3427368ca41dc7e62"
 
 [[package]]
 name = "find-msvc-tools"
@@ -426,7 +433,7 @@ checksum = "8ed6a63f02c8539c91a8685a86f4099661ba3da017932f6ebbea6de3f0fa7c90"
 
 [[package]]
 name = "source_tools"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "allocator-api2",
  "csskit_arena",
@@ -434,7 +441,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "inventory",
  "stable-type-layout-derive",
@@ -442,7 +449,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout-derive"
-version = "0.0.31"
+version = "0.0.33"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -550,7 +557,7 @@ checksum = "7dd6e30e90baa6f72411720665d41d89b9a3d039dc45b8faea1ddd07f617f6af"
 
 [[package]]
 name = "visit-flow"
-version = "0.0.31"
+version = "0.0.33"
 
 [[package]]
 name = "wasip2"
