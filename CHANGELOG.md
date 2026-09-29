@@ -1,4 +1,35 @@
+## [0.0.34] - 2026-09-29
+
+### Bytescan
+- chore(deps): update rust crate fearless_simd to v1 (#1530) ([#1530](https://github.com/csskit/csskit/pull/1530))
+
+
+### Css_ast
+- css_parse/css_ast: move the <an+b> parse driver into a trait (#1524) ([#1524](https://github.com/csskit/csskit/pull/1524))
+- Regenerate css_ast/src/values from csswg drafts (#1506) ([#1506](https://github.com/csskit/csskit/pull/1506))
+
+
+### Css_parse
+- fuzz: new parser findings 2026-09-09 (#1515) ([#1515](https://github.com/csskit/csskit/pull/1515))
+
+
+### Csskit
+- csskit: add bin back to pakcage.json (#1539) ([#1539](https://github.com/csskit/csskit/pull/1539))
+
+
+### Csskit_napi
+- chore(deps): update dependency @napi-rs/cli to v3.10.5 (#1526) ([#1526](https://github.com/csskit/csskit/pull/1526))
+
+
+### Csskit_vscode
+- chore(deps): update dependency @types/node to v24.19.0 (#1536) ([#1536](https://github.com/csskit/csskit/pull/1536))
+- chore(deps): update dependency @types/vscode to v1.138.0 (#1527) ([#1527](https://github.com/csskit/csskit/pull/1527))
+
 ## [0.0.33] - 2026-09-19
+
+### Csskit
+- Release v0.0.33 (#1523) ([#1523](https://github.com/csskit/csskit/pull/1523))
+
 
 ### Derive_atom_set
 - derive_atom_set: Fix devdep version (#1522) ([#1522](https://github.com/csskit/csskit/pull/1522))
