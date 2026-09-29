@@ -43,6 +43,65 @@ mod tests {
 	}
 
 	#[test]
+	fn test_block_size_writes() {
+		assert_parse!(CssAtomSet::ATOMS, BlockSizeStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, BlockSizeStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, BlockSizeStyleValue, "20%");
+		assert_parse!(CssAtomSet::ATOMS, BlockSizeStyleValue, "min-content");
+		assert_parse!(CssAtomSet::ATOMS, BlockSizeStyleValue, "max-content");
+	}
+
+	#[test]
+	fn test_block_size_errors() {
+		assert_peek_false!(CssAtomSet::ATOMS, BlockSizeStyleValue, "none");
+		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "-10px");
+		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "-20%");
+		assert_peek_false!(CssAtomSet::ATOMS, BlockSizeStyleValue, "60");
+		assert_parse_error!(CssAtomSet::ATOMS, BlockSizeStyleValue, "10px 20%");
+	}
+
+	#[test]
+	fn test_inline_size_writes() {
+		assert_parse!(CssAtomSet::ATOMS, InlineSizeStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, InlineSizeStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, InlineSizeStyleValue, "20%");
+		assert_parse!(CssAtomSet::ATOMS, InlineSizeStyleValue, "min-content");
+		assert_parse!(CssAtomSet::ATOMS, InlineSizeStyleValue, "max-content");
+	}
+
+	#[test]
+	fn test_inline_size_errors() {
+		assert_peek_false!(CssAtomSet::ATOMS, InlineSizeStyleValue, "none");
+		assert_parse_error!(CssAtomSet::ATOMS, InlineSizeStyleValue, "-10px");
+		assert_peek_false!(CssAtomSet::ATOMS, InlineSizeStyleValue, "60");
+		assert_parse_error!(CssAtomSet::ATOMS, InlineSizeStyleValue, "10px 20%");
+	}
+
+	#[test]
+	fn test_min_block_size_writes() {
+		assert_parse!(CssAtomSet::ATOMS, MinBlockSizeStyleValue, "auto");
+		assert_parse!(CssAtomSet::ATOMS, MinBlockSizeStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, MinBlockSizeStyleValue, "20%");
+		assert_parse!(CssAtomSet::ATOMS, MinBlockSizeStyleValue, "min-content");
+		assert_parse!(CssAtomSet::ATOMS, MinBlockSizeStyleValue, "max-content");
+	}
+
+	#[test]
+	fn test_max_block_size_writes() {
+		assert_parse!(CssAtomSet::ATOMS, MaxBlockSizeStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, MaxBlockSizeStyleValue, "10px");
+		assert_parse!(CssAtomSet::ATOMS, MaxBlockSizeStyleValue, "20%");
+		assert_parse!(CssAtomSet::ATOMS, MaxBlockSizeStyleValue, "min-content");
+		assert_parse!(CssAtomSet::ATOMS, MaxBlockSizeStyleValue, "max-content");
+	}
+
+	#[test]
+	fn test_max_inline_size_writes() {
+		assert_parse!(CssAtomSet::ATOMS, MaxInlineSizeStyleValue, "none");
+		assert_parse!(CssAtomSet::ATOMS, MaxInlineSizeStyleValue, "10px");
+	}
+
+	#[test]
 	fn test_writes() {
 		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "0");
 		assert_parse!(CssAtomSet::ATOMS, WidthStyleValue, "1px");
@@ -79,6 +138,6 @@ mod tests {
 	#[cfg(feature = "visitable")]
 	fn test_visits() {
 		use crate::assert_visits;
-		assert_visits!("12px", WidthStyleValue, LengthPercentage, Length);
+		assert_visits!("12px", WidthStyleValue, BoxSize, LengthPercentage, Length);
 	}
 }

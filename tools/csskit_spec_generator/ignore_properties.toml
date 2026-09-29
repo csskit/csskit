@@ -104,6 +104,15 @@ properties = [
   "inset-inline",
   "inset-inline-end",
   "inset-inline-start",
+  # https://drafts.csswg.org/css-sizing-4/
+  # The logical sizing properties are now fully defined in css-sizing-4, which is the
+  # canonical location (consistent with `inline-size`/`block-size` being taken from sizing above).
+  "block-size",
+  "inline-size",
+  "max-block-size",
+  "max-inline-size",
+  "min-block-size",
+  "min-inline-size",
 ]
 
 [multicol]
@@ -115,6 +124,12 @@ properties = [
   "column-rule-color",
   "column-rule-style",
 ]
+
+[sizing]
+# https://drafts.csswg.org/css-sizing-4/#intro
+# css-sizing-4 only extends the column-width grammar with `<box-size>`; css-multicol-2 is
+# the canonical definition.
+properties = ["column-width"]
 
 [flexbox]
 # https://drafts.csswg.org/css-flexbox-1/

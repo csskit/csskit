@@ -1671,6 +1671,7 @@ pub enum CssAtomSet {
 	Paint,
 	PaintOrder,
 	Painted,
+	Pair,
 	Palegoldenrod,
 	Palegreen,
 	PaletteMix,
