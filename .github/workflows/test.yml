@@ -2,8 +2,7 @@ name: Test Automation
 
 on:
   workflow_dispatch:
-  push:
-    branches: ["main"]
+  workflow_call:
   pull_request:
 
 permissions:

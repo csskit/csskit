@@ -2,10 +2,8 @@ name: Release Automation (Including Automated PRs)
 
 on:
   workflow_dispatch:
-  workflow_run:
-    workflows: ["Test Automation"]
-    types: [completed]
-    branches: [main, release]
+  push:
+    branches: [main]
 
 concurrency:
   group: "release"
@@ -15,14 +13,16 @@ permissions:
   id-token: write
   pull-requests: write
 jobs:
+  test:
+    name: Test
+    uses: ./.github/workflows/test.yml
+    permissions:
+      contents: read
+      pull-requests: write
+
   build:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (
-        github.event.workflow_run.conclusion == 'success' &&
-        github.repository_owner == 'csskit' &&
-        github.event.workflow_run.head_branch == 'main'
-      )
+    needs: test
+    if: github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit'
 
     strategy:
       fail-fast: false
@@ -110,13 +110,8 @@ jobs:
           path: csskit-*
 
   wasm:
-    if: >-
-      github.event_name == 'workflow_dispatch' ||
-      (
-        github.event.workflow_run.conclusion == 'success' &&
-        github.repository_owner == 'csskit' &&
-        github.event.workflow_run.head_branch == 'main'
-      )
+    needs: test
+    if: github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit'
     name: Package wasm
     runs-on: ubuntu-latest
     steps:
