@@ -7,9 +7,6 @@ on:
     types: [completed]
     branches: [main, release]
 
-concurrency:
-  group: "release"
-  cancel-in-progress: true
 permissions:
   contents: write
   id-token: write
@@ -152,6 +149,9 @@ jobs:
     name: Deploy Release
     needs: [build, wasm]
     runs-on: ubuntu-latest
+    concurrency:
+      group: "release"
+      cancel-in-progress: false
     steps:
       - name: Checkout
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
