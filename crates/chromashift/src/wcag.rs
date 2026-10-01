@@ -9,19 +9,13 @@ where
 	/// [according to WCAG 2.1](https://www.w3.org/WAI/WCAG21/Understanding/contrast-minimum.html)
 	fn relative_luminance(&self) -> f64 {
 		let Srgb { red, green, blue, .. } = (*self).into();
-		let r = red as f64 / 255.0;
-		let g = green as f64 / 255.0;
-		let b = blue as f64 / 255.0;
-		let gamma_correct = |c: f64| {
-			if c <= 0.03928 { c / 12.92 } else { ((c + 0.055) / 1.055).powf(2.4) }
-		};
-
-		let r_linear = gamma_correct(r);
-		let g_linear = gamma_correct(g);
-		let b_linear = gamma_correct(b);
-		0.2126 * r_linear + 0.7152 * g_linear + 0.0722 * b_linear
+		let channels = [red as f64 / 255.0, green as f64 / 255.0, blue as f64 / 255.0];
+		let [r, g, b] = Srgb::SPACE.transfer.decode_all(channels);
+		WCAG_WEIGHTS[0] * r + WCAG_WEIGHTS[1] * g + WCAG_WEIGHTS[2] * b
 	}
 }
+
+const WCAG_WEIGHTS: [f64; 3] = [0.2126, 0.7152, 0.0722];
 
 impl<C: Copy> WcagRelativeLuminance for C where Srgb: From<C> {}
 

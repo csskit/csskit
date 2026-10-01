@@ -23,3 +23,4 @@ owo-colors = { workspace = true, optional = true }
 default = []
 anstyle = ["dep:anstyle"]
 owo-colors = ["dep:owo-colors"]
+rec2020-bt1886 = []

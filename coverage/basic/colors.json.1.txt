@@ -62,9 +62,9 @@ colors --format json
           "source": "rgba(0, 0, 0, 0)",
           "hex": "#0000",
           "srgb": "rgb(0 0 0 / 0%)",
-          "hsl": "hsl(0 0% 0% / 0)",
-          "oklch": "oklch(0 0 0 / 0)",
-          "oklab": "oklab(0 0 0 / 0)"
+          "hsl": "hsl(0 0% 0% / 0%)",
+          "oklch": "oklch(0 0 0 / 0%)",
+          "oklab": "oklab(0 0 0 / 0%)"
         }
       ]
     }

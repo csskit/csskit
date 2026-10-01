@@ -1,4 +1,4 @@
-use crate::{Hsv, LinearRgb, ToAlpha, round_dp};
+use crate::{Hsv, LinearRgb, Srgb, ToAlpha, round_dp};
 use core::fmt;
 
 /// An colour represented as Hue, Whiteness, and Blackness expressed in the sRGB colour space.
@@ -38,7 +38,7 @@ impl fmt::Display for Hwb {
 			round_dp(*blackness as f64, 3)
 		)?;
 		if *alpha < 100.0 {
-			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
 		}
 		write!(f, ")")
 	}
@@ -70,18 +70,6 @@ impl From<Hwb> for Hsv {
 		};
 		Hsv::new(hue, s * 100.0, v * 100.0, alpha)
 	}
-}
-
-/// sRGB gamma-encode: linear to gamma (handles negative/OOG values via signum)
-fn gamma(u: f64) -> f64 {
-	let abs = u.abs();
-	if abs <= 0.0031308 { u * 12.92 } else { u.signum() * (1.055 * abs.powf(1.0 / 2.4) - 0.055) }
-}
-
-/// sRGB linearize: gamma to linear (handles negative/OOG values via signum)
-fn linear(c: f64) -> f64 {
-	let abs = c.abs();
-	if abs > 0.04045 { c.signum() * ((abs + 0.055) / 1.055).powf(2.4) } else { c / 12.92 }
 }
 
 /// Convert float sRGB (r,g,b may be OOG) to HWB via HSV math.
@@ -142,10 +130,8 @@ fn hwb_to_srgb_float(hue: f64, whiteness: f64, blackness: f64) -> (f64, f64, f64
 
 impl From<LinearRgb> for Hwb {
 	fn from(value: LinearRgb) -> Self {
-		let r = gamma(value.red);
-		let g = gamma(value.green);
-		let b_val = gamma(value.blue);
-		let (hue, whiteness, blackness) = srgb_float_to_hwb(r, g, b_val);
+		let [r, g, b] = Srgb::SPACE.transfer.encode_all([value.red, value.green, value.blue]);
+		let (hue, whiteness, blackness) = srgb_float_to_hwb(r, g, b);
 		Hwb::new(hue as f32, whiteness as f32, blackness as f32, value.alpha)
 	}
 }
@@ -153,6 +139,7 @@ impl From<LinearRgb> for Hwb {
 impl From<Hwb> for LinearRgb {
 	fn from(value: Hwb) -> Self {
 		let (r, g, b) = hwb_to_srgb_float(value.hue as f64, value.whiteness as f64, value.blackness as f64);
-		LinearRgb::new(linear(r), linear(g), linear(b), value.alpha)
+		let [red, green, blue] = Srgb::SPACE.transfer.decode_all([r, g, b]);
+		LinearRgb::new(red, green, blue, value.alpha)
 	}
 }

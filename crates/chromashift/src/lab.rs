@@ -1,9 +1,10 @@
 use crate::{ToAlpha, XyzD50, round_dp};
 use core::fmt;
 
-const D50X: f64 = 96.4220;
-const D50Y: f64 = 100.0;
-const D50Z: f64 = 82.5210;
+const D50_WHITE: [f64; 3] = {
+	let [x, y, z] = XyzD50::WHITE.xyz();
+	[x * 100.0, y * 100.0, z * 100.0]
+};
 
 /// An CIE defined colour space representing L - perceptual lightness, and two axes A & B.
 /// The components are:
@@ -36,7 +37,7 @@ impl fmt::Display for Lab {
 		let Self { lightness, a, b, alpha } = self;
 		write!(f, "lab({} {} {}", round_dp(*lightness, 2), round_dp(*a, 3), round_dp(*b, 3))?;
 		if *alpha < 100.0 {
-			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
 		}
 		write!(f, ")")
 	}
@@ -45,9 +46,9 @@ impl fmt::Display for Lab {
 impl From<XyzD50> for Lab {
 	fn from(value: XyzD50) -> Self {
 		let XyzD50 { x, y, z, alpha } = value;
-		let x = x / D50X;
-		let y = y / D50Y;
-		let z = z / D50Z;
+		let x = x / D50_WHITE[0];
+		let y = y / D50_WHITE[1];
+		let z = z / D50_WHITE[2];
 		let epsilon = 216.0 / 24389.0; // 6^3/29^3
 		let kappa = 24389.0 / 27.0; // 29^3/3^3
 		let fx = if x > epsilon { x.cbrt() } else { (kappa * x + 16.0) / 116.0 };
@@ -71,6 +72,6 @@ impl From<Lab> for XyzD50 {
 		let x = if fx.powi(3) > epsilon { fx.powi(3) } else { (116.0 * fx - 16.0) / kappa };
 		let y = if lightness > kappa * epsilon { ((lightness + 16.0) / 116.0).powi(3) } else { lightness / kappa };
 		let z = if fz.powi(3) > epsilon { fz.powi(3) } else { (116.0 * fz - 16.0) / kappa };
-		XyzD50::new(x * D50X, y * D50Y, z * D50Z, alpha)
+		XyzD50::new(x * D50_WHITE[0], y * D50_WHITE[1], z * D50_WHITE[2], alpha)
 	}
 }

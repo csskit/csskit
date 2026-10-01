@@ -1,5 +1,7 @@
 use crate::prelude::*;
-use chromashift::{COLOR_EPSILON, ColorDistance, ColorSpace, Hex, Named, PerceptualRound, Srgb, ToAlpha, round_dp};
+use chromashift::{
+	COLOR_EPSILON, ColorDistance, ColorSpace, Gamut, Hex, LinearRgb, Named, PerceptualRound, Srgb, ToAlpha, round_dp,
+};
 use css_ast::{
 	CalcableValue, Color, ColorFunction, ColorMixFunction, CssTypes, HueInterpolationDirection,
 	InterpolationColorSpace, ToChromashift, VisitNode, Visitable,
@@ -38,6 +40,10 @@ impl<'a> Shortest<'a> for chromashift::Color {
 		.flatten()
 		.min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)))
 	}
+}
+
+fn fits_srgb(color: chromashift::Color) -> bool {
+	color.in_gamut_of(ColorSpace::Srgb) || color.close_to(LinearRgb::from(color).clamp_to_gamut(), COLOR_EPSILON)
 }
 
 /// Formats a CSS alpha value (0–1) from chromashift's internal 0–100 representation.
@@ -219,7 +225,7 @@ where
 		let arena = self.transformer.alloc();
 		let len = color.to_span().len() as usize;
 
-		if chroma_color.in_gamut_of(ColorSpace::Srgb)
+		if fits_srgb(chroma_color)
 			&& let Some(candidate) = chroma_color.shortest(arena)
 			&& candidate.len() < len
 		{
@@ -310,7 +316,7 @@ where
 			let mixed = mixed.with_alpha(mixed_alpha);
 			let rounded = mixed.round();
 			let native_css = rounded.to_css(arena);
-			let srgb_css = if mixed.in_gamut_of(ColorSpace::Srgb) { mixed.shortest(arena) } else { None };
+			let srgb_css = if fits_srgb(mixed) { mixed.shortest(arena) } else { None };
 			let candidate =
 				native_css.into_iter().chain(srgb_css).min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)));
 			if let Some(candidate) = candidate

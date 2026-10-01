@@ -32,7 +32,7 @@ impl fmt::Display for Oklch {
 		let Self { lightness, chroma, hue, alpha } = self;
 		write!(f, "oklch({} {} {}", round_dp(*lightness, 2), round_dp(*chroma, 4), round_dp(*hue, 2))?;
 		if *alpha < 100.0 {
-			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
 		}
 		write!(f, ")")
 	}

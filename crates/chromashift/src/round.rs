@@ -1,5 +1,11 @@
 use crate::*;
 
+/// Rounds `f` to `d` decimal places.
+pub fn round_dp(f: f64, d: u32) -> f64 {
+	let factor = 10u32.pow(d) as f64;
+	(f * factor).round() / factor
+}
+
 /// Rounds a colour's channels to perceptually safe precision.
 ///
 /// The number of decimal places per channel is determined by the channel's value range, so that each rounding step

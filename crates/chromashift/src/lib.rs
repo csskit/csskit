@@ -1,9 +1,8 @@
 use core::fmt;
-mod a98_rgb;
 mod channels;
+mod chromaticity;
 mod color_space;
 mod conversion;
-mod display_p3;
 mod distance;
 mod gamut;
 mod hex;
@@ -12,25 +11,24 @@ mod hsl;
 mod hwb;
 mod lab;
 mod lch;
-mod linear_rgb;
+mod matrix;
 mod mix;
 mod named;
 mod oklab;
 mod oklch;
-mod prophoto_rgb;
-mod rec2020;
+mod rgb;
+mod rgb_space;
 mod round;
 mod srgb;
 #[cfg(test)]
 mod tests;
+mod transfer;
 mod wcag;
-mod xyzd50;
-mod xyzd65;
+mod xyz;
 
-pub use a98_rgb::A98Rgb;
 pub use channels::{Channel, PolarLayout, ToAlpha};
+pub use chromaticity::Chromaticity;
 pub use color_space::ColorSpace;
-pub use display_p3::DisplayP3;
 pub use distance::ColorDistance;
 pub use gamut::Gamut;
 pub use hex::Hex;
@@ -39,267 +37,93 @@ pub use hsl::Hsl;
 pub use hwb::Hwb;
 pub use lab::Lab;
 pub use lch::Lch;
-pub use linear_rgb::LinearRgb;
+pub use matrix::Matrix3;
 pub use mix::{ColorMix, ColorMixPolar, HueInterpolation, mix_channels};
 pub use named::{Named, ToNamedError};
 pub use oklab::Oklab;
 pub use oklch::Oklch;
-pub use prophoto_rgb::ProphotoRgb;
-pub use rec2020::Rec2020;
-pub use round::PerceptualRound;
+pub use rgb::{A98Rgb, DisplayP3, LinearRgb, ProphotoRgb, Rec2020};
+pub use rgb_space::RgbSpace;
+pub use round::{PerceptualRound, round_dp};
 pub use srgb::Srgb;
+pub use transfer::Transfer;
 pub use wcag::{WcagColorContrast, WcagLevel};
-pub use xyzd50::XyzD50;
-pub use xyzd65::XyzD65;
+pub use xyz::{XyzD50, XyzD65};
 
-#[derive(Debug, Clone, Copy, PartialEq)]
-pub enum Color {
-	A98Rgb(A98Rgb),
-	DisplayP3(DisplayP3),
-	Hsv(Hsv),
-	Hsl(Hsl),
-	Hex(Hex),
-	Hwb(Hwb),
-	Lab(Lab),
-	Lch(Lch),
-	LinearRgb(LinearRgb),
-	Named(Named),
-	Oklab(Oklab),
-	Oklch(Oklch),
-	ProphotoRgb(ProphotoRgb),
-	Rec2020(Rec2020),
-	Srgb(Srgb),
-	XyzD50(XyzD50),
-	XyzD65(XyzD65),
-}
-
-impl fmt::Display for Color {
-	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		match self {
-			Self::A98Rgb(a) => fmt::Display::fmt(a, f),
-			Self::DisplayP3(d) => fmt::Display::fmt(d, f),
-			Self::Hex(h) => fmt::Display::fmt(h, f),
-			Self::Hsv(h) => fmt::Display::fmt(h, f),
-			Self::Hsl(h) => fmt::Display::fmt(h, f),
-			Self::Hwb(h) => fmt::Display::fmt(h, f),
-			Self::Lab(l) => fmt::Display::fmt(l, f),
-			Self::Lch(l) => fmt::Display::fmt(l, f),
-			Self::LinearRgb(l) => fmt::Display::fmt(l, f),
-			Self::Named(n) => fmt::Display::fmt(n, f),
-			Self::Oklab(o) => fmt::Display::fmt(o, f),
-			Self::Oklch(o) => fmt::Display::fmt(o, f),
-			Self::ProphotoRgb(p) => fmt::Display::fmt(p, f),
-			Self::Rec2020(r) => fmt::Display::fmt(r, f),
-			Self::Srgb(s) => fmt::Display::fmt(s, f),
-			Self::XyzD50(x) => fmt::Display::fmt(x, f),
-			Self::XyzD65(x) => fmt::Display::fmt(x, f),
+macro_rules! color {
+	(settable: $($settable:ident),+ $(,)?; via_srgb: $($via_srgb:ident),+ $(,)?;) => {
+		/// Any colour this crate can represent, in the colour space it was authored in.
+		#[derive(Debug, Clone, Copy, PartialEq)]
+		pub enum Color {
+			$($settable($settable),)+
+			$($via_srgb($via_srgb),)+
 		}
-	}
-}
 
-impl Color {
-	/// Returns a copy of this colour with a new alpha value (0.0–100.0).
-	///
-	/// For `Named` colours (which are always fully opaque), setting a non-100 alpha converts to `Srgb`. For `Hex`,
-	/// the colour is round-tripped through `Srgb` to apply the new alpha.
-	pub fn with_alpha(self, alpha: f32) -> Self {
-		match self {
-			Color::A98Rgb(mut c) => {
-				c.alpha = alpha;
-				Color::A98Rgb(c)
-			}
-			Color::DisplayP3(mut c) => {
-				c.alpha = alpha;
-				Color::DisplayP3(c)
-			}
-			Color::Hsv(mut c) => {
-				c.alpha = alpha;
-				Color::Hsv(c)
-			}
-			Color::Hsl(mut c) => {
-				c.alpha = alpha;
-				Color::Hsl(c)
-			}
-			Color::Hex(h) => {
-				let mut srgb: Srgb = h.into();
-				srgb.alpha = alpha;
-				Color::Srgb(srgb)
-			}
-			Color::Hwb(mut c) => {
-				c.alpha = alpha;
-				Color::Hwb(c)
-			}
-			Color::Lab(mut c) => {
-				c.alpha = alpha;
-				Color::Lab(c)
-			}
-			Color::Lch(mut c) => {
-				c.alpha = alpha;
-				Color::Lch(c)
-			}
-			Color::LinearRgb(mut c) => {
-				c.alpha = alpha;
-				Color::LinearRgb(c)
-			}
-			Color::Named(n) => {
-				let mut srgb: Srgb = n.into();
-				srgb.alpha = alpha;
-				Color::Srgb(srgb)
-			}
-			Color::Oklab(mut c) => {
-				c.alpha = alpha;
-				Color::Oklab(c)
-			}
-			Color::Oklch(mut c) => {
-				c.alpha = alpha;
-				Color::Oklch(c)
-			}
-			Color::ProphotoRgb(mut c) => {
-				c.alpha = alpha;
-				Color::ProphotoRgb(c)
-			}
-			Color::Rec2020(mut c) => {
-				c.alpha = alpha;
-				Color::Rec2020(c)
-			}
-			Color::Srgb(mut c) => {
-				c.alpha = alpha;
-				Color::Srgb(c)
-			}
-			Color::XyzD50(mut c) => {
-				c.alpha = alpha;
-				Color::XyzD50(c)
-			}
-			Color::XyzD65(mut c) => {
-				c.alpha = alpha;
-				Color::XyzD65(c)
+		impl Color {
+			/// Returns a copy of this colour with `alpha`, clamped to 0.0-100.0.
+			///
+			/// `Hex` and `Named` colours are returned as `Srgb`.
+			pub fn with_alpha(self, alpha: f32) -> Self {
+				let alpha = alpha.clamp(0.0, 100.0);
+				match self {
+					$(Self::$settable(mut c) => {
+						c.alpha = alpha;
+						Self::$settable(c)
+					})+
+					$(Self::$via_srgb(c) => {
+						let mut srgb = Srgb::from(c);
+						srgb.alpha = alpha;
+						Self::Srgb(srgb)
+					})+
+				}
 			}
 		}
-	}
-}
 
-impl ToAlpha for Color {
-	fn to_alpha(&self) -> f32 {
-		match self {
-			Color::A98Rgb(a) => a.to_alpha(),
-			Color::DisplayP3(d) => d.to_alpha(),
-			Color::Hex(h) => h.to_alpha(),
-			Color::Hsv(h) => h.to_alpha(),
-			Color::Hsl(h) => h.to_alpha(),
-			Color::Hwb(h) => h.to_alpha(),
-			Color::Lab(l) => l.to_alpha(),
-			Color::Lch(l) => l.to_alpha(),
-			Color::LinearRgb(l) => l.to_alpha(),
-			Color::Named(n) => n.to_alpha(),
-			Color::Oklab(o) => o.to_alpha(),
-			Color::Oklch(o) => o.to_alpha(),
-			Color::ProphotoRgb(p) => p.to_alpha(),
-			Color::Rec2020(r) => r.to_alpha(),
-			Color::Srgb(s) => s.to_alpha(),
-			Color::XyzD50(x) => x.to_alpha(),
-			Color::XyzD65(x) => x.to_alpha(),
+		impl fmt::Display for Color {
+			fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+				match self {
+					$(Self::$settable(c) => fmt::Display::fmt(c, f),)+
+					$(Self::$via_srgb(c) => fmt::Display::fmt(c, f),)+
+				}
+			}
 		}
-	}
-}
 
-impl From<A98Rgb> for Color {
-	fn from(c: A98Rgb) -> Self {
-		Color::A98Rgb(c)
-	}
-}
-impl From<DisplayP3> for Color {
-	fn from(c: DisplayP3) -> Self {
-		Color::DisplayP3(c)
-	}
-}
-impl From<Hsl> for Color {
-	fn from(c: Hsl) -> Self {
-		Color::Hsl(c)
-	}
-}
-impl From<Hwb> for Color {
-	fn from(c: Hwb) -> Self {
-		Color::Hwb(c)
-	}
-}
-impl From<Lab> for Color {
-	fn from(c: Lab) -> Self {
-		Color::Lab(c)
-	}
-}
-impl From<Lch> for Color {
-	fn from(c: Lch) -> Self {
-		Color::Lch(c)
-	}
-}
-impl From<LinearRgb> for Color {
-	fn from(c: LinearRgb) -> Self {
-		Color::LinearRgb(c)
-	}
-}
-impl From<Oklab> for Color {
-	fn from(c: Oklab) -> Self {
-		Color::Oklab(c)
-	}
-}
-impl From<Oklch> for Color {
-	fn from(c: Oklch) -> Self {
-		Color::Oklch(c)
-	}
-}
-impl From<ProphotoRgb> for Color {
-	fn from(c: ProphotoRgb) -> Self {
-		Color::ProphotoRgb(c)
-	}
-}
-impl From<Rec2020> for Color {
-	fn from(c: Rec2020) -> Self {
-		Color::Rec2020(c)
-	}
-}
-impl From<Srgb> for Color {
-	fn from(c: Srgb) -> Self {
-		Color::Srgb(c)
-	}
-}
-impl From<XyzD50> for Color {
-	fn from(c: XyzD50) -> Self {
-		Color::XyzD50(c)
-	}
-}
-impl From<XyzD65> for Color {
-	fn from(c: XyzD65) -> Self {
-		Color::XyzD65(c)
-	}
-}
-
-impl From<Color> for XyzD65 {
-	fn from(value: Color) -> Self {
-		match value {
-			Color::A98Rgb(a) => a.into(),
-			Color::DisplayP3(d) => d.into(),
-			Color::Hex(h) => h.into(),
-			Color::Hsv(h) => h.into(),
-			Color::Hsl(h) => h.into(),
-			Color::Hwb(h) => h.into(),
-			Color::Lab(l) => l.into(),
-			Color::Lch(l) => l.into(),
-			Color::LinearRgb(l) => l.into(),
-			Color::Named(n) => n.into(),
-			Color::Oklab(o) => o.into(),
-			Color::Oklch(o) => o.into(),
-			Color::ProphotoRgb(p) => p.into(),
-			Color::Rec2020(r) => r.into(),
-			Color::Srgb(s) => s.into(),
-			Color::XyzD50(x) => x.into(),
-			Color::XyzD65(x) => x,
+		impl ToAlpha for Color {
+			fn to_alpha(&self) -> f32 {
+				match self {
+					$(Self::$settable(c) => c.to_alpha(),)+
+					$(Self::$via_srgb(c) => c.to_alpha(),)+
+				}
+			}
 		}
-	}
+
+		impl From<Color> for XyzD65 {
+			fn from(value: Color) -> Self {
+				match value {
+					$(Color::$settable(c) => c.into(),)+
+					$(Color::$via_srgb(c) => c.into(),)+
+				}
+			}
+		}
+
+		$(impl From<$settable> for Color {
+			fn from(c: $settable) -> Self {
+				Color::$settable(c)
+			}
+		})+
+
+		$(impl From<$via_srgb> for Color {
+			fn from(c: $via_srgb) -> Self {
+				Color::$via_srgb(c)
+			}
+		})+
+	};
 }
 
+color! {
+	settable: A98Rgb, DisplayP3, Hsv, Hsl, Hwb, Lab, Lch, LinearRgb, Oklab, Oklch, ProphotoRgb, Rec2020, Srgb, XyzD50, XyzD65;
+	via_srgb: Hex, Named;
+}
+
+/// The CIE Delta E distance below which two colours are considered perceptually identical.
 pub const COLOR_EPSILON: f64 = 0.0072;
-
-pub fn round_dp(f: f64, d: u32) -> f64 {
-	let factor = 10u32.pow(d) as f64;
-	(f * factor).round() / factor
-}
