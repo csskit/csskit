@@ -173,7 +173,7 @@ dependencies = [
 
 [[package]]
 name = "atom_set"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "derive_atom_set",
 ]
@@ -345,7 +345,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "bytescan"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "fearless_simd",
 ]
@@ -382,7 +382,7 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chromashift"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -664,7 +664,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -699,7 +699,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -708,7 +708,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "allocator-api2",
  "atom_set",
@@ -731,7 +731,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "allocator-api2",
  "atom_set",
@@ -755,7 +755,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "css_lexer",
  "heck",
@@ -769,7 +769,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "allocator-api2",
  "anstyle",
@@ -796,7 +796,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_arena"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "allocator-api2",
  "libc",
@@ -806,7 +806,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -826,7 +826,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "darling",
  "heck",
@@ -840,7 +840,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -859,7 +859,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "bitmask-enum",
  "console",
@@ -889,7 +889,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_napi"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "css_ast",
  "css_lexer",
@@ -904,7 +904,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -920,7 +920,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "glob",
  "insta",
@@ -932,7 +932,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "anyhow",
  "clap",
@@ -954,7 +954,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -974,7 +974,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "console_error_panic_hook",
  "css_ast",
@@ -1077,7 +1077,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "atom_set",
  "heck",
@@ -1215,7 +1215,7 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "778e2ac28f6c47af28e4907f13ffd1e1ddbd400980a9abd7c8df189bf578a5ad"
 dependencies = [
  "libc",
- "windows-sys 0.60.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -1758,9 +1758,9 @@ dependencies = [
 
 [[package]]
 name = "insta"
-version = "1.48.0"
+version = "1.49.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "86f0f8fee8c926415c58d6ae43a08523a26faccb2323f5e6b644fe7dd4ef6b82"
+checksum = "b67d3d2e287e4b86c10b3f3b641033d1f89b74bdb39d05f34952e2b9a6fe21cd"
 dependencies = [
  "console",
  "once_cell",
@@ -1803,7 +1803,7 @@ checksum = "3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46"
 dependencies = [
  "hermit-abi",
  "libc",
- "windows-sys 0.61.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -2538,7 +2538,7 @@ dependencies = [
  "once_cell",
  "socket2",
  "tracing",
- "windows-sys 0.60.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -2770,7 +2770,7 @@ dependencies = [
  "errno",
  "libc",
  "linux-raw-sys",
- "windows-sys 0.60.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -2827,7 +2827,7 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "webpki-root-certs",
- "windows-sys 0.61.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -3115,7 +3115,7 @@ dependencies = [
 
 [[package]]
 name = "source_tools"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "allocator-api2",
  "csskit_arena",
@@ -3134,7 +3134,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "inventory",
  "stable-type-layout-derive",
@@ -3142,7 +3142,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout-derive"
-version = "0.0.33"
+version = "0.0.34"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3341,7 +3341,7 @@ dependencies = [
  "getrandom 0.3.3",
  "once_cell",
  "rustix",
- "windows-sys 0.60.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
@@ -3761,7 +3761,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "visit-flow"
-version = "0.0.33"
+version = "0.0.34"
 
 [[package]]
 name = "walkdir"
@@ -3967,7 +3967,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.61.2",
+ "windows-sys 0.52.0",
 ]
 
 [[package]]
