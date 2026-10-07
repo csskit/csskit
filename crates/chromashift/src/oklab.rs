@@ -32,7 +32,7 @@ impl fmt::Display for Oklab {
 		let Self { lightness, a, b, alpha } = self;
 		write!(f, "oklab({} {} {}", round_dp(*lightness, 5), round_dp(*a, 3), round_dp(*b, 3))?;
 		if *alpha < 100.0 {
-			write!(f, " / {}", round_dp(*alpha as f64, 2))?;
+			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
 		}
 		write!(f, ")")
 	}

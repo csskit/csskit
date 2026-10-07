@@ -65,10 +65,6 @@ FAIL colors/0067
 -.b{color:oklch(62.796 .258 29.2);background:oklch(78.619 .064 74.6)}
 +.b{color:red;background:tan}
 
-FAIL colors/0068
--.c{color:oklch(.628 .2577 29.23);background:tan}
-+.c{color:red;background:tan}
-
 FAIL combined/0001
 -div,span,:where(td):where(.error){border:1px dashed red;color:red}:is(div,span){border-color:red;border-style:dashed;border-width:1px;color:red}
 +div,span,:where(td.error){border:1px dashed red;color:red}

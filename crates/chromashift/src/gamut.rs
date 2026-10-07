@@ -32,16 +32,22 @@ pub trait Gamut: Sized {
 /// Caller has already performed steps 1–2 (in-gamut check and conversion to OkLCh).
 ///
 /// <https://drafts.csswg.org/css-color-4/#pseudo-raytrace>
-fn raytrace_to_linear_rgb(oklch: Oklch) -> LinearRgb {
+fn raytrace(oklch: Oklch, destination: &RgbSpace) -> [f64; 3] {
 	let alpha = oklch.alpha;
+	let to_destination = XyzD65::WHITE.adapt_to(destination.white).then(&destination.from_xyz);
+	let from_destination = destination.to_xyz.then(&destination.white.adapt_to(XyzD65::WHITE));
+	let to_linear = |oklch: Oklch| {
+		let XyzD65 { x, y, z, .. } = XyzD65::from(Oklab::from(oklch));
+		to_destination.transform([x / 100.0, y / 100.0, z / 100.0])
+	};
 
 	// 3. if the Lightness of |origin_OkLCh| is >= 100%, return white.
 	if oklch.lightness >= 1.0 {
-		return LinearRgb::new(1.0, 1.0, 1.0, alpha);
+		return [1.0, 1.0, 1.0];
 	}
 	// 4. if the Lightness of |origin_OkLCh| is <= 0%, return black.
 	if oklch.lightness <= 0.0 {
-		return LinearRgb::new(0.0, 0.0, 0.0, alpha);
+		return [0.0, 0.0, 0.0];
 	}
 
 	// 5. let |l_origin| be the OkLCh lightness of |origin_OkLCh|.
@@ -52,13 +58,10 @@ fn raytrace_to_linear_rgb(oklch: Oklch) -> LinearRgb {
 
 	// 7. let |anchor| be an achromatic OkLCh color (l_origin, 0, h_origin),
 	//    converted to the linear-light form of |destination|.
-	let anchor_oklch = Oklch::new(l_origin, 0.0, h_origin, alpha);
-	let anchor_rgb = LinearRgb::from(Oklab::from(anchor_oklch));
-	let mut anchor = [anchor_rgb.red, anchor_rgb.green, anchor_rgb.blue];
+	let mut anchor = to_linear(Oklch::new(l_origin, 0.0, h_origin, alpha));
 
 	// 8. let |origin_rgb| be |origin_OkLCh| converted to the linear-light form of |destination|.
-	let origin_rgb = LinearRgb::from(Oklab::from(oklch));
-	let mut origin_rgb = [origin_rgb.red, origin_rgb.green, origin_rgb.blue];
+	let mut origin_rgb = to_linear(oklch);
 
 	// 9. let |low| be 1E-6.
 	let low = 1e-6;
@@ -74,8 +77,8 @@ fn raytrace_to_linear_rgb(oklch: Oklch) -> LinearRgb {
 		// 12.1. if (i > 0)
 		if i > 0 {
 			// 12.1.1. let |current_OkLCh| be |origin_rgb| converted to OkLCh.
-			let rgb = LinearRgb::new(origin_rgb[0], origin_rgb[1], origin_rgb[2], alpha);
-			let mut current_oklch = Oklch::from(Oklab::from(XyzD65::from(rgb)));
+			let [x, y, z] = from_destination.transform(origin_rgb);
+			let mut current_oklch = Oklch::from(Oklab::from(XyzD65::new(x * 100.0, y * 100.0, z * 100.0, alpha)));
 
 			// 12.1.2. let the lightness of |current_OkLCh| be |l_origin|.
 			current_oklch.lightness = l_origin;
@@ -85,8 +88,7 @@ fn raytrace_to_linear_rgb(oklch: Oklch) -> LinearRgb {
 
 			// 12.1.4. let |origin_rgb| be |current_OkLCh| converted to the linear-light
 			//         form of |destination|.
-			let rgb = LinearRgb::from(XyzD65::from(Oklab::from(current_oklch)));
-			origin_rgb = [rgb.red, rgb.green, rgb.blue];
+			origin_rgb = to_linear(current_oklch);
 		}
 
 		// 12.2. Cast a ray from |anchor| to |origin_rgb| and let |intersection| be
@@ -118,15 +120,20 @@ fn raytrace_to_linear_rgb(oklch: Oklch) -> LinearRgb {
 	// 13. let |clipped| be |origin_rgb| clipped to gamut (components in range 0 to 1),
 	//     trimming off any noise due to floating point inaccuracy.
 	// 14. return |clipped|, converted to |destination| as the gamut mapped color.
-	LinearRgb::new(origin_rgb[0].clamp(0.0, 1.0), origin_rgb[1].clamp(0.0, 1.0), origin_rgb[2].clamp(0.0, 1.0), alpha)
+	origin_rgb.map(|channel| channel.clamp(0.0, 1.0))
 }
 
-/// Implements `map_to_gamut` for a colour type that can convert to/from `Oklch` and `LinearRgb`.
+fn raytrace_to_linear_rgb(oklch: Oklch) -> LinearRgb {
+	let [red, green, blue] = raytrace(oklch, &LinearRgb::SPACE);
+	LinearRgb::new(red, green, blue, oklch.alpha)
+}
+
+/// Implements `map_to_gamut` for an RGB colour type, mapping into the gamut of its own `SPACE`.
 ///
-/// Steps 1–2 of the spec algorithm live here; steps 3–14 are in [`raytrace_to_linear_rgb`].
+/// Steps 1–2 of the spec algorithm live here; steps 3–14 are in [`raytrace`].
 macro_rules! impl_map_to_gamut_raytrace {
-	($ty:ident, $to_oklch:expr, $from_linear:expr) => {
-		impl $ty {
+	($($ty:ident),+ $(,)?) => {
+		$(impl $ty {
 			fn raytrace_map_to_gamut(self) -> Self {
 				// 1. if |origin| is in gamut for |destination|, return it.
 				if self.in_gamut() {
@@ -134,34 +141,17 @@ macro_rules! impl_map_to_gamut_raytrace {
 				}
 
 				// 2. let |origin_OkLCh| be |origin| converted to the OkLCh color space.
-				let oklch = $to_oklch(self);
+				let oklch = Oklch::from(self);
 
 				// Steps 3–14.
-				$from_linear(raytrace_to_linear_rgb(oklch))
+				let [red, green, blue] = Self::SPACE.transfer.encode_all(raytrace(oklch, &Self::SPACE));
+				Self::new(red, green, blue, self.alpha).clamp_to_gamut()
 			}
-		}
+		})+
 	};
 }
 
-// Define conversions for each RGB type. Each needs a way to get to Oklch and back from LinearRgb.
-impl_map_to_gamut_raytrace!(LinearRgb, |c: LinearRgb| Oklch::from(Oklab::from(XyzD65::from(c))), |rgb: LinearRgb| rgb
-	.clamp_to_gamut());
-impl_map_to_gamut_raytrace!(DisplayP3, |c: DisplayP3| Oklch::from(Oklab::from(XyzD65::from(c))), |rgb: LinearRgb| {
-	DisplayP3::from(XyzD65::from(rgb)).clamp_to_gamut()
-});
-impl_map_to_gamut_raytrace!(
-	A98Rgb,
-	|c: A98Rgb| Oklch::from(Oklab::from(XyzD65::from(LinearRgb::from(c)))),
-	|rgb: LinearRgb| A98Rgb::from(rgb).clamp_to_gamut()
-);
-impl_map_to_gamut_raytrace!(
-	ProphotoRgb,
-	|c: ProphotoRgb| Oklch::from(Oklab::from(XyzD65::from(XyzD50::from(c)))),
-	|rgb: LinearRgb| ProphotoRgb::from(XyzD50::from(XyzD65::from(rgb))).clamp_to_gamut()
-);
-impl_map_to_gamut_raytrace!(Rec2020, |c: Rec2020| Oklch::from(Oklab::from(XyzD65::from(c))), |rgb: LinearRgb| {
-	Rec2020::from(XyzD65::from(rgb)).clamp_to_gamut()
-});
+impl_map_to_gamut_raytrace!(LinearRgb, DisplayP3, A98Rgb, ProphotoRgb, Rec2020);
 
 /// CSS Color 4 13.2.6 "cast a ray" — ray–box intersection using the slab method.
 ///
@@ -228,8 +218,6 @@ fn raytrace_box(start: &[f64; 3], end: &[f64; 3]) -> Option<[f64; 3]> {
 	Some([start[0] + direction[0] * tnear, start[1] + direction[1] * tnear, start[2] + direction[2] * tnear])
 }
 
-/// Tolerance for floating-point noise accumulated during colour-space round-trips
-/// (e.g. XYZ to LinearRgb can produce values like −2.9e-17 for a channel that should be 0).
 const GAMUT_EPSILON: f64 = 1e-6;
 
 /// Helper: checks an f64 is in [0.0, 1.0] with [`GAMUT_EPSILON`] tolerance.

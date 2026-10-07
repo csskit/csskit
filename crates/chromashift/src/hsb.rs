@@ -37,7 +37,7 @@ impl fmt::Display for Hsv {
 		let Self { hue, saturation, value, alpha } = self;
 		write!(f, "hsv({hue} {saturation} {value}")?;
 		if *alpha < 100.0 {
-			write!(f, " / {alpha}")?;
+			write!(f, " / {alpha}%")?;
 		}
 		write!(f, ")")
 	}

@@ -1,4 +1,4 @@
-use crate::{LinearRgb, ToAlpha};
+use crate::{LinearRgb, RgbSpace, ToAlpha};
 use core::fmt;
 
 /// An RGB colour space with defined chromacities.
@@ -16,6 +16,9 @@ pub struct Srgb {
 }
 
 impl Srgb {
+	/// The colour space these channels are encoded in.
+	pub const SPACE: RgbSpace = RgbSpace::SRGB;
+
 	pub fn new(red: u8, green: u8, blue: u8, alpha: f32) -> Self {
 		Self { red, green, blue, alpha: alpha.clamp(0.0, 100.0) }
 	}
@@ -38,34 +41,21 @@ impl fmt::Display for Srgb {
 	}
 }
 
-fn linear(c: f64) -> f64 {
-	if c > 0.04045 { ((c + 0.055) / 1.055).powf(2.4) } else { c / 12.92 }
-}
-
-fn gamma(u: f64) -> f64 {
-	if u <= 0.0031308 { u * 12.92 } else { 1.055 * u.powf(1.0 / 2.4) - 0.055 }
-}
-
-fn clamp01(value: f64) -> f64 {
-	value.clamp(0.0, 1.0)
-}
-
 impl From<Srgb> for LinearRgb {
 	fn from(value: Srgb) -> Self {
 		let Srgb { red, green, blue, alpha } = value;
-		LinearRgb::new(linear(red as f64 / 255.0), linear(green as f64 / 255.0), linear(blue as f64 / 255.0), alpha)
+		let channels = [red as f64 / 255.0, green as f64 / 255.0, blue as f64 / 255.0];
+		let [red, green, blue] = Srgb::SPACE.transfer.decode_all(channels);
+		LinearRgb::new(red, green, blue, alpha)
 	}
 }
 
 impl From<LinearRgb> for Srgb {
 	fn from(value: LinearRgb) -> Self {
 		let LinearRgb { red, green, blue, alpha } = value;
-		Srgb::new(
-			(gamma(clamp01(red)) * 255.0).round() as u8,
-			(gamma(clamp01(green)) * 255.0).round() as u8,
-			(gamma(clamp01(blue)) * 255.0).round() as u8,
-			alpha,
-		)
+		let clamped = [red.clamp(0.0, 1.0), green.clamp(0.0, 1.0), blue.clamp(0.0, 1.0)];
+		let [red, green, blue] = Srgb::SPACE.transfer.encode_all(clamped);
+		Srgb::new((red * 255.0).round() as u8, (green * 255.0).round() as u8, (blue * 255.0).round() as u8, alpha)
 	}
 }
 
