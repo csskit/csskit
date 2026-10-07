@@ -1,4 +1,4 @@
-use crate::{Matrix3, RgbSpace, ToAlpha, XyzD50, XyzD65, round_dp};
+use crate::{Alpha, Matrix3, Number, RgbSpace, ToAlpha, XyzD50, XyzD65};
 use core::fmt;
 
 macro_rules! rgb_color {
@@ -37,12 +37,8 @@ macro_rules! rgb_color {
 
 		impl fmt::Display for $ty {
 			fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-				let Self { red, green, blue, alpha } = self;
-				write!(f, concat!("color(", $css, " {} {} {}"), round_dp(*red, 2), round_dp(*green, 2), round_dp(*blue, 2))?;
-				if *alpha < 100.0 {
-					write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
-				}
-				write!(f, ")")
+				let Self { red, green, blue, alpha } = *self;
+				write!(f, concat!("color(", $css, " {} {} {}{})"), Number(red), Number(green), Number(blue), Alpha(alpha))
 			}
 		}
 

@@ -1,4 +1,4 @@
-use crate::{ToAlpha, XyzD50, round_dp};
+use crate::{Alpha, Number, ToAlpha, XyzD50};
 use core::fmt;
 
 const D50_WHITE: [f64; 3] = {
@@ -34,12 +34,8 @@ impl ToAlpha for Lab {
 
 impl fmt::Display for Lab {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let Self { lightness, a, b, alpha } = self;
-		write!(f, "lab({} {} {}", round_dp(*lightness, 2), round_dp(*a, 3), round_dp(*b, 3))?;
-		if *alpha < 100.0 {
-			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
-		}
-		write!(f, ")")
+		let Self { lightness, a, b, alpha } = *self;
+		write!(f, "lab({} {} {}{})", Number(lightness), Number(a), Number(b), Alpha(alpha))
 	}
 }
 

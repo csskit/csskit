@@ -1,4 +1,4 @@
-use crate::{Chromaticity, Matrix3, ToAlpha, round_dp};
+use crate::{Alpha, Chromaticity, Matrix3, Number, ToAlpha};
 use core::fmt;
 
 macro_rules! xyz_color {
@@ -34,13 +34,8 @@ macro_rules! xyz_color {
 
 		impl fmt::Display for $ty {
 			fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-				let Self { x, y, z, alpha } = self;
-				let [x, y, z] = [*x / 100.0, *y / 100.0, *z / 100.0];
-				write!(f, concat!("color(", $css, " {} {} {}"), round_dp(x, 6), round_dp(y, 6), round_dp(z, 6))?;
-				if *alpha < 100.0 {
-					write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
-				}
-				write!(f, ")")
+				let Self { x, y, z, alpha } = *self;
+				write!(f, concat!("color(", $css, " {} {} {}{})"), Number(x / 100.0), Number(y / 100.0), Number(z / 100.0), Alpha(alpha))
 			}
 		}
 	};

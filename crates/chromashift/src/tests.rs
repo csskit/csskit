@@ -209,17 +209,44 @@ fn text_hex_display() {
 	assert_eq!(format!("{}", Hex::new(0x663399FF)), "#639");
 	assert_eq!(format!("{}", Hex::new(0x66339900)), "#6390");
 	assert_eq!(format!("{}", Hex::new(0x112233FF)), "#123");
+	assert_eq!(format!("{}", Hex::new(0xFF00FFED)), "#ff00ffed");
+	assert_eq!(format!("{}", Hex::new(0xFF00FFEE)), "#f0fe");
 }
 
 #[test]
-fn display_serialises_alpha_as_a_percentage() {
-	assert_eq!(format!("{}", Srgb::new(255, 0, 0, 50.0)), "rgb(255 0 0 / 50%)");
-	assert_eq!(format!("{}", A98Rgb::new(0.1, 0.2, 0.3, 50.0)), "color(a98-rgb 0.1 0.2 0.3 / 50%)");
-	assert_eq!(format!("{}", LinearRgb::new(0.1, 0.2, 0.3, 50.0)), "color(srgb-linear 0.1 0.2 0.3 / 50%)");
-	assert_eq!(format!("{}", XyzD50::new(10.0, 20.0, 30.0, 50.0)), "color(xyz-d50 0.1 0.2 0.3 / 50%)");
-	assert_eq!(format!("{}", Lab::new(50.0, 10.0, -10.0, 50.0)), "lab(50 10 -10 / 50%)");
-	assert_eq!(format!("{}", Hsl::new(270.0, 50.0, 40.0, 50.0)), "hsl(270 50% 40% / 50%)");
-	assert_eq!(format!("{}", Srgb::new(255, 0, 0, 100.0)), "rgb(255 0 0)");
+fn display_serialises_per_css_color_4() {
+	assert_eq!(format!("{}", Srgb::new(218, 165, 32, 100.0)), "rgb(218, 165, 32)");
+	assert_eq!(format!("{}", Srgb::new(29, 164, 192, 95.0)), "rgba(29, 164, 192, 0.95)");
+	assert_eq!(format!("{}", Hsl::new(270.0, 50.0, 40.0, 50.0)), "hsl(270 50% 40% / 0.5)");
+	assert_eq!(format!("{}", Hwb::new(20.0, 20.0, 30.0, 50.0)), "hwb(20 20% 30% / 0.5)");
+	assert_eq!(format!("{}", Hsv::new(210.0, 66.7, 20.0, 50.0)), "hsv(210 66.7 20 / 0.5)");
+	assert_eq!(format!("{}", Lab::new(56.2, 0.0, 83.6, 100.0)), "lab(56.2 0 83.6)");
+	assert_eq!(format!("{}", Lch::new(56.2, 83.6, 357.4, 93.0)), "lch(56.2 83.6 357.4 / 0.93)");
+	assert_eq!(format!("{}", Oklab::new(0.54, -0.1, -0.02, 100.0)), "oklab(0.54 -0.1 -0.02)");
+	assert_eq!(format!("{}", Oklch::new(0.5385, 0.1725, 320.67, 70.0)), "oklch(0.5385 0.1725 320.67 / 0.7)");
+	assert_eq!(
+		format!("{}", ProphotoRgb::new(0.2804, 0.40283, 0.42259, 85.0)),
+		"color(prophoto-rgb 0.2804 0.40283 0.42259 / 0.85)"
+	);
+	assert_eq!(format!("{}", XyzD50::new(10.0, 20.0, 30.0, 50.0)), "color(xyz-d50 0.1 0.2 0.3 / 0.5)");
+}
+
+#[test]
+fn display_rounds_to_six_decimals_with_halves_towards_positive_infinity() {
+	assert_eq!(
+		format!("{}", Lab::new(50.0, -0.0078125, 0.0078125, 12.345679)),
+		"lab(50 -0.007812 0.007813 / 0.123457)"
+	);
+}
+
+#[test]
+fn display_never_serialises_negative_zero() {
+	assert_eq!(format!("{}", Oklab::new(1.0, -0.0, -0.0000001, 100.0)), "oklab(1 0 0)");
+}
+
+#[test]
+fn display_serialises_f32_channels_without_float_noise() {
+	assert_eq!(format!("{}", Hsl::new(300.1, 33.3, 66.7, 100.0)), "hsl(300.1 33.3% 66.7%)");
 }
 
 #[test]

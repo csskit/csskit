@@ -1,4 +1,4 @@
-use crate::{LinearRgb, RgbSpace, ToAlpha};
+use crate::{LinearRgb, Number, RgbSpace, ToAlpha};
 use core::fmt;
 
 /// An RGB colour space with defined chromacities.
@@ -32,12 +32,12 @@ impl ToAlpha for Srgb {
 
 impl fmt::Display for Srgb {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let Self { red, green, blue, alpha } = self;
-		write!(f, "rgb({red} {green} {blue}")?;
-		if *alpha < 100.0 {
-			write!(f, " / {alpha}%")?;
+		let Self { red, green, blue, alpha } = *self;
+		if alpha < 100.0 {
+			write!(f, "rgba({red}, {green}, {blue}, {})", Number(alpha as f64 / 100.0))
+		} else {
+			write!(f, "rgb({red}, {green}, {blue})")
 		}
-		write!(f, ")")
 	}
 }
 
