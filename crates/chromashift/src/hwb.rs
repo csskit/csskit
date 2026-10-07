@@ -1,4 +1,4 @@
-use crate::{Hsv, LinearRgb, Srgb, ToAlpha, round_dp};
+use crate::{Alpha, Hsv, LinearRgb, Number, Srgb, ToAlpha};
 use core::fmt;
 
 /// An colour represented as Hue, Whiteness, and Blackness expressed in the sRGB colour space.
@@ -29,18 +29,8 @@ impl ToAlpha for Hwb {
 
 impl fmt::Display for Hwb {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let Self { hue, whiteness, blackness, alpha } = self;
-		write!(
-			f,
-			"hwb({} {} {}",
-			round_dp(*hue as f64, 2),
-			round_dp(*whiteness as f64, 3),
-			round_dp(*blackness as f64, 3)
-		)?;
-		if *alpha < 100.0 {
-			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
-		}
-		write!(f, ")")
+		let Self { hue, whiteness, blackness, alpha } = *self;
+		write!(f, "hwb({} {}% {}%{})", Number(hue), Number(whiteness), Number(blackness), Alpha(alpha))
 	}
 }
 

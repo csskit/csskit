@@ -1,4 +1,4 @@
-use crate::{Lab, ToAlpha, round_dp};
+use crate::{Alpha, Lab, Number, ToAlpha};
 use core::fmt;
 
 /// A cylindrical colour space representing within the CIE colour space.
@@ -29,12 +29,8 @@ impl ToAlpha for Lch {
 
 impl fmt::Display for Lch {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let Self { lightness, chroma, hue, alpha } = self;
-		write!(f, "lch({}% {} {}", round_dp(*lightness, 2), round_dp(*chroma, 5), round_dp(*hue, 2))?;
-		if *alpha < 100.0 {
-			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
-		}
-		write!(f, ")")
+		let Self { lightness, chroma, hue, alpha } = *self;
+		write!(f, "lch({} {} {}{})", Number(lightness), Number(chroma), Number(hue), Alpha(alpha))
 	}
 }
 

@@ -1,4 +1,4 @@
-use crate::{ToAlpha, XyzD65, round_dp};
+use crate::{Alpha, Number, ToAlpha, XyzD65};
 use core::fmt;
 
 /// A more adequate expression of LAB, in the CIE colour space.
@@ -29,12 +29,8 @@ impl ToAlpha for Oklab {
 
 impl fmt::Display for Oklab {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let Self { lightness, a, b, alpha } = self;
-		write!(f, "oklab({} {} {}", round_dp(*lightness, 5), round_dp(*a, 3), round_dp(*b, 3))?;
-		if *alpha < 100.0 {
-			write!(f, " / {}%", round_dp(*alpha as f64, 2))?;
-		}
-		write!(f, ")")
+		let Self { lightness, a, b, alpha } = *self;
+		write!(f, "oklab({} {} {}{})", Number(lightness), Number(a), Number(b), Alpha(alpha))
 	}
 }
 

@@ -44,6 +44,7 @@ pub use oklab::Oklab;
 pub use oklch::Oklch;
 pub use rgb::{A98Rgb, DisplayP3, LinearRgb, ProphotoRgb, Rec2020};
 pub use rgb_space::RgbSpace;
+pub(crate) use round::{Alpha, Number};
 pub use round::{PerceptualRound, round_dp};
 pub use srgb::Srgb;
 pub use transfer::Transfer;

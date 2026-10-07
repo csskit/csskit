@@ -20,11 +20,8 @@ impl Hex {
 	}
 
 	pub fn can_use_4_digit(self) -> bool {
-		let Srgb { red, green, blue, alpha } = self.into();
-		is_shorthand_byte(red)
-			&& is_shorthand_byte(green)
-			&& is_shorthand_byte(blue)
-			&& is_shorthand_byte((alpha * 255.0 / 100.0).round() as u8)
+		let [red, green, blue, alpha] = self.0.to_be_bytes();
+		is_shorthand_byte(red) && is_shorthand_byte(green) && is_shorthand_byte(blue) && is_shorthand_byte(alpha)
 	}
 
 	pub const fn has_alpha(&self) -> bool {
@@ -40,8 +37,7 @@ impl ToAlpha for Hex {
 
 impl fmt::Display for Hex {
 	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
-		let Srgb { red, green, blue, alpha } = (*self).into();
-		let alpha = (alpha * 255.0 / 100.0).round() as u32;
+		let [red, green, blue, alpha] = self.0.to_be_bytes();
 		if self.can_use_3_digit() {
 			write!(f, "#{:x}{:x}{:x}", red & 0xF, green & 0xF, blue & 0xF)
 		} else if self.can_use_4_digit() {

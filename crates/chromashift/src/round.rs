@@ -6,6 +6,35 @@ pub fn round_dp(f: f64, d: u32) -> f64 {
 	(f * factor).round() / factor
 }
 
+pub(crate) struct Number<T>(pub T);
+
+impl fmt::Display for Number<f64> {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		write!(f, "{}", round_css(self.0))
+	}
+}
+
+impl fmt::Display for Number<f32> {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		write!(f, "{}", round_css(self.0 as f64) as f32)
+	}
+}
+
+pub(crate) struct Alpha(pub f32);
+
+impl fmt::Display for Alpha {
+	fn fmt(&self, f: &mut fmt::Formatter<'_>) -> fmt::Result {
+		if self.0 < 100.0 { write!(f, " / {}", Number(self.0 as f64 / 100.0)) } else { Ok(()) }
+	}
+}
+
+fn round_css(value: f64) -> f64 {
+	let scaled = value * 1e6;
+	let floor = scaled.floor();
+	let rounded = if scaled - floor < 0.5 { floor } else { floor + 1.0 };
+	rounded / 1e6 + 0.0
+}
+
 /// Rounds a colour's channels to perceptually safe precision.
 ///
 /// The number of decimal places per channel is determined by the channel's value range, so that each rounding step
