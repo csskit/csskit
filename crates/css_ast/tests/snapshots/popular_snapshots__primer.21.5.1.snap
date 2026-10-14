@@ -511650,48 +511650,54 @@ StyleSheet(
                   offset: SourceOffset(540592),
                   len: 1,
                 )),
-                Semicolon(Cursor(
-                  kind: "Semicolon",
-                  offset: SourceOffset(540593),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(540594),
-                  len: 8,
-                )),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(540602),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(540603),
-                  len: 5,
-                )),
-                Semicolon(Cursor(
-                  kind: "Semicolon",
-                  offset: SourceOffset(540608),
-                  len: 1,
-                )),
-                Ident(Cursor(
-                  kind: "Ident",
-                  offset: SourceOffset(540609),
-                  len: 6,
-                )),
-                Colon(Cursor(
-                  kind: "Colon",
-                  offset: SourceOffset(540615),
-                  len: 1,
-                )),
-                String(Cursor(
-                  kind: "String",
-                  offset: SourceOffset(540616),
-                  len: 10,
-                )),
               ],
             )),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(540593),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(540594),
+              len: 8,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(540602),
+              len: 1,
+            )),
+            value: Inherits(False(Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(540603),
+              len: 5,
+            )))),
+            important: None,
+            semicolon: Some(Semicolon(Cursor(
+              kind: "Semicolon",
+              offset: SourceOffset(540608),
+              len: 1,
+            ))),
+          ),
+          Declaration(
+            name: Ident(Cursor(
+              kind: "Ident",
+              offset: SourceOffset(540609),
+              len: 6,
+            )),
+            colon: Colon(Cursor(
+              kind: "Colon",
+              offset: SourceOffset(540615),
+              len: 1,
+            )),
+            value: Syntax(SyntaxValue(String(Cursor(
+              kind: "String",
+              offset: SourceOffset(540616),
+              len: 10,
+            )))),
             important: None,
             semicolon: None,
           ),
