@@ -1,4 +1,22 @@
-## [0.0.35] - 2026-10-07
+## [0.0.36] - 2026-10-14
+
+### Chromashift
+- chromashift: Preserve saturation for out-of-range lightness in Hsl (#1558) ([#1558](https://github.com/csskit/csskit/pull/1558))
+- chromashift: Keep a half turn's direction for longer hue interpolation (#1566) ([#1566](https://github.com/csskit/csskit/pull/1566))
+
+
+### Css_ast
+- css_ast: Add conic gradients, new gradient syntax (#1567) ([#1567](https://github.com/csskit/csskit/pull/1567))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1507) ([#1507](https://github.com/csskit/csskit/pull/1507))
+
+
+### Csskit_transform
+- coverage: update css-minify-tests (#1565) ([#1565](https://github.com/csskit/csskit/pull/1565))
+
+## [0.0.35] - 2026-10-11
 
 ### Other Changes
 - Chore(deps): update dependencies to v1.49.0 (#1546) ([#1546](https://github.com/csskit/csskit/pull/1546))
@@ -7,10 +25,15 @@
 ### Chromashift
 - chromashift: model RGB colour spaces as first class values (#1553) ([#1553](https://github.com/csskit/csskit/pull/1553))
 - chromashift: Align serialisation to CSS Spec (#1555) ([#1555](https://github.com/csskit/csskit/pull/1555))
+- chromashift: Simplify srgb by storing as f64s, allowing extended ranges (#1557) ([#1557](https://github.com/csskit/csskit/pull/1557))
 
 
 ### Css_ast
 - Regenerate css_ast/src/values from csswg drafts (#1545) ([#1545](https://github.com/csskit/csskit/pull/1545))
+
+
+### Csskit
+- Release v0.0.35 (#1552) ([#1552](https://github.com/csskit/csskit/pull/1552))
 
 
 ### Csskit_vscode
