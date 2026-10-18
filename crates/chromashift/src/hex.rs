@@ -27,6 +27,19 @@ impl Hex {
 	pub const fn has_alpha(&self) -> bool {
 		self.0 & 0xFF != 0xFF
 	}
+
+	/// Returns the length in bytes of the CSS hex notation this colour displays as: 4, 5, 7 or 9.
+	pub fn css_len(self) -> usize {
+		if self.can_use_3_digit() {
+			4
+		} else if self.can_use_4_digit() {
+			5
+		} else if self.has_alpha() {
+			9
+		} else {
+			7
+		}
+	}
 }
 
 impl ToAlpha for Hex {
