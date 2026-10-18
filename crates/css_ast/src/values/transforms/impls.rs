@@ -27,10 +27,8 @@ impl<'a> Parse<'a> for RotateStyleValue<'a> {
 	{
 		let c = p.peek_n(1);
 		if <T![Ident]>::peek(p, c) {
-			if p.equals_atom(c, &CssAtomSet::None) {
-				return p.parse::<KeywordValue<'a, T![Ident]>>().map(Self::None);
-			}
 			let variant = match p.to_atom::<CssAtomSet>(c) {
+				CssAtomSet::None => return p.parse::<KeywordValue<'a, T![Ident]>>().map(Self::None),
 				CssAtomSet::X => RotateStyleValue::XAngle,
 				CssAtomSet::Y => RotateStyleValue::YAngle,
 				CssAtomSet::Z => RotateStyleValue::ZAngle,

@@ -10,22 +10,27 @@ macro_rules! voice_pitch_parse {
 				I: Iterator<Item = Cursor> + Clone,
 			{
 				let c = p.peek_n(1);
-				if <T![Ident]>::peek(p, c) && p.equals_atom(c, &CssAtomSet::Absolute) {
-					let absolute = p.parse::<KeywordValue<'a, T![Ident]>>()?;
-					return Ok(Self::FrequencyAbsolute(
-						p.parse::<CalcableValue<'a, NonNegative<Frequency>>>()?,
-						absolute,
-					));
+				let mut keyword = None;
+				if <T![Ident]>::peek(p, c) {
+					let atom = p.to_atom::<CssAtomSet>(c);
+					match atom {
+						CssAtomSet::Absolute => {
+							let absolute = p.parse::<KeywordValue<'a, T![Ident]>>()?;
+							return Ok(Self::FrequencyAbsolute(
+								p.parse::<CalcableValue<'a, NonNegative<Frequency>>>()?,
+								absolute,
+							));
+						}
+						CssAtomSet::XLow
+						| CssAtomSet::Low
+						| CssAtomSet::Medium
+						| CssAtomSet::High
+						| CssAtomSet::XHigh => {
+							keyword = Some((atom, p.parse::<KeywordValue<'a, T![Ident]>>()?));
+						}
+						_ => {}
+					}
 				}
-				let mut keyword = if <T![Ident]>::peek(p, c)
-					&& matches!(
-						p.to_atom::<CssAtomSet>(c),
-						CssAtomSet::XLow | CssAtomSet::Low | CssAtomSet::Medium | CssAtomSet::High | CssAtomSet::XHigh
-					) {
-					Some((p.to_atom::<CssAtomSet>(c), p.parse::<KeywordValue<'a, T![Ident]>>()?))
-				} else {
-					None
-				};
 				let mut frequency = None;
 				let mut semitones = None;
 				let mut percentage = None;
@@ -38,15 +43,20 @@ macro_rules! voice_pitch_parse {
 				}
 				let c = p.peek_n(1);
 				if keyword.is_none() && <T![Ident]>::peek(p, c) {
-					if frequency.is_some() && p.equals_atom(c, &CssAtomSet::Absolute) {
-						let absolute = p.parse::<KeywordValue<'a, T![Ident]>>()?;
-						return Ok(Self::FrequencyAbsolute(frequency.expect("checked above"), absolute));
-					}
-					if matches!(
-						p.to_atom::<CssAtomSet>(c),
-						CssAtomSet::XLow | CssAtomSet::Low | CssAtomSet::Medium | CssAtomSet::High | CssAtomSet::XHigh
-					) {
-						keyword = Some((p.to_atom::<CssAtomSet>(c), p.parse::<KeywordValue<'a, T![Ident]>>()?));
+					let atom = p.to_atom::<CssAtomSet>(c);
+					match atom {
+						CssAtomSet::Absolute if frequency.is_some() => {
+							let absolute = p.parse::<KeywordValue<'a, T![Ident]>>()?;
+							return Ok(Self::FrequencyAbsolute(frequency.expect("checked above"), absolute));
+						}
+						CssAtomSet::XLow
+						| CssAtomSet::Low
+						| CssAtomSet::Medium
+						| CssAtomSet::High
+						| CssAtomSet::XHigh => {
+							keyword = Some((atom, p.parse::<KeywordValue<'a, T![Ident]>>()?));
+						}
+						_ => {}
 					}
 				}
 				let (atom, keyword) = match keyword {
