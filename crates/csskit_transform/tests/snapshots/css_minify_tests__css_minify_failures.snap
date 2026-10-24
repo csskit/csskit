@@ -18,7 +18,7 @@ FAIL anchor/0004
 -@position-try --empty{}
 
 FAIL calc-advanced/0001
--a{width:calc(5px - 10px);margin:calc(5px - 10px)}
+-a{width:calc(-5px);margin:calc(-5px)}
 +a{width:0;margin:-5px}
 
 FAIL calc-advanced/0002
@@ -26,15 +26,11 @@ FAIL calc-advanced/0002
 +a{width:0;margin:-.5rem}
 
 FAIL calc-advanced/0003
--a{width:calc(5px - 10px)}b{width:calc(-.5rem)}
+-a{width:calc(-5px)}b{width:calc(-.5rem)}
 +a,b{width:0}
 
-FAIL calc-advanced/0004
--a{width:calc(10px*(2/20px)*3em)}
-+a{width:3em}
-
 FAIL calc-advanced/0005
--a{line-height:calc(1in/48px)}
+-a{line-height:calc(2)}
 +a{line-height:2}
 
 FAIL calc-advanced/0006
@@ -42,168 +38,40 @@ FAIL calc-advanced/0006
 +a{z-index:2}
 
 FAIL calc-advanced/0007
--a{column-count:calc(2 - 2)}
+-a{column-count:calc(0)}
 +a{column-count:1}
 
 FAIL calc-advanced/0008
--a{column-count:calc(5 - 2)}
+-a{column-count:calc(3)}
 +a{column-count:3}
 
 FAIL calc-advanced/0009
--a{opacity:calc(3/2)}
+-a{opacity:calc(1.5)}
 +a{opacity:1}
 
-FAIL calc-advanced/0010
--a{line-height:calc((8px/2px)*1px)}
-+a{line-height:4px}
-
 FAIL calc/0001
--a{margin:calc(1px + 2px)calc(4px - 1px)}
+-a{margin:3px 3px}
 +a{margin:3px}
 
-FAIL calc/0003
--a{width:calc(calc(100% - 20px) + 10px)}
-+a{width:calc(100% - 10px)}
-
-FAIL calc/0004
--a{width:calc(100px*2)}
-+a{width:200px}
-
-FAIL calc/0005
--a{width:calc(50px + 50px)}
-+a{width:100px}
-
-FAIL calc/0006
--a{width:calc(((75.37% - 63.5px) - 900px) + (2*100px))}
-+a{width:calc(75.37% - 763.5px)}
-
-FAIL calc/0007
--.a{width:calc(100%/3)}.b{width:calc(100%/6)}.c{width:calc(100%/7)}.d{width:calc(100%/9)}.e{width:calc(100%/11)}.f{width:calc(100%/13)}.g{width:calc(100%/14)}
-+.a{width:33.3333%}.b{width:16.6667%}.c{width:14.2857%}.d{width:11.1111%}.e{width:9.09091%}.f{width:7.69231%}.g{width:7.14286%}
-
-FAIL calc/0008
--a{width:calc(100px*1)}
-+a{width:100px}
-
-FAIL calc/0009
--a{width:calc(100px + 0px)}
-+a{width:100px}
-
-FAIL calc/0010
--a{margin-left:calc(-1*(-10px));margin-right:calc(-10*(-10px))}
-+a{margin-left:10px;margin-right:100px}
-
-FAIL calc/0011
--a{width:calc(1/(1/50px))}
-+a{width:50px}
-
-FAIL calc/0012
--a{width:calc(calc(10px + 20px) + calc(30px + 40px))}
-+a{width:100px}
-
-FAIL calc/0013
--a{width:calc(2*3*10px)}
-+a{width:60px}
-
-FAIL calc/0014
--a{width:calc(2*(50px + 25px))}
-+a{width:150px}
-
-FAIL calc/0015
--a{width:calc(50% + 25%)}
-+a{width:75%}
-
 FAIL calc/0016
--a{line-height:calc(10/2)}
+-a{line-height:calc(5)}
 +a{line-height:5}
-
-FAIL calc/0017
--a{width:calc(50px - 50px)}
-+a{width:0}
-
-FAIL calc/0018
--a{width:calc(100px*0)}
-+a{width:0}
-
-FAIL calc/0019
--a{width:calc(pi*100px)}
-+a{width:314.159px}
-
-FAIL calc/0020
--a{width:calc(e*100px)}
-+a{width:271.828px}
-
-FAIL calc/0021
--a{width:calc(1in + 0px)}
-+a{width:96px}
-
-FAIL calc/0022
--a{width:calc(100px)}
-+a{width:100px}
-
-FAIL calc/0023
--a{width:calc(100px/4)}
-+a{width:25px}
-
-FAIL calc/0024
--a{width:calc(100% - 50px + 0%)}
-+a{width:calc(100% - 50px)}
 
 FAIL calc/0026
 -a{font-size:calc(var(--x)*.25)}
 +a{font-size:calc(var(--x)/4)}
 
-FAIL calc/0030
--.a{width:calc(100%/1)}.b{width:calc(100%/2)}.c{width:calc(100%/4)}.d{width:calc(100%/5)}.e{width:calc(100%/8)}.f{width:calc(100%/10)}.g{width:calc(100%/16)}
-+.a{width:100%}.b{width:50%}.c{width:25%}.d{width:20%}.e{width:12.5%}.f{width:10%}.g{width:6.25%}
-
-FAIL calc/0031
--a{transition-duration:calc(1s - .2s)}
-+a{transition-duration:.8s}
-
-FAIL calc/0032
--a{margin:calc(100% - (25px - 4px) - 2px)}
-+a{margin:calc(100% - 23px)}
-
-FAIL calc/0033
--a{margin:calc((100% - 5em)/2)}
-+a{margin:calc(50% - 2.5em)}
-
-FAIL calc/0034
--a{margin:calc(-1*(1rem + 16px)/2)}
-+a{margin:calc(-.5rem - 8px)}
-
 FAIL calc/0036
--a{rotate:calc(.25turn + 10deg)}
+-a{rotate:calc(100deg)}
 +a{rotate:100deg}
 
-FAIL calc/0037
--a{width:clamp(10px,50px,20px)}
-+a{width:20px}
-
 FAIL calc/0038
--a{width:max(1in,20px)}
+-a{width:96px}
 +a{width:1in}
 
-FAIL calc/0039
--a{margin:calc(abs(-5px) + 5px)}
-+a{margin:10px}
-
-FAIL calc/0040
--a{width:calc(min(10px,20px) + 10px)}
-+a{width:20px}
-
-FAIL calc/0041
--a{width:var(--x,calc(5px + 5px))}
-+a{width:var(--x,10px)}
-
 FAIL calc/0042
--a{width:var(--x,calc(5px - 10px))}
+-a{width:var(--x,calc(-5px))}
 +a{width:var(--x,0)}
-
-FAIL calc/0047
--a{color:rgb(calc(255/2)0 0)}
-+a{color:maroon}
 
 FAIL charset/0005
 -@charset "gbk";.foo:before{content:""}
@@ -1416,21 +1284,9 @@ FAIL values/0045
 -a{opacity:initial}
 +a{opacity:1}
 
-FAIL values/0046
--a{width:max(10px,20px)}
-+a{width:20px}
-
-FAIL values/0047
--a{width:clamp(10px,10px,10px)}
-+a{width:10px}
-
 FAIL values/0050
 -a{background:url("8-).gif")}
 +a{background:url(8-\).gif)}
-
-FAIL values/0052
--a{width:min(10px,20px)}
-+a{width:10px}
 
 FAIL values/0053
 -a{--foo:;color:var(--foo,red)}

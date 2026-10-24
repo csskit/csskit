@@ -147,6 +147,16 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		len_before != edits.len()
 	}
 
+	/// Returns true if a pending edit already replaces or deletes a span that covers `span`.
+	pub fn has_pending_edit_covering(&self, span: Span) -> bool {
+		self.edits.borrow().iter().any(|edit| match edit {
+			TransformEdit::Replace { target, .. } | TransformEdit::Delete { target } => {
+				target.start() <= span.start() && span.end() <= target.end()
+			}
+			TransformEdit::InsertBefore { .. } | TransformEdit::InsertAfter { .. } => false,
+		})
+	}
+
 	pub fn replace(&self, span: impl ToSpan, cursors: Vec<'a, SourceCursor<'a>>) {
 		let span = span.to_span();
 		debug_assert!(span.start() <= span.end(), "Transformer::replace received invalid span: {:?}", span);
