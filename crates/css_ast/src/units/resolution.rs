@@ -1,8 +1,5 @@
 use super::prelude::*;
 
-// const DPPX_IN: f32 = 96.0;
-// const DPPX_CM: f32 = DPPX_IN / 2.54;
-
 /// <https://drafts.csswg.org/css-values/#resolution>
 ///
 /// ```text,ignore
@@ -34,6 +31,17 @@ impl From<Resolution> for f32 {
 			Resolution::Dpcm(r) => r.into(),
 			Resolution::Dppx(r) => r.into(),
 			Resolution::X(r) => r.into(),
+		}
+	}
+}
+
+impl Resolution {
+	pub(crate) fn per_dppx(unit: CssAtomSet) -> Option<f32> {
+		match unit {
+			CssAtomSet::Dpi => Some(96.0),
+			CssAtomSet::Dpcm => Some(96.0 / 2.54),
+			CssAtomSet::Dppx | CssAtomSet::X => Some(1.0),
+			_ => None,
 		}
 	}
 }

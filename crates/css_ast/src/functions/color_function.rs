@@ -26,38 +26,37 @@ impl Channel {
 		}
 	}
 
-	fn resolve(channel: &NoneOr<NumericValue<'_, NumberOrPercentage>>) -> Option<Self> {
+	fn reduce_channel<T: Copy + Into<css_parse::Token>>(
+		channel: &NoneOr<NumericValue<'_, T>>,
+	) -> Option<(crate::CalcUnit, f64)> {
+		use crate::CalcUnit;
 		match channel {
-			NoneOr::None(_) => Some(Self::Number(0.0)),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(number))) => {
-				Some(Self::Number(number.value() as f64))
-			}
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(percent))) => {
-				Some(Self::Percentage(percent.value() as f64))
-			}
-			NoneOr::Some(_) => None,
+			NoneOr::None(_) => Some((CalcUnit::Number, 0.0)),
+			NoneOr::Some(value) => value.reduce()?.as_single(),
+		}
+	}
+
+	fn resolve(channel: &NoneOr<NumericValue<'_, NumberOrPercentage>>) -> Option<Self> {
+		use crate::CalcUnit;
+		match Self::reduce_channel(channel)? {
+			(CalcUnit::Number, value) => Some(Self::Number(value)),
+			(CalcUnit::Dimension(CssAtomSet::Percent), value) => Some(Self::Percentage(value)),
+			_ => None,
 		}
 	}
 
 	fn resolve_8(channel: &NoneOr<NumericValue<'_, NumberOrPercentage>>) -> Option<f64> {
-		match channel {
-			NoneOr::None(_) => Some(0.0),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(number))) => {
-				Some(number.value() as f64 / 255.0)
-			}
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(percent))) => {
-				Some(percent.value() as f64 / 100.0)
-			}
-			NoneOr::Some(_) => None,
+		match Self::resolve(channel)? {
+			Self::Number(number) => Some(number / 255.0),
+			Self::Percentage(percent) => Some(percent / 100.0),
 		}
 	}
 
 	fn resolve_hue_degrees(channel: &NoneOr<NumericValue<'_, AngleOrNumber>>) -> Option<f64> {
-		match channel {
-			NoneOr::None(_) => Some(0.0),
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(number))) => Some(number.value() as f64),
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(angle))) => Some(angle.as_degrees() as f64),
-			NoneOr::Some(_) => None,
+		use crate::CalcUnit;
+		match Self::reduce_channel(channel)? {
+			(CalcUnit::Number | CalcUnit::Dimension(CssAtomSet::Deg), value) => Some(value),
+			_ => None,
 		}
 	}
 

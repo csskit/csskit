@@ -1,4 +1,5 @@
 use super::prelude::*;
+use css_parse::{AtomSet, Token};
 
 /// <https://drafts.csswg.org/css-values/#frequency>
 ///
@@ -22,9 +23,15 @@ pub enum Frequency {
 
 impl Frequency {
 	pub fn as_hertz(&self) -> f32 {
-		match self {
-			Self::Hz(f) => (*f).into(),
-			Self::Khz(f) => Into::<f32>::into(*f) * 1000.0,
+		let token = Token::from(*self);
+		token.value() * Self::hz_per(CssAtomSet::from_bits(token.atom_bits())).unwrap_or(1.0)
+	}
+
+	pub(crate) fn hz_per(unit: CssAtomSet) -> Option<f32> {
+		match unit {
+			CssAtomSet::Khz => Some(1000.0),
+			CssAtomSet::Hz => Some(1.0),
+			_ => None,
 		}
 	}
 }

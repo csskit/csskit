@@ -1,9 +1,9 @@
 use super::prelude::*;
 use crate::{
-	AngleOrNumber, AttrFunction, EnvFunction, FirstValidFunction, IfFunction, NoneOr, Number, TreeCountingFunction,
-	Unresolved, VarFunction,
+	Angle, AngleOrNumber, AttrFunction, EnvFunction, FirstValidFunction, Frequency, IfFunction, Length, NoneOr, Number,
+	Resolution, Time, TreeCountingFunction, Unresolved, VarFunction,
 };
-use css_parse::SemanticEq;
+use css_parse::{AtomSet, SemanticEq, Token};
 
 /// ```text,ignore
 /// <calc()>  = calc( <calc-sum> )
@@ -916,6 +916,286 @@ pub enum RoundingStrategy {
 	LineWidth(Ident),
 }
 
+const MAX_CALC_TERMS: usize = 4;
+
+/// The unit of a term in a [`ReducedCalc`].
+#[derive(Debug, Clone, Copy, PartialEq, Eq)]
+pub enum CalcUnit {
+	/// A unitless `<number>`.
+	Number,
+	/// A dimension or percentage, identified by its unit atom. Absolute lengths are in [`CssAtomSet::Px`], angles
+	/// in [`CssAtomSet::Deg`], times in [`CssAtomSet::S`], frequencies in [`CssAtomSet::Hz`] and resolutions in
+	/// [`CssAtomSet::Dppx`].
+	Dimension(CssAtomSet),
+}
+
+/// A math expression reduced to a sum with at most one term per unit, such as `100% - 50px`.
+#[derive(Debug, Clone, Copy, PartialEq)]
+pub struct ReducedCalc {
+	terms: [(CalcUnit, f64); MAX_CALC_TERMS],
+	len: usize,
+	inverted: bool,
+}
+
+impl ReducedCalc {
+	fn single(unit: CalcUnit, value: f64) -> Self {
+		let mut terms = [(CalcUnit::Number, 0.0); MAX_CALC_TERMS];
+		terms[0] = (unit, value);
+		Self { terms, len: 1, inverted: false }
+	}
+
+	/// Reduces a number or dimension token, converting absolute lengths, angles, times, frequencies and resolutions
+	/// to their canonical unit.
+	/// Returns `None` for any other token, or a dimension with an unknown unit.
+	pub fn from_token(token: Token) -> Option<Self> {
+		let value = token.value() as f64;
+		match token.kind() {
+			Kind::Number => Some(Self::single(CalcUnit::Number, value)),
+			Kind::Dimension if token.atom_bits() != 0 => {
+				let unit = CssAtomSet::from_bits(token.atom_bits());
+				let (unit, value) = if let Some(factor) = Length::px_per(unit) {
+					(CssAtomSet::Px, value * factor as f64)
+				} else if let Some(factor) = Angle::deg_per(unit) {
+					(CssAtomSet::Deg, value * factor as f64)
+				} else if let Some(divisor) = Time::per_s(unit) {
+					(CssAtomSet::S, value / divisor as f64)
+				} else if let Some(factor) = Frequency::hz_per(unit) {
+					(CssAtomSet::Hz, value * factor as f64)
+				} else if let Some(divisor) = Resolution::per_dppx(unit) {
+					(CssAtomSet::Dppx, value / divisor as f64)
+				} else {
+					(unit, value)
+				};
+				Some(Self::single(CalcUnit::Dimension(unit), value))
+			}
+			_ => None,
+		}
+	}
+
+	/// The terms of the sum, in the order their units first appeared.
+	pub fn terms(&self) -> &[(CalcUnit, f64)] {
+		&self.terms[..self.len]
+	}
+
+	/// The unit and value of a sum of exactly one term.
+	pub fn as_single(&self) -> Option<(CalcUnit, f64)> {
+		match self.terms() {
+			[term] if !self.inverted => Some(*term),
+			_ => None,
+		}
+	}
+
+	fn scalar(&self) -> Option<f64> {
+		match self.terms() {
+			[(CalcUnit::Number, value)] => Some(*value),
+			_ => None,
+		}
+	}
+
+	fn dimension(&self) -> Option<(CssAtomSet, f64)> {
+		match self.terms() {
+			[
+				(
+					CalcUnit::Dimension(
+						unit @ (CssAtomSet::Px | CssAtomSet::Deg | CssAtomSet::S | CssAtomSet::Hz | CssAtomSet::Dppx),
+					),
+					value,
+				),
+			] => Some((*unit, *value)),
+			_ => None,
+		}
+	}
+
+	fn is_number(&self) -> bool {
+		self.terms().iter().any(|(unit, _)| *unit == CalcUnit::Number)
+	}
+
+	fn as_single_absolute(&self) -> Option<(CalcUnit, f64)> {
+		self.as_single().filter(|(unit, _)| *unit != CalcUnit::Dimension(CssAtomSet::Percent))
+	}
+
+	fn scale(mut self, factor: f64) -> Self {
+		for term in &mut self.terms[..self.len] {
+			term.1 *= factor;
+		}
+		self
+	}
+
+	fn map(self, f: impl FnOnce(f64) -> f64) -> Option<Self> {
+		let (unit, value) = self.as_single_absolute()?;
+		Some(Self::single(unit, f(value)))
+	}
+
+	fn add(mut self, other: Self, sign: f64) -> Option<Self> {
+		if self.is_number() != other.is_number() || self.inverted || other.inverted {
+			return None;
+		}
+		for &(unit, value) in other.terms() {
+			match self.terms[..self.len].iter_mut().find(|(term_unit, _)| *term_unit == unit) {
+				Some(term) => term.1 += sign * value,
+				None if self.len < MAX_CALC_TERMS => {
+					self.terms[self.len] = (unit, sign * value);
+					self.len += 1;
+				}
+				None => return None,
+			}
+		}
+		Some(self)
+	}
+
+	fn multiply(self, other: Self) -> Option<Self> {
+		match (self.scalar(), other.scalar()) {
+			(Some(factor), _) => Some(other.scale(factor)),
+			(_, Some(factor)) => Some(self.scale(factor)),
+			_ => match (self.dimension(), other.dimension()) {
+				(Some((lhs_unit, lhs)), Some((rhs_unit, rhs)))
+					if lhs_unit == rhs_unit && self.inverted != other.inverted =>
+				{
+					Some(Self::single(CalcUnit::Number, lhs * rhs))
+				}
+				_ => None,
+			},
+		}
+	}
+
+	fn divide(self, other: Self) -> Option<Self> {
+		if let Some(divisor) = other.scalar() {
+			return (divisor != 0.0).then(|| self.scale(1.0 / divisor));
+		}
+		let (unit, divisor) = other.dimension().filter(|(_, value)| *value != 0.0)?;
+		if let Some(dividend) = self.scalar() {
+			return Some(Self {
+				inverted: !other.inverted,
+				..Self::single(CalcUnit::Dimension(unit), dividend / divisor)
+			});
+		}
+		match self.dimension() {
+			Some((dividend_unit, dividend)) if dividend_unit == unit && self.inverted == other.inverted => {
+				Some(Self::single(CalcUnit::Number, dividend / divisor))
+			}
+			_ => None,
+		}
+	}
+
+	fn pick(self, other: Self, choose: fn(f64, f64) -> f64) -> Option<Self> {
+		let ((lhs_unit, lhs), (rhs_unit, rhs)) = (self.as_single_absolute()?, other.as_single_absolute()?);
+		(lhs_unit == rhs_unit)
+			.then(|| Self::single(lhs_unit, if lhs.is_nan() || rhs.is_nan() { f64::NAN } else { choose(lhs, rhs) }))
+	}
+}
+
+fn reduce_comparison<'a, T: 'a>(
+	sums: &CommaSeparated<'a, CalcSum<'a, T>>,
+	leaf: &impl Fn(&T) -> Option<ReducedCalc>,
+	choose: fn(f64, f64) -> f64,
+) -> Option<ReducedCalc> {
+	let mut sums = sums.into_iter().map(|(sum, _)| sum);
+	let first = sums.next()?.reduce_with(leaf)?;
+	sums.try_fold(first, |acc, sum| acc.pick(sum.reduce_with(leaf)?, choose))
+}
+
+impl<'a, T: Copy + Into<Token>> MathFunction<'a, T> {
+	/// Reduces `calc()`, `min()`, `max()`, `clamp()`, `abs()` and `sign()`; see [`MathFunction::reduce_with`].
+	pub fn reduce(&self) -> Option<ReducedCalc> {
+		self.reduce_with(&|value| ReducedCalc::from_token((*value).into()))
+	}
+}
+
+impl<'a, T> MathFunction<'a, T> {
+	/// Reduces `calc()`, `min()`, `max()`, `clamp()`, `abs()` and `sign()`, using `leaf` to reduce each typed value.
+	/// Returns `None` if the expression depends on a substitution or tree counting function, mixes incompatible
+	/// units, divides by zero, compares or takes the sign of a percentage, or uses any other math function.
+	pub fn reduce_with(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		self.fold(leaf).filter(|reduced| !reduced.inverted)
+	}
+
+	fn fold(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		match self {
+			Self::CalcFunction(func) => func.params.fold(leaf),
+			Self::MinFunction(func) => reduce_comparison(&func.params, leaf, f64::min),
+			Self::MaxFunction(func) => reduce_comparison(&func.params, leaf, f64::max),
+			Self::ClampFunction(func) => {
+				let mut value = func.value.reduce_with(leaf)?;
+				if let NoneOr::Some(max) = &func.max {
+					value = value.pick(max.reduce_with(leaf)?, f64::min)?;
+				}
+				if let NoneOr::Some(min) = &func.min {
+					value = value.pick(min.reduce_with(leaf)?, f64::max)?;
+				}
+				Some(value)
+			}
+			Self::AbsFunction(func) => func.params.reduce_with(leaf)?.map(f64::abs),
+			Self::SignFunction(func) => {
+				let reduced = func.params.reduce_with(leaf)?;
+				let value = reduced.scalar().or_else(|| reduced.dimension().map(|(_, value)| value))?;
+				let sign = if value == 0.0 || value.is_nan() { value } else { value.signum() };
+				Some(ReducedCalc::single(CalcUnit::Number, sign))
+			}
+			_ => None,
+		}
+	}
+}
+
+impl<'a, T> CalcSum<'a, T> {
+	/// Reduces this sum, using `leaf` to reduce each typed value; see [`MathFunction::reduce_with`].
+	pub fn reduce_with(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		self.fold(leaf).filter(|reduced| !reduced.inverted)
+	}
+
+	fn fold(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		self.rest.iter().try_fold(self.first.fold(leaf)?, |acc, (op, product)| {
+			let sign = if matches!(op, CalcSumOperator::Add(_)) { 1.0 } else { -1.0 };
+			acc.add(product.fold(leaf)?, sign)
+		})
+	}
+}
+
+impl<'a, T> CalcProduct<'a, T> {
+	fn fold(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		self.rest.iter().try_fold(self.first.fold(leaf)?, |acc, (op, operand)| {
+			let rhs = operand.fold(leaf)?;
+			match op {
+				CalcProductOperator::Multiply(_) => acc.multiply(rhs),
+				CalcProductOperator::Divide(_) => acc.divide(rhs),
+			}
+		})
+	}
+}
+
+impl<'a, T> CalcOperand<'a, T> {
+	fn fold(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		match self {
+			Self::Literal(value) => value.fold(leaf),
+			Self::Substituted(func) => match &**func {
+				CalcOperandSubstitutionFunction::Math(math) => math.fold(leaf),
+				_ => None,
+			},
+			Self::Unresolved(_) => None,
+		}
+	}
+}
+
+impl<'a, T> CalcValue<'a, T> {
+	fn fold(&self, leaf: &impl Fn(&T) -> Option<ReducedCalc>) -> Option<ReducedCalc> {
+		match self {
+			Self::Number(number) => ReducedCalc::from_token((*number).into()),
+			Self::Typed(typed) => leaf(typed),
+			Self::Keyword(keyword) => Some(ReducedCalc::single(
+				CalcUnit::Number,
+				match keyword {
+					CalcKeyword::E(_) => core::f64::consts::E,
+					CalcKeyword::Pi(_) => core::f64::consts::PI,
+					CalcKeyword::Infinity(_) => f64::INFINITY,
+					CalcKeyword::NegativeInfinity(_) => f64::NEG_INFINITY,
+					CalcKeyword::NaN(_) => f64::NAN,
+				},
+			)),
+			Self::TreeCounting(_) => None,
+			Self::Parenthesized(parens) => parens.sum.fold(leaf),
+		}
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use super::*;
@@ -923,6 +1203,48 @@ mod tests {
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
 
 	type LengthMathFunction<'a> = MathFunction<'a, Length>;
+
+	fn reduce(source_text: &str) -> Option<std::vec::Vec<(CalcUnit, f64)>> {
+		use css_parse::{Arena, Parser};
+		let arena = Arena::default();
+		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, source_text);
+		let mut parser = Parser::new(&arena, source_text, lexer);
+		let math = parser.parse_entirely::<MathFunction<crate::LengthPercentage>>().output.unwrap();
+		math.reduce().map(|reduced| reduced.terms().to_vec())
+	}
+
+	#[test]
+	fn test_reduce() {
+		let px = CalcUnit::Dimension(CssAtomSet::Px);
+		let percent = CalcUnit::Dimension(CssAtomSet::Percent);
+		assert_eq!(reduce("calc(1in + 4px)"), Some(vec![(px, 100.0)]));
+		assert_eq!(reduce("calc((100% - 50px) / 2)"), Some(vec![(percent, 50.0), (px, -25.0)]));
+		assert_eq!(reduce("calc(1 / (1 / 50px))"), Some(vec![(px, 50.0)]));
+		assert_eq!(reduce("calc(1in / 48px)"), Some(vec![(CalcUnit::Number, 2.0)]));
+		assert_eq!(reduce("min(1in, 100px)"), Some(vec![(px, 96.0)]));
+		assert_eq!(reduce("clamp(10px, 50px, 20px)"), Some(vec![(px, 20.0)]));
+		assert_eq!(reduce("calc(abs(-5px) + 5px)"), Some(vec![(px, 10.0)]));
+		assert_eq!(reduce("sign(-5px)"), Some(vec![(CalcUnit::Number, -1.0)]));
+	}
+
+	#[test]
+	fn test_reduce_unresolvable() {
+		assert_eq!(reduce("calc(1 / 50px)"), None);
+		assert_eq!(reduce("calc(10 / 4px)"), None);
+		assert_eq!(reduce("calc(2 * (10 / 4px))"), None);
+		assert_eq!(reduce("calc(2 * calc(10 / 4px))"), None);
+		assert_eq!(reduce("calc(1px / 0)"), None);
+		assert_eq!(reduce("calc(1px + 1)"), None);
+		assert_eq!(reduce("calc(10px * 1em)"), None);
+		assert_eq!(reduce("min(10px, 1em)"), None);
+		assert_eq!(reduce("calc(var(--x) + 1px)"), None);
+		assert_eq!(reduce("calc(sibling-index() * 1px)"), None);
+		assert_eq!(reduce("round(5.5px, 1px)"), None);
+		assert_eq!(reduce("min(10%, 20%)"), None);
+		assert_eq!(reduce("clamp(10%, 50%, 20%)"), None);
+		assert_eq!(reduce("abs(-5%)"), None);
+		assert_eq!(reduce("sign(-5%)"), None);
+	}
 
 	#[test]
 	fn test_calc_functions() {

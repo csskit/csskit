@@ -13,6 +13,7 @@ pub(crate) mod prelude {
 }
 
 mod css_minifier;
+mod reduce_calc_expressions;
 mod reduce_charset_rule;
 mod reduce_colors;
 mod reduce_lengths;
@@ -23,6 +24,7 @@ mod remove_inert_nodes;
 mod remove_overridden_declarations;
 
 pub use css_minifier::*;
+pub use reduce_calc_expressions::*;
 pub use reduce_charset_rule::*;
 pub use reduce_colors::*;
 pub use reduce_lengths::*;

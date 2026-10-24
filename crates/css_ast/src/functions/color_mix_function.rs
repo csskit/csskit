@@ -266,8 +266,12 @@ impl crate::ToChromashift for ColorMixFunction<'_> {
 			.map(|(p, _)| {
 				let pct = match &p.percentage {
 					None => None,
-					Some(CalcableValue::Literal(pct)) => Some(pct.value() as f64),
-					Some(_) => return None,
+					Some(pct) => match pct.reduce()?.as_single()? {
+						(crate::CalcUnit::Dimension(CssAtomSet::Percent), value) => {
+							Some(if value.is_nan() { 0.0 } else { value.clamp(0.0, 100.0) })
+						}
+						_ => return None,
+					},
 				};
 				Some((&p.color, pct))
 			})

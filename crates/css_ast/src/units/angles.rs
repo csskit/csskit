@@ -1,4 +1,5 @@
 use super::prelude::*;
+use css_parse::{AtomSet, Token};
 
 /// <https://drafts.csswg.org/css-values/#angles>
 ///
@@ -54,11 +55,17 @@ impl Angle {
 	const DEG_TURN: f32 = 360.0;
 
 	pub fn as_degrees(&self) -> f32 {
-		match self {
-			Self::Grad(d) => Into::<f32>::into(*d) * Self::DEG_GRAD,
-			Self::Rad(d) => Into::<f32>::into(*d) * Self::DEG_RAD,
-			Self::Turn(d) => Into::<f32>::into(*d) * Self::DEG_TURN,
-			Self::Deg(d) => (*d).into(),
+		let token = Token::from(*self);
+		token.value() * Self::deg_per(CssAtomSet::from_bits(token.atom_bits())).unwrap_or(1.0)
+	}
+
+	pub(crate) fn deg_per(unit: CssAtomSet) -> Option<f32> {
+		match unit {
+			CssAtomSet::Grad => Some(Self::DEG_GRAD),
+			CssAtomSet::Rad => Some(Self::DEG_RAD),
+			CssAtomSet::Turn => Some(Self::DEG_TURN),
+			CssAtomSet::Deg => Some(1.0),
+			_ => None,
 		}
 	}
 }
