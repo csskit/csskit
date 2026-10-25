@@ -5,6 +5,72 @@ use crate::functions::relative_color::RelativeColorFunction;
 use crate::{AngleOrNumber, NoneOr, NumberOrPercentage, NumericValue};
 use css_parse::Box;
 
+#[cfg(feature = "chromashift")]
+enum Channel {
+	Number(f64),
+	Percentage(f64),
+}
+
+#[cfg(feature = "chromashift")]
+impl Channel {
+	fn unscaled(self) -> f64 {
+		match self {
+			Self::Number(value) | Self::Percentage(value) => value,
+		}
+	}
+
+	fn scaled(self, percent_reference: f64) -> f64 {
+		match self {
+			Self::Number(number) => number,
+			Self::Percentage(percent) => percent / 100.0 * percent_reference,
+		}
+	}
+
+	fn reduce_channel<T: Copy + Into<css_parse::Token>>(
+		channel: &NoneOr<NumericValue<'_, T>>,
+	) -> Option<(crate::CalcUnit, f64)> {
+		use crate::CalcUnit;
+		match channel {
+			NoneOr::None(_) => Some((CalcUnit::Number, 0.0)),
+			NoneOr::Some(value) => value.reduce()?.as_single(),
+		}
+	}
+
+	fn resolve(channel: &NoneOr<NumericValue<'_, NumberOrPercentage>>) -> Option<Self> {
+		use crate::CalcUnit;
+		match Self::reduce_channel(channel)? {
+			(CalcUnit::Number, value) => Some(Self::Number(value)),
+			(CalcUnit::Dimension(CssAtomSet::Percent), value) => Some(Self::Percentage(value)),
+			_ => None,
+		}
+	}
+
+	fn resolve_8(channel: &NoneOr<NumericValue<'_, NumberOrPercentage>>) -> Option<f64> {
+		match Self::resolve(channel)? {
+			Self::Number(number) => Some(number / 255.0),
+			Self::Percentage(percent) => Some(percent / 100.0),
+		}
+	}
+
+	fn resolve_hue_degrees(channel: &NoneOr<NumericValue<'_, AngleOrNumber>>) -> Option<f64> {
+		use crate::CalcUnit;
+		match Self::reduce_channel(channel)? {
+			(CalcUnit::Number | CalcUnit::Dimension(CssAtomSet::Deg), value) => Some(value),
+			_ => None,
+		}
+	}
+
+	fn resolve_alpha(alpha: &Option<NoneOr<NumericValue<'_, NumberOrPercentage>>>) -> Option<f32> {
+		match alpha {
+			None => Some(100.0),
+			Some(alpha) => match Self::resolve(alpha)? {
+				Self::Number(number) => Some((number * 100.0) as f32),
+				Self::Percentage(percent) => Some(percent as f32),
+			},
+		}
+	}
+}
+
 #[node]
 #[derive(
 	Parse, Peek, IntoCursor, ToSpan, SemanticEq, ToCursors, Debug, Copy, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
@@ -183,74 +249,22 @@ impl crate::ToChromashift for ColorFunctionColor<'_> {
 
 		let ColorFunctionColorParams(space, c1, c2, c3, _, alpha) = &self.params;
 
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
-
-		// Helper to extract a channel as f64 in 0.0-1.0 range
-		let channel_unit = |c: &NoneOr<NumericValue<'_, NumberOrPercentage>>| -> Option<f64> {
-			match c {
-				NoneOr::None(_) => Some(0.0),
-				NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => Some(n.value() as f64),
-				NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => {
-					Some(p.value() as f64 / 100.0)
-				}
-				NoneOr::Some(_) => None,
-			}
-		};
-
+		let c1 = Channel::resolve(c1)?.scaled(1.0);
+		let c2 = Channel::resolve(c2)?.scaled(1.0);
+		let c3 = Channel::resolve(c3)?.scaled(1.0);
+		let alpha = Channel::resolve_alpha(alpha)?;
 		match space {
-			ColorSpace::Srgb(_) => {
-				let r = channel_unit(c1)?;
-				let g = channel_unit(c2)?;
-				let b = channel_unit(c3)?;
-				Some(chromashift::Color::Srgb(Srgb::new(r, g, b, alpha)))
-			}
-			ColorSpace::SrgbLinear(_) => {
-				let r = channel_unit(c1)?;
-				let g = channel_unit(c2)?;
-				let b = channel_unit(c3)?;
-				Some(chromashift::Color::LinearRgb(LinearRgb::new(r, g, b, alpha)))
-			}
-			ColorSpace::DisplayP3(_) => {
-				let r = channel_unit(c1)?;
-				let g = channel_unit(c2)?;
-				let b = channel_unit(c3)?;
-				Some(chromashift::Color::DisplayP3(DisplayP3::new(r, g, b, alpha)))
-			}
-			ColorSpace::A98Rgb(_) => {
-				let r = channel_unit(c1)?;
-				let g = channel_unit(c2)?;
-				let b = channel_unit(c3)?;
-				Some(chromashift::Color::A98Rgb(A98Rgb::new(r, g, b, alpha)))
-			}
-			ColorSpace::ProphotoRgb(_) => {
-				let r = channel_unit(c1)?;
-				let g = channel_unit(c2)?;
-				let b = channel_unit(c3)?;
-				Some(chromashift::Color::ProphotoRgb(ProphotoRgb::new(r, g, b, alpha)))
-			}
-			ColorSpace::Rec2020(_) => {
-				let r = channel_unit(c1)?;
-				let g = channel_unit(c2)?;
-				let b = channel_unit(c3)?;
-				Some(chromashift::Color::Rec2020(Rec2020::new(r, g, b, alpha)))
-			}
+			ColorSpace::Srgb(_) => Some(chromashift::Color::Srgb(Srgb::new(c1, c2, c3, alpha))),
+			ColorSpace::SrgbLinear(_) => Some(chromashift::Color::LinearRgb(LinearRgb::new(c1, c2, c3, alpha))),
+			ColorSpace::DisplayP3(_) => Some(chromashift::Color::DisplayP3(DisplayP3::new(c1, c2, c3, alpha))),
+			ColorSpace::A98Rgb(_) => Some(chromashift::Color::A98Rgb(A98Rgb::new(c1, c2, c3, alpha))),
+			ColorSpace::ProphotoRgb(_) => Some(chromashift::Color::ProphotoRgb(ProphotoRgb::new(c1, c2, c3, alpha))),
+			ColorSpace::Rec2020(_) => Some(chromashift::Color::Rec2020(Rec2020::new(c1, c2, c3, alpha))),
 			ColorSpace::Xyz(_) | ColorSpace::XyzD65(_) => {
-				let x = channel_unit(c1)? * 100.0;
-				let y = channel_unit(c2)? * 100.0;
-				let z = channel_unit(c3)? * 100.0;
-				Some(chromashift::Color::XyzD65(XyzD65::new(x, y, z, alpha)))
+				Some(chromashift::Color::XyzD65(XyzD65::new(c1 * 100.0, c2 * 100.0, c3 * 100.0, alpha)))
 			}
 			ColorSpace::XyzD50(_) => {
-				let x = channel_unit(c1)? * 100.0;
-				let y = channel_unit(c2)? * 100.0;
-				let z = channel_unit(c3)? * 100.0;
-				Some(chromashift::Color::XyzD50(XyzD50::new(x, y, z, alpha)))
+				Some(chromashift::Color::XyzD50(XyzD50::new(c1 * 100.0, c2 * 100.0, c3 * 100.0, alpha)))
 			}
 		}
 	}
@@ -346,31 +360,10 @@ impl crate::ToChromashift for RgbFunctionParams<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Srgb;
 		let Self(red, _, green, _, blue, _, alpha) = &self;
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
-		let red = match red {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(red))) => red.value() as f64 / 255.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(red))) => red.value() as f64 / 100.0,
-			NoneOr::Some(_) => return None,
-		};
-		let green = match green {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(green))) => green.value() as f64 / 255.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(green))) => green.value() as f64 / 100.0,
-			NoneOr::Some(_) => return None,
-		};
-		let blue = match blue {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(blue))) => blue.value() as f64 / 255.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(blue))) => blue.value() as f64 / 100.0,
-			NoneOr::Some(_) => return None,
-		};
+		let red = Channel::resolve_8(red)?;
+		let green = Channel::resolve_8(green)?;
+		let blue = Channel::resolve_8(blue)?;
+		let alpha = Channel::resolve_alpha(alpha)?;
 		Some(chromashift::Color::Srgb(Srgb::new(red, green, blue, alpha)))
 	}
 }
@@ -453,32 +446,11 @@ impl crate::ToChromashift for HslFunctionParams<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Hsl;
 		let Self(hue, _, saturation, _, lightness, _, alpha) = &self;
-		let hue = match hue {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
-			NoneOr::Some(_) => return None,
-		};
-		let saturation = match saturation {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		};
-		let lightness = match lightness {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		};
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
-		Some(chromashift::Color::Hsl(Hsl::new(hue.into(), saturation.into(), lightness.into(), alpha)))
+		let hue = Channel::resolve_hue_degrees(hue)?;
+		let saturation = Channel::resolve(saturation)?.unscaled();
+		let lightness = Channel::resolve(lightness)?.unscaled();
+		let alpha = Channel::resolve_alpha(alpha)?;
+		Some(chromashift::Color::Hsl(Hsl::new(hue, saturation, lightness, alpha)))
 	}
 }
 
@@ -509,32 +481,11 @@ impl crate::ToChromashift for HwbFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Hwb;
 		let HwbFunctionParams(hue, whiteness, blackness, _, alpha) = &self.params;
-		let hue = match hue {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
-			NoneOr::Some(_) => return None,
-		};
-		let whiteness = match whiteness {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		};
-		let blackness = match blackness {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		};
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
-		Some(chromashift::Color::Hwb(Hwb::new(hue.into(), whiteness.into(), blackness.into(), alpha)))
+		let hue = Channel::resolve_hue_degrees(hue)?;
+		let whiteness = Channel::resolve(whiteness)?.unscaled();
+		let blackness = Channel::resolve(blackness)?.unscaled();
+		let alpha = Channel::resolve_alpha(alpha)?;
+		Some(chromashift::Color::Hwb(Hwb::new(hue, whiteness, blackness, alpha)))
 	}
 }
 
@@ -577,31 +528,10 @@ impl crate::ToChromashift for LabFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Lab;
 		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
-		let l = match l {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let a = match a {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let b = match b {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 125.0,
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
+		let l = Channel::resolve(l)?.unscaled();
+		let a = Channel::resolve(a)?.scaled(125.0);
+		let b = Channel::resolve(b)?.scaled(125.0);
+		let alpha = Channel::resolve_alpha(alpha)?;
 		Some(chromashift::Color::Lab(Lab::new(l, a, b, alpha)))
 	}
 }
@@ -645,31 +575,10 @@ impl crate::ToChromashift for LchFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Lch;
 		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
-		let lightness = match lightness {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let chroma = match chroma {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let hue = match hue {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
+		let lightness = Channel::resolve(lightness)?.unscaled();
+		let chroma = Channel::resolve(chroma)?.scaled(150.0);
+		let hue = Channel::resolve_hue_degrees(hue)?;
+		let alpha = Channel::resolve_alpha(alpha)?;
 		Some(chromashift::Color::Lch(Lch::new(lightness, chroma, hue, alpha)))
 	}
 }
@@ -713,31 +622,10 @@ impl crate::ToChromashift for OklabFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Oklab;
 		let LabFunctionParams(l, a, b, _, alpha) = &self.params;
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
-		let l = match l {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0,
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let a = match a {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let b = match b {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 0.4,
-			NoneOr::Some(_) => return None,
-		} as f64;
+		let l = Channel::resolve(l)?.scaled(1.0);
+		let a = Channel::resolve(a)?.scaled(0.4);
+		let b = Channel::resolve(b)?.scaled(0.4);
+		let alpha = Channel::resolve_alpha(alpha)?;
 		Some(chromashift::Color::Oklab(Oklab::new(l, a, b, alpha)))
 	}
 }
@@ -745,9 +633,9 @@ impl crate::ToChromashift for OklabFunction<'_> {
 /// <https://drafts.csswg.org/css-color/#funcdef-oklch>
 ///
 /// ```text,ignore
-/// oklab() = oklab( [ <percentage> | <number> | none]
+/// oklch() = oklch( [ <percentage> | <number> | none]
 ///  [ <percentage> | <number> | none]
-///  [ <percentage> | <number> | none]
+///  [ <hue> | none]
 ///  [ / [<alpha-value> | none] ]? )
 ///  ```
 #[node]
@@ -768,31 +656,10 @@ impl crate::ToChromashift for OklchFunction<'_> {
 	fn to_chromashift(&self) -> Option<chromashift::Color> {
 		use chromashift::Oklch;
 		let LchFunctionParams(lightness, chroma, hue, _, alpha) = &self.params;
-		let lightness = match lightness {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value(),
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let chroma = match chroma {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(n))) => n.value(),
-			NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(p))) => p.value() / 100.0 * 150.0,
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let hue = match hue {
-			NoneOr::None(_) => 0.0,
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Number(hue))) => hue.value(),
-			NoneOr::Some(NumericValue::Literal(AngleOrNumber::Angle(d))) => d.as_degrees(),
-			NoneOr::Some(_) => return None,
-		} as f64;
-		let alpha = match alpha {
-			Some(NoneOr::None(_)) => 0.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Number(t)))) => t.value() * 100.0,
-			Some(NoneOr::Some(NumericValue::Literal(NumberOrPercentage::Percentage(t)))) => t.value(),
-			Some(NoneOr::Some(_)) => return None,
-			None => 100.0,
-		};
+		let lightness = Channel::resolve(lightness)?.scaled(1.0);
+		let chroma = Channel::resolve(chroma)?.scaled(0.4);
+		let hue = Channel::resolve_hue_degrees(hue)?;
+		let alpha = Channel::resolve_alpha(alpha)?;
 		Some(chromashift::Color::Oklch(Oklch::new(lightness, chroma, hue, alpha)))
 	}
 }
@@ -814,5 +681,59 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, RgbFunction, "rgb(0 0 0/var(--a))");
 		// color() with math/substitution channels.
 		assert_parse!(CssAtomSet::ATOMS, ColorFunctionColor, "color(srgb calc(0.5) var(--g) 0)");
+	}
+
+	#[cfg(feature = "chromashift")]
+	#[track_caller]
+	fn assert_close(actual: [f64; 3], expected: [f64; 3]) {
+		assert!(
+			actual.iter().zip(expected).all(|(a, b)| (a - b).abs() < 1e-6),
+			"expected {expected:?}, got {actual:?}"
+		);
+	}
+
+	#[test]
+	#[cfg(feature = "chromashift")]
+	fn chromashift_percentages_use_css_color_4_reference_ranges() {
+		use crate::ToChromashift;
+		use chromashift::Color;
+		use css_parse::assert_parse;
+
+		assert_parse!(CssAtomSet::ATOMS, OklchFunction, "oklch(50% 50% 30)", |node| {
+			let Some(Color::Oklch(oklch)) = node.to_chromashift() else { panic!("expected Oklch") };
+			assert_close([oklch.lightness, oklch.chroma, oklch.hue], [0.5, 0.2, 30.0]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, OklchFunction, "oklch(100% 100% 0)", |node| {
+			let Some(Color::Oklch(oklch)) = node.to_chromashift() else { panic!("expected Oklch") };
+			assert_close([oklch.lightness, oklch.chroma, oklch.hue], [1.0, 0.4, 0.0]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, OklabFunction, "oklab(50% 50% -50%)", |node| {
+			let Some(Color::Oklab(oklab)) = node.to_chromashift() else { panic!("expected Oklab") };
+			assert_close([oklab.lightness, oklab.a, oklab.b], [0.5, 0.2, -0.2]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, LchFunction, "lch(50% 50% 30)", |node| {
+			let Some(Color::Lch(lch)) = node.to_chromashift() else { panic!("expected Lch") };
+			assert_close([lch.lightness, lch.chroma, lch.hue], [50.0, 75.0, 30.0]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, LabFunction, "lab(50% 50% -50%)", |node| {
+			let Some(Color::Lab(lab)) = node.to_chromashift() else { panic!("expected Lab") };
+			assert_close([lab.lightness, lab.a, lab.b], [50.0, 62.5, -62.5]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, ColorFunction, "oklch(from red 50% 50% 30)", |node| {
+			let Some(Color::Oklch(oklch)) = node.to_chromashift() else { panic!("expected Oklch") };
+			assert_close([oklch.lightness, oklch.chroma, oklch.hue], [0.5, 0.2, 30.0]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, ColorFunction, "oklab(from red 50% 50% -50%)", |node| {
+			let Some(Color::Oklab(oklab)) = node.to_chromashift() else { panic!("expected Oklab") };
+			assert_close([oklab.lightness, oklab.a, oklab.b], [0.5, 0.2, -0.2]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, ColorFunction, "lch(from red 50% 50% 30)", |node| {
+			let Some(Color::Lch(lch)) = node.to_chromashift() else { panic!("expected Lch") };
+			assert_close([lch.lightness, lch.chroma, lch.hue], [50.0, 75.0, 30.0]);
+		});
+		assert_parse!(CssAtomSet::ATOMS, ColorFunction, "lab(from red 50% 50% -50%)", |node| {
+			let Some(Color::Lab(lab)) = node.to_chromashift() else { panic!("expected Lab") };
+			assert_close([lab.lightness, lab.a, lab.b], [50.0, 62.5, -62.5]);
+		});
 	}
 }

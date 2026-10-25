@@ -3,7 +3,7 @@ use chromashift::{
 	COLOR_EPSILON, ColorDistance, ColorSpace, Gamut, Hex, LinearRgb, Named, PerceptualRound, Srgb, ToAlpha, round_dp,
 };
 use css_ast::{
-	CalcableValue, Color, ColorFunction, ColorMixFunction, CssTypes, HueInterpolationDirection,
+	CalcUnit, CalcableValue, Color, ColorFunction, ColorMixFunction, CssAtomSet, CssTypes, HueInterpolationDirection,
 	InterpolationColorSpace, ToChromashift, VisitNode, Visitable,
 };
 use css_parse::{Arena, format_in};
@@ -251,25 +251,24 @@ where
 		let n = mix.parts.len();
 		let default_pct = 100.0 / n as f32;
 
-		// A percentage that is a substitution/math function (var()/calc()/...) can't be
-		// resolved statically, so none of the numeric reductions below are safe. Bail if any
-		// explicit percentage is not a plain literal.
-		let literal_pct = |pct: &CalcableValue<'b, css_ast::Percentage>| match pct {
-			CalcableValue::Literal(p) => Some(p.value()),
+		let resolve_pct = |pct: &CalcableValue<'b, css_ast::Percentage>| match pct.reduce()?.as_single()? {
+			(CalcUnit::Dimension(CssAtomSet::Percent), value) => {
+				Some(if value.is_nan() { 0.0 } else { value.clamp(0.0, 100.0) as f32 })
+			}
 			_ => None,
 		};
-		if (&mix.parts).into_iter().any(|(p, _)| p.percentage.as_ref().is_some_and(|pct| literal_pct(pct).is_none())) {
+		if (&mix.parts).into_iter().any(|(p, _)| p.percentage.as_ref().is_some_and(|pct| resolve_pct(pct).is_none())) {
 			return VisitFlow::DESCEND;
 		}
 
 		// Resolve effective percentages
 		let explicit_sum: f32 =
-			(&mix.parts).into_iter().filter_map(|(p, _)| p.percentage.as_ref().and_then(&literal_pct)).sum();
+			(&mix.parts).into_iter().filter_map(|(p, _)| p.percentage.as_ref().and_then(&resolve_pct)).sum();
 		let implicit_count = (&mix.parts).into_iter().filter(|(p, _)| p.percentage.is_none()).count();
 		let implicit_share = if implicit_count > 0 { (100.0 - explicit_sum) / implicit_count as f32 } else { 0.0 };
 		let pcts: Vec<f32> = (&mix.parts)
 			.into_iter()
-			.map(|(p, _)| p.percentage.as_ref().and_then(&literal_pct).unwrap_or(implicit_share))
+			.map(|(p, _)| p.percentage.as_ref().and_then(&resolve_pct).unwrap_or(implicit_share))
 			.collect();
 		let sum: f32 = pcts.iter().sum();
 
@@ -673,6 +672,63 @@ mod tests {
 			StyleSheet,
 			"a { color: rgb(none 128 0); }",
 			"a { color: green; }"
+		);
+	}
+
+	#[test]
+	fn resolves_math_function_channels() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: rgb(calc(255 / 1) 0 0); }",
+			"a { color: red; }"
+		);
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: hsl(calc(0.5turn - 60deg) 100% calc(100% / 4)); }",
+			"a { color: green; }"
+		);
+	}
+
+	#[test]
+	fn keeps_unresolvable_math_function_channels() {
+		assert_no_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: rgb(calc(var(--r) * 1) 0 0); }"
+		);
+	}
+
+	#[test]
+	fn color_mix_resolves_math_function_percentage() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color-mix(in srgb, red calc(50% + 50%), blue); }",
+			"a { color: red; }"
+		);
+	}
+
+	#[test]
+	fn color_mix_clamps_math_percentages() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color-mix(in srgb, red calc(150%), blue 50%); }",
+			"a { color: #a05; }"
+		);
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { color: color-mix(in srgb, red calc(-50%), blue 50%); }",
+			"a { color: #0000ff80; }"
 		);
 	}
 

@@ -1,11 +1,11 @@
 use crate::{
 	AttrFunction, CssAtomSet, CssMetadata, EnvFunction, FirstValidFunction, IdentFunction, IfFunction, MathFunction,
-	TreeCountingFunction, Unresolved, VarFunction,
+	ReducedCalc, TreeCountingFunction, Unresolved, VarFunction,
 };
 use css_lexer::ToSpan;
 use css_parse::{
 	Box, Cursor, DeclarationValue, NodeWithMetadata, Parse, Parser, Peek, Result, SemanticEq, ToCursors,
-	ToNormalisedValue, ToNumberValue,
+	ToNormalisedValue, ToNumberValue, Token,
 };
 use csskit_derives::*;
 use csskit_proc_macro::node;
@@ -94,6 +94,20 @@ pub enum CalcableValue<'a, T> {
 
 impl_value_slot_parse!(CalcableValue, CalcableSubstitutionFunction, T);
 
+impl<'a, T: Copy + Into<Token>> CalcableValue<'a, T> {
+	/// Reduces a literal or math function; see [`MathFunction::reduce`].
+	pub fn reduce(&self) -> Option<ReducedCalc> {
+		match self {
+			Self::Literal(literal) => ReducedCalc::from_token((*literal).into()),
+			Self::Substituted(func) => match &**func {
+				CalcableSubstitutionFunction::Math(math) => math.reduce(),
+				_ => None,
+			},
+			Self::Unresolved(_) => None,
+		}
+	}
+}
+
 /// A substitution or math function appearing in a [`CalcableValue`] slot.
 ///
 /// `Math` covers `calc()`, `min()`, `max()`, `clamp()`, `round()`, `mod()`, `rem()`, the
@@ -131,6 +145,20 @@ pub enum NumericValue<'a, T> {
 }
 
 impl_value_slot_parse!(NumericValue, NumericSubstitutionFunction, T);
+
+impl<'a, T: Copy + Into<Token>> NumericValue<'a, T> {
+	/// Reduces a literal or math function; see [`MathFunction::reduce`].
+	pub fn reduce(&self) -> Option<ReducedCalc> {
+		match self {
+			Self::Literal(literal) => ReducedCalc::from_token((*literal).into()),
+			Self::Substituted(func) => match &**func {
+				NumericSubstitutionFunction::Math(math) => math.reduce(),
+				_ => None,
+			},
+			Self::Unresolved(_) => None,
+		}
+	}
+}
 
 /// A tree-counting, substitution, or math function appearing in a [`NumericValue`] slot.
 ///

@@ -1,4 +1,5 @@
 use super::prelude::*;
+use css_parse::{AtomSet, Token};
 
 /// <https://drafts.csswg.org/css-values/#time>
 ///
@@ -22,9 +23,15 @@ pub enum Time {
 
 impl Time {
 	pub fn as_seconds(&self) -> f32 {
-		match self {
-			Self::Ms(f) => Into::<f32>::into(*f) / 1000.0,
-			Self::S(f) => (*f).into(),
+		let token = Token::from(*self);
+		token.value() / Self::per_s(CssAtomSet::from_bits(token.atom_bits())).unwrap_or(1.0)
+	}
+
+	pub(crate) fn per_s(unit: CssAtomSet) -> Option<f32> {
+		match unit {
+			CssAtomSet::Ms => Some(1000.0),
+			CssAtomSet::S => Some(1.0),
+			_ => None,
 		}
 	}
 }

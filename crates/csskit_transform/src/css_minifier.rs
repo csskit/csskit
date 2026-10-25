@@ -1,6 +1,6 @@
 use crate::{
-	ReduceCharsetRule, ReduceColors, ReduceLengths, ReduceShorthandValues, ReduceTimeUnits, ReduceUrls,
-	RemoveInertNodes, RemoveOverriddenDeclarations, transformer,
+	ReduceCalcExpressions, ReduceCharsetRule, ReduceColors, ReduceLengths, ReduceShorthandValues, ReduceTimeUnits,
+	ReduceUrls, RemoveInertNodes, RemoveOverriddenDeclarations, transformer,
 };
 use bitmask_enum::bitmask;
 use css_ast::{CssMetadata, Visitable};
@@ -16,6 +16,8 @@ transformer!(
 		ReduceLengths,
 		/// Enables the [ReduceTimeUnits] transformer.
 		ReduceTimeUnits,
+		/// Enables the [ReduceCalcExpressions] transformer.
+		ReduceCalcExpressions,
 		/// Enables the [ReduceUrls] transformer.
 		ReduceUrls,
 		/// Enables the [ReduceShorthandValues] transformer.
@@ -128,6 +130,28 @@ mod tests {
 		] {
 			let (output, _) = minify(input, CssMinifierFeature::none());
 			assert_eq!(output, expected);
+		}
+	}
+
+	#[test]
+	fn preserves_angle_range_clamping() {
+		let (output, _) = minify("a{font-style:oblique calc(50deg + 50deg)}", CssMinifierFeature::all_bits());
+		assert_eq!(output, "a{font-style:oblique calc(100deg)}");
+	}
+
+	#[test]
+	fn test_color_mix_with_math_percentage_commits() {
+		for (input, expected) in [
+			("a{color:color-mix(in srgb, red calc(50%), blue)}", "a{color:purple}"),
+			("a{color:color-mix(in srgb, red calc(50% + 50%), blue)!important}", "a{color:red!important}"),
+			(
+				"a{background-color:color-mix(in oklab, rgb(10 20 30) calc(100%/2), white)}",
+				"a{background-color:#797f86}",
+			),
+		] {
+			let (output, changed) = minify(input, CssMinifierFeature::all_bits());
+			assert!(changed, "should change {}", input);
+			assert_eq!(output, expected, "input: {}", input);
 		}
 	}
 }

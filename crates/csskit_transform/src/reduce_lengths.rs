@@ -23,7 +23,7 @@ where
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
-		Self { transformer, unitless_zero_resolves: Cell::new(UnitlessZeroResolves::Length), math_depth: Cell::new(0) }
+		Self { transformer, unitless_zero_resolves: Cell::new(UnitlessZeroResolves::Number), math_depth: Cell::new(0) }
 	}
 }
 
@@ -52,7 +52,7 @@ where
 		_decl: &Declaration<'b, T, CssMetadata>,
 		_query: VisitNode,
 	) {
-		self.unitless_zero_resolves.set(UnitlessZeroResolves::Length);
+		self.unitless_zero_resolves.set(UnitlessZeroResolves::Number);
 	}
 
 	fn visit_math_function<'b, T>(&mut self, _math: &MathFunction<'b, T>) {
@@ -147,6 +147,22 @@ mod tests {
 			CssAtomSet,
 			StyleSheet,
 			"body { width: calc(100px - 0px); }"
+		);
+	}
+
+	#[test]
+	fn test_keeps_units_on_zero_outside_declarations() {
+		assert_no_transform!(
+			CssMinifierFeature::ReduceLengths,
+			CssAtomSet,
+			StyleSheet,
+			"@media (min-width: 0px) { a { width: 1px; } }"
+		);
+		assert_no_transform!(
+			CssMinifierFeature::ReduceLengths,
+			CssAtomSet,
+			StyleSheet,
+			"@media (width >= 0em) { a { width: 1px; } }"
 		);
 	}
 

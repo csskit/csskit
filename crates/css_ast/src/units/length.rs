@@ -1,5 +1,6 @@
 use super::prelude::*;
 use crate::{Exact, Flex, Percentage};
+use css_parse::{AtomSet, Token};
 
 macro_rules! apply_lengths {
 	($ident: ident) => {
@@ -94,12 +95,23 @@ impl Length {
 	pub fn to_px(&self) -> Option<f32> {
 		match self {
 			Self::Zero(_) => Some(0.0),
-			Self::Cm(d) => Some(Into::<f32>::into(*d) * Self::PX_CM),
-			Self::Mm(d) => Some(Into::<f32>::into(*d) * Self::PX_MM),
-			Self::Q(d) => Some(Into::<f32>::into(*d) * Self::PX_Q),
-			Self::In(d) => Some(Into::<f32>::into(*d) * Self::PX_IN),
-			Self::Pc(d) => Some(Into::<f32>::into(*d) * Self::PX_PC),
-			Self::Pt(d) => Some(Into::<f32>::into(*d) * Self::PX_PT),
+			Self::Px(_) => None,
+			_ => {
+				let token = Token::from(*self);
+				Self::px_per(CssAtomSet::from_bits(token.atom_bits())).map(|factor| token.value() * factor)
+			}
+		}
+	}
+
+	pub(crate) fn px_per(unit: CssAtomSet) -> Option<f32> {
+		match unit {
+			CssAtomSet::Cm => Some(Self::PX_CM),
+			CssAtomSet::Mm => Some(Self::PX_MM),
+			CssAtomSet::Q => Some(Self::PX_Q),
+			CssAtomSet::In => Some(Self::PX_IN),
+			CssAtomSet::Pc => Some(Self::PX_PC),
+			CssAtomSet::Pt => Some(Self::PX_PT),
+			CssAtomSet::Px => Some(1.0),
 			_ => None,
 		}
 	}
