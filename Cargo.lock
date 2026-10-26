@@ -173,7 +173,7 @@ dependencies = [
 
 [[package]]
 name = "atom_set"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "derive_atom_set",
 ]
@@ -352,7 +352,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "bytescan"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "fearless_simd",
 ]
@@ -389,7 +389,7 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chromashift"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -669,7 +669,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -694,7 +694,7 @@ dependencies = [
  "quote",
  "serde",
  "serde_json",
- "similar 3.2.0",
+ "similar 3.2.1",
  "smallvec",
  "stable-type-layout",
  "syn 3.0.9",
@@ -704,7 +704,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -713,7 +713,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "allocator-api2",
  "atom_set",
@@ -730,13 +730,13 @@ dependencies = [
  "pprof",
  "serde",
  "serde_json",
- "similar 3.2.0",
+ "similar 3.2.1",
  "source_tools",
 ]
 
 [[package]]
 name = "css_parse"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "allocator-api2",
  "atom_set",
@@ -760,7 +760,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "css_lexer",
  "heck",
@@ -774,7 +774,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "allocator-api2",
  "anstyle",
@@ -801,7 +801,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_arena"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "allocator-api2",
  "libc",
@@ -811,7 +811,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -831,7 +831,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "darling",
  "heck",
@@ -845,7 +845,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -857,14 +857,14 @@ dependencies = [
  "insta",
  "miette",
  "owo-colors",
- "similar 3.2.0",
+ "similar 3.2.1",
  "strum",
  "visit-flow",
 ]
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "bitmask-enum",
  "console",
@@ -885,7 +885,7 @@ dependencies = [
  "ropey",
  "serde",
  "serde_json",
- "similar 3.2.0",
+ "similar 3.2.1",
  "smallvec",
  "strum",
  "tracing",
@@ -894,7 +894,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_napi"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "css_ast",
  "css_lexer",
@@ -909,7 +909,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -925,7 +925,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "glob",
  "insta",
@@ -937,7 +937,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "anyhow",
  "clap",
@@ -959,7 +959,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -973,13 +973,13 @@ dependencies = [
  "pprof",
  "serde",
  "serde_json",
- "similar 3.2.0",
+ "similar 3.2.1",
  "visit-flow",
 ]
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "console_error_panic_hook",
  "css_ast",
@@ -1082,7 +1082,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "atom_set",
  "heck",
@@ -1808,7 +1808,7 @@ checksum = "3640c1c38b8e4e43584d8df18be5fc6b0aa314ce6ebf51b53313d4306cca8e46"
 dependencies = [
  "hermit-abi",
  "libc",
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -2103,9 +2103,9 @@ dependencies = [
 
 [[package]]
 name = "napi"
-version = "3.14.2"
+version = "3.15.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "a4e2cf85c02d9b057898c485b824c3c416b65193689e2b7f517efc94b86ed24c"
+checksum = "6a746ad50efbfb632ade1de4025519a477decbbd798cea1a6ac41d7c44f80083"
 dependencies = [
  "bitflags 2.9.4",
  "ctor",
@@ -2125,9 +2125,9 @@ checksum = "b899b545d3aa6dca985939059f258c5488d34e4ecf39c274e20009748f4b846d"
 
 [[package]]
 name = "napi-derive"
-version = "3.6.12"
+version = "3.6.13"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "92cec6048ac04041ac8055bdce1ec4f353416cd443ba9222bf73af790c3d4495"
+checksum = "3ff48271a0f61abb83f3e2d1989fa71169143db95f6f948c3a8903961f2855dc"
 dependencies = [
  "convert_case",
  "ctor",
@@ -2139,9 +2139,9 @@ dependencies = [
 
 [[package]]
 name = "napi-derive-backend"
-version = "6.1.5"
+version = "6.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "fae2444f4ba7333754bb73414ff8059dec2cb23b83a95bd1a0bf08169eed1be0"
+checksum = "f2639052c5aff9956a21d7b6202fc61d5e89c5f19c72d289b7a0641ea94e8159"
 dependencies = [
  "convert_case",
  "proc-macro2",
@@ -2152,9 +2152,9 @@ dependencies = [
 
 [[package]]
 name = "napi-sys"
-version = "3.4.0"
+version = "3.4.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "e22a4f25c16a5c5411d987cd6fbd48313522ae1789ade2d6dd3efdc6d40a0fc8"
+checksum = "d153beb7d5c973f4b9395be8a83054a28968b61188f1dd1a2cc2321af22daea2"
 dependencies = [
  "libloading",
 ]
@@ -2841,7 +2841,7 @@ dependencies = [
  "security-framework",
  "security-framework-sys",
  "webpki-root-certs",
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
@@ -3089,9 +3089,9 @@ checksum = "bbbb5d9659141646ae647b42fe094daf6c6192d1620870b449d9557f748b2daa"
 
 [[package]]
 name = "similar"
-version = "3.2.0"
+version = "3.2.1"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "4f66ca1f7aca2474dc10c942eb22feffc897735f54cd1db90138c2fddb490987"
+checksum = "d2f8bec09ae8fae0f4f265a4559a9334be3929d8504e9b536df0a41302bd1733"
 dependencies = [
  "bstr",
 ]
@@ -3110,9 +3110,9 @@ checksum = "7a2ae44ef20feb57a68b23d846850f861394c2e02dc425a50098ae8c90267589"
 
 [[package]]
 name = "smallvec"
-version = "1.16.3"
+version = "1.16.4"
 source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "5b3dc8af474f516a851ff4bd12db780f948b9250ad37211e4eec0bccea54e01b"
+checksum = "d0d5d4b1981b8bbbb7aed204cae5726d683d5d6ac7e74ec54122ea28f315e7c8"
 dependencies = [
  "serde",
 ]
@@ -3124,12 +3124,12 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "52d1cfed4120b4d927bf7c0f86d2087a4a7d6027c906d9f9d525a80573b9be51"
 dependencies = [
  "libc",
- "windows-sys 0.60.2",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
 name = "source_tools"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "allocator-api2",
  "csskit_arena",
@@ -3148,7 +3148,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "inventory",
  "stable-type-layout-derive",
@@ -3156,7 +3156,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout-derive"
-version = "0.0.35"
+version = "0.0.36"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3775,7 +3775,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "visit-flow"
-version = "0.0.35"
+version = "0.0.36"
 
 [[package]]
 name = "walkdir"
@@ -3982,7 +3982,7 @@ version = "0.1.11"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "c2a7b1c03c876122aa43f3020e6c3c3ee5c05081c9a00739faf7503aeba10d22"
 dependencies = [
- "windows-sys 0.52.0",
+ "windows-sys 0.61.2",
 ]
 
 [[package]]
