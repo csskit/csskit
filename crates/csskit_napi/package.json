@@ -8,7 +8,7 @@
 		"build:debug": "napi build --features napi"
 	},
 	"devDependencies": {
-		"@napi-rs/cli": "3.10.8"
+		"@napi-rs/cli": "3.10.9"
 	},
 	"napi": {
 		"binaryName": "csskit_napi",
