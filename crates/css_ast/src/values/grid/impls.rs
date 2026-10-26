@@ -19,13 +19,14 @@ macro_rules! impl_grid_template_axis_parse {
 			{
 				if p.peek::<T![Ident]>() {
 					let c = p.peek_n(1);
-					if p.equals_atom(c.into(), &CssAtomSet::None) {
-						return Ok(Self::None(p.parse::<KeywordValue<'a, T![Ident]>>()?));
-					}
-					if p.equals_atom(c.into(), &CssAtomSet::Subgrid) {
-						let keyword = p.parse::<KeywordValue<'a, T![Ident]>>()?;
-						let names = p.parse_if_peek::<Value<'a, LineNameList<'a>>>()?;
-						return Ok(Self::Subgrid(keyword, names));
+					match p.to_atom::<CssAtomSet>(c) {
+						CssAtomSet::None => return Ok(Self::None(p.parse::<KeywordValue<'a, T![Ident]>>()?)),
+						CssAtomSet::Subgrid => {
+							let keyword = p.parse::<KeywordValue<'a, T![Ident]>>()?;
+							let names = p.parse_if_peek::<Value<'a, LineNameList<'a>>>()?;
+							return Ok(Self::Subgrid(keyword, names));
+						}
+						_ => {}
 					}
 					// Not `none`/`subgrid` - could still be a track keyword like `auto` or
 					// `min-content`, so fall through to the track-list attempts below.

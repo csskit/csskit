@@ -10,7 +10,8 @@ impl<'a> ::css_parse::Peek<'a> for TextDecoration {
         I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
     {
         use ::css_parse::Peek;
-        (<Ident>::peek(p, c) && (p.equals_atom(c.into(), &FooAtoms::Underline)))
+        (<Ident>::peek(p, c)
+            && ::core::matches!(p.to_atom:: < FooAtoms > (c), FooAtoms::Underline))
             || <DecorationStyle>::peek(p, c) || <Color>::peek(p, c)
     }
 }

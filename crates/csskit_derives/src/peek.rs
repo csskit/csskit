@@ -110,7 +110,10 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			where_collector.add(ty);
 			match atoms {
 				None => quote! { <#ty>::peek(p, c) },
-				Some(atoms) => quote! { (<#ty>::peek(p, c) && (#(p.equals_atom(c.into(), &#atoms))||*)) },
+				Some(atoms) => {
+					let set = atoms[0].first_segment();
+					quote! { (<#ty>::peek(p, c) && ::core::matches!(p.to_atom::<#set>(c), #(#atoms)|*)) }
+				}
 			}
 		});
 		quote! {

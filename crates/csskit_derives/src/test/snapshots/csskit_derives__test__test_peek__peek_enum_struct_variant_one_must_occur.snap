@@ -11,9 +11,9 @@ impl<'a> ::css_parse::Peek<'a> for FlexWrap {
     {
         use ::css_parse::Peek;
         (<Ident>::peek(p, c)
-            && (p.equals_atom(c.into(), &FooAtoms::Nowrap)
-                || p.equals_atom(c.into(), &FooAtoms::Wrap)
-                || p.equals_atom(c.into(), &FooAtoms::Balance)
-                || p.equals_atom(c.into(), &FooAtoms::WrapReverse)))
+            && ::core::matches!(
+                p.to_atom:: < FooAtoms > (c), FooAtoms::Nowrap | FooAtoms::Wrap |
+                FooAtoms::Balance | FooAtoms::WrapReverse
+            ))
     }
 }
