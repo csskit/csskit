@@ -92,12 +92,16 @@ where
 
 		if can_reduce_to_unitless && matches!(resolved, ResolvedType::UnitedZero | ResolvedType::Resolved(0.0)) {
 			self.transformer.replace(length, self.transformer.parse_value::<Length>("0"));
-		} else if let ResolvedType::Resolved(px) = resolved {
+		} else if let ResolvedType::Resolved(px) = resolved
+			&& px.is_finite()
+			&& !matches!(length, Length::Px(_))
+		{
 			let replacement = format_in!(in self.transformer.alloc(), "{}px", px);
-			let original_span = length.to_span();
-			let original_len = (original_span.end().0 - original_span.start().0) as usize;
-			if replacement.len() <= original_len {
-				self.transformer.replace(length, self.transformer.parse_value::<Length>(replacement.into_str()));
+			let replacement_cursors = self.transformer.parse_value::<Length>(replacement.into_str());
+			let original_cursors = self.transformer.to_source_cursors(length);
+			if self.transformer.compacted_len(&replacement_cursors) <= self.transformer.compacted_len(&original_cursors)
+			{
+				self.transformer.replace(length, replacement_cursors);
 			}
 		}
 	}
@@ -133,6 +137,16 @@ mod tests {
 	#[test]
 	fn test_length_noop() {
 		assert_no_transform!(CssMinifierFeature::ReduceLengths, CssAtomSet, StyleSheet, "body { width: 10rem; }");
+	}
+
+	#[test]
+	fn test_compares_compacted_lengths() {
+		assert_no_transform!(
+			CssMinifierFeature::ReduceLengths,
+			CssAtomSet,
+			StyleSheet,
+			"div { width: 0.000001in; height: 10px; }"
+		);
 	}
 
 	#[test]
