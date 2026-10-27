@@ -262,6 +262,16 @@ mod test {
 	}
 
 	#[test]
+	fn test_keeps_numbers_beyond_f32_precision() {
+		assert_format!("width: 4e38px", "width:4e38px");
+		assert_format!("opacity: -4e38", "opacity:-4e38");
+		assert_format!("width: 3e38px", "width:3e38px");
+		assert_format!("z-index: 16777217", "z-index:16777217");
+		assert_format!("z-index: -16777217", "z-index:-16777217");
+		assert_format!("z-index: 16777215", "z-index:16777215");
+	}
+
+	#[test]
 	fn test_preserves_trailing_semicolons() {
 		assert_format!("foo;", "foo;");
 	}
