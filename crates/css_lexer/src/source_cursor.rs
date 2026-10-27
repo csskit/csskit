@@ -250,6 +250,9 @@ impl<'a> SourceCursor<'a> {
 	/// Check if the numeric value could be compacted.
 	#[inline]
 	fn can_compact_number(&self) -> bool {
+		if self.keeps_source_number() {
+			return false;
+		}
 		let token = self.token();
 		let value = token.value();
 		let num_len = token.numeric_len() as usize;
@@ -277,6 +280,11 @@ impl<'a> SourceCursor<'a> {
 		false
 	}
 
+	#[inline]
+	fn keeps_source_number(&self) -> bool {
+		self.token().value().abs() >= 16_777_216.0
+	}
+
 	fn fmt_compacted(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
 		match token.kind() {
@@ -298,6 +306,10 @@ impl<'a> SourceCursor<'a> {
 
 	fn fmt_compacted_number(&self, f: &mut Formatter<'_>) -> Result {
 		let value = self.token().value();
+		if self.keeps_source_number() {
+			let number_len = self.token().numeric_len() as usize;
+			return f.write_str(&self.inner.source()[..number_len]);
+		}
 		if value <= -1.0 || value >= 1.0 || value == 0.0 {
 			if value > 0.0 && self.token().kind() == Kind::Number && self.token().sign_is_required() {
 				f.write_str("+")?;
@@ -428,6 +440,10 @@ impl<'a> SourceCursor<'a> {
 	#[cfg(feature = "egg")]
 	fn fmt_expanded_number(&self, f: &mut Formatter<'_>) -> Result {
 		let value = self.token().value();
+		if self.keeps_source_number() {
+			let number_len = self.token().numeric_len() as usize;
+			return f.write_str(&self.inner.source()[..number_len]);
+		}
 		let is_negative = value < 0.0;
 		let abs_value = value.abs();
 		if is_negative {
@@ -930,6 +946,12 @@ mod test {
 
 		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 3, 1.0));
 		assert!(SourceCursor::from(c, "1.0").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 8, 16777216.0));
+		assert!(!SourceCursor::from(c, "16777217").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 40, f32::INFINITY));
+		assert!(!SourceCursor::from(c, "0004000000000000000000000000000000000000").may_compact());
 	}
 
 	#[test]

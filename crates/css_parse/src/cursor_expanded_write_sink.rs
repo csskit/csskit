@@ -118,6 +118,12 @@ mod test {
 	}
 
 	#[test]
+	fn test_keeps_numbers_beyond_f32_precision() {
+		assert_expand!("width: 4e38px", r#"\000077 \000069 \000064 \000074 \000068 :    4e38\000070 \000078 "#);
+		assert_expand!("z-index: 16777217", r#"\00007a \00002d \000069 \00006e \000064 \000065 \000078 :    16777217"#);
+	}
+
+	#[test]
 	fn test_expands_whitespace() {
 		// a=0x61, b=0x62
 		assert_expand!("a b", r#"\000061     \000062 "#);
