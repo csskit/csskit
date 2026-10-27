@@ -35,12 +35,11 @@ where
 		if let Time::Ms(dim) = time {
 			let arena = self.transformer.alloc();
 			let seconds = time.as_seconds();
+			if !seconds.is_finite() {
+				return;
+			}
 			let sc = self.transformer.to_source_cursor((*dim).into());
-			let value = if seconds.fract() == 0.0 {
-				format_in!(in arena, "{}", seconds as i64)
-			} else {
-				format_in!(in arena, "{seconds}")
-			};
+			let value = format_in!(in arena, "{seconds}");
 			let seconds_len = value.len() - value.starts_with("0.") as usize - value.starts_with("-0.") as usize + 1;
 			let ms_len = if sc.may_compact() {
 				format_in!(in arena, "{}", self.transformer.to_source_cursor((*dim).into()).compact()).len()
@@ -108,6 +107,27 @@ mod tests {
 			CssAtomSet,
 			StyleSheet,
 			"div { animation-duration: 00050ms; }"
+		);
+	}
+
+	#[test]
+	fn keeps_milliseconds_beyond_f32_range() {
+		assert_no_transform!(
+			CssMinifierFeature::ReduceTimeUnits,
+			CssAtomSet,
+			StyleSheet,
+			"div { transition-duration: 4e38ms; }"
+		);
+	}
+
+	#[test]
+	fn converts_milliseconds_beyond_f32_precision() {
+		assert_transform!(
+			CssMinifierFeature::ReduceTimeUnits,
+			CssAtomSet,
+			StyleSheet,
+			"div { transition-duration: 300000000000000000000000000000ms; }",
+			"div { transition-duration: 300000000000000000000000000s; }"
 		);
 	}
 }
