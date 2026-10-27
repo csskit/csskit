@@ -10,7 +10,7 @@ use crate::{
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use source_tools::SourceCursor as GenericSourceCursor;
-use std::fmt::{Display, Formatter, Result, Write};
+use std::fmt::{Display, Error, Formatter, Result, Write};
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
 struct ParsedChars<'a> {
@@ -255,6 +255,9 @@ impl<'a> SourceCursor<'a> {
 		}
 		let token = self.token();
 		let value = token.value();
+		if self.exponent_may_be_shorter() {
+			return true;
+		}
 		let num_len = token.numeric_len() as usize;
 		if value > -1.0 && value < 1.0 && value != 0.0 {
 			let bytes = self.inner.source().as_bytes();
@@ -285,6 +288,13 @@ impl<'a> SourceCursor<'a> {
 		self.token().value().abs() >= 16_777_216.0
 	}
 
+	#[inline]
+	fn exponent_may_be_shorter(&self) -> bool {
+		let token = self.token();
+		let abs = token.value().abs();
+		abs != 0.0 && !(0.001..1000.0).contains(&abs) && (token.is_float() || !token.numeric_type_is_required())
+	}
+
 	fn fmt_compacted(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
 		match token.kind() {
@@ -305,39 +315,44 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	fn fmt_compacted_number(&self, f: &mut Formatter<'_>) -> Result {
-		let value = self.token().value();
+		let token = self.token();
 		if self.keeps_source_number() {
-			let number_len = self.token().numeric_len() as usize;
-			return f.write_str(&self.inner.source()[..number_len]);
+			return f.write_str(&self.inner.source()[..token.numeric_len() as usize]);
 		}
-		if value <= -1.0 || value >= 1.0 || value == 0.0 {
-			if value > 0.0 && self.token().kind() == Kind::Number && self.token().sign_is_required() {
-				f.write_str("+")?;
-			}
-			value.fmt(f)?;
-			if self.token().is_float() && self.token().numeric_type_is_required() && value.fract() == 0.0 {
-				f.write_str(".0")?;
-			}
-			return Ok(());
+		let value = token.value();
+		if value.is_sign_negative() {
+			f.write_str("-")?;
+		} else if value > 0.0 && token.kind() == Kind::Number && token.sign_is_required() {
+			f.write_str("+")?;
 		}
-
-		let mut small_str = SmallStrBuf::<255>::new();
-		write!(&mut small_str, "{}", value.abs())?;
-		if let Some(str) = small_str.as_str() {
-			if value < 0.0 {
-				f.write_str("-")?;
-			} else if value > 0.0 && self.token().kind() == Kind::Number && self.token().sign_is_required() {
-				f.write_str("+")?;
+		let abs = value.abs();
+		let mut decimal = SmallStrBuf::<255>::new();
+		write!(&mut decimal, "{abs}")?;
+		let decimal = decimal.as_str().ok_or(Error)?;
+		let decimal = decimal.strip_prefix('0').filter(|rest| rest.starts_with('.')).unwrap_or(decimal);
+		let keeps_float = token.is_float() && token.numeric_type_is_required() && !decimal.contains('.');
+		if keeps_float || self.exponent_may_be_shorter() {
+			let mut scientific = SmallStrBuf::<32>::new();
+			write!(&mut scientific, "{abs:e}")?;
+			let (mantissa, exponent) = scientific.as_str().and_then(|s| s.split_once('e')).ok_or(Error)?;
+			let (int_digits, frac_digits) = mantissa.split_once('.').unwrap_or((mantissa, ""));
+			let exponent = exponent.parse::<i32>().map_err(|_| Error)? - frac_digits.len() as i32;
+			let mut exponent_str = SmallStrBuf::<12>::new();
+			write!(&mut exponent_str, "{exponent}")?;
+			let exponent_str = exponent_str.as_str().ok_or(Error)?;
+			let decimal_len = decimal.len() + if keeps_float { 2 } else { 0 };
+			if int_digits.len() + frac_digits.len() + 1 + exponent_str.len() < decimal_len {
+				f.write_str(int_digits)?;
+				f.write_str(frac_digits)?;
+				f.write_str("e")?;
+				return f.write_str(exponent_str);
 			}
-			if let Some(rest) = str.strip_prefix("0.") {
-				f.write_str(".")?;
-				f.write_str(rest)
-			} else {
-				f.write_str(str)
-			}
-		} else {
-			value.fmt(f)
 		}
+		f.write_str(decimal)?;
+		if keeps_float {
+			f.write_str(".0")?;
+		}
+		Ok(())
 	}
 
 	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
