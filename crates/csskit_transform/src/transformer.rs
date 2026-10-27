@@ -5,7 +5,16 @@ use css_parse::{
 	Arena, CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment,
 	Parse, Parser, SourceCursor, SourceOffset, Span, ToCursors,
 };
-use std::{cell::RefCell, marker::PhantomData};
+use std::{cell::RefCell, fmt::Write, marker::PhantomData};
+
+struct LenCounter(usize);
+
+impl Write for LenCounter {
+	fn write_str(&mut self, str: &str) -> std::fmt::Result {
+		self.0 += str.len();
+		Ok(())
+	}
+}
 
 #[derive(Debug)]
 pub enum TransformEdit<'a> {
@@ -85,6 +94,15 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		let mut sink = CursorToSourceCursorSink::new(self.source_text, &mut cursors);
 		parsed.to_cursors(&mut sink);
 		cursors
+	}
+
+	/// Returns the length of `cursors` once written by a compacting sink.
+	pub fn compacted_len(&self, cursors: &[SourceCursor<'a>]) -> usize {
+		let mut counter = LenCounter(0);
+		for cursor in cursors {
+			write!(counter, "{}", cursor.compact()).expect("LenCounter never errors");
+		}
+		counter.0
 	}
 
 	pub fn to_atom<A: AtomSet + PartialEq>(&self, c: Cursor) -> A {

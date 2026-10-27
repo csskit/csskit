@@ -33,21 +33,15 @@ where
 
 	fn visit_time(&mut self, time: &Time) {
 		if let Time::Ms(dim) = time {
-			let arena = self.transformer.alloc();
 			let seconds = time.as_seconds();
 			if !seconds.is_finite() {
 				return;
 			}
-			let sc = self.transformer.to_source_cursor((*dim).into());
-			let value = format_in!(in arena, "{seconds}");
-			let seconds_len = value.len() - value.starts_with("0.") as usize - value.starts_with("-0.") as usize + 1;
-			let ms_len = if sc.may_compact() {
-				format_in!(in arena, "{}", self.transformer.to_source_cursor((*dim).into()).compact()).len()
-			} else {
-				sc.token().len() as usize
-			};
-			if seconds_len < ms_len {
-				self.transformer.replace_parsed::<Time>(time.to_span(), format_in!(in arena, "{value}s").into_str());
+			let arena = self.transformer.alloc();
+			let seconds_cursors = self.transformer.parse_value::<Time>(format_in!(in arena, "{seconds}s").into_str());
+			let ms_cursor = self.transformer.to_source_cursor((*dim).into());
+			if self.transformer.compacted_len(&seconds_cursors) < self.transformer.compacted_len(&[ms_cursor]) {
+				self.transformer.replace(time, seconds_cursors);
 			}
 		}
 	}
@@ -128,6 +122,17 @@ mod tests {
 			StyleSheet,
 			"div { transition-duration: 300000000000000000000000000000ms; }",
 			"div { transition-duration: 300000000000000000000000000s; }"
+		);
+	}
+
+	#[test]
+	fn compares_lengths_after_scientific_notation() {
+		assert_transform!(
+			CssMinifierFeature::ReduceTimeUnits,
+			CssAtomSet,
+			StyleSheet,
+			"div { transition-duration: 1000000ms; }",
+			"div { transition-duration: 1000s; }"
 		);
 	}
 }
