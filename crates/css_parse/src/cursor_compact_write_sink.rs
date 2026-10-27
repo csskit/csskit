@@ -271,11 +271,32 @@ mod test {
 	}
 
 	#[test]
+	fn test_compacts_numbers_to_scientific_notation_when_shorter() {
+		assert_format!("width: 0.000001px", "width:1e-6px");
+		assert_format!("width: 0.000012px", "width:12e-6px");
+		assert_format!("width: -0.0001px", "width:-1e-4px");
+		assert_format!("width: 0.001px", "width:.001px");
+		assert_format!("width: 100px", "width:100px");
+		assert_format!("width: 1000px", "width:1e3px");
+		assert_format!("width: 1234px", "width:1234px");
+		assert_format!("width: 12000000px", "width:12e6px");
+		assert_format!("width: 1e-7px", "width:1e-7px");
+		assert_format!("opacity: 0.00001", "opacity:1e-5");
+		assert_format!("opacity: 1000.0", "opacity:1e3");
+		assert_format!("margin: -0px", "margin:-0px");
+	}
+
+	#[test]
 	fn test_preserves_numeric_type_of_unknown_values() {
+		assert_format!("z-index: 1000000", "z-index:1000000");
 		assert_format!("z-index: 1.0", "z-index:1.0");
 		assert_format!("z-index: 1.000", "z-index:1.0");
 		assert_format!("z-index: 0.0", "z-index:0.0");
 		assert_format!("z-index: -2.0", "z-index:-2.0");
+		assert_format!("z-index: 100.0", "z-index:1e2");
+		assert_format!("a: 1000n", "a:1000n");
+		assert_format!("a: 1000N", "a:1000N");
+		assert_format!("a: 1000n-1", "a:1000n-1");
 		assert_format!("a: 2.0n", "a:2.0n");
 		assert_format!("a: 2.0px", "a:2px");
 	}

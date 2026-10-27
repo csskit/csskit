@@ -1308,10 +1308,6 @@ FAIL values/0057
 -a{hyphenate-limit-chars:initial}
 +a{hyphenate-limit-chars:auto}
 
-FAIL values/0058
--.a{width:.000001px}.b{width:.00001px}.c{width:.0001px}.d{width:.001px}.e{width:.01px}.f{width:.1px}.g{width:1px}.h{width:10px}.i{width:100px}.j{width:1000px}.k{width:10000px}.l{width:100000px}.m{width:1000000px}.n{width:10000000px}.o{width:.000012px}.p{width:12000000px}.q{z-index:1000000}
-+.a{width:1e-6px}.b{width:1e-5px}.c{width:1e-4px}.d{width:.001px}.e{width:.01px}.f{width:.1px}.g{width:1px}.h{width:10px}.i{width:100px}.j{width:1e3px}.k{width:1e4px}.l{width:1e5px}.m{width:1e6px}.n{width:1e7px}.o{width:12e-6px}.p{width:12e6px}.q{z-index:1000000}
-
 FAIL vendors/0001
 -a{-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg)}
 +a{transform:rotate(45deg)}
