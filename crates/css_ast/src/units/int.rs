@@ -58,7 +58,7 @@ impl<'a> Parse<'a> for CSSInt {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		if p.peek::<Self>() {
-			p.parse::<T![Number]>().map(Self)
+			p.parse::<T![Number]>().map(|number| Self(number.preserve_type()))
 		} else {
 			Err(Diagnostic::new(p.next(), Diagnostic::unexpected))?
 		}

@@ -581,6 +581,11 @@ impl Dimension {
 	pub fn value(&self) -> f32 {
 		self.0.token().value()
 	}
+
+	/// Marks the dimension's type (integer or number) as required, so minification preserves it.
+	pub fn preserve_type(self) -> Self {
+		Self(self.0.map_token(|t| t.with_numeric_type_required()))
+	}
 }
 
 /// Represents a token with [Kind::Number]. Use [T![Number]][crate::T] to refer to this.
@@ -612,6 +617,11 @@ impl Number {
 
 	pub fn preserve_sign(self) -> Self {
 		if self.has_sign() { Self(self.0.map_token(|t| t.with_sign_required())) } else { self }
+	}
+
+	/// Marks the number's type (integer or number) as required, so minification preserves it.
+	pub fn preserve_type(self) -> Self {
+		Self(self.0.map_token(|t| t.with_numeric_type_required()))
 	}
 }
 

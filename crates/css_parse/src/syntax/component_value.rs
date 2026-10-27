@@ -76,9 +76,15 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 		} else if <T![Function]>::peek(p, c) {
 			Self::Function(p.parse::<Box<FunctionBlock>>()?)
 		} else if <T![Number]>::peek(p, c) {
-			Self::Number(p.parse::<T![Number]>()?)
+			Self::Number(p.parse::<T![Number]>()?.preserve_type())
 		} else if <T![Dimension]>::peek(p, c) {
-			Self::Dimension(p.parse::<T![Dimension]>()?)
+			let dimension = p.parse::<T![Dimension]>()?;
+			let unit_start = p.to_source_cursor(c).source().as_bytes().get(c.token().numeric_len() as usize);
+			Self::Dimension(if matches!(unit_start, Some(b'n' | b'N' | b'\\')) {
+				dimension.preserve_type()
+			} else {
+				dimension
+			})
 		} else if <T![Ident]>::peek(p, c) {
 			Self::Ident(p.parse::<T![Ident]>()?)
 		} else if <T![AtKeyword]>::peek(p, c) {

@@ -155,12 +155,13 @@ use std::char::REPLACEMENT_CHARACTER;
 ///
 /// ### Value Data for [Kind::Number]
 ///
-/// If the [Kind] is [Kind::Number], Value Data represents the length of that number (this means the parser is
-/// restricted from representing numbers longer than 16,777,216 characters which is probably an acceptable limit). Note
-/// that this does not affect the _value_ of a number, just the characters in a string. Numbers in CSS are [f32]. The
-/// vast majority of [f32s][f32] can be represented in 16MM characters, but it's possible to author a document that
-/// contains a set of numeric characters longer than 16MM code points. These scenarios are considered [undefined
-/// behaviour][1].
+/// If the [Kind] is [Kind::Number], the upper-most bit of Value Data marks the number's type (integer or number) as
+/// required (see [Token::numeric_type_is_required()]). The remaining 23 bits represent the length of that number (this
+/// means the parser is restricted from representing numbers longer than 8,388,607 characters which is probably an
+/// acceptable limit). Note that this does not affect the _value_ of a number, just the characters in a string. Numbers
+/// in CSS are [f32]. The vast majority of [f32s][f32] can be represented in 8MM characters, but it's possible to author
+/// a document that contains a set of numeric characters longer than 8MM code points. These scenarios are considered
+/// [undefined behaviour][1].
 ///
 /// [4]: https://en.wikipedia.org/wiki/Undefined_behavior
 ///
@@ -204,28 +205,29 @@ use std::char::REPLACEMENT_CHARACTER;
 /// ### Value Data for [Kind::Dimension]
 ///
 /// If K is a Dimension, then this represents both the number of characters in the numeric portion of the dimension
-/// and the length of the ident portion of the dimension... or the dimension unit itself (more on that below). This
-/// means the value data is split into two 12 bit numbers:
+/// and the length of the ident portion of the dimension... or the dimension unit itself (more on that below). The
+/// upper-most bit (T) marks the number's type (integer or number) as required (see
+/// [Token::numeric_type_is_required()]). This means the value data is split into a flag and two numbers:
 ///
 /// ```md
-/// |--------------|--------------|
-/// | NL           | DUL          |
-/// | 000000000000 | 000000000000 |
-/// |--------------|--------------|
-/// | 12---------- | 12---------- |
+/// |---|-------------|--------------|
+/// | T | NL          | DUL          |
+/// | 0 | 00000000000 | 000000000000 |
+/// |---|-------------|--------------|
+/// | 1 | 11--------- | 12---------- |
 ///
-/// |--------------|-------| --------|
-/// | NL           | KDUL  | KNOWN   |
-/// | 000000000000 | 00000 | 0000000 |
-/// |--------------|-------| --------|
-/// | 12---------- | 5---- | 7------ |
+/// |---|-------------|-------| --------|
+/// | T | NL          | KDUL  | KNOWN   |
+/// | 0 | 00000000000 | 00000 | 0000000 |
+/// |---|-------------|-------| --------|
+/// | 1 | 11--------- | 5---- | 7------ |
 /// ```
 ///
 /// The NL portion - the numeric length - represents the length of characters the number contains. This means the
-/// numeric portion of a dimension can only be 4,096 characters long. This is dramatically shorter than the 16MM
+/// numeric portion of a dimension can only be 2,047 characters long. This is dramatically shorter than the 8MM
 /// allowed for numbers but it's still also incredibly generous such that it's highly unlikely to ever be hit unless
 /// someone is intentionally trying to break the parser. The [Lexer][super::Lexer] encountering a dimension with a
-/// numeric portion longer than 4,096 characters is considered [undefined behaviour][4].
+/// numeric portion longer than 2,047 characters is considered [undefined behaviour][4].
 ///
 /// The DUL portion (if `TF & 100 == 0`) will represent the length of characters the ident portion of the dimension
 /// (aka the dimension unit) contains. This means the ident portion of a dimension can only be 4,096 characters long.
@@ -296,6 +298,8 @@ impl Default for Token {
 const KIND_MASK: u32 = !((1 << 24) - 1);
 const LENGTH_MASK: u32 = (1 << 24) - 1;
 const HALF_LENGTH_MASK: u32 = !((1 << 12) - 1);
+const NUMERIC_TYPE_REQUIRED: u32 = 1 << 23;
+const NUMERIC_LENGTH_MASK: u32 = NUMERIC_TYPE_REQUIRED - 1;
 
 /// The bit position used to distinguish between static and dynamic atoms.
 /// - Static atoms have this bit = 0 (values 0 to 8,388,607)
@@ -466,7 +470,7 @@ impl Token {
 	#[inline]
 	pub(crate) fn new_number(is_float: bool, has_sign: bool, len: u32, value: f32) -> Self {
 		let flags: u32 = Kind::Number as u32 | ((is_float as u32) << 5) | ((has_sign as u32) << 6);
-		Self((flags << 24) & KIND_MASK | (len & LENGTH_MASK), value.to_bits())
+		Self((flags << 24) & KIND_MASK | (len & NUMERIC_LENGTH_MASK), value.to_bits())
 	}
 
 	/// Creates a new [Kind::Dimension] token.
@@ -479,8 +483,8 @@ impl Token {
 		value: f32,
 		atom: u8,
 	) -> Self {
-		debug_assert!(num_len <= 4097);
-		let num_len = (num_len << 12) & HALF_LENGTH_MASK;
+		debug_assert!(num_len < 2048);
+		let num_len = (num_len << 12) & HALF_LENGTH_MASK & NUMERIC_LENGTH_MASK;
 		let is_known_unit = if unit_len < 32 { ((atom != 0) as u32) << 7 } else { 0 };
 		let unit_len = if is_known_unit == 0 { unit_len } else { unit_len << 7 | (atom as u32 & 0b1111111) };
 		let flags: u32 = Kind::Dimension as u32 | is_known_unit | ((is_float as u32) << 5) | ((has_sign as u32) << 6);
@@ -735,7 +739,7 @@ impl Token {
 			if self.first_flag() {
 				self.numeric_len() + (self.0 >> 7 & 0b11111)
 			} else {
-				((self.0 & LENGTH_MASK) >> 12) + (self.0 & !HALF_LENGTH_MASK)
+				self.numeric_len() + (self.0 & !HALF_LENGTH_MASK)
 			}
 		} else if self.kind_bits() & 0b1111 == Kind::Hash as u8 {
 			self.0 & LENGTH_MASK
@@ -799,6 +803,28 @@ impl Token {
 		Token(self.0 | (1 << 31), self.1)
 	}
 
+	/// The [Token] is a [Kind::Number] or [Kind::Dimension] whose type (integer or number) is semantically required and
+	/// should be preserved during minification. This is used where the type changes the meaning of the value, such as
+	/// `<integer>` (`z-index: 1000000` cannot become `1e6`), `an+b` syntax (`:nth-child(1000n)` cannot become `1e3n`), or
+	/// values whose grammar is unknown (`--z: 1.0` may be substituted into `z-index`, so it cannot become `1`).
+	///
+	/// Asserts: the `kind()` is [Kind::Number] or [Kind::Dimension].
+	#[inline]
+	pub const fn numeric_type_is_required(&self) -> bool {
+		debug_assert!(self.kind_bits() == Kind::Number as u8 || self.kind_bits() == Kind::Dimension as u8);
+		self.0 & NUMERIC_TYPE_REQUIRED != 0
+	}
+
+	/// Returns a new [Token] with the `numeric_type_is_required` flag set. This indicates that the type (integer or
+	/// number) should be preserved during minification.
+	///
+	/// Asserts: the `kind()` is [Kind::Number] or [Kind::Dimension].
+	#[inline]
+	pub const fn with_numeric_type_required(self) -> Token {
+		debug_assert!(self.kind_bits() == Kind::Number as u8 || self.kind_bits() == Kind::Dimension as u8);
+		Token(self.0 | NUMERIC_TYPE_REQUIRED, self.1)
+	}
+
 	/// If the [Token] is a [Kind::Dimension] or [Kind::Number] then this returns the amount of characters used to
 	/// represent this number in the underlying source text. Numbers may be inefficiently encoded in the source text,
 	/// e.g. `0.0000`.
@@ -808,9 +834,9 @@ impl Token {
 	pub const fn numeric_len(&self) -> u32 {
 		debug_assert!(matches!(self.kind(), Kind::Number | Kind::Dimension | Kind::BadNumber | Kind::BadDimension));
 		if self.kind_bits() & 0b1111 == Kind::Dimension as u8 {
-			(self.0 & LENGTH_MASK) >> 12
+			(self.0 & NUMERIC_LENGTH_MASK) >> 12
 		} else {
-			self.0 & LENGTH_MASK
+			self.0 & NUMERIC_LENGTH_MASK
 		}
 	}
 
@@ -1556,6 +1582,31 @@ fn test_new_dimension() {
 		let token = Token::new_dimension(false, false, 9, 3, i as f32, 0);
 		assert_eq!(token.value(), i as f32);
 	}
+}
+
+#[test]
+fn test_numeric_type_required_keeps_lengths() {
+	let number = Token::new_number(true, true, 8_388_607, 4.2);
+	assert!(!number.numeric_type_is_required());
+	let number = number.with_numeric_type_required();
+	assert!(number.numeric_type_is_required());
+	assert!(number.is_float());
+	assert!(number.has_sign());
+	assert_eq!(number.numeric_len(), 8_388_607);
+	assert_eq!(number.len(), 8_388_607);
+	assert_eq!(number.value(), 4.2);
+
+	let dimension = Token::new_dimension(false, false, 2047, 4095, 1.0, 0).with_numeric_type_required();
+	assert!(dimension.numeric_type_is_required());
+	assert!(dimension.is_int());
+	assert_eq!(dimension.numeric_len(), 2047);
+	assert_eq!(dimension.len(), 2047 + 4095);
+
+	let known = Token::new_dimension(false, false, 2047, 2, 1.0, 42).with_numeric_type_required();
+	assert!(known.numeric_type_is_required());
+	assert_eq!(known.numeric_len(), 2047);
+	assert_eq!(known.len(), 2049);
+	assert_eq!(known.atom_bits(), 42);
 }
 
 #[test]

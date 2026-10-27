@@ -314,7 +314,11 @@ impl<'a> SourceCursor<'a> {
 			if value > 0.0 && self.token().kind() == Kind::Number && self.token().sign_is_required() {
 				f.write_str("+")?;
 			}
-			return value.fmt(f);
+			value.fmt(f)?;
+			if self.token().is_float() && self.token().numeric_type_is_required() && value.fract() == 0.0 {
+				f.write_str(".0")?;
+			}
+			return Ok(());
 		}
 
 		let mut small_str = SmallStrBuf::<255>::new();

@@ -94,7 +94,7 @@ FAIL color-rounding/0015
 +a{color:oklch(.7 80%150.1)}
 
 FAIL colors/0029
--a{color:color-mix(in oklch,rgba(255,255,255,1),var(--foo))}
+-a{color:color-mix(in oklch,rgba(255,255,255,1.0),var(--foo))}
 +a{color:color-mix(in oklch,#fff,var(--foo))}
 
 FAIL colors/0030
