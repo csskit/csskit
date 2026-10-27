@@ -250,7 +250,6 @@ mod test {
 
 	#[test]
 	fn test_compacts_edge_case_numbers() {
-		assert_format!("opacity: 0.0", "opacity:0");
 		assert_format!("opacity: 0", "opacity:0");
 		assert_format!("opacity: 1", "opacity:1");
 	}
@@ -269,6 +268,16 @@ mod test {
 		assert_format!("z-index: 16777217", "z-index:16777217");
 		assert_format!("z-index: -16777217", "z-index:-16777217");
 		assert_format!("z-index: 16777215", "z-index:16777215");
+	}
+
+	#[test]
+	fn test_preserves_numeric_type_of_unknown_values() {
+		assert_format!("z-index: 1.0", "z-index:1.0");
+		assert_format!("z-index: 1.000", "z-index:1.0");
+		assert_format!("z-index: 0.0", "z-index:0.0");
+		assert_format!("z-index: -2.0", "z-index:-2.0");
+		assert_format!("a: 2.0n", "a:2.0n");
+		assert_format!("a: 2.0px", "a:2px");
 	}
 
 	#[test]

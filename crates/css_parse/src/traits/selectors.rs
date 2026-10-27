@@ -224,7 +224,7 @@ pub trait Nth<'a>: Sized {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		if p.peek::<T![Number]>() && p.peek_n(1).token().is_int() {
-			return p.parse::<T![Number]>().map(Self::build_integer);
+			return p.parse::<T![Number]>().map(|number| Self::build_integer(number.preserve_type()));
 		} else if p.peek::<T![Ident]>() {
 			let peek_cursor = p.peek_n(1);
 			if Self::peek_odd(p, peek_cursor) {
@@ -251,6 +251,10 @@ pub trait Nth<'a>: Sized {
 		}
 		if c.token().is_float() {
 			Err(Diagnostic::new(c, Diagnostic::expected_int))?
+		}
+		if c.token().kind() != Kind::Ident {
+			c = c.map_token(|t| t.with_numeric_type_required());
+			cursors[if cursors[1] == Cursor::EMPTY { 0 } else { 1 }] = c;
 		}
 
 		let source_cursor = p.to_source_cursor(c);
@@ -306,6 +310,7 @@ pub trait Nth<'a>: Sized {
 			if c.token().has_sign() {
 				c = c.map_token(|t| t.with_sign_required());
 			}
+			c = c.map_token(|t| t.with_numeric_type_required());
 			cursors[3] = c;
 			if b_sign == 0 {
 				b_sign = 1;
