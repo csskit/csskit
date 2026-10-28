@@ -489,6 +489,10 @@ FAIL media/0013
 -@media(prefers-color-scheme:dark){a{color:red}}@media(prefers-color-scheme:dark){a{color:red}}
 +@media(prefers-color-scheme:dark){a{color:red}}
 
+FAIL media/0014
+-@media(min-aspect-ratio:1000000/1){a{color:red}}
++@media(min-aspect-ratio:1e6/1){a{color:red}}
+
 FAIL merging/0001
 -a{color:red}a{font-size:16px}
 +a{color:red;font-size:16px}
@@ -669,6 +673,14 @@ FAIL nesting/0040
 -a{margin-bottom:1px;&{margin-right:1px}}
 +a{margin-bottom:1px;margin-right:1px}
 
+FAIL nesting/0041
+-.menu .item:hover .sub-menu,.menu .item:focus .sub-menu{display:block}
++.menu .item{&:hover,&:focus{.sub-menu{display:block}}}
+
+FAIL nesting/0042
+-.a .b{color:red}.a .c{color:tan}.a:hover .c{color:tan}
++.a{.b{color:red}.c,&:hover .c{color:tan}}
+
 FAIL property/0002
 -@property --size{syntax:"<length>";inherits:true;initial-value:16px}
 +@property --size{syntax:"<length>";initial-value:16px}
@@ -687,6 +699,10 @@ FAIL property/0007
 FAIL property/0008
 -@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:rgb(0 0 0)}
 +@property --brand-color{syntax:"<color>";inherits:false;initial-value:#000}a{--brand-color:#000}
+
+FAIL property/0009
+-@property --x{syntax:"<integer>";inherits:false;initial-value:0}a{--x:1e2}
++@property --x{syntax:"<integer>";inherits:false;initial-value:0}a{--x:100.0}
 
 FAIL selectors-advanced/0001
 -:is(a,b){color:red}
@@ -1300,6 +1316,18 @@ FAIL values/0057
 -a{hyphenate-limit-chars:initial}
 +a{hyphenate-limit-chars:auto}
 
+FAIL values/0063
+-a{width:96000000px}
++a{width:96e6px}
+
+FAIL values/0064
+-.a{transition-duration:1e3s}.b{transition-duration:300000000000000000000000000s}
++.a{transition-duration:1e3s}.b{transition-duration:3e26s}
+
+FAIL values/0065
+-a{transition-duration:1e-4s}
++a{transition-duration:.1ms}
+
 FAIL vendors/0001
 -a{-webkit-transform:rotate(45deg);-moz-transform:rotate(45deg);-ms-transform:rotate(45deg);-o-transform:rotate(45deg);transform:rotate(45deg)}
 +a{transform:rotate(45deg)}
@@ -1311,6 +1339,10 @@ FAIL vendors/0002
 FAIL vendors/0003
 -hr{-webkit-box-sizing:border-box;-moz-box-sizing:border-box;-ms-box-sizing:border-box;-o-box-sizing:border-box;box-sizing:border-box}
 +hr{box-sizing:border-box}
+
+FAIL vendors/0004
+-:-moz-any(:unknown,a){color:red}:-webkit-any(:unknown,a){color:red}:matches(:unknown,a){color:red}:-moz-any(:unknown,b){color:tan}
++:is(:unknown,a){color:red}:-moz-any(:unknown,b){color:tan}
 
 FAIL whitespace/0020
 -:root{--dropShadow:.02em -.02em .015em #45a6,-.02em .02em .015em #45a6,-.02em -.02em .02em #defa,.02em .02em .03em #106a,.1em .1em .09em #246a}
