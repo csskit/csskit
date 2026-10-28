@@ -39,7 +39,7 @@
 		"cssnano": "9.9.0",
 		"esbuild": "0.28.2",
 		"esbuild-plugin-wasm": "1.1.0",
-		"glob": "13.0.6",
+		"glob": "14.0.3",
 		"html-minifier": "4.0.0",
 		"open-props": "1.7.23",
 		"postcss-import": "17.0.1",
