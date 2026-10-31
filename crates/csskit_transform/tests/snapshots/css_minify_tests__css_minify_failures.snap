@@ -77,18 +77,6 @@ FAIL charset/0005
 -@charset "gbk";.foo:before{content:""}
 +@charset "gbk";.foo:before{content:"\e61d"}
 
-FAIL color-rounding/0001
--a{color:oklab(.5 .285 -.149)}
-+a{color:oklab(.5 .285-.149)}
-
-FAIL color-rounding/0005
--a{color:oklch(.554 .123 180.5/.746);background-color:oklab(.654 -.235 .189)}
-+a{color:oklch(.554 .123 180.5/.746);background-color:oklab(.654-.235 .189)}
-
-FAIL color-rounding/0006
--a{color:lch(54.3 100.5 274.5/.746);background-color:lab(54.3 -60.5 70.8)}
-+a{color:lch(54.3 100.5 274.5/.746);background-color:lab(54.3-60.5 70.8)}
-
 FAIL color-rounding/0015
 -a{color:oklch(.7 .32 150.1)}
 +a{color:oklch(.7 80%150.1)}
@@ -108,10 +96,6 @@ FAIL colors/0031
 FAIL colors/0032
 -a{border:1px solid blue}
 +a{border:1px solid#00f}
-
-FAIL colors/0033
--a{color:color(display-p3 1.2 -.3 .5)}
-+a{color:color(display-p3 1.2-.3 .5)}
 
 FAIL colors/0051
 -p{color:#5987FC00;background:#85283700;border-color:#00808000}
