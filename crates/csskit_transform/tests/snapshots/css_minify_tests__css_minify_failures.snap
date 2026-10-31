@@ -1300,14 +1300,6 @@ FAIL values/0057
 -a{hyphenate-limit-chars:initial}
 +a{hyphenate-limit-chars:auto}
 
-FAIL values/0063
--a{width:96000000px}
-+a{width:96e6px}
-
-FAIL values/0064
--.a{transition-duration:1e3s}.b{transition-duration:300000000000000000000000000s}
-+.a{transition-duration:1e3s}.b{transition-duration:3e26s}
-
 FAIL values/0065
 -a{transition-duration:1e-4s}
 +a{transition-duration:.1ms}

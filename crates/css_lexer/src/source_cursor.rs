@@ -10,7 +10,7 @@ use crate::{
 };
 use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use source_tools::SourceCursor as GenericSourceCursor;
-use std::fmt::{Display, Error, Formatter, Result, Write};
+use std::fmt::{Display, Formatter, Result, Write};
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
 #[derive(Clone)]
@@ -250,7 +250,7 @@ impl<'a> SourceCursor<'a> {
 	///
 	/// - Whitespace: returns `true` if len > 1
 	/// - Ident/Function/AtKeyword/Hash: returns `true` if contains escape chars
-	/// - Number: returns `true` if the number representation could be shortened
+	/// - Number: returns `true` if the compacted number is shorter
 	/// - Dimension: combines number and unit checks
 	#[inline]
 	pub fn may_compact(&self) -> bool {
@@ -269,52 +269,61 @@ impl<'a> SourceCursor<'a> {
 		}
 	}
 
-	/// Check if the numeric value could be compacted.
 	#[inline]
 	fn can_compact_number(&self) -> bool {
-		if self.keeps_source_number() {
-			return false;
-		}
-		let token = self.token();
-		let value = token.value();
-		if self.exponent_may_be_shorter() {
-			return true;
-		}
-		let num_len = token.numeric_len() as usize;
-		if value > -1.0 && value < 1.0 && value != 0.0 {
-			let bytes = self.inner.source().as_bytes();
-			if bytes.first() == Some(&b'.') {
-				return false;
-			}
-			if value < 0.0 && bytes.get(1) == Some(&b'.') {
-				return false;
-			}
-			return true;
-		}
-		if token.has_sign() && value > 0.0 {
-			return true;
-		}
-		if token.is_float() && value.fract() == 0.0 {
-			return true;
-		}
-		if token.is_int() {
-			let abs_value = value.abs();
-			let digits = if abs_value == 0.0 { 1 } else { (abs_value.log10().floor() as usize) + 1 };
-			return num_len > (digits + (value < 0.0) as usize);
-		}
-		false
+		let mut digits = SmallStrBuf::new();
+		self.compact_number(&mut digits).is_some_and(|number| number.len() < self.token().numeric_len() as usize)
 	}
 
 	#[inline]
-	fn keeps_source_number(&self) -> bool {
+	fn numeric_source(&self) -> &'a str {
+		&self.inner.source()[..self.token().numeric_len() as usize]
+	}
+
+	#[inline]
+	fn exceeds_f32_precision(&self) -> bool {
 		self.token().value().abs() >= 16_777_216.0
 	}
 
-	#[inline]
-	fn exponent_may_be_shorter(&self) -> bool {
+	/// Splits the number into significant digits and a power of ten, or `None` when the source must be kept verbatim.
+	///
+	/// Integers beyond f32 precision take their digits from source, as the parsed value may be rounded.
+	fn compact_number<'s>(&self, buf: &'s mut SmallStrBuf<16>) -> Option<CompactNumber<'s>>
+	where
+		'a: 's,
+	{
 		let token = self.token();
-		let abs = token.value().abs();
-		abs != 0.0 && !(0.001..1000.0).contains(&abs) && (token.is_float() || !token.numeric_type_is_required())
+		let value = token.value();
+		let (digits, exponent) = if self.exceeds_f32_precision() {
+			if !token.is_int() {
+				return None;
+			}
+			let digits = self.numeric_source().trim_start_matches(['+', '-']).trim_start_matches('0');
+			let significant = digits.trim_end_matches('0');
+			(significant, i32::try_from(digits.len() - significant.len()).ok()?)
+		} else {
+			let mut scientific = SmallStrBuf::<16>::new();
+			write!(&mut scientific, "{:e}", value.abs()).ok()?;
+			let (mantissa, exponent) = scientific.as_str()?.split_once('e')?;
+			let (int_digits, frac_digits) = mantissa.split_once('.').unwrap_or((mantissa, ""));
+			buf.append_str(int_digits);
+			buf.append_str(frac_digits);
+			(buf.as_str()?, exponent.parse::<i32>().ok()? - frac_digits.len() as i32)
+		};
+		let sign = if value.is_sign_negative() {
+			"-"
+		} else if value > 0.0 && token.kind() == Kind::Number && token.sign_is_required() {
+			"+"
+		} else {
+			""
+		};
+		Some(CompactNumber {
+			sign,
+			digits,
+			exponent,
+			keeps_float: token.is_float() && token.numeric_type_is_required(),
+			allows_exponent: token.is_float() || !token.numeric_type_is_required(),
+		})
 	}
 
 	fn fmt_compacted(&self, f: &mut Formatter<'_>) -> Result {
@@ -337,44 +346,11 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	fn fmt_compacted_number(&self, f: &mut Formatter<'_>) -> Result {
-		let token = self.token();
-		if self.keeps_source_number() {
-			return f.write_str(&self.inner.source()[..token.numeric_len() as usize]);
+		let mut digits = SmallStrBuf::new();
+		match self.compact_number(&mut digits) {
+			Some(number) => number.fmt(f),
+			None => f.write_str(self.numeric_source()),
 		}
-		let value = token.value();
-		if value.is_sign_negative() {
-			f.write_str("-")?;
-		} else if value > 0.0 && token.kind() == Kind::Number && token.sign_is_required() {
-			f.write_str("+")?;
-		}
-		let abs = value.abs();
-		let mut decimal = SmallStrBuf::<255>::new();
-		write!(&mut decimal, "{abs}")?;
-		let decimal = decimal.as_str().ok_or(Error)?;
-		let decimal = decimal.strip_prefix('0').filter(|rest| rest.starts_with('.')).unwrap_or(decimal);
-		let keeps_float = token.is_float() && token.numeric_type_is_required() && !decimal.contains('.');
-		if keeps_float || self.exponent_may_be_shorter() {
-			let mut scientific = SmallStrBuf::<32>::new();
-			write!(&mut scientific, "{abs:e}")?;
-			let (mantissa, exponent) = scientific.as_str().and_then(|s| s.split_once('e')).ok_or(Error)?;
-			let (int_digits, frac_digits) = mantissa.split_once('.').unwrap_or((mantissa, ""));
-			let exponent = exponent.parse::<i32>().map_err(|_| Error)? - frac_digits.len() as i32;
-			let mut exponent_str = SmallStrBuf::<12>::new();
-			write!(&mut exponent_str, "{exponent}")?;
-			let exponent_str = exponent_str.as_str().ok_or(Error)?;
-			let decimal_len = decimal.len() + if keeps_float { 2 } else { 0 };
-			if int_digits.len() + frac_digits.len() + 1 + exponent_str.len() < decimal_len {
-				f.write_str(int_digits)?;
-				f.write_str(frac_digits)?;
-				f.write_str("e")?;
-				return f.write_str(exponent_str);
-			}
-		}
-		f.write_str(decimal)?;
-		if keeps_float {
-			f.write_str(".0")?;
-		}
-		Ok(())
 	}
 
 	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
@@ -483,9 +459,8 @@ impl<'a> SourceCursor<'a> {
 	#[cfg(feature = "egg")]
 	fn fmt_expanded_number(&self, f: &mut Formatter<'_>) -> Result {
 		let value = self.token().value();
-		if self.keeps_source_number() {
-			let number_len = self.token().numeric_len() as usize;
-			return f.write_str(&self.inner.source()[..number_len]);
+		if self.exceeds_f32_precision() {
+			return f.write_str(self.numeric_source());
 		}
 		let is_negative = value < 0.0;
 		let abs_value = value.abs();
@@ -726,6 +701,58 @@ impl PartialEq<KindSet> for SourceCursor<'_> {
 	}
 }
 
+/// A number decomposed as `sign digits * 10^exponent`.
+struct CompactNumber<'s> {
+	sign: &'static str,
+	/// Significant digits, without leading or trailing zeros (`"0"` for zero).
+	digits: &'s str,
+	exponent: i32,
+	/// Decimal notation must keep a `.0` so the number is not read as an `<integer>`.
+	keeps_float: bool,
+	allows_exponent: bool,
+}
+
+impl CompactNumber<'_> {
+	fn len(&self) -> usize {
+		self.sign.len() + self.decimal_len().min(self.scientific_len())
+	}
+
+	fn decimal_len(&self) -> usize {
+		let digits = self.digits.len();
+		let zeros = self.exponent.unsigned_abs() as usize;
+		if self.exponent >= 0 { digits + zeros + if self.keeps_float { 2 } else { 0 } } else { digits.max(zeros) + 1 }
+	}
+
+	fn scientific_len(&self) -> usize {
+		if !self.allows_exponent {
+			return usize::MAX;
+		}
+		let exponent_digits = self.exponent.unsigned_abs().checked_ilog10().map_or(1, |log| log as usize + 1);
+		self.digits.len() + 1 + (self.exponent < 0) as usize + exponent_digits
+	}
+}
+
+impl Display for CompactNumber<'_> {
+	fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+		f.write_str(self.sign)?;
+		if self.scientific_len() < self.decimal_len() {
+			return write!(f, "{}e{}", self.digits, self.exponent);
+		}
+		let zeros = self.exponent.unsigned_abs() as usize;
+		if self.exponent >= 0 {
+			write!(f, "{}{:0>zeros$}", self.digits, "")?;
+			return if self.keeps_float { f.write_str(".0") } else { Ok(()) };
+		}
+		match self.digits.len().checked_sub(zeros) {
+			Some(point) if point > 0 => {
+				let (int_digits, frac_digits) = self.digits.split_at(point);
+				write!(f, "{int_digits}.{frac_digits}")
+			}
+			_ => write!(f, ".{:0>leading$}{}", "", self.digits, leading = zeros - self.digits.len()),
+		}
+	}
+}
+
 #[cfg(test)]
 mod test {
 	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
@@ -929,11 +956,52 @@ mod test {
 	}
 
 	#[test]
+	fn test_compact_number_notation() {
+		let compact = |token: Token, source: &str| {
+			format!("{}", SourceCursor::from(Cursor::new(SourceOffset(0), token), source).compact())
+		};
+		let float = |source: &str, value| Token::new_number(true, source.starts_with('-'), source.len() as u32, value);
+		let int = |source: &str, value| Token::new_number(false, source.starts_with('-'), source.len() as u32, value);
+		assert_eq!(compact(int("100", 100.0), "100"), "100");
+		assert_eq!(compact(int("1000", 1000.0), "1000"), "1e3");
+		assert_eq!(compact(float("0.001", 0.001), "0.001"), ".001");
+		assert_eq!(compact(float("0.0001", 0.0001), "0.0001"), "1e-4");
+		assert_eq!(compact(float("-0.00012", -0.00012), "-0.00012"), "-12e-5");
+		assert_eq!(compact(float("1.5e3", 1500.0), "1.5e3"), "1500");
+		assert_eq!(compact(float("12.50", 12.5), "12.50"), "12.5");
+		assert_eq!(compact(int("-0", -0.0), "-0"), "-0");
+		assert_eq!(compact(int("1000", 1000.0).with_numeric_type_required(), "1000"), "1000");
+		assert_eq!(compact(float("1.0", 1.0).with_numeric_type_required(), "1.0"), "1.0");
+		assert_eq!(compact(float("0.50", 0.5).with_numeric_type_required(), "0.50"), ".5");
+		assert_eq!(compact(float("1000.0", 1000.0).with_numeric_type_required(), "1000.0"), "1e3");
+	}
+
+	#[test]
 	fn test_compact_dimension() {
 		let c = Cursor::new(SourceOffset(0), Token::new_dimension(true, false, 4, 4, 0.8, 0));
 		let sc = SourceCursor::from(c, r"+0.8\70x");
 		assert_eq!(format!("{}", sc), r"+0.8\70x");
 		assert_eq!(format!("{}", sc.compact()), ".8px");
+	}
+
+	#[test]
+	fn test_compact_large_integer_uses_source_digits() {
+		let compact = |has_sign, source: &str, value| {
+			let token = Token::new_number(false, has_sign, source.len() as u32, value);
+			format!("{}", SourceCursor::from(Cursor::new(SourceOffset(0), token), source).compact())
+		};
+		assert_eq!(compact(false, "96000000", 96000000.0), "96e6");
+		assert_eq!(compact(true, "-300000000000000000000000000000", -3e29), "-3e29");
+		assert_eq!(compact(true, "+0001000000000000", 1e12), "1e12");
+		assert_eq!(compact(false, "16777217", 16777216.0), "16777217");
+		assert_eq!(compact(false, "123456789", 123456792.0), "123456789");
+		assert_eq!(compact(true, "+00016777217", 16777216.0), "16777217");
+		assert_eq!(compact(true, "-0000123456789", -123456792.0), "-123456789");
+		let anb = Token::new_dimension(false, false, 9, 1, 1e8, 0).with_numeric_type_required();
+		assert_eq!(
+			format!("{}", SourceCursor::from(Cursor::new(SourceOffset(0), anb), "100000000n").compact()),
+			"100000000n"
+		);
 	}
 
 	#[test]
@@ -994,7 +1062,13 @@ mod test {
 		assert!(!SourceCursor::from(c, "16777217").may_compact());
 
 		let c = Cursor::new(SourceOffset(0), Token::new_number(false, false, 40, f32::INFINITY));
-		assert!(!SourceCursor::from(c, "0004000000000000000000000000000000000000").may_compact());
+		assert!(SourceCursor::from(c, "0004000000000000000000000000000000000000").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(false, true, 9, 16777216.0));
+		assert!(SourceCursor::from(c, "+16777217").may_compact());
+
+		let c = Cursor::new(SourceOffset(0), Token::new_number(true, false, 10, 16777216.0));
+		assert!(!SourceCursor::from(c, "16777217.0").may_compact());
 	}
 
 	#[test]
