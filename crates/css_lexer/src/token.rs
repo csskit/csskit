@@ -1189,10 +1189,10 @@ impl Token {
 					|| second.is_cdc()
 			}
 			Kind::Number => {
-				matches!(
-					second.kind(),
-					Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl | Kind::Number | Kind::Dimension
-				) || matches!(second.char(), Some('%'))
+				(matches!(second.kind(), Kind::Number | Kind::Dimension)
+					&& !(second.has_sign() && second.value() < 0.0))
+					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
+					|| matches!(second.char(), Some('%'))
 					|| second.is_cdc()
 			}
 			_ => match self.char() {
@@ -1517,6 +1517,22 @@ fn with_associated_whitespace() {
 		Token::new_delim('>').with_associated_whitespace(AssociatedWhitespaceRules::BanAfter),
 		AssociatedWhitespaceRules::BanAfter
 	);
+}
+
+#[test]
+fn number_needs_separator_for_signed_numbers() {
+	let pair = |s: &str| {
+		let mut lexer = crate::Lexer::new(&crate::EmptyAtomSet::ATOMS, s);
+		let first = lexer.advance();
+		let _ = lexer.advance();
+		first.needs_separator_for(lexer.advance())
+	};
+	assert!(!pair("1.2 -.3"));
+	assert!(!pair("1 -2px"));
+	assert!(pair("1 +2"));
+	assert!(pair("1 -0"));
+	assert!(pair("1 .3"));
+	assert!(pair("1px -2"));
 }
 
 #[test]
