@@ -1,6 +1,4 @@
-use crate::{
-	AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, QuoteStyle, SourceCursor, SourceCursorSink, Token,
-};
+use crate::{AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, SourceCursor, SourceCursorSink, Token};
 
 /// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given sink - using the given `&'a str` as the original source.
@@ -119,7 +117,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			self.sink.append(SourceCursor::SPACE);
 		}
 
-		let out = if kind == Kind::String { c.with_quotes(QuoteStyle::Double).compact() } else { c.compact() };
+		let out = if kind == Kind::String { c.with_quotes(c.fewest_escapes_quotes()).compact() } else { c.compact() };
 		self.emit(out);
 	}
 }
