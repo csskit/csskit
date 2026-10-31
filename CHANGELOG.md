@@ -1,4 +1,29 @@
-## [0.0.36] - 2026-10-24
+## [0.0.37] - 2026-10-28
+
+### Css_ast
+- Regenerate css_ast/src/values from csswg drafts (#1606) ([#1606](https://github.com/csskit/csskit/pull/1606))
+- csskit_derives/css_ast: Use match over equals_atom branches (#1609) ([#1609](https://github.com/csskit/csskit/pull/1609))
+- css_lexer/css_parse: Add a numeric type flag to Number and Dimension tokens (#1619) ([#1619](https://github.com/csskit/csskit/pull/1619))
+
+
+### Css_lexer
+- css_lexer: Use source of numbers beyond f32 precision when compacting (#1617) ([#1617](https://github.com/csskit/csskit/pull/1617))
+- css_lexer: Write numbers in scientific notation when shorter (#1620) ([#1620](https://github.com/csskit/csskit/pull/1620))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1607) ([#1607](https://github.com/csskit/csskit/pull/1607))
+
+
+### Csskit_transform
+- csskit_transform: Avoid reducing large time units (#1618) ([#1618](https://github.com/csskit/csskit/pull/1618))
+- csskit_transform: Compare compacted lengths when reducing time/length units (#1621) ([#1621](https://github.com/csskit/csskit/pull/1621))
+
+
+### Csskit_vscode
+- chore(deps): update dependency node to v26 (#1623) ([#1623](https://github.com/csskit/csskit/pull/1623))
+
+## [0.0.36] - 2026-10-25
 
 ### Other Changes
 - Chore(deps): update dependencies (patch) (#1585) ([#1585](https://github.com/csskit/csskit/pull/1585))
@@ -9,6 +34,7 @@
 - chromashift: Preserve saturation for out-of-range lightness in Hsl (#1558) ([#1558](https://github.com/csskit/csskit/pull/1558))
 - chromashift: Keep a half turn's direction for longer hue interpolation (#1566) ([#1566](https://github.com/csskit/csskit/pull/1566))
 - chromashift/css_ast: Add InterpolationSpace, deduplicate colour mixing (#1577) ([#1577](https://github.com/csskit/csskit/pull/1577))
+- chromashift/css_ast: Fix percentage scaling (#1603) ([#1603](https://github.com/csskit/csskit/pull/1603))
 
 
 ### Css_ast
@@ -26,6 +52,11 @@
 - Regenerate css_ast/src/values from csswg drafts (#1584) ([#1584](https://github.com/csskit/csskit/pull/1584))
 - css_ast: Box more types (#1593) ([#1593](https://github.com/csskit/csskit/pull/1593))
 - css_parse/css_ast: Bound ranged feature name lookahead to u8::MAX tokens (#1589) ([#1589](https://github.com/csskit/csskit/pull/1589))
+- css_ast: Parse leading `not (...)` as a media condition (#1599) ([#1599](https://github.com/csskit/csskit/pull/1599))
+- css_ast: Make subfields public (#1600) ([#1600](https://github.com/csskit/csskit/pull/1600))
+- css_ast: Pass generic type params to visitor methods (#1602) ([#1602](https://github.com/csskit/csskit/pull/1602))
+- css_ast: Deduplicate colour channel math into Channel type (#1604) ([#1604](https://github.com/csskit/csskit/pull/1604))
+- css_ast: Add ReducedCalc, ReduceCalcExpressions minifier (#1605) ([#1605](https://github.com/csskit/csskit/pull/1605))
 
 
 ### Css_feature_data
@@ -35,6 +66,8 @@
 ### Css_lexer
 - css_lexer: Use a LUT for Kind::from_bits (#1578) ([#1578](https://github.com/csskit/csskit/pull/1578))
 - css_lexer: Resolve delim token kinds from value data (#1594) ([#1594](https://github.com/csskit/csskit/pull/1594))
+- css_lexer: Simplify whitespace tokenisation (#1597) ([#1597](https://github.com/csskit/csskit/pull/1597))
+- css_lexer: Don't restart scanning idents when reaching non-ASCII (#1598) ([#1598](https://github.com/csskit/csskit/pull/1598))
 
 
 ### Css_parse
@@ -44,10 +77,12 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1507) ([#1507](https://github.com/csskit/csskit/pull/1507))
+- Release v0.0.36 (#1559) ([#1559](https://github.com/csskit/csskit/pull/1559))
 
 
 ### Csskit_transform
 - coverage: update css-minify-tests (#1565) ([#1565](https://github.com/csskit/csskit/pull/1565))
+- coverage: update css-minify-tests (#1601) ([#1601](https://github.com/csskit/csskit/pull/1601))
 
 
 ### Csskit_vscode
