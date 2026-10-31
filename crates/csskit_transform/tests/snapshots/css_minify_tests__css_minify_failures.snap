@@ -1092,20 +1092,12 @@ FAIL supports/0007
 -@supports not (color:#555){a{color:red}}
 +@supports not (color:color-mix(in srgb,red,blue,lime)){a{color:red}}
 
-FAIL svg/0001
--.double-double{background-image:url("data:image/svg+xml;utf8,<svg xmlns=\22http://www.w3.org/2000/svg\22><circle r=\22 6\22  fill=\22red\22/></svg>")}
-+.double-double{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle r="6" fill="red"/></svg>')}
-
-FAIL svg/0002
--.single-double{background-image:url("data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle r="7" fill="red"/></svg>")}
-+.single-double{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><circle r="7" fill="red"/></svg>')}
-
 FAIL svg/0005
 -a{background-image:url("data:image/svg+xml;utf8,<svg  xmlns='http://www.w3.org/2000/svg'  >  <circle  r='8'  fill='red'  />  </svg>")}
 +a{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='8' fill='red'/></svg>")}
 
 FAIL svg/0006
--a{background:url("data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><path d="M 0,0 0,5 5,0"></path><circle r="10"></circle></svg>")}
+-a{background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><path d="M 0,0 0,5 5,0"></path><circle r="10"></circle></svg>')}
 +a{background:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg"><path d="M 0,0 0,5 5,0"/><circle r="10"/></svg>')}
 
 FAIL svg/0007
@@ -1117,7 +1109,7 @@ FAIL svg/0008
 +p{background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg'><circle r='8' fill='red'/></svg>")}
 
 FAIL svg/0009
--a{background-image:url("data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="350" height="80" viewBox="0 0 350 80"><g font-family="trebuchet ms, verdana, geneva, tahoma, sans-serif"><text x="15" y="35">Hello Wolrd</text></g></svg>")}
+-a{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="350" height="80" viewBox="0 0 350 80"><g font-family="trebuchet ms, verdana, geneva, tahoma, sans-serif"><text x="15" y="35">Hello Wolrd</text></g></svg>')}
 +a{background-image:url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="350" height="80" viewBox="0 0 350 80"><g font-family="trebuchet ms,verdana,geneva,tahoma,sans-serif"><text x="15" y="35">Hello Wolrd</text></g></svg>')}
 
 FAIL transforms/0001

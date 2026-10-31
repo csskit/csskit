@@ -13,6 +13,7 @@ use source_tools::SourceCursor as GenericSourceCursor;
 use std::fmt::{Display, Error, Formatter, Result, Write};
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
+#[derive(Clone)]
 struct ParsedChars<'a> {
 	chars: Chars<'a>,
 	is_string: bool,
@@ -88,7 +89,9 @@ impl<'a> Display for SourceCursor<'a> {
 			Kind::Eof => Ok(()),
 			#[cfg(feature = "egg")]
 			Kind::String if self.should_expand => self.fmt_expanded_string(f),
-			Kind::String if self.should_compact && self.token().contains_escape_chars() => self.fmt_compacted_string(f),
+			Kind::String if self.should_compact && (self.token().contains_escape_chars() || self.contains_quote()) => {
+				self.fmt_compacted_string(f)
+			}
 			// It is important to manually write out quotes for 2 reasons:
 			//  1. The quote style can be mutated from the source string (such as the case of normalising/switching quotes.
 			//  2. Some strings may not have the closing quote, which should be corrected.
@@ -170,6 +173,25 @@ impl<'a> SourceCursor<'a> {
 			#[cfg(feature = "egg")]
 			should_expand: self.should_expand,
 		}
+	}
+
+	/// Returns the [QuoteStyle] which needs fewer escapes to write this string's characters, preferring
+	/// [QuoteStyle::Double] on a tie. Returns [QuoteStyle::None] for tokens which are not strings.
+	pub fn fewest_escapes_quotes(&self) -> QuoteStyle {
+		if self.token().kind() != Kind::String {
+			return QuoteStyle::None;
+		}
+		let (double, single) = self.parsed_chars().fold((0usize, 0usize), |(double, single), (ch, _)| match ch {
+			'"' => (double + 1, single),
+			'\'' => (double, single + 1),
+			_ => (double, single),
+		});
+		if double > single { QuoteStyle::Single } else { QuoteStyle::Double }
+	}
+
+	fn contains_quote(&self) -> bool {
+		let quote = if self.token().quote_style() == QuoteStyle::Single { '\'' } else { '"' };
+		self.content_slice().contains(quote)
 	}
 
 	pub fn with_associated_whitespace(&self, rules: AssociatedWhitespaceRules) -> Self {
@@ -381,13 +403,13 @@ impl<'a> SourceCursor<'a> {
 				};
 				if valid_unescaped {
 					f.write_char(ch)?;
-				} else if !ch.is_ascii_hexdigit() && !ch.is_ascii_whitespace() && !is_newline(ch) {
+				} else if !ch.is_ascii_hexdigit() && !is_newline(ch) {
 					write!(f, "\\{}", ch)?;
 				} else {
 					write!(f, "\\{:x}", ch as u32)?;
 					// A trailing space is needed if the next character is a hex digit
 					// or whitespace, to prevent it from being consumed as part of the escape.
-					let next_char = chars.as_str().chars().next();
+					let next_char = chars.clone().next().map(|(nc, _)| nc);
 					if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
 						f.write_char(' ')?;
 					}
@@ -425,10 +447,12 @@ impl<'a> SourceCursor<'a> {
 		f.write_char(quote)?;
 		let mut chars = self.parsed_chars();
 		while let Some((ch, escaped)) = chars.next() {
-			if escaped && (is_newline(ch) || ch == quote || ch == '\\') {
+			if ch == quote {
+				f.write_char('\\')?;
+				f.write_char(ch)?;
+			} else if escaped && (is_newline(ch) || ch == '\\') {
 				write!(f, "\\{:x}", ch as u32)?;
-				// Trailing space needed if next char is a hex digit.
-				let next_char = chars.as_str().chars().next();
+				let next_char = chars.clone().next().map(|(nc, _)| nc);
 				if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
 					f.write_char(' ')?;
 				}
@@ -1071,7 +1095,7 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 6));
 		let sc = SourceCursor::from(c, r"a\20 b");
 		let compacted = format!("{}", sc.compact());
-		assert_eq!(compacted, "a\\20 b");
+		assert_eq!(compacted, "a\\ b");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 3));
 		let sc = SourceCursor::from(c, "a\\!");
@@ -1086,9 +1110,23 @@ mod test {
 		let sc = SourceCursor::from(c, r"\31 23");
 		assert_eq!(format!("{}", sc.compact()), r"\31 23");
 
+		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 8));
+		let sc = SourceCursor::from(c, r"\31 \41 ");
+		assert_eq!(format!("{}", sc.compact()), r"\31 A");
+
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 9));
 		let sc = SourceCursor::from(c, r"\66\6f\6f");
 		assert_eq!(format!("{}", sc.compact()), "foo");
+	}
+
+	#[test]
+	fn test_compact_string_escapes_literal_quotes_after_requoting() {
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, false, 5));
+		let sc = SourceCursor::from(c, "'a\"b'");
+		assert_eq!(sc.fewest_escapes_quotes(), QuoteStyle::Single);
+		assert_eq!(format!("{}", sc.with_quotes(QuoteStyle::Double).compact()), "\"a\\\"b\"");
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, false, 5));
+		assert_eq!(SourceCursor::from(c, "\"a'b\"").fewest_escapes_quotes(), QuoteStyle::Double);
 	}
 
 	#[test]
@@ -1096,17 +1134,17 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
 		let sc = SourceCursor::from(c, "\"\\22 x\"");
 		let compacted = format!("{}", sc.compact());
-		assert_eq!(compacted, "\"\\22x\"");
+		assert_eq!(compacted, "\"\\\"x\"");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
 		let sc = SourceCursor::from(c, "\"\\22 a\"");
 		let compacted = format!("{}", sc.compact());
-		assert_eq!(compacted, "\"\\22 a\"");
+		assert_eq!(compacted, "\"\\\"a\"");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Single, true, true, 7));
 		let sc = SourceCursor::from(c, "'\\27 x'");
 		let compacted = format!("{}", sc.compact());
-		assert_eq!(compacted, "'\\27x'");
+		assert_eq!(compacted, "'\\'x'");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 7));
 		let sc = SourceCursor::from(c, "\"\\5c x\"");
@@ -1117,6 +1155,10 @@ mod test {
 		let sc = SourceCursor::from(c, "\"\\5c a\"");
 		let compacted = format!("{}", sc.compact());
 		assert_eq!(compacted, "\"\\5c a\"");
+
+		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 9));
+		let sc = SourceCursor::from(c, "\"\\5c \\41\"");
+		assert_eq!(format!("{}", sc.compact()), "\"\\5c A\"");
 
 		let c = Cursor::new(SourceOffset(0), Token::new_string(QuoteStyle::Double, true, true, 6));
 		let sc = SourceCursor::from(c, "\"\\a x\"");
