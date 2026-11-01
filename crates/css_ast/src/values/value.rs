@@ -68,7 +68,7 @@ impl_value_slot_parse!(Value, SubstitutionFunction, T);
 #[derive(csskit_derives::NodeWithMetadata)]
 pub enum SubstitutionFunction<'a, T> {
 	Var(VarFunction<'a, Value<'a, T>>),
-	Env(EnvFunction<'a, Value<'a, T>>),
+	Env(Box<'a, EnvFunction<'a, Value<'a, T>>>),
 	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, Value<'a, T>>),
 	FirstValid(FirstValidFunction<'a, Value<'a, T>>),
@@ -122,7 +122,7 @@ impl<'a, T: Copy + Into<Token>> CalcableValue<'a, T> {
 pub enum CalcableSubstitutionFunction<'a, T> {
 	Math(Box<'a, MathFunction<'a, T>>),
 	Var(VarFunction<'a, CalcableValue<'a, T>>),
-	Env(EnvFunction<'a, CalcableValue<'a, T>>),
+	Env(Box<'a, EnvFunction<'a, CalcableValue<'a, T>>>),
 	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, CalcableValue<'a, T>>),
 	FirstValid(FirstValidFunction<'a, CalcableValue<'a, T>>),
@@ -173,7 +173,7 @@ pub enum NumericSubstitutionFunction<'a, T> {
 	TreeCounting(TreeCountingFunction),
 	Math(Box<'a, MathFunction<'a, T>>),
 	Var(VarFunction<'a, NumericValue<'a, T>>),
-	Env(EnvFunction<'a, NumericValue<'a, T>>),
+	Env(Box<'a, EnvFunction<'a, NumericValue<'a, T>>>),
 	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, NumericValue<'a, T>>),
 	FirstValid(FirstValidFunction<'a, NumericValue<'a, T>>),
@@ -212,7 +212,7 @@ impl_value_slot_parse!(KeywordValue, KeywordSubstitutionFunction, T);
 pub enum KeywordSubstitutionFunction<'a, T> {
 	Ident(IdentFunction<'a>),
 	Var(VarFunction<'a, KeywordValue<'a, T>>),
-	Env(EnvFunction<'a, KeywordValue<'a, T>>),
+	Env(Box<'a, EnvFunction<'a, KeywordValue<'a, T>>>),
 	Attr(Box<'a, AttrFunction<'a>>),
 	If(IfFunction<'a, KeywordValue<'a, T>>),
 	FirstValid(FirstValidFunction<'a, KeywordValue<'a, T>>),

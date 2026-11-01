@@ -510,14 +510,14 @@ BooleanKeyword: size=16 align=4
 BorderBlockClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderBlockColorStyleValue: size=144 align=8 {
+BorderBlockColorStyleValue: size=80 align=8 {
     0: 0
-    1: 72
+    1: 40
 }
 BorderBlockEndClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderBlockEndColorStyleValue: size=72 align=8
+BorderBlockEndColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderBlockEndRadiusStyleValue: size=144 align=8 {
@@ -539,7 +539,7 @@ BorderBlockEndWidthStyleValue: size=40 align=8 {
 BorderBlockStartClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderBlockStartColorStyleValue: size=72 align=8
+BorderBlockStartColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderBlockStartRadiusStyleValue: size=144 align=8 {
@@ -572,7 +572,7 @@ BorderBlockWidthStyleValue: size=80 align=8 {
 BorderBottomClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderBottomColorStyleValue: size=72 align=8
+BorderBottomColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderBottomLeftRadiusStyleValue: size=88 align=8 {
@@ -607,11 +607,11 @@ BorderClipStyleValue: size=32 align=8 {
 BorderCollapseStyleValue: size=32 align=8
     0: Separate
     1: Collapse
-BorderColorStyleValue: size=288 align=8 {
+BorderColorStyleValue: size=160 align=8 {
     0: 0
-    1: 72
-    2: 144
-    3: 216
+    1: 40
+    2: 80
+    3: 120
 }
 BorderEndEndRadiusStyleValue: size=88 align=8 {
     0: 0
@@ -654,14 +654,14 @@ BorderImageWidthStyleValue: size=160 align=8 {
 BorderInlineClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderInlineColorStyleValue: size=144 align=8 {
+BorderInlineColorStyleValue: size=80 align=8 {
     0: 0
-    1: 72
+    1: 40
 }
 BorderInlineEndClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderInlineEndColorStyleValue: size=72 align=8
+BorderInlineEndColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderInlineEndRadiusStyleValue: size=144 align=8 {
@@ -683,7 +683,7 @@ BorderInlineEndWidthStyleValue: size=40 align=8 {
 BorderInlineStartClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderInlineStartColorStyleValue: size=72 align=8
+BorderInlineStartColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderInlineStartRadiusStyleValue: size=144 align=8 {
@@ -716,7 +716,7 @@ BorderInlineWidthStyleValue: size=80 align=8 {
 BorderLeftClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderLeftColorStyleValue: size=72 align=8
+BorderLeftColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderLeftRadiusStyleValue: size=144 align=8 {
@@ -758,7 +758,7 @@ BorderRadiusStyleValue: size=272 align=8 {
 BorderRightClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderRightColorStyleValue: size=72 align=8
+BorderRightColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderRightRadiusStyleValue: size=144 align=8 {
@@ -804,7 +804,7 @@ BorderStyleValue: size=96 align=8 {
 BorderTopClipStyleValue: size=32 align=8 {
     0: 0
 }
-BorderTopColorStyleValue: size=72 align=8
+BorderTopColorStyleValue: size=40 align=8
     0: Color
     1: Image1d
 BorderTopLeftRadiusStyleValue: size=88 align=8 {
@@ -6019,7 +6019,7 @@ Image: size=48 align=8
     3: CrossFadeFunction
     4: ElementFunction
     5: Gradient
-Image1d: size=56 align=8 {
+Image1d: size=16 align=8 {
     0: 0
 }
 ImageAnimationStyleValue: size=32 align=8
@@ -7799,7 +7799,7 @@ OrnamentsFunction: size=56 align=8 {
 OrphansStyleValue: size=24 align=8 {
     0: 0
 }
-OutlineColorStyleValue: size=80 align=8 {
+OutlineColorStyleValue: size=48 align=8 {
     0: 0
 }
 OutlineLineStyle: size=16 align=4
@@ -7819,7 +7819,7 @@ OutlineOffsetStyleValue: size=24 align=8 {
 OutlineStyleStyleValue: size=32 align=8 {
     0: 0
 }
-OutlineStyleValue: size=152 align=8 {
+OutlineStyleValue: size=120 align=8 {
     outline_width: 0
     outline_style: 40
     outline_color: 72
