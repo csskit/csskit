@@ -1,6 +1,7 @@
 use super::prelude::*;
 
 use crate::StripesFunction;
+use css_parse::Box;
 
 /// <https://drafts.csswg.org/css-images-4/#typedef-image-1d>
 ///
@@ -14,7 +15,7 @@ use crate::StripesFunction;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Image1d<'a>(pub StripesFunction<'a>);
+pub struct Image1d<'a>(pub Box<'a, StripesFunction<'a>>);
 
 #[cfg(test)]
 mod tests {
