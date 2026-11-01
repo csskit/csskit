@@ -6241,7 +6241,7 @@ JustifySelfStyleValue: size=56 align=8
     4: Right
     5: Stretch
     6: BaselinePosition
-Keyframe: size=208 align=16 {
+Keyframe: size=160 align=16 {
     0: 0
 }
 KeyframeSelector: size=16 align=4
@@ -9783,7 +9783,7 @@ StyleQuery: size=48 align=8
     1: Not
     2: And
     3: Or
-StyleRule: size=208 align=16 {
+StyleRule: size=160 align=16 {
     rule: 0
 }
 StyleSheet: size=80 align=16 {
@@ -11375,7 +11375,7 @@ UnknownAtRule: size=112 align=8 {
 UnknownAtRulePrelude: size=24 align=8 {
     0: 0
 }
-UnknownQualifiedRule: size=208 align=16 {
+UnknownQualifiedRule: size=160 align=16 {
     0: 0
 }
 UnknownTag: size=12 align=4 {

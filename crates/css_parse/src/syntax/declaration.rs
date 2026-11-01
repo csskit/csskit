@@ -38,9 +38,7 @@ where
 	pub important: Option<Box<'a, BangImportant>>,
 	pub semicolon: Option<token_macros::Semicolon>,
 	#[cfg_attr(feature = "serde", serde(skip))]
-	meta: M,
-	#[cfg_attr(feature = "serde", serde(skip))]
-	_phantom: PhantomData<&'a ()>,
+	_phantom: PhantomData<(&'a (), M)>,
 }
 
 impl<'a, V, M> Declaration<'a, V, M>
@@ -59,13 +57,11 @@ where
 	M: NodeMetadata,
 {
 	fn self_metadata(&self) -> M {
-		// Declaration's self_metadata should return the declaration-specific metadata
-		// (includes !important, property info, etc.) for selector matching.
-		self.meta
+		V::declaration_metadata(self)
 	}
 
 	fn metadata(&self) -> M {
-		self.meta
+		V::declaration_metadata(self)
 	}
 }
 
@@ -135,10 +131,7 @@ where
 		let value = <V>::parse_declaration_value(p, c)?;
 		let important = p.parse_if_peek::<Box<'a, BangImportant>>()?;
 		let semicolon = p.parse_if_peek::<T![;]>()?;
-		let mut declaration =
-			Self { name, colon, value, important, semicolon, meta: M::default(), _phantom: PhantomData };
-		declaration.meta = DeclarationValue::declaration_metadata(&declaration);
-		Ok(declaration)
+		Ok(Self { name, colon, value, important, semicolon, _phantom: PhantomData })
 	}
 }
 
