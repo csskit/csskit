@@ -16,8 +16,6 @@ where
 {
 	pub prelude: P,
 	pub block: Block<'a, D, R, M>,
-	#[cfg_attr(feature = "serde", serde(skip))]
-	meta: M,
 }
 
 impl<'a, P, D, R, M> NodeWithMetadata<M> for QualifiedRule<'a, P, D, R, M>
@@ -26,7 +24,7 @@ where
 	M: NodeMetadata,
 {
 	fn metadata(&self) -> M {
-		self.meta
+		self.block.metadata()
 	}
 }
 
@@ -114,8 +112,7 @@ where
 		// replace them with nested declarations rules containing the list as its sole child.
 		// Assign child rules to rule’s child rules.
 		let block = p.parse::<Block<'a, D, R, M>>()?;
-		let meta = block.metadata();
-		Ok(Self { prelude, block, meta })
+		Ok(Self { prelude, block })
 	}
 }
 
