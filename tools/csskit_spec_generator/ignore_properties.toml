@@ -140,6 +140,11 @@ properties = ["align-content", "align-items", "align-self", "justify-content"]
 # The --* (custom properties) are handled specially in properties/mod.rs with a hardcoded Custom variant
 properties = ["--*"]
 
+[values]
+# https://drafts.csswg.org/css-values-5/#intro
+# interpolate-size is handled in css-sizing-4
+properties = ["interpolate-size"]
+
 [conditional]
 # aspect-ratio, width, height, inline-size, block-size are defined in both conditional and sizing specs. Sizing is the canonical location.
 properties = ["aspect-ratio", "inline-size", "block-size", "width", "height"]
