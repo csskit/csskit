@@ -331,6 +331,12 @@ impl CssMetadata {
 		self.declaration_kinds.contains(DeclarationKind::Longhands)
 	}
 
+	/// Returns true if metadata contains css-wide keywords, e.g. `initial` or `inherit`.
+	#[inline]
+	pub fn has_css_wide_keywords(&self) -> bool {
+		self.declaration_kinds.contains(DeclarationKind::CssWideKeywords)
+	}
+
 	/// Returns true if metadata contains unknown nodes.
 	#[inline]
 	pub fn has_unknown(&self) -> bool {
