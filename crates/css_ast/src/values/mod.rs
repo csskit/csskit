@@ -68,8 +68,6 @@ mod transforms;
 mod transitions;
 mod ui;
 mod value;
-#[allow(clippy::module_inception)]
-mod values;
 mod variables;
 mod view_transitions;
 mod viewport;
@@ -155,7 +153,6 @@ pub use value::{
 	NumericSubstitutionFunction, NumericValue, QuerySubstitutionFunction, QueryValue, SubstitutionFunction, Value,
 };
 pub(crate) use value::{impl_value_slot_parse, is_substitution_function};
-pub use values::*;
 // TODO: not sure if this is needed yet.
 #[allow(unused)]
 pub use variables::*;
