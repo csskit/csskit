@@ -8,7 +8,7 @@ hyperfine = "latest"
 "cargo:cargo-edit" = "0.13.14"
 "cargo:git-cliff" = "2.14.2"
 "cargo:samply" = "0.13.1"
-"cargo:wasm-bindgen-cli" = "0.2.129"
+"cargo:wasm-bindgen-cli" = "0.2.130"
 "aqua:WebAssembly/binaryen" = "131"
 "cargo:cargo-fuzz" = "0.13.2"
 
