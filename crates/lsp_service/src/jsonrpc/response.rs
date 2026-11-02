@@ -64,9 +64,14 @@ impl<'de> Deserialize<'de> for Response {
 			data: Value,
 		}
 
+		fn present<'de, D: Deserializer<'de>>(deserializer: D) -> Result<Option<Value>, D::Error> {
+			Value::deserialize(deserializer).map(Some)
+		}
+
 		#[derive(Deserialize)]
 		struct Res {
 			id: Id,
+			#[serde(default, deserialize_with = "present")]
 			result: Option<Value>,
 			error: Option<Err>,
 		}
@@ -104,6 +109,26 @@ impl Response {
 	}
 }
 
+/// The error a [`Handler`](crate::Handler) answers a request with: what went wrong, and the message the client shows.
+#[derive(Debug, Clone, PartialEq, Eq)]
+pub struct ResponseError {
+	pub code: ErrorCode,
+	pub message: String,
+}
+
+impl ResponseError {
+	pub fn new(code: ErrorCode, message: impl Into<String>) -> Self {
+		Self { code, message: message.into() }
+	}
+}
+
+impl From<ErrorCode> for ResponseError {
+	/// An error whose message names `code`.
+	fn from(code: ErrorCode) -> Self {
+		Self { code, message: format!("{code:?}") }
+	}
+}
+
 #[cfg(test)]
 mod tests {
 	use serde_json::{from_str, json, to_string};
@@ -134,6 +159,7 @@ mod tests {
 			from_str::<Response>(r#"{"id":4, "result":["a", "b"]}"#).unwrap(),
 			Response::Ok(4.into(), json!(["a", "b"]))
 		);
+		assert_eq!(from_str::<Response>(r#"{"id":5, "result":null}"#).unwrap(), Response::Ok(5.into(), Value::Null));
 		assert_eq!(
 			from_str::<Response>(r#"{"id":"a", "error":{"code": -32700, "message": "Parse error"}}"#).unwrap(),
 			Response::Err("a".into(), ErrorCode::ParseError, "Parse error".into(), Value::Null)

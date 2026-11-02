@@ -1,39 +1,29 @@
 use crossbeam_channel::{Receiver, Sender, bounded};
 use css_ast::{CssAtomSet, StyleSheet, Visitable};
-use css_lexer::{Lexer, LineIndex};
-use css_parse::Arena;
-use css_parse::{Parser, ParserReturn};
-use csskit_highlight::{Highlight, SemanticKind, SemanticModifier, TokenHighlighter};
+use css_lexer::Lexer;
+use css_parse::{Arena, Diagnostic, Parser, ParserReturn, Severity};
+use csskit_highlight::{SemanticKind, SemanticModifier, TokenHighlighter};
 use dashmap::DashMap;
 use itertools::Itertools;
-use lsp_types::Uri;
+use lsp_service::{Client, ErrorCode, Handler, PositionEncoding, ResponseError};
+use lsp_types::{SemanticToken, Uri, notification::PublishDiagnostics};
 use ropey::Rope;
 use std::{
-	sync::{
-		Arc,
-		atomic::{AtomicBool, Ordering},
-	},
+	sync::{Arc, OnceLock},
 	thread::{Builder, JoinHandle},
 };
 use strum::VariantNames;
-use tracing::{instrument, trace, trace_span};
-
-use crate::{ErrorCode, Handler};
-
-type Line = u32;
-type Col = u32;
+use tracing::{instrument, trace, trace_span, warn};
 
 #[derive(Debug)]
 enum FileCall {
-	// Re-parse the document based on changes
-	RopeChange(Rope),
-	// Highlight a document, returning the semantic highlights
+	RopeChange(Rope, i32),
 	Highlight,
 }
 
 #[derive(Debug)]
 enum FileReturn {
-	Highlights(Vec<(Highlight, Line, Col)>),
+	Tokens(Vec<SemanticToken>),
 }
 
 #[derive(Debug)]
@@ -46,7 +36,7 @@ pub struct File {
 }
 
 impl File {
-	fn new() -> Self {
+	fn new(uri: Uri, encoding: PositionEncoding, client: Client) -> Self {
 		let (sender, read_receiver) = bounded::<FileCall>(0);
 		let (write_sender, receiver) = bounded::<FileReturn>(0);
 		Self {
@@ -57,50 +47,75 @@ impl File {
 				.name("LspDocumentHandler".into())
 				.spawn(move || {
 					let mut alloc = Arena::default();
+					let mut rope = Rope::new();
 					let mut string: String = "".into();
 					let lexer = Lexer::new(&CssAtomSet::ATOMS, "");
-					let mut line_index = LineIndex::new_in(&string, &alloc);
 					let mut result: ParserReturn<'_, StyleSheet<'_>> =
 						Parser::new(&alloc, "", lexer).parse_entirely::<StyleSheet>();
 					while let Ok(call) = read_receiver.recv() {
 						match call {
-							FileCall::RopeChange(rope) => {
+							FileCall::RopeChange(new_rope, version) => {
 								let span = trace_span!("Parsing document");
 								let _ = span.enter();
 								// TODO! we should be able to optimize this by parsing a subset of the tree and mutating in
 								// place. For now though a partial parse request re-parses it all.
-								drop(line_index);
 								alloc.reset();
-								string = rope.clone().into();
+								rope = new_rope;
+								string = String::from(&rope);
 								let lexer = Lexer::new(&CssAtomSet::ATOMS, &string);
-								line_index = LineIndex::new_in(&string, &alloc);
 								result = Parser::new(&alloc, &string, lexer).parse_entirely::<StyleSheet>();
 								// if let Some(stylesheet) = &result.output {
 								// 	trace!("Sucessfully parsed stylesheet: {:#?}", &stylesheet);
 								// }
+								let diagnostics = result
+									.errors
+									.iter()
+									.map(|diagnostic| to_lsp_diagnostic(diagnostic, &string, &rope, encoding))
+									.collect();
+								let params = lsp_types::PublishDiagnosticsParams {
+									uri: uri.clone(),
+									diagnostics,
+									version: Some(version),
+								};
+								if let Err(e) = client.notify::<PublishDiagnostics>(params) {
+									warn!("Failed to publish diagnostics, connection closed: {e:?}");
+								}
 							}
 							FileCall::Highlight => {
 								let span = trace_span!("Highlighting document");
 								let _ = span.enter();
 								let mut highlighter = TokenHighlighter::new();
+								let mut tokens = vec![];
 								if let Some(stylesheet) = &result.output {
 									let _ = stylesheet.accept(&mut highlighter);
 									let mut current_line = 0;
 									let mut current_start = 0;
-									let data = highlighter
+									tokens = highlighter
 										.highlights()
 										.sorted_by(|a, b| Ord::cmp(&a.span(), &b.span()))
 										.map(|h| {
-											let (line, start) = line_index.line_and_column(h.span());
-											let delta_line: Line = line - current_line;
-											current_line = line;
-											let delta_start: Col =
-												if delta_line == 0 { start - current_start } else { start };
-											current_start = start;
-											(*h, delta_line, delta_start)
-										});
-									write_sender.send(FileReturn::Highlights(data.collect())).ok();
+											let span = h.span();
+											let start =
+												encoding.position(&rope, rope.byte_to_char(span.start().into()));
+											let delta_line = start.line - current_line;
+											let delta_start = if delta_line == 0 {
+												start.character - current_start
+											} else {
+												start.character
+											};
+											current_line = start.line;
+											current_start = start.character;
+											SemanticToken {
+												delta_line,
+												delta_start,
+												length: encoding.len_of(span.str_slice(&string)),
+												token_type: h.kind().bits() as u32,
+												token_modifiers_bitset: h.modifier().bits() as u32,
+											}
+										})
+										.collect();
 								}
+								write_sender.send(FileReturn::Tokens(tokens)).ok();
 							}
 						}
 					}
@@ -109,47 +124,74 @@ impl File {
 		}
 	}
 
-	fn commit(&mut self, rope: Rope) {
+	fn commit(&mut self, rope: Rope, version: i32) {
 		self.content = rope;
-		self.sender.send(FileCall::RopeChange(self.content.clone())).unwrap();
+		self.sender.send(FileCall::RopeChange(self.content.clone(), version)).unwrap();
 	}
 
 	#[instrument]
-	fn get_highlights(&self) -> Vec<(Highlight, Line, Col)> {
+	fn get_tokens(&self) -> Vec<SemanticToken> {
 		self.sender.send(FileCall::Highlight).unwrap();
-		if let Ok(ret) = self.receiver.recv() {
-			let FileReturn::Highlights(highlights) = ret;
-			return highlights;
+		if let Ok(FileReturn::Tokens(tokens)) = self.receiver.recv() {
+			return tokens;
 		}
 		vec![]
+	}
+}
+
+fn to_lsp_diagnostic(
+	diagnostic: &Diagnostic,
+	source: &str,
+	rope: &Rope,
+	encoding: PositionEncoding,
+) -> lsp_types::Diagnostic {
+	let span = diagnostic.span();
+	let meta = diagnostic.meta(source);
+	let position = |offset: usize| encoding.position(rope, rope.byte_to_char(offset.min(source.len())));
+	lsp_types::Diagnostic {
+		range: lsp_types::Range::new(position(span.start().into()), position(span.end().into())),
+		severity: Some(match diagnostic.severity {
+			Severity::Error => lsp_types::DiagnosticSeverity::ERROR,
+			Severity::Warning => lsp_types::DiagnosticSeverity::WARNING,
+			Severity::Advice => lsp_types::DiagnosticSeverity::INFORMATION,
+		}),
+		code: Some(lsp_types::NumberOrString::String(meta.code.into())),
+		source: Some("csskit".into()),
+		message: meta.message,
+		..Default::default()
 	}
 }
 
 #[derive(Debug)]
 pub struct LSPService {
 	version: String,
+	client: Client,
 	files: Arc<DashMap<Uri, File>>,
-	initialized: AtomicBool,
+	encoding: OnceLock<PositionEncoding>,
 }
 
 impl LSPService {
-	pub fn new(version: &'static str) -> Self {
-		Self { version: version.into(), files: Arc::new(DashMap::new()), initialized: AtomicBool::new(false) }
+	pub fn new(version: &'static str, client: Client) -> Self {
+		Self { version: version.into(), client, files: Arc::new(DashMap::new()), encoding: OnceLock::new() }
+	}
+
+	fn encoding(&self) -> PositionEncoding {
+		self.encoding.get().copied().unwrap_or_default()
 	}
 }
 
 impl Handler for LSPService {
 	#[instrument]
 	fn initialized(&self) -> bool {
-		self.initialized.load(Ordering::SeqCst)
+		self.encoding.get().is_some()
 	}
 
 	#[instrument]
-	fn initialize(&self, req: lsp_types::InitializeParams) -> Result<lsp_types::InitializeResult, ErrorCode> {
-		self.initialized.swap(true, Ordering::SeqCst);
+	fn initialize(&self, req: lsp_types::InitializeParams) -> Result<lsp_types::InitializeResult, ResponseError> {
+		let encoding = *self.encoding.get_or_init(|| PositionEncoding::negotiate(&req.capabilities));
 		Ok(lsp_types::InitializeResult {
 			capabilities: lsp_types::ServerCapabilities {
-				// position_encoding: (),
+				position_encoding: Some(encoding.kind()),
 				text_document_sync: Some(lsp_types::TextDocumentSyncCapability::Options(
 					lsp_types::TextDocumentSyncOptions {
 						open_close: Some(true),
@@ -230,29 +272,22 @@ impl Handler for LSPService {
 	fn semantic_tokens_full_request(
 		&self,
 		req: lsp_types::SemanticTokensParams,
-	) -> Result<Option<lsp_types::SemanticTokensResult>, ErrorCode> {
+	) -> Result<Option<lsp_types::SemanticTokensResult>, ResponseError> {
 		let uri = req.text_document.uri;
 		trace!("Asked for SemanticTokens for {:?}", &uri);
 		if let Some(document) = self.files.get(&uri) {
-			let data = document
-				.get_highlights()
-				.into_iter()
-				.map(|(highlight, delta_line, delta_start)| lsp_types::SemanticToken {
-					token_type: highlight.kind().bits() as u32,
-					token_modifiers_bitset: highlight.modifier().bits() as u32,
-					delta_line,
-					delta_start,
-					length: highlight.span().len(),
-				})
-				.collect();
+			let data = document.get_tokens();
 			Ok(Some(lsp_types::SemanticTokensResult::Tokens(lsp_types::SemanticTokens { result_id: None, data })))
 		} else {
-			Err(ErrorCode::InternalError)
+			Err(ErrorCode::InternalError.into())
 		}
 	}
 
 	#[instrument]
-	fn completion(&self, req: lsp_types::CompletionParams) -> Result<Option<lsp_types::CompletionResponse>, ErrorCode> {
+	fn completion(
+		&self,
+		req: lsp_types::CompletionParams,
+	) -> Result<Option<lsp_types::CompletionResponse>, ResponseError> {
 		// let uri = req.text_document_position.text_document.uri;
 		// let position = req.text_document_position.position;
 		// let context = req.context;
@@ -262,50 +297,28 @@ impl Handler for LSPService {
 	#[instrument]
 	fn on_did_open_text_document(&self, req: lsp_types::DidOpenTextDocumentParams) {
 		let uri = req.text_document.uri;
-		let source_text = req.text_document.text;
-		let mut doc = File::new();
-		let mut rope = doc.content.clone();
-		rope.remove(0..);
-		rope.insert(0, &source_text);
+		let mut doc = File::new(uri.clone(), self.encoding(), self.client.clone());
+		let rope = Rope::from_str(&req.text_document.text);
 		trace!("comitting new document {:?} {:?}", &uri, rope);
-		doc.commit(rope);
+		doc.commit(rope, req.text_document.version);
 		self.files.clone().insert(uri, doc);
 	}
 
 	#[instrument]
 	fn on_did_change_text_document(&self, req: lsp_types::DidChangeTextDocumentParams) {
 		let uri = req.text_document.uri;
-		let changes = req.content_changes;
+		let encoding = self.encoding();
 		if let Some(mut file) = self.files.clone().get_mut(&uri) {
 			let mut rope = file.content.clone();
-			for change in changes {
-				let range = if let Some(range) = change.range {
-					rope.try_line_to_char(range.start.line as usize).map_or_else(
-						|_| (0, None),
-						|start| {
-							rope.try_line_to_char(range.end.line as usize).map_or_else(
-								|_| (start + range.start.character as usize, None),
-								|end| {
-									(start + range.start.character as usize, Some(end + range.end.character as usize))
-								},
-							)
-						},
-					)
-				} else {
-					(0, None)
+			for change in req.content_changes {
+				let (start, end) = match change.range {
+					Some(range) => (encoding.char_index(&rope, range.start), encoding.char_index(&rope, range.end)),
+					None => (0, rope.len_chars()),
 				};
-				match range {
-					(start, None) => {
-						rope.try_remove(start..).ok();
-						rope.try_insert(start, &change.text).ok();
-					}
-					(start, Some(end)) => {
-						rope.try_remove(start..end).ok();
-						rope.try_insert(start, &change.text).ok();
-					}
-				}
+				rope.remove(start..end.max(start));
+				rope.insert(start, &change.text);
 			}
-			file.commit(rope)
+			file.commit(rope, req.text_document.version)
 		}
 	}
 }

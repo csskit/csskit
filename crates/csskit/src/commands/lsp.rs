@@ -1,6 +1,7 @@
 use super::prelude::*;
 use clap::crate_version;
-use csskit_lsp::{LSPService, Server};
+use csskit_lsp::LSPService;
+use lsp_service::Server;
 use std::io::stderr;
 use tracing::{level_filters::LevelFilter, trace};
 use tracing_subscriber::{Layer, fmt, layer::SubscriberExt, registry, util::SubscriberInitExt};
@@ -13,7 +14,7 @@ impl Lsp {
 	pub fn run(&self, config: GlobalConfig) -> CliResult {
 		let GlobalConfig { debug, .. } = config;
 		let Lsp {} = self;
-		let server = Server::new(LSPService::new(crate_version!()));
+		let server = Server::new(|client| LSPService::new(crate_version!(), client));
 		let stderr_log =
 			fmt::layer().with_writer(stderr).with_filter(if debug { LevelFilter::TRACE } else { LevelFilter::WARN });
 		registry().with(stderr_log).with(server.tracer()).init();

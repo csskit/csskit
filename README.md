@@ -59,6 +59,7 @@ npm install csskit
 | [css_parse](./crates/css_parse)               | CSS parser                 |
 | [csskit](./crates/csskit)                     | Main CLI and library       |
 | [csskit_lsp](./crates/csskit_lsp)             | Language Server Protocol   |
+| [lsp_service](./crates/lsp_service)           | LSP transport              |
 | [csskit_transform](./crates/csskit_transform) | AST transformations        |
 | [csskit_highlight](./crates/csskit_highlight) | Syntax highlighting        |
 | [chromashift](./crates/chromashift)           | Color space conversions    |

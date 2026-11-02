@@ -14,7 +14,7 @@ pub struct Notification {
 impl Notification {
 	pub fn new<T>(params: T::Params) -> Notification
 	where
-		T: lsp_types::request::Request,
+		T: lsp_types::notification::Notification,
 	{
 		Notification { method: T::METHOD.into(), params: to_value(params).unwrap() }
 	}

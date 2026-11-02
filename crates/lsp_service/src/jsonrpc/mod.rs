@@ -9,9 +9,9 @@ mod tracing_layer;
 
 pub use error_code::ErrorCode;
 pub use id::Id;
-pub use message::{Message, MessageError};
+pub use message::{Message, MessageError, ParseError};
 // pub use method::Method;
 pub use notification::Notification;
 pub use request::Request;
-pub use response::Response;
+pub use response::{Response, ResponseError};
 pub use tracing_layer::TracingLayer;

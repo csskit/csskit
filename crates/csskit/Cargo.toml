@@ -25,6 +25,7 @@ css_parse = { workspace = true, features = ["miette", "egg"] }
 visit_flow = { workspace = true }
 csskit_ast = { workspace = true, features = ["miette"] }
 csskit_lsp = { workspace = true }
+lsp_service = { workspace = true }
 csskit_highlight = { workspace = true, features = ["miette"] }
 csskit_transform = { workspace = true }
 chromashift = { workspace = true }
