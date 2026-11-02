@@ -778,6 +778,7 @@ dependencies = [
  "csskit_lsp",
  "csskit_transform",
  "itertools 0.15.0",
+ "lsp_service",
  "miette",
  "owo-colors",
  "serde",
@@ -865,20 +866,18 @@ dependencies = [
  "csskit_highlight",
  "dashmap",
  "glob",
- "httparse",
  "insta",
  "itertools 0.15.0",
  "lsp-types",
+ "lsp_service",
  "miette",
  "pprof",
  "ropey",
- "serde",
  "serde_json",
  "similar 3.2.1",
  "smallvec",
  "strum",
  "tracing",
- "tracing-subscriber",
 ]
 
 [[package]]
@@ -1980,6 +1979,20 @@ dependencies = [
  "serde",
  "serde_json",
  "serde_repr",
+]
+
+[[package]]
+name = "lsp_service"
+version = "0.0.36"
+dependencies = [
+ "crossbeam-channel",
+ "httparse",
+ "lsp-types",
+ "ropey",
+ "serde",
+ "serde_json",
+ "tracing",
+ "tracing-subscriber",
 ]
 
 [[package]]

@@ -14,9 +14,9 @@ use std::{
 	sync::{Arc, RwLock},
 	thread::{Builder, JoinHandle},
 };
-use tracing::{level_filters::LevelFilter, trace, warn};
+use tracing::{debug, level_filters::LevelFilter, trace, warn};
 
-use crate::{Notification, TracingLayer};
+use crate::{Client, Notification, ParseError, TracingLayer};
 
 use super::Message;
 
@@ -48,9 +48,11 @@ pub struct Server {
 }
 
 impl Server {
-	pub fn new<T: Handler>(handler: T) -> Self {
+	/// Spawns the message handling thread. `make_handler` receives a [`Client`] for sending server-to-client messages.
+	pub fn new<T: Handler>(make_handler: impl FnOnce(Client) -> T) -> Self {
 		let (write_sender, write_receiver) = bounded::<Message>(0);
 		let (read_sender, read_receiver) = bounded::<Message>(0);
+		let handler = make_handler(Client::new(write_sender.clone()));
 
 		let handler_receiver = read_receiver.clone();
 		let handler_sender = write_sender.clone();
@@ -86,7 +88,7 @@ impl Server {
 						return Err(io::Error::other(e));
 					}
 				}
-				warn!("LspMessageHandler closing, channel closed");
+				debug!("LspMessageHandler closing");
 				Ok(())
 			})
 			.expect("Failed to create Reader");
@@ -108,21 +110,35 @@ impl Server {
 			Ok(())
 		})?;
 		let read_sender = self.read_sender.clone();
-		let reader = Builder::new().name("LspReader".into()).spawn(move || {
-			let mut stdin = io::stdin().lock();
-			while let Some(message) = Message::read(&mut stdin)? {
-				if let Err(e) = read_sender.send(message) {
-					return Err(io::Error::other(e));
-				}
-			}
-			Ok(())
-		})?;
+		let reader = Builder::new()
+			.name("LspReader".into())
+			.spawn(move || read_messages(&mut io::stdin().lock(), &read_sender))?;
 		Ok(ThreadConnection { sender: reader, receiver: writer })
 	}
 
-	#[cfg(test)]
+	/// Returns the channels a transport would use: send client messages into the first, receive server messages from
+	/// the second. Drives the server in-process without stdio.
 	pub fn raw_channels(&self) -> (Sender<Message>, Receiver<Message>) {
 		(self.read_sender.clone(), self.write_receiver.clone())
+	}
+}
+
+/// Forwards each message read from `reader` to `sender` until the input ends or the client sends `exit`. A message
+/// whose body is not a JSON-RPC message is skipped, as its framing still says where the next one starts.
+fn read_messages(reader: &mut impl io::BufRead, sender: &Sender<Message>) -> io::Result<()> {
+	loop {
+		match Message::read(reader) {
+			Ok(Some(message)) => {
+				let exit = message.is_exit_notification();
+				sender.send(message).map_err(io::Error::other)?;
+				if exit {
+					return Ok(());
+				}
+			}
+			Ok(None) => return Ok(()),
+			Err(ParseError::Body(error)) => warn!("Skipping unparseable message: {error}"),
+			Err(error) => return Err(error.into()),
+		}
 	}
 }
 
@@ -130,7 +146,7 @@ impl Server {
 mod tests {
 	use std::sync::atomic::{AtomicBool, Ordering};
 
-	use crate::{ErrorCode, Notification, Request, Response};
+	use crate::{ErrorCode, Notification, Request, Response, ResponseError};
 
 	use super::*;
 	use lsp_types::{
@@ -151,13 +167,13 @@ mod tests {
 			fn initialized(&self) -> bool {
 				self.initialized.load(Ordering::SeqCst)
 			}
-			fn initialize(&self, _req: InitializeParams) -> Result<InitializeResult, ErrorCode> {
+			fn initialize(&self, _req: InitializeParams) -> Result<InitializeResult, ResponseError> {
 				self.initialized.swap(true, Ordering::SeqCst);
 				Ok(InitializeResult { ..Default::default() })
 			}
 		}
 
-		let server = Server::new(TestHandler { initialized: AtomicBool::new(false) });
+		let server = Server::new(|_| TestHandler { initialized: AtomicBool::new(false) });
 		registry().with(stderr_log).with(server.tracer()).init();
 		let (sender, receiver) = server.raw_channels();
 		sender
@@ -183,10 +199,25 @@ mod tests {
 				}),
 			}))
 			.unwrap();
-		assert_eq!(
+		assert!(matches!(
 			receiver.recv(),
-			Ok(Message::Response(Response::Err(1.into(), ErrorCode::MethodNotFound, "".into(), Value::Null)))
-		);
+			Ok(Message::Response(Response::Err(id, ErrorCode::MethodNotFound, _, Value::Null))) if id == 1.into()
+		));
 		sender.send(Message::Notification(Notification { method: "exit".into(), params: Value::Null })).unwrap();
+	}
+
+	#[test]
+	fn reader_skips_unparseable_bodies_and_stops_at_exit() {
+		let input = concat!(
+			"Content-Length: 11\r\n\r\n{\"foo\":\"x\"}",
+			"Content-Length: 29\r\n\r\n{\"method\":\"exit\",\"params\":[]}",
+			"Content-Length: 29\r\n\r\n{\"method\":\"next\",\"params\":[]}",
+		);
+		let (sender, receiver) = crossbeam_channel::unbounded();
+		read_messages(&mut input.as_bytes(), &sender).unwrap();
+		assert_eq!(
+			receiver.try_iter().collect::<Vec<_>>(),
+			vec![Message::Notification(Notification { method: "exit".into(), params: json!([]) })]
+		);
 	}
 }

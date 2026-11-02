@@ -2,7 +2,7 @@
 name = "csskit_lsp"
 version.workspace = true
 authors.workspace = true
-description = "A JSON-RPC Language Server Protocol implementation for CSS with semantic tokens and diagnostics."
+description = "A Language Server Protocol implementation for CSS with semantic tokens and diagnostics."
 edition.workspace = true
 homepage.workspace = true
 keywords.workspace = true
@@ -20,6 +20,7 @@ css_parse = { workspace = true }
 css_ast = { workspace = true, features = ["visitable"] }
 css_lexer = { workspace = true }
 csskit_highlight = { workspace = true }
+lsp_service = { workspace = true }
 
 miette = { workspace = true, features = ["derive"] }
 
@@ -29,17 +30,13 @@ ropey = { workspace = true }
 smallvec = { workspace = true }
 strum = { workspace = true, features = ["derive"] }
 
-serde = { workspace = true }
-serde_json = { workspace = true }
-
 lsp-types = { workspace = true, features = ["proposed"] }
 crossbeam-channel = { workspace = true }
-httparse = { workspace = true }
 dashmap = { workspace = true }
 tracing = { workspace = true }
-tracing-subscriber = { workspace = true }
 
 [dev-dependencies]
+serde_json = { workspace = true }
 glob = { workspace = true }
 criterion = { workspace = true, features = ["html_reports"] }
 insta = { workspace = true, features = ["json"] }
