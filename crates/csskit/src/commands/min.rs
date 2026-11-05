@@ -1,6 +1,6 @@
 use super::prelude::*;
 use css_ast::Visitable;
-use css_parse::{CursorCompactWriteSink, CursorOverlaySink, ToCursors};
+use css_parse::{CursorCompactWriteSink, CursorOverlaySink, CursorSink, ToCursors};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use csskit_transform::{CssMinifierFeature, Transformer};
 
@@ -54,7 +54,7 @@ impl Min {
 							&overlays,
 							CursorCompactWriteSink::new(source_text, ansi),
 						);
-						result.to_cursors(&mut stream);
+						result.to_cursors(&mut (&mut stream as &mut dyn CursorSink));
 					}
 				} else {
 					{

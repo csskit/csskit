@@ -8,6 +8,12 @@ pub trait CursorSink {
 	fn append(&mut self, c: Cursor);
 }
 
+impl<S: CursorSink + ?Sized> CursorSink for &mut S {
+	fn append(&mut self, c: Cursor) {
+		(**self).append(c)
+	}
+}
+
 pub trait SourceCursorSink<'a> {
 	fn append(&mut self, c: SourceCursor<'a>);
 }
