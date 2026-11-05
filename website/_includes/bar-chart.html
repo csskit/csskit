@@ -1,0 +1,25 @@
+{%- if chart.rows -%}
+<div class="chart-card">
+<table class="chart bars" style="{{ chart.style }}" data-unit="{{ chart.unit }}">
+<caption>{{ chart.caption }}<small>{{ chart.note }}</small></caption>
+<thead><tr><th>File
+{%- for series in chart.series -%}
+<th id="{{ series.id }}" data-series="{{ series.name | escape }}"><label><input type="checkbox" checked>{{ series.name | escape }}</label>
+{%- endfor -%}
+</thead>
+<tbody>
+{%- for row in chart.rows -%}
+<tr><th>{{ row.label | escape }}
+{%- for cell in row.cells -%}
+<td headers="{{ cell.headers }}" data-series="{{ cell.name | escape }}"{% if cell.style %} style="{{ cell.style }}"{% endif %}>{{ cell.text }}
+{%- endfor -%}
+{%- endfor -%}
+</tbody>
+<tfoot aria-hidden="true"><tr><th>
+{%- for tick in chart.ticks -%}
+<th>{{ tick }}
+{%- endfor -%}
+</tfoot>
+</table>
+</div>
+{%- endif -%}
