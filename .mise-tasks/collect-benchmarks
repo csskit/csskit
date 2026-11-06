@@ -37,7 +37,7 @@ run_criterion_benchmarks() {
 	# Use a baseline name with timestamp for this run
 	BASELINE_NAME="tracking_$(date +%Y%m%d_%H%M%S)"
 
-	if cargo bench --all-features -- --save-baseline "$BASELINE_NAME"; then
+	if cargo bench --all-features --benches -- --save-baseline "$BASELINE_NAME"; then
 		echo "  Criterion benchmarks completed"
 
 		# Extract data from criterion baseline JSON files
