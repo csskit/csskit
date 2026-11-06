@@ -4,7 +4,7 @@ expression: pretty
 ---
 #[automatically_derived]
 impl ::css_parse::ToCursors for Display {
-    fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+    fn to_cursors(&self, s: &mut (impl ::css_parse::CursorSink + ?Sized)) {
         match self {
             Self::Block(v0) => {
                 ::css_parse::ToCursors::to_cursors(v0, s);

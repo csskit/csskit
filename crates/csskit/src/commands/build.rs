@@ -26,7 +26,7 @@ impl Build {
 			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
-				result.with_trivia().to_cursors(&mut (&mut stream as &mut dyn CursorSink));
+				result.with_trivia().to_cursors(&mut stream as &mut dyn CursorSink);
 			} else {
 				for compact_err in result.errors {
 					let report = crate::commands::format_diagnostic_error(&compact_err, source_text, file_name);

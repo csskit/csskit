@@ -47,7 +47,7 @@ impl<'a> Parse<'a> for AttributeOperator {
 }
 
 impl ToCursors for AttributeOperator {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		match self {
 			Self::Exact(t) => t.to_cursors(s),
 			Self::SpaceList(t) => t.to_cursors(s),

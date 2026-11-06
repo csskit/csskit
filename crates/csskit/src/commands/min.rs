@@ -54,7 +54,7 @@ impl Min {
 							&overlays,
 							CursorCompactWriteSink::new(source_text, ansi),
 						);
-						result.to_cursors(&mut (&mut stream as &mut dyn CursorSink));
+						result.to_cursors(&mut stream as &mut dyn CursorSink);
 					}
 				} else {
 					{

@@ -27,7 +27,7 @@ impl<'a, D, M> Peek<'a> for UnknownRuleBlock<'a, D, M> {
 }
 
 impl<'a, D, M> ToCursors for UnknownRuleBlock<'a, D, M> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		self.values.to_cursors(s)
 	}
 }

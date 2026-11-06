@@ -94,7 +94,7 @@ impl<'a> QueryCompoundSelector<'a> {
 }
 
 impl ToCursors for QueryCompoundSelector<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		// Emit leading combinator if present
 		if let Some(lc) = &self.leading_combinator {
 			lc.to_cursors(s);
@@ -290,7 +290,7 @@ impl<'a> Parse<'a> for NeverMatch {
 }
 
 impl ToCursors for NeverMatch {
-	fn to_cursors(&self, _s: &mut impl CursorSink) {
+	fn to_cursors(&self, _s: &mut (impl CursorSink + ?Sized)) {
 		unreachable!("NeverMatch should never be serialized")
 	}
 }

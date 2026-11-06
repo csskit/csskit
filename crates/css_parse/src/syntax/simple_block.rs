@@ -39,7 +39,7 @@ impl<'a> Parse<'a> for SimpleBlock<'a> {
 }
 
 impl<'a> ToCursors for SimpleBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.open, s);
 		ToCursors::to_cursors(&self.values, s);
 		ToCursors::to_cursors(&self.close, s);

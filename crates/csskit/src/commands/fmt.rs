@@ -52,10 +52,10 @@ impl Fmt {
 					let _ = stylesheet.accept(&mut highlighter);
 					let ansi = AnsiHighlightCursorStream::new(&mut str, &highlighter, DefaultAnsiTheme);
 					let mut stream = CursorPrettyWriteSink::new(source_text, ansi, *expand_tab, quotes);
-					result.to_cursors(&mut (&mut stream as &mut dyn CursorSink));
+					result.to_cursors(&mut stream as &mut dyn CursorSink);
 				} else {
 					let mut stream = CursorPrettyWriteSink::new(source_text, &mut str, *expand_tab, quotes);
-					result.to_cursors(&mut (&mut stream as &mut dyn CursorSink));
+					result.to_cursors(&mut stream as &mut dyn CursorSink);
 				}
 				if *check {
 					if str != source_text {

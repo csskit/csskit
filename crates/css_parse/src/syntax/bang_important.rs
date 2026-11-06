@@ -58,7 +58,7 @@ impl<'a> Parse<'a> for BangImportant {
 }
 
 impl ToCursors for BangImportant {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		s.append(self.bang.into());
 		s.append(self.important.into());
 	}

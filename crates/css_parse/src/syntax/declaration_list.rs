@@ -90,7 +90,7 @@ where
 	V: DeclarationValue<'a, M> + ToCursors,
 	M: NodeMetadata,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.open_curly, s);
 		ToCursors::to_cursors(&self.declarations, s);
 		ToCursors::to_cursors(&self.close_curly, s);

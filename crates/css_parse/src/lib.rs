@@ -77,7 +77,7 @@
 //!   dimension: T![Dimension],
 //! }
 //! impl ToCursors for MyProperty {
-//!   fn to_cursors(&self, s: &mut impl CursorSink) {
+//!   fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 //!     s.append(self.ident.into());
 //!     s.append(self.colon.into());
 //!     s.append(self.dimension.into());
@@ -266,7 +266,7 @@
 //!   }
 //! }
 //! impl ToCursors for MyProperty {
-//!   fn to_cursors(&self, s: &mut impl CursorSink) {
+//!   fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 //!     self.ident.to_cursors(s);
 //!     self.colon.to_cursors(s);
 //!     self.dimension.to_cursors(s);

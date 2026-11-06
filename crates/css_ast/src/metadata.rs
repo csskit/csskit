@@ -511,7 +511,7 @@ impl NodeMetadata for CssMetadata {
 
 // Metadata is not serialized to tokens but providing these simplifies ToCursors/ToSpan impls
 impl ToCursors for CssMetadata {
-	fn to_cursors(&self, _: &mut impl css_parse::CursorSink) {}
+	fn to_cursors(&self, _: &mut (impl css_parse::CursorSink + ?Sized)) {}
 }
 impl ToSpan for CssMetadata {
 	fn to_span(&self) -> Span {
@@ -522,7 +522,7 @@ impl ToSpan for CssMetadata {
 // CssTypes is not serialized to tokens; these no-op impls let it sit as a
 // non-node field on Unresolved under derive(ToCursors)/derive(ToSpan).
 impl ToCursors for CssTypes {
-	fn to_cursors(&self, _: &mut impl css_parse::CursorSink) {}
+	fn to_cursors(&self, _: &mut (impl css_parse::CursorSink + ?Sized)) {}
 }
 impl ToSpan for CssTypes {
 	fn to_span(&self) -> Span {

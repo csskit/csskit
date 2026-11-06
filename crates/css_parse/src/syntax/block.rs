@@ -208,7 +208,7 @@ where
 	R: ToCursors,
 	M: NodeMetadata,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.open_curly, s);
 		ToCursors::to_cursors(&self.declarations, s);
 		ToCursors::to_cursors(&self.rules, s);
@@ -271,7 +271,7 @@ mod tests {
 	}
 
 	impl ToCursors for Decl {
-		fn to_cursors(&self, s: &mut impl CursorSink) {
+		fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 			ToCursors::to_cursors(&self.0, s);
 		}
 	}
@@ -305,7 +305,7 @@ mod tests {
 	}
 
 	impl ToCursors for Rule {
-		fn to_cursors(&self, s: &mut impl CursorSink) {
+		fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 			ToCursors::to_cursors(&self.0, s);
 		}
 	}

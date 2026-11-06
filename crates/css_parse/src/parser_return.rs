@@ -29,7 +29,7 @@ impl<'a, T: ToCursors> ParserReturn<'a, T> {
 }
 
 impl<T: ToCursors> ToCursors for ParserReturn<'_, T> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		if let Some(output) = &self.output {
 			let eof_offset = css_lexer::SourceOffset(self.source_text.len() as u32);
 			let eof_cursor = crate::Cursor::new(eof_offset, css_lexer::Token::EOF);

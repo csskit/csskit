@@ -36,7 +36,7 @@ macro_rules! impl_optionals {
 			where
 				$($T: ToCursors,)+
 			{
-				fn to_cursors(&self, s: &mut impl CursorSink) {
+				fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 					let $name($($A),+) = self;
 					$($A.to_cursors(s);)+
 			 }

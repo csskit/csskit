@@ -27,7 +27,7 @@ impl<'a> StyleSheet<'a, ()> for Sheet<'a> {
 }
 
 impl ToCursors for Sheet<'_> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		for rule in &self.rules {
 			rule.to_cursors(s);
 		}
