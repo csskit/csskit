@@ -61,7 +61,7 @@ impl<'a> Parse<'a> for Nth {
 }
 
 impl ToCursors for Nth {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		match self {
 			Self::Odd(c) => ToCursors::to_cursors(c, s),
 			Self::Even(c) => ToCursors::to_cursors(c, s),

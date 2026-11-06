@@ -22,7 +22,7 @@ where
 	D: DeclarationValue<'a, M> + ToCursors,
 	M: NodeMetadata,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		match self {
 			Self::Declaration(d) => d.to_cursors(s),
 			Self::Bad(b) => b.to_cursors(s),

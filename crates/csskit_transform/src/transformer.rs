@@ -136,7 +136,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		);
 		let mut cursors = Vec::new_in(self.alloc());
 		let mut sink = CursorToSourceCursorSink::new(source, &mut cursors);
-		parsed.to_cursors(&mut (&mut sink as &mut dyn CursorSink));
+		parsed.to_cursors(&mut sink as &mut dyn CursorSink);
 		cursors
 	}
 

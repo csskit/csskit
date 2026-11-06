@@ -13,11 +13,11 @@ use crate::CursorSink;
 ///  - Doing so would require creating many intermediary enums or structs.
 ///
 pub trait ToCursors {
-	fn to_cursors(&self, s: &mut impl CursorSink);
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized));
 }
 
 impl ToCursors for Cursor {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		s.append(*self);
 	}
 }
@@ -26,7 +26,7 @@ impl<T> ToCursors for Option<T>
 where
 	T: ToCursors,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		if let Some(t) = self {
 			ToCursors::to_cursors(t, s);
 		}
@@ -37,7 +37,7 @@ impl<'a, T, A: Allocator> ToCursors for Vec<'a, T, A>
 where
 	T: ToCursors,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		for item in self.iter() {
 			ToCursors::to_cursors(item, s);
 		}
@@ -52,7 +52,7 @@ macro_rules! impl_tuple {
         {
             #[allow(non_snake_case)]
             #[allow(unused)]
-            fn to_cursors(&self, s: &mut impl CursorSink) {
+            fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
                 let ($($T),*) = self;
                 $($T.to_cursors(s);)*
             }

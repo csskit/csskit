@@ -5,7 +5,7 @@ use crate::{Cursor, CursorSink, Kind, Vec};
 /// slice of [Cursor]s, in the right places.
 ///
 /// This is useful as way to interleave ancilliary cursors, for example trivia.
-pub struct CursorInterleaveSink<'a, S> {
+pub struct CursorInterleaveSink<'a, S: ?Sized> {
 	sink: &'a mut S,
 	interleave: &'a [(Vec<'a, Cursor>, Cursor)],
 	current_index: usize,
@@ -13,7 +13,7 @@ pub struct CursorInterleaveSink<'a, S> {
 	seen_eof: bool,
 }
 
-impl<'a, S: CursorSink> CursorInterleaveSink<'a, S> {
+impl<'a, S: CursorSink + ?Sized> CursorInterleaveSink<'a, S> {
 	pub fn new(sink: &'a mut S, interleave: &'a [(Vec<'a, Cursor>, Cursor)]) -> Self {
 		Self {
 			sink,
@@ -25,7 +25,7 @@ impl<'a, S: CursorSink> CursorInterleaveSink<'a, S> {
 	}
 }
 
-impl<'a, S: CursorSink> CursorSink for CursorInterleaveSink<'a, S> {
+impl<'a, S: CursorSink + ?Sized> CursorSink for CursorInterleaveSink<'a, S> {
 	fn append(&mut self, c: Cursor) {
 		#[cfg(debug_assertions)]
 		{

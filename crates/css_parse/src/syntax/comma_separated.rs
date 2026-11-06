@@ -90,7 +90,7 @@ impl<'a, T: Parse<'a> + Peek<'a>, const MIN: usize> Parse<'a> for CommaSeparated
 }
 
 impl<'a, T: ToCursors, const MIN: usize> ToCursors for CommaSeparated<'a, T, MIN> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.items, s);
 	}
 }

@@ -6,7 +6,7 @@ use crate::{Arena, Cursor, CursorSink, Kind, SourceOffset, Vec};
 /// Many CSS grammars allow constructing a tree in arbitrarily authored order, but have a canonical ordering, so for e.g
 /// a function like `foo(bar, baz)` could be represented as `foo(baz, bar)` and still be valid. AST nodes output their
 /// cursors in grammar order, which is most often desirable, but this sink will enforce source ordering.
-pub struct CursorOrderedSink<'a, S> {
+pub struct CursorOrderedSink<'a, S: ?Sized> {
 	sink: &'a mut S,
 	/// Sorted buffer of cursors by start position
 	buffer: Vec<'a, Cursor>,
@@ -16,7 +16,7 @@ pub struct CursorOrderedSink<'a, S> {
 	seen_eof: bool,
 }
 
-impl<'a, S: CursorSink> CursorOrderedSink<'a, S> {
+impl<'a, S: CursorSink + ?Sized> CursorOrderedSink<'a, S> {
 	pub fn new(alloc: &'a Arena, sink: &'a mut S) -> Self {
 		Self {
 			sink,
@@ -41,7 +41,7 @@ impl<'a, S: CursorSink> CursorOrderedSink<'a, S> {
 	}
 }
 
-impl<'a, S: CursorSink> CursorSink for CursorOrderedSink<'a, S> {
+impl<'a, S: CursorSink + ?Sized> CursorSink for CursorOrderedSink<'a, S> {
 	// Insert cursor into the buffer, maintaining sorted order efficiently
 	//
 	// The algorithm models cursor coverage as an "array with holes" that get filled over time:

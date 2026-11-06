@@ -46,7 +46,7 @@ impl Expand {
 				let mut stream = CursorExpandedWriteSink::new(source_text, &mut str)
 					.with_extra_semicolons(*semicolons)
 					.with_escape_idents(*escape_idents);
-				result.to_cursors(&mut (&mut stream as &mut dyn CursorSink));
+				result.to_cursors(&mut stream as &mut dyn CursorSink);
 				if *check {
 					if str != source_text {
 						println!("{str}");
