@@ -1,3 +1,4 @@
+import addon from "./addon.js";
 export * from "./nodes.js";
 export * from "./om.js";
 import { StyleSheet } from "./nodes.js";
@@ -9,4 +10,9 @@ import { StyleSheet } from "./nodes.js";
  */
 export function parse(source, options) {
 	return (options?.context ?? StyleSheet).parse(source);
+}
+
+/** Minifies `source` as a stylesheet. Throws if `source` has a parse error. */
+export function minify(source) {
+	return addon.minify(source);
 }

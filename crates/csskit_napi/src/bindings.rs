@@ -8,6 +8,10 @@ use napi_derive::napi;
 
 use crate::ast::{Ast, Diagnostic, QueryMatch};
 use css_ast::visit::{NodeId, NodeKey, NodeVisitor, VisitNode};
+use css_ast::{CssAtomSet, StyleSheet};
+use css_lexer::Lexer;
+use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+use csskit_transform::{CssMinifierFeature, Transformer};
 use visit_flow::{VisitFlow, VisitFlowExt};
 
 // The object API is one JS class for each AST node kind. `Node` is the only native class. The JS
@@ -244,4 +248,24 @@ pub fn parse(source: String, tag: String) -> Result<Node> {
 #[napi]
 pub fn node_kinds() -> Vec<&'static str> {
 	NodeId::all_variants().map(NodeId::tag_name).collect()
+}
+
+/// Minifies `source` as a stylesheet. Throws the first diagnostic if `source` has a parse error.
+#[napi]
+pub fn minify(source: String) -> Result<String> {
+	let arena = Arena::default();
+	let lexer = Lexer::new(&CssAtomSet::ATOMS, &source);
+	let mut result = Parser::new(&arena, &source, lexer).parse_entirely::<StyleSheet>().with_trivia();
+	if let Some(err) = result.errors.first() {
+		return Err(napi::Error::from_reason(err.meta(&source).message));
+	}
+	let mut output = String::new();
+	if let Some(stylesheet) = &mut result.output {
+		let mut transformer = Transformer::new_in(&arena, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source);
+		transformer.transform(stylesheet);
+		let overlays = transformer.overlays();
+		let mut sink = CursorOverlaySink::new(&source, &overlays, CursorCompactWriteSink::new(&source, &mut output));
+		result.to_cursors(&mut sink);
+	}
+	Ok(output)
 }

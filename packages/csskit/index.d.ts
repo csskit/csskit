@@ -70,6 +70,9 @@ export declare class Node {
 export declare function parse<T extends Node>(source: string, options: { context: { parse(source: string): T } }): T;
 export declare function parse(source: string, options?: { context?: undefined }): nodeClasses.StyleSheet;
 
+/** Minifies `source` as a stylesheet. Throws if `source` has a parse error. */
+export declare function minify(source: string): string;
+
 export declare const Color: typeof nodeClasses.Color;
 export declare const ComponentValues: typeof nodeClasses.ComponentValues;
 export declare const SelectorList: typeof nodeClasses.SelectorList;
