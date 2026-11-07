@@ -32,7 +32,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	Ok(quote! {
 		#[automatically_derived]
 		impl #impl_generics ::css_parse::ToCursors for #ident #type_generics #where_clause {
-			fn to_cursors(&self, s: &mut impl ::css_parse::CursorSink) {
+			fn to_cursors(&self, s: &mut (impl ::css_parse::CursorSink + ?Sized)) {
 				#body
 			}
 		}

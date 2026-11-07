@@ -37,7 +37,7 @@ impl<'a, Left: Parse<'a> + Peek<'a>, Right: Parse<'a>> Parse<'a> for Either<Left
 }
 
 impl<Left: ToCursors, Right: ToCursors> ToCursors for Either<Left, Right> {
-	fn to_cursors(&self, s: &mut impl crate::CursorSink) {
+	fn to_cursors(&self, s: &mut (impl crate::CursorSink + ?Sized)) {
 		match self {
 			Self::Left(t) => t.to_cursors(s),
 			Self::Right(t) => t.to_cursors(s),

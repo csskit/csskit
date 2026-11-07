@@ -1,5 +1,5 @@
 use super::prelude::*;
-use css_parse::{CursorExpandedWriteSink, ToCursors};
+use css_parse::{CursorExpandedWriteSink, CursorSink, ToCursors};
 
 /// Expand CSS files to their most verbose form (the opposite of minify).
 #[derive(Debug, Args)]
@@ -46,7 +46,7 @@ impl Expand {
 				let mut stream = CursorExpandedWriteSink::new(source_text, &mut str)
 					.with_extra_semicolons(*semicolons)
 					.with_escape_idents(*escape_idents);
-				result.to_cursors(&mut stream);
+				result.to_cursors(&mut stream as &mut dyn CursorSink);
 				if *check {
 					if str != source_text {
 						println!("{str}");

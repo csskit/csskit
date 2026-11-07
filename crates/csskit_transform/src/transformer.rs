@@ -2,8 +2,8 @@ use atom_set::{AtomSet, DynAtomSet};
 use css_lexer::{Cursor, KindSet, Lexer, ToSpan};
 use css_parse::Vec;
 use css_parse::{
-	Arena, CursorOverlaySet, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind, OverlaySegment,
-	Parse, Parser, SourceCursor, SourceOffset, Span, ToCursors,
+	Arena, CursorOverlaySet, CursorSink, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind,
+	OverlaySegment, Parse, Parser, SourceCursor, SourceOffset, Span, ToCursors,
 };
 use std::{cell::RefCell, fmt::Write, marker::PhantomData};
 
@@ -136,7 +136,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		);
 		let mut cursors = Vec::new_in(self.alloc());
 		let mut sink = CursorToSourceCursorSink::new(source, &mut cursors);
-		parsed.to_cursors(&mut sink);
+		parsed.to_cursors(&mut sink as &mut dyn CursorSink);
 		cursors
 	}
 

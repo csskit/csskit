@@ -1,5 +1,5 @@
 use super::prelude::*;
-use css_parse::{CursorCompactWriteSink, ToCursors};
+use css_parse::{CursorCompactWriteSink, CursorSink, ToCursors};
 
 /// Convert one or more CSS files into production ready CSS.
 #[derive(Debug, Args)]
@@ -26,7 +26,7 @@ impl Build {
 			let result = parser.parse_entirely::<StyleSheet>();
 			if result.output.is_some() {
 				let mut stream = CursorCompactWriteSink::new(source_text, &mut str);
-				result.with_trivia().to_cursors(&mut stream);
+				result.with_trivia().to_cursors(&mut stream as &mut dyn CursorSink);
 			} else {
 				for compact_err in result.errors {
 					let report = crate::commands::format_diagnostic_error(&compact_err, source_text, file_name);

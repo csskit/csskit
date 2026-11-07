@@ -28,7 +28,7 @@ impl<'a> Parse<'a> for FunctionBlock<'a> {
 }
 
 impl<'a> ToCursors for FunctionBlock<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.name, s);
 		ToCursors::to_cursors(&self.params, s);
 		ToCursors::to_cursors(&self.close, s);

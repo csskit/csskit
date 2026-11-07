@@ -111,7 +111,7 @@ impl<'a> DeclarationValue<'a, ()> for ComponentValues<'a> {
 }
 
 impl<'a> ToCursors for ComponentValues<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.values, s)
 	}
 }

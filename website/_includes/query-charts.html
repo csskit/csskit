@@ -1,0 +1,6 @@
+{%- for group in groups -%}
+<details name="{{ name }}"{% if forloop.first %} open{% endif %}>
+<summary>{{ group.name | escape }}</summary>
+{%- include 'line-charts.html', charts: group.charts -%}
+</details>
+{%- endfor -%}

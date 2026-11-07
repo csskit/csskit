@@ -57,7 +57,7 @@ impl<'a> Parse<'a> for Comparison {
 }
 
 impl ToCursors for Comparison {
-	fn to_cursors(&self, s: &mut impl crate::CursorSink) {
+	fn to_cursors(&self, s: &mut (impl crate::CursorSink + ?Sized)) {
 		match self {
 			Self::LessThan(c) => ToCursors::to_cursors(c, s),
 			Self::GreaterThan(c) => ToCursors::to_cursors(c, s),

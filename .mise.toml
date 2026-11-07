@@ -28,7 +28,7 @@ alias = "b"
 description = "Build release"
 sources = ["Cargo.toml", "crates/**/*.toml", "crates/**/*.rs"]
 outputs = ["target/release/csskit"]
-run = "cargo build --all-features --release"
+run = "cargo build --all-features --release -p csskit"
 
 [tasks.build-release-debug]
 description = "Build release-debug"
