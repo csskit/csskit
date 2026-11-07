@@ -1,7 +1,13 @@
-## [0.0.37] - 2026-11-04
+## [0.0.38] - 2026-11-07
+
+### Csskit
+- csskit_napi: Add minify function (#1650) ([#1650](https://github.com/csskit/csskit/pull/1650))
+
+## [0.0.37] - 2026-11-07
 
 ### Other Changes
 - Chore(deps): update dependencies (patch) (#1633) ([#1633](https://github.com/csskit/csskit/pull/1633))
+- Chore(deps): update rust crate browserslist-rs to 0.22.0 (#1641) ([#1641](https://github.com/csskit/csskit/pull/1641))
 
 
 ### Css_ast
@@ -12,6 +18,7 @@
 - css_parse: Lazily get metadata on Declaration/QualifiedRule (#1630) ([#1630](https://github.com/csskit/csskit/pull/1630))
 - csskit_transform: Compare declarations only against later shorthands (#1631) ([#1631](https://github.com/csskit/csskit/pull/1631))
 - Regenerate css_ast/src/values from csswg drafts (#1632) ([#1632](https://github.com/csskit/csskit/pull/1632))
+- css_parse: Allow sinks to be unsized (#1645) ([#1645](https://github.com/csskit/csskit/pull/1645))
 
 
 ### Css_lexer
@@ -22,9 +29,15 @@
 - css_lexer: Rewrite number compaction (#1628) ([#1628](https://github.com/csskit/csskit/pull/1628))
 
 
+### Css_parse
+- css_parse/csskit_transform/csskit: Make CursorSink dyn (#1643) ([#1643](https://github.com/csskit/csskit/pull/1643))
+- css_parse: Track processed overlay ranges in a sorted Vec (#1647) ([#1647](https://github.com/csskit/csskit/pull/1647))
+
+
 ### Csskit
 - chore(deps): update dependencies (patch) (#1607) ([#1607](https://github.com/csskit/csskit/pull/1607))
 - lsp_service: extract out lsp service from csskit_lsp (#1639) ([#1639](https://github.com/csskit/csskit/pull/1639))
+- Release v0.0.37 (#1612) ([#1612](https://github.com/csskit/csskit/pull/1612))
 
 
 ### Csskit_transform
