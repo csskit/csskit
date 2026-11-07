@@ -5,7 +5,7 @@ default-members = ["crates/*"]
 exclude = ["packages/csskit_zed"]
 
 [workspace.package]
-version = "0.0.36"                                     # @release
+version = "0.0.37"                                     # @release
 authors = ["Keith Cirkel (https://keithcirkel.co.uk)"]
 edition = "2024"
 description = "Refreshing CSS!"
@@ -19,30 +19,31 @@ warnings = { level = "deny", priority = -1 }
 unsafe_code = "deny"
 
 [workspace.dependencies]
-atom_set = { path = "crates/atom_set", version = "0.0.36" }                                                                          # @release
-chromashift = { path = "crates/chromashift", version = "0.0.36" }                                                                    # @release
-css_ast = { path = "crates/css_ast", version = "0.0.36" }                                                                            # @release
-css_feature_data = { path = "crates/css_feature_data", version = "0.0.36" }                                                          # @release
-css_lexer = { path = "crates/css_lexer", version = "0.0.36" }                                                                        # @release
-css_parse = { path = "crates/css_parse", version = "0.0.36" }                                                                        # @release
-css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.36" }                                    # @release
-csskit = { path = "crates/csskit", version = "0.0.36" }                                                                              # @release
-csskit_arena = { path = "crates/csskit_arena", version = "0.0.36" }                                                                  # @release
-csskit_ast = { path = "crates/csskit_ast", version = "0.0.36" }                                                                      # @release
-csskit_derives = { path = "crates/csskit_derives", version = "0.0.36" }                                                              # @release
-csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.36" }                                                          # @release
-csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.36" }                                                                      # @release
-csskit_napi = { path = "crates/csskit_napi", version = "0.0.36" }                                                                    # @release
-csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.36" }                                                        # @release
-csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.36" }                                                  # @release
-csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.36" }                                                  # @release
-csskit_transform = { path = "crates/csskit_transform", version = "0.0.36" }                                                          # @release
-derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.36" }                                                            # @release
-bytescan = { path = "crates/bytescan", version = "0.0.36" }                                                                          # @release
-source_tools = { path = "crates/source_tools", version = "0.0.36" }                                                                  # @release
-stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.36" }                      # @release
-stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.36" } # @release
-visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.36" }                                              # @release
+atom_set = { path = "crates/atom_set", version = "0.0.37" }                                                                          # @release
+chromashift = { path = "crates/chromashift", version = "0.0.37" }                                                                    # @release
+css_ast = { path = "crates/css_ast", version = "0.0.37" }                                                                            # @release
+css_feature_data = { path = "crates/css_feature_data", version = "0.0.37" }                                                          # @release
+css_lexer = { path = "crates/css_lexer", version = "0.0.37" }                                                                        # @release
+css_parse = { path = "crates/css_parse", version = "0.0.37" }                                                                        # @release
+css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.37" }                                    # @release
+csskit = { path = "crates/csskit", version = "0.0.37" }                                                                              # @release
+csskit_arena = { path = "crates/csskit_arena", version = "0.0.37" }                                                                  # @release
+csskit_ast = { path = "crates/csskit_ast", version = "0.0.37" }                                                                      # @release
+csskit_derives = { path = "crates/csskit_derives", version = "0.0.37" }                                                              # @release
+csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.37" }                                                          # @release
+csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.37" }                                                                      # @release
+lsp_service = { path = "crates/lsp_service", version = "0.0.37" }                                                                    # @release
+csskit_napi = { path = "crates/csskit_napi", version = "0.0.37" }                                                                    # @release
+csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.37" }                                                        # @release
+csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.37" }                                                  # @release
+csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.37" }                                                  # @release
+csskit_transform = { path = "crates/csskit_transform", version = "0.0.37" }                                                          # @release
+derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.37" }                                                            # @release
+bytescan = { path = "crates/bytescan", version = "0.0.37" }                                                                          # @release
+source_tools = { path = "crates/source_tools", version = "0.0.37" }                                                                  # @release
+stable_type_layout = { package = "stable-type-layout", path = "crates/stable_type_layout", version = "0.0.37" }                      # @release
+stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.37" } # @release
+visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.37" }                                              # @release
 # Memory
 allocator-api2 = { version = "0.4.0" }
 inventory = { version = "0.3.25" }
@@ -57,7 +58,7 @@ fearless_simd = { version = "1.2.0" }
 indexmap = { version = "2.14.2" }
 itertools = { version = "0.15.0" }
 phf = { version = "0.14.0" }
-ropey = { version = "1.6.1" }
+ropey = { version = "1.6.1", default-features = false, features = ["cr_lines", "simd"] }
 smallvec = { version = "1.16.4" }
 strum = { version = "0.28.0" }
 
@@ -121,7 +122,7 @@ tokio = { version = "1.54.1" }
 console_error_panic_hook = { version = "0.1.7" }
 serde-wasm-bindgen = { version = "0.6.5" }
 # Wasm
-wasm-bindgen = { version = "0.2.129" }
+wasm-bindgen = { version = "0.2.130" }
 wasm-bindgen-test = { version = "0.3.79" }
 web-sys = { version = "0.3.106" }
 
@@ -131,7 +132,7 @@ napi-derive = { version = "3.6.13" }
 napi-build = { version = "2.6.0" }
 
 # CSS Feature Data packages
-browserslist-rs = { version = "0.21.2", default-features = false }
+browserslist-rs = { version = "0.22.0", default-features = false }
 chrono = { version = "0.4.45", default-features = false }
 
 # For faster compiles during development, opt-level some dynamic libraries and limit debug generation

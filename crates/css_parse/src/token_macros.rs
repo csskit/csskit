@@ -5,7 +5,7 @@ use crate::{
 macro_rules! cursor_wrapped {
 	($ident:ident) => {
 		impl $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl CursorSink) {
+			fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 				s.append((*self).into());
 			}
 		}
@@ -60,7 +60,7 @@ macro_rules! define_kind_common {
 		}
 
 		impl $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+			fn to_cursors(&self, s: &mut (impl $crate::CursorSink + ?Sized)) {
 				s.append((*self).into());
 			}
 		}
@@ -143,7 +143,7 @@ macro_rules! define_kind_idents {
 		pub struct $ident($crate::Cursor);
 
 		impl $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+			fn to_cursors(&self, s: &mut (impl $crate::CursorSink + ?Sized)) {
 				s.append((*self).into());
 			}
 		}
@@ -239,7 +239,7 @@ macro_rules! custom_delim {
 		}
 
 		impl $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+			fn to_cursors(&self, s: &mut (impl $crate::CursorSink + ?Sized)) {
 				s.append((*self).into());
 			}
 		}
@@ -359,7 +359,7 @@ macro_rules! custom_double_delim {
 		}
 
 		impl<'a> $crate::ToCursors for $ident {
-			fn to_cursors(&self, s: &mut impl $crate::CursorSink) {
+			fn to_cursors(&self, s: &mut (impl $crate::CursorSink + ?Sized)) {
 				s.append(self.0.into());
 				s.append(self.1.into());
 			}
@@ -885,7 +885,7 @@ pub mod double {
 	}
 
 	impl ToCursors for ColonColon {
-		fn to_cursors(&self, s: &mut impl CursorSink) {
+		fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 			s.append(self.0.into());
 			s.append(self.1.into());
 		}

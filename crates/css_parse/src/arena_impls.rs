@@ -4,7 +4,7 @@ use css_lexer::KindSet;
 use csskit_arena::Box;
 
 impl<'a, T: ToCursors, A: Allocator> ToCursors for Box<'a, T, A> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		(**self).to_cursors(s);
 	}
 }

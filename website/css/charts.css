@@ -1,0 +1,520 @@
+@property --c {
+	syntax: "<color>";
+	inherits: true;
+	initial-value: currentColor;
+}
+
+@property --step {
+	syntax: "<length>";
+	inherits: true;
+	initial-value: 0px;
+}
+
+@property --y-axis-width {
+	syntax: "<length>";
+	inherits: true;
+	initial-value: 56px;
+}
+
+.chart-card {
+	--card: light-dark(var(--neutral-1), var(--neutral-13));
+	--text: light-dark(var(--neutral-12), var(--neutral-1));
+	--muted: color-mix(in srgb, var(--text) 70%, transparent);
+	--grid: light-dark(rgb(0 0 0 / 0.2), rgb(255 255 255 / 0.2));
+	--border: var(--grid);
+	--tip: light-dark(var(--neutral-2), var(--neutral-13));
+	--ok: light-dark(var(--emerald-8), var(--emerald-7));
+	--warn: light-dark(var(--gold-7), var(--amber-5));
+	--danger: light-dark(var(--red-9), var(--orange-6));
+	margin: var(--space-5) 0;
+	padding: var(--space-4) var(--space-5);
+	background: var(--card);
+	color: var(--text);
+	border-radius: var(--radius-2);
+	font-family: system-ui, sans-serif;
+}
+
+.chart {
+	display: grid;
+	grid-template-columns: minmax(0, 1fr);
+	width: 100%;
+	border: 0;
+	border-radius: 0;
+	background: none;
+	border-collapse: collapse;
+	container-type: inline-size;
+	font-size: var(--text-sm);
+
+	:is(th, td) {
+		max-inline-size: none;
+		padding: 0;
+		background: none;
+		text-align: start;
+	}
+
+	th {
+		font-weight: normal;
+		white-space: nowrap;
+	}
+
+	caption {
+		margin: 0 0 var(--space-4);
+		text-align: start;
+		font-family: var(--font-ui);
+		font-size: var(--text-lg);
+		font-weight: 500;
+	}
+
+	caption small {
+		display: block;
+		max-inline-size: none;
+		margin-top: var(--space-1);
+		font-size: var(--text-sm);
+		color: var(--muted);
+	}
+
+	tfoot {
+		order: 0;
+	}
+
+	thead {
+		order: 1;
+	}
+
+	thead tr {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: center;
+		gap: 0.3rem 1rem;
+		padding-top: 1rem;
+		font-size: var(--text-sm);
+	}
+}
+
+.lines :is(thead th, td) {
+	&:nth-child(5n + 2) {
+		--c: light-dark(oklch(from var(--sky-8) l c h / 0.85), oklch(from var(--teal-8) l c h / 0.85));
+	}
+	&:nth-child(5n + 3) {
+		--c: light-dark(oklch(from var(--teal-8) l c h / 0.85), oklch(from var(--lime-7) l c h / 0.85));
+	}
+	&:nth-child(5n + 4) {
+		--c: light-dark(oklch(from var(--gold-7) l c h / 0.85), oklch(from var(--cyan-8) l c h / 0.85));
+	}
+	&:nth-child(5n + 5) {
+		--c: light-dark(oklch(from var(--rose-7) l c h / 0.85), oklch(from var(--red-5) l c h / 0.85));
+	}
+	&:nth-child(5n + 6) {
+		--c: light-dark(oklch(from var(--violet-6) l c h / 0.85), oklch(from var(--neutral-8) l c h / 0.85));
+	}
+}
+
+.bars :is(thead th, td) {
+	&[data-series="lightningcss"] {
+		--c: var(--amber-7);
+	}
+	&[data-series="cssnano"] {
+		--c: var(--teal-5);
+	}
+	&[data-series="esbuild"] {
+		--c: var(--amber-3);
+	}
+	&[data-series="csskit"] {
+		--c: var(--purple-11);
+	}
+}
+
+.chart {
+	thead th:first-child {
+		font-size: 0;
+	}
+
+	thead th:has(input:not(:checked)) {
+		opacity: 0.5;
+	}
+
+	label {
+		cursor: pointer;
+		user-select: none;
+	}
+
+	&[data-interactive] caption small::after {
+		content: " Shift-click a legend entry to invert the selection.";
+	}
+
+	input {
+		margin: 0 0.3rem 0 0;
+		vertical-align: -2px;
+		accent-color: var(--c);
+	}
+}
+
+.chart:has(thead th:nth-child(2) input:not(:checked)) td:nth-child(2),
+.chart:has(thead th:nth-child(3) input:not(:checked)) td:nth-child(3),
+.chart:has(thead th:nth-child(4) input:not(:checked)) td:nth-child(4),
+.chart:has(thead th:nth-child(5) input:not(:checked)) td:nth-child(5),
+.chart:has(thead th:nth-child(6) input:not(:checked)) td:nth-child(6),
+.chart:has(thead th:nth-child(7) input:not(:checked)) td:nth-child(7),
+.chart:has(thead th:nth-child(8) input:not(:checked)) td:nth-child(8),
+.chart:has(thead th:nth-child(9) input:not(:checked)) td:nth-child(9),
+.chart:has(thead th:nth-child(10) input:not(:checked)) td:nth-child(10),
+.chart:has(thead th:nth-child(11) input:not(:checked)) td:nth-child(11),
+.chart:has(thead th:nth-child(12) input:not(:checked)) td:nth-child(12),
+.chart:has(thead th:nth-child(13) input:not(:checked)) td:nth-child(13),
+.chart:has(thead th:nth-child(14) input:not(:checked)) td:nth-child(14),
+.chart:has(thead th:nth-child(15) input:not(:checked)) td:nth-child(15),
+.chart:has(thead th:nth-child(16) input:not(:checked)) td:nth-child(16),
+.chart:has(thead th:nth-child(17) input:not(:checked)) td:nth-child(17),
+.chart:has(thead th:nth-child(18) input:not(:checked)) td:nth-child(18),
+.chart:has(thead th:nth-child(19) input:not(:checked)) td:nth-child(19),
+.chart:has(thead th:nth-child(20) input:not(:checked)) td:nth-child(20),
+.chart:has(thead th:nth-child(21) input:not(:checked)) td:nth-child(21),
+.chart:has(thead th:nth-child(22) input:not(:checked)) td:nth-child(22),
+.chart:has(thead th:nth-child(23) input:not(:checked)) td:nth-child(23),
+.chart:has(thead th:nth-child(24) input:not(:checked)) td:nth-child(24),
+.chart:has(thead th:nth-child(25) input:not(:checked)) td:nth-child(25) {
+	display: none;
+}
+
+.chart:has(thead th:nth-child(2):hover) td:not(:nth-child(2)),
+.chart:has(thead th:nth-child(3):hover) td:not(:nth-child(3)),
+.chart:has(thead th:nth-child(4):hover) td:not(:nth-child(4)),
+.chart:has(thead th:nth-child(5):hover) td:not(:nth-child(5)),
+.chart:has(thead th:nth-child(6):hover) td:not(:nth-child(6)),
+.chart:has(thead th:nth-child(7):hover) td:not(:nth-child(7)),
+.chart:has(thead th:nth-child(8):hover) td:not(:nth-child(8)),
+.chart:has(thead th:nth-child(9):hover) td:not(:nth-child(9)),
+.chart:has(thead th:nth-child(10):hover) td:not(:nth-child(10)),
+.chart:has(thead th:nth-child(11):hover) td:not(:nth-child(11)),
+.chart:has(thead th:nth-child(12):hover) td:not(:nth-child(12)),
+.chart:has(thead th:nth-child(13):hover) td:not(:nth-child(13)),
+.chart:has(thead th:nth-child(14):hover) td:not(:nth-child(14)),
+.chart:has(thead th:nth-child(15):hover) td:not(:nth-child(15)),
+.chart:has(thead th:nth-child(16):hover) td:not(:nth-child(16)),
+.chart:has(thead th:nth-child(17):hover) td:not(:nth-child(17)),
+.chart:has(thead th:nth-child(18):hover) td:not(:nth-child(18)),
+.chart:has(thead th:nth-child(19):hover) td:not(:nth-child(19)),
+.chart:has(thead th:nth-child(20):hover) td:not(:nth-child(20)),
+.chart:has(thead th:nth-child(21):hover) td:not(:nth-child(21)),
+.chart:has(thead th:nth-child(22):hover) td:not(:nth-child(22)),
+.chart:has(thead th:nth-child(23):hover) td:not(:nth-child(23)),
+.chart:has(thead th:nth-child(24):hover) td:not(:nth-child(24)),
+.chart:has(thead th:nth-child(25):hover) td:not(:nth-child(25)) {
+	opacity: 0.15;
+}
+
+.lines {
+	--h: 22rem;
+	padding-left: var(--y-axis-width);
+
+	caption {
+		margin-left: calc(var(--y-axis-width) * -1);
+	}
+
+	tbody {
+		display: flex;
+		position: relative;
+		isolation: isolate;
+		height: var(--h);
+		margin-bottom: 1.5rem;
+		border-bottom: 1px solid var(--grid);
+		background: linear-gradient(var(--grid) 1px, transparent 0) 0 0 / 100% calc(var(--h) / 4);
+	}
+
+	tbody::before {
+		content: var(--y-axis);
+		position: absolute;
+		right: 100%;
+		bottom: calc(var(--h) / -8);
+		padding-right: 0.5rem;
+		white-space: pre;
+		line-height: calc(var(--h) / 4);
+		text-align: end;
+		font-size: var(--text-xs);
+	}
+
+	tbody::after,
+	tbody tr:first-child::after {
+		position: absolute;
+		color: var(--threshold-color, var(--ok));
+		border-bottom: 2px dashed var(--threshold-color, var(--ok));
+		text-align: end;
+		pointer-events: none;
+	}
+
+	tbody::after {
+		content: var(--threshold-label, none);
+		inset: auto 0 calc((var(--threshold) - var(--min)) / (var(--max) - var(--min)) * var(--h)) 0;
+	}
+
+	tbody tr:first-child::after {
+		--threshold-color: var(--threshold-2-color);
+		content: var(--threshold-2-label, none);
+		left: 50%;
+		width: 100cqw;
+		bottom: calc((var(--threshold-2) - var(--min)) / (var(--max) - var(--min)) * var(--h));
+	}
+
+	tbody tr {
+		--step: calc(100cqw / (sibling-count() - 1));
+		--dx: var(--step);
+		flex: none;
+		width: var(--step);
+		position: relative;
+	}
+
+	tbody tr:first-child {
+		--dx: 0px;
+		margin-left: calc(var(--step) / -2);
+	}
+
+	tbody tr:first-child td {
+		--y0: var(--y1);
+	}
+
+	tbody th {
+		position: absolute;
+		top: 100%;
+		left: 50%;
+		translate: -50%;
+		padding-top: 0.4rem;
+		font-size: var(--text-xs);
+	}
+
+	tbody tr:not(:nth-child(4n + 1)) th,
+	tbody:has(tr:hover) th {
+		color: transparent;
+	}
+
+	@container (width < 40rem) {
+		tbody tr:not(:nth-child(8n + 1)) th {
+			color: transparent;
+		}
+	}
+
+	tbody tr:hover th {
+		color: var(--text);
+		font-weight: bold;
+	}
+
+	td {
+		--y0: calc((var(--a, var(--b)) - var(--min)) / (var(--max) - var(--min)));
+		--y1: calc((var(--b) - var(--min)) / (var(--max) - var(--min)));
+		--line: linear-gradient(var(--c) 0 0) 0 50% / calc(100% - 6px) 2px no-repeat;
+		display: block;
+		font-size: 0;
+	}
+
+	td::before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		left: calc(50% - var(--dx) - 1px);
+		bottom: calc(var(--y0) * var(--h) - 6px);
+		height: 12px;
+		transform-origin: 1px 50%;
+		width: calc(hypot(var(--dx), (var(--y1) - var(--y0)) * var(--h)) + 8px);
+		rotate: atan2((var(--y0) - var(--y1)) * var(--h), var(--dx));
+		background: var(--line);
+		pointer-events: none;
+	}
+
+	td::after {
+		content: attr(data-series) ":";
+		order: -1;
+		font-weight: normal;
+	}
+
+	tbody tr:hover {
+		z-index: 1;
+		display: grid;
+		grid-template-columns: calc(50% + 12px) max-content;
+		align-content: start;
+	}
+
+	tbody tr:hover::before {
+		content: "";
+		position: absolute;
+		z-index: -1;
+		inset: 0 auto 0 50%;
+		border-left: 1px dashed var(--muted);
+	}
+
+	tbody tr:hover td::before {
+		background: radial-gradient(circle at calc(100% - 7px) 50%, var(--c) 4px, transparent 4.5px), var(--line);
+	}
+
+	tbody tr:hover td {
+		grid-column: 2;
+		position: static;
+		translate: none;
+		display: flex;
+		gap: 0.3rem;
+		white-space: nowrap;
+		padding: 0.15rem 0.6rem 0.15rem 1.4rem;
+		border-inline: 1px solid var(--border);
+		background: radial-gradient(circle at 0.7rem 50%, var(--c) 0.3rem, transparent calc(0.3rem + 0.5px)), var(--tip);
+		color: var(--text);
+		font-size: var(--text-xs);
+		font-weight: bold;
+		pointer-events: none;
+	}
+
+	tbody tr:hover td:empty {
+		display: none;
+	}
+
+	tbody tr:hover td:nth-child(2) {
+		padding-top: 0.4rem;
+		border-top: 1px solid var(--border);
+		border-radius: 0.3rem 0.3rem 0 0;
+	}
+
+	tbody tr:hover td:last-child {
+		padding-bottom: 0.4rem;
+		border-bottom: 1px solid var(--border);
+		border-radius: 0 0 0.3rem 0.3rem;
+	}
+
+	tbody tr:nth-last-child(-n + 12):hover {
+		grid-template-columns: max-content calc(50% + 12px);
+		justify-content: end;
+	}
+
+	tbody tr:nth-last-child(-n + 12):hover td {
+		grid-column: 1;
+	}
+
+	&[data-interactive] tbody {
+		cursor: zoom-in;
+	}
+
+	&[data-interactive] caption small::after {
+		content: " Click the plot to zoom in, shift-click a legend entry to invert the selection.";
+	}
+
+	&[data-zoomed] {
+		tbody {
+			cursor: zoom-out;
+		}
+
+		caption small::after {
+			content: " Click the plot to zoom out, shift-click a legend entry to invert the selection.";
+		}
+
+		tbody:not(:has(tr:hover)) th {
+			color: inherit;
+		}
+
+		tbody tr:hover {
+			grid-template-columns: calc(50% + 12px) max-content;
+			justify-content: normal;
+		}
+
+		tbody tr:hover td {
+			grid-column: 2;
+		}
+
+		tbody tr:nth-last-child(-n + 3):hover {
+			grid-template-columns: max-content calc(50% + 12px);
+			justify-content: end;
+		}
+
+		tbody tr:nth-last-child(-n + 3):hover td {
+			grid-column: 1;
+		}
+	}
+}
+
+.bars {
+	--bar: 0.85rem;
+	--label: min(12rem, 35cqw);
+	--plot: calc(100cqw - var(--label));
+
+	tbody tr {
+		display: grid;
+		grid-template-columns: var(--label) 1fr;
+		padding: 0.5rem 0;
+		border-bottom: 1px solid var(--grid);
+		background: repeating-linear-gradient(90deg, var(--grid) 0 1px, transparent 0 calc(var(--plot) / 5)) var(--label) 0 /
+			var(--plot) 100% no-repeat;
+	}
+
+	tbody tr:hover {
+		background-color: var(--tip);
+	}
+
+	tbody th {
+		grid-row: span 16;
+		align-self: center;
+		overflow: hidden;
+		padding-right: var(--space-2);
+		text-overflow: ellipsis;
+	}
+
+	@container (width < 40rem) {
+		tfoot th:nth-child(odd) {
+			visibility: hidden;
+		}
+	}
+
+	td {
+		--w: calc(var(--v, 0) / var(--max) * var(--plot));
+		grid-column: 2;
+		height: var(--bar);
+		padding-left: min(var(--w) + 0.3rem, var(--plot) - 9rem);
+		line-height: var(--bar);
+		font-size: 0;
+		white-space: nowrap;
+		background: linear-gradient(var(--c) 0 0) 0 50% / var(--w) calc(100% - 3px) no-repeat;
+	}
+
+	td::before {
+		content: attr(data-series) " ";
+	}
+
+	tbody tr:hover td {
+		font-size: var(--text-xs);
+		font-weight: bold;
+		text-shadow:
+			0 0 2px var(--tip),
+			0 0 2px var(--tip),
+			0 0 2px var(--tip);
+	}
+
+	tfoot tr {
+		display: block;
+		position: relative;
+		height: 1.75rem;
+		margin-left: var(--label);
+		width: var(--plot);
+	}
+
+	tfoot th {
+		position: absolute;
+		top: 0.3rem;
+		left: calc((sibling-index() - 2) * 20%);
+		translate: -50%;
+		font-size: var(--text-xs);
+	}
+
+	tfoot th:first-child {
+		display: none;
+	}
+
+	tfoot th:last-child {
+		translate: -100%;
+	}
+}
+
+details:has(> .chart-card) {
+	> summary {
+		cursor: pointer;
+		font-family: system-ui, sans-serif;
+		font-size: var(--text-md);
+	}
+
+	& + & {
+		margin-top: var(--space-2);
+	}
+}

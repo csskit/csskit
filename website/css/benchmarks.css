@@ -38,7 +38,7 @@
 	overflow-x: scroll;
 }
 
-table {
+[scroller] table {
 	width: 100%;
 
 	td {
@@ -73,11 +73,4 @@ table {
 	color: var(--color-error);
 	font-weight: 500;
 	font-size: var(--text-sm);
-}
-
-.apexcharts-canvas {
-	content-visibility: auto;
-	contain: strict;
-	min-height: 300px;
-	min-width: 100%;
 }

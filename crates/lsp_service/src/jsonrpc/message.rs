@@ -3,9 +3,9 @@ use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use serde_json::{Error, Value, from_value, to_string, to_value};
 use std::io;
 
-use crate::{Notification, Request, Response};
+use crate::{Notification, Request, Response, ResponseError};
 
-use super::{ErrorCode, Id};
+use super::Id;
 
 /// JSON RPC Message
 /// This represents a single message coming in or going out, that is
@@ -65,9 +65,9 @@ impl Message {
 		}
 	}
 
-	pub fn from_result(id: Id, result: Result<impl Serialize, ErrorCode>) -> Message {
+	pub fn from_result(id: Id, result: Result<impl Serialize, ResponseError>) -> Message {
 		match result {
-			Err(code) => Message::Response(Response::Err(id, code, "".into(), Value::Null)),
+			Err(ResponseError { code, message }) => Message::Response(Response::Err(id, code, message, Value::Null)),
 			Ok(value) => Message::Response(Response::Ok(id, to_value(value).unwrap())),
 		}
 	}

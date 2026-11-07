@@ -24,6 +24,7 @@ The crates follow a layered architecture:
 ## Tool & Extension Crates
 
 - [`csskit_lsp`](./csskit_lsp/) - [Language Server Protocol](https://microsoft.github.io/language-server-protocol/) implementation for csskit ([docs](https://csskit.rs/docs/internal/csskit_lsp/))
+- [`lsp_service`](./lsp_service/) - Language-agnostic LSP transport, `Handler` dispatch and position encoding used by `csskit_lsp` ([docs](https://csskit.rs/docs/internal/lsp_service/))
 - [`csskit_highlight`](./csskit_highlight/) - Syntax highlighting utilities ([docs](https://csskit.rs/docs/internal/csskit_highlight/))
 - [`csskit_transform`](./csskit_transform/) - CSS transformation and optimization utilities ([docs](https://csskit.rs/docs/internal/csskit_transform/))
 - [`csskit_wasm`](./csskit_wasm/) - WebAssembly bindings for browser/Node/Deno ([docs](https://csskit.rs/docs/internal/csskit_wasm/))

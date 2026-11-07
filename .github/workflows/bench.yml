@@ -35,13 +35,16 @@ jobs:
 
       - name: Build comparison data
         id: compare
+        env:
+          GH_BASE_REF: ${{ github.base_ref }}
+          GH_HEAD_REF: ${{ github.head_ref }}
         run: |
           HISTORY="website/_data/benchmark-history.json"
           PR_ENTRY=$(jq '.[0]' "$HISTORY")
           BASE_ENTRY=$(jq '.[1]' "$HISTORY")
 
-          echo "BASE_REF=${{ github.base_ref }}" >> $GITHUB_ENV
-          echo "PR_REF=${{ github.head_ref }}" >> $GITHUB_ENV
+          echo "BASE_REF=$GH_BASE_REF" >> $GITHUB_ENV
+          echo "PR_REF=$GH_HEAD_REF" >> $GITHUB_ENV
           echo "BASE_SHA=$(echo "$BASE_ENTRY" | jq -r '.git_commit[:7]')" >> $GITHUB_ENV
           echo "PR_SHA=$(echo "$PR_ENTRY" | jq -r '.git_commit[:7]')" >> $GITHUB_ENV
 

@@ -25,7 +25,7 @@ where
 	D: DeclarationValue<'a, M> + ToCursors,
 	M: NodeMetadata,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		for decl in &self.declarations {
 			decl.to_cursors(s);
 		}

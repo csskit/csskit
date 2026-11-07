@@ -78,7 +78,7 @@ where
 	R: ToCursors + NodeWithMetadata<M>,
 	M: NodeMetadata,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.open_curly, s);
 		ToCursors::to_cursors(&self.rules, s);
 		ToCursors::to_cursors(&self.close_curly, s);

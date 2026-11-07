@@ -119,7 +119,7 @@ impl<'a> Parse<'a> for ComponentValue<'a> {
 }
 
 impl<'a> ToCursors for ComponentValue<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		match self {
 			Self::SimpleBlock(t) => ToCursors::to_cursors(t, s),
 			Self::Function(t) => ToCursors::to_cursors(t, s),

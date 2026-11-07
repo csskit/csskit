@@ -140,7 +140,7 @@ where
 	V: DeclarationValue<'a, M> + ToCursors,
 	M: NodeMetadata,
 {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		ToCursors::to_cursors(&self.name, s);
 		ToCursors::to_cursors(&self.colon, s);
 		ToCursors::to_cursors(&self.value, s);
@@ -198,7 +198,7 @@ mod tests {
 	}
 
 	impl ToCursors for Decl {
-		fn to_cursors(&self, s: &mut impl CursorSink) {
+		fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 			s.append(self.0.into())
 		}
 	}

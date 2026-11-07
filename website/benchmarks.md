@@ -4,8 +4,9 @@ title: "Performance Benchmarks"
 description: "Benchmark data for csskit across different CSS frameworks and libraries"
 css:
   - "benchmarks"
+  - "charts"
 script:
-  - "benchmarks"
+  - "charts"
 ---
 
 # Performance Benchmarks
@@ -185,7 +186,7 @@ from popular frameworks using the tools minify command.
 This chart tracks how long it takes for popular css tools to minify various CSS
 files, compared with each other. Smaller bars are better.
 
-<div id="alternatives-time-chart" style="width: 100%; height: 500px;"></div>
+{% include 'bar-chart.html', chart: benchmarkCharts.comparisonTime %}
 
 ### Output Size Comparison
 
@@ -195,7 +196,7 @@ frameworks using the tools minify command.
 This chart tracks how small each tool can compress a CSS file by. Smaller file
 sizes, represented by smaller bars, are better.
 
-<div id="alternatives-size-chart" style="width: 100%; height: 500px;"></div>
+{% include 'bar-chart.html', chart: benchmarkCharts.comparisonSize %}
 
 ## Historical Trends
 
@@ -216,7 +217,7 @@ is better.
 anything under that would be considered "instant". csskit aims to minify most
 content in under that time.
 
-<div id="processing-time-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.processingTime %}
 
 ### Throughput Trends
 
@@ -233,7 +234,7 @@ means unstable performance. Ideally all lines would be within a few mbps of each
 other. There may be some outliers though: very small files tend to be a low
 slower (due to repeated memory drops after each parse).
 
-<div id="throughput-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.throughput %}
 
 ### Compression Ratio Trends
 
@@ -247,7 +248,7 @@ minified file is half the size of the authored file, while 0% means it did not
 compress it at all. Some of the benchmark files are already minified, which
 helps to determine if csskit is compressing better than industry standard tools.
 
-<div id="compression-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.compression %}
 
 ### Criterion Benchmark Trends
 
@@ -264,7 +265,7 @@ benchmark measures the core parsing engine's speed on real-world CSS files.
 Optimizations here improve performance for all csskit operations since parsing
 is always the first step. Lower numbers are better.
 
-<div id="criterion-parse-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.parse %}
 
 #### Lexing Performance
 
@@ -277,7 +278,7 @@ directly impacts all downstream operations.
 
 The target is to have most files lex in under 1.5ms (1500 microseconds).
 
-<div id="criterion-lex-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.lex %}
 
 #### Minification Performance
 
@@ -288,7 +289,7 @@ This isolates the minification logic from parsing overhead, measuring how
 efficiently csskit can compress CSS once it's already in memory. Improvements
 here make the `csskit min` command faster without affecting other operations.
 
-<div id="criterion-minify-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.minify %}
 
 #### Linting Sheet Parsing Performance
 
@@ -299,7 +300,7 @@ Linting rules use a CSS-like syntax to define selectors and diagnostics. This
 benchmark measures how quickly csskit can parse these rule definitions before
 applying them to CSS files. Lower numbers are better.
 
-<div id="criterion-parse-sheet-chart" style="width: 100%; height: 400px;"></div>
+{% include 'line-charts.html', charts: benchmarkCharts.parseSheet %}
 
 #### Selector Matching Performance
 
@@ -311,7 +312,7 @@ nodes match the query selectors defined in linting rules. This benchmark
 measures the efficiency of the matching algorithm, which needs to traverse the
 AST and evaluate complex selectors. Lower numbers are better.
 
-<div id="criterion-selector-matcher-chart" style="width: 100%; height: 400px;"></div>
+{% include 'query-charts.html', name: 'selector-matching', groups: benchmarkCharts.selectorMatching %}
 
 #### Linting Collection Performance
 
@@ -323,7 +324,7 @@ selectors, collecting statistics, evaluating conditions, and generating
 diagnostics. It represents the real-world performance of csskit's linting
 capabilities. Lower numbers are better.
 
-<div id="criterion-collector-chart" style="width: 100%; height: 400px;"></div>
+{% include 'query-charts.html', name: 'collector', groups: benchmarkCharts.collector %}
 
 #### String Parsing by Length
 
@@ -337,9 +338,4 @@ instead csskit performs some tricks to speed this up. Extracting a keyword
 should take mere nanoseconds, and should be roughly consistent for keywords of
 any length. The target is under 20ns per lookup, regardless of the length.
 
-<div id="criterion-fromstr-chart" style="width: 100%; height: 400px;"></div>
-
-<script>
-// Make benchmark data available to JavaScript
-window.benchmarkData = {{ benchmark-history | jsonify }};
-</script>
+{% include 'line-charts.html', charts: benchmarkCharts.fromStr %}

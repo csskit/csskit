@@ -1,0 +1,20 @@
+{%- for chart in charts -%}
+<div class="chart-card">
+<table class="chart lines" style="{{ chart.style }}" data-unit="{{ chart.unit }}" data-thresholds="{{ chart.thresholds | escape }}"{% if chart.fromZero %} data-from-zero{% endif %}>
+<caption>{{ chart.caption }}<small>{{ chart.note }}</small></caption>
+<thead><tr><th>Date
+{%- for series in chart.series -%}
+<th id="{{ series.id }}"><label><input type="checkbox" checked>{{ series.name | escape }}</label>
+{%- endfor -%}
+</thead>
+<tbody>
+{%- for row in chart.rows -%}
+<tr><th>{{ row.label }}
+{%- for cell in row.cells -%}
+<td headers="{{ cell.headers }}" data-series="{{ cell.name | escape }}"{% if cell.style %} style="{{ cell.style }}"{% endif %}>{{ cell.text }}
+{%- endfor -%}
+{%- endfor -%}
+</tbody>
+</table>
+</div>
+{%- endfor -%}

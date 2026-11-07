@@ -37,7 +37,7 @@ impl<'a, D, M> Peek<'a> for NoBlockAllowed<D, M> {
 }
 
 impl<D, M> ToCursors for NoBlockAllowed<D, M> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		if let Some(semicolon) = self.semicolon {
 			s.append(semicolon.into());
 		}

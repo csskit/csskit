@@ -57,7 +57,7 @@ impl<'a> ToSpan for BadDeclaration<'a> {
 }
 
 impl<'a> ToCursors for BadDeclaration<'a> {
-	fn to_cursors(&self, s: &mut impl CursorSink) {
+	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {
 		for value in &self.0 {
 			ToCursors::to_cursors(value, s);
 		}
