@@ -1,5 +1,4 @@
 use crate::{Arena, Cursor, CursorSink, Kind, SourceCursor, SourceCursorSink, SourceOffset, Span, ToSpan, Vec};
-use std::collections::BTreeMap;
 
 #[derive(Debug)]
 pub struct OverlaySegment<'a> {
@@ -98,7 +97,7 @@ pub struct CursorOverlaySink<'a, 'o, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
 	overlays: &'o CursorOverlaySet<'a>,
 	sink: T,
-	processed_overlay_ranges: BTreeMap<SourceOffset, SourceOffset>,
+	processed_overlay_ranges: std::vec::Vec<(SourceOffset, SourceOffset)>,
 	next_segment: usize,
 	#[cfg(debug_assertions)]
 	seen_eof: bool,
@@ -110,7 +109,7 @@ impl<'a, 'o, T: SourceCursorSink<'a>> CursorOverlaySink<'a, 'o, T> {
 			source_text,
 			overlays,
 			sink,
-			processed_overlay_ranges: BTreeMap::new(),
+			processed_overlay_ranges: std::vec::Vec::new(),
 			next_segment: 0,
 			#[cfg(debug_assertions)]
 			seen_eof: false,
@@ -133,17 +132,22 @@ impl<'a, 'o, T: SourceCursorSink<'a>> CursorOverlaySink<'a, 'o, T> {
 				}
 			}
 			if !segment.is_insertion() {
-				self.processed_overlay_ranges.insert(segment.start(), segment.end());
+				match self.processed_overlay_ranges.last_mut() {
+					Some((start, end)) if *start == segment.start() => *end = segment.end(),
+					_ => self.processed_overlay_ranges.push((segment.start(), segment.end())),
+				}
 			}
 			self.next_segment += 1;
 		}
 	}
 
 	fn cursor_is_consumed(&self, cursor_start: SourceOffset, cursor_end: SourceOffset) -> bool {
-		self.processed_overlay_ranges
-			.range(..=cursor_start)
-			.next_back()
-			.is_some_and(|(&range_start, &range_end)| cursor_start >= range_start && cursor_end <= range_end)
+		let ranges = &self.processed_overlay_ranges;
+		let preceding = match ranges.last() {
+			Some((start, _)) if *start <= cursor_start => ranges.len(),
+			_ => ranges.partition_point(|(start, _)| *start <= cursor_start),
+		};
+		preceding.checked_sub(1).is_some_and(|i| cursor_start >= ranges[i].0 && cursor_end <= ranges[i].1)
 	}
 }
 
