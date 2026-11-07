@@ -50,6 +50,14 @@ WidthStyleValue.parse("100px");
 parse("@media print { a { color: red } }", { context: MediaRule });
 ```
 
+`minify` minifies a stylesheet, and throws on a parse error:
+
+```js
+import { minify } from "csskit";
+
+minify("a { color: #ff0000 }"); // a{color:red}
+```
+
 #### Client Side
 
 While the main entry is a native addon, therefore only possible to use in Node,

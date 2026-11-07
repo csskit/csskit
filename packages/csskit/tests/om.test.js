@@ -14,6 +14,7 @@ import {
 	StyleSheet,
 	StyleValue,
 	WidthStyleValue,
+	minify,
 	parse,
 } from "../index.js";
 
@@ -173,4 +174,12 @@ test("invalid query selector throws", () => {
 
 test("nodes cannot be constructed from JS", () => {
 	assert.throws(() => new StyleSheet());
+});
+
+test("minify shrinks a stylesheet", () => {
+	assert.equal(minify("a { color : #ff0000 }"), "a{color:red}");
+});
+
+test("minify throws on a parse error", () => {
+	assert.throws(() => minify("!!bad"));
 });

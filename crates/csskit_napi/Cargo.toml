@@ -32,6 +32,7 @@ visit_flow = { workspace = true }
 napi = { workspace = true, optional = true }
 napi-derive = { workspace = true, optional = true }
 self_cell = { workspace = true, optional = true }
+csskit_transform = { workspace = true, optional = true }
 
 [build-dependencies]
 napi-build = { workspace = true }
@@ -40,4 +41,4 @@ napi-build = { workspace = true }
 default = []
 # Build the native Node addon (pulls the `napi` runtime). Off by default so `cargo test`/`cargo build`
 # of the workspace need no Node symbols to link; the addon is built with `--features napi`.
-napi = ["dep:napi", "dep:napi-derive", "dep:self_cell"]
+napi = ["dep:napi", "dep:napi-derive", "dep:self_cell", "dep:csskit_transform"]

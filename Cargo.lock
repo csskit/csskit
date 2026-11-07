@@ -153,7 +153,7 @@ dependencies = [
 
 [[package]]
 name = "atom_set"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "derive_atom_set",
 ]
@@ -332,7 +332,7 @@ checksum = "d71b6127be86fdcfddb610f7182ac57211d4b18a3e9c82eb2d17662f2227ad6a"
 
 [[package]]
 name = "bytescan"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "fearless_simd",
 ]
@@ -369,7 +369,7 @@ checksum = "613afe47fcd5fac7ccf1db93babcb082c5994d996f20b8b159f2ad1658eb5724"
 
 [[package]]
 name = "chromashift"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "anstyle",
  "owo-colors",
@@ -647,7 +647,7 @@ checksum = "460fbee9c2c2f33933d720630a6a0bac33ba7053db5344fac858d4b8952d77d5"
 
 [[package]]
 name = "css_ast"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -682,7 +682,7 @@ dependencies = [
 
 [[package]]
 name = "css_feature_data"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "browserslist-rs",
  "chrono",
@@ -691,7 +691,7 @@ dependencies = [
 
 [[package]]
 name = "css_lexer"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "allocator-api2",
  "atom_set",
@@ -714,7 +714,7 @@ dependencies = [
 
 [[package]]
 name = "css_parse"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "allocator-api2",
  "atom_set",
@@ -738,7 +738,7 @@ dependencies = [
 
 [[package]]
 name = "css_value_definition_parser"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "css_lexer",
  "heck",
@@ -752,7 +752,7 @@ dependencies = [
 
 [[package]]
 name = "csskit"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "allocator-api2",
  "anstyle",
@@ -780,7 +780,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_arena"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "allocator-api2",
  "libc",
@@ -790,7 +790,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_ast"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -810,7 +810,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_derives"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "darling",
  "heck",
@@ -824,7 +824,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_highlight"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "anstyle",
  "bitmask-enum",
@@ -843,7 +843,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_lsp"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "bitmask-enum",
  "console",
@@ -871,12 +871,13 @@ dependencies = [
 
 [[package]]
 name = "csskit_napi"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "css_ast",
  "css_lexer",
  "css_parse",
  "csskit_ast",
+ "csskit_transform",
  "napi",
  "napi-build",
  "napi-derive",
@@ -886,7 +887,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_proc_macro"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "css_lexer",
  "css_value_definition_parser",
@@ -902,7 +903,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_source_finder"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "glob",
  "insta",
@@ -914,7 +915,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_spec_generator"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "anyhow",
  "clap",
@@ -936,7 +937,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_transform"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "atom_set",
  "bitmask-enum",
@@ -956,7 +957,7 @@ dependencies = [
 
 [[package]]
 name = "csskit_wasm"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "console_error_panic_hook",
  "css_ast",
@@ -1059,7 +1060,7 @@ dependencies = [
 
 [[package]]
 name = "derive_atom_set"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "atom_set",
  "heck",
@@ -1948,7 +1949,7 @@ dependencies = [
 
 [[package]]
 name = "lsp_service"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "crossbeam-channel",
  "httparse",
@@ -3051,7 +3052,7 @@ dependencies = [
 
 [[package]]
 name = "source_tools"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "allocator-api2",
  "csskit_arena",
@@ -3070,7 +3071,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "inventory",
  "stable-type-layout-derive",
@@ -3078,7 +3079,7 @@ dependencies = [
 
 [[package]]
 name = "stable-type-layout-derive"
-version = "0.0.36"
+version = "0.0.37"
 dependencies = [
  "proc-macro2",
  "quote",
@@ -3697,7 +3698,7 @@ checksum = "0b928f33d975fc6ad9f86c8f283853ad26bdd5b10b7f1542aa2fa15e2289105a"
 
 [[package]]
 name = "visit-flow"
-version = "0.0.36"
+version = "0.0.37"
 
 [[package]]
 name = "walkdir"
