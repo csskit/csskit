@@ -120,7 +120,7 @@
 		--c: var(--amber-3);
 	}
 	&[data-series="csskit"] {
-		--c: var(--purple-11);
+		--c: light-dark(var(--purple-11), var(--purple-6));
 	}
 }
 
