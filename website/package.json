@@ -28,7 +28,7 @@
 		"codemirror": "6.0.2",
 		"csskit": "../packages/csskit/",
 		"markdown-it-anchor": "^10.0.0",
-		"openswatch": "^0.1.0"
+		"openswatch": "^1.0.0"
 	},
 	"devDependencies": {
 		"@11ty/eleventy": "3.1.7",
