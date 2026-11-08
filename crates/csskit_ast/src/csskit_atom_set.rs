@@ -24,6 +24,8 @@ impl CsskitAtomSet {
 			Some(Self::Ms)
 		} else if prefix.contains(VendorPrefixes::O) {
 			Some(Self::O)
+		} else if prefix.contains(VendorPrefixes::Khtml) {
+			Some(Self::Khtml)
 		} else {
 			None
 		}
@@ -36,6 +38,7 @@ impl CsskitAtomSet {
 			Self::Moz => Some(VendorPrefixes::Moz),
 			Self::Ms => Some(VendorPrefixes::Ms),
 			Self::O => Some(VendorPrefixes::O),
+			Self::Khtml => Some(VendorPrefixes::Khtml),
 			_ => None,
 		}
 	}

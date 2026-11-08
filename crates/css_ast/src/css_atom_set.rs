@@ -2556,11 +2556,12 @@ pub enum CssAtomSet {
 	_NegInfinity,
 
 	// Bit 23: vendor flag (always 1)
-	// Bits 21-22: vendor index (0-3) for direct array lookup
+	// Bits 20-22: vendor index (0-7) for direct array lookup
 	// WebKit: 0b00000000_10000000_00000000_00000000 (index 0)
-	// Moz:    0b00000000_10100000_00000000_00000000 (index 1)
-	// Ms:     0b00000000_11000000_00000000_00000000 (index 2)
-	// O:      0b00000000_11100000_00000000_00000000 (index 3)
+	// Moz:    0b00000000_10010000_00000000_00000000 (index 1)
+	// Ms:     0b00000000_10100000_00000000_00000000 (index 2)
+	// O:      0b00000000_10110000_00000000_00000000 (index 3)
+	// KHTML:  0b00000000_11000000_00000000_00000000 (index 4)
 	#[atom("-webkit-align-content")]
 	_WebkitAlignContent = 0b00000000_10000000_00000000_00000000,
 	#[atom("-webkit-align-items")]
@@ -2981,7 +2982,7 @@ pub enum CssAtomSet {
 	_WebkitVideoPlayableInline,
 
 	#[atom("-moz-animation")]
-	_MozAnimation = 0b00000000_10100000_00000000_00000000,
+	_MozAnimation = 0b00000000_10010000_00000000_00000000,
 	#[atom("-moz-animation-delay")]
 	_MozAnimationDelay,
 	#[atom("-moz-animation-direction")]
@@ -3400,7 +3401,7 @@ pub enum CssAtomSet {
 	_MozWindowShadow,
 
 	#[atom("-ms-animation")]
-	_MsAnimation = 0b00000000_11000000_00000000_00000000,
+	_MsAnimation = 0b00000000_10100000_00000000_00000000,
 	#[atom("-ms-animation-delay")]
 	_MsAnimationDelay,
 	#[atom("-ms-animation-direction")]
@@ -3577,7 +3578,7 @@ pub enum CssAtomSet {
 	_MsWordWrap,
 
 	#[atom("-o-animation")]
-	_OAnimation = 0b00000000_11100000_00000000_00000000,
+	_OAnimation = 0b00000000_10110000_00000000_00000000,
 	#[atom("-o-animation-delay")]
 	_OAnimationDelay,
 	#[atom("-o-animation-direction")]
@@ -3680,6 +3681,19 @@ pub enum CssAtomSet {
 	_OTransitionProperty,
 	#[atom("-o-transition-timing-function")]
 	_OTransitionTimingFunction,
+
+	#[atom("-khtml-border-bottom-left-radius")]
+	_KhtmlBorderBottomLeftRadius = 0b00000000_11000000_00000000_00000000,
+	#[atom("-khtml-border-bottom-right-radius")]
+	_KhtmlBorderBottomRightRadius,
+	#[atom("-khtml-border-radius")]
+	_KhtmlBorderRadius,
+	#[atom("-khtml-border-top-left-radius")]
+	_KhtmlBorderTopLeftRadius,
+	#[atom("-khtml-border-top-right-radius")]
+	_KhtmlBorderTopRightRadius,
+	#[atom("-khtml-user-select")]
+	_KhtmlUserSelect,
 }
 
 impl CssAtomSet {
@@ -3781,10 +3795,16 @@ fn test_css_atom_set() {
 #[test]
 fn test_all_vendor_atoms_have_correct_prefix() {
 	const VENDOR_FLAG: u32 = 0b00000000_10000000_00000000_00000000;
-	for i in 0..3000isize {
-		let atom = CssAtomSet::from_bits(i as u32);
+	let vendor_blocks = (0..8u32).flat_map(|v| {
+		let base = VENDOR_FLAG | (v << 20);
+		base..base + 1024
+	});
+	for bits in (0..3000u32).chain(vendor_blocks) {
+		let atom = CssAtomSet::from_bits(bits);
 		let str = atom.to_str();
-		let bits = i as i32 as u32;
+		if str.is_empty() {
+			continue;
+		}
 		let has_vendor_flag = (bits & VENDOR_FLAG) != 0;
 
 		// Determine expected vendor prefix from string
@@ -3796,6 +3816,8 @@ fn test_all_vendor_atoms_have_correct_prefix() {
 			Some("ms")
 		} else if str.starts_with("-o-") {
 			Some("o")
+		} else if str.starts_with("-khtml-") {
+			Some("khtml")
 		} else {
 			None
 		};
@@ -3804,14 +3826,15 @@ fn test_all_vendor_atoms_have_correct_prefix() {
 			Some(vendor) => {
 				assert!(
 					has_vendor_flag,
-					"Atom {atom:?} (i {i}) has {vendor} prefix in string '{str}' but vendor flag bit 23 is not set"
+					"Atom {atom:?} (bits {bits}) has {vendor} prefix in string '{str}' but vendor flag bit 23 is not set"
 				);
-				let index = (bits >> 21) & 0b11;
+				let index = (bits >> 20) & 0b111;
 				let expected_index = match vendor {
 					"webkit" => 0,
 					"moz" => 1,
 					"ms" => 2,
 					"o" => 3,
+					"khtml" => 4,
 					_ => unreachable!(),
 				};
 				assert_eq!(
@@ -3823,7 +3846,7 @@ fn test_all_vendor_atoms_have_correct_prefix() {
 				// Atom string has no vendor prefix - must NOT have vendor flag set
 				assert!(
 					!has_vendor_flag,
-					"Atom {atom:?} (i {i}) has no vendor prefix in string '{str}' but vendor flag bit 23 is set (bits: {bits:024b})"
+					"Atom {atom:?} has no vendor prefix in string '{str}' but vendor flag bit 23 is set (bits: {bits:024b})"
 				);
 			}
 		}
