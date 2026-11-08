@@ -445,6 +445,7 @@ pub enum CssAtomSet {
 	Cerror,
 	ChWidth,
 	Chain,
+	Chained,
 	Change,
 	CharacterVariant,
 	Charset,
@@ -3398,10 +3399,40 @@ pub enum CssAtomSet {
 	#[atom("-moz-window-shadow")]
 	_MozWindowShadow,
 
+	#[atom("-ms-animation")]
+	_MsAnimation = 0b00000000_11000000_00000000_00000000,
+	#[atom("-ms-animation-delay")]
+	_MsAnimationDelay,
+	#[atom("-ms-animation-direction")]
+	_MsAnimationDirection,
+	#[atom("-ms-animation-duration")]
+	_MsAnimationDuration,
+	#[atom("-ms-animation-fill-mode")]
+	_MsAnimationFillMode,
+	#[atom("-ms-animation-iteration-count")]
+	_MsAnimationIterationCount,
+	#[atom("-ms-animation-name")]
+	_MsAnimationName,
+	#[atom("-ms-animation-play-state")]
+	_MsAnimationPlayState,
+	#[atom("-ms-animation-timing-function")]
+	_MsAnimationTimingFunction,
 	#[atom("-ms-autohiding-scrollbar")]
-	_MsAutohidingScrollbar = 0b00000000_11000000_00000000_00000000,
+	_MsAutohidingScrollbar,
 	#[atom("-ms-backdrop")]
 	_MsBackdrop,
+	#[atom("-ms-backface-visibility")]
+	_MsBackfaceVisibility,
+	#[atom("-ms-border-bottom-left-radius")]
+	_MsBorderBottomLeftRadius,
+	#[atom("-ms-border-bottom-right-radius")]
+	_MsBorderBottomRightRadius,
+	#[atom("-ms-border-radius")]
+	_MsBorderRadius,
+	#[atom("-ms-border-top-left-radius")]
+	_MsBorderTopLeftRadius,
+	#[atom("-ms-border-top-right-radius")]
+	_MsBorderTopRightRadius,
 	#[atom("-ms-box-sizing")]
 	_MsBoxSizing,
 	#[atom("-ms-browse")]
@@ -3450,14 +3481,30 @@ pub enum CssAtomSet {
 	_MsFlexWrap,
 	#[atom("-ms-flexbox")]
 	_MsFlexbox,
+	#[atom("-ms-font-feature-settings")]
+	_MsFontFeatureSettings,
 	#[atom("-ms-fullscreen")]
 	_MsFullscreen,
 	#[atom("-ms-grid")]
 	_MsGrid,
+	#[atom("-ms-grid-column")]
+	_MsGridColumn,
+	#[atom("-ms-grid-column-span")]
+	_MsGridColumnSpan,
+	#[atom("-ms-grid-columns")]
+	_MsGridColumns,
+	#[atom("-ms-grid-row")]
+	_MsGridRow,
+	#[atom("-ms-grid-row-align")]
+	_MsGridRowAlign,
+	#[atom("-ms-grid-rows")]
+	_MsGridRows,
 	#[atom("-ms-high-contrast")]
 	_MsHighContrast,
 	#[atom("-ms-interpolation-mode")]
 	_MsInterpolationMode,
+	#[atom("-ms-hyphens")]
+	_MsHyphens,
 	#[atom("-ms-ime-align")]
 	_MsImeAlign,
 	#[atom("-ms-inline-flex")]
@@ -3476,10 +3523,16 @@ pub enum CssAtomSet {
 	_MsMinDevicePixelRatio,
 	#[atom("-ms-overflow-style")]
 	_MsOverflowStyle,
+	#[atom("-ms-perspective")]
+	_MsPerspective,
+	#[atom("-ms-perspective-origin")]
+	_MsPerspectiveOrigin,
 	#[atom("-ms-placeholder")]
 	_MsPlaceholder,
 	#[atom("-ms-reveal")]
 	_MsReveal,
+	#[atom("-ms-scroll-chaining")]
+	_MsScrollChaining,
 	#[atom("-ms-selection")]
 	_MsSelection,
 	#[atom("-ms-text-size-adjust")]
@@ -3500,8 +3553,18 @@ pub enum CssAtomSet {
 	_MsTransform,
 	#[atom("-ms-transform-origin")]
 	_MsTransformOrigin,
+	#[atom("-ms-transform-style")]
+	_MsTransformStyle,
 	#[atom("-ms-transition")]
 	_MsTransition,
+	#[atom("-ms-transition-delay")]
+	_MsTransitionDelay,
+	#[atom("-ms-transition-duration")]
+	_MsTransitionDuration,
+	#[atom("-ms-transition-property")]
+	_MsTransitionProperty,
+	#[atom("-ms-transition-timing-function")]
+	_MsTransitionTimingFunction,
 	#[atom("-ms-user-select")]
 	_MsUserSelect,
 	#[atom("-ms-value")]
@@ -3510,6 +3573,8 @@ pub enum CssAtomSet {
 	_MsViewState,
 	#[atom("-ms-word-break")]
 	_MsWordBreak,
+	#[atom("-ms-word-wrap")]
+	_MsWordWrap,
 
 	#[atom("-o-box-sizing")]
 	_OBoxSizing = 0b00000000_11100000_00000000_00000000,
