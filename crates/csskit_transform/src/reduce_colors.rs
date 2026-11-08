@@ -1,6 +1,6 @@
 use crate::prelude::*;
 use chromashift::{
-	COLOR_EPSILON, ColorDistance, ColorSpace, Gamut, Hex, LinearRgb, Named, PerceptualRound, Srgb, ToAlpha, round_dp,
+	COLOR_EPSILON, ColorDistance, ColorSpace, Gamut, Hex, LinearRgb, Named, PerceptualRound, ToAlpha, round_dp,
 };
 use css_ast::{
 	CalcUnit, CalcableValue, Color, ColorFunction, ColorMixFunction, CssAtomSet, CssTypes, HueInterpolationDirection,
@@ -26,19 +26,18 @@ where
 }
 
 trait Shortest<'a> {
-	fn shortest(&self, arena: &'a Arena) -> Option<&'a str>;
+	fn shortest(&self, shorter_than: usize, arena: &'a Arena) -> Option<&'a str>;
 }
 
 impl<'a> Shortest<'a> for chromashift::Color {
-	fn shortest(&self, arena: &'a Arena) -> Option<&'a str> {
-		[
-			Some(format_in!(in arena, "{}", Hex::from(*self)).into_str()),
-			Named::try_from(*self).ok().map(|named| format_in!(in arena, "{named}").into_str()),
-			Some(format_in!(in arena, "{}", Srgb::from(*self).round()).into_str()),
-		]
-		.into_iter()
-		.flatten()
-		.min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)))
+	fn shortest(&self, shorter_than: usize, arena: &'a Arena) -> Option<&'a str> {
+		let hex = Hex::from(*self);
+		if let Ok(named) = Named::try_from(*self)
+			&& named.as_str().len() < hex.css_len()
+		{
+			return Some(named.as_str()).filter(|name| name.len() < shorter_than);
+		}
+		(hex.css_len() < shorter_than).then(|| format_in!(in arena, "{hex}").into_str())
 	}
 }
 
@@ -226,8 +225,7 @@ where
 		let len = color.to_span().len() as usize;
 
 		if fits_srgb(chroma_color)
-			&& let Some(candidate) = chroma_color.shortest(arena)
-			&& candidate.len() < len
+			&& let Some(candidate) = chroma_color.shortest(len, arena)
 		{
 			self.transformer.replace_parsed::<Color>(color.to_span(), candidate);
 			return;
@@ -279,7 +277,7 @@ where
 			{
 				let (part, _) = &mix.parts[dominant];
 				let chroma = part.color.to_chromashift();
-				let str = chroma.and_then(|c| c.shortest(arena)).unwrap_or_else(|| {
+				let str = chroma.and_then(|c| c.shortest(usize::MAX, arena)).unwrap_or_else(|| {
 					let span = part.color.to_span();
 					&self.transformer.source_text[span.start().0 as usize..span.end().0 as usize]
 				});
@@ -296,7 +294,7 @@ where
 				let first = chromata[0].unwrap();
 				if chromata[1..].iter().all(|c| c.unwrap().delta_e(first) < COLOR_EPSILON) {
 					let (part, _) = &mix.parts[0];
-					let str = first.shortest(arena).unwrap_or_else(|| {
+					let str = first.shortest(usize::MAX, arena).unwrap_or_else(|| {
 						let span = part.color.to_span();
 						&self.transformer.source_text[span.start().0 as usize..span.end().0 as usize]
 					});
@@ -315,7 +313,7 @@ where
 			let mixed = mixed.with_alpha(mixed_alpha);
 			let rounded = mixed.round();
 			let native_css = rounded.to_css(arena);
-			let srgb_css = if fits_srgb(mixed) { mixed.shortest(arena) } else { None };
+			let srgb_css = if fits_srgb(mixed) { mixed.shortest(usize::MAX, arena) } else { None };
 			let candidate =
 				native_css.into_iter().chain(srgb_css).min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)));
 			if let Some(candidate) = candidate
@@ -372,6 +370,17 @@ mod tests {
 			StyleSheet,
 			"body { color: #000000; }",
 			"body { color: #000; }"
+		);
+	}
+
+	#[test]
+	fn prefers_hex_over_keyword_of_equal_length() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"body { color: #00ffff; }",
+			"body { color: #0ff; }"
 		);
 	}
 
