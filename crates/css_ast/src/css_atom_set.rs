@@ -1770,6 +1770,7 @@ pub enum CssAtomSet {
 	PrefersReducedTransparency,
 	Prefix,
 	Preserve,
+	#[atom("preserve-3d")]
 	Preserve3d,
 	PreserveBreaks,
 	PreserveParentColor,
