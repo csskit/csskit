@@ -372,6 +372,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"VoiceAge",
 	"VoiceGender",
 	"WebkitAnimationMediaFeature",
+	"WebkitMaskBox",
 	"WebkitPseudoClass",
 	"WebkitPseudoElement",
 	"WebkitTransform2dMediaFeature",

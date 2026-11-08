@@ -36007,36 +36007,25 @@ StyleSheet(
                 offset: SourceOffset(31209),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31210),
+              value: WebkitBackdropFilterStyleValue(BackdropFilterStyleValue(r#Some(Literal(FilterValueList([
+                FilterFunction(Blur(BlurFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(31211),
+                    len: 5,
+                  )),
+                  radius: Some(Literal(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(31216),
+                    len: 3,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(31219),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(31211),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(31216),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(31219),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -36166,36 +36155,25 @@ StyleSheet(
                 offset: SourceOffset(31332),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(31333),
+              value: WebkitBackdropFilterStyleValue(BackdropFilterStyleValue(r#Some(Literal(FilterValueList([
+                FilterFunction(Blur(BlurFunction(
+                  name: Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(31334),
+                    len: 5,
+                  )),
+                  radius: Some(Literal(Px(Dimension(Cursor(
+                    kind: "Dimension",
+                    offset: SourceOffset(31339),
+                    len: 3,
+                  ))))),
+                  close: RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(31342),
                     len: 1,
                   )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(31334),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(31339),
-                          len: 3,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(31342),
-                      len: 1,
-                    )),
-                  ),
-                ],
-              )),
+                ))),
+              ]))))),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

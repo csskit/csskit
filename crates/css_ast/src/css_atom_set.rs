@@ -93,6 +93,7 @@ pub enum CssAtomSet {
 	A = 128,
 	A98Rgb,
 	Abbr,
+	Above,
 	Abs,
 	Absolute,
 	AbsoluteColorimetric,
@@ -110,6 +111,7 @@ pub enum CssAtomSet {
 	AdditiveSymbols,
 	Address,
 	After,
+	AfterWhiteSpace,
 	Alias,
 	Aliceblue,
 	AlignContent,
@@ -248,6 +250,7 @@ pub enum CssAtomSet {
 	Bdo,
 	Before,
 	Beige,
+	Below,
 	Bengali,
 	Between,
 	Bevel,
@@ -385,6 +388,7 @@ pub enum CssAtomSet {
 	BottomToTop,
 	BoundingBox,
 	Box,
+	BoxDecoration,
 	BoxDecorationBreak,
 	BoxShadow,
 	BoxShadowBlur,
@@ -736,6 +740,7 @@ pub enum CssAtomSet {
 	DoubleButton,
 	DoubleCircle,
 	Down,
+	Drag,
 	Drop,
 	DropShadow,
 	Dt,
@@ -750,6 +755,7 @@ pub enum CssAtomSet {
 	EaseInOut,
 	EaseOut,
 	Economy,
+	Edges,
 	Element,
 	Ellipse,
 	Ellipsis,
@@ -1104,6 +1110,7 @@ pub enum CssAtomSet {
 	InitialLetterWrap,
 	InitialOnly,
 	InitialValue,
+	Ink,
 	Inline,
 	InlineAxis,
 	InlineBlock,
@@ -1210,6 +1217,7 @@ pub enum CssAtomSet {
 	Lcm,
 	Leader,
 	Leading,
+	LeadingSpaces,
 	Left,
 	LeftBottom,
 	LeftMiddle,
@@ -1526,6 +1534,7 @@ pub enum CssAtomSet {
 	NoCompress,
 	NoContextual,
 	NoDiscretionaryLigatures,
+	NoDrag,
 	NoDrop,
 	NoEllipsis,
 	NoHistoricalLigatures,
@@ -1567,6 +1576,7 @@ pub enum CssAtomSet {
 	ObjectFit,
 	ObjectPosition,
 	ObjectViewBox,
+	Objects,
 	Oblique,
 	ObliqueOnly,
 	Odd,
@@ -1804,6 +1814,7 @@ pub enum CssAtomSet {
 	Rb,
 	ReadOnly,
 	ReadWrite,
+	ReadWritePlaintextOnly,
 	ReadingFlow,
 	ReadingOrder,
 	Real,
@@ -2338,6 +2349,7 @@ pub enum CssAtomSet {
 	Tr,
 	Track,
 	Traditional,
+	TrailingSpaces,
 	Transform,
 	TransformBox,
 	TransformFunction,
@@ -2557,6 +2569,8 @@ pub enum CssAtomSet {
 	_WebkitAnimation,
 	#[atom("-webkit-animation-delay")]
 	_WebkitAnimationDelay,
+	#[atom("-webkit-animation-direction")]
+	_WebkitAnimationDirection,
 	#[atom("-webkit-animation-duration")]
 	_WebkitAnimationDuration,
 	#[atom("-webkit-animation-fill-mode")]
@@ -2565,12 +2579,16 @@ pub enum CssAtomSet {
 	_WebkitAnimationIterationCount,
 	#[atom("-webkit-animation-name")]
 	_WebkitAnimationName,
+	#[atom("-webkit-animation-play-state")]
+	_WebkitAnimationPlayState,
 	#[atom("-webkit-animation-timing-function")]
 	_WebkitAnimationTimingFunction,
 	#[atom("-webkit-any")]
 	_WebkitAny,
 	#[atom("-webkit-any-link")]
 	_WebkitAnyLink,
+	#[atom("-webkit-app-region")]
+	_WebkitAppRegion,
 	#[atom("-webkit-appearance")]
 	_WebkitAppearance,
 	#[atom("-webkit-autofill")]
@@ -2589,8 +2607,36 @@ pub enum CssAtomSet {
 	_WebkitBackfaceVisibility,
 	#[atom("-webkit-background-clip")]
 	_WebkitBackgroundClip,
+	#[atom("-webkit-background-origin")]
+	_WebkitBackgroundOrigin,
 	#[atom("-webkit-background-size")]
 	_WebkitBackgroundSize,
+	#[atom("-webkit-border-bottom-left-radius")]
+	_WebkitBorderBottomLeftRadius,
+	#[atom("-webkit-border-bottom-right-radius")]
+	_WebkitBorderBottomRightRadius,
+	#[atom("-webkit-border-horizontal-spacing")]
+	_WebkitBorderHorizontalSpacing,
+	#[atom("-webkit-border-image")]
+	_WebkitBorderImage,
+	#[atom("-webkit-border-image-outset")]
+	_WebkitBorderImageOutset,
+	#[atom("-webkit-border-image-repeat")]
+	_WebkitBorderImageRepeat,
+	#[atom("-webkit-border-image-slice")]
+	_WebkitBorderImageSlice,
+	#[atom("-webkit-border-image-source")]
+	_WebkitBorderImageSource,
+	#[atom("-webkit-border-image-width")]
+	_WebkitBorderImageWidth,
+	#[atom("-webkit-border-radius")]
+	_WebkitBorderRadius,
+	#[atom("-webkit-border-top-left-radius")]
+	_WebkitBorderTopLeftRadius,
+	#[atom("-webkit-border-top-right-radius")]
+	_WebkitBorderTopRightRadius,
+	#[atom("-webkit-border-vertical-spacing")]
+	_WebkitBorderVerticalSpacing,
 	#[atom("-webkit-box")]
 	_WebkitBox,
 	#[atom("-webkit-box-align")]
@@ -2623,10 +2669,26 @@ pub enum CssAtomSet {
 	_WebkitColorSwatch,
 	#[atom("-webkit-color-swatch-wrapper")]
 	_WebkitColorSwatchWrapper,
+	#[atom("-webkit-column-break-inside")]
+	_WebkitColumnBreakInside,
 	#[atom("-webkit-column-count")]
 	_WebkitColumnCount,
 	#[atom("-webkit-column-gap")]
 	_WebkitColumnGap,
+	#[atom("-webkit-column-rule")]
+	_WebkitColumnRule,
+	#[atom("-webkit-column-rule-color")]
+	_WebkitColumnRuleColor,
+	#[atom("-webkit-column-rule-style")]
+	_WebkitColumnRuleStyle,
+	#[atom("-webkit-column-rule-width")]
+	_WebkitColumnRuleWidth,
+	#[atom("-webkit-column-span")]
+	_WebkitColumnSpan,
+	#[atom("-webkit-column-width")]
+	_WebkitColumnWidth,
+	#[atom("-webkit-columns")]
+	_WebkitColumns,
 	#[atom("-webkit-contacts-auto-fill-button")]
 	_WebkitContactsAutoFillButton,
 	#[atom("-webkit-credentials-auto-fill-button")]
@@ -2681,10 +2743,16 @@ pub enum CssAtomSet {
 	_WebkitFlexFlow,
 	#[atom("-webkit-flex-grow")]
 	_WebkitFlexGrow,
+	#[atom("-webkit-flex-shrink")]
+	_WebkitFlexShrink,
 	#[atom("-webkit-flex-wrap")]
 	_WebkitFlexWrap,
+	#[atom("-webkit-font-feature-settings")]
+	_WebkitFontFeatureSettings,
 	#[atom("-webkit-font-smoothing")]
 	_WebkitFontSmoothing,
+	#[atom("-webkit-font-variant-ligatures")]
+	_WebkitFontVariantLigatures,
 	#[atom("-webkit-full-page-media")]
 	_WebkitFullPageMedia,
 	#[atom("-webkit-full-screen")]
@@ -2701,6 +2769,8 @@ pub enum CssAtomSet {
 	_WebkitGrab,
 	#[atom("-webkit-grabbing")]
 	_WebkitGrabbing,
+	#[atom("-webkit-hyphens")]
+	_WebkitHyphens,
 	#[atom("-webkit-inline-box")]
 	_WebkitInlineBox,
 	#[atom("-webkit-inline-flex")]
@@ -2713,18 +2783,36 @@ pub enum CssAtomSet {
 	_WebkitJustifyContent,
 	#[atom("-webkit-keyframes")]
 	_WebkitKeyframes,
+	#[atom("-webkit-line-break")]
+	_WebkitLineBreak,
 	#[atom("-webkit-line-clamp")]
 	_WebkitLineClamp,
 	#[atom("-webkit-list-button")]
 	_WebkitListButton,
 	#[atom("-webkit-margin-end")]
 	_WebkitMarginEnd,
+	#[atom("-webkit-margin-start")]
+	_WebkitMarginStart,
+	#[atom("-webkit-margin-top-collapse")]
+	_WebkitMarginTopCollapse,
 	#[atom("-webkit-mask")]
 	_WebkitMask,
+	#[atom("-webkit-mask-attachment")]
+	_WebkitMaskAttachment,
 	#[atom("-webkit-mask-box-image")]
 	_WebkitMaskBoxImage,
+	#[atom("-webkit-mask-clip")]
+	_WebkitMaskClip,
+	#[atom("-webkit-mask-composite")]
+	_WebkitMaskComposite,
+	#[atom("-webkit-mask-image")]
+	_WebkitMaskImage,
+	#[atom("-webkit-mask-origin")]
+	_WebkitMaskOrigin,
 	#[atom("-webkit-mask-position")]
 	_WebkitMaskPosition,
+	#[atom("-webkit-mask-repeat")]
+	_WebkitMaskRepeat,
 	#[atom("-webkit-mask-size")]
 	_WebkitMaskSize,
 	#[atom("-webkit-match-parent")]
@@ -2765,10 +2853,16 @@ pub enum CssAtomSet {
 	_WebkitOuterSpinButton,
 	#[atom("-webkit-overflow-scrolling")]
 	_WebkitOverflowScrolling,
+	#[atom("-webkit-padding-after")]
+	_WebkitPaddingAfter,
+	#[atom("-webkit-padding-start")]
+	_WebkitPaddingStart,
 	#[atom("-webkit-password-auto-fill-button")]
 	_WebkitPasswordAutoFillButton,
 	#[atom("-webkit-perspective")]
 	_WebkitPerspective,
+	#[atom("-webkit-perspective-origin")]
+	_WebkitPerspectiveOrigin,
 	#[atom("-webkit-print-color-adjust")]
 	_WebkitPrintColorAdjust,
 	#[atom("-webkit-progress-bar")]
@@ -2817,8 +2911,12 @@ pub enum CssAtomSet {
 	_WebkitTextDecoration,
 	#[atom("-webkit-text-decoration-color")]
 	_WebkitTextDecorationColor,
+	#[atom("-webkit-text-decoration-skip")]
+	_WebkitTextDecorationSkip,
 	#[atom("-webkit-text-decoration-skip-ink")]
 	_WebkitTextDecorationSkipInk,
+	#[atom("-webkit-text-decoration-style")]
+	_WebkitTextDecorationStyle,
 	#[atom("-webkit-text-fill-color")]
 	_WebkitTextFillColor,
 	#[atom("-webkit-text-size-adjust")]
@@ -2841,6 +2939,8 @@ pub enum CssAtomSet {
 	_WebkitTransform3d,
 	#[atom("-webkit-transform-origin")]
 	_WebkitTransformOrigin,
+	#[atom("-webkit-transform-style")]
+	_WebkitTransformStyle,
 	#[atom("-webkit-transition")]
 	_WebkitTransition,
 	#[atom("-webkit-transition-delay")]
@@ -2853,6 +2953,8 @@ pub enum CssAtomSet {
 	_WebkitTransitionTimingFunction,
 	#[atom("-webkit-user-drag")]
 	_WebkitUserDrag,
+	#[atom("-webkit-user-modify")]
+	_WebkitUserModify,
 	#[atom("-webkit-user-select")]
 	_WebkitUserSelect,
 	#[atom("-webkit-validation-bubble")]
