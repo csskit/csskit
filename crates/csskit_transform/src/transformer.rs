@@ -5,7 +5,11 @@ use css_parse::{
 	Arena, CursorOverlaySet, CursorSink, CursorToSourceCursorSink, NodeMetadata, NodeWithMetadata, OverlayKind,
 	OverlaySegment, Parse, Parser, SourceCursor, SourceOffset, Span, ToCursors,
 };
-use std::{cell::RefCell, fmt::Write, marker::PhantomData};
+use std::{
+	cell::{Ref, RefCell},
+	fmt::Write,
+	marker::PhantomData,
+};
 
 struct LenCounter(usize);
 
@@ -22,6 +26,105 @@ pub enum TransformEdit<'a> {
 	InsertBefore { anchor: SourceOffset, cursors: Vec<'a, SourceCursor<'a>> },
 	InsertAfter { anchor: SourceOffset, cursors: Vec<'a, SourceCursor<'a>> },
 	Delete { target: Span },
+}
+
+impl TransformEdit<'_> {
+	fn span(&self) -> Span {
+		match self {
+			Self::Replace { target, .. } | Self::Delete { target } => *target,
+			Self::InsertBefore { anchor, .. } | Self::InsertAfter { anchor, .. } => Span::new(*anchor, *anchor),
+		}
+	}
+
+	fn rewrites_target(&self) -> bool {
+		matches!(self, Self::Replace { .. } | Self::Delete { .. })
+	}
+}
+
+struct PendingEdit<'a> {
+	edit: TransformEdit<'a>,
+	span: Span,
+	run_max_end: SourceOffset,
+	removed: bool,
+}
+
+struct PendingEdits<'a> {
+	edits: Vec<'a, PendingEdit<'a>>,
+	run_starts: Vec<'a, usize>,
+}
+
+impl<'a> PendingEdits<'a> {
+	fn new_in(alloc: &'a Arena) -> Self {
+		Self { edits: Vec::new_in(alloc), run_starts: Vec::new_in(alloc) }
+	}
+
+	fn is_empty(&self) -> bool {
+		self.edits.is_empty()
+	}
+
+	fn len(&self) -> usize {
+		self.edits.len()
+	}
+
+	/// Drains the edits that were not removed, paired with their insertion order.
+	fn drain(&mut self) -> impl Iterator<Item = (usize, TransformEdit<'a>)> + '_ {
+		self.run_starts.clear();
+		self.edits
+			.drain(..)
+			.enumerate()
+			.filter_map(|(order, pending)| (!pending.removed).then_some((order, pending.edit)))
+	}
+
+	fn clear(&mut self) {
+		self.edits.clear();
+		self.run_starts.clear();
+	}
+
+	fn push(&mut self, edit: TransformEdit<'a>) {
+		let span = edit.span();
+		let run_max_end = match self.edits.last() {
+			Some(last) if last.span.start() <= span.start() => last.run_max_end.max(span.end()),
+			_ => {
+				self.run_starts.push(self.edits.len());
+				span.end()
+			}
+		};
+		self.edits.push(PendingEdit { edit, span, run_max_end, removed: false });
+	}
+
+	fn run_end(&self, run: usize) -> usize {
+		self.run_starts.get(run + 1).copied().unwrap_or(self.edits.len())
+	}
+
+	/// Removes every edit within `span`, returning true if any were removed.
+	fn remove_within(&mut self, span: Span) -> bool {
+		let mut removed_any = false;
+		for run in 0..self.run_starts.len() {
+			let run_range = self.run_starts[run]..self.run_end(run);
+			let run_edits = &mut self.edits[run_range];
+			let first = run_edits.partition_point(|pending| pending.span.start() < span.start());
+			let last = run_edits.partition_point(|pending| pending.span.start() <= span.end());
+			for pending in &mut run_edits[first..last] {
+				if !pending.removed && pending.span.end() <= span.end() {
+					pending.removed = true;
+					removed_any = true;
+				}
+			}
+		}
+		removed_any
+	}
+
+	fn any_rewrite_covering(&self, span: Span) -> bool {
+		(0..self.run_starts.len()).any(|run| {
+			let run_edits = &self.edits[self.run_starts[run]..self.run_end(run)];
+			let candidates = &run_edits[..run_edits.partition_point(|pending| pending.span.start() <= span.start())];
+			candidates
+				.iter()
+				.rev()
+				.take_while(|pending| pending.run_max_end >= span.end())
+				.any(|pending| !pending.removed && pending.edit.rewrites_target() && pending.span.end() >= span.end())
+		})
+	}
 }
 
 #[derive(Debug)]
@@ -50,7 +153,7 @@ pub struct Transformer<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: Transform
 	pub(crate) features: F,
 	changed: RefCell<bool>,
 	overlays: RefCell<CursorOverlaySet<'a>>,
-	edits: RefCell<Vec<'a, TransformEdit<'a>>>,
+	edits: RefCell<PendingEdits<'a>>,
 	pub(crate) source_text: &'a str,
 	_phantom: PhantomData<(M, N)>,
 }
@@ -63,7 +166,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 			atoms,
 			changed: RefCell::new(false),
 			overlays: RefCell::new(CursorOverlaySet::new(alloc)),
-			edits: RefCell::new(Vec::new_in(alloc)),
+			edits: RefCell::new(PendingEdits::new_in(alloc)),
 			source_text,
 			_phantom: PhantomData,
 		}
@@ -117,7 +220,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 		A::from_bits(bits)
 	}
 
-	pub fn overlays(&self) -> std::cell::Ref<'_, CursorOverlaySet<'a>> {
+	pub fn overlays(&self) -> Ref<'_, CursorOverlaySet<'a>> {
 		self.overlays.borrow()
 	}
 
@@ -151,28 +254,12 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	}
 
 	pub fn clear_pending_edits(&self, span: Span) -> bool {
-		let mut edits = self.edits.borrow_mut();
-		let len_before = edits.len();
-		edits.retain(|edit| {
-			let inner = match edit {
-				TransformEdit::Replace { target, .. } | TransformEdit::Delete { target } => *target,
-				TransformEdit::InsertBefore { anchor, .. } | TransformEdit::InsertAfter { anchor, .. } => {
-					Span::new(*anchor, *anchor)
-				}
-			};
-			!(span.start() <= inner.start() && inner.end() <= span.end())
-		});
-		len_before != edits.len()
+		self.edits.borrow_mut().remove_within(span)
 	}
 
 	/// Returns true if a pending edit already replaces or deletes a span that covers `span`.
 	pub fn has_pending_edit_covering(&self, span: Span) -> bool {
-		self.edits.borrow().iter().any(|edit| match edit {
-			TransformEdit::Replace { target, .. } | TransformEdit::Delete { target } => {
-				target.start() <= span.start() && span.end() <= target.end()
-			}
-			TransformEdit::InsertBefore { .. } | TransformEdit::InsertAfter { .. } => false,
-		})
+		self.edits.borrow().any_rewrite_covering(span)
 	}
 
 	pub fn replace(&self, span: impl ToSpan, cursors: Vec<'a, SourceCursor<'a>>) {
@@ -214,7 +301,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 
 		let mut pending_segments: Vec<'a, PendingSegment<'a>> = Vec::with_capacity_in(edits.len(), self.alloc);
 
-		for (order, edit) in edits.drain(..).enumerate() {
+		for (order, edit) in edits.drain() {
 			match edit {
 				TransformEdit::Replace { target, cursors } => {
 					if target.start() > target.end() {
@@ -244,6 +331,10 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 					});
 				}
 			}
+		}
+
+		if pending_segments.is_empty() {
+			return Ok(());
 		}
 
 		pending_segments.sort_by(|a, b| {
@@ -366,5 +457,56 @@ mod tests {
 		assert_eq!(segments[1].cursors()[0].source(), "B");
 		assert_eq!(segments[2].cursors()[0].source(), "C");
 		assert_eq!(segments[3].cursors()[0].source(), "D");
+	}
+
+	#[test]
+	fn committing_cleared_edits_preserves_existing_overlays() {
+		let alloc = Arena::default();
+		let context: Transformer<CssMetadata, ComponentValues, CssMinifierFeature> =
+			Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
+		context.delete(span(0, 2));
+		context.commit_overlays().unwrap();
+		context.delete(span(4, 6));
+		assert!(context.clear_pending_edits(span(4, 6)));
+		context.commit_overlays().unwrap();
+		assert!(context.has_replacement(span(0, 2)));
+		assert!(!context.has_replacement(span(4, 6)));
+	}
+
+	fn span(start: u32, end: u32) -> Span {
+		Span::new(SourceOffset(start), SourceOffset(end))
+	}
+
+	#[test]
+	fn clear_pending_edits_finds_edits_pushed_out_of_order() {
+		let alloc = Arena::default();
+		let context: Transformer<CssMetadata, ComponentValues, CssMinifierFeature> =
+			Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
+
+		context.delete(span(20, 22));
+		context.delete(span(30, 32));
+		context.delete(span(10, 12));
+		context.delete(span(24, 26));
+
+		assert!(context.clear_pending_edits(span(20, 27)));
+		assert!(!context.clear_pending_edits(span(20, 27)));
+		assert!(!context.has_pending_edit_covering(span(20, 22)));
+		assert!(!context.has_pending_edit_covering(span(24, 26)));
+		assert!(context.has_pending_edit_covering(span(10, 12)));
+		assert!(context.has_pending_edit_covering(span(30, 32)));
+	}
+
+	#[test]
+	fn has_pending_edit_covering_sees_past_later_nested_edits() {
+		let alloc = Arena::default();
+		let context: Transformer<CssMetadata, ComponentValues, CssMinifierFeature> =
+			Transformer::new_in(&alloc, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, "");
+
+		context.delete(span(0, 50));
+		context.delete(span(5, 6));
+		context.insert_before(SourceOffset(8), context.parse_value::<ComponentValues>("a"));
+
+		assert!(context.has_pending_edit_covering(span(10, 20)));
+		assert!(!context.has_pending_edit_covering(span(40, 60)));
 	}
 }
