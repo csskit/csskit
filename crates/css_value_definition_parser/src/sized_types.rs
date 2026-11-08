@@ -62,6 +62,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"ContentFunction",
 	"ContentKeyword",
 	"ContentPosition",
+	"ContextProperty",
 	"ContextualAltValues",
 	"ControlFlowTestVisitor",
 	"CoordBox",
