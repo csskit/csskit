@@ -3576,14 +3576,62 @@ pub enum CssAtomSet {
 	#[atom("-ms-word-wrap")]
 	_MsWordWrap,
 
+	#[atom("-o-animation")]
+	_OAnimation = 0b00000000_11100000_00000000_00000000,
+	#[atom("-o-animation-delay")]
+	_OAnimationDelay,
+	#[atom("-o-animation-direction")]
+	_OAnimationDirection,
+	#[atom("-o-animation-duration")]
+	_OAnimationDuration,
+	#[atom("-o-animation-fill-mode")]
+	_OAnimationFillMode,
+	#[atom("-o-animation-iteration-count")]
+	_OAnimationIterationCount,
+	#[atom("-o-animation-name")]
+	_OAnimationName,
+	#[atom("-o-animation-play-state")]
+	_OAnimationPlayState,
+	#[atom("-o-animation-timing-function")]
+	_OAnimationTimingFunction,
+	#[atom("-o-backface-visibility")]
+	_OBackfaceVisibility,
+	#[atom("-o-background-size")]
+	_OBackgroundSize,
+	#[atom("-o-border-bottom-left-radius")]
+	_OBorderBottomLeftRadius,
+	#[atom("-o-border-bottom-right-radius")]
+	_OBorderBottomRightRadius,
+	#[atom("-o-border-image")]
+	_OBorderImage,
+	#[atom("-o-border-image-outset")]
+	_OBorderImageOutset,
+	#[atom("-o-border-image-repeat")]
+	_OBorderImageRepeat,
+	#[atom("-o-border-image-slice")]
+	_OBorderImageSlice,
+	#[atom("-o-border-image-source")]
+	_OBorderImageSource,
+	#[atom("-o-border-image-width")]
+	_OBorderImageWidth,
+	#[atom("-o-border-radius")]
+	_OBorderRadius,
+	#[atom("-o-border-top-left-radius")]
+	_OBorderTopLeftRadius,
+	#[atom("-o-border-top-right-radius")]
+	_OBorderTopRightRadius,
+	#[atom("-o-box-shadow")]
+	_OBoxShadow,
 	#[atom("-o-box-sizing")]
-	_OBoxSizing = 0b00000000_11100000_00000000_00000000,
+	_OBoxSizing,
 	#[atom("-o-device-pixel-ratio")]
 	_ODevicePixelRatio,
 	#[atom("-o-filter")]
 	_OFilter,
 	#[atom("-o-flex")]
 	_OFlex,
+	#[atom("-o-font-feature-settings")]
+	_OFontFeatureSettings,
 	#[atom("-o-inner-spin-button")]
 	_OInnerSpinButton,
 	#[atom("-o-max-device-pixel-ratio")]
@@ -3592,8 +3640,14 @@ pub enum CssAtomSet {
 	_OMinDevicePixelRatio,
 	#[atom("-o-object-fit")]
 	_OObjectFit,
+	#[atom("-o-object-position")]
+	_OObjectPosition,
 	#[atom("-o-outer-spin-button")]
 	_OOuterSpinButton,
+	#[atom("-o-perspective")]
+	_OPerspective,
+	#[atom("-o-perspective-origin")]
+	_OPerspectiveOrigin,
 	#[atom("-o-placeholder")]
 	_OPlaceholder,
 	#[atom("-o-prefocus")]
@@ -3608,6 +3662,24 @@ pub enum CssAtomSet {
 	_OScrollbarTrackPiece,
 	#[atom("-o-selection")]
 	_OSelection,
+	#[atom("-o-tab-size")]
+	_OTabSize,
+	#[atom("-o-transform")]
+	_OTransform,
+	#[atom("-o-transform-origin")]
+	_OTransformOrigin,
+	#[atom("-o-transform-style")]
+	_OTransformStyle,
+	#[atom("-o-transition")]
+	_OTransition,
+	#[atom("-o-transition-delay")]
+	_OTransitionDelay,
+	#[atom("-o-transition-duration")]
+	_OTransitionDuration,
+	#[atom("-o-transition-property")]
+	_OTransitionProperty,
+	#[atom("-o-transition-timing-function")]
+	_OTransitionTimingFunction,
 }
 
 impl CssAtomSet {

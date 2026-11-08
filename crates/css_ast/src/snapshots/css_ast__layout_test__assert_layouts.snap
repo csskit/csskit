@@ -4720,22 +4720,58 @@ CssAtomSet: size=4 align=4
     3013: _MsViewState = 12582997
     3014: _MsWordBreak = 12582998
     3015: _MsWordWrap = 12582999
-    3016: _OBoxSizing = 14680064
-    3017: _ODevicePixelRatio = 14680065
-    3018: _OFilter = 14680066
-    3019: _OFlex = 14680067
-    3020: _OInnerSpinButton = 14680068
-    3021: _OMaxDevicePixelRatio = 14680069
-    3022: _OMinDevicePixelRatio = 14680070
-    3023: _OObjectFit = 14680071
-    3024: _OOuterSpinButton = 14680072
-    3025: _OPlaceholder = 14680073
-    3026: _OPrefocus = 14680074
-    3027: _OScrollbar = 14680075
-    3028: _OScrollbarThumb = 14680076
-    3029: _OScrollbarTrack = 14680077
-    3030: _OScrollbarTrackPiece = 14680078
-    3031: _OSelection = 14680079
+    3016: _OAnimation = 14680064
+    3017: _OAnimationDelay = 14680065
+    3018: _OAnimationDirection = 14680066
+    3019: _OAnimationDuration = 14680067
+    3020: _OAnimationFillMode = 14680068
+    3021: _OAnimationIterationCount = 14680069
+    3022: _OAnimationName = 14680070
+    3023: _OAnimationPlayState = 14680071
+    3024: _OAnimationTimingFunction = 14680072
+    3025: _OBackfaceVisibility = 14680073
+    3026: _OBackgroundSize = 14680074
+    3027: _OBorderBottomLeftRadius = 14680075
+    3028: _OBorderBottomRightRadius = 14680076
+    3029: _OBorderImage = 14680077
+    3030: _OBorderImageOutset = 14680078
+    3031: _OBorderImageRepeat = 14680079
+    3032: _OBorderImageSlice = 14680080
+    3033: _OBorderImageSource = 14680081
+    3034: _OBorderImageWidth = 14680082
+    3035: _OBorderRadius = 14680083
+    3036: _OBorderTopLeftRadius = 14680084
+    3037: _OBorderTopRightRadius = 14680085
+    3038: _OBoxShadow = 14680086
+    3039: _OBoxSizing = 14680087
+    3040: _ODevicePixelRatio = 14680088
+    3041: _OFilter = 14680089
+    3042: _OFlex = 14680090
+    3043: _OFontFeatureSettings = 14680091
+    3044: _OInnerSpinButton = 14680092
+    3045: _OMaxDevicePixelRatio = 14680093
+    3046: _OMinDevicePixelRatio = 14680094
+    3047: _OObjectFit = 14680095
+    3048: _OObjectPosition = 14680096
+    3049: _OOuterSpinButton = 14680097
+    3050: _OPerspective = 14680098
+    3051: _OPerspectiveOrigin = 14680099
+    3052: _OPlaceholder = 14680100
+    3053: _OPrefocus = 14680101
+    3054: _OScrollbar = 14680102
+    3055: _OScrollbarThumb = 14680103
+    3056: _OScrollbarTrack = 14680104
+    3057: _OScrollbarTrackPiece = 14680105
+    3058: _OSelection = 14680106
+    3059: _OTabSize = 14680107
+    3060: _OTransform = 14680108
+    3061: _OTransformOrigin = 14680109
+    3062: _OTransformStyle = 14680110
+    3063: _OTransition = 14680111
+    3064: _OTransitionDelay = 14680112
+    3065: _OTransitionDuration = 14680113
+    3066: _OTransitionProperty = 14680114
+    3067: _OTransitionTimingFunction = 14680115
 CubicBezierFunction: size=176 align=8 {
     name: 0
     params: 16
@@ -8106,6 +8142,75 @@ NumericFractionValues: size=16 align=4
 NumericSpacingValues: size=16 align=4
     0: ProportionalNums
     1: TabularNums
+OAnimationDelayStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationDirectionStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationDurationStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationFillModeStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationIterationCountStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationNameStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationPlayStateStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationStyleValue: size=24 align=8 {
+    0: 0
+}
+OAnimationTimingFunctionStyleValue: size=24 align=8 {
+    0: 0
+}
+OBackfaceVisibilityStyleValue: size=32 align=8 {
+    0: 0
+}
+OBackgroundSizeStyleValue: size=24 align=8 {
+    0: 0
+}
+OBorderBottomLeftRadiusStyleValue: size=88 align=8 {
+    0: 0
+}
+OBorderBottomRightRadiusStyleValue: size=88 align=8 {
+    0: 0
+}
+OBorderImageOutsetStyleValue: size=128 align=8 {
+    0: 0
+}
+OBorderImageRepeatStyleValue: size=64 align=8 {
+    0: 0
+}
+OBorderImageSliceStyleValue: size=120 align=8 {
+    0: 0
+}
+OBorderImageSourceStyleValue: size=64 align=8 {
+    0: 0
+}
+OBorderImageStyleValue: size=568 align=8 {
+    0: 0
+}
+OBorderImageWidthStyleValue: size=160 align=8 {
+    0: 0
+}
+OBorderRadiusStyleValue: size=272 align=8 {
+    0: 0
+}
+OBorderTopLeftRadiusStyleValue: size=88 align=8 {
+    0: 0
+}
+OBorderTopRightRadiusStyleValue: size=88 align=8 {
+    0: 0
+}
+OBoxShadowStyleValue: size=24 align=8 {
+    0: 0
+}
 OBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
@@ -8119,11 +8224,23 @@ ODevicePixelRatioMediaFeature: size=160 align=8
 OFilterStyleValue: size=40 align=8 {
     0: 0
 }
+OFontFeatureSettingsStyleValue: size=32 align=8 {
+    0: 0
+}
 OObjectFitStyleValue: size=56 align=8
     0: Fill
     1: None
     2: Contain
     3: Cover
+OObjectPositionStyleValue: size=120 align=8 {
+    0: 0
+}
+OPerspectiveOriginStyleValue: size=120 align=8 {
+    0: 0
+}
+OPerspectiveStyleValue: size=32 align=8 {
+    0: 0
+}
 OPseudoClass: size=28 align=4
     0: Prefocus
 OPseudoElement: size=40 align=4
@@ -8135,6 +8252,33 @@ OPseudoElement: size=40 align=4
     5: ScrollbarTrack
     6: ScrollbarTrackPiece
     7: Selection
+OTabSizeStyleValue: size=32 align=8 {
+    0: 0
+}
+OTransformOriginStyleValue: size=128 align=8 {
+    0: 0
+}
+OTransformStyleStyleValue: size=32 align=8 {
+    0: 0
+}
+OTransformStyleValue: size=40 align=8 {
+    0: 0
+}
+OTransitionDelayStyleValue: size=24 align=8 {
+    0: 0
+}
+OTransitionDurationStyleValue: size=24 align=8 {
+    0: 0
+}
+OTransitionPropertyStyleValue: size=32 align=8 {
+    0: 0
+}
+OTransitionStyleValue: size=24 align=8 {
+    0: 0
+}
+OTransitionTimingFunctionStyleValue: size=24 align=8 {
+    0: 0
+}
 ObjectFitStyleValue: size=56 align=8
     0: Fill
     1: None
@@ -10784,419 +10928,455 @@ StyleValue: size=40 align=8
     557: NavRight
     558: NavUp
     559: Negative
-    560: _OBoxSizing
-    561: _OFilter
-    562: _OObjectFit
-    563: ObjectFit
-    564: ObjectPosition
-    565: ObjectViewBox
-    566: OffsetAnchor
-    567: OffsetDistance
-    568: OffsetPath
-    569: OffsetPosition
-    570: OffsetRotate
-    571: Offset
-    572: Opacity
-    573: Order
-    574: Orphans
-    575: OutlineColor
-    576: OutlineOffset
-    577: OutlineStyle
-    578: Outline
-    579: OutlineWidth
-    580: OverflowAnchor
-    581: OverflowBlock
-    582: OverflowClipMarginBlockEnd
-    583: OverflowClipMarginBlockStart
-    584: OverflowClipMarginBlock
-    585: OverflowClipMarginBottom
-    586: OverflowClipMarginInlineEnd
-    587: OverflowClipMarginInlineStart
-    588: OverflowClipMarginInline
-    589: OverflowClipMarginLeft
-    590: OverflowClipMarginRight
-    591: OverflowClipMargin
-    592: OverflowClipMarginTop
-    593: OverflowInline
-    594: Overflow
-    595: OverflowWrap
-    596: OverflowX
-    597: OverflowY
-    598: Overlay
-    599: OverscrollBehaviorBlock
-    600: OverscrollBehaviorInline
-    601: OverscrollBehavior
-    602: OverscrollBehaviorX
-    603: OverscrollBehaviorY
-    604: OverscrollContainerType
-    605: Pad
-    606: PaddingBlockEnd
-    607: PaddingBlockStart
-    608: PaddingBlock
-    609: PaddingBottom
-    610: PaddingInlineEnd
-    611: PaddingInlineStart
-    612: PaddingInline
-    613: PaddingLeft
-    614: PaddingRight
-    615: Padding
-    616: PaddingTop
-    617: Page
-    618: PaintOrder
-    619: PauseAfter
-    620: PauseBefore
-    621: Pause
-    622: PerspectiveOrigin
-    623: Perspective
-    624: PlaceContent
-    625: PlaceItems
-    626: PlaceSelf
-    627: PointerEvents
-    628: PointerTimelineAxis
-    629: PointerTimelineName
-    630: PointerTimeline
-    631: PositionAnchor
-    632: PositionArea
-    633: Position
-    634: PositionTryFallbacks
-    635: PositionTryOrder
-    636: PositionTry
-    637: PositionVisibility
-    638: Prefix
-    639: PrintColorAdjust
-    640: Quotes
-    641: Range
-    642: ReadingFlow
-    643: ReadingOrder
-    644: RegionFragment
-    645: Resize
-    646: RestAfter
-    647: RestBefore
-    648: Rest
-    649: Right
-    650: Rotate
-    651: RowGap
-    652: RowRuleBreak
-    653: RowRuleColor
-    654: RowRuleInsetCapEnd
-    655: RowRuleInsetCapStart
-    656: RowRuleInsetCap
-    657: RowRuleInsetEnd
-    658: RowRuleInsetJunctionEnd
-    659: RowRuleInsetJunctionStart
-    660: RowRuleInsetJunction
-    661: RowRuleInsetStart
-    662: RowRuleInset
-    663: RowRuleStyle
-    664: RowRule
-    665: RowRuleVisibilityItems
-    666: RowRuleWidth
-    667: RubyAlign
-    668: RubyMerge
-    669: RubyOverhang
-    670: RubyPosition
-    671: RuleBreak
-    672: RuleColor
-    673: RuleInsetCap
-    674: RuleInsetEnd
-    675: RuleInsetJunction
-    676: RuleInsetStart
-    677: RuleInset
-    678: RuleOverlap
-    679: RuleStyle
-    680: Rule
-    681: RuleVisibilityItems
-    682: RuleWidth
-    683: Running
-    684: Scale
-    685: ScrollAxisLock
-    686: ScrollBehavior
-    687: ScrollInitialTarget
-    688: ScrollMarginBlockEnd
-    689: ScrollMarginBlockStart
-    690: ScrollMarginBlock
-    691: ScrollMarginBottom
-    692: ScrollMarginInlineEnd
-    693: ScrollMarginInlineStart
-    694: ScrollMarginInline
-    695: ScrollMarginLeft
-    696: ScrollMarginRight
-    697: ScrollMargin
-    698: ScrollMarginTop
-    699: ScrollMarkerGroup
-    700: ScrollPaddingBlockEnd
-    701: ScrollPaddingBlockStart
-    702: ScrollPaddingBlock
-    703: ScrollPaddingBottom
-    704: ScrollPaddingInlineEnd
-    705: ScrollPaddingInlineStart
-    706: ScrollPaddingInline
-    707: ScrollPaddingLeft
-    708: ScrollPaddingRight
-    709: ScrollPadding
-    710: ScrollPaddingTop
-    711: ScrollSnapAlign
-    712: ScrollSnapStop
-    713: ScrollSnapType
-    714: ScrollTargetGroup
-    715: ScrollTimelineAxis
-    716: ScrollTimelineName
-    717: ScrollTimeline
-    718: ScrollbarColor
-    719: ScrollbarGutter
-    720: ScrollbarWidth
-    721: ShapeImageThreshold
-    722: ShapeInside
-    723: ShapeMargin
-    724: ShapeOutside
-    725: ShapePadding
-    726: ShapeRendering
-    727: Size
-    728: SliderOrientation
-    729: SpatialNavigationAction
-    730: SpatialNavigationContain
-    731: SpatialNavigationFunction
-    732: SpeakAs
-    733: Speak
-    734: StringSet
-    735: StrokeAlign
-    736: StrokeBreak
-    737: StrokeColor
-    738: StrokeDashCorner
-    739: StrokeDashJustify
-    740: StrokeDasharray
-    741: StrokeDashoffset
-    742: StrokeImage
-    743: StrokeLinecap
-    744: StrokeLinejoin
-    745: StrokeMiterlimit
-    746: StrokeOpacity
-    747: StrokeOrigin
-    748: StrokePosition
-    749: StrokeRepeat
-    750: StrokeSize
-    751: Stroke
-    752: StrokeWidth
-    753: Suffix
-    754: Symbols
-    755: System
-    756: TabSize
-    757: TableLayout
-    758: TextAlignAll
-    759: TextAlignLast
-    760: TextAlign
-    761: TextAutospace
-    762: TextBoxEdge
-    763: TextBox
-    764: TextBoxTrim
-    765: TextCombineUpright
-    766: TextDecorationColor
-    767: TextDecorationInset
-    768: TextDecorationLine
-    769: TextDecorationSkipBox
-    770: TextDecorationSkipInk
-    771: TextDecorationSkipSelf
-    772: TextDecorationSkipSpaces
-    773: TextDecorationSkip
-    774: TextDecorationStyle
-    775: TextDecoration
-    776: TextDecorationThickness
-    777: TextEmphasisColor
-    778: TextEmphasisPosition
-    779: TextEmphasisSkip
-    780: TextEmphasisStyle
-    781: TextEmphasis
-    782: TextFit
-    783: TextGroupAlign
-    784: TextIndent
-    785: TextJustify
-    786: TextOrientation
-    787: TextOverflow
-    788: TextRendering
-    789: TextShadow
-    790: TextSizeAdjust
-    791: TextSpacing
-    792: TextSpacingTrim
-    793: TextTransform
-    794: TextUnderlineOffset
-    795: TextUnderlinePosition
-    796: TextWrapMode
-    797: TextWrapStyle
-    798: TextWrap
-    799: TimelineScope
-    800: TimelineTriggerActivationRangeEnd
-    801: TimelineTriggerActivationRangeStart
-    802: TimelineTriggerActivationRange
-    803: TimelineTriggerActiveRangeEnd
-    804: TimelineTriggerActiveRangeStart
-    805: TimelineTriggerActiveRange
-    806: TimelineTriggerName
-    807: TimelineTriggerRange
-    808: TimelineTriggerSource
-    809: TimelineTrigger
-    810: Top
-    811: TouchAction
-    812: TransformBox
-    813: TransformOrigin
-    814: TransformStyle
-    815: Transform
-    816: TransitionBehavior
-    817: TransitionDelay
-    818: TransitionDuration
-    819: TransitionProperty
-    820: Transition
-    821: TransitionTimingFunction
-    822: Translate
-    823: TriggerScope
-    824: UnicodeBidi
-    825: UserSelect
-    826: VerticalAlign
-    827: ViewTimelineAxis
-    828: ViewTimelineInset
-    829: ViewTimelineName
-    830: ViewTimeline
-    831: ViewTransitionClass
-    832: ViewTransitionGroup
-    833: ViewTransitionName
-    834: ViewTransitionScope
-    835: Visibility
-    836: VoiceBalance
-    837: VoiceDuration
-    838: VoiceFamily
-    839: VoicePitch
-    840: VoiceRange
-    841: VoiceRate
-    842: VoiceStress
-    843: VoiceVolume
-    844: _WebkitAlignContent
-    845: _WebkitAlignItems
-    846: _WebkitAlignSelf
-    847: _WebkitAnimationDelay
-    848: _WebkitAnimationDirection
-    849: _WebkitAnimationDuration
-    850: _WebkitAnimationFillMode
-    851: _WebkitAnimationIterationCount
-    852: _WebkitAnimationName
-    853: _WebkitAnimationPlayState
-    854: _WebkitAnimation
-    855: _WebkitAnimationTimingFunction
-    856: _WebkitAppRegion
-    857: _WebkitAppearance
-    858: _WebkitBackdropFilter
-    859: _WebkitBackfaceVisibility
-    860: _WebkitBackgroundClip
-    861: _WebkitBackgroundOrigin
-    862: _WebkitBackgroundSize
-    863: _WebkitBorderBottomLeftRadius
-    864: _WebkitBorderBottomRightRadius
-    865: _WebkitBorderHorizontalSpacing
-    866: _WebkitBorderImageOutset
-    867: _WebkitBorderImageRepeat
-    868: _WebkitBorderImageSlice
-    869: _WebkitBorderImageSource
-    870: _WebkitBorderImage
-    871: _WebkitBorderImageWidth
-    872: _WebkitBorderRadius
-    873: _WebkitBorderTopLeftRadius
-    874: _WebkitBorderTopRightRadius
-    875: _WebkitBorderVerticalSpacing
-    876: _WebkitBoxAlign
-    877: _WebkitBoxDecorationBreak
-    878: _WebkitBoxDirection
-    879: _WebkitBoxFlex
-    880: _WebkitBoxOrdinalGroup
-    881: _WebkitBoxOrient
-    882: _WebkitBoxPack
-    883: _WebkitBoxReflect
-    884: _WebkitBoxShadow
-    885: _WebkitBoxSizing
-    886: _WebkitClipPath
-    887: _WebkitColumnBreakInside
-    888: _WebkitColumnCount
-    889: _WebkitColumnGap
-    890: _WebkitColumnRuleColor
-    891: _WebkitColumnRuleStyle
-    892: _WebkitColumnRule
-    893: _WebkitColumnRuleWidth
-    894: _WebkitColumnSpan
-    895: _WebkitColumnWidth
-    896: _WebkitColumns
-    897: _WebkitFilter
-    898: _WebkitFlexBasis
-    899: _WebkitFlexDirection
-    900: _WebkitFlexFlow
-    901: _WebkitFlexGrow
-    902: _WebkitFlexShrink
-    903: _WebkitFlex
-    904: _WebkitFlexWrap
-    905: _WebkitFontFeatureSettings
-    906: _WebkitFontSmoothing
-    907: _WebkitFontVariantLigatures
-    908: _WebkitHyphens
-    909: _WebkitJustifyContent
-    910: _WebkitLineBreak
-    911: _WebkitLineClamp
-    912: _WebkitMarginEnd
-    913: _WebkitMarginStart
-    914: _WebkitMarginTopCollapse
-    915: _WebkitMaskAttachment
-    916: _WebkitMaskClip
-    917: _WebkitMaskComposite
-    918: _WebkitMaskImage
-    919: _WebkitMaskOrigin
-    920: _WebkitMaskPosition
-    921: _WebkitMaskRepeat
-    922: _WebkitMaskSize
-    923: _WebkitMask
-    924: _WebkitOrder
-    925: _WebkitOverflowScrolling
-    926: _WebkitPaddingAfter
-    927: _WebkitPaddingStart
-    928: _WebkitPerspectiveOrigin
-    929: _WebkitPerspective
-    930: _WebkitPrintColorAdjust
-    931: _WebkitTapHighlightColor
-    932: _WebkitTextDecorationColor
-    933: _WebkitTextDecorationSkipInk
-    934: _WebkitTextDecorationSkip
-    935: _WebkitTextDecorationStyle
-    936: _WebkitTextDecoration
-    937: _WebkitTextFillColor
-    938: _WebkitTextSizeAdjust
-    939: _WebkitTextStrokeColor
-    940: _WebkitTextStroke
-    941: _WebkitTextStrokeWidth
-    942: _WebkitTouchCallout
-    943: _WebkitTransformOrigin
-    944: _WebkitTransformStyle
-    945: _WebkitTransform
-    946: _WebkitTransitionDelay
-    947: _WebkitTransitionDuration
-    948: _WebkitTransitionProperty
-    949: _WebkitTransition
-    950: _WebkitTransitionTimingFunction
-    951: _WebkitUserDrag
-    952: _WebkitUserModify
-    953: _WebkitUserSelect
-    954: WhiteSpaceCollapse
-    955: WhiteSpace
-    956: WhiteSpaceTrim
-    957: Widows
-    958: Width
-    959: WillChange
-    960: WindowDrag
-    961: WordBreak
-    962: WordSpaceTransform
-    963: WordSpacing
-    964: WordWrap
-    965: WrapAfter
-    966: WrapBefore
-    967: WrapFlow
-    968: WrapInside
-    969: WrapThrough
-    970: WritingMode
-    971: ZIndex
-    972: Zoom
+    560: _OAnimationDelay
+    561: _OAnimationDirection
+    562: _OAnimationDuration
+    563: _OAnimationFillMode
+    564: _OAnimationIterationCount
+    565: _OAnimationName
+    566: _OAnimationPlayState
+    567: _OAnimation
+    568: _OAnimationTimingFunction
+    569: _OBackfaceVisibility
+    570: _OBackgroundSize
+    571: _OBorderBottomLeftRadius
+    572: _OBorderBottomRightRadius
+    573: _OBorderImageOutset
+    574: _OBorderImageRepeat
+    575: _OBorderImageSlice
+    576: _OBorderImageSource
+    577: _OBorderImage
+    578: _OBorderImageWidth
+    579: _OBorderRadius
+    580: _OBorderTopLeftRadius
+    581: _OBorderTopRightRadius
+    582: _OBoxShadow
+    583: _OBoxSizing
+    584: _OFilter
+    585: _OFontFeatureSettings
+    586: _OObjectFit
+    587: _OObjectPosition
+    588: _OPerspectiveOrigin
+    589: _OPerspective
+    590: _OTabSize
+    591: _OTransformOrigin
+    592: _OTransformStyle
+    593: _OTransform
+    594: _OTransitionDelay
+    595: _OTransitionDuration
+    596: _OTransitionProperty
+    597: _OTransition
+    598: _OTransitionTimingFunction
+    599: ObjectFit
+    600: ObjectPosition
+    601: ObjectViewBox
+    602: OffsetAnchor
+    603: OffsetDistance
+    604: OffsetPath
+    605: OffsetPosition
+    606: OffsetRotate
+    607: Offset
+    608: Opacity
+    609: Order
+    610: Orphans
+    611: OutlineColor
+    612: OutlineOffset
+    613: OutlineStyle
+    614: Outline
+    615: OutlineWidth
+    616: OverflowAnchor
+    617: OverflowBlock
+    618: OverflowClipMarginBlockEnd
+    619: OverflowClipMarginBlockStart
+    620: OverflowClipMarginBlock
+    621: OverflowClipMarginBottom
+    622: OverflowClipMarginInlineEnd
+    623: OverflowClipMarginInlineStart
+    624: OverflowClipMarginInline
+    625: OverflowClipMarginLeft
+    626: OverflowClipMarginRight
+    627: OverflowClipMargin
+    628: OverflowClipMarginTop
+    629: OverflowInline
+    630: Overflow
+    631: OverflowWrap
+    632: OverflowX
+    633: OverflowY
+    634: Overlay
+    635: OverscrollBehaviorBlock
+    636: OverscrollBehaviorInline
+    637: OverscrollBehavior
+    638: OverscrollBehaviorX
+    639: OverscrollBehaviorY
+    640: OverscrollContainerType
+    641: Pad
+    642: PaddingBlockEnd
+    643: PaddingBlockStart
+    644: PaddingBlock
+    645: PaddingBottom
+    646: PaddingInlineEnd
+    647: PaddingInlineStart
+    648: PaddingInline
+    649: PaddingLeft
+    650: PaddingRight
+    651: Padding
+    652: PaddingTop
+    653: Page
+    654: PaintOrder
+    655: PauseAfter
+    656: PauseBefore
+    657: Pause
+    658: PerspectiveOrigin
+    659: Perspective
+    660: PlaceContent
+    661: PlaceItems
+    662: PlaceSelf
+    663: PointerEvents
+    664: PointerTimelineAxis
+    665: PointerTimelineName
+    666: PointerTimeline
+    667: PositionAnchor
+    668: PositionArea
+    669: Position
+    670: PositionTryFallbacks
+    671: PositionTryOrder
+    672: PositionTry
+    673: PositionVisibility
+    674: Prefix
+    675: PrintColorAdjust
+    676: Quotes
+    677: Range
+    678: ReadingFlow
+    679: ReadingOrder
+    680: RegionFragment
+    681: Resize
+    682: RestAfter
+    683: RestBefore
+    684: Rest
+    685: Right
+    686: Rotate
+    687: RowGap
+    688: RowRuleBreak
+    689: RowRuleColor
+    690: RowRuleInsetCapEnd
+    691: RowRuleInsetCapStart
+    692: RowRuleInsetCap
+    693: RowRuleInsetEnd
+    694: RowRuleInsetJunctionEnd
+    695: RowRuleInsetJunctionStart
+    696: RowRuleInsetJunction
+    697: RowRuleInsetStart
+    698: RowRuleInset
+    699: RowRuleStyle
+    700: RowRule
+    701: RowRuleVisibilityItems
+    702: RowRuleWidth
+    703: RubyAlign
+    704: RubyMerge
+    705: RubyOverhang
+    706: RubyPosition
+    707: RuleBreak
+    708: RuleColor
+    709: RuleInsetCap
+    710: RuleInsetEnd
+    711: RuleInsetJunction
+    712: RuleInsetStart
+    713: RuleInset
+    714: RuleOverlap
+    715: RuleStyle
+    716: Rule
+    717: RuleVisibilityItems
+    718: RuleWidth
+    719: Running
+    720: Scale
+    721: ScrollAxisLock
+    722: ScrollBehavior
+    723: ScrollInitialTarget
+    724: ScrollMarginBlockEnd
+    725: ScrollMarginBlockStart
+    726: ScrollMarginBlock
+    727: ScrollMarginBottom
+    728: ScrollMarginInlineEnd
+    729: ScrollMarginInlineStart
+    730: ScrollMarginInline
+    731: ScrollMarginLeft
+    732: ScrollMarginRight
+    733: ScrollMargin
+    734: ScrollMarginTop
+    735: ScrollMarkerGroup
+    736: ScrollPaddingBlockEnd
+    737: ScrollPaddingBlockStart
+    738: ScrollPaddingBlock
+    739: ScrollPaddingBottom
+    740: ScrollPaddingInlineEnd
+    741: ScrollPaddingInlineStart
+    742: ScrollPaddingInline
+    743: ScrollPaddingLeft
+    744: ScrollPaddingRight
+    745: ScrollPadding
+    746: ScrollPaddingTop
+    747: ScrollSnapAlign
+    748: ScrollSnapStop
+    749: ScrollSnapType
+    750: ScrollTargetGroup
+    751: ScrollTimelineAxis
+    752: ScrollTimelineName
+    753: ScrollTimeline
+    754: ScrollbarColor
+    755: ScrollbarGutter
+    756: ScrollbarWidth
+    757: ShapeImageThreshold
+    758: ShapeInside
+    759: ShapeMargin
+    760: ShapeOutside
+    761: ShapePadding
+    762: ShapeRendering
+    763: Size
+    764: SliderOrientation
+    765: SpatialNavigationAction
+    766: SpatialNavigationContain
+    767: SpatialNavigationFunction
+    768: SpeakAs
+    769: Speak
+    770: StringSet
+    771: StrokeAlign
+    772: StrokeBreak
+    773: StrokeColor
+    774: StrokeDashCorner
+    775: StrokeDashJustify
+    776: StrokeDasharray
+    777: StrokeDashoffset
+    778: StrokeImage
+    779: StrokeLinecap
+    780: StrokeLinejoin
+    781: StrokeMiterlimit
+    782: StrokeOpacity
+    783: StrokeOrigin
+    784: StrokePosition
+    785: StrokeRepeat
+    786: StrokeSize
+    787: Stroke
+    788: StrokeWidth
+    789: Suffix
+    790: Symbols
+    791: System
+    792: TabSize
+    793: TableLayout
+    794: TextAlignAll
+    795: TextAlignLast
+    796: TextAlign
+    797: TextAutospace
+    798: TextBoxEdge
+    799: TextBox
+    800: TextBoxTrim
+    801: TextCombineUpright
+    802: TextDecorationColor
+    803: TextDecorationInset
+    804: TextDecorationLine
+    805: TextDecorationSkipBox
+    806: TextDecorationSkipInk
+    807: TextDecorationSkipSelf
+    808: TextDecorationSkipSpaces
+    809: TextDecorationSkip
+    810: TextDecorationStyle
+    811: TextDecoration
+    812: TextDecorationThickness
+    813: TextEmphasisColor
+    814: TextEmphasisPosition
+    815: TextEmphasisSkip
+    816: TextEmphasisStyle
+    817: TextEmphasis
+    818: TextFit
+    819: TextGroupAlign
+    820: TextIndent
+    821: TextJustify
+    822: TextOrientation
+    823: TextOverflow
+    824: TextRendering
+    825: TextShadow
+    826: TextSizeAdjust
+    827: TextSpacing
+    828: TextSpacingTrim
+    829: TextTransform
+    830: TextUnderlineOffset
+    831: TextUnderlinePosition
+    832: TextWrapMode
+    833: TextWrapStyle
+    834: TextWrap
+    835: TimelineScope
+    836: TimelineTriggerActivationRangeEnd
+    837: TimelineTriggerActivationRangeStart
+    838: TimelineTriggerActivationRange
+    839: TimelineTriggerActiveRangeEnd
+    840: TimelineTriggerActiveRangeStart
+    841: TimelineTriggerActiveRange
+    842: TimelineTriggerName
+    843: TimelineTriggerRange
+    844: TimelineTriggerSource
+    845: TimelineTrigger
+    846: Top
+    847: TouchAction
+    848: TransformBox
+    849: TransformOrigin
+    850: TransformStyle
+    851: Transform
+    852: TransitionBehavior
+    853: TransitionDelay
+    854: TransitionDuration
+    855: TransitionProperty
+    856: Transition
+    857: TransitionTimingFunction
+    858: Translate
+    859: TriggerScope
+    860: UnicodeBidi
+    861: UserSelect
+    862: VerticalAlign
+    863: ViewTimelineAxis
+    864: ViewTimelineInset
+    865: ViewTimelineName
+    866: ViewTimeline
+    867: ViewTransitionClass
+    868: ViewTransitionGroup
+    869: ViewTransitionName
+    870: ViewTransitionScope
+    871: Visibility
+    872: VoiceBalance
+    873: VoiceDuration
+    874: VoiceFamily
+    875: VoicePitch
+    876: VoiceRange
+    877: VoiceRate
+    878: VoiceStress
+    879: VoiceVolume
+    880: _WebkitAlignContent
+    881: _WebkitAlignItems
+    882: _WebkitAlignSelf
+    883: _WebkitAnimationDelay
+    884: _WebkitAnimationDirection
+    885: _WebkitAnimationDuration
+    886: _WebkitAnimationFillMode
+    887: _WebkitAnimationIterationCount
+    888: _WebkitAnimationName
+    889: _WebkitAnimationPlayState
+    890: _WebkitAnimation
+    891: _WebkitAnimationTimingFunction
+    892: _WebkitAppRegion
+    893: _WebkitAppearance
+    894: _WebkitBackdropFilter
+    895: _WebkitBackfaceVisibility
+    896: _WebkitBackgroundClip
+    897: _WebkitBackgroundOrigin
+    898: _WebkitBackgroundSize
+    899: _WebkitBorderBottomLeftRadius
+    900: _WebkitBorderBottomRightRadius
+    901: _WebkitBorderHorizontalSpacing
+    902: _WebkitBorderImageOutset
+    903: _WebkitBorderImageRepeat
+    904: _WebkitBorderImageSlice
+    905: _WebkitBorderImageSource
+    906: _WebkitBorderImage
+    907: _WebkitBorderImageWidth
+    908: _WebkitBorderRadius
+    909: _WebkitBorderTopLeftRadius
+    910: _WebkitBorderTopRightRadius
+    911: _WebkitBorderVerticalSpacing
+    912: _WebkitBoxAlign
+    913: _WebkitBoxDecorationBreak
+    914: _WebkitBoxDirection
+    915: _WebkitBoxFlex
+    916: _WebkitBoxOrdinalGroup
+    917: _WebkitBoxOrient
+    918: _WebkitBoxPack
+    919: _WebkitBoxReflect
+    920: _WebkitBoxShadow
+    921: _WebkitBoxSizing
+    922: _WebkitClipPath
+    923: _WebkitColumnBreakInside
+    924: _WebkitColumnCount
+    925: _WebkitColumnGap
+    926: _WebkitColumnRuleColor
+    927: _WebkitColumnRuleStyle
+    928: _WebkitColumnRule
+    929: _WebkitColumnRuleWidth
+    930: _WebkitColumnSpan
+    931: _WebkitColumnWidth
+    932: _WebkitColumns
+    933: _WebkitFilter
+    934: _WebkitFlexBasis
+    935: _WebkitFlexDirection
+    936: _WebkitFlexFlow
+    937: _WebkitFlexGrow
+    938: _WebkitFlexShrink
+    939: _WebkitFlex
+    940: _WebkitFlexWrap
+    941: _WebkitFontFeatureSettings
+    942: _WebkitFontSmoothing
+    943: _WebkitFontVariantLigatures
+    944: _WebkitHyphens
+    945: _WebkitJustifyContent
+    946: _WebkitLineBreak
+    947: _WebkitLineClamp
+    948: _WebkitMarginEnd
+    949: _WebkitMarginStart
+    950: _WebkitMarginTopCollapse
+    951: _WebkitMaskAttachment
+    952: _WebkitMaskClip
+    953: _WebkitMaskComposite
+    954: _WebkitMaskImage
+    955: _WebkitMaskOrigin
+    956: _WebkitMaskPosition
+    957: _WebkitMaskRepeat
+    958: _WebkitMaskSize
+    959: _WebkitMask
+    960: _WebkitOrder
+    961: _WebkitOverflowScrolling
+    962: _WebkitPaddingAfter
+    963: _WebkitPaddingStart
+    964: _WebkitPerspectiveOrigin
+    965: _WebkitPerspective
+    966: _WebkitPrintColorAdjust
+    967: _WebkitTapHighlightColor
+    968: _WebkitTextDecorationColor
+    969: _WebkitTextDecorationSkipInk
+    970: _WebkitTextDecorationSkip
+    971: _WebkitTextDecorationStyle
+    972: _WebkitTextDecoration
+    973: _WebkitTextFillColor
+    974: _WebkitTextSizeAdjust
+    975: _WebkitTextStrokeColor
+    976: _WebkitTextStroke
+    977: _WebkitTextStrokeWidth
+    978: _WebkitTouchCallout
+    979: _WebkitTransformOrigin
+    980: _WebkitTransformStyle
+    981: _WebkitTransform
+    982: _WebkitTransitionDelay
+    983: _WebkitTransitionDuration
+    984: _WebkitTransitionProperty
+    985: _WebkitTransition
+    986: _WebkitTransitionTimingFunction
+    987: _WebkitUserDrag
+    988: _WebkitUserModify
+    989: _WebkitUserSelect
+    990: WhiteSpaceCollapse
+    991: WhiteSpace
+    992: WhiteSpaceTrim
+    993: Widows
+    994: Width
+    995: WillChange
+    996: WindowDrag
+    997: WordBreak
+    998: WordSpaceTransform
+    999: WordSpacing
+    1000: WordWrap
+    1001: WrapAfter
+    1002: WrapBefore
+    1003: WrapFlow
+    1004: WrapInside
+    1005: WrapThrough
+    1006: WritingMode
+    1007: ZIndex
+    1008: Zoom
 StylesetFunction: size=56 align=8 {
     name: 0
     params: 16
