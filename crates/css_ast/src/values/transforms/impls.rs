@@ -75,6 +75,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ScaleStyleValue, "1 2 3");
 		assert_parse!(CssAtomSet::ATOMS, ScaleStyleValue, "1.7 50%");
 		assert_parse!(CssAtomSet::ATOMS, TransformStyleStyleValue, "flat");
+		assert_parse!(CssAtomSet::ATOMS, TransformStyleStyleValue, "preserve-3d");
 		assert_parse!(CssAtomSet::ATOMS, PerspectiveOriginStyleValue, "1px");
 		assert_parse!(CssAtomSet::ATOMS, BackfaceVisibilityStyleValue, "visible");
 	}
@@ -82,6 +83,7 @@ mod tests {
 	#[test]
 	fn test_errors() {
 		assert_peek_false!(CssAtomSet::ATOMS, TransformStyleValue, "auto");
+		assert_peek_false!(CssAtomSet::ATOMS, TransformStyleStyleValue, "preserve3d");
 		assert_parse_error!(CssAtomSet::ATOMS, ScaleStyleValue, "none none");
 	}
 
