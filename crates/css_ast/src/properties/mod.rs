@@ -291,8 +291,8 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	{
 		let atom = p.to_atom::<CssAtomSet>(c);
 		c.token().is_dashed_ident()
-			|| crate::property_atoms::CSS_PROPERTY_ATOMS.contains(&atom)
-			|| CSS_VENDOR_PROPERTY_ATOMS.contains(&atom)
+			|| crate::property_atoms::CSS_PROPERTY_ATOMS.binary_search(&atom).is_ok()
+			|| CSS_VENDOR_PROPERTY_ATOMS.binary_search(&atom).is_ok()
 	}
 
 	fn is_unknown(&self) -> bool {
@@ -422,6 +422,24 @@ mod tests {
 	use css_parse::{Arena, Declaration, Parser, assert_parse};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
+
+	#[test]
+	fn every_property_name_is_valid() {
+		let alloc = Arena::new();
+		for atom in crate::property_atoms::CSS_PROPERTY_ATOMS.iter().chain(CSS_VENDOR_PROPERTY_ATOMS) {
+			let source = atom.to_str();
+			let mut lexer = Lexer::new(&CssAtomSet::ATOMS, source);
+			let cursor = lexer.next().unwrap();
+			let parser = Parser::new(&alloc, source, lexer);
+			assert!(StyleValue::valid_declaration_name(&parser, cursor), "{source}");
+		}
+		for source in ["red", "not-a-property"] {
+			let mut lexer = Lexer::new(&CssAtomSet::ATOMS, source);
+			let cursor = lexer.next().unwrap();
+			let parser = Parser::new(&alloc, source, lexer);
+			assert!(!StyleValue::valid_declaration_name(&parser, cursor), "{source}");
+		}
+	}
 
 	#[test]
 	fn test_writes() {
