@@ -26,6 +26,13 @@ impl<T: NodeWithMetadata<CssMetadata>> NodeWithMetadata<CssMetadata> for AutoNon
 			Self::Some(t) => t.metadata(),
 		}
 	}
+
+	#[inline]
+	fn merge_metadata(&self, meta: &mut CssMetadata) {
+		if let Self::Some(t) = self {
+			t.merge_metadata(meta);
+		}
+	}
 }
 
 impl<T: ToNumberValue> ToNumberValue for AutoNoneOr<T> {

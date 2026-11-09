@@ -26,6 +26,7 @@ pub enum SvgPaint<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SvgPaintChildFunction<'a> {
 	#[atom(CssAtomSet::Child)]
 	pub function: T![Function],

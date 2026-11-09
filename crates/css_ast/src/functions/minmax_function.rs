@@ -12,6 +12,7 @@ use crate::{InflexibleBreadth, TrackBreadth};
 #[cfg_attr(feature = "serde", derive(serde::Serialize))]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct MinmaxFunction<'a> {
 	#[atom(CssAtomSet::Minmax)]
 	pub name: T![Function],

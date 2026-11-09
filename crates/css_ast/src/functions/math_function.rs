@@ -39,7 +39,7 @@ use css_parse::{AtomSet, SemanticEq, Token};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub enum MathFunction<'a, T> {
 	CalcFunction(CalcFunction<'a, T>),
 	MinFunction(MinFunction<'a, T>),
@@ -106,7 +106,7 @@ impl<'a, T> Peek<'a> for MathFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct CalcFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Calc)]
@@ -122,7 +122,7 @@ pub struct CalcFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct MinFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Min)]
@@ -138,7 +138,7 @@ pub struct MinFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct MaxFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Max)]
@@ -159,7 +159,7 @@ pub struct MaxFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct ClampFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Clamp)]
@@ -188,7 +188,7 @@ pub struct ClampFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct RoundFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Round)]
@@ -217,7 +217,7 @@ pub struct RoundFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct ModFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Mod)]
@@ -242,7 +242,7 @@ pub struct ModFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct RemFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Rem)]
@@ -267,7 +267,7 @@ pub struct RemFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct SinFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Sin)]
@@ -288,7 +288,7 @@ pub struct SinFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct CosFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Cos)]
@@ -309,7 +309,7 @@ pub struct CosFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct TanFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Tan)]
@@ -330,7 +330,7 @@ pub struct TanFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct AsinFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Asin)]
@@ -351,7 +351,7 @@ pub struct AsinFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct AcosFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Acos)]
@@ -372,7 +372,7 @@ pub struct AcosFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct AtanFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Atan)]
@@ -393,7 +393,7 @@ pub struct AtanFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct Atan2Function<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Atan2)]
@@ -418,7 +418,7 @@ pub struct Atan2Function<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct PowFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Pow)]
@@ -443,7 +443,7 @@ pub struct PowFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct SqrtFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Sqrt)]
@@ -464,7 +464,7 @@ pub struct SqrtFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct HypotFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Hypot)]
@@ -485,7 +485,7 @@ pub struct HypotFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct LogFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Log)]
@@ -510,7 +510,7 @@ pub struct LogFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct ExpFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Exp)]
@@ -531,7 +531,7 @@ pub struct ExpFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct AbsFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Abs)]
@@ -552,7 +552,7 @@ pub struct AbsFunction<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub struct SignFunction<'a, T> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Sign)]
@@ -792,7 +792,7 @@ fn calc_sum_opt_eq<'a, T: SemanticEq>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub enum CalcOperandSubstitutionFunction<'a, T> {
 	Math(Box<'a, MathFunction<'a, T>>),
 	Var(VarFunction<'a, CalcOperand<'a, T>>),

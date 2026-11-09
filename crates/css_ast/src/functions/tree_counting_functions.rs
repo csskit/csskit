@@ -14,7 +14,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, node_kinds = Function)]
 pub enum TreeCountingFunction {
 	SiblingCount(#[atom(CssAtomSet::SiblingCount)] Function, #[semantic_eq(skip)] RightParen),
 	SiblingIndex(#[atom(CssAtomSet::SiblingIndex)] Function, #[semantic_eq(skip)] RightParen),

@@ -39,7 +39,7 @@ pub enum Gradient<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(value_kinds = Image)]
+#[metadata(value_kinds = Image, node_kinds = Function)]
 pub struct LinearGradientFunction<'a> {
 	#[atom(CssAtomSet::LinearGradient)]
 	pub name: T![Function],
@@ -71,7 +71,7 @@ pub struct LinearGradientFunctionParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(value_kinds = Image)]
+#[metadata(value_kinds = Image, node_kinds = Function)]
 pub struct RepeatingLinearGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingLinearGradient)]
 	pub name: T![Function],
@@ -118,7 +118,7 @@ pub struct LinearGradientOptions<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(value_kinds = Image)]
+#[metadata(value_kinds = Image, node_kinds = Function)]
 pub struct RadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RadialGradient)]
 	pub name: T![Function],
@@ -149,7 +149,7 @@ pub struct RadialGradientFunctionParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(value_kinds = Image)]
+#[metadata(value_kinds = Image, node_kinds = Function)]
 pub struct RepeatingRadialGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingRadialGradient)]
 	pub name: T![Function],
@@ -223,7 +223,7 @@ pub struct RadialEndingShape<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(value_kinds = Image)]
+#[metadata(value_kinds = Image, node_kinds = Function)]
 pub struct ConicGradientFunction<'a> {
 	#[atom(CssAtomSet::ConicGradient)]
 	pub name: T![Function],
@@ -254,7 +254,7 @@ pub struct ConicGradientFunctionParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(value_kinds = Image)]
+#[metadata(value_kinds = Image, node_kinds = Function)]
 pub struct RepeatingConicGradientFunction<'a> {
 	#[atom(CssAtomSet::RepeatingConicGradient)]
 	pub name: T![Function],

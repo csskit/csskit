@@ -11,6 +11,7 @@ use crate::Id;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ElementFunction {
 	#[atom(CssAtomSet::Element)]
 	#[cfg_attr(feature = "visitable", visit(skip))]

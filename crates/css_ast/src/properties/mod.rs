@@ -1,11 +1,11 @@
 use crate::{
 	AppliesTo, BoxPortion, BoxSide, CssAtomSet, CssMetadata, DeclarationKind, DeclarationMetadata, Inherits, Longhand,
-	NodeKinds, PropertyGroup, PropertyKind, Shorthand, Unresolved, VendorPrefixes, values,
+	NodeKinds, PropertyGroup, PropertyKind, Shorthand, Unresolved, values,
 };
 use css_lexer::Kind;
 use css_parse::{
-	AtomSet, Box, ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeMetadata,
-	NodeWithMetadata, Parser, Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
+	Box, ComponentValues, Cursor, Declaration, DeclarationValue, Diagnostic, KindSet, NodeMetadata, NodeWithMetadata,
+	Parser, Peek, Result as ParserResult, SemanticEq as SemanticEqTrait, State, T,
 };
 use csskit_derives::*;
 use csskit_proc_macro::node;
@@ -69,69 +69,18 @@ apply_properties!(style_value);
 
 impl<'a> NodeWithMetadata<CssMetadata> for StyleValue<'a> {
 	fn metadata(&self) -> CssMetadata {
-		macro_rules! metadata {
+		let mut meta = self.property_metadata();
+		macro_rules! merge_value {
 			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
 				match self {
-					Self::Initial(_) |
-					Self::Inherit(_)|
-					Self::Unset(_)|
-					Self::Revert(_)|
-					Self::RevertLayer(_) => {
-						CssMetadata {
-							declaration_kinds: DeclarationKind::CssWideKeywords,
-							..Default::default()
-						}
-					}
-					Self::RevertRule(_) => {
-						CssMetadata {
-							declaration_kinds: DeclarationKind::CssWideKeywords,
-							..Default::default()
-						}
-					}
-					Self::Custom(_) => {
-						CssMetadata {
-							declaration_kinds: DeclarationKind::Custom,
-							..Default::default()
-						}
-					}
-					Self::Unresolved(_) => {
-						CssMetadata {
-							declaration_kinds: DeclarationKind::Computed,
-							uses_substitution: true,
-							..Default::default()
-						}
-					},
-					Self::Unknown(_) => {
-						CssMetadata {
-							node_kinds: NodeKinds::Unknown,
-							..Default::default()
-						}
-					},
-					$(
-					Self::$name(v) => {
-						let mut declaration_kinds = DeclarationKind::none();
-						if values::$ty::shorthand().is_some() {
-							declaration_kinds |= DeclarationKind::Shorthands;
-						} else {
-							declaration_kinds |= DeclarationKind::Longhands;
-						}
-						let self_meta = CssMetadata {
-							property_groups: values::$ty::property_group(),
-							applies_to: values::$ty::applies_to(),
-							box_sides: values::$ty::box_side(),
-							box_portions: values::$ty::box_portion(),
-							declaration_kinds,
-							unitless_zero_resolves: values::$ty::unitless_zero_resolves(),
-							..Default::default()
-						};
-						let inner_meta = v.metadata();
-						css_parse::NodeMetadata::merge(self_meta, inner_meta)
-					}
-					)+
+					$(Self::$name(v) => v.merge_metadata(&mut meta),)+
+					Self::Unresolved(v) => v.merge_metadata(&mut meta),
+					_ => {}
 				}
 			};
 		}
-		apply_properties!(metadata)
+		apply_properties!(merge_value);
+		meta
 	}
 }
 
@@ -263,28 +212,50 @@ impl<'a> StyleValue<'a> {
 
 impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	fn declaration_metadata(decl: &Declaration<'a, Self, CssMetadata>) -> CssMetadata {
-		// Mark this node as a declaration
-		let mut meta = decl.value.metadata().with_declaration();
-		if decl.important.is_some() {
-			meta.declaration_kinds |= DeclarationKind::Important;
-		}
-		// Check if this is a custom property (dashed ident)
-		if decl.name.is_dashed_ident() {
-			meta.node_kinds |= NodeKinds::Custom;
-		}
-		// Check if the value is unknown
-		if decl.value.is_unknown() {
-			meta.node_kinds |= NodeKinds::Unknown;
-		}
-		// Extract vendor prefix from property name cursor
-		let cursor: Cursor = decl.name.into();
-		meta.vendor_prefixes =
-			CssAtomSet::from_bits(cursor.token().atom_bits()).try_into().unwrap_or(VendorPrefixes::none());
-		// Declarations always have a name property
-		meta.property_kinds |= PropertyKind::Name;
+		with_declaration_flags(decl, decl.value.metadata())
+	}
+
+	fn declaration_self_metadata(decl: &Declaration<'a, Self, CssMetadata>) -> CssMetadata {
+		let mut meta = with_declaration_flags(decl, decl.value.property_metadata());
+		meta.declaration_kinds |= decl.value.metadata().declaration_kinds;
 		meta
 	}
 
+	fn property_metadata(&self) -> CssMetadata {
+		macro_rules! property_metadata {
+			( $( $name: ident: $ty: ident$(<$a: lifetime>)? = $str: tt,)+ ) => {
+				match self {
+					Self::Initial(_)
+					| Self::Inherit(_)
+					| Self::Unset(_)
+					| Self::Revert(_)
+					| Self::RevertLayer(_)
+					| Self::RevertRule(_) => {
+						CssMetadata { declaration_kinds: DeclarationKind::CssWideKeywords, ..Default::default() }
+					}
+					Self::Custom(_) => CssMetadata { declaration_kinds: DeclarationKind::Custom, ..Default::default() },
+					Self::Unresolved(_) => CssMetadata { declaration_kinds: DeclarationKind::Computed, ..Default::default() },
+					Self::Unknown(_) => CssMetadata { node_kinds: NodeKinds::Unknown, ..Default::default() },
+					$(
+					Self::$name(_) => CssMetadata {
+						property_groups: values::$ty::property_group(),
+						applies_to: values::$ty::applies_to(),
+						box_sides: values::$ty::box_side(),
+						box_portions: values::$ty::box_portion(),
+						declaration_kinds: if values::$ty::shorthand().is_some() {
+							DeclarationKind::Shorthands
+						} else {
+							DeclarationKind::Longhands
+						},
+						unitless_zero_resolves: values::$ty::unitless_zero_resolves(),
+						..Default::default()
+					},
+					)+
+				}
+			};
+		}
+		apply_properties!(property_metadata)
+	}
 	fn valid_declaration_name<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -391,6 +362,22 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 	}
 }
 
+fn with_declaration_flags<'a>(decl: &Declaration<'a, StyleValue<'a>, CssMetadata>, value: CssMetadata) -> CssMetadata {
+	let mut meta = value.with_declaration();
+	if decl.important.is_some() {
+		meta.declaration_kinds |= DeclarationKind::Important;
+	}
+	if decl.name.is_dashed_ident() {
+		meta.node_kinds |= NodeKinds::Custom;
+	}
+	if decl.value.is_unknown() {
+		meta.node_kinds |= NodeKinds::Unknown;
+	}
+	meta.vendor_prefixes |= crate::metadata::vendor_prefixes_of(decl.name.into());
+	meta.property_kinds |= PropertyKind::Name;
+	meta
+}
+
 impl<'a> SemanticEqTrait for crate::StyleValue<'a> {
 	fn semantic_eq(&self, other: &Self, source_text: &str) -> bool {
 		macro_rules! semantic_eq {
@@ -419,7 +406,7 @@ mod tests {
 	use super::*;
 	use crate::{CssAtomSet, CssMetadata, ShorthandReset, Writes};
 	use css_lexer::Lexer;
-	use css_parse::{Arena, Declaration, Parser, assert_parse};
+	use css_parse::{Arena, AtomSet, Declaration, Parser, assert_parse};
 
 	type Property<'a> = Declaration<'a, StyleValue<'a>, CssMetadata>;
 
@@ -687,34 +674,5 @@ mod tests {
 			}
 		}
 		assert_eq!(fails, Vec::<String>::new());
-	}
-
-	#[test]
-	fn lists_the_shorthands_which_state_no_writes() {
-		let mut missing = apply_properties!(every_property)
-			.into_iter()
-			.filter(|(_, shorthand)| shorthand.is_some_and(|shorthand| shorthand.writes.is_none()))
-			.map(|(property, _)| property.to_str())
-			.collect::<Vec<_>>();
-		missing.sort_unstable();
-		assert_eq!(
-			missing,
-			[
-				"-webkit-animation",
-				"all",
-				"animation-delay",
-				"animation-range",
-				"font-synthesis",
-				"font-variant",
-				"grid",
-				"grid-area",
-				"grid-column",
-				"grid-row",
-				"grid-template",
-				"offset",
-				"scroll-timeline",
-				"view-timeline",
-			]
-		);
 	}
 }

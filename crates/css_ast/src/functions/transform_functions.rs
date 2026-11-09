@@ -8,6 +8,7 @@ use css_parse::Box;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum TransformFunction<'a> {
 	Matrix(Box<'a, MatrixFunction<'a>>),
 	Matrix3d(Box<'a, Matrix3dFunction<'a>>),
@@ -42,6 +43,7 @@ pub enum TransformFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct MatrixFunction<'a> {
 	#[atom(CssAtomSet::Matrix)]
 	pub name: T![Function],
@@ -78,6 +80,7 @@ pub struct MatrixFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct Matrix3dFunction<'a> {
 	#[atom(CssAtomSet::Matrix3d)]
 	pub name: T![Function],
@@ -135,6 +138,7 @@ pub struct Matrix3dFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TranslateFunction<'a> {
 	#[atom(CssAtomSet::Translate)]
 	pub name: T![Function],
@@ -156,6 +160,7 @@ pub struct TranslateFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct Translate3dFunction<'a> {
 	#[atom(CssAtomSet::Translate3d)]
 	pub name: T![Function],
@@ -186,6 +191,7 @@ pub struct Translate3dFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TranslatexFunction<'a> {
 	#[atom(CssAtomSet::Translatex)]
 	pub name: T![Function],
@@ -204,6 +210,7 @@ pub struct TranslatexFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TranslateyFunction<'a> {
 	#[atom(CssAtomSet::Translatey)]
 	pub name: T![Function],
@@ -222,6 +229,7 @@ pub struct TranslateyFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TranslatezFunction<'a> {
 	#[atom(CssAtomSet::Translatez)]
 	pub name: T![Function],
@@ -240,6 +248,7 @@ pub struct TranslatezFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ScaleFunction<'a> {
 	#[atom(CssAtomSet::Scale)]
 	pub name: T![Function],
@@ -258,6 +267,7 @@ pub struct ScaleFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct Scale3dFunction<'a> {
 	#[atom(CssAtomSet::Scale3d)]
 	pub name: T![Function],
@@ -288,6 +298,7 @@ pub struct Scale3dFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ScalexFunction<'a> {
 	#[atom(CssAtomSet::Scalex)]
 	pub name: T![Function],
@@ -306,6 +317,7 @@ pub struct ScalexFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ScaleyFunction<'a> {
 	#[atom(CssAtomSet::Scaley)]
 	pub name: T![Function],
@@ -324,6 +336,7 @@ pub struct ScaleyFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ScalezFunction<'a> {
 	#[atom(CssAtomSet::Scalez)]
 	pub name: T![Function],
@@ -342,6 +355,7 @@ pub struct ScalezFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RotateFunction<'a> {
 	#[atom(CssAtomSet::Rotate)]
 	pub name: T![Function],
@@ -360,6 +374,7 @@ pub struct RotateFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct Rotate3dFunction<'a> {
 	#[atom(CssAtomSet::Rotate3d)]
 	pub name: T![Function],
@@ -392,6 +407,7 @@ pub struct Rotate3dFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RotatexFunction<'a> {
 	#[atom(CssAtomSet::Rotatex)]
 	pub name: T![Function],
@@ -410,6 +426,7 @@ pub struct RotatexFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RotateyFunction<'a> {
 	#[atom(CssAtomSet::Rotatey)]
 	pub name: T![Function],
@@ -428,6 +445,7 @@ pub struct RotateyFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RotatezFunction<'a> {
 	#[atom(CssAtomSet::Rotatez)]
 	pub name: T![Function],
@@ -446,6 +464,7 @@ pub struct RotatezFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SkewFunction<'a> {
 	#[atom(CssAtomSet::Skew)]
 	pub name: T![Function],
@@ -464,6 +483,7 @@ pub struct SkewFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SkewxFunction<'a> {
 	#[atom(CssAtomSet::Skewx)]
 	pub name: T![Function],
@@ -482,6 +502,7 @@ pub struct SkewxFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SkewyFunction<'a> {
 	#[atom(CssAtomSet::Skewy)]
 	pub name: T![Function],
@@ -500,6 +521,7 @@ pub struct SkewyFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct PerspectiveFunction<'a> {
 	#[atom(CssAtomSet::Perspective)]
 	pub name: T![Function],

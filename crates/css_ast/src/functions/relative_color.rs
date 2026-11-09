@@ -382,6 +382,7 @@ pub struct ColorRelativeParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RgbRelativeFunction<'a> {
 	#[atom(CssAtomSet::Rgb)]
 	pub name: T![Function],
@@ -411,6 +412,7 @@ impl<'a> Peek<'a> for RgbRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RgbaRelativeFunction<'a> {
 	#[atom(CssAtomSet::Rgba)]
 	pub name: T![Function],
@@ -440,6 +442,7 @@ impl<'a> Peek<'a> for RgbaRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HslRelativeFunction<'a> {
 	#[atom(CssAtomSet::Hsl)]
 	pub name: T![Function],
@@ -469,6 +472,7 @@ impl<'a> Peek<'a> for HslRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HslaRelativeFunction<'a> {
 	#[atom(CssAtomSet::Hsla)]
 	pub name: T![Function],
@@ -498,6 +502,7 @@ impl<'a> Peek<'a> for HslaRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HwbRelativeFunction<'a> {
 	#[atom(CssAtomSet::Hwb)]
 	pub name: T![Function],
@@ -527,6 +532,7 @@ impl<'a> Peek<'a> for HwbRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LabRelativeFunction<'a> {
 	#[atom(CssAtomSet::Lab)]
 	pub name: T![Function],
@@ -556,6 +562,7 @@ impl<'a> Peek<'a> for LabRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LchRelativeFunction<'a> {
 	#[atom(CssAtomSet::Lch)]
 	pub name: T![Function],
@@ -585,6 +592,7 @@ impl<'a> Peek<'a> for LchRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct OklabRelativeFunction<'a> {
 	#[atom(CssAtomSet::Oklab)]
 	pub name: T![Function],
@@ -614,6 +622,7 @@ impl<'a> Peek<'a> for OklabRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct OklchRelativeFunction<'a> {
 	#[atom(CssAtomSet::Oklch)]
 	pub name: T![Function],
@@ -643,6 +652,7 @@ impl<'a> Peek<'a> for OklchRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ColorRelativeFunction<'a> {
 	#[atom(CssAtomSet::Color)]
 	pub name: T![Function],
@@ -671,6 +681,7 @@ impl<'a> Peek<'a> for ColorRelativeFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum RelativeColorFunction<'a> {
 	Color(Box<'a, ColorRelativeFunction<'a>>),
 	Rgb(Box<'a, RgbRelativeFunction<'a>>),

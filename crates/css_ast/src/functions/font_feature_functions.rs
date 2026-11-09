@@ -11,6 +11,7 @@ use crate::{CustomIdent, Value};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct StylisticFunction<'a> {
 	#[atom(CssAtomSet::Stylistic)]
 	pub name: T![Function],
@@ -29,6 +30,7 @@ pub struct StylisticFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct StylesetFunction<'a> {
 	#[atom(CssAtomSet::Styleset)]
 	pub name: T![Function],
@@ -47,6 +49,7 @@ pub struct StylesetFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct CharacterVariantFunction<'a> {
 	#[atom(CssAtomSet::CharacterVariant)]
 	pub name: T![Function],
@@ -65,6 +68,7 @@ pub struct CharacterVariantFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SwashFunction<'a> {
 	#[atom(CssAtomSet::Swash)]
 	pub name: T![Function],
@@ -83,6 +87,7 @@ pub struct SwashFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct OrnamentsFunction<'a> {
 	#[atom(CssAtomSet::Ornaments)]
 	pub name: T![Function],
@@ -101,6 +106,7 @@ pub struct OrnamentsFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct AnnotationFunction<'a> {
 	#[atom(CssAtomSet::Annotation)]
 	pub name: T![Function],

@@ -185,6 +185,39 @@ pub enum PropertyKind {
 /// All PropertyKind variants for iteration.
 pub const PROPERTY_KIND_VARIANTS: &[PropertyKind] = &[PropertyKind::Name];
 
+/// Arbitrary substitution functions present in a node.
+///
+/// <https://drafts.csswg.org/css-values-5/#arbitrary-substitution-function>
+#[bitmask(u8)]
+#[bitmask_config(vec_debug)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize, serde::Deserialize))]
+pub enum SubstitutionKinds {
+	/// `var()`
+	Var,
+	/// `env()`
+	Env,
+	/// `attr()`
+	Attr,
+	/// `if()`
+	If,
+	/// `first-valid()`
+	FirstValid,
+}
+
+impl TryFrom<CssAtomSet> for SubstitutionKinds {
+	type Error = ();
+	fn try_from(atom: CssAtomSet) -> Result<Self, Self::Error> {
+		match atom {
+			CssAtomSet::Var => Ok(Self::Var),
+			CssAtomSet::Env => Ok(Self::Env),
+			CssAtomSet::Attr => Ok(Self::Attr),
+			CssAtomSet::If => Ok(Self::If),
+			CssAtomSet::FirstValid => Ok(Self::FirstValid),
+			_ => Err(()),
+		}
+	}
+}
+
 /// OR-composable bitflag recording the set of CSS value types a substitution position accepts.
 ///
 /// Used by [`Unresolved`](crate::Unresolved) to carry grammar-type knowledge at positions where a
@@ -246,9 +279,9 @@ pub struct CssMetadata {
 	pub unitless_zero_resolves: UnitlessZeroResolves,
 	/// Size of vector-based nodes (e.g., number of declarations, selector list length)
 	pub size: u16,
-	/// True if any substitution function (var(), env(), attr(), etc.) or Unresolved node is present.
+	/// Bitwise OR of all substitution functions (var(), env(), attr(), etc.) in this node and its subtree.
 	/// Enables subtree-skip optimisations in visitors and the minifier.
-	pub uses_substitution: bool,
+	pub substitutions: SubstitutionKinds,
 	/// OR-union of all CssTypes bits for substitution positions in this node.
 	/// Accumulates upward through CssMetadata::merge for type inference.
 	pub expected_value_kinds: CssTypes,
@@ -269,7 +302,7 @@ impl Default for CssMetadata {
 			value_kinds: CssTypes::none(),
 			unitless_zero_resolves: UnitlessZeroResolves::default(),
 			size: 0,
-			uses_substitution: false,
+			substitutions: SubstitutionKinds::none(),
 			expected_value_kinds: CssTypes::none(),
 		}
 	}
@@ -290,7 +323,7 @@ impl CssMetadata {
 			&& self.property_kinds == PropertyKind::none()
 			&& self.unitless_zero_resolves == UnitlessZeroResolves::Length
 			&& self.size == 0
-			&& !self.uses_substitution
+			&& self.substitutions == SubstitutionKinds::none()
 			&& self.expected_value_kinds == CssTypes::none()
 			&& self.value_kinds == CssTypes::none()
 	}
@@ -413,10 +446,16 @@ impl CssMetadata {
 		self.property_kinds.contains(kind)
 	}
 
-	/// Returns true if any substitution function or Unresolved node is present in this subtree.
+	/// Returns true if any substitution function is present in this subtree.
 	#[inline]
 	pub fn has_substitution(&self) -> bool {
-		self.uses_substitution
+		!self.substitutions.is_none()
+	}
+
+	/// Returns true if any of the given substitution functions are present in this subtree.
+	#[inline]
+	pub fn has_substitution_kinds(&self, kinds: SubstitutionKinds) -> bool {
+		self.substitutions.intersects(kinds)
 	}
 
 	/// Returns true if this node or its subtree contains any of the given value kinds.
@@ -485,7 +524,7 @@ impl NodeMetadata for CssMetadata {
 			self.unitless_zero_resolves = UnitlessZeroResolves::Number;
 		}
 		self.size = self.size.max(other.size);
-		self.uses_substitution |= other.uses_substitution;
+		self.substitutions |= other.substitutions;
 		self.expected_value_kinds |= other.expected_value_kinds;
 		self
 	}
@@ -534,6 +573,19 @@ impl SemanticEq for CssTypes {
 		self == other
 	}
 }
+impl ToCursors for SubstitutionKinds {
+	fn to_cursors(&self, _: &mut (impl css_parse::CursorSink + ?Sized)) {}
+}
+impl ToSpan for SubstitutionKinds {
+	fn to_span(&self) -> Span {
+		Span::DUMMY
+	}
+}
+impl SemanticEq for SubstitutionKinds {
+	fn semantic_eq(&self, other: &Self, _source_text: &str) -> bool {
+		self == other
+	}
+}
 
 impl SemanticEq for CssMetadata {
 	fn semantic_eq(&self, other: &Self, _source_text: &str) -> bool {
@@ -554,13 +606,11 @@ macro_rules! impl_token_metadata {
 }
 
 impl_token_metadata!(
-	Ident,
 	Number,
 	Dimension,
 	Hash,
 	AtKeyword,
 	String,
-	Function,
 	Url,
 	Delim,
 	Colon,
@@ -572,6 +622,24 @@ impl_token_metadata!(
 	RightSquare,
 	LeftParen
 );
+
+pub(crate) fn vendor_prefixes_of(cursor: css_parse::Cursor) -> VendorPrefixes {
+	<CssAtomSet as css_parse::AtomSet>::from_bits(cursor.token().atom_bits())
+		.try_into()
+		.unwrap_or(VendorPrefixes::none())
+}
+
+impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::T![Ident] {
+	fn metadata(&self) -> CssMetadata {
+		CssMetadata { vendor_prefixes: vendor_prefixes_of((*self).into()), ..Default::default() }
+	}
+}
+
+impl css_parse::NodeWithMetadata<CssMetadata> for css_parse::T![Function] {
+	fn metadata(&self) -> CssMetadata {
+		CssMetadata { vendor_prefixes: vendor_prefixes_of((*self).into()), ..Default::default() }
+	}
+}
 
 macro_rules! impl_leaf_metadata {
 	($($t:ty),* $(,)?) => {
@@ -626,7 +694,16 @@ impl<'a, T: css_parse::NodeWithMetadata<CssMetadata>> css_parse::NodeWithMetadat
 	for css_parse::Vec<'a, T>
 {
 	fn metadata(&self) -> CssMetadata {
-		self.iter().fold(CssMetadata::default(), |acc, item| NodeMetadata::merge(acc, item.metadata()))
+		let mut meta = CssMetadata::default();
+		self.merge_metadata(&mut meta);
+		meta
+	}
+
+	#[inline]
+	fn merge_metadata(&self, meta: &mut CssMetadata) {
+		for item in self.iter() {
+			item.merge_metadata(meta);
+		}
 	}
 }
 
@@ -634,7 +711,16 @@ impl<'a, T: css_parse::NodeWithMetadata<CssMetadata>, const MIN: usize> css_pars
 	for css_parse::CommaSeparated<'a, T, MIN>
 {
 	fn metadata(&self) -> CssMetadata {
-		self.into_iter().fold(CssMetadata::default(), |acc, (item, _comma)| NodeMetadata::merge(acc, item.metadata()))
+		let mut meta = CssMetadata::default();
+		self.merge_metadata(&mut meta);
+		meta
+	}
+
+	#[inline]
+	fn merge_metadata(&self, meta: &mut CssMetadata) {
+		for (item, _comma) in self {
+			item.merge_metadata(meta);
+		}
 	}
 }
 
@@ -644,14 +730,19 @@ macro_rules! impl_optionals_metadata {
 			css_parse::NodeWithMetadata<CssMetadata> for css_parse::$name<$($T),+>
 		{
 			fn metadata(&self) -> CssMetadata {
-				let css_parse::$name($($v),+) = self;
 				let mut meta = CssMetadata::default();
+				self.merge_metadata(&mut meta);
+				meta
+			}
+
+			#[inline]
+			fn merge_metadata(&self, meta: &mut CssMetadata) {
+				let css_parse::$name($($v),+) = self;
 				$(
 					if let Some(val) = $v {
-						meta = NodeMetadata::merge(meta, val.metadata());
+						val.merge_metadata(meta);
 					}
 				)+
-				meta
 			}
 		}
 	};
@@ -663,30 +754,34 @@ impl_optionals_metadata!(Optionals4, A => a, B => b, C => c, D => d);
 impl_optionals_metadata!(Optionals5, A => a, B => b, C => c, D => d, E => e);
 
 macro_rules! impl_tuple_metadata {
-	($($T:ident),+) => {
+	($($T:ident => $v:ident),+) => {
 		impl<$($T: css_parse::NodeWithMetadata<CssMetadata>),+>
 			css_parse::NodeWithMetadata<CssMetadata> for ($($T,)+)
 		{
-			#[allow(non_snake_case)]
 			fn metadata(&self) -> CssMetadata {
-				let ($($T,)+) = self;
 				let mut meta = CssMetadata::default();
-				$(
-					meta = NodeMetadata::merge(meta, $T.metadata());
-				)+
+				self.merge_metadata(&mut meta);
 				meta
+			}
+
+			#[inline]
+			fn merge_metadata(&self, meta: &mut CssMetadata) {
+				let ($($v,)+) = self;
+				$(
+					$v.merge_metadata(meta);
+				)+
 			}
 		}
 	};
 }
 
-impl_tuple_metadata!(A, B);
-impl_tuple_metadata!(A, B, C);
-impl_tuple_metadata!(A, B, C, D);
-impl_tuple_metadata!(A, B, C, D, E);
-impl_tuple_metadata!(A, B, C, D, E, F);
-impl_tuple_metadata!(A, B, C, D, E, F, G);
-impl_tuple_metadata!(A, B, C, D, E, F, G, H);
+impl_tuple_metadata!(A => a, B => b);
+impl_tuple_metadata!(A => a, B => b, C => c);
+impl_tuple_metadata!(A => a, B => b, C => c, D => d);
+impl_tuple_metadata!(A => a, B => b, C => c, D => d, E => e);
+impl_tuple_metadata!(A => a, B => b, C => c, D => d, E => e, F => f);
+impl_tuple_metadata!(A => a, B => b, C => c, D => d, E => e, F => f, G => g);
+impl_tuple_metadata!(A => a, B => b, C => c, D => d, E => e, F => f, G => g, H => h);
 
 #[cfg(test)]
 mod tests {
@@ -804,6 +899,21 @@ mod tests {
 		assert!(!stylesheet_metadata("@media screen { color: red }").is_nested());
 		assert!(stylesheet_metadata("a { b { color: red } }").is_nested());
 		assert!(stylesheet_metadata("@media screen { a { color: red } }").is_nested());
+	}
+
+	#[test]
+	fn value_vendor_prefixes_reach_the_subtree_but_not_the_declaration_itself() {
+		let css = "a { display: -webkit-box; -moz-appearance: none }";
+		let alloc = Arena::new();
+		let lexer = Lexer::new(&CssAtomSet::ATOMS, css);
+		let mut parser = Parser::new(&alloc, css, lexer);
+		let stylesheet = parser.parse::<StyleSheet>().unwrap();
+		let crate::Rule::Style(rule) = stylesheet.rules.first().unwrap() else { panic!("expected a style rule") };
+		let [display, appearance] = &rule.rule.block.declarations[..] else { panic!("expected two declarations") };
+		assert_eq!(display.metadata().vendor_prefixes, VendorPrefixes::WebKit);
+		assert_eq!(display.self_metadata().vendor_prefixes, VendorPrefixes::none());
+		assert_eq!(appearance.self_metadata().vendor_prefixes, VendorPrefixes::Moz);
+		assert_eq!(stylesheet.metadata().vendor_prefixes, VendorPrefixes::WebKit | VendorPrefixes::Moz);
 	}
 
 	#[test]
@@ -1004,9 +1114,19 @@ mod tests {
 	}
 
 	#[test]
+	fn substitution_kinds_reach_rule_metadata_from_typed_and_unresolved_values() {
+		assert_eq!(stylesheet_metadata("a { width: var(--size) }").substitutions, SubstitutionKinds::Var);
+		assert_eq!(
+			stylesheet_metadata("a { background: var(--background) env(select-arrow) calc(100% - 12px) 50% }")
+				.substitutions,
+			SubstitutionKinds::Var | SubstitutionKinds::Env
+		);
+	}
+
+	#[test]
 	fn test_substitution_fields_default() {
 		let meta = CssMetadata::default();
-		assert!(!meta.uses_substitution);
+		assert!(!meta.has_substitution());
 		assert_eq!(meta.expected_value_kinds, CssTypes::none());
 		assert!(meta.is_empty());
 	}
@@ -1014,33 +1134,39 @@ mod tests {
 	#[test]
 	fn test_substitution_fields_merge() {
 		let meta1 = CssMetadata {
-			uses_substitution: true,
+			substitutions: SubstitutionKinds::Env,
 			expected_value_kinds: CssTypes::Length | CssTypes::Percentage,
 			..Default::default()
 		};
 
-		let meta2 = CssMetadata { expected_value_kinds: CssTypes::Color, ..Default::default() };
+		let meta2 = CssMetadata {
+			substitutions: SubstitutionKinds::Var,
+			expected_value_kinds: CssTypes::Color,
+			..Default::default()
+		};
 
 		let merged = NodeMetadata::merge(meta1, meta2);
-		assert!(merged.uses_substitution);
+		assert_eq!(merged.substitutions, SubstitutionKinds::Env | SubstitutionKinds::Var);
 		assert!(merged.expected_value_kinds.contains(CssTypes::Length));
 		assert!(merged.expected_value_kinds.contains(CssTypes::Percentage));
 		assert!(merged.expected_value_kinds.contains(CssTypes::Color));
 	}
 
 	#[test]
-	fn test_has_substitution() {
+	fn test_has_substitution_kinds() {
 		let mut meta = CssMetadata::default();
 		assert!(!meta.has_substitution());
-		meta.uses_substitution = true;
+		meta.substitutions = SubstitutionKinds::Env;
 		assert!(meta.has_substitution());
+		assert!(meta.has_substitution_kinds(SubstitutionKinds::Env | SubstitutionKinds::Attr));
+		assert!(!meta.has_substitution_kinds(SubstitutionKinds::Var));
 	}
 
 	#[test]
 	fn test_is_empty_with_substitution() {
 		let mut meta = CssMetadata::default();
 		assert!(meta.is_empty());
-		meta.uses_substitution = true;
+		meta.substitutions = SubstitutionKinds::Var;
 		assert!(!meta.is_empty());
 		let meta2 = CssMetadata { expected_value_kinds: CssTypes::Number, ..Default::default() };
 		assert!(!meta2.is_empty());

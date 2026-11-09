@@ -234,7 +234,7 @@ pub struct IfBranch<'a, V> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, substitutions = If, node_kinds = Function)]
 pub struct IfFunction<'a, V> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]

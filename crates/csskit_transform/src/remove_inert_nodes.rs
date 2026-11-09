@@ -1,5 +1,6 @@
 use crate::prelude::*;
-use css_ast::{VisitNode, Visitable};
+use css_ast::{DeclarationValue, VisitNode, Visitable};
+use css_parse::Declaration;
 
 /// Removes nodes which have no effect on rendering, such as rules with an empty block, or rules holding nothing but
 /// such rules.
@@ -26,7 +27,7 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
-		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
 			return VisitFlow::SKIP_CHILDREN;
 		}
 		VisitFlow::DESCEND
@@ -38,6 +39,14 @@ where
 			return VisitFlow::SKIP_CHILDREN;
 		}
 		VisitFlow::DESCEND
+	}
+
+	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
+		&mut self,
+		_decl: &Declaration<'b, T, CssMetadata>,
+		_query: VisitNode,
+	) -> VisitFlow {
+		VisitFlow::SKIP_CHILDREN
 	}
 }
 

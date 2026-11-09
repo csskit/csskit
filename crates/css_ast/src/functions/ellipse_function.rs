@@ -15,6 +15,7 @@ use css_parse::Box;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct EllipseFunction<'a> {
 	#[atom(CssAtomSet::Ellipse)]
 	pub name: T![Function],

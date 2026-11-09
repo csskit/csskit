@@ -12,6 +12,7 @@ use css_parse::Box;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct CounterFunction<'a> {
 	#[atom(CssAtomSet::Counter)]
 	pub name: T![Function],
@@ -40,6 +41,7 @@ pub struct CounterFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct CountersFunction<'a> {
 	#[atom(CssAtomSet::Counters)]
 	pub name: T![Function],

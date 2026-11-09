@@ -29,6 +29,7 @@ use css_parse::Box;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum EasingFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Linear)]
@@ -64,6 +65,7 @@ pub enum EasingFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LinearFunction<'a> {
 	#[atom(CssAtomSet::Linear)]
 	pub name: T![Function],
@@ -103,6 +105,7 @@ impl<'a> Parse<'a> for LinearFunctionParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct CubicBezierFunction<'a> {
 	#[atom(CssAtomSet::CubicBezier)]
 	pub name: T![Function],
@@ -133,6 +136,7 @@ pub struct CubicBezierFunctionParams<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct StepsFunction<'a> {
 	#[atom(CssAtomSet::Steps)]
 	pub name: T![Function],

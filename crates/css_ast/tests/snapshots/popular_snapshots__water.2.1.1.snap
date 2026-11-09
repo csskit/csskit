@@ -16260,6 +16260,9 @@ StyleSheet(
                 expected: CssTypes(
                   bits: 4294967295,
                 ),
+                substitutions: SubstitutionKinds(
+                  bits: 1,
+                ),
               ),
               important: None,
               semicolon: None,
@@ -16599,6 +16602,9 @@ StyleSheet(
                       ),
                       expected: CssTypes(
                         bits: 4294967295,
+                      ),
+                      substitutions: SubstitutionKinds(
+                        bits: 1,
                       ),
                     ),
                     important: None,
@@ -16948,6 +16954,9 @@ StyleSheet(
                       expected: CssTypes(
                         bits: 4294967295,
                       ),
+                      substitutions: SubstitutionKinds(
+                        bits: 1,
+                      ),
                     ),
                     important: None,
                     semicolon: None,
@@ -17296,6 +17305,9 @@ StyleSheet(
                       expected: CssTypes(
                         bits: 4294967295,
                       ),
+                      substitutions: SubstitutionKinds(
+                        bits: 1,
+                      ),
                     ),
                     important: None,
                     semicolon: None,
@@ -17643,6 +17655,9 @@ StyleSheet(
                       ),
                       expected: CssTypes(
                         bits: 4294967295,
+                      ),
+                      substitutions: SubstitutionKinds(
+                        bits: 1,
                       ),
                     ),
                     important: None,

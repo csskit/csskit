@@ -10,6 +10,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct DynamicRangeLimitMixFunction<'a> {
 	#[atom(CssAtomSet::DynamicRangeLimitMix)]
 	pub name: T![Function],

@@ -137,7 +137,7 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
-		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
 			return VisitFlow::SKIP_CHILDREN;
 		}
 		VisitFlow::DESCEND
@@ -148,7 +148,7 @@ where
 		decl: &Declaration<'b, T, CssMetadata>,
 		_query: VisitNode,
 	) {
-		self.unitless_zero_resolves = decl.metadata().unitless_zero_resolves;
+		self.unitless_zero_resolves = decl.value.property_metadata().unitless_zero_resolves;
 	}
 
 	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(

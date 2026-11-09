@@ -35,9 +35,7 @@ impl<'a, 'b> Matcher<'a, 'b> for QueryPseudoClass {
 			QueryPseudoClass::Unknown(..) => meta.has_unknown() || ctx.node.node_id.tag_name().contains("unknown"),
 			QueryPseudoClass::AtRule(..) => meta.node_kinds.contains(NodeKinds::AtRule),
 			QueryPseudoClass::Rule(..) => meta.node_kinds.intersects(NodeKinds::StyleRule | NodeKinds::AtRule),
-			QueryPseudoClass::Function(..) => {
-				meta.has_functions() || ctx.node.node_id.tag_name().ends_with("-function")
-			}
+			QueryPseudoClass::Function(..) => meta.has_functions(),
 			QueryPseudoClass::FirstChild(..) => ctx.sibling_index == 1,
 			QueryPseudoClass::Empty(..) => meta.is_empty_container(),
 			QueryPseudoClass::Nested(..) => ctx.is_nested,

@@ -12,7 +12,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(declaration_kinds = Computed)]
+#[metadata(declaration_kinds = Computed, substitutions = FirstValid, node_kinds = Function)]
 pub struct FirstValidFunction<'a, V> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]

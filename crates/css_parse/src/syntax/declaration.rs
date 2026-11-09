@@ -57,7 +57,7 @@ where
 	M: NodeMetadata,
 {
 	fn self_metadata(&self) -> M {
-		V::declaration_metadata(self)
+		V::declaration_self_metadata(self)
 	}
 
 	fn metadata(&self) -> M {

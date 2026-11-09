@@ -11,6 +11,7 @@ use crate::{FontFamilyName, FontFormat, FontTech, Value};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct FormatFunction<'a> {
 	#[atom(CssAtomSet::Format)]
 	pub name: T![Function],
@@ -29,6 +30,7 @@ pub struct FormatFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TechFunction<'a> {
 	#[atom(CssAtomSet::Tech)]
 	pub name: T![Function],
@@ -47,6 +49,7 @@ pub struct TechFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LocalFunction<'a> {
 	#[atom(CssAtomSet::Local)]
 	pub name: T![Function],
