@@ -92,7 +92,7 @@ impl fmt::Display for SemanticModifier {
 		if self.contains(Self::Experimental) {
 			write!(f, " experimental")?;
 		}
-		if self.contains(Self::Experimental) {
+		if self.contains(Self::Vendor) {
 			write!(f, " vendor")?;
 		}
 		if self.contains(Self::Custom) {
