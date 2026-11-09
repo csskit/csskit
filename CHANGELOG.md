@@ -1,7 +1,36 @@
+## [0.0.39] - 2026-11-09
+
+### Chromashift
+- chromashift/csskit_transform: Format only the winning shortest colour (#1653) ([#1653](https://github.com/csskit/csskit/pull/1653))
+
+
+### Css_ast
+- css_ast: Binary-search property atom tables (#1655) ([#1655](https://github.com/csskit/csskit/pull/1655))
+- css_ast: Correct preserve-3d spelling (#1658) ([#1658](https://github.com/csskit/csskit/pull/1658))
+- Regenerate css_ast/src/values from csswg drafts (#1659) ([#1659](https://github.com/csskit/csskit/pull/1659))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1660) ([#1660](https://github.com/csskit/csskit/pull/1660))
+
+
+### Csskit_highlight
+- csskit_highlight: Fix vendor modifier typo (#1666) ([#1666](https://github.com/csskit/csskit/pull/1666))
+
+
+### Csskit_transform
+- csskit_transform: Index pending edits by source-order runs (#1657) ([#1657](https://github.com/csskit/csskit/pull/1657))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.85.0 (#1665) ([#1665](https://github.com/csskit/csskit/pull/1665))
+- chore(deps): update dependency @types/vscode to v1.145.0 (#1661) ([#1661](https://github.com/csskit/csskit/pull/1661))
+
 ## [0.0.38] - 2026-11-07
 
 ### Csskit
 - csskit_napi: Add minify function (#1650) ([#1650](https://github.com/csskit/csskit/pull/1650))
+- Release v0.0.38 (#1652) ([#1652](https://github.com/csskit/csskit/pull/1652))
 
 ## [0.0.37] - 2026-11-07
 
