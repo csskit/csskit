@@ -31,14 +31,14 @@
 		"openswatch": "^1.0.0"
 	},
 	"devDependencies": {
-		"@11ty/eleventy": "3.1.7",
+		"@11ty/eleventy": "3.1.8",
 		"@11ty/eleventy-plugin-rss": "3.1.0",
 		"@11ty/eleventy-plugin-syntaxhighlight": "5.0.2",
 		"@manustays/eleventy-plugin-generate-social-images": "4.1.0",
 		"cssnano": "9.9.0",
 		"esbuild": "0.28.2",
 		"esbuild-plugin-wasm": "1.1.0",
-		"glob": "14.0.3",
+		"glob": "14.0.4",
 		"html-minifier": "5.0.1",
 		"open-props": "1.7.23",
 		"postcss-import": "17.0.1",
