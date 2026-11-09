@@ -25,6 +25,11 @@ impl<'a, M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>, A: Allocator> cr
 	fn metadata(&self) -> M {
 		(**self).metadata()
 	}
+
+	#[inline]
+	fn merge_metadata(&self, meta: &mut M) {
+		(**self).merge_metadata(meta)
+	}
 }
 
 impl<'a, T: Peek<'a>, A: Allocator> Peek<'a> for Box<'a, T, A> {

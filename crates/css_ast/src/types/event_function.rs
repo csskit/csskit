@@ -12,6 +12,7 @@ use crate::KeypressFunction;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum EventFunction {
 	Click(#[atom(CssAtomSet::Click)] T![Function], #[semantic_eq(skip)] T![')']),
 	Dblclick(#[atom(CssAtomSet::Dblclick)] T![Function], #[semantic_eq(skip)] T![')']),

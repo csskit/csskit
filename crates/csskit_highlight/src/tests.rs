@@ -26,3 +26,8 @@ fn test_nesting() {
 fn test_pseudo_classes() {
 	assert_highlight!("pseudo_classes", r#"body:focus,dialog:modal{}"#);
 }
+
+#[test]
+fn test_vendor() {
+	assert_highlight!("vendor", r#"a { display: -webkit-box; -webkit-transition: none; }"#);
+}

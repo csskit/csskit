@@ -64,6 +64,7 @@ pub enum Target<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TargetCounterFunction<'a> {
 	#[atom(CssAtomSet::TargetCounter)]
 	pub name: T![Function],
@@ -89,6 +90,7 @@ pub struct TargetCounterParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TargetCountersFunction<'a> {
 	#[atom(CssAtomSet::TargetCounters)]
 	pub name: T![Function],
@@ -116,6 +118,7 @@ pub struct TargetCountersParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct TargetTextFunction {
 	#[atom(CssAtomSet::TargetText)]
 	pub name: T![Function],

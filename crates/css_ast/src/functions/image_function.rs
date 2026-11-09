@@ -13,6 +13,7 @@ use crate::{Color, UrlOrString};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ImageFunction<'a> {
 	#[atom(CssAtomSet::Image)]
 	#[cfg_attr(feature = "visitable", visit(skip))]

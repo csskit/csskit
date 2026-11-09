@@ -65,6 +65,14 @@ where
 			Self::Right(t) => t.metadata(),
 		}
 	}
+
+	#[inline]
+	fn merge_metadata(&self, meta: &mut M) {
+		match self {
+			Self::Left(t) => t.merge_metadata(meta),
+			Self::Right(t) => t.merge_metadata(meta),
+		}
+	}
 }
 
 impl<Left, Right> ToNumberValue for Either<Left, Right>

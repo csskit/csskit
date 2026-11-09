@@ -130,7 +130,7 @@ impl Visit for TokenHighlighter {
 		property: &Declaration<'a, T, CssMetadata>,
 		_query: css_ast::VisitNode,
 	) {
-		let metadata = property.metadata();
+		let metadata = property.self_metadata();
 		let modifier = SemanticModifier::from(&metadata);
 		self.insert(property.name.to_span(), SemanticKind::Declaration, modifier);
 		self.insert(property.colon.to_span(), SemanticKind::Punctuation, SemanticModifier::none());

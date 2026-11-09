@@ -6,7 +6,8 @@ pub trait Transform<'a, 'ctx, M: NodeMetadata, N: NodeWithMetadata<M>, F: Transf
 	/// rewrites.
 	///
 	/// [`Transformer`] asks this of the root node before running the transform at all, and the
-	/// transform asks it of every queryable node it enters, pruning the subtree when it holds.
+	/// transform asks it of every stylesheet, style rule and at-rule it considers, through
+	/// `VisitNode::rule_subtree_metadata`, pruning the subtree when it holds.
 	/// Metadata aggregates upwards, so a kind absent from `metadata` is absent from the whole
 	/// subtree: answering `true` for a subtree that does contain such a node silently skips work.
 	fn skips_subtree(metadata: &M) -> bool;

@@ -47,6 +47,7 @@ pub enum ImportLayer<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ImportLayerFunction<'a> {
 	#[atom(CssAtomSet::Layer)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
@@ -62,6 +63,7 @@ pub struct ImportLayerFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ImportSupportsFunction<'a> {
 	#[atom(CssAtomSet::Supports)]
 	#[cfg_attr(feature = "visitable", visit(skip))]

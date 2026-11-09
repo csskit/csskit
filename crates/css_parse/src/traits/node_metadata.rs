@@ -34,6 +34,15 @@ pub trait NodeWithMetadata<M: NodeMetadata> {
 	/// Returns the complete aggregated metadata for this node (self + children).
 	/// Default implementation merges children's metadata with self_metadata().
 	fn metadata(&self) -> M;
+
+	/// Merges the complete metadata for this node into `meta`, as `*meta = meta.merge(self.metadata())` does.
+	///
+	/// Containers override this to merge each child straight into `meta` rather than building and returning
+	/// a merged value per level, which relies on [NodeMetadata::merge] being associative.
+	#[inline]
+	fn merge_metadata(&self, meta: &mut M) {
+		*meta = meta.merge(self.metadata());
+	}
 }
 
 // Stub implementation allowing tests to use () for M
@@ -55,6 +64,13 @@ impl<M: NodeMetadata, T: NodeWithMetadata<M>> NodeWithMetadata<M> for Option<T> 
 		match self {
 			Some(inner) => inner.metadata(),
 			None => M::default(),
+		}
+	}
+
+	#[inline]
+	fn merge_metadata(&self, meta: &mut M) {
+		if let Some(inner) = self {
+			inner.merge_metadata(meta);
 		}
 	}
 }

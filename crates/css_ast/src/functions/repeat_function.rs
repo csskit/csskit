@@ -13,6 +13,7 @@ use crate::{LineNames, NonEmpty, PositiveNonZeroInt};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RepeatFunction<Items, Count = PositiveNonZeroInt> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[atom(CssAtomSet::Repeat)]

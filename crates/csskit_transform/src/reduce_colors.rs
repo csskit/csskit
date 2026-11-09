@@ -205,7 +205,7 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
-		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
 			return VisitFlow::SKIP_CHILDREN;
 		}
 		VisitFlow::DESCEND
@@ -793,6 +793,17 @@ mod tests {
 			StyleSheet,
 			"a { color: oklch(from red l c h); }",
 			"a { color: red; }"
+		);
+	}
+
+	#[test]
+	fn reduces_colors_in_rules_nested_in_rules_without_colors() {
+		assert_transform!(
+			CssMinifierFeature::ReduceColors,
+			CssAtomSet,
+			StyleSheet,
+			"a { display: block; & b { color: #ffffff; } }",
+			"a { display: block; & b { color: #fff; } }"
 		);
 	}
 }

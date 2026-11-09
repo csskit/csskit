@@ -11,6 +11,7 @@ use crate::{AtPosition, CalcableValue};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RayFunction<'a> {
 	#[atom(CssAtomSet::Ray)]
 	pub name: T![Function],

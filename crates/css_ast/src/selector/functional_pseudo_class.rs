@@ -79,6 +79,7 @@ impl<'a> Parse<'a> for FunctionalPseudoClass<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct DirPseudoFunction {
 	#[semantic_eq(skip)]
 	pub colon: T![:],
@@ -106,6 +107,7 @@ pub enum DirValue {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HasPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -125,6 +127,7 @@ pub struct HasPseudoFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HostPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -143,6 +146,7 @@ pub struct HostPseudoFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HostContextPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -161,6 +165,7 @@ pub struct HostContextPseudoFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct IsPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -179,6 +184,7 @@ pub struct IsPseudoFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LangPseudoFunction<'a> {
 	#[semantic_eq(skip)]
 	pub colon: T![:],
@@ -209,6 +215,7 @@ pub enum LangValue {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NotPseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -227,6 +234,7 @@ pub struct NotPseudoFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NthChildPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -245,6 +253,7 @@ pub struct NthChildPseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NthColPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -263,6 +272,7 @@ pub struct NthColPseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NthLastChildPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -281,6 +291,7 @@ pub struct NthLastChildPseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NthLastColPseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -299,6 +310,7 @@ pub struct NthLastColPseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NthLastOfTypePseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -317,6 +329,7 @@ pub struct NthLastOfTypePseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct NthOfTypePseudoFunction {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -335,6 +348,7 @@ pub struct NthOfTypePseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct WherePseudoFunction<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	#[semantic_eq(skip)]
@@ -353,6 +367,7 @@ pub struct WherePseudoFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct StatePseudoFunction {
 	#[semantic_eq(skip)]
 	pub colon: T![:],
@@ -368,6 +383,7 @@ pub struct StatePseudoFunction {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HeadingPseudoFunction<'a> {
 	#[semantic_eq(skip)]
 	pub colon: T![:],

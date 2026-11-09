@@ -77,6 +77,21 @@ impl<'n> VisitNode<'n> {
 		self.source.map(QueryNodeData::self_metadata).unwrap_or_default()
 	}
 
+	/// Aggregated metadata for this node and its subtree, for a stylesheet, style rule or at-rule only.
+	///
+	/// These nodes hold their block's metadata from parse, so this is cheap. For any other node
+	/// [`VisitNode::subtree_metadata`] walks the subtree, so this returns `None` instead. Visitors
+	/// that prune by metadata should prune with this.
+	#[inline]
+	pub fn rule_subtree_metadata(&self) -> Option<CssMetadata> {
+		let node_id = self.node_id?;
+		if matches!(node_id, NodeId::StyleSheet | NodeId::StyleRule) || node_id.to_at_rule_id().is_some() {
+			Some(self.subtree_metadata())
+		} else {
+			None
+		}
+	}
+
 	/// Retrieve a named property from this node, if present.
 	#[inline]
 	pub fn property(&self, kind: PropertyKind) -> Option<Cursor> {

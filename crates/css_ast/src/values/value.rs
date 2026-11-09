@@ -13,7 +13,7 @@ use csskit_proc_macro::node;
 /// Classifies a function atom as an arbitrary substitution function.
 #[inline]
 pub(crate) fn is_substitution_function(atom: CssAtomSet) -> bool {
-	matches!(atom, CssAtomSet::Var | CssAtomSet::Env | CssAtomSet::Attr | CssAtomSet::If | CssAtomSet::FirstValid)
+	crate::SubstitutionKinds::try_from(atom).is_ok()
 }
 
 /// Generates the `Parse` impl for a value-slot enum with the shape
@@ -66,6 +66,7 @@ impl_value_slot_parse!(Value, SubstitutionFunction, T);
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum SubstitutionFunction<'a, T> {
 	Var(VarFunction<'a, Value<'a, T>>),
 	Env(Box<'a, EnvFunction<'a, Value<'a, T>>>),
@@ -119,6 +120,7 @@ impl<'a, T: Copy + Into<Token>> CalcableValue<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum CalcableSubstitutionFunction<'a, T> {
 	Math(Box<'a, MathFunction<'a, T>>),
 	Var(VarFunction<'a, CalcableValue<'a, T>>),
@@ -169,6 +171,7 @@ impl<'a, T: Copy + Into<Token>> NumericValue<'a, T> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum NumericSubstitutionFunction<'a, T> {
 	TreeCounting(TreeCountingFunction),
 	Math(Box<'a, MathFunction<'a, T>>),
@@ -209,6 +212,7 @@ impl_value_slot_parse!(KeywordValue, KeywordSubstitutionFunction, T);
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum KeywordSubstitutionFunction<'a, T> {
 	Ident(IdentFunction<'a>),
 	Var(VarFunction<'a, KeywordValue<'a, T>>),
@@ -241,6 +245,7 @@ impl_value_slot_parse!(QueryValue, QuerySubstitutionFunction, T);
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum QuerySubstitutionFunction<'a, T> {
 	Math(MathFunction<'a, T>),
 	Env(EnvFunction<'a, QueryValue<'a, T>>),
@@ -273,7 +278,6 @@ macro_rules! impl_value_slot_traits {
 				match self {
 					Self::Literal(_) => CssMetadata::default(),
 					Self::Substituted(_) | Self::Unresolved(_) => CssMetadata {
-						uses_substitution: true,
 						declaration_kinds: crate::DeclarationKind::Computed,
 						..CssMetadata::default()
 					},
@@ -281,10 +285,23 @@ macro_rules! impl_value_slot_traits {
 			}
 
 			fn metadata(&self) -> CssMetadata {
+				let mut meta = CssMetadata::default();
+				self.merge_metadata(&mut meta);
+				meta
+			}
+
+			#[inline]
+			fn merge_metadata(&self, meta: &mut CssMetadata) {
 				match self {
-					Self::Literal(t) => t.metadata(),
-					Self::Substituted(f) => css_parse::NodeMetadata::merge(f.metadata(), self.self_metadata()),
-					Self::Unresolved(_) => self.self_metadata(),
+					Self::Literal(t) => t.merge_metadata(meta),
+					Self::Substituted(f) => {
+						f.merge_metadata(meta);
+						*meta = css_parse::NodeMetadata::merge(*meta, self.self_metadata());
+					}
+					Self::Unresolved(u) => {
+						u.merge_metadata(meta);
+						*meta = css_parse::NodeMetadata::merge(*meta, self.self_metadata());
+					}
 				}
 			}
 		}

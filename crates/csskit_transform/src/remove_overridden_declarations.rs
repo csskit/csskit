@@ -48,7 +48,7 @@ where
 	fn property<'s>(declaration: &Declaration<'s, StyleValue<'s>, CssMetadata>) -> Property {
 		let cursor: Cursor = declaration.name.into();
 		let name = CssAtomSet::from_bits(cursor.token().atom_bits());
-		let metadata = declaration.metadata();
+		let metadata = declaration.value.property_metadata();
 		let not_shorthand =
 			!metadata.has_shorthands() && (metadata.has_longhands() || metadata.has_custom_properties());
 		let shorthand = if not_shorthand { None } else { StyleValue::shorthand_by_name(name) };
@@ -56,7 +56,7 @@ where
 	}
 
 	fn overrider<'s>(index: usize, declaration: &Declaration<'s, StyleValue<'s>, CssMetadata>) -> Option<Overrider> {
-		if !Self::may_contain_overrider(&declaration.metadata()) || !Self::can_override(declaration) {
+		if !Self::may_contain_overrider(&declaration.value.property_metadata()) || !Self::can_override(declaration) {
 			return None;
 		}
 		let Property { name, important, shorthand } = Self::property(declaration);
@@ -231,6 +231,17 @@ mod tests {
 	}
 
 	#[test]
+	fn removes_declarations_overridden_by_math_shorthands() {
+		assert_transform!(
+			CssMinifierFeature::RemoveOverriddenDeclarations,
+			CssAtomSet,
+			StyleSheet,
+			"a { margin-top: 1px; margin: calc(1px + 2px); }",
+			"a { margin: calc(1px + 2px); }"
+		);
+	}
+
+	#[test]
 	fn removes_overridden_declarations_in_rules_nested_in_rules_without_shorthands() {
 		assert_transform!(
 			CssMinifierFeature::RemoveOverriddenDeclarations,
@@ -257,7 +268,7 @@ mod tests {
 			CssMinifierFeature::RemoveOverriddenDeclarations,
 			CssAtomSet,
 			StyleSheet,
-			"a { margin-top: 1px; margin: var(--margin); }"
+			"a { margin-top: 1px; margin: var(--margin); } b { margin-top: 1px; margin: attr(data-margin type(<length>)); }"
 		);
 	}
 

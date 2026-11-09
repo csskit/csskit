@@ -11,6 +11,7 @@ use css_parse::ComponentValues;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ParamFunction<'a> {
 	#[atom(CssAtomSet::Param)]
 	pub name: T![Function],

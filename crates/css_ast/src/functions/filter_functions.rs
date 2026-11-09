@@ -13,6 +13,7 @@ use crate::{AngleOrZero, CalcableValue, Color, Length, NonNegative, NumberOrPerc
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum FilterFunction<'a> {
 	#[atom(CssAtomSet::Blur)]
 	Blur(BlurFunction<'a>),
@@ -65,6 +66,7 @@ pub enum FilterValue<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct BlurFunction<'a> {
 	#[atom(CssAtomSet::Blur)]
 	pub name: T![Function],
@@ -79,6 +81,7 @@ pub struct BlurFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct BrightnessFunction<'a> {
 	#[atom(CssAtomSet::Brightness)]
 	pub name: T![Function],
@@ -93,6 +96,7 @@ pub struct BrightnessFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct ContrastFunction<'a> {
 	#[atom(CssAtomSet::Contrast)]
 	pub name: T![Function],
@@ -109,6 +113,7 @@ pub struct ContrastFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct DropShadowFunction<'a> {
 	#[atom(CssAtomSet::DropShadow)]
 	pub name: T![Function],
@@ -126,6 +131,7 @@ pub struct DropShadowFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct GrayscaleFunction<'a> {
 	#[atom(CssAtomSet::Grayscale)]
 	pub name: T![Function],
@@ -140,6 +146,7 @@ pub struct GrayscaleFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HueRotateFunction<'a> {
 	#[atom(CssAtomSet::HueRotate)]
 	pub name: T![Function],
@@ -154,6 +161,7 @@ pub struct HueRotateFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct InvertFunction<'a> {
 	#[atom(CssAtomSet::Invert)]
 	pub name: T![Function],
@@ -168,6 +176,7 @@ pub struct InvertFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct OpacityFunction<'a> {
 	#[atom(CssAtomSet::Opacity)]
 	pub name: T![Function],
@@ -182,6 +191,7 @@ pub struct OpacityFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SaturateFunction<'a> {
 	#[atom(CssAtomSet::Saturate)]
 	pub name: T![Function],
@@ -196,6 +206,7 @@ pub struct SaturateFunction<'a> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct SepiaFunction<'a> {
 	#[atom(CssAtomSet::Sepia)]
 	pub name: T![Function],

@@ -27,7 +27,7 @@ struct MetadataArgs {
 	#[darling(default)]
 	pub value_kinds: Option<PipeList<Ident>>,
 	#[darling(default)]
-	pub uses_substitution: bool,
+	pub substitutions: Option<PipeList<Ident>>,
 }
 
 impl MetadataArgs {
@@ -80,17 +80,6 @@ fn prelude_fields(fields: &Fields) -> Vec<Member> {
 		.collect()
 }
 
-fn merge_expr(base: TokenStream, values: impl IntoIterator<Item = TokenStream>) -> TokenStream {
-	values.into_iter().fold(base, |acc, value| {
-		quote! {
-			css_parse::NodeMetadata::merge(
-				#acc,
-				<_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::metadata(#value),
-			)
-		}
-	})
-}
-
 pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let ident = &input.ident;
 	let args = MetadataArgs::from_attributes(&input.attrs)?;
@@ -108,7 +97,7 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 	let declaration_kinds = MetadataArgs::pipe_tokens(&args.declaration_kinds, parse_quote! { crate::DeclarationKind });
 	let property_kinds = MetadataArgs::pipe_tokens(&args.property_kinds, parse_quote! { crate::PropertyKind });
 	let value_kinds = MetadataArgs::pipe_tokens(&args.value_kinds, parse_quote! { crate::CssTypes });
-	let uses_substitution = args.uses_substitution;
+	let substitutions = MetadataArgs::pipe_tokens(&args.substitutions, parse_quote! { crate::SubstitutionKinds });
 
 	let block = match &input.data {
 		Data::Struct(DataStruct { fields, .. }) => block_field(fields)?,
@@ -191,14 +180,44 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				declaration_kinds: #declaration_kinds,
 				property_kinds: #property_kinds,
 				value_kinds: #value_kinds,
-				uses_substitution: #uses_substitution,
+				substitutions: #substitutions,
 				..Default::default()
 			}
 		}
 	};
 
+	let MetadataArgs {
+		skip: _,
+		block: _,
+		prelude: _,
+		node_kinds: arg_node_kinds,
+		used_at_rules: arg_used_at_rules,
+		vendor_prefixes: arg_vendor_prefixes,
+		declaration_kinds: arg_declaration_kinds,
+		property_kinds: arg_property_kinds,
+		value_kinds: arg_value_kinds,
+		substitutions: arg_substitutions,
+	} = &args;
+	let contributes_self_metadata = block.is_some()
+		|| !preludes.is_empty()
+		|| [
+			arg_node_kinds,
+			arg_used_at_rules,
+			arg_vendor_prefixes,
+			arg_declaration_kinds,
+			arg_property_kinds,
+			arg_value_kinds,
+			arg_substitutions,
+		]
+		.into_iter()
+		.any(|list| list.as_ref().is_some_and(|list| !list.0.is_empty()));
+	let merge_self = contributes_self_metadata.then(|| {
+		quote! { *meta = css_parse::NodeMetadata::merge(*meta, self.self_metadata()); }
+	});
+
 	// A node's metadata is its own merged with that of every field which is not skipped.
 	let mut wc = WhereCollector::new();
+	let mut merges_fields = false;
 	let arms: Vec<TokenStream> = Arm::all(&input)?
 		.iter()
 		.map(|arm| {
@@ -207,17 +226,35 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 				arm.fields.iter().map(|field| !skip_arm && !MetadataArgs::field_is_skipped(&field.attrs)).collect();
 			for (field, _) in arm.fields.iter().zip(&merged).filter(|(_, merged)| **merged) {
 				wc.add(&field.ty);
+				merges_fields = true;
 			}
 			let pattern = arm.pattern(|i, view| merged[i].then(|| view.binding.clone()));
-			let bindings =
-				arm.fields.views().into_iter().zip(&merged).filter(|(_, merged)| **merged).map(|(view, _)| {
-					let binding = view.binding;
-					quote! { #binding }
-				});
-			let body = merge_expr(quote! { self.self_metadata() }, bindings);
-			quote! { #pattern => #body, }
+			let bindings = arm
+				.fields
+				.views()
+				.into_iter()
+				.zip(&merged)
+				.filter(|(_, merged)| **merged)
+				.map(|(view, _)| view.binding);
+			quote! {
+				#pattern => {
+					#(<_ as css_parse::NodeWithMetadata<crate::CssMetadata>>::merge_metadata(#bindings, meta);)*
+				}
+			}
 		})
 		.collect();
+	let merge_metadata = if merge_self.is_some() || merges_fields {
+		quote! {
+			fn merge_metadata(&self, meta: &mut crate::CssMetadata) {
+				#merge_self
+				match self { #(#arms)* }
+			}
+		}
+	} else {
+		quote! {
+			fn merge_metadata(&self, _: &mut crate::CssMetadata) {}
+		}
+	};
 
 	let where_clause =
 		wc.extend_where_clause(&input.generics, parse_quote!(css_parse::NodeWithMetadata<crate::CssMetadata>));
@@ -229,8 +266,12 @@ pub fn derive(input: DeriveInput) -> Result<TokenStream> {
 			#self_metadata
 
 			fn metadata(&self) -> crate::CssMetadata {
-				match self { #(#arms)* }
+				let mut meta = crate::CssMetadata::default();
+				css_parse::NodeWithMetadata::merge_metadata(self, &mut meta);
+				meta
 			}
+
+			#merge_metadata
 		}
 	})
 }

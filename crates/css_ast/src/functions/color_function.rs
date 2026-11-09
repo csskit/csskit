@@ -136,6 +136,7 @@ impl<'a> Parse<'a> for CommaOrSlash {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub enum ColorFunction<'a> {
 	Relative(Box<'a, RelativeColorFunction<'a>>),
 	Color(Box<'a, ColorFunctionColor<'a>>),
@@ -305,6 +306,7 @@ pub struct ColorFunctionColorParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RgbFunction<'a> {
 	#[atom(CssAtomSet::Rgb)]
 	pub name: T![Function],
@@ -325,6 +327,7 @@ impl crate::ToChromashift for RgbFunction<'_> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RgbaFunction<'a> {
 	#[atom(CssAtomSet::Rgba)]
 	pub name: T![Function],
@@ -391,6 +394,7 @@ impl crate::ToChromashift for RgbFunctionParams<'_> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HslFunction<'a> {
 	#[atom(CssAtomSet::Hsl)]
 	pub name: T![Function],
@@ -411,6 +415,7 @@ impl crate::ToChromashift for HslFunction<'_> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HslaFunction<'a> {
 	#[atom(CssAtomSet::Hsla)]
 	pub name: T![Function],
@@ -468,6 +473,7 @@ impl crate::ToChromashift for HslFunctionParams<'_> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct HwbFunction<'a> {
 	#[atom(CssAtomSet::Hwb)]
 	pub name: T![Function],
@@ -515,6 +521,7 @@ pub struct HwbFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LabFunction<'a> {
 	#[atom(CssAtomSet::Lab)]
 	pub name: T![Function],
@@ -562,6 +569,7 @@ pub struct LabFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct LchFunction<'a> {
 	#[atom(CssAtomSet::Lch)]
 	pub name: T![Function],
@@ -609,6 +617,7 @@ pub struct LchFunctionParams<'a>(
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct OklabFunction<'a> {
 	#[atom(CssAtomSet::Oklab)]
 	pub name: T![Function],
@@ -643,6 +652,7 @@ impl crate::ToChromashift for OklabFunction<'_> {
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct OklchFunction<'a> {
 	#[atom(CssAtomSet::Oklch)]
 	pub name: T![Function],

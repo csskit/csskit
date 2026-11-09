@@ -25,7 +25,7 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
-		if node.node_id.is_some() && Self::skips_subtree(&node.subtree_metadata()) {
+		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
 			return VisitFlow::SKIP_CHILDREN;
 		}
 		VisitFlow::DESCEND
@@ -133,6 +133,17 @@ mod tests {
 			StyleSheet,
 			"div { transition-duration: 1000000ms; }",
 			"div { transition-duration: 1000s; }"
+		);
+	}
+
+	#[test]
+	fn converts_in_rules_nested_in_rules_without_times() {
+		assert_transform!(
+			CssMinifierFeature::ReduceTimeUnits,
+			CssAtomSet,
+			StyleSheet,
+			"div { color: red; & span { transition-duration: 500ms; } }",
+			"div { color: red; & span { transition-duration: 0.5s; } }"
 		);
 	}
 }

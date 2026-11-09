@@ -10,7 +10,7 @@ use super::prelude::*;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
-#[metadata(uses_substitution, declaration_kinds = Computed)]
+#[metadata(substitutions = Var, declaration_kinds = Computed, node_kinds = Function)]
 pub struct VarFunction<'a, V> {
 	#[semantic_eq(skip)]
 	#[atom(CssAtomSet::Var)]

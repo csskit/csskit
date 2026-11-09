@@ -15,6 +15,21 @@ pub trait DeclarationValue<'a, M: NodeMetadata>: Sized + NodeWithMetadata<M> + T
 		declaration.value.metadata().with_declaration()
 	}
 
+	/// Returns metadata for the declaration node itself, as opposed to its value subtree.
+	///
+	/// The default implementation returns [DeclarationValue::declaration_metadata].
+	fn declaration_self_metadata(declaration: &Declaration<'a, Self, M>) -> M {
+		Self::declaration_metadata(declaration)
+	}
+
+	/// Returns the metadata this value takes from the property it belongs to, such as whether that property is a
+	/// shorthand, and none from the value's contents.
+	///
+	/// Unlike [NodeWithMetadata::metadata] this does not walk the value. The default implementation returns the default
+	/// metadata.
+	fn property_metadata(&self) -> M {
+		M::default()
+	}
 	/// Determines if the given [Cursor] represents a valid [Ident][crate::token_macros::Ident] matching a known property
 	/// name.
 	///

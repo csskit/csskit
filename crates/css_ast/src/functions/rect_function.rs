@@ -12,6 +12,7 @@ use crate::{AutoOr, CalcableValue, Length};
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(all))]
 #[derive(csskit_derives::NodeWithMetadata)]
+#[metadata(node_kinds = Function)]
 pub struct RectFunction<'a> {
 	#[atom(CssAtomSet::Rect)]
 	#[cfg_attr(feature = "visitable", visit(skip))]
