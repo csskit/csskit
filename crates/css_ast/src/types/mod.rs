@@ -158,6 +158,7 @@ mod unicode_range;
 mod variation_tag_value;
 mod visual_box;
 mod voice_family_name;
+mod webkit_mask_box;
 
 pub use absolute_size::*;
 pub use alt_text::*;
@@ -319,6 +320,7 @@ pub use unicode_range::*;
 pub use variation_tag_value::*;
 pub use visual_box::*;
 pub use voice_family_name::*;
+pub use webkit_mask_box::*;
 
 mod prelude {
 	pub(crate) use crate::CssAtomSet;
