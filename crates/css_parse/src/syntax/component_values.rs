@@ -15,9 +15,9 @@ impl<'a> Peek<'a> for ComponentValues<'a> {
 	const PEEK_KINDSET: KindSet = ComponentValue::PEEK_KINDSET;
 }
 
-impl<'a> Parse<'a> for ComponentValues<'a> {
+impl<'a> ParseInfallible<'a> for ComponentValues<'a> {
 	// https://drafts.csswg.org/css-syntax-3/#consume-list-of-components
-	fn parse<Iter>(p: &mut Parser<'a, Iter>) -> Result<Self>
+	fn parse_infallible<Iter>(p: &mut Parser<'a, Iter>) -> Self
 	where
 		Iter: Iterator<Item = Cursor> + Clone,
 	{
@@ -32,7 +32,9 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 			if p.next_is_stop() {
 				break;
 			}
-			if let Some(mut value) = p.parse_if_peek::<ComponentValue>()? {
+			if let Some(mut value) =
+				p.parse_if_peek::<ComponentValue>().expect("ComponentValue parses every kind it peeks")
+			{
 				if let ComponentValue::Delim(d) = value
 					&& last_was_whitespace
 					&& d.associated_whitespace().contains(AssociatedWhitespaceRules::EnforceAfter)
@@ -70,7 +72,7 @@ impl<'a> Parse<'a> for ComponentValues<'a> {
 				}
 			}
 		}
-		Ok(Self { values })
+		Self { values }
 	}
 }
 

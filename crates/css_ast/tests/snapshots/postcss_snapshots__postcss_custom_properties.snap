@@ -1,6 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
-expression: result.output.unwrap()
+expression: output
 ---
 StyleSheet(
   rules: [
@@ -365,11 +365,11 @@ StyleSheet(
                         )),
                       ],
                     ),
-                    close: Some(PairWiseEnd(Cursor(
+                    close: PairWiseEnd(Cursor(
                       kind: "RightSquare",
                       offset: SourceOffset(212),
                       len: 1,
-                    ))),
+                    )),
                   ),
                 ],
               )),
@@ -443,11 +443,11 @@ StyleSheet(
                         )),
                       ],
                     ),
-                    close: Some(PairWiseEnd(Cursor(
+                    close: PairWiseEnd(Cursor(
                       kind: "RightParen",
                       offset: SourceOffset(240),
                       len: 1,
-                    ))),
+                    )),
                   ),
                 ],
               )),
@@ -658,11 +658,11 @@ StyleSheet(
                         )),
                       ],
                     ),
-                    close: Some(PairWiseEnd(Cursor(
+                    close: PairWiseEnd(Cursor(
                       kind: "RightCurly",
                       offset: SourceOffset(374),
                       len: 1,
-                    ))),
+                    )),
                   ),
                 ],
               )),
@@ -777,19 +777,19 @@ StyleSheet(
                                     )),
                                   ],
                                 ),
-                                close: Some(PairWiseEnd(Cursor(
+                                close: PairWiseEnd(Cursor(
                                   kind: "RightCurly",
                                   offset: SourceOffset(412),
                                   len: 1,
-                                ))),
+                                )),
                               ),
                             ],
                           ),
-                          close: Some(PairWiseEnd(Cursor(
+                          close: PairWiseEnd(Cursor(
                             kind: "RightCurly",
                             offset: SourceOffset(413),
                             len: 1,
-                          ))),
+                          )),
                         ),
                         Comma(Cursor(
                           kind: "Comma",
@@ -816,19 +816,19 @@ StyleSheet(
                               )),
                             ],
                           ),
-                          close: Some(PairWiseEnd(Cursor(
+                          close: PairWiseEnd(Cursor(
                             kind: "RightSquare",
                             offset: SourceOffset(418),
                             len: 1,
-                          ))),
+                          )),
                         ),
                       ],
                     ),
-                    close: Some(PairWiseEnd(Cursor(
+                    close: PairWiseEnd(Cursor(
                       kind: "RightSquare",
                       offset: SourceOffset(419),
                       len: 1,
-                    ))),
+                    )),
                   ),
                 ],
               )),
@@ -929,11 +929,11 @@ StyleSheet(
                         ),
                       ],
                     ),
-                    close: Some(PairWiseEnd(Cursor(
+                    close: PairWiseEnd(Cursor(
                       kind: "RightCurly",
                       offset: SourceOffset(473),
                       len: 1,
-                    ))),
+                    )),
                   ),
                 ],
               )),
@@ -946,11 +946,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(476),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1001,11 +1001,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(490),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1053,11 +1053,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(527),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1105,11 +1105,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(542),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),

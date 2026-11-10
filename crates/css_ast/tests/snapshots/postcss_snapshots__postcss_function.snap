@@ -1,6 +1,6 @@
 ---
 source: crates/css_ast/tests/postcss_snapshots.rs
-expression: result.output.unwrap()
+expression: output
 ---
 StyleSheet(
   rules: [
@@ -115,11 +115,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(205),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),

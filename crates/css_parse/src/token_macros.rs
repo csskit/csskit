@@ -50,6 +50,14 @@ macro_rules! define_kind_common {
 				Self($crate::Cursor::dummy($crate::Token::dummy($crate::Kind::$ident)))
 			}
 
+			/// Records that this token is missing and returns a zero-length stand-in at the next token's offset.
+			pub fn missing<'a, I>(p: &mut $crate::Parser<'a, I>) -> Self
+			where
+				I: ::std::iter::Iterator<Item = $crate::Cursor> + ::std::clone::Clone,
+			{
+				Self(p.missing($crate::Kind::$ident))
+			}
+
 			pub fn associated_whitespace(&self) -> $crate::AssociatedWhitespaceRules {
 				self.0.token().associated_whitespace()
 			}
@@ -982,11 +990,20 @@ impl PairWiseEnd {
 
 	pub fn start(&self) -> Kind {
 		match self.kind() {
-			Kind::RightCurly => Kind::LeftCurly,
-			Kind::RightParen => Kind::LeftParen,
-			Kind::RightSquare => Kind::LeftSquare,
+			Kind::RightCurly | Kind::BadRightCurly => Kind::LeftCurly,
+			Kind::RightParen | Kind::BadRightParen => Kind::LeftParen,
+			Kind::RightSquare | Kind::BadRightSquare => Kind::LeftSquare,
 			k => k,
 		}
+	}
+
+	/// Records that the closing token of `kind` is missing and returns a zero-length stand-in at the next token's
+	/// offset.
+	pub fn missing<'a, I>(p: &mut Parser<'a, I>, kind: Kind) -> Self
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		Self(p.missing(kind))
 	}
 }
 

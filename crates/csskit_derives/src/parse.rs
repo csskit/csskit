@@ -345,11 +345,12 @@ fn is_value_slot(ty: &Type) -> bool {
 	}
 }
 
-/// Runs `body`, which returns or errors, and rewinds to where it began when it errors.
+/// Runs `body`, which returns or errors, and rewinds to where it began when it errors or recovers from an error.
 fn attempt(body: TokenStream) -> TokenStream {
 	quote! {
 		let checkpoint = p.checkpoint();
-		if let Ok(v) = (|| -> ::css_parse::Result<Self> { #body })() {
+		let attempt = (|| -> ::css_parse::Result<Self> { #body })();
+		if let Ok(v) = attempt && p.diagnostic_since(&checkpoint).is_none() {
 			return Ok(v);
 		}
 		p.rewind(checkpoint);

@@ -588,6 +588,23 @@ const KINDS_BY_BITS: [Kind; 64] = {
 };
 
 impl Kind {
+	/// The source character of a single-character [Kind], or [None] for every other kind. The `Bad` counterpart of
+	/// each single-character kind gives the same character.
+	pub const fn char(&self) -> Option<char> {
+		match *self {
+			Kind::Colon | Kind::BadColon => Some(':'),
+			Kind::Semicolon | Kind::BadSemicolon => Some(';'),
+			Kind::Comma | Kind::BadComma => Some(','),
+			Kind::LeftSquare | Kind::BadLeftSquare => Some('['),
+			Kind::RightSquare | Kind::BadRightSquare => Some(']'),
+			Kind::LeftParen | Kind::BadLeftParen => Some('('),
+			Kind::RightParen | Kind::BadRightParen => Some(')'),
+			Kind::LeftCurly | Kind::BadLeftCurly => Some('{'),
+			Kind::RightCurly | Kind::BadRightCurly => Some('}'),
+			_ => None,
+		}
+	}
+
 	pub(crate) const fn from_bits(bits: u8) -> Self {
 		KINDS_BY_BITS[(bits & 0b11_1111) as usize]
 	}

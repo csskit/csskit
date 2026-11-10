@@ -1,6 +1,6 @@
 ---
 source: crates/css_ast/tests/popular_snapshots.rs
-expression: result.output.unwrap()
+expression: output
 ---
 StyleSheet(
   rules: [
@@ -1050,11 +1050,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(695),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1211,11 +1211,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(855),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1262,11 +1262,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(881),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1328,11 +1328,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(911),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1390,11 +1390,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(944),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1535,11 +1535,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(1033),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),
@@ -1609,11 +1609,11 @@ StyleSheet(
             ),
           ],
           rules: [],
-          close_curly: Some(RightCurly(Cursor(
+          close_curly: RightCurly(Cursor(
             kind: "RightCurly",
             offset: SourceOffset(1091),
             len: 1,
-          ))),
+          )),
         ),
       ),
     ),

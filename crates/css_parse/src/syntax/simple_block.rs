@@ -7,7 +7,7 @@ use crate::{Result, syntax::ComponentValues};
 pub struct SimpleBlock<'a> {
 	pub open: T![PairWiseStart],
 	pub values: ComponentValues<'a>,
-	pub close: Option<T![PairWiseEnd]>,
+	pub close: T![PairWiseEnd],
 }
 
 impl<'a> Peek<'a> for SimpleBlock<'a> {
@@ -28,13 +28,10 @@ impl<'a> Parse<'a> for SimpleBlock<'a> {
 	{
 		let open = p.parse::<T![PairWiseStart]>()?;
 		let stop = p.set_stop(KindSet::new(&[open.end()]));
-		let values = p.parse::<ComponentValues>();
+		let values = p.parse_infallible::<ComponentValues>();
 		p.set_stop(stop);
-		let values = values?;
-		if <T![PairWiseEnd]>::peek(p, p.peek_n(1)) {
-			return Ok(Self { open, values, close: p.parse::<T![PairWiseEnd]>().ok() });
-		}
-		Ok(Self { open, values, close: None })
+		let close = p.parse_if_peek::<T![PairWiseEnd]>()?.unwrap_or_else(|| <T![PairWiseEnd]>::missing(p, open.end()));
+		Ok(Self { open, values, close })
 	}
 }
 
@@ -48,7 +45,7 @@ impl<'a> ToCursors for SimpleBlock<'a> {
 
 impl<'a> ToSpan for SimpleBlock<'a> {
 	fn to_span(&self) -> Span {
-		self.open.to_span() + if let Some(close) = self.close { close.to_span() } else { self.values.to_span() }
+		self.open.to_span() + self.close.to_span()
 	}
 }
 
@@ -75,11 +72,15 @@ mod tests {
 		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{foo:bar}");
 		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{one(two)}");
 		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two))");
-		// Incomplete but recoverable
-		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "[foo");
-		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "{foo:bar");
-		assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two)");
-		// assert_parse!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two");
+	}
+
+	#[test]
+	fn test_missing_close_recovers() {
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "[foo", "[foo]");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "{foo:bar", "{foo:bar}");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two)", "(one(two))");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "(one(two", "(one(two))");
+		assert_parse_recovers!(EmptyAtomSet::ATOMS, SimpleBlock, "{a:[b", "{a:[b]}");
 	}
 
 	#[test]

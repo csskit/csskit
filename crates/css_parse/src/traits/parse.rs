@@ -12,6 +12,8 @@ use super::prelude::*;
 ///
 /// Any node implementing [Parse::parse()] gets [Parse::try_parse()] for free. It's unlikely that nodes can come up with
 /// a more efficient algorithm than the provided one, so it is not worth re-implementing [Parse::try_parse()].
+/// [Parse::try_parse()] only succeeds on a clean parse: if the node recovered from an error and recorded a diagnostic
+/// (see [Parser::diagnose()]), the parser rewinds and that diagnostic is returned as the [Err].
 ///
 /// If a Node can construct itself from a single [Cursor][crate::Cursor] it should implement
 /// [Peek][crate::Peek] and [Parse], where [Parse::parse()] calls [Parser::next()] and constructs from the cursor.
@@ -25,7 +27,31 @@ pub trait Parse<'a>: Sized {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let checkpoint = p.checkpoint();
-		Self::parse(p).inspect_err(|_| p.rewind(checkpoint))
+		Self::parse(p)
+			.and_then(|value| match p.diagnostic_since(&checkpoint) {
+				None => Ok(value),
+				Some(diagnostic) => Err(diagnostic),
+			})
+			.inspect_err(|_| p.rewind(checkpoint))
+	}
+}
+
+/// A node that always constructs itself from the [Parser], recovering from bad input instead of returning an [Err].
+///
+/// Implementors keep the tokens they could not parse (for example in a `Bad` variant) and record the failure with
+/// [Parser::diagnose()]. Every [ParseInfallible] node is also [Parse], so it can be used anywhere a fallible node can.
+pub trait ParseInfallible<'a>: Sized {
+	fn parse_infallible<I>(p: &mut Parser<'a, I>) -> Self
+	where
+		I: Iterator<Item = Cursor> + Clone;
+}
+
+impl<'a, T: ParseInfallible<'a>> Parse<'a> for T {
+	fn parse<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		Ok(T::parse_infallible(p))
 	}
 }
 
