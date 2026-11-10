@@ -1182,15 +1182,16 @@ impl Token {
 			Kind::Ident => {
 				(matches!(second.kind(), Kind::Number | Kind::Dimension) &&
 					// numbers with a `-` need separating, but with `+` they do not.
-					(!second.has_sign() || second.value() < 0.0))
+					(!second.has_sign() || second.value().is_sign_negative()))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
 					|| matches!(second.char(), Some('(' | '-'))
 					|| second.is_cdc()
+					|| (second.char() == Some('>') && self.is_dashed_ident() && self.len() == 2)
 			}
 			Kind::AtKeyword | Kind::Hash | Kind::Dimension => {
 				(matches!(second.kind(), Kind::Number | Kind::Dimension) &&
 					// numbers with a `-` need separating, but with `+` they do not.
-					(!second.has_sign() || second.value() < 0.0))
+					(!second.has_sign() || second.value().is_sign_negative()))
 					|| matches!(second.kind(), Kind::Ident | Kind::Function | Kind::Url | Kind::BadUrl)
 					|| matches!(second.char(), Some('-'))
 					|| second.is_cdc()
@@ -1202,6 +1203,7 @@ impl Token {
 					|| matches!(second.char(), Some('%'))
 					|| second.is_cdc()
 			}
+			Kind::BadString => !matches!(second.kind(), Kind::Whitespace | Kind::Eof),
 			_ => match self.char() {
 				Some('#') => {
 					matches!(
@@ -1560,6 +1562,36 @@ fn number_needs_separator_for_signed_numbers() {
 	assert!(pair("1 -0"));
 	assert!(pair("1 .3"));
 	assert!(pair("1px -2"));
+}
+
+#[test]
+fn word_needs_separator_for_negative_zero() {
+	let pair = |s: &str| {
+		let mut lexer = crate::Lexer::new(&crate::EmptyAtomSet::ATOMS, s);
+		let first = lexer.advance();
+		let _ = lexer.advance();
+		first.needs_separator_for(lexer.advance())
+	};
+	assert!(pair("a -0"));
+	assert!(pair("a -.0"));
+	assert!(pair("@layer -0"));
+	assert!(pair("#a -0px"));
+	assert!(pair("1px -0"));
+	assert!(!pair("a +0"));
+}
+
+#[test]
+fn double_dash_ident_needs_separator_for_greater_than() {
+	let pair = |s: &str| {
+		let mut lexer = crate::Lexer::new(&crate::EmptyAtomSet::ATOMS, s);
+		let first = lexer.advance();
+		let _ = lexer.advance();
+		first.needs_separator_for(lexer.advance())
+	};
+	assert!(pair("-- >"));
+	assert!(!pair("--a >"));
+	assert!(!pair("a-- >"));
+	assert!(!pair("-\\- >"));
 }
 
 #[test]

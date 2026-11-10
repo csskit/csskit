@@ -142,6 +142,19 @@ where
 			};
 		}
 
+		macro_rules! push_bad {
+			($bad:expr, $cursor:expr) => {
+				if R::from_declaration_group(DeclarationGroup { declarations: Vec::new_in(p.alloc()) }).is_some() {
+					p.diagnose(Diagnostic::new($cursor, Diagnostic::unexpected));
+					decls.push(DeclarationOrBad::Bad($bad));
+				} else if let Some(rule) = R::bad_declaration(crate::Box::new_in(p.alloc(), $bad)) {
+					p.diagnose(Diagnostic::new($cursor, Diagnostic::unexpected));
+					flush_decls!();
+					rules.push(rule);
+				}
+			};
+		}
+
 		loop {
 			// While by default the parser will skip whitespace, the Declaration or Rule type may be a whitespace sensitive
 			// node, for example `ComponentValues`. As such whitespace needs to be consumed here, before Declarations and
@@ -168,25 +181,21 @@ where
 				continue;
 			}
 			if c == error_kinds {
-				if c != Kind::CdcOrCdo {
-					if R::from_declaration_group(DeclarationGroup { declarations: Vec::new_in(p.alloc()) }).is_some() {
-						let value = BadDeclaration::parse_value(p)?;
-						p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
-						decls.push(DeclarationOrBad::Bad(BadDeclaration::stray(p, value)));
-						continue;
-					}
-					let checkpoint = p.checkpoint();
+				if R::from_declaration_group(DeclarationGroup { declarations: Vec::new_in(p.alloc()) }).is_some() {
 					let value = BadDeclaration::parse_value(p)?;
-					if let Some(rule) =
-						R::bad_declaration(crate::Box::new_in(p.alloc(), BadDeclaration::stray(p, value)))
-					{
-						p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
-						flush_decls!();
-						rules.push(rule);
-						continue;
-					}
-					p.rewind(checkpoint);
+					p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
+					decls.push(DeclarationOrBad::Bad(BadDeclaration::stray(p, value)));
+					continue;
 				}
+				let checkpoint = p.checkpoint();
+				let value = BadDeclaration::parse_value(p)?;
+				if let Some(rule) = R::bad_declaration(crate::Box::new_in(p.alloc(), BadDeclaration::stray(p, value))) {
+					p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
+					flush_decls!();
+					rules.push(rule);
+					continue;
+				}
+				p.rewind(checkpoint);
 				let old_skip = p.set_skip(error_kinds);
 				p.consume_trivia_as_leading();
 				p.set_skip(old_skip);
@@ -217,7 +226,7 @@ where
 						p.set_state(State::Nested);
 						if let Ok(bad_decl) = p.parse::<BadDeclaration>() {
 							p.set_state(old_state);
-							decls.push(DeclarationOrBad::Bad(bad_decl));
+							push_bad!(bad_decl, c);
 						}
 					}
 				}
@@ -240,7 +249,7 @@ where
 				// - `background: var(--bg);` stays as declaration (valid name, even if unknown value)
 				// - `.foo {...}` becomes a rule (invalid declaration name, parses as known StyleRule)
 				// - `bad-prop: value;` stays as declaration (both unknown, prefer declaration)
-				if decl.is_unknown() && !D::valid_declaration_name(p, decl.name.into()) {
+				if decl.is_unknown() && decl.semicolon.is_none() && !D::valid_declaration_name(p, decl.name.into()) {
 					p.rewind(checkpoint.clone());
 					if let Ok(rule) = p.parse::<R>()
 						&& !rule.is_unknown()
@@ -275,7 +284,7 @@ where
 						p.set_state(State::Nested);
 						if let Ok(bad_decl) = p.parse::<BadDeclaration>() {
 							p.set_state(old_state);
-							decls.push(DeclarationOrBad::Bad(bad_decl));
+							push_bad!(bad_decl, c);
 						}
 					}
 				}

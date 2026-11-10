@@ -1,6 +1,6 @@
 use super::prelude::*;
 use crate::{FontFamilyName, UnknownAtRule};
-use css_parse::RuleVariants;
+use css_parse::{BadDeclaration, Box, RuleVariants};
 use csskit_proc_macro::syntax;
 
 /// Represents the `@font-feature-values` at-rule, e.g. `@font-feature-values Taisho Gothic { @annotation { boxed: 1 } }`.
@@ -134,6 +134,7 @@ pub enum FontFeatureValueTypeRule<'a> {
 	Ornaments(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], FontFeatureValueBlock<'a>),
 	Annotation(#[cfg_attr(feature = "visitable", visit(skip))] T![AtKeyword], FontFeatureValueBlock<'a>),
 	UnknownAt(UnknownAtRule<'a>),
+	BadDeclaration(Box<'a, BadDeclaration<'a>>),
 }
 
 impl<'a> NodeWithMetadata<CssMetadata> for FontFeatureValueTypeRule<'a> {
@@ -147,6 +148,7 @@ impl<'a> NodeWithMetadata<CssMetadata> for FontFeatureValueTypeRule<'a> {
 			Self::Styleset(_, block) => block.metadata(),
 			Self::CharacterVariant(_, block) => block.metadata(),
 			Self::UnknownAt(rule) => rule.metadata(),
+			Self::BadDeclaration(_) => CssMetadata::default(),
 		}
 	}
 }
@@ -183,6 +185,10 @@ impl<'a> RuleVariants<'a> for FontFeatureValueTypeRule<'a> {
 
 	fn is_unknown(&self) -> bool {
 		matches!(self, Self::UnknownAt(_))
+	}
+
+	fn bad_declaration(declaration: Box<'a, BadDeclaration<'a>>) -> Option<Self> {
+		Some(Self::BadDeclaration(declaration))
 	}
 }
 
@@ -325,7 +331,7 @@ font_feature_value!(FontFeatureValueList, FontFeatureIndexList);
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
@@ -363,5 +369,27 @@ mod tests {
 		);
 		// A syntax error in a font feature value declaration does not invalidate the block.
 		assert_parse!(CssAtomSet::ATOMS, FontFeatureValuesRule, "@font-feature-values Bongo{@swash{swishy:3 5}}");
+	}
+
+	#[test]
+	fn stray_tokens_after_declaration_kept() {
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			FontFeatureValuesRule,
+			"@font-feature-values x{a:b;,}",
+			"@font-feature-values x{a:b;,}"
+		);
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			FontFeatureValuesRule,
+			"@font-feature-values x{a:b;c}",
+			"@font-feature-values x{a:b;c}"
+		);
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			FontFeatureValuesRule,
+			"@font-feature-values x{a:b;{}}",
+			"@font-feature-values x{a:b;{}}"
+		);
 	}
 }

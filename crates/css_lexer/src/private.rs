@@ -462,6 +462,7 @@ impl<'a> ByteCursor<'a> {
 
 	fn consume_numeric_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
 		let bytes = self.remaining_bytes();
+		let bytes = &bytes[..bytes.len().min((1 << 23) - 1)];
 
 		let mut num_len: usize = 1;
 		let first_byte = bytes[0];
@@ -516,6 +517,7 @@ impl<'a> ByteCursor<'a> {
 		self.advance_n(num_len);
 
 		match self.peek_byte(0) {
+			_ if num_len >= 2048 => Token::new_number(is_float, has_sign, num_len as u32, value),
 			b'%' => {
 				self.pos += 1;
 				Token::new_dimension(is_float, has_sign, num_len as u32, 1, value, atoms.str_to_bits("%") as u8)
@@ -524,7 +526,12 @@ impl<'a> ByteCursor<'a> {
 				let c = self.peek_char();
 				let (_, c2, c3) = if c == EOF && self.at_end() { (EOF, EOF, EOF) } else { self.peek3() };
 				if is_ident_start_sequence(c, c2, c3) {
+					let unit_start = self.pos;
 					let (unit_len, _, _, _, atom_bits, _) = self.consume_ident_sequence(atoms);
+					if unit_len >= 4096 {
+						self.pos = unit_start;
+						return Token::new_number(is_float, has_sign, num_len as u32, value);
+					}
 					let atom = if atom_bits <= 127 { atom_bits as u8 } else { 0 };
 					Token::new_dimension(is_float, has_sign, num_len as u32, unit_len, value, atom)
 				} else {
@@ -540,6 +547,10 @@ impl<'a> ByteCursor<'a> {
 		let first_is_ascii = is_ident(self.peek_char()) || self.peek_char() == '\\';
 		let hash_start = self.pos;
 		let (len, contains_non_lower_ascii, _, contains_escape, _, _) = self.consume_ident_sequence(atoms);
+		if len >= (1 << 24) - 1 {
+			self.pos = hash_start;
+			return Token::new_delim('#');
+		}
 		let hash_bytes = &self.bytes[hash_start..hash_start + len as usize];
 		let mut hex_value: u32 = 0;
 		let mut digits: u32 = 0;

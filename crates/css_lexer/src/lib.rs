@@ -297,6 +297,44 @@ fn whitespace_runs_report_length_and_style() {
 	}
 }
 
+#[test]
+fn dimensions_too_long_to_encode_split_into_number_and_ident() {
+	for (num_len, unit_len, kinds) in [
+		(2047, 2, vec![Kind::Dimension]),
+		(2048, 2, vec![Kind::Number, Kind::Ident]),
+		(1, 4095, vec![Kind::Dimension]),
+		(1, 4096, vec![Kind::Number, Kind::Ident]),
+	] {
+		let source = "1".repeat(num_len) + &"x".repeat(unit_len);
+		let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, &source);
+		let tokens: Vec<Token> = kinds.iter().map(|_| lexer.advance()).collect();
+		assert_eq!(tokens.iter().map(|t| t.kind()).collect::<Vec<_>>(), kinds, "{num_len}+{unit_len}");
+		assert_eq!(tokens.iter().map(|t| t.len()).sum::<u32>() as usize, source.len(), "{num_len}+{unit_len}");
+		assert_eq!(lexer.advance(), Kind::Eof, "{num_len}+{unit_len}");
+		if tokens.len() == 2 {
+			assert_eq!(tokens[0].len() as usize, num_len);
+		}
+	}
+}
+
+#[test]
+fn numbers_and_hashes_too_long_to_encode_split() {
+	let max_number = (1 << 23) - 1;
+	let max_hash = (1 << 24) - 1;
+	for (source, kinds) in [
+		("1".repeat(max_number), vec![Kind::Number]),
+		("1".repeat(max_number + 1), vec![Kind::Number, Kind::Number]),
+		("#".to_string() + &"a".repeat(max_hash - 1), vec![Kind::Hash]),
+		("#".to_string() + &"a".repeat(max_hash), vec![Kind::Delim, Kind::Ident]),
+	] {
+		let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, &source);
+		let tokens: Vec<Token> = kinds.iter().map(|_| lexer.advance()).collect();
+		assert_eq!(tokens.iter().map(|t| t.kind()).collect::<Vec<_>>(), kinds, "{}", source.len());
+		assert_eq!(tokens.iter().map(|t| t.len()).sum::<u32>() as usize, source.len(), "{}", source.len());
+		assert_eq!(lexer.advance(), Kind::Eof, "{}", source.len());
+	}
+}
+
 #[cfg(test)]
 mod iterator_tests {
 	use super::*;

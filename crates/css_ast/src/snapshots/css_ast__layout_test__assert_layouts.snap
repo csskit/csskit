@@ -5470,6 +5470,7 @@ FontFeatureValueTypeRule: size=144 align=16
     5: Ornaments
     6: Annotation
     7: UnknownAt
+    8: BadDeclaration
 FontFeatureValuesPrelude: size=24 align=8 {
     0: 0
 }
@@ -6487,9 +6488,9 @@ JustifySelfStyleValue: size=56 align=8
     4: Right
     5: Stretch
     6: BaselinePosition
-Keyframe: size=160 align=16 {
-    0: 0
-}
+Keyframe: size=176 align=16
+    0: Keyframe
+    1: BadDeclaration
 KeyframeSelector: size=16 align=4
     0: From
     1: To
@@ -6904,6 +6905,7 @@ MarginRule: size=144 align=16
     13: LeftBottom
     14: LeftMiddle
     15: LeftTop
+    16: BadDeclaration
 MarginRuleBlock: size=112 align=16 {
     0: 0
 }

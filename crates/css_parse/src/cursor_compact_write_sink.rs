@@ -366,4 +366,11 @@ mod test {
 		);
 		assert_format!("@media(min-width:576px){}", "@media(min-width:576px){}");
 	}
+
+	#[test]
+	fn test_writes_inserted_closers() {
+		assert_format!("f(", "f()");
+		assert_format!("{f(}", "{f()}");
+		assert_format!("{a;f(}", "{a;f()}");
+	}
 }

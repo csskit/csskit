@@ -113,7 +113,7 @@ use css_parse::{
 	AttributeOperator, Block, Box, CommaSeparated, Comparison, ComponentValue, ComponentValues, Cursor, Declaration,
 	DeclarationGroup, DeclarationList, DeclarationOrBad, DeclarationValue, Either, NoBlockAllowed, NodeMetadata,
 	NodeWithMetadata, Optionals2, Optionals3, Optionals4, Optionals5, Parse, Peek, QualifiedRule, RuleList, Span,
-	ToCursors, ToSpan, syntax::BadDeclaration, token_macros,
+	ToCursors, ToSpan, UnknownRuleBlock, syntax::BadDeclaration, token_macros,
 };
 use std::ops::ControlFlow;
 use visit_flow::try_visit;
@@ -1027,6 +1027,18 @@ impl<'a, D, M> VisitableMut<'a> for NoBlockAllowed<D, M> {
 impl<D, M> Visitable for NoBlockAllowed<D, M> {
 	fn accept<V: Visit>(&self, _: &mut V) -> VisitFlow {
 		VisitFlow::DESCEND
+	}
+}
+
+impl<'a, D, M> VisitableMut<'a> for UnknownRuleBlock<'a, D, M> {
+	fn accept_mut<V: VisitMut<'a>>(&mut self, v: &mut V) -> VisitFlow {
+		self.values.accept_mut(v)
+	}
+}
+
+impl<'a, D, M> Visitable for UnknownRuleBlock<'a, D, M> {
+	fn accept<V: Visit>(&self, v: &mut V) -> VisitFlow {
+		self.values.accept(v)
 	}
 }
 

@@ -1,0 +1,8 @@
+---
+source: crates/css_ast/tests/postcss_snapshots.rs
+expression: "$crate :: render_diagnostics! (result.errors, source_text)"
+---
+[
+    "8..9 Unexpected: Unexpected `Kind::Delim`",
+    "76..77 Unexpected: Unexpected `Kind::Delim`",
+]

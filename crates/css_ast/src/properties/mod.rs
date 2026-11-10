@@ -354,11 +354,19 @@ impl<'a> DeclarationValue<'a, CssMetadata> for StyleValue<'a> {
 		apply_properties!(parse_declaration_value)
 	}
 
-	fn parse_unknown_declaration_value<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	fn parse_unknown_declaration_value<I>(p: &mut Parser<'a, I>, name: Cursor) -> ParserResult<Self>
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		p.parse::<Unknown>().map(Self::Unknown)
+		if Self::valid_declaration_name(p, name) {
+			return p.parse::<Unknown>().map(Self::Unknown);
+		}
+		let old_state = p.set_state(State::Nested);
+		let old_stop = p.set_stop(KindSet::new(&[Kind::LeftCurly, Kind::RightCurly, Kind::Semicolon]));
+		let value = p.parse::<ComponentValues>();
+		p.set_stop(old_stop);
+		p.set_state(old_state);
+		Ok(Self::Unknown(Unknown(value?)))
 	}
 }
 

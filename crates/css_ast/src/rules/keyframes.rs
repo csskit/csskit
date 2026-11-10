@@ -2,7 +2,7 @@ use super::prelude::*;
 use crate::Percentage;
 #[cfg(feature = "visitable")]
 use crate::visit::{NodeId, QueryableNode};
-use css_parse::NoBlockAllowed;
+use css_parse::{BadDeclaration, Box, RuleVariants, UnknownRuleBlock};
 
 /// <https://drafts.csswg.org/css-animations/#at-ruledef-keyframes>
 #[node]
@@ -77,17 +77,38 @@ pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 #[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
-#[derive(csskit_derives::NodeWithMetadata)]
-pub struct Keyframe<'a>(
-	#[metadata(block)]
-	pub  QualifiedRule<
-		'a,
-		KeyframeSelectors<'a>,
-		StyleValue<'a>,
-		NoBlockAllowed<StyleValue<'a>, CssMetadata>,
-		CssMetadata,
-	>,
-);
+pub enum Keyframe<'a> {
+	Keyframe(
+		QualifiedRule<
+			'a,
+			KeyframeSelectors<'a>,
+			StyleValue<'a>,
+			UnknownRuleBlock<'a, StyleValue<'a>, CssMetadata>,
+			CssMetadata,
+		>,
+	),
+	#[parse(skip)]
+	#[peek(skip)]
+	BadDeclaration(Box<'a, BadDeclaration<'a>>),
+}
+
+impl<'a> NodeWithMetadata<CssMetadata> for Keyframe<'a> {
+	fn metadata(&self) -> CssMetadata {
+		match self {
+			Self::Keyframe(rule) => rule.metadata(),
+			Self::BadDeclaration(_) => CssMetadata::default(),
+		}
+	}
+}
+
+impl<'a> RuleVariants<'a> for Keyframe<'a> {
+	type DeclarationValue = StyleValue<'a>;
+	type Metadata = CssMetadata;
+
+	fn bad_declaration(declaration: Box<'a, BadDeclaration<'a>>) -> Option<Self> {
+		Some(Self::BadDeclaration(declaration))
+	}
+}
 
 #[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -114,7 +135,7 @@ pub enum KeyframeSelector {
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
-	use css_parse::assert_parse;
+	use css_parse::{assert_parse, assert_parse_recovers};
 
 	#[test]
 	fn test_writes() {
@@ -128,5 +149,18 @@ mod tests {
 			KeyframesRule,
 			"@keyframes x{to{animation-timing-function:cubic-bezier(0,0,0.2,1)}}"
 		);
+	}
+
+	#[test]
+	fn bad_declaration_in_keyframe_keeps_tokens() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{to{a(}}", "@keyframes x{to{a()}}");
+		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{to{.b:0;}}");
+	}
+
+	#[test]
+	fn stray_semicolon_in_keyframes_kept() {
+		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{;0%{}}");
+		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{0%{a:b};}");
+		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{/**/;0%{}}");
 	}
 }
