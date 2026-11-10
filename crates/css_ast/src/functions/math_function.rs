@@ -638,6 +638,8 @@ pub enum CalcOperand<'a, T> {
 	Substituted(Box<'a, CalcOperandSubstitutionFunction<'a, T>>),
 	#[peek(skip)]
 	Unresolved(Box<'a, Unresolved<'a>>),
+	#[peek(skip)]
+	Bad(Box<'a, Unresolved<'a>>),
 }
 
 crate::values::impl_value_slot_parse!(CalcOperand, CalcOperandSubstitutionFunction, CalcValue<T>);
@@ -652,7 +654,9 @@ fn calc_operand_eq<'a, T: SemanticEq>(a: &CalcOperand<'a, T>, b: &CalcOperand<'a
 	match (a, b) {
 		(CalcOperand::Literal(a), CalcOperand::Literal(b)) => calc_value_eq(a, b, source_text),
 		(CalcOperand::Substituted(a), CalcOperand::Substituted(b)) => calc_operand_substitution_eq(a, b, source_text),
-		(CalcOperand::Unresolved(a), CalcOperand::Unresolved(b)) => a.semantic_eq(b, source_text),
+		(CalcOperand::Unresolved(a), CalcOperand::Unresolved(b)) | (CalcOperand::Bad(a), CalcOperand::Bad(b)) => {
+			a.semantic_eq(b, source_text)
+		}
 		_ => false,
 	}
 }
@@ -1170,7 +1174,7 @@ impl<'a, T> CalcOperand<'a, T> {
 				CalcOperandSubstitutionFunction::Math(math) => math.fold(leaf),
 				_ => None,
 			},
-			Self::Unresolved(_) => None,
+			Self::Unresolved(_) | Self::Bad(_) => None,
 		}
 	}
 }

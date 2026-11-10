@@ -1,0 +1,8 @@
+---
+source: crates/css_ast/tests/postcss_snapshots.rs
+expression: "$crate :: render_diagnostics! (result.errors, source_text)"
+---
+[
+    "52..53 Unexpected: Unexpected `Kind::Semicolon`",
+    "61..62 Unexpected: Unexpected `Kind::Semicolon`",
+]

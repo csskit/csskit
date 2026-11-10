@@ -23,6 +23,12 @@ pub enum ComponentValue<'a> {
 	Colon(T![:]),
 	Semicolon(T![;]),
 	Comma(T![,]),
+	/// A closing `}`, `)` or `]` with no matching opener, kept by recovery.
+	StrayCloser(T![PairWiseEnd]),
+	/// A malformed string token, kept by recovery.
+	BadString(T![BadString]),
+	/// A malformed url token, kept by recovery.
+	BadUrl(T![BadUrl]),
 }
 
 impl<'a, M: NodeMetadata> NodeWithMetadata<M> for ComponentValue<'a> {
@@ -135,6 +141,9 @@ impl<'a> ToCursors for ComponentValue<'a> {
 			Self::Colon(t) => ToCursors::to_cursors(t, s),
 			Self::Semicolon(t) => ToCursors::to_cursors(t, s),
 			Self::Comma(t) => ToCursors::to_cursors(t, s),
+			Self::StrayCloser(t) => ToCursors::to_cursors(t, s),
+			Self::BadString(t) => ToCursors::to_cursors(t, s),
+			Self::BadUrl(t) => ToCursors::to_cursors(t, s),
 		}
 	}
 }
@@ -156,6 +165,9 @@ impl<'a> ToSpan for ComponentValue<'a> {
 			Self::Colon(t) => t.to_span(),
 			Self::Semicolon(t) => t.to_span(),
 			Self::Comma(t) => t.to_span(),
+			Self::StrayCloser(t) => t.to_span(),
+			Self::BadString(t) => t.to_span(),
+			Self::BadUrl(t) => t.to_span(),
 		}
 	}
 }
@@ -176,6 +188,9 @@ impl<'a> SemanticEq for ComponentValue<'a> {
 			(Self::Colon(a), Self::Colon(b)) => a.semantic_eq(b, source_text),
 			(Self::Semicolon(a), Self::Semicolon(b)) => a.semantic_eq(b, source_text),
 			(Self::Comma(a), Self::Comma(b)) => a.semantic_eq(b, source_text),
+			(Self::StrayCloser(a), Self::StrayCloser(b)) => a.semantic_eq(b, source_text),
+			(Self::BadString(a), Self::BadString(b)) => a.semantic_eq(b, source_text),
+			(Self::BadUrl(a), Self::BadUrl(b)) => a.semantic_eq(b, source_text),
 			// Whitespace has no semantic relevance, other than its presence, so it should always be true
 			(Self::Whitespace(_), Self::Whitespace(_)) => true,
 			_ => false, // Different variants are never equal

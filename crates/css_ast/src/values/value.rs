@@ -16,24 +16,37 @@ pub(crate) fn is_substitution_function(atom: CssAtomSet) -> bool {
 	crate::SubstitutionKinds::try_from(atom).is_ok()
 }
 
-/// Generates the `Parse` impl for a value-slot enum with the shape
-/// `Literal(..) | Substituted(Box<Sub>) | Unresolved(Box<Unresolved>)`.
+/// Generates the `ParseInfallible` impl for a value-slot enum with the shape
+/// `Literal(..) | Substituted(Box<Sub>) | Unresolved(Box<Unresolved>) | Bad(Box<Unresolved>)`.
+///
+/// The slot never fails to parse. When the literal or function cannot be parsed, the parser rewinds,
+/// records the diagnostic, and keeps the tokens up to the next stop token as `Bad`.
 macro_rules! impl_value_slot_parse {
 	($ty:ident, $sub:ident, $lit:ty) => {
-		impl<'a, T: ::css_parse::Parse<'a> + ::css_parse::Peek<'a>> ::css_parse::Parse<'a> for $ty<'a, T> {
-			fn parse<I>(p: &mut ::css_parse::Parser<'a, I>) -> ::css_parse::Result<Self>
+		impl<'a, T: ::css_parse::Parse<'a> + ::css_parse::Peek<'a>> ::css_parse::ParseInfallible<'a> for $ty<'a, T> {
+			fn parse_infallible<I>(p: &mut ::css_parse::Parser<'a, I>) -> Self
 			where
 				I: ::std::iter::Iterator<Item = ::css_parse::Cursor> + ::std::clone::Clone,
 			{
-				if p.peek::<$sub<T>>() {
+				let checkpoint = p.checkpoint();
+				let result = if p.peek::<$sub<T>>() {
 					if !p.enter_substitution() {
-						return Ok(Self::Unresolved(::css_parse::Box::new_in(p.alloc(), p.parse::<Unresolved>()?)));
+						return Self::Unresolved(::css_parse::Box::new_in(
+							p.alloc(),
+							p.parse_infallible::<Unresolved>(),
+						));
 					}
 					let sub = p.parse::<$sub<T>>();
 					p.exit_substitution();
-					return Ok(Self::Substituted(::css_parse::Box::new_in(p.alloc(), sub?)));
-				}
-				Ok(Self::Literal(p.parse::<$lit>()?))
+					sub.map(|sub| Self::Substituted(::css_parse::Box::new_in(p.alloc(), sub)))
+				} else {
+					p.parse::<$lit>().map(Self::Literal)
+				};
+				result.unwrap_or_else(|diagnostic| {
+					p.rewind(checkpoint);
+					p.diagnose(diagnostic);
+					Self::Bad(::css_parse::Box::new_in(p.alloc(), p.parse_infallible::<Unresolved>()))
+				})
 			}
 		}
 	};
@@ -85,6 +98,8 @@ pub enum Value<'a, T> {
 	Substituted(Box<'a, SubstitutionFunction<'a, T>>),
 	#[peek(skip)]
 	Unresolved(Box<'a, Unresolved<'a>>),
+	#[peek(skip)]
+	Bad(Box<'a, Unresolved<'a>>),
 }
 
 impl_value_slot_parse!(Value, SubstitutionFunction, T);
@@ -123,6 +138,8 @@ pub enum CalcableValue<'a, T> {
 	Substituted(Box<'a, CalcableSubstitutionFunction<'a, T>>),
 	#[peek(skip)]
 	Unresolved(Box<'a, Unresolved<'a>>),
+	#[peek(skip)]
+	Bad(Box<'a, Unresolved<'a>>),
 }
 
 impl_value_slot_parse!(CalcableValue, CalcableSubstitutionFunction, T);
@@ -136,7 +153,7 @@ impl<'a, T: Copy + Into<Token>> CalcableValue<'a, T> {
 				CalcableSubstitutionFunction::Math(math) => math.reduce(),
 				_ => None,
 			},
-			Self::Unresolved(_) => None,
+			Self::Unresolved(_) | Self::Bad(_) => None,
 		}
 	}
 }
@@ -176,6 +193,8 @@ pub enum NumericValue<'a, T> {
 	Substituted(Box<'a, NumericSubstitutionFunction<'a, T>>),
 	#[peek(skip)]
 	Unresolved(Box<'a, Unresolved<'a>>),
+	#[peek(skip)]
+	Bad(Box<'a, Unresolved<'a>>),
 }
 
 impl_value_slot_parse!(NumericValue, NumericSubstitutionFunction, T);
@@ -189,7 +208,7 @@ impl<'a, T: Copy + Into<Token>> NumericValue<'a, T> {
 				NumericSubstitutionFunction::Math(math) => math.reduce(),
 				_ => None,
 			},
-			Self::Unresolved(_) => None,
+			Self::Unresolved(_) | Self::Bad(_) => None,
 		}
 	}
 }
@@ -231,6 +250,8 @@ pub enum KeywordValue<'a, T> {
 	Substituted(Box<'a, KeywordSubstitutionFunction<'a, T>>),
 	#[peek(skip)]
 	Unresolved(Box<'a, Unresolved<'a>>),
+	#[peek(skip)]
+	Bad(Box<'a, Unresolved<'a>>),
 }
 
 impl_value_slot_parse!(KeywordValue, KeywordSubstitutionFunction, T);
@@ -267,6 +288,8 @@ pub enum QueryValue<'a, T> {
 	Substituted(Box<'a, QuerySubstitutionFunction<'a, T>>),
 	#[peek(skip)]
 	Unresolved(Box<'a, Unresolved<'a>>),
+	#[peek(skip)]
+	Bad(Box<'a, Unresolved<'a>>),
 }
 
 impl_value_slot_parse!(QueryValue, QuerySubstitutionFunction, T);
@@ -291,7 +314,7 @@ macro_rules! impl_value_slot_traits {
 			fn to_number_value(&self) -> Option<f32> {
 				match self {
 					Self::Literal(t) => t.to_number_value(),
-					Self::Substituted(_) | Self::Unresolved(_) => None,
+					Self::Substituted(_) | Self::Unresolved(_) | Self::Bad(_) => None,
 				}
 			}
 		}
@@ -300,7 +323,7 @@ macro_rules! impl_value_slot_traits {
 			fn to_normalised_value(&self) -> Option<f32> {
 				match self {
 					Self::Literal(t) => t.to_normalised_value(),
-					Self::Substituted(_) | Self::Unresolved(_) => None,
+					Self::Substituted(_) | Self::Unresolved(_) | Self::Bad(_) => None,
 				}
 			}
 		}
@@ -308,7 +331,7 @@ macro_rules! impl_value_slot_traits {
 		impl<'a, T: NodeWithMetadata<CssMetadata>> NodeWithMetadata<CssMetadata> for $ty<'a, T> {
 			fn self_metadata(&self) -> CssMetadata {
 				match self {
-					Self::Literal(_) => CssMetadata::default(),
+					Self::Literal(_) | Self::Bad(_) => CssMetadata::default(),
 					Self::Substituted(_) | Self::Unresolved(_) => CssMetadata {
 						declaration_kinds: crate::DeclarationKind::Computed,
 						..CssMetadata::default()
@@ -334,6 +357,7 @@ macro_rules! impl_value_slot_traits {
 						u.merge_metadata(meta);
 						*meta = css_parse::NodeMetadata::merge(*meta, self.self_metadata());
 					}
+					Self::Bad(_) => {}
 				}
 			}
 		}
@@ -374,7 +398,7 @@ macro_rules! impl_value_slot_traits {
 				matches!(self, Self::Literal(t) if t.is_revert_rule())
 			}
 			fn needs_computing(&self) -> bool {
-				!matches!(self, Self::Literal(_))
+				matches!(self, Self::Substituted(_) | Self::Unresolved(_))
 			}
 			fn parse_specified_declaration_value<Iter>(p: &mut Parser<'a, Iter>, name: Cursor) -> Result<Self>
 			where
@@ -587,5 +611,100 @@ mod tests {
 	#[test]
 	fn keyword_rejects_tree_counting_functions() {
 		assert_peek_false!(CssAtomSet::ATOMS, KeywordIdent, "sibling-index()");
+	}
+
+	fn parse_numeric_int<'a>(
+		alloc: &'a css_parse::Arena,
+		input: &'a str,
+	) -> css_parse::ParserReturn<'a, NumericInt<'a>> {
+		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = css_parse::Parser::new(alloc, input, lexer);
+		p.parse_entirely::<NumericInt>()
+	}
+
+	fn written<'a>(alloc: &'a css_parse::Arena, input: &str, node: &impl ToCursors) -> css_parse::String<'a> {
+		let mut out = css_parse::String::new_in(alloc);
+		let mut write_sink = css_parse::CursorWriteSink::new(input, &mut out);
+		let mut ordered_sink = css_parse::CursorOrderedSink::new(alloc, &mut write_sink);
+		node.to_cursors(&mut ordered_sink);
+		out
+	}
+
+	#[test]
+	fn numeric_bad_keeps_tokens_and_records_diagnostic() {
+		let alloc = css_parse::Arena::new();
+		let input = "1.5 junk";
+		let result = parse_numeric_int(&alloc, input);
+		let Some(node @ NumericValue::Bad(_)) = &result.output else { panic!("expected Bad, got {:?}", result.output) };
+		assert_eq!(result.errors.len(), 1);
+		assert_eq!(written(&alloc, input, node).as_str(), input);
+	}
+
+	#[test]
+	fn numeric_bad_stops_at_stop_token() {
+		use css_parse::{Kind, KindSet};
+		let alloc = css_parse::Arena::new();
+		let input = "1.5 junk;2";
+		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = css_parse::Parser::new(&alloc, input, lexer);
+		p.set_stop(KindSet::new(&[Kind::Semicolon]));
+		let node = p.parse_infallible::<NumericInt>();
+		assert!(matches!(node, NumericValue::Bad(_)));
+		assert_eq!(p.peek_n(1), Kind::Semicolon);
+		assert_eq!(written(&alloc, input, &node).as_str(), "1.5 junk");
+	}
+
+	#[test]
+	fn numeric_bad_keeps_unclosed_function() {
+		let alloc = css_parse::Arena::new();
+		let input = "1.5 foo(bar";
+		let result = parse_numeric_int(&alloc, input);
+		let Some(node @ NumericValue::Bad(_)) = &result.output else { panic!("expected Bad, got {:?}", result.output) };
+		assert_eq!(result.errors.len(), 2);
+		assert_eq!(written(&alloc, input, node).as_str(), "1.5 foo(bar)");
+	}
+
+	#[test]
+	fn numeric_try_parse_rejects_bad_and_rewinds() {
+		use css_parse::Kind;
+		let alloc = css_parse::Arena::new();
+		let input = "1.5";
+		let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, input);
+		let mut p = css_parse::Parser::new(&alloc, input, lexer);
+		assert!(p.try_parse::<NumericInt>().is_err());
+		assert_eq!(p.peek_n(1), Kind::Number);
+		let result = p.parse_entirely::<NumericInt>();
+		assert!(matches!(result.output, Some(NumericValue::Bad(_))));
+		assert_eq!(result.errors.len(), 1);
+	}
+
+	#[test]
+	fn substitution_dispatch_skips_variant_with_bad() {
+		use crate::Positive;
+		use css_parse::{Kind, T};
+
+		#[derive(Parse, Peek, Debug)]
+		enum Slotted<'a> {
+			Strict(Value<'a, NumericValue<'a, Positive<CSSInt>>>),
+			Loose(Value<'a, T![Number]>),
+		}
+
+		// `0` peeks as a positive integer but fails to parse, so `Strict` succeeds with a Bad
+		// fallback. The derive must rewind and try `Loose`, which parses cleanly. With `1` the
+		// typed slot is clean and keeps priority.
+		let alloc = css_parse::Arena::new();
+		for (input, loose) in [("var(--a,0)", true), ("var(--a,1)", false)] {
+			let lexer = css_lexer::Lexer::new(&CssAtomSet::ATOMS, input);
+			let mut p = css_parse::Parser::new(&alloc, input, lexer);
+			let checkpoint = p.checkpoint();
+			let node = p.parse::<Slotted>().expect("slots never fail");
+			match node {
+				Slotted::Loose(Value::Substituted(_)) if loose => {}
+				Slotted::Strict(Value::Substituted(_)) if !loose => {}
+				_ => panic!("{input}: got {node:?}"),
+			}
+			assert_eq!(p.peek_n(1), Kind::Eof);
+			assert!(p.diagnostic_since(&checkpoint).is_none());
+		}
 	}
 }

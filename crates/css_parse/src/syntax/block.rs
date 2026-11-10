@@ -161,7 +161,32 @@ where
 			]);
 			let error_kinds = if in_braces { ERROR_KINDS } else { ERROR_KINDS.add(Kind::RightCurly) };
 			let c = p.peek_n(1);
+			if c == Kind::Semicolon {
+				let old_skip = p.set_skip(KindSet::TRIVIA.add(Kind::Semicolon));
+				p.consume_trivia_as_leading();
+				p.set_skip(old_skip);
+				continue;
+			}
 			if c == error_kinds {
+				if c != Kind::CdcOrCdo {
+					if R::from_declaration_group(DeclarationGroup { declarations: Vec::new_in(p.alloc()) }).is_some() {
+						let value = BadDeclaration::parse_value(p)?;
+						p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
+						decls.push(DeclarationOrBad::Bad(BadDeclaration::stray(p, value)));
+						continue;
+					}
+					let checkpoint = p.checkpoint();
+					let value = BadDeclaration::parse_value(p)?;
+					if let Some(rule) =
+						R::bad_declaration(crate::Box::new_in(p.alloc(), BadDeclaration::stray(p, value)))
+					{
+						p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
+						flush_decls!();
+						rules.push(rule);
+						continue;
+					}
+					p.rewind(checkpoint);
+				}
 				let old_skip = p.set_skip(error_kinds);
 				p.consume_trivia_as_leading();
 				p.set_skip(old_skip);
@@ -196,7 +221,9 @@ where
 						}
 					}
 				}
-			} else if let Ok(Some(decl)) = p.try_parse_if_peek::<Declaration<'a, D, M>>() {
+			} else if let Ok(Some(decl)) =
+				p.parse_if_peek::<Declaration<'a, D, M>>().inspect_err(|_| p.rewind(checkpoint.clone()))
+			{
 				// https://drafts.csswg.org/css-syntax-3/#consume-a-blocks-contents
 				// Parsing a declaration can result in an error, at which point the parser must be rewound and a Rule parse
 				// must be attempted. The CSS spec allows parsers to discard unknown rules as syntax errors, but this parser

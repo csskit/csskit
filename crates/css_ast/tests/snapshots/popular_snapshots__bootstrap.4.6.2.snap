@@ -51194,269 +51194,245 @@ StyleSheet(
                 offset: SourceOffset(37785),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(37786),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(37787),
-                      len: 4,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        String(Cursor(
-                          kind: "String",
-                          offset: SourceOffset(37791),
-                          len: 169,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(37960),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(37961),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(37962),
-                    len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(37967),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(37968),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(37975),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(37976),
-                    len: 6,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(37982),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(37983),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(37986),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(37987),
+              value: BackgroundStyleValue([
+                (Literal(BgLayer(
+                  image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(37787),
                     len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(37991),
+                  )), String(Cursor(
+                    kind: "String",
+                    offset: SourceOffset(37791),
+                    len: 169,
+                  )), RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(37960),
                     len: 1,
+                  )))))),
+                  position: Some(BgPositionAndSize(
+                    position: ThreeVertical(Right(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(37962),
+                      len: 5,
+                    ))), Literal(Length(Rem(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(37968),
+                      len: 7,
+                    ))))), Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(37976),
+                      len: 6,
+                    )))),
+                    size: Some((Slash(Delim(Cursor(
+                      kind: "Delim",
+                      offset: SourceOffset(37982),
+                      len: 1,
+                    ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(37983),
+                      len: 3,
+                    )))))), Some(r#Some(Literal(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(37987),
+                      len: 4,
+                    )))))))))),
                   )),
-                  Ident(Cursor(
+                  repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(37992),
                     len: 9,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(38001),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38002),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
-                    kind: "Hash",
-                    offset: SourceOffset(38003),
-                    len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38007),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38008),
-                      len: 4,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        String(Cursor(
-                          kind: "String",
-                          offset: SourceOffset(38012),
-                          len: 250,
+                  ))), None)),
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(38001),
+                  len: 1,
+                )))),
+                (Bad(Unresolved(
+                  tokens: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38002),
+                        len: 1,
+                      )),
+                      Hash(Cursor(
+                        kind: "Hash",
+                        offset: SourceOffset(38003),
+                        len: 4,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38007),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(38008),
+                          len: 4,
                         )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38262),
-                      len: 1,
-                    )),
+                        params: ComponentValues(
+                          values: [
+                            String(Cursor(
+                              kind: "String",
+                              offset: SourceOffset(38012),
+                              len: 250,
+                            )),
+                          ],
+                        ),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(38262),
+                          len: 1,
+                        )),
+                      ),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38263),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(38264),
+                        len: 6,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38270),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(38271),
+                        len: 5,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38276),
+                        len: 1,
+                      )),
+                      Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(38277),
+                        len: 7,
+                      )),
+                      Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(38284),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(38285),
+                          len: 5,
+                        )),
+                        params: ComponentValues(
+                          values: [
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(38290),
+                              len: 6,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(38296),
+                              len: 1,
+                            )),
+                            Delim(Cursor(
+                              kind: "Delim",
+                              offset: SourceOffset(38297),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(38298),
+                              len: 1,
+                            )),
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(38299),
+                              len: 8,
+                            )),
+                          ],
+                        ),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(38307),
+                          len: 1,
+                        )),
+                      ),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38308),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(38309),
+                          len: 5,
+                        )),
+                        params: ComponentValues(
+                          values: [
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(38314),
+                              len: 6,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(38320),
+                              len: 1,
+                            )),
+                            Delim(Cursor(
+                              kind: "Delim",
+                              offset: SourceOffset(38321),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(38322),
+                              len: 1,
+                            )),
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(38323),
+                              len: 8,
+                            )),
+                          ],
+                        ),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(38331),
+                          len: 1,
+                        )),
+                      ),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(38332),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(38333),
+                        len: 9,
+                      )),
+                    ],
                   ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38263),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(38264),
-                    len: 6,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38270),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(38271),
-                    len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38276),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(38277),
-                    len: 7,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(38284),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38285),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38290),
-                          len: 6,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(38296),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(38297),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(38298),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38299),
-                          len: 8,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38307),
-                      len: 1,
-                    )),
+                  expected: CssTypes(
+                    bits: 4294967295,
                   ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38308),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(38309),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38314),
-                          len: 6,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(38320),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(38321),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(38322),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(38323),
-                          len: 8,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(38331),
-                      len: 1,
-                    )),
+                  substitutions: SubstitutionKinds(
+                    bits: 0,
                   ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(38332),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(38333),
-                    len: 9,
-                  )),
-                ],
-              )),
+                  start: SourceOffset(38003),
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",
@@ -55637,269 +55613,245 @@ StyleSheet(
                 offset: SourceOffset(42168),
                 len: 1,
               )),
-              value: Unknown(ComponentValues(
-                values: [
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42169),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(42170),
-                      len: 4,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        String(Cursor(
-                          kind: "String",
-                          offset: SourceOffset(42174),
-                          len: 169,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(42343),
-                      len: 1,
-                    )),
-                  ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42344),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(42345),
-                    len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42350),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(42351),
-                    len: 7,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42358),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(42359),
-                    len: 6,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(42365),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(42366),
-                    len: 3,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42369),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(42370),
+              value: BackgroundStyleValue([
+                (Literal(BgLayer(
+                  image: Some(r#Some(Url(UrlFunction(Function(Cursor(
+                    kind: "Function",
+                    offset: SourceOffset(42170),
                     len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42374),
+                  )), String(Cursor(
+                    kind: "String",
+                    offset: SourceOffset(42174),
+                    len: 169,
+                  )), RightParen(Cursor(
+                    kind: "RightParen",
+                    offset: SourceOffset(42343),
                     len: 1,
+                  )))))),
+                  position: Some(BgPositionAndSize(
+                    position: ThreeVertical(Right(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(42345),
+                      len: 5,
+                    ))), Literal(Length(Rem(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(42351),
+                      len: 7,
+                    ))))), Center(Ident(Cursor(
+                      kind: "Ident",
+                      offset: SourceOffset(42359),
+                      len: 6,
+                    )))),
+                    size: Some((Slash(Delim(Cursor(
+                      kind: "Delim",
+                      offset: SourceOffset(42365),
+                      len: 1,
+                    ))), AutoOrLengthPercentage(r#Some(Literal(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(42366),
+                      len: 3,
+                    )))))), Some(r#Some(Literal(Length(Px(Dimension(Cursor(
+                      kind: "Dimension",
+                      offset: SourceOffset(42370),
+                      len: 4,
+                    )))))))))),
                   )),
-                  Ident(Cursor(
+                  repeat: Some(Repetition(NoRepeat(Ident(Cursor(
                     kind: "Ident",
                     offset: SourceOffset(42375),
                     len: 9,
-                  )),
-                  Comma(Cursor(
-                    kind: "Comma",
-                    offset: SourceOffset(42384),
-                    len: 1,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42385),
-                    len: 1,
-                  )),
-                  Hash(Cursor(
-                    kind: "Hash",
-                    offset: SourceOffset(42386),
-                    len: 4,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42390),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(42391),
-                      len: 4,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        String(Cursor(
-                          kind: "String",
-                          offset: SourceOffset(42395),
-                          len: 309,
+                  ))), None)),
+                  attachment: None,
+                  origin: None,
+                  clip: None,
+                  color: None,
+                )), Some(Comma(Cursor(
+                  kind: "Comma",
+                  offset: SourceOffset(42384),
+                  len: 1,
+                )))),
+                (Bad(Unresolved(
+                  tokens: ComponentValues(
+                    values: [
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42385),
+                        len: 1,
+                      )),
+                      Hash(Cursor(
+                        kind: "Hash",
+                        offset: SourceOffset(42386),
+                        len: 4,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42390),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(42391),
+                          len: 4,
                         )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(42704),
-                      len: 1,
-                    )),
+                        params: ComponentValues(
+                          values: [
+                            String(Cursor(
+                              kind: "String",
+                              offset: SourceOffset(42395),
+                              len: 309,
+                            )),
+                          ],
+                        ),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(42704),
+                          len: 1,
+                        )),
+                      ),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42705),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(42706),
+                        len: 6,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42712),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(42713),
+                        len: 5,
+                      )),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42718),
+                        len: 1,
+                      )),
+                      Dimension(Cursor(
+                        kind: "Dimension",
+                        offset: SourceOffset(42719),
+                        len: 7,
+                      )),
+                      Delim(Cursor(
+                        kind: "Delim",
+                        offset: SourceOffset(42726),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(42727),
+                          len: 5,
+                        )),
+                        params: ComponentValues(
+                          values: [
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(42732),
+                              len: 6,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(42738),
+                              len: 1,
+                            )),
+                            Delim(Cursor(
+                              kind: "Delim",
+                              offset: SourceOffset(42739),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(42740),
+                              len: 1,
+                            )),
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(42741),
+                              len: 8,
+                            )),
+                          ],
+                        ),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(42749),
+                          len: 1,
+                        )),
+                      ),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42750),
+                        len: 1,
+                      )),
+                      FunctionBlock(
+                        name: Function(Cursor(
+                          kind: "Function",
+                          offset: SourceOffset(42751),
+                          len: 5,
+                        )),
+                        params: ComponentValues(
+                          values: [
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(42756),
+                              len: 6,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(42762),
+                              len: 1,
+                            )),
+                            Delim(Cursor(
+                              kind: "Delim",
+                              offset: SourceOffset(42763),
+                              len: 1,
+                            )),
+                            Whitespace(Cursor(
+                              kind: "Whitespace",
+                              offset: SourceOffset(42764),
+                              len: 1,
+                            )),
+                            Dimension(Cursor(
+                              kind: "Dimension",
+                              offset: SourceOffset(42765),
+                              len: 8,
+                            )),
+                          ],
+                        ),
+                        close: RightParen(Cursor(
+                          kind: "RightParen",
+                          offset: SourceOffset(42773),
+                          len: 1,
+                        )),
+                      ),
+                      Whitespace(Cursor(
+                        kind: "Whitespace",
+                        offset: SourceOffset(42774),
+                        len: 1,
+                      )),
+                      Ident(Cursor(
+                        kind: "Ident",
+                        offset: SourceOffset(42775),
+                        len: 9,
+                      )),
+                    ],
                   ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42705),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(42706),
-                    len: 6,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42712),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(42713),
-                    len: 5,
-                  )),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42718),
-                    len: 1,
-                  )),
-                  Dimension(Cursor(
-                    kind: "Dimension",
-                    offset: SourceOffset(42719),
-                    len: 7,
-                  )),
-                  Delim(Cursor(
-                    kind: "Delim",
-                    offset: SourceOffset(42726),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(42727),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(42732),
-                          len: 6,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(42738),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(42739),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(42740),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(42741),
-                          len: 8,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(42749),
-                      len: 1,
-                    )),
+                  expected: CssTypes(
+                    bits: 4294967295,
                   ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42750),
-                    len: 1,
-                  )),
-                  FunctionBlock(
-                    name: Function(Cursor(
-                      kind: "Function",
-                      offset: SourceOffset(42751),
-                      len: 5,
-                    )),
-                    params: ComponentValues(
-                      values: [
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(42756),
-                          len: 6,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(42762),
-                          len: 1,
-                        )),
-                        Delim(Cursor(
-                          kind: "Delim",
-                          offset: SourceOffset(42763),
-                          len: 1,
-                        )),
-                        Whitespace(Cursor(
-                          kind: "Whitespace",
-                          offset: SourceOffset(42764),
-                          len: 1,
-                        )),
-                        Dimension(Cursor(
-                          kind: "Dimension",
-                          offset: SourceOffset(42765),
-                          len: 8,
-                        )),
-                      ],
-                    ),
-                    close: RightParen(Cursor(
-                      kind: "RightParen",
-                      offset: SourceOffset(42773),
-                      len: 1,
-                    )),
+                  substitutions: SubstitutionKinds(
+                    bits: 0,
                   ),
-                  Whitespace(Cursor(
-                    kind: "Whitespace",
-                    offset: SourceOffset(42774),
-                    len: 1,
-                  )),
-                  Ident(Cursor(
-                    kind: "Ident",
-                    offset: SourceOffset(42775),
-                    len: 9,
-                  )),
-                ],
-              )),
+                  start: SourceOffset(42386),
+                )), None),
+              ]),
               important: None,
               semicolon: Some(Semicolon(Cursor(
                 kind: "Semicolon",

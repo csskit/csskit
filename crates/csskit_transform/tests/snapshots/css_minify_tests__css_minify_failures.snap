@@ -106,7 +106,7 @@ FAIL colors/0054
 +a{color:red}
 
 FAIL colors/0055
--a{color:hsl(from rebeccapurple calc(h) calc(s * 1) calc(l + 0) / calc(1 / 1))}
+-a{color:hsl(from rebeccapurple calc(h)calc(s * 1)calc(l + 0)/calc(1/1))}
 +a{color:#639}
 
 FAIL colors/0056
@@ -114,7 +114,7 @@ FAIL colors/0056
 +a{--red:#f01;--h:10;color:hsl(from var(--red)calc(var(--h))calc(s*2)calc(l + 1)/.6)}
 
 FAIL colors/0073
--a{background-color:red;background:#00f00}
+-a{background:#00f00}
 +a{background-color:red}
 
 FAIL colors/0074
@@ -1481,7 +1481,7 @@ FAIL values/0016
 +.a{quotes:none}.b{color:red}.c{quotes:none}.d{color:tan}.e{quotes:none}
 
 FAIL values/0017
--.a{quotes:"a";color:red}.b{quotes:"a" "b" "c";color:tan}
+-.a{quotes:"a";color:red}.b{quotes:"a""b""c";color:tan}
 +.a{color:red}.b{color:tan}
 
 FAIL values/0019

@@ -1,0 +1,8 @@
+---
+source: crates/css_ast/tests/postcss_snapshots.rs
+expression: "$crate :: render_diagnostics! (result.errors, source_text)"
+---
+[
+    "103..106 Unexpected: Unexpected `Kind::Ident`",
+    "288..290 Unexpected: Unexpected `Kind::Ident`",
+]

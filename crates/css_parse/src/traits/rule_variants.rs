@@ -1,5 +1,5 @@
 use super::prelude::*;
-use crate::{BadDeclaration, State, ToCursors, ToSpan};
+use crate::{BadDeclaration, Box, ComponentValue, State, ToCursors, ToSpan};
 
 /// A trait that can be used for AST nodes representing a Declaration's Value. It offers some
 /// convenience functions for handling such values.
@@ -71,7 +71,7 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 	/// [RuleVariants::parse_rule_variants()] can [Err].
 	///
 	/// The default implementation of this method is to return [None].
-	fn bad_declaration(_: BadDeclaration<'a>) -> Option<Self> {
+	fn bad_declaration(_: Box<'a, BadDeclaration<'a>>) -> Option<Self> {
 		None
 	}
 
@@ -116,16 +116,26 @@ pub trait RuleVariants<'a>: Sized + ToCursors + ToSpan {
 					p.rewind(checkpoint.clone());
 					Self::parse_unknown_qualified_rule(p, c)
 				})
-				.or_else(|_| {
+				.or_else(|err| {
 					p.rewind(checkpoint);
 					let state = p.set_state(State::Nested);
 					let declaration = p.parse::<BadDeclaration>();
 					p.set_state(state);
-					if let Some(s) = Self::bad_declaration(declaration?) {
-						Ok(s)
-					} else {
-						Err(Diagnostic::new(c, Diagnostic::unexpected))?
+					let mut declaration = declaration?;
+					if declaration.is_empty()
+						&& !p.is(State::Nested)
+						&& let Some(closer) = p.parse_if_peek::<T![PairWiseEnd]>()?
+					{
+						declaration = BadDeclaration::stray(p, ComponentValue::StrayCloser(closer));
 					}
+					if declaration.is_empty() {
+						Err(err)?
+					}
+					let Some(s) = Self::bad_declaration(Box::new_in(p.alloc(), declaration)) else {
+						Err(Diagnostic::new(c, Diagnostic::unexpected))?
+					};
+					p.diagnose(err);
+					Ok(s)
 				})
 		}
 	}

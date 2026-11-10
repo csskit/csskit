@@ -329,13 +329,14 @@ fn dispatch(variants: &[&Variant], depth: usize, post: &TokenStream, wc: &mut Wh
 	quote! { #(#nodes)* #miss }
 }
 
-/// True when `ty` is a substitution value-slot wrapper (`Value<..>` / `CalcableValue<..>`),
-/// possibly inside a range constraint such as `NonNegative<CalcableValue<..>>`.
+/// True when `ty` is a substitution value-slot wrapper (`Value<..>`, `CalcableValue<..>`,
+/// `NumericValue<..>` or `KeywordValue<..>`), possibly inside a range constraint such as
+/// `NonNegative<CalcableValue<..>>`.
 fn is_value_slot(ty: &Type) -> bool {
 	let Type::Path(path) = ty else { return false };
 	let Some(last) = path.path.segments.last() else { return false };
 	match last.ident.to_string().as_str() {
-		"Value" | "CalcableValue" => true,
+		"Value" | "CalcableValue" | "NumericValue" | "KeywordValue" => true,
 		"NonNegative" | "Positive" | "NonZero" | "Ranged" | "Exact" => matches!(
 			&last.arguments,
 			syn::PathArguments::AngleBracketed(args)

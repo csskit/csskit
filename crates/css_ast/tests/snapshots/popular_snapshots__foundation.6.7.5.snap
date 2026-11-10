@@ -110063,7 +110063,7 @@ StyleSheet(
             offset: SourceOffset(83678),
             len: 3,
           ))),
-          condition: Some(Is(Hack(IEBackslashZero(LeftParen(Cursor(
+          condition: Some(Is(Width(Min(LeftParen(Cursor(
             kind: "LeftParen",
             offset: SourceOffset(83682),
             len: 1,
@@ -110075,10 +110075,28 @@ StyleSheet(
             kind: "Colon",
             offset: SourceOffset(83692),
             len: 1,
-          )), Dimension(Cursor(
-            kind: "Dimension",
-            offset: SourceOffset(83694),
-            len: 3,
+          )), Bad(Unresolved(
+            tokens: ComponentValues(
+              values: [
+                Whitespace(Cursor(
+                  kind: "Whitespace",
+                  offset: SourceOffset(83693),
+                  len: 1,
+                )),
+                Dimension(Cursor(
+                  kind: "Dimension",
+                  offset: SourceOffset(83694),
+                  len: 3,
+                )),
+              ],
+            ),
+            expected: CssTypes(
+              bits: 4294967295,
+            ),
+            substitutions: SubstitutionKinds(
+              bits: 0,
+            ),
+            start: SourceOffset(83694),
           )), RightParen(Cursor(
             kind: "RightParen",
             offset: SourceOffset(83697),

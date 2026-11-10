@@ -9606,6 +9606,7 @@ Rule: size=24 align=8
     21: UnknownAt
     22: Style
     23: Unknown
+    24: BadDeclaration
 RuleBreakStyleValue: size=32 align=8 {
     0: 0
 }
@@ -10474,7 +10475,7 @@ StyleSheet: size=80 align=16 {
     rules: 0
     meta: 32
 }
-StyleValue: size=40 align=8
+StyleValue: size=48 align=8
     0: Initial
     1: Inherit
     2: Unset
@@ -12260,10 +12261,11 @@ UnknownQualifiedRule: size=160 align=16 {
 UnknownTag: size=12 align=4 {
     0: 0
 }
-Unresolved: size=32 align=8 {
+Unresolved: size=40 align=8 {
     tokens: 0
     expected: 24
     substitutions: 28
+    start: 32
 }
 UpdateMediaFeature: size=68 align=4
     0: WithValue

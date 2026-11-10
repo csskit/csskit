@@ -1,0 +1,7 @@
+---
+source: crates/css_ast/tests/popular_snapshots.rs
+expression: "render_diagnostics!(result.errors, source_text)"
+---
+[
+    "2390..2393 Unexpected: Unexpected `Kind::Dimension`",
+]
