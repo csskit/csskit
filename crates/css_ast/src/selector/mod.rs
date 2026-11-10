@@ -104,7 +104,7 @@ pub type RelativeSelector<'a> = SelectorList<'a>;
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(self))]
 #[derive(csskit_derives::NodeWithMetadata)]
-pub struct Id(T![Hash]);
+pub struct Id(pub T![Hash]);
 
 #[node]
 #[derive(
@@ -368,6 +368,29 @@ mod tests {
 		assert_specificity!("button:only-of-type:enabled:active:hover", 0, 4, 1);
 		assert_specificity!("table tr:not(:first-child):hover td:nth-child(2n+1)", 0, 3, 3);
 		assert_specificity!("input[type='checkbox'][checked]:indeterminate + label", 0, 3, 2);
+	}
+
+	#[test]
+	fn test_escaped_names_decode() {
+		use css_parse::{Cursor, SourceCursor};
+		let source = r"d\69v#\66 oo.b\61r";
+		assert_parse!(CssAtomSet::ATOMS, CompoundSelector, r"d\69v#\66 oo.b\61r", |compound| {
+			let arena = css_parse::Arena::new();
+			let names: std::vec::Vec<std::string::String> = compound
+				.0
+				.iter()
+				.map(|component| {
+					let cursor = match component {
+						SelectorComponent::Tag(tag) => Cursor::from(*tag),
+						SelectorComponent::Id(id) => id.0.into(),
+						SelectorComponent::Class(class) => class.name.into(),
+						_ => panic!("unexpected {component:?}"),
+					};
+					SourceCursor::from(cursor, cursor.str_slice(source)).parse(&arena).to_string()
+				})
+				.collect();
+			assert_eq!(names, ["div", "foo", "bar"]);
+		});
 	}
 
 	#[test]
