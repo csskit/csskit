@@ -436,10 +436,9 @@ impl<'a> SourceCursor<'a> {
 					write!(f, "\\{}", ch)?;
 				} else {
 					write!(f, "\\{:x}", ch as u32)?;
-					// A trailing space is needed if the next character is a hex digit
-					// or whitespace, to prevent it from being consumed as part of the escape.
 					let next_char = chars.clone().next().map(|(nc, _)| nc);
-					if next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
+					let ends_token = next_char.is_none() && self.token().kind() != Kind::Function;
+					if ends_token || next_char.is_some_and(|nc| nc.is_ascii_hexdigit() || nc == ' ' || nc == '\t') {
 						f.write_char(' ')?;
 					}
 				}
@@ -455,7 +454,14 @@ impl<'a> SourceCursor<'a> {
 		let trailing_len = token.trailing_len() as usize;
 		f.write_str("url(")?;
 		let url_content = &self.inner.source()[leading_len..(self.inner.source().len() - trailing_len)];
-		f.write_str(url_content.trim())?;
+		let whitespace = [' ', '\t', '\n', '\r', '\x0C'];
+		let start = url_content.len() - url_content.trim_start_matches(whitespace).len();
+		let mut end = url_content.trim_end_matches(whitespace).len();
+		if end < url_content.len() && url_content[start..end].bytes().rev().take_while(|&b| b == b'\\').count() % 2 == 1
+		{
+			end += 1;
+		}
+		f.write_str(&url_content[start..end])?;
 		if token.url_has_closing_paren() {
 			f.write_str(")")?;
 		}
@@ -1300,7 +1306,7 @@ mod test {
 		assert_eq!(compact(r"\-1"), r"\-1");
 		assert_eq!(compact(r"\-a"), "-a");
 		assert_eq!(compact(r"\--"), "--");
-		assert_eq!(compact(r"\-\31 "), r"-\31");
+		assert_eq!(compact(r"\-\31 "), r"-\31 ");
 	}
 
 	#[test]

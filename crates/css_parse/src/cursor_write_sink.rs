@@ -23,7 +23,7 @@ impl<'a, T: Write> CursorWriteSink<'a, T> {
 		let adjacent_in_source = self.last_end == Some((source.as_ptr(), c.offset()));
 		if let Some(last) = self.last_token
 			&& !adjacent_in_source
-			&& last.needs_separator_for(c.token())
+			&& (last == Kind::BadString || last.needs_separator_for(c.token()))
 		{
 			self.writer.write_char(if last.char() == Some('\\') || last == Kind::BadString { '\n' } else { ' ' })?;
 		}
@@ -46,7 +46,7 @@ impl<'a, T: Write> CursorWriteSink<'a, T> {
 		Ok(())
 	}
 
-	fn unclosed(token: Token, str: &str) -> Option<&'static str> {
+	pub(crate) fn unclosed(token: Token, str: &str) -> Option<&'static str> {
 		let escape_at_end = str.bytes().rev().take_while(|&byte| byte == b'\\').count() % 2 == 1;
 		match token.kind() {
 			Kind::String if !token.has_close_quote() => Some(match (token.quote_style(), escape_at_end) {
@@ -118,6 +118,19 @@ mod test {
 			CursorSink::append(&mut stream, cursor);
 		}
 		assert_eq!(str, "'a\nb");
+	}
+
+	#[test]
+	fn bad_string_at_eof_keeps_its_newline() {
+		let source_text = "'a\n";
+		let mut str = String::new();
+		let mut stream = CursorWriteSink::new(source_text, &mut str);
+		for cursor in Lexer::new(&EmptyAtomSet::ATOMS, source_text).filter(|cursor| cursor.token() != Kind::Whitespace)
+		{
+			CursorSink::append(&mut stream, cursor);
+		}
+		CursorSink::append(&mut stream, Cursor::new(css_lexer::SourceOffset(3), Token::EOF));
+		assert_eq!(str, "'a\n");
 	}
 
 	#[test]

@@ -1595,6 +1595,14 @@ fn double_dash_ident_needs_separator_for_greater_than() {
 }
 
 #[test]
+fn backtick_delim_keeps_its_char() {
+	let mut lexer = crate::Lexer::new(&crate::EmptyAtomSet::ATOMS, "`");
+	let token = lexer.advance();
+	assert_eq!(token, Kind::Delim);
+	assert_eq!(token.char(), Some('`'));
+}
+
+#[test]
 fn dummy_single_char_token_keeps_char_with_zero_len() {
 	let token = Token::dummy(Kind::RightCurly);
 	assert_eq!(token.kind(), Kind::BadRightCurly);

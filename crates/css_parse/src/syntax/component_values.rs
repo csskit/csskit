@@ -47,7 +47,7 @@ impl<'a> ParseInfallible<'a> for ComponentValues<'a> {
 				// Whitespace between two values is grammar (`foo(.a .b)` is not `foo(.a.b)`) and stays significant.
 				last_was_whitespace = match value {
 					ComponentValue::Whitespace(ws) => {
-						if values.is_empty() {
+						if values.iter().all(|value| matches!(value, ComponentValue::Whitespace(_))) {
 							value = ComponentValue::Whitespace(ws.with_significant_whitespace(false));
 						} else if trailing_whitespace.is_none() {
 							trailing_whitespace = Some(values.len());
@@ -151,5 +151,21 @@ mod tests {
 		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, " \t foo");
 		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, " /*start*/ foo /*mid*/ bar");
 		assert_parse!(EmptyAtomSet::ATOMS, ComponentValues, "/*comment*/foo");
+	}
+
+	#[test]
+	fn test_edge_whitespace_split_by_comment_is_trivia() {
+		for source_text in [" /**/ foo", "foo /**/ ", " /**/ "] {
+			let alloc = crate::Arena::default();
+			let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+			let mut parser = crate::Parser::new(&alloc, source_text, lexer);
+			let values = parser.parse_entirely::<ComponentValues>().output.unwrap().values;
+			for value in values.iter() {
+				if let ComponentValue::Whitespace(ws) = value {
+					let cursor: Cursor = (*ws).into();
+					assert!(!cursor.token().whitespace_is_significant(), "{source_text:?}: {values:?}");
+				}
+			}
+		}
 	}
 }

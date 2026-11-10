@@ -1,4 +1,7 @@
-use crate::{AssociatedWhitespaceRules, Cursor, CursorSink, Kind, KindSet, SourceCursor, SourceCursorSink, Token};
+use crate::{
+	AssociatedWhitespaceRules, Cursor, CursorSink, CursorWriteSink, Kind, KindSet, SourceCursor, SourceCursorSink,
+	Token,
+};
 
 /// This is a [CursorSink] that wraps a sink (`impl SourceCursorSink`) and on each [CursorSink::append()] call, will write
 /// the contents of the cursor [Cursor] given into the given sink - using the given `&'a str` as the original source.
@@ -8,8 +11,13 @@ pub struct CursorCompactWriteSink<'a, T: SourceCursorSink<'a>> {
 	source_text: &'a str,
 	sink: T,
 	last_token: Option<Token>,
+	after_less_than_bang: bool,
+	after_exponent_unit: bool,
+	after_percentage: bool,
+	after_escaped_double_dash: bool,
 	pending: Option<SourceCursor<'a>>,
 	pending_comment: Option<SourceCursor<'a>>,
+	unclosed_url: Option<&'static str>,
 }
 
 // Tokens that get buffered as `pending` rather than emitted immediately.
@@ -41,12 +49,30 @@ const NO_WHITESPACE_AFTER_KINDSET: KindSet = KindSet::new(&[
 
 impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 	pub fn new(source_text: &'a str, sink: T) -> Self {
-		Self { source_text, sink, last_token: None, pending: None, pending_comment: None }
+		Self {
+			source_text,
+			sink,
+			last_token: None,
+			after_less_than_bang: false,
+			after_exponent_unit: false,
+			after_percentage: false,
+			after_escaped_double_dash: false,
+			pending: None,
+			pending_comment: None,
+			unclosed_url: None,
+		}
 	}
 
 	/// Would emitting `next` immediately after `last_token` change tokenisation?
+	#[inline]
 	fn needs_separator(&self, next: Token) -> bool {
-		self.last_token.is_some_and(|t| t.needs_separator_for(next))
+		self.last_token.is_some_and(|t| {
+			t.needs_separator_for(next)
+				&& !(self.after_percentage
+					&& next.char() == Some('-')
+					&& next != AssociatedWhitespaceRules::EnforceBefore)
+		}) || (self.after_exponent_unit && matches!(next.kind(), Kind::Number | Kind::Dimension) && next.has_sign())
+			|| (self.after_escaped_double_dash && next.char() == Some('>'))
 	}
 
 	/// True when the previously-emitted token never needs a separator after it
@@ -55,7 +81,49 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		self.last_token.is_some_and(|t| t == NO_WHITESPACE_AFTER_KINDSET)
 	}
 
+	/// True when the previously-emitted token only ends at a newline (a BadString, or a `\` delim).
+	#[inline]
+	fn last_needs_newline(&self) -> bool {
+		self.last_token.is_some_and(|t| t == Kind::BadString || (t == Kind::Delim && t.char() == Some('\\')))
+	}
+
+	/// True when `next` is a `!` that would directly follow a `<`.
+	fn bang_after_less_than(&self, next: Token) -> bool {
+		next.char() == Some('!') && self.last_token.is_some_and(|t| t.char() == Some('<'))
+	}
+
+	/// True when emitting `next` straight after the last token would form a CDO (`<!--`).
+	fn forms_cdo(&self, next: SourceCursor<'a>) -> bool {
+		let token = next.token();
+		self.bang_after_less_than(token)
+			|| (self.after_less_than_bang
+				&& (token == Kind::Ident || token == Kind::CdcOrCdo)
+				&& next.source().starts_with("--"))
+	}
+
 	fn emit(&mut self, c: SourceCursor<'a>) {
+		if c.token().is_synthetic()
+			&& let Some(close) = self.unclosed_url.take()
+		{
+			let offset = c.cursor().offset();
+			if close.starts_with('\u{FFFD}') {
+				self.sink.append(SourceCursor::from(Cursor::new(offset, Token::REPLACEMENT_CHARACTER), "\u{FFFD}"));
+			}
+			self.sink.append(SourceCursor::from(Cursor::new(offset, Token::RIGHT_PAREN), ")"));
+		} else if c.token() != Kind::Whitespace {
+			self.unclosed_url = match c.token().kind() {
+				Kind::Url | Kind::BadUrl => CursorWriteSink::<String>::unclosed(c.token(), c.source()),
+				_ => None,
+			};
+		}
+		let token = c.token();
+		self.after_exponent_unit =
+			token == Kind::Dimension && token.len() - token.numeric_len() == 1 && c.source().ends_with(['e', 'E']);
+		self.after_percentage =
+			token == Kind::Dimension && token.len() - token.numeric_len() == 1 && c.source().ends_with('%');
+		self.after_escaped_double_dash =
+			token == Kind::Ident && token.contains_escape_chars() && c.eq_ignore_ascii_case("--");
+		self.after_less_than_bang = self.bang_after_less_than(token);
 		self.last_token = Some(c.token());
 		self.sink.append(c);
 	}
@@ -73,9 +141,17 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		if self.pending_comment.take().is_some()
 			&& kind != Kind::Whitespace
 			&& kind != Kind::Eof
-			&& self.needs_separator(c.token())
-		{
+			&& !self.last_needs_newline()
+			&& (self.forms_cdo(c)
+				|| self.last_token.is_some_and(|t| {
+					t.with_associated_whitespace(AssociatedWhitespaceRules::none()).needs_separator_for(c.token())
+				})) {
 			self.emit(SourceCursor::EMPTY_COMMENT);
+		}
+
+		if kind != PENDING_KINDSET && self.last_needs_newline() {
+			self.pending.take_if(|p| p.token() == Kind::Whitespace);
+			self.emit(SourceCursor::NEWLINE);
 		}
 
 		if kind == Kind::Whitespace && self.pending.is_some_and(|c| c == Kind::Semicolon) {
@@ -85,6 +161,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		let enforce_before = c.token() == AssociatedWhitespaceRules::EnforceBefore;
 		let suppress_separator = self.last_forbids_ws_after() && !enforce_before;
 		let significant_pending_whitespace = self.pending.is_some_and(|p| p.token().whitespace_is_significant());
+		let mut separated = false;
 		if let Some(prev) = self.pending.take() {
 			let keep = match prev.token().kind() {
 				Kind::Semicolon => {
@@ -96,10 +173,15 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 					kind != KindSet::RIGHT_CURLY_OR_SEMICOLON && self.last_token.is_some_and(|t| t != redundant_after)
 				}
 				_ if suppress_separator || (!enforce_before && kind == NO_WHITESPACE_BEFORE_KINDSET) => false,
-				_ => (significant_pending_whitespace && self.last_token.is_some()) || self.needs_separator(c.token()),
+				_ => {
+					(significant_pending_whitespace && self.last_token.is_some())
+						|| self.needs_separator(c.token())
+						|| self.forms_cdo(c)
+				}
 			};
 			if keep {
 				self.emit(prev.compact());
+				separated = true;
 			}
 		}
 
@@ -118,9 +200,38 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 
 		if !suppress_separator && self.needs_separator(c.token()) {
 			self.sink.append(SourceCursor::SPACE);
+			separated = true;
 		}
 
-		let out = if kind == Kind::String { c.with_quotes(c.fewest_escapes_quotes()).compact() } else { c.compact() };
+		let out = if kind == Kind::String {
+			c.with_quotes(c.fewest_escapes_quotes()).compact()
+		} else if matches!(kind, Kind::Number | Kind::Dimension)
+			&& !separated
+			&& self.last_token.is_some_and(|t| {
+				let positive_sign = c.token().has_sign() && !c.token().value().is_sign_negative();
+				match t.kind() {
+					Kind::Delim => match t.char() {
+						Some('.' | '#') => true,
+						Some('+' | '-') => positive_sign,
+						_ => false,
+					},
+					kind => {
+						positive_sign
+							&& kind
+								== KindSet::new(&[
+									Kind::Ident,
+									Kind::AtKeyword,
+									Kind::Hash,
+									Kind::Number,
+									Kind::Dimension,
+								])
+					}
+				}
+			}) {
+			c
+		} else {
+			c.compact()
+		};
 		self.emit(out);
 	}
 }
@@ -130,6 +241,9 @@ impl<'a, T: SourceCursorSink<'a>> Drop for CursorCompactWriteSink<'a, T> {
 		if let Some(prev) = self.pending.take()
 			&& prev == Kind::Semicolon
 		{
+			if self.last_needs_newline() {
+				self.emit(SourceCursor::NEWLINE);
+			}
 			self.emit(prev);
 		}
 	}
@@ -215,6 +329,50 @@ mod test {
 	#[test]
 	fn test_does_not_compact_whitespace_resulting_in_new_ident() {
 		assert_format!("12px - 1px", "12px - 1px");
+	}
+
+	#[test]
+	fn test_keeps_minus_adjacent_to_percentage() {
+		assert_format!("calc(1%- 1px - 1px)", "calc(1%- 1px - 1px)");
+		assert_format!("1%- x", "1%- x");
+		assert_format!("1px-x", "1px-x");
+		assert_format!("1px - x", "1px - x");
+	}
+
+	#[test]
+	fn test_keeps_plus_before_signed_number() {
+		assert_format!("++1", "++1");
+		assert_format!("++1px", "++1px");
+		assert_format!("a ++1", "a ++1");
+		assert_format!("n+3", "n+3");
+		assert_format!("1+2", "1 2");
+		assert_format!("1px+2px", "1px+2px");
+		assert_format!("n +3", "n 3");
+		assert_format!("#+1", "#+1");
+		assert_format!("#+1px", "#+1px");
+	}
+
+	#[test]
+	fn test_keeps_number_source_after_dot_or_hash_delim() {
+		assert_format!("..0x", "..0x");
+		assert_format!("..1e1", "..1e1");
+		assert_format!("#.1e1", "#.1e1");
+	}
+
+	#[test]
+	fn test_separates_exponent_unit_from_signed_number() {
+		assert_format!("1e/**/+1", "1e 1");
+		assert_format!("1E +1", "1E 1");
+		assert_format!("1e1e+1", "10e 1");
+		assert_format!("1ex+1", "1ex+1");
+	}
+
+	#[test]
+	fn test_separates_escaped_double_dash_from_greater_than() {
+		assert_format!(r"\-->", r"-- >");
+		assert_format!(r"-\->", r"-\- >");
+		assert_format!(r"\--a>", r"--a>");
+		assert_format!(r"\--/**/>", r"-- >");
 	}
 
 	#[test]
@@ -372,5 +530,93 @@ mod test {
 		assert_format!("f(", "f()");
 		assert_format!("{f(}", "{f()}");
 		assert_format!("{a;f(}", "{a;f()}");
+	}
+
+	#[test]
+	fn test_closes_unclosed_url_before_inserted_closer() {
+		assert_format!("{url(x", "{url(x)}");
+		assert_format!("{url(x\\", "{url(x\\\u{FFFD})}");
+	}
+
+	#[test]
+	fn test_keeps_escaped_trailing_url_whitespace() {
+		assert_format!("{url(x\\ )", "{url(x\\ )}");
+		assert_format!("{url( x\\\t )", "{url(x\\\t)}");
+		assert_format!("{url(x\\\\ )", "{url(x\\\\)}");
+	}
+
+	#[test]
+	fn test_terminates_trailing_hex_escape() {
+		assert_format!(r"(width \31   1px)", r"(width \31  1px)");
+		assert_format!(r"\31   (a)", r"\31  (a)");
+		assert_format!(r"\31   and (a)", r"\31  and (a)");
+		assert_format!(r"c \31  !important", r"c \31  !important");
+		assert_format!(r"\31(a)", r"\31(a)");
+	}
+
+	#[test]
+	fn test_separates_comment_split_dashes() {
+		assert_format!("-/**/-x", "-/**/-x");
+		assert_format!("a{-/**/-x:1}", "a{-/**/-x:1}");
+	}
+
+	#[test]
+	fn test_separates_comment_split_cdo() {
+		assert_format!("<!/**/--", "<!/**/--");
+		assert_format!("</**/!--", "</**/!--");
+		assert_format!("a{b:<!/**/--}", "a{b:<!/**/--}");
+		assert_format!("<! --", "<! --");
+		assert_format!("< !--", "< !--");
+		assert_format!("a{b:</**/!--}", "a{b:</**/!--}");
+		assert_format!("a</**/b", "a<b");
+		assert_format!("<!-/**/-x", "<!-/**/-x");
+		assert_format!("<!-/**/-1", "<!-/**/-1");
+	}
+
+	fn raw_format(source_text: &str) -> String {
+		let mut sink = String::new();
+		{
+			let mut stream = CursorCompactWriteSink::new(source_text, &mut sink);
+			let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+			loop {
+				let offset = lexer.offset();
+				let token = lexer.advance();
+				CursorSink::append(&mut stream, crate::Cursor::new(offset, token));
+				if token == Kind::Eof {
+					break;
+				}
+			}
+		}
+		sink
+	}
+
+	#[test]
+	fn test_separates_comment_split_cdo_from_raw_tokens() {
+		for (source_text, expected) in [("<!/**/-->", "<!/**/-->"), ("<!/**/--->", "<!/**/--->")] {
+			assert_eq!(raw_format(source_text), expected);
+		}
+	}
+
+	#[test]
+	fn test_ends_bad_string_with_newline() {
+		for (source_text, expected) in [
+			("\"foo\n\"\n", "\"foo\n\"\n"),
+			("\"fo\no\"", "\"fo\no\"\""),
+			("\"a\n;b", "\"a\n;b"),
+			("\"a\n/**/b", "\"a\nb"),
+			("\"a\n/**/*b", "\"a\n*b"),
+			("\\\n/**/*b", "\\\n*b"),
+		] {
+			assert_eq!(raw_format(source_text), expected);
+		}
+	}
+
+	#[test]
+	fn test_ends_lone_reverse_solidus_with_newline() {
+		for (source_text, expected) in
+			[("@\\\neB", "@\\\neB"), ("\\\n", "\\\n"), ("-\\\n", "-\\\n"), ("a\\\n b", "a\\\nb")]
+		{
+			assert_eq!(raw_format(source_text), expected);
+		}
 	}
 }
