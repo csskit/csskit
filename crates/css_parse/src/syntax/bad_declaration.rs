@@ -21,6 +21,19 @@ impl<'a> BadDeclaration<'a> {
 		Self(values)
 	}
 
+	/// Consumes one stray token as a diagnosed bad declaration.
+	#[cold]
+	#[inline(never)]
+	pub(crate) fn parse_stray<I>(p: &mut Parser<'a, I>) -> Result<Self>
+	where
+		I: Iterator<Item = crate::Cursor> + Clone,
+	{
+		let cursor = p.peek_n(1);
+		let value = Self::parse_value(p)?;
+		p.diagnose(Diagnostic::new(cursor, Diagnostic::unexpected));
+		Ok(Self::stray(p, value))
+	}
+
 	pub(crate) fn parse_until<I>(p: &mut Parser<'a, I>, end: css_lexer::SourceOffset) -> Result<Self>
 	where
 		I: Iterator<Item = crate::Cursor> + Clone,

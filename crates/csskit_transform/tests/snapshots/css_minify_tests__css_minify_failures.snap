@@ -1021,7 +1021,7 @@ FAIL selectors-advanced/0028
 +[href]{color:red}
 
 FAIL selectors-advanced/0029
--a{color:red}a:hover{color:red}
+-a{color:red}a: hover{color:red}
 +a{color:red}
 
 FAIL selectors-advanced/0030
@@ -1625,7 +1625,7 @@ FAIL vendors/0004
 +:is(:unknown,a){color:red}:-moz-any(:unknown,b){color:tan}
 
 FAIL vendors/0005
--a{color:red;*display:inline;*zoom:1}
+-a{color:red;*display: inline;*zoom:1}
 +a{color:red}
 
 FAIL vendors/0006

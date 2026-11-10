@@ -63,6 +63,7 @@ impl<'a> Parse<'a> for UnicodeRange {
 			Err(Diagnostic::new(c, Diagnostic::invalid_unicode_range))?
 		}
 		let end = offset + token.len() as usize;
+		p.next();
 		let skip = p.set_skip(KindSet::NONE);
 		let result = loop {
 			let consumed = p.next();

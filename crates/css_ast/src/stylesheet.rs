@@ -1,5 +1,5 @@
 use crate::{CssAtomSet, CssMetadata, StyleValue, rules, stylerule::StyleRule};
-use css_lexer::KindSet;
+use css_lexer::{Kind, KindSet};
 use css_parse::Vec;
 use css_parse::{
 	BadDeclaration, Box, ComponentValues, Cursor, Diagnostic, NodeWithMetadata, Parse, Parser, Peek, QualifiedRule,
@@ -171,6 +171,7 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
+		let checkpoint = p.checkpoint();
 		macro_rules! parse_rule {
 			( $(
 				$name: ident($ty: ident$(<$a: lifetime>)?): $atoms: pat,
@@ -183,7 +184,23 @@ impl<'a> RuleVariants<'a> for Rule<'a> {
 				}
 			}
 		}
-		apply_rules!(parse_rule)
+		let rule = apply_rules!(parse_rule)?;
+		let ended = match &rule {
+			Self::Charset(r) => r.semicolon.is_some(),
+			Self::Import(r) => r.semicolon.is_some(),
+			Self::Namespace(r) => r.semicolon.is_some(),
+			Self::CustomMedia(r) => r.semicolon.is_some(),
+			Self::Layer(r) => r.semicolon.is_some() || r.block.is_some(),
+			_ => true,
+		};
+		let next = p.peek_n(1);
+		if ended || next == Kind::Eof || next == Kind::RightCurly {
+			return Ok(rule);
+		}
+		p.rewind(checkpoint);
+		let unknown = p.parse::<Box<UnknownAtRule>>()?;
+		p.diagnose(Diagnostic::new(next, Diagnostic::unexpected));
+		Ok(Self::UnknownAt(unknown))
 	}
 
 	fn parse_unknown_at_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
@@ -280,6 +297,14 @@ mod tests {
 	}
 
 	#[test]
+	fn top_level_custom_property_keeps_comment() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "--x: /**/ ;", "--x: /**/ ;");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "--x:/**/;", "--x:/**/;");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "--x: /**/ red;", "--x: /**/ red;");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "--x: /**/ --x:/**/", "--x: /**/ --x:/**/");
+	}
+
+	#[test]
 	fn stray_top_level_closer_keeps_tokens() {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "}", "}");
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, ")", ")");
@@ -339,6 +364,31 @@ mod tests {
 	#[test]
 	fn trailing_comment_after_bad_rule_keeps_tokens() {
 		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "]*/*", "]*/*");
+	}
+
+	#[test]
+	fn comment_in_bad_import_prelude_is_kept() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@import \"x\" a /**/ b;", "@import \"x\" a /**/ b;");
+	}
+
+	#[test]
+	fn comment_in_bad_statement_prelude_is_kept() {
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			StyleSheet,
+			"@namespace x \"y\" /**/ z;",
+			"@namespace x \"y\" /**/ z;"
+		);
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@layer a /**/ b;", "@layer a /**/ b;");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@layer a /**/ ,;", "@layer a /**/ ,;");
+		assert_parse_recovers!(
+			CssAtomSet::ATOMS,
+			StyleSheet,
+			"@custom-media --a a /**/ b c;",
+			"@custom-media --a a /**/ b c;"
+		);
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@charset \"a\" /**/ b;", "@charset \"a\" /**/ b;");
+		assert_parse_recovers!(CssAtomSet::ATOMS, StyleSheet, "@charset \"a\" /**/ b;a{}", "@charset \"a\" /**/ b;a{}");
 	}
 
 	#[test]

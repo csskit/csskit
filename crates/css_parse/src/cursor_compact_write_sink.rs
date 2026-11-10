@@ -101,6 +101,19 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 				&& next.source().starts_with("--"))
 	}
 
+	/// True when emitting `next` straight after the last token would join two delims the parser reads as one
+	/// operator (`^=`, `||`, `*|`).
+	fn forms_double_delim(&self, next: SourceCursor<'a>) -> bool {
+		let Some(last) = self.last_token.filter(|t| *t == Kind::Delim).and_then(|t| t.char()) else {
+			return false;
+		};
+		match next.token().char().filter(|_| next.token() == Kind::Delim) {
+			Some('=') => matches!(last, '<' | '>' | '=' | '~' | '|' | '^' | '$' | '*'),
+			Some('|') => matches!(last, '*' | '|'),
+			_ => false,
+		}
+	}
+
 	fn emit(&mut self, c: SourceCursor<'a>) {
 		if c.token().is_synthetic()
 			&& let Some(close) = self.unclosed_url.take()
@@ -143,6 +156,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 			&& kind != Kind::Eof
 			&& !self.last_needs_newline()
 			&& (self.forms_cdo(c)
+				|| self.forms_double_delim(c)
 				|| self.last_token.is_some_and(|t| {
 					t.with_associated_whitespace(AssociatedWhitespaceRules::none()).needs_separator_for(c.token())
 				})) {
@@ -159,9 +173,14 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		}
 
 		let enforce_before = c.token() == AssociatedWhitespaceRules::EnforceBefore;
-		let suppress_separator = self.last_forbids_ws_after() && !enforce_before;
 		let significant_pending_whitespace = self.pending.is_some_and(|p| p.token().whitespace_is_significant());
+		let suppress_separator = self.last_forbids_ws_after()
+			&& !enforce_before
+			&& !(significant_pending_whitespace
+				&& self.last_token.is_some_and(|t| t == Kind::Colon)
+				&& matches!(kind, Kind::Ident | Kind::Function));
 		let mut separated = false;
+		let before_separator = self.last_token;
 		if let Some(prev) = self.pending.take() {
 			let keep = match prev.token().kind() {
 				Kind::Semicolon => {
@@ -177,6 +196,7 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 					(significant_pending_whitespace && self.last_token.is_some())
 						|| self.needs_separator(c.token())
 						|| self.forms_cdo(c)
+						|| self.forms_double_delim(c)
 				}
 			};
 			if keep {
@@ -206,17 +226,17 @@ impl<'a, T: SourceCursorSink<'a>> CursorCompactWriteSink<'a, T> {
 		let out = if kind == Kind::String {
 			c.with_quotes(c.fewest_escapes_quotes()).compact()
 		} else if matches!(kind, Kind::Number | Kind::Dimension)
-			&& !separated
-			&& self.last_token.is_some_and(|t| {
+			&& before_separator.is_some_and(|t| {
 				let positive_sign = c.token().has_sign() && !c.token().value().is_sign_negative();
 				match t.kind() {
 					Kind::Delim => match t.char() {
-						Some('.' | '#') => true,
+						Some('.' | '#') => !separated,
 						Some('+' | '-') => positive_sign,
 						_ => false,
 					},
 					kind => {
-						positive_sign
+						!separated
+							&& positive_sign
 							&& kind
 								== KindSet::new(&[
 									Kind::Ident,
@@ -299,6 +319,14 @@ mod test {
 	}
 
 	#[test]
+	fn keeps_space_after_colon_in_prelude() {
+		assert_format!("a: hover{}", "a: hover{}");
+		assert_format!("a: /**/ has(> b){}", "a: has(> b){}");
+		assert_format!("a{b: c}", "a{b:c}");
+		assert_format!("supports(foo: bar)", "supports(foo:bar)");
+	}
+
+	#[test]
 	fn test_removes_redundant_semis() {
 		assert_format!("foo{bar: 1;;;;bing: 2;;;}", r#"foo{bar:1;bing:2}"#);
 	}
@@ -344,6 +372,8 @@ mod test {
 		assert_format!("++1", "++1");
 		assert_format!("++1px", "++1px");
 		assert_format!("a ++1", "a ++1");
+		assert_format!("+ +1", "+ +1");
+		assert_format!("- +1px", "- +1px");
 		assert_format!("n+3", "n+3");
 		assert_format!("1+2", "1 2");
 		assert_format!("1px+2px", "1px+2px");
@@ -595,6 +625,16 @@ mod test {
 		for (source_text, expected) in [("<!/**/-->", "<!/**/-->"), ("<!/**/--->", "<!/**/--->")] {
 			assert_eq!(raw_format(source_text), expected);
 		}
+	}
+
+	#[test]
+	fn test_separates_split_double_delims() {
+		assert_format!("a[b^/**/=c]", "a[b^/**/=c]");
+		assert_format!("a[b^ =c]", "a[b^ =c]");
+		assert_format!("a[b|/**/=c]", "a[b|/**/=c]");
+		assert_format!("a[b*/**/|c]", "a[b*/**/|c]");
+		assert_format!("a[b^=c]", "a[b^=c]");
+		assert_format!("a>*|b", "a>*|b");
 	}
 
 	#[test]

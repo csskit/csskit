@@ -23,6 +23,7 @@ impl<'a> ParseInfallible<'a> for ComponentValues<'a> {
 	{
 		let mut values = Vec::new_in(p.alloc());
 		let mut last_was_whitespace = false;
+		let mut whitespace_after_colon = false;
 		let mut trailing_whitespace = None;
 
 		loop {
@@ -47,6 +48,7 @@ impl<'a> ParseInfallible<'a> for ComponentValues<'a> {
 				// Whitespace between two values is grammar (`foo(.a .b)` is not `foo(.a.b)`) and stays significant.
 				last_was_whitespace = match value {
 					ComponentValue::Whitespace(ws) => {
+						whitespace_after_colon |= matches!(values.last(), Some(ComponentValue::Colon(_)));
 						if values.iter().all(|value| matches!(value, ComponentValue::Whitespace(_))) {
 							value = ComponentValue::Whitespace(ws.with_significant_whitespace(false));
 						} else if trailing_whitespace.is_none() {
@@ -65,6 +67,10 @@ impl<'a> ParseInfallible<'a> for ComponentValues<'a> {
 			}
 		}
 
+		if whitespace_after_colon && p.peek_n(1) != Kind::LeftCurly {
+			Self::trivialise_whitespace_after_colons(&mut values);
+		}
+
 		if let Some(index) = trailing_whitespace {
 			for value in &mut values[index..] {
 				if let ComponentValue::Whitespace(ws) = value {
@@ -73,6 +79,27 @@ impl<'a> ParseInfallible<'a> for ComponentValues<'a> {
 			}
 		}
 		Self { values }
+	}
+}
+
+impl<'a> ComponentValues<'a> {
+	fn trivialise_whitespace_after_colons(values: &mut [ComponentValue<'a>]) {
+		let end = values
+			.iter()
+			.rposition(
+				|value| matches!(value, ComponentValue::SimpleBlock(block) if Cursor::from(block.open) == Kind::LeftCurly),
+			)
+			.unwrap_or(0);
+		let mut after_colon = false;
+		for value in &mut values[end..] {
+			match value {
+				ComponentValue::Colon(_) => after_colon = true,
+				ComponentValue::Whitespace(ws) if after_colon => {
+					*value = ComponentValue::Whitespace(ws.with_significant_whitespace(false));
+				}
+				_ => after_colon = false,
+			}
+		}
 	}
 }
 

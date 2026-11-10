@@ -1,6 +1,9 @@
 use super::prelude::*;
 use crate::{BadDeclaration, Declaration, DeclarationGroup, DeclarationOrBad, RuleVariants, token_macros};
 
+pub(crate) const STRAY_KINDS: KindSet =
+	KindSet::new(&[Kind::CdcOrCdo, Kind::RightParen, Kind::RightSquare, Kind::BadString, Kind::BadUrl]);
+
 /// This trait provides an implementation for ["consuming a blocks contents"][1].
 ///
 /// ```md
@@ -164,15 +167,7 @@ where
 			// unconsumed they cause a zero-progress loop and unbounded allocation. Per CSS Syntax they are only meaningful
 			// at the stylesheet top level, so discard them here, mirroring the stylesheet top-level loop.
 			p.consume_trivia_as_leading();
-			const ERROR_KINDS: KindSet = KindSet::new(&[
-				Kind::CdcOrCdo,
-				Kind::Semicolon,
-				Kind::RightParen,
-				Kind::RightSquare,
-				Kind::BadString,
-				Kind::BadUrl,
-			]);
-			let error_kinds = if in_braces { ERROR_KINDS } else { ERROR_KINDS.add(Kind::RightCurly) };
+			let stray_kinds = if in_braces { STRAY_KINDS } else { STRAY_KINDS.add(Kind::RightCurly) };
 			let c = p.peek_n(1);
 			if c == Kind::Semicolon {
 				let old_skip = p.set_skip(KindSet::TRIVIA.add(Kind::Semicolon));
@@ -180,7 +175,7 @@ where
 				p.set_skip(old_skip);
 				continue;
 			}
-			if c == error_kinds {
+			if c == stray_kinds {
 				if R::from_declaration_group(DeclarationGroup { declarations: Vec::new_in(p.alloc()) }).is_some() {
 					let value = BadDeclaration::parse_value(p)?;
 					p.diagnose(Diagnostic::new(c, Diagnostic::unexpected));
@@ -196,7 +191,7 @@ where
 					continue;
 				}
 				p.rewind(checkpoint);
-				let old_skip = p.set_skip(error_kinds);
+				let old_skip = p.set_skip(stray_kinds);
 				p.consume_trivia_as_leading();
 				p.set_skip(old_skip);
 				continue;

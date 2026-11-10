@@ -141,7 +141,7 @@ mod tests {
 		assert_parse!(
 			CsskitAtomSet::ATOMS,
 			Sheet,
-			"@stat --total-selectors{type:counter}@stat --unique-selectors{type:unique;normalize:true}"
+			"@stat --total-selectors{type:counter}@stat --selector-bytes{type:bytes}"
 		);
 	}
 

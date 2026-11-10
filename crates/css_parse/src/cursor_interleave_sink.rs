@@ -63,7 +63,9 @@ impl<'a, S: CursorSink + ?Sized> CursorSink for CursorInterleaveSink<'a, S> {
 			let matched = self.interleave[start..]
 				.iter()
 				.take_while(|(_, associated)| associated.offset() == c.offset())
-				.position(|(_, associated)| associated.token().kind() == c.token().kind());
+				.position(|(_, associated)| {
+					associated.token().kind() == c.token().kind() || (!associated.is_empty() && !c.is_empty())
+				});
 			if let Some(index) = matched {
 				for cursor in &self.interleave[start + index].0 {
 					self.sink.append_trivia(*cursor);

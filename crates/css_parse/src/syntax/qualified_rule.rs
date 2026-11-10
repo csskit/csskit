@@ -83,13 +83,7 @@ where
 					let end = p.peek_n(1);
 					Err(Diagnostic::new(start, Diagnostic::bad_declaration).with_end_cursor(end))?
 				// If nested is false, consume a block from input, and return nothing.
-				} else {
-					// QualifiedRules must be able to consume a block from their input when encountering
-					// a custom property like declaration that doesn't end but opens a `{` block. This
-					// is implemented as parsing the existing block as that' simplifies downstream logic
-					// but consumers of this trait can instead opt to implement an optimised version of
-					// this which doesn't build up an AST and just throws away tokens.
-					p.parse::<Block<'a, D, R, M>>()?;
+				} else if p.parse::<Block<'a, D, R, M>>().is_ok() {
 					let start = p.peek_n(1);
 					p.parse::<BadDeclaration>()?;
 					let end = p.peek_n(1);

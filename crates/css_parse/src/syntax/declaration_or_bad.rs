@@ -7,7 +7,7 @@ use crate::{BadDeclaration, Declaration};
 /// we consume the remnants as a bad declaration to maintain error recovery.
 #[node]
 #[derive(Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
-#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde(bound(serialize = "D: serde::Serialize")))]
 pub enum DeclarationOrBad<'a, D, M>
 where
 	D: DeclarationValue<'a, M>,

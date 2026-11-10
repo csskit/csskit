@@ -74,7 +74,7 @@ impl<'a> Parse<'a> for KeyframesName {
 pub struct KeyframesRuleBlock<'a>(pub RuleList<'a, Keyframe<'a>, CssMetadata>);
 
 #[node]
-#[derive(Parse, Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[derive(Peek, ToSpan, ToCursors, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 pub enum Keyframe<'a> {
@@ -87,7 +87,6 @@ pub enum Keyframe<'a> {
 			CssMetadata,
 		>,
 	),
-	#[parse(skip)]
 	#[peek(skip)]
 	BadDeclaration(Box<'a, BadDeclaration<'a>>),
 }
@@ -105,8 +104,24 @@ impl<'a> RuleVariants<'a> for Keyframe<'a> {
 	type DeclarationValue = StyleValue<'a>;
 	type Metadata = CssMetadata;
 
+	fn parse_qualified_rule<I>(p: &mut Parser<'a, I>, _name: Cursor) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		p.parse().map(Self::Keyframe)
+	}
+
 	fn bad_declaration(declaration: Box<'a, BadDeclaration<'a>>) -> Option<Self> {
 		Some(Self::BadDeclaration(declaration))
+	}
+}
+
+impl<'a> Parse<'a> for Keyframe<'a> {
+	fn parse<I>(p: &mut Parser<'a, I>) -> ParserResult<Self>
+	where
+		I: Iterator<Item = Cursor> + Clone,
+	{
+		Self::parse_rule_variants(p)
 	}
 }
 
@@ -162,5 +177,15 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{;0%{}}");
 		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{0%{a:b};}");
 		assert_parse!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{/**/;0%{}}");
+	}
+
+	#[test]
+	fn comment_after_stray_in_keyframes_kept() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes x{)/**/to{}}", "@keyframes x{)/**/to{}}");
+	}
+
+	#[test]
+	fn comment_after_bad_declaration_in_keyframes_kept() {
+		assert_parse_recovers!(CssAtomSet::ATOMS, KeyframesRule, "@keyframes k{b:] /**/ }", "@keyframes k{b:] /**/ }");
 	}
 }

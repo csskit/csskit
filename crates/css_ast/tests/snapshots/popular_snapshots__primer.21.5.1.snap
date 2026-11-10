@@ -511687,7 +511687,7 @@ StyleSheet(
           len: 1,
         )),
         declarations: [
-          Declaration(
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(540578),
@@ -511713,8 +511713,8 @@ StyleSheet(
               offset: SourceOffset(540593),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(540594),
@@ -511736,8 +511736,8 @@ StyleSheet(
               offset: SourceOffset(540608),
               len: 1,
             ))),
-          ),
-          Declaration(
+          )),
+          Declaration(Declaration(
             name: Ident(Cursor(
               kind: "Ident",
               offset: SourceOffset(540609),
@@ -511755,7 +511755,7 @@ StyleSheet(
             )))),
             important: None,
             semicolon: None,
-          ),
+          )),
         ],
         close_curly: RightCurly(Cursor(
           kind: "RightCurly",

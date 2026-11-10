@@ -43,8 +43,7 @@ pub trait CompoundSelector<'a>: Sized + Parse<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let mut components = Vec::new_in(p.alloc());
-		// Trim leading whitespace
-		p.skip_trivia();
+		p.consume_trivia_keeping_comments();
 		while let Some(component) = Self::parse_compound_selector_part(p)? {
 			components.push(component);
 		}

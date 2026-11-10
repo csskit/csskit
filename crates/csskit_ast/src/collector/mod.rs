@@ -252,6 +252,7 @@ impl<'a> Collector<'a> {
 					let name = CsskitAtomSet::get_dyn_set().atom_from_bits(cursor.token().atom_bits());
 					let mut stat_type = StatType::Counter;
 					for decl in &stat_rule.block.declarations {
+						let css_parse::DeclarationOrBad::Declaration(decl) = decl else { continue };
 						match &decl.value {
 							StatDeclarationValue::Type(type_value) => {
 								stat_type = match type_value {

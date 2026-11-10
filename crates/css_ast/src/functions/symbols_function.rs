@@ -1,5 +1,8 @@
 use super::prelude::*;
-use crate::{CssAtomSet, types::Image};
+use crate::{
+	CssAtomSet,
+	types::{CustomIdent, Image},
+};
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols>
 ///
@@ -27,7 +30,7 @@ pub struct SymbolsFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct SymbolsFunctionParams<'a> {
 	pub symbols_type: Option<SymbolsType>,
-	pub symbols: Vec<'a, Symbol<'a>>,
+	pub symbols: Vec<'a, SymbolsFunctionSymbol<'a>>,
 }
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbols-type>
@@ -55,10 +58,26 @@ pub enum SymbolsType {
 
 /// <https://drafts.csswg.org/css-counter-styles-3/#funcdef-symbols>
 ///
-/// A single Symbol from the `<symbols()>` syntax
+/// A single symbol from the `<symbols()>` syntax
 ///
 /// ```text,ignore
 /// <string> | <image>
+/// ```
+#[node]
+#[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit(children))]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum SymbolsFunctionSymbol<'a> {
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	String(T![String]),
+	Image(Image<'a>),
+}
+
+/// <https://drafts.csswg.org/css-counter-styles-3/#typedef-symbol>
+///
+/// ```text,ignore
+/// <symbol> = <string> | <image> | <custom-ident>
 /// ```
 #[node]
 #[derive(Parse, Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
@@ -69,6 +88,8 @@ pub enum Symbol<'a> {
 	#[cfg_attr(feature = "visitable", visit(skip))]
 	String(T![String]),
 	Image(Image<'a>),
+	#[cfg_attr(feature = "visitable", visit(skip))]
+	CustomIdent(CustomIdent),
 }
 
 #[cfg(test)]

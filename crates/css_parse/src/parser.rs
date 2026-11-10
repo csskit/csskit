@@ -500,6 +500,27 @@ where
 		self.trivia.push((trivia, next));
 	}
 
+	/// Consume trivia, attaching it to the next content token only when it holds a comment.
+	pub fn consume_trivia_keeping_comments(&mut self) {
+		let alloc = self.alloc;
+		let mut pending = None;
+		let mut trivia: Option<Vec<'a, Cursor>> = None;
+		self.advance_past_trivia(|cursor| match &mut trivia {
+			Some(collected) => collected.push(cursor),
+			None if cursor == Kind::Comment || pending.is_some() => {
+				let mut collected = Vec::new_in(alloc);
+				collected.extend(pending.take());
+				collected.push(cursor);
+				trivia = Some(collected);
+			}
+			None => pending = Some(cursor),
+		});
+		if let Some(trivia) = trivia.filter(|t| t.iter().any(|c| *c == Kind::Comment)) {
+			let next = self.peek_n(1);
+			self.push_trivia(trivia, next);
+		}
+	}
+
 	#[allow(clippy::should_implement_trait)]
 	#[inline]
 	pub fn next(&mut self) -> Cursor {
@@ -582,6 +603,22 @@ fn test_filling_buffer_with_skip_tokens() {
 	// Must not panic:
 	let _ = p.at_end();
 	let _ = p.offset();
+}
+
+#[test]
+fn rewind_keeps_trivia_past_u16() {
+	let source = "/**/a".repeat(70_000);
+	let alloc = crate::Arena::default();
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, &source);
+	let mut parser = Parser::new(&alloc, &source, lexer);
+	for _ in 0..69_000 {
+		assert_eq!(parser.next().token(), Kind::Ident);
+	}
+	let trivia_len = parser.trivia.len();
+	assert!(trivia_len > u16::MAX as usize);
+	let checkpoint = parser.checkpoint();
+	parser.rewind(checkpoint);
+	assert_eq!(parser.trivia.len(), trivia_len);
 }
 
 #[test]
