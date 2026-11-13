@@ -2045,6 +2045,7 @@ pub enum CssAtomSet {
 	ShapePadding,
 	ShapeRendering,
 	Share,
+	Sheet,
 	Shorter,
 	Show,
 	Shrink,
@@ -2337,6 +2338,7 @@ pub enum CssAtomSet {
 	To,
 	ToZero,
 	Tomato,
+	Tooltip,
 	Top,
 	TopCenter,
 	TopLeft,
@@ -2509,6 +2511,7 @@ pub enum CssAtomSet {
 	WrapInside,
 	WrapReverse,
 	WrapThrough,
+	WriteOnly,
 	WritingMode,
 	XEnd,
 	XFast,
@@ -2976,8 +2979,26 @@ pub enum CssAtomSet {
 	#[atom("-webkit-video-playable-inline")]
 	_WebkitVideoPlayableInline,
 
+	#[atom("-moz-animation")]
+	_MozAnimation = 0b00000000_10100000_00000000_00000000,
+	#[atom("-moz-animation-delay")]
+	_MozAnimationDelay,
+	#[atom("-moz-animation-direction")]
+	_MozAnimationDirection,
+	#[atom("-moz-animation-duration")]
+	_MozAnimationDuration,
+	#[atom("-moz-animation-fill-mode")]
+	_MozAnimationFillMode,
+	#[atom("-moz-animation-iteration-count")]
+	_MozAnimationIterationCount,
+	#[atom("-moz-animation-name")]
+	_MozAnimationName,
+	#[atom("-moz-animation-play-state")]
+	_MozAnimationPlayState,
+	#[atom("-moz-animation-timing-function")]
+	_MozAnimationTimingFunction,
 	#[atom("-moz-anonymous-block")]
-	_MozAnonymousBlock = 0b00000000_10100000_00000000_00000000,
+	_MozAnonymousBlock,
 	#[atom("-moz-anonymous-item")]
 	_MozAnonymousItem,
 	#[atom("-moz-anonymous-positioned-block")]
@@ -2990,12 +3011,48 @@ pub enum CssAtomSet {
 	_MozAppearance,
 	#[atom("-moz-autofill-preview")]
 	_MozAutofillPreview,
+	#[atom("-moz-backface-visibility")]
+	_MozBackfaceVisibility,
+	#[atom("-moz-background-clip")]
+	_MozBackgroundClip,
+	#[atom("-moz-background-size")]
+	_MozBackgroundSize,
 	#[atom("-moz-block-inside-inline-wrapper")]
 	_MozBlockInsideInlineWrapper,
 	#[atom("-moz-block-ruby-content")]
 	_MozBlockRubyContent,
+	#[atom("-moz-border-image")]
+	_MozBorderImage,
+	#[atom("-moz-border-image-outset")]
+	_MozBorderImageOutset,
+	#[atom("-moz-border-image-repeat")]
+	_MozBorderImageRepeat,
+	#[atom("-moz-border-image-slice")]
+	_MozBorderImageSlice,
+	#[atom("-moz-border-image-source")]
+	_MozBorderImageSource,
+	#[atom("-moz-border-image-width")]
+	_MozBorderImageWidth,
+	#[atom("-moz-border-radius")]
+	_MozBorderRadius,
+	#[atom("-moz-border-radius-bottomleft")]
+	_MozBorderRadiusBottomleft,
+	#[atom("-moz-border-radius-bottomright")]
+	_MozBorderRadiusBottomright,
+	#[atom("-moz-border-radius-topleft")]
+	_MozBorderRadiusTopleft,
+	#[atom("-moz-border-radius-topright")]
+	_MozBorderRadiusTopright,
 	#[atom("-moz-box")]
 	_MozBox,
+	#[atom("-moz-box-align")]
+	_MozBoxAlign,
+	#[atom("-moz-box-flex")]
+	_MozBoxFlex,
+	#[atom("-moz-box-ordinal-group")]
+	_MozBoxOrdinalGroup,
+	#[atom("-moz-box-shadow")]
+	_MozBoxShadow,
 	#[atom("-moz-box-sizing")]
 	_MozBoxSizing,
 	#[atom("-moz-broken")]
@@ -3008,16 +3065,36 @@ pub enum CssAtomSet {
 	_MozCellContent,
 	#[atom("-moz-color-swatch")]
 	_MozColorSwatch,
+	#[atom("-moz-column-break-inside")]
+	_MozColumnBreakInside,
 	#[atom("-moz-column-content")]
 	_MozColumnContent,
 	#[atom("-moz-column-count")]
 	_MozColumnCount,
+	#[atom("-moz-column-fill")]
+	_MozColumnFill,
 	#[atom("-moz-column-gap")]
 	_MozColumnGap,
+	#[atom("-moz-column-rule")]
+	_MozColumnRule,
+	#[atom("-moz-column-rule-color")]
+	_MozColumnRuleColor,
+	#[atom("-moz-column-rule-style")]
+	_MozColumnRuleStyle,
+	#[atom("-moz-column-rule-width")]
+	_MozColumnRuleWidth,
 	#[atom("-moz-column-set")]
 	_MozColumnSet,
+	#[atom("-moz-column-span")]
+	_MozColumnSpan,
 	#[atom("-moz-column-span-wrapper")]
 	_MozColumnSpanWrapper,
+	#[atom("-moz-column-width")]
+	_MozColumnWidth,
+	#[atom("-moz-columns")]
+	_MozColumns,
+	#[atom("-moz-context-properties")]
+	_MozContextProperties,
 	#[atom("-moz-device-orientation")]
 	_MozDeviceOrientation,
 	#[atom("-moz-device-pixel-ratio")]
@@ -3056,6 +3133,8 @@ pub enum CssAtomSet {
 	_MozFocusOuter,
 	#[atom("-moz-focusring")]
 	_MozFocusring,
+	#[atom("-moz-font-feature-settings")]
+	_MozFontFeatureSettings,
 	#[atom("-moz-frameset-blank")]
 	_MozFramesetBlank,
 	#[atom("-moz-full-screen")]
@@ -3074,6 +3153,8 @@ pub enum CssAtomSet {
 	_MozHframesetBorder,
 	#[atom("-moz-html-canvas-content")]
 	_MozHtmlCanvasContent,
+	#[atom("-moz-hyphens")]
+	_MozHyphens,
 	#[atom("-moz-images-in-menus")]
 	_MozImagesInMenus,
 	#[atom("-moz-inline-box")]
@@ -3156,6 +3237,10 @@ pub enum CssAtomSet {
 	_MozPagebreak,
 	#[atom("-moz-pagecontent")]
 	_MozPagecontent,
+	#[atom("-moz-perspective")]
+	_MozPerspective,
+	#[atom("-moz-perspective-origin")]
+	_MozPerspectiveOrigin,
 	#[atom("-moz-placeholder")]
 	_MozPlaceholder,
 	#[atom("-moz-placeholder-shown")]
@@ -3220,6 +3305,8 @@ pub enum CssAtomSet {
 	_MozSvgOuterSvgAnonChild,
 	#[atom("-moz-svg-text")]
 	_MozSvgText,
+	#[atom("-moz-tab-size")]
+	_MozTabSize,
 	#[atom("-moz-table")]
 	_MozTable,
 	#[atom("-moz-table-border-nonzero")]
@@ -3246,10 +3333,26 @@ pub enum CssAtomSet {
 	_MozText,
 	#[atom("-moz-touch-enabled")]
 	_MozTouchEnabled,
+	#[atom("-moz-text-size-adjust")]
+	_MozTextSizeAdjust,
 	#[atom("-moz-topmost-modal")]
 	_MozTopmostModal,
+	#[atom("-moz-transform")]
+	_MozTransform,
+	#[atom("-moz-transform-origin")]
+	_MozTransformOrigin,
+	#[atom("-moz-transform-style")]
+	_MozTransformStyle,
 	#[atom("-moz-transition")]
 	_MozTransition,
+	#[atom("-moz-transition-delay")]
+	_MozTransitionDelay,
+	#[atom("-moz-transition-duration")]
+	_MozTransitionDuration,
+	#[atom("-moz-transition-property")]
+	_MozTransitionProperty,
+	#[atom("-moz-transition-timing-function")]
+	_MozTransitionTimingFunction,
 	#[atom("-moz-tree-cell")]
 	_MozTreeCell,
 	#[atom("-moz-tree-cell-text")]
@@ -3278,6 +3381,8 @@ pub enum CssAtomSet {
 	_MozUiValid,
 	#[atom("-moz-user-disabled")]
 	_MozUserDisabled,
+	#[atom("-moz-user-modify")]
+	_MozUserModify,
 	#[atom("-moz-user-select")]
 	_MozUserSelect,
 	#[atom("-moz-vframeset-border")]
@@ -3290,6 +3395,8 @@ pub enum CssAtomSet {
 	_MozValueEmpty,
 	#[atom("-moz-window-inactive")]
 	_MozWindowInactive,
+	#[atom("-moz-window-shadow")]
+	_MozWindowShadow,
 
 	#[atom("-ms-autohiding-scrollbar")]
 	_MsAutohidingScrollbar = 0b00000000_11000000_00000000_00000000,

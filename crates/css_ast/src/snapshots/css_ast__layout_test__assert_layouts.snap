@@ -1456,6 +1456,11 @@ ContentVisibilityStyleValue: size=32 align=8
     0: Visible
     1: Auto
     2: Hidden
+ContextProperty: size=16 align=4
+    0: Fill
+    1: FillOpacity
+    2: Stroke
+    3: StrokeOpacity
 ContextualAltValues: size=16 align=4
     0: Contextual
     1: NoContextual
@@ -3707,942 +3712,997 @@ CssAtomSet: size=4 align=4
     2005: ShapePadding = 2067
     2006: ShapeRendering = 2068
     2007: Share = 2069
-    2008: Shorter = 2070
-    2009: Show = 2071
-    2010: Shrink = 2072
-    2011: SiblingCount = 2073
-    2012: SiblingIndex = 2074
-    2013: Sides = 2075
-    2014: Sideways = 2076
-    2015: SidewaysLr = 2077
-    2016: SidewaysRl = 2078
-    2017: Sienna = 2079
-    2018: Sign = 2080
-    2019: Silent = 2081
-    2020: Silver = 2082
-    2021: Simplified = 2083
-    2022: Sin = 2084
-    2023: SingleButton = 2085
-    2024: Size = 2086
-    2025: SizeAdjust = 2087
-    2026: Skew = 2088
-    2027: Skewx = 2089
-    2028: Skewy = 2090
-    2029: SkipAll = 2091
-    2030: SkipLineThrough = 2092
-    2031: SkipOverline = 2093
-    2032: SkipUnderline = 2094
-    2033: Skyblue = 2095
-    2034: SlashedZero = 2096
-    2035: Slateblue = 2097
-    2036: Slategray = 2098
-    2037: Slategrey = 2099
-    2038: Slice = 2100
-    2039: SliderFill = 2101
-    2040: SliderOrientation = 2102
-    2041: SliderThumb = 2103
-    2042: SliderTrack = 2104
-    2043: Slot = 2105
-    2044: Slotted = 2106
-    2045: Slow = 2107
-    2046: Small = 2108
-    2047: SmallCaps = 2109
-    2048: SmallCaption = 2110
-    2049: Smaller = 2111
-    2050: Smooth = 2112
-    2051: Snap = 2113
-    2052: SnapBlock = 2114
-    2053: SnapInline = 2115
-    2054: Snapped = 2116
-    2055: SnappedBlock = 2117
-    2056: SnappedInline = 2118
-    2057: SnappedX = 2119
-    2058: SnappedY = 2120
-    2059: Snow = 2121
-    2060: Soft = 2122
-    2061: SoftLight = 2123
-    2062: Solid = 2124
-    2063: SomeProp = 2125
-    2064: Source = 2126
-    2065: SourceAtop = 2127
-    2066: SourceIn = 2128
-    2067: SourceOrder = 2129
-    2068: SourceOut = 2130
-    2069: SourceOver = 2131
-    2070: Space = 2132
-    2071: SpaceAll = 2133
-    2072: SpaceAround = 2134
-    2073: SpaceBetween = 2135
-    2074: SpaceEvenly = 2136
-    2075: SpaceFirst = 2137
-    2076: Spacer = 2138
-    2077: Spaces = 2139
-    2078: Span = 2140
-    2079: SpanAll = 2141
-    2080: SpanBlockEnd = 2142
-    2081: SpanBlockStart = 2143
-    2082: SpanBottom = 2144
-    2083: SpanEnd = 2145
-    2084: SpanInlineEnd = 2146
-    2085: SpanInlineStart = 2147
-    2086: SpanLeft = 2148
-    2087: SpanRight = 2149
-    2088: SpanSelfBlockEnd = 2150
-    2089: SpanSelfBlockStart = 2151
-    2090: SpanSelfEnd = 2152
-    2091: SpanSelfInlineEnd = 2153
-    2092: SpanSelfInlineStart = 2154
-    2093: SpanSelfStart = 2155
-    2094: SpanStart = 2156
-    2095: SpanTop = 2157
-    2096: SpanXEnd = 2158
-    2097: SpanXSelfEnd = 2159
-    2098: SpanXSelfStart = 2160
-    2099: SpanXStart = 2161
-    2100: SpanYEnd = 2162
-    2101: SpanYSelfEnd = 2163
-    2102: SpanYSelfStart = 2164
-    2103: SpanYStart = 2165
-    2104: SpanningItem = 2166
-    2105: SpatialNavigationAction = 2167
-    2106: SpatialNavigationContain = 2168
-    2107: SpatialNavigationFunction = 2169
-    2108: Speak = 2170
-    2109: SpeakAs = 2171
-    2110: SpellOut = 2172
-    2111: SpellingError = 2173
-    2112: Spread = 2174
-    2113: Springgreen = 2175
-    2114: Sqrt = 2176
-    2115: Square = 2177
-    2116: Squircle = 2178
-    2117: Src = 2179
-    2118: Srgb = 2180
-    2119: SrgbLinear = 2181
-    2120: Stable = 2182
-    2121: StackedFractions = 2183
-    2122: Stalled = 2184
-    2123: Standalone = 2185
-    2124: Standard = 2186
-    2125: Start = 2187
-    2126: StartingStyle = 2188
-    2127: State = 2189
-    2128: Static = 2190
-    2129: StatusBar = 2191
-    2130: Steelblue = 2192
-    2131: StepControl = 2193
-    2132: StepDown = 2194
-    2133: StepEnd = 2195
-    2134: StepStart = 2196
-    2135: StepUp = 2197
-    2136: Steps = 2198
-    2137: Sticky = 2199
-    2138: Stop = 2200
-    2139: Stopped = 2201
-    2140: Stretch = 2202
-    2141: Strict = 2203
-    2142: Strike = 2204
-    2143: String = 2205
-    2144: StringSet = 2206
-    2145: Stripes = 2207
-    2146: Stroke = 2208
-    2147: StrokeAlign = 2209
-    2148: StrokeBox = 2210
-    2149: StrokeBreak = 2211
-    2150: StrokeColor = 2212
-    2151: StrokeDashCorner = 2213
-    2152: StrokeDashJustify = 2214
-    2153: StrokeDasharray = 2215
-    2154: StrokeDashoffset = 2216
-    2155: StrokeImage = 2217
-    2156: StrokeLinecap = 2218
-    2157: StrokeLinejoin = 2219
-    2158: StrokeMiterlimit = 2220
-    2159: StrokeOpacity = 2221
-    2160: StrokeOrigin = 2222
-    2161: StrokePosition = 2223
-    2162: StrokeRepeat = 2224
-    2163: StrokeSize = 2225
-    2164: StrokeWidth = 2226
-    2165: Strong = 2227
-    2166: Stuck = 2228
-    2167: Style = 2229
-    2168: Styleset = 2230
-    2169: Stylistic = 2231
-    2170: Sub = 2232
-    2171: Subgrid = 2233
-    2172: SubpixelAntialiased = 2234
-    2173: Subset = 2235
-    2174: Subtractive = 2236
-    2175: Suffix = 2237
-    2176: Sum = 2238
-    2177: Summary = 2239
-    2178: SubscriptPositionOverride = 2240
-    2179: SubscriptSizeOverride = 2241
-    2180: Sup = 2242
-    2181: Super = 2243
-    2182: Superellipse = 2244
-    2183: SuperscriptPositionOverride = 2245
-    2184: SuperscriptSizeOverride = 2246
-    2185: Supports = 2247
-    2186: Svg = 2248
-    2187: SwResize = 2249
-    2188: Swap = 2250
-    2189: Swash = 2251
-    2190: Switch = 2252
-    2191: Symbol = 2253
-    2192: Symbolic = 2254
-    2193: Symbols = 2255
-    2194: Syntax = 2256
-    2195: System = 2257
-    2196: SystemUi = 2258
-    2197: TabSize = 2259
-    2198: Table = 2260
-    2199: TableCaption = 2261
-    2200: TableCell = 2262
-    2201: TableColumn = 2263
-    2202: TableColumnGroup = 2264
-    2203: TableFooterGroup = 2265
-    2204: TableHeaderGroup = 2266
-    2205: TableLayout = 2267
-    2206: TableRow = 2268
-    2207: TableRowGroup = 2269
-    2208: Tabs = 2270
-    2209: TabularNums = 2271
-    2210: Tamil = 2272
-    2211: Tan = 2273
-    2212: Target = 2274
-    2213: TargetAfter = 2275
-    2214: TargetBefore = 2276
-    2215: TargetCounter = 2277
-    2216: TargetCounters = 2278
-    2217: TargetCurrent = 2279
-    2218: TargetText = 2280
-    2219: TargetWithin = 2281
-    2220: Tbody = 2282
-    2221: Td = 2283
-    2222: Teal = 2284
-    2223: Telugu = 2285
-    2224: Template = 2286
-    2225: Tendsto = 2287
-    2226: Text = 2288
-    2227: TextAlign = 2289
-    2228: TextAlignAll = 2290
-    2229: TextAlignLast = 2291
-    2230: TextAutospace = 2292
-    2231: TextBottom = 2293
-    2232: TextBox = 2294
-    2233: TextBoxEdge = 2295
-    2234: TextBoxTrim = 2296
-    2235: TextCombineUpright = 2297
-    2236: TextDecoration = 2298
-    2237: TextDecorationColor = 2299
-    2238: TextDecorationInset = 2300
-    2239: TextDecorationLine = 2301
-    2240: TextDecorationSkip = 2302
-    2241: TextDecorationSkipBox = 2303
-    2242: TextDecorationSkipInk = 2304
-    2243: TextDecorationSkipSelf = 2305
-    2244: TextDecorationSkipSpaces = 2306
-    2245: TextDecorationStyle = 2307
-    2246: TextDecorationThickness = 2308
-    2247: TextEmphasis = 2309
-    2248: TextEmphasisColor = 2310
-    2249: TextEmphasisPosition = 2311
-    2250: TextEmphasisSkip = 2312
-    2251: TextEmphasisStyle = 2313
-    2252: TextFit = 2314
-    2253: TextGroupAlign = 2315
-    2254: TextIndent = 2316
-    2255: TextJustify = 2317
-    2256: TextOrientation = 2318
-    2257: TextOverflow = 2319
-    2258: TextRendering = 2320
-    2259: TextShadow = 2321
-    2260: TextSizeAdjust = 2322
-    2261: TextSpacing = 2323
-    2262: TextSpacingTrim = 2324
-    2263: TextTop = 2325
-    2264: TextTransform = 2326
-    2265: TextUnderlineOffset = 2327
-    2266: TextUnderlinePosition = 2328
-    2267: TextWrap = 2329
-    2268: TextWrapMode = 2330
-    2269: TextWrapStyle = 2331
-    2270: Textarea = 2332
-    2271: Textfield = 2333
-    2272: Textpath = 2334
-    2273: Tfoot = 2335
-    2274: Th = 2336
-    2275: Thai = 2337
-    2276: Thead = 2338
-    2277: Thick = 2339
-    2278: Thin = 2340
-    2279: Thistle = 2341
-    2280: Tibetan = 2342
-    2281: Time = 2343
-    2282: TimelineScope = 2344
-    2283: TimelineTrigger = 2345
-    2284: TimelineTriggerActivationRange = 2346
-    2285: TimelineTriggerActivationRangeEnd = 2347
-    2286: TimelineTriggerActivationRangeStart = 2348
-    2287: TimelineTriggerActiveRange = 2349
-    2288: TimelineTriggerActiveRangeEnd = 2350
-    2289: TimelineTriggerActiveRangeStart = 2351
-    2290: TimelineTriggerName = 2352
-    2291: TimelineTriggerRange = 2353
-    2292: TimelineTriggerSource = 2354
-    2293: Times = 2355
-    2294: Title = 2356
-    2295: TitlingCaps = 2357
-    2296: Tech = 2358
-    2297: To = 2359
-    2298: ToZero = 2360
-    2299: Tomato = 2361
-    2300: Top = 2362
-    2301: TopCenter = 2363
-    2302: TopLeft = 2364
-    2303: TopLeftCorner = 2365
-    2304: TopRight = 2366
-    2305: TopRightCorner = 2367
-    2306: TopToBottom = 2368
-    2307: Touch = 2369
-    2308: TouchAction = 2370
-    2309: Tr = 2371
-    2310: Track = 2372
-    2311: Traditional = 2373
-    2312: TrailingSpaces = 2374
-    2313: Transform = 2375
-    2314: TransformBox = 2376
-    2315: TransformFunction = 2377
-    2316: TransformList = 2378
-    2317: TransformOrigin = 2379
-    2318: TransformStyle = 2380
-    2319: Transition = 2381
-    2320: TransitionBehavior = 2382
-    2321: TransitionDelay = 2383
-    2322: TransitionDuration = 2384
-    2323: TransitionProperty = 2385
-    2324: TransitionTimingFunction = 2386
-    2325: Translate = 2387
-    2326: Translate3d = 2388
-    2327: Translatex = 2389
-    2328: Translatey = 2390
-    2329: Translatez = 2391
-    2330: Transparent = 2392
-    2331: Transpose = 2393
-    2332: Triangle = 2394
-    2333: TriggerScope = 2395
-    2334: TrimAll = 2396
-    2335: TrimBoth = 2397
-    2336: TrimEnd = 2398
-    2337: TrimStart = 2399
-    2338: True = 2400
-    2339: Truetype = 2401
-    2340: Tspan = 2402
-    2341: Tt = 2403
-    2342: Turquoise = 2404
-    2343: Type = 2405
-    2344: Types = 2406
-    2345: U = 2407
-    2346: UiMonospace = 2408
-    2347: UiRounded = 2409
-    2348: UiSansSerif = 2410
-    2349: UiSerif = 2411
-    2350: Ul = 2412
-    2351: UltraCondensed = 2413
-    2352: UltraExpanded = 2414
-    2353: Unchecked = 2415
-    2354: Under = 2416
-    2355: Underline = 2417
-    2356: Underscore = 2418
-    2357: Unicase = 2419
-    2358: Unicode = 2420
-    2359: UnicodeBidi = 2421
-    2360: UnicodeRange = 2422
-    2361: Union = 2423
-    2362: Unsafe = 2424
-    2363: Unset = 2425
-    2364: Up = 2426
-    2365: Update = 2427
-    2366: Uplimit = 2428
-    2367: UpperAlpha = 2429
-    2368: UpperArmenian = 2430
-    2369: UpperLatin = 2431
-    2370: UpperRoman = 2432
-    2371: Uppercase = 2433
-    2372: Upright = 2434
-    2373: Url = 2435
-    2374: UrlPrefix = 2436
-    2375: Use = 2437
-    2376: UserInvalid = 2438
-    2377: UserSelect = 2439
-    2378: UserValid = 2440
-    2379: Valid = 2441
-    2380: Var = 2442
-    2381: Variance = 2443
-    2382: Variations = 2444
-    2383: Vector = 2445
-    2384: Vectorproduct = 2446
-    2385: Verso = 2447
-    2386: Vertical = 2448
-    2387: VerticalAlign = 2449
-    2388: VerticalLr = 2450
-    2389: VerticalRl = 2451
-    2390: VerticalText = 2452
-    2391: VerticalViewportSegments = 2453
-    2392: Video = 2454
-    2393: VideoColorGamut = 2455
-    2394: VideoDynamicRange = 2456
-    2395: View = 2457
-    2396: ViewBox = 2458
-    2397: ViewTimeline = 2459
-    2398: ViewTimelineAxis = 2460
-    2399: ViewTimelineInset = 2461
-    2400: ViewTimelineName = 2462
-    2401: ViewTransition = 2463
-    2402: ViewTransitionClass = 2464
-    2403: ViewTransitionGroup = 2465
-    2404: ViewTransitionImagePair = 2466
-    2405: ViewTransitionName = 2467
-    2406: ViewTransitionNew = 2468
-    2407: ViewTransitionOld = 2469
-    2408: ViewTransitionScope = 2470
-    2409: Violet = 2471
-    2410: Visibility = 2472
-    2411: Visible = 2473
-    2412: Visiblefill = 2474
-    2413: Visiblepainted = 2475
-    2414: Visiblestroke = 2476
-    2415: Visited = 2477
-    2416: Visitedtext = 2478
-    2417: Vline = 2479
-    2418: VoiceBalance = 2480
-    2419: VoiceDuration = 2481
-    2420: VoiceFamily = 2482
-    2421: VoicePitch = 2483
-    2422: VoiceRange = 2484
-    2423: VoiceRate = 2485
-    2424: VoiceStress = 2486
-    2425: VoiceVolume = 2487
-    2426: VolumeLocked = 2488
-    2427: W = 2489
-    2428: WResize = 2490
-    2429: Wait = 2491
-    2430: Wavy = 2492
-    2431: Wbr = 2493
-    2432: Weak = 2494
-    2433: Weight = 2495
-    2434: Wheat = 2496
-    2435: Where = 2497
-    2436: White = 2498
-    2437: WhiteSpace = 2499
-    2438: WhiteSpaceCollapse = 2500
-    2439: WhiteSpaceTrim = 2501
-    2440: Whitesmoke = 2502
-    2441: Widows = 2503
-    2442: Width = 2504
-    2443: WillChange = 2505
-    2444: WindowDrag = 2506
-    2445: WindowInactive = 2507
-    2446: WindowsVista = 2508
-    2447: WindowsWin10 = 2509
-    2448: WindowsWin7 = 2510
-    2449: WindowsWin8 = 2511
-    2450: WindowsXp = 2512
-    2451: With = 2513
-    2452: Woff = 2514
-    2453: Woff2 = 2515
-    2454: WordBreak = 2516
-    2455: WordSpaceTransform = 2517
-    2456: WordSpacing = 2518
-    2457: WordWrap = 2519
-    2458: Words = 2520
-    2459: Wrap = 2521
-    2460: WrapAfter = 2522
-    2461: WrapBefore = 2523
-    2462: WrapFlow = 2524
-    2463: WrapInside = 2525
-    2464: WrapReverse = 2526
-    2465: WrapThrough = 2527
-    2466: WritingMode = 2528
-    2467: XEnd = 2529
-    2468: XFast = 2530
-    2469: XHigh = 2531
-    2470: XLarge = 2532
-    2471: XLoud = 2533
-    2472: XLow = 2534
-    2473: XSelfEnd = 2535
-    2474: XSelfStart = 2536
-    2475: XSlow = 2537
-    2476: XSmall = 2538
-    2477: XSoft = 2539
-    2478: XStart = 2540
-    2479: XStrong = 2541
-    2480: XWeak = 2542
-    2481: Xmp = 2543
-    2482: Xo = 2544
-    2483: Xor = 2545
-    2484: XxLarge = 2546
-    2485: XxSmall = 2547
-    2486: Xywh = 2548
-    2487: Xyz = 2549
-    2488: XyzD50 = 2550
-    2489: XyzD65 = 2551
-    2490: Y = 2552
-    2491: YEnd = 2553
-    2492: YSelfEnd = 2554
-    2493: YSelfStart = 2555
-    2494: YStart = 2556
-    2495: Yellow = 2557
-    2496: Yellowgreen = 2558
-    2497: Young = 2559
-    2498: Z = 2560
-    2499: ZIndex = 2561
-    2500: ZeroIfExtrinsic = 2562
-    2501: ZeroIfScroll = 2563
-    2502: Zoom = 2564
-    2503: ZoomIn = 2565
-    2504: ZoomOut = 2566
-    2505: _NegInfinity = 2567
-    2506: _WebkitAlignContent = 8388608
-    2507: _WebkitAlignItems = 8388609
-    2508: _WebkitAlignSelf = 8388610
-    2509: _WebkitAnimatingFullScreenTransition = 8388611
-    2510: _WebkitAnimation = 8388612
-    2511: _WebkitAnimationDelay = 8388613
-    2512: _WebkitAnimationDirection = 8388614
-    2513: _WebkitAnimationDuration = 8388615
-    2514: _WebkitAnimationFillMode = 8388616
-    2515: _WebkitAnimationIterationCount = 8388617
-    2516: _WebkitAnimationName = 8388618
-    2517: _WebkitAnimationPlayState = 8388619
-    2518: _WebkitAnimationTimingFunction = 8388620
-    2519: _WebkitAny = 8388621
-    2520: _WebkitAnyLink = 8388622
-    2521: _WebkitAppRegion = 8388623
-    2522: _WebkitAppearance = 8388624
-    2523: _WebkitAutofill = 8388625
-    2524: _WebkitAutofillAndObscured = 8388626
-    2525: _WebkitAutofillStrongPassword = 8388627
-    2526: _WebkitAutofillStrongPasswordViewable = 8388628
-    2527: _WebkitBackdrop = 8388629
-    2528: _WebkitBackdropFilter = 8388630
-    2529: _WebkitBackfaceVisibility = 8388631
-    2530: _WebkitBackgroundClip = 8388632
-    2531: _WebkitBackgroundOrigin = 8388633
-    2532: _WebkitBackgroundSize = 8388634
-    2533: _WebkitBorderBottomLeftRadius = 8388635
-    2534: _WebkitBorderBottomRightRadius = 8388636
-    2535: _WebkitBorderHorizontalSpacing = 8388637
-    2536: _WebkitBorderImage = 8388638
-    2537: _WebkitBorderImageOutset = 8388639
-    2538: _WebkitBorderImageRepeat = 8388640
-    2539: _WebkitBorderImageSlice = 8388641
-    2540: _WebkitBorderImageSource = 8388642
-    2541: _WebkitBorderImageWidth = 8388643
-    2542: _WebkitBorderRadius = 8388644
-    2543: _WebkitBorderTopLeftRadius = 8388645
-    2544: _WebkitBorderTopRightRadius = 8388646
-    2545: _WebkitBorderVerticalSpacing = 8388647
-    2546: _WebkitBox = 8388648
-    2547: _WebkitBoxAlign = 8388649
-    2548: _WebkitBoxDecorationBreak = 8388650
-    2549: _WebkitBoxDirection = 8388651
-    2550: _WebkitBoxFlex = 8388652
-    2551: _WebkitBoxOrdinalGroup = 8388653
-    2552: _WebkitBoxOrient = 8388654
-    2553: _WebkitBoxPack = 8388655
-    2554: _WebkitBoxReflect = 8388656
-    2555: _WebkitBoxShadow = 8388657
-    2556: _WebkitBoxSizing = 8388658
-    2557: _WebkitCalendarPickerIndicator = 8388659
-    2558: _WebkitCapsLockIndicator = 8388660
-    2559: _WebkitClipPath = 8388661
-    2560: _WebkitColorSwatch = 8388662
-    2561: _WebkitColorSwatchWrapper = 8388663
-    2562: _WebkitColumnBreakInside = 8388664
-    2563: _WebkitColumnCount = 8388665
-    2564: _WebkitColumnGap = 8388666
-    2565: _WebkitColumnRule = 8388667
-    2566: _WebkitColumnRuleColor = 8388668
-    2567: _WebkitColumnRuleStyle = 8388669
-    2568: _WebkitColumnRuleWidth = 8388670
-    2569: _WebkitColumnSpan = 8388671
-    2570: _WebkitColumnWidth = 8388672
-    2571: _WebkitColumns = 8388673
-    2572: _WebkitContactsAutoFillButton = 8388674
-    2573: _WebkitCredentialsAutoFillButton = 8388675
-    2574: _WebkitCreditCardAutoFillButton = 8388676
-    2575: _WebkitDateAndTimeValue = 8388677
-    2576: _WebkitDatetimeEdit = 8388678
-    2577: _WebkitDatetimeEditDayField = 8388679
-    2578: _WebkitDatetimeEditFieldsWrapper = 8388680
-    2579: _WebkitDatetimeEditHourField = 8388681
-    2580: _WebkitDatetimeEditMeridiemField = 8388682
-    2581: _WebkitDatetimeEditMillisecondField = 8388683
-    2582: _WebkitDatetimeEditMinute = 8388684
-    2583: _WebkitDatetimeEditMinuteField = 8388685
-    2584: _WebkitDatetimeEditMonthField = 8388686
-    2585: _WebkitDatetimeEditSecondField = 8388687
-    2586: _WebkitDatetimeEditText = 8388688
-    2587: _WebkitDatetimeEditYearField = 8388689
-    2588: _WebkitDetailsMarker = 8388690
-    2589: _WebkitDevicePixelRatio = 8388691
-    2590: _WebkitDistributed = 8388692
-    2591: _WebkitDrag = 8388693
-    2592: _WebkitFileUploadButton = 8388694
-    2593: _WebkitFilter = 8388695
-    2594: _WebkitFlex = 8388696
-    2595: _WebkitFlexBasis = 8388697
-    2596: _WebkitFlexDirection = 8388698
-    2597: _WebkitFlexFlow = 8388699
-    2598: _WebkitFlexGrow = 8388700
-    2599: _WebkitFlexShrink = 8388701
-    2600: _WebkitFlexWrap = 8388702
-    2601: _WebkitFontFeatureSettings = 8388703
-    2602: _WebkitFontSmoothing = 8388704
-    2603: _WebkitFontVariantLigatures = 8388705
-    2604: _WebkitFullPageMedia = 8388706
-    2605: _WebkitFullScreen = 8388707
-    2606: _WebkitFullScreenAncestor = 8388708
-    2607: _WebkitFullScreenControlsHidden = 8388709
-    2608: _WebkitFullScreenDocument = 8388710
-    2609: _WebkitGenericCueRoot = 8388711
-    2610: _WebkitGrab = 8388712
-    2611: _WebkitGrabbing = 8388713
-    2612: _WebkitHyphens = 8388714
-    2613: _WebkitInlineBox = 8388715
-    2614: _WebkitInlineFlex = 8388716
-    2615: _WebkitInnerSpinButton = 8388717
-    2616: _WebkitInputPlaceholder = 8388718
-    2617: _WebkitJustifyContent = 8388719
-    2618: _WebkitKeyframes = 8388720
-    2619: _WebkitLineBreak = 8388721
-    2620: _WebkitLineClamp = 8388722
-    2621: _WebkitListButton = 8388723
-    2622: _WebkitMarginEnd = 8388724
-    2623: _WebkitMarginStart = 8388725
-    2624: _WebkitMarginTopCollapse = 8388726
-    2625: _WebkitMask = 8388727
-    2626: _WebkitMaskAttachment = 8388728
-    2627: _WebkitMaskBoxImage = 8388729
-    2628: _WebkitMaskClip = 8388730
-    2629: _WebkitMaskComposite = 8388731
-    2630: _WebkitMaskImage = 8388732
-    2631: _WebkitMaskOrigin = 8388733
-    2632: _WebkitMaskPosition = 8388734
-    2633: _WebkitMaskRepeat = 8388735
-    2634: _WebkitMaskSize = 8388736
-    2635: _WebkitMatchParent = 8388737
-    2636: _WebkitMaxContent = 8388738
-    2637: _WebkitMaxDevicePixelRatio = 8388739
-    2638: _WebkitMediaControls = 8388740
-    2639: _WebkitMediaTextTrackContainer = 8388741
-    2640: _WebkitMediaTextTrackDisplay = 8388742
-    2641: _WebkitMediaTextTrackDisplayBackdrop = 8388743
-    2642: _WebkitMediaTextTrackRegion = 8388744
-    2643: _WebkitMediaTextTrackRegionContainer = 8388745
-    2644: _WebkitMeterBar = 8388746
-    2645: _WebkitMeterEvenLessGoodValue = 8388747
-    2646: _WebkitMeterInnerElement = 8388748
-    2647: _WebkitMeterOptimumValue = 8388749
-    2648: _WebkitMeterSuboptimumValue = 8388750
-    2649: _WebkitMinContent = 8388751
-    2650: _WebkitMinDevicePixelRatio = 8388752
-    2651: _WebkitOrder = 8388753
-    2652: _WebkitOuterSpinButton = 8388754
-    2653: _WebkitOverflowScrolling = 8388755
-    2654: _WebkitPaddingAfter = 8388756
-    2655: _WebkitPaddingStart = 8388757
-    2656: _WebkitPasswordAutoFillButton = 8388758
-    2657: _WebkitPerspective = 8388759
-    2658: _WebkitPerspectiveOrigin = 8388760
-    2659: _WebkitPrintColorAdjust = 8388761
-    2660: _WebkitProgressBar = 8388762
-    2661: _WebkitProgressInnerElement = 8388763
-    2662: _WebkitProgressValue = 8388764
-    2663: _WebkitResizer = 8388765
-    2664: _WebkitScrollbar = 8388766
-    2665: _WebkitScrollbarButton = 8388767
-    2666: _WebkitScrollbarCorner = 8388768
-    2667: _WebkitScrollbarThumb = 8388769
-    2668: _WebkitScrollbarTrack = 8388770
-    2669: _WebkitScrollbarTrackPiece = 8388771
-    2670: _WebkitSearchCancelButton = 8388772
-    2671: _WebkitSearchDecoration = 8388773
-    2672: _WebkitSearchResultsButton = 8388774
-    2673: _WebkitSearchResultsDecoration = 8388775
-    2674: _WebkitSelection = 8388776
-    2675: _WebkitSliderContainer = 8388777
-    2676: _WebkitSliderRunnableTrack = 8388778
-    2677: _WebkitSliderThumb = 8388779
-    2678: _WebkitSticky = 8388780
-    2679: _WebkitStrongPasswordAutoFillButton = 8388781
-    2680: _WebkitTapHighlightColor = 8388782
-    2681: _WebkitTextDecoration = 8388783
-    2682: _WebkitTextDecorationColor = 8388784
-    2683: _WebkitTextDecorationSkip = 8388785
-    2684: _WebkitTextDecorationSkipInk = 8388786
-    2685: _WebkitTextDecorationStyle = 8388787
-    2686: _WebkitTextFillColor = 8388788
-    2687: _WebkitTextSizeAdjust = 8388789
-    2688: _WebkitTextStroke = 8388790
-    2689: _WebkitTextStrokeColor = 8388791
-    2690: _WebkitTextStrokeWidth = 8388792
-    2691: _WebkitTextfieldDecorationContainer = 8388793
-    2692: _WebkitTouchCallout = 8388794
-    2693: _WebkitTransform = 8388795
-    2694: _WebkitTransform2d = 8388796
-    2695: _WebkitTransform3d = 8388797
-    2696: _WebkitTransformOrigin = 8388798
-    2697: _WebkitTransformStyle = 8388799
-    2698: _WebkitTransition = 8388800
-    2699: _WebkitTransitionDelay = 8388801
-    2700: _WebkitTransitionDuration = 8388802
-    2701: _WebkitTransitionProperty = 8388803
-    2702: _WebkitTransitionTimingFunction = 8388804
-    2703: _WebkitUserDrag = 8388805
-    2704: _WebkitUserModify = 8388806
-    2705: _WebkitUserSelect = 8388807
-    2706: _WebkitValidationBubble = 8388808
-    2707: _WebkitValidationBubbleArrow = 8388809
-    2708: _WebkitValidationBubbleArrowClipper = 8388810
-    2709: _WebkitValidationBubbleBody = 8388811
-    2710: _WebkitValidationBubbleHeading = 8388812
-    2711: _WebkitValidationBubbleIcon = 8388813
-    2712: _WebkitValidationBubbleMessage = 8388814
-    2713: _WebkitValidationBubbleTextBlock = 8388815
-    2714: _WebkitVideoPlayableInline = 8388816
-    2715: _MozAnonymousBlock = 10485760
-    2716: _MozAnonymousItem = 10485761
-    2717: _MozAnonymousPositionedBlock = 10485762
-    2718: _MozAny = 10485763
-    2719: _MozAnyLink = 10485764
-    2720: _MozAppearance = 10485765
-    2721: _MozAutofillPreview = 10485766
-    2722: _MozBlockInsideInlineWrapper = 10485767
-    2723: _MozBlockRubyContent = 10485768
-    2724: _MozBox = 10485769
-    2725: _MozBoxSizing = 10485770
-    2726: _MozBroken = 10485771
-    2727: _MozButtonContent = 10485772
-    2728: _MozCanvas = 10485773
-    2729: _MozCellContent = 10485774
-    2730: _MozColorSwatch = 10485775
-    2731: _MozColumnContent = 10485776
-    2732: _MozColumnCount = 10485777
-    2733: _MozColumnGap = 10485778
-    2734: _MozColumnSet = 10485779
-    2735: _MozColumnSpanWrapper = 10485780
-    2736: _MozDeviceOrientation = 10485781
-    2737: _MozDevicePixelRatio = 10485782
-    2738: _MozDevtoolsHighlighted = 10485783
-    2739: _MozDirAttrLikeAuto = 10485784
-    2740: _MozDirAttrLtr = 10485785
-    2741: _MozDirAttrRtl = 10485786
-    2742: _MozDocument = 10485787
-    2743: _MozDragOver = 10485788
-    2744: _MozDropdownList = 10485789
-    2745: _MozFieldsetContent = 10485790
-    2746: _MozFileContent = 10485791
-    2747: _MozFilter = 10485792
-    2748: _MozFirstLetterContinuation = 10485793
-    2749: _MozFirstNode = 10485794
-    2750: _MozFlex = 10485795
-    2751: _MozFlexbox = 10485796
-    2752: _MozFocusInner = 10485797
-    2753: _MozFocusOuter = 10485798
-    2754: _MozFocusring = 10485799
-    2755: _MozFramesetBlank = 10485800
-    2756: _MozFullScreen = 10485801
-    2757: _MozFullScreenAncestor = 10485802
-    2758: _MozHandlerBlocked = 10485803
-    2759: _MozHandlerCrashed = 10485804
-    2760: _MozHandlerDisabled = 10485805
-    2761: _MozHasDirAttr = 10485806
-    2762: _MozHframesetBorder = 10485807
-    2763: _MozHtmlCanvasContent = 10485808
-    2764: _MozImagesInMenus = 10485809
-    2765: _MozInlineBox = 10485810
-    2766: _MozInlineStack = 10485811
-    2767: _MozInlineTable = 10485812
-    2768: _MozInert = 10485813
-    2769: _MozIsHtml = 10485814
-    2770: _MozLastNode = 10485815
-    2771: _MozLineFrame = 10485816
-    2772: _MozListBullet = 10485817
-    2773: _MozListNumber = 10485818
-    2774: _MozLoading = 10485819
-    2775: _MozLocaleDir = 10485820
-    2776: _MozLwtheme = 10485821
-    2777: _MozLwthemeBrighttext = 10485822
-    2778: _MozLwthemeDarktext = 10485823
-    2779: _MozMacGraphiteTheme = 10485824
-    2780: _MozMaemoClassicTheme = 10485825
-    2781: _MozMathmlAnonymousBlock = 10485826
-    2782: _MozMathIncrementScriptLevel = 10485827
-    2783: _MozMaxContent = 10485828
-    2784: _MozMaxDevicePixelRatio = 10485829
-    2785: _MozMeterBar = 10485830
-    2786: _MozMeterOptimum = 10485831
-    2787: _MozMeterSubOptimum = 10485832
-    2788: _MozMeterSubSubOptimum = 10485833
-    2789: _MozMinContent = 10485834
-    2790: _MozMinDevicePixelRatio = 10485835
-    2791: _MozNativeAnonymous = 10485836
-    2792: _MozNumberSpinBox = 10485837
-    2793: _MozNumberSpinDown = 10485838
-    2794: _MozNumberSpinUp = 10485839
-    2795: _MozOnlyWhitespace = 10485840
-    2796: _MozOofPlaceholder = 10485841
-    2797: _MozOsVersion = 10485842
-    2798: _MozOsxFontSmoothing = 10485843
-    2799: _MozPage = 10485844
-    2800: _MozPageBreak = 10485845
-    2801: _MozPageContent = 10485846
-    2802: _MozPageSequence = 10485847
-    2803: _MozPagebreak = 10485848
-    2804: _MozPagecontent = 10485849
-    2805: _MozPlaceholder = 10485850
-    2806: _MozPlaceholderShown = 10485851
-    2807: _MozPrintedSheet = 10485852
-    2808: _MozProgressBar = 10485853
-    2809: _MozRangeProgress = 10485854
-    2810: _MozRangeThumb = 10485855
-    2811: _MozRangeTrack = 10485856
-    2812: _MozReadOnly = 10485857
-    2813: _MozReadWrite = 10485858
-    2814: _MozReveal = 10485859
-    2815: _MozRevealed = 10485860
-    2816: _MozRuby = 10485861
-    2817: _MozRubyBase = 10485862
-    2818: _MozRubyBaseContainer = 10485863
-    2819: _MozRubyText = 10485864
-    2820: _MozRubyTextContainer = 10485865
-    2821: _MozScrolledCanvas = 10485866
-    2822: _MozScrolledContent = 10485867
-    2823: _MozScrolledPageSequence = 10485868
-    2824: _MozSearchClearButton = 10485869
-    2825: _MozSelectContent = 10485870
-    2826: _MozSelectListBox = 10485871
-    2827: _MozSelection = 10485872
-    2828: _MozSnapshotContainingBlock = 10485873
-    2829: _MozSubmitInvalid = 10485874
-    2830: _MozStyleeditorTransitioning = 10485875
-    2831: _MozSuppressed = 10485876
-    2832: _MozSuppressForPrintSelection = 10485877
-    2833: _MozSvgForeignContent = 10485878
-    2834: _MozSvgMarkerAnonChild = 10485879
-    2835: _MozSvgOuterSvgAnonChild = 10485880
-    2836: _MozSvgText = 10485881
-    2837: _MozTable = 10485882
-    2838: _MozTableBorderNonzero = 10485883
-    2839: _MozTableCell = 10485884
-    2840: _MozTableColumn = 10485885
-    2841: _MozTableColumnGroup = 10485886
-    2842: _MozTableOuter = 10485887
-    2843: _MozTableRow = 10485888
-    2844: _MozTableRowGroup = 10485889
-    2845: _MozTableWrapper = 10485890
-    2846: _MozTextControlEditingRoot = 10485891
-    2847: _MozTextControlPreview = 10485892
-    2848: _MozText = 10485893
-    2849: _MozTouchEnabled = 10485894
-    2850: _MozTopmostModal = 10485895
-    2851: _MozTransition = 10485896
-    2852: _MozTreeCell = 10485897
-    2853: _MozTreeCellText = 10485898
-    2854: _MozTreeCheckbox = 10485899
-    2855: _MozTreeColumn = 10485900
-    2856: _MozTreeDropFeedback = 10485901
-    2857: _MozTreeImage = 10485902
-    2858: _MozTreeIndentation = 10485903
-    2859: _MozTreeLine = 10485904
-    2860: _MozTreeRow = 10485905
-    2861: _MozTreeSeparator = 10485906
-    2862: _MozTreeTwisty = 10485907
-    2863: _MozUiInvalid = 10485908
-    2864: _MozUiValid = 10485909
-    2865: _MozUserDisabled = 10485910
-    2866: _MozUserSelect = 10485911
-    2867: _MozVframesetBorder = 10485912
-    2868: _MozViewport = 10485913
-    2869: _MozViewportScroll = 10485914
-    2870: _MozValueEmpty = 10485915
-    2871: _MozWindowInactive = 10485916
-    2872: _MsAutohidingScrollbar = 12582912
-    2873: _MsBackdrop = 12582913
-    2874: _MsBoxSizing = 12582914
-    2875: _MsBrowse = 12582915
-    2876: _MsCheck = 12582916
-    2877: _MsClear = 12582917
-    2878: _MsColumnCount = 12582918
-    2879: _MsDevicePixelRatio = 12582919
-    2880: _MsExpand = 12582920
-    2881: _MsFill = 12582921
-    2882: _MsFillLower = 12582922
-    2883: _MsFillUpper = 12582923
-    2884: _MsFilter = 12582924
-    2885: _MsFlex = 12582925
-    2886: _MsFlexAlign = 12582926
-    2887: _MsFlexDirection = 12582927
-    2888: _MsFlexFlow = 12582928
-    2889: _MsFlexItemAlign = 12582929
-    2890: _MsFlexLinePack = 12582930
-    2891: _MsFlexNegative = 12582931
-    2892: _MsFlexOrder = 12582932
-    2893: _MsFlexPack = 12582933
-    2894: _MsFlexPositive = 12582934
-    2895: _MsFlexPreferredSize = 12582935
-    2896: _MsFlexWrap = 12582936
-    2897: _MsFlexbox = 12582937
-    2898: _MsFullscreen = 12582938
-    2899: _MsGrid = 12582939
-    2900: _MsHighContrast = 12582940
-    2901: _MsInterpolationMode = 12582941
-    2902: _MsImeAlign = 12582942
-    2903: _MsInlineFlex = 12582943
-    2904: _MsInlineFlexbox = 12582944
-    2905: _MsInputPlaceholder = 12582945
-    2906: _MsMaxColumnCount = 12582946
-    2907: _MsMaxDevicepixelRatio = 12582947
-    2908: _MsMinColumnCount = 12582948
-    2909: _MsMinDevicePixelRatio = 12582949
-    2910: _MsOverflowStyle = 12582950
-    2911: _MsPlaceholder = 12582951
-    2912: _MsReveal = 12582952
-    2913: _MsSelection = 12582953
-    2914: _MsTextSizeAdjust = 12582954
-    2915: _MsThumb = 12582955
-    2916: _MsTicksAfter = 12582956
-    2917: _MsTicksBefore = 12582957
-    2918: _MsTooltip = 12582958
-    2919: _MsTouchAction = 12582959
-    2920: _MsTrack = 12582960
-    2921: _MsTransform = 12582961
-    2922: _MsTransformOrigin = 12582962
-    2923: _MsTransition = 12582963
-    2924: _MsUserSelect = 12582964
-    2925: _MsValue = 12582965
-    2926: _MsViewState = 12582966
-    2927: _MsWordBreak = 12582967
-    2928: _OBoxSizing = 14680064
-    2929: _ODevicePixelRatio = 14680065
-    2930: _OFilter = 14680066
-    2931: _OFlex = 14680067
-    2932: _OInnerSpinButton = 14680068
-    2933: _OMaxDevicePixelRatio = 14680069
-    2934: _OMinDevicePixelRatio = 14680070
-    2935: _OObjectFit = 14680071
-    2936: _OOuterSpinButton = 14680072
-    2937: _OPlaceholder = 14680073
-    2938: _OPrefocus = 14680074
-    2939: _OScrollbar = 14680075
-    2940: _OScrollbarThumb = 14680076
-    2941: _OScrollbarTrack = 14680077
-    2942: _OScrollbarTrackPiece = 14680078
-    2943: _OSelection = 14680079
+    2008: Sheet = 2070
+    2009: Shorter = 2071
+    2010: Show = 2072
+    2011: Shrink = 2073
+    2012: SiblingCount = 2074
+    2013: SiblingIndex = 2075
+    2014: Sides = 2076
+    2015: Sideways = 2077
+    2016: SidewaysLr = 2078
+    2017: SidewaysRl = 2079
+    2018: Sienna = 2080
+    2019: Sign = 2081
+    2020: Silent = 2082
+    2021: Silver = 2083
+    2022: Simplified = 2084
+    2023: Sin = 2085
+    2024: SingleButton = 2086
+    2025: Size = 2087
+    2026: SizeAdjust = 2088
+    2027: Skew = 2089
+    2028: Skewx = 2090
+    2029: Skewy = 2091
+    2030: SkipAll = 2092
+    2031: SkipLineThrough = 2093
+    2032: SkipOverline = 2094
+    2033: SkipUnderline = 2095
+    2034: Skyblue = 2096
+    2035: SlashedZero = 2097
+    2036: Slateblue = 2098
+    2037: Slategray = 2099
+    2038: Slategrey = 2100
+    2039: Slice = 2101
+    2040: SliderFill = 2102
+    2041: SliderOrientation = 2103
+    2042: SliderThumb = 2104
+    2043: SliderTrack = 2105
+    2044: Slot = 2106
+    2045: Slotted = 2107
+    2046: Slow = 2108
+    2047: Small = 2109
+    2048: SmallCaps = 2110
+    2049: SmallCaption = 2111
+    2050: Smaller = 2112
+    2051: Smooth = 2113
+    2052: Snap = 2114
+    2053: SnapBlock = 2115
+    2054: SnapInline = 2116
+    2055: Snapped = 2117
+    2056: SnappedBlock = 2118
+    2057: SnappedInline = 2119
+    2058: SnappedX = 2120
+    2059: SnappedY = 2121
+    2060: Snow = 2122
+    2061: Soft = 2123
+    2062: SoftLight = 2124
+    2063: Solid = 2125
+    2064: SomeProp = 2126
+    2065: Source = 2127
+    2066: SourceAtop = 2128
+    2067: SourceIn = 2129
+    2068: SourceOrder = 2130
+    2069: SourceOut = 2131
+    2070: SourceOver = 2132
+    2071: Space = 2133
+    2072: SpaceAll = 2134
+    2073: SpaceAround = 2135
+    2074: SpaceBetween = 2136
+    2075: SpaceEvenly = 2137
+    2076: SpaceFirst = 2138
+    2077: Spacer = 2139
+    2078: Spaces = 2140
+    2079: Span = 2141
+    2080: SpanAll = 2142
+    2081: SpanBlockEnd = 2143
+    2082: SpanBlockStart = 2144
+    2083: SpanBottom = 2145
+    2084: SpanEnd = 2146
+    2085: SpanInlineEnd = 2147
+    2086: SpanInlineStart = 2148
+    2087: SpanLeft = 2149
+    2088: SpanRight = 2150
+    2089: SpanSelfBlockEnd = 2151
+    2090: SpanSelfBlockStart = 2152
+    2091: SpanSelfEnd = 2153
+    2092: SpanSelfInlineEnd = 2154
+    2093: SpanSelfInlineStart = 2155
+    2094: SpanSelfStart = 2156
+    2095: SpanStart = 2157
+    2096: SpanTop = 2158
+    2097: SpanXEnd = 2159
+    2098: SpanXSelfEnd = 2160
+    2099: SpanXSelfStart = 2161
+    2100: SpanXStart = 2162
+    2101: SpanYEnd = 2163
+    2102: SpanYSelfEnd = 2164
+    2103: SpanYSelfStart = 2165
+    2104: SpanYStart = 2166
+    2105: SpanningItem = 2167
+    2106: SpatialNavigationAction = 2168
+    2107: SpatialNavigationContain = 2169
+    2108: SpatialNavigationFunction = 2170
+    2109: Speak = 2171
+    2110: SpeakAs = 2172
+    2111: SpellOut = 2173
+    2112: SpellingError = 2174
+    2113: Spread = 2175
+    2114: Springgreen = 2176
+    2115: Sqrt = 2177
+    2116: Square = 2178
+    2117: Squircle = 2179
+    2118: Src = 2180
+    2119: Srgb = 2181
+    2120: SrgbLinear = 2182
+    2121: Stable = 2183
+    2122: StackedFractions = 2184
+    2123: Stalled = 2185
+    2124: Standalone = 2186
+    2125: Standard = 2187
+    2126: Start = 2188
+    2127: StartingStyle = 2189
+    2128: State = 2190
+    2129: Static = 2191
+    2130: StatusBar = 2192
+    2131: Steelblue = 2193
+    2132: StepControl = 2194
+    2133: StepDown = 2195
+    2134: StepEnd = 2196
+    2135: StepStart = 2197
+    2136: StepUp = 2198
+    2137: Steps = 2199
+    2138: Sticky = 2200
+    2139: Stop = 2201
+    2140: Stopped = 2202
+    2141: Stretch = 2203
+    2142: Strict = 2204
+    2143: Strike = 2205
+    2144: String = 2206
+    2145: StringSet = 2207
+    2146: Stripes = 2208
+    2147: Stroke = 2209
+    2148: StrokeAlign = 2210
+    2149: StrokeBox = 2211
+    2150: StrokeBreak = 2212
+    2151: StrokeColor = 2213
+    2152: StrokeDashCorner = 2214
+    2153: StrokeDashJustify = 2215
+    2154: StrokeDasharray = 2216
+    2155: StrokeDashoffset = 2217
+    2156: StrokeImage = 2218
+    2157: StrokeLinecap = 2219
+    2158: StrokeLinejoin = 2220
+    2159: StrokeMiterlimit = 2221
+    2160: StrokeOpacity = 2222
+    2161: StrokeOrigin = 2223
+    2162: StrokePosition = 2224
+    2163: StrokeRepeat = 2225
+    2164: StrokeSize = 2226
+    2165: StrokeWidth = 2227
+    2166: Strong = 2228
+    2167: Stuck = 2229
+    2168: Style = 2230
+    2169: Styleset = 2231
+    2170: Stylistic = 2232
+    2171: Sub = 2233
+    2172: Subgrid = 2234
+    2173: SubpixelAntialiased = 2235
+    2174: Subset = 2236
+    2175: Subtractive = 2237
+    2176: Suffix = 2238
+    2177: Sum = 2239
+    2178: Summary = 2240
+    2179: SubscriptPositionOverride = 2241
+    2180: SubscriptSizeOverride = 2242
+    2181: Sup = 2243
+    2182: Super = 2244
+    2183: Superellipse = 2245
+    2184: SuperscriptPositionOverride = 2246
+    2185: SuperscriptSizeOverride = 2247
+    2186: Supports = 2248
+    2187: Svg = 2249
+    2188: SwResize = 2250
+    2189: Swap = 2251
+    2190: Swash = 2252
+    2191: Switch = 2253
+    2192: Symbol = 2254
+    2193: Symbolic = 2255
+    2194: Symbols = 2256
+    2195: Syntax = 2257
+    2196: System = 2258
+    2197: SystemUi = 2259
+    2198: TabSize = 2260
+    2199: Table = 2261
+    2200: TableCaption = 2262
+    2201: TableCell = 2263
+    2202: TableColumn = 2264
+    2203: TableColumnGroup = 2265
+    2204: TableFooterGroup = 2266
+    2205: TableHeaderGroup = 2267
+    2206: TableLayout = 2268
+    2207: TableRow = 2269
+    2208: TableRowGroup = 2270
+    2209: Tabs = 2271
+    2210: TabularNums = 2272
+    2211: Tamil = 2273
+    2212: Tan = 2274
+    2213: Target = 2275
+    2214: TargetAfter = 2276
+    2215: TargetBefore = 2277
+    2216: TargetCounter = 2278
+    2217: TargetCounters = 2279
+    2218: TargetCurrent = 2280
+    2219: TargetText = 2281
+    2220: TargetWithin = 2282
+    2221: Tbody = 2283
+    2222: Td = 2284
+    2223: Teal = 2285
+    2224: Telugu = 2286
+    2225: Template = 2287
+    2226: Tendsto = 2288
+    2227: Text = 2289
+    2228: TextAlign = 2290
+    2229: TextAlignAll = 2291
+    2230: TextAlignLast = 2292
+    2231: TextAutospace = 2293
+    2232: TextBottom = 2294
+    2233: TextBox = 2295
+    2234: TextBoxEdge = 2296
+    2235: TextBoxTrim = 2297
+    2236: TextCombineUpright = 2298
+    2237: TextDecoration = 2299
+    2238: TextDecorationColor = 2300
+    2239: TextDecorationInset = 2301
+    2240: TextDecorationLine = 2302
+    2241: TextDecorationSkip = 2303
+    2242: TextDecorationSkipBox = 2304
+    2243: TextDecorationSkipInk = 2305
+    2244: TextDecorationSkipSelf = 2306
+    2245: TextDecorationSkipSpaces = 2307
+    2246: TextDecorationStyle = 2308
+    2247: TextDecorationThickness = 2309
+    2248: TextEmphasis = 2310
+    2249: TextEmphasisColor = 2311
+    2250: TextEmphasisPosition = 2312
+    2251: TextEmphasisSkip = 2313
+    2252: TextEmphasisStyle = 2314
+    2253: TextFit = 2315
+    2254: TextGroupAlign = 2316
+    2255: TextIndent = 2317
+    2256: TextJustify = 2318
+    2257: TextOrientation = 2319
+    2258: TextOverflow = 2320
+    2259: TextRendering = 2321
+    2260: TextShadow = 2322
+    2261: TextSizeAdjust = 2323
+    2262: TextSpacing = 2324
+    2263: TextSpacingTrim = 2325
+    2264: TextTop = 2326
+    2265: TextTransform = 2327
+    2266: TextUnderlineOffset = 2328
+    2267: TextUnderlinePosition = 2329
+    2268: TextWrap = 2330
+    2269: TextWrapMode = 2331
+    2270: TextWrapStyle = 2332
+    2271: Textarea = 2333
+    2272: Textfield = 2334
+    2273: Textpath = 2335
+    2274: Tfoot = 2336
+    2275: Th = 2337
+    2276: Thai = 2338
+    2277: Thead = 2339
+    2278: Thick = 2340
+    2279: Thin = 2341
+    2280: Thistle = 2342
+    2281: Tibetan = 2343
+    2282: Time = 2344
+    2283: TimelineScope = 2345
+    2284: TimelineTrigger = 2346
+    2285: TimelineTriggerActivationRange = 2347
+    2286: TimelineTriggerActivationRangeEnd = 2348
+    2287: TimelineTriggerActivationRangeStart = 2349
+    2288: TimelineTriggerActiveRange = 2350
+    2289: TimelineTriggerActiveRangeEnd = 2351
+    2290: TimelineTriggerActiveRangeStart = 2352
+    2291: TimelineTriggerName = 2353
+    2292: TimelineTriggerRange = 2354
+    2293: TimelineTriggerSource = 2355
+    2294: Times = 2356
+    2295: Title = 2357
+    2296: TitlingCaps = 2358
+    2297: Tech = 2359
+    2298: To = 2360
+    2299: ToZero = 2361
+    2300: Tomato = 2362
+    2301: Tooltip = 2363
+    2302: Top = 2364
+    2303: TopCenter = 2365
+    2304: TopLeft = 2366
+    2305: TopLeftCorner = 2367
+    2306: TopRight = 2368
+    2307: TopRightCorner = 2369
+    2308: TopToBottom = 2370
+    2309: Touch = 2371
+    2310: TouchAction = 2372
+    2311: Tr = 2373
+    2312: Track = 2374
+    2313: Traditional = 2375
+    2314: TrailingSpaces = 2376
+    2315: Transform = 2377
+    2316: TransformBox = 2378
+    2317: TransformFunction = 2379
+    2318: TransformList = 2380
+    2319: TransformOrigin = 2381
+    2320: TransformStyle = 2382
+    2321: Transition = 2383
+    2322: TransitionBehavior = 2384
+    2323: TransitionDelay = 2385
+    2324: TransitionDuration = 2386
+    2325: TransitionProperty = 2387
+    2326: TransitionTimingFunction = 2388
+    2327: Translate = 2389
+    2328: Translate3d = 2390
+    2329: Translatex = 2391
+    2330: Translatey = 2392
+    2331: Translatez = 2393
+    2332: Transparent = 2394
+    2333: Transpose = 2395
+    2334: Triangle = 2396
+    2335: TriggerScope = 2397
+    2336: TrimAll = 2398
+    2337: TrimBoth = 2399
+    2338: TrimEnd = 2400
+    2339: TrimStart = 2401
+    2340: True = 2402
+    2341: Truetype = 2403
+    2342: Tspan = 2404
+    2343: Tt = 2405
+    2344: Turquoise = 2406
+    2345: Type = 2407
+    2346: Types = 2408
+    2347: U = 2409
+    2348: UiMonospace = 2410
+    2349: UiRounded = 2411
+    2350: UiSansSerif = 2412
+    2351: UiSerif = 2413
+    2352: Ul = 2414
+    2353: UltraCondensed = 2415
+    2354: UltraExpanded = 2416
+    2355: Unchecked = 2417
+    2356: Under = 2418
+    2357: Underline = 2419
+    2358: Underscore = 2420
+    2359: Unicase = 2421
+    2360: Unicode = 2422
+    2361: UnicodeBidi = 2423
+    2362: UnicodeRange = 2424
+    2363: Union = 2425
+    2364: Unsafe = 2426
+    2365: Unset = 2427
+    2366: Up = 2428
+    2367: Update = 2429
+    2368: Uplimit = 2430
+    2369: UpperAlpha = 2431
+    2370: UpperArmenian = 2432
+    2371: UpperLatin = 2433
+    2372: UpperRoman = 2434
+    2373: Uppercase = 2435
+    2374: Upright = 2436
+    2375: Url = 2437
+    2376: UrlPrefix = 2438
+    2377: Use = 2439
+    2378: UserInvalid = 2440
+    2379: UserSelect = 2441
+    2380: UserValid = 2442
+    2381: Valid = 2443
+    2382: Var = 2444
+    2383: Variance = 2445
+    2384: Variations = 2446
+    2385: Vector = 2447
+    2386: Vectorproduct = 2448
+    2387: Verso = 2449
+    2388: Vertical = 2450
+    2389: VerticalAlign = 2451
+    2390: VerticalLr = 2452
+    2391: VerticalRl = 2453
+    2392: VerticalText = 2454
+    2393: VerticalViewportSegments = 2455
+    2394: Video = 2456
+    2395: VideoColorGamut = 2457
+    2396: VideoDynamicRange = 2458
+    2397: View = 2459
+    2398: ViewBox = 2460
+    2399: ViewTimeline = 2461
+    2400: ViewTimelineAxis = 2462
+    2401: ViewTimelineInset = 2463
+    2402: ViewTimelineName = 2464
+    2403: ViewTransition = 2465
+    2404: ViewTransitionClass = 2466
+    2405: ViewTransitionGroup = 2467
+    2406: ViewTransitionImagePair = 2468
+    2407: ViewTransitionName = 2469
+    2408: ViewTransitionNew = 2470
+    2409: ViewTransitionOld = 2471
+    2410: ViewTransitionScope = 2472
+    2411: Violet = 2473
+    2412: Visibility = 2474
+    2413: Visible = 2475
+    2414: Visiblefill = 2476
+    2415: Visiblepainted = 2477
+    2416: Visiblestroke = 2478
+    2417: Visited = 2479
+    2418: Visitedtext = 2480
+    2419: Vline = 2481
+    2420: VoiceBalance = 2482
+    2421: VoiceDuration = 2483
+    2422: VoiceFamily = 2484
+    2423: VoicePitch = 2485
+    2424: VoiceRange = 2486
+    2425: VoiceRate = 2487
+    2426: VoiceStress = 2488
+    2427: VoiceVolume = 2489
+    2428: VolumeLocked = 2490
+    2429: W = 2491
+    2430: WResize = 2492
+    2431: Wait = 2493
+    2432: Wavy = 2494
+    2433: Wbr = 2495
+    2434: Weak = 2496
+    2435: Weight = 2497
+    2436: Wheat = 2498
+    2437: Where = 2499
+    2438: White = 2500
+    2439: WhiteSpace = 2501
+    2440: WhiteSpaceCollapse = 2502
+    2441: WhiteSpaceTrim = 2503
+    2442: Whitesmoke = 2504
+    2443: Widows = 2505
+    2444: Width = 2506
+    2445: WillChange = 2507
+    2446: WindowDrag = 2508
+    2447: WindowInactive = 2509
+    2448: WindowsVista = 2510
+    2449: WindowsWin10 = 2511
+    2450: WindowsWin7 = 2512
+    2451: WindowsWin8 = 2513
+    2452: WindowsXp = 2514
+    2453: With = 2515
+    2454: Woff = 2516
+    2455: Woff2 = 2517
+    2456: WordBreak = 2518
+    2457: WordSpaceTransform = 2519
+    2458: WordSpacing = 2520
+    2459: WordWrap = 2521
+    2460: Words = 2522
+    2461: Wrap = 2523
+    2462: WrapAfter = 2524
+    2463: WrapBefore = 2525
+    2464: WrapFlow = 2526
+    2465: WrapInside = 2527
+    2466: WrapReverse = 2528
+    2467: WrapThrough = 2529
+    2468: WriteOnly = 2530
+    2469: WritingMode = 2531
+    2470: XEnd = 2532
+    2471: XFast = 2533
+    2472: XHigh = 2534
+    2473: XLarge = 2535
+    2474: XLoud = 2536
+    2475: XLow = 2537
+    2476: XSelfEnd = 2538
+    2477: XSelfStart = 2539
+    2478: XSlow = 2540
+    2479: XSmall = 2541
+    2480: XSoft = 2542
+    2481: XStart = 2543
+    2482: XStrong = 2544
+    2483: XWeak = 2545
+    2484: Xmp = 2546
+    2485: Xo = 2547
+    2486: Xor = 2548
+    2487: XxLarge = 2549
+    2488: XxSmall = 2550
+    2489: Xywh = 2551
+    2490: Xyz = 2552
+    2491: XyzD50 = 2553
+    2492: XyzD65 = 2554
+    2493: Y = 2555
+    2494: YEnd = 2556
+    2495: YSelfEnd = 2557
+    2496: YSelfStart = 2558
+    2497: YStart = 2559
+    2498: Yellow = 2560
+    2499: Yellowgreen = 2561
+    2500: Young = 2562
+    2501: Z = 2563
+    2502: ZIndex = 2564
+    2503: ZeroIfExtrinsic = 2565
+    2504: ZeroIfScroll = 2566
+    2505: Zoom = 2567
+    2506: ZoomIn = 2568
+    2507: ZoomOut = 2569
+    2508: _NegInfinity = 2570
+    2509: _WebkitAlignContent = 8388608
+    2510: _WebkitAlignItems = 8388609
+    2511: _WebkitAlignSelf = 8388610
+    2512: _WebkitAnimatingFullScreenTransition = 8388611
+    2513: _WebkitAnimation = 8388612
+    2514: _WebkitAnimationDelay = 8388613
+    2515: _WebkitAnimationDirection = 8388614
+    2516: _WebkitAnimationDuration = 8388615
+    2517: _WebkitAnimationFillMode = 8388616
+    2518: _WebkitAnimationIterationCount = 8388617
+    2519: _WebkitAnimationName = 8388618
+    2520: _WebkitAnimationPlayState = 8388619
+    2521: _WebkitAnimationTimingFunction = 8388620
+    2522: _WebkitAny = 8388621
+    2523: _WebkitAnyLink = 8388622
+    2524: _WebkitAppRegion = 8388623
+    2525: _WebkitAppearance = 8388624
+    2526: _WebkitAutofill = 8388625
+    2527: _WebkitAutofillAndObscured = 8388626
+    2528: _WebkitAutofillStrongPassword = 8388627
+    2529: _WebkitAutofillStrongPasswordViewable = 8388628
+    2530: _WebkitBackdrop = 8388629
+    2531: _WebkitBackdropFilter = 8388630
+    2532: _WebkitBackfaceVisibility = 8388631
+    2533: _WebkitBackgroundClip = 8388632
+    2534: _WebkitBackgroundOrigin = 8388633
+    2535: _WebkitBackgroundSize = 8388634
+    2536: _WebkitBorderBottomLeftRadius = 8388635
+    2537: _WebkitBorderBottomRightRadius = 8388636
+    2538: _WebkitBorderHorizontalSpacing = 8388637
+    2539: _WebkitBorderImage = 8388638
+    2540: _WebkitBorderImageOutset = 8388639
+    2541: _WebkitBorderImageRepeat = 8388640
+    2542: _WebkitBorderImageSlice = 8388641
+    2543: _WebkitBorderImageSource = 8388642
+    2544: _WebkitBorderImageWidth = 8388643
+    2545: _WebkitBorderRadius = 8388644
+    2546: _WebkitBorderTopLeftRadius = 8388645
+    2547: _WebkitBorderTopRightRadius = 8388646
+    2548: _WebkitBorderVerticalSpacing = 8388647
+    2549: _WebkitBox = 8388648
+    2550: _WebkitBoxAlign = 8388649
+    2551: _WebkitBoxDecorationBreak = 8388650
+    2552: _WebkitBoxDirection = 8388651
+    2553: _WebkitBoxFlex = 8388652
+    2554: _WebkitBoxOrdinalGroup = 8388653
+    2555: _WebkitBoxOrient = 8388654
+    2556: _WebkitBoxPack = 8388655
+    2557: _WebkitBoxReflect = 8388656
+    2558: _WebkitBoxShadow = 8388657
+    2559: _WebkitBoxSizing = 8388658
+    2560: _WebkitCalendarPickerIndicator = 8388659
+    2561: _WebkitCapsLockIndicator = 8388660
+    2562: _WebkitClipPath = 8388661
+    2563: _WebkitColorSwatch = 8388662
+    2564: _WebkitColorSwatchWrapper = 8388663
+    2565: _WebkitColumnBreakInside = 8388664
+    2566: _WebkitColumnCount = 8388665
+    2567: _WebkitColumnGap = 8388666
+    2568: _WebkitColumnRule = 8388667
+    2569: _WebkitColumnRuleColor = 8388668
+    2570: _WebkitColumnRuleStyle = 8388669
+    2571: _WebkitColumnRuleWidth = 8388670
+    2572: _WebkitColumnSpan = 8388671
+    2573: _WebkitColumnWidth = 8388672
+    2574: _WebkitColumns = 8388673
+    2575: _WebkitContactsAutoFillButton = 8388674
+    2576: _WebkitCredentialsAutoFillButton = 8388675
+    2577: _WebkitCreditCardAutoFillButton = 8388676
+    2578: _WebkitDateAndTimeValue = 8388677
+    2579: _WebkitDatetimeEdit = 8388678
+    2580: _WebkitDatetimeEditDayField = 8388679
+    2581: _WebkitDatetimeEditFieldsWrapper = 8388680
+    2582: _WebkitDatetimeEditHourField = 8388681
+    2583: _WebkitDatetimeEditMeridiemField = 8388682
+    2584: _WebkitDatetimeEditMillisecondField = 8388683
+    2585: _WebkitDatetimeEditMinute = 8388684
+    2586: _WebkitDatetimeEditMinuteField = 8388685
+    2587: _WebkitDatetimeEditMonthField = 8388686
+    2588: _WebkitDatetimeEditSecondField = 8388687
+    2589: _WebkitDatetimeEditText = 8388688
+    2590: _WebkitDatetimeEditYearField = 8388689
+    2591: _WebkitDetailsMarker = 8388690
+    2592: _WebkitDevicePixelRatio = 8388691
+    2593: _WebkitDistributed = 8388692
+    2594: _WebkitDrag = 8388693
+    2595: _WebkitFileUploadButton = 8388694
+    2596: _WebkitFilter = 8388695
+    2597: _WebkitFlex = 8388696
+    2598: _WebkitFlexBasis = 8388697
+    2599: _WebkitFlexDirection = 8388698
+    2600: _WebkitFlexFlow = 8388699
+    2601: _WebkitFlexGrow = 8388700
+    2602: _WebkitFlexShrink = 8388701
+    2603: _WebkitFlexWrap = 8388702
+    2604: _WebkitFontFeatureSettings = 8388703
+    2605: _WebkitFontSmoothing = 8388704
+    2606: _WebkitFontVariantLigatures = 8388705
+    2607: _WebkitFullPageMedia = 8388706
+    2608: _WebkitFullScreen = 8388707
+    2609: _WebkitFullScreenAncestor = 8388708
+    2610: _WebkitFullScreenControlsHidden = 8388709
+    2611: _WebkitFullScreenDocument = 8388710
+    2612: _WebkitGenericCueRoot = 8388711
+    2613: _WebkitGrab = 8388712
+    2614: _WebkitGrabbing = 8388713
+    2615: _WebkitHyphens = 8388714
+    2616: _WebkitInlineBox = 8388715
+    2617: _WebkitInlineFlex = 8388716
+    2618: _WebkitInnerSpinButton = 8388717
+    2619: _WebkitInputPlaceholder = 8388718
+    2620: _WebkitJustifyContent = 8388719
+    2621: _WebkitKeyframes = 8388720
+    2622: _WebkitLineBreak = 8388721
+    2623: _WebkitLineClamp = 8388722
+    2624: _WebkitListButton = 8388723
+    2625: _WebkitMarginEnd = 8388724
+    2626: _WebkitMarginStart = 8388725
+    2627: _WebkitMarginTopCollapse = 8388726
+    2628: _WebkitMask = 8388727
+    2629: _WebkitMaskAttachment = 8388728
+    2630: _WebkitMaskBoxImage = 8388729
+    2631: _WebkitMaskClip = 8388730
+    2632: _WebkitMaskComposite = 8388731
+    2633: _WebkitMaskImage = 8388732
+    2634: _WebkitMaskOrigin = 8388733
+    2635: _WebkitMaskPosition = 8388734
+    2636: _WebkitMaskRepeat = 8388735
+    2637: _WebkitMaskSize = 8388736
+    2638: _WebkitMatchParent = 8388737
+    2639: _WebkitMaxContent = 8388738
+    2640: _WebkitMaxDevicePixelRatio = 8388739
+    2641: _WebkitMediaControls = 8388740
+    2642: _WebkitMediaTextTrackContainer = 8388741
+    2643: _WebkitMediaTextTrackDisplay = 8388742
+    2644: _WebkitMediaTextTrackDisplayBackdrop = 8388743
+    2645: _WebkitMediaTextTrackRegion = 8388744
+    2646: _WebkitMediaTextTrackRegionContainer = 8388745
+    2647: _WebkitMeterBar = 8388746
+    2648: _WebkitMeterEvenLessGoodValue = 8388747
+    2649: _WebkitMeterInnerElement = 8388748
+    2650: _WebkitMeterOptimumValue = 8388749
+    2651: _WebkitMeterSuboptimumValue = 8388750
+    2652: _WebkitMinContent = 8388751
+    2653: _WebkitMinDevicePixelRatio = 8388752
+    2654: _WebkitOrder = 8388753
+    2655: _WebkitOuterSpinButton = 8388754
+    2656: _WebkitOverflowScrolling = 8388755
+    2657: _WebkitPaddingAfter = 8388756
+    2658: _WebkitPaddingStart = 8388757
+    2659: _WebkitPasswordAutoFillButton = 8388758
+    2660: _WebkitPerspective = 8388759
+    2661: _WebkitPerspectiveOrigin = 8388760
+    2662: _WebkitPrintColorAdjust = 8388761
+    2663: _WebkitProgressBar = 8388762
+    2664: _WebkitProgressInnerElement = 8388763
+    2665: _WebkitProgressValue = 8388764
+    2666: _WebkitResizer = 8388765
+    2667: _WebkitScrollbar = 8388766
+    2668: _WebkitScrollbarButton = 8388767
+    2669: _WebkitScrollbarCorner = 8388768
+    2670: _WebkitScrollbarThumb = 8388769
+    2671: _WebkitScrollbarTrack = 8388770
+    2672: _WebkitScrollbarTrackPiece = 8388771
+    2673: _WebkitSearchCancelButton = 8388772
+    2674: _WebkitSearchDecoration = 8388773
+    2675: _WebkitSearchResultsButton = 8388774
+    2676: _WebkitSearchResultsDecoration = 8388775
+    2677: _WebkitSelection = 8388776
+    2678: _WebkitSliderContainer = 8388777
+    2679: _WebkitSliderRunnableTrack = 8388778
+    2680: _WebkitSliderThumb = 8388779
+    2681: _WebkitSticky = 8388780
+    2682: _WebkitStrongPasswordAutoFillButton = 8388781
+    2683: _WebkitTapHighlightColor = 8388782
+    2684: _WebkitTextDecoration = 8388783
+    2685: _WebkitTextDecorationColor = 8388784
+    2686: _WebkitTextDecorationSkip = 8388785
+    2687: _WebkitTextDecorationSkipInk = 8388786
+    2688: _WebkitTextDecorationStyle = 8388787
+    2689: _WebkitTextFillColor = 8388788
+    2690: _WebkitTextSizeAdjust = 8388789
+    2691: _WebkitTextStroke = 8388790
+    2692: _WebkitTextStrokeColor = 8388791
+    2693: _WebkitTextStrokeWidth = 8388792
+    2694: _WebkitTextfieldDecorationContainer = 8388793
+    2695: _WebkitTouchCallout = 8388794
+    2696: _WebkitTransform = 8388795
+    2697: _WebkitTransform2d = 8388796
+    2698: _WebkitTransform3d = 8388797
+    2699: _WebkitTransformOrigin = 8388798
+    2700: _WebkitTransformStyle = 8388799
+    2701: _WebkitTransition = 8388800
+    2702: _WebkitTransitionDelay = 8388801
+    2703: _WebkitTransitionDuration = 8388802
+    2704: _WebkitTransitionProperty = 8388803
+    2705: _WebkitTransitionTimingFunction = 8388804
+    2706: _WebkitUserDrag = 8388805
+    2707: _WebkitUserModify = 8388806
+    2708: _WebkitUserSelect = 8388807
+    2709: _WebkitValidationBubble = 8388808
+    2710: _WebkitValidationBubbleArrow = 8388809
+    2711: _WebkitValidationBubbleArrowClipper = 8388810
+    2712: _WebkitValidationBubbleBody = 8388811
+    2713: _WebkitValidationBubbleHeading = 8388812
+    2714: _WebkitValidationBubbleIcon = 8388813
+    2715: _WebkitValidationBubbleMessage = 8388814
+    2716: _WebkitValidationBubbleTextBlock = 8388815
+    2717: _WebkitVideoPlayableInline = 8388816
+    2718: _MozAnimation = 10485760
+    2719: _MozAnimationDelay = 10485761
+    2720: _MozAnimationDirection = 10485762
+    2721: _MozAnimationDuration = 10485763
+    2722: _MozAnimationFillMode = 10485764
+    2723: _MozAnimationIterationCount = 10485765
+    2724: _MozAnimationName = 10485766
+    2725: _MozAnimationPlayState = 10485767
+    2726: _MozAnimationTimingFunction = 10485768
+    2727: _MozAnonymousBlock = 10485769
+    2728: _MozAnonymousItem = 10485770
+    2729: _MozAnonymousPositionedBlock = 10485771
+    2730: _MozAny = 10485772
+    2731: _MozAnyLink = 10485773
+    2732: _MozAppearance = 10485774
+    2733: _MozAutofillPreview = 10485775
+    2734: _MozBackfaceVisibility = 10485776
+    2735: _MozBackgroundClip = 10485777
+    2736: _MozBackgroundSize = 10485778
+    2737: _MozBlockInsideInlineWrapper = 10485779
+    2738: _MozBlockRubyContent = 10485780
+    2739: _MozBorderImage = 10485781
+    2740: _MozBorderImageOutset = 10485782
+    2741: _MozBorderImageRepeat = 10485783
+    2742: _MozBorderImageSlice = 10485784
+    2743: _MozBorderImageSource = 10485785
+    2744: _MozBorderImageWidth = 10485786
+    2745: _MozBorderRadius = 10485787
+    2746: _MozBorderRadiusBottomleft = 10485788
+    2747: _MozBorderRadiusBottomright = 10485789
+    2748: _MozBorderRadiusTopleft = 10485790
+    2749: _MozBorderRadiusTopright = 10485791
+    2750: _MozBox = 10485792
+    2751: _MozBoxAlign = 10485793
+    2752: _MozBoxFlex = 10485794
+    2753: _MozBoxOrdinalGroup = 10485795
+    2754: _MozBoxShadow = 10485796
+    2755: _MozBoxSizing = 10485797
+    2756: _MozBroken = 10485798
+    2757: _MozButtonContent = 10485799
+    2758: _MozCanvas = 10485800
+    2759: _MozCellContent = 10485801
+    2760: _MozColorSwatch = 10485802
+    2761: _MozColumnBreakInside = 10485803
+    2762: _MozColumnContent = 10485804
+    2763: _MozColumnCount = 10485805
+    2764: _MozColumnFill = 10485806
+    2765: _MozColumnGap = 10485807
+    2766: _MozColumnRule = 10485808
+    2767: _MozColumnRuleColor = 10485809
+    2768: _MozColumnRuleStyle = 10485810
+    2769: _MozColumnRuleWidth = 10485811
+    2770: _MozColumnSet = 10485812
+    2771: _MozColumnSpan = 10485813
+    2772: _MozColumnSpanWrapper = 10485814
+    2773: _MozColumnWidth = 10485815
+    2774: _MozColumns = 10485816
+    2775: _MozContextProperties = 10485817
+    2776: _MozDeviceOrientation = 10485818
+    2777: _MozDevicePixelRatio = 10485819
+    2778: _MozDevtoolsHighlighted = 10485820
+    2779: _MozDirAttrLikeAuto = 10485821
+    2780: _MozDirAttrLtr = 10485822
+    2781: _MozDirAttrRtl = 10485823
+    2782: _MozDocument = 10485824
+    2783: _MozDragOver = 10485825
+    2784: _MozDropdownList = 10485826
+    2785: _MozFieldsetContent = 10485827
+    2786: _MozFileContent = 10485828
+    2787: _MozFilter = 10485829
+    2788: _MozFirstLetterContinuation = 10485830
+    2789: _MozFirstNode = 10485831
+    2790: _MozFlex = 10485832
+    2791: _MozFlexbox = 10485833
+    2792: _MozFocusInner = 10485834
+    2793: _MozFocusOuter = 10485835
+    2794: _MozFocusring = 10485836
+    2795: _MozFontFeatureSettings = 10485837
+    2796: _MozFramesetBlank = 10485838
+    2797: _MozFullScreen = 10485839
+    2798: _MozFullScreenAncestor = 10485840
+    2799: _MozHandlerBlocked = 10485841
+    2800: _MozHandlerCrashed = 10485842
+    2801: _MozHandlerDisabled = 10485843
+    2802: _MozHasDirAttr = 10485844
+    2803: _MozHframesetBorder = 10485845
+    2804: _MozHtmlCanvasContent = 10485846
+    2805: _MozHyphens = 10485847
+    2806: _MozImagesInMenus = 10485848
+    2807: _MozInlineBox = 10485849
+    2808: _MozInlineStack = 10485850
+    2809: _MozInlineTable = 10485851
+    2810: _MozInert = 10485852
+    2811: _MozIsHtml = 10485853
+    2812: _MozLastNode = 10485854
+    2813: _MozLineFrame = 10485855
+    2814: _MozListBullet = 10485856
+    2815: _MozListNumber = 10485857
+    2816: _MozLoading = 10485858
+    2817: _MozLocaleDir = 10485859
+    2818: _MozLwtheme = 10485860
+    2819: _MozLwthemeBrighttext = 10485861
+    2820: _MozLwthemeDarktext = 10485862
+    2821: _MozMacGraphiteTheme = 10485863
+    2822: _MozMaemoClassicTheme = 10485864
+    2823: _MozMathmlAnonymousBlock = 10485865
+    2824: _MozMathIncrementScriptLevel = 10485866
+    2825: _MozMaxContent = 10485867
+    2826: _MozMaxDevicePixelRatio = 10485868
+    2827: _MozMeterBar = 10485869
+    2828: _MozMeterOptimum = 10485870
+    2829: _MozMeterSubOptimum = 10485871
+    2830: _MozMeterSubSubOptimum = 10485872
+    2831: _MozMinContent = 10485873
+    2832: _MozMinDevicePixelRatio = 10485874
+    2833: _MozNativeAnonymous = 10485875
+    2834: _MozNumberSpinBox = 10485876
+    2835: _MozNumberSpinDown = 10485877
+    2836: _MozNumberSpinUp = 10485878
+    2837: _MozOnlyWhitespace = 10485879
+    2838: _MozOofPlaceholder = 10485880
+    2839: _MozOsVersion = 10485881
+    2840: _MozOsxFontSmoothing = 10485882
+    2841: _MozPage = 10485883
+    2842: _MozPageBreak = 10485884
+    2843: _MozPageContent = 10485885
+    2844: _MozPageSequence = 10485886
+    2845: _MozPagebreak = 10485887
+    2846: _MozPagecontent = 10485888
+    2847: _MozPerspective = 10485889
+    2848: _MozPerspectiveOrigin = 10485890
+    2849: _MozPlaceholder = 10485891
+    2850: _MozPlaceholderShown = 10485892
+    2851: _MozPrintedSheet = 10485893
+    2852: _MozProgressBar = 10485894
+    2853: _MozRangeProgress = 10485895
+    2854: _MozRangeThumb = 10485896
+    2855: _MozRangeTrack = 10485897
+    2856: _MozReadOnly = 10485898
+    2857: _MozReadWrite = 10485899
+    2858: _MozReveal = 10485900
+    2859: _MozRevealed = 10485901
+    2860: _MozRuby = 10485902
+    2861: _MozRubyBase = 10485903
+    2862: _MozRubyBaseContainer = 10485904
+    2863: _MozRubyText = 10485905
+    2864: _MozRubyTextContainer = 10485906
+    2865: _MozScrolledCanvas = 10485907
+    2866: _MozScrolledContent = 10485908
+    2867: _MozScrolledPageSequence = 10485909
+    2868: _MozSearchClearButton = 10485910
+    2869: _MozSelectContent = 10485911
+    2870: _MozSelectListBox = 10485912
+    2871: _MozSelection = 10485913
+    2872: _MozSnapshotContainingBlock = 10485914
+    2873: _MozSubmitInvalid = 10485915
+    2874: _MozStyleeditorTransitioning = 10485916
+    2875: _MozSuppressed = 10485917
+    2876: _MozSuppressForPrintSelection = 10485918
+    2877: _MozSvgForeignContent = 10485919
+    2878: _MozSvgMarkerAnonChild = 10485920
+    2879: _MozSvgOuterSvgAnonChild = 10485921
+    2880: _MozSvgText = 10485922
+    2881: _MozTabSize = 10485923
+    2882: _MozTable = 10485924
+    2883: _MozTableBorderNonzero = 10485925
+    2884: _MozTableCell = 10485926
+    2885: _MozTableColumn = 10485927
+    2886: _MozTableColumnGroup = 10485928
+    2887: _MozTableOuter = 10485929
+    2888: _MozTableRow = 10485930
+    2889: _MozTableRowGroup = 10485931
+    2890: _MozTableWrapper = 10485932
+    2891: _MozTextControlEditingRoot = 10485933
+    2892: _MozTextControlPreview = 10485934
+    2893: _MozText = 10485935
+    2894: _MozTouchEnabled = 10485936
+    2895: _MozTextSizeAdjust = 10485937
+    2896: _MozTopmostModal = 10485938
+    2897: _MozTransform = 10485939
+    2898: _MozTransformOrigin = 10485940
+    2899: _MozTransformStyle = 10485941
+    2900: _MozTransition = 10485942
+    2901: _MozTransitionDelay = 10485943
+    2902: _MozTransitionDuration = 10485944
+    2903: _MozTransitionProperty = 10485945
+    2904: _MozTransitionTimingFunction = 10485946
+    2905: _MozTreeCell = 10485947
+    2906: _MozTreeCellText = 10485948
+    2907: _MozTreeCheckbox = 10485949
+    2908: _MozTreeColumn = 10485950
+    2909: _MozTreeDropFeedback = 10485951
+    2910: _MozTreeImage = 10485952
+    2911: _MozTreeIndentation = 10485953
+    2912: _MozTreeLine = 10485954
+    2913: _MozTreeRow = 10485955
+    2914: _MozTreeSeparator = 10485956
+    2915: _MozTreeTwisty = 10485957
+    2916: _MozUiInvalid = 10485958
+    2917: _MozUiValid = 10485959
+    2918: _MozUserDisabled = 10485960
+    2919: _MozUserModify = 10485961
+    2920: _MozUserSelect = 10485962
+    2921: _MozVframesetBorder = 10485963
+    2922: _MozViewport = 10485964
+    2923: _MozViewportScroll = 10485965
+    2924: _MozValueEmpty = 10485966
+    2925: _MozWindowInactive = 10485967
+    2926: _MozWindowShadow = 10485968
+    2927: _MsAutohidingScrollbar = 12582912
+    2928: _MsBackdrop = 12582913
+    2929: _MsBoxSizing = 12582914
+    2930: _MsBrowse = 12582915
+    2931: _MsCheck = 12582916
+    2932: _MsClear = 12582917
+    2933: _MsColumnCount = 12582918
+    2934: _MsDevicePixelRatio = 12582919
+    2935: _MsExpand = 12582920
+    2936: _MsFill = 12582921
+    2937: _MsFillLower = 12582922
+    2938: _MsFillUpper = 12582923
+    2939: _MsFilter = 12582924
+    2940: _MsFlex = 12582925
+    2941: _MsFlexAlign = 12582926
+    2942: _MsFlexDirection = 12582927
+    2943: _MsFlexFlow = 12582928
+    2944: _MsFlexItemAlign = 12582929
+    2945: _MsFlexLinePack = 12582930
+    2946: _MsFlexNegative = 12582931
+    2947: _MsFlexOrder = 12582932
+    2948: _MsFlexPack = 12582933
+    2949: _MsFlexPositive = 12582934
+    2950: _MsFlexPreferredSize = 12582935
+    2951: _MsFlexWrap = 12582936
+    2952: _MsFlexbox = 12582937
+    2953: _MsFullscreen = 12582938
+    2954: _MsGrid = 12582939
+    2955: _MsHighContrast = 12582940
+    2956: _MsInterpolationMode = 12582941
+    2957: _MsImeAlign = 12582942
+    2958: _MsInlineFlex = 12582943
+    2959: _MsInlineFlexbox = 12582944
+    2960: _MsInputPlaceholder = 12582945
+    2961: _MsMaxColumnCount = 12582946
+    2962: _MsMaxDevicepixelRatio = 12582947
+    2963: _MsMinColumnCount = 12582948
+    2964: _MsMinDevicePixelRatio = 12582949
+    2965: _MsOverflowStyle = 12582950
+    2966: _MsPlaceholder = 12582951
+    2967: _MsReveal = 12582952
+    2968: _MsSelection = 12582953
+    2969: _MsTextSizeAdjust = 12582954
+    2970: _MsThumb = 12582955
+    2971: _MsTicksAfter = 12582956
+    2972: _MsTicksBefore = 12582957
+    2973: _MsTooltip = 12582958
+    2974: _MsTouchAction = 12582959
+    2975: _MsTrack = 12582960
+    2976: _MsTransform = 12582961
+    2977: _MsTransformOrigin = 12582962
+    2978: _MsTransition = 12582963
+    2979: _MsUserSelect = 12582964
+    2980: _MsValue = 12582965
+    2981: _MsViewState = 12582966
+    2982: _MsWordBreak = 12582967
+    2983: _OBoxSizing = 14680064
+    2984: _ODevicePixelRatio = 14680065
+    2985: _OFilter = 14680066
+    2986: _OFlex = 14680067
+    2987: _OInnerSpinButton = 14680068
+    2988: _OMaxDevicePixelRatio = 14680069
+    2989: _OMinDevicePixelRatio = 14680070
+    2990: _OObjectFit = 14680071
+    2991: _OOuterSpinButton = 14680072
+    2992: _OPlaceholder = 14680073
+    2993: _OPrefocus = 14680074
+    2994: _OScrollbar = 14680075
+    2995: _OScrollbarThumb = 14680076
+    2996: _OScrollbarTrack = 14680077
+    2997: _OScrollbarTrackPiece = 14680078
+    2998: _OSelection = 14680079
 CubicBezierFunction: size=176 align=8 {
     name: 0
     params: 16
@@ -7042,6 +7102,33 @@ MoveCommand: size=168 align=8 {
     keyword: 0
     point: 16
 }
+MozAnimationDelayStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationDirectionStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationDurationStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationFillModeStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationIterationCountStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationNameStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationPlayStateStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationStyleValue: size=24 align=8 {
+    0: 0
+}
+MozAnimationTimingFunctionStyleValue: size=24 align=8 {
+    0: 0
+}
 MozAppearanceStyleValue: size=32 align=8
     0: None
     1: Auto
@@ -7049,16 +7136,108 @@ MozAppearanceStyleValue: size=32 align=8
     3: BaseSelect
     4: CompatAuto
     5: CompatSpecial
+MozBackfaceVisibilityStyleValue: size=32 align=8 {
+    0: 0
+}
+MozBackgroundClipStyleValue: size=24 align=8 {
+    0: 0
+}
+MozBackgroundClipStyleValueKeywords: size=32 align=8
+    0: Border
+    1: Padding
+    2: Content
+    3: BorderBox
+    4: PaddingBox
+    5: ContentBox
+    6: Text
+MozBackgroundSizeStyleValue: size=24 align=8 {
+    0: 0
+}
+MozBorderImageOutsetStyleValue: size=128 align=8 {
+    0: 0
+}
+MozBorderImageRepeatStyleValue: size=64 align=8 {
+    0: 0
+}
+MozBorderImageSliceStyleValue: size=120 align=8 {
+    0: 0
+}
+MozBorderImageSourceStyleValue: size=64 align=8 {
+    0: 0
+}
+MozBorderImageStyleValue: size=568 align=8 {
+    0: 0
+}
+MozBorderImageWidthStyleValue: size=160 align=8 {
+    0: 0
+}
+MozBorderRadiusBottomleftStyleValue: size=88 align=8 {
+    0: 0
+}
+MozBorderRadiusBottomrightStyleValue: size=88 align=8 {
+    0: 0
+}
+MozBorderRadiusStyleValue: size=272 align=8 {
+    0: 0
+}
+MozBorderRadiusTopleftStyleValue: size=88 align=8 {
+    0: 0
+}
+MozBorderRadiusToprightStyleValue: size=88 align=8 {
+    0: 0
+}
+MozBoxAlignStyleValue: size=32 align=8 {
+    0: 0
+}
+MozBoxFlexStyleValue: size=24 align=8 {
+    0: 0
+}
+MozBoxOrdinalGroupStyleValue: size=24 align=8 {
+    0: 0
+}
+MozBoxShadowStyleValue: size=24 align=8 {
+    0: 0
+}
 MozBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
+MozColumnBreakInsideStyleValue: size=32 align=8
+    0: Auto
+    1: Avoid
 MozColumnCountStyleValue: size=32 align=8 {
+    0: 0
+}
+MozColumnFillStyleValue: size=32 align=8 {
     0: 0
 }
 MozColumnGapStyleValue: size=48 align=8
     0: Normal
     1: LengthPercentage
     2: LineWidth
+MozColumnRuleColorStyleValue: size=40 align=8 {
+    0: 0
+}
+MozColumnRuleStyleStyleValue: size=40 align=8 {
+    0: 0
+}
+MozColumnRuleStyleValue: size=32 align=8 {
+    0: 0
+}
+MozColumnRuleWidthStyleValue: size=40 align=8 {
+    0: 0
+}
+MozColumnSpanStyleValue: size=32 align=8 {
+    0: 0
+}
+MozColumnWidthStyleValue: size=32 align=8 {
+    0: 0
+}
+MozColumnsStyleValue: size=112 align=8 {
+    0: 0
+}
+MozContextPropertiesStyleValue: size=32 align=8 {
+    0: 0
+}
 MozDeviceOrientationMediaFeature: size=68 align=4
     0: WithValue
     1: Bare
@@ -7078,6 +7257,9 @@ MozDocumentRule: size=160 align=16 {
     block: 48
 }
 MozFilterStyleValue: size=40 align=8 {
+    0: 0
+}
+MozFontFeatureSettingsStyleValue: size=32 align=8 {
     0: 0
 }
 MozFunctionalPseudoClass: size=60 align=4
@@ -7106,6 +7288,9 @@ MozFunctionalPseudoElementKeyword: size=16 align=4
     8: TreeRow
     9: TreeSeparator
     10: TreeTwisty
+MozHyphensStyleValue: size=32 align=8 {
+    0: 0
+}
 MozImagesInMenusMediaFeature: size=64 align=4
     0: WithValue
     1: Bare
@@ -7133,6 +7318,12 @@ MozOsVersionMediaFeatureKeyword: size=16 align=4
 MozOsxFontSmoothingStyleValue: size=32 align=8
     0: Auto
     1: Grayscale
+MozPerspectiveOriginStyleValue: size=120 align=8 {
+    0: 0
+}
+MozPerspectiveStyleValue: size=32 align=8 {
+    0: 0
+}
 MozPseudoClass: size=28 align=4
     0: Any
     1: AnyLink
@@ -7259,17 +7450,54 @@ MozPseudoElement: size=40 align=4
     74: VframesetBorder
     75: Viewport
     76: ViewportScroll
+MozTabSizeStyleValue: size=32 align=8 {
+    0: 0
+}
+MozTextSizeAdjustStyleValue: size=32 align=8 {
+    0: 0
+}
 MozTouchEnabledMediaFeature: size=64 align=4
     0: WithValue
     1: Bare
+MozTransformOriginStyleValue: size=128 align=8 {
+    0: 0
+}
+MozTransformStyleStyleValue: size=32 align=8 {
+    0: 0
+}
+MozTransformStyleValue: size=40 align=8 {
+    0: 0
+}
+MozTransitionDelayStyleValue: size=24 align=8 {
+    0: 0
+}
+MozTransitionDurationStyleValue: size=24 align=8 {
+    0: 0
+}
+MozTransitionPropertyStyleValue: size=32 align=8 {
+    0: 0
+}
 MozTransitionStyleValue: size=24 align=8 {
     0: 0
 }
+MozTransitionTimingFunctionStyleValue: size=24 align=8 {
+    0: 0
+}
+MozUserModifyStyleValue: size=32 align=8
+    0: ReadOnly
+    1: ReadWrite
+    2: WriteOnly
 MozUserSelectStyleValue: size=32 align=8
     0: Auto
     1: Text
     2: None
     3: All
+MozWindowShadowStyleValue: size=32 align=8
+    0: Default
+    1: Menu
+    2: Tooltip
+    3: Sheet
+    4: None
 MsBoxSizingStyleValue: size=32 align=8
     0: ContentBox
     1: BorderBox
@@ -10294,455 +10522,507 @@ StyleValue: size=40 align=8
     437: MinSize
     438: MinWidth
     439: MixBlendMode
-    440: _MozAppearance
-    441: _MozBoxSizing
-    442: _MozColumnCount
-    443: _MozColumnGap
-    444: _MozFilter
-    445: _MozOsxFontSmoothing
-    446: _MozTransition
-    447: _MozUserSelect
-    448: _MsBoxSizing
-    449: _MsFilter
-    450: _MsFlexAlign
-    451: _MsFlexDirection
-    452: _MsFlexFlow
-    453: _MsFlexItemAlign
-    454: _MsFlexLinePack
-    455: _MsFlexNegative
-    456: _MsFlexOrder
-    457: _MsFlexPack
-    458: _MsFlexPositive
-    459: _MsFlexPreferredSize
-    460: _MsFlex
-    461: _MsFlexWrap
-    462: _MsInterpolationMode
-    463: _MsOverflowStyle
-    464: _MsTextSizeAdjust
-    465: _MsTouchAction
-    466: _MsTransformOrigin
-    467: _MsTransform
-    468: _MsTransition
-    469: _MsUserSelect
-    470: _MsWordBreak
-    471: NavDown
-    472: NavLeft
-    473: NavRight
-    474: NavUp
-    475: Negative
-    476: _OBoxSizing
-    477: _OFilter
-    478: _OObjectFit
-    479: ObjectFit
-    480: ObjectPosition
-    481: ObjectViewBox
-    482: OffsetAnchor
-    483: OffsetDistance
-    484: OffsetPath
-    485: OffsetPosition
-    486: OffsetRotate
-    487: Offset
-    488: Opacity
-    489: Order
-    490: Orphans
-    491: OutlineColor
-    492: OutlineOffset
-    493: OutlineStyle
-    494: Outline
-    495: OutlineWidth
-    496: OverflowAnchor
-    497: OverflowBlock
-    498: OverflowClipMarginBlockEnd
-    499: OverflowClipMarginBlockStart
-    500: OverflowClipMarginBlock
-    501: OverflowClipMarginBottom
-    502: OverflowClipMarginInlineEnd
-    503: OverflowClipMarginInlineStart
-    504: OverflowClipMarginInline
-    505: OverflowClipMarginLeft
-    506: OverflowClipMarginRight
-    507: OverflowClipMargin
-    508: OverflowClipMarginTop
-    509: OverflowInline
-    510: Overflow
-    511: OverflowWrap
-    512: OverflowX
-    513: OverflowY
-    514: Overlay
-    515: OverscrollBehaviorBlock
-    516: OverscrollBehaviorInline
-    517: OverscrollBehavior
-    518: OverscrollBehaviorX
-    519: OverscrollBehaviorY
-    520: OverscrollContainerType
-    521: Pad
-    522: PaddingBlockEnd
-    523: PaddingBlockStart
-    524: PaddingBlock
-    525: PaddingBottom
-    526: PaddingInlineEnd
-    527: PaddingInlineStart
-    528: PaddingInline
-    529: PaddingLeft
-    530: PaddingRight
-    531: Padding
-    532: PaddingTop
-    533: Page
-    534: PaintOrder
-    535: PauseAfter
-    536: PauseBefore
-    537: Pause
-    538: PerspectiveOrigin
-    539: Perspective
-    540: PlaceContent
-    541: PlaceItems
-    542: PlaceSelf
-    543: PointerEvents
-    544: PointerTimelineAxis
-    545: PointerTimelineName
-    546: PointerTimeline
-    547: PositionAnchor
-    548: PositionArea
-    549: Position
-    550: PositionTryFallbacks
-    551: PositionTryOrder
-    552: PositionTry
-    553: PositionVisibility
-    554: Prefix
-    555: PrintColorAdjust
-    556: Quotes
-    557: Range
-    558: ReadingFlow
-    559: ReadingOrder
-    560: RegionFragment
-    561: Resize
-    562: RestAfter
-    563: RestBefore
-    564: Rest
-    565: Right
-    566: Rotate
-    567: RowGap
-    568: RowRuleBreak
-    569: RowRuleColor
-    570: RowRuleInsetCapEnd
-    571: RowRuleInsetCapStart
-    572: RowRuleInsetCap
-    573: RowRuleInsetEnd
-    574: RowRuleInsetJunctionEnd
-    575: RowRuleInsetJunctionStart
-    576: RowRuleInsetJunction
-    577: RowRuleInsetStart
-    578: RowRuleInset
-    579: RowRuleStyle
-    580: RowRule
-    581: RowRuleVisibilityItems
-    582: RowRuleWidth
-    583: RubyAlign
-    584: RubyMerge
-    585: RubyOverhang
-    586: RubyPosition
-    587: RuleBreak
-    588: RuleColor
-    589: RuleInsetCap
-    590: RuleInsetEnd
-    591: RuleInsetJunction
-    592: RuleInsetStart
-    593: RuleInset
-    594: RuleOverlap
-    595: RuleStyle
-    596: Rule
-    597: RuleVisibilityItems
-    598: RuleWidth
-    599: Running
-    600: Scale
-    601: ScrollAxisLock
-    602: ScrollBehavior
-    603: ScrollInitialTarget
-    604: ScrollMarginBlockEnd
-    605: ScrollMarginBlockStart
-    606: ScrollMarginBlock
-    607: ScrollMarginBottom
-    608: ScrollMarginInlineEnd
-    609: ScrollMarginInlineStart
-    610: ScrollMarginInline
-    611: ScrollMarginLeft
-    612: ScrollMarginRight
-    613: ScrollMargin
-    614: ScrollMarginTop
-    615: ScrollMarkerGroup
-    616: ScrollPaddingBlockEnd
-    617: ScrollPaddingBlockStart
-    618: ScrollPaddingBlock
-    619: ScrollPaddingBottom
-    620: ScrollPaddingInlineEnd
-    621: ScrollPaddingInlineStart
-    622: ScrollPaddingInline
-    623: ScrollPaddingLeft
-    624: ScrollPaddingRight
-    625: ScrollPadding
-    626: ScrollPaddingTop
-    627: ScrollSnapAlign
-    628: ScrollSnapStop
-    629: ScrollSnapType
-    630: ScrollTargetGroup
-    631: ScrollTimelineAxis
-    632: ScrollTimelineName
-    633: ScrollTimeline
-    634: ScrollbarColor
-    635: ScrollbarGutter
-    636: ScrollbarWidth
-    637: ShapeImageThreshold
-    638: ShapeInside
-    639: ShapeMargin
-    640: ShapeOutside
-    641: ShapePadding
-    642: ShapeRendering
-    643: Size
-    644: SliderOrientation
-    645: SpatialNavigationAction
-    646: SpatialNavigationContain
-    647: SpatialNavigationFunction
-    648: SpeakAs
-    649: Speak
-    650: StringSet
-    651: StrokeAlign
-    652: StrokeBreak
-    653: StrokeColor
-    654: StrokeDashCorner
-    655: StrokeDashJustify
-    656: StrokeDasharray
-    657: StrokeDashoffset
-    658: StrokeImage
-    659: StrokeLinecap
-    660: StrokeLinejoin
-    661: StrokeMiterlimit
-    662: StrokeOpacity
-    663: StrokeOrigin
-    664: StrokePosition
-    665: StrokeRepeat
-    666: StrokeSize
-    667: Stroke
-    668: StrokeWidth
-    669: Suffix
-    670: Symbols
-    671: System
-    672: TabSize
-    673: TableLayout
-    674: TextAlignAll
-    675: TextAlignLast
-    676: TextAlign
-    677: TextAutospace
-    678: TextBoxEdge
-    679: TextBox
-    680: TextBoxTrim
-    681: TextCombineUpright
-    682: TextDecorationColor
-    683: TextDecorationInset
-    684: TextDecorationLine
-    685: TextDecorationSkipBox
-    686: TextDecorationSkipInk
-    687: TextDecorationSkipSelf
-    688: TextDecorationSkipSpaces
-    689: TextDecorationSkip
-    690: TextDecorationStyle
-    691: TextDecoration
-    692: TextDecorationThickness
-    693: TextEmphasisColor
-    694: TextEmphasisPosition
-    695: TextEmphasisSkip
-    696: TextEmphasisStyle
-    697: TextEmphasis
-    698: TextFit
-    699: TextGroupAlign
-    700: TextIndent
-    701: TextJustify
-    702: TextOrientation
-    703: TextOverflow
-    704: TextRendering
-    705: TextShadow
-    706: TextSizeAdjust
-    707: TextSpacing
-    708: TextSpacingTrim
-    709: TextTransform
-    710: TextUnderlineOffset
-    711: TextUnderlinePosition
-    712: TextWrapMode
-    713: TextWrapStyle
-    714: TextWrap
-    715: TimelineScope
-    716: TimelineTriggerActivationRangeEnd
-    717: TimelineTriggerActivationRangeStart
-    718: TimelineTriggerActivationRange
-    719: TimelineTriggerActiveRangeEnd
-    720: TimelineTriggerActiveRangeStart
-    721: TimelineTriggerActiveRange
-    722: TimelineTriggerName
-    723: TimelineTriggerRange
-    724: TimelineTriggerSource
-    725: TimelineTrigger
-    726: Top
-    727: TouchAction
-    728: TransformBox
-    729: TransformOrigin
-    730: TransformStyle
-    731: Transform
-    732: TransitionBehavior
-    733: TransitionDelay
-    734: TransitionDuration
-    735: TransitionProperty
-    736: Transition
-    737: TransitionTimingFunction
-    738: Translate
-    739: TriggerScope
-    740: UnicodeBidi
-    741: UserSelect
-    742: VerticalAlign
-    743: ViewTimelineAxis
-    744: ViewTimelineInset
-    745: ViewTimelineName
-    746: ViewTimeline
-    747: ViewTransitionClass
-    748: ViewTransitionGroup
-    749: ViewTransitionName
-    750: ViewTransitionScope
-    751: Visibility
-    752: VoiceBalance
-    753: VoiceDuration
-    754: VoiceFamily
-    755: VoicePitch
-    756: VoiceRange
-    757: VoiceRate
-    758: VoiceStress
-    759: VoiceVolume
-    760: _WebkitAlignContent
-    761: _WebkitAlignItems
-    762: _WebkitAlignSelf
-    763: _WebkitAnimationDelay
-    764: _WebkitAnimationDirection
-    765: _WebkitAnimationDuration
-    766: _WebkitAnimationFillMode
-    767: _WebkitAnimationIterationCount
-    768: _WebkitAnimationName
-    769: _WebkitAnimationPlayState
-    770: _WebkitAnimation
-    771: _WebkitAnimationTimingFunction
-    772: _WebkitAppRegion
-    773: _WebkitAppearance
-    774: _WebkitBackdropFilter
-    775: _WebkitBackfaceVisibility
-    776: _WebkitBackgroundClip
-    777: _WebkitBackgroundOrigin
-    778: _WebkitBackgroundSize
-    779: _WebkitBorderBottomLeftRadius
-    780: _WebkitBorderBottomRightRadius
-    781: _WebkitBorderHorizontalSpacing
-    782: _WebkitBorderImageOutset
-    783: _WebkitBorderImageRepeat
-    784: _WebkitBorderImageSlice
-    785: _WebkitBorderImageSource
-    786: _WebkitBorderImage
-    787: _WebkitBorderImageWidth
-    788: _WebkitBorderRadius
-    789: _WebkitBorderTopLeftRadius
-    790: _WebkitBorderTopRightRadius
-    791: _WebkitBorderVerticalSpacing
-    792: _WebkitBoxAlign
-    793: _WebkitBoxDecorationBreak
-    794: _WebkitBoxDirection
-    795: _WebkitBoxFlex
-    796: _WebkitBoxOrdinalGroup
-    797: _WebkitBoxOrient
-    798: _WebkitBoxPack
-    799: _WebkitBoxReflect
-    800: _WebkitBoxShadow
-    801: _WebkitBoxSizing
-    802: _WebkitClipPath
-    803: _WebkitColumnBreakInside
-    804: _WebkitColumnCount
-    805: _WebkitColumnGap
-    806: _WebkitColumnRuleColor
-    807: _WebkitColumnRuleStyle
-    808: _WebkitColumnRule
-    809: _WebkitColumnRuleWidth
-    810: _WebkitColumnSpan
-    811: _WebkitColumnWidth
-    812: _WebkitColumns
-    813: _WebkitFilter
-    814: _WebkitFlexBasis
-    815: _WebkitFlexDirection
-    816: _WebkitFlexFlow
-    817: _WebkitFlexGrow
-    818: _WebkitFlexShrink
-    819: _WebkitFlex
-    820: _WebkitFlexWrap
-    821: _WebkitFontFeatureSettings
-    822: _WebkitFontSmoothing
-    823: _WebkitFontVariantLigatures
-    824: _WebkitHyphens
-    825: _WebkitJustifyContent
-    826: _WebkitLineBreak
-    827: _WebkitLineClamp
-    828: _WebkitMarginEnd
-    829: _WebkitMarginStart
-    830: _WebkitMarginTopCollapse
-    831: _WebkitMaskAttachment
-    832: _WebkitMaskClip
-    833: _WebkitMaskComposite
-    834: _WebkitMaskImage
-    835: _WebkitMaskOrigin
-    836: _WebkitMaskPosition
-    837: _WebkitMaskRepeat
-    838: _WebkitMaskSize
-    839: _WebkitMask
-    840: _WebkitOrder
-    841: _WebkitOverflowScrolling
-    842: _WebkitPaddingAfter
-    843: _WebkitPaddingStart
-    844: _WebkitPerspectiveOrigin
-    845: _WebkitPerspective
-    846: _WebkitPrintColorAdjust
-    847: _WebkitTapHighlightColor
-    848: _WebkitTextDecorationColor
-    849: _WebkitTextDecorationSkipInk
-    850: _WebkitTextDecorationSkip
-    851: _WebkitTextDecorationStyle
-    852: _WebkitTextDecoration
-    853: _WebkitTextFillColor
-    854: _WebkitTextSizeAdjust
-    855: _WebkitTextStrokeColor
-    856: _WebkitTextStroke
-    857: _WebkitTextStrokeWidth
-    858: _WebkitTouchCallout
-    859: _WebkitTransformOrigin
-    860: _WebkitTransformStyle
-    861: _WebkitTransform
-    862: _WebkitTransitionDelay
-    863: _WebkitTransitionDuration
-    864: _WebkitTransitionProperty
-    865: _WebkitTransition
-    866: _WebkitTransitionTimingFunction
-    867: _WebkitUserDrag
-    868: _WebkitUserModify
-    869: _WebkitUserSelect
-    870: WhiteSpaceCollapse
-    871: WhiteSpace
-    872: WhiteSpaceTrim
-    873: Widows
-    874: Width
-    875: WillChange
-    876: WindowDrag
-    877: WordBreak
-    878: WordSpaceTransform
-    879: WordSpacing
-    880: WordWrap
-    881: WrapAfter
-    882: WrapBefore
-    883: WrapFlow
-    884: WrapInside
-    885: WrapThrough
-    886: WritingMode
-    887: ZIndex
-    888: Zoom
+    440: _MozAnimationDelay
+    441: _MozAnimationDirection
+    442: _MozAnimationDuration
+    443: _MozAnimationFillMode
+    444: _MozAnimationIterationCount
+    445: _MozAnimationName
+    446: _MozAnimationPlayState
+    447: _MozAnimation
+    448: _MozAnimationTimingFunction
+    449: _MozAppearance
+    450: _MozBackfaceVisibility
+    451: _MozBackgroundClip
+    452: _MozBackgroundSize
+    453: _MozBorderImageOutset
+    454: _MozBorderImageRepeat
+    455: _MozBorderImageSlice
+    456: _MozBorderImageSource
+    457: _MozBorderImage
+    458: _MozBorderImageWidth
+    459: _MozBorderRadiusBottomleft
+    460: _MozBorderRadiusBottomright
+    461: _MozBorderRadius
+    462: _MozBorderRadiusTopleft
+    463: _MozBorderRadiusTopright
+    464: _MozBoxAlign
+    465: _MozBoxFlex
+    466: _MozBoxOrdinalGroup
+    467: _MozBoxShadow
+    468: _MozBoxSizing
+    469: _MozColumnBreakInside
+    470: _MozColumnCount
+    471: _MozColumnFill
+    472: _MozColumnGap
+    473: _MozColumnRuleColor
+    474: _MozColumnRuleStyle
+    475: _MozColumnRule
+    476: _MozColumnRuleWidth
+    477: _MozColumnSpan
+    478: _MozColumnWidth
+    479: _MozColumns
+    480: _MozContextProperties
+    481: _MozFilter
+    482: _MozFontFeatureSettings
+    483: _MozHyphens
+    484: _MozOsxFontSmoothing
+    485: _MozPerspectiveOrigin
+    486: _MozPerspective
+    487: _MozTabSize
+    488: _MozTextSizeAdjust
+    489: _MozTransformOrigin
+    490: _MozTransformStyle
+    491: _MozTransform
+    492: _MozTransitionDelay
+    493: _MozTransitionDuration
+    494: _MozTransitionProperty
+    495: _MozTransition
+    496: _MozTransitionTimingFunction
+    497: _MozUserModify
+    498: _MozUserSelect
+    499: _MozWindowShadow
+    500: _MsBoxSizing
+    501: _MsFilter
+    502: _MsFlexAlign
+    503: _MsFlexDirection
+    504: _MsFlexFlow
+    505: _MsFlexItemAlign
+    506: _MsFlexLinePack
+    507: _MsFlexNegative
+    508: _MsFlexOrder
+    509: _MsFlexPack
+    510: _MsFlexPositive
+    511: _MsFlexPreferredSize
+    512: _MsFlex
+    513: _MsFlexWrap
+    514: _MsInterpolationMode
+    515: _MsOverflowStyle
+    516: _MsTextSizeAdjust
+    517: _MsTouchAction
+    518: _MsTransformOrigin
+    519: _MsTransform
+    520: _MsTransition
+    521: _MsUserSelect
+    522: _MsWordBreak
+    523: NavDown
+    524: NavLeft
+    525: NavRight
+    526: NavUp
+    527: Negative
+    528: _OBoxSizing
+    529: _OFilter
+    530: _OObjectFit
+    531: ObjectFit
+    532: ObjectPosition
+    533: ObjectViewBox
+    534: OffsetAnchor
+    535: OffsetDistance
+    536: OffsetPath
+    537: OffsetPosition
+    538: OffsetRotate
+    539: Offset
+    540: Opacity
+    541: Order
+    542: Orphans
+    543: OutlineColor
+    544: OutlineOffset
+    545: OutlineStyle
+    546: Outline
+    547: OutlineWidth
+    548: OverflowAnchor
+    549: OverflowBlock
+    550: OverflowClipMarginBlockEnd
+    551: OverflowClipMarginBlockStart
+    552: OverflowClipMarginBlock
+    553: OverflowClipMarginBottom
+    554: OverflowClipMarginInlineEnd
+    555: OverflowClipMarginInlineStart
+    556: OverflowClipMarginInline
+    557: OverflowClipMarginLeft
+    558: OverflowClipMarginRight
+    559: OverflowClipMargin
+    560: OverflowClipMarginTop
+    561: OverflowInline
+    562: Overflow
+    563: OverflowWrap
+    564: OverflowX
+    565: OverflowY
+    566: Overlay
+    567: OverscrollBehaviorBlock
+    568: OverscrollBehaviorInline
+    569: OverscrollBehavior
+    570: OverscrollBehaviorX
+    571: OverscrollBehaviorY
+    572: OverscrollContainerType
+    573: Pad
+    574: PaddingBlockEnd
+    575: PaddingBlockStart
+    576: PaddingBlock
+    577: PaddingBottom
+    578: PaddingInlineEnd
+    579: PaddingInlineStart
+    580: PaddingInline
+    581: PaddingLeft
+    582: PaddingRight
+    583: Padding
+    584: PaddingTop
+    585: Page
+    586: PaintOrder
+    587: PauseAfter
+    588: PauseBefore
+    589: Pause
+    590: PerspectiveOrigin
+    591: Perspective
+    592: PlaceContent
+    593: PlaceItems
+    594: PlaceSelf
+    595: PointerEvents
+    596: PointerTimelineAxis
+    597: PointerTimelineName
+    598: PointerTimeline
+    599: PositionAnchor
+    600: PositionArea
+    601: Position
+    602: PositionTryFallbacks
+    603: PositionTryOrder
+    604: PositionTry
+    605: PositionVisibility
+    606: Prefix
+    607: PrintColorAdjust
+    608: Quotes
+    609: Range
+    610: ReadingFlow
+    611: ReadingOrder
+    612: RegionFragment
+    613: Resize
+    614: RestAfter
+    615: RestBefore
+    616: Rest
+    617: Right
+    618: Rotate
+    619: RowGap
+    620: RowRuleBreak
+    621: RowRuleColor
+    622: RowRuleInsetCapEnd
+    623: RowRuleInsetCapStart
+    624: RowRuleInsetCap
+    625: RowRuleInsetEnd
+    626: RowRuleInsetJunctionEnd
+    627: RowRuleInsetJunctionStart
+    628: RowRuleInsetJunction
+    629: RowRuleInsetStart
+    630: RowRuleInset
+    631: RowRuleStyle
+    632: RowRule
+    633: RowRuleVisibilityItems
+    634: RowRuleWidth
+    635: RubyAlign
+    636: RubyMerge
+    637: RubyOverhang
+    638: RubyPosition
+    639: RuleBreak
+    640: RuleColor
+    641: RuleInsetCap
+    642: RuleInsetEnd
+    643: RuleInsetJunction
+    644: RuleInsetStart
+    645: RuleInset
+    646: RuleOverlap
+    647: RuleStyle
+    648: Rule
+    649: RuleVisibilityItems
+    650: RuleWidth
+    651: Running
+    652: Scale
+    653: ScrollAxisLock
+    654: ScrollBehavior
+    655: ScrollInitialTarget
+    656: ScrollMarginBlockEnd
+    657: ScrollMarginBlockStart
+    658: ScrollMarginBlock
+    659: ScrollMarginBottom
+    660: ScrollMarginInlineEnd
+    661: ScrollMarginInlineStart
+    662: ScrollMarginInline
+    663: ScrollMarginLeft
+    664: ScrollMarginRight
+    665: ScrollMargin
+    666: ScrollMarginTop
+    667: ScrollMarkerGroup
+    668: ScrollPaddingBlockEnd
+    669: ScrollPaddingBlockStart
+    670: ScrollPaddingBlock
+    671: ScrollPaddingBottom
+    672: ScrollPaddingInlineEnd
+    673: ScrollPaddingInlineStart
+    674: ScrollPaddingInline
+    675: ScrollPaddingLeft
+    676: ScrollPaddingRight
+    677: ScrollPadding
+    678: ScrollPaddingTop
+    679: ScrollSnapAlign
+    680: ScrollSnapStop
+    681: ScrollSnapType
+    682: ScrollTargetGroup
+    683: ScrollTimelineAxis
+    684: ScrollTimelineName
+    685: ScrollTimeline
+    686: ScrollbarColor
+    687: ScrollbarGutter
+    688: ScrollbarWidth
+    689: ShapeImageThreshold
+    690: ShapeInside
+    691: ShapeMargin
+    692: ShapeOutside
+    693: ShapePadding
+    694: ShapeRendering
+    695: Size
+    696: SliderOrientation
+    697: SpatialNavigationAction
+    698: SpatialNavigationContain
+    699: SpatialNavigationFunction
+    700: SpeakAs
+    701: Speak
+    702: StringSet
+    703: StrokeAlign
+    704: StrokeBreak
+    705: StrokeColor
+    706: StrokeDashCorner
+    707: StrokeDashJustify
+    708: StrokeDasharray
+    709: StrokeDashoffset
+    710: StrokeImage
+    711: StrokeLinecap
+    712: StrokeLinejoin
+    713: StrokeMiterlimit
+    714: StrokeOpacity
+    715: StrokeOrigin
+    716: StrokePosition
+    717: StrokeRepeat
+    718: StrokeSize
+    719: Stroke
+    720: StrokeWidth
+    721: Suffix
+    722: Symbols
+    723: System
+    724: TabSize
+    725: TableLayout
+    726: TextAlignAll
+    727: TextAlignLast
+    728: TextAlign
+    729: TextAutospace
+    730: TextBoxEdge
+    731: TextBox
+    732: TextBoxTrim
+    733: TextCombineUpright
+    734: TextDecorationColor
+    735: TextDecorationInset
+    736: TextDecorationLine
+    737: TextDecorationSkipBox
+    738: TextDecorationSkipInk
+    739: TextDecorationSkipSelf
+    740: TextDecorationSkipSpaces
+    741: TextDecorationSkip
+    742: TextDecorationStyle
+    743: TextDecoration
+    744: TextDecorationThickness
+    745: TextEmphasisColor
+    746: TextEmphasisPosition
+    747: TextEmphasisSkip
+    748: TextEmphasisStyle
+    749: TextEmphasis
+    750: TextFit
+    751: TextGroupAlign
+    752: TextIndent
+    753: TextJustify
+    754: TextOrientation
+    755: TextOverflow
+    756: TextRendering
+    757: TextShadow
+    758: TextSizeAdjust
+    759: TextSpacing
+    760: TextSpacingTrim
+    761: TextTransform
+    762: TextUnderlineOffset
+    763: TextUnderlinePosition
+    764: TextWrapMode
+    765: TextWrapStyle
+    766: TextWrap
+    767: TimelineScope
+    768: TimelineTriggerActivationRangeEnd
+    769: TimelineTriggerActivationRangeStart
+    770: TimelineTriggerActivationRange
+    771: TimelineTriggerActiveRangeEnd
+    772: TimelineTriggerActiveRangeStart
+    773: TimelineTriggerActiveRange
+    774: TimelineTriggerName
+    775: TimelineTriggerRange
+    776: TimelineTriggerSource
+    777: TimelineTrigger
+    778: Top
+    779: TouchAction
+    780: TransformBox
+    781: TransformOrigin
+    782: TransformStyle
+    783: Transform
+    784: TransitionBehavior
+    785: TransitionDelay
+    786: TransitionDuration
+    787: TransitionProperty
+    788: Transition
+    789: TransitionTimingFunction
+    790: Translate
+    791: TriggerScope
+    792: UnicodeBidi
+    793: UserSelect
+    794: VerticalAlign
+    795: ViewTimelineAxis
+    796: ViewTimelineInset
+    797: ViewTimelineName
+    798: ViewTimeline
+    799: ViewTransitionClass
+    800: ViewTransitionGroup
+    801: ViewTransitionName
+    802: ViewTransitionScope
+    803: Visibility
+    804: VoiceBalance
+    805: VoiceDuration
+    806: VoiceFamily
+    807: VoicePitch
+    808: VoiceRange
+    809: VoiceRate
+    810: VoiceStress
+    811: VoiceVolume
+    812: _WebkitAlignContent
+    813: _WebkitAlignItems
+    814: _WebkitAlignSelf
+    815: _WebkitAnimationDelay
+    816: _WebkitAnimationDirection
+    817: _WebkitAnimationDuration
+    818: _WebkitAnimationFillMode
+    819: _WebkitAnimationIterationCount
+    820: _WebkitAnimationName
+    821: _WebkitAnimationPlayState
+    822: _WebkitAnimation
+    823: _WebkitAnimationTimingFunction
+    824: _WebkitAppRegion
+    825: _WebkitAppearance
+    826: _WebkitBackdropFilter
+    827: _WebkitBackfaceVisibility
+    828: _WebkitBackgroundClip
+    829: _WebkitBackgroundOrigin
+    830: _WebkitBackgroundSize
+    831: _WebkitBorderBottomLeftRadius
+    832: _WebkitBorderBottomRightRadius
+    833: _WebkitBorderHorizontalSpacing
+    834: _WebkitBorderImageOutset
+    835: _WebkitBorderImageRepeat
+    836: _WebkitBorderImageSlice
+    837: _WebkitBorderImageSource
+    838: _WebkitBorderImage
+    839: _WebkitBorderImageWidth
+    840: _WebkitBorderRadius
+    841: _WebkitBorderTopLeftRadius
+    842: _WebkitBorderTopRightRadius
+    843: _WebkitBorderVerticalSpacing
+    844: _WebkitBoxAlign
+    845: _WebkitBoxDecorationBreak
+    846: _WebkitBoxDirection
+    847: _WebkitBoxFlex
+    848: _WebkitBoxOrdinalGroup
+    849: _WebkitBoxOrient
+    850: _WebkitBoxPack
+    851: _WebkitBoxReflect
+    852: _WebkitBoxShadow
+    853: _WebkitBoxSizing
+    854: _WebkitClipPath
+    855: _WebkitColumnBreakInside
+    856: _WebkitColumnCount
+    857: _WebkitColumnGap
+    858: _WebkitColumnRuleColor
+    859: _WebkitColumnRuleStyle
+    860: _WebkitColumnRule
+    861: _WebkitColumnRuleWidth
+    862: _WebkitColumnSpan
+    863: _WebkitColumnWidth
+    864: _WebkitColumns
+    865: _WebkitFilter
+    866: _WebkitFlexBasis
+    867: _WebkitFlexDirection
+    868: _WebkitFlexFlow
+    869: _WebkitFlexGrow
+    870: _WebkitFlexShrink
+    871: _WebkitFlex
+    872: _WebkitFlexWrap
+    873: _WebkitFontFeatureSettings
+    874: _WebkitFontSmoothing
+    875: _WebkitFontVariantLigatures
+    876: _WebkitHyphens
+    877: _WebkitJustifyContent
+    878: _WebkitLineBreak
+    879: _WebkitLineClamp
+    880: _WebkitMarginEnd
+    881: _WebkitMarginStart
+    882: _WebkitMarginTopCollapse
+    883: _WebkitMaskAttachment
+    884: _WebkitMaskClip
+    885: _WebkitMaskComposite
+    886: _WebkitMaskImage
+    887: _WebkitMaskOrigin
+    888: _WebkitMaskPosition
+    889: _WebkitMaskRepeat
+    890: _WebkitMaskSize
+    891: _WebkitMask
+    892: _WebkitOrder
+    893: _WebkitOverflowScrolling
+    894: _WebkitPaddingAfter
+    895: _WebkitPaddingStart
+    896: _WebkitPerspectiveOrigin
+    897: _WebkitPerspective
+    898: _WebkitPrintColorAdjust
+    899: _WebkitTapHighlightColor
+    900: _WebkitTextDecorationColor
+    901: _WebkitTextDecorationSkipInk
+    902: _WebkitTextDecorationSkip
+    903: _WebkitTextDecorationStyle
+    904: _WebkitTextDecoration
+    905: _WebkitTextFillColor
+    906: _WebkitTextSizeAdjust
+    907: _WebkitTextStrokeColor
+    908: _WebkitTextStroke
+    909: _WebkitTextStrokeWidth
+    910: _WebkitTouchCallout
+    911: _WebkitTransformOrigin
+    912: _WebkitTransformStyle
+    913: _WebkitTransform
+    914: _WebkitTransitionDelay
+    915: _WebkitTransitionDuration
+    916: _WebkitTransitionProperty
+    917: _WebkitTransition
+    918: _WebkitTransitionTimingFunction
+    919: _WebkitUserDrag
+    920: _WebkitUserModify
+    921: _WebkitUserSelect
+    922: WhiteSpaceCollapse
+    923: WhiteSpace
+    924: WhiteSpaceTrim
+    925: Widows
+    926: Width
+    927: WillChange
+    928: WindowDrag
+    929: WordBreak
+    930: WordSpaceTransform
+    931: WordSpacing
+    932: WordWrap
+    933: WrapAfter
+    934: WrapBefore
+    935: WrapFlow
+    936: WrapInside
+    937: WrapThrough
+    938: WritingMode
+    939: ZIndex
+    940: Zoom
 StylesetFunction: size=56 align=8 {
     name: 0
     params: 16
