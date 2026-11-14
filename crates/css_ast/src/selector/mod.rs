@@ -288,6 +288,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::view-transition-group(*)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, "::view-transition-new(thing.foo.bar.baz)");
 		assert_parse!(CssAtomSet::ATOMS, SelectorList, ":is(.a,#b)");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "#\\66");
+		assert_parse!(CssAtomSet::ATOMS, SelectorList, "#\\66 oo.a");
 	}
 
 	#[test]
