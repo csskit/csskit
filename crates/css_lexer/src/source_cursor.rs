@@ -319,13 +319,16 @@ impl<'a> SourceCursor<'a> {
 	{
 		let token = self.token();
 		let value = token.value();
-		let (digits, exponent) = if self.exceeds_f32_precision() {
-			if !token.is_int() {
-				return None;
-			}
+		let (digits, exponent) = if token.is_int() {
 			let digits = self.numeric_source().trim_start_matches(['+', '-']).trim_start_matches('0');
 			let significant = digits.trim_end_matches('0');
-			(significant, i32::try_from(digits.len() - significant.len()).ok()?)
+			if digits.is_empty() {
+				("0", 0)
+			} else {
+				(significant, i32::try_from(digits.len() - significant.len()).ok()?)
+			}
+		} else if self.exceeds_f32_precision() {
+			return None;
 		} else {
 			let mut scientific = SmallStrBuf::<16>::new();
 			write!(&mut scientific, "{:e}", value.abs()).ok()?;
@@ -805,15 +808,26 @@ impl Display for CompactNumber<'_> {
 		}
 		let zeros = self.exponent.unsigned_abs() as usize;
 		if self.exponent >= 0 {
-			write!(f, "{}{:0>zeros$}", self.digits, "")?;
+			f.write_str(self.digits)?;
+			for _ in 0..zeros {
+				f.write_str("0")?;
+			}
 			return if self.keeps_float { f.write_str(".0") } else { Ok(()) };
 		}
 		match self.digits.len().checked_sub(zeros) {
 			Some(point) if point > 0 => {
 				let (int_digits, frac_digits) = self.digits.split_at(point);
-				write!(f, "{int_digits}.{frac_digits}")
+				f.write_str(int_digits)?;
+				f.write_str(".")?;
+				f.write_str(frac_digits)
 			}
-			_ => write!(f, ".{:0>leading$}{}", "", self.digits, leading = zeros - self.digits.len()),
+			_ => {
+				f.write_str(".")?;
+				for _ in 0..zeros - self.digits.len() {
+					f.write_str("0")?;
+				}
+				f.write_str(self.digits)
+			}
 		}
 	}
 }
