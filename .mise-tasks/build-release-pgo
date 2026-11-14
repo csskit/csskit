@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+#MISE description="Build a PGO-optimised release csskit, trained on coverage/popular"
+set -euo pipefail
+
+target="$(rustc --print host-tuple)"
+exe=""
+[[ "$target" == *windows* ]] && exe=".exe"
+bin="target/$target/release/csskit$exe"
+packages=(-p csskit -p csskit_napi --features csskit_napi/napi)
+
+cargo pgo instrument build -- "${packages[@]}"
+
+for cmd in min fmt; do "$bin" "$cmd" coverage/popular/*.css >/dev/null; done
+
+cargo pgo optimize build -- "${packages[@]}"

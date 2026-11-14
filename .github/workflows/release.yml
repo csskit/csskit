@@ -67,17 +67,15 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: release-${{ matrix.target }}
-          tools: rust
+          tools: rust cargo:cargo-pgo
           components: ""
 
       - name: Rustup target
         run: rustup target add ${{ matrix.target }}
 
-      - name: Build Binary
-        run: cargo build --release --target ${{ matrix.target }} -p csskit
-
-      - name: Build native addon
-        run: cargo build --release --target ${{ matrix.target }} -p csskit_napi --features napi
+      - name: Build PGO-optimised binary and native addon
+        shell: bash
+        run: .mise-tasks/build-release-pgo
 
       - name: Stage native addon
         shell: bash
