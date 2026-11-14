@@ -533,7 +533,7 @@ impl<'a> ByteCursor<'a> {
 	fn consume_hash_token(&mut self, atoms: &dyn DynAtomSet) -> Token {
 		self.pos += 1; // skip '#'
 		let hash_str = self.remaining_str();
-		let first_is_ascii = is_ident(self.peek_char());
+		let first_is_ascii = is_ident(self.peek_char()) || self.peek_char() == '\\';
 		let hash_start = self.pos;
 		let (len, contains_non_lower_ascii, _, contains_escape, _, _) = self.consume_ident_sequence(atoms);
 		let hash_bytes = &self.bytes[hash_start..hash_start + len as usize];
