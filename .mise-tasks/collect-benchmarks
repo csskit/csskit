@@ -1,8 +1,8 @@
 #!/bin/bash
-#MISE depends=["build-release"]
+#MISE depends=["build-release-pgo"]
 #MISE description="Collect benchmark results for historical tracking"
 
-CSSKIT_BIN="./target/release/csskit"
+export CSSKIT_BIN="$PWD/target/$(rustc --print host-tuple)/release/csskit"
 MAX_ENTRIES=100
 OUTPUT_DIR="website/_data"
 RESULTS_FILE="$OUTPUT_DIR/benchmark-history.json"
