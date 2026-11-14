@@ -417,7 +417,7 @@ impl Token {
 	pub const UNDERSCORE: Token = Token::new_delim('_');
 
 	/// Represents a `\`` [Kind::Delim] token.
-	pub const BACKTICK: Token = Token::new_delim('\'');
+	pub const BACKTICK: Token = Token::new_delim('`');
 
 	/// Represents a `|` [Kind::Delim] token.
 	pub const PIPE: Token = Token::new_delim('|');
