@@ -333,13 +333,10 @@ impl<'a> SourceCursor<'a> {
 			Kind::Ident | Kind::Function | Kind::AtKeyword | Kind::Hash
 				if self.should_compact && token.contains_escape_chars() =>
 			{
-				self.fmt_compacted_ident(f)
+				self.fmt_compacted_ident(f, false)
 			}
 			Kind::Number => self.fmt_compacted_number(f),
-			Kind::Dimension => {
-				self.fmt_compacted_number(f)?;
-				self.fmt_compacted_ident(f)
-			}
+			Kind::Dimension => self.fmt_compacted_dimension(f),
 			Kind::Url => self.fmt_compacted_url(f),
 			_ => f.write_str(self.inner.source()),
 		}
@@ -353,7 +350,41 @@ impl<'a> SourceCursor<'a> {
 		}
 	}
 
-	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_compacted_dimension(&self, f: &mut Formatter<'_>) -> Result {
+		let mut digits = SmallStrBuf::new();
+		let unit_lexes_as_exponent = self.unit_lexes_as_exponent();
+		let escape_exponent = match self.compact_number(&mut digits) {
+			Some(number) if unit_lexes_as_exponent && number.allows_exponent => {
+				f.write_str(number.sign)?;
+				number.fmt_scientific(f)?;
+				false
+			}
+			Some(number) => {
+				number.fmt(f)?;
+				unit_lexes_as_exponent
+			}
+			None => {
+				let source = self.numeric_source();
+				f.write_str(source)?;
+				if unit_lexes_as_exponent && !source.contains(['e', 'E']) {
+					f.write_str("e0")?;
+				}
+				false
+			}
+		};
+		self.fmt_compacted_ident(f, escape_exponent)
+	}
+
+	fn unit_lexes_as_exponent(&self) -> bool {
+		let mut unit = self.parsed_chars().map(|(ch, _)| ch);
+		matches!(unit.next(), Some('e' | 'E')) && {
+			let next = unit.next();
+			let next = if next == Some('-') { unit.next() } else { next };
+			next.is_some_and(|ch| ch.is_ascii_digit())
+		}
+	}
+
+	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>, escape_exponent: bool) -> Result {
 		let token = self.token();
 		let starts_with_dash = self.parsed_chars().next().is_some_and(|(ch, _)| ch == '-');
 
@@ -366,11 +397,13 @@ impl<'a> SourceCursor<'a> {
 		let mut chars = self.parsed_chars();
 		let mut char_i = 0;
 		while let Some((ch, escaped)) = chars.next() {
-			if !escaped {
+			if !escaped && !(char_i == 0 && escape_exponent) {
 				f.write_char(ch)?;
 			} else {
 				// Check if the decoded character is valid at this position unescaped.
-				let valid_unescaped = if ch == '-' && char_i == 0 {
+				let valid_unescaped = if char_i == 0 && escape_exponent {
+					false
+				} else if ch == '-' && char_i == 0 {
 					chars
 						.clone()
 						.next()
@@ -733,13 +766,17 @@ impl CompactNumber<'_> {
 		let exponent_digits = self.exponent.unsigned_abs().checked_ilog10().map_or(1, |log| log as usize + 1);
 		self.digits.len() + 1 + (self.exponent < 0) as usize + exponent_digits
 	}
+
+	fn fmt_scientific(&self, f: &mut Formatter<'_>) -> Result {
+		write!(f, "{}e{}", self.digits, self.exponent)
+	}
 }
 
 impl Display for CompactNumber<'_> {
 	fn fmt(&self, f: &mut Formatter<'_>) -> Result {
 		f.write_str(self.sign)?;
 		if self.scientific_len() < self.decimal_len() {
-			return write!(f, "{}e{}", self.digits, self.exponent);
+			return self.fmt_scientific(f);
 		}
 		let zeros = self.exponent.unsigned_abs() as usize;
 		if self.exponent >= 0 {
@@ -1207,6 +1244,26 @@ mod test {
 		assert_eq!(compact(r"\-a"), "-a");
 		assert_eq!(compact(r"\--"), "--");
 		assert_eq!(compact(r"\-\31 "), r"-\31");
+	}
+
+	#[test]
+	fn test_compact_dimension_escapes_unit_that_would_lex_as_exponent() {
+		let compact = |source: &str| {
+			let mut lexer = crate::Lexer::new(&crate::EmptyAtomSet::ATOMS, source);
+			let token = lexer.advance();
+			let cursor = Cursor::new(SourceOffset(0), token);
+			format!("{}", SourceCursor::from(cursor, &source[..token.len() as usize]).compact())
+		};
+		assert_eq!(compact("1E1e3"), "1e1e3");
+		assert_eq!(compact("1e-1e3"), "1e-1e3");
+		assert_eq!(compact(r"1E-\31"), "1e0E-1");
+		assert_eq!(compact(r"100\65 3"), "1e2e3");
+		assert_eq!(compact(r"1000.0\65 3"), "1e3e3");
+		assert_eq!(compact("1e30e3"), "1e30e3");
+		assert_eq!(compact(r"100000000.5\65 3"), "100000000.5e0e3");
+		assert_eq!(compact(r"1e\+3"), r"1e\+3");
+		assert_eq!(compact("1e1em"), "10em");
+		assert_eq!(compact("1e1e-x"), "10e-x");
 	}
 
 	#[test]
