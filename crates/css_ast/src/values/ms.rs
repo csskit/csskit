@@ -468,17 +468,636 @@ pub enum MsWordBreakStyleValue<'a> {}
     property_group = Transitions,
     computed_value_type = Unknown,
     canonical_order = "per grammar",
+    longhands = _MsTransitionProperty|_MsTransitionDuration|_MsTransitionTimingFunction|_MsTransitionDelay,
 )]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
 #[cfg_attr(feature = "visitable", derive(Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct MsTransitionStyleValue<'a>;
 
+/// `-ms-animation` is an alias for `animation`.
+#[syntax(" <'animation'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    applies_to = Elements,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    longhands = _MsAnimationName|_MsAnimationDuration|_MsAnimationTimingFunction|_MsAnimationDelay|_MsAnimationIterationCount|_MsAnimationDirection|_MsAnimationFillMode|_MsAnimationPlayState,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationStyleValue<'a>;
+
+/// `-ms-backface-visibility` is an alias for `backface-visibility`.
+#[syntax(" <'backface-visibility'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "visible",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsBackfaceVisibilityStyleValue<'a>;
+
+/// `-ms-border-bottom-left-radius` is an alias for `border-bottom-left-radius`.
+#[syntax(" <'border-bottom-left-radius'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Bottom|Left,
+    box_portion = Border,
+    shorthands = _MsBorderRadius,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsBorderBottomLeftRadiusStyleValue<'a>;
+
+/// `-ms-border-bottom-right-radius` is an alias for `border-bottom-right-radius`.
+#[syntax(" <'border-bottom-right-radius'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderBox,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Bottom|Right,
+    box_portion = Border,
+    shorthands = _MsBorderRadius,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsBorderBottomRightRadiusStyleValue<'a>;
+
+/// `-ms-border-radius` is an alias for `border-radius`.
+#[syntax(" <'border-radius'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "see individual properties",
+    inherits = Unknown,
+    applies_to = Unknown,
+    animation_type = Unknown,
+    percentages = Unknown,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    box_portion = Border,
+    longhands = _MsBorderTopLeftRadius|_MsBorderTopRightRadius|_MsBorderBottomRightRadius|_MsBorderBottomLeftRadius,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsBorderRadiusStyleValue<'a>;
+
+/// `-ms-font-feature-settings` is an alias for `font-feature-settings`.
+#[syntax(" <'font-feature-settings'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Elements|Text,
+    animation_type = Discrete,
+    property_group = Fonts,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsFontFeatureSettingsStyleValue<'a>;
+
+/// `-ms-hyphens` is an alias for `hyphens`.
+#[syntax(" <'hyphens'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "manual",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsHyphensStyleValue<'a>;
+
+/// `-ms-perspective` is an alias for `perspective`.
+#[syntax(" <'perspective'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    property_group = Transforms,
+    computed_value_type = AbsoluteLengthOrNone,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsPerspectiveStyleValue<'a>;
+
+/// `-ms-perspective-origin` is an alias for `perspective-origin`.
+#[syntax(" <'perspective-origin'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "50% 50%",
+    applies_to = Unknown,
+    animation_type = ByComputedValue,
+    percentages = ReferenceBox,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsPerspectiveOriginStyleValue<'a>;
+
+/// `-ms-transform-style` is an alias for `transform-style`.
+#[syntax(" <'transform-style'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "flat",
+    applies_to = Unknown,
+    animation_type = Discrete,
+    property_group = Transforms,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsTransformStyleStyleValue<'a>;
+
+/// `-ms-transition-property` is an alias for `transition-property`.
+#[syntax(" <'transition-property'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "all",
+    applies_to = Elements,
+    property_group = Transitions,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    shorthands = _MsTransition,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsTransitionPropertyStyleValue<'a>;
+
+/// `-ms-word-wrap` is an alias for `overflow-wrap`.
+#[syntax(" <'overflow-wrap'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    inherits,
+    applies_to = Text,
+    animation_type = Discrete,
+    property_group = Text,
+    computed_value_type = Unknown,
+    canonical_order = "n/a",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsWordWrapStyleValue<'a>;
+
+/// Represents the value of `-ms-grid-column`.
+#[syntax(" <integer [1,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsGridColumnStyleValue<'a>;
+
+/// Represents the value of `-ms-grid-row`.
+#[syntax(" <integer [1,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsGridRowStyleValue<'a>;
+
+/// Represents the value of `-ms-grid-column-span`.
+#[syntax(" <integer [1,∞]> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsGridColumnSpanStyleValue<'a>;
+
+/// Represents the value of `-ms-grid-row-align`.
+#[syntax(" start | end | center | stretch ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "stretch",
+    applies_to = Elements,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum MsGridRowAlignStyleValue<'a> {}
+
+/// Represents the value of `-ms-grid-columns`.
+#[syntax(" none | <ms-track-size>+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsGridColumnsStyleValue<'a>;
+
+/// Represents the value of `-ms-grid-rows`.
+#[syntax(" none | <ms-track-size>+ ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    property_group = Grid,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsGridRowsStyleValue<'a>;
+
+/// Represents the value of `-ms-scroll-chaining`.
+#[syntax(" chained | none ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "chained",
+    applies_to = Elements,
+    property_group = Overscroll,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub enum MsScrollChainingStyleValue<'a> {}
+
+/// `-ms-animation-delay` is a legacy alias for `animation-delay`.
+#[syntax(" <time># ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0s",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationDelayStyleValue<'a>;
+
+/// `-ms-animation-direction` is an alias for `animation-direction`.
+#[syntax(" <'animation-direction'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "normal",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationDirectionStyleValue<'a>;
+
+/// `-ms-animation-duration` is an alias for `animation-duration`.
+#[syntax(" <'animation-duration'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "auto",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationDurationStyleValue<'a>;
+
+/// `-ms-animation-fill-mode` is an alias for `animation-fill-mode`.
+#[syntax(" <'animation-fill-mode'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationFillModeStyleValue<'a>;
+
+/// `-ms-animation-iteration-count` is an alias for `animation-iteration-count`.
+#[syntax(" <'animation-iteration-count'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "1",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationIterationCountStyleValue<'a>;
+
+/// `-ms-animation-name` is an alias for `animation-name`.
+#[syntax(" <'animation-name'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "none",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationNameStyleValue<'a>;
+
+/// `-ms-animation-play-state` is an alias for `animation-play-state`.
+#[syntax(" <'animation-play-state'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "running",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationPlayStateStyleValue<'a>;
+
+/// `-ms-animation-timing-function` is an alias for `animation-timing-function`.
+#[syntax(" <'animation-timing-function'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "ease",
+    applies_to = Elements,
+    shorthands = _MsAnimation,
+    property_group = Animations,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsAnimationTimingFunctionStyleValue<'a>;
+
+/// `-ms-border-top-left-radius` is an alias for `border-top-left-radius`.
+#[syntax(" <'border-top-left-radius'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderBox,
+    shorthands = _MsBorderRadius,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Top|Left,
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsBorderTopLeftRadiusStyleValue<'a>;
+
+/// `-ms-border-top-right-radius` is an alias for `border-top-right-radius`.
+#[syntax(" <'border-top-right-radius'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0",
+    applies_to = Elements,
+    animation_type = ByComputedValue,
+    percentages = BorderBox,
+    shorthands = _MsBorderRadius,
+    property_group = Borders,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+    logical_property_group = BorderRadius,
+    box_side = Top|Right,
+    box_portion = Border,
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsBorderTopRightRadiusStyleValue<'a>;
+
+/// `-ms-transition-delay` is an alias for `transition-delay`.
+#[syntax(" <'transition-delay'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0s",
+    applies_to = Elements,
+    shorthands = _MsTransition,
+    property_group = Transitions,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsTransitionDelayStyleValue<'a>;
+
+/// `-ms-transition-duration` is an alias for `transition-duration`.
+#[syntax(" <'transition-duration'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "0s",
+    applies_to = Elements,
+    shorthands = _MsTransition,
+    property_group = Transitions,
+    computed_value_type = Unknown,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsTransitionDurationStyleValue<'a>;
+
+/// `-ms-transition-timing-function` is an alias for `transition-timing-function`.
+#[syntax(" <'transition-timing-function'> ")]
+#[derive(
+	Parse, Peek, ToSpan, ToCursors, DeclarationMetadata, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash,
+)]
+#[declaration_metadata(
+    initial = "ease",
+    applies_to = Elements,
+    shorthands = _MsTransition,
+    property_group = Transitions,
+    computed_value_type = AsSpecified,
+    canonical_order = "per grammar",
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit)]
+#[derive(csskit_derives::NodeWithMetadata)]
+pub struct MsTransitionTimingFunctionStyleValue<'a>;
+
 #[cfg(test)]
 mod tests {
 	use super::*;
 	use crate::CssAtomSet;
 	use css_parse::{assert_parse, assert_parse_error, assert_peek_false};
+
+	#[test]
+	fn grid_tracks_accept_legacy_repetition() {
+		assert_parse!(CssAtomSet::ATOMS, MsGridColumnsStyleValue, "10px (250px 10px)[4]");
+		assert_parse!(CssAtomSet::ATOMS, MsGridRowsStyleValue, "auto (minmax(10px, 1fr) 5%)[2] 1fr");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridColumnsStyleValue, "10px (250px 10px)[0]");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridRowsStyleValue, "10px ()[4]");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridColumnsStyleValue, "10px (250px 10px)[4");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridRowsStyleValue, "10px [name] 1fr");
+	}
+
+	#[test]
+	fn grid_indices_require_positive_integers() {
+		assert_parse!(CssAtomSet::ATOMS, MsGridColumnStyleValue, "2");
+		assert_parse!(CssAtomSet::ATOMS, MsGridRowStyleValue, "1");
+		assert_parse!(CssAtomSet::ATOMS, MsGridColumnSpanStyleValue, "3");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridColumnStyleValue, "0");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridRowStyleValue, "-1");
+		assert_peek_false!(CssAtomSet::ATOMS, MsGridColumnSpanStyleValue, "auto");
+		assert_parse_error!(CssAtomSet::ATOMS, MsGridColumnStyleValue, "1 / 3");
+	}
 
 	#[test]
 	fn test_ms_interpolation_mode_parses() {
