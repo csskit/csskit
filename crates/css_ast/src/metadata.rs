@@ -97,21 +97,22 @@ pub enum VendorPrefixes {
 	WebKit,
 	O,
 	Ms,
+	Khtml,
 }
 
 impl TryFrom<CssAtomSet> for VendorPrefixes {
 	type Error = ();
 	fn try_from(atom: CssAtomSet) -> Result<Self, Self::Error> {
 		const VENDOR_FLAG: u32 = 0b00000000_10000000_00000000_00000000;
-		const VENDORS: [VendorPrefixes; 4] =
-			[VendorPrefixes::WebKit, VendorPrefixes::Moz, VendorPrefixes::Ms, VendorPrefixes::O];
+		const VENDORS: [VendorPrefixes; 5] =
+			[VendorPrefixes::WebKit, VendorPrefixes::Moz, VendorPrefixes::Ms, VendorPrefixes::O, VendorPrefixes::Khtml];
 
 		let atom_bits = atom as u32;
 		if atom_bits & VENDOR_FLAG == 0 {
 			return Err(());
 		}
-		let index = (atom_bits >> 21) & 0b11;
-		Ok(VENDORS[index as usize])
+		let index = (atom_bits >> 20) & 0b111;
+		VENDORS.get(index as usize).copied().ok_or(())
 	}
 }
 

@@ -556,6 +556,29 @@ fn prefixed_unknown_vendor_string_fallback() {
 }
 
 #[test]
+fn prefixed_khtml_is_distinct_from_other_vendors() {
+	assert_query!(
+		"a { -khtml-border-radius: 2px; -o-transform: rotate(45deg); color: red; }",
+		":prefixed(khtml)",
+		1,
+		[NodeId::StyleValue]
+	);
+	assert_query!("a { -o-transform: rotate(45deg); }", ":prefixed(khtml)", 0);
+	assert_query!("a { -khtml-border-radius: 2px; }", ":prefixed(o)", 0);
+}
+
+#[test]
+fn prefixed_shorthands_remain_distinct_from_longhands() {
+	assert_query!(
+		"a { -khtml-border-radius: 2px; -khtml-border-bottom-left-radius: 1px; }",
+		":shorthand:prefixed(khtml)",
+		1,
+		[NodeId::StyleValue]
+	);
+	assert_query!("a { -khtml-border-bottom-left-radius: 1px; }", ":shorthand:prefixed(khtml)", 0);
+}
+
+#[test]
 fn shorthand_pseudo() {
 	assert_query!("a { margin: 10px; }", "*:shorthand", 1, [NodeId::StyleValue]);
 	assert_query!(

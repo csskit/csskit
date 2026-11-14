@@ -637,6 +637,12 @@ export declare class KeyframesName extends Node { static readonly tag: 'keyframe
 export declare class KeyframesRule extends Node { static readonly tag: 'keyframes-rule'; }
 export declare class KeyframesRuleBlock extends Node { static readonly tag: 'keyframes-rule-block'; }
 export declare class KeypressFunction extends Node { static readonly tag: 'keypress-function'; }
+export declare class KhtmlBorderBottomLeftRadiusStyleValue extends Node { static readonly tag: 'khtml-border-bottom-left-radius-style-value'; }
+export declare class KhtmlBorderBottomRightRadiusStyleValue extends Node { static readonly tag: 'khtml-border-bottom-right-radius-style-value'; }
+export declare class KhtmlBorderRadiusStyleValue extends Node { static readonly tag: 'khtml-border-radius-style-value'; }
+export declare class KhtmlBorderTopLeftRadiusStyleValue extends Node { static readonly tag: 'khtml-border-top-left-radius-style-value'; }
+export declare class KhtmlBorderTopRightRadiusStyleValue extends Node { static readonly tag: 'khtml-border-top-right-radius-style-value'; }
+export declare class KhtmlUserSelectStyleValue extends Node { static readonly tag: 'khtml-user-select-style-value'; }
 export declare class LabChannelKeyword extends Node { static readonly tag: 'lab-channel-keyword'; }
 export declare class LabFunction extends Node { static readonly tag: 'lab-function'; }
 export declare class LabFunctionParams extends Node { static readonly tag: 'lab-function-params'; }

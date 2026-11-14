@@ -28,6 +28,7 @@ mod grid;
 mod image_animation;
 mod images;
 mod inline;
+mod khtml;
 mod line_grid;
 mod link_params;
 mod lists;
@@ -106,6 +107,7 @@ pub use grid::*;
 pub use image_animation::*;
 pub use images::*;
 pub use inline::*;
+pub use khtml::*;
 pub use line_grid::*;
 // TODO: link_params isn't supported by any engines yet.
 #[allow(unused)]

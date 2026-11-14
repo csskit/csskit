@@ -272,7 +272,7 @@ fn main() {
 				}
 				let kebab = name.to_kebab_case();
 				let variant_name =
-					if matches!(kebab.split('-').next().unwrap_or_default(), "webkit" | "moz" | "ms" | "o") {
+					if matches!(kebab.split('-').next().unwrap_or_default(), "webkit" | "moz" | "ms" | "o" | "khtml") {
 						vendor_atoms.push(format_ident!("_{name}"));
 						format_ident!("_{name}")
 					} else {

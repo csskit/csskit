@@ -20,6 +20,7 @@ pub enum CsskitAtomSet {{
 	Moz,
 	Ms,
 	O,
+	Khtml,
 
 	// Boolean operators
 	And,
