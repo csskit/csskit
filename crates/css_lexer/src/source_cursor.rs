@@ -355,7 +355,7 @@ impl<'a> SourceCursor<'a> {
 
 	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>) -> Result {
 		let token = self.token();
-		let source = self.content_slice();
+		let starts_with_dash = self.parsed_chars().next().is_some_and(|(ch, _)| ch == '-');
 
 		match token.kind() {
 			Kind::AtKeyword => f.write_str("@")?,
@@ -371,8 +371,11 @@ impl<'a> SourceCursor<'a> {
 			} else {
 				// Check if the decoded character is valid at this position unescaped.
 				let valid_unescaped = if ch == '-' && char_i == 0 {
-					true
-				} else if char_i == 0 || (char_i == 1 && source.starts_with('-')) {
+					chars
+						.clone()
+						.next()
+						.is_some_and(|(next, next_escaped)| next_escaped || next == '-' || is_ident_start(next))
+				} else if char_i == 0 || (char_i == 1 && starts_with_dash) {
 					is_ident_start(ch)
 				} else {
 					is_ident(ch)
@@ -1191,6 +1194,19 @@ mod test {
 		let c = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, 9));
 		let sc = SourceCursor::from(c, r"\66\6f\6f");
 		assert_eq!(format!("{}", sc.compact()), "foo");
+	}
+
+	#[test]
+	fn test_compact_ident_keeps_escaped_leading_dash_that_would_not_start_an_ident() {
+		let compact = |source: &str| {
+			let cursor = Cursor::new(SourceOffset(0), Token::new_ident(false, false, true, 0, source.len() as u32));
+			format!("{}", SourceCursor::from(cursor, source).compact())
+		};
+		assert_eq!(compact(r"\-"), r"\-");
+		assert_eq!(compact(r"\-1"), r"\-1");
+		assert_eq!(compact(r"\-a"), "-a");
+		assert_eq!(compact(r"\--"), "--");
+		assert_eq!(compact(r"\-\31 "), r"-\31");
 	}
 
 	#[test]
