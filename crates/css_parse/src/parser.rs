@@ -300,7 +300,7 @@ where
 		ParserCheckpoint {
 			cursor: self.buffer[self.buffer_index],
 			errors_pos: self.errors.len() as u8,
-			trivia_pos: self.trivia.len() as u16,
+			trivia_pos: self.trivia.len() as u32,
 			iter: self.cursor_iter.clone(),
 			buffer: self.buffer,
 			buffer_index: self.buffer_index,
