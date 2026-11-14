@@ -268,6 +268,10 @@ impl<'a> ByteCursor<'a> {
 			// so this branch would never be hit with a valid URL, we can guarantee this ident is not a URL.
 			(false, atoms.str_to_bits(&str[0..len as usize]))
 		};
+		let dashed_ident = dashed_ident
+			|| (contains_escape
+				&& matches!(str.as_bytes(), [b'\\', ..] | [b'-', b'\\', ..])
+				&& small_ident.starts_with(b"--"));
 		(len, contains_non_lower_ascii, dashed_ident, contains_escape, atom_bits, !dashed_ident && is_url)
 	}
 

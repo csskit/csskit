@@ -467,6 +467,18 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, Property, "rotate:1.21gw");
 		assert_parse!(CssAtomSet::ATOMS, Property, "_background:black");
 		assert_parse!(CssAtomSet::ATOMS, Property, "--custom:{foo:{bar};baz:(bing);}");
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"\\-webkit-transition:color 200ms",
+			Property { value: StyleValue::_WebkitTransition(_), .. }
+		);
+		assert_parse!(
+			CssAtomSet::ATOMS,
+			Property,
+			"\\-webkit-text-decoration:overline double red",
+			Property { value: StyleValue::_WebkitTextDecoration(_), .. }
+		);
 	}
 
 	#[test]
