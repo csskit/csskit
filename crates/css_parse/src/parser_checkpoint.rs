@@ -8,7 +8,7 @@ use crate::{Cursor, Kind, KindSet, Span, State, ToSpan, Token};
 pub struct ParserCheckpoint<I> {
 	pub(crate) cursor: Cursor,
 	pub(crate) errors_pos: u8,
-	pub(crate) trivia_pos: u16,
+	pub(crate) trivia_pos: u32,
 	pub(crate) iter: I,
 	pub(crate) buffer: [Cursor; 12],
 	pub(crate) buffer_index: usize,
