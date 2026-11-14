@@ -165,6 +165,31 @@ impl<'a> SourceCursor<'a> {
 		self.inner.source()
 	}
 
+	/// Writes this cursor's text, applying its compaction or expansion settings.
+	pub fn write_to(&self, writer: &mut impl Write) -> Result {
+		let token = self.token();
+		match token.kind() {
+			Kind::Delim
+			| Kind::Colon
+			| Kind::Semicolon
+			| Kind::Comma
+			| Kind::LeftSquare
+			| Kind::LeftParen
+			| Kind::RightSquare
+			| Kind::RightParen
+			| Kind::LeftCurly
+			| Kind::RightCurly => writer.write_char(token.char().unwrap()),
+			Kind::Ident | Kind::Function | Kind::AtKeyword | Kind::Hash if !token.contains_escape_chars() => {
+				#[cfg(feature = "egg")]
+				if self.should_expand {
+					return write!(writer, "{self}");
+				}
+				writer.write_str(self.source())
+			}
+			_ => write!(writer, "{self}"),
+		}
+	}
+
 	pub fn with_quotes(&self, quote_style: QuoteStyle) -> Self {
 		let cursor = self.inner.cursor().map_token(|token| token.with_quotes(quote_style));
 		Self {
@@ -795,9 +820,68 @@ impl Display for CompactNumber<'_> {
 
 #[cfg(test)]
 mod test {
-	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
+	use crate::{Cursor, EmptyAtomSet, Kind, Lexer, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
 	use allocator_api2::alloc::Global;
 	use std::fmt::Write;
+
+	#[test]
+	fn direct_write_matches_display() {
+		let check = |cursor: SourceCursor<'_>| {
+			let modes = [
+				cursor,
+				cursor.compact(),
+				#[cfg(feature = "egg")]
+				cursor.expand(),
+			];
+			for cursor in modes {
+				let mut actual = String::new();
+				cursor.write_to(&mut actual).unwrap();
+				assert_eq!(actual, format!("{cursor}"), "{cursor:?}");
+			}
+		};
+		for source in [
+			"foo FOO --bar foo( @media #fff #123 ғоо ғоо( @ғоо #ғоо",
+			r"f\6fo \66oo( @m\65 dia #f\66f",
+			"foo\0bar f\\\0oo",
+			" \t\r\n 1.0px +0.5 1e3 10% url(a) URL( a )",
+			"'a' \"b\" '\\61' 'open",
+			"\"bad\n/* comment */ <!-- --> ~|^$*=/:;,[](){}",
+		] {
+			let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
+			loop {
+				let offset = lexer.offset();
+				let token = lexer.advance();
+				let cursor = Cursor::new(offset, token);
+				check(SourceCursor::from(cursor, cursor.str_slice(source)));
+				if token == Kind::Eof {
+					break;
+				}
+			}
+		}
+		for byte in 0..=127 {
+			check(SourceCursor::from(Cursor::new(SourceOffset::ZERO, Token::new_delim(char::from(byte))), "x"));
+		}
+	}
+
+	#[test]
+	fn direct_write_propagates_writer_failure() {
+		struct FailingWriter;
+		impl Write for FailingWriter {
+			fn write_str(&mut self, _: &str) -> std::fmt::Result {
+				Err(std::fmt::Error)
+			}
+		}
+		for cursor in [
+			SourceCursor::SEMICOLON,
+			SourceCursor::from(Cursor::new(SourceOffset::ZERO, Token::new_ident(false, false, false, 0, 3)), "foo"),
+			SourceCursor::from(
+				Cursor::new(SourceOffset::ZERO, Token::new_string(QuoteStyle::Double, true, false, 3)),
+				"\"a\"",
+			),
+		] {
+			assert_eq!(cursor.write_to(&mut FailingWriter), Err(std::fmt::Error));
+		}
+	}
 
 	#[test]
 	fn parse_string_line_continuation() {
