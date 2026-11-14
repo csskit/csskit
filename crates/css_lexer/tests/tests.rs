@@ -1422,6 +1422,18 @@ fn tokenizes_hex_values_correctly() {
 	let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, "#CAFE BABE");
 	let token = lexer.advance();
 	assert_eq!(format!("{:x}", token.hex_value()), "ccaaffee");
+	for (source, hex) in [
+		("#f\\66 f", "ffffffff"),
+		("#\\66 \\66 0000", "ff0000ff"),
+		("#\\31 2345678", "12345678"),
+		("#\\66 00a", "ff0000aa"),
+		("#\\67 ff", "0"),
+		("#f\\66 f\\66 ffffff", "0"),
+	] {
+		let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
+		let token = lexer.advance();
+		assert_eq!(format!("{:x}", token.hex_value()), hex, "{source:?}");
+	}
 }
 
 #[test]

@@ -29,6 +29,16 @@ impl<'a> Peek<'a> for HexColor {
 			return false;
 		}
 		let token = c.token();
+		if token.contains_escape_chars() {
+			return token.hex_value() != 0
+				|| matches!(
+					p.to_source_cursor(c)
+						.parse(p.alloc())
+						.bytes()
+						.try_fold(0, |zeros, b| (b == b'0').then_some(zeros + 1)),
+					Some(4 | 8)
+				);
+		}
 		match token.len() {
 			4 | 7 => token.hex_value() != 0,
 			5 | 9 => token.hex_value() != 0 || c.str_slice(p.source_text()).bytes().skip(1).all(|b| b == b'0'),
@@ -61,6 +71,16 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, HexColor, "#abababab");
 		assert_parse!(CssAtomSet::ATOMS, HexColor, "#0000");
 		assert_parse!(CssAtomSet::ATOMS, HexColor, "#00000000");
+	}
+
+	#[test]
+	fn test_escaped() {
+		assert_parse!(CssAtomSet::ATOMS, HexColor, "#f\\66 f");
+		assert_parse!(CssAtomSet::ATOMS, HexColor, "#0\\30 00");
+		assert_parse!(CssAtomSet::ATOMS, HexColor, "#f\\000066f");
+		assert_parse!(CssAtomSet::ATOMS, HexColor, "#\\66 \\66 0000");
+		assert_peek_false!(CssAtomSet::ATOMS, HexColor, "#f\\67 f");
+		assert_peek_false!(CssAtomSet::ATOMS, HexColor, "#f\\66 ff\\66 ");
 	}
 
 	#[test]

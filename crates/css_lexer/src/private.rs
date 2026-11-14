@@ -4,7 +4,7 @@ use crate::{
 	scan::{scan_bad_url, scan_ident, scan_ident_non_lower, scan_line_comment, scan_string, scan_url},
 	small_str_buf::SmallStrBuf,
 	syntax::{
-		CR, EOF, FF, LF, SPACE, TAB,
+		CR, EOF, FF, LF, ParseEscape, SPACE, TAB,
 		identifier::{is_ident, is_ident_ascii_start, is_ident_byte, is_ident_start, is_ident_start_sequence},
 		is_escape_sequence, is_non_printable, is_quote, is_url_ident, is_whitespace,
 		tables::{ASCII_NEWLINE, ASCII_WHITESPACE},
@@ -538,31 +538,11 @@ impl<'a> ByteCursor<'a> {
 		let (len, contains_non_lower_ascii, _, contains_escape, _, _) = self.consume_ident_sequence(atoms);
 		let hash_bytes = &self.bytes[hash_start..hash_start + len as usize];
 		let mut hex_value: u32 = 0;
+		let mut digits: u32 = 0;
 		let mut is_hex = false;
-		if (len == 3 || len == 4) && !contains_escape {
+		if !contains_escape && matches!(len, 3 | 4 | 6 | 8) {
 			is_hex = true;
-			for &b in hash_bytes.iter().take(len as usize) {
-				if let Some(d) = (b as char).to_digit(16) {
-					hex_value = (hex_value << 8) | (d << 4) | d;
-				} else {
-					is_hex = false;
-					break;
-				}
-			}
-		} else if (len == 3 || len == 4) && contains_escape {
-			// Use char-based iteration for escaped sequences
-			is_hex = true;
-			for c in hash_str.chars().take(len as usize) {
-				if let Some(d) = c.to_digit(16) {
-					hex_value = (hex_value << 8) | (d << 4) | d;
-				} else {
-					is_hex = false;
-					break;
-				}
-			}
-		} else if (len == 6 || len == 8) && !contains_escape {
-			is_hex = true;
-			for &b in hash_bytes.iter().take(len as usize) {
+			for &b in hash_bytes {
 				if let Some(d) = (b as char).to_digit(16) {
 					hex_value = (hex_value << 4) | d;
 				} else {
@@ -570,18 +550,34 @@ impl<'a> ByteCursor<'a> {
 					break;
 				}
 			}
-		} else if (len == 6 || len == 8) && contains_escape {
+			digits = len;
+		} else if contains_escape {
 			is_hex = true;
-			for c in hash_str.chars().take(len as usize) {
-				if let Some(d) = c.to_digit(16) {
-					hex_value = (hex_value << 4) | d;
-				} else {
-					is_hex = false;
-					break;
+			let mut chars = hash_str[..len as usize].chars();
+			while let Some(raw) = chars.next() {
+				let decoded = if raw == '\\' { chars.parse_escape_sequence().0 } else { raw };
+				match decoded.to_digit(16) {
+					Some(nibble) if digits < 8 => {
+						hex_value = (hex_value << 4) | nibble;
+						digits += 1;
+					}
+					_ => {
+						is_hex = false;
+						break;
+					}
 				}
 			}
+			is_hex &= matches!(digits, 3 | 4 | 6 | 8);
 		}
-		if is_hex && (len == 3 || len == 6) {
+		if is_hex && digits <= 4 {
+			let mut expanded = 0;
+			for i in (0..digits).rev() {
+				let nibble = (hex_value >> (i * 4)) & 0xF;
+				expanded = (expanded << 8) | (nibble << 4) | nibble;
+			}
+			hex_value = expanded;
+		}
+		if is_hex && (digits == 3 || digits == 6) {
 			hex_value = (hex_value << 8) | 0xFF;
 		}
 		if !is_hex {
