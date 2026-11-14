@@ -1507,6 +1507,12 @@ fn tokenizes_escaped_idents_from_plain_runs_and_escapes() {
 		("--a\\:b", CustomAtom::Empty, true, true),
 		("sm\\:hover\\:bg-blue-500", CustomAtom::Empty, true, false),
 		("caf\u{e9}\\:x", CustomAtom::Empty, false, false),
+		("\\--x", CustomAtom::Empty, true, true),
+		("-\\-x", CustomAtom::Empty, true, true),
+		("\\2d -x", CustomAtom::Empty, true, true),
+		("\\-x", CustomAtom::Empty, true, false),
+		("\\-webkit-transition", CustomAtom::Empty, true, false),
+		("-aaaaaaaaaa\\:b", CustomAtom::Empty, true, false),
 	] {
 		let mut lexer = Lexer::new(&CUSTOM_ATOMS, source);
 		let token = lexer.advance();

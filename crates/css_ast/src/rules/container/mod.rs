@@ -281,6 +281,7 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container style(--x:10px){body{color:green}}");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container style(--x: 10px){body{color:green}}");
 		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container foo style(--x:10px){}");
+		assert_parse!(CssAtomSet::ATOMS, ContainerRule, "@container (inline-size>1px) and style(\\--x){a{}}");
 		// Scroll-state queries
 		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "scroll-state(stuck:top)");
 		assert_parse!(CssAtomSet::ATOMS, ContainerFeature, "scroll-state(scrollable:y and snapped:block)");
