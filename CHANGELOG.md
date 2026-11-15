@@ -1,7 +1,78 @@
+## [0.0.39] - 2026-11-15
+
+### Atom_set
+- derive_atom_set/atom_set: Allow case-sensitive derives (#1691) ([#1691](https://github.com/csskit/csskit/pull/1691))
+
+
+### Bytescan
+- Remove inline(always) from many functions (#1683) ([#1683](https://github.com/csskit/csskit/pull/1683))
+
+
+### Chromashift
+- chromashift/csskit_transform: Format only the winning shortest colour (#1653) ([#1653](https://github.com/csskit/csskit/pull/1653))
+
+
+### Css_ast
+- css_ast: Binary-search property atom tables (#1655) ([#1655](https://github.com/csskit/csskit/pull/1655))
+- css_ast: Correct preserve-3d spelling (#1658) ([#1658](https://github.com/csskit/csskit/pull/1658))
+- Regenerate css_ast/src/values from csswg drafts (#1659) ([#1659](https://github.com/csskit/csskit/pull/1659))
+- css_parse/css_ast/csskit_derives/csskit_transform: Retool metadata (#1667) ([#1667](https://github.com/csskit/csskit/pull/1667))
+- css_ast: Parse WebKit-prefixed properties (#1669) ([#1669](https://github.com/csskit/csskit/pull/1669))
+- css_ast: Parse Mozilla-prefixed properties (#1670) ([#1670](https://github.com/csskit/csskit/pull/1670))
+- css_ast: Parse MS-prefixed properties (#1672) ([#1672](https://github.com/csskit/csskit/pull/1672))
+- css_ast: Parse -o- prefixed properties (#1673) ([#1673](https://github.com/csskit/csskit/pull/1673))
+- css_ast: Parse -khtml prefixed properties (#1674) ([#1674](https://github.com/csskit/csskit/pull/1674))
+- css_lexer/css_ast: Parse escaped hex colours such as `#f\66 f` (#1676) ([#1676](https://github.com/csskit/csskit/pull/1676))
+- css_lexer/css_ast: Treat a hash starting with an escape as an id selector (#1677) ([#1677](https://github.com/csskit/csskit/pull/1677))
+- css_lexer: Mark escaped dashed idents as dashed (#1678) ([#1678](https://github.com/csskit/csskit/pull/1678))
+- Regenerate css_ast/src/values from csswg drafts (#1684) ([#1684](https://github.com/csskit/csskit/pull/1684))
+- Upgrade Rust 1.100.0 (#1690) ([#1690](https://github.com/csskit/csskit/pull/1690))
+
+
+### Css_lexer
+- css_lexer: Fix typo in backtick token (#1675) ([#1675](https://github.com/csskit/csskit/pull/1675))
+- css_lexer: Keep escaping leading dashes for idents with ambiguous subsequent chars (#1679) ([#1679](https://github.com/csskit/csskit/pull/1679))
+- css_lexer: Disambiguate dimension units that compact like they have an exponent (#1680) ([#1680](https://github.com/csskit/csskit/pull/1680))
+- css_lexer/css_parse: Write source cursors to string sinks without `write!` (#1685) ([#1685](https://github.com/csskit/csskit/pull/1685))
+- css_lexer: Reduce write! calls for number compaction (#1687) ([#1687](https://github.com/csskit/csskit/pull/1687))
+- css_lexer/csskit_transform: Drop more write! calls (#1688) ([#1688](https://github.com/csskit/csskit/pull/1688))
+
+
+### Css_parse
+- css_parse: Grow trivia_pos (#1681) ([#1681](https://github.com/csskit/csskit/pull/1681))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1660) ([#1660](https://github.com/csskit/csskit/pull/1660))
+
+
+### Csskit_arena
+- csskit_arena: Optimise extend_from_slice (#1689) ([#1689](https://github.com/csskit/csskit/pull/1689))
+- csskit_arena: Clean up; u32 Vec overflow checks, use NonNull pointer helpers (#1692) ([#1692](https://github.com/csskit/csskit/pull/1692))
+
+
+### Csskit_highlight
+- csskit_highlight: Fix vendor modifier typo (#1666) ([#1666](https://github.com/csskit/csskit/pull/1666))
+
+
+### Csskit_proc_macro
+- csskit_proc_macro: Support keyword `||` groups inside NonOr (#1686) ([#1686](https://github.com/csskit/csskit/pull/1686))
+
+
+### Csskit_transform
+- csskit_transform: Index pending edits by source-order runs (#1657) ([#1657](https://github.com/csskit/csskit/pull/1657))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.85.0 (#1665) ([#1665](https://github.com/csskit/csskit/pull/1665))
+- chore(deps): update dependency @types/vscode to v1.145.0 (#1661) ([#1661](https://github.com/csskit/csskit/pull/1661))
+- Release csskit vscode extension v1.0.10 (#1158) ([#1158](https://github.com/csskit/csskit/pull/1158))
+
 ## [0.0.38] - 2026-11-07
 
 ### Csskit
 - csskit_napi: Add minify function (#1650) ([#1650](https://github.com/csskit/csskit/pull/1650))
+- Release v0.0.38 (#1652) ([#1652](https://github.com/csskit/csskit/pull/1652))
 
 ## [0.0.37] - 2026-11-07
 
