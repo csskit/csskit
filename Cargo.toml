@@ -26,17 +26,14 @@ css_feature_data = { path = "crates/css_feature_data", version = "0.0.38" }     
 css_lexer = { path = "crates/css_lexer", version = "0.0.38" }                                                                        # @release
 css_parse = { path = "crates/css_parse", version = "0.0.38" }                                                                        # @release
 css_value_definition_parser = { path = "crates/css_value_definition_parser", version = "0.0.38" }                                    # @release
-csskit = { path = "crates/csskit", version = "0.0.38" }                                                                              # @release
 csskit_arena = { path = "crates/csskit_arena", version = "0.0.38" }                                                                  # @release
 csskit_ast = { path = "crates/csskit_ast", version = "0.0.38" }                                                                      # @release
 csskit_derives = { path = "crates/csskit_derives", version = "0.0.38" }                                                              # @release
 csskit_highlight = { path = "crates/csskit_highlight", version = "0.0.38" }                                                          # @release
 csskit_lsp = { path = "crates/csskit_lsp", version = "0.0.38" }                                                                      # @release
 lsp_service = { path = "crates/lsp_service", version = "0.0.38" }                                                                    # @release
-csskit_napi = { path = "crates/csskit_napi", version = "0.0.38" }                                                                    # @release
 csskit_proc_macro = { path = "crates/csskit_proc_macro", version = "0.0.38" }                                                        # @release
 csskit_source_finder = { path = "crates/csskit_source_finder", version = "0.0.38" }                                                  # @release
-csskit_spec_generator = { path = "tools/csskit_spec_generator", version = "0.0.38" }                                                  # @release
 csskit_transform = { path = "crates/csskit_transform", version = "0.0.38" }                                                          # @release
 derive_atom_set = { path = "crates/derive_atom_set", version = "0.0.38" }                                                            # @release
 bytescan = { path = "crates/bytescan", version = "0.0.38" }                                                                          # @release
@@ -45,7 +42,6 @@ stable_type_layout = { package = "stable-type-layout", path = "crates/stable_typ
 stable_type_layout_derive = { package = "stable-type-layout-derive", path = "crates/stable_type_layout_derive", version = "0.0.38" } # @release
 visit_flow = { package = "visit-flow", path = "crates/visit_flow", version = "0.0.38" }                                              # @release
 # Memory
-allocator-api2 = { version = "0.4.0" }
 inventory = { version = "0.3.25" }
 libc = { version = "0.2.191" }
 windows-sys = { version = "0.61.2" }
@@ -67,7 +63,6 @@ anstyle = { version = "1.0.14" }
 clap = { version = "4.6.7" }
 glob = { version = "0.3.4" }
 owo-colors = { version = "4.4.0" }
-project-root = { version = "0.2.2" }
 strsim = { version = "0.11.1" }
 
 httparse = { version = "1.10.1" }
@@ -94,7 +89,6 @@ proc-macro2 = { version = "1.0.107" }
 quote = { version = "1.0.47" }
 # Procc Macro Tools
 syn = { version = "3.0.8" }
-synstructure = { version = "0.14.0" }
 
 # Serialization
 serde = { version = "1.0.229" }
@@ -103,18 +97,13 @@ toml = { version = "1.1.8" }
 
 criterion = { version = "0.5.1" }    # Held back for pprof (https://github.com/tikv/pprof-rs/pull/271)
 dhat = { version = "0.3.3" }
-flate2 = { version = "1.1.10" }
 insta = { version = "1.49.0" }
 pprof = { version = "0.15.0" }
 prettyplease = { version = "0.3.0" }
 # Testing, benchmarking
 similar = { version = "3.2.1" }
 
-grep-matcher = { version = "0.1.9" }
 # Build tools
-grep-regex = { version = "0.1.14" }
-grep-searcher = { version = "0.1.17" }
-regex = { version = "1.13.1" }
 reqwest = { version = "0.13.5" }
 scraper = { version = "0.29.0" }
 tokio = { version = "1.54.1" }

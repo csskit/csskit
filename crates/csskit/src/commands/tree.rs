@@ -96,10 +96,10 @@ impl<'a> CollectionVisitor<'a> {
 
 		// Find the last direct child of the parent
 		let mut last_child_idx = None;
-		for j in parent.child_start_idx..self.nodes.len() {
-			if self.nodes[j].depth == parent_depth + 1 {
+		for (j, node) in self.nodes.iter().enumerate().skip(parent.child_start_idx) {
+			if node.depth == parent_depth + 1 {
 				last_child_idx = Some(j);
-			} else if self.nodes[j].depth <= parent_depth {
+			} else if node.depth <= parent_depth {
 				break;
 			}
 		}

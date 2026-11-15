@@ -23,7 +23,6 @@ atom_set = { workspace = true }
 csskit_arena = { workspace = true, features = ["collections"] }
 source_tools = { workspace = true, features = ["csskit_arena"] }
 
-allocator-api2 = { workspace = true }
 smallvec = { workspace = true }
 
 miette = { workspace = true, features = ["derive"], optional = true }

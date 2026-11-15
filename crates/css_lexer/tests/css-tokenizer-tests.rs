@@ -1,10 +1,10 @@
-use allocator_api2::alloc::Global;
 use console::Style;
 use css_lexer::{Cursor, EmptyAtomSet, Kind, Lexer, SourceCursor};
 use glob::glob;
 use serde::{Deserialize, Serialize};
 use serde_json::{from_str, to_string_pretty};
 use similar::{ChangeTag, TextDiff};
+use std::alloc::Global;
 use std::{fs::read_to_string, path::PathBuf};
 
 const FIXTURES_GLOB: &str = "../../coverage/css-tokenizer-tests/tests/**/source.css";

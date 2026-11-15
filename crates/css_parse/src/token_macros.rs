@@ -207,7 +207,7 @@ macro_rules! define_kind_idents {
 	};
 }
 
-/// A macro for defining a struct which captures a [Kind::Delim][Kind::Delim] with a specific character.
+/// A macro for defining a struct which captures a [Kind::Delim] with a specific character.
 ///
 /// # Example
 ///
@@ -299,7 +299,7 @@ macro_rules! custom_delim {
 	};
 }
 
-/// A macro for defining a struct which captures two adjacent [Kind::Delim][Kind::Delim] tokens, each with a
+/// A macro for defining a struct which captures two adjacent [Kind::Delim] tokens, each with a
 /// specific character.
 ///
 /// # Example
@@ -383,51 +383,51 @@ macro_rules! custom_double_delim {
 }
 
 define_kinds! {
-	/// Represents a token with [Kind::Eof][Kind::Eof]. Use [T![Eof]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Eof]. Use [T![Eof]][crate::T] to refer to this.
 	Eof,
 
-	/// Represents a token with [Kind::Comment][Kind::Comment]. Use [T![Comment]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Comment]. Use [T![Comment]][crate::T] to refer to this.
 	Comment,
 
-	/// Represents a token with [Kind::CdcOrCdo][Kind::CdcOrCdo]. Use [T![CdcOrCdo]][crate::T] to refer to this.
+	/// Represents a token with [Kind::CdcOrCdo]. Use [T![CdcOrCdo]][crate::T] to refer to this.
 	CdcOrCdo,
 
-	/// Represents a token with [Kind::BadString][Kind::BadString]. Use [T![BadString]][crate::T] to refer to this.
+	/// Represents a token with [Kind::BadString]. Use [T![BadString]][crate::T] to refer to this.
 	BadString,
 
-	/// Represents a token with [Kind::BadUrl][Kind::BadUrl]. Use [T![BadUrl]][crate::T] to refer to this.[
+	/// Represents a token with [Kind::BadUrl]. Use [T![BadUrl]][crate::T] to refer to this.[
 	BadUrl,
 
-	/// Represents a token with [Kind::Delim][Kind::Delim], can be any single character. Use [T![Delim]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Delim], can be any single character. Use [T![Delim]][crate::T] to refer to this.
 	Delim,
 }
 
 define_fixed_kinds! {
-	/// Represents a token with [Kind::Colon][Kind::Colon] - a `:` character. Use [T![:]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Colon] - a `:` character. Use [T![:]][crate::T] to refer to this.
 	Colon,
 
-	/// Represents a token with [Kind::Semicolon][Kind::Semicolon] - a `;` character. Use [T![;]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Semicolon] - a `;` character. Use [T![;]][crate::T] to refer to this.
 	Semicolon,
 
-	/// Represents a token with [Kind::Comma][Kind::Comma] - a `,` character. Use [T![,]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Comma] - a `,` character. Use [T![,]][crate::T] to refer to this.
 	Comma,
 
-	/// Represents a token with [Kind::LeftCurly][Kind::LeftCurly] - a `{` character. Use [T!['{']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftCurly] - a `{` character. Use [T!['{']][crate::T] to refer to this.
 	LeftCurly,
 
-	/// Represents a token with [Kind::LeftCurly][Kind::LeftCurly] - a `}` character. Use [T!['}']][crate::T] to refer to this.
+	/// Represents a token with [Kind::RightCurly] - a `}` character. Use [T!['}']][crate::T] to refer to this.
 	RightCurly,
 
-	/// Represents a token with [Kind::LeftSquare][Kind::LeftSquare] - a `[` character. Use [T!['[']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftSquare] - a `[` character. Use [T!['[']][crate::T] to refer to this.
 	LeftSquare,
 
-	/// Represents a token with [Kind::RightSquare][Kind::RightSquare] - a `]` character. Use [T![']']][crate::T] to refer to this.
+	/// Represents a token with [Kind::RightSquare] - a `]` character. Use [T![']']][crate::T] to refer to this.
 	RightSquare,
 
-	/// Represents a token with [Kind::LeftParen][Kind::LeftParen] - a `(` character. Use [T!['(']][crate::T] to refer to this.
+	/// Represents a token with [Kind::LeftParen] - a `(` character. Use [T!['(']][crate::T] to refer to this.
 	LeftParen,
 
-	/// Represents a token with [Kind::RightParen][Kind::RightParen] - a `(` character. Use [T![')']][crate::T] to refer to this.
+	/// Represents a token with [Kind::RightParen] - a `(` character. Use [T![')']][crate::T] to refer to this.
 	RightParen,
 }
 
@@ -438,22 +438,22 @@ impl PartialEq<char> for Delim {
 }
 
 define_kind_idents! {
-	/// Represents a token with [Kind::Ident][Kind::Ident]. Use [T![Ident]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Ident]. Use [T![Ident]][crate::T] to refer to this.
 	Ident,
 
-	/// Represents a token with [Kind::String][Kind::String]. Use [T![String]][crate::T] to refer to this.
+	/// Represents a token with [Kind::String]. Use [T![String]][crate::T] to refer to this.
 	String,
 
-	/// Represents a token with [Kind::Url][Kind::Url]. Use [T![Url]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Url]. Use [T![Url]][crate::T] to refer to this.
 	Url,
 
-	/// Represents a token with [Kind::Function][Kind::Function]. Use [T![Function]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Function]. Use [T![Function]][crate::T] to refer to this.
 	Function,
 
-	/// Represents a token with [Kind::AtKeyword][Kind::AtKeyword]. Use [T![AtKeyword]][crate::T] to refer to this.
+	/// Represents a token with [Kind::AtKeyword]. Use [T![AtKeyword]][crate::T] to refer to this.
 	AtKeyword,
 
-	/// Represents a token with [Kind::Hash][Kind::Hash]. Use [T![Hash]][crate::T] to refer to this.
+	/// Represents a token with [Kind::Hash]. Use [T![Hash]][crate::T] to refer to this.
 	Hash,
 }
 
@@ -784,67 +784,67 @@ pub mod double {
 	};
 
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `>` while the second has the char `=`, representing `>=`. Use
 		/// [T![>=]][crate::T] to refer to this.
 		GreaterThanEqual, '>', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `<` while the second has the char `=`, representing `<=`. Use
 		/// [T![<=]][crate::T] to refer to this.
 		LessThanEqual, '<', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `*` while the second has the char `|`, representing `*|`. Use
 		/// [T![*|]][crate::T] to refer to this.
 		StarPipe, '*', '|'
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `|` while the second has the char `|`, representing `||`. Use
 		/// [T![||]][crate::T] to refer to this.
 		PipePipe, '|', '|'
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `=` while the second has the char `=`, representing `==`. Use
 		/// [T![==]][crate::T] to refer to this.
 		EqualEqual, '=', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `~` while the second has the char `=`, representing `~=`. Use
 		/// [T![~=]][crate::T] to refer to this.
 		TildeEqual, '~', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `|` while the second has the char `=`, representing `|=`. Use
 		/// [T![|=]][crate::T] to refer to this.
 		PipeEqual, '|', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `^` while the second has the char `=`, representing `^=`. Use
 		/// [T![\^=]][crate::T] to refer to this.
 		CaretEqual, '^', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `$` while the second has the char `=`, representing `$=`. Use
 		/// [T![$=]][crate::T] to refer to this.
 		DollarEqual, '$', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `*` while the second has the char `=`, representing `*=`. Use
 		/// [T![*=]][crate::T] to refer to this.
 		StarEqual, '*', '='
 	}
 	custom_double_delim! {
-		/// Represents a two consecutive tokens with [Kind::Delim][crate::Kind::Delim] that cannot be separated by any
+		/// Represents a two consecutive tokens with [Kind::Delim] that cannot be separated by any
 		/// other token. The first token has the char `!` while the second has the char `=`, representing `!=`. Use
 		/// [T![!=]][crate::T] to refer to this.
 		BangEqual, '*', '='

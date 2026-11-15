@@ -1,5 +1,4 @@
-use allocator_api2::alloc::{Allocator, Global};
-use allocator_api2::boxed::Box;
+use std::alloc::{Allocator, Global};
 
 /// A Cow-like string that supports custom allocators
 pub enum CowStr<'a, A: Allocator = Global> {

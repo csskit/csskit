@@ -3,7 +3,6 @@ use crate::{
 	commands::{Extract, OutputFormat},
 	green,
 };
-use allocator_api2::alloc::Allocator;
 use css_ast::{Visitable, visit::NodeId};
 use css_lexer::{Cursor, LineIndex, SourceOffset, Span};
 use css_parse::{NodeWithMetadata, SourceCursor, SourceCursorSink};
@@ -11,6 +10,7 @@ use csskit_ast::{CsskitAtomSet, QuerySelectorList, SelectorMatcher};
 use csskit_highlight::{AnsiHighlightCursorStream, DefaultAnsiTheme, TokenHighlighter};
 use itertools::Itertools;
 use serde::Serialize;
+use std::alloc::Allocator;
 use std::collections::BTreeMap;
 use strsim::levenshtein;
 

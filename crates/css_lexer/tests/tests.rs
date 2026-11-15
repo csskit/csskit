@@ -1,7 +1,7 @@
-use allocator_api2::alloc::Global;
 use atom_set::AtomSet;
 use css_lexer::{CommentStyle, EmptyAtomSet, Feature, Kind, Lexer, QuoteStyle, SourceCursor, SourceOffset};
 use derive_atom_set::AtomSet as DeriveAtomSet;
+use std::alloc::Global;
 
 #[test]
 fn tokenizes_empty() {

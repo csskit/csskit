@@ -65,12 +65,6 @@ dependencies = [
 ]
 
 [[package]]
-name = "allocator-api2"
-version = "0.4.0"
-source = "registry+https://github.com/rust-lang/crates.io-index"
-checksum = "c880a97d28a3681c0267bd29cff89621202715b065127cd445fa0f0fe0aa2880"
-
-[[package]]
 name = "anes"
 version = "0.1.6"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -693,7 +687,6 @@ dependencies = [
 name = "css_lexer"
 version = "0.0.38"
 dependencies = [
- "allocator-api2",
  "atom_set",
  "bitmask-enum",
  "bytescan",
@@ -716,7 +709,6 @@ dependencies = [
 name = "css_parse"
 version = "0.0.38"
 dependencies = [
- "allocator-api2",
  "atom_set",
  "bitmask-enum",
  "css_lexer",
@@ -754,7 +746,6 @@ dependencies = [
 name = "csskit"
 version = "0.0.38"
 dependencies = [
- "allocator-api2",
  "anstyle",
  "atom_set",
  "chromashift",
@@ -782,7 +773,6 @@ dependencies = [
 name = "csskit_arena"
 version = "0.0.38"
 dependencies = [
- "allocator-api2",
  "libc",
  "serde",
  "windows-sys 0.61.2",
@@ -920,12 +910,10 @@ dependencies = [
  "anyhow",
  "clap",
  "css_value_definition_parser",
- "futures",
  "heck",
  "prettyplease",
  "proc-macro2",
  "quote",
- "regex",
  "reqwest",
  "scraper",
  "serde",
@@ -3054,7 +3042,6 @@ dependencies = [
 name = "source_tools"
 version = "0.0.38"
 dependencies = [
- "allocator-api2",
  "csskit_arena",
  "miette",
  "serde",

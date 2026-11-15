@@ -8,8 +8,8 @@ use crate::{
 		is_newline,
 	},
 };
-use allocator_api2::{alloc::Allocator, boxed::Box, vec::Vec};
 use source_tools::SourceCursor as GenericSourceCursor;
+use std::alloc::Allocator;
 use std::fmt::{Display, Formatter, Result, Write};
 use std::{char::REPLACEMENT_CHARACTER, str::Chars};
 
@@ -675,9 +675,9 @@ impl<'a> SourceCursor<'a> {
 		}
 		match vec {
 			Some(vec) => {
-				let boxed_slice = vec.into_boxed_slice();
+				let (ptr, allocator) = Box::into_raw_with_allocator(vec.into_boxed_slice());
 				// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
-				unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
+				unsafe { CowStr::Owned(Box::from_raw_in(ptr as *mut str, allocator)) }
 			}
 			None => CowStr::Borrowed(&source[..yielded_len]),
 		}
@@ -695,9 +695,9 @@ impl<'a> SourceCursor<'a> {
 			let mut buf = [0; 4];
 			vec.extend_from_slice(c.to_ascii_lowercase().encode_utf8(&mut buf).as_bytes());
 		}
-		let boxed_slice = vec.into_boxed_slice();
+		let (ptr, allocator) = Box::into_raw_with_allocator(vec.into_boxed_slice());
 		// SAFETY: The source is valid UTF-8, so the slice is valid UTF-8
-		unsafe { CowStr::Owned(Box::from_raw_in(Box::into_raw(boxed_slice) as *mut str, allocator)) }
+		unsafe { CowStr::Owned(Box::from_raw_in(ptr as *mut str, allocator)) }
 	}
 
 	fn content_slice(&self) -> &'a str {
@@ -807,7 +807,7 @@ impl CompactNumber<'_> {
 #[cfg(test)]
 mod test {
 	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
-	use allocator_api2::alloc::Global;
+	use std::alloc::Global;
 	use std::fmt::Write;
 
 	#[test]

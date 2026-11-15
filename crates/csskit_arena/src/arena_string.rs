@@ -1,5 +1,5 @@
 use crate::{Arena, Vec};
-use allocator_api2::alloc::Allocator;
+use std::alloc::Allocator;
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::io;

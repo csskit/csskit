@@ -32,5 +32,5 @@ pub use to_number_value::*;
 
 mod prelude {
 	pub(crate) use crate::{Cursor, Diagnostic, Parse, Parser, Peek, Result, T, Vec};
-	pub(crate) use allocator_api2::alloc::Allocator;
+	pub(crate) use std::alloc::Allocator;
 }

@@ -4,13 +4,13 @@ use crate::{
 	commands::{Extract, OutputFormat, extract::ErrorRecord},
 	dimmed, fg,
 };
-use allocator_api2::alloc::Allocator;
 use chromashift::*;
 use css_ast::{Color as ASTColor, NodeVisitor, ToChromashift, VisitNode, Visitable};
 use css_lexer::LineIndex;
 use css_parse::{Diagnostic, Span, ToSpan};
 use itertools::Itertools;
 use serde::Serialize;
+use std::alloc::Allocator;
 use std::collections::HashSet;
 
 fn extract_colors(src: &str, alloc: &Arena) -> Result<Vec<(Color, Span)>, Vec<Diagnostic>> {

@@ -16,7 +16,6 @@ warnings = { level = "deny", priority = -1 }
 bench = false
 
 [dependencies]
-allocator-api2 = { workspace = true }
 serde = { workspace = true, features = ["derive"], optional = true }
 
 [features]

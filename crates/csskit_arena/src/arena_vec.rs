@@ -1,6 +1,6 @@
 use crate::Arena;
 use crate::raw_vec::RawVec;
-use allocator_api2::alloc::Allocator;
+use std::alloc::Allocator;
 use std::fmt;
 use std::hash::{Hash, Hasher};
 use std::ops::{Deref, DerefMut};
