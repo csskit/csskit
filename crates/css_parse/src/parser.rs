@@ -264,12 +264,12 @@ where
 		A::from_bits(bits)
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn offset(&self) -> SourceOffset {
 		self.buffer[self.buffer_index].offset()
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn at_end(&self) -> bool {
 		self.buffer[self.buffer_index] == Kind::Eof
 	}

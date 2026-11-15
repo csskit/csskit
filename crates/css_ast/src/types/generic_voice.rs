@@ -58,7 +58,7 @@ pub struct GenericVoice<'a> {
 impl<'a> Peek<'a> for GenericVoice<'a> {
 	const PEEK_KINDSET: KindSet = VoiceAge::PEEK_KINDSET.combine(VoiceGender::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

@@ -23,7 +23,7 @@ impl<'a> Peek<'a> for TrackList<'a> {
 	const PEEK_KINDSET: KindSet =
 		LineNames::PEEK_KINDSET.combine(TrackSize::PEEK_KINDSET).combine(TrackRepeat::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -59,7 +59,7 @@ impl<'a> Peek<'a> for AutoTrackList<'a> {
 		.combine(FixedRepeat::PEEK_KINDSET)
 		.combine(AutoRepeat::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -88,7 +88,7 @@ type ExplicitTrackListItem<'a> = (TrackSize<'a>, Option<LineNames<'a>>);
 impl<'a> Peek<'a> for ExplicitTrackList<'a> {
 	const PEEK_KINDSET: KindSet = LineNames::PEEK_KINDSET.combine(TrackSize::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

@@ -53,7 +53,7 @@ impl<'a> Peek<'a> for PositionArea {
 		.combine(PositionAreaPosition::PEEK_KINDSET)
 		.combine(PositionAreaSelfPosition::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

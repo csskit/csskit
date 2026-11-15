@@ -70,12 +70,12 @@ macro_rules! byte_class {
 		$vis struct $name;
 
 		impl $crate::ByteClass for $name {
-			#[inline(always)]
+			#[inline]
 			fn matches(self, byte: u8) -> bool {
 				$crate::__byte_class_scalar!(byte, $($set)+)
 			}
 
-			#[inline(always)]
+			#[inline]
 			fn mask<S: $crate::Simd, V: $crate::ByteVector<S>>(self, value: V) -> V::Mask {
 				$crate::__byte_class_vector!(S, V, value, $($set)+)
 			}
@@ -87,13 +87,11 @@ macro_rules! byte_class {
 		$vis struct $name(pub u8);
 
 		impl $crate::ByteClass for $name {
-			#[inline(always)]
 			fn matches(self, byte: u8) -> bool {
 				let $field = self.0;
 				$crate::__byte_class_scalar!(byte, $($set)+)
 			}
 
-			#[inline(always)]
 			fn mask<S: $crate::Simd, V: $crate::ByteVector<S>>(self, value: V) -> V::Mask {
 				let $field = self.0;
 				$crate::__byte_class_vector!(S, V, value, $($set)+)
@@ -164,13 +162,13 @@ macro_rules! __byte_class_vector {
 }
 
 /// Return a lane mask with one lane set for each byte of `value` equal to `byte`.
-#[inline(always)]
+#[inline]
 pub fn byte_mask<S: Simd, V: ByteVector<S>>(value: V, byte: u8) -> V::Mask {
 	value.simd_eq(byte)
 }
 
 /// Return a lane mask with one lane set for each byte of `value` in the inclusive range `LO..=HI`.
-#[inline(always)]
+#[inline]
 pub fn range_mask<S: Simd, V: ByteVector<S>, const LO: u8, const HI: u8>(value: V) -> V::Mask {
 	if LO == u8::MIN {
 		value.simd_le(HI)
@@ -203,12 +201,10 @@ pub fn scan_byte(bytes: &[u8], needle: u8) -> usize {
 struct NoBytes;
 
 impl ByteClass for NoBytes {
-	#[inline(always)]
 	fn matches(self, _byte: u8) -> bool {
 		false
 	}
 
-	#[inline(always)]
 	fn mask<S: Simd, V: ByteVector<S>>(self, value: V) -> V::Mask {
 		V::Mask::splat(value.token(), false)
 	}
@@ -218,7 +214,7 @@ byte_class! {
 	struct Byte(needle) = needle;
 }
 
-#[inline(always)]
+#[inline]
 fn scan_scalar<C: ByteClass, M: ByteClass>(bytes: &[u8], stop: C, mark: M) -> (usize, bool) {
 	let mut marked = false;
 	for (offset, &byte) in bytes.iter().enumerate() {
@@ -233,7 +229,7 @@ fn scan_scalar<C: ByteClass, M: ByteClass>(bytes: &[u8], stop: C, mark: M) -> (u
 /// Scan whole `V`-wide vectors, reporting `(offset, marked, stopped)`.
 ///
 /// `offset` is the stopping byte when `stopped`, and the number of scanned bytes otherwise.
-#[inline(always)]
+#[inline]
 fn scan_vectors<S: Simd, V: ByteVector<S>, C: ByteClass, M: ByteClass>(
 	simd: S,
 	bytes: &[u8],
@@ -258,7 +254,7 @@ fn scan_vectors<S: Simd, V: ByteVector<S>, C: ByteClass, M: ByteClass>(
 	(offset, marked, false)
 }
 
-#[inline(always)]
+#[inline]
 fn scan<S: Simd, C: ByteClass, M: ByteClass>(simd: S, bytes: &[u8], stop: C, mark: M) -> (usize, bool) {
 	let (mut offset, mut marked, stopped) = scan_vectors::<S, S::u8s, C, M>(simd, bytes, stop, mark);
 	if stopped {

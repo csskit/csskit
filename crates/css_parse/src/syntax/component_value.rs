@@ -50,7 +50,7 @@ impl<'a> Peek<'a> for ComponentValue<'a> {
 		Kind::LeftParen,
 		Kind::LeftSquare,
 	]);
-	#[inline(always)]
+	#[inline]
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = Cursor> + Clone,

@@ -44,7 +44,7 @@ impl<'a> Peek<'a> for CfImage<'a> {
 	const PEEK_KINDSET: KindSet =
 		CfImageValue::PEEK_KINDSET.combine(CalcableValue::<Ranged<Percentage, 0, 100>>::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

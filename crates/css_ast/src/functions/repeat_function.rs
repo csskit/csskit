@@ -32,7 +32,7 @@ pub struct RepeatFunction<Items, Count = PositiveNonZeroInt> {
 impl<'a, Items, Count: Peek<'a>> Peek<'a> for RepeatFunction<Items, Count> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Function]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

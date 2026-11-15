@@ -72,7 +72,7 @@ where
 {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,

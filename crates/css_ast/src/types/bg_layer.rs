@@ -39,7 +39,7 @@ impl<'a> Peek<'a> for BgLayer<'a> {
 		.combine(BgClip::PEEK_KINDSET)
 		.combine(Color::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

@@ -9,19 +9,19 @@ pub struct SourceCursor<'a, T> {
 
 impl<'a, T> SourceCursor<'a, T> {
 	/// Creates a source cursor without checking source length.
-	#[inline(always)]
+	#[inline]
 	pub const fn new(cursor: Cursor<T>, source: &'a str) -> Self {
 		Self { cursor, source }
 	}
 
 	/// Returns cursor by reference.
-	#[inline(always)]
+	#[inline]
 	pub const fn cursor_ref(&self) -> &Cursor<T> {
 		&self.cursor
 	}
 
 	/// Returns source text.
-	#[inline(always)]
+	#[inline]
 	pub const fn source(&self) -> &'a str {
 		self.source
 	}
@@ -29,13 +29,13 @@ impl<'a, T> SourceCursor<'a, T> {
 
 impl<'a, T: Copy> SourceCursor<'a, T> {
 	/// Returns cursor.
-	#[inline(always)]
+	#[inline]
 	pub const fn cursor(&self) -> Cursor<T> {
 		self.cursor
 	}
 
 	/// Returns token.
-	#[inline(always)]
+	#[inline]
 	pub const fn token(&self) -> T {
 		self.cursor.token()
 	}
@@ -43,7 +43,7 @@ impl<'a, T: Copy> SourceCursor<'a, T> {
 
 impl<'a, T: SourceToken> SourceCursor<'a, T> {
 	/// Creates a source cursor and checks source length in debug builds.
-	#[inline(always)]
+	#[inline]
 	pub fn from(cursor: Cursor<T>, source: &'a str) -> Self {
 		debug_assert_eq!(cursor.len() as usize, source.len(), "source length must match cursor length");
 		Self::new(cursor, source)

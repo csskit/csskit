@@ -177,7 +177,7 @@ pub struct ColorMixPart<'a> {
 impl<'a> Peek<'a> for ColorMixPart<'a> {
 	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(CalcableValue::<Percentage>::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

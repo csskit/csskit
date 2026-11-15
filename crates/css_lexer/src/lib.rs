@@ -206,7 +206,7 @@ impl<'a> Lexer<'a> {
 		Self { source, features, offset: SourceOffset::default(), token: Token::default(), atoms }
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn source(&self) -> &'a str {
 		self.source
 	}
@@ -217,12 +217,12 @@ impl<'a> Lexer<'a> {
 	}
 
 	/// Current position in file
-	#[inline(always)]
+	#[inline]
 	pub const fn offset(&self) -> SourceOffset {
 		self.offset
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn checkpoint(&self) -> Cursor {
 		Cursor::new(self.offset(), self.token)
 	}

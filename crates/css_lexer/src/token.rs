@@ -1112,7 +1112,7 @@ impl Token {
 	}
 
 	/// A convenience function for `Cursor::new(offset, token)`.
-	#[inline(always)]
+	#[inline]
 	pub fn with_cursor(self, offset: SourceOffset) -> Cursor {
 		Cursor::new(offset, self)
 	}
@@ -1120,7 +1120,7 @@ impl Token {
 	/// If the [Kind] is [Kind::Hash] then this token may have had the opportunity to be parsed as a `<hex-value>` (e.g.
 	/// `#fff`). When this happens the character data is parsed during tokenization into a u32 which stores the
 	/// RR,GG,BB,AA values.
-	#[inline(always)]
+	#[inline]
 	pub fn hex_value(self) -> u32 {
 		if self == Kind::Hash { self.1 } else { 0 }
 	}

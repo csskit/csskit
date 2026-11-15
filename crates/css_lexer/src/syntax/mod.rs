@@ -20,33 +20,33 @@ pub const SPACE: char = ' ';
 
 use tables::{ASCII_NEWLINE, ASCII_NON_PRINTABLE, ASCII_WHITESPACE};
 
-#[inline(always)]
+#[inline]
 pub const fn is_whitespace(c: char) -> bool {
 	c.is_ascii() && ASCII_WHITESPACE.0[c as usize]
 }
 
-#[inline(always)]
+#[inline]
 pub const fn is_newline(c: char) -> bool {
 	c.is_ascii() && ASCII_NEWLINE.0[c as usize]
 }
 
-#[inline(always)]
+#[inline]
 pub const fn is_quote(c: char) -> bool {
 	c == '\'' || c == '"'
 }
 
-#[inline(always)]
+#[inline]
 pub const fn is_escape_sequence(c: char, c2: char) -> bool {
 	c == '\\' && !is_newline(c2)
 }
 
-#[inline(always)]
+#[inline]
 pub const fn is_url_ident(str: &str) -> bool {
 	let str = str.as_bytes();
 	str.len() == 3 && matches!(str[0], b'u' | b'U') && matches!(str[1], b'r' | b'R') && matches!(str[2], b'l' | b'L')
 }
 
-#[inline(always)]
+#[inline]
 pub fn is_non_printable(c: char) -> bool {
 	c.is_ascii() && ASCII_NON_PRINTABLE.0[c as usize]
 }

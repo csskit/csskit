@@ -79,7 +79,7 @@ impl CustomElementTag {
 impl<'a> Peek<'a> for CustomElementTag {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
