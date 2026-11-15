@@ -1,6 +1,5 @@
 use crate::{Cursor, CursorSink, SourceCursor, SourceCursorSink};
 use allocator_api2::alloc::Allocator;
-use std::fmt::Write;
 
 pub struct CursorToSourceCursorSink<'a, T: SourceCursorSink<'a>> {
 	source: &'a str,
@@ -21,13 +20,13 @@ impl<'a, T: SourceCursorSink<'a>> CursorSink for CursorToSourceCursorSink<'a, T>
 
 impl<'a> SourceCursorSink<'a> for String {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		let _ = write!(self, "{c}");
+		let _ = c.write_to(self);
 	}
 }
 
 impl<'a, 'alloc, A: Allocator> SourceCursorSink<'a> for crate::String<'alloc, A> {
 	fn append(&mut self, c: SourceCursor<'a>) {
-		let _ = write!(self, "{c}");
+		let _ = c.write_to(self);
 	}
 }
 
