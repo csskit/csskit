@@ -503,6 +503,13 @@ fn struct_nonor_keyword_options() {
 }
 
 #[test]
+fn struct_noneor_ordered_keyword_options() {
+	let syntax = to_valuedef! { none | [ <integer> || auto ] foo? };
+	let data = to_deriveinput! { #[derive(Parse)] struct Foo<'a>; };
+	assert_snapshot!(syntax, data, "struct_noneor_ordered_keyword_options");
+}
+
+#[test]
 fn enum_with_keyword_group_in_options() {
 	let syntax = to_valuedef! { nowrap | [ wrap | wrap-reverse ] || balance };
 	let data = to_deriveinput! { #[derive(Parse)] enum Foo<'a> {} };
