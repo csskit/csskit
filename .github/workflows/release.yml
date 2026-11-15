@@ -17,9 +17,34 @@ jobs:
       contents: read
       pull-requests: write
 
+  release-pr:
+    name: Update Release PR
+    if: github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit'
+    runs-on: ubuntu-latest
+    concurrency:
+      group: "release-pr"
+      cancel-in-progress: true
+    steps:
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          fetch-depth: 0
+
+      - name: Setup
+        uses: ./.github/actions/setup
+        with:
+          key: release-pr
+          tools: rust node npm cargo:git-cliff
+          components: ""
+
+      - name: Update Release PR
+        run: mise r release-automation --release-pr
+        env:
+          GH_TOKEN: ${{ secrets.RELEASE_PR_PAT }}
+
   build:
     needs: test
-    if: github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit'
+    if: ${{ !cancelled() && (github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit') && contains(fromJSON('["pass","skip"]'), needs.test.outputs.outcome) }}
 
     strategy:
       fail-fast: false
@@ -106,7 +131,7 @@ jobs:
 
   wasm:
     needs: test
-    if: github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit'
+    if: ${{ !cancelled() && (github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit') && contains(fromJSON('["pass","skip"]'), needs.test.outputs.outcome) }}
     name: Package wasm
     runs-on: ubuntu-latest
     steps:
@@ -141,6 +166,7 @@ jobs:
   deploy:
     name: Deploy Release
     needs: [build, wasm]
+    if: ${{ !cancelled() && needs.build.result == 'success' && needs.wasm.result == 'success' }}
     runs-on: ubuntu-latest
     concurrency:
       group: "release"
