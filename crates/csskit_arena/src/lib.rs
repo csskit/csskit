@@ -1,7 +1,6 @@
 #![doc = include_str!("../README.md")]
 
-use allocator_api2::alloc::{AllocError, Allocator};
-use std::alloc::Layout;
+use std::alloc::{AllocError, Allocator, Layout};
 use std::cell::Cell;
 use std::ptr::NonNull;
 
@@ -216,9 +215,9 @@ impl Arena {
 		self.resident.set(self.resident_bytes());
 		self.cursor.set(0);
 		while let Some(node) = self.prev.get() {
-			// SAFETY: every chunk in the chain came from `Box::into_raw`, and `&mut self` proves nothing allocated from
+			// SAFETY: every chunk in the chain came from `Box::into_non_null`, and `&mut self` proves nothing allocated from
 			// the chunk being dropped is still live.
-			let chunk = *unsafe { std::boxed::Box::from_raw(node.as_ptr()) };
+			let chunk = *unsafe { std::boxed::Box::from_non_null(node) };
 			// SAFETY: as above.
 			unsafe { release(self.region.get(), self.resident.get()) };
 			self.region.set(chunk.region);
@@ -320,9 +319,7 @@ impl Arena {
 		let retired = Chunk { region, used: self.resident_bytes(), prev: self.prev.get() };
 		self.prev_used.set(self.prev_used.get() + self.cursor.get());
 		self.prev_size.set(total);
-		// SAFETY: `Box::into_raw` never returns null.
-		self.prev
-			.set(Some(unsafe { NonNull::new_unchecked(std::boxed::Box::into_raw(std::boxed::Box::new(retired))) }));
+		self.prev.set(Some(std::boxed::Box::into_non_null(std::boxed::Box::new(retired))));
 		self.region.set(new_region);
 		self.cursor.set(0);
 		self.resident.set(0);
@@ -401,8 +398,8 @@ impl Drop for Arena {
 		unsafe { release(self.region.get(), self.resident_bytes()) };
 		let mut node = self.prev.get();
 		while let Some(chunk) = node {
-			// SAFETY: every chunk in the chain came from `Box::into_raw` and has not been freed.
-			let chunk = *unsafe { std::boxed::Box::from_raw(chunk.as_ptr()) };
+			// SAFETY: every chunk in the chain came from `Box::into_non_null` and has not been freed.
+			let chunk = *unsafe { std::boxed::Box::from_non_null(chunk) };
 			node = chunk.prev;
 			// SAFETY: as above; every allocation from the chunk is dead.
 			unsafe { release(chunk.region, chunk.used) };
@@ -475,8 +472,7 @@ unsafe impl Allocator for &Arena {
 #[cfg(test)]
 mod test {
 	use crate::{Arena, BLOCK_ALIGN, INITIAL_COMMIT, MAX_BLOCK_SIZE, commit_target, vm};
-	use allocator_api2::alloc::Allocator;
-	use std::alloc::Layout;
+	use std::alloc::{Allocator, Layout};
 
 	/// A growing arena over a chunk from the global allocator, which unlike a reservation is only `CHUNK_ALIGN` aligned
 	/// and small enough to outgrow. This is what [`Arena::new`] builds where nothing can be reserved.

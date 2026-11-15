@@ -111,6 +111,8 @@ use std::char::REPLACEMENT_CHARACTER;
 /// help differentiate between tokens emitted by the lexer and tokens that were either emitted by the lexer but in an
 /// unexpected position, or tokens _constructed_ by the parser in order to aid in recovering the Parser into a state to
 /// resume.
+/// [^dimension]: Dimensions do not have a [bool] returning method for whether or not the dimension unit is known,
+/// instead [Token::atom_bits()] returns a non-zero atom for known units, and `0` for unknown units.
 /// [^quotes]: Strings do not have a [bool] returning method for whether or not the quote is using double or single
 /// quotes, instead the [Token::quote_style()] method will returning the [QuoteStyle] enum for better readability.
 /// [^whitespace]: Whitespace tokens to not have a [bool] returning method, instead [Token::whitespace_style()] will
@@ -724,8 +726,10 @@ impl Token {
 			debug_assert!(matches!(
 				self.kind(),
 				Kind::Delim
-					| Kind::Colon | Kind::Semicolon
-					| Kind::Comma | Kind::LeftSquare
+					| Kind::Colon
+					| Kind::Semicolon
+					| Kind::Comma
+					| Kind::LeftSquare
 					| Kind::RightSquare
 					| Kind::LeftParen
 					| Kind::RightParen

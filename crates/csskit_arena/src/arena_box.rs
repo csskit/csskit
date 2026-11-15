@@ -1,5 +1,5 @@
 use crate::Arena;
-use allocator_api2::alloc::{Allocator, Layout};
+use std::alloc::{Allocator, Layout};
 use std::{
 	fmt,
 	hash::{Hash, Hasher},

@@ -301,9 +301,7 @@ fn main() {
 				while i < atoms.len() {
 					let mut j = i;
 					while j > 0 && (atoms[j - 1] as u32) > (atoms[j] as u32) {
-						let swap = atoms[j - 1];
-						atoms[j - 1] = atoms[j];
-						atoms[j] = swap;
+						atoms.swap(j - 1, j);
 						j -= 1;
 					}
 					i += 1;

@@ -137,12 +137,12 @@ mod test {
 		isolated(|| {
 			let written = {
 				let arena = Arena::new();
-				let mut vec = allocator_api2::vec::Vec::new_in(&arena);
+				let mut vec = std::vec::Vec::new_in(&arena);
 				vec.extend_from_slice(&[7u8; 4096]);
 				vec.iter().map(|byte| *byte as usize).sum::<usize>()
 			};
 			let arena = Arena::new();
-			let mut vec = allocator_api2::vec::Vec::new_in(&arena);
+			let mut vec = std::vec::Vec::new_in(&arena);
 			vec.extend_from_slice(&[9u8; 4096]);
 			assert_eq!(vec.iter().map(|byte| *byte as usize).sum::<usize>(), 4096 * 9);
 			assert_eq!(written, 4096 * 7);
@@ -182,7 +182,7 @@ mod test {
 		isolated(|| {
 			let mut arena = Arena::new();
 			{
-				let mut vec = allocator_api2::vec::Vec::new_in(&arena);
+				let mut vec = std::vec::Vec::new_in(&arena);
 				vec.extend_from_slice(&[1u8; KEEP * 2]);
 				assert_eq!(vec.len(), KEEP * 2);
 			}
@@ -200,13 +200,13 @@ mod test {
 		isolated(|| {
 			{
 				let arena = Arena::new();
-				let mut vec = allocator_api2::vec::Vec::new_in(&arena);
+				let mut vec = std::vec::Vec::new_in(&arena);
 				vec.extend_from_slice(&[3u8; KEEP * 2]);
 				assert_eq!(vec.len(), KEEP * 2);
 			}
 			assert_eq!(FREE.with(|free| free.borrow().len()), 1, "the reservation was kept");
 			let arena = Arena::new();
-			let mut vec = allocator_api2::vec::Vec::new_in(&arena);
+			let mut vec = std::vec::Vec::new_in(&arena);
 			vec.extend_from_slice(&[5u8; KEEP * 2]);
 			assert!(vec.iter().all(|byte| *byte == 5), "writes across the discarded boundary hold");
 			assert_eq!(vec.len(), KEEP * 2);

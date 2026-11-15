@@ -16,7 +16,6 @@ workspace = true
 bench = false
 
 [dependencies]
-allocator-api2 = { workspace = true }
 csskit_arena = { workspace = true, optional = true }
 miette = { workspace = true, optional = true }
 serde = { workspace = true, features = ["derive"], optional = true }

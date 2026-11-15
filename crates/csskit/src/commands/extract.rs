@@ -1,8 +1,8 @@
 use super::prelude::*;
-use allocator_api2::alloc::Allocator;
 use clap::ValueEnum;
 use css_lexer::{LineIndex, Span};
 use serde::Serialize;
+use std::alloc::Allocator;
 
 /// Position metadata for a single result within a file.
 #[derive(Serialize, Debug, Clone)]

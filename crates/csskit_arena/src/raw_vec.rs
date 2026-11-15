@@ -1,4 +1,4 @@
-use allocator_api2::alloc::{Allocator, Layout};
+use std::alloc::{Allocator, Layout};
 use std::ptr::NonNull;
 
 /// The raw view of a growable slice: a native pointer, a length, and a capacity, with a stable repr(C) layout.

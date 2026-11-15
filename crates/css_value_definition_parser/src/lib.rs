@@ -309,10 +309,15 @@ impl Def {
 					ty.ident_str(),
 					"CalcSize"
 						| "DynamicRangeLimitMix"
-						| "Fade" | "Param" | "Rect"
-						| "Repeat" | "Attr"
-						| "PaletteMix" | "SnapBlock"
-						| "SnapInline" | "Superellipse"
+						| "Fade"
+						| "Param"
+						| "Rect"
+						| "Repeat"
+						| "Attr"
+						| "PaletteMix"
+						| "SnapBlock"
+						| "SnapInline"
+						| "Superellipse"
 				)
 			}
 			Self::Type(_) => true,

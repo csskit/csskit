@@ -5,16 +5,12 @@ graphs. It allocates quickly, releases all storage together, and can preserve
 pointer offsets for zero-copy transfer across language bindings.
 
 It's inspired by [bumpalo], and [oxc_allocator], and uses many of the same
-techniques as these do. However, csskit_arena is designed to work with
-[allocator_api2].
-
-The allocator implements [`allocator_api2::alloc::Allocator`] for `&Arena`, so
-it works with all allocator-aware collections from `allocator-api2`.
+techniques as these do. It implements [`std::alloc::Allocator`] for `&Arena`,
+so it works with allocator-aware std collections such as `Box` and `Vec`.
 
 [bumpalo]: https://github.com/oxc-project/oxc/tree/main/crates/oxc_allocator/
 [oxc_allocator]: https://github.com/oxc-project/oxc/tree/main/crates/oxc_allocator/
-[allocator_api2]: https://github.com/oxc-project/oxc/tree/main/crates/oxc_allocator/
-[`allocator_api2::alloc::Allocator`]: https://docs.rs/allocator-api2/latest/allocator_api2/alloc/trait.Allocator.html
+[`std::alloc::Allocator`]: https://doc.rust-lang.org/std/alloc/trait.Allocator.html
 
 ## Limitations
 
@@ -34,7 +30,6 @@ source code into an AST, none of these matter at all.
 ## Usage
 
 ```rust
-use allocator_api2::vec::Vec;
 use csskit_arena::Arena;
 
 let arena = Arena::with_capacity(4096);
@@ -59,9 +54,9 @@ The crate has no default features. The allocator itself is always available.
   and `format_in!` macros.
 - `serde`: serialization for those collections (implies `collections`).
 
-### Why not the `allocator_api2` collections?
+### Why not the std collections?
 
-`allocator_api2::boxed::Box` and `allocator_api2::vec::Vec` work with `&Arena`
+`std::boxed::Box` and `std::vec::Vec` work with `&Arena`
 and are the right choice for general use, but the `collections` feature of this
 crate provides the same types with some subtle but important differences:
 
@@ -76,7 +71,7 @@ crate provides the same types with some subtle but important differences:
   element destructors, so `T` must not own resources outside the arena. `Box`
   does run the destructor of the value it holds.
 - **Panic, not abort.** Exhausting the arena panics, which parsing can unwind
-  from. The `allocator_api2` collections call `handle_alloc_error`, which
+  from. The std collections call `handle_alloc_error`, which
   aborts the process.
 - **`Sized` only.** There is no unsizing coercion, so no `Box<dyn Trait>` and no
   `Box<[T]>`. Cloning is supported, since each value keeps its allocator.
@@ -139,7 +134,6 @@ than adding a chunk.
 the first chunk for reuse:
 
 ```rust
-use allocator_api2::vec::Vec;
 use csskit_arena::Arena;
 
 let mut arena = Arena::with_capacity(4096);

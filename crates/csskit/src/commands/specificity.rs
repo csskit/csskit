@@ -1,11 +1,11 @@
 use super::prelude::*;
 use crate::commands::{Extract, OutputFormat};
-use allocator_api2::alloc::Allocator;
 use css_ast::specificity::ToSpecificity;
 use css_ast::{NodeVisitor, SelectorList, StyleRule, Visit, VisitNode, Visitable, visitor};
 use css_lexer::{LineIndex, Span};
 use css_parse::ToSpan;
 use serde::Serialize;
+use std::alloc::Allocator;
 
 #[derive(Serialize, Debug)]
 pub struct SpecificityRow {

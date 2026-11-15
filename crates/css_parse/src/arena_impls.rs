@@ -1,7 +1,7 @@
 use crate::{Cursor, CursorSink, Parse, Parser, Peek, SemanticEq, ToCursors};
-use allocator_api2::alloc::Allocator;
 use css_lexer::KindSet;
 use csskit_arena::Box;
+use std::alloc::Allocator;
 
 impl<'a, T: ToCursors, A: Allocator> ToCursors for Box<'a, T, A> {
 	fn to_cursors(&self, s: &mut (impl CursorSink + ?Sized)) {

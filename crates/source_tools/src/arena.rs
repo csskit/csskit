@@ -1,6 +1,6 @@
 use crate::{Span, ToSpan};
-use allocator_api2::alloc::Allocator;
 use csskit_arena::{Box, Vec};
+use std::alloc::Allocator;
 
 impl<'a, T: ToSpan, A: Allocator> ToSpan for Box<'a, T, A> {
 	fn to_span(&self) -> Span {

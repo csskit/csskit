@@ -1,7 +1,6 @@
 use crate::SourceOffset;
-use allocator_api2::alloc::{Allocator, Global};
-use allocator_api2::boxed::Box;
 use core::{fmt::Display, hash::Hash, marker::PhantomData, ops::Add};
+use std::alloc::{Allocator, Global};
 
 /// A half-open byte range in source text.
 #[repr(C)]
@@ -109,7 +108,7 @@ impl<'a> LineIndex<'a, Global> {
 impl<'a, A: Allocator> LineIndex<'a, A> {
 	/// Builds an index using `alloc`.
 	pub fn new_in(source: &'a str, alloc: A) -> Self {
-		let mut line_starts = allocator_api2::vec::Vec::with_capacity_in(source.len() / 32 + 1, alloc);
+		let mut line_starts = std::vec::Vec::with_capacity_in(source.len() / 32 + 1, alloc);
 		line_starts.push(0);
 		for (index, byte) in source.bytes().enumerate() {
 			if byte == b'\n' {
@@ -200,13 +199,7 @@ impl<T: ToSpan> ToSpan for [T] {
 	}
 }
 
-impl<T: ToSpan> ToSpan for Vec<T> {
-	fn to_span(&self) -> Span {
-		self.as_slice().to_span()
-	}
-}
-
-impl<T: ToSpan, A: Allocator> ToSpan for allocator_api2::vec::Vec<T, A> {
+impl<T: ToSpan, A: Allocator> ToSpan for Vec<T, A> {
 	fn to_span(&self) -> Span {
 		self.as_slice().to_span()
 	}

@@ -9,7 +9,7 @@ A spec-compliant CSS tokenizer with zero-copy cursors and optional feature gates
 - **Spec-compliant**: Fully implements CSS Syntax Module Level 3 tokenization rules
 - **Zero-copy cursors**: Efficient token streaming with minimal allocations
 - **Atom-set aware**: Optimized lexing for CSS keywords and identifiers
-- **Allocation control**: Support for custom allocators via allocator_api2 integration
+- **Allocation control**: Support for custom allocators via the std `Allocator` trait
 
 ## Optional Features
 

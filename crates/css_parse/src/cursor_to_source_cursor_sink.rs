@@ -1,5 +1,5 @@
 use crate::{Cursor, CursorSink, SourceCursor, SourceCursorSink};
-use allocator_api2::alloc::Allocator;
+use std::alloc::Allocator;
 
 pub struct CursorToSourceCursorSink<'a, T: SourceCursorSink<'a>> {
 	source: &'a str,
