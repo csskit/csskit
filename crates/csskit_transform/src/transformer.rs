@@ -203,7 +203,7 @@ impl<'a, M: NodeMetadata, N: NodeWithMetadata<M>, F: TransformerFeatures<M, N>> 
 	pub fn compacted_len(&self, cursors: &[SourceCursor<'a>]) -> usize {
 		let mut counter = LenCounter(0);
 		for cursor in cursors {
-			write!(counter, "{}", cursor.compact()).expect("LenCounter never errors");
+			cursor.compact().write_to(&mut counter).expect("LenCounter never errors");
 		}
 		counter.0
 	}

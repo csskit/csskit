@@ -85,45 +85,7 @@ impl<'a> ToSpan for SourceCursor<'a> {
 
 impl<'a> Display for SourceCursor<'a> {
 	fn fmt(&self, f: &mut Formatter<'_>) -> Result {
-		match self.token().kind() {
-			Kind::Eof => Ok(()),
-			#[cfg(feature = "egg")]
-			Kind::String if self.should_expand => self.fmt_expanded_string(f),
-			Kind::String if self.should_compact && (self.token().contains_escape_chars() || self.contains_quote()) => {
-				self.fmt_compacted_string(f)
-			}
-			// It is important to manually write out quotes for 2 reasons:
-			//  1. The quote style can be mutated from the source string (such as the case of normalising/switching quotes.
-			//  2. Some strings may not have the closing quote, which should be corrected.
-			Kind::String => match self.token().quote_style() {
-				QuoteStyle::Single => {
-					let inner = &self.inner.source()
-						[1..(self.token().len() as usize) - self.token().has_close_quote() as usize];
-					write!(f, "'{inner}'")
-				}
-				QuoteStyle::Double => {
-					let inner = &self.inner.source()
-						[1..(self.token().len() as usize) - self.token().has_close_quote() as usize];
-					write!(f, "\"{inner}\"")
-				}
-				// Strings must always be quoted!
-				QuoteStyle::None => unreachable!(),
-			},
-			Kind::Delim
-			| Kind::Colon
-			| Kind::Semicolon
-			| Kind::Comma
-			| Kind::LeftSquare
-			| Kind::LeftParen
-			| Kind::RightSquare
-			| Kind::RightParen
-			| Kind::LeftCurly
-			| Kind::RightCurly => self.token().char().unwrap().fmt(f),
-			_ if self.should_compact => self.fmt_compacted(f),
-			#[cfg(feature = "egg")]
-			_ if self.should_expand => self.fmt_expanded(f),
-			_ => f.write_str(self.inner.source()),
-		}
+		self.write_to(f)
 	}
 }
 
@@ -166,9 +128,25 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	/// Writes this cursor's text, applying its compaction or expansion settings.
-	pub fn write_to(&self, writer: &mut impl Write) -> Result {
+	pub fn write_to<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 		match token.kind() {
+			Kind::Eof => Ok(()),
+			#[cfg(feature = "egg")]
+			Kind::String if self.should_expand => self.fmt_expanded_string(f),
+			Kind::String if self.should_compact && (token.contains_escape_chars() || self.contains_quote()) => {
+				self.fmt_compacted_string(f)
+			}
+			Kind::String => {
+				let quote = match token.quote_style() {
+					QuoteStyle::Single => '\'',
+					QuoteStyle::Double => '"',
+					QuoteStyle::None => unreachable!(),
+				};
+				f.write_char(quote)?;
+				f.write_str(&self.inner.source()[1..(token.len() as usize) - token.has_close_quote() as usize])?;
+				f.write_char(quote)
+			}
 			Kind::Delim
 			| Kind::Colon
 			| Kind::Semicolon
@@ -178,15 +156,11 @@ impl<'a> SourceCursor<'a> {
 			| Kind::RightSquare
 			| Kind::RightParen
 			| Kind::LeftCurly
-			| Kind::RightCurly => writer.write_char(token.char().unwrap()),
-			Kind::Ident | Kind::Function | Kind::AtKeyword | Kind::Hash if !token.contains_escape_chars() => {
-				#[cfg(feature = "egg")]
-				if self.should_expand {
-					return write!(writer, "{self}");
-				}
-				writer.write_str(self.source())
-			}
-			_ => write!(writer, "{self}"),
+			| Kind::RightCurly => f.write_char(token.char().unwrap()),
+			_ if self.should_compact => self.fmt_compacted(f),
+			#[cfg(feature = "egg")]
+			_ if self.should_expand => self.fmt_expanded(f),
+			_ => f.write_str(self.inner.source()),
 		}
 	}
 
@@ -354,7 +328,7 @@ impl<'a> SourceCursor<'a> {
 		})
 	}
 
-	fn fmt_compacted(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_compacted<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 		match token.kind() {
 			Kind::Whitespace => f.write_str(" "),
@@ -370,15 +344,15 @@ impl<'a> SourceCursor<'a> {
 		}
 	}
 
-	fn fmt_compacted_number(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_compacted_number<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let mut digits = SmallStrBuf::new();
 		match self.compact_number(&mut digits) {
-			Some(number) => number.fmt(f),
+			Some(number) => number.write_to(f),
 			None => f.write_str(self.numeric_source()),
 		}
 	}
 
-	fn fmt_compacted_dimension(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_compacted_dimension<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let mut digits = SmallStrBuf::new();
 		let unit_lexes_as_exponent = self.unit_lexes_as_exponent();
 		let escape_exponent = match self.compact_number(&mut digits) {
@@ -388,7 +362,7 @@ impl<'a> SourceCursor<'a> {
 				false
 			}
 			Some(number) => {
-				number.fmt(f)?;
+				number.write_to(f)?;
 				unit_lexes_as_exponent
 			}
 			None => {
@@ -412,7 +386,7 @@ impl<'a> SourceCursor<'a> {
 		}
 	}
 
-	fn fmt_compacted_ident(&self, f: &mut Formatter<'_>, escape_exponent: bool) -> Result {
+	fn fmt_compacted_ident<W: Write + ?Sized>(&self, f: &mut W, escape_exponent: bool) -> Result {
 		let token = self.token();
 		let starts_with_dash = self.parsed_chars().next().is_some_and(|(ch, _)| ch == '-');
 
@@ -465,7 +439,7 @@ impl<'a> SourceCursor<'a> {
 		Ok(())
 	}
 
-	fn fmt_compacted_url(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_compacted_url<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 		let leading_len = token.leading_len() as usize;
 		let trailing_len = token.trailing_len() as usize;
@@ -478,7 +452,7 @@ impl<'a> SourceCursor<'a> {
 		Ok(())
 	}
 
-	fn fmt_compacted_string(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_compacted_string<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let quote = match self.token().quote_style() {
 			QuoteStyle::Single => '\'',
 			QuoteStyle::Double => '"',
@@ -505,7 +479,7 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	#[cfg(feature = "egg")]
-	fn fmt_expanded(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_expanded<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 		match token.kind() {
 			Kind::Whitespace => f.write_str("    "),
@@ -521,7 +495,7 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	#[cfg(feature = "egg")]
-	fn fmt_expanded_number(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_expanded_number<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let value = self.token().value();
 		if self.exceeds_f32_precision() {
 			return f.write_str(self.numeric_source());
@@ -546,7 +520,7 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	#[cfg(feature = "egg")]
-	fn fmt_expanded_ident(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_expanded_ident<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 
 		match token.kind() {
@@ -567,7 +541,7 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	#[cfg(feature = "egg")]
-	fn fmt_expanded_url(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_expanded_url<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 		let leading_len = token.leading_len() as usize;
 		let trailing_len = token.trailing_len() as usize;
@@ -584,7 +558,7 @@ impl<'a> SourceCursor<'a> {
 	}
 
 	#[cfg(feature = "egg")]
-	fn fmt_expanded_string(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_expanded_string<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		let token = self.token();
 		let inner = &self.inner.source()[1..(token.len() as usize) - token.has_close_quote() as usize];
 		// Use the opposite quote style to maximize escaping opportunity
@@ -795,13 +769,11 @@ impl CompactNumber<'_> {
 		self.digits.len() + 1 + (self.exponent < 0) as usize + exponent_digits
 	}
 
-	fn fmt_scientific(&self, f: &mut Formatter<'_>) -> Result {
+	fn fmt_scientific<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		write!(f, "{}e{}", self.digits, self.exponent)
 	}
-}
 
-impl Display for CompactNumber<'_> {
-	fn fmt(&self, f: &mut Formatter<'_>) -> Result {
+	fn write_to<W: Write + ?Sized>(&self, f: &mut W) -> Result {
 		f.write_str(self.sign)?;
 		if self.scientific_len() < self.decimal_len() {
 			return self.fmt_scientific(f);
@@ -834,48 +806,9 @@ impl Display for CompactNumber<'_> {
 
 #[cfg(test)]
 mod test {
-	use crate::{Cursor, EmptyAtomSet, Kind, Lexer, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
+	use crate::{Cursor, QuoteStyle, SourceCursor, SourceOffset, Token, Whitespace};
 	use allocator_api2::alloc::Global;
 	use std::fmt::Write;
-
-	#[test]
-	fn direct_write_matches_display() {
-		let check = |cursor: SourceCursor<'_>| {
-			let modes = [
-				cursor,
-				cursor.compact(),
-				#[cfg(feature = "egg")]
-				cursor.expand(),
-			];
-			for cursor in modes {
-				let mut actual = String::new();
-				cursor.write_to(&mut actual).unwrap();
-				assert_eq!(actual, format!("{cursor}"), "{cursor:?}");
-			}
-		};
-		for source in [
-			"foo FOO --bar foo( @media #fff #123 ғоо ғоо( @ғоо #ғоо",
-			r"f\6fo \66oo( @m\65 dia #f\66f",
-			"foo\0bar f\\\0oo",
-			" \t\r\n 1.0px +0.5 1e3 10% url(a) URL( a )",
-			"'a' \"b\" '\\61' 'open",
-			"\"bad\n/* comment */ <!-- --> ~|^$*=/:;,[](){}",
-		] {
-			let mut lexer = Lexer::new(&EmptyAtomSet::ATOMS, source);
-			loop {
-				let offset = lexer.offset();
-				let token = lexer.advance();
-				let cursor = Cursor::new(offset, token);
-				check(SourceCursor::from(cursor, cursor.str_slice(source)));
-				if token == Kind::Eof {
-					break;
-				}
-			}
-		}
-		for byte in 0..=127 {
-			check(SourceCursor::from(Cursor::new(SourceOffset::ZERO, Token::new_delim(char::from(byte))), "x"));
-		}
-	}
 
 	#[test]
 	fn direct_write_propagates_writer_failure() {
