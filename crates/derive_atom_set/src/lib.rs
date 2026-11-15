@@ -14,6 +14,10 @@ mod atom_set;
 /// - `#[default]`: Marks this variant as the empty/fallback value (returns empty string)
 /// - `#[atom("custom")]`: Overrides the default string representation
 ///
+/// ## Container Attributes
+///
+/// - `#[atom_set(case_sensitive)]`: `from_str` matches bytes exactly instead of ASCII case-insensitively
+///
 /// ## Naming Convention
 ///
 /// If `#[atom("")]` is not provided a string is derived from the variant name:
@@ -56,7 +60,7 @@ mod atom_set;
 /// assert_eq!(MyAtomSet::Percent.to_str(), "%");
 /// assert_eq!(MyAtomSet::from_str("unknown"), MyAtomSet::Unknown);
 /// ```
-#[proc_macro_derive(AtomSet, attributes(default, atom))]
+#[proc_macro_derive(AtomSet, attributes(default, atom, atom_set))]
 pub fn derive_atom_set(input: TokenStream) -> TokenStream {
 	let ast = parse_macro_input!(input as DeriveInput);
 	atom_set::generate(proc_macro2::TokenStream::new(), ast).into()

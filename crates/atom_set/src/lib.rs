@@ -41,7 +41,8 @@ pub trait DynAtomSet: std::fmt::Debug {
 pub trait AtomSet: Default + std::fmt::Debug {
 	/// Converts a string keyword to the corresponding atom variant.
 	///
-	/// This performs case-insensitive matching and returns the `Empty` variant for unrecognized strings.
+	/// This performs ASCII case-insensitive matching, unless the set is derived with
+	/// `#[atom_set(case_sensitive)]`, and returns the `Empty` variant for unrecognized strings.
 	///
 	/// # Examples
 	///

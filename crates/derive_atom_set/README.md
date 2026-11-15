@@ -15,11 +15,13 @@ implementations, this overhead can be undesirable.
 
 [unicase]: https://en.wikipedia.org/wiki/String_interning
 
-`derive_atom_set` bakes in the assumption that keywords are case insensitive,
-and rather than a map, it expects you to enumerate all keywords upfront, in an
-enum. The _benefit_ of these two things is that it can make some assumptions
-about the data and really quickly match an Atom, making for wicked fast string
-matching.
+`derive_atom_set` expects you to enumerate all keywords upfront, in an enum,
+rather than a map. Knowing every keyword ahead of time lets it make some
+assumptions about the data and really quickly match an Atom, making for wicked
+fast string matching.
+
+Matching is ASCII case-insensitive. For case-sensitive languages (e.g. XML
+names) add `#[atom_set(case_sensitive)]` to the enum to match bytes exactly.
 
 ## Usage
 
