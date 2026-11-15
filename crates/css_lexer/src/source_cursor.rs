@@ -136,7 +136,7 @@ impl<'a> SourceCursor<'a> {
 	pub const EMPTY_COMMENT: SourceCursor<'static> =
 		SourceCursor::from(Cursor::new(SourceOffset(0), Token::new_comment(CommentStyle::Block, 4)), "/**/");
 
-	#[inline(always)]
+	#[inline]
 	pub const fn from(cursor: Cursor, source: &'a str) -> Self {
 		debug_assert!(
 			(cursor.token().len() as usize) == source.len(),
@@ -150,17 +150,17 @@ impl<'a> SourceCursor<'a> {
 		}
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub const fn cursor(&self) -> Cursor {
 		self.inner.cursor()
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub const fn token(&self) -> Token {
 		self.inner.cursor().token()
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub const fn source(&self) -> &'a str {
 		self.inner.source()
 	}

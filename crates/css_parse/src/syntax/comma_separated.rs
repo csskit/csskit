@@ -48,7 +48,7 @@ impl<'a, T, const MIN: usize> CommaSeparated<'a, T, MIN> {
 impl<'a, T: Peek<'a>, const MIN: usize> Peek<'a> for CommaSeparated<'a, T, MIN> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = crate::Cursor> + Clone,

@@ -72,7 +72,7 @@ impl<'a> ByteCursor<'a> {
 	}
 
 	/// Peek the next two chars
-	#[inline(always)]
+	#[inline]
 	fn peek2(&self) -> (char, char) {
 		let c0 = self.peek_char_at(0);
 		let c1 = self.peek_char_at(c0.len_utf8());
@@ -80,7 +80,7 @@ impl<'a> ByteCursor<'a> {
 	}
 
 	/// Peek the next three chars
-	#[inline(always)]
+	#[inline]
 	fn peek3(&self) -> (char, char, char) {
 		let c0 = self.peek_char_at(0);
 		let off1 = c0.len_utf8();
@@ -105,7 +105,7 @@ impl<'a> ByteCursor<'a> {
 	}
 
 	/// Advance past one char, return it. Returns None if at end.
-	#[inline(always)]
+	#[inline]
 	fn next_char(&mut self) -> Option<char> {
 		if self.pos >= self.bytes.len() {
 			return None;
@@ -135,13 +135,13 @@ impl<'a> ByteCursor<'a> {
 	}
 
 	/// Return the remaining bytes as a &str (valid since source is UTF-8)
-	#[inline(always)]
+	#[inline]
 	fn remaining_str(&self) -> &'a str {
 		unsafe { std::str::from_utf8_unchecked(&self.bytes[self.pos..]) }
 	}
 
 	/// Return the remaining bytes slice
-	#[inline(always)]
+	#[inline]
 	fn remaining_bytes(&self) -> &'a [u8] {
 		&self.bytes[self.pos..]
 	}

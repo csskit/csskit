@@ -43,7 +43,7 @@ impl<'a> Peek<'a> for SingleAnimation<'a> {
 		.combine(<SingleAnimationIterationCount<'a>>::PEEK_KINDSET)
 		.combine(<NoneOr<KeyframesName>>::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

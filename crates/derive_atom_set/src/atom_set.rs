@@ -127,7 +127,6 @@ fn generate_u64_lookup_fn(
 	let fold = generate_fold(fold_safe, 8);
 
 	quote! {
-	#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
 			#key_computation
 			#fold
@@ -169,7 +168,6 @@ fn generate_u128_lookup_fn(
 	let fold = generate_fold(fold_safe, 16);
 
 	quote! {
-	#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
 			#key_computation
 			#fold
@@ -233,7 +231,6 @@ fn generate_multi_u128_lookup_fn(
 		.collect();
 
 	quote! {
-		#[inline]
 		fn #fn_name(b: &[u8]) -> Self {
 			#(#chunk_computations)*
 			#(#lookup_entries)*
@@ -330,7 +327,6 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 		}
 
 		impl ::atom_set::AtomSet for #ident {
-			#[inline]
 			fn from_str(s: &str) -> Self {
 				let b = s.as_bytes();
 				match b.len() {
@@ -339,14 +335,12 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 				}
 			}
 
-			#[inline]
 			fn to_str(self) -> &'static str {
 				match self {
 					#(#to_str_match_arms,)*
 				}
 			}
 
-			#[inline]
 			fn len(&self) -> u32 {
 				match self {
 					#(#len_match_arms,)*
@@ -354,7 +348,6 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 				}
 			}
 
-			#[inline]
 			fn from_bits(value: u32) -> Self {
 				match value {
 					#(#from_bits_match_arms,)*
@@ -362,7 +355,6 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 				}
 			}
 
-			#[inline]
 			fn as_bits(&self) -> u32 {
 				*self as u32
 			}

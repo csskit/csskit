@@ -278,7 +278,7 @@ pub enum ScrollStateFeature {
 impl<'a> Peek<'a> for ScrollStateFeature {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident, Kind::LeftParen]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

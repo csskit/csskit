@@ -29,7 +29,7 @@ pub struct BangImportant {
 impl<'a> Peek<'a> for BangImportant {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Delim]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<Iter>(p: &Parser<'a, Iter>, c: Cursor) -> bool
 	where
 		Iter: Iterator<Item = Cursor> + Clone,

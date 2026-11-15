@@ -50,7 +50,7 @@ impl<'a> Peek<'a> for ImageFunctionParams<'a> {
 	const PEEK_KINDSET: KindSet =
 		ImageTags::PEEK_KINDSET.combine(UrlOrString::PEEK_KINDSET).combine(Color::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

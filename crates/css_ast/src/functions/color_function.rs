@@ -109,7 +109,7 @@ pub struct CommaOrSlash(#[metadata(skip)] Cursor);
 impl<'a> Peek<'a> for CommaOrSlash {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Delim]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

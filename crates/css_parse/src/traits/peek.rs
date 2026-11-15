@@ -42,7 +42,7 @@ pub trait Peek<'a>: Sized {
 impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -54,7 +54,7 @@ impl<'a, T: Peek<'a>> Peek<'a> for Option<T> {
 impl<'a, T: Peek<'a>, A: Allocator> Peek<'a> for Vec<'a, T, A> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

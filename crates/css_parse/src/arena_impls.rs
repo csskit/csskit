@@ -35,7 +35,7 @@ impl<'a, M: crate::NodeMetadata, T: crate::NodeWithMetadata<M>, A: Allocator> cr
 impl<'a, T: Peek<'a>, A: Allocator> Peek<'a> for Box<'a, T, A> {
 	const PEEK_KINDSET: KindSet = T::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

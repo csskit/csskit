@@ -117,22 +117,22 @@ pub struct Highlight {
 }
 
 impl Highlight {
-	#[inline(always)]
+	#[inline]
 	pub fn span(&self) -> Span {
 		self.span
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn modifier(&self) -> SemanticModifier {
 		self.modifier
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn kind(&self) -> SemanticKind {
 		self.kind
 	}
 
-	#[inline(always)]
+	#[inline]
 	pub fn decoration(&self) -> SemanticDecoration {
 		self.decoration
 	}

@@ -248,7 +248,7 @@ pub struct IfFunction<'a, V> {
 impl<'a, V: Peek<'a>> Peek<'a> for IfFunction<'a, V> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Function]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

@@ -20,7 +20,7 @@ pub enum Position<'a> {
 impl<'a> Peek<'a> for Position<'a> {
 	const PEEK_KINDSET: KindSet = PositionOne::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -235,7 +235,7 @@ pub enum PositionTwo<'a> {
 impl<'a> Peek<'a> for PositionTwo<'a> {
 	const PEEK_KINDSET: KindSet = PositionOne::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

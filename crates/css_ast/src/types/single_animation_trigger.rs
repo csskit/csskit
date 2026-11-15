@@ -64,7 +64,7 @@ impl<'a> Peek<'a> for SingleAnimationTrigger<'a> {
 	const PEEK_KINDSET: KindSet =
 		SingleAnimationTriggerBehavior::PEEK_KINDSET.combine(<SingleAnimationTriggerTimeline<'a>>::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

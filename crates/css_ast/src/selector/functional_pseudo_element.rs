@@ -32,7 +32,7 @@ pub enum FunctionalPseudoElement<'a> {
 impl<'a> Peek<'a> for FunctionalPseudoElement<'a> {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Colon]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, _: css_lexer::Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

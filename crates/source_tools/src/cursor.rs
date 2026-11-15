@@ -40,37 +40,37 @@ pub struct Cursor<T>(SourceOffset, T);
 
 impl<T> Cursor<T> {
 	/// Places `token` at `offset`.
-	#[inline(always)]
+	#[inline]
 	pub const fn new(offset: SourceOffset, token: T) -> Self {
 		Self(offset, token)
 	}
 
 	/// Places a synthetic token at [SourceOffset::DUMMY].
-	#[inline(always)]
+	#[inline]
 	pub const fn dummy(token: T) -> Self {
 		Self(SourceOffset::DUMMY, token)
 	}
 
 	/// Returns token by reference.
-	#[inline(always)]
+	#[inline]
 	pub const fn token_ref(&self) -> &T {
 		&self.1
 	}
 
 	/// Returns starting offset.
-	#[inline(always)]
+	#[inline]
 	pub const fn offset(&self) -> SourceOffset {
 		self.0
 	}
 
 	/// Replaces token while preserving offset.
-	#[inline(always)]
+	#[inline]
 	pub fn with_token<U>(self, token: U) -> Cursor<U> {
 		Cursor(self.0, token)
 	}
 
 	/// Maps token while preserving offset.
-	#[inline(always)]
+	#[inline]
 	pub fn map_token<U>(self, map: impl FnOnce(T) -> U) -> Cursor<U> {
 		Cursor(self.0, map(self.1))
 	}
@@ -78,7 +78,7 @@ impl<T> Cursor<T> {
 
 impl<T: Copy> Cursor<T> {
 	/// Returns token.
-	#[inline(always)]
+	#[inline]
 	pub const fn token(&self) -> T {
 		self.1
 	}
@@ -89,13 +89,13 @@ impl<T: SourceToken> Cursor<T> {
 	pub const EMPTY: Self = Self(SourceOffset::ZERO, T::EMPTY);
 
 	/// Returns token category.
-	#[inline(always)]
+	#[inline]
 	pub fn kind(&self) -> T::Kind {
 		self.1.kind()
 	}
 
 	/// Returns offset immediately after token.
-	#[inline(always)]
+	#[inline]
 	pub fn end_offset(&self) -> SourceOffset {
 		if self.0 == SourceOffset::DUMMY {
 			return self.0;
@@ -104,25 +104,25 @@ impl<T: SourceToken> Cursor<T> {
 	}
 
 	/// Returns token length in bytes.
-	#[inline(always)]
+	#[inline]
 	pub fn len(&self) -> u32 {
 		self.1.len()
 	}
 
 	/// Returns whether token occupies no bytes.
-	#[inline(always)]
+	#[inline]
 	pub fn is_empty(&self) -> bool {
 		self.1.is_empty()
 	}
 
 	/// Returns token source span.
-	#[inline(always)]
+	#[inline]
 	pub fn span(&self) -> Span {
 		Span::new(self.0, self.end_offset())
 	}
 
 	/// Returns source text covered by token.
-	#[inline(always)]
+	#[inline]
 	pub fn str_slice<'a>(&self, source: &'a str) -> &'a str {
 		let start = self.0.0 as usize;
 		let end = self.end_offset().0 as usize;

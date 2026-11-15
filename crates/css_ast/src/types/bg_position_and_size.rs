@@ -19,7 +19,7 @@ pub struct BgPositionAndSize<'a> {
 impl<'a> Peek<'a> for BgPositionAndSize<'a> {
 	const PEEK_KINDSET: KindSet = BgPosition::PEEK_KINDSET;
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

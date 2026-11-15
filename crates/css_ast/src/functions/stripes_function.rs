@@ -41,7 +41,7 @@ pub struct ColorStripe<'a> {
 impl<'a> Peek<'a> for ColorStripe<'a> {
 	const PEEK_KINDSET: KindSet = Color::PEEK_KINDSET.combine(CalcableValue::<LengthPercentageOrFlex>::PEEK_KINDSET);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,

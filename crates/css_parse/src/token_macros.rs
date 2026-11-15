@@ -125,7 +125,7 @@ macro_rules! define_fixed_kinds {
 		define_kind_common!($(#[$meta])* $ident);
 
 		impl $crate::SemanticEq for $ident {
-			#[inline(always)]
+			#[inline]
 			fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 				true
 			}
@@ -289,7 +289,7 @@ macro_rules! custom_delim {
 		}
 
 		impl $crate::SemanticEq for $ident {
-			#[inline(always)]
+			#[inline]
 			fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 				// The character is fixed by the type itself (parsing only succeeds for
 				// `$ch`), so there is nothing left to compare.
@@ -372,7 +372,7 @@ macro_rules! custom_double_delim {
 		}
 
 		impl $crate::SemanticEq for $ident {
-			#[inline(always)]
+			#[inline]
 			fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 				// Both characters are fixed by the type itself (`$first` then `$second`), so
 				// there is nothing left to compare.
@@ -515,7 +515,7 @@ cursor_wrapped!(DashedIdent);
 impl<'a> Peek<'a> for DashedIdent {
 	const PEEK_KINDSET: KindSet = KindSet::new(&[Kind::Ident]);
 
-	#[inline(always)]
+	#[inline]
 	fn peek<I>(_: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
@@ -898,7 +898,7 @@ pub mod double {
 	}
 
 	impl SemanticEq for ColonColon {
-		#[inline(always)]
+		#[inline]
 		fn semantic_eq(&self, _: &Self, _source_text: &str) -> bool {
 			// Both `:` characters are fixed by the type itself, so there is nothing left to
 			// compare.
