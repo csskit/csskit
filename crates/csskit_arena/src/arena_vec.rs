@@ -286,14 +286,20 @@ impl<'a, T: Clone, A: Allocator> Vec<'a, T, A> {
 	/// Append all elements of `slice` by cloning.
 	pub fn extend_from_slice(&mut self, slice: &[T]) {
 		self.reserve(slice.len());
-		for value in slice {
-			self.push(value.clone());
+		debug_assert!(self.raw.len as usize + slice.len() <= self.raw.cap as usize, "reserve must guarantee capacity");
+		let tail = unsafe { self.raw.ptr.as_ptr().add(self.raw.len as usize) };
+		for (i, value) in slice.iter().enumerate() {
+			unsafe { tail.add(i).write(value.clone()) };
 		}
+		self.raw.len += slice.len() as u32;
 	}
 
 	#[inline]
 	fn reserve(&mut self, additional: usize) {
-		let required = self.raw.len + (additional as u32);
+		let required = u32::try_from(additional)
+			.ok()
+			.and_then(|extra| self.raw.len.checked_add(extra))
+			.expect("Vec capacity overflow");
 		if required > self.raw.cap {
 			self.raw.grow(required, &self.alloc);
 		}
@@ -689,6 +695,15 @@ mod test {
 		v.push(1);
 		v.extend_from_slice(&[2, 3, 4]);
 		assert_eq!(&*v, &[1, 2, 3, 4]);
+	}
+
+	#[test]
+	#[should_panic(expected = "Vec capacity overflow")]
+	fn extend_from_slice_past_u32_capacity_panics() {
+		let alloc = Arena::new();
+		let mut v: Vec<()> = Vec::new_in(&alloc);
+		v.push(());
+		v.extend_from_slice(&[(); u32::MAX as usize]);
 	}
 
 	#[test]
