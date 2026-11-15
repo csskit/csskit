@@ -431,30 +431,39 @@ impl ToType for DefType {
 	}
 }
 
+fn is_options_with_keywords(def: &Def) -> bool {
+	if let Def::Combinator(defs, DefCombinatorStyle::Options) = def {
+		defs.iter().any(|d| !matches!(d, Def::Type(_) | Def::StyleValue(_)))
+	} else {
+		false
+	}
+}
+
+fn unwrap_to_options(def: &Def) -> Option<&Def> {
+	match def {
+		Def::Group(inner, _) => unwrap_to_options(inner),
+		d if is_options_with_keywords(d) => Some(d),
+		_ => None,
+	}
+}
+
 /// Find Options combinators containing keyword (Ident) children that need helper structs.
-/// Searches: direct Alternatives children, and NoneOr/AutoOr/NormalOr/AutoNoneOr wrappers.
+/// Searches: direct Alternatives children, and NoneOr/AutoOr/NormalOr/AutoNoneOr wrappers
+/// (including one Options inside an ordered sequence they wrap).
 fn find_options_with_keywords(def: &Def) -> Vec<&Def> {
-	fn is_options_with_keywords(def: &Def) -> bool {
-		if let Def::Combinator(defs, DefCombinatorStyle::Options) = def {
-			defs.iter().any(|d| !matches!(d, Def::Type(_) | Def::StyleValue(_)))
-		} else {
-			false
-		}
-	}
-	fn unwrap_to_options(def: &Def) -> Option<&Def> {
-		match def {
-			Def::Group(inner, _) => unwrap_to_options(inner),
-			d if is_options_with_keywords(d) => Some(d),
-			_ => None,
-		}
-	}
 	match def {
 		Def::Combinator(children, DefCombinatorStyle::Alternatives) => {
 			children.iter().filter_map(unwrap_to_options).collect()
 		}
-		Def::NoneOr(inner) | Def::AutoOr(inner) | Def::NormalOr(inner) | Def::AutoNoneOr(inner) => {
-			unwrap_to_options(inner).into_iter().collect()
-		}
+		Def::NoneOr(inner) | Def::AutoOr(inner) | Def::NormalOr(inner) | Def::AutoNoneOr(inner) => match inner.as_ref()
+		{
+			Def::Combinator(children, DefCombinatorStyle::Ordered) => {
+				let found: Vec<&Def> = children.iter().filter_map(unwrap_to_options).collect();
+				assert!(found.len() <= 1, "multiple keyword `||` groups in one ordered sequence are not supported");
+				found
+			}
+			inner => unwrap_to_options(inner).into_iter().collect(),
+		},
 		_ => vec![],
 	}
 }
@@ -728,12 +737,29 @@ impl DefExt for Def {
 
 	fn rewrite_options_type(&self, replacement: &TokenStream) -> TokenStream {
 		match self {
-			Self::NoneOr(_) => quote! { crate::NoneOr<#replacement> },
-			Self::AutoOr(_) => quote! { crate::AutoOr<#replacement> },
-			Self::NormalOr(_) => quote! { crate::NormalOr<#replacement> },
-			Self::AutoNoneOr(_) => quote! { crate::AutoNoneOr<#replacement> },
+			Self::NoneOr(inner) => {
+				let inner = inner.rewrite_options_type(replacement);
+				quote! { crate::NoneOr<#inner> }
+			}
+			Self::AutoOr(inner) => {
+				let inner = inner.rewrite_options_type(replacement);
+				quote! { crate::AutoOr<#inner> }
+			}
+			Self::NormalOr(inner) => {
+				let inner = inner.rewrite_options_type(replacement);
+				quote! { crate::NormalOr<#inner> }
+			}
+			Self::AutoNoneOr(inner) => {
+				let inner = inner.rewrite_options_type(replacement);
+				quote! { crate::AutoNoneOr<#inner> }
+			}
 			Self::Group(inner, _) => inner.rewrite_options_type(replacement),
 			Self::Combinator(_, DefCombinatorStyle::Options) => replacement.clone(),
+			Self::Combinator(ds, DefCombinatorStyle::Ordered) => {
+				let types =
+					ds.iter().map(|d| if unwrap_to_options(d).is_some() { replacement.clone() } else { d.to_type() });
+				quote! { (#(#types),*) }
+			}
 			_ => self.to_type(),
 		}
 	}

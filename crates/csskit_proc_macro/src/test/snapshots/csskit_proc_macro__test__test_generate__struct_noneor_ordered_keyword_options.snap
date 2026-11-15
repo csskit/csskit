@@ -1,0 +1,42 @@
+---
+source: crates/csskit_proc_macro/src/test/test_generate.rs
+expression: pretty
+---
+#[derive(::stable_type_layout::TypeLayout)]
+#[derive(
+    ::csskit_derives::Parse,
+    ::csskit_derives::Peek,
+    ::csskit_derives::ToSpan,
+    ::csskit_derives::ToCursors,
+    ::csskit_derives::SemanticEq,
+    ::csskit_derives::NodeWithMetadata,
+    Debug,
+    Clone,
+    PartialEq,
+    Eq,
+    PartialOrd,
+    Ord,
+    Hash
+)]
+#[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
+#[cfg_attr(feature = "visitable", derive(::csskit_derives::Visitable), visit(children))]
+#[repr(C)]
+#[parse(one_must_occur)]
+struct FooOptions<'a> {
+    pub integer: Option<crate::NumericValue<'a, crate::Integer>>,
+    #[cfg_attr(feature = "visitable", visit(skip))]
+    #[atom(CssAtomSet::Auto)]
+    pub auto: Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>,
+}
+#[cfg(test)]
+::stable_type_layout::register!(FooOptions < 'static >);
+#[derive(Parse)]
+#[derive(::stable_type_layout::TypeLayout)]
+#[repr(C)]
+struct Foo<'a>(
+    pub crate::NoneOr<
+        (crate::FooOptions<'a>, Option<crate::KeywordValue<'a, ::css_parse::T![Ident]>>),
+    >,
+);
+#[cfg(test)]
+::stable_type_layout::register!(Foo < 'static >);
