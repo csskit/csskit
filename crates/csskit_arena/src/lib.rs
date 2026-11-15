@@ -288,7 +288,7 @@ impl Arena {
 		let committed = self.committed.get();
 		let target = commit_target(end, committed, region.size);
 		// SAFETY: `committed <= target <= size`, so the range lies within the reservation.
-		let ptr = unsafe { NonNull::new_unchecked(region.base.as_ptr().add(committed)) };
+		let ptr = unsafe { region.base.add(committed) };
 		// SAFETY: ditto.
 		if !unsafe { vm::commit(ptr, target - committed) } {
 			return false;
@@ -355,7 +355,7 @@ impl Arena {
 		debug_assert!(aligned >= start && end >= aligned, "bump must advance the cursor monotonically");
 		self.cursor.set(end);
 		// SAFETY: `aligned + bytes <= size`, so the range is within the chunk.
-		let ptr = unsafe { NonNull::new_unchecked(region.base.as_ptr().add(aligned)) };
+		let ptr = unsafe { region.base.add(aligned) };
 		debug_assert_eq!(ptr.as_ptr() as usize % align, 0, "returned pointer must satisfy the requested alignment");
 		Some(NonNull::slice_from_raw_parts(ptr, bytes))
 	}
@@ -374,7 +374,7 @@ impl Arena {
 			return None;
 		}
 		// SAFETY: `aligned <= size`, so the address is within the chunk.
-		let ptr = unsafe { NonNull::new_unchecked(region.base.as_ptr().add(aligned)) };
+		let ptr = unsafe { region.base.add(aligned) };
 		Some(NonNull::slice_from_raw_parts(ptr, 0))
 	}
 }
@@ -463,7 +463,7 @@ unsafe impl Allocator for &Arena {
 		// SAFETY: `ptr` holds `old_layout.size()` initialised bytes; `new` has room for at least that
 		// many; the regions do not overlap (fresh allocation).
 		unsafe {
-			std::ptr::copy_nonoverlapping(ptr.as_ptr(), new.as_ptr() as *mut u8, old_layout.size());
+			ptr.copy_to_nonoverlapping(new.cast::<u8>(), old_layout.size());
 		}
 		Ok(new)
 	}

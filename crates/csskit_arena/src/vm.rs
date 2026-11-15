@@ -71,6 +71,7 @@ mod imp {
 		}
 		let addr = ptr as usize;
 		let aligned = align_up(addr, BLOCK_ALIGN);
+		let base = NonNull::new(ptr.cast::<u8>().with_addr(aligned))?;
 		// Give back the slack either side, so the reservation is exactly the usable region.
 		let head = aligned - addr;
 		if head > 0 {
@@ -80,10 +81,8 @@ mod imp {
 		let tail = over - head - len;
 		if tail > 0 {
 			// SAFETY: `aligned + len` is page aligned and the remaining bytes are part of the same mapping.
-			unsafe { libc::munmap((aligned + len) as *mut libc::c_void, tail) };
+			unsafe { libc::munmap(ptr.with_addr(aligned + len), tail) };
 		}
-		// SAFETY: `mmap` succeeded, so `aligned` is a live, non-null address within the mapping.
-		let base = unsafe { NonNull::new_unchecked(aligned as *mut u8) };
 		// `size` is what was asked for, and so what the pool keeps the reservation under; `len` is the page-rounded
 		// mapping, which is what `munmap` needs.
 		Some(Reservation { reservation: base, reserved: len, base, size })
@@ -132,9 +131,7 @@ mod imp {
 		let ptr = unsafe { VirtualAlloc(ptr::null(), over, MEM_RESERVE, PAGE_READWRITE) };
 		let reservation = NonNull::new(ptr.cast::<u8>())?;
 		let aligned = align_up(ptr as usize, BLOCK_ALIGN);
-		// SAFETY: the reservation spans `size + BLOCK_ALIGN` bytes, so `aligned` and the `size` bytes after it are
-		// inside it.
-		let base = unsafe { NonNull::new_unchecked(aligned as *mut u8) };
+		let base = NonNull::new(ptr.cast::<u8>().with_addr(aligned))?;
 		Some(Reservation { reservation, reserved: over, base, size })
 	}
 

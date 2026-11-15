@@ -13,7 +13,6 @@
 
 use crate::vm::{self, Reservation};
 use std::cell::RefCell;
-use std::ptr::NonNull;
 
 /// How many reservations one thread keeps.
 const CAPACITY: usize = 4;
@@ -93,7 +92,7 @@ pub(crate) unsafe fn give(reservation: Reservation, used: usize) -> bool {
 			// resident, so the next parse writes to pages it already has, and one huge document does not leave its
 			// memory held for the life of the thread.
 			// SAFETY: the caller guarantees nothing allocated from the reservation is live, and `used` is within it.
-			let tail_base = unsafe { NonNull::new_unchecked(reservation.base.as_ptr().add(KEEP)) };
+			let tail_base = unsafe { reservation.base.add(KEEP) };
 			// SAFETY: as above.
 			unsafe { vm::discard(tail_base, tail) };
 		}

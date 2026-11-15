@@ -24,7 +24,7 @@ impl<'a, T, A: Allocator> Box<'a, T, A> {
 	#[inline]
 	pub fn new_in(alloc: A, value: T) -> Self {
 		let ptr = alloc.allocate(Layout::new::<T>()).expect("arena exhausted").cast::<T>();
-		unsafe { ptr.as_ptr().write(value) };
+		unsafe { ptr.write(value) };
 		Self { ptr, alloc, marker: PhantomData }
 	}
 }
@@ -33,11 +33,11 @@ impl<'a, T> Box<'a, T> {
 	/// Gives up ownership of the value. The value stays in the arena, thus its `Drop` does not run.
 	#[inline]
 	pub fn leak(self) -> &'a mut T {
-		let ptr = self.ptr;
+		let mut ptr = self.ptr;
 		std::mem::forget(self);
 		// SAFETY: `ptr` addresses a live value in an arena that outlives `'a`, and this `Box` was the
 		// only owner of it. The arena frees the whole region at once.
-		unsafe { &mut *ptr.as_ptr() }
+		unsafe { ptr.as_mut() }
 	}
 }
 
@@ -59,7 +59,7 @@ impl<'a, T, A: Allocator> DerefMut for Box<'a, T, A> {
 
 impl<'a, T, A: Allocator> Drop for Box<'a, T, A> {
 	fn drop(&mut self) {
-		unsafe { self.ptr.as_ptr().drop_in_place() };
+		unsafe { self.ptr.drop_in_place() };
 	}
 }
 

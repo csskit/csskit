@@ -29,7 +29,7 @@ impl<T> RawVec<T> {
 	/// allocation (avoiding stranding the old buffer); otherwise it falls back to a fresh allocation plus a copy.
 	pub(crate) fn grow<A: Allocator>(&mut self, required: u32, alloc: &A) {
 		debug_assert!(required > self.cap, "grow can only be called when more capacity is needed");
-		let new_cap = required.max(self.cap * 2);
+		let new_cap = required.max(self.cap.saturating_mul(2));
 		debug_assert!(new_cap >= required && new_cap > self.cap, "grow must strictly increase capacity");
 		let new_layout = Self::layout(new_cap);
 		let new_ptr = if self.cap == 0 {
