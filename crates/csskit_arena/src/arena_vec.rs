@@ -52,7 +52,7 @@ impl<'a, T, A: Allocator> Vec<'a, T, A> {
 	pub fn with_capacity_in(cap: usize, alloc: A) -> Self {
 		let mut raw = RawVec::new();
 		if cap > 0 {
-			raw.grow(cap as u32, &alloc);
+			raw.grow(u32::try_from(cap).expect("Vec capacity overflow"), &alloc);
 		}
 		Self { raw, alloc, marker: std::marker::PhantomData }
 	}
@@ -87,7 +87,18 @@ impl<'a, T, A: Allocator> Vec<'a, T, A> {
 	#[inline]
 	fn reserve_one(&mut self) {
 		if self.raw.len == self.raw.cap {
-			self.raw.grow(self.raw.len + 1, &self.alloc);
+			self.raw.grow(self.raw.len.checked_add(1).expect("Vec capacity overflow"), &self.alloc);
+		}
+	}
+
+	#[inline]
+	fn reserve(&mut self, additional: usize) {
+		let required = u32::try_from(additional)
+			.ok()
+			.and_then(|extra| self.raw.len.checked_add(extra))
+			.expect("Vec capacity overflow");
+		if required > self.raw.cap {
+			self.raw.grow(required, &self.alloc);
 		}
 	}
 
@@ -97,7 +108,7 @@ impl<'a, T, A: Allocator> Vec<'a, T, A> {
 		self.reserve_one();
 		debug_assert!(self.raw.len < self.raw.cap, "reserve_one must guarantee spare capacity");
 		unsafe {
-			self.raw.ptr.as_ptr().add(self.raw.len as usize).write(value);
+			self.raw.ptr.add(self.raw.len as usize).write(value);
 		}
 		self.raw.len += 1;
 	}
@@ -109,7 +120,7 @@ impl<'a, T, A: Allocator> Vec<'a, T, A> {
 			return None;
 		}
 		self.raw.len -= 1;
-		Some(unsafe { self.raw.ptr.as_ptr().add(self.raw.len as usize).read() })
+		Some(unsafe { self.raw.ptr.add(self.raw.len as usize).read() })
 	}
 
 	/// Insert `value` at `index`, shifting later elements right.
@@ -287,35 +298,18 @@ impl<'a, T: Clone, A: Allocator> Vec<'a, T, A> {
 	pub fn extend_from_slice(&mut self, slice: &[T]) {
 		self.reserve(slice.len());
 		debug_assert!(self.raw.len as usize + slice.len() <= self.raw.cap as usize, "reserve must guarantee capacity");
-		let tail = unsafe { self.raw.ptr.as_ptr().add(self.raw.len as usize) };
+		let tail = unsafe { self.raw.ptr.add(self.raw.len as usize) };
 		for (i, value) in slice.iter().enumerate() {
 			unsafe { tail.add(i).write(value.clone()) };
 		}
 		self.raw.len += slice.len() as u32;
-	}
-
-	#[inline]
-	fn reserve(&mut self, additional: usize) {
-		let required = u32::try_from(additional)
-			.ok()
-			.and_then(|extra| self.raw.len.checked_add(extra))
-			.expect("Vec capacity overflow");
-		if required > self.raw.cap {
-			self.raw.grow(required, &self.alloc);
-		}
 	}
 }
 
 impl<'a, T, A: Allocator> Extend<T> for Vec<'a, T, A> {
 	fn extend<I: IntoIterator<Item = T>>(&mut self, iter: I) {
 		let iter = iter.into_iter();
-		let (lower, _) = iter.size_hint();
-		if lower > 0 {
-			let required = self.raw.len + (lower as u32);
-			if required > self.raw.cap {
-				self.raw.grow(required, &self.alloc);
-			}
-		}
+		self.reserve(iter.size_hint().0);
 		for value in iter {
 			self.push(value);
 		}
@@ -704,6 +698,45 @@ mod test {
 		let mut v: Vec<()> = Vec::new_in(&alloc);
 		v.push(());
 		v.extend_from_slice(&[(); u32::MAX as usize]);
+	}
+
+	#[test]
+	#[should_panic(expected = "Vec capacity overflow")]
+	fn extend_past_u32_capacity_panics() {
+		let alloc = Arena::new();
+		let mut v: Vec<()> = Vec::new_in(&alloc);
+		v.push(());
+		v.extend(std::iter::repeat_n((), u32::MAX as usize));
+	}
+
+	#[test]
+	#[should_panic(expected = "Vec capacity overflow")]
+	fn push_past_u32_capacity_panics() {
+		let alloc = Arena::new();
+		let mut v: Vec<()> = Vec::new_in(&alloc);
+		v.raw.len = u32::MAX;
+		v.raw.cap = u32::MAX;
+		v.push(());
+	}
+
+	#[cfg(target_pointer_width = "64")]
+	#[test]
+	#[should_panic(expected = "Vec capacity overflow")]
+	fn with_capacity_past_u32_panics() {
+		let alloc = Arena::new();
+		let _ = Vec::<()>::with_capacity_in(u32::MAX as usize + 1, &alloc);
+	}
+
+	#[test]
+	fn grow_near_u32_capacity_saturates() {
+		let alloc = Arena::new();
+		let mut v: Vec<()> = Vec::new_in(&alloc);
+		v.push(());
+		v.raw.len = u32::MAX / 2 + 1;
+		v.raw.cap = u32::MAX / 2 + 1;
+		v.push(());
+		assert_eq!(v.capacity(), u32::MAX as usize);
+		assert_eq!(v.len(), u32::MAX as usize / 2 + 2);
 	}
 
 	#[test]
