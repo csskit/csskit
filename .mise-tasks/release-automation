@@ -1,10 +1,12 @@
 #!/usr/bin/env bash
-set -eu pipefail
+set -euo pipefail
 #MISE description="Generate a release, or a release PR"
 #USAGE flag "--dryrun" help="Run in dry-run mode (no git/publish/write operations)"
+#USAGE flag "--release-pr" help="Only create/update the release PR (no publish)"
 
 # Check if dry-run mode is enabled
 DRY_RUN="${usage_dryrun:-false}"
+RELEASE_PR="${usage_release_pr:-false}"
 
 # Get current version from Cargo workspace
 BRANCH=$(git rev-parse --abbrev-ref HEAD)
@@ -23,8 +25,7 @@ CANARY_VERSION="${NEXT_VERSION}-canary.${SHA}"
 echo "Canary Version:  $CANARY_VERSION"
 
 # Check if this version has already been released
-released_versions="$(git tag --list | grep -E '^v[0-9]+\.[0-9]+\.[0-9]+$' || true)"
-if echo "$released_versions" | grep -q "^$VERSION$"; then
+if git rev-parse -q --verify "refs/tags/$VERSION" >/dev/null; then
 	MODE="CANARY"
 else
 	MODE="RELEASE"
@@ -35,6 +36,11 @@ echo "==========================="
 # Only run on main or release branches (unless dry-run)
 if [[ "$BRANCH" != "main" && "$BRANCH" != "release" && "$DRY_RUN" != "true" ]]; then
 	echo "Not on main or release branch, skipping release"
+	exit 0
+fi
+
+if [[ "$RELEASE_PR" == "true" && "$MODE" == "RELEASE" ]]; then
+	echo "Release mode, no release PR to update"
 	exit 0
 fi
 
@@ -89,9 +95,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# Release all cargo crates
 	cargo publish --allow-dirty
 else
-	# CANARY MODE: Create/update release PR
-	echo "Creating/updating release PR..."
-
 	# Generate changelog for unreleased commits
 	changelog="$(git cliff --bump --unreleased --strip all)"
 
@@ -109,62 +112,62 @@ else
 	git config user.name "Keith Cirkel"
 	git config user.email "keithamus@users.noreply.github.com"
 
-	# Update CHANGELOG.md
 	git cliff --bump -o CHANGELOG.md
 
-	# Replace versions in Cargo.toml
-	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
+	if [[ "$RELEASE_PR" == "true" ]]; then
+		echo "Creating/updating release PR..."
 
-	# Replace versions in npm packages
-	for platform_pkg in packages/csskit-*/ packages/csskit/; do
-		pushd "$platform_pkg"
-		npm version "${NEXT_VERSION#v}" --no-git-tag-version
-		popd
-	done
+		sed -i "/@release/s/version = \"[^\"]*\"/version = \"${NEXT_VERSION#v}\"/g" Cargo.toml
 
-	# Update optionalDependencies versions in main package
-	pushd packages/csskit
-	node -e "
-		const fs = require('fs');
-		const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
-		if (pkg.optionalDependencies) {
-			for (const dep in pkg.optionalDependencies) {
-				pkg.optionalDependencies[dep] = '${NEXT_VERSION#v}';
+		for platform_pkg in packages/csskit-*/ packages/csskit/; do
+			pushd "$platform_pkg"
+			npm version "${NEXT_VERSION#v}" --no-git-tag-version
+			popd
+		done
+
+		pushd packages/csskit
+		node -e "
+			const fs = require('fs');
+			const pkg = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+			if (pkg.optionalDependencies) {
+				for (const dep in pkg.optionalDependencies) {
+					pkg.optionalDependencies[dep] = '${NEXT_VERSION#v}';
+				}
 			}
-		}
-		fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
-	"
-	popd
+			fs.writeFileSync('package.json', JSON.stringify(pkg, null, 4) + '\n');
+		"
+		popd
 
-	BRANCH="release-${NEXT_VERSION}"
+		BRANCH="release-${NEXT_VERSION}"
 
-	# Create release commit
-	git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}" -m"[forcebuild]"
+		git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}" -m"[forcebuild]"
 
-	git remote add PAT "https://keithamus:${GH_TOKEN}@github.com/csskit/csskit.git" > /dev/null 2>&1
-	git push --force PAT HEAD:refs/heads/"${BRANCH}"
-	git remote rm PAT
+		git remote add PAT "https://keithamus:${GH_TOKEN}@github.com/csskit/csskit.git" > /dev/null 2>&1
+		git push --force PAT HEAD:refs/heads/"${BRANCH}"
+		git remote rm PAT
 
-	# Create or update PR
-	gh pr edit "${BRANCH}" \
-		--title "Release ${NEXT_VERSION}" \
-		--body "$changelog" ||
-		gh pr create \
+		gh pr edit "${BRANCH}" \
 			--title "Release ${NEXT_VERSION}" \
-			--body "$changelog" \
-			--label "release" \
-			--base main \
-			--head "${BRANCH}"
+			--body "$changelog" ||
+			gh pr create \
+				--title "Release ${NEXT_VERSION}" \
+				--body "$changelog" \
+				--label "release" \
+				--base main \
+				--head "${BRANCH}"
+		exit 0
+	fi
 
 	################
 	# Canary Release
 	################
+	echo "Publishing canary..."
 
 	# Replace the versions in Cargo.toml
 	sed -i "/@release/s/version = \"[^\"]*\"/version = \"${CANARY_VERSION#v}\"/g" Cargo.toml
 
 	# Commit changes
-	git commit -am'Canary Release' -m"${changelog}" --amend
+	git commit -am'Canary Release' -m"${changelog}"
 	CANARY_SHA=$(git rev-parse HEAD | cut -b 1-10)
 
 	# Replace the canary tag with the current SHA
