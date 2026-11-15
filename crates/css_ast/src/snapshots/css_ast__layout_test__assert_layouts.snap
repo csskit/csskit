@@ -6672,6 +6672,11 @@ LineBreakStyleValue: size=32 align=8
 LineClampStyleValue: size=112 align=8 {
     0: 0
 }
+LineClampStyleValueOptions: size=80 align=8 {
+    integer: 0
+    auto: 24
+    block_ellipsis: 48
+}
 LineColorList: size=24 align=8 {
     0: 0
 }
@@ -7057,8 +7062,8 @@ MaxInlineSizeStyleValue: size=104 align=8 {
     0: 0
 }
 MaxLinesStyleValue: size=48 align=8 {
-    auto: 0
-    integer: 24
+    integer: 0
+    auto: 24
 }
 MaxSizeStyleValue: size=208 align=8 {
     0: 0
@@ -8408,9 +8413,9 @@ OutlineLineStyle: size=16 align=4
     7: Ridge
     8: Inset
     9: Outset
-OutlineOffsetStyleValue: size=24 align=8 {
-    0: 0
-}
+OutlineOffsetStyleValue: size=32 align=8
+    0: Length
+    1: Inset
 OutlineStyleStyleValue: size=32 align=8 {
     0: 0
 }

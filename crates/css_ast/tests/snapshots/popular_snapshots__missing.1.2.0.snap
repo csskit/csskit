@@ -1408,7 +1408,7 @@ StyleSheet(
                 offset: SourceOffset(1004),
                 len: 1,
               )),
-              value: OutlineOffsetStyleValue(Literal(Zero(Number(Cursor(
+              value: Length(Literal(Zero(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(1006),
                 len: 1,
@@ -17160,7 +17160,7 @@ StyleSheet(
                 offset: SourceOffset(12256),
                 len: 1,
               )),
-              value: OutlineOffsetStyleValue(Literal(Px(Dimension(Cursor(
+              value: Length(Literal(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(12258),
                 len: 3,
@@ -42421,7 +42421,7 @@ StyleSheet(
                         offset: SourceOffset(31524),
                         len: 1,
                       )),
-                      value: OutlineOffsetStyleValue(Literal(Px(Dimension(Cursor(
+                      value: Length(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(31526),
                         len: 3,
@@ -42512,7 +42512,7 @@ StyleSheet(
                         offset: SourceOffset(31588),
                         len: 1,
                       )),
-                      value: OutlineOffsetStyleValue(Literal(Px(Dimension(Cursor(
+                      value: Length(Literal(Px(Dimension(Cursor(
                         kind: "Dimension",
                         offset: SourceOffset(31590),
                         len: 3,

@@ -35,6 +35,8 @@ mod tests {
 		assert_parse!(CssAtomSet::ATOMS, LineClampStyleValue, "3 auto -webkit-legacy");
 		assert_peek_false!(CssAtomSet::ATOMS, LineClampStyleValue, "");
 		assert_peek_false!(CssAtomSet::ATOMS, LineClampStyleValue, "-webkit-legacy");
+		assert_peek_false!(CssAtomSet::ATOMS, LineClampStyleValue, "foo");
+		assert_peek_false!(CssAtomSet::ATOMS, LineClampStyleValue, "foo -webkit-legacy");
 		assert_parse_error!(CssAtomSet::ATOMS, LineClampStyleValue, "0");
 	}
 
