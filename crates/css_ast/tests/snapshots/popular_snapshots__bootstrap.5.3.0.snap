@@ -15169,7 +15169,7 @@ StyleSheet(
                 offset: SourceOffset(11384),
                 len: 1,
               )),
-              value: OutlineOffsetStyleValue(Literal(Px(Dimension(Cursor(
+              value: Length(Literal(Px(Dimension(Cursor(
                 kind: "Dimension",
                 offset: SourceOffset(11386),
                 len: 4,
