@@ -2,6 +2,36 @@ use atom_set::AtomSet;
 use derive_atom_set::AtomSet as DeriveAtomSet;
 
 #[derive(DeriveAtomSet, Debug, Default, Clone, Copy, PartialEq, Eq)]
+#[atom_set(case_sensitive)]
+enum CaseSensitiveAtomSet {
+	#[default]
+	_None,
+	A,
+	#[atom("viewBox")]
+	ViewBox,
+	#[atom("clipPathUnits")]
+	ClipPathUnits,
+	#[atom("preserveAspectRatio")]
+	PreserveAspectRatio,
+	#[atom("externalResourcesRequired")]
+	ExternalResourcesRequired,
+}
+
+#[test]
+fn case_sensitive_matches_exact_bytes_only() {
+	use CaseSensitiveAtomSet::*;
+	for atom in [A, ViewBox, ClipPathUnits, PreserveAspectRatio, ExternalResourcesRequired] {
+		assert_eq!(CaseSensitiveAtomSet::from_str(atom.to_str()), atom);
+		assert_eq!(CaseSensitiveAtomSet::from_str(&atom.to_str().to_ascii_uppercase()), _None);
+	}
+	assert_eq!(CaseSensitiveAtomSet::from_str("viewbox"), _None);
+	assert_eq!(CaseSensitiveAtomSet::from_str("VIEWBOX"), _None);
+	assert_eq!(CaseSensitiveAtomSet::from_str("A"), _None);
+	assert_eq!(CaseSensitiveAtomSet::from_str("preserveaspectratio"), _None);
+	assert_eq!(CaseSensitiveAtomSet::from_str("externalResourcesrequired"), _None);
+}
+
+#[derive(DeriveAtomSet, Debug, Default, Clone, Copy, PartialEq, Eq)]
 enum TestAtomSet {
 	#[default]
 	_None,

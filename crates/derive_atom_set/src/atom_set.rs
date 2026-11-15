@@ -29,13 +29,14 @@ fn generate_ascii_table_1char_fn(
 	group: &[(&proc_macro2::Ident, String)],
 	default_variant: &proc_macro2::Ident,
 	type_name: &proc_macro2::Ident,
+	case_sensitive: bool,
 ) -> TokenStream2 {
 	let mut table = vec![quote! { #type_name::#default_variant }; 256];
 	for (ident, string) in group {
 		if !string.is_empty() {
 			let byte = string.as_bytes()[0];
-			let lower_byte = byte.to_ascii_lowercase();
-			let upper_byte = byte.to_ascii_uppercase();
+			let (lower_byte, upper_byte) =
+				if case_sensitive { (byte, byte) } else { (byte.to_ascii_lowercase(), byte.to_ascii_uppercase()) };
 
 			table[lower_byte as usize] = quote! { #type_name::#ident };
 			if lower_byte != upper_byte {
@@ -52,14 +53,14 @@ fn generate_ascii_table_1char_fn(
 	}
 }
 
-fn string_to_multi_u128_keys(s: &str) -> Vec<u128> {
+fn string_to_multi_u128_keys(s: &str, case_sensitive: bool) -> Vec<u128> {
 	let bytes = s.as_bytes();
 	let mut keys = Vec::new();
 	for chunk_start in (0..bytes.len()).step_by(16) {
 		let chunk_end = (chunk_start + 16).min(bytes.len());
 		let mut buf = [0u8; 16];
 		for (i, &byte) in bytes[chunk_start..chunk_end].iter().enumerate() {
-			buf[i] = byte.to_ascii_lowercase();
+			buf[i] = if case_sensitive { byte } else { byte.to_ascii_lowercase() };
 		}
 		keys.push(u128::from_le_bytes(buf));
 	}
@@ -79,7 +80,10 @@ fn is_fold_safe(s: &str) -> bool {
 // A byte is safe for the `& 0x40` fold if the set of inputs that fold to it is exactly the set of
 // its ASCII case variants. Groups holding any other byte fold with a wider sequence that touches
 // only A-Z, and that cannot carry between lanes.
-fn generate_fold(fold_safe: bool, width: usize) -> TokenStream2 {
+fn generate_fold(fold_safe: bool, case_sensitive: bool, width: usize) -> TokenStream2 {
+	if case_sensitive {
+		return quote! {};
+	}
 	let repeat =
 		|byte: u8| Literal::u128_unsuffixed((0..width).fold(0u128, |acc, i| acc | ((byte as u128) << (i * 8))));
 	if fold_safe {
@@ -103,11 +107,14 @@ fn generate_u64_lookup_fn(
 	len: usize,
 	default_variant: &proc_macro2::Ident,
 	fold_safe: bool,
+	case_sensitive: bool,
 ) -> TokenStream2 {
 	let keys: Vec<u64> = group
 		.iter()
 		.map(|(_, s)| {
-			s.bytes().take(8).enumerate().fold(0, |acc, (i, b)| acc | ((b.to_ascii_lowercase() as u64) << (i * 8)))
+			s.bytes().take(8).enumerate().fold(0, |acc, (i, b)| {
+				acc | ((if case_sensitive { b } else { b.to_ascii_lowercase() } as u64) << (i * 8))
+			})
 		})
 		.collect();
 	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
@@ -124,7 +131,7 @@ fn generate_u64_lookup_fn(
 			let mut key = u64::from_le_bytes(bytes);
 		}
 	};
-	let fold = generate_fold(fold_safe, 8);
+	let fold = generate_fold(fold_safe, case_sensitive, 8);
 
 	quote! {
 		fn #fn_name(b: &[u8]) -> Self {
@@ -144,11 +151,14 @@ fn generate_u128_lookup_fn(
 	len: usize,
 	default_variant: &proc_macro2::Ident,
 	fold_safe: bool,
+	case_sensitive: bool,
 ) -> TokenStream2 {
 	let keys: Vec<u128> = group
 		.iter()
 		.map(|(_, s)| {
-			s.bytes().take(16).enumerate().fold(0, |acc, (i, b)| acc | ((b.to_ascii_lowercase() as u128) << (i * 8)))
+			s.bytes().take(16).enumerate().fold(0, |acc, (i, b)| {
+				acc | ((if case_sensitive { b } else { b.to_ascii_lowercase() } as u128) << (i * 8))
+			})
 		})
 		.collect();
 	let variants: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
@@ -165,7 +175,7 @@ fn generate_u128_lookup_fn(
 			let mut key = u128::from_le_bytes(bytes);
 		}
 	};
-	let fold = generate_fold(fold_safe, 16);
+	let fold = generate_fold(fold_safe, case_sensitive, 16);
 
 	quote! {
 		fn #fn_name(b: &[u8]) -> Self {
@@ -184,6 +194,7 @@ fn generate_multi_u128_lookup_fn(
 	group: &[(&proc_macro2::Ident, String)],
 	len: usize,
 	default_variant: &proc_macro2::Ident,
+	case_sensitive: bool,
 ) -> TokenStream2 {
 	let num_chunks = len.div_ceil(16);
 
@@ -191,7 +202,7 @@ fn generate_multi_u128_lookup_fn(
 	let lookup_entries: Vec<_> = group
 		.iter()
 		.map(|(ident, string)| {
-			let keys = string_to_multi_u128_keys(string);
+			let keys = string_to_multi_u128_keys(string, case_sensitive);
 			let mut padded_keys = keys;
 			while padded_keys.len() < num_chunks {
 				padded_keys.push(0);
@@ -217,6 +228,12 @@ fn generate_multi_u128_lookup_fn(
 
 			if bytes_in_chunk == 0 {
 				quote! { let #chunk_var = 0u128; }
+			} else if case_sensitive {
+				quote! {
+					let mut buf = [0u8; 16];
+					buf[..#bytes_in_chunk].copy_from_slice(&b[#chunk_start..#chunk_end]);
+					let #chunk_var = u128::from_le_bytes(buf);
+				}
 			} else {
 				// Need to normalize to lowercase
 				quote! {
@@ -241,6 +258,20 @@ fn generate_multi_u128_lookup_fn(
 
 pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 	let ident = &input.ident;
+	let mut case_sensitive = false;
+	for attr in input.attrs.iter().filter(|attr| attr.path().is_ident("atom_set")) {
+		let parsed = attr.parse_nested_meta(|meta| {
+			if meta.path.is_ident("case_sensitive") {
+				case_sensitive = true;
+				Ok(())
+			} else {
+				Err(meta.error("unsupported atom_set attribute"))
+			}
+		});
+		if let Err(err) = parsed {
+			return err.to_compile_error();
+		}
+	}
 	let variants = match &mut input.data {
 		Data::Enum(enum_data) => &mut enum_data.variants,
 		_ => panic!("AtomSet can only be derived for enums"),
@@ -295,16 +326,16 @@ pub fn generate(_args: TokenStream2, mut input: DeriveInput) -> TokenStream2 {
 			// Choose the appropriate strategy based on string length
 			let fn_match = if len_usize == 1 {
 				// Use ASCII table lookup for 1-char strings
-				generate_ascii_table_1char_fn(&fn_name, &group, default_variant, ident)
+				generate_ascii_table_1char_fn(&fn_name, &group, default_variant, ident, case_sensitive)
 			} else if len_usize <= 8 {
 				// Use u64 lookup table for strings 4-8 chars
-				generate_u64_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe)
+				generate_u64_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe, case_sensitive)
 			} else if len_usize <= 16 {
 				// Use u128 lookup table for strings 9-16 chars
-				generate_u128_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe)
+				generate_u128_lookup_fn(&fn_name, &group, len_usize, default_variant, fold_safe, case_sensitive)
 			} else {
 				// Use multiple u128 chunks for very long strings (>16)
-				generate_multi_u128_lookup_fn(&fn_name, &group, len_usize, default_variant)
+				generate_multi_u128_lookup_fn(&fn_name, &group, len_usize, default_variant, case_sensitive)
 			};
 
 			let idents: Vec<_> = group.iter().map(|(ident, _)| ident).collect();
