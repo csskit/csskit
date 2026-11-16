@@ -24,16 +24,18 @@ function platformPackage() {
 function loadAddon() {
 	const pkg = platformPackage();
 	const candidates = pkg ? [`${pkg}/csskit.node`, './csskit.node'] : ['./csskit.node'];
+	let cause;
 	for (const spec of candidates) {
 		try {
 			return requireFrom(spec);
-		} catch {
-			// try the next candidate
+		} catch (error) {
+			cause ??= error;
 		}
 	}
 	throw new Error(
 		`csskit: no native addon for ${process.platform}-${process.arch}. ` +
 			`Install the '${pkg || 'csskit-<platform>'}' package, or use the WebAssembly build at 'csskit/bundle'.`,
+		{ cause },
 	);
 }
 
