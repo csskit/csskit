@@ -109,7 +109,10 @@ impl<'a, A: Allocator> String<'a, A> {
 	/// Use this to hand a parsed-in-arena string to an API that wants `&'a str`; the bytes outlive the `String` because
 	/// they belong to the arena, not to this handle.
 	#[inline]
-	pub fn into_str(self) -> &'a str {
+	pub fn into_str(self) -> &'a str
+	where
+		A: 'a,
+	{
 		Self::as_utf8(self.bytes.into_slice())
 	}
 
