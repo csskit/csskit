@@ -68,6 +68,11 @@ description = "Run the csskit WebAssembly bundle tests"
 dir = "{{config_root}}/packages/csskit"
 run = "npm run test:wasm"
 
+[tasks.test-bin]
+description = "Run the csskit shell launcher tests"
+dir = "{{config_root}}/packages/csskit"
+run = "npm run test:bin"
+
 [tasks.bench]
 description = "Run the benchmark suite"
 run = "cargo bench --all-features"
