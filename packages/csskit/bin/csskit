@@ -2,7 +2,7 @@
 set -e
 
 SOURCE="${BASH_SOURCE[0]}"
-SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
+SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd -P)"
 
 # Resolve if bin is symlink; like `readlink -f`/`realpath` but cross-platform
 while [ -L "$SOURCE" ]; do
@@ -11,7 +11,7 @@ while [ -L "$SOURCE" ]; do
 	/*) SOURCE="$TARGET" ;;
 	*) SOURCE="$SCRIPT_DIR/$TARGET" ;;
 	esac
-	SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd)"
+	SCRIPT_DIR="$(cd "$(dirname "$SOURCE")" && pwd -P)"
 done
 
 # Detect platform and architecture for sub-package path
