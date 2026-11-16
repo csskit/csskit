@@ -35,7 +35,7 @@ impl<T: ToCursors> ToCursors for ParserReturn<'_, T> {
 			let eof_cursor = crate::Cursor::new(eof_offset, css_lexer::Token::EOF);
 
 			if self.with_trivia {
-				let mut sink = CursorInterleaveSink::new(s, &self.trivia);
+				let mut sink = CursorInterleaveSink::new(s, &self.trivia, eof_offset);
 				ToCursors::to_cursors(output, &mut sink);
 				sink.append(eof_cursor);
 			} else {
