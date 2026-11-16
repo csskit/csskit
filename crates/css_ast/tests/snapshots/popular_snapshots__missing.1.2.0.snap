@@ -46558,11 +46558,11 @@ StyleSheet(
                         kind: "Ident",
                         offset: SourceOffset(34553),
                         len: 4,
-                      )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                      )), Some(Literal(Number(Cursor(
                         kind: "Number",
                         offset: SourceOffset(34558),
                         len: 1,
-                      ))))), None))))),
+                      )))), None))))),
                       important: None,
                       semicolon: Some(Semicolon(Cursor(
                         kind: "Semicolon",

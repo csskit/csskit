@@ -329,9 +329,20 @@ fn dispatch(variants: &[&Variant], depth: usize, post: &TokenStream, wc: &mut Wh
 	quote! { #(#nodes)* #miss }
 }
 
-/// True when `ty` is a substitution value-slot wrapper (`Value<..>` / `CalcableValue<..>`).
+/// True when `ty` is a substitution value-slot wrapper (`Value<..>` / `CalcableValue<..>`),
+/// possibly inside a range constraint such as `NonNegative<CalcableValue<..>>`.
 fn is_value_slot(ty: &Type) -> bool {
-	matches!(ty, Type::Path(path) if path.path.segments.last().is_some_and(|s| s.ident == "Value" || s.ident == "CalcableValue"))
+	let Type::Path(path) = ty else { return false };
+	let Some(last) = path.path.segments.last() else { return false };
+	match last.ident.to_string().as_str() {
+		"Value" | "CalcableValue" => true,
+		"NonNegative" | "Positive" | "NonZero" | "Ranged" | "Exact" => matches!(
+			&last.arguments,
+			syn::PathArguments::AngleBracketed(args)
+				if matches!(args.args.first(), Some(syn::GenericArgument::Type(inner)) if is_value_slot(inner))
+		),
+		_ => false,
+	}
 }
 
 /// Runs `body`, which returns or errors, and rewinds to where it began when it errors.

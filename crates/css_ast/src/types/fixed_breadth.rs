@@ -5,7 +5,7 @@ use crate::{CalcableValue, LengthPercentage, NonNegative};
 /// ```text,ignore
 /// <fixed-breadth> = <length-percentage [0,∞]>
 /// ```
-pub type FixedBreadth<'a> = CalcableValue<'a, NonNegative<LengthPercentage>>;
+pub type FixedBreadth<'a> = NonNegative<CalcableValue<'a, LengthPercentage>>;
 
 #[cfg(test)]
 mod tests {

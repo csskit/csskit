@@ -14,7 +14,7 @@ use crate::{NonNegative, NumericValue};
 pub enum SingleAnimationIterationCount<'a> {
 	#[atom(CssAtomSet::Infinite)]
 	Infinite(T![Ident]),
-	Number(NumericValue<'a, NonNegative<T![Number]>>),
+	Number(NonNegative<NumericValue<'a, T![Number]>>),
 }
 
 #[cfg(test)]

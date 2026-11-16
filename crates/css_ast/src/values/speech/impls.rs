@@ -17,7 +17,7 @@ macro_rules! voice_pitch_parse {
 						CssAtomSet::Absolute => {
 							let absolute = p.parse::<KeywordValue<'a, T![Ident]>>()?;
 							return Ok(Self::FrequencyAbsolute(
-								p.parse::<CalcableValue<'a, NonNegative<Frequency>>>()?,
+								p.parse::<NonNegative<CalcableValue<'a, Frequency>>>()?,
 								absolute,
 							));
 						}
@@ -34,8 +34,8 @@ macro_rules! voice_pitch_parse {
 				let mut frequency = None;
 				let mut semitones = None;
 				let mut percentage = None;
-				if p.peek::<CalcableValue<'a, NonNegative<Frequency>>>() {
-					frequency = Some(p.parse::<CalcableValue<'a, NonNegative<Frequency>>>()?);
+				if p.peek::<NonNegative<CalcableValue<'a, Frequency>>>() {
+					frequency = Some(p.parse::<NonNegative<CalcableValue<'a, Frequency>>>()?);
 				} else if p.peek::<Value<'a, Semitones>>() {
 					semitones = Some(p.parse::<Value<'a, Semitones>>()?);
 				} else if p.peek::<CalcableValue<'a, Percentage>>() {

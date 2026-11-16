@@ -44,19 +44,19 @@ pub struct PaletteMixFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct PaletteMixFunctionParams<'a> {
 	pub palette: PaletteMixPalette<'a>,
-	pub percentage: Option<CalcableValue<'a, Ranged<Percentage, 0, 100>>>,
+	pub percentage: Option<Ranged<CalcableValue<'a, Percentage>, 0, 100>>,
 }
 
 impl<'a> Peek<'a> for PaletteMixFunctionParams<'a> {
 	const PEEK_KINDSET: KindSet =
-		PaletteMixPalette::PEEK_KINDSET.combine(CalcableValue::<Ranged<Percentage, 0, 100>>::PEEK_KINDSET);
+		PaletteMixPalette::PEEK_KINDSET.combine(Ranged::<CalcableValue<Percentage>, 0, 100>::PEEK_KINDSET);
 
 	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		PaletteMixPalette::peek(p, c) || CalcableValue::<Ranged<Percentage, 0, 100>>::peek(p, c)
+		PaletteMixPalette::peek(p, c) || Ranged::<CalcableValue<Percentage>, 0, 100>::peek(p, c)
 	}
 }
 
@@ -66,7 +66,7 @@ impl<'a> Parse<'a> for PaletteMixFunctionParams<'a> {
 		I: Iterator<Item = Cursor> + Clone,
 	{
 		let mut palette = p.parse_if_peek::<PaletteMixPalette>()?;
-		let percentage = p.parse_if_peek::<CalcableValue<Ranged<Percentage, 0, 100>>>()?;
+		let percentage = p.parse_if_peek::<Ranged<CalcableValue<Percentage>, 0, 100>>()?;
 		if palette.is_none() {
 			palette = Some(p.parse::<PaletteMixPalette>()?);
 		}

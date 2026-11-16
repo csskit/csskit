@@ -8,7 +8,7 @@ expression: pretty
 enum Foo<'a> {
     #[atom(CssAtomSet::Bar)]
     Bar(crate::KeywordValue<'a, ::css_parse::T![Ident]>),
-    Angle(Option<crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>>),
+    Angle(Option<crate::Ranged<crate::CalcableValue<'a, crate::Angle>, -90i32, 90i32>>),
 }
 #[cfg(test)]
 ::stable_type_layout::register!(Foo < 'static >);

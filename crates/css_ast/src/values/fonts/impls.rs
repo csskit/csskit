@@ -14,6 +14,13 @@ mod tests {
 	}
 
 	#[test]
+	fn test_math_functions_skip_range_checks() {
+		assert_parse!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique calc(100deg)");
+		assert_parse!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique min(91deg,-91deg)");
+		assert_parse_error!(CssAtomSet::ATOMS, FontStyleStyleValue, "oblique 100deg");
+	}
+
+	#[test]
 	fn test_font_synthesis() {
 		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "none");
 		assert_parse!(CssAtomSet::ATOMS, FontSynthesisStyleValue, "weight");

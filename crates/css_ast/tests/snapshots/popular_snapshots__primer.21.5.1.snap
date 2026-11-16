@@ -456189,11 +456189,11 @@ StyleSheet(
                       kind: "Ident",
                       offset: SourceOffset(495947),
                       len: 4,
-                    )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                    )), Some(Literal(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(495952),
                       len: 1,
-                    ))))), None))))),
+                    )))), None))))),
                     important: None,
                     semicolon: None,
                   ),
@@ -457080,11 +457080,11 @@ StyleSheet(
                       kind: "Ident",
                       offset: SourceOffset(496646),
                       len: 4,
-                    )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                    )), Some(Literal(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(496651),
                       len: 1,
-                    ))))), None))))),
+                    )))), None))))),
                     important: None,
                     semicolon: None,
                   ),
@@ -457816,11 +457816,11 @@ StyleSheet(
                       kind: "Ident",
                       offset: SourceOffset(497324),
                       len: 4,
-                    )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                    )), Some(Literal(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(497329),
                       len: 1,
-                    ))))), None))))),
+                    )))), None))))),
                     important: None,
                     semicolon: None,
                   ),
@@ -458803,11 +458803,11 @@ StyleSheet(
                       kind: "Ident",
                       offset: SourceOffset(498223),
                       len: 4,
-                    )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                    )), Some(Literal(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(498228),
                       len: 1,
-                    ))))), None))))),
+                    )))), None))))),
                     important: None,
                     semicolon: None,
                   ),
@@ -459551,11 +459551,11 @@ StyleSheet(
                       kind: "Ident",
                       offset: SourceOffset(498927),
                       len: 4,
-                    )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                    )), Some(Literal(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(498932),
                       len: 1,
-                    ))))), None))))),
+                    )))), None))))),
                     important: None,
                     semicolon: None,
                   ),
@@ -460538,11 +460538,11 @@ StyleSheet(
                       kind: "Ident",
                       offset: SourceOffset(499826),
                       len: 4,
-                    )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+                    )), Some(Literal(Number(Cursor(
                       kind: "Number",
                       offset: SourceOffset(499831),
                       len: 1,
-                    ))))), None))))),
+                    )))), None))))),
                     important: None,
                     semicolon: None,
                   ),
@@ -461109,11 +461109,11 @@ StyleSheet(
                 kind: "Ident",
                 offset: SourceOffset(500217),
                 len: 4,
-              )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+              )), Some(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(500222),
                 len: 1,
-              ))))), None))))),
+              )))), None))))),
               important: None,
               semicolon: None,
             ),
@@ -462529,11 +462529,11 @@ StyleSheet(
                 kind: "Ident",
                 offset: SourceOffset(501181),
                 len: 4,
-              )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+              )), Some(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(501186),
                 len: 1,
-              ))))), None))))),
+              )))), None))))),
               important: None,
               semicolon: None,
             ),
@@ -462881,11 +462881,11 @@ StyleSheet(
                 kind: "Ident",
                 offset: SourceOffset(501457),
                 len: 4,
-              )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+              )), Some(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(501462),
                 len: 1,
-              ))))), None))))),
+              )))), None))))),
               important: None,
               semicolon: None,
             ),
@@ -463226,11 +463226,11 @@ StyleSheet(
                 kind: "Ident",
                 offset: SourceOffset(501717),
                 len: 4,
-              )), Some(Literal(PositiveNonZeroInt(Number(Cursor(
+              )), Some(Literal(Number(Cursor(
                 kind: "Number",
                 offset: SourceOffset(501722),
                 len: 1,
-              ))))), None))))),
+              )))), None))))),
               important: None,
               semicolon: None,
             ),

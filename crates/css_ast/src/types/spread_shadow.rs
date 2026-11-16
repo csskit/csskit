@@ -15,7 +15,7 @@ use crate::{CalcableValue, Color, Length, NonNegative, NoneOr};
 pub struct SpreadShadow<'a> {
 	pub color: Option<Color<'a>>,
 	pub offset: NoneOr<(CalcableValue<'a, Length>, CalcableValue<'a, Length>)>,
-	pub blur: Option<CalcableValue<'a, NonNegative<Length>>>,
+	pub blur: Option<NonNegative<CalcableValue<'a, Length>>>,
 	pub spread: Option<CalcableValue<'a, Length>>,
 	pub position: Option<ShadowPosition>,
 }

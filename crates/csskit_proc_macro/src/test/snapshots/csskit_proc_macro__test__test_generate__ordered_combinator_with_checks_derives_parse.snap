@@ -11,7 +11,7 @@ enum Foo<'a> {
     Foo(
         #[atom(CssAtomSet::Foo)]
         crate::KeywordValue<'a, ::css_parse::T![Ident]>,
-        Option<crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>>,
+        Option<crate::Ranged<crate::CalcableValue<'a, crate::Angle>, -90i32, 90i32>>,
     ),
 }
 #[cfg(test)]
