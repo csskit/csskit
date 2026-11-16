@@ -41,7 +41,7 @@ impl<'a> Peek<'a> for HexColor {
 		}
 		match token.len() {
 			4 | 7 => token.hex_value() != 0,
-			5 | 9 => token.hex_value() != 0 || c.str_slice(p.source_text()).bytes().skip(1).all(|b| b == b'0'),
+			5 | 9 => token.hex_value() != 0 || p.to_source_cursor(c).source().bytes().skip(1).all(|b| b == b'0'),
 			_ => false,
 		}
 	}

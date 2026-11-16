@@ -40,11 +40,10 @@ impl<'a> Peek<'a> for UnicodeRange {
 		if c != Kind::Ident {
 			return false;
 		}
-		let source = p.source_text();
-		if !c.str_slice(source).eq_ignore_ascii_case("u") {
+		if !p.to_source_cursor(c).source().eq_ignore_ascii_case("u") {
 			return false;
 		}
-		source[c.end_offset().0 as usize..].starts_with('+')
+		p.source_from(c.end_offset()).starts_with('+')
 	}
 }
 
@@ -58,9 +57,8 @@ impl<'a> Parse<'a> for UnicodeRange {
 			Err(Diagnostic::new(c, Diagnostic::invalid_unicode_range))?
 		}
 		let offset = c.offset().0 as usize;
-		let token =
-			Lexer::new_with_features(&CssAtomSet::ATOMS, &p.source_text()[offset..], LexerFeature::UnicodeRange)
-				.advance();
+		let token = Lexer::new_with_features(&CssAtomSet::ATOMS, p.source_from(c.offset()), LexerFeature::UnicodeRange)
+			.advance();
 		if token != Kind::UnicodeRange || token.is_bad() {
 			Err(Diagnostic::new(c, Diagnostic::invalid_unicode_range))?
 		}

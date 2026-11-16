@@ -22,6 +22,8 @@ const BUFFER_REFILL_INDEX: usize = BUFFER_LEN - 5;
 pub struct Parser<'a, I: Iterator<Item = Cursor> + Clone> {
 	pub(crate) source_text: &'a str,
 
+	base_offset: u32,
+
 	pub(crate) cursor_iter: I,
 
 	#[allow(dead_code)]
@@ -60,8 +62,8 @@ pub enum State {
 }
 
 #[inline]
-fn eof_cursor(len: usize) -> Cursor {
-	let eof_offset = css_lexer::SourceOffset(len as u32);
+fn eof_cursor(base_offset: u32, len: usize) -> Cursor {
+	let eof_offset = css_lexer::SourceOffset(base_offset + len as u32);
 	Cursor::new(eof_offset, css_lexer::Token::EOF)
 }
 
@@ -70,13 +72,20 @@ where
 	I: Iterator<Item = Cursor> + Clone,
 {
 	/// Create a new parser with an iterator over cursors
-	pub fn new(alloc: &'a Arena, source_text: &'a str, mut cursor_iter: I) -> Self {
-		let eof_cursor = eof_cursor(source_text.len());
+	pub fn new(alloc: &'a Arena, source_text: &'a str, cursor_iter: I) -> Self {
+		Self::new_at(alloc, source_text, SourceOffset(0), cursor_iter)
+	}
+
+	/// Create a new parser over `source_text` whose first byte sits at `base_offset`, so the cursors of
+	/// `cursor_iter` take offsets from `base_offset` rather than from zero.
+	pub fn new_at(alloc: &'a Arena, source_text: &'a str, base_offset: SourceOffset, mut cursor_iter: I) -> Self {
+		let eof_cursor = eof_cursor(base_offset.0, source_text.len());
 		let mut buffer = [eof_cursor; BUFFER_LEN];
 		buffer.fill_with(|| cursor_iter.next().unwrap_or(eof_cursor));
 
 		Self {
 			source_text,
+			base_offset: base_offset.0,
 			cursor_iter,
 			features: Feature::none(),
 			errors: Vec::new_in(alloc),
@@ -102,7 +111,7 @@ where
 		// Shift remaining buffer cursors left to the start of the slice.
 		self.buffer.copy_within(from..BUFFER_LEN, 0);
 		// Re-fill the buffer with new cursors.
-		let eof = eof_cursor(self.source_text.len());
+		let eof = eof_cursor(self.base_offset, self.source_text.len());
 		for i in BUFFER_LEN - from..BUFFER_LEN {
 			self.buffer[i] = self.cursor_iter.next().unwrap_or(eof);
 		}
@@ -148,6 +157,12 @@ where
 	#[inline]
 	pub fn source_text(&self) -> &'a str {
 		self.source_text
+	}
+
+	/// The source text from `offset` to the end.
+	#[inline]
+	pub fn source_from(&self, offset: SourceOffset) -> &'a str {
+		&self.source_text[(offset.0 - self.base_offset) as usize..]
 	}
 
 	#[inline]
@@ -348,7 +363,7 @@ where
 		let mut iter = self.cursor_iter.clone();
 		loop {
 			let Some(cursor) = iter.next() else {
-				return eof_cursor(self.source_text.len());
+				return eof_cursor(self.base_offset, self.source_text.len());
 			};
 			if cursor == Kind::Eof {
 				return cursor;
@@ -373,7 +388,8 @@ where
 	}
 
 	pub fn to_source_cursor(&self, cursor: Cursor) -> SourceCursor<'a> {
-		SourceCursor::from(cursor, cursor.str_slice(self.source_text))
+		let start = (cursor.offset().0 - self.base_offset) as usize;
+		SourceCursor::from(cursor, &self.source_text[start..start + cursor.len() as usize])
 	}
 
 	pub fn consume_trivia(&mut self) -> Vec<'a, Cursor> {
@@ -392,7 +408,7 @@ where
 			}
 		}
 
-		let eof = eof_cursor(self.source_text.len());
+		let eof = eof_cursor(self.base_offset, self.source_text.len());
 		loop {
 			let Some(c) = self.cursor_iter.next() else {
 				self.buffer = [eof; BUFFER_LEN];
@@ -580,4 +596,45 @@ fn peek_and_next_with_whitsespace() {
 	assert_eq!(c.token().value(), 21.0);
 	let c = p.next();
 	assert_eq!(c.token(), Kind::Eof);
+}
+
+#[test]
+fn new_at_offsets_cursors_from_base() {
+	let str = "a b";
+	let alloc = crate::Arena::default();
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str)
+		.map(|cursor| Cursor::new(SourceOffset(cursor.offset().0 + 100), cursor.token()));
+	let mut p = Parser::new_at(&alloc, str, SourceOffset(100), lexer);
+	assert_eq!(p.offset(), 100);
+	assert_eq!(p.source_from(SourceOffset(101)), " b");
+	let first = p.next();
+	assert_eq!(first.offset(), 100);
+	assert_eq!(p.to_source_cursor(first).source(), "a");
+	let second = p.next();
+	assert_eq!(second.offset(), 102);
+	assert_eq!(p.to_source_cursor(second).source(), "b");
+	assert_eq!(p.source_from(second.end_offset()), "");
+	let eof = p.next();
+	assert_eq!(eof.token(), Kind::Eof);
+	assert_eq!(eof.offset(), 103);
+}
+
+#[test]
+fn new_at_eof_after_buffer_refill() {
+	let str = "0 1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21";
+	let end = 1000 + str.len() as u32;
+	let alloc = crate::Arena::default();
+	let lexer = css_lexer::Lexer::new(&css_lexer::EmptyAtomSet::ATOMS, str)
+		.map(|cursor| Cursor::new(SourceOffset(cursor.offset().0 + 1000), cursor.token()));
+	let mut p = Parser::new_at(&alloc, str, SourceOffset(1000), lexer);
+	let peeked = p.peek_n(23);
+	assert_eq!(peeked.token(), Kind::Eof);
+	assert_eq!(peeked.offset(), end);
+	for i in 0..=21 {
+		let number = p.next();
+		assert_eq!(p.to_source_cursor(number).source(), i.to_string());
+	}
+	let eof = p.next();
+	assert_eq!(eof.token(), Kind::Eof);
+	assert_eq!(eof.offset(), end);
 }
