@@ -20,7 +20,7 @@ pub use arena_box::Box;
 #[cfg(feature = "collections")]
 pub use arena_string::String;
 #[cfg(feature = "collections")]
-pub use arena_vec::{Drain, IntoIter, Vec};
+pub use arena_vec::{Drain, ExtractIf, IntoIter, Splice, TryReserveError, Vec};
 
 /// Required alignment of the arena region (4 GiB), so that `ptr as u32` equals the byte offset
 /// within the region. Where nothing is reserved or 32-bit targets that already express 4gb, this is `1`.
@@ -467,6 +467,30 @@ unsafe impl Allocator for &Arena {
 		}
 		Ok(new)
 	}
+
+	#[inline]
+	unsafe fn shrink(
+		&self,
+		ptr: NonNull<u8>,
+		old_layout: Layout,
+		new_layout: Layout,
+	) -> Result<NonNull<[u8]>, AllocError> {
+		debug_assert!(new_layout.size() <= old_layout.size(), "shrink must not grow");
+		if !(ptr.as_ptr() as usize).is_multiple_of(new_layout.align()) {
+			let new = self.allocate(new_layout)?;
+			// SAFETY: `ptr` holds at least `new_layout.size()` initialised bytes; `new` has room for them and is a fresh
+			// allocation, so the regions do not overlap.
+			unsafe { ptr.copy_to_nonoverlapping(new.cast::<u8>(), new_layout.size()) };
+			return Ok(new);
+		}
+		let region = self.region.get();
+		let offset = (ptr.as_ptr() as usize).wrapping_sub(region.base.as_ptr() as usize);
+		if offset < region.size && offset + old_layout.size() == self.cursor.get() {
+			self.resident.set(self.resident_bytes());
+			self.cursor.set(offset + new_layout.size());
+		}
+		Ok(NonNull::slice_from_raw_parts(ptr, new_layout.size()))
+	}
 }
 
 #[cfg(test)]
@@ -768,5 +792,51 @@ mod test {
 		assert_eq!(b.as_ptr() as *mut u8, base.as_ptr());
 		// SAFETY: the allocation is live and exclusively owned here.
 		unsafe { b.cast::<u8>().write_bytes(0x33, layout.size()) };
+	}
+
+	#[test]
+	fn shrink_latest_allocation_rewinds_cursor_but_not_resident() {
+		let arena = Arena::new();
+		let old = Layout::from_size_align(256, 8).unwrap();
+		let new = Layout::from_size_align(64, 8).unwrap();
+		let block = (&arena).allocate(old).unwrap();
+		let used = arena.used_bytes();
+		// SAFETY: `block` was allocated by this arena with `old`.
+		let shrunk = unsafe { (&arena).shrink(block.cast::<u8>(), old, new) }.unwrap();
+		assert_eq!(shrunk.cast::<u8>(), block.cast::<u8>());
+		assert_eq!(shrunk.len(), 64);
+		assert_eq!(arena.used_bytes(), used - 192);
+		assert_eq!(arena.resident_bytes(), used);
+	}
+
+	#[test]
+	fn shrink_earlier_allocation_keeps_cursor() {
+		let arena = Arena::new();
+		let old = Layout::from_size_align(64, 8).unwrap();
+		let new = Layout::from_size_align(16, 8).unwrap();
+		let earlier = (&arena).allocate(old).unwrap();
+		let _later = (&arena).allocate(old).unwrap();
+		let used = arena.used_bytes();
+		// SAFETY: `earlier` was allocated by this arena with `old`.
+		let shrunk = unsafe { (&arena).shrink(earlier.cast::<u8>(), old, new) }.unwrap();
+		assert_eq!(shrunk.cast::<u8>(), earlier.cast::<u8>());
+		assert_eq!(arena.used_bytes(), used);
+	}
+
+	#[test]
+	fn shrink_to_stricter_alignment_moves_and_copies() {
+		let arena = Arena::new();
+		let _pad = (&arena).allocate(Layout::from_size_align(1, 1).unwrap()).unwrap();
+		let old = Layout::from_size_align(64, 1).unwrap();
+		let new = Layout::from_size_align(32, 64).unwrap();
+		let block = (&arena).allocate(old).unwrap().cast::<u8>();
+		assert!(!(block.as_ptr() as usize).is_multiple_of(64));
+		// SAFETY: `block` is a live 64 byte allocation owned here.
+		unsafe { block.write_bytes(0x5a, 64) };
+		// SAFETY: `block` was allocated by this arena with `old`.
+		let moved = unsafe { (&arena).shrink(block, old, new) }.unwrap().cast::<u8>();
+		assert!((moved.as_ptr() as usize).is_multiple_of(64));
+		// SAFETY: `moved` holds the 32 bytes copied from `block`.
+		assert!(unsafe { std::slice::from_raw_parts(moved.as_ptr(), 32) }.iter().all(|&byte| byte == 0x5a));
 	}
 }
