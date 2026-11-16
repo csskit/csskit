@@ -43,9 +43,10 @@
         "./bundle"
     ],
     "scripts": {
-        "test": "npm run test:napi && npm run test:wasm",
+        "test": "npm run test:napi && npm run test:wasm && npm run test:bin",
         "test:napi": "node --test tests/om.test.js",
-        "test:wasm": "node --test tests/bundle.test.js"
+        "test:wasm": "node --test tests/bundle.test.js",
+        "test:bin": "node --test tests/launcher.test.js"
     },
     "optionalDependencies": {
         "csskit-darwin-arm64": "0.0.39",

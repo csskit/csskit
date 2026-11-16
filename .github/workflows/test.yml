@@ -306,6 +306,9 @@ jobs:
       - name: Build addon and run native object model tests
         run: mise r test-napi
 
+      - name: Run shell launcher tests
+        run: mise r test-bin
+
   generated_files:
     name: Generated File Drift
     needs: check-skip
