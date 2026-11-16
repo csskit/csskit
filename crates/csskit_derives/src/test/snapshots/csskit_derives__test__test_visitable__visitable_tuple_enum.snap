@@ -3,16 +3,22 @@ source: crates/csskit_derives/src/test/test_visitable.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl crate::VisitableMut for Display {
-    fn accept_mut<__V: crate::VisitMut>(&mut self, v: &mut __V) {
+impl<'a> crate::VisitableMut<'a> for Display {
+    fn accept_mut<__V: crate::VisitMut<'a>>(
+        &mut self,
+        v: &mut __V,
+    ) -> visit_flow::VisitFlow {
         use crate::VisitableMut;
         match self {
-            Self::Block(v0) => {
-                v0.accept_mut(v);
-            }
-            Self::Inline(v0) => {
-                v0.accept_mut(v);
-            }
+            Self::Block(v0) => v0.accept_mut(v),
+            Self::Inline(v0) => v0.accept_mut(v),
+        }
+    }
+    fn element_node(&self) -> Option<crate::VisitNode<'_>> {
+        use crate::VisitableMut;
+        match self {
+            Self::Block(v0) => v0.element_node(),
+            Self::Inline(v0) => v0.element_node(),
         }
     }
 }

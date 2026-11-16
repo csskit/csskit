@@ -3,21 +3,32 @@ source: crates/csskit_derives/src/test/test_visitable.rs
 expression: pretty
 ---
 #[automatically_derived]
-impl crate::VisitableMut for FlexWrap {
-    fn accept_mut<__V: crate::VisitMut>(&mut self, v: &mut __V) {
+impl<'a> crate::VisitableMut<'a> for FlexWrap {
+    fn accept_mut<__V: crate::VisitMut<'a>>(
+        &mut self,
+        v: &mut __V,
+    ) -> visit_flow::VisitFlow {
         use crate::VisitableMut;
         match self {
-            Self::Nowrap(v0) => {
-                v0.accept_mut(v);
-            }
+            Self::Nowrap(v0) => v0.accept_mut(v),
             Self::Wrap { wrap, balance, .. } => {
-                wrap.accept_mut(v);
-                balance.accept_mut(v);
+                visit_flow::try_visit!(wrap.accept_mut(v));
+                visit_flow::try_visit!(balance.accept_mut(v));
+                <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
             }
             Self::WrapReverse { wrap_reverse, balance, .. } => {
-                wrap_reverse.accept_mut(v);
-                balance.accept_mut(v);
+                visit_flow::try_visit!(wrap_reverse.accept_mut(v));
+                visit_flow::try_visit!(balance.accept_mut(v));
+                <visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
             }
+        }
+    }
+    fn element_node(&self) -> Option<crate::VisitNode<'_>> {
+        use crate::VisitableMut;
+        match self {
+            Self::Nowrap(v0) => v0.element_node(),
+            Self::Wrap { .. } => None,
+            Self::WrapReverse { .. } => None,
         }
     }
 }

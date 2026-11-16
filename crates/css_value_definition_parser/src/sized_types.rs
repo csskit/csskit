@@ -162,6 +162,7 @@ pub(crate) const SIZED_TYPES: &[&str] = &[
 	"LengthPercentageNumber",
 	"LengthPercentageOrFlex",
 	"LineStyle",
+	"Literal",
 	"Longhand",
 	"MaskLayerClip",
 	"MaskSource",

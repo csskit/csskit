@@ -38,7 +38,7 @@ fn trait_name(item: &ItemImpl) -> Result<&syn::Ident> {
 		.ok_or_else(|| syn::Error::new(path.span(), "#[visitor] requires an impl Visit block"))
 }
 
-/// Rewrites a `Visit` impl block so observer methods need no
+/// Rewrites a `Visit` or `VisitMut` impl block so observer methods need no
 /// `-> VisitFlow` return type or trailing `VisitFlow::DESCEND`.
 ///
 /// For every method that declares **no** return type, the macro:
@@ -49,17 +49,15 @@ fn trait_name(item: &ItemImpl) -> Result<&syn::Ident> {
 /// untouched, so flow-controlling visitors keep full control (return
 /// `VisitFlow::SKIP_CHILDREN` / `VisitFlow::STOP` as normal).
 ///
-/// `VisitMut` impls are accepted but left untouched; those trait methods return
-/// `()` and do not participate in `VisitFlow`.
+/// A `Visit` impl is split in two: the `NodeVisitor` methods move to their own impl, which gains
+/// any it leaves out.
 pub fn expand(item: ItemImpl) -> Result<TokenStream> {
 	let mut item = item;
 	let name = trait_name(&item)?;
-	if name == "VisitMut" {
-		return Ok(quote! { #item });
-	}
-	if name != "Visit" {
+	if name != "Visit" && name != "VisitMut" {
 		return Err(syn::Error::new(name.span(), "#[visitor] only supports impl Visit or impl VisitMut"));
 	}
+	let is_visit = name == "Visit";
 	for impl_item in &mut item.items {
 		let ImplItem::Fn(method) = impl_item else { continue };
 		// Only rewrite methods with an elided return type. An explicit return
@@ -74,6 +72,10 @@ pub fn expand(item: ItemImpl) -> Result<TokenStream> {
 			#(#stmts)*
 			<::visit_flow::VisitFlow as ::visit_flow::VisitFlowExt>::DESCEND
 		});
+	}
+
+	if !is_visit {
+		return Ok(quote! { #item });
 	}
 
 	let mut node_visitor = item.clone();
