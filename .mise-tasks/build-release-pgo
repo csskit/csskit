@@ -8,6 +8,12 @@ exe=""
 bin="target/$target/release/csskit$exe"
 packages=(-p csskit -p csskit_napi --features csskit_napi/napi)
 
+# https://github.com/rust-lang/rust/issues/156675
+if [[ "$target" == aarch64-pc-windows-msvc ]]; then
+	cargo build --release --target "$target" "${packages[@]}"
+	exit 0
+fi
+
 cargo pgo instrument build -- "${packages[@]}"
 
 for cmd in min fmt; do "$bin" "$cmd" coverage/popular/*.css >/dev/null; done
