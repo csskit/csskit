@@ -65,7 +65,7 @@ pub fn derive_into_span(stream: TokenStream) -> TokenStream {
 	run(stream, to_span::derive)
 }
 
-#[proc_macro_derive(Visitable, attributes(visit, queryable))]
+#[proc_macro_derive(Visitable, attributes(visit, queryable, visit_mut_bound))]
 pub fn derive_visitable(stream: TokenStream) -> TokenStream {
 	run(stream, visitable::derive)
 }

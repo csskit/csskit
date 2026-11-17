@@ -153,6 +153,7 @@ pub use ui::*;
 pub use value::{
 	CalcableSubstitutionFunction, CalcableValue, KeywordSubstitutionFunction, KeywordValue,
 	NumericSubstitutionFunction, NumericValue, QuerySubstitutionFunction, QueryValue, SubstitutionFunction, Value,
+	ValueSlot,
 };
 pub(crate) use value::{impl_value_slot_parse, is_substitution_function};
 // TODO: not sure if this is needed yet.

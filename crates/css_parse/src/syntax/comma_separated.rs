@@ -43,6 +43,23 @@ impl<'a, T, const MIN: usize> CommaSeparated<'a, T, MIN> {
 	pub fn len(&self) -> usize {
 		self.items.len()
 	}
+
+	/// Retains only the items for which `f` returns `true`, keeping at least `MIN` items. `f` is called on every item
+	/// in order, with whether that item may still be removed; once only `MIN` remain, the rest are kept whatever `f`
+	/// returns. The last remaining item has no trailing comma.
+	pub fn retain_mut<F: FnMut(&mut T, bool) -> bool>(&mut self, mut f: F) {
+		let mut len = self.items.len();
+		self.items.retain_mut(|(item, _)| {
+			if f(item, len > MIN) || len <= MIN {
+				return true;
+			}
+			len -= 1;
+			false
+		});
+		if let Some((_, comma)) = self.items.last_mut() {
+			*comma = None;
+		}
+	}
 }
 
 impl<'a, T: Peek<'a>, const MIN: usize> Peek<'a> for CommaSeparated<'a, T, MIN> {
@@ -211,5 +228,25 @@ mod tests {
 		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident]>, "one two");
 		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 2>, "one");
 		assert_parse_error!(EmptyAtomSet::ATOMS, CommaSeparated<T![Ident], 3>, "one, two");
+	}
+
+	fn assert_retained<const MIN: usize>(source_text: &str, keep: &[bool], expected: &str) {
+		let alloc = Arena::default();
+		let lexer = css_lexer::Lexer::new(&EmptyAtomSet::ATOMS, source_text);
+		let mut parser = crate::Parser::new(&alloc, source_text, lexer);
+		let mut list = parser.parse_entirely::<CommaSeparated<T![Ident], MIN>>().output.unwrap();
+		let mut keep = keep.iter();
+		list.retain_mut(|_, _| *keep.next().unwrap());
+		let mut actual = crate::String::new_in(&alloc);
+		list.to_cursors(&mut crate::CursorWriteSink::new(source_text, &mut actual));
+		assert_eq!(actual.as_str(), expected);
+	}
+
+	#[test]
+	fn test_retain_mut() {
+		assert_retained::<1>("one,two,three", &[true, false, true], "one,three");
+		assert_retained::<1>("one,two,three", &[true, true, false], "one,two");
+		assert_retained::<1>("one,two,three", &[false, false, false], "three");
+		assert_retained::<2>("one,two,three", &[false, false, false], "two,three");
 	}
 }

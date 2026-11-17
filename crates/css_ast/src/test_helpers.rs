@@ -46,18 +46,18 @@ impl TestVisitor {
 #[cfg(feature = "visitable")]
 macro_rules! visit_mut_trait {
 	( $(
-		$name: ident$(<$($gen:tt),+>)?($obj: ident$(<$($ogen:tt),+>)?) [$($tp: ident),*],
+		$name: ident$(<$lt: lifetime $(, $gen: ident)*>)?($obj: ident$(<$($ogen:tt),+>)?) [$($tp: ident),*],
 	)+ ) => {
-		impl $crate::VisitMut for TestVisitor {
+		impl<'a> $crate::VisitMut<'a> for TestVisitor {
 			$(
-				fn $name$(<$($gen),+>)?(&mut self, _rule: &mut $crate::$obj$(<$($ogen),+>)?) {
-					// Only handle visits for visit_* methods, not exit_* methods
+				fn $name$(<$($gen),*>)?(&mut self, _rule: &mut $crate::$obj$(<$($ogen),+>)?) -> visit_flow::VisitFlow {
 					let name = stringify!($name);
 					if name.starts_with("visit_") {
 						self.handle_visit(stringify!($obj));
 					} else if name.starts_with("exit_") {
 						self.handle_exit(stringify!($obj));
 					}
+					<visit_flow::VisitFlow as visit_flow::VisitFlowExt>::DESCEND
 				}
 			)+
 		}
@@ -87,7 +87,7 @@ macro_rules! assert_visits {
 		let mut parsed = result.output.unwrap();
 
 		let mut visitor = $crate::test_helpers::TestVisitor::new();
-		parsed.accept_mut(&mut visitor);
+		let _ = parsed.accept_mut(&mut visitor);
 
 		// Validate that all visit calls have matching exit calls
 		visitor.validate_balanced();
@@ -106,8 +106,9 @@ macro_rules! assert_visits {
 	}};
 }
 
-/// Parse `$source` as `$ty`, run a [`ControlFlowTestVisitor`] over it, and assert the
-/// `entered`/`exited` node sequences (and optionally the resulting [`VisitFlow`]).
+/// Parse `$source` as `$ty`, run a [`ControlFlowTestVisitor`] over it with both [`Visitable::accept`] and
+/// [`VisitableMut::accept_mut`], and assert each walk's `entered`/`exited` node sequences (and optionally the
+/// resulting [`VisitFlow`]).
 ///
 /// Node names are bare idents; the macro prefixes them with `NodeId::`. The visitor is
 /// configured with either `descend` (no control flow), a `callback: |id| ...` returning
@@ -119,17 +120,21 @@ macro_rules! assert_visit_flow {
 		exited: [$($exit:ident),* $(,)?]
 		$(, result: $result:pat)? $(,)?
 	) => {{
-		use $crate::Visitable;
-		use $crate::NodeId;
+		use $crate::{NodeId, Visitable, VisitableMut};
 		let alloc = ::css_parse::Arena::new();
 		let lexer = css_lexer::Lexer::new(&$crate::CssAtomSet::ATOMS, $source);
 		let mut parser = css_parse::Parser::new(&alloc, $source, lexer);
-		let parsed = parser.parse_entirely::<$ty>().output.expect("parse failed");
+		let mut parsed = parser.parse_entirely::<$ty>().output.expect("parse failed");
 		let mut v = $visitor;
 		let _result = parsed.accept(&mut v);
 		assert_eq!(v.entered(), vec![$(NodeId::$enter),*], "entered mismatch for {:?}", $source);
 		assert_eq!(v.exited(), vec![$(NodeId::$exit),*], "exited mismatch for {:?}", $source);
 		$(assert!(matches!(_result, $result), "result mismatch for {:?}: got {:?}", $source, _result);)?
+		let mut v = $visitor;
+		let _result = parsed.accept_mut(&mut v);
+		assert_eq!(v.entered(), vec![$(NodeId::$enter),*], "accept_mut entered mismatch for {:?}", $source);
+		assert_eq!(v.exited(), vec![$(NodeId::$exit),*], "accept_mut exited mismatch for {:?}", $source);
+		$(assert!(matches!(_result, $result), "accept_mut result mismatch for {:?}: got {:?}", $source, _result);)?
 	}};
 }
 #[cfg(feature = "visitable")]
@@ -222,6 +227,21 @@ impl crate::NodeVisitor for ControlFlowTestVisitor {
 	}
 }
 
+#[cfg(feature = "visitable")]
+impl<'a> crate::VisitMut<'a> for ControlFlowTestVisitor {
+	fn consider_node(&self, node: crate::VisitNode) -> VisitFlow {
+		crate::NodeVisitor::consider_node(self, node)
+	}
+
+	fn enter_node(&mut self, node: crate::VisitNode) -> VisitFlow {
+		crate::NodeVisitor::enter_node(self, node)
+	}
+
+	fn exit_node(&mut self, node: crate::VisitNode) -> VisitFlow {
+		crate::NodeVisitor::exit_node(self, node)
+	}
+}
+
 #[cfg(all(test, feature = "visitable"))]
 mod tests {
 	use super::*;
@@ -239,10 +259,10 @@ mod tests {
 		}
 	}
 
-	impl VisitMut for UnbalancedVisitor {
-		fn visit_color(&mut self, _: &mut Color) {
+	impl<'a> VisitMut<'a> for UnbalancedVisitor {
+		fn visit_color(&mut self, _: &mut Color) -> VisitFlow {
 			self.visitor.handle_visit("Color");
-			// Intentionally NOT calling handle_exit
+			VisitFlow::DESCEND
 		}
 		// Note: exit_color is not overridden, so it won't call handle_exit
 	}
@@ -259,7 +279,7 @@ mod tests {
 
 		let mut color = Color::parse(&mut parser).unwrap();
 		let mut visitor = UnbalancedVisitor::new();
-		color.accept_mut(&mut visitor);
+		let _ = color.accept_mut(&mut visitor);
 
 		// This should panic because we visited but didn't exit
 		visitor.visitor.validate_balanced();
@@ -276,7 +296,7 @@ mod tests {
 
 		let mut color = Color::parse(&mut parser).unwrap();
 		let mut visitor = TestVisitor::new();
-		color.accept_mut(&mut visitor);
+		let _ = color.accept_mut(&mut visitor);
 
 		// This should succeed - the auto-generated implementation is balanced
 		visitor.validate_balanced();

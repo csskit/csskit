@@ -40,6 +40,38 @@ macro_rules! impl_value_slot_parse {
 }
 pub(crate) use impl_value_slot_parse;
 
+/// A value slot whose grammar permits typed math functions, such as [`CalcableValue`], offered to
+/// [`VisitMut::visit_value_slot`][crate::VisitMut::visit_value_slot] so a visitor may replace the whole slot.
+pub trait ValueSlot<'a>: Parse<'a> + ToCursors + ToSpan + 'a {
+	/// The literal type of the slot.
+	type Literal;
+
+	/// Returns the math function filling this slot, if one does.
+	fn math_function(&self) -> Option<&MathFunction<'a, Self::Literal>>;
+}
+
+macro_rules! impl_value_slot {
+	($ty:ident, $sub:ident) => {
+		impl<'a, T: Parse<'a> + Peek<'a> + ToCursors + ToSpan> ValueSlot<'a> for $ty<'a, T> {
+			type Literal = T;
+
+			fn math_function(&self) -> Option<&MathFunction<'a, T>> {
+				match self {
+					Self::Substituted(func) => match &**func {
+						$sub::Math(math) => Some(math),
+						_ => None,
+					},
+					_ => None,
+				}
+			}
+		}
+	};
+}
+
+impl_value_slot!(CalcableValue, CalcableSubstitutionFunction);
+impl_value_slot!(NumericValue, NumericSubstitutionFunction);
+impl_value_slot!(QueryValue, QuerySubstitutionFunction);
+
 /// Generic wrapper for CSS values whose grammar permits arbitrary substitution functions
 /// (`var()`, `env()`, `attr()`, `if()`, `first-valid()`), but **not** typed math functions.
 ///
@@ -85,7 +117,7 @@ pub enum SubstitutionFunction<'a, T> {
 #[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(value_slot), visit_mut_bound(T: Parse<'a> + Peek<'a> + ToCursors))]
 pub enum CalcableValue<'a, T> {
 	Literal(T),
 	Substituted(Box<'a, CalcableSubstitutionFunction<'a, T>>),
@@ -118,7 +150,7 @@ impl<'a, T: Copy + Into<Token>> CalcableValue<'a, T> {
 #[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children), visit_mut_bound(T: Parse<'a> + Peek<'a> + ToCursors))]
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Function)]
 pub enum CalcableSubstitutionFunction<'a, T> {
@@ -138,7 +170,7 @@ pub enum CalcableSubstitutionFunction<'a, T> {
 #[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(value_slot), visit_mut_bound(T: Parse<'a> + Peek<'a> + ToCursors))]
 pub enum NumericValue<'a, T> {
 	Literal(T),
 	Substituted(Box<'a, NumericSubstitutionFunction<'a, T>>),
@@ -169,7 +201,7 @@ impl<'a, T: Copy + Into<Token>> NumericValue<'a, T> {
 #[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children), visit_mut_bound(T: Parse<'a> + Peek<'a> + ToCursors))]
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Function)]
 pub enum NumericSubstitutionFunction<'a, T> {
@@ -229,7 +261,7 @@ pub enum KeywordSubstitutionFunction<'a, T> {
 #[node]
 #[derive(Peek, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(value_slot), visit_mut_bound(T: Parse<'a> + Peek<'a> + ToCursors))]
 pub enum QueryValue<'a, T> {
 	Literal(T),
 	Substituted(Box<'a, QuerySubstitutionFunction<'a, T>>),
@@ -243,7 +275,7 @@ impl_value_slot_parse!(QueryValue, QuerySubstitutionFunction, T);
 #[node]
 #[derive(Peek, Parse, ToCursors, ToSpan, SemanticEq, Debug, Clone, PartialEq, Eq, PartialOrd, Ord, Hash)]
 #[cfg_attr(feature = "serde", derive(serde::Serialize), serde())]
-#[cfg_attr(feature = "visitable", derive(Visitable), visit(children))]
+#[cfg_attr(feature = "visitable", derive(Visitable), visit(children), visit_mut_bound(T: Parse<'a> + Peek<'a> + ToCursors))]
 #[derive(csskit_derives::NodeWithMetadata)]
 #[metadata(node_kinds = Function)]
 pub enum QuerySubstitutionFunction<'a, T> {
