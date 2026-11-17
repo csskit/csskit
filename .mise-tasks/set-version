@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+set -euo pipefail
+#MISE description="Set the version of every crate and npm package"
+#USAGE arg "<version>" help="Version without a leading v, e.g. 0.0.42 or 0.0.42-canary.202611170300"
+
+VERSION="${usage_version#v}"
+
+cargo set-version --workspace "$VERSION"
+
+for pkg in packages/csskit-*/ packages/csskit/; do
+	npm version "$VERSION" --prefix "$pkg" --no-git-tag-version --allow-same-version
+done
+
+for pkg in packages/csskit-*/; do
+	name="$(basename "$pkg")"
+	npm pkg set "optionalDependencies.${name}=${VERSION}" --prefix packages/csskit
+done
