@@ -34,7 +34,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: release-pr
-          tools: rust node npm cargo:git-cliff
+          tools: rust node npm cargo:git-cliff cargo:cargo-edit
           components: ""
 
       - name: Update Release PR
@@ -181,7 +181,7 @@ jobs:
         uses: ./.github/actions/setup
         with:
           key: release-deploy
-          tools: rust node npm cargo:git-cliff
+          tools: rust node npm cargo:git-cliff cargo:cargo-edit
           components: ""
 
       - name: Download native artifacts
