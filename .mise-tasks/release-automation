@@ -21,7 +21,7 @@ echo "Current version: $VERSION"
 NEXT_VERSION="$(git cliff --bumped-version --unreleased)"
 echo "Next version:    $NEXT_VERSION"
 
-CANARY_VERSION="${NEXT_VERSION}-canary.${SHA}"
+CANARY_VERSION="${NEXT_VERSION}-canary.$(date -u +%Y%m%d%H%M)"
 echo "Canary Version:  $CANARY_VERSION"
 
 # Check if this version has already been released

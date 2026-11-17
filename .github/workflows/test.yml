@@ -253,7 +253,7 @@ jobs:
       - name: Set canary version
         run: |
           VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[0].version | split(".") | "\(.[0]).\(.[1]).\(.[2] | tonumber + 1)"')
-          echo "TAG_NAME=${VERSION}-canary.${GITHUB_SHA}" >> $GITHUB_ENV
+          echo "TAG_NAME=${VERSION}-canary.$(date -u +%Y%m%d%H%M)" >> $GITHUB_ENV
 
       - name: Bump workspace version
         run: cargo set-version --workspace $TAG_NAME
