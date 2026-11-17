@@ -1,4 +1,23 @@
-## [0.0.39] - 2026-11-15
+## [0.0.40] - 2026-11-17
+
+### Css_ast
+- csskit_arena: Bring Vec closer to std (#1703) ([#1703](https://github.com/csskit/csskit/pull/1703))
+- css_parse/css_ast: Let a Parser start at a non-zero source offset (#1708) ([#1708](https://github.com/csskit/csskit/pull/1708))
+- csskit_derives/css_ast: Ensure constraint generics wrap slot, not vice-versa (#1704) ([#1704](https://github.com/csskit/csskit/pull/1704))
+
+
+### Csskit
+- chore(deps): update dependencies (patch) (#1696) ([#1696](https://github.com/csskit/csskit/pull/1696))
+- csskit(npm): Log error cause during failed load (#1705) ([#1705](https://github.com/csskit/csskit/pull/1705))
+- csskit(npm): Find physical working dir for script (#1706) ([#1706](https://github.com/csskit/csskit/pull/1706))
+- csskit(npm): Try to test that the shell launcher works (#1707) ([#1707](https://github.com/csskit/csskit/pull/1707))
+
+
+### Csskit_vscode
+- chore(deps): update dependency oxlint to v1.86.0 (#1702) ([#1702](https://github.com/csskit/csskit/pull/1702))
+- chore(deps): update dependency @types/vscode to v1.146.0 (#1701) ([#1701](https://github.com/csskit/csskit/pull/1701))
+
+## [0.0.39] - 2026-11-16
 
 ### Atom_set
 - derive_atom_set/atom_set: Allow case-sensitive derives (#1691) ([#1691](https://github.com/csskit/csskit/pull/1691))
@@ -29,6 +48,10 @@
 - Upgrade Rust 1.100.0 (#1690) ([#1690](https://github.com/csskit/csskit/pull/1690))
 
 
+### Css_feature_data
+- Regenerate css_ast/src/values from csswg drafts (#1694) ([#1694](https://github.com/csskit/csskit/pull/1694))
+
+
 ### Css_lexer
 - css_lexer: Fix typo in backtick token (#1675) ([#1675](https://github.com/csskit/csskit/pull/1675))
 - css_lexer: Keep escaping leading dashes for idents with ambiguous subsequent chars (#1679) ([#1679](https://github.com/csskit/csskit/pull/1679))
@@ -44,6 +67,7 @@
 
 ### Csskit
 - chore(deps): update dependencies (patch) (#1660) ([#1660](https://github.com/csskit/csskit/pull/1660))
+- Release v0.0.39 (#1654) ([#1654](https://github.com/csskit/csskit/pull/1654))
 
 
 ### Csskit_arena
