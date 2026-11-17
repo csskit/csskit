@@ -19,6 +19,10 @@ VERSION=$(cargo metadata --no-deps --format-version 1 | jq -r '.packages[] | sel
 echo "Current version: $VERSION"
 
 NEXT_VERSION="$(git cliff --bumped-version --unreleased)"
+if [[ "$NEXT_VERSION" == "$VERSION" ]]; then
+	IFS=. read -r MAJOR MINOR PATCH <<<"${VERSION#v}"
+	NEXT_VERSION="v${MAJOR}.${MINOR}.$((PATCH + 1))"
+fi
 echo "Next version:    $NEXT_VERSION"
 
 CANARY_VERSION="${NEXT_VERSION}-canary.${SHA}"
@@ -87,7 +91,7 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	cargo publish --allow-dirty
 else
 	# Generate changelog for unreleased commits
-	changelog="$(git cliff --bump --unreleased --strip all)"
+	changelog="$(git cliff --tag "$NEXT_VERSION" --unreleased --strip all)"
 
 	echo "=========================================="
 	echo "CHANGELOG PREVIEW:"
@@ -103,7 +107,7 @@ else
 	git config user.name "Keith Cirkel"
 	git config user.email "keithamus@users.noreply.github.com"
 
-	git cliff --bump -o CHANGELOG.md
+	git cliff --tag "$NEXT_VERSION" -o CHANGELOG.md
 
 	if [[ "$RELEASE_PR" == "true" ]]; then
 		echo "Creating/updating release PR..."
