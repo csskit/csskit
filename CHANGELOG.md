@@ -1,3 +1,8 @@
+## [0.0.41] - 2026-11-17
+
+### Bytescan
+- bytescan: add lints workspace=true (#1712) ([#1712](https://github.com/csskit/csskit/pull/1712))
+
 ## [0.0.40] - 2026-11-17
 
 ### Css_ast
@@ -11,6 +16,7 @@
 - csskit(npm): Log error cause during failed load (#1705) ([#1705](https://github.com/csskit/csskit/pull/1705))
 - csskit(npm): Find physical working dir for script (#1706) ([#1706](https://github.com/csskit/csskit/pull/1706))
 - csskit(npm): Try to test that the shell launcher works (#1707) ([#1707](https://github.com/csskit/csskit/pull/1707))
+- Release v0.0.40 (#1700) ([#1700](https://github.com/csskit/csskit/pull/1700))
 
 
 ### Csskit_vscode
