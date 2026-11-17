@@ -6,7 +6,7 @@ expression: pretty
 #[repr(C)]
 struct Foo<'a>(
     pub crate::AutoOr<
-        crate::CalcableValue<'a, crate::Ranged<crate::Angle, -90i32, 90i32>>,
+        crate::Ranged<crate::CalcableValue<'a, crate::Angle>, -90i32, 90i32>,
     >,
 );
 #[cfg(test)]

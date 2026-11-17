@@ -6,7 +6,7 @@ use crate::{CalcableValue, Color, Length, NonNegative};
 type ShadowOffset<'a> = (
 	CalcableValue<'a, Length>,
 	CalcableValue<'a, Length>,
-	Option<CalcableValue<'a, NonNegative<Length>>>,
+	Option<NonNegative<CalcableValue<'a, Length>>>,
 	Option<CalcableValue<'a, Length>>,
 );
 /// <https://drafts.csswg.org/css-backgrounds-3/#typedef-shadow>

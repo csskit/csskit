@@ -70,7 +70,7 @@ pub enum FilterValue<'a> {
 pub struct BlurFunction<'a> {
 	#[atom(CssAtomSet::Blur)]
 	pub name: T![Function],
-	pub radius: Option<CalcableValue<'a, NonNegative<Length>>>,
+	pub radius: Option<NonNegative<CalcableValue<'a, Length>>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }
@@ -120,7 +120,7 @@ pub struct DropShadowFunction<'a> {
 	pub color: Option<Color<'a>>,
 	pub offset_x: CalcableValue<'a, Length>,
 	pub offset_y: CalcableValue<'a, Length>,
-	pub blur_radius: Option<CalcableValue<'a, NonNegative<Length>>>,
+	pub blur_radius: Option<NonNegative<CalcableValue<'a, Length>>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

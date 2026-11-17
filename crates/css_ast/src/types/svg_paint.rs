@@ -30,7 +30,7 @@ pub enum SvgPaint<'a> {
 pub struct SvgPaintChildFunction<'a> {
 	#[atom(CssAtomSet::Child)]
 	pub function: T![Function],
-	pub index: NumericValue<'a, Positive<Integer>>,
+	pub index: Positive<NumericValue<'a, Integer>>,
 	#[semantic_eq(skip)]
 	pub close: T![')'],
 }

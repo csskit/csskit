@@ -24,7 +24,7 @@ pub enum FeatureTagToggle<'a> {
 	On(T![Ident]),
 	#[atom(CssAtomSet::Off)]
 	Off(T![Ident]),
-	Integer(NumericValue<'a, NonNegative<CSSInt>>),
+	Integer(NonNegative<NumericValue<'a, CSSInt>>),
 }
 
 #[cfg(test)]

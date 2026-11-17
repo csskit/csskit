@@ -392,44 +392,43 @@ impl ToType for DefType {
 		let wrapper = value_wrapper_for(self.ident_str());
 		let generics = self.get_generics();
 		let base_type = quote! { crate::#ty #generics };
+		let slot = match wrapper {
+			WrapperKind::Value => quote! { crate::Value<'a, #base_type> },
+			WrapperKind::Calcable => quote! { crate::CalcableValue<'a, #base_type> },
+			WrapperKind::Numeric => quote! { crate::NumericValue<'a, #base_type> },
+		};
 
-		let range_wrapped = match self.range {
-			DefRange::None | DefRange::Fixed(_) => base_type,
+		let constrained = match self.range {
+			DefRange::None | DefRange::Fixed(_) => slot,
 			DefRange::Range(Range { start, end }) => {
 				if start == end {
 					let value = start as i32;
-					quote! { crate::Exact<#base_type, #value> }
+					quote! { crate::Exact<#slot, #value> }
 				} else {
 					let min = start as i32;
 					let max = end as i32;
-					quote! { crate::Ranged<#base_type, #min, #max> }
+					quote! { crate::Ranged<#slot, #min, #max> }
 				}
 			}
 			DefRange::RangeFrom(start) => {
 				if start == 0.0 {
-					quote! { crate::NonNegative<#base_type> }
+					quote! { crate::NonNegative<#slot> }
 				} else if start > 0.0 && start <= 1.0 {
-					quote! { crate::Positive<#base_type> }
+					quote! { crate::Positive<#slot> }
 				} else {
 					let min = start as i32;
 					let max = i32::MAX;
-					quote! { crate::Ranged<#base_type, #min, #max> }
+					quote! { crate::Ranged<#slot, #min, #max> }
 				}
 			}
 			DefRange::RangeTo(end) => {
 				let min = i32::MIN;
 				let max = end as i32;
-				quote! { crate::Ranged<#base_type, #min, #max> }
+				quote! { crate::Ranged<#slot, #min, #max> }
 			}
 		};
 
-		let wrapped_type = match wrapper {
-			WrapperKind::Value => quote! { crate::Value<'a, #range_wrapped> },
-			WrapperKind::Calcable => quote! { crate::CalcableValue<'a, #range_wrapped> },
-			WrapperKind::Numeric => quote! { crate::NumericValue<'a, #range_wrapped> },
-		};
-
-		vec![wrapped_type]
+		vec![constrained]
 	}
 }
 

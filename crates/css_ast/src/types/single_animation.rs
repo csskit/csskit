@@ -25,7 +25,7 @@ use css_parse::parse_optionals;
 #[cfg_attr(feature = "visitable", derive(csskit_derives::Visitable), visit)]
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct SingleAnimation<'a> {
-	pub duration: Option<AutoOr<CalcableValue<'a, NonNegative<Time>>>>,
+	pub duration: Option<AutoOr<NonNegative<CalcableValue<'a, Time>>>>,
 	pub easing: Option<EasingFunction<'a>>,
 	pub delay: Option<CalcableValue<'a, Time>>,
 	pub iteration_count: Option<SingleAnimationIterationCount<'a>>,
@@ -37,7 +37,7 @@ pub struct SingleAnimation<'a> {
 }
 
 impl<'a> Peek<'a> for SingleAnimation<'a> {
-	const PEEK_KINDSET: KindSet = <AutoOr<CalcableValue<'a, NonNegative<Time>>>>::PEEK_KINDSET
+	const PEEK_KINDSET: KindSet = <AutoOr<NonNegative<CalcableValue<'a, Time>>>>::PEEK_KINDSET
 		.combine(EasingFunction::PEEK_KINDSET)
 		.combine(<CalcableValue<'a, Time>>::PEEK_KINDSET)
 		.combine(<SingleAnimationIterationCount<'a>>::PEEK_KINDSET)
@@ -48,7 +48,7 @@ impl<'a> Peek<'a> for SingleAnimation<'a> {
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		<AutoOr<CalcableValue<'a, NonNegative<Time>>>>::peek(p, c)
+		<AutoOr<NonNegative<CalcableValue<'a, Time>>>>::peek(p, c)
 			|| EasingFunction::peek(p, c)
 			|| <CalcableValue<'a, Time>>::peek(p, c)
 			|| <SingleAnimationIterationCount<'a>>::peek(p, c)
@@ -63,7 +63,7 @@ impl<'a> Parse<'a> for SingleAnimation<'a> {
 	{
 		let (duration, easing, delay, iteration_count, direction, fill_mode, play_state, name, timeline) = parse_optionals!(
 			p,
-			duration: AutoOr<CalcableValue<NonNegative<Time>>>,
+			duration: AutoOr<NonNegative<CalcableValue<Time>>>,
 			easing: EasingFunction,
 			delay: CalcableValue<Time>,
 			iteration_count: SingleAnimationIterationCount,

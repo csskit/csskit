@@ -37,19 +37,19 @@ pub struct CrossFadeFunction<'a> {
 #[derive(csskit_derives::NodeWithMetadata)]
 pub struct CfImage<'a> {
 	pub image: CfImageValue<'a>,
-	pub percentage: Option<CalcableValue<'a, Ranged<Percentage, 0, 100>>>,
+	pub percentage: Option<Ranged<CalcableValue<'a, Percentage>, 0, 100>>,
 }
 
 impl<'a> Peek<'a> for CfImage<'a> {
 	const PEEK_KINDSET: KindSet =
-		CfImageValue::PEEK_KINDSET.combine(CalcableValue::<Ranged<Percentage, 0, 100>>::PEEK_KINDSET);
+		CfImageValue::PEEK_KINDSET.combine(Ranged::<CalcableValue<Percentage>, 0, 100>::PEEK_KINDSET);
 
 	#[inline]
 	fn peek<I>(p: &Parser<'a, I>, c: Cursor) -> bool
 	where
 		I: Iterator<Item = Cursor> + Clone,
 	{
-		CfImageValue::peek(p, c) || CalcableValue::<Ranged<Percentage, 0, 100>>::peek(p, c)
+		CfImageValue::peek(p, c) || Ranged::<CalcableValue<Percentage>, 0, 100>::peek(p, c)
 	}
 }
 
@@ -60,7 +60,7 @@ impl<'a> Parse<'a> for CfImage<'a> {
 	{
 		// Either order: <cf-image-value> <percentage>? or <percentage> <cf-image-value>
 		let mut image = p.parse_if_peek::<CfImageValue>()?;
-		let percentage = p.parse_if_peek::<CalcableValue<Ranged<Percentage, 0, 100>>>()?;
+		let percentage = p.parse_if_peek::<Ranged<CalcableValue<Percentage>, 0, 100>>()?;
 		if image.is_none() {
 			image = Some(p.parse::<CfImageValue>()?);
 		}
