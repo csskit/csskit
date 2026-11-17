@@ -6,6 +6,23 @@ REPO_ROOT="$(git rev-parse --show-toplevel)"
 PKG="$REPO_ROOT/packages/csskit"
 NODE_OUT="$REPO_ROOT/target/wasm-bindgen-node"
 
+missing=()
+if [ ! -d "$(rustc --print target-libdir --target wasm32-unknown-unknown 2>/dev/null)" ]; then
+  missing+=("  - wasm32-unknown-unknown Rust target: rustup target add wasm32-unknown-unknown")
+fi
+if ! command -v wasm-bindgen >/dev/null; then
+  version="$(sed -n 's/^"cargo:wasm-bindgen-cli" = "\(.*\)"$/\1/p' "$REPO_ROOT/.mise.toml")"
+  missing+=("  - wasm-bindgen: cargo install wasm-bindgen-cli --version ${version:-<see .mise.toml>}")
+fi
+if ! command -v wasm-opt >/dev/null; then
+  missing+=("  - wasm-opt: install binaryen (brew install binaryen / apt install binaryen)")
+fi
+if [ ${#missing[@]} -gt 0 ]; then
+  echo "build-csskit-wasm: missing required tools. Run \`mise install\` from $REPO_ROOT, or install manually:" >&2
+  printf '%s\n' "${missing[@]}" >&2
+  exit 1
+fi
+
 cargo build \
   --target wasm32-unknown-unknown \
   --release \
