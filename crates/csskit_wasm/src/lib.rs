@@ -1,10 +1,7 @@
 use core::fmt::Write;
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::{Kind, Lexer, QuoteStyle};
-use css_parse::{
-	Arena, CursorCompactWriteSink, CursorOverlaySink, CursorPrettyWriteSink, Diagnostic, DiagnosticMeta, Parser,
-	ToCursors,
-};
+use css_parse::{Arena, CursorCompactWriteSink, CursorPrettyWriteSink, Diagnostic, DiagnosticMeta, Parser, ToCursors};
 use csskit_transform::{CssMinifierFeature, Transformer};
 #[cfg(all(feature = "miette", not(feature = "fancy")))]
 use miette::JSONReportHandler;
@@ -76,15 +73,7 @@ pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> 
 		let mut transformer =
 			Transformer::new_in(&allocator, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source_text);
 		transformer.transform(stylesheet);
-		let overlays = transformer.overlays();
-		{
-			let mut stream = CursorOverlaySink::new(
-				&source_text,
-				&overlays,
-				CursorCompactWriteSink::new(&source_text, &mut output_string),
-			);
-			result.to_cursors(&mut stream);
-		}
+		result.to_cursors(&mut CursorCompactWriteSink::new(&transformer.text(), &mut output_string));
 	}
 	Ok(output_string)
 }

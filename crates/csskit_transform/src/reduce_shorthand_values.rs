@@ -2,50 +2,53 @@ use crate::prelude::*;
 use css_ast::{
 	BorderColorStyleValue, BorderRadiusStyleValue, BorderStyleStyleValue, BorderWidthStyleValue, ColumnGapStyleValue,
 	DeclarationValue, GapStyleValue, InsetStyleValue, MarginStyleValue, OverflowStyleValue, PaddingStyleValue,
-	RowGapStyleValue, VisitNode, Visitable,
+	RowGapStyleValue, VisitMut, VisitNode,
 };
 use css_parse::{Declaration, SemanticEq};
 
 /// Removes redundant parts from values of CSS shorthand declarations, for example `margin: 1px 1px 1px 1px` becomes
 /// `margin: 1px`.
-pub struct ReduceShorthandValues<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceShorthandValues<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 }
 
 impl<'a, 'ctx, N> ReduceShorthandValues<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
-	fn delete<T: ToSpan>(&self, value: &T) {
-		let span = value.to_span();
-		self.transformer.clear_pending_edits(span);
-		self.transformer.delete(span);
+	fn values_equal<T: SemanticEq>(&self, first: &T, second: &T) -> bool {
+		first.semantic_eq(second, &self.transformer.text())
 	}
 
-	fn reduce_two<T>(&self, first: &T, second: &Option<T>)
-	where
-		T: SemanticEq + ToSpan,
-	{
-		if let Some(second) = second
-			&& second.semantic_eq(first, self.transformer.source_text)
+	fn delete<T>(&self, value: &mut Option<T>) {
+		*value = None;
+		self.transformer.mark_changed();
+	}
+
+	fn reduce_two<T: SemanticEq>(&self, first: &T, second: &mut Option<T>) {
+		if let Some(second_value) = second
+			&& self.values_equal(second_value, first)
 		{
 			self.delete(second);
 		}
 	}
 
-	fn reduce_four<T>(&self, first: &T, second: &Option<T>, third: &Option<T>, fourth: &Option<T>)
-	where
-		T: SemanticEq + ToSpan,
-	{
-		if let Some(fourth) = fourth {
-			let Some(second) = second else { return };
-			if !fourth.semantic_eq(second, self.transformer.source_text) {
+	fn reduce_four<T: SemanticEq>(
+		&self,
+		first: &T,
+		second: &mut Option<T>,
+		third: &mut Option<T>,
+		fourth: &mut Option<T>,
+	) {
+		if let Some(fourth_value) = fourth {
+			let Some(second_value) = second else { return };
+			if !self.values_equal(fourth_value, second_value) {
 				return;
 			}
 			self.delete(fourth);
 		}
-		if let Some(third) = third {
-			if !third.semantic_eq(first, self.transformer.source_text) {
+		if let Some(third_value) = third {
+			if !self.values_equal(third_value, first) {
 				return;
 			}
 			self.delete(third);
@@ -56,7 +59,7 @@ where
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceShorthandValues<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.has_shorthands()
@@ -68,9 +71,9 @@ where
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceShorthandValues<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceShorthandValues<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -79,57 +82,54 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
+	fn enter_declaration<T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
-		declaration: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
+		declaration: &mut Declaration<'a, T, CssMetadata>,
 	) -> VisitFlow {
-		if declaration.metadata().has_substitution() {
-			return VisitFlow::SKIP_CHILDREN;
-		}
-		VisitFlow::DESCEND
+		if declaration.metadata().has_substitution() { VisitFlow::SKIP_CHILDREN } else { VisitFlow::DESCEND }
 	}
 
-	fn visit_margin_style_value(&mut self, value: &MarginStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
+	fn visit_margin_style_value(&mut self, value: &mut MarginStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
 	}
 
-	fn visit_padding_style_value(&mut self, value: &PaddingStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
+	fn visit_padding_style_value(&mut self, value: &mut PaddingStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
 	}
 
-	fn visit_inset_style_value(&mut self, value: &InsetStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
+	fn visit_inset_style_value(&mut self, value: &mut InsetStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
 	}
 
-	fn visit_border_color_style_value(&mut self, value: &BorderColorStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
+	fn visit_border_color_style_value(&mut self, value: &mut BorderColorStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
 	}
 
-	fn visit_border_style_style_value(&mut self, value: &BorderStyleStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
+	fn visit_border_style_style_value(&mut self, value: &mut BorderStyleStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
 	}
 
-	fn visit_border_width_style_value(&mut self, value: &BorderWidthStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
+	fn visit_border_width_style_value(&mut self, value: &mut BorderWidthStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
 	}
-	fn visit_border_radius_style_value(&mut self, value: &BorderRadiusStyleValue) {
-		self.reduce_four(&value.0, &value.1, &value.2, &value.3);
-		if let Some((_, first, second, third, fourth)) = &value.4 {
+
+	fn visit_border_radius_style_value(&mut self, value: &mut BorderRadiusStyleValue<'a>) {
+		self.reduce_four(&value.0, &mut value.1, &mut value.2, &mut value.3);
+		if let Some((_, first, second, third, fourth)) = &mut value.4 {
 			self.reduce_four(first, second, third, fourth);
 		}
 	}
 
-	fn visit_gap_style_value(&mut self, value: &GapStyleValue) {
+	fn visit_gap_style_value(&mut self, value: &mut GapStyleValue<'a>) {
 		if let Some(second) = &value.1
-			&& gap_values_equal(&value.0, second, self.transformer.source_text)
+			&& gap_values_equal(&value.0, second, &self.transformer.text())
 		{
-			self.delete(second);
+			self.delete(&mut value.1);
 		}
 	}
 
-	fn visit_overflow_style_value(&mut self, value: &OverflowStyleValue) {
-		self.reduce_two(&value.0, &value.1);
+	fn visit_overflow_style_value(&mut self, value: &mut OverflowStyleValue<'a>) {
+		self.reduce_two(&value.0, &mut value.1);
 	}
 }
 

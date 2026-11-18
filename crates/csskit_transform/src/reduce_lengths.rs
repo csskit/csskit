@@ -1,8 +1,8 @@
 use crate::prelude::*;
-use css_ast::{CssTypes, DeclarationValue, Length, MathFunction, UnitlessZeroResolves, VisitNode, Visitable};
+use css_ast::{CssTypes, DeclarationValue, Length, MathFunction, UnitlessZeroResolves, VisitMut, VisitNode};
 use css_parse::{Declaration, format_in};
 
-pub struct ReduceLengths<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceLengths<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 	/// Tracks how unitless zero resolves in the current declaration context. When visiting inside a declaration where
 	/// unitless zero resolves to Number, we skip the converting zero lengths to unitless zero.
@@ -15,7 +15,7 @@ pub struct ReduceLengths<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>>
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceLengths<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.has_value_kinds(CssTypes::Length)
@@ -27,9 +27,9 @@ where
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceLengths<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceLengths<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -38,31 +38,27 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
+	fn enter_declaration<T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
-		decl: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
-	) {
+		decl: &mut Declaration<'a, T, CssMetadata>,
+	) -> VisitFlow {
 		self.unitless_zero_resolves = decl.value.property_metadata().unitless_zero_resolves;
+		VisitFlow::DESCEND
 	}
 
-	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
-		&mut self,
-		_decl: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
-	) {
+	fn exit_declaration<T: DeclarationValue<'a, CssMetadata>>(&mut self, _decl: &mut Declaration<'a, T, CssMetadata>) {
 		self.unitless_zero_resolves = UnitlessZeroResolves::Number;
 	}
 
-	fn visit_math_function<'b, T>(&mut self, _math: &MathFunction<'b, T>) {
+	fn visit_math_function<T>(&mut self, _math: &mut MathFunction<'a, T>) {
 		self.math_depth += 1;
 	}
 
-	fn exit_math_function<'b, T>(&mut self, _math: &MathFunction<'b, T>) {
+	fn exit_math_function<T>(&mut self, _math: &mut MathFunction<'a, T>) {
 		self.math_depth = self.math_depth.saturating_sub(1);
 	}
 
-	fn visit_length(&mut self, length: &Length) {
+	fn visit_length(&mut self, length: &mut Length) {
 		// Inside a math function, `0px` and `0` differ in type; never reduce lengths here.
 		if self.math_depth > 0 {
 			return;
@@ -89,19 +85,27 @@ where
 
 		let can_reduce_to_unitless = self.unitless_zero_resolves == UnitlessZeroResolves::Length;
 
-		if can_reduce_to_unitless && matches!(resolved, ResolvedType::UnitedZero | ResolvedType::Resolved(0.0)) {
-			self.transformer.replace(length, self.transformer.parse_value::<Length>("0"));
-		} else if let ResolvedType::Resolved(px) = resolved
-			&& px.is_finite()
-			&& !matches!(length, Length::Px(_))
-		{
-			let replacement = format_in!(in self.transformer.alloc(), "{}px", px);
-			let replacement_cursors = self.transformer.parse_value::<Length>(replacement.into_str());
-			let original_cursors = self.transformer.to_source_cursors(length);
-			if self.transformer.compacted_len(&replacement_cursors) <= self.transformer.compacted_len(&original_cursors)
+		let replacement =
+			if can_reduce_to_unitless && matches!(resolved, ResolvedType::UnitedZero | ResolvedType::Resolved(0.0)) {
+				"0"
+			} else if let ResolvedType::Resolved(px) = resolved
+				&& px.is_finite()
+				&& !matches!(length, Length::Px(_))
 			{
-				self.transformer.replace(length, replacement_cursors);
-			}
+				let Some(compacted) =
+					self.transformer.compact(format_in!(in self.transformer.alloc(), "{}px", px).into_str())
+				else {
+					return;
+				};
+				if compacted.len() > self.transformer.compacted_len(length) {
+					return;
+				}
+				compacted
+			} else {
+				return;
+			};
+		if let Some(reduced) = self.transformer.parse::<Length>(replacement) {
+			self.transformer.replace(length, reduced);
 		}
 	}
 }

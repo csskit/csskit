@@ -1,6 +1,6 @@
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+use css_parse::{Arena, CursorCompactWriteSink, Parser, ToCursors};
 use csskit_transform::{CssMinifierFeature, Transformer};
 use glob::glob;
 use similar::{ChangeTag, TextDiff};
@@ -47,12 +47,7 @@ fn minify(source_text: &str) -> String {
 	let mut output = String::new();
 	if let Some(ref mut node) = result.output {
 		transformer.transform(node);
-		let overlays = transformer.overlays();
-		{
-			let mut overlay_stream =
-				CursorOverlaySink::new(source_text, &overlays, CursorCompactWriteSink::new(source_text, &mut output));
-			result.to_cursors(&mut overlay_stream);
-		}
+		result.to_cursors(&mut CursorCompactWriteSink::new(&transformer.text(), &mut output));
 	} else {
 		panic!("Could not parse source");
 	}
