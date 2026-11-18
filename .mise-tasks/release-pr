@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+set -euo pipefail
+#MISE description="Create or update the release PR"
+#USAGE arg "<version>" help="Version to release, without a leading v"
+#USAGE flag "--dryrun" help="Print the changelog without committing or pushing"
+
+VERSION="${usage_version#v}"
+BRANCH="release-v${VERSION}"
+
+changelog="$(git cliff --unreleased --tag "v${VERSION}" --strip all)"
+echo "$changelog"
+
+if [[ "${usage_dryrun:-false}" == "true" ]]; then
+	exit 0
+fi
+
+git cliff --tag "v${VERSION}" -o CHANGELOG.md
+mise r set-version "$VERSION"
+
+git config user.name "Keith Cirkel"
+git config user.email "keithamus@users.noreply.github.com"
+git commit -am"Release: v${VERSION}" -m"${changelog}" -m"[forcebuild]"
+
+git push --force origin HEAD:refs/heads/"${BRANCH}"
+
+gh pr edit "${BRANCH}" \
+	--title "Release v${VERSION}" \
+	--body "$changelog" ||
+	gh pr create \
+		--title "Release v${VERSION}" \
+		--body "$changelog" \
+		--label "release" \
+		--base main \
+		--head "${BRANCH}"
