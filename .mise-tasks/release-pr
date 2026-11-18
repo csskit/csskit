@@ -8,9 +8,16 @@ VERSION="${usage_version#v}"
 BRANCH="release-v${VERSION}"
 
 changelog="$(git cliff --unreleased --tag "v${VERSION}" --strip all)"
-echo "$changelog"
+
+pr_body() {
+	local headline placeholder
+	headline="$(gh pr list --state open --label release --json body --jq '.[0].body // ""' | .mise-tasks/release-headline)"
+	placeholder="<!-- Summarise the release here. This section becomes the release notes headline and Discord announcement. Use #### for subheadings. -->"
+	printf '### Headline Changes\n\n%s\n\n%s\n' "${headline:-$placeholder}" "$changelog"
+}
 
 if [[ "${usage_dryrun:-false}" == "true" ]]; then
+	pr_body
 	exit 0
 fi
 
@@ -23,12 +30,14 @@ git commit -am"Release: v${VERSION}" -m"${changelog}" -m"[forcebuild]"
 
 git push --force origin HEAD:refs/heads/"${BRANCH}"
 
+body="$(pr_body)"
+
 gh pr edit "${BRANCH}" \
 	--title "Release v${VERSION}" \
-	--body "$changelog" ||
+	--body "$body" ||
 	gh pr create \
 		--title "Release v${VERSION}" \
-		--body "$changelog" \
+		--body "$body" \
 		--label "release" \
 		--base main \
 		--head "${BRANCH}"
