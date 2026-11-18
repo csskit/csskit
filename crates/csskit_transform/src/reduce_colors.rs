@@ -4,17 +4,17 @@ use chromashift::{
 };
 use css_ast::{
 	CalcUnit, CalcableValue, Color, ColorFunction, ColorMixFunction, CssAtomSet, CssTypes, HueInterpolationDirection,
-	InterpolationColorSpace, ToChromashift, VisitNode, Visitable,
+	InterpolationColorSpace, ToChromashift, VisitMut, VisitNode,
 };
 use css_parse::{Arena, format_in};
 
-pub struct ReduceColors<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceColors<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceColors<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.has_value_kinds(CssTypes::Color)
@@ -200,9 +200,9 @@ impl<'a> ToCss<'a> for chromashift::Color {
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceColors<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceColors<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -211,23 +211,32 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn visit_color(&mut self, color: &Color) {
-		// color-mix() is handled by visit_color_mix_function
+	fn visit_color(&mut self, color: &mut Color<'a>) {
 		if let Color::Function(colorfn) = color
-			&& matches!(**colorfn, ColorFunction::ColorMix(_))
+			&& let ColorFunction::ColorMix(mix) = &mut **colorfn
 		{
+			let replacement = match self.reduce_color_mix(mix) {
+				Some(MixReplacement::Color(new)) => Some(new),
+				Some(MixReplacement::Part(index)) => Some(mix.parts[index].0.color.clone()),
+				None => None,
+			};
+			if let Some(new) = replacement {
+				self.transformer.replace(color, new);
+			}
 			return;
 		}
 		let Some(chroma_color) = color.to_chromashift() else {
 			return;
 		};
 		let arena = self.transformer.alloc();
-		let len = color.to_span().len() as usize;
+		let len = self.transformer.compacted_len(color);
 
 		if fits_srgb(chroma_color)
 			&& let Some(candidate) = chroma_color.shortest(len, arena)
 		{
-			self.transformer.replace_parsed::<Color>(color.to_span(), candidate);
+			if let Some(new) = self.transformer.parse::<Color>(candidate) {
+				self.transformer.replace(color, new);
+			}
 			return;
 		}
 
@@ -235,28 +244,39 @@ where
 		// while reducing precision to perceptually safe levels.
 		let rounded = chroma_color.round();
 		if let Some(css) = rounded.to_css(arena)
-			&& css.len() < len
+			&& let Some(new) = self.transformer.parse::<Color>(css)
+			&& self.transformer.compacted_len(&new) < len
 		{
-			self.transformer.replace_parsed::<Color>(color.to_span(), css);
+			self.transformer.replace(color, new);
 		}
 	}
+}
 
-	fn visit_color_mix_function<'b>(&mut self, mix: &ColorMixFunction<'b>) -> VisitFlow {
-		let outer_span = mix.to_span();
-		let outer_len = outer_span.len() as usize;
+/// What a `color-mix()` reduces to: a new colour, or one of its parts moved into its place.
+enum MixReplacement<'a> {
+	Color(Color<'a>),
+	Part(usize),
+}
+
+impl<'a, 'ctx, N> ReduceColors<'a, 'ctx, N>
+where
+	N: NodeWithMetadata<CssMetadata>,
+{
+	fn reduce_color_mix(&self, mix: &mut ColorMixFunction<'a>) -> Option<MixReplacement<'a>> {
+		let outer_len = self.transformer.compacted_len(mix);
 		let arena = self.transformer.alloc();
 
 		let n = mix.parts.len();
 		let default_pct = 100.0 / n as f32;
 
-		let resolve_pct = |pct: &CalcableValue<'b, css_ast::Percentage>| match pct.reduce()?.as_single()? {
+		let resolve_pct = |pct: &CalcableValue<'a, css_ast::Percentage>| match pct.reduce()?.as_single()? {
 			(CalcUnit::Dimension(CssAtomSet::Percent), value) => {
 				Some(if value.is_nan() { 0.0 } else { value.clamp(0.0, 100.0) as f32 })
 			}
 			_ => None,
 		};
 		if (&mix.parts).into_iter().any(|(p, _)| p.percentage.as_ref().is_some_and(|pct| resolve_pct(pct).is_none())) {
-			return VisitFlow::DESCEND;
+			return None;
 		}
 
 		// Resolve effective percentages
@@ -274,17 +294,13 @@ where
 		if sum == 100.0
 			&& let Some(dominant) = pcts.iter().position(|&p| p == 100.0)
 		{
-			{
-				let (part, _) = &mix.parts[dominant];
-				let chroma = part.color.to_chromashift();
-				let str = chroma.and_then(|c| c.shortest(usize::MAX, arena)).unwrap_or_else(|| {
-					let span = part.color.to_span();
-					&self.transformer.source_text[span.start().0 as usize..span.end().0 as usize]
-				});
-				self.transformer.clear_pending_edits(outer_span);
-				self.transformer.replace_parsed::<Color>(outer_span, str);
-				return VisitFlow::SKIP_CHILDREN;
-			}
+			let chroma = mix.parts[dominant].0.color.to_chromashift();
+			return Some(
+				chroma
+					.and_then(|c| c.shortest(usize::MAX, arena))
+					.and_then(|css| self.transformer.parse::<Color>(css))
+					.map_or(MixReplacement::Part(dominant), MixReplacement::Color),
+			);
 		}
 
 		// All identical colors with alpha_mult == 1 (sum >= 100): collapse to first.
@@ -293,14 +309,12 @@ where
 			if chromata.iter().all(Option::is_some) {
 				let first = chromata[0].unwrap();
 				if chromata[1..].iter().all(|c| c.unwrap().delta_e(first) < COLOR_EPSILON) {
-					let (part, _) = &mix.parts[0];
-					let str = first.shortest(usize::MAX, arena).unwrap_or_else(|| {
-						let span = part.color.to_span();
-						&self.transformer.source_text[span.start().0 as usize..span.end().0 as usize]
-					});
-					self.transformer.clear_pending_edits(outer_span);
-					self.transformer.replace_parsed::<Color>(outer_span, str);
-					return VisitFlow::SKIP_CHILDREN;
+					return Some(
+						first
+							.shortest(usize::MAX, arena)
+							.and_then(|css| self.transformer.parse::<Color>(css))
+							.map_or(MixReplacement::Part(0), MixReplacement::Color),
+					);
 				}
 			}
 		}
@@ -317,32 +331,32 @@ where
 			let candidate =
 				native_css.into_iter().chain(srgb_css).min_by(|a, b| a.len().cmp(&b.len()).then_with(|| a.cmp(b)));
 			if let Some(candidate) = candidate
-				&& candidate.len() < outer_len
+				&& let Some(new) = self.transformer.parse::<Color>(candidate)
+				&& self.transformer.compacted_len(&new) < outer_len
 			{
-				self.transformer.replace_parsed::<Color>(outer_span, candidate);
-				return VisitFlow::SKIP_CHILDREN;
+				return Some(MixReplacement::Color(new));
 			}
 		}
 
 		// Remove redundant percentages on an equal N-way split (partial optimisation).
 		if (sum - 100.0).abs() < 0.01 {
-			for ((part, _), &effective) in (&mix.parts).into_iter().zip(&pcts) {
-				if let Some(ref pct) = part.percentage
-					&& (effective - default_pct).abs() < 0.01
-				{
-					self.transformer.delete(pct.to_span());
+			for ((part, _), &effective) in (&mut mix.parts).into_iter().zip(&pcts) {
+				if part.percentage.is_some() && (effective - default_pct).abs() < 0.01 {
+					part.percentage = None;
+					self.transformer.mark_changed();
 				}
 			}
 		}
 
 		// Remove redundant "shorter hue" (shorter is the default hue interpolation direction)
-		if let Some(ref interp) = mix.interpolation
-			&& let InterpolationColorSpace::Polar(_, Some(ref hue_method)) = interp.color_space
-			&& matches!(hue_method.direction, HueInterpolationDirection::Shorter(_))
+		if let Some(interp) = &mut mix.interpolation
+			&& let InterpolationColorSpace::Polar(_, hue_method) = &mut interp.color_space
+			&& hue_method.as_ref().is_some_and(|hue| matches!(hue.direction, HueInterpolationDirection::Shorter(_)))
 		{
-			self.transformer.delete(hue_method.to_span());
+			*hue_method = None;
+			self.transformer.mark_changed();
 		}
-		VisitFlow::DESCEND
+		None
 	}
 }
 

@@ -1,14 +1,14 @@
 use crate::prelude::*;
-use css_ast::{CssTypes, Time, VisitNode, Visitable};
+use css_ast::{CssTypes, Time, VisitMut, VisitNode};
 use css_parse::format_in;
 
-pub struct ReduceTimeUnits<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceTimeUnits<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceTimeUnits<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.has_value_kinds(CssTypes::Time)
@@ -20,9 +20,9 @@ where
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceTimeUnits<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceTimeUnits<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -31,17 +31,20 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn visit_time(&mut self, time: &Time) {
-		if let Time::Ms(dim) = time {
+	fn visit_time(&mut self, time: &mut Time) {
+		if let Time::Ms(_) = *time {
 			let seconds = time.as_seconds();
 			if !seconds.is_finite() {
 				return;
 			}
-			let arena = self.transformer.alloc();
-			let seconds_cursors = self.transformer.parse_value::<Time>(format_in!(in arena, "{seconds}s").into_str());
-			let ms_cursor = self.transformer.to_source_cursor((*dim).into());
-			if self.transformer.compacted_len(&seconds_cursors) < self.transformer.compacted_len(&[ms_cursor]) {
-				self.transformer.replace(time, seconds_cursors);
+			let seconds_text = format_in!(in self.transformer.alloc(), "{seconds}s").into_str();
+			let Some(compacted) = self.transformer.compact(seconds_text) else {
+				return;
+			};
+			if compacted.len() < self.transformer.compacted_len(time)
+				&& let Some(reduced) = self.transformer.parse::<Time>(seconds_text)
+			{
+				self.transformer.replace(time, reduced);
 			}
 		}
 	}

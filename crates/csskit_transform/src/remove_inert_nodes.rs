@@ -1,16 +1,16 @@
 use crate::prelude::*;
-use css_ast::{DeclarationValue, VisitNode, Visitable};
+use css_ast::{DeclarationValue, VisitMut, VisitNode};
 use css_parse::Declaration;
 
 /// Removes nodes which have no effect on rendering, such as rules with an empty block, or rules holding nothing but
 /// such rules.
-pub struct RemoveInertNodes<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct RemoveInertNodes<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for RemoveInertNodes<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.is_inert()
@@ -22,9 +22,9 @@ where
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for RemoveInertNodes<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for RemoveInertNodes<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -33,18 +33,17 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn enter_node(&mut self, node: VisitNode) -> VisitFlow {
+	fn retain(&mut self, node: VisitNode) -> bool {
 		if node.self_metadata().is_inert() {
-			self.transformer.delete(node.span());
-			return VisitFlow::SKIP_CHILDREN;
+			self.transformer.mark_changed();
+			return false;
 		}
-		VisitFlow::DESCEND
+		true
 	}
 
-	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
+	fn enter_declaration<T: DeclarationValue<'a, CssMetadata>>(
 		&mut self,
-		_decl: &Declaration<'b, T, CssMetadata>,
-		_query: VisitNode,
+		_decl: &mut Declaration<'a, T, CssMetadata>,
 	) -> VisitFlow {
 		VisitFlow::SKIP_CHILDREN
 	}

@@ -3,11 +3,11 @@ use crate::{
 	ReduceUrls, RemoveInertNodes, RemoveOverriddenDeclarations, transformer,
 };
 use bitmask_enum::bitmask;
-use css_ast::{CssMetadata, Visitable};
+use css_ast::CssMetadata;
 
 transformer!(
 	/// Runtime feature flags for the CSS minifier, enabling individual transforms.
-	pub enum CssMinifierFeature[CssMetadata, Visitable] {
+	pub enum CssMinifierFeature[CssMetadata] {
 		/// Enables the [ReduceCharsetRule] transformer.
 		ReduceCharsetRule,
 		/// Enables the [ReduceColors] transformer.
@@ -41,7 +41,7 @@ mod tests {
 	use crate::Transformer;
 	use css_ast::{CssAtomSet, StyleSheet};
 	use css_lexer::Lexer;
-	use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+	use css_parse::{Arena, CursorCompactWriteSink, Parser, ToCursors};
 
 	fn minify(source_text: &str, features: CssMinifierFeature) -> (String, bool) {
 		let alloc = Arena::default();
@@ -52,16 +52,8 @@ mod tests {
 		let mut output = String::new();
 		if let Some(ref mut node) = result.output {
 			transformer.transform(node);
-			let overlays = transformer.overlays();
 			let changed = transformer.has_changed();
-			{
-				let mut overlay_stream = CursorOverlaySink::new(
-					source_text,
-					&overlays,
-					CursorCompactWriteSink::new(source_text, &mut output),
-				);
-				result.to_cursors(&mut overlay_stream);
-			}
+			result.to_cursors(&mut CursorCompactWriteSink::new(&transformer.text(), &mut output));
 			(output, changed)
 		} else {
 			panic!("Could not transform output");

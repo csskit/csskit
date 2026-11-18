@@ -10,7 +10,7 @@ use crate::ast::{Ast, Diagnostic, QueryMatch};
 use css_ast::visit::{NodeId, NodeKey, NodeVisitor, VisitNode};
 use css_ast::{CssAtomSet, StyleSheet};
 use css_lexer::Lexer;
-use css_parse::{Arena, CursorCompactWriteSink, CursorOverlaySink, Parser, ToCursors};
+use css_parse::{Arena, CursorCompactWriteSink, Parser, ToCursors};
 use csskit_transform::{CssMinifierFeature, Transformer};
 use visit_flow::{VisitFlow, VisitFlowExt};
 
@@ -263,9 +263,7 @@ pub fn minify(source: String) -> Result<String> {
 	if let Some(stylesheet) = &mut result.output {
 		let mut transformer = Transformer::new_in(&arena, CssMinifierFeature::all_bits(), &CssAtomSet::ATOMS, &source);
 		transformer.transform(stylesheet);
-		let overlays = transformer.overlays();
-		let mut sink = CursorOverlaySink::new(&source, &overlays, CursorCompactWriteSink::new(&source, &mut output));
-		result.to_cursors(&mut sink);
+		result.to_cursors(&mut CursorCompactWriteSink::new(&transformer.text(), &mut output));
 	}
 	Ok(output)
 }

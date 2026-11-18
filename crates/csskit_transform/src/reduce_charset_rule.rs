@@ -1,29 +1,55 @@
 use crate::prelude::*;
-use css_ast::{AtRuleId, AtomSet, CharsetRule, EncodingLabel, VisitNode, Visitable};
-use css_parse::{SourceOffset, format_in};
+use css_ast::{AtRuleId, AtomSet, CharsetRule, EncodingLabel, NodeId, Rule, StyleSheet, VisitMut, VisitNode};
+use css_lexer::Span;
+use css_parse::format_in;
 
-pub struct ReduceCharsetRule<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
+pub struct ReduceCharsetRule<'a, 'ctx, N: NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
-	seen: bool,
+	kept: Option<Span>,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceCharsetRule<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
 		!metadata.used_at_rules.contains(AtRuleId::Charset)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
-		Self { transformer, seen: false }
+		Self { transformer, kept: None }
+	}
+}
+
+impl<'a, 'ctx, N> ReduceCharsetRule<'a, 'ctx, N>
+where
+	N: NodeWithMetadata<CssMetadata>,
+{
+	fn shorten_label(&self, rule: &mut CharsetRule) -> bool {
+		let (encoding, is_shortest) = {
+			let text = self.transformer.text();
+			let encoding = rule.encoding(&text);
+			(encoding, encoding.to_str() == rule.label(&text))
+		};
+		if encoding == EncodingLabel::Unknown {
+			return false;
+		}
+		let shortest = encoding.to_str();
+		if !is_shortest
+			&& let Some(relabelled) = self
+				.transformer
+				.parse::<CharsetRule>(format_in!(in self.transformer.alloc(), "@charset \"{shortest}\";").into_str())
+		{
+			self.transformer.replace(rule, relabelled);
+		}
+		true
 	}
 }
 
 #[visitor]
-impl<'a, 'ctx, N> Visit for ReduceCharsetRule<'a, 'ctx, N>
+impl<'a, 'ctx, N> VisitMut<'a> for ReduceCharsetRule<'a, 'ctx, N>
 where
-	N: Visitable + NodeWithMetadata<CssMetadata>,
+	N: NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
 		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
@@ -32,32 +58,24 @@ where
 		VisitFlow::DESCEND
 	}
 
-	fn visit_charset_rule(&mut self, rule: &CharsetRule) {
-		let span = rule.to_span();
-		let source_text = self.transformer.source_text;
-		let encoding = rule.encoding(source_text);
-		if encoding == EncodingLabel::Unknown || self.seen {
-			self.transformer.delete(span);
-			return;
+	fn retain(&mut self, node: VisitNode) -> bool {
+		if node.node_id == Some(NodeId::CharsetRule) && self.kept != Some(node.span()) {
+			self.transformer.mark_changed();
+			return false;
 		}
-		self.seen = true;
-		let label = rule.label(source_text);
-		let shortest = encoding.to_str();
-		let at_top = span.start() == SourceOffset(0);
-		if shortest == label {
-			if !at_top {
-				self.transformer.insert_before(SourceOffset(0), self.transformer.to_source_cursors(rule));
-				self.transformer.delete(span);
-			}
-			return;
-		}
-		let arena = self.transformer.alloc();
-		let css = format_in!(in arena, "@charset \"{shortest}\";").into_str();
-		if at_top {
-			self.transformer.replace_parsed::<CharsetRule>(span, css);
-		} else {
-			self.transformer.insert_before(SourceOffset(0), self.transformer.parse_value::<CharsetRule>(css));
-			self.transformer.delete(span);
+		true
+	}
+
+	fn visit_style_sheet(&mut self, sheet: &mut StyleSheet<'a>) {
+		let first_valid = sheet.rules.iter_mut().enumerate().find_map(|(index, rule)| match rule {
+			Rule::Charset(charset) => self.shorten_label(charset).then(|| (index, charset.to_span())),
+			_ => None,
+		});
+		let Some((index, kept)) = first_valid else { return };
+		self.kept = Some(kept);
+		if index > 0 {
+			sheet.rules[..=index].rotate_right(1);
+			self.transformer.mark_changed();
 		}
 	}
 }
@@ -75,6 +93,17 @@ mod tests {
 			StyleSheet,
 			"@charset \"UTF-8\";a{color:red}",
 			"a{color:red}"
+		);
+	}
+
+	#[test]
+	fn keeps_valid_charset_after_dropped_one() {
+		assert_transform!(
+			CssMinifierFeature::ReduceCharsetRule,
+			CssAtomSet,
+			StyleSheet,
+			"@charset \"utf-8\";@charset \"gbk\";a{color:red}",
+			"@charset \"gbk\";a{color:red}"
 		);
 	}
 
