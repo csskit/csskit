@@ -1,12 +1,10 @@
 #!/usr/bin/env bash
 set -euo pipefail
-#MISE description="Generate a release, or a release PR"
+#MISE description="Publish a release or canary"
 #USAGE flag "--dryrun" help="Run in dry-run mode (no git/publish/write operations)"
-#USAGE flag "--release-pr" help="Only create/update the release PR (no publish)"
 
 # Check if dry-run mode is enabled
 DRY_RUN="${usage_dryrun:-false}"
-RELEASE_PR="${usage_release_pr:-false}"
 
 # PUBLISH, VERSION and NEXT come from the plan job in release.yml
 NEXT_VERSION="v${NEXT}"
@@ -82,31 +80,6 @@ else
 	git config user.email "keithamus@users.noreply.github.com"
 
 	git cliff --tag "$NEXT_VERSION" -o CHANGELOG.md
-
-	if [[ "$RELEASE_PR" == "true" ]]; then
-		echo "Creating/updating release PR..."
-
-		mise r set-version "${NEXT_VERSION#v}"
-
-		BRANCH="release-${NEXT_VERSION}"
-
-		git commit -am"Release: ${NEXT_VERSION}" -m"${changelog}" -m"[forcebuild]"
-
-		git remote add PAT "https://keithamus:${GH_TOKEN}@github.com/csskit/csskit.git" > /dev/null 2>&1
-		git push --force PAT HEAD:refs/heads/"${BRANCH}"
-		git remote rm PAT
-
-		gh pr edit "${BRANCH}" \
-			--title "Release ${NEXT_VERSION}" \
-			--body "$changelog" ||
-			gh pr create \
-				--title "Release ${NEXT_VERSION}" \
-				--body "$changelog" \
-				--label "release" \
-				--base main \
-				--head "${BRANCH}"
-		exit 0
-	fi
 
 	################
 	# Canary Release
