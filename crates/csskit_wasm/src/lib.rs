@@ -67,7 +67,7 @@ pub fn parse(source_text: String) -> Result<SerializableParserResult, serde_wasm
 pub fn minify(source_text: String) -> Result<String, serde_wasm_bindgen::Error> {
 	let allocator = Arena::default();
 	let lexer = Lexer::new(&CssAtomSet::ATOMS, source_text.as_str());
-	let mut result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>();
+	let mut result = Parser::new(&allocator, source_text.as_str(), lexer).parse_entirely::<StyleSheet>().with_trivia();
 	if !result.errors.is_empty() {
 		return Err(serde_wasm_bindgen::Error::new("Parse error"));
 	}
@@ -201,6 +201,12 @@ mod tests {
 		let options = FormatOptions { quote_style: Some(QuoteStyleOption::Single), ..FormatOptions::default() };
 		let output = format_with_options(source, options).expect("format should succeed");
 		assert!(output.contains("content:'foo'"));
+	}
+
+	#[test]
+	fn minify_preserves_comments_in_custom_properties() {
+		let minified = minify(":root{--foo:/*a*/;--bar:12/* b */12}".into()).expect("minify should succeed");
+		assert_eq!(minified, ":root{--foo:;--bar:12/**/12}");
 	}
 }
 
