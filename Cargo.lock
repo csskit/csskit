@@ -805,7 +805,6 @@ dependencies = [
  "darling",
  "heck",
  "insta",
- "itertools 0.15.0",
  "prettyplease",
  "proc-macro2",
  "quote",
