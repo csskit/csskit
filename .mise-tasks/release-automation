@@ -33,7 +33,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# Just set the tag name for the workflow to use
 	if [[ "$DRY_RUN" == "true" ]]; then
 		echo "Would have created $VERSION"
-		cargo publish --allow-dirty --dry-run
 		exit 0
 	fi
 
@@ -58,9 +57,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	# Update GitHub release
 	gh release create "$VERSION" --generate-notes
 	gh release upload "$VERSION" binary-*/*
-
-	# Release all cargo crates
-	cargo publish --allow-dirty
 else
 	# Generate changelog for unreleased commits
 	changelog="$(git cliff --tag "$NEXT_VERSION" --unreleased --strip all)"
@@ -111,7 +107,4 @@ else
 	echo "Publishing csskit"
 	npm pub --provenance --tag canary --access public
 	popd
-
-	# Release all cargo crates
-	cargo publish --allow-dirty
 fi
