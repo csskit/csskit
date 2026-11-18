@@ -1,8 +1,8 @@
 use crate::prelude::*;
 use css_ast::{
 	Angle, CSSInt, CalcUnit, CssAtomSet, Decibel, DeclarationValue, Flex, Frequency, Length, LengthPercentage,
-	LengthPercentageNumber, MathFunction, NumberLength, NumberPercentage, Percentage, ReducedCalc, Resolution,
-	Semitones, SupportsFeature, Time, UnitlessZeroResolves, VisitNode, Visitable,
+	LengthPercentageNumber, MathFunction, NodeId, NumberLength, NumberPercentage, Percentage, ReducedCalc, Resolution,
+	Semitones, Time, UnitlessZeroResolves, VisitNode, Visitable,
 };
 use css_parse::{AtomSet, ComponentValues, Declaration, format_in};
 
@@ -137,7 +137,9 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn consider_node(&self, node: VisitNode) -> VisitFlow {
-		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
+		if node.node_id == Some(NodeId::SupportsFeature)
+			|| node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta))
+		{
 			return VisitFlow::SKIP_CHILDREN;
 		}
 		VisitFlow::DESCEND
@@ -157,10 +159,6 @@ where
 		_query: VisitNode,
 	) {
 		self.unitless_zero_resolves = UnitlessZeroResolves::Number;
-	}
-
-	fn visit_supports_feature<'b>(&mut self, _feature: &SupportsFeature<'b>) -> VisitFlow {
-		VisitFlow::SKIP_CHILDREN
 	}
 
 	fn visit_math_function<'b, T: Visitable + ToSpan>(&mut self, _math: &MathFunction<'b, T>) {

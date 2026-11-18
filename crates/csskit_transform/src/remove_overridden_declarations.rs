@@ -1,6 +1,6 @@
 use crate::prelude::*;
 use css_ast::{
-	CssAtomSet, DeclarationValue, NestedGroupRule, SelectorList, Shorthand, StyleRule, StyleValue, VisitNode, Visitable,
+	CssAtomSet, DeclarationValue, NestedGroupRule, NodeId, Shorthand, StyleRule, StyleValue, VisitNode, Visitable,
 };
 use css_parse::{AtomSet, Cursor, Declaration};
 
@@ -119,7 +119,7 @@ where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
 	fn skips_subtree(metadata: &CssMetadata) -> bool {
-		!metadata.has_shorthands()
+		!Self::may_contain_overrider(metadata)
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
@@ -132,8 +132,13 @@ impl<'a, 'ctx, N> Visit for RemoveOverriddenDeclarations<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
-	fn visit_selector_list(&mut self, _list: &SelectorList) -> VisitFlow {
-		VisitFlow::SKIP_CHILDREN
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		if node.node_id == Some(NodeId::SelectorList)
+			|| node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta))
+		{
+			return VisitFlow::SKIP_CHILDREN;
+		}
+		VisitFlow::DESCEND
 	}
 
 	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
@@ -144,17 +149,7 @@ where
 		VisitFlow::SKIP_CHILDREN
 	}
 
-	fn visit_style_rule(&mut self, rule: &StyleRule) -> VisitFlow {
-		if !Self::may_contain_overrider(&rule.rule.block.meta) {
-			return VisitFlow::SKIP_CHILDREN;
-		}
-		VisitFlow::DESCEND
-	}
-
 	fn exit_style_rule(&mut self, rule: &StyleRule) {
-		if !Self::may_contain_overrider(&rule.rule.block.meta) {
-			return;
-		}
 		self.remove_overridden(rule.rule.block.declarations.iter());
 		for nested_rule in &rule.rule.block.rules {
 			if let NestedGroupRule::Declarations(group) = nested_rule {
@@ -220,13 +215,24 @@ mod tests {
 	}
 
 	#[test]
-	fn removes_declarations_overridden_by_keyword_shorthands_or_overriding_substituted_shorthands() {
+	fn removes_substituted_declarations_before_overriding_shorthands() {
 		assert_transform!(
 			CssMinifierFeature::RemoveOverriddenDeclarations,
 			CssAtomSet,
 			StyleSheet,
-			"a { margin-top: 1px; margin: inherit; } b { border-top: var(--x); border: 0; }",
-			"a { margin: inherit; } b { border: 0; }"
+			"b { border-top: var(--x); border: 0; }",
+			"b { border: 0; }"
+		);
+	}
+
+	#[test]
+	fn removes_declarations_overridden_by_keyword_shorthands() {
+		assert_transform!(
+			CssMinifierFeature::RemoveOverriddenDeclarations,
+			CssAtomSet,
+			StyleSheet,
+			"a { margin-top: 1px; margin: inherit; }",
+			"a { margin: inherit; }"
 		);
 	}
 
@@ -249,6 +255,17 @@ mod tests {
 			StyleSheet,
 			"a { color: red; & b { margin-top: 1px; margin: 2px; } }",
 			"a { color: red; & b { margin: 2px; } }"
+		);
+	}
+
+	#[test]
+	fn removes_overridden_declarations_in_at_rules() {
+		assert_transform!(
+			CssMinifierFeature::RemoveOverriddenDeclarations,
+			CssAtomSet,
+			StyleSheet,
+			"@media print { a { margin-top: 1px; margin: 2px; } }",
+			"@media print { a { margin: 2px; } }"
 		);
 	}
 
