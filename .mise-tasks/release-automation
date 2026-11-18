@@ -39,21 +39,6 @@ if [[ "$MODE" == "RELEASE" ]]; then
 	git config user.name "Keith Cirkel"
 	git config user.email "keithamus@users.noreply.github.com"
 
-	mise r set-version "${VERSION#v}"
-
-	# Release platform-specific npm packages first
-	for platform_pkg in packages/csskit-*/; do
-		pushd "$platform_pkg"
-		echo "Publishing $platform_pkg"
-		npm pub --provenance --tag latest --access public --loglevel=silly
-		popd
-	done
-
-	pushd packages/csskit
-	echo "Publishing csskit"
-	npm pub --provenance --tag latest --access public --loglevel=silly
-	popd
-
 	# Update GitHub release
 	gh release create "$VERSION" --generate-notes
 	gh release upload "$VERSION" binary-*/*
@@ -94,17 +79,4 @@ else
 
 	# Update GitHub release
 	gh release upload canary binary-*/* --clobber
-
-	# Release platform-specific npm packages first
-	for platform_pkg in packages/csskit-*/; do
-		pushd "$platform_pkg"
-		echo "Publishing $platform_pkg"
-		npm pub --provenance --tag canary --access public
-		popd
-	done
-
-	pushd packages/csskit
-	echo "Publishing csskit"
-	npm pub --provenance --tag canary --access public
-	popd
 fi
