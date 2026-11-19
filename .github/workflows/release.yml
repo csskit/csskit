@@ -4,6 +4,8 @@ on:
   workflow_dispatch:
   push:
     branches: [main]
+  schedule:
+    - cron: "0 3 * * *"
 
 permissions:
   contents: write
@@ -48,10 +50,15 @@ jobs:
             echo "v$VERSION is untagged, publishing release"
             PUBLISH=release
             PUBLISH_VERSION="$VERSION"
+          elif [[ "$GITHUB_EVENT_NAME" == "push" ]]; then
+            echo "Canaries are published nightly, skipping"
           else
-            echo "Publishing canary"
-            PUBLISH=canary
-            PUBLISH_VERSION="$NEXT-canary.$(date -u +%Y%m%d%H%M)"
+            NEW_COMMITS=$(git rev-list --count HEAD --not "v$VERSION" 'canary^{commit}')
+            echo "$NEW_COMMITS commits since last canary or v$VERSION"
+            if [[ "$GITHUB_EVENT_NAME" == "workflow_dispatch" || "$NEW_COMMITS" -gt 0 ]]; then
+              PUBLISH=canary
+              PUBLISH_VERSION="$NEXT-canary.$(date -u +%Y%m%d%H%M)"
+            fi
           fi
           echo "Next release: $NEXT, publishing: ${PUBLISH:-nothing} $PUBLISH_VERSION"
           {
@@ -72,7 +79,7 @@ jobs:
   release-pr:
     name: Update Release PR
     needs: plan
-    if: github.ref == 'refs/heads/main' && needs.plan.outputs.publish != 'release' && (github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit')
+    if: github.ref == 'refs/heads/main' && needs.plan.outputs.publish != 'release' && github.event_name != 'schedule' && (github.event_name == 'workflow_dispatch' || github.repository_owner == 'csskit')
     runs-on: ubuntu-latest
     concurrency:
       group: "release-pr"
