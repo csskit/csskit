@@ -1,17 +1,16 @@
 use crate::prelude::*;
 use css_ast::{CssTypes, DeclarationValue, Length, MathFunction, UnitlessZeroResolves, VisitNode, Visitable};
 use css_parse::{Declaration, format_in};
-use std::cell::Cell;
 
 pub struct ReduceLengths<'a, 'ctx, N: Visitable + NodeWithMetadata<CssMetadata>> {
 	pub transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>,
 	/// Tracks how unitless zero resolves in the current declaration context. When visiting inside a declaration where
 	/// unitless zero resolves to Number, we skip the converting zero lengths to unitless zero.
-	unitless_zero_resolves: Cell<UnitlessZeroResolves>,
+	unitless_zero_resolves: UnitlessZeroResolves,
 	/// Depth of math-function nesting (`calc()`, `min()`, etc). Inside a math function a `0px`
 	/// carries its `<length>` type, whereas a unitless `0` is a `<number>`; reducing one to the
 	/// other changes the calc's resolved type, so zero-length reduction is suppressed while > 0.
-	math_depth: Cell<u32>,
+	math_depth: u32,
 }
 
 impl<'a, 'ctx, N> Transform<'a, 'ctx, CssMetadata, N, CssMinifierFeature> for ReduceLengths<'a, 'ctx, N>
@@ -23,7 +22,7 @@ where
 	}
 
 	fn new(transformer: &'ctx Transformer<'a, CssMetadata, N, CssMinifierFeature>) -> Self {
-		Self { transformer, unitless_zero_resolves: Cell::new(UnitlessZeroResolves::Number), math_depth: Cell::new(0) }
+		Self { transformer, unitless_zero_resolves: UnitlessZeroResolves::Number, math_depth: 0 }
 	}
 }
 
@@ -44,7 +43,7 @@ where
 		decl: &Declaration<'b, T, CssMetadata>,
 		_query: VisitNode,
 	) {
-		self.unitless_zero_resolves.set(decl.value.property_metadata().unitless_zero_resolves);
+		self.unitless_zero_resolves = decl.value.property_metadata().unitless_zero_resolves;
 	}
 
 	fn exit_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
@@ -52,20 +51,20 @@ where
 		_decl: &Declaration<'b, T, CssMetadata>,
 		_query: VisitNode,
 	) {
-		self.unitless_zero_resolves.set(UnitlessZeroResolves::Number);
+		self.unitless_zero_resolves = UnitlessZeroResolves::Number;
 	}
 
 	fn visit_math_function<'b, T>(&mut self, _math: &MathFunction<'b, T>) {
-		self.math_depth.set(self.math_depth.get() + 1);
+		self.math_depth += 1;
 	}
 
 	fn exit_math_function<'b, T>(&mut self, _math: &MathFunction<'b, T>) {
-		self.math_depth.set(self.math_depth.get().saturating_sub(1));
+		self.math_depth = self.math_depth.saturating_sub(1);
 	}
 
 	fn visit_length(&mut self, length: &Length) {
 		// Inside a math function, `0px` and `0` differ in type; never reduce lengths here.
-		if self.math_depth.get() > 0 {
+		if self.math_depth > 0 {
 			return;
 		}
 
@@ -88,7 +87,7 @@ where
 			}
 		};
 
-		let can_reduce_to_unitless = self.unitless_zero_resolves.get() == UnitlessZeroResolves::Length;
+		let can_reduce_to_unitless = self.unitless_zero_resolves == UnitlessZeroResolves::Length;
 
 		if can_reduce_to_unitless && matches!(resolved, ResolvedType::UnitedZero | ResolvedType::Resolved(0.0)) {
 			self.transformer.replace(length, self.transformer.parse_value::<Length>("0"));

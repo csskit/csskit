@@ -72,6 +72,13 @@ impl<'a, 'ctx, N> Visit for ReduceShorthandValues<'a, 'ctx, N>
 where
 	N: Visitable + NodeWithMetadata<CssMetadata>,
 {
+	fn consider_node(&self, node: VisitNode) -> VisitFlow {
+		if node.rule_subtree_metadata().is_some_and(|meta| Self::skips_subtree(&meta)) {
+			return VisitFlow::SKIP_CHILDREN;
+		}
+		VisitFlow::DESCEND
+	}
+
 	fn enter_declaration<'b, T: DeclarationValue<'b, CssMetadata>>(
 		&mut self,
 		declaration: &Declaration<'b, T, CssMetadata>,
@@ -158,6 +165,17 @@ mod tests {
 			StyleSheet,
 			"a { margin: 1px 1px 1px 1px; padding: 1px 2px 1px 2px; inset: 1px 2px 3px 2px; }",
 			"a { margin: 1px; padding: 1px 2px; inset: 1px 2px 3px; }"
+		);
+	}
+
+	#[test]
+	fn reduces_shorthands_in_nested_rules() {
+		assert_transform!(
+			CssMinifierFeature::ReduceShorthandValues,
+			CssAtomSet,
+			StyleSheet,
+			"@media print { a { margin: 1px 1px; } } b { c { padding: 2px 2px; } }",
+			"@media print { a { margin: 1px; } } b { c { padding: 2px; } }"
 		);
 	}
 
